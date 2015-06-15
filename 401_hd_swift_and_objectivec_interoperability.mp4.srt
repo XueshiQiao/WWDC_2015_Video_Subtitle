@@ -1,0 +1,3067 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:06.716 --> 00:00:09.086 A:middle
+&gt;&gt; JORDAN ROSE: Good
+afternoon, everyone.
+
+00:00:09.086 --> 00:00:11.346 A:middle
+My name is Jordan Rose.
+
+00:00:11.346 --> 00:00:16.026 A:middle
+(Applause).
+
+00:00:22.676 --> 00:00:22.756 A:middle
+&gt;&gt; JORDAN ROSE: Wow.
+
+00:00:23.716 --> 00:00:25.186 A:middle
+Thank you.
+
+00:00:25.386 --> 00:00:35.316 A:middle
+I haven't even done
+anything yet.
+
+00:00:36.346 --> 00:00:37.246 A:middle
+My name is Jordan Rose.
+
+00:00:37.246 --> 00:00:39.446 A:middle
+Joining me later will be
+my colleague, Doug Gregor.
+
+00:00:39.536 --> 00:00:41.926 A:middle
+We are here to talk to you about
+the language changes we made
+
+00:00:41.926 --> 00:00:44.606 A:middle
+in both Swift and
+Objective-C over the last year,
+
+00:00:45.006 --> 00:00:47.516 A:middle
+especially in the areas
+of interoperability.
+
+00:00:48.166 --> 00:00:51.746 A:middle
+And this is important because
+all Objective-C APIs are
+
+00:00:51.746 --> 00:00:52.936 A:middle
+available in Swift.
+
+00:00:53.726 --> 00:00:56.116 A:middle
+And in Xcode 7 we
+made it even easier
+
+00:00:56.116 --> 00:00:57.606 A:middle
+to see how this mapping works.
+
+00:00:57.716 --> 00:00:59.676 A:middle
+Go to any Objective-C header
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:00.076 --> 00:01:02.506 A:middle
+and choose the 'show
+related items' button
+
+00:01:02.686 --> 00:01:03.766 A:middle
+in the top-left corner.
+
+00:01:04.256 --> 00:01:06.296 A:middle
+This will bring down a
+menu of related items,
+
+00:01:06.356 --> 00:01:09.066 A:middle
+one of which is 'generated
+interface.'
+
+00:01:09.846 --> 00:01:12.796 A:middle
+And this will show you the
+Swift mapping for that header.
+
+00:01:13.966 --> 00:01:15.956 A:middle
+This is the exact
+same view that you got
+
+00:01:16.056 --> 00:01:19.446 A:middle
+in Xcode 6 using the 'jump
+to definition' feature,
+
+00:01:19.766 --> 00:01:22.726 A:middle
+but now you can get it easily
+from any header in your target.
+
+00:01:22.726 --> 00:01:26.266 A:middle
+So we are going to be
+talking about a variety
+
+00:01:26.266 --> 00:01:29.126 A:middle
+of improvements today that we
+have made to Swift for working
+
+00:01:29.126 --> 00:01:31.086 A:middle
+with Objective-C, and
+that we have been making
+
+00:01:31.086 --> 00:01:32.346 A:middle
+to Objective-C itself.
+
+00:01:32.446 --> 00:01:35.496 A:middle
+We will start off with some
+of the basic features working
+
+00:01:35.496 --> 00:01:38.296 A:middle
+between Swift and
+Objective-C, and at the details
+
+00:01:38.296 --> 00:01:40.716 A:middle
+of the new error-handling
+feature and how that works
+
+00:01:40.716 --> 00:01:41.976 A:middle
+across the language boundaries.
+
+00:01:42.386 --> 00:01:43.406 A:middle
+After that, we are going to talk
+
+00:01:43.406 --> 00:01:44.946 A:middle
+about the three major
+improvements we've made
+
+00:01:44.946 --> 00:01:47.936 A:middle
+to Objective-C in the last
+year, nullability annotations,
+
+00:01:48.046 --> 00:01:50.556 A:middle
+lightweight generics,
+and kindof types.
+
+00:01:52.206 --> 00:01:53.866 A:middle
+Let's start on the
+Swift side of things.
+
+00:01:54.536 --> 00:01:56.346 A:middle
+We just saw how easy it is
+
+00:01:56.346 --> 00:01:58.876 A:middle
+to get the Objective-C
+APIs into Swift.
+
+00:01:58.956 --> 00:02:01.626 A:middle
+But a lot of people come
+up with the question,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:58.956 --> 00:02:01.626 A:middle
+But a lot of people come
+up with the question,
+
+00:02:01.976 --> 00:02:05.126 A:middle
+when is my Swift
+exposed to Objective-C?
+
+00:02:06.456 --> 00:02:08.276 A:middle
+And so, let's go over
+the rules for this.
+
+00:02:09.925 --> 00:02:12.506 A:middle
+If you have a class that's
+a subclass of NSObject,
+
+00:02:12.976 --> 00:02:14.406 A:middle
+then by default, its methods
+
+00:02:14.406 --> 00:02:16.686 A:middle
+and properties are
+exposed to Objective-C.
+
+00:02:17.266 --> 00:02:20.046 A:middle
+In this case, we have a class
+MyController that's a subclass
+
+00:02:20.046 --> 00:02:21.256 A:middle
+of UIViewController.
+
+00:02:21.616 --> 00:02:23.826 A:middle
+That's indirectly a
+subclass of NSObject,
+
+00:02:24.196 --> 00:02:28.126 A:middle
+so this refresh method will
+be exposed to Objective-C.
+
+00:02:29.356 --> 00:02:32.446 A:middle
+However, if you mark
+that method as private,
+
+00:02:33.106 --> 00:02:35.696 A:middle
+that means it's only supposed to
+be visible to the current file.
+
+00:02:36.246 --> 00:02:39.286 A:middle
+So in this case, Swift
+will not expose the method
+
+00:02:39.286 --> 00:02:41.036 A:middle
+to Objective-C by default.
+
+00:02:42.076 --> 00:02:44.416 A:middle
+Additionally, if you
+are only using --
+
+00:02:44.546 --> 00:02:46.746 A:middle
+if you are using some kind
+of Swift-only feature,
+
+00:02:47.056 --> 00:02:49.776 A:middle
+like this unusual return
+type here, then, again,
+
+00:02:50.206 --> 00:02:52.696 A:middle
+there's no way to expose
+this method to Objective-C
+
+00:02:52.806 --> 00:02:55.756 A:middle
+and Swift won't even try.
+
+00:02:55.956 --> 00:03:00.116 A:middle
+Finally, if you are not
+a subclass of NSObject
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:55.956 --> 00:03:00.116 A:middle
+Finally, if you are not
+a subclass of NSObject
+
+00:03:00.546 --> 00:03:03.416 A:middle
+but simply conforming to
+an Objective-C protocol,
+
+00:03:03.966 --> 00:03:05.736 A:middle
+then you have to take
+extra care to make sure
+
+00:03:05.736 --> 00:03:08.146 A:middle
+that your methods actually
+satisfy the requirements
+
+00:03:08.146 --> 00:03:08.846 A:middle
+of the protocol.
+
+00:03:09.266 --> 00:03:11.506 A:middle
+And in Xcode 7, you will
+get a warning for this.
+
+00:03:12.116 --> 00:03:16.036 A:middle
+In this case, 'web view did
+start load' is non-objc,
+
+00:03:16.296 --> 00:03:18.456 A:middle
+and so it cannot
+satisfy the requirements
+
+00:03:18.686 --> 00:03:20.826 A:middle
+of the 'UI web view
+delegate protocol.'
+
+00:03:21.446 --> 00:03:24.086 A:middle
+So that covers the defaults.
+
+00:03:24.756 --> 00:03:26.196 A:middle
+What happens when you
+want to change those
+
+00:03:26.536 --> 00:03:27.656 A:middle
+from that default behavior?
+
+00:03:28.756 --> 00:03:31.276 A:middle
+So let's go back to that
+version of MyController here
+
+00:03:31.276 --> 00:03:33.636 A:middle
+with the refresh method,
+and I want to expose it
+
+00:03:33.636 --> 00:03:36.306 A:middle
+to Objective-C, but
+it really depends --
+
+00:03:36.446 --> 00:03:39.476 A:middle
+what I want to do next really
+depends on what I need to do
+
+00:03:39.476 --> 00:03:40.616 A:middle
+with this refresh method.
+
+00:03:41.286 --> 00:03:45.166 A:middle
+So, if I'm going to make this,
+say, something that I want
+
+00:03:45.166 --> 00:03:48.046 A:middle
+to use an interface builder
+or maybe it's a property
+
+00:03:48.046 --> 00:03:49.046 A:middle
+that I want to use
+from Core data,
+
+00:03:49.546 --> 00:03:51.336 A:middle
+we have dedicated
+attributes for these,
+
+00:03:51.406 --> 00:03:53.746 A:middle
+and adding that attribute
+is all you need to do.
+
+00:03:54.236 --> 00:03:56.976 A:middle
+So, if you use the IBAction
+attribute as shown here,
+
+00:03:58.466 --> 00:03:59.426 A:middle
+that's all you need to do
+
+00:03:59.426 --> 00:04:01.676 A:middle
+to make this refresh
+method a valid action
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:59.426 --> 00:04:01.676 A:middle
+to make this refresh
+method a valid action
+
+00:04:01.676 --> 00:04:02.626 A:middle
+in interface builder.
+
+00:04:04.196 --> 00:04:06.546 A:middle
+Similarly, if you are
+looking to use a property
+
+00:04:06.746 --> 00:04:09.006 A:middle
+with foundations key
+value observing system,
+
+00:04:09.196 --> 00:04:11.366 A:middle
+or Cocoa bindings, all you need
+
+00:04:11.366 --> 00:04:13.736 A:middle
+to do is add the
+dynamic modifier.
+
+00:04:14.196 --> 00:04:15.906 A:middle
+This tells Swift that
+the implementation
+
+00:04:15.906 --> 00:04:18.666 A:middle
+of this property might
+be replaced at run time
+
+00:04:18.896 --> 00:04:20.636 A:middle
+by the key value
+observing system.
+
+00:04:22.036 --> 00:04:24.996 A:middle
+But if you really just want
+to expose a particular method
+
+00:04:24.996 --> 00:04:26.656 A:middle
+or property to Objective-C,
+
+00:04:27.006 --> 00:04:31.516 A:middle
+you can always just use the
+plain-old at-objc modifier,
+
+00:04:31.516 --> 00:04:36.436 A:middle
+or objc attribute -- sorry --
+and this will expose a method
+
+00:04:36.436 --> 00:04:37.956 A:middle
+or objective to Objective-C
+
+00:04:38.176 --> 00:04:39.776 A:middle
+without any additional
+semantics.
+
+00:04:40.066 --> 00:04:44.156 A:middle
+The objc attribute is also
+useful for one other thing,
+
+00:04:44.426 --> 00:04:46.996 A:middle
+which is to figure out why
+something is not visible
+
+00:04:46.996 --> 00:04:48.896 A:middle
+in Objective-C when you
+thought it would be.
+
+00:04:49.406 --> 00:04:52.176 A:middle
+So if I tried to apply this to
+that other version of Refresh
+
+00:04:52.176 --> 00:04:54.046 A:middle
+that has the unusual
+result type here,
+
+00:04:54.046 --> 00:04:57.376 A:middle
+then I will get an error message
+saying this 'method cannot be
+
+00:04:57.376 --> 00:05:00.216 A:middle
+marked at-objc because
+its result type cannot be
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:57.376 --> 00:05:00.216 A:middle
+marked at-objc because
+its result type cannot be
+
+00:05:00.216 --> 00:05:03.006 A:middle
+represented in Objective-C.'
+
+00:05:03.246 --> 00:05:06.766 A:middle
+All of these rules are covered
+in the 'Using Swift with Cocoa
+
+00:05:06.766 --> 00:05:09.566 A:middle
+and Objective-C' guide,
+which is available online
+
+00:05:09.656 --> 00:05:12.546 A:middle
+at developer.apple.com/Swift.
+
+00:05:13.736 --> 00:05:16.536 A:middle
+So now we've covered the
+defaults, and we've covered what
+
+00:05:16.536 --> 00:05:19.006 A:middle
+to do when you want to
+override those defaults
+
+00:05:19.456 --> 00:05:21.306 A:middle
+to make things more ObjC.
+
+00:05:21.306 --> 00:05:23.526 A:middle
+But what if you have
+the opposite problem?
+
+00:05:25.006 --> 00:05:27.526 A:middle
+Let's look at this class
+here: calculator controller.
+
+00:05:28.086 --> 00:05:30.606 A:middle
+It has two methods named
+'perform operation.'
+
+00:05:31.216 --> 00:05:32.876 A:middle
+One of them takes
+one kind of closure
+
+00:05:33.026 --> 00:05:34.666 A:middle
+and the other takes a
+different kind of closure.
+
+00:05:35.626 --> 00:05:36.316 A:middle
+That's fine.
+
+00:05:36.566 --> 00:05:39.256 A:middle
+Swift is able to differentiate
+these methods purely based
+
+00:05:39.256 --> 00:05:40.286 A:middle
+on their argument types.
+
+00:05:41.086 --> 00:05:42.706 A:middle
+But Objective-C doesn't
+work like this.
+
+00:05:42.926 --> 00:05:45.426 A:middle
+In Objective-C, methods
+are only differentiated
+
+00:05:45.426 --> 00:05:47.246 A:middle
+by name, not by type.
+
+00:05:48.636 --> 00:05:51.306 A:middle
+And so in this case, Swift
+knows this might be an issue
+
+00:05:51.306 --> 00:05:52.806 A:middle
+and it will give you
+an error message.
+
+00:05:54.006 --> 00:05:55.046 A:middle
+Now, you have always been able
+
+00:05:55.046 --> 00:05:58.966 A:middle
+to fix this using the selector
+form of the ObjC attribute.
+
+00:05:59.476 --> 00:06:02.936 A:middle
+So if I write this code, then
+I've renamed the bottom method
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:59.476 --> 00:06:02.936 A:middle
+So if I write this code, then
+I've renamed the bottom method
+
+00:06:03.006 --> 00:06:05.456 A:middle
+to 'perform binary operation,
+
+00:06:05.866 --> 00:06:07.986 A:middle
+when I'm accessing
+it from Objective-C.
+
+00:06:08.646 --> 00:06:11.536 A:middle
+The top method is still
+named 'perform operation.'
+
+00:06:12.236 --> 00:06:16.636 A:middle
+In Xcode 7, we've added another
+option for solving this problem,
+
+00:06:16.876 --> 00:06:18.636 A:middle
+which is the non-ObjC attribute.
+
+00:06:19.176 --> 00:06:20.346 A:middle
+As you might have expected,
+
+00:06:20.606 --> 00:06:23.606 A:middle
+this will take something that's
+normally exposed to Objective-C
+
+00:06:23.826 --> 00:06:26.606 A:middle
+and prevent it from
+being exposed as such.
+
+00:06:27.036 --> 00:06:29.806 A:middle
+You can apply the non-ObjC
+attribute to any method,
+
+00:06:30.086 --> 00:06:32.496 A:middle
+property, subscript,
+or initializer.
+
+00:06:33.126 --> 00:06:37.366 A:middle
+So that's a fair amount about
+Objective-C and methods,
+
+00:06:37.706 --> 00:06:39.506 A:middle
+but how about something
+lower level.
+
+00:06:40.656 --> 00:06:41.666 A:middle
+Let's talk about C.
+
+00:06:42.286 --> 00:06:45.486 A:middle
+So there are a few people in
+this room that are really happy
+
+00:06:45.486 --> 00:06:47.176 A:middle
+that we have a slide
+called function pointers.
+
+00:06:47.686 --> 00:06:47.896 A:middle
+(Laughter).
+
+00:06:49.636 --> 00:06:52.736 A:middle
+A function pointer is
+what C uses for callbacks.
+
+00:06:53.416 --> 00:06:55.876 A:middle
+That means they are
+kind of like closures,
+
+00:06:56.406 --> 00:06:58.676 A:middle
+but they can't carry any
+additional state with them.
+
+00:06:59.336 --> 00:07:00.466 A:middle
+What do I mean by that?
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:59.336 --> 00:07:00.466 A:middle
+What do I mean by that?
+
+00:07:01.466 --> 00:07:03.086 A:middle
+Let's say I'm in
+Swift and I'm trying
+
+00:07:03.086 --> 00:07:05.516 A:middle
+to call this C function,
+funopen.
+
+00:07:05.766 --> 00:07:07.416 A:middle
+It takes a lot of arguments.
+
+00:07:07.416 --> 00:07:08.686 A:middle
+You don't have to know
+what they all are.
+
+00:07:09.116 --> 00:07:10.136 A:middle
+One of them is a callback.
+
+00:07:11.176 --> 00:07:14.376 A:middle
+In this callback, I'm trying
+to use self to do something.
+
+00:07:14.986 --> 00:07:18.296 A:middle
+Now, self is not an
+argument to this closure.
+
+00:07:18.886 --> 00:07:20.686 A:middle
+So it has to be stored
+away somewhere
+
+00:07:20.686 --> 00:07:22.176 A:middle
+for the closure to access later.
+
+00:07:23.106 --> 00:07:25.486 A:middle
+That's what we mean by a
+closure carrying state.
+
+00:07:25.956 --> 00:07:29.136 A:middle
+So when you try to use this
+closure, with this API,
+
+00:07:29.546 --> 00:07:32.156 A:middle
+you get an error message.
+
+00:07:32.306 --> 00:07:36.476 A:middle
+Now, in Swift 1.2, C function
+pointers weren't very useful.
+
+00:07:36.946 --> 00:07:39.366 A:middle
+You had this C type that
+is shown on the top,
+
+00:07:39.566 --> 00:07:43.306 A:middle
+and it came into Swift as this
+opaque, C function pointer type.
+
+00:07:43.626 --> 00:07:47.526 A:middle
+You could pass it around but you
+couldn't do much else with it.
+
+00:07:47.716 --> 00:07:50.976 A:middle
+In Swift 2.0, we've just
+made these a special kind
+
+00:07:50.976 --> 00:07:53.606 A:middle
+of closure marked with the
+convention-C attribute.
+
+00:07:54.006 --> 00:07:55.456 A:middle
+You can create these in Swift,
+
+00:07:55.666 --> 00:07:57.676 A:middle
+pass them around,
+and even call them.
+
+00:07:58.116 --> 00:08:00.226 A:middle
+Which means there's a
+whole family of C APIs
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:58.116 --> 00:08:00.226 A:middle
+Which means there's a
+whole family of C APIs
+
+00:08:00.506 --> 00:08:02.386 A:middle
+that you can now
+access directly in Swift
+
+00:08:02.496 --> 00:08:03.506 A:middle
+that you couldn't before.
+
+00:08:03.506 --> 00:08:03.796 A:middle
+(Applause).
+
+00:08:04.116 --> 00:08:11.296 A:middle
+&gt;&gt; JORDAN ROSE: So
+those are just two
+
+00:08:11.296 --> 00:08:14.516 A:middle
+of the little things we have
+done to enhance the bridge
+
+00:08:14.516 --> 00:08:17.466 A:middle
+from Swift and to
+C and Objective-C.
+
+00:08:18.476 --> 00:08:20.726 A:middle
+But there's also some
+big-name features this year
+
+00:08:20.726 --> 00:08:22.226 A:middle
+that have had some
+really big impacts
+
+00:08:22.226 --> 00:08:23.386 A:middle
+on this language bridging.
+
+00:08:24.576 --> 00:08:26.666 A:middle
+The most important, of
+course, being error handling.
+
+00:08:28.176 --> 00:08:29.466 A:middle
+Now, if you haven't really heard
+
+00:08:29.466 --> 00:08:33.275 A:middle
+about the error handling model
+yet, essentially we took a lot
+
+00:08:33.275 --> 00:08:37.496 A:middle
+of lessons from Cocoa's
+NSError paradigm and the rules
+
+00:08:37.496 --> 00:08:39.155 A:middle
+and the conventions
+that surrounded that,
+
+00:08:39.696 --> 00:08:41.416 A:middle
+and used what we
+learned from that
+
+00:08:41.686 --> 00:08:43.096 A:middle
+to make a new language feature,
+
+00:08:43.186 --> 00:08:45.256 A:middle
+represented by the
+'throws' keyword.
+
+00:08:46.106 --> 00:08:48.486 A:middle
+This was covered in a lot of
+depth in this morning's talk
+
+00:08:48.486 --> 00:08:49.486 A:middle
+"What's New In Swift."
+
+00:08:50.126 --> 00:08:53.276 A:middle
+Which was -- which you -- if
+you didn't make it to that,
+
+00:08:53.276 --> 00:08:55.586 A:middle
+I strongly suggest you
+check it out later on,
+
+00:08:55.586 --> 00:08:58.606 A:middle
+to find out really how all this
+error handling stuff works.
+
+00:08:59.126 --> 00:09:04.266 A:middle
+But what I want to focus on now
+is specifics about this going
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:59.126 --> 00:09:04.266 A:middle
+But what I want to focus on now
+is specifics about this going
+
+00:09:04.266 --> 00:09:05.766 A:middle
+between the two languages.
+
+00:09:06.526 --> 00:09:08.136 A:middle
+And one thing I want
+you to understand is
+
+00:09:08.136 --> 00:09:11.176 A:middle
+that this isn't just a mapping
+from Objective-C into Swift.
+
+00:09:11.576 --> 00:09:15.766 A:middle
+It's also how Swift APIs get
+exposed back to Objective-C.
+
+00:09:16.426 --> 00:09:18.296 A:middle
+So this mapping is
+bidirectional.
+
+00:09:18.866 --> 00:09:22.316 A:middle
+Let's take a closer look
+at the return types here.
+
+00:09:23.076 --> 00:09:26.236 A:middle
+In Objective-C, the
+error conventions say
+
+00:09:26.476 --> 00:09:30.536 A:middle
+that returning a nil value
+represents a failure case.
+
+00:09:31.326 --> 00:09:33.876 A:middle
+That's when this 'out
+error' parameter is going
+
+00:09:33.876 --> 00:09:34.836 A:middle
+to be populated.
+
+00:09:36.056 --> 00:09:38.496 A:middle
+In Swift, however,
+that's entirely covered
+
+00:09:38.496 --> 00:09:41.656 A:middle
+by the error handling model, and
+so the return type you will see
+
+00:09:41.656 --> 00:09:45.666 A:middle
+in Swift is a non-optional
+object type.
+
+00:09:46.726 --> 00:09:48.486 A:middle
+Similarly in Objective-C,
+
+00:09:48.486 --> 00:09:50.586 A:middle
+you can also have a
+Boolean return value
+
+00:09:51.046 --> 00:09:53.036 A:middle
+where the no case
+is the failure case.
+
+00:09:53.536 --> 00:09:56.726 A:middle
+Again, that's entirely
+covered by the Swift model
+
+00:09:57.006 --> 00:09:59.296 A:middle
+and so the return type
+you will get will be void.
+
+00:09:59.946 --> 00:10:04.026 A:middle
+Now, on both of these examples,
+I have shown that these methods
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:59.946 --> 00:10:04.026 A:middle
+Now, on both of these examples,
+I have shown that these methods
+
+00:10:04.026 --> 00:10:06.096 A:middle
+in Objective-C have
+multiple parameters,
+
+00:10:06.096 --> 00:10:07.956 A:middle
+only one of which is
+the error parameter,
+
+00:10:08.516 --> 00:10:11.046 A:middle
+but there are also cases where
+methods only have one parameter
+
+00:10:11.256 --> 00:10:12.126 A:middle
+and you will get something
+
+00:10:12.126 --> 00:10:15.406 A:middle
+like 'check resource is
+researchable and return error.'
+
+00:10:16.216 --> 00:10:18.806 A:middle
+As you can see in Swift,
+since we already know
+
+00:10:18.806 --> 00:10:20.376 A:middle
+that the method can
+return an error
+
+00:10:20.696 --> 00:10:22.066 A:middle
+from that 'throws' keyword,
+
+00:10:22.306 --> 00:10:24.066 A:middle
+we will chop off
+those last three words
+
+00:10:24.096 --> 00:10:25.406 A:middle
+for you, just for you!
+
+00:10:25.406 --> 00:10:25.586 A:middle
+(Laughter).
+
+00:10:27.776 --> 00:10:30.756 A:middle
+Now, all of this is
+about what happens
+
+00:10:30.756 --> 00:10:33.586 A:middle
+when you have the
+NSError-star-star type,
+
+00:10:33.586 --> 00:10:35.696 A:middle
+when you are using
+the really basic form
+
+00:10:35.696 --> 00:10:37.706 A:middle
+of the NSError conventions.
+
+00:10:38.116 --> 00:10:39.406 A:middle
+What happens in other cases?
+
+00:10:39.986 --> 00:10:42.276 A:middle
+Well, we just keep things as is.
+
+00:10:42.636 --> 00:10:45.596 A:middle
+If you have an NSError in
+Objective-C, it will come
+
+00:10:45.596 --> 00:10:48.326 A:middle
+into Swift usually as an
+optional NSError reference
+
+00:10:48.616 --> 00:10:50.366 A:middle
+and you can handle
+it as appropriate
+
+00:10:50.366 --> 00:10:52.076 A:middle
+for whatever API you are using.
+
+00:10:53.146 --> 00:10:57.006 A:middle
+Remember that NSError conforms
+to Swift's error type protocol,
+
+00:10:57.006 --> 00:10:58.206 A:middle
+so you can also use it
+
+00:10:58.206 --> 00:11:00.316 A:middle
+with Swift's own error
+handling mechanisms.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:58.206 --> 00:11:00.316 A:middle
+with Swift's own error
+handling mechanisms.
+
+00:11:00.316 --> 00:11:05.786 A:middle
+All of this shows that Swift
+is well equipped to deal
+
+00:11:05.786 --> 00:11:08.026 A:middle
+with all the errors
+coming from Objective-C.
+
+00:11:09.206 --> 00:11:12.086 A:middle
+But what if I call a
+method from Objective-C,
+
+00:11:12.846 --> 00:11:15.936 A:middle
+and it's a Swift method
+that produces a Swift error?
+
+00:11:16.626 --> 00:11:19.696 A:middle
+Now, of course, we
+need this to work.
+
+00:11:19.926 --> 00:11:21.326 A:middle
+Let's find out how it works.
+
+00:11:22.656 --> 00:11:24.936 A:middle
+Here I have a type
+named 'request error.'
+
+00:11:25.256 --> 00:11:28.416 A:middle
+It's a new type I'm defining
+using Swift's error system.
+
+00:11:28.606 --> 00:11:31.616 A:middle
+It conforms to the error type
+protocol, and in this case,
+
+00:11:31.616 --> 00:11:35.526 A:middle
+it's an enum that only has
+one possible enum case.
+
+00:11:36.726 --> 00:11:39.466 A:middle
+I can use this error in
+a method very easily.
+
+00:11:39.996 --> 00:11:42.256 A:middle
+Here I'm defining a
+'send request' method.
+
+00:11:42.556 --> 00:11:45.236 A:middle
+I mark it with the
+'throws' keyword to indicate
+
+00:11:45.236 --> 00:11:48.436 A:middle
+that it can fail, and then
+I actually use the 'throw'
+
+00:11:48.436 --> 00:11:50.926 A:middle
+statement when I hit
+that failure condition.
+
+00:11:51.506 --> 00:11:55.246 A:middle
+Now, if I try to call this
+method from Objective-C,
+
+00:11:55.246 --> 00:11:56.416 A:middle
+it ought to just work.
+
+00:11:56.836 --> 00:11:58.646 A:middle
+Let's see what that looks like.
+
+00:11:59.836 --> 00:12:02.086 A:middle
+The first thing to
+notice is that the name
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:59.836 --> 00:12:02.086 A:middle
+The first thing to
+notice is that the name
+
+00:12:02.086 --> 00:12:03.436 A:middle
+of the method has changed.
+
+00:12:03.756 --> 00:12:05.296 A:middle
+Instead of just 'send request,
+
+00:12:05.526 --> 00:12:07.706 A:middle
+we now have 'send
+request error.'
+
+00:12:08.416 --> 00:12:09.676 A:middle
+The name that you
+would have used
+
+00:12:09.676 --> 00:12:12.256 A:middle
+if you had written this method
+in Objective-C to begin with.
+
+00:12:13.326 --> 00:12:17.106 A:middle
+Additionally, we're just using
+a plain-old NSError type,
+
+00:12:17.146 --> 00:12:19.476 A:middle
+from foundation here,
+even though the error
+
+00:12:19.476 --> 00:12:21.296 A:middle
+that we produced
+came from Swift.
+
+00:12:22.226 --> 00:12:25.526 A:middle
+And what's more, that error
+type actually contains
+
+00:12:25.526 --> 00:12:26.806 A:middle
+useful information.
+
+00:12:27.156 --> 00:12:30.126 A:middle
+If we print the domain and
+code that go with this error,
+
+00:12:30.376 --> 00:12:33.866 A:middle
+we will see that it turns out
+to be the type and the raw value
+
+00:12:33.866 --> 00:12:36.086 A:middle
+of the enum case
+that we saw before.
+
+00:12:36.086 --> 00:12:40.446 A:middle
+Now, there's one more nice
+thing that's going on here.
+
+00:12:41.016 --> 00:12:43.656 A:middle
+I marked this enum with
+the ObjC attribute.
+
+00:12:44.276 --> 00:12:46.946 A:middle
+This is a feature we
+added in Xcode 6.3.
+
+00:12:47.276 --> 00:12:50.006 A:middle
+If you mark an enum
+with the ObjC attribute,
+
+00:12:50.486 --> 00:12:52.996 A:middle
+then it will get printed
+into your generated header.
+
+00:12:53.616 --> 00:12:56.246 A:middle
+The header that exposes
+the Objective-C side
+
+00:12:56.476 --> 00:12:57.626 A:middle
+of your Swift classes.
+
+00:12:59.566 --> 00:13:01.826 A:middle
+In Xcode -- sorry -- in Xcode 7,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:59.566 --> 00:13:01.826 A:middle
+In Xcode -- sorry -- in Xcode 7,
+
+00:13:02.186 --> 00:13:04.146 A:middle
+we've added one more
+little nice feature here.
+
+00:13:04.646 --> 00:13:07.516 A:middle
+This is an enum that conforms
+to the error type protocol,
+
+00:13:08.126 --> 00:13:11.596 A:middle
+so we'll also generate a string
+constant representing the
+
+00:13:11.596 --> 00:13:12.396 A:middle
+error domain.
+
+00:13:13.026 --> 00:13:16.796 A:middle
+Now, all of this is great
+for errors you have defined
+
+00:13:16.796 --> 00:13:19.926 A:middle
+in Swift, and you probably
+want to run out and use this
+
+00:13:19.926 --> 00:13:23.126 A:middle
+for your own classes, but
+then the errors that come back
+
+00:13:23.126 --> 00:13:25.826 A:middle
+from Cocoa and the
+rest of the SDKs start
+
+00:13:25.826 --> 00:13:28.436 A:middle
+to feel a little lacking.
+
+00:13:28.566 --> 00:13:30.286 A:middle
+And, don't worry, we have
+got you covered there too.
+
+00:13:30.286 --> 00:13:33.066 A:middle
+So if you were at the
+presentation earlier today,
+
+00:13:33.126 --> 00:13:34.986 A:middle
+you might have seen
+this preflight method
+
+00:13:35.346 --> 00:13:38.176 A:middle
+which is checking that
+a resource is reachable
+
+00:13:38.176 --> 00:13:40.396 A:middle
+and then catching some
+various error cases.
+
+00:13:41.146 --> 00:13:43.166 A:middle
+Now one of the error
+cases here is listed
+
+00:13:43.166 --> 00:13:46.286 A:middle
+as 'NSURLError, file
+does not exist.'
+
+00:13:47.116 --> 00:13:49.086 A:middle
+That's an error that
+comes from Cocoa.
+
+00:13:49.706 --> 00:13:52.186 A:middle
+Why is that showing up,
+using the Swift notation?
+
+00:13:53.376 --> 00:13:56.126 A:middle
+Well, we have taken the most
+common error types throughout
+
+00:13:56.126 --> 00:13:58.946 A:middle
+our SDKs and made it so
+that you can use them
+
+00:13:58.946 --> 00:14:00.786 A:middle
+with Swift's own catch syntax.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:58.946 --> 00:14:00.786 A:middle
+with Swift's own catch syntax.
+
+00:14:01.506 --> 00:14:03.336 A:middle
+So there's are all sorts
+of errors you can use here.
+
+00:14:03.336 --> 00:14:05.936 A:middle
+And the general idea that you
+should take away from this,
+
+00:14:06.366 --> 00:14:09.166 A:middle
+is that errors should feel
+like NSError when you're
+
+00:14:09.166 --> 00:14:11.946 A:middle
+in Objective-C, and they
+should feel like Swift errors
+
+00:14:12.006 --> 00:14:12.916 A:middle
+when you are in Swift.
+
+00:14:13.256 --> 00:14:14.206 A:middle
+Things should just work.
+
+00:14:14.696 --> 00:14:18.566 A:middle
+So that's just some of the
+enhancements we've made to Swift
+
+00:14:18.656 --> 00:14:21.446 A:middle
+in the area of interoperability
+over the last year.
+
+00:14:21.986 --> 00:14:23.466 A:middle
+So to talk about the
+enhancements we've made
+
+00:14:23.466 --> 00:14:24.976 A:middle
+in the Objective-C
+side of the world,
+
+00:14:25.016 --> 00:14:26.416 A:middle
+I would like to hand
+it over to Doug.
+
+00:14:27.496 --> 00:14:27.646 A:middle
+(Applause.)
+
+00:14:27.756 --> 00:14:33.336 A:middle
+&gt;&gt; DOUG GREGOR: Thank you.
+
+00:14:34.246 --> 00:14:34.936 A:middle
+Thank you, Jordan.
+
+00:14:35.956 --> 00:14:37.336 A:middle
+So today I would like to talk
+
+00:14:37.336 --> 00:14:40.906 A:middle
+about three new Objective-C
+features we've added this year.
+
+00:14:41.716 --> 00:14:42.586 A:middle
+These features can be used
+
+00:14:42.586 --> 00:14:44.196 A:middle
+to make your Objective-C
+code better,
+
+00:14:44.196 --> 00:14:47.006 A:middle
+your Objective-C APIs better,
+make them reflect better
+
+00:14:47.006 --> 00:14:50.576 A:middle
+into Swift, and improve static
+type safety in your Objective-C.
+
+00:14:50.766 --> 00:14:52.126 A:middle
+The first thing we
+are going to talk
+
+00:14:52.126 --> 00:14:54.516 A:middle
+about is nullability
+for Objective-C.
+
+00:14:55.836 --> 00:14:58.626 A:middle
+So take a look at this
+bit of Objective-C code.
+
+00:14:59.696 --> 00:15:00.616 A:middle
+Lots of pointers here.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:59.696 --> 00:15:00.616 A:middle
+Lots of pointers here.
+
+00:15:01.286 --> 00:15:02.616 A:middle
+Which one of these can be nil?
+
+00:15:04.296 --> 00:15:05.356 A:middle
+The code doesn't tell you.
+
+00:15:06.476 --> 00:15:07.936 A:middle
+If you go read the
+documentation,
+
+00:15:07.936 --> 00:15:10.716 A:middle
+maybe it will tell you if
+you are feeling lucky today.
+
+00:15:11.936 --> 00:15:13.406 A:middle
+You could go write some tests
+
+00:15:13.406 --> 00:15:16.676 A:middle
+and see what you think it
+behaves like or maybe guess,
+
+00:15:16.676 --> 00:15:18.176 A:middle
+but that's not really good.
+
+00:15:18.176 --> 00:15:19.716 A:middle
+There's really missing
+information here.
+
+00:15:20.696 --> 00:15:22.336 A:middle
+When we introduced
+Swift last year,
+
+00:15:22.646 --> 00:15:25.606 A:middle
+this lack of information
+became much more apparent
+
+00:15:26.246 --> 00:15:28.566 A:middle
+in these implicitly
+unwrapped optionals,
+
+00:15:29.266 --> 00:15:30.836 A:middle
+which essentially
+means we don't know
+
+00:15:30.836 --> 00:15:32.176 A:middle
+if it can be nil
+on the Swift side.
+
+00:15:34.116 --> 00:15:35.456 A:middle
+So we weren't too
+thrilled with this,
+
+00:15:35.976 --> 00:15:39.176 A:middle
+and so after releasing
+Swift 1.0, we went
+
+00:15:39.376 --> 00:15:41.996 A:middle
+and audited a couple
+thousand pointers
+
+00:15:41.996 --> 00:15:46.376 A:middle
+within our own core
+frameworks to tell the compiler
+
+00:15:46.756 --> 00:15:48.326 A:middle
+which of these pointers
+can be nil.
+
+00:15:48.776 --> 00:15:51.726 A:middle
+And the interfaces after this
+audit got much, much cleaner.
+
+00:15:52.366 --> 00:15:54.876 A:middle
+Now, we are only
+using optional types
+
+00:15:54.986 --> 00:15:57.296 A:middle
+where nil is actually
+something you have to deal with,
+
+00:15:58.076 --> 00:15:59.516 A:middle
+and everything else
+is non-optional.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:00.836 --> 00:16:02.726 A:middle
+This is still not
+that wonderful,
+
+00:16:02.726 --> 00:16:04.986 A:middle
+because this knowledge is
+baked into the compiler.
+
+00:16:04.986 --> 00:16:06.136 A:middle
+It's not something you can do.
+
+00:16:06.936 --> 00:16:10.766 A:middle
+So with Xcode 6.3, we introduced
+nullability qualifiers
+
+00:16:10.766 --> 00:16:11.596 A:middle
+for Objective-C.
+
+00:16:13.056 --> 00:16:15.056 A:middle
+So a nullability qualifier
+is something you can add
+
+00:16:15.306 --> 00:16:17.006 A:middle
+to a C/Objective-C pointer
+
+00:16:17.586 --> 00:16:19.366 A:middle
+to state whether it
+accepts nil or not.
+
+00:16:19.466 --> 00:16:23.426 A:middle
+Of course, this better
+communicates what your API
+
+00:16:23.426 --> 00:16:24.276 A:middle
+actually does.
+
+00:16:24.486 --> 00:16:25.556 A:middle
+Does it accept nil?
+
+00:16:25.556 --> 00:16:26.856 A:middle
+Does that make sense for it?
+
+00:16:27.686 --> 00:16:29.926 A:middle
+It helps our tools do
+better static checking
+
+00:16:29.926 --> 00:16:32.026 A:middle
+to catch bugs before they
+manifest at run time,
+
+00:16:32.646 --> 00:16:35.426 A:middle
+and it makes the Swift
+experience so much better
+
+00:16:35.646 --> 00:16:37.066 A:middle
+with your Objective-C APIs!
+
+00:16:37.626 --> 00:16:41.616 A:middle
+Now, there are three
+nullability qualifiers.
+
+00:16:42.486 --> 00:16:45.206 A:middle
+Nullable, which indicates
+that the pointer may be null.
+
+00:16:46.366 --> 00:16:48.256 A:middle
+This, of course, maps
+into a Swift optional.
+
+00:16:49.366 --> 00:16:50.406 A:middle
+And then there's non-null.
+
+00:16:50.806 --> 00:16:55.546 A:middle
+So this indicates that null or
+nil is not a meaningful value.
+
+00:16:57.326 --> 00:16:59.876 A:middle
+Now, for a non-null pointer,
+it could end up being nil
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:00.616 --> 00:17:01.916 A:middle
+in an Objective-C program.
+
+00:17:02.116 --> 00:17:05.026 A:middle
+Maybe it comes because we
+messaged nil at some point
+
+00:17:05.026 --> 00:17:06.286 A:middle
+and the nil propagated through
+
+00:17:07.165 --> 00:17:08.705 A:middle
+and maybe this has
+worked in the past.
+
+00:17:08.986 --> 00:17:11.705 A:middle
+The compiler is not going to
+change the way it generates code
+
+00:17:11.705 --> 00:17:13.246 A:middle
+because of a non-null
+annotation.
+
+00:17:13.556 --> 00:17:16.175 A:middle
+But this indicates the
+intent of the API author
+
+00:17:16.175 --> 00:17:17.756 A:middle
+that nil does not
+make sense here.
+
+00:17:18.316 --> 00:17:22.996 A:middle
+We also have a third qualifier,
+and that is null-unspecified.
+
+00:17:23.866 --> 00:17:26.695 A:middle
+This is for cases where
+neither nullable nor non-null is
+
+00:17:26.695 --> 00:17:29.736 A:middle
+actually the right thing,
+and we map these into Swift
+
+00:17:29.736 --> 00:17:32.776 A:middle
+as the same implicitly
+unwrapped optional you would get
+
+00:17:32.936 --> 00:17:34.856 A:middle
+if we knew nothing about
+the pointer whatsoever.
+
+00:17:35.396 --> 00:17:37.816 A:middle
+And the most important thing
+
+00:17:37.876 --> 00:17:40.506 A:middle
+about nullability qualifiers
+is we've rolled them
+
+00:17:40.506 --> 00:17:42.066 A:middle
+out throughout our SDKs.
+
+00:17:43.356 --> 00:17:44.786 A:middle
+Alright, so instead of
+just covering a couple
+
+00:17:44.866 --> 00:17:45.846 A:middle
+of core frameworks,
+
+00:17:45.886 --> 00:17:47.816 A:middle
+we've covered the
+majority of the SDKs.
+
+00:17:47.816 --> 00:17:51.726 A:middle
+So this gives a much, much
+better Swift experience
+
+00:17:52.036 --> 00:17:54.086 A:middle
+with true optionals where
+they actually matter
+
+00:17:54.236 --> 00:17:55.776 A:middle
+and non-optionals
+everywhere else.
+
+00:17:56.866 --> 00:17:59.226 A:middle
+For your Objective-C code, it
+means you are going to start
+
+00:17:59.226 --> 00:18:01.116 A:middle
+to see new warnings for places
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:59.226 --> 00:18:01.116 A:middle
+to see new warnings for places
+
+00:18:01.116 --> 00:18:02.926 A:middle
+where you have been
+misusing APIs.
+
+00:18:03.586 --> 00:18:06.246 A:middle
+So, here, for example, you see a
+warning that you've passed null
+
+00:18:06.246 --> 00:18:09.436 A:middle
+or nil to a method that
+did not expect it here.
+
+00:18:09.436 --> 00:18:11.106 A:middle
+It is not part of
+the API contract.
+
+00:18:12.116 --> 00:18:14.536 A:middle
+Now maybe passing a
+nil has worked before;
+
+00:18:14.976 --> 00:18:16.346 A:middle
+it may continue to work.
+
+00:18:16.826 --> 00:18:18.226 A:middle
+But you should heed
+these warnings,
+
+00:18:18.266 --> 00:18:20.166 A:middle
+because the API author
+has told you,
+
+00:18:20.346 --> 00:18:22.816 A:middle
+you should not pass nil
+here, it's good to be careful
+
+00:18:22.816 --> 00:18:26.346 A:middle
+because it may change
+in the future.
+
+00:18:26.526 --> 00:18:27.636 A:middle
+Now, let's say you want
+
+00:18:27.636 --> 00:18:29.876 A:middle
+to add nullability
+qualifiers to your own headers.
+
+00:18:30.206 --> 00:18:32.996 A:middle
+The place to start is
+with an audited region.
+
+00:18:33.656 --> 00:18:36.236 A:middle
+So, these are described by
+'NS-assume non-null begin,
+
+00:18:36.566 --> 00:18:37.876 A:middle
+'NS-assume non-null end;
+
+00:18:38.516 --> 00:18:41.126 A:middle
+bracket your header
+with these macros.
+
+00:18:42.116 --> 00:18:44.036 A:middle
+What this does is it
+allows the compiler
+
+00:18:44.036 --> 00:18:46.896 A:middle
+to make default assumptions
+about pointers
+
+00:18:46.896 --> 00:18:48.526 A:middle
+that are not otherwise
+annotated.
+
+00:18:49.146 --> 00:18:51.656 A:middle
+So, if you have a single
+level pointer, that's going
+
+00:18:51.656 --> 00:18:54.426 A:middle
+to be assumed non-null,
+because what we've found is
+
+00:18:54.426 --> 00:18:57.736 A:middle
+that nil is not a meaningful
+value for most of our APIs.
+
+00:18:58.256 --> 00:19:01.506 A:middle
+The other interesting
+special case here is
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:58.256 --> 00:19:01.506 A:middle
+The other interesting
+special case here is
+
+00:19:01.506 --> 00:19:03.166 A:middle
+NSError-star-star parameters.
+
+00:19:03.166 --> 00:19:06.216 A:middle
+Where you're doing error
+handling in Objective-C,
+
+00:19:06.386 --> 00:19:08.446 A:middle
+these are assumed to be
+nullable at both levels,
+
+00:19:08.446 --> 00:19:11.226 A:middle
+because that's the way you
+work with them for nullability.
+
+00:19:12.726 --> 00:19:15.036 A:middle
+Now the defaults are good, they
+should cover most of the cases,
+
+00:19:15.546 --> 00:19:18.276 A:middle
+but that means you have to
+annotate the exceptional cases.
+
+00:19:18.646 --> 00:19:22.026 A:middle
+So here we are marking the super
+view property as being nullable,
+
+00:19:22.026 --> 00:19:24.696 A:middle
+because, of course, not
+every view has a super view.
+
+00:19:24.836 --> 00:19:25.806 A:middle
+Nil has meaning there.
+
+00:19:27.076 --> 00:19:29.536 A:middle
+Hit test with event has
+a nullable parameter.
+
+00:19:30.186 --> 00:19:32.936 A:middle
+You don't have to pass in an
+event to do hit testing and,
+
+00:19:32.936 --> 00:19:35.246 A:middle
+of course, the result
+is nullable
+
+00:19:35.246 --> 00:19:36.516 A:middle
+because nil has meaning there.
+
+00:19:36.516 --> 00:19:39.976 A:middle
+It means we didn't hit anything.
+
+00:19:40.066 --> 00:19:42.386 A:middle
+Now, this is where
+null-unspecified comes up.
+
+00:19:43.056 --> 00:19:44.306 A:middle
+Say you are auditing a header.
+
+00:19:45.426 --> 00:19:49.596 A:middle
+You run into some really weird
+implementation that's been
+
+00:19:49.596 --> 00:19:50.526 A:middle
+around forever.
+
+00:19:50.906 --> 00:19:52.646 A:middle
+You have no idea what
+it does with nil.
+
+00:19:53.206 --> 00:19:54.636 A:middle
+It hasn't been documented.
+
+00:19:55.206 --> 00:19:57.806 A:middle
+Maybe it's doing something
+really, really interesting
+
+00:19:57.806 --> 00:20:00.396 A:middle
+with messaging nil that may or
+may not work and the only guy
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:57.806 --> 00:20:00.396 A:middle
+with messaging nil that may or
+may not work and the only guy
+
+00:20:00.396 --> 00:20:02.236 A:middle
+that can answer it
+retired five years ago.
+
+00:20:03.726 --> 00:20:05.356 A:middle
+Great place to use
+null unspecified.
+
+00:20:06.046 --> 00:20:07.626 A:middle
+Just mark it as null
+unspecified.
+
+00:20:07.856 --> 00:20:11.556 A:middle
+This means, 'I thought about it,
+I couldn't come to an answer.'
+
+00:20:11.876 --> 00:20:15.246 A:middle
+The best thing to do is keep it
+implicitly unwrapped optional
+
+00:20:15.246 --> 00:20:18.686 A:middle
+in Swift, keep it
+null-unspecified here.
+
+00:20:18.686 --> 00:20:20.256 A:middle
+You can always come
+back to it later.
+
+00:20:20.336 --> 00:20:21.496 A:middle
+So when auditing,
+you really want
+
+00:20:21.496 --> 00:20:23.626 A:middle
+to get some good breadth early
+
+00:20:23.846 --> 00:20:26.326 A:middle
+to make your APIs much,
+much better, faster.
+
+00:20:28.296 --> 00:20:31.896 A:middle
+Now, when you go down to C,
+
+00:20:31.976 --> 00:20:33.616 A:middle
+things get a little
+bit more murky.
+
+00:20:34.446 --> 00:20:36.846 A:middle
+So we have all of the same
+qualifiers but they need
+
+00:20:36.846 --> 00:20:38.626 A:middle
+to be preceded by the
+double-underscore.
+
+00:20:39.856 --> 00:20:42.876 A:middle
+Now, these double-underscored
+keywords, those qualifiers,
+
+00:20:42.876 --> 00:20:45.176 A:middle
+can be used on any
+pointer, anywhere.
+
+00:20:45.746 --> 00:20:50.226 A:middle
+The important rule here is that
+the qualifier goes to the right
+
+00:20:51.326 --> 00:20:54.216 A:middle
+of the pointer it applies
+to, the same place that const
+
+00:20:54.216 --> 00:20:56.486 A:middle
+or volatile would go to,
+to apply to that pointer.
+
+00:20:57.766 --> 00:21:00.816 A:middle
+This is particularly important
+for multilevel pointers
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:57.766 --> 00:21:00.816 A:middle
+This is particularly important
+for multilevel pointers
+
+00:21:00.956 --> 00:21:02.786 A:middle
+like this values parameter here
+
+00:21:03.376 --> 00:21:07.366 A:middle
+where the outer pointer is
+nullable, because you can pass
+
+00:21:07.366 --> 00:21:10.446 A:middle
+in nil to this parameter so
+long as num-values is also zero.
+
+00:21:12.196 --> 00:21:15.916 A:middle
+The inner pointer is non-null,
+because when you are passing
+
+00:21:15.916 --> 00:21:19.886 A:middle
+in an array of values, all of
+those values must be non-null
+
+00:21:19.886 --> 00:21:20.976 A:middle
+to work with CF array.
+
+00:21:21.586 --> 00:21:26.606 A:middle
+That's all we're going to
+talk about with nullability.
+
+00:21:27.436 --> 00:21:29.316 A:middle
+We've pushed it throughout
+our SDKs this year,
+
+00:21:29.316 --> 00:21:30.856 A:middle
+so you get a much
+better experience
+
+00:21:30.856 --> 00:21:32.566 A:middle
+in both Objective-C and Swift.
+
+00:21:33.016 --> 00:21:35.366 A:middle
+We highly recommend
+that you use it
+
+00:21:35.366 --> 00:21:38.276 A:middle
+to improve your own
+Objective-C APIs, particularly
+
+00:21:38.276 --> 00:21:39.986 A:middle
+for a much better
+Swift experience.
+
+00:21:40.106 --> 00:21:44.286 A:middle
+Alright, let's come on
+to the next feature.
+
+00:21:44.676 --> 00:21:47.596 A:middle
+This is a big one.
+
+00:21:47.596 --> 00:21:49.016 A:middle
+Lightweight generics
+for Objective-C.
+
+00:21:49.626 --> 00:21:52.336 A:middle
+Now, the origin of this feature,
+
+00:21:52.706 --> 00:21:54.566 A:middle
+it's actually fairly
+easy to motivate.
+
+00:21:55.016 --> 00:21:55.666 A:middle
+Collections.
+
+00:21:56.996 --> 00:21:59.696 A:middle
+Here we have this
+NSArray of subviews.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:00.226 --> 00:22:02.406 A:middle
+What's in the array?
+
+00:22:03.246 --> 00:22:04.636 A:middle
+We don't say what's
+in the array.
+
+00:22:05.056 --> 00:22:08.176 A:middle
+We bring this into Swift and
+you say, ah, it's an array
+
+00:22:08.176 --> 00:22:09.466 A:middle
+of any object, of course.
+
+00:22:09.566 --> 00:22:11.476 A:middle
+That still tells me
+absolutely nothing.
+
+00:22:12.126 --> 00:22:14.556 A:middle
+I have to cast a lot.
+
+00:22:14.556 --> 00:22:15.216 A:middle
+That's what it tells me.
+
+00:22:15.896 --> 00:22:19.976 A:middle
+So we have had, of
+course, this common request
+
+00:22:19.976 --> 00:22:21.476 A:middle
+for typed collections.
+
+00:22:22.246 --> 00:22:25.096 A:middle
+Because people really want to
+say I have an array of views.
+
+00:22:25.466 --> 00:22:27.416 A:middle
+I have a dictionary that
+maps from string keys
+
+00:22:27.416 --> 00:22:29.576 A:middle
+over to the images
+associated with those keys.
+
+00:22:30.536 --> 00:22:32.986 A:middle
+This has been probably been the
+most highly requested feature
+
+00:22:32.986 --> 00:22:34.996 A:middle
+for the last decade
+of Objective-C.
+
+00:22:35.666 --> 00:22:37.386 A:middle
+So, now we are finally
+rolling it
+
+00:22:37.386 --> 00:22:39.656 A:middle
+out with lightweight
+generics for Objective-C.
+
+00:22:40.276 --> 00:22:42.656 A:middle
+So this is a general language
+feature that can be used
+
+00:22:42.656 --> 00:22:44.966 A:middle
+to improve the expressivity
+of your APIs;
+
+00:22:45.806 --> 00:22:48.836 A:middle
+it makes collections
+way easier to use now
+
+00:22:48.836 --> 00:22:51.956 A:middle
+that we have all the static type
+safety of typed collections.
+
+00:22:52.486 --> 00:22:54.366 A:middle
+Let's take a look.
+
+00:22:55.546 --> 00:22:57.296 A:middle
+So here's our subviews
+property again.
+
+00:22:58.546 --> 00:23:00.596 A:middle
+To make this an array
+of UI-views,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:58.546 --> 00:23:00.596 A:middle
+To make this an array
+of UI-views,
+
+00:23:01.096 --> 00:23:04.896 A:middle
+we just place UI-view-star, so
+UIV pointer, in angle brackets.
+
+00:23:05.086 --> 00:23:06.556 A:middle
+Same syntax you have seen.
+
+00:23:06.556 --> 00:23:06.826 A:middle
+Whoops, sorry.
+
+00:23:06.826 --> 00:23:06.996 A:middle
+(Applause).
+
+00:23:15.056 --> 00:23:18.056 A:middle
+The same syntax you have
+seen from Swift and C++
+
+00:23:18.056 --> 00:23:20.376 A:middle
+and C-Sharp, et cetera,
+et cetera.
+
+00:23:20.796 --> 00:23:21.976 A:middle
+Yes, we are completely aware
+
+00:23:21.976 --> 00:23:24.056 A:middle
+that angle brackets are
+quote protocol qualifiers.
+
+00:23:24.266 --> 00:23:28.536 A:middle
+Don't worry, we've got it.
+
+00:23:28.536 --> 00:23:31.956 A:middle
+So this introduces more type
+information into Objective-C.
+
+00:23:32.056 --> 00:23:33.886 A:middle
+Of course, this reflects
+into Swift
+
+00:23:33.886 --> 00:23:36.036 A:middle
+as much more beautiful
+type information.
+
+00:23:36.476 --> 00:23:38.486 A:middle
+But really I want to talk
+about the Objective-C effect
+
+00:23:38.576 --> 00:23:41.276 A:middle
+because this is a really
+useful feature for Objective-C.
+
+00:23:41.766 --> 00:23:43.706 A:middle
+Because let's talk
+about type safety.
+
+00:23:44.176 --> 00:23:46.686 A:middle
+Here's an example.
+
+00:23:47.236 --> 00:23:51.106 A:middle
+So I'm taking the path
+components of any URL, NSURL.
+
+00:23:51.106 --> 00:23:53.506 A:middle
+And I'm putting it
+into an array of URLs.
+
+00:23:54.036 --> 00:23:56.506 A:middle
+That almost seems reasonable
+if I didn't know this API
+
+00:23:56.506 --> 00:23:59.826 A:middle
+and it would be a while before
+I got the run time error,
+
+00:23:59.826 --> 00:24:02.136 A:middle
+the unrecognized selector
+that points out that no,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:59.826 --> 00:24:02.136 A:middle
+the unrecognized selector
+that points out that no,
+
+00:24:02.136 --> 00:24:04.636 A:middle
+I'm completely wrong in my
+usage of path components.
+
+00:24:05.406 --> 00:24:07.156 A:middle
+With type collections
+and, of course,
+
+00:24:07.226 --> 00:24:09.366 A:middle
+us rolling out type
+collections throughout our SDKs,
+
+00:24:09.366 --> 00:24:12.696 A:middle
+now you get a warning to tell
+you just what you did wrong
+
+00:24:13.006 --> 00:24:16.336 A:middle
+at the point where it happens.
+
+00:24:16.496 --> 00:24:19.726 A:middle
+Many other cases here say I'm
+building up immutable array
+
+00:24:19.796 --> 00:24:24.496 A:middle
+of NS strings and I foolishly go
+and add something to that array
+
+00:24:24.726 --> 00:24:27.886 A:middle
+without turning it into
+a string first, okay,
+
+00:24:28.056 --> 00:24:29.816 A:middle
+the compiler is going
+to tell me, no,
+
+00:24:29.816 --> 00:24:31.276 A:middle
+you can't put an NS number
+
+00:24:31.276 --> 00:24:33.076 A:middle
+into this NS mutable
+array of strings.
+
+00:24:33.326 --> 00:24:34.476 A:middle
+It doesn't make sense.
+
+00:24:34.986 --> 00:24:38.566 A:middle
+Now, the compiler actually
+has fairly deep knowledge
+
+00:24:39.066 --> 00:24:42.226 A:middle
+of the semantics here of
+the Cocoa collections.
+
+00:24:42.896 --> 00:24:46.336 A:middle
+So let's take this example
+here, we have an array of views,
+
+00:24:46.956 --> 00:24:48.156 A:middle
+we have an array of responders.
+
+00:24:48.206 --> 00:24:49.856 A:middle
+We assign from the array
+of views to the array
+
+00:24:49.856 --> 00:24:54.286 A:middle
+of responders, okay every
+view is a responder.
+
+00:24:54.286 --> 00:24:55.266 A:middle
+This seems fine.
+
+00:24:55.846 --> 00:24:56.366 A:middle
+It is okay.
+
+00:24:57.026 --> 00:25:00.886 A:middle
+Let's do the same thing
+with the mutable variant.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:24:57.026 --> 00:25:00.886 A:middle
+Let's do the same thing
+with the mutable variant.
+
+00:25:02.336 --> 00:25:05.986 A:middle
+So we take the stored mutable
+array of views and assign it
+
+00:25:05.986 --> 00:25:09.456 A:middle
+over to the stored mutable
+array of responders.
+
+00:25:09.936 --> 00:25:11.866 A:middle
+There's a trap here.
+
+00:25:12.676 --> 00:25:14.176 A:middle
+The trap, of course,
+is I can go ahead
+
+00:25:14.176 --> 00:25:17.936 A:middle
+and mutate my stored
+responders, put something
+
+00:25:17.936 --> 00:25:20.316 A:middle
+in there that's a
+responder but not a view.
+
+00:25:21.836 --> 00:25:24.376 A:middle
+Now, something later on is
+getting very, very confused
+
+00:25:24.436 --> 00:25:25.936 A:middle
+that the array of
+views it's looking
+
+00:25:25.936 --> 00:25:28.506 A:middle
+at has a view controller
+in it, not a view.
+
+00:25:29.946 --> 00:25:31.346 A:middle
+Compiler understands
+this is as well.
+
+00:25:31.396 --> 00:25:33.946 A:middle
+It will complain at the point
+of initialization, here,
+
+00:25:34.146 --> 00:25:37.136 A:middle
+that while it's perfectly safe
+to do this kind of assignment
+
+00:25:37.356 --> 00:25:40.776 A:middle
+with immutable arrays
+because they don't change
+
+00:25:40.776 --> 00:25:43.196 A:middle
+from underneath you,
+it is not safe to do
+
+00:25:43.296 --> 00:25:44.346 A:middle
+with the mutable variants.
+
+00:25:44.796 --> 00:25:49.006 A:middle
+Alright. You have
+actually seen all you need
+
+00:25:49.006 --> 00:25:50.666 A:middle
+to use lightweight generics
+
+00:25:50.666 --> 00:25:53.136 A:middle
+and typed collections
+throughout your applications.
+
+00:25:53.496 --> 00:25:55.646 A:middle
+But let's take a look
+at how we use this
+
+00:25:55.646 --> 00:25:57.116 A:middle
+within Foundation itself,
+
+00:25:58.446 --> 00:26:00.346 A:middle
+to actually create
+typed collections.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:58.446 --> 00:26:00.346 A:middle
+to actually create
+typed collections.
+
+00:26:00.466 --> 00:26:02.226 A:middle
+Because the feature
+here is generics.
+
+00:26:02.826 --> 00:26:04.416 A:middle
+Typed collections is one
+of the outcomes of it.
+
+00:26:04.736 --> 00:26:07.196 A:middle
+So here we have NSArray as
+you are used to seeing it.
+
+00:26:08.436 --> 00:26:09.666 A:middle
+Now we are going
+to parameterize it,
+
+00:26:09.766 --> 00:26:13.756 A:middle
+based on the object type
+that's stored in the NSArray,
+
+00:26:14.636 --> 00:26:16.106 A:middle
+again, using angle brackets.
+
+00:26:16.106 --> 00:26:17.316 A:middle
+We are just introducing
+a name here.
+
+00:26:18.056 --> 00:26:20.536 A:middle
+We can use that name throughout
+the interface, so, of course,
+
+00:26:20.536 --> 00:26:23.406 A:middle
+object at index, returns
+something of the object type.
+
+00:26:23.406 --> 00:26:26.306 A:middle
+If we go ahead and add
+other methods here.
+
+00:26:27.066 --> 00:26:29.526 A:middle
+When you initialize with
+objects the array you get in,
+
+00:26:29.526 --> 00:26:32.036 A:middle
+the C-array, contains objects.
+
+00:26:32.976 --> 00:26:34.176 A:middle
+Use array by adding object.
+
+00:26:34.176 --> 00:26:36.526 A:middle
+You put in a new object, you
+get an NSArray of objects.
+
+00:26:36.526 --> 00:26:38.456 A:middle
+So it composes very,
+very, very nicely.
+
+00:26:39.416 --> 00:26:42.446 A:middle
+Of course this also works for
+categories and extensions.
+
+00:26:43.276 --> 00:26:46.406 A:middle
+Here we have an NSDictionary
+category, parameterized
+
+00:26:46.406 --> 00:26:49.206 A:middle
+on key type and the object
+type, and we have gone ahead
+
+00:26:49.206 --> 00:26:52.066 A:middle
+and added object for key
+here, takes in a key type,
+
+00:26:52.366 --> 00:26:55.336 A:middle
+returns a nullable object
+type because, of course,
+
+00:26:55.666 --> 00:26:57.566 A:middle
+nil matters here
+and we want to have
+
+00:26:57.566 --> 00:27:00.326 A:middle
+that information in our APIs.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:57.566 --> 00:27:00.326 A:middle
+that information in our APIs.
+
+00:27:00.526 --> 00:27:04.116 A:middle
+Now, of course, there are
+existing categories defined
+
+00:27:04.116 --> 00:27:07.706 A:middle
+on NSDictionary, NSArray, and so
+on, you may have some yourself.
+
+00:27:08.096 --> 00:27:09.916 A:middle
+Those will continue to
+work as they always have.
+
+00:27:10.336 --> 00:27:12.966 A:middle
+They cannot access the
+type parameters in any way,
+
+00:27:13.826 --> 00:27:15.986 A:middle
+but they also won't
+change behavior at all,
+
+00:27:15.986 --> 00:27:17.666 A:middle
+they will continue working
+as they always have.
+
+00:27:19.206 --> 00:27:21.976 A:middle
+That brings me to
+backward compatibility.
+
+00:27:23.236 --> 00:27:26.006 A:middle
+So the entire lightweight
+generics feature is based
+
+00:27:26.076 --> 00:27:27.276 A:middle
+on a type erasure model.
+
+00:27:27.696 --> 00:27:29.266 A:middle
+Which means that
+the compiler has all
+
+00:27:29.266 --> 00:27:32.036 A:middle
+of this rich static type
+information but it erases
+
+00:27:32.036 --> 00:27:34.126 A:middle
+that information
+when generating code.
+
+00:27:34.986 --> 00:27:37.296 A:middle
+There's huge benefits
+here for Objective-C,
+
+00:27:37.616 --> 00:27:39.576 A:middle
+that we did not have
+to make any changes
+
+00:27:39.576 --> 00:27:43.306 A:middle
+to the Objective-C run time
+to make this feature work.
+
+00:27:43.986 --> 00:27:46.086 A:middle
+That means we are able
+to roll out generics
+
+00:27:46.086 --> 00:27:48.416 A:middle
+in type collections, you
+can adopt them in all
+
+00:27:48.416 --> 00:27:52.206 A:middle
+of your applications and it
+does not affect your ability
+
+00:27:52.206 --> 00:27:54.376 A:middle
+to deploy back to
+existing operating systems.
+
+00:27:55.096 --> 00:27:55.246 A:middle
+(Applause.)
+
+00:27:55.546 --> 00:28:04.836 A:middle
+&gt;&gt; DOUG GREGOR: And if it wasn't
+obvious from that description,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:55.546 --> 00:28:04.836 A:middle
+&gt;&gt; DOUG GREGOR: And if it wasn't
+obvious from that description,
+
+00:28:04.836 --> 00:28:06.366 A:middle
+of course, we are also not going
+
+00:28:06.366 --> 00:28:08.476 A:middle
+to change cogeneration
+in any way.
+
+00:28:08.476 --> 00:28:11.186 A:middle
+We are not adding runtime
+checking to Objective-C
+
+00:28:11.186 --> 00:28:13.166 A:middle
+that doesn't make
+sense in Objective-C.
+
+00:28:13.876 --> 00:28:16.136 A:middle
+We just maintain full
+binary compatibility.
+
+00:28:16.136 --> 00:28:19.306 A:middle
+So adopt this feature, enjoy
+the warnings preventing you
+
+00:28:19.306 --> 00:28:20.616 A:middle
+from making horrible mistakes.
+
+00:28:21.956 --> 00:28:27.966 A:middle
+And you can adopt it
+very, very, very...
+
+00:28:28.516 --> 00:28:30.676 A:middle
+hmm gradually, I guess
+is the best term here.
+
+00:28:31.386 --> 00:28:33.266 A:middle
+So in addition to
+binary compatibility,
+
+00:28:33.336 --> 00:28:35.296 A:middle
+we want to provide
+source compatibility,
+
+00:28:35.626 --> 00:28:37.546 A:middle
+because we have rolled this
+feature out through our SDKs.
+
+00:28:37.546 --> 00:28:40.786 A:middle
+We don't want you to have to
+update all of your source code
+
+00:28:40.786 --> 00:28:42.346 A:middle
+to use these things everywhere.
+
+00:28:42.656 --> 00:28:44.096 A:middle
+We want you to gradually
+adopt it.
+
+00:28:44.176 --> 00:28:45.576 A:middle
+Use it where it makes
+sense for you.
+
+00:28:46.076 --> 00:28:47.906 A:middle
+And so we provided these
+implicit conversions
+
+00:28:47.906 --> 00:28:49.506 A:middle
+in the language that allow you
+
+00:28:49.506 --> 00:28:52.126 A:middle
+to add type arguments
+or take them away.
+
+00:28:52.856 --> 00:28:56.126 A:middle
+Okay? Again, there's no run
+time cost to doing this.
+
+00:28:56.526 --> 00:28:57.616 A:middle
+But it lets you get in and get
+
+00:28:57.616 --> 00:28:59.506 A:middle
+out of the generic
+system as you need.
+
+00:28:59.806 --> 00:29:01.846 A:middle
+So all of your new code can
+be written with generics
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:59.806 --> 00:29:01.846 A:middle
+So all of your new code can
+be written with generics
+
+00:29:01.936 --> 00:29:03.316 A:middle
+and if you don't want
+to touch your old code,
+
+00:29:03.576 --> 00:29:04.436 A:middle
+that's perfectly line.
+
+00:29:04.516 --> 00:29:07.256 A:middle
+It's not going to change.
+
+00:29:07.406 --> 00:29:07.726 A:middle
+All right.
+
+00:29:08.086 --> 00:29:12.586 A:middle
+We have one last feature to talk
+about, this one's kind of cool.
+
+00:29:12.836 --> 00:29:16.716 A:middle
+So kindof types.
+
+00:29:17.236 --> 00:29:19.686 A:middle
+Actually, came out of our
+work on lightweight generics.
+
+00:29:20.366 --> 00:29:22.276 A:middle
+And so we started
+with, of course,
+
+00:29:22.946 --> 00:29:25.606 A:middle
+using the untyped
+collection here for subviews,
+
+00:29:26.196 --> 00:29:28.916 A:middle
+and there's code that
+may go grab a view
+
+00:29:28.916 --> 00:29:30.346 A:middle
+and send some message to it.
+
+00:29:31.186 --> 00:29:32.056 A:middle
+This code is fine.
+
+00:29:32.236 --> 00:29:32.946 A:middle
+It works today.
+
+00:29:34.546 --> 00:29:36.996 A:middle
+We went ahead and did these
+annotations to say, okay,
+
+00:29:36.996 --> 00:29:41.506 A:middle
+subviews contains UI views
+and now we get some warnings.
+
+00:29:43.676 --> 00:29:46.006 A:middle
+The compiler is completely
+justified
+
+00:29:46.006 --> 00:29:46.996 A:middle
+in giving this warning.
+
+00:29:48.076 --> 00:29:51.866 A:middle
+It knows now that the
+first subview is a UI view.
+
+00:29:52.906 --> 00:29:56.476 A:middle
+It can't know that you
+know it's a UI button
+
+00:29:56.776 --> 00:29:58.356 A:middle
+that would actually
+respond to this selector.
+
+00:29:59.486 --> 00:30:02.846 A:middle
+And so while the
+compiler is right,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:29:59.486 --> 00:30:02.846 A:middle
+And so while the
+compiler is right,
+
+00:30:03.286 --> 00:30:05.056 A:middle
+it's not necessarily useful
+
+00:30:05.056 --> 00:30:07.056 A:middle
+to be producing warnings
+on all of this code.
+
+00:30:07.056 --> 00:30:09.716 A:middle
+You get a raft of warnings
+most of which would be benign
+
+00:30:09.716 --> 00:30:11.556 A:middle
+and you would be
+adding casts everywhere.
+
+00:30:12.606 --> 00:30:14.696 A:middle
+This really forced
+us to consider ID
+
+00:30:14.796 --> 00:30:17.286 A:middle
+and how it's used
+as an API contract.
+
+00:30:18.616 --> 00:30:20.386 A:middle
+And so let's make this a
+little simpler example.
+
+00:30:20.386 --> 00:30:23.316 A:middle
+Let's talk about NSApp,
+which is this global in Cocoa
+
+00:30:23.316 --> 00:30:26.006 A:middle
+that gives you access to
+your NSApplication instance.
+
+00:30:26.916 --> 00:30:32.786 A:middle
+Now, what this really means
+is NSApp is a subclass
+
+00:30:32.976 --> 00:30:34.036 A:middle
+of NSApplication.
+
+00:30:34.036 --> 00:30:35.906 A:middle
+But we couldn't describe
+that to the type system.
+
+00:30:36.796 --> 00:30:40.586 A:middle
+With kindof types, we can say
+this exactly in Objective-C.
+
+00:30:41.066 --> 00:30:43.946 A:middle
+What does this mean?
+
+00:30:44.936 --> 00:30:47.246 A:middle
+This means NSApp is some
+kind of application.
+
+00:30:47.586 --> 00:30:51.866 A:middle
+So we are going to give it
+some limited behavior, like ID.
+
+00:30:53.256 --> 00:30:56.716 A:middle
+So I have my NSApp, of course
+I can convert it to an NSObject
+
+00:30:56.936 --> 00:30:59.686 A:middle
+because every NSApplication
+is an NSObject.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:00.466 --> 00:31:02.746 A:middle
+The important part here,
+the ID-like behavior,
+
+00:31:02.996 --> 00:31:05.666 A:middle
+is the implicit downcast
+from NSApplication
+
+00:31:06.026 --> 00:31:07.796 A:middle
+to your MyApplication subclass.
+
+00:31:08.286 --> 00:31:09.836 A:middle
+That's good.
+
+00:31:10.016 --> 00:31:12.346 A:middle
+We want that behavior
+because that's how NSApp has
+
+00:31:12.346 --> 00:31:13.056 A:middle
+always worked.
+
+00:31:13.706 --> 00:31:16.326 A:middle
+Now, what we won't allow
+is some silly cross-cast.
+
+00:31:16.426 --> 00:31:19.496 A:middle
+You tried to use
+NSApp in a string?
+
+00:31:19.496 --> 00:31:21.816 A:middle
+Well, that's not an
+NSApplication and never can be.
+
+00:31:22.236 --> 00:31:23.396 A:middle
+So you can produce
+a warning there.
+
+00:31:23.976 --> 00:31:27.356 A:middle
+Of course, coming with
+this is the notion
+
+00:31:27.356 --> 00:31:30.836 A:middle
+that you can message NSApp and
+get all of the methods that are
+
+00:31:31.006 --> 00:31:32.016 A:middle
+in NSApplication,
+
+00:31:32.016 --> 00:31:33.916 A:middle
+its superclasses,
+and its subclasses.
+
+00:31:34.436 --> 00:31:37.306 A:middle
+Now, with kindof types
+we actually found
+
+00:31:37.306 --> 00:31:39.366 A:middle
+that this is much
+more useful than ID.
+
+00:31:39.686 --> 00:31:43.526 A:middle
+Because it gives you more type
+information in the API contract
+
+00:31:43.956 --> 00:31:46.626 A:middle
+which is great for both
+Swift and Objective-C.
+
+00:31:47.156 --> 00:31:49.226 A:middle
+So here we have this
+NS tableview method,
+
+00:31:49.416 --> 00:31:51.116 A:middle
+you have column,
+row, makeIfNecessary.
+
+00:31:51.606 --> 00:31:52.776 A:middle
+It's always returned to ID,
+
+00:31:52.776 --> 00:31:54.716 A:middle
+because that implicit
+downcasting behavior
+
+00:31:54.716 --> 00:31:55.426 A:middle
+is important.
+
+00:31:56.316 --> 00:31:59.396 A:middle
+Well, now we can rewrite
+it as a kindof NSview.
+
+00:31:59.396 --> 00:32:03.846 A:middle
+So returning some kind of
+NSView, and on the Swift side,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:59.396 --> 00:32:03.846 A:middle
+So returning some kind of
+NSView, and on the Swift side,
+
+00:32:04.176 --> 00:32:06.466 A:middle
+ah, now we are returning
+an optional NSView.
+
+00:32:06.836 --> 00:32:09.206 A:middle
+That's the right API for Swift
+
+00:32:09.586 --> 00:32:11.476 A:middle
+and it works beautifully
+in Objective-C.
+
+00:32:12.386 --> 00:32:13.936 A:middle
+Let's bring it back to
+our original example
+
+00:32:13.936 --> 00:32:15.076 A:middle
+with lightweight generics.
+
+00:32:15.606 --> 00:32:20.876 A:middle
+Here we were with our subviews
+stated as an NSArray of UIViews.
+
+00:32:21.196 --> 00:32:25.336 A:middle
+Well, now we can state that it's
+an NSArray of kinds of UI views.
+
+00:32:25.956 --> 00:32:28.006 A:middle
+So we get the stronger
+API contract
+
+00:32:28.006 --> 00:32:29.196 A:middle
+in Objective-C and Swift.
+
+00:32:29.196 --> 00:32:32.976 A:middle
+It's far easier to tell
+what this property is,
+
+00:32:34.296 --> 00:32:37.486 A:middle
+but you don't cause any spurious
+warnings because you still have
+
+00:32:37.486 --> 00:32:40.606 A:middle
+that nice, implicit
+downcasting behavior from ID.
+
+00:32:41.916 --> 00:32:46.116 A:middle
+Hopefully this leads
+you to a question.
+
+00:32:46.186 --> 00:32:49.816 A:middle
+Should I even use ID in an API?
+
+00:32:50.046 --> 00:32:52.596 A:middle
+Over the years we have
+actually been rolling out a lot
+
+00:32:52.596 --> 00:32:56.286 A:middle
+of features that give more
+specific type information
+
+00:32:56.286 --> 00:32:59.056 A:middle
+than ID for various
+important scenarios.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:00.056 --> 00:33:01.866 A:middle
+And the same year
+we introduced Arc,
+
+00:33:01.866 --> 00:33:03.136 A:middle
+we introduced instance type,
+
+00:33:04.126 --> 00:33:06.506 A:middle
+which says that the method you
+are calling returns something
+
+00:33:06.506 --> 00:33:08.446 A:middle
+of the same dynamic
+type as self.
+
+00:33:09.676 --> 00:33:11.766 A:middle
+This year we are
+introducing type collections
+
+00:33:11.766 --> 00:33:14.176 A:middle
+that eliminate tons
+of uses of ID.
+
+00:33:14.596 --> 00:33:17.526 A:middle
+From our own APIs we have been
+rolling out these features and,
+
+00:33:17.526 --> 00:33:19.776 A:middle
+of course, from your APIs
+when you adopt this feature.
+
+00:33:21.096 --> 00:33:24.666 A:middle
+We now have kindof X to
+talk about any subclass of X
+
+00:33:24.666 --> 00:33:26.066 A:middle
+with implicit downcasting.
+
+00:33:26.616 --> 00:33:29.346 A:middle
+So you can keep your
+code working,
+
+00:33:29.486 --> 00:33:31.846 A:middle
+at least all the actually
+working code that's not doing
+
+00:33:31.846 --> 00:33:35.896 A:middle
+weird things, but have a better
+API contract, and, of course,
+
+00:33:35.936 --> 00:33:38.096 A:middle
+protocols have been in
+Objective-C for a very,
+
+00:33:38.096 --> 00:33:41.906 A:middle
+very long time and using ID of
+some protocol is a great way
+
+00:33:41.906 --> 00:33:43.466 A:middle
+to say I don't care
+what the class type is.
+
+00:33:43.466 --> 00:33:44.986 A:middle
+It just has to conform
+to this protocol.
+
+00:33:45.586 --> 00:33:49.696 A:middle
+So there's one major
+class of uses for ID.
+
+00:33:50.136 --> 00:33:51.256 A:middle
+And that's when you really,
+
+00:33:51.256 --> 00:33:53.866 A:middle
+really do mean an
+object of any type.
+
+00:33:54.246 --> 00:33:56.586 A:middle
+And there's no static type
+information that could make
+
+00:33:56.586 --> 00:33:57.626 A:middle
+that statement better.
+
+00:33:58.606 --> 00:34:02.786 A:middle
+So, a canonical example here
+is the user info dictionary.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:58.606 --> 00:34:02.786 A:middle
+So, a canonical example here
+is the user info dictionary.
+
+00:34:03.156 --> 00:34:07.886 A:middle
+You have string keys and
+you have ID for the values.
+
+00:34:08.666 --> 00:34:09.766 A:middle
+It's completely reasonable
+
+00:34:09.766 --> 00:34:12.315 A:middle
+because the different keys
+will have different types
+
+00:34:12.315 --> 00:34:14.505 A:middle
+in those values and it's
+something you can only
+
+00:34:14.505 --> 00:34:15.525 A:middle
+determine dynamically.
+
+00:34:16.085 --> 00:34:20.456 A:middle
+Let's wrap things up.
+
+00:34:20.985 --> 00:34:24.866 A:middle
+So, we have big improvements
+for both Swift and Objective-C.
+
+00:34:25.025 --> 00:34:27.496 A:middle
+These languages are
+codesigned and coevolved
+
+00:34:27.835 --> 00:34:29.576 A:middle
+to work together beautifully.
+
+00:34:30.136 --> 00:34:34.295 A:middle
+And Xcode and the tools
+supporting it will help you move
+
+00:34:34.295 --> 00:34:37.976 A:middle
+between the two languages, the
+best way for your workflow.
+
+00:34:39.346 --> 00:34:41.996 A:middle
+We have rolled out a lot of
+great features for Objective-C.
+
+00:34:41.996 --> 00:34:44.126 A:middle
+We highly recommend you
+modernize your usage
+
+00:34:44.126 --> 00:34:44.916 A:middle
+of Objective-C.
+
+00:34:45.525 --> 00:34:48.246 A:middle
+These new language features
+give you much better APIs,
+
+00:34:48.246 --> 00:34:50.766 A:middle
+and you will see this in
+our APIs and in yours,
+
+00:34:50.766 --> 00:34:53.065 A:middle
+and give you far
+better type safety
+
+00:34:53.106 --> 00:34:55.196 A:middle
+to catch bugs before
+they manifest
+
+00:34:55.196 --> 00:34:57.386 A:middle
+as the dreaded unrecognized
+selector at runtime.
+
+00:34:57.386 --> 00:35:01.526 A:middle
+And using these features can
+really make your Objective-C
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:57.386 --> 00:35:01.526 A:middle
+And using these features can
+really make your Objective-C
+
+00:35:01.526 --> 00:35:03.226 A:middle
+interfaces beautiful in Swift,
+
+00:35:03.376 --> 00:35:07.186 A:middle
+so you have the best Swift
+experience with your own code.
+
+00:35:07.796 --> 00:35:12.596 A:middle
+For more information, please
+contact our Evangelist,
+
+00:35:12.706 --> 00:35:15.166 A:middle
+Stefan Lesser, check
+out the documentation,
+
+00:35:15.166 --> 00:35:16.536 A:middle
+or talk to us in
+the forum online.
+
+00:35:17.136 --> 00:35:19.826 A:middle
+There's a bunch of
+related sessions talking
+
+00:35:19.826 --> 00:35:21.386 A:middle
+about what's new
+in Swift and Cocoa.
+
+00:35:21.846 --> 00:35:23.716 A:middle
+Lots of great Swift
+sessions here.
+
+00:35:24.386 --> 00:35:24.976 A:middle
+Thank you very much.
+
+00:35:28.246 --> 00:35:28.456 A:middle
+(Applause.)
+

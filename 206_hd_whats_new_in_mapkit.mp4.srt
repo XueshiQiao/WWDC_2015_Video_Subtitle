@@ -1,0 +1,2778 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:06.716 --> 00:00:10.806 A:middle
+&gt;&gt; SUMIT LONKAR: Good
+afternoon, everyone.
+
+00:00:22.296 --> 00:00:30.916 A:middle
+Welcome to Session 206.
+
+00:00:31.236 --> 00:00:32.866 A:middle
+This is What's New
+In the MapKit.
+
+00:00:33.326 --> 00:00:34.416 A:middle
+My name is Sumit Lonkar.
+
+00:00:34.496 --> 00:00:36.306 A:middle
+I am a software engineer
+on the Maps team.
+
+00:00:36.766 --> 00:00:39.226 A:middle
+So, we have got a jam-packed
+session for you this afternoon.
+
+00:00:39.436 --> 00:00:41.246 A:middle
+So without further
+ado, let's get started.
+
+00:00:42.556 --> 00:00:44.316 A:middle
+Before we begin,
+first take a look
+
+00:00:44.316 --> 00:00:45.496 A:middle
+at today's session's agenda.
+
+00:00:46.116 --> 00:00:49.046 A:middle
+Our first topic of today
+is going to be improvements
+
+00:00:49.046 --> 00:00:50.206 A:middle
+to existing MapKit API.
+
+00:00:50.616 --> 00:00:52.826 A:middle
+Here, I will mainly talk
+about new features --
+
+00:00:53.116 --> 00:00:57.506 A:middle
+sorry, here, I'll mainly talk
+about our new APIs that we added
+
+00:00:57.506 --> 00:00:58.906 A:middle
+to support our existing
+features.
+
+00:00:59.266 --> 00:01:02.956 A:middle
+After that, I'll talk about
+Transit and we'll mainly focus
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:59.266 --> 00:01:02.956 A:middle
+After that, I'll talk about
+Transit and we'll mainly focus
+
+00:01:02.956 --> 00:01:04.806 A:middle
+on Transit in MapKit's
+perspective.
+
+00:01:04.806 --> 00:01:07.106 A:middle
+And finally we will
+have a Flyover.
+
+00:01:07.476 --> 00:01:09.636 A:middle
+Flyover is a brand
+new MapType to MapKit.
+
+00:01:10.006 --> 00:01:13.296 A:middle
+It's been available to iOS
+applications since iOS 6,
+
+00:01:13.296 --> 00:01:15.246 A:middle
+and now we are bringing
+it to you guys.
+
+00:01:15.246 --> 00:01:18.316 A:middle
+And along with this topic we
+will have various demos for you.
+
+00:01:18.646 --> 00:01:21.326 A:middle
+So you can see all these
+newly added API in action.
+
+00:01:21.676 --> 00:01:23.416 A:middle
+So with that outline,
+let's jump right
+
+00:01:23.416 --> 00:01:26.446 A:middle
+into our first topic today,
+Improvements to Existing API.
+
+00:01:29.656 --> 00:01:33.636 A:middle
+Based on comments and requests
+from developers like you,
+
+00:01:33.746 --> 00:01:36.376 A:middle
+this year we have taken some
+serious effort to make sure
+
+00:01:36.376 --> 00:01:40.036 A:middle
+that you and your application
+get best out of MapKit.
+
+00:01:40.036 --> 00:01:42.076 A:middle
+These newly added
+API will help you
+
+00:01:42.076 --> 00:01:45.196 A:middle
+to customize your MapKit
+experience in your application
+
+00:01:45.506 --> 00:01:48.686 A:middle
+as well as enable great user
+experience, and for developers
+
+00:01:48.686 --> 00:01:51.586 A:middle
+like you, it means way
+less code on your side.
+
+00:01:51.996 --> 00:01:53.856 A:middle
+So, let's look at
+these API one by one.
+
+00:01:54.236 --> 00:01:56.496 A:middle
+To start with, Pin
+Color Customization.
+
+00:01:57.136 --> 00:02:02.036 A:middle
+So, MapKit pins, are also
+known as MKAnnotationView,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:57.136 --> 00:02:02.036 A:middle
+So, MapKit pins, are also
+known as MKAnnotationView,
+
+00:02:02.226 --> 00:02:04.756 A:middle
+has been an integral part of
+MapKit since the very beginning.
+
+00:02:05.446 --> 00:02:07.246 A:middle
+They provide very
+concrete behavior
+
+00:02:07.536 --> 00:02:09.425 A:middle
+to denote any singular
+point on a map.
+
+00:02:09.876 --> 00:02:11.516 A:middle
+And when it comes
+to customization,
+
+00:02:11.656 --> 00:02:13.466 A:middle
+there is not much you
+can do about with them.
+
+00:02:13.756 --> 00:02:16.736 A:middle
+So, you can make them red
+or you can make them green.
+
+00:02:17.266 --> 00:02:18.256 A:middle
+Or purple.
+
+00:02:18.256 --> 00:02:18.976 A:middle
+And that's it.
+
+00:02:19.146 --> 00:02:21.536 A:middle
+That's all you get, all you
+get is only three choices.
+
+00:02:21.536 --> 00:02:24.136 A:middle
+And it's been like
+that since iOS 3.
+
+00:02:24.626 --> 00:02:27.096 A:middle
+And now we are bringing
+you a new API
+
+00:02:27.416 --> 00:02:28.706 A:middle
+that lets you customize this.
+
+00:02:29.156 --> 00:02:31.346 A:middle
+So we are introducing
+it as a property
+
+00:02:31.346 --> 00:02:34.426 A:middle
+on MKPinAnnotationView,
+called pinTintColor.
+
+00:02:34.966 --> 00:02:39.246 A:middle
+On iOS it takes UIColor and
+on OS X it takes NSColor.
+
+00:02:39.666 --> 00:02:42.396 A:middle
+Now, as underneath, it's
+UIColor and NSColor,
+
+00:02:42.396 --> 00:02:44.636 A:middle
+that means you have
+millions of different colors
+
+00:02:44.636 --> 00:02:45.716 A:middle
+that you can put on your Map.
+
+00:02:47.176 --> 00:02:50.106 A:middle
+I would like to take
+this opportunity to point
+
+00:02:50.106 --> 00:02:52.936 A:middle
+out that we are deprecating
+our old API called pinColor.
+
+00:02:53.306 --> 00:02:55.406 A:middle
+So, if your application
+is using this API,
+
+00:02:55.846 --> 00:02:58.136 A:middle
+make sure that you
+update it to the new API
+
+00:02:58.136 --> 00:03:00.126 A:middle
+that we are providing.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:58.136 --> 00:03:00.126 A:middle
+that we are providing.
+
+00:03:00.126 --> 00:03:02.446 A:middle
+That's all about Pin
+Color Customization.
+
+00:03:02.446 --> 00:03:04.636 A:middle
+Let's move on to go to
+Callout Customization.
+
+00:03:05.026 --> 00:03:07.596 A:middle
+And before we dive into
+callouts, I'll first take
+
+00:03:07.596 --> 00:03:09.246 A:middle
+up some time to talk
+about callout.
+
+00:03:09.446 --> 00:03:11.446 A:middle
+For those who have been
+using it for a long time,
+
+00:03:11.726 --> 00:03:13.656 A:middle
+it is just going to
+be a refresher course.
+
+00:03:14.036 --> 00:03:16.886 A:middle
+So, what is this callout, the
+callout is the white bubble
+
+00:03:16.886 --> 00:03:19.106 A:middle
+that pops up when you
+tap on an annotation.
+
+00:03:19.446 --> 00:03:21.846 A:middle
+Primarily it has four
+different components.
+
+00:03:22.096 --> 00:03:23.036 A:middle
+One, the title.
+
+00:03:23.386 --> 00:03:26.466 A:middle
+Second, you get a subtitle that
+goes right below the title,
+
+00:03:26.796 --> 00:03:29.676 A:middle
+and you have a right accessory
+view and a left accessory view.
+
+00:03:30.186 --> 00:03:32.876 A:middle
+Normally, these four
+components are good enough
+
+00:03:33.006 --> 00:03:35.876 A:middle
+to provide us enough, good
+enough to give a little bit
+
+00:03:35.876 --> 00:03:37.896 A:middle
+of information about the point
+
+00:03:38.316 --> 00:03:40.316 A:middle
+or the coordinate
+they are representing,
+
+00:03:40.776 --> 00:03:43.666 A:middle
+but the problem arises when
+the content size increases.
+
+00:03:43.946 --> 00:03:46.986 A:middle
+For example, in this
+callout, all right,
+
+00:03:47.446 --> 00:03:49.636 A:middle
+in this callout you can see
+the subtitle is getting clipped
+
+00:03:49.636 --> 00:03:50.476 A:middle
+at one point.
+
+00:03:51.056 --> 00:03:53.466 A:middle
+So what do you have to do
+to customize these callouts
+
+00:03:53.466 --> 00:03:54.936 A:middle
+to fit your application needs?
+
+00:03:55.336 --> 00:03:57.366 A:middle
+Well, it turns out, there
+are a couple of work-arounds
+
+00:03:57.366 --> 00:03:59.686 A:middle
+that developers have
+been trying.
+
+00:03:59.686 --> 00:04:02.846 A:middle
+Sometimes they run into
+issues, like, to start with,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:59.686 --> 00:04:02.846 A:middle
+Sometimes they run into
+issues, like, to start with,
+
+00:04:03.096 --> 00:04:04.766 A:middle
+we have something like
+this in a map view
+
+00:04:05.036 --> 00:04:07.406 A:middle
+where you tap -- a
+maps application.
+
+00:04:07.706 --> 00:04:10.306 A:middle
+So, when you tap on
+annotations you get a POI
+
+00:04:10.446 --> 00:04:12.116 A:middle
+and a callout with
+a Yelp review.
+
+00:04:12.816 --> 00:04:16.276 A:middle
+And in order to implement
+a similar kind
+
+00:04:16.276 --> 00:04:18.676 A:middle
+of behavior we have seen
+developers do something
+
+00:04:18.676 --> 00:04:21.406 A:middle
+like this, where they put
+Emojis in their subtitle.
+
+00:04:21.736 --> 00:04:23.396 A:middle
+I mean, it's fine for
+something like this.
+
+00:04:23.806 --> 00:04:26.776 A:middle
+But what happens when you go
+implement something complex
+
+00:04:26.776 --> 00:04:27.126 A:middle
+like this?
+
+00:04:27.446 --> 00:04:29.586 A:middle
+Well, it turns out it
+is not a good solution.
+
+00:04:29.936 --> 00:04:32.776 A:middle
+And in order to solve this
+problem we are introducing a new
+
+00:04:32.776 --> 00:04:35.806 A:middle
+way, in terms of a
+property that will help you
+
+00:04:35.806 --> 00:04:37.416 A:middle
+to customize the callout.
+
+00:04:37.416 --> 00:04:39.126 A:middle
+The property we are
+introducing is called
+
+00:04:39.126 --> 00:04:40.386 A:middle
+detailCalloutAccessoryView.
+
+00:04:40.826 --> 00:04:45.466 A:middle
+On iOS it takes a UIView,
+and on OS X it takes NSView.
+
+00:04:45.826 --> 00:04:48.146 A:middle
+Again, it's a UIView and NSView.
+
+00:04:48.306 --> 00:04:50.756 A:middle
+That means you can customize
+it to a greater length.
+
+00:04:50.756 --> 00:04:52.846 A:middle
+So, even if you want
+to use, like, a --
+
+00:04:52.986 --> 00:04:56.776 A:middle
+you can do it and it will open
+up the endless possibilities
+
+00:04:56.776 --> 00:04:58.686 A:middle
+of customizing these callouts.
+
+00:04:58.686 --> 00:05:02.556 A:middle
+Again, these callouts
+support auto layout,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:58.686 --> 00:05:02.556 A:middle
+Again, these callouts
+support auto layout,
+
+00:05:02.646 --> 00:05:03.866 A:middle
+right to left languages.
+
+00:05:03.896 --> 00:05:05.686 A:middle
+That means everything
+is in there for you,
+
+00:05:05.686 --> 00:05:07.676 A:middle
+and all you need is one
+single line of code.
+
+00:05:08.076 --> 00:05:09.506 A:middle
+Let's quickly take a
+look at a sample code
+
+00:05:09.506 --> 00:05:11.586 A:middle
+and how one would use
+it in their application.
+
+00:05:12.106 --> 00:05:14.966 A:middle
+So, here, I have a callback
+method that gets fired
+
+00:05:14.966 --> 00:05:16.656 A:middle
+when you tap on an annotation.
+
+00:05:17.036 --> 00:05:19.776 A:middle
+I'll start off with just setting
+
+00:05:19.776 --> 00:05:21.466 A:middle
+up detailCalloutAccessory
+property,
+
+00:05:21.786 --> 00:05:24.696 A:middle
+detailCalloutAccessoryView
+property to be a UIImageView.
+
+00:05:24.986 --> 00:05:27.736 A:middle
+As you can see I'm just placing
+an image of the Taj Mahal
+
+00:05:27.736 --> 00:05:30.386 A:middle
+in that callout, and that's
+it, that's all you need to do
+
+00:05:30.386 --> 00:05:31.896 A:middle
+to customize this callout.
+
+00:05:31.896 --> 00:05:32.446 A:middle
+Isn't that great?
+
+00:05:32.446 --> 00:05:40.706 A:middle
+As I mentioned earlier, it
+is just a UIView and NSView.
+
+00:05:40.916 --> 00:05:43.096 A:middle
+We are really excited to
+give it out to you guys
+
+00:05:43.096 --> 00:05:45.466 A:middle
+and see what you guys can
+achieve with this thing.
+
+00:05:45.906 --> 00:05:48.076 A:middle
+Hopefully we will see
+those results coming soon.
+
+00:05:48.076 --> 00:05:51.016 A:middle
+So that's all about
+Callout Customization.
+
+00:05:51.286 --> 00:05:53.056 A:middle
+Let's move on to
+Map Customizations.
+
+00:05:53.596 --> 00:05:58.566 A:middle
+In this particular topic we will
+be talking about new handy APIs
+
+00:05:58.566 --> 00:06:01.406 A:middle
+that will let you control
+what goes on your Map View.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:58.566 --> 00:06:01.406 A:middle
+that will let you control
+what goes on your Map View.
+
+00:06:01.406 --> 00:06:03.526 A:middle
+Like, you have a map unit
+inside your application,
+
+00:06:03.856 --> 00:06:05.986 A:middle
+how can you control the
+content of this Map View?
+
+00:06:06.206 --> 00:06:09.826 A:middle
+These APIs have been
+available to maps applications
+
+00:06:09.826 --> 00:06:10.886 A:middle
+for a couple of years now
+
+00:06:10.976 --> 00:06:12.696 A:middle
+and now we are bringing
+it to you guys.
+
+00:06:12.696 --> 00:06:15.256 A:middle
+Let's start off with traffic.
+
+00:06:15.916 --> 00:06:18.246 A:middle
+Now you have an ability
+to show any high traffic
+
+00:06:18.246 --> 00:06:21.836 A:middle
+on your Map View and all you
+have to do is put a flag, like,
+
+00:06:21.836 --> 00:06:24.026 A:middle
+set a flag on the Map
+View called showsTraffic.
+
+00:06:24.756 --> 00:06:27.256 A:middle
+Similar to the traffic,
+we're also providing a way
+
+00:06:27.256 --> 00:06:28.916 A:middle
+to show or hide a scale.
+
+00:06:29.336 --> 00:06:32.396 A:middle
+So you can either
+show or hide a scale
+
+00:06:32.396 --> 00:06:34.736 A:middle
+in your left top
+corner of your Map View.
+
+00:06:34.736 --> 00:06:37.846 A:middle
+And similar to a scale, you
+can also show and hide compass.
+
+00:06:38.246 --> 00:06:41.996 A:middle
+You might have noticed that
+these APIs are very similar
+
+00:06:41.996 --> 00:06:43.056 A:middle
+to our existing APIs
+
+00:06:43.246 --> 00:06:45.696 A:middle
+like showsPointsOfInterest
+or showsBuildings.
+
+00:06:46.126 --> 00:06:49.146 A:middle
+We believe with the use of
+these APIs, you will be able
+
+00:06:49.146 --> 00:06:51.596 A:middle
+to customize Map View
+inside your application
+
+00:06:51.916 --> 00:06:53.956 A:middle
+and provide a great
+user experience.
+
+00:06:54.476 --> 00:06:55.816 A:middle
+So that's Map Customization.
+
+00:06:56.346 --> 00:07:00.786 A:middle
+Other than maps, other than
+these APIs we talked about,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:56.346 --> 00:07:00.786 A:middle
+Other than maps, other than
+these APIs we talked about,
+
+00:07:01.216 --> 00:07:04.446 A:middle
+we have various other
+improvements to MapKit as well.
+
+00:07:04.446 --> 00:07:05.996 A:middle
+First of all, a time
+zone support.
+
+00:07:06.326 --> 00:07:09.336 A:middle
+We have added a time zones
+property on our MK map item.
+
+00:07:09.646 --> 00:07:12.926 A:middle
+You can use that property to
+get the associated time zone.
+
+00:07:13.376 --> 00:07:15.206 A:middle
+You can use it with CLGeocoder.
+
+00:07:15.606 --> 00:07:17.586 A:middle
+So you can find out a
+time zone associated
+
+00:07:17.586 --> 00:07:18.616 A:middle
+with a particular coordinate.
+
+00:07:18.936 --> 00:07:21.976 A:middle
+Or you can also use it
+with MKLocalSearch, so,
+
+00:07:21.976 --> 00:07:25.826 A:middle
+you can search an area for a
+point of interest or anything
+
+00:07:25.826 --> 00:07:26.746 A:middle
+that you would like to search.
+
+00:07:26.746 --> 00:07:29.096 A:middle
+And you can find out a time
+zone associated with that.
+
+00:07:29.676 --> 00:07:32.726 A:middle
+Besides that, we have also done
+various improvements to MapKit
+
+00:07:32.726 --> 00:07:34.416 A:middle
+for better Swift compatibility,
+
+00:07:34.636 --> 00:07:36.576 A:middle
+and we also added
+a WatchKit support
+
+00:07:37.106 --> 00:07:39.226 A:middle
+to launch maps applications
+on your watch
+
+00:07:39.496 --> 00:07:40.986 A:middle
+from your own application.
+
+00:07:41.406 --> 00:07:44.736 A:middle
+So that's it, so that's all the
+improvements that we have done
+
+00:07:44.736 --> 00:07:46.576 A:middle
+to existing features in MapKit.
+
+00:07:47.046 --> 00:07:48.246 A:middle
+Let's move on to the next topic
+
+00:07:48.246 --> 00:07:51.086 A:middle
+and personal favorite
+of mine, Transit.
+
+00:07:53.896 --> 00:07:57.246 A:middle
+We were pretty excited
+about yesterday's keynote,
+
+00:07:57.246 --> 00:07:58.946 A:middle
+with the moment we
+announced the new feature
+
+00:07:59.366 --> 00:08:00.776 A:middle
+for maps application Transit.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:59.366 --> 00:08:00.776 A:middle
+for maps application Transit.
+
+00:08:01.106 --> 00:08:04.336 A:middle
+And today we will mainly focus
+on what it means to MapKit.
+
+00:08:05.006 --> 00:08:07.236 A:middle
+We have worked really
+hard on this feature.
+
+00:08:07.556 --> 00:08:10.766 A:middle
+And while designing this feature
+we kept our user at the center
+
+00:08:10.766 --> 00:08:12.676 A:middle
+of the development process.
+
+00:08:13.286 --> 00:08:16.346 A:middle
+And in order to provide a
+similar kind of experience
+
+00:08:16.346 --> 00:08:18.286 A:middle
+in your application,
+we would like you
+
+00:08:18.286 --> 00:08:21.986 A:middle
+to leverage maps application to
+provide a similar experience.
+
+00:08:22.246 --> 00:08:25.636 A:middle
+And the way we are
+going to do that is
+
+00:08:25.636 --> 00:08:27.436 A:middle
+by providing you a
+distinct entry point
+
+00:08:27.846 --> 00:08:29.066 A:middle
+to a Maps Transit feature.
+
+00:08:29.356 --> 00:08:30.756 A:middle
+Let's look at this
+point one by one.
+
+00:08:31.146 --> 00:08:35.226 A:middle
+First one, ability to
+request a Transit ETA.
+
+00:08:35.226 --> 00:08:39.176 A:middle
+If you use MKDirections
+protocol, MKDirections class
+
+00:08:39.176 --> 00:08:41.775 A:middle
+and related APIs before, then
+you know, you might be aware
+
+00:08:41.775 --> 00:08:44.596 A:middle
+of these two TransportType
+that we already support,
+
+00:08:44.596 --> 00:08:45.726 A:middle
+automobile and walking.
+
+00:08:46.066 --> 00:08:49.166 A:middle
+You can request directions
+and ETAs
+
+00:08:49.166 --> 00:08:51.216 A:middle
+for these two transport types.
+
+00:08:51.216 --> 00:08:53.806 A:middle
+And this year we are
+adding a new TransportType,
+
+00:08:54.156 --> 00:08:55.936 A:middle
+MKDirectionsTransportType,
+Transit.
+
+00:08:56.436 --> 00:09:00.396 A:middle
+With this TransportType, you
+will be able to request ETAs.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:56.436 --> 00:09:00.396 A:middle
+With this TransportType, you
+will be able to request ETAs.
+
+00:09:00.806 --> 00:09:02.956 A:middle
+And I would like to point
+it out, you will only,
+
+00:09:03.036 --> 00:09:05.696 A:middle
+as of now you will only
+request ETAs for Transit.
+
+00:09:06.046 --> 00:09:08.066 A:middle
+You won't get a Transit
+direction.
+
+00:09:08.456 --> 00:09:10.346 A:middle
+So, let's see how you can --
+
+00:09:10.426 --> 00:09:13.606 A:middle
+before we move on to a sample
+code, let's see how you can,
+
+00:09:14.206 --> 00:09:15.586 A:middle
+what you get besides ETA.
+
+00:09:15.586 --> 00:09:17.986 A:middle
+Well, you get expected
+arrival timing
+
+00:09:18.216 --> 00:09:19.676 A:middle
+and expected departure timing.
+
+00:09:19.986 --> 00:09:22.336 A:middle
+Given the frequency, given
+the nature of the frequency
+
+00:09:22.366 --> 00:09:25.586 A:middle
+of our transit varies based on
+the time of the day and a place,
+
+00:09:25.656 --> 00:09:28.296 A:middle
+it is really important that
+we provide this information.
+
+00:09:28.676 --> 00:09:31.966 A:middle
+We believe with this
+information, you will be able
+
+00:09:32.086 --> 00:09:33.596 A:middle
+to give out a great
+user experience
+
+00:09:33.666 --> 00:09:35.346 A:middle
+to your application user base.
+
+00:09:35.876 --> 00:09:37.206 A:middle
+Let's take a look
+at a sample code,
+
+00:09:37.296 --> 00:09:39.316 A:middle
+how can we request
+these Transit ETAs.
+
+00:09:39.316 --> 00:09:43.146 A:middle
+Here, I have a helper
+function called getTransitETA.
+
+00:09:43.606 --> 00:09:46.436 A:middle
+So, I'll start off with
+creating an MKDirectionsRequest.
+
+00:09:46.826 --> 00:09:49.056 A:middle
+After that I'll set a source
+and a destination on it,
+
+00:09:49.056 --> 00:09:53.036 A:middle
+and once I have that, I'll set
+our transport type to be Transit
+
+00:09:53.306 --> 00:09:56.606 A:middle
+because we are interested
+in getting our Transit ETA.
+
+00:09:56.686 --> 00:10:00.026 A:middle
+Once, after that I will create
+MKDirections object using the
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:56.686 --> 00:10:00.026 A:middle
+Once, after that I will create
+MKDirections object using the
+
+00:10:00.026 --> 00:10:03.256 A:middle
+request that we just created,
+and I'll call it calculate ETA
+
+00:10:03.256 --> 00:10:05.316 A:middle
+With Completion Handler
+on that direction object,
+
+00:10:05.716 --> 00:10:07.736 A:middle
+and in CompletionHandler
+I will handle the response
+
+00:10:07.736 --> 00:10:08.966 A:middle
+that is coming back
+from the server.
+
+00:10:09.926 --> 00:10:11.616 A:middle
+So, that's a Transit ETA.
+
+00:10:11.616 --> 00:10:13.356 A:middle
+Now, once we have
+the Transit ETA,
+
+00:10:13.656 --> 00:10:16.546 A:middle
+in order to provide a complete
+experience we are giving you a
+
+00:10:16.546 --> 00:10:19.456 A:middle
+way to launch maps applications
+into a Transit mode.
+
+00:10:19.926 --> 00:10:23.276 A:middle
+As of now you can launch maps
+using various different launch
+
+00:10:23.276 --> 00:10:25.946 A:middle
+options on a map,
+along with a map item,
+
+00:10:26.526 --> 00:10:28.296 A:middle
+and the
+MKLaunchOptionsDirectionsModeKey
+
+00:10:28.656 --> 00:10:32.986 A:middle
+helps you to point out which
+maps application mode you would
+
+00:10:32.986 --> 00:10:33.706 A:middle
+like to launch in.
+
+00:10:34.106 --> 00:10:36.516 A:middle
+So as of now, we are
+supporting a Driving mode
+
+00:10:36.516 --> 00:10:38.836 A:middle
+and a Walking mode, and now
+
+00:10:38.836 --> 00:10:41.726 A:middle
+with iOS 9 we are also
+introducing a Transit mode.
+
+00:10:42.566 --> 00:10:47.756 A:middle
+By using this mode, you will be
+able to launch maps application
+
+00:10:47.756 --> 00:10:48.696 A:middle
+from your application.
+
+00:10:49.116 --> 00:10:50.916 A:middle
+Let's quickly take a look
+at a sample code here.
+
+00:10:51.416 --> 00:10:53.746 A:middle
+So, here, I have a
+helper function called
+
+00:10:53.946 --> 00:10:56.676 A:middle
+openInMapsTransit, which
+takes a coordinate.
+
+00:10:57.116 --> 00:11:01.566 A:middle
+And I will just basically start
+off with creating an MK map item
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:57.116 --> 00:11:01.566 A:middle
+And I will just basically start
+off with creating an MK map item
+
+00:11:01.566 --> 00:11:03.126 A:middle
+with that parsing coordinate.
+
+00:11:03.566 --> 00:11:05.976 A:middle
+After that I'll create a
+dictionary launch options
+
+00:11:06.586 --> 00:11:08.316 A:middle
+with the mode set to be Transit.
+
+00:11:08.316 --> 00:11:10.636 A:middle
+And once I have that, all I have
+
+00:11:10.636 --> 00:11:13.636 A:middle
+to do is call
+openInMapsWithLaunchOptions
+
+00:11:13.766 --> 00:11:14.686 A:middle
+on that map item.
+
+00:11:14.986 --> 00:11:18.236 A:middle
+It will basically launch our
+maps application in Transit mode
+
+00:11:18.236 --> 00:11:21.416 A:middle
+with the mapped item
+to be a destination.
+
+00:11:21.976 --> 00:11:24.666 A:middle
+So that is enough
+of our talking.
+
+00:11:24.666 --> 00:11:36.666 A:middle
+Let's see all these
+APIs in action.
+
+00:11:36.856 --> 00:11:37.816 A:middle
+All right.
+
+00:11:37.816 --> 00:11:41.416 A:middle
+So for this demo purpose I have
+created a city tour application
+
+00:11:41.416 --> 00:11:42.376 A:middle
+for San Francisco.
+
+00:11:42.936 --> 00:11:45.636 A:middle
+It is basically just
+a simple map view
+
+00:11:45.636 --> 00:11:47.316 A:middle
+with various different
+annotations in it.
+
+00:11:47.606 --> 00:11:48.776 A:middle
+I'm just going to quickly run it
+
+00:11:48.776 --> 00:11:50.316 A:middle
+so you can see what
+I have so far.
+
+00:11:50.316 --> 00:11:56.106 A:middle
+So, as you can see, we
+have a map of San Francisco
+
+00:11:56.106 --> 00:11:59.806 A:middle
+and I plotted various different
+annotations with the landmarks,
+
+00:11:59.966 --> 00:12:02.916 A:middle
+like we have Sutro
+Tower over here,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:59.966 --> 00:12:02.916 A:middle
+like we have Sutro
+Tower over here,
+
+00:12:02.916 --> 00:12:05.106 A:middle
+we have Golden Gate
+bridge, and all that,
+
+00:12:05.106 --> 00:12:06.376 A:middle
+and I have also taken
+the liberty
+
+00:12:06.376 --> 00:12:07.666 A:middle
+to set the pin colors on these.
+
+00:12:07.746 --> 00:12:12.936 A:middle
+So if I scroll down to the
+viewForAnnotation callback,
+
+00:12:12.936 --> 00:12:15.526 A:middle
+you can see I have set in
+a pin tint color property
+
+00:12:15.876 --> 00:12:17.576 A:middle
+to customize these pin colors.
+
+00:12:18.096 --> 00:12:18.916 A:middle
+This is okay.
+
+00:12:19.326 --> 00:12:21.416 A:middle
+As the demo progresses
+we will try
+
+00:12:21.416 --> 00:12:22.896 A:middle
+to customize this more and more.
+
+00:12:23.436 --> 00:12:25.736 A:middle
+To begin with, what I'm
+going to do is I'm going
+
+00:12:25.736 --> 00:12:29.156 A:middle
+to add a Transit
+ETA into a subtitle.
+
+00:12:29.606 --> 00:12:31.846 A:middle
+So in order to do so I
+have created a simple
+
+00:12:31.846 --> 00:12:32.656 A:middle
+helper function.
+
+00:12:33.766 --> 00:12:36.146 A:middle
+I am going to drag
+and drop that in here.
+
+00:12:36.656 --> 00:12:38.746 A:middle
+So I have this helper function
+
+00:12:38.746 --> 00:12:40.426 A:middle
+that basically takes
+our annotation,
+
+00:12:40.736 --> 00:12:43.586 A:middle
+which is a landmark
+class for local object.
+
+00:12:44.096 --> 00:12:47.106 A:middle
+And then I will create a
+MKDirectionsRequest in there.
+
+00:12:47.816 --> 00:12:51.086 A:middle
+So you can see I have created
+an MKDirectionsRequest.
+
+00:12:51.566 --> 00:12:53.076 A:middle
+After that I'm just
+setting a source
+
+00:12:53.076 --> 00:12:55.736 A:middle
+and a destination
+on that request.
+
+00:12:56.736 --> 00:12:59.326 A:middle
+And finally I'm setting a
+transport type to be Transit
+
+00:12:59.386 --> 00:13:01.106 A:middle
+because we are interested
+in a Transit ETA.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:59.386 --> 00:13:01.106 A:middle
+because we are interested
+in a Transit ETA.
+
+00:13:01.976 --> 00:13:03.386 A:middle
+Once I have that,
+I'm going to go
+
+00:13:03.386 --> 00:13:05.706 A:middle
+and create an MKDirections
+object.
+
+00:13:08.096 --> 00:13:11.966 A:middle
+So in here I have created an
+MKDirections object using the
+
+00:13:12.586 --> 00:13:15.826 A:middle
+request and in CompletionHandler
+I'm just setting an
+
+00:13:15.826 --> 00:13:18.916 A:middle
+annotation.subtitle to be our
+estimated time of arrival.
+
+00:13:19.356 --> 00:13:23.576 A:middle
+And I am quickly going to call
+this function before I drop my
+
+00:13:23.576 --> 00:13:25.256 A:middle
+annotation on a map view.
+
+00:13:25.876 --> 00:13:30.306 A:middle
+So let's call that
+function here LandMarkPin.
+
+00:13:31.576 --> 00:13:34.426 A:middle
+So, all right, let's run it.
+
+00:13:38.016 --> 00:13:40.686 A:middle
+There we go, so city
+hall is about 22 minutes
+
+00:13:41.416 --> 00:13:44.236 A:middle
+from Moscone West by
+using a public transport.
+
+00:13:44.266 --> 00:13:45.606 A:middle
+Let's check out some other pins.
+
+00:13:46.006 --> 00:13:48.026 A:middle
+Ferry Building, it's 17 minutes.
+
+00:13:48.456 --> 00:13:49.136 A:middle
+So this is nice.
+
+00:13:49.136 --> 00:13:51.776 A:middle
+I mean, this gives initial
+information to your user
+
+00:13:51.776 --> 00:13:53.796 A:middle
+like how long will it take to go
+
+00:13:53.916 --> 00:13:57.056 A:middle
+to this destination using
+Transit, but in order
+
+00:13:57.056 --> 00:13:59.596 A:middle
+to provide a complete Transit
+experience we have to find
+
+00:13:59.596 --> 00:14:01.936 A:middle
+out a way to bring them
+to a maps application.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:59.596 --> 00:14:01.936 A:middle
+out a way to bring them
+to a maps application.
+
+00:14:02.346 --> 00:14:04.296 A:middle
+And for this demo purpose,
+what I am going to do is,
+
+00:14:04.296 --> 00:14:08.266 A:middle
+I'm going to put a right callout
+accessory view on my callout,
+
+00:14:08.266 --> 00:14:11.906 A:middle
+and when I tap it, I will take
+the user to a maps application.
+
+00:14:13.086 --> 00:14:18.056 A:middle
+So we quickly stop it, and let's
+go back to our callback method.
+
+00:14:18.586 --> 00:14:23.116 A:middle
+And in here I am going to set
+a rightCalloutAccessoryView
+
+00:14:23.146 --> 00:14:24.156 A:middle
+on my AnnotationView.
+
+00:14:25.496 --> 00:14:31.396 A:middle
+I added my
+rightCalloutAccessoryView.
+
+00:14:31.686 --> 00:14:33.006 A:middle
+Let's run it.
+
+00:14:39.916 --> 00:14:40.426 A:middle
+All right.
+
+00:14:41.316 --> 00:14:43.266 A:middle
+So you can see a right
+callout accessory view.
+
+00:14:43.546 --> 00:14:45.196 A:middle
+We have added a bus icon here.
+
+00:14:45.616 --> 00:14:48.186 A:middle
+Nothing is happening because we
+haven't implemented the callback
+
+00:14:48.186 --> 00:14:51.426 A:middle
+method that gets called every
+single time a callout accessory
+
+00:14:51.426 --> 00:14:52.306 A:middle
+control is tapped.
+
+00:14:52.596 --> 00:14:55.266 A:middle
+So let's quickly go and
+add that method down here.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:15:00.096 --> 00:15:01.476 A:middle
+So this is the callback method
+
+00:15:01.476 --> 00:15:04.176 A:middle
+that gets called every time
+a callout control accessory
+
+00:15:04.176 --> 00:15:05.036 A:middle
+is pressed.
+
+00:15:06.176 --> 00:15:08.656 A:middle
+Once I have this, I am
+going to add my code
+
+00:15:08.656 --> 00:15:12.816 A:middle
+to launch a given map item
+into a maps application.
+
+00:15:13.446 --> 00:15:17.476 A:middle
+So here I start off with
+creating a dictionary object
+
+00:15:17.476 --> 00:15:20.746 A:middle
+with the mode Key, and the
+mode key set to be Transit.
+
+00:15:21.136 --> 00:15:23.986 A:middle
+After that by getting
+a coordinate
+
+00:15:24.046 --> 00:15:27.246 A:middle
+from the past annotation I'm
+going to create an MKMapItem.
+
+00:15:27.246 --> 00:15:30.856 A:middle
+And once I have that, I am going
+to use open in launch options
+
+00:15:30.856 --> 00:15:34.646 A:middle
+on mapItem to launch this
+map item into a Transit mode.
+
+00:15:35.226 --> 00:15:37.846 A:middle
+Let's quickly go ahead and
+run our application again.
+
+00:15:38.396 --> 00:15:41.556 A:middle
+All right.
+
+00:15:42.566 --> 00:15:47.396 A:middle
+Let's see, Ferry Building.
+
+00:15:49.116 --> 00:15:50.696 A:middle
+Tap on it and there we go.
+
+00:15:50.696 --> 00:15:53.946 A:middle
+We have a maps application
+into a Transit mode
+
+00:15:53.946 --> 00:15:57.746 A:middle
+and you can see it takes 18
+minutes by bus number 40.
+
+00:15:57.866 --> 00:16:00.826 A:middle
+And let's go back to
+our sample app again
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:15:57.866 --> 00:16:00.826 A:middle
+And let's go back to
+our sample app again
+
+00:16:00.826 --> 00:16:01.766 A:middle
+and try something else.
+
+00:16:02.656 --> 00:16:04.386 A:middle
+Let's see if we got
+a response for Sutro.
+
+00:16:04.436 --> 00:16:05.056 A:middle
+Yeah, there we go.
+
+00:16:05.266 --> 00:16:07.586 A:middle
+That's our response.
+
+00:16:08.206 --> 00:16:09.966 A:middle
+Again 45 minutes by Transit.
+
+00:16:10.626 --> 00:16:12.046 A:middle
+That's fairly long.
+
+00:16:12.046 --> 00:16:12.396 A:middle
+Oh, I see.
+
+00:16:12.396 --> 00:16:14.896 A:middle
+It is something wrong.
+
+00:16:14.896 --> 00:16:18.236 A:middle
+Oh, bus stops moved, so probably
+that's the reason, long time.
+
+00:16:18.716 --> 00:16:22.226 A:middle
+Anyway, that's a Transit
+experience in a MapKit.
+
+00:16:22.646 --> 00:16:26.836 A:middle
+Now I would like to talk
+about how we previously talked
+
+00:16:26.836 --> 00:16:28.266 A:middle
+about the callout customization.
+
+00:16:28.626 --> 00:16:32.136 A:middle
+Now let's go and see how
+can we use those callouts
+
+00:16:32.476 --> 00:16:34.966 A:middle
+in this, our sample app.
+
+00:16:36.376 --> 00:16:36.806 A:middle
+All right.
+
+00:16:36.806 --> 00:16:39.986 A:middle
+So, again, we are going to go
+back to our callback method
+
+00:16:39.986 --> 00:16:43.486 A:middle
+that gets called every single
+time the annotation is tapped.
+
+00:16:44.136 --> 00:16:45.206 A:middle
+And down here I'm just going
+
+00:16:45.206 --> 00:16:49.376 A:middle
+to set a detailed callout
+accessory property on this view.
+
+00:16:49.696 --> 00:16:51.646 A:middle
+For the data that I'm getting
+
+00:16:51.646 --> 00:16:54.946 A:middle
+for these landmarks I
+have some of the images.
+
+00:16:56.056 --> 00:16:59.336 A:middle
+So let's set a UIImageView
+in a detailCallout
+
+00:16:59.336 --> 00:17:01.296 A:middle
+and see how they look
+in our annotation.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:59.336 --> 00:17:01.296 A:middle
+and see how they look
+in our annotation.
+
+00:17:02.326 --> 00:17:05.246 A:middle
+So, here I'm just
+reading my image data,
+
+00:17:05.366 --> 00:17:08.415 A:middle
+I'm reading my image name
+from a plist that I'm parsing,
+
+00:17:08.856 --> 00:17:10.425 A:middle
+and then I'm creating a UIImage,
+
+00:17:10.816 --> 00:17:13.266 A:middle
+and after that I'm creating
+a UIImageView and setting it
+
+00:17:13.266 --> 00:17:14.746 A:middle
+on a detailCalloutAccessoryView.
+
+00:17:15.656 --> 00:17:16.816 A:middle
+So let's run this thing.
+
+00:17:16.816 --> 00:17:17.646 A:middle
+Okay. All right.
+
+00:17:20.976 --> 00:17:25.306 A:middle
+So I think I have an image
+for Golden Gate Bridge.
+
+00:17:25.306 --> 00:17:26.866 A:middle
+So let's go and take
+a look at it.
+
+00:17:27.316 --> 00:17:28.246 A:middle
+So there we go.
+
+00:17:28.246 --> 00:17:30.866 A:middle
+That's a nice image of
+the Golden Gate Bridge.
+
+00:17:31.066 --> 00:17:32.076 A:middle
+Let's see what else I have.
+
+00:17:32.266 --> 00:17:34.716 A:middle
+I have the Ferry
+Building as well.
+
+00:17:35.336 --> 00:17:38.346 A:middle
+Okay, that's current location.
+
+00:17:39.416 --> 00:17:40.086 A:middle
+All right.
+
+00:17:40.786 --> 00:17:43.066 A:middle
+Okay. So, Transamerica
+Pyramid doesn't have a,
+
+00:17:43.066 --> 00:17:46.106 A:middle
+Transamerica Pyramid
+doesn't have an image.
+
+00:17:46.266 --> 00:17:49.656 A:middle
+So you can see when we set a
+detail callout accessory view
+
+00:17:49.656 --> 00:17:51.966 A:middle
+on a callout, a detail
+callout accessory,
+
+00:17:52.286 --> 00:17:54.686 A:middle
+we will always get
+precedence or a subtitle.
+
+00:17:55.126 --> 00:17:57.856 A:middle
+For Golden Gate Bridge
+we did add a detail,
+
+00:17:57.886 --> 00:17:58.916 A:middle
+we did have a subtitle,
+
+00:17:59.296 --> 00:18:02.966 A:middle
+but as soon as we set a detail
+callout accessory view on it,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:59.296 --> 00:18:02.966 A:middle
+but as soon as we set a detail
+callout accessory view on it,
+
+00:18:02.966 --> 00:18:04.526 A:middle
+it got a precedence
+or a subtitle.
+
+00:18:05.146 --> 00:18:08.166 A:middle
+So, for some of these other
+landmarks, I don't have images.
+
+00:18:08.206 --> 00:18:09.946 A:middle
+So, let's add text in there.
+
+00:18:09.946 --> 00:18:14.846 A:middle
+So, I have also created
+a text view that will --
+
+00:18:15.606 --> 00:18:17.606 A:middle
+so here I have a
+custom text view
+
+00:18:17.606 --> 00:18:21.156 A:middle
+that basically I just have set
+some height and weight on it.
+
+00:18:21.676 --> 00:18:24.916 A:middle
+And that will allow
+me to show the content
+
+00:18:25.526 --> 00:18:28.586 A:middle
+in our detail callout
+accessory view.
+
+00:18:28.896 --> 00:18:32.466 A:middle
+Similar to the images, I'm
+reading data from my plist
+
+00:18:32.466 --> 00:18:34.696 A:middle
+that I have been using
+to plot these landmarks.
+
+00:18:35.236 --> 00:18:37.706 A:middle
+I just set it that
+detailTextView
+
+00:18:37.706 --> 00:18:39.456 A:middle
+to be a
+detailCalloutAccessoryView.
+
+00:18:40.686 --> 00:18:40.956 A:middle
+All right.
+
+00:18:41.006 --> 00:18:48.386 A:middle
+So I'm quickly going
+to run it again.
+
+00:18:48.416 --> 00:18:49.866 A:middle
+Okay. All right.
+
+00:18:50.106 --> 00:18:50.736 A:middle
+So let's see.
+
+00:18:51.566 --> 00:18:54.466 A:middle
+As you can see now we have
+a nice text view down here
+
+00:18:54.466 --> 00:18:56.096 A:middle
+in Sutro Tower callout.
+
+00:18:56.716 --> 00:18:57.666 A:middle
+Let's check on something else.
+
+00:18:58.426 --> 00:19:00.416 A:middle
+Same thing, for City Hall
+we also have a nice text.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:58.426 --> 00:19:00.416 A:middle
+Same thing, for City Hall
+we also have a nice text.
+
+00:19:00.776 --> 00:19:05.746 A:middle
+So here I have like a one
+callout with a subtitle,
+
+00:19:05.866 --> 00:19:11.116 A:middle
+one callout with a UIImageView
+and one callout with a TextView.
+
+00:19:11.366 --> 00:19:13.616 A:middle
+That's all the beauty
+of this API.
+
+00:19:13.616 --> 00:19:18.396 A:middle
+We are really excited to offer
+it to you and I am damn sure
+
+00:19:18.396 --> 00:19:20.226 A:middle
+that you guys will come
+up with something amazing.
+
+00:19:21.186 --> 00:19:21.336 A:middle
+(Applause.)
+
+00:19:26.496 --> 00:19:29.546 A:middle
+So what we learn from this demo,
+
+00:19:30.026 --> 00:19:31.976 A:middle
+we learn how we can
+customize our pin colors,
+
+00:19:32.576 --> 00:19:35.436 A:middle
+we learn how we can
+customize our callouts.
+
+00:19:35.436 --> 00:19:37.486 A:middle
+We also learn how to
+request Transit ETAs
+
+00:19:37.926 --> 00:19:41.356 A:middle
+and we also learn how to bring
+users to a maps application
+
+00:19:41.496 --> 00:19:43.146 A:middle
+to provide a rich
+transit experience.
+
+00:19:43.876 --> 00:19:44.956 A:middle
+That's all from my end.
+
+00:19:45.276 --> 00:19:55.216 A:middle
+To talk about Flyover, I would
+like to call upon Elisabeth.
+
+00:19:56.106 --> 00:19:56.386 A:middle
+(Applause.)
+
+00:19:57.126 --> 00:19:57.406 A:middle
+&gt;&gt; ELISABETH LINDKVIST: Okay.
+
+00:19:57.406 --> 00:19:58.966 A:middle
+Right, let's talk about Flyover.
+
+00:19:59.876 --> 00:20:01.376 A:middle
+My name is Elisabeth Lindkvist,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:59.876 --> 00:20:01.376 A:middle
+My name is Elisabeth Lindkvist,
+
+00:20:01.376 --> 00:20:03.386 A:middle
+and I'm also an engineer
+on the maps team.
+
+00:20:03.646 --> 00:20:04.686 A:middle
+And these are the things
+
+00:20:04.686 --> 00:20:06.676 A:middle
+that I will be talking
+to you about today.
+
+00:20:07.266 --> 00:20:09.756 A:middle
+So, first of all,
+what is Flyover?
+
+00:20:11.286 --> 00:20:13.026 A:middle
+How will it work in
+your application?
+
+00:20:14.326 --> 00:20:17.416 A:middle
+How do you set the right
+region and handle the camera
+
+00:20:17.416 --> 00:20:18.686 A:middle
+when you are using Flyover?
+
+00:20:18.686 --> 00:20:22.986 A:middle
+And I will also discuss how
+Flyover will work together
+
+00:20:22.986 --> 00:20:24.916 A:middle
+with some of our
+existing MapKit API.
+
+00:20:26.256 --> 00:20:29.316 A:middle
+But to start with, what do
+we actually mean by Flyover?
+
+00:20:29.796 --> 00:20:31.936 A:middle
+For example, this is Flyover.
+
+00:20:32.956 --> 00:20:40.466 A:middle
+It's photo-realistic 3D models
+of various cities and landmarks.
+
+00:20:41.246 --> 00:20:43.926 A:middle
+They are available in
+many different places all
+
+00:20:43.926 --> 00:20:44.546 A:middle
+around the world.
+
+00:20:45.256 --> 00:20:47.956 A:middle
+And they have been available
+
+00:20:47.956 --> 00:20:51.146 A:middle
+in the maps application
+since iOS 6.
+
+00:20:52.106 --> 00:20:54.086 A:middle
+And we are now giving
+you the opportunity
+
+00:20:54.086 --> 00:20:57.466 A:middle
+to show these interactive
+3D views to your users.
+
+00:20:57.466 --> 00:21:03.106 A:middle
+As you might have noticed
+in the maps application
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:57.466 --> 00:21:03.106 A:middle
+As you might have noticed
+in the maps application
+
+00:21:03.176 --> 00:21:06.746 A:middle
+where satellite imagery is not
+available you will instead see
+
+00:21:06.746 --> 00:21:10.316 A:middle
+flat satellite imagery
+being displayed on top
+
+00:21:10.356 --> 00:21:13.596 A:middle
+of a 3D height map which
+represents the terrain.
+
+00:21:14.176 --> 00:21:18.186 A:middle
+And this will also be
+the case in your apps.
+
+00:21:18.806 --> 00:21:21.886 A:middle
+Another important aspect
+of Flyover is this:
+
+00:21:22.026 --> 00:21:25.386 A:middle
+it is being displayed on a globe
+rather than being projected
+
+00:21:25.386 --> 00:21:27.716 A:middle
+into 2D like our
+other map types are.
+
+00:21:27.716 --> 00:21:30.096 A:middle
+This one has some implications
+
+00:21:30.096 --> 00:21:32.186 A:middle
+for how you handle
+your region setting.
+
+00:21:32.956 --> 00:21:35.966 A:middle
+And this is something that I
+will be returning to shortly.
+
+00:21:37.546 --> 00:21:39.856 A:middle
+So, what do you need to do
+
+00:21:39.856 --> 00:21:42.016 A:middle
+to get a Flyover view
+in your application?
+
+00:21:42.756 --> 00:21:45.726 A:middle
+If you used MapKit before,
+I'm sure you are familiar
+
+00:21:45.726 --> 00:21:48.756 A:middle
+with MK map type, which
+is the property you set
+
+00:21:48.756 --> 00:21:51.566 A:middle
+on an MK map view, in
+order to choose which type
+
+00:21:51.566 --> 00:21:52.916 A:middle
+of data you will be displaying.
+
+00:21:53.766 --> 00:21:56.646 A:middle
+We have standard,
+which is a regular map.
+
+00:21:57.646 --> 00:22:01.346 A:middle
+We have satellite, which is
+a top-down satellite view.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:57.646 --> 00:22:01.346 A:middle
+We have satellite, which is
+a top-down satellite view.
+
+00:22:01.346 --> 00:22:06.276 A:middle
+And we have hybrid, which adds
+things like roads and labels
+
+00:22:06.276 --> 00:22:09.486 A:middle
+and points of interest
+to the satellite view.
+
+00:22:10.856 --> 00:22:13.476 A:middle
+And we are now introducing
+two new map types,
+
+00:22:14.036 --> 00:22:16.726 A:middle
+Satellite Flyover
+and Hybrid Flyover.
+
+00:22:17.666 --> 00:22:20.586 A:middle
+So in order to display
+something like this in your app,
+
+00:22:21.016 --> 00:22:23.616 A:middle
+what you would do is
+just set the map type
+
+00:22:23.726 --> 00:22:27.016 A:middle
+of your map view to
+Satellite Flyover.
+
+00:22:28.266 --> 00:22:32.496 A:middle
+If you want to add things such
+as labels, points of interest,
+
+00:22:32.496 --> 00:22:37.256 A:middle
+roads, and borders, you would
+instead use the Hybrid Flyover
+
+00:22:38.506 --> 00:22:39.326 A:middle
+map type.
+
+00:22:39.936 --> 00:22:42.686 A:middle
+Now, as I mentioned, there are
+some things you really need
+
+00:22:42.686 --> 00:22:44.536 A:middle
+to consider when using Flyover.
+
+00:22:44.536 --> 00:22:47.286 A:middle
+One of the most important ones
+is how you set the visible
+
+00:22:47.286 --> 00:22:48.136 A:middle
+region of your map.
+
+00:22:49.236 --> 00:22:52.236 A:middle
+You might be familiar with
+the several methods in MapKit
+
+00:22:52.236 --> 00:22:57.466 A:middle
+that use rectangles such as
+MKCoordinateRegion and MKMapRect
+
+00:22:57.946 --> 00:23:00.406 A:middle
+in order to set and get the
+visible region of your map.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:57.946 --> 00:23:00.406 A:middle
+in order to set and get the
+visible region of your map.
+
+00:23:01.136 --> 00:23:03.376 A:middle
+However, the visible area
+
+00:23:03.836 --> 00:23:06.616 A:middle
+of your map view is
+not always a rectangle.
+
+00:23:07.526 --> 00:23:10.486 A:middle
+In iOS 7 we introduced
+the possibility
+
+00:23:10.486 --> 00:23:12.156 A:middle
+to view a pitched map view
+
+00:23:12.156 --> 00:23:14.226 A:middle
+where you are viewing
+the map at an angle.
+
+00:23:14.716 --> 00:23:17.606 A:middle
+And when you do that,
+
+00:23:17.606 --> 00:23:20.186 A:middle
+the visible area will not
+actually be a perfect rectangle,
+
+00:23:21.026 --> 00:23:23.526 A:middle
+and this will also be
+the case in Flyover
+
+00:23:23.526 --> 00:23:26.686 A:middle
+as you can view pitched
+map views there as well.
+
+00:23:27.996 --> 00:23:30.936 A:middle
+Now, if we take a look
+at this region and zoom
+
+00:23:30.936 --> 00:23:34.126 A:middle
+out a bit we can see the actual
+shape of the visible area.
+
+00:23:34.926 --> 00:23:37.116 A:middle
+And what we do in this case is
+
+00:23:37.116 --> 00:23:39.696 A:middle
+that we define the
+visible region of this map
+
+00:23:39.866 --> 00:23:43.226 A:middle
+as the rectangle which is
+enclosing what you are actually
+
+00:23:43.226 --> 00:23:44.026 A:middle
+seeing on screen.
+
+00:23:44.266 --> 00:23:46.926 A:middle
+So it will be the blue
+rectangle in this case.
+
+00:23:47.216 --> 00:23:50.996 A:middle
+And this will work exactly
+in the same way in Flyover.
+
+00:23:51.296 --> 00:23:54.186 A:middle
+The visible region will be
+defined as the rectangle
+
+00:23:54.186 --> 00:23:56.366 A:middle
+that is enclosing
+whatever you see on screen.
+
+00:23:58.256 --> 00:24:02.626 A:middle
+Now, in Flyover, a view does not
+necessarily have to be pitched
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:58.256 --> 00:24:02.626 A:middle
+Now, in Flyover, a view does not
+necessarily have to be pitched
+
+00:24:02.626 --> 00:24:04.286 A:middle
+in order to not be rectangular.
+
+00:24:04.286 --> 00:24:07.926 A:middle
+If you have a region such as
+this, which is fairly large,
+
+00:24:08.146 --> 00:24:11.136 A:middle
+and you try to set the visible
+region to the blue rectangle
+
+00:24:11.136 --> 00:24:13.386 A:middle
+in this case you end up
+with something like this.
+
+00:24:14.156 --> 00:24:16.266 A:middle
+And the point here is
+
+00:24:16.266 --> 00:24:19.616 A:middle
+that a rectangular
+representation will always be an
+
+00:24:19.616 --> 00:24:22.506 A:middle
+approximation since Flyover
+is being shown on a globe.
+
+00:24:23.666 --> 00:24:27.566 A:middle
+And, also, if you have a very
+large region there will be some
+
+00:24:27.566 --> 00:24:29.546 A:middle
+areas that are not
+actually displayed.
+
+00:24:29.546 --> 00:24:30.676 A:middle
+So, in this case, parts
+
+00:24:30.676 --> 00:24:33.026 A:middle
+of the visible region are
+actually behind the globe.
+
+00:24:34.206 --> 00:24:38.996 A:middle
+So, the recommended way, even
+though there are some cases
+
+00:24:38.996 --> 00:24:41.666 A:middle
+where rectangular region setting
+works just fine in Flyover
+
+00:24:41.666 --> 00:24:43.896 A:middle
+and with pitched map
+views, for example,
+
+00:24:43.956 --> 00:24:46.566 A:middle
+if you have a top-down view
+where if you're very zoomed in,
+
+00:24:47.066 --> 00:24:49.006 A:middle
+the recommended way to make sure
+
+00:24:49.006 --> 00:24:51.206 A:middle
+that you are really
+displaying exactly the part
+
+00:24:51.206 --> 00:24:54.196 A:middle
+of the world you want to
+is to use MKMapCamera.
+
+00:24:55.836 --> 00:25:00.146 A:middle
+MKMapCamera was also
+introduced in iOS 7 in 2013.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:24:55.836 --> 00:25:00.146 A:middle
+MKMapCamera was also
+introduced in iOS 7 in 2013.
+
+00:25:00.416 --> 00:25:03.126 A:middle
+And for more detailed
+information about MKMapCamera,
+
+00:25:03.126 --> 00:25:06.076 A:middle
+and also about region setting
+in general, I really recommend
+
+00:25:06.076 --> 00:25:08.446 A:middle
+that you check out Putting
+MapKit in Perspective,
+
+00:25:08.446 --> 00:25:10.436 A:middle
+which is a talk from 2013.
+
+00:25:11.966 --> 00:25:15.626 A:middle
+But I will briefly recap
+a bit about MKMapCamera.
+
+00:25:16.846 --> 00:25:18.686 A:middle
+It has four basic properties.
+
+00:25:20.366 --> 00:25:23.326 A:middle
+The center coordinate, which
+is the position in the world
+
+00:25:23.326 --> 00:25:25.536 A:middle
+that you want to be shown in
+the middle of your screen.
+
+00:25:26.626 --> 00:25:29.376 A:middle
+The heading which is the
+direction the camera will be
+
+00:25:29.376 --> 00:25:29.936 A:middle
+looking in.
+
+00:25:31.066 --> 00:25:33.456 A:middle
+The pitch, how tilted
+the view is,
+
+00:25:33.676 --> 00:25:37.456 A:middle
+at what angle you are looking
+at the map, and the altitude,
+
+00:25:37.456 --> 00:25:39.776 A:middle
+which is the height in
+meters above the map
+
+00:25:39.776 --> 00:25:42.376 A:middle
+where you want your
+camera to be positioned.
+
+00:25:43.036 --> 00:25:46.706 A:middle
+There is also a convenience
+initializer for MKMapCamera,
+
+00:25:47.236 --> 00:25:49.486 A:middle
+which takes the center
+coordinates
+
+00:25:50.176 --> 00:25:52.546 A:middle
+and the eye coordinates,
+where you want the camera
+
+00:25:52.546 --> 00:25:55.516 A:middle
+to be positioned,
+and the eye altitude,
+
+00:25:55.516 --> 00:25:57.806 A:middle
+how high up you want
+the camera to be,
+
+00:25:58.086 --> 00:26:00.046 A:middle
+and gives you back the
+camera which is looking
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:58.086 --> 00:26:00.046 A:middle
+and gives you back the
+camera which is looking
+
+00:26:00.046 --> 00:26:02.246 A:middle
+at that center coordinate
+from the eye coordinate.
+
+00:26:03.456 --> 00:26:07.896 A:middle
+So, however, in Flyover there
+is terrain and buildings
+
+00:26:07.896 --> 00:26:09.946 A:middle
+and all other sorts
+of interesting things.
+
+00:26:10.376 --> 00:26:15.176 A:middle
+And that means that the
+altitude is actually not
+
+00:26:15.226 --> 00:26:18.056 A:middle
+as straightforward
+as you might think.
+
+00:26:18.056 --> 00:26:20.686 A:middle
+For example, is it the
+height above the buildings?
+
+00:26:20.686 --> 00:26:21.786 A:middle
+The height above the terrain?
+
+00:26:21.786 --> 00:26:23.116 A:middle
+Or some sort of sea level?
+
+00:26:23.116 --> 00:26:26.866 A:middle
+So instead the distance
+between the center coordinates
+
+00:26:26.926 --> 00:26:29.366 A:middle
+and the camera is actually
+a much better measure
+
+00:26:29.366 --> 00:26:30.156 A:middle
+for this case.
+
+00:26:30.496 --> 00:26:33.996 A:middle
+And this is where we're adding a
+new initializer to MKMapCamera.
+
+00:26:34.516 --> 00:26:37.116 A:middle
+And let me go through
+quickly what this does.
+
+00:26:38.966 --> 00:26:40.726 A:middle
+You will start with
+the center coordinates,
+
+00:26:40.726 --> 00:26:42.606 A:middle
+the position you want to be
+in the middle of the screen.
+
+00:26:42.606 --> 00:26:47.586 A:middle
+And you will then specify a
+distance in meters, how far away
+
+00:26:47.586 --> 00:26:49.286 A:middle
+from the center coordinate
+you want the camera
+
+00:26:49.286 --> 00:26:50.136 A:middle
+to be positioned.
+
+00:26:50.516 --> 00:26:53.126 A:middle
+And notice how this
+differs from the altitude.
+
+00:26:53.846 --> 00:26:58.466 A:middle
+You will also specify the pitch,
+how angled you want the camera
+
+00:26:58.466 --> 00:27:00.476 A:middle
+to be, and the heading,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:58.466 --> 00:27:00.476 A:middle
+to be, and the heading,
+
+00:27:00.476 --> 00:27:02.146 A:middle
+the direction you
+want to be looking in.
+
+00:27:03.186 --> 00:27:05.976 A:middle
+And using this initializer
+you can get a camera
+
+00:27:05.976 --> 00:27:08.966 A:middle
+which is looking precisely
+where you want to without having
+
+00:27:08.966 --> 00:27:11.686 A:middle
+to worry about what sort of
+terrain or buildings happens
+
+00:27:11.686 --> 00:27:12.796 A:middle
+to be beneath your camera.
+
+00:27:14.386 --> 00:27:17.216 A:middle
+And I will now give a
+short demo to show some
+
+00:27:17.216 --> 00:27:22.246 A:middle
+of the cool things you
+can do with Flyover.
+
+00:27:23.356 --> 00:27:26.546 A:middle
+Okay. So Sumit was showing you
+a tour application earlier.
+
+00:27:27.106 --> 00:27:30.966 A:middle
+And I have a similar application
+here running on my Mac.
+
+00:27:30.966 --> 00:27:33.556 A:middle
+You can see the landmarks here.
+
+00:27:35.426 --> 00:27:37.746 A:middle
+For example here, Cliff House.
+
+00:27:38.676 --> 00:27:41.766 A:middle
+And as you might remember there
+were some of these locations
+
+00:27:41.766 --> 00:27:44.186 A:middle
+that we did not actually
+have any images for.
+
+00:27:44.186 --> 00:27:45.746 A:middle
+And I thought we
+could use Flyover
+
+00:27:45.746 --> 00:27:46.756 A:middle
+in order to correct that.
+
+00:27:48.236 --> 00:27:50.076 A:middle
+So what I will be doing is,
+
+00:27:50.076 --> 00:27:52.996 A:middle
+that I will be adding a
+detail callout accessory views
+
+00:27:52.996 --> 00:27:54.066 A:middle
+to my callouts here.
+
+00:27:54.686 --> 00:27:57.986 A:middle
+And I will use the
+MKMap snapshot in order
+
+00:27:57.986 --> 00:28:01.426 A:middle
+to generate images from
+Flyover, to set as the image
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:57.986 --> 00:28:01.426 A:middle
+to generate images from
+Flyover, to set as the image
+
+00:28:01.426 --> 00:28:04.686 A:middle
+of the detail callout
+accessory view.
+
+00:28:04.686 --> 00:28:06.536 A:middle
+The MKMap snapshot
+is very useful
+
+00:28:06.536 --> 00:28:08.716 A:middle
+when you only really need
+a static image of a map,
+
+00:28:08.906 --> 00:28:10.626 A:middle
+when you don't need
+it to be interactive.
+
+00:28:11.876 --> 00:28:14.886 A:middle
+So I'm going to add a few
+options for the snapshotter,
+
+00:28:14.886 --> 00:28:16.746 A:middle
+and the most important
+one here being
+
+00:28:16.746 --> 00:28:19.826 A:middle
+that I'm setting the
+mapType to Satellite Flyover.
+
+00:28:22.366 --> 00:28:25.626 A:middle
+I will then create an
+MKMapCamera using our new
+
+00:28:25.626 --> 00:28:29.846 A:middle
+initializer to look at the
+coordinates of the annotation.
+
+00:28:30.756 --> 00:28:32.996 A:middle
+And I will then use
+these options
+
+00:28:33.226 --> 00:28:35.686 A:middle
+to create an MKMap snapshotter.
+
+00:28:36.986 --> 00:28:40.566 A:middle
+I'll start the snapshotter
+and if it completes
+
+00:28:40.566 --> 00:28:43.836 A:middle
+without any error, I will use
+the resulting image as the image
+
+00:28:43.876 --> 00:28:45.516 A:middle
+on my detail callout
+accessory view.
+
+00:28:45.516 --> 00:28:48.446 A:middle
+Let's of course,
+call this function.
+
+00:28:48.506 --> 00:29:00.336 A:middle
+Okay. Let's take a look
+at what it looks like now.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:48.506 --> 00:29:00.336 A:middle
+Okay. Let's take a look
+at what it looks like now.
+
+00:29:00.866 --> 00:29:04.216 A:middle
+So if I recall correctly,
+Cliff House was one of those
+
+00:29:04.216 --> 00:29:05.366 A:middle
+that we didn't have
+an image for.
+
+00:29:05.366 --> 00:29:07.006 A:middle
+And look at that, now we do.
+
+00:29:07.006 --> 00:29:07.226 A:middle
+(Applause.)
+
+00:29:07.226 --> 00:29:07.766 A:middle
+&gt;&gt; ELISABETH LINDKVIST:
+And yeah,
+
+00:29:08.816 --> 00:29:19.066 A:middle
+I think we have a
+few other ones here.
+
+00:29:19.066 --> 00:29:21.166 A:middle
+Like City Hall, for example.
+
+00:29:21.576 --> 00:29:23.736 A:middle
+Now, that's was pretty
+cool, but Flyover views are
+
+00:29:23.776 --> 00:29:25.276 A:middle
+of course also interactive,
+
+00:29:25.776 --> 00:29:28.656 A:middle
+so I'm thinking we can add a
+little animation to this view.
+
+00:29:29.646 --> 00:29:31.436 A:middle
+And I created a new
+ViewController
+
+00:29:31.436 --> 00:29:35.536 A:middle
+which doesn't really do much
+yet but it has an MKMapView.
+
+00:29:37.036 --> 00:29:41.616 A:middle
+And I will add some constants
+that I think will be useful.
+
+00:29:42.456 --> 00:29:45.016 A:middle
+And then I will set
+up the map view.
+
+00:29:45.726 --> 00:29:52.606 A:middle
+And so as we can note here
+I'm also setting my map type
+
+00:29:52.606 --> 00:29:53.696 A:middle
+to Satellite Flyover.
+
+00:29:54.596 --> 00:29:57.446 A:middle
+I'm hiding the compass
+and the zoom controls
+
+00:29:57.556 --> 00:29:59.576 A:middle
+that are visible in OS X.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:00.606 --> 00:30:04.816 A:middle
+I'm also creating an MKMapCamera
+which initially looks
+
+00:30:04.816 --> 00:30:06.366 A:middle
+at the coordinates
+of the landmark.
+
+00:30:07.846 --> 00:30:09.516 A:middle
+And that's about all
+the setup I need.
+
+00:30:10.786 --> 00:30:13.776 A:middle
+Then I'm going to
+create a couple
+
+00:30:13.776 --> 00:30:15.716 A:middle
+of additionally MKMapCameras.
+
+00:30:17.136 --> 00:30:20.266 A:middle
+First of all I have one
+which is a bit tilted down,
+
+00:30:20.766 --> 00:30:21.626 A:middle
+my pitched camera.
+
+00:30:22.396 --> 00:30:24.666 A:middle
+And I'm also adding
+a rotation here.
+
+00:30:24.666 --> 00:30:26.716 A:middle
+So it will do a little
+spin around.
+
+00:30:27.486 --> 00:30:30.976 A:middle
+And as MKMapCamera is
+an animatable property
+
+00:30:30.976 --> 00:30:34.066 A:middle
+in MKMapView, I will do a
+little animation in order
+
+00:30:34.066 --> 00:30:35.826 A:middle
+to switch between these.
+
+00:30:37.316 --> 00:30:41.116 A:middle
+So here I am adding first
+a little short animation
+
+00:30:41.116 --> 00:30:44.436 A:middle
+which will set the camera
+to my pitched camera,
+
+00:30:44.816 --> 00:30:46.676 A:middle
+and we will tilt
+the view down a bit,
+
+00:30:47.206 --> 00:30:49.946 A:middle
+and I am then adding a
+little longer animation
+
+00:30:49.946 --> 00:30:51.766 A:middle
+which will do a little
+spin around.
+
+00:30:52.456 --> 00:30:57.696 A:middle
+In my main View Controller
+I have added a little right
+
+00:30:58.076 --> 00:30:59.856 A:middle
+callout accessory view here
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:00.086 --> 00:31:02.736 A:middle
+which will open my
+new View Controller.
+
+00:31:04.186 --> 00:31:06.376 A:middle
+So let's add that
+button as well.
+
+00:31:06.376 --> 00:31:19.926 A:middle
+Okay. Let's take another
+look at Cliff House.
+
+00:31:19.926 --> 00:31:21.216 A:middle
+There we go.
+
+00:31:21.476 --> 00:31:26.966 A:middle
+And I have my little button
+here, and we are tilting down.
+
+00:31:27.796 --> 00:31:29.276 A:middle
+And spinning around.
+
+00:31:29.386 --> 00:31:29.536 A:middle
+(Applause.)
+
+00:31:29.536 --> 00:31:37.496 A:middle
+This was fun.
+
+00:31:38.106 --> 00:31:44.186 A:middle
+We'll just look at
+this one, too,
+
+00:31:44.776 --> 00:31:46.706 A:middle
+because I think it
+looks really cool.
+
+00:31:49.806 --> 00:31:50.336 A:middle
+There we go.
+
+00:31:50.456 --> 00:31:51.646 A:middle
+Transamerica Pyramid, too.
+
+00:31:52.176 --> 00:31:52.376 A:middle
+(Applause.)
+
+00:31:59.986 --> 00:32:01.646 A:middle
+Okay. So now we have
+seen some of the things
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:59.986 --> 00:32:01.646 A:middle
+Okay. So now we have
+seen some of the things
+
+00:32:01.646 --> 00:32:03.096 A:middle
+that you can do with Flyover.
+
+00:32:03.356 --> 00:32:05.056 A:middle
+So let's get back
+to the presentation.
+
+00:32:05.946 --> 00:32:08.536 A:middle
+As I said at the beginning
+there are also some parts
+
+00:32:08.616 --> 00:32:11.646 A:middle
+of the existing MapKit API that
+I would like to talk about,
+
+00:32:11.646 --> 00:32:13.446 A:middle
+how they would work
+together with Flyover.
+
+00:32:14.546 --> 00:32:16.676 A:middle
+And I'll start with
+MK annotations.
+
+00:32:17.076 --> 00:32:21.236 A:middle
+MK annotations are used to
+annotate a single coordinate
+
+00:32:21.236 --> 00:32:24.086 A:middle
+of the map and the most
+common use case is the pins
+
+00:32:24.086 --> 00:32:25.436 A:middle
+that we have been
+working with today.
+
+00:32:26.486 --> 00:32:29.936 A:middle
+If you are showing buildings
+on the standard map type,
+
+00:32:30.246 --> 00:32:33.516 A:middle
+annotations will be
+placed on top of those.
+
+00:32:34.456 --> 00:32:36.326 A:middle
+And this will also be the case
+
+00:32:36.326 --> 00:32:38.236 A:middle
+when you are using
+the Flyover map types.
+
+00:32:38.716 --> 00:32:42.456 A:middle
+Annotations will be placed on
+top of any buildings, trees,
+
+00:32:43.176 --> 00:32:45.586 A:middle
+large boats, statues,
+whatever you may find
+
+00:32:45.586 --> 00:32:46.936 A:middle
+when you are exploring Flyover.
+
+00:32:48.366 --> 00:32:50.946 A:middle
+And next, MKOverlays.
+
+00:32:51.566 --> 00:32:54.876 A:middle
+Overlays are used to highlight
+areas of the map rather
+
+00:32:54.876 --> 00:32:56.476 A:middle
+than just a single coordinate.
+
+00:32:57.346 --> 00:33:00.766 A:middle
+And if you are showing
+buildings on a 3D map
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:57.346 --> 00:33:00.766 A:middle
+And if you are showing
+buildings on a 3D map
+
+00:33:00.916 --> 00:33:04.616 A:middle
+in the standard map
+type, you will notice
+
+00:33:04.616 --> 00:33:07.186 A:middle
+that overlays are being
+occluded by the buildings.
+
+00:33:08.176 --> 00:33:11.196 A:middle
+This will work precisely
+in the same way in Flyover.
+
+00:33:11.606 --> 00:33:13.676 A:middle
+Any overlays you
+have will be occluded
+
+00:33:13.676 --> 00:33:15.856 A:middle
+by Flyover buildings and trees.
+
+00:33:16.956 --> 00:33:18.036 A:middle
+Something like that.
+
+00:33:21.546 --> 00:33:25.336 A:middle
+However, overlays will be
+drawn on top of the terrain
+
+00:33:25.336 --> 00:33:27.456 A:middle
+so that they will
+follow the ground.
+
+00:33:28.696 --> 00:33:30.196 A:middle
+Something like that.
+
+00:33:30.716 --> 00:33:33.866 A:middle
+So I think that's about
+everything you need to know
+
+00:33:33.866 --> 00:33:37.026 A:middle
+in order to get started with
+using Flyover in your apps
+
+00:33:37.136 --> 00:33:41.686 A:middle
+and I can't wait to see what
+you will be doing with it.
+
+00:33:41.686 --> 00:33:43.936 A:middle
+To summarize a bit what we
+have been talking about today,
+
+00:33:43.996 --> 00:33:48.016 A:middle
+we have added some new ways
+for you to customize your pins,
+
+00:33:48.016 --> 00:33:51.156 A:middle
+your callouts, and the way you
+display your map with traffic,
+
+00:33:51.156 --> 00:33:52.286 A:middle
+and compass, and scale.
+
+00:33:53.526 --> 00:33:57.716 A:middle
+We've added Transit ETA requests
+and ways for you to launch
+
+00:33:57.716 --> 00:33:59.946 A:middle
+into the maps apps to
+show Transit directions.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:01.006 --> 00:34:03.396 A:middle
+And we've also added
+the Satellite Flyover
+
+00:34:03.446 --> 00:34:05.176 A:middle
+and Hybrid Flyover map types
+
+00:34:05.206 --> 00:34:07.716 A:middle
+so that you can show
+photo-realistic 3D models
+
+00:34:07.716 --> 00:34:10.306 A:middle
+and satellite imagery
+on terrain in your apps.
+
+00:34:10.956 --> 00:34:13.596 A:middle
+For more information,
+please take a look
+
+00:34:13.596 --> 00:34:16.536 A:middle
+at the MapKit documentation
+and the Developer Forums.
+
+00:34:17.766 --> 00:34:22.176 A:middle
+Thank you so much for coming.
+
+00:34:22.176 --> 00:34:22.346 A:middle
+(Applause.)
+
