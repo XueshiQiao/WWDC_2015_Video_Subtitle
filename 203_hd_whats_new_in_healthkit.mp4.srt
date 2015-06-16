@@ -1,0 +1,2897 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:20.016 --> 00:00:24.926 A:middle
+[ Applause ]
+
+00:00:25.426 --> 00:00:27.176 A:middle
+&gt;&gt; SHANNON TAN: Hello,
+everyone, welcome to What's New
+
+00:00:27.176 --> 00:00:29.536 A:middle
+in HealthKit, this is a great
+opportunity for you to learn
+
+00:00:29.536 --> 00:00:30.886 A:middle
+about the new things
+we have in store
+
+00:00:30.886 --> 00:00:32.375 A:middle
+for you in the SDK this year.
+
+00:00:32.476 --> 00:00:34.106 A:middle
+My name is Shannon Tan.
+
+00:00:34.176 --> 00:00:37.086 A:middle
+I'm an iOS engineer, and I'll be
+joined up here in a little while
+
+00:00:37.086 --> 00:00:38.606 A:middle
+by my colleague Allen
+Shortlidge.
+
+00:00:39.236 --> 00:00:41.526 A:middle
+We are so excited to help you
+build impactful applications
+
+00:00:41.526 --> 00:00:44.046 A:middle
+that will help millions
+of people be more healthy
+
+00:00:44.046 --> 00:00:47.376 A:middle
+and live better lives.
+
+00:00:48.006 --> 00:00:49.416 A:middle
+Let's start with a
+roadmap of our talk.
+
+00:00:49.416 --> 00:00:51.626 A:middle
+Today we will be talking about
+several different things.
+
+00:00:51.626 --> 00:00:54.736 A:middle
+We will go over HealthKit
+quickly.
+
+00:00:54.736 --> 00:00:57.816 A:middle
+We will talk about the unit
+preferences API introduced
+
+00:00:57.816 --> 00:00:58.946 A:middle
+in iOS 8.2.
+
+00:00:58.996 --> 00:01:01.216 A:middle
+We will talk about
+the diatribes iOS 9,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:58.996 --> 00:01:01.216 A:middle
+We will talk about
+the diatribes iOS 9,
+
+00:01:02.136 --> 00:01:03.606 A:middle
+which will allow
+whole new aspects
+
+00:01:03.606 --> 00:01:04.906 A:middle
+of HealthKit-supported software.
+
+00:01:05.966 --> 00:01:08.426 A:middle
+Next, Allen will come up
+and talk about data sources,
+
+00:01:08.566 --> 00:01:10.216 A:middle
+deletions, and Workout sessions.
+
+00:01:10.976 --> 00:01:12.696 A:middle
+Finally we will finish
+with a WatchKit demo.
+
+00:01:14.746 --> 00:01:16.206 A:middle
+Let's talk about some
+HealthKit background.
+
+00:01:18.056 --> 00:01:20.336 A:middle
+Right now, personal health is
+an extremely exciting area.
+
+00:01:20.736 --> 00:01:23.136 A:middle
+There are a lot of apps in
+the App Store that are focused
+
+00:01:23.136 --> 00:01:24.916 A:middle
+on helping our users
+get and stay healthy,
+
+00:01:25.826 --> 00:01:27.206 A:middle
+and devices like
+activity trackers
+
+00:01:27.206 --> 00:01:28.906 A:middle
+and smartwatches are
+recording large amount
+
+00:01:29.156 --> 00:01:31.046 A:middle
+of extremely personal
+and relevant data.
+
+00:01:31.916 --> 00:01:34.026 A:middle
+HealthKit is a framework
+that makes it easier to store
+
+00:01:34.026 --> 00:01:34.976 A:middle
+and retrieve this information.
+
+00:01:35.186 --> 00:01:39.306 A:middle
+It provides a rich set of APIs
+to save health and fitness data
+
+00:01:39.306 --> 00:01:42.316 A:middle
+and share between applications
+while maintaining security
+
+00:01:42.316 --> 00:01:45.476 A:middle
+with extensive privacy settings
+and encrypted databases.
+
+00:01:47.046 --> 00:01:48.796 A:middle
+What does this mean for
+you as an app developer?
+
+00:01:49.316 --> 00:01:52.386 A:middle
+It means when you use HealthKit
+you can skip writing custom code
+
+00:01:52.506 --> 00:01:55.726 A:middle
+to share, store, and sync data
+and instead focus on features
+
+00:01:55.796 --> 00:01:58.956 A:middle
+that are core to your app
+experience while being part
+
+00:01:58.956 --> 00:02:00.046 A:middle
+of a greater ecosystem.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:58.956 --> 00:02:00.046 A:middle
+of a greater ecosystem.
+
+00:02:02.926 --> 00:02:05.976 A:middle
+Finally, with HealthKit
+comes a Health app,
+
+00:02:06.246 --> 00:02:08.026 A:middle
+which provides a general
+view into HealthKit.
+
+00:02:08.895 --> 00:02:12.356 A:middle
+In iOS 9 we have added more
+views to allow to make it easier
+
+00:02:12.356 --> 00:02:15.256 A:middle
+for users to store, summarize,
+and correlate their data.
+
+00:02:21.006 --> 00:02:22.116 A:middle
+Let's talk about the data types
+
+00:02:22.116 --> 00:02:23.916 A:middle
+which enable these great
+Health applications.
+
+00:02:25.406 --> 00:02:29.686 A:middle
+Currently in HealthKit there
+are a lot of data types
+
+00:02:29.686 --> 00:02:31.816 A:middle
+which cover a wide array of
+aspects of personal health.
+
+00:02:32.616 --> 00:02:34.176 A:middle
+We try to make types
+that are as expansive
+
+00:02:34.176 --> 00:02:35.506 A:middle
+and impactful as possible.
+
+00:02:35.506 --> 00:02:40.266 A:middle
+One common question is, How does
+Apple prioritize what data types
+
+00:02:40.266 --> 00:02:42.746 A:middle
+to add given limited
+development time?
+
+00:02:42.746 --> 00:02:46.776 A:middle
+Our highest priority
+consideration is the existence
+
+00:02:46.776 --> 00:02:47.346 A:middle
+of hardware.
+
+00:02:47.836 --> 00:02:49.586 A:middle
+For example, there
+are Bluetooth scales
+
+00:02:49.586 --> 00:02:53.476 A:middle
+that automatically track
+weights and Sleeptrackers
+
+00:02:53.476 --> 00:02:54.656 A:middle
+that measure your
+sleep activities.
+
+00:02:55.256 --> 00:02:56.276 A:middle
+We find the possibility
+
+00:02:56.276 --> 00:02:58.846 A:middle
+of automatic quantified health
+data syncing to HealthKit
+
+00:02:58.846 --> 00:03:00.386 A:middle
+on your device to be powerful.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:58.846 --> 00:03:00.386 A:middle
+on your device to be powerful.
+
+00:03:02.666 --> 00:03:05.306 A:middle
+We also add data types based
+on existence of software,
+
+00:03:05.306 --> 00:03:07.286 A:middle
+whether there are popular
+apps that already exist
+
+00:03:07.286 --> 00:03:09.106 A:middle
+to create experience
+around that data type.
+
+00:03:10.706 --> 00:03:12.736 A:middle
+Finally, we consider customer
+and developer feedback.
+
+00:03:16.706 --> 00:03:18.286 A:middle
+To support our discussion
+about data types,
+
+00:03:18.286 --> 00:03:21.246 A:middle
+let's look at how
+they are structured.
+
+00:03:21.246 --> 00:03:22.346 A:middle
+Every object in HealthKit
+has a type,
+
+00:03:22.346 --> 00:03:24.306 A:middle
+and every type inherits
+an HK object type.
+
+00:03:25.116 --> 00:03:27.576 A:middle
+Characteristic types are types
+that don't change over time,
+
+00:03:27.856 --> 00:03:29.116 A:middle
+like blood type or
+date of birth.
+
+00:03:29.116 --> 00:03:32.096 A:middle
+Types that do change over
+time are sample types,
+
+00:03:32.126 --> 00:03:33.276 A:middle
+and we'll talk about two.
+
+00:03:33.626 --> 00:03:36.326 A:middle
+Quantity samples have
+quantity and unit, like weight.
+
+00:03:37.056 --> 00:03:38.676 A:middle
+Category samples
+can be enumerated
+
+00:03:38.676 --> 00:03:40.986 A:middle
+into several different
+values, like sleep analysis.
+
+00:03:40.986 --> 00:03:42.956 A:middle
+You can be in one of
+several sleep states.
+
+00:03:44.416 --> 00:03:46.656 A:middle
+Of course, this is a review of
+already-introduced information.
+
+00:03:46.656 --> 00:03:47.476 A:middle
+If you would like to learn more
+
+00:03:47.476 --> 00:03:48.666 A:middle
+about how HealthKit
+is structured,
+
+00:03:48.666 --> 00:03:51.326 A:middle
+we recommend you take a
+look at last year's talk,
+
+00:03:51.326 --> 00:03:54.906 A:middle
+Introducing HealthKit.
+
+00:03:56.466 --> 00:03:58.566 A:middle
+So I mentioned that quantity
+samples have a quantity
+
+00:03:58.566 --> 00:03:58.876 A:middle
+and unit.
+
+00:03:58.876 --> 00:04:00.536 A:middle
+I would like to take time now
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:58.876 --> 00:04:00.536 A:middle
+I would like to take time now
+
+00:04:00.606 --> 00:04:02.366 A:middle
+to discuss the new
+unit preferences API.
+
+00:04:03.286 --> 00:04:06.786 A:middle
+Although this API isn't new
+in iOS 9, it was introduced
+
+00:04:06.946 --> 00:04:08.836 A:middle
+since our last talk in iOS 8.2.
+
+00:04:09.046 --> 00:04:11.856 A:middle
+So we would like
+to cover it now.
+
+00:04:14.296 --> 00:04:15.886 A:middle
+You might have noticed
+in iOS 8.2
+
+00:04:15.886 --> 00:04:20.685 A:middle
+that there was a new unit
+pane in the Health app.
+
+00:04:20.685 --> 00:04:23.376 A:middle
+Units are shown based on the
+region and locale of a user;
+
+00:04:23.666 --> 00:04:26.366 A:middle
+however, the user can
+enter this row and override
+
+00:04:26.366 --> 00:04:29.526 A:middle
+that default setting with
+their own unit preference.
+
+00:04:32.256 --> 00:04:35.696 A:middle
+In iOS 8.2, there is a new class
+extension on the HK Health Store
+
+00:04:35.776 --> 00:04:37.826 A:middle
+that you can use to find
+this unit preference.
+
+00:04:38.346 --> 00:04:40.416 A:middle
+We recommend you do this
+so that the unit you show
+
+00:04:40.416 --> 00:04:42.696 A:middle
+in your app UI will match
+what the user prefers
+
+00:04:42.696 --> 00:04:43.676 A:middle
+to see in Apple Health.
+
+00:04:44.806 --> 00:04:46.316 A:middle
+Finally, there is
+a new notification
+
+00:04:46.316 --> 00:04:48.746 A:middle
+that fires whenever this
+unit preference changes.
+
+00:04:48.746 --> 00:04:53.166 A:middle
+Now that we have discussed the
+units and reviewed data types
+
+00:04:53.166 --> 00:04:55.646 A:middle
+in HealthKit, let's talk about
+the new data types available
+
+00:04:55.646 --> 00:04:58.716 A:middle
+in iOS 9, the first
+one is water intake.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:01.966 --> 00:05:03.996 A:middle
+I'm sure we all know
+someone who lugs
+
+00:05:03.996 --> 00:05:07.016 A:middle
+around a gigantic water
+bottle and when asked,
+
+00:05:07.306 --> 00:05:11.086 A:middle
+explains that daily hydration
+is important to well-being
+
+00:05:11.086 --> 00:05:13.526 A:middle
+and it's probably bad for you
+to be thirsty all of the time.
+
+00:05:14.296 --> 00:05:17.056 A:middle
+There are a lot of apps in the
+App Store that gently nudge you
+
+00:05:17.056 --> 00:05:20.806 A:middle
+to increase water intake and
+even some devices and sensors
+
+00:05:20.806 --> 00:05:23.596 A:middle
+like Bluetooth water bottles
+that track your water intake.
+
+00:05:24.096 --> 00:05:26.586 A:middle
+A lot of people want to make
+sure they drink the recommended
+
+00:05:26.586 --> 00:05:29.126 A:middle
+eight 8-ounce glasses, or
+two liters, of water a day,
+
+00:05:29.296 --> 00:05:31.916 A:middle
+or more if they're intensely
+exercising or if it's a hot day
+
+00:05:31.916 --> 00:05:33.276 A:middle
+and they're at risk
+of dehydration.
+
+00:05:34.076 --> 00:05:35.246 A:middle
+So we have added
+new quantity type
+
+00:05:35.286 --> 00:05:37.036 A:middle
+in HealthKit called
+Dietary Water.
+
+00:05:37.536 --> 00:05:38.716 A:middle
+Its unit is a volume.
+
+00:05:39.266 --> 00:05:43.126 A:middle
+Like its name implies, this
+type can also track water intake
+
+00:05:43.186 --> 00:05:44.686 A:middle
+that occurs through food.
+
+00:05:48.566 --> 00:05:49.956 A:middle
+The next type is UV Exposure.
+
+00:05:50.146 --> 00:05:54.386 A:middle
+UV radiation is present in
+sunlight and it has harms
+
+00:05:54.386 --> 00:05:55.686 A:middle
+and benefits to human health.
+
+00:05:55.976 --> 00:05:59.066 A:middle
+It can stimulate the
+production of vitamin D,
+
+00:05:59.126 --> 00:06:01.586 A:middle
+and it can improve
+mood and well-being.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:59.126 --> 00:06:01.586 A:middle
+and it can improve
+mood and well-being.
+
+00:06:02.226 --> 00:06:04.366 A:middle
+However, overexposure
+also has negative effects.
+
+00:06:05.716 --> 00:06:08.166 A:middle
+It can have negative
+effects like sunburn
+
+00:06:08.166 --> 00:06:10.586 A:middle
+or long-term effects like
+skin damage or cataracts.
+
+00:06:10.886 --> 00:06:13.216 A:middle
+If you spend time in the
+sun, it may be useful to know
+
+00:06:13.216 --> 00:06:14.886 A:middle
+when you are most at
+risk for sun damage.
+
+00:06:17.126 --> 00:06:18.816 A:middle
+There are also nifty devices
+
+00:06:18.816 --> 00:06:21.456 A:middle
+that track a person's
+exposure to UV rays.
+
+00:06:21.456 --> 00:06:23.396 A:middle
+And for apps and
+sensors that do so,
+
+00:06:23.396 --> 00:06:25.466 A:middle
+we're adding a new quantity
+type called UV Exposure.
+
+00:06:26.096 --> 00:06:27.006 A:middle
+Its value is a scalar.
+
+00:06:27.006 --> 00:06:30.676 A:middle
+It represents the UV
+index from 0 to 12,
+
+00:06:30.676 --> 00:06:34.776 A:middle
+from least to most dangerous.
+
+00:06:35.606 --> 00:06:37.556 A:middle
+Of course, UV exposure
+isn't a perfect way
+
+00:06:37.556 --> 00:06:38.666 A:middle
+to measure your risk
+of sun damage.
+
+00:06:38.666 --> 00:06:41.256 A:middle
+It could depend on the
+clothing you are wearing,
+
+00:06:41.556 --> 00:06:43.666 A:middle
+the sunscreen you have on,
+or the skin type you have.
+
+00:06:43.786 --> 00:06:46.366 A:middle
+For the last purpose we have
+added a new characteristic type
+
+00:06:46.366 --> 00:06:48.386 A:middle
+in HealthKit called the
+Fitzpatrick Skin Type.
+
+00:06:49.636 --> 00:06:51.786 A:middle
+This represents the skin
+type of an individual based
+
+00:06:51.896 --> 00:06:55.026 A:middle
+on the Fitzpatrick scale,
+which is based on the degree
+
+00:06:55.026 --> 00:06:56.056 A:middle
+of burning or tanning.
+
+00:06:56.866 --> 00:07:00.376 A:middle
+The emogis in iOS 8.3 are
+based on the Fitzpatrick scale.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:56.866 --> 00:07:00.376 A:middle
+The emogis in iOS 8.3 are
+based on the Fitzpatrick scale.
+
+00:07:00.376 --> 00:07:02.316 A:middle
+All the way on the
+left is type 1,
+
+00:07:02.316 --> 00:07:04.926 A:middle
+which represents very pale
+skin that burns quite easily.
+
+00:07:05.366 --> 00:07:08.556 A:middle
+And all the way on the right
+is dark brown or black skin,
+
+00:07:08.586 --> 00:07:10.736 A:middle
+which never burns
+and tans profusely.
+
+00:07:10.736 --> 00:07:17.196 A:middle
+Because the Fitzpatrick Skin
+Type is a characteristic type,
+
+00:07:17.196 --> 00:07:19.046 A:middle
+it behaves differently
+from a category
+
+00:07:19.046 --> 00:07:20.626 A:middle
+or a quantity sample
+you might be used to.
+
+00:07:20.696 --> 00:07:22.536 A:middle
+It's accessed directly
+against the Health Store,
+
+00:07:22.536 --> 00:07:25.606 A:middle
+and it returns a simple
+wrapper around an enumeration.
+
+00:07:30.816 --> 00:07:32.896 A:middle
+Now, I'd like to talk to
+you about a whole new group
+
+00:07:32.896 --> 00:07:34.916 A:middle
+of data types we are
+adding under the category
+
+00:07:34.966 --> 00:07:35.806 A:middle
+of reproductive health.
+
+00:07:37.516 --> 00:07:41.026 A:middle
+[ Applause ]
+
+00:07:41.526 --> 00:07:44.056 A:middle
+So when we think about
+quantified health we think
+
+00:07:44.056 --> 00:07:45.726 A:middle
+about technologically
+driven items
+
+00:07:45.776 --> 00:07:47.716 A:middle
+like activity trackers
+and smartwatches.
+
+00:07:48.686 --> 00:07:51.096 A:middle
+We think about HealthKit
+syncing workouts,
+
+00:07:51.366 --> 00:07:54.026 A:middle
+or maybe a food diary
+automatically logging nutrition.
+
+00:07:54.956 --> 00:07:57.296 A:middle
+But reproductive health is
+a major component of health.
+
+00:07:58.436 --> 00:08:00.976 A:middle
+For many women who track their
+health data, nothing has been
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:58.436 --> 00:08:00.976 A:middle
+For many women who track their
+health data, nothing has been
+
+00:08:00.976 --> 00:08:03.836 A:middle
+as exciting or revealing as
+tracking their menstrual cycles,
+
+00:08:04.426 --> 00:08:06.326 A:middle
+and for many couples who
+are trying to conceive
+
+00:08:06.616 --> 00:08:08.496 A:middle
+and for many couples who
+are trying not to conceive,
+
+00:08:08.986 --> 00:08:12.006 A:middle
+monitoring fertile times and
+understanding hormonal changes
+
+00:08:12.006 --> 00:08:14.236 A:middle
+or irregularities is
+critical information.
+
+00:08:16.626 --> 00:08:18.486 A:middle
+It might seem strange to
+talk about data that is
+
+00:08:18.606 --> 00:08:20.106 A:middle
+so sensitive and so intimate.
+
+00:08:20.106 --> 00:08:22.736 A:middle
+Yet when we talk about
+technology improving lives,
+
+00:08:23.196 --> 00:08:25.576 A:middle
+this is vital, revealing,
+and insightful information.
+
+00:08:25.946 --> 00:08:28.426 A:middle
+It helps women understand and
+be more aware of their bodies
+
+00:08:28.696 --> 00:08:30.136 A:middle
+and to be in control
+of their health.
+
+00:08:31.236 --> 00:08:32.606 A:middle
+It helps and has helped millions
+
+00:08:32.606 --> 00:08:34.296 A:middle
+of people make informed
+decisions
+
+00:08:34.456 --> 00:08:36.285 A:middle
+about their fertility
+and family planning.
+
+00:08:38.236 --> 00:08:40.446 A:middle
+Apps that track cycles
+in fertility are some
+
+00:08:40.446 --> 00:08:41.635 A:middle
+of the most popular
+in the Health
+
+00:08:41.635 --> 00:08:43.186 A:middle
+and Fitness category
+in the App Store.
+
+00:08:43.956 --> 00:08:46.266 A:middle
+This was the number one
+developer request for HealthKit.
+
+00:08:46.266 --> 00:08:50.006 A:middle
+We are so excited to be adding
+support for these apps in iOS 9.
+
+00:08:53.946 --> 00:08:56.636 A:middle
+So there are many factors
+to reproductive health,
+
+00:08:56.676 --> 00:08:58.916 A:middle
+and we starting by
+adding six new types.
+
+00:08:59.326 --> 00:09:01.116 A:middle
+These are meant to be
+open, so they may be useful
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:59.326 --> 00:09:01.116 A:middle
+These are meant to be
+open, so they may be useful
+
+00:09:01.116 --> 00:09:02.376 A:middle
+for people trying
+to get pregnant,
+
+00:09:02.686 --> 00:09:05.156 A:middle
+trying to not get pregnant,
+or simply people wishing
+
+00:09:05.156 --> 00:09:07.436 A:middle
+to have a full and more complete
+picture of their health.
+
+00:09:10.336 --> 00:09:11.776 A:middle
+The first type is
+Basal Body Temperature,
+
+00:09:11.856 --> 00:09:14.456 A:middle
+and for each type we will be
+adding a dashboard graphic
+
+00:09:14.456 --> 00:09:16.086 A:middle
+to show you how we are
+visualizing this data
+
+00:09:16.146 --> 00:09:16.956 A:middle
+in Apple Health.
+
+00:09:20.426 --> 00:09:22.466 A:middle
+Basal body temperature is
+the temperature of your body
+
+00:09:22.466 --> 00:09:25.076 A:middle
+at rest, which typically is
+measured early in the morning.
+
+00:09:25.196 --> 00:09:26.706 A:middle
+It follows a biphasic path
+
+00:09:26.706 --> 00:09:29.256 A:middle
+where your temperature increases
+slightly after ovulation.
+
+00:09:30.026 --> 00:09:32.256 A:middle
+People often track their basal
+body temperature for months
+
+00:09:32.256 --> 00:09:34.596 A:middle
+at a time so they can get
+a pattern to their cycle
+
+00:09:34.706 --> 00:09:36.356 A:middle
+and anticipate that
+the next time around.
+
+00:09:37.116 --> 00:09:38.956 A:middle
+It's often measured
+with a pencil and paper.
+
+00:09:39.296 --> 00:09:41.266 A:middle
+It's a time-honored
+way to track ovulation.
+
+00:09:44.016 --> 00:09:45.196 A:middle
+Another popular way to track
+
+00:09:45.266 --> 00:09:48.696 A:middle
+or to monitor fertility is
+cervical mucous quality.
+
+00:09:48.696 --> 00:09:52.696 A:middle
+As opposed to the change
+in basal body temperature,
+
+00:09:52.816 --> 00:09:54.986 A:middle
+the change in CM occurs
+slightly before ovulation.
+
+00:09:54.986 --> 00:09:57.706 A:middle
+In HealthKit, this
+is a category sample,
+
+00:09:57.706 --> 00:10:00.336 A:middle
+which lists the generally
+medically accepted CM states.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:57.706 --> 00:10:00.336 A:middle
+which lists the generally
+medically accepted CM states.
+
+00:10:03.906 --> 00:10:06.306 A:middle
+The next type we're adding
+is Ovulation Test Results.
+
+00:10:08.676 --> 00:10:10.336 A:middle
+In females, an acute rise
+
+00:10:10.336 --> 00:10:12.456 A:middle
+in luteinizing hormone
+triggers ovulation.
+
+00:10:13.686 --> 00:10:16.206 A:middle
+A user can buy a home test
+kit and LH test strips
+
+00:10:16.266 --> 00:10:19.496 A:middle
+to measure this LH surge.
+
+00:10:19.496 --> 00:10:21.586 A:middle
+In HealthKit, this category
+sample measures the result
+
+00:10:21.586 --> 00:10:24.376 A:middle
+of such a test, and it can
+be positive or negative.
+
+00:10:28.736 --> 00:10:31.596 A:middle
+Menstruation is an extremely
+important measure of health.
+
+00:10:32.036 --> 00:10:35.016 A:middle
+Doctors often ask women when the
+date of their last period was
+
+00:10:35.016 --> 00:10:36.566 A:middle
+and about the regularity
+of their cycle.
+
+00:10:37.076 --> 00:10:42.336 A:middle
+Apps that help people track
+this are extremely popular
+
+00:10:42.336 --> 00:10:43.136 A:middle
+and varied.
+
+00:10:44.206 --> 00:10:46.676 A:middle
+Here in HealthKit, we are
+adding it as a category sample.
+
+00:10:48.376 --> 00:10:51.206 A:middle
+We are also adding
+a new metadata key,
+
+00:10:52.266 --> 00:10:53.176 A:middle
+Menstrual Cycle Starts.
+
+00:10:54.136 --> 00:10:56.166 A:middle
+Because the date of your
+last period and regularity
+
+00:10:56.166 --> 00:10:57.846 A:middle
+of a cycle is medically
+important information,
+
+00:10:57.846 --> 00:11:00.836 A:middle
+we want to make it easier for
+apps to easily calculate this.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:57.846 --> 00:11:00.836 A:middle
+we want to make it easier for
+apps to easily calculate this.
+
+00:11:02.806 --> 00:11:05.196 A:middle
+We ask that all clients record
+this Boolean metadata key,
+
+00:11:05.196 --> 00:11:07.546 A:middle
+and if we don't see it we
+will throw an exception.
+
+00:11:10.106 --> 00:11:11.246 A:middle
+Let's review metadata.
+
+00:11:11.686 --> 00:11:14.836 A:middle
+Metadata is a dictionary that
+gives additional information
+
+00:11:14.836 --> 00:11:15.776 A:middle
+about the HealthKit object
+
+00:11:15.776 --> 00:11:17.446 A:middle
+that helps you extend
+a given object type
+
+00:11:17.446 --> 00:11:19.746 A:middle
+and add app-specific
+information to HealthKit.
+
+00:11:20.156 --> 00:11:23.276 A:middle
+The keys to the dictionary are
+strings that you can create
+
+00:11:23.276 --> 00:11:25.076 A:middle
+or are that are Apple
+predefined keys.
+
+00:11:25.736 --> 00:11:27.486 A:middle
+Predefined keys facilitate
+sharing
+
+00:11:27.486 --> 00:11:28.686 A:middle
+between different applications.
+
+00:11:29.476 --> 00:11:31.426 A:middle
+Here we are creating
+a metadata dictionary
+
+00:11:32.396 --> 00:11:33.566 A:middle
+that has important information.
+
+00:11:34.136 --> 00:11:36.716 A:middle
+And we are putting the sample
+with the appropriate type
+
+00:11:36.716 --> 00:11:38.716 A:middle
+of value and passing
+in that metadata
+
+00:11:38.716 --> 00:11:40.856 A:middle
+as we're creating the sample
+before finally saving it
+
+00:11:41.096 --> 00:11:42.086 A:middle
+to HealthKit.
+
+00:11:45.806 --> 00:11:48.426 A:middle
+The next two types will
+be category samples,
+
+00:11:48.426 --> 00:11:51.386 A:middle
+but unlike existing category
+samples in HealthKit,
+
+00:11:51.386 --> 00:11:53.126 A:middle
+they will only have
+a single value,
+
+00:11:53.126 --> 00:11:56.696 A:middle
+HK Category Value
+Not Applicable.
+
+00:11:56.696 --> 00:11:58.996 A:middle
+These category samples
+have dates, metadata,
+
+00:11:58.996 --> 00:12:01.106 A:middle
+and other attributes, but
+they cannot be enumerated
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:58.996 --> 00:12:01.106 A:middle
+and other attributes, but
+they cannot be enumerated
+
+00:12:01.106 --> 00:12:02.036 A:middle
+into multiple values.
+
+00:12:03.536 --> 00:12:05.496 A:middle
+So the first of these
+types is vaginal spotting.
+
+00:12:06.016 --> 00:12:08.476 A:middle
+It refers to light
+bleeding that occurs outside
+
+00:12:08.476 --> 00:12:10.016 A:middle
+of the menstruation period.
+
+00:12:10.016 --> 00:12:11.856 A:middle
+So it's separate
+from menstruation.
+
+00:12:14.516 --> 00:12:16.446 A:middle
+The second type we're
+adding is sexual activity.
+
+00:12:17.816 --> 00:12:21.496 A:middle
+Sexual activity is
+relevant and important
+
+00:12:21.496 --> 00:12:23.736 A:middle
+in many fertility-tracking
+applications.
+
+00:12:23.736 --> 00:12:26.286 A:middle
+And we like to add support
+for it in HealthKit.
+
+00:12:26.366 --> 00:12:30.366 A:middle
+We are adding a new optional
+predefined metadata key,
+
+00:12:30.366 --> 00:12:31.726 A:middle
+Sexual Activity Protection Use.
+
+00:12:31.726 --> 00:12:34.206 A:middle
+This can refer to
+protection against STIs
+
+00:12:34.206 --> 00:12:36.046 A:middle
+or protection against pregnancy.
+
+00:12:40.536 --> 00:12:41.236 A:middle
+So let's summarize.
+
+00:12:41.786 --> 00:12:44.536 A:middle
+We just talked about the
+new data types we are adding
+
+00:12:44.686 --> 00:12:47.576 A:middle
+in iOS 9, Water Intake,
+UV Exposure,
+
+00:12:47.616 --> 00:12:48.956 A:middle
+and Fitzpatrick Skin Type,
+
+00:12:49.546 --> 00:12:51.656 A:middle
+and six new reproductive
+health types.
+
+00:12:52.876 --> 00:12:55.506 A:middle
+We look forward to seeing
+the new and innovative ways
+
+00:12:55.506 --> 00:12:56.896 A:middle
+that you will be
+using these data types
+
+00:12:56.946 --> 00:12:58.546 A:middle
+in your apps and devices.
+
+00:12:58.546 --> 00:13:01.456 A:middle
+Now, I will hand
+it over to Allen
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:58.546 --> 00:13:01.456 A:middle
+Now, I will hand
+it over to Allen
+
+00:13:01.866 --> 00:13:03.036 A:middle
+to talk about data sources.
+
+00:13:04.516 --> 00:13:09.546 A:middle
+[ Applause ]
+
+00:13:10.046 --> 00:13:10.556 A:middle
+&gt;&gt; ALLEN SHORTLIDGE:
+Thank you, Shannon.
+
+00:13:11.706 --> 00:13:14.626 A:middle
+Hi, my name is Allen,
+I'm a software developer
+
+00:13:14.626 --> 00:13:16.026 A:middle
+on the HealthKit team at Apple.
+
+00:13:17.516 --> 00:13:19.756 A:middle
+We just heard Shannon
+discuss the new types
+
+00:13:19.756 --> 00:13:22.386 A:middle
+of data you can store
+in HealthKit in iOS 9,
+
+00:13:22.816 --> 00:13:24.426 A:middle
+and now I would like to
+tell you a little bit
+
+00:13:24.426 --> 00:13:27.396 A:middle
+about the new things that you
+can do with HealthKit in iOS 9.
+
+00:13:28.296 --> 00:13:30.536 A:middle
+The first set of changes
+I will be discussing have
+
+00:13:30.536 --> 00:13:31.896 A:middle
+to do with sources of data.
+
+00:13:32.336 --> 00:13:37.276 A:middle
+HealthKit can store data
+from a variety of sources.
+
+00:13:37.936 --> 00:13:39.886 A:middle
+Samples may be pulled
+automatically
+
+00:13:39.886 --> 00:13:42.466 A:middle
+from the Motion code
+processor in the user's iPhone
+
+00:13:42.876 --> 00:13:45.216 A:middle
+or from a connected
+Bluetooth heart rate monitor.
+
+00:13:46.236 --> 00:13:49.526 A:middle
+They may also come from
+manually entered samples
+
+00:13:49.526 --> 00:13:53.756 A:middle
+in the Health app or saved
+by applications create
+
+00:13:53.756 --> 00:13:54.956 A:middle
+by developers like you.
+
+00:13:55.356 --> 00:13:58.576 A:middle
+Knowing where the
+data in HealthKit came
+
+00:13:58.576 --> 00:14:01.286 A:middle
+from can be important,
+especially if you are using
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:58.576 --> 00:14:01.286 A:middle
+from can be important,
+especially if you are using
+
+00:14:01.286 --> 00:14:03.976 A:middle
+that data for medical
+or research purposes.
+
+00:14:04.576 --> 00:14:06.996 A:middle
+So how do you tell where
+data in HealthKit came from?
+
+00:14:06.996 --> 00:14:12.976 A:middle
+Well, the HK object class is the
+root class for all data stored
+
+00:14:12.976 --> 00:14:16.906 A:middle
+in HealthKit, and in iOS 8
+it had two properties related
+
+00:14:16.906 --> 00:14:17.876 A:middle
+to the source of that data.
+
+00:14:19.366 --> 00:14:20.896 A:middle
+The first is the
+Source property.
+
+00:14:21.586 --> 00:14:25.506 A:middle
+And it represents which
+application saved that object.
+
+00:14:26.396 --> 00:14:28.306 A:middle
+The second property is Metadata.
+
+00:14:29.226 --> 00:14:32.326 A:middle
+Developers often use
+metadata to store information
+
+00:14:32.376 --> 00:14:34.966 A:middle
+about external devices
+that created objects.
+
+00:14:36.056 --> 00:14:38.366 A:middle
+This information can
+be things like the name
+
+00:14:38.366 --> 00:14:40.656 A:middle
+of the external device
+or the manufacturer.
+
+00:14:42.036 --> 00:14:44.636 A:middle
+In iOS 9, we are
+introducing two new properties
+
+00:14:44.736 --> 00:14:46.296 A:middle
+that give you richer information
+
+00:14:46.296 --> 00:14:47.656 A:middle
+about where the object
+came from.
+
+00:14:47.876 --> 00:14:51.336 A:middle
+The first of these new
+properties is the Source
+
+00:14:51.336 --> 00:14:54.236 A:middle
+Revision property, and it
+replaces the Source property.
+
+00:14:54.996 --> 00:14:57.236 A:middle
+In addition to representing
+the application
+
+00:14:57.326 --> 00:15:00.686 A:middle
+that created the sample, it also
+carries the version of the app
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:57.326 --> 00:15:00.686 A:middle
+that created the sample, it also
+carries the version of the app
+
+00:15:00.836 --> 00:15:01.806 A:middle
+that saved the object.
+
+00:15:03.056 --> 00:15:05.266 A:middle
+The second property is
+the Device property,
+
+00:15:05.796 --> 00:15:09.256 A:middle
+and it returns an object that
+represents the external device
+
+00:15:09.256 --> 00:15:10.416 A:middle
+that created the object.
+
+00:15:11.136 --> 00:15:13.956 A:middle
+It's intended to
+replace metadata related
+
+00:15:13.956 --> 00:15:15.106 A:middle
+to external devices.
+
+00:15:15.706 --> 00:15:22.176 A:middle
+Let's take a quick look at
+the HK Source Revision class.
+
+00:15:22.716 --> 00:15:26.546 A:middle
+It just has two properties,
+the source, which, again,
+
+00:15:26.606 --> 00:15:27.916 A:middle
+represents -- oops sorry.
+
+00:15:28.706 --> 00:15:31.606 A:middle
+Which represents the
+application that saves the data,
+
+00:15:31.726 --> 00:15:34.026 A:middle
+and then it also
+includes a version string.
+
+00:15:35.456 --> 00:15:36.996 A:middle
+When you save an
+object to HealthKit,
+
+00:15:37.886 --> 00:15:40.906 A:middle
+HealthKit will automatically
+assign an HK source revision
+
+00:15:40.906 --> 00:15:41.246 A:middle
+to it.
+
+00:15:42.076 --> 00:15:45.846 A:middle
+The version string comes
+from the bundle version entry
+
+00:15:45.846 --> 00:15:47.056 A:middle
+in your app's Info.plist.
+
+00:15:49.096 --> 00:15:50.876 A:middle
+Objects that were saved
+to HealthKit prior
+
+00:15:50.876 --> 00:15:53.066 A:middle
+to iOS 9 will have a
+nil version string.
+
+00:15:53.686 --> 00:15:57.906 A:middle
+Now, let's talk about HK Device.
+
+00:15:58.836 --> 00:16:03.096 A:middle
+HK Device is a class that
+includes a number of strings
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:15:58.836 --> 00:16:03.096 A:middle
+HK Device is a class that
+includes a number of strings
+
+00:16:03.486 --> 00:16:06.006 A:middle
+that represent different
+aspects of a hardware device
+
+00:16:06.206 --> 00:16:10.426 A:middle
+such as its name, manufacturer,
+version information, and so on.
+
+00:16:11.066 --> 00:16:14.506 A:middle
+When you create a device, you
+will want to provide as many
+
+00:16:14.506 --> 00:16:17.976 A:middle
+of the applicable properties
+as possible to give your users
+
+00:16:18.026 --> 00:16:21.496 A:middle
+and other applications the
+richest information possible
+
+00:16:21.496 --> 00:16:24.326 A:middle
+about where the object
+came from.
+
+00:16:26.476 --> 00:16:30.746 A:middle
+If your app saves objects that
+were generated by the sensors
+
+00:16:30.746 --> 00:16:33.366 A:middle
+that are built into the device
+that your app is running on,
+
+00:16:33.886 --> 00:16:37.136 A:middle
+then you can use the local
+device class method on HK Device
+
+00:16:37.426 --> 00:16:40.886 A:middle
+to get a device representing
+the device
+
+00:16:40.916 --> 00:16:42.546 A:middle
+that your app is running on.
+
+00:16:44.776 --> 00:16:47.546 A:middle
+So let's take a look at
+how you would save a sample
+
+00:16:47.546 --> 00:16:48.446 A:middle
+with a device.
+
+00:16:49.346 --> 00:16:52.306 A:middle
+First, you will create
+a device with all
+
+00:16:52.306 --> 00:16:53.536 A:middle
+of the applicable properties.
+
+00:16:54.926 --> 00:16:58.746 A:middle
+Next, instantiate
+a sample using one
+
+00:16:58.746 --> 00:17:01.746 A:middle
+of the HK sample subclass
+initializer methods
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:58.746 --> 00:17:01.746 A:middle
+of the HK sample subclass
+initializer methods
+
+00:17:01.746 --> 00:17:02.736 A:middle
+that takes a device.
+
+00:17:03.656 --> 00:17:06.776 A:middle
+Then finally, you can save
+that object to HealthKit just
+
+00:17:06.776 --> 00:17:07.896 A:middle
+as you would have previously.
+
+00:17:10.476 --> 00:17:12.665 A:middle
+Querying for objects that come
+
+00:17:12.665 --> 00:17:15.465 A:middle
+from a particular source
+revision or device is easy too.
+
+00:17:15.465 --> 00:17:19.656 A:middle
+You can use one of the new
+predicate convenience methods
+
+00:17:19.656 --> 00:17:24.106 A:middle
+exposed on HK Query in iOS 9.
+
+00:17:24.965 --> 00:17:29.106 A:middle
+Here is an example of querying
+for objects that were saved
+
+00:17:29.106 --> 00:17:30.966 A:middle
+by a previous version
+of our application.
+
+00:17:31.416 --> 00:17:36.586 A:middle
+First, we are creating a source
+revision with a default source
+
+00:17:36.876 --> 00:17:38.426 A:middle
+and a 1.0 version string.
+
+00:17:38.906 --> 00:17:43.796 A:middle
+Next, we are instantiating
+a predicate
+
+00:17:44.556 --> 00:17:47.436 A:middle
+that matches all samples that
+have that source revision.
+
+00:17:48.796 --> 00:17:51.996 A:middle
+Then finally, we will
+execute an HK sample query,
+
+00:17:51.996 --> 00:17:56.066 A:middle
+and it will return to us all of
+the objects that were created
+
+00:17:56.066 --> 00:18:05.936 A:middle
+by version 1 of our application.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:56.066 --> 00:18:05.936 A:middle
+by version 1 of our application.
+
+00:18:06.266 --> 00:18:08.476 A:middle
+So now that we have talked
+about new ways to save objects
+
+00:18:08.476 --> 00:18:10.106 A:middle
+to HealthKit, let's
+talk a little bit
+
+00:18:10.106 --> 00:18:11.326 A:middle
+about deleting objects.
+
+00:18:11.996 --> 00:18:17.276 A:middle
+In iOS 8, there was one way to
+delete objects, and that was
+
+00:18:17.276 --> 00:18:20.056 A:middle
+with the Delete Object
+method on HK Health Store.
+
+00:18:20.596 --> 00:18:23.776 A:middle
+It takes a single object
+to delete, which is simple,
+
+00:18:23.776 --> 00:18:26.866 A:middle
+but also a little inconvenient
+if you need to delete more
+
+00:18:26.866 --> 00:18:27.946 A:middle
+than one sample at once.
+
+00:18:27.946 --> 00:18:30.936 A:middle
+So we are introducing
+two new convenient ways
+
+00:18:30.936 --> 00:18:31.916 A:middle
+to delete objects.
+
+00:18:32.496 --> 00:18:35.756 A:middle
+The first is a method
+on HK Health Store
+
+00:18:35.756 --> 00:18:37.596 A:middle
+that takes an array
+of objects to delete.
+
+00:18:38.186 --> 00:18:40.316 A:middle
+You can use this whenever
+you have previously queried
+
+00:18:40.346 --> 00:18:43.336 A:middle
+for a set of samples and you
+want to delete them all at once.
+
+00:18:44.046 --> 00:18:47.626 A:middle
+For example, you might want to
+migrate samples that were saved
+
+00:18:47.766 --> 00:18:49.096 A:middle
+by a previous version
+of your app
+
+00:18:49.276 --> 00:18:51.676 A:middle
+to use HK Device
+instead of metadata.
+
+00:18:52.966 --> 00:18:56.236 A:middle
+Once you have saved new copies
+of your previous objects,
+
+00:18:56.356 --> 00:18:59.246 A:middle
+you could delete all of the
+old ones using Delete Objects.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:00.856 --> 00:19:04.636 A:middle
+The second new method that we
+are exposing is Delete Objects
+
+00:19:04.636 --> 00:19:05.876 A:middle
+Of Type with a predicate.
+
+00:19:06.166 --> 00:19:07.726 A:middle
+So it will delete
+all of the objects
+
+00:19:07.726 --> 00:19:08.826 A:middle
+that match a given predicate.
+
+00:19:09.596 --> 00:19:11.826 A:middle
+This is efficient because
+you don't have to query
+
+00:19:11.826 --> 00:19:13.946 A:middle
+for the objects before
+you delete them.
+
+00:19:18.556 --> 00:19:23.616 A:middle
+So it's not always the case that
+you just want to delete objects.
+
+00:19:23.656 --> 00:19:25.626 A:middle
+Sometimes you also
+want to find out about
+
+00:19:25.856 --> 00:19:27.066 A:middle
+when objects were deleted.
+
+00:19:27.066 --> 00:19:30.246 A:middle
+Maybe the user has deleted
+it or another application.
+
+00:19:30.856 --> 00:19:33.556 A:middle
+If your app synchronizes
+with HealthKit,
+
+00:19:33.846 --> 00:19:35.656 A:middle
+ideally you would
+remove an object
+
+00:19:35.656 --> 00:19:38.086 A:middle
+from your database whenever
+that object is removed
+
+00:19:38.086 --> 00:19:39.256 A:middle
+from HealthKit's database.
+
+00:19:39.726 --> 00:19:42.136 A:middle
+Within iOS 8, there was
+no straightforward way
+
+00:19:42.136 --> 00:19:43.046 A:middle
+to accomplish this.
+
+00:19:43.576 --> 00:19:46.576 A:middle
+We are introducing a new way
+to query for deleted objects
+
+00:19:46.576 --> 00:19:50.506 A:middle
+in iOS 9 using the HK
+Anchored Object Query class.
+
+00:19:52.436 --> 00:19:55.516 A:middle
+HK Anchored Object Query
+has a new initializer
+
+00:19:55.516 --> 00:19:58.626 A:middle
+with a results handler
+block that has parameters
+
+00:19:58.626 --> 00:20:01.006 A:middle
+for both new sample
+and deleted samples.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:58.626 --> 00:20:01.006 A:middle
+for both new sample
+and deleted samples.
+
+00:20:02.246 --> 00:20:05.016 A:middle
+Now, when you execute this
+query, HealthKit will return
+
+00:20:05.016 --> 00:20:08.396 A:middle
+to you all the samples that have
+either been created or deleted
+
+00:20:08.566 --> 00:20:09.706 A:middle
+that match your predicate
+
+00:20:10.026 --> 00:20:12.126 A:middle
+since the last time you ran
+an anchored object query,
+
+00:20:12.596 --> 00:20:18.616 A:middle
+which is indicated by
+the anchor you provide.
+
+00:20:18.736 --> 00:20:21.246 A:middle
+Deleted objects are
+represented by instances
+
+00:20:21.246 --> 00:20:25.086 A:middle
+of the HK Deleted Object class,
+which just carries the UID
+
+00:20:25.186 --> 00:20:26.446 A:middle
+of the object that was deleted.
+
+00:20:27.326 --> 00:20:30.916 A:middle
+To save space, deleted objects
+are only stored in HealthKit
+
+00:20:30.916 --> 00:20:32.866 A:middle
+for a limited amount
+of time before they are
+
+00:20:32.866 --> 00:20:33.996 A:middle
+expunged permanently.
+
+00:20:34.476 --> 00:20:39.926 A:middle
+That means if you have
+functionality that depends
+
+00:20:39.986 --> 00:20:42.886 A:middle
+on querying for deleted
+objects, you should register
+
+00:20:42.886 --> 00:20:44.836 A:middle
+for background updates
+to guarantee
+
+00:20:44.836 --> 00:20:47.566 A:middle
+that your app will be launched
+in response to deletions.
+
+00:20:48.336 --> 00:20:50.876 A:middle
+You can use the existing
+Enable Background Delivery
+
+00:20:50.876 --> 00:20:55.396 A:middle
+For Type method that exists in
+iOS 8 to be launched in response
+
+00:20:55.396 --> 00:20:59.226 A:middle
+to deletions and sample
+creations in iOS 9.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:01.316 --> 00:21:03.166 A:middle
+Now, we are going
+to return briefly
+
+00:21:03.166 --> 00:21:05.026 A:middle
+to HK Anchored Object
+Query to talk
+
+00:21:05.026 --> 00:21:09.546 A:middle
+about a second new addition we
+have made to the class in iOS 9.
+
+00:21:09.866 --> 00:21:11.506 A:middle
+That's the Update
+Handler property.
+
+00:21:13.116 --> 00:21:15.356 A:middle
+When provided, this
+block will be called
+
+00:21:15.356 --> 00:21:18.466 A:middle
+after your results handler
+whenever there are more samples
+
+00:21:18.466 --> 00:21:20.046 A:middle
+that have been created
+or deleted
+
+00:21:20.046 --> 00:21:20.986 A:middle
+that match your predicate.
+
+00:21:21.496 --> 00:21:25.246 A:middle
+An HK anchored object query
+
+00:21:25.516 --> 00:21:28.616 A:middle
+that has an update handler will
+continue to run indefinitely
+
+00:21:28.696 --> 00:21:31.596 A:middle
+until you stop it
+explicitly with Stop Query
+
+00:21:31.716 --> 00:21:32.656 A:middle
+on an HK Health Store.
+
+00:21:33.996 --> 00:21:35.626 A:middle
+As you will see later
+in this presentation,
+
+00:21:35.966 --> 00:21:39.166 A:middle
+this can be an efficient
+way to process a stream
+
+00:21:39.166 --> 00:21:40.086 A:middle
+of data from HealthKit.
+
+00:21:41.066 --> 00:21:42.866 A:middle
+For instance, you might want
+
+00:21:42.866 --> 00:21:45.186 A:middle
+to display the user's
+latest heart rate reading
+
+00:21:45.186 --> 00:21:45.766 A:middle
+from HealthKit.
+
+00:21:45.766 --> 00:21:48.546 A:middle
+You can use an update
+handler to accomplish this.
+
+00:21:49.266 --> 00:21:52.106 A:middle
+As you may be aware, Apple
+recently released a new piece
+
+00:21:52.106 --> 00:21:54.236 A:middle
+of hardware, which can detect
+the wearer's heart rate.
+
+00:21:54.796 --> 00:21:57.196 A:middle
+Wouldn't it be cool if you
+could run this query directly
+
+00:21:57.196 --> 00:21:58.006 A:middle
+on that device?
+
+00:21:58.686 --> 00:22:00.006 A:middle
+Well, it turns out you can.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:58.686 --> 00:22:00.006 A:middle
+Well, it turns out you can.
+
+00:22:01.786 --> 00:22:05.056 A:middle
+So in addition to making
+improvements for HealthKit
+
+00:22:05.056 --> 00:22:08.606 A:middle
+on iOS 9 this year, we are
+also bringing the framework
+
+00:22:08.606 --> 00:22:10.156 A:middle
+to WatchKit apps.
+
+00:22:12.016 --> 00:22:17.276 A:middle
+[ Applause ]
+
+00:22:17.776 --> 00:22:21.286 A:middle
+So HealthKit on watchOS is
+a lot like HealthKit on iOS.
+
+00:22:21.736 --> 00:22:24.186 A:middle
+Almost all of the HealthKit
+APIs that you're familiar
+
+00:22:24.186 --> 00:22:26.456 A:middle
+with are available
+on watchOS also.
+
+00:22:27.526 --> 00:22:30.656 A:middle
+You can store and retrieve
+health data with all
+
+00:22:30.656 --> 00:22:33.236 A:middle
+of the same queries and
+methods that you are used to.
+
+00:22:34.256 --> 00:22:37.016 A:middle
+However, because performance
+is incredibly important
+
+00:22:37.016 --> 00:22:39.676 A:middle
+on our new platform,
+only a limited amount
+
+00:22:39.676 --> 00:22:42.926 A:middle
+of historical HealthKit data
+is available on the Watch.
+
+00:22:43.566 --> 00:22:46.426 A:middle
+We are also introducing
+brand-new workout APIs
+
+00:22:46.426 --> 00:22:49.646 A:middle
+that will help you record
+workouts on the Watch.
+
+00:22:50.196 --> 00:22:54.346 A:middle
+Finally, data saved to HealthKit
+
+00:22:54.346 --> 00:22:56.126 A:middle
+on the Watch will
+sync automatically
+
+00:22:56.256 --> 00:22:58.746 A:middle
+to the phone that the user has.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:00.436 --> 00:23:04.276 A:middle
+When your app saves a workout on
+Apple Watch, the energy burned
+
+00:23:04.276 --> 00:23:06.616 A:middle
+by the user gets counted
+in their activity rings.
+
+00:23:07.356 --> 00:23:09.866 A:middle
+Your users will love getting
+credit for the exercise
+
+00:23:09.866 --> 00:23:14.186 A:middle
+that they do while wearing
+the Watch and using your app.
+
+00:23:14.186 --> 00:23:15.746 A:middle
+As you can see in
+these screenshots,
+
+00:23:16.346 --> 00:23:20.096 A:middle
+workouts that you save will
+show up in the Daily Summary
+
+00:23:20.096 --> 00:23:23.326 A:middle
+and the Activity app on iOS.
+
+00:23:25.566 --> 00:23:28.626 A:middle
+Now, before I discuss workouts
+more, I would like to turn
+
+00:23:28.626 --> 00:23:29.756 A:middle
+to privacy for a second.
+
+00:23:30.606 --> 00:23:34.096 A:middle
+We take the privacy of user's
+HealthKit data seriously,
+
+00:23:34.416 --> 00:23:37.886 A:middle
+so naturally we protect it on
+the Watch just as we do on iOS.
+
+00:23:37.886 --> 00:23:40.746 A:middle
+We will need to request access
+
+00:23:41.076 --> 00:23:44.116 A:middle
+to use the user's
+HealthKit data.
+
+00:23:45.536 --> 00:23:47.556 A:middle
+When your app requests
+authorization,
+
+00:23:47.796 --> 00:23:50.716 A:middle
+a prompt will appear on both
+the Watch and the user's phone
+
+00:23:50.986 --> 00:23:52.806 A:middle
+to authorize your
+app for access.
+
+00:23:53.426 --> 00:23:58.276 A:middle
+So if your phone application
+is authorized to store
+
+00:23:58.276 --> 00:24:00.596 A:middle
+and retrieve distance
+samples, let's say,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:58.276 --> 00:24:00.596 A:middle
+and retrieve distance
+samples, let's say,
+
+00:24:00.756 --> 00:24:04.536 A:middle
+then your Watch app also
+will be authorized to store
+
+00:24:04.536 --> 00:24:05.826 A:middle
+and retrieve distance samples.
+
+00:24:07.546 --> 00:24:09.696 A:middle
+So once you have a WatchKit
+app that's authorized
+
+00:24:09.696 --> 00:24:12.116 A:middle
+to use HealthKit data,
+one thing you might want
+
+00:24:12.116 --> 00:24:13.426 A:middle
+to do is record a workout.
+
+00:24:13.976 --> 00:24:18.876 A:middle
+We are introducing the brand-new
+HK Workout Session class
+
+00:24:18.876 --> 00:24:19.886 A:middle
+to facilitate this.
+
+00:24:20.656 --> 00:24:23.376 A:middle
+With HK Workout Session,
+you can specify a type
+
+00:24:23.376 --> 00:24:24.946 A:middle
+of activity the user
+is performing,
+
+00:24:25.436 --> 00:24:29.276 A:middle
+and this information helps Apple
+Watch more accurately record the
+
+00:24:29.276 --> 00:24:30.176 A:middle
+user's activity.
+
+00:24:31.386 --> 00:24:33.936 A:middle
+While in session, your app
+stays in the foreground,
+
+00:24:33.936 --> 00:24:35.796 A:middle
+so whenever the user
+raises their wrist
+
+00:24:35.796 --> 00:24:37.196 A:middle
+to check the progress
+of the workout,
+
+00:24:37.566 --> 00:24:38.866 A:middle
+your app will be
+front and center.
+
+00:24:40.346 --> 00:24:42.576 A:middle
+Note that only one workout
+session will be running
+
+00:24:42.576 --> 00:24:43.476 A:middle
+at any given time.
+
+00:24:43.676 --> 00:24:47.196 A:middle
+So if the user starts another
+workout in another application,
+
+00:24:47.496 --> 00:24:49.546 A:middle
+then your workout
+session will end.
+
+00:24:51.856 --> 00:24:53.746 A:middle
+Let's look at HK
+Workout Session.
+
+00:24:55.616 --> 00:24:57.106 A:middle
+You instantiate a
+workout session
+
+00:24:57.296 --> 00:24:59.186 A:middle
+with an activity type
+and a location type.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:00.326 --> 00:25:03.186 A:middle
+The location type indicates
+whether the activity is taking
+
+00:25:03.186 --> 00:25:04.976 A:middle
+place indoors or outdoors.
+
+00:25:05.596 --> 00:25:08.456 A:middle
+You can also set a delegate.
+
+00:25:09.186 --> 00:25:12.786 A:middle
+This allows you to be
+informed of changes
+
+00:25:12.786 --> 00:25:13.776 A:middle
+to the state of the workout.
+
+00:25:14.326 --> 00:25:21.266 A:middle
+So the HK Workout Session
+delegate protocol has
+
+00:25:21.306 --> 00:25:22.066 A:middle
+two methods.
+
+00:25:23.946 --> 00:25:26.026 A:middle
+The first of these is
+called whenever the state
+
+00:25:26.026 --> 00:25:27.296 A:middle
+of the workout changes.
+
+00:25:27.296 --> 00:25:31.026 A:middle
+For instance, from Not Started
+to Running or Running to Ended.
+
+00:25:31.646 --> 00:25:34.566 A:middle
+It's a good opportunity to
+note the start and end date
+
+00:25:34.566 --> 00:25:36.386 A:middle
+of the workout and also start
+
+00:25:36.386 --> 00:25:39.146 A:middle
+or stop any data queries
+that you might have.
+
+00:25:41.496 --> 00:25:44.296 A:middle
+The second method is called
+whenever there is an error.
+
+00:25:44.296 --> 00:25:47.496 A:middle
+It will be called in
+addition to the first method,
+
+00:25:48.416 --> 00:25:51.326 A:middle
+and it indicates that your
+workout session ended.
+
+00:25:53.716 --> 00:25:56.316 A:middle
+Starting and stopping workout
+sessions is really easy.
+
+00:25:56.596 --> 00:25:59.266 A:middle
+You just call Start Workout
+Session or Stop Workout Session
+
+00:25:59.566 --> 00:26:00.476 A:middle
+on an HK Health Store.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:59.566 --> 00:26:00.476 A:middle
+on an HK Health Store.
+
+00:26:01.286 --> 00:26:04.176 A:middle
+So now I'd like to give you
+a quick demonstration of how
+
+00:26:04.176 --> 00:26:07.206 A:middle
+to build a WatchKit app
+using these new APIs.
+
+00:26:14.776 --> 00:26:17.896 A:middle
+So I have built a simple
+WatchKit application,
+
+00:26:18.206 --> 00:26:20.346 A:middle
+and I would like to give
+you a tour of that app now.
+
+00:26:21.536 --> 00:26:25.856 A:middle
+It allows the user to
+specify an activity
+
+00:26:25.856 --> 00:26:28.086 A:middle
+that they are performing,
+like running.
+
+00:26:28.266 --> 00:26:29.386 A:middle
+I will choose running.
+
+00:26:30.656 --> 00:26:32.426 A:middle
+Once they have chosen
+an activity type,
+
+00:26:32.506 --> 00:26:35.306 A:middle
+they will next choose
+a location type.
+
+00:26:36.966 --> 00:26:39.206 A:middle
+Outdoors or indoors.
+
+00:26:40.276 --> 00:26:44.266 A:middle
+I will choose outdoors, and
+this is the in-session view,
+
+00:26:44.366 --> 00:26:46.556 A:middle
+and it will show a couple of
+metrics about the workout.
+
+00:26:48.106 --> 00:26:50.036 A:middle
+So nothing is happening
+in this session view
+
+00:26:50.036 --> 00:26:51.646 A:middle
+because we haven't hooked
+it up to HealthKit yet.
+
+00:26:52.126 --> 00:26:52.686 A:middle
+Let's do that now.
+
+00:26:54.816 --> 00:26:58.626 A:middle
+Here in Xcode, we are looking
+
+00:26:58.626 --> 00:27:01.166 A:middle
+at my activity interface
+controller.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:58.626 --> 00:27:01.166 A:middle
+at my activity interface
+controller.
+
+00:27:02.116 --> 00:27:05.296 A:middle
+This is the first view we
+just saw where the user chose
+
+00:27:05.296 --> 00:27:06.606 A:middle
+when activity they
+were performing.
+
+00:27:07.046 --> 00:27:11.136 A:middle
+This is a good opportunity for
+me to request authorization
+
+00:27:11.136 --> 00:27:12.256 A:middle
+to access HealthKit data.
+
+00:27:12.356 --> 00:27:16.186 A:middle
+So I'm going to do that
+right here in the awake --
+
+00:27:16.186 --> 00:27:18.476 A:middle
+I'm sorry, Will Activate method.
+
+00:27:18.476 --> 00:27:24.616 A:middle
+The first thing I have
+done is instantiate a set
+
+00:27:24.616 --> 00:27:27.566 A:middle
+of types I want to share which
+just includes the workout type,
+
+00:27:28.386 --> 00:27:33.076 A:middle
+and then next, I have a set of
+types that I would like to read
+
+00:27:33.076 --> 00:27:36.756 A:middle
+from HealthKit, like active
+energy burned, distance cycling,
+
+00:27:37.116 --> 00:27:39.846 A:middle
+distance walking and running,
+and the heart rate of the user.
+
+00:27:41.186 --> 00:27:43.176 A:middle
+Finally, we just call
+and request authorization
+
+00:27:43.176 --> 00:27:46.156 A:middle
+to share types just
+like you would on iOS.
+
+00:27:47.256 --> 00:27:49.346 A:middle
+Now, we also need to
+implement something
+
+00:27:49.346 --> 00:27:53.126 A:middle
+in our companion application
+to finish this request.
+
+00:27:54.486 --> 00:27:57.226 A:middle
+So I'm in the app delegate
+of my companion app
+
+00:27:57.786 --> 00:28:03.886 A:middle
+and I will implement a new UI
+application delegate method.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:57.786 --> 00:28:03.886 A:middle
+and I will implement a new UI
+application delegate method.
+
+00:28:04.526 --> 00:28:07.046 A:middle
+Application should request
+health authorization.
+
+00:28:08.626 --> 00:28:11.646 A:middle
+Here all I'm doing is
+calling handle authorization
+
+00:28:11.646 --> 00:28:13.106 A:middle
+for extension with completion,
+
+00:28:13.516 --> 00:28:15.946 A:middle
+which will prompt the
+user to authorize my app.
+
+00:28:17.416 --> 00:28:19.316 A:middle
+Let's see this in action now.
+
+00:28:27.796 --> 00:28:31.066 A:middle
+So as you can see, the user has
+been prompted on both the Watch
+
+00:28:31.186 --> 00:28:36.066 A:middle
+and the phone to open your
+app and authorize the app.
+
+00:28:37.416 --> 00:28:40.216 A:middle
+Here is the familiar
+health authorization sheet.
+
+00:28:40.796 --> 00:28:43.346 A:middle
+I will approve the app to
+access everything it wants to,
+
+00:28:43.346 --> 00:28:45.236 A:middle
+and hit Allow.
+
+00:28:45.656 --> 00:28:48.546 A:middle
+Now, we are authorized
+to use HealthKit data.
+
+00:28:49.166 --> 00:28:54.856 A:middle
+So the next thing we need to
+do is start a workout session
+
+00:28:54.886 --> 00:28:56.046 A:middle
+when the user taps Start.
+
+00:28:56.996 --> 00:28:59.406 A:middle
+I have a Workout Session
+Manager class here,
+
+00:28:59.406 --> 00:29:01.596 A:middle
+and that's what is responsible
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:59.406 --> 00:29:01.596 A:middle
+and that's what is responsible
+
+00:29:01.596 --> 00:29:03.746 A:middle
+for managing my interaction
+with HealthKit.
+
+00:29:04.476 --> 00:29:08.876 A:middle
+It's a bit of a big
+class, but we are going
+
+00:29:08.876 --> 00:29:11.126 A:middle
+to implement just
+a few parts of it.
+
+00:29:11.856 --> 00:29:14.386 A:middle
+The Start Workout method
+is called right here
+
+00:29:14.496 --> 00:29:15.756 A:middle
+when we hit the Start button.
+
+00:29:16.736 --> 00:29:18.546 A:middle
+So I will want to
+start a workout session
+
+00:29:18.546 --> 00:29:21.226 A:middle
+which I have instantiated
+previously in my constructor.
+
+00:29:25.856 --> 00:29:29.386 A:middle
+All we are doing is calling
+Start Workout Session
+
+00:29:29.546 --> 00:29:32.056 A:middle
+on an HK Health Store
+with that workout session.
+
+00:29:33.746 --> 00:29:36.056 A:middle
+Now, we need to implement
+the workout session delegate
+
+00:29:36.056 --> 00:29:38.866 A:middle
+protocol so that we can
+be informed of changes
+
+00:29:38.866 --> 00:29:41.986 A:middle
+to the state of the workout.
+
+00:29:42.736 --> 00:29:44.356 A:middle
+So as this is called
+on a background cue,
+
+00:29:44.386 --> 00:29:47.196 A:middle
+I'm dispatching back to the
+main queue before handling the
+
+00:29:47.196 --> 00:29:47.856 A:middle
+state change.
+
+00:29:49.096 --> 00:29:52.156 A:middle
+If the state of the
+session changed to Running,
+
+00:29:52.316 --> 00:29:55.746 A:middle
+I will call my Workout Did
+Start method, and if it changes
+
+00:29:55.746 --> 00:29:58.566 A:middle
+to Ended, I will
+call Workout Did End.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:00.316 --> 00:30:05.286 A:middle
+So let's go down to
+Workout Did Start.
+
+00:30:05.476 --> 00:30:08.216 A:middle
+One of the things we will need
+to do is start some queries
+
+00:30:08.696 --> 00:30:11.146 A:middle
+for HealthKit data to
+display in the workout.
+
+00:30:12.486 --> 00:30:14.016 A:middle
+One of those metrics
+is distance.
+
+00:30:14.156 --> 00:30:18.056 A:middle
+So I need a query for gathering
+distance data from HealthKit
+
+00:30:18.146 --> 00:30:20.926 A:middle
+and accumulating it as the
+workout session progresses.
+
+00:30:21.786 --> 00:30:25.166 A:middle
+I'm going to create a helper
+method that will create
+
+00:30:25.216 --> 00:30:28.186 A:middle
+that query right
+here, and we are going
+
+00:30:28.186 --> 00:30:34.786 A:middle
+to use HK Anchored Object
+Query with an update handler.
+
+00:30:36.566 --> 00:30:38.776 A:middle
+So I have written Create
+Streaming Distance Query,
+
+00:30:38.776 --> 00:30:40.866 A:middle
+and it takes a workout
+start date.
+
+00:30:41.856 --> 00:30:44.366 A:middle
+The first thing we do
+is create a predicate,
+
+00:30:44.836 --> 00:30:49.476 A:middle
+which matches all queries that,
+sorry, matches all samples
+
+00:30:49.476 --> 00:30:52.846 A:middle
+that have a start date after
+the workout start date.
+
+00:30:54.306 --> 00:30:58.346 A:middle
+Next, I have instantiated
+an HK anchored object query
+
+00:30:59.426 --> 00:31:00.466 A:middle
+with a results handler
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:59.426 --> 00:31:00.466 A:middle
+with a results handler
+
+00:31:00.566 --> 00:31:03.066 A:middle
+that calls my Add
+Distance Samples method.
+
+00:31:04.126 --> 00:31:06.516 A:middle
+Add Distance Samples is
+implemented right here.
+
+00:31:06.516 --> 00:31:09.336 A:middle
+It dispatches back
+to the main cue
+
+00:31:09.336 --> 00:31:12.566 A:middle
+and then it adds the
+new distance sample
+
+00:31:12.566 --> 00:31:16.456 A:middle
+to my running total of distance
+and it also adds that sample
+
+00:31:16.456 --> 00:31:18.766 A:middle
+to an array of samples
+that I'm accumulating
+
+00:31:18.766 --> 00:31:19.796 A:middle
+over the course of the workout.
+
+00:31:22.066 --> 00:31:25.066 A:middle
+So, again, in the results
+handler we call Add Distance
+
+00:31:25.066 --> 00:31:28.556 A:middle
+Samples, and then in
+our update handler,
+
+00:31:28.556 --> 00:31:29.776 A:middle
+we do exactly the same thing,
+
+00:31:30.276 --> 00:31:31.906 A:middle
+and finally we return
+that distance query.
+
+00:31:33.616 --> 00:31:35.436 A:middle
+So now that we have
+that available to us,
+
+00:31:35.486 --> 00:31:43.836 A:middle
+let's use it in Workout
+Did Start.
+
+00:31:44.006 --> 00:31:47.296 A:middle
+Workout Did Start notes the
+start date of the workout,
+
+00:31:47.296 --> 00:31:50.556 A:middle
+and then it creates queries
+for streaming distance,
+
+00:31:50.936 --> 00:31:53.306 A:middle
+active energy, and heart rate.
+
+00:31:53.846 --> 00:31:56.506 A:middle
+It executes all of the
+queries that we created,
+
+00:31:56.506 --> 00:31:59.606 A:middle
+and then it informs the UI
+that the workout started.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:00.946 --> 00:32:03.396 A:middle
+So let's take a look
+at how this works now.
+
+00:32:12.616 --> 00:32:14.146 A:middle
+So I will choose running again.
+
+00:32:15.336 --> 00:32:16.136 A:middle
+An outdoor run.
+
+00:32:17.616 --> 00:32:19.896 A:middle
+And as you can see, the
+timer is increasing,
+
+00:32:21.006 --> 00:32:24.956 A:middle
+and I'm also accumulating some
+simulated distance samples,
+
+00:32:25.176 --> 00:32:28.916 A:middle
+and some calorie samples
+will show up in a little bit.
+
+00:32:28.916 --> 00:32:31.186 A:middle
+So the user can see
+their distance, calories,
+
+00:32:31.186 --> 00:32:32.766 A:middle
+and heart rate right
+here in the app.
+
+00:32:34.096 --> 00:32:37.006 A:middle
+The last thing that we want
+to enable the user to do is
+
+00:32:37.006 --> 00:32:38.506 A:middle
+to stop and save the workout.
+
+00:32:38.506 --> 00:32:43.126 A:middle
+I have a Force Touch menu that
+just has a single Save button
+
+00:32:44.026 --> 00:32:46.356 A:middle
+that the user will tap
+when the workout stops.
+
+00:32:47.056 --> 00:32:48.736 A:middle
+We haven't implemented this yet,
+
+00:32:48.736 --> 00:32:50.666 A:middle
+so the workout is still
+continuing though.
+
+00:32:51.006 --> 00:32:53.226 A:middle
+So now let's implement that.
+
+00:32:54.676 --> 00:33:01.556 A:middle
+So I have a Stop Workout And
+Save method that's called
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:54.676 --> 00:33:01.556 A:middle
+So I have a Stop Workout And
+Save method that's called
+
+00:33:01.826 --> 00:33:06.426 A:middle
+by the UI whenever the user taps
+that Force Touch menu button.
+
+00:33:07.556 --> 00:33:13.596 A:middle
+I will stop the workout
+session here.
+
+00:33:14.256 --> 00:33:16.556 A:middle
+And I do that just by
+calling Stop Workout Session.
+
+00:33:18.266 --> 00:33:21.506 A:middle
+Now, we need to handle that
+state change to the ended state.
+
+00:33:21.506 --> 00:33:26.086 A:middle
+We are calling Workout Did
+End in response to that.
+
+00:33:28.496 --> 00:33:32.296 A:middle
+So here, as you might imagine,
+we need to stop our queries
+
+00:33:32.896 --> 00:33:34.096 A:middle
+and then save the workout.
+
+00:33:35.696 --> 00:33:40.886 A:middle
+So we will note the end
+date of the workout.
+
+00:33:41.126 --> 00:33:43.276 A:middle
+We will stop all of our queries.
+
+00:33:43.276 --> 00:33:46.546 A:middle
+We will inform the UI
+that the workout stopped,
+
+00:33:46.656 --> 00:33:52.276 A:middle
+and then we will
+save the workout.
+
+00:33:52.276 --> 00:33:56.016 A:middle
+Saving the workout to
+HealthKit is pretty simple, too.
+
+00:33:57.756 --> 00:34:02.596 A:middle
+The first thing I have done
+is unwrap the optional start
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:57.756 --> 00:34:02.596 A:middle
+The first thing I have done
+is unwrap the optional start
+
+00:34:02.596 --> 00:34:05.086 A:middle
+and end dates that I noted
+
+00:34:05.086 --> 00:34:07.196 A:middle
+in Workout Did Start
+and Workout Did End.
+
+00:34:07.826 --> 00:34:09.916 A:middle
+I am using Swift's
+new guard statement
+
+00:34:09.916 --> 00:34:11.936 A:middle
+to return early if
+those are nil.
+
+00:34:13.936 --> 00:34:17.186 A:middle
+Next, we instantiate a
+workout with the activity type
+
+00:34:17.226 --> 00:34:19.286 A:middle
+that the user performs,
+the start and end date,
+
+00:34:19.286 --> 00:34:24.706 A:middle
+and the total active
+energy burned and distance.
+
+00:34:26.176 --> 00:34:28.596 A:middle
+I'm also creating an array
+with all of the samples
+
+00:34:28.596 --> 00:34:30.626 A:middle
+that I accumulated over
+the course of the workout,
+
+00:34:30.956 --> 00:34:32.966 A:middle
+because we want to associate
+these samples with it
+
+00:34:32.966 --> 00:34:36.936 A:middle
+after we save the workout.
+
+00:34:37.076 --> 00:34:38.795 A:middle
+Next, I will save the
+workout to HealthKit,
+
+00:34:40.136 --> 00:34:43.666 A:middle
+and once that's complete, I will
+add samples to that workout.
+
+00:34:44.396 --> 00:34:55.356 A:middle
+So let's take a look
+at that now.
+
+00:34:55.626 --> 00:34:58.486 A:middle
+So I'm choosing running
+again, outdoor run,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:35:00.266 --> 00:35:01.376 A:middle
+my workout is progressing.
+
+00:35:02.826 --> 00:35:07.066 A:middle
+Once we have got a few metrics
+here, I'm going to save it.
+
+00:35:08.386 --> 00:35:09.646 A:middle
+And I will save it.
+
+00:35:09.646 --> 00:35:11.506 A:middle
+And the workout is finished.
+
+00:35:12.706 --> 00:35:15.646 A:middle
+So now that we have saved
+that workout to HealthKit,
+
+00:35:15.646 --> 00:35:18.646 A:middle
+let's see if we can get it to
+show up in our companion app.
+
+00:35:20.336 --> 00:35:22.456 A:middle
+There is our three-calorie
+workout right there.
+
+00:35:22.836 --> 00:35:24.836 A:middle
+It was a lot of work.
+
+00:35:25.676 --> 00:35:31.846 A:middle
+[ Applause ]
+
+00:35:32.346 --> 00:35:36.626 A:middle
+Okay. Let's recap what we
+did in the demo just now.
+
+00:35:37.466 --> 00:35:39.536 A:middle
+First, we requested
+authorization
+
+00:35:39.536 --> 00:35:41.676 A:middle
+to access the user's
+HealthKit data.
+
+00:35:43.276 --> 00:35:46.806 A:middle
+Next, we used HK Workout
+Session to record the workout
+
+00:35:47.296 --> 00:35:48.326 A:middle
+and we streamed samples
+
+00:35:48.326 --> 00:35:50.606 A:middle
+from HealthKit using HK
+Anchored Object Query.
+
+00:35:51.466 --> 00:35:54.216 A:middle
+Finally we saved the
+HK workout to HealthKit
+
+00:35:54.306 --> 00:35:56.406 A:middle
+and associated samples with it.
+
+00:35:58.856 --> 00:36:01.826 A:middle
+So that's what's new
+in HealthKit in iOS 9.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:35:58.856 --> 00:36:01.826 A:middle
+So that's what's new
+in HealthKit in iOS 9.
+
+00:36:02.646 --> 00:36:05.156 A:middle
+We started today by covering
+the unit preference API,
+
+00:36:05.806 --> 00:36:07.646 A:middle
+which allows you to
+display HealthKit data
+
+00:36:07.646 --> 00:36:11.246 A:middle
+in your app using the units
+that the user prefers.
+
+00:36:12.526 --> 00:36:15.616 A:middle
+Next, we covered new data types
+that you can store in HealthKit
+
+00:36:15.616 --> 00:36:18.036 A:middle
+such as Water Intake,
+UV Exposure,
+
+00:36:18.066 --> 00:36:20.646 A:middle
+and information related
+to reproductive health.
+
+00:36:21.516 --> 00:36:24.896 A:middle
+Next, we talked about source
+revisions and devices,
+
+00:36:25.016 --> 00:36:27.486 A:middle
+which give you a richer
+picture of where the data
+
+00:36:27.486 --> 00:36:28.596 A:middle
+in HealthKit comes from.
+
+00:36:30.136 --> 00:36:33.006 A:middle
+We also covered new
+ways to delete samples
+
+00:36:33.006 --> 00:36:34.666 A:middle
+and query for deleted samples.
+
+00:36:35.256 --> 00:36:38.056 A:middle
+And finally, we discussed
+the HK Workout Session API
+
+00:36:38.056 --> 00:36:40.896 A:middle
+and showed you how to build
+a WatchKit app that uses it.
+
+00:36:43.576 --> 00:36:45.376 A:middle
+We think you will love
+the improvements we made
+
+00:36:45.376 --> 00:36:47.526 A:middle
+to HealthKit in iOS
+9 and we can't wait
+
+00:36:47.526 --> 00:36:50.566 A:middle
+to see what you build with it.
+
+00:36:50.646 --> 00:36:53.606 A:middle
+For more information, you
+can visit the developer
+
+00:36:53.606 --> 00:36:57.016 A:middle
+documentation at
+developer.apple.com/healthKit
+
+00:36:57.646 --> 00:36:59.086 A:middle
+or contact technical support.
+
+00:36:59.886 --> 00:37:02.606 A:middle
+You can make a general query
+to healthkit@apple.com.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:59.886 --> 00:37:02.606 A:middle
+You can make a general query
+to healthkit@apple.com.
+
+00:37:02.696 --> 00:37:05.046 A:middle
+So thanks, and enjoy the
+rest of the conference.
+
+00:37:05.676 --> 00:37:19.100 A:middle
+[ Applause ]
+
