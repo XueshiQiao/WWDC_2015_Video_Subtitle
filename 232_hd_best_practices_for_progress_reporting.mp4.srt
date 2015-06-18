@@ -1,0 +1,3090 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:26.516 --> 00:00:31.966 A:middle
+[Applause]
+
+00:00:32.466 --> 00:00:33.226 A:middle
+&gt;&gt; VINCE SPADER: Hello.
+
+00:00:33.366 --> 00:00:34.736 A:middle
+My name is Vince Spader.
+
+00:00:35.056 --> 00:00:36.876 A:middle
+I'm an engineer on
+the Cocoa frameworks.
+
+00:00:37.266 --> 00:00:39.436 A:middle
+And today I'm going
+to be talking to you
+
+00:00:39.436 --> 00:00:41.536 A:middle
+about Best Practices
+for Progress Reporting,
+
+00:00:42.326 --> 00:00:44.456 A:middle
+which in Cocoa means NSProgress.
+
+00:00:45.356 --> 00:00:48.656 A:middle
+So I'm going to give you an
+introduction in NSProgress,
+
+00:00:49.186 --> 00:00:52.236 A:middle
+then we'll talk about composing
+NSProgress objects together,
+
+00:00:52.956 --> 00:00:55.456 A:middle
+and then how to use
+NSProgress as an interface
+
+00:00:55.456 --> 00:00:57.636 A:middle
+for cancellation,
+pausing, and resuming.
+
+00:00:58.466 --> 00:01:00.756 A:middle
+Then we'll talk a little
+bit about hooking NSProgress
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:58.466 --> 00:01:00.756 A:middle
+Then we'll talk a little
+bit about hooking NSProgress
+
+00:01:00.756 --> 00:01:03.326 A:middle
+up to your user interface,
+and we'll wrap
+
+00:01:03.326 --> 00:01:05.146 A:middle
+up with some tips
+and best practices.
+
+00:01:05.146 --> 00:01:07.686 A:middle
+So let's get started.
+
+00:01:09.616 --> 00:01:12.106 A:middle
+NSProgress is an
+object in Foundation
+
+00:01:12.206 --> 00:01:14.336 A:middle
+that represents the
+completion of some work.
+
+00:01:14.826 --> 00:01:18.416 A:middle
+That work could be downloading
+a file, installing an app,
+
+00:01:19.316 --> 00:01:21.546 A:middle
+or something your own
+application is doing.
+
+00:01:22.516 --> 00:01:26.406 A:middle
+The NSProgress object exists to
+let you easily report progress
+
+00:01:26.406 --> 00:01:29.246 A:middle
+in your application
+across various components,
+
+00:01:29.296 --> 00:01:31.486 A:middle
+both yours and the system's.
+
+00:01:31.996 --> 00:01:36.246 A:middle
+In fact, several Cocoa APIs are
+reporting their progress via
+
+00:01:36.246 --> 00:01:39.156 A:middle
+NSProgress, like
+NSBundle Resource Request,
+
+00:01:39.516 --> 00:01:41.066 A:middle
+UIDocument, and NSData.
+
+00:01:41.066 --> 00:01:44.256 A:middle
+So you can use NSProgress
+to get information
+
+00:01:44.256 --> 00:01:46.976 A:middle
+about what those APIs are
+doing in your application.
+
+00:01:47.536 --> 00:01:50.726 A:middle
+And NSProgress is localized.
+
+00:01:50.936 --> 00:01:53.166 A:middle
+You can use it to show
+information to the user
+
+00:01:53.166 --> 00:01:54.196 A:middle
+about what's happening.
+
+00:01:54.496 --> 00:01:56.936 A:middle
+And we have ways to
+influence what it says,
+
+00:01:56.936 --> 00:01:57.876 A:middle
+which we'll get to soon.
+
+00:01:59.116 --> 00:02:03.056 A:middle
+But first, these are the core
+properties on NSProgress.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:59.116 --> 00:02:03.056 A:middle
+But first, these are the core
+properties on NSProgress.
+
+00:02:03.056 --> 00:02:06.026 A:middle
+We have the totalUnitCount,
+which is how much work there is
+
+00:02:06.026 --> 00:02:08.186 A:middle
+to do, and the
+completedUnitCount,
+
+00:02:08.536 --> 00:02:10.576 A:middle
+which is how much work
+has been completed.
+
+00:02:10.726 --> 00:02:12.756 A:middle
+And that gets updated
+as the work occurs.
+
+00:02:13.736 --> 00:02:18.436 A:middle
+And the fractionCompleted is a
+double that gets updated from 0
+
+00:02:18.436 --> 00:02:21.756 A:middle
+to 1, letting you know how
+far along the work is toward
+
+00:02:21.756 --> 00:02:22.366 A:middle
+being completed.
+
+00:02:22.926 --> 00:02:26.806 A:middle
+So, totalUnitCount and
+completedUnitCount,
+
+00:02:27.416 --> 00:02:30.436 A:middle
+the unit these properties are
+referring to is up to you.
+
+00:02:30.486 --> 00:02:32.366 A:middle
+It is whatever unit
+it makes sense
+
+00:02:32.366 --> 00:02:33.866 A:middle
+to track in terms of progress.
+
+00:02:34.376 --> 00:02:38.626 A:middle
+Perhaps bytes, number of files,
+photos, or even abstract units
+
+00:02:38.946 --> 00:02:41.106 A:middle
+like percentage points
+or fractions of work.
+
+00:02:41.646 --> 00:02:44.726 A:middle
+Each individual NSProgress
+object has its own idea
+
+00:02:44.726 --> 00:02:48.176 A:middle
+of what unit it is reporting in.
+
+00:02:48.396 --> 00:02:51.176 A:middle
+And if you don't know how
+much work there is total,
+
+00:02:51.176 --> 00:02:52.906 A:middle
+so you don't know
+your totalUnitCount,
+
+00:02:53.526 --> 00:02:55.166 A:middle
+you can make your
+progress indeterminant.
+
+00:02:55.206 --> 00:02:58.406 A:middle
+And you do that by either
+setting the completedUnitCount
+
+00:02:58.646 --> 00:03:00.986 A:middle
+or the totalUnitCount
+to a negative value.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:58.646 --> 00:03:00.986 A:middle
+or the totalUnitCount
+to a negative value.
+
+00:03:01.306 --> 00:03:04.896 A:middle
+Next, let's talk
+about localization.
+
+00:03:06.096 --> 00:03:09.016 A:middle
+NSProgress has two properties,
+localized Description
+
+00:03:09.016 --> 00:03:10.656 A:middle
+and localized Additional
+Description,
+
+00:03:10.936 --> 00:03:12.316 A:middle
+that you can display
+to the user.
+
+00:03:13.026 --> 00:03:16.436 A:middle
+You can set them yourself
+but NSProgress will also come
+
+00:03:16.436 --> 00:03:18.126 A:middle
+up with something
+for you by default.
+
+00:03:19.416 --> 00:03:22.626 A:middle
+So, here is an example of the
+default localized Description
+
+00:03:22.626 --> 00:03:24.146 A:middle
+and localized Additional
+Description.
+
+00:03:24.626 --> 00:03:27.706 A:middle
+We have an NSProgress with a
+totalUnitCount of 5 million
+
+00:03:27.706 --> 00:03:30.176 A:middle
+and some, and a
+completedUnitCount
+
+00:03:30.176 --> 00:03:32.266 A:middle
+of 419 thousand and change.
+
+00:03:32.266 --> 00:03:36.116 A:middle
+The default localized
+Description is 7 percent
+
+00:03:36.116 --> 00:03:39.276 A:middle
+completed, and the localized
+Additional Description formats
+
+00:03:39.276 --> 00:03:40.596 A:middle
+those numbers nicely.
+
+00:03:41.466 --> 00:03:43.396 A:middle
+So this is the default.
+
+00:03:43.686 --> 00:03:45.026 A:middle
+And if you want something
+different,
+
+00:03:45.366 --> 00:03:46.956 A:middle
+you could set the
+localized Description
+
+00:03:46.956 --> 00:03:48.896 A:middle
+and localized Additional
+Description yourself
+
+00:03:49.386 --> 00:03:51.716 A:middle
+but then you would need
+to actually localize it
+
+00:03:51.756 --> 00:03:53.486 A:middle
+in the languages
+your app supports.
+
+00:03:54.046 --> 00:03:57.196 A:middle
+And instead of doing that,
+we have a couple of knobs
+
+00:03:57.196 --> 00:03:59.316 A:middle
+that you can use to
+alter those defaults.
+
+00:03:59.706 --> 00:04:01.686 A:middle
+So the first is through
+the kind property.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:59.706 --> 00:04:01.686 A:middle
+So the first is through
+the kind property.
+
+00:04:02.186 --> 00:04:05.516 A:middle
+Currently the only option is
+for files, NSProgressKindFile.
+
+00:04:06.666 --> 00:04:08.506 A:middle
+Using this means
+your units are bytes,
+
+00:04:08.556 --> 00:04:10.866 A:middle
+so when NSProgress knows
+your units are bytes,
+
+00:04:11.216 --> 00:04:12.586 A:middle
+it can format them as such,
+
+00:04:12.586 --> 00:04:17.055 A:middle
+so you see now it can say 419
+kilobytes of 5.3 megabytes.
+
+00:04:17.776 --> 00:04:22.246 A:middle
+The other knob for changing the
+default localized Descriptions
+
+00:04:22.246 --> 00:04:24.716 A:middle
+is through certain keys in
+the user info dictionary.
+
+00:04:25.136 --> 00:04:29.276 A:middle
+So NSProgress has a user info
+dictionary, there is a method,
+
+00:04:29.276 --> 00:04:32.186 A:middle
+Set User Info Object For
+Key, that lets you set a key
+
+00:04:32.186 --> 00:04:33.776 A:middle
+and value in the userInfo.
+
+00:04:34.616 --> 00:04:37.236 A:middle
+And one key that's useful
+for virtually any kind
+
+00:04:37.236 --> 00:04:40.886 A:middle
+of NSProgress is NSProgress
+Estimated Time Remaining Key.
+
+00:04:41.236 --> 00:04:43.236 A:middle
+The value there is an NSNumber
+
+00:04:43.286 --> 00:04:44.746 A:middle
+of how many seconds
+are remaining
+
+00:04:44.746 --> 00:04:45.856 A:middle
+until the work is completed.
+
+00:04:46.546 --> 00:04:50.516 A:middle
+And you can see if we set
+that to, say, 97 seconds,
+
+00:04:50.586 --> 00:04:52.556 A:middle
+our localized Additional
+Description now includes
+
+00:04:52.556 --> 00:04:56.266 A:middle
+that information formatted as
+1 minute, 37 seconds remaining.
+
+00:04:57.676 --> 00:05:00.946 A:middle
+And there are additional
+userInfo keys that are only used
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:57.676 --> 00:05:00.946 A:middle
+And there are additional
+userInfo keys that are only used
+
+00:05:00.946 --> 00:05:02.306 A:middle
+if your kind is set to file.
+
+00:05:02.886 --> 00:05:06.626 A:middle
+First let's look at NSProgress
+File Operation Kind Key.
+
+00:05:06.986 --> 00:05:09.326 A:middle
+This tells NSProgress
+the type of operation
+
+00:05:09.326 --> 00:05:10.956 A:middle
+that is being performed
+on the file.
+
+00:05:11.396 --> 00:05:14.136 A:middle
+The values are either
+downloading, decompressing,
+
+00:05:14.426 --> 00:05:19.216 A:middle
+receiving, or copying, so if
+you set the File Operation Kind
+
+00:05:19.216 --> 00:05:22.006 A:middle
+to NSProgress File
+Operation Kind Downloading,
+
+00:05:22.376 --> 00:05:23.986 A:middle
+that updates the
+localized Description
+
+00:05:23.986 --> 00:05:25.636 A:middle
+to say it is downloading files.
+
+00:05:26.226 --> 00:05:30.706 A:middle
+Another key available when your
+Kind is File is the NSProgress
+
+00:05:30.706 --> 00:05:31.676 A:middle
+File URL Key.
+
+00:05:32.086 --> 00:05:34.896 A:middle
+And that is an NSURL of
+the file being worked on.
+
+00:05:35.336 --> 00:05:36.376 A:middle
+So when you set that,
+
+00:05:36.426 --> 00:05:38.766 A:middle
+the localized Description will
+include the name of the file,
+
+00:05:38.806 --> 00:05:42.106 A:middle
+in this example, photos.zip,
+which is from the given URL.
+
+00:05:43.836 --> 00:05:45.156 A:middle
+There are also options
+
+00:05:45.156 --> 00:05:47.676 A:middle
+for if you're operating
+on a set of files.
+
+00:05:47.856 --> 00:05:50.926 A:middle
+NSProgress File Total Count
+Key and Completed Count Key.
+
+00:05:51.386 --> 00:05:52.616 A:middle
+So, here's an example
+
+00:05:52.616 --> 00:05:54.986 A:middle
+where we're setting the
+File Completed Count to 7,
+
+00:05:54.986 --> 00:05:56.596 A:middle
+and the File Total Count to 9,
+
+00:05:57.066 --> 00:05:59.706 A:middle
+and the localized Description
+might use that information,
+
+00:05:59.706 --> 00:06:01.816 A:middle
+so now it says, downloading
+9 files.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:59.706 --> 00:06:01.816 A:middle
+so now it says, downloading
+9 files.
+
+00:06:02.916 --> 00:06:06.316 A:middle
+Note that the kind is still File
+and the units are still bytes,
+
+00:06:06.316 --> 00:06:09.236 A:middle
+it is just the total bytes
+of the files being worked on.
+
+00:06:10.526 --> 00:06:13.716 A:middle
+And finally, we have the
+NSProgress Throughput Key.
+
+00:06:14.136 --> 00:06:15.996 A:middle
+And that's the bytes-per-second
+
+00:06:16.066 --> 00:06:18.286 A:middle
+that the file operations
+are being performed at.
+
+00:06:18.466 --> 00:06:19.536 A:middle
+So, say, it is downloading
+
+00:06:19.536 --> 00:06:22.306 A:middle
+at a blazing fast
+50,000 bytes-per-second,
+
+00:06:22.716 --> 00:06:24.896 A:middle
+if we set the throughput
+on the userInfo,
+
+00:06:25.316 --> 00:06:27.316 A:middle
+the NSProgress can
+include that information
+
+00:06:27.316 --> 00:06:29.366 A:middle
+in the localized
+Description, so it says,
+
+00:06:29.366 --> 00:06:30.636 A:middle
+50 kilobytes-per-second.
+
+00:06:31.816 --> 00:06:34.036 A:middle
+So, all these options
+can really provide,
+
+00:06:34.226 --> 00:06:37.136 A:middle
+help you provide more
+information to the user
+
+00:06:37.166 --> 00:06:40.076 A:middle
+about what's happening.,
+without you having
+
+00:06:40.076 --> 00:06:41.156 A:middle
+to localize it yourself.
+
+00:06:42.516 --> 00:06:45.306 A:middle
+Now, before we go any
+further, we need to talk
+
+00:06:45.306 --> 00:06:46.326 A:middle
+about responsibilities.
+
+00:06:47.576 --> 00:06:49.336 A:middle
+There are two sides
+of NSProgress,
+
+00:06:49.336 --> 00:06:52.396 A:middle
+there is the creation side of
+it, and the client side of it.
+
+00:06:53.036 --> 00:06:54.176 A:middle
+First the creation side.
+
+00:06:55.026 --> 00:06:58.976 A:middle
+So, when you create an
+NSProgress, you are responsible
+
+00:06:58.976 --> 00:07:00.446 A:middle
+for setting its properties
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:58.976 --> 00:07:00.446 A:middle
+for setting its properties
+
+00:07:00.526 --> 00:07:02.226 A:middle
+and updating the
+completedUnitCount
+
+00:07:02.226 --> 00:07:03.246 A:middle
+as the work finishes.
+
+00:07:03.786 --> 00:07:06.316 A:middle
+So you're creating it, you're
+setting the totalUnitCount,
+
+00:07:06.546 --> 00:07:09.266 A:middle
+the Kind, setting
+keys in the userInfo,
+
+00:07:09.266 --> 00:07:11.346 A:middle
+and updating the
+completedUnitCount
+
+00:07:11.346 --> 00:07:12.336 A:middle
+as the work finishes.
+
+00:07:13.306 --> 00:07:16.376 A:middle
+On the other hand, if
+you receive an NSProgress
+
+00:07:16.376 --> 00:07:18.076 A:middle
+from someone else,
+you're the client.
+
+00:07:18.576 --> 00:07:20.406 A:middle
+You can get and observe
+the various properties,
+
+00:07:20.466 --> 00:07:22.556 A:middle
+the totalUnitCount and
+completedUnitCount,
+
+00:07:22.926 --> 00:07:25.496 A:middle
+the fractionCompleted, or
+those localizedDescriptions,
+
+00:07:26.066 --> 00:07:27.686 A:middle
+but do not go setting
+those properties
+
+00:07:27.716 --> 00:07:29.696 A:middle
+because that's just
+going to cause confusion
+
+00:07:29.696 --> 00:07:31.286 A:middle
+with the creator
+of the NSProgress.
+
+00:07:33.056 --> 00:07:36.496 A:middle
+So when you create an
+NSProgress, you need a way
+
+00:07:36.496 --> 00:07:39.086 A:middle
+to give it to clients, and when
+you're a client you need a way
+
+00:07:39.086 --> 00:07:39.466 A:middle
+to get it.
+
+00:07:40.016 --> 00:07:41.426 A:middle
+And one way of doing this is
+
+00:07:41.426 --> 00:07:44.566 A:middle
+through the NSProgress reporting
+protocol, which we added
+
+00:07:44.566 --> 00:07:47.226 A:middle
+in OS X 10.11 and iOS 9.
+
+00:07:47.696 --> 00:07:50.986 A:middle
+It is pretty simple, and it
+defines one property, progress.
+
+00:07:52.146 --> 00:07:54.056 A:middle
+In Cocoa UIDocument
+
+00:07:54.056 --> 00:07:56.476 A:middle
+and NSBundleResourceRequest,
+both implement this.
+
+00:07:56.936 --> 00:07:58.566 A:middle
+And it makes it really obvious
+
+00:07:59.226 --> 00:08:01.336 A:middle
+that a class supports
+progress reporting.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:59.226 --> 00:08:01.336 A:middle
+that a class supports
+progress reporting.
+
+00:08:01.886 --> 00:08:03.206 A:middle
+All right.
+
+00:08:03.366 --> 00:08:07.746 A:middle
+Now, let's do a demo and
+take a look at some code.
+
+00:08:08.366 --> 00:08:09.846 A:middle
+So, here we have an app.
+
+00:08:10.176 --> 00:08:11.206 A:middle
+It is pretty basic.
+
+00:08:11.906 --> 00:08:15.306 A:middle
+It has a photo, and you hit this
+import button and it downloads
+
+00:08:15.306 --> 00:08:18.636 A:middle
+that photo, and when
+the download finishes,
+
+00:08:19.936 --> 00:08:21.026 A:middle
+it shows it to the user.
+
+00:08:21.746 --> 00:08:24.066 A:middle
+Now, that's a pretty
+awful user experience,
+
+00:08:24.066 --> 00:08:26.396 A:middle
+the user has basically
+no idea what's happening.
+
+00:08:26.816 --> 00:08:28.846 A:middle
+And we can make it better
+by reporting progress
+
+00:08:28.846 --> 00:08:30.356 A:middle
+to the user for our download.
+
+00:08:30.656 --> 00:08:37.096 A:middle
+So, if we go to our project,
+we have our download class
+
+00:08:37.436 --> 00:08:43.775 A:middle
+that is used to download the
+photo, and it has an initializer
+
+00:08:43.775 --> 00:08:46.136 A:middle
+that takes a URL
+for it to download,
+
+00:08:46.636 --> 00:08:48.926 A:middle
+and it has a completion
+handler that gets called
+
+00:08:48.926 --> 00:08:51.816 A:middle
+with the downloaded data or
+an error if an error occurs.
+
+00:08:52.286 --> 00:08:57.136 A:middle
+Next there is a start
+method which gets --
+
+00:08:57.136 --> 00:09:00.646 A:middle
+which kicks the whole download
+off, and we have a handful
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:57.136 --> 00:09:00.646 A:middle
+which kicks the whole download
+off, and we have a handful
+
+00:09:00.646 --> 00:09:03.956 A:middle
+of private methods for various
+download-related functionality.
+
+00:09:05.436 --> 00:09:10.476 A:middle
+And we also have these
+convenience methods
+
+00:09:10.476 --> 00:09:12.866 A:middle
+that will get called as
+the download progresses.
+
+00:09:13.426 --> 00:09:18.616 A:middle
+So we have Will Begin
+Download, which gets called
+
+00:09:18.616 --> 00:09:19.716 A:middle
+when the download begins
+
+00:09:19.716 --> 00:09:21.716 A:middle
+and it gets the total
+length of the download.
+
+00:09:22.516 --> 00:09:25.646 A:middle
+Did Download Data, which
+gets called periodically
+
+00:09:25.646 --> 00:09:27.396 A:middle
+as the download completes.
+
+00:09:28.586 --> 00:09:32.516 A:middle
+Did Finish Download gets called
+when the download is completed,
+
+00:09:32.746 --> 00:09:35.136 A:middle
+and Did Fail To Download
+is called
+
+00:09:35.326 --> 00:09:36.756 A:middle
+if there was an error
+during the download.
+
+00:09:37.736 --> 00:09:39.946 A:middle
+So what we're going to do is
+we want to report progress
+
+00:09:40.156 --> 00:09:43.126 A:middle
+about this download
+operation, and we can do
+
+00:09:43.126 --> 00:09:45.666 A:middle
+that by adopting the
+NSProgressReporting protocol.
+
+00:09:46.506 --> 00:09:49.806 A:middle
+So let's go ahead and go up
+to our class declaration,
+
+00:09:50.306 --> 00:09:52.496 A:middle
+and we can add
+NSProgressReporting
+
+00:09:52.646 --> 00:09:54.356 A:middle
+to our list of classes.
+
+00:09:55.006 --> 00:09:59.286 A:middle
+And in order to conform
+to NSProgressReporting,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:00.606 --> 00:10:02.016 A:middle
+we need a ProgressProperty.
+
+00:10:02.266 --> 00:10:04.436 A:middle
+So let's add that,
+it's in NSProgress.
+
+00:10:05.126 --> 00:10:06.836 A:middle
+And now in our initializer
+we need
+
+00:10:06.836 --> 00:10:08.596 A:middle
+to create our NSProgressObject.
+
+00:10:09.586 --> 00:10:14.836 A:middle
+And since we don't know how
+much there is to download yet,
+
+00:10:15.116 --> 00:10:16.926 A:middle
+we're going to make our
+progress indeterminant.
+
+00:10:17.416 --> 00:10:19.576 A:middle
+And one way of making your
+progress indeterminant is
+
+00:10:19.576 --> 00:10:23.386 A:middle
+setting the totalUnitCount to a
+negative value, so we're going
+
+00:10:23.386 --> 00:10:25.186 A:middle
+to set our totalUnitCount
+to negative 1.
+
+00:10:26.126 --> 00:10:28.316 A:middle
+And since we know we're
+downloading a file here,
+
+00:10:28.726 --> 00:10:33.116 A:middle
+we can also give the NSProgress
+a little bit more information
+
+00:10:33.116 --> 00:10:33.886 A:middle
+about what's happening.
+
+00:10:34.416 --> 00:10:37.726 A:middle
+So we can set the Kind
+to NSProgress Kind File,
+
+00:10:38.596 --> 00:10:40.866 A:middle
+and we can set in the userInfo,
+
+00:10:40.866 --> 00:10:44.416 A:middle
+the NSProgress File Operation
+Kind Key to Downloading.
+
+00:10:44.946 --> 00:10:48.546 A:middle
+So now we have created our
+NSProgress and now we just need
+
+00:10:48.546 --> 00:10:50.856 A:middle
+to update it as the
+download completes.
+
+00:10:51.386 --> 00:10:53.726 A:middle
+So, back to our Will
+Begin Download method,
+
+00:10:53.726 --> 00:10:58.136 A:middle
+that gets the total
+amount to download.
+
+00:10:58.136 --> 00:11:01.146 A:middle
+So we want to set our
+totalUnitCount to that amount.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:58.136 --> 00:11:01.146 A:middle
+So we want to set our
+totalUnitCount to that amount.
+
+00:11:01.676 --> 00:11:04.606 A:middle
+And at that point the progress
+will no longer be indeterminant.
+
+00:11:04.606 --> 00:11:07.686 A:middle
+And in our Did Download
+Data callback,
+
+00:11:07.686 --> 00:11:11.806 A:middle
+which is called periodically, we
+can set our completedUnitCount
+
+00:11:12.016 --> 00:11:14.326 A:middle
+to the number of bytes
+downloaded so far.
+
+00:11:15.136 --> 00:11:18.006 A:middle
+And finally, in our Did
+Download Data callback,
+
+00:11:18.876 --> 00:11:20.676 A:middle
+we can set our
+completedUnitCount
+
+00:11:20.676 --> 00:11:22.876 A:middle
+to the total number of
+bytes in the download,
+
+00:11:23.306 --> 00:11:24.996 A:middle
+and that way the
+progress will be finished.
+
+00:11:26.446 --> 00:11:29.636 A:middle
+Now if we, now the user
+interface is already using
+
+00:11:29.686 --> 00:11:33.386 A:middle
+NSProgressReporting and
+looking for the download
+
+00:11:33.386 --> 00:11:37.036 A:middle
+to implement that, and will show
+the progress, so when we build
+
+00:11:37.036 --> 00:11:42.406 A:middle
+and run our app, and we
+press the import button,
+
+00:11:42.836 --> 00:11:45.286 A:middle
+we have a progress being
+reported for the download
+
+00:11:45.286 --> 00:11:48.336 A:middle
+to the user, and it is a
+much less painful experience.
+
+00:11:49.536 --> 00:11:49.886 A:middle
+All right.
+
+00:11:50.266 --> 00:11:51.366 A:middle
+So, back to slides.
+
+00:11:52.516 --> 00:11:54.566 A:middle
+[Applause]
+
+00:11:55.066 --> 00:11:55.286 A:middle
+&gt;&gt; VINCE SPADER: All right.
+
+00:11:55.576 --> 00:11:57.636 A:middle
+So, that's the basics
+of NSProgress.
+
+00:11:57.636 --> 00:12:00.716 A:middle
+Now let's get into what really
+makes NSProgress powerful,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:57.636 --> 00:12:00.716 A:middle
+Now let's get into what really
+makes NSProgress powerful,
+
+00:12:00.716 --> 00:12:03.226 A:middle
+which is the ability to
+compose progress objects
+
+00:12:03.226 --> 00:12:04.986 A:middle
+into other progress objects.
+
+00:12:06.276 --> 00:12:08.976 A:middle
+Now, just because I press a
+download button doesn't mean
+
+00:12:08.976 --> 00:12:10.706 A:middle
+that there is really
+only one thing happening.
+
+00:12:11.166 --> 00:12:13.276 A:middle
+There might be the
+download, a verify,
+
+00:12:13.276 --> 00:12:16.336 A:middle
+and a decompress operation all
+running in reporting progress.
+
+00:12:16.826 --> 00:12:19.676 A:middle
+But the user only
+sees one progress bar.
+
+00:12:20.646 --> 00:12:23.816 A:middle
+So, let's say that these
+boxes represent individual
+
+00:12:23.856 --> 00:12:24.856 A:middle
+NSProgress objects.
+
+00:12:25.336 --> 00:12:28.216 A:middle
+They each report their own
+progress in their own units
+
+00:12:28.216 --> 00:12:29.886 A:middle
+without having to
+worry about the others.
+
+00:12:30.356 --> 00:12:33.326 A:middle
+But we want them to be combined
+into a single NSProgress
+
+00:12:33.716 --> 00:12:36.226 A:middle
+that we hook up to
+the user interface.
+
+00:12:36.726 --> 00:12:38.966 A:middle
+So we're going to create
+an NSProgress object
+
+00:12:38.966 --> 00:12:40.476 A:middle
+and call it the overall
+progress.
+
+00:12:41.246 --> 00:12:43.666 A:middle
+And we can compose
+these other progresses
+
+00:12:43.666 --> 00:12:45.166 A:middle
+into our overall progress,
+
+00:12:45.626 --> 00:12:47.426 A:middle
+the overall progress
+becomes a parent
+
+00:12:47.426 --> 00:12:50.416 A:middle
+of these other three progress
+objects, the download, verify,
+
+00:12:50.416 --> 00:12:53.156 A:middle
+and decompress progresses
+are its children.
+
+00:12:53.906 --> 00:12:55.656 A:middle
+And as those children complete,
+
+00:12:55.916 --> 00:12:58.946 A:middle
+the overall progress
+will be updated.
+
+00:12:59.076 --> 00:13:01.926 A:middle
+So for composing NSProgress
+objects, we have this idea
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:59.076 --> 00:13:01.926 A:middle
+So for composing NSProgress
+objects, we have this idea
+
+00:13:01.926 --> 00:13:03.116 A:middle
+of a pendingUnitCount.
+
+00:13:03.526 --> 00:13:05.516 A:middle
+The pendingUnitCount
+is a portion
+
+00:13:05.516 --> 00:13:08.456 A:middle
+of the parent's totalUnitCount
+that gets assigned
+
+00:13:08.636 --> 00:13:10.546 A:middle
+to a child progress object.
+
+00:13:11.246 --> 00:13:13.846 A:middle
+The pendingUnitCount is in
+terms of the parent's units,
+
+00:13:14.106 --> 00:13:15.556 A:middle
+the child has its own units,
+
+00:13:16.146 --> 00:13:18.756 A:middle
+and we say that the parent's
+pendingUnitCount is assigned
+
+00:13:19.006 --> 00:13:21.456 A:middle
+to the child.
+
+00:13:21.626 --> 00:13:24.916 A:middle
+So what happens is, when
+a child progress finishes,
+
+00:13:25.356 --> 00:13:27.666 A:middle
+the parent's completedUnitCount
+is incremented
+
+00:13:27.666 --> 00:13:29.976 A:middle
+by the pendingUnitCount
+for that child.
+
+00:13:30.396 --> 00:13:31.726 A:middle
+So when you have a child,
+
+00:13:32.276 --> 00:13:34.736 A:middle
+you don't update the
+completedUnitCount manually,
+
+00:13:35.056 --> 00:13:37.246 A:middle
+that might conflict with
+an update that happens
+
+00:13:37.246 --> 00:13:38.466 A:middle
+when your child finishes.
+
+00:13:38.926 --> 00:13:41.176 A:middle
+When your at parent
+progress, you really want
+
+00:13:41.176 --> 00:13:43.486 A:middle
+to assign your entire
+totalUnitCount to children.
+
+00:13:44.066 --> 00:13:47.126 A:middle
+So let's go over a
+diagram of composition.
+
+00:13:47.256 --> 00:13:49.206 A:middle
+Let's say we're importing
+some photos.
+
+00:13:49.566 --> 00:13:52.556 A:middle
+So we have the overall
+import NSProgress object.
+
+00:13:53.496 --> 00:13:56.446 A:middle
+There are two photos
+total, so the totalUnitCount
+
+00:13:56.846 --> 00:13:58.456 A:middle
+for our import progress is 2.
+
+00:13:59.526 --> 00:14:01.926 A:middle
+And it is going to assign
+its entire totalUnitCount
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:59.526 --> 00:14:01.926 A:middle
+And it is going to assign
+its entire totalUnitCount
+
+00:14:01.926 --> 00:14:03.666 A:middle
+to its children, which
+are the progresses
+
+00:14:03.666 --> 00:14:05.286 A:middle
+for the individual photos below.
+
+00:14:05.756 --> 00:14:09.186 A:middle
+So each photo is assigned a
+pendingUnitCount of 1 photo
+
+00:14:09.186 --> 00:14:11.166 A:middle
+from the overall
+import progress.
+
+00:14:11.766 --> 00:14:15.576 A:middle
+Now, the individual photo
+progresses are similar
+
+00:14:15.576 --> 00:14:16.726 A:middle
+but their unit is different,
+
+00:14:16.726 --> 00:14:18.826 A:middle
+they have a totalUnitCount
+of two steps.
+
+00:14:19.746 --> 00:14:22.306 A:middle
+And each step is taking
+up one pendingUnitCount,
+
+00:14:22.306 --> 00:14:24.516 A:middle
+one for the download
+and one for the filter.
+
+00:14:25.456 --> 00:14:28.236 A:middle
+And finally we have the
+download and filter progresses.
+
+00:14:28.716 --> 00:14:30.066 A:middle
+They have their own units.
+
+00:14:30.456 --> 00:14:31.756 A:middle
+They have no children.
+
+00:14:31.906 --> 00:14:34.466 A:middle
+And they update their
+completedUnitCount manually.
+
+00:14:36.256 --> 00:14:36.906 A:middle
+All right.
+
+00:14:36.906 --> 00:14:39.566 A:middle
+So I brought in the
+completedUnitCounts here.
+
+00:14:39.566 --> 00:14:40.886 A:middle
+That's the zero of.
+
+00:14:40.886 --> 00:14:44.646 A:middle
+And the fraction completed is
+the percentage at the bottom.
+
+00:14:44.646 --> 00:14:46.646 A:middle
+Since we haven't done anything
+yet, it starts at zero.
+
+00:14:46.646 --> 00:14:49.716 A:middle
+And let's see what happens
+as the completedUnitCounts
+
+00:14:49.716 --> 00:14:50.956 A:middle
+at the bottom are updated.
+
+00:14:52.426 --> 00:14:55.566 A:middle
+So you can see these -- as
+these children complete,
+
+00:14:56.036 --> 00:14:58.386 A:middle
+the fraction completed is
+updating in the parents.
+
+00:14:58.626 --> 00:15:00.736 A:middle
+Progress kind of flows
+up to the parent.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:58.626 --> 00:15:00.736 A:middle
+Progress kind of flows
+up to the parent.
+
+00:15:01.366 --> 00:15:03.016 A:middle
+And note that the
+completedUnitCount
+
+00:15:03.016 --> 00:15:05.526 A:middle
+for the overall progress
+is still zero.
+
+00:15:05.846 --> 00:15:08.866 A:middle
+The completedUnitCount is only
+incremented once the child is
+
+00:15:08.866 --> 00:15:11.686 A:middle
+finished and photo 1
+still isn't finished.
+
+00:15:12.246 --> 00:15:15.486 A:middle
+And once a child does finish,
+
+00:15:15.516 --> 00:15:17.156 A:middle
+the completedUnitCount
+is incremented
+
+00:15:17.156 --> 00:15:19.066 A:middle
+by the pendingUnitCount
+for the child.
+
+00:15:19.526 --> 00:15:23.516 A:middle
+You can see that the import
+progress now has one photo
+
+00:15:23.516 --> 00:15:26.406 A:middle
+complete since photo one
+is now 100% finished.
+
+00:15:27.776 --> 00:15:31.296 A:middle
+The fraction completed, on
+the other hand, is multiplying
+
+00:15:31.296 --> 00:15:33.036 A:middle
+up based on the pendingUnitCount
+
+00:15:33.346 --> 00:15:35.226 A:middle
+and the fraction
+completed of the child.
+
+00:15:35.226 --> 00:15:38.576 A:middle
+It doesn't wait until the
+child is finished to update.
+
+00:15:40.066 --> 00:15:44.376 A:middle
+And when everything is at 100%,
+the import progress is finished,
+
+00:15:45.016 --> 00:15:47.226 A:middle
+and that's an example
+of what happens
+
+00:15:47.226 --> 00:15:49.646 A:middle
+when you're composing
+NSProgress objects.
+
+00:15:51.006 --> 00:15:52.266 A:middle
+Now let's zoom in here.
+
+00:15:52.836 --> 00:15:56.086 A:middle
+Here we have a progress for
+an individual photo's import,
+
+00:15:56.086 --> 00:15:57.506 A:middle
+so this is just one photo.
+
+00:15:58.186 --> 00:16:00.746 A:middle
+There are the two steps,
+download and filter.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:15:58.186 --> 00:16:00.746 A:middle
+There are the two steps,
+download and filter.
+
+00:16:00.746 --> 00:16:02.766 A:middle
+So we have a totalUnitCount
+of 2.
+
+00:16:03.176 --> 00:16:05.616 A:middle
+And we say the download is
+going to take one of those units
+
+00:16:05.616 --> 00:16:07.576 A:middle
+and the filter is going to
+take one of those units.
+
+00:16:08.276 --> 00:16:12.836 A:middle
+So each step takes up half of
+the photo's overall progress.
+
+00:16:13.596 --> 00:16:15.776 A:middle
+But what if these
+operations aren't equal?
+
+00:16:16.266 --> 00:16:18.856 A:middle
+What if we know that the
+filter is pretty quick relative
+
+00:16:18.856 --> 00:16:22.416 A:middle
+to the time to download, so it
+looks something more like this?
+
+00:16:23.586 --> 00:16:25.526 A:middle
+Well, units can be arbitrary.
+
+00:16:25.526 --> 00:16:27.986 A:middle
+You can say that there
+are actually ten steps
+
+00:16:27.986 --> 00:16:29.826 A:middle
+and the download is
+assigned nine of those,
+
+00:16:29.936 --> 00:16:31.126 A:middle
+and the filter is assigned one.
+
+00:16:31.886 --> 00:16:33.836 A:middle
+And now as the download
+completes,
+
+00:16:34.406 --> 00:16:37.716 A:middle
+the download step takes up
+90% of the import progress
+
+00:16:37.816 --> 00:16:39.786 A:middle
+and the filter takes
+the remaining 10%.
+
+00:16:40.486 --> 00:16:43.706 A:middle
+So you can modify the units
+of the progress in order
+
+00:16:43.706 --> 00:16:45.516 A:middle
+to weight the work being
+assigned to children.
+
+00:16:45.516 --> 00:16:46.106 A:middle
+All right.
+
+00:16:47.236 --> 00:16:50.436 A:middle
+Let's see how to
+actually do this in code.
+
+00:16:50.436 --> 00:16:54.676 A:middle
+There are two ways of
+composing NSProgress objects
+
+00:16:55.016 --> 00:16:56.226 A:middle
+and the first way
+I'm going to talk
+
+00:16:56.226 --> 00:16:57.826 A:middle
+about is implicit composition.
+
+00:16:58.556 --> 00:17:02.296 A:middle
+So you create a parent
+progress object.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:58.556 --> 00:17:02.296 A:middle
+So you create a parent
+progress object.
+
+00:17:02.676 --> 00:17:05.076 A:middle
+This will be the
+photoProgress from before.
+
+00:17:05.856 --> 00:17:07.886 A:middle
+So there are two steps.
+
+00:17:08.425 --> 00:17:12.826 A:middle
+And we have -- so we have
+a totalUnitCount of 2.
+
+00:17:13.516 --> 00:17:16.915 A:middle
+And what we want to do, is add
+a download progress as a child.
+
+00:17:17.776 --> 00:17:20.046 A:middle
+So we call become Current
+With Pending Unit Count
+
+00:17:20.046 --> 00:17:22.156 A:middle
+on the parent progress,
+the photoProgress.
+
+00:17:22.915 --> 00:17:26.965 A:middle
+And what this does is it sets
+a thread local current progress
+
+00:17:27.756 --> 00:17:30.086 A:middle
+so the photoProgress is
+the current progress,
+
+00:17:30.546 --> 00:17:33.466 A:middle
+and that pendingUnitCount
+of 1 is set aside
+
+00:17:34.166 --> 00:17:37.616 A:middle
+and basically reserved
+for progress to come along
+
+00:17:37.616 --> 00:17:39.756 A:middle
+and get added to the
+current progress.
+
+00:17:40.396 --> 00:17:46.706 A:middle
+And next we call our download
+function, startDownload,
+
+00:17:47.366 --> 00:17:50.296 A:middle
+and that creates a
+progress with the NSProgress
+
+00:17:50.296 --> 00:17:52.386 A:middle
+with totalUnitCount
+convenience constructor,
+
+00:17:52.856 --> 00:17:55.936 A:middle
+and with totalUnit
+convenience constructor,
+
+00:17:56.356 --> 00:17:59.836 A:middle
+we'll add the created progress
+to the current progress.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:00.826 --> 00:18:05.296 A:middle
+So the download is added as
+a child of our photoProgress.
+
+00:18:06.786 --> 00:18:08.266 A:middle
+Next we need to clean this up.
+
+00:18:08.376 --> 00:18:09.756 A:middle
+So we call resigned current
+
+00:18:10.106 --> 00:18:13.646 A:middle
+and the photoProgress is no
+longer the current progress.
+
+00:18:13.706 --> 00:18:15.766 A:middle
+And that's it.
+
+00:18:16.276 --> 00:18:18.716 A:middle
+Now we've used implicit
+composition
+
+00:18:18.876 --> 00:18:23.306 A:middle
+to add a child to a parent.
+
+00:18:23.306 --> 00:18:25.916 A:middle
+A few things to remember when
+using implicit composition,
+
+00:18:26.706 --> 00:18:28.906 A:middle
+when supporting implicit
+composition,
+
+00:18:29.926 --> 00:18:35.366 A:middle
+you want to create the
+NSProgress immediately using the
+
+00:18:35.366 --> 00:18:37.306 A:middle
+with totalUnitCount
+convenience constructor.
+
+00:18:37.676 --> 00:18:40.436 A:middle
+That's because the first
+progress object added
+
+00:18:40.436 --> 00:18:43.886 A:middle
+to the current progress takes
+up that entire pendingUnitCount.
+
+00:18:44.456 --> 00:18:47.396 A:middle
+And if you create it first
+thing, you don't have to worry
+
+00:18:47.396 --> 00:18:50.096 A:middle
+about getters or other
+calls unintentionally taking
+
+00:18:50.096 --> 00:18:51.436 A:middle
+up the parent's
+pendingUnitCount.
+
+00:18:52.716 --> 00:18:54.426 A:middle
+Also, be sure to document it.
+
+00:18:54.736 --> 00:18:57.076 A:middle
+Implicit composition
+is implicit after all,
+
+00:18:57.476 --> 00:19:00.406 A:middle
+clients won't know you support
+implicit composition unless you
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:57.476 --> 00:19:00.406 A:middle
+clients won't know you support
+implicit composition unless you
+
+00:19:00.406 --> 00:19:03.176 A:middle
+say so.
+
+00:19:03.416 --> 00:19:05.756 A:middle
+Also, if no child is added
+
+00:19:05.756 --> 00:19:07.436 A:middle
+by the time you call
+resigned current,
+
+00:19:08.156 --> 00:19:10.806 A:middle
+that pendingUnitCount
+will be immediately added
+
+00:19:10.806 --> 00:19:12.596 A:middle
+to the parent's
+completedUnitCount.
+
+00:19:13.256 --> 00:19:15.016 A:middle
+So your completedUnitCount
+will be updated.
+
+00:19:15.646 --> 00:19:20.996 A:middle
+So, the second way to compose
+NSProgress objects is new
+
+00:19:20.996 --> 00:19:23.376 A:middle
+in OS X 10.11 and iOS 9,
+
+00:19:23.696 --> 00:19:25.466 A:middle
+and that's called
+explicit composition.
+
+00:19:26.186 --> 00:19:29.696 A:middle
+So, you receive a progress
+that you want to add
+
+00:19:29.696 --> 00:19:31.076 A:middle
+as a child from somewhere.
+
+00:19:31.076 --> 00:19:32.506 A:middle
+Perhaps something that conforms
+
+00:19:32.506 --> 00:19:34.626 A:middle
+to the NSProgressReporting,
+we'll say a filter.
+
+00:19:35.826 --> 00:19:37.236 A:middle
+And you have your
+parent progress
+
+00:19:37.236 --> 00:19:38.296 A:middle
+that you want to add it to.
+
+00:19:38.906 --> 00:19:41.666 A:middle
+Let's say the photoProgress
+from before.
+
+00:19:43.156 --> 00:19:47.116 A:middle
+Then you simply call
+addChild with pendingUnitCount
+
+00:19:47.746 --> 00:19:51.646 A:middle
+on the progress you
+want to add it to,
+
+00:19:51.776 --> 00:19:55.176 A:middle
+and path in your child progress,
+the filterProgress, here,
+
+00:19:55.646 --> 00:19:57.736 A:middle
+and give it the pendingUnitCount
+you want to add it with,
+
+00:19:57.736 --> 00:20:00.716 A:middle
+since it is one step, we want to
+add it with a pendingCount of 1.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:57.736 --> 00:20:00.716 A:middle
+since it is one step, we want to
+add it with a pendingCount of 1.
+
+00:20:01.596 --> 00:20:02.306 A:middle
+And that's it.
+
+00:20:02.486 --> 00:20:06.286 A:middle
+Now your progress is a child
+of the parent progress.
+
+00:20:06.286 --> 00:20:11.856 A:middle
+So here are some guidelines
+for when to use explicit
+
+00:20:11.856 --> 00:20:13.266 A:middle
+or implicit composition.
+
+00:20:13.876 --> 00:20:17.356 A:middle
+If you have a method that
+can't return in NSProgress
+
+00:20:17.526 --> 00:20:20.316 A:middle
+like you're crossing an API
+boundary you can't change,
+
+00:20:20.656 --> 00:20:22.576 A:middle
+use implicit composition
+and document
+
+00:20:22.576 --> 00:20:24.086 A:middle
+that it supports
+implicit composition.
+
+00:20:24.956 --> 00:20:29.876 A:middle
+Or, because explicit composition
+is new in OS X 10.11 and iOS 9,
+
+00:20:30.346 --> 00:20:33.316 A:middle
+you'll have to use implicit
+composition on older releases.
+
+00:20:33.806 --> 00:20:35.726 A:middle
+Otherwise, you will
+generally want
+
+00:20:35.726 --> 00:20:38.046 A:middle
+to use explicit composition;
+it is a lot simpler.
+
+00:20:38.046 --> 00:20:38.726 A:middle
+All right.
+
+00:20:40.216 --> 00:20:45.566 A:middle
+Now let's go through
+a demo of composition.
+
+00:20:45.566 --> 00:20:48.586 A:middle
+So here we have our
+photo download class
+
+00:20:48.626 --> 00:20:51.836 A:middle
+that we added our progress
+reporting to last time.
+
+00:20:51.836 --> 00:20:55.686 A:middle
+And if we run our app, it
+has been changed a bit.
+
+00:20:56.166 --> 00:20:57.826 A:middle
+Now it has a CollectionView
+
+00:20:57.826 --> 00:21:00.586 A:middle
+of photos instead
+of a single photo.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:57.826 --> 00:21:00.586 A:middle
+of photos instead
+of a single photo.
+
+00:21:01.156 --> 00:21:03.246 A:middle
+So, and when we press import,
+
+00:21:03.676 --> 00:21:05.846 A:middle
+instead of just downloading
+those images,
+
+00:21:06.136 --> 00:21:07.976 A:middle
+it is also running
+them through a filter.
+
+00:21:08.456 --> 00:21:10.126 A:middle
+So we don't have
+progress information
+
+00:21:10.126 --> 00:21:13.506 A:middle
+for that overall thing, so
+the experience is pretty bad.
+
+00:21:14.366 --> 00:21:16.076 A:middle
+And again, we can make it better
+
+00:21:16.076 --> 00:21:19.736 A:middle
+by having our operations
+report progress.
+
+00:21:20.816 --> 00:21:21.726 A:middle
+So let's do that.
+
+00:21:22.996 --> 00:21:24.296 A:middle
+So we have our download class
+
+00:21:24.336 --> 00:21:25.866 A:middle
+that supports
+NSProgressReporting,
+
+00:21:26.666 --> 00:21:30.096 A:middle
+and we have our filter class,
+which has a class method
+
+00:21:30.096 --> 00:21:32.366 A:middle
+that takes an image and
+returns a filtered image.
+
+00:21:33.836 --> 00:21:38.206 A:middle
+And we have this import class,
+which has both the download
+
+00:21:38.206 --> 00:21:41.116 A:middle
+and runs the filter when
+the download completes.
+
+00:21:41.486 --> 00:21:43.086 A:middle
+So it combines the
+progress for --
+
+00:21:43.086 --> 00:21:51.406 A:middle
+we want it to combine the
+progress for the download
+
+00:21:51.736 --> 00:21:53.106 A:middle
+and the filter operation.
+
+00:21:54.556 --> 00:21:57.666 A:middle
+So let's look at
+our photo import.
+
+00:21:57.666 --> 00:21:59.866 A:middle
+It has an initializer,
+which takes a URL
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:00.436 --> 00:22:03.726 A:middle
+and it creates the
+download with that URL.
+
+00:22:04.436 --> 00:22:07.876 A:middle
+It also has a completion
+handler that gets called
+
+00:22:07.876 --> 00:22:10.396 A:middle
+with the filtered
+and downloaded image,
+
+00:22:10.456 --> 00:22:11.856 A:middle
+or an error if an error occurs.
+
+00:22:12.786 --> 00:22:15.686 A:middle
+And it also has a start method
+for starting the import.
+
+00:22:15.976 --> 00:22:19.756 A:middle
+And the start method sets
+the completion handler
+
+00:22:19.756 --> 00:22:23.236 A:middle
+on the download, and
+then creates a UIImage
+
+00:22:23.306 --> 00:22:28.736 A:middle
+from the downloaded data,
+and then passes that image
+
+00:22:28.736 --> 00:22:30.916 A:middle
+into our filter, getting
+out our filtered image,
+
+00:22:31.306 --> 00:22:33.066 A:middle
+and then calls its
+own completion handler
+
+00:22:33.066 --> 00:22:34.146 A:middle
+with the filtered image.
+
+00:22:34.436 --> 00:22:37.536 A:middle
+And once the completion handler
+is set, it starts the download.
+
+00:22:38.106 --> 00:22:43.066 A:middle
+So what we want to do is have
+our photo import report a
+
+00:22:43.066 --> 00:22:46.256 A:middle
+combined progress comprising
+of both the download
+
+00:22:46.256 --> 00:22:47.576 A:middle
+and the filter's progress.
+
+00:22:48.066 --> 00:22:49.246 A:middle
+And we are going
+to do that again
+
+00:22:49.366 --> 00:22:53.696 A:middle
+by having our photo import class
+conform to NSProgressReporting.
+
+00:22:54.296 --> 00:22:56.496 A:middle
+So let's go up to
+our class declaration
+
+00:22:57.086 --> 00:22:58.566 A:middle
+and add NSProgressReporting.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:00.096 --> 00:23:04.216 A:middle
+Now we need to have a progress
+property, so let's add that.
+
+00:23:05.106 --> 00:23:07.446 A:middle
+ANd we need to create
+our NSProgress object.
+
+00:23:08.236 --> 00:23:10.546 A:middle
+And this time for
+our units we're going
+
+00:23:10.546 --> 00:23:12.166 A:middle
+to use something
+a little abstract.
+
+00:23:12.286 --> 00:23:14.546 A:middle
+We have run the app a
+few times and we've found
+
+00:23:14.546 --> 00:23:17.276 A:middle
+that if we have the
+download take up about 90%
+
+00:23:17.276 --> 00:23:19.846 A:middle
+of the import's progress,
+that feels pretty good.
+
+00:23:20.386 --> 00:23:22.346 A:middle
+So we're going to have
+a totalUnitCount of 10,
+
+00:23:22.686 --> 00:23:24.936 A:middle
+and we're going to say
+the download takes up 9
+
+00:23:24.936 --> 00:23:26.916 A:middle
+of that totalUnitCount
+and the filter is going
+
+00:23:26.916 --> 00:23:27.926 A:middle
+to take up the remaining 1.
+
+00:23:28.506 --> 00:23:31.146 A:middle
+So now in our start method,
+
+00:23:31.666 --> 00:23:37.596 A:middle
+since the download already
+conforms to NSProgressReporting,
+
+00:23:37.886 --> 00:23:40.826 A:middle
+we can just get the progress
+object from it and add it
+
+00:23:40.826 --> 00:23:42.656 A:middle
+to our progress, and we can do
+
+00:23:42.656 --> 00:23:44.756 A:middle
+that with the explicit
+add child method.
+
+00:23:45.286 --> 00:23:48.136 A:middle
+So we're calling progress
+add child download progress,
+
+00:23:48.306 --> 00:23:51.066 A:middle
+and our pendingUnitCount is 9,
+
+00:23:51.126 --> 00:23:53.216 A:middle
+so it takes up 90%
+of our progress.
+
+00:23:53.766 --> 00:23:57.656 A:middle
+And now we want to also
+add the filter's progress
+
+00:23:57.746 --> 00:23:58.656 A:middle
+to our progress.
+
+00:23:59.376 --> 00:24:01.536 A:middle
+But the filter is a class method
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:59.376 --> 00:24:01.536 A:middle
+But the filter is a class method
+
+00:24:01.536 --> 00:24:03.756 A:middle
+that takes an image
+and returns an image.
+
+00:24:03.856 --> 00:24:06.246 A:middle
+There is no obvious way to
+get a progress out of it.
+
+00:24:06.946 --> 00:24:11.646 A:middle
+But, if we go to our
+photo filter class,
+
+00:24:11.646 --> 00:24:12.986 A:middle
+we can see a comment here
+
+00:24:12.986 --> 00:24:15.706 A:middle
+that says it supports
+implicit progress composition.
+
+00:24:16.226 --> 00:24:18.336 A:middle
+So we can use implicit
+progress composition
+
+00:24:18.666 --> 00:24:19.816 A:middle
+to add it as a child.
+
+00:24:20.916 --> 00:24:23.356 A:middle
+So let's go back to our
+import start method.
+
+00:24:24.046 --> 00:24:28.606 A:middle
+And in the downloads completion
+handler, which might be called
+
+00:24:28.606 --> 00:24:32.566 A:middle
+on a background thread,
+we're going to become current
+
+00:24:33.296 --> 00:24:34.826 A:middle
+with the pendingUnitCount of 1.
+
+00:24:35.436 --> 00:24:39.706 A:middle
+And note, like I said,
+the completion handler
+
+00:24:39.706 --> 00:24:41.646 A:middle
+for the download might be
+called in a background thread,
+
+00:24:41.896 --> 00:24:44.876 A:middle
+but that's okay because we're
+calling the filter immediately
+
+00:24:44.876 --> 00:24:46.056 A:middle
+after on the same thread.
+
+00:24:47.006 --> 00:24:52.146 A:middle
+So, after we become
+current, our filter will run
+
+00:24:52.146 --> 00:24:55.696 A:middle
+and it will add itself as a
+child to the current progress,
+
+00:24:56.606 --> 00:24:58.166 A:middle
+and once it returns, we need
+
+00:24:58.166 --> 00:25:00.226 A:middle
+to no longer be the current
+progress, so we're going
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:24:58.166 --> 00:25:00.226 A:middle
+to no longer be the current
+progress, so we're going
+
+00:25:00.226 --> 00:25:01.176 A:middle
+to call resign current.
+
+00:25:01.766 --> 00:25:04.246 A:middle
+And that's it.
+
+00:25:04.246 --> 00:25:07.376 A:middle
+Now we have added both the
+download and the filter progress
+
+00:25:07.426 --> 00:25:08.596 A:middle
+to our import progress.
+
+00:25:09.186 --> 00:25:18.026 A:middle
+And now if we run our
+app, and we press import,
+
+00:25:18.336 --> 00:25:21.606 A:middle
+you can see the imports
+are reporting progress
+
+00:25:21.666 --> 00:25:22.386 A:middle
+for each photo.
+
+00:25:23.266 --> 00:25:25.306 A:middle
+And that's good, the
+user has more information
+
+00:25:25.306 --> 00:25:27.736 A:middle
+on what's going on, but it
+is not really that great.
+
+00:25:27.736 --> 00:25:30.266 A:middle
+We only want one progress
+to show to the user.
+
+00:25:30.736 --> 00:25:33.826 A:middle
+So let's do that.
+
+00:25:34.066 --> 00:25:37.196 A:middle
+So we're going to zoom out a
+little bit and we're going to go
+
+00:25:37.196 --> 00:25:39.876 A:middle
+to our root View Controller,
+photos View Controller,
+
+00:25:41.076 --> 00:25:43.366 A:middle
+and this has an overall
+progress property.
+
+00:25:43.656 --> 00:25:47.576 A:middle
+It is a client of this
+NSProgress, it just gets it,
+
+00:25:47.576 --> 00:25:49.696 A:middle
+and it is going to hook it
+up to the UI and show it.
+
+00:25:49.696 --> 00:25:51.846 A:middle
+It is not going to
+create it itself.
+
+00:25:53.206 --> 00:25:55.626 A:middle
+And it also has a
+reference to an Album,
+
+00:25:55.626 --> 00:25:57.626 A:middle
+which is the collection of
+photos that we're downloading.
+
+00:25:57.626 --> 00:26:02.156 A:middle
+And it has IBActions
+for the toolbar buttons,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:57.626 --> 00:26:02.156 A:middle
+And it has IBActions
+for the toolbar buttons,
+
+00:26:02.156 --> 00:26:03.866 A:middle
+in this case the
+start import button
+
+00:26:04.236 --> 00:26:08.676 A:middle
+and that IBAction just calls
+import photos on our album.
+
+00:26:09.646 --> 00:26:14.576 A:middle
+So if we look at our album
+it has an array of photos,
+
+00:26:15.556 --> 00:26:21.166 A:middle
+and it creates the photos
+from URLs in the main bundle,
+
+00:26:21.726 --> 00:26:27.256 A:middle
+and in its import photos method
+it goes through each photo
+
+00:26:27.516 --> 00:26:29.216 A:middle
+and calls start import on them.
+
+00:26:29.786 --> 00:26:35.476 A:middle
+Now if we look at our photo,
+our photo has an image URL
+
+00:26:35.476 --> 00:26:37.716 A:middle
+that it gets in its initializer,
+
+00:26:38.306 --> 00:26:42.306 A:middle
+and it also has a UIImage
+property that starts
+
+00:26:42.306 --> 00:26:43.596 A:middle
+out as a place holder.
+
+00:26:44.606 --> 00:26:46.896 A:middle
+It also has its start
+import method
+
+00:26:46.896 --> 00:26:48.416 A:middle
+that is getting called
+by the album.
+
+00:26:48.706 --> 00:26:50.696 A:middle
+It creates that photo
+import class
+
+00:26:50.926 --> 00:26:53.056 A:middle
+that we added
+NSProgressReporting to,
+
+00:26:54.066 --> 00:26:55.646 A:middle
+and then sets a completion
+handler
+
+00:26:55.646 --> 00:26:58.956 A:middle
+for that photo import
+class, to set the image
+
+00:26:58.956 --> 00:27:00.416 A:middle
+as the image that's
+been imported.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:58.956 --> 00:27:00.416 A:middle
+as the image that's
+been imported.
+
+00:27:00.976 --> 00:27:03.926 A:middle
+And it is then, after the
+completion handler is set,
+
+00:27:03.926 --> 00:27:09.146 A:middle
+it starts the import and stashes
+it away in case it needs it.
+
+00:27:09.416 --> 00:27:11.286 A:middle
+So what we want to do is we want
+
+00:27:11.286 --> 00:27:15.126 A:middle
+to get the photo imports
+progress and collect them
+
+00:27:15.196 --> 00:27:18.146 A:middle
+into a progress for all of the
+imports that are happening.
+
+00:27:19.496 --> 00:27:21.456 A:middle
+So let's go back up to
+our root View Controller.
+
+00:27:21.456 --> 00:27:24.166 A:middle
+And what we can do is we can say
+
+00:27:24.166 --> 00:27:28.316 A:middle
+that our import progress
+method returns that NSProgress.
+
+00:27:28.896 --> 00:27:31.576 A:middle
+so we're going to set our
+overall progress property
+
+00:27:31.576 --> 00:27:33.376 A:middle
+to that returned NSProgress.
+
+00:27:34.686 --> 00:27:37.246 A:middle
+And import photos doesn't
+return in NSProgress yet,
+
+00:27:37.296 --> 00:27:38.456 A:middle
+so we need to go do that.
+
+00:27:38.986 --> 00:27:42.926 A:middle
+So let's go to our album and
+its import photos method.
+
+00:27:43.646 --> 00:27:45.476 A:middle
+And it is currently
+returning void.
+
+00:27:45.476 --> 00:27:48.126 A:middle
+And we need to make it
+return in NSProgress.
+
+00:27:48.866 --> 00:27:51.786 A:middle
+Then we need to create
+the progress object
+
+00:27:51.786 --> 00:27:52.836 A:middle
+that we're going to return.
+
+00:27:53.766 --> 00:27:56.766 A:middle
+And since this progress object
+is going to have a child
+
+00:27:56.766 --> 00:28:01.486 A:middle
+for every photo in our album,
+we want our totalUnitCount
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:56.766 --> 00:28:01.486 A:middle
+for every photo in our album,
+we want our totalUnitCount
+
+00:28:01.876 --> 00:28:06.106 A:middle
+to be the number of
+photos in the album.
+
+00:28:06.106 --> 00:28:08.536 A:middle
+And also let's go
+ahead and return it.
+
+00:28:09.596 --> 00:28:11.646 A:middle
+And what we're going
+to do is we're going
+
+00:28:11.646 --> 00:28:15.506 A:middle
+to have our photo start import
+method also return a progress,
+
+00:28:16.836 --> 00:28:17.656 A:middle
+so we're just going to assign
+
+00:28:17.656 --> 00:28:19.966 A:middle
+that to a local variable
+import progress.
+
+00:28:20.356 --> 00:28:23.726 A:middle
+And then we're going to add
+that as a child to our --
+
+00:28:24.046 --> 00:28:26.656 A:middle
+to the album's progress with
+the pendingUnitCount of 1,
+
+00:28:26.656 --> 00:28:29.946 A:middle
+since this is the import
+progress for one photo.
+
+00:28:30.466 --> 00:28:36.356 A:middle
+And now, in our photos
+start import method,
+
+00:28:36.356 --> 00:28:38.186 A:middle
+it is currently returning void.
+
+00:28:38.406 --> 00:28:40.796 A:middle
+We want in to return in
+NSProgress, so let's do that.
+
+00:28:41.646 --> 00:28:45.276 A:middle
+And since our photo
+import already conforms
+
+00:28:45.276 --> 00:28:46.256 A:middle
+to NSProgressReporting,
+
+00:28:46.526 --> 00:28:48.936 A:middle
+we can just return the
+progress property from it.
+
+00:28:50.586 --> 00:28:51.726 A:middle
+And that's it.
+
+00:28:51.726 --> 00:28:53.846 A:middle
+We have quite a composition
+happening now.
+
+00:28:53.846 --> 00:28:56.056 A:middle
+We have that overall
+progress being assigned
+
+00:28:56.436 --> 00:28:58.316 A:middle
+to a progress made up --
+
+00:28:58.316 --> 00:29:01.066 A:middle
+that has children for each
+import that's happening,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:58.316 --> 00:29:01.066 A:middle
+that has children for each
+import that's happening,
+
+00:29:01.386 --> 00:29:03.906 A:middle
+and each of those imports
+has both a download
+
+00:29:03.906 --> 00:29:04.816 A:middle
+and a filter child.
+
+00:29:05.536 --> 00:29:10.626 A:middle
+So let's run the app.
+
+00:29:10.896 --> 00:29:13.806 A:middle
+And now we have an overall
+progress at the bottom
+
+00:29:13.806 --> 00:29:16.086 A:middle
+that gets updated as all
+those children complete.
+
+00:29:17.296 --> 00:29:20.416 A:middle
+Removing all of the smaller
+progress bars is left
+
+00:29:20.416 --> 00:29:22.666 A:middle
+as an exercise.
+
+00:29:23.516 --> 00:29:26.626 A:middle
+[Applause]
+
+00:29:27.126 --> 00:29:27.326 A:middle
+All right.
+
+00:29:27.326 --> 00:29:27.496 A:middle
+&gt;&gt; VINCE SPADER: Okay.
+
+00:29:27.496 --> 00:29:28.276 A:middle
+Back to slides.
+
+00:29:28.756 --> 00:29:34.316 A:middle
+So now I would like to talk a
+little bit about cancellation,
+
+00:29:34.316 --> 00:29:35.616 A:middle
+pausing, and resuming.
+
+00:29:36.296 --> 00:29:39.296 A:middle
+NSProgress objects can be
+a conduit for cancellation.
+
+00:29:39.476 --> 00:29:42.596 A:middle
+The creator of the
+NSProgress sets cancelable
+
+00:29:42.856 --> 00:29:44.326 A:middle
+and the cancellationHandler.
+
+00:29:45.016 --> 00:29:48.126 A:middle
+If your operation is doing
+some work synchronously and
+
+00:29:48.126 --> 00:29:49.806 A:middle
+and the cancellationHandler
+doesn't really work,
+
+00:29:50.426 --> 00:29:51.996 A:middle
+you can pull the canceled flag
+
+00:29:51.996 --> 00:29:53.616 A:middle
+on the NSProgress
+object as well.
+
+00:29:54.156 --> 00:29:59.326 A:middle
+A client can call cancel and
+the NSProgress will set cancel
+
+00:29:59.326 --> 00:30:01.986 A:middle
+to true and invoke the
+cancellationHandler.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:29:59.326 --> 00:30:01.986 A:middle
+to true and invoke the
+cancellationHandler.
+
+00:30:02.396 --> 00:30:04.666 A:middle
+So cancellation flows
+down to children.
+
+00:30:04.986 --> 00:30:08.076 A:middle
+So if you have child progresses
+with cancellation handlers,
+
+00:30:08.336 --> 00:30:09.346 A:middle
+those will be invoked too.
+
+00:30:09.996 --> 00:30:11.506 A:middle
+And it is permanent.
+
+00:30:11.726 --> 00:30:14.486 A:middle
+Once a progress is canceled,
+there is no uncanceling.
+
+00:30:16.736 --> 00:30:19.046 A:middle
+Pausing is pretty
+similar to cancellation.
+
+00:30:19.546 --> 00:30:23.076 A:middle
+The creator of the
+NSProgress sets pausable along
+
+00:30:23.076 --> 00:30:25.056 A:middle
+with a pausing handler
+and resuming handler.
+
+00:30:25.486 --> 00:30:27.306 A:middle
+That resuming handler
+is actually new
+
+00:30:27.306 --> 00:30:29.506 A:middle
+in OS X 10.11 and iOS 9.
+
+00:30:30.336 --> 00:30:33.636 A:middle
+And you can also pull that
+paused flag to determine
+
+00:30:33.636 --> 00:30:37.076 A:middle
+if the progress is
+currently paused.
+
+00:30:37.256 --> 00:30:39.686 A:middle
+Clients can call pause
+and will set pause
+
+00:30:39.686 --> 00:30:43.006 A:middle
+and call the pausing handler,
+or they can call resume
+
+00:30:43.006 --> 00:30:45.266 A:middle
+and will unset pause and
+invoke the resuming handler.
+
+00:30:45.556 --> 00:30:47.986 A:middle
+Pausing and resuming also flows
+
+00:30:47.986 --> 00:30:50.226 A:middle
+down to child progresses
+just like cancellation.
+
+00:30:51.546 --> 00:30:57.406 A:middle
+And let's go ahead
+and do a demo of that.
+
+00:30:57.606 --> 00:31:00.356 A:middle
+So if your objects, if your
+operations already support
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:57.606 --> 00:31:00.356 A:middle
+So if your objects, if your
+operations already support
+
+00:31:00.356 --> 00:31:01.886 A:middle
+cancellation, pausing,
+and resuming,
+
+00:31:01.886 --> 00:31:04.966 A:middle
+it is actually really easy to
+expose that through NSProgress.
+
+00:31:06.016 --> 00:31:08.196 A:middle
+So we're back in our
+photos View Controller.
+
+00:31:08.196 --> 00:31:09.686 A:middle
+And this is our root
+View Controller.
+
+00:31:10.326 --> 00:31:13.106 A:middle
+And this time the app
+has a few more buttons.
+
+00:31:13.106 --> 00:31:16.376 A:middle
+So if you press import, there is
+also a cancel and pause button,
+
+00:31:16.376 --> 00:31:18.146 A:middle
+but they don't really
+do anything right now.
+
+00:31:18.236 --> 00:31:19.186 A:middle
+And we need to hook them up.
+
+00:31:20.276 --> 00:31:22.406 A:middle
+So let's do that.
+
+00:31:23.096 --> 00:31:25.786 A:middle
+So we have our IBActions
+defined for those buttons,
+
+00:31:25.786 --> 00:31:29.206 A:middle
+we have cancel import, pause
+import, and resume import.
+
+00:31:29.206 --> 00:31:31.606 A:middle
+And what we're going to do is
+we're going to call cancel,
+
+00:31:31.606 --> 00:31:34.876 A:middle
+pause, and resume on the
+overall progress inside
+
+00:31:34.876 --> 00:31:35.686 A:middle
+of those actions.
+
+00:31:36.336 --> 00:31:43.966 A:middle
+And now once -- and now that
+will call any cancellation,
+
+00:31:43.966 --> 00:31:46.666 A:middle
+pausing, or resuming handlers
+on any child progresses.
+
+00:31:46.666 --> 00:31:48.366 A:middle
+And we don't have any yet,
+
+00:31:48.366 --> 00:31:50.296 A:middle
+but our download does
+support cancellation,
+
+00:31:50.296 --> 00:31:51.216 A:middle
+pausing, and resuming.
+
+00:31:51.516 --> 00:31:53.096 A:middle
+So let's go to our
+photo download.
+
+00:31:53.816 --> 00:31:57.126 A:middle
+And if we go down to our
+Will Begin Download callback,
+
+00:31:57.846 --> 00:32:01.016 A:middle
+we can add cancellation,
+pausing,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:57.846 --> 00:32:01.016 A:middle
+we can add cancellation,
+pausing,
+
+00:32:01.016 --> 00:32:02.956 A:middle
+resuming support
+to this NSProgress.
+
+00:32:03.236 --> 00:32:05.956 A:middle
+So first we set cancelable
+to true,
+
+00:32:06.696 --> 00:32:08.656 A:middle
+and we set our
+cancellationHandler,
+
+00:32:09.486 --> 00:32:12.756 A:middle
+and here our cancellationHandler
+is calling Failed Download
+
+00:32:12.756 --> 00:32:15.056 A:middle
+With Error with an
+NSUser Canceled Error.
+
+00:32:18.156 --> 00:32:21.076 A:middle
+And we also are pausable and
+resumable, so we're going
+
+00:32:21.076 --> 00:32:24.076 A:middle
+to set pausable to true, and in
+our pausing handler we're going
+
+00:32:24.076 --> 00:32:25.936 A:middle
+to call this Suspend
+Download method.
+
+00:32:26.726 --> 00:32:29.176 A:middle
+And in our resuming handler,
+we're calling Resume Download.
+
+00:32:30.026 --> 00:32:33.706 A:middle
+Now, note that these are all
+private, the Failed Download
+
+00:32:33.706 --> 00:32:36.236 A:middle
+With Error, Suspend Download,
+and Resume Download methods,
+
+00:32:36.786 --> 00:32:39.456 A:middle
+so we're only exposing this
+functionality for canceling,
+
+00:32:39.456 --> 00:32:41.396 A:middle
+pausing, or resuming
+through NSProgress,
+
+00:32:41.396 --> 00:32:43.426 A:middle
+so it can be a pretty
+powerful point of interaction.
+
+00:32:44.956 --> 00:32:51.466 A:middle
+Now when we run the app, and
+we compress, start our import
+
+00:32:51.466 --> 00:32:55.226 A:middle
+and pause, and the progress,
+the download pauses itself,
+
+00:32:55.956 --> 00:32:58.546 A:middle
+and we press resume,
+and it resumes,
+
+00:32:58.546 --> 00:33:00.466 A:middle
+and we can hit cancel,
+and it gets canceled.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:58.546 --> 00:33:00.466 A:middle
+and we can hit cancel,
+and it gets canceled.
+
+00:33:00.466 --> 00:33:03.566 A:middle
+And what's happening is that
+overall progress is sending --
+
+00:33:03.566 --> 00:33:06.136 A:middle
+invoking any
+cancellationHandlers
+
+00:33:06.136 --> 00:33:07.626 A:middle
+for any children it might have.
+
+00:33:08.286 --> 00:33:09.896 A:middle
+And that's it.
+
+00:33:11.066 --> 00:33:12.546 A:middle
+Back to slides.
+
+00:33:13.516 --> 00:33:17.936 A:middle
+[Applause]
+
+00:33:18.436 --> 00:33:18.696 A:middle
+&gt;&gt; VINCE SPADER: All right.
+
+00:33:19.426 --> 00:33:21.686 A:middle
+So let's talk a little bit
+about the user interface.
+
+00:33:22.256 --> 00:33:23.626 A:middle
+We have gone through
+all of this trouble
+
+00:33:23.626 --> 00:33:25.586 A:middle
+of creating these
+NSProgress objects,
+
+00:33:25.656 --> 00:33:28.086 A:middle
+but their ultimate purpose
+is to give the user an idea
+
+00:33:28.086 --> 00:33:30.666 A:middle
+of what's happening, and that
+means the user interface.
+
+00:33:31.856 --> 00:33:33.536 A:middle
+So all of the properties
+
+00:33:33.536 --> 00:33:36.006 A:middle
+on NSProgress are
+key value observable,
+
+00:33:36.386 --> 00:33:39.146 A:middle
+clients can add the KVO
+observers to update their UI.
+
+00:33:39.146 --> 00:33:43.056 A:middle
+For example, a client can update
+their UI progress views progress
+
+00:33:43.176 --> 00:33:45.496 A:middle
+with the NSProgress as
+fractionCompleted property,
+
+00:33:46.176 --> 00:33:48.836 A:middle
+or update a label with
+a localizedDescription.
+
+00:33:50.156 --> 00:33:54.626 A:middle
+Also be aware, that these KVO
+callbacks might not necessarily
+
+00:33:54.626 --> 00:33:55.996 A:middle
+be called on the main thread.
+
+00:33:56.026 --> 00:33:58.516 A:middle
+So if you're updating
+UIControls, you want to move
+
+00:33:58.516 --> 00:33:59.766 A:middle
+that work to the main queue.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:00.336 --> 00:34:02.736 A:middle
+So here is an example of what
+
+00:34:02.786 --> 00:34:04.906 A:middle
+that adding an observer
+might look like.
+
+00:34:06.396 --> 00:34:10.976 A:middle
+You call addObserver for
+key path on the NSProgress
+
+00:34:11.585 --> 00:34:13.306 A:middle
+for the fractionCompleted
+property.
+
+00:34:14.346 --> 00:34:16.946 A:middle
+Then in our override
+of observe Value
+
+00:34:16.946 --> 00:34:20.716 A:middle
+For Key Path we enqueue
+some work on the main queue,
+
+00:34:21.356 --> 00:34:23.735 A:middle
+and on the main queue we
+get the fractionCompleted
+
+00:34:23.735 --> 00:34:26.886 A:middle
+from the NSProgress, and
+update our UIProgressView.
+
+00:34:27.446 --> 00:34:28.896 A:middle
+And that's basically it.
+
+00:34:28.896 --> 00:34:31.556 A:middle
+You can use a similar
+pattern for updating labels
+
+00:34:31.746 --> 00:34:33.376 A:middle
+or buttons in your UI.
+
+00:34:33.376 --> 00:34:37.166 A:middle
+All right, finally, let's go
+
+00:34:37.166 --> 00:34:39.735 A:middle
+over some best practice
+for NSProgress.
+
+00:34:39.735 --> 00:34:42.896 A:middle
+Since this talk is called best
+practices, I better squeeze some
+
+00:34:42.896 --> 00:34:45.315 A:middle
+in at the last minute.
+
+00:34:45.456 --> 00:34:47.346 A:middle
+So, first is completion.
+
+00:34:47.876 --> 00:34:50.686 A:middle
+Don't use fractionCompleted
+to determine completion.
+
+00:34:50.686 --> 00:34:53.085 A:middle
+It's a floating point
+value determined --
+
+00:34:53.085 --> 00:34:54.446 A:middle
+derived from a calculation.
+
+00:34:54.786 --> 00:34:58.346 A:middle
+So comparing it to 1.0
+won't always be right.
+
+00:34:58.346 --> 00:35:02.896 A:middle
+Use completedUnitCount and
+totalUnitCount instead,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:58.346 --> 00:35:02.896 A:middle
+Use completedUnitCount and
+totalUnitCount instead,
+
+00:35:02.896 --> 00:35:04.456 A:middle
+unless your progress
+is indeterminant
+
+00:35:04.456 --> 00:35:05.766 A:middle
+or the totalUnitCount is 0.
+
+00:35:07.456 --> 00:35:10.666 A:middle
+It is important, by the way,
+that progress is finished.
+
+00:35:10.716 --> 00:35:13.646 A:middle
+The parents completedUnitCount
+only gets updated
+
+00:35:13.766 --> 00:35:14.956 A:middle
+when the child finishes.
+
+00:35:15.376 --> 00:35:19.226 A:middle
+And also NSProgress can optimize
+a way of completed children
+
+00:35:19.226 --> 00:35:21.686 A:middle
+so memory can be saved
+as work finishes.
+
+00:35:23.876 --> 00:35:27.846 A:middle
+Next, NSProgress
+objects cannot be reused.
+
+00:35:28.206 --> 00:35:29.616 A:middle
+Once they're done, they're done.
+
+00:35:29.876 --> 00:35:32.126 A:middle
+Once they're canceled,
+they're canceled.
+
+00:35:32.186 --> 00:35:34.146 A:middle
+If you need to reuse
+an NSProgress,
+
+00:35:34.546 --> 00:35:36.956 A:middle
+instead make a new instance
+and provide a mechanism
+
+00:35:36.956 --> 00:35:39.026 A:middle
+so the client of
+your progress knows
+
+00:35:39.026 --> 00:35:41.496 A:middle
+that the object has been
+replaced, like a notification.
+
+00:35:43.636 --> 00:35:45.446 A:middle
+Finally, performance.
+
+00:35:46.926 --> 00:35:48.866 A:middle
+Don't update the
+completedUnitCount
+
+00:35:48.866 --> 00:35:49.956 A:middle
+in a tight loop.
+
+00:35:49.956 --> 00:35:53.696 A:middle
+So, for example, don't update
+it every byte of a download.
+
+00:35:53.696 --> 00:35:55.476 A:middle
+If you have a parent,
+we might be calling
+
+00:35:55.476 --> 00:35:57.606 A:middle
+up to update the
+fractionCompleted,
+
+00:35:57.816 --> 00:35:59.596 A:middle
+which might take longer
+than you're expecting
+
+00:35:59.596 --> 00:36:03.226 A:middle
+since your composition can be
+arbitrarily large and very deep.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:35:59.596 --> 00:36:03.226 A:middle
+since your composition can be
+arbitrarily large and very deep.
+
+00:36:03.876 --> 00:36:07.426 A:middle
+But when you do so, don't
+forget to finish the progress.
+
+00:36:07.426 --> 00:36:09.286 A:middle
+So be sure to update
+the completedUnitCount
+
+00:36:09.286 --> 00:36:10.236 A:middle
+to the totalUnitCount.
+
+00:36:10.646 --> 00:36:11.856 A:middle
+Otherwise you're
+going to be left
+
+00:36:11.856 --> 00:36:13.046 A:middle
+with nearly finished progresses.
+
+00:36:13.046 --> 00:36:15.406 A:middle
+And that's no fun.
+
+00:36:15.606 --> 00:36:16.206 A:middle
+So that's it.
+
+00:36:16.666 --> 00:36:20.256 A:middle
+We talked a lot about how to
+use NSProgress effectively.
+
+00:36:20.256 --> 00:36:24.496 A:middle
+If there is anything to
+remember, it is these points.
+
+00:36:24.496 --> 00:36:26.636 A:middle
+Each progress has its own unit.
+
+00:36:27.056 --> 00:36:30.806 A:middle
+You can compose them either
+implicitly or explicitly.
+
+00:36:31.026 --> 00:36:33.156 A:middle
+And when you do, the
+pendingUnitCount is
+
+00:36:33.156 --> 00:36:34.596 A:middle
+in the parent's units.
+
+00:36:35.726 --> 00:36:38.516 A:middle
+Also you either create the
+NSProgress or you're a client.
+
+00:36:39.426 --> 00:36:42.976 A:middle
+For localization, you can use
+the kind and userInfo properties
+
+00:36:42.976 --> 00:36:45.666 A:middle
+to help us give you a
+better localizedDescription.
+
+00:36:47.276 --> 00:36:50.656 A:middle
+NSProgress can be a really nice
+interface for cancellation,
+
+00:36:50.656 --> 00:36:51.996 A:middle
+pausing, and resuming.
+
+00:36:52.226 --> 00:36:57.066 A:middle
+And all its properties are KVO
+observable, so you can use it,
+
+00:36:57.066 --> 00:37:00.166 A:middle
+use that to update your UI.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:57.066 --> 00:37:00.166 A:middle
+use that to update your UI.
+
+00:37:00.166 --> 00:37:00.746 A:middle
+&gt;&gt; That's it.
+
+00:37:00.746 --> 00:37:03.146 A:middle
+For more information,
+see the documentation;
+
+00:37:03.466 --> 00:37:05.446 A:middle
+also check out the
+header for NSProgress,
+
+00:37:05.446 --> 00:37:06.906 A:middle
+it is extremely well commented.
+
+00:37:06.986 --> 00:37:10.066 A:middle
+We have some new sample
+code, photoProgress,
+
+00:37:10.066 --> 00:37:12.936 A:middle
+which is based off the
+demos I showed today.
+
+00:37:12.936 --> 00:37:15.906 A:middle
+If you need any help,
+try the developer forums
+
+00:37:15.906 --> 00:37:17.726 A:middle
+or contact developer
+technical support,
+
+00:37:18.196 --> 00:37:20.986 A:middle
+and for general inquiries,
+email Paul Marcos.
+
+00:37:21.106 --> 00:37:21.696 A:middle
+And that's all.
+
+00:37:22.266 --> 00:37:22.496 A:middle
+Thanks.
+
+00:37:23.508 --> 00:37:25.508 A:middle
+[Applause]
+

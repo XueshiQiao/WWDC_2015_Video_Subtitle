@@ -1,0 +1,3736 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:24.326 --> 00:00:25.236 A:middle
+&gt;&gt; JON ANDREWS: Good morning.
+
+00:00:30.306 --> 00:00:32.036 A:middle
+Thank you for coming
+to see our session
+
+00:00:32.036 --> 00:00:33.486 A:middle
+on achieving all-day
+battery Life.
+
+00:00:34.086 --> 00:00:36.726 A:middle
+It's an area I am really excited
+to get to talk to you about.
+
+00:00:37.206 --> 00:00:39.856 A:middle
+My name is Jon Andrews from
+Core OS, and my colleague,
+
+00:00:39.856 --> 00:00:42.086 A:middle
+Soren Spies, will
+also be joining me.
+
+00:00:42.916 --> 00:00:46.466 A:middle
+So I hope that you all
+charged your phones last night
+
+00:00:46.466 --> 00:00:48.246 A:middle
+and didn't get to see
+this this morning.
+
+00:00:49.316 --> 00:00:51.226 A:middle
+We want you to see this
+much later in the day.
+
+00:00:52.196 --> 00:00:53.876 A:middle
+In fact, we'd like you
+to see it even later
+
+00:00:53.876 --> 00:00:55.116 A:middle
+than you've been able
+to see it to date.
+
+00:00:55.226 --> 00:00:58.936 A:middle
+We are going to walk
+through some aspects
+
+00:00:58.936 --> 00:01:01.686 A:middle
+of achieving all-day
+battery life under iOS.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:58.936 --> 00:01:01.686 A:middle
+of achieving all-day
+battery life under iOS.
+
+00:01:02.976 --> 00:01:06.166 A:middle
+We will cover what users expect
+from all-day battery life,
+
+00:01:07.426 --> 00:01:11.376 A:middle
+computing energy in general,
+improvements we've made
+
+00:01:11.376 --> 00:01:17.106 A:middle
+to the OS in terms of energy,
+your role in helping us
+
+00:01:17.106 --> 00:01:19.096 A:middle
+and the customers achieve
+all-day battery life,
+
+00:01:19.776 --> 00:01:22.316 A:middle
+and then Soren will give
+you a much deeper dive
+
+00:01:22.316 --> 00:01:24.866 A:middle
+on how your software
+can be modified in order
+
+00:01:24.866 --> 00:01:26.006 A:middle
+to help achieve those goals.
+
+00:01:27.896 --> 00:01:30.786 A:middle
+So let's look at what
+all-day battery life is.
+
+00:01:31.956 --> 00:01:34.876 A:middle
+Users don't just use
+their phone for eight
+
+00:01:34.876 --> 00:01:36.046 A:middle
+or ten hours in one go.
+
+00:01:37.036 --> 00:01:39.656 A:middle
+They actually spend some
+intense time using it,
+
+00:01:39.656 --> 00:01:42.596 A:middle
+maybe in the morning, as
+they are commuting to work,
+
+00:01:43.136 --> 00:01:45.916 A:middle
+and then the phone's
+pretty much idle,
+
+00:01:46.006 --> 00:01:48.086 A:middle
+and then it's doing
+some background work,
+
+00:01:48.086 --> 00:01:50.396 A:middle
+some maintenance work,
+talking to the network,
+
+00:01:50.396 --> 00:01:51.536 A:middle
+maybe downloading your mail.
+
+00:01:52.276 --> 00:01:54.866 A:middle
+But these kind of patterns
+go on throughout the day,
+
+00:01:54.866 --> 00:01:58.546 A:middle
+with bursts of workload and
+then some periods of idle.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:00.046 --> 00:02:02.126 A:middle
+And in order to achieve
+all-day battery life,
+
+00:02:02.316 --> 00:02:04.136 A:middle
+you really want to
+keep that low.
+
+00:02:04.826 --> 00:02:10.536 A:middle
+So the average energy
+during the day is low.
+
+00:02:11.246 --> 00:02:16.216 A:middle
+And that's what we are
+looking for in efforts from you
+
+00:02:16.216 --> 00:02:20.416 A:middle
+and we have been
+looking at in the OS.
+
+00:02:20.416 --> 00:02:22.576 A:middle
+So let's look at
+the fundamentals
+
+00:02:22.736 --> 00:02:24.916 A:middle
+of how you compute energy.
+
+00:02:25.876 --> 00:02:29.086 A:middle
+Energy has two components,
+power and time,
+
+00:02:29.146 --> 00:02:32.226 A:middle
+and the time element is
+often one that is forgotten.
+
+00:02:32.806 --> 00:02:38.876 A:middle
+You can do a really intense
+operation that uses a lot
+
+00:02:38.876 --> 00:02:43.646 A:middle
+of power, but you want to know
+how long you are doing it for.
+
+00:02:43.646 --> 00:02:47.156 A:middle
+If we look at standby, it
+doesn't use much power,
+
+00:02:47.746 --> 00:02:49.416 A:middle
+but you are able
+to stay in standby
+
+00:02:49.416 --> 00:02:50.706 A:middle
+for a very long period of time.
+
+00:02:51.626 --> 00:02:54.496 A:middle
+Playing audio is one of the
+other very low power use cases
+
+00:02:54.496 --> 00:02:56.596 A:middle
+that we have on our device,
+and that's why we are able
+
+00:02:56.596 --> 00:02:58.046 A:middle
+to offer great playback time.
+
+00:02:59.126 --> 00:03:02.586 A:middle
+But as you get further up into
+the more intense workloads,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:59.126 --> 00:03:02.586 A:middle
+But as you get further up into
+the more intense workloads,
+
+00:03:03.106 --> 00:03:04.496 A:middle
+you use more power
+and, therefore,
+
+00:03:04.496 --> 00:03:07.516 A:middle
+we do expect the time you
+use the device to decrease.
+
+00:03:08.396 --> 00:03:12.046 A:middle
+So it's pretty easy to
+achieve all-day battery life
+
+00:03:12.396 --> 00:03:14.166 A:middle
+if your workload
+looks like idle.
+
+00:03:14.706 --> 00:03:18.296 A:middle
+And that doesn't mean you
+can't have it be really intense
+
+00:03:18.296 --> 00:03:22.936 A:middle
+and have high power bursts,
+as long as the average is low.
+
+00:03:24.896 --> 00:03:27.816 A:middle
+Now our devices are getting
+increased dynamic range.
+
+00:03:28.656 --> 00:03:32.356 A:middle
+We are starting to get
+close to MacBook territory,
+
+00:03:32.356 --> 00:03:34.136 A:middle
+where you can get a huge
+amount of performance
+
+00:03:34.136 --> 00:03:36.146 A:middle
+out of the system, so you
+want to use it very carefully.
+
+00:03:37.626 --> 00:03:38.756 A:middle
+The other thing to remember is
+
+00:03:38.756 --> 00:03:42.096 A:middle
+that as we increase the
+dynamic range, the efficiency
+
+00:03:42.096 --> 00:03:45.426 A:middle
+of our hardware gets better
+with every generation.
+
+00:03:45.916 --> 00:03:48.286 A:middle
+So we are going to give
+you a better ability
+
+00:03:48.286 --> 00:03:50.776 A:middle
+to achieve those
+low-power operations,
+
+00:03:51.416 --> 00:03:54.816 A:middle
+but you can also make use of
+the higher peak performance
+
+00:03:55.266 --> 00:03:58.226 A:middle
+for intense operations and
+a snappy user experience.
+
+00:03:59.796 --> 00:04:03.326 A:middle
+So let's now look at that from
+an app life cycle perspective.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:59.796 --> 00:04:03.326 A:middle
+So let's now look at that from
+an app life cycle perspective.
+
+00:04:05.096 --> 00:04:08.186 A:middle
+The area under this graph
+represents the energy used
+
+00:04:08.186 --> 00:04:08.966 A:middle
+by an application.
+
+00:04:10.436 --> 00:04:14.266 A:middle
+You launch the application, and
+there's some work that goes on,
+
+00:04:14.676 --> 00:04:16.625 A:middle
+to initialize your application,
+
+00:04:16.625 --> 00:04:18.356 A:middle
+maybe you have some
+animations at the beginning.
+
+00:04:19.096 --> 00:04:22.916 A:middle
+And then there's some bursts of
+activity as your user interacts
+
+00:04:22.916 --> 00:04:23.696 A:middle
+with your application.
+
+00:04:24.966 --> 00:04:27.356 A:middle
+There's always some fixed cost
+here that you need to keep
+
+00:04:27.356 --> 00:04:31.526 A:middle
+in mind, and that's the one
+that the system and, you know,
+
+00:04:31.526 --> 00:04:32.836 A:middle
+the frameworks are using,
+
+00:04:33.336 --> 00:04:37.186 A:middle
+and the user workload
+is then on top of that.
+
+00:04:37.386 --> 00:04:40.216 A:middle
+Of course, the user finishes
+using your application,
+
+00:04:40.396 --> 00:04:43.496 A:middle
+and you want to do some
+operations as the app goes
+
+00:04:43.496 --> 00:04:45.546 A:middle
+into the background,
+and then ultimately,
+
+00:04:45.546 --> 00:04:46.966 A:middle
+your application is suspended.
+
+00:04:48.016 --> 00:04:50.316 A:middle
+But here you can see
+there's the time element,
+
+00:04:50.696 --> 00:04:52.746 A:middle
+with both the fixed
+and dynamic costs.
+
+00:04:54.616 --> 00:04:57.756 A:middle
+Now, we also need to
+think about that just
+
+00:04:57.806 --> 00:04:59.086 A:middle
+from a system perspective too.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:00.306 --> 00:05:02.876 A:middle
+So let's look at what a
+system looks like in standby.
+
+00:05:03.786 --> 00:05:08.266 A:middle
+Most of the components here are
+in some form of sleep state.
+
+00:05:09.536 --> 00:05:14.206 A:middle
+The display is off, memory
+is in sort of a refresh mode
+
+00:05:14.986 --> 00:05:17.126 A:middle
+and using actually
+very little power,
+
+00:05:17.926 --> 00:05:20.846 A:middle
+and some of the radios
+are on, just to allow them
+
+00:05:20.846 --> 00:05:24.116 A:middle
+to accept incoming traffic
+and wake the system up.
+
+00:05:24.256 --> 00:05:27.006 A:middle
+This is a great low-power mode.
+
+00:05:27.556 --> 00:05:31.416 A:middle
+Then we talked about user
+idle, and here more components
+
+00:05:31.416 --> 00:05:32.346 A:middle
+of the system are awake.
+
+00:05:32.936 --> 00:05:37.056 A:middle
+You can see that the display is
+on and active, and that brings
+
+00:05:37.056 --> 00:05:40.326 A:middle
+up a certain amount of
+soft systems with it.
+
+00:05:41.256 --> 00:05:47.166 A:middle
+The other components, like the
+CPU and GPU, are mostly inactive
+
+00:05:47.726 --> 00:05:49.596 A:middle
+and have small periods
+of inactivity,
+
+00:05:49.956 --> 00:05:51.666 A:middle
+so the cycle here is really low.
+
+00:05:52.576 --> 00:05:53.866 A:middle
+If we were to animate that,
+
+00:05:53.866 --> 00:05:56.876 A:middle
+and show you what the
+energy would look like,
+
+00:05:57.106 --> 00:05:59.246 A:middle
+you get this really
+nice slow drain
+
+00:05:59.246 --> 00:06:01.196 A:middle
+on the user's battery
+throughout the day,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:59.246 --> 00:06:01.196 A:middle
+on the user's battery
+throughout the day,
+
+00:06:01.596 --> 00:06:03.926 A:middle
+and hopefully now this
+is going into the evening
+
+00:06:03.926 --> 00:06:06.576 A:middle
+and you are going to bed
+plugging your phone in.
+
+00:06:07.996 --> 00:06:13.196 A:middle
+However, if you were to program
+an intense game, 3D game,
+
+00:06:13.766 --> 00:06:16.326 A:middle
+you are making the
+most use of our system.
+
+00:06:17.086 --> 00:06:19.806 A:middle
+You've really got all
+the components lit up,
+
+00:06:19.806 --> 00:06:23.576 A:middle
+you are probably using the CPU
+a lot in order to feed the GPU
+
+00:06:23.946 --> 00:06:28.466 A:middle
+for some complex rendering,
+and you've got the audio system
+
+00:06:28.466 --> 00:06:32.006 A:middle
+up because there's some game
+audio that you want to play.
+
+00:06:32.916 --> 00:06:37.956 A:middle
+So you'd expect that the power
+used is higher and the time
+
+00:06:37.956 --> 00:06:42.946 A:middle
+that the battery
+will last is shorter.
+
+00:06:43.316 --> 00:06:49.666 A:middle
+So there's three components
+to a very simple strategy
+
+00:06:49.666 --> 00:06:51.296 A:middle
+that we have for
+optimizing for energy.
+
+00:06:52.336 --> 00:06:53.786 A:middle
+You want to do less work.
+
+00:06:55.576 --> 00:06:58.286 A:middle
+And you want to then think
+about whether that work needs
+
+00:06:58.286 --> 00:07:00.186 A:middle
+to be done now or whether
+you could do it later.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:58.286 --> 00:07:00.186 A:middle
+to be done now or whether
+you could do it later.
+
+00:07:01.546 --> 00:07:05.386 A:middle
+And then when you eventually
+do that work, you want to do it
+
+00:07:05.386 --> 00:07:06.596 A:middle
+as efficiently as possible.
+
+00:07:07.086 --> 00:07:11.756 A:middle
+Soren will go into
+more details on this
+
+00:07:11.906 --> 00:07:12.886 A:middle
+in the next part of the talk.
+
+00:07:15.296 --> 00:07:17.136 A:middle
+So let's talk about
+what we did in iOS 9.
+
+00:07:18.436 --> 00:07:21.486 A:middle
+We already had best-in-class
+battery life.
+
+00:07:22.346 --> 00:07:23.996 A:middle
+However, we really
+thought we could do better,
+
+00:07:24.776 --> 00:07:26.386 A:middle
+and our customers
+wanted us to do better.
+
+00:07:27.306 --> 00:07:28.286 A:middle
+You wanted us to do better.
+
+00:07:29.566 --> 00:07:32.866 A:middle
+So we set out to improve battery
+life on our existing hardware,
+
+00:07:33.766 --> 00:07:35.876 A:middle
+offering up to an hour of
+additional battery life
+
+00:07:35.876 --> 00:07:40.156 A:middle
+by optimizing the OS and
+many of the applications
+
+00:07:40.156 --> 00:07:41.386 A:middle
+that are integrated inside it.
+
+00:07:42.956 --> 00:07:46.826 A:middle
+Now, this may seem familiar to
+some of you because we did this,
+
+00:07:46.906 --> 00:07:48.636 A:middle
+a similar effort,
+in OS X Mavericks.
+
+00:07:50.126 --> 00:07:51.356 A:middle
+We eliminated polling
+
+00:07:51.356 --> 00:07:53.486 A:middle
+from applications,
+frameworks, drivers.
+
+00:07:53.546 --> 00:07:56.126 A:middle
+We optimized the kernel.
+
+00:07:56.286 --> 00:08:00.196 A:middle
+We applied our quality
+of service to threads,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:56.286 --> 00:08:00.196 A:middle
+We applied our quality
+of service to threads,
+
+00:08:00.956 --> 00:08:04.666 A:middle
+adopted more NS operations,
+scheduled IO
+
+00:08:04.666 --> 00:08:07.866 A:middle
+with a correct quality
+of service.
+
+00:08:08.036 --> 00:08:13.086 A:middle
+We coalesced timers to reduce
+the amount of wakes on the CPU
+
+00:08:13.626 --> 00:08:15.696 A:middle
+and rate-limited applications
+with things like App Nap.
+
+00:08:17.366 --> 00:08:20.096 A:middle
+We reimplemented our CPU power
+management so the overhead
+
+00:08:20.096 --> 00:08:21.496 A:middle
+of achieving those powers
+
+00:08:21.566 --> 00:08:24.526 A:middle
+from a system perspective
+were significantly lower.
+
+00:08:25.436 --> 00:08:29.166 A:middle
+Then we added what turned out
+to be a really popular feature
+
+00:08:29.166 --> 00:08:33.106 A:middle
+in adding the "Significant
+Energy" identification
+
+00:08:33.145 --> 00:08:34.956 A:middle
+to the battery menu
+so you could see
+
+00:08:34.956 --> 00:08:40.496 A:middle
+which applications were drawing
+a lot of power from the battery.
+
+00:08:40.676 --> 00:08:43.655 A:middle
+So going back to iOS now,
+look at how we applied those,
+
+00:08:44.126 --> 00:08:45.396 A:middle
+we really focused on the iPhone.
+
+00:08:46.376 --> 00:08:49.286 A:middle
+That was a device that
+we got the most feedback
+
+00:08:49.286 --> 00:08:50.926 A:middle
+that people wanted to
+improve battery life.
+
+00:08:52.206 --> 00:08:53.816 A:middle
+However, these improvements
+applied
+
+00:08:53.816 --> 00:08:56.226 A:middle
+to all our iOS products,
+to some extent.
+
+00:08:57.536 --> 00:09:00.586 A:middle
+Now, let's go through
+those three components
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:57.536 --> 00:09:00.586 A:middle
+Now, let's go through
+those three components
+
+00:09:00.586 --> 00:09:01.166 A:middle
+to the strategy.
+
+00:09:02.636 --> 00:09:03.456 A:middle
+Doing less work.
+
+00:09:03.486 --> 00:09:09.456 A:middle
+We want to, again, optimize
+for the idle workloads
+
+00:09:09.456 --> 00:09:11.296 A:middle
+and particularly looked
+at the sleep timers,
+
+00:09:11.926 --> 00:09:13.956 A:middle
+the amount of time the
+system takes to go to sleep
+
+00:09:13.956 --> 00:09:15.916 A:middle
+after the user is finished
+interacting with it.
+
+00:09:16.336 --> 00:09:18.016 A:middle
+Those are now optimized based
+
+00:09:18.016 --> 00:09:20.386 A:middle
+on what the user was
+doing with the device.
+
+00:09:21.106 --> 00:09:23.986 A:middle
+Did they actually not
+interact with a notification
+
+00:09:24.426 --> 00:09:26.106 A:middle
+or did they interact with it?
+
+00:09:26.996 --> 00:09:29.506 A:middle
+So we reduced the number
+of CPU wakes in idle,
+
+00:09:29.506 --> 00:09:32.206 A:middle
+and then we've added a
+pretty cool feature in terms
+
+00:09:32.206 --> 00:09:33.256 A:middle
+of face-down detection.
+
+00:09:33.936 --> 00:09:37.536 A:middle
+So if you have the phone with
+the screen toward the table,
+
+00:09:37.536 --> 00:09:43.056 A:middle
+say, and a notification comes
+in, the screen won't light
+
+00:09:43.056 --> 00:09:44.466 A:middle
+to process that notification.
+
+00:09:44.666 --> 00:09:48.166 A:middle
+We'll do the minimal amount of
+work to have the system ready
+
+00:09:48.166 --> 00:09:50.196 A:middle
+so that when the user
+picks the phone up,
+
+00:09:50.196 --> 00:09:53.176 A:middle
+the notification is
+available to them.
+
+00:09:54.026 --> 00:09:55.606 A:middle
+So now moving on to
+doing work later.
+
+00:09:56.296 --> 00:10:00.316 A:middle
+We've made a lot of
+effort to defer work
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:56.296 --> 00:10:00.316 A:middle
+We've made a lot of
+effort to defer work
+
+00:10:00.656 --> 00:10:02.656 A:middle
+until the device is plugged in.
+
+00:10:03.496 --> 00:10:06.186 A:middle
+There's no point doing
+background operation,
+
+00:10:06.186 --> 00:10:09.276 A:middle
+maintenance operation, that the
+user doesn't need right now.
+
+00:10:09.666 --> 00:10:10.986 A:middle
+They may be a daily activity.
+
+00:10:11.446 --> 00:10:12.976 A:middle
+You can do that when
+they charge the phone
+
+00:10:12.976 --> 00:10:14.466 A:middle
+because we know they
+are going to charge it
+
+00:10:14.466 --> 00:10:17.926 A:middle
+at some point during the day.
+
+00:10:18.156 --> 00:10:22.306 A:middle
+And we can also, therefore,
+defer networking to when you're
+
+00:10:22.306 --> 00:10:24.446 A:middle
+on Wi-Fi because people
+charge on their Wi-Fi.
+
+00:10:24.446 --> 00:10:29.036 A:middle
+And then we've leveraged the
+persistent connection API even
+
+00:10:29.036 --> 00:10:31.796 A:middle
+more so that when
+the radios are on,
+
+00:10:31.796 --> 00:10:33.246 A:middle
+we are doing work
+that's appropriate,
+
+00:10:33.716 --> 00:10:36.546 A:middle
+even if the radios came on
+to do some background work.
+
+00:10:36.946 --> 00:10:40.326 A:middle
+Now, it's all well and
+good to do that work,
+
+00:10:40.326 --> 00:10:42.746 A:middle
+but we want to be able to do
+it as efficiently as possible.
+
+00:10:44.016 --> 00:10:45.176 A:middle
+So we made a number of changes.
+
+00:10:45.616 --> 00:10:48.746 A:middle
+We've optimized our iOS and
+networking stack to work best
+
+00:10:48.746 --> 00:10:52.786 A:middle
+with LTE networks and
+specifically our own LTE radios.
+
+00:10:53.876 --> 00:10:55.676 A:middle
+We, again, optimized
+our power management
+
+00:10:55.996 --> 00:10:58.606 A:middle
+to reduce the overhead
+of keeping the system
+
+00:10:58.606 --> 00:10:59.506 A:middle
+in its low power state.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:00.666 --> 00:11:03.336 A:middle
+And we reduced the cost of
+our own logging mechanisms
+
+00:11:03.826 --> 00:11:06.626 A:middle
+so that they don't
+interact with the system.
+
+00:11:06.726 --> 00:11:12.696 A:middle
+And, of course, we continue to
+optimize our numerics libraries
+
+00:11:13.186 --> 00:11:15.316 A:middle
+so that they are best optimized
+for each piece of hardware.
+
+00:11:16.056 --> 00:11:19.626 A:middle
+And there's a session, I
+believe tomorrow, on that.
+
+00:11:21.836 --> 00:11:24.986 A:middle
+So we talked about
+user feedback and how
+
+00:11:24.986 --> 00:11:26.116 A:middle
+that was added in Mavericks.
+
+00:11:26.636 --> 00:11:30.876 A:middle
+We already had the
+battery setting,
+
+00:11:31.076 --> 00:11:35.226 A:middle
+which showed you application
+usage and allowed for --
+
+00:11:35.226 --> 00:11:38.616 A:middle
+gave you information
+around environmental factors
+
+00:11:38.696 --> 00:11:42.186 A:middle
+and suggestions for the user as
+to who to improve battery life.
+
+00:11:43.226 --> 00:11:48.816 A:middle
+We've gone one stage further
+here and added per-app screen on
+
+00:11:48.816 --> 00:11:52.256 A:middle
+and background time
+to this setting panel.
+
+00:11:53.086 --> 00:11:55.076 A:middle
+So you can see there's a
+control in the corner there --
+
+00:11:55.336 --> 00:11:56.866 A:middle
+let me go back and forward --
+
+00:11:57.416 --> 00:11:59.946 A:middle
+you see that small control that
+allows you to switch mode here.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:02.406 --> 00:12:08.306 A:middle
+And then we've added
+Low Power Mode.
+
+00:12:08.936 --> 00:12:13.566 A:middle
+This is a user preference
+that will extend battery life.
+
+00:12:14.556 --> 00:12:17.596 A:middle
+It limits CPU, restricts
+background operation
+
+00:12:17.636 --> 00:12:19.916 A:middle
+so that the background app
+refresh mechanism we introduced
+
+00:12:19.916 --> 00:12:21.816 A:middle
+a few years ago is
+disabled in this mode.
+
+00:12:23.376 --> 00:12:26.736 A:middle
+We turn off discretionary
+and background work,
+
+00:12:27.106 --> 00:12:29.446 A:middle
+so if you have downloads that
+are scheduled in the background,
+
+00:12:29.446 --> 00:12:31.476 A:middle
+they won't happen until the
+user comes out of this mode.
+
+00:12:32.856 --> 00:12:34.486 A:middle
+And mail fetch is disabled.
+
+00:12:34.486 --> 00:12:36.416 A:middle
+People get lots of email
+
+00:12:36.416 --> 00:12:38.356 A:middle
+and therefore it's a big
+drain on their system.
+
+00:12:38.916 --> 00:12:43.136 A:middle
+We talked a little bit about OS.
+
+00:12:43.516 --> 00:12:45.556 A:middle
+Now let's talk about some
+things we are going to give you
+
+00:12:45.556 --> 00:12:47.686 A:middle
+to help improve battery life.
+
+00:12:49.056 --> 00:12:52.676 A:middle
+Well, we've brought the energy
+gauges that we had in OS X
+
+00:12:52.676 --> 00:12:57.216 A:middle
+over to iOS, and we've done
+that in a rather thoughtful way
+
+00:12:57.216 --> 00:13:02.276 A:middle
+in bringing gauges that
+make the most impact on iOS.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:57.216 --> 00:13:02.276 A:middle
+in bringing gauges that
+make the most impact on iOS.
+
+00:13:02.356 --> 00:13:06.896 A:middle
+So we've added a location
+instrument in addition
+
+00:13:06.896 --> 00:13:09.506 A:middle
+to the other instruments
+that are there.
+
+00:13:09.506 --> 00:13:14.306 A:middle
+We've also written an entirely
+new iOS Energy Guide that's
+
+00:13:14.306 --> 00:13:19.066 A:middle
+up on our website, alongside
+an improved OS X Energy Guide.
+
+00:13:20.196 --> 00:13:22.226 A:middle
+Now, what can you do
+with these instruments?
+
+00:13:22.226 --> 00:13:27.106 A:middle
+We want you to go and optimize
+the power of your application.
+
+00:13:27.916 --> 00:13:29.636 A:middle
+Let me just give you
+a very simple example.
+
+00:13:32.006 --> 00:13:35.026 A:middle
+If you are playing full-screen
+video, we have an optimization,
+
+00:13:35.186 --> 00:13:37.086 A:middle
+like many of the TVs you
+probably have at home,
+
+00:13:37.466 --> 00:13:40.646 A:middle
+that reduces the backlight,
+adjusts the gamma to compensate,
+
+00:13:40.646 --> 00:13:42.856 A:middle
+and gives the same visual image.
+
+00:13:43.876 --> 00:13:48.356 A:middle
+Now, that is a small
+reduction in energy,
+
+00:13:48.686 --> 00:13:49.886 A:middle
+but because of the
+time component,
+
+00:13:49.886 --> 00:13:52.646 A:middle
+the energy saved is
+pretty substantial.
+
+00:13:53.366 --> 00:13:55.996 A:middle
+And we can get an additional
+hour of battery life
+
+00:13:56.176 --> 00:13:57.426 A:middle
+if you're watching
+full-screen video,
+
+00:13:57.686 --> 00:13:58.966 A:middle
+just from this simple mechanism.
+
+00:13:59.686 --> 00:14:03.916 A:middle
+However, if you put
+any UI on the screen,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:59.686 --> 00:14:03.916 A:middle
+However, if you put
+any UI on the screen,
+
+00:14:03.916 --> 00:14:07.176 A:middle
+that mechanism is disabled,
+and we've seen applications
+
+00:14:07.216 --> 00:14:10.336 A:middle
+that have full screen,
+fully transparent UI layers
+
+00:14:10.786 --> 00:14:12.406 A:middle
+that completely disable
+this mechanism
+
+00:14:12.406 --> 00:14:13.906 A:middle
+and therefore give no
+benefit to the user.
+
+00:14:14.166 --> 00:14:20.986 A:middle
+Now let's just talk
+about OS X for a moment.
+
+00:14:20.986 --> 00:14:22.646 A:middle
+We talked a little about iOS.
+
+00:14:23.136 --> 00:14:25.426 A:middle
+We introduced the MacBook
+earlier in the year.
+
+00:14:25.566 --> 00:14:28.396 A:middle
+That's our first fanless
+system and, therefore,
+
+00:14:28.396 --> 00:14:30.126 A:middle
+it is somewhat thermally
+constrained.
+
+00:14:30.676 --> 00:14:34.596 A:middle
+It's designed to work best
+with really bursty workloads.
+
+00:14:35.506 --> 00:14:39.296 A:middle
+We've optimized the OS to work
+hand in hand with that machine.
+
+00:14:40.236 --> 00:14:43.256 A:middle
+So you should be
+tagging any work
+
+00:14:43.256 --> 00:14:46.166 A:middle
+with the appropriate
+thread quality of service.
+
+00:14:46.546 --> 00:14:48.456 A:middle
+Use the gauges and instruments
+
+00:14:48.456 --> 00:14:49.976 A:middle
+that we already have
+available on OS X.
+
+00:14:49.976 --> 00:14:54.296 A:middle
+And then make sure you've
+prioritized your work using
+
+00:14:54.336 --> 00:14:55.316 A:middle
+NSOperation and GCD.
+
+00:14:55.316 --> 00:14:59.166 A:middle
+If you have work that's user
+initiated, make sure it's tagged
+
+00:14:59.166 --> 00:15:01.996 A:middle
+as such, but if it's
+background work, tag it as that,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:59.166 --> 00:15:01.996 A:middle
+as such, but if it's
+background work, tag it as that,
+
+00:15:02.656 --> 00:15:08.106 A:middle
+and the OS will schedule that
+work to give great performance
+
+00:15:08.436 --> 00:15:11.276 A:middle
+and also be able
+to manage the power
+
+00:15:11.276 --> 00:15:15.196 A:middle
+and thermals of that device.
+
+00:15:15.336 --> 00:15:21.306 A:middle
+Okay. So, just to recap,
+energy is power times time.
+
+00:15:21.706 --> 00:15:24.156 A:middle
+Always remember that time
+component when you are thinking
+
+00:15:24.156 --> 00:15:26.936 A:middle
+about optimizing energy
+of your application
+
+00:15:26.936 --> 00:15:27.896 A:middle
+for all-day battery life.
+
+00:15:29.046 --> 00:15:30.976 A:middle
+The hardware is getting
+a larger dynamic range.
+
+00:15:31.246 --> 00:15:34.456 A:middle
+So when you are doing
+operations, really think
+
+00:15:34.496 --> 00:15:36.476 A:middle
+about how you are
+doing them efficiently,
+
+00:15:36.746 --> 00:15:39.366 A:middle
+when you are doing them,
+and do you, in fact,
+
+00:15:39.366 --> 00:15:40.356 A:middle
+even need to do them at all?
+
+00:15:41.686 --> 00:15:46.466 A:middle
+And make your application as low
+power as possible on an average
+
+00:15:46.686 --> 00:15:48.716 A:middle
+so that you are able to
+achieve all-day battery life.
+
+00:15:49.616 --> 00:15:51.756 A:middle
+And now I'm going to hand it
+over to my colleague Soren
+
+00:15:51.796 --> 00:15:53.296 A:middle
+who is going to go
+into more detail.
+
+00:15:54.516 --> 00:16:01.576 A:middle
+[ Applause ]
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:15:54.516 --> 00:16:01.576 A:middle
+[ Applause ]
+
+00:16:02.076 --> 00:16:02.386 A:middle
+&gt;&gt; SOREN SPIES: Good morning.
+
+00:16:02.666 --> 00:16:03.036 A:middle
+Thank you.
+
+00:16:03.386 --> 00:16:05.746 A:middle
+Really glad you're here to
+learn about energy efficiency,
+
+00:16:06.106 --> 00:16:08.756 A:middle
+hoping to empower you so that
+you can understand how your code
+
+00:16:09.006 --> 00:16:11.446 A:middle
+is at the center of
+all-day battery life.
+
+00:16:12.256 --> 00:16:16.416 A:middle
+We are going to talk
+about two big things,
+
+00:16:16.916 --> 00:16:19.266 A:middle
+but first we are going to
+start out with some principles
+
+00:16:19.266 --> 00:16:21.906 A:middle
+about how what Jon talked
+about, and we are going to tie
+
+00:16:21.906 --> 00:16:24.416 A:middle
+that to the user and
+how the user is the key
+
+00:16:24.416 --> 00:16:26.336 A:middle
+to getting the right
+time scale in your app.
+
+00:16:26.336 --> 00:16:30.006 A:middle
+We are going to talk about
+where energy goes, in particular
+
+00:16:30.006 --> 00:16:34.466 A:middle
+on CPU and GPU is important
+for both OS X and iOS.
+
+00:16:35.056 --> 00:16:36.436 A:middle
+Throughout this part
+of the talk,
+
+00:16:36.436 --> 00:16:39.336 A:middle
+I am going to be
+explaining to you how
+
+00:16:39.336 --> 00:16:42.896 A:middle
+to achieve low average
+power so that you do get
+
+00:16:42.896 --> 00:16:44.376 A:middle
+that all-day battery life.
+
+00:16:44.376 --> 00:16:46.826 A:middle
+We are also going to talk
+specifically about iOS.
+
+00:16:46.876 --> 00:16:50.206 A:middle
+There's a number of hardware
+components in our iOS devices
+
+00:16:50.206 --> 00:16:52.896 A:middle
+that you can take advantage of,
+which you need to be careful
+
+00:16:52.896 --> 00:16:56.546 A:middle
+about in both the power and time
+components so that you do get
+
+00:16:56.546 --> 00:16:57.446 A:middle
+that all-day battery life.
+
+00:16:57.446 --> 00:16:59.006 A:middle
+And then finally I
+will talk a little bit
+
+00:16:59.006 --> 00:17:00.996 A:middle
+about how you can
+integrate this understanding
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:59.006 --> 00:17:00.996 A:middle
+about how you can
+integrate this understanding
+
+00:17:01.416 --> 00:17:02.596 A:middle
+into your development process
+
+00:17:02.706 --> 00:17:05.376 A:middle
+so that each day you are
+thinking a little bit
+
+00:17:05.376 --> 00:17:06.215 A:middle
+about energy.
+
+00:17:06.996 --> 00:17:11.915 A:middle
+Before I go a little bit
+farther, I can't see too well
+
+00:17:11.915 --> 00:17:13.455 A:middle
+out there, but can
+you raise your hand
+
+00:17:13.455 --> 00:17:15.445 A:middle
+if you have an LED light
+bulb somewhere in your home.
+
+00:17:16.685 --> 00:17:18.516 A:middle
+Okay. You know about
+LED light bulbs.
+
+00:17:18.516 --> 00:17:19.026 A:middle
+Good work.
+
+00:17:19.126 --> 00:17:21.126 A:middle
+You probably still have
+a few incandescents left.
+
+00:17:21.126 --> 00:17:21.656 A:middle
+I know I do.
+
+00:17:21.656 --> 00:17:23.576 A:middle
+I recently replaced
+the ones in my fridge.
+
+00:17:23.746 --> 00:17:25.346 A:middle
+That's an interesting place
+to put LED light bulbs.
+
+00:17:25.346 --> 00:17:31.046 A:middle
+Raise your hand if you leave
+your lights on all the time
+
+00:17:31.046 --> 00:17:33.146 A:middle
+when you are not home.
+
+00:17:33.366 --> 00:17:34.996 A:middle
+Okay. We have one
+person who does that,
+
+00:17:34.996 --> 00:17:36.466 A:middle
+and he's my office
+mate, so I am going
+
+00:17:36.466 --> 00:17:37.746 A:middle
+to give him a hard
+time [laughter].
+
+00:17:38.376 --> 00:17:40.896 A:middle
+He's not even the one who leaves
+his light on in the office.
+
+00:17:40.896 --> 00:17:45.856 A:middle
+Okay. So key here, when
+we switch to LED lights,
+
+00:17:46.036 --> 00:17:46.996 A:middle
+we bring the power down,
+
+00:17:46.996 --> 00:17:49.196 A:middle
+but we don't just leave
+them running all day.
+
+00:17:49.196 --> 00:17:51.286 A:middle
+We still turn them off
+so we get the time down.
+
+00:17:51.786 --> 00:17:54.166 A:middle
+And there's probably a lot
+of equipment in your houses,
+
+00:17:54.406 --> 00:17:57.586 A:middle
+networking, maybe DVRs,
+even computers and servers,
+
+00:17:58.206 --> 00:18:00.526 A:middle
+that is running all the time,
+and you might not think about it
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:58.206 --> 00:18:00.526 A:middle
+that is running all the time,
+and you might not think about it
+
+00:18:00.526 --> 00:18:01.846 A:middle
+because it doesn't
+light up like a light.
+
+00:18:01.846 --> 00:18:04.286 A:middle
+But I am going to try to help
+you think about that better
+
+00:18:04.796 --> 00:18:07.646 A:middle
+in software because software
+ultimately controls all the
+
+00:18:07.646 --> 00:18:11.076 A:middle
+light switches in our
+hardware, and we've got
+
+00:18:11.076 --> 00:18:13.406 A:middle
+to get those light switches
+off most of the time in order
+
+00:18:13.406 --> 00:18:14.386 A:middle
+to get all-day battery life.
+
+00:18:15.006 --> 00:18:17.106 A:middle
+So let's talk about
+the strategy.
+
+00:18:17.826 --> 00:18:20.726 A:middle
+Ultimately, we want to be
+doing user-driven work.
+
+00:18:21.126 --> 00:18:22.896 A:middle
+We want the user
+to be benefiting
+
+00:18:22.896 --> 00:18:23.916 A:middle
+from that energy in the battery.
+
+00:18:23.916 --> 00:18:24.556 A:middle
+They own it.
+
+00:18:25.476 --> 00:18:29.166 A:middle
+There's a lot of times
+when software is like, oh,
+
+00:18:29.286 --> 00:18:30.446 A:middle
+I have something
+to do right now.
+
+00:18:30.446 --> 00:18:30.956 A:middle
+Can I do it?
+
+00:18:30.956 --> 00:18:31.696 A:middle
+Oh, yeah, let's do it.
+
+00:18:31.876 --> 00:18:32.876 A:middle
+Let's do it again.
+
+00:18:33.596 --> 00:18:34.536 A:middle
+Don't. Just don't.
+
+00:18:35.256 --> 00:18:37.636 A:middle
+We've got to eliminate any
+kind of polling or timers.
+
+00:18:37.926 --> 00:18:41.366 A:middle
+Computers operate so much
+more quickly than people do --
+
+00:18:41.646 --> 00:18:43.306 A:middle
+literally between keystrokes.
+
+00:18:43.606 --> 00:18:45.756 A:middle
+Even if you are a super-fast
+typist, 100 words a minute,
+
+00:18:45.756 --> 00:18:48.256 A:middle
+between keystrokes at
+a microsecond scale,
+
+00:18:48.666 --> 00:18:50.676 A:middle
+we can idle parts of the system.
+
+00:18:50.746 --> 00:18:52.856 A:middle
+The processor can actually go
+to sleep between keystrokes,
+
+00:18:53.276 --> 00:18:56.896 A:middle
+and typically, you know,
+click or tap, there's a lot
+
+00:18:56.896 --> 00:18:59.616 A:middle
+of computer time between
+user interactions.
+
+00:18:59.616 --> 00:19:02.596 A:middle
+So you want your software
+to not be trying to run
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:59.616 --> 00:19:02.596 A:middle
+So you want your software
+to not be trying to run
+
+00:19:02.596 --> 00:19:05.866 A:middle
+at computer speed unless
+it's doing work directly
+
+00:19:05.866 --> 00:19:06.386 A:middle
+for the user.
+
+00:19:08.026 --> 00:19:09.576 A:middle
+So you want to respond
+to the user.
+
+00:19:09.576 --> 00:19:10.046 A:middle
+That's great.
+
+00:19:10.296 --> 00:19:12.896 A:middle
+Use all of our super-powerful
+hardware, and then back
+
+00:19:12.896 --> 00:19:15.446 A:middle
+to idle, totally flat, zero.
+
+00:19:16.036 --> 00:19:19.576 A:middle
+Jon talked about delaying work.
+
+00:19:19.786 --> 00:19:22.436 A:middle
+A lot of times, you can actually
+delay work indefinitely.
+
+00:19:22.436 --> 00:19:23.216 A:middle
+Do I need this right now?
+
+00:19:23.216 --> 00:19:23.856 A:middle
+I don't need this right now.
+
+00:19:23.856 --> 00:19:25.526 A:middle
+Maybe it can wait
+a little while.
+
+00:19:26.586 --> 00:19:28.226 A:middle
+Then it turns out I
+didn't need that after all.
+
+00:19:28.546 --> 00:19:29.286 A:middle
+That's less work.
+
+00:19:30.126 --> 00:19:32.126 A:middle
+But also if the user
+doesn't need it right now,
+
+00:19:32.126 --> 00:19:35.636 A:middle
+there's a great benefit in
+deferring it, in saying hey,
+
+00:19:36.206 --> 00:19:38.996 A:middle
+system, please do this, but
+anytime in the next hour,
+
+00:19:39.196 --> 00:19:41.616 A:middle
+ten minutes, any kind
+of leeway you can give,
+
+00:19:41.616 --> 00:19:44.326 A:middle
+whether it's a timer or
+whether -- although, hopefully,
+
+00:19:44.386 --> 00:19:47.486 A:middle
+there's no timers -- or
+just a download and upload,
+
+00:19:47.596 --> 00:19:49.696 A:middle
+because then the system will
+schedule it with other work
+
+00:19:50.136 --> 00:19:51.646 A:middle
+that may otherwise happen.
+
+00:19:51.856 --> 00:19:53.796 A:middle
+So you can kind of
+batch things together.
+
+00:19:54.476 --> 00:19:58.136 A:middle
+Finally, batching is important
+for getting efficiency.
+
+00:19:58.136 --> 00:20:00.366 A:middle
+You want to turn on that
+hardware, there is some cost
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:58.136 --> 00:20:00.366 A:middle
+You want to turn on that
+hardware, there is some cost
+
+00:20:00.366 --> 00:20:04.806 A:middle
+to turn it on, you want to
+use it before you turn it off.
+
+00:20:04.806 --> 00:20:06.276 A:middle
+So you want to do as
+much work as you can
+
+00:20:06.276 --> 00:20:07.696 A:middle
+when you manage it turn it on.
+
+00:20:08.206 --> 00:20:11.366 A:middle
+Again, bring down the power
+when we can, but really pull
+
+00:20:11.366 --> 00:20:13.956 A:middle
+in the time is a
+critical factor.
+
+00:20:14.716 --> 00:20:18.596 A:middle
+And this is an interesting key
+message that I want you to get.
+
+00:20:18.596 --> 00:20:20.136 A:middle
+We have all this
+power available,
+
+00:20:20.136 --> 00:20:22.106 A:middle
+but you just cannot run
+it all day on a battery.
+
+00:20:22.336 --> 00:20:24.856 A:middle
+The device will get too hot
+and the battery will not last.
+
+00:20:25.546 --> 00:20:29.416 A:middle
+So what we really want you to
+think about is a 10 percent load
+
+00:20:29.416 --> 00:20:31.026 A:middle
+on the system, total
+system load,
+
+00:20:31.126 --> 00:20:34.116 A:middle
+which is not just your software,
+but anything you could do,
+
+00:20:34.526 --> 00:20:38.046 A:middle
+how can you make
+that 1/10 or 1/100
+
+00:20:38.296 --> 00:20:41.996 A:middle
+of what you could possibly
+achieve to shrink it down?
+
+00:20:42.376 --> 00:20:43.286 A:middle
+That's when you are on screen.
+
+00:20:43.286 --> 00:20:44.966 A:middle
+When you are in the
+backgrounds, we want much less.
+
+00:20:46.206 --> 00:20:47.246 A:middle
+So here's some bad news.
+
+00:20:48.066 --> 00:20:50.996 A:middle
+Across all of our hardware --
+and I did some research on this,
+
+00:20:50.996 --> 00:20:52.606 A:middle
+and people are like oh,
+it's not exactly right.
+
+00:20:52.606 --> 00:20:54.106 A:middle
+That's not the point
+of this talk.
+
+00:20:54.106 --> 00:20:55.686 A:middle
+The point is to get you
+to think about this.
+
+00:20:56.616 --> 00:21:00.126 A:middle
+Approximately 5 percent of that
+10 percent load is just turning
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:56.616 --> 00:21:00.126 A:middle
+Approximately 5 percent of that
+10 percent load is just turning
+
+00:21:00.126 --> 00:21:00.756 A:middle
+on the display.
+
+00:21:01.946 --> 00:21:03.376 A:middle
+Now, having the display
+on is good
+
+00:21:03.376 --> 00:21:04.906 A:middle
+because it means the user
+is getting some value
+
+00:21:04.906 --> 00:21:07.186 A:middle
+from the system, hopefully,
+it's not just a notification.
+
+00:21:07.806 --> 00:21:11.026 A:middle
+And then there's
+this 10 percent goal,
+
+00:21:11.676 --> 00:21:13.386 A:middle
+and our average is
+to be between those.
+
+00:21:13.386 --> 00:21:14.946 A:middle
+It sounds like you
+only get 5 percent.
+
+00:21:15.286 --> 00:21:17.236 A:middle
+And that's true on
+a long time scale.
+
+00:21:17.576 --> 00:21:20.006 A:middle
+But on a short time scale,
+go for it, 100 percent,
+
+00:21:20.176 --> 00:21:22.876 A:middle
+give us all the work
+you've got, with priorities,
+
+00:21:22.996 --> 00:21:25.436 A:middle
+and we will schedule it.
+
+00:21:26.366 --> 00:21:26.966 A:middle
+That's that.
+
+00:21:26.966 --> 00:21:30.546 A:middle
+You've got to get it
+between 5 and 10 percent.
+
+00:21:30.826 --> 00:21:34.156 A:middle
+Now, let's talk a little
+bit about CPU and GPU.
+
+00:21:34.156 --> 00:21:37.956 A:middle
+These are the biggest
+energy consumers on OS X.
+
+00:21:38.066 --> 00:21:40.186 A:middle
+They are the most dynamic.
+
+00:21:40.186 --> 00:21:44.606 A:middle
+We have very powerful multicore
+CPUs, massively parallel GPUs,
+
+00:21:44.606 --> 00:21:46.656 A:middle
+we can do all kinds of work.
+
+00:21:47.226 --> 00:21:50.916 A:middle
+However, it does consume the
+battery and energy in general
+
+00:21:50.916 --> 00:21:51.796 A:middle
+if you are plugging
+into the wall.
+
+00:21:52.796 --> 00:21:55.246 A:middle
+So you can see here we've got
+a significant amount of work.
+
+00:21:55.246 --> 00:21:57.636 A:middle
+We've got the CPU running, we've
+got the GPU running for a while,
+
+00:21:58.206 --> 00:22:00.906 A:middle
+and in fact, this is not
+going to last all day.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:58.206 --> 00:22:00.906 A:middle
+and in fact, this is not
+going to last all day.
+
+00:22:01.126 --> 00:22:04.446 A:middle
+If this pattern continues --
+and patterns are very important
+
+00:22:04.446 --> 00:22:06.616 A:middle
+in the way you work -- if
+this pattern continues,
+
+00:22:06.616 --> 00:22:07.856 A:middle
+we are not going to get
+all-day battery life.
+
+00:22:08.336 --> 00:22:10.196 A:middle
+The average power is too high.
+
+00:22:10.836 --> 00:22:16.246 A:middle
+So what does it look like
+if we just wake up the CPU?
+
+00:22:16.506 --> 00:22:17.336 A:middle
+Is there work to do?
+
+00:22:17.506 --> 00:22:18.276 A:middle
+Is there work to do?
+
+00:22:18.326 --> 00:22:18.826 A:middle
+Is there mail?
+
+00:22:18.986 --> 00:22:19.586 A:middle
+Did the user tap?
+
+00:22:19.726 --> 00:22:20.346 A:middle
+Anything happen?
+
+00:22:21.556 --> 00:22:22.156 A:middle
+Hey, server.
+
+00:22:23.286 --> 00:22:23.936 A:middle
+Let's not do that.
+
+00:22:24.126 --> 00:22:28.166 A:middle
+When we wake up the CPU and GPU,
+we take a significant amount
+
+00:22:28.166 --> 00:22:31.276 A:middle
+of energy to ramp
+it up -- zooooop!
+
+00:22:32.416 --> 00:22:33.366 A:middle
+Is there work to do?
+
+00:22:33.366 --> 00:22:36.426 A:middle
+I don't hear any work.
+
+00:22:37.006 --> 00:22:40.186 A:middle
+Zoooop. But all those
+triangles as you can see,
+
+00:22:40.336 --> 00:22:43.136 A:middle
+even the iOS triangles, are
+taking up a significant portion
+
+00:22:43.136 --> 00:22:44.746 A:middle
+of that 5 to 10 percent range.
+
+00:22:46.306 --> 00:22:47.916 A:middle
+Try not to wake up
+unnecessarily.
+
+00:22:48.496 --> 00:22:50.306 A:middle
+On OS X, if you wake
+up the CPU all day,
+
+00:22:50.306 --> 00:22:52.106 A:middle
+you will in fact not
+achieve all-day battery life,
+
+00:22:52.256 --> 00:22:54.636 A:middle
+even if you do not work, even
+if you just check for work.
+
+00:22:55.146 --> 00:22:55.686 A:middle
+Don't do that.
+
+00:22:55.996 --> 00:22:59.546 A:middle
+The GPU is a slightly
+different time scale monster,
+
+00:22:59.996 --> 00:23:03.186 A:middle
+but this is way more often
+than you need to wake the GPU,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:59.996 --> 00:23:03.186 A:middle
+but this is way more often
+than you need to wake the GPU,
+
+00:23:03.186 --> 00:23:06.016 A:middle
+even for really nice graphics.
+
+00:23:06.016 --> 00:23:09.406 A:middle
+Right? The GPU can do tons of
+work in like 1 millisecond,
+
+00:23:09.456 --> 00:23:12.846 A:middle
+then there's 15 milliseconds
+before the next frame is needed.
+
+00:23:12.846 --> 00:23:16.786 A:middle
+Now let's talk about
+performance.
+
+00:23:16.866 --> 00:23:18.636 A:middle
+You've hopefully are
+here because you care
+
+00:23:18.636 --> 00:23:21.366 A:middle
+about energy performance,
+but time performance
+
+00:23:21.366 --> 00:23:23.026 A:middle
+where you just do things
+quicker, which is just good
+
+00:23:23.026 --> 00:23:26.126 A:middle
+for users and in general, is
+also key to energy efficiency.
+
+00:23:26.306 --> 00:23:26.946 A:middle
+Let's talk about why.
+
+00:23:29.166 --> 00:23:29.866 A:middle
+Here's a workload.
+
+00:23:29.946 --> 00:23:31.196 A:middle
+This is a fixed workload.
+
+00:23:31.196 --> 00:23:32.836 A:middle
+This is not a continuous
+state of being.
+
+00:23:32.836 --> 00:23:34.556 A:middle
+I just needed to do this
+work and then get it done.
+
+00:23:35.956 --> 00:23:36.706 A:middle
+Pretty big workload.
+
+00:23:36.916 --> 00:23:39.006 A:middle
+I could probably
+optimize my code.
+
+00:23:39.006 --> 00:23:41.686 A:middle
+I could look in my inner
+loops and pull stuff out
+
+00:23:41.686 --> 00:23:44.786 A:middle
+and do less memory accesses and
+traditional performance work.
+
+00:23:45.576 --> 00:23:47.216 A:middle
+So I get a more efficient
+implementation.
+
+00:23:47.896 --> 00:23:48.956 A:middle
+The power did go up.
+
+00:23:49.506 --> 00:23:52.056 A:middle
+However, the time is
+now so much shorter
+
+00:23:52.426 --> 00:23:54.026 A:middle
+that it's a significant
+energy win.
+
+00:23:54.516 --> 00:23:54.966 A:middle
+This is good.
+
+00:23:54.966 --> 00:23:56.446 A:middle
+But we can do better.
+
+00:23:56.686 --> 00:23:57.966 A:middle
+We can parallelize the work.
+
+00:23:58.196 --> 00:24:00.156 A:middle
+We can use multiple
+cores, right?
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:58.196 --> 00:24:00.156 A:middle
+We can use multiple
+cores, right?
+
+00:24:00.646 --> 00:24:03.596 A:middle
+And finally, we can really
+go crazy and fire up the GPU.
+
+00:24:03.726 --> 00:24:06.276 A:middle
+Now, the good news is
+you typically don't need
+
+00:24:06.276 --> 00:24:08.866 A:middle
+to write this optimized
+code, but you do need to look
+
+00:24:08.866 --> 00:24:09.866 A:middle
+for this optimized code.
+
+00:24:09.866 --> 00:24:12.146 A:middle
+You need to find those
+optimized numerics libraries.
+
+00:24:12.706 --> 00:24:14.496 A:middle
+We have a link at the
+end for the session
+
+00:24:14.496 --> 00:24:15.656 A:middle
+and for our energy doc.
+
+00:24:16.386 --> 00:24:19.276 A:middle
+You need to find the right
+data structures, right?
+
+00:24:19.276 --> 00:24:20.396 A:middle
+You need to look at your app
+
+00:24:20.396 --> 00:24:22.486 A:middle
+and say why am I
+churning all the time?
+
+00:24:22.486 --> 00:24:28.026 A:middle
+What could I be optimizing on
+the regular old time component?
+
+00:24:28.026 --> 00:24:29.136 A:middle
+Something important
+in this graph.
+
+00:24:30.216 --> 00:24:33.686 A:middle
+The lowest power solution, which
+is that naive implementation
+
+00:24:33.686 --> 00:24:35.846 A:middle
+where the system is like oh
+come on, you're just waiting
+
+00:24:35.846 --> 00:24:37.376 A:middle
+for loads and stores
+all the time,
+
+00:24:37.376 --> 00:24:38.846 A:middle
+you've got one core running.
+
+00:24:39.326 --> 00:24:41.106 A:middle
+If we get multiple
+cores running,
+
+00:24:41.406 --> 00:24:42.636 A:middle
+then we are really
+using the system.
+
+00:24:42.786 --> 00:24:43.716 A:middle
+But just one core?
+
+00:24:44.336 --> 00:24:46.796 A:middle
+It's low power but
+has the highest cost
+
+00:24:47.036 --> 00:24:48.146 A:middle
+because of that time component.
+
+00:24:50.466 --> 00:24:53.486 A:middle
+Now let's explore more
+about why that is.
+
+00:24:53.996 --> 00:24:57.566 A:middle
+There's a significant fixed
+cost to running any part
+
+00:24:57.566 --> 00:24:59.856 A:middle
+of the system, whether it's
+CPU, GPU, or anything else.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:01.126 --> 00:25:03.016 A:middle
+That fixed cost adds
+up over time.
+
+00:25:03.406 --> 00:25:06.116 A:middle
+The sooner you can turn off
+that fixed cost, the better.
+
+00:25:06.816 --> 00:25:10.176 A:middle
+Here I added a little extra
+fixed cost for the GPU because,
+
+00:25:10.176 --> 00:25:12.966 A:middle
+in fact, there is some more
+fixed cost for using the GPU,
+
+00:25:12.966 --> 00:25:17.426 A:middle
+but look at how much less energy
+is consumed in the green part
+
+00:25:18.026 --> 00:25:20.026 A:middle
+when we pull the time in.
+
+00:25:21.376 --> 00:25:24.716 A:middle
+Key lesson: Fast is
+also energy efficient.
+
+00:25:25.446 --> 00:25:26.926 A:middle
+But don't forget to prioritize.
+
+00:25:27.716 --> 00:25:29.846 A:middle
+Now let's see if these
+fit under the line.
+
+00:25:31.026 --> 00:25:32.846 A:middle
+Here is our naive
+implementation.
+
+00:25:33.246 --> 00:25:35.586 A:middle
+Anybody that's had some high
+school geometry is going
+
+00:25:35.586 --> 00:25:36.946 A:middle
+to know that's not going
+to fit under our --
+
+00:25:36.946 --> 00:25:39.136 A:middle
+we are going to pull
+it down to the average.
+
+00:25:39.136 --> 00:25:40.576 A:middle
+This is no longer
+power times time.
+
+00:25:40.576 --> 00:25:41.276 A:middle
+It's just average.
+
+00:25:42.096 --> 00:25:42.786 A:middle
+It's not going to fit.
+
+00:25:43.276 --> 00:25:44.416 A:middle
+But what about the other ones?
+
+00:25:44.866 --> 00:25:46.726 A:middle
+Hey, look, efficient!
+
+00:25:46.876 --> 00:25:47.406 A:middle
+That's better.
+
+00:25:48.326 --> 00:25:49.156 A:middle
+But still not that good.
+
+00:25:50.136 --> 00:25:53.526 A:middle
+Parallel are almost under the
+line, but that CPU/GPU one,
+
+00:25:53.726 --> 00:25:56.496 A:middle
+that actually fit because
+the time was so short.
+
+00:25:56.556 --> 00:25:59.296 A:middle
+Power was very tall, but
+the time was very short.
+
+00:25:59.296 --> 00:26:02.626 A:middle
+That's how you should design
+your apps, but don't do it over
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:59.296 --> 00:26:02.626 A:middle
+That's how you should design
+your apps, but don't do it over
+
+00:26:02.626 --> 00:26:03.876 A:middle
+and over and over again.
+
+00:26:04.416 --> 00:26:07.466 A:middle
+Wait for the user
+before you do it.
+
+00:26:09.196 --> 00:26:10.666 A:middle
+Now let's switch
+gears a little bit.
+
+00:26:10.976 --> 00:26:13.636 A:middle
+This is all GPU and CPU
+applies to OS X and iOS,
+
+00:26:13.786 --> 00:26:16.396 A:middle
+but it's especially
+important on OS X,
+
+00:26:16.396 --> 00:26:19.086 A:middle
+and we measure basically our
+energy impact on OS X both
+
+00:26:19.086 --> 00:26:22.156 A:middle
+by CPU instructions they
+consume but also by the number
+
+00:26:22.156 --> 00:26:23.286 A:middle
+of times you wake the system.
+
+00:26:24.046 --> 00:26:27.606 A:middle
+And let's switch over to iOS.
+
+00:26:27.696 --> 00:26:30.506 A:middle
+iOS devices not only
+have CPUs and GPUs
+
+00:26:30.506 --> 00:26:33.826 A:middle
+that are quite powerful, but
+they also have networking,
+
+00:26:34.266 --> 00:26:42.386 A:middle
+location, and this ability
+to run in the background.
+
+00:26:43.036 --> 00:26:47.986 A:middle
+The networking has very high
+costs, big networking hardware,
+
+00:26:48.626 --> 00:26:51.226 A:middle
+and it turns out that it has
+some significant time components
+
+00:26:51.226 --> 00:26:51.996 A:middle
+that you need to think about.
+
+00:26:53.016 --> 00:26:56.046 A:middle
+Location is a wonderful
+feature, it's great to use,
+
+00:26:56.376 --> 00:26:57.726 A:middle
+but it is designed
+for, you know --
+
+00:26:58.116 --> 00:26:59.666 A:middle
+I'm looking at the map
+and watching the dot.
+
+00:26:59.666 --> 00:27:00.956 A:middle
+I am going to walk
+across the stage
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:59.666 --> 00:27:00.956 A:middle
+I am going to walk
+across the stage
+
+00:27:00.956 --> 00:27:01.776 A:middle
+and the dot is going to move.
+
+00:27:01.776 --> 00:27:03.466 A:middle
+I am like wow, that's
+really impressive
+
+00:27:03.526 --> 00:27:05.196 A:middle
+that it can tell I am
+walking across the stage.
+
+00:27:07.246 --> 00:27:10.146 A:middle
+Unfortunately, that API is
+very easy to leave running,
+
+00:27:10.516 --> 00:27:13.016 A:middle
+even when I am not looking
+at the map, so we need to --
+
+00:27:13.016 --> 00:27:16.276 A:middle
+we improve the API, but
+we are also needing you
+
+00:27:16.316 --> 00:27:19.346 A:middle
+to only use location
+for the shortest period
+
+00:27:19.346 --> 00:27:20.416 A:middle
+of time that you need.
+
+00:27:21.076 --> 00:27:23.686 A:middle
+And finally, any time you are
+operating in the background,
+
+00:27:24.366 --> 00:27:32.276 A:middle
+that is causing a -- the device
+to stay awake, and that adds up.
+
+00:27:32.506 --> 00:27:34.476 A:middle
+Every time I leave your app,
+I press the Home screen,
+
+00:27:35.176 --> 00:27:36.746 A:middle
+you run for the background,
+maybe a little bit,
+
+00:27:36.746 --> 00:27:40.286 A:middle
+maybe a long time -- we want
+to eliminate that as much
+
+00:27:40.286 --> 00:27:43.586 A:middle
+as possible because we want the
+device to get nice and sleepy
+
+00:27:44.026 --> 00:27:45.896 A:middle
+so that we only have to
+leave the RAM and radios
+
+00:27:45.896 --> 00:27:47.196 A:middle
+in a very low-power mode.
+
+00:27:47.746 --> 00:27:50.476 A:middle
+Let's talk about networking.
+
+00:27:51.946 --> 00:27:53.176 A:middle
+There's some orange
+on the slide.
+
+00:27:53.176 --> 00:27:54.036 A:middle
+That orange is not good.
+
+00:27:54.566 --> 00:27:55.656 A:middle
+That orange is the overhead.
+
+00:27:56.566 --> 00:28:01.096 A:middle
+Here's what happens when
+you want to send some data
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:56.566 --> 00:28:01.096 A:middle
+Here's what happens when
+you want to send some data
+
+00:28:01.096 --> 00:28:03.816 A:middle
+over the network, especially
+on a cellular device.
+
+00:28:04.666 --> 00:28:07.246 A:middle
+The system says, oh, look, I
+have to send this data right now
+
+00:28:07.246 --> 00:28:08.506 A:middle
+because the app told me to.
+
+00:28:09.486 --> 00:28:12.076 A:middle
+Hasn't tagged it as a background
+work, so I can't delay it.
+
+00:28:12.146 --> 00:28:12.886 A:middle
+Got to do it right now.
+
+00:28:12.886 --> 00:28:14.786 A:middle
+We are not connected.
+
+00:28:14.786 --> 00:28:17.246 A:middle
+We are connected with
+an inbound connection
+
+00:28:17.246 --> 00:28:19.356 A:middle
+to the cellular system,
+but we don't have outbound.
+
+00:28:20.316 --> 00:28:21.096 A:middle
+So hold up.
+
+00:28:21.756 --> 00:28:22.426 A:middle
+Find a cell tower.
+
+00:28:22.586 --> 00:28:24.456 A:middle
+Okay. Got the cell tower.
+
+00:28:24.456 --> 00:28:25.386 A:middle
+That one's not so good.
+
+00:28:25.386 --> 00:28:25.946 A:middle
+Let me try another.
+
+00:28:25.946 --> 00:28:28.436 A:middle
+Oh, okay, this cell
+tower's really good.
+
+00:28:28.796 --> 00:28:29.966 A:middle
+We got the connection going.
+
+00:28:29.966 --> 00:28:31.196 A:middle
+Great. I am going
+to send this data.
+
+00:28:31.566 --> 00:28:32.266 A:middle
+Okay. I sent the data.
+
+00:28:34.686 --> 00:28:36.526 A:middle
+There's no more data to send,
+but I have this connection.
+
+00:28:36.746 --> 00:28:37.466 A:middle
+It was expensive.
+
+00:28:37.466 --> 00:28:38.146 A:middle
+I turned it on.
+
+00:28:38.856 --> 00:28:41.046 A:middle
+And the way the cellular
+network works,
+
+00:28:41.046 --> 00:28:43.716 A:middle
+I have to leave it running
+for at least a second or two.
+
+00:28:44.416 --> 00:28:47.816 A:middle
+It may only take a few
+milliseconds to send the data,
+
+00:28:47.996 --> 00:28:49.546 A:middle
+but it can take up
+to ten seconds
+
+00:28:49.546 --> 00:28:50.696 A:middle
+of staying connected
+to the network.
+
+00:28:51.026 --> 00:28:54.166 A:middle
+Obviously not as high power
+mode, but it is still much,
+
+00:28:54.166 --> 00:28:56.186 A:middle
+much higher than idle waiting
+for incoming connections.
+
+00:28:56.856 --> 00:28:59.526 A:middle
+So that overhead is a
+significant energy impact.
+
+00:28:59.526 --> 00:29:02.876 A:middle
+It doesn't matter how much
+networking you are doing.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:59.526 --> 00:29:02.876 A:middle
+It doesn't matter how much
+networking you are doing.
+
+00:29:03.236 --> 00:29:05.666 A:middle
+If the radios are off,
+we have to fire them up
+
+00:29:05.666 --> 00:29:08.356 A:middle
+and leave them running
+for, in some cases,
+
+00:29:08.356 --> 00:29:10.746 A:middle
+a thousand times longer
+than you actually needed
+
+00:29:10.826 --> 00:29:11.376 A:middle
+to send your data.
+
+00:29:11.376 --> 00:29:14.906 A:middle
+And there's no way that
+power is significantly
+
+00:29:14.906 --> 00:29:16.046 A:middle
+over our low power target.
+
+00:29:16.216 --> 00:29:18.026 A:middle
+You cannot leave the
+radios on all the time
+
+00:29:18.066 --> 00:29:19.346 A:middle
+and achieve all-day
+battery life.
+
+00:29:20.706 --> 00:29:22.116 A:middle
+This is bad news for chat apps.
+
+00:29:22.316 --> 00:29:25.676 A:middle
+The good news is for chat apps
+is the users don't actually tap
+
+00:29:25.676 --> 00:29:27.096 A:middle
+on their phones for
+ten hours straight.
+
+00:29:27.096 --> 00:29:27.526 A:middle
+They can't.
+
+00:29:28.166 --> 00:29:30.116 A:middle
+So as long as you are wise
+
+00:29:30.116 --> 00:29:32.476 A:middle
+about if there's not
+live chat going on,
+
+00:29:32.956 --> 00:29:33.926 A:middle
+let the network go down,
+
+00:29:35.086 --> 00:29:36.496 A:middle
+then you can get
+all-day battery life.
+
+00:29:37.016 --> 00:29:39.206 A:middle
+How do we fix this?
+
+00:29:39.506 --> 00:29:40.356 A:middle
+How do we make this better?
+
+00:29:40.726 --> 00:29:41.656 A:middle
+So this is not all-day.
+
+00:29:41.946 --> 00:29:42.676 A:middle
+It's too tall.
+
+00:29:43.386 --> 00:29:46.806 A:middle
+We fix it by coalescing,
+bringing it together,
+
+00:29:46.846 --> 00:29:48.016 A:middle
+putting it into a batch of work.
+
+00:29:48.636 --> 00:29:51.086 A:middle
+So in this particular
+case, we are going
+
+00:29:51.086 --> 00:29:53.416 A:middle
+to bring the future
+work into the old work.
+
+00:29:53.416 --> 00:29:56.046 A:middle
+Now, it may be that the future
+work is actually more important,
+
+00:29:56.046 --> 00:29:57.566 A:middle
+so you would delay the old work.
+
+00:29:57.566 --> 00:29:58.656 A:middle
+That may be easier to do.
+
+00:29:58.846 --> 00:29:59.826 A:middle
+Whichever one is more important.
+
+00:29:59.826 --> 00:30:01.556 A:middle
+But if you know there's
+two pieces of work,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:29:59.826 --> 00:30:01.556 A:middle
+But if you know there's
+two pieces of work,
+
+00:30:01.976 --> 00:30:03.786 A:middle
+the goal for your apps --
+
+00:30:04.136 --> 00:30:05.276 A:middle
+which you can achieve now
+
+00:30:05.276 --> 00:30:07.106 A:middle
+because we have these nice
+new tools that will show you,
+
+00:30:07.286 --> 00:30:09.776 A:middle
+basically, the new
+tools are these graphs
+
+00:30:09.886 --> 00:30:12.586 A:middle
+in Xcode live on your software.
+
+00:30:12.856 --> 00:30:13.346 A:middle
+It's really good.
+
+00:30:14.426 --> 00:30:16.906 A:middle
+You can look and say why am I
+doing all this unnecessary --
+
+00:30:17.006 --> 00:30:17.886 A:middle
+maybe not unnecessary --
+
+00:30:18.786 --> 00:30:21.376 A:middle
+why is my networking
+pattern inefficient?
+
+00:30:21.546 --> 00:30:22.386 A:middle
+Why is it spread out?
+
+00:30:22.386 --> 00:30:23.476 A:middle
+How can I pull it together?
+
+00:30:23.896 --> 00:30:27.826 A:middle
+And then we can actually get to
+that target: average low power.
+
+00:30:28.186 --> 00:30:29.356 A:middle
+That means all-day battery life.
+
+00:30:30.126 --> 00:30:32.106 A:middle
+So to sum up the networking,
+
+00:30:32.566 --> 00:30:34.976 A:middle
+you want to do less
+work in networking.
+
+00:30:35.686 --> 00:30:37.986 A:middle
+So you've got to design
+your system correctly.
+
+00:30:38.406 --> 00:30:41.286 A:middle
+Even if you do networking
+once a minute, oh,
+
+00:30:41.286 --> 00:30:44.026 A:middle
+it's only a few seconds
+of overhead, that adds up.
+
+00:30:44.336 --> 00:30:46.836 A:middle
+Please, unless the user is
+requesting you access the
+
+00:30:46.836 --> 00:30:49.656 A:middle
+network right now,
+don't access the network
+
+00:30:50.116 --> 00:30:52.366 A:middle
+until there's something
+really important.
+
+00:30:52.876 --> 00:30:56.286 A:middle
+In terms of design, anything
+that you can do to offload
+
+00:30:56.286 --> 00:30:58.996 A:middle
+to the system and let
+the system decide when,
+
+00:30:59.126 --> 00:31:02.316 A:middle
+give it some variance of in the
+next 10 minutes, the next hour,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:59.126 --> 00:31:02.316 A:middle
+give it some variance of in the
+next 10 minutes, the next hour,
+
+00:31:02.316 --> 00:31:06.386 A:middle
+the next 24 hours, that will
+allow us to batch it together
+
+00:31:06.496 --> 00:31:08.556 A:middle
+for you, so you offload
+that networking.
+
+00:31:08.556 --> 00:31:12.606 A:middle
+We will wake you up and call
+you back when the work is done.
+
+00:31:15.176 --> 00:31:17.756 A:middle
+A lot of times, you
+can wait on the work.
+
+00:31:18.106 --> 00:31:21.756 A:middle
+Background update,
+NSURLSession has this feature.
+
+00:31:22.056 --> 00:31:23.816 A:middle
+Just wait, defer it.
+
+00:31:24.036 --> 00:31:25.456 A:middle
+Go ahead and queue
+it up, that's fine,
+
+00:31:26.076 --> 00:31:27.736 A:middle
+but don't force it
+to happen right away.
+
+00:31:29.376 --> 00:31:33.406 A:middle
+And these notifications,
+notifications are great,
+
+00:31:33.966 --> 00:31:36.766 A:middle
+but they can get out
+of control sometimes.
+
+00:31:36.766 --> 00:31:37.816 A:middle
+And on the server side --
+
+00:31:38.006 --> 00:31:40.436 A:middle
+remember I mentioned that we are
+always connected to the server
+
+00:31:40.436 --> 00:31:41.716 A:middle
+for inbound connections?
+
+00:31:41.716 --> 00:31:42.586 A:middle
+Jon mentioned this also.
+
+00:31:44.086 --> 00:31:45.156 A:middle
+Inbound connections are cheap.
+
+00:31:45.276 --> 00:31:46.596 A:middle
+They are basically
+always available.
+
+00:31:47.026 --> 00:31:51.186 A:middle
+So go ahead and send something
+out rather than polling up.
+
+00:31:51.576 --> 00:31:52.586 A:middle
+It's better to send
+something out.
+
+00:31:52.586 --> 00:31:55.146 A:middle
+But tag those notifications
+with PushKit
+
+00:31:55.616 --> 00:31:58.566 A:middle
+with an appropriate priority
+so we can batch them together.
+
+00:31:58.626 --> 00:32:01.196 A:middle
+So when I get an instant
+message, which is important
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:58.626 --> 00:32:01.196 A:middle
+So when I get an instant
+message, which is important
+
+00:32:01.196 --> 00:32:03.646 A:middle
+to do quickly, maybe I will
+also get that notification
+
+00:32:03.646 --> 00:32:06.126 A:middle
+that there's new content to
+download into your news app
+
+00:32:06.156 --> 00:32:08.786 A:middle
+or something like that.
+
+00:32:09.006 --> 00:32:10.566 A:middle
+Now let's talk about location.
+
+00:32:11.476 --> 00:32:14.566 A:middle
+There's two components
+of location.
+
+00:32:14.566 --> 00:32:17.116 A:middle
+Now, the good news is the
+power is relatively low,
+
+00:32:17.676 --> 00:32:19.746 A:middle
+although if you leave
+location running all the time,
+
+00:32:19.746 --> 00:32:22.106 A:middle
+there's very little space
+to do anything else,
+
+00:32:22.286 --> 00:32:24.316 A:middle
+so don't leave precise
+location running all the time.
+
+00:32:24.796 --> 00:32:26.646 A:middle
+In fact, don't leave any
+location running all the time
+
+00:32:26.646 --> 00:32:30.346 A:middle
+unless your app is basically
+an app that says I live
+
+00:32:30.346 --> 00:32:33.486 A:middle
+to run location all the time,
+and the user really wants that.
+
+00:32:33.486 --> 00:32:36.436 A:middle
+They are going to see you in
+the battery menu, and it's going
+
+00:32:36.436 --> 00:32:40.546 A:middle
+to say location background,
+25 percent of battery.
+
+00:32:40.826 --> 00:32:41.376 A:middle
+That won't be good.
+
+00:32:41.846 --> 00:32:43.296 A:middle
+Unless that's what your
+application is about.
+
+00:32:43.426 --> 00:32:45.806 A:middle
+And that is fine.
+
+00:32:46.946 --> 00:32:48.876 A:middle
+So precise location
+is the most expensive.
+
+00:32:48.986 --> 00:32:50.836 A:middle
+We have to turn on more
+hardware, talk to satellites --
+
+00:32:51.046 --> 00:32:52.856 A:middle
+hey, satellite, satellite,
+get all the satellites.
+
+00:32:52.856 --> 00:32:53.756 A:middle
+Oh, okay, good.
+
+00:32:56.446 --> 00:32:58.276 A:middle
+Imprecise location
+is a lot cheaper.
+
+00:32:58.276 --> 00:33:00.016 A:middle
+We can just say oh, what
+Wi-Fi network am I on?
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:58.276 --> 00:33:00.016 A:middle
+We can just say oh, what
+Wi-Fi network am I on?
+
+00:33:00.016 --> 00:33:01.016 A:middle
+What cell tower am I near?
+
+00:33:01.476 --> 00:33:02.696 A:middle
+And then we can actually --
+
+00:33:02.696 --> 00:33:05.026 A:middle
+you can see the green is
+where the system is running,
+
+00:33:05.106 --> 00:33:06.466 A:middle
+the display is running.
+
+00:33:06.466 --> 00:33:08.836 A:middle
+We can actually have a system
+be almost completely off
+
+00:33:09.206 --> 00:33:11.456 A:middle
+and still track your location,
+even precise location.
+
+00:33:11.496 --> 00:33:13.446 A:middle
+It's not free, don't leave
+it running all the time.
+
+00:33:13.446 --> 00:33:14.756 A:middle
+Those leaks.
+
+00:33:14.756 --> 00:33:16.786 A:middle
+I am sure you fix drips
+in your house, right,
+
+00:33:17.266 --> 00:33:19.506 A:middle
+especially California residents.
+
+00:33:20.876 --> 00:33:22.496 A:middle
+Location can just
+drip, drip, drip.
+
+00:33:22.636 --> 00:33:25.716 A:middle
+So let's optimize that.
+
+00:33:25.926 --> 00:33:26.616 A:middle
+Use it less.
+
+00:33:26.906 --> 00:33:28.956 A:middle
+You know, if you are going to
+call start updating location,
+
+00:33:29.216 --> 00:33:30.196 A:middle
+don't call it right away.
+
+00:33:30.196 --> 00:33:30.926 A:middle
+There are some apps
+
+00:33:30.926 --> 00:33:32.786 A:middle
+when I launch the app,
+I want my location.
+
+00:33:32.786 --> 00:33:34.656 A:middle
+I want to know what
+buses are coming when.
+
+00:33:35.086 --> 00:33:36.166 A:middle
+Right? That's fine.
+
+00:33:36.386 --> 00:33:39.116 A:middle
+Food around me dot app, awesome.
+
+00:33:39.476 --> 00:33:40.836 A:middle
+Launch, get location.
+
+00:33:41.186 --> 00:33:43.416 A:middle
+Otherwise, wait for
+the user to do a search
+
+00:33:43.416 --> 00:33:44.566 A:middle
+or whatever you need to do.
+
+00:33:45.146 --> 00:33:47.606 A:middle
+Then as soon as the user
+is done with that location,
+
+00:33:47.606 --> 00:33:49.006 A:middle
+you've got whatever
+precision you want,
+
+00:33:49.246 --> 00:33:49.926 A:middle
+go ahead and call stop.
+
+00:33:51.366 --> 00:33:54.886 A:middle
+For iOS 9, we've introduced a
+new API that helps you do this.
+
+00:33:54.886 --> 00:33:56.146 A:middle
+It's called request location.
+
+00:33:56.946 --> 00:33:58.396 A:middle
+It does the start and the stop,
+
+00:33:58.396 --> 00:34:00.466 A:middle
+makes sure you get the
+appropriate precision,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:58.396 --> 00:34:00.466 A:middle
+makes sure you get the
+appropriate precision,
+
+00:34:00.746 --> 00:34:03.286 A:middle
+and you don't have to
+manage the start and stop.
+
+00:34:03.606 --> 00:34:05.266 A:middle
+Only available on iOS 9,
+so you're going to need
+
+00:34:05.266 --> 00:34:06.896 A:middle
+to keep doing the right
+thing for the older OSes.
+
+00:34:06.896 --> 00:34:09.585 A:middle
+We have a location talk linked
+at the end of the slides.
+
+00:34:09.966 --> 00:34:14.646 A:middle
+We are also changing how
+background location behaves
+
+00:34:14.646 --> 00:34:16.505 A:middle
+in the system, so your
+app may have permission
+
+00:34:16.505 --> 00:34:18.446 A:middle
+to use background
+location, but there's going
+
+00:34:18.446 --> 00:34:20.556 A:middle
+to be a little bit more
+interaction with the user before
+
+00:34:20.556 --> 00:34:23.255 A:middle
+that permission is granted,
+and to be careful in your app
+
+00:34:23.255 --> 00:34:25.146 A:middle
+so you don't accidentally
+use it in the background,
+
+00:34:25.636 --> 00:34:28.835 A:middle
+keep the property allows
+background location updates,
+
+00:34:29.346 --> 00:34:30.676 A:middle
+keep that set to false except
+
+00:34:30.676 --> 00:34:32.886 A:middle
+when you are actively
+doing it in the background.
+
+00:34:33.596 --> 00:34:36.436 A:middle
+Just be conscious of when you
+turn the location hardware on.
+
+00:34:36.436 --> 00:34:37.926 A:middle
+You are actually
+powering up, like turning
+
+00:34:37.926 --> 00:34:40.755 A:middle
+on the light switch, it's a very
+easy switch to leave turned on.
+
+00:34:41.286 --> 00:34:44.896 A:middle
+And then when you are actually
+using it, bring that power down.
+
+00:34:45.076 --> 00:34:46.936 A:middle
+So we talked about time
+component, pull the time in,
+
+00:34:47.376 --> 00:34:49.416 A:middle
+pull the power down,
+and I mentioned
+
+00:34:49.416 --> 00:34:50.666 A:middle
+that we can actually offload,
+
+00:34:50.666 --> 00:34:52.966 A:middle
+so let's say I am doing
+a -- I like to bicycle.
+
+00:34:52.966 --> 00:34:56.946 A:middle
+I can track my bicycle riding,
+you know, very accurately.
+
+00:34:57.336 --> 00:34:59.356 A:middle
+But the hardware does it
+rather than the software.
+
+00:34:59.606 --> 00:35:02.896 A:middle
+So defer those updates,
+so every 15 minutes
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:59.606 --> 00:35:02.896 A:middle
+So defer those updates,
+so every 15 minutes
+
+00:35:02.896 --> 00:35:05.266 A:middle
+or so it will call
+you, hey, look,
+
+00:35:05.536 --> 00:35:07.216 A:middle
+here is all the tracking
+information,
+
+00:35:07.526 --> 00:35:10.516 A:middle
+but most of the system and your
+software is completely asleep,
+
+00:35:10.556 --> 00:35:12.616 A:middle
+and just the location
+chip is running.
+
+00:35:14.156 --> 00:35:15.436 A:middle
+Finally, our third area --
+
+00:35:15.436 --> 00:35:17.286 A:middle
+and these are really the
+three things that we want you
+
+00:35:17.286 --> 00:35:19.536 A:middle
+to be doing in terms of
+debugging your software --
+
+00:35:19.706 --> 00:35:22.986 A:middle
+you know, reduce
+networking, reduce location,
+
+00:35:23.526 --> 00:35:26.806 A:middle
+and background running.
+
+00:35:27.146 --> 00:35:30.186 A:middle
+This is just energy that the
+user typically doesn't see,
+
+00:35:30.456 --> 00:35:30.716 A:middle
+right?
+
+00:35:30.716 --> 00:35:32.566 A:middle
+They may appreciate that
+the app is up-to-date
+
+00:35:32.566 --> 00:35:36.026 A:middle
+when they launch it, but try
+to use background app refresh.
+
+00:35:36.026 --> 00:35:37.486 A:middle
+Try to give good, big leeways.
+
+00:35:37.486 --> 00:35:40.396 A:middle
+If you send notifications
+and they get ignored,
+
+00:35:40.396 --> 00:35:42.676 A:middle
+that's actually lighting
+up the screen,
+
+00:35:42.676 --> 00:35:45.356 A:middle
+it's firing up the
+network, and this just --
+
+00:35:45.496 --> 00:35:47.706 A:middle
+this alone is not
+going to consume --
+
+00:35:47.706 --> 00:35:48.586 A:middle
+I mean, if you do
+it all the time,
+
+00:35:48.586 --> 00:35:49.896 A:middle
+it will consume your
+battery pretty quickly.
+
+00:35:49.896 --> 00:35:57.236 A:middle
+But it is a -- it's basically
+just shaving off the energy
+
+00:35:57.236 --> 00:35:58.296 A:middle
+that's available
+for other things.
+
+00:35:58.406 --> 00:36:00.766 A:middle
+It's reducing -- it's
+basically if I lowered the bar
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:35:58.406 --> 00:36:00.766 A:middle
+It's reducing -- it's
+basically if I lowered the bar
+
+00:36:00.766 --> 00:36:04.306 A:middle
+and said you've got to get under
+9 percent instead of 10 percent.
+
+00:36:04.836 --> 00:36:05.966 A:middle
+We've got to get rid of --
+
+00:36:06.276 --> 00:36:10.066 A:middle
+and that's 20 percent worse
+because you only have 5 percent
+
+00:36:10.066 --> 00:36:11.146 A:middle
+to work with on average.
+
+00:36:11.976 --> 00:36:13.346 A:middle
+Just make sure you are not
+running in the background.
+
+00:36:13.486 --> 00:36:14.596 A:middle
+How do you do that?
+
+00:36:15.236 --> 00:36:17.686 A:middle
+Any time you call start
+background task, we are going
+
+00:36:17.686 --> 00:36:19.716 A:middle
+to keep the device awake for
+up to a couple of minutes,
+
+00:36:20.466 --> 00:36:22.656 A:middle
+so you want to call
+end background task
+
+00:36:22.656 --> 00:36:23.426 A:middle
+as soon as possible.
+
+00:36:23.896 --> 00:36:27.776 A:middle
+There's a great App Guide, in
+addition to the Energy Guide,
+
+00:36:27.776 --> 00:36:30.686 A:middle
+there's also an App Life
+Cycle Guide, and basically
+
+00:36:31.076 --> 00:36:32.816 A:middle
+when you get that message
+that says hey, you are going
+
+00:36:32.816 --> 00:36:34.356 A:middle
+into the background,
+that's fine.
+
+00:36:35.496 --> 00:36:38.436 A:middle
+Do your UI state-saving
+right there.
+
+00:36:38.506 --> 00:36:40.236 A:middle
+Talk to UI, please
+save my state.
+
+00:36:40.636 --> 00:36:44.576 A:middle
+If you've got significant data
+you need to save, go ahead
+
+00:36:44.576 --> 00:36:49.046 A:middle
+and fork off a background
+operation, but make sure
+
+00:36:49.046 --> 00:36:50.996 A:middle
+that all code paths call
+end background task.
+
+00:36:51.086 --> 00:36:52.506 A:middle
+Do not leak background activity.
+
+00:36:52.506 --> 00:36:56.406 A:middle
+And if you've got networking
+to do, like maybe that saving
+
+00:36:56.406 --> 00:36:58.706 A:middle
+to the disk, that's probably
+going to happen, that's fine.
+
+00:36:59.146 --> 00:37:02.236 A:middle
+Network activity -- this is a
+great opportunity to offload
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:59.146 --> 00:37:02.236 A:middle
+Network activity -- this is a
+great opportunity to offload
+
+00:37:02.236 --> 00:37:04.876 A:middle
+that networking to the OS.
+
+00:37:05.036 --> 00:37:06.696 A:middle
+Hey, I have this
+networking, it needs to happen
+
+00:37:06.696 --> 00:37:10.066 A:middle
+but it's not time critical, just
+do it whenever you have a chance
+
+00:37:10.066 --> 00:37:11.156 A:middle
+within some time scope.
+
+00:37:11.646 --> 00:37:14.396 A:middle
+That gives the system the
+opportunity to optimize.
+
+00:37:15.716 --> 00:37:17.506 A:middle
+This is also a good
+thing at design time,
+
+00:37:17.956 --> 00:37:21.436 A:middle
+that you can design your app to
+be more flexible in this regard.
+
+00:37:21.966 --> 00:37:24.466 A:middle
+This is my ideal app.
+
+00:37:24.466 --> 00:37:27.326 A:middle
+Jon showed a great slide, sort
+of a typical app that does a lot
+
+00:37:27.326 --> 00:37:28.176 A:middle
+of work when you launch it.
+
+00:37:28.946 --> 00:37:31.696 A:middle
+My ideal app barely does
+any work when you launch it.
+
+00:37:31.986 --> 00:37:33.136 A:middle
+Then it doesn't do any work
+
+00:37:33.776 --> 00:37:35.266 A:middle
+until the user actually
+interacts.
+
+00:37:35.576 --> 00:37:36.846 A:middle
+Then it goes crazy!
+
+00:37:37.596 --> 00:37:38.556 A:middle
+Lots of work!
+
+00:37:38.556 --> 00:37:38.956 A:middle
+Let's do it!
+
+00:37:38.956 --> 00:37:39.696 A:middle
+Here's all the work.
+
+00:37:39.886 --> 00:37:41.066 A:middle
+Prioritized, please.
+
+00:37:41.746 --> 00:37:44.026 A:middle
+And then it's done
+and it goes back.
+
+00:37:44.516 --> 00:37:45.196 A:middle
+It's nice and idle.
+
+00:37:45.796 --> 00:37:49.616 A:middle
+And that you can topple that
+Transamerica pyramid down,
+
+00:37:50.086 --> 00:37:51.806 A:middle
+and it will fit under the line.
+
+00:37:54.476 --> 00:37:56.336 A:middle
+So how is your app doing?
+
+00:37:56.636 --> 00:37:58.516 A:middle
+We really want you to go
+home, run these new tools.
+
+00:37:58.746 --> 00:38:00.786 A:middle
+Check out your app, run
+it through all its paces.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:37:58.746 --> 00:38:00.786 A:middle
+Check out your app, run
+it through all its paces.
+
+00:38:00.946 --> 00:38:03.266 A:middle
+Because these tools will only
+show you what you ask the app
+
+00:38:03.396 --> 00:38:03.706 A:middle
+to do.
+
+00:38:04.216 --> 00:38:05.866 A:middle
+Make sure that what
+the app is doing,
+
+00:38:05.866 --> 00:38:07.006 A:middle
+in terms of energy impact,
+
+00:38:07.376 --> 00:38:09.966 A:middle
+corresponds to the user
+benefit that's being delivered.
+
+00:38:10.546 --> 00:38:14.796 A:middle
+So Xcode now has an energy
+gauge for iOS as well as OS X,
+
+00:38:15.026 --> 00:38:17.176 A:middle
+and it highlights exactly the
+things I just talked about,
+
+00:38:17.176 --> 00:38:19.546 A:middle
+which are CPU, networking,
+location, background.
+
+00:38:20.246 --> 00:38:22.276 A:middle
+Get all that networking
+coalesced, all that location
+
+00:38:22.276 --> 00:38:25.316 A:middle
+under control, all that
+background activity eliminated.
+
+00:38:25.856 --> 00:38:27.906 A:middle
+So come to our next
+talk, learn about that.
+
+00:38:28.746 --> 00:38:31.496 A:middle
+So as you are designing
+your next feature,
+
+00:38:31.806 --> 00:38:34.836 A:middle
+designing your next app,
+think about these costs.
+
+00:38:35.186 --> 00:38:38.796 A:middle
+Raw CPU power, CPU
+patterns and GPU patterns.
+
+00:38:38.796 --> 00:38:40.266 A:middle
+Am I waking up and
+going to sleep a lot?
+
+00:38:40.356 --> 00:38:42.586 A:middle
+Can I make it more constrained?
+
+00:38:43.426 --> 00:38:45.266 A:middle
+Anything that kind of blinks --
+
+00:38:45.556 --> 00:38:47.206 A:middle
+some of you probably
+remember the blink tag
+
+00:38:47.206 --> 00:38:48.506 A:middle
+from the early web pages.
+
+00:38:48.826 --> 00:38:51.276 A:middle
+No blinking, especially
+at high frequency.
+
+00:38:52.476 --> 00:38:55.626 A:middle
+Anything faster than the user's
+interaction is high frequency.
+
+00:38:56.796 --> 00:38:58.766 A:middle
+And try to set expectations
+for yourself.
+
+00:38:58.766 --> 00:39:00.676 A:middle
+Because if you are writing
+a chat app and you are going
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:38:58.766 --> 00:39:00.676 A:middle
+Because if you are writing
+a chat app and you are going
+
+00:39:00.836 --> 00:39:03.406 A:middle
+to be streaming videos
+of yourself all day long,
+
+00:39:03.406 --> 00:39:05.726 A:middle
+you are going to mount it
+on a new hardware device,
+
+00:39:06.506 --> 00:39:07.846 A:middle
+that user hopefully is not going
+
+00:39:07.846 --> 00:39:09.116 A:middle
+to expect all-day battery
+life from that app.
+
+00:39:09.116 --> 00:39:10.706 A:middle
+They are going to have to
+buy a separate phone --
+
+00:39:10.856 --> 00:39:12.646 A:middle
+in fact three phones --
+so that they can have
+
+00:39:12.646 --> 00:39:15.446 A:middle
+that running all day.
+
+00:39:15.716 --> 00:39:19.176 A:middle
+That app is not going to
+sell well, I am sorry.
+
+00:39:19.176 --> 00:39:21.796 A:middle
+So plan this when you are
+like in your business model,
+
+00:39:21.796 --> 00:39:23.526 A:middle
+be like what is the
+battery life of this app?
+
+00:39:24.416 --> 00:39:27.516 A:middle
+Am I using a lot of location,
+am I using a lot of networking,
+
+00:39:27.516 --> 00:39:28.756 A:middle
+am I doing these things
+in the background,
+
+00:39:29.136 --> 00:39:29.906 A:middle
+because they are expensive.
+
+00:39:29.906 --> 00:39:32.866 A:middle
+Look at your implementation.
+
+00:39:32.866 --> 00:39:33.936 A:middle
+Check out the Energy Guide,
+
+00:39:34.166 --> 00:39:35.716 A:middle
+make sure you're passing
+the best arguments
+
+00:39:35.756 --> 00:39:36.846 A:middle
+to the various APIs.
+
+00:39:37.276 --> 00:39:38.206 A:middle
+Look at your own code.
+
+00:39:38.206 --> 00:39:38.976 A:middle
+Look at our code.
+
+00:39:39.246 --> 00:39:41.366 A:middle
+If you see our code doing
+something strange, file a bug.
+
+00:39:41.686 --> 00:39:43.946 A:middle
+Finally, look at any third-party
+code you might be using.
+
+00:39:44.236 --> 00:39:46.336 A:middle
+Say you have an ad framework.
+
+00:39:46.336 --> 00:39:48.466 A:middle
+Ads are good, they support our
+platform, they support you.
+
+00:39:50.006 --> 00:39:53.296 A:middle
+However, if they do a lot of
+downloading, like every ad,
+
+00:39:53.506 --> 00:39:55.506 A:middle
+download display, download
+display, download display,
+
+00:39:55.506 --> 00:39:57.786 A:middle
+and then we're keeping the
+network on for a long time
+
+00:39:57.786 --> 00:39:59.286 A:middle
+in between -- not good.
+
+00:39:59.526 --> 00:40:00.616 A:middle
+Got to take an eye on that.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:39:59.526 --> 00:40:00.616 A:middle
+Got to take an eye on that.
+
+00:40:00.886 --> 00:40:02.296 A:middle
+Finally, test.
+
+00:40:02.376 --> 00:40:04.136 A:middle
+Run these tools on
+a regular basis
+
+00:40:04.136 --> 00:40:07.436 A:middle
+and make sure your app is
+behaving the way you expect
+
+00:40:07.436 --> 00:40:07.746 A:middle
+it to.
+
+00:40:07.956 --> 00:40:10.916 A:middle
+If you already did
+all these things,
+
+00:40:11.056 --> 00:40:13.426 A:middle
+which I suspect you haven't
+yet, but maybe you have --
+
+00:40:13.696 --> 00:40:14.726 A:middle
+in which case, great work --
+
+00:40:15.326 --> 00:40:19.186 A:middle
+go ahead and check out your
+background update intervals.
+
+00:40:19.186 --> 00:40:22.706 A:middle
+Can you reduce and give you
+greater leeway to the system?
+
+00:40:23.396 --> 00:40:25.696 A:middle
+Can you use notifications
+more sparingly,
+
+00:40:25.696 --> 00:40:26.626 A:middle
+especially if you
+have a VoIP app.
+
+00:40:26.656 --> 00:40:28.916 A:middle
+We changed our API a little bit.
+
+00:40:29.436 --> 00:40:31.126 A:middle
+Remember, those incoming
+connections are cheap,
+
+00:40:31.216 --> 00:40:33.286 A:middle
+they are not free, and
+they will cause you
+
+00:40:33.286 --> 00:40:36.536 A:middle
+to call back, but
+don't pull out.
+
+00:40:36.536 --> 00:40:38.156 A:middle
+Don't mess with the
+display brightness.
+
+00:40:38.466 --> 00:40:41.286 A:middle
+And drawing is probably the
+next front of excessive --
+
+00:40:41.446 --> 00:40:42.646 A:middle
+I talked about blink,
+but there's a lot
+
+00:40:42.646 --> 00:40:43.846 A:middle
+of other drawing
+things you can do.
+
+00:40:44.166 --> 00:40:46.666 A:middle
+Last year's talk at these
+topics, linked at the end,
+
+00:40:46.996 --> 00:40:48.696 A:middle
+is right on topic for drawing.
+
+00:40:49.046 --> 00:40:49.956 A:middle
+Got some tools for that too.
+
+00:40:50.266 --> 00:40:54.606 A:middle
+Finally, we now have Energy
+Guides for OS X and iOS,
+
+00:40:54.676 --> 00:40:57.706 A:middle
+so all this information I just
+presented is fully documented,
+
+00:40:57.706 --> 00:40:59.556 A:middle
+and we'll continue to
+update that information
+
+00:40:59.776 --> 00:41:01.316 A:middle
+on developer.Apple.com.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:40:59.776 --> 00:41:01.316 A:middle
+on developer.Apple.com.
+
+00:41:01.596 --> 00:41:04.136 A:middle
+So to summarize everything
+that we talked about,
+
+00:41:04.996 --> 00:41:08.046 A:middle
+energy is power times time.
+
+00:41:08.046 --> 00:41:09.426 A:middle
+You want to pull that in.
+
+00:41:09.626 --> 00:41:12.886 A:middle
+The power part is important,
+but it's only important in terms
+
+00:41:12.886 --> 00:41:13.566 A:middle
+of how long you run it.
+
+00:41:13.566 --> 00:41:16.206 A:middle
+And we want to get you
+down to nice low power,
+
+00:41:16.266 --> 00:41:17.756 A:middle
+and that's the low -- our tools.
+
+00:41:17.756 --> 00:41:19.156 A:middle
+Our tools have a
+nice low section,
+
+00:41:19.396 --> 00:41:20.296 A:middle
+as you will learn
+in the next talk.
+
+00:41:20.726 --> 00:41:23.176 A:middle
+That will give our users
+all-day battery life.
+
+00:41:24.456 --> 00:41:26.116 A:middle
+Do less work less often.
+
+00:41:26.606 --> 00:41:27.136 A:middle
+Do it later.
+
+00:41:27.806 --> 00:41:28.516 A:middle
+Do it efficiently.
+
+00:41:29.776 --> 00:41:31.296 A:middle
+Here are those links
+I talked about.
+
+00:41:31.816 --> 00:41:36.296 A:middle
+Documentation, videos,
+guides, last year's talks.
+
+00:41:36.716 --> 00:41:39.846 A:middle
+We've got our standard forums.
+
+00:41:39.846 --> 00:41:40.896 A:middle
+You can interact
+with each other.
+
+00:41:40.896 --> 00:41:42.786 A:middle
+You can contact us,
+the DTS people.
+
+00:41:43.176 --> 00:41:44.166 A:middle
+They have my phone number.
+
+00:41:44.416 --> 00:41:45.706 A:middle
+You don't have my phone number.
+
+00:41:45.766 --> 00:41:47.156 A:middle
+They do. Talk to them.
+
+00:41:47.156 --> 00:41:48.106 A:middle
+They can probably help you.
+
+00:41:48.106 --> 00:41:49.766 A:middle
+If they don't, they
+will call me or one
+
+00:41:49.766 --> 00:41:50.916 A:middle
+of my excellent teammates.
+
+00:41:51.896 --> 00:41:52.566 A:middle
+Paul is here.
+
+00:41:52.726 --> 00:41:56.706 A:middle
+His email gets to
+go on the slide.
+
+00:41:56.896 --> 00:41:57.856 A:middle
+Related sessions.
+
+00:41:57.856 --> 00:42:00.606 A:middle
+The very next session,
+please stick around.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:41:57.856 --> 00:42:00.606 A:middle
+The very next session,
+please stick around.
+
+00:42:00.606 --> 00:42:03.196 A:middle
+We've got networking,
+we've got some performance,
+
+00:42:03.746 --> 00:42:04.406 A:middle
+check these out.
+
+00:42:04.506 --> 00:42:06.656 A:middle
+They are going to help
+you think about how
+
+00:42:06.656 --> 00:42:08.276 A:middle
+to optimize all the
+things I just talked about.
+
+00:42:08.786 --> 00:42:11.576 A:middle
+Please go optimize
+your apps for energy.
+
+00:42:13.516 --> 00:42:28.570 A:middle
+[ Applause ]
+

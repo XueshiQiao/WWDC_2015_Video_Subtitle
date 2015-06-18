@@ -1,0 +1,4917 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:24.516 --> 00:00:31.166 A:middle
+[Applause]
+
+00:00:31.666 --> 00:00:32.086 A:middle
+&gt;&gt; CHRIS JENSEN: Good morning.
+
+00:00:33.046 --> 00:00:34.916 A:middle
+Welcome to Introducing
+WatchConnectivity.
+
+00:00:35.436 --> 00:00:36.096 A:middle
+My name is Chris.
+
+00:00:36.416 --> 00:00:37.906 A:middle
+Today I'm joined by
+my coworker Alex,
+
+00:00:38.106 --> 00:00:39.226 A:middle
+who will join me on stage later.
+
+00:00:39.226 --> 00:00:42.886 A:middle
+We are excited to show you
+what we have been working
+
+00:00:42.886 --> 00:00:47.706 A:middle
+on for both watchOS 2 and iOS 9.
+
+00:00:47.706 --> 00:00:49.566 A:middle
+We think what we are going
+to talk about today is going
+
+00:00:49.566 --> 00:00:51.376 A:middle
+to help you make more responsive
+
+00:00:51.836 --> 00:00:53.876 A:middle
+and better user experiences
+for your Watch apps.
+
+00:00:55.276 --> 00:00:57.306 A:middle
+To do a brief recap of
+where we are coming from,
+
+00:00:57.636 --> 00:01:00.106 A:middle
+let's look at what the world
+looked like in watchOS 1.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:57.636 --> 00:01:00.106 A:middle
+let's look at what the world
+looked like in watchOS 1.
+
+00:01:00.616 --> 00:01:04.316 A:middle
+Your iOS app and your WatchKit
+extension were both living
+
+00:01:04.506 --> 00:01:07.826 A:middle
+on the iPhone, and we were
+taking care of the communication
+
+00:01:08.606 --> 00:01:12.746 A:middle
+to the WatchKit app, and they
+could both share a data store.
+
+00:01:12.976 --> 00:01:15.486 A:middle
+In watchOS 2, we've moved
+the WatchKit extension
+
+00:01:15.486 --> 00:01:18.536 A:middle
+over to the Watch, and now
+your app is running natively
+
+00:01:18.646 --> 00:01:19.306 A:middle
+on the Watch.
+
+00:01:19.506 --> 00:01:20.926 A:middle
+This has a lot of benefits,
+
+00:01:20.926 --> 00:01:23.366 A:middle
+but it also means they now
+each have their own data store.
+
+00:01:24.526 --> 00:01:27.766 A:middle
+The obvious next question is
+going to be: How do we get data
+
+00:01:28.336 --> 00:01:29.536 A:middle
+over to the Apple Watch?
+
+00:01:29.916 --> 00:01:31.026 A:middle
+That's what we will
+discuss today.
+
+00:01:31.646 --> 00:01:36.756 A:middle
+So we are going to show
+you two main ways to deal
+
+00:01:36.756 --> 00:01:39.236 A:middle
+with this problem, of
+getting the data to the Watch.
+
+00:01:39.576 --> 00:01:42.226 A:middle
+There's the new
+WatchConnectivity framework,
+
+00:01:42.226 --> 00:01:46.166 A:middle
+which we are introducing
+in watchOS 2 and iOS 9.
+
+00:01:47.326 --> 00:01:52.386 A:middle
+And then there's the
+NSURLSession APIs available
+
+00:01:52.386 --> 00:01:53.066 A:middle
+in Foundation.
+
+00:01:53.586 --> 00:01:55.686 A:middle
+These are still available
+to your WatchKit extension,
+
+00:01:56.386 --> 00:01:59.406 A:middle
+and it's now available
+native on watchOS 2.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:00.806 --> 00:02:03.866 A:middle
+We think the topics we are
+going to discuss today apply
+
+00:02:03.986 --> 00:02:07.936 A:middle
+to most Watch apps,
+and we think it's going
+
+00:02:07.986 --> 00:02:10.395 A:middle
+to apply to most of you.
+
+00:02:10.455 --> 00:02:12.856 A:middle
+This is exemplified by
+the amount of examples
+
+00:02:12.856 --> 00:02:14.686 A:middle
+that we will be using in
+our presentation today.
+
+00:02:15.526 --> 00:02:18.486 A:middle
+You can see there's a wide range
+here, and we hope that every one
+
+00:02:18.486 --> 00:02:20.916 A:middle
+of you will be able to identify
+with at least one of these.
+
+00:02:22.276 --> 00:02:24.976 A:middle
+So let's get started with
+discussing WatchConnectivity.
+
+00:02:24.976 --> 00:02:26.716 A:middle
+So this is the new
+framework we introduced
+
+00:02:26.716 --> 00:02:28.846 A:middle
+in watchOS 2 and iOS 9.
+
+00:02:29.526 --> 00:02:31.686 A:middle
+It's available in both
+platforms, and pretty much all
+
+00:02:31.686 --> 00:02:33.756 A:middle
+of the APIs are available
+in both sides.
+
+00:02:33.976 --> 00:02:36.826 A:middle
+There are couple of
+iPhone-specific APIs
+
+00:02:37.036 --> 00:02:38.156 A:middle
+that we will get into.
+
+00:02:39.096 --> 00:02:42.386 A:middle
+The first thing you want
+to do when you are starting
+
+00:02:42.386 --> 00:02:44.576 A:middle
+to adopt WatchConnectivity
+is you want
+
+00:02:44.576 --> 00:02:45.686 A:middle
+to go through the setup.
+
+00:02:46.646 --> 00:02:49.336 A:middle
+We recommend that you
+set this up very early
+
+00:02:49.336 --> 00:02:51.746 A:middle
+in your app's life
+cycle on both sides,
+
+00:02:52.066 --> 00:02:55.296 A:middle
+both on the WatchKit
+extension, running on the Watch
+
+00:02:55.696 --> 00:02:57.266 A:middle
+and in your iOS 9 apps.
+
+00:02:57.956 --> 00:03:00.676 A:middle
+You want to make sure you
+do this setup in a code path
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:57.956 --> 00:03:00.676 A:middle
+You want to make sure you
+do this setup in a code path
+
+00:03:01.146 --> 00:03:02.686 A:middle
+that will be executed even
+
+00:03:02.686 --> 00:03:03.916 A:middle
+if you are being
+background launched.
+
+00:03:03.916 --> 00:03:07.226 A:middle
+So, don't put it inside, like, a
+view controller's View Did Load,
+
+00:03:07.396 --> 00:03:09.006 A:middle
+because when you're being
+launched in the background,
+
+00:03:09.006 --> 00:03:09.696 A:middle
+those won't get called.
+
+00:03:10.236 --> 00:03:12.386 A:middle
+So the first thing
+you want to do
+
+00:03:12.466 --> 00:03:15.216 A:middle
+in your iOS app is
+you will check to see
+
+00:03:15.216 --> 00:03:16.676 A:middle
+if the WCSession is supported.
+
+00:03:17.166 --> 00:03:19.296 A:middle
+You might have a
+universal iOS app.
+
+00:03:19.586 --> 00:03:21.646 A:middle
+Which means this code may
+be executing on an iPad,
+
+00:03:22.336 --> 00:03:24.086 A:middle
+where WatchConnectivity
+is not available.
+
+00:03:25.296 --> 00:03:28.926 A:middle
+So check this up front before
+you do any Watch-specific work
+
+00:03:28.926 --> 00:03:32.006 A:middle
+because we don't want you to
+waste a bunch of CPU doing work
+
+00:03:32.006 --> 00:03:33.956 A:middle
+that won't be used anywhere.
+
+00:03:34.426 --> 00:03:36.416 A:middle
+The next thing you want to
+do is create an instance
+
+00:03:36.416 --> 00:03:38.766 A:middle
+of our object, and you do that
+by calling Default Session.
+
+00:03:38.766 --> 00:03:42.946 A:middle
+And then you want to set a
+delegate on the session object,
+
+00:03:43.896 --> 00:03:45.776 A:middle
+and then finally you
+want to call Activate.
+
+00:03:45.916 --> 00:03:48.756 A:middle
+This will go and set up
+the WCSession object,
+
+00:03:48.966 --> 00:03:52.016 A:middle
+initialize all the properties,
+and once this call returns,
+
+00:03:52.576 --> 00:03:54.616 A:middle
+all the properties
+will be updated
+
+00:03:54.616 --> 00:03:56.836 A:middle
+with the correct
+initialization values.
+
+00:03:57.506 --> 00:04:01.336 A:middle
+And also at this point,
+any delegate callbacks,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:57.506 --> 00:04:01.336 A:middle
+And also at this point,
+any delegate callbacks,
+
+00:04:01.336 --> 00:04:03.246 A:middle
+any cued-up content
+can start coming in.
+
+00:04:03.936 --> 00:04:04.896 A:middle
+That's another reason
+why you want
+
+00:04:04.896 --> 00:04:06.756 A:middle
+to do this very early
+and always.
+
+00:04:07.016 --> 00:04:09.546 A:middle
+There might be content waiting
+to be delivered to your app.
+
+00:04:10.626 --> 00:04:12.736 A:middle
+So make sure you do
+these steps up front.
+
+00:04:13.676 --> 00:04:15.166 A:middle
+The next thing is you
+are going to want to do,
+
+00:04:15.166 --> 00:04:17.875 A:middle
+once you completed that step,
+is look at the session states.
+
+00:04:17.956 --> 00:04:22.426 A:middle
+This will inform your app about
+what the current relationship
+
+00:04:22.466 --> 00:04:24.816 A:middle
+between the iOS app
+and the Watch is.
+
+00:04:26.166 --> 00:04:30.066 A:middle
+So these properties are only
+available on the iPhone app.
+
+00:04:30.246 --> 00:04:32.866 A:middle
+It's informing the iOS
+app what its relationship
+
+00:04:32.866 --> 00:04:33.516 A:middle
+with the Watch is.
+
+00:04:33.796 --> 00:04:36.566 A:middle
+So you don't need to use
+this in your Watch app,
+
+00:04:36.566 --> 00:04:38.006 A:middle
+and they are mostly
+not available.
+
+00:04:39.116 --> 00:04:40.876 A:middle
+So for this example,
+we will use a news app.
+
+00:04:41.556 --> 00:04:43.446 A:middle
+Something that pulls
+down the most recent
+
+00:04:43.446 --> 00:04:44.386 A:middle
+interesting articles.
+
+00:04:46.066 --> 00:04:48.886 A:middle
+And it's going to first go
+through the setup process
+
+00:04:48.926 --> 00:04:49.656 A:middle
+that we just discussed.
+
+00:04:49.656 --> 00:04:51.396 A:middle
+It will do this early
+in its life cycle.
+
+00:04:51.636 --> 00:04:55.626 A:middle
+Next, it will want to check, is
+this device paired with a Watch?
+
+00:04:55.886 --> 00:04:58.806 A:middle
+If it's not paired, then it's
+almost as if this is running
+
+00:04:58.806 --> 00:05:00.306 A:middle
+on an iPad, there's
+nothing more to do.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:58.806 --> 00:05:00.306 A:middle
+on an iPad, there's
+nothing more to do.
+
+00:05:00.306 --> 00:05:01.216 A:middle
+There's no one else to talk to.
+
+00:05:01.216 --> 00:05:02.526 A:middle
+So at that point you might
+
+00:05:02.526 --> 00:05:04.546 A:middle
+as well stop doing any
+Watch-specific work.
+
+00:05:05.456 --> 00:05:08.476 A:middle
+But the user will go out and
+buy a new Watch, and he will go
+
+00:05:08.476 --> 00:05:09.646 A:middle
+through the pairing process.
+
+00:05:10.096 --> 00:05:13.096 A:middle
+He will launch the
+Apple Watch app.
+
+00:05:13.676 --> 00:05:14.866 A:middle
+Work his way through
+the pairing,
+
+00:05:14.866 --> 00:05:17.006 A:middle
+setting these devices up.
+
+00:05:17.566 --> 00:05:19.906 A:middle
+And now, when your app launches,
+
+00:05:20.146 --> 00:05:21.586 A:middle
+you will get a delegate
+callback.
+
+00:05:22.406 --> 00:05:24.266 A:middle
+The session Watch
+state did change.
+
+00:05:25.046 --> 00:05:27.296 A:middle
+When you check the value
+of the paired property,
+
+00:05:27.356 --> 00:05:29.016 A:middle
+you will see it will
+return True,
+
+00:05:29.016 --> 00:05:30.286 A:middle
+because the devices
+are now paired.
+
+00:05:30.286 --> 00:05:32.716 A:middle
+So this is a trigger
+for you to go ahead
+
+00:05:32.716 --> 00:05:34.986 A:middle
+and check this next
+property, which is,
+
+00:05:35.026 --> 00:05:36.146 A:middle
+is your Watch app installed?
+
+00:05:36.146 --> 00:05:38.806 A:middle
+If it is not installed,
+then there's no one
+
+00:05:38.806 --> 00:05:40.236 A:middle
+to talk to, your work is done.
+
+00:05:40.666 --> 00:05:44.176 A:middle
+But -- and by default, the
+Watch app will be default --
+
+00:05:44.176 --> 00:05:46.426 A:middle
+but the user might choose to
+uninstall it for some reason.
+
+00:05:46.426 --> 00:05:50.046 A:middle
+In this case, the user will
+go ahead and reinstall it.
+
+00:05:50.216 --> 00:05:53.746 A:middle
+He will go back into the Apple
+Watch app and he will flip
+
+00:05:53.746 --> 00:05:56.956 A:middle
+that switch, and now if
+your Apple is running,
+
+00:05:57.046 --> 00:05:58.506 A:middle
+you will again get
+the delegate callback
+
+00:05:58.786 --> 00:06:00.496 A:middle
+and you can check
+this properties value,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:58.786 --> 00:06:00.496 A:middle
+and you can check
+this properties value,
+
+00:06:00.876 --> 00:06:03.486 A:middle
+and you would see that Watch
+App Installed is now True.
+
+00:06:04.656 --> 00:06:06.816 A:middle
+Now you do have someone
+to communicate with.
+
+00:06:06.876 --> 00:06:07.996 A:middle
+This should be a trigger for you
+
+00:06:07.996 --> 00:06:10.346 A:middle
+to start communicating
+with your Watch app.
+
+00:06:10.346 --> 00:06:14.136 A:middle
+It will need content that
+only you can provide for it.
+
+00:06:14.636 --> 00:06:18.116 A:middle
+Whenever the Watch App
+Installed switches to True,
+
+00:06:18.476 --> 00:06:20.236 A:middle
+there's this other
+property that's going
+
+00:06:20.236 --> 00:06:22.146 A:middle
+to be available,
+Watch Directory URL.
+
+00:06:22.446 --> 00:06:23.416 A:middle
+You will find that this,
+
+00:06:23.416 --> 00:06:25.456 A:middle
+whenever Watch App
+Installed is True,
+
+00:06:25.746 --> 00:06:28.956 A:middle
+Watch Directory URL will
+have a non-nil value.
+
+00:06:28.956 --> 00:06:31.256 A:middle
+It will be a path to a directory
+
+00:06:31.256 --> 00:06:32.706 A:middle
+that we create in
+your container.
+
+00:06:33.776 --> 00:06:36.416 A:middle
+Let's discuss this a
+little bit more in depth.
+
+00:06:36.476 --> 00:06:39.786 A:middle
+So the directory and its
+contents, its lifetime is tied
+
+00:06:39.786 --> 00:06:41.386 A:middle
+to the Watch App
+Installed property.
+
+00:06:41.596 --> 00:06:45.186 A:middle
+This means whenever Watch App
+Installed switches from True
+
+00:06:45.186 --> 00:06:48.376 A:middle
+to False, this directory and
+all of its contents goes away.
+
+00:06:48.736 --> 00:06:50.456 A:middle
+Whenever it switches
+back to True,
+
+00:06:50.506 --> 00:06:53.876 A:middle
+the directory will be present,
+but this time it will be empty.
+
+00:06:54.576 --> 00:06:56.856 A:middle
+We recommend you only
+use it for data relevant
+
+00:06:56.856 --> 00:06:58.556 A:middle
+to the specific instance
+of your Watch app.
+
+00:06:59.146 --> 00:07:00.276 A:middle
+What do I mean by instance?
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:59.146 --> 00:07:00.276 A:middle
+What do I mean by instance?
+
+00:07:00.756 --> 00:07:04.096 A:middle
+Well, things like last queued
+item marker would be a good
+
+00:07:04.096 --> 00:07:04.846 A:middle
+thing to store there.
+
+00:07:04.846 --> 00:07:07.076 A:middle
+If the user uninstalls
+and reinstalls your app,
+
+00:07:07.296 --> 00:07:09.536 A:middle
+that Watch app is starting
+with a clean container.
+
+00:07:09.866 --> 00:07:12.786 A:middle
+Therefore, this directory will
+start clean, and you will need
+
+00:07:12.786 --> 00:07:16.806 A:middle
+to sync up where your
+app is communicating.
+
+00:07:16.806 --> 00:07:20.336 A:middle
+Other things you can put in
+is something like preferences.
+
+00:07:20.336 --> 00:07:25.416 A:middle
+When the user is running the
+iOS app for the first time,
+
+00:07:25.416 --> 00:07:27.936 A:middle
+you might like him to
+set up what he would
+
+00:07:27.936 --> 00:07:29.806 A:middle
+like his Watch app
+experience to be.
+
+00:07:29.996 --> 00:07:32.576 A:middle
+Maybe he doesn't want
+to show the full content
+
+00:07:32.576 --> 00:07:35.176 A:middle
+but the top ten news items
+for a particular topic
+
+00:07:35.176 --> 00:07:37.306 A:middle
+like international
+news or sports.
+
+00:07:37.806 --> 00:07:39.876 A:middle
+This would be a good
+place to store them.
+
+00:07:40.446 --> 00:07:43.866 A:middle
+Also if you are taking
+your full-sized assets
+
+00:07:44.026 --> 00:07:46.506 A:middle
+and generating Watch-specific
+assets,
+
+00:07:46.506 --> 00:07:49.686 A:middle
+you are compressing
+images, audio, video,
+
+00:07:50.556 --> 00:07:52.576 A:middle
+this would be a good place to
+store those while they are cued
+
+00:07:52.576 --> 00:07:55.086 A:middle
+for transfer, using the
+WatchConnectivity APIs
+
+00:07:55.086 --> 00:07:55.876 A:middle
+that we will discuss later.
+
+00:07:56.126 --> 00:07:58.386 A:middle
+So that's the Watch directory.
+
+00:07:59.266 --> 00:08:01.196 A:middle
+We suggest you store
+content in there,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:59.266 --> 00:08:01.196 A:middle
+We suggest you store
+content in there,
+
+00:08:01.196 --> 00:08:03.696 A:middle
+because then we will clean it
+up, if the Watch goes away,
+
+00:08:03.726 --> 00:08:06.176 A:middle
+if he unpairs his watch,
+we will automatically clean
+
+00:08:06.176 --> 00:08:11.316 A:middle
+up this content, so you don't
+have to micromanage all of this.
+
+00:08:11.316 --> 00:08:12.536 A:middle
+The final property that's part
+
+00:08:12.536 --> 00:08:14.956 A:middle
+of the session state is
+Complication Enabled.
+
+00:08:15.916 --> 00:08:18.716 A:middle
+Currently, the user does not
+have the complication enabled,
+
+00:08:18.886 --> 00:08:22.206 A:middle
+but he will go in and edit his
+Watch face and he will enable it
+
+00:08:22.816 --> 00:08:24.796 A:middle
+and you will get the
+same delicate callback,
+
+00:08:24.886 --> 00:08:26.246 A:middle
+session or stated change.
+
+00:08:26.836 --> 00:08:29.206 A:middle
+And when you check this
+property, it will now be True.
+
+00:08:32.006 --> 00:08:35.506 A:middle
+Now you have set up your
+WatchConnectivity session.
+
+00:08:35.986 --> 00:08:38.216 A:middle
+You have figured out what
+the state of the world is,
+
+00:08:38.216 --> 00:08:42.126 A:middle
+what your relationship
+between your iOS app
+
+00:08:42.126 --> 00:08:43.035 A:middle
+and your Watch app is.
+
+00:08:43.496 --> 00:08:44.326 A:middle
+The next thing you will want
+
+00:08:44.326 --> 00:08:47.386 A:middle
+to do is start communicating
+information over to the Watch
+
+00:08:47.386 --> 00:08:49.036 A:middle
+or from the Watch
+to the iOS app.
+
+00:08:50.046 --> 00:08:53.116 A:middle
+And to do that, I will hand
+over to Alex, who will talk
+
+00:08:53.116 --> 00:08:54.256 A:middle
+about the communication APIs.
+
+00:08:55.516 --> 00:09:04.176 A:middle
+[Applause]
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:55.516 --> 00:09:04.176 A:middle
+[Applause]
+
+00:09:04.676 --> 00:09:04.876 A:middle
+&gt;&gt; ALEXANDER LEDWITH: Thank you.
+
+00:09:05.006 --> 00:09:08.676 A:middle
+Okay. So like Chris said,
+you set up your session.
+
+00:09:09.586 --> 00:09:12.336 A:middle
+You have checked that
+devices are paired,
+
+00:09:12.456 --> 00:09:15.046 A:middle
+your Apple Watch
+app is installed.
+
+00:09:15.406 --> 00:09:17.896 A:middle
+Now let's start talking
+about how you can communicate
+
+00:09:18.046 --> 00:09:19.096 A:middle
+between these two devices.
+
+00:09:19.886 --> 00:09:23.636 A:middle
+We have a couple of different
+categories for communication.
+
+00:09:23.986 --> 00:09:26.716 A:middle
+First category is
+background transfers.
+
+00:09:27.456 --> 00:09:29.336 A:middle
+Background transfers
+are meant for content
+
+00:09:29.606 --> 00:09:32.776 A:middle
+that is not needed immediately
+on the receiving side.
+
+00:09:33.806 --> 00:09:36.606 A:middle
+Because the content is
+not needed immediately,
+
+00:09:36.886 --> 00:09:40.076 A:middle
+this means the system can
+do more intelligent things
+
+00:09:40.076 --> 00:09:42.186 A:middle
+when transferring that content.
+
+00:09:42.776 --> 00:09:46.516 A:middle
+In addition to background
+transfers, we are also going
+
+00:09:46.516 --> 00:09:48.066 A:middle
+to talk about interactive
+messaging.
+
+00:09:48.736 --> 00:09:52.386 A:middle
+Interactive messaging is
+meant for communicating
+
+00:09:52.386 --> 00:09:55.426 A:middle
+between two apps with
+live communication.
+
+00:09:55.526 --> 00:09:56.626 A:middle
+So both apps are up and running.
+
+00:09:56.626 --> 00:09:58.606 A:middle
+They are sending
+messages back and forth,
+
+00:09:59.186 --> 00:10:02.406 A:middle
+request response,
+that kind of thing.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:59.186 --> 00:10:02.406 A:middle
+request response,
+that kind of thing.
+
+00:10:02.716 --> 00:10:04.166 A:middle
+Some examples of
+when you might want
+
+00:10:04.166 --> 00:10:05.386 A:middle
+to use interactive messaging.
+
+00:10:05.616 --> 00:10:08.086 A:middle
+Say you have a game where
+the user is using both apps
+
+00:10:08.266 --> 00:10:09.176 A:middle
+at the same time.
+
+00:10:09.996 --> 00:10:13.136 A:middle
+Or you are on your Apple
+Watch, and you need
+
+00:10:13.136 --> 00:10:15.736 A:middle
+to trigger something to
+happen on the iOS side.
+
+00:10:16.316 --> 00:10:19.326 A:middle
+Like you want to
+trigger the iOS device
+
+00:10:19.326 --> 00:10:21.326 A:middle
+to start tracking
+the user's location.
+
+00:10:22.456 --> 00:10:26.176 A:middle
+So let's dig into this first
+one, background transfers.
+
+00:10:27.146 --> 00:10:28.186 A:middle
+The first thing to talk
+
+00:10:28.186 --> 00:10:31.226 A:middle
+about for background
+transfers is the type
+
+00:10:31.226 --> 00:10:34.346 A:middle
+of content your apps have
+and how the user is going
+
+00:10:34.346 --> 00:10:36.146 A:middle
+to interact with
+these two devices.
+
+00:10:36.726 --> 00:10:38.986 A:middle
+So let's take that
+news app example again,
+
+00:10:39.166 --> 00:10:40.736 A:middle
+this news app has some content.
+
+00:10:41.296 --> 00:10:44.546 A:middle
+It's fetching some more
+content from the server,
+
+00:10:44.896 --> 00:10:47.166 A:middle
+and it determines some of
+this content could be useful
+
+00:10:47.446 --> 00:10:48.376 A:middle
+for your Watch.
+
+00:10:49.586 --> 00:10:52.926 A:middle
+Now, the user isn't using the
+Watch at this point in time.
+
+00:10:53.356 --> 00:10:56.566 A:middle
+So the content isn't needed
+immediately on the Watch side.
+
+00:10:57.266 --> 00:11:00.746 A:middle
+Rather, the iOS app, the news
+app, wants to just pick some
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:57.266 --> 00:11:00.746 A:middle
+Rather, the iOS app, the news
+app, wants to just pick some
+
+00:11:00.746 --> 00:11:03.456 A:middle
+of that content and queue
+it up with the system,
+
+00:11:03.656 --> 00:11:07.216 A:middle
+and then allow the system
+to pick the right conditions
+
+00:11:07.216 --> 00:11:08.786 A:middle
+to transfer that content across.
+
+00:11:09.396 --> 00:11:11.976 A:middle
+The system will look at things
+like power, performance,
+
+00:11:12.066 --> 00:11:14.516 A:middle
+when the user is actually
+using the receiving side,
+
+00:11:14.716 --> 00:11:16.496 A:middle
+in this case the Apple Watch.
+
+00:11:17.396 --> 00:11:20.366 A:middle
+When conditions are right, that
+content will transfer across,
+
+00:11:21.136 --> 00:11:23.736 A:middle
+and it will wait on
+the receiving side,
+
+00:11:23.826 --> 00:11:25.746 A:middle
+in this case the Apple Watch,
+
+00:11:25.746 --> 00:11:28.706 A:middle
+until the user launches
+the receiving app.
+
+00:11:28.706 --> 00:11:29.876 A:middle
+When the receiving
+app is launched,
+
+00:11:30.136 --> 00:11:31.676 A:middle
+then that content
+will be delivered
+
+00:11:31.676 --> 00:11:33.976 A:middle
+and the app can update
+its state.
+
+00:11:34.476 --> 00:11:38.776 A:middle
+So this is what background
+transfers provide.
+
+00:11:38.776 --> 00:11:41.036 A:middle
+It allows you to
+queue up content.
+
+00:11:41.776 --> 00:11:45.816 A:middle
+The system is going to
+transfer the content for you.
+
+00:11:46.486 --> 00:11:50.286 A:middle
+This allows the sending side,
+the sending side app, to exit.
+
+00:11:50.646 --> 00:11:51.806 A:middle
+The system will handle the rest.
+
+00:11:52.566 --> 00:11:55.186 A:middle
+It allows the system to pick
+the opportune time to transfer
+
+00:11:55.186 --> 00:11:59.726 A:middle
+that content, and it allows the
+system to store the information
+
+00:11:59.726 --> 00:12:03.206 A:middle
+on the receiving side and wait
+for the receiving app to launch.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:59.726 --> 00:12:03.206 A:middle
+on the receiving side and wait
+for the receiving app to launch.
+
+00:12:03.696 --> 00:12:06.946 A:middle
+For a lot of the
+content your apps have,
+
+00:12:07.516 --> 00:12:10.766 A:middle
+we definitely recommend that
+you use background transfers.
+
+00:12:11.366 --> 00:12:15.416 A:middle
+The reason is most of that
+content will not be needed
+
+00:12:15.416 --> 00:12:16.866 A:middle
+immediately on the
+receiving side.
+
+00:12:17.156 --> 00:12:18.266 A:middle
+Rather, it will be needed
+
+00:12:18.266 --> 00:12:20.506 A:middle
+when the receiving
+app actually launches.
+
+00:12:20.506 --> 00:12:24.286 A:middle
+So let's get into
+some nuts and bolts.
+
+00:12:25.036 --> 00:12:28.136 A:middle
+We have three different types
+of background transfers.
+
+00:12:28.946 --> 00:12:31.916 A:middle
+The first type is the
+application context.
+
+00:12:32.626 --> 00:12:35.276 A:middle
+The application context
+represents a single set
+
+00:12:35.386 --> 00:12:37.566 A:middle
+of the most interesting
+information your app has
+
+00:12:37.566 --> 00:12:38.696 A:middle
+to offer to the other side.
+
+00:12:39.846 --> 00:12:43.106 A:middle
+So, for example, let's say on
+the iOS side you have an app
+
+00:12:43.476 --> 00:12:46.646 A:middle
+that tracks the user's location,
+and based on that location,
+
+00:12:47.096 --> 00:12:50.516 A:middle
+the app picks a restaurant
+in that location and wants
+
+00:12:50.516 --> 00:12:52.076 A:middle
+to recommend it to the user.
+
+00:12:52.846 --> 00:12:54.856 A:middle
+In addition to sharing
+restaurant on the iOS side,
+
+00:12:54.996 --> 00:12:57.046 A:middle
+you also want to
+show that restaurant
+
+00:12:57.046 --> 00:12:58.366 A:middle
+in the Apple Watch app.
+
+00:12:59.126 --> 00:13:00.726 A:middle
+So you could package
+up that suggestion
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:59.126 --> 00:13:00.726 A:middle
+So you could package
+up that suggestion
+
+00:13:00.726 --> 00:13:02.606 A:middle
+into the application context,
+
+00:13:02.976 --> 00:13:04.446 A:middle
+and that will get
+transferred across,
+
+00:13:04.746 --> 00:13:07.486 A:middle
+and then the next time
+the user launches the app
+
+00:13:07.686 --> 00:13:10.286 A:middle
+on the Apple Watch side,
+the content will be there,
+
+00:13:10.286 --> 00:13:11.886 A:middle
+that suggestion will
+be there to show.
+
+00:13:13.036 --> 00:13:14.476 A:middle
+Another example of
+when you might want
+
+00:13:14.476 --> 00:13:19.226 A:middle
+to use application context, say
+you have a social networking app
+
+00:13:19.576 --> 00:13:22.916 A:middle
+on the iOS side, it fetches a
+bunch of posts and determines
+
+00:13:22.916 --> 00:13:27.696 A:middle
+that there's a top 10 set
+of really interesting posts
+
+00:13:27.696 --> 00:13:30.226 A:middle
+that it wants to show
+on the Apple Watch side.
+
+00:13:30.706 --> 00:13:32.746 A:middle
+That way the user can
+look at the Apple Watch
+
+00:13:32.966 --> 00:13:34.666 A:middle
+and see interesting
+information right away.
+
+00:13:35.476 --> 00:13:37.636 A:middle
+You can also package up
+of those top 10 posts
+
+00:13:37.686 --> 00:13:40.706 A:middle
+into an application context,
+which will get sent across.
+
+00:13:41.916 --> 00:13:44.696 A:middle
+Now application context
+is the simplest way
+
+00:13:44.696 --> 00:13:46.806 A:middle
+of transferring content
+in the background,
+
+00:13:46.956 --> 00:13:48.716 A:middle
+but if you need something
+a little more complex,
+
+00:13:49.376 --> 00:13:51.736 A:middle
+or you need to queue up
+more than a single set
+
+00:13:51.976 --> 00:13:54.636 A:middle
+of information, we are
+offering two ways to do that.
+
+00:13:55.426 --> 00:13:58.126 A:middle
+The first way is
+user info transfer.
+
+00:13:58.956 --> 00:14:01.626 A:middle
+This allows you to transfer
+user info dictionaries,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:58.956 --> 00:14:01.626 A:middle
+This allows you to transfer
+user info dictionaries,
+
+00:14:01.896 --> 00:14:04.246 A:middle
+in-memory content that
+you want to pack up.
+
+00:14:04.336 --> 00:14:07.076 A:middle
+An example of this is
+let's say you have a game
+
+00:14:07.526 --> 00:14:08.646 A:middle
+on the Apple Watch side.
+
+00:14:08.976 --> 00:14:10.436 A:middle
+The user progresses
+through levels,
+
+00:14:11.326 --> 00:14:14.156 A:middle
+and as the user progresses
+through levels,
+
+00:14:14.156 --> 00:14:17.816 A:middle
+you want to sync back that
+progression to the iOS app.
+
+00:14:18.306 --> 00:14:20.236 A:middle
+The iOS app will
+show some nice graphs
+
+00:14:20.856 --> 00:14:22.636 A:middle
+on how the user did
+in each level.
+
+00:14:23.276 --> 00:14:26.386 A:middle
+In addition to the
+user info transfer,
+
+00:14:26.386 --> 00:14:28.606 A:middle
+we are also offering
+file transfer.
+
+00:14:28.606 --> 00:14:29.916 A:middle
+This is very similar.
+
+00:14:29.986 --> 00:14:32.626 A:middle
+It allows you to queue up
+content, except in this case,
+
+00:14:32.676 --> 00:14:34.696 A:middle
+the content is a file.
+
+00:14:35.736 --> 00:14:38.176 A:middle
+One example that we are going
+to use in this presentation
+
+00:14:38.176 --> 00:14:40.476 A:middle
+for file transfer is let's
+say you have an iOS app
+
+00:14:40.476 --> 00:14:42.876 A:middle
+that allows the user
+to edit images
+
+00:14:43.576 --> 00:14:45.556 A:middle
+and after they edit
+those images,
+
+00:14:45.726 --> 00:14:47.206 A:middle
+the user can pick
+their favorites.
+
+00:14:47.206 --> 00:14:48.846 A:middle
+And those favorited images
+are the ones you want
+
+00:14:48.846 --> 00:14:49.896 A:middle
+to show in Apple Watch.
+
+00:14:50.466 --> 00:14:52.576 A:middle
+You can use file
+transfer to transfer
+
+00:14:52.576 --> 00:14:54.076 A:middle
+across those favorited images.
+
+00:14:54.436 --> 00:14:56.086 A:middle
+So they're available
+on Apple Watch
+
+00:14:56.326 --> 00:14:57.236 A:middle
+so the user can show them off
+
+00:14:57.236 --> 00:15:00.136 A:middle
+to their friends,
+that kind of thing.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:57.236 --> 00:15:00.136 A:middle
+to their friends,
+that kind of thing.
+
+00:15:00.346 --> 00:15:02.576 A:middle
+So let's dig into
+these individually.
+
+00:15:03.706 --> 00:15:05.996 A:middle
+We will start with
+application context.
+
+00:15:07.006 --> 00:15:07.926 A:middle
+The example we will use
+
+00:15:07.926 --> 00:15:11.206 A:middle
+for application context is the
+social networking app example.
+
+00:15:11.256 --> 00:15:15.106 A:middle
+I mentioned before, this app
+on iOS fetches all the posts
+
+00:15:15.106 --> 00:15:16.386 A:middle
+from the social networking site
+
+00:15:16.526 --> 00:15:19.596 A:middle
+and then it picks the most
+interesting ones to send
+
+00:15:19.596 --> 00:15:21.776 A:middle
+over to the Watch app.
+
+00:15:22.096 --> 00:15:22.936 A:middle
+The first thing to talk
+
+00:15:22.936 --> 00:15:26.566 A:middle
+about with application context
+are these two properties.
+
+00:15:27.896 --> 00:15:30.126 A:middle
+The first property is
+Application Context.
+
+00:15:30.686 --> 00:15:34.256 A:middle
+It is the property that
+stores the latest content
+
+00:15:34.256 --> 00:15:36.886 A:middle
+on the sending side, and
+then on the receiving side,
+
+00:15:36.886 --> 00:15:38.646 A:middle
+there's Received
+Application Context,
+
+00:15:38.916 --> 00:15:41.696 A:middle
+which will store the
+latest received content
+
+00:15:41.746 --> 00:15:42.766 A:middle
+on the receiving side.
+
+00:15:43.836 --> 00:15:49.446 A:middle
+So let's say this iOS app
+has fetched a bunch of posts,
+
+00:15:49.736 --> 00:15:53.016 A:middle
+and it's packaged up the most
+interesting ones for the Watch.
+
+00:15:53.016 --> 00:15:56.106 A:middle
+It's going to want to call
+Update Application Context.
+
+00:15:57.016 --> 00:16:00.486 A:middle
+This method takes a dictionary,
+representing the latest,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:15:57.016 --> 00:16:00.486 A:middle
+This method takes a dictionary,
+representing the latest,
+
+00:16:00.486 --> 00:16:02.386 A:middle
+most interesting state
+you want to send across.
+
+00:16:04.036 --> 00:16:06.716 A:middle
+This content, we
+take this content
+
+00:16:06.716 --> 00:16:09.796 A:middle
+after Update Application Context
+is called, and we push it
+
+00:16:09.796 --> 00:16:11.786 A:middle
+down into the Application
+Context property.
+
+00:16:11.786 --> 00:16:13.886 A:middle
+And this content will sit here,
+
+00:16:14.036 --> 00:16:16.286 A:middle
+and the system will determine
+a good time to transfer
+
+00:16:16.286 --> 00:16:18.086 A:middle
+that content across, maybe
+
+00:16:18.086 --> 00:16:20.316 A:middle
+when the user starts
+actually using their Watch.
+
+00:16:21.656 --> 00:16:26.866 A:middle
+Now, in the meantime, this iOS
+app could fetch more content
+
+00:16:27.016 --> 00:16:29.086 A:middle
+and determine that
+there's a newer set
+
+00:16:29.446 --> 00:16:31.846 A:middle
+of interesting information
+that it wants
+
+00:16:31.846 --> 00:16:33.806 A:middle
+to send over to the Watch.
+
+00:16:34.196 --> 00:16:36.466 A:middle
+In this case, it's going to
+want call Update Application
+
+00:16:36.466 --> 00:16:37.506 A:middle
+Context again.
+
+00:16:37.956 --> 00:16:40.346 A:middle
+And then we're going
+to push that content
+
+00:16:40.346 --> 00:16:42.486 A:middle
+down into the Application
+Context property.
+
+00:16:42.976 --> 00:16:45.446 A:middle
+This is going to bump out the
+old relevant state and put
+
+00:16:45.446 --> 00:16:47.636 A:middle
+in the new relevant state
+because what we really care
+
+00:16:47.636 --> 00:16:51.406 A:middle
+about is the most
+interesting, latest set of data.
+
+00:16:52.126 --> 00:16:55.326 A:middle
+Now, this new content is
+going to sit here, again,
+
+00:16:55.326 --> 00:16:56.726 A:middle
+waiting for the system
+to pick a good time
+
+00:16:56.726 --> 00:16:58.316 A:middle
+to transfer that content across.
+
+00:16:59.326 --> 00:17:00.756 A:middle
+When the system does
+pick a good time,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:59.326 --> 00:17:00.756 A:middle
+When the system does
+pick a good time,
+
+00:17:01.156 --> 00:17:02.496 A:middle
+that content will come across.
+
+00:17:02.496 --> 00:17:04.465 A:middle
+It will sit on the
+Apple Watch side.
+
+00:17:05.076 --> 00:17:06.756 A:middle
+And it will wait for the user
+
+00:17:06.756 --> 00:17:10.366 A:middle
+to launch the app,
+the Apple Watch app.
+
+00:17:10.675 --> 00:17:13.205 A:middle
+When that app is launched,
+we will deliver that content
+
+00:17:13.205 --> 00:17:15.036 A:middle
+to your WatchKit extension,
+the place where all
+
+00:17:15.036 --> 00:17:18.165 A:middle
+of your code is executing
+on the Apple Watch side.
+
+00:17:18.806 --> 00:17:22.576 A:middle
+So that's the flow of
+application context.
+
+00:17:23.205 --> 00:17:25.756 A:middle
+Now, let's take a
+look at some code.
+
+00:17:26.425 --> 00:17:29.186 A:middle
+The first thing you want to
+do is you want to package
+
+00:17:29.656 --> 00:17:32.886 A:middle
+up your context dictionary,
+representing the latest state
+
+00:17:33.116 --> 00:17:34.516 A:middle
+that you want to send across.
+
+00:17:34.846 --> 00:17:37.316 A:middle
+And then you will call
+Update Application Context
+
+00:17:37.356 --> 00:17:38.356 A:middle
+with that dictionary.
+
+00:17:38.816 --> 00:17:42.276 A:middle
+The last thing to mention
+about this code example is
+
+00:17:42.276 --> 00:17:45.466 A:middle
+that the call to Update
+Application Context is wrapped
+
+00:17:45.676 --> 00:17:49.646 A:middle
+in a Do Catch block, and the
+call is prepended by a Try.
+
+00:17:50.446 --> 00:17:52.076 A:middle
+This is new error
+handling in Swift.
+
+00:17:52.516 --> 00:17:54.906 A:middle
+Update Application Context
+can return an error.
+
+00:17:55.616 --> 00:17:58.956 A:middle
+And if an error is returned,
+the Catch block will be invoked,
+
+00:17:59.536 --> 00:18:01.906 A:middle
+and we strongly suggest
+that you handle your
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:59.536 --> 00:18:01.906 A:middle
+and we strongly suggest
+that you handle your
+
+00:18:01.906 --> 00:18:02.836 A:middle
+errors appropriately.
+
+00:18:03.426 --> 00:18:08.346 A:middle
+So that's the sending side
+for application context.
+
+00:18:08.846 --> 00:18:10.596 A:middle
+Now, let's take a look
+at the receiving side.
+
+00:18:11.806 --> 00:18:12.756 A:middle
+On the receiving side,
+
+00:18:13.086 --> 00:18:15.056 A:middle
+the receivers will get
+this delegate callback,
+
+00:18:15.216 --> 00:18:16.946 A:middle
+Did Receive Application Context.
+
+00:18:16.946 --> 00:18:19.256 A:middle
+It's going to pass
+through the dictionary
+
+00:18:19.366 --> 00:18:20.496 A:middle
+that the sender packaged up.
+
+00:18:21.276 --> 00:18:26.426 A:middle
+And at this point, the
+receiver can take that content
+
+00:18:26.716 --> 00:18:27.946 A:middle
+and update its app state.
+
+00:18:28.776 --> 00:18:30.646 A:middle
+One thing to know about
+this delegate callback
+
+00:18:30.646 --> 00:18:34.156 A:middle
+and all delegate callbacks in
+our API is that they're returned
+
+00:18:34.156 --> 00:18:36.176 A:middle
+on a non-main serial queue.
+
+00:18:36.176 --> 00:18:38.916 A:middle
+If you need to do
+something on the main queue
+
+00:18:38.916 --> 00:18:41.816 A:middle
+because maybe you're updating
+some UI, you're going to need
+
+00:18:41.816 --> 00:18:44.626 A:middle
+to dispatch over to the main
+queue to do that updating
+
+00:18:44.626 --> 00:18:47.366 A:middle
+of your UI based on this
+content or something else.
+
+00:18:48.876 --> 00:18:51.406 A:middle
+So that's application context.
+
+00:18:52.306 --> 00:18:54.166 A:middle
+It's the most interesting
+relevant content
+
+00:18:54.166 --> 00:18:55.976 A:middle
+that your app has
+for the other side.
+
+00:18:56.546 --> 00:18:58.216 A:middle
+It does have overriding
+behavior,
+
+00:18:58.366 --> 00:19:03.996 A:middle
+and this is because you should
+treat the latest content
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:58.366 --> 00:19:03.996 A:middle
+and this is because you should
+treat the latest content
+
+00:19:04.256 --> 00:19:06.766 A:middle
+as the content that the
+receiving side cares about
+
+00:19:07.036 --> 00:19:10.426 A:middle
+and anything that's not
+latest isn't relevant anymore.
+
+00:19:11.686 --> 00:19:13.926 A:middle
+Application context
+takes a dictionary.
+
+00:19:14.696 --> 00:19:16.936 A:middle
+This dictionary takes
+property list types.
+
+00:19:17.706 --> 00:19:20.616 A:middle
+Property list types are basic
+object types such as numbers,
+
+00:19:20.616 --> 00:19:24.286 A:middle
+strings, basic collection
+types, dictionaries, arrays.
+
+00:19:25.126 --> 00:19:27.816 A:middle
+Apple has some great
+documentation online
+
+00:19:28.296 --> 00:19:31.966 A:middle
+if you want a refresher
+on property list types.
+
+00:19:33.316 --> 00:19:35.946 A:middle
+So we have some specific
+recommended use cases
+
+00:19:35.946 --> 00:19:37.376 A:middle
+for application context.
+
+00:19:38.276 --> 00:19:41.726 A:middle
+Application context works really
+well for many Apple Watch apps
+
+00:19:41.846 --> 00:19:44.446 A:middle
+because many Apple
+Watch apps show a subset
+
+00:19:44.446 --> 00:19:46.216 A:middle
+of the information
+the iOS app has.
+
+00:19:47.226 --> 00:19:50.006 A:middle
+So, if your app works like
+this, we suggest that you put
+
+00:19:50.006 --> 00:19:53.306 A:middle
+that subset of the information
+into the application context
+
+00:19:53.656 --> 00:19:56.496 A:middle
+and let it get sent across
+to the Apple Watch side.
+
+00:19:56.906 --> 00:19:58.226 A:middle
+In addition to those apps,
+
+00:19:59.016 --> 00:20:01.686 A:middle
+application context also
+works really well for glances.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:59.016 --> 00:20:01.686 A:middle
+application context also
+works really well for glances.
+
+00:20:03.116 --> 00:20:05.726 A:middle
+Glances take the single
+most interesting piece
+
+00:20:05.726 --> 00:20:07.656 A:middle
+of data your apps have to offer.
+
+00:20:08.096 --> 00:20:09.896 A:middle
+So we suggest you put
+that piece of data
+
+00:20:09.896 --> 00:20:12.976 A:middle
+into an application context on
+the iOS side, so that it gets
+
+00:20:12.976 --> 00:20:14.356 A:middle
+across to the Watch side.
+
+00:20:14.826 --> 00:20:17.196 A:middle
+Then when the user swipes
+up on the clock face
+
+00:20:17.816 --> 00:20:20.306 A:middle
+to show your glance, that
+data will be available.
+
+00:20:21.686 --> 00:20:25.726 A:middle
+So moving on from application
+context, now we are going
+
+00:20:25.726 --> 00:20:27.376 A:middle
+to talk about user
+info transfer.
+
+00:20:28.316 --> 00:20:31.496 A:middle
+An example here that we are
+going to use is you have a game
+
+00:20:32.236 --> 00:20:33.426 A:middle
+on the Apple Watch side.
+
+00:20:33.806 --> 00:20:36.176 A:middle
+The user progresses
+through levels in this game,
+
+00:20:36.446 --> 00:20:39.156 A:middle
+and as the user passes
+one level, you are going
+
+00:20:39.156 --> 00:20:41.396 A:middle
+to sync back the progress
+that they made to the iOS side
+
+00:20:41.736 --> 00:20:44.136 A:middle
+so that the iOS app can
+show some nice graphs
+
+00:20:44.796 --> 00:20:46.876 A:middle
+on how the user did
+in that level.
+
+00:20:47.876 --> 00:20:48.686 A:middle
+The first thing to talk
+
+00:20:48.686 --> 00:20:52.136 A:middle
+about for user info transfer
+is the outstanding user info
+
+00:20:52.136 --> 00:20:52.926 A:middle
+transfer queue.
+
+00:20:53.406 --> 00:20:56.026 A:middle
+This holds on to all the
+content that's waiting
+
+00:20:56.026 --> 00:20:57.566 A:middle
+to be transferred across.
+
+00:20:58.506 --> 00:20:59.466 A:middle
+The current state of the world
+
+00:20:59.556 --> 00:21:01.576 A:middle
+as the user progressed
+through two levels.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:59.556 --> 00:21:01.576 A:middle
+as the user progressed
+through two levels.
+
+00:21:02.596 --> 00:21:04.196 A:middle
+The progression is sitting
+
+00:21:04.736 --> 00:21:07.616 A:middle
+in the outstanding
+user transfer queue.
+
+00:21:08.726 --> 00:21:10.766 A:middle
+And currently the user is
+working on level three.
+
+00:21:11.566 --> 00:21:13.846 A:middle
+Once they finish level three,
+you are going to want to package
+
+00:21:13.846 --> 00:21:18.166 A:middle
+up that content and call
+Transfer User Info and pass
+
+00:21:18.216 --> 00:21:20.536 A:middle
+through a dictionary that
+represents their progress.
+
+00:21:21.636 --> 00:21:24.116 A:middle
+This will take that dictionary,
+and it will package it up
+
+00:21:24.116 --> 00:21:26.856 A:middle
+and it will put it into
+the outstanding user input
+
+00:21:26.856 --> 00:21:27.596 A:middle
+transfer queue.
+
+00:21:27.596 --> 00:21:30.266 A:middle
+Now this content will wait here
+
+00:21:30.266 --> 00:21:32.366 A:middle
+until the system determines
+it's a good time to transfer
+
+00:21:32.366 --> 00:21:35.216 A:middle
+that content, based on power
+considerations or maybe
+
+00:21:35.406 --> 00:21:37.726 A:middle
+when the user starts
+using their phone.
+
+00:21:39.156 --> 00:21:42.176 A:middle
+The content will then transfer,
+and like the previous API,
+
+00:21:42.176 --> 00:21:46.306 A:middle
+we are going to wait until the
+app on the iOS side launches.
+
+00:21:46.936 --> 00:21:49.166 A:middle
+And when it does, we will
+deliver that content,
+
+00:21:49.896 --> 00:21:51.936 A:middle
+and now the iOS app
+can update those graphs
+
+00:21:52.316 --> 00:21:55.066 A:middle
+to show the progress the user
+made in their Apple Watch game.
+
+00:21:55.636 --> 00:21:58.766 A:middle
+So that's the flow for
+user info transfer.
+
+00:21:59.306 --> 00:22:01.056 A:middle
+Let's take a look at some code.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:59.306 --> 00:22:01.056 A:middle
+Let's take a look at some code.
+
+00:22:01.596 --> 00:22:05.156 A:middle
+First thing you want
+to do is package
+
+00:22:05.156 --> 00:22:07.766 A:middle
+up your user info dictionary
+with all the content
+
+00:22:08.406 --> 00:22:10.396 A:middle
+that represents this
+current state
+
+00:22:10.396 --> 00:22:11.756 A:middle
+that you want to send across.
+
+00:22:11.946 --> 00:22:14.296 A:middle
+And then you want to
+call Transfer User Info
+
+00:22:14.386 --> 00:22:15.356 A:middle
+with that dictionary.
+
+00:22:16.426 --> 00:22:19.806 A:middle
+Transfer user info returns
+a user info transfer object.
+
+00:22:20.176 --> 00:22:22.486 A:middle
+This object contains the
+dictionary that's being sent
+
+00:22:22.486 --> 00:22:26.866 A:middle
+across, and it allows you
+to cancel this transfer
+
+00:22:26.956 --> 00:22:28.846 A:middle
+if the transfer is still
+in the outstanding queue.
+
+00:22:29.916 --> 00:22:32.436 A:middle
+In addition to this transfer
+object being returned,
+
+00:22:32.996 --> 00:22:34.826 A:middle
+we also offer a way to get all
+
+00:22:34.826 --> 00:22:37.166 A:middle
+of the outstanding user info
+transfers that are in the queue.
+
+00:22:37.946 --> 00:22:40.456 A:middle
+This returns an array, and you
+can iterate over the array,
+
+00:22:40.836 --> 00:22:42.586 A:middle
+look at all the contents,
+
+00:22:43.276 --> 00:22:45.076 A:middle
+and potentially cancel
+if you need to.
+
+00:22:45.206 --> 00:22:48.536 A:middle
+So that's the sending side
+for user info transfer.
+
+00:22:49.556 --> 00:22:51.056 A:middle
+Let's take a look at
+the receiving side.
+
+00:22:51.606 --> 00:22:54.276 A:middle
+On the receiving side,
+you will get this call,
+
+00:22:54.666 --> 00:22:56.296 A:middle
+Did Receive User Info Transfer.
+
+00:22:57.426 --> 00:23:00.006 A:middle
+Like application context and all
+the other delegate callbacks,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:57.426 --> 00:23:00.006 A:middle
+Like application context and all
+the other delegate callbacks,
+
+00:23:00.316 --> 00:23:02.396 A:middle
+this is returned on a
+non-main serial queue.
+
+00:23:03.786 --> 00:23:06.026 A:middle
+Once you get that call,
+you can take that content,
+
+00:23:06.126 --> 00:23:10.376 A:middle
+that dictionary content, and
+you can update your app state.
+
+00:23:10.576 --> 00:23:11.946 A:middle
+That's user info transfer.
+
+00:23:12.626 --> 00:23:14.096 A:middle
+It takes user input
+dictionaries.
+
+00:23:14.566 --> 00:23:17.236 A:middle
+These dictionaries, like the
+application context dictionary,
+
+00:23:17.236 --> 00:23:18.416 A:middle
+take property list types.
+
+00:23:19.416 --> 00:23:22.596 A:middle
+It's good for in-memory
+content, like game progression.
+
+00:23:23.426 --> 00:23:24.916 A:middle
+And we give you access
+
+00:23:25.226 --> 00:23:29.656 A:middle
+to the outstanding user
+info transfers in the queue.
+
+00:23:30.506 --> 00:23:33.176 A:middle
+Next, let's talk
+about file transfer.
+
+00:23:33.846 --> 00:23:36.606 A:middle
+An example we will use
+for file transfer is this
+
+00:23:36.606 --> 00:23:37.446 A:middle
+image-editing app.
+
+00:23:38.476 --> 00:23:40.956 A:middle
+The user can edit
+images on the iOS side,
+
+00:23:41.776 --> 00:23:43.506 A:middle
+and then they can
+select their favorites,
+
+00:23:43.506 --> 00:23:45.496 A:middle
+and those favorites are the
+ones we want to transfer
+
+00:23:45.496 --> 00:23:47.466 A:middle
+across to Apple Watch.
+
+00:23:48.646 --> 00:23:49.936 A:middle
+So the first thing to talk
+
+00:23:49.936 --> 00:23:52.406 A:middle
+about is the outstanding
+file transfer queue.
+
+00:23:53.126 --> 00:23:54.696 A:middle
+This is where all the
+file transfers will sit
+
+00:23:54.696 --> 00:23:56.186 A:middle
+when they are waiting
+to be sent across.
+
+00:23:56.806 --> 00:23:59.596 A:middle
+And then on the receiving
+side, the files will be put
+
+00:23:59.596 --> 00:24:02.526 A:middle
+into the Documents/Inbox
+folder while they are waiting
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:59.596 --> 00:24:02.526 A:middle
+into the Documents/Inbox
+folder while they are waiting
+
+00:24:02.526 --> 00:24:05.556 A:middle
+to be delivered to the
+receiving side app.
+
+00:24:05.726 --> 00:24:09.346 A:middle
+The state of the world is the
+user has favorited two pictures,
+
+00:24:09.426 --> 00:24:11.656 A:middle
+two images, that are
+sitting in the queue,
+
+00:24:12.356 --> 00:24:13.936 A:middle
+and they are working on a third.
+
+00:24:15.136 --> 00:24:17.436 A:middle
+Once they have completed that
+third and have selected it
+
+00:24:17.436 --> 00:24:20.466 A:middle
+as a favorite, you will
+want to call Transfer File.
+
+00:24:20.736 --> 00:24:24.206 A:middle
+And you will pass in a file
+URL pointing to the file
+
+00:24:24.206 --> 00:24:27.336 A:middle
+that you want to transfer,
+and we are offering a way
+
+00:24:27.336 --> 00:24:31.406 A:middle
+to transfer additional metadata
+in the form of a dictionary.
+
+00:24:32.306 --> 00:24:35.726 A:middle
+One example of when you might
+want to add some metadata is
+
+00:24:35.726 --> 00:24:39.716 A:middle
+if you want to group some
+of these files together
+
+00:24:40.176 --> 00:24:43.406 A:middle
+by putting an identifier in
+each metadata dictionary.
+
+00:24:43.766 --> 00:24:46.376 A:middle
+That way the receiving side
+can pull out that identifier,
+
+00:24:46.686 --> 00:24:47.706 A:middle
+group the incoming files.
+
+00:24:48.486 --> 00:24:51.546 A:middle
+So the user's favorited
+this image.
+
+00:24:51.856 --> 00:24:53.026 A:middle
+We called it transfer file.
+
+00:24:53.576 --> 00:24:55.976 A:middle
+Now we will take that
+packaged-up content,
+
+00:24:55.976 --> 00:24:58.506 A:middle
+and we will put it into the
+outstanding file transfer queue.
+
+00:24:58.506 --> 00:25:01.546 A:middle
+And it will wait here until the
+system determines a good time
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:24:58.506 --> 00:25:01.546 A:middle
+And it will wait here until the
+system determines a good time
+
+00:25:01.546 --> 00:25:02.636 A:middle
+to transfer the content.
+
+00:25:03.666 --> 00:25:05.846 A:middle
+When the system does determine
+a good time to transfer
+
+00:25:05.846 --> 00:25:09.506 A:middle
+that content, it will move that
+content across and it will wait
+
+00:25:09.506 --> 00:25:14.126 A:middle
+for the receiving side to launch
+and take care of that content.
+
+00:25:15.126 --> 00:25:16.346 A:middle
+One thing to note about files,
+
+00:25:16.896 --> 00:25:18.676 A:middle
+files can be a little
+bit larger.
+
+00:25:18.676 --> 00:25:21.236 A:middle
+And the larger the file,
+the longer it's going
+
+00:25:21.236 --> 00:25:22.396 A:middle
+to take to transfer across.
+
+00:25:22.986 --> 00:25:25.296 A:middle
+Potentially you might
+hit power conditions,
+
+00:25:25.296 --> 00:25:27.216 A:middle
+performance conditions while
+those are transferring.
+
+00:25:27.656 --> 00:25:29.866 A:middle
+Just be aware if you have
+large files that are trying
+
+00:25:29.866 --> 00:25:32.266 A:middle
+to transfer across,
+they may take longer
+
+00:25:32.626 --> 00:25:35.736 A:middle
+than the transferring in
+some of the other APIs.
+
+00:25:36.076 --> 00:25:37.706 A:middle
+Now the receiver will launch,
+
+00:25:38.056 --> 00:25:39.876 A:middle
+and we will deliver
+these images.
+
+00:25:40.406 --> 00:25:45.246 A:middle
+And now the Apple Watch app
+can show those images off.
+
+00:25:45.486 --> 00:25:48.496 A:middle
+So that's the flow
+of file transfer.
+
+00:25:48.686 --> 00:25:50.716 A:middle
+Now let's take a
+look at the code.
+
+00:25:51.356 --> 00:25:53.656 A:middle
+First thing you want to do
+is you want to get your URL
+
+00:25:53.956 --> 00:25:55.436 A:middle
+to the file that you
+want to transfer.
+
+00:25:55.436 --> 00:25:58.976 A:middle
+Then you want to package up
+your metadata and finally,
+
+00:25:59.166 --> 00:26:01.776 A:middle
+you want to call Transfer
+File, passing through that URL
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:59.166 --> 00:26:01.776 A:middle
+you want to call Transfer
+File, passing through that URL
+
+00:26:01.816 --> 00:26:03.296 A:middle
+and that metadata dictionary.
+
+00:26:04.286 --> 00:26:06.726 A:middle
+This returns a file
+transfer object,
+
+00:26:06.726 --> 00:26:09.366 A:middle
+the file transfer
+object contains the URL,
+
+00:26:09.586 --> 00:26:13.046 A:middle
+the metadata dictionary, and
+also gives you the ability
+
+00:26:13.046 --> 00:26:18.186 A:middle
+to cancel any file transfers
+that are outstanding.
+
+00:26:18.256 --> 00:26:21.196 A:middle
+Just like user info transfer,
+we offer you the ability
+
+00:26:21.196 --> 00:26:25.176 A:middle
+to get the array back of all
+the outstanding file transfers.
+
+00:26:25.486 --> 00:26:28.046 A:middle
+You can iterate over this
+array, check the contents,
+
+00:26:28.046 --> 00:26:28.996 A:middle
+and cancel if need be.
+
+00:26:29.186 --> 00:26:32.686 A:middle
+So that's the sending
+side for file transfer.
+
+00:26:33.276 --> 00:26:36.306 A:middle
+Now let's take a look
+at the receiving side.
+
+00:26:36.726 --> 00:26:38.346 A:middle
+On the receiving
+side, you are going
+
+00:26:38.346 --> 00:26:41.166 A:middle
+to get this delegate
+callback, Did Receive File.
+
+00:26:42.056 --> 00:26:44.436 A:middle
+There's a few things to mention
+about this delegate callback
+
+00:26:44.436 --> 00:26:47.056 A:middle
+that are slightly different
+than the previous two.
+
+00:26:47.446 --> 00:26:48.096 A:middle
+First, you are going
+
+00:26:48.096 --> 00:26:50.056 A:middle
+to be getting this
+WCSession file object.
+
+00:26:50.956 --> 00:26:55.316 A:middle
+This object just contains the
+file URL and the metadata.
+
+00:26:55.836 --> 00:26:59.966 A:middle
+The second thing to talk
+about with this callback is
+
+00:26:59.966 --> 00:27:02.836 A:middle
+that the file is now in
+the Documents/Inbox folder
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:59.966 --> 00:27:02.836 A:middle
+that the file is now in
+the Documents/Inbox folder
+
+00:27:02.916 --> 00:27:03.976 A:middle
+of your app's container.
+
+00:27:04.906 --> 00:27:09.126 A:middle
+But to take control of this
+file, you need to move that file
+
+00:27:09.126 --> 00:27:11.096 A:middle
+out of the Documents/Inbox
+folder
+
+00:27:11.096 --> 00:27:12.566 A:middle
+into a more permanent location.
+
+00:27:13.146 --> 00:27:19.096 A:middle
+So the main reason you
+need to move this file is
+
+00:27:19.096 --> 00:27:21.036 A:middle
+that the Documents/Inbox
+folder will be cleaned
+
+00:27:21.036 --> 00:27:23.886 A:middle
+up after this delegate returns.
+
+00:27:24.226 --> 00:27:26.566 A:middle
+This means the file will be
+deleted out of there along
+
+00:27:26.566 --> 00:27:28.596 A:middle
+with any additional content.
+
+00:27:29.286 --> 00:27:31.916 A:middle
+So it's really important
+that you move this file
+
+00:27:31.916 --> 00:27:35.526 A:middle
+into a more permanent location
+inside this delegate callback.
+
+00:27:36.596 --> 00:27:38.686 A:middle
+One thing to keep in mind
+if you are dispatching
+
+00:27:38.686 --> 00:27:40.856 A:middle
+to a different queue
+because this is returned
+
+00:27:40.856 --> 00:27:44.036 A:middle
+on a non-main serial
+queue, you will need
+
+00:27:44.116 --> 00:27:48.376 A:middle
+to move the file before
+you do that dispatching,
+
+00:27:48.966 --> 00:27:50.796 A:middle
+if that dispatching is async.
+
+00:27:51.306 --> 00:27:54.586 A:middle
+So that's file transfer.
+
+00:27:55.186 --> 00:27:58.506 A:middle
+It's very similar to user info
+transfer, except it allows you
+
+00:27:58.506 --> 00:28:01.776 A:middle
+to transfer files
+or queue up files.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:58.506 --> 00:28:01.776 A:middle
+to transfer files
+or queue up files.
+
+00:28:02.576 --> 00:28:03.726 A:middle
+We do offer the ability
+
+00:28:03.806 --> 00:28:06.196 A:middle
+to access the outstanding
+files in the queue.
+
+00:28:06.986 --> 00:28:12.846 A:middle
+And we provide the ability to
+transfer additional metadata.
+
+00:28:13.636 --> 00:28:15.596 A:middle
+We suggest you keep
+this metadata small,
+
+00:28:15.596 --> 00:28:17.506 A:middle
+and this metadata dictionary,
+
+00:28:17.646 --> 00:28:19.596 A:middle
+like the other dictionaries
+we talked about,
+
+00:28:19.596 --> 00:28:20.636 A:middle
+takes property list types.
+
+00:28:21.346 --> 00:28:24.726 A:middle
+So those are the three
+background transfer modes.
+
+00:28:25.206 --> 00:28:27.766 A:middle
+Use these if the
+receiver does not need the
+
+00:28:27.766 --> 00:28:28.956 A:middle
+content immediately.
+
+00:28:30.416 --> 00:28:35.976 A:middle
+If, however, you need to
+send messages back and forth
+
+00:28:36.356 --> 00:28:41.256 A:middle
+in a live fashion, you can
+use interactive messaging.
+
+00:28:41.836 --> 00:28:44.736 A:middle
+And interactive messaging
+is meant
+
+00:28:44.736 --> 00:28:47.606 A:middle
+for that live communication,
+both apps are up and running
+
+00:28:47.606 --> 00:28:49.626 A:middle
+and they are sending
+messages back and forth.
+
+00:28:51.096 --> 00:28:52.596 A:middle
+Like I mentioned
+before, some examples
+
+00:28:52.596 --> 00:28:53.986 A:middle
+of when you might
+want to do this.
+
+00:28:54.796 --> 00:28:58.376 A:middle
+Let's say you have a game
+where both UIs are up
+
+00:28:58.446 --> 00:29:01.366 A:middle
+and you want the user to
+be interacting with both.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:58.446 --> 00:29:01.366 A:middle
+and you want the user to
+be interacting with both.
+
+00:29:02.026 --> 00:29:04.316 A:middle
+Or if you are on the Apple
+Watch side and you need
+
+00:29:04.316 --> 00:29:06.776 A:middle
+to trigger the iOS
+app to do something,
+
+00:29:06.856 --> 00:29:08.606 A:middle
+like start tracking
+the user's location.
+
+00:29:09.166 --> 00:29:12.126 A:middle
+Now, there are certain
+conditions that need to be met
+
+00:29:12.876 --> 00:29:15.856 A:middle
+for interactive messaging
+to be used.
+
+00:29:16.196 --> 00:29:17.746 A:middle
+So let's talk about
+those conditions.
+
+00:29:18.556 --> 00:29:19.926 A:middle
+It all relates to this idea
+
+00:29:20.536 --> 00:29:22.286 A:middle
+that we are introducing
+called reachability.
+
+00:29:23.376 --> 00:29:25.266 A:middle
+And what reachability means is
+
+00:29:25.266 --> 00:29:29.066 A:middle
+that the other app is
+available to receive content.
+
+00:29:29.886 --> 00:29:33.496 A:middle
+It is required that the
+other app is available,
+
+00:29:33.706 --> 00:29:36.406 A:middle
+the other app is reachable,
+to use interactive messaging.
+
+00:29:36.406 --> 00:29:37.886 A:middle
+And the way that you check
+
+00:29:37.886 --> 00:29:41.646 A:middle
+that the other side is reachable
+is we have this property
+
+00:29:41.746 --> 00:29:44.686 A:middle
+on the default session,
+Reachable, that you can look at.
+
+00:29:45.796 --> 00:29:46.526 A:middle
+Now, the conditions
+
+00:29:46.526 --> 00:29:49.266 A:middle
+for reachability are
+slightly different depending
+
+00:29:49.266 --> 00:29:51.876 A:middle
+on what slide you are on,
+whether your code is executing
+
+00:29:51.876 --> 00:29:53.816 A:middle
+in your iOS app or
+it's executing
+
+00:29:53.816 --> 00:29:54.836 A:middle
+in the WatchKit extension.
+
+00:29:55.186 --> 00:29:57.146 A:middle
+So let's look at
+those individually.
+
+00:29:57.226 --> 00:29:59.436 A:middle
+We will start on
+the iPhone side.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:00.376 --> 00:30:03.606 A:middle
+The first condition that
+needs to be met for Reachable
+
+00:30:03.606 --> 00:30:06.996 A:middle
+to be True is that the
+devices needs to be connected.
+
+00:30:07.656 --> 00:30:10.756 A:middle
+This is connected over
+Bluetooth or over Wi-Fi,
+
+00:30:11.896 --> 00:30:14.916 A:middle
+but if the user leaves their
+Watch at home, takes their phone
+
+00:30:14.916 --> 00:30:17.016 A:middle
+with them to work, the
+devices won't be connected
+
+00:30:17.016 --> 00:30:19.546 A:middle
+and interactive messaging is
+not going to work in this case.
+
+00:30:20.636 --> 00:30:22.966 A:middle
+The second condition that
+needs to be met for Reachable
+
+00:30:23.196 --> 00:30:25.686 A:middle
+to be True on the iOS side is
+
+00:30:25.686 --> 00:30:27.856 A:middle
+that the Watch app
+must be foreground.
+
+00:30:28.406 --> 00:30:31.526 A:middle
+This means the user must be
+interacting with their Watch app
+
+00:30:31.716 --> 00:30:34.726 A:middle
+for interactive messaging
+to work from the iOS side.
+
+00:30:35.536 --> 00:30:36.936 A:middle
+Once these two conditions
+are true,
+
+00:30:38.396 --> 00:30:42.066 A:middle
+the Reachable property will
+be True in your iOS app.
+
+00:30:43.696 --> 00:30:45.116 A:middle
+So that's the iPhone side.
+
+00:30:47.166 --> 00:30:48.796 A:middle
+Now let's talk about
+the Apple Watch side.
+
+00:30:49.686 --> 00:30:51.546 A:middle
+The first condition for
+Reachable to be True
+
+00:30:51.546 --> 00:30:53.256 A:middle
+in your WatchKit extension is
+
+00:30:53.776 --> 00:30:56.246 A:middle
+that once again devices
+must be connected.
+
+00:30:57.376 --> 00:31:00.006 A:middle
+This means that if the user goes
+for a run and leaves their phone
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:57.376 --> 00:31:00.006 A:middle
+This means that if the user goes
+for a run and leaves their phone
+
+00:31:00.006 --> 00:31:01.456 A:middle
+at home and takes
+their Watch with them,
+
+00:31:02.836 --> 00:31:03.896 A:middle
+Reachable will not be True.
+
+00:31:03.896 --> 00:31:05.236 A:middle
+The devices will
+not be connected.
+
+00:31:06.056 --> 00:31:09.646 A:middle
+The second condition is that
+the WatchKit extension needs
+
+00:31:09.646 --> 00:31:10.416 A:middle
+to be foreground.
+
+00:31:11.296 --> 00:31:13.666 A:middle
+We mentioned the WatchKit
+extension here being foreground
+
+00:31:13.756 --> 00:31:15.346 A:middle
+because there are certain cases
+
+00:31:15.346 --> 00:31:17.606 A:middle
+where the WatchKit extension
+can run in the background.
+
+00:31:18.236 --> 00:31:20.696 A:middle
+They mainly relate to
+complications, and we will talk
+
+00:31:20.696 --> 00:31:22.696 A:middle
+about this a little
+later in the talk.
+
+00:31:23.586 --> 00:31:27.846 A:middle
+For now, when the user
+is using your app,
+
+00:31:27.846 --> 00:31:29.376 A:middle
+your WatchKit extension
+is going to be running
+
+00:31:29.526 --> 00:31:31.706 A:middle
+and your WatchKit
+extension will be foreground,
+
+00:31:31.786 --> 00:31:33.796 A:middle
+which means you can use
+interactive messaging
+
+00:31:34.336 --> 00:31:36.156 A:middle
+and the Reachable
+property will be True.
+
+00:31:37.716 --> 00:31:39.866 A:middle
+One other thing to note
+about this diagram.
+
+00:31:40.256 --> 00:31:42.996 A:middle
+We are not saying that
+the iOS app is running.
+
+00:31:44.116 --> 00:31:49.276 A:middle
+The iOS app has to be running to
+respond to messages coming in,
+
+00:31:49.486 --> 00:31:50.716 A:middle
+to send its own messages.
+
+00:31:51.036 --> 00:31:53.856 A:middle
+So how do we get into a state
+where the iOS app running
+
+00:31:53.856 --> 00:31:55.456 A:middle
+in addition to the
+WatchKit extension?
+
+00:31:55.906 --> 00:31:59.886 A:middle
+Well, for this direction only,
+sending messages from the Watch
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:00.156 --> 00:32:03.856 A:middle
+to the phone or allowing
+the iOS app to be launched
+
+00:32:04.046 --> 00:32:06.446 A:middle
+in the background upon
+receiving a message.
+
+00:32:06.736 --> 00:32:08.416 A:middle
+So let's take this example.
+
+00:32:08.806 --> 00:32:11.886 A:middle
+You have a run tracker app
+and it needs to send a message
+
+00:32:11.886 --> 00:32:17.096 A:middle
+over to the iPhone side
+to talk to CoreLocation
+
+00:32:17.156 --> 00:32:19.506 A:middle
+to start tracking
+the user's location.
+
+00:32:20.656 --> 00:32:23.956 A:middle
+So this app is going
+to package up a message
+
+00:32:23.986 --> 00:32:26.466 A:middle
+that tells its iOS app to
+start using CoreLocation,
+
+00:32:26.466 --> 00:32:28.616 A:middle
+and it's going to send
+that message across.
+
+00:32:29.086 --> 00:32:31.206 A:middle
+When the system receives
+this message, we are going
+
+00:32:31.206 --> 00:32:33.076 A:middle
+to launch the iOS
+app in the background
+
+00:32:33.566 --> 00:32:34.696 A:middle
+and deliver that message.
+
+00:32:35.126 --> 00:32:38.246 A:middle
+Now, both apps are running, and
+now they can do communication.
+
+00:32:38.656 --> 00:32:41.536 A:middle
+This app in this example
+can start tracking the
+
+00:32:41.536 --> 00:32:42.486 A:middle
+user's location.
+
+00:32:42.796 --> 00:32:46.466 A:middle
+So that's kind of flow
+of interactive messaging.
+
+00:32:47.386 --> 00:32:48.726 A:middle
+Kind of how it relates
+
+00:32:48.726 --> 00:32:50.446 A:middle
+to reachability,
+when you can use it.
+
+00:32:50.686 --> 00:32:52.366 A:middle
+Now let's get into
+the nuts and bolts
+
+00:32:52.586 --> 00:32:53.786 A:middle
+of how you use it in your code.
+
+00:32:53.786 --> 00:32:57.386 A:middle
+We are offering two
+different types of messages.
+
+00:32:57.966 --> 00:32:59.666 A:middle
+The first type takes
+a dictionary
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:00.106 --> 00:33:02.506 A:middle
+and you use this
+call, Send Message,
+
+00:33:02.766 --> 00:33:03.996 A:middle
+which takes that dictionary,
+
+00:33:04.096 --> 00:33:06.416 A:middle
+plus a reply handler
+and an error handler.
+
+00:33:07.386 --> 00:33:09.536 A:middle
+This dictionary, like the
+dictionaries we talked
+
+00:33:09.536 --> 00:33:12.986 A:middle
+about before, takes
+property list types.
+
+00:33:14.216 --> 00:33:16.196 A:middle
+In addition to dictionaries,
+
+00:33:16.196 --> 00:33:18.746 A:middle
+we are also introducing
+a way to send data.
+
+00:33:19.536 --> 00:33:21.636 A:middle
+You can send data by
+calling Send Message Data.
+
+00:33:21.996 --> 00:33:24.606 A:middle
+This takes that data plus
+that same reply handler
+
+00:33:24.796 --> 00:33:25.926 A:middle
+and that same error handler.
+
+00:33:26.796 --> 00:33:30.086 A:middle
+For sending data, we suggest you
+use this if you have custom data
+
+00:33:30.216 --> 00:33:31.896 A:middle
+that you're storing
+your information in
+
+00:33:32.396 --> 00:33:34.556 A:middle
+or if you have your own
+serialization format.
+
+00:33:35.986 --> 00:33:38.226 A:middle
+If you are using your
+own serialization format,
+
+00:33:38.476 --> 00:33:41.226 A:middle
+we strongly suggest you use
+one that's quick and compact.
+
+00:33:42.156 --> 00:33:45.096 A:middle
+This way the user
+experience is faster
+
+00:33:45.096 --> 00:33:46.936 A:middle
+because the content is
+transferring faster.
+
+00:33:47.596 --> 00:33:52.256 A:middle
+One thing I want to point out
+about these calls is replying.
+
+00:33:52.256 --> 00:33:55.166 A:middle
+You probably noticed the
+previous two calls have
+
+00:33:55.166 --> 00:33:56.076 A:middle
+reply handler.
+
+00:33:56.606 --> 00:33:58.776 A:middle
+This handler is optional.
+
+00:33:59.606 --> 00:34:02.526 A:middle
+However, we do recommend
+in most cases you use it.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:59.606 --> 00:34:02.526 A:middle
+However, we do recommend
+in most cases you use it.
+
+00:34:03.386 --> 00:34:05.796 A:middle
+The reason is that this
+allows the receiver
+
+00:34:05.796 --> 00:34:07.706 A:middle
+to confirm the incoming message.
+
+00:34:08.436 --> 00:34:10.545 A:middle
+The receiver can confirm
+that it received the message.
+
+00:34:10.636 --> 00:34:13.076 A:middle
+The message contained the
+right content, and it was able
+
+00:34:13.076 --> 00:34:14.335 A:middle
+to process that content.
+
+00:34:14.946 --> 00:34:17.255 A:middle
+And then this way the sending
+side knows that it doesn't have
+
+00:34:17.255 --> 00:34:18.176 A:middle
+to send anything else.
+
+00:34:18.326 --> 00:34:20.366 A:middle
+It doesn't have to
+send anything new
+
+00:34:20.366 --> 00:34:21.536 A:middle
+because it sent the wrong stuff.
+
+00:34:21.976 --> 00:34:28.976 A:middle
+The other part to talk about
+for the replying is what happens
+
+00:34:28.976 --> 00:34:29.996 A:middle
+on the receiving side.
+
+00:34:31.926 --> 00:34:36.096 A:middle
+What happens if the sender says,
+"I want to reply, so I'm going
+
+00:34:36.096 --> 00:34:38.786 A:middle
+to supply a reply handler,"
+versus if the sender says,
+
+00:34:38.786 --> 00:34:40.386 A:middle
+"I don't want to
+reply, I'm not going
+
+00:34:40.386 --> 00:34:41.626 A:middle
+to supply a reply handler."
+
+00:34:42.016 --> 00:34:45.626 A:middle
+In these cases, we have separate
+delegate callbacks the receiver
+
+00:34:45.626 --> 00:34:46.976 A:middle
+is going to get,
+depending on whether
+
+00:34:46.976 --> 00:34:49.025 A:middle
+or not it should supply a reply.
+
+00:34:49.246 --> 00:34:53.226 A:middle
+So let's talk about
+those delegate callbacks.
+
+00:34:53.505 --> 00:34:56.596 A:middle
+In the first case, the sender
+says, "I do need a reply,
+
+00:34:57.176 --> 00:34:58.826 A:middle
+I'm giving the system
+a reply handler."
+
+00:34:59.476 --> 00:35:02.026 A:middle
+This means that the receiving
+side will get this delegate
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:59.476 --> 00:35:02.026 A:middle
+This means that the receiving
+side will get this delegate
+
+00:35:02.026 --> 00:35:05.896 A:middle
+callback, Did Receive
+Message, it has a Reply block
+
+00:35:05.896 --> 00:35:08.896 A:middle
+that you can call after the
+receiver has received the
+
+00:35:08.896 --> 00:35:12.396 A:middle
+message and processed it, and
+the receiver can then determine
+
+00:35:12.396 --> 00:35:14.336 A:middle
+if it wants to send
+back some content
+
+00:35:14.336 --> 00:35:17.236 A:middle
+or maybe send back an error
+if the message is wrong.
+
+00:35:17.236 --> 00:35:20.236 A:middle
+Now, on the other hand,
+
+00:35:20.306 --> 00:35:24.116 A:middle
+if the sender doesn't
+supply a reply handler,
+
+00:35:25.356 --> 00:35:26.576 A:middle
+the receiver is going
+
+00:35:26.576 --> 00:35:29.926 A:middle
+to get this delegate
+callback, Did Receive Message.
+
+00:35:30.346 --> 00:35:31.756 A:middle
+It doesn't have a Reply block.
+
+00:35:32.006 --> 00:35:34.076 A:middle
+The receiver can process
+the incoming content
+
+00:35:34.076 --> 00:35:34.966 A:middle
+and they are done.
+
+00:35:36.056 --> 00:35:37.286 A:middle
+The last thing to note
+
+00:35:37.286 --> 00:35:40.056 A:middle
+about these two delegate
+callbacks is they pass a
+
+00:35:40.056 --> 00:35:40.836 A:middle
+dictionary through.
+
+00:35:41.846 --> 00:35:44.666 A:middle
+This means that the sender
+used the send message,
+
+00:35:45.726 --> 00:35:49.126 A:middle
+sending on the sending
+side, to send a dictionary.
+
+00:35:49.326 --> 00:35:54.626 A:middle
+If instead the sender used
+send message data to send data,
+
+00:35:55.506 --> 00:35:58.516 A:middle
+there is analogous callbacks
+on the receiving side
+
+00:35:58.516 --> 00:35:59.376 A:middle
+that pass through data.
+
+00:35:59.376 --> 00:36:05.556 A:middle
+So now that we kind of have a
+feel for interactive messaging,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:35:59.376 --> 00:36:05.556 A:middle
+So now that we kind of have a
+feel for interactive messaging,
+
+00:36:05.556 --> 00:36:08.406 A:middle
+let's put it all together and
+code for the sending side.
+
+00:36:09.036 --> 00:36:11.416 A:middle
+The first thing you
+want to do is you want
+
+00:36:11.416 --> 00:36:14.316 A:middle
+to check reachability,
+make sure the other side is
+
+00:36:14.316 --> 00:36:15.076 A:middle
+actually reachable.
+
+00:36:15.756 --> 00:36:20.146 A:middle
+Then if Reachable is True, then
+you can package up your message.
+
+00:36:21.506 --> 00:36:22.956 A:middle
+And once you have your message,
+
+00:36:23.196 --> 00:36:25.136 A:middle
+you can call Send Message
+with that dictionary.
+
+00:36:26.486 --> 00:36:27.496 A:middle
+We expect a reply.
+
+00:36:27.736 --> 00:36:29.726 A:middle
+So we will supply
+the reply handler,
+
+00:36:30.766 --> 00:36:32.526 A:middle
+and we want to handle
+our errors,
+
+00:36:32.966 --> 00:36:34.536 A:middle
+so we will implement
+an error handler.
+
+00:36:35.146 --> 00:36:37.816 A:middle
+So those are the different ways
+
+00:36:37.816 --> 00:36:40.156 A:middle
+to transfer content
+using WatchConnectivity.
+
+00:36:41.296 --> 00:36:42.746 A:middle
+So let's sum up what
+we've talked
+
+00:36:42.746 --> 00:36:43.876 A:middle
+about for WatchConnectivity.
+
+00:36:45.756 --> 00:36:47.856 A:middle
+The first thing you
+want to do is you want
+
+00:36:47.856 --> 00:36:48.766 A:middle
+to set up your session.
+
+00:36:50.096 --> 00:36:53.336 A:middle
+To do this, you set your
+delegate, and you call Activate.
+
+00:36:53.746 --> 00:36:56.106 A:middle
+You want to do this early
+in the lifetime of the app
+
+00:36:56.676 --> 00:36:58.966 A:middle
+so the app has the ability
+to start receiving content
+
+00:36:58.966 --> 00:37:01.136 A:middle
+and the ability to start
+checking properties.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:58.966 --> 00:37:01.136 A:middle
+and the ability to start
+checking properties.
+
+00:37:02.916 --> 00:37:05.426 A:middle
+To check those properties,
+you look at the session state.
+
+00:37:06.236 --> 00:37:07.566 A:middle
+And once everything is okay,
+
+00:37:07.736 --> 00:37:09.146 A:middle
+once you know there's
+a paired Watch,
+
+00:37:09.626 --> 00:37:11.496 A:middle
+once you know your Apple
+Watch app is installed,
+
+00:37:12.206 --> 00:37:13.346 A:middle
+you can start communicating.
+
+00:37:15.226 --> 00:37:17.656 A:middle
+The first type of communication
+is background transfers.
+
+00:37:19.626 --> 00:37:21.156 A:middle
+We offer three types.
+
+00:37:21.206 --> 00:37:23.466 A:middle
+The first type is
+application context.
+
+00:37:23.806 --> 00:37:27.346 A:middle
+This is for the single set of
+really interesting information
+
+00:37:27.346 --> 00:37:28.726 A:middle
+that your app has
+for the other side.
+
+00:37:29.356 --> 00:37:30.826 A:middle
+Or if you need to
+queue up content,
+
+00:37:31.136 --> 00:37:34.306 A:middle
+you can use user info
+transfer or file transfer.
+
+00:37:34.636 --> 00:37:37.786 A:middle
+In addition to background
+transfers,
+
+00:37:37.786 --> 00:37:39.536 A:middle
+you can use interactive
+messaging
+
+00:37:39.946 --> 00:37:41.076 A:middle
+for live communication.
+
+00:37:41.726 --> 00:37:44.236 A:middle
+So that's WatchConnectivity.
+
+00:37:44.436 --> 00:37:46.976 A:middle
+It allows device-to-device
+communication between your apps.
+
+00:37:47.506 --> 00:37:51.106 A:middle
+And we are excited to see
+what you do with this API
+
+00:37:51.566 --> 00:37:52.886 A:middle
+to get content back and forth
+
+00:37:52.886 --> 00:37:54.776 A:middle
+and provide better
+user experiences.
+
+00:37:55.866 --> 00:38:00.276 A:middle
+Next, we're going to talk
+about NSURLSession briefly.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:37:55.866 --> 00:38:00.276 A:middle
+Next, we're going to talk
+about NSURLSession briefly.
+
+00:38:01.056 --> 00:38:02.726 A:middle
+So what is NSURLSession?
+
+00:38:03.466 --> 00:38:05.046 A:middle
+It's an existing
+foundation class.
+
+00:38:06.046 --> 00:38:08.616 A:middle
+It allows you to
+make HTTP requests
+
+00:38:09.086 --> 00:38:10.716 A:middle
+to your servers to
+fetch content.
+
+00:38:11.186 --> 00:38:14.966 A:middle
+It's available in watchOS 2, and
+we strongly suggest you use it
+
+00:38:14.966 --> 00:38:17.316 A:middle
+if your servers have content
+that needs to be fetched.
+
+00:38:17.866 --> 00:38:20.796 A:middle
+And it takes advantage of
+the Tetherless Wi-Fi feature.
+
+00:38:21.406 --> 00:38:24.196 A:middle
+The Tetherless Wi-Fi feature
+allows Apple Watch to connect
+
+00:38:24.196 --> 00:38:26.816 A:middle
+to known Wi-Fi networks when
+the phone is not around.
+
+00:38:27.756 --> 00:38:30.496 A:middle
+If the Apple Watch does
+connect to known Wi-Fi networks,
+
+00:38:30.496 --> 00:38:35.016 A:middle
+you can use NSURLSession to
+go over that Wi-Fi to connect
+
+00:38:35.016 --> 00:38:36.926 A:middle
+to your servers and
+fetch content.
+
+00:38:38.856 --> 00:38:41.036 A:middle
+So what do you want
+to use NSURLSession?
+
+00:38:41.036 --> 00:38:44.926 A:middle
+You want to use it any time
+your server has new content.
+
+00:38:45.576 --> 00:38:47.926 A:middle
+This is very similar to how
+you might be doing stuff
+
+00:38:47.926 --> 00:38:48.556 A:middle
+in your iOS apps.
+
+00:38:49.796 --> 00:38:54.806 A:middle
+We do suggest, however, that you
+tailor the content that's being
+
+00:38:54.806 --> 00:39:00.536 A:middle
+delivered to Apple Watch based
+on how Apple Watch works.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:38:54.806 --> 00:39:00.536 A:middle
+delivered to Apple Watch based
+on how Apple Watch works.
+
+00:39:01.096 --> 00:39:04.436 A:middle
+So if you have images
+on your server,
+
+00:39:04.436 --> 00:39:07.686 A:middle
+we suggest you scale those
+images for the screen size
+
+00:39:07.686 --> 00:39:10.466 A:middle
+of Apple Watch, or if you are a
+news app and you are only going
+
+00:39:10.466 --> 00:39:13.346 A:middle
+to show some of article, maybe
+just the text, on Apple Watch,
+
+00:39:13.766 --> 00:39:16.326 A:middle
+we suggest you only
+fetch the parts you need.
+
+00:39:16.996 --> 00:39:20.836 A:middle
+So that's a very brief
+introduction to NSURLSession.
+
+00:39:21.366 --> 00:39:26.546 A:middle
+There's a great WWDC
+session on this API as well
+
+00:39:26.546 --> 00:39:27.806 A:middle
+as great online resources.
+
+00:39:27.806 --> 00:39:30.246 A:middle
+So we definitely suggest
+you check those out.
+
+00:39:30.246 --> 00:39:32.306 A:middle
+Now, the last thing
+we want to talk
+
+00:39:32.306 --> 00:39:35.666 A:middle
+about for NSURLSession
+is using NSURLSession
+
+00:39:36.346 --> 00:39:37.506 A:middle
+with WatchConnectivity.
+
+00:39:38.636 --> 00:39:41.856 A:middle
+So once again, we have the
+example of our news app.
+
+00:39:42.156 --> 00:39:44.156 A:middle
+This news app has
+fetched a bunch of content
+
+00:39:44.666 --> 00:39:46.646 A:middle
+from its server, and it knows
+
+00:39:46.646 --> 00:39:49.426 A:middle
+that the Apple Watch
+app probably will have
+
+00:39:49.426 --> 00:39:53.136 A:middle
+to fetch this same content the
+next time the user launches the
+
+00:39:53.136 --> 00:39:53.726 A:middle
+Apple Watch app.
+
+00:39:54.606 --> 00:39:57.996 A:middle
+Instead of making the Apple
+Watch app refetch that content,
+
+00:39:58.726 --> 00:40:02.626 A:middle
+we will use application context
+to transfer across the content
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:39:58.726 --> 00:40:02.626 A:middle
+we will use application context
+to transfer across the content
+
+00:40:02.626 --> 00:40:04.666 A:middle
+from the iOS side
+to the Watch side.
+
+00:40:04.936 --> 00:40:08.976 A:middle
+That content is going to come
+in, and it will be delivered
+
+00:40:09.156 --> 00:40:11.246 A:middle
+to the Apple Watch app
+the next time it launches.
+
+00:40:11.676 --> 00:40:13.606 A:middle
+And now the Apple Watch
+app has the ability
+
+00:40:13.606 --> 00:40:16.546 A:middle
+to show the same content that
+was seen on the iOS side,
+
+00:40:16.906 --> 00:40:19.266 A:middle
+and it provides a more
+cohesive experience.
+
+00:40:19.816 --> 00:40:23.276 A:middle
+Now the next time the user
+launched the Apple Watch app
+
+00:40:23.426 --> 00:40:25.996 A:middle
+could be a couple
+of hours later,
+
+00:40:26.196 --> 00:40:29.206 A:middle
+which means the server
+has even newer content
+
+00:40:29.206 --> 00:40:30.226 A:middle
+that might want to be fetched.
+
+00:40:30.786 --> 00:40:33.116 A:middle
+So we suggest that
+in addition to taking
+
+00:40:33.116 --> 00:40:35.306 A:middle
+in the application
+context that was sent over,
+
+00:40:36.406 --> 00:40:39.386 A:middle
+you use an HTTP request
+with NSURLSession
+
+00:40:39.386 --> 00:40:43.076 A:middle
+to fetch the absolute latest
+content from your server.
+
+00:40:44.426 --> 00:40:47.516 A:middle
+But this way, while the user
+is waiting for that content
+
+00:40:47.516 --> 00:40:50.516 A:middle
+to come down, they will see
+the same content they saw
+
+00:40:50.516 --> 00:40:53.956 A:middle
+in the iOS side and they will
+have a better experience.
+
+00:40:54.436 --> 00:40:57.876 A:middle
+So that's NSURLSession,
+NSURLSession
+
+00:40:57.876 --> 00:40:59.026 A:middle
+and WatchConnectivity.
+
+00:40:59.856 --> 00:41:03.606 A:middle
+Now, we want to take these two
+APIs and we want to show you how
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:40:59.856 --> 00:41:03.606 A:middle
+Now, we want to take these two
+APIs and we want to show you how
+
+00:41:03.606 --> 00:41:06.626 A:middle
+to use them to get data
+to your complication.
+
+00:41:06.916 --> 00:41:09.476 A:middle
+And to do so, I will
+bring Chris back
+
+00:41:09.526 --> 00:41:11.606 A:middle
+up to the stage to
+talk about this.
+
+00:41:12.516 --> 00:41:17.996 A:middle
+[Applause]
+
+00:41:18.496 --> 00:41:18.996 A:middle
+&gt;&gt; CHRIS JENSEN:
+Thank you, Alex.
+
+00:41:18.996 --> 00:41:20.506 A:middle
+That's some cool stuff, right?
+
+00:41:20.706 --> 00:41:24.426 A:middle
+I think it's going to be
+great to see what you guys end
+
+00:41:24.726 --> 00:41:26.776 A:middle
+up doing with the
+WatchConnectivity APIs
+
+00:41:26.776 --> 00:41:28.436 A:middle
+and the NSURLSession APIs.
+
+00:41:29.716 --> 00:41:31.366 A:middle
+Now let's discuss complications.
+
+00:41:31.656 --> 00:41:34.216 A:middle
+But before we dig in too deep,
+
+00:41:34.216 --> 00:41:35.896 A:middle
+let's make sure we are
+all on the same page.
+
+00:41:36.766 --> 00:41:38.466 A:middle
+These are three Watch faces,
+
+00:41:38.916 --> 00:41:41.546 A:middle
+three clock faces
+on the Apple Watch.
+
+00:41:41.816 --> 00:41:43.146 A:middle
+If you remove the timepiece,
+
+00:41:43.956 --> 00:41:45.606 A:middle
+the remaining pieces
+are complications.
+
+00:41:46.716 --> 00:41:48.546 A:middle
+They provide small snippets
+
+00:41:48.546 --> 00:41:53.456 A:middle
+of information every time the
+user looks at their clock face.
+
+00:41:54.276 --> 00:41:57.886 A:middle
+And this will allow them to get
+sort of the most important piece
+
+00:41:57.886 --> 00:42:00.526 A:middle
+of information really quickly.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:41:57.886 --> 00:42:00.526 A:middle
+of information really quickly.
+
+00:42:01.896 --> 00:42:04.236 A:middle
+So when you are implementing
+your complication,
+
+00:42:04.236 --> 00:42:06.356 A:middle
+there's two primary tasks
+that you will have to solve.
+
+00:42:07.496 --> 00:42:09.666 A:middle
+You will have to figure out
+how to update the clock face,
+
+00:42:09.986 --> 00:42:13.016 A:middle
+and the second one is you
+need to get the content to use
+
+00:42:13.016 --> 00:42:13.896 A:middle
+to update the clock face.
+
+00:42:14.606 --> 00:42:18.946 A:middle
+So let's discuss how you would
+update the clock face briefly.
+
+00:42:18.946 --> 00:42:21.096 A:middle
+This is covered in
+depth at other sessions.
+
+00:42:22.186 --> 00:42:24.406 A:middle
+For this example, we
+will use a weather app
+
+00:42:24.626 --> 00:42:26.656 A:middle
+that has a moon phase
+complication.
+
+00:42:27.196 --> 00:42:29.826 A:middle
+The moon phase complication
+doesn't need any external data.
+
+00:42:29.826 --> 00:42:31.666 A:middle
+It already has all the
+information it needs
+
+00:42:31.666 --> 00:42:33.056 A:middle
+because it just needs
+the date and time.
+
+00:42:34.066 --> 00:42:36.616 A:middle
+So all it needs to
+concern itself with is how
+
+00:42:36.616 --> 00:42:37.516 A:middle
+to update the clock face.
+
+00:42:38.476 --> 00:42:41.166 A:middle
+To do that, it's going to
+use the new ClockKit API,
+
+00:42:41.166 --> 00:42:47.336 A:middle
+the ClockKit framework
+introduced in watchOS 2.
+
+00:42:47.336 --> 00:42:50.376 A:middle
+The way the flow
+works is we're going
+
+00:42:50.376 --> 00:42:54.946 A:middle
+to launch our WatchKit
+extension in the background.
+
+00:42:55.006 --> 00:42:57.716 A:middle
+When this happens, you are
+going to want to get an instance
+
+00:42:57.796 --> 00:42:59.866 A:middle
+of CLK complications server.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:43:00.376 --> 00:43:01.826 A:middle
+You call Shared Instance
+to do that.
+
+00:43:02.626 --> 00:43:05.266 A:middle
+And you will call Extend
+Timeline For Complication,
+
+00:43:06.046 --> 00:43:08.316 A:middle
+and you pass in the complication
+that you are updating.
+
+00:43:08.316 --> 00:43:13.256 A:middle
+The next thing that will happen,
+that will trigger our process
+
+00:43:13.366 --> 00:43:16.086 A:middle
+with ClockKit and they will
+start asking you a couple
+
+00:43:16.086 --> 00:43:16.616 A:middle
+of questions.
+
+00:43:16.616 --> 00:43:19.026 A:middle
+They will ask for the
+current timeline entry.
+
+00:43:19.026 --> 00:43:21.856 A:middle
+This is the one that's
+going to be shown right now.
+
+00:43:22.676 --> 00:43:25.586 A:middle
+They will ask for
+previous timeline entries,
+
+00:43:26.106 --> 00:43:29.886 A:middle
+future timeline entries, and
+finally, they are going to ask
+
+00:43:30.036 --> 00:43:32.516 A:middle
+for a suggestion of when you
+think this data will be stale.
+
+00:43:32.676 --> 00:43:35.166 A:middle
+This is a suggestion to the
+system so that we can know
+
+00:43:35.606 --> 00:43:38.576 A:middle
+when you think that you
+need to get launched again.
+
+00:43:38.746 --> 00:43:40.696 A:middle
+So you can update
+your timeline further.
+
+00:43:41.656 --> 00:43:45.506 A:middle
+That was a quick summary
+of updating the clock face.
+
+00:43:45.756 --> 00:43:48.996 A:middle
+You would use the ClockKit
+framework to do so.
+
+00:43:49.346 --> 00:43:50.996 A:middle
+You will be able
+to provide content
+
+00:43:51.036 --> 00:43:52.566 A:middle
+for past, present, and future.
+
+00:43:54.176 --> 00:43:56.626 A:middle
+Your WatchKit extension will
+get launched in the background
+
+00:43:56.626 --> 00:43:59.406 A:middle
+to do these updates, and
+you will be given a chance
+
+00:43:59.406 --> 00:44:01.776 A:middle
+to specify when the content
+provided is going to be stale.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:43:59.406 --> 00:44:01.776 A:middle
+to specify when the content
+provided is going to be stale.
+
+00:44:02.866 --> 00:44:05.476 A:middle
+One thing to keep in
+mind is that all the work
+
+00:44:05.476 --> 00:44:07.826 A:middle
+that your WatchKit
+extension is doing on behalf
+
+00:44:07.826 --> 00:44:10.466 A:middle
+of updating the complication
+is budgeted, so you want to try
+
+00:44:10.466 --> 00:44:12.646 A:middle
+to keep this as fast and
+efficient as possible
+
+00:44:12.726 --> 00:44:15.296 A:middle
+so that you can keep getting
+launched throughout the day
+
+00:44:15.726 --> 00:44:17.076 A:middle
+to update your complication.
+
+00:44:18.486 --> 00:44:22.216 A:middle
+As I mentioned, there's a great
+talk dedicated to this topic,
+
+00:44:22.346 --> 00:44:23.776 A:middle
+Creating Complications
+with ClockKit.
+
+00:44:24.036 --> 00:44:25.926 A:middle
+We want you to check that
+out if you haven't done so.
+
+00:44:25.926 --> 00:44:29.716 A:middle
+The next you will have
+to deal with is how
+
+00:44:29.716 --> 00:44:31.686 A:middle
+to get content to
+your complication.
+
+00:44:32.286 --> 00:44:35.606 A:middle
+There's a very special instance,
+which is the initial activation.
+
+00:44:35.966 --> 00:44:39.606 A:middle
+The first time the user
+goes into his clock face,
+
+00:44:39.876 --> 00:44:42.236 A:middle
+he's going to go in and
+edit it and then he's going
+
+00:44:42.236 --> 00:44:44.176 A:middle
+to enable your complication;
+in this case,
+
+00:44:44.176 --> 00:44:45.306 A:middle
+the news app complication.
+
+00:44:45.986 --> 00:44:47.046 A:middle
+At this point in time,
+
+00:44:47.046 --> 00:44:50.326 A:middle
+that complication very likely
+has very little or no data
+
+00:44:50.496 --> 00:44:51.396 A:middle
+to populate its timeline.
+
+00:44:51.396 --> 00:44:54.336 A:middle
+So it has a large need
+for a lot of content.
+
+00:44:55.026 --> 00:44:58.046 A:middle
+So what's going to happen
+is we are immediately going
+
+00:44:58.046 --> 00:45:00.006 A:middle
+to launch your WatchKit
+extension in the background.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:44:58.046 --> 00:45:00.006 A:middle
+to launch your WatchKit
+extension in the background.
+
+00:45:00.656 --> 00:45:03.196 A:middle
+And now you have a couple
+of different ways of getting
+
+00:45:03.476 --> 00:45:06.466 A:middle
+that content so you can
+initialize that timeline.
+
+00:45:07.076 --> 00:45:11.776 A:middle
+You could use NSURLSession to
+communicate with your servers
+
+00:45:12.446 --> 00:45:15.796 A:middle
+to get that content,
+or you could choose
+
+00:45:15.796 --> 00:45:16.946 A:middle
+to use WatchConnectivity.
+
+00:45:17.636 --> 00:45:20.146 A:middle
+If you are going to
+use WatchConnectivity
+
+00:45:20.146 --> 00:45:21.796 A:middle
+in this very special
+circumstance,
+
+00:45:22.426 --> 00:45:25.046 A:middle
+and the devices are
+connected, you will find
+
+00:45:25.226 --> 00:45:26.166 A:middle
+that Reachable is True.
+
+00:45:26.166 --> 00:45:28.056 A:middle
+This is what Alex was
+referring to earlier,
+
+00:45:28.636 --> 00:45:31.026 A:middle
+where this property
+might be True
+
+00:45:31.026 --> 00:45:32.346 A:middle
+in certain special
+circumstances.
+
+00:45:32.386 --> 00:45:33.086 A:middle
+This is one of those.
+
+00:45:33.626 --> 00:45:34.786 A:middle
+What you are going
+to be able to do
+
+00:45:34.786 --> 00:45:37.206 A:middle
+in this case is you will be
+able to call Send Message,
+
+00:45:37.456 --> 00:45:40.446 A:middle
+which will send a message
+across to the iPhone.
+
+00:45:40.936 --> 00:45:44.726 A:middle
+And we will wake up the
+weather app in the background,
+
+00:45:45.646 --> 00:45:48.976 A:middle
+and at this point, the weather
+app on the iOS side can use any
+
+00:45:48.976 --> 00:45:53.476 A:middle
+of the WatchConnectivity APIs to
+communicate the information back
+
+00:45:53.596 --> 00:45:54.746 A:middle
+to populate that timeline.
+
+00:45:55.346 --> 00:45:59.886 A:middle
+So in summary, when
+you are going
+
+00:45:59.886 --> 00:46:01.296 A:middle
+through the initial activation,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:45:59.886 --> 00:46:01.296 A:middle
+through the initial activation,
+
+00:46:01.516 --> 00:46:03.646 A:middle
+your WatchKit extension will
+get launched in the background.
+
+00:46:03.956 --> 00:46:06.606 A:middle
+You can use NSURLSession or,
+
+00:46:06.796 --> 00:46:10.196 A:middle
+because this is a very special
+circumstance, you will be able
+
+00:46:10.476 --> 00:46:13.216 A:middle
+to use the WatchConnectivity
+APIs to wake up the iOS app
+
+00:46:13.356 --> 00:46:14.766 A:middle
+because Reachable is True.
+
+00:46:15.166 --> 00:46:17.696 A:middle
+We suggest you use this
+to populate as much
+
+00:46:17.856 --> 00:46:20.576 A:middle
+of the ClockKit timeline
+as possible
+
+00:46:20.706 --> 00:46:23.036 A:middle
+because it's starting
+with nothing.
+
+00:46:23.636 --> 00:46:26.626 A:middle
+The next issue is
+how to stay current.
+
+00:46:28.086 --> 00:46:29.556 A:middle
+Your timeline is now populated,
+
+00:46:29.646 --> 00:46:31.986 A:middle
+and now future updates
+will be happening.
+
+00:46:32.036 --> 00:46:33.786 A:middle
+How do you keep updating
+your complication?
+
+00:46:34.756 --> 00:46:37.956 A:middle
+So there's a couple of different
+ways that you could use
+
+00:46:37.956 --> 00:46:39.056 A:middle
+to update your complication.
+
+00:46:39.246 --> 00:46:42.436 A:middle
+You could get content
+pushed to your complication.
+
+00:46:43.036 --> 00:46:45.446 A:middle
+This makes sense if you
+have an external source
+
+00:46:45.446 --> 00:46:48.226 A:middle
+such as a web server
+that knows specific times
+
+00:46:48.226 --> 00:46:50.956 A:middle
+when there is new content and
+it's not a regular cadence.
+
+00:46:51.046 --> 00:46:53.796 A:middle
+What you are going to want to
+do then is have the content push
+
+00:46:53.796 --> 00:46:56.956 A:middle
+from the clouds to the iPhone,
+and then it gets relayed
+
+00:46:56.956 --> 00:46:57.986 A:middle
+over to the Apple Watch.
+
+00:46:58.946 --> 00:47:01.156 A:middle
+An example of where we think
+this makes sense is something
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:46:58.946 --> 00:47:01.156 A:middle
+An example of where we think
+this makes sense is something
+
+00:47:01.156 --> 00:47:04.606 A:middle
+like a sports app, where
+the complication is showing
+
+00:47:04.906 --> 00:47:05.656 A:middle
+game scores.
+
+00:47:06.686 --> 00:47:08.756 A:middle
+Most of the time, those scores
+are going to be happening
+
+00:47:08.756 --> 00:47:10.766 A:middle
+in a short period of
+time during the day,
+
+00:47:10.766 --> 00:47:12.486 A:middle
+and it will be very
+rapid updates.
+
+00:47:13.156 --> 00:47:14.416 A:middle
+So then we think
+it makes more sense
+
+00:47:14.466 --> 00:47:15.476 A:middle
+to use the pushed approach.
+
+00:47:15.576 --> 00:47:17.346 A:middle
+The other one is what
+we're calling requested
+
+00:47:17.346 --> 00:47:17.946 A:middle
+interval fetch.
+
+00:47:17.946 --> 00:47:20.666 A:middle
+This is more for when you
+know there's a regular cadence
+
+00:47:20.776 --> 00:47:22.526 A:middle
+where you can keep
+updating your complication.
+
+00:47:22.996 --> 00:47:24.966 A:middle
+And then you could use
+something like NSURLSession
+
+00:47:24.966 --> 00:47:27.136 A:middle
+to go directly to the cloud.
+
+00:47:27.796 --> 00:47:32.166 A:middle
+Something like a surfing app
+with a tide complications
+
+00:47:32.326 --> 00:47:34.996 A:middle
+that shows what the tidal
+patterns will be so you know
+
+00:47:34.996 --> 00:47:37.716 A:middle
+when to go out surfing.
+
+00:47:38.636 --> 00:47:41.626 A:middle
+So let's take a look
+at this case first.
+
+00:47:44.476 --> 00:47:47.626 A:middle
+In this case, you will want to
+use NSURLSession and ClockKit
+
+00:47:47.916 --> 00:47:49.016 A:middle
+to update the complication.
+
+00:47:49.016 --> 00:47:51.196 A:middle
+As you can see in the
+corner of clock face,
+
+00:47:51.556 --> 00:47:53.926 A:middle
+the surfing complication
+is already enabled.
+
+00:47:55.236 --> 00:47:58.116 A:middle
+The flow is going to go
+a little bit like this,
+
+00:47:58.116 --> 00:48:00.566 A:middle
+where the WatchKit extension
+gets launched in the background.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:47:58.116 --> 00:48:00.566 A:middle
+where the WatchKit extension
+gets launched in the background.
+
+00:48:01.166 --> 00:48:03.966 A:middle
+You're going to want to
+generate an NSURLSession request
+
+00:48:04.156 --> 00:48:06.246 A:middle
+and you send that up to
+your servers to get content.
+
+00:48:07.276 --> 00:48:08.846 A:middle
+The server will produce
+a response
+
+00:48:09.106 --> 00:48:11.636 A:middle
+and it will get delivered back
+down to the WatchKit extension.
+
+00:48:12.356 --> 00:48:15.106 A:middle
+Now you want to turn
+around and update ClockKit.
+
+00:48:15.396 --> 00:48:18.746 A:middle
+So you will request them
+to extend your timeline.
+
+00:48:19.466 --> 00:48:21.736 A:middle
+They will start asking you these
+questions, and you're going
+
+00:48:22.066 --> 00:48:24.536 A:middle
+to give them the timeline
+updates, both past, present,
+
+00:48:24.636 --> 00:48:28.216 A:middle
+and current, and finally, you
+are going to suggest a time
+
+00:48:28.216 --> 00:48:29.606 A:middle
+for when you should
+be launched again.
+
+00:48:30.306 --> 00:48:35.496 A:middle
+And the last thing that will
+happen is when you provide
+
+00:48:35.496 --> 00:48:37.486 A:middle
+that time for when you
+next should be launched,
+
+00:48:37.546 --> 00:48:39.356 A:middle
+that's a hint to the system
+that your work is done,
+
+00:48:40.016 --> 00:48:44.006 A:middle
+and your WatchKit
+extension will get killed.
+
+00:48:44.536 --> 00:48:47.866 A:middle
+So now, let's pretend
+that some time passes,
+
+00:48:47.976 --> 00:48:50.566 A:middle
+and the system has decided
+based upon your hint
+
+00:48:51.016 --> 00:48:53.566 A:middle
+and system conditions
+that now is a good time
+
+00:48:53.606 --> 00:48:55.506 A:middle
+to relaunch your complication.
+
+00:48:56.296 --> 00:48:58.266 A:middle
+Again, you are going to get
+launched in the background.
+
+00:48:59.116 --> 00:49:01.406 A:middle
+You are going to produce a
+request, using NSURLSession.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:48:59.116 --> 00:49:01.406 A:middle
+You are going to produce a
+request, using NSURLSession.
+
+00:49:01.406 --> 00:49:02.866 A:middle
+You are going to send
+it up to the servers.
+
+00:49:03.726 --> 00:49:06.096 A:middle
+The servers are going to produce
+a response, and you are going
+
+00:49:06.096 --> 00:49:09.666 A:middle
+to turn around and update your
+complication using ClockKit.
+
+00:49:13.856 --> 00:49:17.566 A:middle
+So in summary, and a couple
+of tips is that we suggest
+
+00:49:17.566 --> 00:49:20.376 A:middle
+that you use NSURLSession
+background session if possible.
+
+00:49:21.316 --> 00:49:24.006 A:middle
+This is because the NSURLSession
+request might not complete
+
+00:49:24.006 --> 00:49:25.586 A:middle
+until the next time
+the extension runs.
+
+00:49:26.106 --> 00:49:27.586 A:middle
+Using the background
+session enables it
+
+00:49:27.586 --> 00:49:30.206 A:middle
+to deliver the content
+the next time you run.
+
+00:49:31.896 --> 00:49:34.786 A:middle
+The requested time that you are
+providing is just a suggestion
+
+00:49:34.786 --> 00:49:35.396 A:middle
+to the system.
+
+00:49:35.396 --> 00:49:36.386 A:middle
+It's not a guarantee.
+
+00:49:37.006 --> 00:49:41.596 A:middle
+We'll try to get you close to
+that time, but conditions apply
+
+00:49:41.596 --> 00:49:43.116 A:middle
+and it may not always be exact.
+
+00:49:43.866 --> 00:49:46.546 A:middle
+We suggest that you keep the
+runtime as short as possible,
+
+00:49:46.876 --> 00:49:49.496 A:middle
+and you will use ClockKit
+to update the clock face.
+
+00:49:50.136 --> 00:49:53.336 A:middle
+You want to keep runtime as
+short as possible and make sure
+
+00:49:53.336 --> 00:49:57.236 A:middle
+that you make your next
+requested update time as far
+
+00:49:57.236 --> 00:49:59.616 A:middle
+out as possible because these
+are budgeted and you don't want
+
+00:49:59.616 --> 00:50:01.976 A:middle
+to run out of budget
+before the day is over.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:49:59.616 --> 00:50:01.976 A:middle
+to run out of budget
+before the day is over.
+
+00:50:03.446 --> 00:50:05.996 A:middle
+The other approach to
+getting the content,
+
+00:50:06.266 --> 00:50:08.566 A:middle
+which was in our example
+of the sports app,
+
+00:50:09.186 --> 00:50:10.386 A:middle
+was to get the content pushed.
+
+00:50:10.976 --> 00:50:16.466 A:middle
+We will look at this
+in a couple of stages
+
+00:50:16.466 --> 00:50:19.826 A:middle
+because it uses two
+very distinct processes.
+
+00:50:19.876 --> 00:50:23.496 A:middle
+The first one is you
+are going to use PushKit
+
+00:50:23.676 --> 00:50:27.326 A:middle
+to get the content from
+the cloud to the iPhone.
+
+00:50:29.576 --> 00:50:32.286 A:middle
+The second part is using
+WatchConnectivity to get
+
+00:50:32.286 --> 00:50:35.946 A:middle
+that content from the iPhone
+across to your Apple Watch.
+
+00:50:36.746 --> 00:50:37.866 A:middle
+So let's look at
+those separately.
+
+00:50:39.166 --> 00:50:41.306 A:middle
+So part number one is
+where you are using PushKit
+
+00:50:41.586 --> 00:50:43.316 A:middle
+to get the content
+to your iPhone.
+
+00:50:44.326 --> 00:50:48.636 A:middle
+We have updated the PushKit
+framework to add support
+
+00:50:48.636 --> 00:50:50.116 A:middle
+for these complication pushes.
+
+00:50:50.416 --> 00:50:53.456 A:middle
+The way you use it is you create
+an instance of PKPushRegistry.
+
+00:50:54.606 --> 00:50:57.866 A:middle
+Next, you will want to
+set yourself as a delegate
+
+00:50:57.866 --> 00:51:00.096 A:middle
+so that you are ready
+to receive callbacks.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:50:57.866 --> 00:51:00.096 A:middle
+so that you are ready
+to receive callbacks.
+
+00:51:01.536 --> 00:51:04.336 A:middle
+And finally, you will set the
+decide push types and pass
+
+00:51:04.336 --> 00:51:06.466 A:middle
+in the new PK push
+type complication
+
+00:51:06.466 --> 00:51:08.856 A:middle
+that that was added in iOS 9.
+
+00:51:09.086 --> 00:51:12.446 A:middle
+Once this is done, you will
+get a delegate callback
+
+00:51:12.686 --> 00:51:15.566 A:middle
+with a new Push token, which
+you're going to want to upload
+
+00:51:15.566 --> 00:51:17.596 A:middle
+to your servers, which is
+going to enable your servers
+
+00:51:17.596 --> 00:51:18.946 A:middle
+to send pushes to this device.
+
+00:51:20.026 --> 00:51:21.786 A:middle
+Finally, when the server
+does send the push,
+
+00:51:21.966 --> 00:51:23.686 A:middle
+you will get the Did
+Receive Incoming Push
+
+00:51:23.686 --> 00:51:24.566 A:middle
+With Payload callback.
+
+00:51:24.816 --> 00:51:26.076 A:middle
+And this when you turn around
+
+00:51:26.736 --> 00:51:28.506 A:middle
+and use the WatchConnectivity
+APIs
+
+00:51:28.826 --> 00:51:34.576 A:middle
+to send the content
+over to the iPhone.
+
+00:51:35.096 --> 00:51:38.886 A:middle
+So for the second part,
+this is where you are going
+
+00:51:38.886 --> 00:51:40.856 A:middle
+to use WatchConnectivity
+to get the content
+
+00:51:41.006 --> 00:51:42.916 A:middle
+across to the Apple
+Watch app now
+
+00:51:42.916 --> 00:51:45.426 A:middle
+that you received
+it in your iOS app.
+
+00:51:46.676 --> 00:51:49.436 A:middle
+The first thing you
+are going to want
+
+00:51:49.436 --> 00:51:52.876 A:middle
+to use is the transfer user info
+API that Alex discussed earlier.
+
+00:51:54.196 --> 00:51:56.316 A:middle
+This will allow you to
+queue up timeline entries
+
+00:51:56.886 --> 00:52:00.866 A:middle
+for both the past and the
+future that your iOS --
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:51:56.886 --> 00:52:00.866 A:middle
+for both the past and the
+future that your iOS --
+
+00:52:01.116 --> 00:52:02.776 A:middle
+sorry, your Watch
+complication might need.
+
+00:52:04.106 --> 00:52:06.476 A:middle
+Once you have queued up
+all the timeline entries,
+
+00:52:07.136 --> 00:52:08.926 A:middle
+the last thing you want
+to do before you are done
+
+00:52:08.926 --> 00:52:11.366 A:middle
+with your work is
+called a special API.
+
+00:52:12.106 --> 00:52:13.886 A:middle
+It's also part of
+WatchConnectivity.
+
+00:52:13.986 --> 00:52:16.086 A:middle
+It's called transfer current
+complication user info.
+
+00:52:16.786 --> 00:52:19.036 A:middle
+This is a special version
+of the transfer user info,
+
+00:52:19.216 --> 00:52:20.256 A:middle
+and at any point in time,
+
+00:52:20.256 --> 00:52:22.806 A:middle
+there can only be one current
+complication user info.
+
+00:52:22.876 --> 00:52:25.406 A:middle
+If you call this twice, only
+the most recent call is the one
+
+00:52:25.406 --> 00:52:27.826 A:middle
+that is tagged as the current
+complication user info.
+
+00:52:29.346 --> 00:52:31.326 A:middle
+When you call this, this
+is a hint to the system
+
+00:52:31.326 --> 00:52:34.426 A:middle
+that the work is done, and
+on the receiving side all
+
+00:52:34.426 --> 00:52:37.006 A:middle
+of these callbacks will
+produce this delegate callback,
+
+00:52:37.096 --> 00:52:41.786 A:middle
+Did Receive User Info.
+
+00:52:41.916 --> 00:52:44.546 A:middle
+So let's look at what
+this all would look
+
+00:52:44.546 --> 00:52:46.566 A:middle
+like from a full flow.
+
+00:52:46.566 --> 00:52:47.476 A:middle
+All right?
+
+00:52:48.356 --> 00:52:50.916 A:middle
+So the user has launched
+a sports app
+
+00:52:51.096 --> 00:52:52.536 A:middle
+for the very first time.
+
+00:52:53.606 --> 00:52:55.916 A:middle
+Your app early in its life
+cycle will want to set
+
+00:52:55.916 --> 00:52:58.936 A:middle
+up the PK push registry
+and set the desired types.
+
+00:52:59.556 --> 00:53:02.486 A:middle
+This will register this push --
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:52:59.556 --> 00:53:02.486 A:middle
+This will register this push --
+
+00:53:02.586 --> 00:53:04.636 A:middle
+this device with the
+Apple push servers.
+
+00:53:05.336 --> 00:53:07.146 A:middle
+So that will get pushed
+up to the Apple servers.
+
+00:53:08.096 --> 00:53:10.736 A:middle
+It will turn around and produce
+a Push token, and you will get
+
+00:53:10.736 --> 00:53:13.286 A:middle
+that delegate callback
+in your iOS app.
+
+00:53:14.596 --> 00:53:17.786 A:middle
+You will want to take that token
+and upload it to your servers,
+
+00:53:18.776 --> 00:53:20.566 A:middle
+enabling your servers
+to send pushes
+
+00:53:20.566 --> 00:53:21.586 A:middle
+to this device in the future.
+
+00:53:21.586 --> 00:53:25.846 A:middle
+At that point, the initial
+setup of the PushKit is done
+
+00:53:26.636 --> 00:53:27.516 A:middle
+and your app can go away.
+
+00:53:28.666 --> 00:53:32.226 A:middle
+Let's say the game starts, and
+the server decided it needs
+
+00:53:32.226 --> 00:53:33.536 A:middle
+to update the complication.
+
+00:53:33.576 --> 00:53:36.556 A:middle
+It will send a push
+down to your device.
+
+00:53:37.246 --> 00:53:40.776 A:middle
+That will get received on
+the device, and we will wake
+
+00:53:40.776 --> 00:53:43.616 A:middle
+up the sports app in the
+background and deliver the push.
+
+00:53:43.796 --> 00:53:45.096 A:middle
+That was that other
+delegate callback.
+
+00:53:45.226 --> 00:53:48.986 A:middle
+At this point, you are going
+to want to look at the data
+
+00:53:49.466 --> 00:53:52.336 A:middle
+in the push payload and figure
+out what needs to get sent
+
+00:53:52.336 --> 00:53:53.716 A:middle
+across using WatchConnectivity.
+
+00:53:54.296 --> 00:53:57.316 A:middle
+You will call Transfer
+User Info to queue
+
+00:53:57.316 --> 00:54:00.286 A:middle
+up the timeline entries,
+both past and future,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:53:57.316 --> 00:54:00.286 A:middle
+up the timeline entries,
+both past and future,
+
+00:54:00.286 --> 00:54:02.636 A:middle
+and that will go into
+the outstanding user info
+
+00:54:02.636 --> 00:54:03.376 A:middle
+transfers queue.
+
+00:54:03.376 --> 00:54:06.906 A:middle
+And then you call the special
+transfer current complication
+
+00:54:06.906 --> 00:54:09.586 A:middle
+user info with the one
+that's most important,
+
+00:54:09.586 --> 00:54:10.716 A:middle
+and that's the one
+that should be shown
+
+00:54:10.716 --> 00:54:11.646 A:middle
+on the Watch face right now.
+
+00:54:13.376 --> 00:54:15.456 A:middle
+That will also go into the
+outstanding user info transfers
+
+00:54:15.516 --> 00:54:16.796 A:middle
+queue, but it will
+skip to the front
+
+00:54:16.886 --> 00:54:18.436 A:middle
+because it's the
+most important one.
+
+00:54:19.376 --> 00:54:23.956 A:middle
+And because this is considered
+urgent, we will try to get
+
+00:54:23.956 --> 00:54:25.886 A:middle
+that across to the
+Apple Watch right away,
+
+00:54:26.536 --> 00:54:28.886 A:middle
+and wake up the WatchKit
+extension in the background
+
+00:54:29.296 --> 00:54:32.616 A:middle
+and deliver that current
+complication user info.
+
+00:54:33.116 --> 00:54:36.876 A:middle
+Given conditions, some of other
+content might also transfer
+
+00:54:36.876 --> 00:54:38.736 A:middle
+at this point in time and you
+will get those other timeline
+
+00:54:38.766 --> 00:54:43.156 A:middle
+entries, but at least the most
+important one made it across.
+
+00:54:43.156 --> 00:54:45.696 A:middle
+Finally, you want
+to use ClockKit
+
+00:54:46.146 --> 00:54:48.226 A:middle
+to update your complication.
+
+00:54:55.276 --> 00:54:56.236 A:middle
+So there we go.
+
+00:54:56.236 --> 00:54:58.826 A:middle
+You have updated your
+complication using PushKit.
+
+00:54:59.476 --> 00:55:02.366 A:middle
+We have added the new PK push
+type complication to enable you
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:54:59.476 --> 00:55:02.366 A:middle
+We have added the new PK push
+type complication to enable you
+
+00:55:02.366 --> 00:55:06.776 A:middle
+to very quickly update your
+complication using information
+
+00:55:06.776 --> 00:55:07.616 A:middle
+that's on your servers.
+
+00:55:08.606 --> 00:55:09.996 A:middle
+There's a couple of
+restrictions to be able
+
+00:55:10.046 --> 00:55:11.206 A:middle
+to use these push types.
+
+00:55:11.296 --> 00:55:13.926 A:middle
+The complication must be active
+on the current clock face,
+
+00:55:14.446 --> 00:55:16.226 A:middle
+otherwise these pushes
+will not be delivered,
+
+00:55:16.226 --> 00:55:19.376 A:middle
+and there will be a limited
+number of pushes per day,
+
+00:55:19.456 --> 00:55:20.366 A:middle
+so use these sparingly.
+
+00:55:20.696 --> 00:55:23.146 A:middle
+Roughly one to two
+per hour on average,
+
+00:55:23.236 --> 00:55:27.606 A:middle
+but the sports app may use them
+all in a short period of time.
+
+00:55:27.806 --> 00:55:29.366 A:middle
+You would use transfer
+user info to queue
+
+00:55:29.366 --> 00:55:30.456 A:middle
+up your timeline entries.
+
+00:55:30.706 --> 00:55:32.856 A:middle
+And finally, you would use
+transfer current complication
+
+00:55:32.856 --> 00:55:34.556 A:middle
+user info to queue
+up the current
+
+00:55:34.726 --> 00:55:36.146 A:middle
+or present timeline entry.
+
+00:55:37.146 --> 00:55:40.246 A:middle
+Finally, you would use ClockKit
+to update the clock face.
+
+00:55:40.876 --> 00:55:43.656 A:middle
+Keep in mind that a lot of
+these things are budgeted.
+
+00:55:43.656 --> 00:55:46.756 A:middle
+Any work you do on behalf
+of complication update,
+
+00:55:46.756 --> 00:55:49.376 A:middle
+both on the iOS and
+on the WatchKit side,
+
+00:55:49.646 --> 00:55:50.756 A:middle
+counts against this budget.
+
+00:55:51.536 --> 00:55:54.406 A:middle
+So we recommend that
+any information you need
+
+00:55:54.406 --> 00:55:56.666 A:middle
+to update your complication
+is included in that push.
+
+00:55:57.316 --> 00:56:01.716 A:middle
+The complication push type has
+a 4 K payload, which is larger
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:55:57.316 --> 00:56:01.716 A:middle
+The complication push type has
+a 4 K payload, which is larger
+
+00:56:01.716 --> 00:56:04.866 A:middle
+than the standard, so that
+should enable you to put most
+
+00:56:04.866 --> 00:56:05.746 A:middle
+of the content you needed.
+
+00:56:05.806 --> 00:56:07.806 A:middle
+If you receive one of
+these pushes and you turn
+
+00:56:07.806 --> 00:56:10.776 A:middle
+around in your iOS app and
+do an NSURLSession request,
+
+00:56:11.246 --> 00:56:12.946 A:middle
+you will run out of
+budget much faster.
+
+00:56:12.946 --> 00:56:16.036 A:middle
+So make sure you include all the
+content you need in the pushes.
+
+00:56:16.666 --> 00:56:20.986 A:middle
+That brings us to the
+end of our session.
+
+00:56:21.646 --> 00:56:24.046 A:middle
+Briefly going to discuss
+what we talked about today.
+
+00:56:24.046 --> 00:56:26.366 A:middle
+We went through the
+WatchConnectivity framework
+
+00:56:26.466 --> 00:56:27.186 A:middle
+and APIs.
+
+00:56:27.756 --> 00:56:30.356 A:middle
+We look forward to seeing what
+you guys can do with these APIs.
+
+00:56:31.136 --> 00:56:33.236 A:middle
+We briefly discussed
+NSURLSession and its use.
+
+00:56:33.636 --> 00:56:36.336 A:middle
+There's other sessions that
+go more in depth on what
+
+00:56:36.596 --> 00:56:39.606 A:middle
+and how to use NSURLSession.
+
+00:56:40.086 --> 00:56:43.106 A:middle
+And finally, we discussed how to
+get data to your complications,
+
+00:56:43.286 --> 00:56:45.266 A:middle
+which is a more advanced topic.
+
+00:56:46.216 --> 00:56:48.906 A:middle
+There's a lot of other great
+resources to check out.
+
+00:56:49.146 --> 00:56:50.586 A:middle
+We have some great sample code,
+
+00:56:50.966 --> 00:56:53.536 A:middle
+and we have our evangelist
+that's ready
+
+00:56:53.536 --> 00:56:54.806 A:middle
+to answer any of your questions.
+
+00:56:55.516 --> 00:56:58.266 A:middle
+As far as other related
+sessions,
+
+00:56:58.756 --> 00:57:01.346 A:middle
+we especially suggest you check
+out Creating Complications
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:56:58.756 --> 00:57:01.346 A:middle
+we especially suggest you check
+out Creating Complications
+
+00:57:01.346 --> 00:57:03.686 A:middle
+with ClockKit and
+Networking with NSURLSession,
+
+00:57:03.686 --> 00:57:06.196 A:middle
+as those are closely related to
+the content we discussed today.
+
+00:57:07.406 --> 00:57:07.976 A:middle
+Thank you very much.
+
+00:57:08.508 --> 00:57:10.508 A:middle
+[Applause]
+

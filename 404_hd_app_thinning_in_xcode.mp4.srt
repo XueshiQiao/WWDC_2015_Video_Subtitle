@@ -1,0 +1,3289 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:24.116 --> 00:00:24.536 A:middle
+&gt;&gt; ANDERS BERTELRUD:
+Good morning.
+
+00:00:25.316 --> 00:00:26.326 A:middle
+My name is Anders.
+
+00:00:26.326 --> 00:00:28.736 A:middle
+I would like to welcome
+you to session 404,
+
+00:00:29.266 --> 00:00:30.266 A:middle
+App Thinning in Xcode.
+
+00:00:30.266 --> 00:00:33.926 A:middle
+Now, app thinning
+has been mentioned
+
+00:00:33.926 --> 00:00:35.626 A:middle
+on this stage several
+times this week,
+
+00:00:35.746 --> 00:00:38.506 A:middle
+but judging from your questions
+and the number of questions
+
+00:00:38.506 --> 00:00:40.316 A:middle
+in the lab yesterday, a lot
+
+00:00:40.316 --> 00:00:41.716 A:middle
+of you are interested
+and have questions.
+
+00:00:42.496 --> 00:00:45.036 A:middle
+So we are going to go into a
+lot more detail in this session.
+
+00:00:45.886 --> 00:00:47.536 A:middle
+In particular we
+are going to talk
+
+00:00:47.536 --> 00:00:51.046 A:middle
+about how app thinning
+affects today's app
+
+00:00:51.046 --> 00:00:52.116 A:middle
+distribution pipeline.
+
+00:00:52.536 --> 00:00:54.796 A:middle
+We'll look at how it works today
+and how it is being improved.
+
+00:00:56.126 --> 00:00:58.376 A:middle
+We are going to talk about
+what you can do in order
+
+00:00:58.376 --> 00:01:01.036 A:middle
+to make app thinning as
+efficient as possible.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:58.376 --> 00:01:01.036 A:middle
+to make app thinning as
+efficient as possible.
+
+00:01:01.556 --> 00:01:03.616 A:middle
+And to make your apps
+as small as possible.
+
+00:01:03.616 --> 00:01:06.936 A:middle
+Then we are going to talk
+about what this means
+
+00:01:06.936 --> 00:01:09.186 A:middle
+for your work flow
+as you develop
+
+00:01:09.186 --> 00:01:13.666 A:middle
+and test your applications and
+submit them to the App Store.
+
+00:01:13.876 --> 00:01:15.456 A:middle
+So very quickly let's
+take a look
+
+00:01:15.456 --> 00:01:17.916 A:middle
+at how app distribution
+works today.
+
+00:01:17.946 --> 00:01:20.516 A:middle
+You use Xcode and
+build and iOS app.
+
+00:01:21.216 --> 00:01:23.876 A:middle
+You test it and submit
+it to the App Store.
+
+00:01:25.196 --> 00:01:27.216 A:middle
+When you submit it,
+the app is signed
+
+00:01:27.216 --> 00:01:30.086 A:middle
+with the developer certificate
+so we know it came from you.
+
+00:01:30.636 --> 00:01:33.976 A:middle
+After it has been approved,
+the App Store re-signs it
+
+00:01:34.066 --> 00:01:37.456 A:middle
+with the store certificate and
+hosts it for apps to download.
+
+00:01:39.836 --> 00:01:43.696 A:middle
+So along comes a device
+and downloads your app.
+
+00:01:43.696 --> 00:01:47.486 A:middle
+What it gets is exactly the
+same thing as what you uploaded.
+
+00:01:47.856 --> 00:01:49.486 A:middle
+Let's take a look
+at what's in that.
+
+00:01:50.126 --> 00:01:52.636 A:middle
+First of all, there's your
+executable code, of course.
+
+00:01:53.116 --> 00:01:56.106 A:middle
+And there's resources, broadly
+everything can be categorized
+
+00:01:56.726 --> 00:01:57.956 A:middle
+into that.
+
+00:01:58.156 --> 00:02:01.146 A:middle
+Some of your apps are code
+heavy, have a lot of code
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:58.156 --> 00:02:01.146 A:middle
+Some of your apps are code
+heavy, have a lot of code
+
+00:02:01.146 --> 00:02:04.366 A:middle
+and not so many resources
+and others are the other way
+
+00:02:04.366 --> 00:02:07.266 A:middle
+around where they are media
+rich and have some code
+
+00:02:07.336 --> 00:02:08.316 A:middle
+but it's mostly assets.
+
+00:02:09.166 --> 00:02:13.926 A:middle
+We are going to take a look
+at one of those as an example.
+
+00:02:14.006 --> 00:02:17.996 A:middle
+Now, with your code you
+most likely have 64-bit
+
+00:02:17.996 --> 00:02:19.106 A:middle
+and 32-bit versions.
+
+00:02:19.106 --> 00:02:20.826 A:middle
+In fact, you may have RMV7.
+
+00:02:20.946 --> 00:02:26.786 A:middle
+RMV7 has NRV 64 slices in order
+to run as well as possible
+
+00:02:26.786 --> 00:02:29.336 A:middle
+on all the hardware
+that Apple shares.
+
+00:02:29.886 --> 00:02:34.436 A:middle
+Of course, your assets, if
+you have images, you will want
+
+00:02:34.436 --> 00:02:39.516 A:middle
+to use 1X, 2X, and 3X, Retina,
+art work to look as great
+
+00:02:39.516 --> 00:02:43.956 A:middle
+as possible on every
+type of device.
+
+00:02:44.116 --> 00:02:46.226 A:middle
+You may further differentiate
+the art work
+
+00:02:46.406 --> 00:02:48.416 A:middle
+so that you have some
+for the iPhone idiom
+
+00:02:48.636 --> 00:02:49.966 A:middle
+and others for the iPad idiom.
+
+00:02:50.536 --> 00:02:57.756 A:middle
+If you have a game or other 3D
+graphics oriented app, maybe 1X,
+
+00:02:57.796 --> 00:03:01.626 A:middle
+2X doesn't mean as much to
+you as text compression does
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:57.796 --> 00:03:01.626 A:middle
+2X doesn't mean as much to
+you as text compression does
+
+00:03:02.296 --> 00:03:04.376 A:middle
+and number of polygons.
+
+00:03:04.946 --> 00:03:09.236 A:middle
+In fact, if you want to
+take advantage of OpenGL AS
+
+00:03:09.236 --> 00:03:11.416 A:middle
+and metal, you may
+have different assets,
+
+00:03:11.416 --> 00:03:14.666 A:middle
+different textures for that, and
+you may further differentiate
+
+00:03:14.666 --> 00:03:18.406 A:middle
+between low quality and high
+quality so you run as well
+
+00:03:18.406 --> 00:03:20.336 A:middle
+as possible and look
+as great as possible
+
+00:03:20.336 --> 00:03:23.276 A:middle
+on whatever device you have
+depending on the memory
+
+00:03:23.276 --> 00:03:24.306 A:middle
+and graphics capability.
+
+00:03:24.306 --> 00:03:28.176 A:middle
+You probably have audio as
+well and you may differentiate
+
+00:03:28.176 --> 00:03:29.636 A:middle
+that too in terms of bit rates.
+
+00:03:30.206 --> 00:03:35.436 A:middle
+Of course, there's other data
+such as the levels of your game.
+
+00:03:35.736 --> 00:03:38.446 A:middle
+Or if you have a
+documented application,
+
+00:03:38.446 --> 00:03:40.486 A:middle
+you might have templates
+and other information
+
+00:03:40.906 --> 00:03:43.976 A:middle
+that doesn't make sense to
+differentiate by device.
+
+00:03:43.976 --> 00:03:46.876 A:middle
+It is the same for all devices.
+
+00:03:46.966 --> 00:03:49.026 A:middle
+And many real world
+apps actually have a bit
+
+00:03:49.026 --> 00:03:49.476 A:middle
+of everything.
+
+00:03:49.986 --> 00:03:54.336 A:middle
+So you may have spent a lot of
+good effort categorizing things
+
+00:03:54.336 --> 00:03:57.286 A:middle
+into asset catalogs,
+annotating your assets
+
+00:03:57.286 --> 00:03:59.426 A:middle
+so the right ones get
+loaded on the right device.
+
+00:03:59.986 --> 00:04:00.836 A:middle
+That's great.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:59.986 --> 00:04:00.836 A:middle
+That's great.
+
+00:04:01.016 --> 00:04:04.056 A:middle
+That's actually what app
+slicing takes advantage of.
+
+00:04:04.816 --> 00:04:06.416 A:middle
+If you have an ipad Mini,
+
+00:04:07.696 --> 00:04:14.916 A:middle
+at runtime it will load the RMV7
+slice, for the iPad, et cetera.
+
+00:04:14.916 --> 00:04:18.676 A:middle
+What we are doing with app
+slicing is making the runtime
+
+00:04:18.676 --> 00:04:22.125 A:middle
+decision of what assets to load,
+moving that up into the store.
+
+00:04:22.886 --> 00:04:26.946 A:middle
+Right now the content goes onto
+the device, always is stored
+
+00:04:26.946 --> 00:04:29.056 A:middle
+on the device, even though
+it will never be loaded
+
+00:04:29.386 --> 00:04:34.886 A:middle
+on an iPad 1, so the RM 64 slice
+won't get used on the ipad Mini.
+
+00:04:35.516 --> 00:04:38.206 A:middle
+Therefore, why send it at all?
+
+00:04:39.916 --> 00:04:42.806 A:middle
+So in the store, it is going
+
+00:04:42.806 --> 00:04:48.036 A:middle
+to prebuild a version
+tailored for the ipad Mini.
+
+00:04:48.236 --> 00:04:50.686 A:middle
+Same thing with an iPhone 6+.
+
+00:04:50.686 --> 00:04:53.786 A:middle
+In that case, we have 3X
+art work, RM 64, et cetera.
+
+00:04:54.396 --> 00:04:55.926 A:middle
+Similar thing.
+
+00:04:55.926 --> 00:04:57.266 A:middle
+What is important to note here,
+
+00:04:57.266 --> 00:05:01.686 A:middle
+you still will be uploading
+one universal app with all
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:57.266 --> 00:05:01.686 A:middle
+you still will be uploading
+one universal app with all
+
+00:05:01.686 --> 00:05:05.346 A:middle
+of the different variants of
+art work and other resources
+
+00:05:05.746 --> 00:05:08.576 A:middle
+as you have today, and
+it is in the App Store
+
+00:05:08.576 --> 00:05:10.386 A:middle
+that the slicing happens.
+
+00:05:11.096 --> 00:05:14.396 A:middle
+And what the App Store
+does actually is to look
+
+00:05:14.396 --> 00:05:17.146 A:middle
+at all the different device
+traits of the different devices
+
+00:05:17.206 --> 00:05:18.566 A:middle
+that your app can support.
+
+00:05:19.186 --> 00:05:21.476 A:middle
+Then it looks at the
+actual content of your app
+
+00:05:21.876 --> 00:05:25.436 A:middle
+to see how you annotated
+it with 1X, 2X, et cetera,
+
+00:05:25.436 --> 00:05:29.846 A:middle
+and it builds premade, separate
+IPAs that get downloaded.
+
+00:05:30.256 --> 00:05:33.096 A:middle
+Let's take a look at an
+example you've seen already,
+
+00:05:33.556 --> 00:05:38.076 A:middle
+which is demo box, which was
+shown in the state of the union.
+
+00:05:38.076 --> 00:05:40.086 A:middle
+In this case, we have an app
+
+00:05:40.436 --> 00:05:44.026 A:middle
+that is 74-megabytes
+when built universal.
+
+00:05:44.136 --> 00:05:47.916 A:middle
+That is for all architectures
+and for all types of devices.
+
+00:05:49.416 --> 00:05:52.856 A:middle
+And by thinning it
+out, we get between 16
+
+00:05:52.856 --> 00:05:55.466 A:middle
+and 29-megabytes,
+22 on the average.
+
+00:05:55.466 --> 00:05:58.446 A:middle
+This is an app that
+we run the slicing on.
+
+00:05:58.806 --> 00:06:00.886 A:middle
+There is actually 19 different
+variants that are produced
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:58.806 --> 00:06:00.886 A:middle
+There is actually 19 different
+variants that are produced
+
+00:06:00.886 --> 00:06:02.896 A:middle
+for all the various
+combinations of traits.
+
+00:06:03.266 --> 00:06:07.626 A:middle
+All of that happens invisibly
+to you or without your effort.
+
+00:06:07.626 --> 00:06:10.366 A:middle
+That happens just by how
+you annotated your contents
+
+00:06:10.366 --> 00:06:10.966 A:middle
+of the app.
+
+00:06:11.286 --> 00:06:13.676 A:middle
+So that's one level of savings.
+
+00:06:13.676 --> 00:06:14.866 A:middle
+That's pretty good.
+
+00:06:14.866 --> 00:06:15.996 A:middle
+Can we do better?
+
+00:06:16.456 --> 00:06:18.196 A:middle
+Of course, the answer is yes.
+
+00:06:18.806 --> 00:06:20.996 A:middle
+There are some things
+that we want
+
+00:06:20.996 --> 00:06:23.256 A:middle
+to have all the time
+on the device.
+
+00:06:23.506 --> 00:06:24.896 A:middle
+So the code, for one thing.
+
+00:06:25.366 --> 00:06:28.306 A:middle
+Then there may be some art work,
+like a story board that is shown
+
+00:06:28.306 --> 00:06:32.626 A:middle
+when you launch your app or
+some art work for a main menu,
+
+00:06:32.626 --> 00:06:34.156 A:middle
+let's say, that you'll
+always want to have there.
+
+00:06:35.066 --> 00:06:38.396 A:middle
+Then there are these
+other things that yeah,
+
+00:06:38.566 --> 00:06:41.436 A:middle
+this app will need, but it is
+not going to need it right now.
+
+00:06:41.606 --> 00:06:44.836 A:middle
+A typical example that you've
+heard before is level 19
+
+00:06:44.836 --> 00:06:45.376 A:middle
+of a game.
+
+00:06:45.826 --> 00:06:47.406 A:middle
+The user who is beginning
+
+00:06:47.406 --> 00:06:49.616 A:middle
+to just play level 1 is
+not going to need that yet.
+
+00:06:50.596 --> 00:06:52.016 A:middle
+There are other examples, too.
+
+00:06:52.016 --> 00:06:53.756 A:middle
+There could be media
+rich templates
+
+00:06:53.756 --> 00:06:55.416 A:middle
+if you have a document
+rich application.
+
+00:06:55.776 --> 00:06:58.536 A:middle
+You may want to ship
+a lot of those.
+
+00:06:58.766 --> 00:07:02.306 A:middle
+In order to provide a rich
+experience, you may have a lot
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:58.766 --> 00:07:02.306 A:middle
+In order to provide a rich
+experience, you may have a lot
+
+00:07:02.306 --> 00:07:04.476 A:middle
+of templates, but they
+might take a lot of space.
+
+00:07:04.476 --> 00:07:05.836 A:middle
+You may want to load
+those on-demand.
+
+00:07:06.236 --> 00:07:11.376 A:middle
+Same with audio for instruments,
+those kinds of things.
+
+00:07:11.376 --> 00:07:13.556 A:middle
+There is a good example
+of tutorial
+
+00:07:13.606 --> 00:07:16.136 A:middle
+that the user may watch once,
+and you don't want it to take
+
+00:07:16.136 --> 00:07:17.366 A:middle
+up space on the device anymore.
+
+00:07:18.276 --> 00:07:21.246 A:middle
+If we take a look at one of
+the slices that we talked
+
+00:07:21.246 --> 00:07:24.006 A:middle
+about before, it already
+has been thinned down,
+
+00:07:24.006 --> 00:07:25.916 A:middle
+sliced so it has
+one architecture
+
+00:07:26.286 --> 00:07:32.346 A:middle
+and it has one quality
+variant of every type of asset.
+
+00:07:33.356 --> 00:07:36.686 A:middle
+The next level of partitioning
+we can do is something
+
+00:07:36.686 --> 00:07:41.526 A:middle
+that only you know based on the
+particular domain of your app,
+
+00:07:41.796 --> 00:07:44.466 A:middle
+which is what you are going
+to need at any given time,
+
+00:07:44.646 --> 00:07:46.536 A:middle
+because that is based on
+the logic in your code.
+
+00:07:47.356 --> 00:07:51.336 A:middle
+So in this example,
+we have images,
+
+00:07:51.676 --> 00:07:53.586 A:middle
+Metal shaders, those
+kind of things.
+
+00:07:53.926 --> 00:07:55.986 A:middle
+We can divide those into
+those that are shared
+
+00:07:56.096 --> 00:07:59.256 A:middle
+and always needed that we want
+to keep in the app itself.
+
+00:07:59.806 --> 00:08:02.316 A:middle
+We can have things
+that come in on demand.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:59.806 --> 00:08:02.316 A:middle
+We can have things
+that come in on demand.
+
+00:08:03.506 --> 00:08:09.756 A:middle
+By splitting this up, then you
+can actually shrink the base
+
+00:08:09.756 --> 00:08:12.166 A:middle
+footprint of your app and
+still have access to content.
+
+00:08:13.376 --> 00:08:16.746 A:middle
+In this particular case, the
+asset packs that are built
+
+00:08:16.786 --> 00:08:20.116 A:middle
+by Xcode based on your
+asset tags get moved off.
+
+00:08:20.726 --> 00:08:23.826 A:middle
+They are stored separately
+from your IPA in the App Store.
+
+00:08:24.916 --> 00:08:26.936 A:middle
+You can download them on-demand.
+
+00:08:27.546 --> 00:08:29.326 A:middle
+You can designate some
+of them as being part
+
+00:08:29.326 --> 00:08:31.946 A:middle
+of the initial download so when
+the user downloads the appear
+
+00:08:31.946 --> 00:08:34.196 A:middle
+app and see the progress
+bar go to 100 percent,
+
+00:08:34.956 --> 00:08:37.206 A:middle
+by the time they are ready
+to startnusing your app,
+
+00:08:37.306 --> 00:08:39.116 A:middle
+they already have some
+of the initial content.
+
+00:08:40.126 --> 00:08:43.976 A:middle
+You can bring in more
+content on-demand as needed.
+
+00:08:44.536 --> 00:08:48.156 A:middle
+Now, this is not stored in
+your app's bundle on the device
+
+00:08:48.156 --> 00:08:51.606 A:middle
+and also not on the container
+that gets backed up to iCloud.
+
+00:08:51.716 --> 00:08:55.306 A:middle
+This is stored in memory
+managed by the system
+
+00:08:55.906 --> 00:08:58.456 A:middle
+that can cache the
+on-demand resources
+
+00:08:58.456 --> 00:09:00.726 A:middle
+from the different
+applications on the device.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:58.456 --> 00:09:00.726 A:middle
+from the different
+applications on the device.
+
+00:09:01.896 --> 00:09:03.246 A:middle
+So now in this case if you,
+
+00:09:03.246 --> 00:09:06.426 A:middle
+in this scenario we
+actually have space
+
+00:09:06.426 --> 00:09:07.956 A:middle
+to have more than three levels.
+
+00:09:07.956 --> 00:09:10.226 A:middle
+We can have more levels
+than would normally fit
+
+00:09:10.226 --> 00:09:11.816 A:middle
+if you didn't use
+on-demand resources.
+
+00:09:12.506 --> 00:09:15.736 A:middle
+When we bring in level 4, the
+system can automatically get rid
+
+00:09:15.736 --> 00:09:20.096 A:middle
+of the least recentl used asset
+pack containing your level
+
+00:09:20.096 --> 00:09:20.936 A:middle
+1 resources.
+
+00:09:21.616 --> 00:09:22.636 A:middle
+Same thing for level 5.
+
+00:09:23.746 --> 00:09:26.646 A:middle
+Of course, if the user hasn't
+used your app for awhile
+
+00:09:26.816 --> 00:09:29.616 A:middle
+and some other app needs to
+download on-demand resources,
+
+00:09:29.976 --> 00:09:31.346 A:middle
+it can reclaim the space.
+
+00:09:31.346 --> 00:09:32.736 A:middle
+When your app is used again,
+
+00:09:32.736 --> 00:09:35.806 A:middle
+it will be downloaded
+one more time.
+
+00:09:36.026 --> 00:09:38.706 A:middle
+So some things about
+on-demand resources.
+
+00:09:39.486 --> 00:09:43.036 A:middle
+You build asset packs by
+tagging assets in Xcode.
+
+00:09:43.036 --> 00:09:45.216 A:middle
+You saw a brief demo
+of this in the state
+
+00:09:45.216 --> 00:09:47.296 A:middle
+of the union yesterday.
+
+00:09:47.726 --> 00:09:49.126 A:middle
+And there will be
+a whole session
+
+00:09:49.126 --> 00:09:50.816 A:middle
+on on-demand resources
+later today.
+
+00:09:50.816 --> 00:09:56.796 A:middle
+Asset packs can contain
+any nonexecutable assets.
+
+00:09:57.586 --> 00:10:00.696 A:middle
+App slicing works on
+the asset catalogs
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:57.586 --> 00:10:00.696 A:middle
+App slicing works on
+the asset catalogs
+
+00:10:00.696 --> 00:10:01.896 A:middle
+in the assets you've
+put in there.
+
+00:10:02.246 --> 00:10:04.586 A:middle
+For on-demand resources you
+can have any loose files
+
+00:10:04.586 --> 00:10:06.556 A:middle
+and tag them, and they will
+be part of the asset packs,
+
+00:10:06.626 --> 00:10:08.286 A:middle
+downloaded from the App Store.
+
+00:10:08.286 --> 00:10:09.606 A:middle
+They're hosted by the App Store.
+
+00:10:10.026 --> 00:10:12.846 A:middle
+You submit it all together
+to the App Store as part
+
+00:10:12.846 --> 00:10:16.216 A:middle
+of one IPA, but the App
+Store splits it apart
+
+00:10:17.206 --> 00:10:18.326 A:middle
+and hosts it separately.
+
+00:10:19.586 --> 00:10:22.806 A:middle
+They are downloaded when
+needed based on your code.
+
+00:10:23.186 --> 00:10:24.926 A:middle
+They are reclaimed as necessary.
+
+00:10:26.276 --> 00:10:29.156 A:middle
+And they are sliced just
+like all the other content.
+
+00:10:29.706 --> 00:10:32.306 A:middle
+So you can put asset
+packs in there.
+
+00:10:32.426 --> 00:10:37.286 A:middle
+In fact, if you tag assets
+that are in asset packs,
+
+00:10:37.286 --> 00:10:42.296 A:middle
+Xcode will automatically build
+them for you in asset catalogs.
+
+00:10:42.826 --> 00:10:47.236 A:middle
+Let's take a look at
+the size savings --
+
+00:10:47.236 --> 00:10:51.076 A:middle
+oh, right, there will be
+a session this afternoon
+
+00:10:51.076 --> 00:10:53.166 A:middle
+which will be in
+Pacific Heights at 4:30.
+
+00:10:54.186 --> 00:10:56.996 A:middle
+Let's take a look at what kind
+of slice savings we get then.
+
+00:10:57.116 --> 00:11:00.386 A:middle
+After slicing, we had
+on average 22 megabytes
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:57.116 --> 00:11:00.386 A:middle
+After slicing, we had
+on average 22 megabytes
+
+00:11:00.386 --> 00:11:02.546 A:middle
+for one of the slices.
+
+00:11:03.336 --> 00:11:06.076 A:middle
+In this case, we get
+down to between 11
+
+00:11:06.076 --> 00:11:08.016 A:middle
+and 18-megabytes
+depending on the device
+
+00:11:08.406 --> 00:11:11.556 A:middle
+for the core application and
+the assets themselves are
+
+00:11:11.556 --> 00:11:12.856 A:middle
+between 5 and 11.
+
+00:11:13.356 --> 00:11:16.336 A:middle
+The point is that
+not all of those are
+
+00:11:16.566 --> 00:11:18.206 A:middle
+on the device at the same time.
+
+00:11:19.016 --> 00:11:21.716 A:middle
+So the sum total is about
+eight megabytes in this case.
+
+00:11:21.716 --> 00:11:23.716 A:middle
+This is a fairly small
+app that you can see
+
+00:11:23.716 --> 00:11:27.206 A:middle
+that for a large application
+especially one with lots
+
+00:11:27.816 --> 00:11:31.706 A:middle
+of media, the savings
+really add up.
+
+00:11:32.526 --> 00:11:33.666 A:middle
+Some obvious advantages
+
+00:11:33.666 --> 00:11:36.466 A:middle
+of making your app smaller
+is a better user experience.
+
+00:11:36.876 --> 00:11:39.606 A:middle
+There are affordable devices
+that have eight gigabytes
+
+00:11:39.706 --> 00:11:42.496 A:middle
+of storage, and you really want
+to make the most use of that.
+
+00:11:42.596 --> 00:11:43.996 A:middle
+You don't want anything
+on the device
+
+00:11:43.996 --> 00:11:47.166 A:middle
+that isn't actually
+going to be needed.
+
+00:11:47.776 --> 00:11:51.446 A:middle
+By using app thinning, you can
+support more of those devices.
+
+00:11:52.646 --> 00:11:55.956 A:middle
+Also this means shorter
+download times, less to send
+
+00:11:55.956 --> 00:11:57.306 A:middle
+over the wire which is great.
+
+00:11:57.856 --> 00:12:00.386 A:middle
+That makes it easier for you
+to stay under the 100-megabyte
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:57.856 --> 00:12:00.386 A:middle
+That makes it easier for you
+to stay under the 100-megabyte
+
+00:12:00.826 --> 00:12:04.646 A:middle
+over the air size limit,
+the cellular limit.
+
+00:12:05.966 --> 00:12:07.616 A:middle
+What this means really
+for you is
+
+00:12:07.616 --> 00:12:10.756 A:middle
+that you can support more types
+of devices with less compromise.
+
+00:12:10.756 --> 00:12:13.746 A:middle
+If you have been thinking about
+I really want to use Metal
+
+00:12:13.746 --> 00:12:16.616 A:middle
+and run great on high powered
+devices but I also want
+
+00:12:16.616 --> 00:12:20.036 A:middle
+to be able to use the
+less powerful devices,
+
+00:12:20.036 --> 00:12:23.696 A:middle
+have customers run well
+on those, what do I do?
+
+00:12:23.836 --> 00:12:25.946 A:middle
+This frees you from
+some of that compromise.
+
+00:12:25.946 --> 00:12:30.606 A:middle
+You can now submit, it matters
+a lot less how much you submit
+
+00:12:30.606 --> 00:12:36.116 A:middle
+to the store as it does what
+each user gets from the store.
+
+00:12:37.316 --> 00:12:38.226 A:middle
+What this means for you
+
+00:12:38.226 --> 00:12:42.226 A:middle
+in the longer term is you
+can actually now use some
+
+00:12:42.226 --> 00:12:44.666 A:middle
+of that reclaimed space
+to add those features
+
+00:12:44.666 --> 00:12:46.546 A:middle
+that you couldn't fit
+in because of size.
+
+00:12:47.016 --> 00:12:49.056 A:middle
+This doesn't mean you
+make it huge again,
+
+00:12:49.356 --> 00:12:52.236 A:middle
+but it means it is less
+compromise for you when you look
+
+00:12:52.236 --> 00:12:57.596 A:middle
+at your size versus the things
+you want to put into your app.
+
+00:12:57.996 --> 00:13:01.476 A:middle
+So after that overview, I
+would like to ask Patrick,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:57.996 --> 00:13:01.476 A:middle
+So after that overview, I
+would like to ask Patrick,
+
+00:13:01.586 --> 00:13:03.266 A:middle
+my colleague Patrick Heynen
+to come in and give you some
+
+00:13:03.266 --> 00:13:03.976 A:middle
+of the details on
+how to do that.
+
+00:13:04.516 --> 00:13:09.906 A:middle
+[Applause]
+
+00:13:10.406 --> 00:13:11.696 A:middle
+&gt;&gt; PATRICK HEYNEN:
+Thank you, Anders.
+
+00:13:11.766 --> 00:13:12.426 A:middle
+Hi. I'm Patrick Heynen.
+
+00:13:12.426 --> 00:13:13.746 A:middle
+I would like to talk
+a little bit more
+
+00:13:13.746 --> 00:13:17.176 A:middle
+in detail about asset slicing.
+
+00:13:17.476 --> 00:13:18.216 A:middle
+How does it work?
+
+00:13:20.546 --> 00:13:22.576 A:middle
+Well, I'm happy to
+say that asset slicing
+
+00:13:22.576 --> 00:13:24.376 A:middle
+and app thinning have
+been seamlessly integrated
+
+00:13:24.376 --> 00:13:27.456 A:middle
+into all the build, publish and
+export and workflows of Xcode
+
+00:13:27.456 --> 00:13:28.866 A:middle
+that you may already be familiar
+
+00:13:28.866 --> 00:13:30.376 A:middle
+with in building
+your applications.
+
+00:13:32.026 --> 00:13:34.636 A:middle
+All that really happens
+
+00:13:34.636 --> 00:13:37.606 A:middle
+to actually make you
+realize asset slicing
+
+00:13:37.606 --> 00:13:39.656 A:middle
+and app thinning is that
+we do a post process
+
+00:13:39.786 --> 00:13:42.426 A:middle
+of your build products,
+of your asset catalog
+
+00:13:42.526 --> 00:13:47.096 A:middle
+and executable files
+to tailor the variants
+
+00:13:47.096 --> 00:13:48.276 A:middle
+for all the different devices
+
+00:13:48.276 --> 00:13:49.196 A:middle
+that you are trying
+to build for.
+
+00:13:51.216 --> 00:13:53.526 A:middle
+So what do you need to do?
+
+00:13:54.646 --> 00:13:58.186 A:middle
+Well, the good news is that you
+are probably doing it already,
+
+00:13:58.326 --> 00:13:59.146 A:middle
+or doing it already.
+
+00:13:59.916 --> 00:14:03.756 A:middle
+If you have been developing
+iOS apps for a while,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:59.916 --> 00:14:03.756 A:middle
+If you have been developing
+iOS apps for a while,
+
+00:14:03.756 --> 00:14:06.276 A:middle
+you have already been
+incorporating 1X, 2X,
+
+00:14:06.276 --> 00:14:09.106 A:middle
+and 3X art work to capture
+the range of displays
+
+00:14:09.446 --> 00:14:14.136 A:middle
+on the embedded devices and may
+even be using asset catalogs
+
+00:14:14.136 --> 00:14:16.776 A:middle
+which have been around
+since iOS 7.
+
+00:14:18.516 --> 00:14:20.226 A:middle
+That's really all
+you need to have.
+
+00:14:20.906 --> 00:14:24.176 A:middle
+What are asset catalogs
+and what role do they play?
+
+00:14:25.206 --> 00:14:26.886 A:middle
+Asset catalogues are a facility
+
+00:14:26.886 --> 00:14:29.046 A:middle
+to organize your
+resources according
+
+00:14:29.046 --> 00:14:31.346 A:middle
+to the relevant device
+traits of those resources
+
+00:14:31.346 --> 00:14:33.246 A:middle
+that they are important
+and pertinent for.
+
+00:14:34.956 --> 00:14:36.336 A:middle
+There's an important note here.
+
+00:14:37.226 --> 00:14:39.046 A:middle
+In order to take
+advantage of app thinning,
+
+00:14:39.336 --> 00:14:42.746 A:middle
+your resources must be
+contained within asset catalogs.
+
+00:14:43.186 --> 00:14:45.116 A:middle
+We do not thin loose resources.
+
+00:14:45.836 --> 00:14:50.196 A:middle
+This is not as strong a
+constraint as you might imagine.
+
+00:14:50.196 --> 00:14:51.446 A:middle
+I'll get to that
+in a little moment.
+
+00:14:51.886 --> 00:14:52.956 A:middle
+It is an important note.
+
+00:14:54.746 --> 00:14:56.416 A:middle
+So I mentioned device traits.
+
+00:14:56.876 --> 00:15:00.656 A:middle
+So in the asset catalog
+world, devices have a key set
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:56.876 --> 00:15:00.656 A:middle
+So in the asset catalog
+world, devices have a key set
+
+00:15:00.656 --> 00:15:03.656 A:middle
+of characteristics for which
+assets can be optimized for.
+
+00:15:04.166 --> 00:15:06.286 A:middle
+These include things that
+you are familiar with,
+
+00:15:06.286 --> 00:15:11.016 A:middle
+screen resolutions, 2X and
+3X and also device family.
+
+00:15:11.416 --> 00:15:15.756 A:middle
+Whether it is an iPad or
+an iPhone device idiom.
+
+00:15:16.336 --> 00:15:22.446 A:middle
+New to iOS 9 in Xcode 7, we
+are also exposing a new set
+
+00:15:22.446 --> 00:15:24.316 A:middle
+of device traits that are based
+
+00:15:24.316 --> 00:15:26.656 A:middle
+on the hardware characteristics
+of our devices.
+
+00:15:27.276 --> 00:15:30.926 A:middle
+In particular, graphics
+capabilities and memory levels.
+
+00:15:31.696 --> 00:15:33.556 A:middle
+This really arises
+out of two needs.
+
+00:15:33.556 --> 00:15:37.296 A:middle
+One, the range of devices we
+support now have a huge range
+
+00:15:37.506 --> 00:15:38.966 A:middle
+of performance characteristics,
+
+00:15:38.966 --> 00:15:41.516 A:middle
+different between the lowest end
+device and highest end device.
+
+00:15:41.516 --> 00:15:45.296 A:middle
+It is not the case that a single
+resource is appropriate for all
+
+00:15:45.706 --> 00:15:47.666 A:middle
+of those classes of devices.
+
+00:15:47.726 --> 00:15:50.856 A:middle
+It becomes really hard to make
+the right compromise in terms
+
+00:15:50.856 --> 00:15:53.986 A:middle
+of what your end user
+experience is going to be.
+
+00:15:53.986 --> 00:15:55.966 A:middle
+The same goes for memory levels
+
+00:15:55.966 --> 00:15:58.686 A:middle
+between the low end
+and high end devices.
+
+00:15:58.686 --> 00:16:00.776 A:middle
+The new device traits
+allow you to tailor assets
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:15:58.686 --> 00:16:00.776 A:middle
+The new device traits
+allow you to tailor assets
+
+00:16:01.136 --> 00:16:04.966 A:middle
+to those different capabilities.
+
+00:16:04.966 --> 00:16:08.076 A:middle
+What kind of content goes
+into an asset catalog?
+
+00:16:09.586 --> 00:16:12.356 A:middle
+Well, the most popular
+by far is the one
+
+00:16:12.356 --> 00:16:15.436 A:middle
+that we debuted asset catalogs
+with, and that's named images.
+
+00:16:16.906 --> 00:16:21.656 A:middle
+This basically is your art work
+resources for your application
+
+00:16:22.586 --> 00:16:26.586 A:middle
+in typically bitmap resources
+or vectors, in the png,
+
+00:16:26.586 --> 00:16:30.016 A:middle
+jpg or pdf format that you
+integrate into your project.
+
+00:16:30.466 --> 00:16:34.876 A:middle
+These get compiled into an
+optimized delivery format using
+
+00:16:34.876 --> 00:16:36.236 A:middle
+advanced compression codex
+
+00:16:36.296 --> 00:16:40.226 A:middle
+with really good space saving
+characteristics and delivered
+
+00:16:40.226 --> 00:16:46.076 A:middle
+to your application
+through the UI kit APIs.
+
+00:16:46.296 --> 00:16:52.986 A:middle
+New to iOS 9 and Xcode
+7 is a new data class,
+
+00:16:53.606 --> 00:16:54.886 A:middle
+at least one new data class.
+
+00:16:55.476 --> 00:16:56.746 A:middle
+That is name data.
+
+00:16:57.746 --> 00:16:58.456 A:middle
+What is this for?
+
+00:16:59.366 --> 00:17:03.216 A:middle
+Name data allows you to
+store arbitrary file content.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:59.366 --> 00:17:03.216 A:middle
+Name data allows you to
+store arbitrary file content.
+
+00:17:04.586 --> 00:17:06.626 A:middle
+Now, this in fact
+alleviates some
+
+00:17:06.626 --> 00:17:08.256 A:middle
+of the concern you might
+have had at my statement
+
+00:17:08.256 --> 00:17:10.656 A:middle
+that we only thin asset
+catalogue based content.
+
+00:17:10.925 --> 00:17:14.465 A:middle
+You ask: What if I'm trying to
+thin non-image based resources?
+
+00:17:14.636 --> 00:17:15.955 A:middle
+That is what name data is for.
+
+00:17:16.236 --> 00:17:19.175 A:middle
+It allows you to put any
+arbitrary file content stored
+
+00:17:19.175 --> 00:17:22.226 A:middle
+in your asset catalog
+and classified according
+
+00:17:22.226 --> 00:17:24.715 A:middle
+to those hardware capabilities
+I mentioned to you earlier.
+
+00:17:27.195 --> 00:17:30.516 A:middle
+And then at runtime you use
+the new NS DataAsset class
+
+00:17:30.596 --> 00:17:34.796 A:middle
+in the UI kit in OS X, by the
+way, to retrieve this content
+
+00:17:34.796 --> 00:17:35.686 A:middle
+into your application.
+
+00:17:37.096 --> 00:17:39.596 A:middle
+Brief side bar here
+for a moment.
+
+00:17:39.826 --> 00:17:44.306 A:middle
+The asset catalog features
+I'm describing, the name data
+
+00:17:44.306 --> 00:17:48.246 A:middle
+and some of the ones coming up,
+are available in OS X as well.
+
+00:17:48.466 --> 00:17:50.326 A:middle
+We don't thin applications
+for OS X,
+
+00:17:50.326 --> 00:17:52.856 A:middle
+but since at the catalog store
+our source artifact formats are
+
+00:17:52.856 --> 00:17:55.296 A:middle
+intended to capture your
+sources across all your targets,
+
+00:17:55.296 --> 00:17:57.186 A:middle
+including possibly
+OS X and Watch.
+
+00:17:57.666 --> 00:17:59.266 A:middle
+All these features work there.
+
+00:17:59.266 --> 00:18:01.486 A:middle
+The APIs are present
+on all the platforms.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:59.266 --> 00:18:01.486 A:middle
+The APIs are present
+on all the platforms.
+
+00:18:01.936 --> 00:18:04.096 A:middle
+Just the thinning is
+particular to iOS.
+
+00:18:04.706 --> 00:18:05.476 A:middle
+Side bar end.
+
+00:18:07.166 --> 00:18:10.896 A:middle
+There's another new exciting
+data class that we introduced
+
+00:18:11.126 --> 00:18:14.246 A:middle
+in Xcode 7 and iOS 9 and
+that's Sprite atlases.
+
+00:18:15.366 --> 00:18:18.726 A:middle
+What this represents is
+an exciting combination
+
+00:18:19.026 --> 00:18:24.236 A:middle
+of asset catalogs and
+SpriteKit, allowing you
+
+00:18:24.236 --> 00:18:27.346 A:middle
+to organize your image
+assets in the normal way
+
+00:18:27.346 --> 00:18:29.136 A:middle
+in asset catalogs,
+and group them,
+
+00:18:29.386 --> 00:18:32.136 A:middle
+name them into a Sprite atlas,
+
+00:18:32.536 --> 00:18:36.086 A:middle
+and what this does is
+automatically creates texture
+
+00:18:36.086 --> 00:18:38.416 A:middle
+atlases at build time
+that you can retrieve
+
+00:18:38.476 --> 00:18:42.166 A:middle
+through the SK texture atlas
+class from those image assets.
+
+00:18:42.866 --> 00:18:44.296 A:middle
+The key thing here is,
+
+00:18:44.686 --> 00:18:49.156 A:middle
+if you have done all the usual
+organization on iPhone, iPad,
+
+00:18:50.036 --> 00:18:52.886 A:middle
+it will automatically
+create a thinned version
+
+00:18:53.406 --> 00:18:58.886 A:middle
+of those compiled texture
+atlases and treat those
+
+00:18:58.886 --> 00:19:02.436 A:middle
+as thinnable resources that
+will be thinned automatically
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:58.886 --> 00:19:02.436 A:middle
+as thinnable resources that
+will be thinned automatically
+
+00:19:02.706 --> 00:19:04.886 A:middle
+by the App Store and by the
+other workflows I'm going
+
+00:19:04.886 --> 00:19:07.806 A:middle
+to talk about in a moment.
+
+00:19:07.956 --> 00:19:12.356 A:middle
+So how do we get from asset
+catalogs to app thinning?
+
+00:19:12.456 --> 00:19:13.476 A:middle
+Well, it is really quite simple
+
+00:19:13.506 --> 00:19:14.616 A:middle
+and you may have
+guessed it already.
+
+00:19:15.196 --> 00:19:18.176 A:middle
+Every asset in the asset catalog
+has trademark up information
+
+00:19:18.456 --> 00:19:20.396 A:middle
+that describes what
+characteristics
+
+00:19:20.436 --> 00:19:23.046 A:middle
+that resource is
+pertinent and useful for.
+
+00:19:23.676 --> 00:19:28.136 A:middle
+At build time when we
+do the post processing,
+
+00:19:28.676 --> 00:19:30.956 A:middle
+these traits are used
+to route those resources
+
+00:19:30.956 --> 00:19:32.706 A:middle
+to the relevant thinned
+app variants.
+
+00:19:32.706 --> 00:19:35.566 A:middle
+It's as simple as that.
+
+00:19:35.636 --> 00:19:37.336 A:middle
+I would like to point
+out an important note.
+
+00:19:37.336 --> 00:19:40.526 A:middle
+Asset catalogs have
+been around for awhile.
+
+00:19:40.526 --> 00:19:42.206 A:middle
+They have always given
+you the ability at runtime
+
+00:19:42.206 --> 00:19:44.846 A:middle
+to select the right resource
+appropriate at runtime
+
+00:19:44.846 --> 00:19:47.986 A:middle
+to the device that's
+requesting that resource.
+
+00:19:48.566 --> 00:19:50.516 A:middle
+It is this very same algorithm
+
+00:19:50.516 --> 00:19:53.776 A:middle
+and the very same selection
+criteria used to do the routing
+
+00:19:53.776 --> 00:19:55.166 A:middle
+of the rich thinned
+app variants.
+
+00:19:55.386 --> 00:19:58.136 A:middle
+If your application is behaving
+correctly today on a range
+
+00:19:58.136 --> 00:20:01.156 A:middle
+of devices, odds are it will
+work well with app thinning,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:58.136 --> 00:20:01.156 A:middle
+of devices, odds are it will
+work well with app thinning,
+
+00:20:01.656 --> 00:20:03.966 A:middle
+because it is reallythe
+same mechanism.
+
+00:20:04.716 --> 00:20:08.786 A:middle
+Okay. I mentioned
+the word organization
+
+00:20:08.996 --> 00:20:11.176 A:middle
+in conjunction a
+little while ago.
+
+00:20:11.226 --> 00:20:13.676 A:middle
+I would like to emphasize
+that for a moment.
+
+00:20:14.126 --> 00:20:18.046 A:middle
+Cataloging efficiently in asset
+catalogs is absolutely key.
+
+00:20:18.936 --> 00:20:19.536 A:middle
+Why is that?
+
+00:20:19.936 --> 00:20:23.516 A:middle
+Because a robust mark up
+of your resources means
+
+00:20:23.516 --> 00:20:25.036 A:middle
+that there is less redundancy
+
+00:20:25.036 --> 00:20:27.326 A:middle
+in the slice application
+variants that are produced.
+
+00:20:28.066 --> 00:20:31.106 A:middle
+You don't have extra
+payload being produced
+
+00:20:31.106 --> 00:20:34.926 A:middle
+in those app variants that
+are never going to be used
+
+00:20:34.926 --> 00:20:37.916 A:middle
+at runtime on the target device
+that app variant is built for.
+
+00:20:39.366 --> 00:20:42.586 A:middle
+For example, even though it
+might have worked perfectly
+
+00:20:42.586 --> 00:20:46.206 A:middle
+before, it may not make sense
+to leave an asset as universal
+
+00:20:46.206 --> 00:20:48.086 A:middle
+if they are only used
+on one device family.
+
+00:20:48.326 --> 00:20:52.056 A:middle
+Consider, for example, some
+button art work for a pop
+
+00:20:52.056 --> 00:20:54.826 A:middle
+over UI for your iPad
+version of your app,
+
+00:20:54.826 --> 00:20:57.306 A:middle
+but that never gets presented
+
+00:20:57.306 --> 00:20:59.116 A:middle
+on the iPhone versions
+of the application.
+
+00:20:59.396 --> 00:21:00.876 A:middle
+It would have worked
+fine before to have it
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:59.396 --> 00:21:00.876 A:middle
+It would have worked
+fine before to have it
+
+00:21:00.876 --> 00:21:02.606 A:middle
+as a universal asset
+and drop it in there.
+
+00:21:02.886 --> 00:21:06.356 A:middle
+However, it may now be a good
+idea to revisit and categorize
+
+00:21:06.356 --> 00:21:08.746 A:middle
+that appropriately so you
+don't have it delivered
+
+00:21:08.746 --> 00:21:10.116 A:middle
+to the iPhone versions
+of your apps
+
+00:21:10.406 --> 00:21:14.316 A:middle
+where it doesn't
+make much sense.
+
+00:21:14.316 --> 00:21:17.616 A:middle
+Okay. So those are the basics.
+
+00:21:17.616 --> 00:21:19.986 A:middle
+Those are the theories
+of how this system works.
+
+00:21:19.986 --> 00:21:23.786 A:middle
+Let's get practical and talk
+about some real world workflows
+
+00:21:23.826 --> 00:21:25.016 A:middle
+and how this impacts them.
+
+00:21:25.876 --> 00:21:28.566 A:middle
+Let's talk first about creation.
+
+00:21:28.566 --> 00:21:30.136 A:middle
+How do you create
+asset catalogs?
+
+00:21:30.796 --> 00:21:34.246 A:middle
+The predominant way in which you
+create asset catalog content is
+
+00:21:34.246 --> 00:21:36.346 A:middle
+through the asset
+catalog editor in Xcode.
+
+00:21:38.076 --> 00:21:41.346 A:middle
+This is easy to use user
+interface in the IDE.
+
+00:21:41.346 --> 00:21:44.566 A:middle
+You may be familiar with it.
+
+00:21:44.566 --> 00:21:49.996 A:middle
+All it takes to create a new
+asset is to add a new item,
+
+00:21:51.846 --> 00:21:53.606 A:middle
+and there's a range
+you can see here.
+
+00:21:53.606 --> 00:21:56.606 A:middle
+Here we see the data sets, image
+sets, Sprite atlases as well
+
+00:21:56.606 --> 00:21:59.196 A:middle
+as the other data types
+for other platforms.
+
+00:21:59.196 --> 00:22:04.046 A:middle
+When you add this to your
+project, you are presented
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:59.196 --> 00:22:04.046 A:middle
+When you add this to your
+project, you are presented
+
+00:22:04.046 --> 00:22:06.656 A:middle
+with an organization array
+and spectrum on the left
+
+00:22:06.656 --> 00:22:09.206 A:middle
+that shows you the device traits
+that you can catalogue under,
+
+00:22:09.206 --> 00:22:12.746 A:middle
+and expose how varied
+and diverse you want
+
+00:22:12.746 --> 00:22:14.136 A:middle
+to provide resources for.
+
+00:22:14.706 --> 00:22:18.166 A:middle
+You drop your assets into
+the appropriate wells,
+
+00:22:18.586 --> 00:22:23.056 A:middle
+and you are off to the
+races, and you're done.
+
+00:22:23.276 --> 00:22:23.956 A:middle
+So that's great.
+
+00:22:24.006 --> 00:22:25.086 A:middle
+That's really easy to use.
+
+00:22:25.986 --> 00:22:30.066 A:middle
+What if your team cannot use
+Xcode for asset production?
+
+00:22:30.506 --> 00:22:34.636 A:middle
+What if you are a game studio
+that has a heavy investment
+
+00:22:34.636 --> 00:22:36.736 A:middle
+in an existing asset
+tool chain or pipeline
+
+00:22:36.936 --> 00:22:39.496 A:middle
+where it is not practical
+to put Xcode in front
+
+00:22:39.496 --> 00:22:42.046 A:middle
+of the content engineers or the
+designers that are producing
+
+00:22:42.046 --> 00:22:45.556 A:middle
+and are needing to attribute
+the art work appropriately?
+
+00:22:46.726 --> 00:22:50.086 A:middle
+I'm happy to say that
+we consider this,
+
+00:22:50.646 --> 00:22:53.716 A:middle
+and we carefully designed
+the asset catalog feature
+
+00:22:53.716 --> 00:22:56.506 A:middle
+in conjunction with thinning
+to accommodate these scenarios.
+
+00:22:57.986 --> 00:23:00.166 A:middle
+Specifically, we've
+designed it in a way
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:57.986 --> 00:23:00.166 A:middle
+Specifically, we've
+designed it in a way
+
+00:23:00.166 --> 00:23:03.946 A:middle
+where it should be very easy to
+export image sets and data sets
+
+00:23:03.946 --> 00:23:05.526 A:middle
+from existing asset pipelines.
+
+00:23:06.796 --> 00:23:07.996 A:middle
+How are we going
+to accomplish this?
+
+00:23:07.996 --> 00:23:11.806 A:middle
+We are going to do this
+through the XC asset source
+
+00:23:11.836 --> 00:23:12.716 A:middle
+artifact format.
+
+00:23:13.386 --> 00:23:16.296 A:middle
+I'm happy to say that we
+are going to be documenting
+
+00:23:16.706 --> 00:23:19.646 A:middle
+and publishing to allow
+external tool chains
+
+00:23:19.646 --> 00:23:22.856 A:middle
+to implement this format easily.
+
+00:23:23.446 --> 00:23:27.376 A:middle
+Now, it really is
+not much of a format
+
+00:23:27.376 --> 00:23:30.216 A:middle
+because it is a simple folder
+structure in JSON markup
+
+00:23:30.216 --> 00:23:31.336 A:middle
+and really easy to work with.
+
+00:23:32.146 --> 00:23:37.806 A:middle
+I want to emphasize, this is
+not some kind of import format
+
+00:23:37.806 --> 00:23:40.546 A:middle
+that you sort of create and
+then you import into Xcode
+
+00:23:40.546 --> 00:23:42.086 A:middle
+and then it becomes
+a project artifact.
+
+00:23:42.386 --> 00:23:44.776 A:middle
+This is literally the
+source artifact format
+
+00:23:44.776 --> 00:23:46.936 A:middle
+that the Xcode build
+system works with natively
+
+00:23:47.466 --> 00:23:49.266 A:middle
+at build time to process
+
+00:23:49.266 --> 00:23:51.356 A:middle
+and produce your final
+runtime artifacts.
+
+00:23:52.426 --> 00:23:56.306 A:middle
+Let's take a look at what
+this means in detail.
+
+00:23:56.876 --> 00:24:00.006 A:middle
+We take the previous example
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:56.876 --> 00:24:00.006 A:middle
+We take the previous example
+
+00:24:00.006 --> 00:24:02.536 A:middle
+of the AirPlay icon
+art work and look.
+
+00:24:02.536 --> 00:24:03.966 A:middle
+This is what it looks
+like on disk.
+
+00:24:04.006 --> 00:24:05.156 A:middle
+This is in fact the format.
+
+00:24:05.726 --> 00:24:06.336 A:middle
+Very simple.
+
+00:24:06.916 --> 00:24:09.496 A:middle
+All it consists of is a
+folder naming convention,
+
+00:24:09.496 --> 00:24:10.866 A:middle
+consisting of the
+name of the asset,
+
+00:24:10.866 --> 00:24:13.456 A:middle
+this is the name you
+retrieve it from in code
+
+00:24:13.546 --> 00:24:18.506 A:middle
+with UI image names, and
+then the individual art work
+
+00:24:18.506 --> 00:24:21.096 A:middle
+resources contained
+within that folder.
+
+00:24:21.876 --> 00:24:24.476 A:middle
+And I want to point out that
+even though this particular
+
+00:24:24.476 --> 00:24:27.626 A:middle
+example uses a pretty well-known
+semi-canonical file naming
+
+00:24:27.626 --> 00:24:30.306 A:middle
+convention for showing scale
+factor and device idiom,
+
+00:24:30.886 --> 00:24:33.976 A:middle
+there is no requirement
+to have any specific file
+
+00:24:33.976 --> 00:24:34.556 A:middle
+naming convention.
+
+00:24:34.556 --> 00:24:36.756 A:middle
+You can use whatever is
+natural to your workflow
+
+00:24:36.756 --> 00:24:38.416 A:middle
+or tool chain or
+whatever you like.
+
+00:24:39.276 --> 00:24:39.946 A:middle
+Why is that?
+
+00:24:40.496 --> 00:24:42.896 A:middle
+Because there's this all
+important third element
+
+00:24:42.976 --> 00:24:45.276 A:middle
+to this design, which is
+the contents.JSON file.
+
+00:24:45.856 --> 00:24:50.366 A:middle
+The contents.JSON
+file is the file
+
+00:24:50.366 --> 00:24:52.666 A:middle
+that contains all the
+asset markup information
+
+00:24:52.666 --> 00:24:54.026 A:middle
+and joins everything together
+
+00:24:54.026 --> 00:24:56.876 A:middle
+and tells the system
+what traits are relevant
+
+00:24:56.936 --> 00:24:59.346 A:middle
+for a particular resource.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:00.126 --> 00:25:01.846 A:middle
+So if we were to actually look
+
+00:25:01.846 --> 00:25:06.186 A:middle
+at the AirPlay icon
+example we showed
+
+00:25:06.186 --> 00:25:08.916 A:middle
+in the Xcode editor before,
+this is what it looks like.
+
+00:25:09.416 --> 00:25:11.316 A:middle
+As you can see, it
+is straightforward.
+
+00:25:11.316 --> 00:25:14.316 A:middle
+It is just an array of
+the individual images.
+
+00:25:14.316 --> 00:25:18.706 A:middle
+You can see the individual file
+names and then the device idiom
+
+00:25:18.776 --> 00:25:20.656 A:middle
+and scale factor
+markup information.
+
+00:25:21.306 --> 00:25:24.146 A:middle
+These properties, these key
+value pairs that you see here,
+
+00:25:24.146 --> 00:25:26.106 A:middle
+these are the things
+that will be documented
+
+00:25:26.106 --> 00:25:27.836 A:middle
+in the SES source
+artifact format.
+
+00:25:28.626 --> 00:25:33.436 A:middle
+Taking the example one
+level further, name data,
+
+00:25:33.576 --> 00:25:36.626 A:middle
+what we call data sets,
+look unsurprisingly similar.
+
+00:25:37.376 --> 00:25:39.506 A:middle
+Again, the file names are
+
+00:25:39.506 --> 00:25:42.786 A:middle
+for the individual resources are
+there and then the attribution
+
+00:25:42.786 --> 00:25:45.206 A:middle
+of universal type
+identifier and memory
+
+00:25:45.276 --> 00:25:48.666 A:middle
+or graphics future set class.
+
+00:25:50.216 --> 00:25:52.396 A:middle
+And you can see it is really
+quite easy to work with.
+
+00:25:52.396 --> 00:25:54.326 A:middle
+You can see from
+the way this works,
+
+00:25:54.326 --> 00:25:56.886 A:middle
+how they join the file
+names with the properties
+
+00:25:57.326 --> 00:26:00.056 A:middle
+that this is why it doesn't
+matter what file name you put
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:57.326 --> 00:26:00.056 A:middle
+that this is why it doesn't
+matter what file name you put
+
+00:26:00.056 --> 00:26:03.236 A:middle
+into those data sets
+and image sets.
+
+00:26:03.336 --> 00:26:07.776 A:middle
+What is important is that you
+get this contents.JSON correct.
+
+00:26:08.776 --> 00:26:10.576 A:middle
+What does this allow you to do?
+
+00:26:10.576 --> 00:26:12.236 A:middle
+What is this for?
+
+00:26:12.776 --> 00:26:16.056 A:middle
+I would like to work through
+a hypothetical example here
+
+00:26:16.056 --> 00:26:18.486 A:middle
+of image set creation
+with Xcode.
+
+00:26:18.986 --> 00:26:20.456 A:middle
+The hypothetical
+workflow I'm going
+
+00:26:20.456 --> 00:26:22.986 A:middle
+to show here is using the
+PhotoShop CC generator
+
+00:26:22.986 --> 00:26:23.606 A:middle
+in PhotoShop.
+
+00:26:26.526 --> 00:26:29.766 A:middle
+So let's say your designer
+created beautiful art work
+
+00:26:29.766 --> 00:26:32.696 A:middle
+and they decided iPads
+are going to be blue today
+
+00:26:32.696 --> 00:26:33.886 A:middle
+and iPhones will be red.
+
+00:26:33.886 --> 00:26:35.106 A:middle
+That's just the way we roll.
+
+00:26:35.726 --> 00:26:37.466 A:middle
+Designers do that sometimes.
+
+00:26:37.596 --> 00:26:41.526 A:middle
+They have the beautiful
+master file and they set
+
+00:26:41.526 --> 00:26:44.206 A:middle
+out all these variants here.
+
+00:26:44.446 --> 00:26:47.186 A:middle
+They actually set
+their master file
+
+00:26:47.186 --> 00:26:49.316 A:middle
+up with a generator workflow,
+
+00:26:49.316 --> 00:26:50.996 A:middle
+turned on image asset
+generation,
+
+00:26:51.456 --> 00:26:53.766 A:middle
+and have their layer
+list constructed
+
+00:26:53.946 --> 00:26:57.496 A:middle
+with the appropriate naming
+coventions and default layer
+
+00:26:57.896 --> 00:27:00.216 A:middle
+to export directly
+into an image set,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:57.896 --> 00:27:00.216 A:middle
+to export directly
+into an image set,
+
+00:27:00.996 --> 00:27:03.996 A:middle
+and they have a special hacked
+version of the generator
+
+00:27:04.396 --> 00:27:07.456 A:middle
+that they carefully extended,
+this is the hypothetical piece
+
+00:27:07.456 --> 00:27:10.836 A:middle
+of my example, to
+produce the contents.JSON.
+
+00:27:10.836 --> 00:27:15.096 A:middle
+Here is what the output would
+be from the PhotoShop workflow.
+
+00:27:15.546 --> 00:27:17.506 A:middle
+For those who used
+generator before,
+
+00:27:17.816 --> 00:27:20.656 A:middle
+the photo layout
+will be familiar.
+
+00:27:20.656 --> 00:27:21.706 A:middle
+There is the assets folder.
+
+00:27:21.996 --> 00:27:25.556 A:middle
+Inside is the image
+set that was generated,
+
+00:27:25.656 --> 00:27:30.566 A:middle
+all of the different art work
+entities and the contents.JSON.
+
+00:27:30.566 --> 00:27:34.006 A:middle
+All of that is required to make
+this work is drag that image set
+
+00:27:34.006 --> 00:27:35.626 A:middle
+over and drop it
+into the folder,
+
+00:27:35.626 --> 00:27:39.766 A:middle
+underneath the XE assets folder
+and you're off to the races.
+
+00:27:40.326 --> 00:27:42.986 A:middle
+That's it.
+
+00:27:43.356 --> 00:27:46.256 A:middle
+A few words about this
+kind of dynamic integration
+
+00:27:46.256 --> 00:27:47.186 A:middle
+with your Xcode project.
+
+00:27:48.076 --> 00:27:50.906 A:middle
+The only requirement is
+
+00:27:50.906 --> 00:27:53.656 A:middle
+that your project must
+have an XE asset folder.
+
+00:27:53.946 --> 00:27:55.176 A:middle
+That's really the
+only requirement
+
+00:27:55.176 --> 00:27:58.396 A:middle
+from a project file level, from
+an Xcode project file level.
+
+00:27:59.656 --> 00:28:04.976 A:middle
+Anything contained within that
+can have an arbitrary hierarchy,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:59.656 --> 00:28:04.976 A:middle
+Anything contained within that
+can have an arbitrary hierarchy,
+
+00:28:04.976 --> 00:28:05.856 A:middle
+arbitrary structure.
+
+00:28:06.446 --> 00:28:09.896 A:middle
+It has to conform to the image
+set and data set, you can nest
+
+00:28:09.926 --> 00:28:12.456 A:middle
+that arbitrarily deep and you
+can use your own file system
+
+00:28:12.456 --> 00:28:14.406 A:middle
+organization underneath that.
+
+00:28:14.406 --> 00:28:18.016 A:middle
+At build time, Xcode
+will recursively descend
+
+00:28:18.256 --> 00:28:21.066 A:middle
+that hierarchy, discover all
+the image sets and data sets,
+
+00:28:21.066 --> 00:28:24.366 A:middle
+the spread atlases and
+automatically build them,
+
+00:28:24.656 --> 00:28:27.476 A:middle
+providing that you
+authored the image sets
+
+00:28:27.476 --> 00:28:31.316 A:middle
+and data sets correctly.
+
+00:28:32.316 --> 00:28:34.386 A:middle
+Now we know how to
+create asset catalogs.
+
+00:28:35.106 --> 00:28:38.786 A:middle
+Let's move to the
+next step, building.
+
+00:28:39.246 --> 00:28:40.716 A:middle
+So perhaps the most common
+
+00:28:40.716 --> 00:28:43.216 A:middle
+and most important
+build workflow is just
+
+00:28:43.216 --> 00:28:44.676 A:middle
+when you are sitting
+there working
+
+00:28:44.676 --> 00:28:47.116 A:middle
+on your app you have a tether
+device or you are working
+
+00:28:47.116 --> 00:28:49.346 A:middle
+in a simulator, working
+on a feature.
+
+00:28:49.756 --> 00:28:51.296 A:middle
+How does thinning apply
+in that situation?
+
+00:28:52.026 --> 00:28:54.596 A:middle
+I'm happy to say that the build
+
+00:28:54.596 --> 00:28:57.496 A:middle
+and run workflow
+automatically thins resources
+
+00:28:57.496 --> 00:29:01.666 A:middle
+for the currently active
+run destination in Xcode.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:57.496 --> 00:29:01.666 A:middle
+for the currently active
+run destination in Xcode.
+
+00:29:02.706 --> 00:29:05.106 A:middle
+So what this means is that
+every time you hit build,
+
+00:29:05.106 --> 00:29:08.406 A:middle
+it is actually only going
+to consider and produce
+
+00:29:08.406 --> 00:29:12.336 A:middle
+and automatically create the
+proper runtime asset catalog
+
+00:29:12.696 --> 00:29:15.666 A:middle
+for the target device
+that you are using.
+
+00:29:16.296 --> 00:29:19.876 A:middle
+And this is supported
+for all simulator
+
+00:29:19.876 --> 00:29:21.386 A:middle
+and device run destinations.
+
+00:29:22.476 --> 00:29:24.256 A:middle
+So it is a really great way
+
+00:29:24.256 --> 00:29:28.166 A:middle
+to immediately take
+advantage of thinning.
+
+00:29:29.676 --> 00:29:33.056 A:middle
+This functionality is also
+triggered by or controlled
+
+00:29:33.056 --> 00:29:35.076 A:middle
+by a new build setting
+that has been exposed
+
+00:29:35.076 --> 00:29:37.466 A:middle
+in the asset catalog
+sections of the target editor.
+
+00:29:37.466 --> 00:29:40.326 A:middle
+It is called enable building
+only active resources.
+
+00:29:40.816 --> 00:29:42.486 A:middle
+This is handy.
+
+00:29:42.536 --> 00:29:45.206 A:middle
+What if you're trying to figure
+
+00:29:45.206 --> 00:29:47.896 A:middle
+out if a problem is being
+introduced by thinning
+
+00:29:47.896 --> 00:29:49.826 A:middle
+or what the impact of
+thinning is overall
+
+00:29:49.826 --> 00:29:51.146 A:middle
+on a particular target device.
+
+00:29:51.666 --> 00:29:57.406 A:middle
+You can toggle this on
+and off for that purpose.
+
+00:29:57.596 --> 00:29:59.926 A:middle
+Some other benefits of
+this build workflow is
+
+00:29:59.926 --> 00:30:02.496 A:middle
+that it dramatically
+can speed up iterative
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:29:59.926 --> 00:30:02.496 A:middle
+that it dramatically
+can speed up iterative
+
+00:30:02.496 --> 00:30:04.726 A:middle
+or incremental builds especially
+
+00:30:04.726 --> 00:30:06.486 A:middle
+if your application
+is very content heavy.
+
+00:30:06.946 --> 00:30:11.146 A:middle
+It really only processes
+and works with the resources
+
+00:30:11.146 --> 00:30:13.506 A:middle
+that are appropriate for that
+target device at the time.
+
+00:30:13.506 --> 00:30:15.406 A:middle
+It doesn't have to go through
+everything like it used
+
+00:30:15.406 --> 00:30:17.046 A:middle
+to before when it was
+building universal,
+
+00:30:17.426 --> 00:30:19.366 A:middle
+a universal version
+of your application.
+
+00:30:20.836 --> 00:30:22.576 A:middle
+Another key benefit
+is this allows you
+
+00:30:22.576 --> 00:30:25.356 A:middle
+to easily test the impact
+of cataloging changes
+
+00:30:25.666 --> 00:30:26.646 A:middle
+on the thinned outputs
+
+00:30:26.646 --> 00:30:28.516 A:middle
+for a particular device
+or set of devices.
+
+00:30:28.946 --> 00:30:32.046 A:middle
+If you are trying to understand
+the impact of the sizing
+
+00:30:32.046 --> 00:30:35.586 A:middle
+of your overall built
+application or other aspects
+
+00:30:35.586 --> 00:30:38.846 A:middle
+of your user experience, you can
+make those cataloging changes
+
+00:30:38.956 --> 00:30:41.436 A:middle
+quickly, build and
+run for that device
+
+00:30:41.436 --> 00:30:43.736 A:middle
+and then check other
+devices by switching
+
+00:30:43.736 --> 00:30:47.136 A:middle
+between the other devices and
+the run destination in Xcode
+
+00:30:47.416 --> 00:30:53.366 A:middle
+and test those changes
+fairly quickly and easily.
+
+00:30:53.736 --> 00:30:54.716 A:middle
+Now we've covered build.
+
+00:30:55.726 --> 00:30:56.506 A:middle
+What's next?
+
+00:30:56.696 --> 00:30:57.946 A:middle
+Well, distribution.
+
+00:30:57.996 --> 00:31:01.986 A:middle
+This is the essential
+step involved
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:57.996 --> 00:31:01.986 A:middle
+This is the essential
+step involved
+
+00:31:02.036 --> 00:31:03.256 A:middle
+with thinned applications.
+
+00:31:05.626 --> 00:31:08.416 A:middle
+Now, there are many
+ways that we allow you
+
+00:31:08.416 --> 00:31:10.216 A:middle
+to distribute your
+iOS applications.
+
+00:31:11.116 --> 00:31:13.246 A:middle
+Enable you to distribute
+your iOS applications.
+
+00:31:13.606 --> 00:31:15.786 A:middle
+The biggest and most
+significant one, of course,
+
+00:31:15.786 --> 00:31:18.086 A:middle
+is the one that your end
+users, the customers are using
+
+00:31:18.696 --> 00:31:19.786 A:middle
+through the App Store purchase.
+
+00:31:20.166 --> 00:31:21.586 A:middle
+This is the mechanism
+Anders alluded
+
+00:31:21.586 --> 00:31:25.646 A:middle
+to where you supply
+your universal IPA.
+
+00:31:26.236 --> 00:31:27.376 A:middle
+The store does the work,
+
+00:31:27.486 --> 00:31:30.636 A:middle
+processes all the
+thinned variants.
+
+00:31:30.636 --> 00:31:32.006 A:middle
+When the user is
+purchasing the app,
+
+00:31:32.036 --> 00:31:34.906 A:middle
+it's going to automatically
+select the right device variant
+
+00:31:34.906 --> 00:31:36.466 A:middle
+from the store, and
+download and installs it.
+
+00:31:36.466 --> 00:31:37.536 A:middle
+You're done, fully automatic.
+
+00:31:38.206 --> 00:31:38.896 A:middle
+Nothing to worry about.
+
+00:31:39.946 --> 00:31:42.926 A:middle
+Before you release the
+application, you may want
+
+00:31:42.926 --> 00:31:45.196 A:middle
+to make that same exact
+experience available
+
+00:31:45.196 --> 00:31:47.696 A:middle
+to your beta C testers.
+
+00:31:48.286 --> 00:31:50.556 A:middle
+We will be supporting test
+distribution through --
+
+00:31:50.556 --> 00:31:52.876 A:middle
+thinned distribution
+through TestFlight as well.
+
+00:31:52.876 --> 00:31:58.486 A:middle
+Then, of course, there is ad
+hoc and enterprise distribution
+
+00:31:58.486 --> 00:32:00.906 A:middle
+which is a very common way for
+you to distribute applications
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:58.486 --> 00:32:00.906 A:middle
+which is a very common way for
+you to distribute applications
+
+00:32:01.246 --> 00:32:03.936 A:middle
+in your organization or to
+your team for QA testing
+
+00:32:03.936 --> 00:32:04.666 A:middle
+or that kind of thing.
+
+00:32:05.516 --> 00:32:08.806 A:middle
+That's an incredibly
+important way of distribution.
+
+00:32:09.216 --> 00:32:12.166 A:middle
+We have built thinning
+support into that as well.
+
+00:32:12.406 --> 00:32:15.826 A:middle
+Finally, there's the Xcode
+service and ECos server.
+
+00:32:16.586 --> 00:32:18.946 A:middle
+That has been upgraded
+
+00:32:18.946 --> 00:32:21.556 A:middle
+to support distributing
+thinned applications as well.
+
+00:32:21.966 --> 00:32:25.486 A:middle
+I'll go into some
+details in a moment.
+
+00:32:25.826 --> 00:32:29.706 A:middle
+All of the methods I
+outlined are fairly automatic.
+
+00:32:29.706 --> 00:32:31.796 A:middle
+You don't have to
+really do much.
+
+00:32:31.796 --> 00:32:34.396 A:middle
+Ad hoc enterprise solution
+is something I want
+
+00:32:34.396 --> 00:32:35.626 A:middle
+to focus on for a moment.
+
+00:32:35.626 --> 00:32:39.456 A:middle
+That is the one where you will
+be hosting this distribution
+
+00:32:39.866 --> 00:32:43.076 A:middle
+flow yourself and you may need
+to understand some of the pieces
+
+00:32:43.076 --> 00:32:44.826 A:middle
+of how this is put
+together and how it works.
+
+00:32:45.436 --> 00:32:46.216 A:middle
+Let's talk about that.
+
+00:32:46.216 --> 00:32:46.836 A:middle
+How does that work?
+
+00:32:48.776 --> 00:32:52.356 A:middle
+Well, one functionality
+we've added to Xcode is
+
+00:32:52.356 --> 00:32:53.586 A:middle
+that you can now export
+
+00:32:53.586 --> 00:32:55.686 A:middle
+for a specific device
+from the organizer.
+
+00:32:56.546 --> 00:32:58.856 A:middle
+This is great if you are
+trying to test a build
+
+00:32:58.856 --> 00:33:01.066 A:middle
+or hand off a build to
+somebody with a specific device.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:58.856 --> 00:33:01.066 A:middle
+or hand off a build to
+somebody with a specific device.
+
+00:33:01.066 --> 00:33:03.126 A:middle
+You can immediately
+create an IPA
+
+00:33:03.126 --> 00:33:05.506 A:middle
+for that specific device
+directly from the organizer,
+
+00:33:06.066 --> 00:33:10.806 A:middle
+correctly provisioned
+for that device.
+
+00:33:10.946 --> 00:33:14.776 A:middle
+Coming in a future seed we
+will be providing you a way
+
+00:33:15.166 --> 00:33:17.716 A:middle
+to export all of the
+thinned variants for all
+
+00:33:17.716 --> 00:33:21.006 A:middle
+of the compatible devices giving
+you one complete distribution
+
+00:33:21.006 --> 00:33:22.986 A:middle
+unit for all the possible
+supportive devices
+
+00:33:22.986 --> 00:33:25.856 A:middle
+of your application
+for a given release.
+
+00:33:26.136 --> 00:33:27.086 A:middle
+This is important.
+
+00:33:27.086 --> 00:33:31.116 A:middle
+You may not know or be
+able to generate all
+
+00:33:31.116 --> 00:33:32.926 A:middle
+of the thinned variants
+for all the devices.
+
+00:33:32.926 --> 00:33:35.256 A:middle
+You want to get the full set.
+
+00:33:35.706 --> 00:33:39.186 A:middle
+What this will do
+is actually process
+
+00:33:39.246 --> 00:33:41.736 A:middle
+that universal app build
+archive that you have,
+
+00:33:42.256 --> 00:33:46.406 A:middle
+produce all of the thinned
+variants that are appropriate
+
+00:33:46.406 --> 00:33:49.646 A:middle
+for all of the different
+compatible devices and put them
+
+00:33:49.646 --> 00:33:51.896 A:middle
+into one set of products.
+
+00:33:52.446 --> 00:33:57.076 A:middle
+But now you've got a big
+bushel full of applications.
+
+00:33:57.966 --> 00:34:03.106 A:middle
+You may ask yourself how do
+I get the right application
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:57.966 --> 00:34:03.106 A:middle
+You may ask yourself how do
+I get the right application
+
+00:34:03.106 --> 00:34:04.076 A:middle
+to the right device?
+
+00:34:04.496 --> 00:34:05.866 A:middle
+That's kind of a
+big problem now.
+
+00:34:06.636 --> 00:34:09.656 A:middle
+Well, the most common way that
+apps are delivered to devices
+
+00:34:09.656 --> 00:34:11.036 A:middle
+with enterprise and
+ad hoc, of course,
+
+00:34:11.036 --> 00:34:12.266 A:middle
+is over the air installation.
+
+00:34:12.266 --> 00:34:15.606 A:middle
+I would like to go through
+that and how that works
+
+00:34:15.606 --> 00:34:16.456 A:middle
+with thinning for a moment.
+
+00:34:16.936 --> 00:34:20.456 A:middle
+The first step is to save for ad
+hoc or enterprise distribution.
+
+00:34:20.985 --> 00:34:25.136 A:middle
+It is important here that
+you include the distribution
+
+00:34:25.136 --> 00:34:28.456 A:middle
+manifest option, the check
+box on the lower left there.
+
+00:34:29.775 --> 00:34:30.576 A:middle
+What does this do?
+
+00:34:32.146 --> 00:34:35.616 A:middle
+Well, what this does is
+when Xcode is generating
+
+00:34:35.616 --> 00:34:37.606 A:middle
+that exported set of IPAs,
+
+00:34:37.606 --> 00:34:42.346 A:middle
+it is going to generate a
+manifest list containing URLs
+
+00:34:42.346 --> 00:34:44.396 A:middle
+for each of the app
+variants that it produces.
+
+00:34:45.306 --> 00:34:49.186 A:middle
+What's more, it is going
+to index all of these URLs
+
+00:34:49.306 --> 00:34:52.386 A:middle
+by the supported product
+type of that app variant.
+
+00:34:53.876 --> 00:34:59.376 A:middle
+The impact of this is that when
+a device tries to pull that,
+
+00:34:59.376 --> 00:35:00.736 A:middle
+tries to install
+one of the apps,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:59.376 --> 00:35:00.736 A:middle
+tries to install
+one of the apps,
+
+00:35:01.066 --> 00:35:05.256 A:middle
+using the over the air
+manifest PO list, it will walk
+
+00:35:05.256 --> 00:35:08.136 A:middle
+through the list, find the
+appropriate URL for its device,
+
+00:35:08.236 --> 00:35:11.936 A:middle
+product type, and install
+it and pull that one down.
+
+00:35:12.376 --> 00:35:12.926 A:middle
+That's how it works.
+
+00:35:13.126 --> 00:35:15.296 A:middle
+This is a mechanism
+conceptually very similar
+
+00:35:15.616 --> 00:35:17.206 A:middle
+to what actually
+happens with the store
+
+00:35:17.676 --> 00:35:18.706 A:middle
+with your thinned application,
+
+00:35:19.036 --> 00:35:21.466 A:middle
+but all of these moving
+pieces are all hosted by you
+
+00:35:21.866 --> 00:35:24.496 A:middle
+on your Web server and
+through the mechanisms produced
+
+00:35:24.496 --> 00:35:25.046 A:middle
+by Xcode.
+
+00:35:25.586 --> 00:35:28.746 A:middle
+What if we take it
+one step even further?
+
+00:35:30.006 --> 00:35:32.676 A:middle
+That's what the Xcode server
+continuous integration
+
+00:35:32.676 --> 00:35:33.326 A:middle
+service does.
+
+00:35:33.906 --> 00:35:39.676 A:middle
+What Xcode server
+does is it turns all
+
+00:35:39.676 --> 00:35:41.296 A:middle
+of this mechanism
+I just described
+
+00:35:41.296 --> 00:35:43.566 A:middle
+into one turnkey solution
+for building, hosting
+
+00:35:43.566 --> 00:35:44.946 A:middle
+and distributing thinned apps,
+
+00:35:45.166 --> 00:35:49.156 A:middle
+including hosting
+on-demand asset packs.
+
+00:35:50.926 --> 00:35:52.556 A:middle
+It is quite simple.
+
+00:35:52.846 --> 00:35:56.606 A:middle
+The Xcode server, you set up
+your integration box in Xcode
+
+00:35:56.606 --> 00:35:59.386 A:middle
+in conjunction with your
+Xcode server deployment.
+
+00:35:59.896 --> 00:36:03.996 A:middle
+The bot builds your application
+automatically, produces all
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:35:59.896 --> 00:36:03.996 A:middle
+The bot builds your application
+automatically, produces all
+
+00:36:03.996 --> 00:36:06.466 A:middle
+of the variants, produces
+the manifest P list
+
+00:36:07.066 --> 00:36:10.026 A:middle
+and even wraps a nice
+Web service around it
+
+00:36:10.026 --> 00:36:13.406 A:middle
+where you point the device
+at the Xcode server website
+
+00:36:13.406 --> 00:36:17.086 A:middle
+and select a particular build,
+all you need to do is click
+
+00:36:17.086 --> 00:36:18.886 A:middle
+on the install button and all
+
+00:36:18.886 --> 00:36:21.406 A:middle
+of the mechanism I previously
+described of referencing
+
+00:36:21.406 --> 00:36:23.786 A:middle
+through the manifest P list,
+pulling the appropriate variant,
+
+00:36:23.786 --> 00:36:25.476 A:middle
+it all happens automatically.
+
+00:36:26.546 --> 00:36:28.406 A:middle
+It is simple as pointing
+your device at the
+
+00:36:28.406 --> 00:36:30.086 A:middle
+to the Web server
+portal and going.
+
+00:36:30.716 --> 00:36:33.856 A:middle
+I encourage you if
+you want to get a feel
+
+00:36:33.856 --> 00:36:37.586 A:middle
+for how everything moves around,
+when it becomes available,
+
+00:36:37.586 --> 00:36:39.166 A:middle
+I encourage you to look at this.
+
+00:36:39.166 --> 00:36:41.546 A:middle
+This is the same
+pattern you might use
+
+00:36:41.546 --> 00:36:45.446 A:middle
+to build your own
+enterprise distribution
+
+00:36:45.446 --> 00:36:47.926 A:middle
+or ad hoc distribution workflow
+where you host things yourself.
+
+00:36:48.906 --> 00:36:50.166 A:middle
+None of these pieces are things
+
+00:36:50.166 --> 00:36:51.606 A:middle
+that you couldn't
+build yourself.
+
+00:36:52.476 --> 00:36:56.506 A:middle
+The Xcode service, to
+wrap that piece up,
+
+00:36:56.506 --> 00:36:59.606 A:middle
+is a streamlined
+installation method
+
+00:36:59.896 --> 00:37:02.636 A:middle
+for thinned app variants using
+the over the air manifest.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:59.896 --> 00:37:02.636 A:middle
+for thinned app variants using
+the over the air manifest.
+
+00:37:03.426 --> 00:37:09.406 A:middle
+Nice, simple solution, one stop.
+
+00:37:09.606 --> 00:37:13.526 A:middle
+Okay. So now we've talked about
+how to create asset catalogs
+
+00:37:13.526 --> 00:37:14.586 A:middle
+to enable app slicing.
+
+00:37:15.026 --> 00:37:17.656 A:middle
+We talked about how
+that integrates
+
+00:37:17.656 --> 00:37:19.616 A:middle
+with your build workflows
+and we talked
+
+00:37:19.616 --> 00:37:21.306 A:middle
+about the different
+methods for distribution
+
+00:37:21.306 --> 00:37:22.906 A:middle
+and how app thinning
+interacts with those.
+
+00:37:23.866 --> 00:37:25.226 A:middle
+With that I will hand it back
+
+00:37:25.226 --> 00:37:26.906 A:middle
+over to Anders for
+the conclusion.
+
+00:37:28.516 --> 00:37:31.526 A:middle
+[Applause]
+
+00:37:32.026 --> 00:37:32.626 A:middle
+&gt;&gt; ANDERS BERTELRUD:
+Thank you, Patrick.
+
+00:37:33.716 --> 00:37:35.556 A:middle
+All right.
+
+00:37:35.676 --> 00:37:39.136 A:middle
+So in this session we have seen
+quickly how the app distribution
+
+00:37:39.136 --> 00:37:44.726 A:middle
+workflow works today, how app
+thinning is improving on that;
+
+00:37:45.756 --> 00:37:49.276 A:middle
+the ways in which you can
+help this be more efficient
+
+00:37:49.276 --> 00:37:52.846 A:middle
+by tagging your assets
+properly and by using some
+
+00:37:52.846 --> 00:37:55.136 A:middle
+of the distribution
+features we have.
+
+00:37:56.466 --> 00:37:59.556 A:middle
+And what this means for your
+workflow in terms of testing
+
+00:37:59.556 --> 00:38:00.886 A:middle
+and then submitting
+to the App Store.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:37:59.556 --> 00:38:00.886 A:middle
+and then submitting
+to the App Store.
+
+00:38:01.736 --> 00:38:03.886 A:middle
+So a bit of a call
+to action here.
+
+00:38:04.476 --> 00:38:05.316 A:middle
+What you should do,
+
+00:38:05.716 --> 00:38:08.456 A:middle
+keep creating tailored
+versions of assets.
+
+00:38:08.526 --> 00:38:11.296 A:middle
+That's great because you want
+your app to look its very best
+
+00:38:11.296 --> 00:38:13.876 A:middle
+and run its very best
+on every kind of device.
+
+00:38:13.976 --> 00:38:16.366 A:middle
+With app thinning we are
+freeing you a little bit
+
+00:38:16.366 --> 00:38:19.406 A:middle
+from the size restriction
+of uploading now.
+
+00:38:20.056 --> 00:38:21.986 A:middle
+Every user is going to
+get only what they need.
+
+00:38:23.206 --> 00:38:26.066 A:middle
+Keep creating tailored
+versions of assets.
+
+00:38:26.186 --> 00:38:29.566 A:middle
+Use the asset catalogs
+to organize your assets.
+
+00:38:29.686 --> 00:38:33.416 A:middle
+You can now also put data
+and Sprite atlases in there
+
+00:38:33.416 --> 00:38:37.296 A:middle
+and have those tailored for the
+device as Patrick mentioned.
+
+00:38:39.346 --> 00:38:42.316 A:middle
+Also test your thinned
+app variants using Xcode.
+
+00:38:42.756 --> 00:38:44.376 A:middle
+This will become important now
+
+00:38:44.376 --> 00:38:45.896 A:middle
+because we are only
+delivering the bits
+
+00:38:45.966 --> 00:38:47.326 A:middle
+that every device needs.
+
+00:38:47.406 --> 00:38:51.316 A:middle
+You can do this using Xcode's
+destination as Patrick mentioned
+
+00:38:51.376 --> 00:38:56.236 A:middle
+and using Xcode server to
+build the various thin variants
+
+00:38:56.236 --> 00:38:58.706 A:middle
+and testing them
+on real devices.
+
+00:38:59.276 --> 00:39:06.416 A:middle
+And take advantage of on-demand
+resources to tag your assets
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:38:59.276 --> 00:39:06.416 A:middle
+And take advantage of on-demand
+resources to tag your assets
+
+00:39:06.506 --> 00:39:08.726 A:middle
+and to have those
+built into asset packs
+
+00:39:08.726 --> 00:39:10.936 A:middle
+for later on-demand loading.
+
+00:39:12.356 --> 00:39:17.546 A:middle
+I want to call out a
+couple of places to go
+
+00:39:17.546 --> 00:39:18.616 A:middle
+for more information here.
+
+00:39:18.946 --> 00:39:21.046 A:middle
+One is the app thinning guide,
+
+00:39:21.236 --> 00:39:23.496 A:middle
+the chapter in the
+app distribution guide
+
+00:39:24.096 --> 00:39:27.296 A:middle
+that you will find on the
+developer website at Apple,
+
+00:39:27.646 --> 00:39:30.296 A:middle
+and the other is the asset
+catalogue format documentation
+
+00:39:30.296 --> 00:39:32.596 A:middle
+that's going to be put up on
+the Apple developer website.
+
+00:39:33.136 --> 00:39:36.216 A:middle
+We have related sessions.
+
+00:39:36.216 --> 00:39:37.846 A:middle
+The first couple of
+ones have already been,
+
+00:39:37.846 --> 00:39:39.076 A:middle
+but you can catch them on video.
+
+00:39:39.886 --> 00:39:43.066 A:middle
+There is another one, What's
+New In SpriteKit that is going
+
+00:39:43.066 --> 00:39:45.586 A:middle
+to talk about this
+some more starting
+
+00:39:45.586 --> 00:39:49.066 A:middle
+in 20 minutes in Mission.
+
+00:39:49.066 --> 00:39:51.326 A:middle
+It focuses on the
+on-demand resources part
+
+00:39:51.586 --> 00:39:53.356 A:middle
+in Pacific Heights
+at 4:30 today,
+
+00:39:53.356 --> 00:39:54.846 A:middle
+so I encourage you
+all to check that out.
+
+00:39:55.396 --> 00:39:59.986 A:middle
+And DemoBots will be talked
+about in greater detail
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:40:00.446 --> 00:40:02.736 A:middle
+in Mission tomorrow at 1:30.
+
+00:40:03.686 --> 00:40:04.696 A:middle
+We have a couple of labs.
+
+00:40:05.006 --> 00:40:07.896 A:middle
+Come down and see us in the
+Labs to learn more about this
+
+00:40:07.896 --> 00:40:09.706 A:middle
+and have a great
+rest of the WWDC.
+
+00:40:10.516 --> 00:40:15.500 A:middle
+[Applause]
+

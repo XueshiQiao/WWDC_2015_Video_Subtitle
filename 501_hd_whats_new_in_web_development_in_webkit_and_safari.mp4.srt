@@ -1,0 +1,3636 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:17.396 --> 00:00:19.586 A:middle
+&gt;&gt; BRENT FULGHAM: Hello
+and welcome to "What's New
+
+00:00:19.586 --> 00:00:21.606 A:middle
+In Web Development and
+WebKit and Safari."
+
+00:00:22.506 --> 00:00:25.086 A:middle
+My name's Brent Fulgham
+and I will be taking you
+
+00:00:25.086 --> 00:00:27.846 A:middle
+on a guided tour of some of the
+advances we've made this year.
+
+00:00:28.346 --> 00:00:30.876 A:middle
+This is an especially
+exciting time of year for us,
+
+00:00:31.216 --> 00:00:34.406 A:middle
+because throughout most of the
+year, we only hear from you
+
+00:00:34.406 --> 00:00:38.756 A:middle
+through bug reports and things
+told to us by other people,
+
+00:00:38.756 --> 00:00:41.576 A:middle
+but this time of year, we have
+labs, we have sessions like this
+
+00:00:41.576 --> 00:00:44.416 A:middle
+where we can get into all of the
+things that we have done to try
+
+00:00:44.676 --> 00:00:45.606 A:middle
+to make your lives better.
+
+00:00:46.146 --> 00:00:50.736 A:middle
+And whether you primarily target
+Safari as a web developer,
+
+00:00:51.186 --> 00:00:53.766 A:middle
+or an embedded web view
+in a larger application,
+
+00:00:53.766 --> 00:00:56.046 A:middle
+I think you will find a
+few things in this talk
+
+00:00:56.046 --> 00:00:58.556 A:middle
+that will be useful to
+you almost immediately.
+
+00:00:58.716 --> 00:01:02.256 A:middle
+So I would like to start with a
+brief overview of what WebKit is
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:58.716 --> 00:01:02.256 A:middle
+So I would like to start with a
+brief overview of what WebKit is
+
+00:01:02.256 --> 00:01:04.916 A:middle
+and how it fits into the
+software design stack at Apple,
+
+00:01:05.266 --> 00:01:08.126 A:middle
+and then move on to some
+enhancements we've made
+
+00:01:08.126 --> 00:01:11.806 A:middle
+in Safari this year
+that you will be able
+
+00:01:11.806 --> 00:01:12.766 A:middle
+to take advantage of.
+
+00:01:12.986 --> 00:01:15.656 A:middle
+And finally, I would
+like to talk
+
+00:01:15.656 --> 00:01:17.926 A:middle
+about creating some
+amazing experiences
+
+00:01:18.306 --> 00:01:19.886 A:middle
+for the iOS and Mac platforms.
+
+00:01:20.206 --> 00:01:22.126 A:middle
+Technologies that are
+available on these platforms
+
+00:01:22.176 --> 00:01:23.516 A:middle
+that if you take advantage
+
+00:01:23.516 --> 00:01:27.456 A:middle
+of them will really make
+your website more compelling
+
+00:01:27.456 --> 00:01:29.016 A:middle
+and useful to your customers.
+
+00:01:29.806 --> 00:01:32.116 A:middle
+So let's get started
+talking about WebKit.
+
+00:01:32.486 --> 00:01:34.366 A:middle
+WebKit is our web
+browsing engine.
+
+00:01:34.766 --> 00:01:37.576 A:middle
+And it's an open source
+project that anyone,
+
+00:01:37.726 --> 00:01:39.086 A:middle
+any of you could join.
+
+00:01:39.496 --> 00:01:44.016 A:middle
+And while you may know
+that WebKit is the engine
+
+00:01:44.016 --> 00:01:47.866 A:middle
+that powers Safari, you may
+not be aware that it's used
+
+00:01:47.866 --> 00:01:50.676 A:middle
+in a tremendous number of
+applications across the spectrum
+
+00:01:50.676 --> 00:01:53.876 A:middle
+of things we do at Apple.
+
+00:01:54.066 --> 00:01:57.546 A:middle
+WebKit is the same
+engine on iOS and OS X
+
+00:01:57.546 --> 00:01:59.236 A:middle
+with very few variations
+between them.
+
+00:01:59.616 --> 00:02:00.836 A:middle
+So during rest of my talk,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:59.616 --> 00:02:00.836 A:middle
+So during rest of my talk,
+
+00:02:00.836 --> 00:02:02.466 A:middle
+unless I specifically
+call something
+
+00:02:02.466 --> 00:02:04.986 A:middle
+out as being available only
+on one platform or the other,
+
+00:02:05.446 --> 00:02:07.316 A:middle
+you can safely assume that
+the things we are talking
+
+00:02:07.316 --> 00:02:10.006 A:middle
+about today will be
+available on both platforms.
+
+00:02:11.626 --> 00:02:14.686 A:middle
+So the takeaway here is that
+if you are a web developer
+
+00:02:14.686 --> 00:02:17.736 A:middle
+targeting Safari or
+any web browser on iOS,
+
+00:02:18.126 --> 00:02:20.216 A:middle
+you can use all the things I
+am going to talk about today.
+
+00:02:20.746 --> 00:02:23.376 A:middle
+And if you are an app developer
+with an embedded web view,
+
+00:02:23.376 --> 00:02:24.906 A:middle
+you can use all the
+things I'm talking about.
+
+00:02:25.406 --> 00:02:30.146 A:middle
+And if you are a
+developer targeting just the
+
+00:02:30.146 --> 00:02:34.946 A:middle
+JavaScriptCore framework itself,
+or the OS X automation tools,
+
+00:02:34.946 --> 00:02:37.186 A:middle
+you can make use of all
+the JavaScript features
+
+00:02:37.186 --> 00:02:38.716 A:middle
+that we will talk
+about in this session.
+
+00:02:39.326 --> 00:02:43.726 A:middle
+So that was our introduction
+to WebKit, and let's move
+
+00:02:43.726 --> 00:02:45.826 A:middle
+on to the enhancements
+we made this year.
+
+00:02:46.426 --> 00:02:51.326 A:middle
+So I'm going to break this
+down just for structure
+
+00:02:51.326 --> 00:02:53.446 A:middle
+into new layout and
+rendering features.
+
+00:02:54.156 --> 00:02:56.336 A:middle
+Some JavaScript updates
+that we made
+
+00:02:56.336 --> 00:03:00.366 A:middle
+to support the new ES6
+standard, and CSS features
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:56.336 --> 00:03:00.366 A:middle
+to support the new ES6
+standard, and CSS features
+
+00:03:00.366 --> 00:03:02.606 A:middle
+that will make your
+style sheets easier
+
+00:03:02.606 --> 00:03:04.076 A:middle
+to maintain and simpler to read.
+
+00:03:04.246 --> 00:03:09.256 A:middle
+So let's talk a little bit
+about the enhancements in Safari
+
+00:03:09.256 --> 00:03:11.776 A:middle
+and specifically, layout
+and rendering features.
+
+00:03:12.576 --> 00:03:14.356 A:middle
+And even more specifically,
+I want to talk
+
+00:03:14.356 --> 00:03:15.706 A:middle
+about backdrop effects.
+
+00:03:16.096 --> 00:03:18.786 A:middle
+In iOS 7, the design language
+
+00:03:18.786 --> 00:03:20.336 A:middle
+for the user interface
+was changed
+
+00:03:20.336 --> 00:03:23.156 A:middle
+to incorporate some beautiful
+backdrop blur effects.
+
+00:03:23.736 --> 00:03:27.656 A:middle
+For example, here you can see
+the home screen icons just kind
+
+00:03:27.656 --> 00:03:29.576 A:middle
+of peeking through that
+frosted glass effect.
+
+00:03:29.576 --> 00:03:32.596 A:middle
+And this kind of layering
+gives a lot of depth
+
+00:03:33.176 --> 00:03:36.576 A:middle
+and gives you a sense of what's
+happening behind this overlay,
+
+00:03:37.146 --> 00:03:39.806 A:middle
+without obstructing the content
+that we are trying to view
+
+00:03:39.806 --> 00:03:42.076 A:middle
+in the front of the interface.
+
+00:03:43.416 --> 00:03:45.586 A:middle
+And later, in OS X Yosemite,
+
+00:03:45.996 --> 00:03:47.796 A:middle
+we provided similar
+backdrop effects.
+
+00:03:48.586 --> 00:03:51.696 A:middle
+Here we have a very subtle blur
+in the sidebar of the finder
+
+00:03:52.536 --> 00:03:56.096 A:middle
+and we have this beautiful
+frosted glass effect on the doc.
+
+00:03:57.606 --> 00:04:00.696 A:middle
+And so these effects
+are important to feel
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:57.606 --> 00:04:00.696 A:middle
+And so these effects
+are important to feel
+
+00:04:00.696 --> 00:04:02.006 A:middle
+like a native part
+of the system.
+
+00:04:02.006 --> 00:04:04.286 A:middle
+And they are the kind of
+things you might want to use
+
+00:04:04.286 --> 00:04:08.206 A:middle
+in the most refined version of
+your webpage for people visiting
+
+00:04:08.206 --> 00:04:12.226 A:middle
+on a Mac or iOS device,
+but it's doubly important
+
+00:04:12.226 --> 00:04:14.286 A:middle
+when you have an embedded
+web view that you want
+
+00:04:14.286 --> 00:04:17.216 A:middle
+to have be part of the
+system, and look like part
+
+00:04:17.216 --> 00:04:18.526 A:middle
+of the native user interface.
+
+00:04:19.456 --> 00:04:21.995 A:middle
+But how do you do that?
+
+00:04:22.276 --> 00:04:25.266 A:middle
+Let's say I have an application
+that's displaying photos.
+
+00:04:26.276 --> 00:04:28.506 A:middle
+There's no obvious way to
+create a backdrop effect
+
+00:04:28.666 --> 00:04:30.016 A:middle
+like the ones we saw earlier.
+
+00:04:31.056 --> 00:04:34.026 A:middle
+We can try an overlay with
+a translucent background
+
+00:04:34.256 --> 00:04:36.796 A:middle
+but you can see that the
+content kind of fights
+
+00:04:36.796 --> 00:04:38.416 A:middle
+with the text on top of it.
+
+00:04:38.416 --> 00:04:40.396 A:middle
+You know that there are things
+behind it and it's difficult,
+
+00:04:40.396 --> 00:04:42.136 A:middle
+makes it more difficult to read.
+
+00:04:43.416 --> 00:04:46.036 A:middle
+Now, we have CSS filters
+and those include a blur.
+
+00:04:46.036 --> 00:04:47.606 A:middle
+Could we try something
+like that?
+
+00:04:48.916 --> 00:04:50.436 A:middle
+Well, that's a nice effect,
+
+00:04:51.376 --> 00:04:53.316 A:middle
+but it doesn't really
+get us what we want.
+
+00:04:53.566 --> 00:04:54.796 A:middle
+About the only thing
+that is clear
+
+00:04:54.796 --> 00:04:56.206 A:middle
+in this image is the background,
+
+00:04:56.206 --> 00:04:58.946 A:middle
+which is kind of
+besides the point.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:00.866 --> 00:05:02.846 A:middle
+So we observed people,
+
+00:05:03.286 --> 00:05:06.466 A:middle
+developers like yourselves
+going to heroic efforts.
+
+00:05:06.466 --> 00:05:08.496 A:middle
+What they would do is they
+would have a background picture
+
+00:05:08.496 --> 00:05:11.686 A:middle
+like this and they would create
+an entirely blurred version
+
+00:05:11.686 --> 00:05:15.126 A:middle
+of it, which would then be
+clipped and moved into position
+
+00:05:15.126 --> 00:05:17.896 A:middle
+to cover up the elements that
+you want to dismay as a blur.
+
+00:05:18.306 --> 00:05:19.486 A:middle
+And that's awful.
+
+00:05:19.486 --> 00:05:25.166 A:middle
+I mean, it's amazing that you
+did that but it's bad for us
+
+00:05:25.166 --> 00:05:25.906 A:middle
+that we did that to you.
+
+00:05:26.346 --> 00:05:29.846 A:middle
+So -- and there are
+other problems with that.
+
+00:05:29.846 --> 00:05:31.566 A:middle
+We can't animate
+those backgrounds.
+
+00:05:31.926 --> 00:05:33.796 A:middle
+And it's difficult to
+change the blur effects.
+
+00:05:33.796 --> 00:05:36.356 A:middle
+Once we have made a choice, we
+have to re-render everything.
+
+00:05:36.966 --> 00:05:41.166 A:middle
+So we needed a better way,
+and that is backdrop-filter.
+
+00:05:42.786 --> 00:05:44.676 A:middle
+Backdrop filter allows us
+
+00:05:44.676 --> 00:05:47.396 A:middle
+to specify these backdrop
+effects entirely in CSS
+
+00:05:47.396 --> 00:05:51.246 A:middle
+and it's been proposed
+as a standard to the W3C
+
+00:05:51.246 --> 00:05:53.256 A:middle
+and is undergoing that
+process right now.
+
+00:05:54.176 --> 00:05:55.396 A:middle
+Let's see how this
+fits together.
+
+00:05:56.036 --> 00:05:58.206 A:middle
+So if we have an
+element that we want
+
+00:05:58.206 --> 00:05:59.666 A:middle
+to provide a backdrop
+filter for,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:01.066 --> 00:06:04.016 A:middle
+WebKit will take the region
+behind it and re-render it
+
+00:06:04.276 --> 00:06:05.726 A:middle
+in an off screen context.
+
+00:06:06.656 --> 00:06:11.186 A:middle
+And while that's efficient,
+rendering passes are costly,
+
+00:06:11.716 --> 00:06:14.296 A:middle
+and so we want to make sure
+we don't over use them.
+
+00:06:15.016 --> 00:06:16.526 A:middle
+Once we have this
+background context,
+
+00:06:16.526 --> 00:06:18.376 A:middle
+we then apply the filter
+to them, so we blur it,
+
+00:06:18.896 --> 00:06:21.846 A:middle
+we composite the front-end
+content back on top of it,
+
+00:06:22.206 --> 00:06:25.536 A:middle
+and then we can recomposite
+the entire scene back together
+
+00:06:25.536 --> 00:06:29.346 A:middle
+and you get this beautiful blur
+effect, exactly what we wanted.
+
+00:06:29.836 --> 00:06:32.086 A:middle
+And once we got the
+blurs to work,
+
+00:06:32.526 --> 00:06:34.396 A:middle
+we realized that we
+wanted the flexibility
+
+00:06:34.396 --> 00:06:36.666 A:middle
+to use any of the CSS filters.
+
+00:06:36.876 --> 00:06:37.506 A:middle
+So we did.
+
+00:06:37.506 --> 00:06:38.916 A:middle
+We made it so that
+you can use any
+
+00:06:39.166 --> 00:06:40.856 A:middle
+of the CSS filters
+in this effect.
+
+00:06:41.376 --> 00:06:43.206 A:middle
+So we can invert colors.
+
+00:06:44.296 --> 00:06:46.266 A:middle
+We can combine filters together.
+
+00:06:46.266 --> 00:06:48.026 A:middle
+So we can get a blur
+and a grayscale
+
+00:06:48.026 --> 00:06:49.276 A:middle
+to get an effect like this.
+
+00:06:49.686 --> 00:06:53.886 A:middle
+And most amazingly of
+all, we can overlay this
+
+00:06:53.886 --> 00:06:55.396 A:middle
+on top of dynamic content.
+
+00:06:55.716 --> 00:07:00.436 A:middle
+So this backdrop blur filter
+that's one line of CSS can be
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:55.716 --> 00:07:00.436 A:middle
+So this backdrop blur filter
+that's one line of CSS can be
+
+00:07:00.436 --> 00:07:03.686 A:middle
+on top of a video,
+which is amazing!
+
+00:07:03.686 --> 00:07:07.336 A:middle
+I was so excited when we had
+this working and I can't wait
+
+00:07:07.336 --> 00:07:10.186 A:middle
+to see what you guys do
+with it on your own sites.
+
+00:07:11.536 --> 00:07:13.936 A:middle
+So let's shift gears
+a little bit.
+
+00:07:13.936 --> 00:07:16.586 A:middle
+Another area that we saw
+some issues was in layout
+
+00:07:16.586 --> 00:07:18.496 A:middle
+and rendering of
+scrolling effects.
+
+00:07:19.096 --> 00:07:25.146 A:middle
+You have probably seen this
+great iTunes banner at the top.
+
+00:07:25.566 --> 00:07:27.926 A:middle
+And if you've ever tried
+playing with it, you'll notice
+
+00:07:27.926 --> 00:07:31.916 A:middle
+that when you try to scroll
+it, it moves in whole steps.
+
+00:07:31.916 --> 00:07:35.386 A:middle
+You get an entire movie
+title, movie brick,
+
+00:07:35.386 --> 00:07:37.176 A:middle
+each time you make a movement.
+
+00:07:37.676 --> 00:07:41.966 A:middle
+And our photos app in iOS
+has a similar kind of effect.
+
+00:07:41.966 --> 00:07:45.656 A:middle
+Each time we look at a photo we
+want to swipe to the next one,
+
+00:07:45.656 --> 00:07:48.686 A:middle
+we move across an entire
+photo, we don't show part
+
+00:07:48.686 --> 00:07:49.966 A:middle
+of one photo and
+part of another.
+
+00:07:50.516 --> 00:07:53.916 A:middle
+This kind of interaction is
+really great for image galleries
+
+00:07:53.916 --> 00:07:56.926 A:middle
+or other types of tiled
+content like this.
+
+00:07:57.376 --> 00:08:01.556 A:middle
+And so what we observe people
+doing was writing complicated
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:57.376 --> 00:08:01.556 A:middle
+And so what we observe people
+doing was writing complicated
+
+00:08:01.556 --> 00:08:03.276 A:middle
+JavaScript implementations
+that take
+
+00:08:03.276 --> 00:08:04.866 A:middle
+over the scrolling operations.
+
+00:08:05.216 --> 00:08:08.436 A:middle
+They'd effectively throw out
+the browser's built-in smooth
+
+00:08:08.436 --> 00:08:10.896 A:middle
+scrolling infrastructure,
+and replace it
+
+00:08:10.896 --> 00:08:15.656 A:middle
+with manual JavaScript that
+did this frame by frame.
+
+00:08:16.456 --> 00:08:18.826 A:middle
+And we know that that's a
+significant performance penalty.
+
+00:08:18.826 --> 00:08:21.466 A:middle
+One thing we found is that
+you can't get smooth scrolling
+
+00:08:21.886 --> 00:08:24.226 A:middle
+by running complicated
+JavaScript on every frame
+
+00:08:24.516 --> 00:08:25.526 A:middle
+of a scrolling effect.
+
+00:08:26.716 --> 00:08:28.386 A:middle
+So we needed another
+way to do this.
+
+00:08:29.286 --> 00:08:31.216 A:middle
+And that's scroll snap points.
+
+00:08:33.135 --> 00:08:36.046 A:middle
+Scroll Snap Points are
+a way to declare in CSS,
+
+00:08:36.765 --> 00:08:40.806 A:middle
+regions of scrolling that
+take over the animation
+
+00:08:40.806 --> 00:08:44.576 A:middle
+of that scrolling curve, and
+this is also a CSS standard.
+
+00:08:47.636 --> 00:08:51.456 A:middle
+So imagine we have a viewport
+of some kind, a box that we want
+
+00:08:51.456 --> 00:08:53.406 A:middle
+to look at a series
+of album covers in.
+
+00:08:53.926 --> 00:08:57.026 A:middle
+And so in this image, I
+have the album covers kind
+
+00:08:57.176 --> 00:08:58.566 A:middle
+of dim and off-screen.
+
+00:08:58.966 --> 00:09:02.286 A:middle
+But I want to cycle
+through them one at a time.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:58.966 --> 00:09:02.286 A:middle
+But I want to cycle
+through them one at a time.
+
+00:09:02.806 --> 00:09:04.956 A:middle
+And let's say that I know
+that they have a thick size,
+
+00:09:04.956 --> 00:09:06.576 A:middle
+they are all 300
+pixels, for example.
+
+00:09:07.246 --> 00:09:11.076 A:middle
+Every time I swipe on this
+content, I would want the scroll
+
+00:09:11.076 --> 00:09:14.706 A:middle
+to take me across, one
+entire album cover.
+
+00:09:18.816 --> 00:09:20.826 A:middle
+And we can specify this behavior
+
+00:09:21.176 --> 00:09:23.506 A:middle
+in Scroll Snap Points using
+the Scroll Snap Points
+
+00:09:23.906 --> 00:09:25.806 A:middle
+x declaration.
+
+00:09:26.496 --> 00:09:28.806 A:middle
+And we tell it that we want
+it to be marching along
+
+00:09:28.806 --> 00:09:31.956 A:middle
+in a 300-pixel interval
+using the repeat function,
+
+00:09:31.956 --> 00:09:33.516 A:middle
+with a 300-pixel argument.
+
+00:09:34.316 --> 00:09:37.456 A:middle
+And this animation shows
+kind of how this looks.
+
+00:09:37.456 --> 00:09:39.856 A:middle
+I make a gesture to swipe
+through these images,
+
+00:09:40.676 --> 00:09:42.656 A:middle
+we travel across
+some number of them,
+
+00:09:42.656 --> 00:09:45.496 A:middle
+depending on how strong my
+gesture is, but as we --
+
+00:09:45.766 --> 00:09:49.066 A:middle
+as the momentum slows us
+down, and we come to a stop,
+
+00:09:49.066 --> 00:09:52.536 A:middle
+we always land on a
+clean album boundary.
+
+00:09:52.536 --> 00:09:59.896 A:middle
+Now, in source code, that
+effect requires two lines.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:00.836 --> 00:10:04.106 A:middle
+We turn the feature on using
+the Scroll Snap Type mandatory,
+
+00:10:04.806 --> 00:10:09.006 A:middle
+and then we specify the
+repeat 300 pixel declaration.
+
+00:10:11.366 --> 00:10:13.906 A:middle
+So I did a capture
+on a live site.
+
+00:10:13.906 --> 00:10:17.916 A:middle
+You can see that as I'm swiping
+across these, you get movement.
+
+00:10:17.916 --> 00:10:21.836 A:middle
+And if I slightly pull off and
+let go, the system scrolls back
+
+00:10:21.966 --> 00:10:23.236 A:middle
+to the nearest scroll
+snap point.
+
+00:10:23.316 --> 00:10:25.646 A:middle
+So, like, they're rubber
+banding back to that position.
+
+00:10:26.016 --> 00:10:30.576 A:middle
+And you've probably already
+figured this out from the name,
+
+00:10:30.876 --> 00:10:33.646 A:middle
+but scroll snap points work
+in both dimensions, x and y.
+
+00:10:33.736 --> 00:10:38.426 A:middle
+So what I have shown you
+
+00:10:38.426 --> 00:10:41.356 A:middle
+so far would already be
+a pretty neat feature
+
+00:10:41.556 --> 00:10:45.516 A:middle
+but it doesn't handle the case
+of varying sizes of content
+
+00:10:45.516 --> 00:10:46.526 A:middle
+in the scroll container.
+
+00:10:47.666 --> 00:10:50.076 A:middle
+And so here, where I have
+non-uniform elements,
+
+00:10:50.076 --> 00:10:52.616 A:middle
+even though I might
+have a 300 pixel square,
+
+00:10:52.996 --> 00:10:54.496 A:middle
+I also have a rectangular unit.
+
+00:10:55.006 --> 00:10:59.706 A:middle
+That rectangular image
+or content will not fit
+
+00:10:59.706 --> 00:11:01.206 A:middle
+in that 300 pixel boundary.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:59.706 --> 00:11:01.206 A:middle
+in that 300 pixel boundary.
+
+00:11:01.206 --> 00:11:02.666 A:middle
+And so if I attempt
+to do a scroll
+
+00:11:02.666 --> 00:11:05.156 A:middle
+with that set content,
+it won't look right.
+
+00:11:06.176 --> 00:11:11.176 A:middle
+And so scroll snap has a
+way of dealing with this.
+
+00:11:11.386 --> 00:11:14.736 A:middle
+If we take the scroll container
+as this white box behind me,
+
+00:11:15.766 --> 00:11:17.986 A:middle
+there's something called
+the scroll snap destination
+
+00:11:18.196 --> 00:11:22.546 A:middle
+and that's a position that
+we will align our elements
+
+00:11:22.596 --> 00:11:23.396 A:middle
+when scrolling.
+
+00:11:23.946 --> 00:11:25.576 A:middle
+It defaults to the
+upper left corner
+
+00:11:25.756 --> 00:11:28.986 A:middle
+but we can position it using
+standard CSS positioning syntax.
+
+00:11:29.496 --> 00:11:33.726 A:middle
+The companion to the scroll
+snap destination is the scroll
+
+00:11:33.726 --> 00:11:34.606 A:middle
+snap coordinate.
+
+00:11:36.736 --> 00:11:38.536 A:middle
+These are positions on each
+
+00:11:38.536 --> 00:11:40.886 A:middle
+of the elements inside
+the scrolling container.
+
+00:11:41.896 --> 00:11:43.806 A:middle
+And they are also defaulted
+to the upper left corner.
+
+00:11:44.446 --> 00:11:46.106 A:middle
+So we can tell the scroll --
+
+00:11:46.106 --> 00:11:49.456 A:middle
+the WebKit that we want our
+scroll snap coordinates to be
+
+00:11:49.456 --> 00:11:52.226 A:middle
+in the center of each
+element using this syntax,
+
+00:11:52.396 --> 00:11:54.536 A:middle
+and we can say that
+we want the center
+
+00:11:54.896 --> 00:11:56.196 A:middle
+of the scrolling container
+
+00:11:56.196 --> 00:11:58.126 A:middle
+to be our target
+point, the destination.
+
+00:11:58.616 --> 00:12:00.346 A:middle
+And when you put them together,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:58.616 --> 00:12:00.346 A:middle
+And when you put them together,
+
+00:12:00.956 --> 00:12:04.226 A:middle
+when you perform a scroll
+gesture, we land on a clean,
+
+00:12:04.596 --> 00:12:07.136 A:middle
+centered point on that box.
+
+00:12:08.186 --> 00:12:12.596 A:middle
+And the code for that is no
+more complicated than it was
+
+00:12:12.596 --> 00:12:14.346 A:middle
+for the simple repeating
+pixel case.
+
+00:12:14.756 --> 00:12:16.926 A:middle
+We turn the feature
+on, on the container,
+
+00:12:16.926 --> 00:12:18.816 A:middle
+the scrolling container,
+with mandatory,
+
+00:12:19.496 --> 00:12:21.926 A:middle
+and we position the
+destination in the center
+
+00:12:21.926 --> 00:12:22.976 A:middle
+of the scrolling container.
+
+00:12:23.516 --> 00:12:26.216 A:middle
+And then we position
+the coordinate
+
+00:12:26.216 --> 00:12:27.226 A:middle
+on each of the elements.
+
+00:12:27.226 --> 00:12:29.126 A:middle
+And I created a class,
+'photograph,' here, but,
+
+00:12:29.126 --> 00:12:30.426 A:middle
+you know, you can do
+whatever you want,
+
+00:12:30.766 --> 00:12:32.316 A:middle
+and position that in the center.
+
+00:12:33.816 --> 00:12:36.966 A:middle
+And so this is a capture of what
+that looks like on a website.
+
+00:12:37.196 --> 00:12:41.626 A:middle
+And so with a series of images,
+as I scroll through them,
+
+00:12:41.626 --> 00:12:43.506 A:middle
+we always land with
+something in the middle.
+
+00:12:44.066 --> 00:12:49.156 A:middle
+And with an example, with a
+demonstration of how this looks
+
+00:12:49.156 --> 00:12:50.756 A:middle
+in practice, I will invite Chris
+
+00:12:50.756 --> 00:12:53.796 A:middle
+up to give you an
+amazing example of this.
+
+00:12:54.516 --> 00:12:59.166 A:middle
+[Applause]
+
+00:12:59.666 --> 00:13:00.396 A:middle
+&gt;&gt; CHRIS YOUNG-ZAWADA:
+Thanks, Brent.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:59.666 --> 00:13:00.396 A:middle
+&gt;&gt; CHRIS YOUNG-ZAWADA:
+Thanks, Brent.
+
+00:13:00.866 --> 00:13:03.006 A:middle
+My name is Chris
+Young-Zawada and I'm a developer
+
+00:13:03.006 --> 00:13:04.166 A:middle
+on Apple's Interactive team.
+
+00:13:04.616 --> 00:13:06.286 A:middle
+The interactive team at
+Apple does a lot of work
+
+00:13:06.286 --> 00:13:07.376 A:middle
+around the company, and one
+
+00:13:07.376 --> 00:13:09.226 A:middle
+of the things we do is
+we're responsible for a lot
+
+00:13:09.226 --> 00:13:10.866 A:middle
+of the web content
+you see on Apple.com.
+
+00:13:11.256 --> 00:13:13.836 A:middle
+So I'm super excited to be here
+today because I feel like a lot
+
+00:13:13.836 --> 00:13:15.566 A:middle
+of the features that Brent
+has been showing off are going
+
+00:13:15.566 --> 00:13:16.906 A:middle
+to be really great
+for web developers
+
+00:13:16.906 --> 00:13:18.296 A:middle
+and I'm really excited
+to use them myself.
+
+00:13:19.376 --> 00:13:24.916 A:middle
+So to get started what we put
+together is a little web app
+
+00:13:24.916 --> 00:13:27.316 A:middle
+here that shows off some of
+these new features in WebKit.
+
+00:13:27.936 --> 00:13:30.396 A:middle
+And we have a photo
+gallery laid out here
+
+00:13:30.396 --> 00:13:31.566 A:middle
+that we can scroll up and down.
+
+00:13:31.876 --> 00:13:32.526 A:middle
+And you can see that some
+
+00:13:32.526 --> 00:13:34.226 A:middle
+of the photos are
+different sizes than others.
+
+00:13:34.546 --> 00:13:37.166 A:middle
+We can hover over one, and
+when we click to open it,
+
+00:13:37.166 --> 00:13:39.866 A:middle
+it will open in this overlay
+view, where we are able
+
+00:13:39.866 --> 00:13:43.516 A:middle
+to scroll between the photos,
+by going left and right,
+
+00:13:43.866 --> 00:13:45.266 A:middle
+and we can even choose
+our favorites
+
+00:13:45.266 --> 00:13:46.366 A:middle
+in the top right
+by clicking here.
+
+00:13:47.656 --> 00:13:48.416 A:middle
+Now this is pretty cool,
+
+00:13:48.416 --> 00:13:50.226 A:middle
+but I feel like we could make
+it a lot better using some
+
+00:13:50.226 --> 00:13:51.316 A:middle
+of the new features in Webkit.
+
+00:13:51.316 --> 00:13:54.496 A:middle
+So, to get started, I want
+to focus on backdrop filters.
+
+00:13:55.326 --> 00:13:58.016 A:middle
+If you notice at the top
+of the application here,
+
+00:13:58.016 --> 00:13:59.586 A:middle
+we have this fixed
+navigation element
+
+00:13:59.996 --> 00:14:02.166 A:middle
+and right now it's just
+a solid black color
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:59.996 --> 00:14:02.166 A:middle
+and right now it's just
+a solid black color
+
+00:14:02.166 --> 00:14:03.206 A:middle
+and it's fixed at the top.
+
+00:14:03.636 --> 00:14:06.846 A:middle
+As we scroll up and down, the
+content goes underneath it
+
+00:14:07.146 --> 00:14:10.356 A:middle
+and then goes into the Safari
+tool bar where it gets blurred.
+
+00:14:10.496 --> 00:14:11.176 A:middle
+That's pretty cool
+
+00:14:11.176 --> 00:14:13.456 A:middle
+but we actually can make
+it a lot more cohesive
+
+00:14:13.456 --> 00:14:15.896 A:middle
+by adding a backdrop filter to
+this element and making it feel
+
+00:14:15.896 --> 00:14:17.346 A:middle
+like it's much more
+part of the UI.
+
+00:14:17.346 --> 00:14:20.166 A:middle
+So I'm going to show
+you how to do that.
+
+00:14:20.306 --> 00:14:22.386 A:middle
+Just so you guys know, I like
+to use spaces a lot when I code,
+
+00:14:22.386 --> 00:14:24.986 A:middle
+so I'm going to jump between
+the UI here and the code,
+
+00:14:24.986 --> 00:14:28.676 A:middle
+back and forth, quite a bit.
+
+00:14:28.886 --> 00:14:31.396 A:middle
+Cool. So right now, I'm in
+Xcode and I'm in a CSS file
+
+00:14:31.396 --> 00:14:33.286 A:middle
+that we are going to start
+appending some new code to.
+
+00:14:33.286 --> 00:14:36.516 A:middle
+So to do that, I'm going
+to start, and I'm going
+
+00:14:36.516 --> 00:14:39.626 A:middle
+to paste a new navigation
+declaration here
+
+00:14:39.626 --> 00:14:42.916 A:middle
+which is targeting that
+solid black navigation bar,
+
+00:14:43.226 --> 00:14:44.786 A:middle
+and we are going to set
+the background color
+
+00:14:44.786 --> 00:14:47.786 A:middle
+to be solid black
+with 50% opacity.
+
+00:14:48.506 --> 00:14:49.946 A:middle
+And then we are going
+to add a backdrop filter
+
+00:14:49.946 --> 00:14:50.886 A:middle
+with 10 pixels of blur.
+
+00:14:51.476 --> 00:14:56.466 A:middle
+If we go back, we can
+now see in just one line
+
+00:14:56.466 --> 00:14:59.246 A:middle
+of code we have added
+this amazing new way
+
+00:14:59.246 --> 00:15:02.576 A:middle
+to blur the content behind
+as you are scrolling.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:59.246 --> 00:15:02.576 A:middle
+to blur the content behind
+as you are scrolling.
+
+00:15:02.576 --> 00:15:04.206 A:middle
+The text is still super clear
+
+00:15:04.206 --> 00:15:06.586 A:middle
+and everything goes really
+nicely into the Safari toolbar.
+
+00:15:06.996 --> 00:15:08.126 A:middle
+I think this is awesome.
+
+00:15:08.176 --> 00:15:12.976 A:middle
+Like, this is fantastic work
+on the WebKit team, to do this.
+
+00:15:13.176 --> 00:15:14.336 A:middle
+Awesome. So the next
+thing I want
+
+00:15:14.336 --> 00:15:17.056 A:middle
+to show you guys is
+scroll snap points.
+
+00:15:17.436 --> 00:15:19.036 A:middle
+And I think a really
+good candidate
+
+00:15:19.036 --> 00:15:21.226 A:middle
+for Scroll Snap points
+is this overlay gallery.
+
+00:15:22.116 --> 00:15:24.626 A:middle
+Remember, when we're
+scrolling this left and right,
+
+00:15:24.626 --> 00:15:27.826 A:middle
+we can get left in places where
+we might see through the content
+
+00:15:27.826 --> 00:15:29.996 A:middle
+and not exactly focus on
+what we're looking at here.
+
+00:15:30.906 --> 00:15:33.446 A:middle
+This is okay, but we can
+definitely make it better
+
+00:15:33.446 --> 00:15:35.056 A:middle
+and by focusing on the content
+
+00:15:35.056 --> 00:15:36.596 A:middle
+with Scroll Snap Points we
+are always going to look
+
+00:15:36.596 --> 00:15:37.596 A:middle
+at the photos we
+want to look at.
+
+00:15:38.456 --> 00:15:40.136 A:middle
+So I'm going to show you
+how to do that as well.
+
+00:15:40.136 --> 00:15:42.876 A:middle
+So if we go back to
+the CSS, we are going
+
+00:15:42.876 --> 00:15:45.926 A:middle
+to add a new declaration
+on the overlay gallery
+
+00:15:45.926 --> 00:15:48.216 A:middle
+where we are going to set the
+scroll snap type to mandatory
+
+00:15:48.696 --> 00:15:50.836 A:middle
+and we are going to set
+Scroll Snap Points x to repeat
+
+00:15:50.836 --> 00:15:52.346 A:middle
+at 100 viewport width.
+
+00:15:52.346 --> 00:15:53.696 A:middle
+Each photo container
+is this size,
+
+00:15:53.696 --> 00:15:55.806 A:middle
+so everything should fit
+really nicely when we go back
+
+00:15:55.806 --> 00:15:56.686 A:middle
+and we scroll that element.
+
+00:15:57.516 --> 00:16:04.946 A:middle
+If we refresh, we can now very
+cleanly go between the photos
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:15:57.516 --> 00:16:04.946 A:middle
+If we refresh, we can now very
+cleanly go between the photos
+
+00:16:04.946 --> 00:16:06.686 A:middle
+and WebKit has taken
+control of the scrolling.
+
+00:16:06.686 --> 00:16:08.996 A:middle
+So you'll see that
+I can hit the edges
+
+00:16:08.996 --> 00:16:10.536 A:middle
+and everything will
+bounce back into place.
+
+00:16:11.106 --> 00:16:12.056 A:middle
+It's really nice.
+
+00:16:12.056 --> 00:16:14.536 A:middle
+And as you guys know this would
+take a lot of JavaScript to do
+
+00:16:14.656 --> 00:16:17.326 A:middle
+without this feature, so I can't
+wait to see what you guys do
+
+00:16:17.326 --> 00:16:19.016 A:middle
+with it and I think it's
+going to be really great.
+
+00:16:19.946 --> 00:16:23.656 A:middle
+Another thing that is
+popular, as you guys know,
+
+00:16:23.656 --> 00:16:25.956 A:middle
+is you oftentimes will use
+JavaScript to append styles
+
+00:16:25.956 --> 00:16:28.966 A:middle
+to elements and what would be
+a really interesting use-case
+
+00:16:28.966 --> 00:16:30.266 A:middle
+for that would be
+on this overlay --
+
+00:16:30.366 --> 00:16:32.086 A:middle
+on this masonry gallery here.
+
+00:16:32.086 --> 00:16:34.196 A:middle
+As we are scrolling up and down,
+
+00:16:34.196 --> 00:16:36.496 A:middle
+we actually generate
+this grid in JavaScript.
+
+00:16:36.496 --> 00:16:40.186 A:middle
+So we can change how many cells
+we want on the x and y axis.
+
+00:16:40.666 --> 00:16:43.376 A:middle
+So we don't really know ahead of
+time how tall each one is going
+
+00:16:43.376 --> 00:16:47.116 A:middle
+to be but we can actually
+set a repeat value
+
+00:16:47.116 --> 00:16:48.956 A:middle
+on Scroll Snap Points
+in JavaScript to make it
+
+00:16:48.956 --> 00:16:51.186 A:middle
+so as we're scrolling
+this vertically,
+
+00:16:51.526 --> 00:16:53.586 A:middle
+the nav bar will sit very
+nicely with these elements,
+
+00:16:53.586 --> 00:16:55.436 A:middle
+so you are always focusing
+on what you are supposed to.
+
+00:16:56.376 --> 00:16:59.796 A:middle
+So to do that, we are going to
+jump into the JavaScript, here,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:00.036 --> 00:17:01.646 A:middle
+and this is a new JS file.
+
+00:17:02.176 --> 00:17:06.215 A:middle
+And we are going to extend our
+masonry gallery constructor
+
+00:17:06.306 --> 00:17:07.826 A:middle
+to a Snap Points
+masonry gallery.
+
+00:17:07.826 --> 00:17:10.136 A:middle
+We are going to, and
+basically all we're going
+
+00:17:10.136 --> 00:17:11.846 A:middle
+to do is we're going to add
+a new method called set snap
+
+00:17:11.886 --> 00:17:12.486 A:middle
+point styles.
+
+00:17:13.076 --> 00:17:15.195 A:middle
+What this will do is we will
+actually set the scroll snap
+
+00:17:15.246 --> 00:17:17.915 A:middle
+type to mandatory, and it
+will set the snap points
+
+00:17:18.126 --> 00:17:22.506 A:middle
+on the y axis to repeat as tall
+as each cell is in the y axis
+
+00:17:23.046 --> 00:17:25.776 A:middle
+and this is a variable that we
+set inside of the constructor
+
+00:17:26.266 --> 00:17:27.945 A:middle
+when we are running
+this on instantiation.
+
+00:17:29.126 --> 00:17:31.376 A:middle
+The last thing we're going
+to do is we are going
+
+00:17:31.376 --> 00:17:33.816 A:middle
+to tell our JS file to use this
+so, because we've extended it,
+
+00:17:33.816 --> 00:17:35.576 A:middle
+we just have to put it
+here and use that instead
+
+00:17:35.576 --> 00:17:36.386 A:middle
+of the masonry gallery.
+
+00:17:36.996 --> 00:17:39.616 A:middle
+And now when we refresh,
+you'll notice
+
+00:17:39.656 --> 00:17:42.666 A:middle
+that the nav bar sits very
+nicely with these elements
+
+00:17:42.986 --> 00:17:44.596 A:middle
+and we can throw it
+and it will always land
+
+00:17:44.596 --> 00:17:48.476 A:middle
+in a really nice place where
+it fits with the content.
+
+00:17:48.476 --> 00:17:50.496 A:middle
+I think that's really
+great, and with that,
+
+00:17:50.496 --> 00:17:53.096 A:middle
+I want to give it back to Brent,
+who is going to talk some more
+
+00:17:53.096 --> 00:17:53.796 A:middle
+about layout and rendering.
+
+00:17:53.796 --> 00:17:53.976 A:middle
+Thank you.
+
+00:17:54.516 --> 00:17:59.246 A:middle
+[Applause]
+
+00:17:59.746 --> 00:18:00.066 A:middle
+&gt;&gt; BRENT FULGHAM: Thank you.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:59.746 --> 00:18:00.066 A:middle
+&gt;&gt; BRENT FULGHAM: Thank you.
+
+00:18:00.066 --> 00:18:00.896 A:middle
+That was amazing.
+
+00:18:02.686 --> 00:18:08.046 A:middle
+So I just want to go
+over a couple of things
+
+00:18:08.046 --> 00:18:09.636 A:middle
+about those features
+we just talked about.
+
+00:18:09.996 --> 00:18:11.886 A:middle
+Backdrop filters
+are very efficient.
+
+00:18:11.886 --> 00:18:14.606 A:middle
+They are hardware accelerated,
+but the rendering passes
+
+00:18:14.636 --> 00:18:18.046 A:middle
+that it causes to
+trigger can be expensive.
+
+00:18:18.046 --> 00:18:20.156 A:middle
+So we want to be
+careful to measure
+
+00:18:20.156 --> 00:18:22.126 A:middle
+and see how things
+work on your own sites.
+
+00:18:22.606 --> 00:18:26.736 A:middle
+Scroll Snap is great for page
+content, for tile content,
+
+00:18:27.036 --> 00:18:28.876 A:middle
+but you want to be careful
+if you are doing any kind
+
+00:18:28.876 --> 00:18:30.096 A:middle
+of programmatic scrolling
+
+00:18:30.436 --> 00:18:33.886 A:middle
+because the two features will
+fight each other when trying
+
+00:18:33.886 --> 00:18:34.716 A:middle
+to animate the scroll.
+
+00:18:34.876 --> 00:18:35.936 A:middle
+So keep that in mind.
+
+00:18:36.466 --> 00:18:41.246 A:middle
+And that wraps up the section on
+layout and rendering features.
+
+00:18:41.786 --> 00:18:44.986 A:middle
+And now I would like to move
+on to some JavaScript updates
+
+00:18:45.026 --> 00:18:46.236 A:middle
+that we worked on this year.
+
+00:18:46.886 --> 00:18:50.376 A:middle
+The JavaScript ES6
+standard is fantastic
+
+00:18:50.726 --> 00:18:53.146 A:middle
+and is moving JavaScript
+forward in a number
+
+00:18:53.146 --> 00:18:56.776 A:middle
+of exciting new ways, and Chris
+alluded to some in his demo.
+
+00:18:56.776 --> 00:19:00.866 A:middle
+I want to talk for
+a moment about a few
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:56.776 --> 00:19:00.866 A:middle
+I want to talk for
+a moment about a few
+
+00:19:00.866 --> 00:19:03.956 A:middle
+of the exciting features that
+we put together this year.
+
+00:19:05.186 --> 00:19:07.316 A:middle
+Last year, in our session,
+we talked about a number
+
+00:19:07.316 --> 00:19:08.496 A:middle
+of features that were added
+
+00:19:09.036 --> 00:19:10.626 A:middle
+and we haven't been
+sitting around since then.
+
+00:19:10.626 --> 00:19:13.816 A:middle
+We have expanded the ES6
+support tremendously this year
+
+00:19:14.256 --> 00:19:17.336 A:middle
+with a lot of stuff, symbol
+objects, object out of sign,
+
+00:19:17.436 --> 00:19:20.426 A:middle
+weak sets, but I am just going
+to touch on a couple of things
+
+00:19:20.426 --> 00:19:21.846 A:middle
+that I think are
+really, really useful.
+
+00:19:22.406 --> 00:19:25.026 A:middle
+Let's start with my favorite.
+
+00:19:25.886 --> 00:19:26.726 A:middle
+Template Literals.
+
+00:19:27.426 --> 00:19:30.686 A:middle
+Now how many times have
+you run into this problem
+
+00:19:30.686 --> 00:19:31.996 A:middle
+where you have a set of --
+
+00:19:32.386 --> 00:19:34.186 A:middle
+you are trying to
+build a logging string
+
+00:19:34.186 --> 00:19:36.686 A:middle
+or produce something for a
+user, and you have a bunch
+
+00:19:36.686 --> 00:19:38.026 A:middle
+of string chunks that you want
+
+00:19:38.026 --> 00:19:39.996 A:middle
+to concatenate together,
+and some objects.
+
+00:19:40.226 --> 00:19:42.886 A:middle
+And so you end up with something
+like this old syntax example.
+
+00:19:43.396 --> 00:19:46.506 A:middle
+And I have spent more time
+than I care to admit looking
+
+00:19:46.506 --> 00:19:48.386 A:middle
+for the missing concatenating
+operator
+
+00:19:48.386 --> 00:19:50.646 A:middle
+or the closing quote
+sign that I forgot about.
+
+00:19:51.506 --> 00:19:53.176 A:middle
+And so I was super excited
+
+00:19:53.476 --> 00:19:56.386 A:middle
+when ES6 introduced this
+new template literal syntax,
+
+00:19:57.126 --> 00:20:00.486 A:middle
+where we create strings,
+special strings,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:57.126 --> 00:20:00.486 A:middle
+where we create strings,
+special strings,
+
+00:20:00.526 --> 00:20:02.926 A:middle
+using the backtick
+character instead
+
+00:20:02.926 --> 00:20:03.946 A:middle
+of a regular quote string.
+
+00:20:04.056 --> 00:20:07.266 A:middle
+And when we do that,
+anything inside of the string
+
+00:20:07.726 --> 00:20:11.306 A:middle
+that is escaped with this dollar
+sign curly brace syntax gets
+
+00:20:11.306 --> 00:20:13.826 A:middle
+converted into string
+representation automatically.
+
+00:20:14.406 --> 00:20:18.046 A:middle
+And you can even do operations
+inside the syntax, like,
+
+00:20:18.326 --> 00:20:19.876 A:middle
+here I'm adding two
+numbers together.
+
+00:20:20.186 --> 00:20:22.966 A:middle
+And so both of these
+give us the same output,
+
+00:20:23.396 --> 00:20:26.936 A:middle
+but I find that the second
+one is so much easier to read,
+
+00:20:27.266 --> 00:20:29.356 A:middle
+and I have jumped
+wholeheartedly into this.
+
+00:20:29.356 --> 00:20:31.666 A:middle
+Everything I write is
+in this syntax now.
+
+00:20:31.796 --> 00:20:35.036 A:middle
+I love it!
+
+00:20:35.296 --> 00:20:39.586 A:middle
+Another neat shorthand that was
+introduced this year is related
+
+00:20:39.586 --> 00:20:41.056 A:middle
+to object literal creation.
+
+00:20:41.396 --> 00:20:43.576 A:middle
+So you often have a
+situation like this,
+
+00:20:43.576 --> 00:20:46.536 A:middle
+where we have a generator
+function of some kind with a set
+
+00:20:46.536 --> 00:20:48.146 A:middle
+of argument names
+that we want to use.
+
+00:20:48.756 --> 00:20:51.756 A:middle
+And often those argument names
+are actually the names we want
+
+00:20:51.756 --> 00:20:54.316 A:middle
+to use for the new object
+literals that we're creating
+
+00:20:54.546 --> 00:20:58.306 A:middle
+and so you send up with a silly
+repetition of name, colon, name,
+
+00:20:58.306 --> 00:21:00.076 A:middle
+and category, colon, category.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:58.306 --> 00:21:00.076 A:middle
+and category, colon, category.
+
+00:21:00.336 --> 00:21:02.216 A:middle
+And that's such a common idiom
+
+00:21:02.666 --> 00:21:05.946 A:middle
+that the ES6 designers
+introduced a shorthand for this,
+
+00:21:06.866 --> 00:21:10.006 A:middle
+where you can create an
+object literal with variables
+
+00:21:10.146 --> 00:21:12.986 A:middle
+and if you don't supply the
+property names it will just use
+
+00:21:12.986 --> 00:21:15.166 A:middle
+the names of the values that
+you are supplying to it.
+
+00:21:15.636 --> 00:21:18.686 A:middle
+We were able to get rid of
+a couple of hundred cases
+
+00:21:18.686 --> 00:21:21.386 A:middle
+of this kind of duplication
+in the web inspector,
+
+00:21:22.136 --> 00:21:24.286 A:middle
+and found that to
+be quite useful.
+
+00:21:24.286 --> 00:21:26.086 A:middle
+And I'm sure that if you
+look into your own code,
+
+00:21:26.086 --> 00:21:28.326 A:middle
+you will find plenty of
+cases where this is helpful.
+
+00:21:28.906 --> 00:21:34.856 A:middle
+Now, JavaScript has always had
+strong object-oriented software
+
+00:21:34.856 --> 00:21:38.556 A:middle
+design features but it's
+prototype based syntax has
+
+00:21:38.556 --> 00:21:43.106 A:middle
+seemed, has been somewhat less
+accessible for people coming
+
+00:21:43.106 --> 00:21:45.746 A:middle
+to JavaScript from
+languages like Swift or C++
+
+00:21:45.746 --> 00:21:48.486 A:middle
+or other class-based
+syntax languages.
+
+00:21:49.226 --> 00:21:52.466 A:middle
+So here I have a simple example
+of a polygon class written
+
+00:21:52.606 --> 00:21:54.316 A:middle
+in the standard prototype
+syntax.
+
+00:21:55.016 --> 00:21:59.996 A:middle
+But in ES6, a new syntax has
+been introduced, an object,
+
+00:21:59.996 --> 00:22:03.456 A:middle
+a class-based syntax that
+looks very familiar to anyone
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:59.996 --> 00:22:03.456 A:middle
+a class-based syntax that
+looks very familiar to anyone
+
+00:22:03.456 --> 00:22:07.816 A:middle
+who comes from a language like
+C++ or swift, and allows us
+
+00:22:07.816 --> 00:22:09.466 A:middle
+to encapsulate everything
+together.
+
+00:22:09.786 --> 00:22:12.376 A:middle
+It's so much easier to
+read and easier to see
+
+00:22:12.376 --> 00:22:13.826 A:middle
+where things relate
+to each other.
+
+00:22:15.086 --> 00:22:19.316 A:middle
+The class syntax includes a
+special function, a constructor,
+
+00:22:19.766 --> 00:22:22.246 A:middle
+that handles the object
+initialization for us,
+
+00:22:22.956 --> 00:22:24.896 A:middle
+and we can define
+methods in the class
+
+00:22:24.986 --> 00:22:26.406 A:middle
+that are part of the object.
+
+00:22:26.856 --> 00:22:29.736 A:middle
+And it supports inheritance.
+
+00:22:29.736 --> 00:22:32.306 A:middle
+So we can inherit using
+the extends keyword
+
+00:22:32.306 --> 00:22:33.456 A:middle
+from existing objects.
+
+00:22:34.476 --> 00:22:36.326 A:middle
+When we inherit, we
+want to make sure
+
+00:22:36.326 --> 00:22:39.676 A:middle
+that we initialize the parent
+class using the super operator.
+
+00:22:41.016 --> 00:22:43.096 A:middle
+We can override methods
+like you would expect
+
+00:22:43.096 --> 00:22:44.926 A:middle
+from other object-oriented
+languages,
+
+00:22:45.286 --> 00:22:47.616 A:middle
+and it even supports
+static methods now,
+
+00:22:47.616 --> 00:22:50.246 A:middle
+so you can define
+methods on the class
+
+00:22:50.246 --> 00:22:53.566 A:middle
+that you don't need a specific
+instance of the object to use.
+
+00:22:54.656 --> 00:22:59.386 A:middle
+And finally, this new class
+syntax is completely compatible
+
+00:22:59.656 --> 00:23:01.546 A:middle
+with the existing
+prototype-based syntax.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:59.656 --> 00:23:01.546 A:middle
+with the existing
+prototype-based syntax.
+
+00:23:01.546 --> 00:23:05.576 A:middle
+So you can immediately start
+extending prototype-based code
+
+00:23:05.706 --> 00:23:08.156 A:middle
+using this new syntax without
+having to rewrite anything.
+
+00:23:08.376 --> 00:23:11.206 A:middle
+I think that's a huge
+advantage and it's something
+
+00:23:11.206 --> 00:23:12.546 A:middle
+that you can start
+using right away.
+
+00:23:14.206 --> 00:23:18.846 A:middle
+So that was the brief overview
+of some JavaScript updates.
+
+00:23:19.096 --> 00:23:22.356 A:middle
+We have a ton more JavaScript
+things that we did this year,
+
+00:23:22.616 --> 00:23:26.296 A:middle
+so I really recommend you
+get the El Capitan developer
+
+00:23:26.296 --> 00:23:30.496 A:middle
+software and try it out.
+
+00:23:31.356 --> 00:23:34.016 A:middle
+Now, as we've dealt with CSS
+for many years we have run
+
+00:23:34.016 --> 00:23:40.816 A:middle
+across a number of patterns that
+lead to bloated style rules.
+
+00:23:40.996 --> 00:23:44.636 A:middle
+And so this year, we implemented
+a number of new CSS standards
+
+00:23:44.636 --> 00:23:47.556 A:middle
+that are aimed at combatting
+that, making styles simpler
+
+00:23:47.556 --> 00:23:48.406 A:middle
+and easier to maintain.
+
+00:23:48.976 --> 00:23:52.756 A:middle
+It's a recurring theme in this
+talk, but I don't have time
+
+00:23:52.756 --> 00:23:55.526 A:middle
+to get into all the things
+we did this year, any-link,
+
+00:23:55.526 --> 00:23:59.336 A:middle
+placeholder-shown, lang,
+just a bunch of improvements,
+
+00:23:59.676 --> 00:24:02.316 A:middle
+but I do hope that you get our
+developer seed and try it out.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:59.676 --> 00:24:02.316 A:middle
+but I do hope that you get our
+developer seed and try it out.
+
+00:24:02.366 --> 00:24:05.766 A:middle
+So I want to talk first
+
+00:24:05.766 --> 00:24:08.336 A:middle
+about some recently unprefixed
+properties and values.
+
+00:24:08.856 --> 00:24:12.036 A:middle
+We became satisfied with
+the standards compliance
+
+00:24:12.036 --> 00:24:13.976 A:middle
+and stability of a number
+of features this year,
+
+00:24:14.186 --> 00:24:15.636 A:middle
+and so we've unprefixed them.
+
+00:24:15.636 --> 00:24:17.756 A:middle
+So now you can use them
+in their native format.
+
+00:24:18.106 --> 00:24:21.036 A:middle
+We will continue to support
+the WebKit prefixed version
+
+00:24:21.036 --> 00:24:23.216 A:middle
+of these, so your existing
+sites will continue to work.
+
+00:24:23.496 --> 00:24:25.856 A:middle
+We recommend that you
+switch to the new WebKit,
+
+00:24:26.566 --> 00:24:30.386 A:middle
+or the WebKit less version of
+these strings in your new code.
+
+00:24:31.476 --> 00:24:35.016 A:middle
+Now, I know it's going
+to be hard to top
+
+00:24:35.016 --> 00:24:36.936 A:middle
+that exciting unprefixing slide.
+
+00:24:36.936 --> 00:24:38.366 A:middle
+But I am going to try.
+
+00:24:40.376 --> 00:24:44.276 A:middle
+A very common need is
+the ability to recognize
+
+00:24:44.276 --> 00:24:46.356 A:middle
+when your site is
+being used in a browser
+
+00:24:46.356 --> 00:24:48.016 A:middle
+that supports specific features.
+
+00:24:48.276 --> 00:24:50.306 A:middle
+And so you may choose
+to use certain features
+
+00:24:50.306 --> 00:24:52.336 A:middle
+or not depending on
+what the browser can do.
+
+00:24:52.806 --> 00:24:58.776 A:middle
+Let's say, for example, I
+have a website where I want
+
+00:24:58.776 --> 00:25:02.366 A:middle
+to use a neat drop cap style,
+and so to achieve this look,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:24:58.776 --> 00:25:02.366 A:middle
+to use a neat drop cap style,
+and so to achieve this look,
+
+00:25:02.466 --> 00:25:05.366 A:middle
+I want to use a different
+font for that "C."
+
+00:25:05.636 --> 00:25:09.496 A:middle
+I want to add spacing and
+extra padding around it.
+
+00:25:09.496 --> 00:25:11.206 A:middle
+I want it to be a different size
+
+00:25:11.806 --> 00:25:14.226 A:middle
+so that it's visually
+distinctive.
+
+00:25:14.606 --> 00:25:16.736 A:middle
+And I can do that using
+WebKit initial letter,
+
+00:25:16.736 --> 00:25:19.206 A:middle
+which is another new
+feature this year in WebKit.
+
+00:25:19.726 --> 00:25:24.946 A:middle
+But if the browser viewing
+my site doesn't support this,
+
+00:25:25.056 --> 00:25:30.236 A:middle
+we get this awful --
+I mean this is gross!
+
+00:25:30.516 --> 00:25:32.736 A:middle
+I would never have used this
+font if I knew it was going
+
+00:25:32.736 --> 00:25:33.676 A:middle
+to end up looking like this.
+
+00:25:33.676 --> 00:25:35.656 A:middle
+I wouldn't have put
+the spacing around it,
+
+00:25:35.906 --> 00:25:37.106 A:middle
+if I knew it was
+not going to fit
+
+00:25:37.106 --> 00:25:38.576 A:middle
+in this with idea that I had.
+
+00:25:38.576 --> 00:25:40.536 A:middle
+I would rather have
+done nothing at all.
+
+00:25:40.886 --> 00:25:46.056 A:middle
+And so in the past, we would
+use code that looks something
+
+00:25:46.056 --> 00:25:48.806 A:middle
+like this, to probe the
+browser and say, hey,
+
+00:25:48.806 --> 00:25:50.246 A:middle
+do you support initial style?
+
+00:25:50.246 --> 00:25:52.646 A:middle
+And if you do, then I
+can do some extra work,
+
+00:25:52.646 --> 00:25:54.806 A:middle
+navigate the dom, find
+the elements that I want
+
+00:25:54.806 --> 00:25:56.836 A:middle
+to style, turn these things on.
+
+00:25:56.836 --> 00:25:59.976 A:middle
+Well, that's a lot of
+JavaScript to run or a lot
+
+00:25:59.976 --> 00:26:02.506 A:middle
+of libraries to import
+to do that.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:59.976 --> 00:26:02.506 A:middle
+of libraries to import
+to do that.
+
+00:26:03.606 --> 00:26:05.096 A:middle
+And now we don't have to.
+
+00:26:05.686 --> 00:26:09.216 A:middle
+WebKit supports the
+@supports function this year,
+
+00:26:09.676 --> 00:26:11.346 A:middle
+which allows us to
+create a conditional
+
+00:26:11.586 --> 00:26:15.446 A:middle
+where everything inside the
+brackets is applied only
+
+00:26:15.446 --> 00:26:16.666 A:middle
+if the conditional is true.
+
+00:26:16.666 --> 00:26:19.466 A:middle
+So in this case where I
+have WebKit initial letter,
+
+00:26:19.806 --> 00:26:22.516 A:middle
+I can have all my
+special styling inside the
+
+00:26:22.516 --> 00:26:24.676 A:middle
+supports clause.
+
+00:26:25.376 --> 00:26:27.326 A:middle
+And so if I go to that
+site with a browser
+
+00:26:27.326 --> 00:26:30.926 A:middle
+that doesn't support WebKit
+initial letter, I get a,
+
+00:26:31.166 --> 00:26:37.656 A:middle
+you know, blander view of
+things, but it's perfectly fine.
+
+00:26:37.656 --> 00:26:39.986 A:middle
+This is legible and
+it looks good.
+
+00:26:40.516 --> 00:26:42.786 A:middle
+But if someone goes to
+the site with Safari,
+
+00:26:43.296 --> 00:26:45.746 A:middle
+they get this glorious drop cap.
+
+00:26:46.696 --> 00:26:53.166 A:middle
+Amazing! I want to talk a little
+bit about reducing repetition.
+
+00:26:54.636 --> 00:26:57.076 A:middle
+This is some actual code
+from the web inspector.
+
+00:26:57.536 --> 00:27:00.476 A:middle
+Well, I cleaned it up a
+little bit for the slide,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:57.536 --> 00:27:00.476 A:middle
+Well, I cleaned it up a
+little bit for the slide,
+
+00:27:00.476 --> 00:27:03.466 A:middle
+but we have lots of cases where
+we have something like this,
+
+00:27:03.866 --> 00:27:08.016 A:middle
+defaults and a bunch of
+classes that are part of --
+
+00:27:08.016 --> 00:27:09.196 A:middle
+are part of that same group,
+
+00:27:09.376 --> 00:27:13.496 A:middle
+and we want to apply
+some styling to them.
+
+00:27:13.726 --> 00:27:16.286 A:middle
+But we're repeating
+defaults over and over again,
+
+00:27:16.286 --> 00:27:19.666 A:middle
+and you multiply this times
+dozens of other classes
+
+00:27:19.666 --> 00:27:22.596 A:middle
+and hundreds of other styles
+that we are trying to achieve
+
+00:27:23.026 --> 00:27:25.666 A:middle
+and it ends up being a
+lot of stuff to maintain.
+
+00:27:26.966 --> 00:27:31.056 A:middle
+And so the CSS 4
+designers agreed
+
+00:27:31.056 --> 00:27:33.876 A:middle
+and created the matches
+pseudo-class.
+
+00:27:34.486 --> 00:27:37.146 A:middle
+And what this does
+is it allows us
+
+00:27:37.696 --> 00:27:42.406 A:middle
+to programmatically
+define all the permutations
+
+00:27:42.406 --> 00:27:47.066 A:middle
+between default, for example, a
+class, and a list of selectors.
+
+00:27:47.816 --> 00:27:49.196 A:middle
+And this takes the place
+
+00:27:49.196 --> 00:27:51.376 A:middle
+of those repeated
+lines of common stuff.
+
+00:27:52.906 --> 00:27:54.226 A:middle
+Replaces it with one line.
+
+00:27:55.236 --> 00:27:57.516 A:middle
+And, so, about the only
+thing I like better
+
+00:27:57.516 --> 00:27:59.366 A:middle
+than writing code
+is deleting it.
+
+00:27:59.456 --> 00:28:01.356 A:middle
+And so this is fantastic!
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:59.456 --> 00:28:01.356 A:middle
+And so this is fantastic!
+
+00:28:01.356 --> 00:28:05.186 A:middle
+Because we can get rid of tons
+and tons of replicated code.
+
+00:28:05.186 --> 00:28:07.406 A:middle
+This was a great day in the
+web inspector when we were able
+
+00:28:07.406 --> 00:28:09.886 A:middle
+to land these changes and get
+rid of all this duplication.
+
+00:28:10.446 --> 00:28:15.776 A:middle
+And so those were some new
+CSS features this year.
+
+00:28:15.776 --> 00:28:19.046 A:middle
+And that also completes
+our discussion
+
+00:28:19.046 --> 00:28:20.696 A:middle
+about enhancements in Safari.
+
+00:28:20.696 --> 00:28:25.726 A:middle
+So now I want to shift gears
+a little bit and talk a bit
+
+00:28:25.726 --> 00:28:29.116 A:middle
+about creating amazing
+experiences on OS X and iOS.
+
+00:28:29.976 --> 00:28:33.346 A:middle
+How many of you here have sites
+
+00:28:33.346 --> 00:28:36.336 A:middle
+that are targeted
+just for desktop?
+
+00:28:36.906 --> 00:28:38.706 A:middle
+Or you have special things
+that are just for desktop?
+
+00:28:39.196 --> 00:28:39.796 A:middle
+One or two.
+
+00:28:40.556 --> 00:28:43.746 A:middle
+And others that might have stuff
+that's specific for mobile,
+
+00:28:43.826 --> 00:28:45.176 A:middle
+right, iOS and Safari.
+
+00:28:46.396 --> 00:28:51.926 A:middle
+And so while the bulk of my
+talk is aimed at convincing you
+
+00:28:51.926 --> 00:28:53.766 A:middle
+to use some of these
+web standard features
+
+00:28:53.766 --> 00:28:56.826 A:middle
+that have been developed,
+in this part of the talk,
+
+00:28:56.826 --> 00:28:59.266 A:middle
+I'm hoping to convince you
+to adopt a few of the things
+
+00:28:59.706 --> 00:29:01.796 A:middle
+that are unique to Mac and iOS.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:59.706 --> 00:29:01.796 A:middle
+that are unique to Mac and iOS.
+
+00:29:02.266 --> 00:29:05.656 A:middle
+And by supporting these
+technologies, you can surprise
+
+00:29:05.656 --> 00:29:08.256 A:middle
+and delight your users and
+extend their engagement
+
+00:29:08.256 --> 00:29:11.226 A:middle
+with your content across
+our entire ecosystem.
+
+00:29:13.626 --> 00:29:17.186 A:middle
+AirPlay has been around on iOS
+since iOS 4 and we've supported
+
+00:29:17.186 --> 00:29:19.636 A:middle
+that in Safari since iOS 4.
+
+00:29:20.166 --> 00:29:25.016 A:middle
+But this year, we opened
+up AirPlay on Safari,
+
+00:29:25.166 --> 00:29:29.976 A:middle
+on OS X which allows your
+users to play your media
+
+00:29:30.816 --> 00:29:34.006 A:middle
+to Apple TV directly
+from the device.
+
+00:29:34.456 --> 00:29:38.196 A:middle
+The API is identical to the
+one that was produced for iOS.
+
+00:29:38.196 --> 00:29:40.146 A:middle
+So if you did the work
+to support it back
+
+00:29:40.146 --> 00:29:42.256 A:middle
+in 2013, you are done!
+
+00:29:42.456 --> 00:29:45.606 A:middle
+Or if you use our
+media controls,
+
+00:29:46.106 --> 00:29:47.206 A:middle
+you have that support now.
+
+00:29:47.626 --> 00:29:51.066 A:middle
+But if you haven't, I
+recommend that you look
+
+00:29:51.066 --> 00:29:54.606 A:middle
+at our WWDC 2013 talk where we
+go into some detail about how
+
+00:29:54.606 --> 00:29:56.106 A:middle
+to support the AirPlay protocol.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:00.176 --> 00:30:01.486 A:middle
+Multitasking.
+
+00:30:01.486 --> 00:30:04.456 A:middle
+Wasn't it cool to see
+multitasking on iPad yesterday?
+
+00:30:06.586 --> 00:30:08.956 A:middle
+Until yesterday you
+had a pretty good idea
+
+00:30:08.956 --> 00:30:11.426 A:middle
+that when you viewed content
+on an iPad, you had a good idea
+
+00:30:11.426 --> 00:30:12.236 A:middle
+of what you were getting.
+
+00:30:12.656 --> 00:30:14.246 A:middle
+You pretty much had
+the entire screen.
+
+00:30:14.456 --> 00:30:17.936 A:middle
+But now you can have two-thirds
+of the screen allocated
+
+00:30:17.936 --> 00:30:24.156 A:middle
+to your content, or
+half, or a third.
+
+00:30:24.156 --> 00:30:27.626 A:middle
+And so responsive design
+is really important now.
+
+00:30:28.436 --> 00:30:31.116 A:middle
+Users control the
+size of the view,
+
+00:30:31.696 --> 00:30:34.476 A:middle
+and iPad is a lot
+more like desktop now.
+
+00:30:35.056 --> 00:30:39.466 A:middle
+It's so important, responsive
+design is so important,
+
+00:30:39.466 --> 00:30:44.386 A:middle
+that we have an entire session
+tomorrow, same time, same place.
+
+00:30:45.036 --> 00:30:46.996 A:middle
+I know you all are capable
+of getting up in the morning
+
+00:30:46.996 --> 00:30:49.976 A:middle
+because you are here today,
+and I recommend you come
+
+00:30:49.976 --> 00:30:51.776 A:middle
+and see "Using Safari to Deliver
+
+00:30:51.776 --> 00:30:53.716 A:middle
+and Debug a Responsive
+Web Design" tomorrow,
+
+00:30:53.716 --> 00:30:56.096 A:middle
+which goes into the tools and
+features that have been added
+
+00:30:56.376 --> 00:30:59.786 A:middle
+to the web inspector in Safari
+to make your life easier
+
+00:30:59.786 --> 00:31:01.596 A:middle
+when trying to support
+these styles.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:59.786 --> 00:31:01.596 A:middle
+when trying to support
+these styles.
+
+00:31:02.036 --> 00:31:04.256 A:middle
+There's also a session
+on multitasking
+
+00:31:04.436 --> 00:31:08.236 A:middle
+for media-based apps on iPad and
+iOS 9 which is also of interest.
+
+00:31:08.736 --> 00:31:13.366 A:middle
+And we talked about
+picture-in-picture yesterday.
+
+00:31:13.936 --> 00:31:18.406 A:middle
+The iPad has always been a
+great way to view content,
+
+00:31:19.296 --> 00:31:22.056 A:middle
+and until yesterday,
+you had a good idea
+
+00:31:22.056 --> 00:31:24.286 A:middle
+that your content
+would be consumed
+
+00:31:24.286 --> 00:31:25.776 A:middle
+in this sort of full
+screen form.
+
+00:31:26.826 --> 00:31:27.866 A:middle
+But now we have a new way.
+
+00:31:27.866 --> 00:31:30.446 A:middle
+We have picture-in-picture
+which allows you
+
+00:31:30.446 --> 00:31:34.276 A:middle
+to compress your pictures of
+your children into a small box
+
+00:31:34.276 --> 00:31:36.636 A:middle
+in the corner of your
+giant empty calendar.
+
+00:31:41.086 --> 00:31:43.466 A:middle
+But it's a great feature.
+
+00:31:43.636 --> 00:31:47.776 A:middle
+We have -- we defined this in
+WebKit as presentation mode.
+
+00:31:47.776 --> 00:31:50.106 A:middle
+We support full screen,
+which you are familiar with.
+
+00:31:50.606 --> 00:31:55.236 A:middle
+And inline in which your content
+is displayed in the page itself,
+
+00:31:55.556 --> 00:31:59.136 A:middle
+and picture-in-picture,
+which is our new style.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:00.146 --> 00:32:03.766 A:middle
+So we have a range of sizes that
+you need to be worried about.
+
+00:32:05.696 --> 00:32:08.426 A:middle
+The WebKit, default WebKit
+Media Controls support
+
+00:32:08.426 --> 00:32:09.896 A:middle
+picture-in-picture
+out of the box,
+
+00:32:10.766 --> 00:32:12.596 A:middle
+but if you write your
+own media controls,
+
+00:32:12.596 --> 00:32:14.746 A:middle
+you need to use the
+presentation mode API
+
+00:32:14.836 --> 00:32:15.896 A:middle
+to control these things.
+
+00:32:16.396 --> 00:32:19.966 A:middle
+And our developer documentation
+has information on how
+
+00:32:19.966 --> 00:32:22.836 A:middle
+to take advantage of
+that in your own content.
+
+00:32:23.206 --> 00:32:25.526 A:middle
+There are a few things for
+you to be thinking about here.
+
+00:32:26.516 --> 00:32:30.376 A:middle
+When a viewer starts
+viewing your content
+
+00:32:30.376 --> 00:32:32.366 A:middle
+in full screen video display,
+
+00:32:32.616 --> 00:32:34.426 A:middle
+the page may not
+be obscured anymore
+
+00:32:34.426 --> 00:32:37.486 A:middle
+because the viewer can exit
+full screen mode and go
+
+00:32:37.486 --> 00:32:39.896 A:middle
+into picture-in-picture without
+you really knowing about it.
+
+00:32:40.096 --> 00:32:42.826 A:middle
+So if you take the opportunity
+to turn certain features off
+
+00:32:42.826 --> 00:32:45.026 A:middle
+or hide content on your
+page while a video is being
+
+00:32:45.026 --> 00:32:47.966 A:middle
+displayed, that may not
+look right if they are going
+
+00:32:47.966 --> 00:32:48.746 A:middle
+to picture-in-picture.
+
+00:32:49.016 --> 00:32:52.056 A:middle
+And since the media may be
+playing in a very small window,
+
+00:32:52.386 --> 00:32:55.756 A:middle
+we strongly recommend that
+use HTTP Live Streaming,
+
+00:32:55.886 --> 00:32:58.616 A:middle
+or HLS, for delivering media.
+
+00:32:58.616 --> 00:33:03.546 A:middle
+HLS allows our media engine
+to select a bit encoding,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:58.616 --> 00:33:03.546 A:middle
+HLS allows our media engine
+to select a bit encoding,
+
+00:33:03.586 --> 00:33:06.696 A:middle
+a bit rate for the video
+that matches the size
+
+00:33:06.696 --> 00:33:08.066 A:middle
+of the content being displayed.
+
+00:33:08.376 --> 00:33:10.566 A:middle
+It also takes into
+effect, network conditions,
+
+00:33:10.566 --> 00:33:12.286 A:middle
+battery status on the device.
+
+00:33:12.706 --> 00:33:15.256 A:middle
+And so by using it,
+you will ensure
+
+00:33:15.256 --> 00:33:19.216 A:middle
+that your user has
+the best experience
+
+00:33:19.216 --> 00:33:22.136 A:middle
+because it will take care of a
+lot of those details for them.
+
+00:33:23.356 --> 00:33:26.206 A:middle
+Multitasking essentials for
+media based apps on iPad
+
+00:33:26.456 --> 00:33:28.626 A:middle
+in iOS 9 is a great
+session to see on Wednesday.
+
+00:33:28.706 --> 00:33:31.766 A:middle
+And if you haven't heard
+enough from me this year,
+
+00:33:31.766 --> 00:33:34.476 A:middle
+you can see me and Jer
+talking about advanced media
+
+00:33:34.476 --> 00:33:37.866 A:middle
+for the web last year, where we
+went into some detail about HLS.
+
+00:33:38.626 --> 00:33:41.716 A:middle
+So finally, I want to talk
+about something really amazing,
+
+00:33:42.016 --> 00:33:43.466 A:middle
+our Force Touch trackpad.
+
+00:33:44.816 --> 00:33:47.366 A:middle
+back in March we were excited
+to show off our new products
+
+00:33:47.366 --> 00:33:49.236 A:middle
+with this great new hardware.
+
+00:33:49.756 --> 00:33:52.956 A:middle
+It allows us to recognize
+a second level of click,
+
+00:33:53.056 --> 00:33:55.456 A:middle
+we call Force Click, and we
+are really excited about this.
+
+00:33:55.976 --> 00:34:01.786 A:middle
+We had a lot of fun adding
+new user interface features
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:55.976 --> 00:34:01.786 A:middle
+We had a lot of fun adding
+new user interface features
+
+00:34:01.786 --> 00:34:05.286 A:middle
+like this mode of dictionary
+look up that allows us to find
+
+00:34:05.286 --> 00:34:06.886 A:middle
+out what a fluoroelastomer
+really is.
+
+00:34:07.516 --> 00:34:11.116 A:middle
+And we added a way to view
+the content behind a link
+
+00:34:11.116 --> 00:34:12.786 A:middle
+without having to
+leave the web page.
+
+00:34:13.206 --> 00:34:15.766 A:middle
+I know that all of you can
+come up with even better ways
+
+00:34:15.766 --> 00:34:18.545 A:middle
+to make use of this
+hardware in a web context.
+
+00:34:18.545 --> 00:34:21.295 A:middle
+And so we wanted to open
+up access to that hardware
+
+00:34:21.295 --> 00:34:22.886 A:middle
+so that you could
+use it yourselves
+
+00:34:22.886 --> 00:34:23.946 A:middle
+in your own web pages.
+
+00:34:24.426 --> 00:34:27.815 A:middle
+Let me talk briefly about
+how this fits together.
+
+00:34:28.416 --> 00:34:31.266 A:middle
+When we have a normal
+Trackpad, if the user presses
+
+00:34:31.266 --> 00:34:33.835 A:middle
+down we eventually
+reach a level of force
+
+00:34:33.976 --> 00:34:36.356 A:middle
+that we consider
+to be mouse down.
+
+00:34:36.886 --> 00:34:40.396 A:middle
+And as the user continues
+to press, and then lets up,
+
+00:34:40.676 --> 00:34:43.136 A:middle
+we come back through
+that pressure level
+
+00:34:43.346 --> 00:34:46.746 A:middle
+and call it mouse up, and
+we issue it a click event.
+
+00:34:47.616 --> 00:34:52.255 A:middle
+We extended this model to
+support Force Click operations
+
+00:34:52.585 --> 00:34:55.795 A:middle
+by adding a WebKit force
+property to all mouse events,
+
+00:34:55.795 --> 00:34:57.596 A:middle
+which tells you how much
+force is being applied
+
+00:34:57.596 --> 00:34:58.126 A:middle
+to the Trackpad.
+
+00:34:58.126 --> 00:35:01.986 A:middle
+And then we also added
+a number of new events
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:58.126 --> 00:35:01.986 A:middle
+And then we also added
+a number of new events
+
+00:35:01.986 --> 00:35:04.656 A:middle
+that you can register
+for, to handle this.
+
+00:35:05.186 --> 00:35:08.276 A:middle
+So if we go back
+to this last slide
+
+00:35:08.276 --> 00:35:10.186 A:middle
+where we had mouse
+up, mouse down.
+
+00:35:10.506 --> 00:35:13.396 A:middle
+We now emit a mouse
+force will begin event.
+
+00:35:13.666 --> 00:35:16.356 A:middle
+And that's a great opportunity
+to call prevent defaults
+
+00:35:16.356 --> 00:35:18.876 A:middle
+on the event itself
+to prevent us
+
+00:35:18.876 --> 00:35:21.106 A:middle
+from calling the
+dictionary look up logic
+
+00:35:21.106 --> 00:35:22.516 A:middle
+or from doing the link preview,
+
+00:35:22.546 --> 00:35:23.926 A:middle
+if you want to take
+over this yourself.
+
+00:35:24.346 --> 00:35:28.806 A:middle
+After passing through
+the mouse down phase,
+
+00:35:28.806 --> 00:35:32.136 A:middle
+if the user continues to press,
+we hit a second level of force
+
+00:35:32.136 --> 00:35:34.276 A:middle
+that we consider
+to be a force click
+
+00:35:34.276 --> 00:35:36.206 A:middle
+and we emit a mouse
+force down event.
+
+00:35:36.586 --> 00:35:40.396 A:middle
+And as the user lets
+up on the force,
+
+00:35:40.396 --> 00:35:42.056 A:middle
+we pass through a
+mouse force up.
+
+00:35:42.056 --> 00:35:45.226 A:middle
+So it's completely analogous
+to mouse up, mouse down,
+
+00:35:45.226 --> 00:35:47.946 A:middle
+we have mouse force
+down, mouse force up.
+
+00:35:48.446 --> 00:35:53.086 A:middle
+And during the entire phase
+of time, between mouse down
+
+00:35:53.296 --> 00:35:56.456 A:middle
+and mouse up, we emit
+mouse force changed events
+
+00:35:56.456 --> 00:35:59.986 A:middle
+and we do this because the
+user may be changing pressure,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:00.226 --> 00:36:01.996 A:middle
+changing the amount
+of force they apply
+
+00:36:02.476 --> 00:36:04.096 A:middle
+without moving their
+finger around.
+
+00:36:04.096 --> 00:36:06.136 A:middle
+So there would be
+no mouse move event
+
+00:36:06.136 --> 00:36:07.526 A:middle
+to capture that force for you.
+
+00:36:08.836 --> 00:36:13.316 A:middle
+And note, we also define
+two layers, two constants
+
+00:36:13.316 --> 00:36:14.996 A:middle
+that define the level of force
+
+00:36:14.996 --> 00:36:17.276 A:middle
+at a regular click
+and a Force Click.
+
+00:36:17.276 --> 00:36:19.996 A:middle
+And we strongly recommend you
+use these constants instead
+
+00:36:19.996 --> 00:36:23.006 A:middle
+of capturing numeric values
+because those may change
+
+00:36:23.316 --> 00:36:25.396 A:middle
+as the specification matures.
+
+00:36:26.496 --> 00:36:29.476 A:middle
+And so to show us how to
+take advantage of this
+
+00:36:30.166 --> 00:36:32.246 A:middle
+in your own website, I would
+like to invite Chris back
+
+00:36:33.146 --> 00:36:34.046 A:middle
+to show us another demo.
+
+00:36:35.516 --> 00:36:38.586 A:middle
+[Applause]
+
+00:36:39.086 --> 00:36:39.326 A:middle
+&gt;&gt; CHRIS YOUNG-ZAWADA: Great.
+
+00:36:40.606 --> 00:36:41.066 A:middle
+Thanks, Brent.
+
+00:36:41.386 --> 00:36:44.546 A:middle
+So as Brent just told us about
+Force Touch, there's a lot
+
+00:36:44.546 --> 00:36:45.896 A:middle
+of really cool things
+you can do with it
+
+00:36:45.896 --> 00:36:47.366 A:middle
+that can really enhance
+your websites.
+
+00:36:47.746 --> 00:36:49.206 A:middle
+And if you guys remember
+when we were looking
+
+00:36:49.206 --> 00:36:52.996 A:middle
+at the demo earlier, when we
+were clicking into this overlay,
+
+00:36:52.996 --> 00:36:54.986 A:middle
+we had the ability to
+choose our favorite photos.
+
+00:36:55.346 --> 00:36:58.156 A:middle
+That's really easy to do,
+but it's also another step
+
+00:36:58.156 --> 00:37:00.466 A:middle
+and I think if we can really
+make it better for users
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:58.156 --> 00:37:00.466 A:middle
+and I think if we can really
+make it better for users
+
+00:37:00.466 --> 00:37:03.206 A:middle
+that have a Force Touch
+trackpad in case we want
+
+00:37:03.206 --> 00:37:05.676 A:middle
+to make a little bit more
+interactivity for them.
+
+00:37:07.036 --> 00:37:10.256 A:middle
+So while I was offstage,
+I actually made a couple
+
+00:37:10.256 --> 00:37:12.506 A:middle
+of changes to the code and what
+I have done is I've actually
+
+00:37:12.506 --> 00:37:14.426 A:middle
+extended the Snap
+Points masonry gallery
+
+00:37:14.426 --> 00:37:16.716 A:middle
+to create a force enhanced
+masonry gallery and we are going
+
+00:37:16.716 --> 00:37:18.226 A:middle
+to use this to add
+some force events,
+
+00:37:18.396 --> 00:37:21.166 A:middle
+and actually do some
+animation on force change.
+
+00:37:21.946 --> 00:37:23.556 A:middle
+So there's a couple of
+things to point out here.
+
+00:37:23.556 --> 00:37:25.666 A:middle
+The most important thing is we
+are going to get the min force
+
+00:37:25.666 --> 00:37:27.916 A:middle
+and max force values from
+the mouse event data,
+
+00:37:27.916 --> 00:37:31.386 A:middle
+which are the force at mouse
+down and force at force mouse
+
+00:37:31.416 --> 00:37:33.746 A:middle
+down contstants that
+Brent just told us about.
+
+00:37:34.146 --> 00:37:35.786 A:middle
+The other thing we are
+going to do is we're going
+
+00:37:35.786 --> 00:37:40.406 A:middle
+to bind some event listeners for
+the force events that get thrown
+
+00:37:40.406 --> 00:37:43.626 A:middle
+so we can actually bind to
+them and make updates on those.
+
+00:37:44.126 --> 00:37:46.276 A:middle
+I've just stepped out how we
+are going to handle those,
+
+00:37:46.276 --> 00:37:47.336 A:middle
+so it doesn't do
+anything right now.
+
+00:37:47.336 --> 00:37:48.536 A:middle
+So we are going to
+go step by step.
+
+00:37:50.216 --> 00:37:52.006 A:middle
+Cool. So to get started, I
+am actually going to start
+
+00:37:52.006 --> 00:37:53.076 A:middle
+with force mouse down.
+
+00:37:53.196 --> 00:37:55.246 A:middle
+And what we are going to do
+in this case, is we are going
+
+00:37:55.326 --> 00:37:56.796 A:middle
+to run this function
+I have written,
+
+00:37:56.796 --> 00:37:58.636 A:middle
+called set within
+force range of true,
+
+00:37:58.976 --> 00:38:01.696 A:middle
+and all this really does is
+put a CSS property in the page
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:37:58.976 --> 00:38:01.696 A:middle
+and all this really does is
+put a CSS property in the page
+
+00:38:01.696 --> 00:38:04.336 A:middle
+that makes sure that our CSS
+transitions don't interfere
+
+00:38:04.336 --> 00:38:06.996 A:middle
+with our own animations in
+JavaScript, because we are going
+
+00:38:06.996 --> 00:38:09.026 A:middle
+to be getting a lot of force
+data with force change events.
+
+00:38:09.026 --> 00:38:10.166 A:middle
+We don't want those
+to interfere.
+
+00:38:10.166 --> 00:38:11.216 A:middle
+So this basically makes sure
+
+00:38:11.216 --> 00:38:13.306 A:middle
+that the transitions is
+set in a lot of things.
+
+00:38:14.346 --> 00:38:16.486 A:middle
+The next thing we are
+going to do is look
+
+00:38:16.486 --> 00:38:17.946 A:middle
+at what kit mouse force changed.
+
+00:38:19.296 --> 00:38:20.776 A:middle
+And we do a few things here.
+
+00:38:20.776 --> 00:38:22.216 A:middle
+We are actually getting
+the force data
+
+00:38:22.616 --> 00:38:24.586 A:middle
+from the WebKit force
+property of the event.
+
+00:38:24.936 --> 00:38:26.546 A:middle
+And we are going to create
+a progress, and we are going
+
+00:38:26.546 --> 00:38:28.266 A:middle
+to see how far along
+between the min force
+
+00:38:28.266 --> 00:38:29.466 A:middle
+and the max force values we are.
+
+00:38:29.906 --> 00:38:32.066 A:middle
+And we're actually going
+to animate some elements
+
+00:38:32.106 --> 00:38:34.366 A:middle
+between those, so you'll see
+that we are going to go back
+
+00:38:34.366 --> 00:38:35.586 A:middle
+and do some interesting
+things there.
+
+00:38:36.516 --> 00:38:37.546 A:middle
+And basically when we are
+
+00:38:37.546 --> 00:38:39.026 A:middle
+through our progress
+we are going to say
+
+00:38:39.026 --> 00:38:40.576 A:middle
+that we favorited the image
+and we are going to say
+
+00:38:40.576 --> 00:38:41.326 A:middle
+that we are done animating.
+
+00:38:41.946 --> 00:38:44.686 A:middle
+So if we go back and refresh.
+
+00:38:45.566 --> 00:38:48.046 A:middle
+If you hover over this photo you
+can see that now as I press up
+
+00:38:48.046 --> 00:38:50.376 A:middle
+and down, we are actually
+scaling the image depending
+
+00:38:50.376 --> 00:38:52.376 A:middle
+on the pressure that I'm
+applying to the force trackpad.
+
+00:38:52.916 --> 00:38:54.916 A:middle
+It's really cool and
+it's really interactive
+
+00:38:54.916 --> 00:38:56.256 A:middle
+and it adds a whole
+new layer of depth.
+
+00:38:57.226 --> 00:38:58.596 A:middle
+When I press all the
+way down, you will see
+
+00:38:58.596 --> 00:39:01.026 A:middle
+that this heart appears which
+means we've liked the photo,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:38:58.596 --> 00:39:01.026 A:middle
+that this heart appears which
+means we've liked the photo,
+
+00:39:01.026 --> 00:39:02.696 A:middle
+but I'm actually still
+holding my finger down.
+
+00:39:02.696 --> 00:39:05.586 A:middle
+So as I pull it up,
+you will see that we go
+
+00:39:05.586 --> 00:39:06.586 A:middle
+into this overlay view.
+
+00:39:06.836 --> 00:39:08.636 A:middle
+And that might not
+be what we want.
+
+00:39:08.636 --> 00:39:11.046 A:middle
+What's happening is that the
+click event is still being fired
+
+00:39:11.046 --> 00:39:12.406 A:middle
+because we haven't prevented any
+
+00:39:12.406 --> 00:39:13.886 A:middle
+of the default behavior
+in the browser.
+
+00:39:13.986 --> 00:39:16.226 A:middle
+So to do that, we
+actually just go back
+
+00:39:16.226 --> 00:39:17.276 A:middle
+and add a quick line of code.
+
+00:39:18.356 --> 00:39:21.076 A:middle
+And we're going to go to
+'mouse force will begin'
+
+00:39:21.426 --> 00:39:23.276 A:middle
+and we are basically just
+going to call prevent default.
+
+00:39:23.276 --> 00:39:24.616 A:middle
+This is going to
+make sure that none
+
+00:39:24.616 --> 00:39:27.036 A:middle
+of the OS interactions
+interfere with what you
+
+00:39:27.036 --> 00:39:29.676 A:middle
+as developers are doing
+and you get full control.
+
+00:39:30.726 --> 00:39:33.476 A:middle
+So if we go back, we can
+try it one more time,
+
+00:39:33.476 --> 00:39:37.326 A:middle
+and after we hit this level,
+nothing is going to happen.
+
+00:39:37.326 --> 00:39:38.756 A:middle
+But we still have
+to reset everything.
+
+00:39:38.756 --> 00:39:40.786 A:middle
+So to do that, we have to
+remove the styles we've set
+
+00:39:40.786 --> 00:39:42.286 A:middle
+with JavaScript and make sure
+
+00:39:42.286 --> 00:39:43.526 A:middle
+that everything runs
+really smoothly.
+
+00:39:44.376 --> 00:39:49.086 A:middle
+So we can just fill that
+in with mouse force up.
+
+00:39:49.546 --> 00:39:50.996 A:middle
+And all we are doing
+here is removing a lot
+
+00:39:50.996 --> 00:39:53.246 A:middle
+of the styles we set
+and making sure that all
+
+00:39:53.246 --> 00:39:55.946 A:middle
+of the CSS properties we put in
+there get removed and go back
+
+00:39:55.946 --> 00:39:58.186 A:middle
+to normal as if we never
+touched this at all.
+
+00:39:58.716 --> 00:40:02.306 A:middle
+Great. So with this new
+interaction we can hover
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:39:58.716 --> 00:40:02.306 A:middle
+Great. So with this new
+interaction we can hover
+
+00:40:02.306 --> 00:40:06.266 A:middle
+over the photos, get that
+animation, like them,
+
+00:40:06.866 --> 00:40:11.126 A:middle
+and just like that, we have got
+the ability to add favorites
+
+00:40:11.126 --> 00:40:13.116 A:middle
+to our photos and we can still
+just do a regular click to go
+
+00:40:13.116 --> 00:40:14.176 A:middle
+to the gallery any time.
+
+00:40:14.606 --> 00:40:16.966 A:middle
+I think this is really
+cool and I'm really excited
+
+00:40:16.966 --> 00:40:18.646 A:middle
+to see what you guys are going
+to do with this new technology.
+
+00:40:19.186 --> 00:40:20.776 A:middle
+And with that, I am going
+to give it back to Brent.
+
+00:40:20.776 --> 00:40:20.956 A:middle
+Thank you.
+
+00:40:21.516 --> 00:40:26.276 A:middle
+[Applause]
+
+00:40:26.776 --> 00:40:27.336 A:middle
+&gt;&gt; BRENT FULGHAM: Thanks, Chris.
+
+00:40:28.786 --> 00:40:31.676 A:middle
+So I think you will agree
+that that was a great way
+
+00:40:31.676 --> 00:40:32.826 A:middle
+to make use of this hardware.
+
+00:40:33.426 --> 00:40:37.466 A:middle
+A couple of best practices
+for the Force Touch trackpad
+
+00:40:37.466 --> 00:40:38.966 A:middle
+that I would like to recommend.
+
+00:40:39.676 --> 00:40:41.776 A:middle
+Always use the mouse
+force constants
+
+00:40:41.886 --> 00:40:45.006 A:middle
+and not hardcoded numerical
+values, because we expect
+
+00:40:45.006 --> 00:40:48.756 A:middle
+that these may change as
+we navigate the process
+
+00:40:48.966 --> 00:40:52.476 A:middle
+of fulfilling or
+completing this feature.
+
+00:40:53.136 --> 00:40:56.146 A:middle
+And remember that not all users
+have Force Touch hardware,
+
+00:40:56.146 --> 00:41:01.786 A:middle
+sadly, and so we should use this
+as a shortcut or as a flourish,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:40:56.146 --> 00:41:01.786 A:middle
+sadly, and so we should use this
+as a shortcut or as a flourish,
+
+00:41:01.786 --> 00:41:03.866 A:middle
+an extra for people
+who have this hardware.
+
+00:41:04.166 --> 00:41:07.336 A:middle
+Use it to drive animations or
+to provide a shortcut to content
+
+00:41:07.336 --> 00:41:08.666 A:middle
+that you can get to other ways.
+
+00:41:09.136 --> 00:41:14.706 A:middle
+And that was creating amazing
+experiences on Mac and iOS.
+
+00:41:15.306 --> 00:41:19.176 A:middle
+And that rounds out the
+bulk of the talk today.
+
+00:41:19.266 --> 00:41:21.196 A:middle
+I just want to summarize
+a couple of things.
+
+00:41:21.936 --> 00:41:24.366 A:middle
+We talked about backdrop
+filters, an amazing way
+
+00:41:24.366 --> 00:41:28.096 A:middle
+of hardware accelerated backdrop
+filter effects on your sites.
+
+00:41:28.466 --> 00:41:32.866 A:middle
+Scroll Snap Points allow
+you to get tiled scrolling
+
+00:41:32.866 --> 00:41:34.516 A:middle
+with just a few lines of CSS.
+
+00:41:35.396 --> 00:41:38.656 A:middle
+We talked about the amazing
+new class syntax in JavaScript,
+
+00:41:39.406 --> 00:41:44.696 A:middle
+the @supports functions for CSS,
+so that we can block out content
+
+00:41:44.696 --> 00:41:46.316 A:middle
+and have styles that apply only
+
+00:41:46.316 --> 00:41:47.846 A:middle
+when certain features
+are available.
+
+00:41:48.456 --> 00:41:52.216 A:middle
+We talked a bit about AirPlay
+coming to OS X through Safari,
+
+00:41:52.736 --> 00:41:56.376 A:middle
+and picture-in-picture and iOS
+multitasking, and some sessions
+
+00:41:56.376 --> 00:42:00.156 A:middle
+that you should see about that,
+and this new Force Touch API.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:41:56.376 --> 00:42:00.156 A:middle
+that you should see about that,
+and this new Force Touch API.
+
+00:42:01.276 --> 00:42:04.756 A:middle
+For more information,
+documentation is available.
+
+00:42:04.756 --> 00:42:06.216 A:middle
+We always love people to come
+
+00:42:06.216 --> 00:42:09.726 A:middle
+to the WebKit project
+at www.WebKit.org.
+
+00:42:10.086 --> 00:42:12.636 A:middle
+Join us and see what we
+are doing or come try
+
+00:42:12.636 --> 00:42:14.916 A:middle
+out the nightlies and see
+what new features are coming
+
+00:42:14.916 --> 00:42:15.816 A:middle
+for next year.
+
+00:42:15.816 --> 00:42:16.836 A:middle
+Get a sneak peek.
+
+00:42:16.836 --> 00:42:20.446 A:middle
+And for general inquiries,
+I recommend that you get
+
+00:42:20.446 --> 00:42:22.546 A:middle
+to know Jonathan Davis,
+our WebKit Evangelist.
+
+00:42:22.546 --> 00:42:25.146 A:middle
+He's a great person to get
+to know when you have issues
+
+00:42:25.146 --> 00:42:28.576 A:middle
+that you want to talk about or
+if you have messages you want
+
+00:42:28.576 --> 00:42:30.076 A:middle
+to get to us on the WebKit team.
+
+00:42:31.246 --> 00:42:34.016 A:middle
+And with that, thank you so
+much for your time this morning
+
+00:42:34.016 --> 00:42:35.966 A:middle
+and have a great time
+at WWDC this week.
+
+00:42:36.031 --> 00:42:38.031 A:middle
+[Applause]
+
+00:42:38.046 --> 00:42:38.266 A:middle
+Thank you.
+

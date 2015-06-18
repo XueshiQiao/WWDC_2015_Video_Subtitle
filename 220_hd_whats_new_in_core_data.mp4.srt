@@ -1,0 +1,2268 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:25.516 --> 00:00:30.966 A:middle
+[Applause]
+
+00:00:31.466 --> 00:00:34.216 A:middle
+Good afternoon and
+welcome to Session 220.
+
+00:00:34.756 --> 00:00:38.156 A:middle
+My name is Rishi Verma and I'll
+be joined by Scott Perry later
+
+00:00:38.556 --> 00:00:41.406 A:middle
+and we'll be presenting What's
+New in Core Data this year.
+
+00:00:43.186 --> 00:00:44.776 A:middle
+Before we get into
+what's new though,
+
+00:00:44.996 --> 00:00:47.376 A:middle
+I'd like to tell you a little
+bit about what is Core Data.
+
+00:00:48.316 --> 00:00:52.266 A:middle
+Now a lot of you have made these
+amazing apps with beautiful UI
+
+00:00:52.266 --> 00:00:55.376 A:middle
+and you've tied it all with
+data that you're either getting
+
+00:00:55.376 --> 00:00:57.916 A:middle
+from an external data
+source or provided
+
+00:00:57.916 --> 00:00:58.966 A:middle
+with your resource bundle.
+
+00:00:59.736 --> 00:01:02.726 A:middle
+Now as you process those
+objects you're building
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:59.736 --> 00:01:02.726 A:middle
+Now as you process those
+objects you're building
+
+00:01:02.726 --> 00:01:06.766 A:middle
+up a complex graph and shuttling
+all those changes to your UI.
+
+00:01:06.766 --> 00:01:08.966 A:middle
+And then as your
+user makes changes
+
+00:01:08.966 --> 00:01:11.976 A:middle
+on the UI you're pushing
+all those changes back
+
+00:01:12.066 --> 00:01:16.066 A:middle
+through your object graph
+and back to your data source.
+
+00:01:16.146 --> 00:01:17.776 A:middle
+Well, Core Data makes this easy.
+
+00:01:18.666 --> 00:01:20.776 A:middle
+Core Data will manage
+your object graph for you.
+
+00:01:21.676 --> 00:01:24.446 A:middle
+Simply tell us a bit about
+your Cocoa model there
+
+00:01:24.696 --> 00:01:27.056 A:middle
+and the object model
+editor, tell us a little
+
+00:01:27.056 --> 00:01:29.206 A:middle
+about your objects,
+their attributes,
+
+00:01:29.586 --> 00:01:32.406 A:middle
+how they're all related to
+each other and we'll take care
+
+00:01:32.406 --> 00:01:36.656 A:middle
+of the rest and we'll also
+persist it in the back end
+
+00:01:36.656 --> 00:01:41.366 A:middle
+of your choice, be it sequel
+light or your own custom store.
+
+00:01:42.466 --> 00:01:47.406 A:middle
+Now, as you ingest objects, your
+relationships will be changing
+
+00:01:47.766 --> 00:01:50.546 A:middle
+and Core Data will maintain
+these for you, so if you set
+
+00:01:50.546 --> 00:01:52.236 A:middle
+up any delete propagation rules
+
+00:01:52.236 --> 00:01:55.136 A:middle
+in your object model
+we'll delete and object
+
+00:01:55.136 --> 00:01:57.306 A:middle
+and propagate those
+deletes as you define.
+
+00:01:59.036 --> 00:02:03.426 A:middle
+Finding objects in your object
+graph is also particularly easy.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:59.036 --> 00:02:03.426 A:middle
+Finding objects in your object
+graph is also particularly easy.
+
+00:02:04.326 --> 00:02:08.306 A:middle
+Simply use an NSFetchRequest
+and give it a predicate
+
+00:02:08.485 --> 00:02:10.336 A:middle
+to find the objects
+you're looking for.
+
+00:02:10.936 --> 00:02:12.386 A:middle
+And we'll go and
+find them for you.
+
+00:02:13.746 --> 00:02:15.826 A:middle
+Also convenient is batching.
+
+00:02:16.786 --> 00:02:21.006 A:middle
+This allows you to only pull up
+a smaller portion of the objects
+
+00:02:21.006 --> 00:02:23.786 A:middle
+in your data set that may
+result from your fetch request,
+
+00:02:24.286 --> 00:02:27.696 A:middle
+allowing you to have smaller
+chunks of data as you go
+
+00:02:27.696 --> 00:02:31.436 A:middle
+through your data set and
+also another candy feature
+
+00:02:31.626 --> 00:02:35.006 A:middle
+of NSFetchRequest is
+relationship prefetching.
+
+00:02:35.836 --> 00:02:39.656 A:middle
+Tell us an object to fetch
+and we'll prefetch all
+
+00:02:39.656 --> 00:02:41.966 A:middle
+of its related objects
+so when you traverse
+
+00:02:41.966 --> 00:02:44.876 A:middle
+that relationship you're
+still doing so in memory.
+
+00:02:47.076 --> 00:02:50.056 A:middle
+Then you simply just
+tie this all to UI.
+
+00:02:51.096 --> 00:02:54.656 A:middle
+You take an NSFetch result
+controller and tie it
+
+00:02:54.656 --> 00:02:56.176 A:middle
+to a Table View like
+we've done here.
+
+00:02:56.946 --> 00:02:58.566 A:middle
+And as I delete the
+Apple butter,
+
+00:02:59.016 --> 00:03:00.756 A:middle
+my UI will update accordingly.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:59.016 --> 00:03:00.756 A:middle
+my UI will update accordingly.
+
+00:03:01.886 --> 00:03:06.276 A:middle
+And then as I ingest more
+objects and I add banana bread,
+
+00:03:06.776 --> 00:03:08.686 A:middle
+my UI will update
+accordingly as well.
+
+00:03:09.356 --> 00:03:12.406 A:middle
+This is all handled for you, you
+get all the key view behaviors
+
+00:03:12.686 --> 00:03:15.566 A:middle
+and change notifications
+handled for you by Core Data.
+
+00:03:16.166 --> 00:03:18.866 A:middle
+Excuse me.
+
+00:03:19.836 --> 00:03:21.666 A:middle
+Now there may be a scenario
+
+00:03:22.056 --> 00:03:25.166 A:middle
+where your user is manipulating
+the object on the main context
+
+00:03:25.746 --> 00:03:30.476 A:middle
+and on a background context
+you're ingesting the same new
+
+00:03:30.476 --> 00:03:34.276 A:middle
+object and possibly updating
+the object the user currently is
+
+00:03:34.276 --> 00:03:35.076 A:middle
+also manipulating.
+
+00:03:36.226 --> 00:03:38.656 A:middle
+This is introducing the
+multiwriter conflict.
+
+00:03:39.556 --> 00:03:42.276 A:middle
+In Core Data it has you
+taken care of here as well.
+
+00:03:42.976 --> 00:03:46.966 A:middle
+We version all the objects and
+allow you to set a merge policy.
+
+00:03:47.716 --> 00:03:50.836 A:middle
+If you do not set a merge
+policy we'll default to error
+
+00:03:50.836 --> 00:03:52.166 A:middle
+when you save in your context
+
+00:03:52.756 --> 00:03:55.186 A:middle
+and give you a conflict
+error allowing you
+
+00:03:55.776 --> 00:03:57.826 A:middle
+to address the conflict
+as you see fit.
+
+00:03:58.596 --> 00:04:01.306 A:middle
+Or you can choose from
+several merge policies
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:58.596 --> 00:04:01.306 A:middle
+Or you can choose from
+several merge policies
+
+00:04:01.306 --> 00:04:02.546 A:middle
+that we have already provided,
+
+00:04:02.786 --> 00:04:07.066 A:middle
+be it the in store memory
+persistent store trumps what's
+
+00:04:07.066 --> 00:04:10.946 A:middle
+in memory or what is in memory
+trumps the persistent store.
+
+00:04:11.616 --> 00:04:14.096 A:middle
+Choose what is best for you
+and your particular scenario.
+
+00:04:15.446 --> 00:04:18.125 A:middle
+Once you've adopted Core Data
+you get several benefits.
+
+00:04:18.125 --> 00:04:20.616 A:middle
+I would like to give
+you two in particular
+
+00:04:20.616 --> 00:04:22.956 A:middle
+that really are the best ones.
+
+00:04:23.656 --> 00:04:27.406 A:middle
+An excellent memory scalability
+and aggressive lazy loading.
+
+00:04:28.136 --> 00:04:32.226 A:middle
+What that means, it is we'll
+only load the objects you need
+
+00:04:32.456 --> 00:04:34.236 A:middle
+when you need them into memory.
+
+00:04:35.376 --> 00:04:38.736 A:middle
+Adopting Core Data leads to
+a much smaller footprint,
+
+00:04:39.516 --> 00:04:42.016 A:middle
+over 50 to 70% less code for you
+
+00:04:42.016 --> 00:04:45.416 A:middle
+to maintain allowing you
+more time to go and work
+
+00:04:45.416 --> 00:04:48.096 A:middle
+on new features for your app.
+
+00:04:48.096 --> 00:04:49.566 A:middle
+Then you can join the
+
+00:04:49.566 --> 00:04:53.496 A:middle
+over 400,000 apps already using
+Core Data in the App Store.
+
+00:04:54.726 --> 00:04:56.476 A:middle
+That's a brief overview
+of Core Data.
+
+00:04:57.446 --> 00:04:59.366 A:middle
+Now let's jump into
+the new stuff.
+
+00:04:59.666 --> 00:05:01.546 A:middle
+All the new APIs
+we have for you.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:59.666 --> 00:05:01.546 A:middle
+All the new APIs
+we have for you.
+
+00:05:02.996 --> 00:05:05.706 A:middle
+First, let's start off
+with MS manage object
+
+00:05:06.446 --> 00:05:10.306 A:middle
+and a new property called hash
+persistent changed values.
+
+00:05:12.056 --> 00:05:14.736 A:middle
+Previously you may
+have used hash changes,
+
+00:05:14.966 --> 00:05:19.256 A:middle
+this was a rather basic dirty
+flag, if you touch the object,
+
+00:05:19.336 --> 00:05:20.296 A:middle
+we would mark it dirty.
+
+00:05:20.296 --> 00:05:24.116 A:middle
+But with hash persistent
+changed values we'll ensure
+
+00:05:24.116 --> 00:05:27.996 A:middle
+that the properties on the
+object are different than what's
+
+00:05:27.996 --> 00:05:30.546 A:middle
+in the persistent store
+ensuring you don't have any
+
+00:05:30.596 --> 00:05:31.406 A:middle
+false positives.
+
+00:05:33.786 --> 00:05:37.846 A:middle
+Also new on NSManaged
+object is object ID's
+
+00:05:37.846 --> 00:05:39.046 A:middle
+for relationship named.
+
+00:05:39.946 --> 00:05:45.336 A:middle
+This is ideal for working with
+large relationships mainly
+
+00:05:45.336 --> 00:05:47.776 A:middle
+because we won't materialize
+the entire relationship
+
+00:05:47.776 --> 00:05:50.056 A:middle
+in memory rather we'll return
+
+00:05:50.056 --> 00:05:52.636 A:middle
+to typed array of
+object IDs to you.
+
+00:05:53.296 --> 00:05:56.456 A:middle
+This allows you to go through
+these object IDs and work
+
+00:05:56.456 --> 00:05:58.216 A:middle
+with your objects
+in smaller sizes.
+
+00:05:59.006 --> 00:06:00.946 A:middle
+Let me show you a quick
+example of this in code.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:59.006 --> 00:06:00.946 A:middle
+Let me show you a quick
+example of this in code.
+
+00:06:02.766 --> 00:06:06.796 A:middle
+Here I am with my person object
+and I ask for its object IDs
+
+00:06:06.796 --> 00:06:08.646 A:middle
+for the relationship
+named family.
+
+00:06:09.286 --> 00:06:11.926 A:middle
+This gives me all my
+relations and then I can go
+
+00:06:11.926 --> 00:06:15.196 A:middle
+and fetch these relations
+in a batch size of 100
+
+00:06:16.276 --> 00:06:19.036 A:middle
+and then traverse through
+these relationships at 100
+
+00:06:19.036 --> 00:06:23.086 A:middle
+at a time keeping my
+memory input rather small
+
+00:06:23.496 --> 00:06:24.256 A:middle
+and manageable.
+
+00:06:26.556 --> 00:06:29.466 A:middle
+Let's move on to
+NSManaged object context
+
+00:06:30.066 --> 00:06:34.376 A:middle
+and a new method called
+refresh all objects.
+
+00:06:36.216 --> 00:06:39.326 A:middle
+Refresh all objects does exactly
+what you expect it to do.
+
+00:06:39.326 --> 00:06:41.626 A:middle
+It refreshes the
+objects in your context
+
+00:06:42.286 --> 00:06:46.046 A:middle
+but preserves unsaved
+changes and unlike reset
+
+00:06:46.046 --> 00:06:49.596 A:middle
+on the context your object
+references remain valid.
+
+00:06:50.126 --> 00:06:54.386 A:middle
+So you don't have to refetch
+any references and it is ideal
+
+00:06:54.386 --> 00:06:57.096 A:middle
+for breaking retain cycles
+which may have occurred
+
+00:06:57.096 --> 00:06:59.166 A:middle
+when you traversed a bi
+directional relationship
+
+00:06:59.166 --> 00:07:01.046 A:middle
+and looped yourself around.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:59.166 --> 00:07:01.046 A:middle
+and looped yourself around.
+
+00:07:02.936 --> 00:07:06.756 A:middle
+Also new on NSManaged
+object context is for those
+
+00:07:06.756 --> 00:07:09.316 A:middle
+of you using multiple
+coordinators in your store.
+
+00:07:10.356 --> 00:07:14.836 A:middle
+Merged changes from remote
+context save will take a save
+
+00:07:14.836 --> 00:07:17.566 A:middle
+notification from one
+coordinator and apply it
+
+00:07:17.566 --> 00:07:19.486 A:middle
+to the context in
+another coordinator.
+
+00:07:20.016 --> 00:07:21.906 A:middle
+This allows you to have
+the latest row data
+
+00:07:21.906 --> 00:07:25.336 A:middle
+in all your context
+and we'll take care
+
+00:07:25.336 --> 00:07:27.256 A:middle
+of all the necessary
+context for you.
+
+00:07:32.076 --> 00:07:35.186 A:middle
+In Core Data occasionally
+you'll run
+
+00:07:35.186 --> 00:07:37.426 A:middle
+into one particular
+exception and that sticks
+
+00:07:37.426 --> 00:07:38.706 A:middle
+out a lot to developers.
+
+00:07:39.186 --> 00:07:41.076 A:middle
+That's the inability
+to load a fault.
+
+00:07:42.526 --> 00:07:44.826 A:middle
+Why is Core Data unable
+to load this fault?
+
+00:07:45.576 --> 00:07:48.546 A:middle
+Well, as I mentioned earlier,
+Core Data is aggressive
+
+00:07:48.546 --> 00:07:52.296 A:middle
+about lazily loading objects,
+you'll only have a portion
+
+00:07:52.296 --> 00:07:55.676 A:middle
+of your graph in memory and
+it is possible as we try
+
+00:07:55.676 --> 00:07:59.246 A:middle
+to traverse a relationship we'll
+try to have to go back to disk
+
+00:07:59.646 --> 00:08:02.006 A:middle
+and that object has been
+deleted out from underneath you.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:59.646 --> 00:08:02.006 A:middle
+and that object has been
+deleted out from underneath you.
+
+00:08:03.496 --> 00:08:05.296 A:middle
+What's better than
+throwing in exception,
+
+00:08:05.496 --> 00:08:07.636 A:middle
+there is a lot of things.
+
+00:08:07.926 --> 00:08:09.846 A:middle
+We have introduced
+a new property
+
+00:08:10.066 --> 00:08:13.086 A:middle
+on the NSManaged object
+context that allows you
+
+00:08:13.086 --> 00:08:15.956 A:middle
+to set some basic
+faulting delegated.
+
+00:08:16.516 --> 00:08:20.606 A:middle
+[Applause]
+
+00:08:21.106 --> 00:08:24.186 A:middle
+&gt;&gt; Currently should
+delete inaccessible faults,
+
+00:08:24.386 --> 00:08:25.276 A:middle
+defaults to yes.
+
+00:08:25.806 --> 00:08:29.576 A:middle
+If we encounter a fault we'll
+mark the fault as deleted
+
+00:08:30.076 --> 00:08:33.285 A:middle
+and any missing attributes
+will be null, nil or zero.
+
+00:08:33.856 --> 00:08:37.275 A:middle
+This allows your app to
+continue on with this object
+
+00:08:37.716 --> 00:08:39.326 A:middle
+and treat it as a
+deleted object.
+
+00:08:40.116 --> 00:08:42.256 A:middle
+No longer will you
+crash but you'll be able
+
+00:08:42.256 --> 00:08:47.516 A:middle
+to merely keep going on and show
+the user what they have expected
+
+00:08:48.166 --> 00:08:49.976 A:middle
+to see.
+
+00:08:50.216 --> 00:08:56.296 A:middle
+Now on NSPersistent store
+coordinator we have two new APIs
+
+00:08:56.296 --> 00:08:56.976 A:middle
+to introduce.
+
+00:08:58.116 --> 00:09:01.546 A:middle
+We introduced these two new
+APIs because we have seen issues
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:58.116 --> 00:09:01.546 A:middle
+We introduced these two new
+APIs because we have seen issues
+
+00:09:01.646 --> 00:09:05.566 A:middle
+with the way that developers
+clear up their persistent store.
+
+00:09:06.566 --> 00:09:08.036 A:middle
+A few of you have done this.
+
+00:09:08.036 --> 00:09:10.716 A:middle
+You have gone through and
+bypassed the Core Data API layer
+
+00:09:11.106 --> 00:09:12.976 A:middle
+to manipulate your
+database directly.
+
+00:09:13.896 --> 00:09:17.726 A:middle
+Unfortunately this has some
+unexpected consequences,
+
+00:09:18.486 --> 00:09:21.066 A:middle
+you may be leaving
+bad descriptors open
+
+00:09:21.776 --> 00:09:26.786 A:middle
+and so we have supplied you with
+destroy persistent store at URL.
+
+00:09:28.516 --> 00:09:32.346 A:middle
+[Applause]
+
+00:09:32.846 --> 00:09:36.066 A:middle
+&gt;&gt; Like ad persistent store at
+URL you take the same options
+
+00:09:36.346 --> 00:09:38.176 A:middle
+and you can destroy
+that persistent store
+
+00:09:38.706 --> 00:09:42.816 A:middle
+and we'll honor all locking
+protocols as well as clearing
+
+00:09:42.816 --> 00:09:45.836 A:middle
+out all the related files
+to the particular store type
+
+00:09:45.876 --> 00:09:46.886 A:middle
+that you have chosen to use.
+
+00:09:47.686 --> 00:09:51.586 A:middle
+In that same vein we have
+introduced replace persistent
+
+00:09:51.636 --> 00:09:56.906 A:middle
+tore at URL, similar pattern
+as destroy and if the database
+
+00:09:57.196 --> 00:10:00.126 A:middle
+at the destination doesn't exist
+we'll simply copy it into place.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:57.196 --> 00:10:00.126 A:middle
+at the destination doesn't exist
+we'll simply copy it into place.
+
+00:10:00.866 --> 00:10:04.856 A:middle
+One of the problems you have
+all run into is duplicates.
+
+00:10:06.056 --> 00:10:08.856 A:middle
+Having a database with
+duplicates is not useful.
+
+00:10:09.306 --> 00:10:10.676 A:middle
+You have written a lot of code
+
+00:10:10.896 --> 00:10:12.266 A:middle
+to ensure you don't
+have duplicates.
+
+00:10:13.226 --> 00:10:15.506 A:middle
+Core Data can help
+you out here too.
+
+00:10:16.526 --> 00:10:19.156 A:middle
+First let's look at a common
+pattern you may have used
+
+00:10:19.526 --> 00:10:20.456 A:middle
+to find duplicates.
+
+00:10:21.146 --> 00:10:22.716 A:middle
+That's the find and
+create pattern.
+
+00:10:23.926 --> 00:10:28.106 A:middle
+Here as you see, I set up a
+fetch request and I had to go
+
+00:10:28.106 --> 00:10:31.066 A:middle
+and look for one
+particular object to see
+
+00:10:31.066 --> 00:10:34.256 A:middle
+if it exists before
+I can create it.
+
+00:10:34.256 --> 00:10:36.436 A:middle
+If it does exist, I update it.
+
+00:10:37.416 --> 00:10:41.116 A:middle
+Well this pattern can be rather
+racey and it can also lead
+
+00:10:41.466 --> 00:10:44.276 A:middle
+to more duplicates if I have
+several threads ingested
+
+00:10:44.526 --> 00:10:45.726 A:middle
+from multiple data sources.
+
+00:10:46.496 --> 00:10:50.346 A:middle
+Well Core Data has you covered
+this year, simply tell us
+
+00:10:50.346 --> 00:10:53.316 A:middle
+which attributes should be
+unique across any entity
+
+00:10:53.586 --> 00:10:56.996 A:middle
+and we'll make sure all
+instances of that entity keep
+
+00:10:56.996 --> 00:11:00.306 A:middle
+that unique attribute, be it
+email addresses, part numbers,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:56.996 --> 00:11:00.306 A:middle
+that unique attribute, be it
+email addresses, part numbers,
+
+00:11:00.306 --> 00:11:02.936 A:middle
+UPC, you name it, we'll
+make sure it is unique
+
+00:11:02.936 --> 00:11:04.066 A:middle
+across all instances.
+
+00:11:05.516 --> 00:11:11.036 A:middle
+[Applause]
+
+00:11:11.536 --> 00:11:16.026 A:middle
+Unique instances, unique
+constraints are best used
+
+00:11:16.406 --> 00:11:18.806 A:middle
+when your on values
+that are unmodified
+
+00:11:18.806 --> 00:11:21.376 A:middle
+after object creation, generally
+
+00:11:21.376 --> 00:11:24.416 A:middle
+when you create the object these
+unique constraints should be set
+
+00:11:24.506 --> 00:11:27.086 A:middle
+once and then never changed
+to the life of the object.
+
+00:11:28.236 --> 00:11:31.636 A:middle
+Changing them could
+result in conflicts
+
+00:11:32.176 --> 00:11:35.606 A:middle
+as your unique properties may
+collide with another object
+
+00:11:35.606 --> 00:11:36.976 A:middle
+that has the same
+unique attributes.
+
+00:11:37.736 --> 00:11:40.446 A:middle
+That's where you can
+use the recovery methods
+
+00:11:40.446 --> 00:11:42.666 A:middle
+in the merge policies we
+talked about previously
+
+00:11:43.326 --> 00:11:44.356 A:middle
+to address those issues.
+
+00:11:45.316 --> 00:11:49.356 A:middle
+Also any of your entities
+that inherit from a parent
+
+00:11:49.356 --> 00:11:52.586 A:middle
+that has unique constraints will
+inherit those unique constraints
+
+00:11:52.586 --> 00:11:53.006 A:middle
+as well.
+
+00:11:53.716 --> 00:11:56.936 A:middle
+In this example above you
+can see the parent has UUID
+
+00:11:56.936 --> 00:11:59.126 A:middle
+constraint identified
+as a unique constraint.
+
+00:11:59.846 --> 00:12:03.926 A:middle
+The sub entity has added
+email as an addition
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:59.846 --> 00:12:03.926 A:middle
+The sub entity has added
+email as an addition
+
+00:12:03.926 --> 00:12:05.566 A:middle
+to its unique constraints.
+
+00:12:07.596 --> 00:12:11.346 A:middle
+Now I would like to take a
+quick demo of showing you how
+
+00:12:11.546 --> 00:12:13.616 A:middle
+to utilize unique constraints.
+
+00:12:14.426 --> 00:12:19.456 A:middle
+So here we are, we're using the
+recipes app we have shown you
+
+00:12:19.456 --> 00:12:21.986 A:middle
+in previous years and it is
+available at download off
+
+00:12:21.986 --> 00:12:23.036 A:middle
+of the developer portal.
+
+00:12:23.786 --> 00:12:26.436 A:middle
+We've added a new feature,
+import, down here in the right.
+
+00:12:27.526 --> 00:12:30.116 A:middle
+This allows me to import
+all my favorite recipes
+
+00:12:30.376 --> 00:12:33.226 A:middle
+that involve apples.
+
+00:12:33.426 --> 00:12:35.636 A:middle
+Here we go back,
+you see I added all
+
+00:12:35.636 --> 00:12:39.736 A:middle
+of my favorite apple recipes
+however my UI isn't very
+
+00:12:39.736 --> 00:12:42.826 A:middle
+intuitive and the user may
+be wondering what's going
+
+00:12:42.826 --> 00:12:44.896 A:middle
+on when they click.
+
+00:12:44.896 --> 00:12:47.306 A:middle
+Unfortunately, they have
+duplicated their data.
+
+00:12:47.996 --> 00:12:52.786 A:middle
+We can do a lot better here.
+
+00:12:53.356 --> 00:12:55.886 A:middle
+Let's go back to Xcode and
+look at our object model
+
+00:12:56.786 --> 00:12:59.836 A:middle
+and here we are on our
+entity, I'll select a recipe
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:00.416 --> 00:13:05.236 A:middle
+and now we have a
+new option over here
+
+00:13:05.236 --> 00:13:07.896 A:middle
+on the right called unique.
+
+00:13:08.656 --> 00:13:12.356 A:middle
+This allows me to specify
+which attributes are unique
+
+00:13:12.356 --> 00:13:13.536 A:middle
+for this particular entity.
+
+00:13:14.256 --> 00:13:17.726 A:middle
+In this case we'll have
+source and external ID.
+
+00:13:21.336 --> 00:13:27.386 A:middle
+Thousand when I run the
+recipe app we'll see I have my
+
+00:13:27.386 --> 00:13:28.106 A:middle
+original list.
+
+00:13:28.576 --> 00:13:32.476 A:middle
+I can go, import, and I
+can select my apple recipes
+
+00:13:32.966 --> 00:13:34.346 A:middle
+but I'm also impatient,
+
+00:13:34.476 --> 00:13:37.046 A:middle
+not seeing any UI
+so I keep clicking.
+
+00:13:37.676 --> 00:13:41.686 A:middle
+This time we're left with
+the one single object for all
+
+00:13:41.686 --> 00:13:45.836 A:middle
+of them, no duplicates, no
+extra code to find or create,
+
+00:13:46.606 --> 00:13:49.746 A:middle
+your unique constraints ensure
+that your uniqueness is there.
+
+00:13:50.516 --> 00:13:57.166 A:middle
+[Applause]
+
+00:13:57.666 --> 00:14:02.516 A:middle
+&gt;&gt; However, having all of
+those duplicates isn't ideal.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:57.666 --> 00:14:02.516 A:middle
+&gt;&gt; However, having all of
+those duplicates isn't ideal.
+
+00:14:03.366 --> 00:14:05.576 A:middle
+Getting rid of the duplicates
+can be a lot of work.
+
+00:14:06.066 --> 00:14:07.806 A:middle
+That's where Scott Perry
+is going to come up
+
+00:14:07.806 --> 00:14:09.206 A:middle
+and show us what we
+can do about that.
+
+00:14:10.516 --> 00:14:15.456 A:middle
+[Applause]
+
+00:14:15.956 --> 00:14:16.446 A:middle
+&gt;&gt; Thanks, Rishi.
+
+00:14:18.046 --> 00:14:20.396 A:middle
+So let's say you
+already have an app
+
+00:14:20.756 --> 00:14:22.306 A:middle
+and you've got all this
+duplicated data now,
+
+00:14:23.196 --> 00:14:25.206 A:middle
+now you have to go
+and delete them all.
+
+00:14:25.856 --> 00:14:29.186 A:middle
+Today what you have to do is
+fetch all of them from memory --
+
+00:14:29.676 --> 00:14:32.716 A:middle
+sorry, from the store -- once
+they're in memory, you mark each
+
+00:14:32.716 --> 00:14:35.656 A:middle
+of them for deletion and
+then you have to save
+
+00:14:35.656 --> 00:14:37.876 A:middle
+down to the persistent
+store, if you have a lot
+
+00:14:37.876 --> 00:14:41.316 A:middle
+of objects you're going to have
+to do that over and over again
+
+00:14:41.686 --> 00:14:44.146 A:middle
+in order to maintain a low
+enough memory footprint
+
+00:14:44.146 --> 00:14:45.796 A:middle
+so that your app stays alive.
+
+00:14:47.026 --> 00:14:51.906 A:middle
+It seems kind of silly to just
+load objects into memory just
+
+00:14:51.906 --> 00:14:54.106 A:middle
+so you can delete them.
+
+00:14:54.106 --> 00:14:56.686 A:middle
+This year we have introduced
+a new API in the form
+
+00:14:56.686 --> 00:14:58.416 A:middle
+of NSBatch delete request.
+
+00:14:59.796 --> 00:15:03.446 A:middle
+NSBatch delete request works
+like NSBatch update request
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:59.796 --> 00:15:03.446 A:middle
+NSBatch delete request works
+like NSBatch update request
+
+00:15:03.676 --> 00:15:05.406 A:middle
+in that it acts directly
+in the persistent store
+
+00:15:05.406 --> 00:15:07.056 A:middle
+without loading any
+objects into memory.
+
+00:15:08.296 --> 00:15:10.086 A:middle
+You can create one
+using an instance
+
+00:15:10.146 --> 00:15:14.186 A:middle
+of NSFetchRequest specifying
+an entity, one or more stores
+
+00:15:14.306 --> 00:15:19.426 A:middle
+and use predicate or sources
+or limits to slice up the data
+
+00:15:19.426 --> 00:15:22.316 A:middle
+in whatever interesting
+ways you want.
+
+00:15:23.506 --> 00:15:28.516 A:middle
+A batch delete request returns a
+box type NSBatch deletes result
+
+00:15:28.896 --> 00:15:30.766 A:middle
+and you can configure
+the request
+
+00:15:30.796 --> 00:15:33.536 A:middle
+to return a successor
+failure, the default,
+
+00:15:34.066 --> 00:15:37.196 A:middle
+the count of the objects that
+were deleted or the object IDs
+
+00:15:37.196 --> 00:15:39.316 A:middle
+of the objects in that box.
+
+00:15:39.316 --> 00:15:43.246 A:middle
+There are a couple of
+limitations to this.
+
+00:15:43.376 --> 00:15:45.156 A:middle
+Since none of the objects
+are loaded in memory,
+
+00:15:45.566 --> 00:15:47.856 A:middle
+the changes are not reflected
+into the context and none
+
+00:15:47.856 --> 00:15:49.956 A:middle
+of your validation
+rules are run.
+
+00:15:50.816 --> 00:15:54.126 A:middle
+Relationships will be deleted
+out or nullified as appropriate,
+
+00:15:54.126 --> 00:15:56.256 A:middle
+but that's all the
+guarantees that you get.
+
+00:15:56.256 --> 00:15:58.306 A:middle
+There are also no
+object notifications.
+
+00:15:59.276 --> 00:16:02.116 A:middle
+We think this is going to
+be really helpful for people
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:15:59.276 --> 00:16:02.116 A:middle
+We think this is going to
+be really helpful for people
+
+00:16:02.116 --> 00:16:04.046 A:middle
+if they have a lot of
+duplicates and I would
+
+00:16:04.046 --> 00:16:09.846 A:middle
+like to show you
+how it works now.
+
+00:16:10.046 --> 00:16:13.096 A:middle
+So I have here the same
+recipes app with a copy
+
+00:16:13.096 --> 00:16:14.446 A:middle
+of a database I got
+from my manager.
+
+00:16:14.446 --> 00:16:18.656 A:middle
+He says one of his kids got
+ahold of it and added a lot
+
+00:16:18.656 --> 00:16:21.276 A:middle
+of recipes, like thousands.
+
+00:16:21.926 --> 00:16:24.176 A:middle
+If we were to go threw
+this the old way,
+
+00:16:24.476 --> 00:16:28.916 A:middle
+then we would just fetch
+all of the objects we want
+
+00:16:28.916 --> 00:16:32.096 A:middle
+to delete with a fetch request.
+
+00:16:32.716 --> 00:16:36.426 A:middle
+Then iterate over all
+of them, deleting them,
+
+00:16:36.516 --> 00:16:39.416 A:middle
+and then saving the
+changes with the batch size
+
+00:16:39.416 --> 00:16:40.926 A:middle
+that we've configured
+to be 1,000.
+
+00:16:41.876 --> 00:16:47.546 A:middle
+If you try doing
+this you can see
+
+00:16:47.636 --> 00:16:50.606 A:middle
+in the console here
+it takes a while.
+
+00:16:52.496 --> 00:16:53.236 A:middle
+You can see we're doing --
+
+00:16:53.236 --> 00:16:54.726 A:middle
+since we're doing
+batches in the thousands,
+
+00:16:54.726 --> 00:16:57.426 A:middle
+we're now in our first
+batch and it's still going.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:00.336 --> 00:17:01.306 A:middle
+This will take a while.
+
+00:17:01.306 --> 00:17:02.716 A:middle
+We're not going to stand
+here and wait for it.
+
+00:17:02.796 --> 00:17:07.906 A:middle
+If we break in a convenient
+spot we can kill the app
+
+00:17:09.106 --> 00:17:12.425 A:middle
+and try again using
+batch deletions.
+
+00:17:13.066 --> 00:17:20.996 A:middle
+Let's get rid of all this.
+
+00:17:22.816 --> 00:17:25.596 A:middle
+Creating a duplicate delete
+request using the same fetch
+
+00:17:25.596 --> 00:17:29.226 A:middle
+request that we used
+before and we're going
+
+00:17:29.226 --> 00:17:31.426 A:middle
+to choose a counter resultType
+
+00:17:31.426 --> 00:17:32.676 A:middle
+so that we can see
+what we have done.
+
+00:17:33.726 --> 00:17:35.986 A:middle
+Here we will execute it.
+
+00:17:35.986 --> 00:17:39.496 A:middle
+It is a lot less code, there's
+just one single execute request,
+
+00:17:39.496 --> 00:17:41.536 A:middle
+no looping, no interacting
+with objects.
+
+00:17:41.536 --> 00:17:48.586 A:middle
+If we build and run this,
+-- we'll come back here.
+
+00:17:52.716 --> 00:17:56.736 A:middle
+You can see here that in the
+queries the generator has
+
+00:17:56.736 --> 00:17:58.796 A:middle
+created a trigger that deletes
+all of the relationships
+
+00:17:58.796 --> 00:18:01.266 A:middle
+that need to be cleaned
+up and we're done.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:58.796 --> 00:18:01.266 A:middle
+that need to be cleaned
+up and we're done.
+
+00:18:02.526 --> 00:18:05.186 A:middle
+Back down to a simple
+number of recipes
+
+00:18:05.186 --> 00:18:07.026 A:middle
+so that now we can apply
+the unique restraints.
+
+00:18:08.516 --> 00:18:14.226 A:middle
+[Applause]
+
+00:18:14.726 --> 00:18:16.146 A:middle
+&gt;&gt; Scott Perry: That's
+NSBatch delete request.
+
+00:18:18.206 --> 00:18:20.496 A:middle
+Next up I wanted to talk
+about model versioning.
+
+00:18:22.126 --> 00:18:24.886 A:middle
+While we were creating the
+new version of the recipes app
+
+00:18:25.716 --> 00:18:27.616 A:middle
+in order to support the
+import feature we had
+
+00:18:27.616 --> 00:18:31.036 A:middle
+to add two attributes to
+the recipe entity source
+
+00:18:31.036 --> 00:18:33.496 A:middle
+and external ID which
+Rishi showed you earlier.
+
+00:18:34.496 --> 00:18:37.466 A:middle
+While working on this,
+we open up the model,
+
+00:18:37.466 --> 00:18:39.416 A:middle
+adding the two attributes
+build and run
+
+00:18:39.416 --> 00:18:41.936 A:middle
+and right away we had an error.
+
+00:18:42.016 --> 00:18:44.846 A:middle
+I highlighted the
+most important part.
+
+00:18:45.406 --> 00:18:48.506 A:middle
+We incurred a migration because
+the model changed but we forgot
+
+00:18:48.506 --> 00:18:50.616 A:middle
+to include the original
+source model
+
+00:18:50.616 --> 00:18:55.516 A:middle
+because it was what we used to
+change and the pattern of having
+
+00:18:55.516 --> 00:18:57.066 A:middle
+to copy your old model in order
+
+00:18:57.066 --> 00:18:58.536 A:middle
+to create a new one
+is really cumbersome
+
+00:18:58.536 --> 00:18:59.686 A:middle
+when you're reiterating
+your apps.
+
+00:18:59.776 --> 00:19:01.716 A:middle
+And if you forget to
+deploy a model to the hands
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:59.776 --> 00:19:01.716 A:middle
+And if you forget to
+deploy a model to the hands
+
+00:19:01.716 --> 00:19:02.836 A:middle
+of a customer that's running
+
+00:19:02.836 --> 00:19:04.436 A:middle
+that version it's
+really dangerous.
+
+00:19:05.306 --> 00:19:06.456 A:middle
+This seems to be a case
+
+00:19:06.456 --> 00:19:10.506 A:middle
+where automatic lightweight
+migrations should work for you.
+
+00:19:10.506 --> 00:19:16.146 A:middle
+Now iOS 9 and OS X.11
+we have model caching.
+
+00:19:17.516 --> 00:19:20.546 A:middle
+Whenever you have a store
+that's created or migrated
+
+00:19:20.726 --> 00:19:23.196 A:middle
+or just opened on the new iOS
+
+00:19:23.276 --> 00:19:26.736 A:middle
+from an older version the
+managed object model used
+
+00:19:26.736 --> 00:19:30.946 A:middle
+to create it is cached into
+the store and it is used
+
+00:19:30.946 --> 00:19:32.826 A:middle
+by lightweight migrations
+when they fail
+
+00:19:32.826 --> 00:19:36.616 A:middle
+to find appropriate source model
+as sort of a last-ditch effort.
+
+00:19:38.516 --> 00:19:44.696 A:middle
+[Applause]
+
+00:19:45.196 --> 00:19:46.406 A:middle
+&gt;&gt; Scott Perry: There are
+a couple of limitations,
+
+00:19:46.646 --> 00:19:48.566 A:middle
+this is only available
+for SQLite stores
+
+00:19:48.786 --> 00:19:50.116 A:middle
+and the cached model
+is not available
+
+00:19:50.116 --> 00:19:51.336 A:middle
+for heavyweight migrations.
+
+00:19:51.756 --> 00:19:54.156 A:middle
+If you're doing heavyweight
+migrations you have your model
+
+00:19:54.156 --> 00:19:55.956 A:middle
+ready anyways because you need
+
+00:19:55.956 --> 00:20:00.246 A:middle
+to know what you're actually
+transitioning from and to.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:55.956 --> 00:20:00.246 A:middle
+to know what you're actually
+transitioning from and to.
+
+00:20:00.476 --> 00:20:03.476 A:middle
+Rishi talked earlier about
+API we added and I wanted
+
+00:20:03.476 --> 00:20:05.416 A:middle
+to talk now about some changes.
+
+00:20:06.226 --> 00:20:10.676 A:middle
+For iOS 9 and OS X 10.10 Core
+Data has adopted all the new
+
+00:20:10.676 --> 00:20:11.856 A:middle
+language features you have seen
+
+00:20:11.856 --> 00:20:14.026 A:middle
+in Objective-C running
+generics and nullability.
+
+00:20:14.026 --> 00:20:17.686 A:middle
+We have also taken advantage
+of a new attribute called kind
+
+00:20:17.686 --> 00:20:19.816 A:middle
+of that allows for
+easier downcasting.
+
+00:20:20.456 --> 00:20:22.316 A:middle
+You may not have seen
+this in other talks
+
+00:20:22.316 --> 00:20:25.906 A:middle
+but this is really handy for
+Core Data because normally
+
+00:20:25.906 --> 00:20:28.206 A:middle
+if you're interacting with
+an objective type ID you can
+
+00:20:28.206 --> 00:20:31.466 A:middle
+downcast it to anything, even
+completely inappropriate types.
+
+00:20:32.046 --> 00:20:34.696 A:middle
+But using kind of you
+can attribute type
+
+00:20:34.696 --> 00:20:37.546 A:middle
+to only be downcast to
+subtypes of that type.
+
+00:20:38.046 --> 00:20:41.196 A:middle
+This is going to add a
+lot of safety to your code
+
+00:20:41.776 --> 00:20:44.896 A:middle
+from the compiler because it
+will limit warnings whenever a
+
+00:20:44.896 --> 00:20:46.746 A:middle
+cache seems like it
+doesn't make any sense.
+
+00:20:49.236 --> 00:20:51.926 A:middle
+Generated subclasses have also
+been updated to use generics
+
+00:20:52.186 --> 00:20:54.506 A:middle
+for too many relationships
+as well as nullability
+
+00:20:54.506 --> 00:20:56.476 A:middle
+and we have made
+some other changes
+
+00:20:56.476 --> 00:20:58.626 A:middle
+to subclass generation as well.
+
+00:20:59.036 --> 00:21:04.416 A:middle
+In Xcode 6 you would get
+an implementation file
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:59.036 --> 00:21:04.416 A:middle
+In Xcode 6 you would get
+an implementation file
+
+00:21:04.416 --> 00:21:07.216 A:middle
+and a header file for using
+Objective-C containing both the
+
+00:21:07.636 --> 00:21:11.976 A:middle
+Core Data declarations as well
+as a place to put all your code
+
+00:21:11.976 --> 00:21:14.676 A:middle
+and it was thrown over the
+fence for you to own afterwards.
+
+00:21:14.676 --> 00:21:17.566 A:middle
+If you change your
+model, that becomes sort
+
+00:21:17.566 --> 00:21:19.356 A:middle
+of cumbersome to
+keep up to date.
+
+00:21:19.356 --> 00:21:21.896 A:middle
+In Xcode 7 we have
+added a new file.
+
+00:21:23.376 --> 00:21:26.186 A:middle
+This file is an extension
+or category depending
+
+00:21:26.186 --> 00:21:28.746 A:middle
+on the language that contains
+all of the declarations
+
+00:21:28.796 --> 00:21:30.876 A:middle
+that you're familiar
+with from the header.
+
+00:21:32.636 --> 00:21:35.606 A:middle
+So now the header and
+implementation file are yours
+
+00:21:35.606 --> 00:21:38.066 A:middle
+to own and whenever you
+update your model all you need
+
+00:21:38.066 --> 00:21:39.186 A:middle
+to do is update this file.
+
+00:21:41.516 --> 00:21:48.136 A:middle
+[Applause]
+
+00:21:48.636 --> 00:21:50.296 A:middle
+&gt;&gt; Scott Perry: That's
+it for changes.
+
+00:21:50.876 --> 00:21:54.536 A:middle
+I wanted to talk about
+deprecations, we're getting rid
+
+00:21:54.536 --> 00:21:59.076 A:middle
+of confinement currency
+in iOs9 and OS 10.10--
+
+00:21:59.076 --> 00:22:01.436 A:middle
+it is marked as deprecated,
+we're getting rid of it later.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:59.076 --> 00:22:01.436 A:middle
+it is marked as deprecated,
+we're getting rid of it later.
+
+00:22:03.476 --> 00:22:06.676 A:middle
+Because the confinement
+was the default behavior
+
+00:22:06.676 --> 00:22:10.066 A:middle
+for new managed object context,
+we have also deprecated in it,
+
+00:22:10.936 --> 00:22:12.996 A:middle
+and so moving forward
+you should be using init
+
+00:22:12.996 --> 00:22:15.306 A:middle
+with con currency type
+using private cues
+
+00:22:15.346 --> 00:22:17.546 A:middle
+or main cues for your contexts.
+
+00:22:17.996 --> 00:22:18.966 A:middle
+If you haven't already moved
+
+00:22:18.966 --> 00:22:23.116 A:middle
+over to the block API it
+is really a good idea.
+
+00:22:23.116 --> 00:22:25.476 A:middle
+Encapsulation makes it
+a lot easier to reason
+
+00:22:25.476 --> 00:22:28.506 A:middle
+about your model code and
+the concurrency debugging is
+
+00:22:28.506 --> 00:22:30.166 A:middle
+reported as much stronger.
+
+00:22:30.786 --> 00:22:35.266 A:middle
+I highly recommend checking
+out the online documentation,
+
+00:22:35.476 --> 00:22:38.306 A:middle
+the Core Data guides were
+completely updated this year
+
+00:22:38.956 --> 00:22:41.096 A:middle
+and Adam Swift also
+introduced the block API
+
+00:22:41.096 --> 00:22:42.916 A:middle
+with this really
+good talk What's New
+
+00:22:42.916 --> 00:22:46.096 A:middle
+in Core Data on iOS
+in WWDC 2011.
+
+00:22:47.306 --> 00:22:49.766 A:middle
+Last I wanted to talk
+about performance.
+
+00:22:50.626 --> 00:22:55.716 A:middle
+Over time we start adding
+attributes to the models,
+
+00:22:56.906 --> 00:22:58.096 A:middle
+the amount of data
+that's carried
+
+00:22:58.096 --> 00:23:00.456 A:middle
+by your users gets larger
+as they hold on to our apps
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:58.096 --> 00:23:00.456 A:middle
+by your users gets larger
+as they hold on to our apps
+
+00:23:00.456 --> 00:23:03.626 A:middle
+over the years and the ways in
+which we try to query the data
+
+00:23:03.626 --> 00:23:07.066 A:middle
+to show them get more
+interesting, more advanced,
+
+00:23:07.516 --> 00:23:11.766 A:middle
+and our apps stay fast.
+
+00:23:11.936 --> 00:23:13.836 A:middle
+But how do you avoid
+being surprised
+
+00:23:13.836 --> 00:23:14.946 A:middle
+by performance problems?
+
+00:23:15.976 --> 00:23:17.266 A:middle
+When you're in development
+you're dealing
+
+00:23:17.266 --> 00:23:19.316 A:middle
+with a known data set
+that may be smaller
+
+00:23:19.316 --> 00:23:20.546 A:middle
+than what your customers
+are working with
+
+00:23:20.736 --> 00:23:23.836 A:middle
+and the simulator is much
+faster than moving on a device.
+
+00:23:23.836 --> 00:23:26.096 A:middle
+While that's great
+for development,
+
+00:23:27.106 --> 00:23:29.446 A:middle
+the users are using devices
+with production data.
+
+00:23:30.756 --> 00:23:34.506 A:middle
+Luckily we provide tools that
+allow you to spot patterns
+
+00:23:35.686 --> 00:23:37.806 A:middle
+that are indicative of
+performance problems
+
+00:23:37.806 --> 00:23:39.896 A:middle
+so you can solve them
+before they become problems
+
+00:23:39.896 --> 00:23:41.116 A:middle
+in the hands of your clients.
+
+00:23:41.786 --> 00:23:44.876 A:middle
+I'd like to talk about three
+things to look out for,
+
+00:23:44.916 --> 00:23:47.156 A:middle
+the first of which is
+relationship faults.
+
+00:23:47.706 --> 00:23:50.566 A:middle
+This is the Core Data Instrument
+
+00:23:50.666 --> 00:23:55.616 A:middle
+and we have just ran the
+recipes app and right away
+
+00:23:55.676 --> 00:23:58.596 A:middle
+in the cache missed
+Instruments we can see
+
+00:23:58.596 --> 00:24:02.396 A:middle
+that we blew the cache on three
+objects we wanted to display.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:58.596 --> 00:24:02.396 A:middle
+that we blew the cache on three
+objects we wanted to display.
+
+00:24:03.086 --> 00:24:06.506 A:middle
+If we look in the middle column
+we can see their recipe type.
+
+00:24:07.016 --> 00:24:10.436 A:middle
+And now you remember when we
+made the recipes app this year
+
+00:24:10.436 --> 00:24:12.896 A:middle
+we updated it so that the
+main list view showed the type
+
+00:24:12.896 --> 00:24:14.796 A:middle
+of the recipe along
+with the recipe itself
+
+00:24:14.796 --> 00:24:16.376 A:middle
+but we never changed
+fetch requests.
+
+00:24:17.906 --> 00:24:20.946 A:middle
+We can fix this by adding
+a relationship key pad
+
+00:24:21.006 --> 00:24:24.296 A:middle
+for prefetching to
+the query we used
+
+00:24:24.296 --> 00:24:26.176 A:middle
+to see our NSFetchResults
+controller.
+
+00:24:27.116 --> 00:24:29.466 A:middle
+Those first -- that first set
+
+00:24:29.466 --> 00:24:31.866 A:middle
+of cache misses will now
+no longer be a problem.
+
+00:24:32.186 --> 00:24:34.426 A:middle
+If we go back to
+the same Instrument,
+
+00:24:34.426 --> 00:24:35.836 A:middle
+and look a little
+bit later in the app,
+
+00:24:35.906 --> 00:24:38.116 A:middle
+we can see that when
+we viewed the detail
+
+00:24:38.116 --> 00:24:40.376 A:middle
+of a recipe we also
+incurred a number
+
+00:24:40.376 --> 00:24:41.686 A:middle
+of careers to the database.
+
+00:24:42.556 --> 00:24:45.956 A:middle
+This is because the detailed
+view controller gets its model
+
+00:24:45.956 --> 00:24:50.176 A:middle
+object from the list and then in
+the detailed view we display all
+
+00:24:50.176 --> 00:24:51.366 A:middle
+of the ingredients
+in that recipe.
+
+00:24:52.536 --> 00:24:53.796 A:middle
+We can't use prefetching,
+
+00:24:53.796 --> 00:24:55.866 A:middle
+because then we would prefetch
+all of the ingredients for all
+
+00:24:55.866 --> 00:24:57.426 A:middle
+of the recipes displayed
+in the list view.
+
+00:24:57.426 --> 00:25:00.596 A:middle
+In the detailed view,
+in the controller,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:24:57.426 --> 00:25:00.596 A:middle
+In the detailed view,
+in the controller,
+
+00:25:00.596 --> 00:25:02.866 A:middle
+we have to execute
+another fetch request
+
+00:25:02.866 --> 00:25:04.336 A:middle
+to get those ingredients
+up into memory.
+
+00:25:04.676 --> 00:25:06.846 A:middle
+Now we have turned
+9 queries into one
+
+00:25:06.846 --> 00:25:09.456 A:middle
+and we can still use the
+relationship on the recipe
+
+00:25:09.456 --> 00:25:12.076 A:middle
+to reverse it and interact
+with the set it returns
+
+00:25:12.146 --> 00:25:17.306 A:middle
+because the data is
+shared on the objects.
+
+00:25:17.436 --> 00:25:20.746 A:middle
+Lastly, if we look at
+the fetch Instrument
+
+00:25:20.796 --> 00:25:23.886 A:middle
+in the Core Data
+Instruments view we can see
+
+00:25:23.886 --> 00:25:27.906 A:middle
+that that first fetch request
+took longer than we would like.
+
+00:25:28.896 --> 00:25:31.156 A:middle
+It fetched 85 objects.
+
+00:25:31.586 --> 00:25:33.646 A:middle
+At the time we only
+had 85 objects.
+
+00:25:33.646 --> 00:25:35.916 A:middle
+This is going to be really
+bad if we have 30,000
+
+00:25:35.916 --> 00:25:36.826 A:middle
+like I showed in the demo.
+
+00:25:36.826 --> 00:25:38.356 A:middle
+The app probably
+wouldn't even launch.
+
+00:25:38.916 --> 00:25:45.916 A:middle
+It also it took 15 milliseconds
+on a Mac Pro, that's going
+
+00:25:45.916 --> 00:25:48.926 A:middle
+to have a lot of dropped
+frames on iOS so what we can do
+
+00:25:48.926 --> 00:25:52.136 A:middle
+to resolve this is
+add a batch size
+
+00:25:52.136 --> 00:25:53.686 A:middle
+to our fetch request that's fed
+
+00:25:53.686 --> 00:25:54.926 A:middle
+into our fetch results
+controllers
+
+00:25:54.926 --> 00:25:56.786 A:middle
+so that objects are
+fetched from the store only
+
+00:25:56.786 --> 00:25:58.166 A:middle
+as they're needed to display.
+
+00:25:59.366 --> 00:26:03.746 A:middle
+The last one I wanted to
+show is sequence blocking.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:59.366 --> 00:26:03.746 A:middle
+The last one I wanted to
+show is sequence blocking.
+
+00:26:05.136 --> 00:26:07.196 A:middle
+If you have really complex
+fetches that take a lot
+
+00:26:07.196 --> 00:26:12.006 A:middle
+of time then you can find
+them by using this argument
+
+00:26:12.006 --> 00:26:18.266 A:middle
+to your program and it will
+start printing out data
+
+00:26:18.266 --> 00:26:20.196 A:middle
+about your fetch
+requests as they're ran.
+
+00:26:20.276 --> 00:26:23.686 A:middle
+This case, we have a query and
+the amount of time it took,
+
+00:26:23.686 --> 00:26:28.006 A:middle
+which was about, what,
+almost a tenth of a second
+
+00:26:28.006 --> 00:26:29.776 A:middle
+and it returned 85 rows.
+
+00:26:30.296 --> 00:26:31.546 A:middle
+That's pretty slow.
+
+00:26:31.546 --> 00:26:33.056 A:middle
+We should take a
+look at doing better.
+
+00:26:33.956 --> 00:26:36.726 A:middle
+If we scroll up higher in the
+console we can see it printed
+
+00:26:36.726 --> 00:26:39.206 A:middle
+out the file we're
+using and we can connect
+
+00:26:39.206 --> 00:26:42.156 A:middle
+to that file using SQLite to
+figure out what's going on.
+
+00:26:42.776 --> 00:26:45.056 A:middle
+If we paste in our query
+
+00:26:45.056 --> 00:26:48.266 A:middle
+after explain query plan then
+SQ lit will tell us what it is
+
+00:26:48.266 --> 00:26:51.526 A:middle
+trying to do to fulfill
+the query with this table.
+
+00:26:51.526 --> 00:26:56.926 A:middle
+There is a couple of things
+to note here that we can use
+
+00:26:56.926 --> 00:26:59.306 A:middle
+as a metrics for how to
+expect the performance to be.
+
+00:26:59.396 --> 00:27:03.386 A:middle
+The first is scan table, scan
+table means that SQLite is going
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:59.396 --> 00:27:03.386 A:middle
+The first is scan table, scan
+table means that SQLite is going
+
+00:27:03.386 --> 00:27:07.426 A:middle
+to touch every row, inspect
+every row to fulfill the query
+
+00:27:08.086 --> 00:27:10.436 A:middle
+and on the recipe table
+as we had earlier,
+
+00:27:10.436 --> 00:27:12.666 A:middle
+that was 30,000 rows
+and we'll do that twice,
+
+00:27:12.666 --> 00:27:14.206 A:middle
+so that's not going to
+be very fast and we have
+
+00:27:14.206 --> 00:27:15.676 A:middle
+to investigate making it better.
+
+00:27:16.776 --> 00:27:20.856 A:middle
+Also, we have use temp
+B-tree which is a step
+
+00:27:20.966 --> 00:27:24.016 A:middle
+where SQLite builds its own
+memory structure out of the data
+
+00:27:24.016 --> 00:27:28.336 A:middle
+in order to fulfill either
+sorting or fast searches.
+
+00:27:30.326 --> 00:27:33.236 A:middle
+The temp B-tree is being used
+because of this group by here,
+
+00:27:33.736 --> 00:27:36.376 A:middle
+if we take a look
+a little closer,
+
+00:27:36.376 --> 00:27:38.486 A:middle
+it is because of the
+source in external ID.
+
+00:27:38.486 --> 00:27:41.276 A:middle
+We should be able
+to make this faster
+
+00:27:41.276 --> 00:27:42.916 A:middle
+by using a compound index.
+
+00:27:43.526 --> 00:27:45.406 A:middle
+In the Core Data model
+editor we can add one
+
+00:27:46.136 --> 00:27:49.916 A:middle
+on the right-hand side here.
+
+00:27:50.136 --> 00:27:52.566 A:middle
+Now, if we quit SQLite,
+rebuild our project,
+
+00:27:52.726 --> 00:27:55.246 A:middle
+perform a migration, and
+attach to the new database
+
+00:27:55.246 --> 00:27:58.306 A:middle
+with SQLite we can then see
+that we're using an index.
+
+00:27:59.026 --> 00:28:01.656 A:middle
+Using index means that
+the searches is going
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:59.026 --> 00:28:01.656 A:middle
+Using index means that
+the searches is going
+
+00:28:01.656 --> 00:28:04.976 A:middle
+to be fast using covering
+index is even better,
+
+00:28:04.976 --> 00:28:06.876 A:middle
+it means that the
+results of that step are
+
+00:28:06.876 --> 00:28:09.436 A:middle
+in the natural sort order
+needed for the next step.
+
+00:28:10.006 --> 00:28:12.396 A:middle
+We have entirely eliminated
+the temporary B tree
+
+00:28:13.446 --> 00:28:15.626 A:middle
+but we still have
+the scan table.
+
+00:28:17.116 --> 00:28:20.136 A:middle
+In this case, we're
+matching duplicate objects.
+
+00:28:20.136 --> 00:28:23.006 A:middle
+This was the query we
+used in the demo in order
+
+00:28:23.006 --> 00:28:24.236 A:middle
+to find objects to delete.
+
+00:28:24.836 --> 00:28:27.646 A:middle
+It has to scan the entire
+table, it can't be faster.
+
+00:28:28.786 --> 00:28:30.446 A:middle
+The only thing left
+to do is to make sure
+
+00:28:30.446 --> 00:28:31.546 A:middle
+that we're off the main thread.
+
+00:28:31.546 --> 00:28:34.396 A:middle
+In this case we're using
+a private Q context,
+
+00:28:35.026 --> 00:28:39.986 A:middle
+but if you were trying to create
+some composite data do show
+
+00:28:39.986 --> 00:28:42.876 A:middle
+to a user, you might want to
+use a nonsequitous fetch request
+
+00:28:42.876 --> 00:28:44.426 A:middle
+that will get off of the main
+thread while it's working
+
+00:28:44.426 --> 00:28:46.816 A:middle
+and then come back when
+the results are ready.
+
+00:28:47.986 --> 00:28:50.456 A:middle
+So those are three common
+patterns to look out for
+
+00:28:50.456 --> 00:28:52.156 A:middle
+in your app that allow you
+
+00:28:52.156 --> 00:28:54.586 A:middle
+to solve those performance
+problems before
+
+00:28:54.586 --> 00:28:55.236 A:middle
+they're problems.
+
+00:28:55.736 --> 00:28:59.896 A:middle
+That's it this year for
+What's New in Core Data.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:29:00.236 --> 00:29:01.966 A:middle
+If you find any problems,
+please file them.
+
+00:29:02.186 --> 00:29:04.546 A:middle
+There is a bonus
+for sample apps code
+
+00:29:04.546 --> 00:29:06.876 A:middle
+that reproduces right
+away, it gets fixed first.
+
+00:29:07.536 --> 00:29:09.436 A:middle
+We're also interested in
+hearing things that you would
+
+00:29:09.436 --> 00:29:11.046 A:middle
+like to see in Core
+Data, feature requests,
+
+00:29:11.046 --> 00:29:13.846 A:middle
+enhancement ideas, the
+documentation guides
+
+00:29:13.846 --> 00:29:17.576 A:middle
+as I said were all revised this
+year, so if you find any issues
+
+00:29:17.576 --> 00:29:20.636 A:middle
+with those we would love
+to know about them as well.
+
+00:29:20.786 --> 00:29:23.206 A:middle
+For more information, check
+out the developer portal
+
+00:29:23.866 --> 00:29:26.616 A:middle
+and our documentation and
+sample code, you can get support
+
+00:29:26.616 --> 00:29:28.216 A:middle
+on the dev forums
+or through DTS.
+
+00:29:28.216 --> 00:29:30.596 A:middle
+Thank you for coming.
+
+00:29:31.516 --> 00:29:35.500 A:middle
+[Applause]
+
