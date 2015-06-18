@@ -1,0 +1,3250 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:28.556 --> 00:00:28.776 A:middle
+&gt;&gt; ABHINAV PATHAK: Hello.
+
+00:00:31.546 --> 00:00:32.206 A:middle
+Hello, everyone.
+
+00:00:32.926 --> 00:00:33.506 A:middle
+Good morning.
+
+00:00:34.396 --> 00:00:37.016 A:middle
+Hope you are having
+a great WWDC so far.
+
+00:00:37.926 --> 00:00:40.516 A:middle
+I'm Abhinav Pathak, along with
+my colleague, Pai-Han Huang,
+
+00:00:40.516 --> 00:00:43.126 A:middle
+we are going to talk about
+debugging energy issues.
+
+00:00:44.226 --> 00:00:46.556 A:middle
+We are going to show you the
+tools that we already have
+
+00:00:47.196 --> 00:00:50.946 A:middle
+and the new tools we built
+this year specifically for iOS,
+
+00:00:51.556 --> 00:00:56.226 A:middle
+using which you can find energy
+problems in your app and, two,
+
+00:00:56.406 --> 00:01:00.256 A:middle
+fix them so that your
+customers really like your app.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:56.406 --> 00:01:00.256 A:middle
+fix them so that your
+customers really like your app.
+
+00:01:00.926 --> 00:01:01.396 A:middle
+Let's begin.
+
+00:01:03.176 --> 00:01:04.245 A:middle
+The red battery icon.
+
+00:01:04.336 --> 00:01:07.256 A:middle
+How much we all hate it
+when it happens to us.
+
+00:01:08.456 --> 00:01:09.836 A:middle
+Customers also hate this.
+
+00:01:11.266 --> 00:01:14.796 A:middle
+Having a good battery
+life is really important
+
+00:01:14.796 --> 00:01:17.406 A:middle
+to having an awesome
+user experience.
+
+00:01:18.586 --> 00:01:22.176 A:middle
+Time and time again, it has
+come up that battery life is one
+
+00:01:22.176 --> 00:01:24.996 A:middle
+of the most important
+feature that people want.
+
+00:01:26.436 --> 00:01:28.616 A:middle
+At Apple, we take great strides
+
+00:01:28.936 --> 00:01:32.066 A:middle
+to ensure customers get a
+good battery life experience.
+
+00:01:32.916 --> 00:01:37.576 A:middle
+However, the apps the
+customer run have equal
+
+00:01:37.576 --> 00:01:41.396 A:middle
+or usually more say in
+how the energy is drained
+
+00:01:41.396 --> 00:01:41.946 A:middle
+from their device.
+
+00:01:43.476 --> 00:01:47.356 A:middle
+To help our customers understand
+which app is draining battery,
+
+00:01:47.356 --> 00:01:50.716 A:middle
+which app is heavy in terms of
+energy, a couple of years ago
+
+00:01:51.126 --> 00:01:56.016 A:middle
+on OS X side, we had an activity
+monitor monitor energy impact,
+
+00:01:56.566 --> 00:01:59.206 A:middle
+where you can see, for
+each and every app,
+
+00:01:59.906 --> 00:02:02.896 A:middle
+what is the instantaneous
+impact and what is the impact
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:59.906 --> 00:02:02.896 A:middle
+what is the instantaneous
+impact and what is the impact
+
+00:02:02.946 --> 00:02:05.626 A:middle
+for a period of time so
+that users can get, hey,
+
+00:02:05.626 --> 00:02:06.696 A:middle
+what happened on their device?
+
+00:02:07.996 --> 00:02:11.926 A:middle
+On iOS 8, last year we
+introduced battery usage UI,
+
+00:02:11.926 --> 00:02:17.186 A:middle
+a customer-facing UI, where they
+can go and see in last 24 hours,
+
+00:02:17.446 --> 00:02:20.606 A:middle
+and last 7 days, what is the
+proportion of energy breakdown
+
+00:02:20.796 --> 00:02:23.646 A:middle
+in different application
+that is they have used.
+
+00:02:24.256 --> 00:02:28.896 A:middle
+An app coming at the top could
+have very legitimate reasons,
+
+00:02:28.896 --> 00:02:31.796 A:middle
+hey, I love this app,
+I use it all the time.
+
+00:02:32.986 --> 00:02:35.886 A:middle
+To help customers understand
+what is the factor here,
+
+00:02:36.496 --> 00:02:41.176 A:middle
+this year we have included a
+single toggle at the top of it
+
+00:02:41.236 --> 00:02:44.506 A:middle
+where they can toggle and
+see how much usage there is,
+
+00:02:45.096 --> 00:02:46.996 A:middle
+how much screen time
+the app got,
+
+00:02:46.996 --> 00:02:49.176 A:middle
+and how much it ran
+in the background.
+
+00:02:49.576 --> 00:02:52.556 A:middle
+And then they can assess
+hey, I used it more, or hey,
+
+00:02:52.556 --> 00:02:56.236 A:middle
+this app consumes
+a lot of energy.
+
+00:02:56.536 --> 00:03:00.226 A:middle
+This talk is about if your
+app is coming on the top
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:56.536 --> 00:03:00.226 A:middle
+This talk is about if your
+app is coming on the top
+
+00:03:00.226 --> 00:03:02.186 A:middle
+of this list, how you can get it
+
+00:03:02.186 --> 00:03:05.376 A:middle
+down while maintaining
+the same utilization
+
+00:03:05.716 --> 00:03:07.856 A:middle
+or giving the same
+utility to your user.
+
+00:03:08.666 --> 00:03:11.256 A:middle
+This talk is also about
+people who usually come down,
+
+00:03:11.256 --> 00:03:12.836 A:middle
+how they can further come down
+
+00:03:13.146 --> 00:03:15.086 A:middle
+and get a good customer
+experience.
+
+00:03:16.716 --> 00:03:19.916 A:middle
+To give a high-level overview,
+we are going to quickly go
+
+00:03:19.916 --> 00:03:21.906 A:middle
+through energy fundamentals
+and best practices.
+
+00:03:21.906 --> 00:03:24.266 A:middle
+We are going to summarize the
+talk we had in the morning.
+
+00:03:24.266 --> 00:03:28.056 A:middle
+We are going to show you the
+energy debugging workflow
+
+00:03:28.056 --> 00:03:31.236 A:middle
+and the tools we have
+on how to debug energy.
+
+00:03:31.926 --> 00:03:33.426 A:middle
+We are going to have a demo
+
+00:03:33.666 --> 00:03:36.786 A:middle
+where we will fix energy
+problems in a sample app
+
+00:03:36.786 --> 00:03:39.386 A:middle
+that we have built
+specifically for this talk
+
+00:03:39.386 --> 00:03:42.576 A:middle
+and show you how easy
+it is to go ahead
+
+00:03:42.576 --> 00:03:49.316 A:middle
+and fix energy problems, and
+then we will close this talk.
+
+00:03:49.496 --> 00:03:50.126 A:middle
+Very simple.
+
+00:03:50.306 --> 00:03:51.226 A:middle
+Everybody knows this.
+
+00:03:51.536 --> 00:03:52.806 A:middle
+Energy 101.
+
+00:03:52.806 --> 00:03:54.606 A:middle
+Energy is equal to
+power times time.
+
+00:03:55.256 --> 00:03:56.676 A:middle
+What we are seeing
+here is a graph,
+
+00:03:57.076 --> 00:03:59.266 A:middle
+X-axis is time, Y-axis is power.
+
+00:03:59.266 --> 00:04:01.316 A:middle
+It's a waveform of
+an application usage.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:59.266 --> 00:04:01.316 A:middle
+It's a waveform of
+an application usage.
+
+00:04:01.626 --> 00:04:02.176 A:middle
+What happened?
+
+00:04:02.516 --> 00:04:04.936 A:middle
+Let's say a user launches an
+app, a bunch of activities,
+
+00:04:05.526 --> 00:04:07.656 A:middle
+backgrounded the app, and
+the app got suspended.
+
+00:04:08.766 --> 00:04:11.846 A:middle
+The single most important
+point here is the entire area
+
+00:04:11.846 --> 00:04:14.646 A:middle
+under the graph is
+the energy consumption
+
+00:04:14.896 --> 00:04:17.396 A:middle
+of this particular app.
+
+00:04:18.336 --> 00:04:20.396 A:middle
+Energy is dictated
+by power and time,
+
+00:04:20.875 --> 00:04:22.366 A:middle
+and to illustrate
+the point further,
+
+00:04:22.666 --> 00:04:26.956 A:middle
+if we take two rectangles here,
+they are differing in terms
+
+00:04:26.956 --> 00:04:28.946 A:middle
+of how much power they
+consume, differing in terms
+
+00:04:28.946 --> 00:04:31.766 A:middle
+of how much time they consume,
+but they are equal energy wise.
+
+00:04:32.416 --> 00:04:39.136 A:middle
+Second concept, there's
+something called fixed cost,
+
+00:04:39.186 --> 00:04:40.556 A:middle
+there's something
+called dynamic cost.
+
+00:04:40.686 --> 00:04:44.256 A:middle
+A lot of hardware components
+we have in our systems,
+
+00:04:44.526 --> 00:04:47.736 A:middle
+if you have to use them, we have
+to first bring them into a state
+
+00:04:47.736 --> 00:04:49.536 A:middle
+where they can start
+serving your requests.
+
+00:04:50.476 --> 00:04:53.876 A:middle
+These states are very high
+energy consumption in terms
+
+00:04:54.076 --> 00:04:55.326 A:middle
+of -- compared to
+-- the sleep states.
+
+00:04:55.816 --> 00:04:58.626 A:middle
+Once they are brought up, they
+do the work that you asked it
+
+00:04:58.686 --> 00:05:02.616 A:middle
+to do, and then we keep them in
+that state in anticipation of,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:58.686 --> 00:05:02.616 A:middle
+to do, and then we keep them in
+that state in anticipation of,
+
+00:05:02.896 --> 00:05:04.516 A:middle
+you know, further
+work is going to come.
+
+00:05:04.616 --> 00:05:06.266 A:middle
+Once we see there's
+no work coming up,
+
+00:05:06.436 --> 00:05:10.686 A:middle
+we quiet them down,
+let them go to sleep.
+
+00:05:10.806 --> 00:05:14.006 A:middle
+Fixed cost can be
+very, very expensive,
+
+00:05:14.446 --> 00:05:16.556 A:middle
+and we will see throughout
+this talk how we will go
+
+00:05:16.556 --> 00:05:19.246 A:middle
+after this fixed cost
+whenever it starts impacting
+
+00:05:19.596 --> 00:05:20.216 A:middle
+your application.
+
+00:05:20.796 --> 00:05:25.016 A:middle
+When it comes down to
+reducing energy usage,
+
+00:05:25.016 --> 00:05:28.206 A:middle
+there are very simple three
+rules that you need to follow.
+
+00:05:28.796 --> 00:05:30.686 A:middle
+First rule, do it never.
+
+00:05:30.686 --> 00:05:34.826 A:middle
+Does a customer really
+need that work to be done?
+
+00:05:35.476 --> 00:05:37.716 A:middle
+If you don't do it, fixed
+cost, dynamic cost, energy,
+
+00:05:37.716 --> 00:05:39.126 A:middle
+power time -- all the
+things we have talked --
+
+00:05:39.126 --> 00:05:40.306 A:middle
+is a grand total of zero.
+
+00:05:41.156 --> 00:05:45.406 A:middle
+Awesome. If you need
+to do it, do it less.
+
+00:05:45.796 --> 00:05:48.496 A:middle
+What is the least amount of work
+
+00:05:48.496 --> 00:05:50.086 A:middle
+to satisfy the customer's
+request?
+
+00:05:50.466 --> 00:05:54.966 A:middle
+Next thing, do it
+at a better time.
+
+00:05:54.996 --> 00:05:57.386 A:middle
+A customer is out in the
+wild, taking photographs.
+
+00:05:57.416 --> 00:05:59.096 A:middle
+Do I need to upload it
+to the server right now?
+
+00:05:59.656 --> 00:06:01.166 A:middle
+Have some tolerance, maybe
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:59.656 --> 00:06:01.166 A:middle
+Have some tolerance, maybe
+
+00:06:01.166 --> 00:06:03.176 A:middle
+when a user is connected
+to a power outlet.
+
+00:06:03.966 --> 00:06:07.166 A:middle
+Third, do it efficiently.
+
+00:06:07.246 --> 00:06:09.606 A:middle
+What is the best
+efficient algorithm
+
+00:06:09.606 --> 00:06:12.286 A:middle
+or the best thing I can
+do to serve this request?
+
+00:06:12.286 --> 00:06:15.546 A:middle
+We will see how these things
+come back again and again
+
+00:06:15.836 --> 00:06:20.226 A:middle
+in different parts of the talk.
+
+00:06:20.786 --> 00:06:24.186 A:middle
+To jump in the energy debugging
+workflow and tools we have,
+
+00:06:24.916 --> 00:06:27.956 A:middle
+let's look at how does an energy
+debugging workflow look like?
+
+00:06:28.156 --> 00:06:30.466 A:middle
+It's very similar to normal
+software engineering practices.
+
+00:06:30.876 --> 00:06:33.076 A:middle
+What you do: you
+write code and build.
+
+00:06:34.156 --> 00:06:36.356 A:middle
+You run it on a very
+simple debugger which tries
+
+00:06:36.356 --> 00:06:38.826 A:middle
+to show you what's the
+high-level problems
+
+00:06:38.826 --> 00:06:39.366 A:middle
+in your code.
+
+00:06:39.846 --> 00:06:42.096 A:middle
+A lot of problems you
+can easily identify,
+
+00:06:42.096 --> 00:06:43.536 A:middle
+fix, and you run it again.
+
+00:06:44.966 --> 00:06:47.846 A:middle
+Some of the problems, though,
+are hard, so you go ahead
+
+00:06:47.846 --> 00:06:50.986 A:middle
+and say let me get a
+focused debugger, you know?
+
+00:06:51.116 --> 00:06:52.246 A:middle
+Hey, I have a memory issue.
+
+00:06:52.246 --> 00:06:55.286 A:middle
+Let me get a focused tool only
+on memory that can pinpoint
+
+00:06:55.286 --> 00:06:58.766 A:middle
+in my app exact line of the
+code, where is the problem?
+
+00:06:59.926 --> 00:07:01.106 A:middle
+And once you are
+done with all this,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:59.926 --> 00:07:01.106 A:middle
+And once you are
+done with all this,
+
+00:07:01.466 --> 00:07:04.046 A:middle
+you ship it to your customers
+and your customers use it.
+
+00:07:04.696 --> 00:07:08.016 A:middle
+On OS X side, we have
+Xcode, where we write
+
+00:07:08.016 --> 00:07:10.356 A:middle
+and build your application.
+
+00:07:11.076 --> 00:07:14.626 A:middle
+As part of general
+debugger, within Xcode,
+
+00:07:14.626 --> 00:07:16.246 A:middle
+there are energy
+debugging tools,
+
+00:07:16.246 --> 00:07:17.516 A:middle
+which we are going
+to talk about.
+
+00:07:18.116 --> 00:07:21.616 A:middle
+These show primarily hints
+of how your app is behaving.
+
+00:07:22.176 --> 00:07:26.416 A:middle
+As part of instruments,
+we have focus tools.
+
+00:07:26.416 --> 00:07:28.026 A:middle
+Once you have identified, hey,
+
+00:07:28.026 --> 00:07:29.906 A:middle
+this part of the
+system is a problem,
+
+00:07:29.906 --> 00:07:31.746 A:middle
+let me go ahead and fix this.
+
+00:07:31.996 --> 00:07:34.546 A:middle
+And customers, as we talked
+about, they have energy impact,
+
+00:07:34.546 --> 00:07:37.076 A:middle
+and they can go ahead
+and look at it.
+
+00:07:37.796 --> 00:07:39.086 A:middle
+Before we jump into the tools,
+
+00:07:39.556 --> 00:07:42.346 A:middle
+let's look at energy
+debugging priorities on OS X.
+
+00:07:42.936 --> 00:07:45.076 A:middle
+The reason is the
+tools are very focused
+
+00:07:45.076 --> 00:07:47.646 A:middle
+on energy debugging priority
+because they point you
+
+00:07:47.646 --> 00:07:52.606 A:middle
+to exactly the location where
+you need to fix your problem.
+
+00:07:52.606 --> 00:07:58.526 A:middle
+Priorities on OS X
+are the CPU and GPU.
+
+00:07:59.546 --> 00:08:02.046 A:middle
+They have a very,
+very high fixed cost.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:59.546 --> 00:08:02.046 A:middle
+They have a very,
+very high fixed cost.
+
+00:08:03.086 --> 00:08:05.986 A:middle
+To bring it to a state
+where they can serve you
+
+00:08:05.986 --> 00:08:08.626 A:middle
+or your request in
+the idle state,
+
+00:08:08.846 --> 00:08:12.026 A:middle
+it is ten times the power
+consumption of as compared
+
+00:08:12.026 --> 00:08:13.226 A:middle
+to when they are
+in the sleep state.
+
+00:08:14.516 --> 00:08:17.356 A:middle
+Once they are in the idle state,
+if you use CPU for 1 percent,
+
+00:08:17.646 --> 00:08:20.956 A:middle
+that is 10 percent more on
+top of idle power consumption.
+
+00:08:21.586 --> 00:08:23.146 A:middle
+And from then on,
+it goes exponential.
+
+00:08:23.406 --> 00:08:27.506 A:middle
+10 percent CPU, two times idle;
+100 percent CPU, 100 times idle.
+
+00:08:28.946 --> 00:08:30.186 A:middle
+Very simple rule here.
+
+00:08:30.316 --> 00:08:33.196 A:middle
+Do not wake the CPU up
+if you do not need to.
+
+00:08:33.416 --> 00:08:34.535 A:middle
+Let the giant bear sleep.
+
+00:08:34.535 --> 00:08:36.246 A:middle
+Don't poke it.
+
+00:08:37.785 --> 00:08:40.966 A:middle
+The tool we have in Xcode,
+I call it energy gauges,
+
+00:08:41.416 --> 00:08:44.726 A:middle
+it prints you an energy report
+that looks something like this.
+
+00:08:44.906 --> 00:08:45.846 A:middle
+How do you get there?
+
+00:08:46.136 --> 00:08:48.076 A:middle
+You click -- once you are
+running your application,
+
+00:08:48.166 --> 00:08:50.356 A:middle
+click on the debug
+analysis part.
+
+00:08:50.486 --> 00:08:52.396 A:middle
+Once you click there, you
+see a bunch of gauges.
+
+00:08:52.836 --> 00:08:54.336 A:middle
+Click on the energy
+impact gauge.
+
+00:08:54.376 --> 00:08:55.756 A:middle
+You will see the report.
+
+00:08:56.666 --> 00:09:00.316 A:middle
+What do you see in the report?
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:56.666 --> 00:09:00.316 A:middle
+What do you see in the report?
+
+00:09:00.646 --> 00:09:06.356 A:middle
+So primarily, you'll see if you
+are being a bad citizen of OS X,
+
+00:09:07.026 --> 00:09:11.076 A:middle
+basically, you have -- if
+you are using high CPU.
+
+00:09:11.986 --> 00:09:13.926 A:middle
+If you are preventing your --
+
+00:09:14.466 --> 00:09:17.826 A:middle
+your application is in
+background, user is not looking
+
+00:09:17.826 --> 00:09:21.326 A:middle
+at it, system will try to put
+you in App Nap, which is a kind
+
+00:09:21.326 --> 00:09:23.696 A:middle
+of background suspend, and
+you are preventing system
+
+00:09:23.696 --> 00:09:24.256 A:middle
+to do that.
+
+00:09:24.656 --> 00:09:26.226 A:middle
+You are not actively
+serving any request,
+
+00:09:26.486 --> 00:09:27.746 A:middle
+but you are burning
+a lot of energy.
+
+00:09:28.836 --> 00:09:29.586 A:middle
+Idle prevention.
+
+00:09:29.586 --> 00:09:31.666 A:middle
+You are not letting the CPU
+to go to into idle state.
+
+00:09:31.666 --> 00:09:35.176 A:middle
+If it cannot go into idle, it
+cannot go into sleep state.
+
+00:09:35.176 --> 00:09:39.026 A:middle
+Once gone into sleep state,
+the CPU wake overhead says hey,
+
+00:09:39.026 --> 00:09:42.746 A:middle
+you are responsible
+to bring this guy up.
+
+00:09:43.816 --> 00:09:45.626 A:middle
+Once you have figured
+out high level
+
+00:09:45.656 --> 00:09:46.946 A:middle
+where the problem comes in,
+
+00:09:47.246 --> 00:09:50.426 A:middle
+what you can do is just
+underneath the report,
+
+00:09:50.426 --> 00:09:51.896 A:middle
+you have first of
+all the description
+
+00:09:51.896 --> 00:09:53.236 A:middle
+of the things we
+just talked about,
+
+00:09:53.686 --> 00:09:56.976 A:middle
+but you have these buttons which
+you can jump into instruments,
+
+00:09:57.436 --> 00:09:59.936 A:middle
+and these tools are
+specifically designed for each
+
+00:09:59.936 --> 00:10:03.016 A:middle
+and every area, and they can,
+you know, help you pinpoint,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:59.936 --> 00:10:03.016 A:middle
+and every area, and they can,
+you know, help you pinpoint,
+
+00:10:03.016 --> 00:10:05.996 A:middle
+hey, which line of code
+is actually causing high
+
+00:10:05.996 --> 00:10:07.086 A:middle
+CPU utilization?
+
+00:10:07.466 --> 00:10:09.806 A:middle
+Which line of code is
+causing the wake overhead?
+
+00:10:10.456 --> 00:10:14.476 A:middle
+You can go ahead
+and debug your app.
+
+00:10:15.046 --> 00:10:17.716 A:middle
+When it comes to principles
+of reducing energy on OS X,
+
+00:10:18.316 --> 00:10:21.136 A:middle
+we come back to our three simple
+rules: do it never/do it less.
+
+00:10:21.836 --> 00:10:23.136 A:middle
+You want to coalesce
+all the timers.
+
+00:10:23.396 --> 00:10:25.586 A:middle
+You don't want to wake up
+the system again and again.
+
+00:10:26.226 --> 00:10:27.126 A:middle
+Minimize CPU wakes.
+
+00:10:28.316 --> 00:10:29.376 A:middle
+Do it at a better time.
+
+00:10:29.696 --> 00:10:32.756 A:middle
+Use the background
+activity scheduler APIs,
+
+00:10:32.756 --> 00:10:35.016 A:middle
+where you can specify
+a lot of parameters
+
+00:10:35.296 --> 00:10:37.196 A:middle
+and let the system choose
+the right time for you.
+
+00:10:38.436 --> 00:10:41.636 A:middle
+Do it efficiently, set
+the right work priorities,
+
+00:10:41.706 --> 00:10:43.736 A:middle
+QoS work priorities,
+on your work queues.
+
+00:10:44.496 --> 00:10:45.486 A:middle
+Program a computer algorithm.
+
+00:10:45.486 --> 00:10:55.096 A:middle
+Moving on to iOS, CPU is still
+a dominant energy consumption.
+
+00:10:56.226 --> 00:10:59.276 A:middle
+But given the fact that
+these devices are different
+
+00:10:59.346 --> 00:11:05.916 A:middle
+than OS X devices, a few
+other things come into play.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:59.346 --> 00:11:05.916 A:middle
+than OS X devices, a few
+other things come into play.
+
+00:11:06.616 --> 00:11:09.486 A:middle
+First of all, two of the
+peripheries, location
+
+00:11:09.636 --> 00:11:12.446 A:middle
+and networking, can be
+equally costly as CPU
+
+00:11:12.576 --> 00:11:14.516 A:middle
+if not more in some use cases.
+
+00:11:15.076 --> 00:11:19.686 A:middle
+Next, when an app runs
+in the background,
+
+00:11:19.736 --> 00:11:23.106 A:middle
+your app consumes all
+these three hardware
+
+00:11:23.326 --> 00:11:25.116 A:middle
+and it consumes a lot of energy.
+
+00:11:25.476 --> 00:11:28.766 A:middle
+You don't have the display
+energy, but still all the rest
+
+00:11:28.766 --> 00:11:31.046 A:middle
+of components are huge in
+terms of energy consumption.
+
+00:11:31.916 --> 00:11:35.776 A:middle
+So let's look at each
+of these one by one.
+
+00:11:35.986 --> 00:11:38.406 A:middle
+Location energy usually
+acts like this.
+
+00:11:38.536 --> 00:11:40.016 A:middle
+It's not very high in power.
+
+00:11:40.176 --> 00:11:42.516 A:middle
+The power is data mined by
+which API you have called
+
+00:11:42.516 --> 00:11:45.006 A:middle
+and what is the precision
+with which you are calling it.
+
+00:11:46.116 --> 00:11:47.266 A:middle
+The time component is big,
+
+00:11:47.436 --> 00:11:49.636 A:middle
+and that is how the
+energy becomes really huge.
+
+00:11:50.176 --> 00:11:54.956 A:middle
+When it comes to fixing location
+issues, again, same principles:
+
+00:11:54.956 --> 00:11:57.746 A:middle
+do it never, do continuous
+location only
+
+00:11:57.746 --> 00:11:59.176 A:middle
+if you actually need it,
+
+00:11:59.176 --> 00:12:01.076 A:middle
+it has actually been
+requested by the user.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:59.176 --> 00:12:01.076 A:middle
+it has actually been
+requested by the user.
+
+00:12:01.416 --> 00:12:03.856 A:middle
+And please stop once
+you are done with it.
+
+00:12:03.906 --> 00:12:04.916 A:middle
+Once you get the location,
+
+00:12:04.916 --> 00:12:08.096 A:middle
+once your request is
+satisfied, just stop it.
+
+00:12:08.986 --> 00:12:10.666 A:middle
+Next, do it efficiently.
+
+00:12:10.666 --> 00:12:12.256 A:middle
+What is the best
+accuracy you need?
+
+00:12:12.256 --> 00:12:14.186 A:middle
+Do you need to know
+exactly within three feet
+
+00:12:14.266 --> 00:12:17.656 A:middle
+where the user is standing on
+earth or the city is good enough
+
+00:12:17.656 --> 00:12:19.386 A:middle
+in predicting weather for it?
+
+00:12:20.336 --> 00:12:21.286 A:middle
+What are you trying to do?
+
+00:12:21.836 --> 00:12:24.976 A:middle
+We have went ahead in the
+location site and we said hey,
+
+00:12:25.236 --> 00:12:28.586 A:middle
+there are a set of use cases
+where people want to have
+
+00:12:29.026 --> 00:12:31.826 A:middle
+and for each of the use
+cases, we have designed APIs
+
+00:12:31.826 --> 00:12:35.906 A:middle
+that help serve better
+the developers, you.
+
+00:12:36.756 --> 00:12:40.536 A:middle
+Try to read on these APIs
+what actually you want
+
+00:12:40.536 --> 00:12:47.266 A:middle
+and we'll do the energy
+management really nice for you.
+
+00:12:47.486 --> 00:12:49.356 A:middle
+When it comes to networking,
+
+00:12:49.356 --> 00:12:51.836 A:middle
+very similar principles:
+do it never.
+
+00:12:51.836 --> 00:12:52.746 A:middle
+Cut down transfers.
+
+00:12:53.366 --> 00:12:55.186 A:middle
+Can you cache, can you compress?
+
+00:12:55.326 --> 00:12:57.246 A:middle
+Do you need the highest
+quality media
+
+00:12:57.246 --> 00:12:58.496 A:middle
+on the smallest form factor?
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:01.766 --> 00:13:02.806 A:middle
+Can you do it at a better time?
+
+00:13:02.806 --> 00:13:03.966 A:middle
+Can you consider tolerance?
+
+00:13:04.186 --> 00:13:05.256 A:middle
+When is it needed?
+
+00:13:05.596 --> 00:13:07.746 A:middle
+Can you mark it as
+a discretionary?
+
+00:13:08.186 --> 00:13:09.706 A:middle
+The moment you mark
+it discretionary,
+
+00:13:09.706 --> 00:13:10.586 A:middle
+the system takes over.
+
+00:13:10.936 --> 00:13:13.136 A:middle
+You can specify, hey,
+in the next 6 hours
+
+00:13:13.136 --> 00:13:15.766 A:middle
+or the next 12 hours, I
+need this to be uploaded
+
+00:13:15.766 --> 00:13:17.796 A:middle
+or downloaded, and
+the system will figure
+
+00:13:17.796 --> 00:13:20.446 A:middle
+out what's the best time,
+will do the activity for you,
+
+00:13:20.446 --> 00:13:24.106 A:middle
+and once it's done, it will tell
+you hey, this activity is done.
+
+00:13:25.156 --> 00:13:26.656 A:middle
+Do it more efficiently.
+
+00:13:27.176 --> 00:13:28.626 A:middle
+Coalesce transfers.
+
+00:13:29.066 --> 00:13:30.696 A:middle
+Let's take a look at an example.
+
+00:13:30.696 --> 00:13:31.866 A:middle
+What do we mean by this?
+
+00:13:32.486 --> 00:13:35.116 A:middle
+Let's say you have a requirement
+where you have to sync data
+
+00:13:35.116 --> 00:13:37.226 A:middle
+to a server, user is
+using your app and have
+
+00:13:37.256 --> 00:13:40.646 A:middle
+to periodically sync as it's
+being generated on the device.
+
+00:13:41.716 --> 00:13:42.646 A:middle
+Very simple solution.
+
+00:13:43.556 --> 00:13:45.486 A:middle
+As the data is getting generated
+
+00:13:45.486 --> 00:13:47.486 A:middle
+on the device, just
+keep pushing it.
+
+00:13:48.616 --> 00:13:49.406 A:middle
+What happens here?
+
+00:13:50.056 --> 00:13:53.556 A:middle
+For every push, you bring the
+data up, you send your 2 bytes,
+
+00:13:53.556 --> 00:13:55.646 A:middle
+10 bytes, 100 bytes, radio stays
+
+00:13:55.646 --> 00:13:57.356 A:middle
+on for a long time,
+it goes to sleep.
+
+00:13:58.056 --> 00:13:59.516 A:middle
+Next push, the same is repeated.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:01.256 --> 00:14:04.036 A:middle
+The fixed cost is very
+high in that point.
+
+00:14:05.226 --> 00:14:05.906 A:middle
+How do you fix it?
+
+00:14:06.596 --> 00:14:07.166 A:middle
+Very simple.
+
+00:14:07.686 --> 00:14:08.866 A:middle
+Coalesce all the transfers.
+
+00:14:09.276 --> 00:14:11.706 A:middle
+Let the user interact with
+the device, build a state,
+
+00:14:12.066 --> 00:14:14.646 A:middle
+and once in a while send
+the state to the cloud
+
+00:14:15.206 --> 00:14:18.886 A:middle
+so that you pay the cost only
+once, the cost of fixed price.
+
+00:14:19.476 --> 00:14:25.446 A:middle
+Moving to background,
+first thing,
+
+00:14:25.446 --> 00:14:29.726 A:middle
+background when your app is
+running at the background,
+
+00:14:29.846 --> 00:14:31.936 A:middle
+it is draining energy
+from the user.
+
+00:14:32.966 --> 00:14:34.526 A:middle
+Please don't do anything
+in background
+
+00:14:34.526 --> 00:14:35.916 A:middle
+if you don't need to do it.
+
+00:14:37.416 --> 00:14:40.586 A:middle
+If you need to do it, call your
+task completion handler as quick
+
+00:14:40.586 --> 00:14:46.406 A:middle
+as possible, and this task
+completion handler is an
+
+00:14:46.436 --> 00:14:48.256 A:middle
+indication to the system
+saying, hey, I am done.
+
+00:14:48.716 --> 00:14:49.436 A:middle
+Please suspend me.
+
+00:14:49.536 --> 00:14:51.426 A:middle
+Please let the device
+go to sleep.
+
+00:14:52.416 --> 00:14:53.556 A:middle
+Do it efficiently.
+
+00:14:53.766 --> 00:14:56.146 A:middle
+There are a lot of background
+APIs that you can, you know,
+
+00:14:56.356 --> 00:14:59.396 A:middle
+give your system a hand, you
+know, please do the work for me
+
+00:14:59.396 --> 00:15:02.566 A:middle
+as you find the best time
+and the best, you know,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:59.396 --> 00:15:02.566 A:middle
+as you find the best time
+and the best, you know,
+
+00:15:02.966 --> 00:15:05.946 A:middle
+period energy wise and the
+system will do it for you.
+
+00:15:06.046 --> 00:15:11.576 A:middle
+To go back to the energy
+debugging workflow on iOS,
+
+00:15:11.936 --> 00:15:13.816 A:middle
+what we have so far,
+we have Xcode,
+
+00:15:13.816 --> 00:15:14.976 A:middle
+where you write and
+build your code.
+
+00:15:16.236 --> 00:15:17.846 A:middle
+Customers have battery usage UI
+
+00:15:17.846 --> 00:15:20.486 A:middle
+where they can see how your
+app is performing energy wise.
+
+00:15:21.326 --> 00:15:27.606 A:middle
+So far, we have had for a few
+years a tool called Energy
+
+00:15:27.606 --> 00:15:30.716 A:middle
+Diagnostics in Instruments that
+can give you a first-cut idea
+
+00:15:30.716 --> 00:15:32.126 A:middle
+of how your app is behaving.
+
+00:15:32.796 --> 00:15:34.216 A:middle
+Let's take a look at this tool.
+
+00:15:35.056 --> 00:15:36.006 A:middle
+How do you enable it?
+
+00:15:36.346 --> 00:15:39.836 A:middle
+You go to settings, developer,
+go to the logging pane.
+
+00:15:40.716 --> 00:15:43.536 A:middle
+You turn on the energy
+toggle here
+
+00:15:43.676 --> 00:15:45.406 A:middle
+and then you say,
+hey, start recording.
+
+00:15:45.496 --> 00:15:49.906 A:middle
+Once you have started
+recording, use your app
+
+00:15:49.906 --> 00:15:51.136 A:middle
+as your customer will.
+
+00:15:51.566 --> 00:15:54.146 A:middle
+Live on it for a
+few hours, 12 hours,
+
+00:15:54.146 --> 00:15:56.106 A:middle
+24 hours, a few days or so.
+
+00:15:56.626 --> 00:15:57.456 A:middle
+And once you are done,
+
+00:15:57.906 --> 00:15:59.266 A:middle
+just click the button,
+stop recording.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:03.116 --> 00:16:06.236 A:middle
+After this, connect your
+device to a Mac and go
+
+00:16:06.236 --> 00:16:08.946 A:middle
+to the instrument, select
+Energy Diagnostics, and say hey,
+
+00:16:09.006 --> 00:16:10.686 A:middle
+please import the log
+data that you have.
+
+00:16:11.426 --> 00:16:13.316 A:middle
+Once you do that, you
+will get a picture,
+
+00:16:13.316 --> 00:16:17.516 A:middle
+which is something like this.
+
+00:16:27.046 --> 00:16:29.246 A:middle
+You'll see Wi-Fi, Bluetooth,
+
+00:16:29.426 --> 00:16:31.776 A:middle
+and you'll see how long they
+were on, when they were on,
+
+00:16:31.776 --> 00:16:33.206 A:middle
+when they were off, and so on.
+
+00:16:33.276 --> 00:16:36.276 A:middle
+You will see how many packets
+were sent out of each interface,
+
+00:16:36.276 --> 00:16:37.606 A:middle
+what was the CPU activity.
+
+00:16:38.086 --> 00:16:40.346 A:middle
+At the top, you will see
+an energy usage level,
+
+00:16:40.346 --> 00:16:42.176 A:middle
+which with is a number
+out of 20.
+
+00:16:42.176 --> 00:16:44.516 A:middle
+If you are 20 out of 20,
+believe me, it's a problem.
+
+00:16:45.006 --> 00:16:47.176 A:middle
+Very, very high energy
+consumption.
+
+00:16:47.486 --> 00:16:50.836 A:middle
+You want to stay close to 1.
+
+00:16:51.046 --> 00:16:54.076 A:middle
+This tool is good if you
+want to do long experiments.
+
+00:16:54.696 --> 00:16:58.116 A:middle
+But what it doesn't do is it
+doesn't tell you why did the
+
+00:16:58.116 --> 00:16:58.936 A:middle
+hardware come up?
+
+00:16:59.256 --> 00:17:00.336 A:middle
+Did you request it?
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:59.256 --> 00:17:00.336 A:middle
+Did you request it?
+
+00:17:00.336 --> 00:17:01.636 A:middle
+Where did you request it?
+
+00:17:02.066 --> 00:17:06.006 A:middle
+It doesn't pinpoint, it's not
+fine-grain to go to your code.
+
+00:17:07.205 --> 00:17:13.016 A:middle
+To fix this problem, this year
+we are introducing energy gauges
+
+00:17:13.736 --> 00:17:18.086 A:middle
+on iOS and instruments,
+a few instruments too,
+
+00:17:18.445 --> 00:17:20.715 A:middle
+which you can use to
+pinpoint in your code
+
+00:17:20.715 --> 00:17:22.546 A:middle
+where the problem
+is coming from.
+
+00:17:23.236 --> 00:17:27.175 A:middle
+To talk about all of
+these, let's move to demo.
+
+00:17:27.736 --> 00:17:32.286 A:middle
+I call Pai-Han Huang, my
+colleague, to talk all about it.
+
+00:17:33.516 --> 00:17:36.686 A:middle
+[ Applause ]
+
+00:17:37.186 --> 00:17:38.956 A:middle
+&gt;&gt; PAI-HAN HUANG: So, in
+a demo, I will walk you
+
+00:17:38.956 --> 00:17:42.266 A:middle
+through the major features of
+the new energy bugging tools,
+
+00:17:43.416 --> 00:17:46.916 A:middle
+demo the app, and show you
+how we can use the new tools
+
+00:17:46.916 --> 00:17:50.326 A:middle
+to identify and improve the
+energy efficiency of your app.
+
+00:17:50.876 --> 00:17:55.416 A:middle
+So as a developer, I like these
+new tools because they are easy,
+
+00:17:55.946 --> 00:17:58.376 A:middle
+they are effective, so
+at the end of the demo,
+
+00:17:58.606 --> 00:18:01.886 A:middle
+I hope you will join me in
+including these new tools
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:58.606 --> 00:18:01.886 A:middle
+I hope you will join me in
+including these new tools
+
+00:18:01.886 --> 00:18:03.256 A:middle
+as part of your project cycle.
+
+00:18:04.646 --> 00:18:06.986 A:middle
+There are two major
+components in the demo.
+
+00:18:07.446 --> 00:18:11.646 A:middle
+One is the new tool set; the
+other one is the demo app.
+
+00:18:12.146 --> 00:18:15.416 A:middle
+So let me start from introducing
+you to the new tool set.
+
+00:18:21.176 --> 00:18:23.616 A:middle
+On the screen, what we are
+seeing is the screenshot
+
+00:18:24.276 --> 00:18:27.016 A:middle
+of iOS energy gauge,
+which is the entry point
+
+00:18:27.616 --> 00:18:30.066 A:middle
+to all the other new
+energy debugging tools
+
+00:18:30.066 --> 00:18:30.996 A:middle
+for iOS this year.
+
+00:18:33.026 --> 00:18:34.696 A:middle
+So where is it?
+
+00:18:35.556 --> 00:18:39.376 A:middle
+It is actually inside
+debug navigator of Xcode,
+
+00:18:39.946 --> 00:18:41.536 A:middle
+which you can find over here.
+
+00:18:42.926 --> 00:18:44.866 A:middle
+After you launch your
+apps through Xcode,
+
+00:18:45.336 --> 00:18:49.046 A:middle
+you will be populated
+automatically for you over here.
+
+00:18:50.086 --> 00:18:52.376 A:middle
+And when you click
+it, it will bring you
+
+00:18:52.376 --> 00:18:53.736 A:middle
+to the right-hand
+side of the screen.
+
+00:18:54.346 --> 00:18:58.816 A:middle
+And the iOS energy gauge can
+visualize the energy impact
+
+00:18:58.816 --> 00:19:01.916 A:middle
+of your code, can visualize
+the energy impact of your code,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:58.816 --> 00:19:01.916 A:middle
+of your code, can visualize
+the energy impact of your code,
+
+00:19:02.456 --> 00:19:05.596 A:middle
+both instantaneously and
+in the average instance.
+
+00:19:06.586 --> 00:19:09.286 A:middle
+So the first is the
+instantaneous energy impact
+
+00:19:09.366 --> 00:19:11.206 A:middle
+of your code, can be found
+
+00:19:11.206 --> 00:19:13.986 A:middle
+in the field meter,
+which is over here.
+
+00:19:15.796 --> 00:19:21.126 A:middle
+There are three different
+zones in this graph.
+
+00:19:21.166 --> 00:19:24.086 A:middle
+In the speedometer, the lowest
+one, when the needle points
+
+00:19:24.086 --> 00:19:26.336 A:middle
+to a green zone, it
+means the energy impact
+
+00:19:26.336 --> 00:19:28.026 A:middle
+of your code is actually
+reasonable.
+
+00:19:28.876 --> 00:19:29.636 A:middle
+Congratulations.
+
+00:19:29.766 --> 00:19:32.276 A:middle
+You are a good citizen
+of the iOS ecosystem.
+
+00:19:33.146 --> 00:19:36.386 A:middle
+But still, we suggest you to
+take a look at these new tools
+
+00:19:36.526 --> 00:19:39.086 A:middle
+to see how you can make
+your customers happier.
+
+00:19:40.296 --> 00:19:43.316 A:middle
+When the needle moves up,
+it enters the yellow zone.
+
+00:19:44.436 --> 00:19:47.516 A:middle
+In the yellow zone, the energy
+impact of your code is high,
+
+00:19:48.266 --> 00:19:51.066 A:middle
+so it's likely that if you
+don't deal with it carefully,
+
+00:19:51.906 --> 00:19:55.626 A:middle
+your app will show up high
+in the battery usage UI.
+
+00:19:56.436 --> 00:19:58.946 A:middle
+So please use the new
+energy debugging tools
+
+00:19:59.226 --> 00:20:02.416 A:middle
+to see how you can improve the
+energy efficiency of your code.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:59.226 --> 00:20:02.416 A:middle
+to see how you can improve the
+energy efficiency of your code.
+
+00:20:03.416 --> 00:20:07.956 A:middle
+But if the needle keeps moving
+up, you enter the red zone.
+
+00:20:08.306 --> 00:20:11.526 A:middle
+Red zone indicates
+that the energy impact
+
+00:20:11.526 --> 00:20:13.086 A:middle
+of your code is very high.
+
+00:20:13.646 --> 00:20:17.016 A:middle
+It means that even with the
+slight usage of your app,
+
+00:20:17.996 --> 00:20:19.516 A:middle
+users will significantly --
+
+00:20:19.516 --> 00:20:22.146 A:middle
+will experience significant
+battery drop on your device.
+
+00:20:22.756 --> 00:20:25.256 A:middle
+So please use the new tools!
+
+00:20:25.586 --> 00:20:25.986 A:middle
+Please [laughter]!
+
+00:20:28.076 --> 00:20:29.186 A:middle
+Sorry, I apologize.
+
+00:20:29.336 --> 00:20:32.226 A:middle
+That's the evil in me
+protesting to the people
+
+00:20:32.756 --> 00:20:34.736 A:middle
+who don't take battery
+life seriously.
+
+00:20:35.486 --> 00:20:38.656 A:middle
+I promise you, I am a very nice
+guy, so come to chat with me,
+
+00:20:38.656 --> 00:20:40.396 A:middle
+you know, in the last
+session this afternoon.
+
+00:20:41.276 --> 00:20:44.946 A:middle
+Okay? Okay.
+
+00:20:45.376 --> 00:20:50.586 A:middle
+But speedometer can give you
+an instantaneous energy impact
+
+00:20:50.586 --> 00:20:52.896 A:middle
+information overall of your app.
+
+00:20:53.606 --> 00:20:59.306 A:middle
+If you want to see more
+breakdown, you should see here,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:00.476 --> 00:21:01.366 A:middle
+energy impact session.
+
+00:21:02.386 --> 00:21:05.656 A:middle
+So this graph will be
+refreshed once every second.
+
+00:21:06.866 --> 00:21:11.576 A:middle
+If your app introduces any
+workload to CPU, location,
+
+00:21:12.346 --> 00:21:15.576 A:middle
+or networking, you will
+see a block showing
+
+00:21:15.576 --> 00:21:19.336 A:middle
+up on the top three rows in
+the corresponding time slots.
+
+00:21:20.636 --> 00:21:22.606 A:middle
+And, as an earlier
+talk it was mentioned,
+
+00:21:23.166 --> 00:21:25.426 A:middle
+your app can consume
+significant power,
+
+00:21:25.506 --> 00:21:28.156 A:middle
+not just on the foreground,
+but on the background as well.
+
+00:21:28.966 --> 00:21:30.486 A:middle
+So based on this observation,
+
+00:21:30.486 --> 00:21:32.106 A:middle
+we have the fourth
+rule, background.
+
+00:21:33.026 --> 00:21:36.346 A:middle
+When your app stays in the
+background and doesn't go away,
+
+00:21:37.066 --> 00:21:40.326 A:middle
+you will see the moving blocks
+showing up on the fourth row.
+
+00:21:41.446 --> 00:21:45.556 A:middle
+On top of the graph, you will
+see a series of color bars.
+
+00:21:45.736 --> 00:21:47.966 A:middle
+And they look like this.
+
+00:21:49.146 --> 00:21:49.686 A:middle
+Two colors.
+
+00:21:50.766 --> 00:21:56.316 A:middle
+Red color means that that is
+overhead, energy used to bring
+
+00:21:56.316 --> 00:21:59.966 A:middle
+up the system resources like
+the radio module to perform work
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:00.136 --> 00:22:03.046 A:middle
+for your app, and it also
+maps to an earlier talk,
+
+00:22:03.596 --> 00:22:05.346 A:middle
+the fixed cost of the hardware.
+
+00:22:05.906 --> 00:22:11.886 A:middle
+For the blue one, it represents
+the energy which has been used
+
+00:22:11.886 --> 00:22:15.026 A:middle
+to service the workload
+introduced by your app.
+
+00:22:16.156 --> 00:22:18.176 A:middle
+Besides instantaneous
+information,
+
+00:22:18.176 --> 00:22:19.866 A:middle
+we also provide average
+information.
+
+00:22:20.146 --> 00:22:24.926 A:middle
+For example, like this one, the
+average overhead in percentile,
+
+00:22:25.516 --> 00:22:30.016 A:middle
+and this guy shows you
+the average energy impact.
+
+00:22:30.486 --> 00:22:36.026 A:middle
+On the bottom, you will see
+a series of explanations
+
+00:22:36.026 --> 00:22:39.636 A:middle
+about legend, CPU, location,
+networking, and background.
+
+00:22:40.036 --> 00:22:43.086 A:middle
+And it also provides some tips
+about how you can optimize them.
+
+00:22:44.506 --> 00:22:48.366 A:middle
+But please remember that
+iOS energy gauge is designed
+
+00:22:49.166 --> 00:22:51.826 A:middle
+to show you quick the
+high-level understanding
+
+00:22:51.826 --> 00:22:54.166 A:middle
+about your energy
+impact of your code.
+
+00:22:54.696 --> 00:22:57.636 A:middle
+So if you want more detailed
+information, more breakdown,
+
+00:22:58.226 --> 00:22:59.866 A:middle
+then check this button.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:01.016 --> 00:23:03.776 A:middle
+This button, after you click
+it, it will trampoline you
+
+00:23:03.776 --> 00:23:05.766 A:middle
+to the corresponding instrument,
+
+00:23:05.956 --> 00:23:11.076 A:middle
+to give you breakdown energy
+information for your app.
+
+00:23:11.396 --> 00:23:12.706 A:middle
+This is the iOS energy gauge.
+
+00:23:13.226 --> 00:23:17.176 A:middle
+Let me next briefly
+introduce you to instruments.
+
+00:23:18.396 --> 00:23:20.376 A:middle
+Instruments, as many of
+you already use them:
+
+00:23:20.846 --> 00:23:21.836 A:middle
+it looks very similar.
+
+00:23:22.236 --> 00:23:24.146 A:middle
+For example, the one you see
+
+00:23:24.146 --> 00:23:27.536 A:middle
+on the screen is the
+location instrument.
+
+00:23:27.536 --> 00:23:30.516 A:middle
+How do we start?
+
+00:23:30.706 --> 00:23:36.046 A:middle
+We start from toggle this
+button, record it, and stop it.
+
+00:23:36.866 --> 00:23:41.186 A:middle
+After you record it, you
+will see the system activity
+
+00:23:41.866 --> 00:23:43.006 A:middle
+like this.
+
+00:23:43.206 --> 00:23:46.276 A:middle
+And you will see some reasons
+
+00:23:46.276 --> 00:23:48.636 A:middle
+about why you see
+this kind of activity.
+
+00:23:48.826 --> 00:23:51.366 A:middle
+For example, here you will
+see the location service
+
+00:23:51.366 --> 00:23:53.526 A:middle
+that is trying to
+request for location.
+
+00:23:54.896 --> 00:23:57.086 A:middle
+And if you want more
+information, more detail,
+
+00:23:58.126 --> 00:24:00.136 A:middle
+go here, extended detail.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:58.126 --> 00:24:00.136 A:middle
+go here, extended detail.
+
+00:24:00.166 --> 00:24:05.726 A:middle
+Then you will bring up this
+guy, which is the code stack.
+
+00:24:06.366 --> 00:24:10.766 A:middle
+So this is the introduction
+to the instruments.
+
+00:24:10.766 --> 00:24:14.076 A:middle
+Next, let me briefly
+talk about the demo app.
+
+00:24:15.766 --> 00:24:18.836 A:middle
+On the screen, you will see
+a screenshot of our demo app,
+
+00:24:19.026 --> 00:24:20.206 A:middle
+which we call Energy Buddy.
+
+00:24:21.106 --> 00:24:23.236 A:middle
+So, as an iOS power
+software engineer,
+
+00:24:23.356 --> 00:24:27.096 A:middle
+I am eager to know whether I
+can improve my energy efficiency
+
+00:24:27.236 --> 00:24:29.036 A:middle
+everywhere, not just
+on my phone,
+
+00:24:29.316 --> 00:24:31.556 A:middle
+but in my daily life as well.
+
+00:24:31.676 --> 00:24:33.636 A:middle
+Energy Buddy can suit
+my needs pretty well.
+
+00:24:33.886 --> 00:24:35.326 A:middle
+I can use it to take a picture,
+
+00:24:36.086 --> 00:24:38.916 A:middle
+and it will extract
+the usage information
+
+00:24:38.916 --> 00:24:41.986 A:middle
+from the picture I take for
+energy meter, for example.
+
+00:24:42.836 --> 00:24:45.146 A:middle
+Then it will query the
+location of my device,
+
+00:24:46.416 --> 00:24:48.756 A:middle
+get the weather information
+based on my location,
+
+00:24:49.506 --> 00:24:51.656 A:middle
+correlate the weather
+information with my usage,
+
+00:24:51.796 --> 00:24:53.526 A:middle
+showing up on the screen.
+
+00:24:54.116 --> 00:24:56.086 A:middle
+The structure is like this.
+
+00:24:56.176 --> 00:25:01.766 A:middle
+There is a centralized data
+manager, and if I import a photo
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:24:56.176 --> 00:25:01.766 A:middle
+There is a centralized data
+manager, and if I import a photo
+
+00:25:01.876 --> 00:25:05.646 A:middle
+from there, it will try
+to get a reading from it.
+
+00:25:05.646 --> 00:25:06.786 A:middle
+And based on the location,
+
+00:25:06.926 --> 00:25:11.756 A:middle
+it will try to hit
+a networking service
+
+00:25:11.966 --> 00:25:14.056 A:middle
+to get the weather information
+based on my location.
+
+00:25:15.036 --> 00:25:17.966 A:middle
+And then data manager will
+correlate this information,
+
+00:25:17.966 --> 00:25:20.026 A:middle
+showing up as a curve
+on the screen.
+
+00:25:21.576 --> 00:25:24.076 A:middle
+So next, let's try
+to give it a shot
+
+00:25:24.076 --> 00:25:27.616 A:middle
+and see how the new tools
+can help us identify
+
+00:25:27.616 --> 00:25:29.686 A:middle
+and improve energy
+efficiency of Energy Buddy.
+
+00:25:29.836 --> 00:25:34.756 A:middle
+So on the left-hand side of
+the screen, you will see Xcode.
+
+00:25:35.226 --> 00:25:37.906 A:middle
+Right-hand side is the
+screenshot of my testing device.
+
+00:25:38.716 --> 00:25:40.956 A:middle
+So let's start from
+launching Energy Buddy
+
+00:25:41.196 --> 00:25:42.906 A:middle
+by opening the project files.
+
+00:25:42.906 --> 00:25:47.256 A:middle
+So what it's currently doing is,
+after I hit the round button,
+
+00:25:48.186 --> 00:25:52.086 A:middle
+it will try to build a
+binary file and transport it
+
+00:25:52.086 --> 00:25:54.046 A:middle
+into the device and
+launch it for me.
+
+00:25:54.516 --> 00:25:56.826 A:middle
+So once it's launched,
+we will see this.
+
+00:25:57.426 --> 00:25:57.736 A:middle
+It's here.
+
+00:25:58.156 --> 00:26:03.996 A:middle
+So let's go to debug
+navigator over here.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:58.156 --> 00:26:03.996 A:middle
+So let's go to debug
+navigator over here.
+
+00:26:04.206 --> 00:26:08.526 A:middle
+Energy impact over
+here...oh, there we go.
+
+00:26:09.816 --> 00:26:10.916 A:middle
+The first thing we want
+
+00:26:10.956 --> 00:26:16.846 A:middle
+to see is whether there's
+any moving block over here
+
+00:26:17.056 --> 00:26:18.946 A:middle
+because currently I don't
+do anything with the UI.
+
+00:26:20.186 --> 00:26:21.946 A:middle
+So it seems like
+it's pretty clear
+
+00:26:21.946 --> 00:26:23.116 A:middle
+of those kind of moving blocks.
+
+00:26:23.546 --> 00:26:26.156 A:middle
+This is a good sign because
+when the app is idle,
+
+00:26:26.626 --> 00:26:28.196 A:middle
+not too much should happen.
+
+00:26:28.516 --> 00:26:29.176 A:middle
+So this is good.
+
+00:26:29.946 --> 00:26:32.556 A:middle
+So let me try to import
+a photo by clicking the
+
+00:26:32.556 --> 00:26:36.896 A:middle
+"Import Photo" button, select
+a photo from my gallery.
+
+00:26:37.556 --> 00:26:39.796 A:middle
+It will try to extract
+information,
+
+00:26:39.796 --> 00:26:41.126 A:middle
+and I will set the reading.
+
+00:26:42.346 --> 00:26:46.546 A:middle
+Okay. Oh, okay, I see lots
+of activity coming up,
+
+00:26:47.526 --> 00:26:49.876 A:middle
+including CPU, networking,
+and location.
+
+00:26:50.406 --> 00:26:53.356 A:middle
+But among them, I
+immediately notice one thing.
+
+00:26:54.036 --> 00:26:56.016 A:middle
+That is location is always on.
+
+00:26:56.016 --> 00:26:57.846 A:middle
+Huh. It doesn't make sense.
+
+00:26:58.616 --> 00:27:01.146 A:middle
+Because Energy Buddy is not the
+kind of app where you're trying
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:58.616 --> 00:27:01.146 A:middle
+Because Energy Buddy is not the
+kind of app where you're trying
+
+00:27:01.146 --> 00:27:03.416 A:middle
+to track your exercise,
+like running, right?
+
+00:27:04.286 --> 00:27:06.806 A:middle
+So why do I need to keep
+monitoring the location
+
+00:27:06.806 --> 00:27:07.376 A:middle
+of my device?
+
+00:27:07.376 --> 00:27:08.526 A:middle
+It doesn't make sense.
+
+00:27:09.426 --> 00:27:13.016 A:middle
+So let's take a look to see what
+the location instrument can tell
+
+00:27:13.016 --> 00:27:14.986 A:middle
+us and how we can
+identify the line of code
+
+00:27:15.226 --> 00:27:16.536 A:middle
+to improve the situation.
+
+00:27:17.826 --> 00:27:21.876 A:middle
+So I will next click
+the location instrument,
+
+00:27:22.646 --> 00:27:24.366 A:middle
+and I say restart.
+
+00:27:25.346 --> 00:27:26.436 A:middle
+Then you are trying to bring
+
+00:27:26.436 --> 00:27:35.906 A:middle
+up the instrument,
+launch an app for me.
+
+00:27:35.906 --> 00:27:38.696 A:middle
+Okay. So let me redo
+import photo again.
+
+00:27:39.426 --> 00:27:43.186 A:middle
+Set the reading.
+
+00:27:43.826 --> 00:27:44.996 A:middle
+There you go.
+
+00:27:45.846 --> 00:27:48.216 A:middle
+Okay. So on the screen,
+you will see this.
+
+00:27:49.116 --> 00:27:50.446 A:middle
+This is the location activity.
+
+00:27:50.966 --> 00:27:53.936 A:middle
+It keeps going on and
+on without stopping.
+
+00:27:54.336 --> 00:27:55.526 A:middle
+But where is it?
+
+00:27:55.606 --> 00:27:58.066 A:middle
+Where do we introduce this?
+
+00:27:58.066 --> 00:28:00.026 A:middle
+Take a look at this.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:58.066 --> 00:28:00.026 A:middle
+Take a look at this.
+
+00:28:00.386 --> 00:28:04.206 A:middle
+Go to extended detail and see.
+
+00:28:04.456 --> 00:28:09.756 A:middle
+Oh, okay, it's this part
+-- request location.
+
+00:28:10.136 --> 00:28:12.626 A:middle
+That's how we request
+for location service.
+
+00:28:13.596 --> 00:28:22.436 A:middle
+So let me stop this,
+go back to Xcode,
+
+00:28:22.926 --> 00:28:25.166 A:middle
+and search for request location.
+
+00:28:26.466 --> 00:28:29.306 A:middle
+Okay. It's already here.
+
+00:28:29.886 --> 00:28:32.506 A:middle
+So what is the request
+looking to do?
+
+00:28:32.896 --> 00:28:34.366 A:middle
+First of all, you
+are trying to set
+
+00:28:34.366 --> 00:28:36.046 A:middle
+up the confirm view controller.
+
+00:28:40.216 --> 00:28:42.606 A:middle
+In this piece of code,
+you are trying to set up,
+
+00:28:42.786 --> 00:28:44.076 A:middle
+create a location manager.
+
+00:28:45.346 --> 00:28:48.216 A:middle
+Then you are will call
+start updating location.
+
+00:28:49.006 --> 00:28:53.036 A:middle
+So after this line, what will
+happen is location service will
+
+00:28:53.096 --> 00:28:56.696 A:middle
+periodically push the
+location update to us
+
+00:28:56.996 --> 00:29:00.816 A:middle
+through a callback,
+which is over here.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:56.996 --> 00:29:00.816 A:middle
+through a callback,
+which is over here.
+
+00:29:02.766 --> 00:29:04.726 A:middle
+So in the callback, let's take
+a look -- what does it do?
+
+00:29:05.846 --> 00:29:08.046 A:middle
+First thing is you are
+trying to see, okay,
+
+00:29:08.596 --> 00:29:11.846 A:middle
+if there is anything
+updated here, if it's zero,
+
+00:29:11.846 --> 00:29:14.086 A:middle
+that's invalid, so we
+just ignore it, return.
+
+00:29:15.366 --> 00:29:17.536 A:middle
+Then we will store it, we say,
+
+00:29:17.806 --> 00:29:21.026 A:middle
+whether location is
+horizontal accuracy is actually
+
+00:29:21.026 --> 00:29:22.756 A:middle
+up to our standard,
+up to our expectation.
+
+00:29:22.996 --> 00:29:24.216 A:middle
+If not, we return.
+
+00:29:25.476 --> 00:29:26.916 A:middle
+If so, then we are trying
+
+00:29:26.916 --> 00:29:30.026 A:middle
+to handle location inside
+the confirm view controller.
+
+00:29:30.806 --> 00:29:31.746 A:middle
+And then you return.
+
+00:29:32.706 --> 00:29:35.806 A:middle
+And this callback routine will
+be repeated again and again
+
+00:29:35.806 --> 00:29:38.466 A:middle
+and again, every time
+when we receive a callback
+
+00:29:38.466 --> 00:29:39.556 A:middle
+from the location service.
+
+00:29:40.276 --> 00:29:41.166 A:middle
+Push doesn't look nice.
+
+00:29:41.776 --> 00:29:42.516 A:middle
+So what we should do?
+
+00:29:43.176 --> 00:29:45.386 A:middle
+The thing we should do
+is we should stop it
+
+00:29:46.446 --> 00:29:47.426 A:middle
+when we have a value.
+
+00:29:48.246 --> 00:29:51.026 A:middle
+Like this line.
+
+00:29:51.696 --> 00:29:56.796 A:middle
+So we say when we get
+a value updating --
+
+00:29:56.796 --> 00:29:59.206 A:middle
+location update,
+we should stop it.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:00.246 --> 00:30:02.986 A:middle
+So let's take a look
+and launch it again
+
+00:30:03.306 --> 00:30:05.206 A:middle
+and see what the energy
+gauge can tell us.
+
+00:30:05.666 --> 00:30:09.746 A:middle
+What I expect to see is after
+I receive the first time a
+
+00:30:09.746 --> 00:30:12.706 A:middle
+successful location update,
+I should stop the location,
+
+00:30:12.706 --> 00:30:14.906 A:middle
+and location service should
+not be on and on forever.
+
+00:30:15.486 --> 00:30:18.506 A:middle
+Let's wait for it
+to be launched.
+
+00:30:25.766 --> 00:30:25.833 A:middle
+Hmmm.
+
+00:30:27.206 --> 00:30:31.106 A:middle
+Okay. Go to the iOS
+energy gauge.
+
+00:30:32.076 --> 00:30:34.096 A:middle
+So let me try to
+import a photo again.
+
+00:30:35.936 --> 00:30:37.366 A:middle
+Select a photo from a gallery.
+
+00:30:38.226 --> 00:30:39.016 A:middle
+Set a reading.
+
+00:30:40.896 --> 00:30:43.646 A:middle
+Okay. Location, one second,
+two seconds, three seconds,
+
+00:30:43.686 --> 00:30:45.226 A:middle
+four seconds, and it's gone.
+
+00:30:46.546 --> 00:30:49.936 A:middle
+This is an immediate improvement
+after just one line of code.
+
+00:30:50.836 --> 00:30:52.996 A:middle
+You can think about
+the scenario over here.
+
+00:30:53.296 --> 00:30:56.066 A:middle
+So if the app has been
+turned on for a long time,
+
+00:30:56.816 --> 00:30:59.876 A:middle
+imagine how much energy you
+can save just by doing one line
+
+00:30:59.876 --> 00:31:01.686 A:middle
+of code, which is amazing.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:59.876 --> 00:31:01.686 A:middle
+of code, which is amazing.
+
+00:31:02.816 --> 00:31:06.056 A:middle
+So let's give more
+try on Energy Buddy
+
+00:31:06.056 --> 00:31:09.246 A:middle
+to see what will happen next
+time when we import another one.
+
+00:31:10.676 --> 00:31:13.166 A:middle
+Okay. I import another one.
+
+00:31:13.946 --> 00:31:17.486 A:middle
+And I see the location has
+been up for four seconds,
+
+00:31:18.256 --> 00:31:21.806 A:middle
+but this time, I notice
+the big thing here is
+
+00:31:22.596 --> 00:31:23.486 A:middle
+networking service.
+
+00:31:24.716 --> 00:31:25.746 A:middle
+This doesn't look nice.
+
+00:31:26.186 --> 00:31:29.156 A:middle
+The reason Energy Buddy wants
+to hit the networking service
+
+00:31:29.156 --> 00:31:31.176 A:middle
+because it wants to get
+the weather information.
+
+00:31:31.676 --> 00:31:34.946 A:middle
+But I just did a query
+like two minutes ago,
+
+00:31:35.756 --> 00:31:36.956 A:middle
+so the weather shouldn't change
+
+00:31:36.956 --> 00:31:39.016 A:middle
+that much during the
+past two minutes, right?
+
+00:31:40.096 --> 00:31:42.386 A:middle
+Even for an hour, I would say,
+
+00:31:42.386 --> 00:31:44.216 A:middle
+the weather may not
+change that much.
+
+00:31:44.736 --> 00:31:46.086 A:middle
+So what is the purpose
+if we want
+
+00:31:46.086 --> 00:31:49.776 A:middle
+to redo the networking although
+we already have earlier request
+
+00:31:49.916 --> 00:31:50.926 A:middle
+that is two minutes ago?
+
+00:31:51.406 --> 00:31:56.586 A:middle
+So let's go directly to the code
+and see how we can fix this.
+
+00:31:56.776 --> 00:31:58.846 A:middle
+So the place where
+we actually request
+
+00:31:58.846 --> 00:32:02.266 A:middle
+for location is inside
+the weather file.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:58.846 --> 00:32:02.266 A:middle
+for location is inside
+the weather file.
+
+00:32:02.266 --> 00:32:05.916 A:middle
+And there's a function
+called Fetch if Missing.
+
+00:32:06.316 --> 00:32:07.646 A:middle
+So let's take a look
+what does it do.
+
+00:32:09.176 --> 00:32:11.376 A:middle
+In the first part, we were
+trying to set some parameters
+
+00:32:11.376 --> 00:32:16.246 A:middle
+like date, URL based
+on the query URL for --
+
+00:32:16.336 --> 00:32:18.446 A:middle
+based on the device location
+and the current date --
+
+00:32:19.326 --> 00:32:20.576 A:middle
+and whether I have
+done this kind
+
+00:32:20.576 --> 00:32:22.226 A:middle
+of query within today or not.
+
+00:32:22.786 --> 00:32:26.836 A:middle
+And you will store the source
+ID for the location coordinate,
+
+00:32:26.836 --> 00:32:30.526 A:middle
+and you will set a constant
+that is exactly the number
+
+00:32:30.526 --> 00:32:32.446 A:middle
+of seconds within the hour.
+
+00:32:33.366 --> 00:32:35.536 A:middle
+So the first if we are
+try to go do is we say
+
+00:32:35.966 --> 00:32:37.796 A:middle
+if we have done the
+query for today
+
+00:32:38.856 --> 00:32:42.386 A:middle
+and the data manager already
+has the weather fetched
+
+00:32:42.656 --> 00:32:44.946 A:middle
+since the last time we queried,
+that is like three minutes ago,
+
+00:32:45.486 --> 00:32:48.936 A:middle
+then we say we just return.
+
+00:32:49.106 --> 00:32:52.026 A:middle
+Next is if we don't do it today
+
+00:32:53.056 --> 00:32:55.736 A:middle
+and data manager already
+has the weather fetched,
+
+00:32:55.986 --> 00:32:56.816 A:middle
+then we also return.
+
+00:32:57.376 --> 00:33:02.166 A:middle
+If none of these two
+situations have been satisfied,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:57.376 --> 00:33:02.166 A:middle
+If none of these two
+situations have been satisfied,
+
+00:33:02.166 --> 00:33:08.206 A:middle
+then we will try to set up a
+task based on the location,
+
+00:33:08.206 --> 00:33:12.826 A:middle
+based on the date, and we will
+try to download it over here.
+
+00:33:13.056 --> 00:33:14.026 A:middle
+So what's going wrong there?
+
+00:33:15.126 --> 00:33:20.056 A:middle
+The reason it's doing wrong
+is actually inside this gauge
+
+00:33:20.276 --> 00:33:21.296 A:middle
+over here.
+
+00:33:21.916 --> 00:33:27.146 A:middle
+So I will add in another
+situation like this,
+
+00:33:27.846 --> 00:33:29.896 A:middle
+to say if I have done this today
+
+00:33:29.956 --> 00:33:33.326 A:middle
+and the previous fetch is
+actually within an hour,
+
+00:33:33.616 --> 00:33:34.776 A:middle
+then I will not do it again.
+
+00:33:36.246 --> 00:33:40.406 A:middle
+So let's launch it again and see
+how we can see the improvement
+
+00:33:40.846 --> 00:33:42.856 A:middle
+inside energy gauge.
+
+00:33:43.406 --> 00:33:44.966 A:middle
+So what we expect
+to see is this.
+
+00:33:45.306 --> 00:33:48.336 A:middle
+Because we've already done our
+fetch, like five minutes ago,
+
+00:33:49.416 --> 00:33:52.346 A:middle
+we should not see any networking
+every time when we are trying
+
+00:33:52.346 --> 00:33:54.646 A:middle
+to import a photo again
+within the next hour.
+
+00:33:55.146 --> 00:33:57.156 A:middle
+Let's take a look whether
+energy gauge will agree
+
+00:33:57.156 --> 00:33:58.766 A:middle
+with my theory here.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:01.046 --> 00:34:02.386 A:middle
+Okay. It's up.
+
+00:34:03.726 --> 00:34:08.755 A:middle
+So I am trying to
+import a photo,
+
+00:34:10.016 --> 00:34:14.775 A:middle
+select a picture from a gallery.
+
+00:34:15.626 --> 00:34:17.176 A:middle
+Set the reading.
+
+00:34:17.406 --> 00:34:19.485 A:middle
+So I see the location.
+
+00:34:19.876 --> 00:34:21.366 A:middle
+It's been for four
+seconds like before.
+
+00:34:22.176 --> 00:34:24.366 A:middle
+But magically, all the
+networking is gone.
+
+00:34:24.545 --> 00:34:27.326 A:middle
+This is exactly what we expect.
+
+00:34:27.926 --> 00:34:29.366 A:middle
+So this is another good way
+
+00:34:29.755 --> 00:34:32.166 A:middle
+for the energy efficiency
+of our Energy Buddy.
+
+00:34:33.706 --> 00:34:35.186 A:middle
+So besides the foreground,
+
+00:34:35.766 --> 00:34:39.766 A:middle
+Energy Buddy can also consume
+significant battery even
+
+00:34:39.766 --> 00:34:41.176 A:middle
+on the background.
+
+00:34:41.176 --> 00:34:45.286 A:middle
+So let's take a look at what
+the energy gauge can tell us
+
+00:34:45.346 --> 00:34:47.045 A:middle
+when Energy Buddy is
+actually on the background.
+
+00:34:47.806 --> 00:34:49.356 A:middle
+We put Energy Buddy
+in the background
+
+00:34:49.356 --> 00:34:53.866 A:middle
+by hitting the Home button.
+
+00:34:55.116 --> 00:35:00.096 A:middle
+So what we see is over here.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:55.116 --> 00:35:00.096 A:middle
+So what we see is over here.
+
+00:35:02.176 --> 00:35:03.636 A:middle
+We see lots of, lots
+
+00:35:03.636 --> 00:35:07.316 A:middle
+of background activities
+of Energy Buddy.
+
+00:35:08.676 --> 00:35:12.276 A:middle
+And that means that
+whenever Energy Buddy is
+
+00:35:12.276 --> 00:35:17.246 A:middle
+on the background, the
+device cannot go to sleep,
+
+00:35:17.676 --> 00:35:18.986 A:middle
+which will consume
+significant power
+
+00:35:18.986 --> 00:35:21.436 A:middle
+because there is a fixed cost
+to keep the device awake.
+
+00:35:22.716 --> 00:35:25.476 A:middle
+This doesn't make sense because
+Energy Buddy doesn't need
+
+00:35:25.476 --> 00:35:26.716 A:middle
+to do anything on
+the background.
+
+00:35:27.736 --> 00:35:29.136 A:middle
+So what's going wrong here?
+
+00:35:29.766 --> 00:35:33.406 A:middle
+Let us go to the callback
+
+00:35:34.926 --> 00:35:37.536 A:middle
+when we actually go
+to the background.
+
+00:35:37.536 --> 00:35:39.716 A:middle
+Here is the code.
+
+00:35:39.716 --> 00:35:41.966 A:middle
+What does it do?
+
+00:35:43.126 --> 00:35:43.846 A:middle
+It does the following.
+
+00:35:43.956 --> 00:35:46.476 A:middle
+You are trying to set out
+background task identifier,
+
+00:35:46.476 --> 00:35:50.616 A:middle
+and they will do one thing,
+archive to data manager,
+
+00:35:50.826 --> 00:35:53.626 A:middle
+which will store all the
+changes to data manager,
+
+00:35:53.886 --> 00:35:57.106 A:middle
+and they will say wait for
+input, and we will code
+
+00:35:57.106 --> 00:35:59.096 A:middle
+in background task when
+it is actually done.
+
+00:35:59.626 --> 00:36:01.676 A:middle
+Does it make sense?
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:35:59.626 --> 00:36:01.676 A:middle
+Does it make sense?
+
+00:36:02.446 --> 00:36:03.906 A:middle
+No. Why not?
+
+00:36:04.756 --> 00:36:07.376 A:middle
+Because our app is always
+on in the background, right?
+
+00:36:07.606 --> 00:36:10.676 A:middle
+So how come users
+can actually interact
+
+00:36:10.676 --> 00:36:11.796 A:middle
+with Energy Buddies
+through the UI?
+
+00:36:12.586 --> 00:36:16.556 A:middle
+So there has been no input at
+all, and we are waiting for it.
+
+00:36:16.866 --> 00:36:17.696 A:middle
+This doesn't look nice.
+
+00:36:18.546 --> 00:36:25.926 A:middle
+So what we should do is
+we shouldn't wait for it.
+
+00:36:26.836 --> 00:36:31.476 A:middle
+Instead, we should do
+something like this.
+
+00:36:32.276 --> 00:36:36.356 A:middle
+After we archive the data to
+data manager, we will call
+
+00:36:36.356 --> 00:36:37.986 A:middle
+in background task immediately
+
+00:36:38.096 --> 00:36:42.396 A:middle
+and invalidate the
+background task identifier.
+
+00:36:42.636 --> 00:36:45.976 A:middle
+Again, let's launch
+Energy Buddy again
+
+00:36:45.976 --> 00:36:48.026 A:middle
+and see what the energy
+gauge can tell us.
+
+00:36:49.086 --> 00:36:50.056 A:middle
+What we expect is this.
+
+00:36:50.806 --> 00:36:54.646 A:middle
+After we just saw all the
+changes in data manager,
+
+00:36:54.936 --> 00:36:57.436 A:middle
+it will directly
+just quit itself
+
+00:36:57.436 --> 00:36:58.996 A:middle
+and release the control
+to the assistant.
+
+00:36:59.126 --> 00:36:59.786 A:middle
+It will not stay
+
+00:36:59.886 --> 00:37:07.866 A:middle
+in the background all
+the time like before.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:59.886 --> 00:37:07.866 A:middle
+in the background all
+the time like before.
+
+00:37:07.906 --> 00:37:10.976 A:middle
+Okay. Go to energy gauge.
+
+00:37:11.506 --> 00:37:14.936 A:middle
+Put the Energy Buddy
+in the background.
+
+00:37:16.036 --> 00:37:17.676 A:middle
+So we are in the
+background one second,
+
+00:37:17.766 --> 00:37:21.106 A:middle
+two seconds, and it's gone.
+
+00:37:21.336 --> 00:37:22.416 A:middle
+So this is another big win.
+
+00:37:23.186 --> 00:37:27.396 A:middle
+So keep in mind that, with
+very simple fix like I just did
+
+00:37:27.516 --> 00:37:30.526 A:middle
+on the stage, you can see
+significant improvements,
+
+00:37:30.876 --> 00:37:33.646 A:middle
+and Abhinav will introduce
+you because we carry
+
+00:37:33.646 --> 00:37:36.296 A:middle
+on a couple hours or even a day
+
+00:37:36.776 --> 00:37:38.746 A:middle
+with significant
+battery improvement.
+
+00:37:39.456 --> 00:37:42.646 A:middle
+So this concludes my demo, and
+let me hand it back to Abhinav.
+
+00:37:43.516 --> 00:37:47.546 A:middle
+[ Applause ]
+
+00:37:48.046 --> 00:37:49.316 A:middle
+&gt;&gt; ABHINAV PATHAK:
+Thank you, Pai-Han.
+
+00:37:49.606 --> 00:37:51.126 A:middle
+That was a great demo.
+
+00:37:51.416 --> 00:37:52.256 A:middle
+Back on the slides.
+
+00:37:52.256 --> 00:37:53.196 A:middle
+So let's conclude this talk.
+
+00:37:53.196 --> 00:37:55.376 A:middle
+Let's see what happened during
+this demo, a quick summary.
+
+00:37:55.876 --> 00:37:58.416 A:middle
+We started with the Energy
+Buddy, inefficient code.
+
+00:37:58.416 --> 00:38:02.456 A:middle
+We ran it as the user would use
+it and let's see what happened.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:37:58.416 --> 00:38:02.456 A:middle
+We ran it as the user would use
+it and let's see what happened.
+
+00:38:02.456 --> 00:38:03.636 A:middle
+Everything is lighted here.
+
+00:38:03.866 --> 00:38:06.726 A:middle
+Bad, bad, really bad,
+the impact is very high,
+
+00:38:07.116 --> 00:38:09.676 A:middle
+and your app will come very
+high in the battery UI.
+
+00:38:09.676 --> 00:38:10.946 A:middle
+How did we fix it?
+
+00:38:10.946 --> 00:38:16.326 A:middle
+We went to location, and we
+said hey, location has started.
+
+00:38:16.326 --> 00:38:16.766 A:middle
+Then stop.
+
+00:38:17.206 --> 00:38:19.706 A:middle
+One line of change,
+boom, location stops.
+
+00:38:20.166 --> 00:38:22.606 A:middle
+Let's see before and
+after how does it look?
+
+00:38:23.466 --> 00:38:26.516 A:middle
+If you focus on location
+timeline,
+
+00:38:26.516 --> 00:38:28.906 A:middle
+we see location is
+on all the time.
+
+00:38:29.406 --> 00:38:31.106 A:middle
+Afterwards, location is on only
+
+00:38:31.106 --> 00:38:34.376 A:middle
+when it is actually required
+whenever a photo is imported.
+
+00:38:35.816 --> 00:38:36.746 A:middle
+Let's go to networking.
+
+00:38:36.986 --> 00:38:40.006 A:middle
+What we did was we were getting
+weather information all the time
+
+00:38:40.106 --> 00:38:43.946 A:middle
+whenever a new photo was
+imported, and that is not good.
+
+00:38:43.946 --> 00:38:45.386 A:middle
+We wanted to cut
+down the transfer,
+
+00:38:45.456 --> 00:38:46.786 A:middle
+and we put a very simple block.
+
+00:38:46.786 --> 00:38:49.916 A:middle
+Hey, if this is recently
+called, don't do that.
+
+00:38:50.006 --> 00:38:51.456 A:middle
+We don't need the new
+information again.
+
+00:38:52.276 --> 00:38:54.696 A:middle
+What impact did that
+have on the energy gauge?
+
+00:38:55.016 --> 00:38:57.446 A:middle
+Two photos, again,
+before and after.
+
+00:38:57.736 --> 00:38:59.566 A:middle
+And if you focus on
+the networking part,
+
+00:38:59.886 --> 00:39:01.796 A:middle
+networking is highlighted
+for a long time.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:38:59.886 --> 00:39:01.796 A:middle
+networking is highlighted
+for a long time.
+
+00:39:02.166 --> 00:39:04.766 A:middle
+The red bars on the top are
+highlighted all the time,
+
+00:39:04.796 --> 00:39:06.326 A:middle
+saying networking
+hardware is up.
+
+00:39:06.736 --> 00:39:09.376 A:middle
+It's a huge amount of time
+during the usage of the app.
+
+00:39:09.856 --> 00:39:12.616 A:middle
+At the bottom, we just
+do networking once, boom,
+
+00:39:12.616 --> 00:39:15.536 A:middle
+after that, it's recently
+called, it won't be done again.
+
+00:39:16.266 --> 00:39:19.976 A:middle
+What about the background
+session?
+
+00:39:20.106 --> 00:39:23.516 A:middle
+When we went to background, we
+stored our state into database
+
+00:39:23.856 --> 00:39:25.976 A:middle
+and said hey, let's
+wait for the user input.
+
+00:39:26.346 --> 00:39:27.126 A:middle
+Not a good place to do.
+
+00:39:27.126 --> 00:39:29.196 A:middle
+User is in the going to do
+any input at that point.
+
+00:39:30.016 --> 00:39:31.276 A:middle
+Very simple fix.
+
+00:39:31.456 --> 00:39:33.076 A:middle
+We say don't wait
+for user input.
+
+00:39:33.376 --> 00:39:34.916 A:middle
+Just call the task
+completion handler.
+
+00:39:35.306 --> 00:39:37.646 A:middle
+Tell the system hey,
+I am done, suspend me,
+
+00:39:37.646 --> 00:39:40.176 A:middle
+let the system go to sleep.
+
+00:39:40.176 --> 00:39:42.286 A:middle
+How does energy gauge look
+like before and after?
+
+00:39:42.286 --> 00:39:44.036 A:middle
+Let's focus on the
+background line.
+
+00:39:44.626 --> 00:39:47.416 A:middle
+Background is up all
+the time in the top.
+
+00:39:47.416 --> 00:39:50.546 A:middle
+At the bottom, the moment
+we have done the archiving
+
+00:39:50.546 --> 00:39:53.196 A:middle
+to the database, the
+background task is done.
+
+00:39:53.546 --> 00:39:54.316 A:middle
+We are suspended.
+
+00:39:55.056 --> 00:39:59.696 A:middle
+Awesome. Let's take a look at
+overall code before and after.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:40:00.306 --> 00:40:02.316 A:middle
+Before, you see everything
+lighted up.
+
+00:40:02.626 --> 00:40:05.406 A:middle
+If this is happening to
+your app, this is a problem.
+
+00:40:06.076 --> 00:40:08.876 A:middle
+After is we are doing
+the same utility,
+
+00:40:08.876 --> 00:40:12.036 A:middle
+we are giving the same utility
+to the user, same experience,
+
+00:40:12.476 --> 00:40:15.336 A:middle
+but very, very little
+amount of load
+
+00:40:15.336 --> 00:40:16.916 A:middle
+on the hardware in
+terms of energy.
+
+00:40:18.896 --> 00:40:21.736 A:middle
+Probably the most important
+slide, as we promised you
+
+00:40:21.736 --> 00:40:23.956 A:middle
+in the starting, if your
+app is coming at the top,
+
+00:40:24.306 --> 00:40:27.466 A:middle
+please do the changes and you
+will see your app actually going
+
+00:40:27.466 --> 00:40:28.286 A:middle
+at the bottom of the UI.
+
+00:40:28.286 --> 00:40:31.906 A:middle
+What we did, we took two
+iPhone 6 fresh installs,
+
+00:40:32.416 --> 00:40:34.276 A:middle
+on one of them installed
+inefficient code,
+
+00:40:34.606 --> 00:40:37.246 A:middle
+on the second installed the
+code with all the fixes,
+
+00:40:37.766 --> 00:40:40.066 A:middle
+took both of them exact
+same amount of work,
+
+00:40:40.066 --> 00:40:43.226 A:middle
+while running other applications
+as well, same amount of load
+
+00:40:43.226 --> 00:40:45.466 A:middle
+in terms of all application,
+in terms of Energy Buddy
+
+00:40:45.766 --> 00:40:46.716 A:middle
+and other applications.
+
+00:40:47.436 --> 00:40:53.506 A:middle
+What we found: the fixed code
+consumed 50 percent less energy,
+
+00:40:54.266 --> 00:40:55.746 A:middle
+including display energy,
+
+00:40:56.126 --> 00:40:57.996 A:middle
+which is exactly the
+same in both the apps.
+
+00:40:59.306 --> 00:41:02.446 A:middle
+Battery UI you see right
+on the top, 28 percent.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:40:59.306 --> 00:41:02.446 A:middle
+Battery UI you see right
+on the top, 28 percent.
+
+00:41:02.866 --> 00:41:06.036 A:middle
+And with optimized
+code, it goes way down.
+
+00:41:06.646 --> 00:41:09.016 A:middle
+User is getting exactly
+the same thing.
+
+00:41:10.696 --> 00:41:15.406 A:middle
+To summarize this talk, battery
+life is really, really important
+
+00:41:15.616 --> 00:41:17.716 A:middle
+to have a good customer
+experience.
+
+00:41:18.276 --> 00:41:20.116 A:middle
+Design your app with
+three things in mind --
+
+00:41:20.386 --> 00:41:23.366 A:middle
+do it never/do it less,
+do it more efficiently,
+
+00:41:23.626 --> 00:41:25.896 A:middle
+do it at a better time.
+
+00:41:26.076 --> 00:41:28.246 A:middle
+Be a very considerate
+background application.
+
+00:41:29.696 --> 00:41:31.276 A:middle
+Please try out the
+new debug tools.
+
+00:41:31.536 --> 00:41:32.276 A:middle
+We have our labs.
+
+00:41:32.276 --> 00:41:33.636 A:middle
+I will give details right now.
+
+00:41:34.246 --> 00:41:35.776 A:middle
+Check out the new
+Energy Guide we have.
+
+00:41:35.936 --> 00:41:37.446 A:middle
+It contains all the
+information we talked
+
+00:41:37.446 --> 00:41:39.296 A:middle
+about in this talk and more.
+
+00:41:40.316 --> 00:41:41.746 A:middle
+Bring your apps to
+the Power Lab.
+
+00:41:43.616 --> 00:41:44.466 A:middle
+Some more information
+
+00:41:44.586 --> 00:41:46.466 A:middle
+about where you can
+find the Energy Guides.
+
+00:41:48.296 --> 00:41:49.976 A:middle
+Technical support for this talk.
+
+00:41:51.466 --> 00:41:53.146 A:middle
+Finally, the related
+sessions for these talks,
+
+00:41:53.146 --> 00:41:56.186 A:middle
+which are talking about
+a few concepts we talked,
+
+00:41:56.186 --> 00:41:57.006 A:middle
+but in more detail.
+
+00:41:58.816 --> 00:41:59.886 A:middle
+Thank you, everyone, for coming.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:42:01.516 --> 00:42:14.800 A:middle
+[ Applause ]
+

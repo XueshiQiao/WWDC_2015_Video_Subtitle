@@ -1,0 +1,2789 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:24.516 --> 00:00:27.386 A:middle
+[Applause]
+
+00:00:27.886 --> 00:00:28.786 A:middle
+&gt;&gt; NATHAN DEVRIES:
+Good morning, everyone.
+
+00:00:30.666 --> 00:00:31.946 A:middle
+My name is Nathan deVries,
+
+00:00:32.165 --> 00:00:35.586 A:middle
+and shortly you'll meet
+my colleague Chloe Chang.
+
+00:00:35.586 --> 00:00:37.976 A:middle
+We are here to present
+WatchKit in depth part 2.
+
+00:00:37.976 --> 00:00:41.376 A:middle
+In the previous session, part 1,
+
+00:00:41.376 --> 00:00:43.386 A:middle
+we talked about the
+architectural differences
+
+00:00:43.466 --> 00:00:45.646 A:middle
+between watchOS 1 and watchOS 2
+
+00:00:45.996 --> 00:00:47.696 A:middle
+and how it relates
+to your applications.
+
+00:00:48.376 --> 00:00:50.546 A:middle
+In this talk we will be
+looking a little bit more
+
+00:00:50.546 --> 00:00:52.716 A:middle
+into the new APIs enabled
+
+00:00:52.716 --> 00:00:55.786 A:middle
+by this new architectural
+change bringing your watch app
+
+00:00:56.006 --> 00:00:57.606 A:middle
+and extension to the watch.
+
+00:00:59.186 --> 00:01:01.266 A:middle
+Now, to start with, I will
+be talking a little bit
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:59.186 --> 00:01:01.266 A:middle
+Now, to start with, I will
+be talking a little bit
+
+00:01:01.266 --> 00:01:02.726 A:middle
+about something that's
+pretty exciting.
+
+00:01:03.226 --> 00:01:06.226 A:middle
+We are enabling Digital Crown
+experiences in your own apps
+
+00:01:06.556 --> 00:01:07.676 A:middle
+so this will be great.
+
+00:01:09.126 --> 00:01:11.136 A:middle
+Next, we will be
+talking a little bit
+
+00:01:11.136 --> 00:01:15.216 A:middle
+about media playback both for
+short video and audio content
+
+00:01:15.546 --> 00:01:18.806 A:middle
+as well as long form
+music, podcasts,
+
+00:01:18.806 --> 00:01:19.886 A:middle
+et cetera, in the background.
+
+00:01:20.256 --> 00:01:21.386 A:middle
+This is also a great new API.
+
+00:01:23.456 --> 00:01:25.486 A:middle
+Next, we will be talking
+about audio recording.
+
+00:01:25.766 --> 00:01:27.916 A:middle
+You can now record audio
+straight from your wrist
+
+00:01:28.246 --> 00:01:31.366 A:middle
+and send the short clips of
+audio to friends, to a server,
+
+00:01:31.366 --> 00:01:33.726 A:middle
+share them on the
+internet, and so on.
+
+00:01:35.116 --> 00:01:36.926 A:middle
+And lastly, we're going
+to be talking a little bit
+
+00:01:36.926 --> 00:01:40.416 A:middle
+about storing sensitive
+data on the watch.
+
+00:01:40.736 --> 00:01:43.776 A:middle
+Now that your watch is
+fully responsible for all
+
+00:01:43.776 --> 00:01:46.106 A:middle
+of the data it shows,
+it's important to keep
+
+00:01:46.106 --> 00:01:49.116 A:middle
+in mind the sensitive
+data you might be storing.
+
+00:01:50.086 --> 00:01:51.146 A:middle
+So let's get started.
+
+00:01:52.946 --> 00:01:56.556 A:middle
+The Digital Crown is a brand
+new user input mechanism
+
+00:01:56.596 --> 00:02:02.246 A:middle
+that allows you to fluidly and
+very tactilely scroll through
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:56.596 --> 00:02:02.246 A:middle
+that allows you to fluidly and
+very tactilely scroll through
+
+00:02:02.246 --> 00:02:05.536 A:middle
+and pick elements on the
+screen using the Digital Crown.
+
+00:02:06.286 --> 00:02:09.126 A:middle
+It's a really fantastic way
+to interact with the device.
+
+00:02:10.015 --> 00:02:11.966 A:middle
+Let's take a look at some
+of the core interactions
+
+00:02:11.966 --> 00:02:13.866 A:middle
+that are enabled by
+the Digital Crown.
+
+00:02:14.626 --> 00:02:17.736 A:middle
+To start with, the one that
+you will be most familiar
+
+00:02:17.736 --> 00:02:19.826 A:middle
+with is, of course, scrolling.
+
+00:02:20.926 --> 00:02:24.096 A:middle
+Place your finger on the Crown,
+turn slowly to scroll slowly
+
+00:02:24.346 --> 00:02:26.506 A:middle
+or flick quickly to
+scroll with momentum.
+
+00:02:26.706 --> 00:02:28.456 A:middle
+It's a really natural
+experience.
+
+00:02:28.906 --> 00:02:31.316 A:middle
+It feels like when we did
+Multi-Touch scrolling.
+
+00:02:32.696 --> 00:02:35.916 A:middle
+Next, you can use the Digital
+Crown to choose options.
+
+00:02:36.416 --> 00:02:38.316 A:middle
+This is a similar
+picker style to S iOS,
+
+00:02:38.316 --> 00:02:41.406 A:middle
+but on the watch you can
+use the Digital Crown.
+
+00:02:42.206 --> 00:02:45.306 A:middle
+Here I'm selecting my age
+in the activity set up UI
+
+00:02:46.066 --> 00:02:49.256 A:middle
+where I have a sheet that shows
+three different pickers allowing
+
+00:02:49.256 --> 00:02:54.806 A:middle
+me to have a concise and precise
+UI for choosing my age all
+
+00:02:54.806 --> 00:02:55.966 A:middle
+in a single modal sheet.
+
+00:02:56.526 --> 00:03:03.586 A:middle
+Next, we have a different way
+of presenting option picking.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:56.526 --> 00:03:03.586 A:middle
+Next, we have a different way
+of presenting option picking.
+
+00:03:04.146 --> 00:03:06.026 A:middle
+In many cases, the options
+
+00:03:06.026 --> 00:03:10.356 A:middle
+that you are choosing have a
+more special or specific way
+
+00:03:10.356 --> 00:03:11.406 A:middle
+of presenting the data.
+
+00:03:11.696 --> 00:03:14.756 A:middle
+In this case, I'm setting
+a timer of 45 minutes,
+
+00:03:15.246 --> 00:03:18.106 A:middle
+so we think that setting
+time it makes sense to lay
+
+00:03:18.106 --> 00:03:20.436 A:middle
+out the information in a
+way that's specific to time.
+
+00:03:21.066 --> 00:03:23.186 A:middle
+In this case, it's
+a 60 second dial,
+
+00:03:23.586 --> 00:03:26.706 A:middle
+so turning the Crown shows you
+progress as you are rotating
+
+00:03:26.806 --> 00:03:28.076 A:middle
+through each of those minutes.
+
+00:03:29.026 --> 00:03:31.456 A:middle
+In each of your applications,
+you will need to find ways
+
+00:03:31.666 --> 00:03:34.806 A:middle
+to present the options that
+you are presenting to the user
+
+00:03:34.806 --> 00:03:36.456 A:middle
+in ways that are
+relevant to the data.
+
+00:03:36.676 --> 00:03:37.616 A:middle
+So keep this in mind.
+
+00:03:38.536 --> 00:03:42.866 A:middle
+Lastly, because the Crown
+provides smooth, precise
+
+00:03:43.326 --> 00:03:48.566 A:middle
+and continuous movement, here
+we can use the Crown to rotate
+
+00:03:48.656 --> 00:03:51.206 A:middle
+through continuous
+values like volume
+
+00:03:51.206 --> 00:03:52.256 A:middle
+in the now playing glance.
+
+00:03:53.466 --> 00:03:56.356 A:middle
+So these are a few of the
+core interactions enabled
+
+00:03:56.356 --> 00:04:00.026 A:middle
+by the Crown, and we are excited
+to be able to provide those
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:56.356 --> 00:04:00.026 A:middle
+by the Crown, and we are excited
+to be able to provide those
+
+00:04:00.026 --> 00:04:01.076 A:middle
+to your application too.
+
+00:04:02.536 --> 00:04:06.386 A:middle
+So stepping back a little bit
+from the core interactions,
+
+00:04:06.386 --> 00:04:08.506 A:middle
+what are some of the
+benefits of the Digital Crown?
+
+00:04:08.506 --> 00:04:11.136 A:middle
+Well, we believe that the
+Digital Crown is an incredibly
+
+00:04:11.136 --> 00:04:14.816 A:middle
+intuitive experience when you
+first put on an Apple Watch,
+
+00:04:15.186 --> 00:04:18.596 A:middle
+the first thing you reach
+for is the Digital Crown.
+
+00:04:18.926 --> 00:04:21.726 A:middle
+People love to play with it,
+and it's a very natural way
+
+00:04:21.726 --> 00:04:23.616 A:middle
+to interact with
+content on the screen.
+
+00:04:24.146 --> 00:04:29.316 A:middle
+Next, and very importantly,
+it keeps the UI visible,
+
+00:04:29.766 --> 00:04:31.646 A:middle
+by not obstructing the
+screen with your finger,
+
+00:04:31.956 --> 00:04:33.616 A:middle
+you can see what you
+are interacting with.
+
+00:04:33.726 --> 00:04:37.146 A:middle
+So exposing different
+interactions using the Digital
+
+00:04:37.146 --> 00:04:40.866 A:middle
+Crown allows your users to
+clearly navigate the system.
+
+00:04:43.016 --> 00:04:45.806 A:middle
+Thirdly, it's a very
+precise input mechanism.
+
+00:04:46.306 --> 00:04:48.646 A:middle
+If we look back at
+the timer example,
+
+00:04:49.066 --> 00:04:52.576 A:middle
+you can't imagine trying to
+tune between 0 and 60 minutes
+
+00:04:52.576 --> 00:04:54.566 A:middle
+of a timer using touch alone.
+
+00:04:54.956 --> 00:04:57.556 A:middle
+With the Crown you can
+very precisely tune a 2,
+
+00:04:57.656 --> 00:05:00.596 A:middle
+3 or 4-minute timer
+or zip through
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:57.656 --> 00:05:00.596 A:middle
+3 or 4-minute timer
+or zip through
+
+00:05:00.596 --> 00:05:03.106 A:middle
+and create a 60-minute
+timer very quickly,
+
+00:05:03.236 --> 00:05:04.926 A:middle
+just with a few flicks
+of the Digital Crown.
+
+00:05:06.416 --> 00:05:07.566 A:middle
+Finally it's a playful.
+
+00:05:07.776 --> 00:05:09.926 A:middle
+This is a fun experience.
+
+00:05:10.096 --> 00:05:14.896 A:middle
+It's very tactile and we think
+the users are going to love it.
+
+00:05:15.006 --> 00:05:17.006 A:middle
+So what are we exposing
+in watchOS 2?
+
+00:05:18.896 --> 00:05:20.456 A:middle
+This one you will be
+very familiar with.
+
+00:05:21.236 --> 00:05:24.846 A:middle
+It's the same style of
+picker that we use elsewhere
+
+00:05:24.846 --> 00:05:26.726 A:middle
+in the system, like in
+complication editing
+
+00:05:26.726 --> 00:05:27.926 A:middle
+and activity setup.
+
+00:05:28.236 --> 00:05:31.136 A:middle
+We call this the WKInterface
+picker, and it's available
+
+00:05:31.136 --> 00:05:32.706 A:middle
+in watchOS 2 applications.
+
+00:05:33.496 --> 00:05:37.206 A:middle
+We have the list style.
+
+00:05:37.796 --> 00:05:41.666 A:middle
+This is great for
+selecting a range of options
+
+00:05:42.106 --> 00:05:44.046 A:middle
+where the options
+are showing in text,
+
+00:05:44.716 --> 00:05:47.356 A:middle
+in a list with a little bit of
+context to either side to show
+
+00:05:47.356 --> 00:05:48.866 A:middle
+where you are in the selection.
+
+00:05:50.436 --> 00:05:52.336 A:middle
+Next, we have the stack style.
+
+00:05:52.336 --> 00:05:56.076 A:middle
+Now, the stack style is perfect
+if you have a very visual,
+
+00:05:56.366 --> 00:05:59.026 A:middle
+graphical way of
+presenting your data.
+
+00:05:59.026 --> 00:06:01.136 A:middle
+It could be photographs,
+it could be stickers
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:59.026 --> 00:06:01.136 A:middle
+It could be photographs,
+it could be stickers
+
+00:06:01.136 --> 00:06:02.556 A:middle
+in a messaging application.
+
+00:06:02.956 --> 00:06:06.426 A:middle
+This is really great if you want
+to show in place presentations
+
+00:06:06.426 --> 00:06:07.886 A:middle
+of your data that you can turn
+
+00:06:07.886 --> 00:06:10.666 A:middle
+through using the Digital
+Crown like a flip book.
+
+00:06:10.666 --> 00:06:14.416 A:middle
+And finally, we have the
+sequence style picker.
+
+00:06:15.326 --> 00:06:17.366 A:middle
+Now, this picker is really cool.
+
+00:06:17.366 --> 00:06:18.876 A:middle
+I'm excited to see
+what you are going
+
+00:06:18.876 --> 00:06:19.966 A:middle
+to be able to do with this guy.
+
+00:06:20.796 --> 00:06:23.816 A:middle
+Here, I have used it to create
+an emoji picking interface.
+
+00:06:24.086 --> 00:06:25.576 A:middle
+So if you turn the
+Digital Crown,
+
+00:06:25.896 --> 00:06:27.626 A:middle
+we cycle through
+different emotions.
+
+00:06:27.626 --> 00:06:31.846 A:middle
+This can also be used to
+create your own sliders, knobs,
+
+00:06:32.046 --> 00:06:34.916 A:middle
+meters and even games if
+you get creative enough.
+
+00:06:35.036 --> 00:06:36.516 A:middle
+So that's the sequence style.
+
+00:06:36.666 --> 00:06:39.426 A:middle
+The three styles are
+list, stack and sequence.
+
+00:06:39.426 --> 00:06:44.056 A:middle
+Let's talk a little bit about
+what we call focus styles.
+
+00:06:44.846 --> 00:06:49.186 A:middle
+In addition to the three
+visual styles of pickers,
+
+00:06:49.846 --> 00:06:53.126 A:middle
+each of these styles also
+supports focus styles.
+
+00:06:53.756 --> 00:06:54.406 A:middle
+What does that mean?
+
+00:06:55.356 --> 00:06:57.786 A:middle
+So here we have an example
+of another emoji picking UI
+
+00:06:58.336 --> 00:07:02.816 A:middle
+where we have the opportunity to
+choose both a face and a hand.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:58.336 --> 00:07:02.816 A:middle
+where we have the opportunity to
+choose both a face and a hand.
+
+00:07:03.826 --> 00:07:06.276 A:middle
+It's not immediately obvious
+what turning the Crown would do
+
+00:07:06.276 --> 00:07:06.826 A:middle
+in this case.
+
+00:07:06.826 --> 00:07:09.676 A:middle
+It's not even obvious that there
+are two pickers on the screen.
+
+00:07:10.366 --> 00:07:13.876 A:middle
+What we can do is change
+the default focus style
+
+00:07:13.876 --> 00:07:16.386 A:middle
+of these two pickers
+to an outline style.
+
+00:07:17.126 --> 00:07:19.126 A:middle
+What this does is it
+outlines the picker
+
+00:07:19.126 --> 00:07:21.266 A:middle
+to show it's an interactive
+element,
+
+00:07:21.616 --> 00:07:24.656 A:middle
+and it also clearly shows
+in the system green color
+
+00:07:24.966 --> 00:07:28.656 A:middle
+that the selected or
+focused element is editable
+
+00:07:28.656 --> 00:07:29.506 A:middle
+with the Digital Crown.
+
+00:07:30.426 --> 00:07:34.316 A:middle
+Now, when I tap the
+other item on the screen,
+
+00:07:34.896 --> 00:07:36.846 A:middle
+I see the focus outline changes,
+
+00:07:37.146 --> 00:07:39.386 A:middle
+and I know what turning
+the Digital Crown will do.
+
+00:07:41.016 --> 00:07:43.036 A:middle
+There's an additional level
+of control that you have
+
+00:07:43.116 --> 00:07:44.956 A:middle
+over the focus outline.
+
+00:07:45.796 --> 00:07:49.276 A:middle
+If the items in your picker need
+more context to describe what's
+
+00:07:49.276 --> 00:07:53.466 A:middle
+in them, we can use an outline
+with caption focus style.
+
+00:07:54.056 --> 00:07:56.516 A:middle
+This allows you to
+build a UI similar
+
+00:07:56.586 --> 00:07:59.286 A:middle
+to the complication
+editing UI where you want
+
+00:07:59.286 --> 00:08:00.626 A:middle
+to show a little breakout box
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:59.286 --> 00:08:00.626 A:middle
+to show a little breakout box
+
+00:08:00.766 --> 00:08:03.216 A:middle
+that clearly shows
+what the item is
+
+00:08:03.326 --> 00:08:04.616 A:middle
+that you currently
+have selected.
+
+00:08:05.956 --> 00:08:08.656 A:middle
+And, again, if I
+move to the other,
+
+00:08:08.656 --> 00:08:11.066 A:middle
+move focus to the other
+picker, you will note
+
+00:08:11.066 --> 00:08:13.156 A:middle
+that the caption
+also moves with it.
+
+00:08:14.056 --> 00:08:16.776 A:middle
+The way that I have achieved
+this here is I have each item
+
+00:08:16.776 --> 00:08:18.486 A:middle
+in my picker with
+the same caption,
+
+00:08:18.486 --> 00:08:20.316 A:middle
+but you could also have
+a different caption
+
+00:08:20.316 --> 00:08:21.706 A:middle
+for each item in the picker.
+
+00:08:23.486 --> 00:08:25.066 A:middle
+Now, there are other useful ways
+
+00:08:25.066 --> 00:08:27.956 A:middle
+to provide context while
+the user is interacting
+
+00:08:28.026 --> 00:08:28.936 A:middle
+with the Digital Crown.
+
+00:08:29.546 --> 00:08:31.416 A:middle
+One of these is the system style
+
+00:08:31.416 --> 00:08:33.275 A:middle
+of showing a contextual
+indicator,
+
+00:08:33.275 --> 00:08:34.706 A:middle
+the Digital Crown indicator.
+
+00:08:35.466 --> 00:08:37.696 A:middle
+This is shown beside
+the Digital Crown
+
+00:08:38.046 --> 00:08:40.866 A:middle
+and as the user turns the
+Digital Crown it gives them
+
+00:08:40.866 --> 00:08:44.606 A:middle
+context on the range of values
+available to them for picking.
+
+00:08:45.416 --> 00:08:48.976 A:middle
+It also shows how far through
+the values they currently are.
+
+00:08:48.976 --> 00:08:53.086 A:middle
+So it's good for getting your
+bearings when you have a picker
+
+00:08:53.126 --> 00:08:56.316 A:middle
+that doesn't necessarily show
+where you are in the options,
+
+00:08:56.696 --> 00:08:58.676 A:middle
+just through the visuals itself.
+
+00:08:59.326 --> 00:09:02.196 A:middle
+For applications that want
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:59.326 --> 00:09:02.196 A:middle
+For applications that want
+
+00:09:02.196 --> 00:09:05.716 A:middle
+to show a more customized
+progress UI, they don't want
+
+00:09:05.716 --> 00:09:07.026 A:middle
+to show the little
+Crown indicator,
+
+00:09:07.456 --> 00:09:10.756 A:middle
+we have fantastic new ways for
+you to build those experiences.
+
+00:09:11.556 --> 00:09:14.976 A:middle
+It's best to show
+with an example.
+
+00:09:16.086 --> 00:09:18.946 A:middle
+In this case, I have a picker
+in the center of the screen
+
+00:09:19.066 --> 00:09:22.396 A:middle
+which allows me to tune
+between 0 and 100%.
+
+00:09:23.426 --> 00:09:26.706 A:middle
+So as I turn the Digital Crown,
+you will see the values tick
+
+00:09:26.706 --> 00:09:28.246 A:middle
+up in increments of 10%.
+
+00:09:29.436 --> 00:09:31.086 A:middle
+This is kind of cool,
+but we don't know
+
+00:09:31.086 --> 00:09:34.366 A:middle
+that the bottom limit is 0
+and the upper limit is 100.
+
+00:09:35.006 --> 00:09:36.836 A:middle
+It's not a very visual
+experience.
+
+00:09:36.836 --> 00:09:38.546 A:middle
+It's not a pleasant experience.
+
+00:09:39.056 --> 00:09:40.656 A:middle
+We could use the
+contextual indicator,
+
+00:09:40.656 --> 00:09:44.196 A:middle
+but in our app we would like to
+show progress using a slightly
+
+00:09:44.196 --> 00:09:46.926 A:middle
+different UI that is more
+relevant to your application.
+
+00:09:47.806 --> 00:09:52.026 A:middle
+Here, I have chosen to use an
+arc or a progress ring style UI.
+
+00:09:52.766 --> 00:09:56.726 A:middle
+So as I turn the Digital Crown,
+I have coordinated the picker
+
+00:09:57.136 --> 00:10:02.206 A:middle
+with another interface element
+in my UI so it updates the image
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:57.136 --> 00:10:02.206 A:middle
+with another interface element
+in my UI so it updates the image
+
+00:10:02.206 --> 00:10:04.066 A:middle
+as I turn through
+the picker's items.
+
+00:10:05.216 --> 00:10:08.716 A:middle
+With this coordinated image
+API, you can build all sorts
+
+00:10:08.716 --> 00:10:11.516 A:middle
+of fantastic Digital
+Crown experiences.
+
+00:10:13.276 --> 00:10:16.706 A:middle
+So there are all the different
+knobs and bells and whistles
+
+00:10:16.786 --> 00:10:20.086 A:middle
+that you can configure
+on a WK interface picker,
+
+00:10:20.716 --> 00:10:21.656 A:middle
+how you create one.
+
+00:10:22.226 --> 00:10:23.916 A:middle
+Let's jump into looking
+at that right now.
+
+00:10:25.026 --> 00:10:27.736 A:middle
+So those of you that are
+familiar with watchOS 1,
+
+00:10:27.786 --> 00:10:31.006 A:middle
+this is a very straight
+forward process.
+
+00:10:31.006 --> 00:10:35.116 A:middle
+If you go to your storyboard and
+select an interface controller,
+
+00:10:35.396 --> 00:10:38.236 A:middle
+you can simply drag a new
+picker object straight
+
+00:10:38.236 --> 00:10:41.076 A:middle
+from the objects library
+into your storyboard.
+
+00:10:42.606 --> 00:10:45.696 A:middle
+Once you have a picker, you
+can obviously configure its
+
+00:10:45.696 --> 00:10:46.616 A:middle
+various attributes.
+
+00:10:46.616 --> 00:10:49.336 A:middle
+We have already been speaking
+about these such as the style,
+
+00:10:49.676 --> 00:10:51.726 A:middle
+list, sequence or stack.
+
+00:10:52.556 --> 00:10:54.906 A:middle
+The focus style and
+whether or not you would
+
+00:10:54.906 --> 00:10:57.646 A:middle
+like that optional Digital
+Crown indicator to be shown.
+
+00:10:58.746 --> 00:11:01.006 A:middle
+In this case, I'm
+using the list style,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:58.746 --> 00:11:01.006 A:middle
+In this case, I'm
+using the list style,
+
+00:11:01.256 --> 00:11:04.476 A:middle
+the outline with caption style,
+and a disabled indicator,
+
+00:11:04.476 --> 00:11:07.706 A:middle
+because I'm going to provide
+my own, or I don't feel
+
+00:11:07.706 --> 00:11:09.306 A:middle
+like the context is necessary
+
+00:11:09.356 --> 00:11:12.966 A:middle
+with the data that
+I'm presenting.
+
+00:11:12.966 --> 00:11:15.696 A:middle
+Next, we need to jump into
+the interface controller code,
+
+00:11:15.696 --> 00:11:18.186 A:middle
+and we need to create an
+IB outlet for the picker
+
+00:11:18.186 --> 00:11:22.456 A:middle
+so we can hook up our code and
+the object in the storyboard.
+
+00:11:22.596 --> 00:11:24.226 A:middle
+This gives us a reference
+to the picker.
+
+00:11:25.866 --> 00:11:28.016 A:middle
+And finally, we jump
+back to the storyboard
+
+00:11:28.106 --> 00:11:29.336 A:middle
+and hook these two things up.
+
+00:11:29.336 --> 00:11:31.536 A:middle
+So there are just a few
+simple steps similar
+
+00:11:31.536 --> 00:11:33.716 A:middle
+to creating buttons
+and images and so
+
+00:11:33.716 --> 00:11:36.226 A:middle
+on with the picker
+very easy to create.
+
+00:11:38.316 --> 00:11:40.606 A:middle
+So now we have a picker,
+and we have hooked it up,
+
+00:11:40.606 --> 00:11:43.196 A:middle
+and we have build and run
+and this is what we get.
+
+00:11:43.416 --> 00:11:46.386 A:middle
+It's possibly the most
+useless picker in the world.
+
+00:11:47.466 --> 00:11:49.786 A:middle
+Turn the Digital Crown and
+you can quickly navigate
+
+00:11:49.786 --> 00:11:50.396 A:middle
+through nothing.
+
+00:11:50.506 --> 00:11:50.976 A:middle
+It's great!
+
+00:11:52.166 --> 00:11:55.786 A:middle
+So what we need to do is
+configure what we call items
+
+00:11:55.986 --> 00:11:58.506 A:middle
+as you can see from the title.
+
+00:11:58.506 --> 00:12:00.666 A:middle
+To do that, now that we have
+a reference to the picker
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:58.506 --> 00:12:00.666 A:middle
+To do that, now that we have
+a reference to the picker
+
+00:12:00.666 --> 00:12:04.066 A:middle
+through the IB outlet, we can
+simply call the set items API
+
+00:12:04.066 --> 00:12:07.146 A:middle
+and specify an array
+of WKPickerItems.
+
+00:12:07.246 --> 00:12:11.046 A:middle
+These are the very
+simple objects
+
+00:12:11.126 --> 00:12:12.846 A:middle
+with a few optional properties.
+
+00:12:13.516 --> 00:12:16.996 A:middle
+Here I'm using the title
+property, the caption property
+
+00:12:16.996 --> 00:12:20.306 A:middle
+and the accessory property
+to define the visual style
+
+00:12:20.306 --> 00:12:22.386 A:middle
+that I'm presenting
+on the watch.
+
+00:12:22.386 --> 00:12:27.046 A:middle
+Now, if I want to have full
+control over what's shown
+
+00:12:27.046 --> 00:12:28.246 A:middle
+in each row of the picker,
+
+00:12:28.246 --> 00:12:32.356 A:middle
+I can also use the content
+image property of each
+
+00:12:32.356 --> 00:12:34.296 A:middle
+of these different
+WKPickerItems.
+
+00:12:34.806 --> 00:12:37.016 A:middle
+This gives me full
+control over what's shown
+
+00:12:37.296 --> 00:12:38.666 A:middle
+for each item in the picker.
+
+00:12:39.716 --> 00:12:41.926 A:middle
+For the stack and
+sequence styles,
+
+00:12:42.576 --> 00:12:44.526 A:middle
+the content image is used
+
+00:12:44.526 --> 00:12:47.166 A:middle
+to define what's shown
+in those two pickers.
+
+00:12:47.536 --> 00:12:48.716 A:middle
+So for those two styles,
+
+00:12:48.716 --> 00:12:50.716 A:middle
+you will just use the
+content image property.
+
+00:12:51.406 --> 00:12:55.486 A:middle
+So new in watchOS
+2 we have a new API
+
+00:12:55.486 --> 00:12:59.936 A:middle
+for specifying images you would
+like to be shown in your UI
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:00.596 --> 00:13:02.636 A:middle
+for pickers and for
+a few other objects
+
+00:13:02.636 --> 00:13:05.316 A:middle
+which you will see later.
+
+00:13:05.316 --> 00:13:07.646 A:middle
+This is called the
+WK image class.
+
+00:13:07.646 --> 00:13:11.746 A:middle
+And I will give a few examples
+of how you might use this class.
+
+00:13:13.026 --> 00:13:14.556 A:middle
+The most common example will be
+
+00:13:14.556 --> 00:13:16.166 A:middle
+that you have your
+images included
+
+00:13:16.166 --> 00:13:19.446 A:middle
+in the application already
+in your asset catalog
+
+00:13:19.446 --> 00:13:22.836 A:middle
+or in the bundle itself, and
+so you can use the WK image,
+
+00:13:22.896 --> 00:13:25.216 A:middle
+image name API to
+load those images
+
+00:13:25.216 --> 00:13:28.236 A:middle
+into the application
+just prior to display.
+
+00:13:28.576 --> 00:13:32.156 A:middle
+All the extension needs to do is
+specify the name of the image.
+
+00:13:33.586 --> 00:13:37.216 A:middle
+For cases where your extension
+has downloaded the image
+
+00:13:37.256 --> 00:13:40.016 A:middle
+from the internet or from
+the companion using watch
+
+00:13:40.016 --> 00:13:43.626 A:middle
+connectivity, instead of
+turning that image and turning
+
+00:13:43.626 --> 00:13:45.376 A:middle
+that image data into an image,
+
+00:13:45.666 --> 00:13:48.776 A:middle
+you can save the necessary
+overhead of decoding the image
+
+00:13:48.776 --> 00:13:53.266 A:middle
+in the extension and pass the
+image data into the application
+
+00:13:53.556 --> 00:13:56.346 A:middle
+where it will be converted into
+an image just prior to display.
+
+00:13:57.366 --> 00:14:00.946 A:middle
+These first two ways of creating
+images are the preferred way
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:57.366 --> 00:14:00.946 A:middle
+These first two ways of creating
+images are the preferred way
+
+00:14:00.946 --> 00:14:02.516 A:middle
+if you already have
+the imimage data.
+
+00:14:02.516 --> 00:14:05.546 A:middle
+There is no sense in creating
+UI images unnecessarily
+
+00:14:05.956 --> 00:14:08.156 A:middle
+in your extension
+because they are displayed
+
+00:14:08.216 --> 00:14:08.996 A:middle
+by the application.
+
+00:14:10.716 --> 00:14:13.256 A:middle
+The last case is where
+you do need UI images.
+
+00:14:13.666 --> 00:14:16.816 A:middle
+Now that core graphics available
+on the watch, you can use it
+
+00:14:16.816 --> 00:14:20.656 A:middle
+to render custom effects
+into images to use
+
+00:14:20.656 --> 00:14:21.726 A:middle
+in your WKPickerItems.
+
+00:14:21.726 --> 00:14:25.766 A:middle
+So here I'm using the
+WK image image API,
+
+00:14:26.186 --> 00:14:27.626 A:middle
+which takes a UI image object.
+
+00:14:28.306 --> 00:14:32.456 A:middle
+Now, we have a picker
+configured with items
+
+00:14:32.456 --> 00:14:35.156 A:middle
+and turning the Digital Crown
+will move through those items,
+
+00:14:35.616 --> 00:14:37.676 A:middle
+but it's useful in your
+application to know
+
+00:14:37.946 --> 00:14:40.896 A:middle
+when the selected item
+changes, and to do this,
+
+00:14:40.896 --> 00:14:44.336 A:middle
+we use a similar technique to a
+button or a slider or a switch
+
+00:14:44.726 --> 00:14:46.306 A:middle
+by hooking up an IB action.
+
+00:14:47.436 --> 00:14:52.696 A:middle
+Now, the IB action for pickers
+in particular is a method
+
+00:14:52.696 --> 00:14:54.016 A:middle
+that takes a single argument,
+
+00:14:54.476 --> 00:14:58.776 A:middle
+which is an integer representing
+the index of the selected item
+
+00:14:58.926 --> 00:15:01.986 A:middle
+in your items array that you
+specified using set items.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:58.926 --> 00:15:01.986 A:middle
+in your items array that you
+specified using set items.
+
+00:15:03.086 --> 00:15:05.756 A:middle
+So in this case, I am indexing
+
+00:15:05.756 --> 00:15:09.286 A:middle
+into my picker items using the
+selected index provided to me,
+
+00:15:09.666 --> 00:15:13.306 A:middle
+and I'm printing the
+title of that picker item.
+
+00:15:14.416 --> 00:15:17.136 A:middle
+So really easy to handle
+selected item and changes.
+
+00:15:17.836 --> 00:15:19.236 A:middle
+One thing to note is
+that you don't want
+
+00:15:19.236 --> 00:15:20.906 A:middle
+to do particularly
+expensive work
+
+00:15:21.376 --> 00:15:22.966 A:middle
+in response to item changes.
+
+00:15:23.466 --> 00:15:25.596 A:middle
+As you saw in the core
+interaction section,
+
+00:15:25.596 --> 00:15:28.756 A:middle
+you can turn the Crown quickly
+to move through items quickly
+
+00:15:29.116 --> 00:15:31.816 A:middle
+so your picker action is going
+to be called very rapidly.
+
+00:15:32.336 --> 00:15:35.006 A:middle
+If you are doing very expensive
+things I suggest you hold off
+
+00:15:35.006 --> 00:15:37.536 A:middle
+until you haven't received
+a picker action call
+
+00:15:37.536 --> 00:15:40.726 A:middle
+in a little bit of time, and
+then you do the expensive work
+
+00:15:40.726 --> 00:15:43.116 A:middle
+like refreshing your
+table view and so on.
+
+00:15:45.206 --> 00:15:47.106 A:middle
+Next we have image coordination.
+
+00:15:47.396 --> 00:15:49.866 A:middle
+This is what allows you
+to build those custom,
+
+00:15:50.136 --> 00:15:53.046 A:middle
+beautiful interactions
+where many parts
+
+00:15:53.046 --> 00:15:54.536 A:middle
+of your interface
+are coordinated
+
+00:15:54.646 --> 00:15:56.426 A:middle
+with the picker as
+its value changes.
+
+00:15:57.566 --> 00:15:59.936 A:middle
+This is also very
+simple to set up.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:00.036 --> 00:16:02.466 A:middle
+In this case, I have a picker
+in the center of the screen
+
+00:16:02.466 --> 00:16:06.506 A:middle
+which shows 70%, and the
+outline, the progress ring,
+
+00:16:06.786 --> 00:16:11.966 A:middle
+is a WKInterfaceGroup which
+is the parent of the picker.
+
+00:16:12.106 --> 00:16:14.726 A:middle
+Very easy, very simple
+UI to set up.
+
+00:16:15.716 --> 00:16:17.346 A:middle
+Now, to configure this in code,
+
+00:16:17.346 --> 00:16:20.926 A:middle
+all we need to do is create
+a set of animated images
+
+00:16:21.036 --> 00:16:23.586 A:middle
+which will be managed
+by the picker.
+
+00:16:23.686 --> 00:16:27.106 A:middle
+So here we create a
+progress images variable
+
+00:16:27.816 --> 00:16:32.096 A:middle
+and use the UI animated
+image with images API
+
+00:16:32.596 --> 00:16:36.266 A:middle
+to specify an array of those
+progress images we have either
+
+00:16:36.266 --> 00:16:40.186 A:middle
+drawn in code or we already
+have in our asset catalog.
+
+00:16:41.056 --> 00:16:42.756 A:middle
+We will give it a duration of 0
+
+00:16:42.756 --> 00:16:45.526 A:middle
+because the picker will
+automatically manage seeking
+
+00:16:45.526 --> 00:16:47.986 A:middle
+through this animation,
+and then finally
+
+00:16:48.026 --> 00:16:49.416 A:middle
+on the progress interface group,
+
+00:16:49.556 --> 00:16:51.006 A:middle
+which is hosting
+the progress ring,
+
+00:16:51.076 --> 00:16:53.086 A:middle
+we will call set
+background image
+
+00:16:53.166 --> 00:16:55.376 A:middle
+to make the animated image
+the background image.
+
+00:16:56.446 --> 00:16:59.306 A:middle
+Finally we call set
+coordinated animations
+
+00:16:59.416 --> 00:17:01.706 A:middle
+on the picker giving
+it a list of all
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:59.416 --> 00:17:01.706 A:middle
+on the picker giving
+it a list of all
+
+00:17:01.706 --> 00:17:03.406 A:middle
+of the different interface
+objects that we would
+
+00:17:03.406 --> 00:17:06.906 A:middle
+like the picker to coordinate
+as you turn through the picker.
+
+00:17:07.816 --> 00:17:09.665 A:middle
+In this case, we only
+have a single group,
+
+00:17:10.165 --> 00:17:12.205 A:middle
+but we could also
+specify multiple groups,
+
+00:17:12.806 --> 00:17:14.915 A:middle
+a group in an image, and so on.
+
+00:17:15.185 --> 00:17:19.586 A:middle
+This supports as many
+objects as you like.
+
+00:17:19.856 --> 00:17:23.626 A:middle
+Now, as I turn through the
+WK interface picker's items,
+
+00:17:24.116 --> 00:17:27.226 A:middle
+we coordinate with any
+associated groups and images
+
+00:17:27.435 --> 00:17:31.206 A:middle
+which image is shown in that
+particular interface object.
+
+00:17:32.026 --> 00:17:35.716 A:middle
+In this example, I have matched
+the number of items to images,
+
+00:17:35.716 --> 00:17:37.226 A:middle
+but I will show you
+in a little bit
+
+00:17:37.226 --> 00:17:39.756 A:middle
+that that doesn't necessarily
+need to be the case.
+
+00:17:40.546 --> 00:17:42.806 A:middle
+So that's how you coordinate
+images with a picker.
+
+00:17:44.246 --> 00:17:46.576 A:middle
+Now, to finish things
+off for this section,
+
+00:17:46.576 --> 00:17:49.636 A:middle
+I thought I would give
+you a little demo of how
+
+00:17:49.636 --> 00:17:50.986 A:middle
+to do this in your application.
+
+00:17:53.616 --> 00:17:55.326 A:middle
+So let me just get that set up.
+
+00:17:57.076 --> 00:17:59.416 A:middle
+So here is a little app
+that I created earlier.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:00.386 --> 00:18:03.636 A:middle
+It shows each of the
+different styles of picker
+
+00:18:03.636 --> 00:18:06.046 A:middle
+that you can create as
+well as the last one
+
+00:18:06.046 --> 00:18:07.626 A:middle
+for a demonstration
+of coordination.
+
+00:18:08.216 --> 00:18:10.346 A:middle
+So let's start by going
+to the list style picker.
+
+00:18:11.346 --> 00:18:14.086 A:middle
+In this particular case,
+I have created a picker
+
+00:18:14.086 --> 00:18:15.656 A:middle
+with accessory images drawn
+
+00:18:15.656 --> 00:18:19.266 A:middle
+as random colors using core
+graphics and I have quite a few,
+
+00:18:19.546 --> 00:18:20.576 A:middle
+quite a few items here.
+
+00:18:20.746 --> 00:18:23.646 A:middle
+You can see it's very fluid
+to scroll through these items.
+
+00:18:24.466 --> 00:18:28.556 A:middle
+Everyone time the item changes
+I'm also updating a separate
+
+00:18:28.766 --> 00:18:31.486 A:middle
+interface element
+in my storyboard.
+
+00:18:31.646 --> 00:18:34.086 A:middle
+This is a simple label,
+and I'm updating the text.
+
+00:18:34.896 --> 00:18:38.496 A:middle
+So these kinds of things are
+very possible to do in response
+
+00:18:38.566 --> 00:18:40.106 A:middle
+to selected item changes.
+
+00:18:40.556 --> 00:18:43.076 A:middle
+It's really only more expensive
+things that you want to defer.
+
+00:18:43.116 --> 00:18:46.136 A:middle
+So let's go back to
+the top level menu
+
+00:18:46.136 --> 00:18:48.406 A:middle
+and into the stack style.
+
+00:18:48.996 --> 00:18:51.086 A:middle
+Here I'm also using
+core graphics
+
+00:18:51.446 --> 00:18:54.706 A:middle
+to render random
+squares of random color,
+
+00:18:55.006 --> 00:18:58.446 A:middle
+and here you will see that I can
+very smoothly and quickly flick
+
+00:18:58.516 --> 00:19:01.676 A:middle
+through images in this
+stack style picker.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:58.516 --> 00:19:01.676 A:middle
+through images in this
+stack style picker.
+
+00:19:02.796 --> 00:19:04.836 A:middle
+Also note that in the
+upper right-hand corner
+
+00:19:04.836 --> 00:19:07.466 A:middle
+as I turn the Digital
+Crown, you will see
+
+00:19:07.766 --> 00:19:10.826 A:middle
+that the Digital Crown
+indicator shows my progress
+
+00:19:11.126 --> 00:19:12.516 A:middle
+through this stack of items.
+
+00:19:13.106 --> 00:19:13.756 A:middle
+It's really useful.
+
+00:19:14.356 --> 00:19:18.556 A:middle
+The third example
+is a sequence style.
+
+00:19:18.996 --> 00:19:21.386 A:middle
+I thought I would show the kinds
+of things you could achieve
+
+00:19:21.386 --> 00:19:24.076 A:middle
+with the sequence style
+because the emoji case was kind
+
+00:19:24.076 --> 00:19:25.626 A:middle
+of obvious what you
+could do with that.
+
+00:19:26.136 --> 00:19:30.356 A:middle
+Here I can create a pretty
+compelling experience
+
+00:19:30.356 --> 00:19:33.516 A:middle
+for choosing a random
+color using a color wheel.
+
+00:19:34.116 --> 00:19:35.696 A:middle
+Here as I turn the
+Digital Crown,
+
+00:19:35.956 --> 00:19:37.476 A:middle
+I'm selecting different images
+
+00:19:37.476 --> 00:19:39.626 A:middle
+in the sequence representing
+a new color.
+
+00:19:39.626 --> 00:19:44.296 A:middle
+So this is pretty cool, and also
+note that this supports momentum
+
+00:19:44.296 --> 00:19:46.216 A:middle
+so I can still flick on
+the Crown and it will move
+
+00:19:46.256 --> 00:19:47.716 A:middle
+through the values very quickly.
+
+00:19:49.566 --> 00:19:52.026 A:middle
+Finally, let's talk a little
+bit about coordination.
+
+00:19:52.776 --> 00:19:55.756 A:middle
+I have created an example here
+with a left and a right picker
+
+00:19:55.756 --> 00:19:58.966 A:middle
+where I have got the
+left picker focused.
+
+00:19:59.536 --> 00:20:03.516 A:middle
+As I turn the Digital Crown,
+I'm moving through 12 options
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:59.536 --> 00:20:03.516 A:middle
+As I turn the Digital Crown,
+I'm moving through 12 options
+
+00:20:03.516 --> 00:20:04.536 A:middle
+on the left-hand side.
+
+00:20:05.276 --> 00:20:06.936 A:middle
+If I focus the right
+hand picker,
+
+00:20:07.566 --> 00:20:09.666 A:middle
+now I'm moving through 60 items.
+
+00:20:10.036 --> 00:20:13.736 A:middle
+You can see that this is
+maybe an approximation
+
+00:20:13.736 --> 00:20:15.066 A:middle
+of the timer UI.
+
+00:20:16.686 --> 00:20:17.586 A:middle
+So one thing to note is
+
+00:20:17.616 --> 00:20:20.196 A:middle
+that both pickers share
+the same coordinated image.
+
+00:20:20.286 --> 00:20:25.196 A:middle
+So my coordinated image includes
+60 different progress arcs
+
+00:20:26.266 --> 00:20:30.506 A:middle
+for this right hand picker, but
+my left hand picker can also use
+
+00:20:30.506 --> 00:20:32.026 A:middle
+that same progress image.
+
+00:20:32.486 --> 00:20:35.336 A:middle
+This is a really handy
+technique to use if you want
+
+00:20:35.376 --> 00:20:37.516 A:middle
+to save the number of
+resources you are using
+
+00:20:37.516 --> 00:20:38.286 A:middle
+between your pickers.
+
+00:20:39.366 --> 00:20:42.546 A:middle
+So that's the demo.
+
+00:20:43.516 --> 00:20:50.976 A:middle
+[Applause]
+
+00:20:51.476 --> 00:20:53.306 A:middle
+So just to recap some of
+the things you have learned
+
+00:20:53.306 --> 00:20:56.036 A:middle
+about the Digital Crown, the new
+experiences you can use provide
+
+00:20:56.086 --> 00:20:57.786 A:middle
+to your users in watchOS 2,
+
+00:20:58.686 --> 00:21:01.696 A:middle
+we have three brand new
+customizable styles, the list,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:58.686 --> 00:21:01.696 A:middle
+we have three brand new
+customizable styles, the list,
+
+00:21:02.136 --> 00:21:03.496 A:middle
+the stack and the sequence.
+
+00:21:04.146 --> 00:21:06.666 A:middle
+Each one is tailored to
+displaying different types
+
+00:21:06.666 --> 00:21:09.656 A:middle
+of information, so you should
+choose which one you use based
+
+00:21:09.656 --> 00:21:13.176 A:middle
+on what your users are
+interacting with in your apps.
+
+00:21:13.406 --> 00:21:16.326 A:middle
+Each of these styles supports
+focus and indicator support
+
+00:21:16.326 --> 00:21:19.856 A:middle
+so as you are turning through
+the items in the picker,
+
+00:21:20.406 --> 00:21:24.086 A:middle
+we both show you what the Crown
+would do by showing focus,
+
+00:21:24.306 --> 00:21:25.776 A:middle
+and we also provide support
+
+00:21:25.776 --> 00:21:29.116 A:middle
+for showing the standard
+Digital Crown indicator.
+
+00:21:29.876 --> 00:21:32.456 A:middle
+And finally, for
+creating truly customized,
+
+00:21:32.696 --> 00:21:36.256 A:middle
+compelling interfaces with
+very tailored graphics,
+
+00:21:36.396 --> 00:21:39.076 A:middle
+you can use the image
+animation coordination APIs
+
+00:21:39.326 --> 00:21:43.006 A:middle
+to synchronize other aspects of
+your interface with the pickers
+
+00:21:43.006 --> 00:21:44.206 A:middle
+that are currently being edited.
+
+00:21:44.206 --> 00:21:47.956 A:middle
+And with that, I would like to
+hand off to Chloe who will talk
+
+00:21:47.956 --> 00:21:50.136 A:middle
+about media play
+back on watchOS 2.
+
+00:21:50.476 --> 00:21:50.976 A:middle
+Thank you very much!
+
+00:21:51.516 --> 00:21:58.596 A:middle
+[Applause]
+
+00:21:59.096 --> 00:21:59.796 A:middle
+&gt;&gt; CHLOE CHANG: Hi, everyone!
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:00.556 --> 00:22:06.676 A:middle
+I'm here to talk about more
+new features in watchOS 2.
+
+00:22:07.276 --> 00:22:09.326 A:middle
+The first one is media playback.
+
+00:22:10.666 --> 00:22:16.766 A:middle
+So let me show you what it looks
+like to play a simple video
+
+00:22:17.306 --> 00:22:20.686 A:middle
+in the new media
+player in watchOS 2.
+
+00:22:21.886 --> 00:22:23.696 A:middle
+First, the content
+is loaded and,
+
+00:22:23.696 --> 00:22:27.836 A:middle
+once the user presses the play
+iCon, it will start to play.
+
+00:22:28.896 --> 00:22:32.226 A:middle
+And at any point in time the
+user can turn the Digital Crown
+
+00:22:32.226 --> 00:22:36.136 A:middle
+to adjust the volume and also
+if you tap on the screen,
+
+00:22:36.136 --> 00:22:38.546 A:middle
+the player control will come up.
+
+00:22:39.786 --> 00:22:41.736 A:middle
+And for audio only content,
+
+00:22:41.736 --> 00:22:46.546 A:middle
+we also have a built
+in UI for that.
+
+00:22:47.126 --> 00:22:50.196 A:middle
+The audio for both
+cases will be routed
+
+00:22:50.296 --> 00:22:51.906 A:middle
+to the selected output source.
+
+00:22:52.756 --> 00:22:55.976 A:middle
+That could be your
+Apple Watch speaker
+
+00:22:56.356 --> 00:22:59.696 A:middle
+or a paired bluetooth device.
+
+00:22:59.806 --> 00:23:03.686 A:middle
+Now, let me show you
+how to do this in code.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:59.806 --> 00:23:03.686 A:middle
+Now, let me show you
+how to do this in code.
+
+00:23:03.886 --> 00:23:06.966 A:middle
+Let's say you are trying to
+present this media player
+
+00:23:06.966 --> 00:23:08.886 A:middle
+from your interface controller.
+
+00:23:10.306 --> 00:23:12.296 A:middle
+The first thing you
+do is to figure
+
+00:23:12.296 --> 00:23:15.336 A:middle
+out the URL for the content.
+
+00:23:16.036 --> 00:23:20.486 A:middle
+Suppose you have a simple movie
+from your extension bundle.
+
+00:23:20.716 --> 00:23:24.606 A:middle
+This is how you come up with
+the URL for the content.
+
+00:23:25.006 --> 00:23:27.816 A:middle
+You can also use remote URL.
+
+00:23:28.596 --> 00:23:31.916 A:middle
+In that case, the media player
+would handle the download
+
+00:23:31.916 --> 00:23:32.526 A:middle
+for you.
+
+00:23:33.146 --> 00:23:39.376 A:middle
+And also, it would update the
+UI with a progress indication.
+
+00:23:39.906 --> 00:23:44.766 A:middle
+And with the URL, we can
+then decide how we are going
+
+00:23:44.766 --> 00:23:46.556 A:middle
+to play the content.
+
+00:23:47.136 --> 00:23:48.866 A:middle
+We offer a few options here.
+
+00:23:49.176 --> 00:23:51.706 A:middle
+The first one is auto play.
+
+00:23:52.256 --> 00:23:57.216 A:middle
+When it's set to true, once
+the media player is on screen
+
+00:23:57.216 --> 00:23:58.656 A:middle
+and the content is loaded,
+
+00:23:59.406 --> 00:24:01.496 A:middle
+the playback will
+automatically start.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:59.406 --> 00:24:01.496 A:middle
+the playback will
+automatically start.
+
+00:24:02.326 --> 00:24:05.296 A:middle
+The next one I use
+is start time.
+
+00:24:06.066 --> 00:24:09.676 A:middle
+I make it to start at the
+3 second mark of the video.
+
+00:24:10.546 --> 00:24:14.966 A:middle
+This is really useful if the
+playback was previously paused
+
+00:24:15.216 --> 00:24:18.116 A:middle
+and when user comes back
+to the media player,
+
+00:24:18.116 --> 00:24:20.726 A:middle
+you want to resume the
+playback from the same spot.
+
+00:24:21.236 --> 00:24:26.706 A:middle
+And the third option
+here I use video gravity.
+
+00:24:26.936 --> 00:24:32.436 A:middle
+This key actually determines how
+the video will be resized once
+
+00:24:32.436 --> 00:24:34.116 A:middle
+it's in the media player.
+
+00:24:34.536 --> 00:24:36.746 A:middle
+And with all of this
+information,
+
+00:24:36.746 --> 00:24:40.286 A:middle
+now you can call present
+media controller with URL.
+
+00:24:41.356 --> 00:24:43.256 A:middle
+And you can specify
+completion handler.
+
+00:24:43.256 --> 00:24:45.236 A:middle
+It will tell you how
+the playback ended.
+
+00:24:45.236 --> 00:24:49.496 A:middle
+And that's how easy you
+can present a media player
+
+00:24:49.766 --> 00:24:50.476 A:middle
+from your code.
+
+00:24:51.296 --> 00:24:53.806 A:middle
+And in some other
+cases, for example,
+
+00:24:53.896 --> 00:24:58.206 A:middle
+in the social media app, you
+want to embed a snippet of video
+
+00:24:58.346 --> 00:25:00.026 A:middle
+in some kind of context.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:24:58.346 --> 00:25:00.026 A:middle
+in some kind of context.
+
+00:25:00.946 --> 00:25:04.366 A:middle
+We have the object
+that you need.
+
+00:25:04.626 --> 00:25:08.806 A:middle
+In watchOS 2, now you have
+the WKInterface movie object
+
+00:25:09.256 --> 00:25:13.506 A:middle
+that you can insert into a UI.
+
+00:25:13.686 --> 00:25:17.356 A:middle
+This object has a player icon
+overlaying a poster image
+
+00:25:17.406 --> 00:25:18.976 A:middle
+that represents your content.
+
+00:25:19.506 --> 00:25:24.516 A:middle
+Once user taps on the play icon,
+the media player I showed you
+
+00:25:24.516 --> 00:25:27.696 A:middle
+at the beginning shows
+up here automatically.
+
+00:25:27.696 --> 00:25:31.446 A:middle
+You don't have to write
+any code to do that.
+
+00:25:31.646 --> 00:25:33.736 A:middle
+So let me show you how
+to do that in Xcode.
+
+00:25:33.736 --> 00:25:37.376 A:middle
+In the new Xcode, you will
+find this movie object
+
+00:25:37.556 --> 00:25:38.816 A:middle
+in your object library.
+
+00:25:39.426 --> 00:25:41.906 A:middle
+You can drag and drop
+it into your storyboard,
+
+00:25:42.506 --> 00:25:46.686 A:middle
+and you can use the
+attribute inspector
+
+00:25:46.816 --> 00:25:50.936 A:middle
+to customize this movie object.
+
+00:25:51.446 --> 00:25:55.756 A:middle
+You can specify the video
+gravity, or the poster image.
+
+00:25:57.156 --> 00:25:59.646 A:middle
+You can also do this
+in code if you want
+
+00:25:59.646 --> 00:26:01.566 A:middle
+to dynamically configure this.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:59.646 --> 00:26:01.566 A:middle
+to dynamically configure this.
+
+00:26:02.336 --> 00:26:05.356 A:middle
+Suppose in your code you
+have member variables
+
+00:26:05.686 --> 00:26:09.826 A:middle
+for the content, and
+you have the URL for it,
+
+00:26:09.826 --> 00:26:12.656 A:middle
+and the poster image that
+represents the movie.
+
+00:26:12.656 --> 00:26:17.776 A:middle
+And you drag the IB outlet
+from the interface builder
+
+00:26:18.566 --> 00:26:22.696 A:middle
+and that represents the movie
+object that you are using.
+
+00:26:23.456 --> 00:26:27.306 A:middle
+And once you want to update
+your UI or your content has
+
+00:26:27.306 --> 00:26:29.516 A:middle
+to change, you can
+use this method
+
+00:26:29.846 --> 00:26:31.986 A:middle
+to configure your movie object.
+
+00:26:32.846 --> 00:26:36.876 A:middle
+And because the -- is so
+different on Apple Watch
+
+00:26:36.876 --> 00:26:44.226 A:middle
+than other iOS devices, we have
+a few specific media formats you
+
+00:26:44.226 --> 00:26:47.156 A:middle
+should use for any
+content you are trying
+
+00:26:47.156 --> 00:26:49.646 A:middle
+to play on Apple Watch.
+
+00:26:50.426 --> 00:26:54.286 A:middle
+If your content works
+best in full screen mode,
+
+00:26:54.746 --> 00:26:58.896 A:middle
+then the recommended
+resolution is 208 by 260.
+
+00:26:59.456 --> 00:27:05.356 A:middle
+If your content actually works
+best in a 16:9 aspect ratio,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:59.456 --> 00:27:05.356 A:middle
+If your content actually works
+best in a 16:9 aspect ratio,
+
+00:27:05.546 --> 00:27:09.746 A:middle
+the recommended resolution
+is 320 by 180.
+
+00:27:10.526 --> 00:27:13.536 A:middle
+If you follow this
+set of media specs,
+
+00:27:14.086 --> 00:27:17.876 A:middle
+you can expect the best result
+for your playback feature.
+
+00:27:19.156 --> 00:27:23.166 A:middle
+That's how easy you can play
+audio and video in your app.
+
+00:27:23.916 --> 00:27:25.566 A:middle
+The next feature I want to talk
+
+00:27:25.566 --> 00:27:28.226 A:middle
+about is called long
+form audio playback.
+
+00:27:29.486 --> 00:27:33.926 A:middle
+The features I showed you so
+far present some UI for you
+
+00:27:34.456 --> 00:27:37.556 A:middle
+and once the UI is dismissed,
+the playback will stop.
+
+00:27:38.466 --> 00:27:40.236 A:middle
+Long form audio is different.
+
+00:27:40.776 --> 00:27:46.186 A:middle
+It doesn't come with any
+built in UI for your app.
+
+00:27:47.196 --> 00:27:49.136 A:middle
+That means you can
+create your own,
+
+00:27:49.576 --> 00:27:52.526 A:middle
+and once your own
+UI is dismissed,
+
+00:27:53.266 --> 00:27:56.396 A:middle
+the playback can actually
+continue in the background.
+
+00:27:57.126 --> 00:28:02.846 A:middle
+A common use case for this is
+a podcast app or a music app.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:57.126 --> 00:28:02.846 A:middle
+A common use case for this is
+a podcast app or a music app.
+
+00:28:03.726 --> 00:28:07.736 A:middle
+The user might be listening to
+the audio tracks while he is
+
+00:28:07.736 --> 00:28:09.566 A:middle
+out for a run or
+doing a commute.
+
+00:28:11.036 --> 00:28:14.116 A:middle
+The audio for this feature
+would be routed only
+
+00:28:14.116 --> 00:28:16.596 A:middle
+to the paired bluetooth device.
+
+00:28:16.976 --> 00:28:19.756 A:middle
+And the playback
+status would be updated
+
+00:28:20.086 --> 00:28:21.756 A:middle
+in the now playing glance.
+
+00:28:22.466 --> 00:28:25.836 A:middle
+So it's very convenient for the
+user to control the playback.
+
+00:28:25.896 --> 00:28:29.536 A:middle
+Now, let me show you the API.
+
+00:28:30.456 --> 00:28:33.626 A:middle
+If you are familiar
+with AV foundation APIs,
+
+00:28:33.796 --> 00:28:36.016 A:middle
+you will think these
+are very familiar.
+
+00:28:37.456 --> 00:28:39.486 A:middle
+Let's say you have the URL
+
+00:28:39.526 --> 00:28:42.616 A:middle
+for the audio you
+are trying to play.
+
+00:28:42.966 --> 00:28:46.926 A:middle
+You can create an
+asset like this.
+
+00:28:46.926 --> 00:28:50.956 A:middle
+With this asset you can create
+the audio file player item.
+
+00:28:51.316 --> 00:28:56.216 A:middle
+The player item has
+the presentation status
+
+00:28:56.326 --> 00:28:57.496 A:middle
+for the asset.
+
+00:28:58.216 --> 00:29:01.056 A:middle
+And you can use KVO
+to observe the status.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:58.216 --> 00:29:01.056 A:middle
+And you can use KVO
+to observe the status.
+
+00:29:02.406 --> 00:29:04.406 A:middle
+Just like with AV
+foundation APIs.
+
+00:29:04.406 --> 00:29:08.196 A:middle
+And with the player item,
+you can create a player
+
+00:29:08.196 --> 00:29:09.586 A:middle
+and call play to play it.
+
+00:29:09.966 --> 00:29:10.686 A:middle
+Super simple!
+
+00:29:11.486 --> 00:29:15.966 A:middle
+For the example I
+mentioned, a podcast app,
+
+00:29:16.806 --> 00:29:22.426 A:middle
+you can create a list of items
+that you are trying to play,
+
+00:29:22.956 --> 00:29:28.516 A:middle
+and if you want to provide user
+a gapless listening experience,
+
+00:29:28.856 --> 00:29:31.556 A:middle
+instead of using
+audio file player,
+
+00:29:31.766 --> 00:29:33.696 A:middle
+just use audio file
+Queue player,
+
+00:29:33.696 --> 00:29:36.496 A:middle
+and that will give you
+exactly what you want.
+
+00:29:37.546 --> 00:29:40.156 A:middle
+Just like on other iOS devices,
+
+00:29:40.156 --> 00:29:45.406 A:middle
+if you want to create
+background mode playback,
+
+00:29:46.446 --> 00:29:47.766 A:middle
+you need to enable it
+
+00:29:47.926 --> 00:29:53.186 A:middle
+in the apps info list
+just like this in Xcode.
+
+00:29:53.896 --> 00:29:54.656 A:middle
+Super simple!
+
+00:29:55.206 --> 00:29:58.666 A:middle
+Now, I would like to take
+a couple of moments to talk
+
+00:29:58.666 --> 00:30:03.986 A:middle
+about where you should store all
+of this media data in your app.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:29:58.666 --> 00:30:03.986 A:middle
+about where you should store all
+of this media data in your app.
+
+00:30:04.076 --> 00:30:08.136 A:middle
+As you know now, your app on
+Apple Watch has two components.
+
+00:30:08.246 --> 00:30:11.216 A:middle
+One is the app, the
+other is the extension,
+
+00:30:11.436 --> 00:30:13.346 A:middle
+and when it's installed,
+
+00:30:13.696 --> 00:30:17.446 A:middle
+the extension bundle sits
+inside the app bundle.
+
+00:30:18.346 --> 00:30:23.866 A:middle
+Each component has a container
+for storing dynamic data,
+
+00:30:24.536 --> 00:30:27.156 A:middle
+and each container
+can only be accessed
+
+00:30:27.526 --> 00:30:29.786 A:middle
+by the individual component.
+
+00:30:31.086 --> 00:30:34.146 A:middle
+So let's say you have a static
+image that you want to use
+
+00:30:34.146 --> 00:30:37.386 A:middle
+in your app, and you
+want to use WK image,
+
+00:30:37.416 --> 00:30:40.526 A:middle
+image named to reference
+it, you should put it
+
+00:30:40.526 --> 00:30:43.296 A:middle
+in an asset catalog
+in the app bundle.
+
+00:30:44.136 --> 00:30:46.896 A:middle
+If you have other
+resources, for example,
+
+00:30:46.896 --> 00:30:51.006 A:middle
+audio or video playback, and
+the image data that you want
+
+00:30:51.006 --> 00:30:55.416 A:middle
+to directly manipulate in
+your code, you should put it
+
+00:30:55.416 --> 00:30:58.886 A:middle
+in the extension bundle, so that
+you can create the URL for them.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:00.676 --> 00:31:05.356 A:middle
+Now, in other cases, if you
+want to have dynamic content
+
+00:31:05.356 --> 00:31:09.366 A:middle
+for playback, you can either
+use watch connectivity
+
+00:31:09.366 --> 00:31:12.176 A:middle
+to grab those content
+from the iPhone,
+
+00:31:12.916 --> 00:31:16.806 A:middle
+or you can download your
+content from the internet
+
+00:31:16.936 --> 00:31:18.916 A:middle
+by using NSURL session.
+
+00:31:19.756 --> 00:31:21.816 A:middle
+For these contents,
+you cannot put them
+
+00:31:21.816 --> 00:31:26.316 A:middle
+in either container I show you
+here because they won't be able
+
+00:31:26.316 --> 00:31:29.986 A:middle
+to be accessed by both
+the app and the extension.
+
+00:31:30.236 --> 00:31:33.076 A:middle
+So what you need to do
+is create an app group,
+
+00:31:33.456 --> 00:31:36.056 A:middle
+which provides a
+shared container for you
+
+00:31:36.056 --> 00:31:38.946 A:middle
+to store these data and they
+can be accessed by both.
+
+00:31:40.036 --> 00:31:45.526 A:middle
+So that's all you need to know,
+and if you want to learn more
+
+00:31:45.526 --> 00:31:49.076 A:middle
+about app group, please take
+a look at this documentation.
+
+00:31:50.636 --> 00:31:54.046 A:middle
+The next feature I want to
+talk about is audio recording.
+
+00:31:54.766 --> 00:31:59.656 A:middle
+Let's take a look at the UI,
+and see how it works in action.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:00.516 --> 00:32:02.986 A:middle
+Once the user presses
+the record button,
+
+00:32:04.196 --> 00:32:07.146 A:middle
+the recording will start, and
+the wave form will be updated.
+
+00:32:07.656 --> 00:32:11.006 A:middle
+You can do this with
+just one function call.
+
+00:32:11.496 --> 00:32:16.326 A:middle
+In your interface
+controller sub class,
+
+00:32:16.596 --> 00:32:20.716 A:middle
+you can just call present
+audio recording controller
+
+00:32:20.716 --> 00:32:23.596 A:middle
+with output URL and
+specify the URL.
+
+00:32:24.116 --> 00:32:27.476 A:middle
+Now, you know this URL will
+point to the shared container.
+
+00:32:27.476 --> 00:32:30.686 A:middle
+And then you decide a preset.
+
+00:32:30.686 --> 00:32:33.216 A:middle
+I will talk about
+preset in a few seconds.
+
+00:32:33.216 --> 00:32:36.956 A:middle
+And then you can specify
+the maximum duration
+
+00:32:36.956 --> 00:32:37.866 A:middle
+for this recording.
+
+00:32:38.406 --> 00:32:41.216 A:middle
+It's really useful if you
+want to control the file size.
+
+00:32:42.496 --> 00:32:44.486 A:middle
+Right now, I set
+it to 60 seconds.
+
+00:32:45.826 --> 00:32:50.246 A:middle
+And you can also customize
+the action title which shows
+
+00:32:50.246 --> 00:32:52.466 A:middle
+up on the upper right-hand
+corner of the UI.
+
+00:32:53.546 --> 00:32:55.886 A:middle
+Suppose your app
+provides a feature
+
+00:32:55.886 --> 00:33:01.016 A:middle
+to send this recording output
+to another person, customize it
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:55.886 --> 00:33:01.016 A:middle
+to send this recording output
+to another person, customize it
+
+00:33:01.016 --> 00:33:03.276 A:middle
+to say 'send' would
+be appropriate.
+
+00:33:03.906 --> 00:33:05.756 A:middle
+Otherwise, the default
+will say 'done.'
+
+00:33:06.396 --> 00:33:08.466 A:middle
+You can also specify
+completion handler.
+
+00:33:08.466 --> 00:33:10.716 A:middle
+It will tell you if
+the content gets saved
+
+00:33:11.046 --> 00:33:12.156 A:middle
+and if there is any error.
+
+00:33:12.966 --> 00:33:14.226 A:middle
+Let's go back to the URL.
+
+00:33:14.986 --> 00:33:18.026 A:middle
+The URL has the file
+name, and the extension
+
+00:33:18.026 --> 00:33:21.016 A:middle
+of the file name actually
+determines what codec we are
+
+00:33:21.016 --> 00:33:23.206 A:middle
+going to use for
+generating the output.
+
+00:33:24.486 --> 00:33:29.436 A:middle
+These are the file types
+we supported, MP4 and 4A.
+
+00:33:29.606 --> 00:33:35.106 A:middle
+They will use AAC codec and
+wave will use PCM codec.
+
+00:33:35.786 --> 00:33:39.486 A:middle
+We support three
+different presets.
+
+00:33:39.486 --> 00:33:44.366 A:middle
+Each of them has different
+sample rate and based
+
+00:33:44.366 --> 00:33:46.086 A:middle
+on the codec you choose,
+
+00:33:46.386 --> 00:33:47.906 A:middle
+the output bit rate
+will be different.
+
+00:33:48.976 --> 00:33:53.306 A:middle
+As you expect, the higher
+the quality the output,
+
+00:33:53.586 --> 00:33:55.876 A:middle
+the output file will be larger.
+
+00:33:57.666 --> 00:34:00.356 A:middle
+So it depends on your use case.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:57.666 --> 00:34:00.356 A:middle
+So it depends on your use case.
+
+00:34:00.596 --> 00:34:03.496 A:middle
+So if you are recording
+for a voice memo case,
+
+00:34:03.996 --> 00:34:07.056 A:middle
+the narrow band speech
+preset will be ideal for you.
+
+00:34:07.846 --> 00:34:10.896 A:middle
+If you are trying to record
+something with higher quality,
+
+00:34:10.896 --> 00:34:14.876 A:middle
+maybe for post processing
+purpose, then you might want
+
+00:34:14.876 --> 00:34:17.025 A:middle
+to consider high
+quality audio preset.
+
+00:34:17.686 --> 00:34:19.076 A:middle
+With these presets,
+
+00:34:19.335 --> 00:34:22.246 A:middle
+audio recording becomes really
+straight forward and easy
+
+00:34:22.246 --> 00:34:23.735 A:middle
+to customize for your feature.
+
+00:34:24.206 --> 00:34:27.936 A:middle
+Next I would like to
+talk about security.
+
+00:34:27.936 --> 00:34:32.406 A:middle
+In watchOS 2 you can
+now use key chains
+
+00:34:32.406 --> 00:34:36.416 A:middle
+to store your user's
+sensitive data.
+
+00:34:37.696 --> 00:34:40.456 A:middle
+You can make those
+data only accessible
+
+00:34:40.505 --> 00:34:42.666 A:middle
+when the device is unlocked.
+
+00:34:43.576 --> 00:34:48.266 A:middle
+Apple Watch is unlocked when
+user enters the correct password
+
+00:34:49.045 --> 00:34:53.116 A:middle
+on the Apple Watch when the
+device is on the user's wrist.
+
+00:34:53.876 --> 00:34:58.866 A:middle
+And then the data always
+becomes available to you
+
+00:34:59.156 --> 00:35:03.606 A:middle
+until the user takes the
+watch off their wrist.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:59.156 --> 00:35:03.606 A:middle
+until the user takes the
+watch off their wrist.
+
+00:35:04.736 --> 00:35:08.586 A:middle
+This is really useful if you
+are creating a complication
+
+00:35:08.906 --> 00:35:10.266 A:middle
+for the watch face.
+
+00:35:11.216 --> 00:35:14.516 A:middle
+And in the complication you
+might be showing some user data
+
+00:35:15.716 --> 00:35:17.216 A:middle
+which is sensitive.
+
+00:35:18.446 --> 00:35:20.436 A:middle
+And so this is really important
+
+00:35:20.436 --> 00:35:22.776 A:middle
+to protect those
+data with key chains.
+
+00:35:23.716 --> 00:35:25.836 A:middle
+And one thing I want
+you to bear in mind is
+
+00:35:25.876 --> 00:35:28.396 A:middle
+that the key chains you create
+
+00:35:28.396 --> 00:35:32.216 A:middle
+on Apple Watch do not
+participate in key chain sync.
+
+00:35:32.966 --> 00:35:38.816 A:middle
+They are not icon key chains
+even though the usage is exactly
+
+00:35:38.816 --> 00:35:41.136 A:middle
+the same as other platform.
+
+00:35:41.796 --> 00:35:45.046 A:middle
+This is an example of
+creating a key chain
+
+00:35:45.046 --> 00:35:47.006 A:middle
+to store user credentials.
+
+00:35:47.466 --> 00:35:51.066 A:middle
+Suppose you have a secret
+password and you want
+
+00:35:51.066 --> 00:35:55.236 A:middle
+to store it, make
+it only accessible
+
+00:35:55.336 --> 00:35:59.406 A:middle
+when the device is unlocked,
+you can do something like this.
+
+00:35:59.666 --> 00:36:04.536 A:middle
+And call item add to
+add these tributes.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:35:59.666 --> 00:36:04.536 A:middle
+And call item add to
+add these tributes.
+
+00:36:05.556 --> 00:36:10.196 A:middle
+So you would create a key chain.
+
+00:36:10.256 --> 00:36:14.746 A:middle
+To summarize our talk
+today, at the beginning,
+
+00:36:14.746 --> 00:36:18.986 A:middle
+you heard Nathan introduce you
+to a few new styles of pickers.
+
+00:36:20.446 --> 00:36:22.766 A:middle
+Each of them can be controlled
+
+00:36:22.766 --> 00:36:25.606 A:middle
+by a Digital Crown
+that's really fun to use.
+
+00:36:26.306 --> 00:36:30.386 A:middle
+Then you heard me talk
+about media player for audio
+
+00:36:30.386 --> 00:36:35.196 A:middle
+and video, and you can
+also play long form audio
+
+00:36:35.196 --> 00:36:35.936 A:middle
+in the background.
+
+00:36:36.846 --> 00:36:39.406 A:middle
+For audio recording,
+now you can do this
+
+00:36:39.406 --> 00:36:41.156 A:middle
+in just a couple
+of lines of code.
+
+00:36:42.446 --> 00:36:46.436 A:middle
+And finally, in watchOS
+2 you can use keychain
+
+00:36:46.436 --> 00:36:47.846 A:middle
+to protect your user data.
+
+00:36:48.446 --> 00:36:52.876 A:middle
+If you need more information,
+take a look at this slide.
+
+00:36:53.566 --> 00:36:56.996 A:middle
+There is documentation in
+sample code that you want
+
+00:36:56.996 --> 00:37:02.716 A:middle
+to reference to, and there are a
+few related sessions throughout
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:56.996 --> 00:37:02.716 A:middle
+to reference to, and there are a
+few related sessions throughout
+
+00:37:02.716 --> 00:37:06.396 A:middle
+this week you can attend
+in person or take a look
+
+00:37:06.396 --> 00:37:08.336 A:middle
+at the video recording.
+
+00:37:08.656 --> 00:37:09.806 A:middle
+Thank you for listening!
+
+00:37:10.516 --> 00:37:14.500 A:middle
+[Applause]
+

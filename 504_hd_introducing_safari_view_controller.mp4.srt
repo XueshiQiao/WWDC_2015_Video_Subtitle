@@ -1,0 +1,2464 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:06.716 --> 00:00:10.806 A:middle
+&gt;&gt; RICKY MONDELLO: Good
+afternoon everyone.
+
+00:00:22.376 --> 00:00:32.066 A:middle
+Welcome. Before we get
+started I just want
+
+00:00:32.066 --> 00:00:34.256 A:middle
+to get a little feel
+for the crowd.
+
+00:00:34.606 --> 00:00:36.036 A:middle
+Little show of hands.
+
+00:00:36.716 --> 00:00:37.796 A:middle
+Please raise your hand
+
+00:00:37.796 --> 00:00:39.986 A:middle
+if you have an app that's
+currently being distributed
+
+00:00:39.986 --> 00:00:40.896 A:middle
+on one of the App Stores.
+
+00:00:41.646 --> 00:00:42.846 A:middle
+That's a lot of you.
+
+00:00:43.096 --> 00:00:44.946 A:middle
+Welcome, you're at the
+right place, it's WWDC.
+
+00:00:45.576 --> 00:00:48.706 A:middle
+And how many of you are just
+learning how to write iOS, Mac,
+
+00:00:48.706 --> 00:00:50.466 A:middle
+or Watch apps now and
+just getting started?
+
+00:00:50.466 --> 00:00:52.306 A:middle
+A few of you.
+
+00:00:52.466 --> 00:00:53.726 A:middle
+Welcome to you as well.
+
+00:00:54.326 --> 00:00:57.196 A:middle
+And of all of those apps that
+you've built or you're thinking
+
+00:00:57.196 --> 00:01:01.196 A:middle
+about building, how many of them
+are a dedicated web browser?
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:57.196 --> 00:01:01.196 A:middle
+about building, how many of them
+are a dedicated web browser?
+
+00:01:02.526 --> 00:01:03.966 A:middle
+Okay. A few of you.
+
+00:01:04.696 --> 00:01:05.355 A:middle
+Not that many.
+
+00:01:07.036 --> 00:01:09.366 A:middle
+But how many of you have a
+miniature web browser that's
+
+00:01:09.366 --> 00:01:12.426 A:middle
+within your application that you
+show whenever a user taps on --
+
+00:01:12.426 --> 00:01:13.446 A:middle
+oh my God, all the hands are up.
+
+00:01:13.816 --> 00:01:17.696 A:middle
+Yes, my name is Ricky Mondello,
+I'm an engineer on the Safari
+
+00:01:17.696 --> 00:01:21.636 A:middle
+and WebKit team, and my goal for
+the next half hour is to get all
+
+00:01:21.636 --> 00:01:22.786 A:middle
+of you out of the business
+
+00:01:22.786 --> 00:01:24.506 A:middle
+of writing those
+miniature web browsers.
+
+00:01:25.186 --> 00:01:27.126 A:middle
+(Cheers and applause.)
+
+00:01:29.806 --> 00:01:31.336 A:middle
+&gt;&gt; RICKY MONDELLO: I'm going
+
+00:01:31.336 --> 00:01:33.726 A:middle
+to show you how you
+can use either Safari
+
+00:01:34.386 --> 00:01:38.056 A:middle
+or the new Safari View
+Controller to give you more time
+
+00:01:38.056 --> 00:01:39.446 A:middle
+to focus on the parts
+of your app
+
+00:01:40.066 --> 00:01:41.076 A:middle
+that are special to your app.
+
+00:01:41.596 --> 00:01:43.206 A:middle
+And to give your users features
+
+00:01:43.206 --> 00:01:44.736 A:middle
+that they already
+love from Safari.
+
+00:01:45.736 --> 00:01:46.796 A:middle
+So if you're ready,
+let's get started.
+
+00:01:47.426 --> 00:01:52.096 A:middle
+At the center of this
+topic is web content.
+
+00:01:52.816 --> 00:01:55.126 A:middle
+And web content comes in all
+sorts of different shapes
+
+00:01:55.126 --> 00:01:58.026 A:middle
+and sizes, but for today's
+discussion I'm going to lump it
+
+00:01:58.026 --> 00:01:59.916 A:middle
+into two different buckets.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:00.656 --> 00:02:03.316 A:middle
+The first bucket is
+content within your app
+
+00:02:03.826 --> 00:02:07.526 A:middle
+that just happens to be written
+in HTML, JavaScript, and CSS.
+
+00:02:08.166 --> 00:02:10.406 A:middle
+It's content that
+you own or content
+
+00:02:10.406 --> 00:02:12.216 A:middle
+that you're giving a
+special presentation to.
+
+00:02:13.116 --> 00:02:15.566 A:middle
+The important part, is that
+it's not content that looks
+
+00:02:15.566 --> 00:02:16.816 A:middle
+like a traditional web browser.
+
+00:02:17.356 --> 00:02:19.306 A:middle
+It's not when a user is
+browsing on a website.
+
+00:02:20.616 --> 00:02:22.026 A:middle
+Which brings us to
+the second case.
+
+00:02:22.526 --> 00:02:26.146 A:middle
+When a user taps a link
+in your app and you want
+
+00:02:26.146 --> 00:02:27.986 A:middle
+to show them a view
+that's kind of like Safari,
+
+00:02:28.336 --> 00:02:30.036 A:middle
+so they can do some
+short-term browsing.
+
+00:02:31.616 --> 00:02:35.526 A:middle
+This session is primarily
+focused on the second use case.
+
+00:02:36.026 --> 00:02:37.726 A:middle
+We're going to see
+how both Safari
+
+00:02:38.026 --> 00:02:41.456 A:middle
+and Safari View Controller
+can add years of features
+
+00:02:41.456 --> 00:02:43.036 A:middle
+and polish to your applications.
+
+00:02:44.036 --> 00:02:46.066 A:middle
+But before we do
+that I want to touch
+
+00:02:46.066 --> 00:02:47.306 A:middle
+on that other use
+case real quick.
+
+00:02:47.706 --> 00:02:51.216 A:middle
+If you're using web content
+within your app but in a way
+
+00:02:51.216 --> 00:02:51.786 A:middle
+that doesn't look
+
+00:02:51.786 --> 00:02:55.676 A:middle
+like a traditional web browser
+you might be using WKWebView
+
+00:02:56.076 --> 00:02:59.896 A:middle
+or UIWebView, but WKWebView
+is the preferred tool
+
+00:02:59.896 --> 00:03:01.696 A:middle
+to do this; it's your friend.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:59.896 --> 00:03:01.696 A:middle
+to do this; it's your friend.
+
+00:03:02.896 --> 00:03:06.136 A:middle
+It was introduced in
+iOS 8 and OS X Yosemite,
+
+00:03:06.876 --> 00:03:09.416 A:middle
+and basically it's just a
+rectangle around web content.
+
+00:03:10.536 --> 00:03:14.166 A:middle
+You load a page into it,
+you can evaluate JavaScript
+
+00:03:14.166 --> 00:03:15.716 A:middle
+and get a result
+from that JavaScript
+
+00:03:15.716 --> 00:03:16.716 A:middle
+against the current page.
+
+00:03:17.736 --> 00:03:20.226 A:middle
+You can modify navigations
+or outright block them.
+
+00:03:20.926 --> 00:03:23.056 A:middle
+And it's up to you to add
+your own user interface.
+
+00:03:23.716 --> 00:03:27.556 A:middle
+Back, forward buttons,
+communicate progress, et cetera.
+
+00:03:28.256 --> 00:03:33.856 A:middle
+And new on iOS 9 and OS X
+El Capitan we've heard your
+
+00:03:33.856 --> 00:03:36.416 A:middle
+feedback and we've
+incorporated some of the pieces
+
+00:03:36.486 --> 00:03:38.406 A:middle
+of WKWebView that were missing.
+
+00:03:40.056 --> 00:03:43.946 A:middle
+First and foremost, you can
+securely loadFileURLs now.
+
+00:03:45.146 --> 00:03:45.436 A:middle
+(Applause.)
+
+00:03:49.726 --> 00:03:52.306 A:middle
+&gt;&gt; RICKY MONDELLO:
+You can also loadData,
+
+00:03:52.306 --> 00:03:55.156 A:middle
+say literal HTML string
+that you wanted this way.
+
+00:03:55.806 --> 00:03:57.126 A:middle
+No need to spin up a server.
+
+00:03:57.426 --> 00:04:02.066 A:middle
+And if you like, you can set
+your own customUserAgent string.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:57.426 --> 00:04:02.066 A:middle
+And if you like, you can set
+your own customUserAgent string.
+
+00:04:02.866 --> 00:04:03.246 A:middle
+(Applause.)
+
+00:04:07.966 --> 00:04:11.206 A:middle
+We've also added a new API to
+manage the data that is stored
+
+00:04:11.206 --> 00:04:14.526 A:middle
+by websites like cookies
+and caches and other stuff.
+
+00:04:14.616 --> 00:04:17.896 A:middle
+And it's called
+WKWebsiteDataStore.
+
+00:04:18.486 --> 00:04:21.276 A:middle
+It's a read/write property
+
+00:04:21.396 --> 00:04:23.886 A:middle
+on your web view's
+WKWebViewConfiguration.
+
+00:04:24.896 --> 00:04:28.116 A:middle
+And with the data store you
+can remove data by its type
+
+00:04:28.816 --> 00:04:31.936 A:middle
+or you can do something like
+remove all data that was added
+
+00:04:31.936 --> 00:04:33.806 A:middle
+in the last hour,
+which is pretty cool.
+
+00:04:34.406 --> 00:04:37.336 A:middle
+And because the property,
+
+00:04:37.626 --> 00:04:41.526 A:middle
+the store on your configuration
+is writable you can replace it
+
+00:04:41.526 --> 00:04:43.446 A:middle
+with a configuration
+that's non-persistent
+
+00:04:43.876 --> 00:04:45.036 A:middle
+which is exactly how you'd go
+
+00:04:45.036 --> 00:04:46.466 A:middle
+about implementing
+private browsing.
+
+00:04:47.166 --> 00:04:53.366 A:middle
+So for web content that's
+in your app that you own,
+
+00:04:53.366 --> 00:04:55.426 A:middle
+you control, or you're
+customizing,
+
+00:04:55.986 --> 00:04:58.246 A:middle
+WKWebView is the right
+tool for the job.
+
+00:04:59.116 --> 00:05:03.936 A:middle
+And in iOS 9 and OS X El Capitan
+we've given you more flexibility
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:59.116 --> 00:05:03.936 A:middle
+And in iOS 9 and OS X El Capitan
+we've given you more flexibility
+
+00:05:03.936 --> 00:05:04.756 A:middle
+than ever before.
+
+00:05:04.756 --> 00:05:10.476 A:middle
+But if you've have been sitting
+here thinking: I don't need
+
+00:05:10.476 --> 00:05:12.356 A:middle
+that flexibility, I don't want
+
+00:05:12.356 --> 00:05:14.236 A:middle
+to evaluate JavaScript
+against the page.
+
+00:05:14.886 --> 00:05:17.116 A:middle
+I don't need to modify
+navigations.
+
+00:05:17.276 --> 00:05:19.926 A:middle
+I don't want to wire up my
+own back and forward buttons,
+
+00:05:20.766 --> 00:05:22.076 A:middle
+then the rest of
+this talk is for you.
+
+00:05:25.836 --> 00:05:28.296 A:middle
+We're going to talk about
+how you can use either Safari
+
+00:05:28.706 --> 00:05:31.546 A:middle
+or Safari View Controller
+to get a better experience
+
+00:05:31.546 --> 00:05:34.586 A:middle
+for your users and to give
+you less code to write.
+
+00:05:35.316 --> 00:05:37.036 A:middle
+And your first option is
+
+00:05:37.036 --> 00:05:39.296 A:middle
+to simply delegate
+the responsibility
+
+00:05:39.296 --> 00:05:41.416 A:middle
+of showing web content
+to Safari itself.
+
+00:05:41.966 --> 00:05:44.036 A:middle
+And this is super easy to do.
+
+00:05:44.326 --> 00:05:47.156 A:middle
+You just call UIApplications,
+openURL method
+
+00:05:47.716 --> 00:05:50.616 A:middle
+and iOS will switch away from
+your app and over to Safari.
+
+00:05:51.296 --> 00:05:55.786 A:middle
+And new to iOS 9,
+the system affordance
+
+00:05:55.786 --> 00:05:58.296 A:middle
+that you saw yesterday for
+going back to the last app,
+
+00:05:58.716 --> 00:06:00.216 A:middle
+makes this a better
+option than ever.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:58.716 --> 00:06:00.216 A:middle
+makes this a better
+option than ever.
+
+00:06:00.696 --> 00:06:02.626 A:middle
+It's more lightweight
+than iOS 8 was.
+
+00:06:02.626 --> 00:06:02.856 A:middle
+(Applause.)
+
+00:06:08.036 --> 00:06:10.796 A:middle
+&gt;&gt; RICKY MONDELLO: And
+delegating the responsibility
+
+00:06:10.796 --> 00:06:13.246 A:middle
+of showing web content
+to Safari ensures
+
+00:06:13.246 --> 00:06:15.356 A:middle
+that users get a
+first class experience
+
+00:06:15.356 --> 00:06:16.266 A:middle
+with that web content.
+
+00:06:16.846 --> 00:06:18.076 A:middle
+That's what Safari is all about.
+
+00:06:19.396 --> 00:06:22.286 A:middle
+But if you'd like to maintain
+your app's current experience,
+
+00:06:22.706 --> 00:06:26.016 A:middle
+where users never even leave
+your app, then you're going
+
+00:06:26.016 --> 00:06:27.796 A:middle
+to be interested in
+Safari View Controller.
+
+00:06:29.176 --> 00:06:30.566 A:middle
+Let's take a look.
+
+00:06:32.296 --> 00:06:35.626 A:middle
+This is Safari View Controller
+with the page from apple.com
+
+00:06:35.806 --> 00:06:38.146 A:middle
+with the web contents
+slightly grayed out.
+
+00:06:39.456 --> 00:06:41.726 A:middle
+The first thing you'll
+probably notice is
+
+00:06:41.726 --> 00:06:44.366 A:middle
+that Safari View Controller
+looks a lot like Safari
+
+00:06:44.866 --> 00:06:46.336 A:middle
+with a few intentional
+differences.
+
+00:06:47.646 --> 00:06:50.856 A:middle
+Safari View Controller's
+job is to make it fast,
+
+00:06:50.946 --> 00:06:54.066 A:middle
+easy and enjoyable for users to
+tap on a link within your app,
+
+00:06:55.236 --> 00:06:58.456 A:middle
+view a web page and press done
+to go right back to your app.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:00.006 --> 00:07:02.336 A:middle
+Safari View Controller
+eliminates distractions.
+
+00:07:03.126 --> 00:07:05.826 A:middle
+The URL field that you see
+up there, it's read only.
+
+00:07:06.136 --> 00:07:06.986 A:middle
+You can't change it.
+
+00:07:06.986 --> 00:07:09.136 A:middle
+And there's just this one page.
+
+00:07:09.486 --> 00:07:11.206 A:middle
+No other tabs to
+distract the user.
+
+00:07:11.746 --> 00:07:14.316 A:middle
+And with Safari in the name,
+
+00:07:14.706 --> 00:07:16.746 A:middle
+Safari View Controller
+brings features
+
+00:07:17.586 --> 00:07:19.736 A:middle
+that your users already
+love from Safari,
+
+00:07:20.486 --> 00:07:22.096 A:middle
+but now they're in your app.
+
+00:07:23.156 --> 00:07:25.346 A:middle
+Let's start off, first
+
+00:07:25.346 --> 00:07:28.286 A:middle
+and foremost Safari View
+Controller shares cookies
+
+00:07:28.286 --> 00:07:30.016 A:middle
+with Safari and other
+website data.
+
+00:07:31.086 --> 00:07:34.126 A:middle
+So what this means is if one
+of your users is already logged
+
+00:07:34.126 --> 00:07:38.376 A:middle
+into a website in Safari, if
+they tap a link in your app
+
+00:07:38.376 --> 00:07:39.546 A:middle
+and Safari View Controller comes
+
+00:07:39.546 --> 00:07:41.466 A:middle
+up they might still
+be logged in.
+
+00:07:42.366 --> 00:07:43.966 A:middle
+But if they're not
+logged in already,
+
+00:07:44.366 --> 00:07:45.366 A:middle
+we've got that covered too,
+
+00:07:46.756 --> 00:07:48.656 A:middle
+because Safari View
+Controller allows you
+
+00:07:48.656 --> 00:07:52.166 A:middle
+to use Password Autofill to
+fill any of the passwords synced
+
+00:07:52.166 --> 00:07:55.096 A:middle
+across all of the user's
+devices with iCloud Keychain.
+
+00:07:56.226 --> 00:07:59.196 A:middle
+But before we go further it's
+really important to point
+
+00:07:59.196 --> 00:08:02.316 A:middle
+out this is completely
+safe for your users.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:59.196 --> 00:08:02.316 A:middle
+out this is completely
+safe for your users.
+
+00:08:02.676 --> 00:08:05.386 A:middle
+And the reason that
+this is safe is
+
+00:08:05.386 --> 00:08:08.906 A:middle
+because we're giving your users
+access to their credentials,
+
+00:08:09.176 --> 00:08:12.346 A:middle
+their user names and passwords,
+but we're not giving access
+
+00:08:12.346 --> 00:08:13.796 A:middle
+to the host app to this data.
+
+00:08:14.916 --> 00:08:18.716 A:middle
+In fact, Safari View Controller
+runs in a separate process
+
+00:08:18.716 --> 00:08:19.636 A:middle
+from your application.
+
+00:08:20.186 --> 00:08:23.086 A:middle
+Which categorically frees
+you from the responsibility
+
+00:08:23.206 --> 00:08:25.946 A:middle
+of thinking about this
+important sensitive user data.
+
+00:08:26.786 --> 00:08:27.326 A:middle
+That's on us.
+
+00:08:27.396 --> 00:08:29.986 A:middle
+All right, let's go
+back to features.
+
+00:08:30.556 --> 00:08:35.216 A:middle
+When a user wants to have
+something shipped to their home
+
+00:08:35.216 --> 00:08:38.696 A:middle
+or to their work they'll be able
+to use Contact Card Autofill
+
+00:08:38.696 --> 00:08:41.056 A:middle
+to fill that information just
+like they could in Safari.
+
+00:08:41.746 --> 00:08:45.526 A:middle
+And when it comes time to make
+a purchase they'll be able
+
+00:08:45.526 --> 00:08:50.216 A:middle
+to fill their credit
+cards as well.
+
+00:08:50.406 --> 00:08:51.616 A:middle
+And if one of your users comes
+
+00:08:51.616 --> 00:08:55.896 A:middle
+across an article that's
+interesting, compelling,
+
+00:08:56.366 --> 00:08:58.856 A:middle
+but difficult to
+read, she will be able
+
+00:08:58.856 --> 00:09:01.496 A:middle
+to use the Safari
+Reader button in order
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:58.856 --> 00:09:01.496 A:middle
+to use the Safari
+Reader button in order
+
+00:09:01.496 --> 00:09:05.146 A:middle
+to show a simplified cleaned
+up version of that content.
+
+00:09:05.736 --> 00:09:06.316 A:middle
+Super great.
+
+00:09:06.446 --> 00:09:10.946 A:middle
+And new to iOS 9 in both
+Safari and, of course,
+
+00:09:10.946 --> 00:09:14.246 A:middle
+in Safari View Controller,
+Reader is customizable,
+
+00:09:14.946 --> 00:09:17.366 A:middle
+offering a bunch of themes
+and some fonts to choose from.
+
+00:09:17.856 --> 00:09:19.596 A:middle
+So it's never been
+easier to read articles
+
+00:09:19.596 --> 00:09:23.296 A:middle
+on the web exactly the way you
+want to and your users want to.
+
+00:09:26.866 --> 00:09:29.946 A:middle
+From the share button you'll
+find exactly what you expect.
+
+00:09:31.346 --> 00:09:33.986 A:middle
+You'll find the system
+wide options for sharing
+
+00:09:34.326 --> 00:09:37.356 A:middle
+to social networks and you'll
+also find the ability to add
+
+00:09:37.356 --> 00:09:39.716 A:middle
+to one's reading list,
+but that's not all
+
+00:09:39.716 --> 00:09:40.376 A:middle
+that you'll find here.
+
+00:09:41.416 --> 00:09:44.286 A:middle
+Because alongside these
+activities are activities
+
+00:09:44.286 --> 00:09:46.716 A:middle
+that your app provides to
+Safari View Controller.
+
+00:09:47.866 --> 00:09:49.976 A:middle
+So if your app is
+a social network,
+
+00:09:50.366 --> 00:09:52.526 A:middle
+you can have a dedicated
+button in the share sheet
+
+00:09:52.736 --> 00:09:55.356 A:middle
+to share the current web
+page to the social network.
+
+00:09:56.066 --> 00:09:56.536 A:middle
+Really cool.
+
+00:09:57.106 --> 00:09:59.946 A:middle
+And while we're on the
+topic of customization,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:00.956 --> 00:10:04.126 A:middle
+Safari View Controller will
+respect a custom tint color
+
+00:10:04.416 --> 00:10:06.606 A:middle
+that your app sets on it.
+
+00:10:06.606 --> 00:10:09.996 A:middle
+So in this case up on the slide
+the tint color has been changed
+
+00:10:09.996 --> 00:10:12.216 A:middle
+from Safari's default
+blue to orange.
+
+00:10:12.966 --> 00:10:15.186 A:middle
+This is a great way to let
+users know which app they're
+
+00:10:15.186 --> 00:10:16.826 A:middle
+in when using Safari
+View Controller.
+
+00:10:18.756 --> 00:10:22.826 A:middle
+This next feature is really
+awesome and it's new to iOS 9.
+
+00:10:24.006 --> 00:10:27.316 A:middle
+It's called Content
+Blocking -- go ahead!
+
+00:10:27.316 --> 00:10:27.736 A:middle
+(Chuckles.)
+
+00:10:27.736 --> 00:10:27.926 A:middle
+(Applause.)
+
+00:10:31.966 --> 00:10:33.786 A:middle
+&gt;&gt; RICKY MONDELLO: So the big
+idea behind Content Blocking,
+
+00:10:34.326 --> 00:10:36.746 A:middle
+is that it's possible to add
+something to the experience
+
+00:10:36.746 --> 00:10:39.376 A:middle
+of viewing a web page by
+taking something away.
+
+00:10:40.386 --> 00:10:44.346 A:middle
+In iOS 9, any app can write
+a description of web content
+
+00:10:44.676 --> 00:10:47.716 A:middle
+that Safari and Safari View
+Controller should block
+
+00:10:47.716 --> 00:10:48.976 A:middle
+as the user browses the Web.
+
+00:10:48.976 --> 00:10:50.966 A:middle
+So lets take a look
+at an example.
+
+00:10:51.536 --> 00:10:56.446 A:middle
+Here's a web page that has
+some pretty cool content,
+
+00:10:57.076 --> 00:10:59.486 A:middle
+but in my case I
+really don't like all
+
+00:10:59.486 --> 00:11:01.676 A:middle
+of the clickbait headlines
+that are in that side bar.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:59.486 --> 00:11:01.676 A:middle
+of the clickbait headlines
+that are in that side bar.
+
+00:11:02.536 --> 00:11:05.056 A:middle
+So if you install the right
+content blocker you won't
+
+00:11:05.056 --> 00:11:06.156 A:middle
+believe what happens next.
+
+00:11:06.566 --> 00:11:06.796 A:middle
+(Chuckles.)
+
+00:11:07.046 --> 00:11:08.586 A:middle
+Oh, well, you will.
+
+00:11:10.266 --> 00:11:11.196 A:middle
+The content disappears.
+
+00:11:15.626 --> 00:11:15.806 A:middle
+(Applause.)
+
+00:11:16.596 --> 00:11:17.356 A:middle
+&gt;&gt; RICKY MONDELLO:
+But that's not all
+
+00:11:17.356 --> 00:11:18.956 A:middle
+that Content Blocking
+is capable of.
+
+00:11:19.476 --> 00:11:21.126 A:middle
+Content Blocking
+can do a lot more
+
+00:11:21.126 --> 00:11:22.956 A:middle
+than hiding elements on a page.
+
+00:11:23.546 --> 00:11:25.716 A:middle
+You can out right block
+loads from happening.
+
+00:11:26.316 --> 00:11:28.846 A:middle
+You can block all
+images or all scripts
+
+00:11:28.896 --> 00:11:31.506 A:middle
+from a third-party domain that
+you're not really fond of.
+
+00:11:32.556 --> 00:11:35.006 A:middle
+And all of the content
+blockers that a user turns
+
+00:11:35.056 --> 00:11:38.126 A:middle
+on in settings will
+apply in both Safari
+
+00:11:38.746 --> 00:11:40.016 A:middle
+and in Safari View Controller.
+
+00:11:41.176 --> 00:11:42.416 A:middle
+So what this means for you is
+
+00:11:42.946 --> 00:11:45.286 A:middle
+after you've switched
+your miniature web browser
+
+00:11:45.286 --> 00:11:48.816 A:middle
+implementation over to using
+Safari View Controller you won't
+
+00:11:48.816 --> 00:11:50.986 A:middle
+get any complaints that
+your users' ad blocker is
+
+00:11:50.986 --> 00:11:51.426 A:middle
+not working.
+
+00:11:52.206 --> 00:11:53.226 A:middle
+Pretty cool.
+
+00:11:54.296 --> 00:11:55.496 A:middle
+So that's a bunch of features.
+
+00:11:56.556 --> 00:11:57.706 A:middle
+Let's talk about safety.
+
+00:11:58.286 --> 00:12:02.346 A:middle
+I mentioned a moment ago that
+Safari View Controller runs
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:58.286 --> 00:12:02.346 A:middle
+I mentioned a moment ago that
+Safari View Controller runs
+
+00:12:02.346 --> 00:12:05.306 A:middle
+in a separate process from your
+app which frees you from a lot
+
+00:12:05.306 --> 00:12:07.996 A:middle
+of responsibilities of thinking
+about important user data.
+
+00:12:08.826 --> 00:12:11.176 A:middle
+But when it comes to
+browsing web content,
+
+00:12:11.916 --> 00:12:14.456 A:middle
+it's just as important to
+have an expressive interface
+
+00:12:14.546 --> 00:12:16.296 A:middle
+that communicates
+security to a user,
+
+00:12:16.996 --> 00:12:19.406 A:middle
+and Safari View Controller
+does the same exact job
+
+00:12:19.696 --> 00:12:20.986 A:middle
+that Safari does in this regard.
+
+00:12:21.496 --> 00:12:25.046 A:middle
+First and foremost secure pages.
+
+00:12:25.846 --> 00:12:28.856 A:middle
+Safari View Controller
+communicates the validity of SSL
+
+00:12:29.346 --> 00:12:31.196 A:middle
+to your users just
+like Safari does.
+
+00:12:32.476 --> 00:12:34.876 A:middle
+But if the user is having
+a bad day and they come
+
+00:12:34.876 --> 00:12:35.966 A:middle
+across a phishing page,
+
+00:12:36.736 --> 00:12:38.976 A:middle
+Safari View Controller will
+also warn them about that
+
+00:12:39.096 --> 00:12:40.466 A:middle
+and ask them to turn around,
+
+00:12:41.016 --> 00:12:42.966 A:middle
+exactly the same way
+that Safari would.
+
+00:12:43.546 --> 00:12:49.556 A:middle
+So to recap, Safari View
+Controller has all the great
+
+00:12:49.556 --> 00:12:51.336 A:middle
+features of Safari itself.
+
+00:12:51.636 --> 00:12:53.306 A:middle
+The features that your
+users already love.
+
+00:12:54.306 --> 00:12:57.576 A:middle
+Like the ability to fill their
+passwords, have shared cookies,
+
+00:12:58.186 --> 00:12:59.906 A:middle
+clean up articles
+with Safari Reader
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:00.306 --> 00:13:02.686 A:middle
+and in iOS 9, Content Blocking.
+
+00:13:03.996 --> 00:13:06.236 A:middle
+There are also a few
+other minor things
+
+00:13:06.966 --> 00:13:10.126 A:middle
+like correctly communicating
+progress while progress is
+
+00:13:10.126 --> 00:13:11.496 A:middle
+loading with a nice
+progress bar.
+
+00:13:12.626 --> 00:13:14.426 A:middle
+And showing informative
+error pages
+
+00:13:14.426 --> 00:13:16.336 A:middle
+when something goes
+wrong during a load.
+
+00:13:17.256 --> 00:13:20.076 A:middle
+Your miniature web browsers
+may or may not be doing all
+
+00:13:20.076 --> 00:13:23.746 A:middle
+of these things, but with Safari
+View Controller it doesn't have
+
+00:13:23.816 --> 00:13:27.906 A:middle
+to, because adopting it will
+add years of Safari features
+
+00:13:27.906 --> 00:13:30.646 A:middle
+and polish to your
+apps and future years
+
+00:13:30.646 --> 00:13:32.226 A:middle
+of polish in the future.
+
+00:13:32.776 --> 00:13:36.996 A:middle
+I'm happy to say that adopting
+Safari View Controller is
+
+00:13:36.996 --> 00:13:37.656 A:middle
+really easy.
+
+00:13:38.906 --> 00:13:43.166 A:middle
+Let's take a quick
+walk through the API.
+
+00:13:43.416 --> 00:13:46.136 A:middle
+In code, Safari View
+Controller is known
+
+00:13:46.526 --> 00:13:48.296 A:middle
+as SFSafariViewController.
+
+00:13:48.866 --> 00:13:50.646 A:middle
+It's part of the Safari
+Services Framework.
+
+00:13:51.606 --> 00:13:53.736 A:middle
+And as you might have
+guessed it's a subclass
+
+00:13:53.736 --> 00:13:54.646 A:middle
+of UIViewController.
+
+00:13:55.236 --> 00:13:59.166 A:middle
+It has a delegate which
+I'll get to in a moment,
+
+00:13:59.956 --> 00:14:02.096 A:middle
+and initializer which
+takes a URL.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:59.956 --> 00:14:02.096 A:middle
+and initializer which
+takes a URL.
+
+00:14:02.826 --> 00:14:05.256 A:middle
+This is the URL of the web
+page that your user tapped on,
+
+00:14:05.796 --> 00:14:06.906 A:middle
+the web page that
+you want to show.
+
+00:14:08.206 --> 00:14:10.086 A:middle
+Let's look at that
+delegate real quick.
+
+00:14:12.256 --> 00:14:15.506 A:middle
+The first method in the delegate
+is how you can provide your own
+
+00:14:15.506 --> 00:14:17.176 A:middle
+custom activities
+to the share sheet
+
+00:14:17.486 --> 00:14:18.796 A:middle
+when the user taps
+on the share button.
+
+00:14:19.376 --> 00:14:23.656 A:middle
+And the second delegate method
+is called when the user taps
+
+00:14:23.656 --> 00:14:25.396 A:middle
+on the done button, when
+they're done browsing.
+
+00:14:25.916 --> 00:14:27.656 A:middle
+You're going to want to
+implement this in order
+
+00:14:27.656 --> 00:14:28.926 A:middle
+to dismiss the View Controller.
+
+00:14:29.416 --> 00:14:35.296 A:middle
+Taken all together it's
+a pretty simple API.
+
+00:14:35.296 --> 00:14:39.776 A:middle
+And to show you just how
+powerful this simple API can be
+
+00:14:40.206 --> 00:14:42.686 A:middle
+and how many lines of code it
+will remove from your apps,
+
+00:14:43.276 --> 00:14:45.336 A:middle
+I'm delighted to invite
+my colleague Yongjun
+
+00:14:45.336 --> 00:14:46.736 A:middle
+to the stage for a demo.
+
+00:14:47.306 --> 00:14:47.626 A:middle
+Yongjun.
+
+00:14:56.136 --> 00:14:58.256 A:middle
+&gt;&gt; YONGJUN ZHANG:
+Thank you, Ricky.
+
+00:14:58.416 --> 00:14:59.026 A:middle
+Hi, everyone.
+
+00:14:59.086 --> 00:15:00.106 A:middle
+My name is Yongjun.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:59.086 --> 00:15:00.106 A:middle
+My name is Yongjun.
+
+00:15:00.366 --> 00:15:02.196 A:middle
+I'm a Safari and
+WebKit engineer.
+
+00:15:02.806 --> 00:15:07.286 A:middle
+I don't know about
+you, but I really want
+
+00:15:07.286 --> 00:15:08.326 A:middle
+to have some pizza today.
+
+00:15:09.506 --> 00:15:12.956 A:middle
+So I'm writing an app to
+find pizza stores around me.
+
+00:15:14.286 --> 00:15:15.086 A:middle
+Here it is.
+
+00:15:15.976 --> 00:15:16.896 A:middle
+I call it pizza finder.
+
+00:15:17.586 --> 00:15:18.966 A:middle
+I got a list of pizza stores.
+
+00:15:20.026 --> 00:15:23.456 A:middle
+If I select the first store, I
+got the phone number, address,
+
+00:15:24.096 --> 00:15:26.696 A:middle
+I also get a link to the
+website of the store.
+
+00:15:28.086 --> 00:15:31.146 A:middle
+My task now is to make
+my app show the website
+
+00:15:31.706 --> 00:15:35.166 A:middle
+so I can know more
+about a store.
+
+00:15:35.366 --> 00:15:38.276 A:middle
+As Rick mentioned we
+got three options.
+
+00:15:39.146 --> 00:15:44.206 A:middle
+Option one, use openURL and let
+Safari open the website for us.
+
+00:15:45.406 --> 00:15:47.736 A:middle
+Option two, you establish
+a web view
+
+00:15:48.476 --> 00:15:51.156 A:middle
+and make our own browsing app.
+
+00:15:51.156 --> 00:15:53.526 A:middle
+And option three, use
+Safari View Controller.
+
+00:15:54.396 --> 00:15:56.056 A:middle
+I am going to try
+option one first.
+
+00:15:57.376 --> 00:15:58.916 A:middle
+So I go to my Xcode project.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:00.036 --> 00:16:04.996 A:middle
+And here in my store view
+controller I got a function
+
+00:16:04.996 --> 00:16:06.386 A:middle
+here, showStoreWebsite.
+
+00:16:08.926 --> 00:16:13.036 A:middle
+I just need to drag one line
+of code UIApplication, openURL.
+
+00:16:13.586 --> 00:16:15.896 A:middle
+This will let Safari
+open the URL.
+
+00:16:16.806 --> 00:16:18.146 A:middle
+Lets test it.
+
+00:16:19.516 --> 00:16:25.286 A:middle
+I run the app and select
+the first store, left click.
+
+00:16:26.326 --> 00:16:28.726 A:middle
+Now, Safari opens
+the website for me
+
+00:16:29.486 --> 00:16:31.826 A:middle
+and I can see this
+page has a Reader.
+
+00:16:33.306 --> 00:16:39.536 A:middle
+And if I try to order
+pizza, I got my user name
+
+00:16:39.536 --> 00:16:41.096 A:middle
+and password autofilled.
+
+00:16:41.906 --> 00:16:43.686 A:middle
+So I must have been
+to this site before
+
+00:16:43.686 --> 00:16:47.106 A:middle
+and maybe I ordered
+a pizza before.
+
+00:16:47.666 --> 00:16:48.786 A:middle
+Now I'm in Safari.
+
+00:16:49.956 --> 00:16:53.096 A:middle
+What I really want is my users
+to always stay in my app.
+
+00:16:53.096 --> 00:16:55.196 A:middle
+I don't want them to
+switch to Safari just
+
+00:16:55.196 --> 00:16:57.606 A:middle
+for visiting one
+or two websites.
+
+00:16:58.346 --> 00:16:59.886 A:middle
+Because they can get distracted
+
+00:16:59.956 --> 00:17:02.266 A:middle
+and might not come
+back to my app later.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:59.956 --> 00:17:02.266 A:middle
+and might not come
+back to my app later.
+
+00:17:03.286 --> 00:17:05.256 A:middle
+So I really need a
+browser in my app.
+
+00:17:05.866 --> 00:17:10.215 A:middle
+I'm going to try option 2
+now to make my own browser.
+
+00:17:11.705 --> 00:17:16.736 A:middle
+So first thing I want to do,
+I want to go back to my app.
+
+00:17:17.026 --> 00:17:21.726 A:middle
+So as we know, if we have
+some web content in the app
+
+00:17:21.726 --> 00:17:26.256 A:middle
+and if the web content happens
+to be my UI or part of my UI,
+
+00:17:27.556 --> 00:17:29.506 A:middle
+WKWebView is the best
+tool for that job.
+
+00:17:30.836 --> 00:17:34.366 A:middle
+In my case I wanted
+to use WKWebView
+
+00:17:34.366 --> 00:17:37.446 A:middle
+to load web pages
+certainly, but I also want
+
+00:17:37.446 --> 00:17:38.626 A:middle
+to have some UI around that.
+
+00:17:38.726 --> 00:17:41.446 A:middle
+For example, I want
+to have a URL bar
+
+00:17:41.446 --> 00:17:43.226 A:middle
+on the top to show the URL.
+
+00:17:43.226 --> 00:17:47.576 A:middle
+I also would like to have
+a toolbar in the bottom
+
+00:17:47.746 --> 00:17:49.196 A:middle
+to do back and forth navigation.
+
+00:17:50.626 --> 00:17:53.616 A:middle
+WKWebView is a very rich
+API, it provides a number
+
+00:17:53.616 --> 00:17:55.596 A:middle
+of delegates I can use to listen
+
+00:17:55.596 --> 00:17:57.646 A:middle
+to page load events
+or navigation events.
+
+00:17:58.276 --> 00:18:00.596 A:middle
+I can use this delegate
+to drive my UI.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:58.276 --> 00:18:00.596 A:middle
+I can use this delegate
+to drive my UI.
+
+00:18:01.826 --> 00:18:04.436 A:middle
+So to save us some
+time for this demo,
+
+00:18:04.436 --> 00:18:06.036 A:middle
+I already have a single browser.
+
+00:18:06.766 --> 00:18:07.376 A:middle
+Let's take a look.
+
+00:18:07.516 --> 00:18:10.956 A:middle
+So in the Xcode project I
+switched to another tab.
+
+00:18:12.466 --> 00:18:17.026 A:middle
+I wrapped my simple browser
+into one view controller.
+
+00:18:17.816 --> 00:18:20.226 A:middle
+And in the middle
+I got WKWebView.
+
+00:18:21.086 --> 00:18:24.176 A:middle
+On the top I got
+the navigation bar.
+
+00:18:24.176 --> 00:18:26.796 A:middle
+I use the navigation bar's
+title to show the URL.
+
+00:18:26.796 --> 00:18:31.226 A:middle
+In the bottom I have a back
+and forth button to do back
+
+00:18:31.226 --> 00:18:32.136 A:middle
+and forward navigation.
+
+00:18:33.246 --> 00:18:34.956 A:middle
+Now this is a simple class.
+
+00:18:34.956 --> 00:18:36.746 A:middle
+It has about eighty
+lines of code.
+
+00:18:37.316 --> 00:18:38.636 A:middle
+It took me about one hour.
+
+00:18:38.636 --> 00:18:40.506 A:middle
+I believe we can do better.
+
+00:18:41.206 --> 00:18:43.226 A:middle
+But anyway, let's
+test this browser.
+
+00:18:44.296 --> 00:18:47.526 A:middle
+So I go back to my
+store view controller,
+
+00:18:48.306 --> 00:18:52.526 A:middle
+remove this line we just added
+and drag a couple lines here.
+
+00:18:53.906 --> 00:18:57.226 A:middle
+What I am doing now is I
+load my view controller
+
+00:18:57.226 --> 00:19:01.886 A:middle
+from the story board assigned
+a URL to it and presented it.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:57.226 --> 00:19:01.886 A:middle
+from the story board assigned
+a URL to it and presented it.
+
+00:19:02.936 --> 00:19:04.366 A:middle
+Now let's take a look.
+
+00:19:06.836 --> 00:19:07.786 A:middle
+I run my app.
+
+00:19:08.606 --> 00:19:11.526 A:middle
+Select the first store
+and tap the link.
+
+00:19:12.256 --> 00:19:13.426 A:middle
+This is my browser.
+
+00:19:14.126 --> 00:19:16.806 A:middle
+It runs in my app.
+
+00:19:17.066 --> 00:19:20.716 A:middle
+I don't have to switch to Safari
+to visit this site anymore.
+
+00:19:20.806 --> 00:19:21.296 A:middle
+That's good.
+
+00:19:22.276 --> 00:19:24.026 A:middle
+The URL bar is actually
+grayed out.
+
+00:19:24.026 --> 00:19:25.656 A:middle
+So it won't be distracting.
+
+00:19:26.866 --> 00:19:30.456 A:middle
+But also notice when I drag the
+page I don't have the dynamics
+
+00:19:30.496 --> 00:19:31.386 A:middle
+of Safari's UI.
+
+00:19:32.796 --> 00:19:34.456 A:middle
+And this page doesn't
+have a Reader.
+
+00:19:34.456 --> 00:19:36.136 A:middle
+It will be harder
+for me to read now.
+
+00:19:37.216 --> 00:19:41.236 A:middle
+And if I try to order pizza,
+I don't have my user name
+
+00:19:41.236 --> 00:19:42.356 A:middle
+and password autofilled.
+
+00:19:42.786 --> 00:19:45.056 A:middle
+So it will be harder for me
+to order pizza now especially
+
+00:19:45.316 --> 00:19:47.806 A:middle
+when I'm hungry, and impatient,
+and I don't have my password.
+
+00:19:48.326 --> 00:19:48.476 A:middle
+(Laughter.)
+
+00:19:49.616 --> 00:19:54.176 A:middle
+&gt;&gt; YONGJUN ZHANG: So, what
+I really need is some simple
+
+00:19:54.176 --> 00:19:59.076 A:middle
+and easy way to show
+a website from my app.
+
+00:19:59.846 --> 00:20:01.246 A:middle
+I don't want to spend my time
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:59.846 --> 00:20:01.246 A:middle
+I don't want to spend my time
+
+00:20:01.246 --> 00:20:03.886 A:middle
+to implement missing
+features like progress bar.
+
+00:20:04.356 --> 00:20:07.576 A:middle
+Even though I want to spend time
+there are some features I will
+
+00:20:07.576 --> 00:20:08.306 A:middle
+never get to.
+
+00:20:08.306 --> 00:20:11.866 A:middle
+For example, Password Autofill.
+
+00:20:12.906 --> 00:20:15.496 A:middle
+I would never get users'
+passwords for this website.
+
+00:20:16.836 --> 00:20:19.796 A:middle
+Luckily in iOS 9 we have
+a Safari View Controller.
+
+00:20:20.186 --> 00:20:21.406 A:middle
+Let's take a look.
+
+00:20:23.256 --> 00:20:25.546 A:middle
+So to take Safari View
+Controller into use,
+
+00:20:26.236 --> 00:20:29.436 A:middle
+first thing I need to do is
+import Safari Services Framework
+
+00:20:30.626 --> 00:20:33.826 A:middle
+and then I need to make
+my view controller conform
+
+00:20:33.826 --> 00:20:35.576 A:middle
+to
+SFSafariViewControllerDelegate
+
+00:20:35.646 --> 00:20:36.046 A:middle
+protocol.
+
+00:20:36.776 --> 00:20:41.456 A:middle
+In the code, let's go
+back to showStoreWebsite.
+
+00:20:42.456 --> 00:20:45.036 A:middle
+I don't need my browser
+anymore, so I remove that.
+
+00:20:46.306 --> 00:20:49.026 A:middle
+And just drag a couple
+of lines here.
+
+00:20:49.666 --> 00:20:53.506 A:middle
+What I'm doing now
+is I instantiate my
+
+00:20:53.786 --> 00:20:58.786 A:middle
+SafariViewControler object,
+gives delegate and present it.
+
+00:20:59.616 --> 00:21:02.056 A:middle
+Before we test it I also need
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:59.616 --> 00:21:02.056 A:middle
+Before we test it I also need
+
+00:21:02.056 --> 00:21:05.386 A:middle
+to implement
+safariViewControllerDidFinish,
+
+00:21:05.826 --> 00:21:08.846 A:middle
+when the user taps
+the done button,
+
+00:21:09.376 --> 00:21:11.006 A:middle
+and we can dismiss
+the view controller.
+
+00:21:12.136 --> 00:21:16.236 A:middle
+Since we are here we don't
+need our browser anymore,
+
+00:21:16.436 --> 00:21:19.936 A:middle
+so we can delete the whole
+thing, move to Trash, yes.
+
+00:21:20.336 --> 00:21:23.726 A:middle
+Eighty lines of code
+down and one hour saved.
+
+00:21:24.536 --> 00:21:25.246 A:middle
+Let's run again.
+
+00:21:26.036 --> 00:21:30.126 A:middle
+Select the first store.
+
+00:21:31.536 --> 00:21:33.236 A:middle
+Look! I have Safari in my app.
+
+00:21:34.936 --> 00:21:38.166 A:middle
+So I got Reader back.
+
+00:21:38.776 --> 00:21:42.206 A:middle
+The same dynamics as
+Safari, and if I try
+
+00:21:42.206 --> 00:21:47.266 A:middle
+to order pizza now I have my
+user name and password back.
+
+00:21:48.406 --> 00:21:52.466 A:middle
+As you see, with a couple lines
+of code I have Safari in my app.
+
+00:21:53.396 --> 00:21:54.876 A:middle
+You can do that for
+your app, too.
+
+00:21:55.026 --> 00:21:56.606 A:middle
+And the user would be
+really happy about it.
+
+00:21:56.956 --> 00:21:57.526 A:middle
+Thank you.
+
+00:21:57.706 --> 00:21:57.896 A:middle
+(Applause.)
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:03.426 --> 00:22:07.176 A:middle
+&gt;&gt; YONGJUN ZHANG:
+Back to you, Ricky.
+
+00:22:09.556 --> 00:22:10.576 A:middle
+&gt;&gt; RICKY MONDELLO:
+Thank you, Yongjun.
+
+00:22:10.786 --> 00:22:11.586 A:middle
+That is awesome.
+
+00:22:12.526 --> 00:22:16.366 A:middle
+So Yongjun just showed you
+that although it's easy
+
+00:22:16.366 --> 00:22:20.886 A:middle
+to write your in-app web browser
+in WKWebView, it's kinda hard
+
+00:22:20.886 --> 00:22:22.356 A:middle
+to get all of the details right.
+
+00:22:23.236 --> 00:22:26.156 A:middle
+He also showed you by
+changing about seven lines
+
+00:22:26.156 --> 00:22:28.746 A:middle
+of code he was able to
+replace the whole thing
+
+00:22:29.306 --> 00:22:30.526 A:middle
+with Safari View Controller.
+
+00:22:31.696 --> 00:22:34.156 A:middle
+You got to see how Safari
+View Controller has features
+
+00:22:34.156 --> 00:22:37.846 A:middle
+like Password Autofill and
+Reader and little touches
+
+00:22:37.846 --> 00:22:39.986 A:middle
+like the dynamics when you
+scroll down on a web page.
+
+00:22:43.956 --> 00:22:47.356 A:middle
+When we started a few moments
+ago I divided the world
+
+00:22:47.356 --> 00:22:48.946 A:middle
+of web content into two buckets.
+
+00:22:49.896 --> 00:22:51.896 A:middle
+The kind of stuff that
+is custom within your app
+
+00:22:52.406 --> 00:22:54.196 A:middle
+that you're going to
+use WKWebView for,
+
+00:22:55.206 --> 00:22:58.616 A:middle
+or actual websites when a user
+taps on a link in your app
+
+00:22:59.016 --> 00:23:01.916 A:middle
+which you'll use Safari or
+Safari View Controller for.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:59.016 --> 00:23:01.916 A:middle
+which you'll use Safari or
+Safari View Controller for.
+
+00:23:02.956 --> 00:23:03.896 A:middle
+But for a number of you
+
+00:23:03.896 --> 00:23:07.116 A:middle
+in the audience there's actually
+a third use case for web content
+
+00:23:07.116 --> 00:23:09.306 A:middle
+that I would like to
+talk about real quick.
+
+00:23:10.696 --> 00:23:13.746 A:middle
+That's doing Web-based
+authentication using
+
+00:23:13.746 --> 00:23:14.386 A:middle
+web content.
+
+00:23:15.486 --> 00:23:17.236 A:middle
+So you've all probably
+seen this before.
+
+00:23:17.816 --> 00:23:19.716 A:middle
+You're in an app
+and the app wants
+
+00:23:19.716 --> 00:23:22.706 A:middle
+to use some third-party
+website's accounts.
+
+00:23:23.346 --> 00:23:24.796 A:middle
+The app pulls up a web view.
+
+00:23:24.946 --> 00:23:27.656 A:middle
+You type in your user
+name and password.
+
+00:23:28.426 --> 00:23:32.536 A:middle
+Log in. Then you accept
+or deny the app's request
+
+00:23:32.536 --> 00:23:35.106 A:middle
+for the resource from
+the third-party service.
+
+00:23:35.966 --> 00:23:37.376 A:middle
+You've all probably
+done this before.
+
+00:23:37.876 --> 00:23:40.126 A:middle
+But one flow that
+does this is OAuth.
+
+00:23:40.126 --> 00:23:43.566 A:middle
+I would like to walk through
+at a high level exactly how
+
+00:23:43.566 --> 00:23:44.136 A:middle
+that works.
+
+00:23:44.686 --> 00:23:51.156 A:middle
+So in this flow there are
+three different actors.
+
+00:23:51.736 --> 00:23:54.546 A:middle
+The first actor is an app.
+
+00:23:55.366 --> 00:23:57.006 A:middle
+Let's say that it's your app.
+
+00:23:57.596 --> 00:23:59.166 A:middle
+The second actor is a user.
+
+00:23:59.896 --> 00:24:01.126 A:middle
+Let's say it's one
+of your users.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:59.896 --> 00:24:01.126 A:middle
+Let's say it's one
+of your users.
+
+00:24:02.536 --> 00:24:05.096 A:middle
+And of course, there is
+the third-party web service
+
+00:24:05.266 --> 00:24:07.726 A:middle
+that your app would like
+to authenticate against.
+
+00:24:08.376 --> 00:24:11.656 A:middle
+So what will happen is in this
+flow while the user is using the
+
+00:24:11.836 --> 00:24:13.806 A:middle
+app, presumably they'll tap
+
+00:24:13.806 --> 00:24:15.526 A:middle
+on a button somewhere
+that says log in.
+
+00:24:16.156 --> 00:24:17.846 A:middle
+The app is going
+to package the user
+
+00:24:17.846 --> 00:24:20.236 A:middle
+up with a token representing
+what it wants
+
+00:24:20.236 --> 00:24:21.626 A:middle
+to request from the website.
+
+00:24:22.156 --> 00:24:26.486 A:middle
+And then, the app is
+going to present, somehow,
+
+00:24:26.546 --> 00:24:28.766 A:middle
+a web page to log in against.
+
+00:24:29.346 --> 00:24:31.386 A:middle
+And the user will enter
+their credentials,
+
+00:24:32.696 --> 00:24:34.816 A:middle
+log in and accept
+or deny the request.
+
+00:24:35.536 --> 00:24:38.316 A:middle
+And then be sent
+back over to the app.
+
+00:24:38.316 --> 00:24:40.986 A:middle
+At that point the website is
+going to remember that token
+
+00:24:41.276 --> 00:24:43.996 A:middle
+and know whether it was
+approved or denied for use.
+
+00:24:44.126 --> 00:24:46.046 A:middle
+And when the app
+wants to connect
+
+00:24:46.046 --> 00:24:47.196 A:middle
+to that third-party service
+
+00:24:47.196 --> 00:24:49.936 A:middle
+in the future it will
+do it using that token.
+
+00:24:50.496 --> 00:24:55.586 A:middle
+The major goal of a
+scheme like this is
+
+00:24:55.586 --> 00:24:57.346 A:middle
+to protect a user's credentials
+
+00:24:57.986 --> 00:24:59.696 A:middle
+so that an app doesn't
+have to remember them.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:00.236 --> 00:25:01.676 A:middle
+Instead the app gets a token.
+
+00:25:02.686 --> 00:25:05.926 A:middle
+That token can be used at a
+later date to request resources
+
+00:25:06.546 --> 00:25:09.296 A:middle
+or the user could revoke
+the token without having
+
+00:25:09.296 --> 00:25:10.316 A:middle
+to change their password.
+
+00:25:10.826 --> 00:25:11.916 A:middle
+This is great for users.
+
+00:25:13.086 --> 00:25:14.836 A:middle
+If you are implementing
+this today,
+
+00:25:14.906 --> 00:25:19.306 A:middle
+you are probably using
+UIWebView or WKWebView to do it.
+
+00:25:19.516 --> 00:25:20.586 A:middle
+But I'm happy to tell you
+
+00:25:20.986 --> 00:25:24.396 A:middle
+that Safari View Controller
+is great for this purpose.
+
+00:25:24.536 --> 00:25:26.386 A:middle
+It's awesome for
+web-based authentication.
+
+00:25:26.386 --> 00:25:30.066 A:middle
+One of the reasons it is awesome
+
+00:25:30.066 --> 00:25:32.686 A:middle
+for web-based authentication
+is the security story.
+
+00:25:33.456 --> 00:25:35.696 A:middle
+It's just as secure
+as Safari itself.
+
+00:25:36.576 --> 00:25:39.496 A:middle
+Because it runs out of process,
+and Apple will never get
+
+00:25:39.496 --> 00:25:41.056 A:middle
+to see a user's user name
+
+00:25:41.326 --> 00:25:43.046 A:middle
+and password while
+they're logging in.
+
+00:25:43.046 --> 00:25:45.996 A:middle
+And when it comes to
+protecting a user's data,
+
+00:25:46.646 --> 00:25:50.026 A:middle
+one of the best ways to do
+that is never to have access
+
+00:25:50.026 --> 00:25:51.016 A:middle
+to it in the first place.
+
+00:25:51.786 --> 00:25:53.556 A:middle
+That's our approach
+whenever possible at Apple.
+
+00:25:54.086 --> 00:25:57.056 A:middle
+But it is also an
+awesome user story.
+
+00:25:58.026 --> 00:26:00.816 A:middle
+Because since Safari View
+Controller has access
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:58.026 --> 00:26:00.816 A:middle
+Because since Safari View
+Controller has access
+
+00:26:00.816 --> 00:26:04.436 A:middle
+to a user's credentials, synced
+across all of their devices
+
+00:26:04.436 --> 00:26:07.286 A:middle
+with iCloud Keychain, logging
+in is going to be a breeze.
+
+00:26:07.746 --> 00:26:09.916 A:middle
+They may not need
+to use Autofill.
+
+00:26:10.316 --> 00:26:11.396 A:middle
+They might already be logged
+
+00:26:11.396 --> 00:26:12.986 A:middle
+into that third-party
+web service.
+
+00:26:15.616 --> 00:26:19.466 A:middle
+Simply put, users will be much
+more likely to authenticate
+
+00:26:19.466 --> 00:26:21.086 A:middle
+against that third-party
+web service,
+
+00:26:21.176 --> 00:26:24.186 A:middle
+if you are using Safari View
+Controller compared to something
+
+00:26:24.186 --> 00:26:24.966 A:middle
+that you rolled yourself.
+
+00:26:26.176 --> 00:26:28.836 A:middle
+And I'm happy to say this
+is also super easy to adopt.
+
+00:26:29.356 --> 00:26:30.446 A:middle
+It takes two steps.
+
+00:26:32.916 --> 00:26:37.196 A:middle
+The first is where you would've
+used your own in-app browser,
+
+00:26:37.766 --> 00:26:40.656 A:middle
+just present an instance
+of SFSafariViewController.
+
+00:26:41.746 --> 00:26:43.516 A:middle
+And once the user is
+finished logging in
+
+00:26:44.066 --> 00:26:48.046 A:middle
+and the third-party web service
+redirects back to your app
+
+00:26:48.386 --> 00:26:51.926 A:middle
+with the custom URL scheme
+that you fed it, you can accept
+
+00:26:51.976 --> 00:26:54.776 A:middle
+that in your AppDelegate's
+handleOpenURL method.
+
+00:26:55.556 --> 00:26:57.526 A:middle
+From there you can
+inspect the response
+
+00:26:58.146 --> 00:27:01.036 A:middle
+and dismiss the instance
+of SFSafariViewController
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:58.146 --> 00:27:01.036 A:middle
+and dismiss the instance
+of SFSafariViewController
+
+00:27:01.416 --> 00:27:03.226 A:middle
+because you know that the
+authentication is done.
+
+00:27:04.426 --> 00:27:05.116 A:middle
+That's it.
+
+00:27:05.556 --> 00:27:06.206 A:middle
+Two steps.
+
+00:27:06.916 --> 00:27:10.206 A:middle
+And you've replaced your in-app
+browser with one that has all
+
+00:27:10.206 --> 00:27:11.396 A:middle
+of the user's user names
+
+00:27:11.396 --> 00:27:13.436 A:middle
+and passwords available
+for Autofill.
+
+00:27:14.016 --> 00:27:16.116 A:middle
+Users are going to be delighted
+by this and you are going
+
+00:27:16.116 --> 00:27:18.836 A:middle
+to have more users log into
+that third-party web service.
+
+00:27:19.336 --> 00:27:26.746 A:middle
+Okay, let's cover everything
+we talked about today.
+
+00:27:26.936 --> 00:27:29.876 A:middle
+Web content is everywhere
+and it comes
+
+00:27:29.876 --> 00:27:31.656 A:middle
+in all sorts of shapes
+and sizes.
+
+00:27:33.096 --> 00:27:36.206 A:middle
+But if you are using it within
+your app in a custom way
+
+00:27:36.236 --> 00:27:40.636 A:middle
+where you own the experience
+or you're customizing it,
+
+00:27:40.636 --> 00:27:42.746 A:middle
+WKWebView is the right
+tool for the job.
+
+00:27:44.096 --> 00:27:46.546 A:middle
+You might still be using
+the older UIWebView,
+
+00:27:47.216 --> 00:27:48.986 A:middle
+but WKWebView is modern
+
+00:27:49.396 --> 00:27:51.636 A:middle
+and includes the
+modern JavaScript engine
+
+00:27:51.826 --> 00:27:54.686 A:middle
+that Safari itself
+uses, it's much faster.
+
+00:27:55.496 --> 00:27:59.096 A:middle
+And now in iOS 9
+and OS X El Capitan,
+
+00:27:59.816 --> 00:28:01.546 A:middle
+it has much more
+flexibility for you.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:59.816 --> 00:28:01.546 A:middle
+it has much more
+flexibility for you.
+
+00:28:03.196 --> 00:28:05.866 A:middle
+If you'd like to learn more
+about adopting WKWebView,
+
+00:28:06.136 --> 00:28:07.376 A:middle
+you can see last year's session,
+
+00:28:08.346 --> 00:28:09.866 A:middle
+Introducing the Modern
+WebKit API.
+
+00:28:10.526 --> 00:28:14.776 A:middle
+But if your task with
+web content is different,
+
+00:28:15.876 --> 00:28:19.696 A:middle
+if your task is to show a
+website when a user taps
+
+00:28:19.696 --> 00:28:23.596 A:middle
+on a link, your use case and
+needs are completely different.
+
+00:28:24.856 --> 00:28:27.876 A:middle
+In the past, you may have built
+your own in-app web browser
+
+00:28:27.876 --> 00:28:31.866 A:middle
+with UIWebView or WKWebView,
+but that's always had downsides,
+
+00:28:32.856 --> 00:28:34.416 A:middle
+it didn't have any
+of the features
+
+00:28:34.716 --> 00:28:36.096 A:middle
+or state that Safari has.
+
+00:28:36.976 --> 00:28:38.926 A:middle
+And more likely than
+not through no fault
+
+00:28:38.926 --> 00:28:41.896 A:middle
+of your own your app's
+implementation was different
+
+00:28:41.896 --> 00:28:44.266 A:middle
+than that of other apps
+that the user has installed,
+
+00:28:44.896 --> 00:28:46.946 A:middle
+which leads to a confusing
+experience sometimes.
+
+00:28:47.546 --> 00:28:50.086 A:middle
+Your first option forgetting
+
+00:28:50.086 --> 00:28:53.466 A:middle
+out of the scenario is
+delegating the responsibility
+
+00:28:53.466 --> 00:28:56.056 A:middle
+of showing web content
+to Safari itself.
+
+00:28:56.666 --> 00:28:58.316 A:middle
+And the system wide
+ability to go back
+
+00:28:58.436 --> 00:29:00.566 A:middle
+to the last app makes
+this much better
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:58.436 --> 00:29:00.566 A:middle
+to the last app makes
+this much better
+
+00:29:00.566 --> 00:29:01.606 A:middle
+than it has ever been before.
+
+00:29:02.116 --> 00:29:05.236 A:middle
+But if you would like to
+maintain your current user
+
+00:29:05.236 --> 00:29:08.916 A:middle
+experience where users
+never leave your app,
+
+00:29:08.916 --> 00:29:12.836 A:middle
+Safari View Controller will add
+years of features and polish
+
+00:29:13.276 --> 00:29:15.176 A:middle
+and features and
+polish in the future.
+
+00:29:16.206 --> 00:29:19.476 A:middle
+For you, it'll mean having
+more time to work on the parts
+
+00:29:19.476 --> 00:29:21.426 A:middle
+of your app that are
+special about your app,
+
+00:29:21.916 --> 00:29:23.256 A:middle
+the parts that you
+want to work on.
+
+00:29:23.286 --> 00:29:26.716 A:middle
+For your users, it will
+mean having new features
+
+00:29:27.296 --> 00:29:31.276 A:middle
+like Safari Autofill, Safari
+Reader and Content Blocking.
+
+00:29:31.836 --> 00:29:37.356 A:middle
+And while I still have your
+attention I have a quick favor
+
+00:29:37.356 --> 00:29:39.296 A:middle
+to ask of you.
+
+00:29:39.506 --> 00:29:42.926 A:middle
+Please keep filing bugs
+and feature requests,
+
+00:29:43.336 --> 00:29:47.656 A:middle
+when there is a gap between what
+is and what you think should be
+
+00:29:48.096 --> 00:29:49.756 A:middle
+on the platforms that
+you are developing on.
+
+00:29:50.726 --> 00:29:54.046 A:middle
+One of the reasons that Safari
+View Controller exists is
+
+00:29:54.046 --> 00:29:56.326 A:middle
+because so many of you
+told us that you wanted it.
+
+00:29:57.406 --> 00:29:59.686 A:middle
+And now that it does
+exist as you're trying it
+
+00:29:59.686 --> 00:30:00.946 A:middle
+out over the next few months,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:29:59.686 --> 00:30:00.946 A:middle
+out over the next few months,
+
+00:30:01.396 --> 00:30:03.916 A:middle
+please let us know how we can
+make it more useful to you.
+
+00:30:04.706 --> 00:30:08.866 A:middle
+We really do appreciate
+your feedback.
+
+00:30:09.866 --> 00:30:11.206 A:middle
+Okay. You can get
+more information
+
+00:30:11.206 --> 00:30:13.866 A:middle
+about anything we covered
+today at the usual places.
+
+00:30:14.436 --> 00:30:16.746 A:middle
+Or you can hit up
+John Davis, the Safari
+
+00:30:16.746 --> 00:30:17.796 A:middle
+and WebKit Evangelist.
+
+00:30:18.156 --> 00:30:21.856 A:middle
+And we have some
+related sessions
+
+00:30:21.856 --> 00:30:22.906 A:middle
+that you might be interested in.
+
+00:30:24.106 --> 00:30:27.106 A:middle
+To call out two in
+particular, in Seamless Linking
+
+00:30:27.106 --> 00:30:30.386 A:middle
+to Your App you'll learn about
+Apple's solution to the problem
+
+00:30:30.606 --> 00:30:31.676 A:middle
+of inner app linking
+
+00:30:32.296 --> 00:30:34.556 A:middle
+which involves taking
+your website's URLs
+
+00:30:35.186 --> 00:30:37.906 A:middle
+and making them universal,
+allowing them to open your app
+
+00:30:38.566 --> 00:30:40.016 A:middle
+on your users' iOS devices.
+
+00:30:40.646 --> 00:30:41.286 A:middle
+It's really cool.
+
+00:30:42.206 --> 00:30:44.796 A:middle
+In Safari Extensibility,
+you'll learn to write one
+
+00:30:44.796 --> 00:30:46.816 A:middle
+of those content blockers
+that I mentioned earlier,
+
+00:30:47.296 --> 00:30:50.216 A:middle
+that will apply to all pages
+that are loaded in either Safari
+
+00:30:51.026 --> 00:30:52.466 A:middle
+or in Safari View Controller.
+
+00:30:52.966 --> 00:30:57.266 A:middle
+If you want help with anything
+I covered today, the Safari
+
+00:30:57.266 --> 00:30:58.936 A:middle
+and WebKit Labs are
+the right place to go.
+
+00:30:58.936 --> 00:31:00.616 A:middle
+And the first one is happening
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:58.936 --> 00:31:00.616 A:middle
+And the first one is happening
+
+00:31:00.616 --> 00:31:03.136 A:middle
+in about a half an
+hour in Media Lab A.
+
+00:31:04.536 --> 00:31:06.376 A:middle
+Alright, thank you
+so much everybody.
+
+00:31:06.566 --> 00:31:14.736 A:middle
+I hope you have a
+fantastic WWDC.
+
+00:31:14.736 --> 00:31:14.886 A:middle
+(Applause.)
+

@@ -1,0 +1,3412 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:06.686 --> 00:00:07.646 A:middle
+&gt;&gt; NICK PORCINO:
+Hello, everybody.
+
+00:00:24.556 --> 00:00:28.086 A:middle
+Welcome to managing 3D
+Assets with Model I/O.
+
+00:00:28.446 --> 00:00:31.796 A:middle
+I'm Nick Porcino in the image,
+media, and graphics group.
+
+00:00:33.576 --> 00:00:35.916 A:middle
+Today, I'm really excited
+
+00:00:35.916 --> 00:00:38.756 A:middle
+to introduce the new Model
+I/O framework to you.
+
+00:00:38.976 --> 00:00:43.196 A:middle
+We are raising the bar on --
+or actually we are enabling you
+
+00:00:43.196 --> 00:00:46.586 A:middle
+to raise the bar on interactive
+and realistic graphics.
+
+00:00:46.996 --> 00:00:51.076 A:middle
+Up until now, the graphics
+frameworks and hardware
+
+00:00:51.076 --> 00:00:53.726 A:middle
+that you've been dealing
+with come from an age
+
+00:00:53.966 --> 00:00:56.966 A:middle
+when hardware was a lot
+more limited than it is now.
+
+00:00:57.426 --> 00:00:59.506 A:middle
+The thing you have in your
+pocket is absolutely amazing.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:00.166 --> 00:01:04.696 A:middle
+Now we got new frameworks that
+enable you to get the power
+
+00:01:04.696 --> 00:01:09.396 A:middle
+out to your users, but you
+have to feed that framework
+
+00:01:09.396 --> 00:01:11.056 A:middle
+with really good looking stuff.
+
+00:01:11.636 --> 00:01:15.496 A:middle
+So in the new world of
+really high performance
+
+00:01:15.496 --> 00:01:21.106 A:middle
+and low overhead graphics APIs,
+you need a way to get things
+
+00:01:21.106 --> 00:01:23.796 A:middle
+that are realistic, realistic
+means physically derived
+
+00:01:23.796 --> 00:01:24.986 A:middle
+and physically based things.
+
+00:01:25.556 --> 00:01:29.906 A:middle
+And so there's a lot of research
+and knowledge that you need
+
+00:01:30.056 --> 00:01:31.156 A:middle
+in order to pull that off.
+
+00:01:31.696 --> 00:01:33.776 A:middle
+You need to understand
+the physics of cameras,
+
+00:01:33.816 --> 00:01:36.026 A:middle
+the physics of materials,
+the physics of light
+
+00:01:37.266 --> 00:01:39.656 A:middle
+and you can certainly go out
+and read all of that stuff
+
+00:01:39.656 --> 00:01:41.046 A:middle
+and I encourage you to do so.
+
+00:01:41.406 --> 00:01:43.306 A:middle
+And implementing each one
+
+00:01:43.306 --> 00:01:45.816 A:middle
+of those things requires a
+fair amount of heavy work,
+
+00:01:45.816 --> 00:01:49.046 A:middle
+a fair amount of reading and
+then a whole lot of integration.
+
+00:01:49.996 --> 00:01:53.736 A:middle
+So what we have done with
+Model I/O is we've gone out,
+
+00:01:54.256 --> 00:01:55.836 A:middle
+we have done a whole
+bunch of research,
+
+00:01:55.836 --> 00:01:57.496 A:middle
+we have done a whole
+bunch of integration,
+
+00:01:57.986 --> 00:02:01.216 A:middle
+and we've prepared a unified
+set of data structures
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:57.986 --> 00:02:01.216 A:middle
+and we've prepared a unified
+set of data structures
+
+00:02:01.216 --> 00:02:03.286 A:middle
+to describe these things
+in a consistent way
+
+00:02:03.286 --> 00:02:04.886 A:middle
+and an easy to use API.
+
+00:02:06.456 --> 00:02:10.045 A:middle
+So as it says, Model
+I/O is a framework
+
+00:02:10.045 --> 00:02:12.166 A:middle
+for handling 3D assets and data.
+
+00:02:12.986 --> 00:02:17.896 A:middle
+So at its most basic level,
+you can use Model I/O to bring
+
+00:02:17.896 --> 00:02:20.746 A:middle
+in common file formats
+and export them.
+
+00:02:21.666 --> 00:02:25.676 A:middle
+You can describe in a physically
+realistic way lighting,
+
+00:02:25.906 --> 00:02:27.366 A:middle
+materials, environments.
+
+00:02:28.176 --> 00:02:31.336 A:middle
+You can get assets and
+art work from your artists
+
+00:02:31.666 --> 00:02:35.136 A:middle
+into Model I/O, do some
+interesting processes
+
+00:02:35.136 --> 00:02:37.856 A:middle
+which we'll get into
+as the talk progresses.
+
+00:02:38.506 --> 00:02:43.546 A:middle
+And there's a lot of
+tools now that you can get
+
+00:02:43.636 --> 00:02:44.696 A:middle
+that are focused
+
+00:02:44.696 --> 00:02:47.396 A:middle
+on physically-based
+rendering and materials.
+
+00:02:47.836 --> 00:02:50.776 A:middle
+And Model I/O gives you
+access to those things
+
+00:02:50.886 --> 00:02:53.966 A:middle
+in your own pipelines.
+
+00:02:54.066 --> 00:02:58.686 A:middle
+Model I/O is integrated into
+Xcode 7, and the GameKit APIs,
+
+00:02:58.856 --> 00:03:03.266 A:middle
+it's on iOS 9, and OS 10.11.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:58.856 --> 00:03:03.266 A:middle
+it's on iOS 9, and OS 10.11.
+
+00:03:04.796 --> 00:03:10.176 A:middle
+So in a nut shell, the
+big green box there is
+
+00:03:10.176 --> 00:03:12.206 A:middle
+where Model I/O fits
+in your framework
+
+00:03:12.576 --> 00:03:13.946 A:middle
+or in your application.
+
+00:03:14.566 --> 00:03:16.706 A:middle
+We start in the contact
+creation tool.
+
+00:03:16.706 --> 00:03:17.836 A:middle
+Your artist does some great work
+
+00:03:17.836 --> 00:03:20.616 A:middle
+and you import it
+into Model I/O.
+
+00:03:21.196 --> 00:03:26.596 A:middle
+Model I/O then does the annoying
+and tedious and error-prone step
+
+00:03:26.816 --> 00:03:32.126 A:middle
+of creating buffers for various
+frameworks to render quickly.
+
+00:03:32.566 --> 00:03:34.626 A:middle
+So those frameworks
+that we're supporting
+
+00:03:34.826 --> 00:03:40.346 A:middle
+out of the box are
+SceneKit, Metal, and OpenGL.
+
+00:03:40.536 --> 00:03:44.846 A:middle
+Now Model I/O doesn't just
+load files and save them.
+
+00:03:45.636 --> 00:03:48.466 A:middle
+It also lets you
+perform useful operations
+
+00:03:48.596 --> 00:03:50.716 A:middle
+that are time consuming
+or whatever,
+
+00:03:51.096 --> 00:03:53.526 A:middle
+that serve to improve
+the look of your assets,
+
+00:03:54.186 --> 00:03:56.466 A:middle
+and you can take an asset.
+
+00:03:56.776 --> 00:03:59.316 A:middle
+You can do one of these baking
+operations which we'll get into,
+
+00:03:59.576 --> 00:04:02.246 A:middle
+bring it back into the unified
+representation and Model I/O
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:59.576 --> 00:04:02.246 A:middle
+bring it back into the unified
+representation and Model I/O
+
+00:04:03.086 --> 00:04:07.156 A:middle
+and get it off to your
+hardware ready buffers.
+
+00:04:07.316 --> 00:04:12.786 A:middle
+Also, you can just complete the
+loop here, export your asset,
+
+00:04:12.786 --> 00:04:15.236 A:middle
+out of Model I/O after
+you did something exotic
+
+00:04:15.326 --> 00:04:18.216 A:middle
+that Model I/O provides for
+you, send it all the way back
+
+00:04:18.216 --> 00:04:21.076 A:middle
+to the content creation
+tool, let the artist noodle
+
+00:04:21.076 --> 00:04:23.076 A:middle
+around on it and perhaps
+add some, you know,
+
+00:04:23.076 --> 00:04:24.346 A:middle
+special sweetness or whatever,
+
+00:04:24.346 --> 00:04:26.866 A:middle
+and then you can just
+keep iterating the cycle
+
+00:04:26.866 --> 00:04:29.866 A:middle
+until you achieve the
+look and level of quality
+
+00:04:29.866 --> 00:04:31.786 A:middle
+that you need for your app.
+
+00:04:32.836 --> 00:04:34.926 A:middle
+So what we're going to talk
+
+00:04:34.926 --> 00:04:37.616 A:middle
+about today is what
+are the features?
+
+00:04:38.576 --> 00:04:39.466 A:middle
+What are the data types?
+
+00:04:39.466 --> 00:04:40.736 A:middle
+Where does the physical
+motivation
+
+00:04:40.736 --> 00:04:41.996 A:middle
+for those data types come from?
+
+00:04:42.666 --> 00:04:45.056 A:middle
+And we're going to
+talk about support
+
+00:04:45.056 --> 00:04:47.506 A:middle
+for various geometrical
+features and voxels
+
+00:04:48.136 --> 00:04:52.736 A:middle
+and some advanced lighting
+and our baking steps.
+
+00:04:53.126 --> 00:04:53.406 A:middle
+All right.
+
+00:04:56.476 --> 00:05:01.426 A:middle
+So here we go, bread and
+butter, reading things in.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:56.476 --> 00:05:01.426 A:middle
+So here we go, bread and
+butter, reading things in.
+
+00:05:01.426 --> 00:05:05.846 A:middle
+So import formats,
+we start with some
+
+00:05:05.846 --> 00:05:09.116 A:middle
+of the most commonly
+used formats.
+
+00:05:11.156 --> 00:05:15.896 A:middle
+Alembic is a very high
+performance format and it comes
+
+00:05:15.896 --> 00:05:17.046 A:middle
+from the film industry
+
+00:05:17.046 --> 00:05:19.456 A:middle
+and is heavily uses
+in games now as well.
+
+00:05:20.026 --> 00:05:23.906 A:middle
+And it is the most modern of
+the formats listed up here.
+
+00:05:23.906 --> 00:05:28.686 A:middle
+It includes information on
+animation and material bindings
+
+00:05:28.686 --> 00:05:30.806 A:middle
+and all kinds of
+interesting things.
+
+00:05:31.316 --> 00:05:35.236 A:middle
+Polygon is the standard polygon
+format that you are going to get
+
+00:05:35.236 --> 00:05:36.786 A:middle
+out of a lot of academic
+research.
+
+00:05:37.286 --> 00:05:42.416 A:middle
+Triangles are commonly
+originated and ingested by CAD
+
+00:05:42.416 --> 00:05:43.596 A:middle
+and CAM applications
+
+00:05:43.596 --> 00:05:46.886 A:middle
+and Wavefront .obj
+is universally
+
+00:05:46.886 --> 00:05:47.666 A:middle
+available everywhere.
+
+00:05:48.376 --> 00:05:51.336 A:middle
+And for exporting at the
+moment, you can export
+
+00:05:51.336 --> 00:05:57.196 A:middle
+out to your CAD/CAM
+stuff and (inaudible).
+
+00:05:57.756 --> 00:05:59.746 A:middle
+So importing is that easy.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:00.016 --> 00:06:02.846 A:middle
+You get an MDLAsset,
+by initWithURL.
+
+00:06:03.416 --> 00:06:07.026 A:middle
+And you can send it back out
+somewhere with exportAssetToURL.
+
+00:06:09.376 --> 00:06:12.366 A:middle
+So just a few words
+about physical realism
+
+00:06:12.826 --> 00:06:16.376 A:middle
+without getting super detailed.
+
+00:06:16.616 --> 00:06:21.676 A:middle
+Lights, historically have had
+like a position, and, you know,
+
+00:06:21.676 --> 00:06:23.296 A:middle
+a cone angle and falloff
+
+00:06:23.376 --> 00:06:26.446 A:middle
+and some other physically
+unrealistic parameters
+
+00:06:26.446 --> 00:06:28.766 A:middle
+that just are mathematically
+united to the way hardware
+
+00:06:28.766 --> 00:06:30.336 A:middle
+and graphics APIs used to be.
+
+00:06:30.846 --> 00:06:36.046 A:middle
+What we are providing here
+is access to IES profiles.
+
+00:06:36.256 --> 00:06:39.516 A:middle
+Now, if you go to the
+hardware store and find, like,
+
+00:06:39.646 --> 00:06:41.056 A:middle
+a light fixture that
+you really like.
+
+00:06:41.106 --> 00:06:42.556 A:middle
+Like, say I really like
+that light up there
+
+00:06:42.556 --> 00:06:43.696 A:middle
+and I found it in the store.
+
+00:06:43.696 --> 00:06:47.596 A:middle
+I can go to the manufacturers
+website after reading the label
+
+00:06:47.596 --> 00:06:51.106 A:middle
+on the side and I can
+find an IES profile file
+
+00:06:51.186 --> 00:06:55.016 A:middle
+which is a data file, where they
+have done measurements all the
+
+00:06:55.016 --> 00:06:56.886 A:middle
+way around the light
+to get the irradiance
+
+00:06:56.886 --> 00:06:57.846 A:middle
+from every different angle.
+
+00:06:58.856 --> 00:07:02.836 A:middle
+We read that in into a so-called
+light web, which is a set
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:58.856 --> 00:07:02.836 A:middle
+We read that in into a so-called
+light web, which is a set
+
+00:07:02.836 --> 00:07:05.006 A:middle
+of data that's pretty easy
+to load up into a shader.
+
+00:07:05.336 --> 00:07:09.016 A:middle
+So if you want, you can have
+physically motivated lights
+
+00:07:09.236 --> 00:07:11.836 A:middle
+that match real world
+lights in your shaders.
+
+00:07:12.456 --> 00:07:14.716 A:middle
+Now, when you buy a light
+at the hardware store,
+
+00:07:14.976 --> 00:07:17.976 A:middle
+the light isn't specified
+as an RGB value or whatever.
+
+00:07:17.976 --> 00:07:20.336 A:middle
+It's specified as
+a temperature like,
+
+00:07:20.336 --> 00:07:21.756 A:middle
+you know 4,000K or whatever.
+
+00:07:22.306 --> 00:07:25.496 A:middle
+So you can specify these heights
+in degrees Kelvin as well.
+
+00:07:25.976 --> 00:07:28.816 A:middle
+We also provide image based
+lighting which is in play
+
+00:07:28.936 --> 00:07:30.386 A:middle
+on the excavator there.
+
+00:07:30.976 --> 00:07:35.286 A:middle
+The materials, historically,
+everything has been Lambertian,
+
+00:07:35.446 --> 00:07:38.316 A:middle
+which means fall off
+according to angle,
+
+00:07:38.806 --> 00:07:40.626 A:middle
+and with the Blinn-Phong
+specular
+
+00:07:40.626 --> 00:07:42.906 A:middle
+which means a plastically
+shiny highlight.
+
+00:07:43.426 --> 00:07:44.496 A:middle
+We also provide you
+
+00:07:44.606 --> 00:07:47.996 A:middle
+with a baseline physical
+bidirectional reflection
+
+00:07:48.046 --> 00:07:52.796 A:middle
+function, or a BRDF which
+is what you really need
+
+00:07:53.016 --> 00:07:54.596 A:middle
+if you want real
+world materials.
+
+00:07:55.006 --> 00:08:00.256 A:middle
+And once again, that excavator
+has got physical BDRF on it.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:55.006 --> 00:08:00.256 A:middle
+And once again, that excavator
+has got physical BDRF on it.
+
+00:08:00.716 --> 00:08:03.366 A:middle
+Cameras, historically
+have been pinhole cameras.
+
+00:08:03.676 --> 00:08:06.816 A:middle
+We are describing them all the
+way from the lens to the sensor
+
+00:08:07.206 --> 00:08:09.366 A:middle
+and we are providing
+you some utilities
+
+00:08:09.366 --> 00:08:10.796 A:middle
+for processing environments
+
+00:08:10.796 --> 00:08:12.926 A:middle
+from photographs and
+procedural skies.
+
+00:08:13.526 --> 00:08:19.616 A:middle
+Now, you are going to see
+tools in Xcode to do baking,
+
+00:08:19.966 --> 00:08:24.586 A:middle
+and what I'm telling you here
+on this slide is that the tools
+
+00:08:24.586 --> 00:08:26.206 A:middle
+that you have in Xcode
+
+00:08:26.286 --> 00:08:29.086 A:middle
+to perform these operations are
+available to you in Model I/O
+
+00:08:29.086 --> 00:08:29.936 A:middle
+through the framework.
+
+00:08:30.416 --> 00:08:31.976 A:middle
+So if you want to
+make your own line --
+
+00:08:32.176 --> 00:08:35.726 A:middle
+your own offline pipeline
+to bake your own assets
+
+00:08:35.726 --> 00:08:39.746 A:middle
+from beginning to end, in
+giant batches or on a farm,
+
+00:08:39.826 --> 00:08:41.306 A:middle
+all of those things
+are available
+
+00:08:41.916 --> 00:08:42.785 A:middle
+through the frameworks API.
+
+00:08:43.556 --> 00:08:46.576 A:middle
+We have introduced voxels.
+
+00:08:46.576 --> 00:08:50.796 A:middle
+So you can take a big old mesh
+and turn it into giant cache
+
+00:08:50.796 --> 00:08:52.576 A:middle
+of indexes that you can
+associate your own data with.
+
+00:08:53.076 --> 00:08:53.896 A:middle
+More on that later.
+
+00:08:54.996 --> 00:08:56.996 A:middle
+Once again, it's
+very straightforward,
+
+00:08:57.276 --> 00:09:00.206 A:middle
+create your voxels from
+an asset and find voxels
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:57.276 --> 00:09:00.206 A:middle
+create your voxels from
+an asset and find voxels
+
+00:09:00.206 --> 00:09:01.086 A:middle
+in a particular region.
+
+00:09:01.086 --> 00:09:03.706 A:middle
+You can do constructive
+solid geometry
+
+00:09:03.706 --> 00:09:06.926 A:middle
+and you can turn the voxels
+back into a mesh using some type
+
+00:09:06.926 --> 00:09:08.156 A:middle
+of smoothing algorithm.
+
+00:09:08.426 --> 00:09:10.256 A:middle
+Some kind.
+
+00:09:11.106 --> 00:09:16.186 A:middle
+So system integration, Model
+I/O is integrated directly
+
+00:09:16.976 --> 00:09:21.396 A:middle
+into SceneKit and it's
+utilized in MetalKit and GLKit.
+
+00:09:22.526 --> 00:09:26.616 A:middle
+Model I/O is used to do preview
+in the Finder and in Quick Look.
+
+00:09:26.676 --> 00:09:30.496 A:middle
+So you can go find an Alembic
+.abc cache hit the space bar
+
+00:09:30.496 --> 00:09:32.836 A:middle
+and it'll pop up in the Finder
+and you can tumble your asset
+
+00:09:32.836 --> 00:09:35.526 A:middle
+and preview it without
+even opening up any type
+
+00:09:35.526 --> 00:09:36.636 A:middle
+of auditioning environment.
+
+00:09:36.806 --> 00:09:39.626 A:middle
+You can edit assets
+in the Xcode.
+
+00:09:39.626 --> 00:09:43.746 A:middle
+The excavator here is loaded
+in Xcode in this picture.
+
+00:09:44.276 --> 00:09:48.016 A:middle
+And Model I/O works in
+Playgrounds and with Swift.
+
+00:09:48.016 --> 00:09:48.566 A:middle
+All right.
+
+00:09:50.396 --> 00:09:54.176 A:middle
+Down to the nitty-gritty
+of data types.
+
+00:09:55.276 --> 00:10:00.616 A:middle
+So MDLAsset is the thing
+that you get from a URL
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:55.276 --> 00:10:00.616 A:middle
+So MDLAsset is the thing
+that you get from a URL
+
+00:10:01.016 --> 00:10:02.826 A:middle
+and it's the big
+overall container
+
+00:10:02.826 --> 00:10:04.076 A:middle
+that you will often
+be working with.
+
+00:10:04.586 --> 00:10:07.786 A:middle
+It's an index container, you
+know, for fast enumeration
+
+00:10:07.786 --> 00:10:11.316 A:middle
+and stuff, it has transform
+hierarchies in it, meshes,
+
+00:10:11.586 --> 00:10:14.346 A:middle
+cameras and lights and you
+can make them using the API
+
+00:10:15.076 --> 00:10:17.166 A:middle
+or loading from a URL.
+
+00:10:18.136 --> 00:10:21.836 A:middle
+So a typical asset that
+you might pull out of
+
+00:10:21.836 --> 00:10:23.946 A:middle
+like a big old Alembic file,
+is going to have a whole bunch
+
+00:10:23.946 --> 00:10:25.526 A:middle
+of interesting things in it.
+
+00:10:25.916 --> 00:10:31.086 A:middle
+This particular example here
+has got a couple of cameras
+
+00:10:31.286 --> 00:10:35.136 A:middle
+and a light, a root
+transform, the blue box
+
+00:10:35.136 --> 00:10:36.486 A:middle
+over on the right there.
+
+00:10:36.836 --> 00:10:39.786 A:middle
+And underneath it, are
+the bits of the excavator
+
+00:10:39.786 --> 00:10:42.486 A:middle
+and the orange boxes
+just indicate that, yes,
+
+00:10:42.486 --> 00:10:44.106 A:middle
+you can indicate your
+material assignments
+
+00:10:44.106 --> 00:10:45.296 A:middle
+and things like that as well.
+
+00:10:45.916 --> 00:10:47.576 A:middle
+So that's what's in an asset.
+
+00:10:48.026 --> 00:10:50.816 A:middle
+It's all the stuff that
+logically belongs together
+
+00:10:50.816 --> 00:10:52.096 A:middle
+and you will get
+a bunch of assets
+
+00:10:52.096 --> 00:10:55.496 A:middle
+and compose them into a scene.
+
+00:10:55.746 --> 00:11:01.606 A:middle
+So an asset has allocators
+in case you need
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:55.746 --> 00:11:01.606 A:middle
+So an asset has allocators
+in case you need
+
+00:11:01.606 --> 00:11:04.856 A:middle
+to manage memory yourself,
+you can add an allocator.
+
+00:11:05.476 --> 00:11:09.346 A:middle
+It has descriptors and
+which teach about the things
+
+00:11:09.346 --> 00:11:10.486 A:middle
+that are inside of the asset.
+
+00:11:10.956 --> 00:11:13.056 A:middle
+There's the import
+and export facilities
+
+00:11:13.416 --> 00:11:14.766 A:middle
+and a bunch of children.
+
+00:11:15.346 --> 00:11:17.826 A:middle
+And the children are MDLObjects.
+
+00:11:19.316 --> 00:11:23.036 A:middle
+MDLObjects themselves
+can comprise a hierarchy.
+
+00:11:23.666 --> 00:11:27.206 A:middle
+Now, a typical scene
+graph, of course,
+
+00:11:27.206 --> 00:11:28.856 A:middle
+has transformation hierarchies.
+
+00:11:29.396 --> 00:11:35.176 A:middle
+And so an MDLObject has
+got a transform component.
+
+00:11:36.276 --> 00:11:39.476 A:middle
+We are not implementing
+the transform in, you know,
+
+00:11:39.476 --> 00:11:41.406 A:middle
+the standard way of
+putting a matrix everywhere.
+
+00:11:41.406 --> 00:11:43.016 A:middle
+We actually have a
+transformation component
+
+00:11:43.536 --> 00:11:45.696 A:middle
+and components are
+very interesting,
+
+00:11:45.846 --> 00:11:47.846 A:middle
+because it allows us
+to make scene graphs
+
+00:11:47.846 --> 00:11:51.126 A:middle
+that aren't limited just
+to the parent of or child
+
+00:11:51.126 --> 00:11:52.466 A:middle
+of type relationships.
+
+00:11:52.956 --> 00:11:55.356 A:middle
+Instead you can define
+your own components.
+
+00:11:56.726 --> 00:12:00.686 A:middle
+Now, I guess I should have
+mentioned that the nice thing is
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:56.726 --> 00:12:00.686 A:middle
+Now, I guess I should have
+mentioned that the nice thing is
+
+00:12:01.036 --> 00:12:02.566 A:middle
+that the API is designed
+
+00:12:02.636 --> 00:12:04.696 A:middle
+that you can write your own
+importers and exporters.
+
+00:12:05.136 --> 00:12:08.626 A:middle
+You can write -- if you have
+your own custom file format,
+
+00:12:09.356 --> 00:12:12.406 A:middle
+you can implement that
+and so back to this,
+
+00:12:12.876 --> 00:12:17.886 A:middle
+I've got a custom component
+which is a TriggerComponent
+
+00:12:17.886 --> 00:12:20.266 A:middle
+like a volume your character
+enters a region and some sort
+
+00:12:20.266 --> 00:12:21.236 A:middle
+of action should occur.
+
+00:12:21.536 --> 00:12:24.986 A:middle
+You can just make that yourself
+and define what the behavior is
+
+00:12:24.986 --> 00:12:28.516 A:middle
+and what it connects to,
+the API lets you do that.
+
+00:12:29.356 --> 00:12:33.596 A:middle
+Now, a mesh contains one
+or more vertex buffers.
+
+00:12:33.866 --> 00:12:36.266 A:middle
+That's positions and normals
+the thing that has to go off
+
+00:12:36.266 --> 00:12:38.166 A:middle
+to the GPU for rasterization.
+
+00:12:38.796 --> 00:12:41.226 A:middle
+And submeshers.
+
+00:12:42.266 --> 00:12:46.436 A:middle
+Submeshes, to get an idea
+of what exactly it is,
+
+00:12:46.656 --> 00:12:49.476 A:middle
+you might have, like, a
+character who is going
+
+00:12:49.476 --> 00:12:50.646 A:middle
+to drive the excavator
+
+00:12:50.646 --> 00:12:53.736 A:middle
+and he might have some optional
+components like a hard hat,
+
+00:12:54.066 --> 00:12:55.876 A:middle
+it shouldn't be optional,
+but it is.
+
+00:12:56.286 --> 00:13:01.326 A:middle
+So in one index buffer, I
+might have the whole character
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:56.286 --> 00:13:01.326 A:middle
+So in one index buffer, I
+might have the whole character
+
+00:13:01.326 --> 00:13:03.516 A:middle
+without the hat, and in
+another index buffer,
+
+00:13:03.516 --> 00:13:05.206 A:middle
+I might just have
+all indexes referring
+
+00:13:05.206 --> 00:13:07.016 A:middle
+to the original mesh
+vertex buffers
+
+00:13:07.186 --> 00:13:08.216 A:middle
+that have got his hat in it.
+
+00:13:08.706 --> 00:13:11.726 A:middle
+So by rendering or not
+rendering that submesh, he does
+
+00:13:11.726 --> 00:13:14.566 A:middle
+or does not have a hat.
+
+00:13:14.836 --> 00:13:17.126 A:middle
+Submeshes can share the
+data in the vertex buffers
+
+00:13:17.206 --> 00:13:19.266 A:middle
+so this just allows you to
+have a single submission
+
+00:13:19.266 --> 00:13:21.516 A:middle
+for the hardware.
+
+00:13:21.616 --> 00:13:26.026 A:middle
+So the mesh, besides holding
+vertex and index buffers,
+
+00:13:27.136 --> 00:13:30.596 A:middle
+also has utility functions, and
+there's generators to make all
+
+00:13:30.596 --> 00:13:33.536 A:middle
+of your usual things, like
+boxes and spheres and what not.
+
+00:13:34.176 --> 00:13:35.336 A:middle
+There's modifiers.
+
+00:13:35.726 --> 00:13:39.496 A:middle
+So if a mesh that didn't have
+normals or tangent bases,
+
+00:13:39.496 --> 00:13:42.916 A:middle
+or any of those things, you
+can generate those on demand,
+
+00:13:43.396 --> 00:13:46.596 A:middle
+thinking back to that
+bake and export cycle
+
+00:13:46.596 --> 00:13:47.556 A:middle
+that I showed earlier.
+
+00:13:48.356 --> 00:13:50.156 A:middle
+And there's, of course
+the bakers.
+
+00:13:50.726 --> 00:13:57.436 A:middle
+Now, a mesh buffer is the thing
+that has to go to the hardware.
+
+00:13:57.796 --> 00:13:59.856 A:middle
+It's got the data in it.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:00.816 --> 00:14:01.666 A:middle
+The actual data.
+
+00:14:02.256 --> 00:14:05.386 A:middle
+How big the buffer is,
+how you allocated it.
+
+00:14:05.886 --> 00:14:09.646 A:middle
+And you have to describe
+those vertex buffers.
+
+00:14:09.646 --> 00:14:12.796 A:middle
+You have to say what the
+intention of the buffer is,
+
+00:14:12.796 --> 00:14:13.876 A:middle
+like is this a position?
+
+00:14:14.366 --> 00:14:15.846 A:middle
+How big is it?
+
+00:14:15.846 --> 00:14:18.076 A:middle
+How many bytes does it take
+and so on and so forth.
+
+00:14:19.376 --> 00:14:22.596 A:middle
+So finally the stride from
+one vertex to the next,
+
+00:14:22.656 --> 00:14:23.866 A:middle
+that's what the hardware
+needs to know.
+
+00:14:24.276 --> 00:14:26.716 A:middle
+The same sort of
+thing for the submesh.
+
+00:14:26.886 --> 00:14:28.436 A:middle
+You say what kind of
+indexes do you have.
+
+00:14:28.646 --> 00:14:30.966 A:middle
+Are they 16s or 32s or whatever.
+
+00:14:31.216 --> 00:14:32.166 A:middle
+The geometry type.
+
+00:14:32.166 --> 00:14:35.746 A:middle
+Is it a triangle strip, or
+is it a point or a line,
+
+00:14:36.136 --> 00:14:37.146 A:middle
+and finally a material.
+
+00:14:38.626 --> 00:14:43.976 A:middle
+Materials, as I said are going
+to be physically motivated
+
+00:14:43.976 --> 00:14:45.476 A:middle
+if you use these APIs.
+
+00:14:46.056 --> 00:14:47.836 A:middle
+And to tell you what that means,
+
+00:14:48.096 --> 00:14:51.056 A:middle
+we have got bidirectional
+reflectance functions
+
+00:14:51.116 --> 00:14:53.996 A:middle
+with ten simple parameters
+that are designed
+
+00:14:53.996 --> 00:14:55.346 A:middle
+by artists to be intuitive.
+
+00:14:55.926 --> 00:14:59.086 A:middle
+So one of the more
+important features is just
+
+00:14:59.086 --> 00:15:01.556 A:middle
+to specify whether the
+material is dialectic
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:59.086 --> 00:15:01.556 A:middle
+to specify whether the
+material is dialectic
+
+00:15:01.556 --> 00:15:04.056 A:middle
+like clay or if it's a metal.
+
+00:15:04.056 --> 00:15:07.266 A:middle
+If you set this value all the
+way to one end, it's dialectic
+
+00:15:07.266 --> 00:15:10.706 A:middle
+like clay all the
+way to the other end,
+
+00:15:10.706 --> 00:15:15.136 A:middle
+it will behave like a metal.
+
+00:15:15.286 --> 00:15:19.056 A:middle
+Here I have combined the two to
+put an acrylic clear coat on top
+
+00:15:19.056 --> 00:15:25.266 A:middle
+of the metallic base and here I
+tweaked up one of the parameters
+
+00:15:25.266 --> 00:15:27.186 A:middle
+to give a satin finish.
+
+00:15:27.716 --> 00:15:34.216 A:middle
+And here's an actual
+artist-prepared piece
+
+00:15:34.216 --> 00:15:37.206 A:middle
+of spaceship with all kinds
+of different materials on it,
+
+00:15:37.476 --> 00:15:40.206 A:middle
+just to give you an
+idea that a small number
+
+00:15:40.236 --> 00:15:43.616 A:middle
+of parameters can give you
+a wide variety of looks.
+
+00:15:44.806 --> 00:15:48.646 A:middle
+So, materials have a
+name, just like everything
+
+00:15:48.786 --> 00:15:50.886 A:middle
+in Model I/O has properties.
+
+00:15:51.076 --> 00:15:54.126 A:middle
+You specify the scattering
+function, whether you want it
+
+00:15:54.126 --> 00:15:57.056 A:middle
+to be Lambert Blinn-Phong
+because you need compatibility
+
+00:15:57.056 --> 00:16:00.966 A:middle
+with an older system, and,
+or physically plausible
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:15:57.056 --> 00:16:00.966 A:middle
+with an older system, and,
+or physically plausible
+
+00:16:00.966 --> 00:16:02.906 A:middle
+if you're going into
+this brave new world
+
+00:16:02.906 --> 00:16:04.186 A:middle
+of physical motivation.
+
+00:16:05.466 --> 00:16:09.016 A:middle
+The materials are singly
+inherited and so what
+
+00:16:09.016 --> 00:16:12.126 A:middle
+that means is you might
+have some kind of a uniform
+
+00:16:12.256 --> 00:16:15.416 A:middle
+that only varies by a number
+or something on each character.
+
+00:16:15.416 --> 00:16:18.296 A:middle
+So you can specify a base
+material and override properties
+
+00:16:18.976 --> 00:16:20.756 A:middle
+and subclass materials.
+
+00:16:20.756 --> 00:16:24.756 A:middle
+The material properties have
+names, and they have a semantic
+
+00:16:24.756 --> 00:16:27.526 A:middle
+which means how are
+they to be used, a type,
+
+00:16:27.576 --> 00:16:30.316 A:middle
+like is it a floating point
+value or a color and a value.
+
+00:16:31.726 --> 00:16:32.346 A:middle
+And lights.
+
+00:16:32.946 --> 00:16:37.006 A:middle
+And lights have physical
+parameters
+
+00:16:37.156 --> 00:16:40.436 A:middle
+and physical properties
+and they have geometry.
+
+00:16:40.626 --> 00:16:42.436 A:middle
+They have, you know,
+an extent and a width.
+
+00:16:42.846 --> 00:16:46.866 A:middle
+And the light itself emits
+light in a certain way.
+
+00:16:47.126 --> 00:16:49.326 A:middle
+You can specify it with
+lumens and color temperature.
+
+00:16:49.746 --> 00:16:51.626 A:middle
+One thing I'm really
+excited about overall
+
+00:16:51.626 --> 00:16:55.696 A:middle
+in Model I/O is we've
+got support for color
+
+00:16:56.026 --> 00:17:00.146 A:middle
+that can be specified using
+modern color pipelines.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:56.026 --> 00:17:00.146 A:middle
+that can be specified using
+modern color pipelines.
+
+00:17:00.646 --> 00:17:04.336 A:middle
+So if you want to use SRGB,
+we have a well-specified SRGB.
+
+00:17:04.336 --> 00:17:06.506 A:middle
+If you want to use Rec.709
+
+00:17:06.506 --> 00:17:10.165 A:middle
+or the new Asus CG color
+profiles you can ensure
+
+00:17:10.165 --> 00:17:11.205 A:middle
+that your color started
+
+00:17:11.556 --> 00:17:14.646 A:middle
+in a content production
+app a certain way
+
+00:17:14.646 --> 00:17:18.205 A:middle
+and it got all the way
+to the end, without going
+
+00:17:18.205 --> 00:17:20.236 A:middle
+through odd transformations
+that might give you some,
+
+00:17:20.236 --> 00:17:21.746 A:middle
+you know, color surprises.
+
+00:17:24.415 --> 00:17:28.766 A:middle
+So there we have our
+physically plausible light
+
+00:17:29.506 --> 00:17:32.556 A:middle
+and various subclasses,
+procedure area light,
+
+00:17:32.996 --> 00:17:35.566 A:middle
+I should say it procedural
+description of an area light.
+
+00:17:36.096 --> 00:17:41.146 A:middle
+And the photometric light from
+an IES profile, and light probes
+
+00:17:41.486 --> 00:17:44.206 A:middle
+that take reflective
+maps or irradiance maps
+
+00:17:44.586 --> 00:17:46.826 A:middle
+and you can use them to compute
+spherical harmonics and stuff
+
+00:17:46.826 --> 00:17:49.096 A:middle
+like that to compactly
+represent what's going on.
+
+00:17:50.396 --> 00:17:54.696 A:middle
+And our camera is no longer
+merely a pinhole camera
+
+00:17:54.696 --> 00:17:57.076 A:middle
+with an infinite in
+focus projection.
+
+00:17:57.716 --> 00:18:01.966 A:middle
+We describe a camera from
+one end to the other.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:57.716 --> 00:18:01.966 A:middle
+We describe a camera from
+one end to the other.
+
+00:18:02.416 --> 00:18:07.116 A:middle
+My picture here is supposed
+to have a lens, shutter
+
+00:18:07.116 --> 00:18:08.216 A:middle
+and sensor plain there.
+
+00:18:08.586 --> 00:18:12.846 A:middle
+We describe what the lens can
+see, the properties of the lens,
+
+00:18:12.846 --> 00:18:15.426 A:middle
+what kind of distortion,
+barrel distortion,
+
+00:18:15.596 --> 00:18:18.566 A:middle
+or chromatic aberration that
+sort of thing, the geometry
+
+00:18:18.566 --> 00:18:21.186 A:middle
+of the lens and how big is the
+glass, how long is the barrel.
+
+00:18:21.696 --> 00:18:22.896 A:middle
+The exit aperture.
+
+00:18:22.896 --> 00:18:27.036 A:middle
+How tightly have you closed the
+aperture, how big is the sensor
+
+00:18:27.336 --> 00:18:30.076 A:middle
+and what is the exposure
+characteristics of the sensor.
+
+00:18:30.646 --> 00:18:34.826 A:middle
+So the end result of all of that
+is, if you specify your cameras
+
+00:18:34.826 --> 00:18:41.146 A:middle
+in this way, if you mount a
+35 or say a 50-millimeter lens
+
+00:18:41.146 --> 00:18:45.396 A:middle
+with an F1.8 aperture
+and go check Wikipedia,
+
+00:18:45.606 --> 00:18:47.926 A:middle
+what are the characteristics
+of a lens like that,
+
+00:18:47.996 --> 00:18:51.816 A:middle
+what is the field of view, and
+what's the out of focus light,
+
+00:18:52.036 --> 00:18:55.696 A:middle
+highlight size and things like
+that, the utility functions
+
+00:18:55.696 --> 00:18:59.016 A:middle
+on the MDLCamera will agree with
+what you find in a textbook.
+
+00:18:59.016 --> 00:19:01.956 A:middle
+So that's a handy and fun thing.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:59.016 --> 00:19:01.956 A:middle
+So that's a handy and fun thing.
+
+00:19:02.196 --> 00:19:04.416 A:middle
+And I encourage you to
+incorporate those kinds
+
+00:19:04.416 --> 00:19:06.886 A:middle
+of calculations into your
+shaders and pipelines.
+
+00:19:08.346 --> 00:19:09.646 A:middle
+Just a quick example here.
+
+00:19:10.776 --> 00:19:13.166 A:middle
+When I first load this
+thing up in my viewer,
+
+00:19:13.446 --> 00:19:15.386 A:middle
+these are the default
+exposure settings.
+
+00:19:15.676 --> 00:19:18.706 A:middle
+Some of the detail is lost,
+it's a bit washed out.
+
+00:19:18.886 --> 00:19:23.466 A:middle
+We can't see a lot of detail on
+the dark areas of the excavator.
+
+00:19:24.316 --> 00:19:29.556 A:middle
+Sorry for the brightness here,
+but I underexposed this image
+
+00:19:29.606 --> 00:19:32.176 A:middle
+and then flashed the
+sensor in order to bring
+
+00:19:32.176 --> 00:19:35.746 A:middle
+out shadow detail, and raise
+the overall levels while
+
+00:19:35.746 --> 00:19:36.586 A:middle
+reducing glare.
+
+00:19:37.706 --> 00:19:41.076 A:middle
+Just like a photographer
+might do, if you are playing
+
+00:19:41.076 --> 00:19:45.716 A:middle
+around with settings on
+your own real camera.
+
+00:19:45.826 --> 00:19:46.536 A:middle
+Now, skies.
+
+00:19:47.876 --> 00:19:49.656 A:middle
+We have two ways
+to create skies.
+
+00:19:49.976 --> 00:19:53.916 A:middle
+The first way is to use a
+procedural sky generator.
+
+00:19:53.996 --> 00:19:56.406 A:middle
+It uses physics.
+
+00:19:56.496 --> 00:19:59.416 A:middle
+You give it time of day,
+essentially how high is the sun.
+
+00:19:59.716 --> 00:20:01.446 A:middle
+What are the atmospheric
+conditions.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:59.716 --> 00:20:01.446 A:middle
+What are the atmospheric
+conditions.
+
+00:20:01.446 --> 00:20:04.016 A:middle
+Is there a lot of back
+scatter from the ground,
+
+00:20:04.016 --> 00:20:05.276 A:middle
+is there a lot of
+junk in the air.
+
+00:20:05.786 --> 00:20:09.646 A:middle
+We calculate exactly
+what the sky would look
+
+00:20:09.946 --> 00:20:11.896 A:middle
+like through some
+fairly heavy math.
+
+00:20:13.476 --> 00:20:16.526 A:middle
+So the other way
+you can create --
+
+00:20:16.526 --> 00:20:19.856 A:middle
+it creates a cube that you
+can then just, you know, use.
+
+00:20:20.346 --> 00:20:24.486 A:middle
+Now, the other way you can
+create sky for illumination
+
+00:20:24.606 --> 00:20:27.266 A:middle
+in this physically based
+realm is through photography.
+
+00:20:27.266 --> 00:20:29.416 A:middle
+You can take a spherical
+panorama
+
+00:20:29.626 --> 00:20:30.896 A:middle
+with your phone or a DSLR.
+
+00:20:30.896 --> 00:20:33.106 A:middle
+I made this picture
+with my iPhone.
+
+00:20:33.726 --> 00:20:39.676 A:middle
+Then you can prepare it for
+rendering using the MDLTexture
+
+00:20:39.676 --> 00:20:44.526 A:middle
+and initWithURL API,
+create a cube map
+
+00:20:45.036 --> 00:20:46.286 A:middle
+for reflectance and irradiance.
+
+00:20:46.286 --> 00:20:48.536 A:middle
+Irradiance is the incoming
+light that we can deduce
+
+00:20:48.596 --> 00:20:51.806 A:middle
+from the image, so there it's
+been converted into a cube.
+
+00:20:52.406 --> 00:20:58.336 A:middle
+And then, from that, you
+can compute the irradiance
+
+00:20:58.846 --> 00:21:02.876 A:middle
+and what these three strips
+show is the original image,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:58.846 --> 00:21:02.876 A:middle
+and what these three strips
+show is the original image,
+
+00:21:03.106 --> 00:21:07.286 A:middle
+the middle line is a texture
+map showing the irradiance
+
+00:21:07.286 --> 00:21:09.636 A:middle
+at a certain convolution
+or level of blur
+
+00:21:10.236 --> 00:21:12.276 A:middle
+and the third one is really fun.
+
+00:21:12.276 --> 00:21:14.596 A:middle
+The middle one is a texture and
+it uses a fair amount of memory.
+
+00:21:14.596 --> 00:21:18.106 A:middle
+And the third one is actually
+spherical harmonic coefficients
+
+00:21:18.326 --> 00:21:23.056 A:middle
+and so it's 27 floats
+that reproduce the look
+
+00:21:23.056 --> 00:21:24.406 A:middle
+of the irradiant environment
+
+00:21:24.496 --> 00:21:27.926 A:middle
+that previously took
+several dozen K to represent
+
+00:21:27.926 --> 00:21:29.566 A:middle
+in the middle slide
+or the middle strip.
+
+00:21:30.836 --> 00:21:32.016 A:middle
+So putting that all together,
+
+00:21:32.566 --> 00:21:36.356 A:middle
+this excavator is fairly well
+situated in its environment,
+
+00:21:36.896 --> 00:21:40.886 A:middle
+in that I photographed
+and that's, I think,
+
+00:21:40.886 --> 00:21:43.206 A:middle
+a pretty exciting result,
+and I hope you guys can think
+
+00:21:43.206 --> 00:21:44.506 A:middle
+of cool things to do with that.
+
+00:21:44.556 --> 00:21:49.386 A:middle
+Now, I just want to
+talk a little bit
+
+00:21:49.386 --> 00:21:51.346 A:middle
+about how Model I/O
+integrates with SceneKit.
+
+00:21:52.556 --> 00:21:55.346 A:middle
+There's essentially a
+one-to-one correspondence
+
+00:21:55.666 --> 00:22:00.246 A:middle
+between top level Model I/O
+elements and SceneKit elements.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:55.666 --> 00:22:00.246 A:middle
+between top level Model I/O
+elements and SceneKit elements.
+
+00:22:00.246 --> 00:22:02.566 A:middle
+MDLAsset corresponds
+to SceneKit root node
+
+00:22:03.406 --> 00:22:07.116 A:middle
+and MDLMesh coordinates with
+SCNNode with SCNGeometry.
+
+00:22:07.426 --> 00:22:11.246 A:middle
+MDLLight with SCNLight camera
+camera, material material.
+
+00:22:11.936 --> 00:22:16.216 A:middle
+Where exact analogs don't exist
+between a SceneKit parameter
+
+00:22:16.216 --> 00:22:19.816 A:middle
+and about a Model I/O
+parameter, we translate
+
+00:22:20.056 --> 00:22:21.756 A:middle
+to get a close approximation.
+
+00:22:23.616 --> 00:22:26.746 A:middle
+Now, Model I/O doesn't
+actually do rendering for you.
+
+00:22:26.746 --> 00:22:29.026 A:middle
+You probably gathered
+that since I mentioned all
+
+00:22:29.026 --> 00:22:31.546 A:middle
+of these other APIs
+that do do rendering.
+
+00:22:32.136 --> 00:22:35.086 A:middle
+So in MetalKit, you are
+much closer to the metal.
+
+00:22:35.956 --> 00:22:39.356 A:middle
+The correspondence that
+you get between Model I/O
+
+00:22:39.356 --> 00:22:43.316 A:middle
+and MetalKit is an
+MDLMesh can be converted
+
+00:22:43.606 --> 00:22:46.136 A:middle
+into a model kit
+array kit of meshes.
+
+00:22:46.676 --> 00:22:49.566 A:middle
+Once you have that array
+of meshes, it's up to you
+
+00:22:49.566 --> 00:22:53.086 A:middle
+to write shaders, traverse
+the mesh, find the materials,
+
+00:22:53.086 --> 00:22:55.396 A:middle
+the lighting condition,
+and do the rendering.
+
+00:22:55.876 --> 00:22:57.936 A:middle
+But getting those
+metal buffers prepared
+
+00:22:57.936 --> 00:23:00.186 A:middle
+for you is absolutely
+transparent.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:57.936 --> 00:23:00.186 A:middle
+for you is absolutely
+transparent.
+
+00:23:01.036 --> 00:23:07.216 A:middle
+So with that, I would like to
+pass the mic to Claudia Roberts
+
+00:23:07.216 --> 00:23:09.626 A:middle
+to talk about geometry
+and voxels.
+
+00:23:11.006 --> 00:23:11.156 A:middle
+(Applause).
+
+00:23:18.216 --> 00:23:18.946 A:middle
+&gt;&gt; CLAUDIA ROBERTS:
+Hello, everyone,
+
+00:23:18.946 --> 00:23:21.516 A:middle
+my name is Claudia Roberts
+and as Nick mentioned,
+
+00:23:21.516 --> 00:23:23.556 A:middle
+I will give you an
+overview of some
+
+00:23:23.556 --> 00:23:25.356 A:middle
+of the different
+ways you can describe
+
+00:23:25.356 --> 00:23:28.046 A:middle
+and characterize
+geometry in Model I/O.
+
+00:23:28.786 --> 00:23:32.306 A:middle
+The motivation being to help you
+create games and applications
+
+00:23:32.306 --> 00:23:35.046 A:middle
+that have a more physically
+plausible look and feel.
+
+00:23:35.686 --> 00:23:39.506 A:middle
+To give you all some context
+of where we are headed,
+
+00:23:39.506 --> 00:23:42.656 A:middle
+first I will discuss how Model
+I/O supports normal smoothing
+
+00:23:43.016 --> 00:23:45.736 A:middle
+then go into subdivision
+surfaces followed
+
+00:23:45.736 --> 00:23:48.466 A:middle
+by a discussion on
+voxels and a quick demo.
+
+00:23:49.076 --> 00:23:51.616 A:middle
+Okay. Let's get started.
+
+00:23:51.616 --> 00:23:52.576 A:middle
+Normal smoothing.
+
+00:23:53.506 --> 00:23:56.036 A:middle
+Normal smoothing is a cool
+technique that tricks people
+
+00:23:56.036 --> 00:23:58.986 A:middle
+into believing that your
+models have way more geometry
+
+00:23:58.986 --> 00:23:59.946 A:middle
+than they actually do.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:24:00.996 --> 00:24:02.546 A:middle
+By default, the vertices
+
+00:24:02.546 --> 00:24:04.836 A:middle
+of a polygon all share
+the same face normal.
+
+00:24:05.326 --> 00:24:06.806 A:middle
+And thus all points on the face
+
+00:24:06.806 --> 00:24:08.836 A:middle
+of the polygon have the
+same normal as well.
+
+00:24:09.766 --> 00:24:12.876 A:middle
+This creates a perceived crease
+between adjacent polygons
+
+00:24:13.196 --> 00:24:15.096 A:middle
+which is the result
+of the abrupt change
+
+00:24:15.096 --> 00:24:17.696 A:middle
+and vertex normals during
+the rasterization process.
+
+00:24:18.836 --> 00:24:21.116 A:middle
+This sharp contrast in
+colors can be mitigated
+
+00:24:21.296 --> 00:24:24.396 A:middle
+by introducing a shared normal
+whose value is the average
+
+00:24:24.396 --> 00:24:27.816 A:middle
+of the vertex normals that share
+the same coordinate position.
+
+00:24:28.676 --> 00:24:32.356 A:middle
+Now, during the GPU's lighting
+calculations the normal
+
+00:24:32.356 --> 00:24:33.736 A:middle
+at each point on the face
+
+00:24:33.736 --> 00:24:36.686 A:middle
+of the polygon will be the
+interpolation of vertex normals
+
+00:24:36.686 --> 00:24:39.206 A:middle
+that are no longer all
+the same, giving a nice,
+
+00:24:39.316 --> 00:24:40.246 A:middle
+smooth shading effect.
+
+00:24:41.916 --> 00:24:45.396 A:middle
+Using the MDLMesh API, you
+can add smoothed out normals
+
+00:24:45.436 --> 00:24:49.846 A:middle
+to your object, by calling the
+addNormalsWithAttributeNamed
+
+00:24:49.996 --> 00:24:53.186 A:middle
+method and you can control when
+normal smoothing is applied
+
+00:24:53.496 --> 00:24:55.486 A:middle
+by setting the crease
+threshold value.
+
+00:24:56.836 --> 00:25:00.036 A:middle
+With our spaceship, we
+see our default mesh
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:24:56.836 --> 00:25:00.036 A:middle
+With our spaceship, we
+see our default mesh
+
+00:25:00.036 --> 00:25:01.706 A:middle
+with the flat shading
+on the left
+
+00:25:02.316 --> 00:25:06.066 A:middle
+and the smooth shading
+on the right.
+
+00:25:06.326 --> 00:25:08.106 A:middle
+Next, subdivision surfaces.
+
+00:25:08.536 --> 00:25:12.036 A:middle
+Surface subdivision
+is a common technique
+
+00:25:12.036 --> 00:25:15.766 A:middle
+for using low detailed
+geometry to generate
+
+00:25:15.856 --> 00:25:18.196 A:middle
+and render a smooth
+surface for rendering.
+
+00:25:19.066 --> 00:25:22.486 A:middle
+This technique allows you to use
+a simple polygon control mesh
+
+00:25:22.696 --> 00:25:25.186 A:middle
+to create varying levels
+of detail as needed.
+
+00:25:25.736 --> 00:25:27.826 A:middle
+For instance, it would
+make a lot of sense
+
+00:25:27.826 --> 00:25:30.626 A:middle
+to render a character at a low
+polygon count when further away
+
+00:25:30.626 --> 00:25:34.036 A:middle
+and increase the level of detail
+as the character gets closer
+
+00:25:34.126 --> 00:25:35.666 A:middle
+and closer to the camera.
+
+00:25:36.916 --> 00:25:38.836 A:middle
+By varying the subdivision
+level of a model,
+
+00:25:38.836 --> 00:25:40.896 A:middle
+you can generate these
+different meshes without needing
+
+00:25:40.896 --> 00:25:42.266 A:middle
+to manually create them all.
+
+00:25:43.466 --> 00:25:46.026 A:middle
+In Model I/O, you can
+create subdivision surfaces
+
+00:25:46.386 --> 00:25:51.826 A:middle
+by calling the newSubdividedMesh
+routine, also found in MDLMesh.
+
+00:25:52.746 --> 00:25:55.486 A:middle
+Here at the bottom, we achieve
+the smooth mesh on the right,
+
+00:25:55.876 --> 00:25:58.616 A:middle
+by setting the subdivision
+level to two,
+
+00:25:58.616 --> 00:26:01.346 A:middle
+significantly increasing
+the number of polygons.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:58.616 --> 00:26:01.346 A:middle
+significantly increasing
+the number of polygons.
+
+00:26:04.036 --> 00:26:05.826 A:middle
+Finally, voxels.
+
+00:26:06.736 --> 00:26:09.626 A:middle
+In addition to providing support
+for various advanced techniques
+
+00:26:09.746 --> 00:26:12.056 A:middle
+for polygonal representations
+of 3D models,
+
+00:26:12.576 --> 00:26:15.696 A:middle
+Model I/O also supports
+volumetric representations.
+
+00:26:17.016 --> 00:26:19.316 A:middle
+By representing a model
+as a close approximation
+
+00:26:19.316 --> 00:26:22.186 A:middle
+of how it is actually found in
+the real world, that is a set
+
+00:26:22.186 --> 00:26:24.306 A:middle
+of particles or discreet
+points in space
+
+00:26:24.386 --> 00:26:28.016 A:middle
+with inherent properties such as
+volume, mass, velocity, color,
+
+00:26:28.636 --> 00:26:30.606 A:middle
+the door becomes
+wide open to a range
+
+00:26:30.606 --> 00:26:32.376 A:middle
+of physically realistic
+techniques,
+
+00:26:32.746 --> 00:26:34.416 A:middle
+analysis, and manipulations.
+
+00:26:35.766 --> 00:26:38.856 A:middle
+Where as with polygon meshes
+it's difficult to model
+
+00:26:38.856 --> 00:26:40.476 A:middle
+and represent surfaceless
+phenomena
+
+00:26:40.476 --> 00:26:42.416 A:middle
+such as clouds, water, fire.
+
+00:26:42.936 --> 00:26:45.706 A:middle
+It becomes much easier with
+the volume representation.
+
+00:26:46.596 --> 00:26:49.496 A:middle
+Now, instead of trying to
+mingle and twist a rigid shell
+
+00:26:49.496 --> 00:26:52.426 A:middle
+of polygons, the model
+becomes a deformable mass
+
+00:26:52.666 --> 00:26:54.916 A:middle
+that can change its
+properties at any time.
+
+00:26:55.976 --> 00:26:58.816 A:middle
+Along those same lines
+this representation allows
+
+00:26:58.816 --> 00:27:02.136 A:middle
+for procedural generation and
+modeling, meaning it can make
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:58.816 --> 00:27:02.136 A:middle
+for procedural generation and
+modeling, meaning it can make
+
+00:27:02.136 --> 00:27:04.646 A:middle
+for exciting and novel
+opportunities and game play.
+
+00:27:05.036 --> 00:27:07.526 A:middle
+Think modification and
+destruction of objects
+
+00:27:07.526 --> 00:27:08.646 A:middle
+and terrain on the fly.
+
+00:27:09.316 --> 00:27:14.796 A:middle
+Because a voxel model is a
+more accurate representation
+
+00:27:14.796 --> 00:27:18.186 A:middle
+of the real world, it lends
+itself to being analyzed,
+
+00:27:18.186 --> 00:27:21.446 A:middle
+explored, and operated on in
+a more natural and real way
+
+00:27:21.446 --> 00:27:22.666 A:middle
+like slicing and cutting.
+
+00:27:23.876 --> 00:27:25.996 A:middle
+This fact is proven to
+be particularly useful
+
+00:27:25.996 --> 00:27:28.866 A:middle
+in the medical imaging
+field where, lucky for us,
+
+00:27:28.866 --> 00:27:32.376 A:middle
+scientists have proven than our
+skulls are not really comprised
+
+00:27:32.376 --> 00:27:34.346 A:middle
+of an empty shell of triangles.
+
+00:27:36.026 --> 00:27:39.136 A:middle
+And finally, given that you have
+a few solid voxelized models,
+
+00:27:39.136 --> 00:27:41.636 A:middle
+you can perform Constructive
+Solid Geometry Boolean
+
+00:27:41.636 --> 00:27:43.816 A:middle
+operations on them in
+order to create a slew
+
+00:27:43.816 --> 00:27:45.786 A:middle
+of more interesting
+and complex models.
+
+00:27:46.376 --> 00:27:50.346 A:middle
+In Model I/O, we
+expose the support
+
+00:27:50.346 --> 00:27:53.166 A:middle
+of voxels via the
+MDLVoxelArray API.
+
+00:27:54.186 --> 00:27:56.306 A:middle
+Our implementation
+represents volume models
+
+00:27:56.306 --> 00:27:59.146 A:middle
+as a sparse volume grid,
+where voxels can be accessed
+
+00:27:59.146 --> 00:28:01.086 A:middle
+by using a simple spatial index.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:59.146 --> 00:28:01.086 A:middle
+by using a simple spatial index.
+
+00:28:02.236 --> 00:28:04.646 A:middle
+This representation allows
+for quick neighbor finding
+
+00:28:04.646 --> 00:28:05.886 A:middle
+and neighborhood traversal.
+
+00:28:06.476 --> 00:28:10.276 A:middle
+In addition to the grid
+coordinates each voxel contains
+
+00:28:10.306 --> 00:28:13.306 A:middle
+a shell level value
+which indicates how close
+
+00:28:13.306 --> 00:28:16.216 A:middle
+or far a voxel is to the
+surface of the model,
+
+00:28:16.696 --> 00:28:18.946 A:middle
+both in the positive
+exterior direction
+
+00:28:18.946 --> 00:28:21.196 A:middle
+and the negative
+interior direction.
+
+00:28:22.536 --> 00:28:24.646 A:middle
+And Model I/O also
+supports the creation
+
+00:28:24.686 --> 00:28:26.506 A:middle
+of closed meshes model cleanup
+
+00:28:26.506 --> 00:28:28.316 A:middle
+and conversion back
+to a polygon mesh.
+
+00:28:29.386 --> 00:28:31.776 A:middle
+I will now show you the handful
+of API calls you will need
+
+00:28:31.776 --> 00:28:35.786 A:middle
+in order to get started
+with voxel and Model I/Os.
+
+00:28:36.046 --> 00:28:39.356 A:middle
+So given an initialized
+MDLVoxelArray you can generate
+
+00:28:39.356 --> 00:28:42.056 A:middle
+its voxel data from
+an MDMMesh object
+
+00:28:42.586 --> 00:28:44.916 A:middle
+by calling the setVoxelsForMesh
+method.
+
+00:28:45.976 --> 00:28:48.786 A:middle
+The divisions parameter is
+used to set the resolution
+
+00:28:48.786 --> 00:28:51.356 A:middle
+of your voxel model by
+specifying the number
+
+00:28:51.356 --> 00:28:52.826 A:middle
+of layers your model
+will be divided
+
+00:28:52.826 --> 00:28:54.206 A:middle
+into on the vertical extent.
+
+00:28:55.266 --> 00:28:57.516 A:middle
+You can also specify how
+thick you want the interior
+
+00:28:57.516 --> 00:28:59.076 A:middle
+and the exterior walls
+of your model to be
+
+00:28:59.076 --> 00:29:00.336 A:middle
+with the last two parameters.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:59.076 --> 00:29:00.336 A:middle
+with the last two parameters.
+
+00:29:00.846 --> 00:29:04.226 A:middle
+Once you have your voxel
+array objects set up,
+
+00:29:04.876 --> 00:29:07.036 A:middle
+you can perform various
+operations on them,
+
+00:29:07.036 --> 00:29:10.076 A:middle
+such as intersect, union,
+and differenceWithVoxel
+
+00:29:10.166 --> 00:29:12.646 A:middle
+which perform expected
+basic Boolean operations.
+
+00:29:13.206 --> 00:29:16.936 A:middle
+To actually retrieve your
+voxel data for processing
+
+00:29:16.936 --> 00:29:20.536 A:middle
+and inspection, simply call
+the getVoxelIndices method
+
+00:29:21.536 --> 00:29:24.166 A:middle
+and once your done with your
+processing convert your voxel
+
+00:29:24.166 --> 00:29:26.486 A:middle
+model back to a polygonal
+representation,
+
+00:29:26.726 --> 00:29:28.846 A:middle
+using the meshUsingAllocator
+routine.
+
+00:29:30.716 --> 00:29:31.676 A:middle
+Simple as that.
+
+00:29:32.556 --> 00:29:38.556 A:middle
+And now, I will show you voxels
+in action with a quick demo.
+
+00:29:38.906 --> 00:29:55.856 A:middle
+&gt;&gt; CLAUDIA ROBERTS: So
+here we have this demo.
+
+00:29:56.346 --> 00:29:59.116 A:middle
+It actually took about one
+hour to create from start
+
+00:29:59.116 --> 00:30:00.836 A:middle
+to finish using SceneKit editor.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:29:59.116 --> 00:30:00.836 A:middle
+to finish using SceneKit editor.
+
+00:30:00.836 --> 00:30:04.026 A:middle
+We simply dragged and dropped in
+the ground and we did the same
+
+00:30:04.076 --> 00:30:07.106 A:middle
+for our red panda which
+you actually saw yesterday
+
+00:30:07.106 --> 00:30:08.316 A:middle
+at the state of the union.
+
+00:30:08.656 --> 00:30:11.636 A:middle
+It's just a regular polygon
+mesh and you can use any mesh
+
+00:30:11.636 --> 00:30:12.786 A:middle
+that you want for this.
+
+00:30:13.676 --> 00:30:16.856 A:middle
+And then using the MDLVoxelArray
+API, it only took two lines
+
+00:30:16.856 --> 00:30:19.356 A:middle
+of code to turn this
+mesh into voxels.
+
+00:30:20.286 --> 00:30:24.126 A:middle
+And then for each voxel,
+we creates an SCN box,
+
+00:30:24.126 --> 00:30:25.156 A:middle
+and this is what it looks like.
+
+00:30:29.416 --> 00:30:33.876 A:middle
+And now that we have our voxels
+in SceneKit, the exciting thing
+
+00:30:33.876 --> 00:30:36.686 A:middle
+about that is we
+can take advantage
+
+00:30:36.686 --> 00:30:39.586 A:middle
+of all the really cool things
+that SceneKit has to offer.
+
+00:30:39.746 --> 00:30:42.916 A:middle
+For instance, with one line
+of code, we can turn all
+
+00:30:42.916 --> 00:30:45.716 A:middle
+of these SCN boxes
+into SCN spheres.
+
+00:30:46.316 --> 00:30:50.006 A:middle
+And just for fun, we
+will apply SceneKit body
+
+00:30:50.006 --> 00:30:52.326 A:middle
+to all the nodes
+and explode him.
+
+00:30:52.436 --> 00:30:56.596 A:middle
+Wee! I am hand it over
+to Remi now who will talk
+
+00:30:56.596 --> 00:30:59.286 A:middle
+about advanced topics in
+lighting and Xcode support.
+
+00:30:59.826 --> 00:30:59.986 A:middle
+(Applause).
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:08.716 --> 00:31:11.936 A:middle
+&gt;&gt; REMI PALANDRI: Hey,
+everyone, and thanks, Claudia.
+
+00:31:11.976 --> 00:31:16.366 A:middle
+So hi. As Chris said today, I
+will be talking about advances
+
+00:31:16.366 --> 00:31:18.936 A:middle
+in baking and how Model I/O
+does all of that for you.
+
+00:31:20.116 --> 00:31:22.586 A:middle
+So what exactly is is
+advanced lighting and baking.
+
+00:31:22.586 --> 00:31:23.286 A:middle
+What's the goal here?
+
+00:31:23.836 --> 00:31:26.156 A:middle
+The goal is to introduce
+to your frameworks
+
+00:31:26.156 --> 00:31:27.236 A:middle
+and your rendering pipelines
+
+00:31:27.236 --> 00:31:29.416 A:middle
+in your games is something
+called global illumination.
+
+00:31:30.186 --> 00:31:30.766 A:middle
+So what is that?
+
+00:31:31.526 --> 00:31:34.576 A:middle
+It's not the way of saying,
+all right I have a point height
+
+00:31:34.576 --> 00:31:35.896 A:middle
+and I have a triangle
+and let's light it
+
+00:31:35.896 --> 00:31:38.916 A:middle
+up using dot products
+and be done with it.
+
+00:31:39.036 --> 00:31:41.396 A:middle
+We are going to try to pretend
+that that scene is real.
+
+00:31:41.636 --> 00:31:44.856 A:middle
+We're going to try to simulate
+how light would actually move
+
+00:31:45.166 --> 00:31:47.436 A:middle
+in that scene how light
+will reflect off the walls
+
+00:31:47.726 --> 00:31:50.176 A:middle
+and occlude because it
+can't go through triangles.
+
+00:31:51.126 --> 00:31:53.646 A:middle
+The issue is that
+it's very expensive.
+
+00:31:53.796 --> 00:31:55.826 A:middle
+It's been used a long
+time in the movies
+
+00:31:55.826 --> 00:31:58.196 A:middle
+because you can take a half
+hour to reframe if you want,
+
+00:31:58.696 --> 00:31:59.916 A:middle
+but that doesn't work for us.
+
+00:31:59.916 --> 00:32:03.676 A:middle
+If you look at the picture
+here, you can see, for example,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:59.916 --> 00:32:03.676 A:middle
+If you look at the picture
+here, you can see, for example,
+
+00:32:03.676 --> 00:32:07.836 A:middle
+that the wall here, the red wall
+on the left irradiates a bit
+
+00:32:07.836 --> 00:32:09.546 A:middle
+of red light on that sphere.
+
+00:32:10.176 --> 00:32:14.416 A:middle
+The wall isn't really the light
+per se, but lights as it does
+
+00:32:14.416 --> 00:32:17.816 A:middle
+in real life reflection off the
+wall and irradiated the sphere.
+
+00:32:18.386 --> 00:32:20.936 A:middle
+In the back of the
+sphere, it's a bit dark,
+
+00:32:20.936 --> 00:32:23.146 A:middle
+because this sphere occludes
+some lighting from going there.
+
+00:32:23.176 --> 00:32:24.826 A:middle
+It's not a real direct a shadow
+
+00:32:24.826 --> 00:32:26.086 A:middle
+but there is still
+something going on.
+
+00:32:27.836 --> 00:32:30.006 A:middle
+The issue is that this is
+really hard to do in realtime.
+
+00:32:30.006 --> 00:32:32.946 A:middle
+So we are going to show you
+ways to actually get some
+
+00:32:32.946 --> 00:32:35.796 A:middle
+of that precomputed before
+you even launch your game
+
+00:32:35.796 --> 00:32:36.556 A:middle
+during precompilation.
+
+00:32:37.076 --> 00:32:40.136 A:middle
+So that you can get a really
+realistic rounded look
+
+00:32:40.486 --> 00:32:42.356 A:middle
+without having any of
+the performance drawbacks
+
+00:32:42.716 --> 00:32:44.306 A:middle
+and we will balance
+performance and quality
+
+00:32:44.626 --> 00:32:46.776 A:middle
+so you can get the look
+that you want with very,
+
+00:32:46.776 --> 00:32:48.846 A:middle
+very few performance overheads.
+
+00:32:49.416 --> 00:32:52.936 A:middle
+So global illumination today
+will have two different heads.
+
+00:32:52.936 --> 00:32:56.716 A:middle
+So we are going to first
+show you ambient occlusion
+
+00:32:57.366 --> 00:32:58.526 A:middle
+and then light maps.
+
+00:32:59.376 --> 00:33:00.786 A:middle
+And to introduce
+ambient occlusion,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:59.376 --> 00:33:00.786 A:middle
+And to introduce
+ambient occlusion,
+
+00:33:00.886 --> 00:33:01.936 A:middle
+I would like to show
+you an example.
+
+00:33:02.556 --> 00:33:05.936 A:middle
+If you look at the spaceship
+it's the default SceneKit
+
+00:33:05.996 --> 00:33:07.316 A:middle
+spaceship, it looks good.
+
+00:33:07.666 --> 00:33:08.576 A:middle
+It's a great spaceship.
+
+00:33:08.576 --> 00:33:11.226 A:middle
+I love to play the game,
+but it's a bit flat.
+
+00:33:11.316 --> 00:33:15.346 A:middle
+If you look at the wing or the
+engine, it's not extremely clear
+
+00:33:15.346 --> 00:33:18.466 A:middle
+where the wing ends
+or the engine starts.
+
+00:33:18.466 --> 00:33:20.736 A:middle
+If you look at the two
+fins on the right image,
+
+00:33:21.586 --> 00:33:24.266 A:middle
+it's weird because you have
+the same light as you have
+
+00:33:24.266 --> 00:33:26.436 A:middle
+on the front of the ship
+but the fins should block
+
+00:33:26.436 --> 00:33:26.856 A:middle
+out the lights.
+
+00:33:27.636 --> 00:33:30.106 A:middle
+If you were to add ambient
+occlusion it would look
+
+00:33:31.246 --> 00:33:31.766 A:middle
+like this.
+
+00:33:31.766 --> 00:33:34.526 A:middle
+Same shader, but the look
+is a bit more realistic,
+
+00:33:34.526 --> 00:33:37.496 A:middle
+because there is now a
+shadow between an occlusion
+
+00:33:37.736 --> 00:33:38.986 A:middle
+between the wing and the engine.
+
+00:33:39.516 --> 00:33:41.516 A:middle
+If I were to add ambient
+occlusion to the second one,
+
+00:33:41.726 --> 00:33:43.436 A:middle
+it would look like
+this, same thing,
+
+00:33:43.686 --> 00:33:46.526 A:middle
+but you can see light
+that's occluded
+
+00:33:46.856 --> 00:33:49.216 A:middle
+and it's a more compelling
+experience.
+
+00:33:49.216 --> 00:33:50.846 A:middle
+It's a better looking picture.
+
+00:33:51.686 --> 00:33:53.096 A:middle
+What exactly is ambient
+occlusion?
+
+00:33:54.306 --> 00:33:57.736 A:middle
+What ambient occlusion is
+is very simply a measure
+
+00:33:57.736 --> 00:33:58.736 A:middle
+of geometry occlusion.
+
+00:33:58.986 --> 00:34:01.776 A:middle
+What that means is, for
+my point or my mesh,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:58.986 --> 00:34:01.776 A:middle
+What that means is, for
+my point or my mesh,
+
+00:34:02.356 --> 00:34:04.346 A:middle
+how much of the light
+that arrives
+
+00:34:04.346 --> 00:34:07.726 A:middle
+from my world can actually
+go to my point and how much
+
+00:34:07.726 --> 00:34:09.646 A:middle
+of my light is actually
+blocked by my mesh
+
+00:34:09.866 --> 00:34:10.766 A:middle
+and its surrounding meshes.
+
+00:34:11.746 --> 00:34:14.996 A:middle
+So it's basically a
+signal, one, for white,
+
+00:34:14.996 --> 00:34:17.666 A:middle
+saying I have absolutely
+no blocking.
+
+00:34:17.666 --> 00:34:20.485 A:middle
+The whole light arrives
+and/or commuting,
+
+00:34:20.485 --> 00:34:22.045 A:middle
+most of my light can't go there.
+
+00:34:22.476 --> 00:34:23.636 A:middle
+If we were to look
+at the signal,
+
+00:34:23.976 --> 00:34:24.815 A:middle
+that's what it looks like.
+
+00:34:25.545 --> 00:34:28.016 A:middle
+Mostly white, because
+most light can go there.
+
+00:34:28.346 --> 00:34:31.466 A:middle
+But you see some (inaudible)
+physical data there.
+
+00:34:32.315 --> 00:34:33.775 A:middle
+How do we compute that.
+
+00:34:34.496 --> 00:34:37.166 A:middle
+We compute that using
+offline raytracing.
+
+00:34:37.166 --> 00:34:40.036 A:middle
+So your mesh gets
+into a (inaudible)
+
+00:34:40.036 --> 00:34:41.795 A:middle
+and we send rays everywhere.
+
+00:34:42.096 --> 00:34:44.106 A:middle
+And we calculate how much rays
+
+00:34:44.606 --> 00:34:46.505 A:middle
+if I send rays all
+around my points.
+
+00:34:46.626 --> 00:34:50.485 A:middle
+How much rays hit the mesh and
+how much rays go to the sky box.
+
+00:34:50.806 --> 00:34:53.206 A:middle
+Difference between both is
+my ambient occlusion signal.
+
+00:34:54.315 --> 00:34:55.716 A:middle
+So what do we require
+from you guys?
+
+00:34:56.545 --> 00:34:59.186 A:middle
+An input. It's a
+mesh, my spaceship,
+
+00:34:59.626 --> 00:35:00.696 A:middle
+and a set of occlusion meshes.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:59.626 --> 00:35:00.696 A:middle
+and a set of occlusion meshes.
+
+00:35:01.276 --> 00:35:02.776 A:middle
+So here it's only a spaceship.
+
+00:35:02.776 --> 00:35:04.446 A:middle
+If I were, for example,
+to represent
+
+00:35:04.446 --> 00:35:07.636 A:middle
+that scene right there, and
+I wanted to make the ground.
+
+00:35:07.636 --> 00:35:09.366 A:middle
+So it would compute ambient
+occlusion for the ground.
+
+00:35:09.556 --> 00:35:13.666 A:middle
+I would also need all the chairs
+and the people and the floors
+
+00:35:13.666 --> 00:35:15.716 A:middle
+and all of that to stop the rays
+
+00:35:15.766 --> 00:35:18.826 A:middle
+so that I have a very
+nicely looking mesh.
+
+00:35:18.826 --> 00:35:19.776 A:middle
+So that would be a nice set.
+
+00:35:20.876 --> 00:35:21.956 A:middle
+And what do I get as output,
+
+00:35:21.956 --> 00:35:25.776 A:middle
+a set of occlusion values
+just for every point.
+
+00:35:26.626 --> 00:35:27.736 A:middle
+What is the occlusion
+of that point.
+
+00:35:29.136 --> 00:35:30.396 A:middle
+So how exactly do we store that?
+
+00:35:30.826 --> 00:35:34.176 A:middle
+We have two ways, either
+vertices or textures.
+
+00:35:34.676 --> 00:35:36.536 A:middle
+So if my mesh has
+lots of vertices
+
+00:35:36.536 --> 00:35:39.566 A:middle
+for example a big
+spaceship with plenty
+
+00:35:39.566 --> 00:35:42.066 A:middle
+of triangles we can just
+store that in vertices.
+
+00:35:42.316 --> 00:35:44.996 A:middle
+It works very well because its
+very cheap it's nearly one float
+
+00:35:44.996 --> 00:35:50.056 A:middle
+per vertex and using
+rasterization for your metal
+
+00:35:50.056 --> 00:35:52.286 A:middle
+or pipeline, it's
+extremely cheap to render,
+
+00:35:53.596 --> 00:35:56.916 A:middle
+but for example, that spaceship
+is actually fairly low triangles
+
+00:35:57.176 --> 00:35:58.286 A:middle
+and so we need a texture.
+
+00:35:59.686 --> 00:36:02.386 A:middle
+So we actually built for
+you guys inside Model I/O,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:35:59.686 --> 00:36:02.386 A:middle
+So we actually built for
+you guys inside Model I/O,
+
+00:36:02.696 --> 00:36:05.976 A:middle
+a UV mapper that creates
+2D texture and wraps it
+
+00:36:05.976 --> 00:36:08.246 A:middle
+around the 3D mesh, and
+so that corresponds.
+
+00:36:08.746 --> 00:36:11.816 A:middle
+And then for every pixel
+of that texture we have an
+
+00:36:11.816 --> 00:36:12.496 A:middle
+ambient occlusion.
+
+00:36:12.936 --> 00:36:14.986 A:middle
+If we were to look at what
+that texture looks like for
+
+00:36:14.986 --> 00:36:16.196 A:middle
+that spaceship, it
+looks like this.
+
+00:36:16.196 --> 00:36:20.286 A:middle
+So you can see it's
+basically the texture wrapped
+
+00:36:20.286 --> 00:36:22.176 A:middle
+around the spaceship.
+
+00:36:22.176 --> 00:36:26.576 A:middle
+You can see the wings and the
+engine base and all of that.
+
+00:36:26.806 --> 00:36:27.866 A:middle
+How do we compute that?
+
+00:36:27.966 --> 00:36:28.726 A:middle
+It's very easy.
+
+00:36:28.916 --> 00:36:30.066 A:middle
+It's literally a one liner.
+
+00:36:30.376 --> 00:36:32.566 A:middle
+You can look at the
+top one for example,
+
+00:36:33.066 --> 00:36:35.026 A:middle
+shipMesh
+generateAmbientOcclusion,
+
+00:36:35.816 --> 00:36:36.596 A:middle
+here it's vertex.
+
+00:36:36.596 --> 00:36:40.916 A:middle
+And so we have two parameters
+quality and attenuation factor.
+
+00:36:41.656 --> 00:36:44.816 A:middle
+If we increase quality, what it
+will do, it will send more rays
+
+00:36:44.926 --> 00:36:46.886 A:middle
+to get a better looking
+signal but it's going
+
+00:36:46.886 --> 00:36:48.396 A:middle
+to take a bit more
+time to compute.
+
+00:36:49.276 --> 00:36:52.536 A:middle
+Because it's baking, it's
+before you even launch the game,
+
+00:36:52.536 --> 00:36:52.906 A:middle
+but still.
+
+00:36:53.486 --> 00:36:56.536 A:middle
+And if we have a textural bake,
+then the texture will be bigger
+
+00:36:56.536 --> 00:36:58.946 A:middle
+so it will increase a
+bit your memory cost.
+
+00:36:58.946 --> 00:37:01.746 A:middle
+And then that attenuation will
+simply attenuate the signal
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:58.946 --> 00:37:01.746 A:middle
+And then that attenuation will
+simply attenuate the signal
+
+00:37:01.816 --> 00:37:03.666 A:middle
+so only the darker
+parts stay dark.
+
+00:37:04.916 --> 00:37:07.566 A:middle
+The really cool thing here
+is we actually partnered
+
+00:37:07.566 --> 00:37:09.926 A:middle
+with the SceneKit team to
+integrate those features
+
+00:37:09.926 --> 00:37:12.436 A:middle
+in both SceneKit but even
+in the SceneKit editor
+
+00:37:12.436 --> 00:37:14.126 A:middle
+that you guys saw at
+the state of the union.
+
+00:37:14.566 --> 00:37:20.266 A:middle
+And I would like to
+show you that right now.
+
+00:37:20.956 --> 00:37:22.876 A:middle
+So it works.
+
+00:37:23.236 --> 00:37:26.756 A:middle
+So I just loaded
+here a little scene
+
+00:37:27.066 --> 00:37:31.356 A:middle
+that literally has a
+spaceship and a sky box around.
+
+00:37:31.466 --> 00:37:33.666 A:middle
+The ship is very
+nicely flying in space.
+
+00:37:33.966 --> 00:37:38.196 A:middle
+I added no lights here,
+which is why is is very flat.
+
+00:37:38.196 --> 00:37:40.406 A:middle
+The only thing that we are
+visualizing right now is
+
+00:37:40.406 --> 00:37:40.956 A:middle
+ambient lighting.
+
+00:37:41.506 --> 00:37:45.146 A:middle
+And as you can see the ambient
+lighting does not take what the
+
+00:37:45.246 --> 00:37:47.066 A:middle
+ship looks like into
+account whatsoever.
+
+00:37:47.066 --> 00:37:49.956 A:middle
+It doesn't give the user
+nice feedback in terms
+
+00:37:49.956 --> 00:37:52.146 A:middle
+of where the geometry
+is, so its very flat.
+
+00:37:52.226 --> 00:37:53.526 A:middle
+We're going to change that.
+
+00:37:54.136 --> 00:37:56.146 A:middle
+So I'm going to click
+on my mesh and first,
+
+00:37:56.146 --> 00:37:58.616 A:middle
+I will see that we actually have
+a fair amount of vertexes here
+
+00:37:58.826 --> 00:37:59.816 A:middle
+so we will do a vertex bake.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:38:00.086 --> 00:38:02.336 A:middle
+I will bring up the
+geometry tab.
+
+00:38:02.876 --> 00:38:05.796 A:middle
+I'm going to go here
+and under occlusion bake
+
+00:38:05.886 --> 00:38:06.606 A:middle
+and choose the vertex,
+
+00:38:07.716 --> 00:38:10.996 A:middle
+those values are
+perfect, and press bake.
+
+00:38:11.606 --> 00:38:12.316 A:middle
+So what's happening here?
+
+00:38:12.846 --> 00:38:16.356 A:middle
+For every little vertex of that
+ship, we will send between 100
+
+00:38:16.356 --> 00:38:20.346 A:middle
+to 200 rays around and
+then it looks like this.
+
+00:38:21.366 --> 00:38:23.156 A:middle
+See? Way better!
+
+00:38:23.736 --> 00:38:27.306 A:middle
+We had this and now
+we have got this.
+
+00:38:27.306 --> 00:38:28.206 A:middle
+And it makes perfect sense.
+
+00:38:28.356 --> 00:38:30.676 A:middle
+If you look at, for
+example, here, the top deck,
+
+00:38:30.946 --> 00:38:32.446 A:middle
+created occlusion
+on the bottom one,
+
+00:38:32.446 --> 00:38:34.306 A:middle
+because the light can't
+arrive there easily.
+
+00:38:34.516 --> 00:38:38.246 A:middle
+If we look at the windows
+inside here, here the inner port
+
+00:38:38.246 --> 00:38:40.366 A:middle
+of the windows have more
+occlusion than the outer parts.
+
+00:38:41.366 --> 00:38:42.896 A:middle
+If we look here.
+
+00:38:43.236 --> 00:38:43.886 A:middle
+Let me zoom in.
+
+00:38:44.706 --> 00:38:46.786 A:middle
+If we look here at the
+cannons underneath,
+
+00:38:47.106 --> 00:38:48.986 A:middle
+the top of the cannons
+are really dark
+
+00:38:48.986 --> 00:38:51.526 A:middle
+because the whole ship stops
+the light from arriving there.
+
+00:38:51.906 --> 00:38:53.776 A:middle
+If we were to look
+at the bottom parts,
+
+00:38:53.856 --> 00:38:55.936 A:middle
+all white, makes sense, right?
+
+00:38:56.746 --> 00:39:00.356 A:middle
+So by just adding one float
+per vertex, we were able
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:38:56.746 --> 00:39:00.356 A:middle
+So by just adding one float
+per vertex, we were able
+
+00:39:00.486 --> 00:39:04.406 A:middle
+to give our ambient light
+away to light up our scenes
+
+00:39:04.406 --> 00:39:05.706 A:middle
+and give a better look.
+
+00:39:06.816 --> 00:39:09.136 A:middle
+And that's available in the
+(inaudible) of SceneKit.
+
+00:39:09.936 --> 00:39:12.486 A:middle
+So let's go back to the slides.
+
+00:39:13.796 --> 00:39:15.086 A:middle
+So that was ambient occlusion.
+
+00:39:15.196 --> 00:39:18.046 A:middle
+I will finish today
+by introducing you
+
+00:39:18.046 --> 00:39:20.036 A:middle
+to advanced lighting
+with light maps.
+
+00:39:21.246 --> 00:39:22.826 A:middle
+So what is light maps?
+
+00:39:23.326 --> 00:39:27.226 A:middle
+What light maps are is a way
+to get your diffused lighting
+
+00:39:27.226 --> 00:39:30.256 A:middle
+into the game and precomputing
+how the diffused lighting
+
+00:39:30.256 --> 00:39:33.126 A:middle
+affects your textures to not
+have to do that in realtime.
+
+00:39:33.286 --> 00:39:35.986 A:middle
+As you guys know, if you have
+done some game programming,
+
+00:39:36.446 --> 00:39:38.566 A:middle
+lighting is extremely expensive.
+
+00:39:38.746 --> 00:39:41.806 A:middle
+If you have ten lights then for
+every frame you need to compute
+
+00:39:41.916 --> 00:39:46.546 A:middle
+that lights' aspect and how
+that interferes with your game.
+
+00:39:46.866 --> 00:39:48.146 A:middle
+That's very expensive.
+
+00:39:48.146 --> 00:39:52.806 A:middle
+So what we have here, I just
+dragged and dropped a plane
+
+00:39:52.806 --> 00:39:55.886 A:middle
+and two boxes inside a simulator
+and put eight lights there
+
+00:39:56.276 --> 00:39:58.396 A:middle
+and I computed, before I
+even launched the game,
+
+00:39:58.396 --> 00:40:02.486 A:middle
+using light map baker how those
+light maps light up my scene
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:39:58.396 --> 00:40:02.486 A:middle
+using light map baker how those
+light maps light up my scene
+
+00:40:02.486 --> 00:40:03.586 A:middle
+and light up the texture.
+
+00:40:04.996 --> 00:40:08.136 A:middle
+And if we were to
+look at the scene,
+
+00:40:08.516 --> 00:40:09.796 A:middle
+that's what it looks like.
+
+00:40:09.856 --> 00:40:11.046 A:middle
+It's really realistic.
+
+00:40:11.046 --> 00:40:12.896 A:middle
+We've got the shadows
+and the lights
+
+00:40:13.426 --> 00:40:16.536 A:middle
+but this costs me
+literally one texture fetch.
+
+00:40:17.626 --> 00:40:18.846 A:middle
+That's it.
+
+00:40:19.736 --> 00:40:22.346 A:middle
+Usually rendering eight lights
+especially if you've got shadows
+
+00:40:22.346 --> 00:40:23.686 A:middle
+and shadow maps they
+are very expensive.
+
+00:40:24.296 --> 00:40:25.316 A:middle
+That's what the texture
+looks like.
+
+00:40:25.436 --> 00:40:27.586 A:middle
+Very straightforward,
+you see my boxes
+
+00:40:27.586 --> 00:40:29.096 A:middle
+in the middle and my shadows.
+
+00:40:29.616 --> 00:40:33.696 A:middle
+The cool thing is this is
+just a texture fetch, right?
+
+00:40:33.736 --> 00:40:35.246 A:middle
+So it supports lots of lights.
+
+00:40:35.406 --> 00:40:38.136 A:middle
+I could have 100,000
+lights if I wanted
+
+00:40:38.136 --> 00:40:41.336 A:middle
+and it would have the
+exact same runtime costs.
+
+00:40:41.686 --> 00:40:43.856 A:middle
+Even the shadows
+look really cool.
+
+00:40:44.266 --> 00:40:47.506 A:middle
+When you do spotlights like
+this, that are really close
+
+00:40:47.506 --> 00:40:50.786 A:middle
+to the ground then the
+shadow maps you reach kind
+
+00:40:50.786 --> 00:40:54.066 A:middle
+of precision issues but
+with this, for every pixel
+
+00:40:54.066 --> 00:40:57.296 A:middle
+on the thing, we send rays and
+see which ones are in the light
+
+00:40:57.296 --> 00:40:58.236 A:middle
+and which ones are not.
+
+00:40:58.476 --> 00:41:00.506 A:middle
+So your shadows look
+really realistic.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:40:58.476 --> 00:41:00.506 A:middle
+So your shadows look
+really realistic.
+
+00:41:00.506 --> 00:41:01.616 A:middle
+Calculate it offline.
+
+00:41:02.136 --> 00:41:07.096 A:middle
+And the cool thing is we
+support super complex slide
+
+00:41:07.146 --> 00:41:10.936 A:middle
+that you couldn't even
+dream of doing at run time.
+
+00:41:10.936 --> 00:41:14.836 A:middle
+For example our real lights have
+for a long time been really hard
+
+00:41:14.836 --> 00:41:17.486 A:middle
+to do at runtime because
+they are really hard to do
+
+00:41:17.486 --> 00:41:21.596 A:middle
+with normal point light to
+triangle illumination processes
+
+00:41:21.826 --> 00:41:23.706 A:middle
+but here we are using
+ray tracing.
+
+00:41:23.706 --> 00:41:25.226 A:middle
+So we just send the ray and see
+
+00:41:25.226 --> 00:41:27.376 A:middle
+which ones arrive (inaudible)
+and which ones don't.
+
+00:41:28.036 --> 00:41:29.946 A:middle
+We also support the
+cool IS lights,
+
+00:41:30.486 --> 00:41:31.876 A:middle
+that Nick talked to you before.
+
+00:41:32.536 --> 00:41:34.816 A:middle
+And that was light maps.
+
+00:41:35.376 --> 00:41:38.926 A:middle
+So to close this talk, I
+would like to summarize a bit.
+
+00:41:39.136 --> 00:41:40.826 A:middle
+Today we introduced
+a great new framework
+
+00:41:40.826 --> 00:41:42.336 A:middle
+and we are super happy about it.
+
+00:41:43.136 --> 00:41:47.416 A:middle
+First it does the basics imports
+and exports 3D asset files.
+
+00:41:47.646 --> 00:41:49.346 A:middle
+But is actually does
+so much more for you.
+
+00:41:49.846 --> 00:41:52.476 A:middle
+It introduces concepts for
+physical basis for rendering,
+
+00:41:52.876 --> 00:41:54.776 A:middle
+with models, lights,
+cameras, materials,
+
+00:41:54.776 --> 00:41:56.976 A:middle
+and skies that aren't
+just defined with floats
+
+00:41:56.976 --> 00:41:59.556 A:middle
+but are actually based
+on stuff in real life.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:42:00.136 --> 00:42:03.206 A:middle
+We have integration of system
+in the frameworks and tools
+
+00:42:03.286 --> 00:42:05.396 A:middle
+in Xcode that you guys can
+play with that and have fun.
+
+00:42:07.046 --> 00:42:10.296 A:middle
+For more information, we invite
+you to look at our documentation
+
+00:42:10.296 --> 00:42:12.416 A:middle
+and videos and forums
+and our technical support
+
+00:42:12.856 --> 00:42:15.636 A:middle
+and for any general inquiries,
+you can contact Allan Schaffer.
+
+00:42:16.596 --> 00:42:19.386 A:middle
+Related sessions
+are "Enhancements
+
+00:42:19.386 --> 00:42:22.096 A:middle
+to SceneKit" tomorrow
+and "What's New
+
+00:42:22.096 --> 00:42:22.986 A:middle
+In Metal" on Thursday.
+
+00:42:23.366 --> 00:42:27.026 A:middle
+And we would like to see you
+at Model I/O Lab right now
+
+00:42:27.086 --> 00:42:28.776 A:middle
+and tomorrow morning at 9AM.
+
+00:42:29.246 --> 00:42:32.096 A:middle
+Thank you all for your
+time and have a great WWDC.
+
+00:42:35.656 --> 00:42:35.846 A:middle
+(Applause)
+

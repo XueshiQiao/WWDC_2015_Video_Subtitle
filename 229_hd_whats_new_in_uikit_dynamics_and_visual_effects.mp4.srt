@@ -1,0 +1,3487 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:29.206 --> 00:00:31.206 A:middle
+[Applause]
+
+00:00:31.396 --> 00:00:33.876 A:middle
+&gt;&gt; MICHAEL TURNER: Welcome
+to the final day of WWDC,
+
+00:00:34.636 --> 00:00:37.006 A:middle
+and 'What's New in UIKit
+Dynamics and Visual Effects.'
+
+00:00:37.346 --> 00:00:38.296 A:middle
+My name is Michael Turner,
+
+00:00:38.706 --> 00:00:40.186 A:middle
+joined by my colleague
+David Duncan.
+
+00:00:40.536 --> 00:00:42.216 A:middle
+We are both on the UIKit
+team here at Apple.
+
+00:00:43.696 --> 00:00:45.176 A:middle
+So before we get started today,
+
+00:00:45.406 --> 00:00:47.286 A:middle
+I just want to recommend
+some great sessions.
+
+00:00:47.286 --> 00:00:48.846 A:middle
+Since this is an
+introductory talk,
+
+00:00:49.076 --> 00:00:49.946 A:middle
+we have some great sessions
+
+00:00:49.946 --> 00:00:52.826 A:middle
+from years past covering UIKit
+Dynamics and visual effects.
+
+00:00:53.686 --> 00:00:56.486 A:middle
+So today we are going to
+start with a brief overview
+
+00:00:56.706 --> 00:00:58.736 A:middle
+of the dynamic animation
+system, and we'll do
+
+00:00:58.736 --> 00:01:01.226 A:middle
+that with a basic example, and
+then we are going to dive right
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:58.736 --> 00:01:01.226 A:middle
+that with a basic example, and
+then we are going to dive right
+
+00:01:01.226 --> 00:01:03.656 A:middle
+into what's new this
+year with UIKit Dynamics.
+
+00:01:04.215 --> 00:01:06.106 A:middle
+Then David's going to
+come up and talk to us
+
+00:01:06.276 --> 00:01:11.286 A:middle
+about visual effects, and
+how you can utilize those
+
+00:01:11.286 --> 00:01:12.096 A:middle
+in your application.
+
+00:01:12.726 --> 00:01:14.466 A:middle
+And finally, we are going
+to talk a little bit
+
+00:01:14.466 --> 00:01:16.676 A:middle
+about best practices
+using UIKit Dynamics
+
+00:01:17.166 --> 00:01:18.756 A:middle
+and auto layout in
+your application.
+
+00:01:20.296 --> 00:01:23.186 A:middle
+So when we talk about UIKit
+Dynamics we are talking
+
+00:01:23.186 --> 00:01:26.526 A:middle
+about a 2D, physics-inspired
+animation interaction system.
+
+00:01:27.406 --> 00:01:29.746 A:middle
+This has a very composable
+and declarative API
+
+00:01:30.376 --> 00:01:32.876 A:middle
+for exposing high level
+animations in your app.
+
+00:01:33.756 --> 00:01:36.346 A:middle
+We are not talking about
+replacement for Core Animation
+
+00:01:36.586 --> 00:01:39.206 A:middle
+or UIView animations,
+rather another tool
+
+00:01:39.206 --> 00:01:41.606 A:middle
+to help you create great
+custom effects in your app.
+
+00:01:42.176 --> 00:01:43.436 A:middle
+So let's look at an example.
+
+00:01:44.276 --> 00:01:46.636 A:middle
+So here we have a
+basic sliding view
+
+00:01:46.636 --> 00:01:51.286 A:middle
+and the user can pan the view,
+but if you let go it falls back
+
+00:01:51.286 --> 00:01:53.216 A:middle
+down as if under the
+influence of gravity.
+
+00:01:53.216 --> 00:01:56.426 A:middle
+Now, it doesn't fall through
+the bottom of the phone.
+
+00:01:56.426 --> 00:01:58.636 A:middle
+Rather, it stops on the
+bottom edge, bounces a bit,
+
+00:01:58.636 --> 00:01:59.376 A:middle
+and then comes to rest.
+
+00:01:59.596 --> 00:02:02.726 A:middle
+So let's look at how we can
+create this basic example.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:59.596 --> 00:02:02.726 A:middle
+So let's look at how we can
+create this basic example.
+
+00:02:03.496 --> 00:02:04.296 A:middle
+First you need to start
+
+00:02:04.296 --> 00:02:06.016 A:middle
+by determining a
+great reference view.
+
+00:02:06.316 --> 00:02:08.216 A:middle
+Here, we've chosen the
+view controller's view
+
+00:02:08.356 --> 00:02:09.506 A:middle
+that contains our sliding view.
+
+00:02:10.116 --> 00:02:12.826 A:middle
+And once we have a
+reference view, we then need
+
+00:02:12.826 --> 00:02:15.596 A:middle
+to create a dynamic animator and
+associate that reference view.
+
+00:02:16.136 --> 00:02:18.716 A:middle
+The dynamic animator will
+hold the overall context
+
+00:02:18.716 --> 00:02:21.846 A:middle
+for our animations, and its
+main job is to keep track
+
+00:02:21.846 --> 00:02:23.536 A:middle
+of behaviors and dynamic items.
+
+00:02:24.726 --> 00:02:27.296 A:middle
+So for our sliding example,
+we have a sliding behavior.
+
+00:02:27.716 --> 00:02:30.046 A:middle
+And one of the great things
+about UI dynamic behavior,
+
+00:02:30.466 --> 00:02:32.336 A:middle
+is that higher-level
+behaviors can be composed
+
+00:02:32.336 --> 00:02:33.206 A:middle
+of more primitive ones.
+
+00:02:34.076 --> 00:02:36.516 A:middle
+So our sliding behavior is
+nothing more than a composition
+
+00:02:36.516 --> 00:02:38.776 A:middle
+of gravity, collision,
+and attachment.
+
+00:02:39.766 --> 00:02:42.426 A:middle
+And later on, we will show you
+how we used UIAttachmentBehavior
+
+00:02:42.426 --> 00:02:44.966 A:middle
+and the new things we've added
+there to make this even simpler
+
+00:02:45.076 --> 00:02:47.376 A:middle
+than it would have
+been in the past.
+
+00:02:47.526 --> 00:02:48.926 A:middle
+So once we have our
+sliding behavior,
+
+00:02:49.036 --> 00:02:50.516 A:middle
+we now need a dynamic item.
+
+00:02:50.966 --> 00:02:53.586 A:middle
+Here we've chosen the
+sliding view, just a UIView
+
+00:02:53.936 --> 00:02:56.276 A:middle
+which automatically conforms
+to the dynamic item protocol,
+
+00:02:56.396 --> 00:02:57.156 A:middle
+so it's a great option.
+
+00:02:57.846 --> 00:03:00.126 A:middle
+So we take our dynamic
+item, associate it
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:57.846 --> 00:03:00.126 A:middle
+So we take our dynamic
+item, associate it
+
+00:03:00.126 --> 00:03:01.076 A:middle
+with the sliding behavior,
+
+00:03:01.076 --> 00:03:02.746 A:middle
+and the sliding behavior
+to the animator.
+
+00:03:02.746 --> 00:03:05.966 A:middle
+Now the animator will
+automatically determine
+
+00:03:05.966 --> 00:03:08.636 A:middle
+when the system is at rest or in
+motion, so this is all you need
+
+00:03:08.636 --> 00:03:10.346 A:middle
+to create this great effect.
+
+00:03:11.056 --> 00:03:13.336 A:middle
+So now we have seen
+a basic example.
+
+00:03:14.496 --> 00:03:16.726 A:middle
+This is what's new this
+year in UIKit dynamics.
+
+00:03:17.216 --> 00:03:17.986 A:middle
+We have support
+
+00:03:17.986 --> 00:03:20.816 A:middle
+for non-rectangular collision
+bounds on UIDynamicItem.
+
+00:03:20.816 --> 00:03:24.166 A:middle
+We have a brand new
+UIDynamicItemGroup
+
+00:03:24.316 --> 00:03:26.496 A:middle
+that allows multiple items
+to behave like one item
+
+00:03:26.496 --> 00:03:29.456 A:middle
+in the engine, and we
+have a brand new behavior
+
+00:03:29.766 --> 00:03:31.166 A:middle
+that models vector force fields.
+
+00:03:32.766 --> 00:03:35.876 A:middle
+We have some basic enhancements
+to UIDynamicItemBehavior,
+
+00:03:36.076 --> 00:03:39.226 A:middle
+as well as UISnapBehavior, and
+we'll see some great additions
+
+00:03:39.226 --> 00:03:42.006 A:middle
+to UIAttachmentBehavior,
+and we will finish
+
+00:03:42.006 --> 00:03:44.066 A:middle
+up with some new
+ways that you can use
+
+00:03:44.066 --> 00:03:46.106 A:middle
+to debug your dynamic
+animations.
+
+00:03:46.906 --> 00:03:52.566 A:middle
+So, in iOS 9, we
+added UIDynamicItem
+
+00:03:52.566 --> 00:03:55.556 A:middle
+CollisionBoundsType which
+offers you three new ways
+
+00:03:55.906 --> 00:03:58.406 A:middle
+to specify the collision
+bounds for your dynamic item.
+
+00:03:59.246 --> 00:04:02.306 A:middle
+And by default your collision
+bounds will be rectangular
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:59.246 --> 00:04:02.306 A:middle
+And by default your collision
+bounds will be rectangular
+
+00:04:02.496 --> 00:04:04.796 A:middle
+matching what's returned
+from the bounds accesser
+
+00:04:05.076 --> 00:04:06.236 A:middle
+on the dynamic item protocol.
+
+00:04:07.396 --> 00:04:10.486 A:middle
+And now you can specify an
+ellipse type, which will derive
+
+00:04:10.486 --> 00:04:12.906 A:middle
+from the bounds width and
+bounds height on the protocol.
+
+00:04:13.836 --> 00:04:17.076 A:middle
+And finally, you can specify
+a UI BezierPath to use
+
+00:04:17.076 --> 00:04:18.536 A:middle
+for the collision bounds
+of your dynamic item.
+
+00:04:20.755 --> 00:04:23.666 A:middle
+Now, to accomplish this, we have
+taken the existing dynamic item
+
+00:04:23.666 --> 00:04:27.056 A:middle
+protocol and we have extended
+it with two optional properties.
+
+00:04:27.416 --> 00:04:28.506 A:middle
+And if you don't
+implement either
+
+00:04:28.506 --> 00:04:30.936 A:middle
+of these optional properties
+you will receive rectangular
+
+00:04:30.936 --> 00:04:32.386 A:middle
+collision bounds, as
+you have in the past.
+
+00:04:33.286 --> 00:04:35.396 A:middle
+If you implement the first
+collision bounding type
+
+00:04:35.556 --> 00:04:37.416 A:middle
+and return ellipse,
+will derive one,
+
+00:04:37.506 --> 00:04:39.356 A:middle
+an ellipse from the bounds
+width, bounds height.
+
+00:04:39.356 --> 00:04:42.146 A:middle
+If you implement the
+first and return a path,
+
+00:04:42.146 --> 00:04:43.926 A:middle
+we will then call you
+back for the second
+
+00:04:43.966 --> 00:04:46.886 A:middle
+at which point you will need to
+provide a UI BezierPath to use
+
+00:04:46.886 --> 00:04:47.766 A:middle
+for the collision bounds.
+
+00:04:48.806 --> 00:04:51.526 A:middle
+So if we were to model a
+collision between items
+
+00:04:51.526 --> 00:04:53.966 A:middle
+with different collision bounds,
+and let's add a few more here
+
+00:04:53.966 --> 00:04:56.116 A:middle
+for good measure, it might
+look something like this,
+
+00:04:56.626 --> 00:04:58.986 A:middle
+where this collision
+looks a lot more realistic
+
+00:04:58.986 --> 00:04:59.796 A:middle
+than it would have in the past,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:00.066 --> 00:05:03.236 A:middle
+had all the items had
+rectangular collision bounds.
+
+00:05:04.476 --> 00:05:07.886 A:middle
+Now, there are a few
+restrictions when using a path
+
+00:05:08.116 --> 00:05:10.016 A:middle
+for collision bounds
+and in particular,
+
+00:05:10.016 --> 00:05:13.186 A:middle
+the BezierPath must be convex,
+counter-clockwise wound,
+
+00:05:13.576 --> 00:05:14.806 A:middle
+and non-self-intersecting.
+
+00:05:15.416 --> 00:05:17.996 A:middle
+And these are pretty basic
+if you think about it,
+
+00:05:18.796 --> 00:05:19.996 A:middle
+nothing too fancy there.
+
+00:05:20.056 --> 00:05:23.536 A:middle
+We also need to keep in
+mind that the point 00
+
+00:05:23.536 --> 00:05:26.946 A:middle
+in the BezierPath will represent
+the dynamic item's center point
+
+00:05:27.466 --> 00:05:28.456 A:middle
+when the item is on screen.
+
+00:05:29.066 --> 00:05:31.526 A:middle
+So that's what's new
+in collision bounds.
+
+00:05:31.526 --> 00:05:33.346 A:middle
+Let's talk about
+dynamic item groups.
+
+00:05:33.566 --> 00:05:35.936 A:middle
+And this is a basic way
+to take multiple items
+
+00:05:36.176 --> 00:05:38.406 A:middle
+and make them behave as one
+item in the underlying engine.
+
+00:05:39.096 --> 00:05:41.826 A:middle
+And the group preserves
+respective positions
+
+00:05:42.036 --> 00:05:45.256 A:middle
+and each individual collision
+bounds for each item.
+
+00:05:45.476 --> 00:05:49.556 A:middle
+So for this reason, you should
+associate items with a group
+
+00:05:49.836 --> 00:05:51.296 A:middle
+and not with behaviors
+individually.
+
+00:05:51.296 --> 00:05:53.526 A:middle
+Instead associate them with
+the group and the group
+
+00:05:53.526 --> 00:05:54.496 A:middle
+with any behaviors you would
+
+00:05:54.496 --> 00:05:55.676 A:middle
+like to associate
+with the animator.
+
+00:05:56.206 --> 00:05:57.966 A:middle
+And this will impose
+those behaviors
+
+00:05:57.966 --> 00:05:58.976 A:middle
+on the items as a whole.
+
+00:05:59.876 --> 00:06:02.526 A:middle
+And a group cannot be
+added to other groups.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:59.876 --> 00:06:02.526 A:middle
+And a group cannot be
+added to other groups.
+
+00:06:02.526 --> 00:06:03.886 A:middle
+This is a one-level abstraction.
+
+00:06:04.606 --> 00:06:07.026 A:middle
+So this can be a great
+way to create concave
+
+00:06:07.026 --> 00:06:09.266 A:middle
+or other complex
+geometry not capable
+
+00:06:09.266 --> 00:06:12.336 A:middle
+with the dynamic item
+bounds path, and also have
+
+00:06:12.336 --> 00:06:15.626 A:middle
+that influenceable by
+behaviors as a whole.
+
+00:06:16.316 --> 00:06:19.306 A:middle
+So, let's return to that
+sliding example for a moment.
+
+00:06:21.496 --> 00:06:24.216 A:middle
+So instead of just panning and
+having it to fall back down,
+
+00:06:24.216 --> 00:06:27.206 A:middle
+let's say we want it to bounce
+slightly when the user taps,
+
+00:06:27.206 --> 00:06:28.536 A:middle
+maybe to indicate
+that we can pan.
+
+00:06:29.286 --> 00:06:31.196 A:middle
+And to do this, we just need
+
+00:06:31.196 --> 00:06:33.296 A:middle
+to add a brief force
+to the sliding view.
+
+00:06:33.896 --> 00:06:35.006 A:middle
+So let's take a look
+at that force.
+
+00:06:37.116 --> 00:06:40.066 A:middle
+So we can model the force as
+a vector at the item's center
+
+00:06:40.346 --> 00:06:44.536 A:middle
+where the length of the vector
+corresponds to the magnitude
+
+00:06:44.536 --> 00:06:47.456 A:middle
+of the force and the
+vector points up to indicate
+
+00:06:47.456 --> 00:06:49.816 A:middle
+that the direction of the force,
+in this case we are trying
+
+00:06:49.816 --> 00:06:51.576 A:middle
+to move the view
+up, so it points up.
+
+00:06:52.366 --> 00:06:55.386 A:middle
+And to apply the force, we're
+going to use UIPushBehavior --
+
+00:06:56.076 --> 00:06:59.476 A:middle
+where UIPushBehavior, if you
+recall, has two distinct modes.
+
+00:06:59.896 --> 00:07:03.046 A:middle
+It has a continuous mode that
+represents a constant force
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:59.896 --> 00:07:03.046 A:middle
+It has a continuous mode that
+represents a constant force
+
+00:07:03.046 --> 00:07:05.476 A:middle
+over time, and an
+instantaneous mode
+
+00:07:05.976 --> 00:07:08.386 A:middle
+which represents a brief
+force at an instant in time,
+
+00:07:08.536 --> 00:07:09.726 A:middle
+otherwise known as an impulse.
+
+00:07:10.606 --> 00:07:13.746 A:middle
+So for this interaction, we just
+want a brief force so it bounces
+
+00:07:13.746 --> 00:07:15.216 A:middle
+and comes back to
+rest, so we're going
+
+00:07:15.216 --> 00:07:16.126 A:middle
+to use the instantaneous mode.
+
+00:07:16.536 --> 00:07:18.006 A:middle
+So we do that; we
+get a brief force.
+
+00:07:18.066 --> 00:07:20.406 A:middle
+But what is causing the
+view to come back down?
+
+00:07:20.486 --> 00:07:22.556 A:middle
+We are putting a force on
+it that causes it to move up
+
+00:07:22.556 --> 00:07:24.016 A:middle
+but it's falling back down.
+
+00:07:24.766 --> 00:07:28.426 A:middle
+This is our composite behavior
+that was composed of a gravity,
+
+00:07:28.456 --> 00:07:29.736 A:middle
+a collision, and attachment.
+
+00:07:30.086 --> 00:07:31.876 A:middle
+And so gravity is causing
+it to move back down
+
+00:07:31.876 --> 00:07:33.556 A:middle
+and then it bounces with
+the collision behavior.
+
+00:07:33.556 --> 00:07:35.916 A:middle
+But let's look at a
+little bit more at gravity
+
+00:07:35.916 --> 00:07:37.106 A:middle
+and how that's affecting
+our item.
+
+00:07:37.276 --> 00:07:39.986 A:middle
+So we look at the
+vertical motion over time
+
+00:07:40.666 --> 00:07:43.036 A:middle
+of the sliding view,
+starting with the instant
+
+00:07:43.036 --> 00:07:44.486 A:middle
+that we apply the impulse force.
+
+00:07:44.926 --> 00:07:47.386 A:middle
+You will notice that the
+force is applied at one point
+
+00:07:47.606 --> 00:07:50.086 A:middle
+and then the item kind of moves
+up and then arcs back down.
+
+00:07:50.806 --> 00:07:53.126 A:middle
+This is because gravity is
+affecting it at all positions
+
+00:07:53.126 --> 00:07:54.566 A:middle
+and all times in
+our diagram here.
+
+00:07:54.886 --> 00:07:57.656 A:middle
+If we add those forces in from
+gravity, it might look something
+
+00:07:57.656 --> 00:08:01.826 A:middle
+like this, where
+the force is applied
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:57.656 --> 00:08:01.826 A:middle
+like this, where
+the force is applied
+
+00:08:01.866 --> 00:08:03.406 A:middle
+at all positions and all times.
+
+00:08:03.616 --> 00:08:04.976 A:middle
+So this is tricky to model.
+
+00:08:05.426 --> 00:08:07.346 A:middle
+Maybe we could try and
+use UI push behavior,
+
+00:08:07.446 --> 00:08:09.286 A:middle
+but it would be pretty
+complex, pretty quickly.
+
+00:08:09.976 --> 00:08:12.476 A:middle
+So we really need to think of
+gravity as more of a field.
+
+00:08:13.376 --> 00:08:15.506 A:middle
+And a field's quite
+simple, it's just a function
+
+00:08:15.716 --> 00:08:18.816 A:middle
+that assigns a vector to each
+point within a given domain,
+
+00:08:18.986 --> 00:08:20.776 A:middle
+where our domain,
+in this example,
+
+00:08:20.776 --> 00:08:21.946 A:middle
+is the entire reference view.
+
+00:08:22.236 --> 00:08:24.596 A:middle
+So we want gravity to
+affect our sliding view
+
+00:08:24.946 --> 00:08:25.996 A:middle
+in the entire reference view.
+
+00:08:26.846 --> 00:08:27.276 A:middle
+Pretty simple.
+
+00:08:27.276 --> 00:08:30.666 A:middle
+So we have taken this idea of a
+field and we have extended it.
+
+00:08:31.026 --> 00:08:33.846 A:middle
+In iOS 9, we are
+introducing UIFieldBehavior.
+
+00:08:33.846 --> 00:08:38.206 A:middle
+And UIFieldBehavior is a way
+that can be added to a region
+
+00:08:38.206 --> 00:08:42.296 A:middle
+of your reference view, and the
+field is evaluated at each point
+
+00:08:42.296 --> 00:08:43.285 A:middle
+within the reference view,
+
+00:08:43.285 --> 00:08:46.456 A:middle
+and any resulting forces
+are automatically applied
+
+00:08:46.456 --> 00:08:48.246 A:middle
+by the dynamic animator
+to the items
+
+00:08:48.246 --> 00:08:51.006 A:middle
+that have been associated
+with the field.
+
+00:08:51.166 --> 00:08:52.136 A:middle
+And if you are wondering,
+
+00:08:52.136 --> 00:08:55.236 A:middle
+our existing UIGravityBehavior
+has been implemented
+
+00:08:55.236 --> 00:08:58.866 A:middle
+as a field all along, and
+it's important to keep in mind
+
+00:08:58.866 --> 00:09:00.146 A:middle
+that this is simplified physics.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:58.866 --> 00:09:00.146 A:middle
+that this is simplified physics.
+
+00:09:00.146 --> 00:09:01.626 A:middle
+It's been well tuned
+for performance.
+
+00:09:02.016 --> 00:09:04.626 A:middle
+I wouldn't use it for building
+interstellar space stations
+
+00:09:04.626 --> 00:09:05.306 A:middle
+or anything like that.
+
+00:09:06.606 --> 00:09:09.286 A:middle
+So let's look at the built-in
+field types that we offer.
+
+00:09:09.476 --> 00:09:10.686 A:middle
+We've got a rich variety here.
+
+00:09:10.776 --> 00:09:13.846 A:middle
+We have linear and
+radial gravity, velocity
+
+00:09:13.846 --> 00:09:17.266 A:middle
+and drag fields, a vortex field,
+we have got a great spring field
+
+00:09:17.266 --> 00:09:19.326 A:middle
+that models Hooke's
+law, we've got electric
+
+00:09:19.326 --> 00:09:20.476 A:middle
+and magnetic field types.
+
+00:09:21.086 --> 00:09:23.176 A:middle
+And if these all don't
+quite meet your needs,
+
+00:09:23.176 --> 00:09:25.036 A:middle
+we also offer a custom
+force evaluator,
+
+00:09:25.036 --> 00:09:26.006 A:middle
+and we'll see this in a moment.
+
+00:09:26.486 --> 00:09:28.346 A:middle
+But let's start with
+linear gravity here first.
+
+00:09:29.356 --> 00:09:31.336 A:middle
+So the first thing you will
+notice is it exists in a region,
+
+00:09:31.676 --> 00:09:34.806 A:middle
+in a domain as we previously
+said, and it has a strength,
+
+00:09:34.806 --> 00:09:36.386 A:middle
+we've used the default
+strength of one here,
+
+00:09:36.846 --> 00:09:38.406 A:middle
+but it's also a directional
+force,
+
+00:09:38.486 --> 00:09:40.236 A:middle
+and then we have used
+the familiar direction
+
+00:09:40.236 --> 00:09:43.246 A:middle
+of gravity here, down,
+to show this example,
+
+00:09:43.566 --> 00:09:46.056 A:middle
+but this can be directed
+anywhere, really.
+
+00:09:46.776 --> 00:09:48.996 A:middle
+So let's look at how
+radial gravity differs
+
+00:09:48.996 --> 00:09:50.236 A:middle
+from that of linear gravity.
+
+00:09:51.096 --> 00:09:55.896 A:middle
+And along with existing in a
+domain and having a strength,
+
+00:09:55.896 --> 00:09:58.256 A:middle
+this has a position
+which can be modeled
+
+00:09:58.256 --> 00:10:00.796 A:middle
+with radial gravity
+as a point mass.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:58.256 --> 00:10:00.796 A:middle
+with radial gravity
+as a point mass.
+
+00:10:01.266 --> 00:10:03.826 A:middle
+And if you recall, the
+gravitational force
+
+00:10:03.826 --> 00:10:06.526 A:middle
+between two masses is
+inversely proportional
+
+00:10:06.876 --> 00:10:08.946 A:middle
+to the distance squared
+between the two masses.
+
+00:10:09.446 --> 00:10:12.016 A:middle
+So, here, that distance
+squared between the masses,
+
+00:10:12.016 --> 00:10:14.646 A:middle
+that exponent, this is the
+fall off value of the field.
+
+00:10:15.216 --> 00:10:17.276 A:middle
+So as you get farther away
+from the position of the field,
+
+00:10:17.886 --> 00:10:21.126 A:middle
+the force due to the
+field, it gets -- decreases.
+
+00:10:21.126 --> 00:10:23.796 A:middle
+And we also have a minimum
+radius property here,
+
+00:10:23.796 --> 00:10:26.576 A:middle
+and this is just a
+way to specify how far
+
+00:10:26.576 --> 00:10:29.646 A:middle
+from the position point
+an item must be in order
+
+00:10:29.646 --> 00:10:31.706 A:middle
+to feel a resulting
+force due to this field.
+
+00:10:33.386 --> 00:10:34.986 A:middle
+So we also have a noise field,
+
+00:10:35.516 --> 00:10:37.456 A:middle
+and the first thing you will
+notice about a noise field is,
+
+00:10:37.456 --> 00:10:40.876 A:middle
+it's time varying, and you can
+adjust this using the animation
+
+00:10:40.926 --> 00:10:42.466 A:middle
+speed with a default
+value of one,
+
+00:10:42.816 --> 00:10:44.296 A:middle
+and zero would indicate
+a static field.
+
+00:10:44.996 --> 00:10:46.976 A:middle
+You can also adjust
+the level of noise
+
+00:10:46.976 --> 00:10:48.446 A:middle
+in the field using the
+smoothness property.
+
+00:10:50.726 --> 00:10:52.486 A:middle
+So let's look at a
+custom field evaluator.
+
+00:10:53.296 --> 00:10:54.796 A:middle
+And this is really
+quite easy to use.
+
+00:10:54.796 --> 00:10:57.406 A:middle
+You create a UIFieldBehavior
+and initialize it
+
+00:10:57.686 --> 00:10:58.856 A:middle
+with a field evaluation block.
+
+00:10:59.356 --> 00:11:00.666 A:middle
+We will then call your block
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:59.356 --> 00:11:00.666 A:middle
+We will then call your block
+
+00:11:00.666 --> 00:11:02.856 A:middle
+with several field samples
+containing the position,
+
+00:11:03.176 --> 00:11:06.056 A:middle
+velocity, mass, and
+charge, and time associated
+
+00:11:06.056 --> 00:11:08.436 A:middle
+with that field sample
+and then you can use
+
+00:11:08.436 --> 00:11:10.546 A:middle
+that to determine
+any resulting forces.
+
+00:11:11.016 --> 00:11:13.566 A:middle
+Here all we did was take the
+position, the x position,
+
+00:11:13.956 --> 00:11:15.076 A:middle
+and map it to a sin wave.
+
+00:11:15.666 --> 00:11:16.346 A:middle
+Pretty cool result.
+
+00:11:16.346 --> 00:11:20.456 A:middle
+So these are the -- some of
+the basic built-in fields
+
+00:11:20.456 --> 00:11:22.386 A:middle
+and a basic overview
+of UIFieldBehavior.
+
+00:11:22.606 --> 00:11:25.006 A:middle
+I would like to invite up David
+to give you a quick example
+
+00:11:25.246 --> 00:11:26.096 A:middle
+of showing an inaction.
+
+00:11:27.516 --> 00:11:32.726 A:middle
+[Applause]
+
+00:11:33.226 --> 00:11:35.056 A:middle
+&gt;&gt; DAVID DUNCAN: Hello,
+everybody, and we are going
+
+00:11:35.056 --> 00:11:36.666 A:middle
+to take you through an
+example of something
+
+00:11:36.666 --> 00:11:38.636 A:middle
+that I'm certain you
+have all seen before.
+
+00:11:40.136 --> 00:11:42.726 A:middle
+As I'm sure you have all
+used FaceTime at some point
+
+00:11:42.726 --> 00:11:45.576 A:middle
+or another, and so we
+just have an example
+
+00:11:45.666 --> 00:11:47.266 A:middle
+of building a very similar UI
+
+00:11:47.266 --> 00:11:50.056 A:middle
+for managing your
+face in the screen.
+
+00:11:50.056 --> 00:11:52.806 A:middle
+As you have been able to see
+as I have gone through here,
+
+00:11:53.306 --> 00:11:55.786 A:middle
+the square moves very nicely
+as I move it around the screen,
+
+00:11:55.786 --> 00:11:59.006 A:middle
+and if I pull it a little away
+from the corner it bounces back.
+
+00:11:59.006 --> 00:12:01.096 A:middle
+If I pull farther, it has
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:59.006 --> 00:12:01.096 A:middle
+If I pull farther, it has
+
+00:12:01.096 --> 00:12:02.836 A:middle
+that nice ease-in
+curve as we are going.
+
+00:12:02.836 --> 00:12:05.496 A:middle
+And if I throw it down, it kind
+
+00:12:05.496 --> 00:12:07.616 A:middle
+of bounces off very playfully
+all around the edges.
+
+00:12:08.056 --> 00:12:10.376 A:middle
+And you will note when I threw
+it down, it didn't just kind
+
+00:12:10.376 --> 00:12:12.436 A:middle
+of go straight to where
+it was supposed to go,
+
+00:12:12.676 --> 00:12:14.796 A:middle
+it actually had a little
+physics, it bounced off the side
+
+00:12:14.796 --> 00:12:16.506 A:middle
+of the screen and came
+back into position.
+
+00:12:17.716 --> 00:12:22.096 A:middle
+Now, I can do a little thing
+and trigger a debugging view
+
+00:12:22.096 --> 00:12:23.976 A:middle
+of what those forces
+fields look like.
+
+00:12:24.576 --> 00:12:25.716 A:middle
+In this case you
+can see that we --
+
+00:12:26.516 --> 00:12:31.196 A:middle
+[Applause]
+
+00:12:31.696 --> 00:12:34.026 A:middle
+In case, you can see that we
+have four spring fields running
+
+00:12:34.026 --> 00:12:38.236 A:middle
+around here, and we have got an
+easy way to explain what's going
+
+00:12:38.236 --> 00:12:40.256 A:middle
+on so if we put this
+right on the edge,
+
+00:12:40.306 --> 00:12:41.576 A:middle
+we know it is going
+to bounce back.
+
+00:12:42.446 --> 00:12:44.926 A:middle
+And if we kind of straddle
+two, then depending
+
+00:12:44.926 --> 00:12:47.016 A:middle
+on where we straddle it will
+pick one side or the other.
+
+00:12:47.796 --> 00:12:49.336 A:middle
+And go through the middle,
+
+00:12:49.696 --> 00:12:50.976 A:middle
+and it just picks
+whichever is closest.
+
+00:12:51.536 --> 00:12:53.016 A:middle
+So let's see how we set this up,
+
+00:12:53.016 --> 00:12:55.916 A:middle
+and how we can actually
+set this all ourselves.
+
+00:12:56.696 --> 00:13:00.836 A:middle
+So the first thing that we have
+is this StickyCorners behavior,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:56.696 --> 00:13:00.836 A:middle
+So the first thing that we have
+is this StickyCorners behavior,
+
+00:13:01.286 --> 00:13:03.826 A:middle
+and as Mike mentioned, it's
+built up of other behaviors
+
+00:13:03.826 --> 00:13:06.336 A:middle
+to form this complex behavior
+that does everything we want.
+
+00:13:06.706 --> 00:13:08.446 A:middle
+In this case, it has got
+a collision behavior,
+
+00:13:08.446 --> 00:13:09.536 A:middle
+because we wouldn't
+want your face
+
+00:13:09.536 --> 00:13:11.096 A:middle
+to rocket off the
+side of the screen.
+
+00:13:11.826 --> 00:13:14.236 A:middle
+And we have a dynamic
+item behavior,
+
+00:13:14.236 --> 00:13:16.296 A:middle
+that affects the
+properties of that face.
+
+00:13:16.636 --> 00:13:18.216 A:middle
+In this case, we
+reduce its density
+
+00:13:18.216 --> 00:13:19.966 A:middle
+to it's really light
+feeling in the engine,
+
+00:13:19.966 --> 00:13:22.946 A:middle
+but we increase its
+resistance to motion so that
+
+00:13:22.946 --> 00:13:25.346 A:middle
+when it finds a place to
+settle it doesn't keep spinning
+
+00:13:25.346 --> 00:13:26.366 A:middle
+around in that location.
+
+00:13:27.136 --> 00:13:28.866 A:middle
+And finally we disable rotation,
+
+00:13:28.866 --> 00:13:29.986 A:middle
+because that wouldn't
+make any sense.
+
+00:13:29.986 --> 00:13:30.906 A:middle
+You don't want your
+face spinning
+
+00:13:30.906 --> 00:13:32.146 A:middle
+around as it's going
+around the screen.
+
+00:13:33.556 --> 00:13:35.826 A:middle
+Finally, we have
+these field behaviors,
+
+00:13:35.826 --> 00:13:38.856 A:middle
+the four spring fields that
+map out the four corners,
+
+00:13:38.956 --> 00:13:40.586 A:middle
+and we add those to
+the behavior too.
+
+00:13:40.996 --> 00:13:44.536 A:middle
+Now whenever somebody adds
+this StickyCorners behavior,
+
+00:13:44.636 --> 00:13:48.396 A:middle
+they get all of this
+behavior for free.
+
+00:13:48.616 --> 00:13:50.406 A:middle
+Next, over here in
+the view controller,
+
+00:13:50.966 --> 00:13:52.626 A:middle
+we go to all the usual
+stuff where we set
+
+00:13:52.626 --> 00:13:56.396 A:middle
+up our view hierarchy, but
+then we also add a pan gesture
+
+00:13:56.396 --> 00:13:58.676 A:middle
+recognizer so that the
+user can pick up the face
+
+00:13:58.676 --> 00:13:59.766 A:middle
+and move it around the screen.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:00.966 --> 00:14:03.486 A:middle
+This long press gesture
+recognizer we have here lets me
+
+00:14:03.486 --> 00:14:05.296 A:middle
+actually toggle on and
+off the debug interface.
+
+00:14:05.916 --> 00:14:07.296 A:middle
+We create our dynamic animator
+
+00:14:07.456 --> 00:14:09.776 A:middle
+and add the StickyCorners
+behavior to it.
+
+00:14:10.196 --> 00:14:12.256 A:middle
+So how does that
+gesture recognizer work?
+
+00:14:12.746 --> 00:14:15.306 A:middle
+Well, as usual, the gesture
+recognizer goes between states.
+
+00:14:15.366 --> 00:14:20.046 A:middle
+It starts at begin, and when we
+begin, we do some bookkeeping
+
+00:14:20.046 --> 00:14:21.326 A:middle
+so that we can keep
+track of the item,
+
+00:14:21.326 --> 00:14:23.186 A:middle
+but we also disable
+the sticky behavior.
+
+00:14:23.186 --> 00:14:24.706 A:middle
+And I will show you how
+we do that in a second.
+
+00:14:25.376 --> 00:14:27.826 A:middle
+Similarly, when it's changed
+we just move the item around.
+
+00:14:28.506 --> 00:14:30.146 A:middle
+And when it cancels or ends,
+
+00:14:30.516 --> 00:14:32.066 A:middle
+this is where we do
+something really special.
+
+00:14:32.586 --> 00:14:35.506 A:middle
+We check the velocity that
+the pan gesture recognizer had
+
+00:14:35.506 --> 00:14:37.376 A:middle
+when the user stopped
+interacting with it,
+
+00:14:37.926 --> 00:14:40.316 A:middle
+and we use that to
+add velocity back
+
+00:14:40.316 --> 00:14:41.706 A:middle
+into our dynamic item system.
+
+00:14:41.776 --> 00:14:44.546 A:middle
+And this is so that when the
+user throws that view around,
+
+00:14:44.726 --> 00:14:47.516 A:middle
+it continues moving with the
+force of the user's action,
+
+00:14:47.756 --> 00:14:49.706 A:middle
+rather than just suddenly
+stopping and being taken
+
+00:14:49.706 --> 00:14:51.046 A:middle
+over entirely by the field.
+
+00:14:51.736 --> 00:14:53.086 A:middle
+And the whole reason
+why we disabled
+
+00:14:53.086 --> 00:14:54.486 A:middle
+and enabled it is
+for the same reason.
+
+00:14:54.826 --> 00:14:56.226 A:middle
+We don't want the fields
+
+00:14:56.276 --> 00:14:58.016 A:middle
+to be active while the
+user is moving it around,
+
+00:14:58.016 --> 00:14:58.976 A:middle
+otherwise it is going to slip
+
+00:14:58.976 --> 00:15:00.116 A:middle
+out from underneath
+their finger.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:58.976 --> 00:15:00.116 A:middle
+out from underneath
+their finger.
+
+00:15:00.666 --> 00:15:03.026 A:middle
+So we can go back
+over here briefly
+
+00:15:03.026 --> 00:15:05.226 A:middle
+and see how the enabled works,
+
+00:15:05.796 --> 00:15:07.556 A:middle
+and as you can see,
+it's really simple.
+
+00:15:07.936 --> 00:15:10.596 A:middle
+When it's enabled, we
+add all of the items back
+
+00:15:10.596 --> 00:15:13.086 A:middle
+into the behaviors, and when
+it's disabled, we take them out.
+
+00:15:13.396 --> 00:15:16.386 A:middle
+It's really that easy to
+create a system like this,
+
+00:15:16.386 --> 00:15:18.526 A:middle
+and you can have your own
+FaceTime-like behavior
+
+00:15:18.796 --> 00:15:19.676 A:middle
+in your applications.
+
+00:15:20.296 --> 00:15:23.006 A:middle
+And so to show you how
+to put that debug UI
+
+00:15:23.186 --> 00:15:24.316 A:middle
+into your own applications,
+
+00:15:24.316 --> 00:15:25.736 A:middle
+I am going to bring
+Mike back up on stage.
+
+00:15:26.516 --> 00:15:32.246 A:middle
+[Applause]
+
+00:15:32.746 --> 00:15:33.326 A:middle
+&gt;&gt; MICHAEL TURNER:
+Thanks, David.
+
+00:15:34.086 --> 00:15:37.056 A:middle
+So it's really, really quite
+cool, in David's example,
+
+00:15:37.056 --> 00:15:38.786 A:middle
+to visualize those field lines,
+
+00:15:38.966 --> 00:15:41.516 A:middle
+to understand what
+was actually going on.
+
+00:15:41.896 --> 00:15:43.796 A:middle
+This is pretty mysterious
+until he turned that on.
+
+00:15:44.596 --> 00:15:47.956 A:middle
+So those lines were basically
+an overlay that shows the field
+
+00:15:48.506 --> 00:15:50.166 A:middle
+in your animators'
+reference view.
+
+00:15:51.136 --> 00:15:54.696 A:middle
+And specifically, this overlay
+can help you visualize fields,
+
+00:15:54.696 --> 00:15:56.996 A:middle
+collision bounds,
+attachments, and whether
+
+00:15:56.996 --> 00:16:00.106 A:middle
+or not a particular item
+is in motion or at rest.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:15:56.996 --> 00:16:00.106 A:middle
+or not a particular item
+is in motion or at rest.
+
+00:16:00.656 --> 00:16:02.926 A:middle
+Now, you might be wondering,
+it's not going to be API.
+
+00:16:03.866 --> 00:16:06.826 A:middle
+But it will be accessible in
+LLDB, and we are advertising it
+
+00:16:06.826 --> 00:16:09.376 A:middle
+as an available debug
+feature on UIDynamicAnimator.
+
+00:16:09.866 --> 00:16:10.946 A:middle
+And it's really simple to use.
+
+00:16:11.276 --> 00:16:13.256 A:middle
+Just pause the debugger,
+find a reference
+
+00:16:13.256 --> 00:16:15.956 A:middle
+to your dynamic animator,
+set debug enabled to true,
+
+00:16:15.956 --> 00:16:18.156 A:middle
+and you will have this
+great overlay depicting all
+
+00:16:18.156 --> 00:16:18.526 A:middle
+the physics.
+
+00:16:19.516 --> 00:16:23.546 A:middle
+[Applause]
+
+00:16:24.046 --> 00:16:27.346 A:middle
+Now in addition to debug
+enabled and disabled,
+
+00:16:27.346 --> 00:16:28.966 A:middle
+we are also offering
+debug interval.
+
+00:16:29.056 --> 00:16:32.086 A:middle
+And this is a way that you
+can tune how often we update
+
+00:16:32.086 --> 00:16:33.166 A:middle
+that debug overlay.
+
+00:16:33.456 --> 00:16:35.286 A:middle
+So, by default, that
+will be updated
+
+00:16:35.286 --> 00:16:37.106 A:middle
+on every animation frame,
+but if you have a lot
+
+00:16:37.106 --> 00:16:39.926 A:middle
+of complex physics, it might
+be beneficial to change
+
+00:16:39.926 --> 00:16:41.116 A:middle
+that to five, for example,
+
+00:16:41.116 --> 00:16:43.246 A:middle
+to only update the overlay
+on every fifth frame.
+
+00:16:44.236 --> 00:16:47.326 A:middle
+And, we're also allowing you
+to adjust the animation speed
+
+00:16:47.326 --> 00:16:48.236 A:middle
+of the dynamic animator.
+
+00:16:48.896 --> 00:16:51.076 A:middle
+Now this might be helpful
+for slowing down things
+
+00:16:51.196 --> 00:16:52.746 A:middle
+to observe what's
+actually going on.
+
+00:16:53.046 --> 00:16:55.566 A:middle
+And then it's important to
+keep in mind when using this,
+
+00:16:56.126 --> 00:16:57.946 A:middle
+this can affect the
+results of the simulation,
+
+00:16:58.246 --> 00:16:59.126 A:middle
+when you slow things down.
+
+00:16:59.176 --> 00:17:00.866 A:middle
+So always ensure
+correction at 1x.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:59.176 --> 00:17:00.866 A:middle
+So always ensure
+correction at 1x.
+
+00:17:03.506 --> 00:17:06.215 A:middle
+So, next, let's talk about
+UIDynamicItemBehavior.
+
+00:17:06.836 --> 00:17:08.195 A:middle
+Now, if you recall,
+this is a way
+
+00:17:08.195 --> 00:17:11.486 A:middle
+to alter the physical properties
+of your view or a dynamic item,
+
+00:17:12.046 --> 00:17:14.546 A:middle
+and it can be applied to
+one or more dynamic items.
+
+00:17:15.026 --> 00:17:18.556 A:middle
+And in David's example,
+he applied a lower density
+
+00:17:18.556 --> 00:17:20.656 A:middle
+and a higher resistance
+to the FaceTime square
+
+00:17:20.935 --> 00:17:22.776 A:middle
+to make it really stick
+to the field corners.
+
+00:17:23.516 --> 00:17:26.096 A:middle
+So a few more examples of
+the existing properties here.
+
+00:17:26.096 --> 00:17:29.946 A:middle
+We have elasticity, friction,
+we saw density and resistance,
+
+00:17:29.946 --> 00:17:32.066 A:middle
+we have angular resistance,
+and these are all great ways
+
+00:17:32.376 --> 00:17:34.836 A:middle
+to adjust how your item feels
+in the animation engine.
+
+00:17:35.536 --> 00:17:38.806 A:middle
+In iOS 9, we have added two
+additional properties: charge --
+
+00:17:38.946 --> 00:17:42.066 A:middle
+this affects the degree to
+which your item participates
+
+00:17:42.066 --> 00:17:44.126 A:middle
+in our new electric and
+magnetic field types;
+
+00:17:44.456 --> 00:17:46.466 A:middle
+and we also added an
+anchored property.
+
+00:17:47.036 --> 00:17:48.006 A:middle
+This one is a little
+bit different.
+
+00:17:48.486 --> 00:17:51.096 A:middle
+But what it does is it allows
+your item to participate
+
+00:17:51.096 --> 00:17:54.556 A:middle
+in the dynamic system, and
+participate in collisions,
+
+00:17:54.556 --> 00:17:56.736 A:middle
+but it will obtain no
+velocity of its own.
+
+00:17:56.736 --> 00:17:59.126 A:middle
+So it really behaves more
+like a collision boundary.
+
+00:17:59.636 --> 00:18:03.506 A:middle
+So next, I would like to talk
+about UIAttachmentBehavior.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:59.636 --> 00:18:03.506 A:middle
+So next, I would like to talk
+about UIAttachmentBehavior.
+
+00:18:03.926 --> 00:18:06.386 A:middle
+And this allow you to
+constrain two dynamic items
+
+00:18:06.446 --> 00:18:08.786 A:middle
+such that they maintain
+a particular distance
+
+00:18:08.786 --> 00:18:09.236 A:middle
+from each other.
+
+00:18:09.236 --> 00:18:13.066 A:middle
+And you can configure this
+with the damping and frequency
+
+00:18:13.366 --> 00:18:16.136 A:middle
+to make it behave more like
+a spring as opposed to a rod.
+
+00:18:16.246 --> 00:18:18.176 A:middle
+And this is a great attachment.
+
+00:18:18.176 --> 00:18:20.966 A:middle
+You know, it's very useful,
+but it's really only one way
+
+00:18:20.966 --> 00:18:23.196 A:middle
+to constrain two items
+with respect to each other.
+
+00:18:23.846 --> 00:18:27.686 A:middle
+So, in iOS 9, we have added some
+additional attachment types.
+
+00:18:28.306 --> 00:18:29.866 A:middle
+The first of which is
+a limit attachment.
+
+00:18:30.476 --> 00:18:32.516 A:middle
+This is quite similar to
+the distance attachment
+
+00:18:32.516 --> 00:18:35.486 A:middle
+that we just described, however,
+instead of being constrained
+
+00:18:35.486 --> 00:18:37.746 A:middle
+by what could be thought
+of as a rod or a spring,
+
+00:18:38.246 --> 00:18:40.816 A:middle
+this one behaves more like a
+rope between the two items,
+
+00:18:40.946 --> 00:18:43.156 A:middle
+where the only constraint
+is a maximum distance
+
+00:18:43.156 --> 00:18:43.616 A:middle
+from each other.
+
+00:18:44.656 --> 00:18:46.836 A:middle
+And you configure this similar
+to the distance attachment
+
+00:18:47.166 --> 00:18:49.776 A:middle
+by specifying two points
+offset from each item's center.
+
+00:18:50.646 --> 00:18:51.106 A:middle
+Very simple.
+
+00:18:51.996 --> 00:18:53.466 A:middle
+Next, we have a fixed
+attachment.
+
+00:18:53.876 --> 00:18:56.126 A:middle
+And this one is a little
+bit different than the limit
+
+00:18:56.126 --> 00:18:57.096 A:middle
+or the distance attachment.
+
+00:18:57.726 --> 00:18:59.316 A:middle
+And you create this
+type of attachment
+
+00:18:59.316 --> 00:19:01.056 A:middle
+by first specifying
+an anchor point.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:59.316 --> 00:19:01.056 A:middle
+by first specifying
+an anchor point.
+
+00:19:01.396 --> 00:19:03.336 A:middle
+This anchor point is
+in the coordinate space
+
+00:19:03.336 --> 00:19:07.066 A:middle
+of your reference view, with
+respect to each item's center.
+
+00:19:08.176 --> 00:19:11.156 A:middle
+And this type of attachment
+offers no movement whatsoever
+
+00:19:11.196 --> 00:19:12.216 A:middle
+between the two items.
+
+00:19:12.776 --> 00:19:16.556 A:middle
+It's much like a welded rod
+between both items as opposed
+
+00:19:16.556 --> 00:19:18.636 A:middle
+to a rod that allows
+them to spin on the ends.
+
+00:19:19.026 --> 00:19:22.446 A:middle
+And we have also added
+a pin attachment type.
+
+00:19:23.396 --> 00:19:26.026 A:middle
+This one is similar to the
+fixed attachment where you start
+
+00:19:26.026 --> 00:19:28.966 A:middle
+by specifying an anchor
+point between two items.
+
+00:19:29.946 --> 00:19:32.776 A:middle
+But this type allows two
+items to rotate with respect
+
+00:19:32.776 --> 00:19:34.446 A:middle
+to each other, about
+this anchor point.
+
+00:19:34.836 --> 00:19:37.876 A:middle
+And this allows you to
+specify a rotatable range,
+
+00:19:37.936 --> 00:19:40.526 A:middle
+which by default would be
+unbounded but we could bound it
+
+00:19:40.526 --> 00:19:42.406 A:middle
+down to something
+smaller like so.
+
+00:19:43.436 --> 00:19:46.186 A:middle
+And finally we have added
+a sliding attachment.
+
+00:19:46.786 --> 00:19:49.616 A:middle
+Now the sliding attachment is
+a little bit more complicated.
+
+00:19:49.676 --> 00:19:51.066 A:middle
+We'll look at an
+example in just a second.
+
+00:19:51.556 --> 00:19:53.696 A:middle
+but just like the fixed
+and the pin types,
+
+00:19:53.696 --> 00:19:56.146 A:middle
+we first specify this
+attachment anchor point that's
+
+00:19:56.146 --> 00:19:57.616 A:middle
+in the coordinate space
+of the reference view.
+
+00:19:58.876 --> 00:20:00.396 A:middle
+But unlike those
+types, we also need
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:58.876 --> 00:20:00.396 A:middle
+But unlike those
+types, we also need
+
+00:20:00.396 --> 00:20:02.436 A:middle
+to specify an axis
+of translation.
+
+00:20:02.906 --> 00:20:04.866 A:middle
+And this is where
+all relative movement
+
+00:20:04.866 --> 00:20:07.586 A:middle
+between two items will be
+along the axis of translation.
+
+00:20:08.336 --> 00:20:10.516 A:middle
+And this type prevents
+all relative rotation
+
+00:20:10.516 --> 00:20:11.306 A:middle
+of the two items.
+
+00:20:11.306 --> 00:20:13.666 A:middle
+So they are really fixed
+rotationally with respect
+
+00:20:13.666 --> 00:20:15.946 A:middle
+to each other and they can
+only move along the axis
+
+00:20:15.946 --> 00:20:16.566 A:middle
+of translation.
+
+00:20:17.826 --> 00:20:18.836 A:middle
+But just like the pin type,
+
+00:20:19.196 --> 00:20:21.126 A:middle
+you can limit this
+translatable range.
+
+00:20:21.286 --> 00:20:23.106 A:middle
+So if you do specify
+a translatable range,
+
+00:20:23.426 --> 00:20:25.556 A:middle
+it needs to include the
+attachment anchor point,
+
+00:20:26.096 --> 00:20:27.566 A:middle
+where the anchor
+point is defined
+
+00:20:27.566 --> 00:20:29.166 A:middle
+as the point zero in the range.
+
+00:20:29.896 --> 00:20:32.126 A:middle
+So if we set this system up
+with this type of attachment,
+
+00:20:32.806 --> 00:20:34.026 A:middle
+we can have linear motion
+
+00:20:34.026 --> 00:20:35.566 A:middle
+between the two items,
+like that.
+
+00:20:36.456 --> 00:20:37.516 A:middle
+So that's pretty complicated.
+
+00:20:37.516 --> 00:20:38.896 A:middle
+Let's look at a basic example.
+
+00:20:39.926 --> 00:20:41.376 A:middle
+And to do that, I want to return
+
+00:20:41.376 --> 00:20:43.256 A:middle
+to our sliding example
+one more time.
+
+00:20:44.476 --> 00:20:46.666 A:middle
+Now, I mentioned in the
+past, that had we tried
+
+00:20:46.706 --> 00:20:49.666 A:middle
+to make this slidable
+behavior, we would have had
+
+00:20:49.666 --> 00:20:51.996 A:middle
+to add a collision on the
+bottom and on each side
+
+00:20:52.066 --> 00:20:53.886 A:middle
+and somewhere off the
+screen above on the top,
+
+00:20:54.186 --> 00:20:55.206 A:middle
+to constrain the motion
+
+00:20:55.446 --> 00:20:57.426 A:middle
+of the sliding view
+along the vertical axis.
+
+00:20:58.036 --> 00:21:00.366 A:middle
+Well, with UI attachment
+behavior, we don't need to do
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:58.036 --> 00:21:00.366 A:middle
+Well, with UI attachment
+behavior, we don't need to do
+
+00:21:00.366 --> 00:21:02.776 A:middle
+that anymore, we can use a
+sliding attachment to do that.
+
+00:21:03.026 --> 00:21:04.786 A:middle
+So we limit the system
+to one collision,
+
+00:21:05.176 --> 00:21:06.176 A:middle
+making the performance better,
+
+00:21:06.436 --> 00:21:08.126 A:middle
+and the code actually
+quite a bit more readable.
+
+00:21:08.916 --> 00:21:10.546 A:middle
+So if we enable our
+debug view here,
+
+00:21:10.956 --> 00:21:13.366 A:middle
+you can see the sliding
+attachment depicted
+
+00:21:13.366 --> 00:21:15.426 A:middle
+by the straight line
+along the vertical axis.
+
+00:21:15.426 --> 00:21:18.406 A:middle
+It expands and contracts
+as we slide the view,
+
+00:21:18.876 --> 00:21:20.476 A:middle
+but there's also
+another attachment there,
+
+00:21:20.846 --> 00:21:23.776 A:middle
+and that's a distance
+attachment that we use to attach
+
+00:21:23.776 --> 00:21:25.636 A:middle
+to an anchor point
+that's manipulated
+
+00:21:25.636 --> 00:21:26.826 A:middle
+by a pan gesture recognizer.
+
+00:21:27.306 --> 00:21:29.636 A:middle
+So, unlike David's demo,
+this one's entirely
+
+00:21:29.636 --> 00:21:30.706 A:middle
+within the dynamics system.
+
+00:21:30.706 --> 00:21:32.646 A:middle
+We don't disable
+or enable anything.
+
+00:21:32.826 --> 00:21:33.776 A:middle
+We just stay in dynamics.
+
+00:21:34.376 --> 00:21:34.746 A:middle
+Pretty cool.
+
+00:21:35.836 --> 00:21:39.086 A:middle
+So, finally, let me give you a
+quick update on UISnapBehavior.
+
+00:21:39.786 --> 00:21:42.356 A:middle
+If you recall, UISnapBehavior
+is a higher level behavior.
+
+00:21:42.796 --> 00:21:45.426 A:middle
+And it can be used to move
+a view from one location
+
+00:21:45.426 --> 00:21:46.896 A:middle
+to another with a
+snap-like effect.
+
+00:21:47.956 --> 00:21:50.296 A:middle
+And SnapBehavior allows you
+to customize the damping
+
+00:21:50.296 --> 00:21:53.196 A:middle
+of the snap, which can
+really adjust, you know,
+
+00:21:53.196 --> 00:21:54.816 A:middle
+the snappiness of how it feels.
+
+00:21:55.616 --> 00:21:58.096 A:middle
+In iOS 9, we've added
+the ability
+
+00:21:58.096 --> 00:22:00.296 A:middle
+to customize the snap
+point after init time
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:58.096 --> 00:22:00.296 A:middle
+to customize the snap
+point after init time
+
+00:22:00.296 --> 00:22:01.816 A:middle
+as well, which is pretty cool.
+
+00:22:02.076 --> 00:22:03.366 A:middle
+So let's look at a
+quick example, here.
+
+00:22:04.006 --> 00:22:08.246 A:middle
+So if we try to pan the view,
+here, with our debug on,
+
+00:22:08.616 --> 00:22:11.586 A:middle
+it will fall back to the screen,
+like the original snap point.
+
+00:22:12.016 --> 00:22:14.596 A:middle
+If we tap in another location,
+it will snap to the new point
+
+00:22:14.686 --> 00:22:16.196 A:middle
+and that's just adjusting
+the snap point
+
+00:22:16.516 --> 00:22:18.106 A:middle
+on an existing dynamic behavior.
+
+00:22:18.486 --> 00:22:18.896 A:middle
+Pretty cool.
+
+00:22:19.626 --> 00:22:22.976 A:middle
+And you will also notice
+that with the debug overlay,
+
+00:22:23.546 --> 00:22:25.706 A:middle
+this is actually a
+composite behavior of its own.
+
+00:22:25.706 --> 00:22:29.086 A:middle
+There's four attachments
+here, configured as springs,
+
+00:22:29.516 --> 00:22:31.956 A:middle
+just that snap the view
+to the new position.
+
+00:22:31.956 --> 00:22:32.746 A:middle
+It's really quite cool.
+
+00:22:33.546 --> 00:22:36.626 A:middle
+So that's what's new in
+UIKit Dynamics and iOS 9.
+
+00:22:37.406 --> 00:22:38.816 A:middle
+I would like to turn
+it over to David
+
+00:22:38.816 --> 00:22:39.936 A:middle
+to talk about visual effects.
+
+00:22:41.516 --> 00:22:45.996 A:middle
+[Applause]
+
+00:22:46.496 --> 00:22:47.266 A:middle
+&gt;&gt; DAVID DUNCAN: Good
+evening, everybody.
+
+00:22:47.266 --> 00:22:49.936 A:middle
+So we are going to talk
+about using visual effects
+
+00:22:49.936 --> 00:22:51.456 A:middle
+to add style to your
+application.
+
+00:22:52.256 --> 00:22:54.136 A:middle
+So we are going to motivate this
+
+00:22:54.136 --> 00:22:57.006 A:middle
+with just a simple image viewer
+application, where what we want
+
+00:22:57.006 --> 00:23:00.256 A:middle
+to do is show the user
+some extra information
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:57.006 --> 00:23:00.256 A:middle
+to do is show the user
+some extra information
+
+00:23:00.256 --> 00:23:01.756 A:middle
+about the photo they are
+currently looking at.
+
+00:23:02.316 --> 00:23:05.596 A:middle
+And so as you see right
+there, this image happens
+
+00:23:05.596 --> 00:23:06.606 A:middle
+to have a little overlay
+
+00:23:06.606 --> 00:23:09.126 A:middle
+that tells us what the
+file name is of the image.
+
+00:23:09.676 --> 00:23:11.896 A:middle
+So we are going to walk through
+how we actually create that.
+
+00:23:13.176 --> 00:23:15.306 A:middle
+And so, the first
+step is that you need
+
+00:23:15.306 --> 00:23:16.336 A:middle
+to create a blur effect.
+
+00:23:16.866 --> 00:23:19.206 A:middle
+And we have three different
+styles, the extra light,
+
+00:23:19.286 --> 00:23:20.456 A:middle
+light, and dark styles.
+
+00:23:20.946 --> 00:23:25.156 A:middle
+And then you create a blur
+effect from those styles.
+
+00:23:25.566 --> 00:23:27.356 A:middle
+And that's just how you
+do that right there.
+
+00:23:27.896 --> 00:23:30.446 A:middle
+And finally, you create
+your visual effect view
+
+00:23:30.626 --> 00:23:31.696 A:middle
+with that blur style.
+
+00:23:32.306 --> 00:23:34.256 A:middle
+Then you just add whatever
+layout you need to do
+
+00:23:34.546 --> 00:23:36.406 A:middle
+and you can get the blur
+that you see on screen there.
+
+00:23:36.406 --> 00:23:39.886 A:middle
+The next step is we are going
+to add a vibrancy effect.
+
+00:23:39.886 --> 00:23:42.596 A:middle
+And what vibrancy does is, it
+really makes something pop,
+
+00:23:42.596 --> 00:23:44.286 A:middle
+stand out from when
+it's over a blur.
+
+00:23:44.286 --> 00:23:47.986 A:middle
+And so what we are going to do
+is we are just going to create
+
+00:23:47.986 --> 00:23:49.766 A:middle
+that vibrancy effect
+from a blur effect.
+
+00:23:49.926 --> 00:23:51.776 A:middle
+As mentioned, it's really
+intended to be overlayed
+
+00:23:51.776 --> 00:23:54.316 A:middle
+from a blur, so we start
+with that blur effect
+
+00:23:54.316 --> 00:23:55.526 A:middle
+to create the vibrancy effect.
+
+00:23:56.616 --> 00:23:57.966 A:middle
+We create our vibrancy effect,
+
+00:23:57.966 --> 00:23:59.166 A:middle
+just like we did
+before with the blur.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:24:00.026 --> 00:24:01.806 A:middle
+And then, in this case
+we're going to add it
+
+00:24:01.806 --> 00:24:04.336 A:middle
+to the content view
+of the blur view.
+
+00:24:04.336 --> 00:24:07.226 A:middle
+Now, it doesn't have to be
+directly added to the blur,
+
+00:24:07.226 --> 00:24:10.406 A:middle
+but there should be a
+blur that you see behind
+
+00:24:10.466 --> 00:24:11.356 A:middle
+that visual effect view.
+
+00:24:12.416 --> 00:24:14.356 A:middle
+And finally, we add the label
+
+00:24:14.356 --> 00:24:16.226 A:middle
+to the content view
+of the vibrancy view.
+
+00:24:16.416 --> 00:24:19.396 A:middle
+And the reason we are adding
+these things to the content view
+
+00:24:19.396 --> 00:24:21.356 A:middle
+of the visual effects view,
+is because that ensures
+
+00:24:21.356 --> 00:24:23.856 A:middle
+that we get the correct
+effect for all the content
+
+00:24:23.856 --> 00:24:24.696 A:middle
+that you are presenting.
+
+00:24:25.216 --> 00:24:27.436 A:middle
+And so, when you have
+done all of that,
+
+00:24:27.916 --> 00:24:30.316 A:middle
+you get the lovely
+label on top of the blur
+
+00:24:30.406 --> 00:24:31.226 A:middle
+as you see on the screen.
+
+00:24:32.406 --> 00:24:33.906 A:middle
+So what's new in iOS 9 here?
+
+00:24:34.526 --> 00:24:37.146 A:middle
+Well, the first thing we have
+done is we have made it really
+
+00:24:37.146 --> 00:24:40.446 A:middle
+easy to cleanly animate
+the bounds of your view.
+
+00:24:40.446 --> 00:24:42.836 A:middle
+So that you can show more
+information in that blur view
+
+00:24:42.836 --> 00:24:45.916 A:middle
+to the user without having to
+do anything really complex.
+
+00:24:46.876 --> 00:24:48.746 A:middle
+But, in addition, we
+have made it possible
+
+00:24:48.746 --> 00:24:51.986 A:middle
+for you to animate the blur.
+
+00:24:52.136 --> 00:24:54.796 A:middle
+And so now, if you have a night
+load in your app, for example,
+
+00:24:54.796 --> 00:24:56.996 A:middle
+you can do a really clean
+animation from day to night
+
+00:24:56.996 --> 00:24:58.966 A:middle
+in your application and
+move the user along.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:00.276 --> 00:25:02.176 A:middle
+Now, the next thing we are
+going to talk through, briefly,
+
+00:25:02.176 --> 00:25:04.966 A:middle
+is how do we actually get
+these effects to the screen?
+
+00:25:05.076 --> 00:25:08.086 A:middle
+What does it do and why
+do you need to know?
+
+00:25:08.086 --> 00:25:09.906 A:middle
+It's important because
+this all has impacts
+
+00:25:09.906 --> 00:25:11.426 A:middle
+on both performance
+and correctness.
+
+00:25:11.426 --> 00:25:13.936 A:middle
+So little baby Sophia
+here is going to walk us
+
+00:25:13.936 --> 00:25:18.316 A:middle
+through adding a little
+overlay to her little UI here.
+
+00:25:19.246 --> 00:25:20.906 A:middle
+So the first thing
+to do is figure out,
+
+00:25:20.906 --> 00:25:21.836 A:middle
+where are we capturing?
+
+00:25:22.496 --> 00:25:23.946 A:middle
+Whenever we see a visual effect,
+
+00:25:24.016 --> 00:25:26.426 A:middle
+we figure out what the capture
+content we need for it is
+
+00:25:26.866 --> 00:25:27.906 A:middle
+and we move it offscreen.
+
+00:25:28.726 --> 00:25:30.026 A:middle
+So we copy that little
+piece out.
+
+00:25:30.966 --> 00:25:33.306 A:middle
+And now that it's offscreen,
+we can actually work with it,
+
+00:25:33.306 --> 00:25:34.636 A:middle
+but why did we take
+it offscreen?
+
+00:25:35.116 --> 00:25:37.536 A:middle
+Well, for one reason is
+that we need to make sure
+
+00:25:37.536 --> 00:25:39.196 A:middle
+that we get the correct
+effects and in this case
+
+00:25:39.196 --> 00:25:41.216 A:middle
+that we capture everything
+we need to blur
+
+00:25:41.216 --> 00:25:44.156 A:middle
+for that blur effect, but
+also we often do these things
+
+00:25:44.156 --> 00:25:46.616 A:middle
+offscreen so that we don't mess
+up the content that's already
+
+00:25:46.646 --> 00:25:48.556 A:middle
+on screen when we are
+doing effects like this.
+
+00:25:49.776 --> 00:25:50.976 A:middle
+So we apply the blur to it.
+
+00:25:52.406 --> 00:25:54.636 A:middle
+And finally we copy
+it back into position
+
+00:25:54.636 --> 00:25:55.846 A:middle
+where the effect
+view desired it,
+
+00:25:56.836 --> 00:25:58.896 A:middle
+and all of this is
+the definition
+
+00:25:58.896 --> 00:26:00.506 A:middle
+of something you might
+have heard before called an
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:58.896 --> 00:26:00.506 A:middle
+of something you might
+have heard before called an
+
+00:26:00.506 --> 00:26:01.936 A:middle
+offscreen pass.
+
+00:26:02.006 --> 00:26:05.456 A:middle
+It's whenever we take content,
+we copy it into an offscreen,
+
+00:26:05.876 --> 00:26:07.826 A:middle
+do work, and then bring
+it back on screen.
+
+00:26:09.326 --> 00:26:12.376 A:middle
+So what are some other ways that
+we can get offscreen passes?
+
+00:26:12.866 --> 00:26:15.266 A:middle
+Well, as you can see,
+we have got alpha,
+
+00:26:15.546 --> 00:26:17.376 A:middle
+and you can see the
+way you do that because
+
+00:26:17.376 --> 00:26:19.916 A:middle
+if you have a complex view
+hierarchy that needs alpha
+
+00:26:19.916 --> 00:26:23.286 A:middle
+in it, then we can't just apply
+the alpha to individual views,
+
+00:26:23.286 --> 00:26:24.556 A:middle
+because you won't get
+the correct effect.
+
+00:26:25.166 --> 00:26:28.186 A:middle
+Instead we need to take the
+entire complex hierarchy
+
+00:26:28.236 --> 00:26:30.806 A:middle
+offscreen, render it,
+and then apply the alpha
+
+00:26:30.806 --> 00:26:31.406 A:middle
+to the whole thing.
+
+00:26:32.026 --> 00:26:34.346 A:middle
+Masking has a very similar
+reasoning behind it,
+
+00:26:34.346 --> 00:26:38.986 A:middle
+in that we need to have all
+the pixels for the mask.
+
+00:26:39.166 --> 00:26:42.326 A:middle
+As we just mentioned, blur and
+vibrancy also go offscreen,
+
+00:26:43.296 --> 00:26:44.926 A:middle
+but snapshotting,
+why is that up there?
+
+00:26:44.926 --> 00:26:45.806 A:middle
+You might ask yourself.
+
+00:26:46.566 --> 00:26:48.206 A:middle
+Well, first off,
+what is snapshotting?
+
+00:26:48.506 --> 00:26:51.416 A:middle
+We have got these two UIView
+methods, snapshot view
+
+00:26:51.416 --> 00:26:53.616 A:middle
+after screen updates and draw
+view hierarchy in rect and
+
+00:26:54.166 --> 00:26:57.136 A:middle
+and the UIScreen method snapshot
+view after screen updates,
+
+00:26:57.656 --> 00:27:00.636 A:middle
+and these all hand you back
+content from a snapshot.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:57.656 --> 00:27:00.636 A:middle
+and these all hand you back
+content from a snapshot.
+
+00:27:01.306 --> 00:27:03.936 A:middle
+Well, a snapshot is
+basically doing the same thing
+
+00:27:03.936 --> 00:27:07.026 A:middle
+as an offscreen pass but giving
+you control over the final step
+
+00:27:07.026 --> 00:27:08.196 A:middle
+of copying it back to screen.
+
+00:27:09.246 --> 00:27:11.846 A:middle
+We take all content that
+you asked us to snapshot,
+
+00:27:11.966 --> 00:27:14.346 A:middle
+render it offscreen, and
+then hand you back a view
+
+00:27:14.346 --> 00:27:17.266 A:middle
+or pixel content
+representing that image.
+
+00:27:18.656 --> 00:27:21.056 A:middle
+But, again, what does this
+have to do with making sure
+
+00:27:21.056 --> 00:27:22.856 A:middle
+that your effects are correct.?
+
+00:27:22.856 --> 00:27:27.186 A:middle
+Well, unfortunately, if you get
+a visual effect caught in all
+
+00:27:27.186 --> 00:27:29.656 A:middle
+of this, as you can see,
+Sophia has lost her blur.
+
+00:27:30.036 --> 00:27:33.306 A:middle
+And that's what you will see on
+screen if a visual effect ends
+
+00:27:33.306 --> 00:27:34.836 A:middle
+up getting caught
+in an offscreen
+
+00:27:34.836 --> 00:27:38.866 A:middle
+that you didn't expect
+it to go into.
+
+00:27:38.866 --> 00:27:41.606 A:middle
+So back to motivating this,
+I'm sure you have all been
+
+00:27:41.606 --> 00:27:43.686 A:middle
+to the multitasking sessions
+this year, and if not,
+
+00:27:43.686 --> 00:27:45.186 A:middle
+you should watch them
+on video afterwards.
+
+00:27:45.606 --> 00:27:47.056 A:middle
+But one the key things
+that you need
+
+00:27:47.056 --> 00:27:48.616 A:middle
+to have a great app
+participating
+
+00:27:48.616 --> 00:27:51.146 A:middle
+in multitasking is good
+performance on screen.
+
+00:27:51.406 --> 00:27:52.536 A:middle
+Because now the performance
+
+00:27:52.536 --> 00:27:54.346 A:middle
+of your app also affects
+the other side app.
+
+00:27:55.066 --> 00:27:56.866 A:middle
+And so, since we don't
+have any scrolling
+
+00:27:56.866 --> 00:27:59.576 A:middle
+in this particular example,
+we have decided, let's instead
+
+00:27:59.576 --> 00:28:01.106 A:middle
+of keeping the blur
+rendering all the time,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:59.576 --> 00:28:01.106 A:middle
+of keeping the blur
+rendering all the time,
+
+00:28:01.106 --> 00:28:02.896 A:middle
+let's just take a
+snapshot of it.
+
+00:28:02.896 --> 00:28:04.616 A:middle
+And so we decided
+to take a snapshot
+
+00:28:04.616 --> 00:28:06.266 A:middle
+of that particular
+visual effect view.
+
+00:28:07.526 --> 00:28:10.656 A:middle
+But then what happens
+is the capture area is
+
+00:28:10.656 --> 00:28:11.666 A:middle
+happening offscreen.
+
+00:28:12.086 --> 00:28:14.546 A:middle
+And since you only snapshotted
+the visual effect view,
+
+00:28:15.526 --> 00:28:17.216 A:middle
+there's nothing in
+that capture area.
+
+00:28:17.896 --> 00:28:19.496 A:middle
+And so the capture
+gives you back nothing,
+
+00:28:19.616 --> 00:28:20.836 A:middle
+and the blur has
+nothing to blur,
+
+00:28:21.136 --> 00:28:22.806 A:middle
+and you get the broken
+effect you saw before.
+
+00:28:23.776 --> 00:28:27.396 A:middle
+So, now that we have seen how
+you can have your effect broken,
+
+00:28:27.626 --> 00:28:28.506 A:middle
+what can we do to fix it?
+
+00:28:29.276 --> 00:28:32.346 A:middle
+Well, first thing is, we
+have this handy method
+
+00:28:32.536 --> 00:28:35.156 A:middle
+on visual effect view, called,
+what's wrong with this effect?
+
+00:28:36.016 --> 00:28:38.016 A:middle
+[Laughter]
+
+00:28:38.016 --> 00:28:43.000 A:middle
+[Applause]
+
+00:28:43.396 --> 00:28:46.916 A:middle
+Just like with the dynamics
+debugging flags this isn't
+
+00:28:46.916 --> 00:28:50.136 A:middle
+available in the SDK as
+such, but you can call it
+
+00:28:50.136 --> 00:28:51.766 A:middle
+from in the debugger,
+just like this,
+
+00:28:52.446 --> 00:28:55.746 A:middle
+and you will get back a string
+that looks kind of like this.
+
+00:28:56.286 --> 00:28:58.936 A:middle
+In this case, we found that
+there was a mask view somewhere
+
+00:28:58.936 --> 00:29:01.686 A:middle
+up in the hierarchy that was
+causing the visual effect
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:58.936 --> 00:29:01.686 A:middle
+up in the hierarchy that was
+causing the visual effect
+
+00:29:01.716 --> 00:29:04.566 A:middle
+to go offscreen, and thus
+not capture as much content
+
+00:29:04.566 --> 00:29:06.286 A:middle
+as it needed to,
+to render properly.
+
+00:29:06.846 --> 00:29:09.986 A:middle
+So how can you fix this?
+
+00:29:10.746 --> 00:29:13.036 A:middle
+First way that this works,
+if you are using either alpha
+
+00:29:13.036 --> 00:29:15.076 A:middle
+or masking, is to rearrange
+your view hierarchy.
+
+00:29:15.076 --> 00:29:18.806 A:middle
+What we have here is just some
+container, maybe the window,
+
+00:29:19.036 --> 00:29:20.016 A:middle
+and a container view
+
+00:29:20.016 --> 00:29:22.146 A:middle
+that contains a blur
+and further contents.
+
+00:29:22.576 --> 00:29:24.686 A:middle
+Well, in this case the
+blur doesn't actually need
+
+00:29:24.686 --> 00:29:26.736 A:middle
+to participate in the
+alpha or masking we have,
+
+00:29:27.496 --> 00:29:30.626 A:middle
+so we just rearrange to have
+the blur as the first subview,
+
+00:29:30.776 --> 00:29:33.346 A:middle
+the container as the second
+subview, and thus the container
+
+00:29:33.346 --> 00:29:35.606 A:middle
+and everything in it will
+render on top of the blur,
+
+00:29:35.906 --> 00:29:38.276 A:middle
+and we can apply alpha or
+masking to the container view
+
+00:29:38.446 --> 00:29:39.496 A:middle
+without messing up our blur.
+
+00:29:40.936 --> 00:29:43.666 A:middle
+A second thing that we
+can do for masking is,
+
+00:29:43.956 --> 00:29:47.856 A:middle
+instead of masking the container
+view, we can move that mask
+
+00:29:48.036 --> 00:29:51.086 A:middle
+down into the content that
+we actually need masking for.
+
+00:29:51.966 --> 00:29:53.166 A:middle
+Now, as we mentioned before,
+
+00:29:53.166 --> 00:29:55.006 A:middle
+masking will often
+take an offscreen pass,
+
+00:29:55.206 --> 00:29:56.756 A:middle
+so you should be very
+careful about performance
+
+00:29:56.756 --> 00:30:00.066 A:middle
+when do a transformation
+like this.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:29:56.756 --> 00:30:00.066 A:middle
+when do a transformation
+like this.
+
+00:30:00.656 --> 00:30:02.816 A:middle
+Finally, with snapshotting,
+as we mentioned before,
+
+00:30:02.816 --> 00:30:05.086 A:middle
+snapshotting is only going to
+capture what you tell it to.
+
+00:30:05.666 --> 00:30:07.976 A:middle
+So, in this case, that
+content view that we are asking
+
+00:30:07.976 --> 00:30:10.216 A:middle
+to snapshot has transparency
+in it.
+
+00:30:10.216 --> 00:30:11.526 A:middle
+So we can see things behind it.
+
+00:30:11.746 --> 00:30:14.066 A:middle
+But if we snapshot just that
+view, we aren't going to get
+
+00:30:14.066 --> 00:30:15.886 A:middle
+that in the blur and it is
+going to look a little funny.
+
+00:30:16.536 --> 00:30:17.766 A:middle
+So if we move the snapshot up,
+
+00:30:17.766 --> 00:30:20.636 A:middle
+all the way to the window is
+usually the easiest thing to do,
+
+00:30:21.206 --> 00:30:22.086 A:middle
+but sometimes you might need
+
+00:30:22.086 --> 00:30:23.346 A:middle
+to move it all the
+way up to the screen.
+
+00:30:23.916 --> 00:30:26.066 A:middle
+So if you are going to snapshot
+blurs, you should make sure
+
+00:30:26.066 --> 00:30:28.506 A:middle
+that you snapshot as far
+away from the blur content
+
+00:30:28.506 --> 00:30:30.656 A:middle
+as possible so that you are
+sure you get everything you need
+
+00:30:30.656 --> 00:30:31.606 A:middle
+for it.
+
+00:30:32.266 --> 00:30:36.006 A:middle
+And so with that, let's switch
+over to some best practices
+
+00:30:36.006 --> 00:30:37.386 A:middle
+with dynamics and AutoLayout.
+
+00:30:41.016 --> 00:30:44.816 A:middle
+So, the first thing you might do
+is you might have fairly complex
+
+00:30:44.816 --> 00:30:46.846 A:middle
+view hierarchies working
+inside of dynamics.
+
+00:30:47.926 --> 00:30:50.226 A:middle
+And what you want is for the
+outer view to participate
+
+00:30:50.226 --> 00:30:52.716 A:middle
+in the dynamic system
+but not the inner views.
+
+00:30:52.766 --> 00:30:53.866 A:middle
+They are just going to be laid
+
+00:30:53.866 --> 00:30:55.806 A:middle
+out like you would
+with any other thing.
+
+00:30:56.056 --> 00:30:59.746 A:middle
+So you can use UIKit
+Dynamics for the outside view,
+
+00:30:59.946 --> 00:31:02.536 A:middle
+just by turning translate
+auto resizing mask
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:59.946 --> 00:31:02.536 A:middle
+just by turning translate
+auto resizing mask
+
+00:31:02.536 --> 00:31:03.936 A:middle
+into constraints to true.
+
+00:31:04.096 --> 00:31:06.356 A:middle
+And, yes, in the only slide
+at WWDC that says true.
+
+00:31:07.586 --> 00:31:10.816 A:middle
+And then you can use AutoLayout
+
+00:31:10.816 --> 00:31:12.586 A:middle
+to just position
+everything else inside,
+
+00:31:12.586 --> 00:31:14.756 A:middle
+just like you always have,
+or using the new syntax
+
+00:31:14.756 --> 00:31:17.226 A:middle
+as shown on the slide.
+
+00:31:17.406 --> 00:31:20.326 A:middle
+Another thing you can do is,
+often you will have items
+
+00:31:20.326 --> 00:31:23.486 A:middle
+in the dynamic system but you
+might have labels for them
+
+00:31:23.536 --> 00:31:25.806 A:middle
+that shouldn't participate,
+but they need to follow.
+
+00:31:26.256 --> 00:31:28.516 A:middle
+And so Lola here
+has her little tag
+
+00:31:28.866 --> 00:31:31.526 A:middle
+that says what the file name
+is, and we just have this anchor
+
+00:31:31.526 --> 00:31:33.416 A:middle
+that represents our
+AutoLayout constraints,
+
+00:31:33.786 --> 00:31:36.816 A:middle
+and then when dynamics comes in
+and wants to move Lola around,
+
+00:31:37.026 --> 00:31:39.586 A:middle
+the label moves with it,
+but the label does not end
+
+00:31:39.586 --> 00:31:40.996 A:middle
+up interacting with dynamics.
+
+00:31:42.656 --> 00:31:45.506 A:middle
+Finally you can work
+with dynamics
+
+00:31:45.536 --> 00:31:47.316 A:middle
+by creating a custom
+dynamic item,
+
+00:31:47.436 --> 00:31:48.676 A:middle
+just as Mike mentioned earlier.
+
+00:31:49.846 --> 00:31:51.216 A:middle
+You just subclass NSObject
+
+00:31:51.216 --> 00:31:53.576 A:middle
+or some other appropriate
+object class,
+
+00:31:55.046 --> 00:31:57.096 A:middle
+conform to the UI
+Dynamic Item protocol
+
+00:31:58.136 --> 00:31:59.756 A:middle
+and provide the required
+methods.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:00.666 --> 00:32:02.036 A:middle
+A bounds some of size --
+
+00:32:02.156 --> 00:32:04.126 A:middle
+it can't be 00, or the
+dynamic system is going
+
+00:32:04.126 --> 00:32:08.246 A:middle
+to throw an exception -- and you
+implement center and transform,
+
+00:32:08.376 --> 00:32:10.826 A:middle
+and you use the values
+of those in order
+
+00:32:10.826 --> 00:32:13.016 A:middle
+to construct AutoLayout
+constraints
+
+00:32:13.226 --> 00:32:15.326 A:middle
+or otherwise change something
+outside of your system.
+
+00:32:16.466 --> 00:32:20.216 A:middle
+And so to close out, we are
+going to show you a demo
+
+00:32:20.736 --> 00:32:25.436 A:middle
+of how you can do just that.
+
+00:32:25.806 --> 00:32:29.786 A:middle
+So what we have got here, is,
+again, a simple application
+
+00:32:30.266 --> 00:32:31.666 A:middle
+that just shows a photo.
+
+00:32:31.666 --> 00:32:34.116 A:middle
+But we want to be able to
+show the user the faces
+
+00:32:34.116 --> 00:32:35.776 A:middle
+in the photo with some style.
+
+00:32:36.056 --> 00:32:40.076 A:middle
+And so when we click our dynamic
+item system stretches out
+
+00:32:40.076 --> 00:32:41.386 A:middle
+and animates in that blur.
+
+00:32:42.126 --> 00:32:43.896 A:middle
+And if you click again,
+of course, it will move
+
+00:32:43.896 --> 00:32:45.446 A:middle
+out with a nice little effect.
+
+00:32:46.426 --> 00:32:49.106 A:middle
+But if you keep clicking,
+then you can see
+
+00:32:49.106 --> 00:32:51.636 A:middle
+that it responds very
+fluidly to the dynamic system
+
+00:32:52.146 --> 00:32:54.746 A:middle
+and doesn't have
+very set, rigid path.
+
+00:32:55.466 --> 00:32:58.886 A:middle
+So it's very reactive to
+exactly what the user is doing.
+
+00:32:59.726 --> 00:33:01.066 A:middle
+So how do we get that to work?
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:59.726 --> 00:33:01.066 A:middle
+So how do we get that to work?
+
+00:33:01.966 --> 00:33:05.496 A:middle
+So, the first thing we do is
+we have this face layout guide,
+
+00:33:06.006 --> 00:33:07.996 A:middle
+and that's just a subclass
+of UI layout guide,
+
+00:33:08.296 --> 00:33:11.396 A:middle
+and inside of it is a
+little bit of dynamics.
+
+00:33:11.836 --> 00:33:14.626 A:middle
+We have this face layout guide
+dynamic item, that, again,
+
+00:33:14.626 --> 00:33:17.436 A:middle
+subclass as NSObject and
+conforms to UI Dynamic Item,
+
+00:33:18.256 --> 00:33:19.896 A:middle
+and it's going to
+manage a constraint,
+
+00:33:20.306 --> 00:33:24.116 A:middle
+and by setting the constant of
+that constraint to either the x
+
+00:33:24.116 --> 00:33:27.396 A:middle
+or y value of the center
+point, whenever that changes.
+
+00:33:27.916 --> 00:33:33.676 A:middle
+And then in here, when you
+set up the layout guide,
+
+00:33:34.016 --> 00:33:35.586 A:middle
+it's got a centerrable position
+
+00:33:35.836 --> 00:33:38.376 A:middle
+and it creates four
+additional dynamic items
+
+00:33:38.646 --> 00:33:40.416 A:middle
+that represent the
+top, left, bottom,
+
+00:33:40.416 --> 00:33:41.956 A:middle
+and right in that system.
+
+00:33:43.146 --> 00:33:45.256 A:middle
+We assign it the constraints
+and the constraints just work
+
+00:33:45.336 --> 00:33:47.856 A:middle
+from the top left corner
+of the dynamic item,
+
+00:33:48.496 --> 00:33:50.586 A:middle
+of the dynamic item
+reference view,
+
+00:33:51.576 --> 00:33:54.146 A:middle
+and we use slider
+attachments to limit
+
+00:33:54.146 --> 00:33:56.186 A:middle
+where those four
+dynamic items can go
+
+00:33:56.186 --> 00:33:57.226 A:middle
+with respect to the position.
+
+00:33:57.626 --> 00:34:00.036 A:middle
+And this keeps it from
+flying outside of the system
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:57.626 --> 00:34:00.036 A:middle
+And this keeps it from
+flying outside of the system
+
+00:34:00.036 --> 00:34:01.986 A:middle
+or collapsing to too
+small of a position.
+
+00:34:01.986 --> 00:34:05.096 A:middle
+Now, in the view controller,
+
+00:34:05.096 --> 00:34:08.065 A:middle
+the way we get this behavior is
+we have a gravity behavior along
+
+00:34:08.065 --> 00:34:09.096 A:middle
+with the face layout guide,
+
+00:34:09.406 --> 00:34:10.896 A:middle
+and we center them
+on top of each other.
+
+00:34:10.896 --> 00:34:12.406 A:middle
+So when the gravity changes,
+
+00:34:12.406 --> 00:34:13.966 A:middle
+the layout guide will
+move appropriately,
+
+00:34:15.176 --> 00:34:17.156 A:middle
+and we get the blur
+effect from our storyboard,
+
+00:34:17.156 --> 00:34:18.866 A:middle
+so that we don't have to
+constantly twiddle with it
+
+00:34:18.866 --> 00:34:21.196 A:middle
+if we decide we want to
+change the style we are using.
+
+00:34:21.766 --> 00:34:26.085 A:middle
+And we use constraints
+to attach that blur view
+
+00:34:26.356 --> 00:34:27.576 A:middle
+to the face layout guide.
+
+00:34:27.886 --> 00:34:29.795 A:middle
+So that when that
+guide changes size,
+
+00:34:29.886 --> 00:34:31.545 A:middle
+the blur view will
+also change with it.
+
+00:34:33.005 --> 00:34:35.916 A:middle
+Now, in order to make it look
+like the blur view is cutting
+
+00:34:35.916 --> 00:34:38.416 A:middle
+out everything but the faces,
+we actually have a little trick.
+
+00:34:38.666 --> 00:34:40.815 A:middle
+We make imposters from
+the original image,
+
+00:34:40.976 --> 00:34:44.295 A:middle
+just cut out the images that
+we want, apply a mask to them,
+
+00:34:44.606 --> 00:34:47.815 A:middle
+and create additional UI
+Image Views to place on top
+
+00:34:47.815 --> 00:34:48.806 A:middle
+of the one that's already there.
+
+00:34:49.456 --> 00:34:52.156 A:middle
+And so it looks like the blur
+is just dodging the faces
+
+00:34:52.156 --> 00:34:54.246 A:middle
+but what is actually happening
+is you're seeing the views
+
+00:34:54.246 --> 00:34:58.306 A:middle
+that were placed on top that
+have the faces cut out on them.
+
+00:34:58.496 --> 00:35:01.176 A:middle
+Finally, we have this tap
+gesture recognizer that we set,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:58.496 --> 00:35:01.176 A:middle
+Finally, we have this tap
+gesture recognizer that we set,
+
+00:35:01.176 --> 00:35:02.336 A:middle
+and it will be the thing
+
+00:35:02.336 --> 00:35:04.446 A:middle
+that causes our dynamic
+system to change.
+
+00:35:04.936 --> 00:35:08.036 A:middle
+When we want to expose
+the faces,
+
+00:35:08.506 --> 00:35:09.506 A:middle
+we just change the gravity.
+
+00:35:09.916 --> 00:35:12.126 A:middle
+So normally the gravity is
+causing everything to be pulled
+
+00:35:12.126 --> 00:35:14.346 A:middle
+into the center, but
+then when we flip it,
+
+00:35:14.346 --> 00:35:16.646 A:middle
+it wants to push everything
+out like a repulsor.
+
+00:35:17.966 --> 00:35:19.696 A:middle
+And then we take
+advantage of the fact
+
+00:35:19.696 --> 00:35:21.826 A:middle
+that we are always laying
+out subviews during this,
+
+00:35:22.206 --> 00:35:24.766 A:middle
+to actually trigger the
+blur animation in or out.
+
+00:35:25.696 --> 00:35:29.066 A:middle
+And that's all it takes in order
+to build this really nice effect
+
+00:35:29.416 --> 00:35:31.316 A:middle
+from something that
+both autolayout
+
+00:35:31.316 --> 00:35:33.256 A:middle
+and dynamics can both
+provide easily for you.
+
+00:35:33.256 --> 00:35:38.666 A:middle
+And so we will go back
+to slides to finish out.
+
+00:35:39.466 --> 00:35:43.376 A:middle
+So in summary, we want you
+to use these technologies
+
+00:35:43.376 --> 00:35:45.256 A:middle
+to really improve
+the user experience.
+
+00:35:45.506 --> 00:35:48.036 A:middle
+So when you add a
+blur, you add it
+
+00:35:48.036 --> 00:35:50.966 A:middle
+so that you can put
+additional information offset
+
+00:35:51.026 --> 00:35:51.856 A:middle
+from your content.
+
+00:35:52.346 --> 00:35:53.666 A:middle
+When you use dynamics, it's
+
+00:35:53.666 --> 00:35:57.056 A:middle
+so that you can have a user
+interface that responds nicely
+
+00:35:57.056 --> 00:35:59.126 A:middle
+and as the user expects
+to their input.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:00.016 --> 00:36:01.606 A:middle
+But you also want to
+consider performance
+
+00:36:01.606 --> 00:36:02.596 A:middle
+when you are doing these things.
+
+00:36:03.026 --> 00:36:05.366 A:middle
+Because if you have a lot
+of dynamic items on screen,
+
+00:36:05.536 --> 00:36:07.406 A:middle
+that can really bog
+down the user interface,
+
+00:36:07.866 --> 00:36:10.196 A:middle
+and you don't get the nice
+physics that you were expecting.
+
+00:36:10.536 --> 00:36:11.876 A:middle
+So use it with caution.
+
+00:36:12.306 --> 00:36:15.536 A:middle
+But also for visual effects,
+if you have a lot of them,
+
+00:36:15.536 --> 00:36:17.426 A:middle
+you will end up with
+lots of offscreen passes
+
+00:36:17.756 --> 00:36:19.436 A:middle
+and that can incur
+quite a cost as well.
+
+00:36:21.456 --> 00:36:23.156 A:middle
+So these are all
+the related sessions
+
+00:36:23.156 --> 00:36:24.186 A:middle
+that we have got for you today.
+
+00:36:24.186 --> 00:36:26.856 A:middle
+Unfortunately most of
+them have occurred before.
+
+00:36:26.856 --> 00:36:29.566 A:middle
+There's only one that hasn't
+and that's occurring with us,
+
+00:36:29.566 --> 00:36:31.366 A:middle
+called "Building Responsive
+and Efficient Apps with GCD."
+
+00:36:31.366 --> 00:36:34.996 A:middle
+And we will be in the lab
+after this to take all
+
+00:36:34.996 --> 00:36:37.106 A:middle
+of your questions and
+help you get the most
+
+00:36:37.106 --> 00:36:38.616 A:middle
+out of what you have
+got for this year.
+
+00:36:39.176 --> 00:36:43.646 A:middle
+We have got various
+documentation, and assemble code
+
+00:36:43.646 --> 00:36:45.416 A:middle
+for the StickyCorners
+sample that you saw earlier
+
+00:36:45.416 --> 00:36:48.346 A:middle
+in the presentation should be up
+and available, and, of course,
+
+00:36:48.346 --> 00:36:50.596 A:middle
+Curt Rothert to take your
+questions through email.
+
+00:36:51.106 --> 00:36:53.566 A:middle
+And I'm glad you stuck
+with us on Friday.
+
+00:36:53.886 --> 00:36:56.486 A:middle
+I hope you had a great
+WWDC and a safe trip home.
+
+00:36:57.016 --> 00:36:59.000 A:middle
+[Applause]
+

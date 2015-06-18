@@ -1,0 +1,2942 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:24.141 --> 00:00:26.141 A:middle
+[Applause]
+
+00:00:26.266 --> 00:00:26.636 A:middle
+&gt;&gt; ANUSH NADATHUR: Thank you.
+
+00:00:30.486 --> 00:00:31.136 A:middle
+Hello, everybody.
+
+00:00:31.136 --> 00:00:31.746 A:middle
+Good afternoon.
+
+00:00:32.336 --> 00:00:34.346 A:middle
+Welcome. Thanks for coming.
+
+00:00:35.886 --> 00:00:37.156 A:middle
+My name is Anush Nadathur
+
+00:00:37.156 --> 00:00:39.656 A:middle
+and I'm a software
+engineer on HomeKit.
+
+00:00:40.956 --> 00:00:43.746 A:middle
+Today, my colleague Naveen
+and I are going to talk
+
+00:00:43.746 --> 00:00:45.916 A:middle
+about what's new in
+HomeKit for iOS 9.
+
+00:00:46.566 --> 00:00:50.916 A:middle
+Now for the past few years
+we have seen a proliferation
+
+00:00:50.916 --> 00:00:53.216 A:middle
+of home devices in the market.
+
+00:00:54.336 --> 00:00:57.486 A:middle
+What this gives you is
+a tremendous opportunity
+
+00:00:58.016 --> 00:01:01.676 A:middle
+to influence the experience
+people have when interacting
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:58.016 --> 00:01:01.676 A:middle
+to influence the experience
+people have when interacting
+
+00:01:01.676 --> 00:01:05.036 A:middle
+with these devices in the
+comfort of their own home.
+
+00:01:06.786 --> 00:01:11.496 A:middle
+Apple introduced HomeKit in iOS
+8 so that we can work together
+
+00:01:12.486 --> 00:01:15.376 A:middle
+to bring home automation
+to a much wider audience
+
+00:01:15.376 --> 00:01:20.246 A:middle
+than in the past, and to deliver
+a consistent user experience
+
+00:01:20.246 --> 00:01:21.086 A:middle
+for our customers.
+
+00:01:21.596 --> 00:01:26.856 A:middle
+We had a great session last
+year, but for those of you
+
+00:01:26.856 --> 00:01:30.126 A:middle
+who may have not seen
+it, here's a brief recap.
+
+00:01:32.316 --> 00:01:36.796 A:middle
+HomeKit provides
+a common protocol
+
+00:01:36.796 --> 00:01:39.986 A:middle
+that all HomeKit-enabled
+accesses implement
+
+00:01:40.396 --> 00:01:41.996 A:middle
+and interact with iOS.
+
+00:01:43.076 --> 00:01:46.606 A:middle
+On this protocol, we
+have defined profiles
+
+00:01:46.696 --> 00:01:50.076 A:middle
+that describe many of the
+commonly used accessories.
+
+00:01:50.466 --> 00:01:54.286 A:middle
+However, we also
+made it flexible
+
+00:01:54.496 --> 00:01:58.916 A:middle
+so that you can define profiles
+that define custom features
+
+00:01:59.006 --> 00:02:02.176 A:middle
+of your accessory and
+still be HomeKit-enabled.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:59.006 --> 00:02:02.176 A:middle
+of your accessory and
+still be HomeKit-enabled.
+
+00:02:02.326 --> 00:02:07.616 A:middle
+One of the key features
+in HomeKit is
+
+00:02:07.616 --> 00:02:10.656 A:middle
+to provide a common
+view of the home
+
+00:02:10.656 --> 00:02:12.536 A:middle
+across all HomeKit applications.
+
+00:02:13.146 --> 00:02:16.866 A:middle
+So what that means is if you
+use app A and switch to app B,
+
+00:02:17.206 --> 00:02:18.456 A:middle
+both get the same home data.
+
+00:02:19.276 --> 00:02:21.396 A:middle
+This is critical
+for our customers
+
+00:02:21.396 --> 00:02:23.666 A:middle
+because that delivers the
+consistent user experience
+
+00:02:23.666 --> 00:02:25.806 A:middle
+that we want them to have.
+
+00:02:26.576 --> 00:02:30.716 A:middle
+If your accessory implements one
+of the Apple-defined profiles,
+
+00:02:31.526 --> 00:02:35.276 A:middle
+Siri works right out of the box.
+
+00:02:35.446 --> 00:02:40.476 A:middle
+Yeah. And the HomeKit framework
+
+00:02:40.606 --> 00:02:43.356 A:middle
+on iOS models a home
+very naturally.
+
+00:02:44.126 --> 00:02:48.856 A:middle
+So we have objects which
+describe rooms, zones,
+
+00:02:48.856 --> 00:02:51.206 A:middle
+which are a collection
+of rooms, and of course,
+
+00:02:51.206 --> 00:02:52.576 A:middle
+accesses that you can control.
+
+00:02:54.156 --> 00:02:57.766 A:middle
+Now, none of this would
+matter to our customers
+
+00:02:58.016 --> 00:03:00.766 A:middle
+if their data is not
+private or secure.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:58.016 --> 00:03:00.766 A:middle
+if their data is not
+private or secure.
+
+00:03:01.626 --> 00:03:05.806 A:middle
+HomeKit was designed
+with privacy and security
+
+00:03:05.806 --> 00:03:06.696 A:middle
+from the very beginning.
+
+00:03:07.656 --> 00:03:10.066 A:middle
+All communication between iOS
+
+00:03:10.376 --> 00:03:13.206 A:middle
+and the HomeKit accessories
+is end-to-end encrypted,
+
+00:03:13.916 --> 00:03:17.376 A:middle
+and we never use keys
+across different sessions.
+
+00:03:17.456 --> 00:03:21.816 A:middle
+So when you have a key, that key
+cannot be used to dig up data
+
+00:03:21.816 --> 00:03:23.686 A:middle
+in the past or in the future.
+
+00:03:24.306 --> 00:03:28.956 A:middle
+And all home data is encrypted
+on the device using keys
+
+00:03:28.956 --> 00:03:30.196 A:middle
+that are local to that device.
+
+00:03:30.586 --> 00:03:33.136 A:middle
+So your data is completely
+private and secure.
+
+00:03:34.416 --> 00:03:36.816 A:middle
+So that's HomeKit in iOS 8.
+
+00:03:37.346 --> 00:03:39.496 A:middle
+So let's talk about what we
+have in store for you today.
+
+00:03:40.156 --> 00:03:44.886 A:middle
+I'm going to go over features
+and enhancements for HomeKit
+
+00:03:44.886 --> 00:03:48.956 A:middle
+in iOS 9, and Naveen
+will go over updates
+
+00:03:48.956 --> 00:03:51.246 A:middle
+in our accessories space.
+
+00:03:53.176 --> 00:03:55.586 A:middle
+So let's get right to it.
+
+00:03:58.496 --> 00:04:01.856 A:middle
+We've got some great
+features for HomeKit in iOS 9,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:58.496 --> 00:04:01.856 A:middle
+We've got some great
+features for HomeKit in iOS 9,
+
+00:04:02.656 --> 00:04:06.516 A:middle
+but we have also added
+enhancements based on feedback
+
+00:04:06.656 --> 00:04:08.846 A:middle
+that we have received from
+developers in the past year.
+
+00:04:09.536 --> 00:04:11.156 A:middle
+So please keep those
+feedback coming.
+
+00:04:11.336 --> 00:04:13.586 A:middle
+We absolutely love them.
+
+00:04:13.806 --> 00:04:16.896 A:middle
+So let's begin with a
+small change that we made
+
+00:04:18.026 --> 00:04:20.486 A:middle
+but has a tremendous impact
+on your daily development.
+
+00:04:20.966 --> 00:04:25.216 A:middle
+Let's take an example
+of a light in a bedroom
+
+00:04:26.226 --> 00:04:28.626 A:middle
+and we move it to
+the living room.
+
+00:04:29.556 --> 00:04:33.036 A:middle
+In iOS 8, if your app
+comes to the foreground,
+
+00:04:33.686 --> 00:04:35.386 A:middle
+we would have notified your app
+
+00:04:35.386 --> 00:04:39.366 A:middle
+of this change using home
+manager did update homes
+
+00:04:39.646 --> 00:04:40.446 A:middle
+delegate callback.
+
+00:04:41.316 --> 00:04:43.866 A:middle
+Now, this tells you
+something has changed
+
+00:04:43.956 --> 00:04:46.896 A:middle
+but also gives you a new set of
+objects that now you have to use
+
+00:04:46.896 --> 00:04:49.916 A:middle
+and figure out what exactly
+has changed in your home.
+
+00:04:51.176 --> 00:04:56.986 A:middle
+We thought we should do better,
+so in iOS 9, HomeKit is going
+
+00:04:56.986 --> 00:04:59.886 A:middle
+to maintain your objects
+and only update properties
+
+00:04:59.886 --> 00:05:01.046 A:middle
+that have actually changed.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:59.886 --> 00:05:01.046 A:middle
+that have actually changed.
+
+00:05:01.706 --> 00:05:03.196 A:middle
+[Applause] Thank you.
+
+00:05:06.516 --> 00:05:09.566 A:middle
+So what that means is, in
+our example, you're going
+
+00:05:09.566 --> 00:05:10.746 A:middle
+to get a single delegate
+callback:
+
+00:05:10.946 --> 00:05:12.666 A:middle
+home did update room
+[unintelligible].
+
+00:05:12.716 --> 00:05:15.856 A:middle
+I think this is going to
+simplify your code base
+
+00:05:15.966 --> 00:05:18.356 A:middle
+and let you focus on your
+features for your app.
+
+00:05:19.316 --> 00:05:22.436 A:middle
+That's not the only
+enhancement that we have added.
+
+00:05:22.746 --> 00:05:25.346 A:middle
+Let's talk about another
+one using an example.
+
+00:05:26.266 --> 00:05:29.836 A:middle
+Let's say I have a living
+room, and I have a photo
+
+00:05:29.836 --> 00:05:32.676 A:middle
+of the living room that I
+want to show in the app.
+
+00:05:33.436 --> 00:05:35.946 A:middle
+So what that means is you
+need to be able to associate
+
+00:05:35.946 --> 00:05:39.876 A:middle
+and find a HomeKit
+object representing a room
+
+00:05:39.876 --> 00:05:43.036 A:middle
+across relaunches of your app.
+
+00:05:43.306 --> 00:05:47.536 A:middle
+Now, a room in HomeKit
+is represented using a
+
+00:05:47.536 --> 00:05:48.486 A:middle
+HMRoom class.
+
+00:05:49.346 --> 00:05:53.386 A:middle
+This has a name property,
+and names are not immutable.
+
+00:05:53.826 --> 00:05:55.806 A:middle
+So any HomeKit app
+can change this.
+
+00:05:56.966 --> 00:05:59.776 A:middle
+To solve our problem, we need
+something more persistent.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:00.536 --> 00:06:04.566 A:middle
+So in iOS 9, we are introducing
+persistent identifiers
+
+00:06:04.896 --> 00:06:07.716 A:middle
+across all relevant
+HomeKit classes.
+
+00:06:08.516 --> 00:06:11.436 A:middle
+[Applause]
+
+00:06:11.936 --> 00:06:12.336 A:middle
+Thank you.
+
+00:06:13.416 --> 00:06:15.976 A:middle
+So you are going to have a
+unique identifier property
+
+00:06:15.976 --> 00:06:18.116 A:middle
+on these classes.
+
+00:06:18.986 --> 00:06:22.936 A:middle
+These are unique applications,
+and now you can use this
+
+00:06:23.056 --> 00:06:28.016 A:middle
+to associate context data
+in your app and apply that
+
+00:06:28.256 --> 00:06:29.956 A:middle
+and associate that with
+the HomeKit object.
+
+00:06:29.956 --> 00:06:36.506 A:middle
+Next I want to talk about
+user management in iOS 8.
+
+00:06:37.776 --> 00:06:43.356 A:middle
+Your app had the following three
+APIs to let users manage people
+
+00:06:43.356 --> 00:06:46.426 A:middle
+in their homes so they can
+add users, remove users,
+
+00:06:46.426 --> 00:06:48.406 A:middle
+and list users in their homes.
+
+00:06:49.056 --> 00:06:53.946 A:middle
+In iOS 9, we are deprecating
+these and replacing it
+
+00:06:53.946 --> 00:06:57.976 A:middle
+with a much simpler API, manage
+users with completion handler.
+
+00:06:58.826 --> 00:07:03.266 A:middle
+So this API presents a full
+view controller that is going
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:58.826 --> 00:07:03.266 A:middle
+So this API presents a full
+view controller that is going
+
+00:07:03.266 --> 00:07:06.176 A:middle
+to let users manage
+people in their homes.
+
+00:07:08.216 --> 00:07:11.976 A:middle
+Developers need to move
+to this new API in iOS 9
+
+00:07:12.356 --> 00:07:15.826 A:middle
+so that our customers can
+get a much richer experience
+
+00:07:16.376 --> 00:07:17.466 A:middle
+with respect to home sharing.
+
+00:07:17.466 --> 00:07:22.986 A:middle
+I want to stay on a related
+topic, user capabilities.
+
+00:07:24.316 --> 00:07:27.066 A:middle
+When you share your
+home with a user,
+
+00:07:27.696 --> 00:07:30.546 A:middle
+they can control the
+accessories in the home,
+
+00:07:30.546 --> 00:07:33.286 A:middle
+but they cannot make any
+configuration changes.
+
+00:07:34.876 --> 00:07:40.066 A:middle
+For a good user experience, your
+app needs to show capabilities
+
+00:07:40.066 --> 00:07:41.816 A:middle
+that are only relevant
+to that user.
+
+00:07:43.006 --> 00:07:44.616 A:middle
+To achieve this, you now need
+
+00:07:44.616 --> 00:07:46.716 A:middle
+to know the privilege
+level of that user.
+
+00:07:46.716 --> 00:07:49.316 A:middle
+So, for example, if they
+are not an administrator,
+
+00:07:50.226 --> 00:07:53.086 A:middle
+you should not let them
+edit the name of a room.
+
+00:07:53.086 --> 00:07:56.806 A:middle
+So we are going to give you
+APIs to let you figure this out.
+
+00:07:58.246 --> 00:08:02.156 A:middle
+So on HMHome, we are adding
+a new property, current user.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:58.246 --> 00:08:02.156 A:middle
+So on HMHome, we are adding
+a new property, current user.
+
+00:08:02.886 --> 00:08:07.276 A:middle
+That represents the currently
+signed-in user on that device.
+
+00:08:07.856 --> 00:08:12.706 A:middle
+You can use this and pass along
+to a new method on HMHome,
+
+00:08:13.476 --> 00:08:15.236 A:middle
+home access control for user.
+
+00:08:15.956 --> 00:08:19.486 A:middle
+That returns a HMHome
+access control object,
+
+00:08:20.266 --> 00:08:23.456 A:middle
+which encapsulates the
+privileges of that user.
+
+00:08:24.456 --> 00:08:25.786 A:middle
+Let's see what this
+class looks like.
+
+00:08:26.836 --> 00:08:29.706 A:middle
+It has an administrative
+property that will be set
+
+00:08:30.306 --> 00:08:31.596 A:middle
+if you are the administrator
+of the home.
+
+00:08:32.025 --> 00:08:34.936 A:middle
+So now you can update your
+apps and use this property
+
+00:08:35.346 --> 00:08:37.856 A:middle
+and share only relevant
+features for that user.
+
+00:08:38.326 --> 00:08:46.706 A:middle
+Moving on, let's talk about a
+great feature in iOS 8, scenes.
+
+00:08:47.716 --> 00:08:52.876 A:middle
+Now scenes allow our customers
+to control multiple accesses
+
+00:08:52.876 --> 00:08:53.776 A:middle
+with a single command.
+
+00:08:54.256 --> 00:08:58.636 A:middle
+So I can have a good night
+scene where it switches out all
+
+00:08:58.636 --> 00:09:01.936 A:middle
+of the lights, secures my
+home, and sets the temperature
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:58.636 --> 00:09:01.936 A:middle
+of the lights, secures my
+home, and sets the temperature
+
+00:09:01.936 --> 00:09:05.016 A:middle
+down to a comfortable level
+with a single command.
+
+00:09:05.826 --> 00:09:07.266 A:middle
+This is a very powerful feature.
+
+00:09:07.886 --> 00:09:11.576 A:middle
+In iOS 9 we want our customers
+to use this even more.
+
+00:09:11.936 --> 00:09:15.476 A:middle
+To help this, we are
+introducing predefined scenes.
+
+00:09:16.816 --> 00:09:18.566 A:middle
+There are four common events
+
+00:09:18.626 --> 00:09:20.696 A:middle
+that most people
+experience every day.
+
+00:09:20.696 --> 00:09:26.316 A:middle
+They are getting up, you
+leave home, you return home,
+
+00:09:27.076 --> 00:09:29.426 A:middle
+and then you go to bed.
+
+00:09:29.606 --> 00:09:32.786 A:middle
+Now that you know what these
+four predefined scenes mean,
+
+00:09:32.786 --> 00:09:34.156 A:middle
+you can apply context to them.
+
+00:09:35.276 --> 00:09:37.976 A:middle
+So in your app, you can
+actually make suggestions
+
+00:09:38.726 --> 00:09:42.706 A:middle
+to let customers configure
+these four predefined scenes
+
+00:09:43.156 --> 00:09:44.316 A:middle
+with meaningful actions.
+
+00:09:45.566 --> 00:09:47.956 A:middle
+And to have a good
+experience for our customers,
+
+00:09:48.616 --> 00:09:51.956 A:middle
+predefined scenes cannot
+be deleted from a home.
+
+00:09:52.156 --> 00:09:55.446 A:middle
+Let's walk through the APIs.
+
+00:09:55.636 --> 00:09:59.576 A:middle
+A scene in HomeKit is
+represented using a HM action
+
+00:09:59.576 --> 00:10:00.446 A:middle
+set object.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:59.576 --> 00:10:00.446 A:middle
+set object.
+
+00:10:01.686 --> 00:10:04.266 A:middle
+We have added a new
+property, action set type,
+
+00:10:04.516 --> 00:10:06.606 A:middle
+that describes the kind of scene
+
+00:10:06.606 --> 00:10:08.856 A:middle
+that you are working
+with in your app.
+
+00:10:10.436 --> 00:10:12.996 A:middle
+We have four constants
+that correspond
+
+00:10:12.996 --> 00:10:15.866 A:middle
+to the four predefined scenes
+I talked about earlier.
+
+00:10:16.956 --> 00:10:19.676 A:middle
+We also have a fifth type,
+the user defined type,
+
+00:10:19.676 --> 00:10:24.816 A:middle
+and this is set on the
+scene that your app creates.
+
+00:10:24.936 --> 00:10:28.556 A:middle
+How do I access these
+predefined scenes in a home?
+
+00:10:29.516 --> 00:10:31.996 A:middle
+They are automatically
+populated for you as part
+
+00:10:31.996 --> 00:10:35.316 A:middle
+of the action set property
+on an HMHome class.
+
+00:10:35.816 --> 00:10:39.076 A:middle
+But we also have
+a convenience API,
+
+00:10:39.966 --> 00:10:41.966 A:middle
+built-in action set of type.
+
+00:10:42.466 --> 00:10:44.096 A:middle
+That takes the action set type
+
+00:10:45.246 --> 00:10:50.846 A:middle
+and returns a HM action set
+object that corresponds to one
+
+00:10:50.846 --> 00:10:51.906 A:middle
+of your predefined scenes.
+
+00:10:51.906 --> 00:10:56.286 A:middle
+So that's the APIs, but we want
+
+00:10:56.286 --> 00:10:59.816 A:middle
+to make scenes even much
+easier for our customers.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:01.196 --> 00:11:08.246 A:middle
+So now Siri works even
+better with scenes in iOS 9.
+
+00:11:08.446 --> 00:11:11.406 A:middle
+Siri now recognizes
+the names of all scenes
+
+00:11:11.886 --> 00:11:13.786 A:middle
+and simply speaking the name
+
+00:11:13.786 --> 00:11:15.926 A:middle
+of the scene will
+actually execute it.
+
+00:11:16.316 --> 00:11:19.096 A:middle
+This is a great way for our
+customers to use scenes.
+
+00:11:19.246 --> 00:11:26.436 A:middle
+Now let's talk about
+the experience
+
+00:11:27.226 --> 00:11:29.526 A:middle
+of adding an accessory
+to your home.
+
+00:11:29.786 --> 00:11:34.956 A:middle
+Let's say I have two accessories
+from the same manufacturer,
+
+00:11:35.386 --> 00:11:38.016 A:middle
+and they can have the name
+of the manufacturer as part
+
+00:11:38.016 --> 00:11:40.336 A:middle
+of the accessory's name
+and a model number,
+
+00:11:40.336 --> 00:11:44.146 A:middle
+and when I add this accessory
+to the home, I can always look
+
+00:11:44.146 --> 00:11:45.286 A:middle
+up the packaging and figuring
+
+00:11:45.286 --> 00:11:48.146 A:middle
+out I am adding the
+right device to my home.
+
+00:11:49.666 --> 00:11:52.756 A:middle
+But a better user experience
+for our customers is
+
+00:11:52.756 --> 00:11:54.796 A:middle
+to give some kind of indication
+
+00:11:54.796 --> 00:11:57.086 A:middle
+that provides more
+information about the accessory.
+
+00:11:58.256 --> 00:12:01.296 A:middle
+Let's say, for example, we
+can give them visual clues,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:58.256 --> 00:12:01.296 A:middle
+Let's say, for example, we
+can give them visual clues,
+
+00:12:02.136 --> 00:12:05.046 A:middle
+present an icon that
+tells them the type
+
+00:12:05.046 --> 00:12:09.906 A:middle
+of accessory they are adding
+is a much better experience.
+
+00:12:10.516 --> 00:12:11.656 A:middle
+To attain this feature,
+
+00:12:11.876 --> 00:12:14.916 A:middle
+we are adding accessory
+categories in iOS 9.
+
+00:12:16.226 --> 00:12:17.786 A:middle
+This information is available
+
+00:12:17.786 --> 00:12:21.246 A:middle
+to your app during
+setup of that accessory.
+
+00:12:21.676 --> 00:12:24.226 A:middle
+So when you browse and you
+are finding these accessories,
+
+00:12:24.226 --> 00:12:25.806 A:middle
+it is already available for you.
+
+00:12:27.316 --> 00:12:31.286 A:middle
+And it specifies the primary
+category of that accessory.
+
+00:12:33.116 --> 00:12:36.916 A:middle
+Moving on to the APIs for this,
+we are introducing a new class,
+
+00:12:37.446 --> 00:12:39.036 A:middle
+HM accessory category.
+
+00:12:39.606 --> 00:12:45.116 A:middle
+This has a property category
+type that gives more information
+
+00:12:45.116 --> 00:12:47.086 A:middle
+about that category,
+so, in our example,
+
+00:12:47.606 --> 00:12:49.346 A:middle
+you will have category
+type light bulb
+
+00:12:50.266 --> 00:12:53.046 A:middle
+and category type fan.
+
+00:12:53.176 --> 00:12:56.766 A:middle
+And the way you access this
+category is use the category
+
+00:12:56.766 --> 00:12:58.726 A:middle
+property on an HM accessory.
+
+00:12:59.006 --> 00:13:01.456 A:middle
+So this is available when you
+browse for these accessories.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:59.006 --> 00:13:01.456 A:middle
+So this is available when you
+browse for these accessories.
+
+00:13:02.056 --> 00:13:06.086 A:middle
+So we recommend that you use
+this new feature and enhance
+
+00:13:06.116 --> 00:13:07.936 A:middle
+that user experience
+for our customers during
+
+00:13:07.936 --> 00:13:08.906 A:middle
+first-time setup.
+
+00:13:08.906 --> 00:13:20.216 A:middle
+Now let's talk about
+HomeKit and the Apple Watch.
+
+00:13:21.161 --> 00:13:23.161 A:middle
+[Applause]
+
+00:13:23.306 --> 00:13:28.036 A:middle
+Yeah. As announced
+in Monday's keynote,
+
+00:13:28.816 --> 00:13:31.036 A:middle
+HomeKit is now available
+on Watch OS.
+
+00:13:31.816 --> 00:13:33.816 A:middle
+Now, this means you can
+now go out for a run
+
+00:13:33.816 --> 00:13:37.346 A:middle
+without your iPhone, come back,
+and if you have your watch
+
+00:13:37.346 --> 00:13:38.996 A:middle
+with you, you will be able
+
+00:13:38.996 --> 00:13:40.466 A:middle
+to unlock your door
+and get back in.
+
+00:13:41.106 --> 00:13:42.716 A:middle
+How cool is that?
+
+00:13:43.516 --> 00:13:47.606 A:middle
+[Applause]
+
+00:13:48.106 --> 00:13:52.486 A:middle
+All your home data is
+mirrored from your iOS device
+
+00:13:52.836 --> 00:13:55.756 A:middle
+onto the watch, so you can
+make changes on your phone
+
+00:13:55.916 --> 00:14:00.416 A:middle
+and they will automatically
+synch to the watch.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:55.916 --> 00:14:00.416 A:middle
+and they will automatically
+synch to the watch.
+
+00:14:00.586 --> 00:14:05.086 A:middle
+You can view homes from the
+watch, control your accessories,
+
+00:14:05.496 --> 00:14:07.126 A:middle
+and execute all your scenes.
+
+00:14:08.476 --> 00:14:11.616 A:middle
+We cannot wait to see the
+creative experience you are
+
+00:14:11.616 --> 00:14:13.296 A:middle
+going to deliver
+to our customers
+
+00:14:13.666 --> 00:14:15.196 A:middle
+with HomeKit on the Apple Watch.
+
+00:14:15.596 --> 00:14:23.776 A:middle
+Finally, I want to talk
+about a new feature in iOS 9,
+
+00:14:24.426 --> 00:14:26.586 A:middle
+and I am really excited about it
+
+00:14:26.586 --> 00:14:27.986 A:middle
+because I spent a
+lot of time on it.
+
+00:14:31.296 --> 00:14:33.146 A:middle
+[Laughter] Let's
+talk about triggers.
+
+00:14:34.166 --> 00:14:38.216 A:middle
+Now, in iOS 8, we
+have timer triggers,
+
+00:14:38.246 --> 00:14:41.776 A:middle
+so that lets you execute scenes
+that specify time of the day.
+
+00:14:41.826 --> 00:14:47.776 A:middle
+I can have an evening scene that
+executes at 7 p.m. every day.
+
+00:14:48.966 --> 00:14:52.386 A:middle
+But what if I could do
+something like this.
+
+00:14:52.596 --> 00:14:55.186 A:middle
+I return home, I
+unlock my front door,
+
+00:14:55.966 --> 00:14:56.956 A:middle
+now that generates an event.
+
+00:14:57.606 --> 00:15:00.536 A:middle
+Let's say it's before 6 p.m.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:57.606 --> 00:15:00.536 A:middle
+Let's say it's before 6 p.m.
+
+00:15:01.466 --> 00:15:03.286 A:middle
+and I have a motion
+sensor that's right next
+
+00:15:03.286 --> 00:15:03.906 A:middle
+to my front door.
+
+00:15:04.796 --> 00:15:06.476 A:middle
+That gets activated
+and detects motion.
+
+00:15:07.196 --> 00:15:09.176 A:middle
+If I have an arrive home scene,
+
+00:15:09.596 --> 00:15:11.556 A:middle
+I want that to be
+automatically executed.
+
+00:15:11.986 --> 00:15:14.226 A:middle
+And your home is ready
+and welcoming you.
+
+00:15:15.166 --> 00:15:16.456 A:middle
+I'm happy to say
+you can now do this
+
+00:15:16.456 --> 00:15:21.826 A:middle
+in iOS 9 with event triggers.
+
+00:15:22.466 --> 00:15:24.466 A:middle
+One or more events
+activate a trigger.
+
+00:15:25.646 --> 00:15:27.426 A:middle
+Let's talk about what
+kind of events we support.
+
+00:15:27.676 --> 00:15:31.276 A:middle
+We have events corresponding
+to the state of an accessory,
+
+00:15:31.276 --> 00:15:34.626 A:middle
+so this would correspond to
+our front door unlocking.
+
+00:15:35.526 --> 00:15:38.126 A:middle
+And we also have
+geofence-based events.
+
+00:15:38.486 --> 00:15:40.896 A:middle
+So you can generate
+events corresponding
+
+00:15:40.896 --> 00:15:42.646 A:middle
+to when I leave home
+or arrive home.
+
+00:15:43.826 --> 00:15:50.626 A:middle
+Let's go through these and how
+we represent them in the APIs.
+
+00:15:50.816 --> 00:15:53.476 A:middle
+For the state of an
+accessory, we have a new class,
+
+00:15:53.776 --> 00:15:55.426 A:middle
+HM characteristic event,
+
+00:15:56.466 --> 00:15:58.626 A:middle
+and that takes the
+characteristic you want
+
+00:15:58.626 --> 00:16:02.466 A:middle
+to be the source of that event
+and a trigger value that,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:15:58.626 --> 00:16:02.466 A:middle
+to be the source of that event
+and a trigger value that,
+
+00:16:02.646 --> 00:16:04.556 A:middle
+when that characteristic
+meets that value,
+
+00:16:04.966 --> 00:16:07.356 A:middle
+that event will automatically
+be fired for you.
+
+00:16:09.126 --> 00:16:14.796 A:middle
+For location-based events, we
+have a HM location event class
+
+00:16:14.906 --> 00:16:16.116 A:middle
+that takes a CLRegion.
+
+00:16:16.516 --> 00:16:21.066 A:middle
+You can configure the CLRegion,
+and when that criteria is met,
+
+00:16:21.596 --> 00:16:24.136 A:middle
+the HM location event class
+will automatically fire.
+
+00:16:24.806 --> 00:16:29.556 A:middle
+Let's walk through an example
+of our front door being unlocked
+
+00:16:29.856 --> 00:16:31.716 A:middle
+and capture that as a
+characteristic event.
+
+00:16:32.726 --> 00:16:34.366 A:middle
+Here's how you do it.
+
+00:16:35.536 --> 00:16:38.236 A:middle
+Create a HM characteristic
+event class,
+
+00:16:39.036 --> 00:16:42.196 A:middle
+give it the front door
+current state characteristic
+
+00:16:42.196 --> 00:16:43.866 A:middle
+as a characteristic that
+you want to capture.
+
+00:16:44.536 --> 00:16:48.046 A:middle
+And for the trigger value,
+just specify door state open.
+
+00:16:48.516 --> 00:16:51.406 A:middle
+Now this event would
+be fired when it's part
+
+00:16:51.406 --> 00:16:54.236 A:middle
+of an event trigger as soon
+as your front door unlocks.
+
+00:16:54.786 --> 00:16:57.636 A:middle
+I talked about conditions.
+
+00:16:58.756 --> 00:17:03.576 A:middle
+Conditions get execution of
+a scene in a given trigger.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:58.756 --> 00:17:03.576 A:middle
+Conditions get execution of
+a scene in a given trigger.
+
+00:17:04.406 --> 00:17:07.336 A:middle
+We support three types of
+conditions: time-based,
+
+00:17:08.026 --> 00:17:10.306 A:middle
+so I can have something
+corresponding
+
+00:17:10.306 --> 00:17:14.526 A:middle
+to before 6 p.m. We also support
+the state of an accessory.
+
+00:17:14.726 --> 00:17:17.386 A:middle
+This would be our motion
+sensor detecting motion.
+
+00:17:18.086 --> 00:17:20.836 A:middle
+Finally, we also have
+significant events in a day,
+
+00:17:21.425 --> 00:17:22.536 A:middle
+like sunrise and sunset.
+
+00:17:23.066 --> 00:17:25.626 A:middle
+Let's go through
+each one of these
+
+00:17:25.626 --> 00:17:29.536 A:middle
+and see how we create
+them in the APIs.
+
+00:17:29.756 --> 00:17:33.086 A:middle
+Conditions are represented
+as predicates,
+
+00:17:33.196 --> 00:17:34.946 A:middle
+NS predicates, in the APIs.
+
+00:17:35.696 --> 00:17:39.116 A:middle
+And we have convenience
+measures for all of these.
+
+00:17:39.266 --> 00:17:40.966 A:middle
+You don't have to
+worry about them.
+
+00:17:41.216 --> 00:17:43.976 A:middle
+It's very simple to create them.
+
+00:17:44.086 --> 00:17:49.166 A:middle
+On an HMEventTrigger, class, we
+have a class method predicate
+
+00:17:49.256 --> 00:17:52.946 A:middle
+for evaluating trigger occurring
+before date with components.
+
+00:17:53.366 --> 00:17:55.706 A:middle
+That takes an NS dates component
+that you can configure.
+
+00:17:55.986 --> 00:17:57.896 A:middle
+And you can use this,
+for example,
+
+00:17:58.886 --> 00:18:01.056 A:middle
+to create the before
+6 p.m. condition.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:58.886 --> 00:18:01.056 A:middle
+to create the before
+6 p.m. condition.
+
+00:18:01.966 --> 00:18:04.586 A:middle
+We have one for after
+date with components.
+
+00:18:05.206 --> 00:18:07.926 A:middle
+We also have the third
+one, which is predicate
+
+00:18:07.926 --> 00:18:11.606 A:middle
+for evaluating trigger occurring
+on date with components.
+
+00:18:12.196 --> 00:18:13.206 A:middle
+This is really useful.
+
+00:18:13.356 --> 00:18:15.046 A:middle
+You can use this to
+create a condition
+
+00:18:15.046 --> 00:18:18.046 A:middle
+for a specific day --
+for example, Sundays.
+
+00:18:18.046 --> 00:18:24.076 A:middle
+Let's walk through an example
+of creating our condition
+
+00:18:24.076 --> 00:18:28.906 A:middle
+for before 6 p.m. First, we
+create an NS dates component
+
+00:18:29.316 --> 00:18:34.386 A:middle
+and set the hour
+property to 6 p.m. Next,
+
+00:18:34.836 --> 00:18:37.966 A:middle
+we just use that NS dates
+component and pass it along
+
+00:18:37.966 --> 00:18:39.936 A:middle
+to a convenience API predicate
+
+00:18:39.936 --> 00:18:43.626 A:middle
+for evaluating trigger occurring
+before date with components,
+
+00:18:43.996 --> 00:18:46.406 A:middle
+and that's going to give you
+an NS predicate corresponding
+
+00:18:46.406 --> 00:18:51.946 A:middle
+to before 6 p.m. Next,
+the state of an accessory.
+
+00:18:52.726 --> 00:18:58.486 A:middle
+So we also have a convenience
+API on the HMEventTrigger class,
+
+00:18:58.876 --> 00:19:03.616 A:middle
+namely predicate for evaluating
+trigger with characteristic,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:58.876 --> 00:19:03.616 A:middle
+namely predicate for evaluating
+trigger with characteristic,
+
+00:19:04.026 --> 00:19:07.216 A:middle
+that takes a characteristic
+and a matching value that needs
+
+00:19:07.216 --> 00:19:10.926 A:middle
+to be met for that condition
+to be evaluated through.
+
+00:19:11.856 --> 00:19:13.156 A:middle
+So for our motion sensor,
+
+00:19:13.876 --> 00:19:16.796 A:middle
+here's how you would create
+a condition corresponding it
+
+00:19:17.236 --> 00:19:19.116 A:middle
+to being detecting motion.
+
+00:19:19.616 --> 00:19:21.896 A:middle
+Just call the convenience API,
+
+00:19:22.226 --> 00:19:26.396 A:middle
+specify the front door sensor
+characteristic as a source
+
+00:19:26.396 --> 00:19:28.486 A:middle
+of the characteristic, and
+for the matching value,
+
+00:19:28.776 --> 00:19:29.726 A:middle
+set it to true.
+
+00:19:30.036 --> 00:19:31.966 A:middle
+This would mean motion
+has been detected.
+
+00:19:32.306 --> 00:19:34.946 A:middle
+It's as simple as that.
+
+00:19:35.106 --> 00:19:37.386 A:middle
+Finally, significant
+events in the day.
+
+00:19:37.856 --> 00:19:39.956 A:middle
+We have two convenience
+APIs for this:
+
+00:19:41.576 --> 00:19:44.866 A:middle
+predicate for evaluating trigger
+occurring before significant
+
+00:19:44.866 --> 00:19:47.726 A:middle
+event, that takes an optional
+applying offset parameter,
+
+00:19:47.726 --> 00:19:49.166 A:middle
+which is an NS dates component.
+
+00:19:49.656 --> 00:19:52.846 A:middle
+And the second one, as you
+guessed it, is predicate
+
+00:19:52.846 --> 00:19:56.126 A:middle
+for evaluating trigger occurring
+after significant event.
+
+00:19:57.136 --> 00:19:58.956 A:middle
+We have two constants defined
+
+00:19:59.116 --> 00:20:02.596 A:middle
+for significant events:
+sunrise and sunset.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:59.116 --> 00:20:02.596 A:middle
+for significant events:
+sunrise and sunset.
+
+00:20:02.596 --> 00:20:07.746 A:middle
+Let's walk through an
+example for condition
+
+00:20:07.746 --> 00:20:10.126 A:middle
+for our event trigger
+that would correspond
+
+00:20:10.126 --> 00:20:12.896 A:middle
+to 30 minutes before sunset.
+
+00:20:13.906 --> 00:20:14.946 A:middle
+How do we go about doing that?
+
+00:20:15.456 --> 00:20:18.226 A:middle
+You first create an
+NS dates component
+
+00:20:18.566 --> 00:20:22.276 A:middle
+and specify the minute
+to negative 30.
+
+00:20:22.406 --> 00:20:24.596 A:middle
+And now, just use
+our convenience API,
+
+00:20:25.056 --> 00:20:28.876 A:middle
+predicate for evaluating trigger
+occurring before significant
+
+00:20:28.876 --> 00:20:32.046 A:middle
+event, give it sunset as
+the significant event,
+
+00:20:32.556 --> 00:20:35.106 A:middle
+and give the offset that
+we just created above.
+
+00:20:35.736 --> 00:20:39.706 A:middle
+With this, we can now
+gate execution of a scene
+
+00:20:40.276 --> 00:20:45.326 A:middle
+if that event fires
+after 5:30 p.m. As long
+
+00:20:45.326 --> 00:20:47.686 A:middle
+as it's before 5:30 p.m., it
+will always execute that scene.
+
+00:20:49.036 --> 00:20:54.166 A:middle
+So now we have events that
+can trigger our event trigger,
+
+00:20:54.166 --> 00:20:56.376 A:middle
+and then we have conditions.
+
+00:20:56.556 --> 00:20:57.496 A:middle
+How do we tie it all together?
+
+00:20:58.996 --> 00:21:01.486 A:middle
+That's when you create
+an HMEventTrigger class,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:58.996 --> 00:21:01.486 A:middle
+That's when you create
+an HMEventTrigger class,
+
+00:21:02.006 --> 00:21:04.226 A:middle
+and the method takes the name.
+
+00:21:05.526 --> 00:21:09.716 A:middle
+You can give one or more
+events that activate a trigger.
+
+00:21:09.716 --> 00:21:11.396 A:middle
+Once a trigger is activated,
+
+00:21:11.396 --> 00:21:13.476 A:middle
+we evaluate the corresponding
+condition.
+
+00:21:13.716 --> 00:21:16.836 A:middle
+The condition is optional, so if
+you don't specify a condition,
+
+00:21:18.246 --> 00:21:19.986 A:middle
+it just means we
+assume it to be true,
+
+00:21:19.986 --> 00:21:23.556 A:middle
+and we will always execute the
+corresponding scene associated
+
+00:21:23.556 --> 00:21:28.536 A:middle
+with that event trigger if any
+one of your events activates.
+
+00:21:29.946 --> 00:21:32.476 A:middle
+Now let's walk through
+a completer example
+
+00:21:32.476 --> 00:21:34.156 A:middle
+that I talked about earlier.
+
+00:21:35.386 --> 00:21:38.616 A:middle
+We have created a characteristic
+event corresponding
+
+00:21:38.616 --> 00:21:40.246 A:middle
+to the front door being locked.
+
+00:21:41.286 --> 00:21:43.796 A:middle
+We created our two conditions,
+which is before 6 p.m.
+
+00:21:44.496 --> 00:21:46.836 A:middle
+and the motion sensor
+detecting motion.
+
+00:21:47.836 --> 00:21:50.456 A:middle
+How do we tie it all together
+and create our event trigger?
+
+00:21:50.456 --> 00:21:54.116 A:middle
+First thing you need to do is
+create a compound predicate
+
+00:21:54.196 --> 00:21:56.626 A:middle
+because we want both
+our conditions
+
+00:21:57.456 --> 00:21:59.826 A:middle
+to be ended and evaluated.
+
+00:21:59.826 --> 00:22:02.786 A:middle
+Both have to be true for
+us to execute our scene.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:59.826 --> 00:22:02.786 A:middle
+Both have to be true for
+us to execute our scene.
+
+00:22:03.736 --> 00:22:07.016 A:middle
+For that, just use NS compound
+predicate and predicate
+
+00:22:07.016 --> 00:22:09.916 A:middle
+with subpredicates, and
+specify the two subpredicates
+
+00:22:09.916 --> 00:22:10.886 A:middle
+that we just created earlier.
+
+00:22:12.046 --> 00:22:16.346 A:middle
+Next, create an event trigger
+object, give it a name,
+
+00:22:16.346 --> 00:22:20.736 A:middle
+arrived home, and for the events
+that can activate this trigger,
+
+00:22:20.776 --> 00:22:22.896 A:middle
+just specify an area
+of one element,
+
+00:22:22.976 --> 00:22:26.576 A:middle
+which is a front door
+characteristic that corresponds
+
+00:22:26.576 --> 00:22:27.416 A:middle
+with it being unlocked.
+
+00:22:27.766 --> 00:22:30.176 A:middle
+Finally, we just need
+
+00:22:30.656 --> 00:22:34.586 A:middle
+to associate the arrive
+home predefined scene
+
+00:22:34.976 --> 00:22:35.776 A:middle
+to this event trigger.
+
+00:22:36.456 --> 00:22:40.386 A:middle
+Use our convenience API on
+our home, built-in action set
+
+00:22:40.386 --> 00:22:44.396 A:middle
+of type, give it the
+home arrival type
+
+00:22:44.696 --> 00:22:46.876 A:middle
+that now returns your
+predefined scene corresponding
+
+00:22:46.876 --> 00:22:50.176 A:middle
+to arrived home, just add
+that to the event trigger.
+
+00:22:50.576 --> 00:22:52.376 A:middle
+It's as simple as that.
+
+00:22:52.506 --> 00:22:55.756 A:middle
+Now I'd like to show a demo
+of this example I just talked
+
+00:22:55.756 --> 00:23:00.126 A:middle
+about using our HomeKit
+Accessory Simulator
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:55.756 --> 00:23:00.126 A:middle
+about using our HomeKit
+Accessory Simulator
+
+00:23:00.196 --> 00:23:03.846 A:middle
+and our HomeKit catalog
+sample app,
+
+00:23:04.996 --> 00:23:08.146 A:middle
+which has been completely
+rewritten in Swift.
+
+00:23:09.516 --> 00:23:15.116 A:middle
+[Applause]
+
+00:23:15.616 --> 00:23:16.086 A:middle
+There you go.
+
+00:23:16.086 --> 00:23:19.196 A:middle
+So over here we have our
+HomeKit Accessory Simulator.
+
+00:23:19.746 --> 00:23:22.366 A:middle
+This simulates HomeKit
+accessories that are used
+
+00:23:22.366 --> 00:23:25.766 A:middle
+by our developers to develop
+their HomeKit applications.
+
+00:23:26.026 --> 00:23:29.616 A:middle
+And over here we have our
+HomeKit sample app that,
+
+00:23:30.536 --> 00:23:33.436 A:middle
+you know, that you can use --
+
+00:23:33.436 --> 00:23:35.706 A:middle
+that accesses all
+our HomeKit APIs.
+
+00:23:36.096 --> 00:23:38.006 A:middle
+I want to show you a
+demo of event triggers.
+
+00:23:38.826 --> 00:23:44.146 A:middle
+Now, you can see that I have
+a door lock, a motion sensor,
+
+00:23:44.236 --> 00:23:46.846 A:middle
+and a bridge with
+two lights behind it
+
+00:23:46.876 --> 00:23:48.346 A:middle
+in the HomeKit Accessory
+Simulator.
+
+00:23:48.346 --> 00:23:52.696 A:middle
+And I have added my
+accessories to my home.
+
+00:23:56.716 --> 00:24:01.826 A:middle
+So let's go down to the
+scenes section of the app,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:56.716 --> 00:24:01.826 A:middle
+So let's go down to the
+scenes section of the app,
+
+00:24:01.906 --> 00:24:05.846 A:middle
+and I have configured two of the
+predefined scenes in this app.
+
+00:24:06.716 --> 00:24:09.736 A:middle
+I have the "bye, house," that
+corresponds to leaving home.
+
+00:24:10.886 --> 00:24:11.976 A:middle
+Let's see what that looks like.
+
+00:24:12.626 --> 00:24:15.616 A:middle
+That sets the light to black
+
+00:24:15.616 --> 00:24:18.466 A:middle
+and switches off all
+the power on our lights.
+
+00:24:18.746 --> 00:24:20.766 A:middle
+I am going to go ahead and hit
+cancel because I don't want
+
+00:24:20.766 --> 00:24:23.956 A:middle
+to make changes on this, and
+let's go down to the "hi,
+
+00:24:23.956 --> 00:24:27.056 A:middle
+house," that corresponds
+to arriving home,
+
+00:24:27.526 --> 00:24:28.776 A:middle
+and let's see what
+that looks like.
+
+00:24:29.806 --> 00:24:35.176 A:middle
+Now, that sets the lights to
+on and sets my stereo light
+
+00:24:35.296 --> 00:24:37.376 A:middle
+to green and the
+kitchen light to blue.
+
+00:24:37.866 --> 00:24:41.126 A:middle
+Let's try to see
+these two scenes
+
+00:24:41.126 --> 00:24:42.716 A:middle
+in action and see what happens.
+
+00:24:43.986 --> 00:24:45.576 A:middle
+So when I execute
+the "bye, house,"
+
+00:24:46.236 --> 00:24:48.066 A:middle
+it switches off the two lights.
+
+00:24:48.576 --> 00:24:53.136 A:middle
+And when I execute the "hi,
+house," which corresponds
+
+00:24:53.136 --> 00:24:54.586 A:middle
+to arriving home, that switches
+
+00:24:54.586 --> 00:24:56.456 A:middle
+on the two lights
+behind the bridge.
+
+00:24:58.236 --> 00:25:00.016 A:middle
+Now, let's simulate leaving home
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:24:58.236 --> 00:25:00.016 A:middle
+Now, let's simulate leaving home
+
+00:25:00.686 --> 00:25:02.616 A:middle
+and now create our
+event trigger.
+
+00:25:03.036 --> 00:25:07.966 A:middle
+I am going to go down to the
+trigger section of the app
+
+00:25:09.206 --> 00:25:10.336 A:middle
+and select add trigger.
+
+00:25:10.396 --> 00:25:12.766 A:middle
+You are presented
+with three options.
+
+00:25:13.006 --> 00:25:16.276 A:middle
+For our example, it's the
+front door being unlocked,
+
+00:25:16.486 --> 00:25:18.116 A:middle
+which is the source
+of our trigger.
+
+00:25:18.836 --> 00:25:20.736 A:middle
+That corresponds to a
+characteristic, so I am going
+
+00:25:20.736 --> 00:25:22.086 A:middle
+to go ahead and select
+characteristic.
+
+00:25:22.086 --> 00:25:25.526 A:middle
+I am going to give
+it a name now.
+
+00:25:31.576 --> 00:25:33.436 A:middle
+So this is the name
+of my event trigger.
+
+00:25:34.146 --> 00:25:35.206 A:middle
+And now let's go ahead
+
+00:25:35.206 --> 00:25:37.636 A:middle
+and select the characteristic
+corresponding
+
+00:25:37.636 --> 00:25:39.346 A:middle
+to the front door
+being unlocked.
+
+00:25:39.346 --> 00:25:42.266 A:middle
+So let's go down to the
+characteristics event
+
+00:25:43.506 --> 00:25:44.636 A:middle
+of the app.
+
+00:25:44.746 --> 00:25:46.576 A:middle
+So add a characteristic.
+
+00:25:46.576 --> 00:25:52.326 A:middle
+And now go down to the front
+lock and select unsecured.
+
+00:25:52.656 --> 00:25:54.566 A:middle
+This will correspond to
+the door being unlocked.
+
+00:25:54.566 --> 00:26:00.176 A:middle
+I am going to go
+back and hit done.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:54.566 --> 00:26:00.176 A:middle
+I am going to go
+back and hit done.
+
+00:26:00.396 --> 00:26:03.486 A:middle
+So now I have captured my
+front door being unlocked
+
+00:26:03.486 --> 00:26:04.486 A:middle
+as a source of my trigger.
+
+00:26:05.186 --> 00:26:07.006 A:middle
+Next, let's add our
+two conditions.
+
+00:26:07.916 --> 00:26:09.676 A:middle
+For that, let's go down
+to the conditions section,
+
+00:26:09.976 --> 00:26:14.016 A:middle
+add condition, and since we
+are going to use before 6 p.m.,
+
+00:26:14.016 --> 00:26:14.976 A:middle
+that would mean it's time.
+
+00:26:15.706 --> 00:26:22.576 A:middle
+Go to the time section,
+and we have two ways
+
+00:26:22.576 --> 00:26:24.546 A:middle
+to add time-based conditions.
+
+00:26:24.546 --> 00:26:27.196 A:middle
+One is, of course, the
+significant events, sunrise
+
+00:26:27.196 --> 00:26:30.866 A:middle
+and sunset, but I am just going
+to use 6 p.m. at my example.
+
+00:26:31.006 --> 00:26:34.866 A:middle
+And I want to select before.
+
+00:26:34.866 --> 00:26:37.946 A:middle
+I am going to go
+ahead and hit save.
+
+00:26:38.996 --> 00:26:41.036 A:middle
+Now I have captured
+my first condition.
+
+00:26:41.796 --> 00:26:43.056 A:middle
+Now let's do the
+second condition,
+
+00:26:43.056 --> 00:26:45.236 A:middle
+which is the motion
+sensor detecting motion.
+
+00:26:45.436 --> 00:26:49.436 A:middle
+Go add my second condition.
+
+00:26:49.436 --> 00:26:51.046 A:middle
+Now I am going to
+select characteristic
+
+00:26:51.326 --> 00:26:54.446 A:middle
+because this is an accessory,
+which would mean I need
+
+00:26:54.446 --> 00:26:57.016 A:middle
+to capture a characteristic
+as a source of that condition.
+
+00:26:57.376 --> 00:27:02.616 A:middle
+Select condition,
+find my sensor,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:57.376 --> 00:27:02.616 A:middle
+Select condition,
+find my sensor,
+
+00:27:04.016 --> 00:27:07.006 A:middle
+and set motion to be detected.
+
+00:27:07.076 --> 00:27:10.526 A:middle
+I am going to go
+back and hit done.
+
+00:27:12.066 --> 00:27:12.416 A:middle
+So there you go.
+
+00:27:12.416 --> 00:27:15.496 A:middle
+I have my event trigger, given
+it a name, given it the source
+
+00:27:15.496 --> 00:27:18.636 A:middle
+of my event, specified
+my two conditions
+
+00:27:18.636 --> 00:27:19.626 A:middle
+that both need to be met.
+
+00:27:20.276 --> 00:27:21.096 A:middle
+I tie it all together,
+
+00:27:21.096 --> 00:27:23.466 A:middle
+I just need to associate my
+arrive home scene to this.
+
+00:27:23.976 --> 00:27:27.186 A:middle
+Let's go down to
+the scene section
+
+00:27:27.716 --> 00:27:29.336 A:middle
+and just select "hi, house."
+
+00:27:29.916 --> 00:27:32.986 A:middle
+And go ahead, hit done.
+
+00:27:33.466 --> 00:27:35.416 A:middle
+Now that saves the
+entire event trigger.
+
+00:27:35.416 --> 00:27:38.686 A:middle
+Now, let's see this
+event trigger in action.
+
+00:27:39.886 --> 00:27:41.306 A:middle
+For that, first I
+am going to go ahead
+
+00:27:41.306 --> 00:27:43.196 A:middle
+and unlock my door
+and see what happens.
+
+00:27:43.786 --> 00:27:48.766 A:middle
+I have a view over here
+that shows the door state
+
+00:27:48.766 --> 00:27:50.576 A:middle
+and the motion sensor so
+that it's easier for you
+
+00:27:50.576 --> 00:27:52.266 A:middle
+to see what happens
+behind the bridge.
+
+00:27:52.266 --> 00:27:55.696 A:middle
+If I hit unsecured,
+which corresponds
+
+00:27:55.696 --> 00:27:57.146 A:middle
+to opening the door,
+nothing happened.
+
+00:27:57.146 --> 00:27:58.216 A:middle
+And why is that?
+
+00:27:59.326 --> 00:28:02.156 A:middle
+The door opens, so that causes
+the event to be activated.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:59.326 --> 00:28:02.156 A:middle
+The door opens, so that causes
+the event to be activated.
+
+00:28:02.156 --> 00:28:05.976 A:middle
+It is before 6 p.m. So one
+of my conditions was met,
+
+00:28:05.976 --> 00:28:09.336 A:middle
+but the second condition was
+not met because, as you can see,
+
+00:28:10.026 --> 00:28:11.586 A:middle
+motion detected is set to no.
+
+00:28:12.186 --> 00:28:15.876 A:middle
+So this is working as expected.
+
+00:28:15.876 --> 00:28:17.776 A:middle
+I don't expect my
+scene to be executed.
+
+00:28:18.346 --> 00:28:21.316 A:middle
+Now let's go ahead and close
+the door and set the motion
+
+00:28:21.856 --> 00:28:23.246 A:middle
+to detected and see
+what happens.
+
+00:28:23.276 --> 00:28:27.476 A:middle
+I am going to go ahead
+and unlock the door.
+
+00:28:28.356 --> 00:28:28.876 A:middle
+There you go.
+
+00:28:30.156 --> 00:28:33.526 A:middle
+That switched on the lights and
+executed my arrive home scene.
+
+00:28:34.016 --> 00:28:34.956 A:middle
+How cool is that?
+
+00:28:35.006 --> 00:28:38.976 A:middle
+This is an awesome feature,
+and I work on this every day.
+
+00:28:39.016 --> 00:28:41.016 A:middle
+[Laughter]
+
+00:28:41.016 --> 00:28:45.000 A:middle
+[Applause]
+
+00:28:45.436 --> 00:28:48.766 A:middle
+But what is really
+exciting to see this work,
+
+00:28:48.766 --> 00:28:51.596 A:middle
+when I see that light goes
+on, it just gives you,
+
+00:28:51.976 --> 00:28:53.846 A:middle
+you know, that happy feeling.
+
+00:28:54.516 --> 00:28:57.036 A:middle
+[Laughter]
+
+00:28:57.536 --> 00:29:01.716 A:middle
+For those of you who have
+used the Accessory Simulator,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:57.536 --> 00:29:01.716 A:middle
+For those of you who have
+used the Accessory Simulator,
+
+00:29:01.926 --> 00:29:04.826 A:middle
+you see there's a motion sensor.
+
+00:29:05.396 --> 00:29:07.416 A:middle
+This is new in iOS 9.
+
+00:29:08.036 --> 00:29:10.786 A:middle
+We have added new
+categories of accessories.
+
+00:29:11.586 --> 00:29:14.966 A:middle
+To talk about this and
+new features we have added
+
+00:29:14.966 --> 00:29:18.126 A:middle
+for our accessory classes,
+I'd like to invite Naveen.
+
+00:29:19.516 --> 00:29:25.516 A:middle
+[Applause]
+
+00:29:26.016 --> 00:29:37.000 A:middle
+[ Background Sounds ]
+
+00:29:38.196 --> 00:29:38.746 A:middle
+&gt;&gt; NAVEEN KOMMAREDDI:
+Thank you, Anush.
+
+00:29:41.096 --> 00:29:42.076 A:middle
+Good afternoon, everybody.
+
+00:29:42.426 --> 00:29:44.356 A:middle
+I am Naveen Kommareddi,
+and I am here to present
+
+00:29:44.356 --> 00:29:48.976 A:middle
+to you even more features in
+iOS 9 for HomeKit accessories.
+
+00:29:49.576 --> 00:29:56.686 A:middle
+Starting with remote access and
+new features and enhancements
+
+00:29:56.686 --> 00:29:59.136 A:middle
+for Bluetooth Low Energy
+HomeKit accessories
+
+00:29:59.746 --> 00:30:02.196 A:middle
+and new accessory categories.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:29:59.746 --> 00:30:02.196 A:middle
+and new accessory categories.
+
+00:30:03.066 --> 00:30:05.836 A:middle
+So let's get started
+with remote access.
+
+00:30:06.926 --> 00:30:09.476 A:middle
+With remote access,
+you'd be able
+
+00:30:09.476 --> 00:30:11.746 A:middle
+to control your accessories even
+
+00:30:11.746 --> 00:30:12.736 A:middle
+when you are away
+from your house.
+
+00:30:14.056 --> 00:30:16.716 A:middle
+So let's take an example
+of a thermostat that works
+
+00:30:16.716 --> 00:30:18.036 A:middle
+with HomeKit here in your house.
+
+00:30:18.816 --> 00:30:20.456 A:middle
+You would be able to
+securely connect to it.
+
+00:30:20.646 --> 00:30:24.116 A:middle
+But what if you are
+away from your house?
+
+00:30:24.626 --> 00:30:26.446 A:middle
+How do you control
+this thermostat?
+
+00:30:26.446 --> 00:30:28.616 A:middle
+Say you want to come home,
+but you want to set it
+
+00:30:28.616 --> 00:30:30.456 A:middle
+to the temperature even
+before you come home?
+
+00:30:31.016 --> 00:30:32.216 A:middle
+How do you do that securely?
+
+00:30:32.766 --> 00:30:35.366 A:middle
+Well, in iOS 8, remote
+access is supported
+
+00:30:35.556 --> 00:30:39.406 A:middle
+if you have an Apple
+TV third generation.
+
+00:30:40.136 --> 00:30:43.676 A:middle
+All you need to do is sign
+in with the same Apple ID
+
+00:30:43.886 --> 00:30:46.606 A:middle
+as the one you used
+on your iOS device,
+
+00:30:46.926 --> 00:30:51.206 A:middle
+and you'd have secure
+access to your accessories.
+
+00:30:52.436 --> 00:30:55.616 A:middle
+Now, this is great, but what
+if you don't have an Apple TV?
+
+00:30:56.366 --> 00:30:58.416 A:middle
+Because we know that
+not every one
+
+00:30:58.416 --> 00:31:03.006 A:middle
+of our customers may
+have an Apple TV.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:58.416 --> 00:31:03.006 A:middle
+of our customers may
+have an Apple TV.
+
+00:31:05.156 --> 00:31:09.476 A:middle
+[Laughter] So in iOS 9, I
+am very excited to announce
+
+00:31:10.446 --> 00:31:13.356 A:middle
+that we support HomeKit
+accessory protocol,
+
+00:31:13.356 --> 00:31:14.936 A:middle
+HAP, over iCloud.
+
+00:31:15.516 --> 00:31:19.546 A:middle
+[Applause]
+
+00:31:20.046 --> 00:31:20.306 A:middle
+Thank you.
+
+00:31:21.536 --> 00:31:22.526 A:middle
+Yes, it is really exciting
+
+00:31:22.526 --> 00:31:27.576 A:middle
+because what this means is you
+can now control your accessories
+
+00:31:27.576 --> 00:31:30.156 A:middle
+and get notifications from
+them no matter where you are,
+
+00:31:30.246 --> 00:31:32.226 A:middle
+and even if you don't
+have an Apple TV.
+
+00:31:33.316 --> 00:31:35.086 A:middle
+Let's pause to think
+what this really means.
+
+00:31:35.816 --> 00:31:38.516 A:middle
+To accessory manufacturers
+who have thought
+
+00:31:38.516 --> 00:31:42.446 A:middle
+about providing secure
+and remote access
+
+00:31:42.446 --> 00:31:45.786 A:middle
+to their accessories, you know
+it's a hard problem to solve.
+
+00:31:47.036 --> 00:31:50.916 A:middle
+We built and deployed a
+dedicated iCloud service
+
+00:31:51.556 --> 00:31:55.576 A:middle
+to securely relay HAP
+messages between iOS devices
+
+00:31:55.966 --> 00:31:58.976 A:middle
+and accessories, and we
+scaled the infrastructure
+
+00:31:58.976 --> 00:32:05.376 A:middle
+that runs the service to handle
+billions of HAP messages.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:58.976 --> 00:32:05.376 A:middle
+that runs the service to handle
+billions of HAP messages.
+
+00:32:05.466 --> 00:32:08.216 A:middle
+And we thought: How can
+we make this better?
+
+00:32:09.776 --> 00:32:13.896 A:middle
+So to use this service,
+the accessory manufacturers
+
+00:32:13.946 --> 00:32:18.056 A:middle
+and all our customers
+will now get it for free.
+
+00:32:20.151 --> 00:32:22.151 A:middle
+[Applause]
+
+00:32:22.286 --> 00:32:23.376 A:middle
+Well, thanks.
+
+00:32:25.296 --> 00:32:28.536 A:middle
+But most importantly,
+privacy and security.
+
+00:32:28.996 --> 00:32:33.796 A:middle
+The end-to-end connections
+between iOS devices
+
+00:32:34.206 --> 00:32:39.416 A:middle
+and accessories are HAP secure,
+and privacy is maintained.
+
+00:32:39.856 --> 00:32:43.946 A:middle
+Even Apple can't see the
+content of the communication.
+
+00:32:44.646 --> 00:32:46.586 A:middle
+This is extremely important.
+
+00:32:48.176 --> 00:32:52.536 A:middle
+Now, with HAP support
+over iCloud and Apple TV,
+
+00:32:52.746 --> 00:32:55.696 A:middle
+our customers will now
+have more ubiquitous access
+
+00:32:56.026 --> 00:32:56.996 A:middle
+to their accessories.
+
+00:32:57.476 --> 00:33:02.686 A:middle
+Now, moving on from remote
+access to Bluetooth Low Energy.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:57.476 --> 00:33:02.686 A:middle
+Now, moving on from remote
+access to Bluetooth Low Energy.
+
+00:33:03.306 --> 00:33:07.766 A:middle
+So we are working with
+several of our partners
+
+00:33:07.866 --> 00:33:10.166 A:middle
+to bring more Bluetooth
+Low Energy accessories
+
+00:33:10.246 --> 00:33:11.656 A:middle
+that that work with HomeKit.
+
+00:33:12.606 --> 00:33:15.026 A:middle
+Let's say a Bluetooth door lock.
+
+00:33:16.526 --> 00:33:21.976 A:middle
+Now, if you are within Bluetooth
+LE range within this accessory,
+
+00:33:22.036 --> 00:33:24.096 A:middle
+let's say a door lock,
+say 20 to 30 feet,
+
+00:33:24.406 --> 00:33:27.786 A:middle
+you can securely connect
+to it and control it.
+
+00:33:28.676 --> 00:33:31.526 A:middle
+But what if you are far
+away, like in the corner
+
+00:33:31.526 --> 00:33:32.786 A:middle
+of your house or
+in the backyard?
+
+00:33:33.716 --> 00:33:36.686 A:middle
+How do you securely connect to
+this accessory and control it?
+
+00:33:37.116 --> 00:33:41.246 A:middle
+Wouldn't it be great to have
+a mechanism or a feature
+
+00:33:41.246 --> 00:33:43.686 A:middle
+that would connect these
+two endpoints together?
+
+00:33:44.566 --> 00:33:46.716 A:middle
+Well, in iOS 9, you
+can do exactly
+
+00:33:46.716 --> 00:33:49.246 A:middle
+that with HAP secure tunneling.
+
+00:33:49.886 --> 00:33:57.776 A:middle
+HAP secure tunneling enables an
+intermediate device to associate
+
+00:33:57.776 --> 00:34:04.296 A:middle
+over Bluetooth Low Energy
+and expose it as an artifact
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:57.776 --> 00:34:04.296 A:middle
+over Bluetooth Low Energy
+and expose it as an artifact
+
+00:34:04.296 --> 00:34:08.976 A:middle
+over Wi-Fi to an iOS device.
+
+00:34:09.856 --> 00:34:13.436 A:middle
+Now you have a device that
+is a HomeKit accessory
+
+00:34:14.466 --> 00:34:19.186 A:middle
+that provides range extension
+with HAP secure tunnelling.
+
+00:34:20.666 --> 00:34:25.846 A:middle
+So what's even better is this
+range extender will also be able
+
+00:34:25.846 --> 00:34:28.916 A:middle
+to provide remote access
+to this Bluetooth accessory
+
+00:34:28.916 --> 00:34:30.146 A:middle
+and any other Bluetooth
+accessory
+
+00:34:30.146 --> 00:34:31.056 A:middle
+that works with HomeKit.
+
+00:34:32.556 --> 00:34:37.596 A:middle
+What this means is not only can
+you reach your accessories no
+
+00:34:37.596 --> 00:34:39.085 A:middle
+matter where they
+are in the house,
+
+00:34:39.085 --> 00:34:44.136 A:middle
+but you can also reach them
+wherever you are, home or away.
+
+00:34:44.315 --> 00:34:46.616 A:middle
+Ultimately, privacy
+and security.
+
+00:34:47.476 --> 00:34:48.666 A:middle
+The end-to-end connection
+
+00:34:48.876 --> 00:34:51.896 A:middle
+through this intermediate
+device is still HAP secure,
+
+00:34:52.396 --> 00:34:54.176 A:middle
+and privacy is maintained
+
+00:34:54.856 --> 00:34:56.896 A:middle
+because this intermediate
+device, the range extender,
+
+00:34:57.376 --> 00:34:59.806 A:middle
+cannot see the content
+of the communication.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:35:00.316 --> 00:35:02.696 A:middle
+We didn't stop there.
+
+00:35:03.436 --> 00:35:05.716 A:middle
+We added several
+more enhancements,
+
+00:35:06.396 --> 00:35:08.316 A:middle
+starting with notifications.
+
+00:35:08.856 --> 00:35:13.216 A:middle
+Your Bluetooth Low Energy
+accessories now have full
+
+00:35:13.316 --> 00:35:14.606 A:middle
+support for notifications,
+
+00:35:15.646 --> 00:35:17.246 A:middle
+regardless of the
+state of connectivity.
+
+00:35:17.916 --> 00:35:19.896 A:middle
+So whether they are
+disconnected or connected,
+
+00:35:19.896 --> 00:35:23.336 A:middle
+they can send HAP notifications
+to your iOS devices.
+
+00:35:23.956 --> 00:35:24.656 A:middle
+Really useful.
+
+00:35:26.116 --> 00:35:27.956 A:middle
+We also added support
+for metadata.
+
+00:35:29.436 --> 00:35:33.626 A:middle
+This way, custom characteristics
+can describe themselves fully
+
+00:35:34.136 --> 00:35:35.766 A:middle
+to HomeKit applications.
+
+00:35:36.416 --> 00:35:40.706 A:middle
+And finally, we added support
+for multiple transports.
+
+00:35:41.566 --> 00:35:46.566 A:middle
+With this, you can now have a
+HomeKit accessory that can work
+
+00:35:46.566 --> 00:35:50.086 A:middle
+over IP or Bluetooth
+LE simultaneously,
+
+00:35:50.706 --> 00:35:53.796 A:middle
+and the iOS device will
+be able to recognize
+
+00:35:54.076 --> 00:35:57.626 A:middle
+that it's the same accessory
+regardless of the transport
+
+00:35:57.626 --> 00:36:00.616 A:middle
+that the accessory uses
+to communicate with it.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:35:57.626 --> 00:36:00.616 A:middle
+that the accessory uses
+to communicate with it.
+
+00:36:00.796 --> 00:36:02.006 A:middle
+Really a compelling feature.
+
+00:36:02.566 --> 00:36:08.696 A:middle
+Now, let's move on to the last
+topic of our presentation,
+
+00:36:09.256 --> 00:36:11.086 A:middle
+which is accessory categories.
+
+00:36:11.976 --> 00:36:16.646 A:middle
+Last year with iOS 8, we added
+support for several accessories
+
+00:36:17.406 --> 00:36:21.016 A:middle
+that are most commonly found in
+your house, like your lights,
+
+00:36:21.066 --> 00:36:24.236 A:middle
+fans, switches, plugs,
+garage doors, et cetera.
+
+00:36:25.586 --> 00:36:27.256 A:middle
+Now, adding native support
+
+00:36:27.256 --> 00:36:30.896 A:middle
+for accessory categories is an
+evolutionary process in iOS,
+
+00:36:31.696 --> 00:36:38.016 A:middle
+and in iOS 9, we added
+support for more devices in iOS
+
+00:36:38.016 --> 00:36:42.816 A:middle
+so that you can connect more
+accessories in your house.
+
+00:36:44.246 --> 00:36:46.196 A:middle
+Starting with window coverings.
+
+00:36:46.196 --> 00:36:49.186 A:middle
+You can now use iOS to
+control your awnings, blinds,
+
+00:36:49.186 --> 00:36:52.746 A:middle
+and shades, and motorized
+doors and windows.
+
+00:36:54.056 --> 00:36:56.536 A:middle
+Alarm systems are
+also a new category.
+
+00:36:56.816 --> 00:36:59.406 A:middle
+Now, this is a category
+that several --
+
+00:36:59.406 --> 00:37:02.216 A:middle
+and alarm system and security
+system providers have asked
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:59.406 --> 00:37:02.216 A:middle
+and alarm system and security
+system providers have asked
+
+00:37:02.886 --> 00:37:04.526 A:middle
+for native support, and
+which listened to them.
+
+00:37:04.936 --> 00:37:08.786 A:middle
+But we also found that alarm
+systems can be really complex
+
+00:37:09.146 --> 00:37:13.156 A:middle
+with a lot of features, but what
+we did is to distill the key
+
+00:37:13.156 --> 00:37:16.346 A:middle
+and the most used features
+in an alarm system service.
+
+00:37:16.796 --> 00:37:20.216 A:middle
+Now, you as an accessory
+manufacturer will be able
+
+00:37:20.216 --> 00:37:23.556 A:middle
+to add more features using
+custom characteristics,
+
+00:37:24.086 --> 00:37:25.176 A:middle
+of course.
+
+00:37:25.276 --> 00:37:28.956 A:middle
+Alarm systems typically work
+hand in hand with sensors,
+
+00:37:29.326 --> 00:37:33.506 A:middle
+so we added support for several
+sensor categories: motion,
+
+00:37:33.506 --> 00:37:37.426 A:middle
+air quality, and smoke
+being just a few of them.
+
+00:37:37.516 --> 00:37:38.946 A:middle
+And last but not least --
+
+00:37:38.946 --> 00:37:40.636 A:middle
+and this is a category I
+am very excited about --
+
+00:37:41.536 --> 00:37:43.026 A:middle
+is programmable switches.
+
+00:37:43.796 --> 00:37:48.716 A:middle
+A programmable switch is a
+HomeKit device whose main
+
+00:37:48.716 --> 00:37:52.826 A:middle
+purpose is to generate events.
+
+00:37:52.826 --> 00:37:56.616 A:middle
+iOS makes this accessory
+compelling.
+
+00:37:56.976 --> 00:37:58.126 A:middle
+So to understand this better,
+
+00:37:58.256 --> 00:37:59.696 A:middle
+let me walk you through
+an example.
+
+00:37:59.696 --> 00:38:04.486 A:middle
+So let's say it's bedtime,
+and you're in your bed,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:37:59.696 --> 00:38:04.486 A:middle
+So let's say it's bedtime,
+and you're in your bed,
+
+00:38:05.396 --> 00:38:07.926 A:middle
+you stow away your
+electronics, charging somewhere,
+
+00:38:08.866 --> 00:38:11.416 A:middle
+but you don't know if
+your house is secure.
+
+00:38:11.896 --> 00:38:14.296 A:middle
+Your lights are probably off in
+some far corner of the house.
+
+00:38:15.356 --> 00:38:16.136 A:middle
+But fret not.
+
+00:38:17.006 --> 00:38:20.706 A:middle
+You have this programmable
+switch, nothing
+
+00:38:20.706 --> 00:38:22.156 A:middle
+but a simple switch
+with a button.
+
+00:38:22.156 --> 00:38:24.306 A:middle
+Now, you press the button.
+
+00:38:24.886 --> 00:38:25.886 A:middle
+It generates an event.
+
+00:38:26.526 --> 00:38:29.786 A:middle
+And you know now in iOS 9
+we support event triggers.
+
+00:38:30.716 --> 00:38:36.676 A:middle
+So our users will be able to
+map this event to a trigger,
+
+00:38:37.696 --> 00:38:40.556 A:middle
+which will execute this
+beautiful predefined good
+
+00:38:40.556 --> 00:38:41.136 A:middle
+night scene.
+
+00:38:42.616 --> 00:38:44.846 A:middle
+Now, iOS, wherever it is,
+wherever the phone is,
+
+00:38:44.926 --> 00:38:47.476 A:middle
+it will get this trigger and
+execute all of it magically.
+
+00:38:48.056 --> 00:38:49.226 A:middle
+Powerful but simple.
+
+00:38:49.786 --> 00:38:55.456 A:middle
+Now, programmable switch and
+all the other new accessory
+
+00:38:55.456 --> 00:38:58.476 A:middle
+categories are available,
+as Anush mentioned,
+
+00:38:58.476 --> 00:39:01.096 A:middle
+in our updated version of the
+HomeKit Accessory Simulator,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:38:58.476 --> 00:39:01.096 A:middle
+in our updated version of the
+HomeKit Accessory Simulator,
+
+00:39:01.276 --> 00:39:05.226 A:middle
+so that you, as developers,
+can develop apps
+
+00:39:05.296 --> 00:39:06.716 A:middle
+to support these new categories.
+
+00:39:07.916 --> 00:39:10.336 A:middle
+The HomeKit Accessory
+Simulator is one
+
+00:39:10.336 --> 00:39:13.606 A:middle
+of the several tools
+available to you as developers
+
+00:39:13.606 --> 00:39:14.836 A:middle
+and accessory manufacturers.
+
+00:39:15.956 --> 00:39:18.276 A:middle
+We also have HomeKit
+Accessory Tester,
+
+00:39:18.686 --> 00:39:22.626 A:middle
+which is also being updated to
+support many of the new features
+
+00:39:23.156 --> 00:39:24.226 A:middle
+that we talked about today.
+
+00:39:24.896 --> 00:39:29.246 A:middle
+Now let me talk a minute about
+HomeKit Accessory Tester, HAT.
+
+00:39:29.546 --> 00:39:31.986 A:middle
+We urge you, as accessory
+manufacturers,
+
+00:39:32.436 --> 00:39:36.526 A:middle
+to exclusively use HAT all
+through your development cycle
+
+00:39:36.926 --> 00:39:40.896 A:middle
+because this way you will ensure
+that your accessory is compliant
+
+00:39:41.306 --> 00:39:46.656 A:middle
+to HomeKit specifications
+and also ensure
+
+00:39:46.656 --> 00:39:50.626 A:middle
+that your accessories work with
+past and future versions of iOS.
+
+00:39:51.246 --> 00:39:53.566 A:middle
+Now, HAT also provides
+the debug information
+
+00:39:54.056 --> 00:39:56.756 A:middle
+that may not be available
+to you when you use iOS,
+
+00:39:57.416 --> 00:40:01.206 A:middle
+but the most important reason
+is that we use HAT at Apple
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:39:57.416 --> 00:40:01.206 A:middle
+but the most important reason
+is that we use HAT at Apple
+
+00:40:01.366 --> 00:40:03.006 A:middle
+to certify your accessories.
+
+00:40:03.506 --> 00:40:07.286 A:middle
+Now, HAT is also
+one of the tools
+
+00:40:07.676 --> 00:40:12.296 A:middle
+that is exclusively available to
+members of Apple's MFi program.
+
+00:40:13.296 --> 00:40:15.436 A:middle
+Now, if you are already
+a member of this program,
+
+00:40:16.046 --> 00:40:19.346 A:middle
+then you'd be able to get
+updated specs and tools
+
+00:40:19.626 --> 00:40:21.836 A:middle
+in the near future
+at the MFi portal.
+
+00:40:23.316 --> 00:40:25.346 A:middle
+If you are not a member
+of the MFi program
+
+00:40:26.296 --> 00:40:29.836 A:middle
+and you are making a HomeKit
+accessory, you need to enroll
+
+00:40:30.086 --> 00:40:30.936 A:middle
+so that you would be able
+
+00:40:30.936 --> 00:40:33.206 A:middle
+to download the specifications
+and tools.
+
+00:40:33.686 --> 00:40:35.476 A:middle
+And here is a link
+to get you started.
+
+00:40:37.596 --> 00:40:42.166 A:middle
+Now, in summary, today you
+learned about many new features,
+
+00:40:42.166 --> 00:40:45.606 A:middle
+like HomeKit and Apple
+Watch, event triggers,
+
+00:40:46.036 --> 00:40:48.936 A:middle
+a new way of remote
+access, and several features
+
+00:40:48.936 --> 00:40:50.546 A:middle
+for Bluetooth Low
+Energy accessories.
+
+00:40:51.386 --> 00:40:54.126 A:middle
+We at Apple are really excited
+about all these features,
+
+00:40:54.396 --> 00:40:57.406 A:middle
+and we can't wait to see what
+you are going to do with them.
+
+00:40:58.446 --> 00:41:01.676 A:middle
+If you have any more questions,
+any questions on HomeKit,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:40:58.446 --> 00:41:01.676 A:middle
+If you have any more questions,
+any questions on HomeKit,
+
+00:41:02.676 --> 00:41:04.546 A:middle
+here's where you can get
+more information from.
+
+00:41:05.686 --> 00:41:07.766 A:middle
+Thank you very much for
+attending our session.
+
+00:41:08.516 --> 00:41:12.500 A:middle
+[Applause]
+

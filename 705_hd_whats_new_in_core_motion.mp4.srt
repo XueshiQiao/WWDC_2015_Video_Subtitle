@@ -1,0 +1,3114 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:41.426 --> 00:00:42.856 A:middle
+&gt;&gt; ANIL KANDANGATH: Good
+afternoon and welcome.
+
+00:00:44.146 --> 00:00:47.096 A:middle
+My name is Anil Kandangath
+and today I'm going to talk
+
+00:00:47.096 --> 00:00:49.196 A:middle
+about what is new
+in Core Motion.
+
+00:00:49.606 --> 00:00:51.316 A:middle
+We have quite a few
+things to talk about.
+
+00:00:51.316 --> 00:00:53.996 A:middle
+But today we will stick
+to a few key points.
+
+00:00:54.836 --> 00:00:59.776 A:middle
+We will begin by talking
+about the Apple Watch.
+
+00:00:59.776 --> 00:01:02.656 A:middle
+We have a new platform
+and we will talk about how
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:59.776 --> 00:01:02.656 A:middle
+We have a new platform
+and we will talk about how
+
+00:01:02.656 --> 00:01:04.926 A:middle
+to bring your Core Motion
+apps to the Apple Watch.
+
+00:01:06.006 --> 00:01:07.926 A:middle
+We also have new updates
+
+00:01:07.986 --> 00:01:10.456 A:middle
+to the pedometer
+including some new APIs.
+
+00:01:12.036 --> 00:01:14.286 A:middle
+We will also talk
+about the altimeter
+
+00:01:14.396 --> 00:01:17.776 A:middle
+which is a sensor we
+introduced in the iPhone 6.
+
+00:01:18.636 --> 00:01:22.036 A:middle
+Gabrielle will then walk
+us through an application
+
+00:01:22.036 --> 00:01:25.176 A:middle
+that uses Core Motion in a
+really, really interesting way.
+
+00:01:25.506 --> 00:01:26.946 A:middle
+I've seen it and
+it's pretty awesome.
+
+00:01:27.826 --> 00:01:28.886 A:middle
+So let's get started.
+
+00:01:29.656 --> 00:01:31.506 A:middle
+Now this is not an
+introductory session
+
+00:01:32.016 --> 00:01:34.746 A:middle
+but we will cover enough
+Core Motion concepts for you
+
+00:01:34.746 --> 00:01:36.756 A:middle
+to be able to follow along even
+
+00:01:36.756 --> 00:01:39.786 A:middle
+if you are not intimately
+familiar with Motion itself.
+
+00:01:40.156 --> 00:01:41.246 A:middle
+But for those of you here
+
+00:01:41.246 --> 00:01:44.346 A:middle
+at the conference we do have
+a lab immediately following
+
+00:01:44.346 --> 00:01:44.926 A:middle
+the session.
+
+00:01:45.226 --> 00:01:47.216 A:middle
+So please come by with
+all your questions.
+
+00:01:47.216 --> 00:01:49.026 A:middle
+We have the engineers
+and scientists on hand.
+
+00:01:49.756 --> 00:01:52.106 A:middle
+If you have no questions,
+congratulations.
+
+00:01:52.106 --> 00:01:52.556 A:middle
+[Laughter.]
+
+00:01:52.556 --> 00:01:54.846 A:middle
+&gt;&gt; ANIL KANDANGATH:
+Still come by
+
+00:01:54.846 --> 00:01:57.336 A:middle
+and tell us how you are using
+Core Motion in your apps.
+
+00:01:57.456 --> 00:02:00.106 A:middle
+We would love to hear from you.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:57.456 --> 00:02:00.106 A:middle
+We would love to hear from you.
+
+00:02:00.476 --> 00:02:04.066 A:middle
+We do have some great past
+sessions on Apple developer
+
+00:02:04.366 --> 00:02:08.116 A:middle
+where we go into great
+detail about motion sensing
+
+00:02:08.116 --> 00:02:09.756 A:middle
+and motion activity
+and the pedometer.
+
+00:02:09.846 --> 00:02:11.266 A:middle
+So do check them out.
+
+00:02:11.266 --> 00:02:12.816 A:middle
+Let's get started.
+
+00:02:13.696 --> 00:02:16.746 A:middle
+Now, motion sensing
+has come a long way
+
+00:02:16.746 --> 00:02:18.356 A:middle
+in iOS since the early days.
+
+00:02:18.696 --> 00:02:21.386 A:middle
+We will begin with
+just a quick overview
+
+00:02:21.386 --> 00:02:24.346 A:middle
+of how things work today.
+
+00:02:24.766 --> 00:02:27.676 A:middle
+This is a traditional
+motion sensing architecture.
+
+00:02:27.676 --> 00:02:30.676 A:middle
+You take some sensors hook
+them up to the main processor
+
+00:02:31.106 --> 00:02:32.596 A:middle
+and the drawback
+should be obvious.
+
+00:02:32.676 --> 00:02:34.996 A:middle
+Any time you want to
+access sensor data,
+
+00:02:34.996 --> 00:02:38.196 A:middle
+you do have to keep the
+main processor active.
+
+00:02:38.296 --> 00:02:39.976 A:middle
+This severely limits the kinds
+
+00:02:39.976 --> 00:02:42.036 A:middle
+of applications that
+you can write.
+
+00:02:42.766 --> 00:02:44.106 A:middle
+So we thought we
+could do better.
+
+00:02:44.806 --> 00:02:49.186 A:middle
+Starting with the iPhone 5S we
+introduced a motion coprocessor
+
+00:02:49.506 --> 00:02:51.616 A:middle
+that we called the M7.
+
+00:02:51.786 --> 00:02:55.096 A:middle
+This is a tiny processor
+whose sole job is
+
+00:02:55.096 --> 00:02:56.086 A:middle
+to process Motion data.
+
+00:02:56.086 --> 00:03:00.076 A:middle
+It can chug along all
+day long and only turn
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:56.086 --> 00:03:00.076 A:middle
+It can chug along all
+day long and only turn
+
+00:03:00.276 --> 00:03:02.376 A:middle
+on the main processor
+when it really needs to.
+
+00:03:03.176 --> 00:03:06.166 A:middle
+This is great for the
+battery life of the users.
+
+00:03:06.836 --> 00:03:10.506 A:middle
+In iPhone 6 we introduced
+the M8 processor
+
+00:03:10.786 --> 00:03:13.446 A:middle
+and new sensor, the altimeter.
+
+00:03:13.806 --> 00:03:17.306 A:middle
+This is what motion sensing
+looks like today on iOS.
+
+00:03:18.286 --> 00:03:19.816 A:middle
+So what does it get you?
+
+00:03:20.416 --> 00:03:22.126 A:middle
+Well, if you take the sensors
+
+00:03:22.636 --> 00:03:28.186 A:middle
+and access data live you do get
+not just the raw sensor data
+
+00:03:28.186 --> 00:03:31.306 A:middle
+but also features built
+on top of the sensors
+
+00:03:31.806 --> 00:03:35.116 A:middle
+like device motion which gives
+you the altitude of the device
+
+00:03:35.116 --> 00:03:37.506 A:middle
+or the pedometer
+or motion activity.
+
+00:03:38.036 --> 00:03:41.746 A:middle
+On platforms that have the
+altimeter you also get access
+
+00:03:41.776 --> 00:03:47.626 A:middle
+to the raw pressure, altitude
+changes and flights of stairs.
+
+00:03:48.456 --> 00:03:51.006 A:middle
+So that is live data
+from the sensors.
+
+00:03:51.436 --> 00:03:53.656 A:middle
+But the promise of the
+motion coprocessor is
+
+00:03:53.656 --> 00:03:55.046 A:middle
+that you can do more
+than this, right.
+
+00:03:55.456 --> 00:03:56.476 A:middle
+Indeed, you can.
+
+00:03:56.836 --> 00:03:59.816 A:middle
+You also get 24/7
+access to motion activity
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:00.086 --> 00:04:02.356 A:middle
+and the pedometer
+and on platforms
+
+00:04:02.386 --> 00:04:06.066 A:middle
+that have the altimeter you
+also get flights of stairs 24/7.
+
+00:04:06.406 --> 00:04:12.726 A:middle
+So this is what you can do with
+motion sensing on iOS today.
+
+00:04:12.926 --> 00:04:16.336 A:middle
+So what does motion sensing
+look like on the Apple Watch?
+
+00:04:17.065 --> 00:04:20.366 A:middle
+Well, the Apple Watch
+also has a coprocessor
+
+00:04:20.366 --> 00:04:22.055 A:middle
+and it has an accelerometer
+
+00:04:22.746 --> 00:04:26.836 A:middle
+which means you get the same
+24/7 access to motion activity
+
+00:04:26.836 --> 00:04:31.296 A:middle
+and the pedometer and in terms
+of live data you get sensor data
+
+00:04:31.296 --> 00:04:32.926 A:middle
+in addition to these two.
+
+00:04:33.336 --> 00:04:35.826 A:middle
+So if you are thinking gee,
+this all looks so familiar.
+
+00:04:35.826 --> 00:04:37.826 A:middle
+Maybe Motion is very similar
+
+00:04:37.826 --> 00:04:40.736 A:middle
+on the Apple Watch too,
+you would be right.
+
+00:04:41.456 --> 00:04:46.216 A:middle
+Most Core Motion APIs on iOS
+are available on watchOS,
+
+00:04:46.216 --> 00:04:51.226 A:middle
+and not only that most Core
+Motion APIs behave the same
+
+00:04:51.266 --> 00:04:53.196 A:middle
+on iOS and watchOS.
+
+00:04:53.776 --> 00:04:56.446 A:middle
+So this is a quick run down
+of the features we have
+
+00:04:56.446 --> 00:04:57.456 A:middle
+on both OSs.
+
+00:04:59.206 --> 00:05:02.706 A:middle
+But the Watch is fundamentally
+a different platform.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:59.206 --> 00:05:02.706 A:middle
+But the Watch is fundamentally
+a different platform.
+
+00:05:03.266 --> 00:05:05.576 A:middle
+So there are some
+things we need to know
+
+00:05:05.576 --> 00:05:08.106 A:middle
+as we build our applications
+for the Watch
+
+00:05:08.426 --> 00:05:09.246 A:middle
+and I'll go through them.
+
+00:05:09.766 --> 00:05:11.886 A:middle
+We'll start with
+motion activity.
+
+00:05:12.456 --> 00:05:15.516 A:middle
+Motion activity is what gives
+us contextual information
+
+00:05:15.896 --> 00:05:17.426 A:middle
+about what the user is doing.
+
+00:05:17.496 --> 00:05:19.076 A:middle
+You can tell if they
+are walking, running,
+
+00:05:19.076 --> 00:05:20.576 A:middle
+driving, cycling, et cetera.
+
+00:05:21.436 --> 00:05:24.826 A:middle
+And the stage that you can
+obtain are very much dependent
+
+00:05:24.826 --> 00:05:26.616 A:middle
+on the platform and
+how it is used.
+
+00:05:27.276 --> 00:05:30.746 A:middle
+So this is a quick summary of
+the states that you can get
+
+00:05:30.876 --> 00:05:33.726 A:middle
+on watchOS and you'll notice
+that you can get access
+
+00:05:33.726 --> 00:05:36.806 A:middle
+to walking, running, cycling,
+and stationary states.
+
+00:05:37.486 --> 00:05:40.506 A:middle
+And that's motion activity
+on the Apple Watch.
+
+00:05:42.376 --> 00:05:46.906 A:middle
+Developers have wanted
+access to the sensors itself
+
+00:05:47.406 --> 00:05:49.686 A:middle
+and we do provide access
+to the accelerometer
+
+00:05:50.026 --> 00:05:52.606 A:middle
+through the familiar
+CMAccelerometer API.
+
+00:05:52.606 --> 00:05:55.856 A:middle
+And that should be all there
+is to the accelerometer
+
+00:05:56.206 --> 00:05:58.526 A:middle
+but it is a different platform
+
+00:05:58.526 --> 00:06:00.706 A:middle
+and there are some
+considerations
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:58.526 --> 00:06:00.706 A:middle
+and there are some
+considerations
+
+00:06:00.706 --> 00:06:01.976 A:middle
+that we have to keep in mind.
+
+00:06:02.636 --> 00:06:06.226 A:middle
+The first is that you are
+app may get a limited amount
+
+00:06:06.226 --> 00:06:08.476 A:middle
+of processing time.
+
+00:06:08.476 --> 00:06:10.926 A:middle
+There are no real background
+processing modes in the Watch,
+
+00:06:10.976 --> 00:06:13.116 A:middle
+so your app pretty much runs
+
+00:06:13.166 --> 00:06:14.756 A:middle
+when you are showing
+up on the screen.
+
+00:06:15.816 --> 00:06:19.356 A:middle
+And the screen may turn
+off for many reasons.
+
+00:06:19.396 --> 00:06:20.276 A:middle
+The screen may time out.
+
+00:06:21.006 --> 00:06:24.076 A:middle
+But the Apple Watch screen is
+also designed to turn on only
+
+00:06:24.076 --> 00:06:25.156 A:middle
+when you're looking at it.
+
+00:06:25.486 --> 00:06:27.676 A:middle
+So if you want to turn
+the screen away from you,
+
+00:06:28.196 --> 00:06:30.576 A:middle
+there is a good likelihood
+the screen may turn off
+
+00:06:30.826 --> 00:06:33.596 A:middle
+and your app may not get
+processing time after that.
+
+00:06:34.306 --> 00:06:36.536 A:middle
+So given all these
+considerations
+
+00:06:36.536 --> 00:06:38.786 A:middle
+in mind there are a few
+best practices I would
+
+00:06:38.786 --> 00:06:39.766 A:middle
+like to talk about.
+
+00:06:40.336 --> 00:06:45.016 A:middle
+The first is to design your
+app to only expect data
+
+00:06:45.536 --> 00:06:46.806 A:middle
+when the app is on screen.
+
+00:06:47.086 --> 00:06:48.866 A:middle
+Now, I know this is
+easier said then done
+
+00:06:48.866 --> 00:06:50.386 A:middle
+but something to keep in mind.
+
+00:06:51.096 --> 00:06:54.416 A:middle
+The other is as you are
+accessing a streaming,
+
+00:06:54.416 --> 00:06:56.956 A:middle
+a stream of sensor
+data you have to ensure
+
+00:06:56.956 --> 00:07:02.606 A:middle
+that you can handle your
+task being suspended
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:56.956 --> 00:07:02.606 A:middle
+that you can handle your
+task being suspended
+
+00:07:02.606 --> 00:07:03.676 A:middle
+in a graceful way.
+
+00:07:04.106 --> 00:07:06.696 A:middle
+And fortunately we do
+have a way to do this
+
+00:07:06.696 --> 00:07:08.256 A:middle
+through NSProcessInfo.
+
+00:07:08.886 --> 00:07:11.446 A:middle
+If you use this API
+performExpiring
+
+00:07:11.536 --> 00:07:14.916 A:middle
+ActivityWithReason, you can
+perform your sensor data
+
+00:07:14.916 --> 00:07:16.786 A:middle
+processing as a block
+in this API
+
+00:07:16.786 --> 00:07:20.726 A:middle
+and this will inform your
+block that your task is
+
+00:07:20.726 --> 00:07:23.356 A:middle
+about to be suspended so
+you can do the right thing.
+
+00:07:24.346 --> 00:07:27.686 A:middle
+That is the CMAccelerometer API.
+
+00:07:28.776 --> 00:07:31.746 A:middle
+But some of you want more,
+a lot more than that.
+
+00:07:32.116 --> 00:07:35.116 A:middle
+In fact you wanted to
+get access to sensor data
+
+00:07:35.116 --> 00:07:37.006 A:middle
+for a long period of time.
+
+00:07:37.446 --> 00:07:38.856 A:middle
+So today I'm pleased to say
+
+00:07:38.856 --> 00:07:41.746 A:middle
+that for the first time
+ever we are providing access
+
+00:07:41.746 --> 00:07:45.996 A:middle
+to historical sensor data as
+the historical accelerometer.
+
+00:07:47.086 --> 00:07:49.426 A:middle
+Now what does this do for you?
+
+00:07:49.756 --> 00:07:53.796 A:middle
+It allows you to access
+data for long durations.
+
+00:07:54.086 --> 00:07:55.236 A:middle
+For really long durations.
+
+00:07:55.986 --> 00:07:58.426 A:middle
+And you can access
+this data even
+
+00:07:58.426 --> 00:07:59.896 A:middle
+when your app is not running.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:01.356 --> 00:08:06.706 A:middle
+So this enables you to perform
+your own custom algorithms
+
+00:08:06.706 --> 00:08:09.196 A:middle
+on top of this long
+streams of sensor data.
+
+00:08:09.726 --> 00:08:11.176 A:middle
+This is really cool
+and we expect you
+
+00:08:11.176 --> 00:08:12.576 A:middle
+to make really cool
+apps with this.
+
+00:08:13.106 --> 00:08:14.236 A:middle
+So how do you do this?
+
+00:08:14.796 --> 00:08:17.766 A:middle
+We have a new API called
+the CMSensorRecorder,
+
+00:08:18.336 --> 00:08:22.066 A:middle
+and this enables you to
+initiate historical sensor
+
+00:08:22.066 --> 00:08:22.846 A:middle
+data recording.
+
+00:08:23.076 --> 00:08:25.236 A:middle
+Now keep in mind, this
+is a key difference
+
+00:08:25.236 --> 00:08:27.056 A:middle
+between this historical API
+
+00:08:27.056 --> 00:08:30.906 A:middle
+and the other historical APIs
+we have such as the pedometer
+
+00:08:30.906 --> 00:08:33.316 A:middle
+and motion activity where
+you do not really need
+
+00:08:33.316 --> 00:08:35.046 A:middle
+to initiate any recording.
+
+00:08:35.626 --> 00:08:39.426 A:middle
+But for the SensorRecorder
+you do need to initiate it,
+
+00:08:39.426 --> 00:08:42.496 A:middle
+and the data is recorded
+at 50 Hertz,
+
+00:08:42.826 --> 00:08:45.506 A:middle
+and you can query it
+for up to three days.
+
+00:08:46.806 --> 00:08:50.946 A:middle
+So that's how you use
+the SensorRecorder.
+
+00:08:51.556 --> 00:08:54.386 A:middle
+In terms of the implementation,
+here is how we do it.
+
+00:08:54.736 --> 00:08:57.806 A:middle
+The first thing you want to
+do is initiate recording data
+
+00:08:57.806 --> 00:09:01.636 A:middle
+and do it by saying
+recordAccelerometerDataFor
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:57.806 --> 00:09:01.636 A:middle
+and do it by saying
+recordAccelerometerDataFor
+
+00:09:01.636 --> 00:09:03.276 A:middle
+and provide a duration.
+
+00:09:04.206 --> 00:09:07.316 A:middle
+Once you do this, the
+device may go to sleep.
+
+00:09:07.666 --> 00:09:09.356 A:middle
+Your app may get suspended.
+
+00:09:09.356 --> 00:09:10.396 A:middle
+It's all okay.
+
+00:09:10.716 --> 00:09:14.946 A:middle
+Later the user may come
+and launch your app.
+
+00:09:15.396 --> 00:09:17.796 A:middle
+When they launch your app
+you may decide to query
+
+00:09:17.796 --> 00:09:23.406 A:middle
+for sensor data and you query it
+by saying accelerometerDataFrom
+
+00:09:23.676 --> 00:09:25.796 A:middle
+and provide a time range.
+
+00:09:26.336 --> 00:09:30.176 A:middle
+The accelerometer data
+will then be returned
+
+00:09:30.386 --> 00:09:32.076 A:middle
+for the time ranges specified.
+
+00:09:32.076 --> 00:09:35.066 A:middle
+And it should be obvious that
+the time range can be a subset
+
+00:09:35.066 --> 00:09:39.026 A:middle
+of the time that you have
+been recording data for.
+
+00:09:39.496 --> 00:09:42.836 A:middle
+Now, the data is
+returned as a sequence
+
+00:09:42.836 --> 00:09:44.816 A:middle
+of CMAccelerometerData objects.
+
+00:09:45.436 --> 00:09:48.616 A:middle
+Cast your mind back
+to what we said
+
+00:09:48.616 --> 00:09:51.856 A:middle
+about handling task
+suspenses gracefully.
+
+00:09:51.856 --> 00:09:54.266 A:middle
+You will encounter the
+same problem here, too.
+
+00:09:54.826 --> 00:09:57.576 A:middle
+So as you are processing
+this big stream
+
+00:09:57.876 --> 00:10:00.586 A:middle
+of historical data you do have
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:57.876 --> 00:10:00.586 A:middle
+of historical data you do have
+
+00:10:00.586 --> 00:10:03.396 A:middle
+to visit our old
+friend NSProcessInfo.
+
+00:10:04.286 --> 00:10:08.076 A:middle
+Now, this will inform
+you when your task is
+
+00:10:08.076 --> 00:10:09.186 A:middle
+about to be suspended.
+
+00:10:09.656 --> 00:10:13.016 A:middle
+So if you look at the
+accelerometer data object,
+
+00:10:13.016 --> 00:10:16.156 A:middle
+it contains not just the
+acceleration part you're
+
+00:10:16.156 --> 00:10:18.246 A:middle
+familiar with, but
+also a startDate.
+
+00:10:18.566 --> 00:10:21.046 A:middle
+And you can use this
+startDate as an anchor
+
+00:10:21.446 --> 00:10:24.146 A:middle
+to make sure the next time the
+app is launched you can query
+
+00:10:24.146 --> 00:10:26.366 A:middle
+from this point onwards.
+
+00:10:26.366 --> 00:10:30.126 A:middle
+So that, is how SensorRecorder
+works.
+
+00:10:31.006 --> 00:10:34.566 A:middle
+Now, this is great, but as you
+show there is one consideration.
+
+00:10:35.156 --> 00:10:36.866 A:middle
+Well, two, power
+and performance.
+
+00:10:37.416 --> 00:10:39.626 A:middle
+Now, the SensorRecorder
+is a powerful API
+
+00:10:39.956 --> 00:10:42.806 A:middle
+but with great power
+comes great danger.
+
+00:10:42.806 --> 00:10:47.056 A:middle
+And the danger here is that
+you may not have enough time
+
+00:10:47.056 --> 00:10:49.176 A:middle
+to process large
+strings of sensor data.
+
+00:10:49.856 --> 00:10:52.496 A:middle
+So a few best practices again.
+
+00:10:52.946 --> 00:10:56.706 A:middle
+The first thing is to, and this
+may be obvious, is to record
+
+00:10:56.706 --> 00:11:00.436 A:middle
+and query only data for the
+minimum duration required
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:56.706 --> 00:11:00.436 A:middle
+and query only data for the
+minimum duration required
+
+00:11:00.436 --> 00:11:00.876 A:middle
+by your app.
+
+00:11:00.996 --> 00:11:03.956 A:middle
+So if you are a work out app
+you probably don't need 12 hours
+
+00:11:03.956 --> 00:11:04.176 A:middle
+of data.
+
+00:11:04.176 --> 00:11:06.996 A:middle
+You can probably get by with
+a couple of hours of data.
+
+00:11:06.996 --> 00:11:09.876 A:middle
+The less amount of
+data you query for,
+
+00:11:09.876 --> 00:11:11.776 A:middle
+the easier it will
+be for your app.
+
+00:11:12.926 --> 00:11:15.966 A:middle
+You should also know the
+sensor data rate requirements.
+
+00:11:16.416 --> 00:11:18.576 A:middle
+Now, the data is
+available at 50 Hertz,
+
+00:11:18.996 --> 00:11:21.686 A:middle
+but unless you are planning to
+extract features from that data
+
+00:11:21.686 --> 00:11:25.596 A:middle
+that require a high sensor rate
+you are better off just dropping
+
+00:11:25.596 --> 00:11:27.866 A:middle
+data and process less data.
+
+00:11:28.466 --> 00:11:30.826 A:middle
+So a few best practices
+and you should be good.
+
+00:11:31.436 --> 00:11:35.766 A:middle
+And that's the Core Motion
+update for Apple Watch.
+
+00:11:36.386 --> 00:11:39.646 A:middle
+As you've seen we had a
+lot of the familiar APIs
+
+00:11:39.646 --> 00:11:43.076 A:middle
+and we also have access
+to historical sensor data.
+
+00:11:43.656 --> 00:11:45.186 A:middle
+This should be really great,
+and you should be able
+
+00:11:45.186 --> 00:11:46.936 A:middle
+to make really cool
+application with this.
+
+00:11:47.066 --> 00:11:49.536 A:middle
+In terms of writing
+Watch applications,
+
+00:11:49.536 --> 00:11:51.616 A:middle
+we did have a session
+earlier this morning
+
+00:11:51.976 --> 00:11:53.316 A:middle
+that you can probably
+go watch now.
+
+00:11:53.846 --> 00:11:58.276 A:middle
+For the rest of the talk I'll
+focus on iOS and I'll begin
+
+00:11:58.276 --> 00:11:59.956 A:middle
+with updates to the pedometer.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:01.026 --> 00:12:04.206 A:middle
+This is the pedometer that
+you are familiar with.
+
+00:12:04.476 --> 00:12:05.696 A:middle
+Steps and distance.
+
+00:12:06.616 --> 00:12:08.176 A:middle
+A quick recap.
+
+00:12:08.286 --> 00:12:10.436 A:middle
+The pedometer is designed
+
+00:12:10.576 --> 00:12:12.086 A:middle
+to give you consistent
+performance
+
+00:12:12.086 --> 00:12:13.676 A:middle
+across body location.
+
+00:12:13.676 --> 00:12:16.156 A:middle
+So whether it's in your hand
+or if it's in your pocket,
+
+00:12:16.276 --> 00:12:18.736 A:middle
+the performance is
+supposed to be consistent,
+
+00:12:18.736 --> 00:12:22.346 A:middle
+and it is also consistent
+for varying pace.
+
+00:12:23.436 --> 00:12:25.996 A:middle
+Now a great feature
+of this pedometer is
+
+00:12:25.996 --> 00:12:27.926 A:middle
+that it adapts to the user.
+
+00:12:28.186 --> 00:12:31.566 A:middle
+So the more the user uses the
+pedometer, the better it gets
+
+00:12:31.566 --> 00:12:33.446 A:middle
+by calibrating itself
+to the user.
+
+00:12:34.156 --> 00:12:38.556 A:middle
+In iOS 9 we are making one big
+improvement to the pedometer
+
+00:12:38.626 --> 00:12:42.446 A:middle
+which is it incorporates
+GPS when possible.
+
+00:12:43.726 --> 00:12:44.466 A:middle
+Why do we do this?
+
+00:12:45.466 --> 00:12:47.746 A:middle
+Well, you may have an app
+
+00:12:47.846 --> 00:12:50.136 A:middle
+that is already subscribing
+to location.
+
+00:12:50.136 --> 00:12:52.586 A:middle
+Maybe you are trying to
+plot the user's track
+
+00:12:52.586 --> 00:12:53.476 A:middle
+as they go on a run.
+
+00:12:54.216 --> 00:12:56.946 A:middle
+When you do that,
+the pedometer senses
+
+00:12:56.946 --> 00:12:58.506 A:middle
+that GPS data is available
+
+00:12:58.866 --> 00:13:01.566 A:middle
+and it gets more
+accurate by using it.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:58.866 --> 00:13:01.566 A:middle
+and it gets more
+accurate by using it.
+
+00:13:02.956 --> 00:13:05.286 A:middle
+Well, why is this so critical?
+
+00:13:05.586 --> 00:13:08.176 A:middle
+So take a look at this
+run that a colleague
+
+00:13:08.176 --> 00:13:09.726 A:middle
+of mine did in San Francisco.
+
+00:13:09.726 --> 00:13:11.566 A:middle
+San Francisco is urban canyon.
+
+00:13:11.566 --> 00:13:15.356 A:middle
+It has tall buildings and it
+can be a challenging environment
+
+00:13:15.356 --> 00:13:16.256 A:middle
+for any GPS.
+
+00:13:16.256 --> 00:13:18.946 A:middle
+If you look at this
+segment here,
+
+00:13:19.476 --> 00:13:22.356 A:middle
+GPS looks pretty solid here.
+
+00:13:23.126 --> 00:13:25.916 A:middle
+If you were to rely on
+GPS we'd get really good
+
+00:13:26.046 --> 00:13:27.126 A:middle
+distance estimates.
+
+00:13:28.056 --> 00:13:28.506 A:middle
+That's good.
+
+00:13:29.306 --> 00:13:31.546 A:middle
+If you look at a
+different segment here,
+
+00:13:31.546 --> 00:13:33.066 A:middle
+you can see that
+there's quite a bit
+
+00:13:33.066 --> 00:13:34.746 A:middle
+of wander in the user's track.
+
+00:13:35.376 --> 00:13:38.186 A:middle
+Now granted there are quite
+a few pubs along the way --
+
+00:13:38.186 --> 00:13:41.976 A:middle
+[Laughter.] but that is probably
+not really how this person
+
+00:13:42.906 --> 00:13:44.216 A:middle
+really ran.
+
+00:13:44.716 --> 00:13:47.386 A:middle
+The pedometer is smart
+enough to understand
+
+00:13:47.386 --> 00:13:50.316 A:middle
+that this is a portion where
+it should not rely on the GPS,
+
+00:13:50.316 --> 00:13:53.466 A:middle
+and it resorts to
+its own stride-based
+
+00:13:53.466 --> 00:13:54.456 A:middle
+distance estimation.
+
+00:13:54.776 --> 00:13:59.156 A:middle
+The end result if you use the
+pedometer you get a consistent
+
+00:13:59.296 --> 00:14:02.146 A:middle
+performance and that's
+why you should use steps
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:59.296 --> 00:14:02.146 A:middle
+performance and that's
+why you should use steps
+
+00:14:02.146 --> 00:14:09.016 A:middle
+and distance from the pedometer.
+
+00:14:09.146 --> 00:14:13.136 A:middle
+We have one big API improvement
+in the pedometer this year.
+
+00:14:13.216 --> 00:14:15.306 A:middle
+That is -- well,
+before we go to that,
+
+00:14:15.306 --> 00:14:17.036 A:middle
+let's talk about one
+you already know about
+
+00:14:17.036 --> 00:14:17.986 A:middle
+and that's floor counting.
+
+00:14:18.546 --> 00:14:21.206 A:middle
+So floor counting is available
+
+00:14:21.206 --> 00:14:23.076 A:middle
+as floorsAscended
+and floorsDescended.
+
+00:14:23.876 --> 00:14:25.676 A:middle
+Because this is part
+of the pedometer,
+
+00:14:25.676 --> 00:14:28.396 A:middle
+there is a pedestrian aspect
+to it, which is that you have
+
+00:14:28.396 --> 00:14:29.396 A:middle
+to actually take steps.
+
+00:14:30.166 --> 00:14:33.636 A:middle
+What it means is that you
+really have to earn your floors
+
+00:14:33.916 --> 00:14:36.376 A:middle
+to be awarded floors here.
+
+00:14:37.266 --> 00:14:41.206 A:middle
+Let's take a deeper look
+at how this actually works.
+
+00:14:41.476 --> 00:14:42.596 A:middle
+It has a few requirements.
+
+00:14:42.996 --> 00:14:46.366 A:middle
+The first is that there is a
+minimum ascend rate requirement.
+
+00:14:47.226 --> 00:14:49.596 A:middle
+There is also a steps
+requirement.
+
+00:14:50.076 --> 00:14:53.616 A:middle
+What this all means for us
+is that if you were to say go
+
+00:14:53.616 --> 00:14:55.616 A:middle
+on a long hike and you walk slow
+
+00:14:55.616 --> 00:14:58.466 A:middle
+and eventually you accumulate
+quite a bit of altitude.
+
+00:14:58.746 --> 00:15:03.596 A:middle
+The likelihood is that you won't
+hit the ascend rate requirements
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:58.746 --> 00:15:03.596 A:middle
+The likelihood is that you won't
+hit the ascend rate requirements
+
+00:15:03.596 --> 00:15:04.936 A:middle
+and we won't award you floors.
+
+00:15:05.866 --> 00:15:08.016 A:middle
+But if you are walking
+in San Francisco
+
+00:15:08.016 --> 00:15:09.016 A:middle
+where you have some really,
+
+00:15:09.016 --> 00:15:11.066 A:middle
+really steep hills
+it is possible
+
+00:15:11.066 --> 00:15:12.666 A:middle
+that you will get a few floors.
+
+00:15:14.156 --> 00:15:17.796 A:middle
+Also because of the step
+rate requirements if you were
+
+00:15:17.796 --> 00:15:19.406 A:middle
+to use the elevator
+
+00:15:19.406 --> 00:15:22.686 A:middle
+or the escalator you are not
+likely to be awarded floors.
+
+00:15:22.806 --> 00:15:25.536 A:middle
+So that is how floor
+counting works in iOS.
+
+00:15:25.856 --> 00:15:29.256 A:middle
+Now it's time for the new API.
+
+00:15:30.276 --> 00:15:32.176 A:middle
+That is pace.
+
+00:15:33.086 --> 00:15:33.876 A:middle
+Pace is something
+
+00:15:33.876 --> 00:15:36.366 A:middle
+that developers have
+long asked us to provide.
+
+00:15:36.366 --> 00:15:39.376 A:middle
+We are happy to provide it now.
+
+00:15:39.376 --> 00:15:42.606 A:middle
+When we talk about pace, we
+are referring to currentPace.
+
+00:15:43.226 --> 00:15:45.336 A:middle
+So this is really the
+instantaneous pace
+
+00:15:45.336 --> 00:15:49.186 A:middle
+and not the pace as estimated
+from the beginning of your run.
+
+00:15:49.226 --> 00:15:52.626 A:middle
+And it is provided in units
+of time over distance.
+
+00:15:53.276 --> 00:15:56.806 A:middle
+If you are wondering why it is
+provided in this way and not
+
+00:15:56.806 --> 00:15:59.676 A:middle
+as speed, you know, that pace
+is normally analogous to,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:00.206 --> 00:16:03.396 A:middle
+is because for runners,
+pace is the time taken
+
+00:16:03.396 --> 00:16:04.916 A:middle
+to cover a known distance.
+
+00:16:06.206 --> 00:16:08.416 A:middle
+If you have been following
+the Apple Watch updates
+
+00:16:08.496 --> 00:16:11.646 A:middle
+on the website, this pace
+might be familiar to you.
+
+00:16:12.076 --> 00:16:15.206 A:middle
+To me this is something
+that I'm envy just of.
+
+00:16:15.206 --> 00:16:15.946 A:middle
+[Laughter.]
+
+00:16:15.946 --> 00:16:18.696 A:middle
+&gt;&gt; ANIL KANDANGATH: The
+pedometer has both a live
+
+00:16:18.696 --> 00:16:21.716 A:middle
+and historical aspect to it,
+but pace is only available
+
+00:16:21.716 --> 00:16:23.176 A:middle
+when you do live queries.
+
+00:16:23.936 --> 00:16:25.036 A:middle
+So just keep that in mind.
+
+00:16:25.876 --> 00:16:27.766 A:middle
+Now why do we provide pace?
+
+00:16:27.896 --> 00:16:31.506 A:middle
+After all, we do provide
+distance and a notion of time
+
+00:16:31.506 --> 00:16:34.706 A:middle
+in the pedometer, and we
+could just easily compute pace
+
+00:16:34.706 --> 00:16:35.156 A:middle
+from there.
+
+00:16:36.376 --> 00:16:38.726 A:middle
+The answer in one
+word is robustness.
+
+00:16:39.796 --> 00:16:42.136 A:middle
+If you were to say do some
+finer difference and try
+
+00:16:42.136 --> 00:16:45.166 A:middle
+to estimate pace just from
+those distance chunks,
+
+00:16:45.816 --> 00:16:49.786 A:middle
+we would introduce an acceptable
+amount of jitter in the pace,
+
+00:16:50.766 --> 00:16:54.536 A:middle
+and the pedometer takes
+care of this and ensures
+
+00:16:54.536 --> 00:16:57.006 A:middle
+that the pace estimation
+is smooth.
+
+00:16:57.656 --> 00:17:02.346 A:middle
+The other part is you could
+try to get a smooth pace
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:57.656 --> 00:17:02.346 A:middle
+The other part is you could
+try to get a smooth pace
+
+00:17:02.346 --> 00:17:05.465 A:middle
+by looking back at a much
+bigger chunk of the history
+
+00:17:05.776 --> 00:17:07.566 A:middle
+and then try to average
+a pace over it.
+
+00:17:07.616 --> 00:17:11.726 A:middle
+But the cost of doing that
+is you lose the ability
+
+00:17:11.726 --> 00:17:14.705 A:middle
+to respond quickly to
+changes in the user's pace.
+
+00:17:15.156 --> 00:17:18.856 A:middle
+Pace from CMPedometer
+also responds very quickly
+
+00:17:18.856 --> 00:17:20.316 A:middle
+to changes and it is responsive.
+
+00:17:20.376 --> 00:17:24.226 A:middle
+So smoothness and responsiveness
+is why you should use pace
+
+00:17:24.866 --> 00:17:26.126 A:middle
+from CMPedometer.
+
+00:17:26.866 --> 00:17:28.046 A:middle
+And that's pace.
+
+00:17:28.916 --> 00:17:33.616 A:middle
+A close cousin of
+pace is cadence.
+
+00:17:34.496 --> 00:17:37.136 A:middle
+And we now have cadence
+in the pedometer.
+
+00:17:37.846 --> 00:17:39.496 A:middle
+Now, what is cadence?
+
+00:17:39.496 --> 00:17:43.206 A:middle
+Cadence is the rate of your
+steps or in other terms,
+
+00:17:43.206 --> 00:17:46.306 A:middle
+it is how often your feet
+are landing on the ground.
+
+00:17:46.786 --> 00:17:49.646 A:middle
+We know that the cadence is
+really important to runners,
+
+00:17:49.726 --> 00:17:51.606 A:middle
+so now you can provide cadence
+
+00:17:51.606 --> 00:17:53.706 A:middle
+in your apps directly
+from the pedometer.
+
+00:17:56.076 --> 00:17:56.306 A:middle
+Yeah! [Applause.]
+
+00:17:56.996 --> 00:18:01.376 A:middle
+&gt;&gt; ANIL KANDANGATH: So that is
+our update for the pedometer.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:56.996 --> 00:18:01.376 A:middle
+&gt;&gt; ANIL KANDANGATH: So that is
+our update for the pedometer.
+
+00:18:01.376 --> 00:18:05.666 A:middle
+Here is a quick run down of
+the features across platforms
+
+00:18:05.666 --> 00:18:08.486 A:middle
+and note that the
+pedometer is also available
+
+00:18:08.486 --> 00:18:09.336 A:middle
+in the Apple Watch.
+
+00:18:09.796 --> 00:18:12.896 A:middle
+Let's move on to
+pressure sensing.
+
+00:18:13.846 --> 00:18:17.546 A:middle
+The pressure is available
+through the altimeter sensor.
+
+00:18:18.186 --> 00:18:21.476 A:middle
+It is available as part
+of the CMAltimeter API.
+
+00:18:21.476 --> 00:18:23.336 A:middle
+And it gives you two things.
+
+00:18:23.506 --> 00:18:26.226 A:middle
+it gives you raw
+pressure which is nothing
+
+00:18:26.226 --> 00:18:28.776 A:middle
+but a filtered version of the
+pressure from the sensor itself
+
+00:18:29.306 --> 00:18:31.716 A:middle
+and gives you relative altitude.
+
+00:18:32.256 --> 00:18:34.036 A:middle
+Let's take a deeper
+look at altitude.
+
+00:18:34.846 --> 00:18:37.406 A:middle
+When we say relative,
+it is relative
+
+00:18:37.406 --> 00:18:39.266 A:middle
+to the first sample provided.
+
+00:18:40.256 --> 00:18:42.986 A:middle
+What it means is that
+the first sample you get
+
+00:18:42.986 --> 00:18:47.526 A:middle
+from the altimeter will have
+a relative altitude of zero.
+
+00:18:47.996 --> 00:18:51.246 A:middle
+And every subsequent sample
+will be baselined against that.
+
+00:18:52.306 --> 00:18:56.066 A:middle
+What do we need to know about
+the altimeter to use it?
+
+00:18:56.596 --> 00:19:02.976 A:middle
+Well, the altimeter is really
+great for floor level changes.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:56.596 --> 00:19:02.976 A:middle
+Well, the altimeter is really
+great for floor level changes.
+
+00:19:02.976 --> 00:19:05.046 A:middle
+It is not really great
+for human level changes.
+
+00:19:05.676 --> 00:19:07.716 A:middle
+So you should probably
+not use it to know
+
+00:19:07.716 --> 00:19:09.176 A:middle
+if the user is raising
+their arm.
+
+00:19:09.506 --> 00:19:11.186 A:middle
+The error is not going
+to be good for you.
+
+00:19:12.286 --> 00:19:14.606 A:middle
+There are challenging
+situations for the sensor
+
+00:19:14.606 --> 00:19:17.326 A:middle
+that you should keep in mind.
+
+00:19:17.406 --> 00:19:18.776 A:middle
+One is the environment.
+
+00:19:19.516 --> 00:19:22.556 A:middle
+The environment might change
+over time in the same location
+
+00:19:22.606 --> 00:19:25.246 A:middle
+and give you a false
+sense of altitude changes.
+
+00:19:25.886 --> 00:19:28.226 A:middle
+For example, the
+recent cold front
+
+00:19:28.226 --> 00:19:30.826 A:middle
+in San Francisco would have
+changed the pressure enough
+
+00:19:31.136 --> 00:19:33.156 A:middle
+for us to think that
+your altitude changed
+
+00:19:33.156 --> 00:19:34.726 A:middle
+by say 15 meters.
+
+00:19:35.636 --> 00:19:37.646 A:middle
+You should probably
+not use the sensor
+
+00:19:37.646 --> 00:19:40.836 A:middle
+over long durations of time.
+
+00:19:41.416 --> 00:19:44.896 A:middle
+The case that your device is in
+can also impact the pressure.
+
+00:19:44.896 --> 00:19:48.816 A:middle
+If you are using a rigid sealed
+waterproof case for your phone,
+
+00:19:49.176 --> 00:19:50.926 A:middle
+the pressure sensor
+is not your friend.
+
+00:19:52.606 --> 00:19:56.256 A:middle
+In terms of using the API, it
+should be very familiar to you
+
+00:19:56.256 --> 00:19:59.266 A:middle
+and it gives you pressure
+and altitude in the API.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:00.016 --> 00:20:03.336 A:middle
+How fast can you access
+data from this sensor?
+
+00:20:04.066 --> 00:20:07.226 A:middle
+So the first time you make a
+request, the first sample takes
+
+00:20:07.226 --> 00:20:09.566 A:middle
+around 2.6 seconds to come.
+
+00:20:10.176 --> 00:20:13.916 A:middle
+Every subsequent sample comes
+at a cadence of 1.3 seconds.
+
+00:20:14.206 --> 00:20:16.946 A:middle
+That is how fast you can
+get data from the altimeter.
+
+00:20:18.336 --> 00:20:25.506 A:middle
+So to summarize, Core
+Motion now has, is available
+
+00:20:25.506 --> 00:20:27.266 A:middle
+on a multitude of platforms.
+
+00:20:27.266 --> 00:20:29.316 A:middle
+It is available on
+the iPads, the iPhones
+
+00:20:29.626 --> 00:20:30.806 A:middle
+and also the Apple Watch.
+
+00:20:31.326 --> 00:20:33.276 A:middle
+On the Apple Watch
+we give you access
+
+00:20:33.276 --> 00:20:37.296 A:middle
+and not just the familiar APIs
+but also historical sensor data.
+
+00:20:38.146 --> 00:20:41.326 A:middle
+The pedometer has a bunch of
+really cool updates of its own.
+
+00:20:41.326 --> 00:20:46.556 A:middle
+It's more accurate than
+ever, and it has two new APIs
+
+00:20:46.556 --> 00:20:48.286 A:middle
+in the form of pace and cadence.
+
+00:20:48.286 --> 00:20:51.456 A:middle
+So it is a well-rounded
+now and should be great
+
+00:20:51.456 --> 00:20:53.126 A:middle
+for your fitness apps.
+
+00:20:54.236 --> 00:20:56.356 A:middle
+Now Core Motion has
+traditionally been used
+
+00:20:56.356 --> 00:20:59.336 A:middle
+for gaming, for gestures,
+for fitness.
+
+00:20:59.336 --> 00:21:02.296 A:middle
+There's a bunch of
+applications for Core Motion,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:20:59.336 --> 00:21:02.296 A:middle
+There's a bunch of
+applications for Core Motion,
+
+00:21:02.686 --> 00:21:06.186 A:middle
+but Core Motion can also be
+used to enhance the intelligence
+
+00:21:06.476 --> 00:21:07.706 A:middle
+of other kinds of apps.
+
+00:21:08.396 --> 00:21:10.556 A:middle
+To illustrate this
+concept I am going
+
+00:21:10.556 --> 00:21:11.976 A:middle
+to invite Gabrielle on stage.
+
+00:21:12.516 --> 00:21:20.536 A:middle
+[Applause.]
+
+00:21:21.036 --> 00:21:22.116 A:middle
+&gt;&gt; GABRIELLE BADIE:
+Hi, everybody.
+
+00:21:23.336 --> 00:21:25.076 A:middle
+I'm really excited to be here.
+
+00:21:25.826 --> 00:21:31.426 A:middle
+As a developer, I never got to
+attend WWDC, but I spent every,
+
+00:21:31.426 --> 00:21:34.586 A:middle
+that first week of June
+watching all of the sessions
+
+00:21:34.586 --> 00:21:37.366 A:middle
+on my computer at home
+wherever I was working.
+
+00:21:38.446 --> 00:21:39.986 A:middle
+I learned a lot of information,
+
+00:21:39.986 --> 00:21:41.696 A:middle
+but one of the really
+difficult things was
+
+00:21:41.696 --> 00:21:43.856 A:middle
+that there was too
+much information.
+
+00:21:44.796 --> 00:21:48.596 A:middle
+Even in a given session
+there is so much to absorb
+
+00:21:48.876 --> 00:21:51.386 A:middle
+that when you leave you may
+even forget all of the things
+
+00:21:51.386 --> 00:21:53.176 A:middle
+that you learned
+in the last hour.
+
+00:21:54.486 --> 00:21:57.396 A:middle
+What I'm here to do is to
+take a few of the great things
+
+00:21:57.396 --> 00:21:59.106 A:middle
+that Anil just talked
+to you about
+
+00:21:59.556 --> 00:22:01.846 A:middle
+and see exactly how you
+might want to use them
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:59.556 --> 00:22:01.846 A:middle
+and see exactly how you
+might want to use them
+
+00:22:01.846 --> 00:22:04.576 A:middle
+in your application and
+hopefully make them stick.
+
+00:22:05.226 --> 00:22:10.546 A:middle
+Now Core Motion is really great
+because it can't be just used
+
+00:22:10.546 --> 00:22:12.856 A:middle
+in a fitness context
+or gaming context.
+
+00:22:13.436 --> 00:22:16.156 A:middle
+What I'm here to show you
+today is how you can use it
+
+00:22:16.156 --> 00:22:18.956 A:middle
+in your app regardless of
+what category it falls in.
+
+00:22:18.956 --> 00:22:22.526 A:middle
+So what can Core
+Motion do for you?
+
+00:22:23.736 --> 00:22:27.756 A:middle
+Core Motion allows you to
+detect what a user is doing.
+
+00:22:28.906 --> 00:22:31.236 A:middle
+You can see if a
+user is in their car,
+
+00:22:31.666 --> 00:22:34.336 A:middle
+going on a run, if
+they are cycling.
+
+00:22:35.006 --> 00:22:37.616 A:middle
+You can see their changes
+in pace as we've seen,
+
+00:22:37.786 --> 00:22:39.156 A:middle
+we smooth that out for you.
+
+00:22:40.116 --> 00:22:42.066 A:middle
+And so by using those updates,
+
+00:22:42.536 --> 00:22:46.456 A:middle
+we can tell what context a user
+is in without prompting them
+
+00:22:46.456 --> 00:22:47.956 A:middle
+and asking them to tell us.
+
+00:22:48.576 --> 00:22:52.706 A:middle
+This makes that experience more
+magical and our apps smarter.
+
+00:22:54.086 --> 00:22:56.516 A:middle
+The next thing we can
+do is engage the user.
+
+00:22:57.326 --> 00:23:01.146 A:middle
+Because updates come in every
+few seconds we can see how their
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:57.326 --> 00:23:01.146 A:middle
+Because updates come in every
+few seconds we can see how their
+
+00:23:01.146 --> 00:23:02.296 A:middle
+pace is changing.
+
+00:23:02.516 --> 00:23:04.536 A:middle
+We can see how their
+altitude is changing.
+
+00:23:04.786 --> 00:23:08.586 A:middle
+We can update our app UI
+quickly and accordingly.
+
+00:23:10.096 --> 00:23:13.556 A:middle
+The last thing we can
+do is reflect back.
+
+00:23:13.556 --> 00:23:15.366 A:middle
+And I know that sounds
+really cheesy,
+
+00:23:15.826 --> 00:23:18.506 A:middle
+but one of the great
+things about Core Motion is
+
+00:23:18.506 --> 00:23:21.106 A:middle
+by running all the time
+we can make it look
+
+00:23:21.106 --> 00:23:24.086 A:middle
+like your app is
+working really hard 24/7
+
+00:23:24.316 --> 00:23:27.366 A:middle
+when actually the
+coprocessor is.
+
+00:23:27.526 --> 00:23:29.776 A:middle
+We can look at your
+activity updates
+
+00:23:29.776 --> 00:23:32.016 A:middle
+and your pedometer
+updates over the last week,
+
+00:23:32.246 --> 00:23:33.436 A:middle
+which is pretty fantastic.
+
+00:23:35.076 --> 00:23:38.826 A:middle
+So with these three things in
+mind, I decided I was going
+
+00:23:38.826 --> 00:23:40.126 A:middle
+to make a music player.
+
+00:23:40.926 --> 00:23:43.866 A:middle
+Nothing to rival Apple
+Music or anything like that.
+
+00:23:44.286 --> 00:23:47.726 A:middle
+I wanted to see how Core Motion
+could make my app experience a
+
+00:23:47.726 --> 00:23:50.266 A:middle
+little bit more engaging
+and more magical.
+
+00:23:50.846 --> 00:23:55.856 A:middle
+Now a lot of music applications
+have this idea of playlists.
+
+00:23:56.286 --> 00:23:58.716 A:middle
+I certainly listen to
+different music when I'm
+
+00:23:58.716 --> 00:24:02.316 A:middle
+in my car I want podcasts, or
+if I'm studying or working hard,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:58.716 --> 00:24:02.316 A:middle
+in my car I want podcasts, or
+if I'm studying or working hard,
+
+00:24:02.316 --> 00:24:04.096 A:middle
+I'm going to want maybe
+some classical music,
+
+00:24:04.396 --> 00:24:06.456 A:middle
+and different app playlists
+for working out as well.
+
+00:24:07.176 --> 00:24:10.086 A:middle
+By detecting what
+a user is doing,
+
+00:24:10.416 --> 00:24:14.236 A:middle
+my music application can change
+my playlists accordingly instead
+
+00:24:14.236 --> 00:24:16.006 A:middle
+of the user having to select it.
+
+00:24:16.906 --> 00:24:20.776 A:middle
+Similarly, by seeing changes
+in pace we can say hey,
+
+00:24:20.776 --> 00:24:23.986 A:middle
+you're going on a slow jog
+or maybe you went really fast
+
+00:24:24.266 --> 00:24:26.966 A:middle
+and climbed up a really
+big hill and we are going
+
+00:24:26.966 --> 00:24:29.806 A:middle
+to play you a really exciting
+song to make you feel good
+
+00:24:29.806 --> 00:24:32.116 A:middle
+about that, or try to
+match your cadence.
+
+00:24:32.746 --> 00:24:35.156 A:middle
+Then there's the
+reflection piece.
+
+00:24:35.866 --> 00:24:37.156 A:middle
+There are two really
+great things
+
+00:24:37.156 --> 00:24:39.306 A:middle
+about reflection
+especially in the context
+
+00:24:39.306 --> 00:24:40.626 A:middle
+of my music application.
+
+00:24:41.876 --> 00:24:45.616 A:middle
+One, I can look at data to
+see how a user has been doing.
+
+00:24:45.816 --> 00:24:47.546 A:middle
+Hey, you haven't been
+running in a while.
+
+00:24:47.896 --> 00:24:50.746 A:middle
+Maybe you want to go on a run
+really soon and maybe you want
+
+00:24:50.746 --> 00:24:52.636 A:middle
+to use our application
+to do that
+
+00:24:52.816 --> 00:24:54.066 A:middle
+and listen to your playlist.
+
+00:24:55.136 --> 00:24:57.076 A:middle
+At the end of the day I
+want to motivate users
+
+00:24:57.176 --> 00:24:59.616 A:middle
+to come back to our app.
+
+00:24:59.866 --> 00:25:01.916 A:middle
+Also I thought it
+would be really great
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:24:59.866 --> 00:25:01.916 A:middle
+Also I thought it
+would be really great
+
+00:25:01.916 --> 00:25:04.796 A:middle
+if I said the user might want
+
+00:25:04.796 --> 00:25:06.536 A:middle
+to know what playlist
+they were listening
+
+00:25:06.536 --> 00:25:07.846 A:middle
+to in the car yesterday.
+
+00:25:08.226 --> 00:25:11.146 A:middle
+And so by looking at activity
+information and paring it
+
+00:25:11.336 --> 00:25:12.246 A:middle
+with my information
+
+00:25:12.246 --> 00:25:15.046 A:middle
+about playlists I can
+give that info to them.
+
+00:25:16.256 --> 00:25:18.986 A:middle
+So with these three
+ideas in mind,
+
+00:25:19.436 --> 00:25:22.516 A:middle
+let's see what my application
+actually looks like.
+
+00:25:22.516 --> 00:25:27.836 A:middle
+So when the user opens
+the app, we just want
+
+00:25:27.836 --> 00:25:30.026 A:middle
+to show them a basic playlist.
+
+00:25:30.026 --> 00:25:32.966 A:middle
+In my case I'm pretty much
+standing around, right?
+
+00:25:33.346 --> 00:25:35.416 A:middle
+We're going to have
+low intensity music.
+
+00:25:35.516 --> 00:25:36.476 A:middle
+Nothing too tough.
+
+00:25:37.576 --> 00:25:39.586 A:middle
+As we detect that the
+user is speeding up.
+
+00:25:40.066 --> 00:25:42.006 A:middle
+Maybe they start
+going for a workout.
+
+00:25:42.266 --> 00:25:44.386 A:middle
+We're going to change
+the playlist
+
+00:25:44.386 --> 00:25:47.016 A:middle
+and give them a little
+more upbeat music.
+
+00:25:48.076 --> 00:25:50.476 A:middle
+But this is where the
+engagement part comes in.
+
+00:25:50.716 --> 00:25:53.526 A:middle
+This is where we look at
+maybe changes in cadence
+
+00:25:53.886 --> 00:25:57.876 A:middle
+and maybe changes in altitude,
+and we really engage with them
+
+00:25:57.946 --> 00:26:01.126 A:middle
+and follow along, so we can
+give them a more high intensity
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:57.946 --> 00:26:01.126 A:middle
+and follow along, so we can
+give them a more high intensity
+
+00:26:01.126 --> 00:26:03.206 A:middle
+playlist when they speed up.
+
+00:26:04.576 --> 00:26:06.836 A:middle
+Then we want to context switch.
+
+00:26:07.256 --> 00:26:10.086 A:middle
+When the user goes for a
+drive, I want to be able
+
+00:26:10.086 --> 00:26:14.386 A:middle
+to give them their podcast or
+whatever they usually listen
+
+00:26:14.386 --> 00:26:15.586 A:middle
+to on their morning commute.
+
+00:26:16.046 --> 00:26:20.946 A:middle
+So this is the detection
+piece and engagement piece.
+
+00:26:21.566 --> 00:26:23.266 A:middle
+Next we have the
+reflection piece.
+
+00:26:24.636 --> 00:26:27.906 A:middle
+I want to put this information
+into interesting pieces
+
+00:26:27.906 --> 00:26:30.526 A:middle
+so the user can scroll back and
+see what they have been doing.
+
+00:26:30.836 --> 00:26:33.656 A:middle
+This is where I might tie
+in kind of that playlist
+
+00:26:33.656 --> 00:26:36.066 A:middle
+that they were listening to
+at different moments in time.
+
+00:26:36.646 --> 00:26:41.446 A:middle
+So now that we have an idea of
+what the app will look like,
+
+00:26:42.206 --> 00:26:44.886 A:middle
+let's see where motion
+activity actually fits in
+
+00:26:45.266 --> 00:26:49.186 A:middle
+and what APIs we might need to
+use for each of these pieces.
+
+00:26:51.116 --> 00:26:52.966 A:middle
+First we have the
+detection piece.
+
+00:26:53.156 --> 00:26:55.956 A:middle
+This is something we are going
+to want to do all the time.
+
+00:26:55.956 --> 00:26:59.826 A:middle
+We are going to want to
+see if a user is driving.
+
+00:26:59.826 --> 00:27:02.816 A:middle
+If a user is walking, how
+fast they might be walking.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:59.826 --> 00:27:02.816 A:middle
+If a user is walking, how
+fast they might be walking.
+
+00:27:03.336 --> 00:27:04.826 A:middle
+So what are we going
+to need for that?
+
+00:27:05.946 --> 00:27:08.296 A:middle
+Activity updates and
+pedometer updates.
+
+00:27:08.636 --> 00:27:12.286 A:middle
+We'll want to be monitoring
+those and smoothing those out
+
+00:27:12.656 --> 00:27:16.726 A:middle
+and seeing which information
+allows us to determine context.
+
+00:27:17.066 --> 00:27:20.026 A:middle
+Next we have that
+engagement piece.
+
+00:27:20.486 --> 00:27:24.876 A:middle
+If the user is walking or
+running, in my case I want
+
+00:27:24.876 --> 00:27:26.566 A:middle
+to see how fast they are going.
+
+00:27:26.836 --> 00:27:31.176 A:middle
+Look at that cadence, and
+also I had that idea of maybe
+
+00:27:31.176 --> 00:27:35.276 A:middle
+if they climb a big hill I can
+give them a great cheerful song
+
+00:27:35.276 --> 00:27:36.266 A:middle
+at their achievement.
+
+00:27:36.966 --> 00:27:39.606 A:middle
+For that I would need
+pedometer updates
+
+00:27:39.606 --> 00:27:42.236 A:middle
+which includes those
+pace and cadence changes
+
+00:27:42.676 --> 00:27:44.116 A:middle
+and altitude updates as well.
+
+00:27:45.616 --> 00:27:47.666 A:middle
+Then we had the reflection
+piece.
+
+00:27:48.616 --> 00:27:50.776 A:middle
+As I said, the great
+thing about Core Motion is
+
+00:27:50.776 --> 00:27:53.436 A:middle
+that they work really
+hard for me 24/7.
+
+00:27:53.476 --> 00:27:57.366 A:middle
+So I can look back and get those
+historical activity queries
+
+00:27:57.676 --> 00:28:00.716 A:middle
+and pedometer queries
+to put that information
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:57.676 --> 00:28:00.716 A:middle
+and pedometer queries
+to put that information
+
+00:28:00.746 --> 00:28:02.136 A:middle
+into interesting segments.
+
+00:28:02.826 --> 00:28:09.276 A:middle
+So now that I've gone through
+exactly what my app might look
+
+00:28:09.276 --> 00:28:13.076 A:middle
+like, the detection, engagement,
+and reflection pieces,
+
+00:28:13.076 --> 00:28:16.366 A:middle
+and which parts of Core Motion's
+APIs I would need to use,
+
+00:28:16.716 --> 00:28:18.986 A:middle
+I'm going to show you
+exactly how I coded it up,
+
+00:28:18.986 --> 00:28:21.406 A:middle
+at least for the data model
+part of my application.
+
+00:28:21.966 --> 00:28:25.226 A:middle
+I am about to open Xcode.
+
+00:28:26.006 --> 00:28:28.316 A:middle
+Before I walk to the
+computer over here,
+
+00:28:28.696 --> 00:28:31.636 A:middle
+be warned that there will be
+a lot of text on the screen.
+
+00:28:32.226 --> 00:28:33.716 A:middle
+Don't be intimidated.
+
+00:28:34.076 --> 00:28:37.036 A:middle
+The sample code is
+already available online.
+
+00:28:37.196 --> 00:28:39.386 A:middle
+Don't go open it now, please.
+
+00:28:39.746 --> 00:28:41.746 A:middle
+[Chuckles.]
+
+00:28:42.106 --> 00:28:43.256 A:middle
+&gt;&gt; GABRIELLE BADIE:
+Please just focus
+
+00:28:43.296 --> 00:28:45.626 A:middle
+on the segments I
+highlight for you.
+
+00:28:46.096 --> 00:28:48.276 A:middle
+As I said, there's a
+lot of text on there.
+
+00:28:48.486 --> 00:28:52.376 A:middle
+If you focus on those few things
+and maybe go back and look
+
+00:28:52.376 --> 00:28:54.406 A:middle
+at the sample code
+after the session,
+
+00:28:54.696 --> 00:28:57.576 A:middle
+you'll remember the things I
+focused on instead of trying
+
+00:28:57.576 --> 00:28:59.036 A:middle
+to do too many things at once.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:29:00.076 --> 00:29:01.656 A:middle
+As I said, a lot of text.
+
+00:29:01.656 --> 00:29:02.146 A:middle
+Be warned.
+
+00:29:02.976 --> 00:29:05.086 A:middle
+So as I said, a lot
+of text on the screen.
+
+00:29:05.366 --> 00:29:07.906 A:middle
+I just want you to
+remember the three parts
+
+00:29:09.446 --> 00:29:12.006 A:middle
+that would be detect,
+engage, and reflect.
+
+00:29:12.006 --> 00:29:13.576 A:middle
+As we keep those in
+mind I am going to go
+
+00:29:13.576 --> 00:29:14.956 A:middle
+through these things here
+
+00:29:14.956 --> 00:29:16.916 A:middle
+in this data model
+of my application.
+
+00:29:17.516 --> 00:29:20.796 A:middle
+This is just the
+data model piece.
+
+00:29:21.326 --> 00:29:23.026 A:middle
+The rest is for you
+to explore later.
+
+00:29:23.576 --> 00:29:26.186 A:middle
+So the first thing I'm going
+to want to do is detect.
+
+00:29:26.536 --> 00:29:29.516 A:middle
+That requires activity
+updates and pedometer updates.
+
+00:29:29.516 --> 00:29:31.236 A:middle
+Let's look at those
+activity updates.
+
+00:29:35.716 --> 00:29:37.506 A:middle
+Great. A lot of text, right?
+
+00:29:38.136 --> 00:29:40.936 A:middle
+So the first thing I'm
+going to want to do is check
+
+00:29:40.976 --> 00:29:43.776 A:middle
+if activity is available
+on this hardware.
+
+00:29:43.776 --> 00:29:47.526 A:middle
+As an Anil noted before
+activity isn't always available,
+
+00:29:47.526 --> 00:29:48.356 A:middle
+so we're going to want
+
+00:29:48.356 --> 00:29:51.516 A:middle
+to do those checks before
+we query for any updates.
+
+00:29:52.926 --> 00:29:55.136 A:middle
+The second thing we
+are going to want
+
+00:29:55.136 --> 00:29:58.486 A:middle
+to do is use the
+startActivitiesUpdateToQueue
+
+00:29:58.486 --> 00:29:58.876 A:middle
+API.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:00.036 --> 00:30:03.766 A:middle
+In my case I provide an just
+a simple NS operation queue,
+
+00:30:04.846 --> 00:30:09.016 A:middle
+and then I want to
+handle the data.
+
+00:30:09.196 --> 00:30:12.296 A:middle
+Now, activity updates
+come in pretty frequently.
+
+00:30:12.876 --> 00:30:15.426 A:middle
+It's up to you how you
+want to do the smoothing.
+
+00:30:15.936 --> 00:30:20.046 A:middle
+In my case when a user is going
+on a run and maybe they stop
+
+00:30:20.046 --> 00:30:22.916 A:middle
+at a stop light and they are
+semi-stationary , I don't want
+
+00:30:22.916 --> 00:30:25.046 A:middle
+to keep transitioning
+from the running playlist
+
+00:30:25.046 --> 00:30:26.576 A:middle
+to the really slow
+playlist and back
+
+00:30:26.576 --> 00:30:27.836 A:middle
+and forth and back and forth.
+
+00:30:27.836 --> 00:30:29.096 A:middle
+So I'm going to want to do
+
+00:30:29.096 --> 00:30:32.436 A:middle
+that application specific
+smoothing myself and I leave it
+
+00:30:32.436 --> 00:30:34.696 A:middle
+up to you to do what's
+best for your application.
+
+00:30:35.226 --> 00:30:39.446 A:middle
+Let's look at pedometer
+updates next.
+
+00:30:42.616 --> 00:30:45.066 A:middle
+Great. As you can see,
+
+00:30:45.066 --> 00:30:47.846 A:middle
+the PedometerUpdates
+API is very similar.
+
+00:30:48.426 --> 00:30:51.746 A:middle
+I'm also going to want to check
+if step counting is available.
+
+00:30:52.496 --> 00:30:55.036 A:middle
+Even though we assume that
+activity might be available,
+
+00:30:55.036 --> 00:30:57.016 A:middle
+that doesn't mean that step
+counting will be available
+
+00:30:57.016 --> 00:30:57.476 A:middle
+as well.
+
+00:30:58.946 --> 00:31:02.086 A:middle
+Assuming that that's true, I'm
+going to startPedometerUpdates.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:58.946 --> 00:31:02.086 A:middle
+Assuming that that's true, I'm
+going to startPedometerUpdates.
+
+00:31:02.736 --> 00:31:05.776 A:middle
+This API allows us
+to provide a date.
+
+00:31:06.366 --> 00:31:08.686 A:middle
+If you are in a more journaling
+context you might want
+
+00:31:08.686 --> 00:31:10.706 A:middle
+to start these updates at
+the beginning of your day.
+
+00:31:10.816 --> 00:31:12.546 A:middle
+In my case I want to look
+
+00:31:12.546 --> 00:31:14.686 A:middle
+at them during the
+lifecycle of my application.
+
+00:31:14.686 --> 00:31:19.746 A:middle
+So I start these
+updates from right now.
+
+00:31:19.986 --> 00:31:22.756 A:middle
+Now, there's a really important
+thing I want to point out here.
+
+00:31:24.326 --> 00:31:25.486 A:middle
+We may get an error.
+
+00:31:25.626 --> 00:31:33.206 A:middle
+One of the great things about
+Core Motion is that they do kind
+
+00:31:33.206 --> 00:31:34.656 A:middle
+of the: Hey, do you want
+
+00:31:34.656 --> 00:31:38.116 A:middle
+to let this app use
+motion data pop up for you.
+
+00:31:38.666 --> 00:31:42.236 A:middle
+But while a user may first
+open your application
+
+00:31:42.236 --> 00:31:44.876 A:middle
+and give you access to
+motion data, they can go back
+
+00:31:44.876 --> 00:31:49.156 A:middle
+at any time in the preferences
+and remove that authorization.
+
+00:31:49.746 --> 00:31:52.476 A:middle
+In that case then we would
+throw an authorization error
+
+00:31:52.636 --> 00:31:54.526 A:middle
+when you try to receive updates.
+
+00:31:54.526 --> 00:31:56.946 A:middle
+You are going to want
+to handle those smoothly
+
+00:31:57.146 --> 00:32:01.306 A:middle
+and prompt the user to go
+into the settings application
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:57.146 --> 00:32:01.306 A:middle
+and prompt the user to go
+into the settings application
+
+00:32:01.536 --> 00:32:04.746 A:middle
+and give your application
+authorization again.
+
+00:32:05.296 --> 00:32:10.166 A:middle
+I won't go into it here, but I
+pop up a simple UI alert view
+
+00:32:10.166 --> 00:32:11.806 A:middle
+to prompt to go into settings.
+
+00:32:12.366 --> 00:32:14.706 A:middle
+So that is the detection piece.
+
+00:32:15.216 --> 00:32:18.256 A:middle
+The next thing I'm going to want
+to do is the engagement piece.
+
+00:32:18.996 --> 00:32:23.486 A:middle
+In my case when I'm looking
+at activities updates,
+
+00:32:23.866 --> 00:32:27.106 A:middle
+I also want to start and
+stop altimeter updates,
+
+00:32:27.976 --> 00:32:30.896 A:middle
+so I'm going to do that here.
+
+00:32:31.106 --> 00:32:34.456 A:middle
+I smooth out to see when the
+user is running or is walking.
+
+00:32:34.496 --> 00:32:36.886 A:middle
+In that case I'm interested
+in altitude updates.
+
+00:32:37.316 --> 00:32:43.166 A:middle
+Great. Now you're starting
+to see a theme here.
+
+00:32:43.976 --> 00:32:45.356 A:middle
+First thing I'm going to do,
+
+00:32:45.356 --> 00:32:47.436 A:middle
+check if altitude
+updates are available.
+
+00:32:48.566 --> 00:32:49.846 A:middle
+Assuming that's true,
+
+00:32:50.086 --> 00:32:52.946 A:middle
+I startRelativeAltitude
+UpdatesToQueue.
+
+00:32:54.686 --> 00:32:56.306 A:middle
+I provide a queue.
+
+00:32:56.886 --> 00:32:58.856 A:middle
+And then I handle
+the data accordingly.
+
+00:32:59.546 --> 00:33:01.646 A:middle
+I do check again if
+there is an error.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:59.546 --> 00:33:01.646 A:middle
+I do check again if
+there is an error.
+
+00:33:01.996 --> 00:33:04.246 A:middle
+And if not, I'm going to
+want to handle that data
+
+00:33:04.246 --> 00:33:08.456 A:middle
+as best serves my application,
+and I leave that to you
+
+00:33:09.236 --> 00:33:10.876 A:middle
+to do as best serves yours.
+
+00:33:10.876 --> 00:33:16.506 A:middle
+The next thing I'm going to want
+to do because I'm not interested
+
+00:33:16.506 --> 00:33:20.846 A:middle
+in altitude updates all the time
+is make sure that I stop them
+
+00:33:21.056 --> 00:33:22.626 A:middle
+when I'm not running or walking.
+
+00:33:23.196 --> 00:33:25.876 A:middle
+Hmm, typo!
+
+00:33:26.046 --> 00:33:33.636 A:middle
+Great. And here, the API
+is pretty straightforward.
+
+00:33:33.636 --> 00:33:35.086 A:middle
+I check for availability.
+
+00:33:35.276 --> 00:33:38.476 A:middle
+And I
+stopRelativeAltitudeUpdates.
+
+00:33:40.766 --> 00:33:42.686 A:middle
+Now, I know that
+when I said we want
+
+00:33:42.686 --> 00:33:44.586 A:middle
+to engage the user
+we are going to look
+
+00:33:44.586 --> 00:33:46.206 A:middle
+at pedometer updates as well.
+
+00:33:46.856 --> 00:33:49.866 A:middle
+As you may recall I was already
+looking at pedometer updates
+
+00:33:49.866 --> 00:33:53.036 A:middle
+for the lifecycle of my
+application, and so I don't need
+
+00:33:53.036 --> 00:33:54.506 A:middle
+to start and stop those again.
+
+00:33:54.786 --> 00:33:57.876 A:middle
+I can use those in fusion
+with the altitude updates
+
+00:33:57.976 --> 00:34:01.126 A:middle
+to give me what I want
+for my application,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:57.976 --> 00:34:01.126 A:middle
+to give me what I want
+for my application,
+
+00:34:01.196 --> 00:34:03.046 A:middle
+which is to motivate
+the user through music.
+
+00:34:03.476 --> 00:34:06.356 A:middle
+Now, we have the
+reflection piece.
+
+00:34:11.856 --> 00:34:15.826 A:middle
+So here I'm going to want
+to look at activity updates
+
+00:34:15.826 --> 00:34:18.856 A:middle
+so I can provide these
+in interesting segments
+
+00:34:18.856 --> 00:34:19.886 A:middle
+as I showed you earlier.
+
+00:34:20.416 --> 00:34:29.866 A:middle
+Great. So the first
+thing I want you to look
+
+00:34:29.866 --> 00:34:33.176 A:middle
+at is we can query activity
+updates starting from date.
+
+00:34:33.496 --> 00:34:36.206 A:middle
+In my case I wanted to look
+at it during the last week
+
+00:34:36.326 --> 00:34:38.116 A:middle
+so that even if we
+are not looking
+
+00:34:38.275 --> 00:34:41.386 A:middle
+at using the application during
+that week, we can get all
+
+00:34:41.386 --> 00:34:46.585 A:middle
+of that data and
+put it together.
+
+00:34:46.706 --> 00:34:49.596 A:middle
+In my case I handle
+that data and I put it
+
+00:34:49.596 --> 00:34:51.126 A:middle
+into interesting
+segments for me.
+
+00:34:51.275 --> 00:34:53.616 A:middle
+I can't wait to see
+what you guys want
+
+00:34:53.616 --> 00:34:54.835 A:middle
+to do with it yourselves.
+
+00:34:55.505 --> 00:34:57.526 A:middle
+Again, I know, broken
+record, right?
+
+00:34:57.526 --> 00:35:00.036 A:middle
+I want to handle the
+error accordingly.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:57.526 --> 00:35:00.036 A:middle
+I want to handle the
+error accordingly.
+
+00:35:01.326 --> 00:35:04.516 A:middle
+Now, in my case also
+I wanted to give all
+
+00:35:04.516 --> 00:35:07.986 A:middle
+that extra historical pedometer
+information once I found
+
+00:35:07.986 --> 00:35:09.936 A:middle
+interesting walking segments.
+
+00:35:09.976 --> 00:35:15.416 A:middle
+So what I'm going to do
+is down here I am going
+
+00:35:15.416 --> 00:35:20.616 A:middle
+to request pedometer updates
+for a given activity segment.
+
+00:35:21.116 --> 00:35:29.576 A:middle
+The first thing I do is
+queryPedometerDataFromDate.
+
+00:35:29.576 --> 00:35:32.186 A:middle
+And I provide a start
+date and an end date.
+
+00:35:32.186 --> 00:35:35.726 A:middle
+In my case I've already
+put the data into segments.
+
+00:35:35.726 --> 00:35:39.146 A:middle
+So I look at the start
+and end of those segments.
+
+00:35:39.736 --> 00:35:44.506 A:middle
+The second thing I want to
+point out here is that if I want
+
+00:35:44.506 --> 00:35:48.086 A:middle
+to make any UI changes I'm
+going to want to dispatch those
+
+00:35:48.086 --> 00:35:51.116 A:middle
+on the main queue, and
+you'll start to find issues
+
+00:35:51.116 --> 00:35:53.086 A:middle
+if you don't do that in
+your own applications.
+
+00:35:53.726 --> 00:35:56.326 A:middle
+So that's it.
+
+00:35:57.266 --> 00:35:59.156 A:middle
+That's all I really
+have to show you
+
+00:35:59.366 --> 00:36:01.956 A:middle
+with adding motion
+to your application.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:35:59.366 --> 00:36:01.956 A:middle
+with adding motion
+to your application.
+
+00:36:02.126 --> 00:36:04.356 A:middle
+And it took me like ten
+minutes or something
+
+00:36:04.356 --> 00:36:07.646 A:middle
+so it is actually really easy
+for you to go back and for you
+
+00:36:07.646 --> 00:36:09.176 A:middle
+to do in your own applications.
+
+00:36:10.156 --> 00:36:12.966 A:middle
+Now, I really want to show you
+this app but I'm not going to go
+
+00:36:12.966 --> 00:36:15.096 A:middle
+for a run or drive
+on stage here.
+
+00:36:15.516 --> 00:36:17.446 A:middle
+So I will show you
+what I have been up to
+
+00:36:17.446 --> 00:36:19.506 A:middle
+in the last couple days and how
+
+00:36:19.506 --> 00:36:21.596 A:middle
+that reflection piece
+organizing the data
+
+00:36:21.596 --> 00:36:22.776 A:middle
+into interesting segments.
+
+00:36:28.116 --> 00:36:29.816 A:middle
+Hopefully this will
+be an iPhone.
+
+00:36:30.336 --> 00:36:36.956 A:middle
+Great! So here is my
+music motion application.
+
+00:36:37.746 --> 00:36:39.736 A:middle
+As you can see, I'm
+not doing very much.
+
+00:36:39.736 --> 00:36:41.886 A:middle
+So I'm sitting here
+in low intensity mode.
+
+00:36:41.886 --> 00:36:45.686 A:middle
+Now, let me look at
+my historical updates.
+
+00:36:45.996 --> 00:36:49.426 A:middle
+I'm actually going to
+start at yesterday morning
+
+00:36:49.866 --> 00:36:51.266 A:middle
+and I'll take you through today,
+
+00:36:51.266 --> 00:36:53.566 A:middle
+but all I've really done
+is walk around Moscone.
+
+00:36:55.026 --> 00:36:58.256 A:middle
+Yesterday I woke up and I
+decided to go for a quick cycle.
+
+00:36:58.756 --> 00:37:02.716 A:middle
+What I've done, I've -- the app
+has already figured that out
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:58.756 --> 00:37:02.716 A:middle
+What I've done, I've -- the app
+has already figured that out
+
+00:37:02.716 --> 00:37:04.796 A:middle
+and put that into an
+interesting segment for me.
+
+00:37:05.936 --> 00:37:10.626 A:middle
+Then I walked to my bus,
+realized I was a little late
+
+00:37:10.626 --> 00:37:14.296 A:middle
+and started running, and then
+finally made it on the bus.
+
+00:37:15.156 --> 00:37:19.516 A:middle
+As you can see, what I've done
+here is the walking segments
+
+00:37:19.516 --> 00:37:22.716 A:middle
+have that mile information,
+the pace information,
+
+00:37:23.066 --> 00:37:26.016 A:middle
+floors ascended and
+descended, and puts those
+
+00:37:26.016 --> 00:37:27.366 A:middle
+into interesting chunks for me.
+
+00:37:28.206 --> 00:37:30.906 A:middle
+Now if I were actually
+developing a music application
+
+00:37:31.266 --> 00:37:34.616 A:middle
+in one of these cells I
+might put attach the playlist
+
+00:37:34.616 --> 00:37:36.456 A:middle
+that I was listening
+to for that segment.
+
+00:37:36.906 --> 00:37:41.106 A:middle
+One thing I want to point
+out as I scroll to today
+
+00:37:41.106 --> 00:37:43.556 A:middle
+when I have been
+walking around Moscone,
+
+00:37:43.966 --> 00:37:46.706 A:middle
+I'm not getting any floors
+ascended or descended.
+
+00:37:47.146 --> 00:37:48.306 A:middle
+That's because I've been lazy
+
+00:37:48.306 --> 00:37:49.856 A:middle
+and taking the escalator
+everywhere,
+
+00:37:50.896 --> 00:37:53.056 A:middle
+and so I just wanted you
+guys to notice that as well.
+
+00:37:54.856 --> 00:37:57.226 A:middle
+So that's my basic
+music application.
+
+00:37:57.946 --> 00:38:02.966 A:middle
+I'm just going to wrap this up.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:37:57.946 --> 00:38:02.966 A:middle
+I'm just going to wrap this up.
+
+00:38:03.226 --> 00:38:05.866 A:middle
+So I really hope you
+guys enjoyed the demo.
+
+00:38:05.866 --> 00:38:08.346 A:middle
+I tried to focus on
+just a few things
+
+00:38:08.386 --> 00:38:11.336 A:middle
+so that you can remember
+them for your application.
+
+00:38:11.976 --> 00:38:14.836 A:middle
+Remember, there's the
+detection piece, using motion
+
+00:38:14.836 --> 00:38:17.946 A:middle
+to detect what a user is
+doing instead of a user having
+
+00:38:17.946 --> 00:38:19.376 A:middle
+to tell you what they are doing.
+
+00:38:20.056 --> 00:38:23.626 A:middle
+Engaging with them with the
+push updates from activity,
+
+00:38:23.626 --> 00:38:28.686 A:middle
+pedometer, and altimeter,
+and as well reflecting back
+
+00:38:28.686 --> 00:38:33.206 A:middle
+and really using those
+historical queries wisely.
+
+00:38:33.856 --> 00:38:37.116 A:middle
+If you have any more
+questions, feel free to look
+
+00:38:37.116 --> 00:38:38.196 A:middle
+at the Developer Forums.
+
+00:38:38.196 --> 00:38:40.676 A:middle
+Please do check out
+music motion.
+
+00:38:40.956 --> 00:38:42.736 A:middle
+It should be on the
+developer portal.
+
+00:38:43.156 --> 00:38:46.126 A:middle
+And for any general inquiries,
+contact our evangelist.
+
+00:38:47.376 --> 00:38:49.876 A:middle
+There are also some
+related sessions
+
+00:38:49.956 --> 00:38:51.496 A:middle
+that are really worth
+checking out.
+
+00:38:52.296 --> 00:38:54.866 A:middle
+If you are here at WWDC, you may
+
+00:38:54.866 --> 00:38:57.026 A:middle
+or may not have seen the
+HealthKit presentation
+
+00:38:57.026 --> 00:38:58.716 A:middle
+or the Cocoa Touch presentation.
+
+00:38:59.366 --> 00:39:01.546 A:middle
+If you missed them or
+are sitting at home,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:38:59.366 --> 00:39:01.546 A:middle
+If you missed them or
+are sitting at home,
+
+00:39:01.546 --> 00:39:03.186 A:middle
+please go check those
+out online.
+
+00:39:03.616 --> 00:39:05.116 A:middle
+I also encourage you to check
+
+00:39:05.116 --> 00:39:07.436 A:middle
+out the Core Location
+presentation as well.
+
+00:39:08.656 --> 00:39:12.436 A:middle
+If you really combine
+motion data with health data
+
+00:39:12.646 --> 00:39:16.606 A:middle
+and location data, you can
+create some incredible contexts
+
+00:39:16.606 --> 00:39:18.556 A:middle
+to really enhance
+your applications.
+
+00:39:19.016 --> 00:39:20.936 A:middle
+I really can't wait to
+see what you guys put
+
+00:39:20.936 --> 00:39:21.846 A:middle
+out on the App Store.
+
+00:39:23.516 --> 00:39:30.856 A:middle
+[Applause.]
+
+00:39:31.356 --> 00:39:31.696 A:middle
+&gt;&gt; GABRIELLE BADIE: Thanks.
+
+00:39:31.736 --> 00:39:32.706 A:middle
+Thank you very much.
+
+00:39:33.016 --> 00:39:35.000 A:middle
+[Applause.]
+

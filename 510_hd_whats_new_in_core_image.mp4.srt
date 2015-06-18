@@ -1,0 +1,3125 @@
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:24.031 --> 00:00:26.031 A:middle
+[ Applause ]
+
+00:00:26.046 --> 00:00:26.586 A:middle
+&gt;&gt; DAVID HAYWARD: Good
+morning, everyone,
+
+00:00:26.586 --> 00:00:29.416 A:middle
+my name is David Hayward, and
+it's my privilege today to talk
+
+00:00:29.416 --> 00:00:32.415 A:middle
+about what's new in
+Core Image on iOS 9
+
+00:00:32.576 --> 00:00:34.496 A:middle
+and Mac OS X El Capitan.
+
+00:00:35.136 --> 00:00:38.166 A:middle
+So to start off, we will be
+covering several things today.
+
+00:00:38.276 --> 00:00:40.576 A:middle
+First off I will give a brief
+introduction to Core Image
+
+00:00:40.676 --> 00:00:42.736 A:middle
+for those new to the subject.
+
+00:00:42.866 --> 00:00:44.356 A:middle
+I recommend that you go back
+
+00:00:44.356 --> 00:00:46.236 A:middle
+and see our presentations
+from last year.
+
+00:00:46.316 --> 00:00:48.196 A:middle
+In particular, there was
+a great discussion on how
+
+00:00:48.196 --> 00:00:49.926 A:middle
+to write kernels in Core Image.
+
+00:00:50.686 --> 00:00:52.936 A:middle
+Next, we'll be talking
+about what's new
+
+00:00:52.936 --> 00:00:53.876 A:middle
+in Core Image this year.
+
+00:00:53.926 --> 00:00:55.456 A:middle
+We have a lot of stuff
+to talk about here.
+
+00:00:55.876 --> 00:00:58.736 A:middle
+And the other third of our
+discussion today will be talking
+
+00:00:58.736 --> 00:01:00.786 A:middle
+about using Core
+Image and bridging it
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:00:58.736 --> 00:01:00.786 A:middle
+about using Core
+Image and bridging it
+
+00:01:00.786 --> 00:01:04.855 A:middle
+with other graphics
+frameworks on our platforms.
+
+00:01:05.476 --> 00:01:08.956 A:middle
+First, an introduction
+to Core Image.
+
+00:01:09.456 --> 00:01:13.306 A:middle
+In concept, the idea of Core
+Image is you can apply filters
+
+00:01:13.306 --> 00:01:13.906 A:middle
+to images.
+
+00:01:14.436 --> 00:01:17.086 A:middle
+In a simple example, you can
+start with an input image
+
+00:01:17.086 --> 00:01:19.996 A:middle
+and apply a filter to do a
+color effect such as sepia tone,
+
+00:01:20.726 --> 00:01:21.756 A:middle
+but if you don't like the color
+
+00:01:21.756 --> 00:01:24.666 A:middle
+of sepia tone you can
+apply another color effect
+
+00:01:24.766 --> 00:01:27.256 A:middle
+to change the hue to make it
+more of a blue-toned image.
+
+00:01:27.816 --> 00:01:29.996 A:middle
+You can also use Core
+Image to apply effects
+
+00:01:29.996 --> 00:01:32.166 A:middle
+such as geometry-distorting
+events.
+
+00:01:32.436 --> 00:01:36.416 A:middle
+In this example, we are just
+using a simple transform to zoom
+
+00:01:36.416 --> 00:01:37.576 A:middle
+in on a portion of the image.
+
+00:01:38.466 --> 00:01:40.716 A:middle
+You can think of there
+being an intermediate image
+
+00:01:40.806 --> 00:01:41.796 A:middle
+between every filter.
+
+00:01:42.416 --> 00:01:45.396 A:middle
+However, the way we
+implement filters,
+
+00:01:45.396 --> 00:01:47.056 A:middle
+they are actually very
+lightweight objects
+
+00:01:47.056 --> 00:01:48.876 A:middle
+that take very little
+time to create,
+
+00:01:49.336 --> 00:01:51.366 A:middle
+and there are not necessarily
+intermediate buffers
+
+00:01:51.366 --> 00:01:52.706 A:middle
+in between them.
+
+00:01:52.786 --> 00:01:54.956 A:middle
+Another important
+concept is that associated
+
+00:01:54.956 --> 00:01:57.216 A:middle
+with each filter is
+one or more kernels.
+
+00:01:57.636 --> 00:02:01.306 A:middle
+CI kernels are small subroutines
+that apply the effect
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:01:57.636 --> 00:02:01.306 A:middle
+CI kernels are small subroutines
+that apply the effect
+
+00:02:01.306 --> 00:02:03.106 A:middle
+that that kernel is
+trying to achieve.
+
+00:02:04.586 --> 00:02:05.576 A:middle
+One of the other key features
+
+00:02:05.576 --> 00:02:12.116 A:middle
+of Core Image is we concatenate
+these kernels into a program
+
+00:02:12.456 --> 00:02:15.576 A:middle
+as much as possible to minimize
+the use of intermediate buffers
+
+00:02:15.576 --> 00:02:18.706 A:middle
+and improve performance.
+
+00:02:19.786 --> 00:02:22.696 A:middle
+Another key feature in Core
+Image is what we call region
+
+00:02:22.696 --> 00:02:23.586 A:middle
+of interest support.
+
+00:02:24.146 --> 00:02:26.746 A:middle
+The idea is that if you are only
+rendering a portion of an image,
+
+00:02:27.376 --> 00:02:29.286 A:middle
+either because you are
+zoomed in on a large image
+
+00:02:29.286 --> 00:02:31.466 A:middle
+or because it's being
+rendered out in tiles,
+
+00:02:32.556 --> 00:02:35.666 A:middle
+we can ask each filter
+that's been rendered how much
+
+00:02:35.666 --> 00:02:38.896 A:middle
+of the input image it needs, and
+from that we can calculate back
+
+00:02:38.896 --> 00:02:41.316 A:middle
+to the source image the
+exact region that's needed
+
+00:02:41.546 --> 00:02:45.136 A:middle
+of that image in order to
+produce the desired output.
+
+00:02:45.286 --> 00:02:48.876 A:middle
+This is another great feature
+of Core Image that allows us
+
+00:02:48.876 --> 00:02:50.336 A:middle
+to get good performance
+especially
+
+00:02:50.336 --> 00:02:51.686 A:middle
+when working on large images.
+
+00:02:53.136 --> 00:02:56.046 A:middle
+There are four main
+classes you need to be aware
+
+00:02:56.046 --> 00:02:57.326 A:middle
+of when you are using
+Core Image.
+
+00:02:57.716 --> 00:02:59.066 A:middle
+The first is the CI kernel.
+
+00:02:59.066 --> 00:03:00.646 A:middle
+I mentioned this earlier.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:02:59.066 --> 00:03:00.646 A:middle
+I mentioned this earlier.
+
+00:03:01.046 --> 00:03:03.366 A:middle
+This represents the
+program or routine written
+
+00:03:03.366 --> 00:03:05.486 A:middle
+in Core Image's kernel language.
+
+00:03:05.996 --> 00:03:09.456 A:middle
+The second key class is
+the filter, the CI filter.
+
+00:03:09.816 --> 00:03:13.326 A:middle
+This is a mutable object, and
+it can have multiple inputs,
+
+00:03:13.366 --> 00:03:16.596 A:middle
+and these input parameters
+can be either numbers
+
+00:03:16.596 --> 00:03:18.046 A:middle
+or vectors or other images.
+
+00:03:19.416 --> 00:03:23.106 A:middle
+The filter uses one or
+more kernels in order
+
+00:03:23.106 --> 00:03:26.156 A:middle
+to create an output image
+based on the current state
+
+00:03:26.156 --> 00:03:27.236 A:middle
+of the input parameters.
+
+00:03:27.916 --> 00:03:30.346 A:middle
+A CI image is an
+immutable object
+
+00:03:30.746 --> 00:03:33.696 A:middle
+that represents the recipe
+to produce that image based
+
+00:03:33.696 --> 00:03:35.946 A:middle
+on the previous kernels
+that have been applied.
+
+00:03:37.446 --> 00:03:40.126 A:middle
+And lastly, there is
+the CIContext object.
+
+00:03:40.356 --> 00:03:41.826 A:middle
+And this is a more
+heavyweight object.
+
+00:03:41.826 --> 00:03:44.436 A:middle
+This is the object through
+which Core Image will render.
+
+00:03:44.936 --> 00:03:48.376 A:middle
+You want to avoid creating these
+too often in your application,
+
+00:03:48.416 --> 00:03:50.356 A:middle
+so if you are doing
+fast animation you want
+
+00:03:50.356 --> 00:03:51.226 A:middle
+to do this just once.
+
+00:03:51.836 --> 00:03:52.436 A:middle
+And the great thing
+
+00:03:52.436 --> 00:03:54.546 A:middle
+about CIContext is
+they can be implemented
+
+00:03:54.546 --> 00:03:57.736 A:middle
+on various different back-end
+renderers in our system.
+
+00:03:58.326 --> 00:04:02.786 A:middle
+So the next thing I would
+like to talk about now
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:03:58.326 --> 00:04:02.786 A:middle
+So the next thing I would
+like to talk about now
+
+00:04:02.786 --> 00:04:04.516 A:middle
+that the introduction
+is behind us is to talk
+
+00:04:04.516 --> 00:04:06.456 A:middle
+about what's new this
+year in Core Image.
+
+00:04:07.716 --> 00:04:09.536 A:middle
+We have several things
+to talk about today.
+
+00:04:10.136 --> 00:04:13.786 A:middle
+We will be talking about Metal,
+talking about new filters,
+
+00:04:14.276 --> 00:04:18.375 A:middle
+new detector, color management
+support, and some improvements
+
+00:04:18.375 --> 00:04:20.836 A:middle
+to the kernel classes
+and languages.
+
+00:04:21.815 --> 00:04:24.576 A:middle
+And most important thing I want
+to talk about is that we now
+
+00:04:24.936 --> 00:04:28.096 A:middle
+in Core Image have a unified
+implementation across both
+
+00:04:28.096 --> 00:04:32.136 A:middle
+of our platforms, so for the
+most part unless we mention
+
+00:04:32.136 --> 00:04:34.786 A:middle
+otherwise the behavior of Core
+Image is completely consistent
+
+00:04:35.036 --> 00:04:37.296 A:middle
+and equivalent between
+iOS and OS X.
+
+00:04:37.296 --> 00:04:41.036 A:middle
+And this is a great feature for
+developers to be able to rely
+
+00:04:41.036 --> 00:04:42.166 A:middle
+on this consistent behavior.
+
+00:04:43.036 --> 00:04:46.126 A:middle
+This can be little
+things such as the fact
+
+00:04:46.126 --> 00:04:47.876 A:middle
+that when you include
+the Core Image header,
+
+00:04:48.166 --> 00:04:50.616 A:middle
+you can include Core
+Image, Core Image.H,
+
+00:04:50.816 --> 00:04:52.276 A:middle
+regardless what platform
+you are.
+
+00:04:52.336 --> 00:04:53.326 A:middle
+So it makes it a lot easier
+
+00:04:53.326 --> 00:04:56.266 A:middle
+if you're doing cross-platform
+code.
+
+00:04:56.626 --> 00:05:03.976 A:middle
+We have now got API parity
+between the two platforms.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:04:56.626 --> 00:05:03.976 A:middle
+We have now got API parity
+between the two platforms.
+
+00:05:03.976 --> 00:05:07.316 A:middle
+So one of the major
+things we want to talk
+
+00:05:07.316 --> 00:05:09.686 A:middle
+about today is Core
+Image support for Metal.
+
+00:05:09.746 --> 00:05:12.526 A:middle
+And we will be talking this
+in much more detail later
+
+00:05:12.526 --> 00:05:13.506 A:middle
+on in the presentation,
+
+00:05:13.836 --> 00:05:15.346 A:middle
+but I want to give you
+the highlights right now.
+
+00:05:15.886 --> 00:05:17.446 A:middle
+The key things to think of is
+
+00:05:17.446 --> 00:05:21.256 A:middle
+that Metal Textures can now be
+given as an input to Core Image,
+
+00:05:21.806 --> 00:05:24.126 A:middle
+and also Metal Textures can
+be the output of Core Image.
+
+00:05:25.146 --> 00:05:28.146 A:middle
+And internally, Core
+Image context will be able
+
+00:05:28.146 --> 00:05:30.426 A:middle
+to use Metal as their
+internal renderer.
+
+00:05:31.226 --> 00:05:32.986 A:middle
+What that means is if
+you have written a kernel
+
+00:05:32.986 --> 00:05:35.966 A:middle
+in CI's kernel language, it
+will be automatically translated
+
+00:05:36.406 --> 00:05:38.336 A:middle
+on the fly to Metal language.
+
+00:05:40.256 --> 00:05:42.696 A:middle
+Another thing to keep in mind
+is some of our built-in filters,
+
+00:05:42.696 --> 00:05:46.706 A:middle
+notably Gaussian and convolution
+filters, are now built on top
+
+00:05:46.706 --> 00:05:48.126 A:middle
+of Metal performance
+shaders in order
+
+00:05:48.126 --> 00:05:50.496 A:middle
+to get the best possible
+performance on the diversity
+
+00:05:50.496 --> 00:05:51.726 A:middle
+of platforms that are supported.
+
+00:05:53.636 --> 00:05:56.606 A:middle
+A little bit about filters.
+
+00:05:57.396 --> 00:05:58.796 A:middle
+Again, as I mentioned before,
+
+00:05:58.796 --> 00:06:01.016 A:middle
+we now have a unified
+implementation of Core Image.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:05:58.796 --> 00:06:01.016 A:middle
+we now have a unified
+implementation of Core Image.
+
+00:06:01.016 --> 00:06:04.366 A:middle
+This means we have 200 buil-
+in filters on both platforms.
+
+00:06:04.906 --> 00:06:07.876 A:middle
+That means we have
+brought a lot of filters
+
+00:06:08.096 --> 00:06:10.736 A:middle
+to the iOS implementation
+of Core Image.
+
+00:06:10.886 --> 00:06:12.736 A:middle
+Over 40 have been
+added in this release.
+
+00:06:13.126 --> 00:06:14.846 A:middle
+These fall into different
+categories.
+
+00:06:14.846 --> 00:06:18.406 A:middle
+There are fun filters like
+comic effect, and CMYK Halftone,
+
+00:06:18.406 --> 00:06:20.346 A:middle
+and Droste, and Page Curl.
+
+00:06:20.346 --> 00:06:22.846 A:middle
+There are also some convolutions
+filters that are useful,
+
+00:06:22.846 --> 00:06:27.336 A:middle
+such as median filters, edge
+detection, and noise reduction.
+
+00:06:27.916 --> 00:06:31.866 A:middle
+Also we have reduction
+filters, which are useful
+
+00:06:31.866 --> 00:06:34.586 A:middle
+for image analysis
+such as Area Maximum
+
+00:06:34.586 --> 00:06:36.106 A:middle
+or Column Averaging an image.
+
+00:06:37.476 --> 00:06:40.056 A:middle
+In order to give you a
+little taste of this,
+
+00:06:40.056 --> 00:06:42.576 A:middle
+I want to show you the
+latest version of one
+
+00:06:42.576 --> 00:06:44.916 A:middle
+of our sample applications
+called Core Image FunHouse,
+
+00:06:45.596 --> 00:06:48.336 A:middle
+and we try to update
+this every year.
+
+00:06:49.266 --> 00:06:52.336 A:middle
+One of the things we have now
+is now that we have 200 filters,
+
+00:06:52.926 --> 00:06:55.936 A:middle
+when you bring up the Filters
+pop-up in this application,
+
+00:06:55.936 --> 00:06:58.156 A:middle
+we have now broken them
+up into categories.
+
+00:06:58.556 --> 00:07:00.246 A:middle
+You can also see
+highlighted in red all
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:06:58.556 --> 00:07:00.246 A:middle
+You can also see
+highlighted in red all
+
+00:07:00.246 --> 00:07:03.306 A:middle
+of the new filters we have
+added, and there is now an API
+
+00:07:03.306 --> 00:07:05.966 A:middle
+for you to determine
+what release a filter was
+
+00:07:05.966 --> 00:07:06.486 A:middle
+included in.
+
+00:07:07.816 --> 00:07:11.396 A:middle
+And this is, of course, showing
+the CMYK Halftone effect getting
+
+00:07:11.396 --> 00:07:14.626 A:middle
+good performance on an
+iPad at Retina resolution.
+
+00:07:14.936 --> 00:07:22.366 A:middle
+There are two new filters
+we have added to Core Image
+
+00:07:22.366 --> 00:07:24.236 A:middle
+on both platforms
+by popular request.
+
+00:07:24.586 --> 00:07:27.756 A:middle
+These are filters for
+generating bar codes.
+
+00:07:27.876 --> 00:07:31.226 A:middle
+So the input in this case
+to a filter is not a number
+
+00:07:31.226 --> 00:07:33.246 A:middle
+or another image,
+but a text string.
+
+00:07:34.006 --> 00:07:38.296 A:middle
+And we have added these two
+for generating PDF417 bar codes
+
+00:07:38.336 --> 00:07:42.176 A:middle
+and code 128 bar codes.
+
+00:07:43.606 --> 00:07:46.526 A:middle
+Another feature of Core
+Image is what we call our CI
+
+00:07:46.606 --> 00:07:47.616 A:middle
+detector classes.
+
+00:07:47.876 --> 00:07:49.906 A:middle
+These are our classes we
+have released in the past
+
+00:07:49.906 --> 00:07:52.926 A:middle
+for doing things like
+detecting faces in an image,
+
+00:07:53.416 --> 00:07:55.346 A:middle
+detecting QR codes in an image,
+
+00:07:55.796 --> 00:07:57.386 A:middle
+or detecting rectangles
+in an image.
+
+00:07:57.656 --> 00:07:58.846 A:middle
+And we have a new one this year,
+
+00:07:58.846 --> 00:08:01.596 A:middle
+which is for detecting
+areas of text in an image.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:07:58.846 --> 00:08:01.596 A:middle
+which is for detecting
+areas of text in an image.
+
+00:08:02.036 --> 00:08:05.006 A:middle
+The idea in the filter is to
+locate areas that are likely
+
+00:08:05.006 --> 00:08:06.876 A:middle
+to contain upright text.
+
+00:08:07.636 --> 00:08:10.666 A:middle
+So let me give a brief demo
+of this running on an iPad.
+
+00:08:11.006 --> 00:08:13.756 A:middle
+We have hooked this up to the
+Core Image FunHouse application.
+
+00:08:14.186 --> 00:08:17.786 A:middle
+So we have an old box that was
+on my shelf, and if we turn
+
+00:08:17.786 --> 00:08:20.756 A:middle
+on the text detector it's
+locating the upright text,
+
+00:08:21.236 --> 00:08:24.236 A:middle
+both the runs of text and
+the individual characters.
+
+00:08:24.776 --> 00:08:27.786 A:middle
+And as we zoom in and
+rotate the camera,
+
+00:08:28.146 --> 00:08:30.786 A:middle
+the upright text will
+detect some of the text
+
+00:08:30.786 --> 00:08:33.395 A:middle
+that was at an angle as well.
+
+00:08:34.426 --> 00:08:36.236 A:middle
+So that's our new text
+detector so I'm excited
+
+00:08:36.236 --> 00:08:39.385 A:middle
+to see what developers
+come up with to use that.
+
+00:08:42.196 --> 00:08:43.736 A:middle
+Another thing we
+have brought now
+
+00:08:43.736 --> 00:08:46.216 A:middle
+with our unified implementation
+of Core Image is now
+
+00:08:46.216 --> 00:08:48.436 A:middle
+on iOS we have the
+great functionality
+
+00:08:48.436 --> 00:08:49.876 A:middle
+of automatic color management.
+
+00:08:50.146 --> 00:08:53.256 A:middle
+This has been available on
+OS X ever since the beginning
+
+00:08:53.256 --> 00:08:56.476 A:middle
+of Core Image, but now we
+have this on iOS as well.
+
+00:08:57.096 --> 00:09:01.266 A:middle
+What this means is that Core
+Image now supports ICC-based
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:08:57.096 --> 00:09:01.266 A:middle
+What this means is that Core
+Image now supports ICC-based
+
+00:09:02.396 --> 00:09:04.936 A:middle
+CGColorSpaceRefs fully.
+
+00:09:05.846 --> 00:09:09.236 A:middle
+And these can be used on input
+images or output images or even
+
+00:09:09.236 --> 00:09:10.656 A:middle
+as a working space
+in Core Image.
+
+00:09:11.856 --> 00:09:14.056 A:middle
+This is through great
+work that's been done
+
+00:09:14.356 --> 00:09:19.466 A:middle
+to support ColorSync
+on iOS as well.
+
+00:09:21.066 --> 00:09:22.176 A:middle
+What this means to users is
+
+00:09:22.176 --> 00:09:25.406 A:middle
+that automatically you will
+get correct rendering of TIFFs
+
+00:09:25.406 --> 00:09:27.756 A:middle
+or JPGs that are tagged
+with color spaces.
+
+00:09:28.426 --> 00:09:29.826 A:middle
+Many images are tagged with sRGB
+
+00:09:29.826 --> 00:09:34.086 A:middle
+and those have been rendered
+correctly on previous versions
+
+00:09:34.126 --> 00:09:38.976 A:middle
+of iOS, but now if you have an
+image tagged with a color space
+
+00:09:39.156 --> 00:09:41.126 A:middle
+that is not sRGB, you
+get the correct behavior.
+
+00:09:41.526 --> 00:09:43.766 A:middle
+Here is an example
+of an image tagged
+
+00:09:43.766 --> 00:09:45.076 A:middle
+with the Pro Photo color space.
+
+00:09:45.076 --> 00:09:48.586 A:middle
+The red bench in the
+background is desaturated,
+
+00:09:48.586 --> 00:09:50.186 A:middle
+and skin tones look poor.
+
+00:09:50.686 --> 00:09:56.296 A:middle
+When you correctly see the
+embedded ICC profile on this,
+
+00:09:56.456 --> 00:09:57.686 A:middle
+the image is rendered correctly.
+
+00:09:58.856 --> 00:10:03.936 A:middle
+And this you get
+automatically in Core Image.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:09:58.856 --> 00:10:03.936 A:middle
+And this you get
+automatically in Core Image.
+
+00:10:04.086 --> 00:10:07.766 A:middle
+We also have some new
+support for CI kernel classes
+
+00:10:07.766 --> 00:10:09.406 A:middle
+that is now available on OS X
+
+00:10:09.406 --> 00:10:11.146 A:middle
+like it has been
+on iOS in the past.
+
+00:10:11.196 --> 00:10:13.446 A:middle
+This is another benefit of
+our unified implementation.
+
+00:10:14.626 --> 00:10:17.866 A:middle
+For example, we have two
+classes called CI color kernel
+
+00:10:17.866 --> 00:10:19.026 A:middle
+and CI warp kernels.
+
+00:10:19.336 --> 00:10:22.096 A:middle
+The idea behind these classes is
+to make it much easier for you
+
+00:10:22.096 --> 00:10:23.956 A:middle
+to write the most
+common basic filters.
+
+00:10:24.806 --> 00:10:26.526 A:middle
+Traditionally on
+OS X, if you wanted
+
+00:10:26.526 --> 00:10:27.916 A:middle
+to write a simple blend filter
+
+00:10:27.986 --> 00:10:32.306 A:middle
+to blend three images given
+a mask, you would have
+
+00:10:32.786 --> 00:10:34.466 A:middle
+to write several lines
+of code to sample
+
+00:10:34.826 --> 00:10:37.966 A:middle
+from the sampler correctly,
+and then you would do the math
+
+00:10:38.576 --> 00:10:39.796 A:middle
+to combine the three images.
+
+00:10:40.736 --> 00:10:42.606 A:middle
+If you use CI color
+kernel classes,
+
+00:10:43.006 --> 00:10:44.246 A:middle
+the code becomes much simpler.
+
+00:10:44.786 --> 00:10:48.386 A:middle
+So now the input to the kernel
+is a sampler, underscore,
+
+00:10:48.386 --> 00:10:51.306 A:middle
+underscore sample
+parameter, and the code
+
+00:10:51.306 --> 00:10:54.266 A:middle
+for the kernel is just the math
+for mixing the three results.
+
+00:10:54.806 --> 00:10:56.766 A:middle
+So this is a great
+thing for developers.
+
+00:10:56.766 --> 00:10:57.456 A:middle
+It makes it easier.
+
+00:10:57.456 --> 00:11:01.336 A:middle
+It also makes the job for
+Core Image easier to simplify
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:10:57.456 --> 00:11:01.336 A:middle
+It also makes the job for
+Core Image easier to simplify
+
+00:11:01.906 --> 00:11:04.036 A:middle
+and concatenate programs.
+
+00:11:07.146 --> 00:11:09.096 A:middle
+We also have a lot
+of improvements
+
+00:11:09.096 --> 00:11:12.006 A:middle
+to the CI kernel language
+are available on OS X.
+
+00:11:12.596 --> 00:11:16.086 A:middle
+Our unified implementation when
+we compile CI kernel language
+
+00:11:16.086 --> 00:11:18.976 A:middle
+into the destination
+context language,
+
+00:11:19.916 --> 00:11:22.356 A:middle
+we do that using LLVM
+technology at Apple.
+
+00:11:22.406 --> 00:11:26.776 A:middle
+And what this this has given us
+is new features in our language,
+
+00:11:27.376 --> 00:11:30.226 A:middle
+such as If, For, and While, that
+were not previously available.
+
+00:11:31.456 --> 00:11:33.696 A:middle
+CI kernels in existing
+apps should work fine.
+
+00:11:34.096 --> 00:11:36.616 A:middle
+However, with the new compiler
+we have stricter warnings
+
+00:11:36.616 --> 00:11:39.596 A:middle
+so if your app is linked
+against El Capitan or later,
+
+00:11:40.396 --> 00:11:42.306 A:middle
+keep a look out for
+any compiler warnings.
+
+00:11:42.966 --> 00:11:47.256 A:middle
+As an example of this, here is
+a simple example of a kernel
+
+00:11:47.256 --> 00:11:51.406 A:middle
+that wasn't possible before,
+on OS X using kernel language,
+
+00:11:51.766 --> 00:11:54.536 A:middle
+and that's because this
+particular filter has an input
+
+00:11:54.536 --> 00:11:55.926 A:middle
+parameter, which is a count.
+
+00:11:56.566 --> 00:11:58.646 A:middle
+And we want to have a For
+loop inside this kernel
+
+00:11:58.946 --> 00:12:00.676 A:middle
+that loops based on
+that count variable.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:11:58.946 --> 00:12:00.676 A:middle
+that loops based on
+that count variable.
+
+00:12:01.466 --> 00:12:03.546 A:middle
+In this particular
+example, we're trying
+
+00:12:03.546 --> 00:12:06.026 A:middle
+to do a motion blur along
+a vector for n points.
+
+00:12:06.636 --> 00:12:08.526 A:middle
+And this is now a
+trivial kernel to write.
+
+00:12:09.446 --> 00:12:12.336 A:middle
+You can get fancier,
+and you can have a
+
+00:12:12.336 --> 00:12:13.766 A:middle
+For loop with an early exit.
+
+00:12:14.596 --> 00:12:17.346 A:middle
+In this case, we are sampling
+from that image until we get
+
+00:12:17.346 --> 00:12:21.566 A:middle
+to an area of the image that is
+not opaque, and then we break
+
+00:12:21.566 --> 00:12:24.756 A:middle
+out of the For loop and
+return the average color
+
+00:12:24.756 --> 00:12:29.756 A:middle
+of only the colors
+that are in the image.
+
+00:12:29.916 --> 00:12:32.306 A:middle
+So one thing to keep in mind is
+
+00:12:32.306 --> 00:12:34.256 A:middle
+with our kernel language is
+what are our overall goals
+
+00:12:34.256 --> 00:12:35.046 A:middle
+of this language are.
+
+00:12:35.476 --> 00:12:38.566 A:middle
+What we want to do is enable
+you to write kernels once
+
+00:12:38.566 --> 00:12:42.766 A:middle
+and have them run
+regardless of the device
+
+00:12:42.766 --> 00:12:44.046 A:middle
+that your kernels
+are running on.
+
+00:12:44.546 --> 00:12:46.866 A:middle
+So it will run independent of
+what system you are running on,
+
+00:12:46.866 --> 00:12:50.836 A:middle
+whether iOS or OS X, what
+size your input image is.
+
+00:12:51.156 --> 00:12:54.916 A:middle
+The CI kernel language has
+support for destination core
+
+00:12:54.916 --> 00:12:57.536 A:middle
+to sampler transforms so we
+can support automatic tiling
+
+00:12:57.536 --> 00:12:58.086 A:middle
+of images.
+
+00:12:58.696 --> 00:13:02.136 A:middle
+And the CI kernel
+language works independent
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:12:58.696 --> 00:13:02.136 A:middle
+And the CI kernel
+language works independent
+
+00:13:02.186 --> 00:13:03.656 A:middle
+of what our back-end
+renderer is,
+
+00:13:03.906 --> 00:13:07.176 A:middle
+so whether we are using
+Metal, or OpenCL, or OpenGL,
+
+00:13:07.176 --> 00:13:10.436 A:middle
+or OpenGL ES, you can
+write your algorithms
+
+00:13:10.606 --> 00:13:11.986 A:middle
+in the CI kernel language once.
+
+00:13:16.056 --> 00:13:18.066 A:middle
+So that's the highlights
+of what's new
+
+00:13:18.066 --> 00:13:19.366 A:middle
+in Core Image this year.
+
+00:13:20.056 --> 00:13:22.096 A:middle
+The next subject we would
+like to talk about is how
+
+00:13:22.096 --> 00:13:23.856 A:middle
+to bridge Core Image
+with other frameworks.
+
+00:13:24.056 --> 00:13:26.016 A:middle
+Specifically, some of the wealth
+
+00:13:26.016 --> 00:13:28.086 A:middle
+of other great graphics
+frameworks available
+
+00:13:28.086 --> 00:13:28.746 A:middle
+on our platform.
+
+00:13:30.406 --> 00:13:35.236 A:middle
+We have great imaging
+frameworks on our platform
+
+00:13:35.236 --> 00:13:39.276 A:middle
+such as Core Animation,
+SceneKit, SpriteKit, Metal,
+
+00:13:39.746 --> 00:13:43.816 A:middle
+AV Foundation, IOSurfaces,
+and various View classes.
+
+00:13:44.306 --> 00:13:46.046 A:middle
+We spent a lot of
+time this year trying
+
+00:13:46.046 --> 00:13:49.656 A:middle
+to make these work right
+together with Core Image.
+
+00:13:49.996 --> 00:13:51.806 A:middle
+So to start that discussion,
+
+00:13:51.926 --> 00:13:55.126 A:middle
+I would like to introduce
+Tony Chu, who will be talking
+
+00:13:55.126 --> 00:13:56.916 A:middle
+about Core Image and
+Metal in more detail.
+
+00:13:58.516 --> 00:14:04.606 A:middle
+[ Applause ]
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:13:58.516 --> 00:14:04.606 A:middle
+[ Applause ]
+
+00:14:05.106 --> 00:14:05.726 A:middle
+&gt;&gt; TONY CHU: Thank you, David.
+
+00:14:06.106 --> 00:14:08.756 A:middle
+Good morning, my name
+is Tony and I would
+
+00:14:08.756 --> 00:14:10.866 A:middle
+like to first tell you
+about a little bit more
+
+00:14:10.866 --> 00:14:12.176 A:middle
+about Core Image and Metal.
+
+00:14:12.176 --> 00:14:17.156 A:middle
+So as David mentioned earlier,
+this year we have added support
+
+00:14:17.156 --> 00:14:18.886 A:middle
+for rendering with
+Metal in Core Image,
+
+00:14:19.386 --> 00:14:21.906 A:middle
+and one of the reasons
+we did that is to add
+
+00:14:21.906 --> 00:14:24.266 A:middle
+to our extensive suite
+of supported image types
+
+00:14:24.746 --> 00:14:28.446 A:middle
+such as IOSurface and CGImag,e
+all of which can be used
+
+00:14:28.446 --> 00:14:32.226 A:middle
+as inputs or outputs to a CI
+filter regardless of the type
+
+00:14:32.226 --> 00:14:33.246 A:middle
+of CIContext you have.
+
+00:14:34.116 --> 00:14:37.746 A:middle
+But if you have an OpenGL-based
+CIContext, you can also render
+
+00:14:37.746 --> 00:14:39.646 A:middle
+to and from OpenGL textures.
+
+00:14:40.986 --> 00:14:43.636 A:middle
+And now this year if you
+have a Metal-based CIContext,
+
+00:14:43.876 --> 00:14:45.916 A:middle
+you can also render to
+and from Metal Textures.
+
+00:14:46.656 --> 00:14:48.996 A:middle
+Previously, without this
+support you would have had
+
+00:14:48.996 --> 00:14:51.696 A:middle
+to convert a Metal Texture to
+one of the existing image types,
+
+00:14:52.166 --> 00:14:55.366 A:middle
+which would have likely
+incurred an expensive data copy
+
+00:14:55.366 --> 00:14:56.906 A:middle
+between the CPU and GPU.
+
+00:14:57.556 --> 00:14:59.496 A:middle
+With proper support
+we can render to
+
+00:14:59.496 --> 00:15:01.276 A:middle
+and from these resources
+very efficiently.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:14:59.496 --> 00:15:01.276 A:middle
+and from these resources
+very efficiently.
+
+00:15:01.786 --> 00:15:06.246 A:middle
+Let's take a look at some of
+the new APIs we have available
+
+00:15:06.246 --> 00:15:08.176 A:middle
+for Metal support in Core Image.
+
+00:15:09.016 --> 00:15:12.546 A:middle
+The first is an API that allows
+you to initialize a CI image
+
+00:15:12.916 --> 00:15:18.126 A:middle
+with an input Metal Texture as
+well as an optional dictionary
+
+00:15:18.126 --> 00:15:20.546 A:middle
+where you can specify things
+such as the color space
+
+00:15:21.116 --> 00:15:22.576 A:middle
+that that texture
+it tagged with.
+
+00:15:23.216 --> 00:15:25.096 A:middle
+That's an example of
+one of the advantages
+
+00:15:25.096 --> 00:15:27.426 A:middle
+of using a higher-level
+framework, such as Core Image,
+
+00:15:27.826 --> 00:15:29.226 A:middle
+is that it will take
+care of details
+
+00:15:29.226 --> 00:15:32.016 A:middle
+such as color management
+automatically for you.
+
+00:15:33.936 --> 00:15:35.706 A:middle
+Then, in order to do rendering
+
+00:15:35.706 --> 00:15:37.986 A:middle
+with these Metal-based
+resources, you will want
+
+00:15:37.986 --> 00:15:41.836 A:middle
+to create a new CIContext that
+is a Metal-based CIContext
+
+00:15:42.166 --> 00:15:45.066 A:middle
+by giving it the Metal device
+your application is using.
+
+00:15:45.066 --> 00:15:49.286 A:middle
+And, again, you can specify an
+options dictionary for things
+
+00:15:49.286 --> 00:15:52.896 A:middle
+such as working color
+space or working floor mat
+
+00:15:52.896 --> 00:15:56.886 A:middle
+for intermediate buffers or
+even, you can even declare
+
+00:15:56.886 --> 00:16:03.336 A:middle
+that you want to use
+a low-priority GPU.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:15:56.886 --> 00:16:03.336 A:middle
+that you want to use
+a low-priority GPU.
+
+00:16:03.546 --> 00:16:06.636 A:middle
+In any case, with this
+new Metal-based CIContext,
+
+00:16:06.816 --> 00:16:09.736 A:middle
+we have the new render
+API that allows you
+
+00:16:09.736 --> 00:16:12.966 A:middle
+to render any CI image to
+an output Metal Texture.
+
+00:16:14.006 --> 00:16:15.786 A:middle
+And one of the nice
+features I want to call
+
+00:16:15.786 --> 00:16:17.826 A:middle
+out about this API
+is the ability
+
+00:16:17.826 --> 00:16:19.586 A:middle
+to specify optional
+command buffer.
+
+00:16:21.126 --> 00:16:23.816 A:middle
+If you want things nice and
+simple, you can specify nil
+
+00:16:23.816 --> 00:16:26.736 A:middle
+and in that case Core Image
+will create one internally
+
+00:16:27.286 --> 00:16:29.126 A:middle
+and code all the
+necessary commands to it
+
+00:16:29.126 --> 00:16:31.076 A:middle
+and then commit it
+before returning,
+
+00:16:31.666 --> 00:16:33.056 A:middle
+which will then effectively
+schedule
+
+00:16:33.056 --> 00:16:34.646 A:middle
+that render call on the GPU.
+
+00:16:35.166 --> 00:16:39.266 A:middle
+But you can also provide a
+command buffer to that call,
+
+00:16:39.266 --> 00:16:42.596 A:middle
+and in that case Core Image will
+merely encode commands to it
+
+00:16:42.916 --> 00:16:44.876 A:middle
+and return without
+committing it.
+
+00:16:45.366 --> 00:16:48.406 A:middle
+What that gives you is full
+control on how you want
+
+00:16:48.406 --> 00:16:53.486 A:middle
+to schedule your command buffer
+for rendering on the GPU as well
+
+00:16:53.486 --> 00:16:56.486 A:middle
+as the flexibility to
+insert CI filters anywhere
+
+00:16:56.486 --> 00:16:57.446 A:middle
+into a command buffer.
+
+00:16:57.586 --> 00:17:00.886 A:middle
+So let me explain that in
+a little bit more detail.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:16:57.586 --> 00:17:00.886 A:middle
+So let me explain that in
+a little bit more detail.
+
+00:17:00.886 --> 00:17:03.376 A:middle
+For those who are new to Metal,
+
+00:17:03.376 --> 00:17:05.976 A:middle
+rendering with Metal basically
+involves encoding a series
+
+00:17:05.976 --> 00:17:07.726 A:middle
+of render commands
+to a command buffer.
+
+00:17:08.576 --> 00:17:10.715 A:middle
+In this case, we have
+two sets of commands.
+
+00:17:10.715 --> 00:17:16.185 A:middle
+And with that new API that we
+just saw, you can now insert
+
+00:17:16.185 --> 00:17:19.736 A:middle
+that CI filter anywhere into
+this command buffer such as
+
+00:17:19.736 --> 00:17:23.886 A:middle
+at the very beginning or at
+the very end, or even right
+
+00:17:24.106 --> 00:17:26.156 A:middle
+in the very middle between
+these two render commands.
+
+00:17:26.856 --> 00:17:29.156 A:middle
+So you can imagine this might
+be a situation where you want
+
+00:17:29.156 --> 00:17:32.206 A:middle
+to do some draw, cause,
+and render to some texture
+
+00:17:32.206 --> 00:17:35.656 A:middle
+and then feed the texture
+into a series of CI filters,
+
+00:17:36.696 --> 00:17:38.176 A:middle
+generate some output
+texture from that,
+
+00:17:38.176 --> 00:17:40.106 A:middle
+and do more rendering with it.
+
+00:17:42.016 --> 00:17:46.116 A:middle
+And internally, Core Image will
+then encode all the commands
+
+00:17:46.256 --> 00:17:48.466 A:middle
+for each filter you may
+have in your image graph.
+
+00:17:49.046 --> 00:17:52.306 A:middle
+And in fact, as David
+mentioned earlier,
+
+00:17:52.796 --> 00:17:55.096 A:middle
+some of our built-in filters
+will use Metal performance
+
+00:17:55.096 --> 00:17:56.586 A:middle
+shaders to take advantage
+
+00:17:56.586 --> 00:17:59.516 A:middle
+of these highly optimized
+shaders specifically tuned
+
+00:17:59.516 --> 00:18:00.766 A:middle
+for Metal-capable devices.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:17:59.516 --> 00:18:00.766 A:middle
+for Metal-capable devices.
+
+00:18:01.436 --> 00:18:06.346 A:middle
+And lastly, I want to
+mention that this type
+
+00:18:06.346 --> 00:18:09.116 A:middle
+of calling convention lends
+itself perfectly to be able
+
+00:18:09.116 --> 00:18:12.006 A:middle
+to use CI to render
+directly to a MetalKit view.
+
+00:18:12.566 --> 00:18:15.176 A:middle
+So to explain that further,
+
+00:18:15.176 --> 00:18:16.616 A:middle
+I would like to show
+you sample code.
+
+00:18:17.926 --> 00:18:20.656 A:middle
+So this is sample code that you
+would have to write if you were
+
+00:18:20.656 --> 00:18:23.256 A:middle
+to create a new application
+based
+
+00:18:23.256 --> 00:18:25.406 A:middle
+on the new MetalKit framework.
+
+00:18:26.216 --> 00:18:28.746 A:middle
+The first thing you need to
+do is to do a couple of things
+
+00:18:28.906 --> 00:18:30.646 A:middle
+in this when you want
+to set up the view.
+
+00:18:31.516 --> 00:18:32.866 A:middle
+The first key thing is
+
+00:18:33.296 --> 00:18:37.136 A:middle
+to specify the Frame Buffer Only
+property on that view to False,
+
+00:18:37.646 --> 00:18:40.146 A:middle
+which will allow Core Image
+to use Metal compute shaders
+
+00:18:40.176 --> 00:18:42.316 A:middle
+to render to that
+view's output texture.
+
+00:18:42.746 --> 00:18:47.476 A:middle
+The next thing you want to do
+is initialize the CIContext
+
+00:18:47.476 --> 00:18:48.196 A:middle
+with a Metal device.
+
+00:18:48.806 --> 00:18:51.656 A:middle
+You want to do that here because
+initializing a CIContext is
+
+00:18:51.656 --> 00:18:53.936 A:middle
+something you only want to
+do once in an application.
+
+00:18:56.616 --> 00:18:59.436 A:middle
+Then, in the Draw and
+View Delegate function,
+
+00:18:59.946 --> 00:19:01.936 A:middle
+this is the code you would
+need to write in order
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:18:59.946 --> 00:19:01.936 A:middle
+this is the code you would
+need to write in order
+
+00:19:01.936 --> 00:19:03.546 A:middle
+to render some CI
+filters through that view.
+
+00:19:03.796 --> 00:19:05.716 A:middle
+So let me step you
+through this line by line.
+
+00:19:06.706 --> 00:19:08.686 A:middle
+First thing is, you
+create a command buffer
+
+00:19:08.686 --> 00:19:11.446 A:middle
+that will eventually be used
+to present the drawable with.
+
+00:19:11.446 --> 00:19:16.196 A:middle
+Then we are going to
+initialize a CI image
+
+00:19:16.286 --> 00:19:18.336 A:middle
+with some given input
+Metal Texture.
+
+00:19:18.656 --> 00:19:22.686 A:middle
+Now, this CI image could come
+by other means, for example,
+
+00:19:22.686 --> 00:19:25.116 A:middle
+some of the other image types
+we have, like a CGImage.
+
+00:19:25.116 --> 00:19:28.956 A:middle
+But in this case we will just
+show you how to use our new API.
+
+00:19:28.956 --> 00:19:32.096 A:middle
+But then once you
+have a CI image,
+
+00:19:32.206 --> 00:19:36.276 A:middle
+you can chain together a
+series of CI filters to it.
+
+00:19:36.276 --> 00:19:39.456 A:middle
+In this case, we will apply
+a CI Gaussian Blur filter.
+
+00:19:41.856 --> 00:19:44.986 A:middle
+Then, once you have your CI
+image that you want to render,
+
+00:19:45.496 --> 00:19:48.596 A:middle
+you want to grab the
+texture currently bound
+
+00:19:48.636 --> 00:19:52.666 A:middle
+to that view's current
+drawable and render the CI image
+
+00:19:52.746 --> 00:19:56.226 A:middle
+to that texture with the command
+buffer we want to use here.
+
+00:19:57.856 --> 00:20:00.236 A:middle
+Then finally, once we have
+encoded the render commands
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:19:57.856 --> 00:20:00.236 A:middle
+Then finally, once we have
+encoded the render commands
+
+00:20:00.236 --> 00:20:02.716 A:middle
+there is one more Metal
+command that you need to insert
+
+00:20:02.716 --> 00:20:03.496 A:middle
+at the command buffer,
+
+00:20:03.756 --> 00:20:05.826 A:middle
+and that's to present the
+view's current drawable.
+
+00:20:05.826 --> 00:20:08.326 A:middle
+And then you just call
+Commit on that buffer.
+
+00:20:09.676 --> 00:20:11.096 A:middle
+That is how easy it is
+
+00:20:11.096 --> 00:20:13.076 A:middle
+to integrate some
+Core Image filters
+
+00:20:13.226 --> 00:20:14.816 A:middle
+into a MetalKit application.
+
+00:20:14.816 --> 00:20:19.996 A:middle
+So next I would like to talk
+
+00:20:19.996 --> 00:20:22.286 A:middle
+about bridging Core
+Image and AV Foundation.
+
+00:20:22.906 --> 00:20:26.946 A:middle
+So with the latest changes
+we have this year in both
+
+00:20:26.946 --> 00:20:30.666 A:middle
+of these frameworks, it is now
+easy to add Core Image filters
+
+00:20:30.666 --> 00:20:31.876 A:middle
+to your AV Foundation app,
+
+00:20:32.936 --> 00:20:35.836 A:middle
+and that's because Core Image
+is now conveniently integrated
+
+00:20:36.036 --> 00:20:38.106 A:middle
+with the AVVideoComposition
+class.
+
+00:20:38.786 --> 00:20:42.276 A:middle
+And by default you would get
+automatic color management,
+
+00:20:42.276 --> 00:20:44.926 A:middle
+but if you don't need
+it, you can disable it.
+
+00:20:46.036 --> 00:20:48.716 A:middle
+So we will take a look at
+a couple of examples on how
+
+00:20:48.716 --> 00:20:50.346 A:middle
+to apply CI filters to videos.
+
+00:20:50.916 --> 00:20:52.706 A:middle
+First in the context
+of exporting the video
+
+00:20:52.776 --> 00:20:54.846 A:middle
+and next during live
+playback of a video.
+
+00:20:55.426 --> 00:20:59.916 A:middle
+So for the purpose of
+demonstrating these examples,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:00.096 --> 00:21:01.366 A:middle
+we are going to use a filter
+
+00:21:01.366 --> 00:21:03.566 A:middle
+that we showed you a
+couple of years ago at WWDC.
+
+00:21:03.566 --> 00:21:08.066 A:middle
+And this is a filter where for
+every frame of the video image,
+
+00:21:08.066 --> 00:21:12.866 A:middle
+we are going to first apply a
+sepia tone filter to it along
+
+00:21:12.866 --> 00:21:19.126 A:middle
+with some random noise, and then
+finally some vertical scratches
+
+00:21:19.126 --> 00:21:21.906 A:middle
+overlaid on top of it.
+
+00:21:21.906 --> 00:21:27.756 A:middle
+For those who may recall,
+this is the old film filter
+
+00:21:28.346 --> 00:21:31.586 A:middle
+that we showed you from a
+couple of years ago at WWDC.
+
+00:21:31.736 --> 00:21:34.186 A:middle
+This filter is very
+straightforward,
+
+00:21:34.186 --> 00:21:37.746 A:middle
+all it takes is a single
+input image as well
+
+00:21:37.746 --> 00:21:39.866 A:middle
+as an input time parameter,
+which will allow you
+
+00:21:39.866 --> 00:21:42.656 A:middle
+to apply the effect to the
+video in a repeatable way
+
+00:21:42.946 --> 00:21:44.166 A:middle
+with deterministic results.
+
+00:21:44.886 --> 00:21:49.896 A:middle
+So let's get back to how we
+would apply this filter during
+
+00:21:49.896 --> 00:21:50.876 A:middle
+exporting of that video.
+
+00:21:52.266 --> 00:21:55.246 A:middle
+What you need to do first is
+create a filtered composition,
+
+00:21:55.866 --> 00:21:59.796 A:middle
+giving it the AV asset that
+you want to export as well
+
+00:21:59.796 --> 00:22:04.666 A:middle
+as a callback block in which
+you can specify a filter recipe
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:21:59.796 --> 00:22:04.666 A:middle
+as a callback block in which
+you can specify a filter recipe
+
+00:22:05.196 --> 00:22:09.586 A:middle
+to be applied as each frame of
+the video is being rendered.
+
+00:22:10.486 --> 00:22:13.246 A:middle
+And from this callback block,
+we will get a request object
+
+00:22:13.246 --> 00:22:16.326 A:middle
+as an input parameter from which
+you can get the composition time
+
+00:22:16.696 --> 00:22:18.076 A:middle
+as well as the source image
+
+00:22:18.306 --> 00:22:20.396 A:middle
+for chaining together
+your CI filters.
+
+00:22:21.036 --> 00:22:26.006 A:middle
+And then once you have
+your filtered CI image,
+
+00:22:26.396 --> 00:22:28.836 A:middle
+you then call Finish With
+Image on the request object.
+
+00:22:29.456 --> 00:22:31.816 A:middle
+You can pass in a nil
+context to that call,
+
+00:22:32.186 --> 00:22:36.646 A:middle
+and the AVVideoComposition would
+create a CIContext by default,
+
+00:22:37.326 --> 00:22:38.476 A:middle
+which, as I mentioned earlier,
+
+00:22:38.476 --> 00:22:40.016 A:middle
+will get automatic
+color management.
+
+00:22:41.006 --> 00:22:42.776 A:middle
+If you want to disable
+that, all you need
+
+00:22:42.776 --> 00:22:44.736 A:middle
+to do is create a
+CIContext on your own
+
+00:22:44.736 --> 00:22:48.746 A:middle
+and specify a null color
+working space and pass that into
+
+00:22:48.746 --> 00:22:50.446 A:middle
+that Finish With Image call.
+
+00:22:50.986 --> 00:22:57.106 A:middle
+Now, that filter we just showed
+you is a pretty simple filter
+
+00:22:57.676 --> 00:23:00.446 A:middle
+that has no convolution
+filters involved.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:22:57.676 --> 00:23:00.446 A:middle
+that has no convolution
+filters involved.
+
+00:23:00.996 --> 00:23:03.226 A:middle
+But in the case where you
+do have convolution filters,
+
+00:23:03.546 --> 00:23:07.456 A:middle
+one thing you want to watch out
+for is an undesirable result
+
+00:23:08.006 --> 00:23:11.056 A:middle
+where you get clear
+pixels bleeding
+
+00:23:11.056 --> 00:23:12.806 A:middle
+into the edges of that image.
+
+00:23:13.816 --> 00:23:17.346 A:middle
+To fix that, we have a pretty
+simple recipe that we use
+
+00:23:17.576 --> 00:23:19.436 A:middle
+in a lot of cases
+such as that one.
+
+00:23:20.396 --> 00:23:23.486 A:middle
+The first thing you want to
+do is with the source image
+
+00:23:23.486 --> 00:23:26.026 A:middle
+that you have, that you want
+to apply the convolution filter
+
+00:23:26.026 --> 00:23:28.676 A:middle
+to it, you want to call
+image by clamping to extent.
+
+00:23:28.676 --> 00:23:32.926 A:middle
+It will edge replicate all
+of the pixels along the edge
+
+00:23:32.926 --> 00:23:34.306 A:middle
+of that image to infinity.
+
+00:23:34.306 --> 00:23:37.726 A:middle
+And by doing that, you will
+no longer have the problem
+
+00:23:37.726 --> 00:23:42.056 A:middle
+of clear pixels bleeding
+into the image
+
+00:23:42.056 --> 00:23:44.446 A:middle
+as you are applying the filter.
+
+00:23:44.586 --> 00:23:47.436 A:middle
+Because by doing that you end
+up with an infinite image,
+
+00:23:47.806 --> 00:23:51.486 A:middle
+at the very end of applying the
+filter you want to add image
+
+00:23:51.486 --> 00:23:54.176 A:middle
+by cropping the rect in
+order to crop that image back
+
+00:23:54.176 --> 00:23:55.636 A:middle
+into the source image's extent.
+
+00:23:57.256 --> 00:24:01.626 A:middle
+By applying that simple recipe,
+you will get a much cleaner look
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:23:57.256 --> 00:24:01.626 A:middle
+By applying that simple recipe,
+you will get a much cleaner look
+
+00:24:02.056 --> 00:24:08.556 A:middle
+with nice, crisp, sharp
+borders on the edge.
+
+00:24:08.766 --> 00:24:11.126 A:middle
+So once we have that
+AVVideoComposition,
+
+00:24:12.106 --> 00:24:15.636 A:middle
+if we want to create an
+export session in order
+
+00:24:15.636 --> 00:24:17.996 A:middle
+to export a video, and you do
+
+00:24:17.996 --> 00:24:19.916 A:middle
+that by creating this
+AV export session
+
+00:24:19.946 --> 00:24:23.746 A:middle
+and specify an output URL
+location to which you want
+
+00:24:23.746 --> 00:24:26.266 A:middle
+to export as well as
+the video composition
+
+00:24:26.266 --> 00:24:27.106 A:middle
+that we just created.
+
+00:24:28.156 --> 00:24:30.316 A:middle
+And one thing to keep in
+mind is you might want to --
+
+00:24:31.016 --> 00:24:34.286 A:middle
+you want to call Remove Item
+at URL to remove any item
+
+00:24:34.286 --> 00:24:36.366 A:middle
+that might already exist
+at that output location.
+
+00:24:37.226 --> 00:24:38.156 A:middle
+Once you have done that,
+
+00:24:38.156 --> 00:24:40.426 A:middle
+then you can call
+Export Asynchronously
+
+00:24:40.426 --> 00:24:43.486 A:middle
+on that export session, which
+will then kick off a process
+
+00:24:44.216 --> 00:24:47.976 A:middle
+to export that video and
+apply all of the CI filters
+
+00:24:48.016 --> 00:24:49.486 A:middle
+to every single frame
+of your video.
+
+00:24:50.376 --> 00:24:53.376 A:middle
+If you wanted to update
+some progress on your UI
+
+00:24:53.376 --> 00:24:56.296 A:middle
+to show the progress
+of that export,
+
+00:24:56.516 --> 00:24:59.876 A:middle
+you can use the Composition Time
+parameter in your callback block
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:00.016 --> 00:25:01.936 A:middle
+to update such a UI element.
+
+00:25:06.046 --> 00:25:07.836 A:middle
+So now that was exporting.
+
+00:25:08.156 --> 00:25:11.116 A:middle
+For playing back an AV asset,
+the code that you would need
+
+00:25:11.116 --> 00:25:12.886 A:middle
+to write is actually
+very similar.
+
+00:25:13.316 --> 00:25:16.126 A:middle
+Creating the video composition
+is exactly the same code we
+
+00:25:16.126 --> 00:25:16.736 A:middle
+saw earlier.
+
+00:25:17.466 --> 00:25:19.976 A:middle
+The only difference
+now is instead
+
+00:25:20.016 --> 00:25:21.296 A:middle
+of creating an export session,
+
+00:25:21.726 --> 00:25:23.376 A:middle
+you need to create
+an AVPlayerItem
+
+00:25:23.456 --> 00:25:25.316 A:middle
+with that AV asset along
+
+00:25:25.316 --> 00:25:27.476 A:middle
+with the video composition
+we just created
+
+00:25:28.396 --> 00:25:30.866 A:middle
+and then create an AVPlayer
+with that player item
+
+00:25:30.866 --> 00:25:33.116 A:middle
+and then call Play
+on your player.
+
+00:25:33.726 --> 00:25:39.716 A:middle
+So I'm going to now show you
+a video of how we are applying
+
+00:25:39.716 --> 00:25:44.386 A:middle
+that old film filter to an
+AV asset during playback.
+
+00:25:48.146 --> 00:25:50.006 A:middle
+So one thing to notice here is
+
+00:25:50.006 --> 00:25:51.706 A:middle
+as you are scrubbing
+back this video,
+
+00:25:51.986 --> 00:25:53.986 A:middle
+you can see the same
+effect being applied
+
+00:25:53.986 --> 00:25:56.996 A:middle
+in a repeatable way with
+deterministic results.
+
+00:25:58.016 --> 00:25:59.466 A:middle
+So that is Core Image
+
+00:25:59.466 --> 00:26:02.726 A:middle
+and AV Foundation interoperating
+together very efficiently.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:25:59.466 --> 00:26:02.726 A:middle
+and AV Foundation interoperating
+together very efficiently.
+
+00:26:03.216 --> 00:26:07.256 A:middle
+Next, I would like
+to call up Alex
+
+00:26:07.256 --> 00:26:09.266 A:middle
+to tell you a little bit more
+about Core Image providers.
+
+00:26:09.896 --> 00:26:10.126 A:middle
+Thank you.
+
+00:26:11.516 --> 00:26:14.996 A:middle
+[ Applause ]
+
+00:26:15.496 --> 00:26:15.916 A:middle
+&gt;&gt; ALEXANDRE NAAMAN:
+Thank you, Tony.
+
+00:26:17.236 --> 00:26:19.906 A:middle
+My name is Alexandre
+Naaman and I will talk
+
+00:26:19.906 --> 00:26:21.446 A:middle
+about Core Image providers
+and then we will talk
+
+00:26:21.446 --> 00:26:24.136 A:middle
+about more APIs we have
+on the system and STKs
+
+00:26:24.136 --> 00:26:26.116 A:middle
+and how they can
+work with Core Image
+
+00:26:26.366 --> 00:26:27.796 A:middle
+to create interesting
+applications.
+
+00:26:29.486 --> 00:26:31.286 A:middle
+Let's start with
+CIImageProvider,
+
+00:26:31.626 --> 00:26:33.706 A:middle
+which is a category
+we had on CI image
+
+00:26:33.706 --> 00:26:37.616 A:middle
+that existed previously just on
+OS X but now exists also on iOS
+
+00:26:37.686 --> 00:26:39.896 A:middle
+as part of our unified
+implementation.
+
+00:26:40.406 --> 00:26:44.246 A:middle
+It's a great way for you
+to bring input images
+
+00:26:44.246 --> 00:26:48.186 A:middle
+into your system that wouldn't
+be able to be done otherwise.
+
+00:26:48.186 --> 00:26:50.996 A:middle
+So, for example, if
+you had a file format
+
+00:26:50.996 --> 00:26:52.256 A:middle
+that wasn't supported
+and you wanted
+
+00:26:52.256 --> 00:26:55.006 A:middle
+to somehow create a CI image
+that was based on that,
+
+00:26:55.676 --> 00:26:58.546 A:middle
+or if you had data that was
+streaming from some site
+
+00:26:58.546 --> 00:27:01.006 A:middle
+and you wanted to
+create a CI image,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:26:58.546 --> 00:27:01.006 A:middle
+and you wanted to
+create a CI image,
+
+00:27:01.006 --> 00:27:02.206 A:middle
+you could use a CIImageProvider.
+
+00:27:03.336 --> 00:27:05.286 A:middle
+They are implemented
+via callbacks.
+
+00:27:06.176 --> 00:27:10.336 A:middle
+It's all done lazily, and we
+will call you and tell you
+
+00:27:10.336 --> 00:27:13.486 A:middle
+when we need to fill in the data
+and you get automatic tiling
+
+00:27:13.486 --> 00:27:15.956 A:middle
+and we handle the purgability
+and caching for you.
+
+00:27:16.706 --> 00:27:19.416 A:middle
+Let's take a look
+at how this is done.
+
+00:27:19.416 --> 00:27:20.976 A:middle
+First things first, you
+will create your own class.
+
+00:27:20.976 --> 00:27:23.516 A:middle
+In this case, we will create
+one called tile provider.
+
+00:27:24.686 --> 00:27:27.456 A:middle
+And then we create a CI image
+with that tile provider,
+
+00:27:27.926 --> 00:27:30.446 A:middle
+and in addition to that,
+we give it the size
+
+00:27:30.666 --> 00:27:33.466 A:middle
+of the image we are trying to
+create, whatever format we would
+
+00:27:33.466 --> 00:27:37.066 A:middle
+like to use to create for this
+image, a color space optionally,
+
+00:27:37.346 --> 00:27:40.226 A:middle
+and in this case we
+will give the tile size
+
+00:27:40.226 --> 00:27:42.786 A:middle
+in the options dictionary.
+
+00:27:44.466 --> 00:27:45.866 A:middle
+Now, in order to use this,
+
+00:27:46.846 --> 00:27:50.016 A:middle
+all we have to do is implement
+a method called Provide Image
+
+00:27:50.016 --> 00:27:52.476 A:middle
+Data, and Core Image
+will call you and ask you
+
+00:27:52.476 --> 00:27:53.846 A:middle
+to fill in this information.
+
+00:27:55.066 --> 00:27:56.976 A:middle
+And you have to fill
+in that data pointer
+
+00:27:57.216 --> 00:28:01.616 A:middle
+with a given row bytes value,
+a certain location in X and Y,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:27:57.216 --> 00:28:01.616 A:middle
+with a given row bytes value,
+a certain location in X and Y,
+
+00:28:01.726 --> 00:28:04.216 A:middle
+width and height, and you
+can tag some user info
+
+00:28:04.216 --> 00:28:04.896 A:middle
+if you would like as well.
+
+00:28:05.346 --> 00:28:06.926 A:middle
+That's all you need
+to do in order
+
+00:28:06.926 --> 00:28:09.926 A:middle
+to implement your
+own image providers.
+
+00:28:09.926 --> 00:28:15.446 A:middle
+Now, let's talk about
+the various view classes
+
+00:28:15.516 --> 00:28:17.036 A:middle
+that we have that you can use
+
+00:28:17.036 --> 00:28:19.016 A:middle
+with Core Image on
+both iOS and OS X.
+
+00:28:20.206 --> 00:28:23.316 A:middle
+So we have a broad spectrum
+of support for rendering
+
+00:28:23.316 --> 00:28:25.086 A:middle
+with Core Image on
+a system ranging
+
+00:28:25.086 --> 00:28:29.166 A:middle
+from the very high level,
+such as UIImageView,
+
+00:28:29.476 --> 00:28:30.686 A:middle
+which makes it very easy
+
+00:28:30.996 --> 00:28:32.766 A:middle
+to render an image
+that's been applied
+
+00:28:32.766 --> 00:28:33.636 A:middle
+with a Core Image effect.
+
+00:28:34.076 --> 00:28:36.096 A:middle
+And going to the
+much more low-level
+
+00:28:36.556 --> 00:28:40.826 A:middle
+and potentially higher
+performance APIs such as GLKView
+
+00:28:40.826 --> 00:28:45.406 A:middle
+or MTK view, which give
+you more fine-grain control
+
+00:28:45.406 --> 00:28:50.036 A:middle
+over what you are doing.
+
+00:28:50.206 --> 00:28:51.886 A:middle
+So let's take a look
+at UIImageView.
+
+00:28:53.256 --> 00:28:55.376 A:middle
+UIImageView is probably
+the simplest way
+
+00:28:55.376 --> 00:28:59.616 A:middle
+to display a CI image on iOS,
+and all you have to do is
+
+00:28:59.916 --> 00:29:03.386 A:middle
+on your UIImageView, set the
+Image property to a UI image --
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:28:59.916 --> 00:29:03.386 A:middle
+on your UIImageView, set the
+Image property to a UI image --
+
+00:29:03.936 --> 00:29:06.226 A:middle
+in this case, one
+based on a CI image.
+
+00:29:07.196 --> 00:29:10.196 A:middle
+The problem is, although
+this is very easy to use,
+
+00:29:10.826 --> 00:29:12.826 A:middle
+it's not the most
+high-performance method
+
+00:29:12.826 --> 00:29:13.386 A:middle
+of doing so.
+
+00:29:13.976 --> 00:29:18.826 A:middle
+So what ends up happening is
+we have to render that back
+
+00:29:18.826 --> 00:29:21.206 A:middle
+onto the CPU and send
+it back up to the GPU,
+
+00:29:21.206 --> 00:29:22.836 A:middle
+so it's not as efficient
+as possible.
+
+00:29:22.836 --> 00:29:24.776 A:middle
+And if we take a look
+at a simple example,
+
+00:29:24.776 --> 00:29:27.996 A:middle
+in this case we will run
+a pixelate filter using
+
+00:29:28.116 --> 00:29:29.536 A:middle
+a UIImageView.
+
+00:29:29.976 --> 00:29:32.976 A:middle
+We see that we get about
+20 frames per second
+
+00:29:32.976 --> 00:29:38.166 A:middle
+on a Retina-sized image with
+this effect being applied.
+
+00:29:40.016 --> 00:29:44.966 A:middle
+Now, if we switch to
+an OpenGL ES-based view
+
+00:29:45.726 --> 00:29:48.246 A:middle
+and apply the same filter,
+
+00:29:49.266 --> 00:29:52.426 A:middle
+we can see that now we
+get 48 frames per second.
+
+00:29:53.096 --> 00:29:58.656 A:middle
+And if we go one step further
+and do a Metal-based view,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:00.026 --> 00:30:02.966 A:middle
+we get slight improvement here.
+
+00:30:02.966 --> 00:30:04.316 A:middle
+We get 52 frames per second.
+
+00:30:04.686 --> 00:30:07.436 A:middle
+And although this isn't great
+we are only applying one filter,
+
+00:30:07.436 --> 00:30:11.086 A:middle
+and so the advantages that
+we get aren't as noticeable
+
+00:30:11.086 --> 00:30:14.126 A:middle
+as we would get if we had
+many filters being applied
+
+00:30:14.776 --> 00:30:17.106 A:middle
+or if we had a bunch
+of smaller renders.
+
+00:30:18.196 --> 00:30:19.276 A:middle
+But the basic idea is there.
+
+00:30:20.936 --> 00:30:23.786 A:middle
+So now, let's take a look at
+Core Image and Core Animation
+
+00:30:23.786 --> 00:30:25.436 A:middle
+and how we can make
+those work well together.
+
+00:30:27.116 --> 00:30:28.766 A:middle
+This is one of the few instances
+
+00:30:28.766 --> 00:30:31.536 A:middle
+where we do have differences
+between iOS and OS X.
+
+00:30:31.666 --> 00:30:36.126 A:middle
+On OS X, we can just apply,
+we just have to do two things
+
+00:30:36.576 --> 00:30:39.266 A:middle
+in order to use Core Image
+and Core Animation together.
+
+00:30:39.676 --> 00:30:43.646 A:middle
+First things first, on
+your NSview, all you need
+
+00:30:43.646 --> 00:30:48.296 A:middle
+to do is say view.layer uses
+Core Image filters and set
+
+00:30:48.296 --> 00:30:51.666 A:middle
+that to True and then
+optionally specify an array
+
+00:30:51.666 --> 00:30:53.246 A:middle
+of filters you would
+like to be applied
+
+00:30:53.386 --> 00:30:55.106 A:middle
+to whatever layer you have.
+
+00:30:55.156 --> 00:30:58.956 A:middle
+And that's really
+all you need to do.
+
+00:30:59.886 --> 00:31:03.396 A:middle
+On iOS, we don't
+have that support,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:30:59.886 --> 00:31:03.396 A:middle
+On iOS, we don't
+have that support,
+
+00:31:03.396 --> 00:31:06.126 A:middle
+so instead what you could
+do is OpenGL directly.
+
+00:31:07.646 --> 00:31:10.726 A:middle
+You can do that either
+by deriving from GLKView
+
+00:31:11.126 --> 00:31:14.346 A:middle
+or by creating a
+UIView and ensuring
+
+00:31:14.346 --> 00:31:17.026 A:middle
+that you override the
+layer class method
+
+00:31:17.246 --> 00:31:19.346 A:middle
+and returning CA
+Eagle layer.self.
+
+00:31:19.346 --> 00:31:24.346 A:middle
+And when you do that, then
+you get a GL ES-based object
+
+00:31:24.346 --> 00:31:26.306 A:middle
+that you can use to
+create your CIContext.
+
+00:31:26.376 --> 00:31:28.416 A:middle
+And that will ensure that
+you get optimal performance.
+
+00:31:28.906 --> 00:31:31.446 A:middle
+All of that is great, but
+one thing you need to keep
+
+00:31:31.446 --> 00:31:33.996 A:middle
+into mind is that if you want
+to get great performance,
+
+00:31:33.996 --> 00:31:35.676 A:middle
+it's not just a question
+of using the best API,
+
+00:31:35.736 --> 00:31:37.086 A:middle
+but using it efficiently.
+
+00:31:37.316 --> 00:31:39.876 A:middle
+And in this case, the number one
+thing you have to remember is
+
+00:31:39.916 --> 00:31:42.076 A:middle
+to only create your
+CIContext once because that's
+
+00:31:42.076 --> 00:31:46.146 A:middle
+where the caching takes place
+and a bunch of state is held.
+
+00:31:46.696 --> 00:31:51.126 A:middle
+So keep that in mind when you're
+using the lower-level APIs.
+
+00:31:51.126 --> 00:31:56.736 A:middle
+Now, I would like to talk
+about Core Image on IOSurface.
+
+00:31:57.976 --> 00:32:01.736 A:middle
+Internally, within the
+Core Image implementation,
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:31:57.976 --> 00:32:01.736 A:middle
+Internally, within the
+Core Image implementation,
+
+00:32:01.736 --> 00:32:03.216 A:middle
+we use IOSurface extensively.
+
+00:32:03.716 --> 00:32:06.236 A:middle
+We love it as an API because
+it provides us with a bunch
+
+00:32:06.236 --> 00:32:07.546 A:middle
+of functionality
+that doesn't exist
+
+00:32:07.546 --> 00:32:10.986 A:middle
+with any other API
+on the system.
+
+00:32:10.986 --> 00:32:13.416 A:middle
+So mainly we have
+great purgability,
+
+00:32:13.756 --> 00:32:15.906 A:middle
+some locking semantics so
+we can get data in and out
+
+00:32:15.906 --> 00:32:19.306 A:middle
+of IOSurfaces, and it's a great
+way to move data between CPU
+
+00:32:19.306 --> 00:32:20.566 A:middle
+and GPU and vice versa.
+
+00:32:21.406 --> 00:32:24.266 A:middle
+We have an incredibly
+broad spectrum of support
+
+00:32:24.266 --> 00:32:26.456 A:middle
+for different formats,
+we think probably some
+
+00:32:26.456 --> 00:32:27.636 A:middle
+of the best on the
+entire system.
+
+00:32:27.636 --> 00:32:31.756 A:middle
+For example, we have 420, 444,
+
+00:32:31.756 --> 00:32:34.296 A:middle
+RGBA half float,
+and many others.
+
+00:32:34.296 --> 00:32:37.396 A:middle
+Now, on iOS, as a
+developer it's difficult
+
+00:32:37.396 --> 00:32:40.806 A:middle
+to use IOSurface directly,
+but you can inform Core Image
+
+00:32:40.806 --> 00:32:42.336 A:middle
+that you would like
+to use IOSurface
+
+00:32:42.966 --> 00:32:44.396 A:middle
+by creating Pixel Buffers
+
+00:32:45.756 --> 00:32:49.036 A:middle
+that have the KCV pixel
+buffer IOSurface property
+
+00:32:49.036 --> 00:32:49.966 A:middle
+key specified.
+
+00:32:50.846 --> 00:32:52.986 A:middle
+When you do that, so if
+you create a CV Image
+
+00:32:53.276 --> 00:32:55.796 A:middle
+from a CV Pixel Buffer
+that has this key,
+
+00:32:56.706 --> 00:32:58.036 A:middle
+what ends up happening
+internally is
+
+00:32:58.316 --> 00:33:02.166 A:middle
+that Core Image knows that it's
+an IOSurface-backed CV Pixel
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:32:58.316 --> 00:33:02.166 A:middle
+that Core Image knows that it's
+an IOSurface-backed CV Pixel
+
+00:33:02.166 --> 00:33:04.256 A:middle
+Buffer and we can render
+as efficiently as possible.
+
+00:33:04.936 --> 00:33:06.646 A:middle
+So, this is something to
+keep in mind if you want
+
+00:33:06.646 --> 00:33:08.336 A:middle
+to get all the benefits
+of IOSurface on iOS.
+
+00:33:08.336 --> 00:33:13.066 A:middle
+Next I'd like to talk
+about a few other APIs.
+
+00:33:13.066 --> 00:33:16.236 A:middle
+We will go over examples of how
+we can actually use Core Image
+
+00:33:16.616 --> 00:33:21.236 A:middle
+and STKs together to create
+sample applications very simply.
+
+00:33:21.236 --> 00:33:23.356 A:middle
+So we are going to start
+off with SpriteKit.
+
+00:33:24.436 --> 00:33:29.796 A:middle
+If we start in XCode and
+create a new application,
+
+00:33:30.176 --> 00:33:34.266 A:middle
+we choose Game, and
+then we will choose
+
+00:33:34.266 --> 00:33:36.526 A:middle
+as a game technology SpriteKit.
+
+00:33:36.966 --> 00:33:41.996 A:middle
+And we just build and run,
+we will get this application,
+
+00:33:41.996 --> 00:33:46.406 A:middle
+which as you tap on the screen
+you get new ships showing up,
+
+00:33:46.796 --> 00:33:51.706 A:middle
+and you can see here we are
+getting 60 frames a second.
+
+00:33:51.706 --> 00:33:54.626 A:middle
+We can now with a
+very small amount
+
+00:33:54.626 --> 00:33:58.306 A:middle
+of code add Core Image
+to this application.
+
+00:33:58.646 --> 00:33:59.716 A:middle
+So in this case, we will go
+
+00:33:59.716 --> 00:34:01.986 A:middle
+and modify the Touches
+Began method inside
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:33:59.716 --> 00:34:01.986 A:middle
+and modify the Touches
+Began method inside
+
+00:34:01.986 --> 00:34:06.086 A:middle
+of GameScene.swift, and
+initially what was happening was
+
+00:34:06.386 --> 00:34:09.676 A:middle
+for every tap it was adding
+that sprite to the root node.
+
+00:34:09.676 --> 00:34:15.565 A:middle
+We will modify that a bit, and
+we will use an SK effect node.
+
+00:34:15.565 --> 00:34:18.856 A:middle
+An SK effect node renders the
+entire contexts into a buffer,
+
+00:34:19.396 --> 00:34:21.826 A:middle
+which you can then apply
+a series of filters to.
+
+00:34:23.226 --> 00:34:24.716 A:middle
+So we put an SK effect node.
+
+00:34:25.065 --> 00:34:27.286 A:middle
+Instead of adding our sprite
+that we had earlier to the root,
+
+00:34:27.286 --> 00:34:28.676 A:middle
+we will add it to the effect.
+
+00:34:29.726 --> 00:34:33.556 A:middle
+We will say we want to enable
+some effects, we are going
+
+00:34:33.556 --> 00:34:35.536 A:middle
+to create a filter, in
+this case we are going
+
+00:34:35.536 --> 00:34:36.565 A:middle
+to use a pixelate filter,
+
+00:34:37.315 --> 00:34:39.025 A:middle
+which is the same one
+we were viewing earlier.
+
+00:34:39.826 --> 00:34:43.716 A:middle
+And then we will add
+that effect to the root.
+
+00:34:43.716 --> 00:34:44.786 A:middle
+That is all we need to do.
+
+00:34:45.266 --> 00:34:47.255 A:middle
+This is the exact code you
+would write if you wanted
+
+00:34:47.255 --> 00:34:51.505 A:middle
+to add Core Image to a
+SpriteKit application.
+
+00:34:51.856 --> 00:34:54.226 A:middle
+And if we now run that exact
+same sample that we had
+
+00:34:54.866 --> 00:34:59.706 A:middle
+and start tapping away, we get
+beautifully pixelated sprites
+
+00:34:59.856 --> 00:35:01.846 A:middle
+in our application and running
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:34:59.856 --> 00:35:01.846 A:middle
+in our application and running
+
+00:35:01.846 --> 00:35:03.536 A:middle
+at pretty much the
+same frame rate.
+
+00:35:03.536 --> 00:35:08.296 A:middle
+Now, let's talk a little
+bit about SceneKit.
+
+00:35:08.906 --> 00:35:09.686 A:middle
+Same idea.
+
+00:35:10.556 --> 00:35:13.636 A:middle
+We will create an
+application from Start,
+
+00:35:13.636 --> 00:35:16.486 A:middle
+and we will choose SceneKit
+as a game technology.
+
+00:35:16.926 --> 00:35:20.716 A:middle
+If we just build and run this
+app, we get this spaceship
+
+00:35:20.716 --> 00:35:24.556 A:middle
+that just rotates around
+at interactive rates.
+
+00:35:24.976 --> 00:35:29.176 A:middle
+Now, if we want to add Core
+Image to this application,
+
+00:35:29.176 --> 00:35:31.826 A:middle
+all we have to do is go to
+the View Did Load method
+
+00:35:31.876 --> 00:35:35.806 A:middle
+in GameViewController.swift,
+find the ship,
+
+00:35:36.566 --> 00:35:40.546 A:middle
+which is aligned
+in the sample code.
+
+00:35:41.916 --> 00:35:44.646 A:middle
+We then create, once
+again, the pixelated filter,
+
+00:35:45.606 --> 00:35:48.556 A:middle
+and we specify an optional
+array of filters to the ship.
+
+00:35:49.476 --> 00:35:54.766 A:middle
+If we do that and run, we get
+a beautifully pixelated ship.
+
+00:35:55.616 --> 00:35:59.396 A:middle
+So you can apply this to any
+node in your scene, and, again,
+
+00:35:59.396 --> 00:36:01.956 A:middle
+we get great frame rate.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:35:59.396 --> 00:36:01.956 A:middle
+we get great frame rate.
+
+00:36:02.086 --> 00:36:03.156 A:middle
+One of the big advantages
+
+00:36:03.526 --> 00:36:08.496 A:middle
+of using SceneKit alongside
+Core Image is you can animate
+
+00:36:08.496 --> 00:36:10.176 A:middle
+properties with Core Animation.
+
+00:36:11.496 --> 00:36:13.176 A:middle
+So in this case,
+we are just going
+
+00:36:13.176 --> 00:36:15.806 A:middle
+to create a CA basic
+animation, and we are going
+
+00:36:15.806 --> 00:36:17.526 A:middle
+to animate the input
+scale, so we are going
+
+00:36:17.526 --> 00:36:21.676 A:middle
+to get a varying scale pixelate
+effect that will be applied
+
+00:36:21.676 --> 00:36:23.926 A:middle
+over time going from
+a value of 0 to 50.
+
+00:36:24.586 --> 00:36:28.106 A:middle
+It will ease in and ease out
+over the course of two seconds.
+
+00:36:28.666 --> 00:36:33.506 A:middle
+If we add this code,
+we then get our ship
+
+00:36:34.756 --> 00:36:40.826 A:middle
+with a beautifully
+animated pixelate effect.
+
+00:36:41.576 --> 00:36:44.526 A:middle
+And, again, great frame rates.
+
+00:36:45.176 --> 00:36:49.876 A:middle
+Now, this doesn't necessarily
+have to be applied to one node.
+
+00:36:49.876 --> 00:36:51.806 A:middle
+You can apply it to
+your entire scene.
+
+00:36:51.806 --> 00:36:53.116 A:middle
+Here we have a sample
+that we shipped
+
+00:36:53.186 --> 00:36:55.726 A:middle
+that you can download
+called Bananas,
+
+00:36:56.466 --> 00:36:59.006 A:middle
+where we have applied the same
+effect along with animation
+
+00:36:59.986 --> 00:37:04.066 A:middle
+and we are changing the pixelate
+scale in real time here.
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:36:59.986 --> 00:37:04.066 A:middle
+and we are changing the pixelate
+scale in real time here.
+
+00:37:04.916 --> 00:37:07.396 A:middle
+I was surprised that I
+could play this game better
+
+00:37:07.396 --> 00:37:12.226 A:middle
+when it was pixelated
+than when it was full-res.
+
+00:37:12.396 --> 00:37:15.116 A:middle
+But you could use this
+not just to create games
+
+00:37:15.116 --> 00:37:18.336 A:middle
+but to also apply an effect
+at the end of the game,
+
+00:37:18.336 --> 00:37:23.356 A:middle
+for example, or if you wanted
+to have different versions
+
+00:37:23.356 --> 00:37:24.466 A:middle
+of your assets rendered
+
+00:37:24.836 --> 00:37:26.316 A:middle
+with different image
+processing effects,
+
+00:37:26.316 --> 00:37:28.376 A:middle
+you could use Core Image
+
+00:37:28.376 --> 00:37:31.856 A:middle
+with these APIs together
+and it works great.
+
+00:37:32.446 --> 00:37:36.796 A:middle
+So, so far today we have seen
+a bunch of stuff about how
+
+00:37:36.796 --> 00:37:39.476 A:middle
+to use Core Image with
+Metal, AV Foundation,
+
+00:37:40.406 --> 00:37:42.496 A:middle
+why IOSurface is
+so important to us.
+
+00:37:42.496 --> 00:37:45.056 A:middle
+The easy way to use UIImageView
+
+00:37:45.056 --> 00:37:47.736 A:middle
+if you are only creating
+an image once
+
+00:37:47.736 --> 00:37:49.576 A:middle
+and don't need to
+constantly update.
+
+00:37:49.576 --> 00:37:51.876 A:middle
+It's a great way to
+apply an effect once.
+
+00:37:52.876 --> 00:37:55.736 A:middle
+We showed you how to use Core
+Animation as well, how to bring
+
+00:37:55.736 --> 00:37:57.766 A:middle
+in custom data with
+CIImageProvider,
+
+00:37:57.766 --> 00:38:01.826 A:middle
+and how to use it in the context
+of games or other applications
+
+WEBVTT
+X-TIMESTAMP-MAP=MPEGTS:181083,LOCAL:00:00:00.000
+
+00:37:57.766 --> 00:38:01.826 A:middle
+and how to use it in the context
+of games or other applications
+
+00:38:02.106 --> 00:38:08.786 A:middle
+that you can create very simply
+with SceneKit or SpriteKit.
+
+00:38:09.216 --> 00:38:10.966 A:middle
+For additional information,
+we have a bunch
+
+00:38:10.966 --> 00:38:14.276 A:middle
+of resources available online
+at developer.apple.com,
+
+00:38:15.126 --> 00:38:18.436 A:middle
+and for any additional inquiries
+you can contact Stephen Chick
+
+00:38:18.436 --> 00:38:20.796 A:middle
+at chick@apple.com.
+
+00:38:22.036 --> 00:38:25.696 A:middle
+There are other sessions you
+may be interested in going to,
+
+00:38:25.696 --> 00:38:27.876 A:middle
+including the Editing
+Movies in AV Foundation
+
+00:38:28.346 --> 00:38:31.996 A:middle
+which took place a few days
+ago but you can look at online
+
+00:38:31.996 --> 00:38:35.466 A:middle
+and What's New in Metal Part 2
+that also took place yesterday.
+
+00:38:36.336 --> 00:38:40.456 A:middle
+And on that note, I would like
+to thank you all for coming
+
+00:38:40.526 --> 00:38:43.116 A:middle
+and I hope you enjoy using Core
+Image in your applications,
+
+00:38:43.176 --> 00:38:44.596 A:middle
+and I hope you enjoy the
+rest of the conference.
+
+00:38:44.596 --> 00:38:45.256 A:middle
+Thank you very much!
+
+00:38:47.516 --> 00:38:58.360 A:middle
+[ Applause ]
+
