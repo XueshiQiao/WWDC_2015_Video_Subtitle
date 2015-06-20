@@ -1,0 +1,3086 @@
+
+00:00:06.726 --> 00:00:07.106 A:middle
+(Applause)
+
+00:00:07.106 --> 00:00:10.806 A:middle
+&gt;&gt; NEIL DESAI: Hi, everyone.
+
+00:00:23.296 --> 00:00:34.966 A:middle
+Welcome to Building Watch Apps.
+
+00:00:35.006 --> 00:00:37.006 A:middle
+My name is Neil Desai,
+and I am an engineer
+
+00:00:37.276 --> 00:00:38.916 A:middle
+on the watchOS program.
+
+00:00:39.946 --> 00:00:40.976 A:middle
+Today I am going to show you how
+
+00:00:40.976 --> 00:00:43.356 A:middle
+to build a watchOS app
+from the ground up.
+
+00:00:43.786 --> 00:00:48.266 A:middle
+So we're going to talk through
+the architecture of a Watch app,
+
+00:00:48.266 --> 00:00:50.626 A:middle
+we are going to walk
+through the app life cycle,
+
+00:00:50.766 --> 00:00:51.666 A:middle
+the layout model.
+
+00:00:51.666 --> 00:00:54.876 A:middle
+We are going to use those
+different interface elements
+
+00:00:54.956 --> 00:00:57.876 A:middle
+to provide a great
+experience for your user.
+
+00:00:58.806 --> 00:01:02.046 A:middle
+We're going to debug the
+app, and we are also going
+
+
+
+00:00:58.806 --> 00:01:02.046 A:middle
+We're going to debug the
+app, and we are also going
+
+00:01:02.046 --> 00:01:04.896 A:middle
+to enhance our app using
+various watchOS 2 features.
+
+00:01:05.956 --> 00:01:08.956 A:middle
+So, on the Apple Watch you
+have four opportunities
+
+00:01:08.956 --> 00:01:10.156 A:middle
+to present information.
+
+00:01:10.776 --> 00:01:12.326 A:middle
+From the Home screen
+on Apple Watch
+
+00:01:12.396 --> 00:01:14.146 A:middle
+to where it can manually
+launch your Watch app.
+
+00:01:14.726 --> 00:01:17.686 A:middle
+The Watch app offers an
+in-depth user experience
+
+00:01:17.686 --> 00:01:20.096 A:middle
+and where you will focus most
+of your development efforts.
+
+00:01:21.456 --> 00:01:23.086 A:middle
+You can optionally
+provide a Glance,
+
+00:01:23.326 --> 00:01:26.876 A:middle
+which offers the most timely
+and relevant data from your app
+
+00:01:26.976 --> 00:01:28.256 A:middle
+in an abbreviated form.
+
+00:01:28.836 --> 00:01:33.246 A:middle
+You can also provide a custom
+UI for your app's remote
+
+00:01:33.246 --> 00:01:34.436 A:middle
+and local notifications.
+
+00:01:34.946 --> 00:01:36.296 A:middle
+Apple Watch takes advantage
+
+00:01:36.296 --> 00:01:39.236 A:middle
+of the existing interactive
+notification support on iOS
+
+00:01:39.846 --> 00:01:42.936 A:middle
+to allow the wearer to
+respond with a specific action,
+
+00:01:43.206 --> 00:01:45.906 A:middle
+transition to a specific
+area of your app,
+
+00:01:45.906 --> 00:01:47.526 A:middle
+or later view the notification
+
+00:01:47.646 --> 00:01:49.626 A:middle
+in Notification Center
+on Apple Watch.
+
+00:01:50.616 --> 00:01:55.006 A:middle
+And lastly, you can add --
+now you can add a Complication
+
+00:01:55.006 --> 00:01:57.826 A:middle
+to display information on the
+clock face, and this is one
+
+00:01:57.826 --> 00:01:59.056 A:middle
+that I am really excited about.
+
+00:01:59.176 --> 00:02:01.406 A:middle
+This is great for small
+pieces of information
+
+
+
+00:01:59.176 --> 00:02:01.406 A:middle
+This is great for small
+pieces of information
+
+00:02:01.716 --> 00:02:06.036 A:middle
+that the user may want to
+know while viewing the time.
+
+00:02:06.236 --> 00:02:08.996 A:middle
+So now that we know the
+different ways the user will
+
+00:02:08.996 --> 00:02:10.166 A:middle
+interact with your app,
+
+00:02:10.166 --> 00:02:14.126 A:middle
+let's discuss the
+architecture of a Watch app.
+
+00:02:14.396 --> 00:02:17.316 A:middle
+Your existing iPhone app
+contains your WatchKit extension
+
+00:02:17.376 --> 00:02:18.156 A:middle
+and Watch app.
+
+00:02:18.746 --> 00:02:21.666 A:middle
+These both get installed on
+the Watch after initial pairing
+
+00:02:21.666 --> 00:02:25.946 A:middle
+at the user's request or a later
+user-initiated installation via
+
+00:02:25.946 --> 00:02:26.856 A:middle
+the Apple Watch app.
+
+00:02:27.766 --> 00:02:30.956 A:middle
+The Watch app is comprised
+of two pieces, first,
+
+00:02:30.956 --> 00:02:33.966 A:middle
+the WatchKit extension,
+and this extension now runs
+
+00:02:33.966 --> 00:02:35.856 A:middle
+on Apple Watch and executes code
+
+00:02:36.096 --> 00:02:38.006 A:middle
+in response to user
+interactions.
+
+00:02:38.496 --> 00:02:40.576 A:middle
+The second piece
+is the Watch app.
+
+00:02:40.676 --> 00:02:42.316 A:middle
+Your Watch app's UI is loaded
+
+00:02:42.376 --> 00:02:44.226 A:middle
+from a bundle containing
+your storyboard
+
+00:02:44.516 --> 00:02:46.906 A:middle
+and static resources
+such as images.
+
+00:02:47.466 --> 00:02:51.216 A:middle
+So this UI, which
+lives in the Watch app,
+
+00:02:51.776 --> 00:02:53.496 A:middle
+then talks to your
+WatchKit extension,
+
+00:02:53.856 --> 00:02:55.466 A:middle
+where you can place
+all of your logic.
+
+00:02:56.226 --> 00:02:58.086 A:middle
+Now that the extension
+lives on the Watch,
+
+00:02:58.336 --> 00:03:00.566 A:middle
+you can enable all sorts
+of new capabilities,
+
+
+
+00:02:58.336 --> 00:03:00.566 A:middle
+you can enable all sorts
+of new capabilities,
+
+00:03:00.676 --> 00:03:01.736 A:middle
+which I will get into later.
+
+00:03:02.746 --> 00:03:05.716 A:middle
+And in the moments when your
+Watch app needs to communicate
+
+00:03:05.946 --> 00:03:08.396 A:middle
+with your iOS app, there's
+a new framework called
+
+00:03:08.396 --> 00:03:12.036 A:middle
+WatchConnectivity that you can
+use to offload heavy processing
+
+00:03:12.226 --> 00:03:15.476 A:middle
+or networking tasks, and
+WatchConnectivity lives
+
+00:03:15.476 --> 00:03:20.166 A:middle
+on both iOS and watchOS 2 so you
+can communicate back and forth.
+
+00:03:23.056 --> 00:03:25.316 A:middle
+To summarize, your
+storyboard and all
+
+00:03:25.316 --> 00:03:28.106 A:middle
+of your static resources are
+stored in the Watch app bundle.
+
+00:03:28.986 --> 00:03:30.516 A:middle
+The Watch app target
+provided to you
+
+00:03:30.516 --> 00:03:33.706 A:middle
+by Xcode already contains
+the storyboard you'll use
+
+00:03:33.706 --> 00:03:34.486 A:middle
+during development.
+
+00:03:35.386 --> 00:03:38.026 A:middle
+Because these resources
+are part of the Watch app,
+
+00:03:38.346 --> 00:03:40.496 A:middle
+they must all be
+specified at design time
+
+00:03:40.626 --> 00:03:42.846 A:middle
+and can only be modified
+slightly at runtime.
+
+00:03:43.686 --> 00:03:45.796 A:middle
+This means you need
+to incorporate all
+
+00:03:45.796 --> 00:03:47.626 A:middle
+of the UI elements
+that you might need
+
+00:03:47.626 --> 00:03:49.266 A:middle
+into each scene of
+your storyboard.
+
+00:03:50.236 --> 00:03:53.876 A:middle
+At runtime, coding your WatchKit
+extension can update those UI
+
+00:03:53.876 --> 00:03:56.456 A:middle
+elements, including
+hiding, showing,
+
+00:03:56.456 --> 00:03:57.946 A:middle
+or animating them as needed.
+
+00:03:58.416 --> 00:04:01.196 A:middle
+Additionally, your WatchKit
+extension can send dynamically
+
+
+
+00:03:58.416 --> 00:04:01.196 A:middle
+Additionally, your WatchKit
+extension can send dynamically
+
+00:04:01.196 --> 00:04:03.846 A:middle
+generated content over to
+the Watch app for display.
+
+00:04:05.616 --> 00:04:09.106 A:middle
+So in Interface Controller
+manages the UI elements
+
+00:04:09.106 --> 00:04:10.466 A:middle
+for a single stream of content.
+
+00:04:10.926 --> 00:04:12.876 A:middle
+It sets the initial
+values of those elements,
+
+00:04:13.116 --> 00:04:14.696 A:middle
+responds to user interactions,
+
+00:04:15.066 --> 00:04:16.926 A:middle
+and updates the UI
+as appropriate.
+
+00:04:17.875 --> 00:04:20.026 A:middle
+When you create your
+Interface Controller subclass,
+
+00:04:20.555 --> 00:04:23.476 A:middle
+you add outlets for each UI
+element you need to manage.
+
+00:04:23.996 --> 00:04:26.416 A:middle
+These outlets connect to
+objects in your storyboard
+
+00:04:26.676 --> 00:04:28.386 A:middle
+and handle the transfer
+of information
+
+00:04:28.696 --> 00:04:31.536 A:middle
+between your WatchKit
+extension and Watch app.
+
+00:04:32.146 --> 00:04:34.896 A:middle
+In addition to outlets,
+you set up action methods
+
+00:04:34.896 --> 00:04:37.446 A:middle
+for the interactive
+elements of your storyboard,
+
+00:04:37.846 --> 00:04:41.096 A:middle
+and as with outlets, you
+connect each action method
+
+00:04:41.376 --> 00:04:42.896 A:middle
+to the corresponding UI element.
+
+00:04:43.606 --> 00:04:46.516 A:middle
+And when the wearer interacts
+with that element on the Watch,
+
+00:04:46.976 --> 00:04:49.606 A:middle
+WatchKit will then call
+your action method.
+
+00:04:50.796 --> 00:04:52.816 A:middle
+So let's get started
+thinking about how
+
+00:04:52.816 --> 00:04:55.446 A:middle
+to modify an existing
+iPhone app.
+
+00:04:56.276 --> 00:05:00.776 A:middle
+So in the run-up to WWDC, I
+have been a little forgetful
+
+
+
+00:04:56.276 --> 00:05:00.776 A:middle
+So in the run-up to WWDC, I
+have been a little forgetful
+
+00:05:00.776 --> 00:05:03.296 A:middle
+about contacting people such
+as my family and friends,
+
+00:05:03.906 --> 00:05:06.256 A:middle
+so I wanted to create
+an app that reminds me
+
+00:05:06.256 --> 00:05:08.066 A:middle
+who I have contacted
+and who I haven't,
+
+00:05:08.476 --> 00:05:12.626 A:middle
+and it's called WWDC Call Me
+Lately and helps notify me
+
+00:05:12.656 --> 00:05:13.596 A:middle
+when I should contact them.
+
+00:05:14.216 --> 00:05:17.226 A:middle
+So I communicate with
+my server to keep track
+
+00:05:17.226 --> 00:05:19.836 A:middle
+of the people I need to
+contact via NSURLSession.
+
+00:05:20.246 --> 00:05:23.626 A:middle
+This is a great iOS
+app I made, but really,
+
+00:05:23.626 --> 00:05:25.956 A:middle
+it makes even more
+sense as a Watch app.
+
+00:05:26.686 --> 00:05:31.566 A:middle
+When I am busy, I quickly can
+know who I need to contact next.
+
+00:05:31.566 --> 00:05:34.686 A:middle
+Let's get started
+making our Watch app.
+
+00:05:34.956 --> 00:05:37.306 A:middle
+So what I want to do is
+I want to show you how
+
+00:05:37.306 --> 00:05:40.046 A:middle
+to add a Watch app target
+to an existing iOS app,
+
+00:05:40.046 --> 00:05:42.666 A:middle
+and then we are going
+to walk through where
+
+00:05:42.666 --> 00:05:44.596 A:middle
+to get started configuring
+your interface.
+
+00:05:45.216 --> 00:05:46.996 A:middle
+And lastly, we are
+going to build and run
+
+00:05:47.076 --> 00:05:48.746 A:middle
+to see how things
+look in the simulator.
+
+00:05:50.116 --> 00:05:51.416 A:middle
+So speaking of the simulator,
+
+00:05:51.726 --> 00:05:54.886 A:middle
+we actually have a brand-new
+simulator in the watchOS 2 SDK.
+
+00:05:56.086 --> 00:05:59.256 A:middle
+So you guys are all probably
+familiar with the iOS simulator,
+
+00:05:59.256 --> 00:06:00.476 A:middle
+and it looks something
+like this.
+
+
+
+00:05:59.256 --> 00:06:00.476 A:middle
+and it looks something
+like this.
+
+00:06:01.466 --> 00:06:03.596 A:middle
+And now we have a
+new Watch simulator.
+
+00:06:04.326 --> 00:06:07.446 A:middle
+So what's great about this is
+it's a fully fledged simulator,
+
+00:06:07.516 --> 00:06:10.646 A:middle
+so we can easily look
+at our 38-millimeter
+
+00:06:10.646 --> 00:06:12.216 A:middle
+and 42-millimeter sizes.
+
+00:06:13.256 --> 00:06:14.936 A:middle
+We can simulate touch pressure.
+
+00:06:16.216 --> 00:06:18.116 A:middle
+We can also look at
+different clock faces.
+
+00:06:18.316 --> 00:06:20.786 A:middle
+So like I mentioned earlier,
+there's now the ability
+
+00:06:21.106 --> 00:06:25.246 A:middle
+to support Complications in
+watchOS 2, and so you can look
+
+00:06:25.246 --> 00:06:27.386 A:middle
+at how your Complication views
+
+00:06:27.386 --> 00:06:29.616 A:middle
+in different clock
+faces in the simulator.
+
+00:06:30.986 --> 00:06:32.676 A:middle
+And lastly, you can have
+multiple apps installed
+
+00:06:32.676 --> 00:06:33.406 A:middle
+at the same time.
+
+00:06:33.406 --> 00:06:36.216 A:middle
+So we think this is going to
+be a really great way for you
+
+00:06:36.216 --> 00:06:38.706 A:middle
+to easily make a new
+project, iterate on an idea,
+
+00:06:38.706 --> 00:06:43.266 A:middle
+and then quickly go back and
+forth between different apps.
+
+00:06:44.456 --> 00:06:47.876 A:middle
+So to simulate touch pressure,
+you go into the Simulator menu,
+
+00:06:47.876 --> 00:06:50.316 A:middle
+and you go to Hardware,
+Simulate Touch Pressure,
+
+00:06:50.586 --> 00:06:53.046 A:middle
+and then you can
+select the Deep Press.
+
+00:06:53.046 --> 00:06:55.346 A:middle
+This is useful for
+things like wanting
+
+00:06:55.346 --> 00:06:58.576 A:middle
+to change the clock
+face in the sim.
+
+00:06:58.576 --> 00:07:02.286 A:middle
+Now let's jump into Xcode and
+see how we can add our Watch app
+
+
+
+00:06:58.576 --> 00:07:02.286 A:middle
+Now let's jump into Xcode and
+see how we can add our Watch app
+
+00:07:02.286 --> 00:07:03.866 A:middle
+and use this brand-new
+simulator.
+
+00:07:04.196 --> 00:07:18.416 A:middle
+So let's go to demo.
+
+00:07:18.556 --> 00:07:19.896 A:middle
+Great. So let's launch Xcode.
+
+00:07:20.536 --> 00:07:23.866 A:middle
+And let's select our app.
+
+00:07:24.936 --> 00:07:28.436 A:middle
+And let's make this a
+little bit easier to view.
+
+00:07:29.056 --> 00:07:32.926 A:middle
+Great. So now if I wanted to
+add a new app, I would just go
+
+00:07:32.926 --> 00:07:41.396 A:middle
+to File, New Target, and then
+I now have a new watchOS pane,
+
+00:07:41.466 --> 00:07:43.706 A:middle
+so I have an application
+and framework in library.
+
+00:07:43.766 --> 00:07:47.016 A:middle
+I select Framework In Library
+so I can add a Watch framework
+
+00:07:47.016 --> 00:07:48.286 A:middle
+or Watch static library.
+
+00:07:48.746 --> 00:07:51.966 A:middle
+For now I am going to
+add a WatchKit app.
+
+00:07:51.966 --> 00:07:56.896 A:middle
+I double-click, add
+a product name,
+
+00:07:56.896 --> 00:08:00.146 A:middle
+and my main app is always
+going to be enabled by default,
+
+
+
+00:07:56.896 --> 00:08:00.146 A:middle
+and my main app is always
+going to be enabled by default,
+
+00:08:00.146 --> 00:08:02.326 A:middle
+but I can also include
+a Notification scene,
+
+00:08:02.476 --> 00:08:04.326 A:middle
+a Glance scene, and
+a Complication.
+
+00:08:04.996 --> 00:08:06.036 A:middle
+So I can add those here.
+
+00:08:06.636 --> 00:08:08.316 A:middle
+I already added it to this app.
+
+00:08:08.826 --> 00:08:09.766 A:middle
+Let's just press Cancel.
+
+00:08:11.106 --> 00:08:12.806 A:middle
+Now let's see what we are given.
+
+00:08:13.796 --> 00:08:16.736 A:middle
+Here is our Watch app, and
+here is our WatchKit extension.
+
+00:08:17.336 --> 00:08:18.326 A:middle
+Like I mentioned before,
+
+00:08:18.326 --> 00:08:20.646 A:middle
+our Watch app contains
+our storyboard,
+
+00:08:20.646 --> 00:08:23.746 A:middle
+all our static resources,
+and our asset catalog.
+
+00:08:24.146 --> 00:08:26.406 A:middle
+Our WatchKit extension will
+contain all our interface
+
+00:08:26.406 --> 00:08:31.966 A:middle
+controllers and any other
+code we might want to add.
+
+00:08:31.966 --> 00:08:33.496 A:middle
+Let's go into the storyboard.
+
+00:08:36.895 --> 00:08:39.826 A:middle
+So now, as you can see,
+I have a main interface,
+
+00:08:40.006 --> 00:08:42.606 A:middle
+I have my Glance interface,
+and then I have my static
+
+00:08:42.606 --> 00:08:45.056 A:middle
+and dynamic interface
+for my notification.
+
+00:08:46.296 --> 00:08:48.516 A:middle
+Now, let's also go into
+the utilities inspector,
+
+00:08:49.806 --> 00:08:51.906 A:middle
+and I can look at the
+object library and see
+
+00:08:51.906 --> 00:08:55.026 A:middle
+that I have a lot of different
+objects here that I can use,
+
+00:08:55.026 --> 00:08:59.486 A:middle
+and I have all my WatchKit
+interface elements as well.
+
+00:08:59.696 --> 00:09:02.546 A:middle
+So let's just drag and drop
+an interface controller over.
+
+
+
+00:08:59.696 --> 00:09:02.546 A:middle
+So let's just drag and drop
+an interface controller over.
+
+00:09:04.456 --> 00:09:06.276 A:middle
+For instance, if I wanted
+
+00:09:06.276 --> 00:09:08.686 A:middle
+to very simply make
+a page controller,
+
+00:09:08.686 --> 00:09:12.426 A:middle
+I could select Control on
+my keyboard and then drag
+
+00:09:12.426 --> 00:09:14.016 A:middle
+over to my new interface
+controller
+
+00:09:14.276 --> 00:09:17.386 A:middle
+and create a segue
+for next page.
+
+00:09:17.596 --> 00:09:23.136 A:middle
+So for now, we'll just get rid
+of that, and if you see below,
+
+00:09:23.136 --> 00:09:25.506 A:middle
+there's a static interface
+and a dynamic interface,
+
+00:09:25.696 --> 00:09:28.276 A:middle
+so the dynamic interface
+is actually what hooks
+
+00:09:28.276 --> 00:09:30.196 A:middle
+up to your Notification
+Controller class.
+
+00:09:30.686 --> 00:09:33.836 A:middle
+So when your user first
+raises their wrist
+
+00:09:33.836 --> 00:09:36.476 A:middle
+when they get your notification
+and then they see it,
+
+00:09:36.476 --> 00:09:38.686 A:middle
+your Notification Controller
+class will get called,
+
+00:09:38.946 --> 00:09:41.456 A:middle
+and you can provide
+a very rich UI there.
+
+00:09:42.586 --> 00:09:46.266 A:middle
+Now, your static interface is
+typically going to be invoked
+
+00:09:46.266 --> 00:09:49.386 A:middle
+when the user, for example,
+misses your notification
+
+00:09:49.386 --> 00:09:51.586 A:middle
+and goes to view it again
+in the Notification Center,
+
+00:09:51.886 --> 00:09:54.016 A:middle
+and that's typically when you
+will see the static interface.
+
+00:09:56.076 --> 00:10:00.376 A:middle
+So also, I have this
+My Category here.
+
+
+
+00:09:56.076 --> 00:10:00.376 A:middle
+So also, I have this
+My Category here.
+
+00:10:00.826 --> 00:10:05.066 A:middle
+So for different categories that
+we send for different payloads,
+
+00:10:05.066 --> 00:10:08.236 A:middle
+we can actually create custom
+UIs and custom notifications
+
+00:10:08.786 --> 00:10:10.276 A:middle
+for those different categories.
+
+00:10:10.546 --> 00:10:13.696 A:middle
+So it's not just one
+interface for one --
+
+00:10:14.126 --> 00:10:16.406 A:middle
+for all of the notifications
+you send.
+
+00:10:16.406 --> 00:10:19.516 A:middle
+You can actually modify this
+and create multiple interfaces.
+
+00:10:20.766 --> 00:10:22.876 A:middle
+So let's just add a new
+notification controller.
+
+00:10:27.176 --> 00:10:28.316 A:middle
+Let's place that here.
+
+00:10:29.206 --> 00:10:32.546 A:middle
+So if I wanted to, I could drag
+over an interface controller
+
+00:10:32.546 --> 00:10:35.166 A:middle
+and then, just like I did
+before, I would Control-click,
+
+00:10:35.166 --> 00:10:37.276 A:middle
+and then create my
+new dynamic interface.
+
+00:10:38.126 --> 00:10:41.436 A:middle
+Or I can also just go here
+into the attributes inspector
+
+00:10:41.646 --> 00:10:43.446 A:middle
+and select Has Dynamic
+Interface.
+
+00:10:44.036 --> 00:10:46.706 A:middle
+So now I can modify my category
+
+00:10:46.706 --> 00:10:48.046 A:middle
+and I can create
+a new interface,
+
+00:10:48.046 --> 00:10:50.086 A:middle
+and then I possibly would want
+
+00:10:50.086 --> 00:10:53.216 A:middle
+to create a new Notification
+Controller class
+
+00:10:53.216 --> 00:10:54.746 A:middle
+and then hook that up as well.
+
+00:10:55.876 --> 00:10:58.886 A:middle
+So also we have given to us
+
+00:10:58.886 --> 00:11:02.296 A:middle
+by the template a push
+notification payload .apns file.
+
+
+
+00:10:58.886 --> 00:11:02.296 A:middle
+by the template a push
+notification payload .apns file.
+
+00:11:03.306 --> 00:11:05.206 A:middle
+If you see here, this looks just
+
+00:11:05.206 --> 00:11:06.836 A:middle
+like a normal payload
+we might have.
+
+00:11:07.176 --> 00:11:10.586 A:middle
+It has an alert, a body,
+a title, a category.
+
+00:11:11.196 --> 00:11:13.906 A:middle
+What's great about this
+is in the simulator,
+
+00:11:13.906 --> 00:11:16.316 A:middle
+we can use these
+different payload files
+
+00:11:16.586 --> 00:11:18.136 A:middle
+and mockup different interfaces.
+
+00:11:18.436 --> 00:11:21.836 A:middle
+If we want to test out all of
+these different notifications,
+
+00:11:22.166 --> 00:11:23.586 A:middle
+we don't have to
+just do it to device.
+
+00:11:24.016 --> 00:11:25.886 A:middle
+We can now quickly iterate
+
+00:11:25.886 --> 00:11:27.856 A:middle
+on different ideas
+using the simulator
+
+00:11:27.856 --> 00:11:29.386 A:middle
+and these notification payloads.
+
+00:11:29.946 --> 00:11:32.896 A:middle
+So let's go back
+to my storyboard.
+
+00:11:33.406 --> 00:11:35.246 A:middle
+So now I just want
+to build and run
+
+00:11:35.676 --> 00:11:37.756 A:middle
+and view my main app
+in the simulator.
+
+00:11:38.566 --> 00:11:40.346 A:middle
+So I am going to go
+up to my schemes,
+
+00:11:40.726 --> 00:11:44.726 A:middle
+and I see I have my iOS scheme
+and then my WatchKit app scheme.
+
+00:11:45.596 --> 00:11:48.776 A:middle
+And then I have two simulators
+here, an iPhone 6 Plus
+
+00:11:48.776 --> 00:11:49.796 A:middle
+with a 38-millimeter
+
+00:11:50.056 --> 00:11:52.566 A:middle
+and an iPhone 6 Plus
+with a 42-millimeter.
+
+00:11:52.976 --> 00:11:55.546 A:middle
+As I mentioned before, this
+is actually a full simulator
+
+00:11:55.546 --> 00:11:56.106 A:middle
+for the Watch.
+
+00:11:56.216 --> 00:11:58.916 A:middle
+It's actually going to be
+paired with my iPhone sim,
+
+
+
+00:12:00.096 --> 00:12:06.256 A:middle
+so let's select the iPhone 6
+scheme, and let's build and run,
+
+00:12:06.476 --> 00:12:09.896 A:middle
+and now I have two
+simulators open.
+
+00:12:11.136 --> 00:12:15.836 A:middle
+So what I expect to have happen
+is that the main app will launch
+
+00:12:15.836 --> 00:12:17.786 A:middle
+and I will get attached
+to it in the debugger.
+
+00:12:18.586 --> 00:12:22.296 A:middle
+So great. So let's press Allow,
+because I do want to allow this.
+
+00:12:22.916 --> 00:12:24.676 A:middle
+And now I am attaching
+the debugger,
+
+00:12:24.676 --> 00:12:27.706 A:middle
+and I have a small thing
+that has appeared here,
+
+00:12:27.706 --> 00:12:29.806 A:middle
+it says "extension
+received request to wake
+
+00:12:29.806 --> 00:12:31.246 A:middle
+up for complication support."
+
+00:12:31.636 --> 00:12:34.346 A:middle
+So if I were to implement
+my Complication,
+
+00:12:34.756 --> 00:12:37.266 A:middle
+this would later go away.
+
+00:12:37.506 --> 00:12:40.626 A:middle
+So now let's just stop
+this debug session.
+
+00:12:41.056 --> 00:12:42.526 A:middle
+Let's go back to our Watch sim.
+
+00:12:43.826 --> 00:12:46.366 A:middle
+So here's my new simulator.
+
+00:12:46.366 --> 00:12:47.296 A:middle
+I have my clock face.
+
+00:12:47.686 --> 00:12:50.826 A:middle
+Now if I really just wanted
+to change out my clock face,
+
+00:12:50.826 --> 00:12:53.826 A:middle
+I can go into Hardware,
+Simulate Touch Pressure,
+
+00:12:55.046 --> 00:12:58.666 A:middle
+and now I can simulate a deep
+press, then I can go back
+
+00:12:59.406 --> 00:13:02.756 A:middle
+to a shallow press, and then
+I can modify my clock face.
+
+
+
+00:12:59.406 --> 00:13:02.756 A:middle
+to a shallow press, and then
+I can modify my clock face.
+
+00:13:03.766 --> 00:13:06.006 A:middle
+Now I can customize my
+clock in the simulator.
+
+00:13:06.946 --> 00:13:09.846 A:middle
+So if I were to go to
+this screen on a device,
+
+00:13:09.846 --> 00:13:11.196 A:middle
+I would use my Digital Crown,
+
+00:13:11.196 --> 00:13:12.716 A:middle
+and then I would
+easily change the color.
+
+00:13:13.076 --> 00:13:15.196 A:middle
+So there isn't a Digital
+Crown on my mouse,
+
+00:13:15.456 --> 00:13:18.026 A:middle
+but thankfully I
+have a scroll wheel,
+
+00:13:18.446 --> 00:13:20.956 A:middle
+and I can use the
+trackpad or Magic Mouse,
+
+00:13:21.956 --> 00:13:23.656 A:middle
+and I can change
+the color as such.
+
+00:13:23.726 --> 00:13:26.066 A:middle
+Now I can simulate the
+Digital Crown behavior.
+
+00:13:26.976 --> 00:13:29.376 A:middle
+Also, when I am in my
+Complications view,
+
+00:13:29.686 --> 00:13:34.956 A:middle
+as I swipe over, I can
+then enable my Complication
+
+00:13:35.206 --> 00:13:38.826 A:middle
+that I have, and so if I am
+iterating on Complication ideas,
+
+00:13:38.826 --> 00:13:41.496 A:middle
+I want to build some
+new Complications
+
+00:13:41.496 --> 00:13:44.116 A:middle
+on different faces, I would
+just enable these Complications
+
+00:13:44.116 --> 00:13:44.656 A:middle
+as such.
+
+00:13:45.956 --> 00:13:49.456 A:middle
+So for now, let's just go back,
+and let's do Command-Shift-H
+
+00:13:49.456 --> 00:13:54.956 A:middle
+for home, and let's select and
+then do Command-Shift-H again.
+
+00:13:55.716 --> 00:13:58.186 A:middle
+So now I am at the Home screen,
+so I have my Settings app,
+
+00:13:58.446 --> 00:14:00.146 A:middle
+my clock face, and
+the app I have.
+
+
+
+00:13:58.446 --> 00:14:00.146 A:middle
+my clock face, and
+the app I have.
+
+00:14:00.976 --> 00:14:04.286 A:middle
+And then I can launch my
+app and see it as I expect.
+
+00:14:04.666 --> 00:14:08.946 A:middle
+So let's go back home.
+
+00:14:09.096 --> 00:14:12.216 A:middle
+And now, like I mentioned,
+these sims are paired.
+
+00:14:12.216 --> 00:14:14.426 A:middle
+I have two different
+sims to choose from.
+
+00:14:14.426 --> 00:14:17.266 A:middle
+I go into schemes and
+I see my two sims.
+
+00:14:17.686 --> 00:14:19.256 A:middle
+But what happens if I want
+
+00:14:19.386 --> 00:14:22.306 A:middle
+to have an iPhone 5 sim
+with a 42-millimeter?
+
+00:14:22.346 --> 00:14:25.526 A:middle
+I am going to make a new sim
+and have it paired for me.
+
+00:14:26.656 --> 00:14:31.556 A:middle
+So let's go into Xcode and then
+select Window, and then Devices.
+
+00:14:32.356 --> 00:14:35.496 A:middle
+And so now in my sidebar, I have
+all of my different simulators.
+
+00:14:35.766 --> 00:14:39.326 A:middle
+So if I go to the bottom left,
+I can then add a simulator.
+
+00:14:39.636 --> 00:14:41.856 A:middle
+So I can call it iPhone 5.
+
+00:14:43.496 --> 00:14:44.976 A:middle
+Change my device type.
+
+00:14:45.546 --> 00:14:47.266 A:middle
+I will keep my iOS version.
+
+00:14:47.916 --> 00:14:50.756 A:middle
+I will change the paired
+watch to be a 42-millimeter,
+
+00:14:51.146 --> 00:14:53.476 A:middle
+so I can easily create that.
+
+00:14:53.476 --> 00:14:57.196 A:middle
+Now if I go back to my scheme,
+there's my new simulator.
+
+00:14:58.856 --> 00:15:01.836 A:middle
+So let's go back
+to the storyboard.
+
+
+
+00:14:58.856 --> 00:15:01.836 A:middle
+So let's go back
+to the storyboard.
+
+00:15:02.486 --> 00:15:08.686 A:middle
+And so as I mentioned,
+there's these schemes
+
+00:15:08.686 --> 00:15:11.286 A:middle
+that we can pick from, so
+there's a Notification scheme,
+
+00:15:11.736 --> 00:15:13.566 A:middle
+there's Glance scheme,
+and a Complication,
+
+00:15:13.566 --> 00:15:15.266 A:middle
+so I can select these
+different schemes
+
+00:15:15.676 --> 00:15:17.516 A:middle
+and quickly debug
+those parts of my app.
+
+00:15:18.616 --> 00:15:21.256 A:middle
+And now, for example,
+I want to just test
+
+00:15:21.256 --> 00:15:22.436 A:middle
+out my Notification scheme,
+
+00:15:22.436 --> 00:15:24.386 A:middle
+I want to see how it
+looks in the simulator.
+
+00:15:24.846 --> 00:15:26.526 A:middle
+We already talked
+about the APNS files.
+
+00:15:26.526 --> 00:15:30.356 A:middle
+I want to see that
+appropriately appear.
+
+00:15:30.586 --> 00:15:33.486 A:middle
+So let's just add a label
+to my dynamic interface.
+
+00:15:33.886 --> 00:15:35.726 A:middle
+And let's drag it over.
+
+00:15:36.436 --> 00:15:40.536 A:middle
+And let's just rename
+this Dynamic.
+
+00:15:40.636 --> 00:15:42.916 A:middle
+So now I selected my
+Notification scheme,
+
+00:15:43.726 --> 00:15:46.236 A:middle
+and I am just going to build
+and run this to the simulator.
+
+00:15:50.376 --> 00:15:53.556 A:middle
+So what I want to have
+happen is on the Watch sim,
+
+00:15:54.666 --> 00:15:57.346 A:middle
+my notification will appear,
+and then it says Dynamic,
+
+00:15:57.806 --> 00:16:03.816 A:middle
+and that's all it
+should say for now.
+
+
+
+00:15:57.806 --> 00:16:03.816 A:middle
+and that's all it
+should say for now.
+
+00:16:04.056 --> 00:16:07.006 A:middle
+So here's my notification,
+and it says Test Message,
+
+00:16:07.606 --> 00:16:10.246 A:middle
+so I am going to
+look into my console.
+
+00:16:10.996 --> 00:16:13.726 A:middle
+It says "took too long to
+show custom notification.
+
+00:16:13.726 --> 00:16:14.896 A:middle
+Falling back to static."
+
+00:16:15.746 --> 00:16:19.376 A:middle
+Okay. So let me look into
+my notification controller
+
+00:16:19.376 --> 00:16:20.656 A:middle
+and see why that
+might have occurred.
+
+00:16:21.426 --> 00:16:23.676 A:middle
+Here is my code for my
+notification controller.
+
+00:16:24.776 --> 00:16:27.566 A:middle
+I go down.
+
+00:16:27.946 --> 00:16:31.226 A:middle
+Okay, so my Did Receive Remote
+Notification is commented out.
+
+00:16:31.226 --> 00:16:33.186 A:middle
+I should probably
+uncomment this.
+
+00:16:37.056 --> 00:16:40.516 A:middle
+And now let's just
+build and run again.
+
+00:16:40.736 --> 00:16:43.956 A:middle
+So now hopefully, after I
+dismiss the old notification,
+
+00:16:45.086 --> 00:16:46.176 A:middle
+I should then see my new one,
+
+00:16:46.236 --> 00:16:47.676 A:middle
+and it says Dynamic
+like I expect.
+
+00:16:48.596 --> 00:16:52.676 A:middle
+So on device, if I was in this
+scenario and got a notification,
+
+00:16:52.676 --> 00:16:54.696 A:middle
+I could select the
+App icon or button
+
+00:16:54.696 --> 00:16:56.096 A:middle
+and I would be taken
+right to the app.
+
+00:16:56.466 --> 00:16:58.756 A:middle
+So I can just do the same
+thing here in the simulator,
+
+00:16:58.756 --> 00:17:08.246 A:middle
+and I am taken right
+to the app as I expect.
+
+
+
+00:16:58.756 --> 00:17:08.246 A:middle
+and I am taken right
+to the app as I expect.
+
+00:17:08.376 --> 00:17:13.596 A:middle
+So now I could flesh out this
+code and add a great UI story
+
+00:17:13.846 --> 00:17:16.326 A:middle
+in my notification,
+and I still want
+
+00:17:16.326 --> 00:17:18.146 A:middle
+to be testing my
+static interface.
+
+00:17:18.296 --> 00:17:21.886 A:middle
+The only way I just saw that
+happen was I had to comment
+
+00:17:21.886 --> 00:17:23.866 A:middle
+out Did Receive Remote
+Notification
+
+00:17:23.866 --> 00:17:25.996 A:middle
+to get my static interface,
+and I don't want to be doing
+
+00:17:25.996 --> 00:17:28.215 A:middle
+that while I am iterating
+on my code.
+
+00:17:28.876 --> 00:17:30.726 A:middle
+So there's a couple
+ways I can do this.
+
+00:17:31.026 --> 00:17:34.186 A:middle
+One, I can change this custom
+in my completion handler
+
+00:17:34.416 --> 00:17:38.486 A:middle
+to call Default, or I can
+actually go into my schemes,
+
+00:17:39.336 --> 00:17:44.886 A:middle
+I can edit the scheme, and now
+I can choose my Watch interface.
+
+00:17:44.886 --> 00:17:48.316 A:middle
+So I can change it to be a
+static notification rather
+
+00:17:48.316 --> 00:17:50.966 A:middle
+than a dynamic, and
+as you can see,
+
+00:17:50.966 --> 00:17:52.776 A:middle
+here's my push notification
+payload.
+
+00:17:53.166 --> 00:17:55.396 A:middle
+So if I had multiple payloads,
+they would appear here,
+
+00:17:55.656 --> 00:17:57.036 A:middle
+and I can quickly change
+
+00:17:57.036 --> 00:18:00.796 A:middle
+out which payload I
+am trying to test.
+
+
+
+00:17:57.036 --> 00:18:00.796 A:middle
+out which payload I
+am trying to test.
+
+00:18:00.966 --> 00:18:05.166 A:middle
+So for my purposes, I might
+want to keep a static scheme
+
+00:18:05.166 --> 00:18:07.826 A:middle
+around for a while, so I am just
+going to duplicate this scheme.
+
+00:18:09.106 --> 00:18:10.866 A:middle
+Let's call it Static
+Notification.
+
+00:18:10.866 --> 00:18:15.526 A:middle
+Then let's go to Run.
+
+00:18:16.316 --> 00:18:18.176 A:middle
+Then I change my Watch
+interface to be static.
+
+00:18:19.126 --> 00:18:20.376 A:middle
+Let's press Close.
+
+00:18:21.146 --> 00:18:23.336 A:middle
+So now I have a static
+notification as well
+
+00:18:23.336 --> 00:18:25.086 A:middle
+as my normal dynamic
+notification.
+
+00:18:26.976 --> 00:18:29.676 A:middle
+So this is great, and
+we have the beginning
+
+00:18:29.676 --> 00:18:33.266 A:middle
+of a template project here, but
+let's understand some context
+
+00:18:33.266 --> 00:18:35.436 A:middle
+of how the app life
+cycle works on watchOS.
+
+00:18:35.436 --> 00:18:46.846 A:middle
+So let's go through the
+life cycle of a watchOS app.
+
+00:18:47.716 --> 00:18:50.756 A:middle
+So we looked at the interface
+for the Watch app but haven't
+
+00:18:50.756 --> 00:18:52.216 A:middle
+yet observed its life cycle.
+
+00:18:52.676 --> 00:18:54.486 A:middle
+It's important to know
+when the extension
+
+00:18:54.486 --> 00:18:57.686 A:middle
+and interface controller get
+called for setup and tear-down
+
+00:18:58.066 --> 00:19:01.136 A:middle
+so you are configuring UI
+elements at the right time,
+
+
+
+00:18:58.066 --> 00:19:01.136 A:middle
+so you are configuring UI
+elements at the right time,
+
+00:19:01.236 --> 00:19:04.456 A:middle
+as well as performing cleanup
+operations or finishing tasks
+
+00:19:04.556 --> 00:19:06.616 A:middle
+when the wearer stops
+interacting with your Watch app.
+
+00:19:07.586 --> 00:19:08.876 A:middle
+When your Watch app is launched,
+
+00:19:08.876 --> 00:19:12.796 A:middle
+the extension delegate
+will get Application Did
+
+00:19:12.796 --> 00:19:13.506 A:middle
+Finish Launching.
+
+00:19:13.926 --> 00:19:15.526 A:middle
+The extension delegate
+is analogous
+
+00:19:15.526 --> 00:19:17.336 A:middle
+to UI application
+delegate on iOS.
+
+00:19:18.126 --> 00:19:21.146 A:middle
+As such, you will also receive
+an Application Did Become Active
+
+00:19:21.146 --> 00:19:23.586 A:middle
+callback to allow you to
+update your model data.
+
+00:19:24.866 --> 00:19:27.466 A:middle
+Next, the storyboard in your
+Watch app bundle is loaded
+
+00:19:27.466 --> 00:19:30.586 A:middle
+on Apple Watch, and the initial
+interface controller is created.
+
+00:19:31.356 --> 00:19:32.916 A:middle
+Once the UI is initialized,
+
+00:19:33.186 --> 00:19:35.366 A:middle
+your interface controller
+will receive an Awake
+
+00:19:35.366 --> 00:19:38.566 A:middle
+With Context call, giving it a
+chance to initialize variables
+
+00:19:38.566 --> 00:19:40.956 A:middle
+for state and configure
+UI elements
+
+00:19:40.996 --> 00:19:41.876 A:middle
+with their initial values.
+
+00:19:41.876 --> 00:19:45.546 A:middle
+When the UI of your Watch
+app is in the process
+
+00:19:45.546 --> 00:19:49.196 A:middle
+of getting displayed on screen,
+Will Activate will be called,
+
+00:19:49.376 --> 00:19:51.886 A:middle
+allowing you to perform
+any last-minute tasks
+
+00:19:51.886 --> 00:19:53.886 A:middle
+or final UI element
+configurations.
+
+00:19:54.576 --> 00:19:57.056 A:middle
+And now, as the wearer
+interacts with UI elements,
+
+00:19:57.236 --> 00:19:59.446 A:middle
+WatchKit calls the
+action methods you defined
+
+00:19:59.446 --> 00:20:00.646 A:middle
+on your interface controller.
+
+
+
+00:19:59.446 --> 00:20:00.646 A:middle
+on your interface controller.
+
+00:20:01.336 --> 00:20:04.536 A:middle
+Those action methods are
+your chance to execute code
+
+00:20:04.976 --> 00:20:07.196 A:middle
+and update your app's UI.
+
+00:20:07.196 --> 00:20:09.196 A:middle
+Keep in mind that
+engagement times are short.
+
+00:20:09.816 --> 00:20:13.336 A:middle
+On iOS, we traditionally think
+in terms of our user interacting
+
+00:20:13.336 --> 00:20:16.476 A:middle
+with our app in a sense of
+minutes, but on watchOS,
+
+00:20:16.656 --> 00:20:18.456 A:middle
+we are going to be thinking
+in terms of seconds.
+
+00:20:19.306 --> 00:20:22.686 A:middle
+Actually, we are going to
+hit a Did Deactivate call
+
+00:20:22.686 --> 00:20:25.826 A:middle
+after the wearer stops
+interacting with our app.
+
+00:20:25.826 --> 00:20:30.136 A:middle
+And after that method is
+called, then at some point
+
+00:20:30.136 --> 00:20:33.396 A:middle
+in the future, the
+interface controller will then
+
+00:20:33.526 --> 00:20:34.426 A:middle
+get deallocated.
+
+00:20:34.996 --> 00:20:38.156 A:middle
+And now our extension delegate,
+
+00:20:38.156 --> 00:20:39.676 A:middle
+after the wearer
+stops interacting
+
+00:20:39.676 --> 00:20:42.356 A:middle
+with the watch completely --
+for example, they might go back
+
+00:20:42.356 --> 00:20:45.776 A:middle
+to the Home screen -- you will
+receive an Application Will
+
+00:20:45.776 --> 00:20:49.256 A:middle
+Resign Active callback, and
+so this is your opportunity
+
+00:20:49.606 --> 00:20:52.666 A:middle
+to save any app-related
+state information and close
+
+00:20:52.666 --> 00:20:54.516 A:middle
+out any ongoing tasks.
+
+00:20:56.436 --> 00:20:59.306 A:middle
+So we know the life cycle
+of the WatchKit extension,
+
+00:20:59.556 --> 00:21:01.096 A:middle
+but another important
+thing to talk
+
+
+
+00:20:59.556 --> 00:21:01.096 A:middle
+but another important
+thing to talk
+
+00:21:01.096 --> 00:21:03.666 A:middle
+about is the layout
+of the Watch app.
+
+00:21:04.936 --> 00:21:11.326 A:middle
+So the model in watchOS for
+WatchKit is different from UIKit
+
+00:21:11.326 --> 00:21:13.886 A:middle
+and AppKit because it's
+a flow-based layout.
+
+00:21:14.476 --> 00:21:18.386 A:middle
+So all of our elements
+go one after another,
+
+00:21:19.416 --> 00:21:22.446 A:middle
+and our UI is primarily
+created in Interface Builder.
+
+00:21:23.596 --> 00:21:25.636 A:middle
+So when we have an
+interface controller,
+
+00:21:25.636 --> 00:21:28.696 A:middle
+we can use our object
+library and just drag an image
+
+00:21:29.026 --> 00:21:32.686 A:middle
+or drag a button, and then
+in the instances when we want
+
+00:21:32.686 --> 00:21:36.996 A:middle
+to have a slightly
+more involved layout,
+
+00:21:37.506 --> 00:21:39.446 A:middle
+we could use a WK
+interface group,
+
+00:21:39.536 --> 00:21:42.676 A:middle
+which will just manage the
+layout for different items.
+
+00:21:43.386 --> 00:21:44.986 A:middle
+So for example, we
+could add an image
+
+00:21:44.986 --> 00:21:46.086 A:middle
+and a label into the group.
+
+00:21:46.596 --> 00:21:50.496 A:middle
+And so the programming model
+is really important to note.
+
+00:21:50.876 --> 00:21:53.726 A:middle
+You don't write object
+creation code with WatchKit.
+
+00:21:54.766 --> 00:21:57.036 A:middle
+You have fine-tuned control
+in the Interface Builder
+
+00:21:57.866 --> 00:22:02.806 A:middle
+of positioning and sizing, the
+layout hierarchy, and animation.
+
+
+
+00:21:57.866 --> 00:22:02.806 A:middle
+of positioning and sizing, the
+layout hierarchy, and animation.
+
+00:22:03.396 --> 00:22:07.636 A:middle
+And I highly encourage
+you to go to the Layout
+
+00:22:07.636 --> 00:22:11.266 A:middle
+and Animation Techniques talk
+for WatchKit on Thursday.
+
+00:22:11.266 --> 00:22:12.896 A:middle
+It's going to be a
+great session on how
+
+00:22:12.896 --> 00:22:15.786 A:middle
+to create really rich
+UIs for your users.
+
+00:22:16.796 --> 00:22:19.466 A:middle
+And so I've been thinking about
+how best to make my Watch app,
+
+00:22:19.466 --> 00:22:23.156 A:middle
+and if you recall, my iOS app
+is just a simple UI table view.
+
+00:22:24.086 --> 00:22:26.956 A:middle
+So my first idea was to have
+a list of all the people
+
+00:22:26.956 --> 00:22:29.676 A:middle
+that I need to call, very
+similar to my iOS app,
+
+00:22:30.326 --> 00:22:31.926 A:middle
+and when I started
+thinking about it,
+
+00:22:31.926 --> 00:22:35.916 A:middle
+I realized I don't need all that
+information in my Watch app.
+
+00:22:36.376 --> 00:22:38.936 A:middle
+Really, I just want to know
+who next to call rather
+
+00:22:38.936 --> 00:22:41.126 A:middle
+than knowing a list of
+all those I should call.
+
+00:22:41.546 --> 00:22:43.686 A:middle
+So my UI might look
+something like this.
+
+00:22:44.486 --> 00:22:46.726 A:middle
+So great. Now I have an
+idea of what I want to make,
+
+00:22:47.406 --> 00:22:49.256 A:middle
+and I want to start
+creating my UI.
+
+00:22:49.796 --> 00:22:53.156 A:middle
+So I am going to walk
+through how to create your UI
+
+00:22:53.156 --> 00:22:55.906 A:middle
+for your main app, your
+Glance, and your Notification.
+
+00:22:56.406 --> 00:23:00.226 A:middle
+So let's jump into Xcode
+and see what we have.
+
+
+
+00:22:56.406 --> 00:23:00.226 A:middle
+So let's jump into Xcode
+and see what we have.
+
+00:23:00.426 --> 00:23:02.286 A:middle
+So we understand what
+the life cycle is
+
+00:23:02.286 --> 00:23:04.366 A:middle
+and generally speaking
+what the layout is,
+
+00:23:04.546 --> 00:23:05.926 A:middle
+so let's go into our storyboard.
+
+00:23:07.376 --> 00:23:10.596 A:middle
+If I wanted to add an image
+to my interface controller,
+
+00:23:10.946 --> 00:23:12.766 A:middle
+I would select it here
+in the object library,
+
+00:23:12.766 --> 00:23:16.706 A:middle
+and then I can just
+quickly drag an image over,
+
+00:23:17.686 --> 00:23:19.466 A:middle
+and now I just want to
+add a label as well.
+
+00:23:19.466 --> 00:23:23.516 A:middle
+So let's just find the
+label and drag it over.
+
+00:23:23.586 --> 00:23:26.226 A:middle
+And if you notice,
+a blue line appears,
+
+00:23:26.296 --> 00:23:30.116 A:middle
+so in my flow-based layout,
+I can position my label to be
+
+00:23:30.196 --> 00:23:32.056 A:middle
+after or before my image.
+
+00:23:32.496 --> 00:23:35.046 A:middle
+So let's place it after.
+
+00:23:35.236 --> 00:23:38.656 A:middle
+Now, for instance, if I want
+to place them horizontally next
+
+00:23:38.656 --> 00:23:40.166 A:middle
+to one another, I could --
+
+00:23:41.116 --> 00:23:43.906 A:middle
+okay, so I can't actually do
+this in Interface Builder.
+
+00:23:43.906 --> 00:23:45.956 A:middle
+There's no blue line that
+appears to help me out.
+
+00:23:46.836 --> 00:23:51.286 A:middle
+So let me use a WK
+interface group to do this.
+
+00:23:51.486 --> 00:23:55.416 A:middle
+So let's drag this over,
+resize our image a bit,
+
+00:23:56.796 --> 00:23:58.756 A:middle
+and now let's add the
+label into the group,
+
+00:23:58.756 --> 00:24:02.106 A:middle
+and then let's also add the
+image right next to the label.
+
+
+
+00:23:58.756 --> 00:24:02.106 A:middle
+and then let's also add the
+image right next to the label.
+
+00:24:02.226 --> 00:24:04.286 A:middle
+So this is how it can
+position things horizontally.
+
+00:24:05.326 --> 00:24:08.826 A:middle
+So for now, let's take our
+label out and our image out,
+
+00:24:08.826 --> 00:24:10.776 A:middle
+and let's just delete the group,
+
+00:24:11.976 --> 00:24:13.686 A:middle
+and then in my attributes
+inspector,
+
+00:24:14.206 --> 00:24:15.406 A:middle
+already in my asset catalog,
+
+00:24:15.406 --> 00:24:17.036 A:middle
+I have an image for
+my friend, Ethan.
+
+00:24:17.806 --> 00:24:20.976 A:middle
+So let's just reference
+that image.
+
+00:24:21.336 --> 00:24:22.706 A:middle
+Ethan looks a little squished.
+
+00:24:22.876 --> 00:24:25.156 A:middle
+Let's make him look
+a little bit happier.
+
+00:24:26.506 --> 00:24:27.456 A:middle
+There we go.
+
+00:24:27.456 --> 00:24:28.366 A:middle
+He seems pretty happy.
+
+00:24:28.796 --> 00:24:33.246 A:middle
+So let's also change the
+label text to be Ethan.
+
+00:24:33.246 --> 00:24:35.986 A:middle
+Now my layout is positioned
+-- it's left-aligned,
+
+00:24:36.446 --> 00:24:39.116 A:middle
+so I actually want to position
+it centered in the screen.
+
+00:24:39.706 --> 00:24:41.816 A:middle
+So if I just select on my image,
+
+00:24:42.106 --> 00:24:43.676 A:middle
+then go to my attributes
+inspector,
+
+00:24:44.266 --> 00:24:46.996 A:middle
+and I can change the
+position to be in the center.
+
+00:24:47.616 --> 00:24:50.996 A:middle
+Then I can also change
+the position vertically,
+
+00:24:50.996 --> 00:24:53.346 A:middle
+I can change the size,
+I can change the view
+
+00:24:53.346 --> 00:24:56.376 A:middle
+for this particular image, and
+I can do the same for my label.
+
+00:24:56.436 --> 00:25:00.096 A:middle
+I just want to position
+it in the center.
+
+
+
+00:24:56.436 --> 00:25:00.096 A:middle
+I just want to position
+it in the center.
+
+00:25:00.096 --> 00:25:01.786 A:middle
+Now let's move on to the Glance.
+
+00:25:01.996 --> 00:25:05.226 A:middle
+If you notice, this Glance
+controller looks different
+
+00:25:05.226 --> 00:25:05.766 A:middle
+than our main app.
+
+00:25:06.216 --> 00:25:07.226 A:middle
+There's two groups here.
+
+00:25:07.676 --> 00:25:09.696 A:middle
+That's because Glances
+are actually templated.
+
+00:25:10.266 --> 00:25:12.406 A:middle
+So I have an upper template
+and a lower template.
+
+00:25:12.736 --> 00:25:16.566 A:middle
+So if I select in my attributes
+inspector my upper template,
+
+00:25:16.746 --> 00:25:18.996 A:middle
+I have a list of options
+that I can choose from.
+
+00:25:19.826 --> 00:25:23.246 A:middle
+So for this particular case,
+let's just have a large text,
+
+00:25:24.036 --> 00:25:25.876 A:middle
+and let's change it to be Call.
+
+00:25:28.096 --> 00:25:31.716 A:middle
+Then let's add an image
+to my lower template.
+
+00:25:32.396 --> 00:25:35.146 A:middle
+I am going to do the
+same thing as before,
+
+00:25:35.146 --> 00:25:37.826 A:middle
+just change the image
+to reference Ethan.
+
+00:25:38.736 --> 00:25:41.776 A:middle
+So when I look at my Glance,
+I really kind of want the app
+
+00:25:41.816 --> 00:25:44.116 A:middle
+to scream at me because I am
+really bad about calling Ethan,
+
+00:25:44.876 --> 00:25:49.646 A:middle
+so the app will help me do that.
+
+00:25:49.836 --> 00:25:52.156 A:middle
+And so also I can
+do the same thing
+
+00:25:52.156 --> 00:25:54.356 A:middle
+for my notification
+interfaces as well.
+
+00:25:54.356 --> 00:25:58.986 A:middle
+So for the most part, I
+figured out my new interface,
+
+00:25:59.446 --> 00:26:02.916 A:middle
+and now let's just build
+and run the interface
+
+
+
+00:25:59.446 --> 00:26:02.916 A:middle
+and now let's just build
+and run the interface
+
+00:26:02.916 --> 00:26:04.016 A:middle
+by selecting the schemes.
+
+00:26:04.546 --> 00:26:07.666 A:middle
+Let's build and run
+to the Watch sim.
+
+00:26:08.596 --> 00:26:20.806 A:middle
+So I just expect my new
+interface to appear.
+
+00:26:20.836 --> 00:26:21.666 A:middle
+Okay. Great.
+
+00:26:21.666 --> 00:26:23.656 A:middle
+So there it is, and I have
+attached in the debugger.
+
+00:26:24.466 --> 00:26:27.106 A:middle
+So let's just stop this session,
+and now let's take a look
+
+00:26:27.106 --> 00:26:28.836 A:middle
+at the iOS sim because
+it's important
+
+00:26:28.836 --> 00:26:30.516 A:middle
+to note these are
+paired devices.
+
+00:26:31.966 --> 00:26:34.426 A:middle
+So I scroll up, and
+I pan to the right.
+
+00:26:35.036 --> 00:26:37.536 A:middle
+I see I have my iOS
+app installed,
+
+00:26:37.796 --> 00:26:41.046 A:middle
+so just like on a device, the
+only way your app will get
+
+00:26:41.046 --> 00:26:43.726 A:middle
+to a user's Watch is
+by also being installed
+
+00:26:43.726 --> 00:26:45.106 A:middle
+on the iOS device.
+
+00:26:45.646 --> 00:26:47.116 A:middle
+And so this is what's
+happened here.
+
+00:26:47.646 --> 00:26:51.116 A:middle
+Now let's select our Apple
+Watch app, and in the simulator,
+
+00:26:51.346 --> 00:26:53.026 A:middle
+I can change out
+my Complications.
+
+00:26:54.346 --> 00:26:56.006 A:middle
+So Call Me Lately
+is already enabled.
+
+00:26:56.006 --> 00:27:02.016 A:middle
+I can also uninstall my
+app and reinstall it,
+
+
+
+00:26:56.006 --> 00:27:02.016 A:middle
+I can also uninstall my
+app and reinstall it,
+
+00:27:02.016 --> 00:27:05.576 A:middle
+and I can also disable my
+Glance and reenable it.
+
+00:27:06.706 --> 00:27:08.226 A:middle
+So if I wanted to
+view my Glance,
+
+00:27:08.226 --> 00:27:11.816 A:middle
+I could go in the simulator,
+go back to my clock face,
+
+00:27:12.266 --> 00:27:16.636 A:middle
+and just like on device, I
+swipe up, and then my Glance --
+
+00:27:17.046 --> 00:27:19.046 A:middle
+so let's just reenable it.
+
+00:27:19.046 --> 00:27:22.406 A:middle
+So -- oh, excuse me.
+
+00:27:22.406 --> 00:27:24.096 A:middle
+So I would expect
+my new UI to appear.
+
+00:27:24.096 --> 00:27:28.536 A:middle
+That hasn't happened, but
+let's just move on for now.
+
+00:27:28.776 --> 00:27:32.196 A:middle
+So I figured out my new
+interface, but I need to know
+
+00:27:32.196 --> 00:27:34.406 A:middle
+who the next person is, and
+I need to figure out how
+
+00:27:34.406 --> 00:27:37.326 A:middle
+to update my app to do this.
+
+00:27:37.466 --> 00:27:42.496 A:middle
+So let's go back to slides.
+
+00:27:42.496 --> 00:27:44.576 A:middle
+So my iOS app mainly
+communicates
+
+00:27:44.576 --> 00:27:48.126 A:middle
+to my server via NSURLSession
+to get my list of loved ones.
+
+00:27:48.656 --> 00:27:51.166 A:middle
+What's great is in
+watchOS 2, I can use a lot
+
+00:27:51.166 --> 00:27:54.206 A:middle
+of the same NSURLSession
+code to talk to my server.
+
+00:27:55.276 --> 00:27:57.196 A:middle
+However, there are times
+when I need to make sure
+
+00:27:57.196 --> 00:28:00.506 A:middle
+that my iOS app and watchOS app
+are in touch with each other,
+
+
+
+00:27:57.196 --> 00:28:00.506 A:middle
+that my iOS app and watchOS app
+are in touch with each other,
+
+00:28:00.866 --> 00:28:02.846 A:middle
+and I can use WatchConnectivity
+to do so.
+
+00:28:03.596 --> 00:28:05.976 A:middle
+So let's take a moment and talk
+
+00:28:05.976 --> 00:28:08.906 A:middle
+about the new WatchConnectivity
+framework before we see how we
+
+00:28:08.906 --> 00:28:10.376 A:middle
+can use it in Call Me Lately.
+
+00:28:11.656 --> 00:28:14.126 A:middle
+So WatchConnectivity
+is a framework
+
+00:28:14.176 --> 00:28:17.496 A:middle
+that has four core
+uses for communication
+
+00:28:17.496 --> 00:28:19.326 A:middle
+between iOS and watchOS.
+
+00:28:19.986 --> 00:28:22.636 A:middle
+An important thing to note is
+that WatchConnectivity lives
+
+00:28:22.636 --> 00:28:27.556 A:middle
+on both iOS and watchOS, so you
+can use APIs on both platforms.
+
+00:28:27.926 --> 00:28:30.646 A:middle
+This isn't just your Watch
+app talking to your iOS app
+
+00:28:30.646 --> 00:28:32.796 A:middle
+when there are times when
+you want your iOS app
+
+00:28:32.796 --> 00:28:33.986 A:middle
+to be updating your Watch app.
+
+00:28:34.986 --> 00:28:37.186 A:middle
+So the first use is
+to allow your iOS app
+
+00:28:37.426 --> 00:28:39.746 A:middle
+to update your Watch
+app's application context,
+
+00:28:39.746 --> 00:28:40.646 A:middle
+and vice versa.
+
+00:28:41.256 --> 00:28:44.056 A:middle
+This may not be urgent data, but
+something you know you'll want
+
+00:28:44.056 --> 00:28:45.156 A:middle
+to update your user with.
+
+00:28:45.866 --> 00:28:47.316 A:middle
+The second is Send Message.
+
+00:28:47.716 --> 00:28:50.106 A:middle
+This is for small pieces
+of information that I need
+
+00:28:50.106 --> 00:28:51.476 A:middle
+to transfer back and forth
+
+00:28:51.796 --> 00:28:53.946 A:middle
+between my iOS app
+and Watch app.
+
+00:28:54.756 --> 00:28:56.946 A:middle
+And the third is a
+simple transfer file API.
+
+00:28:57.866 --> 00:29:01.156 A:middle
+And lastly, there's a transfer
+user info API that ties in more
+
+
+
+00:28:57.866 --> 00:29:01.156 A:middle
+And lastly, there's a transfer
+user info API that ties in more
+
+00:29:01.156 --> 00:29:02.176 A:middle
+so with Complications.
+
+00:29:03.566 --> 00:29:06.376 A:middle
+There's also a wider range
+of things you can accomplish,
+
+00:29:06.376 --> 00:29:09.266 A:middle
+and I encourage you to go to
+the talk on WatchConnectivity
+
+00:29:09.266 --> 00:29:10.626 A:middle
+to find out more information.
+
+00:29:11.376 --> 00:29:14.906 A:middle
+Let's see in Call Me
+Lately how I can best
+
+00:29:14.906 --> 00:29:16.066 A:middle
+use WatchConnectivity.
+
+00:29:16.936 --> 00:29:19.616 A:middle
+I just want to add
+WatchConnectivity to my app,
+
+00:29:19.616 --> 00:29:23.396 A:middle
+I want to debug it,
+and lastly I want
+
+00:29:23.436 --> 00:29:25.676 A:middle
+to just profile it
+with Instruments.
+
+00:29:26.166 --> 00:29:28.626 A:middle
+So speaking of Instruments,
+for those that don't know,
+
+00:29:28.946 --> 00:29:32.016 A:middle
+Instruments is a powerful
+profiling tool to check
+
+00:29:32.126 --> 00:29:34.496 A:middle
+out the performance of your app.
+
+00:29:34.676 --> 00:29:36.606 A:middle
+So you will get a
+profiling template
+
+00:29:36.876 --> 00:29:40.406 A:middle
+when you first initially launch
+Instruments, and you can pick
+
+00:29:40.406 --> 00:29:44.056 A:middle
+from a time profiler,
+leaks, allocations,
+
+00:29:44.646 --> 00:29:48.866 A:middle
+and then you will see something,
+if I select a time profiler,
+
+00:29:48.866 --> 00:29:50.386 A:middle
+for instance, this is
+the view I would see,
+
+00:29:50.386 --> 00:29:53.536 A:middle
+and I can easily profile my app.
+
+00:29:53.796 --> 00:29:55.276 A:middle
+And it's really important,
+
+00:29:55.746 --> 00:29:57.816 A:middle
+so engagement times
+are short on the Watch.
+
+00:29:57.816 --> 00:30:00.126 A:middle
+So this means that
+performance is critical,
+
+
+
+00:29:57.816 --> 00:30:00.126 A:middle
+So this means that
+performance is critical,
+
+00:30:00.726 --> 00:30:02.966 A:middle
+and we want to be using
+Instruments to make sure
+
+00:30:02.966 --> 00:30:06.736 A:middle
+that our app is giving
+a good user experience,
+
+00:30:06.976 --> 00:30:09.376 A:middle
+and we want to check it out
+on both device and simulator.
+
+00:30:10.146 --> 00:30:12.956 A:middle
+So now that we know a little
+bit about WatchConnectivity
+
+00:30:12.956 --> 00:30:14.826 A:middle
+and Instruments, let's
+go into demo again.
+
+00:30:15.426 --> 00:30:20.806 A:middle
+So in my app, I might have an
+algorithm of sorts that says,
+
+00:30:20.906 --> 00:30:22.816 A:middle
+oh, this is the next
+person I want to call.
+
+00:30:22.816 --> 00:30:25.646 A:middle
+And so when I have
+this data available,
+
+00:30:26.196 --> 00:30:30.246 A:middle
+I want to update my iOS app
+to know who is the person
+
+00:30:30.246 --> 00:30:31.536 A:middle
+that I am viewing on my Watch
+
+00:30:31.536 --> 00:30:32.986 A:middle
+and the person I
+should next call.
+
+00:30:33.496 --> 00:30:36.046 A:middle
+So I might want to maybe
+on the initial launch
+
+00:30:36.046 --> 00:30:38.316 A:middle
+of the app just update
+my application context
+
+00:30:38.586 --> 00:30:41.376 A:middle
+over to the iOS app
+and see that appear.
+
+00:30:42.586 --> 00:30:44.836 A:middle
+So I would probably
+just want to do this
+
+00:30:44.836 --> 00:30:47.656 A:middle
+on my Application Did Become
+Active in my extension delegate.
+
+00:30:48.226 --> 00:30:51.476 A:middle
+So here I could just
+place this code.
+
+00:30:51.476 --> 00:30:53.896 A:middle
+So let me first import
+WatchConnectivity.
+
+
+
+00:31:00.236 --> 00:31:02.436 A:middle
+And now in Application
+Did Become Active,
+
+00:31:02.516 --> 00:31:03.556 A:middle
+I would add some code,
+
+00:31:03.706 --> 00:31:06.746 A:middle
+just create a context
+that's a string named Ethan,
+
+00:31:06.746 --> 00:31:10.326 A:middle
+and then on WC Session, which
+is part of WatchConnectivity,
+
+00:31:10.456 --> 00:31:12.286 A:middle
+I have the default session
+
+00:31:12.286 --> 00:31:14.446 A:middle
+and I call the method
+Update Application Context
+
+00:31:14.966 --> 00:31:17.526 A:middle
+with the key WC Application
+Context,
+
+00:31:17.936 --> 00:31:19.636 A:middle
+and I would just
+send over my context.
+
+00:31:19.976 --> 00:31:22.106 A:middle
+And worse comes to
+worst, I am just going
+
+00:31:22.106 --> 00:31:23.736 A:middle
+to print my error for now.
+
+00:31:25.116 --> 00:31:26.456 A:middle
+So let's see this work.
+
+00:31:27.286 --> 00:31:34.786 A:middle
+And let's build and run.
+
+00:31:34.986 --> 00:31:36.566 A:middle
+Let's select our Watch app.
+
+00:31:37.496 --> 00:31:45.976 A:middle
+My app launched, but I see
+a WC error domain, 7004,
+
+00:31:45.976 --> 00:31:49.026 A:middle
+so I know from previous
+experience
+
+00:31:49.026 --> 00:31:50.826 A:middle
+that my session just
+isn't activated.
+
+00:31:51.406 --> 00:31:52.636 A:middle
+Let's take a look at my code.
+
+00:31:52.636 --> 00:31:56.166 A:middle
+I also haven't set
+my delegate either,
+
+00:31:56.396 --> 00:32:02.086 A:middle
+so I want to set a WC session
+delegate, and then after --
+
+
+
+00:31:56.396 --> 00:32:02.086 A:middle
+so I want to set a WC session
+delegate, and then after --
+
+00:32:02.736 --> 00:32:05.756 A:middle
+or before my update
+application context code,
+
+00:32:05.756 --> 00:32:10.836 A:middle
+I just want to set the delegate
+to be myself, and then I want
+
+00:32:10.836 --> 00:32:11.926 A:middle
+to activate my session.
+
+00:32:12.056 --> 00:32:13.706 A:middle
+And it's important
+to note that you want
+
+00:32:13.706 --> 00:32:15.886 A:middle
+to set the delegate before
+activating your session
+
+00:32:16.256 --> 00:32:19.016 A:middle
+because you might have
+messages waiting for you
+
+00:32:19.256 --> 00:32:20.576 A:middle
+when you've activated
+that session.
+
+00:32:20.986 --> 00:32:23.946 A:middle
+So you want to receive the
+appropriate delegate callbacks.
+
+00:32:24.956 --> 00:32:30.246 A:middle
+So now let's just
+build and run again.
+
+00:32:30.246 --> 00:32:41.856 A:middle
+Now let's just make sure that
+my error code has gone away.
+
+00:32:41.856 --> 00:32:42.546 A:middle
+Okay. Great.
+
+00:32:42.726 --> 00:32:44.056 A:middle
+So I don't have my
+error anymore.
+
+00:32:44.526 --> 00:32:47.156 A:middle
+So that means this is
+appropriately sending my
+
+00:32:47.156 --> 00:32:49.006 A:middle
+application context
+to my iOS app.
+
+00:32:49.306 --> 00:32:51.936 A:middle
+But now I want to see that my
+iOS app actually receives it.
+
+00:32:52.446 --> 00:32:54.346 A:middle
+So I can do this
+by going to Schemes
+
+00:32:55.166 --> 00:32:58.006 A:middle
+and selecting my iOS
+scheme, and I am going
+
+00:32:58.006 --> 00:33:02.376 A:middle
+to select the same simulator
+that's paired with my Watch sim.
+
+
+
+00:32:58.006 --> 00:33:02.376 A:middle
+to select the same simulator
+that's paired with my Watch sim.
+
+00:33:02.376 --> 00:33:04.876 A:middle
+So I'm going to select
+my iPhone 6 sim.
+
+00:33:05.466 --> 00:33:09.276 A:middle
+Now if I click on Control and
+then press on Build and Run,
+
+00:33:09.356 --> 00:33:10.926 A:middle
+I can actually run
+without building,
+
+00:33:11.196 --> 00:33:14.556 A:middle
+so this way I don't have to
+-- if my app is really large,
+
+00:33:14.556 --> 00:33:16.426 A:middle
+I don't have to wait
+for it to keep compiling
+
+00:33:16.426 --> 00:33:18.566 A:middle
+and install the app,
+et cetera, et cetera.
+
+00:33:18.566 --> 00:33:22.196 A:middle
+So let's just press Control
+and then run without building.
+
+00:33:23.816 --> 00:33:27.286 A:middle
+So now it looks like my
+app launched, and I've hit
+
+00:33:27.286 --> 00:33:29.086 A:middle
+on my app delegate
+in my iOS app,
+
+00:33:29.416 --> 00:33:32.616 A:middle
+I've hit my delegate callback,
+Did Receive Application Context,
+
+00:33:33.076 --> 00:33:36.316 A:middle
+and I can then update
+my UI in my iOS app.
+
+00:33:37.856 --> 00:33:39.376 A:middle
+Let's just continue through.
+
+00:33:40.486 --> 00:33:44.566 A:middle
+So now if I am on my Watch
+sim, and let's go back home.
+
+00:33:46.096 --> 00:33:49.806 A:middle
+So my debugging session is
+still ongoing in my iOS app,
+
+00:33:50.126 --> 00:33:53.446 A:middle
+and my Watch app, when it's
+activated -- excuse me --
+
+00:33:53.586 --> 00:33:56.746 A:middle
+when it's launched, it will then
+update my application context.
+
+00:33:58.106 --> 00:34:00.406 A:middle
+So I can hit it again
+on my iOS app
+
+
+
+00:33:58.106 --> 00:34:00.406 A:middle
+So I can hit it again
+on my iOS app
+
+00:34:00.406 --> 00:34:01.776 A:middle
+and hit the delegate callback.
+
+00:34:02.326 --> 00:34:05.216 A:middle
+So this is great because you
+can now debug in both simulators
+
+00:34:05.216 --> 00:34:07.316 A:middle
+at once, which is really great
+
+00:34:07.316 --> 00:34:09.886 A:middle
+for when you are using
+WatchConnectivity,
+
+00:34:09.886 --> 00:34:12.556 A:middle
+so you can make sure all
+of your calls are occurring
+
+00:34:12.636 --> 00:34:16.326 A:middle
+in the order you want them
+to on both watchOS and iOS.
+
+00:34:16.985 --> 00:34:21.576 A:middle
+(Applause) Thank you.
+
+00:34:24.646 --> 00:34:27.206 A:middle
+Let's just stop the session
+for now, and I just want
+
+00:34:27.206 --> 00:34:28.835 A:middle
+to quickly profile
+an Instrument.
+
+00:34:29.525 --> 00:34:33.956 A:middle
+So I'm going to hit Product,
+Profile, and I am going
+
+00:34:33.956 --> 00:34:38.525 A:middle
+to have Instruments come up, and
+I expect my template to appear,
+
+00:34:38.525 --> 00:34:39.525 A:middle
+my template selection.
+
+00:34:40.166 --> 00:34:41.735 A:middle
+So let's find my -- okay.
+
+00:34:41.896 --> 00:34:43.496 A:middle
+Let's find my time profiler.
+
+00:34:44.106 --> 00:34:45.376 A:middle
+Let's just choose that.
+
+00:34:46.036 --> 00:34:49.786 A:middle
+And then instead of my
+iOS sim, I actually want
+
+00:34:49.786 --> 00:34:52.456 A:middle
+to be debugging my,
+profiling my extension.
+
+00:34:53.295 --> 00:34:54.326 A:middle
+Select that here.
+
+00:34:54.656 --> 00:34:55.766 A:middle
+I can press Record.
+
+00:34:56.666 --> 00:34:58.486 A:middle
+And it looks like
+I've hit an error.
+
+00:34:58.486 --> 00:35:01.986 A:middle
+So let's just open up my
+Watch sim, place that here.
+
+
+
+00:34:58.486 --> 00:35:01.986 A:middle
+So let's just open up my
+Watch sim, place that here.
+
+00:35:03.386 --> 00:35:04.326 A:middle
+Press Record.
+
+00:35:04.656 --> 00:35:07.356 A:middle
+And there I have attached,
+and now I can profile my app.
+
+00:35:08.446 --> 00:35:12.456 A:middle
+So in my call tree, I can
+also see my sample list just
+
+00:35:12.456 --> 00:35:15.356 A:middle
+like on an iOS app, I can
+do the same sorts of things,
+
+00:35:15.596 --> 00:35:17.306 A:middle
+and I can see that most
+of my code is being run
+
+00:35:17.306 --> 00:35:19.736 A:middle
+on my main thread
+here, which is great,
+
+00:35:19.736 --> 00:35:22.576 A:middle
+and then I can go
+back to my call tree.
+
+00:35:23.096 --> 00:35:26.386 A:middle
+And so this is just very simply
+you can easily profile something
+
+00:35:26.596 --> 00:35:27.706 A:middle
+using Instruments.
+
+00:35:28.736 --> 00:35:32.466 A:middle
+So let's just stop this session.
+
+00:35:32.466 --> 00:35:34.356 A:middle
+And now I've written an app
+
+00:35:34.356 --> 00:35:37.146 A:middle
+that basically has a
+very simple interface
+
+00:35:37.326 --> 00:35:38.756 A:middle
+and uses WatchConnectivity,
+
+00:35:38.756 --> 00:35:40.546 A:middle
+and I've profiled my
+app in Instruments.
+
+00:35:40.596 --> 00:35:43.196 A:middle
+Now I could talk
+with my designer
+
+00:35:43.196 --> 00:35:44.456 A:middle
+and really flesh this out.
+
+00:35:45.786 --> 00:35:47.956 A:middle
+So let's talk about what
+we were just able to do.
+
+00:35:48.746 --> 00:35:51.766 A:middle
+So we added a Watch app to
+our existing iPhone app.
+
+00:35:52.776 --> 00:35:55.036 A:middle
+We created an interface
+for our app and Glance.
+
+00:35:55.956 --> 00:35:57.416 A:middle
+We used WatchConnectivity.
+
+00:35:58.486 --> 00:36:01.656 A:middle
+We debugged our iOS and
+watchOS apps at the same time.
+
+
+
+00:35:58.486 --> 00:36:01.656 A:middle
+We debugged our iOS and
+watchOS apps at the same time.
+
+00:36:02.866 --> 00:36:04.636 A:middle
+And we profiled our
+app in Instruments.
+
+00:36:05.166 --> 00:36:10.136 A:middle
+So these are just a few of the
+things that you can get started
+
+00:36:10.136 --> 00:36:14.946 A:middle
+with in WatchKit, and there are
+so many other watchOS 2 features
+
+00:36:14.946 --> 00:36:16.486 A:middle
+that I am incredibly
+excited about,
+
+00:36:16.986 --> 00:36:19.366 A:middle
+and like I mentioned before,
+there's Complications,
+
+00:36:19.736 --> 00:36:22.196 A:middle
+and as you might have seen
+in the Keynote yesterday,
+
+00:36:22.446 --> 00:36:24.086 A:middle
+you can even do Time Travel,
+
+00:36:24.086 --> 00:36:26.066 A:middle
+which I think is
+just the future.
+
+00:36:26.316 --> 00:36:28.276 A:middle
+You can just, like,
+go back and forth.
+
+00:36:28.276 --> 00:36:28.866 A:middle
+It's amazing.
+
+00:36:28.866 --> 00:36:29.496 A:middle
+It's so cool.
+
+00:36:29.946 --> 00:36:32.656 A:middle
+And then you can also
+use Digital Crown,
+
+00:36:32.656 --> 00:36:34.836 A:middle
+so you can create really
+intuitive experiences
+
+00:36:34.836 --> 00:36:37.376 A:middle
+for your users using
+the Digital Crown.
+
+00:36:38.626 --> 00:36:42.146 A:middle
+You also have simple animations
+to create really responsive apps
+
+00:36:42.466 --> 00:36:44.716 A:middle
+for your user, just
+nice and playful.
+
+00:36:45.636 --> 00:36:47.716 A:middle
+You also have access to
+the heart rate sensors,
+
+00:36:47.716 --> 00:36:50.346 A:middle
+so if you are making a Workout
+app or some sort of fitness app,
+
+00:36:50.626 --> 00:36:53.906 A:middle
+you now get that data
+via HealthKit and can use
+
+00:36:53.906 --> 00:36:56.736 A:middle
+that to provide a better
+experience for your user.
+
+00:36:56.936 --> 00:37:00.226 A:middle
+You can also provide a great
+experience using haptics
+
+
+
+00:36:56.936 --> 00:37:00.226 A:middle
+You can also provide a great
+experience using haptics
+
+00:37:00.856 --> 00:37:04.286 A:middle
+and lightly tap your user
+and provide some context
+
+00:37:04.286 --> 00:37:07.996 A:middle
+as to what you are
+doing in the app.
+
+00:37:08.166 --> 00:37:10.136 A:middle
+And there's also media
+playback, so like you saw
+
+00:37:10.136 --> 00:37:13.616 A:middle
+in the Keynote yesterday,
+you can view a simple video.
+
+00:37:14.156 --> 00:37:18.726 A:middle
+And you can also have
+audio playback as well,
+
+00:37:18.726 --> 00:37:20.466 A:middle
+so this would use the
+speaker on the Watch,
+
+00:37:20.686 --> 00:37:22.766 A:middle
+or if the user has paired
+Bluetooth headphones,
+
+00:37:23.036 --> 00:37:24.746 A:middle
+it would then route
+there as well.
+
+00:37:24.746 --> 00:37:28.816 A:middle
+And you can do audio recording,
+so for the first time,
+
+00:37:28.816 --> 00:37:31.916 A:middle
+you can get access to the
+mic on the Watch itself
+
+00:37:32.076 --> 00:37:33.666 A:middle
+and provide a great experience.
+
+00:37:35.156 --> 00:37:37.536 A:middle
+And you have access
+to the Keychain now,
+
+00:37:37.536 --> 00:37:40.266 A:middle
+so you can provide a really
+secure experience for your user.
+
+00:37:42.136 --> 00:37:46.956 A:middle
+So in recap, we were able
+to discuss the architecture
+
+00:37:47.276 --> 00:37:49.896 A:middle
+of an app, we added a Watch app,
+
+00:37:50.616 --> 00:37:52.396 A:middle
+we talked through
+the app life cycle,
+
+00:37:52.996 --> 00:37:55.806 A:middle
+we used the different interface
+elements and we made our app
+
+00:37:55.806 --> 00:37:58.466 A:middle
+and our Glance, and we talked
+
+00:37:58.466 --> 00:38:00.626 A:middle
+through our notification
+interfaces and how
+
+
+
+00:37:58.466 --> 00:38:00.626 A:middle
+through our notification
+interfaces and how
+
+00:38:00.626 --> 00:38:02.816 A:middle
+to easily iterate on
+different notifications
+
+00:38:03.166 --> 00:38:05.656 A:middle
+and using different categories
+and different payloads.
+
+00:38:06.286 --> 00:38:09.856 A:middle
+And we were able to build
+and run in the new simulator,
+
+00:38:10.416 --> 00:38:11.656 A:middle
+and we debugged our app.
+
+00:38:12.926 --> 00:38:15.866 A:middle
+And we were able to use
+various watchOS capabilities.
+
+00:38:17.156 --> 00:38:19.606 A:middle
+So there's some great
+documentation online,
+
+00:38:19.606 --> 00:38:22.126 A:middle
+the watchOS 2 Transition
+Guide is excellent.
+
+00:38:22.126 --> 00:38:24.306 A:middle
+I highly encourage you
+guys to all check it out.
+
+00:38:24.306 --> 00:38:25.736 A:middle
+There's some great
+technical support.
+
+00:38:25.926 --> 00:38:28.736 A:middle
+You can check out the
+Forums, some sample code.
+
+00:38:28.736 --> 00:38:31.686 A:middle
+If you have general inquiries,
+please contact Jake Behrens,
+
+00:38:31.686 --> 00:38:33.416 A:middle
+our watchOS framework's
+Evangelist.
+
+00:38:34.466 --> 00:38:37.956 A:middle
+There is a lot of really amazing
+sessions happening this week,
+
+00:38:38.196 --> 00:38:40.936 A:middle
+there's a lot of info to dig
+through, WatchKit in Depth,
+
+00:38:41.416 --> 00:38:44.916 A:middle
+Complications, Layout,
+and so much more.
+
+00:38:45.756 --> 00:38:49.286 A:middle
+If you have any questions,
+if you have general questions
+
+00:38:49.286 --> 00:38:51.066 A:middle
+or you're digging into
+the code for a first time,
+
+00:38:51.666 --> 00:38:54.256 A:middle
+or if you are an experienced
+WatchKit dev, please come by,
+
+00:38:54.256 --> 00:38:58.316 A:middle
+we will be happy to answer
+any questions you might have.
+
+00:38:58.316 --> 00:38:59.186 A:middle
+So thank you, everyone.
+
+
+
+00:39:03.796 --> 00:39:04.206 A:middle
+(Applause) Thank you.
+
