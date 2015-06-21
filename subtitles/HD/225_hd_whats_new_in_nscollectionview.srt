@@ -1,0 +1,5495 @@
+
+00:00:20.486 --> 00:00:21.196 A:middle
+&gt;&gt; TROY STEPHENS:
+Thank you for coming.
+
+00:00:22.396 --> 00:00:26.596 A:middle
+Welcome to Session 225, What's
+New in NSCollectionView.
+
+00:00:27.096 --> 00:00:29.296 A:middle
+My name's Troy Stephens,
+I'm a Software Engineer
+
+00:00:29.346 --> 00:00:32.116 A:middle
+on the AppKit team and
+I'm delighted to get
+
+00:00:32.116 --> 00:00:35.626 A:middle
+to answer this question for
+you today, what's new indeed.
+
+00:00:36.046 --> 00:00:36.886 A:middle
+Let's find out.
+
+00:00:38.226 --> 00:00:42.316 A:middle
+NSCollectionView has been around
+for a while on OS X since 10.5,
+
+00:00:42.316 --> 00:00:46.156 A:middle
+and it provides a handy way
+to display a grid of items
+
+00:00:46.156 --> 00:00:48.056 A:middle
+in the user interface,
+for example here,
+
+00:00:48.346 --> 00:00:51.666 A:middle
+in the Screen Saver Pref
+panel, we have a grid
+
+00:00:51.666 --> 00:00:53.226 A:middle
+of items representing
+the different screen
+
+00:00:53.226 --> 00:00:54.046 A:middle
+savers available.
+
+00:00:54.356 --> 00:00:56.286 A:middle
+CollectionView is good at
+this, displaying a grid
+
+00:00:56.286 --> 00:00:57.766 A:middle
+of identically sized items,
+
+00:00:58.076 --> 00:01:01.336 A:middle
+you give CollectionView an
+item prototype, which consists
+
+
+
+00:00:58.076 --> 00:01:01.336 A:middle
+you give CollectionView an
+item prototype, which consists
+
+00:01:01.406 --> 00:01:04.025 A:middle
+of basically, a view
+subtree of your own design,
+
+00:01:04.316 --> 00:01:06.506 A:middle
+and an associated
+ViewController that manages it.
+
+00:01:07.056 --> 00:01:12.166 A:middle
+CollectionViewclones that item
+prototype, to populate itself
+
+00:01:12.166 --> 00:01:14.836 A:middle
+with items that represent
+your model objects.
+
+00:01:15.916 --> 00:01:18.826 A:middle
+CollectionView supports
+selection, drag and drop,
+
+00:01:18.826 --> 00:01:20.286 A:middle
+animated re-layout, all around,
+
+00:01:20.286 --> 00:01:21.936 A:middle
+it is a very handy
+class to have around.
+
+00:01:22.846 --> 00:01:25.106 A:middle
+Now enter UICollectionView
+on iOS,
+
+00:01:25.676 --> 00:01:29.156 A:middle
+a cousin to NSCollectionView
+that is also very versatile.
+
+00:01:29.156 --> 00:01:31.926 A:middle
+We see it here in
+the World Clocks part
+
+00:01:31.926 --> 00:01:34.506 A:middle
+of the iPad Clocks app.
+
+00:01:37.056 --> 00:01:39.336 A:middle
+UI CollectionView,
+like its name implies,
+
+00:01:39.336 --> 00:01:41.646 A:middle
+is useful for displaying
+collections of items,
+
+00:01:41.646 --> 00:01:44.186 A:middle
+where each item, once
+again, is represented
+
+00:01:44.186 --> 00:01:46.856 A:middle
+by a view subtree that's
+completely of your own design,
+
+00:01:46.856 --> 00:01:49.386 A:middle
+usually, these are loaded from
+a nib, withUICollectionView.
+
+00:01:50.646 --> 00:01:53.306 A:middle
+And UICollectionView
+supports mixing item types,
+
+00:01:53.306 --> 00:01:55.866 A:middle
+you can have different nibs,
+prototypes for different items,
+
+00:01:55.866 --> 00:01:57.106 A:middle
+you're not stuck with just one.
+
+00:01:58.926 --> 00:02:01.846 A:middle
+UICollectionView supports
+optional header views,
+
+
+
+00:01:58.926 --> 00:02:01.846 A:middle
+UICollectionView supports
+optional header views,
+
+00:02:01.886 --> 00:02:04.596 A:middle
+and footer views surrounding
+your items, and bracketing them.
+
+00:02:05.156 --> 00:02:07.566 A:middle
+This is especially useful
+when used in conjunction
+
+00:02:07.566 --> 00:02:10.586 A:middle
+with the ability to group your
+items into sections if you wish.
+
+00:02:10.586 --> 00:02:13.176 A:middle
+Each section can have a
+header, and a footer view.
+
+00:02:15.326 --> 00:02:18.246 A:middle
+Layout is very flexible
+and customizable,
+
+00:02:18.246 --> 00:02:21.286 A:middle
+there is a default flow
+layout that handles about 90%
+
+00:02:21.286 --> 00:02:22.986 A:middle
+of your needs and is
+very customizable,
+
+00:02:22.986 --> 00:02:26.376 A:middle
+you can tune its parameters to
+usually get something close,
+
+00:02:26.376 --> 00:02:27.396 A:middle
+at least, to what you want.
+
+00:02:28.296 --> 00:02:31.336 A:middle
+UICollectionView is
+also open to arbitrary,
+
+00:02:31.596 --> 00:02:33.116 A:middle
+developer-definable layouts.
+
+00:02:33.156 --> 00:02:35.166 A:middle
+Any kind of layout algorithm
+that you can implement,
+
+00:02:35.386 --> 00:02:36.866 A:middle
+UICollectionView can use,
+
+00:02:36.866 --> 00:02:38.886 A:middle
+to apply to the items
+that it shows.
+
+00:02:40.666 --> 00:02:43.066 A:middle
+Importantly, UICollectionView
+is scalable.
+
+00:02:43.506 --> 00:02:46.086 A:middle
+It has smart behaviors in
+it, so that it can scale
+
+00:02:46.086 --> 00:02:49.166 A:middle
+to potentially large numbers
+of items, and it is smart
+
+00:02:49.166 --> 00:02:52.716 A:middle
+about just instantiating the
+items for model objects in view,
+
+00:02:52.996 --> 00:02:55.906 A:middle
+and recycling or reusing items
+that have scrolled out of view
+
+00:02:55.906 --> 00:02:57.386 A:middle
+to represent other model objects
+
+00:02:57.386 --> 00:02:58.696 A:middle
+that have been scrolled
+into view.
+
+00:02:58.736 --> 00:02:59.556 A:middle
+That's very handy.
+
+
+
+00:03:01.446 --> 00:03:04.946 A:middle
+Like everything else on iOS,
+UICollectionView was designed
+
+00:03:04.946 --> 00:03:06.976 A:middle
+from the beginning to
+always operate layer-backed,
+
+00:03:07.346 --> 00:03:09.516 A:middle
+which gives it the ability
+to present very fluid,
+
+00:03:09.516 --> 00:03:11.536 A:middle
+high-frame-rate animation,
+as the items
+
+00:03:11.536 --> 00:03:14.006 A:middle
+in the Collection View move
+around, and come and go,
+
+00:03:14.176 --> 00:03:16.166 A:middle
+it can give you have a
+very nice, animated effect.
+
+00:03:16.966 --> 00:03:18.746 A:middle
+With all of these
+great features,
+
+00:03:19.136 --> 00:03:22.206 A:middle
+and an API that developers have
+already become familiar with,
+
+00:03:22.696 --> 00:03:26.266 A:middle
+and wide adoption and
+use through iOS apps,
+
+00:03:26.266 --> 00:03:29.506 A:middle
+we thought that UICollectionView
+would therefore form an
+
+00:03:29.566 --> 00:03:31.346 A:middle
+excellent basis for the new
+
+00:03:31.346 --> 00:03:33.226 A:middle
+and greatly-improved
+NSCollectionView
+
+00:03:33.226 --> 00:03:35.106 A:middle
+that we're introducing
+in El Capitan.
+
+00:03:36.136 --> 00:03:38.816 A:middle
+This new NSCollectionView
+inherits all
+
+00:03:38.816 --> 00:03:41.316 A:middle
+of the scalability
+behaviors of UICollectionView.
+
+00:03:42.026 --> 00:03:44.756 A:middle
+It knows how to instantiate
+items only as needed,
+
+00:03:45.126 --> 00:03:47.156 A:middle
+just keeps a few of them
+around, a little more
+
+00:03:47.156 --> 00:03:51.376 A:middle
+than what's visible and is able
+to reuse or recycle items rather
+
+00:03:51.376 --> 00:03:52.336 A:middle
+than reinstantiate them.
+
+00:03:52.336 --> 00:03:54.986 A:middle
+That saves some overhead, you
+can group items in sections,
+
+00:03:55.386 --> 00:03:57.316 A:middle
+you can give those sections
+header, and footer views,
+
+00:03:57.316 --> 00:03:59.256 A:middle
+if you want, put
+anything you want in them.
+
+
+
+00:04:00.266 --> 00:04:02.316 A:middle
+Layout is completely
+customizable,
+
+00:04:02.316 --> 00:04:05.856 A:middle
+so NSCollectionView is no longer
+hard-wired to think I'm a grid.
+
+00:04:06.116 --> 00:04:09.496 A:middle
+You can plug any kind of
+layout you want into it.
+
+00:04:09.866 --> 00:04:13.436 A:middle
+We can handle items that are of
+variable sizes, the items can be
+
+00:04:13.436 --> 00:04:15.356 A:middle
+of all different types,
+you can mix and match,
+
+00:04:15.616 --> 00:04:17.786 A:middle
+and Flow Layout especially
+is capable
+
+00:04:17.786 --> 00:04:19.625 A:middle
+of handling that
+very gracefully.
+
+00:04:21.296 --> 00:04:23.686 A:middle
+Appearance, as before, it
+is completely customizable,
+
+00:04:23.686 --> 00:04:25.906 A:middle
+you can define your
+Item View subtrees
+
+00:04:25.946 --> 00:04:27.186 A:middle
+to look however you want.
+
+00:04:28.076 --> 00:04:31.016 A:middle
+The CollectionView is your blank
+canvas, to use however you want.
+
+00:04:31.616 --> 00:04:34.496 A:middle
+You have control
+over animations.
+
+00:04:34.496 --> 00:04:37.226 A:middle
+When animations are performed,
+and with what durations.
+
+00:04:37.546 --> 00:04:38.466 A:middle
+We'll see how to do that.
+
+00:04:39.426 --> 00:04:42.326 A:middle
+Of course, not content to
+just port UICollectionViews
+
+00:04:42.326 --> 00:04:44.036 A:middle
+capabilities to OS X, we wanted
+
+00:04:44.036 --> 00:04:46.816 A:middle
+to make the new NSCollectionView
+feel really right
+
+00:04:46.816 --> 00:04:48.066 A:middle
+at home on the desktop.
+
+00:04:48.306 --> 00:04:50.016 A:middle
+One of the important
+technologies we deal
+
+00:04:50.016 --> 00:04:51.756 A:middle
+with on the desktop
+is drag and drop
+
+00:04:51.756 --> 00:04:54.126 A:middle
+which NSCollectionView
+has supported all along,
+
+00:04:54.496 --> 00:04:57.396 A:middle
+but as part of bringing
+UICollectionView Layout API
+
+00:04:58.036 --> 00:05:02.136 A:middle
+to the desktop, we have
+augmented the API with a couple
+
+
+
+00:04:58.036 --> 00:05:02.136 A:middle
+to the desktop, we have
+augmented the API with a couple
+
+00:05:02.136 --> 00:05:03.816 A:middle
+of new methods we'll
+talk about at the end,
+
+00:05:04.116 --> 00:05:05.896 A:middle
+that basically enable
+any layout,
+
+00:05:06.146 --> 00:05:10.766 A:middle
+including your own custom
+layouts, to perform hit-testing
+
+00:05:10.766 --> 00:05:13.026 A:middle
+to identify drop
+target candidates.
+
+00:05:13.156 --> 00:05:14.386 A:middle
+We'll look at how
+to do that later.
+
+00:05:15.006 --> 00:05:18.936 A:middle
+Any custom layout of your own
+design can support Drag-and-Drop
+
+00:05:19.286 --> 00:05:20.316 A:middle
+like a first class layout.
+
+00:05:21.046 --> 00:05:24.066 A:middle
+Rubber Band Drag Select, you
+use that to drag across items,
+
+00:05:24.066 --> 00:05:25.836 A:middle
+and select groups
+of items in bulk,
+
+00:05:26.666 --> 00:05:28.526 A:middle
+that's fully supported
+as before.
+
+00:05:28.876 --> 00:05:30.686 A:middle
+We have modified the selection
+
+00:05:30.686 --> 00:05:33.106 A:middle
+and highlight notification
+methods, the delegate methods,
+
+00:05:33.106 --> 00:05:37.156 A:middle
+that handle those occurrences,
+to be able to handle selection
+
+00:05:37.156 --> 00:05:39.186 A:middle
+and highlighting of items in
+bulk because that's something
+
+00:05:39.186 --> 00:05:41.196 A:middle
+that tends to happen a lot
+more on the desktop, you know,
+
+00:05:41.196 --> 00:05:44.216 A:middle
+you tend to do a Select All
+operation or a Deselect All,
+
+00:05:44.356 --> 00:05:45.466 A:middle
+or a big Range Select.
+
+00:05:45.466 --> 00:05:47.586 A:middle
+We wanted to be able to
+handle those very efficiently.
+
+00:05:47.796 --> 00:05:49.956 A:middle
+There is slight adjustments
+to the APIs.
+
+00:05:50.786 --> 00:05:54.076 A:middle
+As before, however, items
+are still represented using
+
+00:05:54.076 --> 00:05:55.646 A:middle
+ViewControllers on the desktop.
+
+00:05:55.646 --> 00:05:58.106 A:middle
+We think this provides a
+great opportunity for you
+
+00:05:58.106 --> 00:06:00.596 A:middle
+to compartmentalize
+your code neatly,
+
+
+
+00:05:58.106 --> 00:06:00.596 A:middle
+to compartmentalize
+your code neatly,
+
+00:06:00.876 --> 00:06:03.496 A:middle
+and have your controller code
+separate from your view code.
+
+00:06:04.086 --> 00:06:05.486 A:middle
+Better code organization.
+
+00:06:06.806 --> 00:06:09.406 A:middle
+One last nice little touch
+we added, is the ability
+
+00:06:09.406 --> 00:06:10.566 A:middle
+for CollectionView
+
+00:06:10.566 --> 00:06:12.766 A:middle
+to automatically find the
+appropriate nibs to use
+
+00:06:12.766 --> 00:06:14.716 A:middle
+for items, if you just
+follow naming conventions,
+
+00:06:14.916 --> 00:06:17.536 A:middle
+if you name the nib
+identical to the identifier
+
+00:06:17.536 --> 00:06:18.966 A:middle
+of the item type
+you're requesting
+
+00:06:18.966 --> 00:06:20.506 A:middle
+from the CollectionView,
+you don't even have
+
+00:06:20.546 --> 00:06:24.216 A:middle
+to register your item nibs with
+the CollectionView anymore.
+
+00:06:24.306 --> 00:06:27.386 A:middle
+It saves you a little
+work, a little bit of code.
+
+00:06:27.596 --> 00:06:29.226 A:middle
+So our goals for
+today, I wanted this
+
+00:06:29.226 --> 00:06:31.796 A:middle
+to be a really hands-on session,
+I want you to walk away ready
+
+00:06:31.796 --> 00:06:32.916 A:middle
+to use the new CollectionView.
+
+00:06:33.196 --> 00:06:37.296 A:middle
+We'll look at how to wire up one
+of these new NSCollectionViews,
+
+00:06:37.296 --> 00:06:40.996 A:middle
+where we're using the new
+API on 10.11, along the way,
+
+00:06:41.296 --> 00:06:44.516 A:middle
+we'll learn what's different
+on OS X versus on iOS,
+
+00:06:44.516 --> 00:06:46.216 A:middle
+and we'll have a
+little something
+
+00:06:46.216 --> 00:06:47.426 A:middle
+for everybody here I think.
+
+00:06:47.676 --> 00:06:49.806 A:middle
+Whether you're a
+veteran iOS developer,
+
+00:06:50.156 --> 00:06:52.306 A:middle
+maybe bringing companion
+apps over to OS X,
+
+00:06:52.306 --> 00:06:54.896 A:middle
+you have used UI CollectionView,
+you're familiar with the API,
+
+00:06:55.426 --> 00:06:57.916 A:middle
+you want to port that knowledge
+over, maybe some code over,
+
+00:06:57.966 --> 00:07:00.236 A:middle
+we'll have information
+useful to you.
+
+
+
+00:06:57.966 --> 00:07:00.236 A:middle
+we'll have information
+useful to you.
+
+00:07:01.266 --> 00:07:03.266 A:middle
+Maybe you're an OS
+X developer working
+
+00:07:03.296 --> 00:07:05.606 A:middle
+with NSCollectionView
+already, and you want
+
+00:07:05.606 --> 00:07:08.296 A:middle
+to learn the new API
+paradigms and how to do that.
+
+00:07:08.296 --> 00:07:09.666 A:middle
+We'll have enough
+of an introduction
+
+00:07:09.666 --> 00:07:12.316 A:middle
+into the UICollectionView
+APIs to get you started.
+
+00:07:13.596 --> 00:07:16.396 A:middle
+But even if you've not worked
+with either before we're going
+
+00:07:16.396 --> 00:07:18.856 A:middle
+to have enough introduction,
+and enough nuts and bolts
+
+00:07:18.856 --> 00:07:21.816 A:middle
+and a code sample, to go
+along with today's session
+
+00:07:21.816 --> 00:07:24.726 A:middle
+that you can study, to learn how
+to get up and running quickly
+
+00:07:24.726 --> 00:07:25.716 A:middle
+with the new CollectionView.
+
+00:07:26.606 --> 00:07:29.466 A:middle
+We'll start with a quick
+overview of the concepts,
+
+00:07:29.466 --> 00:07:31.886 A:middle
+the basic concepts that we need
+to understand about the new API
+
+00:07:31.886 --> 00:07:34.986 A:middle
+and then we'll dive into nuts
+and bolts of how the API works,
+
+00:07:34.986 --> 00:07:37.266 A:middle
+which methods are important,
+what to use, and we'll wrap
+
+00:07:37.266 --> 00:07:38.396 A:middle
+up with a quick conclusion.
+
+00:07:38.856 --> 00:07:40.116 A:middle
+First with that overview.
+
+00:07:40.916 --> 00:07:44.946 A:middle
+In the old model of using
+CollectionView, NSCollectionView
+
+00:07:44.946 --> 00:07:46.686 A:middle
+on OS X 10.10 and earlier,
+
+00:07:47.206 --> 00:07:48.986 A:middle
+you would wire your
+CollectionView's content
+
+00:07:48.986 --> 00:07:51.156 A:middle
+property to an array
+or array controller
+
+00:07:51.156 --> 00:07:53.626 A:middle
+that references your model
+objects, that's how you wire
+
+00:07:53.626 --> 00:07:55.996 A:middle
+up your model, and you
+provide an item prototype,
+
+00:07:56.116 --> 00:07:59.296 A:middle
+that's an NSCollectionView item,
+a subclass of ViewControllers,
+
+00:07:59.296 --> 00:08:00.536 A:middle
+you have basically
+got a ViewController,
+
+
+
+00:07:59.296 --> 00:08:00.536 A:middle
+you have basically
+got a ViewController,
+
+00:08:00.826 --> 00:08:03.596 A:middle
+and an associated view subtree,
+and this is what's going
+
+00:08:03.596 --> 00:08:05.716 A:middle
+to get cloned to populate
+your CollectionView.
+
+00:08:06.396 --> 00:08:08.546 A:middle
+Lastly, yourCollectionView
+might have a delegate,
+
+00:08:08.546 --> 00:08:09.956 A:middle
+if you want to support
+Drag-and-Drop,
+
+00:08:10.286 --> 00:08:12.066 A:middle
+that's your delegate's
+responsibility,
+
+00:08:12.346 --> 00:08:15.226 A:middle
+so you would wire up
+a delegate for that.
+
+00:08:15.546 --> 00:08:17.776 A:middle
+With the new API, a few of
+these things have changed.
+
+00:08:17.776 --> 00:08:20.786 A:middle
+Instead of providing a content
+array, what you are going
+
+00:08:20.786 --> 00:08:24.256 A:middle
+to do now on El Capitan,
+is wire up a data source.
+
+00:08:24.486 --> 00:08:27.446 A:middle
+The data source protocol for
+CollectionView is very simple,
+
+00:08:27.446 --> 00:08:29.656 A:middle
+as in iOS there are only
+two required methods,
+
+00:08:29.846 --> 00:08:32.056 A:middle
+it's very quick and easy
+as you will see to wire
+
+00:08:32.056 --> 00:08:33.686 A:middle
+up your model to CollectionView.
+
+00:08:34.926 --> 00:08:36.546 A:middle
+You still have a
+delegate, as before,
+
+00:08:36.616 --> 00:08:39.496 A:middle
+but now the delegate has the
+opportunity to participate
+
+00:08:39.496 --> 00:08:41.376 A:middle
+in selection and
+highlighting of items.
+
+00:08:41.376 --> 00:08:42.775 A:middle
+We'll talk about
+that in detail later.
+
+00:08:43.226 --> 00:08:46.526 A:middle
+Instead of an item prototype
+you now typically provide a nib
+
+00:08:46.526 --> 00:08:49.386 A:middle
+file, that hasyour
+example item in it,
+
+00:08:49.386 --> 00:08:51.016 A:middle
+and it's associatedview subtree.
+
+00:08:51.276 --> 00:08:53.646 A:middle
+You're not limited to just one
+of these, as I said, you can mix
+
+00:08:53.646 --> 00:08:54.956 A:middle
+and match different
+types of items,
+
+00:08:54.956 --> 00:08:57.286 A:middle
+you can have multiple nib files,
+one for for each type of item
+
+00:08:57.596 --> 00:09:00.406 A:middle
+and the view trees can be
+completely different for these.
+
+
+
+00:08:57.596 --> 00:09:00.406 A:middle
+and the view trees can be
+completely different for these.
+
+00:09:00.896 --> 00:09:03.176 A:middle
+Last but not least,
+very importantly,
+
+00:09:03.756 --> 00:09:06.606 A:middle
+we have taken the layout
+functionality and factored it
+
+00:09:06.606 --> 00:09:08.896 A:middle
+out of CollectionView so
+it is no longer hard wired.
+
+00:09:08.896 --> 00:09:11.536 A:middle
+We now have a very
+modular model, like on iOS,
+
+00:09:12.216 --> 00:09:14.086 A:middle
+so you can take your
+existing CollectionView,
+
+00:09:14.416 --> 00:09:16.716 A:middle
+unplug the layout that's
+currently connected to it,
+
+00:09:16.956 --> 00:09:20.556 A:middle
+plug in a different layout, and
+suddenly your items are laid
+
+00:09:20.556 --> 00:09:23.246 A:middle
+out with different sizes using
+a completely different layout
+
+00:09:23.246 --> 00:09:26.536 A:middle
+algorithm, and these layouts
+are completely interchangeable,
+
+00:09:26.536 --> 00:09:28.666 A:middle
+nd you can even make the
+change to a different layout
+
+00:09:28.886 --> 00:09:31.146 A:middle
+in an animated-transition
+kind of way.
+
+00:09:31.186 --> 00:09:34.066 A:middle
+very easily, as ourcode
+sample does.
+
+00:09:34.736 --> 00:09:37.996 A:middle
+For customizing layout, your
+layout can also delegate
+
+00:09:37.996 --> 00:09:39.456 A:middle
+to your CollectionViews
+delegate.
+
+00:09:39.456 --> 00:09:42.016 A:middle
+You can implement certain
+optional methods to allow you
+
+00:09:42.016 --> 00:09:43.886 A:middle
+to make per-item
+layout adjustments.
+
+00:09:43.886 --> 00:09:45.826 A:middle
+You don't even necessarily
+have to subclass,
+
+00:09:46.096 --> 00:09:47.216 A:middle
+if you want a custom layout.
+
+00:09:48.036 --> 00:09:49.836 A:middle
+We'll take a quick look
+at the layout classes.
+
+00:09:49.836 --> 00:09:52.076 A:middle
+These arevery similar but
+not identical, on iOS.
+
+00:09:52.076 --> 00:09:54.616 A:middle
+As on iOS,
+NSCollectionViewLayout,
+
+00:09:54.616 --> 00:09:57.556 A:middle
+his is the base class that
+defines the common behavior,
+
+00:09:57.556 --> 00:09:59.396 A:middle
+the API interface
+for all layouts.
+
+
+
+00:10:00.446 --> 00:10:03.396 A:middle
+NSCollectionViewGridLayout
+is new and unique to OS X
+
+00:10:03.396 --> 00:10:06.686 A:middle
+and its job is basically
+encapsulate NSCollectionView's
+
+00:10:06.686 --> 00:10:09.756 A:middle
+existing, sort of stretchy
+grid layout algoritm,
+
+00:10:09.956 --> 00:10:12.296 A:middle
+in case you want to use
+it with the new APIs.
+
+00:10:12.296 --> 00:10:15.636 A:middle
+It gives you a stretchy
+grid, where it tries
+
+00:10:15.636 --> 00:10:19.836 A:middle
+to make all items the same
+size, but they're limited to min
+
+00:10:19.836 --> 00:10:21.136 A:middle
+and max sizes, and it tries
+
+00:10:21.186 --> 00:10:23.896 A:middle
+to basically fill its visible
+area as much as possible.
+
+00:10:24.456 --> 00:10:26.306 A:middle
+Sometimes useful,
+but this is sort
+
+00:10:26.306 --> 00:10:27.666 A:middle
+of a legacy layout right now.
+
+00:10:27.716 --> 00:10:30.446 A:middle
+It doesn't yet support sections
+or header or footer views
+
+00:10:30.756 --> 00:10:33.216 A:middle
+and FlowLayout is
+generally much more flexible.
+
+00:10:34.036 --> 00:10:35.846 A:middle
+We usually recommend that
+you you start with that.
+
+00:10:35.846 --> 00:10:38.266 A:middle
+NSCollectionViewFlowLayout
+is basically identical
+
+00:10:38.496 --> 00:10:41.776 A:middle
+to UICollectionViewFlowLayout
+on iOS, it's a very powerful,
+
+00:10:41.776 --> 00:10:45.326 A:middle
+general layout algorithm,
+and the algorithm is much
+
+00:10:45.326 --> 00:10:49.636 A:middle
+like flowing text fragments
+or CSS boxes in flow,
+
+00:10:49.636 --> 00:10:51.406 A:middle
+if you've dealt with
+either of those problems.
+
+00:10:51.596 --> 00:10:53.906 A:middle
+Basically, you can have
+variable item sizes,
+
+00:10:54.136 --> 00:10:56.416 A:middle
+and the layout algorithm
+canhandle that nicely.
+
+00:10:56.696 --> 00:10:59.626 A:middle
+It willrack up items
+into rows or columns,
+
+00:10:59.626 --> 00:11:01.576 A:middle
+depending which orientation
+you give it.
+
+
+
+00:10:59.626 --> 00:11:01.576 A:middle
+depending which orientation
+you give it.
+
+00:11:01.996 --> 00:11:03.656 A:middle
+When it fills up
+a row or column,
+
+00:11:03.656 --> 00:11:05.716 A:middle
+it'll wrap to a new
+one and continue on.
+
+00:11:06.116 --> 00:11:08.986 A:middle
+FlowLayout supports
+sections with optional header
+
+00:11:08.986 --> 00:11:11.306 A:middle
+and footer views, and it
+is generally very powerful
+
+00:11:11.306 --> 00:11:13.706 A:middle
+and customizable, so even
+if you do need to subclass,
+
+00:11:15.026 --> 00:11:17.266 A:middle
+usually you'll want to start
+with FlowLayout, and subclass
+
+00:11:17.266 --> 00:11:18.596 A:middle
+from there to get what you want.
+
+00:11:18.596 --> 00:11:21.986 A:middle
+You're always free to subclass
+NSCollectionViewLayout,
+
+00:11:22.646 --> 00:11:24.406 A:middle
+to get a completely
+custom layout.
+
+00:11:24.486 --> 00:11:28.186 A:middle
+Our sample code todaydoes
+just that.
+
+00:11:28.396 --> 00:11:32.146 A:middle
+Layout attributes objects aren't
+always immediately intuitive
+
+00:11:32.146 --> 00:11:34.326 A:middle
+to those who look at
+them for the first time.
+
+00:11:34.326 --> 00:11:36.676 A:middle
+This is a concept -- the
+same concept as on iOS,
+
+00:11:37.206 --> 00:11:39.456 A:middle
+and once you understand what it
+is, it really is very simple.
+
+00:11:40.276 --> 00:11:42.946 A:middle
+Imagine that you can
+take a view's frame
+
+00:11:43.246 --> 00:11:44.916 A:middle
+and other assorted properties
+
+00:11:44.916 --> 00:11:47.306 A:middle
+and encapsulate them
+separately from the view.
+
+00:11:47.306 --> 00:11:49.846 A:middle
+That's what LayoutAttributes'
+job is.
+
+00:11:49.846 --> 00:11:51.746 A:middle
+You have an instance
+of these frames,
+
+00:11:51.746 --> 00:11:53.026 A:middle
+the most obvious one , right?
+
+00:11:53.026 --> 00:11:56.496 A:middle
+you need to know the
+position and size of an item,
+
+00:11:56.766 --> 00:11:59.376 A:middle
+but there are other ancillary
+attributes, such as Alpha value,
+
+00:11:59.376 --> 00:12:03.036 A:middle
+Opacity in other words, Zindex
+for back-to-front sort order,
+
+
+
+00:11:59.376 --> 00:12:03.036 A:middle
+Opacity in other words, Zindex
+for back-to-front sort order,
+
+00:12:03.976 --> 00:12:05.536 A:middle
+and whether the view
+is hidden or not,
+
+00:12:05.536 --> 00:12:07.586 A:middle
+which can also be
+considered layout state.
+
+00:12:07.586 --> 00:12:09.426 A:middle
+You're taking state,
+and snapshotting it,
+
+00:12:09.646 --> 00:12:13.666 A:middle
+what this enables the new APIs
+to do, is to reason about items
+
+00:12:13.916 --> 00:12:15.846 A:middle
+that are not currently
+instantiated.
+
+00:12:15.846 --> 00:12:18.446 A:middle
+Remember, we're just lazily
+instantiating items on demand.
+
+00:12:19.146 --> 00:12:21.526 A:middle
+We end up creating these,
+and passing them around,
+
+00:12:21.526 --> 00:12:23.066 A:middle
+these layout attributes
+instances,
+
+00:12:23.286 --> 00:12:26.316 A:middle
+that's what the Layout APIs
+deal with, they pass them around
+
+00:12:26.536 --> 00:12:29.066 A:middle
+and then eventually they end
+up getting applied to items
+
+00:12:29.066 --> 00:12:30.246 A:middle
+or views at layout time.
+
+00:12:30.396 --> 00:12:33.406 A:middle
+Applied in the sense of
+setting an animation target
+
+00:12:33.406 --> 00:12:35.066 A:middle
+for a transition to a new state.
+
+00:12:35.426 --> 00:12:36.496 A:middle
+That's all they are really.
+
+00:12:37.036 --> 00:12:40.986 A:middle
+You can group items, that's
+pretty straightforward,
+
+00:12:40.986 --> 00:12:43.136 A:middle
+you can break your items
+up into groups now,
+
+00:12:43.336 --> 00:12:47.116 A:middle
+each group can potentially
+have a header above it,
+
+00:12:47.116 --> 00:12:49.746 A:middle
+and a footer below it, or
+this also works sideways,
+
+00:12:49.746 --> 00:12:51.446 A:middle
+ifyou're doing that orientation.
+
+00:12:52.246 --> 00:12:54.556 A:middle
+The header, and footer,
+together with the items
+
+00:12:54.556 --> 00:12:56.226 A:middle
+that they bracket,
+constitute a section,
+
+00:12:56.226 --> 00:12:58.066 A:middle
+our first section
+here is section 0.
+
+00:12:58.376 --> 00:13:01.826 A:middle
+The items within that section
+are numbered 0, 1, 2, so on.
+
+
+
+00:12:58.376 --> 00:13:01.826 A:middle
+The items within that section
+are numbered 0, 1, 2, so on.
+
+00:13:02.506 --> 00:13:04.166 A:middle
+This is exactly the
+same as on iOS.
+
+00:13:04.626 --> 00:13:06.516 A:middle
+The next section can have
+a header, a footer view,
+
+00:13:06.936 --> 00:13:09.176 A:middle
+together with the items,
+now we've got section 1
+
+00:13:09.176 --> 00:13:12.216 A:middle
+and the items in that
+section are again numbered 0,
+
+00:13:12.306 --> 00:13:13.806 A:middle
+1, 2, and so forth.
+
+00:13:14.526 --> 00:13:17.736 A:middle
+So clearly we have a need for a
+different way to address items.
+
+00:13:17.736 --> 00:13:19.996 A:middle
+We're going to start addressing
+items like we do on iOS.
+
+00:13:19.996 --> 00:13:21.826 A:middle
+We need to know not
+only the item index,
+
+00:13:22.176 --> 00:13:23.356 A:middle
+but the section index.
+
+00:13:23.736 --> 00:13:26.506 A:middle
+This has consequences for
+existing APIs, and accounts
+
+00:13:26.506 --> 00:13:28.826 A:middle
+for a lot of the API
+changes that you will see.
+
+00:13:29.346 --> 00:13:31.296 A:middle
+For example, the
+ItemAtIndex method,
+
+00:13:31.296 --> 00:13:33.656 A:middle
+which takes a single-integer
+index,
+
+00:13:33.656 --> 00:13:36.326 A:middle
+is no longer sufficient.Now
+that we have sections,
+
+00:13:36.326 --> 00:13:37.736 A:middle
+we need to know the
+section number too.
+
+00:13:38.186 --> 00:13:41.346 A:middle
+So APIs like this are now
+soft-deprecated in favor of ones
+
+00:13:41.386 --> 00:13:43.306 A:middle
+that take index paths.
+
+00:13:43.306 --> 00:13:46.016 A:middle
+And NSIndexPath is just
+an existing value type
+
+00:13:46.016 --> 00:13:49.286 A:middle
+that lets us very conveniently
+encapsulate a section index,
+
+00:13:49.286 --> 00:13:52.306 A:middle
+and an item index, together
+in an object, a value object
+
+00:13:52.506 --> 00:13:54.926 A:middle
+that we can pass around,
+throw into collections, so on.
+
+00:13:55.266 --> 00:13:57.696 A:middle
+A lot of the API changes you
+will see actually are just
+
+00:13:57.696 --> 00:13:59.806 A:middle
+accountfor this simple
+transition away
+
+00:13:59.806 --> 00:14:01.096 A:middle
+from single item indices.
+
+
+
+00:13:59.806 --> 00:14:01.096 A:middle
+from single item indices.
+
+00:14:01.416 --> 00:14:03.176 A:middle
+You can still use the old APIs
+
+00:14:03.406 --> 00:14:05.626 A:middle
+if you have a single-section
+CollectionView,
+
+00:14:05.626 --> 00:14:08.536 A:middle
+which is the default, but if
+you might be using sections,
+
+00:14:08.806 --> 00:14:12.516 A:middle
+we encourage you to
+use the new APIs.
+
+00:14:12.686 --> 00:14:14.586 A:middle
+We're obviously starting
+to get into nuts and bolts,
+
+00:14:14.586 --> 00:14:18.616 A:middle
+we'll embrace that, and get down
+to looking at our example code.
+
+00:14:18.616 --> 00:14:20.906 A:middle
+The example today is
+CocoaSlideCollection,
+
+00:14:20.906 --> 00:14:22.426 A:middle
+and it's basically
+an image browser
+
+00:14:22.646 --> 00:14:25.696 A:middle
+that uses a CollectionView
+to present a folder
+
+00:14:25.696 --> 00:14:28.206 A:middle
+of ImageFiles for
+you to look at.
+
+00:14:28.816 --> 00:14:30.456 A:middle
+For each ImageFile
+in the folder,
+
+00:14:30.456 --> 00:14:34.156 A:middle
+we show a thumbnail image
+and assorted image info.
+
+00:14:34.716 --> 00:14:40.106 A:middle
+We position these using the
+Flow layout that comes stock
+
+00:14:40.106 --> 00:14:42.016 A:middle
+on the system, and our
+own custom layouts,
+
+00:14:42.016 --> 00:14:43.076 A:middle
+that you will see
+how to implement.
+
+00:14:43.596 --> 00:14:46.556 A:middle
+We're going to suppose that each
+
+00:14:46.556 --> 00:14:49.036 A:middle
+of our Image Files can have
+tags associated with it
+
+00:14:49.036 --> 00:14:51.026 A:middle
+and we're going to
+use that as an excuse
+
+00:14:51.026 --> 00:14:53.186 A:middle
+to show off the ability to
+have sections with headers
+
+00:14:53.186 --> 00:14:57.916 A:middle
+and footers, we're going to be
+able togroup our items by tag.
+
+00:14:57.916 --> 00:15:00.456 A:middle
+We'll also support
+selection and Drag-and-Drop
+
+
+
+00:14:57.916 --> 00:15:00.456 A:middle
+We'll also support
+selection and Drag-and-Drop
+
+00:15:00.456 --> 00:15:03.536 A:middle
+of our items using the APIs
+that we'll discuss today.
+
+00:15:04.636 --> 00:15:06.556 A:middle
+To break this down into
+parts, we'll break it
+
+00:15:06.556 --> 00:15:09.406 A:middle
+down into six parts, so we
+can do this step by step.
+
+00:15:09.686 --> 00:15:11.646 A:middle
+First, of course, we want
+to make items appear.
+
+00:15:11.646 --> 00:15:12.586 A:middle
+That's always nice.
+
+00:15:12.586 --> 00:15:13.536 A:middle
+That's the big hurdle.
+
+00:15:13.806 --> 00:15:16.146 A:middle
+When you get stuff to show
+up, you can get more advanced.
+
+00:15:16.146 --> 00:15:17.246 A:middle
+We'll do that quickly.
+
+00:15:17.826 --> 00:15:20.146 A:middle
+Thenwe'll look at grouping
+those items into sections.
+
+00:15:20.976 --> 00:15:23.056 A:middle
+Next we want to look
+at how do we handle it
+
+00:15:23.056 --> 00:15:25.616 A:middle
+when the model changes,
+the ImageFiles come and go,
+
+00:15:25.616 --> 00:15:27.026 A:middle
+how do we update
+our CollectionView.
+
+00:15:27.026 --> 00:15:28.426 A:middle
+We'll see how to
+do that properly.
+
+00:15:28.426 --> 00:15:30.716 A:middle
+We'll look at handling
+selection, and highlighting,
+
+00:15:30.716 --> 00:15:33.666 A:middle
+of the semantics of that,
+handling Drag-and-Drop and last
+
+00:15:33.666 --> 00:15:35.646 A:middle
+but not least, the really
+fun part, we'll look at how
+
+00:15:35.646 --> 00:15:37.326 A:middle
+to make custom layouts
+of ourown.
+
+00:15:37.746 --> 00:15:40.926 A:middle
+First, making items appear,
+back to our model here.
+
+00:15:40.926 --> 00:15:42.286 A:middle
+This is the new API again.
+
+00:15:42.966 --> 00:15:44.486 A:middle
+We need to provide a data source
+
+00:15:44.616 --> 00:15:46.526 A:middle
+that implements those
+two required methods.
+
+00:15:47.366 --> 00:15:50.246 A:middle
+We'll need to provide an
+item nib, simple enough.
+
+00:15:50.356 --> 00:15:51.906 A:middle
+Then a CollectionView layout.
+
+00:15:53.146 --> 00:15:56.246 A:middle
+The two required methods are
+simply give the CollectionView
+
+00:15:56.246 --> 00:15:59.316 A:middle
+the ability to ask how many
+items are in this section,
+
+00:15:59.316 --> 00:16:01.486 A:middle
+by default we have one
+section, it is going to pass 0
+
+
+
+00:15:59.316 --> 00:16:01.486 A:middle
+by default we have one
+section, it is going to pass 0
+
+00:16:01.486 --> 00:16:03.706 A:middle
+for the section index, it'll
+just return the number of items.
+
+00:16:04.276 --> 00:16:06.386 A:middle
+The second method's
+responsibility,
+
+00:16:06.386 --> 00:16:09.136 A:middle
+is to actually instantiate
+items,
+
+00:16:09.136 --> 00:16:11.866 A:middle
+or it could be actually
+reusing the recycled items
+
+00:16:11.866 --> 00:16:14.446 A:middle
+under the hood, with help
+from the CollectionView
+
+00:16:14.446 --> 00:16:15.816 A:middle
+and return them back
+to the CollectionView.
+
+00:16:16.376 --> 00:16:20.516 A:middle
+In CocoaSlideCollection
+our basic model object
+
+00:16:20.516 --> 00:16:22.066 A:middle
+to understand is the ImageFile.
+
+00:16:22.796 --> 00:16:26.686 A:middle
+An ImageFile basically
+references a URL of an ImageFile
+
+00:16:26.686 --> 00:16:28.646 A:middle
+that we found on disk in
+the folder we're scanning,
+
+00:16:28.646 --> 00:16:30.606 A:middle
+that includes the file name
+that we're displaying at the top
+
+00:16:30.606 --> 00:16:32.956 A:middle
+of the slide, the file's type
+
+00:16:33.016 --> 00:16:35.796 A:middle
+which we displayed a
+user-readable description of,
+
+00:16:36.096 --> 00:16:38.126 A:middle
+the pixel dimensions
+of the original image,
+
+00:16:39.056 --> 00:16:40.706 A:middle
+then a thumbnail, of course.
+
+00:16:41.196 --> 00:16:44.866 A:middle
+You will see those
+around in the source code.
+
+00:16:45.306 --> 00:16:48.136 A:middle
+An image collection owns
+an array of ImageFiles,
+
+00:16:48.136 --> 00:16:51.386 A:middle
+An image collection also
+owns an array of tags,
+
+00:16:51.386 --> 00:16:53.596 A:middle
+each of which owns an array
+of ImageFiles that have
+
+00:16:53.596 --> 00:16:56.716 A:middle
+that tag applied, and there is
+an untagged ImageFiles array
+
+00:16:56.716 --> 00:16:57.136 A:middle
+as well.
+
+00:16:57.946 --> 00:17:00.176 A:middle
+First we'll look at
+making items appear.
+
+
+
+00:16:57.946 --> 00:17:00.176 A:middle
+First we'll look at
+making items appear.
+
+00:17:00.176 --> 00:17:01.516 A:middle
+We'll go over to the
+demo machine here.
+
+00:17:02.746 --> 00:17:05.215 A:middle
+Let's get this up and running.
+
+00:17:05.386 --> 00:17:06.796 A:middle
+We'll open our Xcode project.
+
+00:17:09.256 --> 00:17:12.836 A:middle
+Things are, you know,
+mostly ready to go,
+
+00:17:12.836 --> 00:17:14.566 A:middle
+but we have no CollectionView
+in our window.
+
+00:17:14.566 --> 00:17:15.636 A:middle
+That's going to be a problem.
+
+00:17:15.636 --> 00:17:17.695 A:middle
+We'll look at how to
+actually get a CollectionView.
+
+00:17:19.536 --> 00:17:23.066 A:middle
+So going into our
+Resources group here.
+
+00:17:23.066 --> 00:17:25.996 A:middle
+We have a BrowserWindow nib
+that holds our main window.
+
+00:17:27.086 --> 00:17:29.186 A:middle
+Let's look at that.
+
+00:17:29.456 --> 00:17:35.326 A:middle
+We'll go in the library here,
+and search for a CollectionView.
+
+00:17:35.776 --> 00:17:42.346 A:middle
+We'll drag it out.
+
+00:17:42.646 --> 00:17:44.256 A:middle
+We'll size it to
+fill our window.
+
+00:17:45.766 --> 00:17:46.956 A:middle
+Apply constraints to it.
+
+00:17:47.066 --> 00:17:53.736 A:middle
+That's going to be our main
+document view for this window.
+
+00:17:53.736 --> 00:17:57.866 A:middle
+Okay. Now what we did, what we
+actually got when we dragged
+
+00:17:57.866 --> 00:17:59.656 A:middle
+out a CollectionView,
+this is a lot like working
+
+00:17:59.746 --> 00:18:02.436 A:middle
+with a Table View
+or Outline View,
+
+
+
+00:17:59.746 --> 00:18:02.436 A:middle
+with a Table View
+or Outline View,
+
+00:18:02.816 --> 00:18:04.716 A:middle
+you're actually getting
+a CollectionView embedded
+
+00:18:04.716 --> 00:18:06.466 A:middle
+in a scroll view unlike on iOS.
+
+00:18:06.656 --> 00:18:09.466 A:middle
+Scroll view is a separate
+thing that's composed
+
+00:18:09.466 --> 00:18:11.046 A:middle
+with a document view
+that you want to scroll,
+
+00:18:11.046 --> 00:18:12.596 A:middle
+you don't inherit the
+scrolling behavior,
+
+00:18:12.596 --> 00:18:13.786 A:middle
+it is done through composition.
+
+00:18:14.996 --> 00:18:15.906 A:middle
+We have a scroll view.
+
+00:18:15.996 --> 00:18:18.686 A:middle
+I said that the new
+CollectionView is designed
+
+00:18:18.686 --> 00:18:20.596 A:middle
+to run layer-backs, we're
+going to go over here
+
+00:18:20.596 --> 00:18:24.106 A:middle
+to our inspector, and we'll set
+the [indecipherable] property
+
+00:18:24.106 --> 00:18:26.416 A:middle
+on the scroll view to
+ensure layer-backing.
+
+00:18:27.126 --> 00:18:29.666 A:middle
+Now, we'll drill down to
+the CollectionView itself,
+
+00:18:29.666 --> 00:18:32.586 A:middle
+which is the scroll
+view's document view.
+
+00:18:32.586 --> 00:18:35.056 A:middle
+We have a new properties
+inspector here in Xcode 7
+
+00:18:35.056 --> 00:18:36.706 A:middle
+that supports some of
+the new capabilities.
+
+00:18:36.706 --> 00:18:39.406 A:middle
+We choose a layout we
+want to use, such as Flow,
+
+00:18:39.406 --> 00:18:40.726 A:middle
+and even set its properties.
+
+00:18:41.116 --> 00:18:42.536 A:middle
+In this sample app
+we're actually going
+
+00:18:42.536 --> 00:18:44.326 A:middle
+to switch programmatically
+between the layouts,
+
+00:18:44.326 --> 00:18:46.546 A:middle
+so we don't really need the one
+with we unarchived from the nib,
+
+00:18:46.956 --> 00:18:48.156 A:middle
+but we can set that there.
+
+00:18:48.486 --> 00:18:52.086 A:middle
+You can do fun, simple things,
+like set the background color,
+
+00:18:52.346 --> 00:18:59.296 A:middle
+as soon as I find
+the color panel.
+
+00:18:59.536 --> 00:19:00.976 A:middle
+The more interesting thing,
+is that you have to hook
+
+
+
+00:18:59.536 --> 00:19:00.976 A:middle
+The more interesting thing,
+is that you have to hook
+
+00:19:00.976 --> 00:19:02.126 A:middle
+up that data source, right?
+
+00:19:02.956 --> 00:19:08.286 A:middle
+So, our file's owner in
+this project is an instance
+
+00:19:08.426 --> 00:19:10.626 A:middle
+of APL Browser Window
+Controller.
+
+00:19:10.696 --> 00:19:12.466 A:middle
+We have a window controller
+that manages the window,
+
+00:19:12.466 --> 00:19:14.466 A:middle
+that's also going tp be our
+data source, and our delegate
+
+00:19:14.466 --> 00:19:15.386 A:middle
+for our CollectionView.
+
+00:19:15.386 --> 00:19:18.836 A:middle
+We'll wire that up here
+from the CollectionView
+
+00:19:18.996 --> 00:19:20.066 A:middle
+to the file's owner, it's going
+
+00:19:20.066 --> 00:19:21.686 A:middle
+to be the CollectionView's
+data source.
+
+00:19:21.816 --> 00:19:24.596 A:middle
+It will be its delegate too, to
+so we can handle Drag-and-Drop,
+
+00:19:25.056 --> 00:19:27.246 A:middle
+we'll wire from the file's owner
+back to the CollectionView,
+
+00:19:27.246 --> 00:19:30.066 A:middle
+we have an ImageCollectionView
+outlet that we've defined
+
+00:19:30.066 --> 00:19:32.056 A:middle
+to make it easier to
+find our CollectionView.
+
+00:19:33.486 --> 00:19:36.416 A:middle
+That's basically what we
+need to do in our nibs.
+
+00:19:36.776 --> 00:19:39.296 A:middle
+We have also got a slide
+nib that we created.
+
+00:19:39.836 --> 00:19:43.686 A:middle
+It holds basically a container
+view that's referenced
+
+00:19:43.686 --> 00:19:48.046 A:middle
+by a slide, our slide class
+is a subclass of collection,
+
+00:19:48.046 --> 00:19:49.216 A:middle
+NSCollectionViewItems.
+
+00:19:49.216 --> 00:19:51.916 A:middle
+We've subclassed so we can
+add some functionality there,
+
+00:19:51.916 --> 00:19:53.716 A:middle
+our own custom controller
+functionality,
+
+00:19:54.226 --> 00:19:56.856 A:middle
+the root view is just a
+container that will be sized
+
+00:19:57.116 --> 00:19:58.976 A:middle
+by the CollectionView's
+layout algorithm.
+
+00:19:59.456 --> 00:20:00.796 A:middle
+Then, we have controls,
+
+
+
+00:19:59.456 --> 00:20:00.796 A:middle
+Then, we have controls,
+
+00:20:00.796 --> 00:20:06.506 A:middle
+text fields that have autolayout
+constraints set on them,
+
+00:20:06.506 --> 00:20:07.756 A:middle
+relative to their containers.
+
+00:20:07.756 --> 00:20:11.046 A:middle
+The layout will set the frame of
+the item, the item's root view,
+
+00:20:11.276 --> 00:20:13.816 A:middle
+and the rest will all be done
+by autolayout internally.
+
+00:20:14.296 --> 00:20:16.466 A:middle
+I have also used bindings
+
+00:20:16.526 --> 00:20:21.076 A:middle
+to basically connect the
+value displayed by each
+
+00:20:21.076 --> 00:20:25.186 A:middle
+of these text fields, through
+the slides-represented object.
+
+00:20:25.186 --> 00:20:27.746 A:middle
+Remember a slide is a
+CollectionView item,
+
+00:20:28.116 --> 00:20:29.236 A:middle
+therefore it is a
+ViewController,
+
+00:20:29.236 --> 00:20:30.946 A:middle
+ViewController has a
+represented object.
+
+00:20:30.946 --> 00:20:32.786 A:middle
+That's where we're going
+to connect our item
+
+00:20:33.096 --> 00:20:34.816 A:middle
+to the model object
+it represents,
+
+00:20:34.816 --> 00:20:36.196 A:middle
+to the ImageFile instance.
+
+00:20:36.626 --> 00:20:38.596 A:middle
+We can access properties
+of that instance.
+
+00:20:39.036 --> 00:20:41.466 A:middle
+All we really are going to
+need to do is wire our item
+
+00:20:41.466 --> 00:20:44.676 A:middle
+up to the represented object,
+i.e. its ImageFile, and then all
+
+00:20:44.676 --> 00:20:46.186 A:middle
+of these controls
+will just populate,
+
+00:20:46.186 --> 00:20:47.976 A:middle
+including the image
+view over here.
+
+00:20:48.696 --> 00:20:52.836 A:middle
+Because we're using a separate
+nib file for the modern API
+
+00:20:53.046 --> 00:20:55.876 A:middle
+for CollectionView, we're
+going to prune some stuff
+
+00:20:55.936 --> 00:20:58.516 A:middle
+that Xcode put in
+here by default still.
+
+00:20:58.816 --> 00:21:01.566 A:middle
+Our image CollectionView
+still has an item prototype.
+
+
+
+00:20:58.816 --> 00:21:01.566 A:middle
+Our image CollectionView
+still has an item prototype.
+
+00:21:02.516 --> 00:21:03.546 A:middle
+We want to get rid of that.
+
+00:21:03.546 --> 00:21:04.336 A:middle
+Let's unwire it.
+
+00:21:05.626 --> 00:21:07.176 A:middle
+That will interfere
+with what we're doing.
+
+00:21:07.466 --> 00:21:08.856 A:middle
+We'll delete the item prototype,
+
+00:21:08.856 --> 00:21:10.736 A:middle
+we'll delete the views
+associated with it.
+
+00:21:10.736 --> 00:21:11.596 A:middle
+We don't need those.
+
+00:21:12.096 --> 00:21:14.056 A:middle
+We can build and
+we're almost okay.
+
+00:21:14.686 --> 00:21:16.656 A:middle
+If we look in the warnings
+here, we see a reminder,
+
+00:21:16.656 --> 00:21:19.616 A:middle
+we didn't implement the
+required data source methods,
+
+00:21:19.616 --> 00:21:21.586 A:middle
+there are just two of them, so
+let's go do that real quick.
+
+00:21:22.646 --> 00:21:24.166 A:middle
+We'll go to Browser
+Window Controller.
+
+00:21:24.796 --> 00:21:28.866 A:middle
+Look here, where the data
+source methods should be.
+
+00:21:28.926 --> 00:21:34.476 A:middle
+Fortunately I typed
+some in advance.
+
+00:21:34.476 --> 00:21:39.606 A:middle
+We'll just drag in.
+
+00:21:39.996 --> 00:21:42.026 A:middle
+For a non-section CollectionView
+this is very simple,
+
+00:21:42.026 --> 00:21:44.686 A:middle
+we implement CollectionView,
+number of items in section
+
+00:21:44.686 --> 00:21:46.776 A:middle
+by default, the CollectionView
+assumes one section,
+
+00:21:47.066 --> 00:21:48.866 A:middle
+we return the count
+of ImageFiles
+
+00:21:49.146 --> 00:21:51.766 A:middle
+in our image collection,
+and the other thing we need
+
+00:21:51.766 --> 00:21:53.566 A:middle
+to do is make items on demand.
+
+00:21:53.626 --> 00:21:55.826 A:middle
+The CollectionView will
+send us CollectionView Item
+
+00:21:55.826 --> 00:21:57.566 A:middle
+For Represented Object
+At Index Path.
+
+00:21:58.206 --> 00:21:59.826 A:middle
+The important thing here
+is that we're calling back
+
+00:21:59.896 --> 00:22:01.416 A:middle
+to the CollectionView,
+and saying make item
+
+
+
+00:21:59.896 --> 00:22:01.416 A:middle
+to the CollectionView,
+and saying make item
+
+00:22:01.416 --> 00:22:03.616 A:middle
+with identifier, which
+is a little misleading,
+
+00:22:03.616 --> 00:22:05.186 A:middle
+make really means
+make or give me
+
+00:22:05.186 --> 00:22:08.866 A:middle
+than existing one you can
+recycle for index path.
+
+00:22:08.866 --> 00:22:10.836 A:middle
+We just pass in the index
+path that we were given,
+
+00:22:10.836 --> 00:22:11.986 A:middle
+that identifies the item.
+
+00:22:12.876 --> 00:22:15.646 A:middle
+As I said, we want to wire up
+the items represented objects,
+
+00:22:15.646 --> 00:22:18.096 A:middle
+so we can find the corresponding
+properties to display just
+
+00:22:18.096 --> 00:22:19.156 A:middle
+for that item instance.
+
+00:22:19.156 --> 00:22:22.406 A:middle
+We've got a little method
+here that we factored out,
+
+00:22:22.406 --> 00:22:24.526 A:middle
+ImageFile At Index
+Path, that lets us dig
+
+00:22:24.526 --> 00:22:25.956 A:middle
+into our data model real simply,
+
+00:22:25.956 --> 00:22:28.876 A:middle
+and find the corresponding
+ImageFile instance.
+
+00:22:29.316 --> 00:22:31.346 A:middle
+That's all we need to
+do, return the item back
+
+00:22:31.466 --> 00:22:32.336 A:middle
+to the CollectionView.
+
+00:22:33.076 --> 00:22:35.526 A:middle
+If we're feeling brave maybe
+we can build and run this,
+
+00:22:35.526 --> 00:22:36.826 A:middle
+and see if it actually works.
+
+00:22:37.266 --> 00:22:39.226 A:middle
+So, we're going to come
+up with -- there you go.
+
+00:22:39.226 --> 00:22:40.996 A:middle
+By default we have
+a window pointing
+
+00:22:40.996 --> 00:22:43.866 A:middle
+at library desktop pictures,
+and it scans that folder.
+
+00:22:43.866 --> 00:22:46.086 A:middle
+It looks for the ImageFiles
+
+00:22:46.126 --> 00:22:48.036 A:middle
+and presents them using
+CollectionView items
+
+00:22:48.036 --> 00:22:50.606 A:middle
+and we scroll through here, the
+items that were out of view,
+
+00:22:50.606 --> 00:22:53.766 A:middle
+are actually being instantiated
+on demand, or even recycled
+
+00:22:53.766 --> 00:22:56.256 A:middle
+from items that just
+scrolled off the top.
+
+00:22:57.006 --> 00:22:59.356 A:middle
+You can resize, the
+layout reflows
+
+
+
+00:23:00.486 --> 00:23:02.496 A:middle
+and we get a lot
+of stuff for free.
+
+00:23:02.496 --> 00:23:04.516 A:middle
+This is, I call it the
+wrapped layout here,
+
+00:23:04.616 --> 00:23:06.996 A:middle
+it is a simple subclass
+of the Flow layout,
+
+00:23:07.536 --> 00:23:09.986 A:middle
+then we have some custom layouts
+that we have implemented, -
+
+00:23:11.286 --> 00:23:12.876 A:middle
+we can layout - these
+are implemented
+
+00:23:12.876 --> 00:23:16.306 A:middle
+by plugging a different layout
+object into the CollectionView.
+
+00:23:17.276 --> 00:23:19.616 A:middle
+We have got group by tag here,
+
+00:23:19.616 --> 00:23:21.816 A:middle
+but that doesn't
+really do anything yet.
+
+00:23:21.816 --> 00:23:23.706 A:middle
+Let's go back to the slides
+
+00:23:23.756 --> 00:23:26.516 A:middle
+and see what it takes
+to get that working.
+
+00:23:28.016 --> 00:23:29.516 A:middle
+[Applause]
+
+00:23:29.516 --> 00:23:30.716 A:middle
+Thank you.
+
+00:23:33.806 --> 00:23:37.656 A:middle
+&gt;&gt; That's always a good start,
+to get the first demo running.
+
+00:23:37.656 --> 00:23:40.426 A:middle
+Now we want to group the
+ImageFiles by tag, not satisfied
+
+00:23:40.426 --> 00:23:42.046 A:middle
+to display them in one
+section, we want to see
+
+00:23:42.046 --> 00:23:43.646 A:middle
+which ones correspond
+to which tags.
+
+00:23:44.156 --> 00:23:47.666 A:middle
+What we're going to do, for
+each tag we have an array
+
+00:23:47.666 --> 00:23:48.736 A:middle
+of ImageFiles.
+
+00:23:49.126 --> 00:23:51.166 A:middle
+That are implicitly
+ordered in some way,
+
+00:23:51.166 --> 00:23:52.986 A:middle
+and we want to show
+them in that order.
+
+00:23:53.586 --> 00:23:56.676 A:middle
+An ImageFile may have many
+tags, meaning we'll show it
+
+00:23:56.676 --> 00:23:57.796 A:middle
+in more than one section.
+
+00:23:57.796 --> 00:23:58.386 A:middle
+That's fine.
+
+00:23:58.956 --> 00:24:02.116 A:middle
+We also may have ImageFiles that
+don't appear in any section.
+
+
+
+00:23:58.956 --> 00:24:02.116 A:middle
+We also may have ImageFiles that
+don't appear in any section.
+
+00:24:02.116 --> 00:24:04.486 A:middle
+We are going to have an
+untagged ImageFile section,
+
+00:24:04.486 --> 00:24:05.986 A:middle
+one additional section
+at the end.
+
+00:24:05.986 --> 00:24:07.116 A:middle
+Where we show all
+of the ImageFiles
+
+00:24:07.116 --> 00:24:09.116 A:middle
+with that have no tag.
+
+00:24:09.116 --> 00:24:11.456 A:middle
+We'll give each of our sections
+a header and footer view,
+
+00:24:11.456 --> 00:24:13.186 A:middle
+because we want to show
+off that we can do that.
+
+00:24:13.836 --> 00:24:15.506 A:middle
+Show you how to do it.
+
+00:24:15.856 --> 00:24:19.286 A:middle
+As with item types, the
+instantiation process for header
+
+00:24:19.286 --> 00:24:21.036 A:middle
+and footer views, you'll
+see, is very similar.
+
+00:24:21.646 --> 00:24:27.166 A:middle
+A header or footer is in general
+considered what CollectionView
+
+00:24:27.166 --> 00:24:30.616 A:middle
+calls a supplementary view,
+it doesn't represent an item,
+
+00:24:30.616 --> 00:24:32.156 A:middle
+but [is] something
+that sort of augments,
+
+00:24:32.156 --> 00:24:35.216 A:middle
+or brackets the display of items
+such as a header or footer.
+
+00:24:36.396 --> 00:24:38.976 A:middle
+We're going to implement
+the data source as optional,
+
+00:24:38.976 --> 00:24:41.676 A:middle
+CollectionView, View For
+Supplementary Element OF Kind,
+
+00:24:41.676 --> 00:24:43.866 A:middle
+that is a fancy way of asking,
+in our case, for a header
+
+00:24:43.866 --> 00:24:46.526 A:middle
+or footer, with a
+given index path.
+
+00:24:47.116 --> 00:24:51.826 A:middle
+We'll go back to the
+demo machine for that.
+
+00:24:52.756 --> 00:24:54.986 A:middle
+We'll hook this up real quick.
+
+00:24:56.396 --> 00:24:59.036 A:middle
+We'll need to take our
+existing data source methods
+
+
+
+00:25:00.786 --> 00:25:03.086 A:middle
+and replace them with slightly
+more sophisticated ones,
+
+00:25:03.086 --> 00:25:04.716 A:middle
+that understand how to
+deal with sectioning.
+
+00:25:05.286 --> 00:25:07.856 A:middle
+Here they are.
+
+00:25:08.236 --> 00:25:09.466 A:middle
+We'll go through them briefly.
+
+00:25:10.026 --> 00:25:12.216 A:middle
+Now we need to be able to tell
+the CollectionView how many
+
+00:25:12.216 --> 00:25:14.106 A:middle
+sections there are in it.
+
+00:25:14.396 --> 00:25:16.566 A:middle
+If our GroupByTag
+check box is checked,
+
+00:25:16.566 --> 00:25:18.066 A:middle
+which with will set
+the property,
+
+00:25:18.346 --> 00:25:21.116 A:middle
+we just return the count
+of the number of tags
+
+00:25:21.146 --> 00:25:22.116 A:middle
+in the image collection.
+
+00:25:22.466 --> 00:25:23.576 A:middle
+Plus one because we want
+
+00:25:23.576 --> 00:25:26.976 A:middle
+that extra untagged
+ImageFiles collection section,
+
+00:25:26.976 --> 00:25:28.006 A:middle
+sorry, at the end.
+
+00:25:29.256 --> 00:25:29.826 A:middle
+Simple enough.
+
+00:25:30.946 --> 00:25:33.656 A:middle
+Reporting the number
+much items in a section,
+
+00:25:33.786 --> 00:25:36.206 A:middle
+again it is a little different
+if we're grouping by tag,
+
+00:25:36.516 --> 00:25:39.766 A:middle
+basically we want to say if
+the section corresponds to one
+
+00:25:39.766 --> 00:25:41.996 A:middle
+of our tags in our collection,
+we'll return the count
+
+00:25:41.996 --> 00:25:44.296 A:middle
+of the number of
+ImageFiles in the tag
+
+00:25:44.296 --> 00:25:45.816 A:middle
+that corresponds
+to that section.
+
+00:25:46.586 --> 00:25:49.066 A:middle
+If we're in the special
+untagged ImageFile section
+
+00:25:49.066 --> 00:25:50.266 A:middle
+at the end we'll
+return the count
+
+00:25:50.266 --> 00:25:51.816 A:middle
+of untagged ImageFiles,
+and so on.
+
+00:25:51.816 --> 00:25:53.146 A:middle
+It's pretty straightforward.
+
+00:25:54.726 --> 00:25:57.126 A:middle
+We'll look at Item
+
+00:25:57.126 --> 00:26:01.266 A:middle
+For Represented Object
+At Index Path.
+
+
+
+00:25:57.126 --> 00:26:01.266 A:middle
+For Represented Object
+At Index Path.
+
+00:26:01.266 --> 00:26:04.046 A:middle
+This is the same implementation
+as before, it is able to be
+
+00:26:04.046 --> 00:26:07.916 A:middle
+because I factored out this
+ImageFile At Index Path method
+
+00:26:08.106 --> 00:26:11.866 A:middle
+for my own use which, actually,
+this one is not suitable
+
+00:26:11.866 --> 00:26:15.976 A:middle
+because it looks at the item
+index and not the section index.
+
+00:26:15.976 --> 00:26:17.986 A:middle
+We'll replace it with
+a smarter version
+
+00:26:19.426 --> 00:26:27.776 A:middle
+that knows we might
+want to group by tag.
+
+00:26:27.876 --> 00:26:31.566 A:middle
+If we're grouping by tag, again,
+if the section corresponds
+
+00:26:31.566 --> 00:26:35.876 A:middle
+to one of our tags, we'll
+find the ImageFile in the list
+
+00:26:35.876 --> 00:26:39.016 A:middle
+of ImageFiles for that tag,
+according to the item index,
+
+00:26:39.606 --> 00:26:42.156 A:middle
+and the section index that tells
+us which tag we're dealing with.
+
+00:26:43.076 --> 00:26:45.596 A:middle
+Let's try building
+and running now.
+
+00:26:46.196 --> 00:26:49.106 A:middle
+We can check group by tag here
+
+00:26:49.686 --> 00:26:52.046 A:middle
+and now we have our
+items grouped by tag
+
+00:26:53.126 --> 00:26:56.436 A:middle
+and we get the same flow
+and re-layout as before,
+
+00:26:56.486 --> 00:26:58.046 A:middle
+and if we zoom in we can see.
+
+00:26:58.116 --> 00:27:01.186 A:middle
+This is our header view
+which we defined in a nib,
+
+
+
+00:26:58.116 --> 00:27:01.186 A:middle
+This is our header view
+which we defined in a nib,
+
+00:27:01.186 --> 00:27:04.076 A:middle
+it is basically a container,
+gives us a light gray background
+
+00:27:04.076 --> 00:27:06.076 A:middle
+and has a text field,
+you can put any kind
+
+00:27:06.076 --> 00:27:08.476 A:middle
+of controls you want
+in here in these,
+
+00:27:08.856 --> 00:27:11.366 A:middle
+this is our footer view here,
+this is sort of a darker gray,
+
+00:27:11.576 --> 00:27:13.566 A:middle
+telling us - we have
+put a text field
+
+00:27:13.566 --> 00:27:15.766 A:middle
+in telling us how many
+ImageFiles are in the group.
+
+00:27:16.306 --> 00:27:18.386 A:middle
+That's really all it takes
+to implement sections,
+
+00:27:18.436 --> 00:27:20.686 A:middle
+it is basically the
+same as on iOS.
+
+00:27:21.356 --> 00:27:24.426 A:middle
+the one thing that I elided
+here, oh, two things I elided,
+
+00:27:25.076 --> 00:27:28.846 A:middle
+are the creation of the
+supplementary views, the.
+
+00:27:28.846 --> 00:27:30.986 A:middle
+headers or footers, there
+is a bit of code here,
+
+00:27:30.986 --> 00:27:33.146 A:middle
+but basically it is
+really very parallel.
+
+00:27:33.376 --> 00:27:35.406 A:middle
+The main point of interest
+is where we call back
+
+00:27:35.406 --> 00:27:38.526 A:middle
+to the CollectionView and say,
+make Supplementary Element View,
+
+00:27:38.816 --> 00:27:41.466 A:middle
+sorry, Make Supplementary
+Element View of kind,
+
+00:27:41.496 --> 00:27:42.896 A:middle
+the Flow layout defines,
+
+00:27:43.146 --> 00:27:45.486 A:middle
+are section header,
+and section footer.
+
+00:27:45.486 --> 00:27:46.866 A:middle
+It will be one of those.
+
+00:27:47.196 --> 00:27:49.326 A:middle
+We know when it is
+section header we'll look
+
+00:27:49.326 --> 00:27:50.846 A:middle
+for header.nib, we're
+going to look
+
+00:27:50.846 --> 00:27:52.256 A:middle
+for footer.nib if
+it is the footer.
+
+00:27:52.626 --> 00:27:54.396 A:middle
+We pass that in as
+an identifier.
+
+00:27:54.826 --> 00:27:57.206 A:middle
+Once we've got our view,
+we're getting a view,
+
+00:27:57.206 --> 00:27:58.706 A:middle
+and not a ViewController
+this time.
+
+
+
+00:28:00.206 --> 00:28:03.376 A:middle
+We can find and set up
+the value for TextField,
+
+00:28:03.376 --> 00:28:05.846 A:middle
+do whatever we want, and return
+it back to the CollectionView.
+
+00:28:06.276 --> 00:28:08.686 A:middle
+Last thing we need to do is
+implement these delegate methods
+
+00:28:08.686 --> 00:28:12.106 A:middle
+the Layout uses to figure
+out what's the proper size,
+
+00:28:12.366 --> 00:28:15.216 A:middle
+basically the height to display
+the header at, and the height
+
+00:28:15.246 --> 00:28:16.236 A:middle
+to display the footer at.
+
+00:28:16.236 --> 00:28:18.216 A:middle
+We have NSIs in each case,
+
+00:28:18.936 --> 00:28:21.216 A:middle
+and since we have a
+vertically-scrolling flow
+
+00:28:21.216 --> 00:28:24.176 A:middle
+layout, only the height matters,
+the width will just get clipped
+
+00:28:24.176 --> 00:28:25.996 A:middle
+to the width of the scroll view.
+
+00:28:27.036 --> 00:28:29.436 A:middle
+We had to do that to
+make sure that ourheaders
+
+00:28:29.476 --> 00:28:30.946 A:middle
+and footers showed up.
+
+00:28:31.626 --> 00:28:32.146 A:middle
+That's it.
+
+00:28:34.306 --> 00:28:36.766 A:middle
+Now we can move on to updating
+when our model changes.
+
+00:28:37.076 --> 00:28:40.066 A:middle
+So ImageFiles will come
+and go in the folder,
+
+00:28:40.226 --> 00:28:41.636 A:middle
+we need to tell the
+CollectionView
+
+00:28:41.636 --> 00:28:44.376 A:middle
+when our model changes so that
+we can update what it is showing
+
+00:28:44.376 --> 00:28:44.846 A:middle
+the user.
+
+00:28:45.956 --> 00:28:49.116 A:middle
+This is done very similarly to
+the way that this is handled
+
+00:28:49.516 --> 00:28:52.816 A:middle
+with Outline View on OS X.
+
+00:28:52.816 --> 00:28:54.956 A:middle
+Basically, these are
+the four operations:
+
+00:28:55.296 --> 00:28:59.236 A:middle
+Items can be inserted,
+deleted, an item can be moved
+
+00:28:59.236 --> 00:29:01.746 A:middle
+from one place to another,
+or an item can be reloaded
+
+
+
+00:28:59.236 --> 00:29:01.746 A:middle
+from one place to another,
+or an item can be reloaded
+
+00:29:01.746 --> 00:29:03.526 A:middle
+which basically means
+it is still there
+
+00:29:03.526 --> 00:29:06.676 A:middle
+but the properties have changed,
+you need to redisplay it,
+
+00:29:06.676 --> 00:29:09.176 A:middle
+you need to regather
+properties from it.
+
+00:29:09.446 --> 00:29:11.156 A:middle
+It turns out that
+these operations apply
+
+00:29:11.156 --> 00:29:12.676 A:middle
+to sections as well as items.
+
+00:29:12.676 --> 00:29:15.256 A:middle
+This is the same as on iOS
+for those who are familiar.
+
+00:29:15.676 --> 00:29:18.956 A:middle
+You can insert, delete, move,
+and reload sections as well.
+
+00:29:20.796 --> 00:29:23.636 A:middle
+Similar approach to view-based
+outline view as I mentioned,
+
+00:29:23.636 --> 00:29:26.146 A:middle
+which basically means any
+time the model changes,
+
+00:29:26.356 --> 00:29:29.306 A:middle
+it is the responsibility of your
+data source or some other part
+
+00:29:29.306 --> 00:29:30.696 A:middle
+of your code that
+deals with the model,
+
+00:29:30.906 --> 00:29:32.306 A:middle
+to notify the CollectionView,
+
+00:29:32.566 --> 00:29:35.126 A:middle
+describing exactly the
+changes that were made.
+
+00:29:35.126 --> 00:29:37.806 A:middle
+I inserted items at
+these index paths.
+
+00:29:37.806 --> 00:29:40.836 A:middle
+I removed items here, so
+that it can will keep up,
+
+00:29:40.836 --> 00:29:42.046 A:middle
+staying in sync with the model.
+
+00:29:42.606 --> 00:29:44.066 A:middle
+If you do it right,
+it is very simple.
+
+00:29:45.426 --> 00:29:48.146 A:middle
+By default, any changes you
+notify the CollectionView of,
+
+00:29:48.196 --> 00:29:50.916 A:middle
+will appear instantly but you
+can easily get an animated
+
+00:29:50.916 --> 00:29:53.796 A:middle
+change, by messaging through
+the CollectionView's animator,
+
+00:29:53.796 --> 00:29:56.636 A:middle
+this is a general proxy
+object that views have,
+
+00:29:56.836 --> 00:29:59.676 A:middle
+that you can message through,
+to request an animated change,
+
+00:29:59.676 --> 00:30:01.856 A:middle
+usually when setting a
+property in this case
+
+
+
+00:29:59.676 --> 00:30:01.856 A:middle
+usually when setting a
+property in this case
+
+00:30:02.116 --> 00:30:03.446 A:middle
+when notifying the
+CollectionView
+
+00:30:03.786 --> 00:30:05.006 A:middle
+that items have been inserted.
+
+00:30:05.416 --> 00:30:08.066 A:middle
+That's what we do in our example
+and that's why we see items come
+
+00:30:08.066 --> 00:30:09.356 A:middle
+and go in animated way.
+
+00:30:09.356 --> 00:30:12.126 A:middle
+Items are inserted, other
+items move out of the way
+
+00:30:12.536 --> 00:30:13.566 A:middle
+in an animated fashion.
+
+00:30:14.126 --> 00:30:16.696 A:middle
+In our example,
+CocoaSlideCollection we're going
+
+00:30:16.696 --> 00:30:18.836 A:middle
+to watch our ImageFolder
+for changes,
+
+00:30:19.606 --> 00:30:21.806 A:middle
+when changes occur
+we're going to notify--
+
+00:30:21.976 --> 00:30:23.336 A:middle
+first we immediate
+to update the model
+
+00:30:23.336 --> 00:30:24.776 A:middle
+and then we notify
+the CollectionView,
+
+00:30:24.776 --> 00:30:27.306 A:middle
+after we changed the model,
+what we did to the model.
+
+00:30:28.806 --> 00:30:32.966 A:middle
+ImageFiles may come and
+go, they may be changed,
+
+00:30:33.176 --> 00:30:35.326 A:middle
+these are the types of updates
+that we'll need to handle.
+
+00:30:35.326 --> 00:30:38.216 A:middle
+We are going to use
+a little feature,
+
+00:30:38.256 --> 00:30:40.336 A:middle
+a foundation feature
+called Key-ValueObserving,
+
+00:30:40.336 --> 00:30:43.046 A:middle
+which basically gives you
+a way to observe properties
+
+00:30:43.046 --> 00:30:45.796 A:middle
+of objects, and be
+notified automatically,
+
+00:30:45.956 --> 00:30:48.576 A:middle
+so that you can then react
+in whatever way you need to,
+
+00:30:48.626 --> 00:30:51.536 A:middle
+our example uses KVO
+throughout for this.
+
+00:30:51.536 --> 00:30:53.776 A:middle
+Let's go back to the
+demo machine real quick.
+
+00:30:54.546 --> 00:30:56.876 A:middle
+I have this already
+working here.
+
+00:30:58.466 --> 00:31:01.426 A:middle
+We'll run our example
+first, to see what it does.
+
+
+
+00:30:58.466 --> 00:31:01.426 A:middle
+We'll run our example
+first, to see what it does.
+
+00:31:01.976 --> 00:31:04.406 A:middle
+Instead of looking at the
+desktop pictures folder,
+
+00:31:04.916 --> 00:31:09.276 A:middle
+I'm going to open this vacation
+pictures folder, on my desktop.
+
+00:31:09.886 --> 00:31:14.836 A:middle
+Let's suppose that I have taken
+some pictures on vacation,
+
+00:31:16.076 --> 00:31:17.176 A:middle
+gone to some neat places.
+
+00:31:17.286 --> 00:31:20.016 A:middle
+I have Finder windows
+down here at the bottom,
+
+00:31:20.526 --> 00:31:22.716 A:middle
+pointing to desktop pictures,
+I'm going to copy some stuff
+
+00:31:22.716 --> 00:31:23.776 A:middle
+from desktop pictures,
+
+00:31:23.776 --> 00:31:26.786 A:middle
+pretending I went
+to these places.
+
+00:31:26.836 --> 00:31:30.636 A:middle
+I'll drag and drop some
+items into the folder.
+
+00:31:31.326 --> 00:31:33.456 A:middle
+CocoaSlideCollection is
+monitoring the folder,
+
+00:31:33.456 --> 00:31:37.786 A:middle
+it will notice the change,
+and add items to its model,
+
+00:31:37.786 --> 00:31:39.936 A:middle
+add ImageFile instances,
+and then it's going
+
+00:31:39.936 --> 00:31:41.366 A:middle
+to notify the CollectionView,
+okay,
+
+00:31:41.596 --> 00:31:44.376 A:middle
+some ImageFiles were added,
+so display some more items
+
+00:31:44.376 --> 00:31:47.236 A:middle
+and that happens in a very
+synchronized, animated way.
+
+00:31:47.576 --> 00:31:51.406 A:middle
+We can drag an item out, a file
+out, and, when it disappears,
+
+00:31:51.406 --> 00:31:54.566 A:middle
+do an updated File system
+scan, notice the change,
+
+00:31:54.566 --> 00:31:56.076 A:middle
+update our model, and
+the CollectionView
+
+00:31:56.076 --> 00:31:56.936 A:middle
+updates accordingly.
+
+00:31:57.596 --> 00:32:01.116 A:middle
+The KVO mechanics of
+this are pretty standard,
+
+
+
+00:31:57.596 --> 00:32:01.116 A:middle
+The KVO mechanics of
+this are pretty standard,
+
+00:32:01.116 --> 00:32:01.646 A:middle
+run of the mill.
+
+00:32:01.886 --> 00:32:04.406 A:middle
+The interesting, part is how
+you talk to the CollectionView.
+
+00:32:04.986 --> 00:32:07.186 A:middle
+So, we'll elide the former, and
+we'll just look at the latter.
+
+00:32:07.186 --> 00:32:10.146 A:middle
+You want to look at these
+methods at the bottom
+
+00:32:10.146 --> 00:32:13.586 A:middle
+of the Window Controller class,
+Handle Image Files Inserted
+
+00:32:13.616 --> 00:32:15.286 A:middle
+At Index Paths, that's
+just something we defined
+
+00:32:15.286 --> 00:32:16.936 A:middle
+for our own use, and
+this is where we talk
+
+00:32:16.936 --> 00:32:20.376 A:middle
+to the image CollectionView
+and use this Insert Items
+
+00:32:20.416 --> 00:32:22.796 A:middle
+at Index Paths API,
+basically what we have had
+
+00:32:22.796 --> 00:32:24.996 A:middle
+to do is figure out, OK, what
+are the index paths of the items
+
+00:32:24.996 --> 00:32:25.986 A:middle
+that are affected by this?
+
+00:32:25.986 --> 00:32:27.066 A:middle
+Where did we insert items?
+
+00:32:27.496 --> 00:32:29.896 A:middle
+We messaged the CollectionView,
+and since we're messaging
+
+00:32:29.896 --> 00:32:31.576 A:middle
+through the animator, we'll
+get an animated change,
+
+00:32:31.576 --> 00:32:33.166 A:middle
+where the re-layout
+that needs to happen,
+
+00:32:33.446 --> 00:32:35.776 A:middle
+happens in a smooth way,
+instead of instantaneously.
+
+00:32:35.956 --> 00:32:38.376 A:middle
+You can make it instantaneous
+if you want, by omitting this.
+
+00:32:38.776 --> 00:32:40.536 A:middle
+If you want an animated
+response,
+
+00:32:40.536 --> 00:32:41.706 A:middle
+message through the animator,
+
+00:32:41.746 --> 00:32:43.596 A:middle
+you can even control
+the duration
+
+00:32:43.596 --> 00:32:45.986 A:middle
+by setting the animation
+context duration.
+
+00:32:46.976 --> 00:32:49.246 A:middle
+Similar thing for
+when ImageFiles go,
+
+00:32:49.246 --> 00:32:52.006 A:middle
+use Delete Items At Index Paths.
+
+00:32:53.056 --> 00:32:56.756 A:middle
+Then there are even sections,
+InsertSections, DeleteSections,
+
+00:32:56.756 --> 00:32:57.796 A:middle
+and other related APIs,
+
+00:32:57.796 --> 00:32:59.396 A:middle
+for dealing with
+sections coming and going.
+
+00:32:59.506 --> 00:33:01.926 A:middle
+We're even equipped to handle
+the new tags being added
+
+
+
+00:32:59.506 --> 00:33:01.926 A:middle
+We're even equipped to handle
+the new tags being added
+
+00:33:01.926 --> 00:33:03.036 A:middle
+and tags being removed.
+
+00:33:04.726 --> 00:33:06.646 A:middle
+That's pretty much
+all there is to it.
+
+00:33:09.156 --> 00:33:11.176 A:middle
+So selection and
+highlighting are important
+
+00:33:11.176 --> 00:33:12.356 A:middle
+when interacting with users.
+
+00:33:12.356 --> 00:33:13.766 A:middle
+We'll look at those
+in some detail.
+
+00:33:15.396 --> 00:33:16.236 A:middle
+Basically selection
+
+00:33:16.236 --> 00:33:18.876 A:middle
+and highlighting are both
+visually indicated states.
+
+00:33:19.126 --> 00:33:22.036 A:middle
+Highlighting in particular
+is sort of a transient state
+
+00:33:22.036 --> 00:33:25.446 A:middle
+on the way to items becoming
+selected, or deselected,
+
+00:33:25.656 --> 00:33:27.126 A:middle
+or used as a drop target.
+
+00:33:29.236 --> 00:33:31.896 A:middle
+Here in this illustration
+we have items
+
+00:33:31.896 --> 00:33:34.706 A:middle
+that were briefly flashed orange
+as I was dragging over them,
+
+00:33:34.706 --> 00:33:36.706 A:middle
+they were candidates for
+selection, we're indicating
+
+00:33:36.706 --> 00:33:39.156 A:middle
+that with the orange border,
+but then they become blue
+
+00:33:39.416 --> 00:33:41.646 A:middle
+when they become selected,
+rather than highlighted.
+
+00:33:44.456 --> 00:33:47.416 A:middle
+So on OS X an item
+has a highlightState.
+
+00:33:47.416 --> 00:33:48.886 A:middle
+This is a little
+different than on iOS,
+
+00:33:48.886 --> 00:33:50.716 A:middle
+there is a just a Boolean
+highlight property,
+
+00:33:50.956 --> 00:33:53.636 A:middle
+we needed a bit more flexibility
+on the desktop to be able
+
+00:33:53.636 --> 00:33:55.246 A:middle
+to describe different
+kinds of states.
+
+00:33:55.616 --> 00:34:00.356 A:middle
+The highlightState has
+four possible values.
+
+
+
+00:33:55.616 --> 00:34:00.356 A:middle
+The highlightState has
+four possible values.
+
+00:34:00.956 --> 00:34:04.226 A:middle
+The default is none, basically
+means don't highlight this item.
+
+00:34:04.316 --> 00:34:06.456 A:middle
+You'll want to look at whether
+the item is selected or not,
+
+00:34:06.456 --> 00:34:07.926 A:middle
+to decide how to present it.
+
+00:34:08.565 --> 00:34:09.985 A:middle
+If it is not selected
+or highlighted,
+
+00:34:10.206 --> 00:34:11.255 A:middle
+you may display it normally.
+
+00:34:12.476 --> 00:34:13.916 A:middle
+an item may be highlighted
+
+00:34:13.916 --> 00:34:16.206 A:middle
+for selection meaning it
+is not currently selected,
+
+00:34:16.206 --> 00:34:18.335 A:middle
+but we're considering
+selecting it, based on something
+
+00:34:18.335 --> 00:34:20.696 A:middle
+that the user is doing, such
+as dragging across items.
+
+00:34:20.985 --> 00:34:22.626 A:middle
+Then you may want to
+present it with some kind
+
+00:34:22.626 --> 00:34:25.806 A:middle
+of highlight indication, this is
+entirely up to you how you want
+
+00:34:25.806 --> 00:34:29.166 A:middle
+to design this in your UI,
+we're using an orange border
+
+00:34:29.166 --> 00:34:30.896 A:middle
+around the slide to
+show it is highlighted
+
+00:34:30.896 --> 00:34:32.556 A:middle
+for selection, but
+not yet selected.
+
+00:34:33.846 --> 00:34:36.616 A:middle
+An item can also be
+highlighted for deselection.
+
+00:34:37.005 --> 00:34:40.846 A:middle
+This is possible with the shift
+drag behavior that's the same
+
+00:34:40.846 --> 00:34:42.525 A:middle
+as in Finder icon views.
+
+00:34:43.775 --> 00:34:48.315 A:middle
+Basically the trick here is the
+item is selected, but you want
+
+00:34:48.315 --> 00:34:50.426 A:middle
+to suppress showing the
+usual selected appearance.
+
+00:34:50.426 --> 00:34:51.525 A:middle
+You want to show
+something different,
+
+00:34:51.525 --> 00:34:54.176 A:middle
+to indicate to the user
+that the item was selected,
+
+00:34:54.176 --> 00:34:56.216 A:middle
+but we're looking at
+making it deselected now.
+
+00:34:56.306 --> 00:34:58.016 A:middle
+You might want to show it
+normally, this is really
+
+00:34:58.016 --> 00:35:01.386 A:middle
+up to you what you want to do,
+according to your new iDesign.
+
+
+
+00:34:58.016 --> 00:35:01.386 A:middle
+up to you what you want to do,
+according to your new iDesign.
+
+00:35:01.866 --> 00:35:03.586 A:middle
+Lastly, an item can
+be highlighted
+
+00:35:03.996 --> 00:35:05.976 A:middle
+to indicate it is a
+potential Drop Target
+
+00:35:05.976 --> 00:35:08.676 A:middle
+which doesn't make a lot of
+sense in our example today,
+
+00:35:08.676 --> 00:35:10.576 A:middle
+because a slide is
+the leaf node,
+
+00:35:10.576 --> 00:35:11.756 A:middle
+we don't really have a semantic
+
+00:35:11.756 --> 00:35:14.116 A:middle
+for dropping slides
+onto another slide.
+
+00:35:14.276 --> 00:35:16.276 A:middle
+But, if we had something
+that was more of a container,
+
+00:35:16.476 --> 00:35:18.166 A:middle
+it might make sense, and
+we'd want to indicate
+
+00:35:18.166 --> 00:35:21.356 A:middle
+that that container is where
+things are going to get dropped
+
+00:35:21.356 --> 00:35:23.436 A:middle
+if the user lets the mouse
+up at that current point.
+
+00:35:23.926 --> 00:35:27.146 A:middle
+Those are the different
+highlight states.
+
+00:35:27.356 --> 00:35:29.116 A:middle
+One handy thing to
+remember, as I said,
+
+00:35:29.116 --> 00:35:30.436 A:middle
+everything is layer-backed now,
+
+00:35:30.436 --> 00:35:32.796 A:middle
+with the new CollectionView
+implementation.
+
+00:35:33.466 --> 00:35:36.506 A:middle
+That gives you the
+opportunity to take advantage
+
+00:35:36.556 --> 00:35:39.706 A:middle
+of backing-layer
+properties as an easy way
+
+00:35:39.706 --> 00:35:40.886 A:middle
+to change the appearance
+of an item
+
+00:35:40.886 --> 00:35:42.046 A:middle
+without having to do redraw.
+
+00:35:42.416 --> 00:35:45.456 A:middle
+So, CN layer properties such as
+background color, border color,
+
+00:35:45.456 --> 00:35:47.116 A:middle
+border width, corner radius,
+you've probably worked
+
+00:35:47.116 --> 00:35:49.146 A:middle
+with these before, are
+real handy for this.
+
+00:35:49.456 --> 00:35:53.666 A:middle
+So we might set an item's root
+views layer's background color
+
+00:35:53.666 --> 00:35:56.496 A:middle
+to some color, and then give
+it a corner radius, and boom,
+
+00:35:56.496 --> 00:35:59.496 A:middle
+in two lines of code we've got
+a quick highlight indication
+
+00:35:59.496 --> 00:36:01.526 A:middle
+or selection indication,
+nice and easy.
+
+
+
+00:35:59.496 --> 00:36:01.526 A:middle
+or selection indication,
+nice and easy.
+
+00:36:01.526 --> 00:36:03.876 A:middle
+You don't have to
+do it that way.
+
+00:36:03.876 --> 00:36:05.276 A:middle
+That's just optional,
+something to keep
+
+00:36:05.276 --> 00:36:06.996 A:middle
+in mind now they're we're
+in a layer-backed world.
+
+00:36:07.846 --> 00:36:09.496 A:middle
+When to apply highlighting?
+
+00:36:09.836 --> 00:36:10.496 A:middle
+Real simple.
+
+00:36:10.546 --> 00:36:12.766 A:middle
+Any time your item's
+highlightState changes,
+
+00:36:12.986 --> 00:36:16.166 A:middle
+in Swift you can do that, in
+a DidSetObserver clause here,
+
+00:36:16.766 --> 00:36:19.696 A:middle
+you will also want to
+do the same for watching
+
+00:36:19.696 --> 00:36:23.076 A:middle
+when the items selected state,
+the Boolean, changes to yes
+
+00:36:23.076 --> 00:36:24.996 A:middle
+or no, you want to take
+the highlightState,
+
+00:36:24.996 --> 00:36:26.976 A:middle
+and the selected state,
+into account together,
+
+00:36:27.196 --> 00:36:29.786 A:middle
+and decide visually how to
+present that item to indicate
+
+00:36:29.786 --> 00:36:31.266 A:middle
+that according to your UI style.
+
+00:36:33.176 --> 00:36:35.296 A:middle
+Selection of course is
+what we're working toward,
+
+00:36:35.296 --> 00:36:37.086 A:middle
+we want users to be
+able to select items
+
+00:36:37.086 --> 00:36:39.896 A:middle
+so that they can then
+operate on them by dragging,
+
+00:36:39.896 --> 00:36:41.106 A:middle
+or with menu commands.
+
+00:36:42.056 --> 00:36:43.996 A:middle
+With a CollectionView,
+items are the things
+
+00:36:43.996 --> 00:36:45.226 A:middle
+that constitute the selection,
+
+00:36:45.226 --> 00:36:46.416 A:middle
+they're what can
+become selected.
+
+00:36:46.906 --> 00:36:49.696 A:middle
+NSCollectionView supports single
+
+00:36:49.696 --> 00:36:51.336 A:middle
+or multiple selection,
+as before.
+
+00:36:51.616 --> 00:36:54.186 A:middle
+The master switch is whether
+it is selectable or not.
+
+00:36:55.306 --> 00:36:56.406 A:middle
+If you make it selectable,
+
+00:36:56.406 --> 00:36:58.086 A:middle
+you can make it allow
+multiple selection,
+
+00:36:58.086 --> 00:37:00.776 A:middle
+or force just single
+selection, or no selection,
+
+
+
+00:36:58.086 --> 00:37:00.776 A:middle
+or force just single
+selection, or no selection,
+
+00:37:00.776 --> 00:37:02.296 A:middle
+and you can deny the ability
+
+00:37:02.296 --> 00:37:04.756 A:middle
+to have an empty selection
+making the CollectionView try
+
+00:37:04.756 --> 00:37:07.146 A:middle
+to always maintain at
+least one item selected.
+
+00:37:07.276 --> 00:37:09.876 A:middle
+These are pretty standard,
+they are common to other types
+
+00:37:09.876 --> 00:37:12.126 A:middle
+of AppKit CollectionViews
+and controls
+
+00:37:12.906 --> 00:37:14.866 A:middle
+such as Table View,
+Outline View.
+
+00:37:16.136 --> 00:37:19.436 A:middle
+Selection is tracked by the new
+Selection Index Path Property
+
+00:37:19.436 --> 00:37:20.666 A:middle
+on NSCollectionView.
+
+00:37:20.666 --> 00:37:22.656 A:middle
+That's the authoritative
+representation
+
+00:37:22.656 --> 00:37:24.206 A:middle
+of what's selected in
+the CollectionView,
+
+00:37:24.206 --> 00:37:26.166 A:middle
+and we are using index paths
+rather than the items, right?
+
+00:37:26.166 --> 00:37:28.936 A:middle
+Because items come and go, but
+the index paths stick around.
+
+00:37:29.326 --> 00:37:31.646 A:middle
+An item, if it happens
+to be instantiated,
+
+00:37:32.016 --> 00:37:33.706 A:middle
+does know whether it is
+part of the selection
+
+00:37:33.706 --> 00:37:36.436 A:middle
+as I have mentioned, but
+again, items come and go.
+
+00:37:36.436 --> 00:37:39.226 A:middle
+CollectionViews are forever,
+so usually you want to look
+
+00:37:39.226 --> 00:37:41.126 A:middle
+at the SelectionIndexPaths
+at the CollectionView,
+
+00:37:41.466 --> 00:37:44.306 A:middle
+to do your operations, and there
+are Select Items At Index Paths,
+
+00:37:44.706 --> 00:37:47.396 A:middle
+and Deselect Items At Index
+Paths, methods that you can use,
+
+00:37:47.396 --> 00:37:49.856 A:middle
+you can also just set
+selection index paths directly.
+
+00:37:50.406 --> 00:37:52.836 A:middle
+When you select items at
+index paths as on iOS,
+
+00:37:52.836 --> 00:37:54.076 A:middle
+you can also ask
+the CollectionView
+
+00:37:54.276 --> 00:37:57.336 A:middle
+to scroll those items into view
+with a particular alignment.
+
+00:37:57.666 --> 00:37:58.486 A:middle
+If you want.
+
+00:37:59.906 --> 00:38:02.026 A:middle
+User selection is what
+we're usually dealing with.
+
+
+
+00:37:59.906 --> 00:38:02.026 A:middle
+User selection is what
+we're usually dealing with.
+
+00:38:02.926 --> 00:38:05.666 A:middle
+The delegate has the
+opportunity as on iOS
+
+00:38:05.666 --> 00:38:07.146 A:middle
+to approve selection
+and deselection.
+
+00:38:07.146 --> 00:38:10.496 A:middle
+We made the API a little
+different, because again we want
+
+00:38:10.496 --> 00:38:12.716 A:middle
+to be able to handle
+bulk operations a little
+
+00:38:12.716 --> 00:38:13.446 A:middle
+more efficiently.
+
+00:38:13.706 --> 00:38:15.886 A:middle
+Now we have CollectionView,
+Should Select Items
+
+00:38:15.886 --> 00:38:17.636 A:middle
+At Index Paths, and
+CollectionView,
+
+00:38:17.636 --> 00:38:19.496 A:middle
+Should Deselect Items
+At Index Paths.
+
+00:38:19.776 --> 00:38:22.146 A:middle
+Each of which takes a set of
+index paths as the parameter.
+
+00:38:22.146 --> 00:38:24.416 A:middle
+These are the proposed
+index paths we are going
+
+00:38:24.416 --> 00:38:26.256 A:middle
+to to select or deselect.
+
+00:38:26.256 --> 00:38:27.796 A:middle
+Notice that, instead
+of returning a Boolean,
+
+00:38:27.796 --> 00:38:30.646 A:middle
+these return also, a
+set of index paths.
+
+00:38:30.816 --> 00:38:32.656 A:middle
+So, if you just want to
+say, do whatever you want,
+
+00:38:32.656 --> 00:38:35.176 A:middle
+CollectionView, just return the
+set of index paths we gave you,
+
+00:38:35.396 --> 00:38:36.936 A:middle
+but you also have
+the opportunity here,
+
+00:38:37.236 --> 00:38:39.426 A:middle
+to return a different
+set of index paths,
+
+00:38:39.426 --> 00:38:41.796 A:middle
+you can do a line item
+detail here if you want,
+
+00:38:42.016 --> 00:38:43.596 A:middle
+based on whatever
+criteria you want,
+
+00:38:43.596 --> 00:38:46.856 A:middle
+you have fine-grain control over
+which items can become selected
+
+00:38:46.856 --> 00:38:48.576 A:middle
+or deselected in
+certain situations.
+
+00:38:48.936 --> 00:38:52.606 A:middle
+There are also DidSelect and
+DidDeselect delegate methods,
+
+00:38:52.896 --> 00:38:54.546 A:middle
+so you can find out
+after the fact
+
+00:38:54.546 --> 00:38:56.036 A:middle
+when the selection
+change has been committed.
+
+00:38:57.206 --> 00:39:00.006 A:middle
+Similarly for highlighting,
+the delegate has methods
+
+
+
+00:38:57.206 --> 00:39:00.006 A:middle
+Similarly for highlighting,
+the delegate has methods
+
+00:39:00.656 --> 00:39:03.726 A:middle
+for approving and
+reacting to these changes.
+
+00:39:03.726 --> 00:39:06.496 A:middle
+So, Should Change Items At Index
+Paths to highlightState, again,
+
+00:39:06.496 --> 00:39:08.916 A:middle
+you can return a different
+set of index paths,
+
+00:39:09.056 --> 00:39:10.336 A:middle
+you have fine-grain control
+
+00:39:10.576 --> 00:39:12.436 A:middle
+over highlighting behavior
+with your delegate.
+
+00:39:12.436 --> 00:39:16.656 A:middle
+We'll look at this real quickly
+again on the demo machine.
+
+00:39:21.456 --> 00:39:22.576 A:middle
+Fortunately, for time's sake,
+
+00:39:22.576 --> 00:39:23.846 A:middle
+I have the code all
+written and running.
+
+00:39:23.846 --> 00:39:25.386 A:middle
+We just want to go
+into our nib file,
+
+00:39:26.616 --> 00:39:28.636 A:middle
+and drill down to our
+CollectionView here.
+
+00:39:36.316 --> 00:39:39.736 A:middle
+We'll make sure that it
+is marked as selectable,
+
+00:39:39.736 --> 00:39:41.156 A:middle
+we'll allow empty selection,
+
+00:39:41.156 --> 00:39:43.586 A:middle
+and we'll allow multiple
+selection too.
+
+00:39:44.386 --> 00:39:46.696 A:middle
+The rest of the implementation
+is pretty straightforward,
+
+00:39:46.696 --> 00:39:49.526 A:middle
+based on the understanding
+that we now have.
+
+00:39:50.316 --> 00:39:51.966 A:middle
+We'll stop, build, and run.
+
+00:39:56.216 --> 00:39:58.906 A:middle
+Now we can click on
+items and select them.
+
+00:39:58.906 --> 00:40:02.576 A:middle
+We have chosen, for illustration
+purposes, to show items
+
+
+
+00:39:58.906 --> 00:40:02.576 A:middle
+We have chosen, for illustration
+purposes, to show items
+
+00:40:02.576 --> 00:40:04.296 A:middle
+that are candidates
+for selection.
+
+00:40:04.296 --> 00:40:06.876 A:middle
+They're highlighted in orange
+before they become selected,
+
+00:40:06.876 --> 00:40:10.206 A:middle
+when I let up on the Trackpad,
+it becomes blue, it's selected,
+
+00:40:10.206 --> 00:40:12.856 A:middle
+and no longer highlighted, we
+can click in the background
+
+00:40:13.016 --> 00:40:15.946 A:middle
+to clear the selection, I can
+click and drag across items,
+
+00:40:15.946 --> 00:40:18.636 A:middle
+again we are showing items as
+highlighted to become selected,
+
+00:40:18.636 --> 00:40:21.426 A:middle
+they're not selected yet, but
+when I let up on the Trackpad,
+
+00:40:21.666 --> 00:40:24.026 A:middle
+they cease to be highlighted,
+now they're selected.
+
+00:40:24.636 --> 00:40:28.026 A:middle
+As I mentioned as in
+the Finder icon view,
+
+00:40:28.026 --> 00:40:30.126 A:middle
+if you hold down shift, and
+drag-select you actually end
+
+00:40:30.126 --> 00:40:31.486 A:middle
+up sort of inverting
+the selection.
+
+00:40:31.486 --> 00:40:33.956 A:middle
+Here is an example of
+items that were selected,
+
+00:40:34.326 --> 00:40:36.726 A:middle
+that become highlighted
+for deselection.
+
+00:40:37.076 --> 00:40:38.296 A:middle
+So, even though they're
+selected,
+
+00:40:38.296 --> 00:40:40.546 A:middle
+we're letting the
+highlightState override that,
+
+00:40:40.546 --> 00:40:41.886 A:middle
+and how we visually
+present them,
+
+00:40:41.886 --> 00:40:44.656 A:middle
+and we're just showing them
+in an ordinary fashion,
+
+00:40:44.656 --> 00:40:45.846 A:middle
+with no border around them.
+
+00:40:45.846 --> 00:40:48.356 A:middle
+Then, when I let go, the
+selection is committed.
+
+00:40:48.766 --> 00:40:51.966 A:middle
+Now, since I can select, I can
+Drag-and-Drop things around,
+
+00:40:51.966 --> 00:40:53.746 A:middle
+reorder them which is nice.
+
+00:40:54.236 --> 00:40:55.666 A:middle
+Once you have selection
+there is a lot
+
+00:40:55.666 --> 00:40:58.496 A:middle
+of neat stuff that you can do.
+
+00:40:59.146 --> 00:41:00.536 A:middle
+Since this is all implemented
+
+
+
+00:40:59.146 --> 00:41:00.536 A:middle
+Since this is all implemented
+
+00:41:00.536 --> 00:41:03.366 A:middle
+in a very generalized way that's
+agnostic in different layouts,
+
+00:41:03.366 --> 00:41:04.896 A:middle
+we can go look at
+our custom layouts,
+
+00:41:05.216 --> 00:41:07.056 A:middle
+since they implement
+the required methods,
+
+00:41:07.496 --> 00:41:11.026 A:middle
+we can also drag-select across
+items in our custom layouts,
+
+00:41:11.056 --> 00:41:13.846 A:middle
+click select, and that
+happens automatically,
+
+00:41:13.846 --> 00:41:14.696 A:middle
+because they conform
+
+00:41:14.696 --> 00:41:17.886 A:middle
+to the standard NSCollectionView
+Layout API.
+
+00:41:18.736 --> 00:41:20.646 A:middle
+That's kind of a nice
+thing to get for free.
+
+00:41:20.646 --> 00:41:22.376 A:middle
+Even when we're in
+section mode here,
+
+00:41:22.946 --> 00:41:27.166 A:middle
+Flow layout lets us drag-select
+across sections, and so forth.
+
+00:41:27.426 --> 00:41:28.866 A:middle
+That's kind of neat.
+
+00:41:29.816 --> 00:41:30.736 A:middle
+It just works.
+
+00:41:31.496 --> 00:41:35.966 A:middle
+Two more things to talk about.
+
+00:41:35.966 --> 00:41:38.266 A:middle
+We'll talk real quick
+about Drag-and-Drop,
+
+00:41:38.956 --> 00:41:40.006 A:middle
+which is important to support.
+
+00:41:40.006 --> 00:41:41.606 A:middle
+It hasn't fundamentally changed
+
+00:41:41.606 --> 00:41:42.866 A:middle
+since the old CollectionView
+API,
+
+00:41:42.866 --> 00:41:44.626 A:middle
+but there are some new
+things to understand.
+
+00:41:45.156 --> 00:41:50.326 A:middle
+We can drag-select items now,
+and then if you have a cluster
+
+00:41:50.326 --> 00:41:51.676 A:middle
+of items selected,
+or just a single,
+
+00:41:51.676 --> 00:41:53.596 A:middle
+you can drag it, move it around.
+
+00:41:54.506 --> 00:41:56.186 A:middle
+The CollectionView,
+as you're dragging,
+
+00:41:56.816 --> 00:41:59.546 A:middle
+computes candidate
+targets for where to drop.
+
+00:41:59.546 --> 00:42:01.836 A:middle
+In the case of this example,
+we're not allowing dropping
+
+
+
+00:41:59.546 --> 00:42:01.836 A:middle
+In the case of this example,
+we're not allowing dropping
+
+00:42:01.836 --> 00:42:03.716 A:middle
+on items because they
+don't represent containers,
+
+00:42:03.716 --> 00:42:05.796 A:middle
+but we are allowing
+dropping between items,
+
+00:42:05.796 --> 00:42:07.486 A:middle
+which is the new thing that
+we have to be concerned
+
+00:42:07.486 --> 00:42:09.126 A:middle
+with on OS X and not on iOS.
+
+00:42:11.066 --> 00:42:13.576 A:middle
+So drag and drop, as before,
+
+00:42:13.576 --> 00:42:15.956 A:middle
+is handled by the
+NSCollectionView's delegate,
+
+00:42:15.956 --> 00:42:18.226 A:middle
+it's responsible for your
+drag-and-drop response.
+
+00:42:18.806 --> 00:42:22.356 A:middle
+The model is intentionally very
+similar to NSOutlineView's API,
+
+00:42:22.356 --> 00:42:25.476 A:middle
+there is no fundamental reason
+for it to be very different.
+
+00:42:25.476 --> 00:42:28.106 A:middle
+If you've seen the drag-and-drop
+outline view example,
+
+00:42:28.106 --> 00:42:30.726 A:middle
+a lot of the same concepts that
+you'll see implemented there,
+
+00:42:31.196 --> 00:42:33.776 A:middle
+[it's] basically the same
+idea with NSCollectionView.
+
+00:42:34.806 --> 00:42:37.326 A:middle
+If you want your CollectionView
+to be a dragging source,
+
+00:42:37.326 --> 00:42:39.186 A:middle
+meaning that items can
+be dragged out of it,
+
+00:42:40.256 --> 00:42:42.846 A:middle
+your basic responsibility
+is to be able to put items
+
+00:42:42.906 --> 00:42:45.916 A:middle
+on the pasteboard when
+requested by the CollectionView.
+
+00:42:46.036 --> 00:42:47.646 A:middle
+If you want to be a
+dragging destination,
+
+00:42:47.646 --> 00:42:50.566 A:middle
+if you want to receive
+drops, you need to be able
+
+00:42:50.566 --> 00:42:53.666 A:middle
+to assess a proposed drop,
+CollectionView will call you,
+
+00:42:53.666 --> 00:42:56.246 A:middle
+say I want -- I'm proposing
+to drop these objects
+
+00:42:56.246 --> 00:42:59.306 A:middle
+from the pasteboard onto
+this target position,
+
+00:42:59.306 --> 00:43:02.706 A:middle
+which will be an index path,
+indicating either a gap
+
+
+
+00:42:59.306 --> 00:43:02.706 A:middle
+which will be an index path,
+indicating either a gap
+
+00:43:02.746 --> 00:43:07.116 A:middle
+between items, before an item
+that's named, or a position
+
+00:43:07.116 --> 00:43:08.606 A:middle
+on top of an existing item,
+
+00:43:08.736 --> 00:43:10.176 A:middle
+if you're letting it
+act like a container.
+
+00:43:10.176 --> 00:43:11.296 A:middle
+There will be an operation,
+
+00:43:11.296 --> 00:43:13.366 A:middle
+these are the standard
+drag operations,
+
+00:43:13.366 --> 00:43:15.906 A:middle
+like copy, move, et cetera.
+
+00:43:15.976 --> 00:43:18.776 A:middle
+You can look at this proposal,
+you can optionally override any
+
+00:43:18.776 --> 00:43:21.156 A:middle
+of these parameters, say
+no, I would like to propose
+
+00:43:21.156 --> 00:43:23.556 A:middle
+that instead, you actually
+target this position
+
+00:43:23.556 --> 00:43:25.116 A:middle
+for drop, or refuse the drop.
+
+00:43:25.566 --> 00:43:27.886 A:middle
+You need to be able to
+implement the drop acceptance,
+
+00:43:27.886 --> 00:43:30.146 A:middle
+which is very similar, but
+then the user has committed
+
+00:43:30.146 --> 00:43:32.476 A:middle
+to the drop, and you
+need to go through,
+
+00:43:32.476 --> 00:43:34.946 A:middle
+and look at modifying
+your model accordingly,
+
+00:43:35.006 --> 00:43:36.526 A:middle
+and updating the
+CollectionView accordingly.
+
+00:43:37.026 --> 00:43:41.206 A:middle
+The mechanics of this boil down
+to these APIs, you need to,
+
+00:43:41.206 --> 00:43:45.436 A:middle
+like any other NSView, you want
+to register for the drag types
+
+00:43:45.436 --> 00:43:46.936 A:middle
+that you want to
+be able to accept,
+
+00:43:47.026 --> 00:43:48.866 A:middle
+because collection view
+generically doesn't know what
+
+00:43:48.866 --> 00:43:51.616 A:middle
+types of objects you deal
+with in terms of your model.
+
+00:43:51.986 --> 00:43:54.806 A:middle
+CollectionView has a Dragging
+Source Operation Mask,
+
+00:43:54.806 --> 00:43:56.976 A:middle
+both for local and
+non-local drags.
+
+00:43:56.976 --> 00:43:59.046 A:middle
+This is just basically
+letting you set in advance,
+
+00:43:59.356 --> 00:44:02.816 A:middle
+I support copy and move but not
+alias, or something like that.
+
+
+
+00:43:59.356 --> 00:44:02.816 A:middle
+I support copy and move but not
+alias, or something like that.
+
+00:44:03.346 --> 00:44:04.626 A:middle
+You want to set that up.
+
+00:44:04.896 --> 00:44:06.836 A:middle
+We do that in our
+example as you will see.
+
+00:44:07.836 --> 00:44:10.426 A:middle
+Then the required delegate
+methods that correspond
+
+00:44:10.426 --> 00:44:12.906 A:middle
+to the responsibilities I
+mentioned on the previous slide.
+
+00:44:13.446 --> 00:44:16.426 A:middle
+Again, you need to be able to
+write items to the pasteboard,
+
+00:44:16.556 --> 00:44:18.956 A:middle
+in the modern API you can
+provide a pasteboard writer
+
+00:44:18.956 --> 00:44:21.106 A:middle
+for an item in an index path.
+
+00:44:21.336 --> 00:44:22.336 A:middle
+That lets you deal
+
+00:44:22.336 --> 00:44:24.536 A:middle
+with multi-item drags
+much more gracefully.
+
+00:44:25.186 --> 00:44:27.836 A:middle
+Certain data types are
+pasteboard writers.
+
+00:44:27.836 --> 00:44:31.926 A:middle
+In this example, NSURL,
+if it is an absolute URL,
+
+00:44:31.926 --> 00:44:34.446 A:middle
+you can just return the
+URL as a pasteboard writer,
+
+00:44:34.946 --> 00:44:36.636 A:middle
+and it knows how to write
+itself to the pasteboard.
+
+00:44:36.846 --> 00:44:39.996 A:middle
+Alternatively, you can implement
+Write Items At Index Paths,
+
+00:44:40.066 --> 00:44:42.156 A:middle
+toPasteboard, either
+way, you're covered.
+
+00:44:42.796 --> 00:44:44.566 A:middle
+Now, to be a dragging
+destination, again,
+
+00:44:44.566 --> 00:44:46.386 A:middle
+there's a Validate
+Drop Delegate method,
+
+00:44:46.746 --> 00:44:48.626 A:middle
+and an Accept Drop
+Delegate method,
+
+00:44:48.626 --> 00:44:49.956 A:middle
+to abbreviate them
+a little bit there.
+
+00:44:50.226 --> 00:44:52.686 A:middle
+And you'll see those
+implemented in our code sample.
+
+00:44:53.236 --> 00:44:56.206 A:middle
+We don't have time to walk
+through the code sample
+
+00:44:56.206 --> 00:44:58.526 A:middle
+in detail today, because drag
+and drop is fairly involved.
+
+00:44:58.526 --> 00:45:01.476 A:middle
+It's designed to be,
+enabling you to drag items
+
+
+
+00:44:58.526 --> 00:45:01.476 A:middle
+It's designed to be,
+enabling you to drag items
+
+00:45:01.826 --> 00:45:03.166 A:middle
+from one application to another.
+
+00:45:03.166 --> 00:45:05.586 A:middle
+There is a lot to it, but
+there are some fundamental tips
+
+00:45:05.676 --> 00:45:06.586 A:middle
+to understand.
+
+00:45:06.586 --> 00:45:09.786 A:middle
+Once you get these concepts,
+the rest is just mechanics,
+
+00:45:09.786 --> 00:45:10.796 A:middle
+and you'll be able to see it all
+
+00:45:10.796 --> 00:45:13.876 A:middle
+in the heavily-commented
+code for our sample today.
+
+00:45:15.226 --> 00:45:19.266 A:middle
+The important things to
+remember, it is worth figuring
+
+00:45:19.266 --> 00:45:22.606 A:middle
+out and especially handling the
+case where a drag is happening
+
+00:45:22.606 --> 00:45:23.936 A:middle
+within your CollectionView.
+
+00:45:24.346 --> 00:45:28.306 A:middle
+When you start to get dragging
+destination delegate messages,
+
+00:45:28.306 --> 00:45:30.686 A:middle
+it is worth being
+able to say, hey,
+
+00:45:31.006 --> 00:45:33.386 A:middle
+I know that this drag
+originated within myself,
+
+00:45:33.386 --> 00:45:35.816 A:middle
+I know which items, which
+index paths, are being dragged
+
+00:45:36.066 --> 00:45:38.446 A:middle
+so I can handle this a lot
+more simply than, sort of,
+
+00:45:38.446 --> 00:45:40.306 A:middle
+the general, oh, this drag
+can be coming from anywhere
+
+00:45:40.306 --> 00:45:42.936 A:middle
+in the system, I have to pull
+things off the pasteboard,
+
+00:45:42.936 --> 00:45:44.156 A:middle
+and so on.
+
+00:45:44.756 --> 00:45:46.556 A:middle
+This lets you, with
+CollectionView,
+
+00:45:46.556 --> 00:45:47.766 A:middle
+it lets you tell
+the CollectionView
+
+00:45:47.766 --> 00:45:50.216 A:middle
+that you're just moving
+items from these index paths,
+
+00:45:50.216 --> 00:45:51.326 A:middle
+to these new index paths,
+
+00:45:51.326 --> 00:45:53.026 A:middle
+and can give you a
+nice slick animation
+
+00:45:53.336 --> 00:45:54.626 A:middle
+as a side benefit of that.
+
+00:45:54.806 --> 00:45:57.196 A:middle
+It's a lot better,
+more sophisticated
+
+00:45:57.196 --> 00:46:00.006 A:middle
+than removing the
+items and then, oh,
+
+
+
+00:45:57.196 --> 00:46:00.006 A:middle
+than removing the
+items and then, oh,
+
+00:46:00.006 --> 00:46:02.386 A:middle
+I have to reinsert these
+same items somewhere else,
+
+00:46:02.646 --> 00:46:03.576 A:middle
+and reconstitute them.
+
+00:46:04.156 --> 00:46:06.376 A:middle
+A handy place to do this
+is in the CollectionView,
+
+00:46:06.376 --> 00:46:08.826 A:middle
+dragging Session Will
+Begin At Point For Items
+
+00:46:08.826 --> 00:46:11.386 A:middle
+At Index Paths delegate method.
+
+00:46:11.486 --> 00:46:13.316 A:middle
+It's an optional method,
+but it's a good place
+
+00:46:13.316 --> 00:46:16.946 A:middle
+to catch those index paths,
+stash them in a private property
+
+00:46:17.226 --> 00:46:21.446 A:middle
+of your data source, so you can
+find that later, and say, aha,
+
+00:46:21.526 --> 00:46:23.546 A:middle
+I can handle this much more
+simply, and you will see
+
+00:46:23.546 --> 00:46:26.186 A:middle
+where the code sample does that.
+
+00:46:26.396 --> 00:46:30.086 A:middle
+I wanted to leave time to
+look at customizing layout.
+
+00:46:30.086 --> 00:46:31.876 A:middle
+That's more interesting and fun.
+
+00:46:32.036 --> 00:46:33.356 A:middle
+Let's go to that.
+
+00:46:34.356 --> 00:46:38.066 A:middle
+It's our last task, we're going
+to look at both what you need
+
+00:46:38.066 --> 00:46:39.656 A:middle
+to do to adjust an
+existing layout,
+
+00:46:39.656 --> 00:46:42.296 A:middle
+let's say Flow does almost
+what you want, but you want
+
+00:46:42.296 --> 00:46:44.506 A:middle
+to tweak it just a bit to
+get everything pixel perfect,
+
+00:46:44.596 --> 00:46:48.126 A:middle
+you know, I have heard
+of doing that before!
+
+00:46:48.216 --> 00:46:52.016 A:middle
+Or, maybe you want to implement
+a completely custom new type
+
+00:46:52.016 --> 00:46:53.356 A:middle
+of layout as we have done here,
+
+00:46:53.466 --> 00:46:56.916 A:middle
+with our various other
+arrangements of slides.
+
+00:46:57.166 --> 00:46:58.976 A:middle
+We'll look at what it
+takes to do that too.
+
+00:46:59.476 --> 00:47:01.926 A:middle
+Adjusting an existing layout
+takes a little less work.
+
+
+
+00:46:59.476 --> 00:47:01.926 A:middle
+Adjusting an existing layout
+takes a little less work.
+
+00:47:02.196 --> 00:47:03.066 A:middle
+We'll look at that first.
+
+00:47:03.316 --> 00:47:05.766 A:middle
+Let's say you want to
+subclass the flow layout class
+
+00:47:05.806 --> 00:47:08.436 A:middle
+to adjust item positioning
+just a little bit,
+
+00:47:08.436 --> 00:47:09.386 A:middle
+tweak things here and there.
+
+00:47:09.976 --> 00:47:11.856 A:middle
+You can do that with a
+delegate, but let's just suppose
+
+00:47:11.856 --> 00:47:13.916 A:middle
+that you want to do something
+that you find you can't do,
+
+00:47:14.216 --> 00:47:15.516 A:middle
+with the existing delegate API.
+
+00:47:16.756 --> 00:47:20.616 A:middle
+This is the main workhorse
+method to understand.
+
+00:47:20.896 --> 00:47:23.436 A:middle
+So far this is the
+same as on iOS.
+
+00:47:23.436 --> 00:47:26.346 A:middle
+Layout Attributes For Elements
+In Rect is a very general API.
+
+00:47:26.346 --> 00:47:27.686 A:middle
+CollectionView calls in,
+
+00:47:27.686 --> 00:47:30.476 A:middle
+and it passes you a
+rectangle that's a rectangle
+
+00:47:30.476 --> 00:47:33.406 A:middle
+in the CollectionViews internal
+bounds coordinate system.
+
+00:47:33.406 --> 00:47:35.986 A:middle
+It's basically saying, hey,
+what's in this rectangle?
+
+00:47:36.506 --> 00:47:38.466 A:middle
+You're obliged to
+return an array
+
+00:47:38.606 --> 00:47:39.946 A:middle
+of layout attributes objects.
+
+00:47:39.946 --> 00:47:43.386 A:middle
+Remember, that's our
+encapsulation of descriptions
+
+00:47:43.386 --> 00:47:44.806 A:middle
+of items, independent of having
+
+00:47:44.806 --> 00:47:47.086 A:middle
+to actually instantiate
+the items just yet.
+
+00:47:47.546 --> 00:47:50.196 A:middle
+You are going to return it
+information about items,
+
+00:47:50.196 --> 00:47:52.076 A:middle
+and if you have header
+and footer views,
+
+00:47:52.076 --> 00:47:54.056 A:middle
+or other supplementary views
+that could be in that area,
+
+00:47:54.506 --> 00:47:56.006 A:middle
+you have to figure
+out what's there,
+
+00:47:56.006 --> 00:47:57.316 A:middle
+and return those descriptions.
+
+00:47:57.556 --> 00:47:59.796 A:middle
+This is obviously
+highly dependent
+
+00:47:59.796 --> 00:48:01.536 A:middle
+on what your layout
+algorithm is.
+
+
+
+00:47:59.796 --> 00:48:01.536 A:middle
+on what your layout
+algorithm is.
+
+00:48:01.536 --> 00:48:02.826 A:middle
+It could be anything, right?
+
+00:48:02.826 --> 00:48:04.536 A:middle
+So you are going to traverse
+your own internal data
+
+00:48:04.536 --> 00:48:06.156 A:middle
+structures, you want
+to figure out how
+
+00:48:06.156 --> 00:48:07.896 A:middle
+to do this really
+efficiently for your layout.
+
+00:48:08.136 --> 00:48:09.866 A:middle
+That is this methods'
+responsibility,
+
+00:48:09.866 --> 00:48:11.826 A:middle
+to return descriptions of
+everything in a rectangle.
+
+00:48:12.296 --> 00:48:14.206 A:middle
+That's the workhorse,
+that's what gets called,
+
+00:48:14.206 --> 00:48:15.586 A:middle
+when the CollectionView
+first lays
+
+00:48:15.586 --> 00:48:17.326 A:middle
+out the items you have given it.
+
+00:48:17.776 --> 00:48:20.046 A:middle
+Then, there is this companion,
+Layout Attributes For Item
+
+00:48:20.046 --> 00:48:21.766 A:middle
+At Index Path, almost
+seems superfluous,
+
+00:48:21.806 --> 00:48:25.636 A:middle
+but the CollectionView needs to
+ask about specific items, say,
+
+00:48:25.636 --> 00:48:27.156 A:middle
+just describe this item to me,
+
+00:48:27.526 --> 00:48:28.976 A:middle
+and that's what you're
+supposed to do here.
+
+00:48:28.976 --> 00:48:32.426 A:middle
+If there is no item at that
+index path you return nil.
+
+00:48:32.976 --> 00:48:35.836 A:middle
+Usually, there is,
+if it is asking.
+
+00:48:35.966 --> 00:48:38.726 A:middle
+This gets invoked when you're
+doing things like moving items
+
+00:48:38.826 --> 00:48:40.106 A:middle
+from one place to another.
+
+00:48:40.846 --> 00:48:43.206 A:middle
+So you want to implement that
+too, and the results need
+
+00:48:43.206 --> 00:48:44.906 A:middle
+to be consistent with
+the first method.
+
+00:48:45.446 --> 00:48:50.556 A:middle
+Then there is Invalidate Layout
+With Context, which is sort
+
+00:48:50.556 --> 00:48:54.356 A:middle
+of a general invalidation method
+that CollectionView will invoke
+
+00:48:54.576 --> 00:48:56.686 A:middle
+with a context, that, if
+you look at its properties,
+
+00:48:56.686 --> 00:48:58.406 A:middle
+examine it, it is
+the same as on iOS,
+
+00:48:58.636 --> 00:49:00.316 A:middle
+it describes what's changed.
+
+
+
+00:48:58.636 --> 00:49:00.316 A:middle
+it describes what's changed.
+
+00:49:00.316 --> 00:49:01.876 A:middle
+Items were inserted or removed,
+
+00:49:01.876 --> 00:49:04.056 A:middle
+maybe the CollectionView is
+resizing, any of a number
+
+00:49:04.056 --> 00:49:05.136 A:middle
+of things could be happening.
+
+00:49:05.616 --> 00:49:08.706 A:middle
+Examining the context properties
+gives you the opportunity
+
+00:49:08.936 --> 00:49:11.076 A:middle
+to just try to be as smart
+and efficient as you can.
+
+00:49:11.076 --> 00:49:13.536 A:middle
+This is sort of a later
+optimization you might want
+
+00:49:13.536 --> 00:49:16.236 A:middle
+to do, after you get your layout
+just basically working the way
+
+00:49:16.236 --> 00:49:17.426 A:middle
+you want it to.
+
+00:49:17.686 --> 00:49:22.006 A:middle
+This is your chance to blow
+away any invalidated state stuff
+
+00:49:22.006 --> 00:49:24.676 A:middle
+that is internal state that
+you track for your layout,
+
+00:49:24.676 --> 00:49:28.436 A:middle
+your own description of it
+when certain changes happen.
+
+00:49:29.486 --> 00:49:32.106 A:middle
+So we're just seeing
+Flow layout,
+
+00:49:32.106 --> 00:49:33.676 A:middle
+then let's say we're going
+
+00:49:33.676 --> 00:49:36.046 A:middle
+to implement those
+first two methods,
+
+00:49:36.046 --> 00:49:39.416 A:middle
+the layout attributes returning
+methods, to call up to super,
+
+00:49:39.846 --> 00:49:42.466 A:middle
+see what NSCollectionView
+Flow layout proposes,
+
+00:49:42.706 --> 00:49:46.316 A:middle
+we can examine the resultant
+layout attributes instance,
+
+00:49:46.316 --> 00:49:49.086 A:middle
+or array of them, and make
+whatever tweaks we want to,
+
+00:49:49.086 --> 00:49:51.326 A:middle
+and return a new array
+of layout attributes,
+
+00:49:51.326 --> 00:49:52.446 A:middle
+or a single array of
+layout attributes.
+
+00:49:52.446 --> 00:49:54.316 A:middle
+That's pretty much
+what there is to that,
+
+00:49:54.316 --> 00:49:56.956 A:middle
+as long as the changes you're
+making don't change the amount
+
+00:49:56.956 --> 00:49:57.986 A:middle
+of space the layout needs.
+
+00:49:59.396 --> 00:50:01.516 A:middle
+What if you want to implement
+a completely custom layout,
+
+
+
+00:49:59.396 --> 00:50:01.516 A:middle
+What if you want to implement
+a completely custom layout,
+
+00:50:01.516 --> 00:50:02.306 A:middle
+like we have done here?
+
+00:50:02.966 --> 00:50:05.076 A:middle
+You can subclass
+NSCollectionView layout
+
+00:50:05.076 --> 00:50:07.046 A:middle
+directly, to just do
+everything from scratch,
+
+00:50:07.046 --> 00:50:09.676 A:middle
+if your layout has nothing in
+common with Flow, for example.
+
+00:50:10.456 --> 00:50:12.816 A:middle
+You implement the same
+methods that we described
+
+00:50:12.816 --> 00:50:13.746 A:middle
+on the previous slide.
+
+00:50:14.526 --> 00:50:15.916 A:middle
+In addition, you need to be able
+
+00:50:15.916 --> 00:50:20.636 A:middle
+to answer certain basic
+questions, like, what's the size
+
+00:50:20.636 --> 00:50:23.006 A:middle
+that you need, the width and
+height, to display the items
+
+00:50:23.006 --> 00:50:24.756 A:middle
+that the CollectionView
+has to offer?
+
+00:50:25.326 --> 00:50:27.576 A:middle
+You basically just telling the
+CollectionView here what's the
+
+00:50:27.766 --> 00:50:30.356 A:middle
+size of my document view within?
+
+00:50:30.356 --> 00:50:31.806 A:middle
+-- this determines
+your scrollable area.
+
+00:50:33.726 --> 00:50:36.606 A:middle
+Should Invalidate Layout For
+Bounds Change returns a Boolean,
+
+00:50:36.606 --> 00:50:38.566 A:middle
+so CollectionView is
+going to invoke this
+
+00:50:38.566 --> 00:50:39.866 A:middle
+when it's being resized.
+
+00:50:40.346 --> 00:50:43.826 A:middle
+And typically you'll look at,
+What's my layout algorithm?
+
+00:50:43.906 --> 00:50:46.256 A:middle
+Is my layout affected
+by this resize?
+
+00:50:46.526 --> 00:50:49.196 A:middle
+If you're a Flow layout
+for example, a vertical one
+
+00:50:49.196 --> 00:50:52.466 A:middle
+that lays things out into rows,
+maybe you don't care so much
+
+00:50:52.506 --> 00:50:55.136 A:middle
+if the CollectionViews
+height is changing, right?
+
+00:50:55.136 --> 00:50:56.546 A:middle
+That just gives you
+more or less space.
+
+00:50:56.606 --> 00:50:58.916 A:middle
+But,if the width is changing,
+you may have to reflow.
+
+00:50:59.256 --> 00:51:01.296 A:middle
+You may return yes in
+that case for example.
+
+
+
+00:50:59.256 --> 00:51:01.296 A:middle
+You may return yes in
+that case for example.
+
+00:51:01.576 --> 00:51:03.976 A:middle
+That's what that method does.
+
+00:51:04.726 --> 00:51:07.946 A:middle
+If you're modifying the flow
+layout so that the amount
+
+00:51:07.946 --> 00:51:10.076 A:middle
+of space you need changes,
+you may actually need
+
+00:51:10.076 --> 00:51:13.176 A:middle
+to implement those two, even
+for a slightly customized flow.
+
+00:51:14.666 --> 00:51:16.886 A:middle
+These methods, however,
+are brand-new on OS X,
+
+00:51:16.886 --> 00:51:19.606 A:middle
+I mentioned we have the
+ability now to hit test,
+
+00:51:19.606 --> 00:51:21.676 A:middle
+to have a layout
+in the abstract,
+
+00:51:21.766 --> 00:51:24.016 A:middle
+hit test for drop targets.
+
+00:51:24.266 --> 00:51:25.856 A:middle
+That's a powerful new feature.
+
+00:51:26.266 --> 00:51:28.366 A:middle
+You can define this for
+any of your custom layouts,
+
+00:51:28.746 --> 00:51:31.506 A:middle
+Layout Attribute For Drop Target
+At Point is the first method.
+
+00:51:32.086 --> 00:51:34.966 A:middle
+If the target is an item,
+that's pretty straightforward.
+
+00:51:34.966 --> 00:51:36.626 A:middle
+You're going to return
+an attribute,
+
+00:51:36.626 --> 00:51:37.976 A:middle
+a layout attributes instance,
+
+00:51:38.416 --> 00:51:40.516 A:middle
+whose represented
+element category is Item.
+
+00:51:41.216 --> 00:51:43.326 A:middle
+You're proposing
+dropping on an item,
+
+00:51:43.976 --> 00:51:47.146 A:middle
+you plug the index path in, of
+the item you have identified
+
+00:51:47.146 --> 00:51:50.276 A:middle
+that would be dropped
+onto, and then you want
+
+00:51:50.276 --> 00:51:54.126 A:middle
+to return the bounding box
+of that item as the frame
+
+00:51:54.126 --> 00:51:55.036 A:middle
+of the layout attribute.
+
+00:51:55.036 --> 00:51:56.356 A:middle
+That's imple enough.
+
+00:51:56.606 --> 00:51:59.116 A:middle
+A more interesting case, now,
+that we didn't have to deal
+
+00:51:59.116 --> 00:52:01.476 A:middle
+with on iOS, is gaps
+between items.
+
+
+
+00:51:59.116 --> 00:52:01.476 A:middle
+with on iOS, is gaps
+between items.
+
+00:52:02.646 --> 00:52:05.536 A:middle
+If you determine that the point
+that's being hit tested is
+
+00:52:05.536 --> 00:52:08.556 A:middle
+between items, and you
+can identify, in some sort
+
+00:52:08.556 --> 00:52:11.716 A:middle
+of serial order of the
+items, where that gap is, OK,
+
+00:52:11.716 --> 00:52:15.376 A:middle
+t is between item at index
+6 and index 7, you may want
+
+00:52:15.376 --> 00:52:16.846 A:middle
+to return an Inter Item Gap.
+
+00:52:17.866 --> 00:52:21.126 A:middle
+That will let users drop between
+your items in your layout.
+
+00:52:21.546 --> 00:52:24.316 A:middle
+You return one whose element
+category is Inter Item Gap,
+
+00:52:25.036 --> 00:52:28.106 A:middle
+the attribute's index
+path is the index path
+
+00:52:28.396 --> 00:52:30.426 A:middle
+of the item after the gap.
+
+00:52:30.426 --> 00:52:33.276 A:middle
+If you're between 6 and 7,
+you return the index path
+
+00:52:33.276 --> 00:52:35.186 A:middle
+that specifies item
+7 in that section.
+
+00:52:36.416 --> 00:52:39.856 A:middle
+Then again, you return as the
+attributes frame, a bounding box
+
+00:52:40.146 --> 00:52:44.076 A:middle
+of that gap, the CollectionView
+will use that bounding box
+
+00:52:44.076 --> 00:52:46.986 A:middle
+to figure out how to draw its
+standard indicators somewhere
+
+00:52:46.986 --> 00:52:47.906 A:middle
+in that rectangle.
+
+00:52:48.196 --> 00:52:53.446 A:middle
+Next there is a method
+called Layout Attributes
+
+00:52:53.446 --> 00:52:55.596 A:middle
+For Inter Item Gap
+Before Index Path.
+
+00:52:55.596 --> 00:52:58.106 A:middle
+CollectionView sometimes needs
+this too, and it will ask
+
+00:52:58.106 --> 00:53:01.556 A:middle
+about a particular position, and
+ask you to describe that gap.
+
+
+
+00:52:58.106 --> 00:53:01.556 A:middle
+about a particular position, and
+ask you to describe that gap.
+
+00:53:02.116 --> 00:53:03.806 A:middle
+So here we return an Attributes
+
+00:53:03.806 --> 00:53:05.476 A:middle
+With Element Category
+Inter Item Gap,
+
+00:53:05.846 --> 00:53:08.586 A:middle
+it's represented element kind
+is Inter Item Gap Indicator,
+
+00:53:08.946 --> 00:53:10.926 A:middle
+so this is really,
+we're using this to set
+
+00:53:10.926 --> 00:53:12.316 A:middle
+up a supplementary view.
+
+00:53:12.316 --> 00:53:15.156 A:middle
+That's how the Inter Item
+Gap Indicator is implemented,
+
+00:53:15.906 --> 00:53:17.926 A:middle
+you just plug in the index
+path that you are given,
+
+00:53:18.606 --> 00:53:20.766 A:middle
+and your return is
+the attributes frames
+
+00:53:20.866 --> 00:53:22.106 A:middle
+as the Rect of the gap.
+
+00:53:22.206 --> 00:53:23.816 A:middle
+With these two methods together,
+
+00:53:24.156 --> 00:53:29.106 A:middle
+CollectionView can support drop
+target indication between items,
+
+00:53:29.106 --> 00:53:32.516 A:middle
+even for potentially-arbitrary
+custom layouts
+
+00:53:32.516 --> 00:53:34.596 A:middle
+of your own design,
+which is pretty neat.
+
+00:53:35.566 --> 00:53:37.486 A:middle
+We'll look briefly at
+our custom layouts,
+
+00:53:37.486 --> 00:53:40.066 A:middle
+and how they're implemented
+as our last demo.
+
+00:53:47.616 --> 00:53:49.586 A:middle
+Looking here on the
+left-sidebar,
+
+00:53:49.976 --> 00:53:51.386 A:middle
+we have the code categorized.
+
+00:53:51.386 --> 00:53:53.346 A:middle
+We have a layouts group,
+you want to look in there.
+
+00:53:53.726 --> 00:53:55.626 A:middle
+We'll look at one example today.
+
+00:53:56.216 --> 00:53:57.166 A:middle
+The circular layout.
+
+
+
+00:54:00.686 --> 00:54:03.276 A:middle
+It is fairly simple.
+
+00:54:03.396 --> 00:54:06.476 A:middle
+We implement Layout Attributes
+For An Item At Index Path,
+
+00:54:06.476 --> 00:54:08.256 A:middle
+that's where we're asked
+about a particular item.
+
+00:54:09.046 --> 00:54:12.626 A:middle
+All we're doing here in concept,
+is we're taking the item index
+
+00:54:13.266 --> 00:54:15.706 A:middle
+from the index path,
+and that's going
+
+00:54:15.706 --> 00:54:18.106 A:middle
+to define how far we
+are around the circle.
+
+00:54:18.416 --> 00:54:23.636 A:middle
+We use that to compute an
+angle from 0 to 2 Pi radians.
+
+00:54:23.946 --> 00:54:26.776 A:middle
+That lets us compute a frame
+for where the slide should go.
+
+00:54:27.696 --> 00:54:31.736 A:middle
+Then the important part is
+here, the API is a little touchy
+
+00:54:31.736 --> 00:54:34.366 A:middle
+to how you instantiate
+layout attributes instances,
+
+00:54:34.366 --> 00:54:36.626 A:middle
+to get one that's
+bound to the index path
+
+00:54:36.676 --> 00:54:38.026 A:middle
+that it references correctly,
+
+00:54:38.336 --> 00:54:39.906 A:middle
+you want to be careful
+to do it this way.
+
+00:54:40.676 --> 00:54:44.986 A:middle
+We'll actually talk
+to the layouts class,
+
+00:54:45.366 --> 00:54:48.116 A:middle
+and get the corresponding
+layout attributes class,
+
+00:54:48.146 --> 00:54:52.446 A:middle
+basically having this API
+allows for layout attributes
+
+00:54:52.506 --> 00:54:54.736 A:middle
+for the NSCollectionView
+Layout Attributes Class
+
+00:54:54.956 --> 00:54:56.516 A:middle
+to be subclassed and extended.
+
+00:54:56.806 --> 00:54:59.516 A:middle
+You may have some really
+custom layout, just as on iOS,
+
+00:54:59.806 --> 00:55:01.906 A:middle
+that needs to work
+with other attributes
+
+
+
+00:54:59.806 --> 00:55:01.906 A:middle
+that needs to work
+with other attributes
+
+00:55:01.906 --> 00:55:04.356 A:middle
+or remember other things about
+items that it's laid out,
+
+00:55:04.586 --> 00:55:06.756 A:middle
+you can add those
+properties by subclassing.
+
+00:55:07.436 --> 00:55:09.296 A:middle
+You override layout
+attribute class
+
+00:55:09.366 --> 00:55:11.336 A:middle
+to return your own subclass.
+
+00:55:12.026 --> 00:55:15.006 A:middle
+This way we make sure we're
+instantiating a subclass
+
+00:55:15.006 --> 00:55:15.716 A:middle
+if we need to.
+
+00:55:16.026 --> 00:55:17.696 A:middle
+The appropriate one.
+
+00:55:17.826 --> 00:55:21.286 A:middle
+We invoke this factory method,
+Layout Attributes For Items
+
+00:55:21.286 --> 00:55:23.816 A:middle
+With Index Path, we pass
+in that path we were given.
+
+00:55:23.816 --> 00:55:26.146 A:middle
+Once we have got a layout
+attributes object back,
+
+00:55:27.186 --> 00:55:29.596 A:middle
+we set the properties we
+want to, we set the frame,
+
+00:55:29.596 --> 00:55:33.056 A:middle
+the Z index for back-to-front
+sort order in the layer world,
+
+00:55:33.056 --> 00:55:34.376 A:middle
+and then we return
+
+00:55:34.376 --> 00:55:36.546 A:middle
+that attributes instance
+back to CollectionView.
+
+00:55:37.186 --> 00:55:39.676 A:middle
+We have a superclass,
+where for all
+
+00:55:39.676 --> 00:55:43.506 A:middle
+of our custom layouts we have
+implemented the Rect-taking
+
+00:55:43.506 --> 00:55:46.546 A:middle
+method, Layout Attributes
+For Elements In Rect,
+
+00:55:46.546 --> 00:55:48.716 A:middle
+and we can do that, because
+in this case, what's special
+
+00:55:48.716 --> 00:55:50.906 A:middle
+about all of these layouts,
+in this case is rather
+
+00:55:50.906 --> 00:55:53.096 A:middle
+than being scrollable
+layouts, that just grow
+
+00:55:53.096 --> 00:55:55.916 A:middle
+to whatever size they need
+to display their items,
+
+00:55:56.136 --> 00:55:58.206 A:middle
+these all choose to display all
+
+00:55:58.206 --> 00:56:00.956 A:middle
+of the CollectionViews
+items in the visible area.
+
+
+
+00:55:58.206 --> 00:56:00.956 A:middle
+of the CollectionViews
+items in the visible area.
+
+00:56:01.356 --> 00:56:04.336 A:middle
+So the implementation of this
+method is basically always
+
+00:56:04.376 --> 00:56:04.816 A:middle
+the same.
+
+00:56:04.816 --> 00:56:07.736 A:middle
+We are looking at the Rect,
+and we are going to look
+
+00:56:07.736 --> 00:56:09.446 A:middle
+at every item we have.
+
+00:56:09.976 --> 00:56:13.766 A:middle
+We're returning descriptions of
+those back to CollectionView,
+
+00:56:14.076 --> 00:56:16.956 A:middle
+so we're actually just
+leveraging the Layout Attributes
+
+00:56:16.956 --> 00:56:18.536 A:middle
+For Item At Index Path method,
+
+00:56:18.746 --> 00:56:20.546 A:middle
+that we implement
+in the subclass.
+
+00:56:21.486 --> 00:56:23.926 A:middle
+CollectionView Content
+Size is the same for all
+
+00:56:23.926 --> 00:56:25.476 A:middle
+of these slide layouts,
+we're just looking
+
+00:56:25.476 --> 00:56:28.846 A:middle
+at the clipped view's bound
+size, what area do we have,
+
+00:56:28.846 --> 00:56:29.946 A:middle
+that's visible to the user?
+
+00:56:29.946 --> 00:56:31.676 A:middle
+We're going to lay out
+everything out within there,
+
+00:56:31.936 --> 00:56:34.336 A:middle
+and because we're doing
+that, we're also going
+
+00:56:34.336 --> 00:56:36.906 A:middle
+to invalidate layout
+when the bounds change,
+
+00:56:36.906 --> 00:56:39.776 A:middle
+regardless of what the change
+is, we want to re-layout,
+
+00:56:39.896 --> 00:56:43.986 A:middle
+so that we can use the
+available space appropriately.
+
+00:56:44.676 --> 00:56:48.196 A:middle
+Prepare Layout, as on iOS, this
+is just a handy little hook
+
+00:56:48.196 --> 00:56:51.046 A:middle
+for when layout parameters have
+changed, and you're being called
+
+00:56:51.046 --> 00:56:52.536 A:middle
+at the start of a
+new layout cycle,
+
+00:56:52.806 --> 00:56:55.276 A:middle
+you can do any pre-computation
+you want to in there,
+
+00:56:55.516 --> 00:56:57.686 A:middle
+and just gets invoked once,
+at the start of the cycle.
+
+00:56:58.636 --> 00:57:01.096 A:middle
+We can look at our
+layouts in action here.
+
+
+
+00:56:58.636 --> 00:57:01.096 A:middle
+We can look at our
+layouts in action here.
+
+00:57:07.556 --> 00:57:11.456 A:middle
+And say for the circular
+layout as we resize,
+
+00:57:11.456 --> 00:57:13.906 A:middle
+the layout is getting
+invalidated each time,
+
+00:57:13.906 --> 00:57:16.616 A:middle
+because we want to make
+the biggest circle we can,
+
+00:57:16.886 --> 00:57:19.066 A:middle
+leaving some margins
+within the available area.
+
+00:57:19.916 --> 00:57:24.666 A:middle
+By implementing those
+relatively-few required methods,
+
+00:57:25.036 --> 00:57:26.736 A:middle
+we have a completely
+custom layout.
+
+00:57:26.736 --> 00:57:27.746 A:middle
+And again, as before,
+
+00:57:28.116 --> 00:57:32.046 A:middle
+it supports crossing selection
+here, and click selection,
+
+00:57:32.576 --> 00:57:34.336 A:middle
+and it is very versatile.
+
+00:57:35.706 --> 00:57:38.536 A:middle
+So, it doesn't take much to
+define your own layouts for use
+
+00:57:39.616 --> 00:57:42.766 A:middle
+within NSCollectionView, and
+in fact the layout classes,
+
+00:57:42.806 --> 00:57:45.566 A:middle
+the APIs you will find,
+except for those additions,
+
+00:57:45.566 --> 00:57:48.606 A:middle
+those augmentations we made to
+support drop target hit-testing,
+
+00:57:48.976 --> 00:57:51.126 A:middle
+basically the API
+is the same as iOS,
+
+00:57:51.126 --> 00:57:52.836 A:middle
+so if you have the layouts
+you have used on iOS,
+
+00:57:53.266 --> 00:57:57.516 A:middle
+you should find it very
+easy to port those to OS X.
+
+00:57:57.516 --> 00:57:59.236 A:middle
+We have covered a lot
+of topics here today,
+
+00:57:59.236 --> 00:58:02.696 A:middle
+we've basically made an
+example run, and you have access
+
+
+
+00:57:59.236 --> 00:58:02.696 A:middle
+we've basically made an
+example run, and you have access
+
+00:58:02.696 --> 00:58:04.036 A:middle
+to the complete source
+code to that.
+
+00:58:04.036 --> 00:58:05.816 A:middle
+I encourage you to study it,
+
+00:58:05.996 --> 00:58:09.586 A:middle
+it should help you get started
+using the new NSCollectionView
+
+00:58:09.816 --> 00:58:10.866 A:middle
+on El Capitan.
+
+00:58:11.636 --> 00:58:15.586 A:middle
+In conclusion, we have
+got a greatly enhanced
+
+00:58:15.586 --> 00:58:17.946 A:middle
+NSCollectionView, I hope
+you'll agree on El Capitan,
+
+00:58:17.946 --> 00:58:20.716 A:middle
+it is ready now to handle
+scalability to large numbers
+
+00:58:20.716 --> 00:58:23.736 A:middle
+of items, flexibility
+to arbitrary layouts,
+
+00:58:24.396 --> 00:58:27.316 A:middle
+and all of the toughest projects
+you may want to throw at it.
+
+00:58:27.466 --> 00:58:28.806 A:middle
+We encourage you to do so.
+
+00:58:29.016 --> 00:58:30.046 A:middle
+Let us know what works.
+
+00:58:30.046 --> 00:58:31.756 A:middle
+Let us know what you
+have challenges with.
+
+00:58:31.756 --> 00:58:34.196 A:middle
+If you need any help
+or guidance,
+
+00:58:34.196 --> 00:58:35.476 A:middle
+we have a lab dedicated
+
+00:58:35.476 --> 00:58:37.536 A:middle
+to CollectionView
+specifically tomorrow morning
+
+00:58:37.796 --> 00:58:41.046 A:middle
+in Foundation Lab B downstairs,
+Frameworks Lab B, sorry,
+
+00:58:41.526 --> 00:58:44.536 A:middle
+at the foundation of the
+building, 9:00 a.m. tomorrow.
+
+00:58:44.536 --> 00:58:46.746 A:middle
+I'll be there along with
+other engineers from our team
+
+00:58:46.746 --> 00:58:47.936 A:middle
+who understand CollectionView.
+
+00:58:48.886 --> 00:58:51.276 A:middle
+Be sure to look at not
+just the documentation,
+
+00:58:51.276 --> 00:58:53.216 A:middle
+but also the Application
+Kit Release Notes,
+
+00:58:53.216 --> 00:58:55.976 A:middle
+I have personally put notes
+about CollectionView use
+
+00:58:55.976 --> 00:59:00.776 A:middle
+in there, details about how
+to set them up, and also,
+
+
+
+00:58:55.976 --> 00:59:00.776 A:middle
+in there, details about how
+to set them up, and also,
+
+00:59:00.776 --> 00:59:01.696 A:middle
+you will find information
+
+00:59:01.696 --> 00:59:03.486 A:middle
+about all the other
+great new stuff we have
+
+00:59:03.486 --> 00:59:05.826 A:middle
+in AppKit in 10.11.
+
+00:59:06.896 --> 00:59:09.246 A:middle
+If you missed What's New in
+Cocoa, another great place
+
+00:59:09.246 --> 00:59:12.376 A:middle
+to find out about all the new
+features that we have added,
+
+00:59:12.376 --> 00:59:14.636 A:middle
+it is quite a lot, it
+didn't even fit in one talk,
+
+00:59:15.006 --> 00:59:16.416 A:middle
+I encourage you to
+check that out,
+
+00:59:16.456 --> 00:59:18.346 A:middle
+on the session videos
+that are available.
+
+00:59:18.346 --> 00:59:21.426 A:middle
+Last but not least we have
+two great auto layout sessions
+
+00:59:21.426 --> 00:59:24.026 A:middle
+earlier today, if you're
+using Auto Layout constraints
+
+00:59:24.326 --> 00:59:26.786 A:middle
+to position your controls
+within your items,
+
+00:59:27.076 --> 00:59:30.266 A:middle
+it might be really helpful to
+understand Auto Layout in depth.
+
+00:59:30.836 --> 00:59:32.196 A:middle
+Thank you very much for coming.
+
+00:59:32.196 --> 00:59:33.726 A:middle
+I look forward to
+seeing what you create.
+
+00:59:33.726 --> 00:59:35.366 A:middle
+Enjoy the WWDC bash!
+
+00:59:35.396 --> 00:59:36.476 A:middle
+I'll see you tomorrow
+morning in the lab.
+
+00:59:37.508 --> 00:59:39.508 A:middle
+[Applause]
+

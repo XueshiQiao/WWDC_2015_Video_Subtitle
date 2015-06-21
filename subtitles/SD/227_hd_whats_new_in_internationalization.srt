@@ -1,0 +1,3377 @@
+
+00:00:19.016 --> 00:00:20.046 A:middle
+[Applause]
+
+00:00:20.046 --> 00:00:20.796 A:middle
+&gt;&gt; NAT HILLARD: Good
+morning, everyone.
+
+00:00:24.076 --> 00:00:26.596 A:middle
+Now, good morning, or
+should I say, zao an,
+
+00:00:27.046 --> 00:00:28.916 A:middle
+dobry den, buenas dias.
+
+00:00:29.156 --> 00:00:30.276 A:middle
+My name is Nat Hillard.
+
+00:00:30.666 --> 00:00:33.486 A:middle
+Today I will be going over what
+is new in internationalization.
+
+00:00:34.026 --> 00:00:36.176 A:middle
+I will be going over new
+APIs that we have introduced,
+
+00:00:36.286 --> 00:00:39.156 A:middle
+as well as improvements to
+existing APIs that you can use
+
+00:00:39.156 --> 00:00:41.796 A:middle
+in your apps to make them ready
+for use all around the world.
+
+00:00:42.896 --> 00:00:45.276 A:middle
+To begin with, this
+is the Earth.
+
+00:00:46.146 --> 00:00:48.506 A:middle
+There are over 7 billion
+people on this Earth.
+
+00:00:49.126 --> 00:00:51.496 A:middle
+To these 7 billion
+people, Apple has sold
+
+00:00:51.496 --> 00:00:54.486 A:middle
+over 1 billion iOS devices.
+
+00:00:54.976 --> 00:00:56.256 A:middle
+Additionally, our install base
+
+00:00:56.256 --> 00:00:58.516 A:middle
+for Mac OS X is 80
+million devices.
+
+00:00:59.126 --> 00:01:02.956 A:middle
+We have over 450 physical stores
+located all around the world
+
+
+
+00:00:59.126 --> 00:01:02.956 A:middle
+We have over 450 physical stores
+located all around the world
+
+00:01:03.526 --> 00:01:06.756 A:middle
+and your apps, numbering
+1.4 million or more,
+
+00:01:07.236 --> 00:01:09.096 A:middle
+have gone from developers
+just like you,
+
+00:01:09.516 --> 00:01:11.106 A:middle
+have gone to users
+all around the world.
+
+00:01:12.096 --> 00:01:16.126 A:middle
+So, that's a lot of numbers, but
+if you only take away one number
+
+00:01:16.126 --> 00:01:18.046 A:middle
+from today's presentation,
+let it be this.
+
+00:01:19.246 --> 00:01:23.416 A:middle
+69%. 69% of Apple's
+current revenue comes
+
+00:01:23.416 --> 00:01:24.526 A:middle
+from international markets.
+
+00:01:24.836 --> 00:01:25.716 A:middle
+Now this is huge.
+
+00:01:25.716 --> 00:01:27.856 A:middle
+To see this in perspective,
+let's look at a graph.
+
+00:01:28.806 --> 00:01:31.866 A:middle
+Over two-thirds of Apple's
+revenue is coming from places
+
+00:01:31.866 --> 00:01:33.026 A:middle
+that are not the United States.
+
+00:01:33.676 --> 00:01:35.826 A:middle
+Users in these areas have
+different expectations
+
+00:01:35.826 --> 00:01:37.556 A:middle
+about how they'll
+interact with your app.
+
+00:01:37.756 --> 00:01:39.596 A:middle
+These include linguistic
+differences,
+
+00:01:39.676 --> 00:01:41.576 A:middle
+regional differences,
+and cultural differences
+
+00:01:41.576 --> 00:01:42.606 A:middle
+that you will have
+to keep in mind.
+
+00:01:42.606 --> 00:01:44.596 A:middle
+Now let's break this
+down even more.
+
+00:01:46.226 --> 00:01:49.456 A:middle
+Interestingly, here,
+is that a combined 41%
+
+00:01:49.456 --> 00:01:51.466 A:middle
+of your users are coming
+from China and Japan.
+
+00:01:52.346 --> 00:01:53.796 A:middle
+Now, I think it's a
+common misconception
+
+00:01:53.796 --> 00:01:56.606 A:middle
+that internationalizing your app
+means making it work in Europe.
+
+00:01:56.996 --> 00:02:00.096 A:middle
+Now, indeed, this is important,
+but additionally you have
+
+
+
+00:01:56.996 --> 00:02:00.096 A:middle
+Now, indeed, this is important,
+but additionally you have
+
+00:02:00.146 --> 00:02:01.616 A:middle
+to keep in mind that
+users in China
+
+00:02:02.326 --> 00:02:04.216 A:middle
+and Japan present
+additional challenges.
+
+00:02:04.956 --> 00:02:07.756 A:middle
+That is to say, they don't
+use an alphabetic script.
+
+00:02:07.946 --> 00:02:09.636 A:middle
+There are no spaces
+to separate words.
+
+00:02:09.636 --> 00:02:11.196 A:middle
+And, additionally, what may work
+
+00:02:11.196 --> 00:02:14.686 A:middle
+in your UI will be often a lot
+terser in Chinese and Japanese.
+
+00:02:15.446 --> 00:02:16.486 A:middle
+So, the good news, here,
+
+00:02:16.486 --> 00:02:18.706 A:middle
+is if you use our
+APIs we will help you
+
+00:02:19.606 --> 00:02:21.796 A:middle
+to internationalize your
+app easily and effortlessly.
+
+00:02:22.796 --> 00:02:25.166 A:middle
+So, today we will be going
+over four major areas
+
+00:02:25.166 --> 00:02:28.596 A:middle
+that you'll have to think
+about: localization, formatting,
+
+00:02:29.056 --> 00:02:30.376 A:middle
+handling text, and layout.
+
+00:02:31.306 --> 00:02:35.616 A:middle
+So, to begin with, let's
+discuss localization.
+
+00:02:36.746 --> 00:02:37.956 A:middle
+Now, by localization, I mean
+
+00:02:37.956 --> 00:02:40.776 A:middle
+to say making your app speak
+your customer's language.
+
+00:02:41.356 --> 00:02:42.866 A:middle
+I mean this both
+literally, in the sense
+
+00:02:42.866 --> 00:02:44.626 A:middle
+of translating the words
+that appear on the screen,
+
+00:02:44.916 --> 00:02:46.116 A:middle
+as well as more metaphorically,
+
+00:02:46.536 --> 00:02:49.016 A:middle
+translating linguistic concepts
+behind the things you wish
+
+00:02:49.016 --> 00:02:49.506 A:middle
+to translate.
+
+00:02:50.546 --> 00:02:52.886 A:middle
+So, it might be helpful
+actually to begin this section
+
+00:02:52.886 --> 00:02:55.486 A:middle
+with taking a look at how users
+interact with these settings
+
+00:02:55.526 --> 00:02:58.306 A:middle
+on our operating systems.
+
+00:02:58.306 --> 00:03:01.146 A:middle
+On the left, we have OS
+X, on the right, iOS.
+
+
+
+00:02:58.306 --> 00:03:01.146 A:middle
+On the left, we have OS
+X, on the right, iOS.
+
+00:03:01.406 --> 00:03:03.036 A:middle
+These are the language and
+region preference panes.
+
+00:03:03.626 --> 00:03:06.296 A:middle
+So, on the left-hand side
+here, on the OS X screenshot,
+
+00:03:06.296 --> 00:03:07.786 A:middle
+you will see the
+preferred languages list.
+
+00:03:08.396 --> 00:03:09.446 A:middle
+Now, in fact, it's
+important here
+
+00:03:09.446 --> 00:03:11.126 A:middle
+that this is an ordered
+list of languages.
+
+00:03:11.596 --> 00:03:13.596 A:middle
+Users can add multiple
+languages and,
+
+00:03:13.596 --> 00:03:15.626 A:middle
+if a given language is not
+available for the display
+
+00:03:15.626 --> 00:03:18.006 A:middle
+of your UI, it will
+actually fall back
+
+00:03:18.056 --> 00:03:18.856 A:middle
+to the language below it.
+
+00:03:19.706 --> 00:03:22.246 A:middle
+Here, for instance, the
+user has chosen Swiss German
+
+00:03:22.246 --> 00:03:23.236 A:middle
+as their primary language.
+
+00:03:23.666 --> 00:03:25.196 A:middle
+But Swiss German is,
+in fact, not a language
+
+00:03:25.196 --> 00:03:26.126 A:middle
+that we localize into.
+
+00:03:26.576 --> 00:03:28.686 A:middle
+Therefore, for this UI, we
+have fallen back to English.
+
+00:03:29.266 --> 00:03:30.996 A:middle
+Now, these fall backs are,
+in fact, somewhat common,
+
+00:03:31.046 --> 00:03:32.026 A:middle
+so you will have
+to think about this
+
+00:03:32.026 --> 00:03:34.136 A:middle
+from a developer
+perspective as well.
+
+00:03:34.296 --> 00:03:35.596 A:middle
+So, in addition, though,
+
+00:03:35.596 --> 00:03:37.496 A:middle
+to the language your
+app is displayed in,
+
+00:03:37.866 --> 00:03:39.566 A:middle
+we have additional
+regional preferences.
+
+00:03:40.476 --> 00:03:42.226 A:middle
+These are off to the
+right-hand side of OS X
+
+00:03:42.226 --> 00:03:44.536 A:middle
+and a little further down
+on the iOS screenshot.
+
+00:03:45.526 --> 00:03:48.366 A:middle
+Now, these actually inform
+the way the given units,
+
+00:03:48.756 --> 00:03:51.216 A:middle
+as well as times
+and calendar dates,
+
+00:03:51.246 --> 00:03:52.656 A:middle
+display in a given locale.
+
+00:03:53.556 --> 00:03:58.406 A:middle
+So, that is to say that
+it's not simply the language
+
+00:03:58.406 --> 00:03:59.416 A:middle
+that you are translating into,
+
+00:03:59.686 --> 00:04:02.126 A:middle
+but often the concepts
+behind the things you wish
+
+
+
+00:03:59.686 --> 00:04:02.126 A:middle
+but often the concepts
+behind the things you wish
+
+00:04:02.126 --> 00:04:02.576 A:middle
+to translate.
+
+00:04:03.586 --> 00:04:05.576 A:middle
+Now, for a lot more information
+about the differences
+
+00:04:05.576 --> 00:04:07.906 A:middle
+between the preferred language
+and the locale settings,
+
+00:04:08.536 --> 00:04:10.506 A:middle
+do check out last year's
+talk, "Advanced Topics
+
+00:04:10.506 --> 00:04:11.996 A:middle
+in Internationalization,"
+which goes
+
+00:04:11.996 --> 00:04:13.136 A:middle
+into a lot more detail
+about this.
+
+00:04:14.176 --> 00:04:16.846 A:middle
+So, we provide a lot of
+settings out of the box,
+
+00:04:16.846 --> 00:04:19.236 A:middle
+but we additionally allow users
+to customize these settings
+
+00:04:19.346 --> 00:04:21.026 A:middle
+if they have individual
+preferences.
+
+00:04:21.685 --> 00:04:24.896 A:middle
+So, new in iOS 9 and El
+Capitan, we have the ability
+
+00:04:24.896 --> 00:04:28.516 A:middle
+to customize your number
+system, as you can see here.
+
+00:04:29.226 --> 00:04:31.796 A:middle
+So let's say we have a user
+who is an Urdu speaker.
+
+00:04:32.396 --> 00:04:34.486 A:middle
+They have chosen as their
+primary language, Urdu,
+
+00:04:34.556 --> 00:04:36.406 A:middle
+and it has therefore
+fallen back to English
+
+00:04:37.356 --> 00:04:40.486 A:middle
+in our operating
+system display language.
+
+00:04:41.216 --> 00:04:45.116 A:middle
+By default this user would
+receive the standard Arabic
+
+00:04:45.116 --> 00:04:45.796 A:middle
+style numerals.
+
+00:04:47.466 --> 00:04:52.986 A:middle
+We allow, though, in iOS 9
+and OS X, El Capitan, to go in
+
+00:04:52.986 --> 00:04:54.146 A:middle
+and customize these settings
+
+00:04:54.196 --> 00:04:56.086 A:middle
+to override the existing
+numeric system.
+
+00:04:56.376 --> 00:04:57.916 A:middle
+A lot of people don't
+realize, in fact,
+
+00:04:57.916 --> 00:04:59.836 A:middle
+there are multiple numeric
+systems in use around the world.
+
+
+
+00:05:00.436 --> 00:05:02.026 A:middle
+On the top we have
+the Arabic system
+
+00:05:02.086 --> 00:05:04.846 A:middle
+and below we have the so-called
+Perso-Arabic numeral system,
+
+00:05:04.846 --> 00:05:06.046 A:middle
+commonly in use in
+the Middle East.
+
+00:05:06.646 --> 00:05:08.066 A:middle
+So a user can choose
+this setting,
+
+00:05:08.486 --> 00:05:10.236 A:middle
+and it has interesting
+repercussions throughout the
+
+00:05:10.236 --> 00:05:10.816 A:middle
+operating system.
+
+00:05:11.766 --> 00:05:13.516 A:middle
+Here, for instance, we
+have the Weather app.
+
+00:05:13.796 --> 00:05:16.266 A:middle
+Now, without any additional
+changes on the part
+
+00:05:16.266 --> 00:05:19.306 A:middle
+of the developer, all they have
+called is 'localized string
+
+00:05:19.306 --> 00:05:22.816 A:middle
+with format' or the NS
+number formatter APIs;
+
+00:05:22.816 --> 00:05:25.006 A:middle
+they have gotten these
+numeric changes for free.
+
+00:05:25.626 --> 00:05:27.896 A:middle
+On the left, we have a user
+using the Arabic numeral system,
+
+00:05:28.186 --> 00:05:29.946 A:middle
+and on the right, the
+Perso-Arabic numerals.
+
+00:05:30.786 --> 00:05:32.466 A:middle
+We noticed that every,
+every instance
+
+00:05:32.466 --> 00:05:36.556 A:middle
+of Arabic numerals have changed
+in this UI, including, in fact,
+
+00:05:36.646 --> 00:05:38.106 A:middle
+the timestamp at the
+top of the screen.
+
+00:05:39.456 --> 00:05:41.906 A:middle
+So, this is interesting,
+as a developer,
+
+00:05:42.176 --> 00:05:43.266 A:middle
+simply calling 'localized string
+
+00:05:43.266 --> 00:05:44.876 A:middle
+of format' you will get
+this behavior for free.
+
+00:05:45.866 --> 00:05:48.986 A:middle
+Now, in addition to the
+language that the user is seeing
+
+00:05:48.986 --> 00:05:51.636 A:middle
+on the screen, the user
+is also inputting text
+
+00:05:51.636 --> 00:05:52.536 A:middle
+into your application.
+
+00:05:54.056 --> 00:05:57.996 A:middle
+New in iOS 9 we add five new
+keyboards for Indic languages.
+
+00:05:59.016 --> 00:06:01.106 A:middle
+On the right, here, you
+see the Telugu keyboard.
+
+
+
+00:05:59.016 --> 00:06:01.106 A:middle
+On the right, here, you
+see the Telugu keyboard.
+
+00:06:02.016 --> 00:06:04.626 A:middle
+Now, additionally, we've
+added predictive typing
+
+00:06:04.626 --> 00:06:06.716 A:middle
+for four existing
+languages: Korean,
+
+00:06:06.836 --> 00:06:08.586 A:middle
+Mexican Spanish,
+Russian, and Turkish.
+
+00:06:09.596 --> 00:06:11.926 A:middle
+Now, from a developer
+perspective, it's interesting
+
+00:06:12.206 --> 00:06:13.086 A:middle
+to realize that, in fact,
+
+00:06:13.086 --> 00:06:15.736 A:middle
+often these characters are not
+what we would typically call
+
+00:06:15.736 --> 00:06:16.166 A:middle
+a character.
+
+00:06:16.726 --> 00:06:19.166 A:middle
+Here in the Telugu keyboard we
+have combining mark characters,
+
+00:06:19.456 --> 00:06:21.276 A:middle
+that, in fact, will combine
+with other characters
+
+00:06:21.276 --> 00:06:22.696 A:middle
+to represent a single
+visible unit.
+
+00:06:23.596 --> 00:06:24.746 A:middle
+So, we'll get into that
+a little bit later.
+
+00:06:26.226 --> 00:06:29.746 A:middle
+Now, so, we have seen how
+users can change the settings
+
+00:06:29.746 --> 00:06:30.576 A:middle
+on your operating system.
+
+00:06:31.096 --> 00:06:33.846 A:middle
+But, how then do localizers
+translate the strings
+
+00:06:33.916 --> 00:06:34.936 A:middle
+that users are seeing?
+
+00:06:35.816 --> 00:06:39.526 A:middle
+The primary interface for
+localizers is the .strings file.
+
+00:06:40.236 --> 00:06:42.016 A:middle
+The .strings file
+has this format.
+
+00:06:42.186 --> 00:06:45.406 A:middle
+First you have a comment,
+in C-style comment syntax,
+
+00:06:45.756 --> 00:06:49.006 A:middle
+followed by the development
+language on the left-hand side,
+
+00:06:49.006 --> 00:06:50.476 A:middle
+and the target language
+on the right.
+
+00:06:51.056 --> 00:06:54.906 A:middle
+Here we have a German.strings
+file.
+
+00:06:54.906 --> 00:06:57.116 A:middle
+Now, .strings files are
+stored in lproj directories
+
+00:06:57.116 --> 00:06:59.546 A:middle
+of your bundle, within
+the resources directory.
+
+
+
+00:07:00.176 --> 00:07:03.596 A:middle
+English has its own .strings
+files, as, here, does German.
+
+00:07:04.416 --> 00:07:07.486 A:middle
+Now, additionally, we allow
+you, and we have allowed you
+
+00:07:07.486 --> 00:07:09.976 A:middle
+since XCode 6, to
+export localizations
+
+00:07:09.976 --> 00:07:12.136 A:middle
+in the commonly used
+XLIFF file format.
+
+00:07:12.586 --> 00:07:15.536 A:middle
+You can then re-import those as
+strings files into your project.
+
+00:07:16.036 --> 00:07:17.616 A:middle
+But for a lot more
+information about this,
+
+00:07:17.616 --> 00:07:19.456 A:middle
+I would encourage you to
+check out last year's talk,
+
+00:07:19.516 --> 00:07:21.106 A:middle
+"Localizing with XCode 6."
+
+00:07:22.206 --> 00:07:24.956 A:middle
+So, we have seen how users
+are changing these settings.
+
+00:07:25.526 --> 00:07:28.576 A:middle
+We have seen how localizers
+can then translate the strings
+
+00:07:28.576 --> 00:07:30.196 A:middle
+that you see on your
+screen, but, then,
+
+00:07:30.356 --> 00:07:32.356 A:middle
+how do you as a developer
+make use of these settings?
+
+00:07:34.066 --> 00:07:36.136 A:middle
+Here's where NSLocalizedString
+comes into play.
+
+00:07:37.016 --> 00:07:38.836 A:middle
+In Objective-C, this is a macro.
+
+00:07:39.506 --> 00:07:41.936 A:middle
+In Swift, we promoted this
+to a first class function.
+
+00:07:42.636 --> 00:07:45.246 A:middle
+It takes five parameters, three
+of which have default values.
+
+00:07:45.776 --> 00:07:47.296 A:middle
+Interestingly, in
+Swift, we've made it
+
+00:07:47.296 --> 00:07:49.836 A:middle
+such that the comment
+argument is non-optional.
+
+00:07:50.606 --> 00:07:53.096 A:middle
+This is really emphasizing
+this is a critical argument.
+
+00:07:53.136 --> 00:07:54.986 A:middle
+It provides context
+for your translators.
+
+00:07:55.676 --> 00:07:58.486 A:middle
+A given word may be
+ambiguous in certain contexts
+
+00:07:58.486 --> 00:08:01.736 A:middle
+and this comment parameter will
+allow you to customize that.
+
+
+
+00:07:58.486 --> 00:08:01.736 A:middle
+and this comment parameter will
+allow you to customize that.
+
+00:08:02.616 --> 00:08:04.866 A:middle
+So, the key is the string
+you wish to translate,
+
+00:08:05.256 --> 00:08:07.266 A:middle
+and the comment is the
+comment explaining it.
+
+00:08:07.876 --> 00:08:10.046 A:middle
+Now, this works for simple
+localized strings, but,
+
+00:08:10.046 --> 00:08:12.006 A:middle
+additionally, we allow
+you to get a localized,
+
+00:08:12.076 --> 00:08:13.976 A:middle
+formatted string,
+that is to say,
+
+00:08:13.976 --> 00:08:16.116 A:middle
+a string with variable
+arguments to be populated.
+
+00:08:16.966 --> 00:08:19.326 A:middle
+So for that, you call
+'localized string with format,
+
+00:08:19.716 --> 00:08:24.276 A:middle
+passing in a format string with
+certain format arguments as well
+
+00:08:24.276 --> 00:08:26.576 A:middle
+as the arguments to populate the
+variables within that string.
+
+00:08:26.576 --> 00:08:29.936 A:middle
+And in fact, it's actually very
+common to use these together.
+
+00:08:30.456 --> 00:08:32.566 A:middle
+You call 'localized string
+with format' on the result
+
+00:08:32.566 --> 00:08:34.456 A:middle
+of having called
+NSLocalizedString.
+
+00:08:36.046 --> 00:08:37.525 A:middle
+Now, to see what this
+looks like in action,
+
+00:08:37.525 --> 00:08:42.196 A:middle
+it might be helpful
+to give a brief demo.
+
+00:08:42.905 --> 00:08:46.446 A:middle
+So, let's say we wish to
+translate the string location:X.
+
+00:08:47.056 --> 00:08:49.406 A:middle
+Now, let's also say that
+we have a variable location
+
+00:08:49.406 --> 00:08:50.966 A:middle
+which has been populated
+by our translators
+
+00:08:51.206 --> 00:08:52.766 A:middle
+to be the user's
+physical location.
+
+00:08:54.086 --> 00:08:55.506 A:middle
+Here is what our strings
+files may look like.
+
+00:08:56.056 --> 00:08:58.506 A:middle
+On the left-hand side is
+the string to be translated,
+
+00:08:58.506 --> 00:09:00.036 A:middle
+and on the right is
+the translated variant.
+
+
+
+00:08:58.506 --> 00:09:00.036 A:middle
+and on the right is
+the translated variant.
+
+00:09:01.146 --> 00:09:03.316 A:middle
+We see here that in fact the
+translated variant still has a
+
+00:09:03.316 --> 00:09:04.006 A:middle
+variable string.
+
+00:09:04.496 --> 00:09:06.536 A:middle
+Percent add is meant to be
+filled with a string variable.
+
+00:09:07.766 --> 00:09:11.296 A:middle
+So, this works in English -- we
+have location, San Francisco --
+
+00:09:11.806 --> 00:09:12.756 A:middle
+as well as in Japanese.
+
+00:09:13.196 --> 00:09:14.186 A:middle
+This is the equivalent string.
+
+00:09:15.446 --> 00:09:17.416 A:middle
+So, now that you know this,
+
+00:09:18.236 --> 00:09:19.706 A:middle
+you may have some
+certain assumptions
+
+00:09:19.706 --> 00:09:20.336 A:middle
+that come into your head.
+
+00:09:21.196 --> 00:09:24.216 A:middle
+One being that the arguments as
+presented to 'localized string
+
+00:09:24.216 --> 00:09:27.076 A:middle
+with format' will be in the same
+order that they are in English.
+
+00:09:27.926 --> 00:09:29.286 A:middle
+Now, we will see
+why this is wrong.
+
+00:09:29.726 --> 00:09:32.356 A:middle
+We call 'localized
+string with format' here
+
+00:09:32.356 --> 00:09:33.896 A:middle
+on the result of
+NSLocalizedString.
+
+00:09:34.026 --> 00:09:36.826 A:middle
+We wish to translate
+the string 'copy X is Y'
+
+00:09:37.196 --> 00:09:39.656 A:middle
+where X is the user name and Y
+is the thing we wish to copy.
+
+00:09:40.436 --> 00:09:41.926 A:middle
+Here, we're passing
+"hairForce1,"
+
+00:09:42.546 --> 00:09:44.786 A:middle
+which is Craig Federighi's
+chosen InstaMessage handle,
+
+00:09:45.316 --> 00:09:46.066 A:middle
+and "photos."
+
+00:09:46.616 --> 00:09:49.196 A:middle
+In our lproj, in
+our .strings files
+
+00:09:49.196 --> 00:09:52.136 A:middle
+within our different lprojs,
+a developer may assume
+
+00:09:52.136 --> 00:09:53.926 A:middle
+that the arguments will
+appear in the same order.
+
+00:09:54.756 --> 00:09:55.896 A:middle
+While this may work for English,
+
+00:09:56.596 --> 00:09:57.926 A:middle
+in fact it doesn't
+work for German.
+
+00:09:59.176 --> 00:10:01.236 A:middle
+These arguments need
+to be reversed
+
+
+
+00:09:59.176 --> 00:10:01.236 A:middle
+These arguments need
+to be reversed
+
+00:10:01.276 --> 00:10:02.176 A:middle
+to make sense in German.
+
+00:10:02.916 --> 00:10:05.006 A:middle
+So, here is where a
+localizer can actually go in
+
+00:10:05.416 --> 00:10:07.476 A:middle
+and add these positional
+formatting arguments.
+
+00:10:07.756 --> 00:10:09.636 A:middle
+This allows what was
+formerly the second argument
+
+00:10:09.716 --> 00:10:11.236 A:middle
+to become the first,
+and vice versa.
+
+00:10:12.136 --> 00:10:17.046 A:middle
+So, here, then, a developer
+doesn't have to do anything.
+
+00:10:17.276 --> 00:10:19.696 A:middle
+They call 'localized string with
+format' and NSLocalizedString.
+
+00:10:20.326 --> 00:10:22.066 A:middle
+But, it's important
+to keep in mind
+
+00:10:22.066 --> 00:10:23.566 A:middle
+from a developer perspective
+
+00:10:23.596 --> 00:10:26.676 A:middle
+that what you think may be the
+first character may not be.
+
+00:10:27.206 --> 00:10:29.766 A:middle
+So if you have an operation
+that operates on the assumption
+
+00:10:29.766 --> 00:10:32.076 A:middle
+that the arguments will come in
+in the same order, you may want
+
+00:10:32.156 --> 00:10:33.266 A:middle
+to rethink that assumption.
+
+00:10:34.906 --> 00:10:38.836 A:middle
+So, now we know how the
+.strings files are stored and in
+
+00:10:38.836 --> 00:10:39.906 A:middle
+which directories
+they're stored.
+
+00:10:40.616 --> 00:10:43.466 A:middle
+But at this point
+you may be tempted
+
+00:10:43.466 --> 00:10:45.356 A:middle
+to do something like this.
+
+00:10:45.656 --> 00:10:47.776 A:middle
+You set the language
+variable to the first object
+
+00:10:47.776 --> 00:10:49.006 A:middle
+in your preferred
+language's array.
+
+00:10:49.526 --> 00:10:51.576 A:middle
+This corresponds to the
+UI element we saw before,
+
+00:10:51.576 --> 00:10:52.746 A:middle
+the preferredLanguages list.
+
+00:10:53.446 --> 00:10:56.986 A:middle
+Additionally, you append
+the suffix lproj to this,
+
+00:10:57.316 --> 00:10:58.726 A:middle
+and you call a 'path
+for resource.'
+
+00:10:58.966 --> 00:11:02.856 A:middle
+Let's say we wish to
+localize a stop sign graphic.
+
+
+
+00:10:58.966 --> 00:11:02.856 A:middle
+Let's say we wish to
+localize a stop sign graphic.
+
+00:11:03.726 --> 00:11:05.776 A:middle
+So, here, let's say, though,
+
+00:11:05.776 --> 00:11:09.456 A:middle
+that our individual bundle
+only has an es.lproj,
+
+00:11:09.456 --> 00:11:10.376 A:middle
+corresponding to Spanish.
+
+00:11:11.006 --> 00:11:12.826 A:middle
+But let's say our user's
+preferred language is
+
+00:11:12.826 --> 00:11:13.646 A:middle
+Mexican Spanish.
+
+00:11:14.296 --> 00:11:18.056 A:middle
+Using this particular technique,
+the user will get nothing back.
+
+00:11:18.576 --> 00:11:19.646 A:middle
+Now, why is this?
+
+00:11:20.126 --> 00:11:22.286 A:middle
+Well, it's because we are
+not using the standard
+
+00:11:22.286 --> 00:11:23.346 A:middle
+NSBundle APIs.
+
+00:11:23.846 --> 00:11:26.376 A:middle
+NSBundle will intelligently
+fall back
+
+00:11:26.746 --> 00:11:29.946 A:middle
+to an available localization if
+one is not currently available.
+
+00:11:30.256 --> 00:11:32.496 A:middle
+So es-MX will fall back to es.
+
+00:11:33.186 --> 00:11:35.706 A:middle
+Additionally, we have other
+smart, fall back logics,
+
+00:11:35.706 --> 00:11:39.026 A:middle
+such as en-IN, Indian
+English, falling back to en-GB,
+
+00:11:39.076 --> 00:11:42.216 A:middle
+the English as used
+in the United Kingdom.
+
+00:11:42.986 --> 00:11:46.996 A:middle
+So if you call, if
+you call these APIs,
+
+00:11:47.516 --> 00:11:49.776 A:middle
+you will get back the
+appropriate resource
+
+00:11:50.166 --> 00:11:51.336 A:middle
+with the appropriate fall backs.
+
+00:11:51.646 --> 00:11:53.196 A:middle
+'Image for resource'
+will give you the image.
+
+00:11:53.666 --> 00:11:55.816 A:middle
+'Path for sound resource' will
+give you the sound resource.
+
+00:11:55.816 --> 00:11:57.416 A:middle
+And 'URL for resource,'
+the most generic,
+
+00:11:57.846 --> 00:12:00.196 A:middle
+will give you back any
+given other file format.
+
+
+
+00:11:57.846 --> 00:12:00.196 A:middle
+will give you back any
+given other file format.
+
+00:12:01.526 --> 00:12:05.116 A:middle
+So, we are seeing, here, using
+NSBundle APIs makes it easy
+
+00:12:05.116 --> 00:12:06.606 A:middle
+to find the resources
+you are interested in.
+
+00:12:07.426 --> 00:12:10.056 A:middle
+And, additionally,
+however, you may think
+
+00:12:10.056 --> 00:12:12.496 A:middle
+that there are certain things
+that can only be done in code.
+
+00:12:13.586 --> 00:12:15.216 A:middle
+Now, how many of you have
+written code like this?
+
+00:12:15.716 --> 00:12:16.876 A:middle
+You wish to say, you wish
+
+00:12:16.876 --> 00:12:19.176 A:middle
+to translate the string
+'X days remaining.'
+
+00:12:19.816 --> 00:12:22.146 A:middle
+We know that in English, if
+there is only a single day,
+
+00:12:22.436 --> 00:12:24.656 A:middle
+we use 'X day remaining,'
+and if there are two
+
+00:12:24.656 --> 00:12:26.586 A:middle
+or more we say 'blank
+days remaining.'
+
+00:12:27.356 --> 00:12:28.746 A:middle
+Now, this may work in English.
+
+00:12:28.866 --> 00:12:30.546 A:middle
+It works for one
+day and five days.
+
+00:12:31.046 --> 00:12:33.736 A:middle
+But other languages
+don't have the same logic
+
+00:12:34.106 --> 00:12:37.046 A:middle
+about how things are pluralized,
+given a given numeric component.
+
+00:12:37.766 --> 00:12:41.026 A:middle
+Here in Russian, for instance,
+we only have, we have one form
+
+00:12:41.026 --> 00:12:44.246 A:middle
+for one, we also have
+a form for few, many,
+
+00:12:44.246 --> 00:12:45.316 A:middle
+and even more than many.
+
+00:12:46.236 --> 00:12:48.726 A:middle
+So this simply doesn't
+work for languages
+
+00:12:48.726 --> 00:12:50.236 A:middle
+that have different
+pluralization rules.
+
+00:12:50.986 --> 00:12:51.846 A:middle
+Now, to help you with this,
+
+00:12:52.446 --> 00:12:53.946 A:middle
+we provide the string
+stick mechanism.
+
+00:12:54.146 --> 00:12:55.726 A:middle
+This has been around
+for a few releases
+
+00:12:56.126 --> 00:12:57.466 A:middle
+but it's important
+to emphasize here.
+
+00:12:58.576 --> 00:13:01.826 A:middle
+A string stick file is
+essentially a plist file
+
+
+
+00:12:58.576 --> 00:13:01.826 A:middle
+A string stick file is
+essentially a plist file
+
+00:13:01.886 --> 00:13:03.046 A:middle
+that you store within
+your project.
+
+00:13:03.486 --> 00:13:04.746 A:middle
+It's a localized resource,
+
+00:13:04.746 --> 00:13:06.556 A:middle
+so it falls within
+your lproj directory
+
+00:13:06.866 --> 00:13:08.336 A:middle
+for a given localization.
+
+00:13:09.026 --> 00:13:10.696 A:middle
+As well, you have a given key.
+
+00:13:10.916 --> 00:13:12.936 A:middle
+That key, in conjunction
+with a numeric argument,
+
+00:13:13.296 --> 00:13:15.696 A:middle
+will then have different
+realizations, depending on what
+
+00:13:15.696 --> 00:13:16.806 A:middle
+that numeric argument is.
+
+00:13:17.506 --> 00:13:18.856 A:middle
+I realize this is a lot of text,
+
+00:13:18.896 --> 00:13:21.536 A:middle
+especially when you add
+the Russian component here.
+
+00:13:23.546 --> 00:13:27.216 A:middle
+But, that is to say, you know
+English has one form for one
+
+00:13:27.356 --> 00:13:29.936 A:middle
+and a different form for
+other, whereas Russian
+
+00:13:29.986 --> 00:13:31.466 A:middle
+as one, few, many, and other.
+
+00:13:32.256 --> 00:13:34.806 A:middle
+Now, to format string stick
+files I would really encourage
+
+00:13:34.806 --> 00:13:36.236 A:middle
+you to check out the
+"Internationalization
+
+00:13:36.236 --> 00:13:37.186 A:middle
+and Localization Guide."
+
+00:13:37.596 --> 00:13:39.506 A:middle
+This goes into a lot more
+detail than we can provide here
+
+00:13:40.206 --> 00:13:42.316 A:middle
+as to how to format and create
+these files on your own.
+
+00:13:43.436 --> 00:13:46.026 A:middle
+So, using this is
+in fact super easy
+
+00:13:46.026 --> 00:13:47.046 A:middle
+from a developer perspective.
+
+00:13:47.976 --> 00:13:50.046 A:middle
+Again, all you call is a
+'localized string with format'
+
+00:13:50.136 --> 00:13:51.636 A:middle
+on the result of
+NSLocalizedString.
+
+00:13:52.336 --> 00:13:54.036 A:middle
+The string that you are
+passing in is the key
+
+00:13:54.036 --> 00:13:55.126 A:middle
+to the string stick dictionary.
+
+00:13:56.116 --> 00:13:59.366 A:middle
+Then you pass a numeric argument
+which will fill in the variable,
+
+00:13:59.366 --> 00:14:04.746 A:middle
+from the formatted string
+which has been returned to you.
+
+
+
+00:13:59.366 --> 00:14:04.746 A:middle
+from the formatted string
+which has been returned to you.
+
+00:14:05.116 --> 00:14:07.786 A:middle
+Therefore, it will do the right
+thing for English, for one, two,
+
+00:14:07.786 --> 00:14:09.816 A:middle
+and five days, as
+well as for Russian.
+
+00:14:10.186 --> 00:14:11.646 A:middle
+We note here that
+the form for two
+
+00:14:11.646 --> 00:14:12.986 A:middle
+and five is different
+in Russian.
+
+00:14:14.726 --> 00:14:16.866 A:middle
+So, more on the topic
+of string stick.
+
+00:14:17.696 --> 00:14:21.806 A:middle
+We have a new mechanism in
+iOS 9 to allow you to make use
+
+00:14:21.806 --> 00:14:24.006 A:middle
+of string stick for formatting
+strings on the screen.
+
+00:14:24.906 --> 00:14:27.726 A:middle
+It's also in El Capitan,
+I should say.
+
+00:14:27.726 --> 00:14:31.176 A:middle
+So, to begin that, let's say,
+this is a common problem,
+
+00:14:31.176 --> 00:14:34.236 A:middle
+and in your InterfaceBuilder you
+have set up a string to appear
+
+00:14:34.236 --> 00:14:36.506 A:middle
+in the center of your screen:
+"Welcome to the store!"
+
+00:14:37.386 --> 00:14:42.226 A:middle
+This may work on an iPad Air,
+but it may not work as well
+
+00:14:42.226 --> 00:14:45.546 A:middle
+on an iPhone 6, and it may work
+even worse on an iPod Touch.
+
+00:14:45.886 --> 00:14:48.406 A:middle
+Now, one way to solve this
+is in fact using auto layout
+
+00:14:48.446 --> 00:14:49.426 A:middle
+and certain constraints.
+
+00:14:49.426 --> 00:14:51.026 A:middle
+And, often, that's the
+solution to this problem.
+
+00:14:51.026 --> 00:14:51.776 A:middle
+We'll get into that later.
+
+00:14:52.336 --> 00:14:54.946 A:middle
+But in fact, another
+way to solve this is
+
+00:14:54.946 --> 00:14:58.456 A:middle
+by using a new mechanism,
+'variable width rule type.'
+
+00:14:59.116 --> 00:15:01.006 A:middle
+This is an entry you can
+add within your string stick
+
+
+
+00:14:59.116 --> 00:15:01.006 A:middle
+This is an entry you can
+add within your string stick
+
+00:15:01.006 --> 00:15:03.146 A:middle
+which will provide different
+realizations depending
+
+00:15:03.146 --> 00:15:05.316 A:middle
+on the amount of space
+available to you.
+
+00:15:06.126 --> 00:15:09.746 A:middle
+On iOS, this refers to the M
+width available on the screen,
+
+00:15:10.146 --> 00:15:12.806 A:middle
+that is to say, the
+visible width of a capital M
+
+00:15:12.806 --> 00:15:13.906 A:middle
+in the standard system font.
+
+00:15:14.716 --> 00:15:16.576 A:middle
+We have three different
+goal posts here.
+
+00:15:17.076 --> 00:15:19.106 A:middle
+We define if there
+are 20Ms available,
+
+00:15:19.566 --> 00:15:21.606 A:middle
+we present the string "Hi."
+
+00:15:21.606 --> 00:15:23.566 A:middle
+If they are 25, we
+give "Welcome."
+
+00:15:23.566 --> 00:15:25.396 A:middle
+And if there are 50, we
+say, "Welcome to the store!"
+
+00:15:26.396 --> 00:15:28.836 A:middle
+To use this, again as the
+developer, super easy.
+
+00:15:29.266 --> 00:15:32.986 A:middle
+You call NSLocalizedString
+on the key
+
+00:15:32.986 --> 00:15:34.116 A:middle
+within your string stick file.
+
+00:15:34.576 --> 00:15:36.376 A:middle
+Then you set it to
+a UI label object.
+
+00:15:37.946 --> 00:15:42.086 A:middle
+This works on iPad Air,
+iPhone 6, and iPod Touch,
+
+00:15:42.376 --> 00:15:43.736 A:middle
+and the realization
+is different.
+
+00:15:44.256 --> 00:15:46.656 A:middle
+Now, interestingly, we have
+used English for these examples
+
+00:15:47.056 --> 00:15:49.106 A:middle
+but in fact this has
+important repercussions
+
+00:15:49.106 --> 00:15:50.696 A:middle
+for international users as well.
+
+00:15:51.236 --> 00:15:53.926 A:middle
+Often a translation into another
+language will be much longer
+
+00:15:54.026 --> 00:15:54.746 A:middle
+than that in English.
+
+00:15:55.246 --> 00:15:56.786 A:middle
+So this allows you
+to flexibly choose
+
+00:15:56.786 --> 00:15:58.826 A:middle
+from among different
+translations for a given string
+
+00:15:59.126 --> 00:16:01.876 A:middle
+in a different language as well,
+so this is a super useful tool.
+
+
+
+00:15:59.126 --> 00:16:01.876 A:middle
+in a different language as well,
+so this is a super useful tool.
+
+00:16:03.536 --> 00:16:08.806 A:middle
+On OS X, things are a
+little bit different.
+
+00:16:08.806 --> 00:16:13.526 A:middle
+So, on OS X, likewise, you call
+NSLocalizedString and you pass
+
+00:16:13.526 --> 00:16:15.026 A:middle
+in the key to your
+string stick dictionary.
+
+00:16:15.716 --> 00:16:18.086 A:middle
+Then you call 'variant
+fitting presentation width.'
+
+00:16:18.696 --> 00:16:21.856 A:middle
+Now, on OS X, this
+integer variable is
+
+00:16:21.856 --> 00:16:24.626 A:middle
+in fact an arbitrary quantity.
+
+00:16:25.036 --> 00:16:27.076 A:middle
+This can be anything, as
+long as it's defined relative
+
+00:16:27.076 --> 00:16:29.696 A:middle
+to other quantities
+within the string stick.
+
+00:16:29.696 --> 00:16:36.226 A:middle
+So calling this with an integer
+value of 20 will yield "Hi," 25,
+
+00:16:36.256 --> 00:16:38.306 A:middle
+"Welcome," and 50,
+"Welcome to the store!"
+
+00:16:39.096 --> 00:16:42.206 A:middle
+So, in general then we have
+made it a lot easier for you
+
+00:16:42.206 --> 00:16:44.346 A:middle
+to translate strings as
+they appear on the screen
+
+00:16:44.696 --> 00:16:46.196 A:middle
+in a flexible manner
+that works for all
+
+00:16:46.196 --> 00:16:46.886 A:middle
+of the world's languages.
+
+00:16:48.496 --> 00:16:50.736 A:middle
+Next up, let's discuss
+formatting.
+
+00:16:51.516 --> 00:16:53.656 A:middle
+It's often not enough to
+simply translate the strings
+
+00:16:53.656 --> 00:16:54.566 A:middle
+that appear on your screen.
+
+00:16:55.116 --> 00:16:57.326 A:middle
+Additionally, you will have
+to think about the way dates,
+
+00:16:57.556 --> 00:17:01.726 A:middle
+numbers, times, and, new in
+iOS 9 and El Capitan, names.
+
+
+
+00:16:57.556 --> 00:17:01.726 A:middle
+numbers, times, and, new in
+iOS 9 and El Capitan, names.
+
+00:17:02.756 --> 00:17:05.266 A:middle
+So, to begin with,
+there is a right way
+
+00:17:05.266 --> 00:17:06.826 A:middle
+and a wrong way to
+format numbers.
+
+00:17:07.276 --> 00:17:09.435 A:middle
+Let's say we wish to present
+the constant pi to our users.
+
+00:17:10.496 --> 00:17:11.766 A:middle
+One naive way to
+do this would be
+
+00:17:11.766 --> 00:17:13.415 A:middle
+to initialize a string variable
+
+00:17:13.536 --> 00:17:17.606 A:middle
+with a format argument
+percent.3F, that is to say,
+
+00:17:17.606 --> 00:17:20.386 A:middle
+a 3 precision float argument.
+
+00:17:20.796 --> 00:17:22.866 A:middle
+This works in English, 3.142.
+
+00:17:24.286 --> 00:17:26.566 A:middle
+If you translate, if
+your user is running
+
+00:17:26.566 --> 00:17:27.906 A:middle
+in a German localization,
+however,
+
+00:17:28.455 --> 00:17:30.536 A:middle
+they get back this string.
+
+00:17:30.536 --> 00:17:32.366 A:middle
+This may appear correct
+at first glance,
+
+00:17:32.836 --> 00:17:36.296 A:middle
+but in fact a German user
+would read this 3,142,
+
+00:17:36.726 --> 00:17:39.696 A:middle
+because in German, the
+decimals digit and the, sorry,
+
+00:17:40.226 --> 00:17:42.346 A:middle
+the thousands digit and the
+decimals digit are, in fact,
+
+00:17:42.346 --> 00:17:44.736 A:middle
+switched, so that is to say,
+where we would use a period
+
+00:17:45.026 --> 00:17:47.306 A:middle
+in U.S. English, they use
+a comma, and vice versa.
+
+00:17:48.186 --> 00:17:49.606 A:middle
+So, to take advantage
+of this fact,
+
+00:17:50.036 --> 00:17:52.096 A:middle
+you can call 'localized
+string with format,
+
+00:17:52.366 --> 00:17:54.406 A:middle
+passing in the same format
+argument you used before.
+
+00:17:55.226 --> 00:17:57.066 A:middle
+Now this will have different
+realizations depending
+
+00:17:57.066 --> 00:17:57.916 A:middle
+on a user's locale.
+
+00:17:58.526 --> 00:18:00.386 A:middle
+And this means now
+the same thing
+
+
+
+00:17:58.526 --> 00:18:00.386 A:middle
+And this means now
+the same thing
+
+00:18:00.386 --> 00:18:02.046 A:middle
+for an English user
+and a German user.
+
+00:18:02.916 --> 00:18:04.576 A:middle
+Now, under the hood,
+'localized string
+
+00:18:04.576 --> 00:18:06.536 A:middle
+with format' is using
+NS number formatter.
+
+00:18:06.586 --> 00:18:10.796 A:middle
+And we have some improvements
+to NS number formatter we would
+
+00:18:10.796 --> 00:18:11.766 A:middle
+like to discuss as well.
+
+00:18:12.576 --> 00:18:16.986 A:middle
+New in iOS 9 and El Capitan
+are different number styles
+
+00:18:16.986 --> 00:18:18.076 A:middle
+for the NS number formatter.
+
+00:18:18.526 --> 00:18:20.466 A:middle
+In addition to the already
+existing 'currency style,
+
+00:18:20.826 --> 00:18:22.586 A:middle
+we now have 'currency
+ISO code style,
+
+00:18:23.116 --> 00:18:26.546 A:middle
+as well 'currency plural style'
+and 'currency accounting style.'
+
+00:18:27.296 --> 00:18:29.126 A:middle
+Interestingly here for
+'currency accounting style,
+
+00:18:29.206 --> 00:18:31.106 A:middle
+if you pass it a
+negative number,
+
+00:18:31.596 --> 00:18:33.716 A:middle
+it presents it surrounded
+by parentheses.
+
+00:18:34.076 --> 00:18:35.416 A:middle
+This is common in
+accounting circles.
+
+00:18:36.736 --> 00:18:39.766 A:middle
+As well, we added an 'ordinal
+style,' that is to say,
+
+00:18:39.766 --> 00:18:41.696 A:middle
+how the number would
+appear in an ordered list.
+
+00:18:42.136 --> 00:18:44.236 A:middle
+So from 42, you get back 42nd.
+
+00:18:45.456 --> 00:18:49.446 A:middle
+So, in addition to formatting
+numbers, another thing
+
+00:18:49.446 --> 00:18:51.856 A:middle
+that commonly goes wrong
+is formatting dates.
+
+00:18:51.856 --> 00:18:54.146 A:middle
+Now here is a very naive
+way to format a date.
+
+00:18:54.756 --> 00:18:57.246 A:middle
+We initialize an NS String
+with this format argument.
+
+00:18:57.726 --> 00:19:01.606 A:middle
+That is to say, this
+represents today's date at 9:00
+
+
+
+00:18:57.726 --> 00:19:01.606 A:middle
+That is to say, this
+represents today's date at 9:00
+
+00:19:01.606 --> 00:19:03.706 A:middle
+in the morning to a
+U.S. English speaker.
+
+00:19:04.976 --> 00:19:07.266 A:middle
+So in U.S. English we
+would get back this string,
+
+00:19:07.266 --> 00:19:08.836 A:middle
+which looks appropriate
+and correct.
+
+00:19:09.286 --> 00:19:12.276 A:middle
+But for an Italian user we
+get back the same string.
+
+00:19:12.846 --> 00:19:14.336 A:middle
+Now this means something
+very different in Italy.
+
+00:19:14.486 --> 00:19:18.996 A:middle
+This is in fact the 6th day of
+the 12th month, and furthermore,
+
+00:19:18.996 --> 00:19:20.906 A:middle
+the time itself could be
+a little more clarified.
+
+00:19:20.946 --> 00:19:21.796 A:middle
+We'll get to that in a second.
+
+00:19:22.166 --> 00:19:25.786 A:middle
+So, one way you could
+attempt to solve this is
+
+00:19:25.786 --> 00:19:27.176 A:middle
+by creating an NS
+date formatter.
+
+00:19:27.506 --> 00:19:29.466 A:middle
+Indeed, NS date formatter
+is the correct solution,
+
+00:19:29.466 --> 00:19:30.926 A:middle
+but this is the incorrect
+way to use it.
+
+00:19:31.566 --> 00:19:33.306 A:middle
+Here, we're setting a
+date format argument.
+
+00:19:33.426 --> 00:19:37.316 A:middle
+Now, the date format implies an
+explicit ordering of strings.
+
+00:19:37.736 --> 00:19:40.536 A:middle
+The exact variables that you
+provided here will then be
+
+00:19:40.536 --> 00:19:45.156 A:middle
+expanded in whatever locale you
+are using, to the exact sequence
+
+00:19:45.156 --> 00:19:45.956 A:middle
+of characters you see.
+
+00:19:46.546 --> 00:19:49.306 A:middle
+So, again, we are getting back
+the incorrect string in Italy.
+
+00:19:50.226 --> 00:19:52.006 A:middle
+Now, the easiest way
+to fix this is in fact
+
+00:19:52.006 --> 00:19:54.026 A:middle
+by setting a date
+style and a time style
+
+00:19:54.026 --> 00:19:55.216 A:middle
+on your NS date formatter.
+
+00:19:55.896 --> 00:19:58.456 A:middle
+We provide certain out of the
+box styles for NS date formatter
+
+00:19:58.456 --> 00:20:02.376 A:middle
+that allow you to specify
+the amount of space available
+
+
+
+00:19:58.456 --> 00:20:02.376 A:middle
+that allow you to specify
+the amount of space available
+
+00:20:02.376 --> 00:20:04.386 A:middle
+to you relative to the
+width of the string.
+
+00:20:05.176 --> 00:20:07.566 A:middle
+So here we call, here
+we set ShortStyle
+
+00:20:07.846 --> 00:20:09.086 A:middle
+for both date and time style.
+
+00:20:09.786 --> 00:20:12.926 A:middle
+What we get back in Italy,
+therefore, is the same string
+
+00:20:13.296 --> 00:20:15.736 A:middle
+but with the variables flipped.
+
+00:20:16.226 --> 00:20:19.406 A:middle
+So that is to say, this
+now reads the 12th day
+
+00:20:19.406 --> 00:20:21.456 A:middle
+of the 6th month
+to a user in Italy,
+
+00:20:21.926 --> 00:20:24.166 A:middle
+which is the same thing would
+read as an English-US user.
+
+00:20:25.136 --> 00:20:26.896 A:middle
+Now, sometimes, though,
+these date styles
+
+00:20:26.896 --> 00:20:28.466 A:middle
+and time styles aren't
+as specific
+
+00:20:28.466 --> 00:20:29.456 A:middle
+as you may need them to be.
+
+00:20:30.086 --> 00:20:33.256 A:middle
+For that, new in iOS 9 and
+El Capitan, we allow you
+
+00:20:33.296 --> 00:20:35.686 A:middle
+to set 'localized date
+format from template.'
+
+00:20:36.596 --> 00:20:40.266 A:middle
+Here you provide a template and
+the variables are rearranged
+
+00:20:40.406 --> 00:20:41.986 A:middle
+as appropriate for
+your given locale.
+
+00:20:43.036 --> 00:20:45.086 A:middle
+Now this is when the
+individual styles
+
+00:20:45.086 --> 00:20:46.756 A:middle
+out of the box don't
+provide enough information.
+
+00:20:47.116 --> 00:20:48.436 A:middle
+Here, for instance,
+the user wishes
+
+00:20:48.476 --> 00:20:50.686 A:middle
+to present the second
+string as well,
+
+00:20:51.086 --> 00:20:53.266 A:middle
+which doesn't typically
+come with a short style.
+
+00:20:54.406 --> 00:20:57.546 A:middle
+So using this template, we
+have allowed for 24-hour time
+
+00:20:57.546 --> 00:21:03.636 A:middle
+as well, as well as rearranging
+the month and day arguments.
+
+
+
+00:20:57.546 --> 00:21:03.636 A:middle
+as well, as well as rearranging
+the month and day arguments.
+
+00:21:04.796 --> 00:21:07.076 A:middle
+So, we have looked at how
+you can format numbers,
+
+00:21:07.156 --> 00:21:08.096 A:middle
+how you can format dates,
+
+00:21:08.486 --> 00:21:10.426 A:middle
+but also important is
+how you format units.
+
+00:21:12.186 --> 00:21:15.476 A:middle
+Now, this is in fact a
+very naive example but one
+
+00:21:15.476 --> 00:21:17.586 A:middle
+which is very real and we
+have seen in the real world.
+
+00:21:18.216 --> 00:21:19.716 A:middle
+Let's say you wish to
+translate the quantity
+
+00:21:19.716 --> 00:21:21.866 A:middle
+"6 pounds" to another language.
+
+00:21:22.586 --> 00:21:24.616 A:middle
+One very naive way to
+solve this would be in fact
+
+00:21:24.616 --> 00:21:26.166 A:middle
+to literally translate
+the string.
+
+00:21:26.646 --> 00:21:28.616 A:middle
+You have on the left-hand
+side, "X pounds.'
+
+00:21:28.976 --> 00:21:31.666 A:middle
+We have translated this for an
+Italian user to "X chilogrammi,"
+
+00:21:31.666 --> 00:21:34.926 A:middle
+that is to say the Italian
+word for the word 'kilogram.'
+
+00:21:35.636 --> 00:21:37.856 A:middle
+Now, this may be
+obviously very wrong.
+
+00:21:37.856 --> 00:21:38.956 A:middle
+In English we have 6 pounds.
+
+00:21:38.956 --> 00:21:39.796 A:middle
+In Italian we have 6 kilograms.
+
+00:21:39.796 --> 00:21:40.456 A:middle
+These quantities are not equal.
+
+00:21:40.456 --> 00:21:41.996 A:middle
+6 pounds is not equal
+to 6 kilograms.
+
+00:21:41.996 --> 00:21:43.956 A:middle
+These quantities are
+not, in fact, equal.
+
+00:21:43.956 --> 00:21:47.016 A:middle
+6 pounds as a unit is
+not equal to 6 kilograms.
+
+00:21:47.016 --> 00:21:48.916 A:middle
+So this is a very
+wrong way to do this.
+
+00:21:49.686 --> 00:21:52.236 A:middle
+An easier way is to
+use NSMassFormatter.
+
+00:21:52.696 --> 00:21:55.486 A:middle
+Now, NSMassFormatter, as
+well as NSEnergyFormatter
+
+00:21:55.796 --> 00:21:57.836 A:middle
+and LengthFormatter, assume
+
+00:21:57.836 --> 00:22:00.116 A:middle
+that under the hood you are
+working in metric units.
+
+
+
+00:21:57.836 --> 00:22:00.116 A:middle
+that under the hood you are
+working in metric units.
+
+00:22:00.546 --> 00:22:03.606 A:middle
+So when you assign a float
+here to the variable weight,
+
+00:22:03.606 --> 00:22:05.536 A:middle
+it assumes that you are
+working with kilograms.
+
+00:22:06.196 --> 00:22:08.156 A:middle
+So you initialize
+an NSMassFormatter,
+
+00:22:08.566 --> 00:22:11.016 A:middle
+you set its unitStyle to
+long, and then, furthermore,
+
+00:22:11.016 --> 00:22:14.846 A:middle
+you call 'string from kilograms'
+on the weight in kilograms.
+
+00:22:15.506 --> 00:22:18.406 A:middle
+This will return back
+in English 44.092,
+
+00:22:19.306 --> 00:22:21.056 A:middle
+which is in fact a
+conversion of the units
+
+00:22:21.346 --> 00:22:22.776 A:middle
+into those used in
+the United States.
+
+00:22:23.676 --> 00:22:26.046 A:middle
+Furthermore, in Italian you
+will get back 20 chilogrammi
+
+00:22:26.366 --> 00:22:28.946 A:middle
+which is both the
+correct unit as well
+
+00:22:28.946 --> 00:22:31.026 A:middle
+as the correct translated
+term for the amount of weight
+
+00:22:31.026 --> 00:22:31.576 A:middle
+that you are providing.
+
+00:22:32.346 --> 00:22:35.236 A:middle
+So using NSMassFormatter
+makes it super easy to present
+
+00:22:35.236 --> 00:22:36.296 A:middle
+in units for your user.
+
+00:22:37.236 --> 00:22:40.336 A:middle
+Now, new in iOS 9, we allow you
+
+00:22:40.336 --> 00:22:43.706 A:middle
+to format names --
+iOS 9 and El Capitan.
+
+00:22:44.396 --> 00:22:46.916 A:middle
+Now, to see why this is
+useful, let's take a look
+
+00:22:46.916 --> 00:22:47.926 A:middle
+at two names side by side.
+
+00:22:48.346 --> 00:22:50.636 A:middle
+The first is "Grace
+Murray Hopper."
+
+00:22:51.066 --> 00:22:52.376 A:middle
+This is a famous
+computer scientist
+
+00:22:52.376 --> 00:22:52.986 A:middle
+from the United States.
+
+00:22:52.986 --> 00:22:56.726 A:middle
+She coined the term "bug" and
+invented the first compiler.
+
+00:22:57.496 --> 00:23:00.426 A:middle
+Additionally, let's look at a
+Chinese name, "Wang Dongling."
+
+
+
+00:22:57.496 --> 00:23:00.426 A:middle
+Additionally, let's look at a
+Chinese name, "Wang Dongling."
+
+00:23:01.096 --> 00:23:02.606 A:middle
+Now, this is a famous
+calligrapher,
+
+00:23:02.726 --> 00:23:04.816 A:middle
+who does the calligraphy outside
+of the Hangzhou Apple Store.
+
+00:23:05.526 --> 00:23:07.426 A:middle
+So, both of these have
+three parts to them.
+
+00:23:08.016 --> 00:23:10.486 A:middle
+But the way we interpret them
+is important and different.
+
+00:23:11.886 --> 00:23:14.746 A:middle
+In English we would
+typically call this the first,
+
+00:23:14.916 --> 00:23:16.326 A:middle
+the middle, and the last name.
+
+00:23:16.546 --> 00:23:18.466 A:middle
+We will see what
+happens when we attempt
+
+00:23:18.466 --> 00:23:20.996 A:middle
+to apply this concept
+for a Chinese user.
+
+00:23:21.076 --> 00:23:25.876 A:middle
+What was formerly the last name
+is now, spatially speaking,
+
+00:23:25.876 --> 00:23:26.836 A:middle
+first from left to right.
+
+00:23:27.556 --> 00:23:29.706 A:middle
+The middle name itself
+doesn't exist at all.
+
+00:23:29.706 --> 00:23:32.976 A:middle
+And what's formerly the first
+name is now, spatially speaking
+
+00:23:33.066 --> 00:23:37.786 A:middle
+from left to right,
+the last name.
+
+00:23:38.366 --> 00:23:41.716 A:middle
+So, we can see here that
+terminology is important as well
+
+00:23:41.716 --> 00:23:44.026 A:middle
+as the labels we choose to
+apply to these concepts.
+
+00:23:44.826 --> 00:23:48.406 A:middle
+So we are introducing NS
+Person Name Components
+
+00:23:48.606 --> 00:23:50.326 A:middle
+and NS Person Name
+Components Formatter.
+
+00:23:50.706 --> 00:23:51.806 A:middle
+We have already gotten the joke
+
+00:23:51.806 --> 00:23:53.236 A:middle
+that people can't
+fit this into Tweets.
+
+00:23:53.346 --> 00:23:55.726 A:middle
+But it's a little long and it's
+a little difficult to work with,
+
+00:23:55.756 --> 00:23:58.036 A:middle
+but, that is to say, it's very
+precise as to what it does.
+
+00:23:58.096 --> 00:23:59.366 A:middle
+It formats person names.
+
+
+
+00:24:00.456 --> 00:24:01.926 A:middle
+So here is how you would use it.
+
+00:24:02.626 --> 00:24:05.486 A:middle
+You initialize an NS Person
+Name Components object.
+
+00:24:06.006 --> 00:24:07.806 A:middle
+You populate the given
+name, the middle name,
+
+00:24:07.806 --> 00:24:08.846 A:middle
+and the family name fields.
+
+00:24:08.956 --> 00:24:10.606 A:middle
+Here is how you would do
+this for an English-US user.
+
+00:24:11.406 --> 00:24:13.316 A:middle
+For a Russian user,
+then, you would populate
+
+00:24:13.606 --> 00:24:16.336 A:middle
+"Fyodor Mikhailovich
+Dostoyevsky."
+
+00:24:17.056 --> 00:24:18.906 A:middle
+Likewise, you are
+populating the same fields.
+
+00:24:19.776 --> 00:24:22.756 A:middle
+Here is then how
+you would format it.
+
+00:24:22.946 --> 00:24:25.776 A:middle
+You initialize as NS Person Name
+Components Formatter object.
+
+00:24:26.306 --> 00:24:27.886 A:middle
+As we've seen with
+other NS formatters,
+
+00:24:27.936 --> 00:24:28.986 A:middle
+it has a style component.
+
+00:24:29.376 --> 00:24:30.706 A:middle
+Here we specify short style.
+
+00:24:31.416 --> 00:24:33.376 A:middle
+Then you call 'string from
+person name components'
+
+00:24:33.376 --> 00:24:34.926 A:middle
+on your Person Name
+Components object.
+
+00:24:35.886 --> 00:24:37.736 A:middle
+The result of this
+call is the following,
+
+00:24:38.066 --> 00:24:42.166 A:middle
+for our five available styles:
+default, short, medium, long,
+
+00:24:42.166 --> 00:24:43.966 A:middle
+and abbreviated, we have
+done the right thing
+
+00:24:43.966 --> 00:24:44.656 A:middle
+for each language.
+
+00:24:44.656 --> 00:24:46.246 A:middle
+A couple of things to note here,
+
+00:24:46.386 --> 00:24:49.386 A:middle
+that in fact the short style
+differs depending on, one,
+
+00:24:49.386 --> 00:24:51.656 A:middle
+the user's locale,
+and depending as well
+
+00:24:51.656 --> 00:24:53.726 A:middle
+on the individual
+user's override settings
+
+00:24:53.726 --> 00:24:55.676 A:middle
+within the mail, contacts,
+and calendar settings.
+
+00:24:56.446 --> 00:24:59.266 A:middle
+As well, for Russian
+names, we have determined
+
+00:24:59.266 --> 00:25:02.026 A:middle
+that abbreviated names in
+this form with first, middle,
+
+
+
+00:24:59.266 --> 00:25:02.026 A:middle
+that abbreviated names in
+this form with first, middle,
+
+00:25:02.026 --> 00:25:02.946 A:middle
+and last all shortened
+
+00:25:02.946 --> 00:25:05.396 A:middle
+to the first character doesn't
+really exist and so, therefore,
+
+00:25:05.396 --> 00:25:07.046 A:middle
+we have fallen back
+to the short style.
+
+00:25:07.926 --> 00:25:10.476 A:middle
+So it's really easy
+out of the box
+
+00:25:10.476 --> 00:25:12.166 A:middle
+to format names for your users.
+
+00:25:14.016 --> 00:25:17.446 A:middle
+So that's numbers, dates,
+times, units, and names.
+
+00:25:18.076 --> 00:25:20.346 A:middle
+We have looked at how
+you can translate now,
+
+00:25:20.886 --> 00:25:22.166 A:middle
+translate the strings
+in your UI,
+
+00:25:22.466 --> 00:25:24.786 A:middle
+how you can format the
+units the users are seeing.
+
+00:25:25.366 --> 00:25:27.706 A:middle
+Additionally important is
+how you handle text received
+
+00:25:27.876 --> 00:25:28.456 A:middle
+from the user.
+
+00:25:31.036 --> 00:25:33.516 A:middle
+Now, this involves looking
+at what a character is,
+
+00:25:33.956 --> 00:25:37.406 A:middle
+how it changes based on
+casing, how you search
+
+00:25:37.406 --> 00:25:39.616 A:middle
+for that character, and,
+as well, how you transform
+
+00:25:39.616 --> 00:25:42.136 A:middle
+that into another
+script, for instance.
+
+00:25:43.186 --> 00:25:44.306 A:middle
+To begin with, with
+this section,
+
+00:25:44.306 --> 00:25:45.636 A:middle
+let's ask a philosophical
+question.
+
+00:25:45.916 --> 00:25:46.896 A:middle
+What is a character?
+
+00:25:47.746 --> 00:25:49.306 A:middle
+To begin with, let's ask,
+
+00:25:49.386 --> 00:25:51.216 A:middle
+how many characters
+is this emoticon?
+
+00:25:51.856 --> 00:25:54.636 A:middle
+This was introduced recently
+on iOS and it's possible
+
+00:25:54.636 --> 00:25:56.266 A:middle
+to type this on our keyboards.
+
+00:25:57.886 --> 00:25:59.706 A:middle
+The answer here is not
+immediately straightforward,
+
+00:25:59.706 --> 00:26:01.636 A:middle
+although visually it
+constitutes a single unit.
+
+
+
+00:25:59.706 --> 00:26:01.636 A:middle
+although visually it
+constitutes a single unit.
+
+00:26:02.136 --> 00:26:05.276 A:middle
+Under the hood it's represented
+by one, two, three, four, five,
+
+00:26:05.656 --> 00:26:09.926 A:middle
+six, seven, eight
+individual characters.
+
+00:26:10.726 --> 00:26:14.336 A:middle
+Now, actually these are Unicode
+code points and depending
+
+00:26:14.336 --> 00:26:16.496 A:middle
+on the encoding you are using
+it may in fact be more than 8.
+
+00:26:16.496 --> 00:26:18.666 A:middle
+It may be 11, for instance, but,
+
+00:26:18.766 --> 00:26:21.586 A:middle
+that is to say you shouldn't
+have to think about this.
+
+00:26:23.236 --> 00:26:28.026 A:middle
+Now, one place where this
+becomes really obvious is
+
+00:26:28.026 --> 00:26:29.336 A:middle
+in enumerating over a string.
+
+00:26:29.896 --> 00:26:31.396 A:middle
+Let's say you have a
+string test followed
+
+00:26:31.396 --> 00:26:33.956 A:middle
+by the emoji character
+we just discussed.
+
+00:26:34.676 --> 00:26:38.426 A:middle
+Now you wish to enumerate over
+each character within the string
+
+00:26:38.426 --> 00:26:39.916 A:middle
+and call 'character at index.'
+
+00:26:40.826 --> 00:26:42.996 A:middle
+This will return the
+unichars constituting the
+
+00:26:42.996 --> 00:26:43.736 A:middle
+individual string.
+
+00:26:44.336 --> 00:26:45.376 A:middle
+But this isn't what you want.
+
+00:26:45.376 --> 00:26:49.026 A:middle
+In fact, this presents
+question mark characters
+
+00:26:49.026 --> 00:26:51.556 A:middle
+and sometimes three unprintable
+characters, and there is a heart
+
+00:26:51.556 --> 00:26:53.586 A:middle
+in the middle for some
+reason, so it's not,
+
+00:26:54.506 --> 00:26:56.366 A:middle
+this is definitely the
+incorrect way to do this.
+
+00:26:57.026 --> 00:26:58.586 A:middle
+The correct way to
+enumerate over a string is
+
+00:26:58.586 --> 00:27:00.566 A:middle
+to call 'enumerate
+substrings in range.'
+
+
+
+00:26:58.586 --> 00:27:00.566 A:middle
+to call 'enumerate
+substrings in range.'
+
+00:27:01.106 --> 00:27:04.006 A:middle
+Additionally, you pass the 'by
+composed character sequences.'
+
+00:27:04.406 --> 00:27:06.206 A:middle
+This makes it such that the
+
+00:27:06.206 --> 00:27:08.726 A:middle
+under the hood representation
+matches the user's visual
+
+00:27:08.726 --> 00:27:09.876 A:middle
+representation of the character.
+
+00:27:10.476 --> 00:27:11.866 A:middle
+Therefore, when we
+call it on this string,
+
+00:27:11.866 --> 00:27:13.656 A:middle
+we get back exactly
+six characters.
+
+00:27:14.756 --> 00:27:17.816 A:middle
+So this is how you would
+enumerate over a string.
+
+00:27:18.506 --> 00:27:20.656 A:middle
+But sometimes you wish
+to transform that string
+
+00:27:20.656 --> 00:27:21.436 A:middle
+into a different form.
+
+00:27:22.786 --> 00:27:26.236 A:middle
+New in iOS 9 we are
+providing the ability,
+
+00:27:26.236 --> 00:27:28.886 A:middle
+iOS 9 and El Capitan, we
+are providing the ability
+
+00:27:28.886 --> 00:27:29.946 A:middle
+to transform that string.
+
+00:27:30.896 --> 00:27:32.766 A:middle
+So let's say your
+string is "istanbul."
+
+00:27:33.566 --> 00:27:35.086 A:middle
+A naïve way to capitalize
+the string would be
+
+00:27:35.086 --> 00:27:39.156 A:middle
+to simply call the
+'capitalize string' property.
+
+00:27:39.956 --> 00:27:41.796 A:middle
+For English-US users
+this may look correct.
+
+00:27:41.966 --> 00:27:43.696 A:middle
+Indeed, this is,
+for English users,
+
+00:27:43.696 --> 00:27:44.856 A:middle
+the correct way to
+capitalize this.
+
+00:27:45.226 --> 00:27:47.826 A:middle
+But for a speaker of Turkish,
+the dotted lower case i
+
+00:27:47.826 --> 00:27:49.696 A:middle
+in fact becomes a
+dotted upper case I.
+
+00:27:50.746 --> 00:27:53.156 A:middle
+To immediately gain
+the benefit of this,
+
+00:27:53.476 --> 00:27:55.796 A:middle
+you can simply call
+'localized capitalized string'
+
+00:27:56.586 --> 00:27:57.516 A:middle
+on that string.
+
+00:27:57.756 --> 00:27:59.586 A:middle
+And, therefore, you will get
+the appropriate capitalized
+
+00:27:59.586 --> 00:28:01.386 A:middle
+representation of the
+string, that is to say,
+
+
+
+00:27:59.586 --> 00:28:01.386 A:middle
+representation of the
+string, that is to say,
+
+00:28:01.476 --> 00:28:03.916 A:middle
+the string with the first
+character upper cased.
+
+00:28:04.796 --> 00:28:08.186 A:middle
+Now, in addition to
+'localized capitalized string,
+
+00:28:08.186 --> 00:28:10.496 A:middle
+we are also providing
+'localized uppercase string'
+
+00:28:10.496 --> 00:28:11.706 A:middle
+and 'localized lowercase
+string.'
+
+00:28:11.796 --> 00:28:13.476 A:middle
+Here is what these look like.
+
+00:28:14.706 --> 00:28:17.166 A:middle
+So you can out of the box
+make use of these characters
+
+00:28:17.166 --> 00:28:18.796 A:middle
+by simply using the
+localized variants
+
+00:28:19.096 --> 00:28:20.416 A:middle
+of the already existing APIs.
+
+00:28:21.446 --> 00:28:24.606 A:middle
+So, that's how you transform
+the case of your string,
+
+00:28:24.606 --> 00:28:26.966 A:middle
+but let's say you wish to search
+for a string within another.
+
+00:28:27.836 --> 00:28:28.856 A:middle
+Here is also where we get back
+
+00:28:28.856 --> 00:28:30.416 A:middle
+to our question,
+what is a character?
+
+00:28:31.676 --> 00:28:35.066 A:middle
+And what are our users
+expecting when they expect
+
+00:28:35.066 --> 00:28:36.116 A:middle
+to search for a given string?
+
+00:28:36.846 --> 00:28:39.616 A:middle
+So, let's say we have the
+variable here representing the
+
+00:28:39.616 --> 00:28:40.516 A:middle
+German word "uber."
+
+00:28:41.236 --> 00:28:42.336 A:middle
+Now this has a capital U,
+
+00:28:42.736 --> 00:28:44.356 A:middle
+and happens to use
+an umlaut over the U.
+
+00:28:45.186 --> 00:28:48.546 A:middle
+A user might expect, given the
+way we typically write this word
+
+00:28:48.546 --> 00:28:51.896 A:middle
+in English, that lower case
+"uber" will find the string.
+
+00:28:52.776 --> 00:28:56.566 A:middle
+As a developer you may call
+'range of string' to find it,
+
+00:28:57.106 --> 00:28:58.516 A:middle
+when in fact this
+will return nil.
+
+00:28:59.646 --> 00:29:02.106 A:middle
+The correct way to search
+for this, and new in iOS 9
+
+
+
+00:28:59.646 --> 00:29:02.106 A:middle
+The correct way to search
+for this, and new in iOS 9
+
+00:29:02.106 --> 00:29:05.156 A:middle
+and El Capitan, is 'localized
+standard range of string.'
+
+00:29:05.926 --> 00:29:07.836 A:middle
+This will allow you to
+search for this string
+
+00:29:07.836 --> 00:29:11.466 A:middle
+within the other using
+diacritic insensitivity as well
+
+00:29:11.466 --> 00:29:13.636 A:middle
+as capitalization insensitivity.
+
+00:29:14.476 --> 00:29:16.376 A:middle
+Additionally, it
+provides allowances
+
+00:29:16.376 --> 00:29:17.606 A:middle
+for a given user's locale.
+
+00:29:18.346 --> 00:29:20.866 A:middle
+So, here, we've found the
+lowercase string "uber"
+
+00:29:20.956 --> 00:29:25.886 A:middle
+within 'capital U-umlaut-ber' by
+simply calling these new APIs.
+
+00:29:27.276 --> 00:29:29.976 A:middle
+So, in addition to
+searching through the string,
+
+00:29:30.366 --> 00:29:32.666 A:middle
+sometimes you may wish to
+transform the entire string.
+
+00:29:33.846 --> 00:29:35.486 A:middle
+Now, this is where
+transforms come in.
+
+00:29:36.246 --> 00:29:38.436 A:middle
+Transforms allow you to
+translate between an uppercase
+
+00:29:38.436 --> 00:29:40.156 A:middle
+and a lowercase variant
+of an entire string.
+
+00:29:40.736 --> 00:29:43.656 A:middle
+Additionally they allow you
+to do Unicode normalization.
+
+00:29:43.656 --> 00:29:45.956 A:middle
+That is to say, they take
+out the diacritic characters
+
+00:29:45.956 --> 00:29:47.176 A:middle
+and separate them
+out, such that A
+
+00:29:47.176 --> 00:29:50.186 A:middle
+with an umlaut becomes
+A plus umlaut character.
+
+00:29:51.096 --> 00:29:52.006 A:middle
+Additionally, we allow you
+
+00:29:52.006 --> 00:29:54.566 A:middle
+to script-to-script
+conversion, or transliteration.
+
+00:29:54.566 --> 00:29:57.126 A:middle
+That is to say, going from
+Chinese Han characters
+
+00:29:57.426 --> 00:29:58.626 A:middle
+to their Latin representation.
+
+00:29:59.366 --> 00:30:00.886 A:middle
+Now, formerly this was
+available to you only
+
+
+
+00:29:59.366 --> 00:30:00.886 A:middle
+Now, formerly this was
+available to you only
+
+00:30:00.886 --> 00:30:02.106 A:middle
+at the Core Foundation level.
+
+00:30:03.256 --> 00:30:06.876 A:middle
+New in iOS 9 and El Capitan,
+we allow you to access this
+
+00:30:06.876 --> 00:30:07.756 A:middle
+at the Foundation level.
+
+00:30:09.206 --> 00:30:11.176 A:middle
+You simply call a 'string
+by applying transform.'
+
+00:30:12.216 --> 00:30:14.406 A:middle
+Then you provide a
+string or here a constant,
+
+00:30:15.376 --> 00:30:18.836 A:middle
+representing how you wish
+to transform the string.
+
+00:30:19.446 --> 00:30:22.206 A:middle
+Here, we wish to translate
+the emoji character or, sorry,
+
+00:30:22.206 --> 00:30:25.376 A:middle
+transliterate the emoji
+character "thumbs up"
+
+00:30:25.456 --> 00:30:27.056 A:middle
+into an XML representation.
+
+00:30:28.606 --> 00:30:31.426 A:middle
+To do this, it's as
+simple as calling 'string
+
+00:30:31.426 --> 00:30:32.346 A:middle
+by applying transform'
+
+00:30:32.566 --> 00:30:35.176 A:middle
+and provide 'NS String
+Transform to XML Hex.'
+
+00:30:35.906 --> 00:30:39.406 A:middle
+We additionally provide such
+transforms as Han characters
+
+00:30:39.406 --> 00:30:43.796 A:middle
+to Latin, and between different
+European scripts as well.
+
+00:30:44.536 --> 00:30:47.286 A:middle
+So it's super easy,
+then, to translate,
+
+00:30:47.286 --> 00:30:49.926 A:middle
+transliterate your string
+from one script to another,
+
+00:30:49.926 --> 00:30:53.096 A:middle
+and provide transforms from
+your individual characters
+
+00:30:53.256 --> 00:30:54.356 A:middle
+to different representations.
+
+00:30:55.346 --> 00:30:58.916 A:middle
+So, that's how you handle text
+within our operating system
+
+00:30:59.366 --> 00:31:00.596 A:middle
+as received from the user.
+
+
+
+00:30:59.366 --> 00:31:00.596 A:middle
+as received from the user.
+
+00:31:01.546 --> 00:31:03.086 A:middle
+Additionally important
+is the way you lay
+
+00:31:03.086 --> 00:31:04.726 A:middle
+out visual elements
+on the screen.
+
+00:31:06.446 --> 00:31:10.236 A:middle
+Now, here is where
+auto layout comes in.
+
+00:31:11.226 --> 00:31:12.976 A:middle
+Auto layout was released
+several releases ago
+
+00:31:13.416 --> 00:31:14.726 A:middle
+and the original intention was
+
+00:31:14.986 --> 00:31:18.706 A:middle
+to format given UI
+differently based on the amount
+
+00:31:18.706 --> 00:31:20.206 A:middle
+of screen real estate
+available to you.
+
+00:31:20.506 --> 00:31:22.306 A:middle
+This has become increasingly
+important
+
+00:31:22.306 --> 00:31:23.806 A:middle
+as we've released
+different form factors
+
+00:31:23.806 --> 00:31:28.156 A:middle
+for our devices both
+on iOS and OS X.
+
+00:31:28.236 --> 00:31:32.156 A:middle
+But I should say an additional
+benefit of auto layout is
+
+00:31:32.156 --> 00:31:34.566 A:middle
+in localizing the UI
+of your application.
+
+00:31:36.596 --> 00:31:39.156 A:middle
+Here is what a UI
+would look like.
+
+00:31:39.156 --> 00:31:40.086 A:middle
+So, let's say, for instance,
+
+00:31:40.086 --> 00:31:42.076 A:middle
+we wish to add a new
+calendar to iCloud.
+
+00:31:42.646 --> 00:31:44.336 A:middle
+Here is what a sample UI
+may look like in English.
+
+00:31:44.886 --> 00:31:47.606 A:middle
+This UI may have been worked
+on meticulously and may work
+
+00:31:47.606 --> 00:31:50.526 A:middle
+when you test it in
+different orientations
+
+00:31:50.796 --> 00:31:53.806 A:middle
+and may work even dynamically
+with content added at runtime.
+
+00:31:54.916 --> 00:31:58.496 A:middle
+But if you haven't taken
+allowances for how this works
+
+00:31:58.496 --> 00:32:00.466 A:middle
+in other UIs or in
+other languages,
+
+
+
+00:31:58.496 --> 00:32:00.466 A:middle
+in other UIs or in
+other languages,
+
+00:32:00.816 --> 00:32:03.366 A:middle
+in fact it may break
+these assumptions
+
+00:32:03.366 --> 00:32:04.426 A:middle
+that you've had up until now.
+
+00:32:05.596 --> 00:32:09.996 A:middle
+So here is the same UI in Greek,
+and this may work, this may seem
+
+00:32:09.996 --> 00:32:11.156 A:middle
+to work on first glance.
+
+00:32:11.776 --> 00:32:13.616 A:middle
+When you take a little closer
+look, we realize, in fact,
+
+00:32:13.616 --> 00:32:16.286 A:middle
+this character is now
+3.5 characters long.
+
+00:32:16.286 --> 00:32:18.036 A:middle
+There are additional
+sections of the UI
+
+00:32:18.036 --> 00:32:19.046 A:middle
+that have this problem as well.
+
+00:32:19.816 --> 00:32:22.016 A:middle
+Now, I should say that it's not
+necessary to localize your app
+
+00:32:22.066 --> 00:32:23.706 A:middle
+to test it in a different
+localization.
+
+00:32:24.216 --> 00:32:27.686 A:middle
+Thanks to XCode's Skin menu
+you can test your app using a
+
+00:32:27.686 --> 00:32:29.096 A:middle
+double-width pseudo-language,
+
+00:32:29.096 --> 00:32:30.836 A:middle
+as well as a right-to-left
+pseudo-language,
+
+00:32:31.426 --> 00:32:33.836 A:middle
+that doesn't require you to
+have a translation on hand
+
+00:32:34.186 --> 00:32:36.456 A:middle
+to see how your UI would
+operate in different contexts.
+
+00:32:37.566 --> 00:32:39.916 A:middle
+So, assuming then you
+are using auto layout
+
+00:32:40.366 --> 00:32:42.706 A:middle
+and you have set your
+hugging priorities
+
+00:32:43.146 --> 00:32:45.106 A:middle
+and your compression
+resistance priorities correctly,
+
+00:32:45.576 --> 00:32:47.606 A:middle
+here is what your
+UI would look like.
+
+00:32:47.656 --> 00:32:52.576 A:middle
+We have seen what was formerly
+3.5 characters is now 12.
+
+00:32:53.176 --> 00:32:55.186 A:middle
+This is a huge difference.
+
+00:32:55.556 --> 00:32:58.026 A:middle
+We have allowed our label to
+expand the available space given
+
+00:32:58.026 --> 00:33:01.766 A:middle
+to us by specifying
+not static constraints
+
+
+
+00:32:58.026 --> 00:33:01.766 A:middle
+to us by specifying
+not static constraints
+
+00:33:01.766 --> 00:33:02.996 A:middle
+but rather those that can grow.
+
+00:33:03.366 --> 00:33:06.196 A:middle
+We say that the constraint is
+less than or equal to the width
+
+00:33:06.256 --> 00:33:06.996 A:middle
+to the edge of the screen.
+
+00:33:07.736 --> 00:33:09.346 A:middle
+So, for a lot more
+information about this,
+
+00:33:09.346 --> 00:33:11.636 A:middle
+I would really encourage you
+to check out yesterday's talk,
+
+00:33:12.186 --> 00:33:14.226 A:middle
+"Mysteries of Auto
+Layout, Part 1 and 2."
+
+00:33:14.976 --> 00:33:16.096 A:middle
+Those go into a lot more detail
+
+00:33:16.446 --> 00:33:18.646 A:middle
+about how you can use auto
+layout to make your app work
+
+00:33:18.646 --> 00:33:22.256 A:middle
+around the world, as well as for
+different device orientations.
+
+00:33:23.586 --> 00:33:28.696 A:middle
+So, also a thing to keep in
+mind in laying out your UI is
+
+00:33:28.696 --> 00:33:30.986 A:middle
+that table cells
+themselves may change size.
+
+00:33:31.896 --> 00:33:33.166 A:middle
+This relates to dynamic type.
+
+00:33:33.496 --> 00:33:35.676 A:middle
+On the left, we have
+an English-US UI,
+
+00:33:35.676 --> 00:33:36.976 A:middle
+on the right, we have Hindi.
+
+00:33:37.716 --> 00:33:38.736 A:middle
+Now, notice that, actually,
+
+00:33:38.736 --> 00:33:41.516 A:middle
+individual cells are
+different heights here.
+
+00:33:41.966 --> 00:33:43.976 A:middle
+This is because the
+cells are auto resizing.
+
+00:33:43.976 --> 00:33:46.396 A:middle
+We have allowed the cells
+to take up the amount
+
+00:33:46.396 --> 00:33:49.366 A:middle
+of space dictated by the
+line height of that language.
+
+00:33:50.186 --> 00:33:53.246 A:middle
+So if you use standard
+UI controls and UI views,
+
+00:33:53.246 --> 00:33:55.856 A:middle
+you will see, you will get
+this behavior for free.
+
+00:33:56.606 --> 00:33:59.026 A:middle
+But important to keep in mind
+from a developer perspective is
+
+00:33:59.026 --> 00:33:59.926 A:middle
+that you shouldn't assume
+
+00:33:59.926 --> 00:34:01.696 A:middle
+that a given table cell
+will be a certain height.
+
+
+
+00:33:59.926 --> 00:34:01.696 A:middle
+that a given table cell
+will be a certain height.
+
+00:34:02.186 --> 00:34:05.146 A:middle
+It may expand in
+different locales to take
+
+00:34:05.146 --> 00:34:06.536 A:middle
+up a different amount of space.
+
+00:34:08.516 --> 00:34:11.876 A:middle
+So additionally important
+and critical in iOS 9 is
+
+00:34:11.876 --> 00:34:13.806 A:middle
+that we have now
+provided full support
+
+00:34:13.806 --> 00:34:15.025 A:middle
+for right-to-left languages.
+
+00:34:15.335 --> 00:34:18.346 A:middle
+On the left, we have an English
+UI, and on the right, an Arabic.
+
+00:34:19.116 --> 00:34:20.826 A:middle
+Now, the changes here are deep.
+
+00:34:21.376 --> 00:34:23.346 A:middle
+We have gone through the
+standard controls and views,
+
+00:34:23.636 --> 00:34:26.216 A:middle
+and switched the
+overall control flow.
+
+00:34:26.826 --> 00:34:30.216 A:middle
+In English, you would go from
+one menu into a detail menu
+
+00:34:30.216 --> 00:34:31.246 A:middle
+by going left to right.
+
+00:34:31.846 --> 00:34:34.735 A:middle
+Now, in right-to-left languages
+you go to right to left.
+
+00:34:35.246 --> 00:34:37.156 A:middle
+Note that the chevrons
+themselves have shifted.
+
+00:34:37.446 --> 00:34:40.446 A:middle
+The accessory views are
+on the other side and much
+
+00:34:40.446 --> 00:34:42.016 A:middle
+of the text itself
+has been flipped.
+
+00:34:43.016 --> 00:34:45.025 A:middle
+Important to keep in mind,
+though, is not everything
+
+00:34:45.025 --> 00:34:50.985 A:middle
+in the UI may shift, and may
+not automatically shift for you.
+
+00:34:50.985 --> 00:34:53.126 A:middle
+Sometimes you may wish to
+customize the behavior.
+
+00:34:53.926 --> 00:34:57.796 A:middle
+As we see here in the 'do not
+disturb' icon which is, in fact,
+
+00:34:57.796 --> 00:35:00.756 A:middle
+still left to right, as
+well as the Latin text
+
+
+
+00:34:57.796 --> 00:35:00.756 A:middle
+still left to right, as
+well as the Latin text
+
+00:35:00.756 --> 00:35:02.546 A:middle
+which is still left
+to right as well.
+
+00:35:03.086 --> 00:35:05.186 A:middle
+Now, for a lot more
+information about this,
+
+00:35:05.186 --> 00:35:07.386 A:middle
+I would really encourage you
+to check out "New UIKit Support
+
+00:35:07.386 --> 00:35:09.436 A:middle
+for International Interfaces"
+which happened yesterday.
+
+00:35:10.246 --> 00:35:13.166 A:middle
+This goes through how you
+can use standard controls
+
+00:35:13.446 --> 00:35:15.416 A:middle
+to make use of and
+gain the benefit
+
+00:35:15.416 --> 00:35:17.846 A:middle
+of the full right-to-left
+support in iOS 9,
+
+00:35:18.456 --> 00:35:20.376 A:middle
+additionally how you may
+wish to customize this
+
+00:35:20.656 --> 00:35:21.806 A:middle
+for your individual app needs.
+
+00:35:23.146 --> 00:35:28.256 A:middle
+So, overall, it's important
+to remember to keep in mind
+
+00:35:28.706 --> 00:35:32.056 A:middle
+in internationalizing your app,
+first the localization aspect,
+
+00:35:32.546 --> 00:35:34.166 A:middle
+how it is that your
+strings are translated,
+
+00:35:34.456 --> 00:35:36.666 A:middle
+how it is that the concepts
+behind the translations are
+
+00:35:36.666 --> 00:35:38.286 A:middle
+themselves translated
+to your users.
+
+00:35:38.916 --> 00:35:42.426 A:middle
+Additionally, formatting, how it
+is that units, dates, numbers,
+
+00:35:42.426 --> 00:35:44.916 A:middle
+times, and now names are
+formatted to your user.
+
+00:35:46.166 --> 00:35:48.746 A:middle
+Handling text, how is it that
+you take the text from the user
+
+00:35:49.126 --> 00:35:50.586 A:middle
+and perform operations on it.
+
+00:35:51.116 --> 00:35:53.596 A:middle
+This brings back the eternal
+question, what is a character?
+
+00:35:53.916 --> 00:35:55.956 A:middle
+Something you should always
+keep in mind in processing text.
+
+00:35:56.266 --> 00:35:59.906 A:middle
+Finally we have layout, how it
+is that your UI elements appear
+
+00:35:59.906 --> 00:36:01.386 A:middle
+on the screen to
+international users.
+
+
+
+00:35:59.906 --> 00:36:01.386 A:middle
+on the screen to
+international users.
+
+00:36:02.276 --> 00:36:04.336 A:middle
+Now, luckily if you're
+using the localized variants
+
+00:36:04.336 --> 00:36:07.546 A:middle
+of existing APIs, as well as
+standard views and controls,
+
+00:36:07.786 --> 00:36:09.326 A:middle
+you should get all of
+this behavior for free.
+
+00:36:10.136 --> 00:36:11.266 A:middle
+Now, if you keep all
+of this in in mind,
+
+00:36:11.266 --> 00:36:13.646 A:middle
+you will find
+internationalization opens the
+
+00:36:13.646 --> 00:36:15.026 A:middle
+world to your application.
+
+00:36:16.576 --> 00:36:18.836 A:middle
+For more information, do
+check out these slides here,
+
+00:36:19.016 --> 00:36:20.896 A:middle
+or do check out the
+documentation here.
+
+00:36:21.336 --> 00:36:26.616 A:middle
+Contact our developer forums or
+our App Frameworks Evangelist,
+
+00:36:26.616 --> 00:36:31.216 A:middle
+Paul Marcos, and also check
+out these related sessions.
+
+00:36:31.596 --> 00:36:33.436 A:middle
+These have in fact already
+happened, so check them
+
+00:36:33.436 --> 00:36:35.026 A:middle
+out in your app or online.
+
+00:36:35.026 --> 00:36:38.176 A:middle
+Also, however, we will be
+offering an internationalization
+
+00:36:38.176 --> 00:36:41.596 A:middle
+lab today from 11:00 to 1:10
+p.m. So do come check us out.
+
+00:36:41.596 --> 00:36:43.206 A:middle
+I will be there as
+well as my team
+
+00:36:43.206 --> 00:36:45.536 A:middle
+to answer questions you have
+about internationalizing
+
+00:36:45.536 --> 00:36:46.466 A:middle
+and localizing your apps.
+
+00:36:47.326 --> 00:36:48.596 A:middle
+So, thank you.
+
+00:36:49.516 --> 00:36:52.500 A:middle
+[Applause]
+

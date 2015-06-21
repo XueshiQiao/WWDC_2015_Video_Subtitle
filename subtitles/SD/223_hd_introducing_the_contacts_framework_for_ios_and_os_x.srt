@@ -1,0 +1,2802 @@
+
+00:00:27.516 --> 00:00:32.665 A:middle
+[ Applause ]
+
+00:00:33.166 --> 00:00:34.366 A:middle
+&gt;&gt; BRUCE STADNYK:
+Good afternoon!
+
+00:00:34.826 --> 00:00:38.516 A:middle
+I am Bruce Stadnyk from the iOS
+contacts team and I'm excited
+
+00:00:38.516 --> 00:00:41.646 A:middle
+to introduce the new
+Contacts Framework to you.
+
+00:00:42.516 --> 00:00:45.896 A:middle
+[ Applause ]
+
+00:00:46.396 --> 00:00:47.276 A:middle
+&gt;&gt; BRUCE STADNYK: If you are new
+
+00:00:47.276 --> 00:00:50.196 A:middle
+to Apple's platforms you
+will learn how easy it is
+
+00:00:50.196 --> 00:00:52.266 A:middle
+to use contacts in your app.
+
+00:00:52.896 --> 00:00:54.876 A:middle
+If you are an experienced
+developer with Address Book,
+
+00:00:55.166 --> 00:00:56.546 A:middle
+you will love this
+new Framework.
+
+00:00:59.756 --> 00:01:02.716 A:middle
+So what is this new
+Contacts Framework?
+
+
+
+00:00:59.756 --> 00:01:02.716 A:middle
+So what is this new
+Contacts Framework?
+
+00:01:03.766 --> 00:01:06.696 A:middle
+Well, we have been listening
+to your Address Book feedback
+
+00:01:06.696 --> 00:01:09.546 A:middle
+and today we are addressing
+the most frequent request.
+
+00:01:09.776 --> 00:01:13.946 A:middle
+The Address Book Framework
+provides an Objective-C API
+
+00:01:13.946 --> 00:01:18.556 A:middle
+to access contacts,
+and the API is designed
+
+00:01:18.556 --> 00:01:19.676 A:middle
+to work well with Swift
+
+00:01:20.516 --> 00:01:22.926 A:middle
+[ Applause ]
+
+00:01:23.426 --> 00:01:25.336 A:middle
+&gt;&gt; BRUCE STADNYK: We are as
+excited about this as you are.
+
+00:01:27.356 --> 00:01:30.306 A:middle
+There are many design goals with
+this new Contacts Framework.
+
+00:01:30.796 --> 00:01:35.116 A:middle
+I'm going to review a few of
+the key ones with you now.
+
+00:01:35.346 --> 00:01:38.316 A:middle
+One, to address the
+majority of apps
+
+00:01:38.746 --> 00:01:42.716 A:middle
+that are mostly get contacts
+and do not modify contacts,
+
+00:01:43.496 --> 00:01:46.926 A:middle
+we have designed the API for
+thread safe read-only usage.
+
+00:01:48.656 --> 00:01:51.756 A:middle
+This is done mostly with
+immutable value objects
+
+00:01:51.916 --> 00:01:53.476 A:middle
+that do not reference
+a data store.
+
+00:01:55.476 --> 00:01:59.376 A:middle
+This allows you to pass
+contacts easily between queues
+
+00:01:59.376 --> 00:02:05.036 A:middle
+on your app and not have
+unexpected I/O occur on them.
+
+
+
+00:01:59.376 --> 00:02:05.036 A:middle
+on your app and not have
+unexpected I/O occur on them.
+
+00:02:05.246 --> 00:02:07.966 A:middle
+Another is to have
+the same contacts API
+
+00:02:07.966 --> 00:02:11.616 A:middle
+on OS X, iOS and watchOS.
+
+00:02:12.516 --> 00:02:15.026 A:middle
+[ Applause ]
+
+00:02:15.526 --> 00:02:18.486 A:middle
+&gt;&gt; BRUCE STADNYK: You learn one
+API and then use the same code
+
+00:02:18.486 --> 00:02:21.186 A:middle
+to access contacts across
+multiple Apple platforms.
+
+00:02:23.076 --> 00:02:26.386 A:middle
+And, Address Book,
+if you are using it,
+
+00:02:26.856 --> 00:02:27.976 A:middle
+it is being deprecated.
+
+00:02:28.516 --> 00:02:35.676 A:middle
+[ Cheers and applause ]
+
+00:02:36.176 --> 00:02:39.106 A:middle
+&gt;&gt; BRUCE STADNYK: We don't
+realize how much we take
+
+00:02:39.106 --> 00:02:41.186 A:middle
+for granted the contacts
+on our devices.
+
+00:02:42.296 --> 00:02:44.696 A:middle
+For example when we
+receive a phone call
+
+00:02:45.036 --> 00:02:48.336 A:middle
+and we only see a phone number,
+we ask ourselves: Who is that?
+
+00:02:49.396 --> 00:02:50.996 A:middle
+Is it someone from our family?
+
+00:02:51.776 --> 00:02:52.556 A:middle
+Is it a friend?
+
+00:02:53.326 --> 00:02:54.436 A:middle
+Another telemarketer?
+
+00:02:56.136 --> 00:02:58.936 A:middle
+It is a much better experience
+when a contact is displayed.
+
+00:02:59.846 --> 00:03:02.396 A:middle
+Oh, it's John Apleseed,
+one of my best friends.
+
+
+
+00:02:59.846 --> 00:03:02.396 A:middle
+Oh, it's John Apleseed,
+one of my best friends.
+
+00:03:05.076 --> 00:03:07.836 A:middle
+So everyone has contacts
+on their devices.
+
+00:03:08.616 --> 00:03:11.236 A:middle
+They help us to identify who
+we are communicating with
+
+00:03:11.836 --> 00:03:14.816 A:middle
+and also help us to make
+phone calls, send e-mails,
+
+00:03:15.126 --> 00:03:17.046 A:middle
+and initiate other
+means of communication.
+
+00:03:17.706 --> 00:03:21.836 A:middle
+For example, I can speak
+to my device and say: Hey,
+
+00:03:21.836 --> 00:03:23.946 A:middle
+Siri, call John Appleseed.
+
+00:03:24.696 --> 00:03:26.206 A:middle
+Okay. There we go.
+
+00:03:26.206 --> 00:03:28.736 A:middle
+&gt;&gt; SIRI: Calling John
+Appleseed, iPhone on speaker.
+
+00:03:29.716 --> 00:03:32.206 A:middle
+&gt;&gt; BRUCE STADNYK: So
+contacts are a central part
+
+00:03:32.206 --> 00:03:33.976 A:middle
+of the user experience
+on our devices.
+
+00:03:37.726 --> 00:03:40.566 A:middle
+So how does the Contacts
+Framework handle this
+
+00:03:40.566 --> 00:03:41.566 A:middle
+contact information?
+
+00:03:42.566 --> 00:03:44.886 A:middle
+Let's take a look at an
+example with John Appleseed.
+
+00:03:46.186 --> 00:03:47.726 A:middle
+For those of you
+experienced with Address Book,
+
+00:03:47.956 --> 00:03:48.896 A:middle
+this is a quick review.
+
+00:03:51.156 --> 00:03:54.996 A:middle
+Here we have John's profile
+picture, his first name,
+
+00:03:56.146 --> 00:04:05.286 A:middle
+last name, his home e-mail
+address, work e-mail address,
+
+
+
+00:03:56.146 --> 00:04:05.286 A:middle
+last name, his home e-mail
+address, work e-mail address,
+
+00:04:06.276 --> 00:04:07.786 A:middle
+and the phone number
+for his iPhone.
+
+00:04:11.636 --> 00:04:14.546 A:middle
+These contact properties
+represent this
+
+00:04:14.576 --> 00:04:15.536 A:middle
+contact information.
+
+00:04:16.995 --> 00:04:19.416 A:middle
+The profile image is
+represented by image data.
+
+00:04:21.086 --> 00:04:22.976 A:middle
+The name is broken
+into components.
+
+00:04:23.516 --> 00:04:25.646 A:middle
+So the first name is
+represented by given name
+
+00:04:25.646 --> 00:04:29.626 A:middle
+and the last name
+by family name.
+
+00:04:29.836 --> 00:04:32.776 A:middle
+Both the home and work e-mail
+addresses are represented
+
+00:04:32.776 --> 00:04:33.736 A:middle
+by e-mail addresses.
+
+00:04:34.316 --> 00:04:38.886 A:middle
+And the phone number is
+represented by phone numbers.
+
+00:04:40.736 --> 00:04:42.866 A:middle
+There are many more
+contact properties.
+
+00:04:43.186 --> 00:04:45.756 A:middle
+You can refer to the contacts
+documentation for more details.
+
+00:04:48.496 --> 00:04:50.546 A:middle
+Now, let's talk more
+about this object.
+
+00:04:52.976 --> 00:04:55.066 A:middle
+This is the CNContact object.
+
+00:04:56.776 --> 00:05:00.906 A:middle
+It is an immutable value
+object of contact properties.
+
+
+
+00:04:56.776 --> 00:05:00.906 A:middle
+It is an immutable value
+object of contact properties.
+
+00:05:02.126 --> 00:05:04.196 A:middle
+It is modeled like NSDictionary.
+
+00:05:05.176 --> 00:05:08.736 A:middle
+It has a mutable
+subclass, CNMuteableContact,
+
+00:05:09.236 --> 00:05:11.186 A:middle
+that you modify the
+contact properties with.
+
+00:05:12.616 --> 00:05:13.996 A:middle
+You will see this
+pattern throughout the
+
+00:05:13.996 --> 00:05:14.906 A:middle
+Contacts Framework.
+
+00:05:18.556 --> 00:05:21.516 A:middle
+For contact properties that
+can have multiple values
+
+00:05:21.876 --> 00:05:23.856 A:middle
+like e-mail addresses,
+or phone numbers,
+
+00:05:24.606 --> 00:05:27.446 A:middle
+an array of CNLabeledValue
+is used.
+
+00:05:28.996 --> 00:05:33.976 A:middle
+CNLabeledValue is an immutable
+Tuple of label and value,
+
+00:05:35.256 --> 00:05:38.276 A:middle
+where the label is a string,
+and the value is an object.
+
+00:05:38.726 --> 00:05:40.416 A:middle
+Like string for an
+e-mail address.
+
+00:05:42.596 --> 00:05:45.906 A:middle
+The value can be labeled
+to help differentiate it
+
+00:05:46.106 --> 00:05:47.806 A:middle
+from the multiple
+values for a property,
+
+00:05:48.916 --> 00:05:52.116 A:middle
+such as a home e-mail address,
+or a work e-mail address.
+
+00:05:53.096 --> 00:05:57.266 A:middle
+For those of you
+experienced with Address Book,
+
+00:05:58.036 --> 00:06:02.496 A:middle
+AB multivalue is replaced by
+this array of CNLabeledValue.
+
+
+
+00:05:58.036 --> 00:06:02.496 A:middle
+AB multivalue is replaced by
+this array of CNLabeledValue.
+
+00:06:03.526 --> 00:06:06.306 A:middle
+Yes, you heard that correctly,
+AB multivalue is dead.
+
+00:06:07.516 --> 00:06:11.546 A:middle
+[ Applause ]
+
+00:06:12.046 --> 00:06:12.936 A:middle
+&gt;&gt; BRUCE STADNYK: Now I
+would like to take a look
+
+00:06:12.936 --> 00:06:15.656 A:middle
+at an example of creating a new
+contact with John Appleseed.
+
+00:06:16.606 --> 00:06:18.146 A:middle
+So first we import Contacts,
+
+00:06:19.576 --> 00:06:21.596 A:middle
+then we create a
+mutable contact,
+
+00:06:21.596 --> 00:06:25.136 A:middle
+as we are going to
+be adding to it.
+
+00:06:25.386 --> 00:06:30.036 A:middle
+We then set John's profile
+picture as NSData to imageData,
+
+00:06:30.836 --> 00:06:35.116 A:middle
+and then we set his name to
+givenName and familyName.
+
+00:06:39.066 --> 00:06:41.106 A:middle
+Now, for John's two
+e-mail addresses,
+
+00:06:41.276 --> 00:06:45.816 A:middle
+we create two CNLabeled
+values, one with CNLabelHome,
+
+00:06:46.336 --> 00:06:47.816 A:middle
+the other with CNLabelWork.
+
+00:06:48.816 --> 00:06:50.606 A:middle
+These are some of
+the predefined labels
+
+00:06:50.606 --> 00:06:51.766 A:middle
+in the Contacts Framework.
+
+00:06:53.356 --> 00:06:55.576 A:middle
+These predefined labels
+have localized strings
+
+00:06:55.576 --> 00:06:57.316 A:middle
+that you can use
+in your apps UI.
+
+00:06:58.626 --> 00:07:00.536 A:middle
+You can also create
+your own custom labels.
+
+
+
+00:06:58.626 --> 00:07:00.536 A:middle
+You can also create
+your own custom labels.
+
+00:07:01.096 --> 00:07:05.766 A:middle
+We take these two label values,
+home e-mail and work e-mail,
+
+00:07:06.236 --> 00:07:09.156 A:middle
+place them in an array, and
+set them on e-mail addresses.
+
+00:07:09.776 --> 00:07:10.566 A:middle
+It's that simple.
+
+00:07:13.166 --> 00:07:15.496 A:middle
+And we can do the same thing
+with John's phone number.
+
+00:07:16.056 --> 00:07:17.676 A:middle
+Again, we create
+a CNLabeled value,
+
+00:07:18.506 --> 00:07:23.526 A:middle
+use the iPhone predefined label,
+create a CNPhoneNumber object
+
+00:07:23.676 --> 00:07:27.376 A:middle
+as the value, place the
+label value in array,
+
+00:07:27.636 --> 00:07:28.896 A:middle
+and set that to phone numbers.
+
+00:07:32.636 --> 00:07:35.536 A:middle
+I also know John's home address,
+so I can add that as well.
+
+00:07:35.536 --> 00:07:39.256 A:middle
+I create a
+CNMuteablePostalAddress,
+
+00:07:39.866 --> 00:07:42.306 A:middle
+set the appropriate information,
+
+00:07:43.506 --> 00:07:46.056 A:middle
+again create a labeled
+value using LabelHome,
+
+00:07:46.726 --> 00:07:49.376 A:middle
+place that in array, and set
+that to postal addresses.
+
+00:07:53.296 --> 00:07:55.356 A:middle
+Finally, I also know
+his birthday,
+
+00:07:55.416 --> 00:07:58.696 A:middle
+so I can create an
+NSDateComponent, set the day,
+
+00:07:58.696 --> 00:07:59.816 A:middle
+month, and year component,
+
+
+
+00:08:00.446 --> 00:08:01.886 A:middle
+and set that to the
+birthday property.
+
+00:08:03.156 --> 00:08:05.996 A:middle
+Note that all date-related
+properties
+
+00:08:06.076 --> 00:08:09.386 A:middle
+in the Contacts Framework
+are NSDate components.
+
+00:08:10.426 --> 00:08:14.366 A:middle
+This allows flexibility
+to have dates
+
+00:08:14.366 --> 00:08:15.596 A:middle
+such as year-less birthdays,
+
+00:08:15.896 --> 00:08:17.366 A:middle
+where you would omit
+the year component.
+
+00:08:22.076 --> 00:08:25.456 A:middle
+The Contacts Framework is also
+able to perform operations
+
+00:08:25.456 --> 00:08:26.826 A:middle
+on these contact objects.
+
+00:08:27.806 --> 00:08:30.966 A:middle
+Of interest here is
+formatting contact data.
+
+00:08:32.616 --> 00:08:35.956 A:middle
+The CNContactFormatter will
+format a contact's name.
+
+00:08:35.956 --> 00:08:38.905 A:middle
+In this example, we're
+formatting the full name,
+
+00:08:38.986 --> 00:08:40.275 A:middle
+and get back John Appleseed.
+
+00:08:41.775 --> 00:08:44.486 A:middle
+CNContact Formatter
+will correctly format
+
+00:08:44.486 --> 00:08:45.486 A:middle
+international names.
+
+00:08:48.036 --> 00:08:51.366 A:middle
+We also have a formatter,
+CNPostalAddressFormatter
+
+00:08:51.786 --> 00:08:54.496 A:middle
+for formatting mailing
+labels for postal addresses.
+
+00:08:55.816 --> 00:08:57.726 A:middle
+That returns back...that.
+
+00:08:58.986 --> 00:09:02.896 A:middle
+CNPostalAddressFormatter will
+correctly format international
+
+
+
+00:08:58.986 --> 00:09:02.896 A:middle
+CNPostalAddressFormatter will
+correctly format international
+
+00:09:03.276 --> 00:09:04.086 A:middle
+postal addresses.
+
+00:09:05.186 --> 00:09:06.936 A:middle
+We recommend that you
+use these Formatters
+
+00:09:06.936 --> 00:09:08.356 A:middle
+in your app when appropriate.
+
+00:09:11.676 --> 00:09:14.126 A:middle
+Now, I would like to
+invite Dave up to the stage
+
+00:09:14.126 --> 00:09:16.216 A:middle
+to show you how you can
+use Contacts in your app.
+
+00:09:17.516 --> 00:09:22.696 A:middle
+[ Applause ]
+
+00:09:23.196 --> 00:09:23.906 A:middle
+&gt;&gt; DAVE DRIBIN: Thank
+you, Bruce.
+
+00:09:24.296 --> 00:09:29.516 A:middle
+My name is Dave Dribin, and I
+work on the OS X Contacts team.
+
+00:09:29.716 --> 00:09:33.716 A:middle
+Sorry. So Bruce just
+showed you how to create
+
+00:09:33.716 --> 00:09:35.976 A:middle
+and modify CNContact
+objects in code.
+
+00:09:36.896 --> 00:09:39.346 A:middle
+However, these already
+has many contacts as part
+
+00:09:39.346 --> 00:09:43.196 A:middle
+of the Contacts app of
+OS X, iOS and watchOS.
+
+00:09:44.086 --> 00:09:46.446 A:middle
+And Bruce also showed how
+system apps can integrate
+
+00:09:46.446 --> 00:09:49.816 A:middle
+with these contacts to provide
+a richer user experience.
+
+00:09:50.366 --> 00:09:53.116 A:middle
+For example, the phone app
+can show the person's name
+
+00:09:53.116 --> 00:09:54.636 A:middle
+and photo instead of
+just a phone number,
+
+00:09:55.326 --> 00:09:57.596 A:middle
+for an incoming phone call.
+
+00:09:58.186 --> 00:10:00.096 A:middle
+The Contacts Framework
+allows you to provide
+
+
+
+00:09:58.186 --> 00:10:00.096 A:middle
+The Contacts Framework
+allows you to provide
+
+00:10:00.096 --> 00:10:01.976 A:middle
+that same rich experience
+for your app.
+
+00:10:05.126 --> 00:10:06.116 A:middle
+So the class you
+are going to use
+
+00:10:06.116 --> 00:10:09.096 A:middle
+to access a user's contacts
+is called CNContactStore.
+
+00:10:09.096 --> 00:10:11.096 A:middle
+We are going to talk
+about how to fetch
+
+00:10:11.096 --> 00:10:12.596 A:middle
+and save users' contacts.
+
+00:10:13.476 --> 00:10:14.406 A:middle
+Let's start off with fetching.
+
+00:10:16.346 --> 00:10:17.216 A:middle
+The main method you are going
+
+00:10:17.216 --> 00:10:20.926 A:middle
+to use is called unified
+ContactsMatchingPredicate,
+
+00:10:20.926 --> 00:10:21.636 A:middle
+keysToFetch.
+
+00:10:22.226 --> 00:10:25.406 A:middle
+This is going to return an
+array of CNContact objects.
+
+00:10:25.956 --> 00:10:29.626 A:middle
+The predicate in Keys to
+Fetch are there in order
+
+00:10:29.626 --> 00:10:32.126 A:middle
+to help your app fetch as
+efficiently as possible.
+
+00:10:33.446 --> 00:10:34.526 A:middle
+Let's start off with
+the predicate.
+
+00:10:35.736 --> 00:10:38.636 A:middle
+The user might have hundreds,
+or even thousands of contacts.
+
+00:10:38.716 --> 00:10:41.486 A:middle
+You might only be interested
+in a small subset of those.
+
+00:10:42.566 --> 00:10:44.686 A:middle
+The predicate allows you to, ah,
+
+00:10:44.686 --> 00:10:46.676 A:middle
+helps you limit the
+number of results returned.
+
+00:10:48.086 --> 00:10:49.276 A:middle
+Now, for those that don't know,
+
+00:10:49.366 --> 00:10:51.896 A:middle
+NSPredicate is a standard
+foundation-level object
+
+00:10:51.896 --> 00:10:54.556 A:middle
+that presents criteria
+to be matched
+
+00:10:54.556 --> 00:10:55.956 A:middle
+against an object
+while searching.
+
+00:10:59.536 --> 00:11:02.936 A:middle
+The Contacts Framework
+provides predicates you can use
+
+
+
+00:10:59.536 --> 00:11:02.936 A:middle
+The Contacts Framework
+provides predicates you can use
+
+00:11:02.936 --> 00:11:03.926 A:middle
+with the contact store.
+
+00:11:03.986 --> 00:11:06.266 A:middle
+And the contacts store
+will evaluate these
+
+00:11:06.266 --> 00:11:08.166 A:middle
+against the predicate,
+or the contact.
+
+00:11:08.916 --> 00:11:12.066 A:middle
+The example here is predicate
+ForContactsMatchingName.
+
+00:11:13.046 --> 00:11:15.966 A:middle
+And this will match
+each of the contacts
+
+00:11:15.966 --> 00:11:18.146 A:middle
+against the specified name,
+in this case Appleseed.
+
+00:11:19.016 --> 00:11:19.936 A:middle
+Let's see a quick example.
+
+00:11:23.226 --> 00:11:25.026 A:middle
+Say the user has
+these three contacts.
+
+00:11:25.196 --> 00:11:28.236 A:middle
+John Appleseed, Jane
+Appleseed, and Craig Bromley.
+
+00:11:29.556 --> 00:11:31.626 A:middle
+The contacts store can
+effectively evaluate this
+
+00:11:31.686 --> 00:11:33.646 A:middle
+predicate [John Appleseed]
+against each
+
+00:11:33.646 --> 00:11:34.356 A:middle
+of the contacts [Jane
+Appleseed; Craig Bromley]
+
+00:11:34.356 --> 00:11:36.256 A:middle
+and only return the
+matching ones.
+
+00:11:36.566 --> 00:11:38.036 A:middle
+In this case John
+and Jane are going
+
+00:11:38.036 --> 00:11:39.616 A:middle
+to be returned, but not Craig.
+
+00:11:43.266 --> 00:11:45.336 A:middle
+So the predicate allows
+you to limit the number
+
+00:11:45.466 --> 00:11:47.416 A:middle
+of contacts returned,
+but there's still a lot
+
+00:11:47.416 --> 00:11:49.226 A:middle
+of contact information
+on a contact,
+
+00:11:49.226 --> 00:11:51.496 A:middle
+and you might only be interested
+in a small subset of that,
+
+00:11:52.436 --> 00:11:53.976 A:middle
+and that's where
+keysToFetch comes in.
+
+00:11:57.596 --> 00:12:00.246 A:middle
+KeysToFetch is an
+array of strings.
+
+
+
+00:11:57.596 --> 00:12:00.246 A:middle
+KeysToFetch is an
+array of strings.
+
+00:12:00.606 --> 00:12:03.676 A:middle
+And these are strings of keys,
+in the key-value-coding sense.
+
+00:12:04.216 --> 00:12:06.466 A:middle
+So if you are just interested in
+the given name and family name,
+
+00:12:06.616 --> 00:12:08.446 A:middle
+you could set up your
+keysToFetch like this.
+
+00:12:09.256 --> 00:12:11.656 A:middle
+Of course, using string
+literals is error prone.
+
+00:12:11.786 --> 00:12:13.716 A:middle
+We provide constants for this.
+
+00:12:16.346 --> 00:12:18.206 A:middle
+And what the Contact Store is
+going to do is it's only going
+
+00:12:18.206 --> 00:12:20.546 A:middle
+to fetch the properties
+that you specify.
+
+00:12:21.646 --> 00:12:23.636 A:middle
+In this case, given
+name and family name.
+
+00:12:24.626 --> 00:12:26.256 A:middle
+So you can really
+see how the predicate
+
+00:12:26.256 --> 00:12:28.386 A:middle
+in keysToFetch allows you
+to scope down the amount
+
+00:12:28.386 --> 00:12:30.256 A:middle
+of information to returned
+so that your app can be
+
+00:12:30.256 --> 00:12:31.486 A:middle
+as efficient as possible.
+
+00:12:32.826 --> 00:12:33.876 A:middle
+Let's go over a full example.
+
+00:12:33.876 --> 00:12:37.866 A:middle
+So here we are going to
+start off with a predicate
+
+00:12:37.866 --> 00:12:39.586 A:middle
+and keysToFetch as
+we had earlier,
+
+00:12:40.846 --> 00:12:42.606 A:middle
+but now you need a contacts
+store to use these on.
+
+00:12:42.976 --> 00:12:44.526 A:middle
+And this is easy, you
+can just create one
+
+00:12:44.626 --> 00:12:45.826 A:middle
+with the default initializer.
+
+00:12:47.236 --> 00:12:49.716 A:middle
+Then you call unified
+ContactsMatchingPredicate,
+
+00:12:49.716 --> 00:12:52.366 A:middle
+keysToFetch with those values,
+and assuming this works,
+
+00:12:52.476 --> 00:12:55.016 A:middle
+you're going to get back
+an array of contacts,
+
+00:12:55.956 --> 00:12:57.286 A:middle
+and then you can use
+them however you want.
+
+00:12:57.286 --> 00:12:58.436 A:middle
+Here we are just going to print
+
+00:12:58.436 --> 00:12:59.876 A:middle
+out the given name
+and family name.
+
+
+
+00:13:01.266 --> 00:13:02.576 A:middle
+There's a couple of
+important things I want
+
+00:13:02.576 --> 00:13:03.406 A:middle
+to talk about, about fetching.
+
+00:13:04.036 --> 00:13:06.986 A:middle
+The first one is
+that the lifetime
+
+00:13:06.986 --> 00:13:08.676 A:middle
+of a CNContact is not tied
+
+00:13:08.676 --> 00:13:10.586 A:middle
+to the lifetime of
+a CNContact store.
+
+00:13:10.586 --> 00:13:13.296 A:middle
+There is no need to keep a
+strong reference to the Store
+
+00:13:13.296 --> 00:13:15.256 A:middle
+around after the
+fetch completes.
+
+00:13:16.066 --> 00:13:19.096 A:middle
+It means the data on
+the CNContact is, ah,
+
+00:13:19.096 --> 00:13:22.166 A:middle
+valid and it is from the time of
+the fetch, basically a snapshot
+
+00:13:22.166 --> 00:13:23.976 A:middle
+from the time of the
+fetch, and it is valid
+
+00:13:23.976 --> 00:13:26.146 A:middle
+for the lifetime
+of that CNContact.
+
+00:13:27.116 --> 00:13:28.506 A:middle
+And the second important thing,
+
+00:13:28.506 --> 00:13:30.006 A:middle
+is that this is a
+synchronous method,
+
+00:13:30.076 --> 00:13:32.906 A:middle
+and fetching contacts is a
+relatively slow operation.
+
+00:13:34.326 --> 00:13:37.826 A:middle
+As such, you should really fetch
+these on a background queue,
+
+00:13:38.986 --> 00:13:40.646 A:middle
+to keep your user
+interface responsive.
+
+00:13:41.896 --> 00:13:43.046 A:middle
+And as Bruce mentioned earlier,
+
+00:13:43.046 --> 00:13:46.786 A:middle
+CNContacts are completely thread
+safe, so it's safe to take these
+
+00:13:46.786 --> 00:13:49.276 A:middle
+from the background queue, and
+move them over to the main queue
+
+00:13:49.276 --> 00:13:51.106 A:middle
+to update your user interface.
+
+00:13:54.046 --> 00:13:55.376 A:middle
+And another really
+good reason to fetch
+
+00:13:55.376 --> 00:13:57.536 A:middle
+on a background queue
+is data privacy.
+
+
+
+00:14:02.796 --> 00:14:07.146 A:middle
+So, users take the privacy of
+their contacts very seriously.
+
+00:14:07.676 --> 00:14:10.886 A:middle
+And as such, we want to put
+up a barrier between your app,
+
+00:14:10.886 --> 00:14:12.006 A:middle
+and the users contacts.
+
+00:14:13.476 --> 00:14:17.206 A:middle
+The very first time your
+app accesses contacts
+
+00:14:17.206 --> 00:14:20.236 A:middle
+through the API, the OS is
+going to show a dialogue box
+
+00:14:20.236 --> 00:14:22.836 A:middle
+or alert asking the user
+to allow or deny access.
+
+00:14:22.836 --> 00:14:23.986 A:middle
+You have probably
+seen these before.
+
+00:14:25.356 --> 00:14:27.666 A:middle
+This means that the first
+time you call a method
+
+00:14:27.666 --> 00:14:30.086 A:middle
+on the contacts store, it
+cannot provide the results
+
+00:14:30.446 --> 00:14:33.636 A:middle
+until the user responds,
+and that can be a long time.
+
+00:14:34.696 --> 00:14:38.006 A:middle
+So while you can move your
+contacts store access off
+
+00:14:38.006 --> 00:14:41.076 A:middle
+to a background queue
+using GCD or NS operation,
+
+00:14:41.526 --> 00:14:42.836 A:middle
+we provide a helper method here,
+
+00:14:42.836 --> 00:14:44.726 A:middle
+an async method called
+request access
+
+00:14:44.726 --> 00:14:46.226 A:middle
+for entity type completion
+handler.
+
+00:14:46.756 --> 00:14:51.006 A:middle
+Now the user may deny access,
+and your app should be able
+
+00:14:51.006 --> 00:14:51.996 A:middle
+to handle this gracefully.
+
+00:14:51.996 --> 00:14:54.526 A:middle
+And if the user allows access,
+
+00:14:54.706 --> 00:14:56.766 A:middle
+be sure to handle this
+contact data with care.
+
+00:14:57.626 --> 00:14:59.356 A:middle
+Please see the privacy
+in your app session
+
+00:14:59.356 --> 00:14:59.906 A:middle
+for more information.
+
+
+
+00:15:02.256 --> 00:15:05.156 A:middle
+I would like to talk a little
+bit more about keysToFetch
+
+00:15:05.156 --> 00:15:06.946 A:middle
+and how they return
+partial contacts.
+
+00:15:09.206 --> 00:15:11.636 A:middle
+So as I showed previously,
+the keysToFetch allows you
+
+00:15:11.636 --> 00:15:14.176 A:middle
+to only fetch the properties
+you are interested in.
+
+00:15:14.716 --> 00:15:17.526 A:middle
+In this case the given
+name and family name.
+
+00:15:17.676 --> 00:15:19.926 A:middle
+What if you tried to access a
+property you didn't request--
+
+00:15:20.036 --> 00:15:20.986 A:middle
+for example a phone number?
+
+00:15:24.196 --> 00:15:26.086 A:middle
+It's going to throw
+an exception,
+
+00:15:26.166 --> 00:15:27.766 A:middle
+because that data is not there,
+
+00:15:27.766 --> 00:15:30.336 A:middle
+and we call these partial
+contacts because only some
+
+00:15:30.336 --> 00:15:31.616 A:middle
+of the properties are available.
+
+00:15:33.156 --> 00:15:35.086 A:middle
+Now normally this isn't
+a problem if you set
+
+00:15:35.086 --> 00:15:37.536 A:middle
+up your keysToFetch properly,as
+we did in the previous examples,
+
+00:15:38.086 --> 00:15:41.176 A:middle
+but there are times you
+are going to get a contact,
+
+00:15:41.176 --> 00:15:42.146 A:middle
+and you are unsure
+
+00:15:42.146 --> 00:15:44.846 A:middle
+which keysToFetch was
+used when it was fetched.
+
+00:15:45.506 --> 00:15:47.356 A:middle
+In those cases, you are
+going to want to check to see
+
+00:15:47.356 --> 00:15:49.906 A:middle
+if the key is available
+before accessing the property,
+
+00:15:50.526 --> 00:15:51.726 A:middle
+just as you would
+check the length
+
+00:15:51.726 --> 00:15:54.096 A:middle
+of an array before indexing
+into it, to avoid an exception.
+
+00:15:55.186 --> 00:15:57.986 A:middle
+Here this example is using the
+isKeyAvailable method to see
+
+00:15:57.986 --> 00:15:59.596 A:middle
+if the PhoneNumbers
+key is available
+
+00:15:59.596 --> 00:16:01.216 A:middle
+for accessing the
+phone numbers property.
+
+
+
+00:15:59.596 --> 00:16:01.216 A:middle
+for accessing the
+phone numbers property.
+
+00:16:01.216 --> 00:16:04.106 A:middle
+You might be thinking
+"well, that's great,
+
+00:16:04.106 --> 00:16:06.066 A:middle
+but I really wanted to
+access those phone numbers."
+
+00:16:06.836 --> 00:16:08.606 A:middle
+In those cases, you can
+re-fetch the contact
+
+00:16:08.606 --> 00:16:09.866 A:middle
+with the additional keysToFetch.
+
+00:16:10.436 --> 00:16:11.536 A:middle
+Let's see how that would work.
+
+00:16:12.406 --> 00:16:15.156 A:middle
+So, here we are setting
+up keysToFetch,
+
+00:16:15.156 --> 00:16:16.886 A:middle
+but this time we're using
+the phone numbers key,
+
+00:16:17.896 --> 00:16:21.206 A:middle
+and using a method called
+unifiedContactWithIdentifier.
+
+00:16:21.556 --> 00:16:23.776 A:middle
+Now each contact
+has a identifier
+
+00:16:23.776 --> 00:16:26.416 A:middle
+that uniquely identifies it,
+and you can use to re-fetch
+
+00:16:26.416 --> 00:16:29.336 A:middle
+at a later point in time.
+
+00:16:29.336 --> 00:16:31.026 A:middle
+And then, once you re-fetch,
+
+00:16:31.296 --> 00:16:32.696 A:middle
+you can safely access
+the phone numbers
+
+00:16:32.696 --> 00:16:33.796 A:middle
+on this re-fetched contact.
+
+00:16:34.276 --> 00:16:37.306 A:middle
+In partial contacts
+it's important
+
+00:16:37.306 --> 00:16:39.746 A:middle
+to understand how they work
+with the rest of the framework.
+
+00:16:43.046 --> 00:16:45.476 A:middle
+Now, the previous example showed
+how we fetched the given name
+
+00:16:45.476 --> 00:16:46.836 A:middle
+and family name and
+then printed them out,
+
+00:16:47.256 --> 00:16:49.426 A:middle
+to print the full name, but
+that's really not ideal.
+
+00:16:49.426 --> 00:16:51.626 A:middle
+We should really use one
+of the formatters, sorry,
+
+00:16:51.776 --> 00:16:54.546 A:middle
+the CNContact formatter
+that Bruce showed earlier,
+
+00:16:54.586 --> 00:16:57.276 A:middle
+and the formatter may
+access other properties
+
+00:16:57.276 --> 00:16:59.496 A:middle
+that you haven't fetched,
+like name, prefix, or suffix.
+
+00:16:59.936 --> 00:17:01.766 A:middle
+If they're not there, it's
+going to throw an exception.
+
+
+
+00:16:59.936 --> 00:17:01.766 A:middle
+If they're not there, it's
+going to throw an exception.
+
+00:17:02.406 --> 00:17:06.356 A:middle
+So, we could document all
+the keys you need in order
+
+00:17:06.356 --> 00:17:08.546 A:middle
+to use the formatter, but that's
+rather tedious and error prone.
+
+00:17:09.016 --> 00:17:11.306 A:middle
+So we've come up with the
+concept of key descriptors.
+
+00:17:12.556 --> 00:17:15.886 A:middle
+And key descriptors
+represent a set of keys
+
+00:17:16.165 --> 00:17:18.126 A:middle
+for a particular operation.
+
+00:17:18.626 --> 00:17:20.736 A:middle
+In this case, the formatter
+knows which keys it needs
+
+00:17:20.736 --> 00:17:23.226 A:middle
+to do its job, so it is
+providing the key descriptors
+
+00:17:23.705 --> 00:17:26.175 A:middle
+with the descriptor
+ForRequiredKeysForStyle method,
+
+00:17:26.376 --> 00:17:28.396 A:middle
+and you can include this
+directly in your keys to fetch.
+
+00:17:29.346 --> 00:17:32.736 A:middle
+And this tells the contact
+store all of the properties
+
+00:17:32.736 --> 00:17:34.146 A:middle
+that it needs to fetch
+for the formatter.
+
+00:17:35.046 --> 00:17:36.226 A:middle
+Let's see an example of this.
+
+00:17:36.226 --> 00:17:40.676 A:middle
+So in this example, we
+want to fetch all contacts
+
+00:17:40.676 --> 00:17:41.626 A:middle
+with the name Appleseed,
+
+00:17:41.796 --> 00:17:44.356 A:middle
+and we want to print their
+full name and e-mail addresses.
+
+00:17:44.356 --> 00:17:47.336 A:middle
+We are going to set up the
+predicate as we did before,
+
+00:17:47.396 --> 00:17:49.526 A:middle
+and set up the keysToFetch
+a little bit differently.
+
+00:17:49.566 --> 00:17:53.686 A:middle
+We are going to start off with
+descriptor for required keys
+
+00:17:53.686 --> 00:17:55.156 A:middle
+for style (.FullName).
+
+00:17:55.156 --> 00:17:58.066 A:middle
+And this is going to, uh,
+allows us to get the full name,
+
+00:17:58.106 --> 00:18:00.216 A:middle
+using the Contact
+Formatter later on.
+
+
+
+00:17:58.106 --> 00:18:00.216 A:middle
+using the Contact
+Formatter later on.
+
+00:18:01.206 --> 00:18:04.816 A:middle
+You can also include the
+CNContact e-mail addresses key,
+
+00:18:04.816 --> 00:18:06.366 A:middle
+because we want to print
+the e-mail addresses.
+
+00:18:06.836 --> 00:18:09.116 A:middle
+You can intermix key descriptors
+
+00:18:09.386 --> 00:18:11.786 A:middle
+and CNContact keys
+in the same array.
+
+00:18:12.416 --> 00:18:16.476 A:middle
+With this setup, you fetch,
+just as we did before,
+
+00:18:16.476 --> 00:18:18.516 A:middle
+calling unified contacts
+matching predicate,
+
+00:18:18.516 --> 00:18:21.886 A:middle
+and then with the results,
+you can get the full name
+
+00:18:21.886 --> 00:18:23.906 A:middle
+with the formatter and
+the e-mail addresses.
+
+00:18:26.476 --> 00:18:27.946 A:middle
+So one other important point
+
+00:18:28.066 --> 00:18:30.216 A:middle
+about fetching is
+unified contacts.
+
+00:18:31.286 --> 00:18:33.676 A:middle
+You may have the same
+contact in multiple accounts.
+
+00:18:33.676 --> 00:18:35.096 A:middle
+For example, you might
+have a John Appleseed
+
+00:18:35.206 --> 00:18:37.506 A:middle
+in your iCloud account with
+his work e-mail address
+
+00:18:37.506 --> 00:18:39.536 A:middle
+and phone number, but
+you might also be friends
+
+00:18:39.536 --> 00:18:40.416 A:middle
+with John on Facebook.
+
+00:18:40.416 --> 00:18:42.516 A:middle
+And that is going
+to have an image,
+
+00:18:42.966 --> 00:18:44.986 A:middle
+home e-mail address,
+and birthday.
+
+00:18:45.596 --> 00:18:48.056 A:middle
+So rather than display two
+separate contacts there,
+
+00:18:48.656 --> 00:18:51.256 A:middle
+the contacts app is going
+to use some heuristics
+
+00:18:51.256 --> 00:18:54.426 A:middle
+to link these together, and
+display a single contact
+
+00:18:54.426 --> 00:18:55.706 A:middle
+with the union of
+the information,
+
+00:18:55.706 --> 00:18:57.376 A:middle
+and we call these
+unified contacts.
+
+00:18:57.936 --> 00:19:00.286 A:middle
+And contacts apps
+have been doing this
+
+
+
+00:18:57.936 --> 00:19:00.286 A:middle
+And contacts apps
+have been doing this
+
+00:19:00.286 --> 00:19:01.186 A:middle
+for a few releases now.
+
+00:19:02.206 --> 00:19:05.066 A:middle
+The Contacts Framework will
+return unified contacts
+
+00:19:05.066 --> 00:19:07.546 A:middle
+by default, as you may have
+guessed from the method names.
+
+00:19:08.806 --> 00:19:10.776 A:middle
+So the good news is, that
+means that you're going
+
+00:19:10.776 --> 00:19:13.166 A:middle
+to get the data back that
+the user sees in the app.
+
+00:19:14.276 --> 00:19:15.166 A:middle
+The really great thing here is
+
+00:19:15.166 --> 00:19:17.676 A:middle
+that these are ordinary
+CNContact objects, and they work
+
+00:19:17.676 --> 00:19:19.736 A:middle
+and act just like any
+other CNContact object.
+
+00:19:20.526 --> 00:19:24.026 A:middle
+you can even modify them and
+save them and it will just work.
+
+00:19:25.456 --> 00:19:27.936 A:middle
+So speaking of saving, let's
+go over a few code examples
+
+00:19:28.366 --> 00:19:29.656 A:middle
+on how to save contacts.
+
+00:19:29.916 --> 00:19:33.296 A:middle
+I'm going to start off
+by adding a new contact.
+
+00:19:35.086 --> 00:19:37.046 A:middle
+So let's say you've got
+a C immutable contact,
+
+00:19:37.046 --> 00:19:39.016 A:middle
+and you set it up with data,
+as Bruce showed you earlier.
+
+00:19:39.566 --> 00:19:41.996 A:middle
+In order to get this into the
+user's contacts, you are going
+
+00:19:41.996 --> 00:19:44.036 A:middle
+to use what's called a save
+request, and you are going
+
+00:19:44.036 --> 00:19:46.356 A:middle
+to execute that save
+request on a contact store.
+
+00:19:46.976 --> 00:19:51.496 A:middle
+The first thing you do is create
+a new CNSaveRequest object,
+
+00:19:51.496 --> 00:19:54.146 A:middle
+and then you are going
+to call add contact,
+
+00:19:54.146 --> 00:19:55.656 A:middle
+to container with identifier.
+
+00:19:56.866 --> 00:19:58.726 A:middle
+Now we don't have time
+to talk about containers,
+
+00:19:59.216 --> 00:20:01.696 A:middle
+but the nil container identifier
+means the default container,
+
+
+
+00:19:59.216 --> 00:20:01.696 A:middle
+but the nil container identifier
+means the default container,
+
+00:20:02.066 --> 00:20:02.836 A:middle
+and, so please refer
+
+00:20:02.836 --> 00:20:04.326 A:middle
+to the documentation
+for more information.
+
+00:20:04.606 --> 00:20:08.056 A:middle
+And save request just marks
+a contact for being added.
+
+00:20:08.056 --> 00:20:10.106 A:middle
+It doesn't actually
+apply this change yet.
+
+00:20:10.476 --> 00:20:12.296 A:middle
+For that you need to
+call execute SaveRequest
+
+00:20:12.326 --> 00:20:13.296 A:middle
+on a contacts store.
+
+00:20:13.796 --> 00:20:16.446 A:middle
+Assuming this completes
+successfully, this will be added
+
+00:20:16.446 --> 00:20:17.406 A:middle
+to the user's contacts.
+
+00:20:21.076 --> 00:20:23.696 A:middle
+Updating an existing
+contact is very similar,
+
+00:20:23.696 --> 00:20:25.476 A:middle
+but now you are going to
+be starting off with, say,
+
+00:20:25.476 --> 00:20:27.656 A:middle
+an immutable contact that
+you got from a fetch.
+
+00:20:29.136 --> 00:20:30.206 A:middle
+So, the first thing
+you are going to want
+
+00:20:30.206 --> 00:20:32.236 A:middle
+to do is create a mutable copy,
+
+00:20:32.816 --> 00:20:34.286 A:middle
+and then make any
+changes you want.
+
+00:20:34.286 --> 00:20:36.846 A:middle
+For example, here we are
+adding in a new e-mail address.
+
+00:20:36.846 --> 00:20:39.066 A:middle
+Now, it is important
+to note that,
+
+00:20:39.066 --> 00:20:41.706 A:middle
+when you make a mutable
+copy of a partial contact,
+
+00:20:42.096 --> 00:20:45.536 A:middle
+only modify the property
+that you had fetched.
+
+00:20:49.086 --> 00:20:51.366 A:middle
+And just as before, we
+need to use a save request.
+
+00:20:52.276 --> 00:20:54.036 A:middle
+Create a new save request,
+but this time we are going
+
+00:20:54.036 --> 00:20:55.486 A:middle
+to use the updateContact method.
+
+00:20:56.616 --> 00:20:58.816 A:middle
+And again, this just marks
+the contact for being updated,
+
+00:20:58.816 --> 00:21:00.266 A:middle
+and doesn't actually
+apply those changes
+
+
+
+00:20:58.816 --> 00:21:00.266 A:middle
+and doesn't actually
+apply those changes
+
+00:21:00.976 --> 00:21:02.676 A:middle
+until you call
+executeSaveRequest.
+
+00:21:03.276 --> 00:21:07.036 A:middle
+And, a couple of important
+things about saving.
+
+00:21:07.606 --> 00:21:10.786 A:middle
+Number one is that the save
+request can include multiple
+
+00:21:10.786 --> 00:21:12.686 A:middle
+changes, and when
+you execute it,
+
+00:21:12.686 --> 00:21:14.896 A:middle
+all of them will be
+applied during, um,
+
+00:21:14.896 --> 00:21:15.836 A:middle
+when it gets executed.
+
+00:21:16.406 --> 00:21:21.336 A:middle
+And the second is that the
+save request requires mutable
+
+00:21:21.336 --> 00:21:23.566 A:middle
+contacts, so you want
+to be careful not
+
+00:21:23.566 --> 00:21:25.966 A:middle
+to access these mutable
+contacts on another thread,
+
+00:21:26.056 --> 00:21:26.976 A:middle
+while a save is in process.
+
+00:21:29.316 --> 00:21:30.966 A:middle
+So now that you know
+how to fetch
+
+00:21:31.256 --> 00:21:34.976 A:middle
+and save a user's contacts,
+I'll invite Julien up on stage
+
+00:21:34.976 --> 00:21:37.456 A:middle
+to talk about using contacts
+in the user interface.
+
+00:21:39.516 --> 00:21:43.106 A:middle
+[ Applause ]
+
+00:21:43.606 --> 00:21:45.166 A:middle
+&gt;&gt; JULIEN ROBERT:
+Thank you, Dave.
+
+00:21:47.356 --> 00:21:48.606 A:middle
+Good afternoon.
+
+00:21:48.606 --> 00:21:51.686 A:middle
+I'm Julien and I'm an engineer
+in the iOS contacts team.
+
+00:21:52.676 --> 00:21:57.296 A:middle
+And now that Bruce and
+Dave made you experts
+
+00:21:57.296 --> 00:22:00.886 A:middle
+in the Contacts Framework, I
+will talk about user interface
+
+
+
+00:21:57.296 --> 00:22:00.886 A:middle
+in the Contacts Framework, I
+will talk about user interface
+
+00:22:01.616 --> 00:22:06.186 A:middle
+and show you how to pick and
+display contacts in your app.
+
+00:22:07.576 --> 00:22:10.276 A:middle
+Coming along with Contacts
+Framework we have a new UI
+
+00:22:10.366 --> 00:22:13.416 A:middle
+Framework called contacts UI.
+
+00:22:13.416 --> 00:22:17.946 A:middle
+It is available on both
+iOS 9 and OS X El Capitan.
+
+00:22:18.996 --> 00:22:23.406 A:middle
+This provides you with two
+clusters, first the picker,
+
+00:22:23.646 --> 00:22:27.146 A:middle
+which displays a list of
+all the users contacts,
+
+00:22:27.146 --> 00:22:30.136 A:middle
+to let him selectively
+import contact information
+
+00:22:30.136 --> 00:22:31.586 A:middle
+into your app.
+
+00:22:32.286 --> 00:22:35.136 A:middle
+And secondly, the
+contact view controller,
+
+00:22:35.546 --> 00:22:37.186 A:middle
+which is used to
+display a contact.
+
+00:22:37.846 --> 00:22:40.536 A:middle
+In the rest of this
+presentation I will talk
+
+00:22:40.536 --> 00:22:42.846 A:middle
+about the iOS version
+of the classes,
+
+00:22:43.696 --> 00:22:46.626 A:middle
+but the OS X counterparts
+are pretty similar.
+
+00:22:47.306 --> 00:22:50.846 A:middle
+Let's talk about
+picking contact first.
+
+00:22:51.756 --> 00:22:54.416 A:middle
+The class you use for
+that is CNContact Picker
+
+00:22:54.416 --> 00:22:55.166 A:middle
+View Controller.
+
+00:22:56.016 --> 00:22:58.896 A:middle
+It is a direct replacement
+of the class we had
+
+00:22:58.946 --> 00:23:03.276 A:middle
+in Address Book UI, AB People
+Picker Navigation Controller.
+
+
+
+00:22:58.946 --> 00:23:03.276 A:middle
+in Address Book UI, AB People
+Picker Navigation Controller.
+
+00:23:04.616 --> 00:23:08.206 A:middle
+As you can guess by its
+name, it is a direct subclass
+
+00:23:08.206 --> 00:23:11.546 A:middle
+of UA View Controller but
+you still must present it,
+
+00:23:11.646 --> 00:23:13.696 A:middle
+and not push it in a
+navigation controller.
+
+00:23:15.296 --> 00:23:17.736 A:middle
+It is always out of process.
+
+00:23:18.076 --> 00:23:22.186 A:middle
+It has the great advantage
+of not requiring the user
+
+00:23:22.246 --> 00:23:25.146 A:middle
+to let your app access
+its contacts.
+
+00:23:26.196 --> 00:23:29.266 A:middle
+So when you present
+a contact picker,
+
+00:23:29.266 --> 00:23:32.976 A:middle
+you will never see the dialogue
+that Bruce -- that Dave showed.
+
+00:23:35.656 --> 00:23:36.866 A:middle
+One thing that is important is
+
+00:23:36.866 --> 00:23:39.566 A:middle
+that the contact picker may
+return partial contacts.
+
+00:23:40.016 --> 00:23:42.996 A:middle
+For example, if you
+set a limited set
+
+00:23:43.426 --> 00:23:47.506 A:middle
+of displayed property keys,
+you will only get those keys
+
+00:23:47.986 --> 00:23:49.516 A:middle
+in the contact that
+you get back.
+
+00:23:50.256 --> 00:23:54.556 A:middle
+And the behavior of the picker
+is defined by two things,
+
+00:23:55.166 --> 00:23:58.656 A:middle
+first the delegate method that
+you implement, and second,
+
+00:23:58.656 --> 00:24:00.636 A:middle
+the predicate that
+you set on it.
+
+
+
+00:23:58.656 --> 00:24:00.636 A:middle
+the predicate that
+you set on it.
+
+00:24:00.946 --> 00:24:03.486 A:middle
+And we are going to talk
+about those just after.
+
+00:24:04.386 --> 00:24:06.536 A:middle
+But last but not
+least the picker must
+
+00:24:06.536 --> 00:24:07.856 A:middle
+support multiselection.
+
+00:24:09.516 --> 00:24:13.246 A:middle
+[ Applause ]
+
+00:24:13.746 --> 00:24:16.016 A:middle
+&gt;&gt; JULIEN ROBERT: Let's talk
+about the delegate method first.
+
+00:24:17.336 --> 00:24:20.326 A:middle
+So if your app is interested
+by a single contact,
+
+00:24:20.326 --> 00:24:23.856 A:middle
+and you want have this
+familiar look of the picker,
+
+00:24:24.856 --> 00:24:28.516 A:middle
+you simply need to implement
+the didSelectContact delegate
+
+00:24:28.516 --> 00:24:31.596 A:middle
+method, and you get
+a CNContact back.
+
+00:24:32.286 --> 00:24:34.496 A:middle
+So again, these contacts
+may be partial.
+
+00:24:35.116 --> 00:24:38.536 A:middle
+If you are interested
+in a single property,
+
+00:24:39.086 --> 00:24:41.646 A:middle
+you implement a did Select
+Contact Property delegate
+
+00:24:41.646 --> 00:24:44.546 A:middle
+method, and you get a
+CNContactProperty object.
+
+00:24:45.536 --> 00:24:48.016 A:middle
+So, this object is actually
+from the Contacts Framework
+
+00:24:48.016 --> 00:24:50.876 A:middle
+but we haven't seen it
+before, so let's take a look.
+
+00:24:52.386 --> 00:24:55.506 A:middle
+It is a simple wrapper class
+that contains the contact
+
+00:24:55.536 --> 00:24:59.266 A:middle
+that was selected, as well
+as the key of the property
+
+00:24:59.266 --> 00:25:00.886 A:middle
+that was selected by the user.
+
+
+
+00:24:59.266 --> 00:25:00.886 A:middle
+that was selected by the user.
+
+00:25:01.606 --> 00:25:04.786 A:middle
+Its value and potentially,
+the identifier,
+
+00:25:04.786 --> 00:25:07.736 A:middle
+is the property,
+is labeled value.
+
+00:25:10.046 --> 00:25:15.716 A:middle
+But you may also be interested
+in having multiple contacts.
+
+00:25:15.716 --> 00:25:18.256 A:middle
+And you would get
+this appearance.
+
+00:25:19.366 --> 00:25:20.666 A:middle
+To do that is very simple.
+
+00:25:20.666 --> 00:25:24.566 A:middle
+You just implement the
+didSelectContact delegate
+
+00:25:24.566 --> 00:25:26.776 A:middle
+method, and you get as expected,
+
+00:25:26.776 --> 00:25:28.676 A:middle
+an array of sent
+contact objects.
+
+00:25:30.056 --> 00:25:34.776 A:middle
+This also works for properties,
+you can get multiple of them
+
+00:25:34.776 --> 00:25:37.446 A:middle
+by implementing the
+didSelectContactProperties
+
+00:25:38.186 --> 00:25:41.626 A:middle
+delegate method, and get an
+array of CNContact properties.
+
+00:25:43.186 --> 00:25:43.486 A:middle
+All right.
+
+00:25:44.766 --> 00:25:46.326 A:middle
+So now let's talk
+about predicates.
+
+00:25:46.906 --> 00:25:50.766 A:middle
+Predicates lets you customize
+the behavior of the panel
+
+00:25:50.766 --> 00:25:53.206 A:middle
+and we have three of them.
+
+00:25:53.706 --> 00:25:56.356 A:middle
+The first one is predicate
+for enabling contact.
+
+00:25:57.066 --> 00:26:01.326 A:middle
+This lets you decide which
+contacts are available
+
+
+
+00:25:57.066 --> 00:26:01.326 A:middle
+This lets you decide which
+contacts are available
+
+00:26:01.326 --> 00:26:02.706 A:middle
+to the user and which are not.
+
+00:26:03.426 --> 00:26:05.946 A:middle
+If I take the example
+that we've seen earlier,
+
+00:26:05.946 --> 00:26:09.716 A:middle
+and if you want a user
+to only select members
+
+00:26:09.716 --> 00:26:12.176 A:middle
+of the Parker family,
+for example,
+
+00:26:12.676 --> 00:26:16.026 A:middle
+you would create a predicate
+where you want to match contacts
+
+00:26:16.026 --> 00:26:17.826 A:middle
+with the Parker family name.
+
+00:26:17.896 --> 00:26:22.136 A:middle
+You set it as a
+predicateForEnablingContact.
+
+00:26:22.756 --> 00:26:24.606 A:middle
+And once the picker
+is represented,
+
+00:26:24.606 --> 00:26:28.326 A:middle
+you can see that you
+can only select people
+
+00:26:28.326 --> 00:26:30.486 A:middle
+with the Parker family name.
+
+00:26:31.636 --> 00:26:36.526 A:middle
+The second one that we have is
+predicate ForSelectionOfContact.
+
+00:26:37.366 --> 00:26:41.706 A:middle
+This one is evaluated when the
+user will tap on the contact.
+
+00:26:42.306 --> 00:26:43.866 A:middle
+And if it evaluates to true,
+
+00:26:43.866 --> 00:26:46.166 A:middle
+then the contact is
+returned to your app.
+
+00:26:46.596 --> 00:26:50.576 A:middle
+Otherwise we will
+display the contact card.
+
+00:26:50.806 --> 00:26:52.876 A:middle
+Similarly for properties
+we have predicate
+
+00:26:52.876 --> 00:26:54.286 A:middle
+ForSelectionOf Property.
+
+00:26:55.386 --> 00:26:58.916 A:middle
+And if it evaluates to true,
+the property that is tapped
+
+00:26:58.916 --> 00:27:01.246 A:middle
+by the user will be
+returned to your app,
+
+
+
+00:26:58.916 --> 00:27:01.246 A:middle
+by the user will be
+returned to your app,
+
+00:27:01.566 --> 00:27:03.646 A:middle
+otherwise the default
+action will be performed,
+
+00:27:04.006 --> 00:27:06.826 A:middle
+such as making a phone call
+or creating a new e-mail.
+
+00:27:08.026 --> 00:27:11.376 A:middle
+One thing to note is that this
+last predicate is evaluated
+
+00:27:11.376 --> 00:27:13.186 A:middle
+on [the] CNContactProperty
+object,
+
+00:27:13.726 --> 00:27:17.456 A:middle
+whereas the first two are
+evaluated on CNContact objects.
+
+00:27:17.456 --> 00:27:22.586 A:middle
+I would like to point out
+that you need to be coherent
+
+00:27:23.026 --> 00:27:24.916 A:middle
+between the predicates you set
+
+00:27:24.916 --> 00:27:26.766 A:middle
+and the delegate methods
+that you implement.
+
+00:27:27.226 --> 00:27:29.796 A:middle
+For example, you should only
+implement the didSelectContact
+
+00:27:29.796 --> 00:27:33.726 A:middle
+delegate method, but set
+the predicate for selection
+
+00:27:33.876 --> 00:27:37.816 A:middle
+of property predicate, then,
+doesn't really make sense,
+
+00:27:37.816 --> 00:27:40.406 A:middle
+and you would see a log, and
+your predicate will be ignored.
+
+00:27:44.046 --> 00:27:46.956 A:middle
+Right, so now that you
+know how to pick contacts,
+
+00:27:46.956 --> 00:27:48.806 A:middle
+let's talk about
+viewing them in your app.
+
+00:27:49.946 --> 00:27:51.886 A:middle
+So we now have just one class
+
+00:27:51.886 --> 00:27:56.796 A:middle
+to replace the three classes
+what we had in Address Book UI.
+
+00:27:56.996 --> 00:27:59.856 A:middle
+But you can still get the
+behavior that you want
+
+
+
+00:28:00.446 --> 00:28:02.726 A:middle
+by using the appropriate
+creation method.
+
+00:28:04.336 --> 00:28:07.546 A:middle
+The first one is
+viewControllerForContact,
+
+00:28:07.916 --> 00:28:11.646 A:middle
+which would give you a view
+controller that is the same
+
+00:28:11.706 --> 00:28:14.946 A:middle
+as in contacts app, iPhone app.
+
+00:28:15.856 --> 00:28:18.386 A:middle
+If you want to create
+a new contact,
+
+00:28:18.386 --> 00:28:20.266 A:middle
+you can use
+viewControllerForNewContact,
+
+00:28:20.266 --> 00:28:24.416 A:middle
+and you get this View Controller
+which is always in editing mode.
+
+00:28:25.106 --> 00:28:28.906 A:middle
+And lastly, if you
+have a contact that is
+
+00:28:28.906 --> 00:28:32.296 A:middle
+from an unknown origin, such
+as a vCard, for example,
+
+00:28:32.656 --> 00:28:34.496 A:middle
+you use
+viewControllerForUnknownContact.
+
+00:28:35.506 --> 00:28:40.056 A:middle
+One thing we've added in iOS 9
+is this update contact button
+
+00:28:40.666 --> 00:28:42.816 A:middle
+which will be displayed
+automatically
+
+00:28:43.046 --> 00:28:44.606 A:middle
+if there is already a contact
+
+00:28:44.606 --> 00:28:46.906 A:middle
+in the user's contact
+matching the name
+
+00:28:47.326 --> 00:28:48.666 A:middle
+of the contact you
+are displaying.
+
+00:28:49.056 --> 00:28:53.056 A:middle
+And if the user taps on
+it, it will display the UI
+
+00:28:53.056 --> 00:28:55.266 A:middle
+to update the existing contact
+with the new information.
+
+00:28:55.766 --> 00:29:01.156 A:middle
+This Contact View Controller
+is now always out of process,
+
+
+
+00:28:55.766 --> 00:29:01.156 A:middle
+This Contact View Controller
+is now always out of process,
+
+00:29:01.806 --> 00:29:03.036 A:middle
+and the reason for that is
+
+00:29:03.476 --> 00:29:05.796 A:middle
+that we may add some
+additional information
+
+00:29:06.216 --> 00:29:11.046 A:middle
+such as contacts data
+that was found in mail.
+
+00:29:11.246 --> 00:29:14.246 A:middle
+And as Dave pointed
+out, it is important
+
+00:29:14.436 --> 00:29:17.636 A:middle
+to fetch the contacts
+using the right keys.
+
+00:29:18.456 --> 00:29:21.006 A:middle
+So if you want to display it in
+the Contacts View Controller,
+
+00:29:21.006 --> 00:29:24.496 A:middle
+it must be fetched using the
+descriptorForRequiredKeys
+
+00:29:24.636 --> 00:29:25.856 A:middle
+of the Contacts View Controller.
+
+00:29:28.536 --> 00:29:32.076 A:middle
+So let's look at a quick
+code example on how
+
+00:29:32.076 --> 00:29:34.496 A:middle
+to display a contact
+from an identifier.
+
+00:29:35.456 --> 00:29:37.566 A:middle
+First you would fetch
+the contact
+
+00:29:37.566 --> 00:29:39.626 A:middle
+with the
+descriptorForRequiredKeys
+
+00:29:39.826 --> 00:29:41.166 A:middle
+of the Contact View Controller.
+
+00:29:42.746 --> 00:29:47.406 A:middle
+Then you create the Contact
+View Controller with forContact,
+
+00:29:47.506 --> 00:29:51.846 A:middle
+because we want a regular look
+at the Contact View Controller.
+
+00:29:51.846 --> 00:29:55.386 A:middle
+If you already have a contact
+store, you should set it
+
+00:29:55.386 --> 00:29:58.736 A:middle
+to the Contacts View Controller
+so that we can reuse it.
+
+00:29:59.286 --> 00:30:01.086 A:middle
+Set self as a delegate.
+
+
+
+00:29:59.286 --> 00:30:01.086 A:middle
+Set self as a delegate.
+
+00:30:02.326 --> 00:30:03.816 A:middle
+Push the View Controller.
+
+00:30:04.306 --> 00:30:07.706 A:middle
+And then in your delegate
+method you will get called
+
+00:30:07.706 --> 00:30:09.136 A:middle
+when the contact is modified.
+
+00:30:09.766 --> 00:30:13.556 A:middle
+Alright, so it is nice
+to look at a code sample,
+
+00:30:13.556 --> 00:30:17.846 A:middle
+but what is better is [to]
+build an app together,
+
+00:30:18.556 --> 00:30:19.746 A:middle
+let's do that now.
+
+00:30:24.046 --> 00:30:27.006 A:middle
+And the app we are going
+to build is called Meow.
+
+00:30:27.946 --> 00:30:32.406 A:middle
+And it's an app that lets
+you share your emotions
+
+00:30:32.566 --> 00:30:35.976 A:middle
+with your friends by
+sending them cat sounds.
+
+00:30:38.046 --> 00:30:43.086 A:middle
+So if I run the app, you can see
+at the top is a mood selector.
+
+00:30:43.086 --> 00:30:47.276 A:middle
+And then at the bottom is your
+friends list, which is empty
+
+00:30:47.276 --> 00:30:49.386 A:middle
+for now, and this is what
+we are going to build now.
+
+00:30:50.836 --> 00:30:54.386 A:middle
+The app is using an e-mail
+address to send the cat sounds.
+
+00:30:55.556 --> 00:31:00.026 A:middle
+So what we need is just a
+nickname and e-mail address.
+
+
+
+00:30:55.556 --> 00:31:00.026 A:middle
+So what we need is just a
+nickname and e-mail address.
+
+00:31:00.026 --> 00:31:04.716 A:middle
+So if I hit save,
+nothing happens
+
+00:31:04.716 --> 00:31:06.666 A:middle
+because it is not
+implemented yet.
+
+00:31:06.976 --> 00:31:09.996 A:middle
+So this is what we
+are going to do.
+
+00:31:10.236 --> 00:31:14.616 A:middle
+When I hit save, this
+addBuddy function is called,
+
+00:31:14.616 --> 00:31:16.566 A:middle
+and we will implement it now.
+
+00:31:17.836 --> 00:31:19.816 A:middle
+First we create a
+mutable contact
+
+00:31:19.816 --> 00:31:21.596 A:middle
+because we are going
+to modify it.
+
+00:31:22.066 --> 00:31:25.186 A:middle
+Then we set the nickname to be
+the value from the text field.
+
+00:31:25.186 --> 00:31:30.736 A:middle
+The emailAddresses
+property is set as an array
+
+00:31:31.366 --> 00:31:33.316 A:middle
+of a single label value.
+
+00:31:33.846 --> 00:31:36.386 A:middle
+We have the value being
+from the text field.
+
+00:31:36.386 --> 00:31:41.306 A:middle
+And finally we add this new
+contact to our list of contacts.
+
+00:31:42.326 --> 00:31:45.686 A:middle
+So let's run and see
+how it works now.
+
+00:31:48.406 --> 00:31:51.756 A:middle
+So I'm going to use prefilled
+values, and add Emily
+
+00:31:51.756 --> 00:31:55.096 A:middle
+to my friends, OK, my family.
+
+00:31:55.986 --> 00:31:58.246 A:middle
+You can notice this
+info button here.
+
+00:31:58.246 --> 00:32:00.656 A:middle
+And we want to show
+the contact view
+
+
+
+00:31:58.246 --> 00:32:00.656 A:middle
+And we want to show
+the contact view
+
+00:32:01.036 --> 00:32:02.866 A:middle
+when we click on
+this info button.
+
+00:32:04.156 --> 00:32:05.946 A:middle
+So this is what we are
+going to implement now.
+
+00:32:09.056 --> 00:32:13.866 A:middle
+So when I tap this button, the
+showContact function is called.
+
+00:32:14.516 --> 00:32:17.006 A:middle
+So let's fill it in.
+
+00:32:17.836 --> 00:32:21.106 A:middle
+First we create a Contact View
+Controller for the contact
+
+00:32:21.416 --> 00:32:24.646 A:middle
+that was, ah, that
+we want to show.
+
+00:32:25.236 --> 00:32:28.126 A:middle
+Then we set the contacts store
+to the one we already have.
+
+00:32:28.126 --> 00:32:30.906 A:middle
+And finally, we push
+the View Controller.
+
+00:32:34.836 --> 00:32:39.826 A:middle
+Let's just try, and okay, we
+can see the info for Emily.
+
+00:32:40.596 --> 00:32:44.266 A:middle
+Great. But what if we want
+to add a contact in our list,
+
+00:32:44.596 --> 00:32:46.326 A:middle
+that is already in
+the user's contacts?
+
+00:32:47.436 --> 00:32:49.366 A:middle
+So this is what we
+are going to do here.
+
+00:32:49.366 --> 00:32:52.516 A:middle
+And for that we are going
+to use the contact picker.
+
+00:32:53.226 --> 00:32:58.896 A:middle
+So this function is called
+when I tap on addFromContacts.
+
+00:32:58.896 --> 00:33:01.226 A:middle
+And I am going to
+implement it now.
+
+
+
+00:32:58.896 --> 00:33:01.226 A:middle
+And I am going to
+implement it now.
+
+00:33:01.696 --> 00:33:07.566 A:middle
+First thing I'm doing is create
+the contact picker controller.
+
+00:33:08.206 --> 00:33:10.956 A:middle
+Then since we are only
+interested in e-mail addresses,
+
+00:33:11.666 --> 00:33:14.636 A:middle
+I limit the properties
+to e-mail addresses.
+
+00:33:16.256 --> 00:33:23.386 A:middle
+Then we want, ah, to, the user
+to select contacts who have only
+
+00:33:23.896 --> 00:33:25.756 A:middle
+at least one e-mail address.
+
+00:33:25.886 --> 00:33:29.056 A:middle
+We see this is the part of the
+predicate that is doing that.
+
+00:33:29.546 --> 00:33:32.406 A:middle
+And who are not already
+in our list of friends,
+
+00:33:32.606 --> 00:33:36.046 A:middle
+because we don't
+want duplicates.
+
+00:33:36.046 --> 00:33:38.916 A:middle
+Finally, is the user,
+is contact already,
+
+00:33:39.206 --> 00:33:42.566 A:middle
+[who] has exactly one e-mail
+address, we don't need
+
+00:33:42.566 --> 00:33:45.216 A:middle
+to push the [card?], We want
+it to be written directly.
+
+00:33:46.026 --> 00:33:48.436 A:middle
+This is what this
+predicate is doing.
+
+00:33:48.876 --> 00:33:53.616 A:middle
+We set ourself as a delegate and
+we present the View Controller.
+
+00:33:55.356 --> 00:34:01.206 A:middle
+We also need delegate methods
+where we add the new contact
+
+
+
+00:33:55.356 --> 00:34:01.206 A:middle
+We also need delegate methods
+where we add the new contact
+
+00:34:01.206 --> 00:34:02.326 A:middle
+to our list of contacts.
+
+00:34:03.596 --> 00:34:04.976 A:middle
+So it is straight now.
+
+00:34:05.456 --> 00:34:11.676 A:middle
+And if I select John Appleseed,
+I know he has two e-mails.
+
+00:34:12.366 --> 00:34:14.396 A:middle
+So the contact card is pushed.
+
+00:34:14.956 --> 00:34:17.556 A:middle
+I would select one e-mail,
+and we have John in our list.
+
+00:34:19.016 --> 00:34:22.166 A:middle
+If I add a new contact,
+first you can see
+
+00:34:22.166 --> 00:34:24.456 A:middle
+that now John Appleseed
+is unavailable
+
+00:34:24.456 --> 00:34:26.396 A:middle
+because he is already
+in my friends list.
+
+00:34:27.306 --> 00:34:31.116 A:middle
+But if I select David, he
+just has one e-mail address.
+
+00:34:31.116 --> 00:34:32.696 A:middle
+So the contact is
+returned directly.
+
+00:34:33.266 --> 00:34:38.456 A:middle
+So what happens if I want
+to show the card for John?
+
+00:34:39.696 --> 00:34:41.045 A:middle
+So we have an exception.
+
+00:34:41.545 --> 00:34:44.876 A:middle
+And the reason is that
+because we were not careful
+
+00:34:45.306 --> 00:34:48.815 A:middle
+when presenting the
+contact here,
+
+00:34:49.056 --> 00:34:53.456 A:middle
+because the contact picker
+returned the partial contacts,
+
+00:34:53.456 --> 00:34:56.146 A:middle
+it is missing some keys for
+the Contact View Controller.
+
+00:34:56.146 --> 00:35:03.266 A:middle
+So we are going to fix
+that by first checking
+
+
+
+00:34:56.146 --> 00:35:03.266 A:middle
+So we are going to fix
+that by first checking
+
+00:35:03.266 --> 00:35:05.836 A:middle
+if the contact has the
+required keys to be used
+
+00:35:06.296 --> 00:35:07.996 A:middle
+in the Contact View Controller.
+
+00:35:08.426 --> 00:35:12.516 A:middle
+And if he does, we just use
+the code that we had before.
+
+00:35:13.306 --> 00:35:16.586 A:middle
+But if he does not, we
+will first ask the Store
+
+00:35:16.586 --> 00:35:18.626 A:middle
+to request access for contacts.
+
+00:35:19.846 --> 00:35:23.426 A:middle
+If the user grants access,
+we are going to have
+
+00:35:23.526 --> 00:35:27.026 A:middle
+to re-fetch the contact
+using its identifier.
+
+00:35:27.026 --> 00:35:32.236 A:middle
+And this time using the
+keysToFetch, the descriptor
+
+00:35:32.236 --> 00:35:35.536 A:middle
+for recorded keys of the
+CNContactViewController.
+
+00:35:36.766 --> 00:35:40.306 A:middle
+Then we call the same
+function again but this time
+
+00:35:40.306 --> 00:35:45.266 A:middle
+with our complete
+contacts ready to be used.
+
+00:35:45.266 --> 00:35:48.966 A:middle
+So let's try again.
+
+00:35:48.966 --> 00:35:52.136 A:middle
+So if I view the
+contact card for Emily,
+
+00:35:52.886 --> 00:35:54.186 A:middle
+we have no dialogue showing
+
+00:35:54.186 --> 00:35:58.936 A:middle
+up because Emily
+was created in code.
+
+00:35:58.936 --> 00:36:00.366 A:middle
+So she has all the fetch keys.
+
+
+
+00:35:58.936 --> 00:36:00.366 A:middle
+So she has all the fetch keys.
+
+00:36:00.946 --> 00:36:04.776 A:middle
+If I do the same on John,
+I re-fetch is necessary.
+
+00:36:05.526 --> 00:36:08.206 A:middle
+So at this point your app will
+access the user's contact.
+
+00:36:09.476 --> 00:36:12.846 A:middle
+So we say okay, and we can see
+all the contact information
+
+00:36:12.906 --> 00:36:13.306 A:middle
+for John.
+
+00:36:13.306 --> 00:36:13.946 A:middle
+All right.
+
+00:36:15.736 --> 00:36:19.276 A:middle
+So this concludes our demo.
+
+00:36:19.546 --> 00:36:20.946 A:middle
+Which makes me a bit sad.
+
+00:36:20.946 --> 00:36:24.246 A:middle
+So I will share my
+emotions with John.
+
+00:36:24.246 --> 00:36:25.976 A:middle
+(Sound of cat crying.)
+
+00:36:26.516 --> 00:36:31.946 A:middle
+[ Applause ]
+
+00:36:32.446 --> 00:36:33.936 A:middle
+&gt;&gt; JULIEN ROBERT: And
+I will call Bruce back
+
+00:36:34.236 --> 00:36:35.416 A:middle
+to conclude this presentation.
+
+00:36:39.576 --> 00:36:40.926 A:middle
+&gt;&gt; BRUCE STADNYK: Thank
+you, Dave and Julien
+
+00:36:40.926 --> 00:36:44.626 A:middle
+for showing us how to
+use contacts in our apps.
+
+00:36:45.676 --> 00:36:49.396 A:middle
+So you now have an Objective-C
+API to access contacts,
+
+00:36:49.856 --> 00:36:53.406 A:middle
+and it works well with Swift.
+
+00:36:54.056 --> 00:36:58.116 A:middle
+The Contacts API is the same
+across multiple Apple platforms.
+
+00:36:58.916 --> 00:37:01.976 A:middle
+Address book is being
+deprecated,
+
+
+
+00:36:58.916 --> 00:37:01.976 A:middle
+Address book is being
+deprecated,
+
+00:37:02.116 --> 00:37:03.446 A:middle
+so start adopting now.
+
+00:37:07.456 --> 00:37:10.296 A:middle
+For more information you
+can refer to the contacts
+
+00:37:10.296 --> 00:37:12.306 A:middle
+in ContactsUI Framework
+References
+
+00:37:12.816 --> 00:37:13.976 A:middle
+on the developer library.
+
+00:37:13.976 --> 00:37:18.966 A:middle
+For technical support you can
+go to the Developer Forums,
+
+00:37:20.036 --> 00:37:22.186 A:middle
+and for general inquiries,
+Paul loves e-mail,
+
+00:37:22.186 --> 00:37:25.536 A:middle
+so you can e-mail him, and he's
+our app Frameworks evangelist.
+
+00:37:26.106 --> 00:37:26.526 A:middle
+Thank you
+
+00:37:27.016 --> 00:37:29.000 A:middle
+[ Applause ]
+

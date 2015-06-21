@@ -1,0 +1,3467 @@
+
+00:00:23.516 --> 00:00:31.096 A:middle
+[Applause]
+
+00:00:31.596 --> 00:00:32.076 A:middle
+&gt;&gt; KYLE SLUDER: Good morning!
+
+00:00:33.266 --> 00:00:35.096 A:middle
+Happy Thursday to everybody.
+
+00:00:35.746 --> 00:00:37.256 A:middle
+Congratulations on making it
+
+00:00:37.256 --> 00:00:38.976 A:middle
+to a 9:00 a.m. session
+this late in the week.
+
+00:00:39.016 --> 00:00:40.086 A:middle
+[Laughter]
+
+00:00:40.086 --> 00:00:41.666 A:middle
+&gt;&gt; KYLE SLUDER: I was
+in your seats last year.
+
+00:00:41.666 --> 00:00:43.036 A:middle
+I know exactly how
+difficult that can be.
+
+00:00:43.036 --> 00:00:48.856 A:middle
+Today we're going to talk
+about some improvements
+
+00:00:48.856 --> 00:00:50.296 A:middle
+that we've made to storyboards.
+
+00:00:51.136 --> 00:00:54.546 A:middle
+Just to help everybody warm-up
+and get ready for the day,
+
+00:00:54.816 --> 00:00:56.606 A:middle
+I'm going to do a
+quick exercise here.
+
+00:00:57.356 --> 00:00:58.936 A:middle
+How many people here
+have shipped an app
+
+00:00:59.456 --> 00:01:00.606 A:middle
+that uses storyboards?
+
+
+
+00:00:59.456 --> 00:01:00.606 A:middle
+that uses storyboards?
+
+00:01:01.126 --> 00:01:04.025 A:middle
+That is a very good number.
+
+00:01:04.025 --> 00:01:08.996 A:middle
+How many people here have
+maybe tried to use storyboards
+
+00:01:08.996 --> 00:01:11.476 A:middle
+or thought about using
+storyboards and either they
+
+00:01:11.476 --> 00:01:15.136 A:middle
+or their team decided that this
+isn't the way we want do this?
+
+00:01:15.646 --> 00:01:16.436 A:middle
+Maybe not for now.
+
+00:01:17.536 --> 00:01:22.816 A:middle
+Okay. How many people
+here have never used the
+
+00:01:22.816 --> 00:01:23.606 A:middle
+storyboard before?
+
+00:01:24.146 --> 00:01:28.186 A:middle
+Wow, this is a very
+experienced crowd.
+
+00:01:28.956 --> 00:01:29.586 A:middle
+All right.
+
+00:01:31.046 --> 00:01:33.886 A:middle
+We're going to focus on
+three main areas today:
+
+00:01:34.306 --> 00:01:36.976 A:middle
+First we're going to talk about
+a new feature that we've added
+
+00:01:36.976 --> 00:01:38.456 A:middle
+to help you organize
+your storyboards
+
+00:01:38.456 --> 00:01:40.816 A:middle
+and keep them manageable
+and then we're going to talk
+
+00:01:40.816 --> 00:01:43.816 A:middle
+about ways that you can
+customize the standard segueway
+
+00:01:43.816 --> 00:01:45.586 A:middle
+ways that we've provided
+for you in Interface Builder
+
+00:01:46.536 --> 00:01:47.486 A:middle
+and finally we're going to talk
+
+00:01:47.486 --> 00:01:50.546 A:middle
+about what might be a little
+bit more of an advanced feature,
+
+00:01:50.916 --> 00:01:54.916 A:middle
+unwind segueway ways and how we
+have improved them in relation
+
+00:01:54.916 --> 00:01:58.186 A:middle
+to the custom container view
+controllers that you use in iOS.
+
+00:01:58.316 --> 00:02:01.446 A:middle
+So let's get started.
+
+
+
+00:01:58.316 --> 00:02:01.446 A:middle
+So let's get started.
+
+00:02:01.446 --> 00:02:05.846 A:middle
+We have a really simple
+demo application here.
+
+00:02:05.846 --> 00:02:07.856 A:middle
+It is just a collection
+view that displays a bunch
+
+00:02:07.856 --> 00:02:09.795 A:middle
+of photos inside of
+navigation controller.
+
+00:02:10.506 --> 00:02:14.566 A:middle
+If I tap one of those
+photos, it comes in onscreen.
+
+00:02:15.596 --> 00:02:16.906 A:middle
+Then I can tap that back button
+
+00:02:16.906 --> 00:02:19.186 A:middle
+in the upper-left
+corner and it goes away.
+
+00:02:23.476 --> 00:02:28.146 A:middle
+The three components of that
+user interface correspond
+
+00:02:28.216 --> 00:02:30.916 A:middle
+to three view controller
+instances at runtime.
+
+00:02:32.306 --> 00:02:34.356 A:middle
+If I were to diagram
+this application
+
+00:02:34.356 --> 00:02:36.186 A:middle
+out on paper I might
+do something like this.
+
+00:02:36.356 --> 00:02:39.996 A:middle
+It might represent those
+view controllers as boxes
+
+00:02:40.646 --> 00:02:44.156 A:middle
+and then draw lines between
+them to describe the flow
+
+00:02:44.156 --> 00:02:45.206 A:middle
+through my application.
+
+00:02:45.726 --> 00:02:49.526 A:middle
+That's the kind of information
+that a storyboard captures
+
+00:02:49.526 --> 00:02:51.186 A:middle
+for you and let's
+you use at runtime.
+
+00:02:51.656 --> 00:02:55.056 A:middle
+There's a bit of
+specialized terminology
+
+00:02:55.056 --> 00:02:56.906 A:middle
+with regard to storyboards.
+
+00:02:56.906 --> 00:02:58.896 A:middle
+Those boxes that have been
+turned into circles here,
+
+00:02:59.186 --> 00:03:02.286 A:middle
+we call those scenes and
+they act as templates
+
+
+
+00:02:59.186 --> 00:03:02.286 A:middle
+we call those scenes and
+they act as templates
+
+00:03:02.356 --> 00:03:04.106 A:middle
+for the view controllers
+that actually make
+
+00:03:04.106 --> 00:03:07.416 A:middle
+up your user interface
+at runtime.
+
+00:03:07.506 --> 00:03:10.846 A:middle
+Those lines we call segueways,
+and there are a couple
+
+00:03:10.846 --> 00:03:12.476 A:middle
+of different kinds of segueways.
+
+00:03:13.506 --> 00:03:14.776 A:middle
+That relationship --
+
+00:03:14.776 --> 00:03:17.096 A:middle
+that segueway between
+the navigation controller
+
+00:03:17.096 --> 00:03:18.946 A:middle
+and the collection view
+controller is a kind
+
+00:03:18.946 --> 00:03:20.516 A:middle
+of segueway called a
+relationship segueway.
+
+00:03:21.096 --> 00:03:25.226 A:middle
+Specifically it states that that
+collection view controller is
+
+00:03:25.226 --> 00:03:27.636 A:middle
+at the root of the
+navigation stack managed
+
+00:03:27.636 --> 00:03:28.866 A:middle
+by that navigation controller.
+
+00:03:29.386 --> 00:03:33.396 A:middle
+Another kind of segueway
+is a triggered segueway,
+
+00:03:33.676 --> 00:03:36.886 A:middle
+this one specificallys says
+that when I tap on a cell
+
+00:03:36.886 --> 00:03:38.596 A:middle
+in a collection view I want
+
+00:03:38.596 --> 00:03:41.866 A:middle
+to show my photo view controller
+using the semantics defined
+
+00:03:41.866 --> 00:03:44.066 A:middle
+by the show view
+controller method.
+
+00:03:46.936 --> 00:03:49.236 A:middle
+When we actually
+put this altogether
+
+00:03:49.296 --> 00:03:53.306 A:middle
+in a storyboard file we
+can give things identifiers
+
+00:03:54.676 --> 00:03:56.656 A:middle
+and then we set that up
+in Interface Builder --
+
+00:03:56.786 --> 00:03:59.496 A:middle
+in Xcode as our main
+interface file for our project
+
+
+
+00:04:00.166 --> 00:04:01.166 A:middle
+and we run the application.
+
+00:04:01.836 --> 00:04:03.256 A:middle
+The first thing that happens,
+
+00:04:03.256 --> 00:04:05.966 A:middle
+is that we instantiate a
+navigation controller based
+
+00:04:05.966 --> 00:04:08.666 A:middle
+on what's in the initial
+scene in our storyboard
+
+00:04:09.266 --> 00:04:12.156 A:middle
+and then we see that there
+is a relationship defined
+
+00:04:12.156 --> 00:04:13.496 A:middle
+on that navigation controller.
+
+00:04:14.066 --> 00:04:18.446 A:middle
+So we instantiate the view
+controller at the other end
+
+00:04:18.446 --> 00:04:22.206 A:middle
+of that segueway and then we
+establish the relationship
+
+00:04:22.826 --> 00:04:24.586 A:middle
+that is defined by
+that segueway,
+
+00:04:24.876 --> 00:04:28.176 A:middle
+that root of the
+navigation stack.
+
+00:04:28.386 --> 00:04:32.126 A:middle
+Later on as the user is using
+our application they tap
+
+00:04:32.126 --> 00:04:36.446 A:middle
+on a collection view cell
+which performs that segueway
+
+00:04:36.446 --> 00:04:37.996 A:middle
+that we have labeled
+show pic here,
+
+00:04:38.236 --> 00:04:39.836 A:middle
+that's that show
+segueway from before.
+
+00:04:39.836 --> 00:04:43.716 A:middle
+We instantiate the view
+controller at the other end
+
+00:04:43.716 --> 00:04:46.816 A:middle
+of that segueway and we
+establish the relationship,
+
+00:04:46.816 --> 00:04:49.706 A:middle
+we perform that action
+that the segueway defines.
+
+00:04:50.616 --> 00:04:52.946 A:middle
+As you're designing
+your application,
+
+00:04:52.946 --> 00:04:55.576 A:middle
+you're implementing your
+application your interfaces get
+
+00:04:55.576 --> 00:04:57.566 A:middle
+more complicated and
+so do your storyboards.
+
+00:04:58.156 --> 00:05:00.076 A:middle
+Eventually in order to
+keep things manageable,
+
+
+
+00:04:58.156 --> 00:05:00.076 A:middle
+Eventually in order to
+keep things manageable,
+
+00:05:00.076 --> 00:05:02.456 A:middle
+just like you split your source
+code into multiple files,
+
+00:05:03.226 --> 00:05:05.296 A:middle
+you split your storyboards
+into multiple files,
+
+00:05:06.576 --> 00:05:09.406 A:middle
+but we can't draw a segueway
+across a file boundary.
+
+00:05:10.676 --> 00:05:13.616 A:middle
+We can fall back to code, we
+can instantiate an instance
+
+00:05:13.616 --> 00:05:14.896 A:middle
+of that secondary storyboard,
+
+00:05:16.576 --> 00:05:19.326 A:middle
+and we can instantiate view
+controllers based on the scenes
+
+00:05:19.326 --> 00:05:24.636 A:middle
+in that storyboard, or
+we have lost the ability
+
+00:05:24.716 --> 00:05:27.406 A:middle
+to visualize the connection
+between the scenes.
+
+00:05:27.656 --> 00:05:30.826 A:middle
+What we really want to do is
+we want to get that arrow back.
+
+00:05:30.826 --> 00:05:34.976 A:middle
+That's what we have
+done for you in Xcode 7
+
+00:05:34.976 --> 00:05:37.336 A:middle
+with a new feature we call
+Storyboard References.
+
+00:05:38.516 --> 00:05:43.686 A:middle
+[Applause]
+
+00:05:44.186 --> 00:05:45.346 A:middle
+&gt;&gt; KYLE SLUDER: So just so
+you know, you're all have
+
+00:05:45.346 --> 00:05:47.376 A:middle
+to applaud again for Tony
+because he actually did most
+
+00:05:47.376 --> 00:05:48.976 A:middle
+of the work on implementing
+this.
+
+00:05:49.016 --> 00:05:50.046 A:middle
+[Laughter]
+
+00:05:50.046 --> 00:05:52.376 A:middle
+&gt;&gt; KYLE SLUDER: A
+storyboard reference stands
+
+00:05:52.376 --> 00:05:54.886 A:middle
+in for another scene and
+that scene can actually be
+
+00:05:54.886 --> 00:05:57.656 A:middle
+in to the same storyboard
+or in another storyboard.
+
+00:05:58.196 --> 00:06:01.856 A:middle
+Just like any scene, it can be
+
+
+
+00:05:58.196 --> 00:06:01.856 A:middle
+Just like any scene, it can be
+
+00:06:02.296 --> 00:06:05.896 A:middle
+at the destination
+end of any segueway.
+
+00:06:06.396 --> 00:06:09.946 A:middle
+Really that's all there is
+to say about that so I'd
+
+00:06:09.946 --> 00:06:12.766 A:middle
+like to ask Tony up, show you
+how easy it is with Xcode 7
+
+00:06:12.766 --> 00:06:15.416 A:middle
+to organize your
+storyboards for OS X 10.11,
+
+00:06:15.916 --> 00:06:18.976 A:middle
+iOS 9 and watchOS using Xcode 7.
+
+00:06:19.516 --> 00:06:23.286 A:middle
+[Applause]
+
+00:06:23.786 --> 00:06:24.916 A:middle
+&gt;&gt; TONY RICCIARDI:
+Thank you, Kyle.
+
+00:06:25.376 --> 00:06:28.366 A:middle
+Good Morning, my name is Tony
+and I work on Interface Builder.
+
+00:06:28.476 --> 00:06:30.976 A:middle
+In this (unintelligible),
+I'll show you our new feature,
+
+00:06:31.056 --> 00:06:32.146 A:middle
+called Storyboard References,
+
+00:06:32.506 --> 00:06:35.106 A:middle
+but before we get started let me
+show you the app we're building.
+
+00:06:36.616 --> 00:06:38.736 A:middle
+This is an app to
+help you organize
+
+00:06:38.816 --> 00:06:40.466 A:middle
+and plan events for a road trip.
+
+00:06:40.936 --> 00:06:44.686 A:middle
+I implemented the UI for this
+app using a custom container
+
+00:06:44.686 --> 00:06:47.896 A:middle
+view controller which
+manages four tabs.
+
+00:06:48.546 --> 00:06:50.286 A:middle
+Each of these tabs
+is implemented
+
+00:06:50.286 --> 00:06:53.276 A:middle
+with its own UI navigation
+controller and you can open
+
+00:06:53.276 --> 00:06:55.966 A:middle
+up a tab by tapping
+on its navigation bar.
+
+00:06:56.676 --> 00:07:00.746 A:middle
+This first tab shows a
+table of upcoming events.
+
+
+
+00:06:56.676 --> 00:07:00.746 A:middle
+This first tab shows a
+table of upcoming events.
+
+00:07:01.676 --> 00:07:05.666 A:middle
+This tab shows a
+journal of past events.
+
+00:07:05.756 --> 00:07:07.386 A:middle
+Here we have a map
+of upcoming stops.
+
+00:07:08.406 --> 00:07:10.546 A:middle
+Finally, we have a
+collection of photos
+
+00:07:10.546 --> 00:07:11.466 A:middle
+that we have taken on our trip.
+
+00:07:12.126 --> 00:07:15.596 A:middle
+You can tap on a photo cell to
+get a larger view of the photo
+
+00:07:15.596 --> 00:07:17.696 A:middle
+and you can tap on
+this bar button item
+
+00:07:17.846 --> 00:07:19.306 A:middle
+to get a menu of
+possible actions.
+
+00:07:19.746 --> 00:07:24.206 A:middle
+Let's take a look at the
+main storyboard for my app.
+
+00:07:25.366 --> 00:07:29.206 A:middle
+Up here in the top left I
+have my custom container view
+
+00:07:29.206 --> 00:07:32.996 A:middle
+controller and that
+container is connected to each
+
+00:07:32.996 --> 00:07:36.506 A:middle
+of its four child navigation
+controllers using an
+
+00:07:36.506 --> 00:07:37.196 A:middle
+embed segueway.
+
+00:07:37.956 --> 00:07:39.316 A:middle
+An embed segueway allows you
+
+00:07:39.316 --> 00:07:44.216 A:middle
+to embed a child view
+controller inside of a parent.
+
+00:07:44.326 --> 00:07:46.616 A:middle
+As you can see, over time
+this storyboard has gotten
+
+00:07:46.616 --> 00:07:47.236 A:middle
+pretty large.
+
+00:07:47.616 --> 00:07:49.096 A:middle
+And so what I want to
+do today is break it
+
+00:07:49.096 --> 00:07:50.116 A:middle
+up into smaller pieces.
+
+00:07:50.836 --> 00:07:56.866 A:middle
+If we take a look at the bottom
+of my storyboard you can see
+
+00:07:56.866 --> 00:08:00.016 A:middle
+that I have the three view
+controllers for my photos tab.
+
+
+
+00:07:56.866 --> 00:08:00.016 A:middle
+that I have the three view
+controllers for my photos tab.
+
+00:08:01.436 --> 00:08:04.256 A:middle
+These view controllers are
+mostly independent of the rest
+
+00:08:04.256 --> 00:08:05.456 A:middle
+of the scenes in my storyboard.
+
+00:08:05.816 --> 00:08:07.316 A:middle
+And so it would make
+sense to pull them
+
+00:08:07.316 --> 00:08:08.166 A:middle
+out into their own file.
+
+00:08:09.426 --> 00:08:13.196 A:middle
+To do that, I'm going to select
+these view controllers and head
+
+00:08:13.196 --> 00:08:16.076 A:middle
+up to the editor menu and
+choose refactor to storyboard.
+
+00:08:16.356 --> 00:08:20.086 A:middle
+I'm going to call the new
+file photos.storyboard.
+
+00:08:21.566 --> 00:08:24.796 A:middle
+When I do that, Xcode
+generates a new storyboard file,
+
+00:08:24.916 --> 00:08:27.216 A:middle
+pulls those view controllers
+out of my main storyboard
+
+00:08:27.406 --> 00:08:30.276 A:middle
+and puts them in the new file.
+
+00:08:30.496 --> 00:08:32.336 A:middle
+What happened back in
+the main storyboard file?
+
+00:08:32.336 --> 00:08:33.385 A:middle
+Let's use the back button.
+
+00:08:34.746 --> 00:08:35.916 A:middle
+Down here where we used
+
+00:08:35.976 --> 00:08:38.306 A:middle
+to see those three view
+controllers we now have a
+
+00:08:38.436 --> 00:08:39.566 A:middle
+storyboard reference.
+
+00:08:40.936 --> 00:08:43.076 A:middle
+Whenever you refactor
+scenes from a storyboard
+
+00:08:43.395 --> 00:08:46.406 A:middle
+and the scenes have incoming
+segueways, Xcode is going
+
+00:08:46.406 --> 00:08:50.006 A:middle
+to take those segueways,
+generate a storyboard reference
+
+00:08:50.006 --> 00:08:51.696 A:middle
+and reroute the segueways
+to the reference.
+
+00:08:52.846 --> 00:08:54.826 A:middle
+At runtime when this
+segueway executes,
+
+00:08:54.916 --> 00:08:57.636 A:middle
+it is going to instantiate
+the initial view controller
+
+00:08:57.636 --> 00:09:00.366 A:middle
+out of my photo storyboard and
+use that as its destination.
+
+
+
+00:08:57.636 --> 00:09:00.366 A:middle
+out of my photo storyboard and
+use that as its destination.
+
+00:09:02.386 --> 00:09:06.136 A:middle
+If I double-click on this
+reference Xcode takes me
+
+00:09:06.356 --> 00:09:08.766 A:middle
+to that storyboard and
+shows me the view controller
+
+00:09:08.766 --> 00:09:09.366 A:middle
+I'm referencing.
+
+00:09:09.716 --> 00:09:11.716 A:middle
+Which in this case is
+the initial navigation...
+
+00:09:11.716 --> 00:09:13.156 A:middle
+the initial view
+controller of the storyboard.
+
+00:09:14.526 --> 00:09:15.796 A:middle
+That's one way to
+use this feature.
+
+00:09:16.106 --> 00:09:17.996 A:middle
+You can take a large
+storyboard file
+
+00:09:17.996 --> 00:09:19.756 A:middle
+and refactor it into
+smaller pieces.
+
+00:09:20.696 --> 00:09:23.786 A:middle
+Another way you can use this
+feature is to create segueways
+
+00:09:23.786 --> 00:09:26.256 A:middle
+to view controllers that
+already exist in separate files.
+
+00:09:27.566 --> 00:09:30.576 A:middle
+I'm going to create a new
+segueway now and I want
+
+00:09:30.576 --> 00:09:32.416 A:middle
+that segueway to be triggered
+by this journal button.
+
+00:09:32.806 --> 00:09:35.656 A:middle
+I want it to take me
+back to a view controller
+
+00:09:35.656 --> 00:09:37.776 A:middle
+in my main storyboard
+file that manages the UI
+
+00:09:37.776 --> 00:09:39.246 A:middle
+for creating a new
+journal entry.
+
+00:09:39.756 --> 00:09:44.656 A:middle
+To do that, I'm going to scroll
+over to my photo view controller
+
+00:09:44.656 --> 00:09:48.146 A:middle
+over here and I'm going to
+drag out a storyboard reference
+
+00:09:48.146 --> 00:09:49.956 A:middle
+from the library and
+drop it next to it.
+
+00:09:50.446 --> 00:09:53.806 A:middle
+Let's take a look at
+the Attributes inspector
+
+00:09:53.806 --> 00:09:54.886 A:middle
+for a storyboard reference.
+
+00:09:55.016 --> 00:09:58.566 A:middle
+As you can see, there
+are three fields here.
+
+00:09:59.386 --> 00:10:01.086 A:middle
+The first field is the name
+
+
+
+00:09:59.386 --> 00:10:01.086 A:middle
+The first field is the name
+
+00:10:01.086 --> 00:10:02.476 A:middle
+of the storyboard file
+you're referencing.
+
+00:10:03.316 --> 00:10:06.536 A:middle
+If you leave this blank Xcode
+will use the same storyboard
+
+00:10:06.536 --> 00:10:08.336 A:middle
+that contains the
+reference itself,
+
+00:10:08.736 --> 00:10:10.866 A:middle
+which in this case would
+be the photo storyboard.
+
+00:10:11.576 --> 00:10:14.156 A:middle
+That may be useful if you
+have a really large storyboard
+
+00:10:14.156 --> 00:10:16.246 A:middle
+and you want to create a
+segueway from a view controller
+
+00:10:16.246 --> 00:10:18.296 A:middle
+on one side to a view
+controller on another side.
+
+00:10:19.116 --> 00:10:21.936 A:middle
+In my case, I want to reference
+the main storyboard so I'm going
+
+00:10:21.936 --> 00:10:25.396 A:middle
+to choose main from the menu.
+
+00:10:25.516 --> 00:10:27.566 A:middle
+The next field is the identifier
+
+00:10:27.566 --> 00:10:28.846 A:middle
+of the view controller
+you're referencing.
+
+00:10:29.596 --> 00:10:32.546 A:middle
+If you leave this blank Xcode
+will use the initial view
+
+00:10:32.546 --> 00:10:34.026 A:middle
+controller of the
+referenced storyboard.
+
+00:10:34.876 --> 00:10:37.786 A:middle
+In my case, I want to
+reference a specific controller
+
+00:10:37.786 --> 00:10:39.536 A:middle
+in my main storyboard
+and I have given
+
+00:10:39.536 --> 00:10:42.776 A:middle
+that controller the
+identifier new journal entry.
+
+00:10:45.516 --> 00:10:47.886 A:middle
+The last field here is
+the bundle identifier.
+
+00:10:49.196 --> 00:10:51.276 A:middle
+Your storyboard that
+you're referencing might be
+
+00:10:51.276 --> 00:10:52.446 A:middle
+in an external framework.
+
+00:10:52.636 --> 00:10:53.956 A:middle
+In that case, you'll want
+
+00:10:53.956 --> 00:10:55.816 A:middle
+to put the framework's
+bundle identifier here.
+
+00:10:55.816 --> 00:10:59.686 A:middle
+I'm going to leave it blank
+because my main storyboard is
+
+00:10:59.686 --> 00:11:01.756 A:middle
+in the same bundle as
+my photo storyboard.
+
+
+
+00:10:59.686 --> 00:11:01.756 A:middle
+in the same bundle as
+my photo storyboard.
+
+00:11:02.226 --> 00:11:08.576 A:middle
+Once again, now that my
+storyboard reference is
+
+00:11:08.576 --> 00:11:12.026 A:middle
+configured, if I double-click
+on it, Xcode will take me
+
+00:11:12.056 --> 00:11:13.606 A:middle
+into my reference
+storyboard file
+
+00:11:14.006 --> 00:11:15.636 A:middle
+and show me the view
+controller I'm referencing.
+
+00:11:16.566 --> 00:11:20.216 A:middle
+In this case it is a navigation
+controller and if we take a look
+
+00:11:20.216 --> 00:11:22.146 A:middle
+at its Identity inspector
+you can see
+
+00:11:22.146 --> 00:11:24.536 A:middle
+that I have given it the
+same identifier I just typed
+
+00:11:24.536 --> 00:11:25.946 A:middle
+in the reference.
+
+00:11:27.236 --> 00:11:31.296 A:middle
+The root view controller of this
+navigation controller is this
+
+00:11:31.326 --> 00:11:32.976 A:middle
+table view controller
+which manages the UI
+
+00:11:32.976 --> 00:11:34.396 A:middle
+for creating a new
+journal entry.
+
+00:11:34.846 --> 00:11:37.996 A:middle
+Let's head back to
+the photo storyboard
+
+00:11:38.276 --> 00:11:42.016 A:middle
+and create a segueway
+to that reference.
+
+00:11:42.076 --> 00:11:44.656 A:middle
+Earlier I mentioned that I want
+this segueway to be triggered
+
+00:11:44.656 --> 00:11:45.506 A:middle
+by this journal button.
+
+00:11:46.196 --> 00:11:48.406 A:middle
+You don't see that
+journal button here
+
+00:11:48.406 --> 00:11:49.396 A:middle
+in my photo view controller.
+
+00:11:50.686 --> 00:11:54.006 A:middle
+That's because that menu
+is up here in the SceneDoc.
+
+00:11:54.656 --> 00:11:59.396 A:middle
+The SceneDoc allows you to store
+top level objects alongside your
+
+00:11:59.396 --> 00:12:01.946 A:middle
+view controller and you might
+put a view in your SceneDoc
+
+
+
+00:11:59.396 --> 00:12:01.946 A:middle
+view controller and you might
+put a view in your SceneDoc
+
+00:12:02.236 --> 00:12:04.526 A:middle
+if you don't want that
+view to initially be a part
+
+00:12:04.526 --> 00:12:05.726 A:middle
+of the view hierarchy
+at runtime.
+
+00:12:06.846 --> 00:12:08.996 A:middle
+In Xcode 7 when you put
+a view in your SceneDoc
+
+00:12:09.266 --> 00:12:11.986 A:middle
+and you select it, it
+shows up in its own editor
+
+00:12:11.986 --> 00:12:13.886 A:middle
+above the view controller
+right there in the canvas.
+
+00:12:14.516 --> 00:12:20.976 A:middle
+[Applause]
+
+00:12:21.476 --> 00:12:23.136 A:middle
+&gt;&gt; TONY RICCIARDI: So now that
+we can see the journal button,
+
+00:12:23.516 --> 00:12:24.756 A:middle
+let's create that segueway.
+
+00:12:24.836 --> 00:12:28.236 A:middle
+I'm going to control drag over
+to my storyboard reference
+
+00:12:28.806 --> 00:12:30.676 A:middle
+and I want to present this
+view controller modally,
+
+00:12:30.676 --> 00:12:34.136 A:middle
+so I'll choose that.
+
+00:12:34.336 --> 00:12:34.676 A:middle
+All right.
+
+00:12:34.726 --> 00:12:36.006 A:middle
+Let's see this segueway
+in action.
+
+00:12:42.256 --> 00:12:43.826 A:middle
+So the first thing I
+want to point out is
+
+00:12:43.826 --> 00:12:46.536 A:middle
+that my photos tab is showing
+up just like it did before,
+
+00:12:46.736 --> 00:12:48.776 A:middle
+even though now it is
+coming from a separate file.
+
+00:12:49.716 --> 00:12:52.586 A:middle
+If I tap on a cell and
+bring down the menu and tap
+
+00:12:52.586 --> 00:12:56.146 A:middle
+on the journal button we
+execute that segueway which goes
+
+00:12:56.146 --> 00:12:58.136 A:middle
+into our main storyboard
+file and instantiates
+
+00:12:58.136 --> 00:13:01.726 A:middle
+that view controller by its
+identifier and it works just
+
+
+
+00:12:58.136 --> 00:13:01.726 A:middle
+that view controller by its
+identifier and it works just
+
+00:13:01.726 --> 00:13:03.096 A:middle
+as if it was in the
+same storyboard.
+
+00:13:04.306 --> 00:13:05.986 A:middle
+That's our new Storyboard
+Reference feature
+
+00:13:06.156 --> 00:13:07.306 A:middle
+and I hope you find it useful.
+
+00:13:08.026 --> 00:13:09.506 A:middle
+Now I'll hand you
+back over to Kyle.
+
+00:13:10.516 --> 00:13:16.946 A:middle
+[Applause]
+
+00:13:17.446 --> 00:13:19.746 A:middle
+&gt;&gt; KYLE SLUDER: Thank you, Tony.
+
+00:13:19.936 --> 00:13:23.436 A:middle
+Okay. So I gather that
+everybody is really excited
+
+00:13:23.436 --> 00:13:23.986 A:middle
+about that feature.
+
+00:13:23.986 --> 00:13:25.066 A:middle
+We're really happy
+to have been able
+
+00:13:25.066 --> 00:13:25.976 A:middle
+to bring it to you this year.
+
+00:13:26.516 --> 00:13:30.746 A:middle
+[Applause]
+
+00:13:31.246 --> 00:13:32.576 A:middle
+&gt;&gt; KYLE SLUDER: Let's talk
+about something different.
+
+00:13:33.566 --> 00:13:35.876 A:middle
+Let's talk about how
+you can customize some
+
+00:13:35.876 --> 00:13:37.416 A:middle
+of the standard segueways
+that we provide
+
+00:13:37.416 --> 00:13:38.936 A:middle
+for you in Interface Builder.
+
+00:13:38.936 --> 00:13:43.136 A:middle
+Looking at a different aspect
+of our demo application here,
+
+00:13:43.286 --> 00:13:46.436 A:middle
+we have a journal that is
+implemented using a table
+
+00:13:46.436 --> 00:13:46.986 A:middle
+view controller.
+
+00:13:47.576 --> 00:13:51.326 A:middle
+If the user taps that
+plus button at the top
+
+00:13:51.326 --> 00:13:54.736 A:middle
+of the journal we want to
+do a modal presentation just
+
+00:13:54.736 --> 00:13:56.626 A:middle
+like Tony showed you before
+with the journal button
+
+00:13:57.076 --> 00:13:59.796 A:middle
+and that's going to bring
+up navigation controller
+
+
+
+00:14:00.246 --> 00:14:03.106 A:middle
+that has a table view
+controller inside of it.
+
+00:14:05.356 --> 00:14:08.686 A:middle
+Tap the cancel button, that
+navigation controller goes away.
+
+00:14:08.786 --> 00:14:11.006 A:middle
+That's the standard modal
+presentation style coming
+
+00:14:11.006 --> 00:14:12.746 A:middle
+up from the bottom of
+the screen and going back
+
+00:14:12.746 --> 00:14:14.516 A:middle
+down to the bottom of the screen
+that you see on an iPhone.
+
+00:14:15.086 --> 00:14:18.236 A:middle
+What if you want to be fancy?
+
+00:14:18.236 --> 00:14:23.886 A:middle
+User taps the plus button,
+we perform our segueway,
+
+00:14:23.936 --> 00:14:26.286 A:middle
+we want to be sparkly!
+
+00:14:26.736 --> 00:14:32.936 A:middle
+And if we're going to be fancy
+in the incoming direction,
+
+00:14:33.216 --> 00:14:35.796 A:middle
+we really want to be equally
+fancy when we're going away.
+
+00:14:36.306 --> 00:14:39.456 A:middle
+You might be familiar,
+
+00:14:39.666 --> 00:14:43.196 A:middle
+if you are an experienced
+storyboard user,
+
+00:14:43.676 --> 00:14:46.036 A:middle
+with some of the options you
+get when you select the segueway
+
+00:14:46.036 --> 00:14:47.956 A:middle
+and look at the segueway
+inspector.
+
+00:14:49.156 --> 00:14:52.026 A:middle
+There are a couple of
+standard transitions
+
+00:14:52.026 --> 00:14:54.816 A:middle
+that a modal presentation
+can take on in iOS.
+
+00:14:55.656 --> 00:14:58.496 A:middle
+The default is coming from the
+bottom, its that cover vertical,
+
+00:14:58.496 --> 00:15:01.716 A:middle
+but we can also do a horizontal
+flip or cross dissolve,
+
+
+
+00:14:58.496 --> 00:15:01.716 A:middle
+but we can also do a horizontal
+flip or cross dissolve,
+
+00:15:02.456 --> 00:15:04.226 A:middle
+but sparkly, really
+isn't in this list.
+
+00:15:04.686 --> 00:15:09.196 A:middle
+One thing we can do in iOS
+8 using earlier versions
+
+00:15:09.196 --> 00:15:11.126 A:middle
+of Xcode is we can
+go and we can turn
+
+00:15:11.126 --> 00:15:12.346 A:middle
+that into a custom segueway.
+
+00:15:12.856 --> 00:15:16.226 A:middle
+At that point we're responsible
+
+00:15:16.226 --> 00:15:18.246 A:middle
+for subclassing
+UIStoryboardSegueway
+
+00:15:18.246 --> 00:15:20.146 A:middle
+and doing all of
+the work ourselves.
+
+00:15:20.876 --> 00:15:24.976 A:middle
+That's not really all that
+big a burden when it comes
+
+00:15:25.016 --> 00:15:28.586 A:middle
+to actually presenting the view
+controller, but it would be nice
+
+00:15:28.586 --> 00:15:30.816 A:middle
+if we didn't have to do that.
+
+00:15:30.816 --> 00:15:34.636 A:middle
+Specifically in this case we
+need to do a bunch of work
+
+00:15:34.636 --> 00:15:35.576 A:middle
+to set up the animation.
+
+00:15:36.116 --> 00:15:41.506 A:middle
+In Xcode 7 when you're
+targeting iOS 9
+
+00:15:41.506 --> 00:15:45.636 A:middle
+or OS X 10.11 you can select any
+of our standard segueway types
+
+00:15:46.026 --> 00:15:48.516 A:middle
+and still be able to
+specify a custom subclass
+
+00:15:48.646 --> 00:15:49.696 A:middle
+of storyboard segueway.
+
+00:15:50.196 --> 00:15:53.826 A:middle
+You over-ride the perform
+method just like you would
+
+00:15:53.876 --> 00:15:57.146 A:middle
+for a completely custom segueway
+but now your implementation
+
+00:15:57.146 --> 00:15:59.886 A:middle
+of perform can call up
+the supers implementation
+
+
+
+00:16:00.076 --> 00:16:01.386 A:middle
+and get the default behavior.
+
+00:16:02.106 --> 00:16:04.876 A:middle
+Around that super call you can
+perform whatever customizations
+
+00:16:04.876 --> 00:16:05.386 A:middle
+you want.
+
+00:16:05.986 --> 00:16:09.366 A:middle
+What's really important
+about this
+
+00:16:09.366 --> 00:16:13.856 A:middle
+for our modal presentation
+case is that we will hang on to
+
+00:16:13.856 --> 00:16:17.126 A:middle
+that segueway object that gets
+created when the user triggers
+
+00:16:17.126 --> 00:16:19.876 A:middle
+that segueway for
+the entire time
+
+00:16:19.946 --> 00:16:21.676 A:middle
+that your modal presentation
+is onscreen.
+
+00:16:22.886 --> 00:16:24.826 A:middle
+Usually segueway objects
+are really transient,
+
+00:16:25.346 --> 00:16:28.626 A:middle
+we perform the segueway, we
+allocate a segueway, we send it,
+
+00:16:28.626 --> 00:16:31.496 A:middle
+perform, deallocate it,
+but we're going to hold
+
+00:16:31.496 --> 00:16:34.856 A:middle
+on to your modal presentation
+segueways and popover segueways
+
+00:16:34.856 --> 00:16:38.076 A:middle
+on iOS for the duration that
+the view controller is onscreen
+
+00:16:38.076 --> 00:16:39.326 A:middle
+as long as you call
+up the super.
+
+00:16:40.296 --> 00:16:43.316 A:middle
+Why am I making a
+big deal out of this?
+
+00:16:43.526 --> 00:16:45.806 A:middle
+We need to go through how
+you would actually implement
+
+00:16:45.806 --> 00:16:47.136 A:middle
+that custom sparkle animation
+
+00:16:47.136 --> 00:16:49.136 A:middle
+or any custom modal
+presentation animation.
+
+00:16:50.146 --> 00:16:52.196 A:middle
+We've got our application
+nice and tiny up here,
+
+00:16:52.736 --> 00:16:56.296 A:middle
+and the user has tapped the
+button to trigger the segueway.
+
+00:16:56.856 --> 00:17:00.776 A:middle
+The destination view controller
+exists, it has been instantiated
+
+
+
+00:16:56.856 --> 00:17:00.776 A:middle
+The destination view controller
+exists, it has been instantiated
+
+00:17:00.776 --> 00:17:02.796 A:middle
+from the storyboard but has
+not been put onscreen yet.
+
+00:17:03.566 --> 00:17:04.906 A:middle
+We're going to send
+perform to the segueway,
+
+00:17:04.906 --> 00:17:08.406 A:middle
+and the first thing that our
+override or perform needs
+
+00:17:08.406 --> 00:17:10.976 A:middle
+to do is assign a
+transitioning delegate
+
+00:17:10.976 --> 00:17:12.316 A:middle
+to the destination
+view controller.
+
+00:17:12.665 --> 00:17:18.646 A:middle
+Then it will call super to begin
+the normal modal presentation.
+
+00:17:19.146 --> 00:17:22.016 A:middle
+Now the destination
+view controller,
+
+00:17:22.465 --> 00:17:24.346 A:middle
+when it gets
+presentViewController
+
+00:17:24.346 --> 00:17:26.596 A:middle
+which is done by supers
+implementation or perform,
+
+00:17:27.425 --> 00:17:29.196 A:middle
+is going to consult with
+the transition delegate
+
+00:17:29.776 --> 00:17:31.046 A:middle
+to bend another object
+
+00:17:31.906 --> 00:17:34.056 A:middle
+that actually drives
+the custom animation.
+
+00:17:34.506 --> 00:17:38.706 A:middle
+For more details on how this
+series of protocols works,
+
+00:17:38.706 --> 00:17:41.076 A:middle
+I suggest that you check out the
+custom transitions using view
+
+00:17:41.076 --> 00:17:43.336 A:middle
+controller section
+from WWDC2013.
+
+00:17:43.336 --> 00:17:48.066 A:middle
+Now in the other direction,
+one the user is done
+
+00:17:48.226 --> 00:17:50.306 A:middle
+with our view controller,
+they tap the cancel button.
+
+00:17:50.936 --> 00:17:53.496 A:middle
+The destination view controller,
+
+00:17:53.496 --> 00:17:56.486 A:middle
+since it is going away still
+has a transitioning delegate
+
+00:17:56.486 --> 00:17:58.826 A:middle
+assigned to it and asks
+that transitioning delegate
+
+00:17:58.826 --> 00:18:02.446 A:middle
+for an animation controller
+to drive the dismissal.
+
+
+
+00:17:58.826 --> 00:18:02.446 A:middle
+for an animation controller
+to drive the dismissal.
+
+00:18:02.586 --> 00:18:05.466 A:middle
+If we didn't hold on to our
+segueway which in turn holds
+
+00:18:05.466 --> 00:18:06.676 A:middle
+on to our transition delegate,
+
+00:18:07.066 --> 00:18:08.736 A:middle
+this all would have
+been released
+
+00:18:08.736 --> 00:18:10.916 A:middle
+and in iOS 8 we probably
+would have a crash here,
+
+00:18:10.916 --> 00:18:12.566 A:middle
+in iOS 9 it is a weak pointer
+
+00:18:12.566 --> 00:18:14.606 A:middle
+so we wouldn't have gotten
+our nice custom animation.
+
+00:18:16.296 --> 00:18:19.256 A:middle
+Then animation controller gets
+asked to drive the dismissal
+
+00:18:19.796 --> 00:18:21.306 A:middle
+and our fancy view goes away.
+
+00:18:22.446 --> 00:18:24.216 A:middle
+Another case where
+this is important is
+
+00:18:24.306 --> 00:18:26.316 A:middle
+when you are handling
+adaptivity.
+
+00:18:26.616 --> 00:18:29.326 A:middle
+For example, if you're
+running on a iPhone
+
+00:18:29.326 --> 00:18:32.056 A:middle
+and the user rotates the
+device, maybe an iPhone 6 Plus
+
+00:18:32.056 --> 00:18:35.286 A:middle
+and you want to present a
+different interface in landscape
+
+00:18:35.286 --> 00:18:38.406 A:middle
+or portrait or you
+have taken advantage
+
+00:18:38.406 --> 00:18:41.326 A:middle
+of the new multitasking
+features in iOS 9 when running
+
+00:18:41.326 --> 00:18:45.166 A:middle
+on an iPad Air 2, and the
+user has split your app 50/50
+
+00:18:45.266 --> 00:18:48.706 A:middle
+and you don't want to have, say,
+
+00:18:48.706 --> 00:18:50.666 A:middle
+a popover in the
+compact presentation.
+
+00:18:51.676 --> 00:18:54.646 A:middle
+This specific example comes
+from a talk on Tuesday,
+
+00:18:54.646 --> 00:18:58.046 A:middle
+getting started with
+multitasking on iPad in iOS 9
+
+00:18:58.416 --> 00:19:00.756 A:middle
+which explains why you would
+want to do something like this
+
+
+
+00:18:58.416 --> 00:19:00.756 A:middle
+which explains why you would
+want to do something like this
+
+00:19:00.786 --> 00:19:03.816 A:middle
+and in the cases in
+which this would occur.
+
+00:19:03.816 --> 00:19:05.656 A:middle
+Similarly to our
+custom animation,
+
+00:19:05.656 --> 00:19:08.536 A:middle
+we need to use the delegate
+to customize the presentation.
+
+00:19:08.536 --> 00:19:13.146 A:middle
+Our user is going to trigger
+whatever segueway brings
+
+00:19:13.146 --> 00:19:17.366 A:middle
+up the modal presentation and
+our overrider perform is going
+
+00:19:17.366 --> 00:19:18.896 A:middle
+to assign an adaptive delegate
+
+00:19:19.666 --> 00:19:21.866 A:middle
+to that destination
+view controller's
+
+00:19:22.216 --> 00:19:23.286 A:middle
+presentation controller.
+
+00:19:24.086 --> 00:19:25.516 A:middle
+It is just the delegate
+property,
+
+00:19:25.516 --> 00:19:28.716 A:middle
+but the protocol is actually
+called adaptive delegate.
+
+00:19:28.716 --> 00:19:29.806 A:middle
+Then we call super in order
+
+00:19:29.806 --> 00:19:31.176 A:middle
+to get the standard
+modal presentation
+
+00:19:31.176 --> 00:19:33.466 A:middle
+to popover a full
+screen, whatever happens
+
+00:19:33.506 --> 00:19:36.636 A:middle
+to be appropriate for
+the current size class.
+
+00:19:36.636 --> 00:19:39.446 A:middle
+Later on the user does something
+to cause the size class
+
+00:19:39.446 --> 00:19:42.066 A:middle
+to change this, rotates
+their iPhone 6 Plus,
+
+00:19:42.136 --> 00:19:46.336 A:middle
+does 50/50 in split
+view on iPad air 2.
+
+00:19:46.796 --> 00:19:51.066 A:middle
+The presentation
+controller is going to inform
+
+00:19:51.066 --> 00:19:53.466 A:middle
+that adaptive delegate that
+we're changing size classes
+
+00:19:54.076 --> 00:19:56.166 A:middle
+and will turn around to
+ask that adaptive delegate
+
+00:19:56.166 --> 00:19:57.596 A:middle
+to have a new view controller
+
+00:19:58.776 --> 00:20:00.586 A:middle
+to temporarily replace
+the view controller
+
+
+
+00:19:58.776 --> 00:20:00.586 A:middle
+to temporarily replace
+the view controller
+
+00:20:00.586 --> 00:20:01.826 A:middle
+that is currently
+being presented.
+
+00:20:03.126 --> 00:20:04.586 A:middle
+For more information
+on how this works,
+
+00:20:04.806 --> 00:20:06.456 A:middle
+last year my boss gave
+a great presentation
+
+00:20:06.456 --> 00:20:09.876 A:middle
+on view controller advancements
+on iOS 8, last year,
+
+00:20:09.926 --> 00:20:15.006 A:middle
+not two years ago, but to
+show you how this works today,
+
+00:20:15.636 --> 00:20:18.376 A:middle
+Tony will use Xcode 7 to
+give us a custom animation.
+
+00:20:19.516 --> 00:20:24.356 A:middle
+[Applause]
+
+00:20:24.856 --> 00:20:25.406 A:middle
+&gt;&gt; TONY RICCIARDI:
+Thank you, Kyle.
+
+00:20:26.246 --> 00:20:31.666 A:middle
+In this demo I will show you
+a few ways you can add custom
+
+00:20:31.666 --> 00:20:33.256 A:middle
+Logic to your segueways
+with code.
+
+00:20:34.556 --> 00:20:36.626 A:middle
+If you've used storyboards
+before you have probably written
+
+00:20:36.626 --> 00:20:39.526 A:middle
+code to pass along data from
+a source view controller
+
+00:20:39.526 --> 00:20:42.196 A:middle
+to its destination while
+preparing to execute a segueway.
+
+00:20:43.246 --> 00:20:45.836 A:middle
+What you may not know is it
+is also possible to customize
+
+00:20:45.956 --> 00:20:48.096 A:middle
+when a segueway triggers
+or how it animates.
+
+00:20:48.826 --> 00:20:53.466 A:middle
+To show you that, I will create
+a segueway here and specifically
+
+00:20:53.826 --> 00:20:55.256 A:middle
+when a user taps
+this delete button,
+
+00:20:55.256 --> 00:20:58.396 A:middle
+I want to conditionally
+present a confirmation sheet
+
+00:20:58.706 --> 00:21:01.956 A:middle
+if this photo here is
+associated with a journal entry.
+
+
+
+00:20:58.706 --> 00:21:01.956 A:middle
+if this photo here is
+associated with a journal entry.
+
+00:21:03.056 --> 00:21:07.066 A:middle
+The first step in doing that is
+to drag out of view controller
+
+00:21:07.066 --> 00:21:09.466 A:middle
+from the library which
+will represent our
+
+00:21:09.466 --> 00:21:10.846 A:middle
+confirmation sheet.
+
+00:21:11.516 --> 00:21:14.056 A:middle
+I give this view
+controller a custom class
+
+00:21:14.056 --> 00:21:17.686 A:middle
+which I have already
+added to the project.
+
+00:21:18.206 --> 00:21:20.296 A:middle
+This class implements load view
+
+00:21:20.296 --> 00:21:22.316 A:middle
+to create its view
+from the code.
+
+00:21:22.316 --> 00:21:24.546 A:middle
+The view controller doesn't
+need this view that came along
+
+00:21:24.546 --> 00:21:25.536 A:middle
+with it from the library.
+
+00:21:26.476 --> 00:21:29.506 A:middle
+I'll click on the
+view and remove it.
+
+00:21:30.276 --> 00:21:33.286 A:middle
+Now that this view controller is
+no longer going to get its view
+
+00:21:33.286 --> 00:21:36.696 A:middle
+from its storyboard, at runtime
+the framework will fall back
+
+00:21:36.696 --> 00:21:39.006 A:middle
+to my view controller's
+implementation of load view.
+
+00:21:39.566 --> 00:21:43.346 A:middle
+Now that we have our
+confirmation sheet view
+
+00:21:43.346 --> 00:21:46.156 A:middle
+controller let's
+create a segueway to it.
+
+00:21:46.156 --> 00:21:48.906 A:middle
+I want this segueway to be
+triggered from code rather
+
+00:21:48.906 --> 00:21:51.756 A:middle
+than from a particular
+button press.
+
+00:21:51.756 --> 00:21:54.646 A:middle
+Rather than dragging out
+the segueway from a sub view
+
+00:21:54.646 --> 00:21:57.026 A:middle
+in my view controller's
+hierarchy I'll drag it
+
+00:21:57.026 --> 00:21:58.556 A:middle
+out from the view
+controller itself.
+
+00:21:59.376 --> 00:22:01.926 A:middle
+To do that, I'll control
+drag from this icon
+
+
+
+00:21:59.376 --> 00:22:01.926 A:middle
+To do that, I'll control
+drag from this icon
+
+00:22:01.926 --> 00:22:03.546 A:middle
+in my sourceViewController
+SceneDoc
+
+00:22:03.876 --> 00:22:05.016 A:middle
+over to the destination.
+
+00:22:05.766 --> 00:22:08.306 A:middle
+Once again, I want to present
+this view controller modally.
+
+00:22:08.306 --> 00:22:14.706 A:middle
+I want the code that
+executes this segueway
+
+00:22:15.226 --> 00:22:17.366 A:middle
+to be triggered by
+the delete button.
+
+00:22:17.976 --> 00:22:20.186 A:middle
+What I want to do now
+is create an IB action
+
+00:22:20.476 --> 00:22:22.886 A:middle
+from the delete button.
+
+00:22:22.886 --> 00:22:25.596 A:middle
+I open up the assistant
+editor taking me
+
+00:22:25.596 --> 00:22:29.856 A:middle
+to the implementation file
+for my photo view controller.
+
+00:22:29.856 --> 00:22:33.056 A:middle
+Now I'm going to control-drag
+from the delete button
+
+00:22:33.216 --> 00:22:36.636 A:middle
+over to my source code and
+I get a popover allowing me
+
+00:22:36.636 --> 00:22:39.226 A:middle
+to configure my new connection.
+
+00:22:40.696 --> 00:22:43.456 A:middle
+As I said, I want this to
+be an action and I'm going
+
+00:22:43.806 --> 00:22:49.886 A:middle
+to call it delete photo.
+
+00:22:49.886 --> 00:22:53.916 A:middle
+Xcode generates an IB action
+method and now I'm just going
+
+00:22:53.916 --> 00:22:56.386 A:middle
+to paste in some code here.
+
+
+
+00:23:01.176 --> 00:23:03.076 A:middle
+There you go.
+
+00:23:03.196 --> 00:23:06.956 A:middle
+In this code it checks if there
+is an associated journal entry,
+
+00:23:07.626 --> 00:23:11.066 A:middle
+if so it calls perform
+segueway with identifier
+
+00:23:11.636 --> 00:23:17.356 A:middle
+and the identifier pass
+in here let's me refer
+
+00:23:17.356 --> 00:23:19.556 A:middle
+to that segueway we just
+created in the storyboard.
+
+00:23:20.076 --> 00:23:23.506 A:middle
+I'm going to give that
+segueway the same identifier
+
+00:23:23.506 --> 00:23:24.066 A:middle
+in just a moment.
+
+00:23:24.476 --> 00:23:27.546 A:middle
+First I want to point out I
+also referred to that identifier
+
+00:23:27.736 --> 00:23:29.206 A:middle
+from my prepare for
+segueway method.
+
+00:23:30.616 --> 00:23:34.486 A:middle
+In this method I pass along
+that associated journal entry
+
+00:23:34.526 --> 00:23:37.456 A:middle
+to the destination view
+controller, which allows it is
+
+00:23:37.456 --> 00:23:39.676 A:middle
+to present the details
+of that journal entry
+
+00:23:39.676 --> 00:23:41.306 A:middle
+in its confirmation sheet.
+
+00:23:43.196 --> 00:23:45.376 A:middle
+Now let's head over
+to the storyboard
+
+00:23:45.376 --> 00:23:48.816 A:middle
+and select the segueway and head
+up to the Attributes inspector.
+
+00:23:49.236 --> 00:23:54.456 A:middle
+I'm going to type in that same
+identifier here, confirm delete.
+
+00:23:55.016 --> 00:23:59.546 A:middle
+You may notice if you used the
+segueway Attributes inspector
+
+00:23:59.546 --> 00:24:01.896 A:middle
+before, there is a new
+field under the identifier
+
+
+
+00:23:59.546 --> 00:24:01.896 A:middle
+before, there is a new
+field under the identifier
+
+00:24:02.276 --> 00:24:04.556 A:middle
+which allows you to specify
+a custom segueway class.
+
+00:24:05.656 --> 00:24:08.796 A:middle
+In Xcode 7 you can now
+provide a subclass for any
+
+00:24:08.796 --> 00:24:10.336 A:middle
+of the system provided
+segueway types.
+
+00:24:10.916 --> 00:24:15.876 A:middle
+This works both on iOS
+9 and Mac OS X 10.11.
+
+00:24:15.876 --> 00:24:18.216 A:middle
+I have a custom segueway
+I have added to my project
+
+00:24:18.326 --> 00:24:19.316 A:middle
+and I will choose that here.
+
+00:24:19.406 --> 00:24:21.516 A:middle
+It is called scaling
+animation segueway.
+
+00:24:22.856 --> 00:24:25.416 A:middle
+Let's take a look at the
+implementation for that class.
+
+00:24:25.416 --> 00:24:27.696 A:middle
+I'm going to close
+the assistant,
+
+00:24:28.376 --> 00:24:29.886 A:middle
+then I'll use the
+jump bar to head
+
+00:24:29.886 --> 00:24:32.416 A:middle
+over to my scaling
+animation segueway.
+
+00:24:32.916 --> 00:24:36.936 A:middle
+The first thing I
+want to point out is
+
+00:24:36.936 --> 00:24:40.636 A:middle
+that this segueway derives
+from UIStoryboardSegueway
+
+00:24:40.926 --> 00:24:41.796 A:middle
+and then conforms
+
+00:24:41.796 --> 00:24:44.596 A:middle
+to the protocol UIViewController
+transitioning delegate.
+
+00:24:45.456 --> 00:24:47.436 A:middle
+This protocol allows
+you to vend objects
+
+00:24:47.686 --> 00:24:50.956 A:middle
+which control the animation
+both for the presentation
+
+00:24:51.106 --> 00:24:53.066 A:middle
+and for the dismissal
+of the modal child.
+
+00:24:55.626 --> 00:24:58.676 A:middle
+First I override the
+perform method and in
+
+00:24:58.676 --> 00:25:00.776 A:middle
+that method I set the segueway
+
+
+
+00:24:58.676 --> 00:25:00.776 A:middle
+that method I set the segueway
+
+00:25:00.986 --> 00:25:03.126 A:middle
+as the destination view
+controller's transitional
+
+00:25:03.126 --> 00:25:05.056 A:middle
+delegate and I call super
+
+00:25:05.206 --> 00:25:06.776 A:middle
+which kicks off the
+modal presentation.
+
+00:25:07.206 --> 00:25:10.456 A:middle
+Next I override two methods
+
+00:25:10.456 --> 00:25:12.156 A:middle
+from the transitioning
+delegate protocol.
+
+00:25:12.716 --> 00:25:14.636 A:middle
+Animation controller for
+presented controller,
+
+00:25:14.886 --> 00:25:17.626 A:middle
+and animation controller
+for dismissed controller.
+
+00:25:19.476 --> 00:25:23.476 A:middle
+The objects that I return from
+each of these methods conform
+
+00:25:23.936 --> 00:25:27.026 A:middle
+to the UIViewController
+animated transitioning protocol.
+
+00:25:28.366 --> 00:25:30.076 A:middle
+In this protocol, it
+contains the methods
+
+00:25:30.076 --> 00:25:31.796 A:middle
+that actually control
+the animation.
+
+00:25:32.266 --> 00:25:37.536 A:middle
+Down here in my presentation
+animator I have a pretty simple
+
+00:25:37.536 --> 00:25:40.676 A:middle
+animation which scales up the
+destination view controller
+
+00:25:40.676 --> 00:25:41.686 A:middle
+from the center of the screen.
+
+00:25:42.846 --> 00:25:43.976 A:middle
+Let's see the segueway
+in action.
+
+00:25:48.536 --> 00:25:49.026 A:middle
+All right.
+
+00:25:49.026 --> 00:25:51.706 A:middle
+Once again I'll tap on a
+cell and bring down the menu.
+
+00:25:52.536 --> 00:25:58.026 A:middle
+When I tap on this delete button
+our custom segueway executes
+
+00:25:58.026 --> 00:25:59.126 A:middle
+with our custom animation.
+
+00:25:59.986 --> 00:26:01.656 A:middle
+We see our confirmation sheet.
+
+
+
+00:25:59.986 --> 00:26:01.656 A:middle
+We see our confirmation sheet.
+
+00:26:02.396 --> 00:26:08.476 A:middle
+Now when I cancel this we run
+our dismissal animation using
+
+00:26:08.476 --> 00:26:09.386 A:middle
+our dismissal animator.
+
+00:26:09.946 --> 00:26:13.946 A:middle
+So you saw a couple of different
+ways you can customize your
+
+00:26:13.946 --> 00:26:17.866 A:middle
+segueways with code and
+I encourage you to check
+
+00:26:17.866 --> 00:26:20.826 A:middle
+out the rest of our segueway
+API on UIViewController
+
+00:26:20.826 --> 00:26:21.926 A:middle
+and UIStoryboardSegueway.
+
+00:26:23.006 --> 00:26:25.376 A:middle
+That wraps up our demo
+on custom segueways.
+
+00:26:25.376 --> 00:26:28.966 A:middle
+Again, let's head back to Kyle
+to take us to the next segment.
+
+00:26:29.516 --> 00:26:35.376 A:middle
+[Applause]
+
+00:26:35.876 --> 00:26:36.226 A:middle
+&gt;&gt; KYLE SLUDER: Thank you.
+
+00:26:36.226 --> 00:26:40.746 A:middle
+So I know it is an
+advanced crowd here,
+
+00:26:40.746 --> 00:26:43.416 A:middle
+pretty experienced
+with storyboards.
+
+00:26:43.416 --> 00:26:46.256 A:middle
+How many people here have
+used unwind segueways before?
+
+00:26:47.916 --> 00:26:51.086 A:middle
+Substantially fewer than have
+used storyboards themselves.
+
+00:26:51.466 --> 00:26:53.776 A:middle
+How many people here have
+implemented a custom container
+
+00:26:53.776 --> 00:26:54.926 A:middle
+view controller on iOS?
+
+00:26:55.556 --> 00:26:57.566 A:middle
+About the same number.
+
+00:26:58.646 --> 00:27:00.096 A:middle
+One thing that I'm
+really excited to talk
+
+
+
+00:26:58.646 --> 00:27:00.096 A:middle
+One thing that I'm
+really excited to talk
+
+00:27:00.096 --> 00:27:02.496 A:middle
+about this year is how we have
+made those two features work
+
+00:27:02.496 --> 00:27:03.116 A:middle
+better together.
+
+00:27:04.126 --> 00:27:06.306 A:middle
+For those of you that aren't
+familiar with an unwind segueway
+
+00:27:06.306 --> 00:27:08.856 A:middle
+and what it does,
+the best analogy
+
+00:27:08.856 --> 00:27:11.726 A:middle
+that I have found is the map.
+
+00:27:12.556 --> 00:27:15.286 A:middle
+So imagine I'm hanging out
+here at Grace Cathedral,
+
+00:27:15.286 --> 00:27:18.046 A:middle
+which is that really nice
+geometric church that's
+
+00:27:18.046 --> 00:27:21.266 A:middle
+up on Nob Hill, you can see
+it from places from downtown.
+
+00:27:22.566 --> 00:27:24.196 A:middle
+And it being at the
+top of a hill,
+
+00:27:24.196 --> 00:27:26.326 A:middle
+figure we'll take a
+nice long downhill walk
+
+00:27:26.326 --> 00:27:27.086 A:middle
+to the ferry terminal.
+
+00:27:27.086 --> 00:27:33.526 A:middle
+Hang out at the ferry terminal
+for a bit, get my organic kale
+
+00:27:33.526 --> 00:27:37.056 A:middle
+and my blue bottle coffee and
+since I'm on the Embarcadero,
+
+00:27:37.146 --> 00:27:41.586 A:middle
+I may as well take a nice long
+flat walk to Fisherman's Wharf.
+
+00:27:41.586 --> 00:27:44.376 A:middle
+Now I'm really tired.
+
+00:27:44.376 --> 00:27:47.736 A:middle
+I want to go home.
+
+00:27:48.396 --> 00:27:51.276 A:middle
+What I don't want
+to do is turn around
+
+00:27:51.276 --> 00:27:53.436 A:middle
+and come back the way I
+came because A, I don't live
+
+00:27:53.436 --> 00:27:56.546 A:middle
+at the Cathedral, and B, that's
+not even the shortest way
+
+00:27:56.546 --> 00:27:57.326 A:middle
+to get to the Cathedral.
+
+00:27:57.846 --> 00:28:03.216 A:middle
+What I want to do is first
+figure out where I'm going,
+
+
+
+00:27:57.846 --> 00:28:03.216 A:middle
+What I want to do is first
+figure out where I'm going,
+
+00:28:04.646 --> 00:28:09.516 A:middle
+second, find that
+location, and third,
+
+00:28:09.596 --> 00:28:12.686 A:middle
+plot and execute a route
+to that destination.
+
+00:28:13.556 --> 00:28:15.196 A:middle
+That's what unwind segueways do.
+
+00:28:16.316 --> 00:28:19.286 A:middle
+They find a path to a
+specific destination
+
+00:28:19.846 --> 00:28:21.746 A:middle
+that doesn't necessarily
+mean that we go backwards
+
+00:28:21.816 --> 00:28:22.746 A:middle
+through the way we came.
+
+00:28:23.256 --> 00:28:27.596 A:middle
+To give you a more concrete
+example using an actual
+
+00:28:27.596 --> 00:28:29.486 A:middle
+application let's go back
+
+00:28:29.486 --> 00:28:32.636 A:middle
+to this demo application
+we have been using
+
+00:28:32.636 --> 00:28:33.996 A:middle
+with our tab bar controller...
+
+00:28:34.096 --> 00:28:37.366 A:middle
+sorry, our custom tab
+controller and the table view
+
+00:28:38.086 --> 00:28:40.576 A:middle
+and its navigation
+controller that contains it.
+
+00:28:41.036 --> 00:28:43.026 A:middle
+As the user uses
+our application,
+
+00:28:43.026 --> 00:28:44.786 A:middle
+our view controller
+hierarchy changes.
+
+00:28:45.326 --> 00:28:49.536 A:middle
+They may tap on an
+image and push something
+
+00:28:49.536 --> 00:28:55.496 A:middle
+into the nav controller
+that is a child of that tab.
+
+00:28:55.716 --> 00:28:56.866 A:middle
+That's where we're at right now.
+
+00:28:57.536 --> 00:29:00.416 A:middle
+At this point the user
+says I want to go back
+
+
+
+00:28:57.536 --> 00:29:00.416 A:middle
+At this point the user
+says I want to go back
+
+00:29:00.416 --> 00:29:02.306 A:middle
+to that journal table I
+was looking at before.
+
+00:29:07.276 --> 00:29:10.726 A:middle
+So when they ask to do that,
+
+00:29:11.326 --> 00:29:12.926 A:middle
+we're going to perform
+a segueway
+
+00:29:13.506 --> 00:29:15.356 A:middle
+from our photo view controller.
+
+00:29:16.756 --> 00:29:19.696 A:middle
+It is an unwind segueway with
+the identifier goBackToJournal.
+
+00:29:20.026 --> 00:29:23.976 A:middle
+The first thing that
+unwind segueway needs
+
+00:29:23.976 --> 00:29:25.666 A:middle
+to do is identify
+the destination.
+
+00:29:26.176 --> 00:29:30.496 A:middle
+The way we find our
+destination, the way we dermine
+
+00:29:30.496 --> 00:29:32.216 A:middle
+that we've found what
+we're looking for,
+
+00:29:32.696 --> 00:29:33.876 A:middle
+it is with some code.
+
+00:29:34.596 --> 00:29:38.836 A:middle
+That code is in our subclass
+of UITableViewController
+
+00:29:39.436 --> 00:29:42.256 A:middle
+and it is a method that I have
+chosen to call iAmTheJournal.
+
+00:29:43.256 --> 00:29:44.496 A:middle
+That method doesn't do anything.
+
+00:29:44.616 --> 00:29:47.056 A:middle
+It is an ID action that takes
+a UI storyboard segueway
+
+00:29:47.556 --> 00:29:50.166 A:middle
+and exists solely so
+that we can determine
+
+00:29:50.166 --> 00:29:52.376 A:middle
+that we have found the view
+controller we are looking for.
+
+00:29:58.216 --> 00:30:00.496 A:middle
+Step two is finding
+the destination.
+
+
+
+00:29:58.216 --> 00:30:00.496 A:middle
+Step two is finding
+the destination.
+
+00:30:01.006 --> 00:30:06.446 A:middle
+So we start by looking at the
+parent of our current source.
+
+00:30:07.756 --> 00:30:12.196 A:middle
+In iOS 8 we ask this view
+controller -- excuse me.
+
+00:30:13.296 --> 00:30:15.716 A:middle
+In iOS 8 we ask this
+view controller,
+
+00:30:15.716 --> 00:30:17.886 A:middle
+viewController
+ForUnwindseguewayAction.
+
+00:30:18.536 --> 00:30:21.206 A:middle
+This view controller would look
+through its children trying
+
+00:30:21.206 --> 00:30:23.406 A:middle
+to find a view controller
+that responded
+
+00:30:23.906 --> 00:30:28.916 A:middle
+to that iAmTheJournal selector
+that we have specified here.
+
+00:30:29.376 --> 00:30:31.646 A:middle
+We have set that
+up in the inspector
+
+00:30:31.646 --> 00:30:32.576 A:middle
+for our unwind segueway.
+
+00:30:33.126 --> 00:30:39.006 A:middle
+That method is great for smaller
+view controller hierarchies
+
+00:30:39.006 --> 00:30:40.326 A:middle
+but doesn't really
+handle the kind
+
+00:30:40.326 --> 00:30:42.246 A:middle
+of viewer controller hierarchy
+we have in this application.
+
+00:30:43.526 --> 00:30:47.486 A:middle
+In iOS 9 we have deprecated
+that method and replaced it
+
+00:30:47.486 --> 00:30:50.896 A:middle
+with a new method, allowed child
+view controllers for unwinding
+
+00:30:50.896 --> 00:30:53.666 A:middle
+from source, and what
+this method returns,
+
+00:30:53.666 --> 00:30:56.746 A:middle
+instead an individual view
+controller, returns an array
+
+00:30:56.746 --> 00:30:59.916 A:middle
+of the children of the
+receiver that we should look
+
+00:30:59.916 --> 00:31:02.126 A:middle
+through to try to find
+the destination So we want
+
+
+
+00:30:59.916 --> 00:31:02.126 A:middle
+through to try to find
+the destination So we want
+
+00:31:04.316 --> 00:31:07.496 A:middle
+to actually return a
+subset, we don't want to try
+
+00:31:07.496 --> 00:31:11.126 A:middle
+to find an unwind
+destination that's a descendant
+
+00:31:11.126 --> 00:31:12.116 A:middle
+of where we're coming from.
+
+00:31:12.566 --> 00:31:13.886 A:middle
+We also have another new method,
+
+00:31:14.246 --> 00:31:16.336 A:middle
+child view controller
+containing segueway source
+
+00:31:16.836 --> 00:31:19.816 A:middle
+that are an override of allow
+child view controllers can use
+
+00:31:19.816 --> 00:31:21.976 A:middle
+to figure out where
+we're coming from.
+
+00:31:23.296 --> 00:31:26.326 A:middle
+The implementation on UI
+navigation controller calls
+
+00:31:26.326 --> 00:31:29.746 A:middle
+that method to figure out where
+we're coming from and says, oh,
+
+00:31:29.746 --> 00:31:31.306 A:middle
+that photo view controller
+is the source,
+
+00:31:31.506 --> 00:31:32.746 A:middle
+therefore contains the source.
+
+00:31:33.966 --> 00:31:37.806 A:middle
+The returned array of child
+view controllers omits
+
+00:31:37.806 --> 00:31:39.836 A:middle
+that view controller and
+we get an array of 1.
+
+00:31:40.396 --> 00:31:44.256 A:middle
+At this point the
+storyboard runtime recurses
+
+00:31:44.256 --> 00:31:46.586 A:middle
+into that array starting with
+the first and only element.
+
+00:31:47.156 --> 00:31:50.876 A:middle
+We ask this, the collection
+view controller that's currently
+
+00:31:50.876 --> 00:31:54.606 A:middle
+obscured what children do you
+have that we should search
+
+00:31:54.606 --> 00:31:56.836 A:middle
+through to find the destination
+of our unwind segueway?
+
+00:31:57.396 --> 00:31:59.166 A:middle
+It doesn't have any children.
+
+
+
+00:32:01.086 --> 00:32:03.866 A:middle
+We have the base case for
+our recursion and we ask it,
+
+00:32:04.356 --> 00:32:07.226 A:middle
+can you perform the unwind
+segueway action we're
+
+00:32:07.226 --> 00:32:07.716 A:middle
+looking for.
+
+00:32:09.056 --> 00:32:14.216 A:middle
+It can't. We haven't
+found our destination.
+
+00:32:15.276 --> 00:32:17.166 A:middle
+Let's try the search
+again one level
+
+00:32:17.166 --> 00:32:18.536 A:middle
+up the view controller
+hierarchy chain.
+
+00:32:19.046 --> 00:32:23.706 A:middle
+Same method as before, this
+new method allowed child view
+
+00:32:23.706 --> 00:32:25.886 A:middle
+controllers from
+unwinding from source.
+
+00:32:26.556 --> 00:32:31.376 A:middle
+Its implementation, our
+custom view controller,
+
+00:32:31.686 --> 00:32:33.066 A:middle
+only wants to go backwards,
+
+00:32:33.066 --> 00:32:34.486 A:middle
+vertically up through
+that stack.
+
+00:32:35.396 --> 00:32:38.866 A:middle
+It asks itself which of
+my children contains the
+
+00:32:38.866 --> 00:32:39.556 A:middle
+unwind source?
+
+00:32:40.056 --> 00:32:44.646 A:middle
+That photo nav controller
+contains the source
+
+00:32:45.716 --> 00:32:47.786 A:middle
+so the array it returns
+omits that child.
+
+00:32:48.756 --> 00:32:50.876 A:middle
+We have again an array of
+one child that we're return
+
+00:32:50.876 --> 00:32:54.456 A:middle
+from this method and
+the runtime recurses.
+
+00:32:55.076 --> 00:32:57.496 A:middle
+Which of your children
+should we look
+
+00:32:57.496 --> 00:32:59.196 A:middle
+through to find the
+unwind source?
+
+
+
+00:33:00.246 --> 00:33:01.386 A:middle
+I'm sorry, the unwind
+destination.
+
+00:33:01.926 --> 00:33:05.526 A:middle
+This navigation controller
+doesn't have any --
+
+00:33:05.836 --> 00:33:07.526 A:middle
+doesn't have the source
+of the descendants,
+
+00:33:07.526 --> 00:33:10.926 A:middle
+we can skip over that for
+now and we recurse again.
+
+00:33:10.926 --> 00:33:13.786 A:middle
+We ask the Table
+view controller,
+
+00:33:13.786 --> 00:33:14.926 A:middle
+which of your children
+should we look
+
+00:33:14.926 --> 00:33:16.026 A:middle
+through to find the destination?
+
+00:33:16.026 --> 00:33:17.636 A:middle
+It doesn't have any children.
+
+00:33:18.396 --> 00:33:21.666 A:middle
+We ask it, can you perform
+the unwind segueway action?
+
+00:33:22.206 --> 00:33:25.426 A:middle
+That's what that method is
+that I implemented earlier
+
+00:33:25.426 --> 00:33:28.446 A:middle
+that didn't have actually any
+body to its implementation.
+
+00:33:29.056 --> 00:33:31.866 A:middle
+That's our sentinel, we found
+it, we found our destination.
+
+00:33:39.056 --> 00:33:43.216 A:middle
+Now at this point, in iOS
+8 we would ask the parent
+
+00:33:43.216 --> 00:33:47.466 A:middle
+of our destination to return
+us a segueway that knows how
+
+00:33:47.466 --> 00:33:49.346 A:middle
+to restore our view
+controller hierarchy
+
+00:33:49.676 --> 00:33:51.116 A:middle
+such that our destination
+is visible.
+
+00:33:52.166 --> 00:33:54.686 A:middle
+That's a really hard
+question to answer
+
+00:33:54.786 --> 00:33:57.756 A:middle
+for more complicated view
+controller hierarchies.
+
+00:33:58.316 --> 00:34:02.216 A:middle
+We have deprecated that
+method and we replaced it
+
+
+
+00:33:58.316 --> 00:34:02.216 A:middle
+We have deprecated that
+method and we replaced it
+
+00:34:02.216 --> 00:34:04.236 A:middle
+with a feature we call
+incremental unwinding.
+
+00:34:04.796 --> 00:34:09.085 A:middle
+This feature let's every view
+controller from the source
+
+00:34:09.085 --> 00:34:11.636 A:middle
+to the destination
+participate in the unwind
+
+00:34:11.636 --> 00:34:14.656 A:middle
+so that it only needs to
+use the local knowledge.
+
+00:34:15.456 --> 00:34:18.576 A:middle
+The runtime will construct a
+UI storyboard segueway object
+
+00:34:18.826 --> 00:34:22.806 A:middle
+for you using whatever subclass
+you specified in the inspector
+
+00:34:22.806 --> 00:34:23.496 A:middle
+and Interface Builder.
+
+00:34:24.666 --> 00:34:29.386 A:middle
+It will ask it to perform.
+
+00:34:29.516 --> 00:34:33.406 A:middle
+Here is step three,
+follow the route.
+
+00:34:33.606 --> 00:34:34.636 A:middle
+Well, we have found the route
+
+00:34:34.966 --> 00:34:36.706 A:middle
+from the source to
+the destination.
+
+00:34:37.235 --> 00:34:42.505 A:middle
+The first thing we're going
+to do is ask the first hop
+
+00:34:42.505 --> 00:34:44.466 A:middle
+on that route to unwind
+
+00:34:44.466 --> 00:34:46.025 A:middle
+for segueway towards
+view controller.
+
+00:34:46.025 --> 00:34:48.815 A:middle
+We're going to ask the
+parent of the source
+
+00:34:49.916 --> 00:34:52.505 A:middle
+to perform whatever action
+is necessary to get us
+
+00:34:52.505 --> 00:34:55.775 A:middle
+to the next step in the chain.
+
+00:34:55.996 --> 00:34:58.146 A:middle
+The child view controller
+doesn't know anything
+
+00:34:58.146 --> 00:34:58.586 A:middle
+about its parent.
+
+00:34:58.586 --> 00:35:00.886 A:middle
+This method actually
+doesn't do anything.
+
+
+
+00:34:58.586 --> 00:35:00.886 A:middle
+This method actually
+doesn't do anything.
+
+00:35:01.236 --> 00:35:02.926 A:middle
+It has been told unwind
+towards your parent,
+
+00:35:03.266 --> 00:35:04.546 A:middle
+that's not the child's
+responsibility.
+
+00:35:05.026 --> 00:35:08.446 A:middle
+Next we get to our custom
+container view controller.
+
+00:35:09.626 --> 00:35:12.536 A:middle
+We ask it, okay, unwind
+towards our journal
+
+00:35:12.536 --> 00:35:13.466 A:middle
+navigation controller.
+
+00:35:13.966 --> 00:35:17.326 A:middle
+This is something that the
+custom tab controller is
+
+00:35:17.326 --> 00:35:20.946 A:middle
+actually responsible for and it
+knows how to rearrange itself
+
+00:35:20.946 --> 00:35:24.146 A:middle
+so that the journal navigation
+controller is visible.
+
+00:35:24.396 --> 00:35:31.826 A:middle
+Next up on the chain we ask our
+navigation controller to unwind
+
+00:35:31.826 --> 00:35:32.816 A:middle
+to the table view controller.
+
+00:35:32.816 --> 00:35:35.996 A:middle
+It is already at the top
+of the navigation stack
+
+00:35:35.996 --> 00:35:37.096 A:middle
+so there is nothing to do here.
+
+00:35:38.376 --> 00:35:40.546 A:middle
+We returned where
+the user wants to go.
+
+00:35:41.026 --> 00:35:44.026 A:middle
+This is how all this
+stuff works internally.
+
+00:35:45.346 --> 00:35:46.156 A:middle
+Tony will show you how
+
+00:35:46.156 --> 00:35:47.566 A:middle
+to implement it in
+your application.
+
+00:35:48.516 --> 00:35:52.646 A:middle
+[Applause]
+
+00:35:53.146 --> 00:35:54.006 A:middle
+&gt;&gt; TONY RICCIARDI:
+Thank you, Kyle.
+
+00:35:54.176 --> 00:35:57.196 A:middle
+In this demo I'll show you
+how to use unwind segueways
+
+00:35:57.406 --> 00:35:58.966 A:middle
+with a custom container
+view controller.
+
+
+
+00:36:00.346 --> 00:36:03.716 A:middle
+You might remember in our first
+demo we created a segueway
+
+00:36:03.716 --> 00:36:04.616 A:middle
+from this journal button.
+
+00:36:05.336 --> 00:36:07.606 A:middle
+This modal sheet for
+creating a new journal entry.
+
+00:36:08.896 --> 00:36:12.096 A:middle
+Unfortunately we haven't
+implemented any functionality
+
+00:36:12.096 --> 00:36:12.876 A:middle
+for this done button.
+
+00:36:13.636 --> 00:36:16.266 A:middle
+What I want to do now is
+create an unwind segueway
+
+00:36:16.266 --> 00:36:17.746 A:middle
+from this done button and I want
+
+00:36:17.746 --> 00:36:19.166 A:middle
+that unwind segueway
+button to do a few things.
+
+00:36:20.186 --> 00:36:22.786 A:middle
+First of all, I want it to
+dismiss this modal sheet.
+
+00:36:23.856 --> 00:36:27.006 A:middle
+I want it to pop my
+photo view controller off
+
+00:36:27.006 --> 00:36:28.066 A:middle
+of the navigation stack.
+
+00:36:28.976 --> 00:36:31.876 A:middle
+I want it to switch tabs
+over to my journal tab.
+
+00:36:31.876 --> 00:36:33.956 A:middle
+I want it to descend
+
+00:36:33.956 --> 00:36:36.536 A:middle
+down through this navigation
+controller and finally end
+
+00:36:36.536 --> 00:36:38.026 A:middle
+up at this table view controller
+
+00:36:38.376 --> 00:36:40.196 A:middle
+where we'll insert a
+new table view cell
+
+00:36:40.196 --> 00:36:41.056 A:middle
+for the new journal entry.
+
+00:36:42.016 --> 00:36:43.646 A:middle
+That's a lot to ask
+for one segueway.
+
+00:36:43.806 --> 00:36:46.346 A:middle
+Where do we get started?
+
+00:36:46.506 --> 00:36:49.916 A:middle
+The first step in creating
+an unwind segueway is
+
+00:36:49.966 --> 00:36:52.676 A:middle
+to define a special
+type of IB action method
+
+00:36:52.946 --> 00:36:54.796 A:middle
+in the view controller
+you're unwinding to.
+
+00:36:55.086 --> 00:36:59.036 A:middle
+In this case, it is our
+journal table view controller.
+
+00:36:59.086 --> 00:37:00.756 A:middle
+Over here in the implementation
+
+
+
+00:36:59.086 --> 00:37:00.756 A:middle
+Over here in the implementation
+
+00:37:00.756 --> 00:37:03.616 A:middle
+for that controller you can
+see I have an IB action method.
+
+00:37:04.486 --> 00:37:06.046 A:middle
+And this IB action
+method is special
+
+00:37:06.196 --> 00:37:08.446 A:middle
+because it is taking
+a UIStoryboardSegueway
+
+00:37:08.676 --> 00:37:09.776 A:middle
+as its only paramater.
+
+00:37:11.276 --> 00:37:14.746 A:middle
+Whenever Xcode sees an IB
+action method it takes a
+
+00:37:14.746 --> 00:37:17.846 A:middle
+UIStoryboardSegueway as its
+only paramater and allows you
+
+00:37:17.846 --> 00:37:21.106 A:middle
+to create unwind segueways
+targeting that selector.
+
+00:37:21.436 --> 00:37:26.786 A:middle
+Within this method I grab
+the source view controller
+
+00:37:26.786 --> 00:37:30.266 A:middle
+of the segueway which in this
+case is that view controller
+
+00:37:30.266 --> 00:37:31.536 A:middle
+for creating a new
+journal entry.
+
+00:37:31.856 --> 00:37:36.046 A:middle
+I use that view controller's
+journal entry and add it
+
+00:37:36.076 --> 00:37:39.336 A:middle
+to our model which refreshes
+the table and inserts a new cell
+
+00:37:39.586 --> 00:37:41.036 A:middle
+and scrolls to that
+cell's position.
+
+00:37:41.486 --> 00:37:45.736 A:middle
+Now that we have seen the action
+that we're unwinding towards,
+
+00:37:46.106 --> 00:37:47.466 A:middle
+let's head over to
+our storyboard
+
+00:37:47.466 --> 00:37:49.436 A:middle
+and create a segueway
+targeting that selector.
+
+00:37:49.966 --> 00:37:54.176 A:middle
+Here we aree at the
+view controller
+
+00:37:54.176 --> 00:37:55.376 A:middle
+for creating a new journal entry
+
+00:37:56.356 --> 00:37:59.716 A:middle
+and we'll create an unwind
+segueway from this done button.
+
+
+
+00:38:00.446 --> 00:38:02.806 A:middle
+To do that, we'll control-drag
+from the done button
+
+00:38:03.376 --> 00:38:05.766 A:middle
+to the exit place
+holder in the SceneDoc.
+
+00:38:06.916 --> 00:38:10.336 A:middle
+The exit place holder serves
+as a place holder for all
+
+00:38:10.336 --> 00:38:11.816 A:middle
+of the valid unwind actions
+
+00:38:11.816 --> 00:38:13.576 A:middle
+that Xcode has found
+in your work space.
+
+00:38:14.366 --> 00:38:17.226 A:middle
+It determines that a method is
+a valid unwind action once again
+
+00:38:17.426 --> 00:38:19.726 A:middle
+based on whether it
+is an IB action method
+
+00:38:19.726 --> 00:38:21.206 A:middle
+that takes a
+UIStoryboardSegueway.
+
+00:38:22.086 --> 00:38:27.516 A:middle
+It found that method we saw
+so I'm going to select that.
+
+00:38:27.726 --> 00:38:29.976 A:middle
+Normally when you create an
+unwind segueway that's all you
+
+00:38:29.976 --> 00:38:30.386 A:middle
+have to do.
+
+00:38:30.576 --> 00:38:33.596 A:middle
+You define the unwind selector
+and create the segueway to it.
+
+00:38:34.286 --> 00:38:37.256 A:middle
+In my case I want to
+execute some custom logic
+
+00:38:38.016 --> 00:38:40.496 A:middle
+which allows my custom
+container view controller
+
+00:38:40.766 --> 00:38:42.186 A:middle
+to switch between these tabs.
+
+00:38:43.186 --> 00:38:46.406 A:middle
+That logic is in my custom
+container view controller file
+
+00:38:46.406 --> 00:38:51.626 A:middle
+so let's head over there.
+
+00:38:51.836 --> 00:38:54.186 A:middle
+As you can see, in this
+view controller I have
+
+00:38:54.186 --> 00:38:56.886 A:middle
+over ridden unwind for segueway
+towards view controller.
+
+00:38:57.986 --> 00:38:59.336 A:middle
+In this method I do two things.
+
+
+
+00:39:00.826 --> 00:39:03.516 A:middle
+First of all, I take the
+currently selected navigation
+
+00:39:03.516 --> 00:39:06.206 A:middle
+controller, and I pop that down
+to the root view controller.
+
+00:39:07.526 --> 00:39:10.276 A:middle
+Then I set the selected
+navigation controller
+
+00:39:10.626 --> 00:39:13.366 A:middle
+to be this parameter
+subsequent view controller.
+
+00:39:14.696 --> 00:39:16.986 A:middle
+Subsequent view controller
+is the next step
+
+00:39:17.056 --> 00:39:17.836 A:middle
+in the unwind chain.
+
+00:39:17.836 --> 00:39:20.406 A:middle
+It is not necessarily
+the end destination
+
+00:39:20.406 --> 00:39:23.106 A:middle
+of the unwind segueway,
+it is a direct child
+
+00:39:23.106 --> 00:39:25.566 A:middle
+of this custom container
+that we're unwinding towards.
+
+00:39:26.216 --> 00:39:30.946 A:middle
+The did set observer for this
+property, is going to take care
+
+00:39:31.176 --> 00:39:34.036 A:middle
+of updating my auto layout
+constraints and performing
+
+00:39:34.036 --> 00:39:35.716 A:middle
+that sliding animation
+we saw earlier.
+
+00:39:35.716 --> 00:39:40.566 A:middle
+Now that we have seen my custom
+container view controllers'
+
+00:39:40.566 --> 00:39:42.436 A:middle
+implementation of
+incremental unwinding,
+
+00:39:42.916 --> 00:39:48.656 A:middle
+let's see this unwind
+segueway in action.
+
+00:39:48.816 --> 00:39:50.086 A:middle
+I'll tap on a cell.
+
+00:39:50.086 --> 00:39:50.856 A:middle
+Bring down the menu.
+
+00:39:51.256 --> 00:39:53.696 A:middle
+I tap on that journal button.
+
+00:39:53.696 --> 00:39:54.926 A:middle
+Now I'm going to
+tap the done button.
+
+00:39:55.696 --> 00:39:57.636 A:middle
+You can see we have
+switched tabs.
+
+00:39:58.546 --> 00:40:00.166 A:middle
+We have ended up at our
+journal view controller
+
+
+
+00:39:58.546 --> 00:40:00.166 A:middle
+We have ended up at our
+journal view controller
+
+00:40:00.416 --> 00:40:03.156 A:middle
+and inserted this new table
+view cell for our journal entry.
+
+00:40:03.636 --> 00:40:07.736 A:middle
+As you can see, unwind segueways
+have gotten a lot more powerful
+
+00:40:07.736 --> 00:40:09.426 A:middle
+in iOS 9 and they work great
+
+00:40:09.426 --> 00:40:10.966 A:middle
+with custom container
+viewer controllers.
+
+00:40:11.516 --> 00:40:18.166 A:middle
+[Applause]
+
+00:40:18.666 --> 00:40:21.186 A:middle
+&gt;&gt; TONY RICCIARDI: So that
+wraps up our unwinding demo.
+
+00:40:21.466 --> 00:40:24.766 A:middle
+Now let's head back over to Kyle
+one last time to wrap this up.
+
+00:40:26.376 --> 00:40:28.376 A:middle
+&gt;&gt; KYLE SLUDER: Thank you, Tony.
+
+00:40:28.376 --> 00:40:30.896 A:middle
+So just a quick summary
+
+00:40:30.896 --> 00:40:32.666 A:middle
+of the new API we have
+introduced for unwinding.
+
+00:40:33.436 --> 00:40:35.046 A:middle
+We have deprecated
+viewer controller
+
+00:40:35.046 --> 00:40:37.546 A:middle
+for unwind segueway action
+and we have replaced it
+
+00:40:37.546 --> 00:40:39.106 A:middle
+with allowed child
+view controllers
+
+00:40:39.106 --> 00:40:40.266 A:middle
+from unwinding from source.
+
+00:40:40.946 --> 00:40:42.406 A:middle
+If you override the old method
+
+00:40:42.406 --> 00:40:43.896 A:middle
+and don't override
+the new method,
+
+00:40:44.136 --> 00:40:46.896 A:middle
+we will call the old
+method even on iOS 9
+
+00:40:46.896 --> 00:40:49.686 A:middle
+so that your code behaves the
+same if your app targets iOS 8
+
+00:40:50.136 --> 00:40:51.466 A:middle
+and it can also run on iOS 9.
+
+00:40:52.626 --> 00:40:54.536 A:middle
+The implementation of
+that override my want
+
+00:40:54.536 --> 00:40:56.796 A:middle
+to call the new allowed child
+view containing controllers
+
+00:40:56.796 --> 00:41:00.746 A:middle
+for segueway source method so
+that it can filter the array
+
+
+
+00:40:56.796 --> 00:41:00.746 A:middle
+for segueway source method so
+that it can filter the array
+
+00:41:00.746 --> 00:41:04.066 A:middle
+of child view controllers
+that it returns.
+
+00:41:04.176 --> 00:41:06.726 A:middle
+If you need some sort
+of custom validation
+
+00:41:06.726 --> 00:41:09.696 A:middle
+for whether you can perform a
+certain unwind you can override
+
+00:41:09.766 --> 00:41:12.446 A:middle
+the can perform unwind segueway
+action method which has existed
+
+00:41:12.446 --> 00:41:15.206 A:middle
+for a while but by
+default all it does is see
+
+00:41:15.206 --> 00:41:17.176 A:middle
+if the receiver responds
+to that selector.
+
+00:41:17.826 --> 00:41:21.216 A:middle
+Usually that's sufficient.
+
+00:41:21.296 --> 00:41:23.556 A:middle
+Likewise, we have
+deprecated the segueway for --
+
+00:41:23.556 --> 00:41:26.486 A:middle
+segueway for unwinding
+to view controller method
+
+00:41:27.006 --> 00:41:30.016 A:middle
+and replaced it with unwind
+for segueway which is called
+
+00:41:30.016 --> 00:41:31.606 A:middle
+on each view controller
+in the chain
+
+00:41:32.056 --> 00:41:33.396 A:middle
+to implement incremental
+unwinding.
+
+00:41:36.676 --> 00:41:39.126 A:middle
+Overall, today we learned how
+
+00:41:39.126 --> 00:41:41.266 A:middle
+to organize our storyboards
+using references.
+
+00:41:41.266 --> 00:41:45.276 A:middle
+We learned how to customize our
+segueways by subclassing them.
+
+00:41:45.786 --> 00:41:47.446 A:middle
+Even though we want to
+get the standard behavior.
+
+00:41:48.946 --> 00:41:52.996 A:middle
+We learned that in iOS and iOS
+9 specifically, present modally
+
+00:41:52.996 --> 00:41:56.956 A:middle
+and popover presentation
+segueways will hang on to --
+
+00:41:56.956 --> 00:41:59.196 A:middle
+sorry -- the view
+controllers that are presented
+
+00:41:59.256 --> 00:42:02.526 A:middle
+by present modally and popover
+presentation segueways will hang
+
+
+
+00:41:59.256 --> 00:42:02.526 A:middle
+by present modally and popover
+presentation segueways will hang
+
+00:42:02.526 --> 00:42:05.316 A:middle
+on to the segueway
+objects that presented them
+
+00:42:05.736 --> 00:42:07.026 A:middle
+so that they can
+act as delegates
+
+00:42:07.026 --> 00:42:09.416 A:middle
+for animation or for adaptivity.
+
+00:42:09.816 --> 00:42:12.806 A:middle
+We have learned how
+unwind segueways work
+
+00:42:13.166 --> 00:42:15.366 A:middle
+to get us backwards
+through our application flow
+
+00:42:15.366 --> 00:42:18.416 A:middle
+and that we can support them
+easier in our custom containers
+
+00:42:19.446 --> 00:42:21.426 A:middle
+and remove our deprecated
+APIs in order
+
+00:42:21.426 --> 00:42:22.726 A:middle
+to get the behavior in iOS 9.
+
+00:42:23.276 --> 00:42:26.226 A:middle
+If you need more
+information on storyboards,
+
+00:42:26.226 --> 00:42:28.486 A:middle
+the storyboard help has
+been rewritten in Xcode 7,
+
+00:42:28.486 --> 00:42:30.016 A:middle
+so you should check
+that out first.
+
+00:42:30.016 --> 00:42:33.766 A:middle
+We also have a sample
+project, segueway catalog,
+
+00:42:34.746 --> 00:42:37.506 A:middle
+which is available on
+the developer website.
+
+00:42:37.506 --> 00:42:39.866 A:middle
+There actually isn't a space
+in that name so if you search
+
+00:42:39.866 --> 00:42:40.926 A:middle
+for segueway in the
+space catalog,
+
+00:42:40.926 --> 00:42:43.486 A:middle
+you find the wrong thing.
+
+00:42:44.076 --> 00:42:46.766 A:middle
+If you need technical support,
+check out the dev forums.
+
+00:42:46.766 --> 00:42:49.246 A:middle
+There are a lot of developers
+out there just like you,
+
+00:42:49.246 --> 00:42:52.476 A:middle
+facing the same problems you
+have have been posting on there,
+
+00:42:52.696 --> 00:42:54.436 A:middle
+are able to help you
+figure out your problems,
+
+00:42:54.436 --> 00:42:57.166 A:middle
+you can contact developer
+technical support
+
+00:42:57.236 --> 00:42:58.436 A:middle
+or if you have general
+inquiries,
+
+00:42:58.496 --> 00:43:00.546 A:middle
+contact Curt Rothert,
+our evangelist.
+
+
+
+00:42:58.496 --> 00:43:00.546 A:middle
+contact Curt Rothert,
+our evangelist.
+
+00:43:01.186 --> 00:43:02.966 A:middle
+Otherwise, maybe I'll
+see you at the bash.
+
+00:43:03.516 --> 00:43:06.500 A:middle
+[Applause]
+

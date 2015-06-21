@@ -1,0 +1,3984 @@
+
+00:00:20.016 --> 00:00:20.376 A:middle
+[Applause]
+
+00:00:20.376 --> 00:00:21.456 A:middle
+&gt;&gt; RALEIGH LEDET: Good morning.
+
+00:00:25.036 --> 00:00:27.996 A:middle
+Welcome to Session 217:
+Adopting New Trackpad Features.
+
+00:00:28.486 --> 00:00:31.656 A:middle
+My name is Raleigh Ledet, I'm an
+AppKit engineer and I'm master
+
+00:00:31.656 --> 00:00:33.526 A:middle
+of using the new
+Force Touch trackpads,
+
+00:00:34.736 --> 00:00:37.116 A:middle
+so this is what we're
+going to be talking about,
+
+00:00:37.116 --> 00:00:38.456 A:middle
+the new Force Touch trackpads.
+
+00:00:39.276 --> 00:00:42.306 A:middle
+They're very, very cool
+pieces of technology.
+
+00:00:42.406 --> 00:00:45.236 A:middle
+What makes them different
+than our previous trackpads is
+
+00:00:45.236 --> 00:00:48.176 A:middle
+that there isn't a physical
+button for you to press on.
+
+00:00:48.706 --> 00:00:51.206 A:middle
+Instead, we have these
+four force sensors
+
+00:00:51.496 --> 00:00:54.006 A:middle
+so we can measure how much
+force the user is applying
+
+00:00:54.006 --> 00:00:55.896 A:middle
+to the trackpad and
+then we marry
+
+00:00:55.896 --> 00:00:57.516 A:middle
+that with our Taptic Engine.
+
+00:00:57.986 --> 00:00:58.826 A:middle
+And when we've determined
+
+00:00:58.826 --> 00:01:01.366 A:middle
+that the user has pressed
+enough force on the trackpad
+
+
+
+00:00:58.826 --> 00:01:01.366 A:middle
+that the user has pressed
+enough force on the trackpad
+
+00:01:01.446 --> 00:01:04.995 A:middle
+to issue a mouse down, we go
+ahead and use the Taptic Engine
+
+00:01:05.316 --> 00:01:07.796 A:middle
+and we yank the trackpad
+sideways just a little bit,
+
+00:01:07.796 --> 00:01:10.366 A:middle
+and the user gets the feeling
+
+00:01:10.366 --> 00:01:12.676 A:middle
+that they have actually
+pressed down on a button.
+
+00:01:13.176 --> 00:01:14.936 A:middle
+And so, the trackpad
+moves sideways,
+
+00:01:15.346 --> 00:01:17.036 A:middle
+but your brain makes you think
+
+00:01:17.036 --> 00:01:18.566 A:middle
+that you have actually
+pressed down on a button.
+
+00:01:18.876 --> 00:01:21.346 A:middle
+It's a really awesome
+sensation and it's really neat
+
+00:01:21.346 --> 00:01:23.346 A:middle
+on how your mind is tricked
+
+00:01:23.346 --> 00:01:24.516 A:middle
+into believing you've
+pressed a button.
+
+00:01:24.816 --> 00:01:26.516 A:middle
+We have some of these
+downstairs in the lab,
+
+00:01:26.516 --> 00:01:28.156 A:middle
+if you haven't experienced
+one of these yet,
+
+00:01:28.576 --> 00:01:29.746 A:middle
+please come down and try it out.
+
+00:01:30.606 --> 00:01:33.466 A:middle
+Another quick look at the
+Taptic Engine going there --
+
+00:01:34.356 --> 00:01:34.926 A:middle
+pretty awesome.
+
+00:01:35.396 --> 00:01:38.336 A:middle
+So, to recap, you get a
+little bit of pressure
+
+00:01:38.336 --> 00:01:41.546 A:middle
+and you get a click, but
+allows us to recognize
+
+00:01:41.616 --> 00:01:45.626 A:middle
+when you apply more pressure to
+the trackpad and we can sense
+
+00:01:45.626 --> 00:01:47.226 A:middle
+that as what we call
+a Force click,
+
+00:01:47.226 --> 00:01:48.856 A:middle
+and you'll get a little
+bit more haptic feedback
+
+00:01:48.856 --> 00:01:49.636 A:middle
+from that as well.
+
+00:01:51.026 --> 00:01:52.096 A:middle
+So, you can do lots
+
+00:01:52.096 --> 00:01:53.636 A:middle
+of interesting things
+with the Force click.
+
+00:01:53.966 --> 00:01:54.816 A:middle
+In fact, let me show you some
+
+00:01:54.816 --> 00:01:57.466 A:middle
+of the interesting things
+you can do with that now.
+
+00:01:57.536 --> 00:02:06.006 A:middle
+I have up here, you can see as
+I'm moving the cursor around,
+
+
+
+00:01:57.536 --> 00:02:06.006 A:middle
+I have up here, you can see as
+I'm moving the cursor around,
+
+00:02:06.396 --> 00:02:09.395 A:middle
+you can see the force that
+I'm applying to the trackpad.
+
+00:02:09.395 --> 00:02:12.806 A:middle
+If I go down to the next level,
+you get down to Force click.
+
+00:02:13.016 --> 00:02:14.406 A:middle
+And so, everybody was
+able to hear that?
+
+00:02:14.766 --> 00:02:16.936 A:middle
+I've added -- you know, normally
+your computer doesn't play a
+
+00:02:16.936 --> 00:02:18.916 A:middle
+sound when you do Force
+click; I've added that in
+
+00:02:18.916 --> 00:02:21.136 A:middle
+because you can't actually feel
+the haptic feedback since you're
+
+00:02:21.136 --> 00:02:22.246 A:middle
+over there and I'm over here.
+
+00:02:22.906 --> 00:02:27.226 A:middle
+So, you'll be able to watch
+as I do this demo the force
+
+00:02:27.226 --> 00:02:28.406 A:middle
+that I'm applying
+to the trackpad.
+
+00:02:29.136 --> 00:02:31.956 A:middle
+One of the things that you
+can do is renaming files
+
+00:02:31.956 --> 00:02:33.696 A:middle
+in the Finder; sometimes
+it's kind of tricky,
+
+00:02:33.696 --> 00:02:37.266 A:middle
+you have to click on it, and
+you have to do it a second time
+
+00:02:37.266 --> 00:02:39.356 A:middle
+in such a way that --
+and I missed it again.
+
+00:02:39.356 --> 00:02:40.366 A:middle
+You got to do the right timing
+
+00:02:40.366 --> 00:02:41.706 A:middle
+so you don't double-click
+and open it.
+
+00:02:42.186 --> 00:02:45.756 A:middle
+But with the Force Touch,
+you just Force click on it,
+
+00:02:45.756 --> 00:02:48.296 A:middle
+it goes right immediately
+into editing the filename.
+
+00:02:48.486 --> 00:02:51.346 A:middle
+It's a lot easier to do; that's
+just one of the small things
+
+00:02:51.346 --> 00:02:52.566 A:middle
+that you can do with
+Force click.
+
+00:02:52.566 --> 00:02:54.616 A:middle
+I'm going to open up
+TextEdit real quick.
+
+00:02:55.256 --> 00:02:59.646 A:middle
+Let me grab the window.
+
+
+
+00:03:00.356 --> 00:03:03.366 A:middle
+You have seen this example
+as well, you can Force click
+
+00:03:03.496 --> 00:03:05.736 A:middle
+and you can get Quick
+Look to come up.
+
+00:03:05.736 --> 00:03:08.306 A:middle
+It's kind of neat, you can
+actually sit here, you can play
+
+00:03:08.306 --> 00:03:12.506 A:middle
+around with the animation if
+you adjust your force levels.
+
+00:03:12.656 --> 00:03:15.536 A:middle
+That's another feature
+that we have.
+
+00:03:15.576 --> 00:03:18.136 A:middle
+Lastly to show you some
+things real quick, you know,
+
+00:03:18.136 --> 00:03:20.756 A:middle
+I could change how fast
+by varying the force,
+
+00:03:20.756 --> 00:03:24.886 A:middle
+how fast the photos come
+in, or changing the amount
+
+00:03:25.096 --> 00:03:27.416 A:middle
+that the indicator is showing,
+
+00:03:27.416 --> 00:03:29.096 A:middle
+you can control the
+amount of pressure here.
+
+00:03:29.166 --> 00:03:31.686 A:middle
+And of course, no pressure
+demo would be complete
+
+00:03:31.686 --> 00:03:34.776 A:middle
+without having a drawing field
+that you can draw on as well.
+
+00:03:35.566 --> 00:03:38.526 A:middle
+Lastly, don't have the
+sound hooked up for this,
+
+00:03:38.526 --> 00:03:40.806 A:middle
+but on this control
+when it gets --
+
+00:03:40.926 --> 00:03:42.336 A:middle
+when you rotate the
+photo back to zero,
+
+00:03:42.336 --> 00:03:43.956 A:middle
+you're feeling a little
+bit of haptic feedback
+
+00:03:44.286 --> 00:03:45.446 A:middle
+on the trackpad for that.
+
+00:03:45.876 --> 00:03:47.696 A:middle
+So that's pretty neat.
+
+00:03:48.176 --> 00:03:49.426 A:middle
+Let's switch back to the slides.
+
+00:03:50.566 --> 00:03:51.756 A:middle
+We've got a lot to cover.
+
+00:03:52.296 --> 00:03:53.506 A:middle
+We're going to talk
+about the APIs,
+
+00:03:53.506 --> 00:03:57.036 A:middle
+that that application was using,
+the various APIs that we use
+
+00:03:57.036 --> 00:03:59.116 A:middle
+in the system as well,
+so that you can go ahead
+
+00:03:59.116 --> 00:04:00.426 A:middle
+and add all sorts
+
+
+
+00:03:59.116 --> 00:04:00.426 A:middle
+and add all sorts
+
+00:04:00.556 --> 00:04:04.266 A:middle
+of new features using
+the Force Touch trackpad
+
+00:04:04.266 --> 00:04:05.076 A:middle
+in your application.
+
+00:04:05.656 --> 00:04:08.366 A:middle
+I'm going to teach you today how
+
+00:04:08.366 --> 00:04:11.276 A:middle
+to become a master using the
+Force Touch trackpad on OS X.
+
+00:04:11.866 --> 00:04:13.626 A:middle
+To become a master in
+the Force Touch trackpad,
+
+00:04:13.626 --> 00:04:14.986 A:middle
+even though we're going
+to do it in one day,
+
+00:04:15.026 --> 00:04:15.976 A:middle
+you've got to start off small,
+
+00:04:15.976 --> 00:04:17.156 A:middle
+you've got to start
+off learning everything
+
+00:04:17.156 --> 00:04:20.106 A:middle
+that a squire would know about
+using the Force Touch trackpad,
+
+00:04:20.106 --> 00:04:22.716 A:middle
+and this is all about
+using the high-level APIs
+
+00:04:23.036 --> 00:04:26.756 A:middle
+and the built-in tools that we
+have in some of our controls.
+
+00:04:27.296 --> 00:04:28.506 A:middle
+The we're going to move
+on, and we're going
+
+00:04:28.566 --> 00:04:30.046 A:middle
+to learn everything a
+knight needs to know
+
+00:04:30.046 --> 00:04:31.546 A:middle
+about using the Force
+Touch trackpad.
+
+00:04:31.906 --> 00:04:34.896 A:middle
+This is all about the flow of
+the force through the system,
+
+00:04:34.896 --> 00:04:37.276 A:middle
+the event stream, we'll talk
+about customizing Spring Loading
+
+00:04:37.276 --> 00:04:39.726 A:middle
+in your application and
+then taking it all the way
+
+00:04:39.726 --> 00:04:41.146 A:middle
+to doing some Alignment Feedback
+
+00:04:41.146 --> 00:04:43.426 A:middle
+and providing some additional
+haptic feedback to the user.
+
+00:04:44.166 --> 00:04:47.146 A:middle
+Then finally, we're going to cap
+it off with becoming a master
+
+00:04:47.146 --> 00:04:49.086 A:middle
+of using the Force Touch
+trackpad and this is
+
+00:04:49.086 --> 00:04:50.386 A:middle
+about controlling the force.
+
+00:04:50.516 --> 00:04:52.066 A:middle
+Configuring the trackpad
+
+00:04:52.366 --> 00:04:54.876 A:middle
+so it is doing the
+appropriate haptic feedbacks
+
+00:04:54.876 --> 00:04:57.516 A:middle
+for the given situation
+for your controls
+
+00:04:57.946 --> 00:05:00.246 A:middle
+and manually playing haptic
+feedbacks where appropriate.
+
+
+
+00:04:57.946 --> 00:05:00.246 A:middle
+and manually playing haptic
+feedbacks where appropriate.
+
+00:05:01.056 --> 00:05:03.056 A:middle
+So let's dig in.
+
+00:05:05.216 --> 00:05:08.466 A:middle
+In being a squire we're going
+to talk about Table Row Actions,
+
+00:05:08.466 --> 00:05:10.066 A:middle
+it's a nice, neat new
+feature, you have seen
+
+00:05:10.066 --> 00:05:12.206 A:middle
+that in the Mail
+application demo
+
+00:05:12.206 --> 00:05:13.376 A:middle
+that Craig did during
+the keynote.
+
+00:05:13.806 --> 00:05:15.176 A:middle
+We'll talk about
+spring-loaded controls,
+
+00:05:15.256 --> 00:05:18.246 A:middle
+some things that are built in,
+and the accelerator controls.
+
+00:05:18.316 --> 00:05:20.396 A:middle
+We're going to do that by
+looking at some case studies.
+
+00:05:21.026 --> 00:05:24.186 A:middle
+Here is Mail, for example, and
+if you do a two-finger swipe
+
+00:05:24.186 --> 00:05:27.246 A:middle
+on a row in Mail, you get
+some more Table Row Actions
+
+00:05:27.246 --> 00:05:28.776 A:middle
+that could come up, and
+you can click on them,
+
+00:05:28.886 --> 00:05:31.736 A:middle
+or you can do a smooth swipe,
+a little bit longer swipe
+
+00:05:31.736 --> 00:05:35.166 A:middle
+and it will actually
+activate the default action
+
+00:05:35.266 --> 00:05:37.156 A:middle
+and so it is one complete
+gesture for the user.
+
+00:05:37.526 --> 00:05:39.476 A:middle
+It is a really nice way
+
+00:05:39.576 --> 00:05:41.316 A:middle
+of adding some additional
+functionality
+
+00:05:41.316 --> 00:05:42.076 A:middle
+to your application.
+
+00:05:42.076 --> 00:05:43.686 A:middle
+I use it every day
+in Mail myself.
+
+00:05:44.226 --> 00:05:45.926 A:middle
+The API for it is
+incredibly simple.
+
+00:05:46.296 --> 00:05:47.496 A:middle
+In your tableView delegate,
+
+00:05:47.496 --> 00:05:49.906 A:middle
+just implement tableView
+rowActionsForRow edge,
+
+00:05:50.306 --> 00:05:52.496 A:middle
+and we will tell you what edge
+it is, it's either the leading
+
+00:05:52.496 --> 00:05:54.196 A:middle
+or the trailing, so we
+handle right to left
+
+00:05:54.196 --> 00:05:55.186 A:middle
+and left to right for you.
+
+00:05:56.516 --> 00:06:00.736 A:middle
+And then you just return back
+an array of Table Row Actions.
+
+
+
+00:05:56.516 --> 00:06:00.736 A:middle
+And then you just return back
+an array of Table Row Actions.
+
+00:06:00.736 --> 00:06:05.066 A:middle
+Create a new NSTable Row Action,
+you init with a style, a title,
+
+00:06:05.066 --> 00:06:08.446 A:middle
+and a handler, the handler's
+what's going to get called back
+
+00:06:08.446 --> 00:06:11.166 A:middle
+if that item is selected,
+either by clicking on it
+
+00:06:11.166 --> 00:06:13.206 A:middle
+or if they did a complete
+swipe for the default one,
+
+00:06:13.586 --> 00:06:17.216 A:middle
+it goes ahead and the
+handler is called.
+
+00:06:17.346 --> 00:06:20.076 A:middle
+We have a couple of styles:
+Regular and Destructive.
+
+00:06:20.876 --> 00:06:22.956 A:middle
+Regular is the one with
+the blue highlighting,
+
+00:06:22.956 --> 00:06:25.616 A:middle
+and that's what you
+should use for most styles
+
+00:06:25.616 --> 00:06:27.206 A:middle
+of your Table Row Actions.
+
+00:06:27.846 --> 00:06:29.226 A:middle
+Destructive is the
+one that's red.
+
+00:06:29.946 --> 00:06:31.836 A:middle
+Don't choose these
+because of their color;
+
+00:06:31.956 --> 00:06:33.366 A:middle
+it is more than just red.
+
+00:06:33.686 --> 00:06:38.786 A:middle
+The destructive items, since by
+nature they're destructive we
+
+00:06:38.786 --> 00:06:39.936 A:middle
+actually make it a
+little bit harder
+
+00:06:39.936 --> 00:06:41.506 A:middle
+for the user to do a full swipe.
+
+00:06:41.776 --> 00:06:44.006 A:middle
+They have to swipe
+a further distance
+
+00:06:44.276 --> 00:06:47.616 A:middle
+on the trackpad before a
+destructive action is triggered
+
+00:06:47.616 --> 00:06:48.166 A:middle
+by default.
+
+00:06:48.636 --> 00:06:51.966 A:middle
+This is so that they don't
+accidentally trigger it.
+
+00:06:51.966 --> 00:06:54.256 A:middle
+Use regular for almost
+everything
+
+00:06:54.256 --> 00:06:57.326 A:middle
+and reserve destructive items
+just for destructive, don't try
+
+00:06:57.326 --> 00:07:00.746 A:middle
+and get the red color, there is
+some important semantics there
+
+
+
+00:06:57.326 --> 00:07:00.746 A:middle
+and get the red color, there is
+some important semantics there
+
+00:07:00.746 --> 00:07:01.606 A:middle
+that you need to be aware of.
+
+00:07:02.136 --> 00:07:04.586 A:middle
+And that's all there
+is to this API.
+
+00:07:04.836 --> 00:07:05.586 A:middle
+It's that simple.
+
+00:07:05.796 --> 00:07:08.856 A:middle
+This works on a new Force Touch
+trackpad and it also works
+
+00:07:08.856 --> 00:07:10.956 A:middle
+on our legacy trackpads
+and the Magic Mouse,
+
+00:07:11.256 --> 00:07:13.306 A:middle
+so you can easily add
+these to your application
+
+00:07:13.606 --> 00:07:16.056 A:middle
+and you can open up some
+great new possibilities.
+
+00:07:16.686 --> 00:07:19.806 A:middle
+Let's look at Spring
+Loading in the Finder.
+
+00:07:19.806 --> 00:07:23.736 A:middle
+So I have this image of
+Lola that I downloaded,
+
+00:07:23.736 --> 00:07:25.806 A:middle
+and I want to move her
+to my Documents folder.
+
+00:07:25.806 --> 00:07:28.416 A:middle
+Some I'm going to start dragging
+and go back in my history
+
+00:07:28.416 --> 00:07:31.106 A:middle
+by Force clicking, I'm even
+going to change it to icon mode
+
+00:07:31.106 --> 00:07:32.766 A:middle
+so I can find the
+Documents folder easier,
+
+00:07:33.026 --> 00:07:35.176 A:middle
+and then finally go ahead and
+drop it in my Documents folder.
+
+00:07:35.916 --> 00:07:38.026 A:middle
+You might have known about
+spring loading before
+
+00:07:38.376 --> 00:07:40.626 A:middle
+where you could hover over a
+folder and after a timeout,
+
+00:07:40.626 --> 00:07:43.326 A:middle
+the folder would go
+ahead and spring load.
+
+00:07:43.656 --> 00:07:45.376 A:middle
+We have added spring
+loading to a lot more places
+
+00:07:45.376 --> 00:07:47.096 A:middle
+and applications to
+bring windows forwards,
+
+00:07:47.516 --> 00:07:49.436 A:middle
+and as you saw the
+buttons were spring loaded,
+
+00:07:49.666 --> 00:07:52.386 A:middle
+and you can bypass
+the hover timeout
+
+00:07:52.386 --> 00:07:53.556 A:middle
+by just doing a Force click,
+
+00:07:53.556 --> 00:07:58.606 A:middle
+and it becomes much more
+intuitive and easier to use.
+
+00:07:59.336 --> 00:08:02.146 A:middle
+To implement Spring Loading
+
+
+
+00:07:59.336 --> 00:08:02.146 A:middle
+To implement Spring Loading
+
+00:08:02.146 --> 00:08:05.706 A:middle
+in those toolbar buttons all
+Finder did was set the Spring
+
+00:08:05.706 --> 00:08:08.746 A:middle
+Loading property of
+NSButton to true.
+
+00:08:09.176 --> 00:08:10.806 A:middle
+Really what they did was
+just check the box in IB.
+
+00:08:10.806 --> 00:08:11.546 A:middle
+It is that easy.
+
+00:08:11.546 --> 00:08:13.966 A:middle
+You can do that for
+segmented control as well;
+
+00:08:13.966 --> 00:08:17.616 A:middle
+when I change the icon layout
+from list view to icon view,
+
+00:08:18.106 --> 00:08:19.616 A:middle
+that's on NSSegmentedControl,
+
+00:08:19.616 --> 00:08:21.216 A:middle
+and again it's just a
+springLoaded property
+
+00:08:21.776 --> 00:08:24.016 A:middle
+and you can set it
+with a check box in IB.
+
+00:08:24.016 --> 00:08:27.126 A:middle
+It's that simple to turn Spring
+Loading on in your buttons
+
+00:08:27.396 --> 00:08:28.396 A:middle
+and your segmented controls.
+
+00:08:28.656 --> 00:08:31.146 A:middle
+You have to opt in for
+this, but for places
+
+00:08:31.146 --> 00:08:33.155 A:middle
+that are doing navigation
+during drag
+
+00:08:33.155 --> 00:08:35.006 A:middle
+and drop it is really
+useful and I suggest
+
+00:08:35.006 --> 00:08:35.916 A:middle
+that you go and turn it on.
+
+00:08:37.376 --> 00:08:40.405 A:middle
+There is another example of
+using force; this is QuickTime.
+
+00:08:40.405 --> 00:08:42.866 A:middle
+I want you to pay attention to
+the fast-forward button here.
+
+00:08:42.916 --> 00:08:46.736 A:middle
+I'm going to use the Force
+Touch trackpad and I'm going
+
+00:08:46.736 --> 00:08:48.176 A:middle
+to apply different
+pressure to the button,
+
+00:08:48.176 --> 00:08:50.496 A:middle
+and you can see I can
+go up to 5x, 10x, 30x.
+
+00:08:50.766 --> 00:08:51.596 A:middle
+You can back off.
+
+00:08:51.986 --> 00:08:53.736 A:middle
+As you're moving
+through your movie file,
+
+00:08:54.056 --> 00:08:56.036 A:middle
+you can control how fast
+you're moving forward,
+
+00:08:56.036 --> 00:08:58.196 A:middle
+so you slow down when you
+get close to that area
+
+00:08:58.196 --> 00:09:00.036 A:middle
+that you're looking for
+without overshooting.
+
+
+
+00:08:58.196 --> 00:09:00.036 A:middle
+that you're looking for
+without overshooting.
+
+00:09:00.596 --> 00:09:04.906 A:middle
+The way QuickTime does this
+is we have a new button type,
+
+00:09:04.906 --> 00:09:08.876 A:middle
+so the fast-forward buttons are
+really literally just NSButtons
+
+00:09:08.876 --> 00:09:11.516 A:middle
+with a custom image, and
+they set the button type
+
+00:09:11.746 --> 00:09:14.586 A:middle
+to either AcceleratorButton or
+MultiLevelAcceleratorButton.
+
+00:09:15.526 --> 00:09:18.586 A:middle
+For AcceleratorButton -- you
+can set it right here in IB --
+
+00:09:19.136 --> 00:09:23.086 A:middle
+as the force in the
+trackpad changes,
+
+00:09:23.356 --> 00:09:25.436 A:middle
+the button will continually
+send its action message,
+
+00:09:25.546 --> 00:09:27.606 A:middle
+so as the force changes, you
+get a new action message;
+
+00:09:27.796 --> 00:09:29.686 A:middle
+when the force changes again,
+you get a new action message,
+
+00:09:30.256 --> 00:09:33.086 A:middle
+and the range of the
+doubleValue is going to be 1
+
+00:09:33.086 --> 00:09:35.676 A:middle
+when the user clicks
+the button up to 2
+
+00:09:35.676 --> 00:09:39.236 A:middle
+as the user presses the
+maximum amount of force
+
+00:09:39.236 --> 00:09:41.686 A:middle
+on the trackpad that we accept.
+
+00:09:42.856 --> 00:09:45.626 A:middle
+You can see the pressure
+change between 1 and 2
+
+00:09:45.626 --> 00:09:48.356 A:middle
+and you can adjust
+however you --
+
+00:09:48.356 --> 00:09:49.736 A:middle
+whatever you need
+to do with that.
+
+00:09:49.736 --> 00:09:52.956 A:middle
+In QuickTime's case, that
+controls the acceleration.
+
+00:09:54.036 --> 00:09:55.786 A:middle
+You will finally
+get a value of 0.
+
+00:09:55.786 --> 00:09:58.116 A:middle
+A final action message
+with a value of 0
+
+00:09:58.116 --> 00:10:00.326 A:middle
+when the user ends
+tracking of the button.
+
+
+
+00:09:58.116 --> 00:10:00.326 A:middle
+when the user ends
+tracking of the button.
+
+00:10:00.626 --> 00:10:01.936 A:middle
+When they release
+the mouse button up,
+
+00:10:02.386 --> 00:10:04.486 A:middle
+you'll get a last action
+message with a range of zero.
+
+00:10:05.506 --> 00:10:07.506 A:middle
+Now, what QuickTime is
+actually using here is the
+
+00:10:07.506 --> 00:10:09.396 A:middle
+MultiLevelAcceleratorButton.
+
+00:10:09.986 --> 00:10:11.706 A:middle
+You can set that
+right here in IB.
+
+00:10:12.326 --> 00:10:15.606 A:middle
+The MultiLevelAcceleratorButton
+is discrete;
+
+00:10:15.976 --> 00:10:19.816 A:middle
+whereas the AcceleratorButton
+is a smooth range,
+
+00:10:19.816 --> 00:10:21.466 A:middle
+a continuous range
+between 1 and 2,
+
+00:10:21.616 --> 00:10:24.326 A:middle
+the AcceleratorButton
+is integer levels,
+
+00:10:24.366 --> 00:10:26.386 A:middle
+it's a discrete integer
+levels, and you can set
+
+00:10:26.386 --> 00:10:29.186 A:middle
+that with the
+maxAcceleratorLevel.
+
+00:10:29.766 --> 00:10:33.246 A:middle
+Our range is between 1 and 5
+so you can set how many levels
+
+00:10:33.246 --> 00:10:35.156 A:middle
+that you want to have
+in your acceleration;
+
+00:10:35.956 --> 00:10:37.696 A:middle
+by default it is 2.
+
+00:10:38.266 --> 00:10:39.506 A:middle
+QuickTime sets it to 5.
+
+00:10:40.286 --> 00:10:42.256 A:middle
+Then again, you look
+at the doubleValue.
+
+00:10:42.296 --> 00:10:45.286 A:middle
+Now the range is going to be
+0 to 5, it's 1 when you click,
+
+00:10:45.286 --> 00:10:46.796 A:middle
+as the user goes up
+through the levels,
+
+00:10:46.796 --> 00:10:48.976 A:middle
+it'll go up to whatever
+you set the max level to,
+
+00:10:49.356 --> 00:10:51.716 A:middle
+and you'll get a final
+message action of 0
+
+00:10:51.716 --> 00:10:53.286 A:middle
+when the user finishes tracking.
+
+00:10:53.526 --> 00:10:54.846 A:middle
+And this is what
+QuickTime is doing.
+
+00:10:55.116 --> 00:10:58.626 A:middle
+Here you can see how QuickTime
+is just mapping 1, 2, 3, 4,
+
+00:10:58.626 --> 00:11:00.316 A:middle
+and 5 to your various speeds,
+
+
+
+00:10:58.626 --> 00:11:00.316 A:middle
+and 5 to your various speeds,
+
+00:11:00.516 --> 00:11:03.466 A:middle
+and for example 3 is
+10x fast-forwarding.
+
+00:11:03.906 --> 00:11:08.766 A:middle
+Another example of Accelerator
+Controls: here is Maps,
+
+00:11:09.446 --> 00:11:11.176 A:middle
+and Maps has this
+nice zoom buttons,
+
+00:11:11.976 --> 00:11:14.636 A:middle
+and these are actually
+implemented
+
+00:11:14.716 --> 00:11:16.686 A:middle
+as NSSegmentedControls.
+
+00:11:17.146 --> 00:11:19.256 A:middle
+NSSegmentedControls
+has a new tracking mode
+
+00:11:19.256 --> 00:11:23.206 A:middle
+which is MomentaryAccelerator,
+and this works exactly
+
+00:11:23.206 --> 00:11:26.666 A:middle
+like the accelerator
+NSButtonType does --
+
+00:11:27.386 --> 00:11:29.166 A:middle
+real easy to set
+that in IB as well.
+
+00:11:29.166 --> 00:11:31.766 A:middle
+But instead of asking
+for the doubleValue
+
+00:11:31.766 --> 00:11:34.586 A:middle
+when the segmented control
+action messages are fired,
+
+00:11:34.756 --> 00:11:36.016 A:middle
+you want to ask for
+the doubleValue
+
+00:11:36.016 --> 00:11:37.246 A:middle
+for the selected segment.
+
+00:11:37.686 --> 00:11:40.406 A:middle
+It is the same range as
+we discussed earlier;
+
+00:11:40.406 --> 00:11:44.006 A:middle
+it's 1 to 2 with a final action
+message with a value of 0
+
+00:11:44.006 --> 00:11:44.996 A:middle
+when tracking has ended.
+
+00:11:46.446 --> 00:11:49.206 A:middle
+Segmented controls don't
+have a multilevel option,
+
+00:11:49.436 --> 00:11:51.926 A:middle
+they only support
+the continuous mode.
+
+00:11:52.456 --> 00:11:56.356 A:middle
+Here is an example of Photos.
+
+00:11:57.176 --> 00:12:02.386 A:middle
+For moving through your
+photos in Photos by applying,
+
+
+
+00:11:57.176 --> 00:12:02.386 A:middle
+For moving through your
+photos in Photos by applying,
+
+00:12:03.096 --> 00:12:04.326 A:middle
+varying the pressure,
+
+00:12:04.326 --> 00:12:07.026 A:middle
+I can control how fast
+the photos move across.
+
+00:12:07.796 --> 00:12:10.906 A:middle
+This is something that we call a
+continuous accelerator control.
+
+00:12:11.606 --> 00:12:14.006 A:middle
+If you have an accelerator
+control settings
+
+00:12:14.006 --> 00:12:16.206 A:middle
+on either NSButton or
+NSSegmentedControl,
+
+00:12:16.546 --> 00:12:20.136 A:middle
+in the NSControl section you can
+set the continuous flag to true
+
+00:12:20.356 --> 00:12:22.036 A:middle
+or just check the box in IB,
+
+00:12:22.766 --> 00:12:26.396 A:middle
+and you'll get what we call a
+continuous accelerator control.
+
+00:12:27.186 --> 00:12:29.176 A:middle
+Continuous accelerator
+controls are different
+
+00:12:29.176 --> 00:12:31.916 A:middle
+because you don't worry about
+their doubleValues so much.
+
+00:12:31.916 --> 00:12:33.996 A:middle
+You just want to move to
+the next slide as soon
+
+00:12:33.996 --> 00:12:34.906 A:middle
+as the action happens.
+
+00:12:34.956 --> 00:12:37.086 A:middle
+The doubleValue doesn't matter.
+
+00:12:37.086 --> 00:12:39.196 A:middle
+They come back, come
+in on a heartbeat,
+
+00:12:39.376 --> 00:12:41.646 A:middle
+and the force changes the
+frequency of that heartbeat.
+
+00:12:42.036 --> 00:12:42.996 A:middle
+That's the difference.
+
+00:12:43.276 --> 00:12:46.416 A:middle
+To drive the point home a little
+bit, let's compare the two.
+
+00:12:46.956 --> 00:12:48.056 A:middle
+In accelerated control,
+
+00:12:48.926 --> 00:12:51.656 A:middle
+ou get your action message
+whenever the pressure happens
+
+00:12:51.696 --> 00:12:53.836 A:middle
+to change, so there may be a
+little bit of delay in there,
+
+00:12:54.046 --> 00:12:56.046 A:middle
+it may come close together,
+
+00:12:56.256 --> 00:12:58.446 A:middle
+and you just change how
+fast you're fast-forwarding
+
+00:12:58.446 --> 00:12:58.916 A:middle
+in the movie.
+
+
+
+00:13:00.296 --> 00:13:05.026 A:middle
+For a continuous control
+it comes in on a heartbeat
+
+00:13:05.026 --> 00:13:06.246 A:middle
+for a continuous acceleration,
+
+00:13:06.246 --> 00:13:07.766 A:middle
+and then you just
+do your action.
+
+00:13:07.936 --> 00:13:10.006 A:middle
+The frequency, they might
+come together closely
+
+00:13:10.006 --> 00:13:12.616 A:middle
+if the frequency is high because
+the user is applying a lot
+
+00:13:12.616 --> 00:13:12.996 A:middle
+of force.
+
+00:13:13.286 --> 00:13:16.826 A:middle
+It is a great way for doing
+something like sliding photos
+
+00:13:16.826 --> 00:13:19.276 A:middle
+where the animation speed is
+constant, but when do you need
+
+00:13:19.276 --> 00:13:20.516 A:middle
+to bring in the next photo?
+
+00:13:20.726 --> 00:13:22.436 A:middle
+That's the next time
+the action message fires
+
+00:13:22.706 --> 00:13:24.186 A:middle
+and it gives the user
+a lot of control.
+
+00:13:25.476 --> 00:13:27.456 A:middle
+That's everything you need
+to know to be a squire.
+
+00:13:27.456 --> 00:13:28.196 A:middle
+Congratulations.
+
+00:13:28.196 --> 00:13:30.456 A:middle
+You are all now squires in
+using the Force Touch trackpads.
+
+00:13:30.456 --> 00:13:33.586 A:middle
+We have talked about Table
+Row Actions, a very easy API
+
+00:13:33.586 --> 00:13:36.026 A:middle
+to implement, spring-loaded
+NSButtons
+
+00:13:36.026 --> 00:13:38.446 A:middle
+and accelerator NS Buttons
+and segmented controls,
+
+00:13:38.576 --> 00:13:41.506 A:middle
+they're real easy to turn
+on, our high-level API,
+
+00:13:41.616 --> 00:13:45.076 A:middle
+you get a lot of bang for your
+buck here in using these APIs
+
+00:13:45.386 --> 00:13:47.326 A:middle
+and we hope that you turn
+them on in your applications.
+
+00:13:48.416 --> 00:13:49.586 A:middle
+Let's move forward
+to being a knight.
+
+00:13:50.516 --> 00:13:51.726 A:middle
+Being a knight is all
+
+00:13:51.726 --> 00:13:54.216 A:middle
+about understanding how the
+force flows through the system.
+
+00:13:54.716 --> 00:13:56.576 A:middle
+We're going to talk about
+the force event stream,
+
+00:13:56.576 --> 00:13:58.516 A:middle
+and then I'm also going to talk
+
+00:13:58.516 --> 00:14:01.156 A:middle
+about the spring-loading
+protocol
+
+
+
+00:13:58.516 --> 00:14:01.156 A:middle
+about the spring-loading
+protocol
+
+00:14:01.156 --> 00:14:04.766 A:middle
+so that you can use the same
+API that NSButton is doing
+
+00:14:04.966 --> 00:14:07.376 A:middle
+to provide spring loading
+in your custom applications.
+
+00:14:08.006 --> 00:14:11.506 A:middle
+Then finally we will talk about
+some Alignment Feedback API
+
+00:14:11.506 --> 00:14:15.136 A:middle
+to help you do snap-to
+guides and things like that.
+
+00:14:15.136 --> 00:14:17.376 A:middle
+Let's talk about
+the event stream.
+
+00:14:18.296 --> 00:14:23.176 A:middle
+We have a ton of events already
+on OS X; you get the mouse downs
+
+00:14:23.176 --> 00:14:26.226 A:middle
+and ups, your gestures
+for magnify and rotate.
+
+00:14:26.496 --> 00:14:27.916 A:middle
+And now we're introducing
+another one:
+
+00:14:27.996 --> 00:14:29.296 A:middle
+NSEventTypePressure.
+
+00:14:30.116 --> 00:14:32.576 A:middle
+Or actually, we introduced
+it in 10.10.3
+
+00:14:32.576 --> 00:14:33.926 A:middle
+when we introduced
+the new MacBooks,
+
+00:14:34.266 --> 00:14:37.706 A:middle
+so you can get
+NSEventTypePressures there
+
+00:14:37.706 --> 00:14:38.086 A:middle
+as well.
+
+00:14:38.706 --> 00:14:40.066 A:middle
+The are pressure gesture.
+
+00:14:41.126 --> 00:14:42.866 A:middle
+And along with the new
+event type, of course,
+
+00:14:42.866 --> 00:14:44.296 A:middle
+we have the event
+mask to go along
+
+00:14:44.296 --> 00:14:46.506 A:middle
+with it: NSEventMaskPressure.
+
+00:14:46.856 --> 00:14:49.056 A:middle
+And what this means is that
+during your tracking loops,
+
+00:14:49.596 --> 00:14:51.236 A:middle
+you can just add
+event mask pressure
+
+00:14:51.236 --> 00:14:52.726 A:middle
+to your tracking loop mask,
+
+00:14:53.696 --> 00:14:56.796 A:middle
+and you can get the
+pressure events coming
+
+00:14:56.796 --> 00:14:58.436 A:middle
+in as you're tracking
+the mouse as well.
+
+00:14:59.176 --> 00:15:00.216 A:middle
+It is really easy to use.
+
+
+
+00:14:59.176 --> 00:15:00.216 A:middle
+It is really easy to use.
+
+00:15:01.686 --> 00:15:03.576 A:middle
+If you prefer to use
+the responder approach
+
+00:15:03.576 --> 00:15:06.716 A:middle
+where you're overriding
+mouse down and mouse drag
+
+00:15:06.716 --> 00:15:08.856 A:middle
+and mouse up, we also have
+a new responder method
+
+00:15:08.896 --> 00:15:11.016 A:middle
+pressureChangeWithEvent, so
+you can get them that way
+
+00:15:11.016 --> 00:15:11.836 A:middle
+as well if you prefer.
+
+00:15:12.366 --> 00:15:17.316 A:middle
+Let's dig into the properties
+of the pressure gesture.
+
+00:15:17.636 --> 00:15:20.496 A:middle
+It is a gesture; unlike
+a mouse event sequence
+
+00:15:20.496 --> 00:15:23.266 A:middle
+which has individual types
+for mouse down, mouse drag,
+
+00:15:23.266 --> 00:15:26.606 A:middle
+and mouse up, there is just
+the single type for pressure,
+
+00:15:26.946 --> 00:15:29.886 A:middle
+it has a phase, and it goes
+through a cycle of Began,
+
+00:15:30.136 --> 00:15:32.076 A:middle
+Changed, and Ended
+when the gesture ends.
+
+00:15:33.536 --> 00:15:34.686 A:middle
+And we have a stage.
+
+00:15:34.896 --> 00:15:37.226 A:middle
+A stage is how we determine
+when a Force click happens.
+
+00:15:37.816 --> 00:15:43.416 A:middle
+So when you do a mouse down with
+a trackpad you'll get a Began
+
+00:15:43.416 --> 00:15:46.406 A:middle
+phase pressure gesture and
+it will have a stage of 1.
+
+00:15:46.406 --> 00:15:48.886 A:middle
+This is the standard
+click level stage.
+
+00:15:48.946 --> 00:15:51.716 A:middle
+The user presses harder to
+get to Force click level
+
+00:15:51.716 --> 00:15:53.746 A:middle
+on the trackpad, the
+stage will change to 2.
+
+00:15:53.746 --> 00:15:56.386 A:middle
+That's how you know the user's
+accomplished Force click
+
+00:15:56.806 --> 00:15:59.526 A:middle
+and you can just immediately do
+your Force click action and go
+
+00:15:59.526 --> 00:16:01.716 A:middle
+into rename on the
+Finder, for example.
+
+
+
+00:15:59.526 --> 00:16:01.716 A:middle
+into rename on the
+Finder, for example.
+
+00:16:02.756 --> 00:16:05.316 A:middle
+Then as the user releases
+the force from the trackpad,
+
+00:16:05.786 --> 00:16:08.116 A:middle
+it goes back to stage 1
+as it gets to click level,
+
+00:16:08.116 --> 00:16:10.496 A:middle
+and eventually it gets to
+stage 0 when the gesture ends
+
+00:16:10.906 --> 00:16:15.266 A:middle
+because the mouse button
+down, it is no longer down,
+
+00:16:15.736 --> 00:16:19.906 A:middle
+so you get a final event of
+stage 0 with a phase of Ended.
+
+00:16:20.486 --> 00:16:25.226 A:middle
+Now, of course, no pressure
+gesture would be complete
+
+00:16:25.226 --> 00:16:26.676 A:middle
+without actually
+having a pressure value,
+
+00:16:26.676 --> 00:16:28.376 A:middle
+so we have a pressure
+property as well,
+
+00:16:28.376 --> 00:16:29.726 A:middle
+it is within the
+range of 0 to 1.
+
+00:16:30.866 --> 00:16:32.216 A:middle
+It is important to note here
+
+00:16:32.216 --> 00:16:34.386 A:middle
+that the pressure
+property is the pressure
+
+00:16:34.386 --> 00:16:35.476 A:middle
+of the current stage.
+
+00:16:35.476 --> 00:16:36.616 A:middle
+So as you can see in the chart,
+
+00:16:36.616 --> 00:16:39.566 A:middle
+as you enter stage 1 the
+pressure starts to go up
+
+00:16:39.566 --> 00:16:43.066 A:middle
+and reaches 1 as you approach
+stage 2, and once you cross
+
+00:16:43.066 --> 00:16:45.306 A:middle
+over to stage 2, the pressure
+drops immediately back
+
+00:16:45.306 --> 00:16:47.576 A:middle
+down to 0, and it
+goes back up again
+
+00:16:47.966 --> 00:16:51.466 A:middle
+as you increase the pressure
+while you're in stage 2.
+
+00:16:51.526 --> 00:16:54.386 A:middle
+The pressure is of
+the current stage.
+
+00:16:55.036 --> 00:16:55.756 A:middle
+That's really important.
+
+00:16:57.206 --> 00:16:59.966 A:middle
+Now I'm showing a linear
+mapping between the force
+
+
+
+00:17:00.006 --> 00:17:03.416 A:middle
+on the trackpad to what the
+user is doing to the values
+
+00:17:03.416 --> 00:17:05.516 A:middle
+in the pressure event,
+but I don't want you
+
+00:17:05.516 --> 00:17:06.506 A:middle
+to read too much into that.
+
+00:17:07.175 --> 00:17:10.316 A:middle
+We like to think of every
+click on the trackpad
+
+00:17:10.316 --> 00:17:13.066 A:middle
+as a new adventure,
+and we look at a lot
+
+00:17:13.066 --> 00:17:15.836 A:middle
+of different variables -- is
+the user using their thumb,
+
+00:17:15.836 --> 00:17:18.516 A:middle
+what firmness setting do they
+have in their preferences,
+
+00:17:18.976 --> 00:17:20.935 A:middle
+how are they interacting
+with the trackpad --
+
+00:17:20.935 --> 00:17:23.165 A:middle
+so we dynamically change
+these curves on the fly
+
+00:17:23.165 --> 00:17:25.136 A:middle
+to give the user the
+best possible experience,
+
+00:17:25.496 --> 00:17:28.296 A:middle
+and we normalize the
+input from the trackpad
+
+00:17:28.696 --> 00:17:30.496 A:middle
+into the pressure
+range of 0 to 1
+
+00:17:30.796 --> 00:17:32.436 A:middle
+and that's what you should
+be using in your application.
+
+00:17:32.996 --> 00:17:37.226 A:middle
+As you notice when I was
+clicking around earlier
+
+00:17:37.226 --> 00:17:39.836 A:middle
+in the demo, just clicking
+around in TextEdit,
+
+00:17:40.386 --> 00:17:45.016 A:middle
+I wasn't getting the animation
+of the popover until I started
+
+00:17:45.016 --> 00:17:46.906 A:middle
+to really get close to
+having enough pressure
+
+00:17:46.906 --> 00:17:47.736 A:middle
+to reach Force click.
+
+00:17:47.736 --> 00:17:51.446 A:middle
+You don't want to
+have a whole bunch
+
+00:17:51.446 --> 00:17:52.736 A:middle
+of distracting animations
+occurring
+
+00:17:52.736 --> 00:17:54.176 A:middle
+when the user's just
+clicking around.
+
+00:17:54.326 --> 00:17:57.906 A:middle
+Doing this animation as they're
+approaching the transition
+
+00:17:57.906 --> 00:17:59.016 A:middle
+to stage 2 can be useful.
+
+00:17:59.336 --> 00:18:01.056 A:middle
+This is what the stage
+transition property is
+
+
+
+00:17:59.336 --> 00:18:01.056 A:middle
+This is what the stage
+transition property is
+
+00:18:01.056 --> 00:18:01.606 A:middle
+useful for.
+
+00:18:02.156 --> 00:18:04.356 A:middle
+As you see here, it is in
+the range of 0 to 1 just
+
+00:18:04.356 --> 00:18:07.226 A:middle
+like pressure, but it stays at 0
+for a much longer period of time
+
+00:18:07.226 --> 00:18:09.466 A:middle
+until you start to
+approach the next stage,
+
+00:18:09.466 --> 00:18:10.506 A:middle
+stage 2 in this case.
+
+00:18:11.066 --> 00:18:13.996 A:middle
+I want you to get to approach
+stage 2, it will then shoot
+
+00:18:13.996 --> 00:18:17.716 A:middle
+up to 1, you can use this range
+to control your animation,
+
+00:18:18.016 --> 00:18:19.666 A:middle
+and it won't interfere
+with just clicking
+
+00:18:19.666 --> 00:18:21.166 A:middle
+around in your interface.
+
+00:18:21.216 --> 00:18:23.656 A:middle
+You can get that
+animation and as soon
+
+00:18:23.656 --> 00:18:26.076 A:middle
+as you reach stage 2 you can pop
+that animation to completion,
+
+00:18:26.076 --> 00:18:29.526 A:middle
+and you can see the
+stageTransition value drops back
+
+00:18:29.566 --> 00:18:32.426 A:middle
+to 0 once you reach stage 2,
+and we don't have a stage 3
+
+00:18:32.426 --> 00:18:35.046 A:middle
+in this case to transition
+to, so it just stays at 0
+
+00:18:35.046 --> 00:18:37.886 A:middle
+for the remainder of the time.
+
+00:18:38.086 --> 00:18:42.286 A:middle
+I mentioned earlier that
+mouse events are going
+
+00:18:42.286 --> 00:18:45.386 A:middle
+on at the same time as
+pressure gestures are.
+
+00:18:45.476 --> 00:18:47.756 A:middle
+The trackpad is still emulating
+a mouse like it always has.
+
+00:18:48.686 --> 00:18:51.706 A:middle
+It is also issuing
+pressure gestures.
+
+00:18:51.706 --> 00:18:54.116 A:middle
+I'm going to look at how
+those flow in the system
+
+00:18:54.116 --> 00:18:55.326 A:middle
+at the same time in parallel.
+
+00:18:55.746 --> 00:18:56.606 A:middle
+This is what we're
+going to cover.
+
+00:18:56.606 --> 00:19:00.856 A:middle
+This is an example of the user
+putting force on the trackpad,
+
+
+
+00:18:56.606 --> 00:19:00.856 A:middle
+This is an example of the user
+putting force on the trackpad,
+
+00:19:01.246 --> 00:19:02.716 A:middle
+applying a click,
+going all the way
+
+00:19:02.716 --> 00:19:03.766 A:middle
+to the Force click threshold,
+
+00:19:03.766 --> 00:19:05.246 A:middle
+and then releasing
+pressure off of that.
+
+00:19:05.316 --> 00:19:06.026 A:middle
+That's their input.
+
+00:19:06.526 --> 00:19:09.136 A:middle
+Down here we're going to show
+you the events as they're coming
+
+00:19:09.136 --> 00:19:10.026 A:middle
+into your application.
+
+00:19:10.106 --> 00:19:13.246 A:middle
+So the user starts off,
+they're applying light pressure,
+
+00:19:13.846 --> 00:19:15.786 A:middle
+and these are all mouse moves.
+
+00:19:15.846 --> 00:19:18.056 A:middle
+We haven't reached a
+click threshold yet.
+
+00:19:18.386 --> 00:19:20.406 A:middle
+We haven't even started
+a pressure gesture yet.
+
+00:19:20.486 --> 00:19:21.616 A:middle
+These are just mouse moves,
+
+00:19:21.786 --> 00:19:23.596 A:middle
+there are no pressure
+gestures coming in.
+
+00:19:24.706 --> 00:19:27.036 A:middle
+You reach the click
+threshold, a mouse down occurs,
+
+00:19:27.566 --> 00:19:31.136 A:middle
+and you also get a pressure
+began event with a stage of 1
+
+00:19:31.436 --> 00:19:33.686 A:middle
+and the pressure value is
+going to be 0 at this point.
+
+00:19:34.386 --> 00:19:35.146 A:middle
+We don't guarantee
+
+00:19:35.146 --> 00:19:38.236 A:middle
+if the pressure began event
+occurs first or if the mouse
+
+00:19:38.236 --> 00:19:41.106 A:middle
+down occurs first; they
+can swap sometimes.
+
+00:19:41.886 --> 00:19:45.356 A:middle
+The easiest way to handle that
+is just look for the mouse down
+
+00:19:45.426 --> 00:19:47.336 A:middle
+and if you also want pressure
+events, then start looking
+
+00:19:47.336 --> 00:19:49.016 A:middle
+for them after the
+mouse down occurs.
+
+00:19:49.516 --> 00:19:53.096 A:middle
+As the user starts to apply
+more force to the trackpad,
+
+00:19:53.096 --> 00:19:55.076 A:middle
+you see the pressure
+rises up towards 1
+
+00:19:55.076 --> 00:19:56.696 A:middle
+as we approach the
+Force click threshold.
+
+00:19:57.206 --> 00:19:59.056 A:middle
+If the cursor is moving,
+these are going to come
+
+00:19:59.056 --> 00:20:00.316 A:middle
+through as mouse dragged events,
+
+
+
+00:19:59.056 --> 00:20:00.316 A:middle
+through as mouse dragged events,
+
+00:20:00.536 --> 00:20:01.566 A:middle
+you have the mouse
+dragged events
+
+00:20:01.566 --> 00:20:03.556 A:middle
+and the pressure events --
+we're still in stage 1 --
+
+00:20:04.076 --> 00:20:05.686 A:middle
+we reach the Force
+click threshold,
+
+00:20:06.356 --> 00:20:08.646 A:middle
+you now get a pressure
+gesture with a stage 2
+
+00:20:08.646 --> 00:20:11.286 A:middle
+and the pressure value
+drops all the way back to 0.
+
+00:20:11.286 --> 00:20:14.516 A:middle
+The user continues to apply
+more force on the trackpad,
+
+00:20:14.916 --> 00:20:17.196 A:middle
+the pressure starts to
+increase again, as they start
+
+00:20:17.196 --> 00:20:19.056 A:middle
+to release the pressure
+from the trackpad it starts
+
+00:20:19.056 --> 00:20:20.436 A:middle
+to go back down toward 0.
+
+00:20:20.976 --> 00:20:23.266 A:middle
+Now they have released it back
+to the Force click threshold,
+
+00:20:23.266 --> 00:20:24.326 A:middle
+that pressure is at 0.
+
+00:20:25.846 --> 00:20:27.426 A:middle
+We're still at stage
+2 at this point.
+
+00:20:28.286 --> 00:20:30.536 A:middle
+As the user releases
+a bit more pressure,
+
+00:20:30.666 --> 00:20:31.906 A:middle
+we're still at stage 2.
+
+00:20:31.906 --> 00:20:34.606 A:middle
+We have actually exaggerated
+it a little bit on this graph.
+
+00:20:35.096 --> 00:20:37.706 A:middle
+But it is very difficult for
+somebody to hold pressure
+
+00:20:37.706 --> 00:20:39.836 A:middle
+at a constant rate
+on the trackpad.
+
+00:20:39.886 --> 00:20:42.086 A:middle
+If they're right at the Force
+click level they'll be going
+
+00:20:42.086 --> 00:20:44.516 A:middle
+above it and slightly
+below it and we don't want
+
+00:20:44.516 --> 00:20:47.236 A:middle
+to be triggering Force click on
+and off, on and off, on and off;
+
+00:20:47.236 --> 00:20:49.096 A:middle
+that's not what the
+user's trying to do.
+
+00:20:49.096 --> 00:20:52.396 A:middle
+We require that you drop below
+the Force click threshold a
+
+00:20:52.396 --> 00:20:55.856 A:middle
+little bit further before we
+finally unlatch from stage 2,
+
+00:20:56.376 --> 00:20:59.006 A:middle
+and we give you finally
+an event of stage 1.
+
+00:20:59.496 --> 00:21:00.656 A:middle
+And during that small section
+
+
+
+00:20:59.496 --> 00:21:00.656 A:middle
+And during that small section
+
+00:21:00.656 --> 00:21:03.956 A:middle
+of time the pressure is
+going to be 0 in the event.
+
+00:21:04.366 --> 00:21:06.236 A:middle
+You're obviously below
+the Force click threshold
+
+00:21:06.236 --> 00:21:08.446 A:middle
+where the pressure
+would start to go up.
+
+00:21:09.176 --> 00:21:13.146 A:middle
+Then now that you're in stage
+1, the user continues to release
+
+00:21:13.346 --> 00:21:16.346 A:middle
+and the pressure jumps up and
+starts to come back down again.
+
+00:21:16.346 --> 00:21:18.466 A:middle
+You notice it didn't jump
+all the way back up to 1,
+
+00:21:18.466 --> 00:21:20.036 A:middle
+because that's part
+of the little gap.
+
+00:21:20.636 --> 00:21:23.526 A:middle
+One of the things to note
+here is that this is one
+
+00:21:23.526 --> 00:21:25.576 A:middle
+of the reasons why you
+shouldn't try to combine stage 1
+
+00:21:25.576 --> 00:21:27.546 A:middle
+and stage 2 to get a
+larger dynamic range,
+
+00:21:27.546 --> 00:21:30.236 A:middle
+we're going to talk more
+about that when we get
+
+00:21:30.236 --> 00:21:32.336 A:middle
+to the master section.
+
+00:21:32.676 --> 00:21:33.966 A:middle
+Whenever there's stage 2 occurs,
+
+00:21:33.966 --> 00:21:37.166 A:middle
+automatically we also provide
+haptic feedback, so don't try
+
+00:21:37.166 --> 00:21:38.896 A:middle
+and combine the pressure
+into two stages.
+
+00:21:39.246 --> 00:21:41.866 A:middle
+Either look at stage 1 and use
+the pressure or look at stage 2
+
+00:21:41.966 --> 00:21:43.466 A:middle
+and use the pressure if
+that's where you need
+
+00:21:43.466 --> 00:21:48.936 A:middle
+to do your animation or the
+stage transition property.
+
+00:21:48.936 --> 00:21:52.366 A:middle
+We reached the click
+threshold point for stage 1,
+
+00:21:52.366 --> 00:21:54.666 A:middle
+so your pressure is now back
+down to 0, and just like we did
+
+00:21:54.666 --> 00:21:57.026 A:middle
+with the Force click
+threshold, the user actually has
+
+00:21:57.076 --> 00:21:58.756 A:middle
+to release even more pressure
+
+00:21:58.756 --> 00:22:03.496 A:middle
+from the trackpad before we
+finally release from stage 1.
+
+
+
+00:21:58.756 --> 00:22:03.496 A:middle
+from the trackpad before we
+finally release from stage 1.
+
+00:22:04.126 --> 00:22:06.746 A:middle
+We're going to do a
+pressure with a phase ended
+
+00:22:06.746 --> 00:22:08.496 A:middle
+at stage 0 and the mouse up.
+
+00:22:08.906 --> 00:22:11.266 A:middle
+Again, whether the
+mouse up occurs first
+
+00:22:11.266 --> 00:22:13.646 A:middle
+or the pressure ended
+event occurs first,
+
+00:22:14.096 --> 00:22:16.806 A:middle
+that is not guaranteed;
+the easiest way to deal
+
+00:22:16.806 --> 00:22:19.506 A:middle
+with this is look for the
+mouse up, track your pressure
+
+00:22:19.506 --> 00:22:21.126 A:middle
+and your mouse movements
+at the same time
+
+00:22:21.176 --> 00:22:22.966 A:middle
+until the mouse up occurs.
+
+00:22:23.246 --> 00:22:25.666 A:middle
+Just ignore any pressure
+events that might occur before
+
+00:22:25.666 --> 00:22:26.746 A:middle
+or after that sequence.
+
+00:22:27.256 --> 00:22:32.416 A:middle
+This will work with mice as
+well as our older trackpads
+
+00:22:32.466 --> 00:22:33.956 A:middle
+and the new Force Touch
+trackpads as well.
+
+00:22:35.046 --> 00:22:37.526 A:middle
+Finally, if the user is
+moving around with very,
+
+00:22:37.526 --> 00:22:39.936 A:middle
+very light pressure after the
+mouse up, these are mouse moves,
+
+00:22:40.096 --> 00:22:42.456 A:middle
+the pressure gesture has ended
+and we're starting the cycle
+
+00:22:42.456 --> 00:22:44.116 A:middle
+over again as we did
+in the beginning.
+
+00:22:44.676 --> 00:22:49.166 A:middle
+It gets real important to
+know sometimes on the mouse
+
+00:22:49.166 --> 00:22:50.966 A:middle
+down if there is going
+
+00:22:50.966 --> 00:22:53.396 A:middle
+to be pressure associated
+with this mouse down.
+
+00:22:53.596 --> 00:22:56.596 A:middle
+Is this coming from a device
+that's emulating the mouse
+
+00:22:56.676 --> 00:22:59.886 A:middle
+and also issuing
+pressure gesture events.
+
+00:22:59.886 --> 00:23:01.926 A:middle
+The way we have to
+help you do this is
+
+
+
+00:22:59.886 --> 00:23:01.926 A:middle
+The way we have to
+help you do this is
+
+00:23:01.926 --> 00:23:03.916 A:middle
+by using the associatedEventMask
+property
+
+00:23:04.486 --> 00:23:06.226 A:middle
+on the mouse down events.
+
+00:23:06.226 --> 00:23:08.216 A:middle
+You can see this on the
+mouse dragged events as well.
+
+00:23:08.216 --> 00:23:09.996 A:middle
+It is real easy to use.
+
+00:23:09.996 --> 00:23:13.956 A:middle
+You ask the mouse down event
+for the associatedEventMask,
+
+00:23:13.956 --> 00:23:16.256 A:middle
+you find out if it contains
+the EventMaskPressure,
+
+00:23:16.366 --> 00:23:20.276 A:middle
+if you're using Cocoa
+you're just ending it
+
+00:23:20.276 --> 00:23:21.806 A:middle
+with the NSEventMaskPressure
+
+00:23:21.806 --> 00:23:23.226 A:middle
+because you're checking
+the bit field.
+
+00:23:24.606 --> 00:23:27.096 A:middle
+If it does contain
+the EventMaskPressure,
+
+00:23:27.096 --> 00:23:29.396 A:middle
+you know pressure events
+are going to be coming,
+
+00:23:29.436 --> 00:23:32.756 A:middle
+and you can set it up so that
+you have varying brush widths
+
+00:23:33.026 --> 00:23:34.076 A:middle
+for example in your drawing.
+
+00:23:34.076 --> 00:23:34.876 A:middle
+And that's great.
+
+00:23:35.426 --> 00:23:37.146 A:middle
+If it doesn't contain
+the EventMaskPressure,
+
+00:23:37.606 --> 00:23:41.296 A:middle
+then it is coming from a mouse
+or an older style trackpad
+
+00:23:41.296 --> 00:23:43.166 A:middle
+for example, and at
+that point you want
+
+00:23:43.166 --> 00:23:45.176 A:middle
+to choose a default brush size,
+
+00:23:45.246 --> 00:23:47.966 A:middle
+usually you choose the maximum
+brush size at that point
+
+00:23:48.316 --> 00:23:51.546 A:middle
+or maybe you want to just
+choose half a brush size
+
+00:23:51.726 --> 00:23:53.176 A:middle
+and you use this constant value
+
+00:23:53.586 --> 00:23:55.956 A:middle
+for the entire mouse
+dragging sequence.
+
+00:23:56.446 --> 00:24:01.146 A:middle
+That's the new
+EventTypePressure,
+
+
+
+00:23:56.446 --> 00:24:01.146 A:middle
+That's the new
+EventTypePressure,
+
+00:24:01.146 --> 00:24:05.166 A:middle
+it's got a lot of new
+properties, it's got a phase,
+
+00:24:05.536 --> 00:24:07.736 A:middle
+because it is a gesture,
+pressure which is
+
+00:24:07.736 --> 00:24:10.746 A:middle
+within the range of 0 to
+1 for the current stage.
+
+00:24:11.066 --> 00:24:12.886 A:middle
+Of course you have
+stage, you can easily see
+
+00:24:12.886 --> 00:24:15.616 A:middle
+when the user goes to Force
+click, stage transitions
+
+00:24:15.616 --> 00:24:18.506 A:middle
+for animating those transitions,
+the associated event mask
+
+00:24:18.506 --> 00:24:20.266 A:middle
+so you know when your
+mouse events are going
+
+00:24:20.266 --> 00:24:21.816 A:middle
+to have pressure
+associated with them,
+
+00:24:22.186 --> 00:24:24.096 A:middle
+and of course the
+pressure change
+
+00:24:24.096 --> 00:24:25.316 A:middle
+with event responder method
+
+00:24:25.536 --> 00:24:26.836 A:middle
+if you're using the
+responder methods.
+
+00:24:27.326 --> 00:24:29.906 A:middle
+Let's talk a little bit
+about spring loading
+
+00:24:29.906 --> 00:24:31.916 A:middle
+and how NSButton
+implemented spring loading;
+
+00:24:32.026 --> 00:24:34.706 A:middle
+you can use that exact same
+API in your custom controls
+
+00:24:34.706 --> 00:24:36.546 A:middle
+to add spring loading
+to your application.
+
+00:24:37.896 --> 00:24:40.306 A:middle
+There is an
+NSSpringLoadingDestination
+
+00:24:40.306 --> 00:24:43.676 A:middle
+protocol; it's very similar to
+NSDraggingDestination protocol
+
+00:24:43.676 --> 00:24:45.006 A:middle
+if you've ever implemented that.
+
+00:24:45.006 --> 00:24:49.726 A:middle
+In your destination, in your
+destination view you need
+
+00:24:49.726 --> 00:24:51.406 A:middle
+to implement either
+springLoadingEntered
+
+00:24:51.406 --> 00:24:52.566 A:middle
+or springLoadingUpdated.
+
+00:24:53.276 --> 00:24:55.446 A:middle
+To give you an example
+of how these work,
+
+00:24:55.446 --> 00:24:57.446 A:middle
+NSButton implements
+springLoadingEntered
+
+00:24:57.446 --> 00:24:58.806 A:middle
+and not springLoadingUpdated,
+
+00:24:59.286 --> 00:25:01.436 A:middle
+because a button is
+either enabled or disabled,
+
+
+
+00:24:59.286 --> 00:25:01.436 A:middle
+because a button is
+either enabled or disabled,
+
+00:25:01.436 --> 00:25:02.756 A:middle
+so as soon as you
+enter the button,
+
+00:25:03.076 --> 00:25:06.216 A:middle
+it can return the spring-loading
+options and it is not going
+
+00:25:06.216 --> 00:25:07.396 A:middle
+to change for the lifetime
+
+00:25:07.396 --> 00:25:08.786 A:middle
+that the drag is
+occurring in the button.
+
+00:25:09.476 --> 00:25:11.236 A:middle
+NSSegmentedControl,
+on the other hand,
+
+00:25:11.326 --> 00:25:12.856 A:middle
+implements springLoadingUpdated.
+
+00:25:13.326 --> 00:25:16.046 A:middle
+Each segment may be enabled
+or disabled independently
+
+00:25:16.046 --> 00:25:19.626 A:middle
+of each other, it's one view,
+so with springLoadingUpdated,
+
+00:25:20.166 --> 00:25:23.366 A:middle
+segmented control can watch
+the drag and find out exactly
+
+00:25:23.366 --> 00:25:24.546 A:middle
+where in the control the drag is
+
+00:25:24.546 --> 00:25:26.406 A:middle
+and dynamically change the
+spring-loading options.
+
+00:25:26.896 --> 00:25:28.716 A:middle
+As I mentioned, you need to --
+
+00:25:29.076 --> 00:25:30.426 A:middle
+if you implement one
+of these methods,
+
+00:25:30.536 --> 00:25:32.756 A:middle
+you need to implement
+spring-loading options.
+
+00:25:32.756 --> 00:25:35.996 A:middle
+You can implement both if
+you want, you don't have
+
+00:25:35.996 --> 00:25:37.776 A:middle
+to implement just one of
+these, you need to implement
+
+00:25:37.776 --> 00:25:38.716 A:middle
+at least one of these though.
+
+00:25:38.716 --> 00:25:41.396 A:middle
+For your spring-loading
+options, it is pretty obvious,
+
+00:25:41.396 --> 00:25:43.496 A:middle
+you return if spring
+loading should be enabled
+
+00:25:43.496 --> 00:25:45.366 A:middle
+or disabled, that's pretty easy.
+
+00:25:45.366 --> 00:25:47.606 A:middle
+We also have a couple of
+other interesting options,
+
+00:25:47.606 --> 00:25:49.016 A:middle
+continuous activation --
+
+00:25:49.536 --> 00:25:52.526 A:middle
+generally a spring-loading
+action is discrete,
+
+00:25:52.526 --> 00:25:53.506 A:middle
+spring loading occurred,
+
+00:25:53.746 --> 00:25:56.846 A:middle
+the button fires its
+action, it is over.
+
+00:25:57.286 --> 00:25:58.716 A:middle
+There is also a continuous
+version
+
+00:25:58.716 --> 00:26:00.466 A:middle
+which we'll cover
+a little bit more
+
+
+
+00:25:58.716 --> 00:26:00.466 A:middle
+which we'll cover
+a little bit more
+
+00:26:00.466 --> 00:26:02.126 A:middle
+in the next couple of slides.
+
+00:26:02.216 --> 00:26:04.096 A:middle
+I want to move on to no hover.
+
+00:26:05.496 --> 00:26:07.996 A:middle
+As I mentioned earlier, spring
+loading can be triggered either
+
+00:26:07.996 --> 00:26:11.146 A:middle
+with a hover, which
+works great for people
+
+00:26:11.146 --> 00:26:12.586 A:middle
+that don't have Force
+Touch trackpads
+
+00:26:12.586 --> 00:26:13.516 A:middle
+or you can Force click.
+
+00:26:14.676 --> 00:26:17.266 A:middle
+If you want to do a Force
+click on a canvas for example
+
+00:26:17.266 --> 00:26:20.286 A:middle
+that has a large area, and the
+user is just dragging the item
+
+00:26:20.286 --> 00:26:22.976 A:middle
+across the canvas, they're just
+trying to get across the canvas,
+
+00:26:23.136 --> 00:26:24.806 A:middle
+and they lift the
+finger up to come back
+
+00:26:24.806 --> 00:26:26.636 A:middle
+down to continue the
+drag, or lift the mouse
+
+00:26:26.636 --> 00:26:27.776 A:middle
+up to continue the drag,
+
+00:26:28.416 --> 00:26:30.546 A:middle
+that amount of time
+might be just long enough
+
+00:26:30.546 --> 00:26:34.116 A:middle
+that the cursor stays still that
+spring loading is activated.
+
+00:26:34.936 --> 00:26:37.176 A:middle
+So this would be a
+false activation,
+
+00:26:37.176 --> 00:26:38.726 A:middle
+that wasn't what the
+user was trying to do.
+
+00:26:39.396 --> 00:26:41.206 A:middle
+If you have a situation
+where you're getting a lot
+
+00:26:41.206 --> 00:26:44.516 A:middle
+of false activations because
+of hover, then you might want
+
+00:26:44.516 --> 00:26:47.086 A:middle
+to consider the no hover
+spring-loading option
+
+00:26:47.266 --> 00:26:49.956 A:middle
+which will still allow users
+with the Force Touch trackpad
+
+00:26:50.026 --> 00:26:52.366 A:middle
+to do a Force click
+to get spring loading
+
+00:26:52.506 --> 00:26:53.496 A:middle
+in that area of your view.
+
+00:26:54.306 --> 00:26:57.556 A:middle
+Use it sparingly, make sure
+that you really think about it
+
+00:26:57.556 --> 00:26:59.146 A:middle
+because we don't want
+to leave out any users
+
+00:26:59.146 --> 00:27:00.676 A:middle
+that don't have a
+Force Touch trackpad,
+
+
+
+00:26:59.146 --> 00:27:00.676 A:middle
+that don't have a
+Force Touch trackpad,
+
+00:27:01.056 --> 00:27:03.816 A:middle
+but if you're getting
+more false activations,
+
+00:27:04.036 --> 00:27:05.616 A:middle
+this is a good option
+to use sometimes.
+
+00:27:07.496 --> 00:27:09.446 A:middle
+Along with springLoadingEntered
+and Updated,
+
+00:27:09.446 --> 00:27:11.216 A:middle
+of course we have
+springLoadingExited --
+
+00:27:11.216 --> 00:27:13.776 A:middle
+this lets you know when the
+drag has exited your view --
+
+00:27:13.966 --> 00:27:15.296 A:middle
+and there's also draggingEnded.
+
+00:27:15.496 --> 00:27:17.816 A:middle
+Spring loading is part of
+the drag and drop operations,
+
+00:27:17.816 --> 00:27:21.746 A:middle
+so if the user has
+dragged over your view
+
+00:27:21.956 --> 00:27:24.656 A:middle
+and your spring-loading
+destination
+
+00:27:24.916 --> 00:27:26.356 A:middle
+and you implement draggingEnded,
+
+00:27:26.866 --> 00:27:29.336 A:middle
+when the dragging does
+completed, when the user lets go
+
+00:27:29.336 --> 00:27:30.696 A:middle
+of the mouse, cancels the drag,
+
+00:27:31.376 --> 00:27:33.266 A:middle
+you will get back
+the draggingEnded.
+
+00:27:33.396 --> 00:27:36.256 A:middle
+Whether this drag, whether
+the user completed the drag
+
+00:27:36.256 --> 00:27:37.106 A:middle
+in your application
+
+00:27:37.106 --> 00:27:39.066 A:middle
+or in another process,
+it doesn't matter.
+
+00:27:39.506 --> 00:27:41.926 A:middle
+Everybody that's implemented
+draggingUpdated will get
+
+00:27:41.926 --> 00:27:42.526 A:middle
+their callback.
+
+00:27:42.736 --> 00:27:46.836 A:middle
+Since this is part of dragging,
+
+00:27:47.356 --> 00:27:52.976 A:middle
+the NSDraggingDestination also
+has a draggingEnded function.
+
+00:27:53.176 --> 00:27:55.136 A:middle
+It is the exact same
+function we have here.
+
+00:27:55.136 --> 00:27:57.286 A:middle
+If you are both a Spring
+Loading destination
+
+00:27:57.356 --> 00:28:00.546 A:middle
+and an NSDraggingDestination,
+you only need
+
+
+
+00:27:57.356 --> 00:28:00.546 A:middle
+and an NSDraggingDestination,
+you only need
+
+00:28:00.546 --> 00:28:02.526 A:middle
+to have one implementation
+of draggingEnded,
+
+00:28:02.526 --> 00:28:04.976 A:middle
+it applies to both, so you'll
+need to do any cleanup you need
+
+00:28:04.976 --> 00:28:07.296 A:middle
+to do for both Spring Loading
+and dragging destination
+
+00:28:07.686 --> 00:28:09.556 A:middle
+if you're both a Spring
+Loading destination
+
+00:28:09.636 --> 00:28:12.866 A:middle
+and a dragging destination
+at the same time.
+
+00:28:13.086 --> 00:28:15.596 A:middle
+Now we get to the really fun
+stuff about spring loading.
+
+00:28:16.106 --> 00:28:18.596 A:middle
+So you're required to implement
+springLoadingActivated.
+
+00:28:18.926 --> 00:28:21.806 A:middle
+This is where we
+tell your destination
+
+00:28:21.806 --> 00:28:23.286 A:middle
+that the user has spring loaded.
+
+00:28:24.486 --> 00:28:26.276 A:middle
+We have a Boolean value,
+which is normally yes.
+
+00:28:26.616 --> 00:28:29.166 A:middle
+As I mentioned, spring
+loading is a discrete action,
+
+00:28:29.166 --> 00:28:32.046 A:middle
+it has occurred, and
+NSButton just fires its action
+
+00:28:32.916 --> 00:28:36.196 A:middle
+and everybody is happy.
+
+00:28:36.426 --> 00:28:39.556 A:middle
+But if you have that
+continuous bit set, then as soon
+
+00:28:39.556 --> 00:28:40.756 A:middle
+as the user Force clicks,
+
+00:28:41.376 --> 00:28:43.186 A:middle
+we'll send a
+springLoadingActivated yes,
+
+00:28:43.186 --> 00:28:45.506 A:middle
+you can start a timer,
+you can add continuously
+
+00:28:45.676 --> 00:28:49.066 A:middle
+on that timer firing your action
+message, and when you release
+
+00:28:49.066 --> 00:28:54.186 A:middle
+from Force click it will respond
+with a springLoadingActivated no
+
+00:28:54.186 --> 00:28:56.526 A:middle
+and that you know to turn
+off your timer at that point.
+
+00:28:56.936 --> 00:28:58.536 A:middle
+If the user is using hover,
+
+00:28:59.076 --> 00:29:00.616 A:middle
+you will get the
+springLoadingActivated
+
+
+
+00:28:59.076 --> 00:29:00.616 A:middle
+you will get the
+springLoadingActivated
+
+00:29:00.616 --> 00:29:03.916 A:middle
+at the hover timeout with
+a yes, and you'll get a no
+
+00:29:03.916 --> 00:29:05.126 A:middle
+when they move out
+of the control.
+
+00:29:06.506 --> 00:29:09.026 A:middle
+Again to compare this to
+the normal discrete action,
+
+00:29:09.286 --> 00:29:11.526 A:middle
+usually spring loading
+from Force click occurs
+
+00:29:11.756 --> 00:29:14.216 A:middle
+on the release of Force click,
+so they move all the way
+
+00:29:14.216 --> 00:29:15.596 A:middle
+down into Force click, it's
+
+00:29:15.596 --> 00:29:17.406 A:middle
+when they release Force
+click you will get a
+
+00:29:17.406 --> 00:29:20.056 A:middle
+springLoadingActivated yes, if
+you're not using continuous;
+
+00:29:20.336 --> 00:29:22.156 A:middle
+that's the one that
+we generally suggest
+
+00:29:22.156 --> 00:29:23.356 A:middle
+that you use unless you need
+
+00:29:23.356 --> 00:29:29.196 A:middle
+to continuously fire your action
+message during a spring load.
+
+00:29:29.196 --> 00:29:31.146 A:middle
+Lastly, we have
+springLoadingHighlightChanged.
+
+00:29:31.626 --> 00:29:33.666 A:middle
+We like to give the user
+feedback on what's going on.
+
+00:29:33.716 --> 00:29:35.746 A:middle
+We have three forms
+of highlighting: None,
+
+00:29:35.966 --> 00:29:37.246 A:middle
+Standard, and Emphasized.
+
+00:29:38.676 --> 00:29:41.566 A:middle
+When you get a
+springLoadingHighlightChanged
+
+00:29:41.696 --> 00:29:44.816 A:middle
+message, you need to ask
+the draggingInfo for what
+
+00:29:44.816 --> 00:29:48.246 A:middle
+that springLoadingHighlight
+is, set your view
+
+00:29:48.246 --> 00:29:51.546 A:middle
+that needs display, and
+then you update and you draw
+
+00:29:51.546 --> 00:29:52.866 A:middle
+with the correct highlighting.
+
+00:29:54.236 --> 00:29:56.756 A:middle
+What's important here is that
+you don't try to infer any kind
+
+00:29:56.756 --> 00:29:59.476 A:middle
+of behavior that the user
+is doing with this yet.
+
+00:29:59.896 --> 00:30:02.046 A:middle
+That's what
+springLoadingActivated is for.
+
+
+
+00:29:59.896 --> 00:30:02.046 A:middle
+That's what
+springLoadingActivated is for.
+
+00:30:04.236 --> 00:30:08.216 A:middle
+Sort of like when you select
+an item from a menu we blink
+
+00:30:08.216 --> 00:30:10.496 A:middle
+that menu item to let
+the user know and confirm
+
+00:30:10.496 --> 00:30:13.466 A:middle
+that they have selected that
+item, we'll do something similar
+
+00:30:13.466 --> 00:30:14.936 A:middle
+to that in spring loading,
+
+00:30:14.936 --> 00:30:17.306 A:middle
+and we do that by
+changing the highlighting,
+
+00:30:17.676 --> 00:30:19.646 A:middle
+and so all you have
+to do is just draw
+
+00:30:19.646 --> 00:30:21.736 A:middle
+with the new highlighting
+style whenever requested
+
+00:30:22.096 --> 00:30:24.866 A:middle
+and you'll get a consistent
+look in your application
+
+00:30:24.866 --> 00:30:25.986 A:middle
+to match the rest of the system.
+
+00:30:26.356 --> 00:30:27.686 A:middle
+Use springLoadingActivated
+to know
+
+00:30:27.686 --> 00:30:29.116 A:middle
+when to fire the
+action messages.
+
+00:30:29.486 --> 00:30:32.126 A:middle
+That's Spring Loading
+Destination.
+
+00:30:33.236 --> 00:30:34.886 A:middle
+We have Alignment
+Feedback, you can see this
+
+00:30:34.886 --> 00:30:37.086 A:middle
+in Interface Builder when
+you get two items together,
+
+00:30:37.086 --> 00:30:39.256 A:middle
+we snap them together, draw that
+nice little alignment guide.
+
+00:30:40.106 --> 00:30:42.476 A:middle
+We have some new API
+to help you do this.
+
+00:30:42.646 --> 00:30:45.326 A:middle
+The drawing is up to you, but
+our new API helps you decide
+
+00:30:45.326 --> 00:30:46.326 A:middle
+when to do the snapping.
+
+00:30:47.076 --> 00:30:50.616 A:middle
+To give you an example of that,
+let's look at a tracking loop,
+
+00:30:50.616 --> 00:30:51.786 A:middle
+a typical tracking loop.
+
+00:30:51.786 --> 00:30:53.676 A:middle
+Let's zoom in on that.
+
+00:30:53.676 --> 00:30:54.946 A:middle
+You get your mouse down event,
+
+00:30:54.946 --> 00:30:57.836 A:middle
+you figure out what your event
+mask is, which events you want
+
+00:30:57.836 --> 00:31:01.666 A:middle
+to track, you ask for the next
+event, you move your item,
+
+
+
+00:30:57.836 --> 00:31:01.666 A:middle
+to track, you ask for the next
+event, you move your item,
+
+00:31:01.766 --> 00:31:04.156 A:middle
+update your data model,
+set your needs display,
+
+00:31:04.156 --> 00:31:06.706 A:middle
+is this a mouse up, no, and
+you just continue the cycle,
+
+00:31:06.866 --> 00:31:10.346 A:middle
+you draw whenever drawRect is
+called and you drag your item
+
+00:31:10.346 --> 00:31:12.586 A:middle
+across the screen until
+the mouse up occurs.
+
+00:31:13.396 --> 00:31:16.486 A:middle
+We have an
+NSAlignmentFeedbackFilter object
+
+00:31:16.486 --> 00:31:17.556 A:middle
+to help you out with this.
+
+00:31:18.956 --> 00:31:20.456 A:middle
+You get your mouse down,
+the first thing you do,
+
+00:31:20.456 --> 00:31:21.976 A:middle
+you get the input event mask
+
+00:31:21.976 --> 00:31:23.636 A:middle
+from the Alignment
+Feedback filter.
+
+00:31:23.636 --> 00:31:27.746 A:middle
+This is the events that the
+Alignment Feedback filter needs
+
+00:31:27.746 --> 00:31:31.506 A:middle
+to know about, you just or them
+or union them in the Swift case
+
+00:31:31.506 --> 00:31:34.676 A:middle
+with your event mask for when
+you call nextEventMatchingMask.
+
+00:31:35.576 --> 00:31:38.916 A:middle
+Once you get the next event,
+the very first thing you do,
+
+00:31:38.916 --> 00:31:41.256 A:middle
+you give that event to the
+Alignment Feedback filter,
+
+00:31:41.256 --> 00:31:42.506 A:middle
+it's going to return right away,
+
+00:31:42.506 --> 00:31:44.106 A:middle
+it just updates some
+internal state.
+
+00:31:44.946 --> 00:31:48.746 A:middle
+You move -- excuse me, if you're
+using a pan gesture recognizer,
+
+00:31:48.746 --> 00:31:51.076 A:middle
+you can also update with the
+pan gesture recognizer --
+
+00:31:51.076 --> 00:31:52.746 A:middle
+it works very similar
+to a tracking loop,
+
+00:31:52.996 --> 00:31:56.276 A:middle
+everything applies except for
+this one message difference.
+
+00:31:58.256 --> 00:32:00.006 A:middle
+Once Alignment Feedback
+filter returns
+
+
+
+00:31:58.256 --> 00:32:00.006 A:middle
+Once Alignment Feedback
+filter returns
+
+00:32:00.006 --> 00:32:03.596 A:middle
+from processing the input, you
+move the item in your data model
+
+00:32:03.596 --> 00:32:06.086 A:middle
+as you normally would, and
+then you prepare alignment.
+
+00:32:06.616 --> 00:32:09.366 A:middle
+Let's dig in to prepareAlignment
+a bit and you're going
+
+00:32:09.366 --> 00:32:12.536 A:middle
+to use the Alignment Feedback
+filter to help you do that.
+
+00:32:12.536 --> 00:32:14.746 A:middle
+We have the object in the
+data model previously,
+
+00:32:14.746 --> 00:32:17.156 A:middle
+we got the event, and we decided
+the user moved it to here,
+
+00:32:17.256 --> 00:32:18.646 A:middle
+this is the default location
+
+00:32:19.066 --> 00:32:20.736 A:middle
+that if we don't
+do any snapping,
+
+00:32:20.856 --> 00:32:22.476 A:middle
+this is where the object
+is going to end up.
+
+00:32:23.246 --> 00:32:26.336 A:middle
+We want to know, should we
+snap it here, should we snap it
+
+00:32:26.336 --> 00:32:29.146 A:middle
+down to this line, or should
+we snap both at the same time
+
+00:32:29.146 --> 00:32:30.156 A:middle
+and get it down in the corner.
+
+00:32:31.416 --> 00:32:34.356 A:middle
+Use the Alignment Feedback
+filter object to help
+
+00:32:34.356 --> 00:32:35.066 A:middle
+to decide this,
+
+00:32:35.066 --> 00:32:37.866 A:middle
+alignmentFeedbackToken
+ForHorizontalMovementInView
+
+00:32:37.866 --> 00:32:40.186 A:middle
+(without space), previousX,
+alignedX, and defaultX,
+
+00:32:40.806 --> 00:32:43.086 A:middle
+these coordinates are in
+the window coordinates space
+
+00:32:43.086 --> 00:32:47.256 A:middle
+so it works really well
+regardless of your zoom level
+
+00:32:47.256 --> 00:32:48.496 A:middle
+that you might have
+in your view.
+
+00:32:49.836 --> 00:32:52.046 A:middle
+If snapping should
+occur, we will go ahead
+
+00:32:52.046 --> 00:32:54.316 A:middle
+and return you an
+Alignment Feedback token.
+
+00:32:55.016 --> 00:32:56.776 A:middle
+If you don't get an
+Alignment Feedback token,
+
+00:32:56.776 --> 00:32:57.656 A:middle
+don't do any alignment.
+
+00:32:57.656 --> 00:32:59.076 A:middle
+If you get an Alignment
+Feedback token,
+
+00:32:59.416 --> 00:33:01.776 A:middle
+in your data model change
+the X position in this case
+
+
+
+00:32:59.416 --> 00:33:01.776 A:middle
+in your data model change
+the X position in this case
+
+00:33:02.006 --> 00:33:04.536 A:middle
+to the aligned position
+and hang on to
+
+00:33:04.536 --> 00:33:05.706 A:middle
+that Alignment Feedback token.
+
+00:33:06.656 --> 00:33:09.336 A:middle
+You can then check for
+vertical movement as well,
+
+00:33:09.336 --> 00:33:11.536 A:middle
+except you send your Y
+values instead of your X
+
+00:33:11.816 --> 00:33:14.396 A:middle
+and again you may or may not
+get an Alignment Feedback token.
+
+00:33:14.966 --> 00:33:17.116 A:middle
+If you've gotten two Alignment
+Feedback tokens you'll have
+
+00:33:17.116 --> 00:33:19.536 A:middle
+aligned in both axes and
+so your object will be
+
+00:33:19.536 --> 00:33:20.866 A:middle
+down here in the corner.
+
+00:33:22.896 --> 00:33:25.196 A:middle
+Then sometimes -- this
+happens more rarely,
+
+00:33:25.196 --> 00:33:28.156 A:middle
+but sometimes you only
+want to snap to a position
+
+00:33:28.696 --> 00:33:32.446 A:middle
+if it is both aligned on
+the X axis and the Y axis,
+
+00:33:32.726 --> 00:33:35.756 A:middle
+and it's either aligned to both
+axes or aligned to neither,
+
+00:33:35.966 --> 00:33:39.256 A:middle
+in that case we have Alignment
+Feedback token for movement
+
+00:33:39.256 --> 00:33:42.196 A:middle
+and you pass in points
+instead of an individual X
+
+00:33:42.196 --> 00:33:45.386 A:middle
+or Y coordinate, and it
+works the same way, you may
+
+00:33:45.386 --> 00:33:49.246 A:middle
+or may not get an
+Alignment Feedback token.
+
+00:33:49.946 --> 00:33:53.936 A:middle
+You iterate over the various
+items that are being dragged
+
+00:33:53.936 --> 00:33:56.276 A:middle
+that they can snap to, you get
+back your Alignment Feedback
+
+00:33:56.276 --> 00:33:59.146 A:middle
+tokens and you change your data
+model if snapping should happen,
+
+00:33:59.686 --> 00:34:02.276 A:middle
+and now you have a
+collection of tokens.
+
+
+
+00:33:59.686 --> 00:34:02.276 A:middle
+and now you have a
+collection of tokens.
+
+00:34:02.766 --> 00:34:04.366 A:middle
+You want to perform
+haptic feedback
+
+00:34:04.416 --> 00:34:06.326 A:middle
+to the user using the
+new Force Touch trackpad.
+
+00:34:07.266 --> 00:34:09.806 A:middle
+We'll use the Alignment Feedback
+filter to help us do that;
+
+00:34:09.806 --> 00:34:11.306 A:middle
+we'll just ask the
+Alignment Feedback filter
+
+00:34:11.306 --> 00:34:13.156 A:middle
+to perform feedback
+at a performance time,
+
+00:34:13.616 --> 00:34:15.686 A:middle
+just use the default for the
+performance time for now,
+
+00:34:15.686 --> 00:34:17.985 A:middle
+we'll cover performance times
+a little bit more later.
+
+00:34:18.835 --> 00:34:20.856 A:middle
+Then you just pass the
+array a feedback token.
+
+00:34:21.036 --> 00:34:23.326 A:middle
+You can even pass an empty
+array if nothing was aligned
+
+00:34:23.596 --> 00:34:26.235 A:middle
+and Alignment Feedback
+filter is robust with that,
+
+00:34:26.235 --> 00:34:27.446 A:middle
+it knows to just do nothing.
+
+00:34:28.496 --> 00:34:30.116 A:middle
+Then you set that your
+view needs display
+
+00:34:30.466 --> 00:34:35.815 A:middle
+and you redraw whenever you're
+asked; if you have the tokens,
+
+00:34:35.866 --> 00:34:37.315 A:middle
+then you know when
+you're redrawing
+
+00:34:37.315 --> 00:34:41.226 A:middle
+to also draw alignment guides if
+that's appropriate for your UI.
+
+00:34:41.565 --> 00:34:43.846 A:middle
+The feedback will then be
+performed synchronously
+
+00:34:43.846 --> 00:34:46.516 A:middle
+with the screen change and
+the user will have a nice
+
+00:34:46.516 --> 00:34:49.196 A:middle
+synchronous -- sees the
+alignment guide pop up
+
+00:34:49.376 --> 00:34:50.596 A:middle
+and they feel the
+haptic feedback
+
+00:34:50.596 --> 00:34:53.196 A:middle
+from the trackpad
+at the same time.
+
+00:34:53.326 --> 00:34:56.916 A:middle
+If the user is not using a Force
+Touch trackpad the Alignment
+
+00:34:56.916 --> 00:34:59.016 A:middle
+Feedback filter knows how
+to work with that as well,
+
+00:34:59.356 --> 00:35:01.536 A:middle
+and so you just have to write it
+
+
+
+00:34:59.356 --> 00:35:01.536 A:middle
+and so you just have to write it
+
+00:35:01.536 --> 00:35:02.956 A:middle
+as if there is a
+Force Touch trackpad;
+
+00:35:03.006 --> 00:35:04.566 A:middle
+if there's not, it
+just works great.
+
+00:35:05.106 --> 00:35:08.996 A:middle
+So that's all there really is
+
+00:35:09.126 --> 00:35:10.826 A:middle
+to using Alignment
+Feedback filters.
+
+00:35:11.026 --> 00:35:13.196 A:middle
+They're pretty simple
+APIs, real easy to add it
+
+00:35:13.196 --> 00:35:15.716 A:middle
+to your application and
+existing tracking loops,
+
+00:35:16.086 --> 00:35:17.566 A:middle
+provided a consistent
+feel across app,
+
+00:35:17.796 --> 00:35:20.846 A:middle
+we look at the velocity of
+the cursor, for example,
+
+00:35:21.076 --> 00:35:23.696 A:middle
+so that we don't do snapping
+if the user is moving quickly,
+
+00:35:23.696 --> 00:35:24.286 A:middle
+because we don't want
+
+00:35:24.286 --> 00:35:26.406 A:middle
+to do Alignment Feedback
+either at that point.
+
+00:35:26.966 --> 00:35:28.576 A:middle
+That's not what the
+user is trying to do,
+
+00:35:28.996 --> 00:35:30.456 A:middle
+we look at the modifier values,
+
+00:35:30.936 --> 00:35:32.686 A:middle
+and so this will
+provide a consistent feel
+
+00:35:32.686 --> 00:35:35.366 A:middle
+across all applications that are
+using the system-wide Alignment
+
+00:35:35.366 --> 00:35:36.006 A:middle
+Feedback API.
+
+00:35:36.976 --> 00:35:39.756 A:middle
+And you can use this for more
+than just dragging a item;
+
+00:35:40.106 --> 00:35:42.506 A:middle
+if you're doing a resize for
+example or a size to fit,
+
+00:35:42.676 --> 00:35:44.786 A:middle
+that's another good place to
+use Alignment Feedback filter.
+
+00:35:45.176 --> 00:35:47.566 A:middle
+It could be used in a
+lot of different places.
+
+00:35:48.016 --> 00:35:50.656 A:middle
+So that's everything you
+need to know to be a knight.
+
+00:35:50.656 --> 00:35:51.286 A:middle
+Congratulations.
+
+00:35:51.286 --> 00:35:53.456 A:middle
+You're all knights in using
+the Force Touch trackpad.
+
+00:35:55.046 --> 00:35:56.976 A:middle
+Let's move on to
+becoming masters.
+
+00:35:57.506 --> 00:35:59.086 A:middle
+This is all about
+controlling the force.
+
+00:35:59.576 --> 00:36:01.316 A:middle
+This is about configuring
+the trackpad
+
+
+
+00:35:59.576 --> 00:36:01.316 A:middle
+This is about configuring
+the trackpad
+
+00:36:01.316 --> 00:36:04.526 A:middle
+so that it works appropriately
+for your custom situations
+
+00:36:04.736 --> 00:36:06.366 A:middle
+and manually providing
+haptic feedback.
+
+00:36:06.986 --> 00:36:11.616 A:middle
+Let's go back to
+that drawing example.
+
+00:36:12.776 --> 00:36:14.716 A:middle
+You start to do a
+drawing and you press
+
+00:36:14.716 --> 00:36:16.906 A:middle
+on the Force Touch trackpad,
+you get a Force click
+
+00:36:17.106 --> 00:36:19.206 A:middle
+and that's not really
+appropriate in your drawing.
+
+00:36:19.206 --> 00:36:20.866 A:middle
+And as I mentioned earlier,
+you don't want to try
+
+00:36:20.866 --> 00:36:23.256 A:middle
+to combine the pressure
+values from stage 1
+
+00:36:23.256 --> 00:36:25.666 A:middle
+with with the pressure values
+from stage 2, it's not going
+
+00:36:25.666 --> 00:36:27.856 A:middle
+to be even during the
+release, and the user's going
+
+00:36:27.856 --> 00:36:29.726 A:middle
+to get this haptic feedback
+in the middle of the drawing,
+
+00:36:29.726 --> 00:36:31.106 A:middle
+that's not a good experience.
+
+00:36:32.006 --> 00:36:33.406 A:middle
+So we want to configure
+the trackpad
+
+00:36:33.446 --> 00:36:37.876 A:middle
+to not provide Force click
+actuations at all in that case.
+
+00:36:37.876 --> 00:36:38.816 A:middle
+And this is what we can do
+
+00:36:38.816 --> 00:36:40.236 A:middle
+with the pressure
+configuration object.
+
+00:36:40.526 --> 00:36:42.716 A:middle
+We initialize one with
+a pressureBehavior,
+
+00:36:43.386 --> 00:36:45.776 A:middle
+check out the header file
+and the documentation,
+
+00:36:45.776 --> 00:36:49.106 A:middle
+check out NSEvent.h,
+there's a lot of description
+
+00:36:49.106 --> 00:36:50.586 A:middle
+in the header file
+about each of these,
+
+00:36:50.586 --> 00:36:51.576 A:middle
+I'm not going to cover them all.
+
+00:36:51.936 --> 00:36:54.656 A:middle
+The default one is
+DeepClick, that's what happens
+
+00:36:54.656 --> 00:36:55.606 A:middle
+by default in the system.
+
+00:36:55.606 --> 00:36:57.526 A:middle
+In this case we want
+PrimaryGeneric;
+
+00:36:57.946 --> 00:37:00.466 A:middle
+PrimaryGeneric is a
+one-stage gesture,
+
+
+
+00:36:57.946 --> 00:37:00.466 A:middle
+PrimaryGeneric is a
+one-stage gesture,
+
+00:37:00.786 --> 00:37:03.386 A:middle
+so the user won't get
+a Force click actuation
+
+00:37:03.386 --> 00:37:04.496 A:middle
+when they're drawing,
+
+00:37:04.966 --> 00:37:08.686 A:middle
+and it provides the largest
+dynamic range of user input
+
+00:37:08.686 --> 00:37:11.596 A:middle
+of their force on the trackpad,
+mapping that back out to you
+
+00:37:11.596 --> 00:37:12.966 A:middle
+and to pressure between 0 and 1.
+
+00:37:13.256 --> 00:37:15.686 A:middle
+It's the best one to use
+for drawing and for a lot
+
+00:37:15.686 --> 00:37:18.386 A:middle
+of other situations, and
+then check the header files
+
+00:37:18.386 --> 00:37:21.416 A:middle
+for the descriptions of
+the other behaviors to see
+
+00:37:21.416 --> 00:37:22.966 A:middle
+which one is appropriate
+for your situation.
+
+00:37:23.436 --> 00:37:25.976 A:middle
+Once you have a pressure
+configuration,
+
+00:37:25.976 --> 00:37:26.656 A:middle
+you just call set.
+
+00:37:26.806 --> 00:37:29.506 A:middle
+The trackpad is now configured
+in this new configuration
+
+00:37:29.876 --> 00:37:32.556 A:middle
+and everything is great
+-- with some caveats.
+
+00:37:33.206 --> 00:37:34.866 A:middle
+You can only set the trackpad
+
+00:37:34.866 --> 00:37:37.786 A:middle
+into a different configuration
+during a mouse drag,
+
+00:37:37.966 --> 00:37:40.046 A:middle
+so on mouse down, you
+check the mouse location,
+
+00:37:40.046 --> 00:37:41.406 A:middle
+if it is supposed to be changed
+
+00:37:41.406 --> 00:37:42.726 A:middle
+for this specific
+mouse location,
+
+00:37:43.526 --> 00:37:45.646 A:middle
+create a pressure
+configuration, you call the set,
+
+00:37:45.646 --> 00:37:47.016 A:middle
+and the trackpad is
+going to be changed.
+
+00:37:47.896 --> 00:37:50.586 A:middle
+You need to realize that
+you're racing the user here.
+
+00:37:51.306 --> 00:37:55.736 A:middle
+The user might move the cursor
+over your view, go immediately
+
+00:37:55.736 --> 00:37:57.386 A:middle
+to a Force click,
+release the mouse,
+
+00:37:57.386 --> 00:37:58.886 A:middle
+and you didn't even
+get the mouse down yet,
+
+00:37:58.986 --> 00:38:02.026 A:middle
+perhaps you're being paged
+in from virtual memory
+
+
+
+00:37:58.986 --> 00:38:02.026 A:middle
+perhaps you're being paged
+in from virtual memory
+
+00:38:02.026 --> 00:38:03.386 A:middle
+and your app is not responsive.
+
+00:38:04.316 --> 00:38:07.386 A:middle
+You can try to set the pressure,
+the trackpad configuration
+
+00:38:07.386 --> 00:38:10.766 A:middle
+at this point but the user is
+already completed their gesture,
+
+00:38:11.026 --> 00:38:12.106 A:middle
+and it won't take effect.
+
+00:38:12.676 --> 00:38:17.066 A:middle
+When you do set the
+trackpad configuration it is
+
+00:38:17.066 --> 00:38:19.336 A:middle
+automatically reset back
+to the system default
+
+00:38:19.336 --> 00:38:21.536 A:middle
+when the user ends the gesture
+as well, so you don't have
+
+00:38:21.536 --> 00:38:22.496 A:middle
+to worry about unsetting it.
+
+00:38:23.256 --> 00:38:26.516 A:middle
+But this isn't ideal for most
+situations; it is really useful
+
+00:38:26.516 --> 00:38:30.126 A:middle
+when you need to decide at
+the very last minute based
+
+00:38:30.126 --> 00:38:32.086 A:middle
+on the mouse location what
+the configuration should be.
+
+00:38:33.016 --> 00:38:37.516 A:middle
+Instead, just set the pressure
+configuration on NSView.
+
+00:38:38.366 --> 00:38:40.226 A:middle
+Create a pressure
+configuration ahead of time,
+
+00:38:40.426 --> 00:38:42.076 A:middle
+set it as the pressure
+configuration property
+
+00:38:42.076 --> 00:38:44.346 A:middle
+on the NSView and the
+system will go ahead and set
+
+00:38:44.346 --> 00:38:46.396 A:middle
+up the trackpad before
+mouse down even occurs.
+
+00:38:46.396 --> 00:38:48.776 A:middle
+In fact, the system can
+configure the trackpad
+
+00:38:48.776 --> 00:38:50.766 A:middle
+to this configuration even
+
+00:38:50.766 --> 00:38:52.566 A:middle
+if your app isn't
+being responsive yet.
+
+00:38:53.086 --> 00:38:56.436 A:middle
+Now the user can go ahead and
+interact with your application,
+
+00:38:56.436 --> 00:38:57.856 A:middle
+you didn't even get
+the mouse down yet,
+
+00:38:58.146 --> 00:38:59.956 A:middle
+but they didn't feel the
+Force click because it is
+
+00:38:59.956 --> 00:39:04.066 A:middle
+in the PrimaryGeneric
+behavior and the events you get
+
+
+
+00:38:59.956 --> 00:39:04.066 A:middle
+in the PrimaryGeneric
+behavior and the events you get
+
+00:39:04.066 --> 00:39:06.546 A:middle
+in from the application,
+from the system at that point
+
+00:39:07.066 --> 00:39:08.476 A:middle
+when you finally
+do get your events
+
+00:39:08.476 --> 00:39:12.076 A:middle
+if you're not being responsive,
+don't have Force click in them,
+
+00:39:12.076 --> 00:39:12.996 A:middle
+they don't go to stage 2.
+
+00:39:12.996 --> 00:39:16.386 A:middle
+Let's talk a little bit
+about haptic feedback.
+
+00:39:18.176 --> 00:39:20.346 A:middle
+Haptic feedback should
+be used sparingly.
+
+00:39:20.726 --> 00:39:22.056 A:middle
+This is for subtle interactions.
+
+00:39:22.056 --> 00:39:23.996 A:middle
+We just want the trackpad
+to just feel right, right?
+
+00:39:25.166 --> 00:39:26.706 A:middle
+So when the user is
+trying to align something,
+
+00:39:26.706 --> 00:39:28.536 A:middle
+they get that haptic
+feedback and it feels great,
+
+00:39:28.616 --> 00:39:30.686 A:middle
+we're not trying to massage
+the user's finger here,
+
+00:39:31.016 --> 00:39:33.036 A:middle
+we just want this to
+be subtle interaction.
+
+00:39:33.876 --> 00:39:37.126 A:middle
+In fact, if the user
+goes back to one
+
+00:39:37.126 --> 00:39:38.906 A:middle
+of our older trackpads
+we want them
+
+00:39:38.906 --> 00:39:41.356 A:middle
+to maybe not even realize
+why something is wrong
+
+00:39:41.356 --> 00:39:42.926 A:middle
+but it just doesn't
+quite feel right.
+
+00:39:43.386 --> 00:39:47.526 A:middle
+That's the point of using the
+haptic feedback is doing it
+
+00:39:47.766 --> 00:39:50.056 A:middle
+appropriately when the user
+is trying to do something
+
+00:39:50.056 --> 00:39:52.246 A:middle
+to give them that little
+bit of subtle feedback,
+
+00:39:52.416 --> 00:39:53.896 A:middle
+oh yes, this is just right.
+
+00:39:53.896 --> 00:39:55.256 A:middle
+This is how it should
+have always been,
+
+00:39:55.256 --> 00:39:55.986 A:middle
+and I didn't know that.
+
+00:39:56.706 --> 00:39:57.586 A:middle
+Subtle interactions.
+
+00:39:58.596 --> 00:40:00.356 A:middle
+You just ask the
+NSHapticFeedbackManager
+
+
+
+00:39:58.596 --> 00:40:00.356 A:middle
+You just ask the
+NSHapticFeedbackManager
+
+00:40:00.356 --> 00:40:02.976 A:middle
+for the defaultPerformer, always
+ask for the defaultPerformer
+
+00:40:02.976 --> 00:40:05.826 A:middle
+because it can change
+based on the input device
+
+00:40:06.226 --> 00:40:09.506 A:middle
+and the user's preferences.
+
+00:40:10.196 --> 00:40:11.886 A:middle
+You ask to perform
+the feedback pattern
+
+00:40:11.886 --> 00:40:14.486 A:middle
+at a specific performance
+time, we have three --
+
+00:40:14.956 --> 00:40:17.476 A:middle
+three patterns: Generic,
+Alignment, and LevelChange.
+
+00:40:17.666 --> 00:40:19.396 A:middle
+Alignment can be used for
+a lot of different things,
+
+00:40:19.886 --> 00:40:23.896 A:middle
+even if you're just rotating
+a photo to align a horizon,
+
+00:40:23.896 --> 00:40:26.196 A:middle
+for example, you can go ahead
+and use alignment for that.
+
+00:40:26.566 --> 00:40:30.226 A:middle
+LevelChange is what NSButton
+uses in the multilevel mode;
+
+00:40:30.226 --> 00:40:32.606 A:middle
+it will provide haptic
+feedback as the levels change.
+
+00:40:33.306 --> 00:40:35.856 A:middle
+If those two don't sufficiently
+describe what you're trying
+
+00:40:35.856 --> 00:40:37.916 A:middle
+to do, then go ahead
+and just use generic.
+
+00:40:39.066 --> 00:40:42.166 A:middle
+You want your haptic feedback
+to perform synchronously
+
+00:40:42.166 --> 00:40:44.246 A:middle
+with what's going on
+the screen so that
+
+00:40:44.316 --> 00:40:45.656 A:middle
+by default that's
+the DrawCompleted.
+
+00:40:45.656 --> 00:40:47.626 A:middle
+If you're using Cocoa
+drawing or core animation,
+
+00:40:47.876 --> 00:40:50.856 A:middle
+you just use a DrawCompleted
+performance time
+
+00:40:50.996 --> 00:40:54.066 A:middle
+and this will just automatically
+synchronize them for you
+
+00:40:54.066 --> 00:40:57.106 A:middle
+so that you can determine your
+haptic feedbacks during event
+
+00:40:57.106 --> 00:40:59.836 A:middle
+processing and your drawing can
+just concentrate on drawing.
+
+
+
+00:41:00.306 --> 00:41:02.396 A:middle
+If you're using Medal
+or OpenGL directly,
+
+00:41:02.666 --> 00:41:05.816 A:middle
+then you can just use Now and
+as things update on the screen,
+
+00:41:06.126 --> 00:41:09.336 A:middle
+you will go ahead and need to
+make sure that you line them
+
+00:41:09.336 --> 00:41:10.956 A:middle
+up so that they occur
+simultaneously.
+
+00:41:12.126 --> 00:41:13.086 A:middle
+That's all there is.
+
+00:41:13.276 --> 00:41:15.746 A:middle
+You're now all masters in
+using the Force Touch trackpad.
+
+00:41:16.356 --> 00:41:18.376 A:middle
+I can't wait to see what
+you do with these things
+
+00:41:18.376 --> 00:41:20.966 A:middle
+in your application, we have
+covered Table Row Actions,
+
+00:41:20.966 --> 00:41:24.326 A:middle
+accelerator buttons,
+Spring Loading, we've talked
+
+00:41:24.516 --> 00:41:26.516 A:middle
+about how the force
+flows through the system,
+
+00:41:26.756 --> 00:41:29.776 A:middle
+doing Alignment Feedback, and
+finally controlling the trackpad
+
+00:41:29.776 --> 00:41:32.206 A:middle
+and configuring it for
+your specific needs.
+
+00:41:32.616 --> 00:41:35.596 A:middle
+There's a lot that
+you can do here.
+
+00:41:35.796 --> 00:41:37.856 A:middle
+That little app that I
+did earlier in my demo,
+
+00:41:37.856 --> 00:41:39.786 A:middle
+it's called Force Touch
+Catalog, you can download
+
+00:41:39.786 --> 00:41:40.526 A:middle
+that and check that out.
+
+00:41:40.526 --> 00:41:43.306 A:middle
+We also have an alignment
+guide sample application,
+
+00:41:43.306 --> 00:41:44.796 A:middle
+so that's really
+great to use as well.
+
+00:41:44.796 --> 00:41:49.066 A:middle
+I suggest that you also
+check out the What's New
+
+00:41:49.066 --> 00:41:50.876 A:middle
+in Web Development
+in WebKit and Safari
+
+00:41:50.876 --> 00:41:54.676 A:middle
+so you can learn how
+Safari is exposing pressure
+
+00:41:54.676 --> 00:41:58.246 A:middle
+in the web environment.
+
+00:41:59.596 --> 00:42:03.496 A:middle
+We have a lab coming up
+right after this, the Cocoa
+
+
+
+00:41:59.596 --> 00:42:03.496 A:middle
+We have a lab coming up
+right after this, the Cocoa
+
+00:42:03.496 --> 00:42:06.156 A:middle
+and Force Touch and Gesture
+lab; I will of course be there.
+
+00:42:06.426 --> 00:42:08.926 A:middle
+I'm real excited to hear your
+ideas on how to use Force Touch
+
+00:42:08.926 --> 00:42:12.046 A:middle
+in your applications or
+even to show me anything
+
+00:42:12.046 --> 00:42:14.726 A:middle
+that you have already done,
+I'm really excited to see that
+
+00:42:14.726 --> 00:42:15.666 A:middle
+and to talk about it with you.
+
+00:42:15.666 --> 00:42:18.036 A:middle
+Please come find me in the
+lab right after this session.
+
+00:42:18.776 --> 00:42:19.656 A:middle
+Thank you very much.
+
+00:42:19.656 --> 00:42:20.396 A:middle
+Enjoy the rest of the show.
+
+00:42:21.516 --> 00:42:24.500 A:middle
+[Applause]
+

@@ -1,0 +1,3068 @@
+
+00:00:27.516 --> 00:00:31.896 A:middle
+[Applause]
+
+00:00:32.396 --> 00:00:32.996 A:middle
+&gt;&gt; JAMIE WOOD: Thank you.
+
+00:00:34.256 --> 00:00:35.206 A:middle
+Good morning, everyone.
+
+00:00:35.476 --> 00:00:37.126 A:middle
+Welcome to session 717.
+
+00:00:37.616 --> 00:00:39.796 A:middle
+My name is Jamie Wood
+and I'm here today
+
+00:00:39.796 --> 00:00:41.046 A:middle
+with my colleague, Tommy Pauly.
+
+00:00:41.046 --> 00:00:43.766 A:middle
+We are Network Engineers in
+the Core OS networking group
+
+00:00:43.766 --> 00:00:48.116 A:middle
+at Apple, and we are excited
+to tell you about what is new
+
+00:00:48.356 --> 00:00:51.526 A:middle
+in Network Extension and VPN.
+
+00:00:51.736 --> 00:00:55.576 A:middle
+So you may be wondering what
+is Network Extension Framework?
+
+00:00:55.826 --> 00:00:57.956 A:middle
+What capabilities does
+it have to offer to me
+
+00:00:58.176 --> 00:00:59.526 A:middle
+for use in my application?
+
+
+
+00:01:00.166 --> 00:01:04.186 A:middle
+Network Extension Framework
+provide APIs to use in your app
+
+00:01:04.766 --> 00:01:07.796 A:middle
+to customize and extend the
+Core networking features
+
+00:01:07.796 --> 00:01:08.896 A:middle
+of Apple's platforms.
+
+00:01:09.326 --> 00:01:12.086 A:middle
+Let's look at specific
+examples of kinds
+
+00:01:12.086 --> 00:01:15.006 A:middle
+of apps you can create using
+the Network Extension APIs.
+
+00:01:16.196 --> 00:01:20.696 A:middle
+If your company makes Wi-Fi
+Hotspots that are deployed
+
+00:01:20.696 --> 00:01:24.656 A:middle
+in public places like hotels,
+airports, coffee shops,
+
+00:01:25.426 --> 00:01:28.626 A:middle
+you can use the any Hotspot
+helper API to create apps
+
+00:01:28.776 --> 00:01:30.346 A:middle
+that connect to your
+Wi-Fi Hotspots.
+
+00:01:30.996 --> 00:01:34.936 A:middle
+If your company creates
+a personal VPN service
+
+00:01:35.136 --> 00:01:38.966 A:middle
+that your users use to securely
+browse the Internet you can use
+
+00:01:38.966 --> 00:01:42.466 A:middle
+the NEVPN manager API to
+create apps that connect
+
+00:01:42.466 --> 00:01:43.806 A:middle
+to your personal VPN service.
+
+00:01:44.436 --> 00:01:49.146 A:middle
+If your company creates a
+remote access VPN server,
+
+00:01:49.866 --> 00:01:52.496 A:middle
+you can use the any tunnel
+provider family of APIs
+
+00:01:52.886 --> 00:01:55.026 A:middle
+to create apps that
+connect to your VPN server.
+
+00:01:55.576 --> 00:01:59.996 A:middle
+And finally if your school
+creates a network content
+
+00:01:59.996 --> 00:02:02.026 A:middle
+filtering solution
+for use by schools
+
+
+
+00:01:59.996 --> 00:02:02.026 A:middle
+filtering solution
+for use by schools
+
+00:02:02.026 --> 00:02:03.896 A:middle
+to protect the students'
+Internet browsing,
+
+00:02:04.856 --> 00:02:07.696 A:middle
+you can use the any filter
+provider family of APIs
+
+00:02:07.756 --> 00:02:12.366 A:middle
+to create apps that
+filter network content.
+
+00:02:14.376 --> 00:02:20.256 A:middle
+So these are all of the Network
+Extension APIs that we are going
+
+00:02:20.256 --> 00:02:22.066 A:middle
+to talk about today
+during the session.
+
+00:02:22.966 --> 00:02:27.176 A:middle
+So let's go ahead and dive into
+the any Hotspot helper API.
+
+00:02:31.836 --> 00:02:36.666 A:middle
+So the any Hotspot helper
+API is used to create apps
+
+00:02:36.666 --> 00:02:38.256 A:middle
+that connect to Wi-Fi Hotspots.
+
+00:02:38.836 --> 00:02:42.106 A:middle
+Now, some of you may be aware
+
+00:02:42.106 --> 00:02:44.316 A:middle
+that there actually are
+already APIs that you can use
+
+00:02:44.586 --> 00:02:46.496 A:middle
+to create apps that
+connect to Wi-Fi Hotspots.
+
+00:02:46.616 --> 00:02:50.886 A:middle
+The CNSetSupportedSSIDs and
+CNMarkPortalOnline APIs,
+
+00:02:51.396 --> 00:02:53.386 A:middle
+but they have limitations.
+
+00:02:54.696 --> 00:02:58.796 A:middle
+One problem is that the
+Hotspot list you can pass
+
+00:02:59.236 --> 00:03:02.166 A:middle
+to CNSetSupportedSSIDs
+is limited in size.
+
+
+
+00:02:59.236 --> 00:03:02.166 A:middle
+to CNSetSupportedSSIDs
+is limited in size.
+
+00:03:02.436 --> 00:03:06.126 A:middle
+If you have a Global Network
+of Wi-Fi Hotspots you're trying
+
+00:03:06.126 --> 00:03:08.316 A:middle
+to connect your app
+to you can quickly run
+
+00:03:08.316 --> 00:03:09.506 A:middle
+into the size limitation.
+
+00:03:10.916 --> 00:03:13.026 A:middle
+Another draw-back
+is that in order
+
+00:03:13.026 --> 00:03:14.596 A:middle
+to call CNMarkPortalOnline,
+
+00:03:15.186 --> 00:03:17.086 A:middle
+users have to manually
+run your application.
+
+00:03:17.916 --> 00:03:20.866 A:middle
+This is exacerbated by the
+fact that there's no indication
+
+00:03:20.866 --> 00:03:22.826 A:middle
+to the user they
+need to do this.
+
+00:03:23.336 --> 00:03:24.946 A:middle
+It is not a great
+user experience.
+
+00:03:25.056 --> 00:03:26.856 A:middle
+The users don't know that
+they have to go into the app
+
+00:03:26.966 --> 00:03:28.446 A:middle
+to connect to the Wi-Fi Hotspot.
+
+00:03:29.596 --> 00:03:34.146 A:middle
+So we've introduced the
+any Hotspot helper API
+
+00:03:34.786 --> 00:03:36.176 A:middle
+to address some of
+these limitations.
+
+00:03:37.306 --> 00:03:39.926 A:middle
+So the way this works is
+you first register your app
+
+00:03:39.926 --> 00:03:41.616 A:middle
+with the system as
+a Hotspot helper.
+
+00:03:42.586 --> 00:03:47.076 A:middle
+Then as the device comes
+within range of Wi-Fi networks,
+
+00:03:47.076 --> 00:03:50.446 A:middle
+scanning for Wi-Fi networks or
+the user selects a Wi-Fi network
+
+00:03:50.446 --> 00:03:55.036 A:middle
+to connect to, the system will
+call into your app, run your app
+
+00:03:55.036 --> 00:03:56.806 A:middle
+in the background,
+call into your app
+
+00:03:57.526 --> 00:03:58.996 A:middle
+and give your app
+the opportunity
+
+00:03:58.996 --> 00:04:01.376 A:middle
+to claim the Wi-Fi
+Hotspot with a level
+
+
+
+00:03:58.996 --> 00:04:01.376 A:middle
+to claim the Wi-Fi
+Hotspot with a level
+
+00:04:01.376 --> 00:04:04.036 A:middle
+of confidence, high,
+medium or low.
+
+00:04:04.426 --> 00:04:07.606 A:middle
+If you claim a Hotspot with
+a high level of confidence,
+
+00:04:08.196 --> 00:04:09.906 A:middle
+the system will call you
+
+00:04:09.906 --> 00:04:11.526 A:middle
+to actually perform
+the authentication
+
+00:04:11.526 --> 00:04:12.566 A:middle
+with the Wi-Fi Hotspot.
+
+00:04:13.276 --> 00:04:15.416 A:middle
+And it will periodically
+call you
+
+00:04:15.726 --> 00:04:17.726 A:middle
+to maintain the authentication
+session.
+
+00:04:19.486 --> 00:04:22.026 A:middle
+The Hotspot helper
+API also allows you
+
+00:04:22.576 --> 00:04:27.066 A:middle
+to annotate Wi-Fi networks that
+show up in the Wi-Fi manager
+
+00:04:27.526 --> 00:04:32.186 A:middle
+in the settings app and you can
+annotate these Wi-Fi networks
+
+00:04:32.186 --> 00:04:35.406 A:middle
+with the name of your app
+or the name of your company.
+
+00:04:36.096 --> 00:04:37.806 A:middle
+So that's the any
+Hotspot helper API.
+
+00:04:38.656 --> 00:04:40.636 A:middle
+You can use this
+API to create apps
+
+00:04:40.706 --> 00:04:43.026 A:middle
+that seamlessly connect
+to Wi-Fi Hotspots.
+
+00:04:43.526 --> 00:04:47.686 A:middle
+Next let's look at
+the NEVPN manager API.
+
+00:04:47.686 --> 00:04:51.386 A:middle
+You can use this API to
+create apps that connect
+
+00:04:51.446 --> 00:04:53.806 A:middle
+to a personal VPN service
+that users will use
+
+00:04:53.806 --> 00:04:55.386 A:middle
+to securely browse the Internet.
+
+00:04:56.006 --> 00:05:01.686 A:middle
+Now, the NEVPN manager
+API is not new in iOS 9.
+
+
+
+00:04:56.006 --> 00:05:01.686 A:middle
+Now, the NEVPN manager
+API is not new in iOS 9.
+
+00:05:02.306 --> 00:05:04.866 A:middle
+We introduced this API in iOS 8.
+
+00:05:05.526 --> 00:05:10.266 A:middle
+We made some enhancements to the
+API and made the API available
+
+00:05:10.266 --> 00:05:11.866 A:middle
+on OS X, OS X El Capitan.
+
+00:05:13.076 --> 00:05:16.876 A:middle
+The way this works is you
+can use the NEVPN manager API
+
+00:05:16.936 --> 00:05:19.536 A:middle
+to configure and control
+the built-in IPSEC client
+
+00:05:20.256 --> 00:05:20.956 A:middle
+on the platform.
+
+00:05:21.576 --> 00:05:25.806 A:middle
+You can create a single
+personal VPN configuration.
+
+00:05:26.026 --> 00:05:28.136 A:middle
+I'll talk about what a
+personal VPN configuration is
+
+00:05:28.136 --> 00:05:29.236 A:middle
+in a few minutes here.
+
+00:05:29.796 --> 00:05:34.326 A:middle
+The built in IPSEC
+clients supports IKE v1
+
+00:05:34.326 --> 00:05:36.616 A:middle
+and IKE v2 key exchange
+protocols.
+
+00:05:36.616 --> 00:05:37.646 A:middle
+You can use either of these.
+
+00:05:38.236 --> 00:05:43.336 A:middle
+You can configure the VPN
+to connect automatically
+
+00:05:43.336 --> 00:05:44.686 A:middle
+under certain network
+conditions.
+
+00:05:45.316 --> 00:05:51.226 A:middle
+New in iOS 9 and
+OS X El Capitan,
+
+00:05:51.226 --> 00:05:53.616 A:middle
+you can configure http proxies
+
+00:05:53.616 --> 00:05:57.136 A:middle
+for http traffic
+traversing your VPN tunnel.
+
+00:05:57.706 --> 00:06:03.936 A:middle
+And personal VPN configurations
+coexist and cooperate
+
+
+
+00:05:57.706 --> 00:06:03.936 A:middle
+And personal VPN configurations
+coexist and cooperate
+
+00:06:04.086 --> 00:06:05.796 A:middle
+with enterprise VPN
+configurations.
+
+00:06:06.326 --> 00:06:09.066 A:middle
+Suppose the user is
+using your app to connect
+
+00:06:09.066 --> 00:06:10.436 A:middle
+to your personal VPN service,
+
+00:06:10.436 --> 00:06:13.446 A:middle
+and they are securely
+browsing the Internet and want
+
+00:06:13.786 --> 00:06:17.276 A:middle
+to access something in their
+company's internal network.
+
+00:06:18.106 --> 00:06:23.046 A:middle
+So they go ahead and connect
+to their enterprise VPN and all
+
+00:06:23.046 --> 00:06:24.696 A:middle
+of the traffic that's destined
+
+00:06:24.696 --> 00:06:26.206 A:middle
+for those internal
+resources will go ahead
+
+00:06:26.206 --> 00:06:27.796 A:middle
+and use that enterprise VPN.
+
+00:06:27.796 --> 00:06:30.426 A:middle
+But everything else
+that is not going
+
+00:06:30.426 --> 00:06:32.226 A:middle
+to use the enterprise
+VPN will continue to go
+
+00:06:32.226 --> 00:06:33.286 A:middle
+through the personal VPN.
+
+00:06:33.726 --> 00:06:35.116 A:middle
+Personal VPN remains connected
+
+00:06:35.626 --> 00:06:37.546 A:middle
+and will continue
+to tunnel traffic.
+
+00:06:38.186 --> 00:06:43.076 A:middle
+So there's a brief run
+down of the features
+
+00:06:43.076 --> 00:06:45.096 A:middle
+that the NEVPN manager
+API provides.
+
+00:06:46.756 --> 00:06:49.746 A:middle
+Another way that we've enhanced
+NEVPN manager is we've enhanced
+
+00:06:49.746 --> 00:06:51.716 A:middle
+our IKE v2 protocol support.
+
+00:06:52.426 --> 00:06:55.316 A:middle
+We think that's a great
+tunneling protocol
+
+00:06:55.976 --> 00:06:58.096 A:middle
+and made it better
+in this release.
+
+00:06:58.426 --> 00:07:01.076 A:middle
+We now support MOBIKE.
+
+
+
+00:06:58.426 --> 00:07:01.076 A:middle
+We now support MOBIKE.
+
+00:07:01.856 --> 00:07:07.306 A:middle
+We will now seamlessly
+transition your IKE v2 tunnel
+
+00:07:07.306 --> 00:07:09.426 A:middle
+from one network
+interface to the other.
+
+00:07:09.956 --> 00:07:13.016 A:middle
+For example, if your
+tunnel is connected
+
+00:07:13.016 --> 00:07:16.406 A:middle
+over the Wi-Fi interface but
+the user walks out of range
+
+00:07:16.406 --> 00:07:18.766 A:middle
+of that Wi-Fi network, so
+now the device switches
+
+00:07:18.766 --> 00:07:20.496 A:middle
+over to use the cellular
+interface,
+
+00:07:21.006 --> 00:07:23.116 A:middle
+the IKE v2 tunnel will
+seamlessly transition over.
+
+00:07:23.746 --> 00:07:26.056 A:middle
+Very cool.
+
+00:07:27.516 --> 00:07:30.196 A:middle
+[Applause]
+
+00:07:30.696 --> 00:07:33.266 A:middle
+&gt;&gt; JAMIE WOOD: We now have full
+support for IPv6, both inside
+
+00:07:33.266 --> 00:07:35.106 A:middle
+and outside of the
+IKE v2 tunnel.
+
+00:07:36.236 --> 00:07:39.096 A:middle
+We now support IKE
+fragmentation.
+
+00:07:39.096 --> 00:07:43.456 A:middle
+This allows the IKE v2 tunnel to
+work more reliably in a variety
+
+00:07:43.456 --> 00:07:44.396 A:middle
+of network environments.
+
+00:07:44.956 --> 00:07:48.166 A:middle
+We have IKE redirect
+supports allowing you
+
+00:07:48.166 --> 00:07:50.686 A:middle
+to load balance your
+IKE v2 server.
+
+00:07:51.496 --> 00:07:54.166 A:middle
+So with all of these
+enhancements it is now better
+
+00:07:54.166 --> 00:07:55.116 A:middle
+than ever.
+
+00:07:55.116 --> 00:07:56.416 A:middle
+IKE v2 works better than ever.
+
+00:07:56.716 --> 00:07:59.466 A:middle
+It works more reliably
+in a wider number
+
+00:07:59.466 --> 00:08:02.746 A:middle
+of network environments.
+
+
+
+00:07:59.466 --> 00:08:02.746 A:middle
+of network environments.
+
+00:08:03.076 --> 00:08:04.846 A:middle
+So now let's take a
+look at some code.
+
+00:08:04.846 --> 00:08:06.796 A:middle
+How do you use the
+NEVPN manager API?
+
+00:08:06.796 --> 00:08:08.866 A:middle
+I want to show you some code
+
+00:08:08.866 --> 00:08:12.616 A:middle
+that will create this
+personal VPN configuration.
+
+00:08:15.576 --> 00:08:19.196 A:middle
+So each app that uses the
+NEVPN manager API gets access
+
+00:08:19.196 --> 00:08:21.306 A:middle
+to a single personal
+VPN configuration,
+
+00:08:21.336 --> 00:08:24.606 A:middle
+which is represented by a
+single NEVPN manager object.
+
+00:08:25.006 --> 00:08:28.766 A:middle
+So first I get a reference to
+my shared manager object and all
+
+00:08:28.766 --> 00:08:30.876 A:middle
+of the VPN configurations
+on the system are stored
+
+00:08:30.876 --> 00:08:32.456 A:middle
+in the network extension
+preferences.
+
+00:08:33.035 --> 00:08:36.145 A:middle
+Before I can work with my
+configuration, in my code,
+
+00:08:36.145 --> 00:08:39.015 A:middle
+I need to load it from those
+preferences using this load
+
+00:08:39.015 --> 00:08:40.856 A:middle
+from preferences with
+completion handler call.
+
+00:08:42.756 --> 00:08:45.236 A:middle
+In the completion handler,
+the first thing I want
+
+00:08:45.236 --> 00:08:48.226 A:middle
+to do is check and see if my
+configuration exists or not.
+
+00:08:48.776 --> 00:08:51.966 A:middle
+I look at the protocol
+property on the manager object.
+
+00:08:52.516 --> 00:08:54.646 A:middle
+If that's nil, it means I
+don't have a configuration yet.
+
+00:08:55.066 --> 00:08:56.006 A:middle
+I want to set one up.
+
+00:08:56.006 --> 00:09:00.266 A:middle
+I'll configure a IKE v2
+configuration here and I fill it
+
+
+
+00:08:56.006 --> 00:09:00.266 A:middle
+I'll configure a IKE v2
+configuration here and I fill it
+
+00:09:00.266 --> 00:09:04.876 A:middle
+out with all the IKE v2 specific
+configuration parameters.
+
+00:09:05.876 --> 00:09:09.216 A:middle
+When I'm done with that I'll
+set the protocol property
+
+00:09:09.216 --> 00:09:13.056 A:middle
+on the manager object and I'll
+enable the VPN configuration.
+
+00:09:13.146 --> 00:09:16.076 A:middle
+You can only have one personal
+VPN configuration enabled
+
+00:09:16.076 --> 00:09:17.196 A:middle
+on the system at a time.
+
+00:09:17.756 --> 00:09:22.066 A:middle
+And then when I'm all done,
+go ahead and call save
+
+00:09:22.066 --> 00:09:24.686 A:middle
+to preferences to
+save the configuration
+
+00:09:24.686 --> 00:09:26.106 A:middle
+into the network
+extension preferences
+
+00:09:26.106 --> 00:09:27.776 A:middle
+and apply the configuration
+of the system
+
+00:09:28.166 --> 00:09:29.226 A:middle
+so they can actually be used.
+
+00:09:30.306 --> 00:09:33.156 A:middle
+From here you can use
+the API to manually start
+
+00:09:33.156 --> 00:09:36.366 A:middle
+and stop the VPN tunnel
+and introspect the status
+
+00:09:36.366 --> 00:09:38.716 A:middle
+of the VPN tunnel to know
+when you're connected,
+
+00:09:38.856 --> 00:09:39.826 A:middle
+disconnected, et cetera.
+
+00:09:41.216 --> 00:09:44.986 A:middle
+But for great user experience
+another thing to do is
+
+00:09:45.076 --> 00:09:47.116 A:middle
+to configure connect on-demand.
+
+00:09:47.116 --> 00:09:50.926 A:middle
+So with connect on-demand you
+can set up rules that state
+
+00:09:51.366 --> 00:09:53.326 A:middle
+when the VPN should
+connect automatically.
+
+00:09:54.486 --> 00:09:57.816 A:middle
+So, for this example, I'm going
+to go ahead and set up a rule
+
+00:09:58.106 --> 00:10:01.316 A:middle
+that says that my VPN should
+connect whenever the device is
+
+
+
+00:09:58.106 --> 00:10:01.316 A:middle
+that says that my VPN should
+connect whenever the device is
+
+00:10:01.316 --> 00:10:02.256 A:middle
+on a Wi-Fi network.
+
+00:10:03.796 --> 00:10:04.766 A:middle
+So the first thing to do,
+
+00:10:04.766 --> 00:10:08.036 A:middle
+I'm going to create an
+on-demand rule connect object.
+
+00:10:08.626 --> 00:10:10.606 A:middle
+So this is a rule that says
+
+00:10:11.046 --> 00:10:15.836 A:middle
+when this rule matches,
+connect the VPN.
+
+00:10:16.086 --> 00:10:19.196 A:middle
+Next I'm going to set an
+interface type match condition
+
+00:10:19.406 --> 00:10:20.016 A:middle
+on my rule.
+
+00:10:20.956 --> 00:10:23.546 A:middle
+So it says when the device
+is on a particular type
+
+00:10:23.546 --> 00:10:26.096 A:middle
+of network interface,
+then this rule will match.
+
+00:10:26.096 --> 00:10:27.406 A:middle
+I'm go to set that to Wi-Fi.
+
+00:10:28.106 --> 00:10:30.516 A:middle
+This rule will match when the
+device is on a Wi-Fi network.
+
+00:10:32.136 --> 00:10:34.066 A:middle
+Go ahead and set the
+on-demand rules array
+
+00:10:34.146 --> 00:10:36.036 A:middle
+to contain this new rule
+
+00:10:36.506 --> 00:10:38.876 A:middle
+and save the result
+to the preferences.
+
+00:10:39.616 --> 00:10:42.416 A:middle
+So now my VPN will connect
+automatically whenever the
+
+00:10:42.416 --> 00:10:43.756 A:middle
+device is on a Wi-Fi network.
+
+00:10:44.396 --> 00:10:48.976 A:middle
+Okay. So that's the
+NEVPN manager API.
+
+00:10:49.126 --> 00:10:51.976 A:middle
+You can use this API to
+create apps that connect
+
+00:10:51.976 --> 00:10:53.836 A:middle
+to your personal VPN service.
+
+00:10:54.346 --> 00:10:56.886 A:middle
+Let's go ahead and talk
+
+00:10:56.886 --> 00:10:59.226 A:middle
+about the any tunnel
+provider family of APIs.
+
+
+
+00:11:00.086 --> 00:11:02.306 A:middle
+You use these APIs to
+create apps that connect
+
+00:11:02.686 --> 00:11:04.506 A:middle
+to enterprise VPN servers.
+
+00:11:05.066 --> 00:11:11.756 A:middle
+So the way this works is
+you create a custom VPN
+
+00:11:11.756 --> 00:11:12.686 A:middle
+protocol provider.
+
+00:11:13.316 --> 00:11:16.136 A:middle
+This is essentially the
+client side implementation
+
+00:11:16.136 --> 00:11:19.216 A:middle
+of your own custom
+tunneling protocol.
+
+00:11:19.466 --> 00:11:23.466 A:middle
+These protocol providers
+run as app extensions.
+
+00:11:23.646 --> 00:11:26.246 A:middle
+They run in the background
+handling background traffic.
+
+00:11:27.336 --> 00:11:31.126 A:middle
+You can create two types
+of tunnel providers.
+
+00:11:31.126 --> 00:11:32.906 A:middle
+You can create a
+Packet Tunnel Provider.
+
+00:11:33.636 --> 00:11:36.246 A:middle
+These tunnel traffic
+at the IP layer.
+
+00:11:36.836 --> 00:11:40.886 A:middle
+You can create, or you can
+create an App Proxy provider
+
+00:11:40.886 --> 00:11:43.016 A:middle
+that tunnels traffic
+at the app layer.
+
+00:11:45.336 --> 00:11:48.986 A:middle
+The tunnel provider family
+also has APIs that allow you
+
+00:11:48.986 --> 00:11:52.266 A:middle
+to configure and control your
+protocol provider from your app.
+
+00:11:52.456 --> 00:11:54.926 A:middle
+So similar to the VPN manager
+API where you can configure
+
+00:11:54.926 --> 00:11:57.946 A:middle
+and control the IPSEC
+client, these APIs allow you
+
+00:11:57.946 --> 00:12:01.026 A:middle
+to configure and control your
+own custom protocol provider.
+
+
+
+00:11:57.946 --> 00:12:01.026 A:middle
+to configure and control your
+own custom protocol provider.
+
+00:12:05.056 --> 00:12:08.756 A:middle
+Let's take a closer look at the
+NEPacket Tunnel provider API.
+
+00:12:09.276 --> 00:12:09.976 A:middle
+How does this work?
+
+00:12:10.956 --> 00:12:14.846 A:middle
+So suppose we have an NEPacket
+Tunnel Provider here running
+
+00:12:14.846 --> 00:12:18.256 A:middle
+on the system and it's
+connected to a VPN server
+
+00:12:18.256 --> 00:12:21.546 A:middle
+and providing a tunnel
+to some internal network.
+
+00:12:22.976 --> 00:12:27.516 A:middle
+So you've got an app that's
+trying to connect to a resource
+
+00:12:27.516 --> 00:12:28.346 A:middle
+in the internal network.
+
+00:12:29.496 --> 00:12:31.136 A:middle
+So the app will open
+up a network connection
+
+00:12:31.136 --> 00:12:35.126 A:middle
+that will create a socket and
+create a TCP/IP connection
+
+00:12:36.026 --> 00:12:39.626 A:middle
+and the packets for that TCP/IP
+connection will be routed
+
+00:12:39.626 --> 00:12:41.066 A:middle
+to the UTUN0 interface.
+
+00:12:41.066 --> 00:12:45.636 A:middle
+This is a virtual interface, so
+instead of sending the packets
+
+00:12:45.636 --> 00:12:49.146 A:middle
+out over the physical
+network it will divert them
+
+00:12:49.456 --> 00:12:50.786 A:middle
+to the NEPacket Tunnel Provider.
+
+00:12:51.756 --> 00:12:54.736 A:middle
+The Packet Tunnel Provider
+then can take the packets,
+
+00:12:54.736 --> 00:12:57.556 A:middle
+encapsulate them in
+your tunneling protocol,
+
+00:12:58.046 --> 00:13:00.036 A:middle
+send them over to
+the tunneling server.
+
+
+
+00:12:58.046 --> 00:13:00.036 A:middle
+send them over to
+the tunneling server.
+
+00:13:00.036 --> 00:13:02.326 A:middle
+The tunneling server
+will decapsulate them,
+
+00:13:02.326 --> 00:13:04.266 A:middle
+inject those packets
+into the internal network
+
+00:13:04.266 --> 00:13:06.326 A:middle
+and they will be delivered
+to the ultimate destination,
+
+00:13:07.026 --> 00:13:09.666 A:middle
+and the return packets will
+be encapsulated by the server,
+
+00:13:09.906 --> 00:13:12.966 A:middle
+sent back to the provider,
+the provider decapsulates them
+
+00:13:13.396 --> 00:13:16.296 A:middle
+and injects them back into the
+networking stack via the UTUN0
+
+00:13:16.296 --> 00:13:18.356 A:middle
+interface, they'll
+be delivered back
+
+00:13:18.356 --> 00:13:21.076 A:middle
+up through the TCP/IP
+stack to the application.
+
+00:13:21.826 --> 00:13:24.386 A:middle
+This is the basic
+way that this works.
+
+00:13:24.986 --> 00:13:28.226 A:middle
+NEPacket Tunnel Provider
+has a lot of control
+
+00:13:28.226 --> 00:13:29.646 A:middle
+over the UTUN0 interface.
+
+00:13:30.336 --> 00:13:32.766 A:middle
+Most importantly, it
+can specify the routes.
+
+00:13:33.176 --> 00:13:38.066 A:middle
+The IP destinations that will
+be routed to the UTUN0 interface
+
+00:13:38.066 --> 00:13:38.786 A:middle
+and through the tunnel.
+
+00:13:39.786 --> 00:13:42.716 A:middle
+The Packet Tunnel Provider can
+specify the virtual address
+
+00:13:42.716 --> 00:13:45.696 A:middle
+to assign to the
+interface, as well as the DNS
+
+00:13:45.696 --> 00:13:47.796 A:middle
+and proxy settings
+that should be used
+
+00:13:47.796 --> 00:13:51.776 A:middle
+for traffic routed
+through the tunnel.
+
+00:13:52.256 --> 00:13:55.036 A:middle
+So next Tommy Pauly is going to
+come up and give us a brief demo
+
+00:13:55.346 --> 00:13:57.356 A:middle
+of how to create an
+NEPacket Tunnel Provider.
+
+00:13:58.516 --> 00:14:02.696 A:middle
+[Applause]
+
+
+
+00:13:58.516 --> 00:14:02.696 A:middle
+[Applause]
+
+00:14:03.196 --> 00:14:05.106 A:middle
+&gt;&gt; TOM PAULY: Thank you, Jamie.
+
+00:14:05.106 --> 00:14:08.756 A:middle
+We are excited to have you
+write your own custom VPN
+
+00:14:08.756 --> 00:14:09.796 A:middle
+protocol providers.
+
+00:14:10.206 --> 00:14:14.026 A:middle
+To help you do that I want
+to show you quickly the steps
+
+00:14:14.026 --> 00:14:16.426 A:middle
+that are involved in building
+a Packet Tunnel Provider.
+
+00:14:16.426 --> 00:14:19.576 A:middle
+I'm going to start
+with an Xcode project
+
+00:14:19.576 --> 00:14:21.946 A:middle
+in which I have an app already.
+
+00:14:21.946 --> 00:14:25.826 A:middle
+It is using the manager APIs
+to create a configuration.
+
+00:14:25.826 --> 00:14:28.096 A:middle
+So we are going to skip over
+that part and we're going
+
+00:14:28.096 --> 00:14:30.706 A:middle
+to assume that I have a
+framework that is implemented
+
+00:14:30.706 --> 00:14:33.626 A:middle
+to do my own custom
+protocol negotiation.
+
+00:14:33.886 --> 00:14:36.936 A:middle
+I want to show how to build
+this new extension and kind
+
+00:14:36.936 --> 00:14:38.076 A:middle
+of put all the pieces together.
+
+00:14:38.076 --> 00:14:38.746 A:middle
+All right.
+
+00:14:40.716 --> 00:14:43.686 A:middle
+So here I have my project.
+
+00:14:44.436 --> 00:14:46.206 A:middle
+The first thing you need
+
+00:14:46.206 --> 00:14:48.386 A:middle
+to do is add a new
+target for your extension.
+
+00:14:49.506 --> 00:14:53.806 A:middle
+To get this, in OS X El
+Capitan we've added it
+
+00:14:53.896 --> 00:14:56.856 A:middle
+into the network
+extension framework.
+
+00:14:57.896 --> 00:15:02.616 A:middle
+So on your system if you go to
+system, library, Frameworks,
+
+
+
+00:14:57.896 --> 00:15:02.616 A:middle
+So on your system if you go to
+system, library, Frameworks,
+
+00:15:03.216 --> 00:15:06.166 A:middle
+network extension
+Framework and you go
+
+00:15:06.166 --> 00:15:08.916 A:middle
+into the resources folder,
+we've provided an installer
+
+00:15:08.916 --> 00:15:12.476 A:middle
+for the templates for
+this, these target types.
+
+00:15:13.436 --> 00:15:14.486 A:middle
+So you can go through
+the installer.
+
+00:15:15.676 --> 00:15:17.866 A:middle
+I'm going to install
+it just for this user.
+
+00:15:18.456 --> 00:15:22.416 A:middle
+And now I have the templates.
+
+00:15:22.416 --> 00:15:27.936 A:middle
+If I go into my project and
+I try to create a new target,
+
+00:15:27.996 --> 00:15:30.766 A:middle
+under application extensions I
+now have four new target types.
+
+00:15:31.466 --> 00:15:34.916 A:middle
+I have App Proxy providers
+for application layer VPNs.
+
+00:15:35.446 --> 00:15:39.166 A:middle
+I have two filter control
+and data providers.
+
+00:15:39.636 --> 00:15:41.316 A:middle
+These allow me to do content
+filtering which we'll talk
+
+00:15:41.316 --> 00:15:43.806 A:middle
+about later and I have
+Packet Tunnel Provider.
+
+00:15:43.806 --> 00:15:49.356 A:middle
+My protocol in this case uses
+IP level tunneling for my VPN.
+
+00:15:49.356 --> 00:15:50.776 A:middle
+I'll choose the Packet
+Tunnel Provider.
+
+00:15:51.276 --> 00:15:54.916 A:middle
+Going to write in Swift.
+
+00:15:54.916 --> 00:16:01.446 A:middle
+Let's just call it
+packet tunnel.
+
+
+
+00:15:54.916 --> 00:16:01.446 A:middle
+Let's just call it
+packet tunnel.
+
+00:16:01.596 --> 00:16:03.236 A:middle
+Great. Now I have a new target
+
+00:16:03.426 --> 00:16:05.866 A:middle
+and I can start building
+my VPN provider.
+
+00:16:05.866 --> 00:16:10.946 A:middle
+So let's jump ahead to the
+actual process of writing this.
+
+00:16:11.326 --> 00:16:13.176 A:middle
+My protocol happens to
+be based around UDP.
+
+00:16:13.176 --> 00:16:16.176 A:middle
+It uses UDP to talk
+to the server
+
+00:16:16.176 --> 00:16:21.376 A:middle
+and tunnel traffic
+from the system.
+
+00:16:21.376 --> 00:16:24.366 A:middle
+I have subclassed the
+NEPacket Tunnel Provider class
+
+00:16:25.466 --> 00:16:28.286 A:middle
+and this is the class going
+to be called in my extension
+
+00:16:28.286 --> 00:16:29.686 A:middle
+to start and stop my VPN.
+
+00:16:30.386 --> 00:16:32.636 A:middle
+The most important
+function that I'm going
+
+00:16:32.636 --> 00:16:35.186 A:middle
+to overwrite here is the
+start tunnel with options.
+
+00:16:35.636 --> 00:16:37.206 A:middle
+This will get called
+whenever the user
+
+00:16:37.326 --> 00:16:39.486 A:middle
+or the system automatically
+wants to start your VPN.
+
+00:16:39.486 --> 00:16:45.006 A:middle
+And if you notice, it calls and
+passes a completion handler.
+
+00:16:45.436 --> 00:16:48.356 A:middle
+This completion handler is
+what you can use to call
+
+00:16:48.356 --> 00:16:50.776 A:middle
+and tell the system that you
+are done setting up your VPN.
+
+00:16:50.896 --> 00:16:53.766 A:middle
+When you call this, the system
+will know you fully connected
+
+00:16:53.766 --> 00:16:57.206 A:middle
+and it's ready to go.
+
+00:16:57.356 --> 00:17:00.736 A:middle
+So I mentioned already that my
+protocol is based around UDP.
+
+
+
+00:16:57.356 --> 00:17:00.736 A:middle
+So I mentioned already that my
+protocol is based around UDP.
+
+00:17:00.736 --> 00:17:06.656 A:middle
+I want to in my start create
+a UDP connection to my server.
+
+00:17:06.976 --> 00:17:11.506 A:middle
+In order to do this I'm going to
+create an NWUDP session object.
+
+00:17:12.016 --> 00:17:15.965 A:middle
+This is one of many convenience
+networking APIs that we've added
+
+00:17:16.256 --> 00:17:19.586 A:middle
+to the Network Extension
+Framework to help you make good
+
+00:17:20.316 --> 00:17:22.536 A:middle
+and very efficient connections.
+
+00:17:23.116 --> 00:17:24.556 A:middle
+So UDP session allows me
+
+00:17:24.556 --> 00:17:27.415 A:middle
+to create a connection
+to a host name.
+
+00:17:27.415 --> 00:17:29.496 A:middle
+It will do all the
+DNS resolution for me
+
+00:17:29.496 --> 00:17:33.156 A:middle
+and asynchronously let me
+know when it's ready to go.
+
+00:17:33.296 --> 00:17:39.546 A:middle
+I can do reading and writing of
+multiple data grams at a time
+
+00:17:39.546 --> 00:17:41.286 A:middle
+for the most efficient
+connections possible.
+
+00:17:41.786 --> 00:17:45.996 A:middle
+Let's implement start
+tunnel with options now.
+
+00:17:47.636 --> 00:17:50.256 A:middle
+The first thing I need
+to do is actually figure
+
+00:17:50.256 --> 00:17:51.376 A:middle
+out what I'm trying
+to connect to.
+
+00:17:51.426 --> 00:17:53.816 A:middle
+I look at my configuration
+to get my server address.
+
+00:17:54.256 --> 00:17:56.476 A:middle
+This might be an IP
+address or a host name.
+
+00:17:57.066 --> 00:18:01.866 A:middle
+I then wrap it up in
+an NW host end point.
+
+
+
+00:17:57.066 --> 00:18:01.866 A:middle
+I then wrap it up in
+an NW host end point.
+
+00:18:02.186 --> 00:18:05.926 A:middle
+This is just a container
+object that takes an address
+
+00:18:05.926 --> 00:18:08.266 A:middle
+or a host name and puts
+it alongside a port
+
+00:18:08.656 --> 00:18:09.756 A:middle
+that belongs to my protocol.
+
+00:18:10.346 --> 00:18:17.376 A:middle
+I then call create UDP session
+2 end point to start the process
+
+00:18:17.376 --> 00:18:19.316 A:middle
+of doing DNS resolution
+
+00:18:19.716 --> 00:18:21.296 A:middle
+and creating the
+connection to my server.
+
+00:18:22.406 --> 00:18:25.736 A:middle
+At this point the system starts
+doing that and I am waiting
+
+00:18:25.736 --> 00:18:30.836 A:middle
+for the event that I
+want to read and write.
+
+00:18:30.836 --> 00:18:34.236 A:middle
+I do KeyVO to watch the state
+property of the UDP session
+
+00:18:34.236 --> 00:18:35.336 A:middle
+to get these transitions.
+
+00:18:35.886 --> 00:18:39.746 A:middle
+So at this point I'm pretty
+much done with my start call.
+
+00:18:40.116 --> 00:18:43.556 A:middle
+The last thing I need to do is
+save that completion handler
+
+00:18:43.616 --> 00:18:45.466 A:middle
+that I got at the
+beginning because I'm not
+
+00:18:45.466 --> 00:18:48.036 A:middle
+yet done completing
+my VPN connection.
+
+00:18:48.946 --> 00:18:52.056 A:middle
+So I'm going to declare a
+pending start completion.
+
+00:18:52.636 --> 00:18:56.836 A:middle
+And I'm going to
+save that for later.
+
+00:18:58.256 --> 00:18:58.526 A:middle
+All right.
+
+00:18:58.586 --> 00:18:59.806 A:middle
+So I'm going to skip
+over the part
+
+00:18:59.806 --> 00:19:02.046 A:middle
+where we actually
+negotiate with our server.
+
+
+
+00:18:59.806 --> 00:19:02.046 A:middle
+where we actually
+negotiate with our server.
+
+00:19:02.046 --> 00:19:05.046 A:middle
+I assume your protocol
+already knows how to do that.
+
+00:19:05.556 --> 00:19:08.656 A:middle
+I'm going to skip ahead to where
+we have been assigned an address
+
+00:19:08.656 --> 00:19:09.906 A:middle
+and other network settings.
+
+00:19:09.906 --> 00:19:13.496 A:middle
+We want to apply it to the
+system and let the system know
+
+00:19:13.496 --> 00:19:14.846 A:middle
+that we're done bringing
+up the VPN.
+
+00:19:15.816 --> 00:19:20.716 A:middle
+This is just a custom
+function that I wrote that says
+
+00:19:20.776 --> 00:19:22.946 A:middle
+that I'm done bringing
+up my connection.
+
+00:19:24.146 --> 00:19:25.926 A:middle
+What I'm going to do is call,
+
+00:19:25.926 --> 00:19:28.756 A:middle
+create NEPacket Tunnel
+network settings object,
+
+00:19:29.246 --> 00:19:30.516 A:middle
+and this is a bundle of settings
+
+00:19:30.516 --> 00:19:32.086 A:middle
+that I can apply
+into the system.
+
+00:19:32.946 --> 00:19:35.826 A:middle
+I can set the IPv4 settings,
+
+00:19:35.826 --> 00:19:38.326 A:middle
+I have an assigned
+address and subnet.
+
+00:19:39.256 --> 00:19:41.356 A:middle
+I have route settings.
+
+00:19:41.356 --> 00:19:43.446 A:middle
+In this case I want to be the
+default route for the system
+
+00:19:43.916 --> 00:19:47.906 A:middle
+but I can also have a long
+list of split tunnel routes.
+
+00:19:49.176 --> 00:19:52.436 A:middle
+I can define the overhead
+bytes that my tunnel has.
+
+00:19:52.436 --> 00:19:55.826 A:middle
+For every packet,
+how much do I incur
+
+00:19:56.246 --> 00:19:57.716 A:middle
+for encryption and
+encapsulation.
+
+00:19:58.086 --> 00:20:03.716 A:middle
+This helps the system know how
+large it should send packets.
+
+
+
+00:19:58.086 --> 00:20:03.716 A:middle
+This helps the system know how
+large it should send packets.
+
+00:20:03.776 --> 00:20:05.856 A:middle
+And lastly, I can
+set the DNS settings.
+
+00:20:06.286 --> 00:20:09.246 A:middle
+I can set my assigned
+DNS server or domain.
+
+00:20:09.856 --> 00:20:12.226 A:middle
+To apply this to the system,
+
+00:20:12.426 --> 00:20:15.086 A:middle
+I call set tunnel
+network settings.
+
+00:20:15.536 --> 00:20:17.936 A:middle
+I get a callback
+handler when it is done
+
+00:20:18.456 --> 00:20:21.226 A:middle
+and that lets me know it has
+been successfully applied
+
+00:20:21.356 --> 00:20:24.036 A:middle
+and I can call the start
+completion handler letting the
+
+00:20:24.036 --> 00:20:27.066 A:middle
+system know that I'm
+done bringing up the VPN.
+
+00:20:27.066 --> 00:20:27.636 A:middle
+This is great.
+
+00:20:27.636 --> 00:20:29.256 A:middle
+I have a full connection up.
+
+00:20:29.856 --> 00:20:31.846 A:middle
+But the thing I'm
+missing is being able
+
+00:20:31.846 --> 00:20:33.326 A:middle
+to route traffic back and forth.
+
+00:20:33.326 --> 00:20:38.686 A:middle
+I'll give you a look at
+what that looks like.
+
+00:20:38.956 --> 00:20:42.196 A:middle
+So as Jamie mentioned,
+the way you're doing this,
+
+00:20:42.196 --> 00:20:44.106 A:middle
+you have a virtual
+interface that is going
+
+00:20:44.106 --> 00:20:47.706 A:middle
+to be sending packets up
+into your protocol provider
+
+00:20:47.706 --> 00:20:50.056 A:middle
+and then you're going to
+send that off to your server.
+
+00:20:50.056 --> 00:20:51.456 A:middle
+When you receive packets back
+
+00:20:51.456 --> 00:20:53.446 A:middle
+from the server you re-inject
+them back into the stack.
+
+00:20:53.676 --> 00:20:57.236 A:middle
+I want to start first
+with the outbound flow.
+
+00:20:57.846 --> 00:21:03.206 A:middle
+A packet tunnel provider has a
+property called a packet flow.
+
+
+
+00:20:57.846 --> 00:21:03.206 A:middle
+A packet tunnel provider has a
+property called a packet flow.
+
+00:21:03.486 --> 00:21:05.446 A:middle
+This represents the
+virtual interface
+
+00:21:05.446 --> 00:21:06.556 A:middle
+that you can read
+and write into.
+
+00:21:07.946 --> 00:21:09.976 A:middle
+If I call read packets
+with completion handler,
+
+00:21:09.976 --> 00:21:13.186 A:middle
+I will get called back
+with an array of packets
+
+00:21:13.926 --> 00:21:16.996 A:middle
+that have been sent
+out into the network.
+
+00:21:17.626 --> 00:21:23.286 A:middle
+I can send these into my
+protocol to encapsulate
+
+00:21:23.356 --> 00:21:26.636 A:middle
+and to encrypt them and
+generate a new array
+
+00:21:27.036 --> 00:21:28.276 A:middle
+of encrypted payloads.
+
+00:21:28.796 --> 00:21:33.166 A:middle
+And very easily I can write
+these as multiple data grams
+
+00:21:33.716 --> 00:21:36.726 A:middle
+at one time into the UDP session
+to send over to the server.
+
+00:21:37.646 --> 00:21:40.166 A:middle
+That's all we need to
+do to send packets out.
+
+00:21:41.236 --> 00:21:42.786 A:middle
+Coming back in is very similar.
+
+00:21:43.686 --> 00:21:47.196 A:middle
+Here I have a function
+that is taking packets
+
+00:21:47.946 --> 00:21:52.266 A:middle
+in from the UDP server.
+
+00:21:53.086 --> 00:21:56.456 A:middle
+And I can simply send
+these to my protocol.
+
+00:21:56.456 --> 00:22:01.336 A:middle
+I can decapsulate them, generate
+IP packets which I then write
+
+
+
+00:21:56.456 --> 00:22:01.336 A:middle
+I can decapsulate them, generate
+IP packets which I then write
+
+00:22:01.416 --> 00:22:02.786 A:middle
+into my packet flow property.
+
+00:22:06.896 --> 00:22:10.266 A:middle
+Great. So now I have
+a connection
+
+00:22:10.266 --> 00:22:13.826 A:middle
+that can be established
+in read and write.
+
+00:22:14.036 --> 00:22:15.816 A:middle
+Let's see how this
+looks in practice.
+
+00:22:16.336 --> 00:22:19.416 A:middle
+All right.
+
+00:22:20.106 --> 00:22:21.456 A:middle
+So here I have my device.
+
+00:22:21.456 --> 00:22:24.106 A:middle
+If you notice I've
+installed already my VPN app.
+
+00:22:26.626 --> 00:22:28.676 A:middle
+First I want to show you that
+if I go into Safari and try
+
+00:22:28.676 --> 00:22:29.986 A:middle
+to access the internal website,
+
+00:22:30.076 --> 00:22:32.406 A:middle
+I do not have access
+to it right now.
+
+00:22:32.406 --> 00:22:39.486 A:middle
+I now can go into my VPN
+app and I hit start VPN.
+
+00:22:39.486 --> 00:22:42.186 A:middle
+And what this did,
+
+00:22:42.186 --> 00:22:45.756 A:middle
+in the background it kicked
+off the tunnel packet provider.
+
+00:22:46.726 --> 00:22:49.586 A:middle
+If you can see now, I
+do have the VPN badge
+
+00:22:49.586 --> 00:22:50.516 A:middle
+up in the status bar.
+
+00:22:50.516 --> 00:22:52.716 A:middle
+It actually did come up and
+establish the connection.
+
+00:22:53.916 --> 00:22:56.496 A:middle
+I can then go back
+into Safari and I see
+
+00:22:56.716 --> 00:22:58.426 A:middle
+that my internal
+page has now loaded.
+
+00:22:58.986 --> 00:23:03.856 A:middle
+So we have a fully working VPN
+protocol provider all written
+
+
+
+00:22:58.986 --> 00:23:03.856 A:middle
+So we have a fully working VPN
+protocol provider all written
+
+00:23:03.856 --> 00:23:04.316 A:middle
+in Swift.
+
+00:23:04.666 --> 00:23:05.286 A:middle
+That simple.
+
+00:23:06.516 --> 00:23:11.056 A:middle
+[Applause]
+
+00:23:11.556 --> 00:23:14.316 A:middle
+&gt;&gt; TOM PAULY: Back to Jamie.
+
+00:23:14.496 --> 00:23:14.886 A:middle
+&gt;&gt; JAMIE WOOD: All right.
+
+00:23:14.886 --> 00:23:15.586 A:middle
+Thank you, Tommy.
+
+00:23:16.156 --> 00:23:17.956 A:middle
+So Tommy just showed us how
+
+00:23:17.956 --> 00:23:19.436 A:middle
+to create a can packet
+tunnel provider.
+
+00:23:19.436 --> 00:23:22.156 A:middle
+It's easy and powerful.
+
+00:23:22.826 --> 00:23:27.076 A:middle
+So while we are on the subject
+of Packet Tunnel Provider I want
+
+00:23:27.076 --> 00:23:31.716 A:middle
+to take a moment and talk about
+Per-App VPN for managed apps.
+
+00:23:31.716 --> 00:23:37.216 A:middle
+Per-App VPN is great for BYOD or
+bring your own device use cases.
+
+00:23:37.806 --> 00:23:40.976 A:middle
+In BYOD you have company
+employees who want
+
+00:23:40.976 --> 00:23:42.346 A:middle
+to bring their own
+personal device,
+
+00:23:42.866 --> 00:23:44.646 A:middle
+connect it to the
+company's internal network
+
+00:23:44.646 --> 00:23:46.076 A:middle
+and access network resources.
+
+00:23:46.626 --> 00:23:49.076 A:middle
+They also don't want all
+of their Internet traffic
+
+00:23:49.076 --> 00:23:50.836 A:middle
+to be routed through
+the company's VPN.
+
+00:23:50.836 --> 00:23:54.576 A:middle
+And then you have
+enterprises that want
+
+00:23:54.576 --> 00:23:56.696 A:middle
+to give their employees
+access, but they want
+
+00:23:56.696 --> 00:23:58.196 A:middle
+to restrict the applications
+
+00:23:58.496 --> 00:24:00.276 A:middle
+that can access their
+internal network.
+
+
+
+00:23:58.496 --> 00:24:00.276 A:middle
+that can access their
+internal network.
+
+00:24:01.276 --> 00:24:04.636 A:middle
+So this is where
+Per-App VPN is great.
+
+00:24:05.506 --> 00:24:07.706 A:middle
+So with Per-App VPN
+you can set up the VPN
+
+00:24:07.706 --> 00:24:10.956 A:middle
+so that only certain managed
+applications can use the VPN.
+
+00:24:12.056 --> 00:24:15.916 A:middle
+The way to set this up
+is using Apple's own MDM
+
+00:24:15.916 --> 00:24:20.166 A:middle
+or mobile device
+management protocol.
+
+00:24:20.726 --> 00:24:22.706 A:middle
+You enroll devices
+with an MDM service.
+
+00:24:23.246 --> 00:24:26.306 A:middle
+The MDM service has
+the ability to push
+
+00:24:26.306 --> 00:24:29.896 A:middle
+down configurations including
+VPN configurations as well
+
+00:24:29.896 --> 00:24:31.306 A:middle
+as managed applications.
+
+00:24:32.116 --> 00:24:36.466 A:middle
+And the MDM service can also
+link those managed applications
+
+00:24:36.606 --> 00:24:39.576 A:middle
+with Per-App VPN
+configurations to send
+
+00:24:39.576 --> 00:24:43.226 A:middle
+up a Per-App VPN deployment.
+
+00:24:43.226 --> 00:24:48.856 A:middle
+Now, we support Per-App VPN
+with, we've always supported it
+
+00:24:48.856 --> 00:24:51.036 A:middle
+with custom App Proxy providers.
+
+00:24:51.646 --> 00:24:57.136 A:middle
+In iOS 9 and OS X El Capitan,
+we now support Per-App VPN
+
+00:24:57.276 --> 00:24:58.816 A:middle
+with custom packet
+tunnel providers
+
+00:24:59.406 --> 00:25:00.926 A:middle
+and support Per-App VPN
+
+
+
+00:24:59.406 --> 00:25:00.926 A:middle
+and support Per-App VPN
+
+00:25:01.266 --> 00:25:03.796 A:middle
+with a built-in IPSEC
+clients on the platform.
+
+00:25:05.266 --> 00:25:09.036 A:middle
+So let's go ahead and take a
+look at how Per-App VPN works
+
+00:25:09.296 --> 00:25:11.106 A:middle
+in the network data path.
+
+00:25:11.106 --> 00:25:13.996 A:middle
+We have the same Packet Tunnel
+Provider that we had before.
+
+00:25:14.076 --> 00:25:17.136 A:middle
+We have the UTUN0
+interface again
+
+00:25:17.136 --> 00:25:19.586 A:middle
+that the traffic is routed to.
+
+00:25:19.586 --> 00:25:21.956 A:middle
+Now we have a managed
+application that is linked
+
+00:25:21.956 --> 00:25:23.416 A:middle
+to the VPN configuration.
+
+00:25:24.236 --> 00:25:27.856 A:middle
+Instead of having the traffic
+routed to the UTUN0 interface
+
+00:25:27.856 --> 00:25:31.376 A:middle
+by the destination IP,
+the traffic is routed
+
+00:25:31.376 --> 00:25:34.586 A:middle
+to the UTUN0 interface by
+the source application.
+
+00:25:35.056 --> 00:25:37.876 A:middle
+Only this managed app
+can access the VPN.
+
+00:25:38.596 --> 00:25:41.636 A:middle
+If the user uses another
+app that is not managed,
+
+00:25:42.306 --> 00:25:44.516 A:middle
+it is going to connect
+to the network
+
+00:25:44.516 --> 00:25:45.856 A:middle
+out the physical interface.
+
+00:25:46.006 --> 00:25:47.906 A:middle
+Even if it's trying to
+connect to the same IP
+
+00:25:48.156 --> 00:25:49.586 A:middle
+that the managed app
+is connecting to.
+
+00:25:49.586 --> 00:25:50.246 A:middle
+All right.
+
+00:25:51.176 --> 00:25:53.336 A:middle
+So that's how Per-App VPN works.
+
+00:25:54.356 --> 00:25:56.676 A:middle
+Tommy is going to give us
+another brief demo of how
+
+00:25:56.676 --> 00:25:58.846 A:middle
+to configure Per-App VPN.
+
+00:25:58.956 --> 00:25:59.206 A:middle
+&gt;&gt; TOM PAULY: Great.
+
+00:25:59.506 --> 00:26:00.626 A:middle
+Thank you, Jamie.
+
+
+
+00:25:59.506 --> 00:26:00.626 A:middle
+Thank you, Jamie.
+
+00:26:01.326 --> 00:26:02.886 A:middle
+We are really excited to have...
+
+00:26:03.196 --> 00:26:06.716 A:middle
+Now, everyone who is
+writing a custom protocol
+
+00:26:06.876 --> 00:26:09.696 A:middle
+or even using the built in
+IPSEC protocols will be able
+
+00:26:09.696 --> 00:26:13.286 A:middle
+to deploy Per-App VPN to
+make great UID solutions.
+
+00:26:13.816 --> 00:26:20.726 A:middle
+As Jamie mentioned, we create
+these Per-App configurations
+
+00:26:21.146 --> 00:26:21.956 A:middle
+with MDM.
+
+00:26:22.346 --> 00:26:24.966 A:middle
+MDM is pushing down a
+configuration profile
+
+00:26:25.296 --> 00:26:29.856 A:middle
+that defines the VPN and also
+pushes down the managed apps
+
+00:26:29.856 --> 00:26:32.336 A:middle
+to associate with that VPN.
+
+00:26:32.336 --> 00:26:36.946 A:middle
+I want to show how to modify
+an existing VPN profile
+
+00:26:37.256 --> 00:26:38.586 A:middle
+to make it work with
+Per-App VPN.
+
+00:26:39.206 --> 00:26:40.876 A:middle
+I'm going to do it
+with a profile
+
+00:26:40.876 --> 00:26:44.026 A:middle
+that configures the same
+custom app that I just built.
+
+00:26:47.556 --> 00:26:50.486 A:middle
+So here is a look
+into a VPN profile.
+
+00:26:50.486 --> 00:26:51.336 A:middle
+There's a lot on here.
+
+00:26:51.516 --> 00:26:52.706 A:middle
+You don't have to
+get it all right now.
+
+00:26:52.706 --> 00:26:55.536 A:middle
+I want to highlight the
+parts that are different.
+
+00:26:55.536 --> 00:26:57.876 A:middle
+The three tweaks
+that you need to make
+
+00:26:57.876 --> 00:27:01.666 A:middle
+to have this profile
+work with Per-App VPN.
+
+
+
+00:26:57.876 --> 00:27:01.666 A:middle
+to have this profile
+work with Per-App VPN.
+
+00:27:01.886 --> 00:27:03.086 A:middle
+The first is the payload type.
+
+00:27:03.626 --> 00:27:08.426 A:middle
+Normally it is
+com.Apple.vpn.managed simply add
+
+00:27:08.756 --> 00:27:15.036 A:middle
+a .applayer to the end of that
+to make that a Per-App VPN.
+
+00:27:15.216 --> 00:27:17.476 A:middle
+There are multiple
+types of providers
+
+00:27:17.476 --> 00:27:20.216 A:middle
+that work with Per-App VPN.
+
+00:27:20.586 --> 00:27:22.656 A:middle
+So we need to specify
+which type you're using.
+
+00:27:23.176 --> 00:27:27.136 A:middle
+Within the VPN payload,
+we have a new key
+
+00:27:27.136 --> 00:27:28.216 A:middle
+that is the provider type.
+
+00:27:28.976 --> 00:27:31.776 A:middle
+And you can specify either
+packet tunnel or App Proxy.
+
+00:27:32.146 --> 00:27:36.216 A:middle
+In this case as you saw, my app
+uses a packet tunnel protocol.
+
+00:27:36.216 --> 00:27:37.996 A:middle
+I'll specify that one.
+
+00:27:38.536 --> 00:27:45.106 A:middle
+The last field you need to
+add is called the VPN UUID.
+
+00:27:45.416 --> 00:27:48.646 A:middle
+Which is an arbitrary
+string that acts as the glue
+
+00:27:49.016 --> 00:27:53.386 A:middle
+between a VPN configuration
+and the managed apps.
+
+00:27:53.586 --> 00:27:58.076 A:middle
+When an MDM server pushes down
+managed apps, it will mark them
+
+00:27:58.156 --> 00:27:59.886 A:middle
+with the same VPN UUID
+
+
+
+00:28:00.136 --> 00:28:04.616 A:middle
+so the system knows those
+apps can only route traffic
+
+00:28:04.796 --> 00:28:06.916 A:middle
+through that VPN.
+
+00:28:07.476 --> 00:28:13.106 A:middle
+This profile should
+work for Per-App VPN.
+
+00:28:13.356 --> 00:28:17.426 A:middle
+So because we are so eager
+to have you guys make apps
+
+00:28:17.426 --> 00:28:18.376 A:middle
+that work with Per-App VPN,
+
+00:28:19.246 --> 00:28:22.296 A:middle
+we wanted to make it really
+easy to develop with it.
+
+00:28:22.436 --> 00:28:23.576 A:middle
+You may not have access
+
+00:28:23.616 --> 00:28:25.886 A:middle
+to a full MDM solution
+while you are developing.
+
+00:28:26.616 --> 00:28:31.686 A:middle
+So we've enabled for development
+builds of your app only.
+
+00:28:31.736 --> 00:28:32.946 A:middle
+Not distribution builds.
+
+00:28:33.896 --> 00:28:37.596 A:middle
+The ability to specify
+in an info Plist apps
+
+00:28:37.596 --> 00:28:39.526 A:middle
+to associate your
+VPN configurations
+
+00:28:39.526 --> 00:28:43.256 A:middle
+with to make it easier
+to test Per-App VPN.
+
+00:28:43.436 --> 00:28:48.246 A:middle
+Here is a look at an info Plist
+of your app, it's small here,
+
+00:28:48.246 --> 00:28:53.356 A:middle
+but we have a new key
+called NETest App Mapping.
+
+00:28:53.846 --> 00:28:55.416 A:middle
+This is a dictionary of arrays,
+
+00:28:55.486 --> 00:28:58.546 A:middle
+the keys are the same
+UUID I mentioned before,
+
+00:28:58.546 --> 00:29:03.136 A:middle
+the glue to hold configurations
+and apps together.
+
+
+
+00:28:58.546 --> 00:29:03.136 A:middle
+the glue to hold configurations
+and apps together.
+
+00:29:03.136 --> 00:29:08.196 A:middle
+Within the array you can specify
+the string bundle identifiers
+
+00:29:08.286 --> 00:29:11.066 A:middle
+of apps that you want to
+force to go through your VPN.
+
+00:29:11.066 --> 00:29:14.366 A:middle
+In this case I'm going
+to use the box app.
+
+00:29:15.356 --> 00:29:17.146 A:middle
+Great to show you
+what this looks like.
+
+00:29:17.146 --> 00:29:21.176 A:middle
+I installed the profile and
+the info Plist on my device.
+
+00:29:21.746 --> 00:29:25.086 A:middle
+And so here I have
+a configuration
+
+00:29:25.606 --> 00:29:26.506 A:middle
+for my Per-App VPN.
+
+00:29:26.506 --> 00:29:31.476 A:middle
+And you can see that I have my
+custom Packet Tunnel protocol.
+
+00:29:32.506 --> 00:29:36.966 A:middle
+And listed are the included apps
+and it has now associated Box
+
+00:29:36.966 --> 00:29:38.276 A:middle
+with my VPN configuration.
+
+00:29:39.066 --> 00:29:41.396 A:middle
+That's all it takes to
+making Per-App VPN work
+
+00:29:41.396 --> 00:29:43.626 A:middle
+with your protocol.
+
+00:29:44.116 --> 00:29:44.366 A:middle
+Thank you.
+
+00:29:45.516 --> 00:29:49.136 A:middle
+[Applause]
+
+00:29:49.636 --> 00:29:49.946 A:middle
+&gt;&gt; JAMIE WOOD: All right.
+
+00:29:49.946 --> 00:29:50.606 A:middle
+Thank you, Tommy.
+
+00:29:50.936 --> 00:29:54.406 A:middle
+So we really think that Per-App
+VPN is a great deployment
+
+00:29:54.566 --> 00:29:57.126 A:middle
+for BYOD, provides a
+great user experience
+
+00:29:57.196 --> 00:29:58.686 A:middle
+for company employees.
+
+00:29:58.686 --> 00:30:01.366 A:middle
+We highly encourage
+you to deploy it.
+
+
+
+00:29:58.686 --> 00:30:01.366 A:middle
+We highly encourage
+you to deploy it.
+
+00:30:02.076 --> 00:30:08.146 A:middle
+So next I want to talk about
+the NEApp Proxy Provider API.
+
+00:30:09.216 --> 00:30:12.976 A:middle
+Now, any App Proxy
+providers work exclusively
+
+00:30:13.226 --> 00:30:14.206 A:middle
+with Per-App VPN.
+
+00:30:15.106 --> 00:30:17.846 A:middle
+So let's take a look
+and see how these work,
+
+00:30:17.846 --> 00:30:19.836 A:middle
+how they are different from
+the packet tunnel providers.
+
+00:30:20.076 --> 00:30:23.666 A:middle
+We have a managed application,
+an App Proxy Provider running
+
+00:30:23.666 --> 00:30:26.666 A:middle
+on the system and the managed
+app is going to connect
+
+00:30:26.706 --> 00:30:28.706 A:middle
+to an internal network resource.
+
+00:30:29.436 --> 00:30:32.716 A:middle
+Instead of having IP packets
+routed to the UTUN0 interface,
+
+00:30:33.616 --> 00:30:36.136 A:middle
+the data the managed app writes
+
+00:30:36.136 --> 00:30:39.836 A:middle
+to its socket is diverted
+directly to the proxy provider.
+
+00:30:41.216 --> 00:30:44.286 A:middle
+So from there the NEApp Proxy
+Provider can send the data
+
+00:30:44.286 --> 00:30:47.196 A:middle
+to the proxy server
+and the return data
+
+00:30:47.196 --> 00:30:50.226 A:middle
+from the proxy server will be
+sent back to the proxy provider,
+
+00:30:50.406 --> 00:30:51.936 A:middle
+it can inject it into the socket
+
+00:30:51.936 --> 00:30:53.776 A:middle
+to be delivered to
+the application.
+
+00:30:55.056 --> 00:31:00.066 A:middle
+The reason why we added the
+NEApp Proxy Provider API is
+
+
+
+00:30:55.056 --> 00:31:00.066 A:middle
+The reason why we added the
+NEApp Proxy Provider API is
+
+00:31:00.396 --> 00:31:01.626 A:middle
+really about the servers.
+
+00:31:01.726 --> 00:31:04.046 A:middle
+So you're connecting to
+these transparent network
+
+00:31:04.046 --> 00:31:04.906 A:middle
+proxy servers.
+
+00:31:05.496 --> 00:31:07.826 A:middle
+The servers are usually
+easier to deploy
+
+00:31:08.066 --> 00:31:10.126 A:middle
+than a fully fledged
+IP layer VPN.
+
+00:31:10.126 --> 00:31:14.396 A:middle
+You don't have to provision
+virtual IPs to assign
+
+00:31:14.396 --> 00:31:15.796 A:middle
+to the UTUN0 interface.
+
+00:31:16.366 --> 00:31:19.496 A:middle
+They usually scale
+a little better.
+
+00:31:19.496 --> 00:31:21.616 A:middle
+We've given you the
+NEApp Proxy Provider API
+
+00:31:21.776 --> 00:31:23.756 A:middle
+to connect to these servers.
+
+00:31:24.246 --> 00:31:30.446 A:middle
+And a new thing that we added
+for App Proxy Provider in iOS 9
+
+00:31:30.736 --> 00:31:36.076 A:middle
+and OS X El Capitan is the
+ability to proxy UDP traffic
+
+00:31:36.076 --> 00:31:37.286 A:middle
+in addition to TCP traffic.
+
+00:31:39.326 --> 00:31:41.816 A:middle
+Oh, here we have a managed app
+
+00:31:41.816 --> 00:31:45.026 A:middle
+to illustrate those
+are still connecting
+
+00:31:45.736 --> 00:31:48.336 A:middle
+out the physical interface.
+
+00:31:48.336 --> 00:31:51.706 A:middle
+Okay. So that's the NETunnel
+provider family of APIs.
+
+00:31:52.096 --> 00:31:54.956 A:middle
+Use these APIs to
+create custom clients
+
+00:31:54.956 --> 00:31:56.136 A:middle
+for your tunneling protocol,
+
+00:31:56.236 --> 00:31:58.696 A:middle
+to connect to enterprise
+VPN servers.
+
+00:31:58.696 --> 00:32:01.696 A:middle
+Now let's take a look
+
+
+
+00:31:58.696 --> 00:32:01.696 A:middle
+Now let's take a look
+
+00:32:01.696 --> 00:32:04.136 A:middle
+at the NEFilter provider
+family of APIs.
+
+00:32:04.296 --> 00:32:06.656 A:middle
+Use these APIs to create the
+network content filtering
+
+00:32:06.656 --> 00:32:07.786 A:middle
+solutions for schools.
+
+00:32:09.016 --> 00:32:11.516 A:middle
+There are currently some ways
+
+00:32:11.516 --> 00:32:13.796 A:middle
+that schools can do
+network content filtering
+
+00:32:14.226 --> 00:32:15.306 A:middle
+with iOS devices.
+
+00:32:16.856 --> 00:32:21.196 A:middle
+They can deploy an on-site
+content filter, put a device
+
+00:32:21.196 --> 00:32:25.436 A:middle
+on their local network and
+route all their Internet traffic
+
+00:32:25.436 --> 00:32:26.666 A:middle
+through that content filter
+
+00:32:26.666 --> 00:32:28.776 A:middle
+so that they can filter
+the content, right?
+
+00:32:29.326 --> 00:32:31.706 A:middle
+The draw back with this is
+that it's only available
+
+00:32:31.706 --> 00:32:32.876 A:middle
+on the school's local network.
+
+00:32:33.126 --> 00:32:35.866 A:middle
+If the students want to
+take the schools iPads
+
+00:32:35.866 --> 00:32:40.816 A:middle
+or iPhones home they either
+can't browse the Internet at all
+
+00:32:40.816 --> 00:32:43.876 A:middle
+when they are home or browse
+the Internet unfiltered.
+
+00:32:44.306 --> 00:32:45.706 A:middle
+This is not so great.
+
+00:32:45.866 --> 00:32:49.226 A:middle
+To sort of try to solve
+some of that problem,
+
+00:32:49.406 --> 00:32:52.046 A:middle
+the school can deploy global
+proxy, put it on the Internet,
+
+00:32:52.586 --> 00:32:54.856 A:middle
+route all of the Internet
+traffic through the proxy
+
+00:32:54.856 --> 00:32:56.246 A:middle
+to perform the content
+filtering.
+
+00:32:56.876 --> 00:33:00.986 A:middle
+The draw back, the school has to
+deploy and maintain the proxy,
+
+
+
+00:32:56.876 --> 00:33:00.986 A:middle
+The draw back, the school has to
+deploy and maintain the proxy,
+
+00:33:00.986 --> 00:33:06.086 A:middle
+and not all the schools have
+the resources to do that.
+
+00:33:06.286 --> 00:33:08.766 A:middle
+Another solution is to
+use a full tunnel VPN.
+
+00:33:08.766 --> 00:33:11.136 A:middle
+That has a lot of the same
+problems as global proxy
+
+00:33:11.136 --> 00:33:13.236 A:middle
+and may be even harder
+to deploy and maintain.
+
+00:33:14.356 --> 00:33:16.416 A:middle
+The best solution for schools is
+
+00:33:16.416 --> 00:33:18.596 A:middle
+to filter the network
+content on the device.
+
+00:33:18.816 --> 00:33:19.876 A:middle
+Before it leaves the device
+
+00:33:20.376 --> 00:33:23.156 A:middle
+and just before it's actually
+delivered to the user.
+
+00:33:24.006 --> 00:33:27.656 A:middle
+So this is exactly what the
+NEFilter provider family
+
+00:33:27.656 --> 00:33:28.856 A:middle
+of APIs allows you to do.
+
+00:33:29.456 --> 00:33:34.786 A:middle
+Now, the NEFilter provider
+APIs are only available on iOS.
+
+00:33:36.046 --> 00:33:39.366 A:middle
+And using API you can
+perform dynamic evaluation
+
+00:33:39.566 --> 00:33:40.896 A:middle
+of network content.
+
+00:33:41.086 --> 00:33:46.906 A:middle
+You have the ability to update
+filtering rules on the fly,
+
+00:33:48.036 --> 00:33:49.606 A:middle
+for instance downloaded
+from the Internet.
+
+00:33:50.206 --> 00:33:55.096 A:middle
+And you have the ability to send
+back a customizable block page
+
+00:33:55.096 --> 00:33:56.606 A:middle
+to the user when they
+try to access something
+
+00:33:56.726 --> 00:34:02.396 A:middle
+that they are not
+allowed to access.
+
+
+
+00:33:56.726 --> 00:34:02.396 A:middle
+that they are not
+allowed to access.
+
+00:34:03.066 --> 00:34:06.916 A:middle
+Now, NEFilter provider only
+works on supervised devices.
+
+00:34:06.916 --> 00:34:08.376 A:middle
+We are targeting
+this at schools,
+
+00:34:08.686 --> 00:34:11.996 A:middle
+schools that own their devices,
+are locking them down so
+
+00:34:12.036 --> 00:34:15.016 A:middle
+that users can't install
+new apps or change settings.
+
+00:34:15.746 --> 00:34:18.255 A:middle
+This is where filter
+provider works.
+
+00:34:19.376 --> 00:34:20.826 A:middle
+So let's take a look
+
+00:34:20.826 --> 00:34:24.436 A:middle
+at how filter provider
+works in the data path.
+
+00:34:24.626 --> 00:34:28.085 A:middle
+So we have an NEFilter data
+provider extension running
+
+00:34:28.196 --> 00:34:28.846 A:middle
+on the system.
+
+00:34:29.356 --> 00:34:32.306 A:middle
+And its job is to make
+pass and block decisions
+
+00:34:32.306 --> 00:34:35.946 A:middle
+about network content that is
+flowing through the system.
+
+00:34:36.065 --> 00:34:38.466 A:middle
+Now, because it has access
+to all this network content,
+
+00:34:38.896 --> 00:34:40.936 A:middle
+we've locked down this
+data provider so it runs
+
+00:34:40.936 --> 00:34:41.985 A:middle
+in a read only sand box.
+
+00:34:42.606 --> 00:34:43.806 A:middle
+It can't access the network
+
+00:34:44.335 --> 00:34:46.416 A:middle
+and it has read only
+access to the disk.
+
+00:34:48.735 --> 00:34:51.735 A:middle
+So we've also provided
+another extension,
+
+00:34:51.946 --> 00:34:54.946 A:middle
+the NEFilter control
+provider, and its job is
+
+00:34:54.946 --> 00:34:57.346 A:middle
+to feed information to
+the filter data provider
+
+00:34:57.346 --> 00:34:58.396 A:middle
+so that it can do its job.
+
+00:34:58.726 --> 00:35:00.656 A:middle
+For instance, download
+rules over the Internet,
+
+
+
+00:34:58.726 --> 00:35:00.656 A:middle
+For instance, download
+rules over the Internet,
+
+00:35:01.146 --> 00:35:02.636 A:middle
+write them to a location on disk
+
+00:35:02.966 --> 00:35:06.976 A:middle
+where the data provider
+can access them.
+
+00:35:07.836 --> 00:35:11.476 A:middle
+Now, suppose that the user is
+running an app using Web kit,
+
+00:35:12.106 --> 00:35:12.446 A:middle
+right?
+
+00:35:12.446 --> 00:35:18.026 A:middle
+They have a UI Web view in
+their UI and so all the content
+
+00:35:18.026 --> 00:35:20.456 A:middle
+that is being rendered into
+the Web kit is passed off
+
+00:35:20.456 --> 00:35:23.596 A:middle
+to the filter data
+provider, which makes a pass
+
+00:35:23.596 --> 00:35:27.276 A:middle
+or block decision on that data.
+
+00:35:27.436 --> 00:35:30.596 A:middle
+So obviously not all
+applications use Web kit.
+
+00:35:31.386 --> 00:35:34.306 A:middle
+There's some applications that
+are using other networking APIs
+
+00:35:34.306 --> 00:35:36.676 A:middle
+such as NSURL session,
+NSURL connection,
+
+00:35:37.076 --> 00:35:38.356 A:middle
+some of the CFNetwork APIs.
+
+00:35:39.076 --> 00:35:43.976 A:middle
+For those APIs we added a hook
+into the socket layer to send
+
+00:35:43.976 --> 00:35:45.936 A:middle
+that traffic over to
+the filter data provider
+
+00:35:45.936 --> 00:35:48.266 A:middle
+so it can make a
+pass/block decision.
+
+00:35:49.116 --> 00:35:52.986 A:middle
+As you can see the
+filter control provider
+
+00:35:52.986 --> 00:35:56.966 A:middle
+and data provider together
+provide a comprehensive content
+
+00:35:56.966 --> 00:36:00.456 A:middle
+filtering solution
+on the device.
+
+
+
+00:35:56.966 --> 00:36:00.456 A:middle
+filtering solution
+on the device.
+
+00:36:00.616 --> 00:36:02.076 A:middle
+So for Web kit applications,
+
+00:36:02.756 --> 00:36:04.946 A:middle
+when the data provider
+makes a block decision,
+
+00:36:05.086 --> 00:36:07.976 A:middle
+decides to block some
+access to the content,
+
+00:36:08.696 --> 00:36:12.216 A:middle
+the data provider can send
+a, instruct the Web kit
+
+00:36:12.506 --> 00:36:14.016 A:middle
+to display a block page.
+
+00:36:14.386 --> 00:36:15.956 A:middle
+Here is an example
+of that block page.
+
+00:36:16.206 --> 00:36:20.426 A:middle
+You can, using the API you
+can customize this block page
+
+00:36:20.426 --> 00:36:21.496 A:middle
+in a number of ways.
+
+00:36:21.606 --> 00:36:23.486 A:middle
+You can change the
+organization that's displayed.
+
+00:36:23.486 --> 00:36:25.836 A:middle
+For example, you can display
+the name of the school
+
+00:36:26.536 --> 00:36:29.506 A:middle
+and you can customize
+this request access link.
+
+00:36:30.076 --> 00:36:32.216 A:middle
+You can choose to not
+display the link at all,
+
+00:36:32.296 --> 00:36:35.146 A:middle
+not give the user the option of
+gaining access to the content.
+
+00:36:35.146 --> 00:36:39.076 A:middle
+If you display it, you can
+display the text of the link
+
+00:36:39.626 --> 00:36:40.926 A:middle
+and target of the link.
+
+00:36:41.146 --> 00:36:45.126 A:middle
+Point to the Web service where
+users can go and request access
+
+00:36:45.176 --> 00:36:46.406 A:middle
+to the blocked content.
+
+00:36:46.906 --> 00:36:51.716 A:middle
+So that's the NEFilter
+provider family of APIs.
+
+00:36:51.716 --> 00:36:55.226 A:middle
+You can use these APIs to
+create powerful comprehensive,
+
+00:36:55.706 --> 00:36:59.086 A:middle
+on-device network content
+filtering solutions for schools.
+
+00:36:59.586 --> 00:37:05.466 A:middle
+Here is all the Network
+Extension APIs we've talked
+
+
+
+00:36:59.586 --> 00:37:05.466 A:middle
+Here is all the Network
+Extension APIs we've talked
+
+00:37:05.466 --> 00:37:06.706 A:middle
+about today.
+
+00:37:07.866 --> 00:37:10.266 A:middle
+And here's some of
+the great apps
+
+00:37:10.816 --> 00:37:12.956 A:middle
+that you can create
+using these APIs.
+
+00:37:13.356 --> 00:37:17.206 A:middle
+You can create apps for Wi-Fi
+Hotspot, personal VPN services,
+
+00:37:17.896 --> 00:37:19.046 A:middle
+enterprise remote access VPNs
+
+00:37:19.046 --> 00:37:22.226 A:middle
+and you can create on-device
+network content filtering
+
+00:37:22.226 --> 00:37:23.426 A:middle
+solutions for schools.
+
+00:37:24.846 --> 00:37:27.286 A:middle
+As you can see these
+are powerful APIs.
+
+00:37:27.876 --> 00:37:29.116 A:middle
+They allow you to extend
+
+00:37:29.116 --> 00:37:31.686 A:middle
+and customize the core
+networking features
+
+00:37:31.686 --> 00:37:32.816 A:middle
+of Apple's platforms.
+
+00:37:33.676 --> 00:37:36.786 A:middle
+And because these are very
+powerful APIs we do require some
+
+00:37:36.786 --> 00:37:39.216 A:middle
+special entitlements for
+you to be able to use these.
+
+00:37:40.436 --> 00:37:41.986 A:middle
+To use the NEVPN manager API,
+
+00:37:42.096 --> 00:37:45.466 A:middle
+you need to select the
+personal VPN capability
+
+00:37:45.876 --> 00:37:47.956 A:middle
+in your project settings' Xcode.
+
+00:37:47.956 --> 00:37:54.226 A:middle
+To use the any Hotspot helper
+API, the NETunnel family
+
+00:37:54.226 --> 00:37:56.736 A:middle
+of APIs, and the
+NEFilter provider family
+
+00:37:56.736 --> 00:38:00.096 A:middle
+of APIs you need access to
+other special entitlements.
+
+
+
+00:37:56.736 --> 00:38:00.096 A:middle
+of APIs you need access to
+other special entitlements.
+
+00:38:00.886 --> 00:38:02.916 A:middle
+The way to get these
+is to send a request
+
+00:38:03.486 --> 00:38:05.096 A:middle
+to networkextension@Apple.com.
+
+00:38:05.856 --> 00:38:08.356 A:middle
+We'll send you back a
+questionnaire that we'll ask you
+
+00:38:08.356 --> 00:38:12.406 A:middle
+to fill out and send back to us
+and we'll process your request.
+
+00:38:12.706 --> 00:38:15.896 A:middle
+We're excited to be
+delivering these APIs to you.
+
+00:38:15.896 --> 00:38:17.946 A:middle
+We are looking forward to
+getting all of your requests
+
+00:38:18.566 --> 00:38:22.856 A:middle
+and giving you access
+to these APIs.
+
+00:38:23.536 --> 00:38:25.206 A:middle
+So what should you do?
+
+00:38:26.026 --> 00:38:27.796 A:middle
+Port your Captive Network apps
+
+00:38:27.896 --> 00:38:31.336 A:middle
+to use the NEHotspot
+helper, which is seamless.
+
+00:38:31.626 --> 00:38:38.256 A:middle
+Adopt the NEManager API
+in your personal VPN app
+
+00:38:38.906 --> 00:38:41.696 A:middle
+to create seamless
+user experience
+
+00:38:42.056 --> 00:38:43.986 A:middle
+for those using your
+personal VPN service.
+
+00:38:44.386 --> 00:38:47.276 A:middle
+Use the NETunnel provider
+
+00:38:47.756 --> 00:38:52.136 A:middle
+to create powerful
+custom enterprise VPN apps
+
+00:38:53.186 --> 00:38:54.426 A:middle
+that connect to your VPN server.
+
+00:38:54.986 --> 00:38:58.696 A:middle
+Use the MDM to deploy
+Per-App VPN
+
+00:38:58.696 --> 00:39:01.546 A:middle
+for great BYOD user experiences.
+
+
+
+00:38:58.696 --> 00:39:01.546 A:middle
+for great BYOD user experiences.
+
+00:39:01.546 --> 00:39:06.376 A:middle
+And use the NEFilter
+provider APIs
+
+00:39:06.626 --> 00:39:09.376 A:middle
+to create dynamic on-device
+network content filtering
+
+00:39:09.796 --> 00:39:10.476 A:middle
+for schools.
+
+00:39:10.696 --> 00:39:14.926 A:middle
+Here is where you can
+get more information.
+
+00:39:15.126 --> 00:39:17.476 A:middle
+Unfortunately, the documentation
+is not yet published.
+
+00:39:17.646 --> 00:39:18.436 A:middle
+Coming soon.
+
+00:39:18.436 --> 00:39:21.496 A:middle
+Please keep searching for
+it on the developer website.
+
+00:39:21.606 --> 00:39:24.506 A:middle
+And the sample code is
+also not quite ready yet.
+
+00:39:25.026 --> 00:39:26.946 A:middle
+Keep searching for the
+simple tunnel sample.
+
+00:39:27.346 --> 00:39:29.316 A:middle
+We have a great sample going.
+
+00:39:29.316 --> 00:39:30.856 A:middle
+We haven't quite
+finished it yet.
+
+00:39:31.426 --> 00:39:33.866 A:middle
+Please keep looking for it.
+
+00:39:35.156 --> 00:39:38.556 A:middle
+For more information you
+are welcome to participate
+
+00:39:38.696 --> 00:39:41.796 A:middle
+in the dev forums, contact
+developer technical support.
+
+00:39:42.526 --> 00:39:45.066 A:middle
+Reach out to Paul Danbold
+our Core evangelist.
+
+00:39:45.596 --> 00:39:50.316 A:middle
+And here is the address you
+can send your network extension
+
+00:39:50.316 --> 00:39:51.616 A:middle
+request to.
+
+00:39:53.966 --> 00:39:55.346 A:middle
+Here are related sessions.
+
+00:39:55.346 --> 00:39:56.686 A:middle
+We encourage you
+to check these out.
+
+00:39:57.106 --> 00:39:58.346 A:middle
+Especially want to give a plug
+
+00:39:58.766 --> 00:40:01.906 A:middle
+for the other Core OS networking
+session today happening 11:00
+
+
+
+00:39:58.766 --> 00:40:01.906 A:middle
+for the other Core OS networking
+session today happening 11:00
+
+00:40:01.906 --> 00:40:04.206 A:middle
+a.m., Your app and next
+generation networks.
+
+00:40:05.496 --> 00:40:06.676 A:middle
+Thank you all so
+much for coming.
+
+00:40:06.676 --> 00:40:06.976 A:middle
+Have a great day.
+
+00:40:07.516 --> 00:40:10.500 A:middle
+[Applause]
+

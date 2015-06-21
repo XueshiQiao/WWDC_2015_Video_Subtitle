@@ -1,0 +1,3764 @@
+
+00:00:20.516 --> 00:00:22.636 A:middle
+[Applause]
+
+00:00:23.136 --> 00:00:26.026 A:middle
+&gt;&gt; STEVE LEWALLEN:
+Well, good afternoon!
+
+00:00:26.026 --> 00:00:29.066 A:middle
+And welcome to today's session
+introducing On Demand Resources.
+
+00:00:29.066 --> 00:00:30.166 A:middle
+My name is Steve Lewallen.
+
+00:00:30.216 --> 00:00:31.736 A:middle
+So what do we have
+for you today?
+
+00:00:32.396 --> 00:00:35.176 A:middle
+Well, we're going to begin
+by giving you an overview
+
+00:00:35.176 --> 00:00:38.126 A:middle
+of On Demand Resources,
+or ODR, and we're going
+
+00:00:38.126 --> 00:00:41.846 A:middle
+to compare an application built
+with ODR to one built without.
+
+00:00:41.846 --> 00:00:45.456 A:middle
+We will follow that by listing
+all the features and benefits
+
+00:00:45.456 --> 00:00:48.406 A:middle
+to you, the developer, as well
+as to users of ODR applications.
+
+00:00:49.666 --> 00:00:52.796 A:middle
+Then we will deep dive into
+a bit of the details of ODR,
+
+00:00:52.946 --> 00:00:55.836 A:middle
+how an ODR application is
+structured, how you build one.
+
+00:00:56.486 --> 00:01:00.036 A:middle
+We will follow that up by
+giving you a demo using Xcode
+
+
+
+00:00:56.486 --> 00:01:00.036 A:middle
+We will follow that up by
+giving you a demo using Xcode
+
+00:01:00.396 --> 00:01:03.136 A:middle
+and the new ODR API we
+have added to Foundation.
+
+00:01:04.575 --> 00:01:07.116 A:middle
+And finally, we will wrap
+things up with a segment
+
+00:01:07.116 --> 00:01:09.136 A:middle
+on best practices in using
+
+00:01:09.136 --> 00:01:11.316 A:middle
+and building the
+optimal ODR application.
+
+00:01:11.946 --> 00:01:12.896 A:middle
+So let's get started.
+
+00:01:12.896 --> 00:01:16.416 A:middle
+So to understand where
+we are going with ODR,
+
+00:01:16.416 --> 00:01:18.416 A:middle
+we need to understand
+where we are today
+
+00:01:18.416 --> 00:01:19.756 A:middle
+with the traditional
+application.
+
+00:01:20.506 --> 00:01:23.476 A:middle
+Now, this application will
+have an executable segment.
+
+00:01:23.476 --> 00:01:25.786 A:middle
+This is your compiled
+Swift, Objective-C,
+
+00:01:25.786 --> 00:01:30.456 A:middle
+C++ as well as some base
+resources, and the levels
+
+00:01:30.456 --> 00:01:32.186 A:middle
+in the game, for example,
+if this is a game.
+
+00:01:33.366 --> 00:01:35.636 A:middle
+When you, the developer,
+are happy with this game
+
+00:01:35.636 --> 00:01:37.436 A:middle
+or application, you
+upload it to the store,
+
+00:01:38.216 --> 00:01:40.996 A:middle
+and when the user comes
+along and buys the app
+
+00:01:41.366 --> 00:01:43.456 A:middle
+or game they get the
+entire thing and down
+
+00:01:43.456 --> 00:01:44.566 A:middle
+to the device it goes.
+
+00:01:45.166 --> 00:01:46.536 A:middle
+And there it is not alone.
+
+00:01:47.076 --> 00:01:49.636 A:middle
+Here we have all the other
+compelling applications
+
+00:01:49.636 --> 00:01:51.106 A:middle
+and games that you,
+the developer,
+
+00:01:51.106 --> 00:01:52.726 A:middle
+are writing for all
+of these users.
+
+00:01:52.996 --> 00:01:55.616 A:middle
+In fact they are so compelling
+that they can't get enough
+
+00:01:55.696 --> 00:01:58.416 A:middle
+of them and literally
+this means more
+
+00:01:58.416 --> 00:02:00.996 A:middle
+and more the case this
+is literally true.
+
+
+
+00:01:58.416 --> 00:02:00.996 A:middle
+and more the case this
+is literally true.
+
+00:02:00.996 --> 00:02:03.556 A:middle
+There just is not enough
+space on the device.
+
+00:02:04.146 --> 00:02:05.326 A:middle
+So what are we to do?
+
+00:02:05.806 --> 00:02:08.466 A:middle
+Well, one thing we can do
+is make the observation
+
+00:02:08.466 --> 00:02:11.376 A:middle
+that not every part of every
+app is needed at any one time.
+
+00:02:11.536 --> 00:02:12.706 A:middle
+I will give an example.
+
+00:02:12.806 --> 00:02:15.276 A:middle
+I may be on Level 7 of a game.
+
+00:02:15.786 --> 00:02:17.886 A:middle
+I certainly don't need
+Level 1 any longer
+
+00:02:17.886 --> 00:02:20.986 A:middle
+and I probably won't need
+Level 30 for quite a while.
+
+00:02:21.336 --> 00:02:22.896 A:middle
+So it's with that
+thought that we started
+
+00:02:22.896 --> 00:02:24.836 A:middle
+to begin to think about ODR.
+
+00:02:25.136 --> 00:02:27.456 A:middle
+So now let's look at
+an ODR application.
+
+00:02:28.316 --> 00:02:31.386 A:middle
+In this case, we start
+off with the same bits,
+
+00:02:31.386 --> 00:02:33.586 A:middle
+we haven't taken anything
+away, but what we're going
+
+00:02:33.586 --> 00:02:35.776 A:middle
+to do is we are going to
+tease apart the assets
+
+00:02:35.776 --> 00:02:37.106 A:middle
+for each level of that game.
+
+00:02:37.606 --> 00:02:39.966 A:middle
+And then we are going to upload
+the entire thing to the store.
+
+00:02:40.786 --> 00:02:43.016 A:middle
+Now, when a customer comes
+along and buys the app,
+
+00:02:44.276 --> 00:02:46.316 A:middle
+they get the executable
+and the base resources
+
+00:02:46.426 --> 00:02:48.186 A:middle
+and perhaps the first
+level in the game.
+
+00:02:49.246 --> 00:02:51.956 A:middle
+So no pun intended we are
+already ahead of the game here
+
+00:02:51.956 --> 00:02:54.896 A:middle
+because they were able to arrive
+at the first level of the game,
+
+00:02:55.346 --> 00:02:57.726 A:middle
+the time between buying the app
+and playing that first level,
+
+00:02:58.026 --> 00:02:59.446 A:middle
+much more quickly
+than if they had
+
+00:02:59.446 --> 00:03:02.836 A:middle
+to download the entire
+app first and they had
+
+
+
+00:02:59.446 --> 00:03:02.836 A:middle
+to download the entire
+app first and they had
+
+00:03:02.836 --> 00:03:05.716 A:middle
+to use far less disk
+space to do it.
+
+00:03:06.136 --> 00:03:08.026 A:middle
+Now, the user starts
+playing this game
+
+00:03:08.026 --> 00:03:10.646 A:middle
+and the first level is in use.
+
+00:03:10.986 --> 00:03:13.926 A:middle
+And a well-designed ODR
+application will anticipate
+
+00:03:13.926 --> 00:03:15.796 A:middle
+needing, say, the next
+level in the game.
+
+00:03:16.076 --> 00:03:17.866 A:middle
+So it will download that.
+
+00:03:18.326 --> 00:03:21.646 A:middle
+The user continues to play,
+they move on to Level 2,
+
+00:03:21.646 --> 00:03:25.006 A:middle
+and at this point, the
+caching mechanism built
+
+00:03:25.006 --> 00:03:27.646 A:middle
+into ODR notices you are
+no longer using Level 2,
+
+00:03:27.646 --> 00:03:29.216 A:middle
+well I'm just going to
+make a note of that.
+
+00:03:29.216 --> 00:03:31.576 A:middle
+It's still there, we haven't
+done anything with it,
+
+00:03:31.576 --> 00:03:33.516 A:middle
+but we're just going to
+remember it's no longer needed.
+
+00:03:34.156 --> 00:03:37.296 A:middle
+So this continues until we
+get to the point, perhaps,
+
+00:03:37.296 --> 00:03:38.976 A:middle
+where there is no more
+space on the device
+
+00:03:38.976 --> 00:03:40.966 A:middle
+for the next level of the game.
+
+00:03:40.966 --> 00:03:43.996 A:middle
+We have looked at every other
+possible place on the device
+
+00:03:44.066 --> 00:03:48.256 A:middle
+to free up resources and all
+we have left is ODR content
+
+00:03:48.406 --> 00:03:49.166 A:middle
+from this game.
+
+00:03:49.166 --> 00:03:52.446 A:middle
+In this case, the caching
+mechanism can step in again
+
+00:03:52.446 --> 00:03:55.566 A:middle
+and say, you know, I had
+Level 1, I can free that up
+
+00:03:55.566 --> 00:03:58.746 A:middle
+and now the user can
+continue on with the game
+
+00:03:58.746 --> 00:03:59.876 A:middle
+and play the next level.
+
+
+
+00:04:00.726 --> 00:04:02.886 A:middle
+So this is the basic
+idea behind ODR;
+
+00:04:02.886 --> 00:04:07.226 A:middle
+in the case of a game it's fast
+to first play from buy to play
+
+00:04:07.756 --> 00:04:10.846 A:middle
+and it's always occupying a
+smaller, more manageable amount
+
+00:04:10.846 --> 00:04:14.986 A:middle
+of space on the device.
+
+00:04:15.496 --> 00:04:18.266 A:middle
+So now let's talk about
+all of the features of ODR
+
+00:04:18.266 --> 00:04:20.426 A:middle
+that we provide you,
+the developers.
+
+00:04:21.505 --> 00:04:25.096 A:middle
+First of all, obviously this
+is a dynamically loaded content
+
+00:04:25.096 --> 00:04:27.376 A:middle
+system and you have
+probably used systems sort
+
+00:04:27.376 --> 00:04:30.056 A:middle
+of like this before, but we
+have added some new wrinkles.
+
+00:04:30.656 --> 00:04:32.326 A:middle
+First of all we are
+going to host the content
+
+00:04:32.326 --> 00:04:34.516 A:middle
+on the App Store right
+along with your app.
+
+00:04:35.336 --> 00:04:39.336 A:middle
+Second of all, we can download
+content during app install
+
+00:04:39.336 --> 00:04:42.556 A:middle
+as well as by request and
+in fact we can automate,
+
+00:04:43.796 --> 00:04:49.326 A:middle
+we can automate this
+content download at any time.
+
+00:04:49.466 --> 00:04:52.596 A:middle
+And finally, we also include an
+intelligent caching mechanism
+
+00:04:52.596 --> 00:04:53.166 A:middle
+that I mentioned.
+
+00:04:53.956 --> 00:04:58.236 A:middle
+So, for example, we can free
+up space to load something new.
+
+00:04:58.616 --> 00:05:04.366 A:middle
+And finally, a traditional app
+maxes out at 4-gig submission
+
+
+
+00:04:58.616 --> 00:05:04.366 A:middle
+And finally, a traditional app
+maxes out at 4-gig submission
+
+00:05:04.366 --> 00:05:08.596 A:middle
+in the Store, but with
+ODR your app can now be
+
+00:05:08.626 --> 00:05:09.876 A:middle
+up to 20 gigabytes.
+
+00:05:10.566 --> 00:05:14.036 A:middle
+Most of this, of
+course, is ODR content.
+
+00:05:14.036 --> 00:05:14.266 A:middle
+All right.
+
+00:05:15.056 --> 00:05:16.676 A:middle
+So that's what's in it
+for you, the developer,
+
+00:05:16.676 --> 00:05:17.826 A:middle
+but what's in it for the user?
+
+00:05:19.176 --> 00:05:23.436 A:middle
+Well, first of all, we can
+improve the install experience.
+
+00:05:24.106 --> 00:05:28.556 A:middle
+A traditional DLC system, a game
+written using such a technology,
+
+00:05:28.906 --> 00:05:30.996 A:middle
+provides an experience
+something like this:
+
+00:05:30.996 --> 00:05:33.576 A:middle
+the user downloads the
+app, they are all excited
+
+00:05:33.576 --> 00:05:34.546 A:middle
+about playing the game.
+
+00:05:34.786 --> 00:05:37.786 A:middle
+They launch it, but oh no,
+the game now needs to go
+
+00:05:37.786 --> 00:05:39.736 A:middle
+and download new content.
+
+00:05:39.736 --> 00:05:43.546 A:middle
+With ODR we can make sure that
+that content is on the device
+
+00:05:43.786 --> 00:05:45.686 A:middle
+when the app looks
+like it is installed.
+
+00:05:45.686 --> 00:05:49.286 A:middle
+So the experience for
+the user is much better.
+
+00:05:50.086 --> 00:05:53.296 A:middle
+Second, because we are
+occupying a smaller
+
+00:05:53.296 --> 00:05:57.306 A:middle
+and more manageable space on
+device, the footprint of the app
+
+00:05:57.306 --> 00:06:00.566 A:middle
+at any one time, we can have
+more apps on the device ready
+
+
+
+00:05:57.306 --> 00:06:00.566 A:middle
+at any one time, we can have
+more apps on the device ready
+
+00:06:00.566 --> 00:06:03.266 A:middle
+to go and more apps ready
+to go at any one time
+
+00:06:03.266 --> 00:06:04.986 A:middle
+on the device is always a
+good thing for the user.
+
+00:06:05.626 --> 00:06:09.326 A:middle
+And finally, for the
+user, because, again,
+
+00:06:09.326 --> 00:06:11.986 A:middle
+there is more space and we
+are keeping a lot of the app
+
+00:06:11.986 --> 00:06:16.806 A:middle
+or the game in the cloud on the
+App Store, we can have levels
+
+00:06:16.846 --> 00:06:19.286 A:middle
+that are richer and more
+expansive, for example.
+
+00:06:19.596 --> 00:06:22.286 A:middle
+And that is always a good
+thing for the user as well.
+
+00:06:23.246 --> 00:06:27.816 A:middle
+Okay. So now let's dive into
+some of the details about ODR.
+
+00:06:29.296 --> 00:06:31.906 A:middle
+First of all, it's an
+elementive app thinning in iOS 9
+
+00:06:33.176 --> 00:06:35.766 A:middle
+and it's well integrated
+with app slicing.
+
+00:06:36.006 --> 00:06:38.586 A:middle
+In case you missed the
+details of app slicing earlier
+
+00:06:38.586 --> 00:06:40.496 A:middle
+in the conference,
+app slicing is all
+
+00:06:40.496 --> 00:06:43.726 A:middle
+about tailoring the download of
+an app to a particular device.
+
+00:06:44.406 --> 00:06:46.446 A:middle
+So let me give you an
+example: You write an app
+
+00:06:46.606 --> 00:06:49.526 A:middle
+that targets many different
+iPhone sizes and iPads.
+
+00:06:50.726 --> 00:06:53.246 A:middle
+A user with an iPhone comes
+along and when they buy
+
+00:06:53.246 --> 00:06:55.476 A:middle
+that app, app slicing makes sure
+
+00:06:55.476 --> 00:06:58.666 A:middle
+that they only get the resources
+you need for that phone.
+
+00:06:59.546 --> 00:07:01.346 A:middle
+In the past they
+would have gotten all
+
+
+
+00:06:59.546 --> 00:07:01.346 A:middle
+In the past they
+would have gotten all
+
+00:07:01.346 --> 00:07:03.136 A:middle
+of the assets including
+those for an iPad.
+
+00:07:03.916 --> 00:07:08.636 A:middle
+So now when we combine app
+slicing and we join it with ODR,
+
+00:07:08.896 --> 00:07:10.456 A:middle
+we double the benefits of both.
+
+00:07:10.456 --> 00:07:12.306 A:middle
+The footprint is
+still even smaller.
+
+00:07:12.736 --> 00:07:15.366 A:middle
+We are getting to
+first play even faster
+
+00:07:15.666 --> 00:07:17.956 A:middle
+and the constant
+steady state of the app
+
+00:07:18.266 --> 00:07:20.476 A:middle
+on device is much smaller.
+
+00:07:21.076 --> 00:07:26.966 A:middle
+Okay. So what does
+an ODR app look like?
+
+00:07:26.966 --> 00:07:27.826 A:middle
+How is it structured?
+
+00:07:28.186 --> 00:07:32.686 A:middle
+It's pretty similar to an
+app today, but as you recall,
+
+00:07:32.686 --> 00:07:35.926 A:middle
+we teased apart the assets
+for those levels in the game.
+
+00:07:36.416 --> 00:07:37.806 A:middle
+We call these asset packs.
+
+00:07:38.666 --> 00:07:40.766 A:middle
+And the rest of the app
+remains your dot app.
+
+00:07:41.986 --> 00:07:46.386 A:middle
+Now, you group these together
+using Xcode with simple tags.
+
+00:07:46.386 --> 00:07:49.006 A:middle
+For example, these are
+all my assets in Level 1
+
+00:07:49.076 --> 00:07:50.096 A:middle
+of the game, for example.
+
+00:07:50.266 --> 00:07:51.776 A:middle
+It's pretty simple to set up.
+
+00:07:52.016 --> 00:07:56.146 A:middle
+And you can tag a single
+file or a whole folder.
+
+00:07:56.146 --> 00:07:58.606 A:middle
+This whole folder is
+Level 2, for example.
+
+00:07:59.036 --> 00:07:59.786 A:middle
+All right.
+
+
+
+00:08:00.136 --> 00:08:01.786 A:middle
+Now, what can you tag?
+
+00:08:03.256 --> 00:08:05.476 A:middle
+Well, pretty much anything
+that can be in a dot app today.
+
+00:08:06.386 --> 00:08:11.796 A:middle
+For example, images,
+sounds, data, scripts,
+
+00:08:12.056 --> 00:08:13.456 A:middle
+many games have scripts in them,
+
+00:08:13.886 --> 00:08:17.076 A:middle
+you can also have
+in-app purchased content.
+
+00:08:17.076 --> 00:08:19.916 A:middle
+So now you can tie together
+your in-app purchased receipts
+
+00:08:20.376 --> 00:08:21.966 A:middle
+with in-app purchased content
+
+00:08:21.966 --> 00:08:24.376 A:middle
+that you are actually
+downloading via ODR,
+
+00:08:24.376 --> 00:08:26.536 A:middle
+and taking advantage of
+all the other ODR API
+
+00:08:26.536 --> 00:08:27.446 A:middle
+to help manage that.
+
+00:08:28.426 --> 00:08:31.246 A:middle
+The only thing you can't have
+is executable content: That's,
+
+00:08:31.246 --> 00:08:34.306 A:middle
+again, the compiled
+Swift, Objective-C, C, C++.
+
+00:08:34.586 --> 00:08:36.926 A:middle
+Leave that in your dot app.
+
+00:08:37.086 --> 00:08:37.816 A:middle
+All right.
+
+00:08:38.826 --> 00:08:41.796 A:middle
+So where is this content hosted?
+
+00:08:42.385 --> 00:08:43.846 A:middle
+Well, I mentioned
+one of the locations;
+
+00:08:43.846 --> 00:08:44.926 A:middle
+it's obviously the App Store.
+
+00:08:46.216 --> 00:08:48.766 A:middle
+We host it in the App Store and
+we serve it on demand as needed,
+
+00:08:49.596 --> 00:08:52.666 A:middle
+but during development, Xcode
+stands in for the App Store,
+
+00:08:52.816 --> 00:08:53.666 A:middle
+whether you are developing
+
+00:08:53.666 --> 00:08:55.446 A:middle
+against a device
+or the simulator.
+
+00:08:55.886 --> 00:08:59.216 A:middle
+And it hosts it to your app
+and delivers it on demand.
+
+
+
+00:09:00.056 --> 00:09:03.006 A:middle
+Now, another tool in the Xcode
+tool box is the Xcode Server.
+
+00:09:03.496 --> 00:09:05.256 A:middle
+You can set this up in
+your own department,
+
+00:09:05.956 --> 00:09:09.086 A:middle
+such that the app along with
+the ODR content is available
+
+00:09:09.086 --> 00:09:10.746 A:middle
+on that server, for example,
+
+00:09:10.746 --> 00:09:13.946 A:middle
+your Q/A engineering
+group to test your app.
+
+00:09:14.916 --> 00:09:16.406 A:middle
+And as you might expect,
+
+00:09:16.566 --> 00:09:18.526 A:middle
+TestFlight is fully
+integrated with ODR.
+
+00:09:20.036 --> 00:09:21.766 A:middle
+And finally, if you
+are deploying an app
+
+00:09:21.766 --> 00:09:24.796 A:middle
+into Enterprise, you can
+actually host ODR content
+
+00:09:24.796 --> 00:09:27.886 A:middle
+on a web server inside of your
+enterprise including behind a
+
+00:09:27.886 --> 00:09:31.006 A:middle
+secure login so that not just
+anyone can get at that content.
+
+00:09:32.296 --> 00:09:34.156 A:middle
+So that's where we
+host ODR content.
+
+00:09:34.676 --> 00:09:36.056 A:middle
+All right.
+
+00:09:36.836 --> 00:09:38.126 A:middle
+So how do you get started?
+
+00:09:38.786 --> 00:09:40.296 A:middle
+Well, as a developer,
+the first thing you need
+
+00:09:40.296 --> 00:09:43.896 A:middle
+to do is take a look at all the
+many assets you have in your app
+
+00:09:43.896 --> 00:09:45.546 A:middle
+and start to identify them.
+
+00:09:45.546 --> 00:09:46.946 A:middle
+You need to categorize them.
+
+00:09:47.826 --> 00:09:50.566 A:middle
+You use this, again, by tagging
+them with simple strings.
+
+00:09:51.016 --> 00:09:53.146 A:middle
+These are all of the assets
+that are in Level 1 of my game.
+
+00:09:53.786 --> 00:09:55.696 A:middle
+These are the assets
+for Level 2 of my game.
+
+00:09:55.936 --> 00:09:58.266 A:middle
+And you know, there are some
+shared assets between levels?
+
+00:09:59.286 --> 00:09:59.746 A:middle
+There they are.
+
+00:09:59.746 --> 00:10:03.276 A:middle
+So you can tag assets with
+multiple tags in order
+
+
+
+00:09:59.746 --> 00:10:03.276 A:middle
+So you can tag assets with
+multiple tags in order
+
+00:10:03.276 --> 00:10:06.216 A:middle
+to indicate the sharing
+and avoid duplication.
+
+00:10:07.046 --> 00:10:10.426 A:middle
+So this is part one of
+getting ready to use ODR
+
+00:10:10.426 --> 00:10:11.916 A:middle
+and that was your
+job as a developer.
+
+00:10:12.256 --> 00:10:15.386 A:middle
+Now, Xcode does its job because
+it takes all this tagging
+
+00:10:15.736 --> 00:10:17.946 A:middle
+and groups these
+into asset packs.
+
+00:10:18.086 --> 00:10:20.756 A:middle
+In this case, we ended up
+with three asset packs.
+
+00:10:21.656 --> 00:10:25.356 A:middle
+We have the asset pack for Level
+1, the asset pack for Level 2,
+
+00:10:25.656 --> 00:10:27.676 A:middle
+and we ended up with
+a third asset pack
+
+00:10:27.676 --> 00:10:30.116 A:middle
+which is the shared assets
+between those two levels,
+
+00:10:30.716 --> 00:10:32.266 A:middle
+again, avoiding duplication.
+
+00:10:33.776 --> 00:10:36.206 A:middle
+Okay. So Xcode has done its job.
+
+00:10:36.206 --> 00:10:37.716 A:middle
+Now, it's back to
+you, the developer.
+
+00:10:39.026 --> 00:10:39.956 A:middle
+The first thing you need
+
+00:10:39.956 --> 00:10:42.306 A:middle
+to do is basically just
+request the resources: Hey,
+
+00:10:42.606 --> 00:10:44.456 A:middle
+I need everything for Level 1,
+
+00:10:45.036 --> 00:10:48.406 A:middle
+and down come the two asset
+packs, both the dedicated one
+
+00:10:48.516 --> 00:10:51.476 A:middle
+to Level 1, and then the
+one that was sharing assets
+
+00:10:51.476 --> 00:10:52.736 A:middle
+between Level 1 and Level 2.
+
+00:10:52.816 --> 00:10:55.386 A:middle
+And because we brought down
+that shared asset pack,
+
+00:10:55.896 --> 00:10:58.706 A:middle
+when we request Level
+2, we get those assets
+
+00:10:59.276 --> 00:11:01.416 A:middle
+and we already have the
+shared assets on the device.
+
+
+
+00:10:59.276 --> 00:11:01.416 A:middle
+and we already have the
+shared assets on the device.
+
+00:11:02.686 --> 00:11:07.326 A:middle
+So this is a high level overview
+of what ODR is all about as well
+
+00:11:07.326 --> 00:11:09.146 A:middle
+as how to build an
+ODR application.
+
+00:11:09.146 --> 00:11:10.956 A:middle
+Now, I would like to
+invite on stage Tony Parker
+
+00:11:11.256 --> 00:11:13.516 A:middle
+to show us how it's done
+in Xcode with a real API.
+
+00:11:13.896 --> 00:11:14.146 A:middle
+Tony.
+
+00:11:15.516 --> 00:11:20.086 A:middle
+[Applause]
+
+00:11:20.586 --> 00:11:21.306 A:middle
+&gt;&gt; TONY PARKER: Thanks, Steve.
+
+00:11:21.956 --> 00:11:23.626 A:middle
+So, again, my name is Tony
+Parker, I'm the manager
+
+00:11:23.626 --> 00:11:24.796 A:middle
+of the Foundation team at Apple.
+
+00:11:25.426 --> 00:11:26.976 A:middle
+So Steve gave you
+a basic overview
+
+00:11:26.976 --> 00:11:28.656 A:middle
+of how the ODR system works.
+
+00:11:29.046 --> 00:11:31.196 A:middle
+Now we are going to dive
+in to the API that we use
+
+00:11:31.196 --> 00:11:33.606 A:middle
+in your application to
+actually make those requests.
+
+00:11:34.296 --> 00:11:37.516 A:middle
+There is really just one piece
+of API that you need to know.
+
+00:11:37.616 --> 00:11:41.206 A:middle
+It's a new class in Foundation
+called NSBundleResourceRequest.
+
+00:11:41.686 --> 00:11:45.346 A:middle
+This class follows the
+command design pattern.
+
+00:11:45.596 --> 00:11:47.066 A:middle
+So what that means is
+you're going to set up one
+
+00:11:47.066 --> 00:11:48.506 A:middle
+of these objects with
+a set of options,
+
+00:11:49.096 --> 00:11:51.186 A:middle
+including of course the set of
+tags that you are interested
+
+00:11:51.186 --> 00:11:54.066 A:middle
+in using, and then you tell
+it to begin its request.
+
+00:11:54.626 --> 00:11:58.666 A:middle
+So you can create as many of
+these objects as you need.
+
+00:11:58.726 --> 00:12:00.866 A:middle
+That's because the system
+will ref count the tags
+
+
+
+00:11:58.726 --> 00:12:00.866 A:middle
+That's because the system
+will ref count the tags
+
+00:12:00.866 --> 00:12:01.466 A:middle
+under the hood.
+
+00:12:01.466 --> 00:12:04.006 A:middle
+So if you have several different
+parts of your application
+
+00:12:04.006 --> 00:12:08.206 A:middle
+that use ODR and perhaps use
+overlapping tags, you don't need
+
+00:12:08.206 --> 00:12:10.016 A:middle
+to create a manager
+class to keep track
+
+00:12:10.016 --> 00:12:11.846 A:middle
+of which ones you
+have in use at a time.
+
+00:12:11.846 --> 00:12:13.186 A:middle
+We will go ahead
+and do that for you.
+
+00:12:15.656 --> 00:12:19.156 A:middle
+The most important point,
+design point about this class is
+
+00:12:19.156 --> 00:12:21.016 A:middle
+that the request is decoupled
+
+00:12:21.016 --> 00:12:23.076 A:middle
+from the actual use
+of the resources.
+
+00:12:23.766 --> 00:12:26.666 A:middle
+What this means is that all
+of the APIs that you use today
+
+00:12:26.666 --> 00:12:28.426 A:middle
+in your application and
+you are already familiar
+
+00:12:28.426 --> 00:12:31.186 A:middle
+with like NSBundle's
+URLForResource,
+
+00:12:31.456 --> 00:12:35.546 A:middle
+NSData's dataWithContentsOfURL
+or UIImage imageNamed,
+
+00:12:36.116 --> 00:12:38.316 A:middle
+all of those APIs
+remain actually as is.
+
+00:12:38.796 --> 00:12:41.056 A:middle
+You just need to tell the
+system in advance using one
+
+00:12:41.056 --> 00:12:43.076 A:middle
+of these request objects
+that you are going
+
+00:12:43.076 --> 00:12:44.626 A:middle
+to need those resources
+to be present.
+
+00:12:47.416 --> 00:12:49.476 A:middle
+This object forms a very
+simple state machine.
+
+00:12:49.726 --> 00:12:51.276 A:middle
+So start off in init.
+
+00:12:52.286 --> 00:12:53.916 A:middle
+We move it to this
+requested state
+
+00:12:53.916 --> 00:12:56.066 A:middle
+when we anticipate the
+need for those resources.
+
+00:12:56.686 --> 00:12:59.926 A:middle
+And we're going to get back
+a completion handler callback
+
+00:12:59.926 --> 00:13:02.506 A:middle
+which will tell us either the
+resources are now available
+
+
+
+00:12:59.926 --> 00:13:02.506 A:middle
+which will tell us either the
+resources are now available
+
+00:13:02.506 --> 00:13:05.846 A:middle
+for you to use and you can
+continue to use those APIs
+
+00:13:05.846 --> 00:13:08.906 A:middle
+that we just discussed,
+or an error occurred.
+
+00:13:09.166 --> 00:13:11.816 A:middle
+Now, of course, when you are
+using ODR there are a few errors
+
+00:13:11.816 --> 00:13:14.046 A:middle
+that can occur that we may
+need to present to the user.
+
+00:13:14.366 --> 00:13:16.796 A:middle
+That could include, perhaps,
+there is no network available
+
+00:13:16.796 --> 00:13:18.196 A:middle
+and we need it to
+download the content,
+
+00:13:18.566 --> 00:13:20.796 A:middle
+or maybe there is not enough
+disk space on the device even
+
+00:13:20.796 --> 00:13:23.176 A:middle
+after we tried purging
+to hold the content.
+
+00:13:23.616 --> 00:13:25.916 A:middle
+So in any case, you need to
+present that to the user.
+
+00:13:25.976 --> 00:13:27.856 A:middle
+Perhaps there is something they
+can do to resolve the issue.
+
+00:13:28.336 --> 00:13:31.646 A:middle
+So if the resources were
+available, then, as I said,
+
+00:13:31.646 --> 00:13:34.936 A:middle
+you can continue to use
+them, and also important,
+
+00:13:34.936 --> 00:13:37.266 A:middle
+when you are done with those
+resources, please tell us
+
+00:13:37.266 --> 00:13:39.616 A:middle
+about it, and there are
+two mechanisms to do that.
+
+00:13:39.976 --> 00:13:42.836 A:middle
+The first is to call an
+explicit API on this class
+
+00:13:43.246 --> 00:13:45.236 A:middle
+that tells us you are
+finished with the content.
+
+00:13:46.016 --> 00:13:48.546 A:middle
+The second is to allow the
+class to be deallocated,
+
+00:13:48.546 --> 00:13:49.876 A:middle
+allow the object
+to be deallocated,
+
+00:13:49.876 --> 00:13:51.876 A:middle
+in which case we are
+going to go ahead
+
+00:13:51.876 --> 00:13:54.166 A:middle
+and end the request
+on your behalf.
+
+00:13:54.626 --> 00:13:58.026 A:middle
+So here is what the
+basic methods look like.
+
+00:13:58.616 --> 00:14:01.526 A:middle
+First, an initializer, and
+you can see it takes a set
+
+
+
+00:13:58.616 --> 00:14:01.526 A:middle
+First, an initializer, and
+you can see it takes a set
+
+00:14:01.526 --> 00:14:02.096 A:middle
+of strings.
+
+00:14:02.206 --> 00:14:04.316 A:middle
+Those are the tags that you
+are interested in requesting.
+
+00:14:05.516 --> 00:14:07.736 A:middle
+The method to begin
+the request is called
+
+00:14:07.736 --> 00:14:09.996 A:middle
+beginAccessingResources
+WithCompletionHander,
+
+00:14:09.996 --> 00:14:11.536 A:middle
+and you can see there's
+the closure
+
+00:14:11.536 --> 00:14:13.816 A:middle
+that has the NSError argument.
+
+00:14:15.176 --> 00:14:16.306 A:middle
+And finally that method
+
+00:14:16.306 --> 00:14:17.706 A:middle
+that tells the system
+you are finished,
+
+00:14:18.016 --> 00:14:20.186 A:middle
+the explicit
+endAccessingResources call.
+
+00:14:22.306 --> 00:14:24.796 A:middle
+So next I would like to go
+into a demo and show you some
+
+00:14:24.796 --> 00:14:25.776 A:middle
+of this API in action.
+
+00:14:25.776 --> 00:14:26.426 A:middle
+All right.
+
+00:14:34.116 --> 00:14:38.586 A:middle
+So here you have our demo app
+today, it's called iTravel,
+
+00:14:38.996 --> 00:14:41.866 A:middle
+and iTravel is called iTravel
+because it's a travel guide
+
+00:14:42.226 --> 00:14:44.576 A:middle
+that gives you all kinds
+interesting information
+
+00:14:44.576 --> 00:14:48.376 A:middle
+about countries whose names
+begin with the letter I.
+
+00:14:48.376 --> 00:14:50.446 A:middle
+As you can see, we support
+two countries today:
+
+00:14:50.736 --> 00:14:52.446 A:middle
+There's Iceland and Italy.
+
+00:14:53.006 --> 00:14:54.896 A:middle
+Now, this kind of application
+is a great candidate
+
+00:14:54.896 --> 00:14:56.626 A:middle
+for adopting On Demand
+Resources.
+
+00:14:56.666 --> 00:14:58.606 A:middle
+And that is, the reason is
+
+00:14:58.606 --> 00:15:00.226 A:middle
+because when the
+user buys this app,
+
+
+
+00:14:58.606 --> 00:15:00.226 A:middle
+because when the
+user buys this app,
+
+00:15:00.546 --> 00:15:03.186 A:middle
+they are maybe not interested
+in getting all the information
+
+00:15:03.186 --> 00:15:06.226 A:middle
+about both Iceland and
+Italy or at least not both
+
+00:15:06.226 --> 00:15:09.596 A:middle
+at the same time so we
+can make the install size
+
+00:15:09.596 --> 00:15:12.226 A:middle
+and the download size much
+smaller by downloading
+
+00:15:12.226 --> 00:15:13.466 A:middle
+that content on demand.
+
+00:15:14.136 --> 00:15:15.746 A:middle
+So before we adopt
+ODR I just want
+
+00:15:15.746 --> 00:15:18.076 A:middle
+to show you a brief
+example of how you use this.
+
+00:15:18.446 --> 00:15:20.426 A:middle
+First I will go ahead
+and visit Iceland.
+
+00:15:21.796 --> 00:15:24.596 A:middle
+You can see that I get a list
+here of points of interest.
+
+00:15:25.216 --> 00:15:26.786 A:middle
+So I can pick one of these
+
+00:15:27.216 --> 00:15:29.626 A:middle
+and there is some high
+quality pictures, perhaps,
+
+00:15:29.626 --> 00:15:32.086 A:middle
+or guide text, and
+each of these points
+
+00:15:32.086 --> 00:15:34.136 A:middle
+of interest has more pictures.
+
+00:15:34.536 --> 00:15:39.436 A:middle
+So you can see that this could
+add up to quite a bit of data.
+
+00:15:39.576 --> 00:15:41.676 A:middle
+And Italy, of course,
+behaves the same way,
+
+00:15:42.026 --> 00:15:43.896 A:middle
+but with a different
+set of content.
+
+00:15:44.386 --> 00:15:48.356 A:middle
+So let's look at how this
+application is built.
+
+00:15:48.356 --> 00:15:53.186 A:middle
+We are going to spend
+most of our time today
+
+00:15:53.186 --> 00:15:56.156 A:middle
+in just one class, it's called
+the AlbumTableViewController.
+
+00:15:56.156 --> 00:15:58.976 A:middle
+This is the view controller
+that controls this view
+
+00:15:58.976 --> 00:16:01.346 A:middle
+that we see right here with
+the list of points of interest.
+
+
+
+00:15:58.976 --> 00:16:01.346 A:middle
+that we see right here with
+the list of points of interest.
+
+00:16:02.066 --> 00:16:03.286 A:middle
+So let me show you how it works.
+
+00:16:04.486 --> 00:16:07.056 A:middle
+When we segue into
+this view, we are going
+
+00:16:07.056 --> 00:16:09.656 A:middle
+to have this function
+called loadAlbum,
+
+00:16:09.656 --> 00:16:11.716 A:middle
+and the argument is going to be
+which album we are interested
+
+00:16:11.716 --> 00:16:13.526 A:middle
+in looking at, either
+Italy or Iceland.
+
+00:16:14.856 --> 00:16:17.116 A:middle
+We set our title and we
+call this helper function
+
+00:16:17.116 --> 00:16:18.416 A:middle
+called populateTable.
+
+00:16:19.136 --> 00:16:21.456 A:middle
+Now, here in the populateTable
+function, we are going
+
+00:16:21.456 --> 00:16:25.936 A:middle
+to use NSBundle's URLForResource
+to find a JSON file
+
+00:16:25.936 --> 00:16:28.216 A:middle
+which describes all of the
+points of interest with pictures
+
+00:16:28.216 --> 00:16:29.696 A:middle
+to show what the captions are.
+
+00:16:29.696 --> 00:16:33.006 A:middle
+We are using NSData's
+contentsOfURL method
+
+00:16:33.006 --> 00:16:35.026 A:middle
+to actually read that
+JSON file from disk.
+
+00:16:35.026 --> 00:16:38.156 A:middle
+We are using NSJSONSerialization
+to parse it.
+
+00:16:38.206 --> 00:16:40.476 A:middle
+We are setting up some more
+detailed label text here,
+
+00:16:40.716 --> 00:16:42.676 A:middle
+and finally we ask the
+tableView to reload itself,
+
+00:16:43.056 --> 00:16:43.856 A:middle
+and the data source
+
+00:16:43.856 --> 00:16:47.246 A:middle
+in the tableView is
+using UIImage.imageNamed
+
+00:16:47.386 --> 00:16:49.426 A:middle
+to actually show that,
+to fetch that picture.
+
+00:16:49.986 --> 00:16:54.246 A:middle
+So the important point here
+is that as we adopt ODR
+
+00:16:54.246 --> 00:16:55.926 A:middle
+in this application, nothing
+
+00:16:55.926 --> 00:16:57.916 A:middle
+in this populateTable
+function has to change.
+
+00:16:58.446 --> 00:17:00.766 A:middle
+So, again, all of the
+APIs that you use today
+
+
+
+00:16:58.446 --> 00:17:00.766 A:middle
+So, again, all of the
+APIs that you use today
+
+00:17:00.766 --> 00:17:04.536 A:middle
+that access contents of files
+on disk or finds those files
+
+00:17:04.536 --> 00:17:07.386 A:middle
+like NSBundles, those
+remain exactly the same.
+
+00:17:07.965 --> 00:17:10.316 A:middle
+So the first thing we are going
+
+00:17:10.316 --> 00:17:12.656 A:middle
+to do is actually add some
+tags to our application.
+
+00:17:13.006 --> 00:17:16.086 A:middle
+So to do that, I will bring
+up the inspector here,
+
+00:17:16.806 --> 00:17:19.536 A:middle
+and you can see that I have
+already organized my application
+
+00:17:19.536 --> 00:17:22.036 A:middle
+to have a group called
+Resources,
+
+00:17:22.396 --> 00:17:25.195 A:middle
+and folders that contain
+some of my content.
+
+00:17:25.346 --> 00:17:29.126 A:middle
+So this one contains all of the
+picture from Iceland, this one,
+
+00:17:29.126 --> 00:17:32.986 A:middle
+all of the pictures from
+Italy, and these JSON files
+
+00:17:32.986 --> 00:17:33.756 A:middle
+that I was discussing.
+
+00:17:33.756 --> 00:17:36.786 A:middle
+So what I'm going
+to do is go ahead
+
+00:17:36.786 --> 00:17:40.676 A:middle
+and select both the JSON file
+for Iceland and the folder
+
+00:17:41.206 --> 00:17:43.706 A:middle
+and look on the right side
+here in this inspector.
+
+00:17:43.706 --> 00:17:46.566 A:middle
+You see there is a new field,
+On Demand Resource Tags,
+
+00:17:47.376 --> 00:17:49.206 A:middle
+so all I have to do
+here is start typing
+
+00:17:49.406 --> 00:17:52.406 A:middle
+and we will tag our
+content as Iceland.
+
+00:17:52.446 --> 00:17:55.446 A:middle
+And we will do the same
+for our Italy content.
+
+00:17:56.156 --> 00:18:02.836 A:middle
+So next we just, so that,
+what that does is, of course,
+
+
+
+00:17:56.156 --> 00:18:02.836 A:middle
+So next we just, so that,
+what that does is, of course,
+
+00:18:02.836 --> 00:18:05.736 A:middle
+as Steve explained, tell Xcode
+how to split up your content.
+
+00:18:06.086 --> 00:18:09.276 A:middle
+Now, the next part is to
+tell the system at runtime
+
+00:18:09.576 --> 00:18:11.606 A:middle
+that when we anticipate the need
+
+00:18:11.606 --> 00:18:12.936 A:middle
+for that content
+to be available.
+
+00:18:12.936 --> 00:18:15.286 A:middle
+So we will do that here
+in this view controller.
+
+00:18:15.286 --> 00:18:18.906 A:middle
+So the first thing I'm going to
+do is add an I var to my class
+
+00:18:18.956 --> 00:18:21.176 A:middle
+that holds the class that
+we've been talking about,
+
+00:18:21.176 --> 00:18:22.366 A:middle
+NSBundleResourceRequest.
+
+00:18:22.996 --> 00:18:24.986 A:middle
+So what I'm doing is
+taking advantage of the fact
+
+00:18:24.986 --> 00:18:27.016 A:middle
+that when this view
+controller is torn down,
+
+00:18:27.456 --> 00:18:30.206 A:middle
+we maintain pretty tight
+control over this object.
+
+00:18:30.206 --> 00:18:33.316 A:middle
+So we can control its lifetime
+so when it's torn down we know
+
+00:18:33.316 --> 00:18:34.386 A:middle
+that we are done
+with the request
+
+00:18:34.386 --> 00:18:36.686 A:middle
+and we can allow the
+system to deallocate it
+
+00:18:36.686 --> 00:18:39.366 A:middle
+and that will tell the system
+we are done with the content.
+
+00:18:39.766 --> 00:18:44.266 A:middle
+Next in our loadAlbum function
+before we call populate table,
+
+00:18:44.266 --> 00:18:47.516 A:middle
+we are going to create the
+request, we are passing
+
+00:18:47.516 --> 00:18:50.216 A:middle
+in the set of tags, in this
+case it's a set of one tag
+
+00:18:50.246 --> 00:18:51.856 A:middle
+which is either Italy
+or Iceland.
+
+00:18:52.416 --> 00:18:56.136 A:middle
+We call beginAccessingResources
+WithCompletionHandler (without
+
+00:18:56.306 --> 00:18:57.876 A:middle
+space), and when
+we get a result,
+
+00:18:58.026 --> 00:19:01.806 A:middle
+this closure will be called,
+and it may have an error.
+
+
+
+00:18:58.026 --> 00:19:01.806 A:middle
+this closure will be called,
+and it may have an error.
+
+00:19:02.156 --> 00:19:04.796 A:middle
+So on the main thread, because
+this completion handler will be
+
+00:19:04.796 --> 00:19:07.666 A:middle
+called on a non-main thread,
+we are going to first check
+
+00:19:07.666 --> 00:19:08.946 A:middle
+to make sure that
+the error is nil.
+
+00:19:09.326 --> 00:19:11.226 A:middle
+If it's non-nil, then
+an error occurred
+
+00:19:11.226 --> 00:19:13.406 A:middle
+and as we discussed it's
+important to present
+
+00:19:13.406 --> 00:19:15.686 A:middle
+that to the user, which I'm
+doing in a helper function here.
+
+00:19:16.616 --> 00:19:18.996 A:middle
+Then we call the exact
+same populateTable function
+
+00:19:19.266 --> 00:19:20.476 A:middle
+that we just went through.
+
+00:19:20.666 --> 00:19:22.016 A:middle
+So, again, nothing
+in there changed.
+
+00:19:22.746 --> 00:19:24.286 A:middle
+Let's go ahead and run
+the application again
+
+00:19:24.286 --> 00:19:25.806 A:middle
+and see how this looks.
+
+00:19:29.636 --> 00:19:33.016 A:middle
+So now, I'm going to visit
+Iceland and we will see
+
+00:19:33.016 --> 00:19:36.696 A:middle
+that my content is here because
+we have made a request for it,
+
+00:19:36.696 --> 00:19:39.676 A:middle
+and I can choose some of these
+pictures or points of interest,
+
+00:19:40.036 --> 00:19:42.196 A:middle
+and all of my content
+is available just
+
+00:19:42.196 --> 00:19:44.146 A:middle
+as if it had been part of the
+application from the start.
+
+00:19:44.146 --> 00:19:46.166 A:middle
+Now, this is a good opportunity
+
+00:19:46.166 --> 00:19:48.186 A:middle
+to show you a new
+debugging feature in Xcode
+
+00:19:48.186 --> 00:19:49.746 A:middle
+that can really help
+you to understand
+
+00:19:49.996 --> 00:19:51.816 A:middle
+if you are using
+these request objects
+
+00:19:51.816 --> 00:19:52.826 A:middle
+in the way you think you are.
+
+00:19:52.826 --> 00:19:54.956 A:middle
+And that's a new debug gauge.
+
+00:19:55.766 --> 00:19:56.366 A:middle
+So I'm going to bring
+
+00:19:56.366 --> 00:19:58.766 A:middle
+up the debug gauge view
+here and choose disk.
+
+00:19:59.296 --> 00:20:01.676 A:middle
+And you'll notice in the middle
+we have a new section called
+
+
+
+00:19:59.296 --> 00:20:01.676 A:middle
+And you'll notice in the middle
+we have a new section called
+
+00:20:02.106 --> 00:20:03.136 A:middle
+On Demand Resources.
+
+00:20:03.616 --> 00:20:05.886 A:middle
+It lists all of the tags that
+are part of your application,
+
+00:20:06.746 --> 00:20:10.776 A:middle
+so Iceland and Italy, their
+size and their current status.
+
+00:20:11.196 --> 00:20:13.696 A:middle
+You notice that Iceland
+is listed as in use,
+
+00:20:13.996 --> 00:20:15.666 A:middle
+and that makes sense
+because we are looking
+
+00:20:15.666 --> 00:20:18.496 A:middle
+at the Iceland content right
+here and it remains in use
+
+00:20:18.496 --> 00:20:19.886 A:middle
+as I view some of
+these pictures.
+
+00:20:20.326 --> 00:20:21.826 A:middle
+But if I go back
+to the main table
+
+00:20:21.826 --> 00:20:24.446 A:middle
+of contents its status
+is changed from in use
+
+00:20:24.446 --> 00:20:26.696 A:middle
+to downloaded, and
+that's because again
+
+00:20:26.696 --> 00:20:28.366 A:middle
+that request object
+was deallocated
+
+00:20:28.556 --> 00:20:31.456 A:middle
+and the system now knows we are
+no longer using that content.
+
+00:20:31.916 --> 00:20:35.726 A:middle
+We didn't delete it off disk
+immediately so if you go back
+
+00:20:35.726 --> 00:20:37.756 A:middle
+to Iceland the content
+is available again
+
+00:20:38.016 --> 00:20:40.036 A:middle
+and the status changes
+back to in use.
+
+00:20:40.036 --> 00:20:42.856 A:middle
+Let's see what happens
+if I visit Italy now.
+
+00:20:42.856 --> 00:20:45.896 A:middle
+Now, you notice that it's going
+
+00:20:45.896 --> 00:20:48.966 A:middle
+to take some time to
+show this content.
+
+00:20:49.436 --> 00:20:52.856 A:middle
+And the reason for
+that is that the size
+
+00:20:52.856 --> 00:20:55.796 A:middle
+of the Italy tag is actually
+much larger than the one
+
+00:20:55.796 --> 00:20:57.686 A:middle
+for Iceland; it's
+130 megabytes here.
+
+00:20:58.386 --> 00:21:00.986 A:middle
+Now, there are two things
+that are important to do here.
+
+
+
+00:20:58.386 --> 00:21:00.986 A:middle
+Now, there are two things
+that are important to do here.
+
+00:21:01.226 --> 00:21:05.856 A:middle
+The first is to actually reduce
+the size of the tagged content,
+
+00:21:05.856 --> 00:21:08.576 A:middle
+split it up into smaller
+chunks, and we are going to go
+
+00:21:08.576 --> 00:21:10.776 A:middle
+into some more detail on the
+best practices for that later,
+
+00:21:11.316 --> 00:21:12.956 A:middle
+but for now, what I want
+
+00:21:12.956 --> 00:21:15.286 A:middle
+to do is show you how you
+can adopt progress reporting
+
+00:21:15.386 --> 00:21:18.106 A:middle
+in your application
+in conjunction
+
+00:21:18.106 --> 00:21:20.266 A:middle
+with NSBundleResourceRequest
+so that
+
+00:21:20.266 --> 00:21:22.546 A:middle
+when you are downloading
+this content you can display
+
+00:21:22.546 --> 00:21:25.406 A:middle
+something to the user so they
+understand what's going on.
+
+00:21:25.406 --> 00:21:32.146 A:middle
+So let's go back to our
+AlbumTableViewController class.
+
+00:21:32.596 --> 00:21:37.816 A:middle
+So what we are going
+to do is take advantage
+
+00:21:37.816 --> 00:21:40.806 A:middle
+of NSBundleResourceRequest
+support for NSProgress,
+
+00:21:40.806 --> 00:21:44.056 A:middle
+which is a foundation class
+you can use to report progress
+
+00:21:44.056 --> 00:21:47.216 A:middle
+and compose progress
+across your application.
+
+00:21:48.486 --> 00:21:51.866 A:middle
+NSProgress supports key value
+observing, so what we're going
+
+00:21:51.866 --> 00:21:54.526 A:middle
+to do is add this view
+controller as an observer
+
+00:21:54.526 --> 00:21:58.886 A:middle
+of the progress and in response
+to updates, change some UI
+
+00:21:58.886 --> 00:22:00.486 A:middle
+on the screen, a
+UI progress view,
+
+
+
+00:21:58.886 --> 00:22:00.486 A:middle
+on the screen, a
+UI progress view,
+
+00:22:00.486 --> 00:22:01.926 A:middle
+and some detail label text.
+
+00:22:02.916 --> 00:22:06.366 A:middle
+So right here after
+we create the request,
+
+00:22:06.526 --> 00:22:08.716 A:middle
+we are going to call
+addObserver.
+
+00:22:09.146 --> 00:22:10.376 A:middle
+This class will be the observer.
+
+00:22:10.376 --> 00:22:12.126 A:middle
+The progress property
+
+00:22:12.126 --> 00:22:14.576 A:middle
+of the request is the
+object we are observing.
+
+00:22:15.606 --> 00:22:18.296 A:middle
+The key path of the progress
+is fractionCompleted.
+
+00:22:18.906 --> 00:22:21.396 A:middle
+And as always when
+using KVO it's important
+
+00:22:21.396 --> 00:22:23.256 A:middle
+to specify a unique
+context pointer
+
+00:22:23.616 --> 00:22:25.076 A:middle
+which I have defined
+elsewhere in this file.
+
+00:22:26.016 --> 00:22:29.366 A:middle
+Also, we are going to go ahead
+and unhide a UI progressView
+
+00:22:29.546 --> 00:22:31.596 A:middle
+that I have already hooked
+up in our storyboard.
+
+00:22:32.246 --> 00:22:36.766 A:middle
+When we get our response, that's
+a great time to removeObserver
+
+00:22:36.856 --> 00:22:39.096 A:middle
+because after that point
+we are no longer interested
+
+00:22:39.096 --> 00:22:40.596 A:middle
+in updates to the progress.
+
+00:22:41.426 --> 00:22:45.376 A:middle
+And then on the main thread we
+are also going to unhide the --
+
+00:22:45.376 --> 00:22:47.516 A:middle
+sorry, rehide the
+UI progressView
+
+00:22:47.516 --> 00:22:49.026 A:middle
+because we don't want
+our user to be staring
+
+00:22:49.026 --> 00:22:50.126 A:middle
+at complete progress bars.
+
+00:22:50.536 --> 00:22:53.336 A:middle
+So that adds ourselves
+as an observer
+
+00:22:53.686 --> 00:22:56.566 A:middle
+and then the second part of
+this is to actually do something
+
+00:22:56.566 --> 00:22:58.246 A:middle
+when the value changes,
+
+00:22:58.246 --> 00:23:00.486 A:middle
+and we do that in the
+traditional KVO method,
+
+
+
+00:22:58.246 --> 00:23:00.486 A:middle
+and we do that in the
+traditional KVO method,
+
+00:23:00.796 --> 00:23:02.066 A:middle
+observeValueForKeyPath.
+
+00:23:02.706 --> 00:23:04.186 A:middle
+So here we are first
+checking to make sure
+
+00:23:04.186 --> 00:23:07.106 A:middle
+that this is the update that
+we are interested in observing
+
+00:23:07.106 --> 00:23:09.356 A:middle
+by checking the context
+pointer and the key path,
+
+00:23:10.046 --> 00:23:13.216 A:middle
+and on the main thread, again,
+because this update will come
+
+00:23:13.216 --> 00:23:14.956 A:middle
+on a non-main thread,
+we are going
+
+00:23:14.956 --> 00:23:18.396 A:middle
+to update our UI progressView by
+setting its progress property,
+
+00:23:18.866 --> 00:23:20.176 A:middle
+and we are going
+to take advantage
+
+00:23:20.176 --> 00:23:24.596 A:middle
+of NSProgress's support for an
+automatic localized description
+
+00:23:24.596 --> 00:23:26.476 A:middle
+by using its
+localizedDescription method.
+
+00:23:27.006 --> 00:23:30.526 A:middle
+Let's go ahead and run this
+again and see how that works.
+
+00:23:36.196 --> 00:23:39.036 A:middle
+So this time when I visit
+Italy, you will notice
+
+00:23:39.036 --> 00:23:41.546 A:middle
+that at the bottom our detail
+label text has been updated
+
+00:23:41.546 --> 00:23:45.396 A:middle
+to show a percent completed, and
+then as the download completes,
+
+00:23:45.396 --> 00:23:48.196 A:middle
+our UI progress view is
+updated to show the user
+
+00:23:48.196 --> 00:23:49.086 A:middle
+that something has happened.
+
+00:23:50.156 --> 00:23:52.696 A:middle
+Also, again, we didn't
+delete the content eagerly
+
+00:23:52.696 --> 00:23:54.566 A:middle
+so if we go back and
+visit Italy again,
+
+00:23:54.836 --> 00:23:56.746 A:middle
+you notice that the content
+is immediately available
+
+00:23:57.286 --> 00:24:00.216 A:middle
+because it's been cached by
+the On Demand Resources system.
+
+
+
+00:23:57.286 --> 00:24:00.216 A:middle
+because it's been cached by
+the On Demand Resources system.
+
+00:24:00.746 --> 00:24:03.026 A:middle
+Let's go back to our slides.
+
+00:24:04.386 --> 00:24:13.106 A:middle
+So a few more things about
+the progress reporting part
+
+00:24:13.106 --> 00:24:13.666 A:middle
+of that demo.
+
+00:24:14.126 --> 00:24:16.136 A:middle
+So, again, you can find
+information on the progress
+
+00:24:16.136 --> 00:24:18.806 A:middle
+of the request by looking
+at the progress property.
+
+00:24:19.846 --> 00:24:22.276 A:middle
+We also support cancellation,
+pausing, and resuming
+
+00:24:22.276 --> 00:24:24.406 A:middle
+of the request, and those
+are methods you will find
+
+00:24:24.406 --> 00:24:27.286 A:middle
+on the NSProgress property,
+not the request itself.
+
+00:24:29.256 --> 00:24:33.256 A:middle
+Now, actually in iOS 9 and
+OS X 10.11 we have made a lot
+
+00:24:33.256 --> 00:24:34.376 A:middle
+of really great improvements
+
+00:24:34.436 --> 00:24:36.536 A:middle
+to the NSProgress
+class in Foundation.
+
+00:24:37.066 --> 00:24:40.266 A:middle
+So to learn more about how to
+use it, how to incorporate it
+
+00:24:40.266 --> 00:24:42.626 A:middle
+from this class and from
+elsewhere into your application
+
+00:24:42.936 --> 00:24:44.926 A:middle
+in a great way, I really
+recommend you check
+
+00:24:44.926 --> 00:24:47.606 A:middle
+out this talk on
+Friday, Best Practices
+
+00:24:47.606 --> 00:24:48.476 A:middle
+for Progress Reporting.
+
+00:24:49.086 --> 00:24:54.326 A:middle
+So the beginAccessing method
+that we used goes ahead
+
+00:24:54.326 --> 00:24:56.946 A:middle
+and downloads content if
+it's not already available.
+
+00:24:57.366 --> 00:24:59.686 A:middle
+However, sometimes you may
+want to only use the content
+
+00:24:59.686 --> 00:25:01.076 A:middle
+if it's already available
+on disk
+
+
+
+00:24:59.686 --> 00:25:01.076 A:middle
+if it's already available
+on disk
+
+00:25:01.076 --> 00:25:03.036 A:middle
+without triggering a
+download and you can do
+
+00:25:03.036 --> 00:25:05.026 A:middle
+that using what we call
+a conditional request.
+
+00:25:05.916 --> 00:25:06.766 A:middle
+Here's the method:
+
+00:25:06.826 --> 00:25:09.516 A:middle
+conditionallyBeginAccessing
+ResourcesWithCompletionHandler
+
+00:25:09.576 --> 00:25:10.936 A:middle
+(without space), and you can see
+
+00:25:10.936 --> 00:25:13.116 A:middle
+that the closure here
+has a Boolean argument,
+
+00:25:13.116 --> 00:25:14.766 A:middle
+so the answer is
+either yes or no,
+
+00:25:14.896 --> 00:25:17.166 A:middle
+depending on whether the content
+is already available or not.
+
+00:25:18.026 --> 00:25:22.716 A:middle
+So in the view of our state
+machine, we start off in init,
+
+00:25:23.316 --> 00:25:25.416 A:middle
+we move to this conditionally
+requested state
+
+00:25:25.416 --> 00:25:26.486 A:middle
+by invoking this method.
+
+00:25:26.486 --> 00:25:29.676 A:middle
+You will get your response,
+either it's available or not.
+
+00:25:29.896 --> 00:25:32.566 A:middle
+If it's available, then
+the resources are available
+
+00:25:32.566 --> 00:25:34.166 A:middle
+to you just as if you had
+called the other method.
+
+00:25:34.166 --> 00:25:36.606 A:middle
+So, again, be sure to
+call endAccessingResources
+
+00:25:36.876 --> 00:25:38.286 A:middle
+or allow the object
+to be deallocated.
+
+00:25:38.286 --> 00:25:40.996 A:middle
+If it wasn't available, at
+that point you have a choice:
+
+00:25:40.996 --> 00:25:43.676 A:middle
+You can either do nothing
+
+00:25:43.766 --> 00:25:46.066 A:middle
+or you can call the
+beginAccessingResources method
+
+00:25:46.066 --> 00:25:47.766 A:middle
+to cause that download
+to happen.
+
+00:25:48.316 --> 00:25:53.786 A:middle
+And finally, there are two kinds
+of priority APIs on this class
+
+00:25:53.786 --> 00:25:54.676 A:middle
+that I want to talk about.
+
+00:25:55.106 --> 00:25:56.766 A:middle
+The first is called
+a loading priority.
+
+00:25:56.766 --> 00:25:59.736 A:middle
+This is a double, and
+it provides ordering
+
+00:25:59.736 --> 00:26:02.156 A:middle
+for the outstanding
+requests in your application.
+
+
+
+00:25:59.736 --> 00:26:02.156 A:middle
+for the outstanding
+requests in your application.
+
+00:26:02.656 --> 00:26:04.056 A:middle
+The value ranges from 0 to 1.
+
+00:26:04.346 --> 00:26:06.896 A:middle
+So a value of 1 is
+the highest priority
+
+00:26:06.896 --> 00:26:08.486 A:middle
+and the value of
+0 is the lowest.
+
+00:26:08.486 --> 00:26:12.316 A:middle
+What we do with these values
+is provide a hint to the system
+
+00:26:12.376 --> 00:26:15.696 A:middle
+about which outstanding request
+should be prioritized first.
+
+00:26:16.176 --> 00:26:19.226 A:middle
+So because the value is not
+compared across applications
+
+00:26:19.226 --> 00:26:21.406 A:middle
+on the system, but
+only within your app,
+
+00:26:21.626 --> 00:26:23.356 A:middle
+you can use these
+values as you choose
+
+00:26:23.356 --> 00:26:25.926 A:middle
+to help order the requests
+according to your needs.
+
+00:26:26.476 --> 00:26:29.526 A:middle
+We do have a constant that
+you can use here actually;
+
+00:26:29.526 --> 00:26:33.636 A:middle
+it's called loading priority
+urgent, and this is for the case
+
+00:26:33.636 --> 00:26:35.866 A:middle
+where the user is doing nothing
+but waiting for the download
+
+00:26:35.866 --> 00:26:37.536 A:middle
+to finish and we will
+talk a little bit more
+
+00:26:37.536 --> 00:26:38.166 A:middle
+about this later.
+
+00:26:38.736 --> 00:26:42.636 A:middle
+The second kind of priority is
+called a preservation priority.
+
+00:26:43.266 --> 00:26:46.716 A:middle
+So this method provides ordering
+of purging for unused tags
+
+00:26:46.716 --> 00:26:48.486 A:middle
+in your app, so this
+is not associated
+
+00:26:48.486 --> 00:26:50.766 A:middle
+with a particular request,
+which is why it's an extension
+
+00:26:50.766 --> 00:26:54.606 A:middle
+on NSBundle, but instead
+with a tag or set of tags.
+
+00:26:55.066 --> 00:26:57.016 A:middle
+Again, the value
+ranges from 0 to 1,
+
+00:26:57.386 --> 00:26:59.586 A:middle
+with 0 being the least
+interesting to keep
+
+00:26:59.686 --> 00:27:01.396 A:middle
+and 1 being the most
+important to keep.
+
+
+
+00:26:59.686 --> 00:27:01.396 A:middle
+and 1 being the most
+important to keep.
+
+00:27:02.246 --> 00:27:05.116 A:middle
+So you can use this to
+tell the system a hint
+
+00:27:05.156 --> 00:27:08.646 A:middle
+about which content is the most
+important to keep if we run
+
+00:27:08.646 --> 00:27:10.306 A:middle
+into disk space pressure.
+
+00:27:10.916 --> 00:27:12.536 A:middle
+And the value, again,
+is compared only
+
+00:27:12.536 --> 00:27:13.716 A:middle
+across your own application,
+
+00:27:13.716 --> 00:27:15.486 A:middle
+not between applications
+on the system.
+
+00:27:16.006 --> 00:27:19.136 A:middle
+So with that, I would like
+to bring back Steve to go
+
+00:27:19.136 --> 00:27:21.206 A:middle
+over some more best
+practices about using ODR.
+
+00:27:22.016 --> 00:27:23.926 A:middle
+[Applause]
+
+00:27:23.926 --> 00:27:24.416 A:middle
+&gt;&gt; STEVE LEWALLEN:
+Thank you, Tony.
+
+00:27:28.286 --> 00:27:31.246 A:middle
+All right, so now we
+have an overview of ODR,
+
+00:27:31.246 --> 00:27:33.826 A:middle
+we understand what it's about,
+and we have seen it in use.
+
+00:27:34.336 --> 00:27:37.166 A:middle
+So now let's talk about
+how we build the optimal
+
+00:27:37.166 --> 00:27:38.036 A:middle
+ODR application.
+
+00:27:38.846 --> 00:27:40.896 A:middle
+Now, to do that, the
+first thing that you need
+
+00:27:40.896 --> 00:27:43.056 A:middle
+to do before you start
+tagging assets is
+
+00:27:43.056 --> 00:27:44.776 A:middle
+to consider your app's behavior,
+
+00:27:45.246 --> 00:27:48.036 A:middle
+because this will inform
+how you need to tag assets.
+
+00:27:48.866 --> 00:27:51.636 A:middle
+There are three patterns that
+I can offer up for you today
+
+00:27:51.636 --> 00:27:54.866 A:middle
+as to how you might
+use ODR content.
+
+00:27:55.156 --> 00:27:58.716 A:middle
+The first pattern, this is
+like Tony's iTravel app.
+
+00:27:59.056 --> 00:28:02.006 A:middle
+We couldn't quite anticipate
+where the user would want to go.
+
+
+
+00:27:59.056 --> 00:28:02.006 A:middle
+We couldn't quite anticipate
+where the user would want to go.
+
+00:28:02.726 --> 00:28:03.756 A:middle
+This is random access.
+
+00:28:03.756 --> 00:28:06.046 A:middle
+And in a random access app,
+
+00:28:06.046 --> 00:28:09.626 A:middle
+especially when the assets are
+larger, the content in total,
+
+00:28:09.626 --> 00:28:13.496 A:middle
+what you want to do is tag
+more assets and read things
+
+00:28:13.496 --> 00:28:16.526 A:middle
+in progressively so that as soon
+as the user makes a decision,
+
+00:28:16.846 --> 00:28:18.706 A:middle
+they can start to
+see some progress
+
+00:28:18.706 --> 00:28:19.806 A:middle
+of that decision in the UI.
+
+00:28:21.446 --> 00:28:24.516 A:middle
+The next pattern is
+called limited prediction.
+
+00:28:24.516 --> 00:28:27.886 A:middle
+This is like an open
+world game in some sense,
+
+00:28:28.356 --> 00:28:30.886 A:middle
+where though there may be
+almost an infinite number
+
+00:28:30.886 --> 00:28:33.036 A:middle
+of possibilities,
+at any one point
+
+00:28:33.036 --> 00:28:34.856 A:middle
+in time there's only
+a limited subset.
+
+00:28:34.856 --> 00:28:36.586 A:middle
+An so again what you want
+
+00:28:36.586 --> 00:28:40.446 A:middle
+to do is have many tags
+tagging smaller size content,
+
+00:28:40.726 --> 00:28:43.606 A:middle
+progressively read that
+in, but also be prepared
+
+00:28:43.606 --> 00:28:48.286 A:middle
+to discard content that the
+user has chosen not to view, as,
+
+00:28:48.286 --> 00:28:50.916 A:middle
+for example, the player in the
+game moves around the world
+
+00:28:50.916 --> 00:28:54.526 A:middle
+and they have left some
+location, you should stop using
+
+00:28:54.526 --> 00:28:56.636 A:middle
+that indexing resources,
+getting rid
+
+00:28:56.636 --> 00:28:58.346 A:middle
+of the NSBundleResourceRequest
+object.
+
+00:28:59.206 --> 00:29:02.086 A:middle
+Now, the third pattern is the
+pattern than I've been using
+
+
+
+00:28:59.206 --> 00:29:02.086 A:middle
+Now, the third pattern is the
+pattern than I've been using
+
+00:29:02.086 --> 00:29:03.956 A:middle
+in my example; it's
+the levels in the game.
+
+00:29:04.186 --> 00:29:06.676 A:middle
+This is the linear
+progression game much
+
+00:29:06.676 --> 00:29:07.926 A:middle
+like a first person shooter.
+
+00:29:08.446 --> 00:29:11.866 A:middle
+In this case, the biggest task
+that you have as a developer is
+
+00:29:11.866 --> 00:29:15.526 A:middle
+to anticipate well ahead of
+time what will be needed next,
+
+00:29:16.016 --> 00:29:17.896 A:middle
+but you are pretty
+much assured that all
+
+00:29:17.896 --> 00:29:20.206 A:middle
+of the content will be
+consumed, and so you just want
+
+00:29:20.206 --> 00:29:22.416 A:middle
+to start loading that content
+
+00:29:22.896 --> 00:29:26.406 A:middle
+within a reasonable
+amount of time.
+
+00:29:26.626 --> 00:29:31.546 A:middle
+Okay. Speaking of time, there is
+a rhythm to how you use ODR API.
+
+00:29:32.296 --> 00:29:34.036 A:middle
+So let's give ourselves
+a timeline
+
+00:29:34.106 --> 00:29:36.966 A:middle
+from the point the app
+launches until it exits.
+
+00:29:38.036 --> 00:29:41.196 A:middle
+Now, the well-written ODR
+application will anticipate
+
+00:29:41.196 --> 00:29:43.236 A:middle
+needing assets well beforehand.
+
+00:29:43.856 --> 00:29:45.366 A:middle
+Remember, this is a
+network-based app.
+
+00:29:45.366 --> 00:29:47.156 A:middle
+It's going to have to
+download it from the Store
+
+00:29:47.476 --> 00:29:49.466 A:middle
+or another location
+we went over earlier,
+
+00:29:49.596 --> 00:29:50.676 A:middle
+but that will take some time.
+
+00:29:51.286 --> 00:29:54.066 A:middle
+So as soon as you anticipate
+needing them, assets,
+
+00:29:54.246 --> 00:29:56.836 A:middle
+that's when you call
+beginAccessingResources
+
+00:29:56.836 --> 00:29:58.486 A:middle
+and that will kick
+off the download
+
+00:29:58.896 --> 00:30:00.766 A:middle
+if the assets are not
+yet on the device.
+
+
+
+00:29:58.896 --> 00:30:00.766 A:middle
+if the assets are not
+yet on the device.
+
+00:30:01.956 --> 00:30:05.826 A:middle
+Now, the best-laid plans can
+hit, well, network problems,
+
+00:30:05.826 --> 00:30:08.386 A:middle
+for example, and other
+things that may result
+
+00:30:08.386 --> 00:30:11.336 A:middle
+in you needing the resources
+before they are actually ready.
+
+00:30:11.786 --> 00:30:15.696 A:middle
+And, again, in this case, you
+want to bring up the progress UI
+
+00:30:15.696 --> 00:30:17.606 A:middle
+that Tony mentioned using
+the progress property
+
+00:30:17.606 --> 00:30:18.966 A:middle
+and NSBundleResourceRequest.
+
+00:30:19.696 --> 00:30:22.686 A:middle
+Share your learning screen,
+allow the download to continue,
+
+00:30:22.686 --> 00:30:25.296 A:middle
+and then at some point
+that will actually finish,
+
+00:30:25.586 --> 00:30:27.866 A:middle
+the resources will be
+available and you can take
+
+00:30:27.866 --> 00:30:31.076 A:middle
+down the loading screen, and you
+can begin to use the resources.
+
+00:30:31.936 --> 00:30:35.206 A:middle
+Once you are done using the
+resources, you absolutely want
+
+00:30:35.206 --> 00:30:37.276 A:middle
+to call endAccessingResources
+
+00:30:37.776 --> 00:30:40.056 A:middle
+or allow the
+NSBundleResourceRequest object
+
+00:30:40.126 --> 00:30:43.556 A:middle
+to dealloc in order to tell the
+system, hey, I'm done with this.
+
+00:30:44.026 --> 00:30:46.256 A:middle
+And remember that that
+doesn't mean we go off
+
+00:30:46.256 --> 00:30:47.206 A:middle
+and delete that content.
+
+00:30:47.296 --> 00:30:49.066 A:middle
+We are just making a note of it.
+
+00:30:49.336 --> 00:30:51.866 A:middle
+So this is the basic timeline
+you need to be aware of,
+
+00:30:52.186 --> 00:30:54.776 A:middle
+and you can make multiple
+these requests simultaneously,
+
+00:30:54.776 --> 00:30:57.906 A:middle
+you just need to remember
+the basic parts of this.
+
+00:30:58.666 --> 00:31:04.756 A:middle
+Okay. Now, I had talked about
+how ODR can benefit the user
+
+
+
+00:30:58.666 --> 00:31:04.756 A:middle
+Okay. Now, I had talked about
+how ODR can benefit the user
+
+00:31:04.756 --> 00:31:06.896 A:middle
+by improving the
+installation experience.
+
+00:31:07.756 --> 00:31:08.976 A:middle
+So how is that done?
+
+00:31:08.976 --> 00:31:10.666 A:middle
+Well, we need your
+help to do that.
+
+00:31:11.726 --> 00:31:13.176 A:middle
+What you need to do
+as a developer is
+
+00:31:13.176 --> 00:31:16.576 A:middle
+to consider the assets that the
+user is going to need as soon
+
+00:31:16.576 --> 00:31:17.406 A:middle
+as they launch the app.
+
+00:31:18.716 --> 00:31:20.846 A:middle
+When you know what those
+are, say the first level
+
+00:31:20.846 --> 00:31:24.126 A:middle
+in the game is a good one,
+then you want to take the tags
+
+00:31:24.126 --> 00:31:28.246 A:middle
+for those assets and put them in
+Xcode's Initial Install Tags UI.
+
+00:31:29.816 --> 00:31:33.676 A:middle
+This will tell the ODR system
+to make sure all the assets
+
+00:31:34.206 --> 00:31:39.066 A:middle
+with those tags are
+downloaded before the app shows
+
+00:31:39.066 --> 00:31:40.996 A:middle
+as being 100% installed.
+
+00:31:41.066 --> 00:31:43.186 A:middle
+That way when it does show
+it's completely installed
+
+00:31:43.186 --> 00:31:44.986 A:middle
+and the user taps on
+it, it's ready to go.
+
+00:31:45.056 --> 00:31:47.126 A:middle
+They are ready to
+play that game.
+
+00:31:47.126 --> 00:31:50.536 A:middle
+The size of your app that you
+see in the App Store is going
+
+00:31:50.536 --> 00:31:53.726 A:middle
+to be the size of the
+dot app plus the size
+
+00:31:53.726 --> 00:31:56.266 A:middle
+of the initial ODR content
+that you have tagged here,
+
+00:31:56.686 --> 00:31:58.046 A:middle
+so just to be aware
+and we will talk
+
+00:31:58.046 --> 00:31:59.706 A:middle
+about this point a
+little bit later as well.
+
+
+
+00:32:00.796 --> 00:32:04.406 A:middle
+Okay. So now let's talk about
+automating the installation
+
+00:32:04.406 --> 00:32:07.496 A:middle
+of ODR content between the
+time the app is actually fully
+
+00:32:07.496 --> 00:32:10.306 A:middle
+installed, but the user has
+still not actually launched it,
+
+00:32:10.436 --> 00:32:12.606 A:middle
+because you can automate
+that period of time as well.
+
+00:32:13.546 --> 00:32:16.086 A:middle
+You could use this, for example,
+to make sure the second level
+
+00:32:16.086 --> 00:32:19.376 A:middle
+in the game is loading,
+or, for example, tutorials.
+
+00:32:19.496 --> 00:32:21.776 A:middle
+Maybe some customers want
+to see these tutorials
+
+00:32:21.776 --> 00:32:24.066 A:middle
+and others don't, so you are
+not going to prevent the app
+
+00:32:24.266 --> 00:32:26.446 A:middle
+from actually running if
+the tutorial isn't there,
+
+00:32:26.746 --> 00:32:28.286 A:middle
+but you would like to
+make sure it is there
+
+00:32:28.286 --> 00:32:29.366 A:middle
+if you have the opportunity.
+
+00:32:29.796 --> 00:32:34.266 A:middle
+And to do this, you can also
+use Xcode's resource tags UI
+
+00:32:34.856 --> 00:32:38.276 A:middle
+and put the tags in the
+pre-fetch tag order section.
+
+00:32:39.006 --> 00:32:40.926 A:middle
+In the actual order
+that you place them
+
+00:32:40.926 --> 00:32:44.566 A:middle
+in this section is the
+order we will download them.
+
+00:32:44.776 --> 00:32:46.506 A:middle
+All right.
+
+00:32:46.876 --> 00:32:48.516 A:middle
+Now, let's talk about caching.
+
+00:32:48.826 --> 00:32:50.456 A:middle
+We mentioned caching earlier
+
+00:32:50.456 --> 00:32:53.956 A:middle
+and we showed how the
+system purged game Level 1
+
+00:32:53.956 --> 00:32:55.906 A:middle
+to make space for a new level.
+
+00:32:56.736 --> 00:32:59.746 A:middle
+The first thing you need to
+know is we only purge content
+
+00:32:59.806 --> 00:33:01.706 A:middle
+when the system is low on space.
+
+
+
+00:32:59.806 --> 00:33:01.706 A:middle
+when the system is low on space.
+
+00:33:02.596 --> 00:33:04.436 A:middle
+And the only content
+that is there
+
+00:33:04.436 --> 00:33:05.946 A:middle
+to be purged is ODR content.
+
+00:33:07.056 --> 00:33:10.026 A:middle
+When we do come to that point,
+there are several attributes
+
+00:33:10.026 --> 00:33:11.596 A:middle
+that come into play to inform us
+
+00:33:11.786 --> 00:33:15.136 A:middle
+as to what decision we
+should make in deleting
+
+00:33:15.136 --> 00:33:17.376 A:middle
+which asset pack, for example.
+
+00:33:18.496 --> 00:33:19.446 A:middle
+These are pretty obvious.
+
+00:33:20.106 --> 00:33:22.386 A:middle
+One is when did you
+last use the asset.
+
+00:33:22.436 --> 00:33:25.846 A:middle
+So, for example, game Level 1
+that was played last Tuesday,
+
+00:33:25.846 --> 00:33:28.656 A:middle
+that's probably a better
+candidate to delete
+
+00:33:28.656 --> 00:33:31.896 A:middle
+than the level you
+finished last night.
+
+00:33:32.156 --> 00:33:35.306 A:middle
+Also as Tony mentioned you
+have preservation priority
+
+00:33:35.306 --> 00:33:37.116 A:middle
+which is a ranking
+you can place on tags.
+
+00:33:38.026 --> 00:33:39.616 A:middle
+So this is your own
+ranking but we take
+
+00:33:39.616 --> 00:33:40.716 A:middle
+that into account as well.
+
+00:33:41.416 --> 00:33:43.496 A:middle
+And finally, we take
+
+00:33:43.496 --> 00:33:45.146 A:middle
+into account the
+running state of the app.
+
+00:33:45.686 --> 00:33:48.616 A:middle
+We will not delete any asset
+packs from a running app
+
+00:33:48.986 --> 00:33:51.116 A:middle
+when those assets
+are actually in use.
+
+00:33:51.726 --> 00:33:56.876 A:middle
+Now, there are a few
+strategies you can use
+
+00:33:57.136 --> 00:33:59.216 A:middle
+to help preserve
+your ODR content.
+
+00:33:59.896 --> 00:34:02.116 A:middle
+One of them is to
+avoid overpurging.
+
+
+
+00:33:59.896 --> 00:34:02.116 A:middle
+One of them is to
+avoid overpurging.
+
+00:34:02.546 --> 00:34:03.506 A:middle
+What do I mean by this?
+
+00:34:03.506 --> 00:34:04.886 A:middle
+Let me give you an example.
+
+00:34:05.366 --> 00:34:07.886 A:middle
+Let's say the system
+needs 100 megabytes,
+
+00:34:08.676 --> 00:34:09.985 A:middle
+and it's gone everywhere else
+
+00:34:09.985 --> 00:34:11.466 A:middle
+to find the space,
+it can't find it.
+
+00:34:12.436 --> 00:34:14.815 A:middle
+Through the attributes we
+discussed just a moment ago,
+
+00:34:15.536 --> 00:34:17.326 A:middle
+it's located one of
+your asset packs,
+
+00:34:17.356 --> 00:34:19.646 A:middle
+but that asset pack
+is 512 megabytes.
+
+00:34:20.196 --> 00:34:22.565 A:middle
+We are going to have to
+purge that asset pack
+
+00:34:22.565 --> 00:34:25.436 A:middle
+if it met the conditions
+so we will have overpurged
+
+00:34:25.476 --> 00:34:30.085 A:middle
+by 412 megabytes, so it's better
+to keep your asset pack smaller.
+
+00:34:30.085 --> 00:34:33.735 A:middle
+As I mentioned earlier, this
+is also good because you want
+
+00:34:33.735 --> 00:34:35.916 A:middle
+to progressively download
+and consume content,
+
+00:34:36.295 --> 00:34:37.835 A:middle
+so smaller is better
+there as well.
+
+00:34:38.226 --> 00:34:40.786 A:middle
+But smaller is also better
+here to avoid overpurging.
+
+00:34:41.985 --> 00:34:43.036 A:middle
+All right.
+
+00:34:44.335 --> 00:34:46.466 A:middle
+Another thing you might
+be tempted to do is
+
+00:34:46.466 --> 00:34:49.696 A:middle
+to tag everything with a
+1.0 preservation priority,
+
+00:34:50.326 --> 00:34:51.775 A:middle
+but that doesn't
+really help you.
+
+00:34:52.286 --> 00:34:55.696 A:middle
+That just makes more of
+your assets look equivalent
+
+00:34:55.786 --> 00:34:58.166 A:middle
+to the system when it
+comes to it looking
+
+00:34:58.166 --> 00:35:00.206 A:middle
+at purging something
+from your app.
+
+
+
+00:34:58.166 --> 00:35:00.206 A:middle
+at purging something
+from your app.
+
+00:35:00.206 --> 00:35:03.426 A:middle
+So you want to use the
+1.0 value judiciously.
+
+00:35:03.996 --> 00:35:08.946 A:middle
+And finally, again, make
+sure, because we look
+
+00:35:08.946 --> 00:35:12.426 A:middle
+at the last used date that you
+endAccessingResources as soon
+
+00:35:12.426 --> 00:35:14.186 A:middle
+as you are done with the tags
+
+00:35:14.916 --> 00:35:18.056 A:middle
+or you allow the
+NSBundleResourceRequest object
+
+00:35:18.186 --> 00:35:19.506 A:middle
+to deallocate as
+soon as possible.
+
+00:35:19.806 --> 00:35:22.526 A:middle
+This helps the system know
+how you are using the assets
+
+00:35:22.526 --> 00:35:26.286 A:middle
+so it can make the
+best decisions.
+
+00:35:26.286 --> 00:35:28.276 A:middle
+Okay. Now, I would be
+remiss if I didn't talk
+
+00:35:28.276 --> 00:35:30.086 A:middle
+about performance in this talk.
+
+00:35:31.506 --> 00:35:33.626 A:middle
+One of the things that
+we have been doing here
+
+00:35:33.626 --> 00:35:37.506 A:middle
+in this session is to encourage
+you to download content
+
+00:35:37.506 --> 00:35:38.926 A:middle
+in the background ahead of time.
+
+00:35:40.056 --> 00:35:43.966 A:middle
+But we don't want to
+do that at the expense
+
+00:35:43.966 --> 00:35:46.326 A:middle
+of consuming more
+resources of the system
+
+00:35:46.656 --> 00:35:47.826 A:middle
+than your app can tolerate.
+
+00:35:48.596 --> 00:35:51.776 A:middle
+So we balance the speed of a
+download with the resources,
+
+00:35:51.776 --> 00:35:54.836 A:middle
+CPU and otherwise, that we
+consume while we download
+
+00:35:54.836 --> 00:35:57.136 A:middle
+and process these asset packs.
+
+00:35:57.226 --> 00:35:58.016 A:middle
+That's the default.
+
+00:35:58.496 --> 00:36:00.746 A:middle
+But if you get into a
+situation or you just want
+
+
+
+00:35:58.496 --> 00:36:00.746 A:middle
+But if you get into a
+situation or you just want
+
+00:36:00.746 --> 00:36:02.236 A:middle
+to manage this all on
+your own and you want
+
+00:36:02.236 --> 00:36:04.586 A:middle
+to put full throttle
+down, then you can set it
+
+00:36:04.586 --> 00:36:08.476 A:middle
+with the urgent priority, and we
+will disregard that balancing,
+
+00:36:08.476 --> 00:36:10.946 A:middle
+and we will download the
+content as quickly as possible.
+
+00:36:11.626 --> 00:36:14.966 A:middle
+Again, as Tony mentioned, this
+is a good time to set this
+
+00:36:14.966 --> 00:36:17.096 A:middle
+when you are putting
+up the loading screen,
+
+00:36:17.616 --> 00:36:20.976 A:middle
+but your app actually may be
+tolerant to the CPU usage,
+
+00:36:20.976 --> 00:36:24.366 A:middle
+for example, that we have on the
+system when we are doing this.
+
+00:36:24.596 --> 00:36:27.986 A:middle
+So it's all up to you.
+
+00:36:27.986 --> 00:36:32.516 A:middle
+And also, we should talk
+about performance testing.
+
+00:36:32.516 --> 00:36:35.346 A:middle
+You need to do real world
+testing for an ODR application.
+
+00:36:35.616 --> 00:36:38.176 A:middle
+An ODR application is a
+network-based application.
+
+00:36:38.486 --> 00:36:41.106 A:middle
+So when you have your
+device connected via USB
+
+00:36:41.106 --> 00:36:44.806 A:middle
+to your MacBook Pro, for
+example, running Xcode,
+
+00:36:45.026 --> 00:36:48.006 A:middle
+that's not a real
+world scenario.
+
+00:36:48.006 --> 00:36:48.976 A:middle
+That's just far too fast.
+
+00:36:49.926 --> 00:36:51.706 A:middle
+So what you want to do is
+
+00:36:51.706 --> 00:36:56.176 A:middle
+to test your app using perhaps
+TestFlight or Xcode Server.
+
+00:36:57.506 --> 00:37:01.976 A:middle
+And then also use the Developer
+Tools Network Link Conditioner
+
+
+
+00:36:57.506 --> 00:37:01.976 A:middle
+And then also use the Developer
+Tools Network Link Conditioner
+
+00:37:02.696 --> 00:37:05.246 A:middle
+to test out various
+networking conditions
+
+00:37:06.046 --> 00:37:08.006 A:middle
+that might cause
+issues for your app
+
+00:37:08.526 --> 00:37:10.576 A:middle
+in how soon ODR content
+is downloading.
+
+00:37:11.056 --> 00:37:13.806 A:middle
+In fact, I would recommend using
+this tool for any networking
+
+00:37:13.806 --> 00:37:14.806 A:middle
+that you are doing
+from your app.
+
+00:37:14.806 --> 00:37:15.396 A:middle
+It's really great.
+
+00:37:15.846 --> 00:37:18.236 A:middle
+If you haven't used it
+before, I would like to cover
+
+00:37:18.236 --> 00:37:19.426 A:middle
+that now just briefly.
+
+00:37:19.786 --> 00:37:23.286 A:middle
+So when you attach
+your device via USB
+
+00:37:23.286 --> 00:37:26.506 A:middle
+to your MacBook Pro again,
+for example, of running Xcode
+
+00:37:26.506 --> 00:37:28.606 A:middle
+and you then you go to Settings
+on your device you are going
+
+00:37:28.606 --> 00:37:30.676 A:middle
+to see this entry,
+a developer entry.
+
+00:37:30.676 --> 00:37:34.496 A:middle
+You tap that and you
+will see numerous numbers
+
+00:37:34.916 --> 00:37:38.596 A:middle
+of developer settings that you
+can use in logging, et cetera,
+
+00:37:38.596 --> 00:37:41.586 A:middle
+and in the middle there is
+the Network Link Conditioner.
+
+00:37:41.936 --> 00:37:46.546 A:middle
+So you tap that, and now you
+see the options that you can use
+
+00:37:46.546 --> 00:37:49.906 A:middle
+to cause various
+conditions to be present
+
+00:37:49.906 --> 00:37:52.296 A:middle
+when networking out of your app.
+
+00:37:52.296 --> 00:37:55.816 A:middle
+To use this, you enable the
+Network Link Conditioner,
+
+00:37:56.206 --> 00:37:59.016 A:middle
+and then you decide what type
+of situation you want to create.
+
+00:37:59.406 --> 00:38:03.606 A:middle
+Perhaps you want to mimic 100%
+loss or very slow network,
+
+
+
+00:37:59.406 --> 00:38:03.606 A:middle
+Perhaps you want to mimic 100%
+loss or very slow network,
+
+00:38:04.386 --> 00:38:08.546 A:middle
+or perhaps a high latency in
+DNS lookups, or you just want
+
+00:38:08.546 --> 00:38:10.266 A:middle
+to reproduce a really
+bad network.
+
+00:38:10.966 --> 00:38:12.896 A:middle
+So this is a great tool
+
+00:38:12.896 --> 00:38:17.736 A:middle
+to use while you test
+your ODR application.
+
+00:38:17.736 --> 00:38:21.016 A:middle
+Okay. Now, speaking
+of networking issues,
+
+00:38:21.016 --> 00:38:24.326 A:middle
+you may encounter a couple of
+networking errors along the way.
+
+00:38:24.986 --> 00:38:26.166 A:middle
+One of them is this one.
+
+00:38:26.166 --> 00:38:27.506 A:middle
+Obviously there is no network.
+
+00:38:28.046 --> 00:38:31.316 A:middle
+So if your app needed ODR
+content and there is no network,
+
+00:38:31.316 --> 00:38:33.526 A:middle
+you need to be ready to
+handle this situation.
+
+00:38:35.036 --> 00:38:38.756 A:middle
+Another area you may encounter
+is resource unavailable,
+
+00:38:38.756 --> 00:38:41.556 A:middle
+and basically what this means is
+we thought the ODR content was
+
+00:38:41.556 --> 00:38:43.546 A:middle
+going to be in a certain
+location and it wasn't.
+
+00:38:44.086 --> 00:38:47.256 A:middle
+Generally the case or the cause
+of this will be, for example,
+
+00:38:47.256 --> 00:38:50.206 A:middle
+setting up a server
+inside of your own company
+
+00:38:50.206 --> 00:38:52.186 A:middle
+and someone is managing
+it, moving things around,
+
+00:38:52.526 --> 00:38:55.506 A:middle
+and they just weren't ready
+for the users to use that app.
+
+00:38:56.176 --> 00:38:59.466 A:middle
+So just to be ready
+for that error as well.
+
+00:38:59.896 --> 00:39:04.056 A:middle
+Another class of error that
+you can encounter relates
+
+
+
+00:38:59.896 --> 00:39:04.056 A:middle
+Another class of error that
+you can encounter relates
+
+00:39:04.056 --> 00:39:05.026 A:middle
+to storage space.
+
+00:39:06.296 --> 00:39:11.336 A:middle
+So ODR will allow your app
+to have a maximum of 2 gig
+
+00:39:11.336 --> 00:39:12.586 A:middle
+in use at any one time.
+
+00:39:13.466 --> 00:39:15.286 A:middle
+What this means is
+your app is running,
+
+00:39:15.686 --> 00:39:18.916 A:middle
+you have called
+beginAccessingResources on tags
+
+00:39:19.466 --> 00:39:22.216 A:middle
+that amount to 2 gigabytes,
+
+00:39:22.806 --> 00:39:24.936 A:middle
+you haven't called
+endAccessingResources on any
+
+00:39:24.936 --> 00:39:28.326 A:middle
+of those, you haven't allowed
+the NSBundleResourceRequest
+
+00:39:28.666 --> 00:39:32.166 A:middle
+to dealloc for any of those,
+so that 2 gig is in use.
+
+00:39:32.486 --> 00:39:34.026 A:middle
+And then you go and
+make another request.
+
+00:39:34.446 --> 00:39:36.116 A:middle
+That goes over and you
+are going to get an error
+
+00:39:36.116 --> 00:39:37.506 A:middle
+in your request, a callback.
+
+00:39:38.316 --> 00:39:40.856 A:middle
+So be aware of that as well.
+
+00:39:41.336 --> 00:39:44.576 A:middle
+Also, of course, we just might
+hit a low-space condition
+
+00:39:44.866 --> 00:39:46.296 A:middle
+on local storage on the device.
+
+00:39:46.296 --> 00:39:48.076 A:middle
+And you will get
+this notification.
+
+00:39:48.806 --> 00:39:51.196 A:middle
+This can happen if you
+have initiated a download
+
+00:39:51.196 --> 00:39:54.736 A:middle
+or maybe it happens long
+after you made that request.
+
+00:39:55.766 --> 00:39:57.186 A:middle
+So just be prepared
+to handle that.
+
+00:39:57.566 --> 00:39:59.156 A:middle
+To handle it you could
+do a couple of things;
+
+00:39:59.196 --> 00:40:01.006 A:middle
+you could endAccessingResources
+
+
+
+00:39:59.196 --> 00:40:01.006 A:middle
+you could endAccessingResources
+
+00:40:01.006 --> 00:40:03.236 A:middle
+on any ODR content
+you no longer need.
+
+00:40:04.656 --> 00:40:06.926 A:middle
+And you can also look
+at what you are storing
+
+00:40:06.926 --> 00:40:09.416 A:middle
+on the local device, perhaps
+some caches or other documents
+
+00:40:09.416 --> 00:40:10.456 A:middle
+that you actually don't need,
+
+00:40:10.866 --> 00:40:12.946 A:middle
+and you could free those
+up and delete those.
+
+00:40:13.486 --> 00:40:18.556 A:middle
+So now let's talk
+about cellular data.
+
+00:40:18.866 --> 00:40:21.586 A:middle
+Again, an ODR application
+is a network application.
+
+00:40:22.066 --> 00:40:25.016 A:middle
+So it is governed by the
+same cellular data switch
+
+00:40:25.896 --> 00:40:27.816 A:middle
+that controls the rest
+of your app's networking.
+
+00:40:28.246 --> 00:40:30.846 A:middle
+So if that switch is
+off, you will not be able
+
+00:40:30.846 --> 00:40:32.166 A:middle
+to get any ODR content.
+
+00:40:33.176 --> 00:40:36.546 A:middle
+If that switch is on, and you
+are downloading ODR content,
+
+00:40:37.176 --> 00:40:41.316 A:middle
+then any of that data that
+you use over cellular is going
+
+00:40:41.316 --> 00:40:43.176 A:middle
+to be attributed to your app.
+
+00:40:43.576 --> 00:40:46.216 A:middle
+So this should encourage
+you to make sure you ask
+
+00:40:46.476 --> 00:40:48.256 A:middle
+for what you need
+and not any more.
+
+00:40:49.016 --> 00:40:52.936 A:middle
+We don't want to run
+up a user's bill.
+
+00:40:53.146 --> 00:40:56.666 A:middle
+And finally, the 100-megabyte
+cellular download limit still
+
+00:40:56.666 --> 00:40:58.286 A:middle
+applies to ODR applications,
+
+00:40:58.626 --> 00:41:01.966 A:middle
+so remember where I had
+the dot app plus the size
+
+
+
+00:40:58.626 --> 00:41:01.966 A:middle
+so remember where I had
+the dot app plus the size
+
+00:41:01.966 --> 00:41:04.086 A:middle
+of initial ODR adding
+to up the size
+
+00:41:04.086 --> 00:41:05.526 A:middle
+of the app listed
+in the App Store?
+
+00:41:06.046 --> 00:41:09.196 A:middle
+Well, if that's greater than 100
+megabytes, your app is not going
+
+00:41:09.196 --> 00:41:12.086 A:middle
+to download over cellular,
+just like a normal app
+
+00:41:12.266 --> 00:41:14.166 A:middle
+that was greater than
+100 megabytes would not.
+
+00:41:15.206 --> 00:41:18.406 A:middle
+So you need to be aware of
+that limitation as well.
+
+00:41:20.656 --> 00:41:24.146 A:middle
+Finally, as we begin
+to wrap this up,
+
+00:41:24.146 --> 00:41:27.146 A:middle
+there is some vital statistics
+that you need to be aware of.
+
+00:41:27.896 --> 00:41:32.996 A:middle
+First of all, although you can
+have an ODR application have a
+
+00:41:32.996 --> 00:41:34.886 A:middle
+size of up to 20
+gig in the Store,
+
+00:41:35.436 --> 00:41:39.666 A:middle
+a maximum of 2 gig is
+reserved for your dot app.
+
+00:41:40.076 --> 00:41:41.156 A:middle
+So your dot app itself?
+
+00:41:41.406 --> 00:41:43.586 A:middle
+Remember when we teased apart
+the assets from your dot app,
+
+00:41:43.586 --> 00:41:45.136 A:middle
+we had the asset packs
+and then your dot app?
+
+00:41:45.586 --> 00:41:47.876 A:middle
+That dot app can be a
+maximum of 2 gigabytes.
+
+00:41:48.286 --> 00:41:50.706 A:middle
+The rest of it can be
+ODR content up to 20 gig.
+
+00:41:50.876 --> 00:41:56.416 A:middle
+And you can have a
+maximum of 2 gig of initial
+
+00:41:56.416 --> 00:41:58.126 A:middle
+and pre-fetched ODR content.
+
+00:41:58.126 --> 00:42:00.106 A:middle
+This is the content we
+set up in Xcode's UI
+
+
+
+00:41:58.126 --> 00:42:00.106 A:middle
+This is the content we
+set up in Xcode's UI
+
+00:42:01.146 --> 00:42:03.636 A:middle
+to download things
+during the app install
+
+00:42:03.636 --> 00:42:04.736 A:middle
+and right afterwards.
+
+00:42:05.016 --> 00:42:10.596 A:middle
+You can have a maximum of two
+gigabytes of that combined,
+
+00:42:10.596 --> 00:42:13.696 A:middle
+and as I mentioned just a moment
+ago, a maximum of two gigabytes
+
+00:42:13.776 --> 00:42:16.656 A:middle
+in use at any one time.
+
+00:42:16.766 --> 00:42:19.896 A:middle
+And finally, a given asset
+pack can be a maximum
+
+00:42:19.896 --> 00:42:21.236 A:middle
+of 512 megabytes.
+
+00:42:22.786 --> 00:42:25.366 A:middle
+So if you take a single tag
+and tag a bunch of resources,
+
+00:42:25.496 --> 00:42:28.766 A:middle
+and that adds up to more than
+512 megabytes, Xcode is going
+
+00:42:28.766 --> 00:42:31.586 A:middle
+to give you a warning, but
+it will allow you to continue
+
+00:42:31.586 --> 00:42:34.946 A:middle
+to develop your app or game, but
+when you submit to the Store,
+
+00:42:34.946 --> 00:42:36.456 A:middle
+you are going to get
+a submission failure,
+
+00:42:36.936 --> 00:42:41.176 A:middle
+and the submission failure
+error message will explain why.
+
+00:42:41.406 --> 00:42:45.796 A:middle
+Okay. So in summary, On Demand
+Resources is a dynamically
+
+00:42:45.796 --> 00:42:46.966 A:middle
+loaded content system.
+
+00:42:47.896 --> 00:42:49.156 A:middle
+Hosted in the App Store.
+
+00:42:50.156 --> 00:42:51.146 A:middle
+This can be automated
+
+00:42:51.666 --> 00:42:55.056 A:middle
+to download content during app
+install time and by request.
+
+00:42:56.236 --> 00:42:58.436 A:middle
+You can prioritize or
+order these downloads.
+
+00:42:59.776 --> 00:43:02.146 A:middle
+We have an intelligent caching
+mechanism so that, for example,
+
+
+
+00:42:59.776 --> 00:43:02.146 A:middle
+We have an intelligent caching
+mechanism so that, for example,
+
+00:43:02.146 --> 00:43:05.246 A:middle
+we could get rid of that game
+Level 1 in order to make space
+
+00:43:05.296 --> 00:43:10.846 A:middle
+for a following level, and
+you get 20 gig in the Store.
+
+00:43:11.026 --> 00:43:13.916 A:middle
+So for more information we
+have a great new documentation
+
+00:43:13.916 --> 00:43:16.596 A:middle
+on ODR; we also have
+sample code,
+
+00:43:17.066 --> 00:43:19.616 A:middle
+and the developer forums are
+always a great place to go.
+
+00:43:19.616 --> 00:43:22.296 A:middle
+And if you still have
+questions you can follow
+
+00:43:22.296 --> 00:43:24.056 A:middle
+up with our App Frameworks
+evangelist.
+
+00:43:24.966 --> 00:43:26.576 A:middle
+You may have missed
+a couple of sessions
+
+00:43:26.906 --> 00:43:30.556 A:middle
+on other technologies
+that relate to ODR.
+
+00:43:31.146 --> 00:43:35.156 A:middle
+Those will be available via
+videos on the developer website.
+
+00:43:35.156 --> 00:43:38.716 A:middle
+And there is going to be a
+session as Tony indicated
+
+00:43:38.716 --> 00:43:43.896 A:middle
+about progress on Friday as well
+as a lab tomorrow from 11:00
+
+00:43:43.896 --> 00:43:45.766 A:middle
+to 1:30 dedicated to ODR.
+
+00:43:46.016 --> 00:43:49.426 A:middle
+Tony and I and the extended ODR
+engineering team will be there
+
+00:43:49.426 --> 00:43:51.146 A:middle
+to answer any of your questions,
+
+00:43:51.146 --> 00:43:52.956 A:middle
+get you started using
+ODR content,
+
+00:43:52.956 --> 00:43:56.446 A:middle
+and listen to any
+suggestions you might have.
+
+00:43:56.926 --> 00:43:57.536 A:middle
+Thank you very much!
+
+00:43:58.016 --> 00:44:00.000 A:middle
+[Applause]
+

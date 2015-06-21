@@ -1,0 +1,2451 @@
+
+00:00:26.516 --> 00:00:31.296 A:middle
+[Applause]
+
+00:00:31.796 --> 00:00:32.806 A:middle
+&gt;&gt; MICHELE CAMPEOTTO:
+Good afternoon, everyone.
+
+00:00:32.946 --> 00:00:33.326 A:middle
+Thank you.
+
+00:00:34.286 --> 00:00:36.226 A:middle
+You guys have been
+doing some great work
+
+00:00:36.226 --> 00:00:37.866 A:middle
+with notifications in the US.
+
+00:00:38.196 --> 00:00:40.666 A:middle
+So today, we are going over a
+little bit the entire system,
+
+00:00:40.666 --> 00:00:43.706 A:middle
+how it works and we will see
+some new features we created
+
+00:00:43.706 --> 00:00:43.966 A:middle
+for you.
+
+00:00:45.186 --> 00:00:47.136 A:middle
+Notifications are
+a two-part system.
+
+00:00:47.136 --> 00:00:49.806 A:middle
+We have iOS notifications
+and APNS.
+
+00:00:50.896 --> 00:00:53.796 A:middle
+My name is Michele, and I work
+in the iOS Notifications team.
+
+00:00:53.796 --> 00:00:55.696 A:middle
+We will start with
+iOS notifications.
+
+00:00:56.656 --> 00:00:59.076 A:middle
+We will talk about
+silent notifications
+
+00:00:59.546 --> 00:01:02.146 A:middle
+and user notifications
+and what is the difference
+
+
+
+00:00:59.546 --> 00:01:02.146 A:middle
+and user notifications
+and what is the difference
+
+00:01:02.146 --> 00:01:03.176 A:middle
+between these two.
+
+00:01:03.386 --> 00:01:08.256 A:middle
+We will see notification
+actions and a new feature
+
+00:01:08.256 --> 00:01:10.886 A:middle
+that I hope you guys
+are really enjoying.
+
+00:01:11.356 --> 00:01:14.156 A:middle
+In the second half
+of the presentation,
+
+00:01:14.456 --> 00:01:16.486 A:middle
+my colleague Gokul will talk
+
+00:01:16.486 --> 00:01:18.866 A:middle
+about some important
+new features
+
+00:01:18.866 --> 00:01:22.826 A:middle
+in Apple Push Notification
+Service, that I think are going
+
+00:01:22.826 --> 00:01:28.786 A:middle
+to make your work much easier
+and save you a lot of time.
+
+00:01:28.986 --> 00:01:31.786 A:middle
+So let's start from
+silent notifications.
+
+00:01:32.886 --> 00:01:34.786 A:middle
+Silent notifications are silent.
+
+00:01:35.116 --> 00:01:37.126 A:middle
+They don't show UI to the user.
+
+00:01:37.516 --> 00:01:39.876 A:middle
+They don't buzz the phone.
+
+00:01:40.276 --> 00:01:42.346 A:middle
+So you don't use them
+to notify the user.
+
+00:01:42.346 --> 00:01:43.896 A:middle
+You use them to notify
+your own app.
+
+00:01:45.056 --> 00:01:46.326 A:middle
+They are remote notifications.
+
+00:01:46.326 --> 00:01:48.066 A:middle
+So they come from the Internet.
+
+00:01:48.466 --> 00:01:50.246 A:middle
+Here's your server,
+and your app.
+
+00:01:50.826 --> 00:01:53.796 A:middle
+Your server sends a
+notification to your app,
+
+00:01:54.846 --> 00:01:57.996 A:middle
+and if you send the content
+available flag to one,
+
+00:01:58.276 --> 00:02:00.806 A:middle
+your app knows that there's
+going to be new content
+
+
+
+00:01:58.276 --> 00:02:00.806 A:middle
+your app knows that there's
+going to be new content
+
+00:02:00.806 --> 00:02:04.306 A:middle
+to be downloaded, so it
+will start and download it.
+
+00:02:06.276 --> 00:02:09.436 A:middle
+Silent notifications
+are enabled by default.
+
+00:02:09.985 --> 00:02:13.166 A:middle
+The user does not need
+to approve your --
+
+00:02:13.416 --> 00:02:16.556 A:middle
+does not give permission
+to your app to use them,
+
+00:02:17.236 --> 00:02:18.816 A:middle
+and you can just
+start using them
+
+00:02:18.816 --> 00:02:21.126 A:middle
+without asking the
+user for permission.
+
+00:02:22.366 --> 00:02:26.586 A:middle
+But silent notifications are
+the mechanism behind background
+
+00:02:26.586 --> 00:02:27.326 A:middle
+app refresh.
+
+00:02:27.876 --> 00:02:30.206 A:middle
+At any point you know
+that the user can go
+
+00:02:30.206 --> 00:02:31.806 A:middle
+in settings and disable them.
+
+00:02:32.246 --> 00:02:35.566 A:middle
+So you can't depend on them
+always being available.
+
+00:02:35.566 --> 00:02:38.166 A:middle
+You don't know if the
+user the turn them off,
+
+00:02:38.166 --> 00:02:40.526 A:middle
+and you are not getting
+a notification anymore.
+
+00:02:42.536 --> 00:02:47.346 A:middle
+This also means that silent
+notifications are delivered
+
+00:02:47.346 --> 00:02:48.306 A:middle
+with the best effort.
+
+00:02:48.696 --> 00:02:51.646 A:middle
+That means that when
+the notification arrives
+
+00:02:51.976 --> 00:02:55.746 A:middle
+on the user's device, the system
+is going to make some choices.
+
+00:02:55.746 --> 00:02:58.946 A:middle
+It's going to use different
+signals from the device
+
+00:02:59.156 --> 00:03:02.186 A:middle
+and from the user behavior,
+like power or the time of day
+
+
+
+00:02:59.156 --> 00:03:02.186 A:middle
+and from the user behavior,
+like power or the time of day
+
+00:03:02.726 --> 00:03:04.976 A:middle
+to decide when it is a good time
+
+00:03:05.266 --> 00:03:07.496 A:middle
+to deliver the notification
+and launch your app.
+
+00:03:08.486 --> 00:03:10.856 A:middle
+It may try to save
+battery or it may try
+
+00:03:10.856 --> 00:03:15.066 A:middle
+to match the user behavior
+and make the content available
+
+00:03:15.066 --> 00:03:19.246 A:middle
+when the user is more
+likely to use it.
+
+00:03:19.506 --> 00:03:21.636 A:middle
+Next part is user notifications.
+
+00:03:22.686 --> 00:03:25.826 A:middle
+As the name says, the main
+difference is that you use these
+
+00:03:25.936 --> 00:03:29.656 A:middle
+to notify the user, when you
+want to tell the user something,
+
+00:03:29.896 --> 00:03:32.836 A:middle
+when you want to notify them
+of something that happened
+
+00:03:32.836 --> 00:03:35.886 A:middle
+on your server, or from
+some other user of your app.
+
+00:03:36.456 --> 00:03:39.966 A:middle
+They appear in the user
+page that you know, banners,
+
+00:03:39.966 --> 00:03:41.626 A:middle
+lockscreen, notification center.
+
+00:03:42.106 --> 00:03:46.496 A:middle
+Since these notifications
+are for the user
+
+00:03:46.496 --> 00:03:48.586 A:middle
+and they can interrupt
+what the user is doing,
+
+00:03:48.856 --> 00:03:49.996 A:middle
+they can buzz their phone.
+
+00:03:50.516 --> 00:03:52.266 A:middle
+We do require permission.
+
+00:03:52.266 --> 00:03:55.776 A:middle
+You want to make sure that they
+want to receive the notification
+
+00:03:55.776 --> 00:03:58.526 A:middle
+and they are aware that they
+are going to receive it.
+
+00:03:59.276 --> 00:04:02.666 A:middle
+That also means that they can
+also be disabled at any point
+
+
+
+00:03:59.276 --> 00:04:02.666 A:middle
+That also means that they can
+also be disabled at any point
+
+00:04:02.666 --> 00:04:05.196 A:middle
+in time, and the user
+can change a setting.
+
+00:04:05.296 --> 00:04:09.706 A:middle
+So even if you set up your
+notifications to be banners
+
+00:04:09.746 --> 00:04:12.316 A:middle
+and badges, maybe the
+user disables part of it,
+
+00:04:12.616 --> 00:04:18.986 A:middle
+and they just receive the
+badge and not the banner.
+
+00:04:19.036 --> 00:04:21.516 A:middle
+There are two different
+types of user notifications.
+
+00:04:22.836 --> 00:04:25.106 A:middle
+The first one is
+remote notifications
+
+00:04:25.106 --> 00:04:27.166 A:middle
+and the second one is
+local notifications.
+
+00:04:28.246 --> 00:04:30.746 A:middle
+Let's see remote
+notifications first.
+
+00:04:31.896 --> 00:04:34.566 A:middle
+They are remote, so they
+come from the Internet again,
+
+00:04:34.946 --> 00:04:36.026 A:middle
+and that's your server again.
+
+00:04:36.936 --> 00:04:41.116 A:middle
+That sends a notification
+to the user's device.
+
+00:04:41.276 --> 00:04:46.546 A:middle
+Now, you see that at this
+point in time, your app is not
+
+00:04:46.546 --> 00:04:48.976 A:middle
+in the picture yet because
+your app is not running.
+
+00:04:50.466 --> 00:04:52.446 A:middle
+Your app is launched only
+
+00:04:52.446 --> 00:04:54.516 A:middle
+when the user taps
+on the notification.
+
+00:04:55.216 --> 00:04:58.366 A:middle
+When the user taps on the
+notification, we launch the app,
+
+00:04:58.866 --> 00:05:01.636 A:middle
+and you have the opportunity
+to handle the notification
+
+
+
+00:04:58.866 --> 00:05:01.636 A:middle
+and you have the opportunity
+to handle the notification
+
+00:05:01.636 --> 00:05:05.666 A:middle
+that you sent at that point.
+
+00:05:07.016 --> 00:05:11.196 A:middle
+Now, you can in a user
+remote notification,
+
+00:05:11.196 --> 00:05:15.956 A:middle
+you can set the same content
+available flag that you set
+
+00:05:15.956 --> 00:05:18.816 A:middle
+in silent notifications,
+and that allows your app
+
+00:05:18.886 --> 00:05:23.106 A:middle
+to have some time to
+download the content
+
+00:05:23.106 --> 00:05:26.986 A:middle
+or update the content that it
+wants to be displayed so that
+
+00:05:26.986 --> 00:05:28.826 A:middle
+when the user taps
+on the notification,
+
+00:05:29.676 --> 00:05:31.666 A:middle
+your content is available.
+
+00:05:32.036 --> 00:05:33.896 A:middle
+And the user sees what it does.
+
+00:05:34.996 --> 00:05:39.226 A:middle
+This is a way to have a silent
+notification inside a user
+
+00:05:39.226 --> 00:05:43.836 A:middle
+notifications like a summary.
+
+00:05:43.986 --> 00:05:46.806 A:middle
+Second, is local notifications.
+
+00:05:47.396 --> 00:05:50.656 A:middle
+Local notifications are
+scheduled by your own app,
+
+00:05:51.396 --> 00:05:52.836 A:middle
+directly on the user's device.
+
+00:05:53.556 --> 00:05:54.306 A:middle
+There's no server.
+
+00:05:54.306 --> 00:05:55.006 A:middle
+There's no Internet.
+
+00:05:55.616 --> 00:05:59.626 A:middle
+As before, your app
+schedules the notification.
+
+
+
+00:06:00.156 --> 00:06:05.366 A:middle
+The system displays it to the
+user, and when the user taps
+
+00:06:05.366 --> 00:06:08.596 A:middle
+on the notification, your
+app receives a callback
+
+00:06:08.596 --> 00:06:11.916 A:middle
+in the app delegate
+and at that point,
+
+00:06:12.176 --> 00:06:14.926 A:middle
+you can handle the
+notifications and you know
+
+00:06:14.926 --> 00:06:17.176 A:middle
+that the user tapped
+on it and wants
+
+00:06:17.176 --> 00:06:18.596 A:middle
+to act on the notification.
+
+00:06:19.136 --> 00:06:23.296 A:middle
+I said that you can
+schedule from your app.
+
+00:06:23.936 --> 00:06:24.606 A:middle
+How do you do that?
+
+00:06:25.316 --> 00:06:27.196 A:middle
+You can schedule
+the notification
+
+00:06:27.196 --> 00:06:28.206 A:middle
+in two different ways.
+
+00:06:29.026 --> 00:06:30.476 A:middle
+You can schedule them by time,
+
+00:06:31.186 --> 00:06:34.886 A:middle
+so you can have the notification
+happen with a delay,
+
+00:06:35.756 --> 00:06:37.806 A:middle
+after a certain amount of time,
+
+00:06:38.076 --> 00:06:42.026 A:middle
+or you can have the notification
+happen at a specific time
+
+00:06:42.026 --> 00:06:44.416 A:middle
+in the future, a
+specific time and date.
+
+00:06:44.926 --> 00:06:48.706 A:middle
+Another way that you can
+schedule notifications
+
+00:06:49.196 --> 00:06:50.856 A:middle
+is geofences.
+
+00:06:50.936 --> 00:06:55.516 A:middle
+You can set notifications to
+appear when the user arrives
+
+00:06:55.866 --> 00:06:58.726 A:middle
+or leaves a certain
+location that you decide.
+
+00:06:58.726 --> 00:07:01.376 A:middle
+So this is how notifications
+work
+
+
+
+00:06:58.726 --> 00:07:01.376 A:middle
+So this is how notifications
+work
+
+00:07:01.376 --> 00:07:02.746 A:middle
+from the user's point of view.
+
+00:07:02.786 --> 00:07:03.786 A:middle
+This was how notifications work.
+
+00:07:03.786 --> 00:07:06.506 A:middle
+In iOS 8, we introduced
+notification actions.
+
+00:07:07.656 --> 00:07:09.796 A:middle
+Notification actions allow you
+
+00:07:09.796 --> 00:07:12.076 A:middle
+to make your notifications
+more interactive,
+
+00:07:12.686 --> 00:07:15.466 A:middle
+so that a user can
+interact with your app
+
+00:07:15.536 --> 00:07:18.856 A:middle
+without actually launching it
+and make them more efficient
+
+00:07:18.916 --> 00:07:22.056 A:middle
+because when they receive the
+notification, they can act
+
+00:07:22.056 --> 00:07:23.936 A:middle
+on it right there
+without launching the app
+
+00:07:23.936 --> 00:07:28.376 A:middle
+and interrupting
+what they were doing.
+
+00:07:28.946 --> 00:07:31.726 A:middle
+Actions are grouped
+in categories.
+
+00:07:32.736 --> 00:07:35.736 A:middle
+You can use different categories
+to group different types
+
+00:07:36.086 --> 00:07:37.986 A:middle
+of notifications
+that you are sending
+
+00:07:38.396 --> 00:07:40.996 A:middle
+so that you can have
+different actions
+
+00:07:41.296 --> 00:07:43.056 A:middle
+in different types
+of notifications.
+
+00:07:43.516 --> 00:07:49.066 A:middle
+Say you have a photo app that
+users use to share photos,
+
+00:07:49.646 --> 00:07:52.186 A:middle
+you can have a different
+set of actions
+
+00:07:52.186 --> 00:08:01.256 A:middle
+when someone posts a photo or
+when someone posts a comment.
+
+
+
+00:07:52.186 --> 00:08:01.256 A:middle
+when someone posts a photo or
+when someone posts a comment.
+
+00:08:01.376 --> 00:08:04.556 A:middle
+Now, all of this
+that we are talking
+
+00:08:04.556 --> 00:08:08.146 A:middle
+until now is also
+forwarded to the Apple Watch.
+
+00:08:08.976 --> 00:08:11.626 A:middle
+You don't need to do
+anything, and everything works
+
+00:08:11.896 --> 00:08:13.896 A:middle
+on the watch, if the
+user is wearing it
+
+00:08:13.986 --> 00:08:17.866 A:middle
+and it's paired with the device.
+
+00:08:17.986 --> 00:08:22.086 A:middle
+You get the basic and
+default behavior just
+
+00:08:22.256 --> 00:08:24.576 A:middle
+by having your notification
+set up correctly.
+
+00:08:24.826 --> 00:08:28.336 A:middle
+If you want to customize
+the look of the notification
+
+00:08:28.336 --> 00:08:30.436 A:middle
+or the behavior of
+the notifications,
+
+00:08:31.096 --> 00:08:35.025 A:middle
+I suggest you take a look at
+the WatchKit presentations
+
+00:08:35.025 --> 00:08:37.956 A:middle
+that we had earlier in the
+week and they have a lot
+
+00:08:37.956 --> 00:08:39.025 A:middle
+of useful information.
+
+00:08:41.876 --> 00:08:46.386 A:middle
+Now, if you don't
+always communicate
+
+00:08:46.386 --> 00:08:49.396 A:middle
+with your friends using only
+emojis as I've been dooing
+
+00:08:49.486 --> 00:08:54.786 A:middle
+in the presentation until now,
+we introduced a new feature
+
+00:08:54.786 --> 00:09:00.156 A:middle
+in iOS 8 for notifications and
+that feature is text reply.
+
+
+
+00:08:54.786 --> 00:09:00.156 A:middle
+in iOS 8 for notifications and
+that feature is text reply.
+
+00:09:00.756 --> 00:09:05.426 A:middle
+When you receive a text message,
+you can pull down the banner
+
+00:09:05.986 --> 00:09:09.606 A:middle
+and respond to the text
+message right there.
+
+00:09:09.876 --> 00:09:13.276 A:middle
+So we have heard some
+feedback, and it looks
+
+00:09:13.276 --> 00:09:17.406 A:middle
+like you also enjoy conversating
+
+00:09:17.406 --> 00:09:19.666 A:middle
+with your friends using
+words instead of emojis.
+
+00:09:19.666 --> 00:09:25.226 A:middle
+In iOS 9, we are introducing
+user notification text input
+
+00:09:25.956 --> 00:09:28.206 A:middle
+so you can use the same UI
+
+00:09:28.336 --> 00:09:31.746 A:middle
+and the same interactive
+notifications in your own app.
+
+00:09:32.296 --> 00:09:33.306 A:middle
+How does that look?
+
+00:09:34.716 --> 00:09:36.506 A:middle
+It looks like this.
+
+00:09:37.916 --> 00:09:39.436 A:middle
+You send a notification
+from your app.
+
+00:09:40.956 --> 00:09:43.606 A:middle
+The user can pull down and
+type the text response.
+
+00:09:44.246 --> 00:09:46.466 A:middle
+Words instead of emojis.
+
+00:09:47.066 --> 00:09:48.996 A:middle
+This is how we look.
+
+00:09:49.646 --> 00:09:55.926 A:middle
+Let's see how to do this and
+how they work, how they behave.
+
+00:09:56.526 --> 00:10:01.476 A:middle
+Text input actions are
+just a new type of action.
+
+
+
+00:09:56.526 --> 00:10:01.476 A:middle
+Text input actions are
+just a new type of action.
+
+00:10:01.636 --> 00:10:05.036 A:middle
+They -- you create and
+you use them the same way
+
+00:10:05.036 --> 00:10:07.996 A:middle
+that you use the actions that
+they were already used to.
+
+00:10:08.556 --> 00:10:10.556 A:middle
+They appear in the same spots
+
+00:10:11.126 --> 00:10:16.146 A:middle
+that all the other actions
+appear, and as you noticed
+
+00:10:16.146 --> 00:10:20.666 A:middle
+from these slides, they work
+together with other actions.
+
+00:10:20.766 --> 00:10:25.006 A:middle
+You can have more than
+one action and one or more
+
+00:10:25.006 --> 00:10:27.286 A:middle
+of them can be text
+input actions.
+
+00:10:27.626 --> 00:10:31.646 A:middle
+This is something that
+not even messages can do.
+
+00:10:31.896 --> 00:10:34.706 A:middle
+How do you create them?
+
+00:10:34.956 --> 00:10:38.856 A:middle
+So we said that they are
+just actions, like the one
+
+00:10:38.856 --> 00:10:40.376 A:middle
+that we used until iOS 8.
+
+00:10:41.506 --> 00:10:43.776 A:middle
+So you create them exactly
+
+00:10:43.776 --> 00:10:46.256 A:middle
+as you created the
+notification actions.
+
+00:10:46.966 --> 00:10:51.606 A:middle
+The only difference is that
+you set the behavior to be
+
+00:10:51.606 --> 00:10:54.626 A:middle
+at text input behavior, so that
+
+00:10:54.696 --> 00:10:57.386 A:middle
+when the device receives
+the notification
+
+00:10:57.386 --> 00:11:00.706 A:middle
+and there's a new action
+with the text input behavior,
+
+
+
+00:10:57.386 --> 00:11:00.706 A:middle
+and there's a new action
+with the text input behavior,
+
+00:11:00.706 --> 00:11:01.936 A:middle
+we can display the text field.
+
+00:11:03.336 --> 00:11:05.016 A:middle
+So here we created our action.
+
+00:11:05.636 --> 00:11:08.986 A:middle
+Then we register it by
+creating our category.
+
+00:11:09.686 --> 00:11:11.376 A:middle
+In this example,
+it's a simple one.
+
+00:11:11.736 --> 00:11:15.016 A:middle
+We only have a reply action,
+but we can add more actions here
+
+00:11:15.316 --> 00:11:16.966 A:middle
+and they will appear
+in the banner
+
+00:11:16.966 --> 00:11:18.596 A:middle
+or in the alerts
+in the lock screen.
+
+00:11:19.796 --> 00:11:21.546 A:middle
+Then we create our settings
+
+00:11:22.156 --> 00:11:24.116 A:middle
+and we register them
+with the application.
+
+00:11:24.566 --> 00:11:29.096 A:middle
+This is the point where the
+user is going to be prompted
+
+00:11:29.216 --> 00:11:32.506 A:middle
+for permission to use
+the user notifications.
+
+00:11:33.466 --> 00:11:36.956 A:middle
+So if notifications are
+an option in your app,
+
+00:11:37.246 --> 00:11:41.376 A:middle
+they are not required, maybe
+you don't need to register them
+
+00:11:41.376 --> 00:11:42.326 A:middle
+when the app launches.
+
+00:11:42.326 --> 00:11:44.676 A:middle
+You can register them
+when the user says, yes,
+
+00:11:44.916 --> 00:11:46.456 A:middle
+I do want to receive
+a notification.
+
+00:11:46.456 --> 00:11:47.356 A:middle
+There is a button somewhere.
+
+00:11:47.886 --> 00:11:54.126 A:middle
+How do you receive these
+text input notifications?
+
+00:11:55.496 --> 00:11:59.036 A:middle
+There's a new delegate in your
+app delegate, a new method
+
+
+
+00:12:00.026 --> 00:12:03.346 A:middle
+and it's very similar
+to the delegate we used
+
+00:12:03.346 --> 00:12:04.946 A:middle
+for the old type of actions.
+
+00:12:05.326 --> 00:12:08.436 A:middle
+The only difference is that
+now you have a new parameter
+
+00:12:08.746 --> 00:12:11.176 A:middle
+that tells you the
+response from the user.
+
+00:12:12.086 --> 00:12:15.436 A:middle
+This is from the delegate
+for the remote notifications
+
+00:12:16.066 --> 00:12:18.096 A:middle
+and this is the one for
+local notifications.
+
+00:12:18.476 --> 00:12:23.596 A:middle
+There's a tiny difference, but
+they are two different methods.
+
+00:12:26.016 --> 00:12:30.156 A:middle
+How do you handle the data
+that you receive from the user?
+
+00:12:31.486 --> 00:12:32.286 A:middle
+This is the delegate.
+
+00:12:34.006 --> 00:12:38.366 A:middle
+We have the identifier that
+was set in the category
+
+00:12:38.366 --> 00:12:39.866 A:middle
+when we registered
+the notifications.
+
+00:12:41.466 --> 00:12:45.746 A:middle
+We have the response info,
+and that contains a dictionary
+
+00:12:46.156 --> 00:12:49.236 A:middle
+with information sent back
+from the notification.
+
+00:12:49.766 --> 00:12:52.336 A:middle
+In this case, since it's
+a text input action,
+
+00:12:52.336 --> 00:12:55.136 A:middle
+it will contain the text
+that the user typed.
+
+00:12:55.136 --> 00:13:00.916 A:middle
+This is a check that the
+identifier is actually the one
+
+
+
+00:12:55.136 --> 00:13:00.916 A:middle
+This is a check that the
+identifier is actually the one
+
+00:13:01.566 --> 00:13:07.466 A:middle
+for the comment reply action
+that I created and then I go
+
+00:13:07.526 --> 00:13:10.776 A:middle
+and extract the text
+from the dictionary.
+
+00:13:11.466 --> 00:13:13.186 A:middle
+There's some conversion
+to be done,
+
+00:13:13.466 --> 00:13:17.006 A:middle
+but when I have the string, I
+can do whatever I need to do.
+
+00:13:17.006 --> 00:13:22.086 A:middle
+Like, in this example, I
+can append it to my chat app
+
+00:13:22.086 --> 00:13:22.826 A:middle
+in the view controller.
+
+00:13:23.656 --> 00:13:27.786 A:middle
+All of this is also
+supported by the Apple Watch.
+
+00:13:28.976 --> 00:13:29.826 A:middle
+It just works.
+
+00:13:30.316 --> 00:13:31.566 A:middle
+You create a notification.
+
+00:13:32.266 --> 00:13:33.346 A:middle
+You create the actions.
+
+00:13:33.436 --> 00:13:37.546 A:middle
+You have the text reply and the
+user gets the standard Apple
+
+00:13:37.546 --> 00:13:40.846 A:middle
+Watch Quickboard to reply
+to the notification.
+
+00:13:41.726 --> 00:13:44.376 A:middle
+And same as I said before,
+
+00:13:45.016 --> 00:13:49.366 A:middle
+if you want to customize the
+way it looks or other behaviors,
+
+00:13:49.366 --> 00:13:53.056 A:middle
+you can for example customize
+the list of responses
+
+00:13:53.096 --> 00:13:54.956 A:middle
+that the user can tap on here.
+
+00:13:55.576 --> 00:13:58.306 A:middle
+Again, check the
+WatchKit sessions
+
+00:13:58.306 --> 00:14:03.516 A:middle
+that we had earlier in the week.
+
+
+
+00:13:58.306 --> 00:14:03.516 A:middle
+that we had earlier in the week.
+
+00:14:03.716 --> 00:14:05.696 A:middle
+Now, I have one more thing.
+
+00:14:06.816 --> 00:14:08.726 A:middle
+Unfortunately it's not
+a new iPod classic.
+
+00:14:08.906 --> 00:14:10.356 A:middle
+It's not super exciting.
+
+00:14:10.966 --> 00:14:12.806 A:middle
+It's iOS 8 compatibility.
+
+00:14:13.786 --> 00:14:17.426 A:middle
+It's a small thing, but you
+need to pay attention because,
+
+00:14:18.696 --> 00:14:23.046 A:middle
+say you have an app
+in iOS 8 with actions,
+
+00:14:23.766 --> 00:14:28.476 A:middle
+and you already had a reply
+action because you have a chat
+
+00:14:28.476 --> 00:14:31.736 A:middle
+up and when the user receives
+the notification, you want --
+
+00:14:33.076 --> 00:14:36.416 A:middle
+if they tap on the reply
+button, they can go directly
+
+00:14:36.416 --> 00:14:38.436 A:middle
+to the conversation
+that they were having.
+
+00:14:38.436 --> 00:14:40.886 A:middle
+So you open your app in
+the right conversation
+
+00:14:40.886 --> 00:14:42.106 A:middle
+and they can start
+typing right away.
+
+00:14:43.546 --> 00:14:47.986 A:middle
+In this case, you would have
+used a foreground action
+
+00:14:48.306 --> 00:14:51.916 A:middle
+because that is when
+we launch the app,
+
+00:14:52.106 --> 00:14:57.286 A:middle
+when the user taps
+on the action.
+
+00:14:57.466 --> 00:15:01.866 A:middle
+Now, when you do this
+in iOS 9, and you want
+
+
+
+00:14:57.466 --> 00:15:01.866 A:middle
+Now, when you do this
+in iOS 9, and you want
+
+00:15:01.866 --> 00:15:07.346 A:middle
+to use a text input action, you
+would use a background action,
+
+00:15:07.346 --> 00:15:09.516 A:middle
+because you don't want
+the app to be launched.
+
+00:15:09.516 --> 00:15:13.666 A:middle
+You want the text input right
+there and the banner to go away
+
+00:15:13.666 --> 00:15:15.296 A:middle
+when the user typed
+and sends a response.
+
+00:15:16.166 --> 00:15:22.076 A:middle
+You see that you have a problem,
+and you need your action
+
+00:15:22.076 --> 00:15:23.926 A:middle
+to be registered in
+two different ways,
+
+00:15:23.926 --> 00:15:28.446 A:middle
+depending on if your app is
+running on iOS 8 or iOS 9.
+
+00:15:29.476 --> 00:15:33.536 A:middle
+So when you are registering
+your actions at the beginning,
+
+00:15:33.536 --> 00:15:36.646 A:middle
+the piece of code that
+we saw, you need to check
+
+00:15:37.786 --> 00:15:39.526 A:middle
+on which version of
+iOS you are running.
+
+00:15:39.846 --> 00:15:43.356 A:middle
+You can check if the API
+is available and decide
+
+00:15:43.356 --> 00:15:46.486 A:middle
+to do the two things
+in different ways.
+
+00:15:48.036 --> 00:15:50.866 A:middle
+So this was text input action.
+
+00:15:52.766 --> 00:15:57.046 A:middle
+We saw iOS notifications,
+how they work in the system.
+
+00:15:58.576 --> 00:16:01.366 A:middle
+We saw silent notifications
+that you can use
+
+
+
+00:15:58.576 --> 00:16:01.366 A:middle
+We saw silent notifications
+that you can use
+
+00:16:01.366 --> 00:16:05.246 A:middle
+to have your app update the
+content and be already available
+
+00:16:05.246 --> 00:16:06.466 A:middle
+for when the user uses it.
+
+00:16:07.386 --> 00:16:10.316 A:middle
+We saw user notifications,
+and actions.
+
+00:16:10.916 --> 00:16:15.416 A:middle
+We saw the new text
+input feature
+
+00:16:15.416 --> 00:16:19.366 A:middle
+that I hope you guys
+are really going to use.
+
+00:16:20.826 --> 00:16:23.356 A:middle
+And how all of this
+forwards to the Apple Watch
+
+00:16:23.356 --> 00:16:25.756 A:middle
+and how it behaves
+on the Apple Watch.
+
+00:16:26.286 --> 00:16:31.726 A:middle
+And now, I'm going to leave
+the stage to my colleague Gokul
+
+00:16:31.866 --> 00:16:35.176 A:middle
+who will tell you about
+some important news
+
+00:16:35.176 --> 00:16:37.016 A:middle
+about Apple Push
+Notification Service.
+
+00:16:37.326 --> 00:16:37.966 A:middle
+Thank you.
+
+00:16:38.516 --> 00:16:46.136 A:middle
+[Applause]
+
+00:16:46.636 --> 00:16:47.296 A:middle
+&gt;&gt; GOKUL THIRUMALAI:
+Good afternoon.
+
+00:16:47.656 --> 00:16:48.476 A:middle
+My name is Gokul.
+
+00:16:49.166 --> 00:16:52.386 A:middle
+I work on the Apple Push
+Notification Service or APNS.
+
+00:16:53.856 --> 00:16:55.946 A:middle
+And I'm really excited
+to be here to tell you
+
+00:16:55.946 --> 00:16:57.846 A:middle
+about all the new things we
+we're doing here this year
+
+00:16:57.846 --> 00:16:58.476 A:middle
+with APNS.
+
+00:16:58.476 --> 00:16:59.476 A:middle
+So let's get started.
+
+
+
+00:17:00.496 --> 00:17:05.665 A:middle
+We will start with a review of
+how APNS works, for those of you
+
+00:17:05.665 --> 00:17:09.976 A:middle
+that are new to iOS remote
+notifications, or APNS.
+
+00:17:11.036 --> 00:17:13.866 A:middle
+And then we'll talk about
+the new provider API
+
+00:17:13.866 --> 00:17:16.675 A:middle
+that we are really thrilled
+to be announcing this year.
+
+00:17:17.856 --> 00:17:19.976 A:middle
+The flow of remote notifications
+
+00:17:19.976 --> 00:17:23.925 A:middle
+through APNS has these
+four familiar components.
+
+00:17:23.925 --> 00:17:27.296 A:middle
+The bottom right is your
+client app that runs
+
+00:17:27.296 --> 00:17:29.596 A:middle
+on the operating system
+on the bottom left,
+
+00:17:30.316 --> 00:17:33.566 A:middle
+and the top left is APNS and
+the top right is your provider
+
+00:17:33.566 --> 00:17:36.156 A:middle
+that is responsible for
+sending remote notifications.
+
+00:17:37.386 --> 00:17:40.006 A:middle
+So the flow starts
+with you registering
+
+00:17:40.006 --> 00:17:41.506 A:middle
+to receive notifications
+
+00:17:42.156 --> 00:17:43.926 A:middle
+with the operating system,
+from the client app.
+
+00:17:45.236 --> 00:17:48.556 A:middle
+When you do that, the operating
+system gets a device token
+
+00:17:48.556 --> 00:17:51.446 A:middle
+that is unique to your
+client app from APNS,
+
+00:17:52.646 --> 00:17:54.246 A:middle
+and that is returned
+back to your client app,
+
+00:17:54.246 --> 00:17:59.076 A:middle
+and then you register
+that with your provider
+
+00:17:59.226 --> 00:18:02.106 A:middle
+which is your server,
+that is responsible
+
+
+
+00:17:59.226 --> 00:18:02.106 A:middle
+which is your server,
+that is responsible
+
+00:18:02.416 --> 00:18:04.056 A:middle
+for sending remote
+notifications.
+
+00:18:04.566 --> 00:18:08.316 A:middle
+Now your provider is
+ultimately responsible
+
+00:18:08.316 --> 00:18:10.956 A:middle
+for sending remote notifications
+and the first step to doing
+
+00:18:10.956 --> 00:18:15.466 A:middle
+that is to register your topic
+in the Apple developer portal,
+
+00:18:16.046 --> 00:18:18.636 A:middle
+and get a certificate
+that you can use
+
+00:18:18.856 --> 00:18:22.446 A:middle
+to securely talk to APNS.
+
+00:18:22.446 --> 00:18:23.636 A:middle
+Once you have the certificate,
+
+00:18:24.226 --> 00:18:29.346 A:middle
+you can establish a client
+SSL connection to APNS
+
+00:18:29.646 --> 00:18:32.946 A:middle
+and send your remote
+notifications using the APNS
+
+00:18:32.946 --> 00:18:33.476 A:middle
+provider API.
+
+00:18:33.476 --> 00:18:39.216 A:middle
+Now, the APNS provided
+API is an extremely fast,
+
+00:18:39.426 --> 00:18:44.386 A:middle
+very high performance server
+API with very low overhead,
+
+00:18:44.386 --> 00:18:47.506 A:middle
+and it allows you to
+send a large number
+
+00:18:47.506 --> 00:18:49.726 A:middle
+of push notifications just
+using a single connection.
+
+00:18:50.906 --> 00:18:52.196 A:middle
+For even higher throughput,
+
+00:18:52.236 --> 00:18:54.556 A:middle
+you can create many
+connections to APNS if you want.
+
+00:18:55.216 --> 00:18:59.536 A:middle
+After you are done sending
+notifications you can leave the
+
+00:18:59.536 --> 00:19:02.356 A:middle
+connection up and
+you can reuse it.
+
+
+
+00:18:59.536 --> 00:19:02.356 A:middle
+connection up and
+you can reuse it.
+
+00:19:02.356 --> 00:19:04.566 A:middle
+APNS will not tear the
+connection down immediately.
+
+00:19:05.616 --> 00:19:06.806 A:middle
+That way you don't pay the cost
+
+00:19:06.806 --> 00:19:08.456 A:middle
+of establishing a
+new connection later.
+
+00:19:09.046 --> 00:19:13.326 A:middle
+If there's any errors
+encompassing your connection,
+
+00:19:13.606 --> 00:19:15.976 A:middle
+APNS will return an error
+code and close the connection.
+
+00:19:16.546 --> 00:19:20.036 A:middle
+That's a review of the
+current API that we have.
+
+00:19:21.356 --> 00:19:26.586 A:middle
+What happens if you uninstall
+your app from the device,
+
+00:19:26.676 --> 00:19:29.176 A:middle
+how do you find out
+about these device tokens
+
+00:19:29.176 --> 00:19:30.176 A:middle
+that are no longer active?
+
+00:19:31.156 --> 00:19:32.706 A:middle
+That's where feedback
+service comes in.
+
+00:19:34.006 --> 00:19:38.086 A:middle
+Feedback service is the way
+you can discover apps --
+
+00:19:38.086 --> 00:19:40.846 A:middle
+device tokens that are no longer
+active for your application
+
+00:19:40.846 --> 00:19:43.956 A:middle
+so you don't waste resources
+trying to send notifications
+
+00:19:43.956 --> 00:19:45.546 A:middle
+that are ultimately
+going to be thrown away.
+
+00:19:46.096 --> 00:19:51.006 A:middle
+It starts when you send a device
+-- when you send a notification
+
+00:19:51.006 --> 00:19:54.316 A:middle
+to a device token
+and APNS discovers
+
+00:19:54.626 --> 00:19:58.696 A:middle
+that the device token is no
+longer active, it will store it
+
+00:19:58.696 --> 00:20:00.166 A:middle
+in the APNS feedback service.
+
+
+
+00:19:58.696 --> 00:20:00.166 A:middle
+in the APNS feedback service.
+
+00:20:02.116 --> 00:20:05.416 A:middle
+Providers can then periodically
+pull the APNS feedback service
+
+00:20:05.416 --> 00:20:07.176 A:middle
+and discover the device
+tokens that are invalid
+
+00:20:07.486 --> 00:20:08.636 A:middle
+and clean up the database.
+
+00:20:09.126 --> 00:20:14.026 A:middle
+That's a quick summary
+of feedback service.
+
+00:20:14.356 --> 00:20:16.736 A:middle
+Let's look at what's ahead.
+
+00:20:17.816 --> 00:20:20.306 A:middle
+Coming next year are
+large device tokens.
+
+00:20:21.346 --> 00:20:23.286 A:middle
+Device tokens today
+are 32 bytes.
+
+00:20:24.386 --> 00:20:28.856 A:middle
+And next year, in 2016, they
+may be growing up to 100 bytes.
+
+00:20:29.366 --> 00:20:33.056 A:middle
+So if you make any assumptions
+about the size of device tokens
+
+00:20:33.056 --> 00:20:38.706 A:middle
+in your code, or in your
+server APIs, now is a good time
+
+00:20:38.826 --> 00:20:40.146 A:middle
+to revisit those assumptions.
+
+00:20:40.606 --> 00:20:44.706 A:middle
+Large device tokens
+coming in 2016.
+
+00:20:45.306 --> 00:20:48.226 A:middle
+So that's a review
+of the provider API
+
+00:20:48.226 --> 00:20:50.086 A:middle
+and what's ahead next year.
+
+00:20:50.536 --> 00:20:51.956 A:middle
+Let's talk about what
+we are doing this year.
+
+00:20:52.496 --> 00:20:56.186 A:middle
+So we have a brand
+new provider API
+
+00:20:57.126 --> 00:20:58.606 A:middle
+that we think you
+will really love.
+
+00:20:59.146 --> 00:21:05.466 A:middle
+This new provider API is built
+on four primary features.
+
+
+
+00:20:59.146 --> 00:21:05.466 A:middle
+This new provider API is built
+on four primary features.
+
+00:21:05.976 --> 00:21:11.866 A:middle
+And we think that it will help
+you send notifications more
+
+00:21:11.866 --> 00:21:16.296 A:middle
+reliably without
+compromising speed or efficiency
+
+00:21:17.206 --> 00:21:19.496 A:middle
+in your apps, in your providers.
+
+00:21:19.976 --> 00:21:27.486 A:middle
+The first feature of the
+new provider API is HTTP/2.
+
+00:21:28.056 --> 00:21:30.086 A:middle
+The new provider API --
+
+00:21:31.516 --> 00:21:35.496 A:middle
+[Applause]
+
+00:21:35.996 --> 00:21:38.346 A:middle
+The new provider
+API is built on top
+
+00:21:38.346 --> 00:21:41.976 A:middle
+of the brand new HTTP/2
+industry standard.
+
+00:21:42.526 --> 00:21:48.896 A:middle
+HTTP/2 is latest evolution
+of the popular HTTP protocol,
+
+00:21:48.896 --> 00:21:54.426 A:middle
+and I'm really happy to build a
+new provider API on top of that.
+
+00:21:54.426 --> 00:21:57.276 A:middle
+Why did we choose HTTP/2
+for our new provider API,
+
+00:21:57.276 --> 00:21:59.886 A:middle
+and what benefits do you get?
+
+
+
+00:22:00.676 --> 00:22:03.296 A:middle
+There are three primary
+things that we think
+
+00:22:03.296 --> 00:22:05.466 A:middle
+that HTTP/2 really
+brings to the table.
+
+00:22:07.156 --> 00:22:09.946 A:middle
+The first thing is that
+it's a request response,
+
+00:22:10.106 --> 00:22:11.016 A:middle
+just like HTTP.
+
+00:22:12.006 --> 00:22:14.986 A:middle
+So every notification that
+you send from your provider
+
+00:22:14.986 --> 00:22:18.666 A:middle
+to APNS will get a response
+back from the server.
+
+00:22:19.226 --> 00:22:23.206 A:middle
+And this builds on top of
+familiar HTTP semantics
+
+00:22:23.206 --> 00:22:27.626 A:middle
+that you are already used
+to, like URIs, headers,
+
+00:22:27.926 --> 00:22:30.346 A:middle
+response codes, things
+you can act on.
+
+00:22:30.896 --> 00:22:36.426 A:middle
+And this we think will help you
+build more reliable providers
+
+00:22:37.056 --> 00:22:38.616 A:middle
+to send push notifications.
+
+00:22:39.636 --> 00:22:40.756 A:middle
+So request response.
+
+00:22:41.646 --> 00:22:45.026 A:middle
+Second, HTTP/2 is a
+multiplex protocol.
+
+00:22:45.886 --> 00:22:48.356 A:middle
+This is much like the
+current provider protocol
+
+00:22:48.356 --> 00:22:49.146 A:middle
+that we have today.
+
+00:22:50.446 --> 00:22:52.156 A:middle
+So we're not compromising
+on speed.
+
+00:22:53.296 --> 00:22:55.856 A:middle
+Multiplexing in HTTP/2 means
+
+00:22:55.856 --> 00:22:59.606 A:middle
+that you can send multiple
+requests simultaneously
+
+00:22:59.606 --> 00:23:01.046 A:middle
+on a single connection
+to the server.
+
+
+
+00:22:59.606 --> 00:23:01.046 A:middle
+on a single connection
+to the server.
+
+00:23:02.076 --> 00:23:04.966 A:middle
+So you are not wasting resources
+setting up new connections
+
+00:23:04.966 --> 00:23:08.546 A:middle
+for every request or
+anything like that.
+
+00:23:08.746 --> 00:23:12.626 A:middle
+Each multiplexed request
+response is called a stream.
+
+00:23:13.146 --> 00:23:15.456 A:middle
+We will look at that
+a little bit later.
+
+00:23:16.026 --> 00:23:18.556 A:middle
+So request response
+and multiplexed.
+
+00:23:19.426 --> 00:23:22.236 A:middle
+The third thing that HTTP/2 is
+great for is that it's binary,
+
+00:23:23.036 --> 00:23:24.426 A:middle
+much like our current protocol.
+
+00:23:25.776 --> 00:23:28.086 A:middle
+We are not compromising
+on efficiency
+
+00:23:28.756 --> 00:23:30.906 A:middle
+by adopting the new
+HTTP/2 provider API.
+
+00:23:32.546 --> 00:23:35.096 A:middle
+With binary, HTTP
+frames that are sent
+
+00:23:35.096 --> 00:23:38.906 A:middle
+over the wire are not text
+like HTTP, but binary,
+
+00:23:39.566 --> 00:23:42.296 A:middle
+and you also get to
+benefit from things
+
+00:23:42.296 --> 00:23:44.946 A:middle
+like header compression
+with HPACK.
+
+00:23:45.716 --> 00:23:49.476 A:middle
+These three things make
+it a really ideal choice
+
+00:23:49.476 --> 00:23:50.476 A:middle
+for the new provider API.
+
+00:23:51.776 --> 00:23:54.726 A:middle
+In addition to these, there
+are also some benefits
+
+00:23:54.926 --> 00:23:57.226 A:middle
+like being an industry standard.
+
+00:23:57.516 --> 00:23:59.326 A:middle
+You can benefit from libraries
+
+00:23:59.326 --> 00:24:02.416 A:middle
+and tooling that's already
+out there for HTTP/2.
+
+
+
+00:23:59.326 --> 00:24:02.416 A:middle
+and tooling that's already
+out there for HTTP/2.
+
+00:24:03.556 --> 00:24:08.656 A:middle
+Overall, we think this is
+going to be really exciting.
+
+00:24:09.256 --> 00:24:14.426 A:middle
+Now, the flow of HTTP/2
+provider API looks exactly
+
+00:24:14.426 --> 00:24:17.666 A:middle
+like the flow you have
+today, except the connection,
+
+00:24:18.086 --> 00:24:21.536 A:middle
+the protocol between the
+provider and APNS is HTTP/2.
+
+00:24:21.836 --> 00:24:24.416 A:middle
+So you don't need to modify your
+client app, the way it talks
+
+00:24:24.416 --> 00:24:27.216 A:middle
+to the operating system or the
+way it talks to your provider
+
+00:24:27.426 --> 00:24:28.856 A:middle
+in order to benefit
+from this new API.
+
+00:24:28.856 --> 00:24:34.046 A:middle
+You can adopt the API, and you
+will instantly benefit from it.
+
+00:24:35.396 --> 00:24:37.686 A:middle
+Let's drill into what
+that process looks like.
+
+00:24:37.846 --> 00:24:40.916 A:middle
+The first step here is
+establishing a connection,
+
+00:24:41.006 --> 00:24:43.446 A:middle
+from your provider, to APNS.
+
+00:24:43.926 --> 00:24:46.386 A:middle
+When you establish a connection,
+
+00:24:46.606 --> 00:24:49.386 A:middle
+it uses the same
+client certificates
+
+00:24:49.526 --> 00:24:53.736 A:middle
+that you already have today
+with the current provider API.
+
+00:24:54.416 --> 00:24:55.966 A:middle
+So using that certificate,
+
+00:24:55.966 --> 00:24:58.976 A:middle
+you can establish a client
+authenticated SSL connection
+
+00:24:59.506 --> 00:25:03.576 A:middle
+to APNS, and as soon as the
+connection is established,
+
+
+
+00:24:59.506 --> 00:25:03.576 A:middle
+to APNS, and as soon as the
+connection is established,
+
+00:25:03.966 --> 00:25:07.536 A:middle
+HTTP/2 starts by
+exchanging settings frames.
+
+00:25:10.256 --> 00:25:13.916 A:middle
+Settings frames contain
+details like number
+
+00:25:13.916 --> 00:25:16.246 A:middle
+of concurrent requests you
+can issue over that connection
+
+00:25:16.776 --> 00:25:19.346 A:middle
+or the header table
+parameter sizes and so forth.
+
+00:25:20.626 --> 00:25:22.576 A:middle
+As soon as the settings
+frames are exchanged,
+
+00:25:22.576 --> 00:25:24.796 A:middle
+as soon as you send the setting
+frames from the provider,
+
+00:25:25.076 --> 00:25:28.246 A:middle
+you can start sending
+your notification data,
+
+00:25:28.246 --> 00:25:29.546 A:middle
+your notification requests.
+
+00:25:30.066 --> 00:25:34.036 A:middle
+Let's take a look at what a
+notification request would
+
+00:25:34.506 --> 00:25:35.976 A:middle
+look like.
+
+00:25:36.226 --> 00:25:38.336 A:middle
+Each notification
+request that you make
+
+00:25:38.336 --> 00:25:40.346 A:middle
+to APNS is a post request.
+
+00:25:41.686 --> 00:25:44.416 A:middle
+This post request
+is made to a URI
+
+00:25:44.656 --> 00:25:48.316 A:middle
+that includes the device
+token and has a body,
+
+00:25:48.316 --> 00:25:49.886 A:middle
+the JSON body that's exactly
+
+00:25:49.886 --> 00:25:52.256 A:middle
+like the current provider
+API that you use today.
+
+00:25:53.166 --> 00:25:57.106 A:middle
+And this JSON payload is
+delivered intact to the device.
+
+00:25:57.606 --> 00:26:03.546 A:middle
+Now, to take an advantage
+of HTTP/2 multiplexing.
+
+
+
+00:25:57.606 --> 00:26:03.546 A:middle
+Now, to take an advantage
+of HTTP/2 multiplexing.
+
+00:26:04.356 --> 00:26:07.076 A:middle
+If you have multiple requests,
+multiple notifications
+
+00:26:07.076 --> 00:26:09.926 A:middle
+that you want to send,
+then you can send them all
+
+00:26:09.926 --> 00:26:10.686 A:middle
+in the same connection.
+
+00:26:11.246 --> 00:26:14.446 A:middle
+That's what a request
+looks like.
+
+00:26:14.826 --> 00:26:16.476 A:middle
+What about a response
+to that request?
+
+00:26:18.796 --> 00:26:22.176 A:middle
+The response to a request
+in this new provider API,
+
+00:26:22.686 --> 00:26:24.816 A:middle
+if everything works
+great, no problems.
+
+00:26:25.216 --> 00:26:26.926 A:middle
+You get a 200 status okay.
+
+00:26:27.846 --> 00:26:28.936 A:middle
+Everything is successful,
+
+00:26:28.936 --> 00:26:31.456 A:middle
+continue to send
+notifications as you already do.
+
+00:26:32.046 --> 00:26:34.536 A:middle
+What if there's a failure?
+
+00:26:35.056 --> 00:26:40.846 A:middle
+What if you had a bad device
+token, and APNS failed
+
+00:26:40.846 --> 00:26:43.396 A:middle
+to process your message?
+
+00:26:43.556 --> 00:26:45.076 A:middle
+You get a 400 bad request.
+
+00:26:45.956 --> 00:26:47.826 A:middle
+The body -- the response body
+
+00:26:47.946 --> 00:26:50.946 A:middle
+for that request
+includes the JSON payload
+
+00:26:50.946 --> 00:26:53.776 A:middle
+with a reason why
+your request failed.
+
+00:26:54.736 --> 00:26:58.806 A:middle
+It will say "bad device token"
+and the connection will stay up.
+
+00:26:58.806 --> 00:27:00.586 A:middle
+You can continue to
+send more requests
+
+
+
+00:26:58.806 --> 00:27:00.586 A:middle
+You can continue to
+send more requests
+
+00:27:00.586 --> 00:27:05.526 A:middle
+over this HTTP connection to the
+server, and everything is well.
+
+00:27:06.306 --> 00:27:08.696 A:middle
+So that's what a request
+response looks like.
+
+00:27:08.696 --> 00:27:12.476 A:middle
+Now, I think it will be useful
+to go through an example
+
+00:27:12.476 --> 00:27:15.196 A:middle
+of what a request response using
+this new provider API would look
+
+00:27:15.196 --> 00:27:17.336 A:middle
+like on the wire.
+
+00:27:17.596 --> 00:27:22.136 A:middle
+If you have not seen an
+HTTP/2 request response,
+
+00:27:22.136 --> 00:27:24.436 A:middle
+this might look like
+a lot of text,
+
+00:27:24.436 --> 00:27:25.926 A:middle
+but I will walk you through it.
+
+00:27:26.486 --> 00:27:27.716 A:middle
+So here is an example.
+
+00:27:28.246 --> 00:27:31.916 A:middle
+Notice that this is
+a request in HTTP/2
+
+00:27:31.916 --> 00:27:34.966 A:middle
+and there are two
+frames in the stream.
+
+00:27:35.756 --> 00:27:37.206 A:middle
+The first frame is
+a header frame,
+
+00:27:37.206 --> 00:27:39.086 A:middle
+and the second frame
+is the data frame.
+
+00:27:39.636 --> 00:27:45.536 A:middle
+The header frame contains things
+like the post as the method
+
+00:27:45.916 --> 00:27:49.936 A:middle
+or the URI containing the device
+token for your application
+
+00:27:49.936 --> 00:27:52.376 A:middle
+that you are sending
+this notification to.
+
+00:27:54.236 --> 00:27:57.256 A:middle
+The header frame also
+contains optional parameters
+
+00:27:57.486 --> 00:28:01.576 A:middle
+like expiration, ID, priority,
+things of that nature.
+
+
+
+00:27:57.486 --> 00:28:01.576 A:middle
+like expiration, ID, priority,
+things of that nature.
+
+00:28:05.916 --> 00:28:08.856 A:middle
+In the data frame is
+the actual JSON payload
+
+00:28:09.126 --> 00:28:11.526 A:middle
+that you want delivered
+to the device.
+
+00:28:12.196 --> 00:28:14.036 A:middle
+In this example, this
+is a simple alert
+
+00:28:14.036 --> 00:28:16.316 A:middle
+and it says hello, HTTP/2.
+
+00:28:16.626 --> 00:28:18.886 A:middle
+That's what a request
+locks like.
+
+00:28:19.196 --> 00:28:21.226 A:middle
+Let's look at what the
+response for this might be.
+
+00:28:22.336 --> 00:28:24.356 A:middle
+The response in this case
+is everything was great.
+
+00:28:24.356 --> 00:28:25.856 A:middle
+You get a 200 okay.
+
+00:28:26.136 --> 00:28:26.906 A:middle
+Nothing more to do.
+
+00:28:26.906 --> 00:28:27.456 A:middle
+Short and sweet.
+
+00:28:28.016 --> 00:28:32.956 A:middle
+If there's a failure, say,
+the device token was bad,
+
+00:28:33.066 --> 00:28:36.686 A:middle
+here's what the response
+might look like.
+
+00:28:37.356 --> 00:28:40.006 A:middle
+Again, two frames, a header
+frame and a data frame.
+
+00:28:41.306 --> 00:28:43.306 A:middle
+Notice that the status
+now says 400.
+
+00:28:44.406 --> 00:28:48.356 A:middle
+And the body is a JSON
+payload that has the reason
+
+00:28:48.356 --> 00:28:50.026 A:middle
+for why your request failed.
+
+00:28:50.306 --> 00:28:51.926 A:middle
+So in this case it was
+a bad device token.
+
+00:28:52.536 --> 00:28:56.256 A:middle
+So you can act on that
+response, and continue
+
+00:28:56.256 --> 00:28:57.966 A:middle
+to process other notifications.
+
+00:28:58.366 --> 00:29:01.366 A:middle
+So that's a quick look
+
+
+
+00:28:58.366 --> 00:29:01.366 A:middle
+So that's a quick look
+
+00:29:01.366 --> 00:29:06.606 A:middle
+at the new HTTP/2 request
+response provider API.
+
+00:29:06.606 --> 00:29:10.296 A:middle
+That's the first feature
+of this new provider API.
+
+00:29:12.636 --> 00:29:15.586 A:middle
+The next feature is feedback.
+
+00:29:16.046 --> 00:29:16.806 A:middle
+What about feedback?
+
+00:29:17.406 --> 00:29:19.436 A:middle
+With the new provider API,
+
+00:29:19.436 --> 00:29:21.996 A:middle
+we are introducing
+instant feedback.
+
+00:29:23.346 --> 00:29:26.046 A:middle
+With instant feedback,
+you don't need to talk
+
+00:29:26.046 --> 00:29:29.626 A:middle
+to a separate feedback service
+to get the device tokens
+
+00:29:29.856 --> 00:29:31.906 A:middle
+that are no longer active
+for your application.
+
+00:29:33.356 --> 00:29:35.846 A:middle
+You get -- you can
+instantly learn
+
+00:29:35.846 --> 00:29:37.626 A:middle
+about them in the response.
+
+00:29:38.836 --> 00:29:41.186 A:middle
+So going back to the
+flow of feedback service.
+
+00:29:42.896 --> 00:29:46.946 A:middle
+Instead of polling
+periodically from APNS feedback
+
+00:29:46.946 --> 00:29:52.456 A:middle
+from your provider, you can
+now instead get feedback
+
+00:29:52.456 --> 00:29:53.236 A:middle
+in the response.
+
+00:29:53.906 --> 00:29:57.626 A:middle
+And the HTTP status
+code in the response,
+
+00:29:58.286 --> 00:30:03.196 A:middle
+in the case of feedback, will be
+a status 410, 410 meaning gone,
+
+
+
+00:29:58.286 --> 00:30:03.196 A:middle
+in the case of feedback, will be
+a status 410, 410 meaning gone,
+
+00:30:03.406 --> 00:30:05.696 A:middle
+that the device token
+is no longer active
+
+00:30:06.086 --> 00:30:06.826 A:middle
+for your application.
+
+00:30:07.436 --> 00:30:10.306 A:middle
+In addition to this status code
+
+00:30:10.536 --> 00:30:12.396 A:middle
+that the device token
+is no longer active,
+
+00:30:13.576 --> 00:30:18.746 A:middle
+you also get the time stamp for
+the last time that APNS learned
+
+00:30:19.036 --> 00:30:20.726 A:middle
+that the device token
+was no longer active
+
+00:30:20.726 --> 00:30:21.466 A:middle
+for your application.
+
+00:30:22.626 --> 00:30:24.386 A:middle
+Let's take a look at an example.
+
+00:30:24.386 --> 00:30:26.286 A:middle
+So you sent a notification.
+
+00:30:26.656 --> 00:30:27.556 A:middle
+You sent a request.
+
+00:30:27.936 --> 00:30:31.306 A:middle
+And it turned out the device
+token was no longer active
+
+00:30:31.306 --> 00:30:33.826 A:middle
+for your application,
+so you can clean it
+
+00:30:33.826 --> 00:30:35.566 A:middle
+up so you don't send
+notifications to it anymore.
+
+00:30:36.776 --> 00:30:38.546 A:middle
+The response might look
+something hike this.
+
+00:30:38.876 --> 00:30:43.366 A:middle
+Notice there's the status
+410 and there's a time stamp.
+
+00:30:43.476 --> 00:30:46.136 A:middle
+This is the time stamp
+that APNS last confirmed
+
+00:30:46.436 --> 00:30:49.076 A:middle
+that the device token
+is no longer valid
+
+00:30:49.076 --> 00:30:49.826 A:middle
+for your application.
+
+00:30:50.376 --> 00:30:56.416 A:middle
+So HTTP/2 provider API
+and instant feedback.
+
+00:30:57.116 --> 00:31:01.816 A:middle
+The third new feature of this
+new provider API is simplified
+
+
+
+00:30:57.116 --> 00:31:01.816 A:middle
+The third new feature of this
+new provider API is simplified
+
+00:31:01.816 --> 00:31:02.656 A:middle
+certificate handling.
+
+00:31:03.256 --> 00:31:06.806 A:middle
+We know you make reach
+applications with a lot
+
+00:31:06.806 --> 00:31:11.226 A:middle
+of features and through
+development and production,
+
+00:31:11.546 --> 00:31:14.056 A:middle
+we understand that you have to
+create a lot of certificates.
+
+00:31:14.576 --> 00:31:17.816 A:middle
+We simplify certificate
+handling --
+
+00:31:19.776 --> 00:31:23.146 A:middle
+before simplify certificate
+handling, here's an example
+
+00:31:23.146 --> 00:31:24.746 A:middle
+of certificates would
+you have to deal with.
+
+00:31:25.416 --> 00:31:27.466 A:middle
+You would have a
+certificate for,
+
+00:31:27.466 --> 00:31:31.086 A:middle
+let's say your application
+topic, perhaps one for VOIP,
+
+00:31:31.756 --> 00:31:38.026 A:middle
+one for watch complications,
+and if you were working
+
+00:31:38.026 --> 00:31:40.086 A:middle
+with development and
+production environments,
+
+00:31:40.506 --> 00:31:45.456 A:middle
+you might have sets of
+certificates for each of these.
+
+00:31:45.676 --> 00:31:47.276 A:middle
+With simplified certificate
+handling,
+
+00:31:47.916 --> 00:31:51.416 A:middle
+you now can use a single
+certificate for all
+
+00:31:51.416 --> 00:31:52.866 A:middle
+of your pushes for
+your application.
+
+00:31:53.516 --> 00:32:00.596 A:middle
+[Applause]
+
+
+
+00:31:53.516 --> 00:32:00.596 A:middle
+[Applause]
+
+00:32:01.096 --> 00:32:01.616 A:middle
+It's exciting.
+
+00:32:02.436 --> 00:32:04.436 A:middle
+[Laughter]
+
+00:32:04.856 --> 00:32:08.716 A:middle
+So HTTP/2 provider
+API, instant feedback,
+
+00:32:09.736 --> 00:32:11.226 A:middle
+and simplified certificate
+handling.
+
+00:32:11.696 --> 00:32:14.796 A:middle
+Three new features of
+the new provider API.
+
+00:32:15.486 --> 00:32:21.846 A:middle
+Now, last year, we increased the
+push payload size from 256 bytes
+
+00:32:22.226 --> 00:32:24.196 A:middle
+to 2 kilobites to
+a lot of applause.
+
+00:32:26.476 --> 00:32:29.966 A:middle
+This year, we are doubling
+this to 4 kilobytes.
+
+00:32:30.516 --> 00:32:35.296 A:middle
+[Applause]
+
+00:32:35.796 --> 00:32:40.726 A:middle
+The 4 kilobyte limit will apply
+to all versions of iOS and OS X.
+
+00:32:41.276 --> 00:32:46.366 A:middle
+So it's not exclusive to
+iOS 9 or OS X, El Capitan.
+
+00:32:46.936 --> 00:32:51.596 A:middle
+It will be part of
+the new provider API.
+
+00:32:52.446 --> 00:32:54.806 A:middle
+So that's the new provider API.
+
+00:32:55.646 --> 00:33:00.096 A:middle
+To review, there's a new request
+response, HTTP/2 interface.
+
+
+
+00:32:55.646 --> 00:33:00.096 A:middle
+To review, there's a new request
+response, HTTP/2 interface.
+
+00:33:01.916 --> 00:33:03.986 A:middle
+There's instant feedback
+where you can learn
+
+00:33:03.986 --> 00:33:07.596 A:middle
+about device tokens that
+are no longer active.
+
+00:33:07.746 --> 00:33:10.966 A:middle
+Simplified certificate
+handling will get you a single
+
+00:33:10.966 --> 00:33:15.136 A:middle
+certificate for all
+pushes to your topics.
+
+00:33:16.186 --> 00:33:17.996 A:middle
+And a new 4 kilobyte payload.
+
+00:33:20.256 --> 00:33:24.536 A:middle
+The new provider API
+will be available
+
+00:33:24.536 --> 00:33:27.036 A:middle
+in APNS development
+environments this summer.
+
+00:33:28.096 --> 00:33:32.446 A:middle
+And we will be rolling it out
+to production later this year.
+
+00:33:32.646 --> 00:33:35.406 A:middle
+Once again, the new
+provider API can be used
+
+00:33:35.586 --> 00:33:41.106 A:middle
+to send notifications to all
+versions of iOS and OS X.
+
+00:33:41.106 --> 00:33:43.296 A:middle
+You don't need to
+create any special logic
+
+00:33:43.296 --> 00:33:44.396 A:middle
+for version compatibility.
+
+00:33:45.046 --> 00:33:48.296 A:middle
+So that's the new provider API.
+
+00:33:49.506 --> 00:33:52.206 A:middle
+For more information
+on Michele's section
+
+00:33:52.306 --> 00:33:56.036 A:middle
+on iOS notification as
+well as APNS, please refer
+
+00:33:56.036 --> 00:33:58.386 A:middle
+to the APNS developer
+documentation.
+
+00:33:59.356 --> 00:34:02.016 A:middle
+The new provider API will be
+documented later this year.
+
+
+
+00:33:59.356 --> 00:34:02.016 A:middle
+The new provider API will be
+documented later this year.
+
+00:34:02.556 --> 00:34:07.196 A:middle
+You can also access technical
+support and developer forums,
+
+00:34:07.756 --> 00:34:10.106 A:middle
+and please direct
+general inquiries to Paul,
+
+00:34:10.106 --> 00:34:11.356 A:middle
+our core list evangelist.
+
+00:34:13.436 --> 00:34:15.896 A:middle
+There are related sessions
+you may be interested in,
+
+00:34:16.545 --> 00:34:19.356 A:middle
+specifically ones about
+ClockKit, Watch connectivity,
+
+00:34:19.466 --> 00:34:23.576 A:middle
+and things that Michel
+demoed and the networking
+
+00:34:23.576 --> 00:34:26.926 A:middle
+with NSURL session has
+more details on HTTP/2.
+
+00:34:27.585 --> 00:34:28.505 A:middle
+Thank you very much.
+
+00:34:28.726 --> 00:34:29.426 A:middle
+Have a great evening.
+
+00:34:30.016 --> 00:34:32.000 A:middle
+[Applause]
+

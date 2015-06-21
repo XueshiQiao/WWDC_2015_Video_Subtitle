@@ -1,0 +1,3916 @@
+
+00:00:26.596 --> 00:00:26.716 A:middle
+&gt;&gt; VIPUL PRAKASH: Hello.
+
+00:00:26.716 --> 00:00:30.166 A:middle
+Welcome to session 709.
+
+00:00:30.936 --> 00:00:33.826 A:middle
+I'm Vipul Prakash
+and I'll be joined
+
+00:00:33.826 --> 00:00:36.286 A:middle
+by my colleagues Dave
+Salim and Jason Douglas.
+
+00:00:36.786 --> 00:00:41.846 A:middle
+We'll give you an in-depth tour
+of the new Search APIs in iOS 9.
+
+00:00:42.396 --> 00:00:46.846 A:middle
+As you saw in the Keynote, deep
+links, the content in your apps,
+
+00:00:46.846 --> 00:00:50.036 A:middle
+they can now appear as tightly
+integrated search results
+
+00:00:50.106 --> 00:00:50.746 A:middle
+in Spotlight.
+
+00:00:51.316 --> 00:00:52.766 A:middle
+This is tremendously exciting.
+
+00:00:53.726 --> 00:00:56.376 A:middle
+On iOS users spent most of
+their time inside of apps,
+
+00:00:56.516 --> 00:00:58.956 A:middle
+this is where all the great
+content is, this is really
+
+00:00:58.956 --> 00:01:01.366 A:middle
+where people live their
+digital lives these days.
+
+
+
+00:00:58.956 --> 00:01:01.366 A:middle
+where people live their
+digital lives these days.
+
+00:01:01.816 --> 00:01:04.766 A:middle
+We have been interested
+in connecting all
+
+00:01:04.766 --> 00:01:06.436 A:middle
+of this great content
+through Search.
+
+00:01:06.816 --> 00:01:11.936 A:middle
+We didn't want to create an ad
+hoc one-size-fits-all course
+
+00:01:11.936 --> 00:01:14.656 A:middle
+of indexing scheme going
+inside of your apps
+
+00:01:14.656 --> 00:01:17.136 A:middle
+to grab whatever it can
+and stuffs it in Spotlight.
+
+00:01:17.636 --> 00:01:20.156 A:middle
+That's an approach to indexing
+that worked well for the web
+
+00:01:20.646 --> 00:01:24.316 A:middle
+because it is uniform but
+it is the wrong approach
+
+00:01:24.586 --> 00:01:25.546 A:middle
+for app search.
+
+00:01:26.596 --> 00:01:30.006 A:middle
+What we wanted to do was
+create an experience where you
+
+00:01:30.006 --> 00:01:33.106 A:middle
+as developers choose
+exactly what is in the index,
+
+00:01:33.556 --> 00:01:37.306 A:middle
+how results appear in search
+and where the user goes
+
+00:01:37.306 --> 00:01:39.086 A:middle
+to when they tap on the results.
+
+00:01:39.946 --> 00:01:41.506 A:middle
+I think we have been
+able to achieve this
+
+00:01:41.616 --> 00:01:44.896 A:middle
+with search APIs keeping
+them simple and lightweight.
+
+00:01:46.216 --> 00:01:51.286 A:middle
+The goal of search APIs
+is to bring the content
+
+00:01:51.346 --> 00:01:55.926 A:middle
+in your apps more deeply
+in a search context.
+
+00:01:56.756 --> 00:01:59.316 A:middle
+In addition to results appearing
+
+00:01:59.316 --> 00:02:02.156 A:middle
+in Spotlight they
+also appear in Safari.
+
+
+
+00:01:59.316 --> 00:02:02.156 A:middle
+in Spotlight they
+also appear in Safari.
+
+00:02:03.916 --> 00:02:08.485 A:middle
+This works in a way similar to
+how Spotlight suggestions work
+
+00:02:08.485 --> 00:02:10.606 A:middle
+which are produced in iOS 8.
+
+00:02:11.466 --> 00:02:14.676 A:middle
+As the user types a query
+into the Safari address bar,
+
+00:02:14.676 --> 00:02:17.946 A:middle
+you have the results from the
+Internet like Maps, Wikipedia,
+
+00:02:17.946 --> 00:02:22.046 A:middle
+App Store and the user can tap
+on the results to jump directly
+
+00:02:22.046 --> 00:02:23.366 A:middle
+to the content they're
+looking for.
+
+00:02:23.956 --> 00:02:27.176 A:middle
+In iOS 9 users will be
+able to jump directly
+
+00:02:27.576 --> 00:02:30.326 A:middle
+to content inside of your apps.
+
+00:02:31.596 --> 00:02:36.306 A:middle
+This is another vector
+of distribution
+
+00:02:36.306 --> 00:02:38.166 A:middle
+and exposure we provide.
+
+00:02:38.776 --> 00:02:42.866 A:middle
+Public deep links inside of
+your app, will now appear
+
+00:02:43.096 --> 00:02:46.186 A:middle
+in search results for users that
+don't have your app installed.
+
+00:02:46.666 --> 00:02:49.056 A:middle
+This is super exciting.
+
+00:02:49.706 --> 00:02:54.776 A:middle
+This provides a whole
+new level of exposure
+
+00:02:54.776 --> 00:02:57.506 A:middle
+for your app potentially
+to hundreds
+
+00:02:57.506 --> 00:02:59.586 A:middle
+of millions of iOS users.
+
+
+
+00:03:00.516 --> 00:03:06.386 A:middle
+[Applause]
+
+00:03:06.886 --> 00:03:08.146 A:middle
+&gt;&gt; VIPUL PRAKASH: Let's
+look at how this works.
+
+00:03:08.146 --> 00:03:09.736 A:middle
+Let's look at examples.
+
+00:03:11.316 --> 00:03:15.106 A:middle
+We invited the folks from
+Airbnb to look at the APIs
+
+00:03:15.106 --> 00:03:18.606 A:middle
+and they were able to do an
+integration within a few hours.
+
+00:03:19.206 --> 00:03:22.906 A:middle
+What they did, they took
+reservations that users make
+
+00:03:23.276 --> 00:03:25.806 A:middle
+and the communications that
+they have on the platform
+
+00:03:26.036 --> 00:03:28.026 A:middle
+and index them to
+the search APIs.
+
+00:03:28.826 --> 00:03:32.786 A:middle
+Now when I look for the
+reservation I made in Napa,
+
+00:03:32.786 --> 00:03:36.316 A:middle
+I put that in Spotlight,
+the reservation comes
+
+00:03:36.316 --> 00:03:37.426 A:middle
+up as the first result.
+
+00:03:38.266 --> 00:03:40.976 A:middle
+It has the dates --
+it is really cool.
+
+00:03:41.146 --> 00:03:43.146 A:middle
+[Applause]
+
+00:03:43.276 --> 00:03:45.496 A:middle
+&gt;&gt; VIPUL PRAKASH: It has
+the dates, number of guests,
+
+00:03:45.566 --> 00:03:49.316 A:middle
+descriptions, and when I
+tap on it it takes me inside
+
+00:03:49.316 --> 00:03:51.516 A:middle
+of the rich experience
+in the app.
+
+00:03:52.776 --> 00:03:56.326 A:middle
+Another result that you will see
+here, this is result number 2,
+
+00:03:56.326 --> 00:04:01.036 A:middle
+which is a message from the
+host of the reservation.
+
+
+
+00:03:56.326 --> 00:04:01.036 A:middle
+which is a message from the
+host of the reservation.
+
+00:04:01.386 --> 00:04:06.736 A:middle
+As you can see, I can read
+the message, it is very useful
+
+00:04:06.736 --> 00:04:09.026 A:middle
+and there is also a
+call glyph on the right,
+
+00:04:09.846 --> 00:04:13.796 A:middle
+when they indexed this,
+they are added data
+
+00:04:13.796 --> 00:04:16.995 A:middle
+to include the phone
+number of the host
+
+00:04:17.466 --> 00:04:20.446 A:middle
+and Spotlight picked this
+up, rendered a call glyph
+
+00:04:20.636 --> 00:04:23.136 A:middle
+and when it happens, it
+does what you expect.
+
+00:04:23.716 --> 00:04:25.446 A:middle
+It makes the call.
+
+00:04:26.026 --> 00:04:31.116 A:middle
+So this is a really beautifully
+integrated integration
+
+00:04:31.396 --> 00:04:33.346 A:middle
+to achieve search APIs.
+
+00:04:33.346 --> 00:04:34.606 A:middle
+Let's look at other examples.
+
+00:04:36.166 --> 00:04:38.636 A:middle
+Here is LinkedIn, a
+professional networking app.
+
+00:04:39.116 --> 00:04:41.006 A:middle
+What's happening
+in this example,
+
+00:04:41.636 --> 00:04:44.426 A:middle
+my first degree network,
+all of the communications
+
+00:04:44.426 --> 00:04:47.546 A:middle
+that I have had on LinkedIn have
+been added to the search index.
+
+00:04:47.886 --> 00:04:52.286 A:middle
+Now they're available in the
+same way as built-in Contacts
+
+00:04:52.486 --> 00:04:54.046 A:middle
+and built-in messages
+that are available.
+
+00:04:57.996 --> 00:05:00.896 A:middle
+Now search APIs, are not
+limited to just content.
+
+
+
+00:04:57.996 --> 00:05:00.896 A:middle
+Now search APIs, are not
+limited to just content.
+
+00:05:01.456 --> 00:05:06.136 A:middle
+One really handy use case
+is to make navigation points
+
+00:05:06.356 --> 00:05:08.846 A:middle
+and features inside
+of apps searchable.
+
+00:05:09.416 --> 00:05:13.526 A:middle
+As an example, our very
+own Health app does this.
+
+00:05:14.286 --> 00:05:17.746 A:middle
+It indexes all the deep
+links of all the sessions.
+
+00:05:17.746 --> 00:05:21.546 A:middle
+If I want to see how many steps
+I have taken, I type steps
+
+00:05:21.546 --> 00:05:24.306 A:middle
+in Spotlight, get this
+deep link, tap on it,
+
+00:05:24.406 --> 00:05:25.686 A:middle
+go straight to the steps screen.
+
+00:05:27.516 --> 00:05:31.306 A:middle
+[Applause]
+
+00:05:31.806 --> 00:05:32.796 A:middle
+&gt;&gt; VIPUL PRAKASH: I
+think this is very cool.
+
+00:05:32.796 --> 00:05:37.536 A:middle
+One of the most popular
+users of Spotlight Search is
+
+00:05:37.616 --> 00:05:39.016 A:middle
+to find and launch apps.
+
+00:05:39.446 --> 00:05:43.226 A:middle
+We believe in iOS
+9 going straight
+
+00:05:43.276 --> 00:05:46.346 A:middle
+to deep navigation points
+inside of apps is going
+
+00:05:46.346 --> 00:05:49.826 A:middle
+to be another very
+popular use case.
+
+00:05:50.076 --> 00:05:54.556 A:middle
+In all these examples
+the results came
+
+00:05:54.556 --> 00:05:57.686 A:middle
+from your own device index,
+the deep links were put
+
+00:05:57.686 --> 00:05:59.886 A:middle
+in the device index and
+they never crossed the
+
+00:05:59.886 --> 00:06:00.616 A:middle
+device boundary.
+
+
+
+00:05:59.886 --> 00:06:00.616 A:middle
+device boundary.
+
+00:06:01.156 --> 00:06:03.866 A:middle
+What if the user does not
+have your app installed?
+
+00:06:04.436 --> 00:06:09.006 A:middle
+We maintain a massive
+index of deep links
+
+00:06:09.506 --> 00:06:10.796 A:middle
+in Apple's cloud servers.
+
+00:06:11.266 --> 00:06:15.586 A:middle
+We can serve results
+seamlessly from this index.
+
+00:06:15.586 --> 00:06:22.286 A:middle
+We have come up with a novel
+way of populating this index.
+
+00:06:23.636 --> 00:06:28.986 A:middle
+Developers, you can tag content
+which is public as public
+
+00:06:29.516 --> 00:06:33.266 A:middle
+and once enough users engage
+with it, it is then promoted
+
+00:06:33.466 --> 00:06:37.346 A:middle
+to the cloud index where now
+it is available to all users
+
+00:06:37.346 --> 00:06:40.286 A:middle
+of your app and if there
+are web links associated
+
+00:06:40.646 --> 00:06:46.506 A:middle
+with the deep links then it is
+available to all users of iOS.
+
+00:06:46.696 --> 00:06:53.746 A:middle
+Now indexing and crawling apps
+is nonsensical in some ways
+
+00:06:53.746 --> 00:06:56.076 A:middle
+but on the web, it is not.
+
+00:06:56.076 --> 00:06:59.136 A:middle
+If your app mirrors its content
+
+00:06:59.296 --> 00:07:03.276 A:middle
+on a website what
+we can do is go out
+
+
+
+00:06:59.296 --> 00:07:03.276 A:middle
+on a website what
+we can do is go out
+
+00:07:03.276 --> 00:07:07.036 A:middle
+and proactively go index your
+website, find the deep links
+
+00:07:07.406 --> 00:07:09.006 A:middle
+and bring them in a cloud index
+
+00:07:09.066 --> 00:07:11.416 A:middle
+when they're seamlessly
+available in search.
+
+00:07:11.746 --> 00:07:19.486 A:middle
+This logic of seamlessness of on
+device search and cloud search,
+
+00:07:19.486 --> 00:07:21.906 A:middle
+it is very important to
+the App Search story.
+
+00:07:22.506 --> 00:07:25.236 A:middle
+There is a lot of content
+in apps that's private
+
+00:07:25.896 --> 00:07:29.236 A:middle
+and then content that's public,
+it is not both at the same time.
+
+00:07:29.706 --> 00:07:33.446 A:middle
+What we can do with this
+approach is present a seamless
+
+00:07:33.636 --> 00:07:36.996 A:middle
+search interface to the user
+where the results are coming
+
+00:07:36.996 --> 00:07:38.796 A:middle
+from the device index
+or the cloud index.
+
+00:07:39.266 --> 00:07:42.466 A:middle
+Let's look at examples of this.
+
+00:07:42.606 --> 00:07:46.676 A:middle
+I searched for "northern lights"
+a music festival, I'm presented
+
+00:07:46.676 --> 00:07:49.156 A:middle
+with a result from the cloud
+index from the EventBrite app,
+
+00:07:50.186 --> 00:07:52.996 A:middle
+I don't have this app installed,
+this result has a web link.
+
+00:07:53.326 --> 00:07:59.796 A:middle
+I tap on it, it takes me to
+Safari and opens the space.
+
+00:07:59.886 --> 00:08:03.446 A:middle
+You notice that EventBrite
+users, the smart app banner
+
+
+
+00:07:59.886 --> 00:08:03.446 A:middle
+You notice that EventBrite
+users, the smart app banner
+
+00:08:04.256 --> 00:08:06.896 A:middle
+which encourages me
+to download the app
+
+00:08:07.326 --> 00:08:09.846 A:middle
+and experience this
+content in a richer way,
+
+00:08:10.526 --> 00:08:11.666 A:middle
+which is what I do now.
+
+00:08:12.636 --> 00:08:16.376 A:middle
+Imagine if this was your
+app, wouldn't it be awesome
+
+00:08:16.746 --> 00:08:19.886 A:middle
+to get your content in
+front of all iOS users
+
+00:08:19.886 --> 00:08:23.246 A:middle
+in this very contextual way when
+they're looking for something
+
+00:08:23.466 --> 00:08:26.086 A:middle
+that your app provides
+to promote app discovery?
+
+00:08:26.186 --> 00:08:31.476 A:middle
+Here is an example where I
+searched for "sprained ankle".
+
+00:08:31.976 --> 00:08:36.515 A:middle
+I don't have an app for
+medical conditions on my device.
+
+00:08:36.515 --> 00:08:42.416 A:middle
+I'm offered multiple results
+by App Search based on the apps
+
+00:08:42.466 --> 00:08:45.226 A:middle
+that users have previously
+found interesting
+
+00:08:45.276 --> 00:08:46.986 A:middle
+or useful for this quarry.
+
+00:08:47.856 --> 00:08:51.356 A:middle
+I can tap on this,
+install the app
+
+00:08:51.726 --> 00:08:57.296 A:middle
+and continue my exploration
+inside of the app.
+
+00:08:57.516 --> 00:08:59.726 A:middle
+So how does this work?
+
+
+
+00:09:01.166 --> 00:09:06.456 A:middle
+App Search has three APIs
+that are distinct but related.
+
+00:09:06.846 --> 00:09:10.856 A:middle
+They're designed for
+enabling different use cases
+
+00:09:10.996 --> 00:09:11.716 A:middle
+of App Search.
+
+00:09:12.786 --> 00:09:14.816 A:middle
+The first one is NSUserActivity.
+
+00:09:14.816 --> 00:09:17.276 A:middle
+This is an extension
+of the Handoff API
+
+00:09:17.886 --> 00:09:19.126 A:middle
+that we released in iOS 8.
+
+00:09:20.336 --> 00:09:23.726 A:middle
+When we looked at the
+pattern of information access
+
+00:09:23.856 --> 00:09:27.796 A:middle
+and search one of the things
+we found is that users want
+
+00:09:27.796 --> 00:09:31.286 A:middle
+to certainly for things
+they have seen in the past.
+
+00:09:31.286 --> 00:09:34.626 A:middle
+NSUserActivity makes
+searching this information
+
+00:09:34.626 --> 00:09:36.296 A:middle
+and indexing it very easy.
+
+00:09:36.566 --> 00:09:41.246 A:middle
+It sort of works like how a web
+browser maintains your browsing
+
+00:09:41.246 --> 00:09:44.296 A:middle
+history and the user
+activity maintains the form
+
+00:09:44.296 --> 00:09:46.266 A:middle
+of app history and
+makes it searchable.
+
+00:09:46.836 --> 00:09:50.866 A:middle
+The second API is
+called CoreSpotlight.
+
+00:09:50.866 --> 00:09:53.716 A:middle
+This is a very powerful way
+
+00:09:53.716 --> 00:09:58.756 A:middle
+of comprehensively indexing
+any content inside of your app.
+
+00:09:58.756 --> 00:10:02.846 A:middle
+All built in apps in iOS
+9, Mail, Notes, Calendar,
+
+
+
+00:09:58.756 --> 00:10:02.846 A:middle
+All built in apps in iOS
+9, Mail, Notes, Calendar,
+
+00:10:02.846 --> 00:10:04.416 A:middle
+they use this CoreSpotlight.
+
+00:10:04.676 --> 00:10:11.966 A:middle
+It gives you low level access
+to the index on the device,
+
+00:10:11.966 --> 00:10:14.806 A:middle
+it sort of works like a
+database API you can add
+
+00:10:14.806 --> 00:10:20.196 A:middle
+and remove items,
+and it's the best way
+
+00:10:20.476 --> 00:10:23.736 A:middle
+to index any private
+content that you have inside
+
+00:10:23.736 --> 00:10:24.656 A:middle
+of your app for the user.
+
+00:10:25.746 --> 00:10:28.976 A:middle
+Third API is web markup.
+
+00:10:29.976 --> 00:10:33.126 A:middle
+This is for apps that mirror
+their content on a website.
+
+00:10:33.796 --> 00:10:37.746 A:middle
+You can simply markup your
+web content with deep links,
+
+00:10:37.816 --> 00:10:40.526 A:middle
+annotation information,
+we go out, crawl it,
+
+00:10:41.046 --> 00:10:45.246 A:middle
+put it in the cloud index and
+it is then seamlessly available
+
+00:10:45.296 --> 00:10:47.196 A:middle
+to users through iOS 9 search.
+
+00:10:47.746 --> 00:10:53.026 A:middle
+Here is the Agenda for
+the rest of the session.
+
+00:10:54.056 --> 00:10:57.196 A:middle
+We'll do a deep dive
+into each of these APIs,
+
+00:10:57.916 --> 00:11:02.166 A:middle
+show you how they work,
+and we'll look at how best
+
+
+
+00:10:57.916 --> 00:11:02.166 A:middle
+show you how they work,
+and we'll look at how best
+
+00:11:02.166 --> 00:11:04.986 A:middle
+to adopt these APIs
+in your apps.
+
+00:11:07.496 --> 00:11:10.496 A:middle
+We'll talk about NSUserActivity
+and CoreSpotlight,
+
+00:11:10.496 --> 00:11:11.506 A:middle
+I would like to ask Dave Salim.
+
+00:11:12.516 --> 00:11:20.616 A:middle
+[Applause]
+
+00:11:21.116 --> 00:11:25.346 A:middle
+&gt;&gt; DAVE SALIM: I'm Dave Salim,
+a developer on App Search.
+
+00:11:26.686 --> 00:11:29.116 A:middle
+We just heard about some
+exciting new features
+
+00:11:29.686 --> 00:11:32.096 A:middle
+to make the content in
+your apps searchable
+
+00:11:32.386 --> 00:11:33.256 A:middle
+and more discoverable.
+
+00:11:34.196 --> 00:11:37.226 A:middle
+Now we'll take a look at some
+of the APIs you can adopt
+
+00:11:37.226 --> 00:11:38.116 A:middle
+to enable these features.
+
+00:11:38.686 --> 00:11:43.576 A:middle
+We'll start off by taking
+a look at NSUserActivity.
+
+00:11:45.096 --> 00:11:48.306 A:middle
+A little background,
+NSUserActivity was introduced
+
+00:11:48.306 --> 00:11:50.686 A:middle
+in iOS 8 to support Handoff.
+
+00:11:51.616 --> 00:11:53.806 A:middle
+Handoff is the amazing
+feature that allows you
+
+00:11:53.806 --> 00:11:56.546 A:middle
+to start an activity on one
+device and pick up right
+
+00:11:56.546 --> 00:11:57.936 A:middle
+where you left off on another.
+
+00:11:59.246 --> 00:12:03.306 A:middle
+NSUserActivity is a lightweight
+way to capture application state
+
+
+
+00:11:59.246 --> 00:12:03.306 A:middle
+NSUserActivity is a lightweight
+way to capture application state
+
+00:12:03.486 --> 00:12:04.606 A:middle
+which can be restored later.
+
+00:12:06.766 --> 00:12:11.916 A:middle
+Now new in iOS 9 is we're adding
+the ability for NSUserActivities
+
+00:12:12.036 --> 00:12:16.346 A:middle
+to be indexed and searchable
+from iOS search and Safari.
+
+00:12:16.976 --> 00:12:20.246 A:middle
+You will now be able
+to associate metadata
+
+00:12:20.246 --> 00:12:22.966 A:middle
+with your activities so you
+can describe your activities.
+
+00:12:23.396 --> 00:12:25.756 A:middle
+And that information
+can be used to index
+
+00:12:25.756 --> 00:12:27.676 A:middle
+and provide rich search results.
+
+00:12:28.826 --> 00:12:30.626 A:middle
+When users engage with
+your search results,
+
+00:12:31.106 --> 00:12:32.106 A:middle
+your app will be launched
+
+00:12:32.266 --> 00:12:34.666 A:middle
+and passed the activity
+with that result.
+
+00:12:35.326 --> 00:12:38.426 A:middle
+You can continue restoring the
+state bringing the user right
+
+00:12:38.426 --> 00:12:39.256 A:middle
+back to its content.
+
+00:12:40.676 --> 00:12:42.566 A:middle
+Let's take a look at an example
+
+00:12:42.836 --> 00:12:46.996 A:middle
+of how NSUserActivities
+are added to the index.
+
+00:12:47.036 --> 00:12:50.976 A:middle
+Here we have a recipe app and
+as a user browses a recipe
+
+00:12:50.976 --> 00:12:53.986 A:middle
+in this app, we create an
+NSUserActivity capturing its
+
+00:12:53.986 --> 00:12:56.656 A:middle
+state, providing it
+the information needed
+
+00:12:56.656 --> 00:12:57.786 A:middle
+to get back to this recipe.
+
+00:12:58.336 --> 00:13:01.746 A:middle
+We then describe that
+activity with information
+
+
+
+00:12:58.336 --> 00:13:01.746 A:middle
+We then describe that
+activity with information
+
+00:13:01.746 --> 00:13:05.546 A:middle
+from the recipe, the title,
+description, even a thumbnail.
+
+00:13:07.066 --> 00:13:08.396 A:middle
+Then we inform the system
+
+00:13:08.676 --> 00:13:11.316 A:middle
+that this activity represents
+the user's current state
+
+00:13:11.846 --> 00:13:14.076 A:middle
+and that activity is added
+to the on-device index.
+
+00:13:15.716 --> 00:13:19.246 A:middle
+So as a user moves about the
+app we follow the same pattern
+
+00:13:19.586 --> 00:13:22.076 A:middle
+of creating activities,
+describing them,
+
+00:13:22.156 --> 00:13:23.446 A:middle
+and informing the system
+
+00:13:23.706 --> 00:13:25.596 A:middle
+that these represent
+the users current state
+
+00:13:26.036 --> 00:13:28.426 A:middle
+and these activities will be
+added to the on-device index.
+
+00:13:28.986 --> 00:13:34.156 A:middle
+Let's take a look at some of
+the new and existing properties
+
+00:13:34.156 --> 00:13:37.376 A:middle
+on NSUserActivity used
+to support App Search.
+
+00:13:38.846 --> 00:13:40.656 A:middle
+First, there is now properties
+
+00:13:41.116 --> 00:13:44.276 A:middle
+to designate an activity's
+capabilities, there is one
+
+00:13:44.276 --> 00:13:48.206 A:middle
+for Handoff, by default Handoff
+is enabled, if you choose not
+
+00:13:48.206 --> 00:13:49.786 A:middle
+to enable Handoff
+for your users,
+
+00:13:49.786 --> 00:13:51.126 A:middle
+you can easily set
+this to false.
+
+00:13:51.196 --> 00:13:52.986 A:middle
+There is one for search
+
+00:13:53.346 --> 00:13:56.086 A:middle
+which allows on-device
+indexing of the activity.
+
+00:13:57.176 --> 00:13:58.596 A:middle
+There is one for Public Indexing
+
+00:13:58.666 --> 00:14:02.076 A:middle
+which we'll talk
+about in a minute.
+
+
+
+00:13:58.666 --> 00:14:02.076 A:middle
+which we'll talk
+about in a minute.
+
+00:14:02.226 --> 00:14:04.156 A:middle
+Next, how do you
+describe your activity?
+
+00:14:04.566 --> 00:14:06.536 A:middle
+First you give your
+activity a title.
+
+00:14:07.436 --> 00:14:10.246 A:middle
+This title is used both for
+indexing and for display
+
+00:14:10.246 --> 00:14:11.156 A:middle
+in the search results.
+
+00:14:12.226 --> 00:14:14.616 A:middle
+You can also provide keywords
+to describe your activity,
+
+00:14:14.786 --> 00:14:15.896 A:middle
+these will also be indexed.
+
+00:14:16.516 --> 00:14:19.776 A:middle
+To fully more describe your
+activity you can use a new class
+
+00:14:19.776 --> 00:14:20.406 A:middle
+we're introducing
+
+00:14:20.406 --> 00:14:23.536 A:middle
+in CoreSpotlight named
+CSSearchableItem.attributeSet
+
+00:14:23.646 --> 00:14:25.426 A:middle
+which makes it easy to
+describe the activity
+
+00:14:25.596 --> 00:14:27.596 A:middle
+by setting properties
+and you can set this
+
+00:14:27.596 --> 00:14:30.436 A:middle
+on the contentAttributes
+property of NSUserActivity.
+
+00:14:31.526 --> 00:14:34.676 A:middle
+If you prefer for your
+activity to only be shown
+
+00:14:34.676 --> 00:14:40.206 A:middle
+until a certain date, you can
+provide an expiration date.
+
+00:14:40.406 --> 00:14:43.976 A:middle
+Also if your activity's content
+can be restored on the web
+
+00:14:44.836 --> 00:14:47.056 A:middle
+or you support Safari's
+universal links,
+
+00:14:47.606 --> 00:14:49.186 A:middle
+set the webpage URL property
+
+00:14:49.566 --> 00:14:51.206 A:middle
+and the system will
+appropriately launch your
+
+00:14:51.206 --> 00:14:54.346 A:middle
+activity in Safari
+or in your app.
+
+00:14:57.216 --> 00:14:59.506 A:middle
+Now let's take a look at
+how we create an activity.
+
+
+
+00:15:00.046 --> 00:15:05.076 A:middle
+Here we're instantiating an
+instance of an NSUserActivity
+
+00:15:05.256 --> 00:15:07.446 A:middle
+and we're providing
+it an activity type.
+
+00:15:08.376 --> 00:15:10.106 A:middle
+This is a unique
+string that you provide,
+
+00:15:10.106 --> 00:15:12.426 A:middle
+this is the same string
+you provide to the system
+
+00:15:12.786 --> 00:15:15.736 A:middle
+to let it know what activities
+your app is capable of handling.
+
+00:15:17.046 --> 00:15:19.936 A:middle
+We recommend a reverse DNS-style
+notation for these types
+
+00:15:19.936 --> 00:15:22.976 A:middle
+of strings to keep them unique.
+
+00:15:23.116 --> 00:15:24.756 A:middle
+Next, our activity
+needs a title.
+
+00:15:25.366 --> 00:15:28.096 A:middle
+Again, the title is used
+for indexing and used
+
+00:15:28.096 --> 00:15:29.816 A:middle
+as a display title in
+the search results.
+
+00:15:30.296 --> 00:15:33.346 A:middle
+Next, we're setting a dictionary
+
+00:15:33.346 --> 00:15:36.356 A:middle
+on the userInfo property
+containing the information we
+
+00:15:36.356 --> 00:15:38.346 A:middle
+need to recreate the state.
+
+00:15:38.726 --> 00:15:44.456 A:middle
+Next we're enabling on-device
+indexing of the activity
+
+00:15:44.766 --> 00:15:46.836 A:middle
+by setting eligibleForSearch
+to true,
+
+00:15:47.166 --> 00:15:51.346 A:middle
+and with this activity it
+represents what the user's
+
+00:15:51.346 --> 00:15:54.566 A:middle
+current state is and we inform
+the system by becomeCurrent
+
+00:15:54.566 --> 00:15:56.536 A:middle
+on the activity and the
+activity will be added
+
+00:15:56.716 --> 00:15:57.726 A:middle
+to the on-device index.
+
+00:15:58.146 --> 00:16:00.766 A:middle
+What does this look
+like for your users?
+
+
+
+00:15:58.146 --> 00:16:00.766 A:middle
+What does this look
+like for your users?
+
+00:16:01.456 --> 00:16:04.036 A:middle
+Now users can be
+returned search results
+
+00:16:04.176 --> 00:16:06.766 A:middle
+for activities indexed
+from your apps.
+
+00:16:08.236 --> 00:16:11.336 A:middle
+Here we can see how the title
+property maps to the title
+
+00:16:11.626 --> 00:16:17.196 A:middle
+in the search result and if you
+provide more information using
+
+00:16:17.196 --> 00:16:20.186 A:middle
+the contentAttributes set we
+can provide richer results.
+
+00:16:20.786 --> 00:16:24.136 A:middle
+So now what happens
+when a user taps on one
+
+00:16:24.136 --> 00:16:25.016 A:middle
+of your search results?
+
+00:16:26.506 --> 00:16:29.106 A:middle
+A UI application delegate
+method in your app is called,
+
+00:16:29.686 --> 00:16:31.136 A:middle
+the same one used for Handoff.
+
+00:16:31.596 --> 00:16:34.076 A:middle
+Here we see continueUserActivity
+restorationHandler.
+
+00:16:35.116 --> 00:16:37.456 A:middle
+And we pass that activity
+for the search result.
+
+00:16:37.976 --> 00:16:42.696 A:middle
+We check its activity
+type and we can continue
+
+00:16:42.696 --> 00:16:45.456 A:middle
+to restore the state using
+the information populated
+
+00:16:45.456 --> 00:16:46.206 A:middle
+in the user info.
+
+00:16:48.396 --> 00:16:52.106 A:middle
+So now users can tap on results
+for activities from your app
+
+00:16:52.106 --> 00:17:00.216 A:middle
+and you can restore them right
+back to the proper state.
+
+
+
+00:16:52.106 --> 00:17:00.216 A:middle
+and you can restore them right
+back to the proper state.
+
+00:17:00.216 --> 00:17:03.516 A:middle
+NSUserActivity in App
+Search is a great way
+
+00:17:03.516 --> 00:17:05.425 A:middle
+to let your users get back
+
+00:17:05.425 --> 00:17:06.976 A:middle
+to the content they
+previously visited.
+
+00:17:08.286 --> 00:17:09.695 A:middle
+We wanted to take
+it a step further.
+
+00:17:09.695 --> 00:17:13.796 A:middle
+So when we were designing this
+feature we took a look at a lot
+
+00:17:13.796 --> 00:17:16.636 A:middle
+of apps in the App
+Store and noticed a lot
+
+00:17:16.636 --> 00:17:20.766 A:middle
+of apps have content that's
+available to many other users.
+
+00:17:21.406 --> 00:17:25.826 A:middle
+So we thought wouldn't it
+be great for discoverability
+
+00:17:25.976 --> 00:17:29.106 A:middle
+if we could take the activities
+representing public content
+
+00:17:29.866 --> 00:17:32.896 A:middle
+and make them searchable by all
+users of the app not just ones
+
+00:17:32.896 --> 00:17:34.796 A:middle
+that previously visited
+that content?
+
+00:17:37.196 --> 00:17:38.386 A:middle
+That's what we're doing
+
+00:17:38.386 --> 00:17:40.696 A:middle
+with NSUserActivity
+and Public Indexing.
+
+00:17:42.226 --> 00:17:42.966 A:middle
+So how does this work?
+
+00:17:43.746 --> 00:17:46.056 A:middle
+As a user navigates
+the public content
+
+00:17:46.356 --> 00:17:50.006 A:middle
+in your apps you create
+NSUserActivities capturing
+
+00:17:50.006 --> 00:17:54.046 A:middle
+that state and you
+designate them as public.
+
+00:17:55.436 --> 00:17:58.276 A:middle
+As users engage with
+the search results
+
+00:17:58.276 --> 00:18:01.936 A:middle
+for these activities
+the activity is shared
+
+
+
+00:17:58.276 --> 00:18:01.936 A:middle
+for these activities
+the activity is shared
+
+00:18:01.936 --> 00:18:05.496 A:middle
+with our cloud index and
+made searchable by all users
+
+00:18:05.496 --> 00:18:08.276 A:middle
+of the app, not just ones that
+previously visited the content.
+
+00:18:09.486 --> 00:18:11.866 A:middle
+If your activity can
+be restored on the web
+
+00:18:11.916 --> 00:18:15.536 A:middle
+and you set the webpageURL
+property you can massively
+
+00:18:15.536 --> 00:18:19.126 A:middle
+increase its audience by being
+searchable in iOS Safari.
+
+00:18:21.116 --> 00:18:25.056 A:middle
+So let's see how we designate
+an activity as public.
+
+00:18:26.016 --> 00:18:28.336 A:middle
+We can start off with the
+activity we previously saw
+
+00:18:29.766 --> 00:18:31.366 A:middle
+and we can set one
+additional property.
+
+00:18:31.366 --> 00:18:34.156 A:middle
+Here we're setting
+eligibleForPublicIndexing
+
+00:18:34.376 --> 00:18:38.366 A:middle
+to true and we just designated
+this activity as public.
+
+00:18:40.196 --> 00:18:42.666 A:middle
+Even though we have set
+this property to true,
+
+00:18:43.836 --> 00:18:45.546 A:middle
+that doesn't mean
+that the contents
+
+00:18:45.546 --> 00:18:48.666 A:middle
+of the activity are immediately
+shared with our cloud index.
+
+00:18:49.126 --> 00:18:55.326 A:middle
+For an activity to be shared
+it first needs to appear
+
+00:18:55.326 --> 00:18:58.706 A:middle
+in search results and be
+engaged with by many users.
+
+00:18:59.356 --> 00:19:06.016 A:middle
+We track these engagements using
+a zero-knowledge proof method
+
+
+
+00:18:59.356 --> 00:19:06.016 A:middle
+We track these engagements using
+a zero-knowledge proof method
+
+00:19:06.316 --> 00:19:08.656 A:middle
+which keeps the activities'
+contents private
+
+00:19:09.276 --> 00:19:13.116 A:middle
+until an engagement
+threshold is met.
+
+00:19:13.326 --> 00:19:17.166 A:middle
+So here in more detail as a user
+engages with the search result
+
+00:19:17.166 --> 00:19:20.726 A:middle
+for an activity designated
+as public a one-way hash
+
+00:19:21.076 --> 00:19:23.456 A:middle
+of the activity is sent
+to our cloud index.
+
+00:19:23.946 --> 00:19:30.276 A:middle
+Not until the cloud index has
+seen the same hash many times
+
+00:19:30.276 --> 00:19:32.076 A:middle
+from users is the content
+
+00:19:32.346 --> 00:19:34.296 A:middle
+of the activity shared
+with our cloud index.
+
+00:19:34.816 --> 00:19:37.886 A:middle
+We took extra measure
+
+00:19:37.886 --> 00:19:42.596 A:middle
+in defining the feature this way
+first to respect user privacy
+
+00:19:43.156 --> 00:19:46.216 A:middle
+and second to prevent
+any user specific data
+
+00:19:46.216 --> 00:19:48.956 A:middle
+from accidentally being
+shared with our cloud index.
+
+00:19:50.696 --> 00:19:55.906 A:middle
+In addition, the properties on
+NSUserActivity eligibleForSearch
+
+00:19:55.986 --> 00:19:59.166 A:middle
+and eligibleForPublicIndexing
+are false by default
+
+
+
+00:20:00.076 --> 00:20:02.836 A:middle
+and for everyone here,
+only designate public
+
+00:20:03.076 --> 00:20:06.036 A:middle
+on your activities that
+represent content and features
+
+00:20:06.226 --> 00:20:08.866 A:middle
+that are popular among
+many of your users.
+
+00:20:13.656 --> 00:20:16.246 A:middle
+Now let's take a look at some
+additional benefits you get
+
+00:20:16.246 --> 00:20:17.836 A:middle
+for adopting NSUserActivity.
+
+00:20:18.636 --> 00:20:20.006 A:middle
+The first is Handoff.
+
+00:20:20.866 --> 00:20:23.646 A:middle
+So by adopting the API you've
+just added support for Handoff.
+
+00:20:23.646 --> 00:20:26.986 A:middle
+If you choose, you can allow
+your users to start an activity
+
+00:20:27.706 --> 00:20:30.376 A:middle
+in your app on one device
+and continue it on another.
+
+00:20:34.136 --> 00:20:37.056 A:middle
+The next two are related
+to new features from Siri.
+
+00:20:39.216 --> 00:20:43.176 A:middle
+As shown in the keynote, swiping
+left of home presents the user
+
+00:20:43.446 --> 00:20:44.486 A:middle
+with Siri suggestions.
+
+00:20:45.706 --> 00:20:48.516 A:middle
+Along with suggested
+Contacts and suggested apps
+
+00:20:48.516 --> 00:20:52.866 A:middle
+and nearby places, activities
+from your app can be suggested.
+
+00:20:53.566 --> 00:20:56.696 A:middle
+Here we see a suggestion for
+an upcoming calendar event
+
+00:20:57.396 --> 00:21:00.126 A:middle
+and a suggestion to
+resume a podcast.
+
+
+
+00:20:57.396 --> 00:21:00.126 A:middle
+and a suggestion to
+resume a podcast.
+
+00:21:00.566 --> 00:21:05.106 A:middle
+Next is the Siri
+smart reminders.
+
+00:21:06.016 --> 00:21:10.096 A:middle
+Now users can ask Siri to
+remind them of specific content
+
+00:21:10.256 --> 00:21:13.706 A:middle
+from your apps and when
+they do the activity
+
+00:21:13.706 --> 00:21:15.686 A:middle
+from your app is
+embedded in the reminder.
+
+00:21:15.686 --> 00:21:18.366 A:middle
+It is an easy way
+for users to get back
+
+00:21:18.366 --> 00:21:20.586 A:middle
+to the content they want
+to be reminded about.
+
+00:21:21.746 --> 00:21:26.536 A:middle
+NSUserActivity in App Search
+makes it easy for your users
+
+00:21:26.536 --> 00:21:28.536 A:middle
+to get back to the content
+they previously visited
+
+00:21:28.536 --> 00:21:31.586 A:middle
+and it can make the
+public content
+
+00:21:31.586 --> 00:21:33.156 A:middle
+in your apps more discoverable.
+
+00:21:37.576 --> 00:21:39.926 A:middle
+Next let's talk about
+the next API you can use
+
+00:21:39.926 --> 00:21:41.896 A:middle
+to make the content in
+your apps searchable,
+
+00:21:42.496 --> 00:21:44.086 A:middle
+that's CoreSpotlight.
+
+00:21:47.316 --> 00:21:50.346 A:middle
+CoreSpotlight is a
+brand-new framework on iOS 9.
+
+00:21:50.816 --> 00:21:54.206 A:middle
+It provides a database-like API
+
+00:21:54.746 --> 00:21:57.136 A:middle
+so you can add, update,
+delete items.
+
+00:21:58.526 --> 00:22:01.286 A:middle
+The items you indexed using
+CoreSpotlight will be searchable
+
+
+
+00:21:58.526 --> 00:22:01.286 A:middle
+The items you indexed using
+CoreSpotlight will be searchable
+
+00:22:01.856 --> 00:22:06.266 A:middle
+in iOS search and it is used by
+our own built-in apps, Messages,
+
+00:22:06.266 --> 00:22:09.226 A:middle
+Mail, Calendar, Notes,
+you can get an idea
+
+00:22:09.516 --> 00:22:11.886 A:middle
+of what you can index
+with CoreSpotlight.
+
+00:22:12.406 --> 00:22:17.706 A:middle
+Let's take a look at the API.
+
+00:22:17.936 --> 00:22:19.886 A:middle
+First we start off with
+a CSSearchableItem.
+
+00:22:21.056 --> 00:22:23.826 A:middle
+This will represent the
+unique item we wish to index.
+
+00:22:24.256 --> 00:22:29.526 A:middle
+Next we associate a
+CSSearchableItemAttributeSet
+
+00:22:30.176 --> 00:22:33.076 A:middle
+which is an easy way to describe
+the item by setting properties.
+
+00:22:35.716 --> 00:22:39.346 A:middle
+Then we pass the CSSearchItem
+to the CSSearchableIndex
+
+00:22:39.926 --> 00:22:42.476 A:middle
+and the item is added
+to the on-device index.
+
+00:22:47.616 --> 00:22:52.156 A:middle
+Let's see how we go
+about creating an item.
+
+00:22:52.356 --> 00:22:53.926 A:middle
+First we start off
+by creating the
+
+00:22:53.926 --> 00:22:55.556 A:middle
+CSSearchableItemAttributeSet.
+
+00:22:56.816 --> 00:22:58.736 A:middle
+Here we have one for an image.
+
+
+
+00:23:02.756 --> 00:23:05.596 A:middle
+Next we set a few properties
+on the attribute set
+
+00:23:05.596 --> 00:23:07.976 A:middle
+to describe the item
+we wish to index.
+
+00:23:07.976 --> 00:23:10.576 A:middle
+Here we're setting a
+title and a description.
+
+00:23:11.966 --> 00:23:14.096 A:middle
+We'll see how the title
+and the description map
+
+00:23:14.206 --> 00:23:19.366 A:middle
+to the search result in a bit.
+
+00:23:19.576 --> 00:23:21.516 A:middle
+Next we create the
+CSSearchableItem
+
+00:23:21.516 --> 00:23:24.606 A:middle
+and we supply a unique
+identifier,
+
+00:23:24.766 --> 00:23:26.566 A:middle
+this is an identifier
+that the app can use
+
+00:23:26.566 --> 00:23:29.856 A:middle
+to reference the actual
+data that we wish to index.
+
+00:23:30.416 --> 00:23:33.426 A:middle
+We can supply a domain
+identifier.
+
+00:23:33.566 --> 00:23:36.216 A:middle
+This is a way of
+grouping items together.
+
+00:23:36.216 --> 00:23:38.666 A:middle
+In our example here
+we're indexing a photo.
+
+00:23:38.796 --> 00:23:42.046 A:middle
+We may want to group all
+of our photos together
+
+00:23:42.046 --> 00:23:44.126 A:middle
+under a domain identifier
+representing an album.
+
+00:23:45.286 --> 00:23:47.656 A:middle
+And we provide an attribute
+set which we created
+
+00:23:47.656 --> 00:23:52.416 A:middle
+above describing the item.
+
+00:23:52.626 --> 00:23:56.106 A:middle
+Next, we index the item
+calling indexSearchableItems
+
+00:23:56.266 --> 00:23:58.956 A:middle
+on the CSSearchableIndex
+passing it an array
+
+00:23:58.956 --> 00:24:00.206 A:middle
+of items we wish to index.
+
+
+
+00:23:58.956 --> 00:24:00.206 A:middle
+of items we wish to index.
+
+00:24:00.726 --> 00:24:04.236 A:middle
+What does this look
+like for users?
+
+00:24:05.216 --> 00:24:07.176 A:middle
+Users can now go into iOS search
+
+00:24:07.626 --> 00:24:09.856 A:middle
+and be returned search
+results things in your app
+
+00:24:09.926 --> 00:24:11.886 A:middle
+that have been indexed
+using CoreSpotlight.
+
+00:24:16.916 --> 00:24:19.986 A:middle
+Here is how some of the
+attributes, properties we set
+
+00:24:19.986 --> 00:24:22.686 A:middle
+on the attribute set map
+to the search result.
+
+00:24:23.096 --> 00:24:28.936 A:middle
+What happens when a user taps
+on one of your search results,
+
+00:24:31.396 --> 00:24:34.256 A:middle
+a UI application delegate
+method in your app is called,
+
+00:24:34.946 --> 00:24:36.526 A:middle
+the same one used for Handoff
+
+00:24:37.056 --> 00:24:42.206 A:middle
+and here we see again
+ContinuousUserActivity
+
+00:24:42.206 --> 00:24:45.776 A:middle
+RestorationHandler and this time
+you know you're being launched
+
+00:24:45.776 --> 00:24:50.346 A:middle
+by a CoreSpotlight item
+because the activity type is set
+
+00:24:50.346 --> 00:24:51.956 A:middle
+to CSSearchableItemActionType
+
+00:24:52.326 --> 00:24:55.386 A:middle
+and the unique identifier
+we used
+
+00:24:55.386 --> 00:24:59.096 A:middle
+when we initialized the
+searchable item is accessible
+
+00:24:59.276 --> 00:25:00.956 A:middle
+for the value
+
+
+
+00:24:59.276 --> 00:25:00.956 A:middle
+for the value
+
+00:25:01.086 --> 00:25:03.426 A:middle
+in CSSearchableItem
+ActivityIdentifier
+
+00:25:03.706 --> 00:25:04.476 A:middle
+in the userInfo.
+
+00:25:07.156 --> 00:25:11.286 A:middle
+So now users can tap on search
+results and you can return them
+
+00:25:11.286 --> 00:25:13.216 A:middle
+to the right context
+for that item.
+
+00:25:13.316 --> 00:25:19.186 A:middle
+Now let's talk about
+maintaining your index.
+
+00:25:20.256 --> 00:25:22.676 A:middle
+The index supports
+updating items.
+
+00:25:23.796 --> 00:25:27.246 A:middle
+Over time the title of
+your item may change,
+
+00:25:27.246 --> 00:25:30.666 A:middle
+the description may change, the
+user updates, certain fields
+
+00:25:30.666 --> 00:25:33.606 A:middle
+of your -- representing your
+item, you can update them
+
+00:25:34.646 --> 00:25:37.136 A:middle
+by calling the same method
+you used to index items
+
+00:25:37.606 --> 00:25:40.286 A:middle
+by creating a CSSearchableItem
+with a unique identifier
+
+00:25:40.766 --> 00:25:44.466 A:middle
+that you wish to update
+associating an updated
+
+00:25:44.466 --> 00:25:46.056 A:middle
+CSSearchableItemAttributeSet
+
+00:25:47.036 --> 00:25:49.536 A:middle
+and indexing the item
+calling CSSearchableItems.
+
+00:25:52.136 --> 00:25:55.146 A:middle
+Another common maintenance
+routine is deleting items.
+
+00:25:55.786 --> 00:25:58.256 A:middle
+It is good practice
+to delete any items
+
+00:25:58.256 --> 00:26:00.116 A:middle
+that are no longer
+relevant from the index.
+
+
+
+00:25:58.256 --> 00:26:00.116 A:middle
+that are no longer
+relevant from the index.
+
+00:26:00.636 --> 00:26:02.886 A:middle
+We support multiple
+ways to delete items.
+
+00:26:03.716 --> 00:26:05.356 A:middle
+First, you can delete
+by identifier
+
+00:26:06.296 --> 00:26:08.506 A:middle
+so you can pass an
+array of identifiers
+
+00:26:09.236 --> 00:26:11.206 A:middle
+to delete searchable
+items with identifiers.
+
+00:26:11.726 --> 00:26:14.356 A:middle
+Those items will be
+deleted from the index.
+
+00:26:14.776 --> 00:26:18.416 A:middle
+You can delete by
+domain identifier.
+
+00:26:18.716 --> 00:26:21.156 A:middle
+You saw earlier when
+creating our item,
+
+00:26:21.906 --> 00:26:24.976 A:middle
+you can use a domain identifier
+to group items together.
+
+00:26:25.506 --> 00:26:29.596 A:middle
+You can pass the
+identifier and the group
+
+00:26:29.596 --> 00:26:30.556 A:middle
+of items will be deleted
+
+00:26:30.626 --> 00:26:32.026 A:middle
+when calling
+deleteSearchableItems
+
+00:26:32.216 --> 00:26:33.206 A:middle
+WithDomainIdentifiers.
+
+00:26:33.616 --> 00:26:38.036 A:middle
+Last, you can delete all
+the items from your index
+
+00:26:38.566 --> 00:26:40.736 A:middle
+by calling
+deleteAllSearchableItems
+
+00:26:41.106 --> 00:26:41.986 A:middle
+WithCompletion handler.
+
+00:26:42.466 --> 00:26:49.926 A:middle
+Now let's take a look at a
+demo to see how easy it is
+
+00:26:49.926 --> 00:26:51.856 A:middle
+to add CoreSpotlight
+to your apps.
+
+00:26:52.616 --> 00:26:55.566 A:middle
+Our demo app is a photo
+viewer displaying a collection
+
+00:26:55.566 --> 00:26:55.986 A:middle
+of photos.
+
+00:26:56.396 --> 00:26:59.496 A:middle
+I'll show you how easy it is to
+index the items by their title
+
+
+
+00:27:00.606 --> 00:27:02.246 A:middle
+and we'll look at
+the user experience
+
+00:27:02.606 --> 00:27:04.056 A:middle
+of searching and restoring.
+
+00:27:12.636 --> 00:27:16.326 A:middle
+Here we have Xcode and
+the iPhone simulator.
+
+00:27:16.946 --> 00:27:20.446 A:middle
+Let's launch our app
+first to get an idea
+
+00:27:20.446 --> 00:27:21.146 A:middle
+of what it looks like.
+
+00:27:22.306 --> 00:27:24.786 A:middle
+Here we have a collection
+of photos,
+
+00:27:25.436 --> 00:27:28.186 A:middle
+each photo has a title below it.
+
+00:27:28.286 --> 00:27:29.596 A:middle
+There are some nice
+sunsets in here.
+
+00:27:30.966 --> 00:27:32.906 A:middle
+Okay. Let's see how easy it is
+
+00:27:33.066 --> 00:27:34.676 A:middle
+to index these photos
+using their title.
+
+00:27:36.736 --> 00:27:40.816 A:middle
+You go in Spotlight, and we
+have a method, index items
+
+00:27:41.616 --> 00:27:44.946 A:middle
+and we'll call this when
+the data model initializes
+
+00:27:45.516 --> 00:27:50.806 A:middle
+and we'll enumerate over all
+of the photos in the data store
+
+00:27:50.806 --> 00:27:54.356 A:middle
+and we'll add each photo
+using CoreSpotlight.
+
+00:27:55.486 --> 00:28:00.786 A:middle
+We'll start off by creating
+the attribute set describing
+
+
+
+00:27:55.486 --> 00:28:00.786 A:middle
+We'll start off by creating
+the attribute set describing
+
+00:28:02.756 --> 00:28:03.666 A:middle
+the photo.
+
+00:28:03.666 --> 00:28:06.816 A:middle
+Here we're creating a
+CSSearchableItemAttributeSet
+
+00:28:08.616 --> 00:28:09.516 A:middle
+for an image.
+
+00:28:10.376 --> 00:28:14.036 A:middle
+Then we'll take the title
+from the data model and set it
+
+00:28:14.036 --> 00:28:16.426 A:middle
+on the Title property
+of the attribute set.
+
+00:28:17.836 --> 00:28:20.356 A:middle
+We'll also include a
+description based on that title.
+
+00:28:25.716 --> 00:28:27.876 A:middle
+Next we'll create
+the item itself.
+
+00:28:28.676 --> 00:28:32.116 A:middle
+Here we're passing in a unique
+identifier which represents
+
+00:28:32.256 --> 00:28:35.886 A:middle
+that we can use to reference
+the image in our data store.
+
+00:28:40.756 --> 00:28:46.626 A:middle
+Then we'll call
+indexSearchableItems passing
+
+00:28:46.626 --> 00:28:49.176 A:middle
+in the item into the
+CSSearchableIndex.
+
+00:28:50.726 --> 00:28:54.396 A:middle
+Now let's build and run this app
+and here we are back in our app
+
+00:28:54.396 --> 00:28:59.146 A:middle
+and this time when our app
+initialized it called index
+
+00:28:59.146 --> 00:29:01.856 A:middle
+items and enumerated all of
+the photos in the collection
+
+
+
+00:28:59.146 --> 00:29:01.856 A:middle
+items and enumerated all of
+the photos in the collection
+
+00:29:01.886 --> 00:29:05.896 A:middle
+and added each photo
+to the on-device index.
+
+00:29:07.806 --> 00:29:10.336 A:middle
+Now we can go into iOS search
+
+00:29:11.166 --> 00:29:14.226 A:middle
+and I remember seeing some
+nice sunsets in there.
+
+00:29:14.226 --> 00:29:18.976 A:middle
+We can see results from
+our app for these sunsets
+
+00:29:19.306 --> 00:29:23.376 A:middle
+with the Title of
+"sunset" in them.
+
+00:29:23.586 --> 00:29:26.286 A:middle
+Tapping on one of
+the results allows us
+
+00:29:26.286 --> 00:29:27.966 A:middle
+to restore the app right back
+
+00:29:28.186 --> 00:29:29.496 A:middle
+to the proper context
+for that item.
+
+00:29:30.516 --> 00:29:37.306 A:middle
+[Applause]
+
+00:29:37.806 --> 00:29:39.586 A:middle
+&gt;&gt; DAVE SALIM: That's
+how easy it is
+
+00:29:40.196 --> 00:29:41.986 A:middle
+to index items using
+CoreSpotlight.
+
+00:29:42.956 --> 00:29:44.146 A:middle
+So some additional features
+
+00:29:44.846 --> 00:29:47.156 A:middle
+in CoreSpotlight is
+support for batching.
+
+00:29:47.926 --> 00:29:51.136 A:middle
+Your app may choose to index a
+large number of items and wish
+
+00:29:51.456 --> 00:29:52.856 A:middle
+to break it up in batches.
+
+00:29:53.366 --> 00:29:56.616 A:middle
+The index supports saving
+the State of where you are
+
+00:29:56.616 --> 00:29:58.356 A:middle
+in your batch process
+and retrieving it
+
+00:29:58.356 --> 00:30:00.386 A:middle
+so that you can resume
+where you left off.
+
+
+
+00:29:58.356 --> 00:30:00.386 A:middle
+so that you can resume
+where you left off.
+
+00:30:01.186 --> 00:30:04.016 A:middle
+There is also support for
+a delegate and extension
+
+00:30:04.016 --> 00:30:06.146 A:middle
+so that the index can
+communicate with your app
+
+00:30:06.476 --> 00:30:08.116 A:middle
+in the foreground, background,
+
+00:30:08.116 --> 00:30:09.216 A:middle
+or when it is not
+currently running.
+
+00:30:10.316 --> 00:30:12.256 A:middle
+There is support for
+data protection classes
+
+00:30:12.636 --> 00:30:14.816 A:middle
+so you can choose the
+appropriate security policy
+
+00:30:15.236 --> 00:30:16.536 A:middle
+for the information
+that you're indexing.
+
+00:30:17.856 --> 00:30:21.446 A:middle
+CoreSpotlight is an easy
+to adopt database-like API
+
+00:30:22.336 --> 00:30:25.206 A:middle
+which you can use to
+index any features
+
+00:30:25.206 --> 00:30:27.326 A:middle
+and content from your apps.
+
+00:30:28.536 --> 00:30:30.576 A:middle
+So now I'll hand it over
+to Jason Douglas talk
+
+00:30:30.576 --> 00:30:32.596 A:middle
+about the third API, web markup.
+
+00:30:33.516 --> 00:30:43.176 A:middle
+[Applause]
+
+00:30:43.676 --> 00:30:44.546 A:middle
+&gt;&gt; JASON DOUGLAS: Hello.
+
+00:30:45.196 --> 00:30:46.416 A:middle
+My name is Jason Douglas.
+
+00:30:46.446 --> 00:30:47.626 A:middle
+I'm from the Siri team.
+
+00:30:47.856 --> 00:30:49.576 A:middle
+We'll talk about web markup.
+
+00:30:49.956 --> 00:30:53.476 A:middle
+You have seen two amazing ways
+
+00:30:53.476 --> 00:30:55.446 A:middle
+to make your app
+contents searchable both
+
+00:30:55.536 --> 00:30:59.956 A:middle
+in NSUserActivity and
+CoreSpotlight, the third set
+
+00:30:59.956 --> 00:31:02.226 A:middle
+of those APIs is web markup.
+
+
+
+00:30:59.956 --> 00:31:02.226 A:middle
+of those APIs is web markup.
+
+00:31:02.596 --> 00:31:04.666 A:middle
+And this is for content
+from the app
+
+00:31:04.976 --> 00:31:06.746 A:middle
+which is also available
+on a website.
+
+00:31:07.276 --> 00:31:11.966 A:middle
+The key to making this
+connection is a mobile
+
+00:31:11.966 --> 00:31:12.446 A:middle
+deep link.
+
+00:31:12.746 --> 00:31:14.856 A:middle
+A deep link is a lot
+like a URL but rather
+
+00:31:14.856 --> 00:31:17.896 A:middle
+than to a webpage
+it links to content,
+
+00:31:18.046 --> 00:31:23.966 A:middle
+specific content directly
+inside of your app.
+
+00:31:24.236 --> 00:31:25.656 A:middle
+You saw this diagram earlier
+
+00:31:26.026 --> 00:31:28.786 A:middle
+where we're building
+both an on-device index
+
+00:31:28.786 --> 00:31:31.086 A:middle
+and a cloud index
+from public items
+
+00:31:31.086 --> 00:31:32.526 A:middle
+that are sourced
+from the device.
+
+00:31:33.346 --> 00:31:35.236 A:middle
+Well, to call crawl content
+
+00:31:35.236 --> 00:31:38.566 A:middle
+from websites Apple now has
+a web crawler called AppleBot
+
+00:31:38.826 --> 00:31:41.246 A:middle
+which is going out and
+crawling app websites
+
+00:31:41.276 --> 00:31:42.346 A:middle
+for quite some time now.
+
+00:31:43.106 --> 00:31:45.576 A:middle
+And for a lot of this content,
+you didn't have to do anything.
+
+00:31:45.676 --> 00:31:49.876 A:middle
+If your website supports
+mobile deep links, we were able
+
+00:31:49.876 --> 00:31:53.056 A:middle
+to go ahead, discover that
+content and make it searchable
+
+00:31:53.096 --> 00:31:54.926 A:middle
+from iOS search and Safari.
+
+00:31:56.736 --> 00:32:00.296 A:middle
+This content when
+pulled from the website,
+
+
+
+00:31:56.736 --> 00:32:00.296 A:middle
+This content when
+pulled from the website,
+
+00:32:00.296 --> 00:32:04.396 A:middle
+we surface it directly in search
+and Safari like you see here.
+
+00:32:05.816 --> 00:32:07.096 A:middle
+And when a user taps on one
+
+00:32:07.096 --> 00:32:09.276 A:middle
+of the results they're
+deep linked directly
+
+00:32:09.276 --> 00:32:11.386 A:middle
+into your app seeing the content
+
+00:32:11.386 --> 00:32:13.276 A:middle
+that they saw from
+search results.
+
+00:32:13.746 --> 00:32:18.076 A:middle
+You will notice there is a
+link to get back to your app
+
+00:32:18.466 --> 00:32:19.346 A:middle
+which you get for free.
+
+00:32:19.686 --> 00:32:21.096 A:middle
+You don't have to
+do anything special
+
+00:32:21.096 --> 00:32:22.516 A:middle
+in your app to get
+this behavior.
+
+00:32:23.486 --> 00:32:26.116 A:middle
+Users simply have to tap on
+that link in the top left corner
+
+00:32:26.366 --> 00:32:27.836 A:middle
+and they're taken
+back to searching.
+
+00:32:27.836 --> 00:32:29.946 A:middle
+This makes it seamless
+to go back and forth.
+
+00:32:31.396 --> 00:32:34.686 A:middle
+There are four simple steps
+
+00:32:34.786 --> 00:32:38.706 A:middle
+to making your apps content
+searchable via the web markup.
+
+00:32:39.606 --> 00:32:43.086 A:middle
+The first step is making
+sure Apple can discover
+
+00:32:43.416 --> 00:32:45.216 A:middle
+and index your website.
+
+00:32:46.436 --> 00:32:50.206 A:middle
+The second step is ensuring that
+your website contains markup
+
+00:32:50.206 --> 00:32:51.256 A:middle
+for mobile deep links.
+
+00:32:51.706 --> 00:32:54.486 A:middle
+Next you want to also be sure
+
+00:32:54.486 --> 00:32:59.546 A:middle
+that your app can handle opening
+those deep links and finally,
+
+00:32:59.546 --> 00:33:01.526 A:middle
+this is optional, but
+highly recommended,
+
+
+
+00:32:59.546 --> 00:33:01.526 A:middle
+this is optional, but
+highly recommended,
+
+00:33:01.736 --> 00:33:03.756 A:middle
+is adding mark-up
+for structured data.
+
+00:33:03.876 --> 00:33:06.096 A:middle
+We'll talk more about
+what this is.
+
+00:33:06.136 --> 00:33:09.566 A:middle
+This allows your results to
+look rich and engaging to users.
+
+00:33:10.106 --> 00:33:14.806 A:middle
+So the first step, making your
+website discoverable by Apple.
+
+00:33:14.806 --> 00:33:18.066 A:middle
+We have been going out crawling
+the web for a while looking
+
+00:33:18.066 --> 00:33:20.426 A:middle
+for sites with deep
+links, the easiest way
+
+00:33:20.426 --> 00:33:23.286 A:middle
+to make sure we can find the
+app's website is to use it
+
+00:33:23.286 --> 00:33:25.486 A:middle
+as either your support
+or marketing URL
+
+00:33:25.726 --> 00:33:28.426 A:middle
+when you submit the
+site to iTunes Connect.
+
+00:33:29.836 --> 00:33:33.096 A:middle
+When you submit your app there
+is two text boxes for this.
+
+00:33:33.096 --> 00:33:34.116 A:middle
+It is very easy.
+
+00:33:34.426 --> 00:33:37.496 A:middle
+We use them as a starting
+point for going out
+
+00:33:37.496 --> 00:33:38.986 A:middle
+and finding mobile deep links.
+
+00:33:39.376 --> 00:33:43.526 A:middle
+The next thing is making sure
+
+00:33:43.526 --> 00:33:46.696 A:middle
+that your website has
+markup for deep links.
+
+00:33:47.506 --> 00:33:50.076 A:middle
+The most popular way, you have
+probably seen this before,
+
+00:33:50.496 --> 00:33:52.296 A:middle
+are something called
+Smart App Banners,
+
+00:33:52.296 --> 00:33:53.896 A:middle
+they have been around
+for a while.
+
+00:33:53.946 --> 00:33:57.396 A:middle
+This is a simple &lt;meta&gt;
+tag specifying the app
+
+00:33:57.396 --> 00:34:00.016 A:middle
+and what the deep
+link URL should be.
+
+
+
+00:33:57.396 --> 00:34:00.016 A:middle
+and what the deep
+link URL should be.
+
+00:34:01.006 --> 00:34:04.296 A:middle
+Users when they visit your app's
+website in Safari see a banner.
+
+00:34:04.706 --> 00:34:07.266 A:middle
+If the app is not installed
+it allows them to go directly
+
+00:34:07.266 --> 00:34:08.576 A:middle
+to the App Store to install it
+
+00:34:08.835 --> 00:34:12.255 A:middle
+or if it is already installed
+you can click the view button
+
+00:34:12.525 --> 00:34:14.956 A:middle
+to view that content
+directly inside of your app.
+
+00:34:15.835 --> 00:34:18.856 A:middle
+If you want to learn more
+about Smart App Banners check
+
+00:34:18.856 --> 00:34:21.856 A:middle
+out the Safari Web Content Guide
+which has more information.
+
+00:34:22.436 --> 00:34:29.116 A:middle
+In iOS 9 there is a new
+feature called Universal Links
+
+00:34:29.436 --> 00:34:30.926 A:middle
+which is an even
+better alternative
+
+00:34:30.926 --> 00:34:31.926 A:middle
+to Smart App Banners.
+
+00:34:33.085 --> 00:34:37.266 A:middle
+There are a few advantages
+over the custom URL schemes
+
+00:34:37.266 --> 00:34:39.545 A:middle
+that you may have used in
+the past for deep links.
+
+00:34:40.766 --> 00:34:42.576 A:middle
+The first of the features
+is they're unique.
+
+00:34:43.056 --> 00:34:47.156 A:middle
+Multiple apps can't
+claim the same custom --
+
+00:34:47.156 --> 00:34:49.076 A:middle
+they can claim the
+same custom URL scheme
+
+00:34:49.076 --> 00:34:51.416 A:middle
+but with universal
+links they can't collide
+
+00:34:51.676 --> 00:34:55.505 A:middle
+because we use the app website
+as a way to uniquely identify.
+
+00:34:56.565 --> 00:35:00.226 A:middle
+It is secure, just because
+you say that an app belongs
+
+
+
+00:34:56.565 --> 00:35:00.226 A:middle
+It is secure, just because
+you say that an app belongs
+
+00:35:00.226 --> 00:35:03.036 A:middle
+to a certain website we
+don't take it for granted.
+
+00:35:03.656 --> 00:35:06.946 A:middle
+A signed certificate is
+uploaded to the website
+
+00:35:06.946 --> 00:35:10.366 A:middle
+and when the user installs your
+app we check the certificate
+
+00:35:10.366 --> 00:35:13.716 A:middle
+to make sure that they're
+truly linked together.
+
+00:35:15.296 --> 00:35:19.656 A:middle
+They're also flexible so users
+can control the behavior whether
+
+00:35:19.656 --> 00:35:22.596 A:middle
+they prefer being within the
+website or within the app,
+
+00:35:22.596 --> 00:35:24.476 A:middle
+they can easily toggle
+this behavior
+
+00:35:24.556 --> 00:35:26.536 A:middle
+and choose the default
+they want the most.
+
+00:35:26.806 --> 00:35:29.336 A:middle
+This means that you can
+also avoid using things
+
+00:35:29.336 --> 00:35:31.646 A:middle
+like JavaScript to
+try to ask the user
+
+00:35:31.866 --> 00:35:32.866 A:middle
+which they would prefer.
+
+00:35:33.176 --> 00:35:35.716 A:middle
+Another great advantage of not
+using Javascript is it's one
+
+00:35:35.716 --> 00:35:38.066 A:middle
+of the types of deep
+link which we have a bit
+
+00:35:38.066 --> 00:35:39.606 A:middle
+of a hard time understanding.
+
+00:35:39.606 --> 00:35:42.606 A:middle
+Using something like Universal
+Links ensures we're able
+
+00:35:42.606 --> 00:35:44.296 A:middle
+to parse your deep
+links correctly.
+
+00:35:45.436 --> 00:35:47.586 A:middle
+The final advantage,
+they're universal.
+
+00:35:48.276 --> 00:35:52.916 A:middle
+A Universal Link is a single URL
+used both for your web content
+
+00:35:52.916 --> 00:35:54.496 A:middle
+as well as your app's content.
+
+00:35:54.756 --> 00:35:57.416 A:middle
+You don't need to have two
+separate URLs, one for web
+
+00:35:57.416 --> 00:35:59.416 A:middle
+and one for the deep
+link content.
+
+00:35:59.966 --> 00:36:06.326 A:middle
+If using Universal Links
+we'll still need to know
+
+
+
+00:35:59.966 --> 00:36:06.326 A:middle
+If using Universal Links
+we'll still need to know
+
+00:36:06.326 --> 00:36:09.026 A:middle
+about your deep links
+via your web markup,
+
+00:36:09.026 --> 00:36:11.406 A:middle
+so you want to use
+Smart App Banners
+
+00:36:11.726 --> 00:36:13.696 A:middle
+or an alternative
+supported standard.
+
+00:36:14.006 --> 00:36:16.976 A:middle
+This also ensures that if a user
+doesn't have the app installed
+
+00:36:17.206 --> 00:36:19.796 A:middle
+they're still able to go
+discover your app, and find it,
+
+00:36:19.796 --> 00:36:23.496 A:middle
+install it since Universal Links
+is a feature that's enabled once
+
+00:36:23.496 --> 00:36:24.636 A:middle
+your app is installed.
+
+00:36:25.536 --> 00:36:28.596 A:middle
+To learn more, I highly
+recommend that you check
+
+00:36:28.596 --> 00:36:30.966 A:middle
+out the session Seamless
+Linking to Your App
+
+00:36:31.176 --> 00:36:31.926 A:middle
+which will be tomorrow.
+
+00:36:35.636 --> 00:36:39.936 A:middle
+So the next step or the other
+alternatives we also support
+
+00:36:39.936 --> 00:36:42.776 A:middle
+for deep linking, one of
+those is Twitter cards
+
+00:36:43.616 --> 00:36:48.236 A:middle
+which also uses &lt;meta&gt; tags
+and Facebook app links.
+
+00:36:48.426 --> 00:36:52.556 A:middle
+In addition to just supporting
+smart app banners we support
+
+00:36:52.556 --> 00:36:54.536 A:middle
+these as well and
+we'll add support
+
+00:36:54.536 --> 00:36:57.916 A:middle
+for other popular standards
+that may come along later.
+
+
+
+00:37:01.876 --> 00:37:04.896 A:middle
+Finally, making sure that
+your app can open deep links.
+
+00:37:05.056 --> 00:37:08.396 A:middle
+In the past and you may
+be familiar with this,
+
+00:37:08.396 --> 00:37:09.896 A:middle
+you may have already
+done this for your app,
+
+00:37:10.146 --> 00:37:12.406 A:middle
+is making sure you've
+implemented openURL.
+
+00:37:13.526 --> 00:37:16.066 A:middle
+Here is a simple
+example of using openURL.
+
+00:37:16.796 --> 00:37:19.526 A:middle
+In this case in our
+example we have a URL
+
+00:37:19.526 --> 00:37:22.416 A:middle
+which can view profiles and
+it simply takes a profile ID.
+
+00:37:22.416 --> 00:37:26.896 A:middle
+We simply parse the URL
+with NSURL components
+
+00:37:28.026 --> 00:37:31.396 A:middle
+and pass the profile ID
+from the query parameters
+
+00:37:31.696 --> 00:37:32.656 A:middle
+to the view controller.
+
+00:37:33.026 --> 00:37:35.736 A:middle
+This is a very simple
+example of how easy it is
+
+00:37:35.766 --> 00:37:38.046 A:middle
+to support deep linking
+for your app.
+
+00:37:40.916 --> 00:37:43.386 A:middle
+So now I want to talk
+about structured data
+
+00:37:43.386 --> 00:37:44.726 A:middle
+which I alluded to earlier.
+
+00:37:45.786 --> 00:37:49.376 A:middle
+Structured data is something in
+addition to the mobile deep link
+
+00:37:49.736 --> 00:37:51.306 A:middle
+which lets us understand
+
+00:37:51.306 --> 00:37:53.336 A:middle
+and parse information
+about your results.
+
+00:37:53.956 --> 00:37:57.476 A:middle
+Parsing freeform web
+text is not an easy task
+
+00:37:57.476 --> 00:37:59.576 A:middle
+and this helps us
+out significantly.
+
+
+
+00:38:00.366 --> 00:38:03.126 A:middle
+It also ensures that
+your results can stand
+
+00:38:03.126 --> 00:38:06.516 A:middle
+out to the user rather than
+just having text you can have an
+
+00:38:06.516 --> 00:38:09.436 A:middle
+image, ratings, and
+other key things
+
+00:38:09.476 --> 00:38:10.876 A:middle
+that are called out
+in the result.
+
+00:38:11.276 --> 00:38:12.976 A:middle
+It can also help
+improve your ranking
+
+00:38:13.346 --> 00:38:16.276 A:middle
+because we know this result is
+rich and engaging to the user,
+
+00:38:16.566 --> 00:38:19.136 A:middle
+we may tend to surface it
+more than other results.
+
+00:38:19.806 --> 00:38:23.316 A:middle
+So one standard for
+adding this type
+
+00:38:23.316 --> 00:38:25.276 A:middle
+of structured data
+is open graph.
+
+00:38:25.976 --> 00:38:28.916 A:middle
+Open graph you can
+specify an image, an audio,
+
+00:38:28.916 --> 00:38:31.006 A:middle
+or even a video file
+with your result.
+
+00:38:31.316 --> 00:38:33.606 A:middle
+You simply place this
+markup on your webpage
+
+00:38:33.606 --> 00:38:34.776 A:middle
+and we'll then associate it
+
+00:38:34.776 --> 00:38:39.976 A:middle
+with the deep link we also
+find on the same page.
+
+00:38:40.996 --> 00:38:42.766 A:middle
+Another very common format
+
+00:38:42.846 --> 00:38:46.006 A:middle
+for structured data is
+schema.org that's been
+
+00:38:46.006 --> 00:38:50.046 A:middle
+around for a while and we're
+adding support for it rapidly.
+
+00:38:50.846 --> 00:38:53.876 A:middle
+A common schema.org
+is AggregateRatings
+
+00:38:53.876 --> 00:38:55.566 A:middle
+for ratings and reviews.
+
+00:38:56.326 --> 00:38:59.286 A:middle
+This example we're showing
+adding the AggregateRating
+
+00:38:59.286 --> 00:39:05.586 A:middle
+markup with the schema.org micro
+data and we support RDFA as well
+
+
+
+00:38:59.286 --> 00:39:05.586 A:middle
+markup with the schema.org micro
+data and we support RDFA as well
+
+00:39:05.586 --> 00:39:09.196 A:middle
+as JSON-LD depending on
+what you're comfortable
+
+00:39:09.196 --> 00:39:12.716 A:middle
+with implementing on your
+website we'll support that
+
+00:39:12.716 --> 00:39:14.616 A:middle
+and parse that to
+be all-inclusive.
+
+00:39:17.196 --> 00:39:19.326 A:middle
+Now let's dissect an example
+
+00:39:19.326 --> 00:39:20.756 A:middle
+of how this works
+in the real world.
+
+00:39:21.106 --> 00:39:23.536 A:middle
+Here is an Airbnb
+result and the first
+
+00:39:23.536 --> 00:39:26.156 A:middle
+and most obvious thing is
+the title which we parsed
+
+00:39:26.156 --> 00:39:30.256 A:middle
+with standard HTML &lt;title&gt; tags
+and then we go a step further.
+
+00:39:31.186 --> 00:39:33.066 A:middle
+There is a price
+per night shown.
+
+00:39:33.426 --> 00:39:38.936 A:middle
+We're able to do this because
+on this webpage the Offer schema
+
+00:39:38.936 --> 00:39:41.736 A:middle
+was added and it is
+associated with a hotel.
+
+00:39:42.846 --> 00:39:45.586 A:middle
+We're able to parse that price
+and price currency and show
+
+00:39:45.586 --> 00:39:47.406 A:middle
+that directly in the result.
+
+00:39:48.876 --> 00:39:53.106 A:middle
+We're also able to show number
+of reviews via AggregateRating
+
+00:39:53.106 --> 00:39:56.086 A:middle
+from schema.org and
+a rating value
+
+00:39:56.086 --> 00:39:57.436 A:middle
+which we can render as stars.
+
+00:39:59.946 --> 00:40:03.316 A:middle
+Finally, the image has been
+provided using open graph's
+
+
+
+00:39:59.946 --> 00:40:03.316 A:middle
+Finally, the image has been
+provided using open graph's
+
+00:40:03.356 --> 00:40:04.066 A:middle
+image tag.
+
+00:40:04.646 --> 00:40:09.726 A:middle
+So now to talk about
+some of the schemas
+
+00:40:09.726 --> 00:40:11.606 A:middle
+which we support
+from schema.org.
+
+00:40:12.406 --> 00:40:18.066 A:middle
+The first is AggregateRatings,
+another is offers, prices,
+
+00:40:18.586 --> 00:40:22.166 A:middle
+or if you have a consumer
+shopping site, you offer things
+
+00:40:22.166 --> 00:40:26.686 A:middle
+for sale and as we saw
+with hotels maybe, booking,
+
+00:40:28.036 --> 00:40:30.426 A:middle
+price range in case you
+don't have a fixed price
+
+00:40:30.476 --> 00:40:35.366 A:middle
+but rather a range of prices,
+interactionCount for things
+
+00:40:35.366 --> 00:40:38.576 A:middle
+like likes, views, comments,
+
+00:40:40.076 --> 00:40:43.786 A:middle
+also interactionCount will
+be superseded in schema.org
+
+00:40:43.836 --> 00:40:49.186 A:middle
+by the new Action set of schemas
+which we'll support that as well
+
+00:40:49.356 --> 00:40:50.966 A:middle
+if you're thinking of migrating
+
+00:40:50.966 --> 00:40:52.846 A:middle
+from interactionCount
+to Actions.
+
+00:40:54.406 --> 00:40:56.726 A:middle
+Organization for things
+such as businesses,
+
+00:40:56.766 --> 00:41:00.166 A:middle
+you can also have
+addresses associated
+
+
+
+00:40:56.766 --> 00:41:00.166 A:middle
+you can also have
+addresses associated
+
+00:41:00.166 --> 00:41:03.426 A:middle
+with these contact information,
+like telephone numbers
+
+00:41:03.426 --> 00:41:04.436 A:middle
+and we'll see a bit later how
+
+00:41:04.436 --> 00:41:06.886 A:middle
+that can help make your
+result more richer.
+
+00:41:07.276 --> 00:41:11.336 A:middle
+Recipes, this one
+is self-explanatory.
+
+00:41:13.026 --> 00:41:16.636 A:middle
+SearchActions, in case your
+website has a landing page
+
+00:41:16.636 --> 00:41:18.826 A:middle
+for searches by marking it
+
+00:41:18.826 --> 00:41:21.686 A:middle
+up in a special way we're also
+then able to treat your result
+
+00:41:21.786 --> 00:41:23.426 A:middle
+in a little bit differently,
+
+00:41:23.426 --> 00:41:25.726 A:middle
+we know it is a landing
+page for search.
+
+00:41:26.986 --> 00:41:28.616 A:middle
+Finally, ImageObjects.
+
+00:41:28.906 --> 00:41:31.136 A:middle
+This is for nothing
+else but images.
+
+00:41:31.136 --> 00:41:36.076 A:middle
+So now I want to also
+talk about Actions.
+
+00:41:36.736 --> 00:41:39.076 A:middle
+Actions are a way
+using structured data
+
+00:41:39.076 --> 00:41:41.396 A:middle
+to allow your results
+to become actionable.
+
+00:41:42.976 --> 00:41:46.456 A:middle
+There's a set of actions that
+we'll be supporting on launch,
+
+00:41:46.496 --> 00:41:50.676 A:middle
+the first of which is dialing a
+phone number, getting directions
+
+00:41:50.676 --> 00:41:53.786 A:middle
+to an address and playing
+an audio or video file.
+
+00:41:53.786 --> 00:42:00.796 A:middle
+For the first of these
+examples dialing a phone number.
+
+
+
+00:41:53.786 --> 00:42:00.796 A:middle
+For the first of these
+examples dialing a phone number.
+
+00:42:01.326 --> 00:42:04.706 A:middle
+As we saw before with the
+Organization schema you can add
+
+00:42:04.706 --> 00:42:07.066 A:middle
+something like a
+telephone as a property.
+
+00:42:07.696 --> 00:42:10.746 A:middle
+When we see this telephone
+number we can parse it
+
+00:42:10.746 --> 00:42:13.186 A:middle
+and put a call button
+directly in the result.
+
+00:42:13.516 --> 00:42:16.356 A:middle
+This makes your result
+actionable now.
+
+00:42:17.516 --> 00:42:20.606 A:middle
+Another is using an
+AudioObject schema
+
+00:42:21.486 --> 00:42:24.836 A:middle
+with AudioObject you can
+specify a URL to an audio file
+
+00:42:24.836 --> 00:42:28.486 A:middle
+and the users will play it from
+the result, they don't have
+
+00:42:28.536 --> 00:42:32.886 A:middle
+to deep link into the app
+and play it from there.
+
+00:42:34.326 --> 00:42:35.886 A:middle
+Finally, getting directions.
+
+00:42:36.606 --> 00:42:39.836 A:middle
+Providing a postal address
+we can then allow the user
+
+00:42:39.836 --> 00:42:42.166 A:middle
+to navigate directly
+without having
+
+00:42:42.166 --> 00:42:43.276 A:middle
+to deep link into the app.
+
+00:42:43.636 --> 00:42:46.766 A:middle
+This has the benefit of
+making your result much more
+
+00:42:46.766 --> 00:42:48.626 A:middle
+potentially interactive
+to the user.
+
+00:42:49.366 --> 00:42:51.206 A:middle
+If a user sees a list
+of results and sees
+
+00:42:51.206 --> 00:42:53.466 A:middle
+that they can get
+directly to the action
+
+00:42:53.466 --> 00:42:56.516 A:middle
+that they want they may be more
+likely to click on your result.
+
+00:42:56.516 --> 00:43:04.306 A:middle
+So we have shown a lot of
+different schemas, markups,
+
+
+
+00:42:56.516 --> 00:43:04.306 A:middle
+So we have shown a lot of
+different schemas, markups,
+
+00:43:04.536 --> 00:43:07.046 A:middle
+we'll add testing
+tools later this year
+
+00:43:07.156 --> 00:43:09.856 A:middle
+for testing the markup
+on your website.
+
+00:43:09.856 --> 00:43:13.636 A:middle
+This will be available on the
+developer site later this year.
+
+00:43:13.966 --> 00:43:16.956 A:middle
+We'll be having testing tools
+for both the deep link markup
+
+00:43:16.956 --> 00:43:19.846 A:middle
+and the structured data markup.
+
+00:43:20.856 --> 00:43:23.686 A:middle
+Finally, I just wanted to
+call out a few more resources
+
+00:43:24.006 --> 00:43:26.776 A:middle
+as you're adding both
+either mobile deep links
+
+00:43:26.856 --> 00:43:31.446 A:middle
+or structured data to the
+website, do check out some
+
+00:43:31.506 --> 00:43:34.256 A:middle
+of these resources,
+provide a lot of information
+
+00:43:34.256 --> 00:43:40.006 A:middle
+and again we'll hopefully
+help get you started.
+
+00:43:40.356 --> 00:43:40.696 A:middle
+Thanks.
+
+00:43:42.516 --> 00:43:47.696 A:middle
+[Applause]
+
+00:43:48.196 --> 00:43:51.626 A:middle
+&gt;&gt; JASON DOUGLAS: Now I
+hand it back to Vipul.
+
+00:43:55.756 --> 00:43:58.776 A:middle
+&gt;&gt; VIPUL PRAKASH: So those
+are three simple, powerful,
+
+00:43:58.776 --> 00:44:05.056 A:middle
+and flexible ways of making
+your app searchable on iOS 9.
+
+
+
+00:43:58.776 --> 00:44:05.056 A:middle
+and flexible ways of making
+your app searchable on iOS 9.
+
+00:44:05.276 --> 00:44:06.256 A:middle
+Which one should you use?
+
+00:44:06.516 --> 00:44:10.316 A:middle
+It is a function of the
+nature of your content as well
+
+00:44:10.316 --> 00:44:12.976 A:middle
+as the kind of search experience
+that you're trying to create.
+
+00:44:13.696 --> 00:44:17.846 A:middle
+CoreSpotlight is for
+private data which is indexed
+
+00:44:17.846 --> 00:44:20.686 A:middle
+on the device and you
+can use CoreSpotlight
+
+00:44:20.896 --> 00:44:24.586 A:middle
+to comprehensively
+index data in your app.
+
+00:44:24.586 --> 00:44:27.976 A:middle
+If you're building or you
+have a social networking app
+
+00:44:28.016 --> 00:44:30.656 A:middle
+for instance and you wanted
+to index all of the messages
+
+00:44:31.016 --> 00:44:32.836 A:middle
+that the user has
+sent and received,
+
+00:44:33.206 --> 00:44:35.086 A:middle
+CoreSpotlight is the
+right tool for the job.
+
+00:44:36.036 --> 00:44:39.336 A:middle
+Web markup is for apps that
+mirror their content on the web.
+
+00:44:39.756 --> 00:44:42.866 A:middle
+If you do that, you should
+absolutely adopt that markup,
+
+00:44:42.866 --> 00:44:46.866 A:middle
+because it creates tremendous
+opportunity for your app
+
+00:44:46.976 --> 00:44:49.046 A:middle
+and content to be
+discovered by users
+
+00:44:49.216 --> 00:44:51.586 A:middle
+that don't have your app yet.
+
+00:44:51.856 --> 00:44:55.356 A:middle
+Use NSUserActivity for both
+public and private content
+
+00:44:55.356 --> 00:44:58.906 A:middle
+as well as for indexing
+navigation points inside
+
+00:44:58.906 --> 00:44:59.306 A:middle
+of your app.
+
+
+
+00:45:00.316 --> 00:45:03.366 A:middle
+Now there is another flavor of
+NSUserActivity that Dave touched
+
+00:45:03.366 --> 00:45:04.766 A:middle
+on which is Public Indexing.
+
+00:45:05.436 --> 00:45:06.576 A:middle
+This is really powerful.
+
+00:45:06.816 --> 00:45:09.986 A:middle
+If your app has a large
+number of items, millions
+
+00:45:09.986 --> 00:45:13.486 A:middle
+or even hundreds of millions
+you can use Public Indexing
+
+00:45:13.486 --> 00:45:16.246 A:middle
+to essentially move those
+items and have them indexed
+
+00:45:16.246 --> 00:45:18.126 A:middle
+in Apple's cloud index.
+
+00:45:20.316 --> 00:45:22.966 A:middle
+These APIs while distinct,
+
+00:45:24.336 --> 00:45:26.166 A:middle
+they're really designed
+to work together.
+
+00:45:26.736 --> 00:45:31.646 A:middle
+In the same app for the
+same content you can adopt
+
+00:45:31.646 --> 00:45:32.506 A:middle
+multiple APIs.
+
+00:45:33.856 --> 00:45:38.706 A:middle
+The only thing to remember
+is for items that are indexed
+
+00:45:39.616 --> 00:45:42.766 A:middle
+from multiple places, you
+want to connect these items
+
+00:45:43.396 --> 00:45:44.796 A:middle
+by giving them the same ID.
+
+00:45:45.306 --> 00:45:51.176 A:middle
+If you're using all three APIs,
+the obvious ID is the URL.
+
+00:45:52.946 --> 00:45:56.346 A:middle
+You would set CSSearchableItems
+UniqueIdentifier to the URL
+
+00:45:56.896 --> 00:45:59.626 A:middle
+and NSUserActivity related to
+the unique identifier as well
+
+00:45:59.626 --> 00:46:01.226 A:middle
+as the webpage URL to the URL.
+
+
+
+00:45:59.626 --> 00:46:01.226 A:middle
+as the webpage URL to the URL.
+
+00:46:01.966 --> 00:46:05.516 A:middle
+if you use NSUserActivity
+and CoreSpotlight together,
+
+00:46:05.516 --> 00:46:08.126 A:middle
+which is a very common
+pattern, you just want to ensure
+
+00:46:08.476 --> 00:46:09.686 A:middle
+that they have the same ID.
+
+00:46:10.146 --> 00:46:13.896 A:middle
+Now this help search
+deduplicate results
+
+00:46:14.316 --> 00:46:16.576 A:middle
+but it also helps
+items rank stronger.
+
+00:46:17.126 --> 00:46:19.446 A:middle
+Let's talk a bit about ranking.
+
+00:46:21.916 --> 00:46:23.896 A:middle
+The magic of search really is
+
+00:46:23.976 --> 00:46:28.166 A:middle
+to provide the most relevant
+result based on a few keystrokes
+
+00:46:28.166 --> 00:46:29.176 A:middle
+of input from the user.
+
+00:46:29.616 --> 00:46:31.826 A:middle
+We have done a lot of work here.
+
+00:46:32.996 --> 00:46:36.176 A:middle
+Relevance and ranking,
+is a complex function
+
+00:46:36.176 --> 00:46:38.236 A:middle
+of matching the query
+to the items.
+
+00:46:38.516 --> 00:46:40.906 A:middle
+Most of this is completely
+transparent
+
+00:46:41.186 --> 00:46:43.136 A:middle
+to you developers
+and to our users.
+
+00:46:44.796 --> 00:46:50.996 A:middle
+However, an important component
+of ranking is interaction
+
+00:46:50.996 --> 00:46:52.586 A:middle
+with the content and results.
+
+00:46:52.586 --> 00:46:57.616 A:middle
+What you can do is help ensure
+that search can capture all
+
+00:46:57.616 --> 00:46:58.496 A:middle
+of these interactions.
+
+00:46:58.996 --> 00:47:03.646 A:middle
+The three types of
+interactions that we care about,
+
+
+
+00:46:58.996 --> 00:47:03.646 A:middle
+The three types of
+interactions that we care about,
+
+00:47:03.646 --> 00:47:08.156 A:middle
+one is URL popularity,
+this is applicable
+
+00:47:08.336 --> 00:47:13.316 A:middle
+to content that's indexed via
+web markup and this is based
+
+00:47:13.316 --> 00:47:16.866 A:middle
+on any quality indications
+you add through schemas
+
+00:47:16.866 --> 00:47:22.016 A:middle
+like ratings, likes, reviews, as
+well as the position of the URL
+
+00:47:22.076 --> 00:47:23.396 A:middle
+in the web's link graph.
+
+00:47:24.336 --> 00:47:29.076 A:middle
+The URL improved this
+position based on popularity
+
+00:47:29.076 --> 00:47:30.246 A:middle
+and this happens automatically.
+
+00:47:30.836 --> 00:47:36.436 A:middle
+The second interaction
+is the frequency of views
+
+00:47:36.436 --> 00:47:39.226 A:middle
+that your content
+receives inside of the app.
+
+00:47:39.696 --> 00:47:43.386 A:middle
+Really the only way to capture
+this is through NSUserActivity
+
+00:47:43.386 --> 00:47:46.876 A:middle
+which is why we encourage that
+you always adopt NSUserActivity.
+
+00:47:47.766 --> 00:47:49.546 A:middle
+The third and most
+important form
+
+00:47:49.546 --> 00:47:51.756 A:middle
+of interaction is engagement
+with search results.
+
+00:47:51.826 --> 00:47:54.856 A:middle
+This is when a search result
+is presented to the user,
+
+00:47:55.386 --> 00:47:58.456 A:middle
+whether they tap on the
+result, or if they're satisfied
+
+00:47:58.456 --> 00:48:02.846 A:middle
+by the description in the result
+which we call silent engagement
+
+
+
+00:47:58.456 --> 00:48:02.846 A:middle
+by the description in the result
+which we call silent engagement
+
+00:48:02.846 --> 00:48:04.496 A:middle
+and we capture through
+session analytics.
+
+00:48:08.316 --> 00:48:11.316 A:middle
+A quick checklist of what
+to do to optimize relevance.
+
+00:48:11.316 --> 00:48:13.946 A:middle
+First, continue to
+do what you're doing,
+
+00:48:13.946 --> 00:48:15.516 A:middle
+make great apps and
+great content.
+
+00:48:15.516 --> 00:48:18.646 A:middle
+Really, the search
+system is designed to find
+
+00:48:18.646 --> 00:48:20.456 A:middle
+and bubble up the best content.
+
+00:48:21.406 --> 00:48:24.506 A:middle
+You can help by ensuring
+that we can capture all
+
+00:48:24.506 --> 00:48:26.396 A:middle
+of the interactions,
+using NSUserActivity,
+
+00:48:26.936 --> 00:48:29.866 A:middle
+use NSUserActivity with Public
+Indexing where applicable
+
+00:48:30.466 --> 00:48:33.356 A:middle
+because now we can
+capture the engagements
+
+00:48:33.356 --> 00:48:35.536 A:middle
+with your content
+across the user base.
+
+00:48:36.596 --> 00:48:40.536 A:middle
+Adopt schema mark-up
+for interactions counts
+
+00:48:40.626 --> 00:48:41.796 A:middle
+and quality indications.
+
+00:48:42.236 --> 00:48:45.176 A:middle
+Finally follow user
+interface guidelines I'll talk
+
+00:48:45.176 --> 00:48:45.836 A:middle
+about in a moment.
+
+00:48:48.696 --> 00:48:50.226 A:middle
+The flip side of bubbling
+
+00:48:50.226 --> 00:48:55.306 A:middle
+up great content is suppressing
+content that is not relevant.
+
+00:48:55.826 --> 00:49:00.486 A:middle
+We have done a lot of
+work on this as well.
+
+
+
+00:48:55.826 --> 00:49:00.486 A:middle
+We have done a lot of
+work on this as well.
+
+00:49:00.486 --> 00:49:03.306 A:middle
+If malicious or a poorly
+considered app is spamming the
+
+00:49:03.306 --> 00:49:07.066 A:middle
+index, we will downrank
+their results
+
+00:49:07.436 --> 00:49:09.216 A:middle
+or suppress them entirely.
+
+00:49:09.576 --> 00:49:10.726 A:middle
+The most important sort
+
+00:49:10.726 --> 00:49:15.286 A:middle
+of measure here is
+engagements-to-shown ratios,
+
+00:49:15.286 --> 00:49:17.866 A:middle
+the amount of times your
+results are shown in search
+
+00:49:18.236 --> 00:49:20.196 A:middle
+and how many times are engaged.
+
+00:49:20.746 --> 00:49:22.896 A:middle
+Low engagements will
+be suppressed
+
+00:49:23.246 --> 00:49:27.196 A:middle
+and high engagement ratios
+will help your content rank
+
+00:49:27.196 --> 00:49:28.056 A:middle
+up higher in search.
+
+00:49:28.586 --> 00:49:33.896 A:middle
+One of the best ways to
+get high engagements is
+
+00:49:33.936 --> 00:49:36.626 A:middle
+to follow a few simple
+user guidelines.
+
+00:49:37.196 --> 00:49:39.806 A:middle
+One of the things
+you will notice
+
+00:49:39.806 --> 00:49:42.356 A:middle
+in iOS 9 is search results even
+
+00:49:42.356 --> 00:49:46.376 A:middle
+from built-in apps are very
+descriptive and rich and this is
+
+00:49:46.376 --> 00:49:50.266 A:middle
+because we found that richer
+results get more engagements.
+
+00:49:50.806 --> 00:49:55.286 A:middle
+A few things here,
+provide a thumbnail,
+
+00:49:55.546 --> 00:49:58.916 A:middle
+provide a well-structured
+readable description, ratings
+
+00:49:58.916 --> 00:50:00.276 A:middle
+and actions where applicable.
+
+
+
+00:49:58.916 --> 00:50:00.276 A:middle
+and actions where applicable.
+
+00:50:00.946 --> 00:50:04.026 A:middle
+The image in the thumbnail
+is really powerful,
+
+00:50:04.256 --> 00:50:06.676 A:middle
+it gives the user a
+sense of what they'll see
+
+00:50:06.676 --> 00:50:08.986 A:middle
+when they tap on the result.
+
+00:50:08.986 --> 00:50:10.486 A:middle
+Provide a good thumbnail.
+
+00:50:11.056 --> 00:50:13.376 A:middle
+Provide key information that
+the user is looking for.
+
+00:50:13.776 --> 00:50:16.686 A:middle
+For instance, if the user is
+looking for a booking number,
+
+00:50:16.686 --> 00:50:19.086 A:middle
+a reference number, include
+it in the description
+
+00:50:19.306 --> 00:50:22.376 A:middle
+so that the search task can be
+completed right there in search.
+
+00:50:22.966 --> 00:50:29.226 A:middle
+Now another powerful provision
+is support for keywords.
+
+00:50:29.746 --> 00:50:32.786 A:middle
+In all the APIs you can
+provide a number of keywords
+
+00:50:33.116 --> 00:50:35.596 A:middle
+that will then trigger
+search results.
+
+00:50:35.836 --> 00:50:39.366 A:middle
+Category keywords tend
+to be very, very useful.
+
+00:50:40.566 --> 00:50:43.546 A:middle
+Users may search type
+"ticket" when searching
+
+00:50:43.546 --> 00:50:46.276 A:middle
+for a specific ticket
+rather than typing the name,
+
+00:50:46.576 --> 00:50:49.376 A:middle
+they may type "recipe"
+when looking for protein.
+
+00:50:49.596 --> 00:50:51.956 A:middle
+This creates a magical,
+
+00:50:51.956 --> 00:50:54.356 A:middle
+intelligent experience
+for users.
+
+00:50:54.846 --> 00:51:01.496 A:middle
+Other types of keywords
+that are useful are synonyms
+
+
+
+00:50:54.846 --> 00:51:01.496 A:middle
+Other types of keywords
+that are useful are synonyms
+
+00:51:01.566 --> 00:51:05.236 A:middle
+and abbreviations, users want
+to type as little as possible,
+
+00:51:05.536 --> 00:51:08.376 A:middle
+so instead of searching "San
+Francisco Giants" they may type
+
+00:51:08.376 --> 00:51:11.696 A:middle
+"sf giants" and you can provide
+this recall through keywords.
+
+00:51:16.226 --> 00:51:20.466 A:middle
+Just as important, is
+behavior on launch.
+
+00:51:20.496 --> 00:51:23.066 A:middle
+This is what happens when
+the user taps on the result.
+
+00:51:23.366 --> 00:51:25.596 A:middle
+You want to take them
+straight to the content
+
+00:51:25.726 --> 00:51:29.816 A:middle
+that they're looking for without
+interstitials, without pop-ups,
+
+00:51:30.086 --> 00:51:32.796 A:middle
+without screens,
+without spending a lot
+
+00:51:32.796 --> 00:51:34.196 A:middle
+of time loading that screen.
+
+00:51:35.096 --> 00:51:37.296 A:middle
+This is, in fact, so
+important that we measure
+
+00:51:37.296 --> 00:51:42.096 A:middle
+and estimate the time from tap
+to the content shown and use it
+
+00:51:42.096 --> 00:51:43.226 A:middle
+as a factor in ranking.
+
+00:51:43.646 --> 00:51:47.606 A:middle
+Here is two examples.
+
+00:51:47.606 --> 00:51:48.246 A:middle
+One is right.
+
+00:51:48.596 --> 00:51:49.466 A:middle
+One is wrong.
+
+00:51:49.466 --> 00:51:51.976 A:middle
+Let me show you what to do.
+
+00:51:52.516 --> 00:51:59.516 A:middle
+[Pause]
+
+
+
+00:52:00.016 --> 00:52:04.000 A:middle
+[Laughter]
+
+00:52:04.046 --> 00:52:04.966 A:middle
+&gt;&gt; VIPUL PRAKASH: I'm sure none
+of you have apps that do that!
+
+00:52:05.516 --> 00:52:09.866 A:middle
+[Applause]
+
+00:52:10.366 --> 00:52:12.426 A:middle
+&gt;&gt; VIPUL PRAKASH: It is
+frustrating for the user
+
+00:52:12.786 --> 00:52:16.056 A:middle
+and you want to find ways
+of completely avoiding it.
+
+00:52:16.616 --> 00:52:20.986 A:middle
+Let's talk about
+what to do next.
+
+00:52:22.536 --> 00:52:26.916 A:middle
+You can, of course, index your
+app content comprehensively,
+
+00:52:27.256 --> 00:52:30.046 A:middle
+these are certain things that
+we have found to be very useful
+
+00:52:30.046 --> 00:52:30.926 A:middle
+in the search context.
+
+00:52:31.096 --> 00:52:33.086 A:middle
+Any content that the user
+has viewed in the past
+
+00:52:33.086 --> 00:52:36.136 A:middle
+that you can capture with
+NSUserActivity and content
+
+00:52:36.136 --> 00:52:38.996 A:middle
+that the user may have
+created or curated by starring
+
+00:52:38.996 --> 00:52:42.006 A:middle
+or creating lists inside of
+the app, people want to go back
+
+00:52:42.146 --> 00:52:45.846 A:middle
+to things that they
+have done in the past.
+
+00:52:45.996 --> 00:52:49.436 A:middle
+Navigation points and
+features are very, very useful.
+
+00:52:50.036 --> 00:52:56.896 A:middle
+New messages, new content
+arriving that the user may want
+
+00:52:56.896 --> 00:52:59.586 A:middle
+to look for inside of your
+app, you would also want
+
+00:52:59.586 --> 00:53:01.036 A:middle
+to look for this in search.
+
+
+
+00:52:59.586 --> 00:53:01.036 A:middle
+to look for this in search.
+
+00:53:02.456 --> 00:53:05.206 A:middle
+You can get creative.
+
+00:53:05.296 --> 00:53:07.046 A:middle
+You can proactively index items
+
+00:53:07.316 --> 00:53:09.216 A:middle
+that the user may
+want to look at.
+
+00:53:09.306 --> 00:53:13.496 A:middle
+Say I bought a ticket to a music
+festival, I may be interested
+
+00:53:13.746 --> 00:53:15.136 A:middle
+in other music festivals
+in the area.
+
+00:53:15.136 --> 00:53:17.906 A:middle
+You can use your app
+analytics to figure
+
+00:53:17.906 --> 00:53:22.896 A:middle
+out interesting content
+and put it in the index.
+
+00:53:22.896 --> 00:53:26.756 A:middle
+Really the APIs are
+flexible and allow you
+
+00:53:27.026 --> 00:53:29.426 A:middle
+to create novel search
+experiences.
+
+00:53:29.466 --> 00:53:31.846 A:middle
+The possibilities here
+are really limitless.
+
+00:53:35.816 --> 00:53:38.056 A:middle
+So summary, just
+let's take a look
+
+00:53:38.056 --> 00:53:39.846 A:middle
+of things we covered
+in the session.
+
+00:53:40.266 --> 00:53:46.546 A:middle
+We introduced fast on-device
+and cloud architecture that used
+
+00:53:46.616 --> 00:53:48.646 A:middle
+for indexing deep links
+and for App Search.
+
+00:53:49.156 --> 00:53:50.496 A:middle
+We showed you three APIs
+
+00:53:50.736 --> 00:53:54.176 A:middle
+and deep linking methods
+which you can adopt.
+
+00:53:54.796 --> 00:53:59.556 A:middle
+We showed you how great
+content, descriptive results,
+
+00:53:59.726 --> 00:54:04.026 A:middle
+and fast content-to-result
+interaction can provide engaging
+
+
+
+00:53:59.726 --> 00:54:04.026 A:middle
+and fast content-to-result
+interaction can provide engaging
+
+00:54:04.026 --> 00:54:04.976 A:middle
+search experience.
+
+00:54:06.336 --> 00:54:11.116 A:middle
+Provisions built in the APIs
+that are taking your content
+
+00:54:11.336 --> 00:54:14.636 A:middle
+and showing it to iOS
+users around the world.
+
+00:54:18.956 --> 00:54:20.586 A:middle
+We have some more information.
+
+00:54:21.386 --> 00:54:23.036 A:middle
+If you're looking for
+details, you can head
+
+00:54:23.086 --> 00:54:27.796 A:middle
+to our search API documentation
+portal, we have forums
+
+00:54:27.796 --> 00:54:29.906 A:middle
+for more interactive help.
+
+00:54:31.986 --> 00:54:36.596 A:middle
+I'd recommend going to the
+session on seamless linking
+
+00:54:36.596 --> 00:54:37.696 A:middle
+that Jason introduced.
+
+00:54:42.776 --> 00:54:46.516 A:middle
+We also have two labs, one
+
+00:54:46.516 --> 00:54:48.896 A:middle
+that starts immediately
+after I stop talking.
+
+00:54:49.266 --> 00:54:53.546 A:middle
+You should come and join us
+there and another one on Friday
+
+00:54:53.936 --> 00:54:58.616 A:middle
+and we would love to see some
+integrations with search APIs
+
+00:54:58.816 --> 00:55:03.206 A:middle
+on Friday that you
+made during WWDC.
+
+
+
+00:54:58.816 --> 00:55:03.206 A:middle
+on Friday that you
+made during WWDC.
+
+00:55:03.756 --> 00:55:05.866 A:middle
+That's it for App Search.
+
+00:55:06.516 --> 00:55:11.500 A:middle
+[Applause]
+
