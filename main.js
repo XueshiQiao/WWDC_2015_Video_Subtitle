@@ -8,8 +8,8 @@ var fx = require('fs-extra');
 var fs = require('fs');
 
 var videoLinksFile = "WWDC2015_links.txt";
-var subtitlsFolderForHD = "subtitles/HD/";
-var subtitlsFolderForSD = "subtitles/SD/";
+var subtitlesFolderForHD = "subtitles/HD/";
+var subtitlesFolderForSD = "subtitles/SD/";
 
 var videoURLRegex = /(http:\/\/devstreaming.apple.com\/videos\/wwdc\/2015\/\w+\/\d+\/)(\w+)\.mp4\?dl=1/;
 async.waterfall([
@@ -17,9 +17,9 @@ async.waterfall([
     function(callback) {
         fs.readFile(videoLinksFile, 'utf-8', function (err, data) {
             if (err) throw err;
-            var links = data.split("\n");
-            links = links.filter(function (link) {
-                return link && link.length > 0;
+            var lines = data.split("\n");
+            var links = lines.filter(function (line) {
+                return line && line.length > 0;
             });
             callback(null, links);
         });
@@ -36,8 +36,8 @@ async.waterfall([
                     videoURL: group[0],
                     videoURLPrefix: group[1],
                     videoNameWithOutExtension: group[2],
-                    subtitleNameForHD: subtitlsFolderForHD + group[2] + ".srt",
-                    subtitleNameForSD: subtitlsFolderForSD + group[2] + ".srt",
+                    subtitleNameForHD: subtitlesFolderForHD + group[2] + ".srt",
+                    subtitleNameForSD: subtitlesFolderForSD + group[2] + ".srt",
                     webvttFileNames: [],
                     errorMessage: null,
                     skip:false
@@ -51,7 +51,7 @@ async.waterfall([
     //check if subtitle file has been downloaded, if so, mark skip to true
     function(videoInfos, callback) {
         videoInfos.forEach(function (videoInfo) {
-            videoInfo.skip = fs.existsSync(videoInfo.subtitleNameForHD) && fs.existsSync(videoInfo.subtitleNameForHD);
+            videoInfo.skip = fs.existsSync(videoInfo.subtitleNameForHD) && fs.existsSync(videoInfo.subtitleNameForSD);
         });
         callback(null, videoInfos);
     },
