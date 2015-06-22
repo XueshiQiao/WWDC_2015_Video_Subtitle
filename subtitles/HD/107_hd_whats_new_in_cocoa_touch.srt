@@ -1,0 +1,2344 @@
+
+00:00:24.406 --> 00:00:27.936 A:middle
+&gt;&gt; Jason Beaver: Good afternoon.
+
+00:00:28.036 --> 00:00:29.216 A:middle
+Welcome to What's
+New in Cocoa Touch.
+
+00:00:29.546 --> 00:00:30.716 A:middle
+I'm Jason Beaver, I'm one
+
+00:00:30.716 --> 00:00:33.036 A:middle
+of the senior engineering
+managers in the iOS group.
+
+00:00:35.206 --> 00:00:37.576 A:middle
+There is a lot that's
+new to discuss in iOS 9,
+
+00:00:37.766 --> 00:00:40.986 A:middle
+but first I want to take a look
+back at some changes we've made
+
+00:00:40.986 --> 00:00:42.276 A:middle
+over the past few years.
+
+00:00:43.836 --> 00:00:48.056 A:middle
+Since iOS 6 we've been laying
+the groundwork for major change
+
+00:00:48.056 --> 00:00:51.016 A:middle
+in how applications are built
+for iOS and we've been rolling
+
+00:00:51.016 --> 00:00:53.846 A:middle
+out the changes in
+each major release.
+
+00:00:55.696 --> 00:00:57.786 A:middle
+In iOS 6 we added autolayout.
+
+00:00:58.336 --> 00:01:00.576 A:middle
+This allows you to
+easily build a dynamic
+
+
+
+00:00:58.336 --> 00:01:00.576 A:middle
+This allows you to
+easily build a dynamic
+
+00:01:00.576 --> 00:01:03.246 A:middle
+and versatile interface
+that responds to changes
+
+00:01:03.246 --> 00:01:06.406 A:middle
+in available size and
+screen orientation,
+
+00:01:06.636 --> 00:01:07.786 A:middle
+as well as localization.
+
+00:01:09.756 --> 00:01:12.476 A:middle
+In iOS 7 we introduced
+dynamic type
+
+00:01:13.176 --> 00:01:15.426 A:middle
+and this lets you achieve
+beautiful typography
+
+00:01:15.426 --> 00:01:18.736 A:middle
+in your application in a variety
+of users' selectable text sizes.
+
+00:01:19.556 --> 00:01:20.926 A:middle
+And coupled with autolayout,
+
+00:01:20.926 --> 00:01:24.006 A:middle
+your interface will adapt
+automatically to changes
+
+00:01:24.006 --> 00:01:27.816 A:middle
+in the user's selected text size
+and by adopting dynamic type,
+
+00:01:27.966 --> 00:01:31.526 A:middle
+the system can make improvements
+to the text rendering and layout
+
+00:01:31.526 --> 00:01:33.356 A:middle
+that your application
+will inherent for free.
+
+00:01:35.646 --> 00:01:39.006 A:middle
+In iOS 8 we made what is
+perhaps the biggest change.
+
+00:01:39.096 --> 00:01:40.886 A:middle
+We introduced the
+concept of adaptivity.
+
+00:01:42.586 --> 00:01:44.576 A:middle
+This is the concept that
+your application should adapt
+
+00:01:45.166 --> 00:01:46.806 A:middle
+to changes in the
+running environment.
+
+00:01:47.566 --> 00:01:50.396 A:middle
+Fundamental to this
+concept is size classes.
+
+00:01:50.906 --> 00:01:54.916 A:middle
+Size classes drive
+structural changes
+
+00:01:54.916 --> 00:01:57.026 A:middle
+to your applications'
+user interface based
+
+00:01:57.026 --> 00:01:58.836 A:middle
+on whether space is constrained
+
+00:01:58.836 --> 00:02:00.206 A:middle
+in a particular dimension
+or not.
+
+
+
+00:01:58.836 --> 00:02:00.206 A:middle
+in a particular dimension
+or not.
+
+00:02:01.486 --> 00:02:05.136 A:middle
+In the settings application
+shown here this is the identical
+
+00:02:05.136 --> 00:02:08.395 A:middle
+code running on both
+an iPad and an iPhone.
+
+00:02:08.395 --> 00:02:11.246 A:middle
+The difference in size classes
+driven structural changes
+
+00:02:11.596 --> 00:02:12.596 A:middle
+to the user interface.
+
+00:02:14.226 --> 00:02:17.376 A:middle
+Size classes drives the
+adaptivity of many parts
+
+00:02:17.376 --> 00:02:21.436 A:middle
+of the iKit view controllers,
+view controller presentations,
+
+00:02:22.286 --> 00:02:25.186 A:middle
+search results, action
+sheets, and many more,
+
+00:02:25.616 --> 00:02:29.516 A:middle
+all of these adapt to the size
+class and to the available space
+
+00:02:29.516 --> 00:02:30.576 A:middle
+that they have to work with.
+
+00:02:32.886 --> 00:02:34.586 A:middle
+When we introduced the concept
+
+00:02:34.586 --> 00:02:37.856 A:middle
+of adaptivity last year it
+wasn't clear why we were moving
+
+00:02:37.856 --> 00:02:38.546 A:middle
+in this direction.
+
+00:02:39.326 --> 00:02:41.106 A:middle
+In applications we're
+always full screen
+
+00:02:41.106 --> 00:02:42.646 A:middle
+and they generally did not need
+
+00:02:43.136 --> 00:02:46.446 A:middle
+to change their user interface
+structure while the application
+
+00:02:46.446 --> 00:02:46.946 A:middle
+was running.
+
+00:02:48.386 --> 00:02:50.156 A:middle
+With the introduction
+of multitasking,
+
+00:02:50.886 --> 00:02:52.746 A:middle
+the reason for the
+changes is now clear.
+
+00:02:53.266 --> 00:02:57.626 A:middle
+You're no longer building two
+distinct experiences tailored
+
+00:02:57.866 --> 00:02:59.296 A:middle
+to specific pieces of hardware.
+
+00:02:59.986 --> 00:03:04.046 A:middle
+You're providing a continuum of
+experiences tailored to the size
+
+
+
+00:02:59.986 --> 00:03:04.046 A:middle
+You're providing a continuum of
+experiences tailored to the size
+
+00:03:04.046 --> 00:03:06.406 A:middle
+that your user is
+running the app at.
+
+00:03:06.686 --> 00:03:08.736 A:middle
+Adopting these foundational
+technologies,
+
+00:03:08.736 --> 00:03:12.166 A:middle
+not only is your app ready for
+the entire range of hardware
+
+00:03:12.166 --> 00:03:14.376 A:middle
+that we ship, it is also ready
+
+00:03:14.376 --> 00:03:16.396 A:middle
+to support these new
+multitasking features
+
+00:03:17.086 --> 00:03:18.286 A:middle
+and developers that we worked
+
+00:03:18.286 --> 00:03:20.896 A:middle
+with that had already
+adopted all of these changes
+
+00:03:21.566 --> 00:03:24.566 A:middle
+and in some cases literally
+only needed a matter of minutes
+
+00:03:24.886 --> 00:03:25.996 A:middle
+to get their app ready
+
+00:03:25.996 --> 00:03:28.196 A:middle
+to run seamlessly
+alongside our own apps.
+
+00:03:30.546 --> 00:03:32.916 A:middle
+One special case to deal
+with is picture-in-picture,
+
+00:03:33.016 --> 00:03:36.926 A:middle
+if your application supports
+background media playback you
+
+00:03:36.926 --> 00:03:40.506 A:middle
+can use new API in iOS
+9 to enable your player
+
+00:03:40.506 --> 00:03:41.706 A:middle
+to support picture-in-picture.
+
+00:03:42.566 --> 00:03:44.506 A:middle
+Keep in mind that with
+picture-in-picture as well
+
+00:03:44.506 --> 00:03:47.826 A:middle
+as all of multitasking,
+your application needs
+
+00:03:47.826 --> 00:03:50.206 A:middle
+to be a good citizen to make
+sure it is not interfering
+
+00:03:50.206 --> 00:03:52.046 A:middle
+with the overall
+user experience.
+
+00:03:52.576 --> 00:03:56.986 A:middle
+We have a number of sessions
+on multitasking this week,
+
+00:03:57.136 --> 00:03:59.206 A:middle
+Getting Started with
+Multitasking on iPad,
+
+00:03:59.586 --> 00:04:02.136 A:middle
+Multitasking Essentials
+for Media-based Apps
+
+
+
+00:03:59.586 --> 00:04:02.136 A:middle
+Multitasking Essentials
+for Media-based Apps
+
+00:04:02.486 --> 00:04:04.746 A:middle
+and Optimizing your
+App for Multitasking.
+
+00:04:05.286 --> 00:04:09.566 A:middle
+Let's move on and talk about
+things that are new in iOS 9.
+
+00:04:11.216 --> 00:04:12.396 A:middle
+The first is autolayout.
+
+00:04:13.066 --> 00:04:18.706 A:middle
+We're introducing a new UI
+layout guide class in cases
+
+00:04:18.706 --> 00:04:21.446 A:middle
+where you would have
+used extra views
+
+00:04:21.446 --> 00:04:25.226 A:middle
+in your autolayout constraints
+you now can use layout guides
+
+00:04:25.226 --> 00:04:27.096 A:middle
+to avoid cluttering up
+your view hierarchy.
+
+00:04:28.776 --> 00:04:32.266 A:middle
+There are two layout guides
+we're introducing by default,
+
+00:04:33.426 --> 00:04:36.426 A:middle
+layout margins guide and
+readable content guide.
+
+00:04:36.896 --> 00:04:39.016 A:middle
+We can use these
+properties on UIView
+
+00:04:39.016 --> 00:04:42.266 A:middle
+to allow more expressiveness
+in defining
+
+00:04:42.266 --> 00:04:44.216 A:middle
+where within a view
+content should be drawn.
+
+00:04:45.616 --> 00:04:49.086 A:middle
+These supersede layout margins
+that we've introduced in iOS 8
+
+00:04:49.086 --> 00:04:52.146 A:middle
+and you should use layout
+guides in any new code you write
+
+00:04:52.146 --> 00:04:54.926 A:middle
+and as you revisit old code
+you should replace margins
+
+00:04:54.926 --> 00:04:55.706 A:middle
+with layout guides.
+
+00:04:56.026 --> 00:05:00.036 A:middle
+I want to take a moment though
+to talk about the second case,
+
+
+
+00:04:56.026 --> 00:05:00.036 A:middle
+I want to take a moment though
+to talk about the second case,
+
+00:05:00.096 --> 00:05:01.786 A:middle
+the readable content guide.
+
+00:05:03.476 --> 00:05:07.106 A:middle
+When you have large
+bodies of text,
+
+00:05:07.706 --> 00:05:09.846 A:middle
+the length of the line
+has a great deal to do
+
+00:05:09.846 --> 00:05:12.446 A:middle
+with the readability and
+legibility of that text.
+
+00:05:13.846 --> 00:05:17.766 A:middle
+If the lines are too wide, as
+we see here, it's harder to see
+
+00:05:17.766 --> 00:05:21.206 A:middle
+where a line begins and ends and
+it can be difficult to continue
+
+00:05:21.206 --> 00:05:22.856 A:middle
+onto the next line
+when you're reading.
+
+00:05:23.746 --> 00:05:26.646 A:middle
+Conversely, if the lines
+are too narrow your eye has
+
+00:05:26.646 --> 00:05:28.546 A:middle
+to travel back too frequently
+
+00:05:28.546 --> 00:05:29.986 A:middle
+which interrupts
+the flow of reading.
+
+00:05:31.106 --> 00:05:33.966 A:middle
+The optimal line length is
+dependent on many factors,
+
+00:05:33.966 --> 00:05:36.596 A:middle
+including the font, the
+size, and line spacing,
+
+00:05:37.566 --> 00:05:39.786 A:middle
+but by using the
+readable content guide,
+
+00:05:40.446 --> 00:05:43.126 A:middle
+you can be assured that your
+text will be readable regardless
+
+00:05:43.126 --> 00:05:46.746 A:middle
+of the user's text size
+or the available space
+
+00:05:46.826 --> 00:05:48.426 A:middle
+that your application
+has to render the text.
+
+00:05:48.426 --> 00:05:50.646 A:middle
+Let's talk about how
+layout guides can be used
+
+00:05:50.676 --> 00:05:51.936 A:middle
+to reduce the number of
+views in your application.
+
+00:05:52.006 --> 00:06:00.346 A:middle
+Let's say we have a view that
+shows a number of planets
+
+
+
+00:05:52.006 --> 00:06:00.346 A:middle
+Let's say we have a view that
+shows a number of planets
+
+00:06:00.416 --> 00:06:03.626 A:middle
+and we want to show them all
+centered in their parent view
+
+00:06:04.056 --> 00:06:06.676 A:middle
+or show them spread
+out along the x axis.
+
+00:06:07.216 --> 00:06:09.786 A:middle
+Before using autolayout
+constraints we would've had
+
+00:06:09.786 --> 00:06:11.496 A:middle
+to introduce a number
+of extra views
+
+00:06:11.766 --> 00:06:13.086 A:middle
+into the view hierarchy
+to do that.
+
+00:06:13.596 --> 00:06:15.626 A:middle
+We can now simply
+define the layout guides
+
+00:06:15.626 --> 00:06:17.496 A:middle
+that define the proportion
+of the space
+
+00:06:17.946 --> 00:06:22.046 A:middle
+that the view is
+using when laid out.
+
+00:06:23.846 --> 00:06:26.696 A:middle
+We also will create an
+additional set of constraints
+
+00:06:26.696 --> 00:06:30.856 A:middle
+that will center the views
+and then simply by changing
+
+00:06:30.856 --> 00:06:34.216 A:middle
+which set of constraints is
+active we get a nice animation
+
+00:06:34.216 --> 00:06:34.836 A:middle
+like this.
+
+00:06:35.526 --> 00:06:37.446 A:middle
+In this case we're changing
+all of the constraints
+
+00:06:37.446 --> 00:06:41.336 A:middle
+at the same time but if
+we instead change the set
+
+00:06:41.336 --> 00:06:44.846 A:middle
+of constraints at different
+times using a keyframe animation
+
+00:06:45.076 --> 00:06:47.756 A:middle
+we can achieve a number of
+very interesting effects.
+
+00:06:50.576 --> 00:06:55.376 A:middle
+We're also bringing the
+StackView over to iOS in iOS 9.
+
+00:06:56.296 --> 00:06:59.856 A:middle
+This allows you to manage
+a set of sub views as stack
+
+00:06:59.856 --> 00:07:02.106 A:middle
+that can be arranged either
+horizontally or vertically,
+
+
+
+00:06:59.856 --> 00:07:02.106 A:middle
+that can be arranged either
+horizontally or vertically,
+
+00:07:02.396 --> 00:07:06.226 A:middle
+the StackView uses autolayout
+under the covers but manages all
+
+00:07:06.226 --> 00:07:07.396 A:middle
+of the constraints for you.
+
+00:07:07.396 --> 00:07:11.016 A:middle
+It allows you to adjust
+the spacing alignment,
+
+00:07:11.546 --> 00:07:14.826 A:middle
+it can allow you to adjust
+how the views are distributed
+
+00:07:14.826 --> 00:07:17.316 A:middle
+within the available
+space either equally
+
+00:07:17.316 --> 00:07:18.136 A:middle
+or proportionately.
+
+00:07:18.716 --> 00:07:21.276 A:middle
+StackViews also can be nested.
+
+00:07:21.276 --> 00:07:26.236 A:middle
+You can have a StackView
+as an element
+
+00:07:26.236 --> 00:07:29.166 A:middle
+in another StackView allowing
+you to create very rich layouts.
+
+00:07:29.686 --> 00:07:32.716 A:middle
+These layouts will
+automatically adjust
+
+00:07:32.716 --> 00:07:35.916 A:middle
+to the content being
+displayed as well
+
+00:07:36.206 --> 00:07:39.936 A:middle
+as to the available
+space that's there.
+
+00:07:40.176 --> 00:07:42.616 A:middle
+So we also introduced
+shortcuts bar.
+
+00:07:43.176 --> 00:07:46.496 A:middle
+This appears over the software
+keyboard or at the bottom
+
+00:07:46.496 --> 00:07:48.536 A:middle
+of the screen when the
+hardware keyboard is attached.
+
+00:07:49.536 --> 00:07:53.556 A:middle
+This bar contains stock controls
+for things like bold, italic,
+
+00:07:53.556 --> 00:07:55.506 A:middle
+underline and cut,
+copy and paste.
+
+00:07:55.966 --> 00:07:58.216 A:middle
+It can also be customized
+in your application.
+
+00:07:59.676 --> 00:08:03.966 A:middle
+Anything that conforms to the UI
+text input protocol can return
+
+
+
+00:07:59.676 --> 00:08:03.966 A:middle
+Anything that conforms to the UI
+text input protocol can return
+
+00:08:04.016 --> 00:08:06.036 A:middle
+an input-assistant
+item using this method.
+
+00:08:06.626 --> 00:08:11.566 A:middle
+UI text input-assistant
+item is a new class in iOS 9
+
+00:08:12.506 --> 00:08:15.816 A:middle
+and has two properties
+for specifying the leading
+
+00:08:15.846 --> 00:08:17.576 A:middle
+and trailing bar-button groups
+
+00:08:17.576 --> 00:08:23.066 A:middle
+so you can easily add your
+own elements in there.
+
+00:08:23.266 --> 00:08:26.846 A:middle
+Now, as you saw in the State
+of the Union, we no longer have
+
+00:08:26.986 --> 00:08:29.226 A:middle
+to have the entire
+interface for your application
+
+00:08:29.226 --> 00:08:30.356 A:middle
+in a single storyboard.
+
+00:08:30.356 --> 00:08:33.395 A:middle
+You can now link from one
+storyboard to another.
+
+00:08:34.645 --> 00:08:37.176 A:middle
+We also offer a way
+now to unwind segues.
+
+00:08:38.015 --> 00:08:43.486 A:middle
+[ Applause ]
+
+00:08:43.986 --> 00:08:47.106 A:middle
+Also as you saw, we now have
+full right-to-left support
+
+00:08:47.106 --> 00:08:48.106 A:middle
+in the operating system.
+
+00:08:49.076 --> 00:08:51.716 A:middle
+If you have a localization
+for a right-to-left language
+
+00:08:52.156 --> 00:08:53.136 A:middle
+and have linked to your app
+
+00:08:53.136 --> 00:08:55.406 A:middle
+on iOS 9 this will
+happen automatically
+
+00:08:55.406 --> 00:08:56.436 A:middle
+in your app as well.
+
+00:08:57.496 --> 00:09:00.246 A:middle
+All UI Kit controls will
+automatically reverse.
+
+
+
+00:08:57.496 --> 00:09:00.246 A:middle
+All UI Kit controls will
+automatically reverse.
+
+00:09:00.816 --> 00:09:02.686 A:middle
+Notice that navigation
+is reversed,
+
+00:09:03.446 --> 00:09:05.186 A:middle
+all of the animations
+are reversed,
+
+00:09:05.536 --> 00:09:08.916 A:middle
+layout of table view cells,
+even controls like sliders
+
+00:09:08.916 --> 00:09:10.396 A:middle
+and switches are all reversed.
+
+00:09:11.746 --> 00:09:14.506 A:middle
+Collection view will
+automatically reverse its layout
+
+00:09:14.506 --> 00:09:15.926 A:middle
+and will flow from
+right-to-left.
+
+00:09:16.546 --> 00:09:18.986 A:middle
+Here we see that the swipe to
+the leader mark requires a swipe
+
+00:09:18.986 --> 00:09:20.486 A:middle
+to the right and marking
+
+00:09:20.486 --> 00:09:22.946 A:middle
+as unread requires
+a swipe to the left.
+
+00:09:29.286 --> 00:09:32.856 A:middle
+There's two properties
+on both view controller
+
+00:09:32.856 --> 00:09:34.896 A:middle
+and view called semantic
+content attribute
+
+00:09:35.696 --> 00:09:39.256 A:middle
+that let you specify how
+content should lay out.
+
+00:09:39.406 --> 00:09:42.246 A:middle
+By default, everything
+will flip automatically,
+
+00:09:43.166 --> 00:09:46.776 A:middle
+but you can override the
+properties to customize
+
+00:09:46.776 --> 00:09:48.386 A:middle
+that if it makes sense
+in your application.
+
+00:09:49.196 --> 00:09:51.566 A:middle
+There is also a method to
+get the layout direction
+
+00:09:52.046 --> 00:09:58.956 A:middle
+for a particular
+content attribute.
+
+00:09:59.086 --> 00:10:02.136 A:middle
+The semantic content attribute
+has one of five values,
+
+
+
+00:09:59.086 --> 00:10:02.136 A:middle
+The semantic content attribute
+has one of five values,
+
+00:10:02.266 --> 00:10:03.496 A:middle
+the first is unspecified.
+
+00:10:03.496 --> 00:10:04.456 A:middle
+This is the default.
+
+00:10:05.096 --> 00:10:07.446 A:middle
+Unless you have a reason to
+change what UI Kit is doing,
+
+00:10:07.446 --> 00:10:09.176 A:middle
+this is the value you
+should leave it at.
+
+00:10:10.806 --> 00:10:15.116 A:middle
+If you have a set of controls
+that represent playback controls
+
+00:10:15.116 --> 00:10:18.216 A:middle
+like play, fast forward
+and rewind,
+
+00:10:18.216 --> 00:10:20.386 A:middle
+you can use the playback
+content attribute.
+
+00:10:21.496 --> 00:10:25.696 A:middle
+If you have a set of controls
+that represent or result
+
+00:10:25.696 --> 00:10:27.966 A:middle
+in some sort of directional
+change in your UI,
+
+00:10:28.486 --> 00:10:30.926 A:middle
+so let's say text alignment
+controls, left, center,
+
+00:10:30.926 --> 00:10:34.296 A:middle
+right in a text editor,
+you can use the spatial
+
+00:10:34.296 --> 00:10:35.266 A:middle
+content attribute.
+
+00:10:36.256 --> 00:10:38.286 A:middle
+Finally, there is
+two additional values
+
+00:10:38.616 --> 00:10:40.436 A:middle
+that lets you force
+either left to right
+
+00:10:40.436 --> 00:10:41.676 A:middle
+or right-to-left layout.
+
+00:10:46.016 --> 00:10:50.026 A:middle
+Now, for images, UI Kit can't
+know whether an image should be
+
+00:10:50.026 --> 00:10:51.676 A:middle
+flipped by default in all cases,
+
+00:10:51.906 --> 00:10:53.836 A:middle
+things that represent user
+content like photographs,
+
+00:10:53.836 --> 00:10:56.516 A:middle
+shouldn't be flipped but
+things that represent controls
+
+00:10:56.516 --> 00:10:58.166 A:middle
+in your application
+you may want to flip.
+
+00:10:59.816 --> 00:11:02.666 A:middle
+So we have a property
+or a method on UI image
+
+
+
+00:10:59.816 --> 00:11:02.666 A:middle
+So we have a property
+or a method on UI image
+
+00:11:02.756 --> 00:11:06.436 A:middle
+from right-to-left to allow
+you to tell us that you want
+
+00:11:06.436 --> 00:11:09.556 A:middle
+to use a flipped image
+and also a property to ask
+
+00:11:09.556 --> 00:11:10.636 A:middle
+if that image has been flipped.
+
+00:11:10.716 --> 00:11:14.466 A:middle
+I encourage you all to come
+to the new UI Kit support
+
+00:11:14.466 --> 00:11:16.266 A:middle
+for international
+interfaces and find
+
+00:11:16.266 --> 00:11:19.476 A:middle
+out how you can make your app
+support right-to-left languages.
+
+00:11:23.116 --> 00:11:26.176 A:middle
+For accessibility you
+now have the ability
+
+00:11:26.176 --> 00:11:28.676 A:middle
+to use more speech
+voices like Alex as well
+
+00:11:28.676 --> 00:11:31.616 A:middle
+as high-quality voices
+in AV speech synthesis.
+
+00:11:32.116 --> 00:11:36.326 A:middle
+I encourage you to come out
+to iOS Accessibility to find
+
+00:11:36.326 --> 00:11:38.776 A:middle
+out more about how to
+make your app accessible.
+
+00:11:41.796 --> 00:11:44.376 A:middle
+You also saw that we're
+introducing a number
+
+00:11:44.836 --> 00:11:47.486 A:middle
+of new text editing
+gestures in iOS 9.
+
+00:11:48.226 --> 00:11:51.786 A:middle
+These gestures can be
+performed either on the keyboard
+
+00:11:51.786 --> 00:11:54.706 A:middle
+at the bottom of the screen
+or in the text area itself.
+
+00:11:55.376 --> 00:11:58.746 A:middle
+They allow you to move the
+insertion point indirectly,
+
+00:11:59.676 --> 00:12:02.386 A:middle
+they allow you to
+select a word, sentence,
+
+
+
+00:11:59.676 --> 00:12:02.386 A:middle
+they allow you to
+select a word, sentence,
+
+00:12:02.386 --> 00:12:07.026 A:middle
+or paragraph very easily just by
+multiple taps and also allow you
+
+00:12:07.026 --> 00:12:09.186 A:middle
+to easily extend an
+existing selection.
+
+00:12:10.416 --> 00:12:13.626 A:middle
+Coupled with the shortcut bar
+we introduced, it allows you
+
+00:12:13.626 --> 00:12:16.996 A:middle
+to easily access, copy and paste
+without moving up to the text.
+
+00:12:17.796 --> 00:12:20.626 A:middle
+Text interaction manipulation
+has never been easier or faster.
+
+00:12:21.506 --> 00:12:24.676 A:middle
+Now, there's nothing you need
+to do in your application
+
+00:12:24.676 --> 00:12:26.786 A:middle
+to adopt these text
+editing gestures,
+
+00:12:27.326 --> 00:12:30.366 A:middle
+but if you have customized
+the gestures in a text view
+
+00:12:30.366 --> 00:12:31.436 A:middle
+within your application,
+
+00:12:31.856 --> 00:12:33.346 A:middle
+you should make sure
+they're not conflicting
+
+00:12:33.346 --> 00:12:37.806 A:middle
+with the new system
+text gestures.
+
+00:12:38.036 --> 00:12:41.916 A:middle
+In iOS 7 we added support for
+application to find keyboard,
+
+00:12:42.156 --> 00:12:43.876 A:middle
+hardware keyboard commands.
+
+00:12:44.786 --> 00:12:46.966 A:middle
+App could have their own
+commands like command
+
+00:12:46.966 --> 00:12:48.316 A:middle
+in to create a new document.
+
+00:12:49.376 --> 00:12:50.886 A:middle
+This was a benefit
+to power users
+
+00:12:50.886 --> 00:12:53.026 A:middle
+who already knew these
+commands but there was no way
+
+00:12:53.026 --> 00:12:54.696 A:middle
+to discover what
+these commands are.
+
+00:12:55.636 --> 00:12:59.636 A:middle
+In iOS 9 we're introducing a new
+keyboard command discoverability
+
+00:12:59.636 --> 00:13:02.656 A:middle
+HUD and if you press
+and hold the command key
+
+
+
+00:12:59.636 --> 00:13:02.656 A:middle
+HUD and if you press
+and hold the command key
+
+00:13:02.896 --> 00:13:07.116 A:middle
+on the hardware keyboard and
+hold it for just a moment,
+
+00:13:07.116 --> 00:13:09.676 A:middle
+the HUD will appear and
+show you the set of commands
+
+00:13:09.676 --> 00:13:12.476 A:middle
+that are available at
+that particular moment.
+
+00:13:12.476 --> 00:13:14.496 A:middle
+Notice that this is
+context dependent.
+
+00:13:15.466 --> 00:13:16.996 A:middle
+Depending on the state
+of your application
+
+00:13:16.996 --> 00:13:19.246 A:middle
+at that time you'll get a
+different set of commands.
+
+00:13:19.356 --> 00:13:22.866 A:middle
+So, instead of seeing the
+entire set and some enabled
+
+00:13:22.866 --> 00:13:25.586 A:middle
+and some are disabled, you
+only see the ones that apply.
+
+00:13:26.516 --> 00:13:29.376 A:middle
+All you need to do to adopt
+this in your application is
+
+00:13:29.376 --> 00:13:33.186 A:middle
+to set the discoverability title
+for each of your key commands.
+
+00:13:33.426 --> 00:13:35.536 A:middle
+UI Kit will take care
+automatically to figure
+
+00:13:35.536 --> 00:13:42.066 A:middle
+out what commands are applicable
+in that moment in time.
+
+00:13:42.326 --> 00:13:44.246 A:middle
+Let's take a moment to
+talk about touch events.
+
+00:13:45.386 --> 00:13:46.206 A:middle
+When a touch is tracking
+
+00:13:46.206 --> 00:13:48.346 A:middle
+on the screen there
+is some inherent lag
+
+00:13:48.986 --> 00:13:52.356 A:middle
+between where the finger is
+and any resulting drawing
+
+00:13:52.356 --> 00:13:53.436 A:middle
+that you see on the screen.
+
+00:13:54.396 --> 00:13:58.686 A:middle
+It simply takes time to
+scan the hardware to do all
+
+00:13:58.686 --> 00:14:01.016 A:middle
+of the intermediate
+processing and drawing
+
+
+
+00:13:58.686 --> 00:14:01.016 A:middle
+of the intermediate
+processing and drawing
+
+00:14:01.016 --> 00:14:02.786 A:middle
+and then flush the
+results to that display.
+
+00:14:03.756 --> 00:14:05.866 A:middle
+This is called the
+touch-to-display latency.
+
+00:14:06.326 --> 00:14:08.796 A:middle
+Most users will never
+notice this latency
+
+00:14:08.796 --> 00:14:10.576 A:middle
+under most circumstances.
+
+00:14:11.196 --> 00:14:13.446 A:middle
+It's perceptable when the user
+moves their finger fast enough.
+
+00:14:14.606 --> 00:14:17.516 A:middle
+Despite the fact that iOS
+already has industry-leading
+
+00:14:17.596 --> 00:14:20.786 A:middle
+touch-to-diplay latency,
+in iOS 9 we set
+
+00:14:20.786 --> 00:14:23.216 A:middle
+out to dramatically
+improve this latency.
+
+00:14:23.746 --> 00:14:26.956 A:middle
+When a touch is tracking
+on the screen,
+
+00:14:27.856 --> 00:14:29.996 A:middle
+UI Kit is notifying
+the application
+
+00:14:29.996 --> 00:14:32.826 A:middle
+with each screen refresh so
+that the application can update
+
+00:14:32.976 --> 00:14:34.656 A:middle
+its state.
+
+00:14:35.106 --> 00:14:36.866 A:middle
+In some of our more
+recent hardware,
+
+00:14:37.676 --> 00:14:40.896 A:middle
+the touches are updated more
+frequently than the display is.
+
+00:14:41.946 --> 00:14:44.196 A:middle
+So there is now a new
+method to get access
+
+00:14:44.196 --> 00:14:47.236 A:middle
+to any intermediate touches
+since the last display refresh.
+
+00:14:47.786 --> 00:14:51.206 A:middle
+For drawing applications this
+can result in much smoother
+
+00:14:51.206 --> 00:14:52.376 A:middle
+and more accurate drawing.
+
+00:14:52.976 --> 00:14:56.286 A:middle
+As a first step to improving
+
+00:14:56.286 --> 00:14:59.356 A:middle
+that touch-to-display latency
+we now offer touch prediction
+
+00:14:59.356 --> 00:14:59.846 A:middle
+as well.
+
+
+
+00:15:01.016 --> 00:15:03.866 A:middle
+This uses a sophisticated
+algorithm that looks
+
+00:15:03.866 --> 00:15:06.686 A:middle
+at the touches velocity,
+acceleration and curvature
+
+00:15:06.976 --> 00:15:08.676 A:middle
+to predict where
+the touch is headed.
+
+00:15:09.596 --> 00:15:13.216 A:middle
+That lets you reduce the
+apparent latency for drawing
+
+00:15:13.216 --> 00:15:17.956 A:middle
+where the touch will be rather
+than where the touch is.
+
+00:15:19.676 --> 00:15:25.116 A:middle
+[ Applause ]
+
+00:15:25.616 --> 00:15:26.866 A:middle
+We went much further than that.
+
+00:15:27.016 --> 00:15:28.756 A:middle
+In addition to offering
+touch prediction,
+
+00:15:28.756 --> 00:15:32.086 A:middle
+we have made a number of changes
+throughout the entire software
+
+00:15:32.086 --> 00:15:36.626 A:middle
+stack to reduce the latency
+from over 60 milliseconds which,
+
+00:15:36.626 --> 00:15:38.416 A:middle
+as I said, is already
+industry leading,
+
+00:15:38.976 --> 00:15:40.766 A:middle
+to less than 30 milliseconds.
+
+00:15:42.516 --> 00:15:48.596 A:middle
+[ Applause ]
+
+00:15:49.096 --> 00:15:52.896 A:middle
+We have also introduced a number
+of changes in UI Kit dynamics.
+
+00:15:54.116 --> 00:15:56.886 A:middle
+The first of these is now
+we support non-rectangular
+
+00:15:56.886 --> 00:15:59.806 A:middle
+collision bounds.
+
+
+
+00:16:00.516 --> 00:16:04.376 A:middle
+[ Applause ]
+
+00:16:04.876 --> 00:16:07.326 A:middle
+In addition to rectangular
+we now support elliptical
+
+00:16:07.326 --> 00:16:09.636 A:middle
+and path-based collisions
+and this results
+
+00:16:09.636 --> 00:16:12.396 A:middle
+in much more realistic
+collision interactions.
+
+00:16:14.006 --> 00:16:18.156 A:middle
+We also support a wide
+variety of field behaviors.
+
+00:16:19.206 --> 00:16:21.926 A:middle
+We now have linear and radial
+gravity like you see here,
+
+00:16:22.486 --> 00:16:27.736 A:middle
+spring, drag and velocity, or
+noise and turbulence fields
+
+00:16:27.736 --> 00:16:31.986 A:middle
+like you see here, electric
+and magnetic fields as well.
+
+00:16:32.916 --> 00:16:35.096 A:middle
+We also support the
+ability for you
+
+00:16:35.136 --> 00:16:38.076 A:middle
+to define your own
+field effects.
+
+00:16:40.436 --> 00:16:43.526 A:middle
+Finally, we have added a number
+
+00:16:43.526 --> 00:16:45.246 A:middle
+of new additional
+attachment types.
+
+00:16:46.116 --> 00:16:49.076 A:middle
+Before we had a very simple
+way to attach two objects
+
+00:16:49.076 --> 00:16:50.986 A:middle
+and if you wanted to
+constrain their movement
+
+00:16:50.986 --> 00:16:53.936 A:middle
+in some way you had to set up a
+number of external constraints.
+
+00:16:54.606 --> 00:16:56.646 A:middle
+Now with these additional
+attachment types,
+
+00:16:56.926 --> 00:17:00.526 A:middle
+it can dramatically simplify
+how you build your UI
+
+
+
+00:16:56.926 --> 00:17:00.526 A:middle
+it can dramatically simplify
+how you build your UI
+
+00:17:00.526 --> 00:17:01.286 A:middle
+dynamics model.
+
+00:17:04.876 --> 00:17:09.175 A:middle
+We're also adding the ability
+to animate the blur radius.
+
+00:17:10.516 --> 00:17:14.705 A:middle
+[ Applause ]
+
+00:17:15.205 --> 00:17:17.955 A:middle
+To let you receive beautiful
+effects here like you see here,
+
+00:17:17.955 --> 00:17:20.626 A:middle
+moving into and out
+of spotlight.
+
+00:17:21.516 --> 00:17:25.185 A:middle
+We've also made a number
+of EPI changes in iOS 9
+
+00:17:25.425 --> 00:17:28.185 A:middle
+to optimize their
+use with Swift.
+
+00:17:29.446 --> 00:17:33.546 A:middle
+This is taking advantage of
+the better expressiveness
+
+00:17:33.546 --> 00:17:37.856 A:middle
+that Swift offers and to improve
+compile-time type checking.
+
+00:17:38.386 --> 00:17:44.266 A:middle
+For nullability, you can now
+specify whether properties
+
+00:17:44.266 --> 00:17:46.506 A:middle
+actions and return
+values can be nil or not.
+
+00:17:46.506 --> 00:17:49.856 A:middle
+We have gone through our entire
+API and defined where it's valid
+
+00:17:49.856 --> 00:17:52.656 A:middle
+to have nil arguments
+or nil return values
+
+00:17:52.966 --> 00:17:57.976 A:middle
+or whether it is
+guaranteed not to be nil.
+
+00:17:58.126 --> 00:17:59.756 A:middle
+We also have lightweight
+generics.
+
+00:17:59.886 --> 00:18:02.426 A:middle
+This is a lightweight form
+of type parameterization
+
+
+
+00:17:59.886 --> 00:18:02.426 A:middle
+This is a lightweight form
+of type parameterization
+
+00:18:02.486 --> 00:18:06.166 A:middle
+that lets us better express
+Cocoa and Cocoa Touch APIs.
+
+00:18:06.546 --> 00:18:10.646 A:middle
+For example the sub views method
+on UI views can now be typed
+
+00:18:10.876 --> 00:18:15.286 A:middle
+to return an array of UI views
+instead of an array of just ids.
+
+00:18:15.836 --> 00:18:19.586 A:middle
+You can find out more about
+this in What's New in Swift.
+
+00:18:20.046 --> 00:18:26.616 A:middle
+New in iOS 9 is the
+ability for notifications
+
+00:18:26.616 --> 00:18:30.466 A:middle
+to allow text input for the user
+or from the user in the same way
+
+00:18:30.466 --> 00:18:34.786 A:middle
+as quick reply for
+text messages.
+
+00:18:35.516 --> 00:18:37.776 A:middle
+[ Applause ]
+
+00:18:38.276 --> 00:18:41.916 A:middle
+The UI user-notification
+action class has a new behavior
+
+00:18:41.916 --> 00:18:44.996 A:middle
+property and if set to
+the text-input behavior,
+
+00:18:46.356 --> 00:18:48.706 A:middle
+your notification has
+a text field allowing
+
+00:18:48.706 --> 00:18:49.656 A:middle
+for a quick reply.
+
+00:18:51.516 --> 00:18:55.116 A:middle
+[ Applause ]
+
+00:18:55.616 --> 00:18:58.446 A:middle
+There is also an additional
+action parameters dictionary
+
+00:18:58.446 --> 00:19:01.186 A:middle
+that allows you to customize
+the title of the Send button.
+
+
+
+00:18:58.446 --> 00:19:01.186 A:middle
+that allows you to customize
+the title of the Send button.
+
+00:19:01.186 --> 00:19:04.326 A:middle
+You can find more at
+What's New in Notifications.
+
+00:19:04.836 --> 00:19:07.516 A:middle
+We're also introducing a new
+SF Safari view controller
+
+00:19:07.516 --> 00:19:10.726 A:middle
+and this allows you
+to display web content
+
+00:19:10.726 --> 00:19:15.186 A:middle
+in a native app surrounded by
+all the key Safari UI elements
+
+00:19:15.186 --> 00:19:17.306 A:middle
+that are already
+familiar to your users.
+
+00:19:18.206 --> 00:19:19.796 A:middle
+It even supports
+advanced features
+
+00:19:19.796 --> 00:19:21.176 A:middle
+like Reader and autofill.
+
+00:19:21.176 --> 00:19:26.026 A:middle
+You can find more at Introducing
+Safari View Controller.
+
+00:19:26.026 --> 00:19:28.906 A:middle
+For iOS 9, we're introducing a
+number of new extension points
+
+00:19:28.906 --> 00:19:31.376 A:middle
+that allow you to extend other
+applications in the system.
+
+00:19:31.926 --> 00:19:35.236 A:middle
+For VPN we have three
+new extension points.
+
+00:19:35.996 --> 00:19:38.616 A:middle
+There is a packet-tunnel
+provider which allows you
+
+00:19:38.616 --> 00:19:41.586 A:middle
+to build the client side of
+your own VPN-tunneling protocol.
+
+00:19:43.256 --> 00:19:45.616 A:middle
+There is an app-proxy
+provider that allows you
+
+00:19:45.616 --> 00:19:46.906 A:middle
+to implement the client side
+
+00:19:46.906 --> 00:19:50.516 A:middle
+of your own custom transparent
+network proxy protocol
+
+00:19:51.086 --> 00:19:54.486 A:middle
+and a filter-control provider
+and filter-data provider
+
+00:19:54.586 --> 00:19:56.986 A:middle
+that allows you to
+perform dynamic on-device
+
+00:19:57.076 --> 00:19:57.966 A:middle
+content filtering.
+
+00:19:59.006 --> 00:20:01.056 A:middle
+For Safari there's two
+new extension points.
+
+
+
+00:19:59.006 --> 00:20:01.056 A:middle
+For Safari there's two
+new extension points.
+
+00:20:02.336 --> 00:20:05.066 A:middle
+Shared Links lets your
+application specify content
+
+00:20:05.066 --> 00:20:09.266 A:middle
+that should appear in the
+shared links users feed.
+
+00:20:10.456 --> 00:20:14.476 A:middle
+The content blocking extension
+allows you to identify subsets
+
+00:20:14.476 --> 00:20:16.576 A:middle
+of content or resources
+on a page
+
+00:20:16.576 --> 00:20:17.856 A:middle
+and prevent them from showing.
+
+00:20:18.386 --> 00:20:28.886 A:middle
+For Spotlight, there's now an
+extension that allows the system
+
+00:20:28.886 --> 00:20:34.266 A:middle
+to index your application
+data and it can also do this
+
+00:20:34.266 --> 00:20:41.376 A:middle
+in the background so you don't
+have to fire up your application
+
+00:20:41.376 --> 00:20:43.106 A:middle
+to re-index your apps content.
+
+00:20:43.636 --> 00:20:49.666 A:middle
+You can find out more at
+Introducing App Search.
+
+00:20:50.406 --> 00:20:54.356 A:middle
+Finally, audio units or core
+audio plug-ins that can act
+
+00:20:54.356 --> 00:20:57.466 A:middle
+as musical instruments, audio
+effects or audio generators,
+
+00:20:58.896 --> 00:21:01.256 A:middle
+and until now iOS
+users were limited
+
+
+
+00:20:58.896 --> 00:21:01.256 A:middle
+and until now iOS
+users were limited
+
+00:21:01.256 --> 00:21:03.866 A:middle
+to the built-in audio
+units provided by Apple.
+
+00:21:05.236 --> 00:21:07.476 A:middle
+In iOS 9 we added a
+new extension point
+
+00:21:07.476 --> 00:21:10.016 A:middle
+and you can bring your
+audio units to iOS.
+
+00:21:11.676 --> 00:21:15.046 A:middle
+[ Applause ]
+
+00:21:15.546 --> 00:21:17.716 A:middle
+You can find more at
+Audio Units Extensions.
+
+00:21:18.236 --> 00:21:22.866 A:middle
+Many of you have asked, and
+I'm now pleased to announce
+
+00:21:22.906 --> 00:21:25.976 A:middle
+that we've delivered an all-new
+Swift and Objective-C API
+
+00:21:25.976 --> 00:21:27.136 A:middle
+for interacting with contacts.
+
+00:21:27.676 --> 00:21:31.966 A:middle
+[ Applause ]
+
+00:21:32.466 --> 00:21:32.966 A:middle
+Thank you.
+
+00:21:35.276 --> 00:21:36.256 A:middle
+You can find out more
+
+00:21:36.256 --> 00:21:41.706 A:middle
+at Introducing the Contacts
+Framework for iOS in iOS 10.
+
+00:21:42.076 --> 00:21:46.446 A:middle
+For Wallet and Passkit, you can
+now provision cards from scratch
+
+00:21:46.446 --> 00:21:48.166 A:middle
+in bank and merchant
+applications
+
+00:21:48.166 --> 00:21:49.466 A:middle
+if you have a special
+entitlement.
+
+00:21:50.036 --> 00:21:55.636 A:middle
+You can also suppress ApplePay
+from coming up in situations
+
+00:21:55.636 --> 00:21:57.556 A:middle
+where it would interfere
+with your application.
+
+00:21:57.816 --> 00:22:00.956 A:middle
+So say your application
+needs to display a barcode
+
+
+
+00:21:57.816 --> 00:22:00.956 A:middle
+So say your application
+needs to display a barcode
+
+00:22:01.256 --> 00:22:03.546 A:middle
+in an environment where
+there's an NFC terminal present.
+
+00:22:03.876 --> 00:22:05.456 A:middle
+Normally that would
+make ApplePay appear.
+
+00:22:05.456 --> 00:22:08.976 A:middle
+You can suppress that so that
+your barcode can be scanned.
+
+00:22:09.046 --> 00:22:12.546 A:middle
+In core location, for
+apps linked against iOS 9
+
+00:22:12.546 --> 00:22:13.826 A:middle
+or later there are some changes
+
+00:22:13.826 --> 00:22:16.196 A:middle
+to how the background
+location tracking works.
+
+00:22:17.036 --> 00:22:21.876 A:middle
+There is also a new bit of
+API on CL Location Manager
+
+00:22:22.736 --> 00:22:24.616 A:middle
+to request a one-time
+location update
+
+00:22:24.616 --> 00:22:28.306 A:middle
+if you don't need ongoing
+updates to location,
+
+00:22:28.306 --> 00:22:29.786 A:middle
+this is a much more
+efficient way
+
+00:22:29.926 --> 00:22:30.986 A:middle
+to get the user's
+current location.
+
+00:22:32.516 --> 00:22:36.586 A:middle
+[ Applause ]
+
+00:22:37.086 --> 00:22:40.226 A:middle
+For MapKit there is several
+new features with a map view,
+
+00:22:40.396 --> 00:22:42.966 A:middle
+the first is access
+to 3d Flyover View.
+
+00:22:44.676 --> 00:22:47.546 A:middle
+[ Applause ]
+
+00:22:48.046 --> 00:22:50.976 A:middle
+You can now show traffic as
+well as the compass and scale
+
+00:22:51.066 --> 00:22:54.336 A:middle
+and create your own
+custom callouts now.
+
+00:22:56.516 --> 00:22:59.546 A:middle
+[ Applause ]
+
+
+
+00:23:00.046 --> 00:23:03.726 A:middle
+In HealthKit you have direct
+real-time access to sensor data
+
+00:23:03.836 --> 00:23:08.766 A:middle
+in Watch OS 2 and there is
+a number of new data types.
+
+00:23:09.396 --> 00:23:12.486 A:middle
+Tracking users intake of
+water, tracking their exposure
+
+00:23:12.486 --> 00:23:14.606 A:middle
+to sunlight and reproductive
+health.
+
+00:23:15.856 --> 00:23:18.586 A:middle
+There is new APIs for
+better device tracking
+
+00:23:18.586 --> 00:23:21.486 A:middle
+of HealthKit data, better
+support for deleting data
+
+00:23:22.096 --> 00:23:24.966 A:middle
+and a new workout session
+API to track exercise.
+
+00:23:25.566 --> 00:23:28.886 A:middle
+We announced ResearchKit a
+few months ago to make it easy
+
+00:23:28.886 --> 00:23:30.566 A:middle
+for developers and researchers
+
+00:23:31.136 --> 00:23:32.926 A:middle
+to create apps for
+medical research.
+
+00:23:34.236 --> 00:23:39.016 A:middle
+ResearchKit now includes iPad
+support, new active tasks
+
+00:23:39.016 --> 00:23:41.456 A:middle
+for PureTone Audiometry
+which is used
+
+00:23:41.456 --> 00:23:44.036 A:middle
+to identify hearing
+threshold levels
+
+00:23:44.676 --> 00:23:47.116 A:middle
+and also a simple
+reaction-time task
+
+00:23:47.116 --> 00:23:49.406 A:middle
+to measure a user's
+reaction time to an event.
+
+00:23:49.406 --> 00:23:53.956 A:middle
+There is also a new image
+capture step to use.
+
+00:23:54.046 --> 00:23:57.466 A:middle
+As you saw yesterday, we made
+a number of changes to HomeKit.
+
+00:23:58.936 --> 00:24:01.446 A:middle
+We now support detailed
+change notifications.
+
+
+
+00:23:58.936 --> 00:24:01.446 A:middle
+We now support detailed
+change notifications.
+
+00:24:01.966 --> 00:24:03.256 A:middle
+When a light gets turned on,
+
+00:24:03.736 --> 00:24:08.726 A:middle
+you now get a specific
+delegate message identifying the
+
+00:24:08.726 --> 00:24:12.156 A:middle
+characteristic and the
+accessory that changed.
+
+00:24:12.156 --> 00:24:15.776 A:middle
+So, you may get the particular
+light turning on instead
+
+00:24:15.776 --> 00:24:18.736 A:middle
+of just the generic something in
+your house changed notification.
+
+00:24:20.896 --> 00:24:24.986 A:middle
+HomeKit also has four predefined
+action sets when you wake
+
+00:24:24.986 --> 00:24:27.926 A:middle
+up in the morning, when you
+leave, when you arrive home,
+
+00:24:27.926 --> 00:24:31.366 A:middle
+when you go to bed, and you
+can implement standard actions
+
+00:24:31.366 --> 00:24:31.776 A:middle
+with these.
+
+00:24:31.816 --> 00:24:34.936 A:middle
+Things like turning off the
+lights, locking the doors,
+
+00:24:34.936 --> 00:24:36.406 A:middle
+making sure the garage
+is closed.
+
+00:24:36.526 --> 00:24:38.766 A:middle
+Things like that, all
+without requiring any
+
+00:24:38.766 --> 00:24:39.786 A:middle
+user configuration.
+
+00:24:43.416 --> 00:24:46.856 A:middle
+In iOS 8 you can create a
+timer trigger to allow you
+
+00:24:46.856 --> 00:24:48.516 A:middle
+to execute a scene
+on a schedule.
+
+00:24:49.556 --> 00:24:53.346 A:middle
+In iOS 9 you can now create
+much more complicated triggers.
+
+00:24:54.006 --> 00:24:56.056 A:middle
+For example, you know,
+when this door is unlocked
+
+00:24:56.056 --> 00:24:58.576 A:middle
+and this motion sensor
+is detecting motion
+
+00:24:58.656 --> 00:25:01.916 A:middle
+and it is 30 minutes
+after sunset do something.
+
+
+
+00:24:58.656 --> 00:25:01.916 A:middle
+and it is 30 minutes
+after sunset do something.
+
+00:25:02.566 --> 00:25:07.616 A:middle
+Of course HomeKit is available
+on the Watch and you can use it
+
+00:25:07.616 --> 00:25:10.156 A:middle
+to control devices within your
+home directly from your watch.
+
+00:25:10.776 --> 00:25:15.976 A:middle
+Wi-fi enabled accessories can
+now be accessed remotely even
+
+00:25:15.976 --> 00:25:17.806 A:middle
+if you don't have an Apple TV.
+
+00:25:18.866 --> 00:25:22.036 A:middle
+You will be able to
+communicate with them directly
+
+00:25:22.036 --> 00:25:22.836 A:middle
+through iCloud
+
+00:25:22.976 --> 00:25:26.446 A:middle
+and bluetooth-enabled
+accessories can be automatically
+
+00:25:26.446 --> 00:25:27.666 A:middle
+bridged over Wi-Fi.
+
+00:25:28.796 --> 00:25:31.486 A:middle
+Even if you are out of Bluetooth
+range with an accessory,
+
+00:25:31.486 --> 00:25:33.266 A:middle
+you can still control it.
+
+00:25:33.816 --> 00:25:36.916 A:middle
+Finally, we've included
+standard definitions of a number
+
+00:25:36.916 --> 00:25:39.046 A:middle
+of new items within your house.
+
+00:25:40.536 --> 00:25:46.866 A:middle
+For CloudKit, we have updated
+the limits and the pricing
+
+00:25:46.866 --> 00:25:50.336 A:middle
+for public databases but much
+more exciting we have now
+
+00:25:50.336 --> 00:25:52.896 A:middle
+offered CloudKit Web
+Services to integrate
+
+00:25:53.116 --> 00:25:54.536 A:middle
+with your web applications.
+
+00:25:56.516 --> 00:25:58.956 A:middle
+[ Applause ]
+
+00:25:59.456 --> 00:26:01.556 A:middle
+There are two sessions
+discussing CloudKit this week:
+
+
+
+00:25:59.456 --> 00:26:01.556 A:middle
+There are two sessions
+discussing CloudKit this week:
+
+00:26:02.296 --> 00:26:08.376 A:middle
+What's New in CloudKit and
+CloudKit Tips and Tricks.
+
+00:26:08.546 --> 00:26:10.266 A:middle
+So until now the UI document
+
+00:26:10.266 --> 00:26:12.136 A:middle
+and action controller
+would create copies
+
+00:26:12.136 --> 00:26:14.086 A:middle
+of every document
+sent to another app.
+
+00:26:15.476 --> 00:26:18.316 A:middle
+Now, with open in
+place, apps can request
+
+00:26:18.316 --> 00:26:21.146 A:middle
+to open documents directly
+if they're stored in iCloud.
+
+00:26:22.286 --> 00:26:25.406 A:middle
+Adoption consists of adding
+a key to your info.plist
+
+00:26:25.816 --> 00:26:26.856 A:middle
+to declare conformance
+
+00:26:26.856 --> 00:26:28.716 A:middle
+in implementing a
+new delegate method
+
+00:26:28.716 --> 00:26:29.926 A:middle
+to opening the document
+directly.
+
+00:26:29.926 --> 00:26:39.226 A:middle
+We'll discuss this at
+Building Document-Based Apps.
+
+00:26:39.466 --> 00:26:42.636 A:middle
+Now, many applications contain
+resources that are not needed
+
+00:26:42.636 --> 00:26:44.636 A:middle
+when a user first
+starts your application,
+
+00:26:45.866 --> 00:26:48.696 A:middle
+including every resource your
+app might ever need makes your
+
+00:26:48.696 --> 00:26:52.386 A:middle
+app bundle significantly larger,
+slows down the installation
+
+00:26:52.386 --> 00:26:54.476 A:middle
+and can even push you
+over the OTA limit
+
+00:26:54.476 --> 00:26:55.676 A:middle
+which can impact your sales.
+
+00:26:57.406 --> 00:27:00.886 A:middle
+So to address this we're
+introducing on-demand resources.
+
+
+
+00:26:57.406 --> 00:27:00.886 A:middle
+So to address this we're
+introducing on-demand resources.
+
+00:27:01.816 --> 00:27:04.726 A:middle
+Your application is uploaded
+as single package exactly
+
+00:27:04.726 --> 00:27:09.396 A:middle
+like you do today, but content
+can be downloaded dynamically
+
+00:27:09.396 --> 00:27:10.796 A:middle
+when the application needs it.
+
+00:27:11.456 --> 00:27:15.366 A:middle
+These assets are intelligently
+cached using heuristics based
+
+00:27:15.366 --> 00:27:17.576 A:middle
+on your input as well
+as user behavior.
+
+00:27:19.586 --> 00:27:24.516 A:middle
+In Xcode, assets are grouped
+together using simple tags
+
+00:27:24.516 --> 00:27:28.476 A:middle
+and we're introducing a new
+class called NS Bundle Resource
+
+00:27:28.476 --> 00:27:30.856 A:middle
+Request that allows
+you to request all
+
+00:27:30.856 --> 00:27:32.466 A:middle
+of the resources
+with a given tag.
+
+00:27:33.706 --> 00:27:36.636 A:middle
+Once those resources have
+downloaded you can use familiar
+
+00:27:36.636 --> 00:27:39.826 A:middle
+API to access them, things
+like UI Image, image named.
+
+00:27:40.436 --> 00:27:44.476 A:middle
+There is even a way
+to test this in Xcode
+
+00:27:44.476 --> 00:27:47.556 A:middle
+to simulate not having the
+resources and requesting them
+
+00:27:47.556 --> 00:27:49.676 A:middle
+from the server, Xcode
+will act as the server
+
+00:27:49.876 --> 00:27:52.156 A:middle
+and deliver those resources
+to your application.
+
+00:27:53.326 --> 00:27:55.376 A:middle
+Now another new technology
+we're introducing
+
+00:27:55.546 --> 00:27:58.316 A:middle
+to address your application
+size is app slicing.
+
+00:27:59.406 --> 00:28:03.546 A:middle
+Now, applications often have
+assets and executable content
+
+
+
+00:27:59.406 --> 00:28:03.546 A:middle
+Now, applications often have
+assets and executable content
+
+00:28:03.576 --> 00:28:05.106 A:middle
+that aren't relevant
+to the hardware
+
+00:28:05.106 --> 00:28:07.016 A:middle
+that the user has
+installed it in.
+
+00:28:07.136 --> 00:28:11.056 A:middle
+This slicing takes care of
+delivering just the resources
+
+00:28:11.126 --> 00:28:14.536 A:middle
+and executable slices that
+that user's device needs.
+
+00:28:14.536 --> 00:28:18.976 A:middle
+Using app slicing the App Store
+will generate automatically
+
+00:28:19.076 --> 00:28:21.596 A:middle
+and deliver tailored
+variants of your applications
+
+00:28:21.596 --> 00:28:23.336 A:middle
+to all devices running iOS 9
+
+00:28:23.336 --> 00:28:26.106 A:middle
+and these will only
+contain the resources
+
+00:28:26.106 --> 00:28:28.686 A:middle
+and executable slices
+pertinent to that device.
+
+00:28:30.466 --> 00:28:31.566 A:middle
+This happens on the server
+
+00:28:31.566 --> 00:28:34.226 A:middle
+so the extraneous content
+isn't even downloaded.
+
+00:28:35.756 --> 00:28:37.066 A:middle
+This saves installation time
+
+00:28:37.066 --> 00:28:39.886 A:middle
+and can hopefully even bring
+the app under the OTA limit.
+
+00:28:41.336 --> 00:28:44.346 A:middle
+We're also introducing a
+new NS data asset class
+
+00:28:44.346 --> 00:28:48.056 A:middle
+which allows you to easily fetch
+content tailored to the memory
+
+00:28:48.056 --> 00:28:50.036 A:middle
+and graphics capability
+of your device.
+
+00:28:50.366 --> 00:28:54.426 A:middle
+Now for Game Center we have
+added guest players which allows
+
+00:28:54.426 --> 00:28:57.106 A:middle
+for new configurations in
+Game Center multiplayer.
+
+00:28:58.536 --> 00:29:01.926 A:middle
+We've also unified the Game
+Center server environment
+
+
+
+00:28:58.536 --> 00:29:01.926 A:middle
+We've also unified the Game
+Center server environment
+
+00:29:01.926 --> 00:29:05.796 A:middle
+to streamline development
+and testing.
+
+00:29:05.796 --> 00:29:07.716 A:middle
+Finally we're introducing
+ReplayKit
+
+00:29:07.896 --> 00:29:11.586 A:middle
+which provides a new way
+to share game experiences.
+
+00:29:12.856 --> 00:29:15.846 A:middle
+It allows your apps to easily
+record audio and visuals
+
+00:29:15.846 --> 00:29:17.966 A:middle
+and share them with other users.
+
+00:29:20.146 --> 00:29:23.096 A:middle
+In iOS 9 SpriteKit
+is now Metal-backed
+
+00:29:23.096 --> 00:29:24.606 A:middle
+on systems that support it.
+
+00:29:25.376 --> 00:29:28.056 A:middle
+It is open GL on systems
+that don't support Metal.
+
+00:29:28.486 --> 00:29:30.806 A:middle
+This happens automatically
+without your involvement.
+
+00:29:32.196 --> 00:29:34.426 A:middle
+There is also an all
+new action editor
+
+00:29:34.976 --> 00:29:37.966 A:middle
+and of course it is
+integrated tightly
+
+00:29:38.166 --> 00:29:39.666 A:middle
+with on demand resources.
+
+00:29:40.136 --> 00:29:44.966 A:middle
+You can find out more at
+What's New in SpriteKit.
+
+00:29:46.836 --> 00:29:51.416 A:middle
+For SceneKit there is an
+all-new scene editor available
+
+00:29:51.416 --> 00:29:54.366 A:middle
+in Xcode 7 that supports
+particles, physics,
+
+00:29:54.676 --> 00:29:56.036 A:middle
+actions, and much more.
+
+00:29:56.036 --> 00:29:59.866 A:middle
+There is also a ton of new
+features in SceneKit itself.
+
+
+
+00:30:00.766 --> 00:30:05.316 A:middle
+Things like scene transitions,
+audio nodes, model i/o,
+
+00:30:05.956 --> 00:30:12.956 A:middle
+ambient occlusion and light
+maps and many other features.
+
+00:30:13.056 --> 00:30:15.956 A:middle
+Now while SpriteKit and SceneKit
+are fantastic frameworks
+
+00:30:15.956 --> 00:30:18.096 A:middle
+for building the graphical
+interface for a game,
+
+00:30:18.726 --> 00:30:23.476 A:middle
+there is far more to a great
+game than just the graphics.
+
+00:30:23.576 --> 00:30:27.246 A:middle
+Games have entities and
+components, they have agents
+
+00:30:27.446 --> 00:30:29.256 A:middle
+which are autonomous
+objects within your game
+
+00:30:29.256 --> 00:30:31.116 A:middle
+that have goals and behaviors.
+
+00:30:31.436 --> 00:30:35.406 A:middle
+You need path-finding algorithms
+to allow your agents to navigate
+
+00:30:35.406 --> 00:30:39.996 A:middle
+around your game and you need
+AI for allowing the agents
+
+00:30:39.996 --> 00:30:44.076 A:middle
+to decide what moves
+they're going to make.
+
+00:30:44.286 --> 00:30:45.376 A:middle
+All of the elements you need
+
+00:30:45.376 --> 00:30:48.656 A:middle
+to build really engaging
+gameplay can be found now
+
+00:30:48.656 --> 00:30:50.946 A:middle
+in GameplayKit and
+you can find out more
+
+00:30:50.946 --> 00:30:52.246 A:middle
+at Introducing GameplayKit.
+
+00:30:52.736 --> 00:30:55.646 A:middle
+Finally, of course, we're
+introducing WatchOS 2.
+
+00:30:56.246 --> 00:30:59.076 A:middle
+In addition to direct access
+to existing frameworks,
+
+00:30:59.206 --> 00:31:01.826 A:middle
+there is now new frameworks
+such as Watch connectivity
+
+
+
+00:30:59.206 --> 00:31:01.826 A:middle
+there is now new frameworks
+such as Watch connectivity
+
+00:31:02.236 --> 00:31:05.596 A:middle
+for connecting to your app
+on the phone and WatchKit
+
+00:31:05.596 --> 00:31:07.216 A:middle
+for building Watch
+face complications.
+
+00:31:10.006 --> 00:31:11.546 A:middle
+You can find out more
+at Introducing WatchKit
+
+00:31:11.576 --> 00:31:15.326 A:middle
+for WatchOS 2 for an overview of
+all of the sessions this week,
+
+00:31:15.886 --> 00:31:17.856 A:middle
+the Talk About WatchOS 2.
+
+00:31:18.876 --> 00:31:21.776 A:middle
+For more information, there is,
+of course, the documentation,
+
+00:31:22.546 --> 00:31:25.556 A:middle
+there is the online forums,
+developer technical support.
+
+00:31:26.856 --> 00:31:28.176 A:middle
+Thanks. I hope you
+have a great week.
+
+00:31:29.516 --> 00:31:46.360 A:middle
+[ Applause ]
+
