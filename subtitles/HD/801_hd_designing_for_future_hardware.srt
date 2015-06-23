@@ -1,0 +1,2860 @@
+
+00:00:24.516 --> 00:00:26.806 A:middle
+[ Applause ]
+
+00:00:27.306 --> 00:00:27.906 A:middle
+&gt;&gt; JEFFREY TRAER
+BERNSTEIN: Hello, everyone.
+
+00:00:27.906 --> 00:00:30.446 A:middle
+And welcome to designing
+for future hardware.
+
+00:00:31.566 --> 00:00:32.946 A:middle
+I'm Jeffrey Traer Bernstein.
+
+00:00:33.336 --> 00:00:36.096 A:middle
+With me are Matthaeus
+Krenn and Bill Lindmeier.
+
+00:00:37.906 --> 00:00:38.856 A:middle
+Who is this session for?
+
+00:00:39.716 --> 00:00:44.296 A:middle
+Perhaps you're creating
+a device that's connected
+
+00:00:44.336 --> 00:00:45.926 A:middle
+to an application.
+
+00:00:46.836 --> 00:00:53.126 A:middle
+That device could be, say,
+a dishwasher that you would
+
+00:00:53.126 --> 00:00:54.706 A:middle
+like to control from
+your application.
+
+00:00:55.866 --> 00:00:58.926 A:middle
+Or maybe it's a drone you would
+like to control from an app.
+
+00:00:59.146 --> 00:01:01.506 A:middle
+Or maybe a golf club that
+would send information
+
+
+
+00:00:59.146 --> 00:01:01.506 A:middle
+Or maybe a golf club that
+would send information
+
+00:01:01.506 --> 00:01:03.136 A:middle
+about your swing back
+to an application.
+
+00:01:04.275 --> 00:01:06.046 A:middle
+Perhaps you have an
+application and you would
+
+00:01:06.046 --> 00:01:07.126 A:middle
+like to create a device for it.
+
+00:01:08.146 --> 00:01:10.676 A:middle
+Maybe it's a game you would like
+to create a custom controller
+
+00:01:10.676 --> 00:01:13.546 A:middle
+for or a messaging application.
+
+00:01:14.246 --> 00:01:15.866 A:middle
+Or maybe a device to
+go with a dating app.
+
+00:01:15.966 --> 00:01:16.796 A:middle
+Who knows what that would be.
+
+00:01:19.066 --> 00:01:21.806 A:middle
+You might also find this
+useful if you are designing
+
+00:01:21.936 --> 00:01:25.176 A:middle
+for a device you just don't have
+yet like perhaps an Apple Watch
+
+00:01:25.426 --> 00:01:27.986 A:middle
+or some fancy new
+thing we've released.
+
+00:01:28.636 --> 00:01:29.146 A:middle
+Who are we?
+
+00:01:29.146 --> 00:01:32.896 A:middle
+We are a team of inventors,
+designers, prototypers.
+
+00:01:33.606 --> 00:01:35.296 A:middle
+We work across all
+of Apple's products
+
+00:01:36.016 --> 00:01:38.686 A:middle
+and explore what new
+interfaces mean to our devices,
+
+00:01:38.736 --> 00:01:40.686 A:middle
+operating systems
+and applications.
+
+00:01:41.546 --> 00:01:44.246 A:middle
+We brought you exciting features
+such as Multitouch gestures,
+
+00:01:44.676 --> 00:01:46.286 A:middle
+Force Touch and a Taptic Engine.
+
+00:01:46.826 --> 00:01:52.356 A:middle
+This time last year we did
+Prototyping at WWDC 2014.
+
+00:01:52.406 --> 00:01:53.976 A:middle
+Was anyone there for it?
+
+00:01:54.271 --> 00:01:56.271 A:middle
+[ Cheering ]
+
+00:01:56.526 --> 00:01:57.326 A:middle
+&gt;&gt; JEFFREY TRAER BERNSTEIN:
+Thank you - excellent.
+
+00:01:57.636 --> 00:01:58.416 A:middle
+Thank you for joining us.
+
+00:01:58.896 --> 00:02:00.016 A:middle
+Did anyone watch it online?
+
+
+
+00:01:58.896 --> 00:02:00.016 A:middle
+Did anyone watch it online?
+
+00:02:02.826 --> 00:02:03.786 A:middle
+Less people, all right.
+
+00:02:05.826 --> 00:02:08.136 A:middle
+Well, it is not required
+for this session,
+
+00:02:08.136 --> 00:02:09.545 A:middle
+but I suggest you check
+it out afterwards.
+
+00:02:10.056 --> 00:02:12.326 A:middle
+I'll give you a brief
+synopsis right now.
+
+00:02:13.676 --> 00:02:15.206 A:middle
+We unveiled a disruptive,
+
+00:02:15.406 --> 00:02:17.816 A:middle
+revolutionary new
+application called Toast Modern
+
+00:02:18.596 --> 00:02:21.706 A:middle
+that allowed you to browse for
+artisanal, overpriced toast
+
+00:02:21.706 --> 00:02:23.046 A:middle
+on the streets of San Francisco,
+
+00:02:24.496 --> 00:02:27.506 A:middle
+take photos of the toast
+you're eating, and share it
+
+00:02:27.506 --> 00:02:28.656 A:middle
+with your friends
+and loved ones.
+
+00:02:30.086 --> 00:02:32.766 A:middle
+We used this application to
+explain why to Prototype.
+
+00:02:33.056 --> 00:02:34.376 A:middle
+There are two important reasons.
+
+00:02:34.726 --> 00:02:37.206 A:middle
+One, test ideas to save time
+
+00:02:37.206 --> 00:02:39.156 A:middle
+and money building the right
+things for your products.
+
+00:02:39.456 --> 00:02:42.806 A:middle
+Number two is to get new
+ideas to make the experience
+
+00:02:42.806 --> 00:02:44.026 A:middle
+of your product even better.
+
+00:02:45.416 --> 00:02:47.156 A:middle
+We also talked about
+how to Prototype.
+
+00:02:48.766 --> 00:02:53.206 A:middle
+Make fake apps, show people,
+and learn from their feedback,
+
+00:02:53.206 --> 00:02:55.946 A:middle
+and do it over and over
+again until the experience
+
+00:02:55.946 --> 00:02:57.116 A:middle
+of your product is incredible.
+
+00:02:59.346 --> 00:03:01.156 A:middle
+As you might have
+imagined, the reception
+
+
+
+00:02:59.346 --> 00:03:01.156 A:middle
+As you might have
+imagined, the reception
+
+00:03:01.156 --> 00:03:02.566 A:middle
+on the Internet was incredible.
+
+00:03:02.736 --> 00:03:03.786 A:middle
+People said things like,
+
+00:03:03.786 --> 00:03:05.596 A:middle
+"The workflow shown is
+something I may try."
+
+00:03:06.766 --> 00:03:06.916 A:middle
+(Laughter)
+
+00:03:07.016 --> 00:03:08.066 A:middle
+&gt;&gt; JEFFREY TRAER BERNSTEIN:
+
+00:03:08.066 --> 00:03:10.186 A:middle
+The Prototyping video
+for WWDC is great.
+
+00:03:10.366 --> 00:03:11.286 A:middle
+"Grab a plate of toast."
+
+00:03:12.276 --> 00:03:14.736 A:middle
+" Takeaways: Number one, make
+fake apps; number two, um...
+
+00:03:14.736 --> 00:03:15.356 A:middle
+missed that part."
+
+00:03:17.296 --> 00:03:18.216 A:middle
+"I'm so proud of you."
+
+00:03:18.216 --> 00:03:18.526 A:middle
+My mom.
+
+00:03:21.636 --> 00:03:24.546 A:middle
+So today, you're all very
+fortunate to be here.
+
+00:03:24.546 --> 00:03:26.976 A:middle
+We are going to unveil
+a brand new,
+
+00:03:27.176 --> 00:03:29.316 A:middle
+revolutionary Toast
+Modern product
+
+00:03:29.606 --> 00:03:32.936 A:middle
+that builds upon the success of
+Toast Modern, the application.
+
+00:03:33.976 --> 00:03:37.966 A:middle
+We are going to give you a peek
+behind the curtain, a little bit
+
+00:03:37.966 --> 00:03:40.086 A:middle
+of how Apple and partners
+prototype the watch.
+
+00:03:41.106 --> 00:03:44.086 A:middle
+We're going to create a device
+and an app that connects to it.
+
+00:03:44.086 --> 00:03:47.366 A:middle
+We're going to show you along
+the way a few prototyping
+
+00:03:47.366 --> 00:03:49.106 A:middle
+strategies for hardware
+and software.
+
+00:03:49.666 --> 00:03:54.656 A:middle
+I would like to share our
+Toast Modern product today.
+
+00:03:54.686 --> 00:03:55.576 A:middle
+Would you all like to see it?
+
+00:03:56.516 --> 00:03:59.726 A:middle
+[ Applause ]
+
+
+
+00:04:00.226 --> 00:04:00.716 A:middle
+&gt;&gt; JEFFREY TRAER
+BERNSTEIN: Excellent.
+
+00:04:02.466 --> 00:04:10.096 A:middle
+It's a revolutionary,
+disruptive, connected, social,
+
+00:04:11.326 --> 00:04:22.646 A:middle
+big data-y Internet of
+Things thing and this is it.
+
+00:04:24.516 --> 00:05:24.356 A:middle
+[ Music ]
+
+
+
+00:04:24.516 --> 00:05:24.356 A:middle
+[ Music ]
+
+00:05:24.856 --> 00:05:25.466 A:middle
+&gt;&gt; JEFFREY TRAER
+BERNSTEIN: Thank you.
+
+00:05:26.366 --> 00:05:26.976 A:middle
+Thank you very much.
+
+00:05:27.516 --> 00:05:32.456 A:middle
+[ Applause ]
+
+00:05:32.956 --> 00:05:37.046 A:middle
+So we call this Toastal Service.
+
+00:05:40.036 --> 00:05:43.866 A:middle
+It is the world's
+first social toaster.
+
+00:05:46.226 --> 00:05:48.286 A:middle
+It allows you to
+send Toast messages
+
+00:05:48.286 --> 00:05:50.826 A:middle
+to your friends and loved ones.
+
+00:05:51.876 --> 00:05:56.036 A:middle
+Of course, it's available in
+three great colors: Silver,
+
+00:05:56.856 --> 00:05:59.686 A:middle
+Space Grey and 18-Karat gold.
+
+
+
+00:06:00.516 --> 00:06:07.016 A:middle
+[ Applause ]
+
+00:06:07.516 --> 00:06:08.906 A:middle
+&gt;&gt; JEFFREY TRAER BERNSTEIN:
+So we have an iPhone
+
+00:06:09.336 --> 00:06:10.206 A:middle
+and we have a Toaster.
+
+00:06:11.196 --> 00:06:13.336 A:middle
+Both have excellent
+qualities to recommend them.
+
+00:06:13.706 --> 00:06:15.616 A:middle
+The iPhone has a
+great interface.
+
+00:06:16.736 --> 00:06:17.996 A:middle
+It is connected to the Internet.
+
+00:06:19.166 --> 00:06:20.276 A:middle
+And it's always with you.
+
+00:06:20.736 --> 00:06:23.476 A:middle
+Our toaster can turn
+bread into toast.
+
+00:06:24.816 --> 00:06:27.066 A:middle
+So we want to combine
+the capabilities of each.
+
+00:06:27.796 --> 00:06:30.806 A:middle
+We want to blur the lines
+between hardware and software,
+
+00:06:30.866 --> 00:06:32.506 A:middle
+create a perfect
+meld of the two.
+
+00:06:33.086 --> 00:06:35.976 A:middle
+I can think of another
+product that has done the same.
+
+00:06:36.546 --> 00:06:38.946 A:middle
+That is the Apple Watch.
+
+00:06:39.546 --> 00:06:44.236 A:middle
+Now, you might think that
+at Apple we would begin here
+
+00:06:44.766 --> 00:06:48.056 A:middle
+with the fully formed Apple
+Watch springs from the brain
+
+00:06:48.056 --> 00:06:50.116 A:middle
+of its designers and is
+carved out of aluminum,
+
+00:06:50.206 --> 00:06:50.876 A:middle
+and sent to all of you.
+
+00:06:52.396 --> 00:06:56.036 A:middle
+In reality, we actually
+begin by drawing the Watch
+
+00:06:56.116 --> 00:06:59.276 A:middle
+on another device so we can
+experiment with the interface.
+
+00:06:59.926 --> 00:07:03.726 A:middle
+This is a pretty well formed
+watch as it exists today.
+
+
+
+00:06:59.926 --> 00:07:03.726 A:middle
+This is a pretty well formed
+watch as it exists today.
+
+00:07:04.426 --> 00:07:09.526 A:middle
+We start with this, a rectangle,
+and we use this platform
+
+00:07:09.526 --> 00:07:11.976 A:middle
+to experiment with the different
+things we might need to add
+
+00:07:11.976 --> 00:07:13.556 A:middle
+to the Watch to make
+the experience great.
+
+00:07:14.426 --> 00:07:16.816 A:middle
+We might add a Digital Crown
+that we draw on the screen
+
+00:07:16.816 --> 00:07:20.866 A:middle
+and scroll over to understand
+how that works and experiment
+
+00:07:20.866 --> 00:07:21.796 A:middle
+with different buttons.
+
+00:07:22.796 --> 00:07:26.876 A:middle
+This is great, teaches us a ton
+about the interface of the Watch
+
+00:07:26.976 --> 00:07:28.556 A:middle
+and the experience of using it.
+
+00:07:28.976 --> 00:07:33.436 A:middle
+But you can't strap an iPhone
+to your wrist and go outside
+
+00:07:33.556 --> 00:07:34.666 A:middle
+and try it in context.
+
+00:07:35.016 --> 00:07:39.216 A:middle
+So some of our app partners
+when they were developing
+
+00:07:39.216 --> 00:07:41.346 A:middle
+for the Watch before
+Watches were available
+
+00:07:41.346 --> 00:07:42.876 A:middle
+to them did some clever things.
+
+00:07:43.626 --> 00:07:46.596 A:middle
+For example, this
+French Transit app.
+
+00:07:47.016 --> 00:07:48.456 A:middle
+They created their
+own Apple Watch.
+
+00:07:49.136 --> 00:07:50.966 A:middle
+It is more rustic but useful.
+
+00:07:51.586 --> 00:07:55.336 A:middle
+They drew some pictures of
+their different screens.
+
+00:07:56.406 --> 00:07:58.276 A:middle
+And then slid them
+inside of the watch.
+
+00:07:58.316 --> 00:07:59.116 A:middle
+This was important.
+
+00:07:59.406 --> 00:08:00.636 A:middle
+This is a Transit app.
+
+
+
+00:07:59.406 --> 00:08:00.636 A:middle
+This is a Transit app.
+
+00:08:00.636 --> 00:08:03.286 A:middle
+I need to be able to see
+what it's like to run
+
+00:08:03.286 --> 00:08:04.826 A:middle
+for the train I'm late for
+
+00:08:05.106 --> 00:08:06.846 A:middle
+and see what train
+I'm going to catch.
+
+00:08:07.046 --> 00:08:08.356 A:middle
+They have to try it in context.
+
+00:08:09.506 --> 00:08:11.826 A:middle
+The German newspaper Bild
+printed out a picture
+
+00:08:11.826 --> 00:08:15.486 A:middle
+of an Apple Watch and slid
+underneath various screens.
+
+00:08:15.486 --> 00:08:18.836 A:middle
+It was important for them
+to test the legibility
+
+00:08:19.096 --> 00:08:20.916 A:middle
+of their articles in the places
+
+00:08:20.916 --> 00:08:24.666 A:middle
+where they expect
+people to read them.
+
+00:08:24.936 --> 00:08:26.126 A:middle
+We learned a few things
+
+00:08:26.126 --> 00:08:28.136 A:middle
+about Prototyping
+hardware and software.
+
+00:08:29.506 --> 00:08:31.716 A:middle
+We learned we can fake
+hardware on screens
+
+00:08:31.866 --> 00:08:33.176 A:middle
+as with the Apple Watch.
+
+00:08:33.756 --> 00:08:36.576 A:middle
+We can fake software
+with pictures
+
+00:08:36.806 --> 00:08:38.596 A:middle
+as we explained last
+year with Toast Modern,
+
+00:08:39.285 --> 00:08:43.736 A:middle
+and it is important to try it
+in context at the right size,
+
+00:08:43.986 --> 00:08:46.936 A:middle
+in the right place as you saw
+with the paper Watch Prototypes.
+
+00:08:47.546 --> 00:08:51.346 A:middle
+Here is our prototyping
+cycle from last year:
+
+00:08:51.346 --> 00:08:53.306 A:middle
+make fake things,
+show them to people
+
+00:08:53.306 --> 00:08:54.496 A:middle
+and learn from their feedback.
+
+00:08:55.676 --> 00:08:58.576 A:middle
+This year we are going to make
+fake hardware and software.
+
+00:08:59.386 --> 00:09:00.466 A:middle
+Before we begin we are going
+
+
+
+00:08:59.386 --> 00:09:00.466 A:middle
+Before we begin we are going
+
+00:09:00.466 --> 00:09:03.256 A:middle
+to ask ourselves three important
+questions for each of those.
+
+00:09:04.396 --> 00:09:05.666 A:middle
+What needs to be more real?
+
+00:09:07.236 --> 00:09:08.136 A:middle
+What can be faked?
+
+00:09:08.316 --> 00:09:10.746 A:middle
+That's nearly everything except
+for the one thing we are going
+
+00:09:10.746 --> 00:09:13.836 A:middle
+to choose to be real, and
+where will it be used?
+
+00:09:13.836 --> 00:09:16.896 A:middle
+And then we are going to
+go and show it to people.
+
+00:09:17.436 --> 00:09:20.326 A:middle
+Who do we show it to?
+
+00:09:21.236 --> 00:09:22.516 A:middle
+The people you app is for.
+
+00:09:22.826 --> 00:09:24.656 A:middle
+If it's not meant
+for your office mate,
+
+00:09:24.836 --> 00:09:25.756 A:middle
+go find the people it's for.
+
+00:09:26.856 --> 00:09:29.976 A:middle
+Where? In the place
+where people will use it.
+
+00:09:30.116 --> 00:09:31.306 A:middle
+You might have to go outside.
+
+00:09:31.926 --> 00:09:37.166 A:middle
+And remember, don't
+argue, defend, or dismiss.
+
+00:09:37.556 --> 00:09:39.256 A:middle
+You're there to learn
+from people's impression
+
+00:09:39.256 --> 00:09:40.466 A:middle
+of the Prototype
+you put together.
+
+00:09:42.096 --> 00:09:45.156 A:middle
+After we've shown it to people,
+we learn from their feedback.
+
+00:09:46.966 --> 00:09:49.076 A:middle
+We ask ourselves
+three questions:
+
+00:09:49.606 --> 00:09:50.826 A:middle
+Number one, what is working?
+
+00:09:51.466 --> 00:09:53.056 A:middle
+Number two, what is not working?
+
+00:09:53.346 --> 00:09:56.946 A:middle
+Number 3, what other
+ideas does this give us?
+
+00:09:57.946 --> 00:10:00.556 A:middle
+Now we are going to go through
+the cycle three times today
+
+
+
+00:09:57.946 --> 00:10:00.556 A:middle
+Now we are going to go through
+the cycle three times today
+
+00:10:00.926 --> 00:10:02.186 A:middle
+and show you a few
+different techniques.
+
+00:10:02.186 --> 00:10:05.066 A:middle
+We are going to begin with
+pictures and animation.
+
+00:10:05.686 --> 00:10:07.796 A:middle
+Then we are going to use
+a technique we call behind
+
+00:10:07.796 --> 00:10:08.186 A:middle
+the curtain.
+
+00:10:09.186 --> 00:10:12.316 A:middle
+After that we are going to
+create a lightweight interactive
+
+00:10:12.436 --> 00:10:13.446 A:middle
+and connected prototype.
+
+00:10:13.996 --> 00:10:17.746 A:middle
+I would like to quickly recap
+Toastal Service for you guys.
+
+00:10:18.766 --> 00:10:21.126 A:middle
+It's the world's
+first social toaster.
+
+00:10:22.226 --> 00:10:24.596 A:middle
+Allows you to receive toast
+messages, we call them Toasties,
+
+00:10:26.316 --> 00:10:27.506 A:middle
+and send toast messages,
+
+00:10:28.136 --> 00:10:30.586 A:middle
+and we want that
+experience to be magical.
+
+00:10:31.486 --> 00:10:33.846 A:middle
+To kick it off, I'd like to
+ask Matthaeus up to the stage.
+
+00:10:34.516 --> 00:10:39.436 A:middle
+[ Applause ]
+
+00:10:39.936 --> 00:10:40.316 A:middle
+&gt;&gt; MATTHAEUS KRENN:
+Thanks, Jeff.
+
+00:10:42.276 --> 00:10:46.216 A:middle
+Cool. So how are we going
+to get started with this?
+
+00:10:46.476 --> 00:10:50.666 A:middle
+So first of all, let's look
+at our hardware and our app
+
+00:10:50.666 --> 00:10:53.026 A:middle
+and ask ourselves the question
+that Jeff just mentioned.
+
+00:10:53.626 --> 00:10:56.646 A:middle
+First of all, what do
+we make more real now?
+
+00:10:56.646 --> 00:11:02.176 A:middle
+Well, I want us actually
+to start with the receiving
+
+
+
+00:10:56.646 --> 00:11:02.176 A:middle
+Well, I want us actually
+to start with the receiving
+
+00:11:02.246 --> 00:11:04.346 A:middle
+and the Toasting part
+of the experience.
+
+00:11:04.666 --> 00:11:07.856 A:middle
+So on the hardware, let's figure
+out a way how we can indicate
+
+00:11:07.856 --> 00:11:09.846 A:middle
+that a new Toastie
+has been received.
+
+00:11:10.776 --> 00:11:14.026 A:middle
+On the app we can look at
+new Toastie notifications
+
+00:11:14.546 --> 00:11:19.256 A:middle
+and see what kind of information
+the app can display with it.
+
+00:11:19.346 --> 00:11:21.546 A:middle
+The next question is,
+what can be faked?
+
+00:11:22.476 --> 00:11:26.136 A:middle
+And really here just go for
+as much as possible really.
+
+00:11:26.136 --> 00:11:28.146 A:middle
+We are not going
+to build a Toaster.
+
+00:11:28.146 --> 00:11:30.666 A:middle
+We are not going to look at
+how to turn bread into Toast.
+
+00:11:30.666 --> 00:11:33.576 A:middle
+All we are going to do is
+put pictures on the device
+
+00:11:33.576 --> 00:11:35.016 A:middle
+and simulate the
+hardware like that.
+
+00:11:36.056 --> 00:11:39.896 A:middle
+For the app again,
+everything we are going
+
+00:11:39.896 --> 00:11:41.586 A:middle
+to take pictures for everything.
+
+00:11:41.586 --> 00:11:43.926 A:middle
+We are not going to make
+anything really interactive
+
+00:11:43.926 --> 00:11:45.906 A:middle
+and definitely not
+writing any code.
+
+00:11:48.456 --> 00:11:50.906 A:middle
+And third, where will
+the product be used?
+
+00:11:51.816 --> 00:11:54.686 A:middle
+For the Toaster,
+that's the kitchen.
+
+00:11:54.916 --> 00:11:57.476 A:middle
+For the app it's anywhere
+or at least anywhere
+
+00:11:57.476 --> 00:11:58.416 A:middle
+around the house for sure.
+
+
+
+00:12:00.676 --> 00:12:03.346 A:middle
+So let's start with
+looking at our Toaster.
+
+00:12:03.896 --> 00:12:08.206 A:middle
+We said that we wanted
+to simulate hardware
+
+00:12:08.206 --> 00:12:09.626 A:middle
+by putting pictures on a screen.
+
+00:12:09.676 --> 00:12:13.506 A:middle
+That sounds awfully a lot
+like what Jeff just described
+
+00:12:13.606 --> 00:12:16.546 A:middle
+with the Apple Watch
+on an iPhone.
+
+00:12:17.816 --> 00:12:20.946 A:middle
+Luckily Apple also makes a great
+Toaster shaped product called
+
+00:12:20.946 --> 00:12:21.296 A:middle
+the iPad.
+
+00:12:22.736 --> 00:12:24.526 A:middle
+That is just the right
+thing for us here.
+
+00:12:25.996 --> 00:12:29.126 A:middle
+To sketch out our Toaster, I'm
+going to use keynote today.
+
+00:12:30.006 --> 00:12:34.406 A:middle
+For you really, whatever gets
+you started easily and simply,
+
+00:12:34.906 --> 00:12:36.246 A:middle
+I'm going to use keynote today.
+
+00:12:36.246 --> 00:12:37.836 A:middle
+Feel free to use
+whatever you can.
+
+00:12:38.576 --> 00:12:42.256 A:middle
+I'm going to try to keep it
+as simple as possible too.
+
+00:12:43.346 --> 00:12:47.876 A:middle
+A Toaster is really just
+a box, some feet, a lever,
+
+00:12:47.876 --> 00:12:50.886 A:middle
+maybe we will actually
+call this a digital lever.
+
+00:12:52.496 --> 00:12:55.046 A:middle
+And a slot where you can
+put in a piece of bread.
+
+00:12:56.176 --> 00:12:58.036 A:middle
+We also said that we
+wanted to indicate
+
+00:12:58.516 --> 00:13:00.656 A:middle
+when a new Toastie
+has been received.
+
+
+
+00:12:58.516 --> 00:13:00.656 A:middle
+when a new Toastie
+has been received.
+
+00:13:00.766 --> 00:13:03.416 A:middle
+We'll put an LED up
+there that can light up.
+
+00:13:03.416 --> 00:13:07.626 A:middle
+And while we are in
+keynote, we are also going
+
+00:13:07.626 --> 00:13:09.476 A:middle
+to add some bread
+to the Toaster.
+
+00:13:09.556 --> 00:13:11.926 A:middle
+This is the Toaster toasting.
+
+00:13:12.646 --> 00:13:15.196 A:middle
+And eventually the
+Toastie pops back up
+
+00:13:15.196 --> 00:13:17.256 A:middle
+and we can see what's on it.
+
+00:13:17.256 --> 00:13:18.186 A:middle
+We can take this.
+
+00:13:18.596 --> 00:13:21.136 A:middle
+We can open it in
+keynote on our iPad.
+
+00:13:21.246 --> 00:13:22.876 A:middle
+And we have a Toaster.
+
+00:13:22.876 --> 00:13:27.276 A:middle
+For our app we are going
+to do something similar.
+
+00:13:27.276 --> 00:13:30.136 A:middle
+We are going to get started with
+a home screen, a screen shot
+
+00:13:30.136 --> 00:13:34.776 A:middle
+of a home screen on the iPhone
+and put our app icon on it.
+
+00:13:34.776 --> 00:13:39.296 A:middle
+We are going to take a screen
+shot and use it as an underlay
+
+00:13:39.296 --> 00:13:41.236 A:middle
+for an application that
+we want to customize.
+
+00:13:42.746 --> 00:13:43.286 A:middle
+That's simple.
+
+00:13:43.286 --> 00:13:48.476 A:middle
+For our app, we're going to take
+a screen shot of Toast Modern,
+
+00:13:48.626 --> 00:13:50.606 A:middle
+the product that we
+unveiled last year.
+
+00:13:50.656 --> 00:13:55.576 A:middle
+You can see in the top left
+corner there's a convenient open
+
+00:13:55.576 --> 00:14:00.096 A:middle
+spot that is the perfect place
+for the link to our Toast inbox.
+
+
+
+00:13:55.576 --> 00:14:00.096 A:middle
+spot that is the perfect place
+for the link to our Toast inbox.
+
+00:14:00.456 --> 00:14:04.656 A:middle
+I'll put a Toaster icon up there
+and a little notification badge.
+
+00:14:06.326 --> 00:14:10.426 A:middle
+On the Toaster inbox
+I'm going to use a slice
+
+00:14:10.426 --> 00:14:13.186 A:middle
+of bread right now as a place
+holder because I don't want
+
+00:14:13.186 --> 00:14:15.926 A:middle
+to take away what is
+actually on the Toastie.
+
+00:14:15.926 --> 00:14:18.046 A:middle
+We don't want to take
+away the anticipation,
+
+00:14:18.046 --> 00:14:20.346 A:middle
+that surprise moment when
+you are sitting waiting
+
+00:14:20.346 --> 00:14:21.566 A:middle
+for your Toast to be toasted.
+
+00:14:22.506 --> 00:14:25.816 A:middle
+We definitely want to show
+who is this Toastie from?
+
+00:14:26.336 --> 00:14:29.786 A:middle
+We will put a picture and
+name of the sender up there.
+
+00:14:29.786 --> 00:14:33.366 A:middle
+And we are also going to add the
+date and time when it was sent.
+
+00:14:34.066 --> 00:14:36.166 A:middle
+At this point I think
+it would be great
+
+00:14:36.166 --> 00:14:39.206 A:middle
+if we can immediately also
+choose how dark we want our
+
+00:14:39.206 --> 00:14:40.316 A:middle
+bread to be Toasted.
+
+00:14:41.376 --> 00:14:46.376 A:middle
+We can do that easily
+with a slider here.
+
+00:14:46.586 --> 00:14:52.086 A:middle
+Now, again let's open that on
+our iPhone and see what it looks
+
+00:14:52.086 --> 00:14:54.106 A:middle
+like on an actual device.
+
+00:14:55.756 --> 00:14:58.596 A:middle
+This immediately gives
+us a really life like
+
+00:14:58.596 --> 00:15:01.206 A:middle
+but completely fake app.
+
+
+
+00:14:58.596 --> 00:15:01.206 A:middle
+but completely fake app.
+
+00:15:01.206 --> 00:15:05.796 A:middle
+Now we can look at how these two
+things work together in action.
+
+00:15:06.686 --> 00:15:08.596 A:middle
+You can see that I'm
+just tapping on a screen
+
+00:15:08.596 --> 00:15:10.956 A:middle
+to make the notification
+appear to open the app
+
+00:15:11.236 --> 00:15:12.326 A:middle
+and to go into the inbox.
+
+00:15:13.116 --> 00:15:18.376 A:middle
+And on the Toaster, I can also
+-- you can first of all you see
+
+00:15:18.376 --> 00:15:20.126 A:middle
+that the LED is already
+blinking.
+
+00:15:20.986 --> 00:15:22.736 A:middle
+Then I can tap to
+insert some bread.
+
+00:15:23.576 --> 00:15:25.726 A:middle
+I tap again to lower
+our digital lever.
+
+00:15:26.476 --> 00:15:29.806 A:middle
+Then in a couple seconds later
+the Toastie will pop back out,
+
+00:15:29.806 --> 00:15:32.076 A:middle
+and we're going to
+see what's on it.
+
+00:15:32.966 --> 00:15:33.926 A:middle
+That is not too bad for now.
+
+00:15:33.926 --> 00:15:37.546 A:middle
+We can immediately take this
+and show it to our friends
+
+00:15:37.656 --> 00:15:40.676 A:middle
+and ask them how they feel
+about this so we can learn
+
+00:15:40.676 --> 00:15:43.616 A:middle
+from what they have to say.
+
+00:15:43.616 --> 00:15:46.776 A:middle
+So what is working right now?
+
+00:15:47.006 --> 00:15:49.726 A:middle
+Well, the LED seems to
+be really good indicator
+
+00:15:49.726 --> 00:15:52.546 A:middle
+that there is a new
+Toastie, and the notification
+
+00:15:52.546 --> 00:15:55.716 A:middle
+on the app helps us know that
+there is a new Toastie even
+
+00:15:55.716 --> 00:15:57.266 A:middle
+when we are not sitting
+in the kitchen
+
+00:15:57.816 --> 00:16:00.046 A:middle
+in full anticipation
+looking at our Toaster.
+
+
+
+00:15:57.816 --> 00:16:00.046 A:middle
+in full anticipation
+looking at our Toaster.
+
+00:16:01.306 --> 00:16:04.476 A:middle
+What is not working so well
+is, a lot of people mentioned
+
+00:16:04.476 --> 00:16:07.786 A:middle
+to us what happens when you
+have more than one Toastie?
+
+00:16:08.536 --> 00:16:11.236 A:middle
+That's true, our design doesn't
+account for that very well.
+
+00:16:12.676 --> 00:16:15.986 A:middle
+So what can we do about this?
+
+00:16:16.996 --> 00:16:21.096 A:middle
+Well, maybe we'll actually
+upgrade the LED on our Toaster
+
+00:16:21.376 --> 00:16:23.346 A:middle
+and maybe our app
+can show a list
+
+00:16:23.346 --> 00:16:25.056 A:middle
+of Toasties instead
+of just the last one.
+
+00:16:25.836 --> 00:16:30.036 A:middle
+So let's take it from
+the top here again.
+
+00:16:30.166 --> 00:16:33.246 A:middle
+Let's look again at our
+hardware and at our app.
+
+00:16:34.486 --> 00:16:36.546 A:middle
+And at this stage again let's
+ask ourselves what needs
+
+00:16:36.546 --> 00:16:37.316 A:middle
+to be more real now.
+
+00:16:37.316 --> 00:16:42.186 A:middle
+Well, we want our hardware
+to handle multiple Toasties
+
+00:16:42.276 --> 00:16:43.486 A:middle
+and toast the right one.
+
+00:16:43.656 --> 00:16:46.416 A:middle
+On the app we want to be
+able to browse Toasties
+
+00:16:46.586 --> 00:16:47.726 A:middle
+and select the right one for us.
+
+00:16:48.776 --> 00:16:49.476 A:middle
+What can we fake?
+
+00:16:49.476 --> 00:16:52.496 A:middle
+Still we are going to
+fake as much as possible.
+
+00:16:52.496 --> 00:16:54.226 A:middle
+There is not going to
+be a real connection
+
+00:16:54.226 --> 00:16:55.426 A:middle
+between the two devices.
+
+00:16:55.846 --> 00:16:58.756 A:middle
+Anything related to actual
+toasting we are not even going
+
+00:16:58.756 --> 00:16:59.866 A:middle
+to touch that.
+
+
+
+00:17:00.816 --> 00:17:03.406 A:middle
+For the app sending data back
+and forth, again we are going
+
+00:17:03.406 --> 00:17:06.316 A:middle
+to fake that and our UI
+is mostly still pictures
+
+00:17:06.715 --> 00:17:07.406 A:middle
+and animations.
+
+00:17:08.856 --> 00:17:10.096 A:middle
+Where will the products be used?
+
+00:17:10.205 --> 00:17:11.336 A:middle
+Still the same as before.
+
+00:17:11.576 --> 00:17:14.826 A:middle
+The Toaster in the kitchen
+and the app really anywhere.
+
+00:17:16.376 --> 00:17:17.665 A:middle
+Let's look at our Toaster again.
+
+00:17:18.236 --> 00:17:22.146 A:middle
+We said we wanted to change
+something about the LED.
+
+00:17:22.146 --> 00:17:24.876 A:middle
+So maybe we can use a dot
+matrix display here instead.
+
+00:17:25.346 --> 00:17:28.516 A:middle
+We could indicate how many
+Toasties have been received.
+
+00:17:29.436 --> 00:17:33.086 A:middle
+And instead of using hi res
+touch screen that we put
+
+00:17:33.086 --> 00:17:36.616 A:middle
+on the Toaster here which would
+make our product complicated
+
+00:17:36.616 --> 00:17:39.106 A:middle
+to produce and expensive
+to buy, we are not going
+
+00:17:39.106 --> 00:17:41.646 A:middle
+to recreate capabilities that
+we have on the phone anyway.
+
+00:17:42.116 --> 00:17:44.676 A:middle
+We'll keep the hardware
+simple and focus
+
+00:17:44.676 --> 00:17:46.666 A:middle
+on the complicated
+stuff on the phone.
+
+00:17:47.236 --> 00:17:51.826 A:middle
+So we'll add additional
+Toasties to our inbox.
+
+00:17:52.116 --> 00:17:54.376 A:middle
+Easy to swipe through
+so we can select
+
+00:17:54.536 --> 00:17:55.756 A:middle
+which one we want to Toast.
+
+00:17:56.096 --> 00:17:59.076 A:middle
+We will create a state where
+a different Toastie has
+
+00:17:59.076 --> 00:17:59.666 A:middle
+been selected.
+
+
+
+00:18:00.836 --> 00:18:04.296 A:middle
+We will also add a screen
+that shows up on the app
+
+00:18:04.566 --> 00:18:05.936 A:middle
+when the Toaster is toasting.
+
+00:18:06.196 --> 00:18:07.776 A:middle
+We can add a count
+down to the top
+
+00:18:08.096 --> 00:18:09.556 A:middle
+so we know how long it will be
+
+00:18:09.556 --> 00:18:12.236 A:middle
+until we enjoy our
+delicious piece of toast.
+
+00:18:12.936 --> 00:18:17.786 A:middle
+Finally the Toastie is toasted
+and it's back on the list
+
+00:18:17.786 --> 00:18:19.726 A:middle
+and we can see what's
+on our app as well.
+
+00:18:23.086 --> 00:18:30.616 A:middle
+Now we have an iPhone, now we
+have an iPhone running a keynote
+
+00:18:30.616 --> 00:18:34.216 A:middle
+of a fake app and we have
+an iPad running a keynote
+
+00:18:34.216 --> 00:18:35.006 A:middle
+of a fake Toaster.
+
+00:18:35.406 --> 00:18:39.606 A:middle
+With those two together we can
+start playing more realistic
+
+00:18:39.606 --> 00:18:41.526 A:middle
+scenario of our product
+experience.
+
+00:18:42.016 --> 00:18:44.726 A:middle
+A notification comes in on
+both devices at the same time.
+
+00:18:45.556 --> 00:18:46.316 A:middle
+We open the app.
+
+00:18:46.526 --> 00:18:48.986 A:middle
+We go to our inbox and
+select a different Toastie.
+
+00:18:49.586 --> 00:18:51.446 A:middle
+We add some bread
+to the Toaster,
+
+00:18:52.296 --> 00:18:53.656 A:middle
+push down the digital lever
+
+00:18:53.656 --> 00:18:58.396 A:middle
+and eventually the Toastie
+pops back out on both devices.
+
+00:18:59.486 --> 00:19:00.336 A:middle
+Now, that's pretty cool.
+
+
+
+00:18:59.486 --> 00:19:00.336 A:middle
+Now, that's pretty cool.
+
+00:19:00.336 --> 00:19:04.076 A:middle
+But there is a fundamental
+problem with this unfortunately.
+
+00:19:04.766 --> 00:19:08.836 A:middle
+When we test our product, we
+can't just put the devices next
+
+00:19:08.836 --> 00:19:12.446 A:middle
+to each other in front of us
+and happily tap on both of them
+
+00:19:12.446 --> 00:19:15.616 A:middle
+in a really orchestrated way
+to play this perfect scenario.
+
+00:19:16.726 --> 00:19:19.946 A:middle
+What is more realistic is that
+eventually the Toaster is going
+
+00:19:19.946 --> 00:19:22.476 A:middle
+to be in the kitchen and
+the app is going to be all
+
+00:19:22.476 --> 00:19:23.596 A:middle
+over the place with you.
+
+00:19:24.296 --> 00:19:26.916 A:middle
+That's a fundamental part
+of the experience, right?
+
+00:19:27.216 --> 00:19:28.636 A:middle
+You get a notification.
+
+00:19:28.886 --> 00:19:30.046 A:middle
+You walk up to the Toaster.
+
+00:19:30.046 --> 00:19:31.216 A:middle
+You do a couple things.
+
+00:19:31.216 --> 00:19:33.336 A:middle
+It starts Toasting
+and you walk away
+
+00:19:33.336 --> 00:19:36.286 A:middle
+to brush your teeth,
+something like that.
+
+00:19:36.286 --> 00:19:37.956 A:middle
+Eventually the Toastie is done
+
+00:19:38.116 --> 00:19:39.456 A:middle
+and you come back
+to the Toaster.
+
+00:19:39.456 --> 00:19:41.896 A:middle
+If you don't capture that
+part of the experience,
+
+00:19:42.246 --> 00:19:44.986 A:middle
+you're testing for something
+that is entirely unrealistic.
+
+00:19:46.106 --> 00:19:49.536 A:middle
+How can we make our
+two Prototypes talk
+
+00:19:49.536 --> 00:19:51.666 A:middle
+to each other over a distance.
+
+00:19:52.356 --> 00:19:53.836 A:middle
+Ideally how can we do
+
+00:19:53.836 --> 00:19:56.566 A:middle
+that without putting any
+additional effort into it.
+
+00:19:56.566 --> 00:20:01.276 A:middle
+I want to keep using the keynote
+prototypes we just built.
+
+
+
+00:19:56.566 --> 00:20:01.276 A:middle
+I want to keep using the keynote
+prototypes we just built.
+
+00:20:01.276 --> 00:20:04.546 A:middle
+It turns out our team has a
+really convenient technique
+
+00:20:05.006 --> 00:20:06.056 A:middle
+for circumstances like that.
+
+00:20:06.656 --> 00:20:07.976 A:middle
+I want to show that
+to you right now.
+
+00:20:11.216 --> 00:20:14.806 A:middle
+You can see this is still our
+keynote prototype on the phone.
+
+00:20:16.056 --> 00:20:19.736 A:middle
+But now the notification
+actually comes in on its own.
+
+00:20:20.556 --> 00:20:23.496 A:middle
+We can still tap to
+open the app and then go
+
+00:20:23.496 --> 00:20:25.896 A:middle
+and select the different
+Toastie that we want to Toast.
+
+00:20:26.246 --> 00:20:30.546 A:middle
+And on the Toaster, you can see
+
+00:20:30.546 --> 00:20:32.936 A:middle
+that we can still tap
+to insert some bread.
+
+00:20:33.476 --> 00:20:35.966 A:middle
+Now look at the app, what
+happens when we lower the lever.
+
+00:20:36.706 --> 00:20:38.836 A:middle
+The app responds
+to it in realtime.
+
+00:20:40.236 --> 00:20:43.816 A:middle
+When the Toastie is
+back finished Toasting,
+
+00:20:43.816 --> 00:20:47.746 A:middle
+it appears on both
+devices at the same time.
+
+00:20:48.936 --> 00:20:50.326 A:middle
+That's pretty awesome, I think.
+
+00:20:51.396 --> 00:20:52.676 A:middle
+But how do we do that?
+
+00:20:53.576 --> 00:20:56.926 A:middle
+Especially considering that
+this is really just images
+
+00:20:56.926 --> 00:21:02.056 A:middle
+on devices, and we didn't
+write a single line of code.
+
+
+
+00:20:56.926 --> 00:21:02.056 A:middle
+on devices, and we didn't
+write a single line of code.
+
+00:21:02.166 --> 00:21:03.946 A:middle
+Well, it turns out
+we have something
+
+00:21:03.946 --> 00:21:06.426 A:middle
+that is a little bit cooler
+and a little bit faster
+
+00:21:06.426 --> 00:21:08.096 A:middle
+and a little bit
+smarter than code.
+
+00:21:09.516 --> 00:21:14.986 A:middle
+[ Laughter ]
+
+00:21:15.486 --> 00:21:16.976 A:middle
+&gt;&gt; MATTHAEUS KRENN:
+We call this ...
+
+00:21:17.516 --> 00:21:21.756 A:middle
+[ Applause ]
+
+00:21:22.256 --> 00:21:24.216 A:middle
+&gt;&gt; MATTHAEUS KRENN: We call this
+technique behind the curtain.
+
+00:21:24.766 --> 00:21:27.656 A:middle
+It is essentially about a person
+pretending to be a computer.
+
+00:21:29.176 --> 00:21:31.826 A:middle
+In our case, it's
+me behind the sofa,
+
+00:21:31.826 --> 00:21:37.106 A:middle
+using two keynote remotes
+connected to the iPhone and iPad
+
+00:21:37.846 --> 00:21:41.276 A:middle
+and I can supplement
+tapping on the Prototypes
+
+00:21:41.536 --> 00:21:44.256 A:middle
+by remotely controlling
+the state of each device.
+
+00:21:44.836 --> 00:21:48.286 A:middle
+When you do something on the
+app I can press on the remote
+
+00:21:48.286 --> 00:21:50.596 A:middle
+and the Toaster reacts to it.
+
+00:21:50.596 --> 00:21:53.956 A:middle
+We create a perfect simulation
+of this realistic experience
+
+00:21:53.956 --> 00:21:56.726 A:middle
+and we didn't really have to
+do anything to achieve it.
+
+00:21:57.256 --> 00:21:59.596 A:middle
+You wouldn't believe
+actually how many people
+
+00:21:59.596 --> 00:22:00.826 A:middle
+at Apple we tricked
+
+
+
+00:21:59.596 --> 00:22:00.826 A:middle
+at Apple we tricked
+
+00:22:00.826 --> 00:22:03.636 A:middle
+into thinking we have
+implemented some magical
+
+00:22:03.636 --> 00:22:07.566 A:middle
+technology where really, as
+we were demoing our Prototype,
+
+00:22:07.566 --> 00:22:10.006 A:middle
+some of our team is
+just kind of sitting
+
+00:22:10.006 --> 00:22:12.486 A:middle
+in the corner controlling
+one of the Prototypes.
+
+00:22:13.186 --> 00:22:17.526 A:middle
+And so again with this more
+realistic setup we can go
+
+00:22:17.526 --> 00:22:19.496 A:middle
+to our friends and
+ask them for feedback.
+
+00:22:26.256 --> 00:22:27.566 A:middle
+And we ask them what's working.
+
+00:22:28.326 --> 00:22:31.406 A:middle
+Well, selecting from
+many Toasties
+
+00:22:31.636 --> 00:22:33.986 A:middle
+and then Toasting the right
+one, it's all done, all good.
+
+00:22:35.516 --> 00:22:36.516 A:middle
+What is not working?
+
+00:22:36.916 --> 00:22:40.036 A:middle
+Well, despite our incredible
+Prototyping efforts,
+
+00:22:40.656 --> 00:22:43.476 A:middle
+the devices still don't feel
+really connected and responsive.
+
+00:22:44.616 --> 00:22:45.646 A:middle
+What can we do about that?
+
+00:22:46.766 --> 00:22:50.876 A:middle
+Maybe we can have the Toaster
+react in realtime to the input
+
+00:22:50.876 --> 00:22:52.446 A:middle
+in the app and vice versa.
+
+00:22:53.576 --> 00:22:54.886 A:middle
+To do that we are
+going to have to step
+
+00:22:54.886 --> 00:22:56.766 A:middle
+up our Prototyping
+game a little bit.
+
+00:22:56.966 --> 00:22:58.686 A:middle
+I'm going to ask
+Bill on the stage
+
+00:22:58.856 --> 00:23:00.666 A:middle
+to show you guys how to do that.
+
+
+
+00:22:58.856 --> 00:23:00.666 A:middle
+to show you guys how to do that.
+
+00:23:01.516 --> 00:23:03.916 A:middle
+[ Applause ]
+
+00:23:04.416 --> 00:23:07.556 A:middle
+&gt;&gt; BILL: Thank you,
+Matthaeus, that's awesome.
+
+00:23:07.946 --> 00:23:09.476 A:middle
+Hello, everybody, I'm Bill.
+
+00:23:10.346 --> 00:23:13.166 A:middle
+I get to spend my
+days experimenting
+
+00:23:13.166 --> 00:23:16.376 A:middle
+with top-secret Apple hardware
+which is pretty awesome.
+
+00:23:18.256 --> 00:23:20.776 A:middle
+So we would like to share a
+little bit about our process
+
+00:23:20.776 --> 00:23:23.656 A:middle
+that might give you
+some ideas for designing
+
+00:23:23.656 --> 00:23:26.626 A:middle
+for your own top-secret
+hardware or possibly a device
+
+00:23:26.626 --> 00:23:27.976 A:middle
+that you just don't have yet.
+
+00:23:34.996 --> 00:23:37.376 A:middle
+So after a couple of iterations,
+we are feeling pretty good
+
+00:23:37.376 --> 00:23:40.326 A:middle
+about the designs that
+Matthaeus created for us.
+
+00:23:41.076 --> 00:23:43.006 A:middle
+However, with the
+keynote prototypes,
+
+00:23:43.536 --> 00:23:44.936 A:middle
+it can only take us so far.
+
+00:23:45.236 --> 00:23:48.326 A:middle
+We can tap through from
+state to state or fake that,
+
+00:23:48.896 --> 00:23:50.576 A:middle
+but there is no true
+interactivity yet.
+
+00:23:51.226 --> 00:23:53.216 A:middle
+For example, the digital lever.
+
+00:23:53.706 --> 00:23:56.256 A:middle
+We can't drag that up and
+down, which is pretty critical.
+
+
+
+00:24:03.046 --> 00:24:06.856 A:middle
+So let's return to
+our three questions
+
+00:24:07.466 --> 00:24:10.726 A:middle
+and decide how can we enhance
+the fidelity of these prototypes
+
+00:24:11.086 --> 00:24:13.306 A:middle
+with a little bit of
+interactivity and a little bit
+
+00:24:13.306 --> 00:24:15.826 A:middle
+of connectivity to make
+them that much better.
+
+00:24:16.386 --> 00:24:19.576 A:middle
+What needs to be more real?
+
+00:24:20.876 --> 00:24:24.016 A:middle
+On the hardware side we want
+to wire up the digital lever.
+
+00:24:25.296 --> 00:24:26.696 A:middle
+We also want to connect
+the state
+
+00:24:26.696 --> 00:24:29.206 A:middle
+of the Toaster to
+the app itself.
+
+00:24:30.676 --> 00:24:33.146 A:middle
+On the app side let's
+allow our friends
+
+00:24:33.146 --> 00:24:35.966 A:middle
+to browse the Toasties
+in the inbox.
+
+00:24:36.936 --> 00:24:39.946 A:middle
+Also pick a Toastie to Toast.
+
+00:24:41.696 --> 00:24:43.186 A:middle
+So we like faking things.
+
+00:24:43.266 --> 00:24:44.906 A:middle
+What can we keep fake?
+
+00:24:45.576 --> 00:24:48.856 A:middle
+Let's not worry about
+servers, edge cases,
+
+00:24:49.246 --> 00:24:50.506 A:middle
+turning bread into Toast.
+
+00:24:52.166 --> 00:24:54.206 A:middle
+And on the app side,
+we are going to keep
+
+00:24:54.206 --> 00:24:56.126 A:middle
+that message queue
+completely canned
+
+00:24:56.426 --> 00:24:58.496 A:middle
+and also the Toasties
+themselves,
+
+00:24:58.966 --> 00:25:01.246 A:middle
+we'll have them be
+images on both devices.
+
+
+
+00:24:58.966 --> 00:25:01.246 A:middle
+we'll have them be
+images on both devices.
+
+00:25:01.246 --> 00:25:03.016 A:middle
+We won't actually send
+them back and forth
+
+00:25:03.116 --> 00:25:08.696 A:middle
+between the devices
+over the air.
+
+00:25:08.916 --> 00:25:11.606 A:middle
+Okay. So where are we
+going to use these things?
+
+00:25:11.606 --> 00:25:12.686 A:middle
+Toasters live in the kitchen,
+
+00:25:12.686 --> 00:25:14.426 A:middle
+so we'll use the
+Toaster in the kitchen.
+
+00:25:15.576 --> 00:25:17.026 A:middle
+The app can be used anywhere
+
+00:25:17.026 --> 00:25:18.406 A:middle
+that maybe you're
+hungry for a snack.
+
+00:25:19.076 --> 00:25:21.456 A:middle
+Maybe it's the first app you
+launch when you roll out of bed.
+
+00:25:22.016 --> 00:25:25.906 A:middle
+We have to ask ourselves,
+
+00:25:25.956 --> 00:25:27.706 A:middle
+what is the best way
+of moving forward?
+
+00:25:31.156 --> 00:25:34.186 A:middle
+Matthaeus said he wanted to
+connect the Toaster and the app.
+
+00:25:34.866 --> 00:25:37.906 A:middle
+Maybe we start with a real
+Toaster, hack it together
+
+00:25:37.906 --> 00:25:39.466 A:middle
+with a microcontroller.
+
+00:25:39.466 --> 00:25:43.526 A:middle
+Maybe put a wireless radio
+on it, some LEDs to make
+
+00:25:43.526 --> 00:25:45.166 A:middle
+that a nice little display.
+
+00:25:45.166 --> 00:25:47.106 A:middle
+And this would probably work.
+
+00:25:47.106 --> 00:25:51.666 A:middle
+But we are not committed enough
+to this design to move forward
+
+00:25:51.666 --> 00:25:54.156 A:middle
+in this direction because this
+is starting to feel very real.
+
+00:25:54.156 --> 00:25:59.906 A:middle
+Maybe it's time to 3D print
+a model of our Toaster
+
+
+
+00:26:00.516 --> 00:26:03.816 A:middle
+and start customizing
+Toasties with a laser cutter.
+
+00:26:04.406 --> 00:26:08.416 A:middle
+Let's be honest, we are
+always looking for excuses
+
+00:26:08.486 --> 00:26:10.376 A:middle
+to use the 3D printer
+and the laser cutter.
+
+00:26:12.516 --> 00:26:15.206 A:middle
+[ Applause ]
+
+00:26:15.706 --> 00:26:17.576 A:middle
+&gt;&gt; BILL LINDMEIER: But it is
+actually really fun making this
+
+00:26:17.576 --> 00:26:21.616 A:middle
+slide, but that is
+probably putting the cart
+
+00:26:21.616 --> 00:26:22.526 A:middle
+in front of the horse a bit.
+
+00:26:23.546 --> 00:26:27.976 A:middle
+Okay. So how about a
+virtual reality Toaster?
+
+00:26:28.516 --> 00:26:41.166 A:middle
+[ Laughter and Applause ]
+
+00:26:41.666 --> 00:26:43.806 A:middle
+&gt;&gt; BILL LINDMEIER: This will
+be extremely awesome and fun
+
+00:26:43.806 --> 00:26:46.526 A:middle
+to use, but Toaster haptics
+are still about five years out,
+
+00:26:46.526 --> 00:26:49.916 A:middle
+so we have to put it on hold.
+
+00:26:49.916 --> 00:26:53.476 A:middle
+Seriously, all three
+examples have in common
+
+00:26:53.846 --> 00:26:56.766 A:middle
+that they are distracting
+us from the task at hand
+
+00:26:57.096 --> 00:26:58.666 A:middle
+which is designing
+the experience.
+
+00:26:58.666 --> 00:27:04.316 A:middle
+So to the extent that we do
+any engineering at this point,
+
+
+
+00:26:58.666 --> 00:27:04.316 A:middle
+So to the extent that we do
+any engineering at this point,
+
+00:27:05.206 --> 00:27:08.036 A:middle
+let's keep it to the engineering
+which enhances our design
+
+00:27:08.036 --> 00:27:10.126 A:middle
+and lets us explore that
+a little bit further.
+
+00:27:11.346 --> 00:27:13.916 A:middle
+That way when we actually do
+go to make this thing we know
+
+00:27:13.916 --> 00:27:17.036 A:middle
+that we are making
+the right thing.
+
+00:27:17.246 --> 00:27:20.416 A:middle
+Okay. So with that in
+mind, for the purposes
+
+00:27:20.416 --> 00:27:22.916 A:middle
+of our Prototype,
+what is a Toaster?
+
+00:27:24.096 --> 00:27:26.886 A:middle
+It is not a bread heating
+device, but you knew that.
+
+00:27:27.416 --> 00:27:29.766 A:middle
+It is a connected state machine.
+
+00:27:30.456 --> 00:27:33.166 A:middle
+When I say that I just mean
+that it's a physical object
+
+00:27:33.486 --> 00:27:36.076 A:middle
+with attributes like where
+the digital lever is, whether
+
+00:27:36.076 --> 00:27:38.856 A:middle
+or not there's Toast in it,
+what message is toasting,
+
+00:27:39.296 --> 00:27:41.936 A:middle
+and we want to know how do
+these attributes respond
+
+00:27:42.116 --> 00:27:42.936 A:middle
+to user input.
+
+00:27:44.146 --> 00:27:47.606 A:middle
+We can easily model
+this with software.
+
+00:27:51.046 --> 00:27:53.906 A:middle
+So we are going to take our
+existing keynote Prototypes,
+
+00:27:54.656 --> 00:27:55.746 A:middle
+the app of the Toaster.
+
+00:27:55.936 --> 00:27:57.896 A:middle
+We are going to port
+them to Swift.
+
+00:27:58.566 --> 00:28:02.496 A:middle
+And when I say we are going to
+port them to Swift, I don't mean
+
+
+
+00:27:58.566 --> 00:28:02.496 A:middle
+And when I say we are going to
+port them to Swift, I don't mean
+
+00:28:02.496 --> 00:28:04.026 A:middle
+that we are going to
+make a fully functional,
+
+00:28:04.026 --> 00:28:05.436 A:middle
+feature-rich Swift app.
+
+00:28:06.696 --> 00:28:09.746 A:middle
+It is a lot like the Prototypes
+in that there are screen shots
+
+00:28:10.126 --> 00:28:13.616 A:middle
+and they animate based on user
+touches, but then we are going
+
+00:28:13.616 --> 00:28:16.126 A:middle
+to sprinkle in just a
+little bit of extra code
+
+00:28:16.126 --> 00:28:18.416 A:middle
+for features we want
+to explore further.
+
+00:28:19.826 --> 00:28:21.446 A:middle
+Of course this doesn't
+have to be Swift.
+
+00:28:21.576 --> 00:28:23.796 A:middle
+It can be another
+programming language you like.
+
+00:28:24.086 --> 00:28:26.576 A:middle
+It can be another tool that
+allows you more interactivity.
+
+00:28:27.046 --> 00:28:29.686 A:middle
+But we at Apple happen to
+like Swift so we are going
+
+00:28:29.686 --> 00:28:32.906 A:middle
+to move forward with that.
+
+00:28:33.116 --> 00:28:36.086 A:middle
+Okay. So specifically let's
+define what we are going
+
+00:28:36.086 --> 00:28:36.596 A:middle
+to implement.
+
+00:28:37.006 --> 00:28:38.546 A:middle
+The Toast-a-Toastie flow.
+
+00:28:39.126 --> 00:28:44.396 A:middle
+So for the first step we want to
+pick a Toastie from the inbox.
+
+00:28:45.816 --> 00:28:51.096 A:middle
+Next we want to send the
+Toastie to the Toaster.
+
+00:28:51.196 --> 00:28:57.096 A:middle
+Third, we want to Toast the
+selected Toastie and finally,
+
+00:28:57.096 --> 00:28:59.206 A:middle
+we want to indicate that
+the Toastie is Toasted.
+
+00:28:59.826 --> 00:29:05.146 A:middle
+So here is our new
+interactive app prototype.
+
+
+
+00:28:59.826 --> 00:29:05.146 A:middle
+So here is our new
+interactive app prototype.
+
+00:29:05.146 --> 00:29:09.426 A:middle
+What we've done is turned this
+carousel into a UI scroll view
+
+00:29:09.426 --> 00:29:11.746 A:middle
+that allows our friends
+to easily paginate
+
+00:29:11.746 --> 00:29:12.926 A:middle
+between the different messages.
+
+00:29:13.496 --> 00:29:18.496 A:middle
+We have a UI slider at
+the bottom which allows us
+
+00:29:18.496 --> 00:29:19.896 A:middle
+to pick the color of the Toast.
+
+00:29:20.766 --> 00:29:23.846 A:middle
+We've also added a gesture
+recognizer to each slice
+
+00:29:23.846 --> 00:29:26.936 A:middle
+of Toast so we can pull it
+down into the virtual Toaster
+
+00:29:27.206 --> 00:29:28.686 A:middle
+and simulate that
+it's being sent.
+
+00:29:29.326 --> 00:29:34.336 A:middle
+Let's see how that
+looks in action.
+
+00:29:34.526 --> 00:29:35.566 A:middle
+We launch our inbox.
+
+00:29:36.586 --> 00:29:40.116 A:middle
+You can see as we swipe through
+the Toastie selected increases.
+
+00:29:40.726 --> 00:29:44.106 A:middle
+And we can adjust the
+Toast darkness variable.
+
+00:29:47.996 --> 00:29:49.596 A:middle
+And then we are going
+to drag the Toast
+
+00:29:49.596 --> 00:29:53.726 A:middle
+down into the virtual Toaster
+which sets Toasting to true,
+
+00:29:54.226 --> 00:29:56.976 A:middle
+kicks off an animation and
+our Toastie is presented.
+
+
+
+00:30:06.046 --> 00:30:06.276 A:middle
+All right.
+
+00:30:06.706 --> 00:30:07.746 A:middle
+Moving on to the Toaster.
+
+00:30:07.746 --> 00:30:11.506 A:middle
+We are going to add a gesture
+recognizer to the digital lever.
+
+00:30:12.526 --> 00:30:14.866 A:middle
+When you pull it all the way
+down, it begins Toasting,
+
+00:30:14.936 --> 00:30:17.166 A:middle
+set Toasting to true,
+begin a timer.
+
+00:30:17.286 --> 00:30:20.266 A:middle
+We have also added a
+segmented control at the bottom
+
+00:30:20.346 --> 00:30:23.006 A:middle
+that lets us easily pick
+the message we want to Toast
+
+00:30:23.006 --> 00:30:24.156 A:middle
+without connecting
+it to the app,
+
+00:30:24.656 --> 00:30:27.466 A:middle
+and finally the animation
+will present the Toast.
+
+00:30:27.866 --> 00:30:29.406 A:middle
+Let's take a look at that.
+
+00:30:30.736 --> 00:30:33.066 A:middle
+We are selecting our Toast
+which loads the bread.
+
+00:30:33.366 --> 00:30:36.366 A:middle
+You can see we have this nice
+animation now in the LED matrix.
+
+00:30:36.366 --> 00:30:40.326 A:middle
+When we bring the lever
+all the way down to 1,
+
+00:30:40.326 --> 00:30:44.196 A:middle
+it is Toasting set to
+true, kicks off the timer.
+
+00:30:44.796 --> 00:30:45.896 A:middle
+And our Toast is presented.
+
+00:30:49.246 --> 00:30:51.046 A:middle
+So this is a critical stage.
+
+00:30:52.086 --> 00:30:54.596 A:middle
+This technique of
+modeling hardware
+
+00:30:54.596 --> 00:30:56.696 A:middle
+with software is super
+useful and we use it
+
+00:30:56.696 --> 00:30:57.886 A:middle
+in our studio all the time.
+
+00:30:58.826 --> 00:31:01.546 A:middle
+You can imagine that you are
+making a connected Fireplace
+
+
+
+00:30:58.826 --> 00:31:01.546 A:middle
+You can imagine that you are
+making a connected Fireplace
+
+00:31:01.806 --> 00:31:03.476 A:middle
+and you want to integrate
+that with HomeKit.
+
+00:31:04.776 --> 00:31:08.046 A:middle
+You can use a projector or that
+large screen TV that you've got.
+
+00:31:08.466 --> 00:31:10.946 A:middle
+Put it where you expect the
+Fireplace to be in the den
+
+00:31:10.946 --> 00:31:13.236 A:middle
+and you can simulate
+the controls right
+
+00:31:13.236 --> 00:31:14.416 A:middle
+where they are going to be used.
+
+00:31:15.856 --> 00:31:18.536 A:middle
+Maybe you are creating the next
+great Transit app for the Watch
+
+00:31:18.536 --> 00:31:20.076 A:middle
+but you don't have a Watch yet.
+
+00:31:20.516 --> 00:31:23.076 A:middle
+Throw the interface on
+an iPod, bring the iPod
+
+00:31:23.076 --> 00:31:26.146 A:middle
+down into the subway station
+and use it in context.
+
+00:31:26.636 --> 00:31:30.446 A:middle
+Maybe you're making
+the next great drone.
+
+00:31:31.316 --> 00:31:33.856 A:middle
+You can simulate the hardware
+controls on an iPhone,
+
+00:31:34.106 --> 00:31:35.616 A:middle
+strap it to the paper prototype,
+
+00:31:35.616 --> 00:31:39.156 A:middle
+and when you're moving it
+around, you can stream gyroscope
+
+00:31:39.156 --> 00:31:42.476 A:middle
+and accelerometer data back
+as if it's the real hardware.
+
+00:31:46.196 --> 00:31:49.566 A:middle
+So we've got the interactive
+app, the interactive Toaster.
+
+00:31:49.716 --> 00:31:52.226 A:middle
+Now we need to send data across.
+
+00:31:52.286 --> 00:31:56.346 A:middle
+Pick the Toastie from the
+app and send physical states
+
+00:31:56.346 --> 00:32:00.706 A:middle
+across from the Toaster
+back to the app.
+
+
+
+00:31:56.346 --> 00:32:00.706 A:middle
+across from the Toaster
+back to the app.
+
+00:32:00.966 --> 00:32:02.386 A:middle
+What is the best way to do this?
+
+00:32:03.056 --> 00:32:06.576 A:middle
+The best way is whatever is
+easiest and fastest for you.
+
+00:32:06.576 --> 00:32:09.526 A:middle
+We are not designing
+a network API.
+
+00:32:09.526 --> 00:32:11.856 A:middle
+We can let somebody
+else do that later.
+
+00:32:11.856 --> 00:32:13.666 A:middle
+We are not worried
+about efficiency.
+
+00:32:14.216 --> 00:32:16.516 A:middle
+If you're Prototyping
+in the browser,
+
+00:32:17.016 --> 00:32:18.396 A:middle
+maybe you use Web sockets.
+
+00:32:18.976 --> 00:32:22.566 A:middle
+If you've got that drone and
+the phone connected to it,
+
+00:32:22.566 --> 00:32:24.436 A:middle
+you can stream the
+gyroscope data
+
+00:32:24.436 --> 00:32:28.386 A:middle
+with O.S.C. Maybe you
+have a back end server
+
+00:32:28.686 --> 00:32:32.846 A:middle
+and you can use HTTP requests.
+
+00:32:32.876 --> 00:32:34.896 A:middle
+I know that some of you have
+probably never programmed a
+
+00:32:34.896 --> 00:32:35.896 A:middle
+networking layer before.
+
+00:32:36.766 --> 00:32:37.766 A:middle
+So think creatively.
+
+00:32:37.926 --> 00:32:41.596 A:middle
+You can use a service like if
+this then that to observe emails
+
+00:32:41.596 --> 00:32:43.846 A:middle
+that you're sending back and
+forth between the devices
+
+00:32:43.896 --> 00:32:45.016 A:middle
+and take action upon that.
+
+00:32:45.726 --> 00:32:48.216 A:middle
+Maybe you're noticing
+whenever a new photo is added
+
+00:32:48.216 --> 00:32:49.726 A:middle
+to a shared photo stream.
+
+00:32:53.046 --> 00:32:56.566 A:middle
+So we are going to use a
+Multipeer connectivity peer
+
+00:32:56.566 --> 00:32:57.476 A:middle
+to peer connection.
+
+00:32:58.076 --> 00:32:59.686 A:middle
+This is what our network
+is going to look like.
+
+
+
+00:33:00.316 --> 00:33:02.646 A:middle
+We have two iPhones
+connected to an iPad
+
+00:33:02.646 --> 00:33:04.566 A:middle
+and call our network Toast Talk.
+
+00:33:05.236 --> 00:33:07.646 A:middle
+The reason we're using
+Multipeer connectivity,
+
+00:33:07.786 --> 00:33:09.586 A:middle
+it is incredibly easy to set up.
+
+00:33:09.936 --> 00:33:15.316 A:middle
+It doesn't require a server and
+it allows an arbitrary number
+
+00:33:15.316 --> 00:33:16.356 A:middle
+of devices to connect.
+
+00:33:16.816 --> 00:33:19.096 A:middle
+So here is a bit of code.
+
+00:33:19.096 --> 00:33:21.976 A:middle
+I'm going to fly right through
+because we are running short
+
+00:33:21.976 --> 00:33:22.516 A:middle
+on time.
+
+00:33:22.516 --> 00:33:24.316 A:middle
+We are going to create
+a session.
+
+00:33:24.316 --> 00:33:28.726 A:middle
+We are going to name the network
+Toast Talk and take any data
+
+00:33:28.726 --> 00:33:30.806 A:middle
+that comes in and
+convert it to a string.
+
+00:33:31.356 --> 00:33:35.796 A:middle
+We can choose devices with
+this handy class called the MC
+
+00:33:35.796 --> 00:33:37.026 A:middle
+Browser View Controller.
+
+00:33:37.026 --> 00:33:40.096 A:middle
+Super easy to set up.
+
+00:33:40.096 --> 00:33:42.846 A:middle
+You pass the name
+into the constructtor
+
+00:33:43.416 --> 00:33:45.276 A:middle
+and also pass in that session.
+
+00:33:45.936 --> 00:33:49.316 A:middle
+You can present it on a button
+click or when the app launches.
+
+00:33:49.796 --> 00:33:53.816 A:middle
+Then you just dismiss it
+when they've connected.
+
+00:33:53.866 --> 00:33:55.646 A:middle
+What messages should
+we send back and forth?
+
+00:33:56.396 --> 00:33:59.776 A:middle
+The app Prototype wants to tell
+the Toaster the Toasty number
+
+
+
+00:34:00.276 --> 00:34:01.786 A:middle
+and the Toast darkness.
+
+00:34:02.336 --> 00:34:05.786 A:middle
+The Toaster needs to
+send the lever position
+
+00:34:06.016 --> 00:34:09.246 A:middle
+when Toasting began and
+when Toasting ended.
+
+00:34:10.315 --> 00:34:13.545 A:middle
+A little bit of code
+that does that.
+
+00:34:13.795 --> 00:34:16.106 A:middle
+We are just going to
+convert our string to data
+
+00:34:16.106 --> 00:34:17.396 A:middle
+and send that to the session.
+
+00:34:18.636 --> 00:34:21.315 A:middle
+And this is an example of how we
+might send the letter position.
+
+00:34:21.315 --> 00:34:23.676 A:middle
+We are going to say
+we've got our message
+
+00:34:23.735 --> 00:34:24.866 A:middle
+which is lever position.
+
+00:34:25.005 --> 00:34:27.606 A:middle
+Throw a carat in there and
+pass some data along with it.
+
+00:34:27.606 --> 00:34:31.376 A:middle
+This is a totally arbitrary
+format but fast and simple.
+
+00:34:32.315 --> 00:34:34.856 A:middle
+We will split the incoming
+messages on that carat
+
+00:34:35.326 --> 00:34:38.985 A:middle
+and switch overall the message
+names and pass the data off
+
+00:34:39.036 --> 00:34:40.436 A:middle
+to whatever function
+is appropriate.
+
+00:34:41.815 --> 00:34:45.096 A:middle
+This allows us this really
+cool dynamic relationship
+
+00:34:45.096 --> 00:34:46.556 A:middle
+between our Toaster and our app.
+
+00:34:47.356 --> 00:34:49.866 A:middle
+You can see as I drag the
+digital lever up and down,
+
+00:34:50.426 --> 00:34:54.045 A:middle
+that's reflected in the app.
+
+00:34:54.306 --> 00:34:55.085 A:middle
+That's pretty great.
+
+00:34:55.085 --> 00:34:56.085 A:middle
+We've closed the loop.
+
+00:34:56.525 --> 00:34:58.456 A:middle
+We have interactive
+apps and Toasters.
+
+00:34:59.636 --> 00:35:00.436 A:middle
+The world is good.
+
+
+
+00:34:59.636 --> 00:35:00.436 A:middle
+The world is good.
+
+00:35:00.866 --> 00:35:03.946 A:middle
+Let's give this to our friends,
+let them try it in context
+
+00:35:04.396 --> 00:35:05.746 A:middle
+and see what they think.
+
+00:35:06.516 --> 00:35:29.136 A:middle
+[ Music and Applause ]
+
+00:35:29.636 --> 00:35:32.116 A:middle
+&gt;&gt; BILL LINDMEIER: So
+Toastal Service is shaping up
+
+00:35:33.726 --> 00:35:36.076 A:middle
+and starting to feel
+real and we haven't done
+
+00:35:36.076 --> 00:35:36.946 A:middle
+that much engineering.
+
+00:35:38.536 --> 00:35:39.766 A:middle
+Let's learn from the feedback.
+
+00:35:40.646 --> 00:35:41.376 A:middle
+What is working?
+
+00:35:41.376 --> 00:35:43.806 A:middle
+Clearly we can pick
+messages from the inbox
+
+00:35:43.806 --> 00:35:45.236 A:middle
+and send them to the Toaster.
+
+00:35:45.476 --> 00:35:47.506 A:middle
+That's a fundamental
+part of this experience.
+
+00:35:48.886 --> 00:35:49.766 A:middle
+What is not working?
+
+00:35:49.766 --> 00:35:52.496 A:middle
+Our friends told us
+it's a little odd
+
+00:35:52.496 --> 00:35:54.386 A:middle
+that there's no visual
+feedback from the Toaster
+
+00:35:54.386 --> 00:35:57.556 A:middle
+when you select the color
+from the color slider.
+
+00:35:58.206 --> 00:35:59.366 A:middle
+Maybe in the next round
+
+00:35:59.366 --> 00:36:04.896 A:middle
+of Prototyping iteration we
+adjust the color of the LEDs
+
+
+
+00:35:59.366 --> 00:36:04.896 A:middle
+of Prototyping iteration we
+adjust the color of the LEDs
+
+00:36:04.896 --> 00:36:08.056 A:middle
+on that matrix to reflect that
+the data is being sent over
+
+00:36:08.436 --> 00:36:11.646 A:middle
+and the color is
+being remembered.
+
+00:36:12.256 --> 00:36:16.176 A:middle
+So with that, I would like to
+invite Jeff back up to the stage
+
+00:36:16.176 --> 00:36:17.416 A:middle
+and he can wrap it up for us.
+
+00:36:17.576 --> 00:36:17.906 A:middle
+Thank you.
+
+00:36:18.516 --> 00:36:21.546 A:middle
+[ Applause ]
+
+00:36:22.046 --> 00:36:24.066 A:middle
+&gt;&gt; JEFFREY TRAER
+BERNSTEIN: Thank you, Bill.
+
+00:36:24.066 --> 00:36:25.916 A:middle
+Thanks for taking so much time
+
+00:36:26.006 --> 00:36:28.416 A:middle
+on that last sentence,
+all right.
+
+00:36:28.496 --> 00:36:30.166 A:middle
+Quick recap for everybody.
+
+00:36:30.776 --> 00:36:33.046 A:middle
+We Prototyped using
+pictures and animation
+
+00:36:33.466 --> 00:36:35.526 A:middle
+so we could quickly
+see different inputs
+
+00:36:35.526 --> 00:36:36.656 A:middle
+and outputs for the Toaster.
+
+00:36:37.176 --> 00:36:39.096 A:middle
+We showed you the behind
+the curtain technique
+
+00:36:39.916 --> 00:36:42.326 A:middle
+to see how the app and
+the device work together.
+
+00:36:43.166 --> 00:36:45.416 A:middle
+Then we created a
+lightweight interactive
+
+00:36:45.416 --> 00:36:46.466 A:middle
+and connective Prototype
+
+00:36:47.186 --> 00:36:49.746 A:middle
+so we could try the entire
+end-to-end experience.
+
+00:36:51.126 --> 00:36:53.416 A:middle
+Along the way we learned a
+few things about our Toaster.
+
+00:36:54.626 --> 00:36:56.456 A:middle
+We don't need a darkness
+setting on the Toaster
+
+00:36:56.456 --> 00:36:57.916 A:middle
+where most Toasters have that.
+
+00:36:59.036 --> 00:37:00.896 A:middle
+We need a number
+display on the Toaster.
+
+
+
+00:36:59.036 --> 00:37:00.896 A:middle
+We need a number
+display on the Toaster.
+
+00:37:01.616 --> 00:37:03.656 A:middle
+We need a sensor on
+the digital lever
+
+00:37:03.656 --> 00:37:04.946 A:middle
+to communicate back to the app.
+
+00:37:05.586 --> 00:37:08.786 A:middle
+We figured all of this
+out really, really fast.
+
+00:37:10.336 --> 00:37:11.906 A:middle
+Look at all the time
+and money we saved.
+
+00:37:12.136 --> 00:37:14.946 A:middle
+Imagine that we had to build
+a real Toaster to learn all
+
+00:37:14.946 --> 00:37:18.846 A:middle
+of these things and we got
+really cool ideas along the way.
+
+00:37:19.816 --> 00:37:21.246 A:middle
+So all of that reminds me:
+
+00:37:21.606 --> 00:37:23.736 A:middle
+There are two important
+reasons to Prototype.
+
+00:37:24.476 --> 00:37:26.876 A:middle
+Number one is to test
+ideas to save time
+
+00:37:26.876 --> 00:37:29.016 A:middle
+and money building the
+right things for your app.
+
+00:37:30.256 --> 00:37:32.506 A:middle
+Number two is to get new
+ideas to make the experience
+
+00:37:32.506 --> 00:37:33.646 A:middle
+of your product even better.
+
+00:37:34.246 --> 00:37:35.276 A:middle
+How do we do it?
+
+00:37:35.476 --> 00:37:36.416 A:middle
+We make fake things.
+
+00:37:36.906 --> 00:37:39.386 A:middle
+We show people and learn
+from their feedback.
+
+00:37:39.896 --> 00:37:44.506 A:middle
+And we do it over and over again
+until our product is incredible.
+
+00:37:46.546 --> 00:37:48.736 A:middle
+So here is what we would like
+you to go and do after this.
+
+00:37:49.776 --> 00:37:51.826 A:middle
+If you are creating a
+thing connected to an app,
+
+00:37:51.976 --> 00:37:53.906 A:middle
+for the thing, fake
+it on a screen.
+
+00:37:54.626 --> 00:37:55.316 A:middle
+In context.
+
+00:37:56.046 --> 00:37:59.616 A:middle
+For your app, fake it
+with pictures in context
+
+
+
+00:38:00.106 --> 00:38:03.636 A:middle
+and for the connection between
+the two, just tap through both.
+
+00:38:04.576 --> 00:38:07.116 A:middle
+Or use the behind the curtain
+technique or behind the sofa.
+
+00:38:08.886 --> 00:38:11.196 A:middle
+And maybe create a
+lightweight network prototype.
+
+00:38:12.096 --> 00:38:13.716 A:middle
+If you just don't
+have the device,
+
+00:38:14.556 --> 00:38:16.066 A:middle
+especially perhaps
+the next thing
+
+00:38:16.066 --> 00:38:18.956 A:middle
+that we unveil, don't wait.
+
+00:38:19.236 --> 00:38:21.236 A:middle
+Fake it on a screen, in context.
+
+00:38:21.236 --> 00:38:24.456 A:middle
+Here is some stuff
+about more information.
+
+00:38:25.346 --> 00:38:26.666 A:middle
+There are related sessions.
+
+00:38:27.566 --> 00:38:31.336 A:middle
+Most importantly, tomorrow
+Designing with Animation.
+
+00:38:31.806 --> 00:38:34.776 A:middle
+Some of our teammates at
+3:30 in this very room.
+
+00:38:35.216 --> 00:38:36.706 A:middle
+I think you'll find
+it very useful.
+
+00:38:36.956 --> 00:38:37.976 A:middle
+Thank you very much, everybody!
+
+00:38:38.516 --> 00:38:41.500 A:middle
+[ Applause ]
+
