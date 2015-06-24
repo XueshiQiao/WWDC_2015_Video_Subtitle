@@ -1,0 +1,2796 @@
+
+00:00:22.016 --> 00:00:23.256 A:middle
+[ Applause ]
+
+00:00:23.256 --> 00:00:23.636 A:middle
+&gt;&gt; JOSH SHAFFER: All right.
+
+00:00:24.046 --> 00:00:24.506 A:middle
+Good morning.
+
+00:00:25.036 --> 00:00:27.746 A:middle
+Thank you for coming out this
+morning to learn what's new
+
+00:00:27.746 --> 00:00:29.706 A:middle
+in WatchKit and watchOS 2.
+
+00:00:30.476 --> 00:00:32.686 A:middle
+We've got a lot of great stuff
+to talk about this morning.
+
+00:00:33.436 --> 00:00:36.496 A:middle
+Of course WatchKit will be
+the biggest part of the topic,
+
+00:00:36.766 --> 00:00:37.846 A:middle
+What's New in WatchKit,
+after all.
+
+00:00:38.806 --> 00:00:43.246 A:middle
+WatchKit is now one part of
+the overall watchOS platform.
+
+00:00:43.676 --> 00:00:45.476 A:middle
+There's a whole bunch
+of other frameworks.
+
+00:00:45.886 --> 00:00:47.186 A:middle
+Many of which you're
+already familiar
+
+00:00:47.186 --> 00:00:50.386 A:middle
+with in building your iOS apps,
+but there's a few new ones
+
+00:00:50.386 --> 00:00:53.546 A:middle
+that are specific to
+watchOS that provide features
+
+00:00:53.546 --> 00:00:54.996 A:middle
+that are unique to Apple Watch.
+
+00:00:55.606 --> 00:00:58.306 A:middle
+We're going to talk through all
+of those new things and some
+
+00:00:58.306 --> 00:00:59.306 A:middle
+of the ones you're
+already familiar
+
+00:00:59.306 --> 00:01:02.326 A:middle
+with to cover what's new in
+those specifically in watchOS.
+
+
+
+00:00:59.306 --> 00:01:02.326 A:middle
+with to cover what's new in
+those specifically in watchOS.
+
+00:01:03.166 --> 00:01:07.746 A:middle
+That's going to be watchOS 2.
+
+00:01:08.976 --> 00:01:11.266 A:middle
+First let's talk a little
+bit about architecture.
+
+00:01:12.886 --> 00:01:16.436 A:middle
+So you're already familiar with
+watchOS apps for watchOS 1.
+
+00:01:17.166 --> 00:01:19.626 A:middle
+The way that works was
+you had a user interface
+
+00:01:19.626 --> 00:01:21.596 A:middle
+on both your iPhone
+and Apple Watch.
+
+00:01:22.086 --> 00:01:24.826 A:middle
+So you have an iPhone app,
+
+00:01:24.926 --> 00:01:27.976 A:middle
+and inside of your iPhone app is
+an Apple Watch that's packaged
+
+00:01:27.976 --> 00:01:29.636 A:middle
+as part of that Apple Watch app.
+
+00:01:30.186 --> 00:01:33.776 A:middle
+The UI, your storyboards,
+your resources,
+
+00:01:34.176 --> 00:01:36.436 A:middle
+those exist on Apple Watch
+and are installed there,
+
+00:01:36.856 --> 00:01:38.336 A:middle
+but your app extension
+runs on iPhone.
+
+00:01:39.046 --> 00:01:43.186 A:middle
+The big change with watchOS 2
+is that that app extension moves
+
+00:01:43.186 --> 00:01:45.256 A:middle
+over and runs natively
+on Apple Watch itself.
+
+00:01:47.536 --> 00:01:50.556 A:middle
+This gives you a few really
+great benefits for your users,
+
+00:01:51.016 --> 00:01:53.396 A:middle
+the first of course is that
+now that the user interface
+
+00:01:53.396 --> 00:01:55.196 A:middle
+and the back-end code is running
+
+00:01:55.196 --> 00:01:58.316 A:middle
+on the same device you can
+provide much lower interaction
+
+00:01:58.316 --> 00:02:01.806 A:middle
+latencies making your apps far
+more responsive for your users.
+
+
+
+00:01:58.316 --> 00:02:01.806 A:middle
+latencies making your apps far
+more responsive for your users.
+
+00:02:03.116 --> 00:02:05.516 A:middle
+Of course this also enables
+some really great new things
+
+00:02:06.086 --> 00:02:08.346 A:middle
+like running your app when
+the iPhone is not present.
+
+00:02:09.545 --> 00:02:12.426 A:middle
+In order to make sure that that
+can happen efficiently you need
+
+00:02:12.426 --> 00:02:14.176 A:middle
+to take some time
+and figure out how
+
+00:02:14.176 --> 00:02:16.926 A:middle
+to move your application
+logic into the app extension.
+
+00:02:18.076 --> 00:02:19.946 A:middle
+If in watchOS 1 you
+were spending a bunch
+
+00:02:19.946 --> 00:02:23.726 A:middle
+of time using open parent
+application to run code
+
+00:02:23.726 --> 00:02:26.396 A:middle
+in your iPhone app you want
+to try and refactor that logic
+
+00:02:26.396 --> 00:02:27.976 A:middle
+and move it in the
+extension yourself.
+
+00:02:29.176 --> 00:02:30.426 A:middle
+The more code you can get
+
+00:02:30.426 --> 00:02:33.306 A:middle
+in the app extension the more
+standalone functionality you can
+
+00:02:33.306 --> 00:02:35.546 A:middle
+provide when the
+iPhone is not present.
+
+00:02:36.616 --> 00:02:37.686 A:middle
+Of course the other big part
+
+00:02:37.686 --> 00:02:39.506 A:middle
+about stand-alone
+functionality is
+
+00:02:39.506 --> 00:02:43.156 A:middle
+that Apple Watch can access the
+network using tether-less Wi-Fi
+
+00:02:43.726 --> 00:02:46.636 A:middle
+so your applications can
+get data off of HTTP servers
+
+00:02:46.636 --> 00:02:48.736 A:middle
+on the internet even when
+the iPhone is not present.
+
+00:02:49.656 --> 00:02:52.906 A:middle
+If you're used to using NSURL
+Session in your iOS apps,
+
+00:02:53.306 --> 00:02:54.976 A:middle
+you already know how to
+take advantage of this.
+
+00:02:55.286 --> 00:02:56.396 A:middle
+We'll talk more about
+that later.
+
+00:02:57.146 --> 00:02:58.716 A:middle
+But first let's talk
+about what's new
+
+00:02:59.016 --> 00:03:00.306 A:middle
+in the WatchKit framework
+itself.
+
+
+
+00:02:59.016 --> 00:03:00.306 A:middle
+in the WatchKit framework
+itself.
+
+00:03:00.976 --> 00:03:04.086 A:middle
+In addition to the big change of
+moving the code to run natively
+
+00:03:04.086 --> 00:03:06.736 A:middle
+on Apple Watch, we've also
+added a whole bunch of new stuff
+
+00:03:06.736 --> 00:03:10.576 A:middle
+into WatchKit to help you build
+even cooler apps with watchOS 2.
+
+00:03:11.646 --> 00:03:13.026 A:middle
+To give you an idea of
+some of those things,
+
+00:03:13.026 --> 00:03:14.876 A:middle
+we've got a list here of
+some of what we're going
+
+00:03:14.876 --> 00:03:17.526 A:middle
+to cover right now, we have
+the digital crown support,
+
+00:03:17.526 --> 00:03:18.506 A:middle
+layout and animations.
+
+00:03:18.746 --> 00:03:21.296 A:middle
+A bunch of great stuff, so we'll
+go through all of these now.
+
+00:03:21.676 --> 00:03:23.516 A:middle
+First off let's talk
+about the Digital Crown,
+
+00:03:24.056 --> 00:03:26.726 A:middle
+this is the really unique
+interaction mechanisms specific
+
+00:03:26.726 --> 00:03:30.736 A:middle
+to Apple Watch and you can
+access this using a simple new
+
+00:03:30.736 --> 00:03:32.246 A:middle
+control that you can put
+
+00:03:32.246 --> 00:03:34.996 A:middle
+into your storyboards
+called wk interface picker.
+
+00:03:36.236 --> 00:03:39.926 A:middle
+The picker control is a
+control that lets you scroll
+
+00:03:39.926 --> 00:03:42.426 A:middle
+through a list of elements
+using the digital crown
+
+00:03:42.756 --> 00:03:43.416 A:middle
+and choose one.
+
+00:03:44.186 --> 00:03:45.986 A:middle
+It has three different styles.
+
+00:03:46.546 --> 00:03:47.526 A:middle
+We'll talk through
+each of those.
+
+00:03:47.616 --> 00:03:50.216 A:middle
+The first is the list style
+that you can see here.
+
+00:03:50.856 --> 00:03:53.156 A:middle
+If you're familiar with
+configuring complications
+
+00:03:53.156 --> 00:03:55.466 A:middle
+on the watch face you already
+know what this looks like.
+
+00:03:55.466 --> 00:03:59.926 A:middle
+It is a list of items and it can
+have the optional focus outline
+
+00:03:59.926 --> 00:04:02.286 A:middle
+around it and a caption
+up at the top
+
+
+
+00:03:59.926 --> 00:04:02.286 A:middle
+around it and a caption
+up at the top
+
+00:04:02.486 --> 00:04:04.816 A:middle
+that can give you more detail
+about the selected item
+
+00:04:04.816 --> 00:04:06.356 A:middle
+in case it is not obvious
+
+00:04:06.356 --> 00:04:08.586 A:middle
+from the item itself
+exactly what it means.
+
+00:04:10.076 --> 00:04:11.576 A:middle
+You can choose to
+hide or show either
+
+00:04:11.576 --> 00:04:12.916 A:middle
+of those user interface
+elements.
+
+00:04:13.386 --> 00:04:15.186 A:middle
+If you have multiple
+pickers onscreen
+
+00:04:15.186 --> 00:04:18.255 A:middle
+at the same time you probably
+want to show the focus outline
+
+00:04:18.466 --> 00:04:19.565 A:middle
+to make it clear to the user
+
+00:04:19.565 --> 00:04:22.116 A:middle
+when they turn the crown what's
+going to end up happening.
+
+00:04:23.346 --> 00:04:27.876 A:middle
+The second style
+is the stack style.
+
+00:04:28.926 --> 00:04:32.526 A:middle
+The stack style provides
+you with a list of images
+
+00:04:32.656 --> 00:04:34.606 A:middle
+that your user can scroll
+through and pick one.
+
+00:04:34.946 --> 00:04:37.106 A:middle
+It has this really nice
+transition automation
+
+00:04:37.106 --> 00:04:39.866 A:middle
+up while the other fades back.
+
+00:04:39.866 --> 00:04:42.256 A:middle
+Any content that you might
+want to allow them to choose
+
+00:04:42.256 --> 00:04:44.636 A:middle
+from that you can represent
+graphically you can use the
+
+00:04:44.636 --> 00:04:45.556 A:middle
+stack style for.
+
+00:04:45.846 --> 00:04:46.856 A:middle
+It looks really nice.
+
+00:04:47.776 --> 00:04:49.936 A:middle
+The third style is
+the image sequence.
+
+00:04:50.876 --> 00:04:53.886 A:middle
+The image sequence style lets
+you scroll through a list
+
+00:04:53.886 --> 00:04:57.476 A:middle
+of images but without any
+transitions between them.
+
+00:04:57.476 --> 00:04:59.746 A:middle
+If you have something that looks
+really natural as you just move
+
+00:04:59.746 --> 00:05:02.096 A:middle
+from one frame to the
+next, you can use this one
+
+
+
+00:04:59.746 --> 00:05:02.096 A:middle
+from one frame to the
+next, you can use this one
+
+00:05:02.166 --> 00:05:03.726 A:middle
+and you'll get a
+nice way to pick
+
+00:05:03.946 --> 00:05:05.516 A:middle
+which image you want
+to be able to use.
+
+00:05:05.886 --> 00:05:09.076 A:middle
+You can also see here
+in the top right corner
+
+00:05:09.446 --> 00:05:11.056 A:middle
+that we have a scroll
+indicator in this one.
+
+00:05:11.686 --> 00:05:14.556 A:middle
+That's an optional user
+interface element to put on any
+
+00:05:14.556 --> 00:05:15.776 A:middle
+of the three different styles.
+
+00:05:16.716 --> 00:05:19.036 A:middle
+You would want to use this in
+cases where it is not obvious
+
+00:05:19.036 --> 00:05:22.136 A:middle
+from the content exactly
+where the user is in the list
+
+00:05:22.136 --> 00:05:23.736 A:middle
+of content or how
+many things there are.
+
+00:05:24.296 --> 00:05:26.636 A:middle
+For example, if you're letting
+the user choose from a day --
+
+00:05:26.746 --> 00:05:28.906 A:middle
+from an hour out of the day,
+
+00:05:29.456 --> 00:05:31.606 A:middle
+you probably don't need
+the scroll indicator
+
+00:05:31.866 --> 00:05:34.276 A:middle
+because the users likely
+know how many hours there are
+
+00:05:34.276 --> 00:05:36.156 A:middle
+in a day and they can figure
+out where they are in the list.
+
+00:05:36.486 --> 00:05:37.906 A:middle
+If you're doing something else
+
+00:05:37.906 --> 00:05:39.756 A:middle
+where it's not self-evident
+how many things there are,
+
+00:05:39.856 --> 00:05:42.726 A:middle
+like choosing from emoji, you
+might want to show the indicator
+
+00:05:42.726 --> 00:05:44.566 A:middle
+so that they have some
+context of where they are
+
+00:05:44.566 --> 00:05:47.976 A:middle
+and how many options they have.
+
+00:05:48.186 --> 00:05:49.976 A:middle
+Now, in addition to
+these three styles,
+
+00:05:49.976 --> 00:05:53.276 A:middle
+there is actually another
+great feature of picker control
+
+00:05:53.276 --> 00:05:55.796 A:middle
+that gives you even more
+flexibility in how this works
+
+00:05:55.796 --> 00:05:56.856 A:middle
+in your user interfaces.
+
+00:05:57.326 --> 00:05:59.276 A:middle
+That's called coordinated
+images.
+
+00:05:59.876 --> 00:06:01.416 A:middle
+The really cool thing
+about this,
+
+
+
+00:05:59.876 --> 00:06:01.416 A:middle
+The really cool thing
+about this,
+
+00:06:01.416 --> 00:06:03.746 A:middle
+you can take an animated
+image that you may have set
+
+00:06:03.746 --> 00:06:06.416 A:middle
+on some other interface element,
+like the background of a group,
+
+00:06:06.796 --> 00:06:10.496 A:middle
+or some wk interface image and
+you can set it to be coordinated
+
+00:06:10.696 --> 00:06:12.076 A:middle
+with the picker control itself.
+
+00:06:12.626 --> 00:06:13.956 A:middle
+This way as the user scrubs
+
+00:06:14.026 --> 00:06:17.906 A:middle
+through we'll adjust the frame
+offset in the animated image
+
+00:06:18.086 --> 00:06:20.866 A:middle
+to match the relative offset
+in the items in the list.
+
+00:06:21.346 --> 00:06:22.846 A:middle
+That will let you
+build user interfaces
+
+00:06:22.846 --> 00:06:23.996 A:middle
+that look something like this.
+
+00:06:24.686 --> 00:06:26.716 A:middle
+As the user goes through,
+picks which minute,
+
+00:06:26.716 --> 00:06:29.326 A:middle
+you have a coordinated image in
+the back that's filling a ring.
+
+00:06:30.146 --> 00:06:32.876 A:middle
+The combination of the different
+styles lets you get some really
+
+00:06:32.876 --> 00:06:35.246 A:middle
+interesting, unique
+interfaces all controlled
+
+00:06:35.246 --> 00:06:36.136 A:middle
+by the Digital Crown.
+
+00:06:36.646 --> 00:06:40.056 A:middle
+Next up, let's talk about
+animations and layout.
+
+00:06:40.946 --> 00:06:43.786 A:middle
+So as you know, you build your
+user interfaces for watchOS
+
+00:06:44.116 --> 00:06:45.506 A:middle
+in storyboards in Xcode.
+
+00:06:47.556 --> 00:06:51.036 A:middle
+In Xcode you have a whole bunch
+of different options you can set
+
+00:06:51.036 --> 00:06:53.086 A:middle
+on the different interface
+elements in your storyboard.
+
+00:06:53.806 --> 00:06:56.126 A:middle
+Now, in watchOS 1 there
+were a lot of these
+
+00:06:56.126 --> 00:06:57.466 A:middle
+that you could change
+programmatically
+
+00:06:57.546 --> 00:06:59.696 A:middle
+but some could only be set
+within the storyboard itself.
+
+
+
+00:07:00.336 --> 00:07:02.716 A:middle
+In watchOS 2 we have gone
+through and enhanced this
+
+00:07:02.836 --> 00:07:04.546 A:middle
+to add setters for
+all of the items
+
+00:07:04.636 --> 00:07:06.366 A:middle
+that were previously
+only settable
+
+00:07:06.366 --> 00:07:08.356 A:middle
+in Xcode at design time.
+
+00:07:09.096 --> 00:07:11.806 A:middle
+This lets you change a lot of
+stuff in the program at runtime
+
+00:07:11.806 --> 00:07:13.296 A:middle
+that previously had
+to be static.
+
+00:07:14.326 --> 00:07:18.576 A:middle
+In addition we have added a new
+animation API called animate
+
+00:07:18.576 --> 00:07:21.396 A:middle
+with duration that lets
+you pass in a block
+
+00:07:21.646 --> 00:07:23.256 A:middle
+that can include changes
+that you may have set
+
+00:07:23.296 --> 00:07:24.346 A:middle
+to your interface elements.
+
+00:07:24.806 --> 00:07:27.076 A:middle
+Anything that you change within
+that block will get animated.
+
+00:07:27.366 --> 00:07:29.976 A:middle
+If you're familiar with UI kits
+animation API you'll be right
+
+00:07:29.976 --> 00:07:30.766 A:middle
+at home with this one.
+
+00:07:31.456 --> 00:07:34.416 A:middle
+It lets you build a lot of cool,
+
+00:07:34.416 --> 00:07:36.766 A:middle
+smoother interfaces
+with animation.
+
+00:07:37.466 --> 00:07:38.776 A:middle
+Now, there is so much
+to talk about with
+
+00:07:38.776 --> 00:07:41.216 A:middle
+that that there is an entire
+session covering layout
+
+00:07:41.216 --> 00:07:42.756 A:middle
+and animation techniques
+for WatchKit,
+
+00:07:42.756 --> 00:07:44.326 A:middle
+so you should definitely
+go check that out.
+
+00:07:45.076 --> 00:07:46.846 A:middle
+There is a lot of things
+that may not be self-evident
+
+00:07:46.846 --> 00:07:49.346 A:middle
+and cool tricks and
+tips to use these APIs
+
+00:07:49.716 --> 00:07:50.926 A:middle
+to get some really cool effects.
+
+00:07:50.926 --> 00:07:52.756 A:middle
+So if you come check that
+out there will be a lot
+
+00:07:52.756 --> 00:07:53.556 A:middle
+of great stuff to see.
+
+00:07:54.026 --> 00:07:56.986 A:middle
+Next up, let's talk
+about Taptic Engine,
+
+00:07:57.646 --> 00:08:00.646 A:middle
+this is another really
+unique element on Apple Watch
+
+
+
+00:07:57.646 --> 00:08:00.646 A:middle
+this is another really
+unique element on Apple Watch
+
+00:08:00.846 --> 00:08:02.776 A:middle
+that lets you get
+information to your users
+
+00:08:02.996 --> 00:08:05.746 A:middle
+without actually having to have
+them read it off the screen.
+
+00:08:05.746 --> 00:08:06.736 A:middle
+It is really great.
+
+00:08:07.156 --> 00:08:10.166 A:middle
+The cool thing about Taptic
+Engine is your users will come
+
+00:08:10.166 --> 00:08:13.796 A:middle
+to know the feeling and
+sound of individual haptics
+
+00:08:14.086 --> 00:08:17.026 A:middle
+and what those things mean in
+the context of applications.
+
+00:08:17.696 --> 00:08:19.126 A:middle
+We have a great API
+that is simple
+
+00:08:19.126 --> 00:08:22.496 A:middle
+that lets you just play
+haptics on wk interface device,
+
+00:08:22.496 --> 00:08:24.366 A:middle
+you just call play
+haptic, and there's a list
+
+00:08:24.366 --> 00:08:26.746 A:middle
+of different styles
+you can choose from.
+
+00:08:26.776 --> 00:08:29.416 A:middle
+Each of these as I mentioned
+has a particular intended use
+
+00:08:29.416 --> 00:08:31.936 A:middle
+and your users will come
+to know what they mean
+
+00:08:32.176 --> 00:08:34.176 A:middle
+because the intent is
+to deliver information
+
+00:08:34.426 --> 00:08:35.866 A:middle
+without them having
+to read anything.
+
+00:08:36.316 --> 00:08:38.476 A:middle
+You want to make sure that
+you use these consistently
+
+00:08:38.775 --> 00:08:40.376 A:middle
+and they're named in such
+a way to help you figure
+
+00:08:40.376 --> 00:08:42.096 A:middle
+out how they should be used.
+
+00:08:42.496 --> 00:08:44.746 A:middle
+There is also really clear
+documentation in the docs
+
+00:08:44.746 --> 00:08:47.196 A:middle
+about the intended use of
+each and they're covered
+
+00:08:47.196 --> 00:08:49.436 A:middle
+in more depth in the
+designing Apple Watch session.
+
+00:08:49.856 --> 00:08:51.496 A:middle
+So definitely check those
+things out if you're going
+
+00:08:51.496 --> 00:08:52.506 A:middle
+to use haptics in your app
+
+00:08:52.846 --> 00:08:54.406 A:middle
+and make sure you
+use them consistently
+
+00:08:54.476 --> 00:08:56.446 A:middle
+so that your users will
+understand what's happening
+
+00:08:56.446 --> 00:08:58.206 A:middle
+without having to
+look at the screen.
+
+00:08:58.746 --> 00:09:03.916 A:middle
+There is also a few other
+pieces of hardware we wanted
+
+
+
+00:08:58.746 --> 00:09:03.916 A:middle
+There is also a few other
+pieces of hardware we wanted
+
+00:09:03.916 --> 00:09:05.466 A:middle
+to enable access
+to with WatchKit.
+
+00:09:05.966 --> 00:09:07.496 A:middle
+The first is the microphone.
+
+00:09:08.396 --> 00:09:11.186 A:middle
+So we've got a new API in
+watchOS 2 that lets you bring
+
+00:09:11.186 --> 00:09:14.926 A:middle
+up this recording sheet, record
+any audio that's going on,
+
+00:09:15.336 --> 00:09:18.326 A:middle
+play it back before
+the user acts on it,
+
+00:09:18.326 --> 00:09:19.766 A:middle
+and then ultimately act
+
+00:09:20.026 --> 00:09:21.516 A:middle
+by tapping the button
+in the top right.
+
+00:09:23.206 --> 00:09:25.766 A:middle
+So the button in the top
+right can be named based
+
+00:09:25.766 --> 00:09:28.576 A:middle
+on whatever is appropriate for
+your application's context.
+
+00:09:28.926 --> 00:09:30.096 A:middle
+In this case I call it "send"
+
+00:09:30.096 --> 00:09:31.836 A:middle
+because I'm assuming I
+might send a message.
+
+00:09:32.196 --> 00:09:33.566 A:middle
+But you might also
+have it be "save"
+
+00:09:33.566 --> 00:09:35.276 A:middle
+if you were doing something
+like a voice memo app.
+
+00:09:36.716 --> 00:09:37.676 A:middle
+It's really simple.
+
+00:09:37.676 --> 00:09:40.176 A:middle
+It records to a file and when
+the user hits the confirmation
+
+00:09:40.176 --> 00:09:43.006 A:middle
+button you'll be handed
+the file back to act on it
+
+00:09:43.006 --> 00:09:45.196 A:middle
+as whatever way is appropriate
+for your application.
+
+00:09:46.396 --> 00:09:48.746 A:middle
+Of course, in addition to
+the microphone, we also want
+
+00:09:48.746 --> 00:09:50.026 A:middle
+to enable access to the speaker.
+
+00:09:50.026 --> 00:09:53.046 A:middle
+We have done that in a way
+that lets you play back audio
+
+00:09:53.046 --> 00:09:55.116 A:middle
+and video content in
+your applications.
+
+00:09:55.856 --> 00:09:58.616 A:middle
+There is three APIs that
+enable this in different ways.
+
+00:09:59.286 --> 00:10:02.286 A:middle
+The first one is a new
+interface object called wk
+
+
+
+00:09:59.286 --> 00:10:02.286 A:middle
+The first one is a new
+interface object called wk
+
+00:10:02.286 --> 00:10:03.266 A:middle
+interface movie.
+
+00:10:04.446 --> 00:10:06.926 A:middle
+This element lets you get a
+really standard appearance
+
+00:10:07.176 --> 00:10:10.226 A:middle
+for what it would look like in
+your app to see a video file
+
+00:10:10.226 --> 00:10:11.046 A:middle
+and start its playback.
+
+00:10:11.726 --> 00:10:13.516 A:middle
+In this case you see
+I have two onscreen.
+
+00:10:13.846 --> 00:10:15.056 A:middle
+You provide a poster image,
+
+00:10:15.406 --> 00:10:17.446 A:middle
+a URL where your
+content is located,
+
+00:10:17.776 --> 00:10:19.176 A:middle
+and WatchKit handles
+playback for you.
+
+00:10:19.646 --> 00:10:21.316 A:middle
+That URL can be a local file
+
+00:10:21.316 --> 00:10:23.186 A:middle
+if you've already gotten
+the content onto the watch
+
+00:10:23.386 --> 00:10:26.626 A:middle
+or it can be a remote HTTP URL
+if it is not already local.
+
+00:10:27.096 --> 00:10:28.876 A:middle
+If you provide a
+remote resource,
+
+00:10:29.116 --> 00:10:31.466 A:middle
+WatchKit will handle
+downloading it, showing progress
+
+00:10:31.606 --> 00:10:33.966 A:middle
+and then ultimately playing once
+the resource was downloaded.
+
+00:10:34.466 --> 00:10:36.906 A:middle
+If it's local, playback
+will start really quickly.
+
+00:10:38.306 --> 00:10:40.406 A:middle
+When the user taps on the
+play button they're going
+
+00:10:40.406 --> 00:10:43.316 A:middle
+to be presented with a great
+full-screen view of that video
+
+00:10:43.586 --> 00:10:45.746 A:middle
+and it's going to play back
+taking up the whole screen
+
+00:10:46.096 --> 00:10:48.986 A:middle
+with playback controls that fade
+out right away to give access
+
+00:10:49.066 --> 00:10:50.936 A:middle
+to quick view into
+the full content.
+
+00:10:53.516 --> 00:10:56.066 A:middle
+Additionally, if you want to
+start playback some way other
+
+00:10:56.066 --> 00:10:58.756 A:middle
+than the standard interface
+element there is also an API
+
+00:10:58.756 --> 00:11:00.826 A:middle
+that lets you just present
+that controller directly
+
+
+
+00:10:58.756 --> 00:11:00.826 A:middle
+that lets you just present
+that controller directly
+
+00:11:00.826 --> 00:11:01.976 A:middle
+from some other interaction.
+
+00:11:05.056 --> 00:11:08.456 A:middle
+These APIs play video and
+audio content and they're best
+
+00:11:08.456 --> 00:11:10.026 A:middle
+for playing back short content.
+
+00:11:10.396 --> 00:11:12.776 A:middle
+The watch is designed
+for short interaction.
+
+00:11:13.546 --> 00:11:14.326 A:middle
+So the best kind of content
+
+00:11:14.326 --> 00:11:17.076 A:middle
+to play here is something that's
+not going to be very long.
+
+00:11:17.286 --> 00:11:19.466 A:middle
+You probably don't want to
+be playing a two-hour movie
+
+00:11:19.676 --> 00:11:22.956 A:middle
+on Apple Watch this way.
+
+00:11:23.056 --> 00:11:25.896 A:middle
+Sometimes there are some types
+of audio content that are longer
+
+00:11:25.896 --> 00:11:26.856 A:middle
+that you do want to play back.
+
+00:11:27.286 --> 00:11:30.016 A:middle
+If you're writing something
+like a podcasting application,
+
+00:11:30.266 --> 00:11:33.366 A:middle
+you might want to download some
+podcasts and then go for a run,
+
+00:11:33.366 --> 00:11:35.186 A:middle
+listen to them on your
+Bluetooth headphones.
+
+00:11:35.686 --> 00:11:38.086 A:middle
+We've got another API
+that is really great
+
+00:11:38.086 --> 00:11:40.116 A:middle
+for playing back
+this long-form audio.
+
+00:11:40.826 --> 00:11:43.826 A:middle
+If you're familiar with the AV
+foundation APIs you know how
+
+00:11:43.826 --> 00:11:44.406 A:middle
+to use these.
+
+00:11:44.446 --> 00:11:45.616 A:middle
+They're very, very similar.
+
+00:11:46.486 --> 00:11:49.396 A:middle
+The one difference between
+this and the AV foundation APIs
+
+00:11:49.396 --> 00:11:52.956 A:middle
+that you might know from
+iOS is that in order
+
+00:11:53.096 --> 00:11:55.486 A:middle
+to enable really
+high performance
+
+00:11:55.486 --> 00:11:59.566 A:middle
+and great battery usage for
+the app it doesn't require
+
+00:11:59.566 --> 00:12:01.696 A:middle
+that your application continue
+to run in the background
+
+
+
+00:11:59.566 --> 00:12:01.696 A:middle
+that your application continue
+to run in the background
+
+00:12:01.696 --> 00:12:03.116 A:middle
+in order to play
+back that audio.
+
+00:12:03.516 --> 00:12:05.126 A:middle
+The file can be handed
+off to the system
+
+00:12:05.316 --> 00:12:07.626 A:middle
+to be played back even when
+your application is suspended
+
+00:12:07.626 --> 00:12:08.236 A:middle
+and not running.
+
+00:12:08.236 --> 00:12:12.906 A:middle
+If the user goes to the watch
+face while out for a run,
+
+00:12:12.906 --> 00:12:14.666 A:middle
+they can bring up the
+now playing glance
+
+00:12:14.856 --> 00:12:16.536 A:middle
+and control the playback
+of the audio that's
+
+00:12:16.536 --> 00:12:19.176 A:middle
+from your application even while
+your application is not running.
+
+00:12:19.746 --> 00:12:25.536 A:middle
+So there is a few other
+APIs that are not related
+
+00:12:25.536 --> 00:12:27.456 A:middle
+to hardware things that I still
+want to go over quickly here.
+
+00:12:28.196 --> 00:12:29.976 A:middle
+The first one here is alerts.
+
+00:12:30.286 --> 00:12:33.046 A:middle
+Again, I mentioned Apple
+Watch is really designed
+
+00:12:33.046 --> 00:12:35.476 A:middle
+for short interactions,
+so you probably want
+
+00:12:35.476 --> 00:12:38.246 A:middle
+to be really careful about
+not over using this API
+
+00:12:38.576 --> 00:12:40.386 A:middle
+because it does introduce
+an additional step
+
+00:12:40.466 --> 00:12:43.516 A:middle
+into some other work
+flow in your app.
+
+00:12:44.106 --> 00:12:45.556 A:middle
+There are some times
+when you just need
+
+00:12:45.556 --> 00:12:46.636 A:middle
+to ask the user a question
+
+00:12:46.636 --> 00:12:48.136 A:middle
+to get an answer
+before you proceed.
+
+00:12:48.476 --> 00:12:50.106 A:middle
+For those cases, we
+have the alert API
+
+00:12:50.546 --> 00:12:53.416 A:middle
+which gives you a consistent
+appearance for this style of UI.
+
+00:12:54.426 --> 00:12:56.766 A:middle
+You provide a title, a
+description, then the list
+
+00:12:56.766 --> 00:12:59.506 A:middle
+of buttons and the actions that
+should be taken in a block.
+
+
+
+00:13:00.246 --> 00:13:02.276 A:middle
+They'll just be displayed
+and you get called back
+
+00:13:02.276 --> 00:13:03.406 A:middle
+when the user taps
+on one of them.
+
+00:13:03.756 --> 00:13:07.486 A:middle
+In this case I have included a
+destructive style button making
+
+00:13:07.516 --> 00:13:09.086 A:middle
+it clear that something
+destructive will happen
+
+00:13:09.086 --> 00:13:09.986 A:middle
+when I tap delete here.
+
+00:13:10.556 --> 00:13:15.676 A:middle
+We have a great open
+system URL API
+
+00:13:16.106 --> 00:13:17.806 A:middle
+which enable a whole
+bunch of new things.
+
+00:13:18.236 --> 00:13:22.356 A:middle
+Open system URL can take
+another URL and sends the user
+
+00:13:22.356 --> 00:13:24.356 A:middle
+to the messages application
+to send an iMessage
+
+00:13:24.356 --> 00:13:26.926 A:middle
+to some recipient that
+you've defined in your app
+
+00:13:28.276 --> 00:13:31.586 A:middle
+and even cooler, you can
+pass tel URLs you can have
+
+00:13:31.676 --> 00:13:34.866 A:middle
+from your application a phone
+call started on Apple Watch.
+
+00:13:35.646 --> 00:13:38.426 A:middle
+When that happens, the in-call
+UI will show up over your app,
+
+00:13:38.426 --> 00:13:41.926 A:middle
+the user can make the phone
+call, as soon as they hang up,
+
+00:13:41.926 --> 00:13:44.286 A:middle
+they'll be right back
+where they left the app
+
+00:13:44.396 --> 00:13:48.746 A:middle
+when they started the call.
+
+00:13:48.966 --> 00:13:51.806 A:middle
+We also have integration
+with Passbook -- PassKit.
+
+00:13:52.476 --> 00:13:55.616 A:middle
+In fact, the PassKit framework
+is part of the watchOS
+
+00:13:56.806 --> 00:13:58.546 A:middle
+so you can get access
+to the passes
+
+00:13:58.546 --> 00:14:01.126 A:middle
+that your application
+may have on iPhone.
+
+
+
+00:13:58.546 --> 00:14:01.126 A:middle
+that your application
+may have on iPhone.
+
+00:14:01.396 --> 00:14:03.366 A:middle
+The pass library is
+synchronized between iPhone
+
+00:14:03.366 --> 00:14:04.366 A:middle
+and watch so you get both.
+
+00:14:04.366 --> 00:14:08.676 A:middle
+Even better, WatchKit now has
+an API that lets you add passes
+
+00:14:08.726 --> 00:14:11.226 A:middle
+to the pass library,
+you hand your PK pass
+
+00:14:11.226 --> 00:14:13.726 A:middle
+over to the WatchKit API,
+it presents this way,
+
+00:14:13.816 --> 00:14:17.046 A:middle
+the user can scroll through
+it to check out what is
+
+00:14:17.046 --> 00:14:19.466 A:middle
+in that pass and all the way
+at the bottom is an add button
+
+00:14:19.716 --> 00:14:20.926 A:middle
+to add it to the library.
+
+00:14:21.736 --> 00:14:23.506 A:middle
+When they tap that, it will
+be added to the library
+
+00:14:23.506 --> 00:14:25.796 A:middle
+on Apple Watch, but
+also on iPhone
+
+00:14:25.796 --> 00:14:27.966 A:middle
+and all their other devices that
+are synchronized through iCloud.
+
+00:14:28.806 --> 00:14:32.176 A:middle
+So it's a really great way to
+get an end to end pass story all
+
+00:14:32.176 --> 00:14:34.566 A:middle
+on Apple Watch, from
+ingestion all the way
+
+00:14:34.566 --> 00:14:38.596 A:middle
+through to using the pass later.
+
+00:14:38.836 --> 00:14:40.486 A:middle
+So that's what's
+new in WatchKit,
+
+00:14:40.486 --> 00:14:42.066 A:middle
+there is a whole
+bunch of stuff there.
+
+00:14:42.786 --> 00:14:45.116 A:middle
+As I mentioned, WatchKit
+is just one part
+
+00:14:45.296 --> 00:14:49.096 A:middle
+of the overall watchOS STK and
+there are other frameworks,
+
+00:14:49.186 --> 00:14:52.936 A:middle
+some are new and
+some that existed
+
+00:14:52.936 --> 00:14:54.166 A:middle
+and have some new functionality.
+
+00:14:54.226 --> 00:14:57.216 A:middle
+I would like to talk through
+a few of the other ones now.
+
+00:14:57.466 --> 00:15:00.066 A:middle
+Starting with two that are
+specific just to watchOS.
+
+
+
+00:14:57.466 --> 00:15:00.066 A:middle
+Starting with two that are
+specific just to watchOS.
+
+00:15:00.936 --> 00:15:03.566 A:middle
+The first is Clock Kit.
+
+00:15:05.076 --> 00:15:08.506 A:middle
+So Clock Kit is a
+framework giving up access
+
+00:15:08.786 --> 00:15:12.586 A:middle
+to building complications that
+show up right on the watch face.
+
+00:15:12.836 --> 00:15:14.606 A:middle
+It is a great way to
+get your data in front
+
+00:15:14.606 --> 00:15:16.116 A:middle
+of the users really,
+really quickly.
+
+00:15:18.736 --> 00:15:20.826 A:middle
+There is a few styles
+of complications,
+
+00:15:21.116 --> 00:15:22.526 A:middle
+and Clock Kit supports
+all of them.
+
+00:15:22.946 --> 00:15:24.726 A:middle
+And to give you an idea
+of what that is let's look
+
+00:15:24.726 --> 00:15:26.396 A:middle
+through the watch
+faces, see what they are.
+
+00:15:27.246 --> 00:15:29.386 A:middle
+Here we have our utility face
+
+00:15:29.386 --> 00:15:31.476 A:middle
+and there are three different
+complications visible
+
+00:15:31.476 --> 00:15:33.526 A:middle
+on this face right now.
+
+00:15:33.566 --> 00:15:37.856 A:middle
+You see complications with
+different sizes and shapes
+
+00:15:38.186 --> 00:15:40.676 A:middle
+and Clock Kit supports
+formatting the data
+
+00:15:40.676 --> 00:15:42.596 A:middle
+in the appropriate
+way to display in each
+
+00:15:42.596 --> 00:15:44.276 A:middle
+of these complications.
+
+00:15:45.146 --> 00:15:47.156 A:middle
+If we look at our
+color face for example,
+
+00:15:47.506 --> 00:15:50.656 A:middle
+this has more square sized
+complications and they're taller
+
+00:15:50.746 --> 00:15:53.626 A:middle
+to display two lines
+of text or an image.
+
+00:15:54.606 --> 00:15:57.346 A:middle
+Finally, on the digital
+modular face we have our biggest
+
+00:15:57.346 --> 00:16:00.156 A:middle
+complication right in the center
+and four others are on the edge.
+
+
+
+00:15:57.346 --> 00:16:00.156 A:middle
+complication right in the center
+and four others are on the edge.
+
+00:16:00.626 --> 00:16:03.936 A:middle
+Clock Kit provides some great
+APIs to let you format your data
+
+00:16:04.416 --> 00:16:06.506 A:middle
+in various different
+templates to fit all
+
+00:16:06.506 --> 00:16:10.026 A:middle
+of these different
+appearances and tailoring it
+
+00:16:10.806 --> 00:16:13.606 A:middle
+to show the right amount of
+data given each particular
+
+00:16:13.606 --> 00:16:14.686 A:middle
+complication size.
+
+00:16:15.286 --> 00:16:18.726 A:middle
+Now the other important
+thing about complications,
+
+00:16:18.996 --> 00:16:20.716 A:middle
+is that they're right
+on your watch face
+
+00:16:21.076 --> 00:16:23.196 A:middle
+which means every time the user
+raises their wrist and looks
+
+00:16:23.196 --> 00:16:25.216 A:middle
+at the watch, they
+want to see the most
+
+00:16:25.216 --> 00:16:26.676 A:middle
+up to date data right away.
+
+00:16:27.406 --> 00:16:30.696 A:middle
+If we had to every time the user
+raises the wrist ask the code
+
+00:16:30.696 --> 00:16:32.446 A:middle
+to give the current
+value to be shown,
+
+00:16:32.786 --> 00:16:33.866 A:middle
+we would already have failed.
+
+00:16:34.366 --> 00:16:38.226 A:middle
+It needs to be there immediately
+before the user even raises
+
+00:16:38.226 --> 00:16:38.686 A:middle
+their wrist.
+
+00:16:39.176 --> 00:16:42.196 A:middle
+In order to facilitate that,
+you provide your app's data
+
+00:16:42.196 --> 00:16:44.486 A:middle
+to Clock Kit in the
+form of a timeline.
+
+00:16:45.266 --> 00:16:49.036 A:middle
+In this case, I've got the data
+for the WWDC app in the form
+
+00:16:49.036 --> 00:16:50.566 A:middle
+of a complication
+and timeline here.
+
+00:16:51.186 --> 00:16:52.706 A:middle
+If this were 10:00 a.m.,
+
+00:16:53.046 --> 00:16:55.416 A:middle
+the morning of the
+keynote it might be showing
+
+00:16:55.416 --> 00:16:57.216 A:middle
+that the keynote is the
+current session coming up.
+
+00:16:58.686 --> 00:17:01.926 A:middle
+As the day progresses,
+let's say it becomes 2:00
+
+
+
+00:16:58.686 --> 00:17:01.926 A:middle
+As the day progresses,
+let's say it becomes 2:00
+
+00:17:01.986 --> 00:17:04.415 A:middle
+and it already has the
+data so Clock Kit chooses
+
+00:17:04.415 --> 00:17:06.506 A:middle
+to show the appropriate
+thing for that time of day.
+
+00:17:06.566 --> 00:17:08.586 A:middle
+It would have moved to the
+platform state of the union.
+
+00:17:09.165 --> 00:17:11.586 A:middle
+Moving on to 4:00,
+Apple Design Awards.
+
+00:17:12.386 --> 00:17:16.336 A:middle
+The great thing with
+this format,
+
+00:17:16.336 --> 00:17:18.846 A:middle
+you get the automatic
+behavior throughout the day
+
+00:17:18.846 --> 00:17:21.945 A:middle
+without the code having to run
+all the time, but you also get
+
+00:17:21.945 --> 00:17:23.445 A:middle
+to participate in time travel
+
+00:17:23.445 --> 00:17:25.296 A:middle
+without any additional
+effort on your part.
+
+00:17:25.336 --> 00:17:28.286 A:middle
+If the user turned the
+digital crown to move backwards
+
+00:17:28.286 --> 00:17:30.206 A:middle
+and see what was happening
+earlier in the day,
+
+00:17:30.646 --> 00:17:33.476 A:middle
+clock kit would just switch to
+showing the appropriate piece
+
+00:17:33.476 --> 00:17:36.226 A:middle
+of your data for
+that point in time.
+
+00:17:36.226 --> 00:17:38.946 A:middle
+Really, really easy to add
+support for complications
+
+00:17:39.186 --> 00:17:40.976 A:middle
+and a really powerful
+way to get your data
+
+00:17:41.106 --> 00:17:42.226 A:middle
+in front of your users.
+
+00:17:42.766 --> 00:17:43.956 A:middle
+That's Clock Kit.
+
+00:17:43.956 --> 00:17:47.946 A:middle
+There is a whole session that
+goes into a lot of this in a ton
+
+00:17:47.946 --> 00:17:50.076 A:middle
+of detail and tells
+you all about the APIs,
+
+00:17:50.076 --> 00:17:52.756 A:middle
+different templates, everything
+you need to get started.
+
+00:17:53.126 --> 00:17:55.906 A:middle
+Check out Creating
+Complications with Clock Kit.
+
+00:17:57.556 --> 00:18:01.056 A:middle
+The next thing I want to
+talk about, networking.
+
+
+
+00:17:57.556 --> 00:18:01.056 A:middle
+The next thing I want to
+talk about, networking.
+
+00:18:01.116 --> 00:18:05.126 A:middle
+Networking is an important story
+now that you have code running
+
+00:18:05.126 --> 00:18:07.026 A:middle
+on both Apple Watch and iPhone.
+
+00:18:07.096 --> 00:18:11.006 A:middle
+There is two kinds of
+networking you may wanted
+
+00:18:11.006 --> 00:18:12.066 A:middle
+to do in your applications.
+
+00:18:12.486 --> 00:18:14.596 A:middle
+The first of those is
+you may want to talk
+
+00:18:14.936 --> 00:18:16.336 A:middle
+to the broader internet.
+
+00:18:17.816 --> 00:18:19.756 A:middle
+The way you can do
+that when you're
+
+00:18:19.756 --> 00:18:22.906 A:middle
+in either a stand alone mode or
+when your watch and phone are
+
+00:18:22.906 --> 00:18:25.996 A:middle
+in the same place, using
+the NSURL session APIs.
+
+00:18:27.656 --> 00:18:28.776 A:middle
+These will get to the internet
+
+00:18:28.776 --> 00:18:31.616 A:middle
+in the most efficient way
+possible given how your user is
+
+00:18:31.616 --> 00:18:35.146 A:middle
+currently using the phone
+including detect over Wi-Fi
+
+00:18:35.146 --> 00:18:37.226 A:middle
+with tether-less Wi-Fi when
+the phone is not present.
+
+00:18:37.226 --> 00:18:42.606 A:middle
+There is a whole session to
+talk about NSURL session.
+
+00:18:42.866 --> 00:18:45.946 A:middle
+Networking with NSURL session
+so go check that one out.
+
+00:18:46.486 --> 00:18:49.736 A:middle
+Any server anywhere
+on the internet, hit,
+
+00:18:49.736 --> 00:18:53.636 A:middle
+download the data, it is the
+same API you're used to using
+
+00:18:53.636 --> 00:18:56.686 A:middle
+if you used it on iOS and
+it has all the same set
+
+00:18:56.686 --> 00:18:58.816 A:middle
+of features including
+background downloads.
+
+00:18:59.386 --> 00:19:04.436 A:middle
+Of course, there are some times
+where you have code now running
+
+
+
+00:18:59.386 --> 00:19:04.436 A:middle
+Of course, there are some times
+where you have code now running
+
+00:19:04.436 --> 00:19:06.776 A:middle
+on both Apple Watch
+and iPhone and you want
+
+00:19:06.776 --> 00:19:08.626 A:middle
+to have them share data
+or talk to each other.
+
+00:19:09.586 --> 00:19:12.826 A:middle
+We have provided a brand-new
+framework for watchOS
+
+00:19:12.826 --> 00:19:14.926 A:middle
+and iOS called watch
+connectivity
+
+00:19:15.236 --> 00:19:16.756 A:middle
+that allows you to do just that.
+
+00:19:16.876 --> 00:19:19.706 A:middle
+Your iPhone can link watch
+connectivity while running
+
+00:19:19.706 --> 00:19:22.546 A:middle
+on your iPhone and your watch
+app can link watch connectivity
+
+00:19:22.586 --> 00:19:23.386 A:middle
+running on your watch.
+
+00:19:23.966 --> 00:19:29.186 A:middle
+So a good example of when
+you may want to use something
+
+00:19:29.186 --> 00:19:31.676 A:middle
+like this is when you're
+downloading data off the
+
+00:19:31.676 --> 00:19:34.886 A:middle
+internet, such as if you
+were building a weather app
+
+00:19:34.986 --> 00:19:37.016 A:middle
+downloading the current
+weather information.
+
+00:19:37.816 --> 00:19:39.756 A:middle
+Let's say your user
+picks up their iPhone
+
+00:19:40.046 --> 00:19:42.056 A:middle
+and launches the app,
+you go to the internet,
+
+00:19:42.176 --> 00:19:45.016 A:middle
+grab the latest weather, you
+show it to them on their iPhone.
+
+00:19:45.846 --> 00:19:48.926 A:middle
+If you didn't do anything
+else, you built the watch app
+
+00:19:48.926 --> 00:19:51.566 A:middle
+to do the same thing, the next
+time they looked at the app
+
+00:19:51.566 --> 00:19:53.536 A:middle
+on the watch, it goes
+out to the internet,
+
+00:19:53.536 --> 00:19:55.286 A:middle
+download the latest
+data and show it there.
+
+00:19:56.496 --> 00:19:58.116 A:middle
+But that's not the
+best we could do,
+
+00:19:58.116 --> 00:19:59.216 A:middle
+we could definitely do better.
+
+00:19:59.456 --> 00:20:02.256 A:middle
+We had the data, we just got
+it on the iPhone and it's
+
+
+
+00:19:59.456 --> 00:20:02.256 A:middle
+We had the data, we just got
+it on the iPhone and it's
+
+00:20:02.256 --> 00:20:04.696 A:middle
+in the user's pocket now.
+
+00:20:05.046 --> 00:20:06.636 A:middle
+It would be really great
+if we could find some way
+
+00:20:06.636 --> 00:20:07.706 A:middle
+to take advantage of the fact
+
+00:20:07.706 --> 00:20:10.116 A:middle
+that we already downloaded
+our data on one of our devices
+
+00:20:10.116 --> 00:20:12.136 A:middle
+and not have to do
+it multiple times.
+
+00:20:13.116 --> 00:20:15.146 A:middle
+To facilitate that, that might
+look something like this.
+
+00:20:15.146 --> 00:20:18.516 A:middle
+The user downloads the data on
+their iPhone, you move it over,
+
+00:20:18.516 --> 00:20:22.556 A:middle
+keep it available on the
+watch so if the user then goes
+
+00:20:22.556 --> 00:20:25.686 A:middle
+and looks at the app on their
+watch the data is already there
+
+00:20:26.016 --> 00:20:28.406 A:middle
+and it can be displayed without
+having to be downloaded again.
+
+00:20:29.326 --> 00:20:30.506 A:middle
+Of course you may still go out
+
+00:20:30.506 --> 00:20:32.516 A:middle
+and download the more
+recent updated version.
+
+00:20:32.756 --> 00:20:33.876 A:middle
+If you knew, for example,
+
+00:20:33.876 --> 00:20:36.366 A:middle
+that the weather data is only
+updating data once an hour,
+
+00:20:36.626 --> 00:20:39.526 A:middle
+you might have the newest
+data and not have to do that.
+
+00:20:39.526 --> 00:20:42.586 A:middle
+You may have something
+newer available
+
+00:20:42.586 --> 00:20:43.646 A:middle
+for display right away.
+
+00:20:45.026 --> 00:20:47.646 A:middle
+Watch connectivity
+provides this functionality.
+
+00:20:48.366 --> 00:20:50.076 A:middle
+There are two APIs
+that it provides
+
+00:20:50.076 --> 00:20:52.816 A:middle
+for background downloading,
+
+00:20:53.126 --> 00:20:55.946 A:middle
+the first is called application
+context and what it does,
+
+00:20:55.946 --> 00:20:58.786 A:middle
+it lets you hand over a
+dictionary of data that you want
+
+00:20:58.786 --> 00:20:59.906 A:middle
+to have available in your app
+
+00:20:59.906 --> 00:21:01.936 A:middle
+on the other side
+whenever it runs next.
+
+
+
+00:20:59.906 --> 00:21:01.936 A:middle
+on the other side
+whenever it runs next.
+
+00:21:02.626 --> 00:21:05.716 A:middle
+It's always got the
+latest version of the data
+
+00:21:05.716 --> 00:21:07.246 A:middle
+so you just set whatever
+is current
+
+00:21:07.516 --> 00:21:08.946 A:middle
+and the next time
+your application runs,
+
+00:21:08.946 --> 00:21:10.476 A:middle
+it will be available over there.
+
+00:21:11.116 --> 00:21:12.066 A:middle
+Behind the scenes,
+
+00:21:12.236 --> 00:21:13.766 A:middle
+watch connectivity
+will transfer the data
+
+00:21:13.906 --> 00:21:16.736 A:middle
+at the time that's most power
+and performance efficient.
+
+00:21:17.936 --> 00:21:21.226 A:middle
+There is also a file transfer
+API, if you have larger data,
+
+00:21:21.226 --> 00:21:24.846 A:middle
+more bits of data you can
+transfer files from your iPhone
+
+00:21:24.846 --> 00:21:26.656 A:middle
+to your watch and vice versa.
+
+00:21:27.116 --> 00:21:29.676 A:middle
+Again, it will do it in
+the background in the times
+
+00:21:29.676 --> 00:21:31.946 A:middle
+that are most power and
+performance efficient.
+
+00:21:32.596 --> 00:21:35.966 A:middle
+There are also times when you
+need interactive messaging
+
+00:21:35.966 --> 00:21:38.006 A:middle
+between the two sides.
+
+00:21:38.006 --> 00:21:40.716 A:middle
+If your watch app is going
+to kick off some operation
+
+00:21:40.716 --> 00:21:43.026 A:middle
+on your iPhone, you may
+want to send a message over.
+
+00:21:43.026 --> 00:21:46.586 A:middle
+In this example I've got
+a go button on my watch.
+
+00:21:46.926 --> 00:21:49.366 A:middle
+When I tap it, I want to
+send a message to the iPhone
+
+00:21:50.636 --> 00:21:53.436 A:middle
+and what will happen is if
+your app is not already running
+
+00:21:53.436 --> 00:21:55.316 A:middle
+on the iPhone it will get
+launched in the background
+
+00:21:55.546 --> 00:21:56.756 A:middle
+and the message will
+be delivered
+
+00:21:56.756 --> 00:21:58.716 A:middle
+so you could do something
+like start a session
+
+00:21:59.156 --> 00:22:00.966 A:middle
+or perform some activity
+on the iPhone.
+
+
+
+00:21:59.156 --> 00:22:00.966 A:middle
+or perform some activity
+on the iPhone.
+
+00:22:00.966 --> 00:22:04.726 A:middle
+Now I mentioned that these
+APIs exist on both sides
+
+00:22:04.726 --> 00:22:05.816 A:middle
+and they are bi-directional,
+
+00:22:06.206 --> 00:22:08.066 A:middle
+application context
+can go both ways,
+
+00:22:08.526 --> 00:22:11.456 A:middle
+the file transfer APIs can
+transfer files both ways.
+
+00:22:12.046 --> 00:22:14.026 A:middle
+One difference is in
+the send message API.
+
+00:22:14.886 --> 00:22:16.896 A:middle
+When sending a message from
+the watch to the iPhone,
+
+00:22:16.896 --> 00:22:19.256 A:middle
+it can wake your application
+in the background on the iPhone
+
+00:22:19.256 --> 00:22:20.276 A:middle
+to perform some activity.
+
+00:22:20.876 --> 00:22:22.936 A:middle
+However when going the
+other way from iPhone
+
+00:22:22.936 --> 00:22:25.676 A:middle
+to watch it won't wake up
+the watch in the background.
+
+00:22:25.936 --> 00:22:27.886 A:middle
+Your app has to be running
+on the watch in order
+
+00:22:27.886 --> 00:22:30.276 A:middle
+to receive messages
+coming in from the iPhone.
+
+00:22:31.676 --> 00:22:34.496 A:middle
+There is a ton of detail to
+be had on all of these APIs
+
+00:22:34.496 --> 00:22:35.466 A:middle
+and there is a whole session
+
+00:22:35.466 --> 00:22:37.666 A:middle
+about it called Introducing
+Watch Connectivity,
+
+00:22:38.106 --> 00:22:40.176 A:middle
+so you should definitely
+check that out to learn how
+
+00:22:40.176 --> 00:22:44.196 A:middle
+to move your back end from
+a situation where it ran
+
+00:22:44.266 --> 00:22:46.906 A:middle
+on one device into
+having your code running
+
+00:22:46.906 --> 00:22:48.796 A:middle
+on both iPhone and Apple Watch.
+
+00:22:49.366 --> 00:22:55.616 A:middle
+So those are the three new
+frameworks that are brand-new
+
+00:22:55.616 --> 00:22:57.506 A:middle
+and specific to watchOS.
+
+00:22:57.896 --> 00:23:00.306 A:middle
+There is a bunch much
+frameworks that exist on iOS
+
+
+
+00:22:57.896 --> 00:23:00.306 A:middle
+There is a bunch much
+frameworks that exist on iOS
+
+00:23:00.696 --> 00:23:02.776 A:middle
+that you're used to
+using in the apps today
+
+00:23:03.186 --> 00:23:04.816 A:middle
+that have some new functionality
+
+00:23:05.056 --> 00:23:07.986 A:middle
+or some enhanced functionality
+specific to Apple Watch.
+
+00:23:08.596 --> 00:23:10.326 A:middle
+I would like to go over
+a few of those right now.
+
+00:23:11.206 --> 00:23:12.716 A:middle
+The first is Core Motion.
+
+00:23:13.786 --> 00:23:17.526 A:middle
+Now, Core Motion, as you know,
+is the API giving you access
+
+00:23:17.526 --> 00:23:20.156 A:middle
+to the motion sensors
+in the iOS devices.
+
+00:23:20.686 --> 00:23:22.436 A:middle
+It also exists on watchOS
+
+00:23:22.476 --> 00:23:24.156 A:middle
+and gives you access
+to the accelerometer.
+
+00:23:24.996 --> 00:23:28.446 A:middle
+As on iOS, on watchOS Core
+Motion can give you live data
+
+00:23:28.446 --> 00:23:32.536 A:middle
+while the application is
+running, but new and cool
+
+00:23:32.536 --> 00:23:36.746 A:middle
+and specific to Apple Watch
+is it also records motion data
+
+00:23:36.746 --> 00:23:38.646 A:middle
+on your applications behalf even
+
+00:23:38.646 --> 00:23:42.186 A:middle
+when your application is not
+running at a lower refresh rate
+
+00:23:42.496 --> 00:23:44.446 A:middle
+and then give that
+accelerometer data to you
+
+00:23:44.446 --> 00:23:46.526 A:middle
+in a batch the next time
+your application runs.
+
+00:23:47.586 --> 00:23:50.516 A:middle
+Cool way to get insight
+into the motion
+
+00:23:50.856 --> 00:23:52.406 A:middle
+when the app is not running.
+
+00:23:53.456 --> 00:23:56.376 A:middle
+There is a whole talk about
+this, What's New in Core Motion,
+
+00:23:56.546 --> 00:23:59.026 A:middle
+so you should definitely
+go check that out.
+
+00:23:59.176 --> 00:24:01.786 A:middle
+Additionally, core location
+is part of the watch iOS
+
+
+
+00:23:59.176 --> 00:24:01.786 A:middle
+Additionally, core location
+is part of the watch iOS
+
+00:24:02.396 --> 00:24:06.096 A:middle
+and there is a great way to find
+out the user's new location,
+
+00:24:06.646 --> 00:24:12.246 A:middle
+there is a great thing making
+it super easy to figure
+
+00:24:12.246 --> 00:24:15.286 A:middle
+out the current location
+with just a simple API call.
+
+00:24:15.946 --> 00:24:19.316 A:middle
+Now, the other thing to
+note about core location
+
+00:24:19.316 --> 00:24:24.446 A:middle
+on watchOS is that watch is
+location authorization is shared
+
+00:24:24.446 --> 00:24:26.616 A:middle
+between your iOS app
+running on the iPhone
+
+00:24:26.926 --> 00:24:29.156 A:middle
+and the watchOS app
+running on the Apple Watch.
+
+00:24:30.006 --> 00:24:32.696 A:middle
+As you know, when you go to
+use core location you have
+
+00:24:32.696 --> 00:24:34.396 A:middle
+to request location
+authorization
+
+00:24:34.396 --> 00:24:37.206 A:middle
+from the user before the app is
+allowed to find out location.
+
+00:24:37.646 --> 00:24:39.186 A:middle
+That's true in Apple
+Watch as well.
+
+00:24:39.896 --> 00:24:43.176 A:middle
+Once you have -- once the user
+accepted the authorization
+
+00:24:43.176 --> 00:24:46.406 A:middle
+on the iPhone or watch,
+it applies to both
+
+00:24:46.796 --> 00:24:48.466 A:middle
+so they won't have to
+answer the question twice
+
+00:24:48.716 --> 00:24:50.286 A:middle
+and there is one way to manage
+
+00:24:50.286 --> 00:24:51.846 A:middle
+that authorization
+for the users.
+
+00:24:51.846 --> 00:24:56.206 A:middle
+There is a whole session
+on core location what's new
+
+00:24:56.206 --> 00:25:00.116 A:middle
+in core location, a lot of
+new stuff to learn on that.
+
+
+
+00:24:56.206 --> 00:25:00.116 A:middle
+in core location, a lot of
+new stuff to learn on that.
+
+00:25:00.576 --> 00:25:01.486 A:middle
+Next up is HealthKit.
+
+00:25:02.436 --> 00:25:05.886 A:middle
+HealthKit is also part of
+watchOS, same framework
+
+00:25:05.886 --> 00:25:08.256 A:middle
+with the same set of APIs
+you're used to using on iOS.
+
+00:25:09.456 --> 00:25:13.276 A:middle
+The great thing about using
+HealthKit on watchOS is so much
+
+00:25:13.276 --> 00:25:15.876 A:middle
+of the health data
+recorded is being recorded
+
+00:25:15.876 --> 00:25:19.666 A:middle
+on the watch itself that you now
+have even more up-to-date live
+
+00:25:19.666 --> 00:25:22.516 A:middle
+access to the data as it is
+coming in on the watch itself.
+
+00:25:22.936 --> 00:25:25.016 A:middle
+You're now running on the
+same device that's generating
+
+00:25:25.016 --> 00:25:25.286 A:middle
+that data.
+
+00:25:26.876 --> 00:25:29.856 A:middle
+So for example you have
+really up-to-date heart rate
+
+00:25:29.856 --> 00:25:31.676 A:middle
+information as it
+is being recorded
+
+00:25:31.676 --> 00:25:32.426 A:middle
+and stored in HealthKit.
+
+00:25:33.596 --> 00:25:34.756 A:middle
+The other great thing
+about HealthKit
+
+00:25:34.756 --> 00:25:37.036 A:middle
+and watchOS is it provides API
+
+00:25:37.696 --> 00:25:39.816 A:middle
+that lets you start
+workout sessions.
+
+00:25:40.596 --> 00:25:43.976 A:middle
+These workout sessions can do a
+lot of the same kinds of things
+
+00:25:44.276 --> 00:25:48.456 A:middle
+that the workout app
+on watch itself can do.
+
+00:25:48.556 --> 00:25:50.796 A:middle
+For example, if you
+go start a run,
+
+00:25:50.796 --> 00:25:52.456 A:middle
+you want to record
+the user's heart rate
+
+00:25:52.456 --> 00:25:55.426 A:middle
+at a higher frequency, you can
+use the HealthKit API to start
+
+00:25:55.426 --> 00:25:58.316 A:middle
+that session and request
+the heart rate information
+
+00:25:58.316 --> 00:26:00.616 A:middle
+to be recorded in
+high frequency.
+
+
+
+00:25:58.316 --> 00:26:00.616 A:middle
+to be recorded in
+high frequency.
+
+00:26:01.946 --> 00:26:03.766 A:middle
+The other great thing
+about using this API
+
+00:26:04.176 --> 00:26:07.926 A:middle
+for your workout applications
+is it allows the application
+
+00:26:07.926 --> 00:26:10.096 A:middle
+to continue to come back to
+the foreground every time
+
+00:26:10.096 --> 00:26:13.416 A:middle
+that the user raises a
+wrist in that session.
+
+00:26:13.466 --> 00:26:15.086 A:middle
+If you're writing a biking app
+
+00:26:15.216 --> 00:26:17.396 A:middle
+and the user starts
+the biking session,
+
+00:26:17.996 --> 00:26:19.666 A:middle
+every time they raise
+the wrist while
+
+00:26:19.666 --> 00:26:22.836 A:middle
+in that session they'll see the
+app and be able to get the most
+
+00:26:22.836 --> 00:26:26.866 A:middle
+up to date data to find out
+how they're doing during
+
+00:26:27.436 --> 00:26:28.296 A:middle
+the workout.
+
+00:26:28.406 --> 00:26:30.806 A:middle
+Now, while the user has dropped
+the wrist and the screen is off,
+
+00:26:30.806 --> 00:26:32.526 A:middle
+the application is suspended
+
+00:26:33.136 --> 00:26:36.316 A:middle
+but HealthKit behind the scenes
+will record all of that data
+
+00:26:36.316 --> 00:26:39.006 A:middle
+for you so when the user raises
+the wrist and you get a chance
+
+00:26:39.006 --> 00:26:40.916 A:middle
+to run again, you update
+
+00:26:40.916 --> 00:26:43.876 A:middle
+on the data recorded while
+your app was suspended.
+
+00:26:45.076 --> 00:26:48.756 A:middle
+This provides a really great
+way to gather all this data
+
+00:26:49.296 --> 00:26:50.066 A:middle
+in the most power
+
+00:26:50.066 --> 00:26:51.656 A:middle
+and performance efficient
+way possible
+
+00:26:51.956 --> 00:26:54.476 A:middle
+and provide great
+experience to your users.
+
+00:26:56.616 --> 00:26:59.396 A:middle
+So there is also a whole session
+on What's New in HealthKit,
+
+00:26:59.846 --> 00:27:01.936 A:middle
+definitely check that out
+if you're writing work
+
+
+
+00:26:59.846 --> 00:27:01.936 A:middle
+definitely check that out
+if you're writing work
+
+00:27:01.936 --> 00:27:04.236 A:middle
+out style apps or anything
+that may take advantage
+
+00:27:04.336 --> 00:27:06.836 A:middle
+of the HealthKit data.
+
+00:27:07.016 --> 00:27:08.456 A:middle
+I also want to take
+time and talk
+
+00:27:08.456 --> 00:27:09.596 A:middle
+about the security framework,
+
+00:27:09.596 --> 00:27:12.386 A:middle
+which maybe is not the most
+exciting way to spend time.
+
+00:27:13.076 --> 00:27:14.746 A:middle
+Trust me, there is
+important stuff here.
+
+00:27:15.106 --> 00:27:20.506 A:middle
+If you've used the security
+framework on iOS you know
+
+00:27:20.506 --> 00:27:23.156 A:middle
+that this provides you with
+access to the Keychain.
+
+00:27:23.606 --> 00:27:26.586 A:middle
+The Keychain on Apple
+Watch is really interesting
+
+00:27:27.016 --> 00:27:29.466 A:middle
+because the unique thing
+about Apple Watch is
+
+00:27:29.466 --> 00:27:32.666 A:middle
+that while it stays on your
+user's wrist it remains unlocked
+
+00:27:33.216 --> 00:27:36.336 A:middle
+and as soon as the user
+removes their watch the device
+
+00:27:36.336 --> 00:27:37.326 A:middle
+immediately locks.
+
+00:27:38.476 --> 00:27:41.526 A:middle
+You can take advantage of this
+by storing your credentials
+
+00:27:41.526 --> 00:27:45.026 A:middle
+and secured data
+in the Keychain.
+
+00:27:46.486 --> 00:27:49.126 A:middle
+By doing that, you ensure that
+as long as the watch remains
+
+00:27:49.126 --> 00:27:52.756 A:middle
+on the user's wrist you have
+access to the data and as soon
+
+00:27:52.756 --> 00:27:55.716 A:middle
+as it is removed the
+data becomes inaccessible
+
+00:27:55.716 --> 00:27:58.036 A:middle
+because the watch is
+locked [applause].
+
+00:27:58.426 --> 00:28:06.926 A:middle
+Thanks. He was very excited
+about that [laughter]!
+
+
+
+00:27:58.426 --> 00:28:06.926 A:middle
+Thanks. He was very excited
+about that [laughter]!
+
+00:28:08.056 --> 00:28:08.906 A:middle
+All right.
+
+00:28:09.046 --> 00:28:09.896 A:middle
+That's security.
+
+00:28:11.366 --> 00:28:12.266 A:middle
+Next up is MapKit.
+
+00:28:12.556 --> 00:28:16.986 A:middle
+There is a subset of the
+MapKit API available as part
+
+00:28:17.056 --> 00:28:20.926 A:middle
+of the watchOS STK and in
+particular the MK Map API.
+
+00:28:21.896 --> 00:28:22.946 A:middle
+The cool thing about this,
+
+00:28:22.946 --> 00:28:27.226 A:middle
+from your application you hand
+a location over to the maps app
+
+00:28:27.266 --> 00:28:30.096 A:middle
+to send the user to go view it
+in the full maps application.
+
+00:28:30.696 --> 00:28:34.486 A:middle
+Not only can they view it,
+you can start directions
+
+00:28:34.486 --> 00:28:36.646 A:middle
+and routing from the app.
+
+00:28:36.646 --> 00:28:39.056 A:middle
+If you have a location and
+want to have the user be able
+
+00:28:39.056 --> 00:28:40.566 A:middle
+to start getting
+directions right to it,
+
+00:28:40.896 --> 00:28:43.496 A:middle
+you use the MapKit API
+to begin the directions
+
+00:28:43.496 --> 00:28:46.216 A:middle
+on the Apple Watch and the
+iPhone and send the user
+
+00:28:46.216 --> 00:28:48.826 A:middle
+over to get the directions
+from the app.
+
+00:28:50.076 --> 00:28:53.016 A:middle
+There is also a session in
+MapKit, What's New in MapKit
+
+00:28:53.016 --> 00:28:54.706 A:middle
+to learn all about that.
+
+00:28:55.656 --> 00:28:58.116 A:middle
+The last two frameworks
+I want to talk about,
+
+00:28:58.116 --> 00:29:01.676 A:middle
+they're all about getting access
+to your data on Apple Watch --
+
+
+
+00:28:58.116 --> 00:29:01.676 A:middle
+they're all about getting access
+to your data on Apple Watch --
+
+00:29:02.146 --> 00:29:05.456 A:middle
+your user's data on Apple
+Watch for types of data
+
+00:29:05.456 --> 00:29:07.026 A:middle
+that we've already
+synchronized over.
+
+00:29:08.616 --> 00:29:10.466 A:middle
+The first one is the
+contacts framework.
+
+00:29:11.396 --> 00:29:14.306 A:middle
+Contacts is a brand-new
+framework in iOS 9
+
+00:29:14.306 --> 00:29:18.026 A:middle
+and watchOS 2 giving you
+access to the address book
+
+00:29:18.176 --> 00:29:22.396 A:middle
+on Apple Watch and it has been
+synchronized because we use it
+
+00:29:22.396 --> 00:29:25.296 A:middle
+in our own applications and you
+have access to the local data
+
+00:29:25.296 --> 00:29:26.736 A:middle
+without having to transfer it.
+
+00:29:26.736 --> 00:29:29.856 A:middle
+There is a session on
+the brand new framework,
+
+00:29:30.246 --> 00:29:33.046 A:middle
+Introducing Contacts
+Framework for iOS and OS 10,
+
+00:29:33.356 --> 00:29:34.826 A:middle
+so you should definitely
+check that out if you're going
+
+00:29:34.826 --> 00:29:36.126 A:middle
+to be using contact information.
+
+00:29:36.866 --> 00:29:40.216 A:middle
+Just like with core
+location, the authorization
+
+00:29:40.216 --> 00:29:42.376 A:middle
+to access the user's
+address book is shared
+
+00:29:42.376 --> 00:29:44.716 A:middle
+between the iOS app
+and the watchOS app.
+
+00:29:45.386 --> 00:29:48.616 A:middle
+Since the user authorized you to
+get access to the address book
+
+00:29:48.616 --> 00:29:50.966 A:middle
+on either sides you have
+authorization on both
+
+00:29:51.426 --> 00:29:53.716 A:middle
+and there is one place
+to manage authorization
+
+00:29:54.066 --> 00:29:56.456 A:middle
+on both Apple Watch and iPhone.
+
+00:29:57.436 --> 00:30:00.836 A:middle
+The final is EventKit.
+
+
+
+00:29:57.436 --> 00:30:00.836 A:middle
+The final is EventKit.
+
+00:30:01.186 --> 00:30:03.646 A:middle
+EventKit is how you get
+access to the user's calendar.
+
+00:30:04.656 --> 00:30:07.286 A:middle
+This has the same set of story
+
+00:30:07.286 --> 00:30:08.526 A:middle
+as we talked about
+with contacts.
+
+00:30:09.116 --> 00:30:10.906 A:middle
+Once you have gotten
+authorization to access it,
+
+00:30:10.906 --> 00:30:14.226 A:middle
+it is the same on both your
+iPhone app and the watch app.
+
+00:30:16.496 --> 00:30:20.456 A:middle
+So there is a ton of
+stuff in watchOS 2.
+
+00:30:21.716 --> 00:30:23.116 A:middle
+Three brand-new frameworks --
+
+00:30:23.946 --> 00:30:27.496 A:middle
+well, three watch-specific
+frameworks, WatchKit,
+
+00:30:27.836 --> 00:30:32.106 A:middle
+watch connectivity --
+oh -- and Clock Kit.
+
+00:30:34.576 --> 00:30:35.496 A:middle
+Thank you.
+
+00:30:36.016 --> 00:30:38.016 A:middle
+[ Laughter ]
+
+00:30:38.016 --> 00:30:43.000 A:middle
+[ Applause ]
+
+00:30:43.046 --> 00:30:45.206 A:middle
+Three brand-new frameworks
+that are specific to watchOS
+
+00:30:45.956 --> 00:30:48.916 A:middle
+and there is a ton of new
+functionality available in all
+
+00:30:48.916 --> 00:30:52.746 A:middle
+of the other frameworks
+that are specific to watchOS
+
+00:30:52.746 --> 00:30:54.646 A:middle
+and some are shared
+across all your apps.
+
+00:30:55.766 --> 00:30:57.956 A:middle
+There is a lot of
+stuff when you learn it
+
+00:30:57.956 --> 00:31:00.976 A:middle
+on one platform you apply it
+to all of the apps running
+
+
+
+00:30:57.956 --> 00:31:00.976 A:middle
+on one platform you apply it
+to all of the apps running
+
+00:31:00.976 --> 00:31:03.996 A:middle
+on all platforms and other
+frameworks to take advantage
+
+00:31:03.996 --> 00:31:05.486 A:middle
+of the watch-specific
+functionality.
+
+00:31:06.486 --> 00:31:08.166 A:middle
+There is a ton of sessions
+throughout the week
+
+00:31:08.166 --> 00:31:09.966 A:middle
+and other places to
+learn more stuff.
+
+00:31:10.706 --> 00:31:12.886 A:middle
+In the documentation we
+have a transition guide,
+
+00:31:12.946 --> 00:31:17.176 A:middle
+the WatchKit transition guide
+having you learn the WatchKit
+
+00:31:17.176 --> 00:31:21.296 A:middle
+app for watchOS 1 and updated
+it to run for watchOS 2 to run
+
+00:31:21.296 --> 00:31:23.296 A:middle
+as a native app on
+the watch itself.
+
+00:31:24.506 --> 00:31:27.466 A:middle
+There is plenty of sample
+code and the developer forum
+
+00:31:27.466 --> 00:31:30.096 A:middle
+and the technical support
+are great places to go
+
+00:31:30.096 --> 00:31:31.546 A:middle
+to get all your questions
+answered.
+
+00:31:32.096 --> 00:31:33.316 A:middle
+That's what's new in WatchKit.
+
+00:31:33.636 --> 00:31:35.166 A:middle
+Thank you for coming
+out this morning.
+
+00:31:35.416 --> 00:31:38.916 A:middle
+I can't wait to see what you
+guys build with all of this.
+
+00:31:41.516 --> 00:31:52.950 A:middle
+[ Applause ]
+

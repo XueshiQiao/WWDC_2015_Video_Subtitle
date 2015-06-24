@@ -1,0 +1,3356 @@
+
+00:00:24.516 --> 00:00:29.376 A:middle
+[Cheering and applause]
+
+00:00:29.876 --> 00:00:30.696 A:middle
+&gt;&gt; BRITTANY PAINE: Hi, everyone.
+
+00:00:30.996 --> 00:00:33.166 A:middle
+My name is Brittany Paine,
+
+00:00:33.286 --> 00:00:35.966 A:middle
+and later you will
+meet Jon Drummond.
+
+00:00:36.336 --> 00:00:38.386 A:middle
+We are engineers on
+the SpringBoard team.
+
+00:00:38.736 --> 00:00:41.326 A:middle
+Today we are going to talk to
+you about optimizing your app
+
+00:00:41.606 --> 00:00:44.066 A:middle
+for multitasking
+on iPad and iOS 9.
+
+00:00:46.446 --> 00:00:47.946 A:middle
+This is actually the third talk
+
+00:00:47.946 --> 00:00:51.466 A:middle
+in the series related
+to multitasking.
+
+00:00:51.466 --> 00:00:52.916 A:middle
+The first two already happened.
+
+00:00:53.016 --> 00:00:54.816 A:middle
+If you didn't get a
+chance to watch them,
+
+00:00:55.476 --> 00:00:56.256 A:middle
+you should go watch them.
+
+00:00:56.326 --> 00:01:00.076 A:middle
+So I have a lot to say today.
+
+
+
+00:00:56.326 --> 00:01:00.076 A:middle
+So I have a lot to say today.
+
+00:01:00.076 --> 00:01:00.746 A:middle
+Jon does too.
+
+00:01:00.746 --> 00:01:02.686 A:middle
+We are going to go pretty fast.
+
+00:01:02.746 --> 00:01:03.716 A:middle
+Put on your listening ears.
+
+00:01:05.576 --> 00:01:07.836 A:middle
+So this is your app.
+
+00:01:07.836 --> 00:01:13.326 A:middle
+In iOS 8, your app had the
+full device at your disposal.
+
+00:01:13.386 --> 00:01:15.616 A:middle
+It could use as much
+system resources
+
+00:01:15.616 --> 00:01:16.896 A:middle
+as the device had available.
+
+00:01:17.886 --> 00:01:21.626 A:middle
+However, in multitasking in iOS
+9 this is no longer the case.
+
+00:01:22.476 --> 00:01:24.906 A:middle
+There can and probably
+will be more
+
+00:01:24.906 --> 00:01:26.666 A:middle
+than one app on screen
+at a time.
+
+00:01:27.296 --> 00:01:29.246 A:middle
+And all of the apps
+on screen now have
+
+00:01:29.296 --> 00:01:30.646 A:middle
+to share the system resources.
+
+00:01:31.156 --> 00:01:35.596 A:middle
+Some system resources
+like CPU, GPU,
+
+00:01:35.596 --> 00:01:38.126 A:middle
+and disk I/O degrade gradually
+
+00:01:38.126 --> 00:01:40.186 A:middle
+as multiple processes
+compete for them.
+
+00:01:40.906 --> 00:01:42.876 A:middle
+Let's look at an example of CPU.
+
+00:01:44.406 --> 00:01:47.346 A:middle
+So for the new developers in
+the audience, the Holy Grail
+
+00:01:47.386 --> 00:01:50.636 A:middle
+of app responsiveness is to
+be able to update your UI
+
+00:01:50.856 --> 00:01:54.816 A:middle
+at 60 frames per
+second, or 60 FPS.
+
+00:01:54.816 --> 00:01:57.836 A:middle
+This means you have
+about 16 milliseconds
+
+00:01:57.876 --> 00:02:00.316 A:middle
+to get all your work done
+in response to a user event.
+
+
+
+00:01:57.876 --> 00:02:00.316 A:middle
+to get all your work done
+in response to a user event.
+
+00:02:00.316 --> 00:02:03.466 A:middle
+So if this is your app,
+
+00:02:03.466 --> 00:02:07.346 A:middle
+let's say it is doing a great
+job rendering at 60 FPS.
+
+00:02:08.026 --> 00:02:10.675 A:middle
+It can get all its work done
+in only 10 milliseconds.
+
+00:02:11.666 --> 00:02:14.086 A:middle
+Each of these slices
+represents one millisecond.
+
+00:02:15.526 --> 00:02:18.046 A:middle
+Then, the user brings
+in a secondary app.
+
+00:02:18.626 --> 00:02:22.046 A:middle
+That app is also doing a
+great job updating at 60 FPS.
+
+00:02:22.046 --> 00:02:25.026 A:middle
+And it gets all its work
+finished in 6 milliseconds.
+
+00:02:25.926 --> 00:02:29.676 A:middle
+Both apps combined, as you
+can see, are already using
+
+00:02:29.676 --> 00:02:32.206 A:middle
+up all 16 milliseconds
+that we have in order
+
+00:02:32.206 --> 00:02:33.476 A:middle
+to be able to render at 60 FPS.
+
+00:02:34.326 --> 00:02:37.496 A:middle
+And then the user starts a PiP,
+
+00:02:37.496 --> 00:02:39.796 A:middle
+and the PiP is also
+doing a great job,
+
+00:02:40.096 --> 00:02:42.336 A:middle
+and he needs eight
+milliseconds to render his UI.
+
+00:02:43.286 --> 00:02:45.606 A:middle
+The combined total
+of all three apps
+
+00:02:45.606 --> 00:02:50.586 A:middle
+on screen are 24
+milliseconds, and that means
+
+00:02:50.706 --> 00:02:53.616 A:middle
+that the rendering is actually
+at about 40 FIPS instead
+
+00:02:53.616 --> 00:02:55.226 A:middle
+of the 60 FIPS that we want.
+
+00:02:55.776 --> 00:02:57.276 A:middle
+The user will notice stuttering.
+
+00:02:58.566 --> 00:03:00.616 A:middle
+The same type of problem
+applies to the GPU.
+
+
+
+00:02:58.566 --> 00:03:00.616 A:middle
+The same type of problem
+applies to the GPU.
+
+00:03:01.776 --> 00:03:06.036 A:middle
+However, some system resources
+like memory can result
+
+00:03:06.036 --> 00:03:07.856 A:middle
+in a much worse user experience
+
+00:03:07.856 --> 00:03:09.736 A:middle
+when multiple processes
+are competing for them.
+
+00:03:10.606 --> 00:03:11.876 A:middle
+Look at the example again.
+
+00:03:12.506 --> 00:03:13.976 A:middle
+Here is the app again.
+
+00:03:14.386 --> 00:03:17.106 A:middle
+Below the iPad is the
+system memory footprint.
+
+00:03:17.106 --> 00:03:19.486 A:middle
+You can see on the very left
+we have the system using some
+
+00:03:19.486 --> 00:03:20.146 A:middle
+amount of memory.
+
+00:03:20.146 --> 00:03:22.936 A:middle
+In the middle, we have
+your app, the blue app,
+
+00:03:22.936 --> 00:03:23.966 A:middle
+using some amount of memory.
+
+00:03:24.546 --> 00:03:26.466 A:middle
+Then we have all
+of this free space.
+
+00:03:26.846 --> 00:03:29.216 A:middle
+There is so much
+room for activities.
+
+00:03:29.466 --> 00:03:30.626 A:middle
+You can do all kind of stuff.
+
+00:03:31.396 --> 00:03:35.806 A:middle
+And then, the user
+brings in a secondary app,
+
+00:03:35.806 --> 00:03:37.706 A:middle
+and the secondary app
+needs memory, too.
+
+00:03:38.356 --> 00:03:39.606 A:middle
+But we are still in good shape.
+
+00:03:39.606 --> 00:03:41.856 A:middle
+We have a tiny bit
+of free memory left.
+
+00:03:42.976 --> 00:03:45.566 A:middle
+Then guess what happens next?
+
+00:03:46.296 --> 00:03:47.396 A:middle
+The PiP happens.
+
+00:03:47.396 --> 00:03:49.196 A:middle
+Now we are out of memory.
+
+00:03:49.446 --> 00:03:51.686 A:middle
+When the system can't
+find free memory,
+
+00:03:51.686 --> 00:03:52.876 A:middle
+it has to kill a process.
+
+00:03:53.596 --> 00:03:58.546 A:middle
+In that instance, the user gets
+ripped out of his or her --
+
+00:03:58.736 --> 00:04:00.386 A:middle
+we'll say her --
+current context,
+
+
+
+00:03:58.736 --> 00:04:00.386 A:middle
+we'll say her --
+current context,
+
+00:04:00.936 --> 00:04:03.196 A:middle
+and we are taken
+back to SpringBoard.
+
+00:04:03.546 --> 00:04:06.686 A:middle
+In my opinion, that is a
+much worse user experience
+
+00:04:07.086 --> 00:04:09.696 A:middle
+than just the stuttering
+UI that can happen
+
+00:04:09.696 --> 00:04:12.356 A:middle
+when multiple processes
+compete for CPU or GPU.
+
+00:04:12.356 --> 00:04:17.846 A:middle
+So now you may be asking
+yourself, what is SpringBoard,
+
+00:04:18.156 --> 00:04:21.245 A:middle
+and why are SpringBoard
+engineers here today to talk
+
+00:04:21.245 --> 00:04:22.376 A:middle
+to you about multitasking?
+
+00:04:23.026 --> 00:04:25.336 A:middle
+Well, SpringBoard
+is a lot of things.
+
+00:04:26.366 --> 00:04:27.796 A:middle
+It is the Home screen.
+
+00:04:28.176 --> 00:04:29.076 A:middle
+The Lock screen.
+
+00:04:29.436 --> 00:04:34.206 A:middle
+Icons, wallpaper, system
+gestures, notification center.
+
+00:04:34.786 --> 00:04:35.526 A:middle
+Control center.
+
+00:04:36.386 --> 00:04:38.566 A:middle
+I got lost.
+
+00:04:38.816 --> 00:04:42.126 A:middle
+Okay, all of these
+things and more.
+
+00:04:43.046 --> 00:04:48.916 A:middle
+But most importantly, we are a
+UI application just like y'all.
+
+00:04:49.206 --> 00:04:53.556 A:middle
+SpringBoard is also the
+original multitasking app.
+
+00:04:53.616 --> 00:04:57.726 A:middle
+Prior to iOS 9 and
+also in iOS 9,
+
+00:04:57.806 --> 00:05:00.646 A:middle
+SpringBoard is always considered
+to be running in the foreground,
+
+
+
+00:04:57.806 --> 00:05:00.646 A:middle
+SpringBoard is always considered
+to be running in the foreground,
+
+00:05:00.676 --> 00:05:02.576 A:middle
+even though your app
+is visible to the user.
+
+00:05:02.576 --> 00:05:06.866 A:middle
+Because of that, we
+face the same challenges
+
+00:05:06.866 --> 00:05:09.436 A:middle
+that y'all do today in the
+new multitasking environment.
+
+00:05:09.966 --> 00:05:13.516 A:middle
+And we've learned a lot
+of lessons along the way.
+
+00:05:14.086 --> 00:05:16.676 A:middle
+And we would like to share
+some of those lessons
+
+00:05:16.676 --> 00:05:18.896 A:middle
+with y'all today so you
+don't make the same mistakes.
+
+00:05:19.406 --> 00:05:21.526 A:middle
+Let's get started.
+
+00:05:21.916 --> 00:05:26.436 A:middle
+Optimizing your app, the
+easy stuff, part one.
+
+00:05:26.636 --> 00:05:30.346 A:middle
+First thing, use the
+Leaks instrument and find
+
+00:05:30.346 --> 00:05:31.256 A:middle
+and fix your memory leaks.
+
+00:05:33.316 --> 00:05:34.956 A:middle
+How many of you have
+forgotten to write DIALEK?
+
+00:05:34.956 --> 00:05:37.936 A:middle
+There has to be more
+hands than that.
+
+00:05:37.936 --> 00:05:39.686 A:middle
+Well, I have.
+
+00:05:39.686 --> 00:05:43.046 A:middle
+Happens to the best of us.
+
+00:05:43.046 --> 00:05:45.786 A:middle
+And the Leaks instrument can
+help you find those problems,
+
+00:05:45.786 --> 00:05:47.206 A:middle
+and they are usually
+really easy to fix.
+
+00:05:48.986 --> 00:05:52.076 A:middle
+However, the best way to
+avoid leaks is to use Swift.
+
+00:05:52.416 --> 00:05:53.506 A:middle
+You should do that instead.
+
+00:05:55.666 --> 00:05:58.896 A:middle
+Next, you should use the
+Allocations instrument to find
+
+00:05:58.896 --> 00:06:01.646 A:middle
+and fix retained cycles and
+unbounded memory growth.
+
+
+
+00:05:58.896 --> 00:06:01.646 A:middle
+and fix retained cycles and
+unbounded memory growth.
+
+00:06:02.736 --> 00:06:06.276 A:middle
+Last, you should use the Time
+Profiler instrument to find
+
+00:06:06.276 --> 00:06:07.466 A:middle
+and fix inefficient algorithms.
+
+00:06:08.816 --> 00:06:11.526 A:middle
+I'm not going to talk about
+any of these problems today.
+
+00:06:11.526 --> 00:06:14.946 A:middle
+These types of problems apply
+to all apps, not just apps
+
+00:06:15.136 --> 00:06:16.586 A:middle
+that are interested
+in multitasking.
+
+00:06:17.866 --> 00:06:20.586 A:middle
+Instead, we are going to focus
+on the things most important
+
+00:06:20.586 --> 00:06:22.056 A:middle
+in the new multitasking
+environment.
+
+00:06:22.756 --> 00:06:26.966 A:middle
+In our experience, the
+biggest lesson we learned is
+
+00:06:26.966 --> 00:06:30.016 A:middle
+that great performance
+involves trade-offs.
+
+00:06:30.086 --> 00:06:32.936 A:middle
+Are you going to precompute
+your data and keep it in memory?
+
+00:06:33.466 --> 00:06:36.266 A:middle
+Or are you going to calculate
+it on the fly and use CPU?
+
+00:06:37.276 --> 00:06:40.156 A:middle
+Are you going to keep all your
+resources locally on disk?
+
+00:06:40.836 --> 00:06:42.516 A:middle
+Or are you going to
+keep them in the cloud
+
+00:06:42.516 --> 00:06:43.716 A:middle
+and fetch them whenever
+you need them?
+
+00:06:44.626 --> 00:06:46.056 A:middle
+Are you going to
+run your animations
+
+00:06:46.056 --> 00:06:48.546 A:middle
+on the CPU or on the GPU?
+
+00:06:48.546 --> 00:06:51.516 A:middle
+Let's look at an example
+
+00:06:51.516 --> 00:06:54.436 A:middle
+of a sample app we have been
+working on called IconReel.
+
+00:06:55.676 --> 00:06:58.186 A:middle
+So here is our app
+right out of the box.
+
+00:06:58.936 --> 00:07:00.756 A:middle
+It starts with a
+handful of icons.
+
+
+
+00:06:58.936 --> 00:07:00.756 A:middle
+It starts with a
+handful of icons.
+
+00:07:01.206 --> 00:07:04.326 A:middle
+When the user taps on an
+icon, we zoom up the icon
+
+00:07:04.326 --> 00:07:05.556 A:middle
+to show a more detailed view.
+
+00:07:06.456 --> 00:07:08.966 A:middle
+There is a sticky
+dock at the bottom
+
+00:07:08.966 --> 00:07:11.486 A:middle
+where users can save
+their favorite icons.
+
+00:07:11.986 --> 00:07:15.146 A:middle
+When a user adds more
+icons, we add more pages,
+
+00:07:15.146 --> 00:07:17.066 A:middle
+and the user can scroll
+between the pages.
+
+00:07:18.366 --> 00:07:19.516 A:middle
+Does this look familiar
+to anyone?
+
+00:07:19.516 --> 00:07:19.966 A:middle
+Yeah, that was on purpose
+
+00:07:20.086 --> 00:07:22.086 A:middle
+[Laughter]
+
+00:07:22.156 --> 00:07:26.786 A:middle
+&gt;&gt; BRITTANY PAINE: So we
+can keep all of these icons
+
+00:07:26.786 --> 00:07:29.796 A:middle
+in memory because each icon
+is only about 60 kilobytes.
+
+00:07:29.796 --> 00:07:32.936 A:middle
+We will store them all
+in an NSDictionary.
+
+00:07:34.086 --> 00:07:35.646 A:middle
+It turns out scrolling is great.
+
+00:07:36.326 --> 00:07:38.706 A:middle
+Why? Because we have no
+other pages to scroll to.
+
+00:07:39.666 --> 00:07:42.276 A:middle
+So some of our users
+like to add more icons.
+
+00:07:42.766 --> 00:07:46.336 A:middle
+So we add a few dozen more
+icons to our NSDictionary.
+
+00:07:46.666 --> 00:07:48.356 A:middle
+So far scrolling is okay.
+
+00:07:49.566 --> 00:07:51.656 A:middle
+Now, this animation may
+look familiar to you.
+
+00:07:51.906 --> 00:07:53.376 A:middle
+That's because there
+are a lot of apps
+
+00:07:53.576 --> 00:07:54.826 A:middle
+that have an animation
+like this.
+
+00:07:55.716 --> 00:08:00.076 A:middle
+Think of photos scrolling around
+in a photos or videos app.
+
+
+
+00:07:55.716 --> 00:08:00.076 A:middle
+Think of photos scrolling around
+in a photos or videos app.
+
+00:08:00.206 --> 00:08:03.936 A:middle
+You may have an animation
+like this in your app.
+
+00:08:04.076 --> 00:08:05.136 A:middle
+Everything is going great.
+
+00:08:05.136 --> 00:08:07.706 A:middle
+Some of our really good
+customers download even
+
+00:08:07.706 --> 00:08:08.646 A:middle
+more icons.
+
+00:08:09.086 --> 00:08:12.776 A:middle
+And now we have several dozen
+more icons in our NSDictionary,
+
+00:08:12.776 --> 00:08:15.826 A:middle
+and it turns out
+scrolling is still perfect.
+
+00:08:16.936 --> 00:08:20.886 A:middle
+That is, until sometimes we
+are seeing IconReel crash,
+
+00:08:21.356 --> 00:08:24.806 A:middle
+and sometimes in a multitasking
+environment we are seeing other
+
+00:08:24.896 --> 00:08:27.236 A:middle
+foreground apps crash.
+
+00:08:27.236 --> 00:08:29.386 A:middle
+Let's invest what
+is going on here.
+
+00:08:30.696 --> 00:08:33.676 A:middle
+We took a time profiler
+trace and saw that CPU
+
+00:08:33.676 --> 00:08:35.566 A:middle
+and disk I/O were
+minimal while scrolling.
+
+00:08:35.566 --> 00:08:39.966 A:middle
+But the Allocations instrument
+showed us our memory usage was
+
+00:08:39.966 --> 00:08:43.476 A:middle
+very high because all of our
+icons were kept in memory.
+
+00:08:44.066 --> 00:08:46.846 A:middle
+What is happening here is
+
+00:08:46.846 --> 00:08:49.746 A:middle
+that IconReel is quickly
+exhausting the available system
+
+00:08:49.746 --> 00:08:52.626 A:middle
+memory, and when the system
+gets short on free memory,
+
+00:08:53.316 --> 00:08:54.486 A:middle
+it tries to free some up.
+
+00:08:54.486 --> 00:08:57.556 A:middle
+If there's none it can find,
+it has to terminate processes.
+
+00:08:58.406 --> 00:09:00.616 A:middle
+Sometimes this means
+terminating IconReel,
+
+
+
+00:08:58.406 --> 00:09:00.616 A:middle
+Sometimes this means
+terminating IconReel,
+
+00:09:01.126 --> 00:09:03.156 A:middle
+and sometimes this means
+terminating another
+
+00:09:03.156 --> 00:09:03.826 A:middle
+foreground app.
+
+00:09:04.336 --> 00:09:07.216 A:middle
+But all of the time this is
+a horrible user experience.
+
+00:09:07.306 --> 00:09:08.526 A:middle
+We want to avoid this.
+
+00:09:08.856 --> 00:09:12.936 A:middle
+As a good multitasking
+citizen, IconReel needs
+
+00:09:12.936 --> 00:09:16.296 A:middle
+to get its memory usage
+under control so all the apps
+
+00:09:16.296 --> 00:09:19.686 A:middle
+on screen can coexist and
+create the great user experience
+
+00:09:19.726 --> 00:09:21.486 A:middle
+that our users expect.
+
+00:09:22.136 --> 00:09:25.226 A:middle
+This brings me to the
+idea of the working set.
+
+00:09:27.276 --> 00:09:29.496 A:middle
+One of the most important
+things you can do
+
+00:09:29.496 --> 00:09:32.346 A:middle
+to optimize your memory
+usage is to understand
+
+00:09:32.346 --> 00:09:33.536 A:middle
+and manage your working set.
+
+00:09:35.256 --> 00:09:37.816 A:middle
+Your working set should consist
+of only the critical objects
+
+00:09:37.816 --> 00:09:40.126 A:middle
+and resources that your
+app needs right now.
+
+00:09:42.206 --> 00:09:43.756 A:middle
+You should keep it
+small in order
+
+00:09:43.756 --> 00:09:45.116 A:middle
+to keep your memory usage low.
+
+00:09:45.876 --> 00:09:48.696 A:middle
+It might change based
+on context.
+
+00:09:48.966 --> 00:09:51.626 A:middle
+For example, your working set
+may contain different objects
+
+00:09:52.086 --> 00:09:53.436 A:middle
+when the app is in
+the foreground
+
+00:09:53.776 --> 00:09:56.966 A:middle
+versus when the app is in the
+background, or it might change
+
+00:09:57.206 --> 00:09:58.356 A:middle
+when you change view
+controllers.
+
+00:09:59.656 --> 00:10:02.196 A:middle
+Last, you shouldn't
+let it grow unbounded.
+
+
+
+00:09:59.656 --> 00:10:02.196 A:middle
+Last, you shouldn't
+let it grow unbounded.
+
+00:10:02.646 --> 00:10:04.646 A:middle
+We saw what happens when the
+system runs out of memory.
+
+00:10:05.126 --> 00:10:08.516 A:middle
+We don't want you
+to be that app.
+
+00:10:08.516 --> 00:10:10.046 A:middle
+Let's look at IconReel's
+working set.
+
+00:10:10.046 --> 00:10:12.286 A:middle
+At the end of the last example,
+
+00:10:12.286 --> 00:10:16.496 A:middle
+IconReel's working set was every
+icon we were keeping in memory.
+
+00:10:16.496 --> 00:10:18.726 A:middle
+Is this the best working set?
+
+00:10:20.406 --> 00:10:23.826 A:middle
+No. So what do we
+really need right now?
+
+00:10:25.226 --> 00:10:28.346 A:middle
+Well, all we really need is
+the current page of icons
+
+00:10:28.346 --> 00:10:29.326 A:middle
+that the user is viewing.
+
+00:10:30.196 --> 00:10:31.746 A:middle
+So this is a much
+better working set.
+
+00:10:33.346 --> 00:10:36.426 A:middle
+So now let's try scrolling
+with our working set
+
+00:10:36.696 --> 00:10:41.516 A:middle
+of only one page of icons.
+
+00:10:41.706 --> 00:10:43.656 A:middle
+Oh! Oh! Okay.
+
+00:10:43.956 --> 00:10:44.966 A:middle
+That was horrible.
+
+00:10:45.036 --> 00:10:46.816 A:middle
+And if you didn't see it
+because maybe I was standing
+
+00:10:46.816 --> 00:10:50.296 A:middle
+in your way, scrolling
+was horrible.
+
+00:10:50.296 --> 00:10:53.216 A:middle
+There was a multisecond
+hang before the next page
+
+00:10:53.216 --> 00:10:54.426 A:middle
+of icons scrolled into view.
+
+00:10:56.046 --> 00:10:58.766 A:middle
+Let's investigate
+what is going on.
+
+00:10:59.576 --> 00:11:03.746 A:middle
+We took another time profiler
+trace, and we saw that CPU
+
+
+
+00:10:59.576 --> 00:11:03.746 A:middle
+We took another time profiler
+trace, and we saw that CPU
+
+00:11:03.746 --> 00:11:06.296 A:middle
+and disk I/O are actually
+very high while scrolling,
+
+00:11:06.936 --> 00:11:10.456 A:middle
+and Allocation showed us that
+our memory usage is very low.
+
+00:11:11.436 --> 00:11:15.906 A:middle
+This is the exact opposite
+problem from what we just had.
+
+00:11:15.906 --> 00:11:18.456 A:middle
+Like I said, great performance
+involves making a series
+
+00:11:18.456 --> 00:11:19.216 A:middle
+of trade-offs.
+
+00:11:20.026 --> 00:11:22.006 A:middle
+What can we do to fix this?
+
+00:11:22.656 --> 00:11:25.216 A:middle
+The answer is to manage
+our CPU time better.
+
+00:11:26.706 --> 00:11:28.326 A:middle
+So the most important
+thing you can do
+
+00:11:28.326 --> 00:11:31.396 A:middle
+to keep your app responsive
+is to do as little work
+
+00:11:31.396 --> 00:11:32.986 A:middle
+as possible on your main thread.
+
+00:11:34.076 --> 00:11:36.996 A:middle
+The main thread's top priority
+is to respond to user events,
+
+00:11:37.456 --> 00:11:40.186 A:middle
+and doing unnecessary work
+on your main thread means
+
+00:11:40.186 --> 00:11:42.896 A:middle
+that the main thread has less
+time to respond to user events.
+
+00:11:44.596 --> 00:11:47.006 A:middle
+Because you're sharing the
+CPU time with all of the apps
+
+00:11:47.006 --> 00:11:49.346 A:middle
+on screen, you need
+to be hyperaware
+
+00:11:49.346 --> 00:11:50.706 A:middle
+of what your main
+thread is doing.
+
+00:11:51.646 --> 00:11:54.676 A:middle
+Any work being performed on the
+main thread that is not directly
+
+00:11:54.676 --> 00:11:57.476 A:middle
+in response to a user event
+should be performed elsewhere.
+
+00:11:59.426 --> 00:12:01.956 A:middle
+What tools can we use to make
+sure that we keep responding
+
+
+
+00:11:59.426 --> 00:12:01.956 A:middle
+What tools can we use to make
+sure that we keep responding
+
+00:12:01.956 --> 00:12:04.966 A:middle
+to user events but also make
+sure we get the extra work
+
+00:12:04.966 --> 00:12:06.146 A:middle
+finished in a timely manner?
+
+00:12:07.826 --> 00:12:10.776 A:middle
+Well, the answer is we can use
+GCD and Quality of Service.
+
+00:12:12.156 --> 00:12:15.276 A:middle
+There was a great talk
+last year at WWDC 2014,
+
+00:12:15.726 --> 00:12:18.286 A:middle
+and there's a great talk
+coming up on Friday on GCD
+
+00:12:18.286 --> 00:12:19.396 A:middle
+and Quality of Service.
+
+00:12:19.396 --> 00:12:21.206 A:middle
+So I'm not going to go
+into a lot of detail here.
+
+00:12:21.786 --> 00:12:23.436 A:middle
+There's two important things.
+
+00:12:24.036 --> 00:12:26.786 A:middle
+The first thing is that
+your main thread is running
+
+00:12:26.786 --> 00:12:29.686 A:middle
+at the highest priority, that's
+the user interactive priority.
+
+00:12:29.916 --> 00:12:33.186 A:middle
+The other thing is
+that the Quality
+
+00:12:33.186 --> 00:12:34.856 A:middle
+of Service bands are shared
+
+00:12:34.856 --> 00:12:36.576 A:middle
+across all foreground
+applications.
+
+00:12:37.266 --> 00:12:39.936 A:middle
+So everyone's user-initiated
+queues get equal access
+
+00:12:39.976 --> 00:12:42.826 A:middle
+to the CPU, and everyone's
+background queues get equal
+
+00:12:42.856 --> 00:12:43.866 A:middle
+access to the CPU.
+
+00:12:44.556 --> 00:12:48.726 A:middle
+No single foreground app is
+prioritized above any other.
+
+00:12:49.206 --> 00:12:51.416 A:middle
+If you prioritize your
+work appropriately,
+
+00:12:51.706 --> 00:12:55.006 A:middle
+the system can guarantee
+that we get the best possible
+
+00:12:55.006 --> 00:12:57.026 A:middle
+performance while there are
+multiple apps on screen.
+
+00:12:57.626 --> 00:13:00.706 A:middle
+So how does this
+apply to IconReel?
+
+
+
+00:12:57.626 --> 00:13:00.706 A:middle
+So how does this
+apply to IconReel?
+
+00:13:01.666 --> 00:13:03.746 A:middle
+Well, we are going
+to load the icons
+
+00:13:03.746 --> 00:13:05.646 A:middle
+on a separate thread using GCD
+
+00:13:05.646 --> 00:13:07.976 A:middle
+at the user-initiated
+Quality of Service.
+
+00:13:09.236 --> 00:13:12.086 A:middle
+The first thing we do, we
+create our dispatch queue,
+
+00:13:12.446 --> 00:13:16.536 A:middle
+called Icon Generation Queue,
+and it's a serial queue.
+
+00:13:16.536 --> 00:13:19.766 A:middle
+While we are on the main thread,
+we're going to dispatch async,
+
+00:13:19.766 --> 00:13:22.826 A:middle
+generating each icon on the
+next page onto our icon queue.
+
+00:13:23.896 --> 00:13:26.256 A:middle
+It isn't obvious from
+this code snippet,
+
+00:13:26.516 --> 00:13:29.846 A:middle
+but dispatch asyncing work
+from the main thread to a queue
+
+00:13:29.846 --> 00:13:33.036 A:middle
+like this downgrades
+the quality of service
+
+00:13:33.616 --> 00:13:35.686 A:middle
+to the user-initiated
+quality of service,
+
+00:13:35.766 --> 00:13:38.546 A:middle
+which is the second-highest
+quality of service.
+
+00:13:39.396 --> 00:13:42.156 A:middle
+So this code is effectively
+loading all the icons
+
+00:13:42.156 --> 00:13:44.146 A:middle
+at the user-initiated
+quality of service.
+
+00:13:45.856 --> 00:13:47.576 A:middle
+Okay. So let's try
+scrolling again.
+
+00:13:47.646 --> 00:13:48.326 A:middle
+All right.
+
+00:13:50.096 --> 00:13:52.206 A:middle
+That was better.
+
+00:13:53.436 --> 00:13:56.076 A:middle
+This solution could work
+for you and your apps
+
+00:13:56.246 --> 00:13:58.196 A:middle
+if your design allows for it.
+
+00:13:58.256 --> 00:14:01.166 A:middle
+Let's say you can show
+placeholder images while you are
+
+
+
+00:13:58.256 --> 00:14:01.166 A:middle
+Let's say you can show
+placeholder images while you are
+
+00:14:01.166 --> 00:14:02.546 A:middle
+waiting for the real
+content to load.
+
+00:14:03.266 --> 00:14:06.236 A:middle
+However, IconReel's design
+doesn't allow for it.
+
+00:14:06.386 --> 00:14:09.666 A:middle
+We have to have the icon
+already loaded before it scrolls
+
+00:14:09.666 --> 00:14:10.256 A:middle
+on screen.
+
+00:14:11.716 --> 00:14:14.086 A:middle
+So what we really
+need, we need a way
+
+00:14:14.216 --> 00:14:17.196 A:middle
+to temporarily boost the
+icon generation queue
+
+00:14:17.506 --> 00:14:19.856 A:middle
+up to the same priority
+as the main thread,
+
+00:14:20.186 --> 00:14:22.336 A:middle
+right before the icon
+scrolls on to screen
+
+00:14:22.336 --> 00:14:26.556 A:middle
+so that it can finish
+generating the icon faster.
+
+00:14:26.606 --> 00:14:27.636 A:middle
+There's a way to do that, too.
+
+00:14:28.546 --> 00:14:30.836 A:middle
+It's by using the quality
+of service overrides.
+
+00:14:32.596 --> 00:14:35.656 A:middle
+This comes in handy when we have
+this type of priority inversion
+
+00:14:35.656 --> 00:14:38.286 A:middle
+where we have a high-priority
+thread or queue blocked,
+
+00:14:38.726 --> 00:14:41.746 A:middle
+waiting on a low-priority thread
+or queue to finish some work.
+
+00:14:42.996 --> 00:14:45.466 A:middle
+And the awesome part
+is that quality
+
+00:14:45.466 --> 00:14:47.976 A:middle
+of service overrides can
+happen for you automatically
+
+00:14:47.976 --> 00:14:49.946 A:middle
+if you provide the system
+with enough information.
+
+00:14:50.946 --> 00:14:54.296 A:middle
+You may be thinking: Brittany,
+how can I provide the system
+
+00:14:54.296 --> 00:14:55.326 A:middle
+with enough information?
+
+00:14:56.566 --> 00:14:57.816 A:middle
+Well, here is a handy chart.
+
+00:14:58.966 --> 00:15:01.166 A:middle
+Again, the talk from last
+year and the talk coming
+
+
+
+00:14:58.966 --> 00:15:01.166 A:middle
+Again, the talk from last
+year and the talk coming
+
+00:15:01.166 --> 00:15:03.316 A:middle
+up on Friday go into
+this in more depth.
+
+00:15:04.016 --> 00:15:06.376 A:middle
+But the take-home here is
+that Dispatch Group Wait
+
+00:15:06.776 --> 00:15:10.286 A:middle
+and Dispatch Semaphore
+Wait are not your friends.
+
+00:15:10.546 --> 00:15:12.926 A:middle
+You should audit your code
+for uses of these functions
+
+00:15:12.996 --> 00:15:15.676 A:middle
+and be aware that they
+don't fix these types
+
+00:15:15.676 --> 00:15:16.726 A:middle
+of priority inversions.
+
+00:15:18.706 --> 00:15:22.626 A:middle
+So let's look at what we
+are going to do in IconReel.
+
+00:15:22.906 --> 00:15:26.546 A:middle
+Right before that first column
+of icons scroll on screen,
+
+00:15:27.376 --> 00:15:28.616 A:middle
+on the main thread we are going
+
+00:15:28.616 --> 00:15:32.056 A:middle
+to dispatch sync this empty
+block onto our icon queue.
+
+00:15:32.056 --> 00:15:36.916 A:middle
+What that will do is boost
+the priority of the icon queue
+
+00:15:36.916 --> 00:15:39.176 A:middle
+up to match the priority
+of the main thread
+
+00:15:39.456 --> 00:15:41.026 A:middle
+until that block executes,
+
+00:15:41.336 --> 00:15:43.826 A:middle
+at which point the
+icon queue will go back
+
+00:15:43.826 --> 00:15:45.016 A:middle
+down to its normal priority.
+
+00:15:46.086 --> 00:15:54.726 A:middle
+Now let's look at scrolling
+and see what it looks like.
+
+00:15:54.726 --> 00:15:58.186 A:middle
+Oh, yeah, looks great,
+with a nice slow swipe.
+
+00:15:59.476 --> 00:16:07.446 A:middle
+So let's try a slow swipe
+followed by a fast swipe.
+
+
+
+00:15:59.476 --> 00:16:07.446 A:middle
+So let's try a slow swipe
+followed by a fast swipe.
+
+00:16:07.596 --> 00:16:10.736 A:middle
+Oh, man! We are right
+back to where we started
+
+00:16:11.026 --> 00:16:12.876 A:middle
+where that next page, there's
+
+00:16:12.876 --> 00:16:14.576 A:middle
+like a hang before
+it comes on screen.
+
+00:16:15.506 --> 00:16:16.396 A:middle
+So now what?
+
+00:16:18.026 --> 00:16:20.176 A:middle
+There is a pattern here.
+
+00:16:20.686 --> 00:16:22.166 A:middle
+Pulled out Instruments again.
+
+00:16:22.166 --> 00:16:23.096 A:middle
+We took another trace.
+
+00:16:23.426 --> 00:16:25.416 A:middle
+This time we also
+got a calculator,
+
+00:16:25.946 --> 00:16:29.856 A:middle
+and we did some math, and we
+found that we just can't load,
+
+00:16:30.246 --> 00:16:34.326 A:middle
+read the icon image from
+disk, decode the icon image,
+
+00:16:34.326 --> 00:16:37.456 A:middle
+and make the icon nice and
+pretty in the amount of time
+
+00:16:37.456 --> 00:16:39.946 A:middle
+that it takes for a fast user
+to swipe to the next page.
+
+00:16:41.446 --> 00:16:42.366 A:middle
+So now what?
+
+00:16:43.816 --> 00:16:45.946 A:middle
+I guess we can just
+wait for faster devices.
+
+00:16:47.016 --> 00:16:49.016 A:middle
+[Laughter]
+
+00:16:49.016 --> 00:16:50.000 A:middle
+[Applause]
+
+00:16:50.046 --> 00:16:54.556 A:middle
+&gt;&gt; BRITTANY PAINE:
+Some applause for that.
+
+00:16:54.556 --> 00:16:55.216 A:middle
+Just kidding.
+
+00:16:55.656 --> 00:16:56.456 A:middle
+We can do better.
+
+00:16:56.616 --> 00:16:57.616 A:middle
+We have to be smarter.
+
+00:16:57.616 --> 00:17:02.096 A:middle
+Math calculations told us
+we would have much better
+
+
+
+00:16:57.616 --> 00:17:02.096 A:middle
+Math calculations told us
+we would have much better
+
+00:17:02.096 --> 00:17:03.866 A:middle
+performance if we
+had the next page
+
+00:17:03.866 --> 00:17:05.786 A:middle
+of icons already
+loaded in memory.
+
+00:17:06.945 --> 00:17:10.776 A:middle
+This ensures that even when
+you are scrolling quickly
+
+00:17:10.776 --> 00:17:12.935 A:middle
+through multiple pages,
+we have enough time
+
+00:17:12.935 --> 00:17:15.766 A:middle
+to load the next page of icons
+before the user can swipe again.
+
+00:17:17.736 --> 00:17:20.766 A:middle
+So let's increase our
+working set size from one page
+
+00:17:20.766 --> 00:17:23.685 A:middle
+to three pages: the page
+you're currently viewing
+
+00:17:23.685 --> 00:17:24.796 A:middle
+and the page on either side.
+
+00:17:25.796 --> 00:17:27.366 A:middle
+We don't have a magic
+eight ball.
+
+00:17:27.496 --> 00:17:30.166 A:middle
+So we don't know which way
+the user is about to scroll.
+
+00:17:30.606 --> 00:17:33.766 A:middle
+Having one page on either side
+seems like the best compromise.
+
+00:17:33.906 --> 00:17:36.246 A:middle
+Now let's try scrolling.
+
+00:17:36.596 --> 00:17:37.686 A:middle
+All right.
+
+00:17:42.776 --> 00:17:44.076 A:middle
+That looks much better.
+
+00:17:44.146 --> 00:17:47.266 A:middle
+Now by the time the user
+gets to the next page,
+
+00:17:47.266 --> 00:17:50.836 A:middle
+we've already started loading
+the next page of icons.
+
+00:17:51.016 --> 00:17:54.216 A:middle
+However, this actually
+increases our memory usage.
+
+00:17:54.216 --> 00:17:57.056 A:middle
+When we had our working set
+that contained only one page,
+
+00:17:57.056 --> 00:17:58.326 A:middle
+we had this memory footprint.
+
+00:17:58.786 --> 00:18:00.716 A:middle
+Now we have this
+memory footprint.
+
+
+
+00:17:58.786 --> 00:18:00.716 A:middle
+Now we have this
+memory footprint.
+
+00:18:00.716 --> 00:18:05.206 A:middle
+We need to be aware of how
+we are affecting other apps.
+
+00:18:05.706 --> 00:18:08.126 A:middle
+So now let's look at what
+happens when the user brings
+
+00:18:08.126 --> 00:18:10.596 A:middle
+in a secondary app with
+IconReel already on screen.
+
+00:18:11.656 --> 00:18:16.196 A:middle
+IconReel resizes to show only
+three columns instead of four.
+
+00:18:17.206 --> 00:18:20.376 A:middle
+This is a great opportunity
+to reassess our working set.
+
+00:18:21.196 --> 00:18:24.516 A:middle
+Do we still need three
+pages of four columns
+
+00:18:24.516 --> 00:18:26.076 A:middle
+of icons in memory at a time?
+
+00:18:27.126 --> 00:18:30.636 A:middle
+No. We only need three
+pages of three columns
+
+00:18:30.636 --> 00:18:31.756 A:middle
+of icons in memory at a time.
+
+00:18:32.996 --> 00:18:36.326 A:middle
+So effectively it looks
+a little bit like this.
+
+00:18:36.426 --> 00:18:38.776 A:middle
+Now, I could go through
+
+00:18:38.776 --> 00:18:41.866 A:middle
+and manually throw away
+those extra columns of icons
+
+00:18:41.866 --> 00:18:44.376 A:middle
+that we don't need
+anymore, but it was a lot
+
+00:18:44.376 --> 00:18:45.916 A:middle
+of work to generate them.
+
+00:18:46.056 --> 00:18:49.136 A:middle
+I don't want to redo
+it if I don't have to.
+
+00:18:49.136 --> 00:18:50.856 A:middle
+It would be great
+if there was a place
+
+00:18:51.066 --> 00:18:53.126 A:middle
+where I could put
+these icons where,
+
+00:18:53.506 --> 00:18:56.726 A:middle
+if the system needed the memory,
+we could get rid of them.
+
+00:18:56.726 --> 00:18:59.886 A:middle
+If the system didn't need the
+memory, then they could stay
+
+00:18:59.886 --> 00:19:01.576 A:middle
+in memory for us so that
+we could use them again
+
+
+
+00:18:59.886 --> 00:19:01.576 A:middle
+in memory for us so that
+we could use them again
+
+00:19:01.576 --> 00:19:02.166 A:middle
+when we need them.
+
+00:19:03.056 --> 00:19:04.426 A:middle
+There is a way to do that,
+
+00:19:04.816 --> 00:19:07.066 A:middle
+and that is by listening
+to memory warnings.
+
+00:19:09.486 --> 00:19:13.086 A:middle
+Memory warnings happen when the
+system is under memory pressure
+
+00:19:13.146 --> 00:19:15.706 A:middle
+or your process is
+approaching its memory limit.
+
+00:19:18.056 --> 00:19:20.236 A:middle
+I'd really like to give you
+a number that you could code
+
+00:19:20.236 --> 00:19:21.616 A:middle
+to for your memory limit.
+
+00:19:22.116 --> 00:19:23.836 A:middle
+Unfortunately, there's
+no such number.
+
+00:19:24.466 --> 00:19:26.276 A:middle
+The limit is different
+per device
+
+00:19:26.476 --> 00:19:28.156 A:middle
+and per application context.
+
+00:19:28.666 --> 00:19:31.256 A:middle
+So my best advice
+is to just listen
+
+00:19:31.256 --> 00:19:33.526 A:middle
+for memory warnings
+and do things.
+
+00:19:34.216 --> 00:19:36.286 A:middle
+So what should you do?
+
+00:19:37.266 --> 00:19:39.656 A:middle
+Well, you should remove anything
+not in your working set.
+
+00:19:39.926 --> 00:19:43.226 A:middle
+This includes clearing cache
+data, releasing images,
+
+00:19:43.226 --> 00:19:44.526 A:middle
+and releasing view controllers.
+
+00:19:44.606 --> 00:19:49.376 A:middle
+Here is the APIs that
+you can use to listen
+
+00:19:49.376 --> 00:19:52.616 A:middle
+for memory warnings, and I
+want to make it clear that none
+
+00:19:52.616 --> 00:19:54.546 A:middle
+of these are new in iOS 9.
+
+00:19:54.546 --> 00:19:56.236 A:middle
+They have been around
+for a while.
+
+00:19:56.556 --> 00:20:00.326 A:middle
+Hopefully y'all are
+already using all of them.
+
+
+
+00:19:56.556 --> 00:20:00.326 A:middle
+Hopefully y'all are
+already using all of them.
+
+00:20:00.976 --> 00:20:03.956 A:middle
+I could go through on a memory
+warning and manually get rid
+
+00:20:03.956 --> 00:20:05.096 A:middle
+of these icons myself.
+
+00:20:05.196 --> 00:20:08.376 A:middle
+I'm lazy and don't
+want to do that.
+
+00:20:08.816 --> 00:20:11.606 A:middle
+It would be great if there was a
+tool that managed all that crap
+
+00:20:11.656 --> 00:20:14.396 A:middle
+for me so I didn't
+have to do it.
+
+00:20:14.446 --> 00:20:15.816 A:middle
+Turns out we have
+one of those, too.
+
+00:20:16.266 --> 00:20:16.936 A:middle
+It is called NSCache.
+
+00:20:16.936 --> 00:20:20.426 A:middle
+It is similar to an
+NSDictionary, and it's great
+
+00:20:20.426 --> 00:20:22.396 A:middle
+for objects that can
+be re-created quickly.
+
+00:20:23.546 --> 00:20:25.416 A:middle
+It also handles the
+memory warnings for you
+
+00:20:25.416 --> 00:20:29.276 A:middle
+by automatically evicting items
+from itself, and it's also aware
+
+00:20:29.276 --> 00:20:32.116 A:middle
+of application context like
+foreground versus background
+
+00:20:32.436 --> 00:20:33.896 A:middle
+and evicts items when necessary.
+
+00:20:35.216 --> 00:20:37.766 A:middle
+It does other cool stuff,
+too, but we don't have time
+
+00:20:37.766 --> 00:20:38.836 A:middle
+to talk about that today.
+
+00:20:39.016 --> 00:20:41.276 A:middle
+Make sure to check out
+the NSCache documentation.
+
+00:20:41.866 --> 00:20:46.836 A:middle
+Now when we have IconReel
+up in a split view,
+
+00:20:47.296 --> 00:20:49.136 A:middle
+instead of throwing
+away these icons,
+
+00:20:49.696 --> 00:20:50.796 A:middle
+let's put them in an NSCache.
+
+00:20:50.856 --> 00:20:55.306 A:middle
+In fact, let's just put every
+icon we ever generate that's not
+
+00:20:55.306 --> 00:20:58.046 A:middle
+in our working set in NSCache.
+
+00:20:58.046 --> 00:20:59.466 A:middle
+And when we have
+a memory warning,
+
+00:20:59.726 --> 00:21:03.216 A:middle
+we can let NSCache do all the
+work of evicting all those icons
+
+
+
+00:20:59.726 --> 00:21:03.216 A:middle
+we can let NSCache do all the
+work of evicting all those icons
+
+00:21:03.216 --> 00:21:06.446 A:middle
+that are not in our working set.
+
+00:21:06.446 --> 00:21:06.966 A:middle
+Let's recap.
+
+00:21:07.606 --> 00:21:10.746 A:middle
+We started here, where we
+had every icon in memory.
+
+00:21:10.936 --> 00:21:14.216 A:middle
+So our memory usage was high,
+but scrolling was great and CUP
+
+00:21:14.216 --> 00:21:15.446 A:middle
+and disk I/O were low.
+
+00:21:16.026 --> 00:21:17.496 A:middle
+But sometimes we were
+seeing apps crash,
+
+00:21:18.056 --> 00:21:20.576 A:middle
+and that is not good.
+
+00:21:20.796 --> 00:21:23.336 A:middle
+So then we adjusted our working
+set size to only one page
+
+00:21:23.336 --> 00:21:26.776 A:middle
+of icons, so the memory
+usage was low, but our CPU
+
+00:21:26.776 --> 00:21:28.656 A:middle
+and disk I/O were very
+high while scrolling,
+
+00:21:28.816 --> 00:21:30.826 A:middle
+and this resulted in crappy
+scrolling performance.
+
+00:21:33.176 --> 00:21:36.996 A:middle
+Then, we revised our working set
+size to be three pages of icons,
+
+00:21:37.456 --> 00:21:39.476 A:middle
+which increased our
+memory usage a little bit.
+
+00:21:39.856 --> 00:21:42.606 A:middle
+And then every other icon
+that we generated that was not
+
+00:21:42.606 --> 00:21:46.336 A:middle
+in our working set we
+threw into NSCache.
+
+00:21:46.536 --> 00:21:48.366 A:middle
+We have increased our
+overall memory usage,
+
+00:21:48.366 --> 00:21:50.286 A:middle
+but most of our increase
+is now adaptable
+
+00:21:50.286 --> 00:21:51.646 A:middle
+to the surrounding
+circumstances.
+
+00:21:53.346 --> 00:21:54.876 A:middle
+For many of you this
+is good enough.
+
+00:21:55.746 --> 00:21:58.416 A:middle
+If your app can run in a
+multitasking environment
+
+00:21:58.566 --> 00:22:03.076 A:middle
+with Maps running Flyover, then
+you are probably in great shape.
+
+
+
+00:21:58.566 --> 00:22:03.076 A:middle
+with Maps running Flyover, then
+you are probably in great shape.
+
+00:22:04.296 --> 00:22:07.186 A:middle
+I presented a bunch of things
+that your app can do today
+
+00:22:07.186 --> 00:22:08.736 A:middle
+to be a good multitasking
+citizen,
+
+00:22:09.056 --> 00:22:12.136 A:middle
+but sometimes these
+things are not enough.
+
+00:22:12.136 --> 00:22:14.026 A:middle
+To talk to you about
+what you should do next,
+
+00:22:14.076 --> 00:22:14.976 A:middle
+I would like to present
+Jon Drummond.
+
+00:22:15.516 --> 00:22:23.546 A:middle
+[Applause]
+
+00:22:24.046 --> 00:22:24.806 A:middle
+&gt;&gt; JON DRUMMOND:
+Thank you, Brittany.
+
+00:22:24.806 --> 00:22:25.776 A:middle
+Hi, everybody.
+
+00:22:27.196 --> 00:22:30.366 A:middle
+So understanding how your
+app uses memory can pay off
+
+00:22:30.836 --> 00:22:32.836 A:middle
+tremendously for both
+your app's performance
+
+00:22:32.836 --> 00:22:33.906 A:middle
+and the rest of the system.
+
+00:22:34.176 --> 00:22:36.216 A:middle
+But sometimes that
+just isn't enough.
+
+00:22:36.596 --> 00:22:38.356 A:middle
+What if you are doing
+everything we talked about
+
+00:22:38.356 --> 00:22:41.526 A:middle
+and doing it all correctly, but
+things are still going wrong?
+
+00:22:42.286 --> 00:22:45.526 A:middle
+We will talk about some ways
+to be even more adaptive
+
+00:22:45.576 --> 00:22:47.816 A:middle
+with the way that your apps
+manage their memory footprint.
+
+00:22:49.126 --> 00:22:52.316 A:middle
+To start, I would like to go
+back to the multitasking example
+
+00:22:52.316 --> 00:22:54.356 A:middle
+where we have a primary
+and a secondary app.
+
+00:22:55.146 --> 00:22:57.346 A:middle
+We are under memory
+pressure right now,
+
+00:22:57.346 --> 00:22:59.506 A:middle
+so the system issues a
+memory warning and the apps,
+
+00:22:59.656 --> 00:23:02.006 A:middle
+being good multitasking
+citizens, will take care
+
+
+
+00:22:59.656 --> 00:23:02.006 A:middle
+being good multitasking
+citizens, will take care
+
+00:23:02.006 --> 00:23:04.106 A:middle
+of trimming their caches and
+other objects they don't need.
+
+00:23:04.516 --> 00:23:08.716 A:middle
+Great. Now, the user
+brings in a PiP, okay?
+
+00:23:08.876 --> 00:23:10.156 A:middle
+We have space, it's good.
+
+00:23:10.156 --> 00:23:12.166 A:middle
+We are not under pressure,
+but we are getting close.
+
+00:23:13.396 --> 00:23:15.996 A:middle
+Now the user goes and
+resizes the secondary app
+
+00:23:16.066 --> 00:23:17.706 A:middle
+to be fifty-fifty
+with the primary.
+
+00:23:18.146 --> 00:23:22.796 A:middle
+This causes a spike in memory
+growth, and CPU for that matter.
+
+00:23:22.796 --> 00:23:24.916 A:middle
+The system did not have
+time to react to this.
+
+00:23:25.176 --> 00:23:26.646 A:middle
+Unfortunately, it was forced
+
+00:23:26.646 --> 00:23:29.496 A:middle
+to kill the primary app here
+even though the primary app was
+
+00:23:29.496 --> 00:23:31.356 A:middle
+not the cause of
+the memory growth.
+
+00:23:32.036 --> 00:23:34.666 A:middle
+Dropping back into SpringBoard
+is never a good experience,
+
+00:23:34.666 --> 00:23:35.866 A:middle
+as Brittany showed us.
+
+00:23:37.766 --> 00:23:39.226 A:middle
+Before I finish or
+keep going here,
+
+00:23:39.226 --> 00:23:43.616 A:middle
+I want to share a
+quote with you.
+
+00:23:43.736 --> 00:23:47.086 A:middle
+That is that "the world outside
+your process should be regarded
+
+00:23:47.086 --> 00:23:49.406 A:middle
+as hostile and bent
+upon your destruction."
+
+00:23:50.736 --> 00:23:53.946 A:middle
+I don't mean that to sound
+ominous and I don't want you
+
+00:23:53.946 --> 00:23:56.296 A:middle
+to think I'm paranoid, but part
+
+00:23:56.296 --> 00:23:58.786 A:middle
+of being a good multitasking
+citizen is adapting
+
+00:23:58.926 --> 00:24:00.626 A:middle
+to everything that is
+happening around you.
+
+
+
+00:23:58.926 --> 00:24:00.626 A:middle
+to everything that is
+happening around you.
+
+00:24:00.746 --> 00:24:03.826 A:middle
+Sometimes what is happening
+around you is extreme.
+
+00:24:04.686 --> 00:24:06.236 A:middle
+You might be doing
+everything fine,
+
+00:24:06.236 --> 00:24:08.996 A:middle
+but the system might
+conspire to terminate you.
+
+00:24:08.996 --> 00:24:11.546 A:middle
+It is not really, but being
+prepared for this kind
+
+00:24:11.546 --> 00:24:14.056 A:middle
+of situation will
+help you survive.
+
+00:24:16.536 --> 00:24:18.006 A:middle
+So first things first.
+
+00:24:18.506 --> 00:24:20.586 A:middle
+Memory is the most
+constrained resource on iOS.
+
+00:24:20.996 --> 00:24:23.676 A:middle
+That is not to say that other
+resources are not constrained.
+
+00:24:23.676 --> 00:24:25.836 A:middle
+They are, but they just
+degrade differently.
+
+00:24:26.116 --> 00:24:27.586 A:middle
+When the system runs
+out of memory,
+
+00:24:27.696 --> 00:24:28.936 A:middle
+it's like hitting a wall.
+
+00:24:28.936 --> 00:24:29.886 A:middle
+Something has to go.
+
+00:24:29.886 --> 00:24:31.466 A:middle
+It's got to get the memory back.
+
+00:24:32.466 --> 00:24:34.136 A:middle
+As we saw from the
+previous example,
+
+00:24:34.556 --> 00:24:37.826 A:middle
+sometimes the system can
+acquire memory faster
+
+00:24:37.826 --> 00:24:38.626 A:middle
+than it can be released.
+
+00:24:39.116 --> 00:24:41.626 A:middle
+Even if we had time to issue
+a memory warning there,
+
+00:24:41.626 --> 00:24:43.686 A:middle
+and even if the apps, all
+three of them running,
+
+00:24:43.686 --> 00:24:46.176 A:middle
+had time to respond
+to it, it's not clear
+
+00:24:46.176 --> 00:24:47.806 A:middle
+that they would have
+had enough CPU cycles
+
+00:24:47.806 --> 00:24:50.226 A:middle
+to actually do something
+meaningful and clean
+
+00:24:50.226 --> 00:24:52.426 A:middle
+up enough memory to
+accommodate the growth.
+
+00:24:53.586 --> 00:24:55.856 A:middle
+To understand how the
+system can reclaim memory,
+
+00:24:55.856 --> 00:24:58.576 A:middle
+we have to understand
+how memory is classified.
+
+00:24:58.656 --> 00:25:01.606 A:middle
+I'm going to break it down
+into three different groups,
+
+
+
+00:24:58.656 --> 00:25:01.606 A:middle
+I'm going to break it down
+into three different groups,
+
+00:25:01.606 --> 00:25:03.526 A:middle
+the first of which
+we call dirty.
+
+00:25:03.526 --> 00:25:06.676 A:middle
+This is memory in active
+use by your process.
+
+00:25:06.796 --> 00:25:09.296 A:middle
+These are your objects, these
+are your heap allocations,
+
+00:25:09.586 --> 00:25:11.916 A:middle
+statics, globals,
+everything you have cached,
+
+00:25:11.916 --> 00:25:13.306 A:middle
+actually pretty much everything.
+
+00:25:13.506 --> 00:25:15.196 A:middle
+And it is not reclaimable
+by the system
+
+00:25:15.196 --> 00:25:16.566 A:middle
+because it's in use by you.
+
+00:25:18.176 --> 00:25:19.706 A:middle
+The second is called purgeable.
+
+00:25:20.006 --> 00:25:23.346 A:middle
+This is otherwise dirty memory
+that has been explicitly marked
+
+00:25:23.576 --> 00:25:25.946 A:middle
+as not in use by the app,
+
+00:25:25.946 --> 00:25:28.556 A:middle
+so the system knows it can
+take it back if needed.
+
+00:25:29.556 --> 00:25:32.206 A:middle
+The third type we call clean,
+and that is read-only memory
+
+00:25:32.206 --> 00:25:33.686 A:middle
+that is backed by files on disk.
+
+00:25:34.116 --> 00:25:35.676 A:middle
+The system can reclaim
+the memory
+
+00:25:35.766 --> 00:25:40.436 A:middle
+because it can always bring it
+back because the file is there.
+
+00:25:40.686 --> 00:25:42.556 A:middle
+Back to our system memory bars.
+
+00:25:42.616 --> 00:25:43.756 A:middle
+What does this look like?
+
+00:25:43.836 --> 00:25:46.846 A:middle
+We have a scenario with very,
+very little free memory.
+
+00:25:47.256 --> 00:25:48.966 A:middle
+But it doesn't look
+like that to the system.
+
+00:25:49.606 --> 00:25:53.956 A:middle
+The system knows it has leeway
+to use anytime it wants to free
+
+00:25:53.956 --> 00:25:56.216 A:middle
+up memory for growth,
+and it can do this
+
+00:25:56.216 --> 00:25:57.406 A:middle
+without issuing memory warnings
+
+00:25:57.406 --> 00:25:58.886 A:middle
+or requiring the
+apps to intervene.
+
+00:25:59.246 --> 00:26:05.306 A:middle
+The goals for your app and for
+adapting the memory usage here
+
+
+
+00:25:59.246 --> 00:26:05.306 A:middle
+The goals for your app and for
+adapting the memory usage here
+
+00:26:05.306 --> 00:26:07.026 A:middle
+are minimize your dirty memory
+
+00:26:07.766 --> 00:26:10.336 A:middle
+and maximize your
+purgeable and clean memory.
+
+00:26:10.336 --> 00:26:12.566 A:middle
+We are going to start
+with minimizing dirty.
+
+00:26:14.326 --> 00:26:15.996 A:middle
+First, yeah, use less of it.
+
+00:26:16.726 --> 00:26:18.906 A:middle
+I know that's really easy for
+me to say standing up here,
+
+00:26:18.906 --> 00:26:21.336 A:middle
+but if you manage
+your working set
+
+00:26:21.336 --> 00:26:24.096 A:middle
+and track the objects you are
+allocating, use Instruments,
+
+00:26:24.096 --> 00:26:27.706 A:middle
+do all that, once you've taken
+care of that, the next step is
+
+00:26:27.706 --> 00:26:30.356 A:middle
+about reclassifying this
+dirty memory as purgeable.
+
+00:26:31.276 --> 00:26:33.676 A:middle
+If you do this, it can be
+automatically reclaimed
+
+00:26:33.676 --> 00:26:37.166 A:middle
+by the system, and it is
+best for nice-to-have data,
+
+00:26:37.166 --> 00:26:39.816 A:middle
+data that you don't need right
+now, might need in the future,
+
+00:26:39.816 --> 00:26:42.416 A:middle
+and anything you might otherwise
+put in a cache, for example.
+
+00:26:43.866 --> 00:26:45.156 A:middle
+Let's apply this to IconReel.
+
+00:26:46.366 --> 00:26:48.366 A:middle
+This resembles the
+scenario we left off.
+
+00:26:48.366 --> 00:26:53.006 A:middle
+We have caches of icons on
+either side in our working set.
+
+00:26:53.906 --> 00:26:57.536 A:middle
+For this example, I'm going
+to reclassify our data a bit.
+
+00:26:57.536 --> 00:26:59.316 A:middle
+Rather than working
+on a per-icon chunk,
+
+00:26:59.316 --> 00:27:02.296 A:middle
+I'm going to group the
+icons into sets of columns,
+
+
+
+00:26:59.316 --> 00:27:02.296 A:middle
+I'm going to group the
+icons into sets of columns,
+
+00:27:02.366 --> 00:27:04.106 A:middle
+just because it makes
+this a bit easier here
+
+00:27:04.506 --> 00:27:07.346 A:middle
+but it doesn't otherwise
+change the dynamic of our app.
+
+00:27:07.346 --> 00:27:09.646 A:middle
+As the user scrolls around,
+we update our working set,
+
+00:27:09.696 --> 00:27:11.136 A:middle
+things get cached,
+things get pulled
+
+00:27:11.136 --> 00:27:13.786 A:middle
+out of the cache,
+it's all the same.
+
+00:27:13.786 --> 00:27:15.186 A:middle
+Let's classify this memory use.
+
+00:27:16.746 --> 00:27:19.116 A:middle
+First, we've got
+our memory in use.
+
+00:27:19.576 --> 00:27:20.526 A:middle
+Classified as dirty.
+
+00:27:20.916 --> 00:27:21.786 A:middle
+That's our working set.
+
+00:27:23.256 --> 00:27:26.336 A:middle
+We've got all the objects in
+our caches, those are purgeable.
+
+00:27:27.166 --> 00:27:29.826 A:middle
+This presents us with an
+interesting opportunity
+
+00:27:30.866 --> 00:27:33.866 A:middle
+to be even fancier with
+the way we classify memory.
+
+00:27:34.736 --> 00:27:41.306 A:middle
+Let's, for example, mark even
+more of the data as in use
+
+00:27:41.306 --> 00:27:42.866 A:middle
+or dirty, even some
+that's in the cache.
+
+00:27:43.706 --> 00:27:46.626 A:middle
+What this has done for us
+is introduced a second level
+
+00:27:46.626 --> 00:27:47.066 A:middle
+of caching.
+
+00:27:48.296 --> 00:27:50.486 A:middle
+The first one, the
+outside-most icons,
+
+00:27:50.896 --> 00:27:52.966 A:middle
+the ones we are least
+likely to need soon,
+
+00:27:52.966 --> 00:27:55.196 A:middle
+we'll let the system reclaim
+whenever the system needs it.
+
+00:27:55.196 --> 00:27:55.856 A:middle
+We don't care.
+
+00:27:56.826 --> 00:27:58.456 A:middle
+But we'd like to
+retain some control
+
+00:27:58.456 --> 00:27:59.996 A:middle
+over icons we might need soon.
+
+
+
+00:28:00.696 --> 00:28:02.146 A:middle
+So even though they're
+still in the cache,
+
+00:28:02.146 --> 00:28:03.066 A:middle
+we're going to mark them in use
+
+00:28:03.066 --> 00:28:05.326 A:middle
+so the system can't take
+them without asking.
+
+00:28:05.726 --> 00:28:06.776 A:middle
+These are the ones we'll release
+
+00:28:06.776 --> 00:28:08.096 A:middle
+when we respond to
+a memory warning.
+
+00:28:09.416 --> 00:28:10.826 A:middle
+This leaves us with
+the working set,
+
+00:28:10.826 --> 00:28:12.266 A:middle
+which we absolutely
+need right now,
+
+00:28:12.266 --> 00:28:13.796 A:middle
+and there's nothing
+to do about that.
+
+00:28:14.466 --> 00:28:17.586 A:middle
+What does this look like in
+the multitasking example?
+
+00:28:18.376 --> 00:28:21.346 A:middle
+I'll return to the scenario
+where things went wrong before.
+
+00:28:21.786 --> 00:28:22.746 A:middle
+The PiP has come in.
+
+00:28:22.746 --> 00:28:23.606 A:middle
+We're out of memory.
+
+00:28:23.876 --> 00:28:25.976 A:middle
+But now, the system knows
+that both the primary
+
+00:28:25.976 --> 00:28:28.506 A:middle
+and the secondary app, being
+good multitasking citizens,
+
+00:28:28.796 --> 00:28:31.336 A:middle
+have this region of purgeable
+memory that can be cleared.
+
+00:28:31.546 --> 00:28:34.816 A:middle
+The system, without asking
+or telling anybody anything,
+
+00:28:34.816 --> 00:28:36.436 A:middle
+can take that from the app
+
+00:28:36.436 --> 00:28:39.346 A:middle
+and return the system
+to a good state.
+
+00:28:40.656 --> 00:28:43.366 A:middle
+But of course, the user
+keeps using the device
+
+00:28:43.366 --> 00:28:44.686 A:middle
+and memory grows again.
+
+00:28:44.686 --> 00:28:46.096 A:middle
+We have another memory warning.
+
+00:28:46.586 --> 00:28:49.436 A:middle
+But since the apps have only
+lost the purgeable data,
+
+00:28:49.436 --> 00:28:51.686 A:middle
+they are free to respond to
+memory warnings and clear
+
+00:28:51.686 --> 00:28:57.796 A:middle
+up the caches, thus returning
+the system to a good state.
+
+00:28:57.796 --> 00:29:00.226 A:middle
+How can you use purgeable
+data in your apps?
+
+
+
+00:28:57.796 --> 00:29:00.226 A:middle
+How can you use purgeable
+data in your apps?
+
+00:29:00.226 --> 00:29:00.936 A:middle
+It is simple.
+
+00:29:01.086 --> 00:29:02.666 A:middle
+There's a class, and
+it's Purgeable Data.
+
+00:29:02.666 --> 00:29:05.256 A:middle
+And it is a subclass
+of NS immutable data
+
+00:29:05.326 --> 00:29:07.176 A:middle
+with no other properties,
+it is simple.
+
+00:29:07.606 --> 00:29:09.166 A:middle
+The only additions are
+these three methods,
+
+00:29:09.496 --> 00:29:11.246 A:middle
+the first being Begin
+Content Access.
+
+00:29:11.356 --> 00:29:13.546 A:middle
+This tells the system
+you are using the memory,
+
+00:29:13.776 --> 00:29:14.896 A:middle
+and don't take it away from me.
+
+00:29:15.616 --> 00:29:18.216 A:middle
+The second, to go along with
+it, is End Content Access.
+
+00:29:18.386 --> 00:29:20.106 A:middle
+The memory is now
+considered purgeable,
+
+00:29:20.106 --> 00:29:21.316 A:middle
+and you may lose it at any time.
+
+00:29:21.956 --> 00:29:24.546 A:middle
+And the third, to figure out if
+the system has taken it from you
+
+00:29:24.546 --> 00:29:26.106 A:middle
+when you weren't using it.
+
+00:29:26.756 --> 00:29:31.476 A:middle
+To return to the system resource
+bars, this is pretty much
+
+00:29:31.476 --> 00:29:32.896 A:middle
+where we left off with Brittany.
+
+00:29:32.896 --> 00:29:33.986 A:middle
+I haven't changed anything.
+
+00:29:33.986 --> 00:29:35.486 A:middle
+The height of these
+bars is all the same.
+
+00:29:35.676 --> 00:29:38.776 A:middle
+What we have done is take a
+segment of our adaptive memory
+
+00:29:38.976 --> 00:29:40.576 A:middle
+and reclassified
+it as purgeable.
+
+00:29:41.286 --> 00:29:44.376 A:middle
+This has made us a much
+better multitasking citizen
+
+00:29:44.376 --> 00:29:46.916 A:middle
+because the system can do
+work for us on our behalf
+
+00:29:47.456 --> 00:29:50.276 A:middle
+but has the same intrinsic
+performance characteristic
+
+00:29:50.366 --> 00:29:52.116 A:middle
+where, if I've lost
+my purgeable memory
+
+00:29:52.296 --> 00:29:55.296 A:middle
+and I've cleared my caches,
+what am I going to do now?
+
+00:29:55.296 --> 00:29:57.236 A:middle
+I need to rebuild
+any data I need,
+
+00:29:57.236 --> 00:29:59.096 A:middle
+and we've established
+that's very expensive.
+
+00:29:59.236 --> 00:30:02.156 A:middle
+Disk I/O and CPU
+spike, that's not great.
+
+
+
+00:29:59.236 --> 00:30:02.156 A:middle
+Disk I/O and CPU
+spike, that's not great.
+
+00:30:02.646 --> 00:30:06.786 A:middle
+Let's, though, analyze the
+data we use in our app to see
+
+00:30:06.786 --> 00:30:10.686 A:middle
+if there's something
+more we can do with that.
+
+00:30:10.896 --> 00:30:13.516 A:middle
+Well, what is the data
+that IconReel uses?
+
+00:30:13.986 --> 00:30:16.686 A:middle
+Well, they are icons,
+and the first property is
+
+00:30:16.686 --> 00:30:18.106 A:middle
+that they are absolutely
+essential.
+
+00:30:18.136 --> 00:30:19.806 A:middle
+We don't have an app
+if we don't have icons.
+
+00:30:20.016 --> 00:30:21.846 A:middle
+At some point, the user
+will scroll to them.
+
+00:30:21.846 --> 00:30:22.576 A:middle
+We need them.
+
+00:30:22.576 --> 00:30:23.516 A:middle
+No getting away from it.
+
+00:30:24.776 --> 00:30:26.376 A:middle
+Second, they are
+expensive to generate.
+
+00:30:27.136 --> 00:30:28.916 A:middle
+Read them off the
+disk, decode them,
+
+00:30:29.066 --> 00:30:33.256 A:middle
+do nice rounded corners,
+whatever you want.
+
+00:30:33.506 --> 00:30:33.966 A:middle
+Expensive.
+
+00:30:35.326 --> 00:30:37.656 A:middle
+The third point, though, they
+can actually be precomputed.
+
+00:30:37.656 --> 00:30:40.146 A:middle
+We know ahead of time what
+the images are going to be.
+
+00:30:40.506 --> 00:30:43.576 A:middle
+If we have the spare cycles,
+we can calculate them.
+
+00:30:43.576 --> 00:30:47.386 A:middle
+And the last point is that
+they are largely static.
+
+00:30:48.266 --> 00:30:49.686 A:middle
+There is a very,
+very good chance
+
+00:30:49.686 --> 00:30:52.346 A:middle
+if I pregenerated something,
+it is going to be the same
+
+00:30:52.516 --> 00:30:55.036 A:middle
+when I actually need it because
+it doesn't change frequently.
+
+00:30:55.476 --> 00:30:56.786 A:middle
+All of these points combine
+
+00:30:57.726 --> 00:31:01.676 A:middle
+to make this data a perfect
+candidate for caching to a file.
+
+
+
+00:30:57.726 --> 00:31:01.676 A:middle
+to make this data a perfect
+candidate for caching to a file.
+
+00:31:02.696 --> 00:31:03.846 A:middle
+Before I move on from this,
+
+00:31:03.846 --> 00:31:06.256 A:middle
+I want to make the point
+this is still a cache even
+
+00:31:06.256 --> 00:31:06.956 A:middle
+if it's a file.
+
+00:31:07.436 --> 00:31:10.686 A:middle
+Don't go writing such caches
+to the user's documents folder.
+
+00:31:11.006 --> 00:31:12.696 A:middle
+Keep it for your
+app's cache folder
+
+00:31:12.696 --> 00:31:14.016 A:middle
+or the system's temp directory.
+
+00:31:14.606 --> 00:31:16.996 A:middle
+Back to our system resources.
+
+00:31:17.046 --> 00:31:18.876 A:middle
+We just introduced a new one.
+
+00:31:19.466 --> 00:31:20.426 A:middle
+That is disk space.
+
+00:31:21.076 --> 00:31:25.086 A:middle
+We can trade some CPU cycles
+up front to generate the data,
+
+00:31:25.906 --> 00:31:28.346 A:middle
+save it off, and then when we
+actually need to pull it in,
+
+00:31:28.876 --> 00:31:32.606 A:middle
+we virtually eliminated the
+need for the CPU at all.
+
+00:31:33.486 --> 00:31:36.156 A:middle
+Now, you may have noticed
+that I/O went up a bit there
+
+00:31:36.156 --> 00:31:38.846 A:middle
+because the fully rendered
+images may be larger
+
+00:31:38.846 --> 00:31:40.466 A:middle
+than the source files.
+
+00:31:40.466 --> 00:31:41.016 A:middle
+That's okay.
+
+00:31:41.486 --> 00:31:42.616 A:middle
+These things are all
+about trade-offs.
+
+00:31:43.776 --> 00:31:47.226 A:middle
+That leads me directly to
+maximizing clean memory.
+
+00:31:48.256 --> 00:31:51.036 A:middle
+You may recall I said earlier
+that memory backed by a file
+
+00:31:51.036 --> 00:31:52.756 A:middle
+on disk is considered clean.
+
+00:31:53.246 --> 00:31:55.156 A:middle
+Well, we have a file
+on disk now.
+
+00:31:55.256 --> 00:31:55.926 A:middle
+What a coincidence.
+
+00:31:56.626 --> 00:31:58.346 A:middle
+Data in such a file
+can be memory mapped.
+
+00:31:58.426 --> 00:32:00.896 A:middle
+The system will allocate
+a chunk of memory for you
+
+
+
+00:31:58.426 --> 00:32:00.896 A:middle
+The system will allocate
+a chunk of memory for you
+
+00:32:00.896 --> 00:32:03.786 A:middle
+that directly maps the file, the
+contents of the file, on disk.
+
+00:32:03.786 --> 00:32:07.076 A:middle
+It is most definitely
+worth noting that memory
+
+00:32:07.076 --> 00:32:09.846 A:middle
+in the file contents
+must match exactly.
+
+00:32:10.296 --> 00:32:13.586 A:middle
+You cannot memory map a file
+that needs further decoding,
+
+00:32:13.586 --> 00:32:16.186 A:middle
+or what have you,
+after it is loaded in.
+
+00:32:16.796 --> 00:32:19.806 A:middle
+This is ideal for read-only
+data, as I mentioned,
+
+00:32:19.806 --> 00:32:20.816 A:middle
+that doesn't change frequently.
+
+00:32:22.296 --> 00:32:25.436 A:middle
+The coolest part about
+all of this is the same
+
+00:32:25.436 --> 00:32:26.606 A:middle
+with purgeable memory,
+
+00:32:26.866 --> 00:32:30.446 A:middle
+the system can reclaim any
+free memory from you as needed.
+
+00:32:31.296 --> 00:32:33.146 A:middle
+But, it is not gone.
+
+00:32:33.616 --> 00:32:35.616 A:middle
+When you need it again,
+when you access again,
+
+00:32:35.796 --> 00:32:38.006 A:middle
+the system loads it
+back from the disk,
+
+00:32:38.006 --> 00:32:39.156 A:middle
+and it's like it
+never went away.
+
+00:32:40.736 --> 00:32:42.916 A:middle
+Furthermore, it has great
+random access properties.
+
+00:32:42.956 --> 00:32:45.126 A:middle
+Just because your working set
+is here and you need a piece
+
+00:32:45.126 --> 00:32:46.726 A:middle
+of data over here,
+doesn't matter.
+
+00:32:47.036 --> 00:32:49.016 A:middle
+The system can just read
+that portion of the file,
+
+00:32:49.076 --> 00:32:50.846 A:middle
+hand it off to you,
+and you're good to go.
+
+00:32:51.286 --> 00:32:53.826 A:middle
+What does this look like?
+
+00:32:54.086 --> 00:32:55.376 A:middle
+We start with our
+data in memory.
+
+00:32:56.066 --> 00:32:58.116 A:middle
+And you write it out to disk.
+
+00:32:58.806 --> 00:33:00.846 A:middle
+The system now considers
+this, that memory map.
+
+
+
+00:32:58.806 --> 00:33:00.846 A:middle
+The system now considers
+this, that memory map.
+
+00:33:00.846 --> 00:33:05.816 A:middle
+If you go to access a chunk
+of it, all it does is load
+
+00:33:05.816 --> 00:33:07.386 A:middle
+that in, hand it off to you.
+
+00:33:07.456 --> 00:33:09.996 A:middle
+When you are not using it
+anymore, it takes it away.
+
+00:33:10.766 --> 00:33:14.146 A:middle
+How can we apply
+this to IconReel?
+
+00:33:14.906 --> 00:33:17.546 A:middle
+We'll start with the working
+set, but actually we are going
+
+00:33:17.546 --> 00:33:18.856 A:middle
+to combine the working set
+
+00:33:19.186 --> 00:33:21.396 A:middle
+with every other icon
+image we generated
+
+00:33:21.546 --> 00:33:29.316 A:middle
+and create one big data
+file and write that to disk.
+
+00:33:29.486 --> 00:33:32.426 A:middle
+Now, back in our app, we
+bring back our working set.
+
+00:33:32.426 --> 00:33:32.936 A:middle
+Three pages.
+
+00:33:34.546 --> 00:33:36.466 A:middle
+We access those three
+pages of memory,
+
+00:33:36.466 --> 00:33:39.296 A:middle
+and the system just loads
+only that portion of the file
+
+00:33:39.296 --> 00:33:41.536 A:middle
+into memory for us, keeping
+the rest of this clean.
+
+00:33:41.786 --> 00:33:44.196 A:middle
+Doesn't matter if that file goes
+out for hundreds of megabytes.
+
+00:33:44.196 --> 00:33:45.726 A:middle
+It is not there in memory.
+
+00:33:46.126 --> 00:33:47.926 A:middle
+As we scroll around,
+the same happens.
+
+00:33:48.826 --> 00:33:50.206 A:middle
+System loads in the
+data we need.
+
+00:33:50.626 --> 00:33:53.446 A:middle
+Say if we introduce a feature
+that shows notifications
+
+00:33:53.446 --> 00:33:55.636 A:middle
+for icons that may be
+elsewhere on the home screen,
+
+00:33:55.836 --> 00:33:57.546 A:middle
+we can pull those
+in without worrying
+
+00:33:57.546 --> 00:33:58.826 A:middle
+about where they
+are, what they are.
+
+00:33:59.416 --> 00:34:02.966 A:middle
+Virtual memory system does
+all the heavy lifting for us.
+
+
+
+00:33:59.416 --> 00:34:02.966 A:middle
+Virtual memory system does
+all the heavy lifting for us.
+
+00:34:04.776 --> 00:34:06.856 A:middle
+How does this change our
+system resource bars?
+
+00:34:07.656 --> 00:34:09.166 A:middle
+We've already killed CPU there.
+
+00:34:09.166 --> 00:34:12.146 A:middle
+But now our cache
+is actually on disk.
+
+00:34:12.146 --> 00:34:13.686 A:middle
+So that goes away, too.
+
+00:34:14.476 --> 00:34:16.926 A:middle
+And now our only memory
+footprint is the working set.
+
+00:34:17.166 --> 00:34:18.686 A:middle
+Everything else is
+considered clean
+
+00:34:19.206 --> 00:34:20.536 A:middle
+and thus does not
+count against us.
+
+00:34:21.366 --> 00:34:25.656 A:middle
+It is also worth noting that we
+effectively eliminated the CPU
+
+00:34:25.686 --> 00:34:28.775 A:middle
+requirements on both
+the front and back end
+
+00:34:28.775 --> 00:34:29.846 A:middle
+of our data's life cycle.
+
+00:34:30.186 --> 00:34:32.835 A:middle
+We no longer need CPU
+to generate data to show
+
+00:34:32.835 --> 00:34:35.326 A:middle
+to the user, nor do we
+need CPU to clean it
+
+00:34:35.326 --> 00:34:36.755 A:middle
+up in response to
+memory warnings.
+
+00:34:36.786 --> 00:34:38.786 A:middle
+The system is doing
+all of that for us.
+
+00:34:40.186 --> 00:34:41.565 A:middle
+How can you use memory map data?
+
+00:34:42.106 --> 00:34:44.476 A:middle
+Once again, it's a
+simple API on NSData.
+
+00:34:44.476 --> 00:34:46.726 A:middle
+There are some options
+you can use
+
+00:34:46.775 --> 00:34:48.376 A:middle
+to initialize the data object.
+
+00:34:48.775 --> 00:34:51.616 A:middle
+If you specified the mapped
+option in your initializer,
+
+00:34:52.096 --> 00:34:54.545 A:middle
+you will get a memory
+map data file.
+
+00:34:54.545 --> 00:34:59.326 A:middle
+I would be remiss, however,
+if I did not mention
+
+00:34:59.326 --> 00:35:01.236 A:middle
+that there were caveats
+with using this system.
+
+
+
+00:34:59.326 --> 00:35:01.236 A:middle
+that there were caveats
+with using this system.
+
+00:35:02.186 --> 00:35:04.066 A:middle
+The first being that
+it is not appropriate
+
+00:35:04.066 --> 00:35:05.156 A:middle
+for small chunks of data.
+
+00:35:05.456 --> 00:35:07.496 A:middle
+The virtual memory
+itself works on pages,
+
+00:35:07.496 --> 00:35:09.176 A:middle
+which are small chunks of data.
+
+00:35:09.426 --> 00:35:13.786 A:middle
+If yours are even smaller,
+you will introduce problems
+
+00:35:13.856 --> 00:35:16.036 A:middle
+that overshadow what you are
+actually trying to solve.
+
+00:35:16.726 --> 00:35:19.676 A:middle
+Furthermore, from
+memory map files,
+
+00:35:20.106 --> 00:35:22.716 A:middle
+if you memory mapped a
+thousand icon files, say,
+
+00:35:22.716 --> 00:35:25.846 A:middle
+there is actually a limit to the
+open files any process can have.
+
+00:35:25.846 --> 00:35:27.456 A:middle
+You can get yourself
+into trouble that way.
+
+00:35:28.006 --> 00:35:29.216 A:middle
+That's one of the main reasons
+
+00:35:29.216 --> 00:35:31.686 A:middle
+in our examples we grouped
+the data into larger chunks
+
+00:35:31.726 --> 00:35:35.326 A:middle
+to make it more manageable
+for the VM system.
+
+00:35:35.466 --> 00:35:38.096 A:middle
+You can also just misuse
+the virtual memory system.
+
+00:35:38.156 --> 00:35:41.226 A:middle
+Each purgeable data object
+you create creates a region
+
+00:35:41.226 --> 00:35:42.446 A:middle
+in your virtual memory space.
+
+00:35:42.816 --> 00:35:45.376 A:middle
+If you create too many of
+these memory map files, too,
+
+00:35:45.376 --> 00:35:47.156 A:middle
+you can fragment
+your entire space.
+
+00:35:47.156 --> 00:35:49.226 A:middle
+You can similarly exhaust it.
+
+00:35:49.496 --> 00:35:51.826 A:middle
+If you decide to memory map
+a file that is ten gigabytes,
+
+00:35:51.826 --> 00:35:53.556 A:middle
+you're going to run
+out of space entirely.
+
+00:35:54.866 --> 00:35:58.796 A:middle
+Unfortunately, abusing the
+virtual memory system results
+
+00:35:58.796 --> 00:36:00.206 A:middle
+in your process being
+terminated,
+
+
+
+00:35:58.796 --> 00:36:00.206 A:middle
+in your process being
+terminated,
+
+00:36:00.246 --> 00:36:02.256 A:middle
+which is what we are here to
+avoid in the first place, right?
+
+00:36:02.256 --> 00:36:07.376 A:middle
+In order to give the best
+multitasking experience
+
+00:36:07.376 --> 00:36:10.246 A:middle
+to the user, it is really
+important to understand the data
+
+00:36:10.246 --> 00:36:13.416 A:middle
+and the characteristics of
+the data that your app uses.
+
+00:36:14.086 --> 00:36:16.836 A:middle
+You must be able to
+differentiate nice-to-have data
+
+00:36:17.186 --> 00:36:19.516 A:middle
+from the essential data
+you need right now.
+
+00:36:20.246 --> 00:36:21.596 A:middle
+Can your data be precomputed?
+
+00:36:21.796 --> 00:36:23.536 A:middle
+How expensive is
+it to re-create?
+
+00:36:24.186 --> 00:36:25.396 A:middle
+How frequently does it change?
+
+00:36:26.016 --> 00:36:28.906 A:middle
+Understanding this about the
+data you use can help you pick
+
+00:36:28.906 --> 00:36:32.246 A:middle
+the right tools to make your
+memory as adaptable as possible.
+
+00:36:33.146 --> 00:36:36.996 A:middle
+Together we can improve
+the adaptivity of our apps
+
+00:36:37.046 --> 00:36:39.586 A:middle
+and provide the best
+multitasking experience
+
+00:36:39.586 --> 00:36:40.136 A:middle
+for our users.
+
+00:36:40.746 --> 00:36:43.956 A:middle
+In the coming weeks, as
+you're update your apps
+
+00:36:44.026 --> 00:36:45.636 A:middle
+for multitasking in iOS 9,
+
+00:36:45.756 --> 00:36:47.546 A:middle
+I hope you keep these
+topics in mind.
+
+00:36:48.486 --> 00:36:53.746 A:middle
+First, using Instruments
+to identify and fix bugs.
+
+00:36:54.266 --> 00:36:55.236 A:middle
+This is the easy stuff.
+
+00:36:55.236 --> 00:36:57.646 A:middle
+Your leaks, inefficient
+data structures, algorithms,
+
+00:36:57.856 --> 00:36:58.976 A:middle
+abandoned memory, too.
+
+00:36:59.336 --> 00:37:01.156 A:middle
+Get that stuff fixed.
+
+
+
+00:36:59.336 --> 00:37:01.156 A:middle
+Get that stuff fixed.
+
+00:37:01.156 --> 00:37:03.396 A:middle
+Second, prioritize
+your work appropriately
+
+00:37:03.396 --> 00:37:04.656 A:middle
+and don't block the main thread.
+
+00:37:04.996 --> 00:37:06.906 A:middle
+I don't know how many of
+you caught the first session
+
+00:37:06.906 --> 00:37:09.376 A:middle
+in this series, but the system
+may actually terminate you
+
+00:37:09.376 --> 00:37:12.156 A:middle
+for blocking the main
+thread for too long.
+
+00:37:12.156 --> 00:37:13.256 A:middle
+It is best to understand
+
+00:37:13.256 --> 00:37:15.086 A:middle
+where your work should
+go and put it there.
+
+00:37:15.536 --> 00:37:18.686 A:middle
+The third was identifying and
+managing your working set,
+
+00:37:18.926 --> 00:37:21.606 A:middle
+and be aware that this
+working set may change based
+
+00:37:21.606 --> 00:37:23.636 A:middle
+on the application's
+current executing context:
+
+00:37:23.916 --> 00:37:26.816 A:middle
+are you foreground, are you
+background, are you a PiP?
+
+00:37:27.036 --> 00:37:28.286 A:middle
+Understand where
+you are right now
+
+00:37:28.286 --> 00:37:31.006 A:middle
+because your working set
+is likely not the same.
+
+00:37:31.576 --> 00:37:34.526 A:middle
+The fourth is to use caches and
+response to memory warnings.
+
+00:37:34.656 --> 00:37:39.216 A:middle
+This is the basics for being
+a good multitasking citizen.
+
+00:37:39.626 --> 00:37:40.446 A:middle
+Please respond to them.
+
+00:37:42.376 --> 00:37:44.126 A:middle
+Next, leverage the
+virtual memory system,
+
+00:37:44.126 --> 00:37:45.126 A:middle
+which is what we talked about.
+
+00:37:45.536 --> 00:37:47.756 A:middle
+Understand the data
+characteristics of your app,
+
+00:37:47.756 --> 00:37:49.276 A:middle
+and see if you can
+leverage these tools
+
+00:37:49.276 --> 00:37:52.476 A:middle
+to let the system manage
+your memory for you.
+
+00:37:53.536 --> 00:37:56.116 A:middle
+The last is that great
+performance requires trade-offs.
+
+00:37:56.606 --> 00:37:57.766 A:middle
+Your apps have requirements.
+
+00:37:57.886 --> 00:37:59.516 A:middle
+The apps running next to
+you have requirements.
+
+00:37:59.576 --> 00:38:00.826 A:middle
+The system has limitations.
+
+
+
+00:37:59.576 --> 00:38:00.826 A:middle
+The system has limitations.
+
+00:38:01.996 --> 00:38:05.516 A:middle
+Identify ways your app can
+adapt to the environment
+
+00:38:06.076 --> 00:38:08.486 A:middle
+with more constrained
+resources as this is the key
+
+00:38:08.486 --> 00:38:11.396 A:middle
+to improving the user
+experience for everybody.
+
+00:38:12.576 --> 00:38:14.846 A:middle
+Because I started with a quote,
+I'm going to end with one.
+
+00:38:15.586 --> 00:38:16.736 A:middle
+I found this on the Internet.
+
+00:38:16.736 --> 00:38:19.896 A:middle
+Allegedly attributed to Charles
+Darwin: "It is not the strongest
+
+00:38:20.186 --> 00:38:21.606 A:middle
+or most intelligent who survive,
+
+00:38:21.936 --> 00:38:23.606 A:middle
+but those who can
+best manage change."
+
+00:38:24.266 --> 00:38:27.716 A:middle
+Multitasking is about
+adapting, and the apps
+
+00:38:27.716 --> 00:38:30.466 A:middle
+that best adapt are going
+
+00:38:30.466 --> 00:38:32.146 A:middle
+to provide the best
+user experience.
+
+00:38:33.696 --> 00:38:36.336 A:middle
+For more information I
+really encourage you to check
+
+00:38:36.336 --> 00:38:37.636 A:middle
+out the documentation.
+
+00:38:37.636 --> 00:38:39.626 A:middle
+There's a new Adopting
+Multitasking guide
+
+00:38:39.626 --> 00:38:40.216 A:middle
+that is great.
+
+00:38:40.726 --> 00:38:42.826 A:middle
+Technical support,
+come to the forums.
+
+00:38:43.376 --> 00:38:44.756 A:middle
+If you have any general
+questions,
+
+00:38:44.976 --> 00:38:47.476 A:middle
+there's Curt Rothert,
+contact him.
+
+00:38:47.766 --> 00:38:49.616 A:middle
+He's also an ex-SpringBoard
+engineer, by the way,
+
+00:38:49.616 --> 00:38:50.896 A:middle
+so I'm sure he would
+love to hear from you.
+
+00:38:51.516 --> 00:38:53.966 A:middle
+[Laughter]
+
+00:38:54.466 --> 00:38:56.136 A:middle
+We had two sessions
+earlier in this track.
+
+00:38:56.136 --> 00:38:57.556 A:middle
+I encourage you to watch them.
+
+00:38:57.696 --> 00:39:00.486 A:middle
+There are also Performance
+and GCD talks coming up.
+
+
+
+00:38:57.696 --> 00:39:00.486 A:middle
+There are also Performance
+and GCD talks coming up.
+
+00:39:01.336 --> 00:39:02.626 A:middle
+Thank you, everybody,
+for coming out!
+
+00:39:03.296 --> 00:39:04.706 A:middle
+I can't wait to see your apps!
+
+00:39:05.508 --> 00:39:07.508 A:middle
+[Applause]
+
