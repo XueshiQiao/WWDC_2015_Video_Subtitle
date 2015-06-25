@@ -1,0 +1,3027 @@
+
+00:00:25.516 --> 00:00:31.796 A:middle
+[Applause]
+
+00:00:32.296 --> 00:00:32.776 A:middle
+&gt;&gt; LUKE CASE: Good morning!
+
+00:00:34.116 --> 00:00:35.336 A:middle
+Thanks for coming
+out and welcome
+
+00:00:35.336 --> 00:00:37.196 A:middle
+to "Networking with
+NSURL Session."
+
+00:00:37.716 --> 00:00:40.266 A:middle
+I'm Luke Case and I'm an
+engineer on the CF Network team.
+
+00:00:40.266 --> 00:00:41.836 A:middle
+We have got some
+great stuff lined
+
+00:00:41.836 --> 00:00:42.906 A:middle
+up for you guys this morning.
+
+00:00:43.416 --> 00:00:45.846 A:middle
+First, we're going
+to talk a little bit
+
+00:00:45.846 --> 00:00:49.126 A:middle
+about app transport security
+and following that we will talk
+
+00:00:49.126 --> 00:00:52.216 A:middle
+about some new protocol support
+we've added in NSURL Session.
+
+00:00:53.086 --> 00:00:56.136 A:middle
+Now, we all heard about
+watchOS on Monday.
+
+00:00:56.546 --> 00:00:59.936 A:middle
+We'll talk about the NSURL
+Session features we've added
+
+
+
+00:01:00.576 --> 00:01:01.666 A:middle
+for watchOS.
+
+00:01:02.026 --> 00:01:05.495 A:middle
+Following that, we will wrap
+things up with some API changes
+
+00:01:05.495 --> 00:01:07.776 A:middle
+and some new additions we've
+added to the NSURL Session.
+
+00:01:08.366 --> 00:01:11.906 A:middle
+Now, to begin, I would like
+to start with a little bit
+
+00:01:11.906 --> 00:01:15.686 A:middle
+of background on NSURL
+Session and the HTTP protocol.
+
+00:01:16.166 --> 00:01:19.976 A:middle
+NSURL Session is a networking
+API that is mainly used
+
+00:01:19.976 --> 00:01:23.666 A:middle
+to download content, HTTP
+content, from the web.
+
+00:01:24.576 --> 00:01:27.906 A:middle
+It has a rich set of delegate
+methods that can be used
+
+00:01:27.906 --> 00:01:32.016 A:middle
+for authentication and other
+important event handling.
+
+00:01:32.616 --> 00:01:35.846 A:middle
+And one of the greatest
+features about NSURL Session is
+
+00:01:35.846 --> 00:01:36.886 A:middle
+that it allows you
+
+00:01:37.436 --> 00:01:41.906 A:middle
+to do networking even while
+your app is not running via the
+
+00:01:42.066 --> 00:01:44.216 A:middle
+background download APIs.
+
+00:01:44.216 --> 00:01:47.456 A:middle
+Now, for those of you
+that aren't familiar
+
+00:01:47.456 --> 00:01:49.746 A:middle
+with NSURL Session,
+it's recommended
+
+00:01:49.746 --> 00:01:53.826 A:middle
+that you go back a few years
+to the previous WWDC sessions
+
+00:01:54.246 --> 00:01:55.986 A:middle
+on the introduction
+of NSURL Session.
+
+00:01:56.356 --> 00:01:59.196 A:middle
+So now let's talk a little bit
+
+00:01:59.196 --> 00:02:02.096 A:middle
+about the hypertext
+transfer protocol.
+
+
+
+00:01:59.196 --> 00:02:02.096 A:middle
+about the hypertext
+transfer protocol.
+
+00:02:02.166 --> 00:02:04.286 A:middle
+It's a very well-known
+protocol and many
+
+00:02:04.286 --> 00:02:06.136 A:middle
+of you x probably
+are familiar with it.
+
+00:02:06.846 --> 00:02:08.106 A:middle
+Essentially at its core,
+
+00:02:08.106 --> 00:02:11.356 A:middle
+what you are doing is you are
+making requests to the server
+
+00:02:11.556 --> 00:02:14.396 A:middle
+and you are pulling
+in data in response.
+
+00:02:15.196 --> 00:02:20.686 A:middle
+Now, HTTP in itself, as
+some of you may know,
+
+00:02:20.686 --> 00:02:22.096 A:middle
+is sent out over cleartext.
+
+00:02:22.096 --> 00:02:23.766 A:middle
+So it's inherently insecure.
+
+00:02:24.726 --> 00:02:26.086 A:middle
+And in today's environment,
+
+00:02:26.686 --> 00:02:28.566 A:middle
+there's many hostile
+parties going
+
+00:02:29.006 --> 00:02:31.156 A:middle
+after the data that's
+leaving your app
+
+00:02:31.156 --> 00:02:32.636 A:middle
+and going out onto the network.
+
+00:02:36.396 --> 00:02:41.356 A:middle
+Now, there was a time when
+using cleartext HTTP alone was
+
+00:02:41.356 --> 00:02:42.346 A:middle
+perfectly reasonable.
+
+00:02:42.736 --> 00:02:44.586 A:middle
+But that time has passed.
+
+00:02:45.216 --> 00:02:48.426 A:middle
+Now, fortunately for all of us,
+this problem has been solved
+
+00:02:48.426 --> 00:02:49.646 A:middle
+for many years and
+there's a tried
+
+00:02:49.646 --> 00:02:56.786 A:middle
+and true solution
+known as HTTPS.
+
+00:02:56.786 --> 00:03:00.066 A:middle
+Now, HTTPS is essentially
+HTTP layered on top
+
+
+
+00:02:56.786 --> 00:03:00.066 A:middle
+Now, HTTPS is essentially
+HTTP layered on top
+
+00:03:00.066 --> 00:03:02.746 A:middle
+of another protocol known
+as transport layer security.
+
+00:03:03.416 --> 00:03:06.656 A:middle
+And transport layer security
+performs a multi-leg handshake
+
+00:03:07.106 --> 00:03:10.026 A:middle
+using public key
+cryptography and, when complete,
+
+00:03:10.246 --> 00:03:11.806 A:middle
+creates a secure connection.
+
+00:03:11.806 --> 00:03:15.216 A:middle
+Now this connection
+is considered secure
+
+00:03:15.536 --> 00:03:16.806 A:middle
+because of three properties.
+
+00:03:17.576 --> 00:03:21.866 A:middle
+The first being that the data
+that's leaving your app goes
+
+00:03:21.866 --> 00:03:23.026 A:middle
+over the network encrypted.
+
+00:03:23.396 --> 00:03:24.256 A:middle
+So it can't be read.
+
+00:03:25.146 --> 00:03:28.036 A:middle
+The second that it
+provides message integrity
+
+00:03:28.676 --> 00:03:31.096 A:middle
+so the message can't be
+altered without detection.
+
+00:03:31.916 --> 00:03:34.816 A:middle
+And finally, the third,
+it provides authentication
+
+00:03:34.816 --> 00:03:37.856 A:middle
+so you can actually prove
+the identity of exactly
+
+00:03:37.856 --> 00:03:42.766 A:middle
+who you are talking to.
+
+00:03:43.016 --> 00:03:47.046 A:middle
+Now, NSURL Session has
+excellent HTTPS support embedded
+
+00:03:47.046 --> 00:03:51.206 A:middle
+within in it, and so often in
+your client code, it's as easy
+
+00:03:51.396 --> 00:03:54.296 A:middle
+as using HTTPS instead
+of using HTTP.
+
+00:03:54.946 --> 00:03:57.456 A:middle
+Now, do note that some
+additional server support is
+
+00:03:57.456 --> 00:04:04.016 A:middle
+required, but HTTPS is supported
+by most server vendors today.
+
+
+
+00:03:57.456 --> 00:04:04.016 A:middle
+required, but HTTPS is supported
+by most server vendors today.
+
+00:04:04.196 --> 00:04:09.386 A:middle
+Also keep in mind that most data
+should be considered sensitive,
+
+00:04:09.386 --> 00:04:13.296 A:middle
+and this is because even
+if you might not think
+
+00:04:13.296 --> 00:04:15.996 A:middle
+that the data that's
+leaving your app going
+
+00:04:16.286 --> 00:04:17.976 A:middle
+out onto the network
+is not sensitive,
+
+00:04:18.815 --> 00:04:21.726 A:middle
+your customer may,
+in fact, think it is.
+
+00:04:22.005 --> 00:04:24.616 A:middle
+For example, if you
+have a TV streaming app,
+
+00:04:26.086 --> 00:04:27.966 A:middle
+you may think, well,
+it's just TV.
+
+00:04:28.086 --> 00:04:30.406 A:middle
+You know? He's just watching TV.
+
+00:04:30.786 --> 00:04:32.916 A:middle
+He or she is just
+watching TV, but to them,
+
+00:04:33.376 --> 00:04:37.376 A:middle
+it may mean that they
+don't want people
+
+00:04:37.756 --> 00:04:39.176 A:middle
+to know what they are
+watching, essentially.
+
+00:04:39.246 --> 00:04:39.966 A:middle
+Let's put it that way.
+
+00:04:40.486 --> 00:04:42.486 A:middle
+[Laughter]
+
+00:04:42.956 --> 00:04:46.586 A:middle
+So -- now, why is it
+important to use HTTPS?
+
+00:04:46.586 --> 00:04:49.076 A:middle
+Well, it's essentially,
+it comes down to this:
+
+00:04:49.416 --> 00:04:52.586 A:middle
+your customers trust you with
+their data and their privacy.
+
+00:04:53.526 --> 00:04:56.596 A:middle
+And we at Apple, we really want
+to work together with you guys
+
+00:04:56.596 --> 00:04:59.866 A:middle
+to make sure that we build
+upon and maintain that trust.
+
+
+
+00:05:00.236 --> 00:05:01.146 A:middle
+And today, I'm proud
+
+00:05:01.146 --> 00:05:03.556 A:middle
+to introduce App
+Transport Security.
+
+00:05:04.096 --> 00:05:08.726 A:middle
+Now, App Transport Security
+is a new feature from Apple
+
+00:05:09.096 --> 00:05:11.766 A:middle
+in iOS 9 and OS X, El Capitan.
+
+00:05:11.766 --> 00:05:17.366 A:middle
+And essentially, at its core
+it helps prevent accidental
+
+00:05:17.366 --> 00:05:19.736 A:middle
+disclosure of sensitive
+customer data.
+
+00:05:21.836 --> 00:05:26.186 A:middle
+Now, ATS also strengthens the
+default policy of NSURL Session.
+
+00:05:27.336 --> 00:05:30.826 A:middle
+And perhaps the most important
+aspect of that strengthening is
+
+00:05:30.826 --> 00:05:33.436 A:middle
+that now NSURL Session,
+by default,
+
+00:05:33.726 --> 00:05:36.266 A:middle
+will disallow cleartext
+HTTP loads.
+
+00:05:36.626 --> 00:05:38.776 A:middle
+It'll only use HTTPS
+connections.
+
+00:05:39.236 --> 00:05:41.466 A:middle
+Now, these connections that
+it does make uses today's
+
+00:05:41.466 --> 00:05:42.496 A:middle
+best practices.
+
+00:05:43.216 --> 00:05:46.226 A:middle
+So ATS places restrictions
+on TLS versions,
+
+00:05:47.006 --> 00:05:49.776 A:middle
+cipher suites used,
+certificate trusts,
+
+00:05:50.176 --> 00:05:52.756 A:middle
+and certificate key sizes that
+are used in that transaction.
+
+00:05:53.466 --> 00:05:59.066 A:middle
+Now ATS is simply configured
+via your apps Info.plist.
+
+00:05:59.706 --> 00:06:00.976 A:middle
+And you can see an example here.
+
+
+
+00:05:59.706 --> 00:06:00.976 A:middle
+And you can see an example here.
+
+00:06:02.166 --> 00:06:03.966 A:middle
+Essentially what we
+are asking you to do is
+
+00:06:03.966 --> 00:06:08.346 A:middle
+to declare your intended network
+behavior within your app.
+
+00:06:10.536 --> 00:06:15.216 A:middle
+So at its core, ATS wants you to
+really describe what you intend
+
+00:06:15.216 --> 00:06:19.016 A:middle
+to do with the network, and we
+really want you to worry less
+
+00:06:19.336 --> 00:06:21.646 A:middle
+about the security of your
+app and rely more heavily
+
+00:06:21.996 --> 00:06:23.406 A:middle
+on the system to
+do the right thing.
+
+00:06:23.916 --> 00:06:27.216 A:middle
+So describing your network
+transaction is, of course,
+
+00:06:27.216 --> 00:06:28.836 A:middle
+easiest when it's all secure.
+
+00:06:30.496 --> 00:06:34.956 A:middle
+So if your app exclusively
+uses secure connections,
+
+00:06:35.156 --> 00:06:37.266 A:middle
+and they only use best
+practice properties,
+
+00:06:37.916 --> 00:06:39.386 A:middle
+then there's nothing
+else you have to do
+
+00:06:39.386 --> 00:06:41.526 A:middle
+to configure ATS
+within your app.
+
+00:06:42.666 --> 00:06:45.426 A:middle
+So if you are writing a
+new app, this is exactly
+
+00:06:45.426 --> 00:06:48.606 A:middle
+where we want you to start,
+and if you have an existing app
+
+00:06:48.606 --> 00:06:50.046 A:middle
+or you are supporting
+legacy code,
+
+00:06:50.046 --> 00:06:54.796 A:middle
+this is where you
+should aim to be.
+
+00:06:55.056 --> 00:07:00.546 A:middle
+Now, we understand that this
+may not be always the case
+
+
+
+00:06:55.056 --> 00:07:00.546 A:middle
+Now, we understand that this
+may not be always the case
+
+00:07:00.546 --> 00:07:02.016 A:middle
+that you have a server
+that can comply
+
+00:07:02.016 --> 00:07:06.506 A:middle
+with these new restrictions on
+TLS versions or cipher suites,
+
+00:07:06.966 --> 00:07:11.136 A:middle
+so we allowed that to --
+through the use of exceptions.
+
+00:07:11.516 --> 00:07:14.976 A:middle
+And essentially, with ATS
+you can declare exceptions
+
+00:07:15.996 --> 00:07:18.606 A:middle
+and let us know what versions
+of TLS you want to use,
+
+00:07:18.606 --> 00:07:19.386 A:middle
+or if you want to opt
+
+00:07:19.386 --> 00:07:21.686 A:middle
+out of forward secrecy,
+or other options.
+
+00:07:22.246 --> 00:07:24.956 A:middle
+Now, we do understand
+
+00:07:24.956 --> 00:07:27.896 A:middle
+that existing apps may
+have different constraints.
+
+00:07:28.466 --> 00:07:32.686 A:middle
+Let's say for the most part
+you do use secure connections,
+
+00:07:33.396 --> 00:07:37.346 A:middle
+but in some cases,
+you have servers
+
+00:07:37.346 --> 00:07:41.556 A:middle
+that just don't support
+HTTPS or the best practices.
+
+00:07:42.036 --> 00:07:44.306 A:middle
+So, for example, if
+you have a media server
+
+00:07:44.596 --> 00:07:46.856 A:middle
+that doesn't support
+HTTPS and only HTTP,
+
+00:07:46.856 --> 00:07:52.046 A:middle
+you can easily describe this
+behavior using an exception.
+
+00:07:53.276 --> 00:07:56.736 A:middle
+Essentially all you have to do
+is declare which domain needs
+
+00:07:56.736 --> 00:08:00.256 A:middle
+to load over HTTP and NSURL
+Session will still allow
+
+
+
+00:07:56.736 --> 00:08:00.256 A:middle
+to load over HTTP and NSURL
+Session will still allow
+
+00:08:00.256 --> 00:08:01.586 A:middle
+that cleartext load.
+
+00:08:04.336 --> 00:08:06.556 A:middle
+Now we also know that some
+
+00:08:06.556 --> 00:08:09.116 A:middle
+of you may be supporting a
+general purpose web browser
+
+00:08:09.196 --> 00:08:13.006 A:middle
+or another app that loads URLs
+based off dynamic user input,
+
+00:08:13.006 --> 00:08:14.946 A:middle
+and we've allowed for that case.
+
+00:08:15.396 --> 00:08:19.656 A:middle
+In this case here, you can't
+possibly describe what secure
+
+00:08:19.656 --> 00:08:22.876 A:middle
+connections you need ahead of
+time, and so you can simply opt
+
+00:08:22.876 --> 00:08:25.606 A:middle
+out by declaring an
+allow-all policy.
+
+00:08:26.746 --> 00:08:31.446 A:middle
+Now the allow-all policy can
+be used to allow NSURL Session
+
+00:08:31.446 --> 00:08:35.366 A:middle
+to load any HTTP
+or HTTPS resource.
+
+00:08:36.186 --> 00:08:40.076 A:middle
+Now, do note that this is
+a useful tool for debugging
+
+00:08:40.525 --> 00:08:42.236 A:middle
+that I believe is already
+out on the Internet.
+
+00:08:42.645 --> 00:08:46.486 A:middle
+So we ask, if you do
+use it for debugging,
+
+00:08:46.566 --> 00:08:48.826 A:middle
+to do it temporarily
+for obvious reasons.
+
+00:08:49.466 --> 00:08:52.836 A:middle
+Now, even if you
+are in this state,
+
+00:08:52.836 --> 00:08:56.476 A:middle
+you can still protect
+specific servers and domains.
+
+00:08:57.786 --> 00:08:59.676 A:middle
+So you are in this state where
+you are allowing everything,
+
+00:08:59.896 --> 00:09:01.466 A:middle
+but you have your
+own servers, say,
+
+
+
+00:08:59.896 --> 00:09:01.466 A:middle
+but you have your
+own servers, say,
+
+00:09:01.466 --> 00:09:04.526 A:middle
+that you pull the configuration
+data from or metadata from,
+
+00:09:05.186 --> 00:09:08.636 A:middle
+and to do this, again, is
+just an exception within ATS.
+
+00:09:09.626 --> 00:09:13.166 A:middle
+You simply declare this domain
+that you want to protect
+
+00:09:13.166 --> 00:09:16.046 A:middle
+as an exception to
+the allow-all policy.
+
+00:09:16.646 --> 00:09:19.426 A:middle
+And this will allow
+NSURL Session to continue
+
+00:09:19.426 --> 00:09:23.016 A:middle
+to protect this resource
+by only loading over HTTPS
+
+00:09:23.746 --> 00:09:25.256 A:middle
+and with best practices.
+
+00:09:26.546 --> 00:09:32.546 A:middle
+Now, the SDK has been
+out since Monday,
+
+00:09:33.226 --> 00:09:36.066 A:middle
+and there's probably
+a few of you that woke
+
+00:09:36.066 --> 00:09:39.526 A:middle
+up at this awful hour, just to
+find out what ATS is all about
+
+00:09:39.596 --> 00:09:41.416 A:middle
+and why your network
+loads are failing.
+
+00:09:42.296 --> 00:09:45.006 A:middle
+Well, we understand that and we
+want to work together with you
+
+00:09:45.336 --> 00:09:47.276 A:middle
+to get you up and running.
+
+00:09:48.976 --> 00:09:52.706 A:middle
+So, do note that ATS is
+only active if you build
+
+00:09:52.706 --> 00:09:53.736 A:middle
+against a current SDK.
+
+00:09:53.736 --> 00:09:56.616 A:middle
+If you are targeting
+the previous release,
+
+00:09:57.066 --> 00:10:00.716 A:middle
+ATS rules do not apply.
+
+
+
+00:09:57.066 --> 00:10:00.716 A:middle
+ATS rules do not apply.
+
+00:10:00.926 --> 00:10:06.756 A:middle
+NSURL Session will transfer all
+HTTP resources or loads URLs
+
+00:10:07.066 --> 00:10:08.926 A:middle
+to HTTPS automatically.
+
+00:10:09.516 --> 00:10:14.826 A:middle
+And, again, as I said earlier,
+some of you already know
+
+00:10:14.826 --> 00:10:18.466 A:middle
+about the allow-all key, and we
+ask you to use this temporarily
+
+00:10:18.676 --> 00:10:22.346 A:middle
+to find out if the new network
+failures in your app are
+
+00:10:22.346 --> 00:10:24.096 A:middle
+because of ATS or not.
+
+00:10:24.356 --> 00:10:28.346 A:middle
+And this will kind of help
+you narrow things down.
+
+00:10:28.546 --> 00:10:32.336 A:middle
+So the next step, if
+you allow-all ATS loads,
+
+00:10:32.606 --> 00:10:36.256 A:middle
+or allow-all loads,
+and you've determined
+
+00:10:36.256 --> 00:10:39.336 A:middle
+that the problem is ATS,
+the next step would be
+
+00:10:39.336 --> 00:10:42.396 A:middle
+to log the NSURL Session
+errors that you are seeing,
+
+00:10:42.706 --> 00:10:44.346 A:middle
+so you can try to
+determine and narrow
+
+00:10:44.346 --> 00:10:46.076 A:middle
+down which load is
+actually failing,
+
+00:10:46.076 --> 00:10:48.546 A:middle
+and what the underlying
+error is.
+
+00:10:50.496 --> 00:10:55.216 A:middle
+There is also a great debugging
+tool that's an environment
+
+00:10:55.216 --> 00:10:57.506 A:middle
+variable known as CF
+Network Diagnostics.
+
+00:10:58.706 --> 00:11:01.186 A:middle
+If you set CF Network
+Diagnostics to level 1,
+
+
+
+00:10:58.706 --> 00:11:01.186 A:middle
+If you set CF Network
+Diagnostics to level 1,
+
+00:11:01.936 --> 00:11:04.036 A:middle
+all the failing URL loads --
+
+00:11:04.166 --> 00:11:07.206 A:middle
+so, all the loads that
+failed will log the URLs
+
+00:11:07.576 --> 00:11:09.426 A:middle
+and the underlying TLS error.
+
+00:11:10.276 --> 00:11:12.376 A:middle
+And so what you can do
+in the next step is take
+
+00:11:12.376 --> 00:11:16.406 A:middle
+that underlying TLS error, and
+look up and secure transport.h,
+
+00:11:16.906 --> 00:11:20.336 A:middle
+and see exactly what
+the underlying issue is.
+
+00:11:21.026 --> 00:11:24.036 A:middle
+Usually it's a failure in
+negotiation between client
+
+00:11:24.036 --> 00:11:26.156 A:middle
+and server at the TLS layer.
+
+00:11:28.956 --> 00:11:34.196 A:middle
+So now, do understand
+that this is a new API,
+
+00:11:34.196 --> 00:11:35.946 A:middle
+and it's still under
+development.
+
+00:11:36.466 --> 00:11:38.826 A:middle
+So we strongly encourage
+you guys to pay attention
+
+00:11:38.826 --> 00:11:43.056 A:middle
+to the seed notes and
+release notes, and also,
+
+00:11:43.186 --> 00:11:46.576 A:middle
+please file radars so
+we can track any issues
+
+00:11:46.576 --> 00:11:48.326 A:middle
+that you guys are hitting
+
+00:11:48.576 --> 00:11:55.146 A:middle
+and help you guys
+get up and running.
+
+00:11:55.766 --> 00:11:57.336 A:middle
+So I hope it's clear
+that the time
+
+00:11:57.336 --> 00:11:58.636 A:middle
+for secure networking is now.
+
+00:11:59.356 --> 00:12:01.466 A:middle
+And we really want to
+work with you in order
+
+
+
+00:11:59.356 --> 00:12:01.466 A:middle
+And we really want to
+work with you in order
+
+00:12:01.466 --> 00:12:03.056 A:middle
+to protect your customers' data.
+
+00:12:04.396 --> 00:12:09.696 A:middle
+So, again, if you are writing
+a new app, start with HTTPS
+
+00:12:09.696 --> 00:12:12.306 A:middle
+and try to get your
+servers up and running
+
+00:12:12.926 --> 00:12:14.796 A:middle
+with the best practices.
+
+00:12:15.366 --> 00:12:20.056 A:middle
+Now, for those of you
+with existing apps,
+
+00:12:20.186 --> 00:12:24.016 A:middle
+we ask that you first start by
+moving what you can to HTTPS,
+
+00:12:24.016 --> 00:12:26.946 A:middle
+and for the places where
+you can't, go ahead
+
+00:12:26.946 --> 00:12:29.036 A:middle
+and use the exceptions
+that are available
+
+00:12:29.336 --> 00:12:30.906 A:middle
+through your Info.plist.
+
+00:12:32.296 --> 00:12:35.336 A:middle
+Now, do keep in mind that
+your customers trust you
+
+00:12:35.946 --> 00:12:39.856 A:middle
+with their data, and it is
+truly sensitive in all cases.
+
+00:12:40.326 --> 00:12:42.266 A:middle
+And so Apple wants to
+work together with you
+
+00:12:43.226 --> 00:12:45.886 A:middle
+to provide a more secure
+environment for your customers.
+
+00:12:46.416 --> 00:12:50.536 A:middle
+So, again, please give
+us feedback via radar,
+
+00:12:51.156 --> 00:12:54.006 A:middle
+come see us down at the lab
+after this session and tomorrow.
+
+00:12:54.556 --> 00:12:57.316 A:middle
+We really want to work with
+you to protect our customers.
+
+00:12:58.186 --> 00:13:01.336 A:middle
+Thank you all for being here and
+I will be followed up by Andreas
+
+
+
+00:12:58.186 --> 00:13:01.336 A:middle
+Thank you all for being here and
+I will be followed up by Andreas
+
+00:13:01.336 --> 00:13:03.936 A:middle
+who will talk about new protocol
+support and NSURL Session.
+
+00:13:04.266 --> 00:13:05.276 A:middle
+Have a great conference.
+
+00:13:06.516 --> 00:13:10.936 A:middle
+[Applause]
+
+00:13:11.436 --> 00:13:12.246 A:middle
+&gt;&gt; ANDREAS GARKUSCHA:
+Thanks, Luke.
+
+00:13:12.866 --> 00:13:16.316 A:middle
+Good morning, everyone!
+
+00:13:16.316 --> 00:13:18.576 A:middle
+My name is Andreas
+and I'm going to talk
+
+00:13:18.576 --> 00:13:21.186 A:middle
+about new protocol
+support in NSURL Session.
+
+00:13:23.376 --> 00:13:30.436 A:middle
+Yes, NSURL Session
+supports HTTP/2 protocol.
+
+00:13:31.916 --> 00:13:35.056 A:middle
+Your apps are ready to
+communicate using HTTP/2
+
+00:13:35.186 --> 00:13:37.296 A:middle
+and it's very easy to adopt.
+
+00:13:37.666 --> 00:13:40.496 A:middle
+Let me play it one more time.
+
+00:13:41.196 --> 00:13:41.826 A:middle
+All right!
+
+00:13:42.836 --> 00:13:45.786 A:middle
+If you are already using
+NSURL Session in your code,
+
+00:13:46.146 --> 00:13:48.726 A:middle
+you are automatically
+a part of all of that.
+
+00:13:49.226 --> 00:13:51.416 A:middle
+Future of the web,
+major milestone
+
+00:13:51.416 --> 00:13:54.606 A:middle
+in the web's evolution, your
+apps are running faster.
+
+00:13:55.036 --> 00:13:56.986 A:middle
+You don't need to
+change your source code.
+
+00:13:57.076 --> 00:13:58.766 A:middle
+Everything works automatically.
+
+
+
+00:14:00.346 --> 00:14:04.686 A:middle
+So today, we are going to
+talk about three things.
+
+00:14:05.616 --> 00:14:09.286 A:middle
+Why do we need a new protocol
+and what are the common problems
+
+00:14:09.766 --> 00:14:12.426 A:middle
+of the current HTTP/1.1
+protocol?
+
+00:14:12.496 --> 00:14:17.776 A:middle
+We will learn about the most
+important HTTP/2 features.
+
+00:14:18.696 --> 00:14:20.656 A:middle
+And finally, we will talk
+
+00:14:20.656 --> 00:14:26.546 A:middle
+about HTTP/2 protocol
+adoption in your apps.
+
+00:14:27.656 --> 00:14:29.876 A:middle
+So, why another new protocol?
+
+00:14:31.716 --> 00:14:34.746 A:middle
+We already have a
+lot of protocols
+
+00:14:35.076 --> 00:14:36.826 A:middle
+for every kind of communication.
+
+00:14:37.686 --> 00:14:39.096 A:middle
+The reason is that most
+
+00:14:39.096 --> 00:14:42.636 A:middle
+of the protocols were
+designed many years ago
+
+00:14:42.636 --> 00:14:44.236 A:middle
+for the needs of their time.
+
+00:14:45.056 --> 00:14:49.916 A:middle
+Look at one of the
+first Apple websites.
+
+00:14:51.216 --> 00:14:54.186 A:middle
+Today's needs look
+significantly different
+
+00:14:54.506 --> 00:14:56.726 A:middle
+than those 15 years ago.
+
+00:14:57.236 --> 00:14:58.776 A:middle
+So it is time for an update.
+
+00:14:59.436 --> 00:15:03.316 A:middle
+HTTP has been around since
+the beginning of the web,
+
+
+
+00:14:59.436 --> 00:15:03.316 A:middle
+HTTP has been around since
+the beginning of the web,
+
+00:15:03.866 --> 00:15:06.746 A:middle
+and it is not a secret
+that it has many issues.
+
+00:15:07.816 --> 00:15:11.026 A:middle
+The most famous HTTP
+issue is the problem
+
+00:15:11.026 --> 00:15:14.526 A:middle
+of only one outstanding
+request per TCP connection.
+
+00:15:16.546 --> 00:15:19.146 A:middle
+The solution for this
+was HTTP pipelining,
+
+00:15:19.826 --> 00:15:22.706 A:middle
+but HTTP pipelining
+is not available
+
+00:15:22.706 --> 00:15:24.136 A:middle
+on all servers or networks.
+
+00:15:24.786 --> 00:15:29.326 A:middle
+In fact, it's disabled on most
+popular desktop web browsers.
+
+00:15:31.376 --> 00:15:34.866 A:middle
+Another solution was to open
+multiple connections to a host.
+
+00:15:35.806 --> 00:15:39.166 A:middle
+This could help to fetch
+multiple resources faster,
+
+00:15:39.596 --> 00:15:43.606 A:middle
+but together with other things
+like textual protocol overhead,
+
+00:15:44.456 --> 00:15:47.426 A:middle
+the lack of header
+compression, it just adds
+
+00:15:47.506 --> 00:15:51.296 A:middle
+up to higher system requirements
+and lower performance
+
+00:15:51.576 --> 00:15:58.216 A:middle
+on both the client
+and the server.
+
+00:15:58.386 --> 00:16:01.576 A:middle
+Last year, we introduced SPDY
+Support in NSURL Session.
+
+
+
+00:15:58.386 --> 00:16:01.576 A:middle
+Last year, we introduced SPDY
+Support in NSURL Session.
+
+00:16:02.586 --> 00:16:04.876 A:middle
+SPDY was an attempt to
+make the web faster.
+
+00:16:05.456 --> 00:16:09.896 A:middle
+It was an experimental
+protocol, however, it was chosen
+
+00:16:10.326 --> 00:16:12.896 A:middle
+as a basis for a
+new version of HTTP.
+
+00:16:13.636 --> 00:16:18.086 A:middle
+The specification for the
+new protocol version went
+
+00:16:18.086 --> 00:16:20.686 A:middle
+through the IETF
+standardization,
+
+00:16:20.956 --> 00:16:24.566 A:middle
+and officially got an RFC
+number assigned last month.
+
+00:16:25.626 --> 00:16:30.476 A:middle
+So today, as you already know,
+NSURL Session is extended
+
+00:16:30.666 --> 00:16:33.646 A:middle
+to support HTTP/2 protocol.
+
+00:16:34.336 --> 00:16:37.736 A:middle
+Let's take a look at
+the key differences
+
+00:16:37.736 --> 00:16:40.546 A:middle
+between HTTP/1.1 and HTTP/2.
+
+00:16:41.856 --> 00:16:43.766 A:middle
+As opposed to HTTP/1.1,
+
+00:16:44.166 --> 00:16:48.096 A:middle
+HTTP/2 opens only one
+TCP connection to a host.
+
+00:16:49.446 --> 00:16:52.756 A:middle
+It's network friendly and
+requires less system resources
+
+00:16:52.876 --> 00:16:57.016 A:middle
+on both the client
+and the server.
+
+00:16:57.836 --> 00:17:00.186 A:middle
+HTTP/2 is fully multiplexed.
+
+
+
+00:16:57.836 --> 00:17:00.186 A:middle
+HTTP/2 is fully multiplexed.
+
+00:17:00.976 --> 00:17:04.415 A:middle
+That means that a new
+request does not need to wait
+
+00:17:04.415 --> 00:17:06.915 A:middle
+until the server
+sends the response
+
+00:17:06.915 --> 00:17:08.066 A:middle
+for the previous request.
+
+00:17:09.876 --> 00:17:12.826 A:middle
+HTTP/2 has request priorities,
+
+00:17:13.396 --> 00:17:16.496 A:middle
+so that more important
+resources can be delivered
+
+00:17:16.915 --> 00:17:20.675 A:middle
+at a higher priority
+to the client.
+
+00:17:22.165 --> 00:17:28.386 A:middle
+Let's take a look at how HTTP/2
+multiplexing resolves the
+
+00:17:28.386 --> 00:17:30.696 A:middle
+Head-of-Line Blocking problem.
+
+00:17:32.086 --> 00:17:35.406 A:middle
+We have three requests for
+resources on a web server.
+
+00:17:36.986 --> 00:17:40.856 A:middle
+We sent out the first
+request and we get a response.
+
+00:17:41.956 --> 00:17:45.076 A:middle
+Only after this, we can
+send out the second request
+
+00:17:46.016 --> 00:17:47.396 A:middle
+and get the second response.
+
+00:17:48.016 --> 00:17:50.996 A:middle
+Same happens with
+the third request.
+
+00:17:51.386 --> 00:17:58.586 A:middle
+Now, with pipelining enabled, we
+can send out all the requests,
+
+00:17:59.206 --> 00:18:01.726 A:middle
+one after another,
+without waiting
+
+
+
+00:17:59.206 --> 00:18:01.726 A:middle
+one after another,
+without waiting
+
+00:18:01.726 --> 00:18:03.516 A:middle
+for the previous
+responses to arrive.
+
+00:18:05.296 --> 00:18:09.636 A:middle
+But we still get the
+responses in the same order.
+
+00:18:10.716 --> 00:18:13.796 A:middle
+And you see that the first
+response for the image in blue,
+
+00:18:15.236 --> 00:18:17.096 A:middle
+blocks the following
+two responses.
+
+00:18:17.726 --> 00:18:23.626 A:middle
+With HTTP/2, we have
+the same three requests,
+
+00:18:24.426 --> 00:18:25.576 A:middle
+with different priorities.
+
+00:18:27.016 --> 00:18:30.846 A:middle
+We still can send out all the
+requests at the beginning,
+
+00:18:32.236 --> 00:18:37.946 A:middle
+but we are receiving all the
+responses at the same time.
+
+00:18:38.166 --> 00:18:42.076 A:middle
+Moreover, the requests
+with the higher priority,
+
+00:18:43.486 --> 00:18:45.646 A:middle
+I get and deliver
+faster to the client.
+
+00:18:46.846 --> 00:18:52.846 A:middle
+You see that the second
+response was a medium priority
+
+00:18:52.846 --> 00:18:56.606 A:middle
+and the third response for
+request was a high priority,
+
+00:18:57.306 --> 00:19:01.346 A:middle
+arrived prior to the first
+response even though they were
+
+
+
+00:18:57.306 --> 00:19:01.346 A:middle
+arrived prior to the first
+response even though they were
+
+00:19:01.346 --> 00:19:02.206 A:middle
+scheduled later.
+
+00:19:02.976 --> 00:19:06.266 A:middle
+The image does not block them
+anymore and this is great.
+
+00:19:06.606 --> 00:19:08.786 A:middle
+Great for your applications
+and the performance.
+
+00:19:10.606 --> 00:19:12.736 A:middle
+Let's continue with
+the comparison.
+
+00:19:13.376 --> 00:19:18.206 A:middle
+HTTP/2 is a binary protocol.
+
+00:19:20.476 --> 00:19:24.916 A:middle
+That makes data processing
+and parsing faster.
+
+00:19:25.596 --> 00:19:30.006 A:middle
+HTTP/1.1 does not use
+header compression.
+
+00:19:30.656 --> 00:19:33.546 A:middle
+SPDY also could not
+use header compression
+
+00:19:33.686 --> 00:19:35.406 A:middle
+because of a security exploit.
+
+00:19:36.266 --> 00:19:40.376 A:middle
+HTTP/2 uses HPACK, a
+more secure mechanism
+
+00:19:40.376 --> 00:19:41.386 A:middle
+for header compression.
+
+00:19:42.566 --> 00:19:44.966 A:middle
+Let's talk about HPACK.
+
+00:19:48.006 --> 00:19:50.516 A:middle
+HPACK header compression
+is based on two tables,
+
+00:19:51.326 --> 00:19:53.746 A:middle
+a static table and
+a dynamic one.
+
+00:19:55.336 --> 00:19:59.146 A:middle
+The static table contains
+the most used HTTP headers
+
+00:19:59.666 --> 00:20:00.766 A:middle
+and is unchangeable.
+
+
+
+00:19:59.666 --> 00:20:00.766 A:middle
+and is unchangeable.
+
+00:20:03.066 --> 00:20:06.776 A:middle
+The headers, which are not
+included in the static table,
+
+00:20:07.066 --> 00:20:08.876 A:middle
+can be added to the
+dynamic table.
+
+00:20:09.846 --> 00:20:13.516 A:middle
+The headers from the tables
+can be referenced by index.
+
+00:20:15.246 --> 00:20:19.476 A:middle
+As an example, you see a
+simple HTTP/1.1 request.
+
+00:20:20.936 --> 00:20:26.986 A:middle
+Highlighted is the data which is
+going to be sent to the server.
+
+00:20:26.986 --> 00:20:30.736 A:middle
+And here's HTTP/2 representation
+of the same request.
+
+00:20:30.736 --> 00:20:33.566 A:middle
+So let's encode this request.
+
+00:20:35.396 --> 00:20:42.046 A:middle
+The pseudo headers,
+method, scheme, and path,
+
+00:20:43.386 --> 00:20:46.016 A:middle
+can be referenced
+using the static table.
+
+00:20:47.756 --> 00:20:51.196 A:middle
+The authority header is
+included in the static table,
+
+00:20:51.326 --> 00:20:52.626 A:middle
+but without its value.
+
+00:20:53.696 --> 00:20:58.456 A:middle
+So to encode this request,
+we need three bytes
+
+00:20:58.876 --> 00:21:02.546 A:middle
+for the first three headers,
+plus an additional byte,
+
+
+
+00:20:58.876 --> 00:21:02.546 A:middle
+for the first three headers,
+plus an additional byte,
+
+00:21:03.356 --> 00:21:07.466 A:middle
+which tells that we want
+to add the authority header
+
+00:21:07.596 --> 00:21:10.446 A:middle
+to the dynamic table
+and the value
+
+00:21:10.446 --> 00:21:13.086 A:middle
+of the authority
+with its length.
+
+00:21:13.966 --> 00:21:18.706 A:middle
+And this is what
+is going to be sent
+
+00:21:19.026 --> 00:21:24.166 A:middle
+to the server plus additional
+overhead for the header frame.
+
+00:21:24.776 --> 00:21:28.056 A:middle
+Now with the second request,
+
+00:21:28.056 --> 00:21:31.966 A:middle
+and you see that the
+authority header goes
+
+00:21:32.006 --> 00:21:32.946 A:middle
+in the dynamic table.
+
+00:21:33.966 --> 00:21:35.196 A:middle
+So with the second request,
+
+00:21:35.396 --> 00:21:41.346 A:middle
+HTTP/1.1 would send the same
+headers over and over again.
+
+00:21:43.586 --> 00:21:46.966 A:middle
+In HTTP/2 case, in
+that particular case,
+
+00:21:47.256 --> 00:21:51.306 A:middle
+we can reference all the
+headers using the static
+
+00:21:51.306 --> 00:21:53.226 A:middle
+and the dynamic table.
+
+00:21:53.386 --> 00:21:55.586 A:middle
+We are using only one
+byte for each header.
+
+00:21:56.146 --> 00:21:57.926 A:middle
+It is a huge savings
+of the bandwidth
+
+00:21:58.276 --> 00:22:00.926 A:middle
+and it's remarkable how
+few bytes are needed
+
+
+
+00:21:58.276 --> 00:22:00.926 A:middle
+and it's remarkable how
+few bytes are needed
+
+00:22:01.356 --> 00:22:09.376 A:middle
+to encode a request or
+response header in HTTP/2.
+
+00:22:10.246 --> 00:22:11.966 A:middle
+So let's talk about
+what you need
+
+00:22:11.966 --> 00:22:14.636 A:middle
+to adopt HTTP/2 protocol
+in your apps.
+
+00:22:16.266 --> 00:22:18.786 A:middle
+There's not much work to do.
+
+00:22:18.786 --> 00:22:22.256 A:middle
+HTTP/2 protocol is
+seamlessly integrated
+
+00:22:22.296 --> 00:22:23.836 A:middle
+into NSURL Session API.
+
+00:22:25.356 --> 00:22:30.426 A:middle
+If you are already using NSURL
+Session in your code, your apps
+
+00:22:30.426 --> 00:22:34.536 A:middle
+and OS X programs will get this
+functionality automatically.
+
+00:22:35.746 --> 00:22:38.216 A:middle
+You will not need to
+write any new code
+
+00:22:38.416 --> 00:22:43.796 A:middle
+or provide any additional
+configuration to turn it on.
+
+00:22:44.406 --> 00:22:46.396 A:middle
+Let's take a look at
+the source code example.
+
+00:22:46.966 --> 00:22:49.126 A:middle
+This source code looks exactly
+
+00:22:49.126 --> 00:22:51.646 A:middle
+like the code you guys
+already have in your apps.
+
+00:22:52.126 --> 00:22:55.956 A:middle
+You see, there's no difference,
+no new configuration flags.
+
+00:22:56.226 --> 00:22:57.856 A:middle
+It just works.
+
+00:22:58.516 --> 00:23:05.546 A:middle
+[Chuckles]
+
+
+
+00:22:58.516 --> 00:23:05.546 A:middle
+[Chuckles]
+
+00:23:06.046 --> 00:23:10.006 A:middle
+Yes, you only need
+an HTTP/2 server.
+
+00:23:11.776 --> 00:23:12.526 A:middle
+But it's okay.
+
+00:23:13.516 --> 00:23:16.526 A:middle
+[Laughter]
+
+00:23:17.026 --> 00:23:18.396 A:middle
+Your apps are ready
+
+00:23:18.506 --> 00:23:22.126 A:middle
+to communicate using
+HTTP/2 protocol.
+
+00:23:22.576 --> 00:23:25.626 A:middle
+If you do not deploy
+an HTTP/2 server yet,
+
+00:23:26.686 --> 00:23:30.776 A:middle
+then your apps will
+use HTTP/1.1 directly,
+
+00:23:31.506 --> 00:23:35.096 A:middle
+or the best available protocol
+will be selected automatically
+
+00:23:35.096 --> 00:23:36.496 A:middle
+for the network communication.
+
+00:23:37.276 --> 00:23:41.046 A:middle
+Once you start using a web
+server which supports HTTP/2,
+
+00:23:41.756 --> 00:23:43.916 A:middle
+there is no additional
+work needed.
+
+00:23:44.726 --> 00:23:50.926 A:middle
+Your apps will use HTTP/2
+protocol automatically.
+
+00:23:56.536 --> 00:24:01.216 A:middle
+Please keep in mind that NSURL
+Session supports HTTP/2 protocol
+
+
+
+00:23:56.536 --> 00:24:01.216 A:middle
+Please keep in mind that NSURL
+Session supports HTTP/2 protocol
+
+00:24:01.446 --> 00:24:03.586 A:middle
+only over an encrypted
+connection.
+
+00:24:04.846 --> 00:24:10.596 A:middle
+And that your HTTP/2 server
+requires to support ALPN or NPN
+
+00:24:11.026 --> 00:24:12.286 A:middle
+for protocol negotiation.
+
+00:24:16.716 --> 00:24:21.036 A:middle
+Currently at Apple, HomeKit
+remote access via iCloud is
+
+00:24:21.036 --> 00:24:23.826 A:middle
+using HTTP/2 protocol
+for communication
+
+00:24:23.826 --> 00:24:27.806 A:middle
+between HomeKit accessories
+and iCloud.
+
+00:24:29.026 --> 00:24:32.166 A:middle
+Many big companies are
+already using HTTP/2 protocol.
+
+00:24:32.666 --> 00:24:35.176 A:middle
+Google provides its
+services in HTTP/2.
+
+00:24:35.916 --> 00:24:38.236 A:middle
+Twitter is using HTTP/2 as well.
+
+00:24:39.406 --> 00:24:43.456 A:middle
+There are many HTTP/2 open
+source web servers out there,
+
+00:24:44.326 --> 00:24:48.286 A:middle
+and finally, some CDN
+service providers are working
+
+00:24:48.516 --> 00:24:51.016 A:middle
+on the HTTP/2 protocol
+support today.
+
+00:24:54.736 --> 00:24:58.116 A:middle
+We worked hard to provide
+HTTP/2 protocol support
+
+00:24:58.116 --> 00:25:01.006 A:middle
+in NSURL Session so
+that you guys can adopt
+
+
+
+00:24:58.116 --> 00:25:01.006 A:middle
+in NSURL Session so
+that you guys can adopt
+
+00:25:01.006 --> 00:25:03.276 A:middle
+and use it as easy as possible.
+
+00:25:03.426 --> 00:25:07.676 A:middle
+HTTP/2 is available
+today in WWDC seed.
+
+00:25:08.216 --> 00:25:11.936 A:middle
+It's seamlessly integrated
+into NSURL Session API
+
+00:25:11.936 --> 00:25:17.826 A:middle
+and it's enabled in Safari,
+on OS X, 10.11, and iOS 9.
+
+00:25:19.566 --> 00:25:20.096 A:middle
+Thank you.
+
+00:25:21.186 --> 00:25:23.816 A:middle
+And now I would like to
+invite Dan up to the stage.
+
+00:25:23.816 --> 00:25:23.976 A:middle
+Dan?
+
+00:25:24.516 --> 00:25:31.126 A:middle
+[Applause]
+
+00:25:31.626 --> 00:25:32.316 A:middle
+&gt;&gt; DAN VINEGRAD: Good
+morning, everyone.
+
+00:25:32.746 --> 00:25:33.756 A:middle
+My name is Dan.
+
+00:25:33.756 --> 00:25:36.306 A:middle
+I'm a software engineer on
+the CF Network team at Apple,
+
+00:25:36.306 --> 00:25:37.786 A:middle
+and the first thing
+I would like to talk
+
+00:25:37.786 --> 00:25:40.656 A:middle
+about today is using
+NSURL Session on watchOS.
+
+00:25:42.266 --> 00:25:46.076 A:middle
+With the WatchKit SDK that was
+released alongside watchOS 2
+
+00:25:46.076 --> 00:25:48.496 A:middle
+in beta earlier this
+week, I'm pleased to say
+
+00:25:48.496 --> 00:25:51.506 A:middle
+that HTTPS loads are fully
+supported on watchOS.
+
+00:25:52.386 --> 00:25:54.326 A:middle
+And this means that
+everything we've already talked
+
+00:25:54.326 --> 00:25:57.766 A:middle
+about today, like App
+Transport Security and HTTP/2,
+
+00:25:57.766 --> 00:25:58.816 A:middle
+are built into this support.
+
+
+
+00:26:00.666 --> 00:26:04.296 A:middle
+One major difference between
+using NSURL Session on watchOS
+
+00:26:04.296 --> 00:26:07.316 A:middle
+and using it on other platforms
+is that underneath the hood,
+
+00:26:07.316 --> 00:26:10.156 A:middle
+we actually will use the best
+connectivity mechanism that's
+
+00:26:10.156 --> 00:26:11.606 A:middle
+available to us at the time.
+
+00:26:12.016 --> 00:26:14.026 A:middle
+And this means that
+in most circumstances,
+
+00:26:14.396 --> 00:26:17.766 A:middle
+if the users' watch is nearby
+their paired iPhone device,
+
+00:26:18.196 --> 00:26:20.656 A:middle
+then we will actually leverage
+the Bluetooth connection
+
+00:26:20.656 --> 00:26:24.496 A:middle
+between them, perform the HTTP
+loads on the phone itself,
+
+00:26:24.496 --> 00:26:27.196 A:middle
+and deliver the results back
+to the watch over Bluetooth.
+
+00:26:28.366 --> 00:26:31.026 A:middle
+If the user happens to be out
+and away from their phone,
+
+00:26:31.026 --> 00:26:33.116 A:middle
+but with their watch, and
+the watch is connected
+
+00:26:33.116 --> 00:26:35.706 A:middle
+to a known Wi-Fi network,
+then we can actually use
+
+00:26:35.706 --> 00:26:37.026 A:middle
+that Wi-Fi network directly.
+
+00:26:38.316 --> 00:26:39.366 A:middle
+But the good news for you is
+
+00:26:39.366 --> 00:26:42.356 A:middle
+that this is all abstracted
+away from the API itself.
+
+00:26:42.356 --> 00:26:45.066 A:middle
+You can use the API just as you
+have been on other platforms.
+
+00:26:45.066 --> 00:26:46.786 A:middle
+You don't need to worry
+about how we are connecting.
+
+00:26:47.056 --> 00:26:50.096 A:middle
+It just works like magic.
+
+00:26:50.436 --> 00:26:53.256 A:middle
+So, with that said, there are
+a few best practices and things
+
+00:26:53.256 --> 00:26:55.976 A:middle
+to keep in mind when using
+NSURL Session on watchOS.
+
+00:26:56.706 --> 00:26:58.506 A:middle
+The first is that
+you should really try
+
+00:26:58.506 --> 00:27:00.726 A:middle
+to just download the
+minimal size assets
+
+
+
+00:26:58.506 --> 00:27:00.726 A:middle
+to just download the
+minimal size assets
+
+00:27:00.726 --> 00:27:02.746 A:middle
+that are actually required
+for your app to function.
+
+00:27:03.376 --> 00:27:06.956 A:middle
+Keep in mind that the watch
+has a very small screen.
+
+00:27:07.166 --> 00:27:09.196 A:middle
+So if you are downloading
+images you don't really need
+
+00:27:09.196 --> 00:27:12.056 A:middle
+to download the full resolution
+images that you would want
+
+00:27:12.056 --> 00:27:15.346 A:middle
+to display on an iPhone 6 Plus
+or a Mac with a retina display.
+
+00:27:15.716 --> 00:27:18.276 A:middle
+The screen's a lot smaller; you
+can download smaller images.
+
+00:27:18.946 --> 00:27:23.276 A:middle
+And also keep in mind that the
+watch has a lot less processing
+
+00:27:23.276 --> 00:27:25.726 A:middle
+power than a phone or a Mac,
+
+00:27:26.576 --> 00:27:29.136 A:middle
+and additionally will often
+be limited by the bandwidth
+
+00:27:29.136 --> 00:27:30.206 A:middle
+and latency constraints
+
+00:27:30.206 --> 00:27:31.786 A:middle
+of the Bluetooth
+connection to your phone.
+
+00:27:32.006 --> 00:27:34.306 A:middle
+So we're not really going to be
+able to get you bytes as quickly
+
+00:27:34.306 --> 00:27:35.916 A:middle
+to the watch as we would
+on other platforms.
+
+00:27:35.916 --> 00:27:38.656 A:middle
+So keep that in mind as well.
+
+00:27:38.846 --> 00:27:43.026 A:middle
+Another thing to note is that
+apps on watch will generally run
+
+00:27:43.026 --> 00:27:45.526 A:middle
+for a much shorter period
+of time than iPhone apps
+
+00:27:45.526 --> 00:27:46.796 A:middle
+or definitely Mac apps.
+
+00:27:47.196 --> 00:27:49.266 A:middle
+You will mostly be limited
+by how long the user wants
+
+00:27:49.266 --> 00:27:51.436 A:middle
+to sit there standing with
+his wrist raised staring
+
+00:27:51.436 --> 00:27:52.956 A:middle
+at the watch and
+interacting with it.
+
+00:27:53.966 --> 00:27:57.046 A:middle
+So if you are using a
+default session configuration
+
+00:27:57.046 --> 00:27:59.656 A:middle
+or an ephemeral session
+configuration, keep in mind
+
+00:27:59.656 --> 00:28:03.646 A:middle
+that these networking transfers
+will happen only while your app
+
+
+
+00:27:59.656 --> 00:28:03.646 A:middle
+that these networking transfers
+will happen only while your app
+
+00:28:03.646 --> 00:28:05.726 A:middle
+is actually running.
+
+00:28:05.726 --> 00:28:08.136 A:middle
+So this is totally fine if
+you are sending small amounts
+
+00:28:08.136 --> 00:28:10.546 A:middle
+of data like fetching stock
+quotes or weather data
+
+00:28:10.936 --> 00:28:12.586 A:middle
+or social network
+status updates,
+
+00:28:13.106 --> 00:28:16.036 A:middle
+but for any larger content
+like videos, for instance,
+
+00:28:16.036 --> 00:28:18.156 A:middle
+you 'll want to use
+background uploads or downloads,
+
+00:28:18.156 --> 00:28:19.546 A:middle
+which can continue
+
+00:28:19.546 --> 00:28:22.036 A:middle
+out of process while your
+app is no longer running.
+
+00:28:22.316 --> 00:28:23.806 A:middle
+And for more information
+on background uploads
+
+00:28:23.806 --> 00:28:25.536 A:middle
+and downloads, I highly
+encourage you to check
+
+00:28:25.536 --> 00:28:27.326 A:middle
+out the WWDC sessions
+
+00:28:27.326 --> 00:28:29.316 A:middle
+on Foundation Networking
+from previous years.
+
+00:28:29.316 --> 00:28:35.836 A:middle
+Next up, I would like to
+talk about some API changes
+
+00:28:35.836 --> 00:28:37.476 A:middle
+that we have made in
+this year's releases.
+
+00:28:38.586 --> 00:28:40.966 A:middle
+The first thing I would like to
+talk about is NSURL Connection,
+
+00:28:40.966 --> 00:28:42.876 A:middle
+something we have not
+talked about today so far.
+
+00:28:43.466 --> 00:28:44.946 A:middle
+So, this year, I'm announcing
+
+00:28:44.946 --> 00:28:47.626 A:middle
+that NSURL Connection
+is deprecated on OS X,
+
+00:28:47.626 --> 00:28:49.196 A:middle
+El Capitan, and iOS 9.
+
+00:28:50.216 --> 00:28:52.596 A:middle
+And let's just take a moment
+to think about what that means.
+
+00:28:52.666 --> 00:28:54.126 A:middle
+Deprecation does not mean
+
+00:28:54.126 --> 00:28:56.706 A:middle
+that NSURL Connection
+is going away entirely.
+
+00:28:56.756 --> 00:28:58.776 A:middle
+We know that there are
+a lot of apps out there
+
+00:28:58.776 --> 00:29:00.046 A:middle
+that are using NSURL Connection,
+
+
+
+00:28:58.776 --> 00:29:00.046 A:middle
+that are using NSURL Connection,
+
+00:29:00.246 --> 00:29:01.546 A:middle
+and we're not just
+going to break them.
+
+00:29:01.956 --> 00:29:02.886 A:middle
+So it will still work.
+
+00:29:02.886 --> 00:29:05.716 A:middle
+Those transfers will still
+work, but keep in mind
+
+00:29:05.716 --> 00:29:08.386 A:middle
+that new features are really
+only going to be added
+
+00:29:08.386 --> 00:29:09.866 A:middle
+to NSURL Session at this point.
+
+00:29:09.866 --> 00:29:14.866 A:middle
+We highly encourage you to
+switch over existing code
+
+00:29:15.156 --> 00:29:18.146 A:middle
+from NSURL Connection to NSURL
+Session if you haven't already,
+
+00:29:19.406 --> 00:29:22.206 A:middle
+and if you are writing new
+code, we would really hope
+
+00:29:22.206 --> 00:29:24.356 A:middle
+that you would only use NSURL
+Session and not Connection.
+
+00:29:25.046 --> 00:29:26.846 A:middle
+Another thing to keep in mind is
+
+00:29:26.846 --> 00:29:30.086 A:middle
+that NSURL Connection is not
+supported at all on watchOS.
+
+00:29:30.086 --> 00:29:31.996 A:middle
+So if you need to
+load HTTP content
+
+00:29:31.996 --> 00:29:34.706 A:middle
+from a WatchKit extension,
+you have to use NSURL Session.
+
+00:29:35.396 --> 00:29:37.556 A:middle
+But luckily for you, if you
+haven't done so already,
+
+00:29:37.556 --> 00:29:39.236 A:middle
+switching from NSURL Connection
+
+00:29:39.236 --> 00:29:40.916 A:middle
+to NSURL Session is
+actually very easy.
+
+00:29:41.236 --> 00:29:44.596 A:middle
+So I would like to walk
+through an example of that now.
+
+00:29:44.596 --> 00:29:47.036 A:middle
+Here's a simple use
+of NSURL Connection
+
+00:29:47.096 --> 00:29:49.246 A:middle
+to perform an asynchronous
+HTTP request,
+
+00:29:49.246 --> 00:29:51.326 A:middle
+which probably looks similar
+to the things that a lot
+
+00:29:51.326 --> 00:29:53.346 A:middle
+of you have in your apps.
+
+00:29:53.346 --> 00:29:57.926 A:middle
+Here, we're connecting to
+www.example.com over HTTPS,
+
+00:29:57.976 --> 00:30:00.356 A:middle
+and we have an NSURL
+object to represent that.
+
+
+
+00:29:57.976 --> 00:30:00.356 A:middle
+and we have an NSURL
+object to represent that.
+
+00:30:01.166 --> 00:30:04.806 A:middle
+We then construct an
+NSURLRequest, wrapping that URL,
+
+00:30:05.686 --> 00:30:08.766 A:middle
+and we use NSURL Connection's
+'send asynchronous request'
+
+00:30:08.766 --> 00:30:11.966 A:middle
+method to fire off that
+request asynchronously.
+
+00:30:12.536 --> 00:30:16.886 A:middle
+And we receive the result
+in the form of this closure,
+
+00:30:16.886 --> 00:30:20.316 A:middle
+which includes an NSURL Response
+object representing the HTTP
+
+00:30:20.466 --> 00:30:23.636 A:middle
+response headers that are
+received, an NSData object
+
+00:30:23.636 --> 00:30:26.366 A:middle
+for the response body
+data, and an error
+
+00:30:26.766 --> 00:30:28.196 A:middle
+if a transmission
+error occurred.
+
+00:30:29.246 --> 00:30:30.916 A:middle
+So let's take a look
+at what that would look
+
+00:30:30.916 --> 00:30:32.236 A:middle
+like with NSURL Session.
+
+00:30:33.316 --> 00:30:34.556 A:middle
+It's very similar.
+
+00:30:34.726 --> 00:30:36.846 A:middle
+You will notice that the NSURL
+
+00:30:36.846 --> 00:30:39.736 A:middle
+and NSURL request objects are
+still in use and this is true
+
+00:30:39.736 --> 00:30:42.756 A:middle
+for a lot of the other
+NSURL family of objects,
+
+00:30:42.756 --> 00:30:46.136 A:middle
+like NSURL Credential Storage
+and NSHTTP Cookie Storage.
+
+00:30:46.866 --> 00:30:48.596 A:middle
+The main difference
+here is that instead
+
+00:30:48.596 --> 00:30:49.946 A:middle
+of using NSURL Connection
+
+00:30:49.946 --> 00:30:51.876 A:middle
+to send an asynchronous
+request method,
+
+00:30:52.236 --> 00:30:55.326 A:middle
+we are using the 'data
+task with request' method
+
+00:30:55.546 --> 00:30:58.396 A:middle
+on the NSURL Session
+shared session.
+
+00:30:58.396 --> 00:31:02.866 A:middle
+Then once we resume the task, we
+would again receive the results
+
+
+
+00:30:58.396 --> 00:31:02.866 A:middle
+Then once we resume the task, we
+would again receive the results
+
+00:31:02.866 --> 00:31:05.056 A:middle
+of that transaction,
+asynchronously,
+
+00:31:05.056 --> 00:31:08.626 A:middle
+in the form of the response
+data, the response headers,
+
+00:31:08.626 --> 00:31:11.166 A:middle
+and an error if a
+transmission error occurred.
+
+00:31:11.846 --> 00:31:15.796 A:middle
+So that's how easy it is to
+switch from NSURL Connection
+
+00:31:15.796 --> 00:31:17.786 A:middle
+into NSURL Session in your apps.
+
+00:31:18.976 --> 00:31:20.796 A:middle
+So, next I would like
+to switch gears and talk
+
+00:31:20.796 --> 00:31:22.356 A:middle
+about some new additions
+that we've added
+
+00:31:22.356 --> 00:31:24.936 A:middle
+to the NSURL Session
+family of APIs this year.
+
+00:31:25.856 --> 00:31:29.026 A:middle
+The first thing I would like to
+talk about deals with cookies.
+
+00:31:29.926 --> 00:31:34.136 A:middle
+Last year at WWDC we introduced
+a great new feature called app
+
+00:31:34.136 --> 00:31:36.596 A:middle
+extensions, which
+lets you embed parts
+
+00:31:36.596 --> 00:31:38.636 A:middle
+of your app's functionality
+other places on the system
+
+00:31:38.636 --> 00:31:39.846 A:middle
+like notification center.
+
+00:31:40.886 --> 00:31:45.966 A:middle
+But applications and their
+extensions have different data
+
+00:31:45.966 --> 00:31:48.076 A:middle
+containers by default,
+which means that even
+
+00:31:48.076 --> 00:31:49.466 A:middle
+if you are using NSURL Session
+
+00:31:49.466 --> 00:31:52.766 A:middle
+and already leveraging our
+great built-in cookie handling
+
+00:31:52.766 --> 00:31:54.996 A:middle
+support, those cookies
+are actually being stored
+
+00:31:54.996 --> 00:31:55.856 A:middle
+in different places.
+
+00:31:56.386 --> 00:32:00.076 A:middle
+But you can use what's
+called an application group
+
+
+
+00:31:56.386 --> 00:32:00.076 A:middle
+But you can use what's
+called an application group
+
+00:32:00.256 --> 00:32:03.106 A:middle
+to actually get access to
+a shared data container,
+
+00:32:03.106 --> 00:32:05.496 A:middle
+which both your app and
+its extensions can access.
+
+00:32:06.066 --> 00:32:08.016 A:middle
+And this year we have
+introduced new API
+
+00:32:08.016 --> 00:32:10.686 A:middle
+to let you create a
+cookie storage associated
+
+00:32:10.686 --> 00:32:11.646 A:middle
+with that group container.
+
+00:32:11.646 --> 00:32:14.186 A:middle
+And I would like to
+show you how to do that.
+
+00:32:14.586 --> 00:32:19.176 A:middle
+So what you want to use here
+is NSHTTP cookie storage's new
+
+00:32:19.176 --> 00:32:21.996 A:middle
+'shared cookie storage for group
+container identifier' method.
+
+00:32:22.586 --> 00:32:26.456 A:middle
+And you just simply create a
+cookie storage with the passing
+
+00:32:26.456 --> 00:32:28.226 A:middle
+in the name of your
+application group,
+
+00:32:28.226 --> 00:32:31.316 A:middle
+and application groups can be
+configured while editing your
+
+00:32:31.316 --> 00:32:33.096 A:middle
+project's build settings
+in Xcode and going
+
+00:32:33.096 --> 00:32:34.186 A:middle
+to the Capabilities tab.
+
+00:32:35.616 --> 00:32:39.076 A:middle
+Once you've created the cookie
+storage, you just need to set it
+
+00:32:39.076 --> 00:32:40.816 A:middle
+as the HTTP cookie
+storage property
+
+00:32:41.036 --> 00:32:43.326 A:middle
+on an NSURL Session
+configuration object,
+
+00:32:43.976 --> 00:32:46.496 A:middle
+create an NSURL Session
+from that configuration,
+
+00:32:46.536 --> 00:32:49.906 A:middle
+and then any tasks that you
+create in that session will use
+
+00:32:50.056 --> 00:32:55.396 A:middle
+that cookie storage in
+the group container.
+
+00:32:56.486 --> 00:32:58.596 A:middle
+So for the entirety of
+the presentations today,
+
+00:32:58.596 --> 00:33:01.776 A:middle
+we have been talking about using
+NSURL Session in the context
+
+
+
+00:32:58.596 --> 00:33:01.776 A:middle
+we have been talking about using
+NSURL Session in the context
+
+00:33:01.776 --> 00:33:03.186 A:middle
+of loading HTTP content.
+
+00:33:04.206 --> 00:33:06.106 A:middle
+But there are some cases
+
+00:33:06.106 --> 00:33:10.026 A:middle
+where you really need a protocol
+other than HTTP or HTTPS.
+
+00:33:10.546 --> 00:33:13.596 A:middle
+So if you are implementing
+a chat application,
+
+00:33:13.976 --> 00:33:20.426 A:middle
+a video calling app, or
+-- or something like that,
+
+00:33:20.426 --> 00:33:23.146 A:middle
+you really need -- you might
+need a protocol that's not HTTP,
+
+00:33:23.146 --> 00:33:25.856 A:middle
+and you want to do
+something custom directly
+
+00:33:25.856 --> 00:33:28.246 A:middle
+on top of TCP/IP networking.
+
+00:33:28.766 --> 00:33:32.056 A:middle
+So NSURL Session Stream
+Task is a new API this year,
+
+00:33:32.056 --> 00:33:33.706 A:middle
+which is a Foundation
+extraction,
+
+00:33:33.866 --> 00:33:35.446 A:middle
+directly over a TCP connection.
+
+00:33:36.556 --> 00:33:39.686 A:middle
+Now, in the past, you might
+have used NSInput Stream
+
+00:33:39.686 --> 00:33:43.366 A:middle
+and NSOutput Stream to do
+something similar, but we think
+
+00:33:43.366 --> 00:33:46.396 A:middle
+that NSUSRLSession Stream
+Task has a few key advantages
+
+00:33:46.396 --> 00:33:48.076 A:middle
+over the NSStream APIs.
+
+00:33:48.676 --> 00:33:50.656 A:middle
+First of all, it
+offers a very simple,
+
+00:33:50.656 --> 00:33:53.026 A:middle
+convenient asynchronous
+read and write interface,
+
+00:33:53.776 --> 00:33:56.976 A:middle
+whereas with NSStream you had
+to set up a delegate to listen
+
+00:33:56.976 --> 00:33:59.656 A:middle
+for events or when to read, and
+the read and writes could block,
+
+00:33:59.656 --> 00:34:00.576 A:middle
+and it was kind of a mess.
+
+
+
+00:33:59.656 --> 00:34:00.576 A:middle
+and it was kind of a mess.
+
+00:34:00.946 --> 00:34:02.506 A:middle
+But this is a lot
+easier and cleaner.
+
+00:34:03.686 --> 00:34:07.126 A:middle
+Secondly, NSURL Session
+has great built-in support
+
+00:34:07.126 --> 00:34:09.456 A:middle
+for automatically getting
+through HTTP proxies,
+
+00:34:09.835 --> 00:34:12.426 A:middle
+and NSURL Session Stream Task
+can leverage this support
+
+00:34:12.426 --> 00:34:15.226 A:middle
+so that you can connect
+to a remote server even
+
+00:34:15.226 --> 00:34:17.045 A:middle
+if there's an HTTP
+proxy between it,
+
+00:34:17.045 --> 00:34:18.516 A:middle
+and NSStream can't
+really do this.
+
+00:34:18.996 --> 00:34:21.426 A:middle
+And there are a few
+other new API goodies
+
+00:34:21.426 --> 00:34:23.045 A:middle
+that I will talk
+about later as well.
+
+00:34:24.536 --> 00:34:26.896 A:middle
+We also know that NSStream
+is a very pervasive API.
+
+00:34:26.896 --> 00:34:30.696 A:middle
+There are a lot of other
+frameworks and APIs that accept
+
+00:34:30.696 --> 00:34:32.315 A:middle
+and work with NSStream objects.
+
+00:34:32.806 --> 00:34:35.806 A:middle
+So we also have some support
+to be compatible with NSStreams
+
+00:34:35.806 --> 00:34:37.416 A:middle
+as well and I will
+show you that later on.
+
+00:34:38.775 --> 00:34:42.835 A:middle
+So as I said, NSURL Session
+Stream Task supports TCP/IP
+
+00:34:42.835 --> 00:34:45.896 A:middle
+connections, which you
+can create explicitly
+
+00:34:45.896 --> 00:34:47.005 A:middle
+with a host name and port,
+
+00:34:47.335 --> 00:34:50.936 A:middle
+or if you are using
+the NSNetService's APIs
+
+00:34:50.936 --> 00:34:53.766 A:middle
+to discover Bonjour
+services in your app,
+
+00:34:53.766 --> 00:34:56.016 A:middle
+then we can actually accept
+that NSNetService and resolve
+
+00:34:56.016 --> 00:34:57.096 A:middle
+that for you automatically.
+
+00:34:58.636 --> 00:35:02.496 A:middle
+Stream Task uses the existing
+NSURL Session configuration
+
+
+
+00:34:58.636 --> 00:35:02.496 A:middle
+Stream Task uses the existing
+NSURL Session configuration
+
+00:35:02.496 --> 00:35:07.376 A:middle
+options and delegate methods to
+communicate events to you, and,
+
+00:35:07.376 --> 00:35:10.406 A:middle
+of course, we support
+TLS-secured connections
+
+00:35:10.406 --> 00:35:12.916 A:middle
+and you can even dynamically
+change this once you've actually
+
+00:35:12.916 --> 00:35:14.226 A:middle
+established a connection
+to a server.
+
+00:35:14.226 --> 00:35:19.366 A:middle
+So let's take a look at how you
+would perform a read operation
+
+00:35:19.366 --> 00:35:21.086 A:middle
+with a Stream Task.
+
+00:35:21.086 --> 00:35:23.606 A:middle
+First, to create a Stream Task
+you can simply use the 'Stream
+
+00:35:23.606 --> 00:35:26.496 A:middle
+Task with Host Name
+and Port' method.
+
+00:35:26.626 --> 00:35:28.386 A:middle
+And you just pass in
+the host name and port
+
+00:35:28.386 --> 00:35:29.366 A:middle
+that you want to connect to.
+
+00:35:29.366 --> 00:35:32.816 A:middle
+And then after resuming
+the task,
+
+00:35:32.816 --> 00:35:34.836 A:middle
+you can use this 'Read
+Data of Min Length,
+
+00:35:34.836 --> 00:35:36.326 A:middle
+Max Length, Timeout' method.
+
+00:35:37.136 --> 00:35:40.406 A:middle
+And what this will do is you
+can pass in a range of bytes
+
+00:35:40.406 --> 00:35:42.946 A:middle
+that you want to read and a
+timeout for that operation.
+
+00:35:43.336 --> 00:35:45.716 A:middle
+So if we managed to read
+something within that range
+
+00:35:45.716 --> 00:35:49.176 A:middle
+or we hit an EOF, or there's a
+transmission error or timeout
+
+00:35:49.176 --> 00:35:52.056 A:middle
+that occurs, we will invoke
+this closure with the results.
+
+00:35:53.266 --> 00:35:55.576 A:middle
+Writing is very similar.
+
+00:35:55.576 --> 00:35:58.976 A:middle
+We -- unlike -- with NSStream we
+can work directly with NSData,
+
+00:35:58.976 --> 00:36:01.206 A:middle
+you just pass in the NSData
+object that you want us to write
+
+
+
+00:35:58.976 --> 00:36:01.206 A:middle
+you just pass in the NSData
+object that you want us to write
+
+00:36:01.206 --> 00:36:03.256 A:middle
+and a timeout for that
+operation, and, again,
+
+00:36:03.526 --> 00:36:05.726 A:middle
+this closure will be
+invoked with a nil error
+
+00:36:05.726 --> 00:36:08.646 A:middle
+if that occurred successfully
+or an error if a timeout
+
+00:36:08.646 --> 00:36:11.186 A:middle
+or a transmission
+error occurred.
+
+00:36:11.366 --> 00:36:12.976 A:middle
+Enabling TLS is as simple
+
+00:36:12.976 --> 00:36:18.946 A:middle
+as calling the 'Start Secure
+Connection' method on the task.
+
+00:36:19.126 --> 00:36:21.816 A:middle
+I mentioned before that we
+also have some built-in support
+
+00:36:21.816 --> 00:36:25.136 A:middle
+to work with NSStream,
+NSURL Session Stream Task.
+
+00:36:25.596 --> 00:36:27.476 A:middle
+So the reason we do
+this is because we know
+
+00:36:27.476 --> 00:36:29.386 A:middle
+that there are a lot of
+APIs out there that work
+
+00:36:29.386 --> 00:36:31.086 A:middle
+with NSStream objects
+already and we want
+
+00:36:31.086 --> 00:36:33.596 A:middle
+to give you something that can
+still be compatible with those.
+
+00:36:34.016 --> 00:36:37.366 A:middle
+So, you can actually convert
+an NSURLSession Stream Task
+
+00:36:37.366 --> 00:36:39.566 A:middle
+to NSStreams, and I will show
+you the very simple code to do
+
+00:36:39.566 --> 00:36:40.826 A:middle
+that on the next slide.
+
+00:36:41.326 --> 00:36:45.136 A:middle
+Just keep in mind that when you
+do this, any pending async reads
+
+00:36:45.136 --> 00:36:46.606 A:middle
+or writes that you have enqueued
+
+00:36:46.606 --> 00:36:49.166 A:middle
+on the Stream Task will
+complete before we give you
+
+00:36:49.166 --> 00:36:49.816 A:middle
+the NSStreams.
+
+00:36:50.556 --> 00:36:52.776 A:middle
+And that doing this
+also detaches the task
+
+00:36:52.996 --> 00:36:53.646 A:middle
+from the session.
+
+00:36:53.646 --> 00:36:55.096 A:middle
+And so its connection,
+
+00:36:55.306 --> 00:36:58.626 A:middle
+its underlying connection will
+no longer count against a limit
+
+00:36:58.626 --> 00:37:00.986 A:middle
+that you may have set on
+the session's maximum number
+
+
+
+00:36:58.626 --> 00:37:00.986 A:middle
+that you may have set on
+the session's maximum number
+
+00:37:00.986 --> 00:37:04.166 A:middle
+of connections per host,
+and it will no longer be
+
+00:37:04.166 --> 00:37:07.726 A:middle
+in the session's set
+of outstanding tasks.
+
+00:37:08.736 --> 00:37:10.706 A:middle
+So to convert a Stream
+Task to Streams,
+
+00:37:10.706 --> 00:37:13.506 A:middle
+you simply call the 'Capture
+Streams' method on the Task,
+
+00:37:14.176 --> 00:37:17.586 A:middle
+and then those input streams and
+output streams will be delivered
+
+00:37:17.586 --> 00:37:19.886 A:middle
+to your delegate with
+a new delegate message.
+
+00:37:21.116 --> 00:37:24.756 A:middle
+We also have a few other
+informational delegate messages
+
+00:37:24.756 --> 00:37:26.796 A:middle
+that we have introduced
+on Stream Task.
+
+00:37:26.856 --> 00:37:27.966 A:middle
+The first is interesting.
+
+00:37:27.966 --> 00:37:30.506 A:middle
+It's a better route
+discovered for Stream Task.
+
+00:37:31.106 --> 00:37:33.376 A:middle
+So let's say, you have a
+Stream Task that's connected
+
+00:37:33.376 --> 00:37:36.016 A:middle
+to your server over a
+cellular data connection.
+
+00:37:36.456 --> 00:37:39.256 A:middle
+If the user then
+joins a Wi-Fi network,
+
+00:37:39.416 --> 00:37:41.256 A:middle
+then we would deliver this
+notification to your app
+
+00:37:41.256 --> 00:37:43.176 A:middle
+to tell you that there might
+be a better way to connect.
+
+00:37:43.826 --> 00:37:47.326 A:middle
+And what you might want to do in
+this situation, if you want to,
+
+00:37:47.326 --> 00:37:50.236 A:middle
+is tear down your existing
+Stream Task and create a new one
+
+00:37:50.626 --> 00:37:55.206 A:middle
+to that host and port,
+and try to connect
+
+00:37:55.206 --> 00:37:56.616 A:middle
+over the better connection.
+
+00:37:56.866 --> 00:37:58.486 A:middle
+And we leave it up to
+you to decide whether
+
+00:37:58.486 --> 00:37:59.616 A:middle
+or not you want to do this.
+
+00:37:59.706 --> 00:38:03.026 A:middle
+You know, if you are 99% of the
+way through transferring a lot
+
+
+
+00:37:59.706 --> 00:38:03.026 A:middle
+You know, if you are 99% of the
+way through transferring a lot
+
+00:38:03.026 --> 00:38:04.956 A:middle
+of data it might not make
+sense to actually tear
+
+00:38:04.956 --> 00:38:07.046 A:middle
+down the existing connection
+and create a new one.
+
+00:38:07.426 --> 00:38:10.186 A:middle
+And we also have some
+informational delegate methods
+
+00:38:10.186 --> 00:38:11.816 A:middle
+to tell you when to
+read or write sides
+
+00:38:11.816 --> 00:38:13.856 A:middle
+of the underlying TCP
+connections have been closed.
+
+00:38:16.756 --> 00:38:19.736 A:middle
+I also talked before about our
+automatic support for dealing
+
+00:38:19.736 --> 00:38:21.476 A:middle
+with HTTP proxies
+in Stream Task.
+
+00:38:21.856 --> 00:38:24.596 A:middle
+And the way you can do deal with
+this is actually by starting
+
+00:38:24.596 --> 00:38:27.766 A:middle
+with an existing NSURL Session
+Data Task, which generally deals
+
+00:38:27.766 --> 00:38:30.706 A:middle
+with HTTP content, and
+converting it to a Stream Task.
+
+00:38:31.626 --> 00:38:33.636 A:middle
+And this you can do
+when the response
+
+00:38:33.636 --> 00:38:35.026 A:middle
+for that Data Task is received.
+
+00:38:36.206 --> 00:38:38.526 A:middle
+So to convert a Data
+Task to a Stream Task,
+
+00:38:38.526 --> 00:38:40.986 A:middle
+and let you communicate
+directly over the TCP connection
+
+00:38:40.986 --> 00:38:44.696 A:middle
+without the HTTP framing,
+you would simply respond
+
+00:38:44.696 --> 00:38:46.116 A:middle
+to this completion handler
+
+00:38:46.116 --> 00:38:48.156 A:middle
+in the 'Did Receive
+Response' delegate method
+
+00:38:48.156 --> 00:38:50.256 A:middle
+with the new 'Become
+Stream' disposition.
+
+00:38:50.916 --> 00:38:52.566 A:middle
+And then we will
+inform your delegate
+
+00:38:52.566 --> 00:38:55.826 A:middle
+that the Data Task has been
+converted to a Stream Task
+
+00:38:55.826 --> 00:38:59.206 A:middle
+with the 'URL Session Data Task
+Did Become Stream Task' method.
+
+
+
+00:39:02.016 --> 00:39:04.156 A:middle
+Before we finish up today,
+I would just like to go
+
+00:39:04.156 --> 00:39:06.456 A:middle
+over a few things that we
+discussed this morning.
+
+00:39:07.006 --> 00:39:11.026 A:middle
+We first talked about how you
+can use App Transport Security
+
+00:39:11.316 --> 00:39:14.036 A:middle
+to guarantee that only
+secure connections are made
+
+00:39:14.036 --> 00:39:16.696 A:middle
+from your app and how you
+can declare exceptions
+
+00:39:16.696 --> 00:39:17.676 A:middle
+to those as needed.
+
+00:39:18.056 --> 00:39:20.136 A:middle
+We then talked about how you
+can make your apps faster
+
+00:39:20.136 --> 00:39:22.016 A:middle
+by supporting HTTP/2
+on your servers,
+
+00:39:22.256 --> 00:39:25.606 A:middle
+which requires no additional
+changes on the client.
+
+00:39:26.446 --> 00:39:29.276 A:middle
+We talked about best practices
+for using NSURL Session
+
+00:39:29.276 --> 00:39:33.946 A:middle
+on watch apps, and went over the
+new API changes this release,
+
+00:39:34.006 --> 00:39:36.506 A:middle
+the deprecation of NSURL
+Connection and how to migrate
+
+00:39:36.506 --> 00:39:40.266 A:middle
+to Session, how to share cookies
+between apps and extensions,
+
+00:39:40.666 --> 00:39:44.156 A:middle
+and how to get a great
+foundation level abstraction
+
+00:39:44.156 --> 00:39:47.246 A:middle
+if you need to communicate
+using a TCP connection
+
+00:39:47.296 --> 00:39:49.126 A:middle
+without HTTP to your servers.
+
+00:39:49.636 --> 00:39:55.586 A:middle
+As always, I would like to
+refer you to the documentation
+
+00:39:55.586 --> 00:39:58.136 A:middle
+that we have available on
+our website, and remind you
+
+00:39:58.236 --> 00:40:00.786 A:middle
+about the developer forums
+that you can participate in,
+
+
+
+00:39:58.236 --> 00:40:00.786 A:middle
+about the developer forums
+that you can participate in,
+
+00:40:00.786 --> 00:40:03.246 A:middle
+and any questions that you
+might have while you are here
+
+00:40:03.246 --> 00:40:05.816 A:middle
+at WWDC this week, Paul
+Danbold is our Evangelist
+
+00:40:05.816 --> 00:40:06.706 A:middle
+and you can talk to him.
+
+00:40:06.706 --> 00:40:10.106 A:middle
+There are a few other
+related sessions
+
+00:40:10.106 --> 00:40:10.976 A:middle
+that you might want to attend.
+
+00:40:10.976 --> 00:40:13.296 A:middle
+I highly encourage you
+to attend "Your App
+
+00:40:13.296 --> 00:40:15.226 A:middle
+and Next Generation
+Networks," tomorrow,
+
+00:40:15.226 --> 00:40:17.576 A:middle
+which will be a lower level
+discussion of networking.
+
+00:40:18.116 --> 00:40:21.336 A:middle
+And the networking labs
+occur this week as well
+
+00:40:21.336 --> 00:40:23.346 A:middle
+and you can talk to us directly
+for any questions you have.
+
+00:40:23.836 --> 00:40:25.546 A:middle
+With that, I would like to
+thank you for coming out today,
+
+00:40:25.976 --> 00:40:29.236 A:middle
+and we look forward to seeing
+the amazing apps that you create
+
+00:40:29.356 --> 00:40:31.766 A:middle
+with iOS 9, OS X, El
+Capitan, and watchOS 2.
+
+00:40:31.766 --> 00:40:31.976 A:middle
+Thanks.
+
+00:40:32.516 --> 00:40:35.500 A:middle
+[Applause]
+
