@@ -1,2907 +1,3418 @@
 
-00:00:24.031 --> 00:00:26.031 A:middle
+00:00:29.356 --> 00:00:30.286 A:middle
+&gt;&gt; SOPHIA TEUTSCHLER:
+Good afternoon.
+
+00:00:31.516 --> 00:00:33.796 A:middle
 [ Applause ]
 
-00:00:26.046 --> 00:00:27.366 A:middle
-&gt;&gt; MIKE HESS: Thank you.
+00:00:34.296 --> 00:00:36.576 A:middle
+Welcome to App Extension
+Best Practices.
 
-00:00:30.106 --> 00:00:30.656 A:middle
-Good afternoon!
+00:00:36.776 --> 00:00:39.316 A:middle
+I am Sophia Teutschler,
+I am an engineer
 
-00:00:31.116 --> 00:00:33.736 A:middle
-I'm Mike Hess and I'm a software
-engineer on the iOS Apps
+00:00:39.316 --> 00:00:41.016 A:middle
+in the UIKit Framework Team.
 
-00:00:33.736 --> 00:00:36.746 A:middle
-and Frameworks team and I'm here
-with Johannes Fortmann to talk
+00:00:41.486 --> 00:00:43.196 A:middle
+Later in this session I will
+be joined by my colleague,
 
-00:00:36.746 --> 00:00:40.326 A:middle
-to you about how to make your
-document-based apps top notch.
+00:00:43.236 --> 00:00:44.446 A:middle
+Ian Baird from CoreOS.
 
-00:00:41.706 --> 00:00:43.786 A:middle
-Now we have written some
-sample code for you today
+00:00:46.226 --> 00:00:49.256 A:middle
+The first part of the
+session I would like to talk
 
-00:00:44.226 --> 00:00:47.436 A:middle
-which is going to show you how
-to build the two main components
+00:00:49.256 --> 00:00:52.106 A:middle
+about the two main types
+of extensions on iOS,
 
-00:00:47.516 --> 00:00:49.686 A:middle
-of a document-based app.
+00:00:52.816 --> 00:00:54.196 A:middle
+Action and Share extensions.
 
-00:00:50.326 --> 00:00:52.036 A:middle
-First, we're going
-to show you how
+00:00:55.766 --> 00:00:57.766 A:middle
+The later session, Ian
+will join us to talk
 
-00:00:52.036 --> 00:00:54.276 A:middle
-to build a great
-Document Browser
+00:00:57.766 --> 00:00:59.276 A:middle
+about Today Widget enhancements.
 
-00:00:54.636 --> 00:00:57.576 A:middle
-which will let your users
-quickly find the documents
 
-00:00:57.576 --> 00:00:58.926 A:middle
-that they're interested
-in working on.
 
+00:01:00.446 --> 00:01:02.546 A:middle
+Throughout the session we
+will show you many real-world
 
+00:01:02.546 --> 00:01:04.446 A:middle
+examples to help
+you make the most
 
-00:01:00.386 --> 00:01:02.036 A:middle
-Second, we're going
-to show you how
+00:01:04.446 --> 00:01:09.626 A:middle
+out of those types
+of extensions.
 
-00:01:02.036 --> 00:01:05.666 A:middle
-to build a great document
-editor that interacts properly
+00:01:09.626 --> 00:01:11.486 A:middle
+Now, Action and Share
+extensions.
 
-00:01:05.666 --> 00:01:09.076 A:middle
-with file coordination to
-deal with concurrent readers
+00:01:11.486 --> 00:01:15.696 A:middle
+Let me give you a brief
+overview of the two types
 
-00:01:09.076 --> 00:01:11.506 A:middle
-and writers such as the
-iCloud drive daemon.
+00:01:15.696 --> 00:01:17.456 A:middle
+of extensions, how they differ.
 
-00:01:11.906 --> 00:01:13.756 A:middle
-We're going to get into
-this a little bit later.
+00:01:19.406 --> 00:01:23.736 A:middle
+Now, Action extensions are all
+about changing content in place,
 
-00:01:14.736 --> 00:01:17.006 A:middle
-First, let's focus on
-the Document Browser.
+00:01:24.376 --> 00:01:26.936 A:middle
+where the Share extensions
+are all about moving content
 
-00:01:18.096 --> 00:01:21.046 A:middle
-So what is a document-based
-app anyways?
+00:01:27.076 --> 00:01:28.646 A:middle
+from the current
+host application
 
-00:01:22.796 --> 00:01:26.706 A:middle
-Well, we think of a document
-as a single, standalone entity
+00:01:28.966 --> 00:01:31.016 A:middle
+to your application
+or Web Service.
 
-00:01:26.706 --> 00:01:30.646 A:middle
-and it is understood to the
-user as a single entity.
+00:01:32.896 --> 00:01:35.776 A:middle
+Now, let me give you
+more examples here.
 
-00:01:31.336 --> 00:01:33.526 A:middle
-A document-based app is
-just going to be an app
+00:01:36.726 --> 00:01:37.496 A:middle
+As I just mentioned,
 
-00:01:33.526 --> 00:01:37.366 A:middle
-which manages a list of these
-documents and presents them
+00:01:38.006 --> 00:01:40.296 A:middle
+Action extensions act
+on a current content.
 
-00:01:37.366 --> 00:01:39.696 A:middle
-to the users so that
-they can view them
+00:01:41.286 --> 00:01:43.756 A:middle
+Because of that,
+they use the content
 
-00:01:39.696 --> 00:01:41.696 A:middle
-or edit them or rename them.
+00:01:43.756 --> 00:01:45.256 A:middle
+as the main user interface.
 
-00:01:42.886 --> 00:01:45.466 A:middle
-Keynote, for example,
-manages a list
+00:01:46.376 --> 00:01:50.046 A:middle
+I will show an example
+later on about that.
 
-00:01:45.546 --> 00:01:47.626 A:middle
-of Keynote presentation
-documents.
+00:01:50.256 --> 00:01:51.586 A:middle
+But you also have
+the opportunity
 
-00:01:47.956 --> 00:01:51.386 A:middle
-Numbers manages a list of
-Numbers spreadsheet documents;
+00:01:51.856 --> 00:01:54.786 A:middle
+to present additional options
+before you perform that action.
 
-00:01:51.666 --> 00:01:55.426 A:middle
-even Garage Band manages a list
-of Garage Band song documents.
+00:01:57.016 --> 00:02:01.476 A:middle
+Also, your application
+functionality can be separated
 
-00:01:55.776 --> 00:02:01.016 A:middle
-So we would consider all of
-these to be document-based apps.
 
 
+00:01:57.016 --> 00:02:01.476 A:middle
+Also, your application
+functionality can be separated
 
-00:01:55.776 --> 00:02:01.016 A:middle
-So we would consider all of
-these to be document-based apps.
+00:02:01.476 --> 00:02:03.686 A:middle
+in different Action
+extensions that live
 
-00:02:01.266 --> 00:02:02.626 A:middle
-Now let's get into
-how we're going
+00:02:03.766 --> 00:02:06.476 A:middle
+within that container
+application.
 
-00:02:02.626 --> 00:02:04.956 A:middle
-to build our Document Browser.
+00:02:08.556 --> 00:02:10.576 A:middle
+Now, let me show
+an example here.
 
-00:02:06.486 --> 00:02:09.485 A:middle
-There are four main components
-of a great Document Browser.
+00:02:12.216 --> 00:02:13.046 A:middle
+We are in Safari.
 
-00:02:10.416 --> 00:02:14.246 A:middle
-First, we want to
-list our documents
+00:02:13.046 --> 00:02:15.336 A:middle
+I am going to tap on the
+action item on the top right,
 
-00:02:14.246 --> 00:02:16.736 A:middle
-in a way that's meaningful
-to our users such as here
+00:02:15.836 --> 00:02:18.556 A:middle
+bring up our Share Sheet with
+our two types of extensions,
 
-00:02:16.736 --> 00:02:20.226 A:middle
-in our sample code we sort
-our documents by file name.
+00:02:19.446 --> 00:02:20.566 A:middle
+the Share extension
+is on the top
 
-00:02:20.396 --> 00:02:23.656 A:middle
-Our user understands
-the flow of our app.
+00:02:20.806 --> 00:02:24.126 A:middle
+and the Action extension
+on the bottom.
 
-00:02:24.736 --> 00:02:27.576 A:middle
-Second, we think you
-should use thumbnails
+00:02:24.126 --> 00:02:27.476 A:middle
+We made this Translate
+extension, and when we tap it,
 
-00:02:27.646 --> 00:02:30.406 A:middle
-for greater document
-visibility so that just
+00:02:27.676 --> 00:02:28.686 A:middle
+the following will happen.
 
-00:02:30.406 --> 00:02:34.416 A:middle
-at a glance your users can
-quickly identify the document
+00:02:29.586 --> 00:02:32.196 A:middle
+Safari will transfer a
+webpage to that extension.
 
-00:02:34.416 --> 00:02:36.036 A:middle
-that they're interested
-in working on.
+00:02:32.656 --> 00:02:37.106 A:middle
+There it is translated and then
+the translated corners move back
 
-00:02:37.356 --> 00:02:41.306 A:middle
-Third, we want to display all
-documents that are available
+00:02:37.106 --> 00:02:38.676 A:middle
+into place in Safari.
 
-00:02:41.306 --> 00:02:44.546 A:middle
-to our app, including
-documents that exist
+00:02:42.226 --> 00:02:43.676 A:middle
+Here's a variation
+of the same one.
 
-00:02:44.546 --> 00:02:47.826 A:middle
-in other apps' containers such
-as this document in the sample
+00:02:44.266 --> 00:02:46.886 A:middle
+When you tap Translate, you
+bring up this form sheet
 
-00:02:48.386 --> 00:02:51.606 A:middle
-which exists in the shared
-iCloud Drive container.
+00:02:46.936 --> 00:02:48.906 A:middle
+where a user can select
+one of the languages.
 
-00:02:53.206 --> 00:02:54.996 A:middle
-And fourth, we think
-it is a good idea
+00:02:49.546 --> 00:02:53.216 A:middle
+Then when you tap Language,
+we transfer the webpage
 
-00:02:54.996 --> 00:02:58.916 A:middle
-to store a recently accessed
-list of your documents
+00:02:53.216 --> 00:02:57.256 A:middle
+to the extension, then again
+it's translated and moved back
 
-00:02:58.946 --> 00:03:02.066 A:middle
-so that users can quickly
-get back to the documents
+00:02:57.256 --> 00:03:02.986 A:middle
+into place in Safari So so
+much about Action extensions.
 
 
 
-00:02:58.946 --> 00:03:02.066 A:middle
-so that users can quickly
-get back to the documents
+00:02:57.256 --> 00:03:02.986 A:middle
+into place in Safari So so
+much about Action extensions.
 
-00:03:02.066 --> 00:03:03.306 A:middle
-that they're currently
-working on.
+00:03:03.036 --> 00:03:05.226 A:middle
+So how are Share
+extensions different?
 
-00:03:03.826 --> 00:03:08.876 A:middle
-Now let's go into how we're
-going to discover our documents
+00:03:09.926 --> 00:03:12.396 A:middle
+As I said earlier,
+Share extensions are all
 
-00:03:08.876 --> 00:03:10.316 A:middle
-for our Document Browser.
+00:03:12.396 --> 00:03:15.566 A:middle
+about sharing content
+from the host application
 
-00:03:10.906 --> 00:03:17.686 A:middle
-Now, a naive approach might
-be to use NSFileManager to try
+00:03:15.776 --> 00:03:17.266 A:middle
+to your app or Web Service.
 
-00:03:17.686 --> 00:03:19.636 A:middle
-to list your documents
-in the cloud
+00:03:19.386 --> 00:03:21.026 A:middle
+And because of that,
+it's very important
 
-00:03:19.936 --> 00:03:21.626 A:middle
-but these results
-are incomplete.
+00:03:21.026 --> 00:03:24.266 A:middle
+that you offer the user
+to validate and edit
 
-00:03:22.576 --> 00:03:27.536 A:middle
-For example, in iCloud there is
-a notion of document promises
+00:03:24.266 --> 00:03:26.676 A:middle
+that content before it moves
+out to your Web Service.
 
-00:03:27.986 --> 00:03:29.996 A:middle
-where there's a document
-that exists there
+00:03:28.456 --> 00:03:29.846 A:middle
+And we offer you an API for that
 
-00:03:29.996 --> 00:03:32.656 A:middle
-but content has not been
-made available locally,
+00:03:29.846 --> 00:03:31.556 A:middle
+that I will show you a
+few examples on later on.
 
-00:03:32.656 --> 00:03:34.246 A:middle
-it has not been downloaded
-to disk yet,
+00:03:34.586 --> 00:03:38.026 A:middle
+Also, your Share extension
+represents your application
 
-00:03:34.416 --> 00:03:37.566 A:middle
-and NSFileManager does not pick
-up these documents properly.
+00:03:38.026 --> 00:03:40.656 A:middle
+in the Share Sheet, and
+to prevent confusion,
 
-00:03:38.226 --> 00:03:39.716 A:middle
-In addition, if you're trying
+00:03:40.656 --> 00:03:43.096 A:middle
+we only allow you to offer
+one Share extension per
 
-00:03:39.716 --> 00:03:42.166 A:middle
-to list your documents
-using NSFileManager,
+00:03:43.126 --> 00:03:46.626 A:middle
+containing app.
 
-00:03:42.586 --> 00:03:44.426 A:middle
-external documents
-are not included
+00:03:46.626 --> 00:03:49.186 A:middle
+Now, let me show an example
+for the Share extension here.
 
-00:03:44.666 --> 00:03:48.596 A:middle
-so you're not listing all of the
-documents available to your app.
+00:03:50.166 --> 00:03:51.956 A:middle
+We have the Share in the bottom
 
-00:03:48.826 --> 00:03:49.996 A:middle
-Let's take a quick look at this.
+00:03:52.266 --> 00:03:53.656 A:middle
+and our Share extension
+on the top.
 
-00:03:51.106 --> 00:03:53.576 A:middle
-Let's say you're using
-the NSFileManager APIs.
+00:03:54.986 --> 00:03:57.166 A:middle
+Now, we select four
+photos, and when we tap
 
-00:03:54.826 --> 00:03:57.986 A:middle
-If you're using NSFileManager,
-you'll properly pick
+00:03:57.256 --> 00:03:59.096 A:middle
+on the iCloud Photo
+Sharing extension,
 
-00:03:57.986 --> 00:04:00.166 A:middle
-up document one and
-document two here,
+00:03:59.096 --> 00:04:01.786 A:middle
+the following will happen.
 
 
 
-00:03:57.986 --> 00:04:00.166 A:middle
-up document one and
-document two here,
+00:03:59.096 --> 00:04:01.786 A:middle
+the following will happen.
 
-00:04:00.536 --> 00:04:03.486 A:middle
-which are completely downloaded
-to disk in our app's container.
+00:04:03.046 --> 00:04:06.126 A:middle
+We get a little preview sheet
+where a user can add a comment,
 
-00:04:04.216 --> 00:04:06.606 A:middle
-But you're missing the
-result of document 3
+00:04:06.586 --> 00:04:10.596 A:middle
+maybe tap the Shared album, and
+a little preview on the right.
 
-00:04:06.836 --> 00:04:08.976 A:middle
-which is a document
-promise from iCloud,
+00:04:10.896 --> 00:04:12.576 A:middle
+But we haven't transferred
+any data yet.
 
-00:04:09.436 --> 00:04:12.296 A:middle
-and you're also missing
-document 4 which exists
+00:04:14.286 --> 00:04:17.386 A:middle
+Now, if the information is
+correct, the user can decide
 
-00:04:12.296 --> 00:04:13.626 A:middle
-in another app's container
+00:04:17.386 --> 00:04:20.576 A:middle
+to either cancel out or tap Post
+to actually perform the Action.
 
-00:04:13.736 --> 00:04:17.836 A:middle
-but our user has granted our
-app access to that document.
+00:04:21.766 --> 00:04:24.956 A:middle
+Now let's take a closer look at
+this sheet here in the Center.
 
-00:04:17.935 --> 00:04:20.796 A:middle
-So you don't really want to
-use the NSFileManager APIs
+00:04:26.356 --> 00:04:29.196 A:middle
+This is actually the API I
+was talking about earlier.
 
-00:04:20.796 --> 00:04:22.136 A:middle
-when you're listing
-your documents.
+00:04:29.196 --> 00:04:30.956 A:middle
+It's called the
+SLComposeServiceViewController.
 
-00:04:23.696 --> 00:04:26.116 A:middle
-Instead, you want to
-use NSMetadataQuery.
+00:04:30.956 --> 00:04:33.306 A:middle
+This is how it looks
+straight out of the box.
 
-00:04:27.146 --> 00:04:30.046 A:middle
-Let's take a look at how
-NSMetadataQuery works.
+00:04:34.266 --> 00:04:36.776 A:middle
+There's a text field, a
+little preview on the right.
 
-00:04:31.126 --> 00:04:34.596 A:middle
-NSMetadataQuery will pick up all
-the documents that are available
+00:04:38.346 --> 00:04:41.466 A:middle
+However, it's very customizable,
+and for our special service,
 
-00:04:34.596 --> 00:04:38.666 A:middle
-to your app, including document
-3 which is the document promise,
+00:04:41.466 --> 00:04:43.466 A:middle
+for example, we like
+to customize it
 
-00:04:38.756 --> 00:04:42.186 A:middle
-and document 4 which exists
-in another app's container
+00:04:43.646 --> 00:04:45.186 A:middle
+to make it look more like this.
 
-00:04:42.186 --> 00:04:44.066 A:middle
-but the user granted
-our app permission
+00:04:47.446 --> 00:04:49.396 A:middle
+We added a place holder,
+we even added a character
 
-00:04:44.066 --> 00:04:45.716 A:middle
-to view that document.
+00:04:49.436 --> 00:04:50.396 A:middle
+remaining property.
 
-00:04:46.526 --> 00:04:49.086 A:middle
-Now it is important to note
-here that document 5 which is
+00:04:50.546 --> 00:04:52.296 A:middle
+We even change the preview view,
 
-00:04:49.086 --> 00:04:50.266 A:middle
-in another app's container
+00:04:52.736 --> 00:04:55.336 A:middle
+and we have some options
+on the bottom part.
 
-00:04:50.466 --> 00:04:52.896 A:middle
-but the user has not
-granted our app permission
+00:04:59.166 --> 00:05:02.846 A:middle
+Now let's go through some
+examples to build that up.
 
-00:04:52.976 --> 00:04:57.656 A:middle
-to view is still not included
-in the NSMetadataQuery results
 
-00:04:57.686 --> 00:05:00.316 A:middle
-because that would be a
-privacy leak if we showed
 
+00:04:59.166 --> 00:05:02.846 A:middle
+Now let's go through some
+examples to build that up.
 
+00:05:04.606 --> 00:05:07.576 A:middle
+First, to set a place holder,
 
-00:04:57.686 --> 00:05:00.316 A:middle
-because that would be a
-privacy leak if we showed
+00:05:07.576 --> 00:05:10.086 A:middle
+set a place holder
+property on that sheet.
 
-00:05:00.316 --> 00:05:02.196 A:middle
-that document to the user.
+00:05:13.136 --> 00:05:13.726 A:middle
+There we go.
 
-00:05:04.556 --> 00:05:06.566 A:middle
-So let's use NSMetadataQuery
+00:05:15.986 --> 00:05:18.866 A:middle
+And your Web Service might
+have a maximum character limit,
 
-00:05:06.566 --> 00:05:08.116 A:middle
-for discovering our
-documents in the cloud.
+00:05:19.316 --> 00:05:21.166 A:middle
+so we have a little indicator
+on the bottom left for that.
 
-00:05:09.576 --> 00:05:11.936 A:middle
-Now how does this flow
-work from your app?
+00:05:21.396 --> 00:05:23.416 A:middle
+To update it, just
+set a property there.
 
-00:05:12.906 --> 00:05:15.886 A:middle
-Well, first of all you're going
-to create your NSMetadataQuery.
+00:05:26.366 --> 00:05:28.836 A:middle
+And again, we offer you a
+preview view out of the box,
 
-00:05:17.386 --> 00:05:19.296 A:middle
-Then NSMetadataQuery
-is going to go
+00:05:28.836 --> 00:05:30.026 A:middle
+but you can have your own one.
 
-00:05:19.296 --> 00:05:22.106 A:middle
-through an initial gather
-phase where it lists all
+00:05:30.726 --> 00:05:34.356 A:middle
+To support that simply subclass
+the composer's controller
 
-00:05:22.106 --> 00:05:26.106 A:middle
-of the documents that are
-currently available to your app.
+00:05:34.716 --> 00:05:36.386 A:middle
+and override load preview view,
 
-00:05:26.376 --> 00:05:28.716 A:middle
-Once this initial gather
-phase has completed,
+00:05:36.826 --> 00:05:40.426 A:middle
+and then return your custom
+view controller for the preview.
 
-00:05:28.996 --> 00:05:31.006 A:middle
-you will get a notification
-and then you just have
+00:05:41.736 --> 00:05:43.676 A:middle
+One thing to keep
+in mind, however,
 
-00:05:31.046 --> 00:05:33.836 A:middle
-to display these
-initial documents
+00:05:43.676 --> 00:05:46.536 A:middle
+make sure that the view has --
 
-00:05:33.956 --> 00:05:35.616 A:middle
-on your main queue
-in your app's UI.
+00:05:46.536 --> 00:05:50.516 A:middle
+otherwise it might not
+show up on the sheet.
 
-00:05:37.916 --> 00:05:40.416 A:middle
-But NSMetadataQuery
-doesn't stop there.
+00:05:54.366 --> 00:05:57.996 A:middle
+Now, there are these
+options on the bottom.
 
-00:05:41.256 --> 00:05:45.126 A:middle
-In addition, you will receive
-update notifications as state
+00:05:59.076 --> 00:06:02.276 A:middle
+Those are simply cells
+with a value on the left,
 
-00:05:45.126 --> 00:05:48.326 A:middle
-in the cloud changes such as
-here the iCloud Drive daemon
 
-00:05:48.896 --> 00:05:52.306 A:middle
-downloaded a new document
-to our app's container
 
-00:05:52.306 --> 00:05:53.506 A:middle
-and we were notified
+00:05:59.076 --> 00:06:02.276 A:middle
+Those are simply cells
+with a value on the left,
 
-00:05:53.506 --> 00:05:55.926 A:middle
-in our NSMetadataQuery
-about this document.
+00:06:02.276 --> 00:06:05.486 A:middle
+value on the right,
+and to tap on them,
 
-00:05:57.776 --> 00:06:02.706 A:middle
-Then you just need to compute
-the animations from the changes,
+00:06:05.606 --> 00:06:07.136 A:middle
+we push an option
+view controller
 
+00:06:07.136 --> 00:06:12.356 A:middle
+that can select your options,
+your custom options there.
 
+00:06:13.306 --> 00:06:15.136 A:middle
+Let me show you how you
+set that up in code.
 
-00:05:57.776 --> 00:06:02.706 A:middle
-Then you just need to compute
-the animations from the changes,
+00:06:16.246 --> 00:06:16.896 A:middle
+Pretty simple.
 
-00:06:02.706 --> 00:06:06.746 A:middle
-such as here we may want to
-insert a CollectionView cell
+00:06:17.356 --> 00:06:22.726 A:middle
+Subclass SL -- composer,
+then override the -- method.
 
-00:06:07.116 --> 00:06:08.396 A:middle
-into our CollectionView,
+00:06:23.796 --> 00:06:27.546 A:middle
+Each row is represented
+as an SL compose sheet
 
-00:06:08.936 --> 00:06:12.766 A:middle
-and then just display this
-updated UI on our main thread.
+00:06:27.596 --> 00:06:28.536 A:middle
+configuration item.
 
-00:06:15.486 --> 00:06:18.196 A:middle
-Now that we know how to
-discover our documents,
+00:06:28.946 --> 00:06:29.576 A:middle
+Quite a mouthful.
 
-00:06:18.196 --> 00:06:22.216 A:middle
-let's get into how we're
-going to make our UI better
+00:06:30.226 --> 00:06:34.026 A:middle
+On the left is the title.
 
-00:06:22.216 --> 00:06:23.526 A:middle
-with document thumbnails.
+00:06:34.606 --> 00:06:37.746 A:middle
+The value is on the
+right-hand side.
 
-00:06:28.396 --> 00:06:34.916 A:middle
-Now, we think it is a good idea
-to display thumbnails in your UI
+00:06:40.166 --> 00:06:44.276 A:middle
+Now, if the user taps on a cell,
+we call this tap handler here,
 
-00:06:34.916 --> 00:06:38.876 A:middle
-because it gives visual
-context to your user.
+00:06:44.956 --> 00:06:46.226 A:middle
+and there you are supposed
 
-00:06:39.676 --> 00:06:43.436 A:middle
-That way your user can just at
-a glance identify the document
+00:06:46.296 --> 00:06:48.216 A:middle
+to create your custom
+view controller
 
-00:06:43.436 --> 00:06:44.466 A:middle
-that they're interested
-in working
+00:06:48.216 --> 00:06:49.786 A:middle
+for your custom option.
 
-00:06:44.466 --> 00:06:46.306 A:middle
-on because they have
-a great thumbnail
+00:06:49.786 --> 00:06:53.866 A:middle
+And to push it, simply call push
+configuration view controller.
 
-00:06:46.306 --> 00:06:48.246 A:middle
-so they can quickly identify it.
+00:06:54.456 --> 00:06:56.906 A:middle
+This works the same
+way as the API
 
-00:06:48.776 --> 00:06:51.616 A:middle
-Now new in iOS 9, thumbnails
-are actually generated
+00:06:57.066 --> 00:06:59.146 A:middle
+from your navigation controller.
 
-00:06:51.616 --> 00:06:54.576 A:middle
-for you automatically for
-certain document types
 
-00:06:54.656 --> 00:06:57.556 A:middle
-that are well-known, such as
-large image files, for example.
 
-00:06:57.556 --> 00:07:02.936 A:middle
-Now let's get into the
-workflow of how you might want
+00:07:01.356 --> 00:07:05.676 A:middle
+And then finally,
+return the area of items.
 
+00:07:08.546 --> 00:07:11.356 A:middle
+Now, we even offer you
+auto complete support
 
+00:07:11.356 --> 00:07:12.346 A:middle
+on the compose sheet.
 
-00:06:57.556 --> 00:07:02.936 A:middle
-Now let's get into the
-workflow of how you might want
+00:07:13.236 --> 00:07:16.196 A:middle
+To auto complete, you
+set a view controller
 
-00:07:02.936 --> 00:07:06.446 A:middle
-to load your thumbnail for
-display in your app's UI.
+00:07:16.196 --> 00:07:17.876 A:middle
+to update the button part here.
 
-00:07:07.146 --> 00:07:08.986 A:middle
-It is important to note here
+00:07:18.776 --> 00:07:21.686 A:middle
+In this case, it's a table view
+where we auto complete names,
 
-00:07:08.986 --> 00:07:12.756 A:middle
-that loading thumbnails involves
-loading a potentially large
+00:07:21.876 --> 00:07:23.016 A:middle
+but it could be really anything.
 
-00:07:12.756 --> 00:07:16.086 A:middle
-amount of data into
-memory, which can be slow,
+00:07:24.696 --> 00:07:27.736 A:middle
+To set it, just set the auto
+completion view property,
 
-00:07:16.086 --> 00:07:19.766 A:middle
-so you don't want to block your
-main queue while loading your
+00:07:28.226 --> 00:07:29.736 A:middle
+we do all the animations
+for you.
 
-00:07:19.766 --> 00:07:20.516 A:middle
-thumbnail data.
+00:07:30.126 --> 00:07:31.366 A:middle
+When you are done
+auto completing,
 
-00:07:21.256 --> 00:07:23.836 A:middle
-Let's take an example
-workflow, which would work,
+00:07:31.396 --> 00:07:35.506 A:middle
+you set it back to nil.
 
-00:07:24.316 --> 00:07:26.476 A:middle
-which is how our
-sample code app does it.
+00:07:35.846 --> 00:07:36.686 A:middle
+All pretty simple.
 
-00:07:27.426 --> 00:07:30.096 A:middle
-So first in our sample code
-we have a CollectionView
+00:07:37.416 --> 00:07:37.596 A:middle
+Again,
 
-00:07:30.096 --> 00:07:33.296 A:middle
-and the CollectionView asks us
-to load a CollectionView cell.
+00:07:37.596 --> 00:07:39.826 A:middle
+our
+SLComposeServiceViewController
 
-00:07:34.756 --> 00:07:39.286 A:middle
-We're going to go ahead and
-schedule a fetch thumbnail job
+00:07:39.826 --> 00:07:41.656 A:middle
+provides a consistent
+and familiar UI.
 
-00:07:39.286 --> 00:07:42.096 A:middle
-on a background queue because
-we don't have the thumbnail
+00:07:42.736 --> 00:07:46.086 A:middle
+It's very customizable for
+you to adopt it in your app.
 
-00:07:42.096 --> 00:07:42.766 A:middle
-cached yet.
+00:07:47.076 --> 00:07:48.626 A:middle
+However, if you have
+different needs
 
-00:07:43.816 --> 00:07:45.446 A:middle
-Now, we're not going to wait
+00:07:48.656 --> 00:07:50.986 A:middle
+for your service extension,
 
-00:07:45.476 --> 00:07:47.676 A:middle
-for this fetch thumbnail
-job to complete.
+00:07:51.256 --> 00:07:54.166 A:middle
+you can always go back
+subclassing your view
 
-00:07:48.256 --> 00:07:51.216 A:middle
-We're going to immediately
-return a CollectionView cell
+00:07:54.366 --> 00:07:55.386 A:middle
+controller directly.
 
-00:07:51.216 --> 00:07:53.776 A:middle
-with a placeholder image
-so that the user knows
+00:07:57.346 --> 00:08:00.826 A:middle
+Now, I will just show you how
+to make Action Share extensions.
 
-00:07:53.816 --> 00:07:55.146 A:middle
-that there is something there.
 
-00:07:55.766 --> 00:07:59.446 A:middle
-At some point in the future,
-the fetch thumbnail job is going
 
-00:07:59.446 --> 00:08:03.436 A:middle
-to finish and then we'll just
-notify our CollectionView
+00:07:57.346 --> 00:08:00.826 A:middle
+Now, I will just show you how
+to make Action Share extensions.
 
+00:08:01.546 --> 00:08:02.806 A:middle
+Now let's change
+gears a little bit
 
+00:08:02.956 --> 00:08:07.716 A:middle
+and discuss how you can support
+extensions made by someone else
 
-00:07:59.446 --> 00:08:03.436 A:middle
-to finish and then we'll just
-notify our CollectionView
+00:08:08.136 --> 00:08:09.536 A:middle
+in your host application.
 
-00:08:03.436 --> 00:08:05.106 A:middle
-that it needs to
-reload that cell
+00:08:11.316 --> 00:08:14.586 A:middle
+For example, let's say we
+made a text edit application,
 
-00:08:05.996 --> 00:08:07.636 A:middle
-and then we'll just
-display the cell
+00:08:15.236 --> 00:08:17.356 A:middle
+and we'd like to share
+those text documents
 
-00:08:08.146 --> 00:08:10.226 A:middle
-in our UI with our thumbnail.
+00:08:17.356 --> 00:08:18.556 A:middle
+as well, plain text.
 
-00:08:12.426 --> 00:08:13.026 A:middle
-All right.
+00:08:19.586 --> 00:08:22.476 A:middle
+However, some extensions
+might not understand text.
 
-00:08:13.246 --> 00:08:17.666 A:middle
-Now that we know how to find
-our documents and display them
+00:08:23.186 --> 00:08:24.686 A:middle
+They might only support PDFs
 
-00:08:17.666 --> 00:08:19.506 A:middle
-with great thumbnails,
-let's get into how
+00:08:25.556 --> 00:08:27.736 A:middle
+or other extensions
+might only support HTML.
 
-00:08:19.506 --> 00:08:21.386 A:middle
-to manage a recents list.
+00:08:29.326 --> 00:08:31.396 A:middle
+Now, you would like to support
+as many extensions as possible,
 
-00:08:22.736 --> 00:08:26.046 A:middle
-Now we think you want
-to use a recents list
+00:08:31.396 --> 00:08:35.116 A:middle
+so a good way would be to offer
+all those three file types.
 
-00:08:26.046 --> 00:08:29.676 A:middle
-because recently accessed
-documents are often the
+00:08:36.806 --> 00:08:38.525 A:middle
+But when you think about that,
 
-00:08:29.676 --> 00:08:32.566 A:middle
-documents that a user
-is currently working on,
+00:08:39.046 --> 00:08:41.246 A:middle
+those are not really
+three separate documents
 
-00:08:33.626 --> 00:08:37.506 A:middle
-so it is a good idea to store
-a list of these documents
+00:08:41.246 --> 00:08:43.116 A:middle
+when you share a text document,
 
-00:08:37.506 --> 00:08:41.116 A:middle
-that your user can
-quickly get back to them.
+00:08:43.586 --> 00:08:46.586 A:middle
+but what you really have
+is a single document
 
-00:08:41.926 --> 00:08:45.446 A:middle
-Now, a naïve approach,
-again, might be to use NSURLs
+00:08:46.676 --> 00:08:48.236 A:middle
+that supports different
+file formats.
 
-00:08:45.446 --> 00:08:48.686 A:middle
-to store a recents list of the
-recently accessed documents,
+00:08:49.936 --> 00:08:53.416 A:middle
+And exactly for that we have
+an API called NSItemProvider.
 
-00:08:48.786 --> 00:08:51.416 A:middle
-but this suffers from
-many similar pitfalls
+00:08:55.296 --> 00:08:58.956 A:middle
+In one sentence,
+NSItemProvider is a single item
 
-00:08:51.416 --> 00:08:53.536 A:middle
-as NSFileManager did earlier.
+00:08:59.046 --> 00:09:00.536 A:middle
+with multiple representations.
 
-00:08:54.826 --> 00:08:55.996 A:middle
-Let's take a quick look at this.
 
-00:08:56.866 --> 00:09:00.566 A:middle
-So let's say we store a list
-of NSURLs to our documents
 
+00:08:59.046 --> 00:09:00.536 A:middle
+with multiple representations.
 
+00:09:01.686 --> 00:09:04.266 A:middle
+Let me show you a code
+example to explain it better.
 
-00:08:56.866 --> 00:09:00.566 A:middle
-So let's say we store a list
-of NSURLs to our documents
+00:09:05.786 --> 00:09:10.846 A:middle
+Now, we create NSItemProvider,
+then we call register the item
 
-00:09:00.566 --> 00:09:02.326 A:middle
-which are the recently
-accessed documents.
+00:09:10.846 --> 00:09:14.156 A:middle
+for type identifier to
+add a new representation
 
-00:09:02.916 --> 00:09:06.416 A:middle
-But then the iCloud Drive daemon
-moves the document while our app
+00:09:14.156 --> 00:09:15.196 A:middle
+to that item provider.
 
-00:09:06.596 --> 00:09:09.616 A:middle
-isn't running, such as here,
-it moved it into a new folder.
+00:09:16.166 --> 00:09:17.496 A:middle
+In that case, it's plain text.
 
-00:09:10.816 --> 00:09:14.756 A:middle
-The NSURL is now a broken
-reference and will not resolve
+00:09:19.136 --> 00:09:22.906 A:middle
+Now, if the extension asks for
+the plain text representation,
 
-00:09:14.756 --> 00:09:17.376 A:middle
-to the updated location
-of our document on disk
+00:09:23.336 --> 00:09:26.106 A:middle
+the system will call this
+load handler block here.
 
-00:09:18.096 --> 00:09:22.056 A:middle
-so we can't really rely on
-this to store our recents list.
+00:09:27.546 --> 00:09:30.226 A:middle
+And there you are supposed
+to create your text document
 
-00:09:23.556 --> 00:09:26.896 A:middle
-The correct way to
-store a recents list is
+00:09:30.226 --> 00:09:32.746 A:middle
+on the fly and call
+the completion handler
 
-00:09:26.896 --> 00:09:28.656 A:middle
-with security scoped bookmarks.
+00:09:32.746 --> 00:09:34.976 A:middle
+to return the data
+back to the extension.
 
-00:09:30.186 --> 00:09:33.996 A:middle
-Here, if we store a security
-scoped bookmark to this document
+00:09:34.976 --> 00:09:36.416 A:middle
+Same for PDF.
 
-00:09:34.566 --> 00:09:37.846 A:middle
-and again the iCloud Drive
-daemon moves this document
+00:09:37.106 --> 00:09:41.586 A:middle
+As soon as the extension asks
+for a PDF representation,
 
-00:09:37.846 --> 00:09:42.786 A:middle
-into a folder, the bookmark will
-update automatically to resolve
+00:09:42.026 --> 00:09:45.546 A:middle
+we call the load handler, there
+you create your PDF on the fly
 
-00:09:42.786 --> 00:09:45.816 A:middle
-to the document's new
-location on disk so we want
+00:09:45.546 --> 00:09:47.646 A:middle
+and call the completion
+and let it return data back
 
-00:09:45.816 --> 00:09:48.676 A:middle
-to use security scope bookmarks
-when managing our recents list.
+00:09:48.106 --> 00:09:49.076 A:middle
+to the extension.
 
-00:09:48.946 --> 00:09:53.596 A:middle
-And with that, I would like
-to get into a quick demo
+00:09:51.136 --> 00:09:53.146 A:middle
+To display Share Sheet,
 
-00:09:53.676 --> 00:09:56.406 A:middle
-for how we're going to
-manage our recents list
+00:09:53.506 --> 00:09:55.666 A:middle
+simply create a UI
+activity view controller
 
-00:09:56.506 --> 00:09:57.976 A:middle
-and how to load thumbnails.
+00:09:56.306 --> 00:10:01.786 A:middle
+and offer the item provider
+options in the initializer.
 
 
 
-00:10:07.156 --> 00:10:07.356 A:middle
-All right.
+00:09:56.306 --> 00:10:01.786 A:middle
+and offer the item provider
+options in the initializer.
 
-00:10:07.596 --> 00:10:09.596 A:middle
-Let's go ahead and launch
-up our sample code here.
+00:10:03.266 --> 00:10:06.986 A:middle
+Now, in the first example with
+the compose sheet you saw,
 
-00:10:10.106 --> 00:10:13.356 A:middle
-And we haven't loaded
-thumbnails yet into our app.
+00:10:07.456 --> 00:10:09.216 A:middle
+we have this little
+preview in the top right.
 
-00:10:15.246 --> 00:10:19.216 A:middle
-But for example, if I open the
-iCloud Drive app using the new
+00:10:09.796 --> 00:10:11.826 A:middle
+The hosts should offer
+previews as well.
 
-00:10:19.216 --> 00:10:22.336 A:middle
-Multitasking feature, we
-can tell that the thumbnails
+00:10:13.346 --> 00:10:15.696 A:middle
+Those previews represent
+what will be shared,
 
-00:10:22.336 --> 00:10:25.996 A:middle
-for these documents are
-actually there, so we just need
+00:10:17.076 --> 00:10:19.776 A:middle
+and also they need to be
+simple and efficient to create.
 
-00:10:25.996 --> 00:10:28.796 A:middle
-to load them to display
-in our app's UI.
+00:10:19.776 --> 00:10:21.026 A:middle
+They can't be too large.
 
-00:10:29.486 --> 00:10:38.066 A:middle
-Let's go ahead and
-look at this in code.
+00:10:22.966 --> 00:10:25.756 A:middle
+Again, for that, we have an
+API in NSItemProvider as well.
 
-00:10:38.066 --> 00:10:38.326 A:middle
-All right.
+00:10:26.566 --> 00:10:28.166 A:middle
+It's called preview
+image handler.
 
-00:10:38.326 --> 00:10:40.846 A:middle
-So first of all, let's
-talk about how we're going
+00:10:29.276 --> 00:10:32.006 A:middle
+And as soon as the
+extension asks for a preview,
 
-00:10:40.846 --> 00:10:42.826 A:middle
-to manage our recents
-list in code.
+00:10:32.286 --> 00:10:34.876 A:middle
+we call this block here,
+and there you are supposed
 
-00:10:45.486 --> 00:10:50.586 A:middle
-The important thing here is
+00:10:34.876 --> 00:10:37.886 A:middle
+to create your thumbnail or
+your preview representation
 
-00:10:50.966 --> 00:10:56.936 A:middle
-when we're saving our object
-here we are bookmarking this
+00:10:37.886 --> 00:10:40.776 A:middle
+as an image on the fly and
+call the completion handler
 
-00:10:56.936 --> 00:11:00.166 A:middle
-document using the 'bookmark
-data with options' method
+00:10:40.776 --> 00:10:41.836 A:middle
+to return that data back.
 
+00:10:42.806 --> 00:10:44.936 A:middle
+Now we need to change our
+perspective yet again.
 
+00:10:45.526 --> 00:10:47.616 A:middle
+We talked first about
+implementing extensions.
 
-00:10:56.936 --> 00:11:00.166 A:middle
-document using the 'bookmark
-data with options' method
+00:10:48.686 --> 00:10:51.526 A:middle
+Then we talked about supporting
+extensions as a host app.
 
-00:11:00.166 --> 00:11:02.616 A:middle
-and it is important here
-to pass the 'suitable
+00:10:52.166 --> 00:10:53.266 A:middle
+Now let's look at what it's
 
-00:11:02.616 --> 00:11:04.396 A:middle
-for bookmark file' option
+00:10:53.266 --> 00:10:55.626 A:middle
+like to be an extension
+developer again and how
 
-00:11:04.666 --> 00:11:06.526 A:middle
-so that we can resolve
-it properly later.
+00:10:55.626 --> 00:10:57.306 A:middle
+to declare your support
+with the kind
 
-00:11:08.436 --> 00:11:10.486 A:middle
-Then on our app launch
-we just have
+00:10:57.306 --> 00:11:00.126 A:middle
+of data the host app can
+offer to your extension.
 
-00:11:10.486 --> 00:11:12.796 A:middle
-to call the NSURL
-Constructor method
 
-00:11:12.796 --> 00:11:15.826 A:middle
-of 'by resolving bookmark
-data' with the bookmark
 
-00:11:15.826 --> 00:11:19.296 A:middle
-that we have saved
-previously, and we'll get a URL,
+00:10:57.306 --> 00:11:00.126 A:middle
+of data the host app can
+offer to your extension.
 
-00:11:19.296 --> 00:11:22.396 A:middle
-which is the updated location
-of our document on disk.
+00:11:01.556 --> 00:11:04.576 A:middle
+For example, maybe you like
+to have full sharing service,
 
-00:11:23.986 --> 00:11:27.746 A:middle
-Now, it is important here that
-with this returned URL we need
+00:11:04.576 --> 00:11:07.086 A:middle
+and you want to declare that you
+are sharing extension support
 
-00:11:27.746 --> 00:11:30.786 A:middle
-to call 'start accessing
-security scope for resource,
+00:11:07.196 --> 00:11:10.086 A:middle
+images and movie.
 
-00:11:31.186 --> 00:11:33.526 A:middle
-in case this document
-is a document
+00:11:11.656 --> 00:11:15.026 A:middle
+Now, let's make three
+extensions in that case.
 
-00:11:33.526 --> 00:11:36.106 A:middle
-in another app's container,
-or we won't be able
+00:11:16.096 --> 00:11:20.236 A:middle
+One extension should support --
+one extension supports images,
 
-00:11:36.106 --> 00:11:38.126 A:middle
-to read this document because --
+00:11:20.866 --> 00:11:22.416 A:middle
+another one can handle movies,
 
-00:11:38.186 --> 00:11:39.446 A:middle
-read properties from
-this document
+00:11:22.736 --> 00:11:25.356 A:middle
+and a third one handles
+images and movies.
 
-00:11:39.656 --> 00:11:42.606 A:middle
-because this will
-extend our Sandbox
+00:11:27.286 --> 00:11:28.116 A:middle
+Now let's see what happens
 
-00:11:42.926 --> 00:11:44.696 A:middle
-to have access to this document.
+00:11:28.116 --> 00:11:30.176 A:middle
+if the host app shares
+the single image.
 
-00:11:47.446 --> 00:11:51.386 A:middle
-Now for thumbnails we've written
-this great thumbnail cache class
+00:11:31.896 --> 00:11:33.316 A:middle
+In that case, the first
 
-00:11:51.386 --> 00:11:55.946 A:middle
-for you in the sample
-code, which is going
+00:11:33.316 --> 00:11:35.456 A:middle
+and third extension will
+appear in the Share Sheet.
 
-00:11:55.946 --> 00:11:59.716 A:middle
-to cache our thumbnails
-for our app.
+00:11:37.366 --> 00:11:39.536 A:middle
+Now, same way for
+the movie case.
 
+00:11:40.176 --> 00:11:44.616 A:middle
+If the host application shares
+a single movie, the second
 
+00:11:44.616 --> 00:11:47.356 A:middle
+and third extension in the
+Share Sheet, that makes sense.
 
-00:12:01.006 --> 00:12:03.446 A:middle
-It takes care of a lot of
-the heavy lifting for us,
+00:11:48.286 --> 00:11:50.856 A:middle
+However, what happens
+if the host
 
-00:12:03.446 --> 00:12:06.746 A:middle
-such as scheduling, thumbnail
-loading on background queues,
+00:11:51.286 --> 00:11:53.106 A:middle
+of a share supports
+image and movie?
 
-00:12:06.746 --> 00:12:10.756 A:middle
-et cetera, and notifying
-our CollectionView
+00:11:53.106 --> 00:11:55.426 A:middle
+You would think all the
+extensions would appear
 
-00:12:10.756 --> 00:12:12.346 A:middle
-that we need to reload cells.
+00:11:55.426 --> 00:11:58.786 A:middle
+in the sheet; however, this
+is currently not the case
 
-00:12:13.176 --> 00:12:14.626 A:middle
-Now the only thing we
-have not implemented
+00:11:58.856 --> 00:12:02.166 A:middle
+since in iOS 8 the
+implementation requires
 
-00:12:14.626 --> 00:12:17.186 A:middle
-yet is just this block
-of code right here,
 
-00:12:17.436 --> 00:12:20.766 A:middle
-which will load our
-thumbnail from disk.
 
-00:12:21.286 --> 00:12:24.746 A:middle
-All we have to do is
-call the NSURL method
+00:11:58.856 --> 00:12:02.166 A:middle
+since in iOS 8 the
+implementation requires
 
-00:12:24.746 --> 00:12:28.846 A:middle
-of 'get promised item resource
-value for key' on the URL
+00:12:02.276 --> 00:12:07.036 A:middle
+that extension can handle all
+two types of file formats.
 
-00:12:28.846 --> 00:12:31.926 A:middle
-of the document with a
-thumbnail dictionary key,
+00:12:07.036 --> 00:12:10.246 A:middle
+It's a bit unfortunate
 
-00:12:31.926 --> 00:12:33.576 A:middle
-and we'll get a dictionary
-of thumbnails.
+00:12:10.316 --> 00:12:14.276 A:middle
+since user extension developer
+would probably like to support
 
-00:12:33.676 --> 00:12:37.346 A:middle
-Then we just need to extract
-the UIImage from the dictionary
+00:12:14.276 --> 00:12:17.856 A:middle
+as many extensions as possible,
+and to do that, you should offer
 
-00:12:37.866 --> 00:12:41.986 A:middle
-and return it to our thumbnail
-class so that we can display it.
+00:12:17.856 --> 00:12:19.866 A:middle
+as many representations
+as possible as well.
 
-00:12:41.986 --> 00:12:43.376 A:middle
-Now it is important here
+00:12:20.426 --> 00:12:23.226 A:middle
+But in that case, you
+actually get less extensions
 
-00:12:43.376 --> 00:12:47.016 A:middle
-to use the 'get promised item
-resource value for key' instead
+00:12:23.226 --> 00:12:25.946 A:middle
+than by just sharing a
+single representation,
 
-00:12:47.016 --> 00:12:49.326 A:middle
-of the 'get resource
-value for key' method
+00:12:25.946 --> 00:12:27.526 A:middle
+like movie or image.
 
-00:12:49.846 --> 00:12:52.626 A:middle
-because the document may not
-have its content available
+00:12:29.176 --> 00:12:30.916 A:middle
+So we added a new
+behavior in iOS 9.
 
-00:12:53.026 --> 00:12:58.476 A:middle
-locally yet, so we can
-display our thumbnail even
+00:12:32.996 --> 00:12:37.606 A:middle
+You can opt in by adding
+the NSExtension activation
 
-00:12:58.476 --> 00:13:00.206 A:middle
-if it is not downloaded yet.
+00:12:37.606 --> 00:12:38.396 A:middle
+dictionary version
 
+00:12:38.806 --> 00:12:42.426 A:middle
+in new extensions info
+plist, set it to two.
 
+00:12:43.146 --> 00:12:46.836 A:middle
+After that, your
+extension will appear even
 
-00:12:58.476 --> 00:13:00.206 A:middle
-if it is not downloaded yet.
+00:12:46.836 --> 00:12:49.146 A:middle
+if the host app shares
+both image and movie,
 
-00:13:02.116 --> 00:13:05.496 A:middle
-Then all we have
-to do is redeploy
+00:12:49.146 --> 00:12:51.896 A:middle
+and even if you are only
+interested in movies or images.
 
-00:13:06.306 --> 00:13:10.236 A:middle
-and we have some great
-thumbnails in our app,
+00:12:54.256 --> 00:12:56.536 A:middle
+Now, those are high-level
+activation rules,
 
-00:13:11.266 --> 00:13:14.796 A:middle
-which load in the background so
-they don't block our scrolling
+00:12:57.186 --> 00:13:00.546 A:middle
+but we also support activation
+rules that are just predicates.
 
-00:13:14.796 --> 00:13:17.876 A:middle
-as we scroll through
-our sample code.
 
-00:13:18.806 --> 00:13:19.316 A:middle
-All right.
 
-00:13:19.316 --> 00:13:27.776 A:middle
-Let's get back to the slides.
+00:12:57.186 --> 00:13:00.546 A:middle
+but we also support activation
+rules that are just predicates.
 
-00:13:27.776 --> 00:13:30.556 A:middle
-So what have we learned about
-building a Document Browser?
+00:13:01.896 --> 00:13:04.366 A:middle
+Again, predicates can be
+very simple but also very,
 
-00:13:31.386 --> 00:13:33.776 A:middle
-First, we learned that we want
+00:13:04.366 --> 00:13:05.876 A:middle
+very powerful like
+this one here.
 
-00:13:33.776 --> 00:13:37.176 A:middle
-to discover our documents using
-NSMetadataQuery as opposed
+00:13:06.796 --> 00:13:08.566 A:middle
+I won't go into details
+right now,
 
-00:13:37.176 --> 00:13:41.916 A:middle
-to other methods so that we
-can discover all the documents
+00:13:08.666 --> 00:13:10.706 A:middle
+but check out the App
+Extension Developer Guide
 
-00:13:41.916 --> 00:13:43.186 A:middle
-that are available to our app.
+00:13:10.706 --> 00:13:11.626 A:middle
+for more information.
 
-00:13:44.156 --> 00:13:46.896 A:middle
-Second, we have learned that
-we want to display thumbnails
+00:13:11.626 --> 00:13:19.546 A:middle
+Now, let's talk about
+icons for extensions.
 
-00:13:46.896 --> 00:13:50.106 A:middle
-in our app's UI so that we
-can build some great UIs
+00:13:19.636 --> 00:13:23.886 A:middle
+As I mentioned before,
 
-00:13:50.106 --> 00:13:53.046 A:middle
-and our users can just quickly
-identify the documents they're
+00:13:24.016 --> 00:13:26.866 A:middle
+Share extensions
+represents your application
 
-00:13:53.046 --> 00:13:53.586 A:middle
-working on.
+00:13:26.866 --> 00:13:28.516 A:middle
+of Web Service within
+a Share Sheet.
 
-00:13:54.536 --> 00:13:56.306 A:middle
-And finally, we have
-learned we want
+00:13:29.266 --> 00:13:32.056 A:middle
+Because of that, we simply
+use your application icon
 
-00:13:56.306 --> 00:13:58.646 A:middle
-to store our recents list
-using bookmarks as opposed
+00:13:32.056 --> 00:13:35.156 A:middle
+or a containing applications
+icon as the icon
 
-00:13:58.646 --> 00:14:01.676 A:middle
-to other methods so that
-users can quickly get back
+00:13:35.156 --> 00:13:37.226 A:middle
+in the Share Sheet, so
+there's no additional work
 
+00:13:37.226 --> 00:13:38.606 A:middle
+for you needed.
 
+00:13:41.146 --> 00:13:44.486 A:middle
+Action extensions, on the other
+hand, require template images.
 
-00:13:58.646 --> 00:14:01.676 A:middle
-to other methods so that
-users can quickly get back
+00:13:44.896 --> 00:13:49.916 A:middle
+We require two sizes, one for
+the iPad, one for the iPhone.
 
-00:14:01.676 --> 00:14:03.756 A:middle
-to the documents that
-they're currently working on.
+00:13:52.186 --> 00:13:53.746 A:middle
+And they reside in
+the extension bundle.
 
-00:14:04.286 --> 00:14:06.516 A:middle
-And with that, I would like
-to welcome Johannes Fortmann
+00:13:54.756 --> 00:13:57.666 A:middle
+Now, let me explain how
+template images work.
 
-00:14:06.516 --> 00:14:07.746 A:middle
-to the stage to talk to you
+00:13:59.166 --> 00:14:00.976 A:middle
+Think of it as, like, a stencil.
 
-00:14:07.746 --> 00:14:09.576 A:middle
-about building the
-document editor.
 
-00:14:10.516 --> 00:14:15.696 A:middle
+
+00:13:59.166 --> 00:14:00.976 A:middle
+Think of it as, like, a stencil.
+
+00:14:02.006 --> 00:14:04.216 A:middle
+A template image is a
+black-and-white representation
+
+00:14:04.706 --> 00:14:07.386 A:middle
+with a transparent background,
+and the system then takes
+
+00:14:07.386 --> 00:14:09.316 A:middle
+that stencil of that
+black-and-white image
+
+00:14:10.166 --> 00:14:14.826 A:middle
+and creates the actual
+icon for the Share Sheet.
+
+00:14:15.666 --> 00:14:21.496 A:middle
+And again, require two sizes,
+60 points for the iPhone,
+
+00:14:21.986 --> 00:14:23.526 A:middle
+76 points for the iPad.
+
+00:14:25.816 --> 00:14:30.076 A:middle
+However, I encourage you to use
+image assets in your extension
+
+00:14:30.236 --> 00:14:33.406 A:middle
+and offer all different --
+all the different icon sizes
+
+00:14:33.506 --> 00:14:35.086 A:middle
+that are for application icons.
+
+00:14:35.756 --> 00:14:39.096 A:middle
+That way your app extension
+will be far more future-proof.
+
+00:14:42.896 --> 00:14:45.126 A:middle
+So much about Action
+Share extensions.
+
+00:14:45.126 --> 00:14:46.876 A:middle
+Let's invite Ian
+on stage to talk
+
+00:14:46.876 --> 00:14:48.136 A:middle
+about Today Widget enhancements.
+
+00:14:49.516 --> 00:14:56.826 A:middle
 [ Applause ]
 
-00:14:16.196 --> 00:14:17.846 A:middle
-&gt;&gt; JOHANNES FORTMANN:
-Thank you, Mike.
+00:14:57.326 --> 00:14:59.386 A:middle
+&gt;&gt; IAN BAIRD: Thank you, Sophia.
 
-00:14:17.846 --> 00:14:19.376 A:middle
-Now, Mike has shown you how
 
-00:14:19.376 --> 00:14:22.556 A:middle
-to build a beautiful Document
-Browser in your application.
 
-00:14:23.076 --> 00:14:26.626 A:middle
-And of course that's something
-that's very nice for our app
+00:15:00.376 --> 00:15:04.696 A:middle
+Hi. I'm Ian Baird, CoreOS
+engineer, and today I am going
 
-00:14:26.626 --> 00:14:28.356 A:middle
-but equally as important
+00:15:04.696 --> 00:15:07.096 A:middle
+to talk to you about
+Today Widget enhancements.
 
-00:14:28.356 --> 00:14:32.416 A:middle
-or possibly even more important
-is the part of your application
+00:15:08.576 --> 00:15:09.546 A:middle
+First a quick recap.
 
-00:14:32.416 --> 00:14:36.436 A:middle
-where your user can go and
-load and edit documents.
+00:15:10.136 --> 00:15:11.386 A:middle
+As you remember from last year,
 
-00:14:36.756 --> 00:14:40.126 A:middle
-After all, that's why they're
-trying to use your application.
+00:15:11.856 --> 00:15:15.056 A:middle
+Today Widgets give you quick
+information at a glance,
 
-00:14:41.246 --> 00:14:45.076 A:middle
-Now, before we go into the
-whole loading and writing
+00:15:15.056 --> 00:15:18.236 A:middle
+so your stock prices,
+your sports scores.
 
-00:14:45.076 --> 00:14:48.876 A:middle
-out change documents, we
-have to take a quick detour
+00:15:18.686 --> 00:15:20.706 A:middle
+It tells you how long
+it's going to take for you
 
-00:14:49.226 --> 00:14:51.646 A:middle
-into a concept called
-file coordination.
+00:15:20.706 --> 00:15:22.386 A:middle
+to get home from work.
 
-00:14:52.696 --> 00:14:54.766 A:middle
-Now, what am I talking
-about here?
+00:15:23.836 --> 00:15:26.566 A:middle
+So today I am going to
+talk to you about how
 
-00:14:55.896 --> 00:15:01.646 A:middle
-Well, in our new modern
-multitasking-based world we have
+00:15:26.566 --> 00:15:29.506 A:middle
+to enhance your Today
+Widget, how to make sure
 
+00:15:29.566 --> 00:15:33.096 A:middle
+that the model data is
+always up-to-date and in sync
 
+00:15:33.186 --> 00:15:34.766 A:middle
+with your containing app.
 
-00:14:55.896 --> 00:15:01.646 A:middle
-Well, in our new modern
-multitasking-based world we have
+00:15:35.226 --> 00:15:37.796 A:middle
+I'm also going to tell
+you about how to make sure
 
-00:15:01.976 --> 00:15:05.126 A:middle
-this concept of multiple
-apps being able to access
+00:15:37.996 --> 00:15:40.886 A:middle
+that your visual
+representation is up-to-date
 
-00:15:05.126 --> 00:15:07.026 A:middle
-and display the same file.
+00:15:40.886 --> 00:15:42.966 A:middle
+and reflects your
+widget's content as well.
 
-00:15:07.306 --> 00:15:11.876 A:middle
-As an example we could have the
-iCloud Drive app displaying an
+00:15:44.026 --> 00:15:47.386 A:middle
+And then I am going to go over
+some general best practices
 
-00:15:11.876 --> 00:15:15.406 A:middle
-overview of all the files that
-are in your document container
+00:15:47.466 --> 00:15:49.846 A:middle
+that you can use for
+all of your extensions,
 
-00:15:15.486 --> 00:15:18.666 A:middle
-at the same time as
-your app is running
+00:15:50.076 --> 00:15:52.156 A:middle
+including your Today Widgets.
 
-00:15:18.776 --> 00:15:21.576 A:middle
-and the user is actually
-editing this document.
+00:15:53.726 --> 00:15:54.506 A:middle
+Let's get started.
 
-00:15:22.576 --> 00:15:26.086 A:middle
-Or as a more conservative
-approach,
+00:15:55.316 --> 00:15:57.636 A:middle
+This is a view of the
+Notification Center.
 
-00:15:26.396 --> 00:15:30.476 A:middle
-even if your user is not
-actually using this two-up view
+00:15:57.946 --> 00:16:00.276 A:middle
+It's populated by Today Widgets.
 
-00:15:30.476 --> 00:15:34.086 A:middle
-of Multitasking, there is
-always going to be the case
 
-00:15:34.446 --> 00:15:38.556 A:middle
-that the iCloud Drive
-syncing daemon may want
 
-00:15:38.556 --> 00:15:41.136 A:middle
-to access the document
-to sync it
+00:15:57.946 --> 00:16:00.276 A:middle
+It's populated by Today Widgets.
 
-00:15:41.136 --> 00:15:44.046 A:middle
-up to the cloud while
-your user is editing.
+00:16:00.856 --> 00:16:03.076 A:middle
+You can scroll it to
+see all of the widgets,
 
-00:15:44.046 --> 00:15:46.826 A:middle
-In fact, that is a
-really, really common case,
+00:16:03.686 --> 00:16:07.966 A:middle
+and if you want more information
+about anything you can see here,
 
-00:15:46.916 --> 00:15:49.656 A:middle
-because the user is in the
-middle of editing the document,
+00:16:08.376 --> 00:16:12.916 A:middle
+you can simply tap on the
+widget, and it will take you
 
-00:15:50.226 --> 00:15:53.146 A:middle
-they're saving this
-document to disk,
+00:16:12.976 --> 00:16:15.156 A:middle
+to the containing app
+for more information.
 
-00:15:53.146 --> 00:15:56.816 A:middle
-and of course now it is changed,
-so the iCloud Drive daemon wants
+00:16:16.156 --> 00:16:18.546 A:middle
+Now, how do we facilitate
+this interaction
 
-00:15:56.816 --> 00:15:59.436 A:middle
-to make sure that it is
-up-to-date in the cloud.
+00:16:18.746 --> 00:16:21.526 A:middle
+between the Today Widget
+and its containing app?
 
+00:16:22.256 --> 00:16:25.266 A:middle
+Well, we do this by
+the use of URL schemes.
 
+00:16:25.906 --> 00:16:28.136 A:middle
+And now I am going to tell you
+a little bit more about those.
 
-00:16:00.416 --> 00:16:06.436 A:middle
-So that's a really common case.
+00:16:28.826 --> 00:16:33.566 A:middle
+Interactions use these URL
+schemes and some open URL API
 
-00:16:06.576 --> 00:16:10.166 A:middle
-Let's have a look at this
-specific case where your user is
+00:16:33.916 --> 00:16:38.646 A:middle
+on NSExtension contexts to
+take the user to the app.
 
-00:16:10.166 --> 00:16:13.506 A:middle
-in the middle of editing
-the document on disk.
+00:16:38.646 --> 00:16:41.616 A:middle
+Now, we have some best
+practices that I'd like to talk
 
-00:16:14.336 --> 00:16:16.966 A:middle
-And the way this looks is that
-your app is, of course, running.
+00:16:41.616 --> 00:16:44.766 A:middle
+about today governing the
+use of these URL schemes.
 
-00:16:17.576 --> 00:16:19.706 A:middle
-And the user is making
-some edits
+00:16:45.616 --> 00:16:49.016 A:middle
+First, we'd really like
+you to use and concentrate
 
-00:16:19.856 --> 00:16:22.816 A:middle
-and in the meantime your
-application is going
+00:16:49.016 --> 00:16:51.626 A:middle
+on your app's registered
+URL schemes.
 
-00:16:23.016 --> 00:16:27.456 A:middle
-through auto-saving,
-do periodical writes
+00:16:52.196 --> 00:16:53.086 A:middle
+This is great.
 
-00:16:27.646 --> 00:16:29.046 A:middle
-of this document to disk.
+00:16:54.206 --> 00:16:55.246 A:middle
+The next thing you want
 
-00:16:29.576 --> 00:16:31.846 A:middle
-So we're going to have
-a write at some point,
+00:16:55.246 --> 00:16:59.586 A:middle
+to use is you can use system
+URL schemes, like HTTPS.
 
-00:16:32.566 --> 00:16:35.746 A:middle
-and at a later time we're going
-to have like the user's editing,
+00:16:59.586 --> 00:17:03.016 A:middle
+That's going to open
+a webpage in Safari.
 
-00:16:35.746 --> 00:16:38.826 A:middle
-and changing the document, we're
-going to have another write.
 
-00:16:39.876 --> 00:16:43.146 A:middle
-Cool. Now let's just
-assume for a moment
 
-00:16:43.586 --> 00:16:45.656 A:middle
-that our user is
-taking full advantage
+00:16:59.586 --> 00:17:03.016 A:middle
+That's going to open
+a webpage in Safari.
 
-00:16:45.656 --> 00:16:48.986 A:middle
-of the multitasking feature
-and is at the same time
+00:17:03.476 --> 00:17:06.976 A:middle
+You can also create
+messages, start phone calls,
 
-00:16:48.986 --> 00:16:51.306 A:middle
-as they're editing
-this document,
+00:17:07.366 --> 00:17:10.806 A:middle
+and perform other interactions
+and start interesting workflows
 
-00:16:51.526 --> 00:16:53.416 A:middle
-also launching another
-application,
+00:17:11.006 --> 00:17:12.346 A:middle
+with system components.
 
-00:16:53.716 --> 00:16:57.756 A:middle
-and this other application
-might have a previous reference
+00:17:12.826 --> 00:17:15.096 A:middle
+And here's how you do it.
 
-00:16:57.756 --> 00:17:01.596 A:middle
-to this document, and will
-now immediately doing state
+00:17:15.366 --> 00:17:19.846 A:middle
+You'll notice that I am showing
+a table view, did select row
 
+00:17:19.846 --> 00:17:22.286 A:middle
+at index path callback
+because a lot
 
+00:17:22.286 --> 00:17:24.096 A:middle
+of widgets are simply
+table views.
 
-00:16:57.756 --> 00:17:01.596 A:middle
-to this document, and will
-now immediately doing state
+00:17:25.096 --> 00:17:26.336 A:middle
+The first thing we
+are going to want
 
-00:17:01.596 --> 00:17:05.546 A:middle
-restoration for example, try to
-read this document from disk.
+00:17:26.376 --> 00:17:29.006 A:middle
+to do is actually
+construct a URL.
 
-00:17:06.675 --> 00:17:11.036 A:middle
-Now as you can see here,
-this is a bad situation
+00:17:29.246 --> 00:17:32.956 A:middle
+We are going to do this with
+the myapp URL scheme here,
 
-00:17:11.586 --> 00:17:14.786 A:middle
-because we're reading this
-document at the same time
+00:17:33.256 --> 00:17:34.816 A:middle
+just for the sake of example.
 
-00:17:14.896 --> 00:17:17.296 A:middle
-as the other application
-is writing it.
+00:17:35.046 --> 00:17:38.456 A:middle
+This is going to take
+us to my containing app.
 
-00:17:17.726 --> 00:17:19.406 A:middle
-Well, that's our
-application actually.
+00:17:38.816 --> 00:17:40.026 A:middle
+The next thing we
+are going to want
 
-00:17:19.886 --> 00:17:22.705 A:middle
-So we're going to get this
-inconsistent read which,
+00:17:40.116 --> 00:17:42.376 A:middle
+to do is we are actually
+going to want to call
 
-00:17:22.705 --> 00:17:24.106 A:middle
-of course, is very unfortunate.
+00:17:42.376 --> 00:17:47.766 A:middle
+that open URL API that you can
+find on the extension context,
 
-00:17:24.586 --> 00:17:26.336 A:middle
-We're in the middle of
-writing this document
+00:17:48.066 --> 00:17:50.586 A:middle
+which is probably attached
+to your view controller.
 
-00:17:26.336 --> 00:17:28.386 A:middle
-at the same time the other
-application is reading it.
+00:17:51.586 --> 00:17:55.036 A:middle
+Now, this is a little bit
+different from the API we expose
 
-00:17:28.996 --> 00:17:31.036 A:middle
-The data is halfway
-written to disk.
+00:17:55.036 --> 00:17:58.856 A:middle
+on UI application in that
+it takes a call-back block,
 
-00:17:31.036 --> 00:17:32.006 A:middle
-The other half is not.
+00:17:59.176 --> 00:18:02.346 A:middle
+and this call-back block
+has one boolean parameter
 
-00:17:32.606 --> 00:17:35.176 A:middle
-And the other app may
-not know what to do
 
-00:17:35.176 --> 00:17:36.916 A:middle
-with this weird,
-inconsistent data.
 
-00:17:37.596 --> 00:17:38.746 A:middle
-That's a bad situation.
+00:17:59.176 --> 00:18:02.346 A:middle
+and this call-back block
+has one boolean parameter
 
-00:17:39.266 --> 00:17:44.136 A:middle
-And likewise, even if we somehow
-manage to live around this,
+00:18:02.486 --> 00:18:04.106 A:middle
+that I am going to tell
+you more about now.
 
-00:17:44.256 --> 00:17:46.606 A:middle
-after our second
-write, remember,
+00:18:05.516 --> 00:18:09.256 A:middle
+The success parameter is
+going to be set to true
 
-00:17:46.606 --> 00:17:48.736 A:middle
-we're still in the first
-application editing
+00:18:09.476 --> 00:18:12.446 A:middle
+if we were able to take
+you to the containing app
 
-00:17:48.736 --> 00:17:49.466 A:middle
-this document.
+00:18:12.946 --> 00:18:14.816 A:middle
+or to the system component,
 
-00:17:49.646 --> 00:17:54.256 A:middle
-The other application will
-now still be displaying your
+00:18:15.106 --> 00:18:17.106 A:middle
+which has registered
+the URL scheme.
 
-00:17:54.256 --> 00:17:58.886 A:middle
-document and this document
-is now being displayed
+00:18:17.686 --> 00:18:20.936 A:middle
+It's going to be set to false
+if we were not able to do this,
 
-00:17:58.886 --> 00:18:00.996 A:middle
-in an old version in
-the other application,
+00:18:21.486 --> 00:18:24.296 A:middle
+like if the user has not
+unlocked the phone and pulls
 
+00:18:24.296 --> 00:18:26.996 A:middle
+down the Notification Center
+when the phone is locked.
 
+00:18:29.076 --> 00:18:31.826 A:middle
+There are many other
+ways of interacting
 
-00:17:58.886 --> 00:18:00.996 A:middle
-in an old version in
-the other application,
+00:18:31.926 --> 00:18:35.046 A:middle
+with the containing app and
+sharing data, and today I want
 
-00:18:00.996 --> 00:18:04.546 A:middle
-so we have got this issue
-of having a stale display.
+00:18:35.046 --> 00:18:36.716 A:middle
+to tell you about
+how to use defaults
 
-00:18:04.546 --> 00:18:08.006 A:middle
-And that is, of course,
-very unfortunate.
+00:18:36.886 --> 00:18:40.306 A:middle
+with your containing
+app; containers;
 
-00:18:08.556 --> 00:18:11.756 A:middle
-Now conveniently we have
-two solutions for you here.
+00:18:41.816 --> 00:18:46.096 A:middle
+Keychain items; and
+framework data.
 
-00:18:12.086 --> 00:18:14.396 A:middle
-And that is, first of all,
+00:18:46.166 --> 00:18:49.296 A:middle
+Framework data is going to be
+scribbled into Shared containers
 
-00:18:14.736 --> 00:18:16.646 A:middle
-we have this concept
-of file coordination.
+00:18:49.406 --> 00:18:52.076 A:middle
+on your behalf by
+system frameworks.
 
-00:18:17.216 --> 00:18:21.466 A:middle
-File coordination is a
-distributed reader/writer
+00:18:52.776 --> 00:18:58.626 A:middle
+And all of this is neatly
+grouped up into app groups.
 
-00:18:21.466 --> 00:18:22.196 A:middle
-lock mechanism.
+00:18:58.776 --> 00:19:00.316 A:middle
+First, user defaults.
 
-00:18:22.476 --> 00:18:26.786 A:middle
-And what that means is
-that, while there can be
 
-00:18:26.786 --> 00:18:29.726 A:middle
-at any time multiple
-readers for a document,
 
-00:18:30.216 --> 00:18:32.116 A:middle
-there can only ever
-be one writer
+00:18:58.776 --> 00:19:00.316 A:middle
+First, user defaults.
 
-00:18:32.116 --> 00:18:35.666 A:middle
-and the one writer excludes
-all other readers from reading.
+00:19:00.706 --> 00:19:02.546 A:middle
+You probably know
+what user defaults are
 
-00:18:37.276 --> 00:18:39.606 A:middle
-That means that if both our
-applications are using proper
+00:19:02.676 --> 00:19:04.146 A:middle
+if you've been developing
+for Cocoa
 
-00:18:39.606 --> 00:18:42.966 A:middle
-file coordination as they will
-if they're using UIDocument,
+00:19:04.146 --> 00:19:05.436 A:middle
+or Cocoa Touch for a while.
 
-00:18:43.316 --> 00:18:45.566 A:middle
-which implements
-these mechanisms,
+00:19:05.676 --> 00:19:08.276 A:middle
+They are small pieces
+of configuration data.
 
-00:18:46.256 --> 00:18:51.546 A:middle
-then our read will
-be moved to a time
+00:19:08.326 --> 00:19:11.926 A:middle
+They are like little
+strings, numbers, booleans,
 
-00:18:51.546 --> 00:18:55.386 A:middle
-after our write has
-finished and in
+00:19:12.196 --> 00:19:15.456 A:middle
+and other things that affect
+the configuration of your app.
 
-00:18:55.386 --> 00:18:58.726 A:middle
-such a way we have always
-a consistent picture
+00:19:15.776 --> 00:19:18.216 A:middle
+You can share these pieces
+of configuration data
 
-00:18:58.726 --> 00:18:59.606 A:middle
-of this document.
+00:19:18.616 --> 00:19:21.516 A:middle
+between your containing
+app and your extensions
 
+00:19:21.836 --> 00:19:26.436 A:middle
+by using the NSUser defaults
+init with suite name API.
 
+00:19:26.436 --> 00:19:31.316 A:middle
+You are going to pass the app
+group identifier to this API.
 
-00:19:00.316 --> 00:19:01.136 A:middle
-That's very nice.
+00:19:31.316 --> 00:19:34.626 A:middle
+Now there's an important
+thing to remember about this,
 
-00:19:02.296 --> 00:19:05.236 A:middle
-Now, there is another
-mechanism I promised you too.
+00:19:35.036 --> 00:19:39.646 A:middle
+this API doesn't merely unlock
+your containing app's defaults,
 
-00:19:05.556 --> 00:19:08.276 A:middle
-And the other mechanism
-here is NSFilePresentation.
+00:19:39.806 --> 00:19:42.566 A:middle
+your standard user defaults
+in your containing app.
 
-00:19:08.786 --> 00:19:10.996 A:middle
-NSFilePresentation
-is a distributed
+00:19:42.996 --> 00:19:45.996 A:middle
+What it does is it
+creates a new default suite
 
-00:19:10.996 --> 00:19:12.016 A:middle
-modification mechanism.
+00:19:46.266 --> 00:19:49.356 A:middle
+which your containing
+app can also have access
 
-00:19:12.776 --> 00:19:16.796 A:middle
-What that means is that our file
-coordination will automatically
+00:19:49.356 --> 00:19:53.306 A:middle
+to if it participates in the app
+group, so it's super important
 
-00:19:17.156 --> 00:19:20.286 A:middle
-tell every other file
-presenter that's been registered
+00:19:53.516 --> 00:19:56.456 A:middle
+that you use this API, not
+only in your extension,
 
-00:19:20.286 --> 00:19:24.306 A:middle
-for your document that it
-has been written to disk
+00:19:56.666 --> 00:19:58.456 A:middle
+but in your containing
+app when you want
 
-00:19:24.426 --> 00:19:27.756 A:middle
-and that this file presenter
-has to go and update itself.
+00:19:58.456 --> 00:20:01.406 A:middle
+to change these configuration
+items in the defaults.
 
-00:19:29.036 --> 00:19:31.526 A:middle
-That way we immediately
-get a notification
 
-00:19:31.526 --> 00:19:35.446 A:middle
-after our second write and we
-can be sure to update our UI.
 
-00:19:36.806 --> 00:19:40.686 A:middle
-Cool. So that's how we
-can be able to make sure
+00:19:58.456 --> 00:20:01.406 A:middle
+to change these configuration
+items in the defaults.
 
-00:19:40.686 --> 00:19:43.886 A:middle
-that we have always a consistent
-picture of our documents.
+00:20:02.556 --> 00:20:06.076 A:middle
+The next thing I want to
+talk to you about are things
 
-00:19:44.416 --> 00:19:45.716 A:middle
-But what documents?
+00:20:06.076 --> 00:20:08.826 A:middle
+that you can use inside
+of the shared container
 
-00:19:46.246 --> 00:19:49.476 A:middle
-Of course, we first need to
-create some documents to be able
+00:20:09.706 --> 00:20:14.196 A:middle
+which the containing app and its
+extension all have access to.
 
-00:19:49.476 --> 00:19:52.216 A:middle
-to actually display and
-have the user edit them.
+00:20:14.756 --> 00:20:17.216 A:middle
+The first thing you can
+keep in there is model data.
 
-00:19:52.736 --> 00:19:53.726 A:middle
-So let's have a look at that.
+00:20:17.886 --> 00:20:22.846 A:middle
+Model data is stuff like SQLite
+files, core data data stores
 
-00:19:54.786 --> 00:19:57.566 A:middle
-What are our goals in
-creating these documents?
+00:20:23.186 --> 00:20:26.426 A:middle
+and maybe even model
+objects persisted
 
-00:19:57.856 --> 00:20:01.276 A:middle
-Well, let's imagine as
-our sample app implements,
+00:20:26.426 --> 00:20:28.116 A:middle
+to things like plist files.
 
+00:20:28.116 --> 00:20:30.466 A:middle
+You can store all of this
+inside of a shared container
 
+00:20:30.856 --> 00:20:32.326 A:middle
+where the containing application
 
-00:19:57.856 --> 00:20:01.276 A:middle
-Well, let's imagine as
-our sample app implements,
+00:20:32.586 --> 00:20:36.646 A:middle
+and its extensions can
+all have access to it.
 
-00:20:01.276 --> 00:20:03.676 A:middle
-we have this little plus
-button in the top right corner,
+00:20:37.286 --> 00:20:39.006 A:middle
+You can also store
+documents in there.
 
-00:20:04.076 --> 00:20:07.046 A:middle
-and this plus button,
-well, the user taps it,
+00:20:39.146 --> 00:20:42.166 A:middle
+Earlier, Sophia was talking
+about a text application,
 
-00:20:07.196 --> 00:20:10.816 A:middle
-we will maybe show a
-template dialogue, something,
+00:20:42.526 --> 00:20:45.756 A:middle
+and maybe this text application
+should store its text documents
 
-00:20:11.066 --> 00:20:13.896 A:middle
-but in any case at some point
-we'll create a new document.
+00:20:46.066 --> 00:20:49.086 A:middle
+inside of the shared container,
+where it can edit them
 
-00:20:14.566 --> 00:20:16.796 A:middle
-And our main goal here is
+00:20:49.486 --> 00:20:53.306 A:middle
+and the extension can edit it.
 
-00:20:16.996 --> 00:20:22.806 A:middle
-to give the user a consistent
-display that's up-to-date
+00:20:53.586 --> 00:20:58.976 A:middle
+Next, you can also store
+media, media items like images,
 
-00:20:22.806 --> 00:20:23.766 A:middle
-at all times.
+00:20:59.486 --> 00:21:03.826 A:middle
+video clips, audio files, and
+other things that you want
 
-00:20:24.286 --> 00:20:26.406 A:middle
-So it wouldn't help a lot
 
-00:20:26.406 --> 00:20:28.226 A:middle
-if the user tapped
-this little plus button
 
-00:20:28.626 --> 00:20:31.536 A:middle
-and now we wouldn't get an
-update in our Document Browser
+00:20:59.486 --> 00:21:03.826 A:middle
+video clips, audio files, and
+other things that you want
 
-00:20:31.536 --> 00:20:35.156 A:middle
-and the user is confused and
-doesn't know what happened
+00:21:03.826 --> 00:21:06.646 A:middle
+to have accessible to both
+your containing application
 
-00:20:35.156 --> 00:20:37.726 A:middle
-and will possibly tap the
-plus button a few more times
+00:21:07.086 --> 00:21:08.306 A:middle
+and its extensions.
 
-00:20:37.726 --> 00:20:40.716 A:middle
-and now we have five
-different new documents.
+00:21:09.066 --> 00:21:11.866 A:middle
+Now, if you are storing
+cacheable items
 
-00:20:40.946 --> 00:20:46.806 A:middle
-Not good. Now that's the
-situation that we might end
+00:21:11.866 --> 00:21:14.446 A:middle
+in the shared container, that's
+probably not all that good.
 
-00:20:47.226 --> 00:20:51.816 A:middle
-up in without using file
-coordination because, of course,
+00:21:14.446 --> 00:21:17.046 A:middle
+I think you want to keep that
+in caches where it can be purged
 
-00:20:51.816 --> 00:20:55.046 A:middle
-what this means is that we
-create a document on disk
+00:21:17.046 --> 00:21:19.706 A:middle
+if we start running
+low on space.
 
-00:20:55.046 --> 00:20:58.426 A:middle
-and at some point later the
-iCloud Drive daemon notices
+00:21:20.306 --> 00:21:26.226 A:middle
+Now, to set up core data to
+use the shared container,
 
-00:20:58.426 --> 00:21:01.886 A:middle
-that there is a new document
-here and informs our app.
+00:21:26.666 --> 00:21:28.926 A:middle
+I want to show you a
+little bit of sample code,
 
+00:21:29.076 --> 00:21:31.746 A:middle
+and this is sample code that
+you are going to use both
 
+00:21:31.746 --> 00:21:34.426 A:middle
+in your containing app
+and any of its extensions.
 
-00:20:58.426 --> 00:21:01.886 A:middle
-that there is a new document
-here and informs our app.
+00:21:35.136 --> 00:21:39.016 A:middle
+You are simply modifying the
+code that Xcode already produced
 
-00:21:01.886 --> 00:21:06.226 A:middle
-But this delay can be half
-a second or something,
+00:21:39.016 --> 00:21:40.526 A:middle
+for you via the template.
 
-00:21:06.306 --> 00:21:08.656 A:middle
-possibly even more if the
-daemon is busy at this time.
+00:21:41.166 --> 00:21:43.906 A:middle
+So the first thing you will want
+to do is create a new property
 
-00:21:09.496 --> 00:21:12.326 A:middle
-And this exact delay is
-what we want to avoid.
+00:21:44.186 --> 00:21:45.666 A:middle
+or change the existing one.
 
-00:21:12.996 --> 00:21:17.156 A:middle
-Now, conveniently, if you're
-using a coordinated operation,
+00:21:46.096 --> 00:21:49.816 A:middle
+And in this case, we are calling
+it secure app group presentation
 
-00:21:17.606 --> 00:21:19.626 A:middle
-this is done directly for you.
+00:21:49.816 --> 00:21:50.706 A:middle
+store URL.
 
-00:21:20.826 --> 00:21:25.866 A:middle
-The coordinated operation
-works in conjunction
+00:21:52.096 --> 00:21:54.916 A:middle
+Of course, the first thing we
+need to do is get an instance
 
-00:21:26.116 --> 00:21:28.526 A:middle
-with the NSMetadataQuery
-that you're using
+00:21:54.976 --> 00:21:56.306 A:middle
+of the NSFile manager.
 
-00:21:28.526 --> 00:21:34.696 A:middle
-to display documents in your
-browser, and basically loops
+00:21:57.216 --> 00:22:01.516 A:middle
+And next, on file manager, we
+are going to call container URL
 
-00:21:34.696 --> 00:21:37.586 A:middle
-around after the
-coordination has finished
 
-00:21:38.026 --> 00:21:40.286 A:middle
-and immediately tells
-your running query
 
-00:21:40.866 --> 00:21:43.046 A:middle
-that there's a new
-updated document.
+00:21:57.216 --> 00:22:01.516 A:middle
+And next, on file manager, we
+are going to call container URL
 
-00:21:44.346 --> 00:21:46.886 A:middle
-That way we get rid
-of this ugly delay.
+00:22:01.626 --> 00:22:04.976 A:middle
+for security application
+group identifier, and again,
 
-00:21:48.306 --> 00:21:50.696 A:middle
-Of course, there's
-another slight caveat here,
+00:22:05.256 --> 00:22:08.656 A:middle
+pass the app group identifier
+that we had set up previously.
 
-00:21:51.296 --> 00:21:53.706 A:middle
-which is that since
-we're writing to disk,
+00:22:10.006 --> 00:22:11.226 A:middle
+After that, we are going
 
-00:21:53.706 --> 00:21:58.886 A:middle
-we're writing anything to disk,
-it can take a bit of time.
+00:22:11.226 --> 00:22:15.046 A:middle
+to append the store
+file name to that URL.
 
-00:21:58.886 --> 00:22:03.156 A:middle
-And of course doing any
-operation that can take a bit
+00:22:15.416 --> 00:22:18.276 A:middle
+That URL points in to
+the shared container,
 
+00:22:18.456 --> 00:22:22.976 A:middle
+where both the containing app
+and the extension can access it.
 
+00:22:23.236 --> 00:22:25.976 A:middle
+Now we need to use this store
+URL, so we are going to set
 
-00:21:58.886 --> 00:22:03.156 A:middle
-And of course doing any
-operation that can take a bit
+00:22:25.976 --> 00:22:27.936 A:middle
+up our persistent
+store coordinator.
 
-00:22:03.156 --> 00:22:06.166 A:middle
-of time on the main
-queue is unfortunate
+00:22:28.216 --> 00:22:29.356 A:middle
+And the way we are
+going to do this is
 
-00:22:06.206 --> 00:22:09.416 A:middle
-because it can block the
-main queue and thus look
+00:22:29.356 --> 00:22:33.696 A:middle
+by first creating a store
+coordinator using our manage
 
-00:22:09.416 --> 00:22:11.636 A:middle
-like a stutter in your
-application to the user.
+00:22:33.696 --> 00:22:37.126 A:middle
+object model, and then we are
+going to grab the instance
 
-00:22:15.556 --> 00:22:18.606 A:middle
-Now, the solution to
-this is, of course, easy.
+00:22:37.126 --> 00:22:39.256 A:middle
+of the store URL
+we just created.
 
-00:22:19.076 --> 00:22:20.586 A:middle
-We want to use a
-background queue
+00:22:40.526 --> 00:22:43.826 A:middle
+Finally, we are going to
+add this persistent store
 
-00:22:20.586 --> 00:22:25.986 A:middle
-to dispatch this coordinated
-operation and make sure
+00:22:44.136 --> 00:22:47.546 A:middle
+to the store coordinator
+using the URL we just created.
 
-00:22:25.986 --> 00:22:31.506 A:middle
-that our operation is not
-blocking the main thread.
+00:22:47.546 --> 00:22:49.166 A:middle
+This is going to
+point -- remember --
 
-00:22:32.336 --> 00:22:34.176 A:middle
-Now conveniently we're still --
+00:22:49.166 --> 00:22:52.466 A:middle
+to the SQLite file that's
+backing this persistent store
 
-00:22:34.176 --> 00:22:36.046 A:middle
-since we're using this
-coordinated operation --
+00:22:52.866 --> 00:22:53.986 A:middle
+in the Shared container.
 
-00:22:36.436 --> 00:22:40.946 A:middle
-we're still getting the
-immediately updated display
+00:22:54.906 --> 00:22:56.906 A:middle
+Finally, we return
+it to the caller.
 
-00:22:40.946 --> 00:22:45.326 A:middle
-in our UI because our
-NSMetadataQuery is still
+00:22:59.246 --> 00:23:03.186 A:middle
+Lastly, we actually want to set
+up the manage object context,
 
-00:22:45.326 --> 00:22:46.326 A:middle
-updated directly.
 
-00:22:47.236 --> 00:22:49.456 A:middle
-You don't even have to
-bounce this information back
 
-00:22:49.496 --> 00:22:51.846 A:middle
-to the main queue
-because we're updating the
+00:22:59.246 --> 00:23:03.186 A:middle
+Lastly, we actually want to set
+up the manage object context,
 
-00:22:51.846 --> 00:22:54.086 A:middle
-NSMetadataQuery directly.
+00:23:03.266 --> 00:23:06.366 A:middle
+and we will do this by grabbing
+our persistent store coordinator
 
-00:22:54.316 --> 00:22:59.206 A:middle
-Cool. Now, another common
-operation is deleting a file.
+00:23:06.366 --> 00:23:09.466 A:middle
+and then creating a
+manage object context.
 
+00:23:09.946 --> 00:23:12.266 A:middle
+And then we will
+set this coordinator
 
+00:23:12.326 --> 00:23:14.216 A:middle
+to be the persistent
+store coordinator
 
-00:23:00.196 --> 00:23:03.636 A:middle
-That's a totally reasonable
-thing for your user to do.
+00:23:14.536 --> 00:23:18.146 A:middle
+for the manage object
+context and then return it.
 
-00:23:03.636 --> 00:23:04.816 A:middle
-They're done with this document.
+00:23:18.586 --> 00:23:21.676 A:middle
+And that's all you have to
+do to set up core data inside
 
-00:23:04.816 --> 00:23:05.766 A:middle
-They want to get rid of it
+00:23:21.676 --> 00:23:24.456 A:middle
+of your containing app
+and any of its extensions
 
-00:23:06.136 --> 00:23:07.696 A:middle
-so it doesn't clutter
-up their workspace.
+00:23:24.696 --> 00:23:29.046 A:middle
+to use a shared persistent
+store which is located
 
-00:23:08.246 --> 00:23:12.226 A:middle
-And the basic idea behind
-deletion is exactly the same.
+00:23:29.296 --> 00:23:30.456 A:middle
+in the shared container.
 
-00:23:12.776 --> 00:23:17.756 A:middle
-We'll coordinate a write
-on our background queue,
+00:23:32.196 --> 00:23:37.346 A:middle
+So core data may not be what
+you need for your application.
 
-00:23:18.006 --> 00:23:21.896 A:middle
-perform the deletion during this
-write, and immediately loop back
+00:23:37.746 --> 00:23:40.676 A:middle
+Let's pretend that you are using
+the plist files that I talked
 
-00:23:21.936 --> 00:23:24.576 A:middle
-to the main queue through
-the NSMetadataQuery
+00:23:40.676 --> 00:23:43.366 A:middle
+about earlier to
+serialize your model objects
 
-00:23:24.576 --> 00:23:26.596 A:middle
-to update in time.
+00:23:43.656 --> 00:23:44.956 A:middle
+into the shared container.
 
-00:23:28.636 --> 00:23:33.846 A:middle
-Cool. So that's how you manage
-creating and deleting documents
+00:23:45.576 --> 00:23:47.566 A:middle
+At this point, you are
+going to have to worry
 
-00:23:33.906 --> 00:23:35.966 A:middle
-on your background queue.
+00:23:47.566 --> 00:23:51.836 A:middle
+about synchronization, access,
+and all this kind of stuff
 
-00:23:36.346 --> 00:23:40.556 A:middle
-So let's have a look at
-what you actually want
+00:23:52.196 --> 00:23:56.156 A:middle
+in the shared container because
+very potentially, your extension
 
-00:23:40.556 --> 00:23:42.266 A:middle
-to do with these documents.
+00:23:56.596 --> 00:23:58.696 A:middle
+and your application
+could be attempting
 
-00:23:42.956 --> 00:23:45.726 A:middle
-And that, of course, is
-you want to display them,
+00:23:58.696 --> 00:24:01.126 A:middle
+to simultaneously
+modify these files,
 
-00:23:46.506 --> 00:23:48.556 A:middle
-meaning you want to
-read and write them.
 
-00:23:49.386 --> 00:23:52.656 A:middle
-Now, we strongly,
-strongly, strongly suggest
 
-00:23:52.656 --> 00:23:55.486 A:middle
-that you use UIDocument for
-reading and writing documents.
+00:23:58.696 --> 00:24:01.126 A:middle
+to simultaneously
+modify these files,
 
-00:23:56.026 --> 00:24:00.846 A:middle
-UIDocument implements both
-the NSFileCoordination calls
+00:24:01.396 --> 00:24:03.326 A:middle
+which is not good
+for data consistency.
 
+00:24:04.336 --> 00:24:08.276 A:middle
+So you may actually have
+to use exclusive locks.
 
+00:24:08.586 --> 00:24:10.576 A:middle
+And you need to be
+really super careful
 
-00:23:56.026 --> 00:24:00.846 A:middle
-UIDocument implements both
-the NSFileCoordination calls
+00:24:10.576 --> 00:24:13.406 A:middle
+about using exclusive locks for
+data in the shared container
 
-00:24:01.016 --> 00:24:04.036 A:middle
-to make sure that at
-any time you are reading
+00:24:13.906 --> 00:24:16.406 A:middle
+because when an extension
+is killed,
 
-00:24:04.036 --> 00:24:06.046 A:middle
-and writing documents
-in a coordinated manner,
+00:24:16.756 --> 00:24:20.136 A:middle
+if it's suspended while
+holding on to an exclusive lock.
 
-00:24:06.046 --> 00:24:12.106 A:middle
-as well as implementing
-NSFilePresentation to make sure
+00:24:20.766 --> 00:24:23.156 A:middle
+Again, this isn't good
+for data consistency.
 
-00:24:12.306 --> 00:24:14.026 A:middle
-that you can be immediately
-informed
+00:24:23.926 --> 00:24:26.726 A:middle
+So what do you need
+to do about this?
 
-00:24:14.026 --> 00:24:15.396 A:middle
-that this document has changed
+00:24:27.456 --> 00:24:29.506 A:middle
+Well, I'd like to talk
+to you a little bit more
 
-00:24:15.396 --> 00:24:17.596 A:middle
-and can update it
-in your display.
+00:24:29.506 --> 00:24:30.936 A:middle
+about task assertions.
 
-00:24:18.946 --> 00:24:20.916 A:middle
-So let's have a look at
-how to read a document.
+00:24:31.346 --> 00:24:34.616 A:middle
+Task assertions are a great
+way for your extension
 
-00:24:21.646 --> 00:24:25.446 A:middle
-You create a UIDocument object
-and simply call the 'open
+00:24:34.976 --> 00:24:39.046 A:middle
+to tell the operating system
+that, hey, I'm doing something
 
-00:24:25.446 --> 00:24:28.306 A:middle
-with completion' method on
-this UIDocument instance.
+00:24:39.046 --> 00:24:40.986 A:middle
+that you probably
+shouldn't interrupt.
 
-00:24:29.026 --> 00:24:33.416 A:middle
-And what this method does is it
-will take out a coordinated read
+00:24:41.636 --> 00:24:46.456 A:middle
+And if you interrupt it, well,
+I'd like to get some sort
 
-00:24:33.686 --> 00:24:35.376 A:middle
-on a background worker queue.
+00:24:46.456 --> 00:24:48.456 A:middle
+of call-back so I can
+clean things up first.
 
-00:24:36.456 --> 00:24:39.266 A:middle
-That way your application
-stays perfectly performant
+00:24:49.696 --> 00:24:52.846 A:middle
+Remember that extensions are
+suspended pretty aggressively
 
-00:24:39.266 --> 00:24:41.176 A:middle
-and responsive, while
+00:24:52.846 --> 00:24:54.306 A:middle
+when they are no longer in use.
 
-00:24:41.176 --> 00:24:45.306 A:middle
-at the same time your document
-is going to read itself in.
+00:24:54.816 --> 00:24:59.106 A:middle
+When the user swipes down to
+expose the Notification Center
 
-00:24:45.636 --> 00:24:49.526 A:middle
-Now all that is there
-that's left to do for you,
+00:24:59.336 --> 00:25:02.476 A:middle
+and then swipes back up to
+dismiss it, we are going
 
-00:24:49.836 --> 00:24:52.286 A:middle
-is that you implement the
-'load from contents' method.
 
-00:24:52.716 --> 00:24:55.676 A:middle
-And this method will
-simply get called
 
-00:24:55.676 --> 00:24:58.306 A:middle
-within the coordinated
-read so it is encapsulated
+00:24:59.336 --> 00:25:02.476 A:middle
+and then swipes back up to
+dismiss it, we are going
 
-00:24:58.306 --> 00:25:01.666 A:middle
-by this coordinated read,
-meaning it is totally safe
+00:25:02.476 --> 00:25:05.786 A:middle
+to suspend all of the
+extensions in play at that time.
 
+00:25:06.366 --> 00:25:07.866 A:middle
+So that could be pretty quick.
 
+00:25:09.256 --> 00:25:12.356 A:middle
+So you are going to want
+to protect serialization
 
-00:24:58.306 --> 00:25:01.666 A:middle
-by this coordinated read,
-meaning it is totally safe
+00:25:12.436 --> 00:25:13.846 A:middle
+and other cleanup tasks
 
-00:25:01.666 --> 00:25:03.716 A:middle
-to read anything
-you want in there,
+00:25:13.966 --> 00:25:16.096 A:middle
+with these background
+task assertions.
 
-00:25:03.716 --> 00:25:05.306 A:middle
-from the document, mind you.
+00:25:17.046 --> 00:25:18.596 A:middle
+And I am going to
+show you how to do
 
-00:25:06.136 --> 00:25:09.836 A:middle
-And all you have to do is
-basically take the contents
+00:25:18.596 --> 00:25:22.316 A:middle
+that now using the
+NSProcess info API.
 
-00:25:09.836 --> 00:25:14.166 A:middle
-and fill in your
-document data from them.
+00:25:23.596 --> 00:25:25.316 A:middle
+So the first thing
+you are going to want
 
-00:25:14.456 --> 00:25:17.886 A:middle
-Now, there's another method here
+00:25:25.416 --> 00:25:28.736 A:middle
+to do is get the
+NSProcess info instance
 
-00:25:18.126 --> 00:25:20.526 A:middle
-that you can alternatively
-choose to implement,
+00:25:29.006 --> 00:25:31.756 A:middle
+by calling the process
+info factory method.
 
-00:25:21.506 --> 00:25:25.806 A:middle
-which instead of taking a blob
-of data, it takes an NSURL
+00:25:32.256 --> 00:25:35.256 A:middle
+Next you are going to want
 
-00:25:25.806 --> 00:25:30.476 A:middle
-and you can use that method to,
-for example, stream document,
+00:25:35.256 --> 00:25:38.766 A:middle
+to call the API perform
+expiring activity with reason,
 
-00:25:30.476 --> 00:25:34.466 A:middle
-there may be situations where
-that's more reasonable for you
+00:25:38.876 --> 00:25:41.736 A:middle
+and I am going to take you
+through how to set up this call.
 
-00:25:34.466 --> 00:25:37.416 A:middle
-to do, because, for
-example, the document format
+00:25:42.336 --> 00:25:46.666 A:middle
+The first parameter
+you are going to pass
 
-00:25:37.416 --> 00:25:40.226 A:middle
-on disk is very different
-than what you want in memory.
+00:25:46.666 --> 00:25:49.106 A:middle
+to this method is a
+very short string.
 
-00:25:41.076 --> 00:25:44.796 A:middle
-Now, after this is done,
-we will simply loop back
+00:25:49.676 --> 00:25:53.986 A:middle
+This short string is for you,
+not for the operating system.
 
-00:25:44.796 --> 00:25:47.546 A:middle
-to the main queue and
-call the completion block
+00:25:54.336 --> 00:25:56.706 A:middle
+This tells you what
+you are doing inside
 
-00:25:47.546 --> 00:25:49.176 A:middle
-that you provided for us.
+00:25:56.706 --> 00:25:57.876 A:middle
+of the protected task.
 
-00:25:49.246 --> 00:25:53.696 A:middle
-And in that completion block,
-you can go and, for example,
+00:25:58.666 --> 00:26:02.036 A:middle
+The next thing you
+are going to pass
 
-00:25:53.696 --> 00:25:57.536 A:middle
-push your new interface
-updated for your document.
 
-00:25:59.856 --> 00:26:03.386 A:middle
-Cool. So that's how
-reading a document works.
 
+00:25:58.666 --> 00:26:02.036 A:middle
+The next thing you
+are going to pass
 
+00:26:02.036 --> 00:26:04.976 A:middle
+to this API is a
+call-back block,
 
-00:25:59.856 --> 00:26:03.386 A:middle
-Cool. So that's how
-reading a document works.
+00:26:05.646 --> 00:26:08.866 A:middle
+and the call-back block is going
+to be used in one of two ways.
 
-00:26:03.886 --> 00:26:07.066 A:middle
-But as you remember,
-Mike told you
+00:26:09.136 --> 00:26:11.036 A:middle
+And let me go through
+the first way with you.
 
-00:26:07.066 --> 00:26:09.026 A:middle
-about this concept
-called promises.
+00:26:11.536 --> 00:26:14.916 A:middle
+First, it's going to be
+called if we were able
 
-00:26:09.786 --> 00:26:11.966 A:middle
-And a promise is
-basically a file
+00:26:14.916 --> 00:26:17.986 A:middle
+to acquire a background task
+assertion on your behalf
 
-00:26:12.286 --> 00:26:15.306 A:middle
-that the iCloud Drive
-daemon promises
+00:26:18.236 --> 00:26:20.066 A:middle
+with expired set to false.
 
-00:26:15.396 --> 00:26:20.496 A:middle
-to your app is actually there,
-but it is not yet downloaded.
+00:26:20.516 --> 00:26:23.086 A:middle
+This means to you
+that it's safe for you
 
-00:26:21.466 --> 00:26:24.116 A:middle
-And what that means
-is that a read
+00:26:23.276 --> 00:26:26.976 A:middle
+to perform some sensitive
+task like serializing data
 
-00:26:24.116 --> 00:26:26.336 A:middle
-on this document may
-trigger a download.
+00:26:26.976 --> 00:26:28.596 A:middle
+that you don't want
+to be interrupted.
 
-00:26:27.536 --> 00:26:32.086 A:middle
-Now, of course if you've
-lived in the real world
+00:26:29.806 --> 00:26:32.836 A:middle
+Now, since a task
+assertion cannot be taken
 
-00:26:32.136 --> 00:26:37.426 A:middle
-as we all have, obviously,
-downloads can be terribly slow
+00:26:32.836 --> 00:26:37.196 A:middle
+out indefinitely, when the task
+assertion is about to expire,
 
-00:26:37.426 --> 00:26:41.606 A:middle
-at times, and depending how
-your document size looks,
+00:26:37.196 --> 00:26:39.606 A:middle
+it's on the cusp
+of being let go,
 
-00:26:42.266 --> 00:26:43.356 A:middle
-this may take a while.
+00:26:41.196 --> 00:26:44.686 A:middle
+the operating system is going
+to call your call-back again,
 
-00:26:43.986 --> 00:26:48.796 A:middle
-And your user may perceive
-this download as a failing
+00:26:44.856 --> 00:26:47.366 A:middle
+this time with expired
+set to true.
 
-00:26:48.796 --> 00:26:51.736 A:middle
-of your app, which is totally
-unfair, it is not your fault
+00:26:47.916 --> 00:26:51.976 A:middle
+This means that you need to
+cancel whatever task you have
 
-00:26:51.736 --> 00:26:54.026 A:middle
-that this download is being done
+00:26:51.976 --> 00:26:56.926 A:middle
+in flight and prepare
+to be suspended.
 
-00:26:54.026 --> 00:26:56.906 A:middle
-over a slow network
-connection and takes a while.
+00:26:57.246 --> 00:27:01.606 A:middle
+Now, when you exit the
+block, we are going
 
-00:26:57.696 --> 00:27:02.836 A:middle
-And so, for you, new in
-iOS 9, we expose a way
 
 
+00:26:57.246 --> 00:27:01.606 A:middle
+Now, when you exit the
+block, we are going
 
-00:26:57.696 --> 00:27:02.836 A:middle
-And so, for you, new in
-iOS 9, we expose a way
+00:27:01.606 --> 00:27:04.226 A:middle
+to release the task
+assertion on your behalf.
 
-00:27:02.836 --> 00:27:04.606 A:middle
-to display progress
+00:27:04.476 --> 00:27:06.456 A:middle
+There's nothing else
+that you need to do.
 
-00:27:04.606 --> 00:27:09.656 A:middle
-on UIDocuments using the new
-NSProgressReporting protocol.
+00:27:07.386 --> 00:27:11.606 A:middle
+So the second way that this
+can work is that we were unable
 
-00:27:10.656 --> 00:27:12.626 A:middle
-Now, implementing
-this is very simple.
+00:27:11.606 --> 00:27:14.446 A:middle
+to acquire a task
+assertion for you at all.
 
-00:27:13.126 --> 00:27:16.966 A:middle
-The NSProgressReporting protocol
-exposes a progress property
+00:27:14.446 --> 00:27:17.716 A:middle
+What we are going to do in
+this case is we are going
 
-00:27:16.966 --> 00:27:20.666 A:middle
-on your UIDocument instance, and
-this progress property is filled
+00:27:17.716 --> 00:27:20.616 A:middle
+to immediately call
+your call-back block
 
-00:27:20.666 --> 00:27:24.876 A:middle
-in by us to display to you
-what kind of progress we have.
+00:27:20.896 --> 00:27:22.756 A:middle
+with expired set to true.
 
-00:27:25.536 --> 00:27:28.096 A:middle
-So it is basically
-a simple percentage
+00:27:23.726 --> 00:27:26.866 A:middle
+You probably don't want
+to take an exclusive lock
 
-00:27:28.096 --> 00:27:29.116 A:middle
-of the download state.
+00:27:26.866 --> 00:27:28.546 A:middle
+in the shared container
+at this point
 
-00:27:30.356 --> 00:27:35.996 A:middle
-Now, we expose this NSProgress
-property through a state change,
+00:27:28.706 --> 00:27:31.996 A:middle
+because if you get suspended,
+nothing is protecting you.
 
-00:27:36.406 --> 00:27:41.266 A:middle
-so the way that you display
-this is that you listen
+00:27:33.586 --> 00:27:36.586 A:middle
+At this point, you
+want to clean up
 
-00:27:41.266 --> 00:27:44.996 A:middle
-for a state change notification
-on your document state,
+00:27:37.206 --> 00:27:38.786 A:middle
+and get ready to be suspended.
 
-00:27:46.126 --> 00:27:50.576 A:middle
-and when the state changes you
-look at the new flag that says,
+00:27:38.956 --> 00:27:42.046 A:middle
+You only have a few brief
+seconds to make sure
 
-00:27:50.576 --> 00:27:52.986 A:middle
-'hey, I have a progress
-that I'm exposing here.'
+00:27:42.046 --> 00:27:43.966 A:middle
+to clean everything up.
 
-00:27:52.986 --> 00:27:55.796 A:middle
-And then you simply
-display this progress.
+00:27:45.456 --> 00:27:52.046 A:middle
+So that's a complex topic, but
+I think there are three things
 
-00:27:56.446 --> 00:28:00.316 A:middle
-Now, displaying a progress on,
-for example, a UIProgress view,
+00:27:52.046 --> 00:27:55.306 A:middle
+that you need to come away with
+this talk about task assertions.
 
+00:27:56.456 --> 00:27:58.746 A:middle
+The first is that
+they're released
 
+00:27:58.816 --> 00:28:01.206 A:middle
+when your code exits
+the call-back block.
 
-00:27:56.446 --> 00:28:00.316 A:middle
-Now, displaying a progress on,
-for example, a UIProgress view,
 
-00:28:00.626 --> 00:28:02.446 A:middle
-used to be a little
-bit complicated
 
-00:28:02.876 --> 00:28:05.006 A:middle
-because it exposes a
-property that you have
+00:27:58.816 --> 00:28:01.206 A:middle
+when your code exits
+the call-back block.
 
-00:28:05.056 --> 00:28:08.716 A:middle
-to key value observe to put
-it into this progress view.
+00:28:02.076 --> 00:28:05.566 A:middle
+We grab one at the beginning,
+and if everything's successful,
 
-00:28:09.376 --> 00:28:13.616 A:middle
-And also we realized that, of
-course, and also new in iOS 9,
+00:28:05.566 --> 00:28:08.356 A:middle
+we set expired to false,
+and then we hold on to
 
-00:28:13.856 --> 00:28:17.256 A:middle
-we exposed an observe progress
-property on the UIProgress view
+00:28:08.356 --> 00:28:10.406 A:middle
+that task assertion for you
 
-00:28:17.696 --> 00:28:22.336 A:middle
-that will enable you to just
-plump the NSProgress directly
+00:28:10.716 --> 00:28:13.966 A:middle
+until your code exits
+that block scope.
 
-00:28:22.336 --> 00:28:23.246 A:middle
-into the progress view.
+00:28:15.916 --> 00:28:18.076 A:middle
+The next thing to remember is
 
-00:28:23.776 --> 00:28:25.536 A:middle
-You simply assign the NSProgress
+00:28:18.076 --> 00:28:20.726 A:middle
+that there is potentially
+re-enter and execution
 
-00:28:25.876 --> 00:28:28.386 A:middle
-to the progress view's
-'observe progress' property
+00:28:20.846 --> 00:28:22.386 A:middle
+of your call-back
+for the purposes
 
-00:28:28.576 --> 00:28:31.876 A:middle
-and it will automatically
-update its count [applause].
+00:28:22.386 --> 00:28:25.196 A:middle
+of notifying you
+about expiration.
 
-00:28:33.166 --> 00:28:34.936 A:middle
-That's very convenient for you.
+00:28:25.836 --> 00:28:28.626 A:middle
+Again, we can call your
+call-back block again
 
-00:28:38.196 --> 00:28:43.136 A:middle
-Thanks. All that's left
-for you to do is to listen
+00:28:28.626 --> 00:28:31.846 A:middle
+with expired set to true to
+give you a hint that, hey,
 
-00:28:43.136 --> 00:28:46.356 A:middle
-for the next state change
-which signals, 'hey,
+00:28:31.846 --> 00:28:34.246 A:middle
+this task assertion
+is about to expire
 
-00:28:46.526 --> 00:28:47.856 A:middle
-we're done with this progress.'
+00:28:34.246 --> 00:28:35.686 A:middle
+and it's time for
+you to clean up.
 
-00:28:48.716 --> 00:28:50.266 A:middle
-And at that point you want
+00:28:36.976 --> 00:28:37.816 A:middle
+And then finally,
 
-00:28:50.266 --> 00:28:54.346 A:middle
-to probably undisplay your
-UIProgress view and get ready
+00:28:37.926 --> 00:28:41.126 A:middle
+task assertions are not always
+available for your extension.
 
-00:28:54.346 --> 00:28:57.246 A:middle
-for displaying the new
-document controller.
+00:28:41.536 --> 00:28:44.606 A:middle
+Sometimes you will call and
+expired will be immediately set
 
-00:28:58.806 --> 00:29:01.676 A:middle
-Cool. So that's reading
-documents.
+00:28:44.606 --> 00:28:47.306 A:middle
+to true and your call-back
+block will be executed that way
 
+00:28:47.306 --> 00:28:51.726 A:middle
+and you will not get a chance to
+perform some critical operation.
 
+00:28:51.726 --> 00:28:53.556 A:middle
+You need to be prepared
+to deal with that
 
-00:28:58.806 --> 00:29:01.676 A:middle
-Cool. So that's reading
-documents.
+00:28:54.406 --> 00:28:55.406 A:middle
+because it will happen.
 
-00:29:01.876 --> 00:29:03.716 A:middle
-Of course, we also want
-to write documents.
+00:28:57.006 --> 00:29:01.256 A:middle
+Next, these task assertions only
+protect the code in the scope
 
-00:29:04.356 --> 00:29:08.036 A:middle
-And writing documents is very
-symmetric to reading documents.
 
-00:29:08.716 --> 00:29:12.126 A:middle
-The way we write documents
-is that we also take
 
-00:29:12.126 --> 00:29:14.136 A:middle
-out a coordinated
-file coordination
+00:28:57.006 --> 00:29:01.256 A:middle
+Next, these task assertions only
+protect the code in the scope
 
-00:29:14.136 --> 00:29:15.136 A:middle
-on a background queue.
+00:29:01.256 --> 00:29:03.376 A:middle
+of that block, so they
+are generally used
 
-00:29:15.786 --> 00:29:18.056 A:middle
-Now, this one is
-slightly different
+00:29:03.416 --> 00:29:06.536 A:middle
+for very simple things,
+like quick serialization,
 
-00:29:18.056 --> 00:29:19.476 A:middle
-in that you're not starting it
+00:29:06.536 --> 00:29:07.676 A:middle
+something that's synchronous.
 
-00:29:19.966 --> 00:29:23.606 A:middle
-but rather UIDocument
-will automatically notice
+00:29:08.376 --> 00:29:11.866 A:middle
+What do you do if you
+need to coordinate
 
-00:29:24.166 --> 00:29:27.826 A:middle
-that now is a convenient
-time to save the document.
+00:29:11.866 --> 00:29:13.416 A:middle
+with work on another queue?
 
-00:29:28.136 --> 00:29:31.896 A:middle
-For example, because for a while
-there have not been any edits
+00:29:13.966 --> 00:29:17.046 A:middle
+Because you remember that the
+task assertions are scoped
 
-00:29:31.966 --> 00:29:34.466 A:middle
-incoming, or it has been a time
+00:29:17.106 --> 00:29:18.316 A:middle
+to that call-back block.
 
-00:29:34.466 --> 00:29:36.536 A:middle
-since the document
-was last saved,
+00:29:19.316 --> 00:29:23.266 A:middle
+Well, a call-back
+block must synchronize
 
-00:29:37.606 --> 00:29:40.746 A:middle
-or the user is putting your
-application into the background
+00:29:23.266 --> 00:29:25.016 A:middle
+with protected work
+on other queues.
 
-00:29:40.746 --> 00:29:42.486 A:middle
-so now would be a
-really convenient time
+00:29:25.356 --> 00:29:29.146 A:middle
+So for instance, if you have
+something on the main queue
 
-00:29:42.486 --> 00:29:43.456 A:middle
-to save the document.
+00:29:29.716 --> 00:29:32.766 A:middle
+that you wish to protect,
+you need to make sure
 
-00:29:44.106 --> 00:29:47.676 A:middle
-But basically the way this
-is done is very symmetrical
+00:29:32.926 --> 00:29:36.336 A:middle
+that that call-back block does
+not exit the original protected
 
-00:29:47.676 --> 00:29:50.296 A:middle
-to reading a document, we
-simply call the 'contents
+00:29:36.386 --> 00:29:39.116 A:middle
+block scope before that
+work has completed.
 
-00:29:50.296 --> 00:29:53.036 A:middle
-for type' method on your
-UIDocument instance,
+00:29:39.986 --> 00:29:42.696 A:middle
+So here's an example
+of how not to do it.
 
-00:29:53.156 --> 00:29:55.386 A:middle
-and you fill in the
-NSData instance
+00:29:43.266 --> 00:29:47.056 A:middle
+By dispatch asyncing to the main
+queue from within the block,
 
-00:29:55.456 --> 00:29:56.846 A:middle
-that you then return from there.
+00:29:47.606 --> 00:29:50.076 A:middle
+execution will exit
+that block's scope,
 
-00:29:57.866 --> 00:29:58.316 A:middle
-Very nice.
+00:29:50.466 --> 00:29:53.466 A:middle
+possibly before perform
+interrupt will work
 
-00:29:58.706 --> 00:30:00.536 A:middle
-There is one additional
-thing here,
+00:29:54.006 --> 00:29:54.786 A:middle
+has completed.
 
+00:29:55.356 --> 00:29:56.286 A:middle
+This is pretty bad.
 
+00:29:56.956 --> 00:29:58.966 A:middle
+So in this case,
+your block needs
 
-00:29:58.706 --> 00:30:00.536 A:middle
-There is one additional
-thing here,
+00:29:59.016 --> 00:30:02.876 A:middle
+to synchronize via dispatch
+sync or dispatch semaphores
 
-00:30:00.536 --> 00:30:03.076 A:middle
-and that is that this
-is a convenient time
 
-00:30:03.076 --> 00:30:04.006 A:middle
-to write a thumbnail.
 
-00:30:04.756 --> 00:30:08.836 A:middle
-As Mike told you, for some very
-specific document formats we'll
+00:29:59.016 --> 00:30:02.876 A:middle
+to synchronize via dispatch
+sync or dispatch semaphores
 
-00:30:08.836 --> 00:30:12.936 A:middle
-automatically generate
-thumbnails, but chances are
+00:30:02.876 --> 00:30:06.356 A:middle
+or whatever method you
+choose with the main queue.
 
-00:30:12.936 --> 00:30:16.166 A:middle
-that you're not building the
-exact thing that we're building,
+00:30:06.656 --> 00:30:08.956 A:middle
+And remember that this work
+that you are dispatching
 
-00:30:16.696 --> 00:30:21.406 A:middle
-and thus if you're not
-building, using any of our very,
+00:30:09.506 --> 00:30:11.616 A:middle
+to another queue -- it
+doesn't necessarily have
 
-00:30:21.406 --> 00:30:25.346 A:middle
-very well-known formats
-like images or simple text,
+00:30:11.656 --> 00:30:14.116 A:middle
+to be the main queue --
+needs to be cancelable
 
-00:30:25.956 --> 00:30:28.896 A:middle
-then you will want to out
-write thumbnails on your own.
+00:30:14.356 --> 00:30:18.426 A:middle
+because we might call back your
+block with expired set to true,
 
-00:30:29.926 --> 00:30:32.466 A:middle
-Now, the way you do this is
+00:30:18.776 --> 00:30:20.586 A:middle
+and at this point,
+you will need to clean
 
-00:30:32.546 --> 00:30:35.106 A:middle
-that we will call the
-'file attributes to write
+00:30:20.586 --> 00:30:24.336 A:middle
+up whatever you are doing, exit,
+go back to the block, drop out,
 
-00:30:35.106 --> 00:30:37.876 A:middle
-to your own' method
-on your UIDocument.
+00:30:24.606 --> 00:30:26.226 A:middle
+and release the task assertion.
 
-00:30:38.446 --> 00:30:42.836 A:middle
-And in that method you simply
-return a UIImage instance
+00:30:26.796 --> 00:30:31.756 A:middle
+And it's actually safe
+for you to do this
 
-00:30:42.936 --> 00:30:45.066 A:middle
-as part of your attribute
-dictionary.
+00:30:31.806 --> 00:30:34.476 A:middle
+because this call-back
+block is executing
 
-00:30:45.676 --> 00:30:49.746 A:middle
-And this instance we'll
-write out contained
+00:30:34.476 --> 00:30:35.986 A:middle
+on a private system queue.
 
-00:30:49.746 --> 00:30:53.506 A:middle
-in the same coordinated write
-that's writing your document.
+00:30:36.386 --> 00:30:37.526 A:middle
+You are not going to dead-lock
 
-00:30:54.176 --> 00:30:56.346 A:middle
-That means that if the user has
+00:30:37.586 --> 00:30:39.906 A:middle
+because we are not going
+to call back into it.
 
-00:30:56.346 --> 00:31:01.936 A:middle
-at this time the Document
-Browser up in a separate pane,
+00:30:41.236 --> 00:30:43.816 A:middle
+Now, that was a lot.
 
+00:30:44.646 --> 00:30:47.296 A:middle
+I understand.
 
+00:30:47.626 --> 00:30:50.646 A:middle
+Moving along here.
 
-00:30:56.346 --> 00:31:01.936 A:middle
-at this time the Document
-Browser up in a separate pane,
+00:30:50.886 --> 00:30:55.566 A:middle
+In our new multitasking world,
+we can now run into situations
 
-00:31:02.206 --> 00:31:04.346 A:middle
-they'll not see an
-inconsistent state.
+00:30:55.906 --> 00:30:59.166 A:middle
+where your extension and the
+containing application are
 
-00:31:05.106 --> 00:31:08.466 A:middle
-Cool. The important thing
-here is to keep in mind
+00:30:59.166 --> 00:31:00.586 A:middle
+running simultaneously.
 
-00:31:08.466 --> 00:31:10.266 A:middle
-that this is being called
-on a background queue.
 
-00:31:10.816 --> 00:31:12.576 A:middle
-And what that means
-is that you cannot
 
-00:31:12.576 --> 00:31:16.156 A:middle
-under any circumstances
-use UIViews to write --
+00:30:59.166 --> 00:31:00.586 A:middle
+running simultaneously.
 
-00:31:16.156 --> 00:31:17.676 A:middle
-to render your thumbnail.
+00:31:01.186 --> 00:31:03.736 A:middle
+And this means that if
+something happens inside
 
-00:31:18.216 --> 00:31:21.306 A:middle
-UIViews are not thread safe
-so you have to make sure
+00:31:03.736 --> 00:31:06.956 A:middle
+of your containing app that
+changes your model data state,
 
-00:31:21.386 --> 00:31:26.016 A:middle
-that your thumbnail rendering is
-being done using, for example,
+00:31:07.696 --> 00:31:10.776 A:middle
+potentially your extension
+could be out of sync
 
-00:31:26.016 --> 00:31:28.086 A:middle
-Core Graphics, or textKit,
+00:31:11.276 --> 00:31:13.376 A:middle
+with the model state,
+and this is bad.
 
-00:31:28.446 --> 00:31:30.996 A:middle
-or any of the other thread
-safe rendering mechanisms
+00:31:14.106 --> 00:31:17.776 A:middle
+So one way, one thing you
+can use to keep everyone
 
-00:31:30.996 --> 00:31:33.066 A:middle
-that we provide on our platform.
+00:31:17.776 --> 00:31:20.806 A:middle
+on the same page is the
+Darwin Notification Center.
 
-00:31:33.176 --> 00:31:35.656 A:middle
-In iOS 8, the only mechanism
+00:31:21.346 --> 00:31:24.236 A:middle
+Now, the API is similar to
+the NSNotification Center,
 
-00:31:35.916 --> 00:31:38.546 A:middle
-to access a document
-was through a copy.
+00:31:25.306 --> 00:31:28.056 A:middle
+but it's a lot simpler, and
+there's a smaller number
 
-00:31:38.546 --> 00:31:42.236 A:middle
-And the reason for that
-is that applications
+00:31:28.056 --> 00:31:30.036 A:middle
+of use cases for
+which it is applicable
 
-00:31:42.276 --> 00:31:45.006 A:middle
-in general do not have access
-to each other's Sandbox.
+00:31:30.416 --> 00:31:32.766 A:middle
+to your containing
+app and its extension.
 
-00:31:45.386 --> 00:31:48.986 A:middle
-So if we have two application
-Sandboxes, the only way
+00:31:33.366 --> 00:31:36.746 A:middle
+For example today, we are
+going to show you how to use it
 
-00:31:49.356 --> 00:31:53.366 A:middle
-to move a document from a
-Sandbox to another Sandbox was
+00:31:36.746 --> 00:31:39.536 A:middle
+to hint your extension
+to reload the model.
 
-00:31:53.656 --> 00:31:56.276 A:middle
-that the first application
-caused a copy to be made
+00:31:39.536 --> 00:31:41.206 A:middle
+And this is how you do it.
 
-00:31:56.326 --> 00:31:58.146 A:middle
-in the other application
-Sandbox.
+00:31:41.676 --> 00:31:45.226 A:middle
+First, inside of that containing
+app, you are going to want
 
-00:31:58.746 --> 00:32:02.676 A:middle
-Now, we relaxed this thing
-a little bit through the use
+00:31:45.226 --> 00:31:48.606 A:middle
+to get an instance of the
+Darwin Notification Center,
 
+00:31:48.976 --> 00:31:51.916 A:middle
+and you will do this by
+calling CFNotificationCenter,
 
+00:31:52.316 --> 00:31:53.926 A:middle
+get Darwin notify Center.
 
-00:31:58.746 --> 00:32:02.676 A:middle
-Now, we relaxed this thing
-a little bit through the use
+00:31:54.956 --> 00:31:58.816 A:middle
+Then you are going to pass this
+notification center instance
 
-00:32:02.676 --> 00:32:04.536 A:middle
-of the 'UIDocument
-Menu View Controller,
+00:31:59.116 --> 00:32:01.686 A:middle
+to CFNotificationCenter
+post notification.
 
-00:32:05.006 --> 00:32:08.876 A:middle
-which allowed your application
-to do a pull of a document
 
-00:32:08.876 --> 00:32:10.306 A:middle
-in another application's
-container.
 
-00:32:11.116 --> 00:32:15.536 A:middle
-But in general you could
-not simply open a document.
+00:31:59.116 --> 00:32:01.686 A:middle
+to CFNotificationCenter
+post notification.
 
-00:32:16.196 --> 00:32:19.306 A:middle
-And every open of this
-document would cause a copy.
+00:32:03.226 --> 00:32:06.276 A:middle
+The next thing you are going to
+want to do is to pick a string.
 
-00:32:20.266 --> 00:32:22.736 A:middle
-Now, of course, doing all
+00:32:06.406 --> 00:32:08.956 A:middle
+This string is going to
+represent your notification,
 
-00:32:22.736 --> 00:32:24.676 A:middle
-of these copies is
-very inconvenient,
+00:32:09.376 --> 00:32:11.566 A:middle
+and you are going to use
+it in your containing app
 
-00:32:24.726 --> 00:32:27.756 A:middle
-because now you have a
-copy of your document
+00:32:11.946 --> 00:32:15.786 A:middle
+and any extensions with which
+to observe this notification.
 
-00:32:28.096 --> 00:32:30.576 A:middle
-in the other application's
-container and the user is going
+00:32:16.756 --> 00:32:17.986 A:middle
+And then you want to pass true.
 
-00:32:30.576 --> 00:32:33.216 A:middle
-to modify it so you have a
-second version of this document.
+00:32:19.076 --> 00:32:23.506 A:middle
+In your extension, again,
+you are going to want
 
-00:32:33.686 --> 00:32:36.576 A:middle
-And now, for example,
-the user is going to want
+00:32:23.506 --> 00:32:26.156 A:middle
+to get an instance of the
+Darwin Notification Center,
 
-00:32:36.576 --> 00:32:39.626 A:middle
-to open this document
-back in your application
+00:32:27.646 --> 00:32:29.006 A:middle
+and you are going
+to want to pass this
 
-00:32:40.166 --> 00:32:42.776 A:middle
-and that causes a
-third copy to be made.
+00:32:29.006 --> 00:32:31.406 A:middle
+to CFNotificationCenter
+at observer.
 
-00:32:43.206 --> 00:32:45.386 A:middle
-Now you have these
-three different versions
+00:32:31.896 --> 00:32:35.096 A:middle
+This allows you to observe
+for this notification.
 
-00:32:45.386 --> 00:32:46.716 A:middle
-of documents floating around.
+00:32:36.306 --> 00:32:38.616 A:middle
+The next thing you are going
+to want to do is you are going
 
-00:32:47.396 --> 00:32:50.156 A:middle
-And that's very unfortunate,
-because the user gets confused
+00:32:38.616 --> 00:32:40.026 A:middle
+to want to pass a
+call-back block.
 
-00:32:50.156 --> 00:32:52.866 A:middle
-and doesn't know which
-version is the most recent.
+00:32:40.456 --> 00:32:43.106 A:middle
+This is the call-back
+block which is executed
 
-00:32:54.296 --> 00:32:56.606 A:middle
-And it is just not
-a great situation.
+00:32:43.466 --> 00:32:45.116 A:middle
+when the system notices
 
-00:32:57.936 --> 00:33:01.386 A:middle
-Now in iOS 9, we have this
-nice new mechanism called 'Open
+00:32:45.276 --> 00:32:47.596 A:middle
+that this notification
+has been emitted.
 
+00:32:48.786 --> 00:32:50.636 A:middle
+Then you want to pass
+the short string.
 
+00:32:51.246 --> 00:32:54.866 A:middle
+And finally, deliver
+immediately.
 
-00:32:57.936 --> 00:33:01.386 A:middle
-Now in iOS 9, we have this
-nice new mechanism called 'Open
+00:32:56.016 --> 00:32:58.916 A:middle
+This makes sure that
+everything stays up-to-date
 
-00:33:01.386 --> 00:33:01.936 A:middle
-in place.'
+00:32:59.146 --> 00:33:01.836 A:middle
+and the model inside of
+your extension is reloaded
 
-00:33:02.876 --> 00:33:05.876 A:middle
-And what this means is
-that your application,
 
-00:33:05.976 --> 00:33:08.256 A:middle
-through use of the document
-interaction controller,
 
-00:33:08.866 --> 00:33:14.546 A:middle
-can grant another application
-access to a document.
+00:32:59.146 --> 00:33:01.836 A:middle
+and the model inside of
+your extension is reloaded
 
-00:33:15.346 --> 00:33:18.706 A:middle
-And this document is
-the exact same document,
+00:33:01.986 --> 00:33:04.296 A:middle
+when the containing app
+passes it this hint.
 
-00:33:18.706 --> 00:33:22.426 A:middle
-this is not a copy but rather
-a reference to this document.
+00:33:04.436 --> 00:33:08.076 A:middle
+Now, remember I am calling it a
+hint so you probably don't want
 
-00:33:23.556 --> 00:33:24.696 A:middle
-What that means is, of course,
+00:33:08.076 --> 00:33:11.856 A:middle
+to use this for coordinating
+locks between your extension
 
-00:33:24.696 --> 00:33:28.236 A:middle
-that the other application
-is able to simply make edits
+00:33:12.116 --> 00:33:16.816 A:middle
+and your containing app because
+it's not always guaranteed
 
-00:33:28.306 --> 00:33:30.626 A:middle
-that are then, through the
-magic of file presentation,
+00:33:17.086 --> 00:33:18.636 A:middle
+that your extension
+is going to be
 
-00:33:30.676 --> 00:33:37.096 A:middle
-are directly reflected in your
-application, which, of course,
+00:33:18.636 --> 00:33:20.826 A:middle
+around to receive
+these notifications.
 
-00:33:37.096 --> 00:33:38.406 A:middle
-is very nice for the user.
+00:33:21.366 --> 00:33:28.066 A:middle
+So that's how to keep your
+data model up-to-date.
 
-00:33:38.646 --> 00:33:41.086 A:middle
-And this includes
-files that are open
+00:33:28.346 --> 00:33:30.506 A:middle
+How do you keep your
+widgets visual
 
-00:33:41.086 --> 00:33:43.556 A:middle
-from the iCloud Drive
-app and from Spotlight.
+00:33:30.506 --> 00:33:31.746 A:middle
+representation up-to-date?
 
-00:33:44.496 --> 00:33:48.716 A:middle
-That means that any time your
-user browses their documents
+00:33:31.746 --> 00:33:33.756 A:middle
+And next I would like
+to tell you about that.
 
-00:33:49.006 --> 00:33:53.796 A:middle
-in the iCloud Drive app, we
-will directly be able to open
+00:33:33.756 --> 00:33:37.146 A:middle
+We are going to use something
+called background refresh.
 
-00:33:53.796 --> 00:33:55.076 A:middle
-that document in place.
+00:33:38.576 --> 00:33:42.196 A:middle
+And background refresh is
+a way that the system works
 
-00:33:56.236 --> 00:33:59.126 A:middle
-The mechanism behind
-this is very similar
+00:33:42.196 --> 00:33:44.866 A:middle
+with your widget to
+keep it up-to-date,
 
-00:33:59.126 --> 00:34:01.826 A:middle
-to the mechanism used by the
-'Document Menu View Controller.'
+00:33:44.916 --> 00:33:49.716 A:middle
+to keep the visual
+representation of it up-to-date.
 
+00:33:49.716 --> 00:33:52.606 A:middle
+So again, we are going back
+to the Notification Center,
 
+00:33:52.896 --> 00:33:54.826 A:middle
+and here you can see
+our stocks widget.
 
-00:33:59.126 --> 00:34:01.826 A:middle
-to the mechanism used by the
-'Document Menu View Controller.'
+00:33:55.166 --> 00:33:58.396 A:middle
+The stocks widget, again,
+shows the latest stock prices.
 
-00:34:02.466 --> 00:34:04.156 A:middle
-That means that if your
-application is already
+00:33:58.926 --> 00:34:08.646 A:middle
+What happens if, in the course
+of the day, Apple stock changes?
 
-00:34:04.156 --> 00:34:06.936 A:middle
-supporting that, it
-is super easy for you
 
-00:34:06.936 --> 00:34:08.565 A:middle
-to also support this mechanism.
 
-00:34:09.306 --> 00:34:12.646 A:middle
-And even if you're not
-currently supporting the
+00:33:58.926 --> 00:34:08.646 A:middle
+What happens if, in the course
+of the day, Apple stock changes?
 
-00:34:12.646 --> 00:34:15.295 A:middle
-UIMenuViewController,
-it is super easy for you
+00:34:09.366 --> 00:34:12.866 A:middle
+Well, this notification
+will probably be emitted
 
-00:34:15.295 --> 00:34:19.025 A:middle
-to adopt this, because there
-is really no big magic here.
+00:34:12.866 --> 00:34:17.186 A:middle
+to your phone, at which point
+the containing app will probably
 
-00:34:19.025 --> 00:34:20.926 A:middle
-You get a URL and put it
+00:34:17.186 --> 00:34:19.306 A:middle
+be expected to do
+something with it.
 
-00:34:20.926 --> 00:34:23.696 A:middle
-into a UIDocument instance
-that's you then display.
+00:34:20.386 --> 00:34:23.936 A:middle
+And this will probably change
+the visual representation
 
-00:34:24.136 --> 00:34:29.356 A:middle
-Let's have a quick look at
-how you want to support this.
+00:34:23.936 --> 00:34:24.476 A:middle
+of your widget.
 
-00:34:29.976 --> 00:34:31.286 A:middle
-As I said, it is super simple.
+00:34:25.906 --> 00:34:29.835 A:middle
+Unfortunately, we will notice
+here that the widget is now
 
-00:34:31.746 --> 00:34:33.916 A:middle
-First of all, you have to
-tell us that you support it.
+00:34:29.835 --> 00:34:31.505 A:middle
+out of sync with
+the stock price.
 
-00:34:34.476 --> 00:34:36.056 A:middle
-Your app, remember,
-is not actually,
+00:34:31.505 --> 00:34:33.846 A:middle
+It's showing $130.12.
 
-00:34:36.146 --> 00:34:39.216 A:middle
-possibly it may not be launched
-at the time we're trying
+00:34:33.846 --> 00:34:36.235 A:middle
+It should be $132.12.
 
-00:34:39.216 --> 00:34:42.065 A:middle
-to figure out whether we want
-to open this file in place.
+00:34:36.676 --> 00:34:37.835 A:middle
+So how do we fix this?
 
-00:34:42.136 --> 00:34:43.616 A:middle
-So you have to tell
-us beforehand.
+00:34:37.976 --> 00:34:40.775 A:middle
+How do we make sure that
+our visual representation is
 
-00:34:44.275 --> 00:34:48.786 A:middle
-And you do that by adopting the
-'LS Supports Opening Documents
+00:34:40.835 --> 00:34:41.676 A:middle
+always up-to-date?
 
-00:34:48.786 --> 00:34:50.795 A:middle
-In Place' key in
-your Info.plist.
+00:34:42.505 --> 00:34:44.696 A:middle
+Well, for starters,
+the system is going
 
-00:34:51.186 --> 00:34:53.076 A:middle
-You simply set that
-to yes or true,
+00:34:44.696 --> 00:34:47.426 A:middle
+to opportunistically
+refresh this content.
 
-00:34:53.076 --> 00:34:55.206 A:middle
-depending on whether you
-are Objective-C or Swift.
+00:34:47.746 --> 00:34:50.186 A:middle
+It's going to talk to the
+widgets and see if they need
 
-00:34:55.946 --> 00:35:01.476 A:middle
-And that tells us that
-your application is able
+00:34:50.186 --> 00:34:52.126 A:middle
+to be updated without
+having to pull
 
+00:34:52.126 --> 00:34:53.565 A:middle
+down the Notification Center.
 
+00:34:55.166 --> 00:34:58.906 A:middle
+Each Today Widget view
+controller conforms
 
-00:34:55.946 --> 00:35:01.476 A:middle
-And that tells us that
-your application is able
+00:34:58.906 --> 00:35:00.466 A:middle
+to NC widget providing.
 
-00:35:01.476 --> 00:35:02.346 A:middle
-to handle this.
 
-00:35:03.146 --> 00:35:05.886 A:middle
-Now there is also a bit of
-code you'll have to write,
 
-00:35:06.546 --> 00:35:09.096 A:middle
-and that comes in the form
-of a new delegate method.
+00:34:58.906 --> 00:35:00.466 A:middle
+to NC widget providing.
 
-00:35:10.096 --> 00:35:10.856 A:middle
-How does that look?
+00:35:01.246 --> 00:35:05.596 A:middle
+And if the widget's view
+controller implements the update
 
-00:35:11.616 --> 00:35:15.026 A:middle
-Well, let's say you already
-are opening documents here.
+00:35:05.596 --> 00:35:08.956 A:middle
+delegate method, it gets to
+participate in this system,
 
-00:35:15.596 --> 00:35:17.846 A:middle
-And it is a reasonable
-assumption because, well,
+00:35:09.086 --> 00:35:10.376 A:middle
+and I will show you
+how to do that now.
 
-00:35:17.846 --> 00:35:19.086 A:middle
-you're a document-based app.
+00:35:12.046 --> 00:35:13.846 A:middle
+The first thing we are
+going to do is we are going
 
-00:35:19.366 --> 00:35:21.726 A:middle
-So you must be implementing
-a method very similar
+00:35:13.846 --> 00:35:17.156 A:middle
+to add widget perform update
+with completion handler
 
-00:35:21.726 --> 00:35:23.916 A:middle
-to the one that we see here.
+00:35:17.536 --> 00:35:20.506 A:middle
+to our Today Widget view
+controller that conforms
 
-00:35:24.496 --> 00:35:28.256 A:middle
-Your method currently
-must be getting an NSURL,
+00:35:20.716 --> 00:35:22.446 A:middle
+to NC widget providing.
 
-00:35:29.136 --> 00:35:32.366 A:middle
-and since that NSURL
-is a temporary copy
+00:35:23.986 --> 00:35:26.726 A:middle
+As a first step, we are
+going to refresh the model,
 
-00:35:32.366 --> 00:35:35.606 A:middle
-that the system made for
-your app, you have to be able
+00:35:27.216 --> 00:35:29.486 A:middle
+and this is going to
+do one thing for us,
 
-00:35:35.606 --> 00:35:38.586 A:middle
-to copy this into
-your own container
+00:35:29.486 --> 00:35:30.786 A:middle
+one very important thing.
 
-00:35:38.586 --> 00:35:40.686 A:middle
-and then open this copied file.
+00:35:31.096 --> 00:35:34.276 A:middle
+It's going to tell us whether
+or not there is a change
 
-00:35:41.116 --> 00:35:46.306 A:middle
-And this is what this small
-chunk of code here does.
+00:35:34.276 --> 00:35:35.686 A:middle
+in the model that is going
 
-00:35:46.866 --> 00:35:49.456 A:middle
-Now, the first thing is to
-adopt our new method here.
+00:35:35.686 --> 00:35:39.526 A:middle
+to materially affect the
+widget's visual representation.
 
-00:35:50.246 --> 00:35:53.326 A:middle
-And this new method is very
-similar to the old one.
+00:35:40.036 --> 00:35:43.936 A:middle
+If it did, then we're going
+to tell the view hierarchy
 
-00:35:53.766 --> 00:35:56.426 A:middle
-It simply takes an
-options dictionary
+00:35:43.996 --> 00:35:45.196 A:middle
+that it needs to redraw.
 
-00:35:56.996 --> 00:36:01.296 A:middle
-that encapsulates the parameters
-that the previous method has.
+00:35:46.636 --> 00:35:49.166 A:middle
+And finally, inside
+of it, we are going
 
+00:35:49.166 --> 00:35:52.046 A:middle
+to take the completion
+handler that was passed to us,
 
+00:35:52.536 --> 00:35:54.956 A:middle
+and if there was
+a visual change,
 
-00:35:56.996 --> 00:36:01.296 A:middle
-that encapsulates the parameters
-that the previous method has.
+00:35:55.036 --> 00:35:56.656 A:middle
+we are going to pass new data.
 
-00:36:01.916 --> 00:36:05.086 A:middle
-And, importantly, one of
-these parameters is the 'open
+00:35:57.476 --> 00:36:00.016 A:middle
+If there was no material
+change that was going
 
-00:36:05.086 --> 00:36:05.846 A:middle
-in place' key.
 
-00:36:07.076 --> 00:36:10.896 A:middle
-Now, all you have to do is have
-a look at whether this 'open
 
-00:36:10.896 --> 00:36:16.276 A:middle
-in place' key is actually
-true, and if this key is true,
+00:35:57.476 --> 00:36:00.016 A:middle
+If there was no material
+change that was going
 
-00:36:16.276 --> 00:36:18.356 A:middle
-then your application should
-open this file in place.
+00:36:00.016 --> 00:36:02.556 A:middle
+to affect the visual
+representation of our widget,
 
-00:36:18.796 --> 00:36:20.836 A:middle
-That means it should
-not make a copy.
+00:36:02.556 --> 00:36:04.276 A:middle
+then we are going
+to pass no data,
 
-00:36:21.636 --> 00:36:23.366 A:middle
-Simple, you just
-stop doing something
+00:36:04.706 --> 00:36:07.156 A:middle
+and this lets our
+widget be a good citizen
 
-00:36:23.366 --> 00:36:24.586 A:middle
-that you must have
-been doing before.
+00:36:07.366 --> 00:36:09.706 A:middle
+in the Notification Center
+because at this point,
 
-00:36:25.346 --> 00:36:29.856 A:middle
-And then now that you have
-this URL, all you have
+00:36:09.706 --> 00:36:12.446 A:middle
+we are hinting the operating
+system that it doesn't need
 
-00:36:29.856 --> 00:36:33.616 A:middle
-to do is go ahead and open it
-whichever way you were opening
+00:36:12.446 --> 00:36:14.206 A:middle
+to expend any resources
 
-00:36:33.616 --> 00:36:34.196 A:middle
-it before.
+00:36:14.586 --> 00:36:17.346 A:middle
+to update the visual
+representation
 
-00:36:34.736 --> 00:36:38.656 A:middle
-And that's how simple it is
-to support open in place.
+00:36:17.736 --> 00:36:18.866 A:middle
+of our Today Widget.
 
-00:36:40.476 --> 00:36:43.006 A:middle
-Cool. Let's summarize what
-we have learned today.
+00:36:20.376 --> 00:36:23.056 A:middle
+Since we've done this, our
+widget has been updated,
 
-00:36:43.916 --> 00:36:47.406 A:middle
-We have seen how to make your
-app very performance responsive
+00:36:23.396 --> 00:36:31.166 A:middle
+and you'll notice that the
+stock price is correct.
 
-00:36:47.406 --> 00:36:53.346 A:middle
-and beautiful using
-NSMetadataQuery to display a set
+00:36:31.306 --> 00:36:32.986 A:middle
+Next, networking.
 
-00:36:53.346 --> 00:36:58.126 A:middle
-of documents and to update
-these documents in time
+00:36:34.186 --> 00:36:36.886 A:middle
+Extensions are ephemeral
+objects,
 
-00:36:58.206 --> 00:36:59.746 A:middle
-when changes come
-in from the cloud.
+00:36:37.026 --> 00:36:38.456 A:middle
+really ephemeral processes.
 
+00:36:38.546 --> 00:36:39.696 A:middle
+They come and they go.
 
+00:36:39.746 --> 00:36:42.006 A:middle
+Remember, I was talking
+about the user swiping down
 
-00:37:00.086 --> 00:37:02.066 A:middle
-We have seen how
-to use bookmarks
+00:36:42.006 --> 00:36:43.206 A:middle
+and then quickly swiping up.
 
-00:37:02.406 --> 00:37:06.006 A:middle
-to implement a recents
-mechanism that allows your users
+00:36:43.846 --> 00:36:46.196 A:middle
+And this can play havoc with
+things that take a while
 
-00:37:06.006 --> 00:37:08.896 A:middle
-to quickly go back to the
-state that they were before --
+00:36:46.196 --> 00:36:48.456 A:middle
+to work, like networking
+sessions.
 
-00:37:08.896 --> 00:37:09.886 A:middle
-that they were in before.
+00:36:48.986 --> 00:36:53.206 A:middle
+And widgets are expected to
+call out to cloud services
 
-00:37:10.486 --> 00:37:12.726 A:middle
-And of course, something
-we didn't talk about,
+00:36:53.206 --> 00:36:56.306 A:middle
+and other things on the network
+in order to process data.
 
-00:37:12.726 --> 00:37:14.456 A:middle
-but which is entirely
-reasonable,
+00:36:57.046 --> 00:36:58.246 A:middle
+So how do we deal with this?
 
-00:37:14.656 --> 00:37:17.206 A:middle
-you can also use bookmarks to
-implement state restoration,
+00:36:59.416 --> 00:37:01.476 A:middle
+Well, I'd recommend
+that you take a look
 
-00:37:17.696 --> 00:37:20.256 A:middle
-which allows your users
-to directly go back
 
-00:37:20.256 --> 00:37:21.746 A:middle
-to the previous state
-that they were in.
 
-00:37:22.126 --> 00:37:24.856 A:middle
-We have seen how
-to use thumbnails
+00:36:59.416 --> 00:37:01.476 A:middle
+Well, I'd recommend
+that you take a look
 
-00:37:24.856 --> 00:37:26.176 A:middle
-to make your application
-beautiful,
+00:37:01.476 --> 00:37:04.636 A:middle
+at using NSURLSession
+background sessions.
 
-00:37:26.536 --> 00:37:30.386 A:middle
-and how to implement
-progress display to make sure
+00:37:05.026 --> 00:37:05.776 A:middle
+And what are these?
 
-00:37:30.386 --> 00:37:32.376 A:middle
-that your user is always
-aware of what happens
+00:37:06.776 --> 00:37:10.226 A:middle
+These are tasks, networking
+tasks, that are performed
 
-00:37:32.376 --> 00:37:33.246 A:middle
-in their applications.
+00:37:10.226 --> 00:37:12.486 A:middle
+on your behalf by the system.
 
-00:37:33.336 --> 00:37:36.166 A:middle
-And last but not least, we
-have seen how easy it is
+00:37:14.496 --> 00:37:18.366 A:middle
+The updates and events are
+delivered to your extension
 
-00:37:36.166 --> 00:37:37.476 A:middle
-to implement open-in-place.
+00:37:18.416 --> 00:37:20.096 A:middle
+for as long as it stays active.
 
-00:37:38.136 --> 00:37:41.456 A:middle
-Open-in-place is a great new
-mechanism that allows your users
+00:37:20.776 --> 00:37:23.616 A:middle
+But if your extension
+gets suspended or killed
 
-00:37:41.746 --> 00:37:47.686 A:middle
-to directly open documents in
-your application without having
+00:37:23.616 --> 00:37:25.236 A:middle
+or for some reason
+hangs up the phone
 
-00:37:47.686 --> 00:37:48.736 A:middle
-to make multiple copies.
+00:37:25.236 --> 00:37:27.786 A:middle
+with this critical system --
+or with this system component,
 
-00:37:50.426 --> 00:37:55.026 A:middle
-Now all of these concepts
-are beautifully displayed
+00:37:28.766 --> 00:37:33.526 A:middle
+then the containing
+application takes over error
 
-00:37:55.026 --> 00:37:57.156 A:middle
-in a sample code that
-we published today.
+00:37:33.526 --> 00:37:35.556 A:middle
+and event handling
+on its behalf.
 
-00:37:57.156 --> 00:37:59.436 A:middle
-And the sample code is
-basically the application
+00:37:35.556 --> 00:37:37.706 A:middle
+And I will show you
+how to set that up.
 
-00:37:59.436 --> 00:38:01.416 A:middle
-that Mike showed you
-previously in the demo.
+00:37:39.086 --> 00:37:41.616 A:middle
+Inside of your extension
+you are going to want
 
+00:37:41.616 --> 00:37:46.706 A:middle
+to first create an NSURLSession
+configuration background session
 
+00:37:46.706 --> 00:37:48.836 A:middle
+configuration with
+identifier object.
 
-00:37:59.436 --> 00:38:01.416 A:middle
-that Mike showed you
-previously in the demo.
+00:37:49.576 --> 00:37:50.746 A:middle
+Or sorry, use the method.
 
-00:38:01.906 --> 00:38:03.686 A:middle
-It implements all
-of these features
+00:37:51.546 --> 00:37:55.376 A:middle
+And, again, following in the
+pattern, you are going to want
 
-00:38:04.146 --> 00:38:09.686 A:middle
-that are creating documents,
-displaying documents
+00:37:55.376 --> 00:37:58.426 A:middle
+to create an identifier
+that's going to be used
 
-00:38:09.716 --> 00:38:14.116 A:middle
-in a Document Browser, animating
-changes on these documents, and,
+00:37:58.756 --> 00:38:01.056 A:middle
+by the extension and
+the containing app
 
-00:38:14.116 --> 00:38:18.086 A:middle
-of course, writing thumbnails,
-and, of course, open-in-place.
 
-00:38:19.056 --> 00:38:21.096 A:middle
-For technical support, we would
 
-00:38:21.096 --> 00:38:22.716 A:middle
-like to direct you
-to our forums.
+00:37:58.756 --> 00:38:01.056 A:middle
+by the extension and
+the containing app
 
-00:38:23.676 --> 00:38:26.096 A:middle
-And we also have
-amazing documentation
+00:38:01.056 --> 00:38:03.416 A:middle
+which are participating in
+this background session.
 
-00:38:26.096 --> 00:38:28.516 A:middle
-under the link that
-you see here.
+00:38:04.206 --> 00:38:07.646 A:middle
+In our case, we are using
+com.example.my downloadsession.
 
-00:38:28.516 --> 00:38:30.456 A:middle
-If you're interested
-in learning more
+00:38:08.496 --> 00:38:10.146 A:middle
+The next thing you
+are going to want
 
-00:38:30.456 --> 00:38:33.446 A:middle
-about using the 'UIDocument
-Menu View Controller'
+00:38:10.146 --> 00:38:13.526 A:middle
+to do is set the shared
+container identifier
 
-00:38:33.966 --> 00:38:38.006 A:middle
-to implement the pull mechanism
-as opposed to the pull mechanism
+00:38:14.026 --> 00:38:15.956 A:middle
+on the session configuration.
 
-00:38:38.006 --> 00:38:39.396 A:middle
-that open-in-place implements,
+00:38:16.476 --> 00:38:18.196 A:middle
+Otherwise, you are
+going to have a lot
 
-00:38:39.896 --> 00:38:42.496 A:middle
-so that your application
-can pull documents
+00:38:18.196 --> 00:38:21.166 A:middle
+of fun debugging while all our
+sessions come back as invalid
 
-00:38:42.496 --> 00:38:45.346 A:middle
-from another application's
-container,
+00:38:21.166 --> 00:38:22.356 A:middle
+as soon as you start a task.
 
-00:38:45.946 --> 00:38:47.846 A:middle
-or if you're generally
-interested in how
+00:38:22.866 --> 00:38:23.686 A:middle
+At least I know I did.
 
-00:38:47.846 --> 00:38:50.206 A:middle
-to implement UIDocument-based
-applications,
+00:38:23.686 --> 00:38:29.836 A:middle
+Next, you are going to want
+to create an NSURLSession,
 
-00:38:50.656 --> 00:38:53.276 A:middle
-we'd like to point you to
-our session from last year,
+00:38:30.506 --> 00:38:32.426 A:middle
+passing this session
+configuration
 
-00:38:53.276 --> 00:38:58.186 A:middle
-that's session 234 last
-year, and, of course,
+00:38:32.836 --> 00:38:33.896 A:middle
+to the initializer.
 
-00:38:58.186 --> 00:38:59.286 A:middle
-that's online as well.
+00:38:34.186 --> 00:38:36.326 A:middle
+Now, you will notice that we
+are using the delegate form
 
+00:38:36.326 --> 00:38:39.546 A:middle
+with the initializer because
+the completion handler form
 
+00:38:39.546 --> 00:38:42.686 A:middle
+of the initializer
+is not valid for use
 
-00:39:00.056 --> 00:39:01.616 A:middle
-And with that, thank
-you for your time
+00:38:42.686 --> 00:38:44.386 A:middle
+with background URL sessions.
 
-00:39:01.866 --> 00:39:03.206 A:middle
-and have a great afternoon.
+00:38:45.576 --> 00:38:48.146 A:middle
+Next, for the sake of
+the example, we are going
 
-00:39:05.516 --> 00:39:16.660 A:middle
+00:38:48.146 --> 00:38:50.706 A:middle
+to download the apple.com
+website.
+
+00:38:52.116 --> 00:38:55.506 A:middle
+We are going to create
+the task and resume it.
+
+00:38:56.096 --> 00:38:59.166 A:middle
+And now our extension has
+successfully created an
+
+00:38:59.326 --> 00:39:03.186 A:middle
+NSURLSession in the background
+and handed it off to the system,
+
+
+
+00:38:59.326 --> 00:39:03.186 A:middle
+NSURLSession in the background
+and handed it off to the system,
+
+00:39:03.486 --> 00:39:08.096 A:middle
+and the system will begin to
+deliver events to the extension.
+
+00:39:08.096 --> 00:39:11.296 A:middle
+Next, inside of our
+containing app, as I was talking
+
+00:39:11.296 --> 00:39:15.556 A:middle
+about before, we need to prepare
+it for any eventualities,
+
+00:39:15.766 --> 00:39:19.156 A:middle
+for cases where the extension
+was suspended or killed
+
+00:39:19.156 --> 00:39:22.586 A:middle
+or otherwise dismissed and can
+no longer handle the events
+
+00:39:22.886 --> 00:39:25.406 A:middle
+coming from the system
+networking component.
+
+00:39:25.886 --> 00:39:29.236 A:middle
+We do this by adding
+application, handle events
+
+00:39:29.386 --> 00:39:33.286 A:middle
+for background URL session to
+our UI application delegate.
+
+00:39:34.446 --> 00:39:35.806 A:middle
+The first step we want to take
+
+00:39:35.906 --> 00:39:38.736 A:middle
+and the step I am taking here
+again, for the sake of example,
+
+00:39:39.086 --> 00:39:41.826 A:middle
+is to make sure the
+identifier is the identifier
+
+00:39:41.826 --> 00:39:42.806 A:middle
+that we expected.
+
+00:39:43.156 --> 00:39:46.656 A:middle
+The system is going to pass
+in the identifier associated
+
+00:39:46.866 --> 00:39:51.056 A:middle
+with the NSURLSession for the
+events that you are being asked
+
+00:39:51.196 --> 00:39:53.256 A:middle
+to handle in the
+application delegate.
+
+00:39:54.706 --> 00:39:57.906 A:middle
+Again, just like in the
+extension, we are going to set
+
+00:39:57.906 --> 00:40:00.916 A:middle
+up an NSURLSession
+configuration item
+
+
+
+00:39:57.906 --> 00:40:00.916 A:middle
+up an NSURLSession
+configuration item
+
+00:40:01.176 --> 00:40:03.466 A:middle
+by calling the background
+session configuration
+
+00:40:03.466 --> 00:40:05.626 A:middle
+with identifier factory method.
+
+00:40:07.156 --> 00:40:10.006 A:middle
+And we need to set up the shared
+container identifier again.
+
+00:40:11.576 --> 00:40:14.206 A:middle
+And then we need to
+call NSURLSession,
+
+00:40:14.466 --> 00:40:17.066 A:middle
+passing this shared
+configuration, and again,
+
+00:40:17.146 --> 00:40:19.606 A:middle
+using the delegate
+variant of the initializer.
+
+00:40:20.146 --> 00:40:23.756 A:middle
+And then last but not least --
+and this is very important --
+
+00:40:23.756 --> 00:40:25.256 A:middle
+you'll miss it if
+you don't look --
+
+00:40:25.966 --> 00:40:28.816 A:middle
+is we are going to store
+this completion handler back.
+
+00:40:28.956 --> 00:40:31.526 A:middle
+We are going to save it
+back in our properties
+
+00:40:31.756 --> 00:40:33.246 A:middle
+for when we're completed,
+
+00:40:33.246 --> 00:40:37.516 A:middle
+when we are done handling
+events for this URL session.
+
+00:40:37.856 --> 00:40:39.056 A:middle
+And you might ask,
+how do you know
+
+00:40:39.056 --> 00:40:40.416 A:middle
+when you are done
+handling events?
+
+00:40:40.456 --> 00:40:41.456 A:middle
+Well, I will show you.
+
+00:40:42.536 --> 00:40:47.206 A:middle
+In our NSURLSession delegate,
+we need to add this method.
+
+00:40:47.566 --> 00:40:50.616 A:middle
+URL session did finish events
+for background URL session.
+
+00:40:50.736 --> 00:40:53.036 A:middle
+It will be called when
+your containing app,
+
+00:40:53.036 --> 00:40:54.766 A:middle
+or in this case the delegate
+
+00:40:55.636 --> 00:40:59.436 A:middle
+that your containing app
+dutifully appointed to take care
+
+00:40:59.436 --> 00:41:04.016 A:middle
+of these events, is done
+processing all the URL session
+
+
+
+00:40:59.436 --> 00:41:04.016 A:middle
+of these events, is done
+processing all the URL session
+
+00:41:04.166 --> 00:41:06.296 A:middle
+events from the background
+URL session.
+
+00:41:06.946 --> 00:41:07.996 A:middle
+And the first thing we are going
+
+00:41:08.076 --> 00:41:10.486 A:middle
+to do is get the session
+configuration object,
+
+00:41:11.316 --> 00:41:12.786 A:middle
+and then we are going
+to look to make sure
+
+00:41:12.786 --> 00:41:15.796 A:middle
+that the session configuration's
+identifier matches the
+
+00:41:15.796 --> 00:41:17.256 A:middle
+identifier that we expect.
+
+00:41:18.936 --> 00:41:21.116 A:middle
+Then we are going to call
+this completion handler
+
+00:41:21.116 --> 00:41:22.426 A:middle
+that we saved earlier
+
+00:41:23.866 --> 00:41:25.566 A:middle
+and release our reference
+to the session.
+
+00:41:25.726 --> 00:41:27.166 A:middle
+And at this point, we are done.
+
+00:41:27.616 --> 00:41:32.026 A:middle
+We have successfully handled
+any of the events that have come
+
+00:41:32.156 --> 00:41:35.326 A:middle
+to our containing app
+from the system component
+
+00:41:35.566 --> 00:41:38.886 A:middle
+which was previously
+started by the extension.
+
+00:41:40.286 --> 00:41:42.716 A:middle
+Now, you can use this
+technique for any
+
+00:41:42.716 --> 00:41:45.506 A:middle
+of your other extension
+types, not just Today Widgets.
+
+00:41:45.506 --> 00:41:47.056 A:middle
+It's a really great technique.
+
+00:41:47.496 --> 00:41:50.036 A:middle
+But one place where
+you can't use it is
+
+00:41:50.036 --> 00:41:52.086 A:middle
+for your Watch OS 1 extensions.
+
+00:41:52.946 --> 00:41:55.076 A:middle
+Instead, we would prefer
+
+00:41:55.076 --> 00:41:57.426 A:middle
+that you use background
+task assertions
+
+00:41:57.626 --> 00:42:01.276 A:middle
+to protect these small tasks,
+and you can find out more
+
+
+
+00:41:57.626 --> 00:42:01.276 A:middle
+to protect these small tasks,
+and you can find out more
+
+00:42:01.276 --> 00:42:04.816 A:middle
+about it by going to
+WatchKit Tips and Tricks
+
+00:42:05.466 --> 00:42:09.236 A:middle
+in the Presidio tomorrow
+at 10 a.m., given to you
+
+00:42:09.236 --> 00:42:14.806 A:middle
+by Jake Behrens, also
+known as the man in plaid.
+
+00:42:15.006 --> 00:42:19.386 A:middle
+Next, when you are doing network
+transactions, it's inevitable
+
+00:42:19.386 --> 00:42:21.946 A:middle
+that you are going to be
+challenged for credentials.
+
+00:42:22.686 --> 00:42:27.376 A:middle
+How do you safely and securely
+protect your users' privacy
+
+00:42:28.466 --> 00:42:31.216 A:middle
+by sharing these secrets
+between your containing app
+
+00:42:31.766 --> 00:42:32.706 A:middle
+and its extensions?
+
+00:42:33.666 --> 00:42:36.836 A:middle
+We recommend that you use
+Keychain access groups
+
+00:42:36.836 --> 00:42:38.436 A:middle
+for this, as shown here.
+
+00:42:39.346 --> 00:42:43.206 A:middle
+You set this up inside of the
+capabilities for your extension
+
+00:42:43.586 --> 00:42:45.876 A:middle
+and for your containing app.
+
+00:42:45.876 --> 00:42:48.616 A:middle
+And then, using the
+identifier that you set
+
+00:42:48.616 --> 00:42:51.256 A:middle
+up in your containing
+app and its extensions,
+
+00:42:52.586 --> 00:42:56.556 A:middle
+you simply pass this identifier
+as the value for the k --
+
+00:42:56.626 --> 00:43:01.256 A:middle
+access group key whenever you
+add items to the Keychain.
+
+
+
+00:42:56.626 --> 00:43:01.256 A:middle
+access group key whenever you
+add items to the Keychain.
+
+00:43:01.816 --> 00:43:04.876 A:middle
+As shown here.
+
+00:43:06.686 --> 00:43:09.066 A:middle
+The next thing to
+tell you about this is
+
+00:43:09.066 --> 00:43:11.096 A:middle
+that there's automatic
+search behavior
+
+00:43:11.276 --> 00:43:14.096 A:middle
+for query API using
+the Keychain API.
+
+00:43:14.636 --> 00:43:16.406 A:middle
+So sec item update.
+
+00:43:17.116 --> 00:43:18.366 A:middle
+Sec item delete.
+
+00:43:19.036 --> 00:43:23.206 A:middle
+And sec item copy matching all
+automatically do the right thing
+
+00:43:23.326 --> 00:43:26.436 A:middle
+by searching every
+accessible Keychain for you
+
+00:43:26.436 --> 00:43:29.686 A:middle
+so you don't have to pass the
+Keychain access group identifier
+
+00:43:30.016 --> 00:43:30.626 A:middle
+to these APIs.
+
+00:43:30.626 --> 00:43:32.396 A:middle
+It's just a tip to remember.
+
+00:43:33.396 --> 00:43:35.626 A:middle
+And you can find out
+more about these APIs
+
+00:43:35.826 --> 00:43:43.416 A:middle
+by watching the Security
+and Your Apps video.
+
+00:43:43.846 --> 00:43:47.746 A:middle
+In summary, today Sophia
+told you all about Action
+
+00:43:47.746 --> 00:43:51.426 A:middle
+and Share extensions, about
+what they were meant to do
+
+00:43:51.576 --> 00:43:54.786 A:middle
+and how best to use
+them to share data
+
+00:43:54.976 --> 00:43:57.096 A:middle
+with your app and the web.
+
+00:43:58.806 --> 00:44:02.156 A:middle
+She also showed you how
+to use NS item provider
+
+
+
+00:43:58.806 --> 00:44:02.156 A:middle
+She also showed you how
+to use NS item provider
+
+00:44:02.506 --> 00:44:04.896 A:middle
+to its fullest possible
+extent and how
+
+00:44:04.896 --> 00:44:08.836 A:middle
+to make it do the hard work
+of sharing data types for you.
+
+00:44:10.626 --> 00:44:14.546 A:middle
+She also showed you how to make
+your host application a great
+
+00:44:14.546 --> 00:44:18.266 A:middle
+environment for Action and Share
+extensions, and you know what?
+
+00:44:18.686 --> 00:44:22.146 A:middle
+This increases the
+value of your host app.
+
+00:44:23.156 --> 00:44:27.416 A:middle
+Then I showed you how to enhance
+your Today Widget by making sure
+
+00:44:27.666 --> 00:44:31.806 A:middle
+that your model objects and its
+visual representation always
+
+00:44:31.806 --> 00:44:33.566 A:middle
+stayed fresh and up-to-date.
+
+00:44:35.446 --> 00:44:37.566 A:middle
+And then we showed
+you a collection
+
+00:44:37.566 --> 00:44:41.566 A:middle
+of general best practices, like
+how to securely share secrets
+
+00:44:41.566 --> 00:44:43.166 A:middle
+and guard your customers'
+privacy.
+
+00:44:43.306 --> 00:44:48.456 A:middle
+There are the related
+sessions I referenced earlier,
+
+00:44:48.636 --> 00:44:51.966 A:middle
+the WatchKit Tips and Tricks
+one tomorrow, and Security
+
+00:44:51.966 --> 00:44:53.806 A:middle
+and Your Apps that you can view.
+
+00:44:54.266 --> 00:44:59.016 A:middle
+And for more information,
+we'd recommend that you go
+
+00:44:59.016 --> 00:45:01.906 A:middle
+to the App Extension
+Programming Guide or talk
+
+
+
+00:44:59.016 --> 00:45:01.906 A:middle
+to the App Extension
+Programming Guide or talk
+
+00:45:02.016 --> 00:45:04.656 A:middle
+to our Evangelist, Curt Rothert.
+
+00:45:06.916 --> 00:45:07.916 A:middle
+Thanks.
+
+00:45:09.516 --> 00:45:12.500 A:middle
 [ Applause ]
 
