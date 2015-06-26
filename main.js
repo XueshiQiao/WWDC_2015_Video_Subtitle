@@ -6,6 +6,7 @@ var async = require('async');
 var request = require('request');
 var fx = require('fs-extra');
 var fs = require('fs');
+var sutil = require('./subtitle_util');
 
 var videoLinksFile = "WWDC2015_links.txt";
 var subtitlesFolderForHD = "subtitles/HD/";
@@ -110,6 +111,9 @@ async.waterfall([
                                 //remove webvtt file header, they're useless
                                 return line.indexOf("WEBVTT") !== 0 && line.indexOf("X-TIMESTAMP-MAP") !== 0;
                             });
+
+                            webvttFilesLines = sutil.webvttLinesToSrtLines(webvttFilesLines);
+
 
                             //save to local FS
                             fx.outputFile(videoInfo.subtitleNameForHD, webvttFilesLines.join("\n"), function (err) {
