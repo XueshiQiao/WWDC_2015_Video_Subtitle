@@ -193,166 +193,114 @@ HTML/JS/CSS编辑的内容.
 
 00:03:17.736 --> 00:03:20.226 A:middle
 你还可以修改其中的导航或者阻止它们跳转.
-You can modify navigations
-or outright block them.
 
 00:03:20.926 --> 00:03:23.056 A:middle
 你甚至能在里边自定义UI.
-And it's up to you to add
-your own user interface.
 
 00:03:23.716 --> 00:03:27.556 A:middle
 后退/前进按钮, 通信进度条... 诸如此类.
-Back, forward buttons,
-communicate progress, et cetera.
 
 00:03:28.256 --> 00:03:33.856 A:middle
 同时, 在新的iOS 9和El Capitan(10.11新系统)中, 
-And new on iOS 9 and OS X
-El Capitan we've heard your
 
 00:03:33.856 --> 00:03:36.416 A:middle
 我们听取并吸收了童鞋们的反馈意见, 
-feedback and we've
-incorporated some of the pieces
 
 00:03:36.486 --> 00:03:38.406 A:middle
 补足了一些WKWebView所缺失的地方.
-of WKWebView that were missing.
 
 00:03:40.056 --> 00:03:43.946 A:middle
 首先, 你可以安全地加载文件了(loadFileURLs).
-First and foremost, you can
-securely loadFileURLs now.
 
 00:03:45.516 --> 00:03:50.546 A:middle
 [ 鼓掌 ]
-[ Applause ]
 
 00:03:51.046 --> 00:03:52.306 A:middle
 你也可以加载数据了(loadData), 
-&gt;&gt; RICKY MONDELLO:
-You can also loadData,
 
 00:03:52.306 --> 00:03:55.156 A:middle
 例如你期望的HTML文本串.
-say literal HTML string
-that you wanted this way.
 
 00:03:55.806 --> 00:03:57.126 A:middle
 没必要去旋转加速(spin up)服务器.
-No need to spin up a server.
 
 00:03:57.426 --> 00:04:01.906 A:middle
 如你所愿, 你也可以设置自定义代理了(customUserAgent).
-And if you like, you can
-set your own customUserAgent
 
 00:04:02.896 --> 00:04:03.296 A:middle
 [ 鼓掌 ]
-string [applause].
 
 00:04:07.966 --> 00:04:11.206 A:middle
 我们还提供了一个新的API, 用于管理网页存储中
-We've also added a new API to
-manage the data that is stored
 
 00:04:11.206 --> 00:04:14.526 A:middle
 cookies/caches或其它类型的数据.
-by websites like cookies
-and caches and other stuff.
 
 00:04:14.616 --> 00:04:17.896 A:middle
 它叫WKWebsiteDataStore.
-And it's called
-WKWebsiteDataStore.
 
 00:04:18.486 --> 00:04:21.276 A:middle
-这是个可读/可写属性, 
-It's a read/write property
+这是你网页视图的WKWebViewConfiguration
 
 00:04:21.396 --> 00:04:23.886 A:middle
-属于你网页视图
-on your web view's
-WKWebViewConfiguration.
+中一个可读/可写的属性.
 
 00:04:24.896 --> 00:04:28.116 A:middle
-And with the data store you
-can remove data by its type
+使用这个数据存储, 你可以根据数据类型来删除数据, 
 
 00:04:28.816 --> 00:04:31.936 A:middle
-or you can do something like
-remove all data that was added
+也可以删除最近一个小时添加的所有数据.
 
 00:04:31.936 --> 00:04:33.806 A:middle
-in the last hour,
-which is pretty cool.
+这些特性都非常棒.
 
 00:04:34.406 --> 00:04:37.336 A:middle
-And because the property,
+由于提供了这个属性, 
 
 00:04:37.626 --> 00:04:41.526 A:middle
-the store on your configuration
-is writable you can replace it
+你的配置存储是可写的. 这意味着你可以使用一个
 
 00:04:41.526 --> 00:04:43.446 A:middle
-with a configuration
-that's non-persistent
+短期配置来替换它. 
 
 00:04:43.876 --> 00:04:45.036 A:middle
-which is exactly how you'd go
+这就是你实现这种
 
 00:04:45.036 --> 00:04:46.466 A:middle
-about implementing
-private browsing.
+私密浏览模式的秘诀.
 
 00:04:47.166 --> 00:04:53.366 A:middle
-So for web content that's
-in your app that you own,
+WKWebView是最适合你
 
 00:04:53.366 --> 00:04:55.426 A:middle
-you control, or you're
-customizing,
+拥有/控制/定制化
 
 00:04:55.986 --> 00:04:58.246 A:middle
-WKWebView is the right
-tool for the job.
+网页内容的工具.
 
 00:04:59.116 --> 00:05:03.936 A:middle
-And in iOS 9 and OS X El Capitan
-we've given you more flexibility
-
-
-
-00:04:59.116 --> 00:05:03.936 A:middle
-And in iOS 9 and OS X El Capitan
-we've given you more flexibility
+在iOS 9和El Capitan中, 我们给你提供了比以往
 
 00:05:03.936 --> 00:05:04.756 A:middle
-than ever before.
+更多的灵活性.
 
 00:05:04.756 --> 00:05:10.476 A:middle
-But if you've have been sitting
-here thinking: I don't need
+但如果你坐在这里想(静静:)): 能不能简单点,
 
 00:05:10.476 --> 00:05:12.356 A:middle
-that flexibility, I don't want
+傻瓜点, 我不需要这种灵活性,
 
 00:05:12.356 --> 00:05:14.236 A:middle
-to evaluate JavaScript
-against the page.
+我压根不需要JS来”搞”我的页面.
 
 00:05:14.886 --> 00:05:17.116 A:middle
-I don't need to modify
-navigations.
+我也不需要跳来跳去(像个二哈),
 
 00:05:17.276 --> 00:05:19.926 A:middle
-I don't want to wire up my
-own back and forward buttons,
+我更不想将我的后退和前进按钮弄得花里胡哨,
 
 00:05:20.766 --> 00:05:22.076 A:middle
-then the rest of
-this talk is for you.
+那么接下来的内容就是给这些童鞋准备的.
 
 00:05:25.836 --> 00:05:28.296 A:middle
 We're going to talk about
