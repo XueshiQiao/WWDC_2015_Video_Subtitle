@@ -1,3206 +1,4618 @@
+1
+00:00:28,556 --> 00:00:28,776
+>> ABHINAV PATHAK: Hello.
 
-00:00:28.556 --> 00:00:28.776 A:middle
-&gt;&gt; ABHINAV PATHAK: Hello.
 
-00:00:31.546 --> 00:00:32.206 A:middle
+2
+00:00:31,546 --> 00:00:32,206
 Hello, everyone.
 
-00:00:32.926 --> 00:00:33.506 A:middle
+
+3
+00:00:32,926 --> 00:00:33,506
 Good morning.
 
-00:00:34.396 --> 00:00:37.016 A:middle
+
+4
+00:00:34,396 --> 00:00:37,016
 Hope you are having
 a great WWDC so far.
 
-00:00:37.926 --> 00:00:40.516 A:middle
+
+5
+00:00:37,926 --> 00:00:40,516
 I'm Abhinav Pathak, along with
 my colleague, Pai-Han Huang,
 
-00:00:40.516 --> 00:00:43.126 A:middle
+
+6
+00:00:40,516 --> 00:00:43,126
 we are going to talk about
 debugging energy issues.
 
-00:00:44.226 --> 00:00:46.556 A:middle
+
+7
+00:00:44,226 --> 00:00:46,556
 We are going to show you the
 tools that we already have
 
-00:00:47.196 --> 00:00:50.946 A:middle
+
+8
+00:00:47,196 --> 00:00:50,946
 and the new tools we built
 this year specifically for iOS,
 
-00:00:51.556 --> 00:00:56.226 A:middle
+
+9
+00:00:51,556 --> 00:00:56,226
 using which you can find energy
 problems in your app and, two,
 
-00:00:56.406 --> 00:01:00.256 A:middle
+
+10
+00:00:56,406 --> 00:01:00,256
 fix them so that your
 customers really like your app.
 
 
-
-00:00:56.406 --> 00:01:00.256 A:middle
-fix them so that your
-customers really like your app.
-
-00:01:00.926 --> 00:01:01.396 A:middle
+11
+00:01:00,926 --> 00:01:01,396
 Let's begin.
 
-00:01:03.176 --> 00:01:04.245 A:middle
+
+12
+00:01:03,176 --> 00:01:04,245
 The red battery icon.
 
-00:01:04.336 --> 00:01:07.256 A:middle
+
+13
+00:01:04,336 --> 00:01:07,256
 How much we all hate it
 when it happens to us.
 
-00:01:08.456 --> 00:01:09.836 A:middle
+
+14
+00:01:08,456 --> 00:01:09,836
 Customers also hate this.
 
-00:01:11.266 --> 00:01:14.796 A:middle
+
+15
+00:01:11,266 --> 00:01:14,796
 Having a good battery
 life is really important
 
-00:01:14.796 --> 00:01:17.406 A:middle
+
+16
+00:01:14,796 --> 00:01:17,406
 to having an awesome
 user experience.
 
-00:01:18.586 --> 00:01:22.176 A:middle
+
+17
+00:01:18,586 --> 00:01:22,176
 Time and time again, it has
 come up that battery life is one
 
-00:01:22.176 --> 00:01:24.996 A:middle
+
+18
+00:01:22,176 --> 00:01:24,996
 of the most important
 feature that people want.
 
-00:01:26.436 --> 00:01:28.616 A:middle
+
+19
+00:01:26,436 --> 00:01:28,616
 At Apple, we take great strides
 
-00:01:28.936 --> 00:01:32.066 A:middle
+
+20
+00:01:28,936 --> 00:01:32,066
 to ensure customers get a
 good battery life experience.
 
-00:01:32.916 --> 00:01:37.576 A:middle
+
+21
+00:01:32,916 --> 00:01:37,576
 However, the apps the
 customer run have equal
 
-00:01:37.576 --> 00:01:41.396 A:middle
+
+22
+00:01:37,576 --> 00:01:41,396
 or usually more say in
 how the energy is drained
 
-00:01:41.396 --> 00:01:41.946 A:middle
+
+23
+00:01:41,396 --> 00:01:41,946
 from their device.
 
-00:01:43.476 --> 00:01:47.356 A:middle
+
+24
+00:01:43,476 --> 00:01:47,356
 To help our customers understand
 which app is draining battery,
 
-00:01:47.356 --> 00:01:50.716 A:middle
+
+25
+00:01:47,356 --> 00:01:50,716
 which app is heavy in terms of
 energy, a couple of years ago
 
-00:01:51.126 --> 00:01:56.016 A:middle
+
+26
+00:01:51,126 --> 00:01:56,016
 on OS X side, we had an activity
 monitor monitor energy impact,
 
-00:01:56.566 --> 00:01:59.206 A:middle
+
+27
+00:01:56,566 --> 00:01:59,206
 where you can see, for
 each and every app,
 
-00:01:59.906 --> 00:02:02.896 A:middle
+
+28
+00:01:59,906 --> 00:02:02,896
 what is the instantaneous
 impact and what is the impact
 
 
-
-00:01:59.906 --> 00:02:02.896 A:middle
-what is the instantaneous
-impact and what is the impact
-
-00:02:02.946 --> 00:02:05.626 A:middle
+29
+00:02:02,946 --> 00:02:05,626
 for a period of time so
 that users can get, hey,
 
-00:02:05.626 --> 00:02:06.696 A:middle
+
+30
+00:02:05,626 --> 00:02:06,696
 what happened on their device?
 
-00:02:07.996 --> 00:02:11.926 A:middle
+
+31
+00:02:07,996 --> 00:02:11,926
 On iOS 8, last year we
 introduced battery usage UI,
 
-00:02:11.926 --> 00:02:17.186 A:middle
+
+32
+00:02:11,926 --> 00:02:17,186
 a customer-facing UI, where they
 can go and see in last 24 hours,
 
-00:02:17.446 --> 00:02:20.606 A:middle
+
+33
+00:02:17,446 --> 00:02:20,606
 and last 7 days, what is the
 proportion of energy breakdown
 
-00:02:20.796 --> 00:02:23.646 A:middle
+
+34
+00:02:20,796 --> 00:02:23,646
 in different application
 that is they have used.
 
-00:02:24.256 --> 00:02:28.896 A:middle
+
+35
+00:02:24,256 --> 00:02:28,896
 An app coming at the top could
 have very legitimate reasons,
 
-00:02:28.896 --> 00:02:31.796 A:middle
+
+36
+00:02:28,896 --> 00:02:31,796
 hey, I love this app,
 I use it all the time.
 
-00:02:32.986 --> 00:02:35.886 A:middle
+
+37
+00:02:32,986 --> 00:02:35,886
 To help customers understand
 what is the factor here,
 
-00:02:36.496 --> 00:02:41.176 A:middle
+
+38
+00:02:36,496 --> 00:02:41,176
 this year we have included a
 single toggle at the top of it
 
-00:02:41.236 --> 00:02:44.506 A:middle
+
+39
+00:02:41,236 --> 00:02:44,506
 where they can toggle and
 see how much usage there is,
 
-00:02:45.096 --> 00:02:46.996 A:middle
+
+40
+00:02:45,096 --> 00:02:46,996
 how much screen time
 the app got,
 
-00:02:46.996 --> 00:02:49.176 A:middle
+
+41
+00:02:46,996 --> 00:02:49,176
 and how much it ran
 in the background.
 
-00:02:49.576 --> 00:02:52.556 A:middle
+
+42
+00:02:49,576 --> 00:02:52,556
 And then they can assess
 hey, I used it more, or hey,
 
-00:02:52.556 --> 00:02:56.236 A:middle
+
+43
+00:02:52,556 --> 00:02:56,236
 this app consumes
 a lot of energy.
 
-00:02:56.536 --> 00:03:00.226 A:middle
+
+44
+00:02:56,536 --> 00:03:00,226
 This talk is about if your
 app is coming on the top
 
 
-
-00:02:56.536 --> 00:03:00.226 A:middle
-This talk is about if your
-app is coming on the top
-
-00:03:00.226 --> 00:03:02.186 A:middle
+45
+00:03:00,226 --> 00:03:02,186
 of this list, how you can get it
 
-00:03:02.186 --> 00:03:05.376 A:middle
+
+46
+00:03:02,186 --> 00:03:05,376
 down while maintaining
 the same utilization
 
-00:03:05.716 --> 00:03:07.856 A:middle
+
+47
+00:03:05,716 --> 00:03:07,856
 or giving the same
 utility to your user.
 
-00:03:08.666 --> 00:03:11.256 A:middle
+
+48
+00:03:08,666 --> 00:03:11,256
 This talk is also about
 people who usually come down,
 
-00:03:11.256 --> 00:03:12.836 A:middle
+
+49
+00:03:11,256 --> 00:03:12,836
 how they can further come down
 
-00:03:13.146 --> 00:03:15.086 A:middle
+
+50
+00:03:13,146 --> 00:03:15,086
 and get a good customer
 experience.
 
-00:03:16.716 --> 00:03:19.916 A:middle
+
+51
+00:03:16,716 --> 00:03:19,916
 To give a high-level overview,
 we are going to quickly go
 
-00:03:19.916 --> 00:03:21.906 A:middle
+
+52
+00:03:19,916 --> 00:03:21,906
 through energy fundamentals
 and best practices.
 
-00:03:21.906 --> 00:03:24.266 A:middle
+
+53
+00:03:21,906 --> 00:03:24,266
 We are going to summarize the
 talk we had in the morning.
 
-00:03:24.266 --> 00:03:28.056 A:middle
+
+54
+00:03:24,266 --> 00:03:28,056
 We are going to show you the
 energy debugging workflow
 
-00:03:28.056 --> 00:03:31.236 A:middle
+
+55
+00:03:28,056 --> 00:03:31,236
 and the tools we have
 on how to debug energy.
 
-00:03:31.926 --> 00:03:33.426 A:middle
+
+56
+00:03:31,926 --> 00:03:33,426
 We are going to have a demo
 
-00:03:33.666 --> 00:03:36.786 A:middle
+
+57
+00:03:33,666 --> 00:03:36,786
 where we will fix energy
 problems in a sample app
 
-00:03:36.786 --> 00:03:39.386 A:middle
+
+58
+00:03:36,786 --> 00:03:39,386
 that we have built
 specifically for this talk
 
-00:03:39.386 --> 00:03:42.576 A:middle
+
+59
+00:03:39,386 --> 00:03:42,576
 and show you how easy
 it is to go ahead
 
-00:03:42.576 --> 00:03:49.316 A:middle
+
+60
+00:03:42,576 --> 00:03:49,316
 and fix energy problems, and
 then we will close this talk.
 
-00:03:49.496 --> 00:03:50.126 A:middle
+
+61
+00:03:49,496 --> 00:03:50,126
 Very simple.
 
-00:03:50.306 --> 00:03:51.226 A:middle
+
+62
+00:03:50,306 --> 00:03:51,226
 Everybody knows this.
 
-00:03:51.536 --> 00:03:52.806 A:middle
+
+63
+00:03:51,536 --> 00:03:52,806
 Energy 101.
 
-00:03:52.806 --> 00:03:54.606 A:middle
+
+64
+00:03:52,806 --> 00:03:54,606
 Energy is equal to
 power times time.
 
-00:03:55.256 --> 00:03:56.676 A:middle
+
+65
+00:03:55,256 --> 00:03:56,676
 What we are seeing
 here is a graph,
 
-00:03:57.076 --> 00:03:59.266 A:middle
+
+66
+00:03:57,076 --> 00:03:59,266
 X-axis is time, Y-axis is power.
 
-00:03:59.266 --> 00:04:01.316 A:middle
+
+67
+00:03:59,266 --> 00:04:01,316
 It's a waveform of
 an application usage.
 
 
-
-00:03:59.266 --> 00:04:01.316 A:middle
-It's a waveform of
-an application usage.
-
-00:04:01.626 --> 00:04:02.176 A:middle
+68
+00:04:01,626 --> 00:04:02,176
 What happened?
 
-00:04:02.516 --> 00:04:04.936 A:middle
+
+69
+00:04:02,516 --> 00:04:04,936
 Let's say a user launches an
 app, a bunch of activities,
 
-00:04:05.526 --> 00:04:07.656 A:middle
+
+70
+00:04:05,526 --> 00:04:07,656
 backgrounded the app, and
 the app got suspended.
 
-00:04:08.766 --> 00:04:11.846 A:middle
+
+71
+00:04:08,766 --> 00:04:11,846
 The single most important
 point here is the entire area
 
-00:04:11.846 --> 00:04:14.646 A:middle
+
+72
+00:04:11,846 --> 00:04:14,646
 under the graph is
 the energy consumption
 
-00:04:14.896 --> 00:04:17.396 A:middle
+
+73
+00:04:14,896 --> 00:04:17,396
 of this particular app.
 
-00:04:18.336 --> 00:04:20.396 A:middle
+
+74
+00:04:18,336 --> 00:04:20,396
 Energy is dictated
 by power and time,
 
-00:04:20.875 --> 00:04:22.366 A:middle
+
+75
+00:04:20,875 --> 00:04:22,366
 and to illustrate
 the point further,
 
-00:04:22.666 --> 00:04:26.956 A:middle
+
+76
+00:04:22,666 --> 00:04:26,956
 if we take two rectangles here,
 they are differing in terms
 
-00:04:26.956 --> 00:04:28.946 A:middle
+
+77
+00:04:26,956 --> 00:04:28,946
 of how much power they
 consume, differing in terms
 
-00:04:28.946 --> 00:04:31.766 A:middle
+
+78
+00:04:28,946 --> 00:04:31,766
 of how much time they consume,
 but they are equal energy wise.
 
-00:04:32.416 --> 00:04:39.136 A:middle
+
+79
+00:04:32,416 --> 00:04:39,136
 Second concept, there's
 something called fixed cost,
 
-00:04:39.186 --> 00:04:40.556 A:middle
+
+80
+00:04:39,186 --> 00:04:40,556
 there's something
 called dynamic cost.
 
-00:04:40.686 --> 00:04:44.256 A:middle
+
+81
+00:04:40,686 --> 00:04:44,256
 A lot of hardware components
 we have in our systems,
 
-00:04:44.526 --> 00:04:47.736 A:middle
+
+82
+00:04:44,526 --> 00:04:47,736
 if you have to use them, we have
 to first bring them into a state
 
-00:04:47.736 --> 00:04:49.536 A:middle
+
+83
+00:04:47,736 --> 00:04:49,536
 where they can start
 serving your requests.
 
-00:04:50.476 --> 00:04:53.876 A:middle
+
+84
+00:04:50,476 --> 00:04:53,876
 These states are very high
 energy consumption in terms
 
-00:04:54.076 --> 00:04:55.326 A:middle
+
+85
+00:04:54,076 --> 00:04:55,326
 of -- compared to
 -- the sleep states.
 
-00:04:55.816 --> 00:04:58.626 A:middle
+
+86
+00:04:55,816 --> 00:04:58,626
 Once they are brought up, they
 do the work that you asked it
 
-00:04:58.686 --> 00:05:02.616 A:middle
+
+87
+00:04:58,686 --> 00:05:02,616
 to do, and then we keep them in
 that state in anticipation of,
 
 
-
-00:04:58.686 --> 00:05:02.616 A:middle
-to do, and then we keep them in
-that state in anticipation of,
-
-00:05:02.896 --> 00:05:04.516 A:middle
+88
+00:05:02,896 --> 00:05:04,516
 you know, further
 work is going to come.
 
-00:05:04.616 --> 00:05:06.266 A:middle
+
+89
+00:05:04,616 --> 00:05:06,266
 Once we see there's
 no work coming up,
 
-00:05:06.436 --> 00:05:10.686 A:middle
+
+90
+00:05:06,436 --> 00:05:10,686
 we quiet them down,
 let them go to sleep.
 
-00:05:10.806 --> 00:05:14.006 A:middle
+
+91
+00:05:10,806 --> 00:05:14,006
 Fixed cost can be
 very, very expensive,
 
-00:05:14.446 --> 00:05:16.556 A:middle
+
+92
+00:05:14,446 --> 00:05:16,556
 and we will see throughout
 this talk how we will go
 
-00:05:16.556 --> 00:05:19.246 A:middle
+
+93
+00:05:16,556 --> 00:05:19,246
 after this fixed cost
 whenever it starts impacting
 
-00:05:19.596 --> 00:05:20.216 A:middle
+
+94
+00:05:19,596 --> 00:05:20,216
 your application.
 
-00:05:20.796 --> 00:05:25.016 A:middle
+
+95
+00:05:20,796 --> 00:05:25,016
 When it comes down to
 reducing energy usage,
 
-00:05:25.016 --> 00:05:28.206 A:middle
+
+96
+00:05:25,016 --> 00:05:28,206
 there are very simple three
 rules that you need to follow.
 
-00:05:28.796 --> 00:05:30.686 A:middle
+
+97
+00:05:28,796 --> 00:05:30,686
 First rule, do it never.
 
-00:05:30.686 --> 00:05:34.826 A:middle
+
+98
+00:05:30,686 --> 00:05:34,826
 Does a customer really
 need that work to be done?
 
-00:05:35.476 --> 00:05:37.716 A:middle
+
+99
+00:05:35,476 --> 00:05:37,716
 If you don't do it, fixed
 cost, dynamic cost, energy,
 
-00:05:37.716 --> 00:05:39.126 A:middle
+
+100
+00:05:37,716 --> 00:05:39,126
 power time -- all the
 things we have talked --
 
-00:05:39.126 --> 00:05:40.306 A:middle
+
+101
+00:05:39,126 --> 00:05:40,306
 is a grand total of zero.
 
-00:05:41.156 --> 00:05:45.406 A:middle
+
+102
+00:05:41,156 --> 00:05:45,406
 Awesome. If you need
 to do it, do it less.
 
-00:05:45.796 --> 00:05:48.496 A:middle
+
+103
+00:05:45,796 --> 00:05:48,496
 What is the least amount of work
 
-00:05:48.496 --> 00:05:50.086 A:middle
+
+104
+00:05:48,496 --> 00:05:50,086
 to satisfy the customer's
 request?
 
-00:05:50.466 --> 00:05:54.966 A:middle
+
+105
+00:05:50,466 --> 00:05:54,966
 Next thing, do it
 at a better time.
 
-00:05:54.996 --> 00:05:57.386 A:middle
+
+106
+00:05:54,996 --> 00:05:57,386
 A customer is out in the
 wild, taking photographs.
 
-00:05:57.416 --> 00:05:59.096 A:middle
+
+107
+00:05:57,416 --> 00:05:59,096
 Do I need to upload it
 to the server right now?
 
-00:05:59.656 --> 00:06:01.166 A:middle
+
+108
+00:05:59,656 --> 00:06:01,166
 Have some tolerance, maybe
 
 
-
-00:05:59.656 --> 00:06:01.166 A:middle
-Have some tolerance, maybe
-
-00:06:01.166 --> 00:06:03.176 A:middle
+109
+00:06:01,166 --> 00:06:03,176
 when a user is connected
 to a power outlet.
 
-00:06:03.966 --> 00:06:07.166 A:middle
+
+110
+00:06:03,966 --> 00:06:07,166
 Third, do it efficiently.
 
-00:06:07.246 --> 00:06:09.606 A:middle
+
+111
+00:06:07,246 --> 00:06:09,606
 What is the best
 efficient algorithm
 
-00:06:09.606 --> 00:06:12.286 A:middle
+
+112
+00:06:09,606 --> 00:06:12,286
 or the best thing I can
 do to serve this request?
 
-00:06:12.286 --> 00:06:15.546 A:middle
+
+113
+00:06:12,286 --> 00:06:15,546
 We will see how these things
 come back again and again
 
-00:06:15.836 --> 00:06:20.226 A:middle
+
+114
+00:06:15,836 --> 00:06:20,226
 in different parts of the talk.
 
-00:06:20.786 --> 00:06:24.186 A:middle
+
+115
+00:06:20,786 --> 00:06:24,186
 To jump in the energy debugging
 workflow and tools we have,
 
-00:06:24.916 --> 00:06:27.956 A:middle
+
+116
+00:06:24,916 --> 00:06:27,956
 let's look at how does an energy
 debugging workflow look like?
 
-00:06:28.156 --> 00:06:30.466 A:middle
+
+117
+00:06:28,156 --> 00:06:30,466
 It's very similar to normal
 software engineering practices.
 
-00:06:30.876 --> 00:06:33.076 A:middle
+
+118
+00:06:30,876 --> 00:06:33,076
 What you do: you
 write code and build.
 
-00:06:34.156 --> 00:06:36.356 A:middle
+
+119
+00:06:34,156 --> 00:06:36,356
 You run it on a very
 simple debugger which tries
 
-00:06:36.356 --> 00:06:38.826 A:middle
+
+120
+00:06:36,356 --> 00:06:38,826
 to show you what's the
 high-level problems
 
-00:06:38.826 --> 00:06:39.366 A:middle
+
+121
+00:06:38,826 --> 00:06:39,366
 in your code.
 
-00:06:39.846 --> 00:06:42.096 A:middle
+
+122
+00:06:39,846 --> 00:06:42,096
 A lot of problems you
 can easily identify,
 
-00:06:42.096 --> 00:06:43.536 A:middle
+
+123
+00:06:42,096 --> 00:06:43,536
 fix, and you run it again.
 
-00:06:44.966 --> 00:06:47.846 A:middle
+
+124
+00:06:44,966 --> 00:06:47,846
 Some of the problems, though,
 are hard, so you go ahead
 
-00:06:47.846 --> 00:06:50.986 A:middle
+
+125
+00:06:47,846 --> 00:06:50,986
 and say let me get a
 focused debugger, you know?
 
-00:06:51.116 --> 00:06:52.246 A:middle
+
+126
+00:06:51,116 --> 00:06:52,246
 Hey, I have a memory issue.
 
-00:06:52.246 --> 00:06:55.286 A:middle
+
+127
+00:06:52,246 --> 00:06:55,286
 Let me get a focused tool only
 on memory that can pinpoint
 
-00:06:55.286 --> 00:06:58.766 A:middle
+
+128
+00:06:55,286 --> 00:06:58,766
 in my app exact line of the
 code, where is the problem?
 
-00:06:59.926 --> 00:07:01.106 A:middle
+
+129
+00:06:59,926 --> 00:07:01,106
 And once you are
 done with all this,
 
 
-
-00:06:59.926 --> 00:07:01.106 A:middle
-And once you are
-done with all this,
-
-00:07:01.466 --> 00:07:04.046 A:middle
+130
+00:07:01,466 --> 00:07:04,046
 you ship it to your customers
 and your customers use it.
 
-00:07:04.696 --> 00:07:08.016 A:middle
+
+131
+00:07:04,696 --> 00:07:08,016
 On OS X side, we have
 Xcode, where we write
 
-00:07:08.016 --> 00:07:10.356 A:middle
+
+132
+00:07:08,016 --> 00:07:10,356
 and build your application.
 
-00:07:11.076 --> 00:07:14.626 A:middle
+
+133
+00:07:11,076 --> 00:07:14,626
 As part of general
 debugger, within Xcode,
 
-00:07:14.626 --> 00:07:16.246 A:middle
+
+134
+00:07:14,626 --> 00:07:16,246
 there are energy
 debugging tools,
 
-00:07:16.246 --> 00:07:17.516 A:middle
+
+135
+00:07:16,246 --> 00:07:17,516
 which we are going
 to talk about.
 
-00:07:18.116 --> 00:07:21.616 A:middle
+
+136
+00:07:18,116 --> 00:07:21,616
 These show primarily hints
 of how your app is behaving.
 
-00:07:22.176 --> 00:07:26.416 A:middle
+
+137
+00:07:22,176 --> 00:07:26,416
 As part of instruments,
 we have focus tools.
 
-00:07:26.416 --> 00:07:28.026 A:middle
+
+138
+00:07:26,416 --> 00:07:28,026
 Once you have identified, hey,
 
-00:07:28.026 --> 00:07:29.906 A:middle
+
+139
+00:07:28,026 --> 00:07:29,906
 this part of the
 system is a problem,
 
-00:07:29.906 --> 00:07:31.746 A:middle
+
+140
+00:07:29,906 --> 00:07:31,746
 let me go ahead and fix this.
 
-00:07:31.996 --> 00:07:34.546 A:middle
+
+141
+00:07:31,996 --> 00:07:34,546
 And customers, as we talked
 about, they have energy impact,
 
-00:07:34.546 --> 00:07:37.076 A:middle
+
+142
+00:07:34,546 --> 00:07:37,076
 and they can go ahead
 and look at it.
 
-00:07:37.796 --> 00:07:39.086 A:middle
+
+143
+00:07:37,796 --> 00:07:39,086
 Before we jump into the tools,
 
-00:07:39.556 --> 00:07:42.346 A:middle
+
+144
+00:07:39,556 --> 00:07:42,346
 let's look at energy
 debugging priorities on OS X.
 
-00:07:42.936 --> 00:07:45.076 A:middle
+
+145
+00:07:42,936 --> 00:07:45,076
 The reason is the
 tools are very focused
 
-00:07:45.076 --> 00:07:47.646 A:middle
+
+146
+00:07:45,076 --> 00:07:47,646
 on energy debugging priority
 because they point you
 
-00:07:47.646 --> 00:07:52.606 A:middle
+
+147
+00:07:47,646 --> 00:07:52,606
 to exactly the location where
 you need to fix your problem.
 
-00:07:52.606 --> 00:07:58.526 A:middle
+
+148
+00:07:52,606 --> 00:07:58,526
 Priorities on OS X
 are the CPU and GPU.
 
-00:07:59.546 --> 00:08:02.046 A:middle
+
+149
+00:07:59,546 --> 00:08:02,046
 They have a very,
 very high fixed cost.
 
 
-
-00:07:59.546 --> 00:08:02.046 A:middle
-They have a very,
-very high fixed cost.
-
-00:08:03.086 --> 00:08:05.986 A:middle
+150
+00:08:03,086 --> 00:08:05,986
 To bring it to a state
 where they can serve you
 
-00:08:05.986 --> 00:08:08.626 A:middle
+
+151
+00:08:05,986 --> 00:08:08,626
 or your request in
 the idle state,
 
-00:08:08.846 --> 00:08:12.026 A:middle
+
+152
+00:08:08,846 --> 00:08:12,026
 it is ten times the power
 consumption of as compared
 
-00:08:12.026 --> 00:08:13.226 A:middle
+
+153
+00:08:12,026 --> 00:08:13,226
 to when they are
 in the sleep state.
 
-00:08:14.516 --> 00:08:17.356 A:middle
+
+154
+00:08:14,516 --> 00:08:17,356
 Once they are in the idle state,
 if you use CPU for 1 percent,
 
-00:08:17.646 --> 00:08:20.956 A:middle
+
+155
+00:08:17,646 --> 00:08:20,956
 that is 10 percent more on
 top of idle power consumption.
 
-00:08:21.586 --> 00:08:23.146 A:middle
+
+156
+00:08:21,586 --> 00:08:23,146
 And from then on,
 it goes exponential.
 
-00:08:23.406 --> 00:08:27.506 A:middle
+
+157
+00:08:23,406 --> 00:08:27,506
 10 percent CPU, two times idle;
 100 percent CPU, 100 times idle.
 
-00:08:28.946 --> 00:08:30.186 A:middle
+
+158
+00:08:28,946 --> 00:08:30,186
 Very simple rule here.
 
-00:08:30.316 --> 00:08:33.196 A:middle
+
+159
+00:08:30,316 --> 00:08:33,196
 Do not wake the CPU up
 if you do not need to.
 
-00:08:33.416 --> 00:08:34.535 A:middle
+
+160
+00:08:33,416 --> 00:08:34,535
 Let the giant bear sleep.
 
-00:08:34.535 --> 00:08:36.246 A:middle
+
+161
+00:08:34,535 --> 00:08:36,246
 Don't poke it.
 
-00:08:37.785 --> 00:08:40.966 A:middle
+
+162
+00:08:37,785 --> 00:08:40,966
 The tool we have in Xcode,
 I call it energy gauges,
 
-00:08:41.416 --> 00:08:44.726 A:middle
+
+163
+00:08:41,416 --> 00:08:44,726
 it prints you an energy report
 that looks something like this.
 
-00:08:44.906 --> 00:08:45.846 A:middle
+
+164
+00:08:44,906 --> 00:08:45,846
 How do you get there?
 
-00:08:46.136 --> 00:08:48.076 A:middle
+
+165
+00:08:46,136 --> 00:08:48,076
 You click -- once you are
 running your application,
 
-00:08:48.166 --> 00:08:50.356 A:middle
+
+166
+00:08:48,166 --> 00:08:50,356
 click on the debug
 analysis part.
 
-00:08:50.486 --> 00:08:52.396 A:middle
+
+167
+00:08:50,486 --> 00:08:52,396
 Once you click there, you
 see a bunch of gauges.
 
-00:08:52.836 --> 00:08:54.336 A:middle
+
+168
+00:08:52,836 --> 00:08:54,336
 Click on the energy
 impact gauge.
 
-00:08:54.376 --> 00:08:55.756 A:middle
+
+169
+00:08:54,376 --> 00:08:55,756
 You will see the report.
 
-00:08:56.666 --> 00:09:00.316 A:middle
+
+170
+00:08:56,666 --> 00:09:00,316
 What do you see in the report?
 
 
-
-00:08:56.666 --> 00:09:00.316 A:middle
-What do you see in the report?
-
-00:09:00.646 --> 00:09:06.356 A:middle
+171
+00:09:00,646 --> 00:09:06,356
 So primarily, you'll see if you
 are being a bad citizen of OS X,
 
-00:09:07.026 --> 00:09:11.076 A:middle
+
+172
+00:09:07,026 --> 00:09:11,076
 basically, you have -- if
 you are using high CPU.
 
-00:09:11.986 --> 00:09:13.926 A:middle
+
+173
+00:09:11,986 --> 00:09:13,926
 If you are preventing your --
 
-00:09:14.466 --> 00:09:17.826 A:middle
+
+174
+00:09:14,466 --> 00:09:17,826
 your application is in
 background, user is not looking
 
-00:09:17.826 --> 00:09:21.326 A:middle
+
+175
+00:09:17,826 --> 00:09:21,326
 at it, system will try to put
 you in App Nap, which is a kind
 
-00:09:21.326 --> 00:09:23.696 A:middle
+
+176
+00:09:21,326 --> 00:09:23,696
 of background suspend, and
 you are preventing system
 
-00:09:23.696 --> 00:09:24.256 A:middle
+
+177
+00:09:23,696 --> 00:09:24,256
 to do that.
 
-00:09:24.656 --> 00:09:26.226 A:middle
+
+178
+00:09:24,656 --> 00:09:26,226
 You are not actively
 serving any request,
 
-00:09:26.486 --> 00:09:27.746 A:middle
+
+179
+00:09:26,486 --> 00:09:27,746
 but you are burning
 a lot of energy.
 
-00:09:28.836 --> 00:09:29.586 A:middle
+
+180
+00:09:28,836 --> 00:09:29,586
 Idle prevention.
 
-00:09:29.586 --> 00:09:31.666 A:middle
+
+181
+00:09:29,586 --> 00:09:31,666
 You are not letting the CPU
 to go to into idle state.
 
-00:09:31.666 --> 00:09:35.176 A:middle
+
+182
+00:09:31,666 --> 00:09:35,176
 If it cannot go into idle, it
 cannot go into sleep state.
 
-00:09:35.176 --> 00:09:39.026 A:middle
+
+183
+00:09:35,176 --> 00:09:39,026
 Once gone into sleep state,
 the CPU wake overhead says hey,
 
-00:09:39.026 --> 00:09:42.746 A:middle
+
+184
+00:09:39,026 --> 00:09:42,746
 you are responsible
 to bring this guy up.
 
-00:09:43.816 --> 00:09:45.626 A:middle
+
+185
+00:09:43,816 --> 00:09:45,626
 Once you have figured
 out high level
 
-00:09:45.656 --> 00:09:46.946 A:middle
+
+186
+00:09:45,656 --> 00:09:46,946
 where the problem comes in,
 
-00:09:47.246 --> 00:09:50.426 A:middle
+
+187
+00:09:47,246 --> 00:09:50,426
 what you can do is just
 underneath the report,
 
-00:09:50.426 --> 00:09:51.896 A:middle
+
+188
+00:09:50,426 --> 00:09:51,896
 you have first of
 all the description
 
-00:09:51.896 --> 00:09:53.236 A:middle
+
+189
+00:09:51,896 --> 00:09:53,236
 of the things we
 just talked about,
 
-00:09:53.686 --> 00:09:56.976 A:middle
+
+190
+00:09:53,686 --> 00:09:56,976
 but you have these buttons which
 you can jump into instruments,
 
-00:09:57.436 --> 00:09:59.936 A:middle
+
+191
+00:09:57,436 --> 00:09:59,936
 and these tools are
 specifically designed for each
 
-00:09:59.936 --> 00:10:03.016 A:middle
+
+192
+00:09:59,936 --> 00:10:03,016
 and every area, and they can,
 you know, help you pinpoint,
 
 
-
-00:09:59.936 --> 00:10:03.016 A:middle
-and every area, and they can,
-you know, help you pinpoint,
-
-00:10:03.016 --> 00:10:05.996 A:middle
+193
+00:10:03,016 --> 00:10:05,996
 hey, which line of code
 is actually causing high
 
-00:10:05.996 --> 00:10:07.086 A:middle
+
+194
+00:10:05,996 --> 00:10:07,086
 CPU utilization?
 
-00:10:07.466 --> 00:10:09.806 A:middle
+
+195
+00:10:07,466 --> 00:10:09,806
 Which line of code is
 causing the wake overhead?
 
-00:10:10.456 --> 00:10:14.476 A:middle
+
+196
+00:10:10,456 --> 00:10:14,476
 You can go ahead
 and debug your app.
 
-00:10:15.046 --> 00:10:17.716 A:middle
+
+197
+00:10:15,046 --> 00:10:17,716
 When it comes to principles
 of reducing energy on OS X,
 
-00:10:18.316 --> 00:10:21.136 A:middle
+
+198
+00:10:18,316 --> 00:10:21,136
 we come back to our three simple
 rules: do it never/do it less.
 
-00:10:21.836 --> 00:10:23.136 A:middle
+
+199
+00:10:21,836 --> 00:10:23,136
 You want to coalesce
 all the timers.
 
-00:10:23.396 --> 00:10:25.586 A:middle
+
+200
+00:10:23,396 --> 00:10:25,586
 You don't want to wake up
 the system again and again.
 
-00:10:26.226 --> 00:10:27.126 A:middle
+
+201
+00:10:26,226 --> 00:10:27,126
 Minimize CPU wakes.
 
-00:10:28.316 --> 00:10:29.376 A:middle
+
+202
+00:10:28,316 --> 00:10:29,376
 Do it at a better time.
 
-00:10:29.696 --> 00:10:32.756 A:middle
+
+203
+00:10:29,696 --> 00:10:32,756
 Use the background
 activity scheduler APIs,
 
-00:10:32.756 --> 00:10:35.016 A:middle
+
+204
+00:10:32,756 --> 00:10:35,016
 where you can specify
 a lot of parameters
 
-00:10:35.296 --> 00:10:37.196 A:middle
+
+205
+00:10:35,296 --> 00:10:37,196
 and let the system choose
 the right time for you.
 
-00:10:38.436 --> 00:10:41.636 A:middle
+
+206
+00:10:38,436 --> 00:10:41,636
 Do it efficiently, set
 the right work priorities,
 
-00:10:41.706 --> 00:10:43.736 A:middle
+
+207
+00:10:41,706 --> 00:10:43,736
 QoS work priorities,
 on your work queues.
 
-00:10:44.496 --> 00:10:45.486 A:middle
+
+208
+00:10:44,496 --> 00:10:45,486
 Program a computer algorithm.
 
-00:10:45.486 --> 00:10:55.096 A:middle
+
+209
+00:10:45,486 --> 00:10:55,096
 Moving on to iOS, CPU is still
 a dominant energy consumption.
 
-00:10:56.226 --> 00:10:59.276 A:middle
+
+210
+00:10:56,226 --> 00:10:59,276
 But given the fact that
 these devices are different
 
-00:10:59.346 --> 00:11:05.916 A:middle
+
+211
+00:10:59,346 --> 00:11:05,916
 than OS X devices, a few
 other things come into play.
 
 
-
-00:10:59.346 --> 00:11:05.916 A:middle
-than OS X devices, a few
-other things come into play.
-
-00:11:06.616 --> 00:11:09.486 A:middle
+212
+00:11:06,616 --> 00:11:09,486
 First of all, two of the
 peripheries, location
 
-00:11:09.636 --> 00:11:12.446 A:middle
+
+213
+00:11:09,636 --> 00:11:12,446
 and networking, can be
 equally costly as CPU
 
-00:11:12.576 --> 00:11:14.516 A:middle
+
+214
+00:11:12,576 --> 00:11:14,516
 if not more in some use cases.
 
-00:11:15.076 --> 00:11:19.686 A:middle
+
+215
+00:11:15,076 --> 00:11:19,686
 Next, when an app runs
 in the background,
 
-00:11:19.736 --> 00:11:23.106 A:middle
+
+216
+00:11:19,736 --> 00:11:23,106
 your app consumes all
 these three hardware
 
-00:11:23.326 --> 00:11:25.116 A:middle
+
+217
+00:11:23,326 --> 00:11:25,116
 and it consumes a lot of energy.
 
-00:11:25.476 --> 00:11:28.766 A:middle
+
+218
+00:11:25,476 --> 00:11:28,766
 You don't have the display
 energy, but still all the rest
 
-00:11:28.766 --> 00:11:31.046 A:middle
+
+219
+00:11:28,766 --> 00:11:31,046
 of components are huge in
 terms of energy consumption.
 
-00:11:31.916 --> 00:11:35.776 A:middle
+
+220
+00:11:31,916 --> 00:11:35,776
 So let's look at each
 of these one by one.
 
-00:11:35.986 --> 00:11:38.406 A:middle
+
+221
+00:11:35,986 --> 00:11:38,406
 Location energy usually
 acts like this.
 
-00:11:38.536 --> 00:11:40.016 A:middle
+
+222
+00:11:38,536 --> 00:11:40,016
 It's not very high in power.
 
-00:11:40.176 --> 00:11:42.516 A:middle
+
+223
+00:11:40,176 --> 00:11:42,516
 The power is data mined by
 which API you have called
 
-00:11:42.516 --> 00:11:45.006 A:middle
+
+224
+00:11:42,516 --> 00:11:45,006
 and what is the precision
 with which you are calling it.
 
-00:11:46.116 --> 00:11:47.266 A:middle
+
+225
+00:11:46,116 --> 00:11:47,266
 The time component is big,
 
-00:11:47.436 --> 00:11:49.636 A:middle
+
+226
+00:11:47,436 --> 00:11:49,636
 and that is how the
 energy becomes really huge.
 
-00:11:50.176 --> 00:11:54.956 A:middle
+
+227
+00:11:50,176 --> 00:11:54,956
 When it comes to fixing location
 issues, again, same principles:
 
-00:11:54.956 --> 00:11:57.746 A:middle
+
+228
+00:11:54,956 --> 00:11:57,746
 do it never, do continuous
 location only
 
-00:11:57.746 --> 00:11:59.176 A:middle
+
+229
+00:11:57,746 --> 00:11:59,176
 if you actually need it,
 
-00:11:59.176 --> 00:12:01.076 A:middle
+
+230
+00:11:59,176 --> 00:12:01,076
 it has actually been
 requested by the user.
 
 
-
-00:11:59.176 --> 00:12:01.076 A:middle
-it has actually been
-requested by the user.
-
-00:12:01.416 --> 00:12:03.856 A:middle
+231
+00:12:01,416 --> 00:12:03,856
 And please stop once
 you are done with it.
 
-00:12:03.906 --> 00:12:04.916 A:middle
+
+232
+00:12:03,906 --> 00:12:04,916
 Once you get the location,
 
-00:12:04.916 --> 00:12:08.096 A:middle
+
+233
+00:12:04,916 --> 00:12:08,096
 once your request is
 satisfied, just stop it.
 
-00:12:08.986 --> 00:12:10.666 A:middle
+
+234
+00:12:08,986 --> 00:12:10,666
 Next, do it efficiently.
 
-00:12:10.666 --> 00:12:12.256 A:middle
+
+235
+00:12:10,666 --> 00:12:12,256
 What is the best
 accuracy you need?
 
-00:12:12.256 --> 00:12:14.186 A:middle
+
+236
+00:12:12,256 --> 00:12:14,186
 Do you need to know
 exactly within three feet
 
-00:12:14.266 --> 00:12:17.656 A:middle
+
+237
+00:12:14,266 --> 00:12:17,656
 where the user is standing on
 earth or the city is good enough
 
-00:12:17.656 --> 00:12:19.386 A:middle
+
+238
+00:12:17,656 --> 00:12:19,386
 in predicting weather for it?
 
-00:12:20.336 --> 00:12:21.286 A:middle
+
+239
+00:12:20,336 --> 00:12:21,286
 What are you trying to do?
 
-00:12:21.836 --> 00:12:24.976 A:middle
+
+240
+00:12:21,836 --> 00:12:24,976
 We have went ahead in the
 location site and we said hey,
 
-00:12:25.236 --> 00:12:28.586 A:middle
+
+241
+00:12:25,236 --> 00:12:28,586
 there are a set of use cases
 where people want to have
 
-00:12:29.026 --> 00:12:31.826 A:middle
+
+242
+00:12:29,026 --> 00:12:31,826
 and for each of the use
 cases, we have designed APIs
 
-00:12:31.826 --> 00:12:35.906 A:middle
+
+243
+00:12:31,826 --> 00:12:35,906
 that help serve better
 the developers, you.
 
-00:12:36.756 --> 00:12:40.536 A:middle
+
+244
+00:12:36,756 --> 00:12:40,536
 Try to read on these APIs
 what actually you want
 
-00:12:40.536 --> 00:12:47.266 A:middle
+
+245
+00:12:40,536 --> 00:12:47,266
 and we'll do the energy
 management really nice for you.
 
-00:12:47.486 --> 00:12:49.356 A:middle
+
+246
+00:12:47,486 --> 00:12:49,356
 When it comes to networking,
 
-00:12:49.356 --> 00:12:51.836 A:middle
+
+247
+00:12:49,356 --> 00:12:51,836
 very similar principles:
 do it never.
 
-00:12:51.836 --> 00:12:52.746 A:middle
+
+248
+00:12:51,836 --> 00:12:52,746
 Cut down transfers.
 
-00:12:53.366 --> 00:12:55.186 A:middle
+
+249
+00:12:53,366 --> 00:12:55,186
 Can you cache, can you compress?
 
-00:12:55.326 --> 00:12:57.246 A:middle
+
+250
+00:12:55,326 --> 00:12:57,246
 Do you need the highest
 quality media
 
-00:12:57.246 --> 00:12:58.496 A:middle
+
+251
+00:12:57,246 --> 00:12:58,496
 on the smallest form factor?
 
 
-
-00:13:01.766 --> 00:13:02.806 A:middle
+252
+00:13:01,766 --> 00:13:02,806
 Can you do it at a better time?
 
-00:13:02.806 --> 00:13:03.966 A:middle
+
+253
+00:13:02,806 --> 00:13:03,966
 Can you consider tolerance?
 
-00:13:04.186 --> 00:13:05.256 A:middle
+
+254
+00:13:04,186 --> 00:13:05,256
 When is it needed?
 
-00:13:05.596 --> 00:13:07.746 A:middle
+
+255
+00:13:05,596 --> 00:13:07,746
 Can you mark it as
 a discretionary?
 
-00:13:08.186 --> 00:13:09.706 A:middle
+
+256
+00:13:08,186 --> 00:13:09,706
 The moment you mark
 it discretionary,
 
-00:13:09.706 --> 00:13:10.586 A:middle
+
+257
+00:13:09,706 --> 00:13:10,586
 the system takes over.
 
-00:13:10.936 --> 00:13:13.136 A:middle
+
+258
+00:13:10,936 --> 00:13:13,136
 You can specify, hey,
 in the next 6 hours
 
-00:13:13.136 --> 00:13:15.766 A:middle
+
+259
+00:13:13,136 --> 00:13:15,766
 or the next 12 hours, I
 need this to be uploaded
 
-00:13:15.766 --> 00:13:17.796 A:middle
+
+260
+00:13:15,766 --> 00:13:17,796
 or downloaded, and
 the system will figure
 
-00:13:17.796 --> 00:13:20.446 A:middle
+
+261
+00:13:17,796 --> 00:13:20,446
 out what's the best time,
 will do the activity for you,
 
-00:13:20.446 --> 00:13:24.106 A:middle
+
+262
+00:13:20,446 --> 00:13:24,106
 and once it's done, it will tell
 you hey, this activity is done.
 
-00:13:25.156 --> 00:13:26.656 A:middle
+
+263
+00:13:25,156 --> 00:13:26,656
 Do it more efficiently.
 
-00:13:27.176 --> 00:13:28.626 A:middle
+
+264
+00:13:27,176 --> 00:13:28,626
 Coalesce transfers.
 
-00:13:29.066 --> 00:13:30.696 A:middle
+
+265
+00:13:29,066 --> 00:13:30,696
 Let's take a look at an example.
 
-00:13:30.696 --> 00:13:31.866 A:middle
+
+266
+00:13:30,696 --> 00:13:31,866
 What do we mean by this?
 
-00:13:32.486 --> 00:13:35.116 A:middle
+
+267
+00:13:32,486 --> 00:13:35,116
 Let's say you have a requirement
 where you have to sync data
 
-00:13:35.116 --> 00:13:37.226 A:middle
+
+268
+00:13:35,116 --> 00:13:37,226
 to a server, user is
 using your app and have
 
-00:13:37.256 --> 00:13:40.646 A:middle
+
+269
+00:13:37,256 --> 00:13:40,646
 to periodically sync as it's
 being generated on the device.
 
-00:13:41.716 --> 00:13:42.646 A:middle
+
+270
+00:13:41,716 --> 00:13:42,646
 Very simple solution.
 
-00:13:43.556 --> 00:13:45.486 A:middle
+
+271
+00:13:43,556 --> 00:13:45,486
 As the data is getting generated
 
-00:13:45.486 --> 00:13:47.486 A:middle
+
+272
+00:13:45,486 --> 00:13:47,486
 on the device, just
 keep pushing it.
 
-00:13:48.616 --> 00:13:49.406 A:middle
+
+273
+00:13:48,616 --> 00:13:49,406
 What happens here?
 
-00:13:50.056 --> 00:13:53.556 A:middle
+
+274
+00:13:50,056 --> 00:13:53,556
 For every push, you bring the
 data up, you send your 2 bytes,
 
-00:13:53.556 --> 00:13:55.646 A:middle
+
+275
+00:13:53,556 --> 00:13:55,646
 10 bytes, 100 bytes, radio stays
 
-00:13:55.646 --> 00:13:57.356 A:middle
+
+276
+00:13:55,646 --> 00:13:57,356
 on for a long time,
 it goes to sleep.
 
-00:13:58.056 --> 00:13:59.516 A:middle
+
+277
+00:13:58,056 --> 00:13:59,516
 Next push, the same is repeated.
 
 
-
-00:14:01.256 --> 00:14:04.036 A:middle
+278
+00:14:01,256 --> 00:14:04,036
 The fixed cost is very
 high in that point.
 
-00:14:05.226 --> 00:14:05.906 A:middle
+
+279
+00:14:05,226 --> 00:14:05,906
 How do you fix it?
 
-00:14:06.596 --> 00:14:07.166 A:middle
+
+280
+00:14:06,596 --> 00:14:07,166
 Very simple.
 
-00:14:07.686 --> 00:14:08.866 A:middle
+
+281
+00:14:07,686 --> 00:14:08,866
 Coalesce all the transfers.
 
-00:14:09.276 --> 00:14:11.706 A:middle
+
+282
+00:14:09,276 --> 00:14:11,706
 Let the user interact with
 the device, build a state,
 
-00:14:12.066 --> 00:14:14.646 A:middle
+
+283
+00:14:12,066 --> 00:14:14,646
 and once in a while send
 the state to the cloud
 
-00:14:15.206 --> 00:14:18.886 A:middle
+
+284
+00:14:15,206 --> 00:14:18,886
 so that you pay the cost only
 once, the cost of fixed price.
 
-00:14:19.476 --> 00:14:25.446 A:middle
+
+285
+00:14:19,476 --> 00:14:25,446
 Moving to background,
 first thing,
 
-00:14:25.446 --> 00:14:29.726 A:middle
+
+286
+00:14:25,446 --> 00:14:29,726
 background when your app is
 running at the background,
 
-00:14:29.846 --> 00:14:31.936 A:middle
+
+287
+00:14:29,846 --> 00:14:31,936
 it is draining energy
 from the user.
 
-00:14:32.966 --> 00:14:34.526 A:middle
+
+288
+00:14:32,966 --> 00:14:34,526
 Please don't do anything
 in background
 
-00:14:34.526 --> 00:14:35.916 A:middle
+
+289
+00:14:34,526 --> 00:14:35,916
 if you don't need to do it.
 
-00:14:37.416 --> 00:14:40.586 A:middle
+
+290
+00:14:37,416 --> 00:14:40,586
 If you need to do it, call your
 task completion handler as quick
 
-00:14:40.586 --> 00:14:46.406 A:middle
+
+291
+00:14:40,586 --> 00:14:46,406
 as possible, and this task
 completion handler is an
 
-00:14:46.436 --> 00:14:48.256 A:middle
+
+292
+00:14:46,436 --> 00:14:48,256
 indication to the system
 saying, hey, I am done.
 
-00:14:48.716 --> 00:14:49.436 A:middle
+
+293
+00:14:48,716 --> 00:14:49,436
 Please suspend me.
 
-00:14:49.536 --> 00:14:51.426 A:middle
+
+294
+00:14:49,536 --> 00:14:51,426
 Please let the device
 go to sleep.
 
-00:14:52.416 --> 00:14:53.556 A:middle
+
+295
+00:14:52,416 --> 00:14:53,556
 Do it efficiently.
 
-00:14:53.766 --> 00:14:56.146 A:middle
+
+296
+00:14:53,766 --> 00:14:56,146
 There are a lot of background
 APIs that you can, you know,
 
-00:14:56.356 --> 00:14:59.396 A:middle
+
+297
+00:14:56,356 --> 00:14:59,396
 give your system a hand, you
 know, please do the work for me
 
-00:14:59.396 --> 00:15:02.566 A:middle
+
+298
+00:14:59,396 --> 00:15:02,566
 as you find the best time
 and the best, you know,
 
 
-
-00:14:59.396 --> 00:15:02.566 A:middle
-as you find the best time
-and the best, you know,
-
-00:15:02.966 --> 00:15:05.946 A:middle
+299
+00:15:02,966 --> 00:15:05,946
 period energy wise and the
 system will do it for you.
 
-00:15:06.046 --> 00:15:11.576 A:middle
+
+300
+00:15:06,046 --> 00:15:11,576
 To go back to the energy
 debugging workflow on iOS,
 
-00:15:11.936 --> 00:15:13.816 A:middle
+
+301
+00:15:11,936 --> 00:15:13,816
 what we have so far,
 we have Xcode,
 
-00:15:13.816 --> 00:15:14.976 A:middle
+
+302
+00:15:13,816 --> 00:15:14,976
 where you write and
 build your code.
 
-00:15:16.236 --> 00:15:17.846 A:middle
+
+303
+00:15:16,236 --> 00:15:17,846
 Customers have battery usage UI
 
-00:15:17.846 --> 00:15:20.486 A:middle
+
+304
+00:15:17,846 --> 00:15:20,486
 where they can see how your
 app is performing energy wise.
 
-00:15:21.326 --> 00:15:27.606 A:middle
+
+305
+00:15:21,326 --> 00:15:27,606
 So far, we have had for a few
 years a tool called Energy
 
-00:15:27.606 --> 00:15:30.716 A:middle
+
+306
+00:15:27,606 --> 00:15:30,716
 Diagnostics in Instruments that
 can give you a first-cut idea
 
-00:15:30.716 --> 00:15:32.126 A:middle
+
+307
+00:15:30,716 --> 00:15:32,126
 of how your app is behaving.
 
-00:15:32.796 --> 00:15:34.216 A:middle
+
+308
+00:15:32,796 --> 00:15:34,216
 Let's take a look at this tool.
 
-00:15:35.056 --> 00:15:36.006 A:middle
+
+309
+00:15:35,056 --> 00:15:36,006
 How do you enable it?
 
-00:15:36.346 --> 00:15:39.836 A:middle
+
+310
+00:15:36,346 --> 00:15:39,836
 You go to settings, developer,
 go to the logging pane.
 
-00:15:40.716 --> 00:15:43.536 A:middle
+
+311
+00:15:40,716 --> 00:15:43,536
 You turn on the energy
 toggle here
 
-00:15:43.676 --> 00:15:45.406 A:middle
+
+312
+00:15:43,676 --> 00:15:45,406
 and then you say,
 hey, start recording.
 
-00:15:45.496 --> 00:15:49.906 A:middle
+
+313
+00:15:45,496 --> 00:15:49,906
 Once you have started
 recording, use your app
 
-00:15:49.906 --> 00:15:51.136 A:middle
+
+314
+00:15:49,906 --> 00:15:51,136
 as your customer will.
 
-00:15:51.566 --> 00:15:54.146 A:middle
+
+315
+00:15:51,566 --> 00:15:54,146
 Live on it for a
 few hours, 12 hours,
 
-00:15:54.146 --> 00:15:56.106 A:middle
+
+316
+00:15:54,146 --> 00:15:56,106
 24 hours, a few days or so.
 
-00:15:56.626 --> 00:15:57.456 A:middle
+
+317
+00:15:56,626 --> 00:15:57,456
 And once you are done,
 
-00:15:57.906 --> 00:15:59.266 A:middle
+
+318
+00:15:57,906 --> 00:15:59,266
 just click the button,
 stop recording.
 
 
-
-00:16:03.116 --> 00:16:06.236 A:middle
+319
+00:16:03,116 --> 00:16:06,236
 After this, connect your
 device to a Mac and go
 
-00:16:06.236 --> 00:16:08.946 A:middle
+
+320
+00:16:06,236 --> 00:16:08,946
 to the instrument, select
 Energy Diagnostics, and say hey,
 
-00:16:09.006 --> 00:16:10.686 A:middle
+
+321
+00:16:09,006 --> 00:16:10,686
 please import the log
 data that you have.
 
-00:16:11.426 --> 00:16:13.316 A:middle
+
+322
+00:16:11,426 --> 00:16:13,316
 Once you do that, you
 will get a picture,
 
-00:16:13.316 --> 00:16:17.516 A:middle
+
+323
+00:16:13,316 --> 00:16:17,516
 which is something like this.
 
-00:16:27.046 --> 00:16:29.246 A:middle
+
+324
+00:16:27,046 --> 00:16:29,246
 You'll see Wi-Fi, Bluetooth,
 
-00:16:29.426 --> 00:16:31.776 A:middle
+
+325
+00:16:29,426 --> 00:16:31,776
 and you'll see how long they
 were on, when they were on,
 
-00:16:31.776 --> 00:16:33.206 A:middle
+
+326
+00:16:31,776 --> 00:16:33,206
 when they were off, and so on.
 
-00:16:33.276 --> 00:16:36.276 A:middle
+
+327
+00:16:33,276 --> 00:16:36,276
 You will see how many packets
 were sent out of each interface,
 
-00:16:36.276 --> 00:16:37.606 A:middle
+
+328
+00:16:36,276 --> 00:16:37,606
 what was the CPU activity.
 
-00:16:38.086 --> 00:16:40.346 A:middle
+
+329
+00:16:38,086 --> 00:16:40,346
 At the top, you will see
 an energy usage level,
 
-00:16:40.346 --> 00:16:42.176 A:middle
+
+330
+00:16:40,346 --> 00:16:42,176
 which with is a number
 out of 20.
 
-00:16:42.176 --> 00:16:44.516 A:middle
+
+331
+00:16:42,176 --> 00:16:44,516
 If you are 20 out of 20,
 believe me, it's a problem.
 
-00:16:45.006 --> 00:16:47.176 A:middle
+
+332
+00:16:45,006 --> 00:16:47,176
 Very, very high energy
 consumption.
 
-00:16:47.486 --> 00:16:50.836 A:middle
+
+333
+00:16:47,486 --> 00:16:50,836
 You want to stay close to 1.
 
-00:16:51.046 --> 00:16:54.076 A:middle
+
+334
+00:16:51,046 --> 00:16:54,076
 This tool is good if you
 want to do long experiments.
 
-00:16:54.696 --> 00:16:58.116 A:middle
+
+335
+00:16:54,696 --> 00:16:58,116
 But what it doesn't do is it
 doesn't tell you why did the
 
-00:16:58.116 --> 00:16:58.936 A:middle
+
+336
+00:16:58,116 --> 00:16:58,936
 hardware come up?
 
-00:16:59.256 --> 00:17:00.336 A:middle
+
+337
+00:16:59,256 --> 00:17:00,336
 Did you request it?
 
 
-
-00:16:59.256 --> 00:17:00.336 A:middle
-Did you request it?
-
-00:17:00.336 --> 00:17:01.636 A:middle
+338
+00:17:00,336 --> 00:17:01,636
 Where did you request it?
 
-00:17:02.066 --> 00:17:06.006 A:middle
+
+339
+00:17:02,066 --> 00:17:06,006
 It doesn't pinpoint, it's not
 fine-grain to go to your code.
 
-00:17:07.205 --> 00:17:13.016 A:middle
+
+340
+00:17:07,205 --> 00:17:13,016
 To fix this problem, this year
 we are introducing energy gauges
 
-00:17:13.736 --> 00:17:18.086 A:middle
+
+341
+00:17:13,736 --> 00:17:18,086
 on iOS and instruments,
 a few instruments too,
 
-00:17:18.445 --> 00:17:20.715 A:middle
+
+342
+00:17:18,445 --> 00:17:20,715
 which you can use to
 pinpoint in your code
 
-00:17:20.715 --> 00:17:22.546 A:middle
+
+343
+00:17:20,715 --> 00:17:22,546
 where the problem
 is coming from.
 
-00:17:23.236 --> 00:17:27.175 A:middle
+
+344
+00:17:23,236 --> 00:17:27,175
 To talk about all of
 these, let's move to demo.
 
-00:17:27.736 --> 00:17:32.286 A:middle
+
+345
+00:17:27,736 --> 00:17:32,286
 I call Pai-Han Huang, my
 colleague, to talk all about it.
 
-00:17:33.516 --> 00:17:36.686 A:middle
+
+346
+00:17:33,516 --> 00:17:36,686
 [ Applause ]
 
-00:17:37.186 --> 00:17:38.956 A:middle
-&gt;&gt; PAI-HAN HUANG: So, in
+
+347
+00:17:37,186 --> 00:17:38,956
+>> PAI-HAN HUANG: So, in
 a demo, I will walk you
 
-00:17:38.956 --> 00:17:42.266 A:middle
+
+348
+00:17:38,956 --> 00:17:42,266
 through the major features of
 the new energy bugging tools,
 
-00:17:43.416 --> 00:17:46.916 A:middle
+
+349
+00:17:43,416 --> 00:17:46,916
 demo the app, and show you
 how we can use the new tools
 
-00:17:46.916 --> 00:17:50.326 A:middle
+
+350
+00:17:46,916 --> 00:17:50,326
 to identify and improve the
 energy efficiency of your app.
 
-00:17:50.876 --> 00:17:55.416 A:middle
+
+351
+00:17:50,876 --> 00:17:55,416
 So as a developer, I like these
 new tools because they are easy,
 
-00:17:55.946 --> 00:17:58.376 A:middle
+
+352
+00:17:55,946 --> 00:17:58,376
 they are effective, so
 at the end of the demo,
 
-00:17:58.606 --> 00:18:01.886 A:middle
+
+353
+00:17:58,606 --> 00:18:01,886
 I hope you will join me in
 including these new tools
 
 
-
-00:17:58.606 --> 00:18:01.886 A:middle
-I hope you will join me in
-including these new tools
-
-00:18:01.886 --> 00:18:03.256 A:middle
+354
+00:18:01,886 --> 00:18:03,256
 as part of your project cycle.
 
-00:18:04.646 --> 00:18:06.986 A:middle
+
+355
+00:18:04,646 --> 00:18:06,986
 There are two major
 components in the demo.
 
-00:18:07.446 --> 00:18:11.646 A:middle
+
+356
+00:18:07,446 --> 00:18:11,646
 One is the new tool set; the
 other one is the demo app.
 
-00:18:12.146 --> 00:18:15.416 A:middle
+
+357
+00:18:12,146 --> 00:18:15,416
 So let me start from introducing
 you to the new tool set.
 
-00:18:21.176 --> 00:18:23.616 A:middle
+
+358
+00:18:21,176 --> 00:18:23,616
 On the screen, what we are
 seeing is the screenshot
 
-00:18:24.276 --> 00:18:27.016 A:middle
+
+359
+00:18:24,276 --> 00:18:27,016
 of iOS energy gauge,
 which is the entry point
 
-00:18:27.616 --> 00:18:30.066 A:middle
+
+360
+00:18:27,616 --> 00:18:30,066
 to all the other new
 energy debugging tools
 
-00:18:30.066 --> 00:18:30.996 A:middle
+
+361
+00:18:30,066 --> 00:18:30,996
 for iOS this year.
 
-00:18:33.026 --> 00:18:34.696 A:middle
+
+362
+00:18:33,026 --> 00:18:34,696
 So where is it?
 
-00:18:35.556 --> 00:18:39.376 A:middle
+
+363
+00:18:35,556 --> 00:18:39,376
 It is actually inside
 debug navigator of Xcode,
 
-00:18:39.946 --> 00:18:41.536 A:middle
+
+364
+00:18:39,946 --> 00:18:41,536
 which you can find over here.
 
-00:18:42.926 --> 00:18:44.866 A:middle
+
+365
+00:18:42,926 --> 00:18:44,866
 After you launch your
 apps through Xcode,
 
-00:18:45.336 --> 00:18:49.046 A:middle
+
+366
+00:18:45,336 --> 00:18:49,046
 you will be populated
 automatically for you over here.
 
-00:18:50.086 --> 00:18:52.376 A:middle
+
+367
+00:18:50,086 --> 00:18:52,376
 And when you click
 it, it will bring you
 
-00:18:52.376 --> 00:18:53.736 A:middle
+
+368
+00:18:52,376 --> 00:18:53,736
 to the right-hand
 side of the screen.
 
-00:18:54.346 --> 00:18:58.816 A:middle
+
+369
+00:18:54,346 --> 00:18:58,816
 And the iOS energy gauge can
 visualize the energy impact
 
-00:18:58.816 --> 00:19:01.916 A:middle
+
+370
+00:18:58,816 --> 00:19:01,916
 of your code, can visualize
 the energy impact of your code,
 
 
-
-00:18:58.816 --> 00:19:01.916 A:middle
-of your code, can visualize
-the energy impact of your code,
-
-00:19:02.456 --> 00:19:05.596 A:middle
+371
+00:19:02,456 --> 00:19:05,596
 both instantaneously and
 in the average instance.
 
-00:19:06.586 --> 00:19:09.286 A:middle
+
+372
+00:19:06,586 --> 00:19:09,286
 So the first is the
 instantaneous energy impact
 
-00:19:09.366 --> 00:19:11.206 A:middle
+
+373
+00:19:09,366 --> 00:19:11,206
 of your code, can be found
 
-00:19:11.206 --> 00:19:13.986 A:middle
+
+374
+00:19:11,206 --> 00:19:13,986
 in the field meter,
 which is over here.
 
-00:19:15.796 --> 00:19:21.126 A:middle
+
+375
+00:19:15,796 --> 00:19:21,126
 There are three different
 zones in this graph.
 
-00:19:21.166 --> 00:19:24.086 A:middle
+
+376
+00:19:21,166 --> 00:19:24,086
 In the speedometer, the lowest
 one, when the needle points
 
-00:19:24.086 --> 00:19:26.336 A:middle
+
+377
+00:19:24,086 --> 00:19:26,336
 to a green zone, it
 means the energy impact
 
-00:19:26.336 --> 00:19:28.026 A:middle
+
+378
+00:19:26,336 --> 00:19:28,026
 of your code is actually
 reasonable.
 
-00:19:28.876 --> 00:19:29.636 A:middle
+
+379
+00:19:28,876 --> 00:19:29,636
 Congratulations.
 
-00:19:29.766 --> 00:19:32.276 A:middle
+
+380
+00:19:29,766 --> 00:19:32,276
 You are a good citizen
 of the iOS ecosystem.
 
-00:19:33.146 --> 00:19:36.386 A:middle
+
+381
+00:19:33,146 --> 00:19:36,386
 But still, we suggest you to
 take a look at these new tools
 
-00:19:36.526 --> 00:19:39.086 A:middle
+
+382
+00:19:36,526 --> 00:19:39,086
 to see how you can make
 your customers happier.
 
-00:19:40.296 --> 00:19:43.316 A:middle
+
+383
+00:19:40,296 --> 00:19:43,316
 When the needle moves up,
 it enters the yellow zone.
 
-00:19:44.436 --> 00:19:47.516 A:middle
+
+384
+00:19:44,436 --> 00:19:47,516
 In the yellow zone, the energy
 impact of your code is high,
 
-00:19:48.266 --> 00:19:51.066 A:middle
+
+385
+00:19:48,266 --> 00:19:51,066
 so it's likely that if you
 don't deal with it carefully,
 
-00:19:51.906 --> 00:19:55.626 A:middle
+
+386
+00:19:51,906 --> 00:19:55,626
 your app will show up high
 in the battery usage UI.
 
-00:19:56.436 --> 00:19:58.946 A:middle
+
+387
+00:19:56,436 --> 00:19:58,946
 So please use the new
 energy debugging tools
 
-00:19:59.226 --> 00:20:02.416 A:middle
+
+388
+00:19:59,226 --> 00:20:02,416
 to see how you can improve the
 energy efficiency of your code.
 
 
-
-00:19:59.226 --> 00:20:02.416 A:middle
-to see how you can improve the
-energy efficiency of your code.
-
-00:20:03.416 --> 00:20:07.956 A:middle
+389
+00:20:03,416 --> 00:20:07,956
 But if the needle keeps moving
 up, you enter the red zone.
 
-00:20:08.306 --> 00:20:11.526 A:middle
+
+390
+00:20:08,306 --> 00:20:11,526
 Red zone indicates
 that the energy impact
 
-00:20:11.526 --> 00:20:13.086 A:middle
+
+391
+00:20:11,526 --> 00:20:13,086
 of your code is very high.
 
-00:20:13.646 --> 00:20:17.016 A:middle
+
+392
+00:20:13,646 --> 00:20:17,016
 It means that even with the
 slight usage of your app,
 
-00:20:17.996 --> 00:20:19.516 A:middle
+
+393
+00:20:17,996 --> 00:20:19,516
 users will significantly --
 
-00:20:19.516 --> 00:20:22.146 A:middle
+
+394
+00:20:19,516 --> 00:20:22,146
 will experience significant
 battery drop on your device.
 
-00:20:22.756 --> 00:20:25.256 A:middle
+
+395
+00:20:22,756 --> 00:20:25,256
 So please use the new tools!
 
-00:20:25.586 --> 00:20:25.986 A:middle
+
+396
+00:20:25,586 --> 00:20:25,986
 Please [laughter]!
 
-00:20:28.076 --> 00:20:29.186 A:middle
+
+397
+00:20:28,076 --> 00:20:29,186
 Sorry, I apologize.
 
-00:20:29.336 --> 00:20:32.226 A:middle
+
+398
+00:20:29,336 --> 00:20:32,226
 That's the evil in me
 protesting to the people
 
-00:20:32.756 --> 00:20:34.736 A:middle
+
+399
+00:20:32,756 --> 00:20:34,736
 who don't take battery
 life seriously.
 
-00:20:35.486 --> 00:20:38.656 A:middle
+
+400
+00:20:35,486 --> 00:20:38,656
 I promise you, I am a very nice
 guy, so come to chat with me,
 
-00:20:38.656 --> 00:20:40.396 A:middle
+
+401
+00:20:38,656 --> 00:20:40,396
 you know, in the last
 session this afternoon.
 
-00:20:41.276 --> 00:20:44.946 A:middle
+
+402
+00:20:41,276 --> 00:20:44,946
 Okay? Okay.
 
-00:20:45.376 --> 00:20:50.586 A:middle
+
+403
+00:20:45,376 --> 00:20:50,586
 But speedometer can give you
 an instantaneous energy impact
 
-00:20:50.586 --> 00:20:52.896 A:middle
+
+404
+00:20:50,586 --> 00:20:52,896
 information overall of your app.
 
-00:20:53.606 --> 00:20:59.306 A:middle
+
+405
+00:20:53,606 --> 00:20:59,306
 If you want to see more
 breakdown, you should see here,
 
 
-
-00:21:00.476 --> 00:21:01.366 A:middle
+406
+00:21:00,476 --> 00:21:01,366
 energy impact session.
 
-00:21:02.386 --> 00:21:05.656 A:middle
+
+407
+00:21:02,386 --> 00:21:05,656
 So this graph will be
 refreshed once every second.
 
-00:21:06.866 --> 00:21:11.576 A:middle
+
+408
+00:21:06,866 --> 00:21:11,576
 If your app introduces any
 workload to CPU, location,
 
-00:21:12.346 --> 00:21:15.576 A:middle
+
+409
+00:21:12,346 --> 00:21:15,576
 or networking, you will
 see a block showing
 
-00:21:15.576 --> 00:21:19.336 A:middle
+
+410
+00:21:15,576 --> 00:21:19,336
 up on the top three rows in
 the corresponding time slots.
 
-00:21:20.636 --> 00:21:22.606 A:middle
+
+411
+00:21:20,636 --> 00:21:22,606
 And, as an earlier
 talk it was mentioned,
 
-00:21:23.166 --> 00:21:25.426 A:middle
+
+412
+00:21:23,166 --> 00:21:25,426
 your app can consume
 significant power,
 
-00:21:25.506 --> 00:21:28.156 A:middle
+
+413
+00:21:25,506 --> 00:21:28,156
 not just on the foreground,
 but on the background as well.
 
-00:21:28.966 --> 00:21:30.486 A:middle
+
+414
+00:21:28,966 --> 00:21:30,486
 So based on this observation,
 
-00:21:30.486 --> 00:21:32.106 A:middle
+
+415
+00:21:30,486 --> 00:21:32,106
 we have the fourth
 rule, background.
 
-00:21:33.026 --> 00:21:36.346 A:middle
+
+416
+00:21:33,026 --> 00:21:36,346
 When your app stays in the
 background and doesn't go away,
 
-00:21:37.066 --> 00:21:40.326 A:middle
+
+417
+00:21:37,066 --> 00:21:40,326
 you will see the moving blocks
 showing up on the fourth row.
 
-00:21:41.446 --> 00:21:45.556 A:middle
+
+418
+00:21:41,446 --> 00:21:45,556
 On top of the graph, you will
 see a series of color bars.
 
-00:21:45.736 --> 00:21:47.966 A:middle
+
+419
+00:21:45,736 --> 00:21:47,966
 And they look like this.
 
-00:21:49.146 --> 00:21:49.686 A:middle
+
+420
+00:21:49,146 --> 00:21:49,686
 Two colors.
 
-00:21:50.766 --> 00:21:56.316 A:middle
+
+421
+00:21:50,766 --> 00:21:56,316
 Red color means that that is
 overhead, energy used to bring
 
-00:21:56.316 --> 00:21:59.966 A:middle
+
+422
+00:21:56,316 --> 00:21:59,966
 up the system resources like
 the radio module to perform work
 
 
-
-00:22:00.136 --> 00:22:03.046 A:middle
+423
+00:22:00,136 --> 00:22:03,046
 for your app, and it also
 maps to an earlier talk,
 
-00:22:03.596 --> 00:22:05.346 A:middle
+
+424
+00:22:03,596 --> 00:22:05,346
 the fixed cost of the hardware.
 
-00:22:05.906 --> 00:22:11.886 A:middle
+
+425
+00:22:05,906 --> 00:22:11,886
 For the blue one, it represents
 the energy which has been used
 
-00:22:11.886 --> 00:22:15.026 A:middle
+
+426
+00:22:11,886 --> 00:22:15,026
 to service the workload
 introduced by your app.
 
-00:22:16.156 --> 00:22:18.176 A:middle
+
+427
+00:22:16,156 --> 00:22:18,176
 Besides instantaneous
 information,
 
-00:22:18.176 --> 00:22:19.866 A:middle
+
+428
+00:22:18,176 --> 00:22:19,866
 we also provide average
 information.
 
-00:22:20.146 --> 00:22:24.926 A:middle
+
+429
+00:22:20,146 --> 00:22:24,926
 For example, like this one, the
 average overhead in percentile,
 
-00:22:25.516 --> 00:22:30.016 A:middle
+
+430
+00:22:25,516 --> 00:22:30,016
 and this guy shows you
 the average energy impact.
 
-00:22:30.486 --> 00:22:36.026 A:middle
+
+431
+00:22:30,486 --> 00:22:36,026
 On the bottom, you will see
 a series of explanations
 
-00:22:36.026 --> 00:22:39.636 A:middle
+
+432
+00:22:36,026 --> 00:22:39,636
 about legend, CPU, location,
 networking, and background.
 
-00:22:40.036 --> 00:22:43.086 A:middle
+
+433
+00:22:40,036 --> 00:22:43,086
 And it also provides some tips
 about how you can optimize them.
 
-00:22:44.506 --> 00:22:48.366 A:middle
+
+434
+00:22:44,506 --> 00:22:48,366
 But please remember that
 iOS energy gauge is designed
 
-00:22:49.166 --> 00:22:51.826 A:middle
+
+435
+00:22:49,166 --> 00:22:51,826
 to show you quick the
 high-level understanding
 
-00:22:51.826 --> 00:22:54.166 A:middle
+
+436
+00:22:51,826 --> 00:22:54,166
 about your energy
 impact of your code.
 
-00:22:54.696 --> 00:22:57.636 A:middle
+
+437
+00:22:54,696 --> 00:22:57,636
 So if you want more detailed
 information, more breakdown,
 
-00:22:58.226 --> 00:22:59.866 A:middle
+
+438
+00:22:58,226 --> 00:22:59,866
 then check this button.
 
 
-
-00:23:01.016 --> 00:23:03.776 A:middle
+439
+00:23:01,016 --> 00:23:03,776
 This button, after you click
 it, it will trampoline you
 
-00:23:03.776 --> 00:23:05.766 A:middle
+
+440
+00:23:03,776 --> 00:23:05,766
 to the corresponding instrument,
 
-00:23:05.956 --> 00:23:11.076 A:middle
+
+441
+00:23:05,956 --> 00:23:11,076
 to give you breakdown energy
 information for your app.
 
-00:23:11.396 --> 00:23:12.706 A:middle
+
+442
+00:23:11,396 --> 00:23:12,706
 This is the iOS energy gauge.
 
-00:23:13.226 --> 00:23:17.176 A:middle
+
+443
+00:23:13,226 --> 00:23:17,176
 Let me next briefly
 introduce you to instruments.
 
-00:23:18.396 --> 00:23:20.376 A:middle
+
+444
+00:23:18,396 --> 00:23:20,376
 Instruments, as many of
 you already use them:
 
-00:23:20.846 --> 00:23:21.836 A:middle
+
+445
+00:23:20,846 --> 00:23:21,836
 it looks very similar.
 
-00:23:22.236 --> 00:23:24.146 A:middle
+
+446
+00:23:22,236 --> 00:23:24,146
 For example, the one you see
 
-00:23:24.146 --> 00:23:27.536 A:middle
+
+447
+00:23:24,146 --> 00:23:27,536
 on the screen is the
 location instrument.
 
-00:23:27.536 --> 00:23:30.516 A:middle
+
+448
+00:23:27,536 --> 00:23:30,516
 How do we start?
 
-00:23:30.706 --> 00:23:36.046 A:middle
+
+449
+00:23:30,706 --> 00:23:36,046
 We start from toggle this
 button, record it, and stop it.
 
-00:23:36.866 --> 00:23:41.186 A:middle
+
+450
+00:23:36,866 --> 00:23:41,186
 After you record it, you
 will see the system activity
 
-00:23:41.866 --> 00:23:43.006 A:middle
+
+451
+00:23:41,866 --> 00:23:43,006
 like this.
 
-00:23:43.206 --> 00:23:46.276 A:middle
+
+452
+00:23:43,206 --> 00:23:46,276
 And you will see some reasons
 
-00:23:46.276 --> 00:23:48.636 A:middle
+
+453
+00:23:46,276 --> 00:23:48,636
 about why you see
 this kind of activity.
 
-00:23:48.826 --> 00:23:51.366 A:middle
+
+454
+00:23:48,826 --> 00:23:51,366
 For example, here you will
 see the location service
 
-00:23:51.366 --> 00:23:53.526 A:middle
+
+455
+00:23:51,366 --> 00:23:53,526
 that is trying to
 request for location.
 
-00:23:54.896 --> 00:23:57.086 A:middle
+
+456
+00:23:54,896 --> 00:23:57,086
 And if you want more
 information, more detail,
 
-00:23:58.126 --> 00:24:00.136 A:middle
+
+457
+00:23:58,126 --> 00:24:00,136
 go here, extended detail.
 
 
-
-00:23:58.126 --> 00:24:00.136 A:middle
-go here, extended detail.
-
-00:24:00.166 --> 00:24:05.726 A:middle
+458
+00:24:00,166 --> 00:24:05,726
 Then you will bring up this
 guy, which is the code stack.
 
-00:24:06.366 --> 00:24:10.766 A:middle
+
+459
+00:24:06,366 --> 00:24:10,766
 So this is the introduction
 to the instruments.
 
-00:24:10.766 --> 00:24:14.076 A:middle
+
+460
+00:24:10,766 --> 00:24:14,076
 Next, let me briefly
 talk about the demo app.
 
-00:24:15.766 --> 00:24:18.836 A:middle
+
+461
+00:24:15,766 --> 00:24:18,836
 On the screen, you will see
 a screenshot of our demo app,
 
-00:24:19.026 --> 00:24:20.206 A:middle
+
+462
+00:24:19,026 --> 00:24:20,206
 which we call Energy Buddy.
 
-00:24:21.106 --> 00:24:23.236 A:middle
+
+463
+00:24:21,106 --> 00:24:23,236
 So, as an iOS power
 software engineer,
 
-00:24:23.356 --> 00:24:27.096 A:middle
+
+464
+00:24:23,356 --> 00:24:27,096
 I am eager to know whether I
 can improve my energy efficiency
 
-00:24:27.236 --> 00:24:29.036 A:middle
+
+465
+00:24:27,236 --> 00:24:29,036
 everywhere, not just
 on my phone,
 
-00:24:29.316 --> 00:24:31.556 A:middle
+
+466
+00:24:29,316 --> 00:24:31,556
 but in my daily life as well.
 
-00:24:31.676 --> 00:24:33.636 A:middle
+
+467
+00:24:31,676 --> 00:24:33,636
 Energy Buddy can suit
 my needs pretty well.
 
-00:24:33.886 --> 00:24:35.326 A:middle
+
+468
+00:24:33,886 --> 00:24:35,326
 I can use it to take a picture,
 
-00:24:36.086 --> 00:24:38.916 A:middle
+
+469
+00:24:36,086 --> 00:24:38,916
 and it will extract
 the usage information
 
-00:24:38.916 --> 00:24:41.986 A:middle
+
+470
+00:24:38,916 --> 00:24:41,986
 from the picture I take for
 energy meter, for example.
 
-00:24:42.836 --> 00:24:45.146 A:middle
+
+471
+00:24:42,836 --> 00:24:45,146
 Then it will query the
 location of my device,
 
-00:24:46.416 --> 00:24:48.756 A:middle
+
+472
+00:24:46,416 --> 00:24:48,756
 get the weather information
 based on my location,
 
-00:24:49.506 --> 00:24:51.656 A:middle
+
+473
+00:24:49,506 --> 00:24:51,656
 correlate the weather
 information with my usage,
 
-00:24:51.796 --> 00:24:53.526 A:middle
+
+474
+00:24:51,796 --> 00:24:53,526
 showing up on the screen.
 
-00:24:54.116 --> 00:24:56.086 A:middle
+
+475
+00:24:54,116 --> 00:24:56,086
 The structure is like this.
 
-00:24:56.176 --> 00:25:01.766 A:middle
+
+476
+00:24:56,176 --> 00:25:01,766
 There is a centralized data
 manager, and if I import a photo
 
 
-
-00:24:56.176 --> 00:25:01.766 A:middle
-There is a centralized data
-manager, and if I import a photo
-
-00:25:01.876 --> 00:25:05.646 A:middle
+477
+00:25:01,876 --> 00:25:05,646
 from there, it will try
 to get a reading from it.
 
-00:25:05.646 --> 00:25:06.786 A:middle
+
+478
+00:25:05,646 --> 00:25:06,786
 And based on the location,
 
-00:25:06.926 --> 00:25:11.756 A:middle
+
+479
+00:25:06,926 --> 00:25:11,756
 it will try to hit
 a networking service
 
-00:25:11.966 --> 00:25:14.056 A:middle
+
+480
+00:25:11,966 --> 00:25:14,056
 to get the weather information
 based on my location.
 
-00:25:15.036 --> 00:25:17.966 A:middle
+
+481
+00:25:15,036 --> 00:25:17,966
 And then data manager will
 correlate this information,
 
-00:25:17.966 --> 00:25:20.026 A:middle
+
+482
+00:25:17,966 --> 00:25:20,026
 showing up as a curve
 on the screen.
 
-00:25:21.576 --> 00:25:24.076 A:middle
+
+483
+00:25:21,576 --> 00:25:24,076
 So next, let's try
 to give it a shot
 
-00:25:24.076 --> 00:25:27.616 A:middle
+
+484
+00:25:24,076 --> 00:25:27,616
 and see how the new tools
 can help us identify
 
-00:25:27.616 --> 00:25:29.686 A:middle
+
+485
+00:25:27,616 --> 00:25:29,686
 and improve energy
 efficiency of Energy Buddy.
 
-00:25:29.836 --> 00:25:34.756 A:middle
+
+486
+00:25:29,836 --> 00:25:34,756
 So on the left-hand side of
 the screen, you will see Xcode.
 
-00:25:35.226 --> 00:25:37.906 A:middle
+
+487
+00:25:35,226 --> 00:25:37,906
 Right-hand side is the
 screenshot of my testing device.
 
-00:25:38.716 --> 00:25:40.956 A:middle
+
+488
+00:25:38,716 --> 00:25:40,956
 So let's start from
 launching Energy Buddy
 
-00:25:41.196 --> 00:25:42.906 A:middle
+
+489
+00:25:41,196 --> 00:25:42,906
 by opening the project files.
 
-00:25:42.906 --> 00:25:47.256 A:middle
+
+490
+00:25:42,906 --> 00:25:47,256
 So what it's currently doing is,
 after I hit the round button,
 
-00:25:48.186 --> 00:25:52.086 A:middle
+
+491
+00:25:48,186 --> 00:25:52,086
 it will try to build a
 binary file and transport it
 
-00:25:52.086 --> 00:25:54.046 A:middle
+
+492
+00:25:52,086 --> 00:25:54,046
 into the device and
 launch it for me.
 
-00:25:54.516 --> 00:25:56.826 A:middle
+
+493
+00:25:54,516 --> 00:25:56,826
 So once it's launched,
 we will see this.
 
-00:25:57.426 --> 00:25:57.736 A:middle
+
+494
+00:25:57,426 --> 00:25:57,736
 It's here.
 
-00:25:58.156 --> 00:26:03.996 A:middle
+
+495
+00:25:58,156 --> 00:26:03,996
 So let's go to debug
 navigator over here.
 
 
-
-00:25:58.156 --> 00:26:03.996 A:middle
-So let's go to debug
-navigator over here.
-
-00:26:04.206 --> 00:26:08.526 A:middle
+496
+00:26:04,206 --> 00:26:08,526
 Energy impact over
 here...oh, there we go.
 
-00:26:09.816 --> 00:26:10.916 A:middle
+
+497
+00:26:09,816 --> 00:26:10,916
 The first thing we want
 
-00:26:10.956 --> 00:26:16.846 A:middle
+
+498
+00:26:10,956 --> 00:26:16,846
 to see is whether there's
 any moving block over here
 
-00:26:17.056 --> 00:26:18.946 A:middle
+
+499
+00:26:17,056 --> 00:26:18,946
 because currently I don't
 do anything with the UI.
 
-00:26:20.186 --> 00:26:21.946 A:middle
+
+500
+00:26:20,186 --> 00:26:21,946
 So it seems like
 it's pretty clear
 
-00:26:21.946 --> 00:26:23.116 A:middle
+
+501
+00:26:21,946 --> 00:26:23,116
 of those kind of moving blocks.
 
-00:26:23.546 --> 00:26:26.156 A:middle
+
+502
+00:26:23,546 --> 00:26:26,156
 This is a good sign because
 when the app is idle,
 
-00:26:26.626 --> 00:26:28.196 A:middle
+
+503
+00:26:26,626 --> 00:26:28,196
 not too much should happen.
 
-00:26:28.516 --> 00:26:29.176 A:middle
+
+504
+00:26:28,516 --> 00:26:29,176
 So this is good.
 
-00:26:29.946 --> 00:26:32.556 A:middle
+
+505
+00:26:29,946 --> 00:26:32,556
 So let me try to import
 a photo by clicking the
 
-00:26:32.556 --> 00:26:36.896 A:middle
+
+506
+00:26:32,556 --> 00:26:36,896
 "Import Photo" button, select
 a photo from my gallery.
 
-00:26:37.556 --> 00:26:39.796 A:middle
+
+507
+00:26:37,556 --> 00:26:39,796
 It will try to extract
 information,
 
-00:26:39.796 --> 00:26:41.126 A:middle
+
+508
+00:26:39,796 --> 00:26:41,126
 and I will set the reading.
 
-00:26:42.346 --> 00:26:46.546 A:middle
+
+509
+00:26:42,346 --> 00:26:46,546
 Okay. Oh, okay, I see lots
 of activity coming up,
 
-00:26:47.526 --> 00:26:49.876 A:middle
+
+510
+00:26:47,526 --> 00:26:49,876
 including CPU, networking,
 and location.
 
-00:26:50.406 --> 00:26:53.356 A:middle
+
+511
+00:26:50,406 --> 00:26:53,356
 But among them, I
 immediately notice one thing.
 
-00:26:54.036 --> 00:26:56.016 A:middle
+
+512
+00:26:54,036 --> 00:26:56,016
 That is location is always on.
 
-00:26:56.016 --> 00:26:57.846 A:middle
+
+513
+00:26:56,016 --> 00:26:57,846
 Huh. It doesn't make sense.
 
-00:26:58.616 --> 00:27:01.146 A:middle
+
+514
+00:26:58,616 --> 00:27:01,146
 Because Energy Buddy is not the
 kind of app where you're trying
 
 
-
-00:26:58.616 --> 00:27:01.146 A:middle
-Because Energy Buddy is not the
-kind of app where you're trying
-
-00:27:01.146 --> 00:27:03.416 A:middle
+515
+00:27:01,146 --> 00:27:03,416
 to track your exercise,
 like running, right?
 
-00:27:04.286 --> 00:27:06.806 A:middle
+
+516
+00:27:04,286 --> 00:27:06,806
 So why do I need to keep
 monitoring the location
 
-00:27:06.806 --> 00:27:07.376 A:middle
+
+517
+00:27:06,806 --> 00:27:07,376
 of my device?
 
-00:27:07.376 --> 00:27:08.526 A:middle
+
+518
+00:27:07,376 --> 00:27:08,526
 It doesn't make sense.
 
-00:27:09.426 --> 00:27:13.016 A:middle
+
+519
+00:27:09,426 --> 00:27:13,016
 So let's take a look to see what
 the location instrument can tell
 
-00:27:13.016 --> 00:27:14.986 A:middle
+
+520
+00:27:13,016 --> 00:27:14,986
 us and how we can
 identify the line of code
 
-00:27:15.226 --> 00:27:16.536 A:middle
+
+521
+00:27:15,226 --> 00:27:16,536
 to improve the situation.
 
-00:27:17.826 --> 00:27:21.876 A:middle
+
+522
+00:27:17,826 --> 00:27:21,876
 So I will next click
 the location instrument,
 
-00:27:22.646 --> 00:27:24.366 A:middle
+
+523
+00:27:22,646 --> 00:27:24,366
 and I say restart.
 
-00:27:25.346 --> 00:27:26.436 A:middle
+
+524
+00:27:25,346 --> 00:27:26,436
 Then you are trying to bring
 
-00:27:26.436 --> 00:27:35.906 A:middle
+
+525
+00:27:26,436 --> 00:27:35,906
 up the instrument,
 launch an app for me.
 
-00:27:35.906 --> 00:27:38.696 A:middle
+
+526
+00:27:35,906 --> 00:27:38,696
 Okay. So let me redo
 import photo again.
 
-00:27:39.426 --> 00:27:43.186 A:middle
+
+527
+00:27:39,426 --> 00:27:43,186
 Set the reading.
 
-00:27:43.826 --> 00:27:44.996 A:middle
+
+528
+00:27:43,826 --> 00:27:44,996
 There you go.
 
-00:27:45.846 --> 00:27:48.216 A:middle
+
+529
+00:27:45,846 --> 00:27:48,216
 Okay. So on the screen,
 you will see this.
 
-00:27:49.116 --> 00:27:50.446 A:middle
+
+530
+00:27:49,116 --> 00:27:50,446
 This is the location activity.
 
-00:27:50.966 --> 00:27:53.936 A:middle
+
+531
+00:27:50,966 --> 00:27:53,936
 It keeps going on and
 on without stopping.
 
-00:27:54.336 --> 00:27:55.526 A:middle
+
+532
+00:27:54,336 --> 00:27:55,526
 But where is it?
 
-00:27:55.606 --> 00:27:58.066 A:middle
+
+533
+00:27:55,606 --> 00:27:58,066
 Where do we introduce this?
 
-00:27:58.066 --> 00:28:00.026 A:middle
+
+534
+00:27:58,066 --> 00:28:00,026
 Take a look at this.
 
 
-
-00:27:58.066 --> 00:28:00.026 A:middle
-Take a look at this.
-
-00:28:00.386 --> 00:28:04.206 A:middle
+535
+00:28:00,386 --> 00:28:04,206
 Go to extended detail and see.
 
-00:28:04.456 --> 00:28:09.756 A:middle
+
+536
+00:28:04,456 --> 00:28:09,756
 Oh, okay, it's this part
 -- request location.
 
-00:28:10.136 --> 00:28:12.626 A:middle
+
+537
+00:28:10,136 --> 00:28:12,626
 That's how we request
 for location service.
 
-00:28:13.596 --> 00:28:22.436 A:middle
+
+538
+00:28:13,596 --> 00:28:22,436
 So let me stop this,
 go back to Xcode,
 
-00:28:22.926 --> 00:28:25.166 A:middle
+
+539
+00:28:22,926 --> 00:28:25,166
 and search for request location.
 
-00:28:26.466 --> 00:28:29.306 A:middle
+
+540
+00:28:26,466 --> 00:28:29,306
 Okay. It's already here.
 
-00:28:29.886 --> 00:28:32.506 A:middle
+
+541
+00:28:29,886 --> 00:28:32,506
 So what is the request
 looking to do?
 
-00:28:32.896 --> 00:28:34.366 A:middle
+
+542
+00:28:32,896 --> 00:28:34,366
 First of all, you
 are trying to set
 
-00:28:34.366 --> 00:28:36.046 A:middle
+
+543
+00:28:34,366 --> 00:28:36,046
 up the confirm view controller.
 
-00:28:40.216 --> 00:28:42.606 A:middle
+
+544
+00:28:40,216 --> 00:28:42,606
 In this piece of code,
 you are trying to set up,
 
-00:28:42.786 --> 00:28:44.076 A:middle
+
+545
+00:28:42,786 --> 00:28:44,076
 create a location manager.
 
-00:28:45.346 --> 00:28:48.216 A:middle
+
+546
+00:28:45,346 --> 00:28:48,216
 Then you are will call
 start updating location.
 
-00:28:49.006 --> 00:28:53.036 A:middle
+
+547
+00:28:49,006 --> 00:28:53,036
 So after this line, what will
 happen is location service will
 
-00:28:53.096 --> 00:28:56.696 A:middle
+
+548
+00:28:53,096 --> 00:28:56,696
 periodically push the
 location update to us
 
-00:28:56.996 --> 00:29:00.816 A:middle
+
+549
+00:28:56,996 --> 00:29:00,816
 through a callback,
 which is over here.
 
 
-
-00:28:56.996 --> 00:29:00.816 A:middle
-through a callback,
-which is over here.
-
-00:29:02.766 --> 00:29:04.726 A:middle
+550
+00:29:02,766 --> 00:29:04,726
 So in the callback, let's take
 a look -- what does it do?
 
-00:29:05.846 --> 00:29:08.046 A:middle
+
+551
+00:29:05,846 --> 00:29:08,046
 First thing is you are
 trying to see, okay,
 
-00:29:08.596 --> 00:29:11.846 A:middle
+
+552
+00:29:08,596 --> 00:29:11,846
 if there is anything
 updated here, if it's zero,
 
-00:29:11.846 --> 00:29:14.086 A:middle
+
+553
+00:29:11,846 --> 00:29:14,086
 that's invalid, so we
 just ignore it, return.
 
-00:29:15.366 --> 00:29:17.536 A:middle
+
+554
+00:29:15,366 --> 00:29:17,536
 Then we will store it, we say,
 
-00:29:17.806 --> 00:29:21.026 A:middle
+
+555
+00:29:17,806 --> 00:29:21,026
 whether location is
 horizontal accuracy is actually
 
-00:29:21.026 --> 00:29:22.756 A:middle
+
+556
+00:29:21,026 --> 00:29:22,756
 up to our standard,
 up to our expectation.
 
-00:29:22.996 --> 00:29:24.216 A:middle
+
+557
+00:29:22,996 --> 00:29:24,216
 If not, we return.
 
-00:29:25.476 --> 00:29:26.916 A:middle
+
+558
+00:29:25,476 --> 00:29:26,916
 If so, then we are trying
 
-00:29:26.916 --> 00:29:30.026 A:middle
+
+559
+00:29:26,916 --> 00:29:30,026
 to handle location inside
 the confirm view controller.
 
-00:29:30.806 --> 00:29:31.746 A:middle
+
+560
+00:29:30,806 --> 00:29:31,746
 And then you return.
 
-00:29:32.706 --> 00:29:35.806 A:middle
+
+561
+00:29:32,706 --> 00:29:35,806
 And this callback routine will
 be repeated again and again
 
-00:29:35.806 --> 00:29:38.466 A:middle
+
+562
+00:29:35,806 --> 00:29:38,466
 and again, every time
 when we receive a callback
 
-00:29:38.466 --> 00:29:39.556 A:middle
+
+563
+00:29:38,466 --> 00:29:39,556
 from the location service.
 
-00:29:40.276 --> 00:29:41.166 A:middle
+
+564
+00:29:40,276 --> 00:29:41,166
 Push doesn't look nice.
 
-00:29:41.776 --> 00:29:42.516 A:middle
+
+565
+00:29:41,776 --> 00:29:42,516
 So what we should do?
 
-00:29:43.176 --> 00:29:45.386 A:middle
+
+566
+00:29:43,176 --> 00:29:45,386
 The thing we should do
 is we should stop it
 
-00:29:46.446 --> 00:29:47.426 A:middle
+
+567
+00:29:46,446 --> 00:29:47,426
 when we have a value.
 
-00:29:48.246 --> 00:29:51.026 A:middle
+
+568
+00:29:48,246 --> 00:29:51,026
 Like this line.
 
-00:29:51.696 --> 00:29:56.796 A:middle
+
+569
+00:29:51,696 --> 00:29:56,796
 So we say when we get
 a value updating --
 
-00:29:56.796 --> 00:29:59.206 A:middle
+
+570
+00:29:56,796 --> 00:29:59,206
 location update,
 we should stop it.
 
 
-
-00:30:00.246 --> 00:30:02.986 A:middle
+571
+00:30:00,246 --> 00:30:02,986
 So let's take a look
 and launch it again
 
-00:30:03.306 --> 00:30:05.206 A:middle
+
+572
+00:30:03,306 --> 00:30:05,206
 and see what the energy
 gauge can tell us.
 
-00:30:05.666 --> 00:30:09.746 A:middle
+
+573
+00:30:05,666 --> 00:30:09,746
 What I expect to see is after
 I receive the first time a
 
-00:30:09.746 --> 00:30:12.706 A:middle
+
+574
+00:30:09,746 --> 00:30:12,706
 successful location update,
 I should stop the location,
 
-00:30:12.706 --> 00:30:14.906 A:middle
+
+575
+00:30:12,706 --> 00:30:14,906
 and location service should
 not be on and on forever.
 
-00:30:15.486 --> 00:30:18.506 A:middle
+
+576
+00:30:15,486 --> 00:30:18,506
 Let's wait for it
 to be launched.
 
-00:30:25.766 --> 00:30:25.833 A:middle
+
+577
+00:30:25,766 --> 00:30:25,833
 Hmmm.
 
-00:30:27.206 --> 00:30:31.106 A:middle
+
+578
+00:30:27,206 --> 00:30:31,106
 Okay. Go to the iOS
 energy gauge.
 
-00:30:32.076 --> 00:30:34.096 A:middle
+
+579
+00:30:32,076 --> 00:30:34,096
 So let me try to
 import a photo again.
 
-00:30:35.936 --> 00:30:37.366 A:middle
+
+580
+00:30:35,936 --> 00:30:37,366
 Select a photo from a gallery.
 
-00:30:38.226 --> 00:30:39.016 A:middle
+
+581
+00:30:38,226 --> 00:30:39,016
 Set a reading.
 
-00:30:40.896 --> 00:30:43.646 A:middle
+
+582
+00:30:40,896 --> 00:30:43,646
 Okay. Location, one second,
 two seconds, three seconds,
 
-00:30:43.686 --> 00:30:45.226 A:middle
+
+583
+00:30:43,686 --> 00:30:45,226
 four seconds, and it's gone.
 
-00:30:46.546 --> 00:30:49.936 A:middle
+
+584
+00:30:46,546 --> 00:30:49,936
 This is an immediate improvement
 after just one line of code.
 
-00:30:50.836 --> 00:30:52.996 A:middle
+
+585
+00:30:50,836 --> 00:30:52,996
 You can think about
 the scenario over here.
 
-00:30:53.296 --> 00:30:56.066 A:middle
+
+586
+00:30:53,296 --> 00:30:56,066
 So if the app has been
 turned on for a long time,
 
-00:30:56.816 --> 00:30:59.876 A:middle
+
+587
+00:30:56,816 --> 00:30:59,876
 imagine how much energy you
 can save just by doing one line
 
-00:30:59.876 --> 00:31:01.686 A:middle
+
+588
+00:30:59,876 --> 00:31:01,686
 of code, which is amazing.
 
 
-
-00:30:59.876 --> 00:31:01.686 A:middle
-of code, which is amazing.
-
-00:31:02.816 --> 00:31:06.056 A:middle
+589
+00:31:02,816 --> 00:31:06,056
 So let's give more
 try on Energy Buddy
 
-00:31:06.056 --> 00:31:09.246 A:middle
+
+590
+00:31:06,056 --> 00:31:09,246
 to see what will happen next
 time when we import another one.
 
-00:31:10.676 --> 00:31:13.166 A:middle
+
+591
+00:31:10,676 --> 00:31:13,166
 Okay. I import another one.
 
-00:31:13.946 --> 00:31:17.486 A:middle
+
+592
+00:31:13,946 --> 00:31:17,486
 And I see the location has
 been up for four seconds,
 
-00:31:18.256 --> 00:31:21.806 A:middle
+
+593
+00:31:18,256 --> 00:31:21,806
 but this time, I notice
 the big thing here is
 
-00:31:22.596 --> 00:31:23.486 A:middle
+
+594
+00:31:22,596 --> 00:31:23,486
 networking service.
 
-00:31:24.716 --> 00:31:25.746 A:middle
+
+595
+00:31:24,716 --> 00:31:25,746
 This doesn't look nice.
 
-00:31:26.186 --> 00:31:29.156 A:middle
+
+596
+00:31:26,186 --> 00:31:29,156
 The reason Energy Buddy wants
 to hit the networking service
 
-00:31:29.156 --> 00:31:31.176 A:middle
+
+597
+00:31:29,156 --> 00:31:31,176
 because it wants to get
 the weather information.
 
-00:31:31.676 --> 00:31:34.946 A:middle
+
+598
+00:31:31,676 --> 00:31:34,946
 But I just did a query
 like two minutes ago,
 
-00:31:35.756 --> 00:31:36.956 A:middle
+
+599
+00:31:35,756 --> 00:31:36,956
 so the weather shouldn't change
 
-00:31:36.956 --> 00:31:39.016 A:middle
+
+600
+00:31:36,956 --> 00:31:39,016
 that much during the
 past two minutes, right?
 
-00:31:40.096 --> 00:31:42.386 A:middle
+
+601
+00:31:40,096 --> 00:31:42,386
 Even for an hour, I would say,
 
-00:31:42.386 --> 00:31:44.216 A:middle
+
+602
+00:31:42,386 --> 00:31:44,216
 the weather may not
 change that much.
 
-00:31:44.736 --> 00:31:46.086 A:middle
+
+603
+00:31:44,736 --> 00:31:46,086
 So what is the purpose
 if we want
 
-00:31:46.086 --> 00:31:49.776 A:middle
+
+604
+00:31:46,086 --> 00:31:49,776
 to redo the networking although
 we already have earlier request
 
-00:31:49.916 --> 00:31:50.926 A:middle
+
+605
+00:31:49,916 --> 00:31:50,926
 that is two minutes ago?
 
-00:31:51.406 --> 00:31:56.586 A:middle
+
+606
+00:31:51,406 --> 00:31:56,586
 So let's go directly to the code
 and see how we can fix this.
 
-00:31:56.776 --> 00:31:58.846 A:middle
+
+607
+00:31:56,776 --> 00:31:58,846
 So the place where
 we actually request
 
-00:31:58.846 --> 00:32:02.266 A:middle
+
+608
+00:31:58,846 --> 00:32:02,266
 for location is inside
 the weather file.
 
 
-
-00:31:58.846 --> 00:32:02.266 A:middle
-for location is inside
-the weather file.
-
-00:32:02.266 --> 00:32:05.916 A:middle
+609
+00:32:02,266 --> 00:32:05,916
 And there's a function
 called Fetch if Missing.
 
-00:32:06.316 --> 00:32:07.646 A:middle
+
+610
+00:32:06,316 --> 00:32:07,646
 So let's take a look
 what does it do.
 
-00:32:09.176 --> 00:32:11.376 A:middle
+
+611
+00:32:09,176 --> 00:32:11,376
 In the first part, we were
 trying to set some parameters
 
-00:32:11.376 --> 00:32:16.246 A:middle
+
+612
+00:32:11,376 --> 00:32:16,246
 like date, URL based
 on the query URL for --
 
-00:32:16.336 --> 00:32:18.446 A:middle
+
+613
+00:32:16,336 --> 00:32:18,446
 based on the device location
 and the current date --
 
-00:32:19.326 --> 00:32:20.576 A:middle
+
+614
+00:32:19,326 --> 00:32:20,576
 and whether I have
 done this kind
 
-00:32:20.576 --> 00:32:22.226 A:middle
+
+615
+00:32:20,576 --> 00:32:22,226
 of query within today or not.
 
-00:32:22.786 --> 00:32:26.836 A:middle
+
+616
+00:32:22,786 --> 00:32:26,836
 And you will store the source
 ID for the location coordinate,
 
-00:32:26.836 --> 00:32:30.526 A:middle
+
+617
+00:32:26,836 --> 00:32:30,526
 and you will set a constant
 that is exactly the number
 
-00:32:30.526 --> 00:32:32.446 A:middle
+
+618
+00:32:30,526 --> 00:32:32,446
 of seconds within the hour.
 
-00:32:33.366 --> 00:32:35.536 A:middle
+
+619
+00:32:33,366 --> 00:32:35,536
 So the first if we are
 try to go do is we say
 
-00:32:35.966 --> 00:32:37.796 A:middle
+
+620
+00:32:35,966 --> 00:32:37,796
 if we have done the
 query for today
 
-00:32:38.856 --> 00:32:42.386 A:middle
+
+621
+00:32:38,856 --> 00:32:42,386
 and the data manager already
 has the weather fetched
 
-00:32:42.656 --> 00:32:44.946 A:middle
+
+622
+00:32:42,656 --> 00:32:44,946
 since the last time we queried,
 that is like three minutes ago,
 
-00:32:45.486 --> 00:32:48.936 A:middle
+
+623
+00:32:45,486 --> 00:32:48,936
 then we say we just return.
 
-00:32:49.106 --> 00:32:52.026 A:middle
+
+624
+00:32:49,106 --> 00:32:52,026
 Next is if we don't do it today
 
-00:32:53.056 --> 00:32:55.736 A:middle
+
+625
+00:32:53,056 --> 00:32:55,736
 and data manager already
 has the weather fetched,
 
-00:32:55.986 --> 00:32:56.816 A:middle
+
+626
+00:32:55,986 --> 00:32:56,816
 then we also return.
 
-00:32:57.376 --> 00:33:02.166 A:middle
+
+627
+00:32:57,376 --> 00:33:02,166
 If none of these two
 situations have been satisfied,
 
 
-
-00:32:57.376 --> 00:33:02.166 A:middle
-If none of these two
-situations have been satisfied,
-
-00:33:02.166 --> 00:33:08.206 A:middle
+628
+00:33:02,166 --> 00:33:08,206
 then we will try to set up a
 task based on the location,
 
-00:33:08.206 --> 00:33:12.826 A:middle
+
+629
+00:33:08,206 --> 00:33:12,826
 based on the date, and we will
 try to download it over here.
 
-00:33:13.056 --> 00:33:14.026 A:middle
+
+630
+00:33:13,056 --> 00:33:14,026
 So what's going wrong there?
 
-00:33:15.126 --> 00:33:20.056 A:middle
+
+631
+00:33:15,126 --> 00:33:20,056
 The reason it's doing wrong
 is actually inside this gauge
 
-00:33:20.276 --> 00:33:21.296 A:middle
+
+632
+00:33:20,276 --> 00:33:21,296
 over here.
 
-00:33:21.916 --> 00:33:27.146 A:middle
+
+633
+00:33:21,916 --> 00:33:27,146
 So I will add in another
 situation like this,
 
-00:33:27.846 --> 00:33:29.896 A:middle
+
+634
+00:33:27,846 --> 00:33:29,896
 to say if I have done this today
 
-00:33:29.956 --> 00:33:33.326 A:middle
+
+635
+00:33:29,956 --> 00:33:33,326
 and the previous fetch is
 actually within an hour,
 
-00:33:33.616 --> 00:33:34.776 A:middle
+
+636
+00:33:33,616 --> 00:33:34,776
 then I will not do it again.
 
-00:33:36.246 --> 00:33:40.406 A:middle
+
+637
+00:33:36,246 --> 00:33:40,406
 So let's launch it again and see
 how we can see the improvement
 
-00:33:40.846 --> 00:33:42.856 A:middle
+
+638
+00:33:40,846 --> 00:33:42,856
 inside energy gauge.
 
-00:33:43.406 --> 00:33:44.966 A:middle
+
+639
+00:33:43,406 --> 00:33:44,966
 So what we expect
 to see is this.
 
-00:33:45.306 --> 00:33:48.336 A:middle
+
+640
+00:33:45,306 --> 00:33:48,336
 Because we've already done our
 fetch, like five minutes ago,
 
-00:33:49.416 --> 00:33:52.346 A:middle
+
+641
+00:33:49,416 --> 00:33:52,346
 we should not see any networking
 every time when we are trying
 
-00:33:52.346 --> 00:33:54.646 A:middle
+
+642
+00:33:52,346 --> 00:33:54,646
 to import a photo again
 within the next hour.
 
-00:33:55.146 --> 00:33:57.156 A:middle
+
+643
+00:33:55,146 --> 00:33:57,156
 Let's take a look whether
 energy gauge will agree
 
-00:33:57.156 --> 00:33:58.766 A:middle
+
+644
+00:33:57,156 --> 00:33:58,766
 with my theory here.
 
 
-
-00:34:01.046 --> 00:34:02.386 A:middle
+645
+00:34:01,046 --> 00:34:02,386
 Okay. It's up.
 
-00:34:03.726 --> 00:34:08.755 A:middle
+
+646
+00:34:03,726 --> 00:34:08,755
 So I am trying to
 import a photo,
 
-00:34:10.016 --> 00:34:14.775 A:middle
+
+647
+00:34:10,016 --> 00:34:14,775
 select a picture from a gallery.
 
-00:34:15.626 --> 00:34:17.176 A:middle
+
+648
+00:34:15,626 --> 00:34:17,176
 Set the reading.
 
-00:34:17.406 --> 00:34:19.485 A:middle
+
+649
+00:34:17,406 --> 00:34:19,485
 So I see the location.
 
-00:34:19.876 --> 00:34:21.366 A:middle
+
+650
+00:34:19,876 --> 00:34:21,366
 It's been for four
 seconds like before.
 
-00:34:22.176 --> 00:34:24.366 A:middle
+
+651
+00:34:22,176 --> 00:34:24,366
 But magically, all the
 networking is gone.
 
-00:34:24.545 --> 00:34:27.326 A:middle
+
+652
+00:34:24,545 --> 00:34:27,326
 This is exactly what we expect.
 
-00:34:27.926 --> 00:34:29.366 A:middle
+
+653
+00:34:27,926 --> 00:34:29,366
 So this is another good way
 
-00:34:29.755 --> 00:34:32.166 A:middle
+
+654
+00:34:29,755 --> 00:34:32,166
 for the energy efficiency
 of our Energy Buddy.
 
-00:34:33.706 --> 00:34:35.186 A:middle
+
+655
+00:34:33,706 --> 00:34:35,186
 So besides the foreground,
 
-00:34:35.766 --> 00:34:39.766 A:middle
+
+656
+00:34:35,766 --> 00:34:39,766
 Energy Buddy can also consume
 significant battery even
 
-00:34:39.766 --> 00:34:41.176 A:middle
+
+657
+00:34:39,766 --> 00:34:41,176
 on the background.
 
-00:34:41.176 --> 00:34:45.286 A:middle
+
+658
+00:34:41,176 --> 00:34:45,286
 So let's take a look at what
 the energy gauge can tell us
 
-00:34:45.346 --> 00:34:47.045 A:middle
+
+659
+00:34:45,346 --> 00:34:47,045
 when Energy Buddy is
 actually on the background.
 
-00:34:47.806 --> 00:34:49.356 A:middle
+
+660
+00:34:47,806 --> 00:34:49,356
 We put Energy Buddy
 in the background
 
-00:34:49.356 --> 00:34:53.866 A:middle
+
+661
+00:34:49,356 --> 00:34:53,866
 by hitting the Home button.
 
-00:34:55.116 --> 00:35:00.096 A:middle
+
+662
+00:34:55,116 --> 00:35:00,096
 So what we see is over here.
 
 
-
-00:34:55.116 --> 00:35:00.096 A:middle
-So what we see is over here.
-
-00:35:02.176 --> 00:35:03.636 A:middle
+663
+00:35:02,176 --> 00:35:03,636
 We see lots of, lots
 
-00:35:03.636 --> 00:35:07.316 A:middle
+
+664
+00:35:03,636 --> 00:35:07,316
 of background activities
 of Energy Buddy.
 
-00:35:08.676 --> 00:35:12.276 A:middle
+
+665
+00:35:08,676 --> 00:35:12,276
 And that means that
 whenever Energy Buddy is
 
-00:35:12.276 --> 00:35:17.246 A:middle
+
+666
+00:35:12,276 --> 00:35:17,246
 on the background, the
 device cannot go to sleep,
 
-00:35:17.676 --> 00:35:18.986 A:middle
+
+667
+00:35:17,676 --> 00:35:18,986
 which will consume
 significant power
 
-00:35:18.986 --> 00:35:21.436 A:middle
+
+668
+00:35:18,986 --> 00:35:21,436
 because there is a fixed cost
 to keep the device awake.
 
-00:35:22.716 --> 00:35:25.476 A:middle
+
+669
+00:35:22,716 --> 00:35:25,476
 This doesn't make sense because
 Energy Buddy doesn't need
 
-00:35:25.476 --> 00:35:26.716 A:middle
+
+670
+00:35:25,476 --> 00:35:26,716
 to do anything on
 the background.
 
-00:35:27.736 --> 00:35:29.136 A:middle
+
+671
+00:35:27,736 --> 00:35:29,136
 So what's going wrong here?
 
-00:35:29.766 --> 00:35:33.406 A:middle
+
+672
+00:35:29,766 --> 00:35:33,406
 Let us go to the callback
 
-00:35:34.926 --> 00:35:37.536 A:middle
+
+673
+00:35:34,926 --> 00:35:37,536
 when we actually go
 to the background.
 
-00:35:37.536 --> 00:35:39.716 A:middle
+
+674
+00:35:37,536 --> 00:35:39,716
 Here is the code.
 
-00:35:39.716 --> 00:35:41.966 A:middle
+
+675
+00:35:39,716 --> 00:35:41,966
 What does it do?
 
-00:35:43.126 --> 00:35:43.846 A:middle
+
+676
+00:35:43,126 --> 00:35:43,846
 It does the following.
 
-00:35:43.956 --> 00:35:46.476 A:middle
+
+677
+00:35:43,956 --> 00:35:46,476
 You are trying to set out
 background task identifier,
 
-00:35:46.476 --> 00:35:50.616 A:middle
+
+678
+00:35:46,476 --> 00:35:50,616
 and they will do one thing,
 archive to data manager,
 
-00:35:50.826 --> 00:35:53.626 A:middle
+
+679
+00:35:50,826 --> 00:35:53,626
 which will store all the
 changes to data manager,
 
-00:35:53.886 --> 00:35:57.106 A:middle
+
+680
+00:35:53,886 --> 00:35:57,106
 and they will say wait for
 input, and we will code
 
-00:35:57.106 --> 00:35:59.096 A:middle
+
+681
+00:35:57,106 --> 00:35:59,096
 in background task when
 it is actually done.
 
-00:35:59.626 --> 00:36:01.676 A:middle
+
+682
+00:35:59,626 --> 00:36:01,676
 Does it make sense?
 
 
-
-00:35:59.626 --> 00:36:01.676 A:middle
-Does it make sense?
-
-00:36:02.446 --> 00:36:03.906 A:middle
+683
+00:36:02,446 --> 00:36:03,906
 No. Why not?
 
-00:36:04.756 --> 00:36:07.376 A:middle
+
+684
+00:36:04,756 --> 00:36:07,376
 Because our app is always
 on in the background, right?
 
-00:36:07.606 --> 00:36:10.676 A:middle
+
+685
+00:36:07,606 --> 00:36:10,676
 So how come users
 can actually interact
 
-00:36:10.676 --> 00:36:11.796 A:middle
+
+686
+00:36:10,676 --> 00:36:11,796
 with Energy Buddies
 through the UI?
 
-00:36:12.586 --> 00:36:16.556 A:middle
+
+687
+00:36:12,586 --> 00:36:16,556
 So there has been no input at
 all, and we are waiting for it.
 
-00:36:16.866 --> 00:36:17.696 A:middle
+
+688
+00:36:16,866 --> 00:36:17,696
 This doesn't look nice.
 
-00:36:18.546 --> 00:36:25.926 A:middle
+
+689
+00:36:18,546 --> 00:36:25,926
 So what we should do is
 we shouldn't wait for it.
 
-00:36:26.836 --> 00:36:31.476 A:middle
+
+690
+00:36:26,836 --> 00:36:31,476
 Instead, we should do
 something like this.
 
-00:36:32.276 --> 00:36:36.356 A:middle
+
+691
+00:36:32,276 --> 00:36:36,356
 After we archive the data to
 data manager, we will call
 
-00:36:36.356 --> 00:36:37.986 A:middle
+
+692
+00:36:36,356 --> 00:36:37,986
 in background task immediately
 
-00:36:38.096 --> 00:36:42.396 A:middle
+
+693
+00:36:38,096 --> 00:36:42,396
 and invalidate the
 background task identifier.
 
-00:36:42.636 --> 00:36:45.976 A:middle
+
+694
+00:36:42,636 --> 00:36:45,976
 Again, let's launch
 Energy Buddy again
 
-00:36:45.976 --> 00:36:48.026 A:middle
+
+695
+00:36:45,976 --> 00:36:48,026
 and see what the energy
 gauge can tell us.
 
-00:36:49.086 --> 00:36:50.056 A:middle
+
+696
+00:36:49,086 --> 00:36:50,056
 What we expect is this.
 
-00:36:50.806 --> 00:36:54.646 A:middle
+
+697
+00:36:50,806 --> 00:36:54,646
 After we just saw all the
 changes in data manager,
 
-00:36:54.936 --> 00:36:57.436 A:middle
+
+698
+00:36:54,936 --> 00:36:57,436
 it will directly
 just quit itself
 
-00:36:57.436 --> 00:36:58.996 A:middle
+
+699
+00:36:57,436 --> 00:36:58,996
 and release the control
 to the assistant.
 
-00:36:59.126 --> 00:36:59.786 A:middle
+
+700
+00:36:59,126 --> 00:36:59,786
 It will not stay
 
-00:36:59.886 --> 00:37:07.866 A:middle
+
+701
+00:36:59,886 --> 00:37:07,866
 in the background all
 the time like before.
 
 
-
-00:36:59.886 --> 00:37:07.866 A:middle
-in the background all
-the time like before.
-
-00:37:07.906 --> 00:37:10.976 A:middle
+702
+00:37:07,906 --> 00:37:10,976
 Okay. Go to energy gauge.
 
-00:37:11.506 --> 00:37:14.936 A:middle
+
+703
+00:37:11,506 --> 00:37:14,936
 Put the Energy Buddy
 in the background.
 
-00:37:16.036 --> 00:37:17.676 A:middle
+
+704
+00:37:16,036 --> 00:37:17,676
 So we are in the
 background one second,
 
-00:37:17.766 --> 00:37:21.106 A:middle
+
+705
+00:37:17,766 --> 00:37:21,106
 two seconds, and it's gone.
 
-00:37:21.336 --> 00:37:22.416 A:middle
+
+706
+00:37:21,336 --> 00:37:22,416
 So this is another big win.
 
-00:37:23.186 --> 00:37:27.396 A:middle
+
+707
+00:37:23,186 --> 00:37:27,396
 So keep in mind that, with
 very simple fix like I just did
 
-00:37:27.516 --> 00:37:30.526 A:middle
+
+708
+00:37:27,516 --> 00:37:30,526
 on the stage, you can see
 significant improvements,
 
-00:37:30.876 --> 00:37:33.646 A:middle
+
+709
+00:37:30,876 --> 00:37:33,646
 and Abhinav will introduce
 you because we carry
 
-00:37:33.646 --> 00:37:36.296 A:middle
+
+710
+00:37:33,646 --> 00:37:36,296
 on a couple hours or even a day
 
-00:37:36.776 --> 00:37:38.746 A:middle
+
+711
+00:37:36,776 --> 00:37:38,746
 with significant
 battery improvement.
 
-00:37:39.456 --> 00:37:42.646 A:middle
+
+712
+00:37:39,456 --> 00:37:42,646
 So this concludes my demo, and
 let me hand it back to Abhinav.
 
-00:37:43.516 --> 00:37:47.546 A:middle
+
+713
+00:37:43,516 --> 00:37:47,546
 [ Applause ]
 
-00:37:48.046 --> 00:37:49.316 A:middle
-&gt;&gt; ABHINAV PATHAK:
+
+714
+00:37:48,046 --> 00:37:49,316
+>> ABHINAV PATHAK:
 Thank you, Pai-Han.
 
-00:37:49.606 --> 00:37:51.126 A:middle
+
+715
+00:37:49,606 --> 00:37:51,126
 That was a great demo.
 
-00:37:51.416 --> 00:37:52.256 A:middle
+
+716
+00:37:51,416 --> 00:37:52,256
 Back on the slides.
 
-00:37:52.256 --> 00:37:53.196 A:middle
+
+717
+00:37:52,256 --> 00:37:53,196
 So let's conclude this talk.
 
-00:37:53.196 --> 00:37:55.376 A:middle
+
+718
+00:37:53,196 --> 00:37:55,376
 Let's see what happened during
 this demo, a quick summary.
 
-00:37:55.876 --> 00:37:58.416 A:middle
+
+719
+00:37:55,876 --> 00:37:58,416
 We started with the Energy
 Buddy, inefficient code.
 
-00:37:58.416 --> 00:38:02.456 A:middle
+
+720
+00:37:58,416 --> 00:38:02,456
 We ran it as the user would use
 it and let's see what happened.
 
 
-
-00:37:58.416 --> 00:38:02.456 A:middle
-We ran it as the user would use
-it and let's see what happened.
-
-00:38:02.456 --> 00:38:03.636 A:middle
+721
+00:38:02,456 --> 00:38:03,636
 Everything is lighted here.
 
-00:38:03.866 --> 00:38:06.726 A:middle
+
+722
+00:38:03,866 --> 00:38:06,726
 Bad, bad, really bad,
 the impact is very high,
 
-00:38:07.116 --> 00:38:09.676 A:middle
+
+723
+00:38:07,116 --> 00:38:09,676
 and your app will come very
 high in the battery UI.
 
-00:38:09.676 --> 00:38:10.946 A:middle
+
+724
+00:38:09,676 --> 00:38:10,946
 How did we fix it?
 
-00:38:10.946 --> 00:38:16.326 A:middle
+
+725
+00:38:10,946 --> 00:38:16,326
 We went to location, and we
 said hey, location has started.
 
-00:38:16.326 --> 00:38:16.766 A:middle
+
+726
+00:38:16,326 --> 00:38:16,766
 Then stop.
 
-00:38:17.206 --> 00:38:19.706 A:middle
+
+727
+00:38:17,206 --> 00:38:19,706
 One line of change,
 boom, location stops.
 
-00:38:20.166 --> 00:38:22.606 A:middle
+
+728
+00:38:20,166 --> 00:38:22,606
 Let's see before and
 after how does it look?
 
-00:38:23.466 --> 00:38:26.516 A:middle
+
+729
+00:38:23,466 --> 00:38:26,516
 If you focus on location
 timeline,
 
-00:38:26.516 --> 00:38:28.906 A:middle
+
+730
+00:38:26,516 --> 00:38:28,906
 we see location is
 on all the time.
 
-00:38:29.406 --> 00:38:31.106 A:middle
+
+731
+00:38:29,406 --> 00:38:31,106
 Afterwards, location is on only
 
-00:38:31.106 --> 00:38:34.376 A:middle
+
+732
+00:38:31,106 --> 00:38:34,376
 when it is actually required
 whenever a photo is imported.
 
-00:38:35.816 --> 00:38:36.746 A:middle
+
+733
+00:38:35,816 --> 00:38:36,746
 Let's go to networking.
 
-00:38:36.986 --> 00:38:40.006 A:middle
+
+734
+00:38:36,986 --> 00:38:40,006
 What we did was we were getting
 weather information all the time
 
-00:38:40.106 --> 00:38:43.946 A:middle
+
+735
+00:38:40,106 --> 00:38:43,946
 whenever a new photo was
 imported, and that is not good.
 
-00:38:43.946 --> 00:38:45.386 A:middle
+
+736
+00:38:43,946 --> 00:38:45,386
 We wanted to cut
 down the transfer,
 
-00:38:45.456 --> 00:38:46.786 A:middle
+
+737
+00:38:45,456 --> 00:38:46,786
 and we put a very simple block.
 
-00:38:46.786 --> 00:38:49.916 A:middle
+
+738
+00:38:46,786 --> 00:38:49,916
 Hey, if this is recently
 called, don't do that.
 
-00:38:50.006 --> 00:38:51.456 A:middle
+
+739
+00:38:50,006 --> 00:38:51,456
 We don't need the new
 information again.
 
-00:38:52.276 --> 00:38:54.696 A:middle
+
+740
+00:38:52,276 --> 00:38:54,696
 What impact did that
 have on the energy gauge?
 
-00:38:55.016 --> 00:38:57.446 A:middle
+
+741
+00:38:55,016 --> 00:38:57,446
 Two photos, again,
 before and after.
 
-00:38:57.736 --> 00:38:59.566 A:middle
+
+742
+00:38:57,736 --> 00:38:59,566
 And if you focus on
 the networking part,
 
-00:38:59.886 --> 00:39:01.796 A:middle
+
+743
+00:38:59,886 --> 00:39:01,796
 networking is highlighted
 for a long time.
 
 
-
-00:38:59.886 --> 00:39:01.796 A:middle
-networking is highlighted
-for a long time.
-
-00:39:02.166 --> 00:39:04.766 A:middle
+744
+00:39:02,166 --> 00:39:04,766
 The red bars on the top are
 highlighted all the time,
 
-00:39:04.796 --> 00:39:06.326 A:middle
+
+745
+00:39:04,796 --> 00:39:06,326
 saying networking
 hardware is up.
 
-00:39:06.736 --> 00:39:09.376 A:middle
+
+746
+00:39:06,736 --> 00:39:09,376
 It's a huge amount of time
 during the usage of the app.
 
-00:39:09.856 --> 00:39:12.616 A:middle
+
+747
+00:39:09,856 --> 00:39:12,616
 At the bottom, we just
 do networking once, boom,
 
-00:39:12.616 --> 00:39:15.536 A:middle
+
+748
+00:39:12,616 --> 00:39:15,536
 after that, it's recently
 called, it won't be done again.
 
-00:39:16.266 --> 00:39:19.976 A:middle
+
+749
+00:39:16,266 --> 00:39:19,976
 What about the background
 session?
 
-00:39:20.106 --> 00:39:23.516 A:middle
+
+750
+00:39:20,106 --> 00:39:23,516
 When we went to background, we
 stored our state into database
 
-00:39:23.856 --> 00:39:25.976 A:middle
+
+751
+00:39:23,856 --> 00:39:25,976
 and said hey, let's
 wait for the user input.
 
-00:39:26.346 --> 00:39:27.126 A:middle
+
+752
+00:39:26,346 --> 00:39:27,126
 Not a good place to do.
 
-00:39:27.126 --> 00:39:29.196 A:middle
+
+753
+00:39:27,126 --> 00:39:29,196
 User is in the going to do
 any input at that point.
 
-00:39:30.016 --> 00:39:31.276 A:middle
+
+754
+00:39:30,016 --> 00:39:31,276
 Very simple fix.
 
-00:39:31.456 --> 00:39:33.076 A:middle
+
+755
+00:39:31,456 --> 00:39:33,076
 We say don't wait
 for user input.
 
-00:39:33.376 --> 00:39:34.916 A:middle
+
+756
+00:39:33,376 --> 00:39:34,916
 Just call the task
 completion handler.
 
-00:39:35.306 --> 00:39:37.646 A:middle
+
+757
+00:39:35,306 --> 00:39:37,646
 Tell the system hey,
 I am done, suspend me,
 
-00:39:37.646 --> 00:39:40.176 A:middle
+
+758
+00:39:37,646 --> 00:39:40,176
 let the system go to sleep.
 
-00:39:40.176 --> 00:39:42.286 A:middle
+
+759
+00:39:40,176 --> 00:39:42,286
 How does energy gauge look
 like before and after?
 
-00:39:42.286 --> 00:39:44.036 A:middle
+
+760
+00:39:42,286 --> 00:39:44,036
 Let's focus on the
 background line.
 
-00:39:44.626 --> 00:39:47.416 A:middle
+
+761
+00:39:44,626 --> 00:39:47,416
 Background is up all
 the time in the top.
 
-00:39:47.416 --> 00:39:50.546 A:middle
+
+762
+00:39:47,416 --> 00:39:50,546
 At the bottom, the moment
 we have done the archiving
 
-00:39:50.546 --> 00:39:53.196 A:middle
+
+763
+00:39:50,546 --> 00:39:53,196
 to the database, the
 background task is done.
 
-00:39:53.546 --> 00:39:54.316 A:middle
+
+764
+00:39:53,546 --> 00:39:54,316
 We are suspended.
 
-00:39:55.056 --> 00:39:59.696 A:middle
+
+765
+00:39:55,056 --> 00:39:59,696
 Awesome. Let's take a look at
 overall code before and after.
 
 
-
-00:40:00.306 --> 00:40:02.316 A:middle
+766
+00:40:00,306 --> 00:40:02,316
 Before, you see everything
 lighted up.
 
-00:40:02.626 --> 00:40:05.406 A:middle
+
+767
+00:40:02,626 --> 00:40:05,406
 If this is happening to
 your app, this is a problem.
 
-00:40:06.076 --> 00:40:08.876 A:middle
+
+768
+00:40:06,076 --> 00:40:08,876
 After is we are doing
 the same utility,
 
-00:40:08.876 --> 00:40:12.036 A:middle
+
+769
+00:40:08,876 --> 00:40:12,036
 we are giving the same utility
 to the user, same experience,
 
-00:40:12.476 --> 00:40:15.336 A:middle
+
+770
+00:40:12,476 --> 00:40:15,336
 but very, very little
 amount of load
 
-00:40:15.336 --> 00:40:16.916 A:middle
+
+771
+00:40:15,336 --> 00:40:16,916
 on the hardware in
 terms of energy.
 
-00:40:18.896 --> 00:40:21.736 A:middle
+
+772
+00:40:18,896 --> 00:40:21,736
 Probably the most important
 slide, as we promised you
 
-00:40:21.736 --> 00:40:23.956 A:middle
+
+773
+00:40:21,736 --> 00:40:23,956
 in the starting, if your
 app is coming at the top,
 
-00:40:24.306 --> 00:40:27.466 A:middle
+
+774
+00:40:24,306 --> 00:40:27,466
 please do the changes and you
 will see your app actually going
 
-00:40:27.466 --> 00:40:28.286 A:middle
+
+775
+00:40:27,466 --> 00:40:28,286
 at the bottom of the UI.
 
-00:40:28.286 --> 00:40:31.906 A:middle
+
+776
+00:40:28,286 --> 00:40:31,906
 What we did, we took two
 iPhone 6 fresh installs,
 
-00:40:32.416 --> 00:40:34.276 A:middle
+
+777
+00:40:32,416 --> 00:40:34,276
 on one of them installed
 inefficient code,
 
-00:40:34.606 --> 00:40:37.246 A:middle
+
+778
+00:40:34,606 --> 00:40:37,246
 on the second installed the
 code with all the fixes,
 
-00:40:37.766 --> 00:40:40.066 A:middle
+
+779
+00:40:37,766 --> 00:40:40,066
 took both of them exact
 same amount of work,
 
-00:40:40.066 --> 00:40:43.226 A:middle
+
+780
+00:40:40,066 --> 00:40:43,226
 while running other applications
 as well, same amount of load
 
-00:40:43.226 --> 00:40:45.466 A:middle
+
+781
+00:40:43,226 --> 00:40:45,466
 in terms of all application,
 in terms of Energy Buddy
 
-00:40:45.766 --> 00:40:46.716 A:middle
+
+782
+00:40:45,766 --> 00:40:46,716
 and other applications.
 
-00:40:47.436 --> 00:40:53.506 A:middle
+
+783
+00:40:47,436 --> 00:40:53,506
 What we found: the fixed code
 consumed 50 percent less energy,
 
-00:40:54.266 --> 00:40:55.746 A:middle
+
+784
+00:40:54,266 --> 00:40:55,746
 including display energy,
 
-00:40:56.126 --> 00:40:57.996 A:middle
+
+785
+00:40:56,126 --> 00:40:57,996
 which is exactly the
 same in both the apps.
 
-00:40:59.306 --> 00:41:02.446 A:middle
+
+786
+00:40:59,306 --> 00:41:02,446
 Battery UI you see right
 on the top, 28 percent.
 
 
-
-00:40:59.306 --> 00:41:02.446 A:middle
-Battery UI you see right
-on the top, 28 percent.
-
-00:41:02.866 --> 00:41:06.036 A:middle
+787
+00:41:02,866 --> 00:41:06,036
 And with optimized
 code, it goes way down.
 
-00:41:06.646 --> 00:41:09.016 A:middle
+
+788
+00:41:06,646 --> 00:41:09,016
 User is getting exactly
 the same thing.
 
-00:41:10.696 --> 00:41:15.406 A:middle
+
+789
+00:41:10,696 --> 00:41:15,406
 To summarize this talk, battery
 life is really, really important
 
-00:41:15.616 --> 00:41:17.716 A:middle
+
+790
+00:41:15,616 --> 00:41:17,716
 to have a good customer
 experience.
 
-00:41:18.276 --> 00:41:20.116 A:middle
+
+791
+00:41:18,276 --> 00:41:20,116
 Design your app with
 three things in mind --
 
-00:41:20.386 --> 00:41:23.366 A:middle
+
+792
+00:41:20,386 --> 00:41:23,366
 do it never/do it less,
 do it more efficiently,
 
-00:41:23.626 --> 00:41:25.896 A:middle
+
+793
+00:41:23,626 --> 00:41:25,896
 do it at a better time.
 
-00:41:26.076 --> 00:41:28.246 A:middle
+
+794
+00:41:26,076 --> 00:41:28,246
 Be a very considerate
 background application.
 
-00:41:29.696 --> 00:41:31.276 A:middle
+
+795
+00:41:29,696 --> 00:41:31,276
 Please try out the
 new debug tools.
 
-00:41:31.536 --> 00:41:32.276 A:middle
+
+796
+00:41:31,536 --> 00:41:32,276
 We have our labs.
 
-00:41:32.276 --> 00:41:33.636 A:middle
+
+797
+00:41:32,276 --> 00:41:33,636
 I will give details right now.
 
-00:41:34.246 --> 00:41:35.776 A:middle
+
+798
+00:41:34,246 --> 00:41:35,776
 Check out the new
 Energy Guide we have.
 
-00:41:35.936 --> 00:41:37.446 A:middle
+
+799
+00:41:35,936 --> 00:41:37,446
 It contains all the
 information we talked
 
-00:41:37.446 --> 00:41:39.296 A:middle
+
+800
+00:41:37,446 --> 00:41:39,296
 about in this talk and more.
 
-00:41:40.316 --> 00:41:41.746 A:middle
+
+801
+00:41:40,316 --> 00:41:41,746
 Bring your apps to
 the Power Lab.
 
-00:41:43.616 --> 00:41:44.466 A:middle
+
+802
+00:41:43,616 --> 00:41:44,466
 Some more information
 
-00:41:44.586 --> 00:41:46.466 A:middle
+
+803
+00:41:44,586 --> 00:41:46,466
 about where you can
 find the Energy Guides.
 
-00:41:48.296 --> 00:41:49.976 A:middle
+
+804
+00:41:48,296 --> 00:41:49,976
 Technical support for this talk.
 
-00:41:51.466 --> 00:41:53.146 A:middle
+
+805
+00:41:51,466 --> 00:41:53,146
 Finally, the related
 sessions for these talks,
 
-00:41:53.146 --> 00:41:56.186 A:middle
+
+806
+00:41:53,146 --> 00:41:56,186
 which are talking about
 a few concepts we talked,
 
-00:41:56.186 --> 00:41:57.006 A:middle
+
+807
+00:41:56,186 --> 00:41:57,006
 but in more detail.
 
-00:41:58.816 --> 00:41:59.886 A:middle
+
+808
+00:41:58,816 --> 00:41:59,886
 Thank you, everyone, for coming.
 
 
-
-00:42:01.516 --> 00:42:14.800 A:middle
+809
+00:42:01,516 --> 00:42:14,800
 [ Applause ]
 

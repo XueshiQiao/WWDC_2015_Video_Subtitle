@@ -1,2237 +1,3165 @@
-
-00:00:25.516 --> 00:00:30.966 A:middle
+1
+00:00:25,516 --> 00:00:30,966
 [Applause]
 
-00:00:31.466 --> 00:00:34.216 A:middle
+
+2
+00:00:31,466 --> 00:00:34,216
 Good afternoon and
 welcome to Session 220.
 
-00:00:34.756 --> 00:00:38.156 A:middle
+
+3
+00:00:34,756 --> 00:00:38,156
 My name is Rishi Verma and I'll
 be joined by Scott Perry later
 
-00:00:38.556 --> 00:00:41.406 A:middle
+
+4
+00:00:38,556 --> 00:00:41,406
 and we'll be presenting What's
 New in Core Data this year.
 
-00:00:43.186 --> 00:00:44.776 A:middle
+
+5
+00:00:43,186 --> 00:00:44,776
 Before we get into
 what's new though,
 
-00:00:44.996 --> 00:00:47.376 A:middle
+
+6
+00:00:44,996 --> 00:00:47,376
 I'd like to tell you a little
 bit about what is Core Data.
 
-00:00:48.316 --> 00:00:52.266 A:middle
+
+7
+00:00:48,316 --> 00:00:52,266
 Now a lot of you have made these
 amazing apps with beautiful UI
 
-00:00:52.266 --> 00:00:55.376 A:middle
+
+8
+00:00:52,266 --> 00:00:55,376
 and you've tied it all with
 data that you're either getting
 
-00:00:55.376 --> 00:00:57.916 A:middle
+
+9
+00:00:55,376 --> 00:00:57,916
 from an external data
 source or provided
 
-00:00:57.916 --> 00:00:58.966 A:middle
+
+10
+00:00:57,916 --> 00:00:58,966
 with your resource bundle.
 
-00:00:59.736 --> 00:01:02.726 A:middle
+
+11
+00:00:59,736 --> 00:01:02,726
 Now as you process those
 objects you're building
 
 
-
-00:00:59.736 --> 00:01:02.726 A:middle
-Now as you process those
-objects you're building
-
-00:01:02.726 --> 00:01:06.766 A:middle
+12
+00:01:02,726 --> 00:01:06,766
 up a complex graph and shuttling
 all those changes to your UI.
 
-00:01:06.766 --> 00:01:08.966 A:middle
+
+13
+00:01:06,766 --> 00:01:08,966
 And then as your
 user makes changes
 
-00:01:08.966 --> 00:01:11.976 A:middle
+
+14
+00:01:08,966 --> 00:01:11,976
 on the UI you're pushing
 all those changes back
 
-00:01:12.066 --> 00:01:16.066 A:middle
+
+15
+00:01:12,066 --> 00:01:16,066
 through your object graph
 and back to your data source.
 
-00:01:16.146 --> 00:01:17.776 A:middle
+
+16
+00:01:16,146 --> 00:01:17,776
 Well, Core Data makes this easy.
 
-00:01:18.666 --> 00:01:20.776 A:middle
+
+17
+00:01:18,666 --> 00:01:20,776
 Core Data will manage
 your object graph for you.
 
-00:01:21.676 --> 00:01:24.446 A:middle
+
+18
+00:01:21,676 --> 00:01:24,446
 Simply tell us a bit about
 your Cocoa model there
 
-00:01:24.696 --> 00:01:27.056 A:middle
+
+19
+00:01:24,696 --> 00:01:27,056
 and the object model
 editor, tell us a little
 
-00:01:27.056 --> 00:01:29.206 A:middle
+
+20
+00:01:27,056 --> 00:01:29,206
 about your objects,
 their attributes,
 
-00:01:29.586 --> 00:01:32.406 A:middle
+
+21
+00:01:29,586 --> 00:01:32,406
 how they're all related to
 each other and we'll take care
 
-00:01:32.406 --> 00:01:36.656 A:middle
+
+22
+00:01:32,406 --> 00:01:36,656
 of the rest and we'll also
 persist it in the back end
 
-00:01:36.656 --> 00:01:41.366 A:middle
+
+23
+00:01:36,656 --> 00:01:41,366
 of your choice, be it sequel
 light or your own custom store.
 
-00:01:42.466 --> 00:01:47.406 A:middle
+
+24
+00:01:42,466 --> 00:01:47,406
 Now, as you ingest objects, your
 relationships will be changing
 
-00:01:47.766 --> 00:01:50.546 A:middle
+
+25
+00:01:47,766 --> 00:01:50,546
 and Core Data will maintain
 these for you, so if you set
 
-00:01:50.546 --> 00:01:52.236 A:middle
+
+26
+00:01:50,546 --> 00:01:52,236
 up any delete propagation rules
 
-00:01:52.236 --> 00:01:55.136 A:middle
+
+27
+00:01:52,236 --> 00:01:55,136
 in your object model
 we'll delete and object
 
-00:01:55.136 --> 00:01:57.306 A:middle
+
+28
+00:01:55,136 --> 00:01:57,306
 and propagate those
 deletes as you define.
 
-00:01:59.036 --> 00:02:03.426 A:middle
+
+29
+00:01:59,036 --> 00:02:03,426
 Finding objects in your object
 graph is also particularly easy.
 
 
-
-00:01:59.036 --> 00:02:03.426 A:middle
-Finding objects in your object
-graph is also particularly easy.
-
-00:02:04.326 --> 00:02:08.306 A:middle
+30
+00:02:04,326 --> 00:02:08,306
 Simply use an NSFetchRequest
 and give it a predicate
 
-00:02:08.485 --> 00:02:10.336 A:middle
+
+31
+00:02:08,485 --> 00:02:10,336
 to find the objects
 you're looking for.
 
-00:02:10.936 --> 00:02:12.386 A:middle
+
+32
+00:02:10,936 --> 00:02:12,386
 And we'll go and
 find them for you.
 
-00:02:13.746 --> 00:02:15.826 A:middle
+
+33
+00:02:13,746 --> 00:02:15,826
 Also convenient is batching.
 
-00:02:16.786 --> 00:02:21.006 A:middle
+
+34
+00:02:16,786 --> 00:02:21,006
 This allows you to only pull up
 a smaller portion of the objects
 
-00:02:21.006 --> 00:02:23.786 A:middle
+
+35
+00:02:21,006 --> 00:02:23,786
 in your data set that may
 result from your fetch request,
 
-00:02:24.286 --> 00:02:27.696 A:middle
+
+36
+00:02:24,286 --> 00:02:27,696
 allowing you to have smaller
 chunks of data as you go
 
-00:02:27.696 --> 00:02:31.436 A:middle
+
+37
+00:02:27,696 --> 00:02:31,436
 through your data set and
 also another candy feature
 
-00:02:31.626 --> 00:02:35.006 A:middle
+
+38
+00:02:31,626 --> 00:02:35,006
 of NSFetchRequest is
 relationship prefetching.
 
-00:02:35.836 --> 00:02:39.656 A:middle
+
+39
+00:02:35,836 --> 00:02:39,656
 Tell us an object to fetch
 and we'll prefetch all
 
-00:02:39.656 --> 00:02:41.966 A:middle
+
+40
+00:02:39,656 --> 00:02:41,966
 of its related objects
 so when you traverse
 
-00:02:41.966 --> 00:02:44.876 A:middle
+
+41
+00:02:41,966 --> 00:02:44,876
 that relationship you're
 still doing so in memory.
 
-00:02:47.076 --> 00:02:50.056 A:middle
+
+42
+00:02:47,076 --> 00:02:50,056
 Then you simply just
 tie this all to UI.
 
-00:02:51.096 --> 00:02:54.656 A:middle
+
+43
+00:02:51,096 --> 00:02:54,656
 You take an NSFetch result
 controller and tie it
 
-00:02:54.656 --> 00:02:56.176 A:middle
+
+44
+00:02:54,656 --> 00:02:56,176
 to a Table View like
 we've done here.
 
-00:02:56.946 --> 00:02:58.566 A:middle
+
+45
+00:02:56,946 --> 00:02:58,566
 And as I delete the
 Apple butter,
 
-00:02:59.016 --> 00:03:00.756 A:middle
+
+46
+00:02:59,016 --> 00:03:00,756
 my UI will update accordingly.
 
 
-
-00:02:59.016 --> 00:03:00.756 A:middle
-my UI will update accordingly.
-
-00:03:01.886 --> 00:03:06.276 A:middle
+47
+00:03:01,886 --> 00:03:06,276
 And then as I ingest more
 objects and I add banana bread,
 
-00:03:06.776 --> 00:03:08.686 A:middle
+
+48
+00:03:06,776 --> 00:03:08,686
 my UI will update
 accordingly as well.
 
-00:03:09.356 --> 00:03:12.406 A:middle
+
+49
+00:03:09,356 --> 00:03:12,406
 This is all handled for you, you
 get all the key view behaviors
 
-00:03:12.686 --> 00:03:15.566 A:middle
+
+50
+00:03:12,686 --> 00:03:15,566
 and change notifications
 handled for you by Core Data.
 
-00:03:16.166 --> 00:03:18.866 A:middle
+
+51
+00:03:16,166 --> 00:03:18,866
 Excuse me.
 
-00:03:19.836 --> 00:03:21.666 A:middle
+
+52
+00:03:19,836 --> 00:03:21,666
 Now there may be a scenario
 
-00:03:22.056 --> 00:03:25.166 A:middle
+
+53
+00:03:22,056 --> 00:03:25,166
 where your user is manipulating
 the object on the main context
 
-00:03:25.746 --> 00:03:30.476 A:middle
+
+54
+00:03:25,746 --> 00:03:30,476
 and on a background context
 you're ingesting the same new
 
-00:03:30.476 --> 00:03:34.276 A:middle
+
+55
+00:03:30,476 --> 00:03:34,276
 object and possibly updating
 the object the user currently is
 
-00:03:34.276 --> 00:03:35.076 A:middle
+
+56
+00:03:34,276 --> 00:03:35,076
 also manipulating.
 
-00:03:36.226 --> 00:03:38.656 A:middle
+
+57
+00:03:36,226 --> 00:03:38,656
 This is introducing the
 multiwriter conflict.
 
-00:03:39.556 --> 00:03:42.276 A:middle
+
+58
+00:03:39,556 --> 00:03:42,276
 In Core Data it has you
 taken care of here as well.
 
-00:03:42.976 --> 00:03:46.966 A:middle
+
+59
+00:03:42,976 --> 00:03:46,966
 We version all the objects and
 allow you to set a merge policy.
 
-00:03:47.716 --> 00:03:50.836 A:middle
+
+60
+00:03:47,716 --> 00:03:50,836
 If you do not set a merge
 policy we'll default to error
 
-00:03:50.836 --> 00:03:52.166 A:middle
+
+61
+00:03:50,836 --> 00:03:52,166
 when you save in your context
 
-00:03:52.756 --> 00:03:55.186 A:middle
+
+62
+00:03:52,756 --> 00:03:55,186
 and give you a conflict
 error allowing you
 
-00:03:55.776 --> 00:03:57.826 A:middle
+
+63
+00:03:55,776 --> 00:03:57,826
 to address the conflict
 as you see fit.
 
-00:03:58.596 --> 00:04:01.306 A:middle
+
+64
+00:03:58,596 --> 00:04:01,306
 Or you can choose from
 several merge policies
 
 
-
-00:03:58.596 --> 00:04:01.306 A:middle
-Or you can choose from
-several merge policies
-
-00:04:01.306 --> 00:04:02.546 A:middle
+65
+00:04:01,306 --> 00:04:02,546
 that we have already provided,
 
-00:04:02.786 --> 00:04:07.066 A:middle
+
+66
+00:04:02,786 --> 00:04:07,066
 be it the in store memory
 persistent store trumps what's
 
-00:04:07.066 --> 00:04:10.946 A:middle
+
+67
+00:04:07,066 --> 00:04:10,946
 in memory or what is in memory
 trumps the persistent store.
 
-00:04:11.616 --> 00:04:14.096 A:middle
+
+68
+00:04:11,616 --> 00:04:14,096
 Choose what is best for you
 and your particular scenario.
 
-00:04:15.446 --> 00:04:18.125 A:middle
+
+69
+00:04:15,446 --> 00:04:18,125
 Once you've adopted Core Data
 you get several benefits.
 
-00:04:18.125 --> 00:04:20.616 A:middle
+
+70
+00:04:18,125 --> 00:04:20,616
 I would like to give
 you two in particular
 
-00:04:20.616 --> 00:04:22.956 A:middle
+
+71
+00:04:20,616 --> 00:04:22,956
 that really are the best ones.
 
-00:04:23.656 --> 00:04:27.406 A:middle
+
+72
+00:04:23,656 --> 00:04:27,406
 An excellent memory scalability
 and aggressive lazy loading.
 
-00:04:28.136 --> 00:04:32.226 A:middle
+
+73
+00:04:28,136 --> 00:04:32,226
 What that means, it is we'll
 only load the objects you need
 
-00:04:32.456 --> 00:04:34.236 A:middle
+
+74
+00:04:32,456 --> 00:04:34,236
 when you need them into memory.
 
-00:04:35.376 --> 00:04:38.736 A:middle
+
+75
+00:04:35,376 --> 00:04:38,736
 Adopting Core Data leads to
 a much smaller footprint,
 
-00:04:39.516 --> 00:04:42.016 A:middle
+
+76
+00:04:39,516 --> 00:04:42,016
 over 50 to 70% less code for you
 
-00:04:42.016 --> 00:04:45.416 A:middle
+
+77
+00:04:42,016 --> 00:04:45,416
 to maintain allowing you
 more time to go and work
 
-00:04:45.416 --> 00:04:48.096 A:middle
+
+78
+00:04:45,416 --> 00:04:48,096
 on new features for your app.
 
-00:04:48.096 --> 00:04:49.566 A:middle
+
+79
+00:04:48,096 --> 00:04:49,566
 Then you can join the
 
-00:04:49.566 --> 00:04:53.496 A:middle
+
+80
+00:04:49,566 --> 00:04:53,496
 over 400,000 apps already using
 Core Data in the App Store.
 
-00:04:54.726 --> 00:04:56.476 A:middle
+
+81
+00:04:54,726 --> 00:04:56,476
 That's a brief overview
 of Core Data.
 
-00:04:57.446 --> 00:04:59.366 A:middle
+
+82
+00:04:57,446 --> 00:04:59,366
 Now let's jump into
 the new stuff.
 
-00:04:59.666 --> 00:05:01.546 A:middle
+
+83
+00:04:59,666 --> 00:05:01,546
 All the new APIs
 we have for you.
 
 
-
-00:04:59.666 --> 00:05:01.546 A:middle
-All the new APIs
-we have for you.
-
-00:05:02.996 --> 00:05:05.706 A:middle
+84
+00:05:02,996 --> 00:05:05,706
 First, let's start off
 with MS manage object
 
-00:05:06.446 --> 00:05:10.306 A:middle
+
+85
+00:05:06,446 --> 00:05:10,306
 and a new property called hash
 persistent changed values.
 
-00:05:12.056 --> 00:05:14.736 A:middle
+
+86
+00:05:12,056 --> 00:05:14,736
 Previously you may
 have used hash changes,
 
-00:05:14.966 --> 00:05:19.256 A:middle
+
+87
+00:05:14,966 --> 00:05:19,256
 this was a rather basic dirty
 flag, if you touch the object,
 
-00:05:19.336 --> 00:05:20.296 A:middle
+
+88
+00:05:19,336 --> 00:05:20,296
 we would mark it dirty.
 
-00:05:20.296 --> 00:05:24.116 A:middle
+
+89
+00:05:20,296 --> 00:05:24,116
 But with hash persistent
 changed values we'll ensure
 
-00:05:24.116 --> 00:05:27.996 A:middle
+
+90
+00:05:24,116 --> 00:05:27,996
 that the properties on the
 object are different than what's
 
-00:05:27.996 --> 00:05:30.546 A:middle
+
+91
+00:05:27,996 --> 00:05:30,546
 in the persistent store
 ensuring you don't have any
 
-00:05:30.596 --> 00:05:31.406 A:middle
+
+92
+00:05:30,596 --> 00:05:31,406
 false positives.
 
-00:05:33.786 --> 00:05:37.846 A:middle
+
+93
+00:05:33,786 --> 00:05:37,846
 Also new on NSManaged
 object is object ID's
 
-00:05:37.846 --> 00:05:39.046 A:middle
+
+94
+00:05:37,846 --> 00:05:39,046
 for relationship named.
 
-00:05:39.946 --> 00:05:45.336 A:middle
+
+95
+00:05:39,946 --> 00:05:45,336
 This is ideal for working with
 large relationships mainly
 
-00:05:45.336 --> 00:05:47.776 A:middle
+
+96
+00:05:45,336 --> 00:05:47,776
 because we won't materialize
 the entire relationship
 
-00:05:47.776 --> 00:05:50.056 A:middle
+
+97
+00:05:47,776 --> 00:05:50,056
 in memory rather we'll return
 
-00:05:50.056 --> 00:05:52.636 A:middle
+
+98
+00:05:50,056 --> 00:05:52,636
 to typed array of
 object IDs to you.
 
-00:05:53.296 --> 00:05:56.456 A:middle
+
+99
+00:05:53,296 --> 00:05:56,456
 This allows you to go through
 these object IDs and work
 
-00:05:56.456 --> 00:05:58.216 A:middle
+
+100
+00:05:56,456 --> 00:05:58,216
 with your objects
 in smaller sizes.
 
-00:05:59.006 --> 00:06:00.946 A:middle
+
+101
+00:05:59,006 --> 00:06:00,946
 Let me show you a quick
 example of this in code.
 
 
-
-00:05:59.006 --> 00:06:00.946 A:middle
-Let me show you a quick
-example of this in code.
-
-00:06:02.766 --> 00:06:06.796 A:middle
+102
+00:06:02,766 --> 00:06:06,796
 Here I am with my person object
 and I ask for its object IDs
 
-00:06:06.796 --> 00:06:08.646 A:middle
+
+103
+00:06:06,796 --> 00:06:08,646
 for the relationship
 named family.
 
-00:06:09.286 --> 00:06:11.926 A:middle
+
+104
+00:06:09,286 --> 00:06:11,926
 This gives me all my
 relations and then I can go
 
-00:06:11.926 --> 00:06:15.196 A:middle
+
+105
+00:06:11,926 --> 00:06:15,196
 and fetch these relations
 in a batch size of 100
 
-00:06:16.276 --> 00:06:19.036 A:middle
+
+106
+00:06:16,276 --> 00:06:19,036
 and then traverse through
 these relationships at 100
 
-00:06:19.036 --> 00:06:23.086 A:middle
+
+107
+00:06:19,036 --> 00:06:23,086
 at a time keeping my
 memory input rather small
 
-00:06:23.496 --> 00:06:24.256 A:middle
+
+108
+00:06:23,496 --> 00:06:24,256
 and manageable.
 
-00:06:26.556 --> 00:06:29.466 A:middle
+
+109
+00:06:26,556 --> 00:06:29,466
 Let's move on to
 NSManaged object context
 
-00:06:30.066 --> 00:06:34.376 A:middle
+
+110
+00:06:30,066 --> 00:06:34,376
 and a new method called
 refresh all objects.
 
-00:06:36.216 --> 00:06:39.326 A:middle
+
+111
+00:06:36,216 --> 00:06:39,326
 Refresh all objects does exactly
 what you expect it to do.
 
-00:06:39.326 --> 00:06:41.626 A:middle
+
+112
+00:06:39,326 --> 00:06:41,626
 It refreshes the
 objects in your context
 
-00:06:42.286 --> 00:06:46.046 A:middle
+
+113
+00:06:42,286 --> 00:06:46,046
 but preserves unsaved
 changes and unlike reset
 
-00:06:46.046 --> 00:06:49.596 A:middle
+
+114
+00:06:46,046 --> 00:06:49,596
 on the context your object
 references remain valid.
 
-00:06:50.126 --> 00:06:54.386 A:middle
+
+115
+00:06:50,126 --> 00:06:54,386
 So you don't have to refetch
 any references and it is ideal
 
-00:06:54.386 --> 00:06:57.096 A:middle
+
+116
+00:06:54,386 --> 00:06:57,096
 for breaking retain cycles
 which may have occurred
 
-00:06:57.096 --> 00:06:59.166 A:middle
+
+117
+00:06:57,096 --> 00:06:59,166
 when you traversed a bi
 directional relationship
 
-00:06:59.166 --> 00:07:01.046 A:middle
+
+118
+00:06:59,166 --> 00:07:01,046
 and looped yourself around.
 
 
-
-00:06:59.166 --> 00:07:01.046 A:middle
-and looped yourself around.
-
-00:07:02.936 --> 00:07:06.756 A:middle
+119
+00:07:02,936 --> 00:07:06,756
 Also new on NSManaged
 object context is for those
 
-00:07:06.756 --> 00:07:09.316 A:middle
+
+120
+00:07:06,756 --> 00:07:09,316
 of you using multiple
 coordinators in your store.
 
-00:07:10.356 --> 00:07:14.836 A:middle
+
+121
+00:07:10,356 --> 00:07:14,836
 Merged changes from remote
 context save will take a save
 
-00:07:14.836 --> 00:07:17.566 A:middle
+
+122
+00:07:14,836 --> 00:07:17,566
 notification from one
 coordinator and apply it
 
-00:07:17.566 --> 00:07:19.486 A:middle
+
+123
+00:07:17,566 --> 00:07:19,486
 to the context in
 another coordinator.
 
-00:07:20.016 --> 00:07:21.906 A:middle
+
+124
+00:07:20,016 --> 00:07:21,906
 This allows you to have
 the latest row data
 
-00:07:21.906 --> 00:07:25.336 A:middle
+
+125
+00:07:21,906 --> 00:07:25,336
 in all your context
 and we'll take care
 
-00:07:25.336 --> 00:07:27.256 A:middle
+
+126
+00:07:25,336 --> 00:07:27,256
 of all the necessary
 context for you.
 
-00:07:32.076 --> 00:07:35.186 A:middle
+
+127
+00:07:32,076 --> 00:07:35,186
 In Core Data occasionally
 you'll run
 
-00:07:35.186 --> 00:07:37.426 A:middle
+
+128
+00:07:35,186 --> 00:07:37,426
 into one particular
 exception and that sticks
 
-00:07:37.426 --> 00:07:38.706 A:middle
+
+129
+00:07:37,426 --> 00:07:38,706
 out a lot to developers.
 
-00:07:39.186 --> 00:07:41.076 A:middle
+
+130
+00:07:39,186 --> 00:07:41,076
 That's the inability
 to load a fault.
 
-00:07:42.526 --> 00:07:44.826 A:middle
+
+131
+00:07:42,526 --> 00:07:44,826
 Why is Core Data unable
 to load this fault?
 
-00:07:45.576 --> 00:07:48.546 A:middle
+
+132
+00:07:45,576 --> 00:07:48,546
 Well, as I mentioned earlier,
 Core Data is aggressive
 
-00:07:48.546 --> 00:07:52.296 A:middle
+
+133
+00:07:48,546 --> 00:07:52,296
 about lazily loading objects,
 you'll only have a portion
 
-00:07:52.296 --> 00:07:55.676 A:middle
+
+134
+00:07:52,296 --> 00:07:55,676
 of your graph in memory and
 it is possible as we try
 
-00:07:55.676 --> 00:07:59.246 A:middle
+
+135
+00:07:55,676 --> 00:07:59,246
 to traverse a relationship we'll
 try to have to go back to disk
 
-00:07:59.646 --> 00:08:02.006 A:middle
+
+136
+00:07:59,646 --> 00:08:02,006
 and that object has been
 deleted out from underneath you.
 
 
-
-00:07:59.646 --> 00:08:02.006 A:middle
-and that object has been
-deleted out from underneath you.
-
-00:08:03.496 --> 00:08:05.296 A:middle
+137
+00:08:03,496 --> 00:08:05,296
 What's better than
 throwing in exception,
 
-00:08:05.496 --> 00:08:07.636 A:middle
+
+138
+00:08:05,496 --> 00:08:07,636
 there is a lot of things.
 
-00:08:07.926 --> 00:08:09.846 A:middle
+
+139
+00:08:07,926 --> 00:08:09,846
 We have introduced
 a new property
 
-00:08:10.066 --> 00:08:13.086 A:middle
+
+140
+00:08:10,066 --> 00:08:13,086
 on the NSManaged object
 context that allows you
 
-00:08:13.086 --> 00:08:15.956 A:middle
+
+141
+00:08:13,086 --> 00:08:15,956
 to set some basic
 faulting delegated.
 
-00:08:16.516 --> 00:08:20.606 A:middle
+
+142
+00:08:16,516 --> 00:08:20,606
 [Applause]
 
-00:08:21.106 --> 00:08:24.186 A:middle
-&gt;&gt; Currently should
+
+143
+00:08:21,106 --> 00:08:24,186
+>> Currently should
 delete inaccessible faults,
 
-00:08:24.386 --> 00:08:25.276 A:middle
+
+144
+00:08:24,386 --> 00:08:25,276
 defaults to yes.
 
-00:08:25.806 --> 00:08:29.576 A:middle
+
+145
+00:08:25,806 --> 00:08:29,576
 If we encounter a fault we'll
 mark the fault as deleted
 
-00:08:30.076 --> 00:08:33.285 A:middle
+
+146
+00:08:30,076 --> 00:08:33,285
 and any missing attributes
 will be null, nil or zero.
 
-00:08:33.856 --> 00:08:37.275 A:middle
+
+147
+00:08:33,856 --> 00:08:37,275
 This allows your app to
 continue on with this object
 
-00:08:37.716 --> 00:08:39.326 A:middle
+
+148
+00:08:37,716 --> 00:08:39,326
 and treat it as a
 deleted object.
 
-00:08:40.116 --> 00:08:42.256 A:middle
+
+149
+00:08:40,116 --> 00:08:42,256
 No longer will you
 crash but you'll be able
 
-00:08:42.256 --> 00:08:47.516 A:middle
+
+150
+00:08:42,256 --> 00:08:47,516
 to merely keep going on and show
 the user what they have expected
 
-00:08:48.166 --> 00:08:49.976 A:middle
+
+151
+00:08:48,166 --> 00:08:49,976
 to see.
 
-00:08:50.216 --> 00:08:56.296 A:middle
+
+152
+00:08:50,216 --> 00:08:56,296
 Now on NSPersistent store
 coordinator we have two new APIs
 
-00:08:56.296 --> 00:08:56.976 A:middle
+
+153
+00:08:56,296 --> 00:08:56,976
 to introduce.
 
-00:08:58.116 --> 00:09:01.546 A:middle
+
+154
+00:08:58,116 --> 00:09:01,546
 We introduced these two new
 APIs because we have seen issues
 
 
-
-00:08:58.116 --> 00:09:01.546 A:middle
-We introduced these two new
-APIs because we have seen issues
-
-00:09:01.646 --> 00:09:05.566 A:middle
+155
+00:09:01,646 --> 00:09:05,566
 with the way that developers
 clear up their persistent store.
 
-00:09:06.566 --> 00:09:08.036 A:middle
+
+156
+00:09:06,566 --> 00:09:08,036
 A few of you have done this.
 
-00:09:08.036 --> 00:09:10.716 A:middle
+
+157
+00:09:08,036 --> 00:09:10,716
 You have gone through and
 bypassed the Core Data API layer
 
-00:09:11.106 --> 00:09:12.976 A:middle
+
+158
+00:09:11,106 --> 00:09:12,976
 to manipulate your
 database directly.
 
-00:09:13.896 --> 00:09:17.726 A:middle
+
+159
+00:09:13,896 --> 00:09:17,726
 Unfortunately this has some
 unexpected consequences,
 
-00:09:18.486 --> 00:09:21.066 A:middle
+
+160
+00:09:18,486 --> 00:09:21,066
 you may be leaving
 bad descriptors open
 
-00:09:21.776 --> 00:09:26.786 A:middle
+
+161
+00:09:21,776 --> 00:09:26,786
 and so we have supplied you with
 destroy persistent store at URL.
 
-00:09:28.516 --> 00:09:32.346 A:middle
+
+162
+00:09:28,516 --> 00:09:32,346
 [Applause]
 
-00:09:32.846 --> 00:09:36.066 A:middle
-&gt;&gt; Like ad persistent store at
+
+163
+00:09:32,846 --> 00:09:36,066
+>> Like ad persistent store at
 URL you take the same options
 
-00:09:36.346 --> 00:09:38.176 A:middle
+
+164
+00:09:36,346 --> 00:09:38,176
 and you can destroy
 that persistent store
 
-00:09:38.706 --> 00:09:42.816 A:middle
+
+165
+00:09:38,706 --> 00:09:42,816
 and we'll honor all locking
 protocols as well as clearing
 
-00:09:42.816 --> 00:09:45.836 A:middle
+
+166
+00:09:42,816 --> 00:09:45,836
 out all the related files
 to the particular store type
 
-00:09:45.876 --> 00:09:46.886 A:middle
+
+167
+00:09:45,876 --> 00:09:46,886
 that you have chosen to use.
 
-00:09:47.686 --> 00:09:51.586 A:middle
+
+168
+00:09:47,686 --> 00:09:51,586
 In that same vein we have
 introduced replace persistent
 
-00:09:51.636 --> 00:09:56.906 A:middle
+
+169
+00:09:51,636 --> 00:09:56,906
 tore at URL, similar pattern
 as destroy and if the database
 
-00:09:57.196 --> 00:10:00.126 A:middle
+
+170
+00:09:57,196 --> 00:10:00,126
 at the destination doesn't exist
 we'll simply copy it into place.
 
 
-
-00:09:57.196 --> 00:10:00.126 A:middle
-at the destination doesn't exist
-we'll simply copy it into place.
-
-00:10:00.866 --> 00:10:04.856 A:middle
+171
+00:10:00,866 --> 00:10:04,856
 One of the problems you have
 all run into is duplicates.
 
-00:10:06.056 --> 00:10:08.856 A:middle
+
+172
+00:10:06,056 --> 00:10:08,856
 Having a database with
 duplicates is not useful.
 
-00:10:09.306 --> 00:10:10.676 A:middle
+
+173
+00:10:09,306 --> 00:10:10,676
 You have written a lot of code
 
-00:10:10.896 --> 00:10:12.266 A:middle
+
+174
+00:10:10,896 --> 00:10:12,266
 to ensure you don't
 have duplicates.
 
-00:10:13.226 --> 00:10:15.506 A:middle
+
+175
+00:10:13,226 --> 00:10:15,506
 Core Data can help
 you out here too.
 
-00:10:16.526 --> 00:10:19.156 A:middle
+
+176
+00:10:16,526 --> 00:10:19,156
 First let's look at a common
 pattern you may have used
 
-00:10:19.526 --> 00:10:20.456 A:middle
+
+177
+00:10:19,526 --> 00:10:20,456
 to find duplicates.
 
-00:10:21.146 --> 00:10:22.716 A:middle
+
+178
+00:10:21,146 --> 00:10:22,716
 That's the find and
 create pattern.
 
-00:10:23.926 --> 00:10:28.106 A:middle
+
+179
+00:10:23,926 --> 00:10:28,106
 Here as you see, I set up a
 fetch request and I had to go
 
-00:10:28.106 --> 00:10:31.066 A:middle
+
+180
+00:10:28,106 --> 00:10:31,066
 and look for one
 particular object to see
 
-00:10:31.066 --> 00:10:34.256 A:middle
+
+181
+00:10:31,066 --> 00:10:34,256
 if it exists before
 I can create it.
 
-00:10:34.256 --> 00:10:36.436 A:middle
+
+182
+00:10:34,256 --> 00:10:36,436
 If it does exist, I update it.
 
-00:10:37.416 --> 00:10:41.116 A:middle
+
+183
+00:10:37,416 --> 00:10:41,116
 Well this pattern can be rather
 racey and it can also lead
 
-00:10:41.466 --> 00:10:44.276 A:middle
+
+184
+00:10:41,466 --> 00:10:44,276
 to more duplicates if I have
 several threads ingested
 
-00:10:44.526 --> 00:10:45.726 A:middle
+
+185
+00:10:44,526 --> 00:10:45,726
 from multiple data sources.
 
-00:10:46.496 --> 00:10:50.346 A:middle
+
+186
+00:10:46,496 --> 00:10:50,346
 Well Core Data has you covered
 this year, simply tell us
 
-00:10:50.346 --> 00:10:53.316 A:middle
+
+187
+00:10:50,346 --> 00:10:53,316
 which attributes should be
 unique across any entity
 
-00:10:53.586 --> 00:10:56.996 A:middle
+
+188
+00:10:53,586 --> 00:10:56,996
 and we'll make sure all
 instances of that entity keep
 
-00:10:56.996 --> 00:11:00.306 A:middle
+
+189
+00:10:56,996 --> 00:11:00,306
 that unique attribute, be it
 email addresses, part numbers,
 
 
-
-00:10:56.996 --> 00:11:00.306 A:middle
-that unique attribute, be it
-email addresses, part numbers,
-
-00:11:00.306 --> 00:11:02.936 A:middle
+190
+00:11:00,306 --> 00:11:02,936
 UPC, you name it, we'll
 make sure it is unique
 
-00:11:02.936 --> 00:11:04.066 A:middle
+
+191
+00:11:02,936 --> 00:11:04,066
 across all instances.
 
-00:11:05.516 --> 00:11:11.036 A:middle
+
+192
+00:11:05,516 --> 00:11:11,036
 [Applause]
 
-00:11:11.536 --> 00:11:16.026 A:middle
+
+193
+00:11:11,536 --> 00:11:16,026
 Unique instances, unique
 constraints are best used
 
-00:11:16.406 --> 00:11:18.806 A:middle
+
+194
+00:11:16,406 --> 00:11:18,806
 when your on values
 that are unmodified
 
-00:11:18.806 --> 00:11:21.376 A:middle
+
+195
+00:11:18,806 --> 00:11:21,376
 after object creation, generally
 
-00:11:21.376 --> 00:11:24.416 A:middle
+
+196
+00:11:21,376 --> 00:11:24,416
 when you create the object these
 unique constraints should be set
 
-00:11:24.506 --> 00:11:27.086 A:middle
+
+197
+00:11:24,506 --> 00:11:27,086
 once and then never changed
 to the life of the object.
 
-00:11:28.236 --> 00:11:31.636 A:middle
+
+198
+00:11:28,236 --> 00:11:31,636
 Changing them could
 result in conflicts
 
-00:11:32.176 --> 00:11:35.606 A:middle
+
+199
+00:11:32,176 --> 00:11:35,606
 as your unique properties may
 collide with another object
 
-00:11:35.606 --> 00:11:36.976 A:middle
+
+200
+00:11:35,606 --> 00:11:36,976
 that has the same
 unique attributes.
 
-00:11:37.736 --> 00:11:40.446 A:middle
+
+201
+00:11:37,736 --> 00:11:40,446
 That's where you can
 use the recovery methods
 
-00:11:40.446 --> 00:11:42.666 A:middle
+
+202
+00:11:40,446 --> 00:11:42,666
 in the merge policies we
 talked about previously
 
-00:11:43.326 --> 00:11:44.356 A:middle
+
+203
+00:11:43,326 --> 00:11:44,356
 to address those issues.
 
-00:11:45.316 --> 00:11:49.356 A:middle
+
+204
+00:11:45,316 --> 00:11:49,356
 Also any of your entities
 that inherit from a parent
 
-00:11:49.356 --> 00:11:52.586 A:middle
+
+205
+00:11:49,356 --> 00:11:52,586
 that has unique constraints will
 inherit those unique constraints
 
-00:11:52.586 --> 00:11:53.006 A:middle
+
+206
+00:11:52,586 --> 00:11:53,006
 as well.
 
-00:11:53.716 --> 00:11:56.936 A:middle
+
+207
+00:11:53,716 --> 00:11:56,936
 In this example above you
 can see the parent has UUID
 
-00:11:56.936 --> 00:11:59.126 A:middle
+
+208
+00:11:56,936 --> 00:11:59,126
 constraint identified
 as a unique constraint.
 
-00:11:59.846 --> 00:12:03.926 A:middle
+
+209
+00:11:59,846 --> 00:12:03,926
 The sub entity has added
 email as an addition
 
 
-
-00:11:59.846 --> 00:12:03.926 A:middle
-The sub entity has added
-email as an addition
-
-00:12:03.926 --> 00:12:05.566 A:middle
+210
+00:12:03,926 --> 00:12:05,566
 to its unique constraints.
 
-00:12:07.596 --> 00:12:11.346 A:middle
+
+211
+00:12:07,596 --> 00:12:11,346
 Now I would like to take a
 quick demo of showing you how
 
-00:12:11.546 --> 00:12:13.616 A:middle
+
+212
+00:12:11,546 --> 00:12:13,616
 to utilize unique constraints.
 
-00:12:14.426 --> 00:12:19.456 A:middle
+
+213
+00:12:14,426 --> 00:12:19,456
 So here we are, we're using the
 recipes app we have shown you
 
-00:12:19.456 --> 00:12:21.986 A:middle
+
+214
+00:12:19,456 --> 00:12:21,986
 in previous years and it is
 available at download off
 
-00:12:21.986 --> 00:12:23.036 A:middle
+
+215
+00:12:21,986 --> 00:12:23,036
 of the developer portal.
 
-00:12:23.786 --> 00:12:26.436 A:middle
+
+216
+00:12:23,786 --> 00:12:26,436
 We've added a new feature,
 import, down here in the right.
 
-00:12:27.526 --> 00:12:30.116 A:middle
+
+217
+00:12:27,526 --> 00:12:30,116
 This allows me to import
 all my favorite recipes
 
-00:12:30.376 --> 00:12:33.226 A:middle
+
+218
+00:12:30,376 --> 00:12:33,226
 that involve apples.
 
-00:12:33.426 --> 00:12:35.636 A:middle
+
+219
+00:12:33,426 --> 00:12:35,636
 Here we go back,
 you see I added all
 
-00:12:35.636 --> 00:12:39.736 A:middle
+
+220
+00:12:35,636 --> 00:12:39,736
 of my favorite apple recipes
 however my UI isn't very
 
-00:12:39.736 --> 00:12:42.826 A:middle
+
+221
+00:12:39,736 --> 00:12:42,826
 intuitive and the user may
 be wondering what's going
 
-00:12:42.826 --> 00:12:44.896 A:middle
+
+222
+00:12:42,826 --> 00:12:44,896
 on when they click.
 
-00:12:44.896 --> 00:12:47.306 A:middle
+
+223
+00:12:44,896 --> 00:12:47,306
 Unfortunately, they have
 duplicated their data.
 
-00:12:47.996 --> 00:12:52.786 A:middle
+
+224
+00:12:47,996 --> 00:12:52,786
 We can do a lot better here.
 
-00:12:53.356 --> 00:12:55.886 A:middle
+
+225
+00:12:53,356 --> 00:12:55,886
 Let's go back to Xcode and
 look at our object model
 
-00:12:56.786 --> 00:12:59.836 A:middle
+
+226
+00:12:56,786 --> 00:12:59,836
 and here we are on our
 entity, I'll select a recipe
 
 
-
-00:13:00.416 --> 00:13:05.236 A:middle
+227
+00:13:00,416 --> 00:13:05,236
 and now we have a
 new option over here
 
-00:13:05.236 --> 00:13:07.896 A:middle
+
+228
+00:13:05,236 --> 00:13:07,896
 on the right called unique.
 
-00:13:08.656 --> 00:13:12.356 A:middle
+
+229
+00:13:08,656 --> 00:13:12,356
 This allows me to specify
 which attributes are unique
 
-00:13:12.356 --> 00:13:13.536 A:middle
+
+230
+00:13:12,356 --> 00:13:13,536
 for this particular entity.
 
-00:13:14.256 --> 00:13:17.726 A:middle
+
+231
+00:13:14,256 --> 00:13:17,726
 In this case we'll have
 source and external ID.
 
-00:13:21.336 --> 00:13:27.386 A:middle
+
+232
+00:13:21,336 --> 00:13:27,386
 Thousand when I run the
 recipe app we'll see I have my
 
-00:13:27.386 --> 00:13:28.106 A:middle
+
+233
+00:13:27,386 --> 00:13:28,106
 original list.
 
-00:13:28.576 --> 00:13:32.476 A:middle
+
+234
+00:13:28,576 --> 00:13:32,476
 I can go, import, and I
 can select my apple recipes
 
-00:13:32.966 --> 00:13:34.346 A:middle
+
+235
+00:13:32,966 --> 00:13:34,346
 but I'm also impatient,
 
-00:13:34.476 --> 00:13:37.046 A:middle
+
+236
+00:13:34,476 --> 00:13:37,046
 not seeing any UI
 so I keep clicking.
 
-00:13:37.676 --> 00:13:41.686 A:middle
+
+237
+00:13:37,676 --> 00:13:41,686
 This time we're left with
 the one single object for all
 
-00:13:41.686 --> 00:13:45.836 A:middle
+
+238
+00:13:41,686 --> 00:13:45,836
 of them, no duplicates, no
 extra code to find or create,
 
-00:13:46.606 --> 00:13:49.746 A:middle
+
+239
+00:13:46,606 --> 00:13:49,746
 your unique constraints ensure
 that your uniqueness is there.
 
-00:13:50.516 --> 00:13:57.166 A:middle
+
+240
+00:13:50,516 --> 00:13:57,166
 [Applause]
 
-00:13:57.666 --> 00:14:02.516 A:middle
-&gt;&gt; However, having all of
+
+241
+00:13:57,666 --> 00:14:02,516
+>> However, having all of
 those duplicates isn't ideal.
 
 
-
-00:13:57.666 --> 00:14:02.516 A:middle
-&gt;&gt; However, having all of
-those duplicates isn't ideal.
-
-00:14:03.366 --> 00:14:05.576 A:middle
+242
+00:14:03,366 --> 00:14:05,576
 Getting rid of the duplicates
 can be a lot of work.
 
-00:14:06.066 --> 00:14:07.806 A:middle
+
+243
+00:14:06,066 --> 00:14:07,806
 That's where Scott Perry
 is going to come up
 
-00:14:07.806 --> 00:14:09.206 A:middle
+
+244
+00:14:07,806 --> 00:14:09,206
 and show us what we
 can do about that.
 
-00:14:10.516 --> 00:14:15.456 A:middle
+
+245
+00:14:10,516 --> 00:14:15,456
 [Applause]
 
-00:14:15.956 --> 00:14:16.446 A:middle
-&gt;&gt; Thanks, Rishi.
 
-00:14:18.046 --> 00:14:20.396 A:middle
+246
+00:14:15,956 --> 00:14:16,446
+>> Thanks, Rishi.
+
+
+247
+00:14:18,046 --> 00:14:20,396
 So let's say you
 already have an app
 
-00:14:20.756 --> 00:14:22.306 A:middle
+
+248
+00:14:20,756 --> 00:14:22,306
 and you've got all this
 duplicated data now,
 
-00:14:23.196 --> 00:14:25.206 A:middle
+
+249
+00:14:23,196 --> 00:14:25,206
 now you have to go
 and delete them all.
 
-00:14:25.856 --> 00:14:29.186 A:middle
+
+250
+00:14:25,856 --> 00:14:29,186
 Today what you have to do is
 fetch all of them from memory --
 
-00:14:29.676 --> 00:14:32.716 A:middle
+
+251
+00:14:29,676 --> 00:14:32,716
 sorry, from the store -- once
 they're in memory, you mark each
 
-00:14:32.716 --> 00:14:35.656 A:middle
+
+252
+00:14:32,716 --> 00:14:35,656
 of them for deletion and
 then you have to save
 
-00:14:35.656 --> 00:14:37.876 A:middle
+
+253
+00:14:35,656 --> 00:14:37,876
 down to the persistent
 store, if you have a lot
 
-00:14:37.876 --> 00:14:41.316 A:middle
+
+254
+00:14:37,876 --> 00:14:41,316
 of objects you're going to have
 to do that over and over again
 
-00:14:41.686 --> 00:14:44.146 A:middle
+
+255
+00:14:41,686 --> 00:14:44,146
 in order to maintain a low
 enough memory footprint
 
-00:14:44.146 --> 00:14:45.796 A:middle
+
+256
+00:14:44,146 --> 00:14:45,796
 so that your app stays alive.
 
-00:14:47.026 --> 00:14:51.906 A:middle
+
+257
+00:14:47,026 --> 00:14:51,906
 It seems kind of silly to just
 load objects into memory just
 
-00:14:51.906 --> 00:14:54.106 A:middle
+
+258
+00:14:51,906 --> 00:14:54,106
 so you can delete them.
 
-00:14:54.106 --> 00:14:56.686 A:middle
+
+259
+00:14:54,106 --> 00:14:56,686
 This year we have introduced
 a new API in the form
 
-00:14:56.686 --> 00:14:58.416 A:middle
+
+260
+00:14:56,686 --> 00:14:58,416
 of NSBatch delete request.
 
-00:14:59.796 --> 00:15:03.446 A:middle
+
+261
+00:14:59,796 --> 00:15:03,446
 NSBatch delete request works
 like NSBatch update request
 
 
-
-00:14:59.796 --> 00:15:03.446 A:middle
-NSBatch delete request works
-like NSBatch update request
-
-00:15:03.676 --> 00:15:05.406 A:middle
+262
+00:15:03,676 --> 00:15:05,406
 in that it acts directly
 in the persistent store
 
-00:15:05.406 --> 00:15:07.056 A:middle
+
+263
+00:15:05,406 --> 00:15:07,056
 without loading any
 objects into memory.
 
-00:15:08.296 --> 00:15:10.086 A:middle
+
+264
+00:15:08,296 --> 00:15:10,086
 You can create one
 using an instance
 
-00:15:10.146 --> 00:15:14.186 A:middle
+
+265
+00:15:10,146 --> 00:15:14,186
 of NSFetchRequest specifying
 an entity, one or more stores
 
-00:15:14.306 --> 00:15:19.426 A:middle
+
+266
+00:15:14,306 --> 00:15:19,426
 and use predicate or sources
 or limits to slice up the data
 
-00:15:19.426 --> 00:15:22.316 A:middle
+
+267
+00:15:19,426 --> 00:15:22,316
 in whatever interesting
 ways you want.
 
-00:15:23.506 --> 00:15:28.516 A:middle
+
+268
+00:15:23,506 --> 00:15:28,516
 A batch delete request returns a
 box type NSBatch deletes result
 
-00:15:28.896 --> 00:15:30.766 A:middle
+
+269
+00:15:28,896 --> 00:15:30,766
 and you can configure
 the request
 
-00:15:30.796 --> 00:15:33.536 A:middle
+
+270
+00:15:30,796 --> 00:15:33,536
 to return a successor
 failure, the default,
 
-00:15:34.066 --> 00:15:37.196 A:middle
+
+271
+00:15:34,066 --> 00:15:37,196
 the count of the objects that
 were deleted or the object IDs
 
-00:15:37.196 --> 00:15:39.316 A:middle
+
+272
+00:15:37,196 --> 00:15:39,316
 of the objects in that box.
 
-00:15:39.316 --> 00:15:43.246 A:middle
+
+273
+00:15:39,316 --> 00:15:43,246
 There are a couple of
 limitations to this.
 
-00:15:43.376 --> 00:15:45.156 A:middle
+
+274
+00:15:43,376 --> 00:15:45,156
 Since none of the objects
 are loaded in memory,
 
-00:15:45.566 --> 00:15:47.856 A:middle
+
+275
+00:15:45,566 --> 00:15:47,856
 the changes are not reflected
 into the context and none
 
-00:15:47.856 --> 00:15:49.956 A:middle
+
+276
+00:15:47,856 --> 00:15:49,956
 of your validation
 rules are run.
 
-00:15:50.816 --> 00:15:54.126 A:middle
+
+277
+00:15:50,816 --> 00:15:54,126
 Relationships will be deleted
 out or nullified as appropriate,
 
-00:15:54.126 --> 00:15:56.256 A:middle
+
+278
+00:15:54,126 --> 00:15:56,256
 but that's all the
 guarantees that you get.
 
-00:15:56.256 --> 00:15:58.306 A:middle
+
+279
+00:15:56,256 --> 00:15:58,306
 There are also no
 object notifications.
 
-00:15:59.276 --> 00:16:02.116 A:middle
+
+280
+00:15:59,276 --> 00:16:02,116
 We think this is going to
 be really helpful for people
 
 
-
-00:15:59.276 --> 00:16:02.116 A:middle
-We think this is going to
-be really helpful for people
-
-00:16:02.116 --> 00:16:04.046 A:middle
+281
+00:16:02,116 --> 00:16:04,046
 if they have a lot of
 duplicates and I would
 
-00:16:04.046 --> 00:16:09.846 A:middle
+
+282
+00:16:04,046 --> 00:16:09,846
 like to show you
 how it works now.
 
-00:16:10.046 --> 00:16:13.096 A:middle
+
+283
+00:16:10,046 --> 00:16:13,096
 So I have here the same
 recipes app with a copy
 
-00:16:13.096 --> 00:16:14.446 A:middle
+
+284
+00:16:13,096 --> 00:16:14,446
 of a database I got
 from my manager.
 
-00:16:14.446 --> 00:16:18.656 A:middle
+
+285
+00:16:14,446 --> 00:16:18,656
 He says one of his kids got
 ahold of it and added a lot
 
-00:16:18.656 --> 00:16:21.276 A:middle
+
+286
+00:16:18,656 --> 00:16:21,276
 of recipes, like thousands.
 
-00:16:21.926 --> 00:16:24.176 A:middle
+
+287
+00:16:21,926 --> 00:16:24,176
 If we were to go threw
 this the old way,
 
-00:16:24.476 --> 00:16:28.916 A:middle
+
+288
+00:16:24,476 --> 00:16:28,916
 then we would just fetch
 all of the objects we want
 
-00:16:28.916 --> 00:16:32.096 A:middle
+
+289
+00:16:28,916 --> 00:16:32,096
 to delete with a fetch request.
 
-00:16:32.716 --> 00:16:36.426 A:middle
+
+290
+00:16:32,716 --> 00:16:36,426
 Then iterate over all
 of them, deleting them,
 
-00:16:36.516 --> 00:16:39.416 A:middle
+
+291
+00:16:36,516 --> 00:16:39,416
 and then saving the
 changes with the batch size
 
-00:16:39.416 --> 00:16:40.926 A:middle
+
+292
+00:16:39,416 --> 00:16:40,926
 that we've configured
 to be 1,000.
 
-00:16:41.876 --> 00:16:47.546 A:middle
+
+293
+00:16:41,876 --> 00:16:47,546
 If you try doing
 this you can see
 
-00:16:47.636 --> 00:16:50.606 A:middle
+
+294
+00:16:47,636 --> 00:16:50,606
 in the console here
 it takes a while.
 
-00:16:52.496 --> 00:16:53.236 A:middle
+
+295
+00:16:52,496 --> 00:16:53,236
 You can see we're doing --
 
-00:16:53.236 --> 00:16:54.726 A:middle
+
+296
+00:16:53,236 --> 00:16:54,726
 since we're doing
 batches in the thousands,
 
-00:16:54.726 --> 00:16:57.426 A:middle
+
+297
+00:16:54,726 --> 00:16:57,426
 we're now in our first
 batch and it's still going.
 
 
-
-00:17:00.336 --> 00:17:01.306 A:middle
+298
+00:17:00,336 --> 00:17:01,306
 This will take a while.
 
-00:17:01.306 --> 00:17:02.716 A:middle
+
+299
+00:17:01,306 --> 00:17:02,716
 We're not going to stand
 here and wait for it.
 
-00:17:02.796 --> 00:17:07.906 A:middle
+
+300
+00:17:02,796 --> 00:17:07,906
 If we break in a convenient
 spot we can kill the app
 
-00:17:09.106 --> 00:17:12.425 A:middle
+
+301
+00:17:09,106 --> 00:17:12,425
 and try again using
 batch deletions.
 
-00:17:13.066 --> 00:17:20.996 A:middle
+
+302
+00:17:13,066 --> 00:17:20,996
 Let's get rid of all this.
 
-00:17:22.816 --> 00:17:25.596 A:middle
+
+303
+00:17:22,816 --> 00:17:25,596
 Creating a duplicate delete
 request using the same fetch
 
-00:17:25.596 --> 00:17:29.226 A:middle
+
+304
+00:17:25,596 --> 00:17:29,226
 request that we used
 before and we're going
 
-00:17:29.226 --> 00:17:31.426 A:middle
+
+305
+00:17:29,226 --> 00:17:31,426
 to choose a counter resultType
 
-00:17:31.426 --> 00:17:32.676 A:middle
+
+306
+00:17:31,426 --> 00:17:32,676
 so that we can see
 what we have done.
 
-00:17:33.726 --> 00:17:35.986 A:middle
+
+307
+00:17:33,726 --> 00:17:35,986
 Here we will execute it.
 
-00:17:35.986 --> 00:17:39.496 A:middle
+
+308
+00:17:35,986 --> 00:17:39,496
 It is a lot less code, there's
 just one single execute request,
 
-00:17:39.496 --> 00:17:41.536 A:middle
+
+309
+00:17:39,496 --> 00:17:41,536
 no looping, no interacting
 with objects.
 
-00:17:41.536 --> 00:17:48.586 A:middle
+
+310
+00:17:41,536 --> 00:17:48,586
 If we build and run this,
 -- we'll come back here.
 
-00:17:52.716 --> 00:17:56.736 A:middle
+
+311
+00:17:52,716 --> 00:17:56,736
 You can see here that in the
 queries the generator has
 
-00:17:56.736 --> 00:17:58.796 A:middle
+
+312
+00:17:56,736 --> 00:17:58,796
 created a trigger that deletes
 all of the relationships
 
-00:17:58.796 --> 00:18:01.266 A:middle
+
+313
+00:17:58,796 --> 00:18:01,266
 that need to be cleaned
 up and we're done.
 
 
-
-00:17:58.796 --> 00:18:01.266 A:middle
-that need to be cleaned
-up and we're done.
-
-00:18:02.526 --> 00:18:05.186 A:middle
+314
+00:18:02,526 --> 00:18:05,186
 Back down to a simple
 number of recipes
 
-00:18:05.186 --> 00:18:07.026 A:middle
+
+315
+00:18:05,186 --> 00:18:07,026
 so that now we can apply
 the unique restraints.
 
-00:18:08.516 --> 00:18:14.226 A:middle
+
+316
+00:18:08,516 --> 00:18:14,226
 [Applause]
 
-00:18:14.726 --> 00:18:16.146 A:middle
-&gt;&gt; Scott Perry: That's
+
+317
+00:18:14,726 --> 00:18:16,146
+>> Scott Perry: That's
 NSBatch delete request.
 
-00:18:18.206 --> 00:18:20.496 A:middle
+
+318
+00:18:18,206 --> 00:18:20,496
 Next up I wanted to talk
 about model versioning.
 
-00:18:22.126 --> 00:18:24.886 A:middle
+
+319
+00:18:22,126 --> 00:18:24,886
 While we were creating the
 new version of the recipes app
 
-00:18:25.716 --> 00:18:27.616 A:middle
+
+320
+00:18:25,716 --> 00:18:27,616
 in order to support the
 import feature we had
 
-00:18:27.616 --> 00:18:31.036 A:middle
+
+321
+00:18:27,616 --> 00:18:31,036
 to add two attributes to
 the recipe entity source
 
-00:18:31.036 --> 00:18:33.496 A:middle
+
+322
+00:18:31,036 --> 00:18:33,496
 and external ID which
 Rishi showed you earlier.
 
-00:18:34.496 --> 00:18:37.466 A:middle
+
+323
+00:18:34,496 --> 00:18:37,466
 While working on this,
 we open up the model,
 
-00:18:37.466 --> 00:18:39.416 A:middle
+
+324
+00:18:37,466 --> 00:18:39,416
 adding the two attributes
 build and run
 
-00:18:39.416 --> 00:18:41.936 A:middle
+
+325
+00:18:39,416 --> 00:18:41,936
 and right away we had an error.
 
-00:18:42.016 --> 00:18:44.846 A:middle
+
+326
+00:18:42,016 --> 00:18:44,846
 I highlighted the
 most important part.
 
-00:18:45.406 --> 00:18:48.506 A:middle
+
+327
+00:18:45,406 --> 00:18:48,506
 We incurred a migration because
 the model changed but we forgot
 
-00:18:48.506 --> 00:18:50.616 A:middle
+
+328
+00:18:48,506 --> 00:18:50,616
 to include the original
 source model
 
-00:18:50.616 --> 00:18:55.516 A:middle
+
+329
+00:18:50,616 --> 00:18:55,516
 because it was what we used to
 change and the pattern of having
 
-00:18:55.516 --> 00:18:57.066 A:middle
+
+330
+00:18:55,516 --> 00:18:57,066
 to copy your old model in order
 
-00:18:57.066 --> 00:18:58.536 A:middle
+
+331
+00:18:57,066 --> 00:18:58,536
 to create a new one
 is really cumbersome
 
-00:18:58.536 --> 00:18:59.686 A:middle
+
+332
+00:18:58,536 --> 00:18:59,686
 when you're reiterating
 your apps.
 
-00:18:59.776 --> 00:19:01.716 A:middle
+
+333
+00:18:59,776 --> 00:19:01,716
 And if you forget to
 deploy a model to the hands
 
 
-
-00:18:59.776 --> 00:19:01.716 A:middle
-And if you forget to
-deploy a model to the hands
-
-00:19:01.716 --> 00:19:02.836 A:middle
+334
+00:19:01,716 --> 00:19:02,836
 of a customer that's running
 
-00:19:02.836 --> 00:19:04.436 A:middle
+
+335
+00:19:02,836 --> 00:19:04,436
 that version it's
 really dangerous.
 
-00:19:05.306 --> 00:19:06.456 A:middle
+
+336
+00:19:05,306 --> 00:19:06,456
 This seems to be a case
 
-00:19:06.456 --> 00:19:10.506 A:middle
+
+337
+00:19:06,456 --> 00:19:10,506
 where automatic lightweight
 migrations should work for you.
 
-00:19:10.506 --> 00:19:16.146 A:middle
+
+338
+00:19:10,506 --> 00:19:16,146
 Now iOS 9 and OS X.11
 we have model caching.
 
-00:19:17.516 --> 00:19:20.546 A:middle
+
+339
+00:19:17,516 --> 00:19:20,546
 Whenever you have a store
 that's created or migrated
 
-00:19:20.726 --> 00:19:23.196 A:middle
+
+340
+00:19:20,726 --> 00:19:23,196
 or just opened on the new iOS
 
-00:19:23.276 --> 00:19:26.736 A:middle
+
+341
+00:19:23,276 --> 00:19:26,736
 from an older version the
 managed object model used
 
-00:19:26.736 --> 00:19:30.946 A:middle
+
+342
+00:19:26,736 --> 00:19:30,946
 to create it is cached into
 the store and it is used
 
-00:19:30.946 --> 00:19:32.826 A:middle
+
+343
+00:19:30,946 --> 00:19:32,826
 by lightweight migrations
 when they fail
 
-00:19:32.826 --> 00:19:36.616 A:middle
+
+344
+00:19:32,826 --> 00:19:36,616
 to find appropriate source model
 as sort of a last-ditch effort.
 
-00:19:38.516 --> 00:19:44.696 A:middle
+
+345
+00:19:38,516 --> 00:19:44,696
 [Applause]
 
-00:19:45.196 --> 00:19:46.406 A:middle
-&gt;&gt; Scott Perry: There are
+
+346
+00:19:45,196 --> 00:19:46,406
+>> Scott Perry: There are
 a couple of limitations,
 
-00:19:46.646 --> 00:19:48.566 A:middle
+
+347
+00:19:46,646 --> 00:19:48,566
 this is only available
 for SQLite stores
 
-00:19:48.786 --> 00:19:50.116 A:middle
+
+348
+00:19:48,786 --> 00:19:50,116
 and the cached model
 is not available
 
-00:19:50.116 --> 00:19:51.336 A:middle
+
+349
+00:19:50,116 --> 00:19:51,336
 for heavyweight migrations.
 
-00:19:51.756 --> 00:19:54.156 A:middle
+
+350
+00:19:51,756 --> 00:19:54,156
 If you're doing heavyweight
 migrations you have your model
 
-00:19:54.156 --> 00:19:55.956 A:middle
+
+351
+00:19:54,156 --> 00:19:55,956
 ready anyways because you need
 
-00:19:55.956 --> 00:20:00.246 A:middle
+
+352
+00:19:55,956 --> 00:20:00,246
 to know what you're actually
 transitioning from and to.
 
 
-
-00:19:55.956 --> 00:20:00.246 A:middle
-to know what you're actually
-transitioning from and to.
-
-00:20:00.476 --> 00:20:03.476 A:middle
+353
+00:20:00,476 --> 00:20:03,476
 Rishi talked earlier about
 API we added and I wanted
 
-00:20:03.476 --> 00:20:05.416 A:middle
+
+354
+00:20:03,476 --> 00:20:05,416
 to talk now about some changes.
 
-00:20:06.226 --> 00:20:10.676 A:middle
+
+355
+00:20:06,226 --> 00:20:10,676
 For iOS 9 and OS X 10.10 Core
 Data has adopted all the new
 
-00:20:10.676 --> 00:20:11.856 A:middle
+
+356
+00:20:10,676 --> 00:20:11,856
 language features you have seen
 
-00:20:11.856 --> 00:20:14.026 A:middle
+
+357
+00:20:11,856 --> 00:20:14,026
 in Objective-C running
 generics and nullability.
 
-00:20:14.026 --> 00:20:17.686 A:middle
+
+358
+00:20:14,026 --> 00:20:17,686
 We have also taken advantage
 of a new attribute called kind
 
-00:20:17.686 --> 00:20:19.816 A:middle
+
+359
+00:20:17,686 --> 00:20:19,816
 of that allows for
 easier downcasting.
 
-00:20:20.456 --> 00:20:22.316 A:middle
+
+360
+00:20:20,456 --> 00:20:22,316
 You may not have seen
 this in other talks
 
-00:20:22.316 --> 00:20:25.906 A:middle
+
+361
+00:20:22,316 --> 00:20:25,906
 but this is really handy for
 Core Data because normally
 
-00:20:25.906 --> 00:20:28.206 A:middle
+
+362
+00:20:25,906 --> 00:20:28,206
 if you're interacting with
 an objective type ID you can
 
-00:20:28.206 --> 00:20:31.466 A:middle
+
+363
+00:20:28,206 --> 00:20:31,466
 downcast it to anything, even
 completely inappropriate types.
 
-00:20:32.046 --> 00:20:34.696 A:middle
+
+364
+00:20:32,046 --> 00:20:34,696
 But using kind of you
 can attribute type
 
-00:20:34.696 --> 00:20:37.546 A:middle
+
+365
+00:20:34,696 --> 00:20:37,546
 to only be downcast to
 subtypes of that type.
 
-00:20:38.046 --> 00:20:41.196 A:middle
+
+366
+00:20:38,046 --> 00:20:41,196
 This is going to add a
 lot of safety to your code
 
-00:20:41.776 --> 00:20:44.896 A:middle
+
+367
+00:20:41,776 --> 00:20:44,896
 from the compiler because it
 will limit warnings whenever a
 
-00:20:44.896 --> 00:20:46.746 A:middle
+
+368
+00:20:44,896 --> 00:20:46,746
 cache seems like it
 doesn't make any sense.
 
-00:20:49.236 --> 00:20:51.926 A:middle
+
+369
+00:20:49,236 --> 00:20:51,926
 Generated subclasses have also
 been updated to use generics
 
-00:20:52.186 --> 00:20:54.506 A:middle
+
+370
+00:20:52,186 --> 00:20:54,506
 for too many relationships
 as well as nullability
 
-00:20:54.506 --> 00:20:56.476 A:middle
+
+371
+00:20:54,506 --> 00:20:56,476
 and we have made
 some other changes
 
-00:20:56.476 --> 00:20:58.626 A:middle
+
+372
+00:20:56,476 --> 00:20:58,626
 to subclass generation as well.
 
-00:20:59.036 --> 00:21:04.416 A:middle
+
+373
+00:20:59,036 --> 00:21:04,416
 In Xcode 6 you would get
 an implementation file
 
 
-
-00:20:59.036 --> 00:21:04.416 A:middle
-In Xcode 6 you would get
-an implementation file
-
-00:21:04.416 --> 00:21:07.216 A:middle
+374
+00:21:04,416 --> 00:21:07,216
 and a header file for using
 Objective-C containing both the
 
-00:21:07.636 --> 00:21:11.976 A:middle
+
+375
+00:21:07,636 --> 00:21:11,976
 Core Data declarations as well
 as a place to put all your code
 
-00:21:11.976 --> 00:21:14.676 A:middle
+
+376
+00:21:11,976 --> 00:21:14,676
 and it was thrown over the
 fence for you to own afterwards.
 
-00:21:14.676 --> 00:21:17.566 A:middle
+
+377
+00:21:14,676 --> 00:21:17,566
 If you change your
 model, that becomes sort
 
-00:21:17.566 --> 00:21:19.356 A:middle
+
+378
+00:21:17,566 --> 00:21:19,356
 of cumbersome to
 keep up to date.
 
-00:21:19.356 --> 00:21:21.896 A:middle
+
+379
+00:21:19,356 --> 00:21:21,896
 In Xcode 7 we have
 added a new file.
 
-00:21:23.376 --> 00:21:26.186 A:middle
+
+380
+00:21:23,376 --> 00:21:26,186
 This file is an extension
 or category depending
 
-00:21:26.186 --> 00:21:28.746 A:middle
+
+381
+00:21:26,186 --> 00:21:28,746
 on the language that contains
 all of the declarations
 
-00:21:28.796 --> 00:21:30.876 A:middle
+
+382
+00:21:28,796 --> 00:21:30,876
 that you're familiar
 with from the header.
 
-00:21:32.636 --> 00:21:35.606 A:middle
+
+383
+00:21:32,636 --> 00:21:35,606
 So now the header and
 implementation file are yours
 
-00:21:35.606 --> 00:21:38.066 A:middle
+
+384
+00:21:35,606 --> 00:21:38,066
 to own and whenever you
 update your model all you need
 
-00:21:38.066 --> 00:21:39.186 A:middle
+
+385
+00:21:38,066 --> 00:21:39,186
 to do is update this file.
 
-00:21:41.516 --> 00:21:48.136 A:middle
+
+386
+00:21:41,516 --> 00:21:48,136
 [Applause]
 
-00:21:48.636 --> 00:21:50.296 A:middle
-&gt;&gt; Scott Perry: That's
+
+387
+00:21:48,636 --> 00:21:50,296
+>> Scott Perry: That's
 it for changes.
 
-00:21:50.876 --> 00:21:54.536 A:middle
+
+388
+00:21:50,876 --> 00:21:54,536
 I wanted to talk about
 deprecations, we're getting rid
 
-00:21:54.536 --> 00:21:59.076 A:middle
+
+389
+00:21:54,536 --> 00:21:59,076
 of confinement currency
 in iOs9 and OS 10.10--
 
-00:21:59.076 --> 00:22:01.436 A:middle
+
+390
+00:21:59,076 --> 00:22:01,436
 it is marked as deprecated,
 we're getting rid of it later.
 
 
-
-00:21:59.076 --> 00:22:01.436 A:middle
-it is marked as deprecated,
-we're getting rid of it later.
-
-00:22:03.476 --> 00:22:06.676 A:middle
+391
+00:22:03,476 --> 00:22:06,676
 Because the confinement
 was the default behavior
 
-00:22:06.676 --> 00:22:10.066 A:middle
+
+392
+00:22:06,676 --> 00:22:10,066
 for new managed object context,
 we have also deprecated in it,
 
-00:22:10.936 --> 00:22:12.996 A:middle
+
+393
+00:22:10,936 --> 00:22:12,996
 and so moving forward
 you should be using init
 
-00:22:12.996 --> 00:22:15.306 A:middle
+
+394
+00:22:12,996 --> 00:22:15,306
 with con currency type
 using private cues
 
-00:22:15.346 --> 00:22:17.546 A:middle
+
+395
+00:22:15,346 --> 00:22:17,546
 or main cues for your contexts.
 
-00:22:17.996 --> 00:22:18.966 A:middle
+
+396
+00:22:17,996 --> 00:22:18,966
 If you haven't already moved
 
-00:22:18.966 --> 00:22:23.116 A:middle
+
+397
+00:22:18,966 --> 00:22:23,116
 over to the block API it
 is really a good idea.
 
-00:22:23.116 --> 00:22:25.476 A:middle
+
+398
+00:22:23,116 --> 00:22:25,476
 Encapsulation makes it
 a lot easier to reason
 
-00:22:25.476 --> 00:22:28.506 A:middle
+
+399
+00:22:25,476 --> 00:22:28,506
 about your model code and
 the concurrency debugging is
 
-00:22:28.506 --> 00:22:30.166 A:middle
+
+400
+00:22:28,506 --> 00:22:30,166
 reported as much stronger.
 
-00:22:30.786 --> 00:22:35.266 A:middle
+
+401
+00:22:30,786 --> 00:22:35,266
 I highly recommend checking
 out the online documentation,
 
-00:22:35.476 --> 00:22:38.306 A:middle
+
+402
+00:22:35,476 --> 00:22:38,306
 the Core Data guides were
 completely updated this year
 
-00:22:38.956 --> 00:22:41.096 A:middle
+
+403
+00:22:38,956 --> 00:22:41,096
 and Adam Swift also
 introduced the block API
 
-00:22:41.096 --> 00:22:42.916 A:middle
+
+404
+00:22:41,096 --> 00:22:42,916
 with this really
 good talk What's New
 
-00:22:42.916 --> 00:22:46.096 A:middle
+
+405
+00:22:42,916 --> 00:22:46,096
 in Core Data on iOS
 in WWDC 2011.
 
-00:22:47.306 --> 00:22:49.766 A:middle
+
+406
+00:22:47,306 --> 00:22:49,766
 Last I wanted to talk
 about performance.
 
-00:22:50.626 --> 00:22:55.716 A:middle
+
+407
+00:22:50,626 --> 00:22:55,716
 Over time we start adding
 attributes to the models,
 
-00:22:56.906 --> 00:22:58.096 A:middle
+
+408
+00:22:56,906 --> 00:22:58,096
 the amount of data
 that's carried
 
-00:22:58.096 --> 00:23:00.456 A:middle
+
+409
+00:22:58,096 --> 00:23:00,456
 by your users gets larger
 as they hold on to our apps
 
 
-
-00:22:58.096 --> 00:23:00.456 A:middle
-by your users gets larger
-as they hold on to our apps
-
-00:23:00.456 --> 00:23:03.626 A:middle
+410
+00:23:00,456 --> 00:23:03,626
 over the years and the ways in
 which we try to query the data
 
-00:23:03.626 --> 00:23:07.066 A:middle
+
+411
+00:23:03,626 --> 00:23:07,066
 to show them get more
 interesting, more advanced,
 
-00:23:07.516 --> 00:23:11.766 A:middle
+
+412
+00:23:07,516 --> 00:23:11,766
 and our apps stay fast.
 
-00:23:11.936 --> 00:23:13.836 A:middle
+
+413
+00:23:11,936 --> 00:23:13,836
 But how do you avoid
 being surprised
 
-00:23:13.836 --> 00:23:14.946 A:middle
+
+414
+00:23:13,836 --> 00:23:14,946
 by performance problems?
 
-00:23:15.976 --> 00:23:17.266 A:middle
+
+415
+00:23:15,976 --> 00:23:17,266
 When you're in development
 you're dealing
 
-00:23:17.266 --> 00:23:19.316 A:middle
+
+416
+00:23:17,266 --> 00:23:19,316
 with a known data set
 that may be smaller
 
-00:23:19.316 --> 00:23:20.546 A:middle
+
+417
+00:23:19,316 --> 00:23:20,546
 than what your customers
 are working with
 
-00:23:20.736 --> 00:23:23.836 A:middle
+
+418
+00:23:20,736 --> 00:23:23,836
 and the simulator is much
 faster than moving on a device.
 
-00:23:23.836 --> 00:23:26.096 A:middle
+
+419
+00:23:23,836 --> 00:23:26,096
 While that's great
 for development,
 
-00:23:27.106 --> 00:23:29.446 A:middle
+
+420
+00:23:27,106 --> 00:23:29,446
 the users are using devices
 with production data.
 
-00:23:30.756 --> 00:23:34.506 A:middle
+
+421
+00:23:30,756 --> 00:23:34,506
 Luckily we provide tools that
 allow you to spot patterns
 
-00:23:35.686 --> 00:23:37.806 A:middle
+
+422
+00:23:35,686 --> 00:23:37,806
 that are indicative of
 performance problems
 
-00:23:37.806 --> 00:23:39.896 A:middle
+
+423
+00:23:37,806 --> 00:23:39,896
 so you can solve them
 before they become problems
 
-00:23:39.896 --> 00:23:41.116 A:middle
+
+424
+00:23:39,896 --> 00:23:41,116
 in the hands of your clients.
 
-00:23:41.786 --> 00:23:44.876 A:middle
+
+425
+00:23:41,786 --> 00:23:44,876
 I'd like to talk about three
 things to look out for,
 
-00:23:44.916 --> 00:23:47.156 A:middle
+
+426
+00:23:44,916 --> 00:23:47,156
 the first of which is
 relationship faults.
 
-00:23:47.706 --> 00:23:50.566 A:middle
+
+427
+00:23:47,706 --> 00:23:50,566
 This is the Core Data Instrument
 
-00:23:50.666 --> 00:23:55.616 A:middle
+
+428
+00:23:50,666 --> 00:23:55,616
 and we have just ran the
 recipes app and right away
 
-00:23:55.676 --> 00:23:58.596 A:middle
+
+429
+00:23:55,676 --> 00:23:58,596
 in the cache missed
 Instruments we can see
 
-00:23:58.596 --> 00:24:02.396 A:middle
+
+430
+00:23:58,596 --> 00:24:02,396
 that we blew the cache on three
 objects we wanted to display.
 
 
-
-00:23:58.596 --> 00:24:02.396 A:middle
-that we blew the cache on three
-objects we wanted to display.
-
-00:24:03.086 --> 00:24:06.506 A:middle
+431
+00:24:03,086 --> 00:24:06,506
 If we look in the middle column
 we can see their recipe type.
 
-00:24:07.016 --> 00:24:10.436 A:middle
+
+432
+00:24:07,016 --> 00:24:10,436
 And now you remember when we
 made the recipes app this year
 
-00:24:10.436 --> 00:24:12.896 A:middle
+
+433
+00:24:10,436 --> 00:24:12,896
 we updated it so that the
 main list view showed the type
 
-00:24:12.896 --> 00:24:14.796 A:middle
+
+434
+00:24:12,896 --> 00:24:14,796
 of the recipe along
 with the recipe itself
 
-00:24:14.796 --> 00:24:16.376 A:middle
+
+435
+00:24:14,796 --> 00:24:16,376
 but we never changed
 fetch requests.
 
-00:24:17.906 --> 00:24:20.946 A:middle
+
+436
+00:24:17,906 --> 00:24:20,946
 We can fix this by adding
 a relationship key pad
 
-00:24:21.006 --> 00:24:24.296 A:middle
+
+437
+00:24:21,006 --> 00:24:24,296
 for prefetching to
 the query we used
 
-00:24:24.296 --> 00:24:26.176 A:middle
+
+438
+00:24:24,296 --> 00:24:26,176
 to see our NSFetchResults
 controller.
 
-00:24:27.116 --> 00:24:29.466 A:middle
+
+439
+00:24:27,116 --> 00:24:29,466
 Those first -- that first set
 
-00:24:29.466 --> 00:24:31.866 A:middle
+
+440
+00:24:29,466 --> 00:24:31,866
 of cache misses will now
 no longer be a problem.
 
-00:24:32.186 --> 00:24:34.426 A:middle
+
+441
+00:24:32,186 --> 00:24:34,426
 If we go back to
 the same Instrument,
 
-00:24:34.426 --> 00:24:35.836 A:middle
+
+442
+00:24:34,426 --> 00:24:35,836
 and look a little
 bit later in the app,
 
-00:24:35.906 --> 00:24:38.116 A:middle
+
+443
+00:24:35,906 --> 00:24:38,116
 we can see that when
 we viewed the detail
 
-00:24:38.116 --> 00:24:40.376 A:middle
+
+444
+00:24:38,116 --> 00:24:40,376
 of a recipe we also
 incurred a number
 
-00:24:40.376 --> 00:24:41.686 A:middle
+
+445
+00:24:40,376 --> 00:24:41,686
 of careers to the database.
 
-00:24:42.556 --> 00:24:45.956 A:middle
+
+446
+00:24:42,556 --> 00:24:45,956
 This is because the detailed
 view controller gets its model
 
-00:24:45.956 --> 00:24:50.176 A:middle
+
+447
+00:24:45,956 --> 00:24:50,176
 object from the list and then in
 the detailed view we display all
 
-00:24:50.176 --> 00:24:51.366 A:middle
+
+448
+00:24:50,176 --> 00:24:51,366
 of the ingredients
 in that recipe.
 
-00:24:52.536 --> 00:24:53.796 A:middle
+
+449
+00:24:52,536 --> 00:24:53,796
 We can't use prefetching,
 
-00:24:53.796 --> 00:24:55.866 A:middle
+
+450
+00:24:53,796 --> 00:24:55,866
 because then we would prefetch
 all of the ingredients for all
 
-00:24:55.866 --> 00:24:57.426 A:middle
+
+451
+00:24:55,866 --> 00:24:57,426
 of the recipes displayed
 in the list view.
 
-00:24:57.426 --> 00:25:00.596 A:middle
+
+452
+00:24:57,426 --> 00:25:00,596
 In the detailed view,
 in the controller,
 
 
-
-00:24:57.426 --> 00:25:00.596 A:middle
-In the detailed view,
-in the controller,
-
-00:25:00.596 --> 00:25:02.866 A:middle
+453
+00:25:00,596 --> 00:25:02,866
 we have to execute
 another fetch request
 
-00:25:02.866 --> 00:25:04.336 A:middle
+
+454
+00:25:02,866 --> 00:25:04,336
 to get those ingredients
 up into memory.
 
-00:25:04.676 --> 00:25:06.846 A:middle
+
+455
+00:25:04,676 --> 00:25:06,846
 Now we have turned
 9 queries into one
 
-00:25:06.846 --> 00:25:09.456 A:middle
+
+456
+00:25:06,846 --> 00:25:09,456
 and we can still use the
 relationship on the recipe
 
-00:25:09.456 --> 00:25:12.076 A:middle
+
+457
+00:25:09,456 --> 00:25:12,076
 to reverse it and interact
 with the set it returns
 
-00:25:12.146 --> 00:25:17.306 A:middle
+
+458
+00:25:12,146 --> 00:25:17,306
 because the data is
 shared on the objects.
 
-00:25:17.436 --> 00:25:20.746 A:middle
+
+459
+00:25:17,436 --> 00:25:20,746
 Lastly, if we look at
 the fetch Instrument
 
-00:25:20.796 --> 00:25:23.886 A:middle
+
+460
+00:25:20,796 --> 00:25:23,886
 in the Core Data
 Instruments view we can see
 
-00:25:23.886 --> 00:25:27.906 A:middle
+
+461
+00:25:23,886 --> 00:25:27,906
 that that first fetch request
 took longer than we would like.
 
-00:25:28.896 --> 00:25:31.156 A:middle
+
+462
+00:25:28,896 --> 00:25:31,156
 It fetched 85 objects.
 
-00:25:31.586 --> 00:25:33.646 A:middle
+
+463
+00:25:31,586 --> 00:25:33,646
 At the time we only
 had 85 objects.
 
-00:25:33.646 --> 00:25:35.916 A:middle
+
+464
+00:25:33,646 --> 00:25:35,916
 This is going to be really
 bad if we have 30,000
 
-00:25:35.916 --> 00:25:36.826 A:middle
+
+465
+00:25:35,916 --> 00:25:36,826
 like I showed in the demo.
 
-00:25:36.826 --> 00:25:38.356 A:middle
+
+466
+00:25:36,826 --> 00:25:38,356
 The app probably
 wouldn't even launch.
 
-00:25:38.916 --> 00:25:45.916 A:middle
+
+467
+00:25:38,916 --> 00:25:45,916
 It also it took 15 milliseconds
 on a Mac Pro, that's going
 
-00:25:45.916 --> 00:25:48.926 A:middle
+
+468
+00:25:45,916 --> 00:25:48,926
 to have a lot of dropped
 frames on iOS so what we can do
 
-00:25:48.926 --> 00:25:52.136 A:middle
+
+469
+00:25:48,926 --> 00:25:52,136
 to resolve this is
 add a batch size
 
-00:25:52.136 --> 00:25:53.686 A:middle
+
+470
+00:25:52,136 --> 00:25:53,686
 to our fetch request that's fed
 
-00:25:53.686 --> 00:25:54.926 A:middle
+
+471
+00:25:53,686 --> 00:25:54,926
 into our fetch results
 controllers
 
-00:25:54.926 --> 00:25:56.786 A:middle
+
+472
+00:25:54,926 --> 00:25:56,786
 so that objects are
 fetched from the store only
 
-00:25:56.786 --> 00:25:58.166 A:middle
+
+473
+00:25:56,786 --> 00:25:58,166
 as they're needed to display.
 
-00:25:59.366 --> 00:26:03.746 A:middle
+
+474
+00:25:59,366 --> 00:26:03,746
 The last one I wanted to
 show is sequence blocking.
 
 
-
-00:25:59.366 --> 00:26:03.746 A:middle
-The last one I wanted to
-show is sequence blocking.
-
-00:26:05.136 --> 00:26:07.196 A:middle
+475
+00:26:05,136 --> 00:26:07,196
 If you have really complex
 fetches that take a lot
 
-00:26:07.196 --> 00:26:12.006 A:middle
+
+476
+00:26:07,196 --> 00:26:12,006
 of time then you can find
 them by using this argument
 
-00:26:12.006 --> 00:26:18.266 A:middle
+
+477
+00:26:12,006 --> 00:26:18,266
 to your program and it will
 start printing out data
 
-00:26:18.266 --> 00:26:20.196 A:middle
+
+478
+00:26:18,266 --> 00:26:20,196
 about your fetch
 requests as they're ran.
 
-00:26:20.276 --> 00:26:23.686 A:middle
+
+479
+00:26:20,276 --> 00:26:23,686
 This case, we have a query and
 the amount of time it took,
 
-00:26:23.686 --> 00:26:28.006 A:middle
+
+480
+00:26:23,686 --> 00:26:28,006
 which was about, what,
 almost a tenth of a second
 
-00:26:28.006 --> 00:26:29.776 A:middle
+
+481
+00:26:28,006 --> 00:26:29,776
 and it returned 85 rows.
 
-00:26:30.296 --> 00:26:31.546 A:middle
+
+482
+00:26:30,296 --> 00:26:31,546
 That's pretty slow.
 
-00:26:31.546 --> 00:26:33.056 A:middle
+
+483
+00:26:31,546 --> 00:26:33,056
 We should take a
 look at doing better.
 
-00:26:33.956 --> 00:26:36.726 A:middle
+
+484
+00:26:33,956 --> 00:26:36,726
 If we scroll up higher in the
 console we can see it printed
 
-00:26:36.726 --> 00:26:39.206 A:middle
+
+485
+00:26:36,726 --> 00:26:39,206
 out the file we're
 using and we can connect
 
-00:26:39.206 --> 00:26:42.156 A:middle
+
+486
+00:26:39,206 --> 00:26:42,156
 to that file using SQLite to
 figure out what's going on.
 
-00:26:42.776 --> 00:26:45.056 A:middle
+
+487
+00:26:42,776 --> 00:26:45,056
 If we paste in our query
 
-00:26:45.056 --> 00:26:48.266 A:middle
+
+488
+00:26:45,056 --> 00:26:48,266
 after explain query plan then
 SQ lit will tell us what it is
 
-00:26:48.266 --> 00:26:51.526 A:middle
+
+489
+00:26:48,266 --> 00:26:51,526
 trying to do to fulfill
 the query with this table.
 
-00:26:51.526 --> 00:26:56.926 A:middle
+
+490
+00:26:51,526 --> 00:26:56,926
 There is a couple of things
 to note here that we can use
 
-00:26:56.926 --> 00:26:59.306 A:middle
+
+491
+00:26:56,926 --> 00:26:59,306
 as a metrics for how to
 expect the performance to be.
 
-00:26:59.396 --> 00:27:03.386 A:middle
+
+492
+00:26:59,396 --> 00:27:03,386
 The first is scan table, scan
 table means that SQLite is going
 
 
-
-00:26:59.396 --> 00:27:03.386 A:middle
-The first is scan table, scan
-table means that SQLite is going
-
-00:27:03.386 --> 00:27:07.426 A:middle
+493
+00:27:03,386 --> 00:27:07,426
 to touch every row, inspect
 every row to fulfill the query
 
-00:27:08.086 --> 00:27:10.436 A:middle
+
+494
+00:27:08,086 --> 00:27:10,436
 and on the recipe table
 as we had earlier,
 
-00:27:10.436 --> 00:27:12.666 A:middle
+
+495
+00:27:10,436 --> 00:27:12,666
 that was 30,000 rows
 and we'll do that twice,
 
-00:27:12.666 --> 00:27:14.206 A:middle
+
+496
+00:27:12,666 --> 00:27:14,206
 so that's not going to
 be very fast and we have
 
-00:27:14.206 --> 00:27:15.676 A:middle
+
+497
+00:27:14,206 --> 00:27:15,676
 to investigate making it better.
 
-00:27:16.776 --> 00:27:20.856 A:middle
+
+498
+00:27:16,776 --> 00:27:20,856
 Also, we have use temp
 B-tree which is a step
 
-00:27:20.966 --> 00:27:24.016 A:middle
+
+499
+00:27:20,966 --> 00:27:24,016
 where SQLite builds its own
 memory structure out of the data
 
-00:27:24.016 --> 00:27:28.336 A:middle
+
+500
+00:27:24,016 --> 00:27:28,336
 in order to fulfill either
 sorting or fast searches.
 
-00:27:30.326 --> 00:27:33.236 A:middle
+
+501
+00:27:30,326 --> 00:27:33,236
 The temp B-tree is being used
 because of this group by here,
 
-00:27:33.736 --> 00:27:36.376 A:middle
+
+502
+00:27:33,736 --> 00:27:36,376
 if we take a look
 a little closer,
 
-00:27:36.376 --> 00:27:38.486 A:middle
+
+503
+00:27:36,376 --> 00:27:38,486
 it is because of the
 source in external ID.
 
-00:27:38.486 --> 00:27:41.276 A:middle
+
+504
+00:27:38,486 --> 00:27:41,276
 We should be able
 to make this faster
 
-00:27:41.276 --> 00:27:42.916 A:middle
+
+505
+00:27:41,276 --> 00:27:42,916
 by using a compound index.
 
-00:27:43.526 --> 00:27:45.406 A:middle
+
+506
+00:27:43,526 --> 00:27:45,406
 In the Core Data model
 editor we can add one
 
-00:27:46.136 --> 00:27:49.916 A:middle
+
+507
+00:27:46,136 --> 00:27:49,916
 on the right-hand side here.
 
-00:27:50.136 --> 00:27:52.566 A:middle
+
+508
+00:27:50,136 --> 00:27:52,566
 Now, if we quit SQLite,
 rebuild our project,
 
-00:27:52.726 --> 00:27:55.246 A:middle
+
+509
+00:27:52,726 --> 00:27:55,246
 perform a migration, and
 attach to the new database
 
-00:27:55.246 --> 00:27:58.306 A:middle
+
+510
+00:27:55,246 --> 00:27:58,306
 with SQLite we can then see
 that we're using an index.
 
-00:27:59.026 --> 00:28:01.656 A:middle
+
+511
+00:27:59,026 --> 00:28:01,656
 Using index means that
 the searches is going
 
 
-
-00:27:59.026 --> 00:28:01.656 A:middle
-Using index means that
-the searches is going
-
-00:28:01.656 --> 00:28:04.976 A:middle
+512
+00:28:01,656 --> 00:28:04,976
 to be fast using covering
 index is even better,
 
-00:28:04.976 --> 00:28:06.876 A:middle
+
+513
+00:28:04,976 --> 00:28:06,876
 it means that the
 results of that step are
 
-00:28:06.876 --> 00:28:09.436 A:middle
+
+514
+00:28:06,876 --> 00:28:09,436
 in the natural sort order
 needed for the next step.
 
-00:28:10.006 --> 00:28:12.396 A:middle
+
+515
+00:28:10,006 --> 00:28:12,396
 We have entirely eliminated
 the temporary B tree
 
-00:28:13.446 --> 00:28:15.626 A:middle
+
+516
+00:28:13,446 --> 00:28:15,626
 but we still have
 the scan table.
 
-00:28:17.116 --> 00:28:20.136 A:middle
+
+517
+00:28:17,116 --> 00:28:20,136
 In this case, we're
 matching duplicate objects.
 
-00:28:20.136 --> 00:28:23.006 A:middle
+
+518
+00:28:20,136 --> 00:28:23,006
 This was the query we
 used in the demo in order
 
-00:28:23.006 --> 00:28:24.236 A:middle
+
+519
+00:28:23,006 --> 00:28:24,236
 to find objects to delete.
 
-00:28:24.836 --> 00:28:27.646 A:middle
+
+520
+00:28:24,836 --> 00:28:27,646
 It has to scan the entire
 table, it can't be faster.
 
-00:28:28.786 --> 00:28:30.446 A:middle
+
+521
+00:28:28,786 --> 00:28:30,446
 The only thing left
 to do is to make sure
 
-00:28:30.446 --> 00:28:31.546 A:middle
+
+522
+00:28:30,446 --> 00:28:31,546
 that we're off the main thread.
 
-00:28:31.546 --> 00:28:34.396 A:middle
+
+523
+00:28:31,546 --> 00:28:34,396
 In this case we're using
 a private Q context,
 
-00:28:35.026 --> 00:28:39.986 A:middle
+
+524
+00:28:35,026 --> 00:28:39,986
 but if you were trying to create
 some composite data do show
 
-00:28:39.986 --> 00:28:42.876 A:middle
+
+525
+00:28:39,986 --> 00:28:42,876
 to a user, you might want to
 use a nonsequitous fetch request
 
-00:28:42.876 --> 00:28:44.426 A:middle
+
+526
+00:28:42,876 --> 00:28:44,426
 that will get off of the main
 thread while it's working
 
-00:28:44.426 --> 00:28:46.816 A:middle
+
+527
+00:28:44,426 --> 00:28:46,816
 and then come back when
 the results are ready.
 
-00:28:47.986 --> 00:28:50.456 A:middle
+
+528
+00:28:47,986 --> 00:28:50,456
 So those are three common
 patterns to look out for
 
-00:28:50.456 --> 00:28:52.156 A:middle
+
+529
+00:28:50,456 --> 00:28:52,156
 in your app that allow you
 
-00:28:52.156 --> 00:28:54.586 A:middle
+
+530
+00:28:52,156 --> 00:28:54,586
 to solve those performance
 problems before
 
-00:28:54.586 --> 00:28:55.236 A:middle
+
+531
+00:28:54,586 --> 00:28:55,236
 they're problems.
 
-00:28:55.736 --> 00:28:59.896 A:middle
+
+532
+00:28:55,736 --> 00:28:59,896
 That's it this year for
 What's New in Core Data.
 
 
-
-00:29:00.236 --> 00:29:01.966 A:middle
+533
+00:29:00,236 --> 00:29:01,966
 If you find any problems,
 please file them.
 
-00:29:02.186 --> 00:29:04.546 A:middle
+
+534
+00:29:02,186 --> 00:29:04,546
 There is a bonus
 for sample apps code
 
-00:29:04.546 --> 00:29:06.876 A:middle
+
+535
+00:29:04,546 --> 00:29:06,876
 that reproduces right
 away, it gets fixed first.
 
-00:29:07.536 --> 00:29:09.436 A:middle
+
+536
+00:29:07,536 --> 00:29:09,436
 We're also interested in
 hearing things that you would
 
-00:29:09.436 --> 00:29:11.046 A:middle
+
+537
+00:29:09,436 --> 00:29:11,046
 like to see in Core
 Data, feature requests,
 
-00:29:11.046 --> 00:29:13.846 A:middle
+
+538
+00:29:11,046 --> 00:29:13,846
 enhancement ideas, the
 documentation guides
 
-00:29:13.846 --> 00:29:17.576 A:middle
+
+539
+00:29:13,846 --> 00:29:17,576
 as I said were all revised this
 year, so if you find any issues
 
-00:29:17.576 --> 00:29:20.636 A:middle
+
+540
+00:29:17,576 --> 00:29:20,636
 with those we would love
 to know about them as well.
 
-00:29:20.786 --> 00:29:23.206 A:middle
+
+541
+00:29:20,786 --> 00:29:23,206
 For more information, check
 out the developer portal
 
-00:29:23.866 --> 00:29:26.616 A:middle
+
+542
+00:29:23,866 --> 00:29:26,616
 and our documentation and
 sample code, you can get support
 
-00:29:26.616 --> 00:29:28.216 A:middle
+
+543
+00:29:26,616 --> 00:29:28,216
 on the dev forums
 or through DTS.
 
-00:29:28.216 --> 00:29:30.596 A:middle
+
+544
+00:29:28,216 --> 00:29:30,596
 Thank you for coming.
 
-00:29:31.516 --> 00:29:35.500 A:middle
+
+545
+00:29:31,516 --> 00:29:35,500
 [Applause]
 

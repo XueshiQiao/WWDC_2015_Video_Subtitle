@@ -1,3047 +1,4352 @@
-
-00:00:23.516 --> 00:00:26.546 A:middle
+1
+00:00:23,516 --> 00:00:26,546
 [ Applause ]
 
-00:00:27.046 --> 00:00:29.316 A:middle
-&gt;&gt; Good afternoon.
 
-00:00:29.586 --> 00:00:30.106 A:middle
+2
+00:00:27,046 --> 00:00:29,316
+>> Good afternoon.
+
+
+3
+00:00:29,586 --> 00:00:30,106
 Hi, everyone.
 
-00:00:30.216 --> 00:00:31.016 A:middle
+
+4
+00:00:30,216 --> 00:00:31,016
 Thank you for joining us.
 
-00:00:31.116 --> 00:00:32.026 A:middle
+
+5
+00:00:31,116 --> 00:00:32,026
 My name is Ted Kremenek.
 
-00:00:32.066 --> 00:00:33.876 A:middle
+
+6
+00:00:32,066 --> 00:00:33,876
 I manage the Swift
 team at Apple.
 
-00:00:34.346 --> 00:00:36.466 A:middle
+
+7
+00:00:34,346 --> 00:00:36,466
 Alex and I have the real
 honor and privilege to talk
 
-00:00:36.566 --> 00:00:39.686 A:middle
+
+8
+00:00:36,566 --> 00:00:39,686
 to you this afternoon about
 some great ways to use Swift
 
-00:00:39.896 --> 00:00:44.366 A:middle
+
+9
+00:00:39,896 --> 00:00:44,366
 in practice to find more issues
 in your code at compile time.
 
-00:00:44.846 --> 00:00:47.286 A:middle
+
+10
+00:00:44,846 --> 00:00:47,286
 This is a pretty broad
 theme, so we decided
 
-00:00:47.286 --> 00:00:48.896 A:middle
+
+11
+00:00:47,286 --> 00:00:48,896
 to focus on two topics.
 
-00:00:49.686 --> 00:00:51.386 A:middle
+
+12
+00:00:49,686 --> 00:00:51,386
 The first is about
 taking advantage
 
-00:00:51.386 --> 00:00:53.656 A:middle
+
+13
+00:00:51,386 --> 00:00:53,656
 of the new language
 affordances in Swift 2
 
-00:00:54.576 --> 00:00:57.746 A:middle
+
+14
+00:00:54,576 --> 00:00:57,746
 to easily allow your
 application to take advantage
 
-00:00:57.746 --> 00:01:00.026 A:middle
+
+15
+00:00:57,746 --> 00:01:00,026
 of new APIs while deploying
 to earlier releases.
 
 
-
-00:00:57.746 --> 00:01:00.026 A:middle
-of new APIs while deploying
-to earlier releases.
-
-00:01:00.596 --> 00:01:02.646 A:middle
+16
+00:01:00,596 --> 00:01:02,646
 We talked about this
 briefly in earlier sessions.
 
-00:01:02.646 --> 00:01:04.385 A:middle
+
+17
+00:01:02,646 --> 00:01:04,385
 We are going to really
 dive into the philosophy
 
-00:01:04.605 --> 00:01:06.606 A:middle
+
+18
+00:01:04,605 --> 00:01:06,606
 of how it's designed, the
 problems it was solving,
 
-00:01:06.946 --> 00:01:08.266 A:middle
+
+19
+00:01:06,946 --> 00:01:08,266
 and how best to use
 it in your code.
 
-00:01:09.256 --> 00:01:11.456 A:middle
+
+20
+00:01:09,256 --> 00:01:11,456
 Afterwards, Alex is
 going to talk about how
 
-00:01:11.456 --> 00:01:14.506 A:middle
+
+21
+00:01:11,456 --> 00:01:14,506
 to use the rich type
 system, protocols, enums,
 
-00:01:14.506 --> 00:01:18.366 A:middle
+
+22
+00:01:14,506 --> 00:01:18,366
 and even protocol extensions to
 enforce application invariance
 
-00:01:18.366 --> 00:01:20.806 A:middle
+
+23
+00:01:18,366 --> 00:01:20,806
 in your own code and to define
 away a lot of boilerplate.
 
-00:01:21.996 --> 00:01:24.386 A:middle
+
+24
+00:01:21,996 --> 00:01:24,386
 So let's jump into
 our first topic,
 
-00:01:24.736 --> 00:01:26.856 A:middle
+
+25
+00:01:24,736 --> 00:01:26,856
 taking advantage of new APIs.
 
-00:01:28.596 --> 00:01:34.746 A:middle
+
+26
+00:01:28,596 --> 00:01:34,746
 This is a well-told story that
 many of you are familiar with.
 
-00:01:35.436 --> 00:01:39.386 A:middle
+
+27
+00:01:35,436 --> 00:01:39,386
 As Apple, we continue
 to roll out rich,
 
-00:01:39.796 --> 00:01:44.466 A:middle
+
+28
+00:01:39,796 --> 00:01:44,466
 new APIs in every OS release
 that gives you the opportunity
 
-00:01:44.466 --> 00:01:46.906 A:middle
+
+29
+00:01:44,466 --> 00:01:46,906
 to build great features
 in your application.
 
-00:01:47.186 --> 00:01:50.296 A:middle
+
+30
+00:01:47,186 --> 00:01:50,296
 Right? This is part of the
 reason why we do it; right?
 
-00:01:51.206 --> 00:01:55.526 A:middle
+
+31
+00:01:51,206 --> 00:01:55,526
 The conundrum here is that apps
 have existing users; right?
 
-00:01:55.526 --> 00:01:56.436 A:middle
+
+32
+00:01:55,526 --> 00:01:56,436
 They are currently...
 
-00:01:56.866 --> 00:01:59.436 A:middle
+
+33
+00:01:56,866 --> 00:01:59,436
 they are not necessarily
 using the newest OS.
 
-00:01:59.436 --> 00:02:01.616 A:middle
+
+34
+00:01:59,436 --> 00:02:01,616
 We have a rapid adoption
 rate on iOS,
 
 
-
-00:01:59.436 --> 00:02:01.616 A:middle
-We have a rapid adoption
-rate on iOS,
-
-00:02:02.306 --> 00:02:04.976 A:middle
+35
+00:02:02,306 --> 00:02:04,976
 but not necessarily everybody
 adopts instantaneously,
 
-00:02:05.316 --> 00:02:08.416 A:middle
+
+36
+00:02:05,316 --> 00:02:08,416
 and some of them can't adopt at
 all for a variety of reasons.
 
-00:02:09.506 --> 00:02:11.956 A:middle
+
+37
+00:02:09,506 --> 00:02:11,956
 So you're faced with
 a series of choices.
 
-00:02:12.496 --> 00:02:12.996 A:middle
+
+38
+00:02:12,496 --> 00:02:12,996
 What do you do?
 
-00:02:14.576 --> 00:02:15.556 A:middle
+
+39
+00:02:14,576 --> 00:02:15,556
 Should you just go ahead
 
-00:02:15.556 --> 00:02:18.636 A:middle
+
+40
+00:02:15,556 --> 00:02:18,636
 and require your app
 to use the latest OS?
 
-00:02:18.636 --> 00:02:22.296 A:middle
+
+41
+00:02:18,636 --> 00:02:22,296
 Right, so you get all the new
 APIs, but this really sucks
 
-00:02:22.296 --> 00:02:24.486 A:middle
+
+42
+00:02:22,296 --> 00:02:24,486
 because you are going to lose...
 
-00:02:24.486 --> 00:02:25.676 A:middle
+
+43
+00:02:24,486 --> 00:02:25,676
 you know, you lose users.
 
-00:02:25.676 --> 00:02:27.296 A:middle
+
+44
+00:02:25,676 --> 00:02:27,296
 These are the people
 who are buying your app.
 
-00:02:29.566 --> 00:02:31.676 A:middle
+
+45
+00:02:29,566 --> 00:02:31,676
 Should you, on the
 opposite extreme,
 
-00:02:32.156 --> 00:02:35.046 A:middle
+
+46
+00:02:32,156 --> 00:02:35,046
 hold back on adopting
 new APIs at all?
 
-00:02:35.046 --> 00:02:37.226 A:middle
+
+47
+00:02:35,046 --> 00:02:37,226
 Right, this just goes to
 the least common denominator
 
-00:02:37.546 --> 00:02:39.096 A:middle
+
+48
+00:02:37,546 --> 00:02:39,096
 of the earliest OS
 that you support.
 
-00:02:39.586 --> 00:02:42.456 A:middle
+
+49
+00:02:39,586 --> 00:02:42,456
 This is also bad because
 you are holding back
 
-00:02:43.036 --> 00:02:45.116 A:middle
+
+50
+00:02:43,036 --> 00:02:45,116
 on the possible rich features
 you could be delivering
 
-00:02:45.266 --> 00:02:46.086 A:middle
+
+51
+00:02:45,266 --> 00:02:46,086
 to your users.
 
-00:02:47.166 --> 00:02:49.626 A:middle
+
+52
+00:02:47,166 --> 00:02:49,626
 And of course, you know,
 there's the "have your cake
 
-00:02:49.626 --> 00:02:54.376 A:middle
+
+53
+00:02:49,626 --> 00:02:54,376
 and eat it too," where you
 can adopt new APIs while still
 
-00:02:54.376 --> 00:02:55.716 A:middle
+
+54
+00:02:54,376 --> 00:02:55,716
 deploying back to
 earlier releases.
 
-00:02:56.206 --> 00:03:00.366 A:middle
+
+55
+00:02:56,206 --> 00:03:00,366
 So this is something that we
 have supported technically,
 
 
-
-00:02:56.206 --> 00:03:00.366 A:middle
-So this is something that we
-have supported technically,
-
-00:03:00.496 --> 00:03:01.566 A:middle
+56
+00:03:00,496 --> 00:03:01,566
 you know, for a very long time.
 
-00:03:02.466 --> 00:03:04.686 A:middle
+
+57
+00:03:02,466 --> 00:03:04,686
 Right, you can do this in
 both Objective-C and Swift.
 
-00:03:05.286 --> 00:03:08.076 A:middle
+
+58
+00:03:05,286 --> 00:03:08,076
 But the reality is this
 is an extremely painful
 
-00:03:08.226 --> 00:03:09.576 A:middle
+
+59
+00:03:08,226 --> 00:03:09,576
 experience today.
 
-00:03:11.516 --> 00:03:15.546 A:middle
+
+60
+00:03:11,516 --> 00:03:15,546
 [ Applause ]
 
-00:03:16.046 --> 00:03:19.756 A:middle
+
+61
+00:03:16,046 --> 00:03:19,756
 But in Swift 2, we tried to make
 it as pain-free as possible,
 
-00:03:19.756 --> 00:03:23.176 A:middle
+
+62
+00:03:19,756 --> 00:03:23,176
 and we've done that by
 looking at the current problems
 
-00:03:23.686 --> 00:03:27.146 A:middle
+
+63
+00:03:23,686 --> 00:03:27,146
 that developers have told us
 about, you know, about deploying
 
-00:03:27.146 --> 00:03:29.166 A:middle
+
+64
+00:03:27,146 --> 00:03:29,166
 to earlier releases
 and trying to solve
 
-00:03:29.166 --> 00:03:30.406 A:middle
+
+65
+00:03:29,166 --> 00:03:30,406
 that problem in the language.
 
-00:03:30.986 --> 00:03:34.916 A:middle
+
+66
+00:03:30,986 --> 00:03:34,916
 Now, the fundamental model
 hasn't changed; right?
 
-00:03:34.916 --> 00:03:38.996 A:middle
+
+67
+00:03:34,916 --> 00:03:38,996
 To develop, just for our
 platform, we always want you
 
-00:03:38.996 --> 00:03:40.386 A:middle
+
+68
+00:03:38,996 --> 00:03:40,386
 to use the latest SDK.
 
-00:03:40.756 --> 00:03:43.676 A:middle
+
+69
+00:03:40,756 --> 00:03:43,676
 Right? That essentially
 gives you the full grab bag
 
-00:03:43.676 --> 00:03:45.806 A:middle
+
+70
+00:03:43,676 --> 00:03:45,806
 of all the APIs you
 could potentially use
 
-00:03:46.256 --> 00:03:47.156 A:middle
+
+71
+00:03:46,256 --> 00:03:47,156
 in your application.
 
-00:03:47.916 --> 00:03:50.196 A:middle
+
+72
+00:03:47,916 --> 00:03:50,196
 Then you toggle the
 deployment target of your app
 
-00:03:50.496 --> 00:03:52.296 A:middle
+
+73
+00:03:50,496 --> 00:03:52,296
 to say how far back in
 time you want to go.
 
-00:03:53.906 --> 00:03:55.576 A:middle
+
+74
+00:03:53,906 --> 00:03:55,576
 Now, pictorially,
 this is pretty simple.
 
-00:03:55.656 --> 00:03:57.716 A:middle
+
+75
+00:03:55,656 --> 00:03:57,716
 It's like a sliding
 window of releases.
 
-00:03:57.716 --> 00:03:59.316 A:middle
+
+76
+00:03:57,716 --> 00:03:59,316
 You set the base
 SDK to the latest,
 
-00:03:59.916 --> 00:04:02.536 A:middle
+
+77
+00:03:59,916 --> 00:04:02,536
 set the deployment target
 back to the earliest release
 
 
-
-00:03:59.916 --> 00:04:02.536 A:middle
-set the deployment target
-back to the earliest release
-
-00:04:02.816 --> 00:04:03.996 A:middle
+78
+00:04:02,816 --> 00:04:03,996
 in that window; right?
 
-00:04:04.546 --> 00:04:05.616 A:middle
+
+79
+00:04:04,546 --> 00:04:05,616
 Conceptually very simple.
 
-00:04:06.386 --> 00:04:11.826 A:middle
+
+80
+00:04:06,386 --> 00:04:11,826
 So before I talk about how we
 do adopt new features and APIs
 
-00:04:11.826 --> 00:04:15.756 A:middle
+
+81
+00:04:11,826 --> 00:04:15,756
 in Swift 2, let's take a look
 at the current problems we have
 
-00:04:15.756 --> 00:04:17.456 A:middle
+
+82
+00:04:15,756 --> 00:04:17,456
 in the existing approach.
 
-00:04:18.266 --> 00:04:21.565 A:middle
+
+83
+00:04:18,266 --> 00:04:21,565
 So fundamentally, you have to
 write your app so it can contend
 
-00:04:21.906 --> 00:04:26.026 A:middle
+
+84
+00:04:21,906 --> 00:04:26,026
 with the absence of APIs on
 an earlier host OS; right?
 
-00:04:26.836 --> 00:04:30.506 A:middle
+
+85
+00:04:26,836 --> 00:04:30,506
 So there are several things you
 have to separately consider --
 
-00:04:30.926 --> 00:04:33.766 A:middle
+
+86
+00:04:30,926 --> 00:04:33,766
 the absence of entire
 frameworks, classes, methods,
 
-00:04:33.766 --> 00:04:37.606 A:middle
+
+87
+00:04:33,766 --> 00:04:37,606
 functions, and even certain
 enum values are not legal to use
 
-00:04:37.966 --> 00:04:39.126 A:middle
+
+88
+00:04:37,966 --> 00:04:39,126
 on an earlier release.
 
-00:04:39.616 --> 00:04:42.416 A:middle
+
+89
+00:04:39,616 --> 00:04:42,416
 And the thing that really is
 the bummer is you have to reason
 
-00:04:42.416 --> 00:04:44.236 A:middle
+
+90
+00:04:42,416 --> 00:04:44,236
 about each one of
 these independently.
 
-00:04:45.196 --> 00:04:47.896 A:middle
+
+91
+00:04:45,196 --> 00:04:47,896
 For frameworks, you have to
 tediously decide, you know,
 
-00:04:47.896 --> 00:04:50.136 A:middle
+
+92
+00:04:47,896 --> 00:04:50,136
 say hey, this framework
 is going to be optional
 
-00:04:50.566 --> 00:04:52.386 A:middle
+
+93
+00:04:50,566 --> 00:04:52,386
 when I link it into
 my application.
 
-00:04:52.866 --> 00:04:56.056 A:middle
+
+94
+00:04:52,866 --> 00:04:56,056
 If you don't do this, your app
 is just going to fail a load
 
-00:04:56.086 --> 00:04:57.506 A:middle
+
+95
+00:04:56,086 --> 00:04:57,506
 when it launches
 on an earlier OS.
 
-00:04:58.306 --> 00:05:02.836 A:middle
+
+96
+00:04:58,306 --> 00:05:02,836
 And then comes the actual
 usage of the API itself.
 
 
-
-00:04:58.306 --> 00:05:02.836 A:middle
-And then comes the actual
-usage of the API itself.
-
-00:05:02.986 --> 00:05:05.066 A:middle
+97
+00:05:02,986 --> 00:05:05,066
 Let's start with classes.
 
-00:05:06.146 --> 00:05:08.296 A:middle
+
+98
+00:05:06,146 --> 00:05:08,296
 So fundamentally, you
 are writing your app
 
-00:05:08.346 --> 00:05:09.616 A:middle
+
+99
+00:05:08,346 --> 00:05:09,616
 so it behaves differently.
 
-00:05:10.036 --> 00:05:11.706 A:middle
+
+100
+00:05:10,036 --> 00:05:11,706
 There's going to be
 conditional behavior here,
 
-00:05:11.706 --> 00:05:14.406 A:middle
+
+101
+00:05:11,706 --> 00:05:14,406
 like when new APIs are
 available, your app is going
 
-00:05:14.406 --> 00:05:15.226 A:middle
+
+102
+00:05:14,406 --> 00:05:15,226
 to do something different.
 
-00:05:15.906 --> 00:05:18.066 A:middle
+
+103
+00:05:15,906 --> 00:05:18,066
 So conditional logic
 isn't really the problem.
 
-00:05:18.626 --> 00:05:21.526 A:middle
+
+104
+00:05:18,626 --> 00:05:21,526
 The problem is how you actually
 conditionalize your behavior.
 
-00:05:22.956 --> 00:05:25.266 A:middle
+
+105
+00:05:22,956 --> 00:05:25,266
 Here on this slide, here
 is the canonical way
 
-00:05:25.266 --> 00:05:26.666 A:middle
+
+106
+00:05:25,266 --> 00:05:26,666
 that you check availability.
 
-00:05:26.666 --> 00:05:28.776 A:middle
+
+107
+00:05:26,666 --> 00:05:28,776
 You query the Objective-C
 runtime, say hey,
 
-00:05:28.986 --> 00:05:32.136 A:middle
+
+108
+00:05:28,986 --> 00:05:32,136
 is this class present
 at runtime?
 
-00:05:33.376 --> 00:05:35.356 A:middle
+
+109
+00:05:33,376 --> 00:05:35,356
 The problem is that
 this is a bit of a lie.
 
-00:05:35.936 --> 00:05:37.986 A:middle
+
+110
+00:05:35,936 --> 00:05:37,986
 Right? I mean, so the
 class may be available,
 
-00:05:38.696 --> 00:05:41.476 A:middle
+
+111
+00:05:38,696 --> 00:05:41,476
 but that doesn't mean that
 it's available for you to use.
 
-00:05:42.366 --> 00:05:47.226 A:middle
+
+112
+00:05:42,366 --> 00:05:47,226
 Frequently, APIs start their
 life as internal APIs, right,
 
-00:05:47.946 --> 00:05:51.556 A:middle
+
+113
+00:05:47,946 --> 00:05:51,556
 in the OS, and they go through
 some time where they are baked
 
-00:05:51.556 --> 00:05:54.956 A:middle
+
+114
+00:05:51,556 --> 00:05:54,956
 and their evolved, and then
 by the time they are released
 
-00:05:54.956 --> 00:05:56.936 A:middle
+
+115
+00:05:54,956 --> 00:05:56,936
 for public use, the behavior
 
-00:05:56.936 --> 00:05:58.836 A:middle
+
+116
+00:05:56,936 --> 00:05:58,836
 of the API may have
 completely changed.
 
-00:05:59.336 --> 00:06:01.586 A:middle
+
+117
+00:05:59,336 --> 00:06:01,586
 Even though this check
 may succeed at runtime,
 
 
-
-00:05:59.336 --> 00:06:01.586 A:middle
-Even though this check
-may succeed at runtime,
-
-00:06:02.446 --> 00:06:04.776 A:middle
+118
+00:06:02,446 --> 00:06:04,776
 it's not the actual
 truth of whether
 
-00:06:04.776 --> 00:06:06.626 A:middle
+
+119
+00:06:04,776 --> 00:06:06,626
 or not you can actually
 safely use this API.
 
-00:06:07.636 --> 00:06:10.476 A:middle
+
+120
+00:06:07,636 --> 00:06:10,476
 What that means is if you use
 the API too early, you know,
 
-00:06:10.546 --> 00:06:13.036 A:middle
+
+121
+00:06:10,546 --> 00:06:13,036
 on an OS release too early
 before you are supposed
 
-00:06:13.036 --> 00:06:15.306 A:middle
+
+122
+00:06:13,036 --> 00:06:15,306
 to be using it, you
 essentially have a time bomb
 
-00:06:15.306 --> 00:06:16.136 A:middle
+
+123
+00:06:15,306 --> 00:06:16,136
 in your application.
 
-00:06:16.136 --> 00:06:18.446 A:middle
+
+124
+00:06:16,136 --> 00:06:18,446
 The behavior of your
 app that assumed
 
-00:06:18.446 --> 00:06:20.736 A:middle
+
+125
+00:06:18,446 --> 00:06:20,736
 that that API would
 behave a certain way is now
 
-00:06:20.736 --> 00:06:21.666 A:middle
+
+126
+00:06:20,736 --> 00:06:21,666
 completely broken.
 
-00:06:22.116 --> 00:06:25.256 A:middle
+
+127
+00:06:22,116 --> 00:06:25,256
 This has bitten developers
 many times.
 
-00:06:25.526 --> 00:06:27.236 A:middle
+
+128
+00:06:25,526 --> 00:06:27,236
 So this is a huge problem.
 
-00:06:27.866 --> 00:06:31.996 A:middle
+
+129
+00:06:27,866 --> 00:06:31,996
 The other problem is it's
 so easy to make mistakes.
 
-00:06:32.676 --> 00:06:33.516 A:middle
+
+130
+00:06:32,676 --> 00:06:33,516
 Take this new API.
 
-00:06:34.666 --> 00:06:36.726 A:middle
+
+131
+00:06:34,666 --> 00:06:36,726
 With a few characters'
 difference,
 
-00:06:36.946 --> 00:06:40.706 A:middle
+
+132
+00:06:36,946 --> 00:06:40,706
 I have completely valid code,
 and it's doing the wrong thing.
 
-00:06:41.426 --> 00:06:45.166 A:middle
+
+133
+00:06:41,426 --> 00:06:45,166
 And this data was introduced
 long before NS data asset.
 
-00:06:45.586 --> 00:06:48.086 A:middle
+
+134
+00:06:45,586 --> 00:06:48,086
 Your code will compile,
 it will even run correctly
 
-00:06:48.416 --> 00:06:49.776 A:middle
+
+135
+00:06:48,416 --> 00:06:49,776
 if you are testing
 on the latest OS.
 
-00:06:50.426 --> 00:06:53.596 A:middle
+
+136
+00:06:50,426 --> 00:06:53,596
 So the failure occurs only when
 you happen to run this code
 
-00:06:53.906 --> 00:06:55.526 A:middle
+
+137
+00:06:53,906 --> 00:06:55,526
 on an older OS device.
 
-00:06:55.616 --> 00:06:58.996 A:middle
+
+138
+00:06:55,616 --> 00:06:58,996
 Right? And that's not going to
 be in your common test scenario,
 
-00:06:59.426 --> 00:07:01.306 A:middle
+
+139
+00:06:59,426 --> 00:07:01,306
 and in some cases it's only
 
 
-
-00:06:59.426 --> 00:07:01.306 A:middle
-and in some cases it's only
-
-00:07:01.306 --> 00:07:03.126 A:middle
+140
+00:07:01,306 --> 00:07:03,126
 up to your users to
 find this problem.
 
-00:07:03.716 --> 00:07:06.186 A:middle
+
+141
+00:07:03,716 --> 00:07:06,186
 And what will happen is you
 will have a crash at runtime
 
-00:07:06.336 --> 00:07:10.906 A:middle
+
+142
+00:07:06,336 --> 00:07:10,906
 when you try and use this class.
 
-00:07:11.136 --> 00:07:15.106 A:middle
+
+143
+00:07:11,136 --> 00:07:15,106
 So easy to make mistakes
 just by having simple typos.
 
-00:07:16.586 --> 00:07:20.186 A:middle
+
+144
+00:07:16,586 --> 00:07:20,186
 Methods essentially suffer from
 the same problems as classes.
 
-00:07:20.906 --> 00:07:22.796 A:middle
+
+145
+00:07:20,906 --> 00:07:22,796
 You can type them wrong.
 
-00:07:22.906 --> 00:07:25.126 A:middle
+
+146
+00:07:22,906 --> 00:07:25,126
 If you are checking for the
 availability of a property,
 
-00:07:25.126 --> 00:07:27.736 A:middle
+
+147
+00:07:25,126 --> 00:07:27,736
 now you have to know what the
 selector was for that property
 
-00:07:27.736 --> 00:07:29.246 A:middle
+
+148
+00:07:27,736 --> 00:07:29,246
 and you have to spell
 it correctly,
 
-00:07:29.736 --> 00:07:32.596 A:middle
+
+149
+00:07:29,736 --> 00:07:32,596
 and also the syntax is
 completely different; right?
 
-00:07:32.596 --> 00:07:34.896 A:middle
+
+150
+00:07:32,596 --> 00:07:34,896
 You are checking for APIs,
 but the syntax is different.
 
-00:07:36.076 --> 00:07:37.806 A:middle
+
+151
+00:07:36,076 --> 00:07:37,806
 Functions suffer from
 the same problems.
 
-00:07:37.806 --> 00:07:39.706 A:middle
+
+152
+00:07:37,806 --> 00:07:39,706
 You can make the same
 mistakes, but yet you have
 
-00:07:39.706 --> 00:07:41.276 A:middle
+
+153
+00:07:39,706 --> 00:07:41,276
 yet another third way
 to write something.
 
-00:07:41.276 --> 00:07:45.356 A:middle
+
+154
+00:07:41,276 --> 00:07:45,356
 And then if you have enums,
 you are just completely hosed.
 
-00:07:45.356 --> 00:07:47.746 A:middle
+
+155
+00:07:45,356 --> 00:07:47,746
 You don't really
 have a good solution.
 
-00:07:47.746 --> 00:07:50.116 A:middle
+
+156
+00:07:47,746 --> 00:07:50,116
 There is no respond
 to selector for enums,
 
-00:07:50.636 --> 00:07:54.146 A:middle
+
+157
+00:07:50,636 --> 00:07:54,146
 so you are stuck doing a
 manual OS version check.
 
-00:07:54.716 --> 00:07:57.836 A:middle
+
+158
+00:07:54,716 --> 00:07:57,836
 And just looking at this table,
 like there's a whole assortment
 
-00:07:57.836 --> 00:07:59.146 A:middle
+
+159
+00:07:57,836 --> 00:07:59,146
 of book keeping that
 you have to have
 
-00:07:59.146 --> 00:08:00.446 A:middle
+
+160
+00:07:59,146 --> 00:08:00,446
 in your head to get this right.
 
 
-
-00:07:59.146 --> 00:08:00.446 A:middle
-in your head to get this right.
-
-00:08:01.256 --> 00:08:03.516 A:middle
+161
+00:08:01,256 --> 00:08:03,516
 And this is just a
 very sad story indeed.
 
-00:08:05.666 --> 00:08:09.536 A:middle
+
+162
+00:08:05,666 --> 00:08:09,536
 So our observations was
 this is just a really broken
 
-00:08:09.536 --> 00:08:10.406 A:middle
+
+163
+00:08:09,536 --> 00:08:10,406
 programming model.
 
-00:08:10.506 --> 00:08:13.086 A:middle
+
+164
+00:08:10,506 --> 00:08:13,086
 Right? It technically works,
 but it's just hard to do.
 
-00:08:13.706 --> 00:08:15.386 A:middle
+
+165
+00:08:13,706 --> 00:08:15,386
 And we want you to
 take advantage
 
-00:08:15.386 --> 00:08:18.476 A:middle
+
+166
+00:08:15,386 --> 00:08:18,476
 of new APIs while continuing
 to support all of your users.
 
-00:08:19.946 --> 00:08:22.696 A:middle
+
+167
+00:08:19,946 --> 00:08:22,696
 So we need to fix
 these problems.
 
-00:08:23.286 --> 00:08:27.946 A:middle
+
+168
+00:08:23,286 --> 00:08:27,946
 So in Swift 2, things
 have changed.
 
-00:08:28.186 --> 00:08:29.396 A:middle
+
+169
+00:08:28,186 --> 00:08:29,396
 It's built into the language.
 
-00:08:30.666 --> 00:08:34.616 A:middle
+
+170
+00:08:30,666 --> 00:08:34,616
 You focus on how you want to
 structure your app so that
 
-00:08:35.035 --> 00:08:37.166 A:middle
+
+171
+00:08:35,035 --> 00:08:37,166
 when it makes sense to
 have alternate behavior,
 
-00:08:37.265 --> 00:08:38.756 A:middle
+
+172
+00:08:37,265 --> 00:08:38,756
 you just go and use those APIs.
 
-00:08:38.756 --> 00:08:40.946 A:middle
+
+173
+00:08:38,756 --> 00:08:40,946
 You understand there's going to
 be conditional behavior there,
 
-00:08:40.946 --> 00:08:42.876 A:middle
+
+174
+00:08:40,946 --> 00:08:42,876
 but you focus primarily on that.
 
-00:08:43.956 --> 00:08:45.416 A:middle
+
+175
+00:08:43,956 --> 00:08:45,416
 Then the compiler has your back.
 
-00:08:45.656 --> 00:08:49.906 A:middle
+
+176
+00:08:45,656 --> 00:08:49,906
 It will emit an error if you
 use the API in an unsafe way.
 
-00:08:51.056 --> 00:08:53.566 A:middle
+
+177
+00:08:51,056 --> 00:08:53,566
 You also have unified syntax,
 so you don't have to think
 
-00:08:53.566 --> 00:08:56.306 A:middle
+
+178
+00:08:53,566 --> 00:08:56,306
 about classes, methods,
 functions, even enums.
 
-00:08:56.516 --> 00:09:00.146 A:middle
+
+179
+00:08:56,516 --> 00:09:00,146
 All of this is handled under
 one syntax that you just use.
 
 
-
-00:08:56.516 --> 00:09:00.146 A:middle
-All of this is handled under
-one syntax that you just use.
-
-00:09:00.146 --> 00:09:02.746 A:middle
+180
+00:09:00,146 --> 00:09:02,746
 And the compiler knows
 the syntax for you to use,
 
-00:09:02.746 --> 00:09:07.436 A:middle
+
+181
+00:09:02,746 --> 00:09:07,436
 so if you don't get it right,
 it will tell you what to do.
 
-00:09:07.696 --> 00:09:11.036 A:middle
+
+182
+00:09:07,696 --> 00:09:11,036
 And because the compiler
 is all involved all along,
 
-00:09:11.226 --> 00:09:12.706 A:middle
+
+183
+00:09:11,226 --> 00:09:12,706
 and in Swift we are
 using modules,
 
-00:09:13.416 --> 00:09:15.916 A:middle
+
+184
+00:09:13,416 --> 00:09:15,916
 all that optional linking,
 that just gets handled for you.
 
-00:09:16.606 --> 00:09:19.536 A:middle
+
+185
+00:09:16,606 --> 00:09:19,536
 So how does this work?
 
-00:09:20.436 --> 00:09:22.356 A:middle
+
+186
+00:09:20,436 --> 00:09:22,356
 So here are some APIs
 from core location.
 
-00:09:24.486 --> 00:09:27.396 A:middle
+
+187
+00:09:24,486 --> 00:09:27,396
 Now, let's say I am
 deploying to iOS 9,
 
-00:09:27.396 --> 00:09:29.526 A:middle
+
+188
+00:09:27,396 --> 00:09:29,526
 so I am using the iOS 9 SDK
 
-00:09:29.526 --> 00:09:31.456 A:middle
+
+189
+00:09:29,526 --> 00:09:31,456
 and set my deployment
 target to iOS 9.
 
-00:09:31.496 --> 00:09:35.366 A:middle
+
+190
+00:09:31,496 --> 00:09:35,366
 The compiler sees this
 information in the SDK,
 
-00:09:35.616 --> 00:09:37.366 A:middle
+
+191
+00:09:35,616 --> 00:09:37,366
 so this is literally in
 the Objective-C headers,
 
-00:09:37.476 --> 00:09:39.816 A:middle
+
+192
+00:09:37,476 --> 00:09:39,816
 which you could also view as the
 generated interfaces in Swift.
 
-00:09:40.616 --> 00:09:42.706 A:middle
+
+193
+00:09:40,616 --> 00:09:42,706
 So the class was
 introduced in iOS 2,
 
-00:09:43.446 --> 00:09:45.686 A:middle
+
+194
+00:09:43,446 --> 00:09:45,686
 and the method was later
 introduced in iOS 8.
 
-00:09:46.616 --> 00:09:47.896 A:middle
+
+195
+00:09:46,616 --> 00:09:47,896
 Since I am running on iOS 9,
 
-00:09:48.216 --> 00:09:50.446 A:middle
+
+196
+00:09:48,216 --> 00:09:50,446
 there's no problems just using
 this API unconditionally.
 
-00:09:51.546 --> 00:09:54.786 A:middle
+
+197
+00:09:51,546 --> 00:09:54,786
 If I deploy back to iOS
 8, still no problems.
 
-00:09:55.566 --> 00:09:57.956 A:middle
+
+198
+00:09:55,566 --> 00:09:57,956
 But if I slide all the way
 back to deploying to iOS 7,
 
-00:09:58.596 --> 00:10:01.046 A:middle
+
+199
+00:09:58,596 --> 00:10:01,046
 the compiler can see, just
 as we can read on this slide,
 
 
-
-00:09:58.596 --> 00:10:01.046 A:middle
-the compiler can see, just
-as we can read on this slide,
-
-00:10:02.016 --> 00:10:04.506 A:middle
+200
+00:10:02,016 --> 00:10:04,506
 that it's unsafe
 to use this method,
 
-00:10:04.546 --> 00:10:06.176 A:middle
+
+201
+00:10:04,546 --> 00:10:06,176
 request when in use
 authorization.
 
-00:10:06.836 --> 00:10:13.366 A:middle
+
+202
+00:10:06,836 --> 00:10:13,366
 And the compiler will tell you
 that this is just unsafe code.
 
-00:10:14.036 --> 00:10:14.946 A:middle
+
+203
+00:10:14,036 --> 00:10:14,946
 And it's an error.
 
-00:10:15.496 --> 00:10:18.156 A:middle
+
+204
+00:10:15,496 --> 00:10:18,156
 It will literally prevent
 you from building this code.
 
-00:10:18.156 --> 00:10:20.686 A:middle
+
+205
+00:10:18,156 --> 00:10:20,686
 And it will give you
 a nice safety check.
 
-00:10:21.516 --> 00:10:26.546 A:middle
+
+206
+00:10:21,516 --> 00:10:26,546
 [ Applause ]
 
-00:10:27.046 --> 00:10:29.376 A:middle
+
+207
+00:10:27,046 --> 00:10:29,376
 It will give you the option
 
-00:10:29.996 --> 00:10:31.946 A:middle
+
+208
+00:10:29,996 --> 00:10:31,946
 of different ways you
 can solve this problem.
 
-00:10:33.126 --> 00:10:35.496 A:middle
+
+209
+00:10:33,126 --> 00:10:35,496
 There is this note, you want to
 guard it with a safety check?
 
-00:10:36.216 --> 00:10:38.836 A:middle
+
+210
+00:10:36,216 --> 00:10:38,836
 There is a fix it attached
 to it, and if you accept it,
 
-00:10:39.286 --> 00:10:40.796 A:middle
+
+211
+00:10:39,286 --> 00:10:40,796
 your code is rewritten as this.
 
-00:10:42.156 --> 00:10:48.446 A:middle
+
+212
+00:10:42,156 --> 00:10:48,446
 Now, there's a combination of
 compilation, static enforcement,
 
-00:10:48.446 --> 00:10:49.706 A:middle
+
+213
+00:10:48,446 --> 00:10:49,706
 and runtime enforcement here.
 
-00:10:51.056 --> 00:10:54.126 A:middle
+
+214
+00:10:51,056 --> 00:10:54,126
 What's happening is this
 hash available syntax.
 
-00:10:54.816 --> 00:10:56.496 A:middle
+
+215
+00:10:54,816 --> 00:10:56,496
 Basically, everything
 within that block
 
-00:10:56.496 --> 00:11:01.376 A:middle
+
+216
+00:10:56,496 --> 00:11:01,376
 of code the compiler
 scans to see if, you know,
 
 
-
-00:10:56.496 --> 00:11:01.376 A:middle
-of code the compiler
-scans to see if, you know,
-
-00:11:01.376 --> 00:11:03.766 A:middle
+217
+00:11:01,376 --> 00:11:03,766
 what is the most
 recent iOS or OS X
 
-00:11:03.766 --> 00:11:05.666 A:middle
+
+218
+00:11:03,766 --> 00:11:05,666
 or whatever release
 that's needed
 
-00:11:06.096 --> 00:11:08.176 A:middle
+
+219
+00:11:06,096 --> 00:11:08,176
 to execute those APIs safely?
 
-00:11:09.366 --> 00:11:11.716 A:middle
+
+220
+00:11:09,366 --> 00:11:11,716
 And then it will use that
 version that's mentioned
 
-00:11:11.716 --> 00:11:14.246 A:middle
+
+221
+00:11:11,716 --> 00:11:14,246
 in the hash available to do
 the appropriate runtime check
 
-00:11:14.566 --> 00:11:14.986 A:middle
+
+222
+00:11:14,566 --> 00:11:14,986
 for you.
 
-00:11:14.986 --> 00:11:16.506 A:middle
+
+223
+00:11:14,986 --> 00:11:16,506
 The compiler will
 insert that in.
 
-00:11:16.506 --> 00:11:19.356 A:middle
+
+224
+00:11:16,506 --> 00:11:19,356
 You don't have to guess how it's
 done, it's done efficiently,
 
-00:11:19.696 --> 00:11:22.596 A:middle
+
+225
+00:11:19,696 --> 00:11:22,596
 it's cached, so you can
 just use it very safely.
 
-00:11:23.506 --> 00:11:26.096 A:middle
+
+226
+00:11:23,506 --> 00:11:26,096
 So just by using the
 information in the SDK,
 
-00:11:26.096 --> 00:11:30.316 A:middle
+
+227
+00:11:26,096 --> 00:11:30,316
 we get this perfect fidelity,
 so you get a really safe model.
 
-00:11:31.026 --> 00:11:35.826 A:middle
+
+228
+00:11:31,026 --> 00:11:35,826
 So a few people have
 asked why are we checking
 
-00:11:35.826 --> 00:11:37.276 A:middle
+
+229
+00:11:35,826 --> 00:11:37,276
 against OS version?
 
-00:11:37.306 --> 00:11:39.296 A:middle
+
+230
+00:11:37,306 --> 00:11:39,296
 Isn't this something we
 have provided guidance
 
-00:11:39.296 --> 00:11:40.826 A:middle
+
+231
+00:11:39,296 --> 00:11:40,826
 against doing in the past?
 
-00:11:41.946 --> 00:11:46.286 A:middle
+
+232
+00:11:41,946 --> 00:11:46,286
 The reason is the
 bookkeeping is so hard to do.
 
-00:11:46.686 --> 00:11:49.376 A:middle
+
+233
+00:11:46,686 --> 00:11:49,376
 At least when you are querying
 runtime, you get some kind
 
-00:11:49.376 --> 00:11:51.186 A:middle
+
+234
+00:11:49,376 --> 00:11:51,186
 of truth, even though
 that truth turns
 
-00:11:51.186 --> 00:11:52.846 A:middle
+
+235
+00:11:51,186 --> 00:11:52,846
 out to be a lie in many cases.
 
-00:11:54.576 --> 00:11:58.826 A:middle
+
+236
+00:11:54,576 --> 00:11:58,826
 Well, logically, when we talk
 to app developers -- you --
 
-00:11:59.876 --> 00:12:02.186 A:middle
+
+237
+00:11:59,876 --> 00:12:02,186
 you think about, you know, the
 experiences you want to build
 
 
-
-00:11:59.876 --> 00:12:02.186 A:middle
-you think about, you know, the
-experiences you want to build
-
-00:12:02.186 --> 00:12:04.366 A:middle
+238
+00:12:02,186 --> 00:12:04,366
 in your app, it's all
 staged in by, like,
 
-00:12:04.366 --> 00:12:07.416 A:middle
+
+239
+00:12:04,366 --> 00:12:07,416
 what host OS your users
 are running; right?
 
-00:12:07.996 --> 00:12:10.996 A:middle
+
+240
+00:12:07,996 --> 00:12:10,996
 In each OS release, there's
 like a wave of new APIs.
 
-00:12:12.596 --> 00:12:14.546 A:middle
+
+241
+00:12:12,596 --> 00:12:14,546
 Those basically define
 the set of features
 
-00:12:15.006 --> 00:12:18.596 A:middle
+
+242
+00:12:15,006 --> 00:12:18,596
 that you could implement,
 and your users are
 
-00:12:18.596 --> 00:12:22.066 A:middle
+
+243
+00:12:18,596 --> 00:12:22,066
 on different versions of
 the OS, and so they --
 
-00:12:22.066 --> 00:12:25.326 A:middle
+
+244
+00:12:22,066 --> 00:12:25,326
 you know, they logically break
 into categories of the behaviors
 
-00:12:25.326 --> 00:12:27.466 A:middle
+
+245
+00:12:25,326 --> 00:12:27,466
 that your apps, you
 know, can have; right?
 
-00:12:27.466 --> 00:12:30.966 A:middle
+
+246
+00:12:27,466 --> 00:12:30,966
 And so this all just
 varies logically consistent.
 
-00:12:32.036 --> 00:12:35.286 A:middle
+
+247
+00:12:32,036 --> 00:12:35,286
 Also, it's not checking for
 just the existence of one API.
 
-00:12:36.156 --> 00:12:39.256 A:middle
+
+248
+00:12:36,156 --> 00:12:39,256
 It doesn't even really make
 sense because you usually intend
 
-00:12:39.256 --> 00:12:40.906 A:middle
+
+249
+00:12:39,256 --> 00:12:40,906
 to use a bunch of APIs together.
 
-00:12:41.406 --> 00:12:42.936 A:middle
+
+250
+00:12:41,406 --> 00:12:42,936
 And it's not always
 true that the existence
 
-00:12:42.936 --> 00:12:44.446 A:middle
+
+251
+00:12:42,936 --> 00:12:44,446
 of one API implies the other.
 
-00:12:44.936 --> 00:12:47.536 A:middle
+
+252
+00:12:44,936 --> 00:12:47,536
 That information is in the
 SDK, and the compiler can do
 
-00:12:47.536 --> 00:12:48.486 A:middle
+
+253
+00:12:47,536 --> 00:12:48,486
 that bookkeeping for you.
 
-00:12:49.756 --> 00:12:52.446 A:middle
+
+254
+00:12:49,756 --> 00:12:52,446
 And the compiler being involved
 is the real game changer here.
 
-00:12:53.136 --> 00:12:55.726 A:middle
+
+255
+00:12:53,136 --> 00:12:55,726
 It makes it so the availability
 checks are just reliable,
 
-00:12:56.296 --> 00:12:59.816 A:middle
+
+256
+00:12:56,296 --> 00:12:59,816
 and you can assume the compiler
 is doing the right thing.
 
 
-
-00:13:00.036 --> 00:13:01.406 A:middle
+257
+00:13:00,036 --> 00:13:01,406
 So you get that peace of mind
 
-00:13:01.776 --> 00:13:04.896 A:middle
+
+258
+00:13:01,776 --> 00:13:04,896
 that you are really defining
 away the whole class of problems
 
-00:13:05.096 --> 00:13:06.736 A:middle
+
+259
+00:13:05,096 --> 00:13:06,736
 because you have this
 compile enforcement.
 
-00:13:07.366 --> 00:13:12.956 A:middle
+
+260
+00:13:07,366 --> 00:13:12,956
 It also naturally goes to
 multiple platforms as well.
 
-00:13:13.946 --> 00:13:17.546 A:middle
+
+261
+00:13:13,946 --> 00:13:17,546
 So let's say I have this NSData
 asset example from before.
 
-00:13:18.106 --> 00:13:20.756 A:middle
+
+262
+00:13:18,106 --> 00:13:20,756
 If I want this code to
 target both OS X and iOS,
 
-00:13:20.756 --> 00:13:24.036 A:middle
+
+263
+00:13:20,756 --> 00:13:24,036
 I can simply extend the syntax
 to say I am also checking
 
-00:13:24.036 --> 00:13:26.536 A:middle
+
+264
+00:13:24,036 --> 00:13:26,536
 for this minimum availability
 on this other platform.
 
-00:13:27.586 --> 00:13:30.336 A:middle
+
+265
+00:13:27,586 --> 00:13:30,336
 The star indicates essentially,
 you know, the all other cases,
 
-00:13:30.406 --> 00:13:32.086 A:middle
+
+266
+00:13:30,406 --> 00:13:32,086
 which in this case
 would be Watch OS.
 
-00:13:33.326 --> 00:13:34.836 A:middle
+
+267
+00:13:33,326 --> 00:13:34,836
 We put it there explicitly
 to call
 
-00:13:34.836 --> 00:13:36.616 A:middle
+
+268
+00:13:34,836 --> 00:13:36,616
 out that there's
 potential control flow here.
 
-00:13:36.786 --> 00:13:39.716 A:middle
+
+269
+00:13:36,786 --> 00:13:39,716
 For other platforms that
 aren't explicitly mentioned,
 
-00:13:40.166 --> 00:13:42.436 A:middle
+
+270
+00:13:40,166 --> 00:13:42,436
 this if condition will
 still be executed.
 
-00:13:42.556 --> 00:13:44.966 A:middle
+
+271
+00:13:42,556 --> 00:13:44,966
 Essentially, there is
 a true and a false.
 
-00:13:45.526 --> 00:13:47.906 A:middle
+
+272
+00:13:45,526 --> 00:13:47,906
 We wanted to call out
 that those branches,
 
-00:13:47.906 --> 00:13:49.206 A:middle
+
+273
+00:13:47,906 --> 00:13:49,206
 they still will be taken.
 
-00:13:49.456 --> 00:13:51.106 A:middle
+
+274
+00:13:49,456 --> 00:13:51,106
 So we wanted to kind
 of explicitly call
 
-00:13:51.106 --> 00:13:52.916 A:middle
+
+275
+00:13:51,106 --> 00:13:52,916
 out that behavior
 for readability.
 
-00:13:53.566 --> 00:13:58.176 A:middle
+
+276
+00:13:53,566 --> 00:13:58,176
 Now, the availability check
 also naturally composes
 
-00:13:58.176 --> 00:14:00.526 A:middle
+
+277
+00:13:58,176 --> 00:14:00,526
 with other affordances in
 Swift 2 for control flow.
 
 
-
-00:13:58.176 --> 00:14:00.526 A:middle
-with other affordances in
-Swift 2 for control flow.
-
-00:14:01.386 --> 00:14:04.896 A:middle
+278
+00:14:01,386 --> 00:14:04,896
 So let's say you have structured
 your app so that you want
 
-00:14:04.896 --> 00:14:08.566 A:middle
+
+279
+00:14:04,896 --> 00:14:08,566
 to do this check, and then
 implement some feature
 
-00:14:08.836 --> 00:14:11.446 A:middle
+
+280
+00:14:08,836 --> 00:14:11,446
 and otherwise do
 nothing, just bail out.
 
-00:14:12.656 --> 00:14:14.846 A:middle
+
+281
+00:14:12,656 --> 00:14:14,846
 Well, this composes nicely
 with the new guard statement,
 
-00:14:16.216 --> 00:14:18.196 A:middle
+
+282
+00:14:16,216 --> 00:14:18,196
 and you can just reshuffle
 your code like this.
 
-00:14:18.556 --> 00:14:20.826 A:middle
+
+283
+00:14:18,556 --> 00:14:20,826
 Everything below the
 guard is guaranteed
 
-00:14:20.826 --> 00:14:22.596 A:middle
+
+284
+00:14:20,826 --> 00:14:22,596
 to have the availability
 provided
 
-00:14:22.596 --> 00:14:23.816 A:middle
+
+285
+00:14:22,596 --> 00:14:23,816
 by the hash available tag.
 
-00:14:24.516 --> 00:14:29.056 A:middle
+
+286
+00:14:24,516 --> 00:14:29,056
 [ Applause ]
 
-00:14:29.556 --> 00:14:33.406 A:middle
+
+287
+00:14:29,556 --> 00:14:33,406
 And so this naturally
 composes to find a nice way
 
-00:14:33.406 --> 00:14:34.966 A:middle
+
+288
+00:14:33,406 --> 00:14:34,966
 to factor your application.
 
-00:14:35.486 --> 00:14:38.826 A:middle
+
+289
+00:14:35,486 --> 00:14:38,826
 So let's say you are
 deploying back to iOS 7.
 
-00:14:39.876 --> 00:14:43.516 A:middle
+
+290
+00:14:39,876 --> 00:14:43,516
 So I am going to color code the
 APIs that are available at iOS 7
 
-00:14:44.236 --> 00:14:47.156 A:middle
+
+291
+00:14:44,236 --> 00:14:47,156
 in green, and the green bar
 represents within this block
 
-00:14:47.156 --> 00:14:50.136 A:middle
+
+292
+00:14:47,156 --> 00:14:50,136
 of code, it's safe to use
 anything from iOS 7 or earlier,
 
-00:14:50.136 --> 00:14:51.536 A:middle
+
+293
+00:14:50,136 --> 00:14:51,536
 so this is basically
 the compilers,
 
-00:14:52.056 --> 00:14:53.196 A:middle
+
+294
+00:14:52,056 --> 00:14:53,196
 you know, view of the world.
 
-00:14:54.656 --> 00:14:57.276 A:middle
+
+295
+00:14:54,656 --> 00:14:57,276
 If I want to use an iOS 8
 API, which I have color coded
 
-00:14:57.276 --> 00:14:59.756 A:middle
+
+296
+00:14:57,276 --> 00:14:59,756
 in orange, you have to do the
 availability check; otherwise,
 
-00:14:59.756 --> 00:15:01.276 A:middle
+
+297
+00:14:59,756 --> 00:15:01,276
 you get an error
 from the compiler.
 
 
-
-00:14:59.756 --> 00:15:01.276 A:middle
-you get an error
-from the compiler.
-
-00:15:01.916 --> 00:15:03.996 A:middle
+298
+00:15:01,916 --> 00:15:03,996
 You can think of it that
 within this block of code,
 
-00:15:03.996 --> 00:15:05.446 A:middle
+
+299
+00:15:03,996 --> 00:15:05,446
 you are raising the privileges
 
-00:15:05.766 --> 00:15:09.176 A:middle
+
+300
+00:15:05,766 --> 00:15:09,176
 of what APIs are
 allowed to be called.
 
-00:15:09.176 --> 00:15:11.906 A:middle
+
+301
+00:15:09,176 --> 00:15:11,906
 Once I get out of that block,
 my privileges drop again,
 
-00:15:12.036 --> 00:15:13.486 A:middle
+
+302
+00:15:12,036 --> 00:15:13,486
 where I can only
 call iOS 7 APIs.
 
-00:15:13.536 --> 00:15:17.736 A:middle
+
+303
+00:15:13,536 --> 00:15:17,736
 If I want to call iOS 9 APIs,
 I can do a different check
 
-00:15:17.956 --> 00:15:19.036 A:middle
+
+304
+00:15:17,956 --> 00:15:19,036
 which then gives
 a different range
 
-00:15:19.036 --> 00:15:20.316 A:middle
+
+305
+00:15:19,036 --> 00:15:20,316
 of privileges within that block.
 
-00:15:20.316 --> 00:15:22.246 A:middle
+
+306
+00:15:20,316 --> 00:15:22,246
 It's a very composable,
 readable model.
 
-00:15:23.676 --> 00:15:25.716 A:middle
+
+307
+00:15:23,676 --> 00:15:25,716
 Let's say I am building an app
 
-00:15:25.756 --> 00:15:29.216 A:middle
+
+308
+00:15:25,756 --> 00:15:29,216
 that has a whole new different
 set of features depending
 
-00:15:29.216 --> 00:15:31.536 A:middle
+
+309
+00:15:29,216 --> 00:15:31,536
 on whether certain
 APIs are available.
 
-00:15:32.096 --> 00:15:33.116 A:middle
+
+310
+00:15:32,096 --> 00:15:33,116
 I want to factor it out.
 
-00:15:33.116 --> 00:15:36.316 A:middle
+
+311
+00:15:33,116 --> 00:15:36,316
 I am not just loading a bunch of
 code into these if statements.
 
-00:15:36.346 --> 00:15:38.306 A:middle
+
+312
+00:15:36,346 --> 00:15:38,306
 I want to factor it out
 into separate functions.
 
-00:15:38.886 --> 00:15:40.856 A:middle
+
+313
+00:15:38,886 --> 00:15:40,856
 This is easily done.
 
-00:15:41.326 --> 00:15:42.906 A:middle
+
+314
+00:15:41,326 --> 00:15:42,906
 I can declare another function.
 
-00:15:42.906 --> 00:15:46.516 A:middle
+
+315
+00:15:42,906 --> 00:15:46,516
 Let's say for pedagogical
 reasons, my function uses iOS 8.
 
-00:15:46.876 --> 00:15:50.436 A:middle
+
+316
+00:15:46,876 --> 00:15:50,436
 I am going to call that
 from my conditional block.
 
-00:15:51.646 --> 00:15:54.056 A:middle
+
+317
+00:15:51,646 --> 00:15:54,056
 And the problem here is
 the compiler doesn't know
 
-00:15:54.056 --> 00:15:55.186 A:middle
+
+318
+00:15:54,056 --> 00:15:55,186
 that you are going
 -- that you know --
 
-00:15:55.186 --> 00:15:58.716 A:middle
+
+319
+00:15:55,186 --> 00:15:58,716
 that you are only going to
 call this once you've done
 
-00:15:58.716 --> 00:15:59.126 A:middle
+
+320
+00:15:58,716 --> 00:15:59,126
 this check.
 
 
-
-00:16:00.236 --> 00:16:02.116 A:middle
+321
+00:16:00,236 --> 00:16:02,116
 So by default, the compiler
 is going to go okay,
 
-00:16:02.116 --> 00:16:03.966 A:middle
+
+322
+00:16:02,116 --> 00:16:03,966
 you are targeting iOS 7.
 
-00:16:04.256 --> 00:16:06.776 A:middle
+
+323
+00:16:04,256 --> 00:16:06,776
 I am going to assume you
 can only use iOS 7 APIs
 
-00:16:07.596 --> 00:16:08.456 A:middle
+
+324
+00:16:07,596 --> 00:16:08,456
 within this function.
 
-00:16:09.496 --> 00:16:12.356 A:middle
+
+325
+00:16:09,496 --> 00:16:12,356
 So if you want to use
 iOS 8 APIs, then you have
 
-00:16:12.356 --> 00:16:14.646 A:middle
+
+326
+00:16:12,356 --> 00:16:14,646
 to do the check there.
 
-00:16:14.856 --> 00:16:16.156 A:middle
+
+327
+00:16:14,856 --> 00:16:16,156
 This is not really great; right?
 
-00:16:16.156 --> 00:16:18.986 A:middle
+
+328
+00:16:16,156 --> 00:16:18,986
 This does not provide a way for
 you to really factor your app.
 
-00:16:19.926 --> 00:16:21.606 A:middle
+
+329
+00:16:19,926 --> 00:16:21,606
 It also results in
 redundant checks.
 
-00:16:22.176 --> 00:16:26.136 A:middle
+
+330
+00:16:22,176 --> 00:16:26,136
 You can tell the
 compiler your intentions.
 
-00:16:27.766 --> 00:16:31.786 A:middle
+
+331
+00:16:27,766 --> 00:16:31,786
 So the SDK itself has these
 add available adaptations
 
-00:16:31.786 --> 00:16:33.366 A:middle
+
+332
+00:16:31,786 --> 00:16:33,366
 on all the methods and classes,
 
-00:16:33.416 --> 00:16:36.956 A:middle
+
+333
+00:16:33,416 --> 00:16:36,956
 saying this is the minimum
 OS you can use for this API.
 
-00:16:36.956 --> 00:16:40.606 A:middle
+
+334
+00:16:36,956 --> 00:16:40,606
 You can use those same
 annotations on your own code.
 
-00:16:41.626 --> 00:16:44.886 A:middle
+
+335
+00:16:41,626 --> 00:16:44,886
 What that means is you can't
 even call this function unless
 
-00:16:44.886 --> 00:16:46.746 A:middle
+
+336
+00:16:44,886 --> 00:16:46,746
 you've done the appropriate
 availability check.
 
-00:16:47.596 --> 00:16:48.846 A:middle
+
+337
+00:16:47,596 --> 00:16:48,846
 And once that happens,
 
-00:16:50.186 --> 00:16:52.316 A:middle
+
+338
+00:16:50,186 --> 00:16:52,316
 the compiler sees your
 code in a different light.
 
-00:16:53.826 --> 00:16:56.616 A:middle
+
+339
+00:16:53,826 --> 00:16:56,616
 You can then completely
 eliminate that check, you know,
 
-00:16:56.676 --> 00:16:59.876 A:middle
+
+340
+00:16:56,676 --> 00:16:59,876
 that extra availability check,
 and safely use iOS 8 APIs.
 
 
-
-00:17:00.056 --> 00:17:02.726 A:middle
+341
+00:17:00,056 --> 00:17:02,726
 This is nicely composable
 
-00:17:02.726 --> 00:17:04.976 A:middle
+
+342
+00:17:02,726 --> 00:17:04,976
 because you have other
 functions similarly annotated,
 
-00:17:05.246 --> 00:17:07.415 A:middle
+
+343
+00:17:05,246 --> 00:17:07,415
 and you can just go
 directly call them,
 
-00:17:07.496 --> 00:17:10.636 A:middle
+
+344
+00:17:07,496 --> 00:17:10,636
 if the functions essentially
 have the same API privileges.
 
-00:17:11.415 --> 00:17:14.346 A:middle
+
+345
+00:17:11,415 --> 00:17:14,346
 And if you wanted to call APIs
 with even more privileges,
 
-00:17:14.705 --> 00:17:16.746 A:middle
+
+346
+00:17:14,705 --> 00:17:16,746
 that's when you have to
 do the availability check.
 
-00:17:17.766 --> 00:17:20.846 A:middle
+
+347
+00:17:17,766 --> 00:17:20,846
 So this is very nice,
 composable, easy to reason
 
-00:17:20.846 --> 00:17:23.266 A:middle
+
+348
+00:17:20,846 --> 00:17:23,266
 about way about how
 to factor your code.
 
-00:17:24.876 --> 00:17:27.266 A:middle
+
+349
+00:17:24,876 --> 00:17:27,266
 This applies, as you would
 expect, to methods as well,
 
-00:17:27.816 --> 00:17:30.146 A:middle
+
+350
+00:17:27,816 --> 00:17:30,146
 so you can mark -- a
 class can be available,
 
-00:17:30.416 --> 00:17:32.586 A:middle
+
+351
+00:17:30,416 --> 00:17:32,586
 but individual methods
 might not be.
 
-00:17:34.206 --> 00:17:38.026 A:middle
+
+352
+00:17:34,206 --> 00:17:38,026
 So if you want, you can possibly
 instantiate the class before you
 
-00:17:38.026 --> 00:17:40.336 A:middle
+
+353
+00:17:38,026 --> 00:17:40,336
 can call a specific method
 at a higher availability,
 
-00:17:40.336 --> 00:17:41.186 A:middle
+
+354
+00:17:40,336 --> 00:17:41,186
 you would have to do the check.
 
-00:17:43.156 --> 00:17:45.836 A:middle
+
+355
+00:17:43,156 --> 00:17:45,836
 This also naturally works if you
 want to mark the entire class
 
-00:17:46.356 --> 00:17:48.176 A:middle
+
+356
+00:17:46,356 --> 00:17:48,176
 as requiring a certain
 minimum availability.
 
-00:17:49.086 --> 00:17:52.706 A:middle
+
+357
+00:17:49,086 --> 00:17:52,706
 If you did that, can't even
 instantiate the class unless
 
-00:17:52.706 --> 00:17:54.276 A:middle
+
+358
+00:17:52,706 --> 00:17:54,276
 you've done the availability
 check.
 
-00:17:55.056 --> 00:17:58.546 A:middle
+
+359
+00:17:55,056 --> 00:17:58,546
 So you get this really, you
 know, total transitive closure
 
-00:17:58.886 --> 00:18:01.476 A:middle
+
+360
+00:17:58,886 --> 00:18:01,476
 of completeness of
 the API availability.
 
 
-
-00:17:58.886 --> 00:18:01.476 A:middle
-of completeness of
-the API availability.
-
-00:18:01.476 --> 00:18:07.256 A:middle
+361
+00:18:01,476 --> 00:18:07,256
 And this naturally leads to some
 really great tricks you can do.
 
-00:18:07.516 --> 00:18:11.276 A:middle
+
+362
+00:18:07,516 --> 00:18:11,276
 So let's say you had some
 custom, you know, blurring view
 
-00:18:11.276 --> 00:18:16.226 A:middle
+
+363
+00:18:11,276 --> 00:18:16,226
 that you had on earlier iOS
 releases, and then Apple rolls
 
-00:18:16.226 --> 00:18:22.806 A:middle
+
+364
+00:18:16,226 --> 00:18:22,806
 out a more specific subclass
 of UI view that you want to use
 
-00:18:22.896 --> 00:18:25.806 A:middle
+
+365
+00:18:22,896 --> 00:18:25,806
 on host OSes using
 a new release.
 
-00:18:26.366 --> 00:18:30.386 A:middle
+
+366
+00:18:26,366 --> 00:18:30,386
 You can do this kind
 of runtime polymorphism
 
-00:18:30.716 --> 00:18:34.766 A:middle
+
+367
+00:18:30,716 --> 00:18:34,766
 with the availability guard
 so that if you are running
 
-00:18:34.766 --> 00:18:38.136 A:middle
+
+368
+00:18:34,766 --> 00:18:38,136
 on your OS, use the
 native, you know, UI.
 
-00:18:38.576 --> 00:18:41.166 A:middle
+
+369
+00:18:38,576 --> 00:18:41,166
 Otherwise, use your custom one.
 
-00:18:41.166 --> 00:18:43.866 A:middle
+
+370
+00:18:41,166 --> 00:18:43,866
 And then the client that goes
 
-00:18:43.866 --> 00:18:47.376 A:middle
+
+371
+00:18:43,866 --> 00:18:47,376
 and gets this object
 back doesn't need to care
 
-00:18:47.876 --> 00:18:49.926 A:middle
+
+372
+00:18:47,876 --> 00:18:49,926
 about which OS version
 you are running on.
 
-00:18:50.046 --> 00:18:52.496 A:middle
+
+373
+00:18:50,046 --> 00:18:52,496
 You have completely provided
 this separation of concerns.
 
-00:18:53.986 --> 00:18:56.136 A:middle
+
+374
+00:18:53,986 --> 00:18:56,136
 And this works really nicely
 for you can do the same thing
 
-00:18:56.136 --> 00:18:58.376 A:middle
+
+375
+00:18:56,136 --> 00:18:58,376
 with protocols, providing
 different implementations,
 
-00:18:58.376 --> 00:19:00.956 A:middle
+
+376
+00:18:58,376 --> 00:19:00,956
 you can have closures,
 different functions.
 
 
-
-00:18:58.376 --> 00:19:00.956 A:middle
-you can have closures,
-different functions.
-
-00:19:01.276 --> 00:19:04.476 A:middle
+377
+00:19:01,276 --> 00:19:04,476
 It gives you completely new ways
 in which to factor your code out
 
-00:19:04.816 --> 00:19:06.156 A:middle
+
+378
+00:19:04,816 --> 00:19:06,156
 and get the safety
 that you expect.
 
-00:19:06.306 --> 00:19:10.636 A:middle
+
+379
+00:19:06,306 --> 00:19:10,636
 So we think the availability
 checking is pretty awesome.
 
-00:19:11.236 --> 00:19:13.726 A:middle
+
+380
+00:19:11,236 --> 00:19:13,726
 It -- I think it really
 provides a cohesive,
 
-00:19:13.986 --> 00:19:20.466 A:middle
+
+381
+00:19:13,986 --> 00:19:20,466
 safe way to adopt new APIs and
 deploy back to earlier releases.
 
-00:19:21.196 --> 00:19:23.896 A:middle
+
+382
+00:19:21,196 --> 00:19:23,896
 The unified syntax provides a
 really safe programming model,
 
-00:19:24.656 --> 00:19:26.046 A:middle
+
+383
+00:19:24,656 --> 00:19:26,046
 but more importantly,
 it gives you a way
 
-00:19:26.046 --> 00:19:27.506 A:middle
+
+384
+00:19:26,046 --> 00:19:27,506
 to naturally factor your apps.
 
-00:19:27.506 --> 00:19:28.696 A:middle
+
+385
+00:19:27,506 --> 00:19:28,696
 You can read your apps.
 
-00:19:28.996 --> 00:19:32.036 A:middle
+
+386
+00:19:28,996 --> 00:19:32,036
 You can read the code and
 understand how, you know,
 
-00:19:32.166 --> 00:19:33.546 A:middle
+
+387
+00:19:32,166 --> 00:19:33,546
 the invariance that
 you are expecting.
 
-00:19:33.546 --> 00:19:36.196 A:middle
+
+388
+00:19:33,546 --> 00:19:36,196
 And I think that's
 incredibly powerful.
 
-00:19:37.566 --> 00:19:39.386 A:middle
+
+389
+00:19:37,566 --> 00:19:39,386
 And on that note, I am going
 to hand it over to Alex,
 
-00:19:39.386 --> 00:19:41.516 A:middle
+
+390
+00:19:39,386 --> 00:19:41,516
 who will talk about other ways
 you can use Swift's powerful
 
-00:19:41.516 --> 00:19:43.896 A:middle
+
+391
+00:19:41,516 --> 00:19:43,896
 type system to enforce
 your own invariance
 
-00:19:43.976 --> 00:19:44.736 A:middle
+
+392
+00:19:43,976 --> 00:19:44,736
 in your own application.
 
-00:19:45.516 --> 00:19:51.546 A:middle
+
+393
+00:19:45,516 --> 00:19:51,546
 [ Applause ]
 
-00:19:52.046 --> 00:19:52.376 A:middle
-&gt;&gt; ALEX MIGICOVSKY: Thanks, Ted.
 
-00:19:52.516 --> 00:19:53.016 A:middle
+394
+00:19:52,046 --> 00:19:52,376
+>> ALEX MIGICOVSKY: Thanks, Ted.
+
+
+395
+00:19:52,516 --> 00:19:53,016
 Hi, everyone.
 
-00:19:53.016 --> 00:19:54.446 A:middle
+
+396
+00:19:53,016 --> 00:19:54,446
 My name is Alex Migicovsky,
 
-00:19:54.446 --> 00:19:56.056 A:middle
+
+397
+00:19:54,446 --> 00:19:56,056
 and I am a sample
 coder here at Apple.
 
-00:19:56.786 --> 00:19:58.136 A:middle
+
+398
+00:19:56,786 --> 00:19:58,136
 For the past year and a half,
 
-00:19:58.136 --> 00:20:00.046 A:middle
+
+399
+00:19:58,136 --> 00:20:00,046
 I have been teaching
 developers how
 
 
-
-00:19:58.136 --> 00:20:00.046 A:middle
-I have been teaching
-developers how
-
-00:20:00.046 --> 00:20:03.916 A:middle
+400
+00:20:00,046 --> 00:20:03,916
 to write Cocoa apps with Swift.
 
-00:20:03.916 --> 00:20:08.756 A:middle
+
+401
+00:20:03,916 --> 00:20:08,756
 I have started developing lucid
 dreams about Swift and Cocoa
 
-00:20:09.876 --> 00:20:12.956 A:middle
+
+402
+00:20:09,876 --> 00:20:12,956
 and how you can use the two
 together to have safe --
 
-00:20:13.126 --> 00:20:15.736 A:middle
+
+403
+00:20:13,126 --> 00:20:15,736
 compiled time safe applications.
 
-00:20:17.166 --> 00:20:18.956 A:middle
+
+404
+00:20:17,166 --> 00:20:18,956
 What I want to do today
 is go through some
 
-00:20:18.956 --> 00:20:22.086 A:middle
+
+405
+00:20:18,956 --> 00:20:22,086
 of these visions I've
 had and explain some
 
-00:20:22.086 --> 00:20:24.766 A:middle
+
+406
+00:20:22,086 --> 00:20:24,766
 of the paradigms you
 can use from the visions
 
-00:20:25.016 --> 00:20:27.486 A:middle
+
+407
+00:20:25,016 --> 00:20:27,486
 and apply those concepts
 in your own applications
 
-00:20:27.776 --> 00:20:29.926 A:middle
+
+408
+00:20:27,776 --> 00:20:29,926
 so you can have compile
 time safe code as well.
 
-00:20:31.446 --> 00:20:34.116 A:middle
+
+409
+00:20:31,446 --> 00:20:34,116
 Now, I haven't told you this
 yet, but in these visions,
 
-00:20:34.576 --> 00:20:36.786 A:middle
+
+410
+00:20:34,576 --> 00:20:36,786
 I also dream about unicorns.
 
-00:20:37.666 --> 00:20:42.266 A:middle
+
+411
+00:20:37,666 --> 00:20:42,266
 I have developed a unicorn app
 that lets me go see and browse
 
-00:20:42.266 --> 00:20:45.306 A:middle
+
+412
+00:20:42,266 --> 00:20:45,306
 through the different unicorns
 I have seen in my visions.
 
-00:20:45.946 --> 00:20:48.756 A:middle
+
+413
+00:20:45,946 --> 00:20:48,756
 And the first thing
 that I want to talk
 
-00:20:48.756 --> 00:20:53.116 A:middle
+
+414
+00:20:48,756 --> 00:20:53,116
 about in my application is
 Asset Catalog identifiers.
 
-00:20:53.186 --> 00:20:56.136 A:middle
+
+415
+00:20:53,186 --> 00:20:56,136
 This is something that everyone
 uses in their UIKit apps.
 
-00:20:57.446 --> 00:20:59.856 A:middle
+
+416
+00:20:57,446 --> 00:20:59,856
 Now, my unicorn browsing
 app is pretty simple.
 
 
-
-00:21:00.056 --> 00:21:02.136 A:middle
+417
+00:21:00,056 --> 00:21:02,136
 I have three unicorn images
 
-00:21:02.136 --> 00:21:04.396 A:middle
+
+418
+00:21:02,136 --> 00:21:04,396
 that I have added
 to my Asset Catalog.
 
-00:21:05.016 --> 00:21:07.936 A:middle
+
+419
+00:21:05,016 --> 00:21:07,936
 But what I want to
 do now is take a look
 
-00:21:07.936 --> 00:21:09.216 A:middle
+
+420
+00:21:07,936 --> 00:21:09,216
 and see what the code looks
 
-00:21:09.216 --> 00:21:12.416 A:middle
+
+421
+00:21:09,216 --> 00:21:12,416
 like when I actually create the
 images from the Asset Catalog.
 
-00:21:12.996 --> 00:21:15.776 A:middle
+
+422
+00:21:12,996 --> 00:21:15,776
 And you'll notice that I am --
 
-00:21:15.866 --> 00:21:18.316 A:middle
+
+423
+00:21:15,866 --> 00:21:18,316
 here I have three images
 that I am constructing.
 
-00:21:18.806 --> 00:21:20.746 A:middle
+
+424
+00:21:18,806 --> 00:21:20,746
 Each of them I am
 passing a string
 
-00:21:20.926 --> 00:21:23.326 A:middle
+
+425
+00:21:20,926 --> 00:21:23,326
 to the UIKit UI image API.
 
-00:21:23.326 --> 00:21:29.016 A:middle
+
+426
+00:21:23,326 --> 00:21:29,016
 And UIKit doesn't know what
 assets I have actually provided
 
-00:21:29.016 --> 00:21:31.786 A:middle
+
+427
+00:21:29,016 --> 00:21:31,786
 in my Asset Catalog, so I
 have to unwrap these images
 
-00:21:31.786 --> 00:21:34.156 A:middle
+
+428
+00:21:31,786 --> 00:21:34,156
 if I actually want to use
 them in my application.
 
-00:21:35.156 --> 00:21:36.546 A:middle
+
+429
+00:21:35,156 --> 00:21:36,546
 This is really unfortunate
 
-00:21:36.546 --> 00:21:39.076 A:middle
+
+430
+00:21:36,546 --> 00:21:39,076
 because I have already defined
 the Asset Catalog identifiers
 
-00:21:39.076 --> 00:21:40.326 A:middle
+
+431
+00:21:39,076 --> 00:21:40,326
 in my Asset Catalog.
 
-00:21:40.366 --> 00:21:44.306 A:middle
+
+432
+00:21:40,366 --> 00:21:44,306
 I don't want to have this
 duplicate information here.
 
-00:21:45.046 --> 00:21:49.256 A:middle
+
+433
+00:21:45,046 --> 00:21:49,256
 Furthermore, right here I
 am only using three images,
 
-00:21:50.166 --> 00:21:53.586 A:middle
+
+434
+00:21:50,166 --> 00:21:53,586
 but throughout my application,
 I could use many, many more.
 
-00:21:54.316 --> 00:21:57.896 A:middle
+
+435
+00:21:54,316 --> 00:21:57,896
 The problem is it's really
 hard to find in your code
 
-00:21:58.176 --> 00:21:59.986 A:middle
+
+436
+00:21:58,176 --> 00:21:59,986
 where you might have
 typos, and you might want
 
-00:21:59.986 --> 00:22:02.896 A:middle
+
+437
+00:21:59,986 --> 00:22:02,896
 to change these based on
 the reaction that you see
 
 
-
-00:21:59.986 --> 00:22:02.896 A:middle
-to change these based on
-the reaction that you see
-
-00:22:03.006 --> 00:22:04.686 A:middle
+438
+00:22:03,006 --> 00:22:04,686
 on the slide with
 all these typos.
 
-00:22:04.686 --> 00:22:05.346 A:middle
+
+439
+00:22:04,686 --> 00:22:05,346
 I know I do.
 
-00:22:05.836 --> 00:22:10.366 A:middle
+
+440
+00:22:05,836 --> 00:22:10,366
 But it's really hard to
 go back and find all that.
 
-00:22:10.366 --> 00:22:12.486 A:middle
+
+441
+00:22:10,366 --> 00:22:12,486
 So a classic solution
 to that would be
 
-00:22:12.486 --> 00:22:14.096 A:middle
+
+442
+00:22:12,486 --> 00:22:14,096
 to have a global constant
 
-00:22:14.416 --> 00:22:17.036 A:middle
+
+443
+00:22:14,416 --> 00:22:17,036
 where you would use the same
 constant name everywhere
 
-00:22:17.036 --> 00:22:17.936 A:middle
+
+444
+00:22:17,036 --> 00:22:17,936
 in your application.
 
-00:22:19.196 --> 00:22:21.076 A:middle
+
+445
+00:22:19,196 --> 00:22:21,076
 And so if you use
 that correctly,
 
-00:22:21.076 --> 00:22:23.676 A:middle
+
+446
+00:22:21,076 --> 00:22:23,676
 you will get your unicorn
 image back like you expected,
 
-00:22:23.676 --> 00:22:25.566 A:middle
+
+447
+00:22:23,676 --> 00:22:25,566
 but you still have
 to unwrap the image
 
-00:22:25.896 --> 00:22:27.556 A:middle
+
+448
+00:22:25,896 --> 00:22:27,556
 because the compiler
 doesn't know
 
-00:22:27.556 --> 00:22:29.056 A:middle
+
+449
+00:22:27,556 --> 00:22:29,056
 and the framework doesn't know
 
-00:22:29.156 --> 00:22:31.536 A:middle
+
+450
+00:22:29,156 --> 00:22:31,536
 if you are providing a
 valid constant name or not.
 
-00:22:32.126 --> 00:22:35.546 A:middle
+
+451
+00:22:32,126 --> 00:22:35,546
 And furthermore, you can
 provide totally random streams
 
-00:22:35.586 --> 00:22:40.046 A:middle
+
+452
+00:22:35,586 --> 00:22:40,046
 to the API and get a
 fatal error at runtime
 
-00:22:41.266 --> 00:22:44.356 A:middle
+
+453
+00:22:41,266 --> 00:22:44,356
 because it's the NSUbiquity
 identity change node
 
-00:22:44.356 --> 00:22:47.346 A:middle
+
+454
+00:22:44,356 --> 00:22:47,346
 notification is still a
 string and is valid to pass
 
-00:22:47.346 --> 00:22:49.216 A:middle
+
+455
+00:22:47,346 --> 00:22:49,216
 in UI image named API.
 
-00:22:50.866 --> 00:22:52.696 A:middle
+
+456
+00:22:50,866 --> 00:22:52,696
 Let's talk about how we
 can solve this problem.
 
-00:22:52.696 --> 00:22:56.906 A:middle
+
+457
+00:22:52,696 --> 00:22:56,906
 What we have right now is
 a stringly typed solution.
 
-00:22:56.906 --> 00:22:59.026 A:middle
+
+458
+00:22:56,906 --> 00:22:59,026
 We are passing strings
 everywhere in our code.
 
-00:22:59.086 --> 00:23:02.806 A:middle
+
+459
+00:22:59,086 --> 00:23:02,806
 What we really want is a
 strongly typed solution.
 
 
-
-00:22:59.086 --> 00:23:02.806 A:middle
-What we really want is a
-strongly typed solution.
-
-00:23:03.356 --> 00:23:07.016 A:middle
+460
+00:23:03,356 --> 00:23:07,016
 What we want to be able
 to do is map strings
 
-00:23:07.076 --> 00:23:08.926 A:middle
+
+461
+00:23:07,076 --> 00:23:08,926
 to a new kind of type.
 
-00:23:09.556 --> 00:23:13.106 A:middle
+
+462
+00:23:09,556 --> 00:23:13,106
 This is going to allow
 us to encode information
 
-00:23:13.106 --> 00:23:15.596 A:middle
+
+463
+00:23:13,106 --> 00:23:15,596
 about how we structured
 our application right
 
-00:23:15.596 --> 00:23:17.136 A:middle
+
+464
+00:23:15,596 --> 00:23:17,136
 into the compiler's knowledge
 
-00:23:17.136 --> 00:23:20.426 A:middle
+
+465
+00:23:17,136 --> 00:23:20,426
 so that we can return
 non-optional UI images
 
-00:23:20.686 --> 00:23:23.026 A:middle
+
+466
+00:23:20,686 --> 00:23:23,026
 everywhere in our code.
 
-00:23:23.216 --> 00:23:24.846 A:middle
+
+467
+00:23:23,216 --> 00:23:24,846
 The solution to that is going
 
-00:23:24.846 --> 00:23:28.216 A:middle
+
+468
+00:23:24,846 --> 00:23:28,216
 to be application-specific
 enumerations,
 
-00:23:28.216 --> 00:23:30.556 A:middle
+
+469
+00:23:28,216 --> 00:23:30,556
 enums that we define
 in our own application.
 
-00:23:31.676 --> 00:23:34.386 A:middle
+
+470
+00:23:31,676 --> 00:23:34,386
 If we take a look at the
 code that we defined before,
 
-00:23:35.456 --> 00:23:38.276 A:middle
+
+471
+00:23:35,456 --> 00:23:38,276
 this is what I really want
 to have my code look like.
 
-00:23:38.276 --> 00:23:42.866 A:middle
+
+472
+00:23:38,276 --> 00:23:42,866
 I want to pass an enumeration
 every time I create a UI image
 
-00:23:42.866 --> 00:23:44.566 A:middle
+
+473
+00:23:42,866 --> 00:23:44,566
 object so that I don't have
 
-00:23:44.626 --> 00:23:48.096 A:middle
+
+474
+00:23:44,626 --> 00:23:48,096
 to unwrap the return
 value in my code.
 
-00:23:48.846 --> 00:23:50.706 A:middle
+
+475
+00:23:48,846 --> 00:23:50,706
 So how do we implement that?
 
-00:23:51.356 --> 00:23:52.746 A:middle
+
+476
+00:23:51,356 --> 00:23:52,746
 Well, the first thing
 that I want
 
-00:23:52.746 --> 00:23:58.066 A:middle
+
+477
+00:23:52,746 --> 00:23:58,066
 to do is define a nested
 type on UI image that's going
 
-00:23:58.066 --> 00:24:00.786 A:middle
+
+478
+00:23:58,066 --> 00:24:00,786
 to provide the mapping
 between enum cases
 
 
-
-00:23:58.066 --> 00:24:00.786 A:middle
-to provide the mapping
-between enum cases
-
-00:24:01.126 --> 00:24:03.606 A:middle
+479
+00:24:01,126 --> 00:24:03,606
 and the string representation
 we have defined
 
-00:24:03.606 --> 00:24:04.746 A:middle
+
+480
+00:24:03,606 --> 00:24:04,746
 in our Asset Catalog.
 
-00:24:05.986 --> 00:24:09.416 A:middle
+
+481
+00:24:05,986 --> 00:24:09,416
 We defined it as a nested
 type so other assets
 
-00:24:09.926 --> 00:24:12.866 A:middle
+
+482
+00:24:09,926 --> 00:24:12,866
 that can be stored in Asset
 Catalog can have this,
 
-00:24:13.126 --> 00:24:14.936 A:middle
+
+483
+00:24:13,126 --> 00:24:14,936
 can use this approach as well.
 
-00:24:16.116 --> 00:24:18.286 A:middle
+
+484
+00:24:16,116 --> 00:24:18,286
 Once I have done that, it's
 pretty straightforward.
 
-00:24:18.286 --> 00:24:22.286 A:middle
+
+485
+00:24:18,286 --> 00:24:22,286
 I can provide a case
 mapping between an enum case
 
-00:24:22.286 --> 00:24:23.666 A:middle
+
+486
+00:24:22,286 --> 00:24:23,666
 and string representation.
 
-00:24:24.166 --> 00:24:26.896 A:middle
+
+487
+00:24:24,166 --> 00:24:26,896
 I can do that for all
 my other cases as well.
 
-00:24:28.116 --> 00:24:32.086 A:middle
+
+488
+00:24:28,116 --> 00:24:32,086
 Now, one really beneficial
 thing about this approach is
 
-00:24:32.086 --> 00:24:34.966 A:middle
+
+489
+00:24:32,086 --> 00:24:34,966
 that if I accidentally
 have typos, if I copy
 
-00:24:34.966 --> 00:24:37.436 A:middle
+
+490
+00:24:34,966 --> 00:24:37,436
 and paste a string
 accidentally from somewhere
 
-00:24:37.736 --> 00:24:39.726 A:middle
+
+491
+00:24:37,736 --> 00:24:39,726
 and have a duplicate,
 the compiler is going
 
-00:24:39.726 --> 00:24:42.266 A:middle
+
+492
+00:24:39,726 --> 00:24:42,266
 to give me a warning
 or an error telling me
 
-00:24:42.626 --> 00:24:47.956 A:middle
+
+493
+00:24:42,626 --> 00:24:47,956
 that I have a duplicate
 case in my enumeration.
 
-00:24:48.806 --> 00:24:52.126 A:middle
+
+494
+00:24:48,806 --> 00:24:52,126
 So that's really great that the
 compiler can help me with that.
 
-00:24:52.916 --> 00:24:54.706 A:middle
+
+495
+00:24:52,916 --> 00:24:54,706
 Now, once we've defined
 this new type,
 
-00:24:54.876 --> 00:24:58.276 A:middle
+
+496
+00:24:54,876 --> 00:24:58,276
 all we have to do is go back and
 write a convenience initializer
 
-00:24:58.606 --> 00:25:01.186 A:middle
+
+497
+00:24:58,606 --> 00:25:01,186
 that takes in this enumeration
 instead of the string
 
 
-
-00:24:58.606 --> 00:25:01.186 A:middle
-that takes in this enumeration
-instead of the string
-
-00:25:01.506 --> 00:25:04.186 A:middle
+498
+00:25:01,506 --> 00:25:04,186
 and forwards the
 enumeration's raw value
 
-00:25:04.426 --> 00:25:07.946 A:middle
+
+499
+00:25:04,426 --> 00:25:07,946
 to the UIKit defined UI
 image named initializer.
 
-00:25:08.956 --> 00:25:11.146 A:middle
+
+500
+00:25:08,956 --> 00:25:11,146
 If we go back and
 look at our code,
 
-00:25:11.386 --> 00:25:16.116 A:middle
+
+501
+00:25:11,386 --> 00:25:16,116
 we get unicorns everywhere we
 wanted them, and if we look
 
-00:25:16.116 --> 00:25:19.476 A:middle
+
+502
+00:25:16,116 --> 00:25:19,476
 and see what happens when we
 have a typo like we had before,
 
-00:25:19.476 --> 00:25:22.776 A:middle
+
+503
+00:25:19,476 --> 00:25:22,776
 the compiler now can tell
 us that we've had a typo
 
-00:25:22.996 --> 00:25:24.716 A:middle
+
+504
+00:25:22,996 --> 00:25:24,716
 since we've encoded
 that information
 
-00:25:24.996 --> 00:25:27.796 A:middle
+
+505
+00:25:24,996 --> 00:25:27,796
 of our application
 structure into our code.
 
-00:25:28.726 --> 00:25:31.276 A:middle
+
+506
+00:25:28,726 --> 00:25:31,276
 So if we fix that, the
 compiler error goes away.
 
-00:25:31.386 --> 00:25:38.016 A:middle
+
+507
+00:25:31,386 --> 00:25:38,016
 So let's talk about the
 benefits of this approach.
 
-00:25:38.016 --> 00:25:41.296 A:middle
+
+508
+00:25:38,016 --> 00:25:41,296
 The first thing is we have
 centrally located constants.
 
-00:25:41.636 --> 00:25:45.156 A:middle
+
+509
+00:25:41,636 --> 00:25:45,156
 If I were to add a new image to
 my Asset Catalog, I know exactly
 
-00:25:45.156 --> 00:25:49.316 A:middle
+
+510
+00:25:45,156 --> 00:25:49,316
 where I need to go to add
 another image constant case.
 
-00:25:49.836 --> 00:25:53.116 A:middle
+
+511
+00:25:49,836 --> 00:25:53,116
 The other benefit is
 this doesn't pollute the
 
-00:25:53.116 --> 00:25:54.406 A:middle
+
+512
+00:25:53,116 --> 00:25:54,406
 global namespace.
 
-00:25:54.406 --> 00:25:58.606 A:middle
+
+513
+00:25:54,406 --> 00:25:58,606
 I could have multiple
 objects that can be defined
 
-00:25:58.606 --> 00:26:02.086 A:middle
+
+514
+00:25:58,606 --> 00:26:02,086
 in an Asset Catalog that
 I use this approach for.
 
 
-
-00:25:58.606 --> 00:26:02.086 A:middle
-in an Asset Catalog that
-I use this approach for.
-
-00:26:03.536 --> 00:26:06.506 A:middle
+515
+00:26:03,536 --> 00:26:06,506
 One of the best things is
 that you can only use one
 
-00:26:06.506 --> 00:26:08.866 A:middle
+
+516
+00:26:06,506 --> 00:26:08,866
 of these enum cases
 in your application
 
-00:26:08.866 --> 00:26:11.056 A:middle
+
+517
+00:26:08,866 --> 00:26:11,056
 when you are constructing
 your UI image object now,
 
-00:26:11.386 --> 00:26:13.326 A:middle
+
+518
+00:26:11,386 --> 00:26:13,326
 so the compiler can
 help you with that,
 
-00:26:13.696 --> 00:26:17.036 A:middle
+
+519
+00:26:13,696 --> 00:26:17,036
 and now you can return
 non-optional images everywhere
 
-00:26:17.036 --> 00:26:18.496 A:middle
+
+520
+00:26:17,036 --> 00:26:18,496
 in your code, so you
 don't have to worry
 
-00:26:18.496 --> 00:26:20.236 A:middle
+
+521
+00:26:18,496 --> 00:26:20,236
 about forced unwrapping.
 
-00:26:20.536 --> 00:26:26.086 A:middle
+
+522
+00:26:20,536 --> 00:26:26,086
 So this was a very specific
 approach that we're using
 
-00:26:26.086 --> 00:26:28.266 A:middle
+
+523
+00:26:26,086 --> 00:26:28,266
 in this unicorn browser
 app, but I want you to think
 
-00:26:28.266 --> 00:26:30.716 A:middle
+
+524
+00:26:28,266 --> 00:26:30,716
 about how you can use
 enumerations in your own code
 
-00:26:30.716 --> 00:26:32.956 A:middle
+
+525
+00:26:30,716 --> 00:26:32,956
 to provide other kinds
 of rich mappings.
 
-00:26:33.976 --> 00:26:35.876 A:middle
+
+526
+00:26:33,976 --> 00:26:35,876
 You can use more than
 just strings as well.
 
-00:26:35.876 --> 00:26:37.886 A:middle
+
+527
+00:26:35,876 --> 00:26:37,886
 You can use integers
 and even selectors.
 
-00:26:38.256 --> 00:26:39.926 A:middle
+
+528
+00:26:38,256 --> 00:26:39,926
 So there's a lot of opportunity
 
-00:26:39.996 --> 00:26:43.646 A:middle
+
+529
+00:26:39,996 --> 00:26:43,646
 to define these mappings
 in your own code.
 
-00:26:44.416 --> 00:26:49.476 A:middle
+
+530
+00:26:44,416 --> 00:26:49,476
 Now, that was a deep dive into
 enumerations, but what I want
 
-00:26:49.476 --> 00:26:52.456 A:middle
+
+531
+00:26:49,476 --> 00:26:52,456
 to talk about now are
 segue identifiers,
 
-00:26:52.526 --> 00:26:54.966 A:middle
+
+532
+00:26:52,526 --> 00:26:54,966
 since this is something
 that you also use
 
-00:26:54.966 --> 00:26:55.976 A:middle
+
+533
+00:26:54,966 --> 00:26:55,976
 in your code all the time.
 
-00:26:57.236 --> 00:27:00.386 A:middle
+
+534
+00:26:57,236 --> 00:27:00,386
 Now, recently, my visions
 have been getting stronger,
 
 
-
-00:26:57.236 --> 00:27:00.386 A:middle
-Now, recently, my visions
-have been getting stronger,
-
-00:27:00.386 --> 00:27:03.396 A:middle
+535
+00:27:00,386 --> 00:27:03,396
 and I've had to develop an app
 that lets me actually keep track
 
-00:27:03.826 --> 00:27:06.166 A:middle
+
+536
+00:27:03,826 --> 00:27:06,166
 of unicorns and download
 them on the fly.
 
-00:27:07.366 --> 00:27:09.156 A:middle
+
+537
+00:27:07,366 --> 00:27:09,156
 So I have a more
 complex application.
 
-00:27:09.556 --> 00:27:12.036 A:middle
+
+538
+00:27:09,556 --> 00:27:12,036
 And if we take a look
 at the storyboard,
 
-00:27:12.436 --> 00:27:13.896 A:middle
+
+539
+00:27:12,436 --> 00:27:13,896
 it ends up being pretty simple.
 
-00:27:14.566 --> 00:27:17.026 A:middle
+
+540
+00:27:14,566 --> 00:27:17,026
 I have a single view
 controller that can segue
 
-00:27:17.026 --> 00:27:18.726 A:middle
+
+541
+00:27:17,026 --> 00:27:18,726
 to two other view controllers.
 
-00:27:19.206 --> 00:27:23.546 A:middle
+
+542
+00:27:19,206 --> 00:27:23,546
 And for each of these
 view controllers,
 
-00:27:23.596 --> 00:27:25.296 A:middle
+
+543
+00:27:23,596 --> 00:27:25,296
 I've defined a segue identifier.
 
-00:27:26.596 --> 00:27:29.546 A:middle
+
+544
+00:27:26,596 --> 00:27:29,546
 What I want to do now is take a
 look and see what the code looks
 
-00:27:29.606 --> 00:27:32.496 A:middle
+
+545
+00:27:29,606 --> 00:27:32,496
 like when we override
 prepare for segue
 
-00:27:32.496 --> 00:27:34.776 A:middle
+
+546
+00:27:32,496 --> 00:27:34,776
 to configure the view controller
 
-00:27:34.916 --> 00:27:38.386 A:middle
+
+547
+00:27:34,916 --> 00:27:38,386
 that the unicorn browser view
 controller would present.
 
-00:27:39.316 --> 00:27:43.276 A:middle
+
+548
+00:27:39,316 --> 00:27:43,276
 So we've overridden this
 method, and the classic way
 
-00:27:43.276 --> 00:27:45.436 A:middle
+
+549
+00:27:43,276 --> 00:27:45,436
 of implementing this would
 be something like this,
 
-00:27:45.436 --> 00:27:48.486 A:middle
+
+550
+00:27:45,436 --> 00:27:48,486
 where we switch on the
 segue identifier string.
 
-00:27:49.366 --> 00:27:53.746 A:middle
+
+551
+00:27:49,366 --> 00:27:53,746
 Now, you saw before I am
 using the same exact strings
 
-00:27:53.746 --> 00:27:56.816 A:middle
+
+552
+00:27:53,746 --> 00:27:56,816
 that I defined as my segues
 that I had in my storyboard,
 
-00:27:57.346 --> 00:27:59.166 A:middle
+
+553
+00:27:57,346 --> 00:27:59,166
 but the compiler
 doesn't know this.
 
-00:27:59.516 --> 00:28:02.326 A:middle
+
+554
+00:27:59,516 --> 00:28:02,326
 So when I switch on
 these two strings only,
 
 
-
-00:27:59.516 --> 00:28:02.326 A:middle
-So when I switch on
-these two strings only,
-
-00:28:02.476 --> 00:28:03.796 A:middle
+555
+00:28:02,476 --> 00:28:03,796
 the compiler is going to tell me
 
-00:28:04.286 --> 00:28:07.496 A:middle
+
+556
+00:28:04,286 --> 00:28:07,496
 that this is not an
 exhaustive check, and so I have
 
-00:28:07.536 --> 00:28:10.906 A:middle
+
+557
+00:28:07,536 --> 00:28:10,906
 to add a default case because
 the compiler doesn't know
 
-00:28:11.546 --> 00:28:14.466 A:middle
+
+558
+00:28:11,546 --> 00:28:14,466
 that I have actually
 provided valid mappings.
 
-00:28:15.846 --> 00:28:18.336 A:middle
+
+559
+00:28:15,846 --> 00:28:18,336
 But what happens if I were
 to add a new view controller
 
-00:28:19.166 --> 00:28:21.996 A:middle
+
+560
+00:28:19,166 --> 00:28:21,996
 and I have to -- I
 have a brand-new segue?
 
-00:28:22.856 --> 00:28:24.346 A:middle
+
+561
+00:28:22,856 --> 00:28:24,346
 How do I know where in my code
 
-00:28:24.346 --> 00:28:25.946 A:middle
+
+562
+00:28:24,346 --> 00:28:25,946
 that I actually need
 to change this logic?
 
-00:28:27.246 --> 00:28:29.866 A:middle
+
+563
+00:28:27,246 --> 00:28:29,866
 Well, let's take a look and see
 how we can solve this problem
 
-00:28:29.866 --> 00:28:31.896 A:middle
+
+564
+00:28:29,866 --> 00:28:31,896
 by using enums again.
 
-00:28:33.276 --> 00:28:36.986 A:middle
+
+565
+00:28:33,276 --> 00:28:36,986
 So I've defined a nested type on
 unicorn browser view controller
 
-00:28:36.986 --> 00:28:38.546 A:middle
+
+566
+00:28:36,986 --> 00:28:38,546
 which is going to
 represent the mapping
 
-00:28:38.546 --> 00:28:41.036 A:middle
+
+567
+00:28:38,546 --> 00:28:41,036
 between segue identifier cases
 
-00:28:41.326 --> 00:28:44.816 A:middle
+
+568
+00:28:41,326 --> 00:28:44,816
 and the string representation
 in our storyboard.
 
-00:28:45.446 --> 00:28:48.666 A:middle
+
+569
+00:28:45,446 --> 00:28:48,666
 So let's see how we can
 implement the prepare
 
-00:28:48.666 --> 00:28:51.946 A:middle
+
+570
+00:28:48,666 --> 00:28:51,946
 for segue method with
 more stronger typing.
 
-00:28:52.526 --> 00:28:54.856 A:middle
+
+571
+00:28:52,526 --> 00:28:54,856
 So the first thing
 that I am going
 
-00:28:54.856 --> 00:28:57.406 A:middle
+
+572
+00:28:54,856 --> 00:28:57,406
 to do is grab the
 segue identifier string
 
-00:28:57.406 --> 00:28:58.926 A:middle
+
+573
+00:28:57,406 --> 00:28:58,926
 from the storyboard segue object
 
 
-
-00:29:00.246 --> 00:29:02.536 A:middle
+574
+00:29:00,246 --> 00:29:02,536
 and construct the
 segue identifier enum
 
-00:29:02.536 --> 00:29:03.666 A:middle
+
+575
+00:29:02,536 --> 00:29:03,666
 from that raw value.
 
-00:29:04.266 --> 00:29:07.236 A:middle
+
+576
+00:29:04,266 --> 00:29:07,236
 And I am going to
 provide a little bit
 
-00:29:07.236 --> 00:29:09.936 A:middle
+
+577
+00:29:07,236 --> 00:29:09,936
 of runtime checking
 debugging just
 
-00:29:09.936 --> 00:29:13.426 A:middle
+
+578
+00:29:09,936 --> 00:29:13,426
 in case I haven't
 provided a valid enum case
 
-00:29:13.426 --> 00:29:15.356 A:middle
+
+579
+00:29:13,426 --> 00:29:15,356
 for that new segue identifier.
 
-00:29:16.276 --> 00:29:19.516 A:middle
+
+580
+00:29:16,276 --> 00:29:19,516
 Now, from there I can switch on
 the enum instead of the string.
 
-00:29:19.516 --> 00:29:23.626 A:middle
+
+581
+00:29:19,516 --> 00:29:23,626
 And that's really great because
 all I have to do now is switch
 
-00:29:23.626 --> 00:29:27.886 A:middle
+
+582
+00:29:23,626 --> 00:29:27,886
 on two cases, the compiler knows
 that I've only defined two cases
 
-00:29:27.886 --> 00:29:31.666 A:middle
+
+583
+00:29:27,886 --> 00:29:31,666
 in my enumeration, so that's all
 I have to switch on in my code.
 
-00:29:31.666 --> 00:29:37.696 A:middle
+
+584
+00:29:31,666 --> 00:29:37,696
 Now, if we add a new segue
 identifier in our enumeration,
 
-00:29:38.566 --> 00:29:40.736 A:middle
+
+585
+00:29:38,566 --> 00:29:40,736
 the compiler is going
 to actually tell us
 
-00:29:41.116 --> 00:29:45.906 A:middle
+
+586
+00:29:41,116 --> 00:29:45,906
 that we don't have an exhaustive
 switch, and so everywhere
 
-00:29:45.906 --> 00:29:49.116 A:middle
+
+587
+00:29:45,906 --> 00:29:49,116
 in our code that we
 switch on this enumeration,
 
-00:29:49.576 --> 00:29:51.346 A:middle
+
+588
+00:29:49,576 --> 00:29:51,346
 the compiler is going
 to tell us exactly
 
-00:29:51.346 --> 00:29:52.826 A:middle
+
+589
+00:29:51,346 --> 00:29:52,826
 where we need to
 update our logic.
 
-00:29:53.336 --> 00:29:56.776 A:middle
+
+590
+00:29:53,336 --> 00:29:56,776
 Now, this is a huge benefit
 over the string solution.
 
-00:29:57.346 --> 00:30:01.226 A:middle
+
+591
+00:29:57,346 --> 00:30:01,226
 So this is how you can
 override prepare for segue,
 
 
-
-00:29:57.346 --> 00:30:01.226 A:middle
-So this is how you can
-override prepare for segue,
-
-00:30:02.186 --> 00:30:05.356 A:middle
+592
+00:30:02,186 --> 00:30:05,356
 but sometimes you need
 to invoke perform segue
 
-00:30:05.356 --> 00:30:06.876 A:middle
+
+593
+00:30:05,356 --> 00:30:06,876
 with identifier manually.
 
-00:30:08.196 --> 00:30:11.196 A:middle
+
+594
+00:30:08,196 --> 00:30:11,196
 And in our case, I might want
 to import a bunch of unicorns,
 
-00:30:11.196 --> 00:30:13.866 A:middle
+
+595
+00:30:11,196 --> 00:30:13,866
 download them, download
 images for them on the Web,
 
-00:30:14.296 --> 00:30:15.906 A:middle
+
+596
+00:30:14,296 --> 00:30:15,906
 and then present a
 new view controller.
 
-00:30:16.376 --> 00:30:18.506 A:middle
+
+597
+00:30:16,376 --> 00:30:18,506
 So let's take a look and see
 how that code might look.
 
-00:30:18.506 --> 00:30:23.606 A:middle
+
+598
+00:30:18,506 --> 00:30:23,606
 So a classic solution to
 this would be to pass strings
 
-00:30:23.746 --> 00:30:26.316 A:middle
+
+599
+00:30:23,746 --> 00:30:26,316
 in the perform segue
 with identifier method.
 
-00:30:27.686 --> 00:30:29.636 A:middle
+
+600
+00:30:27,686 --> 00:30:29,636
 But we've already
 defined this enumeration.
 
-00:30:29.636 --> 00:30:31.126 A:middle
+
+601
+00:30:29,636 --> 00:30:31,126
 We really just want
 to use this mapping
 
-00:30:31.126 --> 00:30:32.106 A:middle
+
+602
+00:30:31,126 --> 00:30:32,106
 that we've already provided.
 
-00:30:32.666 --> 00:30:34.886 A:middle
+
+603
+00:30:32,666 --> 00:30:34,886
 So we want to use enums instead.
 
-00:30:35.576 --> 00:30:36.666 A:middle
+
+604
+00:30:35,576 --> 00:30:36,666
 How do we do this?
 
-00:30:36.666 --> 00:30:38.266 A:middle
+
+605
+00:30:36,666 --> 00:30:38,266
 Well, it's actually
 pretty straightforward.
 
-00:30:38.266 --> 00:30:42.446 A:middle
+
+606
+00:30:38,266 --> 00:30:42,446
 We can define an overload on
 the UIKit define perform segue
 
-00:30:42.446 --> 00:30:45.876 A:middle
+
+607
+00:30:42,446 --> 00:30:45,876
 with identifier method that
 now takes enumeration instead
 
-00:30:45.876 --> 00:30:50.186 A:middle
+
+608
+00:30:45,876 --> 00:30:50,186
 of a string and then call
 the UIKit define method
 
-00:30:51.066 --> 00:30:53.236 A:middle
+
+609
+00:30:51,066 --> 00:30:53,236
 with the raw value
 of our enumeration.
 
-00:30:53.866 --> 00:30:57.756 A:middle
+
+610
+00:30:53,866 --> 00:30:57,756
 And if we go back to the
 code that calls this method
 
-00:30:57.756 --> 00:31:01.946 A:middle
+
+611
+00:30:57,756 --> 00:31:01,946
 with the enumeration, it
 works exactly like we want it.
 
 
-
-00:30:57.756 --> 00:31:01.946 A:middle
-with the enumeration, it
-works exactly like we want it.
-
-00:31:03.126 --> 00:31:05.296 A:middle
+612
+00:31:03,126 --> 00:31:05,296
 So this is a really
 great solution specific
 
-00:31:05.296 --> 00:31:06.996 A:middle
+
+613
+00:31:05,296 --> 00:31:06,996
 to unicorn browser
 view controller.
 
-00:31:07.596 --> 00:31:09.936 A:middle
+
+614
+00:31:07,596 --> 00:31:09,936
 But what happens when
 we scale this up a bit?
 
-00:31:09.936 --> 00:31:13.876 A:middle
+
+615
+00:31:09,936 --> 00:31:13,876
 I want to take a look now at the
 structure of what we just did
 
-00:31:13.876 --> 00:31:15.596 A:middle
+
+616
+00:31:13,876 --> 00:31:15,596
 to see how we can
 apply this to more
 
-00:31:15.596 --> 00:31:17.906 A:middle
+
+617
+00:31:15,596 --> 00:31:17,906
 than just the unicorn
 browser view controller.
 
-00:31:18.486 --> 00:31:22.536 A:middle
+
+618
+00:31:18,486 --> 00:31:22,536
 So what we've really done
 is provided a mapping
 
-00:31:22.536 --> 00:31:25.516 A:middle
+
+619
+00:31:22,536 --> 00:31:25,516
 between enum cases and
 their string representations
 
-00:31:25.516 --> 00:31:26.456 A:middle
+
+620
+00:31:25,516 --> 00:31:26,456
 in the storyboard.
 
-00:31:27.256 --> 00:31:30.856 A:middle
+
+621
+00:31:27,256 --> 00:31:30,856
 And we've also added
 implementation that uses
 
-00:31:30.856 --> 00:31:33.146 A:middle
+
+622
+00:31:30,856 --> 00:31:33,146
 that mapping to have
 a stronger --
 
-00:31:33.146 --> 00:31:36.936 A:middle
+
+623
+00:31:33,146 --> 00:31:36,936
 a more strongly typed
 system in our application.
 
-00:31:37.816 --> 00:31:39.636 A:middle
+
+624
+00:31:37,816 --> 00:31:39,636
 But if we add a new view
 controller and we want
 
-00:31:39.636 --> 00:31:42.666 A:middle
+
+625
+00:31:39,636 --> 00:31:42,666
 to do the same thing, we are
 going to have to duplicate all
 
-00:31:42.666 --> 00:31:45.416 A:middle
+
+626
+00:31:42,666 --> 00:31:45,416
 of that work, and I
 don't want to do that.
 
-00:31:46.846 --> 00:31:50.946 A:middle
+
+627
+00:31:46,846 --> 00:31:50,946
 What I really want to do is
 extract the implementation
 
-00:31:51.206 --> 00:31:55.336 A:middle
+
+628
+00:31:51,206 --> 00:31:55,336
 from the view controller and
 define a loose mapping for what
 
-00:31:55.336 --> 00:31:58.826 A:middle
+
+629
+00:31:55,336 --> 00:31:58,826
 that enumeration of segue
 identifiers is going
 
-00:31:58.826 --> 00:32:03.126 A:middle
+
+630
+00:31:58,826 --> 00:32:03,126
 to be specific to a view
 controller, and by doing that,
 
 
-
-00:31:58.826 --> 00:32:03.126 A:middle
-to be specific to a view
-controller, and by doing that,
-
-00:32:03.186 --> 00:32:06.696 A:middle
+631
+00:32:03,186 --> 00:32:06,696
 we can use this implementation
 for many different kinds
 
-00:32:06.696 --> 00:32:09.636 A:middle
+
+632
+00:32:06,696 --> 00:32:09,636
 of view controllers, regardless
 of their class hierarchy.
 
-00:32:09.636 --> 00:32:12.296 A:middle
+
+633
+00:32:09,636 --> 00:32:12,296
 So you can avoid a lot of
 awkward class hierarchies
 
-00:32:13.086 --> 00:32:15.616 A:middle
+
+634
+00:32:13,086 --> 00:32:15,616
 by reusing this implementation.
 
-00:32:16.996 --> 00:32:20.006 A:middle
+
+635
+00:32:16,996 --> 00:32:20,006
 And we are going to do
 this by using protocols.
 
-00:32:20.976 --> 00:32:22.476 A:middle
+
+636
+00:32:20,976 --> 00:32:22,476
 And so I have defined
 a new protocol.
 
-00:32:22.476 --> 00:32:24.146 A:middle
+
+637
+00:32:22,476 --> 00:32:24,146
 We are going to call
 this segue handler type.
 
-00:32:24.146 --> 00:32:26.346 A:middle
+
+638
+00:32:24,146 --> 00:32:26,346
 And this is what our view
 controllers are going
 
-00:32:26.346 --> 00:32:27.166 A:middle
+
+639
+00:32:26,346 --> 00:32:27,166
 to conform to.
 
-00:32:27.896 --> 00:32:31.346 A:middle
+
+640
+00:32:27,896 --> 00:32:31,346
 And now we want to define the
 mapping that we just mentioned,
 
-00:32:31.346 --> 00:32:34.526 A:middle
+
+641
+00:32:31,346 --> 00:32:34,526
 and now it's going to be our
 segue identifier enumeration.
 
-00:32:35.376 --> 00:32:38.406 A:middle
+
+642
+00:32:35,376 --> 00:32:38,406
 And we want to make sure that
 the segue identifier conforms
 
-00:32:38.406 --> 00:32:40.326 A:middle
+
+643
+00:32:38,406 --> 00:32:40,326
 to the raw representable
 protocol.
 
-00:32:41.276 --> 00:32:44.896 A:middle
+
+644
+00:32:41,276 --> 00:32:44,896
 This protocol is an
 underlying implementation detail
 
-00:32:44.896 --> 00:32:48.536 A:middle
+
+645
+00:32:44,896 --> 00:32:48,536
 of how enumerations that are
 backed by other types work.
 
-00:32:48.836 --> 00:32:52.526 A:middle
+
+646
+00:32:48,836 --> 00:32:52,526
 And the compiler can synthesize
 this automatically for you.
 
-00:32:53.836 --> 00:32:56.536 A:middle
+
+647
+00:32:53,836 --> 00:32:56,536
 So that's all we have for
 the protocol definition.
 
-00:32:57.306 --> 00:33:00.716 A:middle
+
+648
+00:32:57,306 --> 00:33:00,716
 What I want to do now is use
 a Swift 2.0 feature called
 
 
-
-00:32:57.306 --> 00:33:00.716 A:middle
-What I want to do now is use
-a Swift 2.0 feature called
-
-00:33:00.776 --> 00:33:02.476 A:middle
+649
+00:33:00,776 --> 00:33:02,476
 constrained protocol extensions
 
-00:33:02.906 --> 00:33:05.166 A:middle
+
+650
+00:33:02,906 --> 00:33:05,166
 to actually add the
 implementation that's going
 
-00:33:05.166 --> 00:33:06.926 A:middle
+
+651
+00:33:05,166 --> 00:33:06,926
 to be our generic reusable code.
 
-00:33:07.826 --> 00:33:10.646 A:middle
+
+652
+00:33:07,826 --> 00:33:10,646
 So we are going to extend
 this segue handler type,
 
-00:33:10.646 --> 00:33:12.776 A:middle
+
+653
+00:33:10,646 --> 00:33:12,776
 and then we are going
 to constrain it,
 
-00:33:12.776 --> 00:33:16.596 A:middle
+
+654
+00:33:12,776 --> 00:33:16,596
 so we only want implementation
 to be added
 
-00:33:16.816 --> 00:33:18.786 A:middle
+
+655
+00:33:16,816 --> 00:33:18,786
 if these constraints are met.
 
-00:33:19.526 --> 00:33:23.126 A:middle
+
+656
+00:33:19,526 --> 00:33:23,126
 And first constraint is
 that the type that conforms
 
-00:33:23.126 --> 00:33:26.196 A:middle
+
+657
+00:33:23,126 --> 00:33:26,196
 to this protocol is a UI
 view controller subclass,
 
-00:33:26.196 --> 00:33:27.896 A:middle
+
+658
+00:33:26,196 --> 00:33:27,896
 and this is going
 to now allow us
 
-00:33:27.896 --> 00:33:30.006 A:middle
+
+659
+00:33:27,896 --> 00:33:30,006
 to call UI view controller
 methods
 
-00:33:30.546 --> 00:33:31.796 A:middle
+
+660
+00:33:30,546 --> 00:33:31,796
 in our protocol extension.
 
-00:33:32.596 --> 00:33:35.176 A:middle
+
+661
+00:33:32,596 --> 00:33:35,176
 And the second thing
 is that we want
 
-00:33:35.176 --> 00:33:38.116 A:middle
+
+662
+00:33:35,176 --> 00:33:38,116
 to make sure the segue
 identifier mapping is
 
-00:33:38.116 --> 00:33:40.646 A:middle
+
+663
+00:33:38,116 --> 00:33:40,646
 between enum cases and strings.
 
-00:33:41.226 --> 00:33:45.506 A:middle
+
+664
+00:33:41,226 --> 00:33:45,506
 Now that we've defined this
 constrained protocol extension,
 
-00:33:45.506 --> 00:33:47.506 A:middle
+
+665
+00:33:45,506 --> 00:33:47,506
 all we have to do is
 add our implementation.
 
-00:33:48.186 --> 00:33:51.236 A:middle
+
+666
+00:33:48,186 --> 00:33:51,236
 All we need to do is take
 the existing implementation
 
-00:33:51.276 --> 00:33:54.996 A:middle
+
+667
+00:33:51,276 --> 00:33:54,996
 of perform segue with identifier
 that we defined previously
 
-00:33:55.606 --> 00:33:58.256 A:middle
+
+668
+00:33:55,606 --> 00:33:58,256
 and slap the exact same
 implementation right
 
-00:33:58.256 --> 00:33:58.886 A:middle
+
+669
+00:33:58,256 --> 00:33:58,886
 into the code.
 
-00:33:59.406 --> 00:34:03.266 A:middle
+
+670
+00:33:59,406 --> 00:34:03,266
 And if we go back to our
 unicorn browser view controller,
 
 
-
-00:33:59.406 --> 00:34:03.266 A:middle
-And if we go back to our
-unicorn browser view controller,
-
-00:34:03.716 --> 00:34:06.936 A:middle
+671
+00:34:03,716 --> 00:34:06,936
 all we have to do is add this
 conformance to the new type,
 
-00:34:08.005 --> 00:34:11.226 A:middle
+
+672
+00:34:08,005 --> 00:34:11,226
 and we've already satisfied all
 the associated type constraints
 
-00:34:11.306 --> 00:34:15.226 A:middle
+
+673
+00:34:11,306 --> 00:34:15,226
 of the protocol because we
 already identified this segue
 
-00:34:15.226 --> 00:34:16.065 A:middle
+
+674
+00:34:15,226 --> 00:34:16,065
 identifier enum.
 
-00:34:17.466 --> 00:34:21.436 A:middle
+
+675
+00:34:17,466 --> 00:34:21,436
 So if we go to our handle action
 method, we can call the code
 
-00:34:21.436 --> 00:34:25.025 A:middle
+
+676
+00:34:21,436 --> 00:34:25,025
 in the exact same way, but we
 are reusing the implementation
 
-00:34:25.025 --> 00:34:26.136 A:middle
+
+677
+00:34:25,025 --> 00:34:26,136
 in our segue handler type.
 
-00:34:27.636 --> 00:34:29.835 A:middle
+
+678
+00:34:27,636 --> 00:34:29,835
 So that was how you can
 reuse the perform segue
 
-00:34:29.835 --> 00:34:34.735 A:middle
+
+679
+00:34:29,835 --> 00:34:34,735
 with identifier method, but what
 about calling prepare for segue
 
-00:34:34.735 --> 00:34:36.326 A:middle
+
+680
+00:34:34,735 --> 00:34:36,326
 or handling prepare for segue?
 
-00:34:36.326 --> 00:34:40.626 A:middle
+
+681
+00:34:36,326 --> 00:34:40,626
 What I want to do now is define
 a convenience method that's
 
-00:34:40.626 --> 00:34:42.716 A:middle
+
+682
+00:34:40,626 --> 00:34:42,716
 going to take in a
 storyboard object
 
-00:34:43.356 --> 00:34:46.596 A:middle
+
+683
+00:34:43,356 --> 00:34:46,596
 and return a segue identifier
 enum, and this is going to be
 
-00:34:46.596 --> 00:34:47.856 A:middle
+
+684
+00:34:46,596 --> 00:34:47,856
 in our protocol extension.
 
-00:34:49.196 --> 00:34:52.166 A:middle
+
+685
+00:34:49,196 --> 00:34:52,166
 All I need to do again is take
 the exact implementation we
 
-00:34:52.166 --> 00:34:57.016 A:middle
+
+686
+00:34:52,166 --> 00:34:57,016
 defined before and return
 the segue identifier enum
 
-00:34:57.016 --> 00:34:59.876 A:middle
+
+687
+00:34:57,016 --> 00:34:59,876
 that we created out
 of that code.
 
 
-
-00:35:00.886 --> 00:35:03.106 A:middle
+688
+00:35:00,886 --> 00:35:03,106
 And so if we take a look at
 our prepare for segue method,
 
-00:35:03.146 --> 00:35:05.726 A:middle
+
+689
+00:35:03,146 --> 00:35:05,726
 it ends up being
 really straightforward.
 
-00:35:06.806 --> 00:35:10.096 A:middle
+
+690
+00:35:06,806 --> 00:35:10,096
 All we have to do is
 switch on the result return
 
-00:35:10.096 --> 00:35:12.566 A:middle
+
+691
+00:35:10,096 --> 00:35:12,566
 by segue identifier for
 segue, which is the method
 
-00:35:12.566 --> 00:35:16.316 A:middle
+
+692
+00:35:12,566 --> 00:35:16,316
 that we just defined, and we
 only need to provide two cases
 
-00:35:16.316 --> 00:35:16.966 A:middle
+
+693
+00:35:16,316 --> 00:35:16,966
 that we are switching
 
-00:35:16.966 --> 00:35:19.056 A:middle
+
+694
+00:35:16,966 --> 00:35:19,056
 on the same exact way
 that we did before.
 
-00:35:19.706 --> 00:35:21.346 A:middle
+
+695
+00:35:19,706 --> 00:35:21,346
 But we have this
 generic solution.
 
-00:35:22.496 --> 00:35:24.556 A:middle
+
+696
+00:35:22,496 --> 00:35:24,556
 So let's talk about the
 benefits of this approach.
 
-00:35:25.126 --> 00:35:31.956 A:middle
+
+697
+00:35:25,126 --> 00:35:31,956
 So the compiler knows exactly
 the segues that we've defined
 
-00:35:32.176 --> 00:35:34.226 A:middle
+
+698
+00:35:32,176 --> 00:35:34,226
 in our storyboard
 now when we add them
 
-00:35:34.266 --> 00:35:35.946 A:middle
+
+699
+00:35:34,266 --> 00:35:35,946
 to our segue identifier enum.
 
-00:35:36.676 --> 00:35:38.776 A:middle
+
+700
+00:35:36,676 --> 00:35:38,776
 So it can make sure
 we handle all
 
-00:35:38.776 --> 00:35:40.556 A:middle
+
+701
+00:35:38,776 --> 00:35:40,556
 of the possible cases
 in our code.
 
-00:35:41.796 --> 00:35:46.126 A:middle
+
+702
+00:35:41,796 --> 00:35:46,126
 We have a reusable solution by
 using this protocol extension,
 
-00:35:46.176 --> 00:35:49.596 A:middle
+
+703
+00:35:46,176 --> 00:35:49,596
 we can use this implementation
 on any view controller
 
-00:35:49.596 --> 00:35:51.086 A:middle
+
+704
+00:35:49,596 --> 00:35:51,086
 that conforms to
 this new protocol.
 
-00:35:52.526 --> 00:35:54.516 A:middle
+
+705
+00:35:52,526 --> 00:35:54,516
 And we also have
 convenience syntax.
 
-00:35:54.936 --> 00:35:57.946 A:middle
+
+706
+00:35:54,936 --> 00:35:57,946
 We can use method syntax
 on these different --
 
-00:35:58.836 --> 00:36:01.106 A:middle
+
+707
+00:35:58,836 --> 00:36:01,106
 on these different
 view controllers.
 
 
-
-00:35:58.836 --> 00:36:01.106 A:middle
-on these different
-view controllers.
-
-00:36:01.106 --> 00:36:02.786 A:middle
+708
+00:36:01,106 --> 00:36:02,786
 It doesn't have to
 be free functions.
 
-00:36:04.066 --> 00:36:07.656 A:middle
+
+709
+00:36:04,066 --> 00:36:07,656
 So this is a really specific
 way that you can use protocols
 
-00:36:07.656 --> 00:36:09.526 A:middle
+
+710
+00:36:07,656 --> 00:36:09,526
 and constraint protocol
 extensions
 
-00:36:09.526 --> 00:36:12.066 A:middle
+
+711
+00:36:09,526 --> 00:36:12,066
 in this unicorn browser
 app, but you all have a lot
 
-00:36:12.066 --> 00:36:13.586 A:middle
+
+712
+00:36:12,066 --> 00:36:13,586
 of other interesting
 applications,
 
-00:36:13.926 --> 00:36:15.286 A:middle
+
+713
+00:36:13,926 --> 00:36:15,286
 and what I want you
 to do is think
 
-00:36:15.286 --> 00:36:18.856 A:middle
+
+714
+00:36:15,286 --> 00:36:18,856
 about how you can use protocols
 and associated type constraints
 
-00:36:19.106 --> 00:36:22.506 A:middle
+
+715
+00:36:19,106 --> 00:36:22,506
 in your own applications to
 encode some of the structure
 
-00:36:22.506 --> 00:36:25.556 A:middle
+
+716
+00:36:22,506 --> 00:36:25,556
 of your application to the
 compiler so it can help you
 
-00:36:25.676 --> 00:36:27.376 A:middle
+
+717
+00:36:25,676 --> 00:36:27,376
 with compile time safety.
 
-00:36:28.476 --> 00:36:30.316 A:middle
+
+718
+00:36:28,476 --> 00:36:30,316
 I want you to also think
 
-00:36:30.316 --> 00:36:32.266 A:middle
+
+719
+00:36:30,316 --> 00:36:32,266
 about how you can use
 protocol extensions
 
-00:36:32.596 --> 00:36:35.456 A:middle
+
+720
+00:36:32,596 --> 00:36:35,456
 to share implementation
 throughout your application
 
-00:36:35.876 --> 00:36:39.076 A:middle
+
+721
+00:36:35,876 --> 00:36:39,076
 and avoid a bunch of awkward
 class hierarchy problems.
 
-00:36:39.686 --> 00:36:44.686 A:middle
+
+722
+00:36:39,686 --> 00:36:44,686
 So Ted and I spoke about a lot
 today, but what want you to get
 
-00:36:44.686 --> 00:36:47.126 A:middle
+
+723
+00:36:44,686 --> 00:36:47,126
 out of this is that the
 compiler is here to help you.
 
-00:36:47.666 --> 00:36:51.866 A:middle
+
+724
+00:36:47,666 --> 00:36:51,866
 Ted spoke to you about how
 you can safely take advantage
 
-00:36:51.866 --> 00:36:52.936 A:middle
+
+725
+00:36:51,866 --> 00:36:52,936
 of new APIs.
 
-00:36:53.266 --> 00:36:55.576 A:middle
+
+726
+00:36:53,266 --> 00:36:55,576
 Now, this is largely
 done by the compiler,
 
-00:36:55.576 --> 00:36:59.596 A:middle
+
+727
+00:36:55,576 --> 00:36:59,596
 and so the compiler knows what
 is available and what is not
 
-00:36:59.976 --> 00:37:01.526 A:middle
+
+728
+00:36:59,976 --> 00:37:01,526
 for specific OS versions.
 
 
-
-00:36:59.976 --> 00:37:01.526 A:middle
-for specific OS versions.
-
-00:37:02.866 --> 00:37:06.066 A:middle
+729
+00:37:02,866 --> 00:37:06,066
 And I spoke to you about strong
 typing in your applications
 
-00:37:06.066 --> 00:37:07.756 A:middle
+
+730
+00:37:06,066 --> 00:37:07,756
 and forcing application
 invariance
 
-00:37:08.036 --> 00:37:09.396 A:middle
+
+731
+00:37:08,036 --> 00:37:09,396
 and leveraging the compiler,
 
-00:37:09.736 --> 00:37:11.676 A:middle
+
+732
+00:37:09,736 --> 00:37:11,676
 letting it know what
 the constraints are
 
-00:37:11.676 --> 00:37:14.986 A:middle
+
+733
+00:37:11,676 --> 00:37:14,986
 of your application and encoding
 that information into your code
 
-00:37:15.446 --> 00:37:17.936 A:middle
+
+734
+00:37:15,446 --> 00:37:17,936
 so that the compiler can help
 you reason about problems
 
-00:37:17.936 --> 00:37:20.356 A:middle
+
+735
+00:37:17,936 --> 00:37:20,356
 at compile time and
 not at runtime.
 
-00:37:21.876 --> 00:37:23.196 A:middle
+
+736
+00:37:21,876 --> 00:37:23,196
 So for more information,
 
-00:37:23.196 --> 00:37:26.866 A:middle
+
+737
+00:37:23,196 --> 00:37:26,866
 I suggest you go watch the
 Protocol-Oriented Programming
 
-00:37:26.866 --> 00:37:32.106 A:middle
+
+738
+00:37:26,866 --> 00:37:32,106
 in Swift session online, and if
 you want to have lucid dreams
 
-00:37:32.106 --> 00:37:34.726 A:middle
+
+739
+00:37:32,106 --> 00:37:34,726
 about Cocoa and Swift
 yourself, I suggest you go check
 
-00:37:34.726 --> 00:37:35.866 A:middle
+
+740
+00:37:34,726 --> 00:37:35,866
 out these two samples.
 
-00:37:35.866 --> 00:37:38.236 A:middle
+
+741
+00:37:35,866 --> 00:37:38,236
 The lister sample has an example
 
-00:37:38.236 --> 00:37:40.106 A:middle
+
+742
+00:37:38,236 --> 00:37:40,106
 of the segue handler
 type protocol,
 
-00:37:40.396 --> 00:37:41.886 A:middle
+
+743
+00:37:40,396 --> 00:37:41,886
 and DemoBots uses a bunch
 
-00:37:41.886 --> 00:37:45.876 A:middle
+
+744
+00:37:41,886 --> 00:37:45,876
 of interesting ways it use
 enumerations in protocols
 
-00:37:46.666 --> 00:37:48.406 A:middle
+
+745
+00:37:46,666 --> 00:37:48,406
 for compile time safety.
 
-00:37:49.256 --> 00:37:51.026 A:middle
+
+746
+00:37:49,256 --> 00:37:51,026
 Now for more information,
 you can check
 
-00:37:51.026 --> 00:37:53.086 A:middle
+
+747
+00:37:51,026 --> 00:37:53,086
 out the Swift Language
 Documentation.
 
-00:37:53.086 --> 00:37:55.666 A:middle
+
+748
+00:37:53,086 --> 00:37:55,666
 We have the Dev Forums,
 and you can contact Stefan
 
-00:37:55.666 --> 00:37:56.696 A:middle
+
+749
+00:37:55,666 --> 00:37:56,696
 if you have any questions.
 
-00:37:57.226 --> 00:37:58.866 A:middle
+
+750
+00:37:57,226 --> 00:37:58,866
 Thanks, everyone, and
 I am looking forward
 
-00:37:58.866 --> 00:37:59.566 A:middle
+
+751
+00:37:58,866 --> 00:37:59,566
 to seeing you at the labs.
 
 
-
-00:38:01.516 --> 00:38:16.640 A:middle
+752
+00:38:01,516 --> 00:38:16,640
 [ Applause ]
 

@@ -1,4343 +1,6168 @@
-
-00:00:24.516 --> 00:00:26.746 A:middle
+1
+00:00:24,516 --> 00:00:26,746
 [Applause]
 
-00:00:27.246 --> 00:00:27.796 A:middle
-&gt;&gt; DOUG WYATT: Good morning.
 
-00:00:29.706 --> 00:00:32.686 A:middle
+2
+00:00:27,246 --> 00:00:27,796
+>> DOUG WYATT: Good morning.
+
+
+3
+00:00:29,706 --> 00:00:32,686
 I'm Doug Wyatt from the
 Core Audio team and I would
 
-00:00:32.686 --> 00:00:34.516 A:middle
+
+4
+00:00:32,686 --> 00:00:34,516
 like to show you something
 new we have been working
 
-00:00:34.516 --> 00:00:36.986 A:middle
+
+5
+00:00:34,516 --> 00:00:36,986
 on called Audio Unit Extensions.
 
-00:00:37.386 --> 00:00:42.416 A:middle
+
+6
+00:00:37,386 --> 00:00:42,416
 This is a new technology in
 iOS 9 and OS X El Capitan.
 
-00:00:43.946 --> 00:00:46.786 A:middle
+
+7
+00:00:43,946 --> 00:00:46,786
 About Audio Units: we've
 had had this technology
 
-00:00:46.786 --> 00:00:51.316 A:middle
+
+8
+00:00:46,786 --> 00:00:51,316
 in our operating systems since
 the beginning OS X and iOS.
 
-00:00:52.096 --> 00:00:54.436 A:middle
+
+9
+00:00:52,096 --> 00:00:54,436
 The operating system
 includes a great number
 
-00:00:54.436 --> 00:00:57.756 A:middle
+
+10
+00:00:54,436 --> 00:00:57,756
 of built-in units ranging
 from I/O units and mixers,
 
-00:00:58.116 --> 00:01:02.386 A:middle
+
+11
+00:00:58,116 --> 00:01:02,386
 a lot of different effects
 ranging to software sampler.
 
 
-
-00:00:58.116 --> 00:01:02.386 A:middle
-a lot of different effects
-ranging to software sampler.
-
-00:01:04.086 --> 00:01:06.436 A:middle
+12
+00:01:04,086 --> 00:01:06,436
 We use these internal
 Audio Units in many
 
-00:01:06.436 --> 00:01:09.166 A:middle
+
+13
+00:01:06,436 --> 00:01:09,166
 of our higher-level
 APIs, for example,
 
-00:01:09.356 --> 00:01:10.736 A:middle
+
+14
+00:01:09,356 --> 00:01:10,736
 the media playback stack.
 
-00:01:12.076 --> 00:01:15.756 A:middle
+
+15
+00:01:12,076 --> 00:01:15,756
 But Audio Units are also a
 widely adopted third-party
 
-00:01:15.876 --> 00:01:17.806 A:middle
+
+16
+00:01:15,876 --> 00:01:17,806
 plug-in format on OS X.
 
-00:01:18.216 --> 00:01:21.056 A:middle
+
+17
+00:01:18,216 --> 00:01:21,056
 There are literally thousands
 of third-party Audio Units
 
-00:01:21.056 --> 00:01:23.616 A:middle
+
+18
+00:01:21,056 --> 00:01:23,616
 in the market out there.
 
-00:01:24.246 --> 00:01:25.916 A:middle
+
+19
+00:01:24,246 --> 00:01:25,916
 Now, Audio Unit extensions
 
-00:01:25.916 --> 00:01:28.936 A:middle
+
+20
+00:01:25,916 --> 00:01:28,936
 for the first time bring
 us a full plug-in model
 
-00:01:29.426 --> 00:01:31.736 A:middle
+
+21
+00:01:29,426 --> 00:01:31,736
 on both OS X and iOS.
 
-00:01:32.016 --> 00:01:35.266 A:middle
+
+22
+00:01:32,016 --> 00:01:35,266
 It is built on top of the
 app extension technology,
 
-00:01:35.746 --> 00:01:39.006 A:middle
+
+23
+00:01:35,746 --> 00:01:39,006
 which means if you are writing
 plug-ins you can package them
 
-00:01:39.006 --> 00:01:42.646 A:middle
+
+24
+00:01:39,006 --> 00:01:42,646
 into apps, and those apps can
 be sold on the App Stores.
 
-00:01:43.516 --> 00:01:49.186 A:middle
+
+25
+00:01:43,516 --> 00:01:49,186
 [Applause]
 
-00:01:49.686 --> 00:01:53.256 A:middle
+
+26
+00:01:49,686 --> 00:01:53,256
 As part of this technology,
 we have modernized the API and
 
-00:01:53.736 --> 00:01:56.616 A:middle
+
+27
+00:01:53,736 --> 00:01:56,616
 yet at the same time
 maintained compatibility,
 
-00:01:57.116 --> 00:02:00.236 A:middle
+
+28
+00:01:57,116 --> 00:02:00,236
 and in this session I will go
 through details of this new API,
 
 
-
-00:01:57.116 --> 00:02:00.236 A:middle
-and in this session I will go
-through details of this new API,
-
-00:02:01.216 --> 00:02:05.096 A:middle
+29
+00:02:01,216 --> 00:02:05,096
 which we are calling the
 version 3 Audio Unit API.
 
-00:02:05.916 --> 00:02:10.175 A:middle
+
+30
+00:02:05,916 --> 00:02:10,175
 It's based on an Objective-C
 class called AUAudioUnit that's
 
-00:02:10.175 --> 00:02:11.626 A:middle
+
+31
+00:02:10,175 --> 00:02:11,626
 in the Audio Unit framework.
 
-00:02:12.036 --> 00:02:15.766 A:middle
+
+32
+00:02:12,036 --> 00:02:15,766
 And as an Objective-C class,
 of course, it plays nicely
 
-00:02:15.766 --> 00:02:19.256 A:middle
+
+33
+00:02:15,766 --> 00:02:19,256
 with Swift, as we will see.
 
-00:02:19.946 --> 00:02:21.966 A:middle
+
+34
+00:02:19,946 --> 00:02:21,966
 In this session, we are also
 going to look at a number
 
-00:02:21.966 --> 00:02:24.516 A:middle
+
+35
+00:02:21,966 --> 00:02:24,516
 of classes in the
 AVFoundation framework.
 
-00:02:25.146 --> 00:02:28.996 A:middle
+
+36
+00:02:25,146 --> 00:02:28,996
 We have AV Audio Unit
 component manager
 
-00:02:29.616 --> 00:02:31.456 A:middle
+
+37
+00:02:29,616 --> 00:02:31,456
 and AV Audio Unit component.
 
-00:02:32.146 --> 00:02:35.656 A:middle
+
+38
+00:02:32,146 --> 00:02:35,656
 These are used to located the
 audio components on the system.
 
-00:02:36.376 --> 00:02:38.666 A:middle
+
+39
+00:02:36,376 --> 00:02:38,666
 Those appear for the
 first time in iOS 9.
 
-00:02:39.296 --> 00:02:40.936 A:middle
+
+40
+00:02:39,296 --> 00:02:40,936
 They also exist on Yosemite.
 
-00:02:41.736 --> 00:02:45.296 A:middle
+
+41
+00:02:41,736 --> 00:02:45,296
 And we will also be using
 AVAudioEngine in some
 
-00:02:45.296 --> 00:02:47.366 A:middle
+
+42
+00:02:45,296 --> 00:02:47,366
 of our example code we
 will be showing today,
 
-00:02:48.206 --> 00:02:50.806 A:middle
+
+43
+00:02:48,206 --> 00:02:50,806
 in particular the
 AVAudioUnit class
 
-00:02:50.806 --> 00:02:52.796 A:middle
+
+44
+00:02:50,806 --> 00:02:52,796
 and AVAudioUnitEffect class.
 
-00:02:53.216 --> 00:02:56.276 A:middle
+
+45
+00:02:53,216 --> 00:02:56,276
 Those have been available
 since last year's OS releases.
 
-00:02:58.536 --> 00:03:00.306 A:middle
+
+46
+00:02:58,536 --> 00:03:00,306
 So about compatibility now.
 
 
-
-00:02:58.536 --> 00:03:00.306 A:middle
-So about compatibility now.
-
-00:03:00.306 --> 00:03:02.666 A:middle
+47
+00:03:00,306 --> 00:03:02,666
 This is how things
 look now in OS X.
 
-00:03:03.036 --> 00:03:05.646 A:middle
+
+48
+00:03:03,036 --> 00:03:05,646
 We have our existing
 version 2 Audio Unit hosts
 
-00:03:06.056 --> 00:03:09.246 A:middle
+
+49
+00:03:06,056 --> 00:03:09,246
 and existing version 2
 Audio Unit implementations.
 
-00:03:09.616 --> 00:03:12.036 A:middle
+
+50
+00:03:09,616 --> 00:03:12,036
 The hosts start their
 communication
 
-00:03:12.036 --> 00:03:13.866 A:middle
+
+51
+00:03:12,036 --> 00:03:13,866
 with audio component
 instance new,
 
-00:03:14.526 --> 00:03:16.696 A:middle
+
+52
+00:03:14,526 --> 00:03:16,696
 and our implementations
 are built
 
-00:03:16.696 --> 00:03:18.986 A:middle
+
+53
+00:03:16,696 --> 00:03:18,986
 on audio component
 factory functions.
 
-00:03:21.436 --> 00:03:23.676 A:middle
+
+54
+00:03:21,436 --> 00:03:23,676
 We have a new set of APIs here,
 
-00:03:24.036 --> 00:03:26.826 A:middle
+
+55
+00:03:24,036 --> 00:03:26,826
 so we will have new hosts
 using those new APIs.
 
-00:03:26.826 --> 00:03:31.556 A:middle
+
+56
+00:03:26,826 --> 00:03:31,556
 And new Audio Units implemented
 using those new APIs.
 
-00:03:32.296 --> 00:03:35.566 A:middle
+
+57
+00:03:32,296 --> 00:03:35,566
 Hosts will communicate with
 the class AU Audio Unit.
 
-00:03:35.996 --> 00:03:40.066 A:middle
+
+58
+00:03:35,996 --> 00:03:40,066
 New version 3 Audio Units
 will subclass AU Audio Unit.
 
-00:03:40.866 --> 00:03:42.916 A:middle
+
+59
+00:03:40,866 --> 00:03:42,916
 So that's two separate APIs.
 
-00:03:42.916 --> 00:03:44.876 A:middle
+
+60
+00:03:42,916 --> 00:03:44,876
 What are we going to
 do to be compatible?
 
-00:03:44.926 --> 00:03:48.626 A:middle
+
+61
+00:03:44,926 --> 00:03:48,626
 We have built bridges
 between these two APIs.
 
-00:03:49.996 --> 00:03:52.606 A:middle
+
+62
+00:03:49,996 --> 00:03:52,606
 So thanks to these
 bridges, we will find
 
-00:03:52.606 --> 00:03:57.236 A:middle
+
+63
+00:03:52,606 --> 00:03:57,236
 that new version 3 hosts should
 be almost completely compatible
 
-00:03:57.236 --> 00:03:59.536 A:middle
+
+64
+00:03:57,236 --> 00:03:59,536
 with existing version
 2 Audio Units.
 
 
-
-00:04:00.286 --> 00:04:04.606 A:middle
+65
+00:04:00,286 --> 00:04:04,606
 And conversely, existing version
 2 hosts would only need minor
 
-00:04:04.606 --> 00:04:08.476 A:middle
+
+66
+00:04:04,606 --> 00:04:08,476
 source changes to work with
 new version 3 Audio Units.
 
-00:04:08.806 --> 00:04:12.266 A:middle
+
+67
+00:04:08,806 --> 00:04:12,266
 And I will detail those API
 changes in a little bit.
 
-00:04:15.456 --> 00:04:17.646 A:middle
+
+68
+00:04:15,456 --> 00:04:17,646
 So now I would like
 to give you a demo
 
-00:04:17.646 --> 00:04:19.796 A:middle
+
+69
+00:04:17,646 --> 00:04:19,796
 of a new Audio Unit working
 
-00:04:19.796 --> 00:04:22.906 A:middle
+
+70
+00:04:19,796 --> 00:04:22,906
 in an only slightly modified
 version of Logic Pro.
 
-00:04:23.016 --> 00:04:29.356 A:middle
+
+71
+00:04:23,016 --> 00:04:29,356
 I have a little session here,
 it has a drum loop built in.
 
-00:04:29.606 --> 00:04:34.536 A:middle
+
+72
+00:04:29,606 --> 00:04:34,536
 And here I'm going to apply
 an Audio Unit to this track.
 
-00:04:35.946 --> 00:04:38.626 A:middle
+
+73
+00:04:35,946 --> 00:04:38,626
 So here are all of the
 Apple built-in Audio Units.
 
-00:04:40.146 --> 00:04:45.406 A:middle
+
+74
+00:04:40,146 --> 00:04:45,406
 And here I have a new demo
 Audio Unit called v3 Distortion.
 
-00:04:46.696 --> 00:04:48.376 A:middle
+
+75
+00:04:46,696 --> 00:04:48,376
 So I can open this Audio Unit.
 
-00:04:49.376 --> 00:04:55.246 A:middle
+
+76
+00:04:49,376 --> 00:04:55,246
 I can find the preset I like,
 and we can hear Logic playing
 
-00:04:55.246 --> 00:04:55.976 A:middle
+
+77
+00:04:55,246 --> 00:04:55,976
 through this Audio Unit.
 
-00:04:56.516 --> 00:05:01.576 A:middle
+
+78
+00:04:56,516 --> 00:05:01,576
 [Music]
 
 
-
-00:04:56.516 --> 00:05:01.576 A:middle
-[Music]
-
-00:05:02.076 --> 00:05:04.646 A:middle
+79
+00:05:02,076 --> 00:05:04,646
 There it's dry.
 
-00:05:04.986 --> 00:05:05.816 A:middle
+
+80
+00:05:04,986 --> 00:05:05,816
 Completely distorted.
 
-00:05:06.816 --> 00:05:09.306 A:middle
+
+81
+00:05:06,816 --> 00:05:09,306
 Now, if I go to activity
 monitor here,
 
-00:05:10.096 --> 00:05:13.296 A:middle
+
+82
+00:05:10,096 --> 00:05:13,296
 we can see that this
 distortion Audio Unit is running
 
-00:05:13.486 --> 00:05:17.306 A:middle
+
+83
+00:05:13,486 --> 00:05:17,306
 in a separate process,
 AU v3 distortion.
 
-00:05:17.706 --> 00:05:19.806 A:middle
+
+84
+00:05:17,706 --> 00:05:19,806
 It's consuming a
 little bit of CPU.
 
-00:05:20.326 --> 00:05:21.896 A:middle
+
+85
+00:05:20,326 --> 00:05:21,896
 It has some threads running.
 
-00:05:23.086 --> 00:05:27.976 A:middle
+
+86
+00:05:23,086 --> 00:05:27,976
 Now, suppose this Audio Unit
 has a bug in it, and it crashes.
 
-00:05:27.976 --> 00:05:30.366 A:middle
+
+87
+00:05:27,976 --> 00:05:30,366
 Well, I can simulate that
 here in activity monitor.
 
-00:05:31.016 --> 00:05:32.886 A:middle
+
+88
+00:05:31,016 --> 00:05:32,886
 I can force quit it.
 
-00:05:33.116 --> 00:05:36.476 A:middle
+
+89
+00:05:33,116 --> 00:05:36,476
 And notice in Logic,
 the view went blank
 
-00:05:36.886 --> 00:05:38.196 A:middle
+
+90
+00:05:36,886 --> 00:05:38,196
 but the music kept playing.
 
-00:05:39.516 --> 00:05:48.676 A:middle
+
+91
+00:05:39,516 --> 00:05:48,676
 [Applause]
 
-00:05:49.176 --> 00:05:51.546 A:middle
+
+92
+00:05:49,176 --> 00:05:51,546
 So here is a diagram of what
 we were just looking at.
 
-00:05:52.036 --> 00:05:54.966 A:middle
+
+93
+00:05:52,036 --> 00:05:54,966
 That's a slightly modified
 version of Logic Pro,
 
-00:05:55.746 --> 00:05:58.606 A:middle
+
+94
+00:05:55,746 --> 00:05:58,606
 but it's still basically
 communicating using the existing
 
-00:05:58.606 --> 00:06:03.846 A:middle
+
+95
+00:05:58,606 --> 00:06:03,846
 version 2 API, which is bridged
 to AU Audio Unit and in turn,
 
 
-
-00:05:58.606 --> 00:06:03.846 A:middle
-version 2 API, which is bridged
-to AU Audio Unit and in turn,
-
-00:06:04.116 --> 00:06:06.526 A:middle
+96
+00:06:04,116 --> 00:06:06,526
 in that separate
 extension service process,
 
-00:06:06.916 --> 00:06:10.616 A:middle
+
+97
+00:06:06,916 --> 00:06:10,616
 we saw the distortion units
 AU Audio Unit subclass running
 
-00:06:11.296 --> 00:06:13.036 A:middle
+
+98
+00:06:11,296 --> 00:06:13,036
 along with its custom
 View Controller.
 
-00:06:13.606 --> 00:06:16.216 A:middle
+
+99
+00:06:13,606 --> 00:06:16,216
 In the Logic process, there
 is also a View Controller,
 
-00:06:16.796 --> 00:06:18.626 A:middle
+
+100
+00:06:16,796 --> 00:06:18,626
 and you see how these
 are bridged
 
-00:06:19.206 --> 00:06:21.286 A:middle
+
+101
+00:06:19,206 --> 00:06:21,286
 across the process boundary.
 
-00:06:24.906 --> 00:06:27.596 A:middle
+
+102
+00:06:24,906 --> 00:06:27,596
 Now, I'd like to talk
 about hosting Audio Units
 
-00:06:28.256 --> 00:06:32.046 A:middle
+
+103
+00:06:28,256 --> 00:06:32,046
 and I will show you an example
 that uses the version 3 APIs.
 
-00:06:32.156 --> 00:06:35.286 A:middle
+
+104
+00:06:32,156 --> 00:06:35,286
 We have sample code called
 Audio Unit v3 Example.
 
-00:06:35.716 --> 00:06:38.236 A:middle
+
+105
+00:06:35,716 --> 00:06:38,236
 I checked a couple of hours
 ago, but it hadn't appeared yet.
 
-00:06:38.566 --> 00:06:42.616 A:middle
+
+106
+00:06:38,566 --> 00:06:42,616
 I hope it comes out today.
 
-00:06:42.916 --> 00:06:45.336 A:middle
+
+107
+00:06:42,916 --> 00:06:45,336
 In this sample code project,
 you will see there are a number
 
-00:06:45.336 --> 00:06:48.186 A:middle
+
+108
+00:06:45,336 --> 00:06:48,186
 of targets and one of
 them is called AU Host.
 
-00:06:49.006 --> 00:06:51.876 A:middle
+
+109
+00:06:49,006 --> 00:06:51,876
 Now, this application is fairly
 simple and straightforward,
 
-00:06:52.276 --> 00:06:55.586 A:middle
+
+110
+00:06:52,276 --> 00:06:55,586
 but it shows how to find and
 open Audio Units that are
 
-00:06:55.586 --> 00:06:58.486 A:middle
+
+111
+00:06:55,586 --> 00:06:58,486
 on the system, how to
 connect them together
 
-00:06:58.826 --> 00:07:02.316 A:middle
+
+112
+00:06:58,826 --> 00:07:02,316
 into a rendering chain, how
 to select Audio Unit presets,
 
 
-
-00:06:58.826 --> 00:07:02.316 A:middle
-into a rendering chain, how
-to select Audio Unit presets,
-
-00:07:02.766 --> 00:07:05.656 A:middle
+113
+00:07:02,766 --> 00:07:05,656
 and how to open an Audio
 Unit's custom view.
 
-00:07:07.496 --> 00:07:11.066 A:middle
+
+114
+00:07:07,496 --> 00:07:11,066
 So in the AU host app, we have
 something called simple play
 
-00:07:11.066 --> 00:07:14.946 A:middle
+
+115
+00:07:11,066 --> 00:07:14,946
 engine, which is a Swift
 class that uses AVAudioEngine.
 
-00:07:14.986 --> 00:07:19.146 A:middle
+
+116
+00:07:14,986 --> 00:07:19,146
 It uses an AV audio
 player node connected
 
-00:07:19.146 --> 00:07:20.426 A:middle
+
+117
+00:07:19,146 --> 00:07:20,426
 to an AV Audio Unit effect.
 
-00:07:20.426 --> 00:07:23.266 A:middle
+
+118
+00:07:20,426 --> 00:07:23,266
 That AV Audio Unit effect
 
-00:07:23.266 --> 00:07:26.556 A:middle
+
+119
+00:07:23,266 --> 00:07:26,556
 in turn exposed an
 underlying AU Audio Unit,
 
-00:07:27.146 --> 00:07:30.776 A:middle
+
+120
+00:07:27,146 --> 00:07:30,776
 which is the maiden class of
 the version 3 Audio Unit API.
 
-00:07:31.756 --> 00:07:33.546 A:middle
+
+121
+00:07:31,756 --> 00:07:33,546
 We have the player
 to the effect,
 
-00:07:33.546 --> 00:07:34.986 A:middle
+
+122
+00:07:33,546 --> 00:07:34,986
 to the mixer, to the output.
 
-00:07:35.246 --> 00:07:37.416 A:middle
+
+123
+00:07:35,246 --> 00:07:37,416
 That's how the simple
 play engine makes sound.
 
-00:07:38.316 --> 00:07:42.966 A:middle
+
+124
+00:07:38,316 --> 00:07:42,966
 We will also see how to use the
 AV Audio Unit component manager
 
-00:07:42.996 --> 00:07:46.476 A:middle
+
+125
+00:07:42,996 --> 00:07:46,476
 class to select from the
 AV Audio Unit components
 
-00:07:46.476 --> 00:07:50.146 A:middle
+
+126
+00:07:46,476 --> 00:07:50,146
 on the system and use
 that to control what kind
 
-00:07:50.146 --> 00:07:52.596 A:middle
+
+127
+00:07:50,146 --> 00:07:52,596
 of AV Audio Unit
 effect gets selected.
 
-00:07:52.596 --> 00:07:56.466 A:middle
+
+128
+00:07:52,596 --> 00:07:56,466
 So let's get into a
 little bit of code,
 
-00:07:56.466 --> 00:07:59.746 A:middle
+
+129
+00:07:56,466 --> 00:07:59,746
 but first there is a very
 fundamental data structure here
 
-00:07:59.746 --> 00:08:01.276 A:middle
+
+130
+00:07:59,746 --> 00:08:01,276
 when working with Audio Units.
 
 
-
-00:07:59.746 --> 00:08:01.276 A:middle
-when working with Audio Units.
-
-00:08:01.866 --> 00:08:03.796 A:middle
+131
+00:08:01,866 --> 00:08:03,796
 We have the audio
 component description
 
-00:08:04.296 --> 00:08:07.596 A:middle
+
+132
+00:08:04,296 --> 00:08:07,596
 and its first three fields:
 the component type, type,
 
-00:08:07.736 --> 00:08:10.386 A:middle
+
+133
+00:08:07,736 --> 00:08:10,386
 subtype, and manufacturer.
 
-00:08:10.816 --> 00:08:14.626 A:middle
+
+134
+00:08:10,816 --> 00:08:14,626
 That tuple uniquely identifies
 an Audio Unit in the system.
 
-00:08:15.236 --> 00:08:16.756 A:middle
+
+135
+00:08:15,236 --> 00:08:16,756
 The flags are also important.
 
-00:08:16.756 --> 00:08:19.556 A:middle
+
+136
+00:08:16,756 --> 00:08:19,556
 They are partially populated
 by the audio component,
 
-00:08:19.946 --> 00:08:23.356 A:middle
+
+137
+00:08:19,946 --> 00:08:23,356
 and there are new ones
 populated by the system.
 
-00:08:23.356 --> 00:08:25.686 A:middle
+
+138
+00:08:23,356 --> 00:08:25,686
 We will describe some
 of those as we go along.
 
-00:08:26.136 --> 00:08:28.336 A:middle
+
+139
+00:08:26,136 --> 00:08:28,336
 The important thing
 here is this is the key
 
-00:08:28.336 --> 00:08:29.956 A:middle
+
+140
+00:08:28,336 --> 00:08:29,956
 that identifies the plug-in.
 
-00:08:31.776 --> 00:08:34.946 A:middle
+
+141
+00:08:31,776 --> 00:08:34,946
 So to find Audio Unit
 components on the system,
 
-00:08:35.836 --> 00:08:38.926 A:middle
+
+142
+00:08:35,836 --> 00:08:38,926
 the first thing we do is create
 an audio component description
 
-00:08:39.666 --> 00:08:41.316 A:middle
+
+143
+00:08:39,666 --> 00:08:41,316
 that contains a wildcard.
 
-00:08:41.666 --> 00:08:43.726 A:middle
+
+144
+00:08:41,666 --> 00:08:43,726
 Here we say the component
 type is effect.
 
-00:08:43.836 --> 00:08:46.706 A:middle
+
+145
+00:08:43,836 --> 00:08:46,706
 That's not a wildcard, but
 we have component subtype
 
-00:08:46.706 --> 00:08:48.456 A:middle
+
+146
+00:08:46,706 --> 00:08:48,456
 and manufacturer of zero.
 
-00:08:48.806 --> 00:08:51.786 A:middle
+
+147
+00:08:48,806 --> 00:08:51,786
 Those are wildcards, so we have
 built a component description
 
-00:08:51.786 --> 00:08:54.056 A:middle
+
+148
+00:08:51,786 --> 00:08:54,056
 here that identifies any effect.
 
-00:08:55.536 --> 00:09:00.606 A:middle
+
+149
+00:08:55,536 --> 00:09:00,606
 And then we can take that any
 effect component description
 
 
-
-00:08:55.536 --> 00:09:00.606 A:middle
-And then we can take that any
-effect component description
-
-00:09:00.606 --> 00:09:03.496 A:middle
+150
+00:09:00,606 --> 00:09:03,496
 and pass it to AV Audio
 Unit component manager,
 
-00:09:04.106 --> 00:09:06.106 A:middle
+
+151
+00:09:04,106 --> 00:09:06,106
 and it will give us
 back all of the effects
 
-00:09:06.106 --> 00:09:08.736 A:middle
+
+152
+00:09:06,106 --> 00:09:08,736
 on the system matching
 that wildcard.
 
-00:09:09.626 --> 00:09:13.366 A:middle
+
+153
+00:09:09,626 --> 00:09:13,366
 So here we get an array of AV
 Audio Unit component objects,
 
-00:09:13.976 --> 00:09:18.396 A:middle
+
+154
+00:09:13,976 --> 00:09:18,396
 and those contain things
 like the name, tags,
 
-00:09:18.866 --> 00:09:23.366 A:middle
+
+155
+00:09:18,866 --> 00:09:23,366
 also the audio component
 description of that unit.
 
-00:09:25.336 --> 00:09:27.486 A:middle
+
+156
+00:09:25,336 --> 00:09:27,486
 So here we have got an
 array of components.
 
-00:09:27.486 --> 00:09:28.876 A:middle
+
+157
+00:09:27,486 --> 00:09:28,876
 We can pass that back to the UI,
 
-00:09:28.876 --> 00:09:34.146 A:middle
+
+158
+00:09:28,876 --> 00:09:34,146
 and in turn the UI can call this
 method in the simple play engine
 
-00:09:34.526 --> 00:09:37.946 A:middle
+
+159
+00:09:34,526 --> 00:09:37,946
 to select one of these
 previously vended
 
-00:09:38.656 --> 00:09:39.776 A:middle
+
+160
+00:09:38,656 --> 00:09:39,776
 effect components.
 
-00:09:40.136 --> 00:09:41.706 A:middle
+
+161
+00:09:40,136 --> 00:09:41,706
 So here it gives us a component.
 
-00:09:42.176 --> 00:09:44.586 A:middle
+
+162
+00:09:42,176 --> 00:09:44,586
 We are going to fetch the
 audio component description
 
-00:09:44.586 --> 00:09:50.196 A:middle
+
+163
+00:09:44,586 --> 00:09:50,196
 out of that, pass it to an
 internal method, and the guts
 
-00:09:50.196 --> 00:09:51.806 A:middle
+
+164
+00:09:50,196 --> 00:09:51,806
 of that internal method is here.
 
-00:09:52.286 --> 00:09:56.436 A:middle
+
+165
+00:09:52,286 --> 00:09:56,436
 We are going to call a new
 class method of AV Audio Unit.
 
-00:09:57.296 --> 00:10:01.026 A:middle
+
+166
+00:09:57,296 --> 00:10:01,026
 And this method asks it to
 create an instance based
 
 
-
-00:09:57.296 --> 00:10:01.026 A:middle
-And this method asks it to
-create an instance based
-
-00:10:01.026 --> 00:10:03.106 A:middle
+167
+00:10:01,026 --> 00:10:03,106
 on the component
 description we have here.
 
-00:10:04.136 --> 00:10:07.316 A:middle
+
+168
+00:10:04,136 --> 00:10:07,316
 Now, this is an asynchronous
 function, meaning it's going
 
-00:10:07.316 --> 00:10:09.316 A:middle
+
+169
+00:10:07,316 --> 00:10:09,316
 to go off and start
 instantiating it,
 
-00:10:09.756 --> 00:10:11.846 A:middle
+
+170
+00:10:09,756 --> 00:10:11,846
 and then it's going
 to call this closure
 
-00:10:12.846 --> 00:10:18.046 A:middle
+
+171
+00:10:12,846 --> 00:10:18,046
 when it actually has
 instantiated the Audio Unit
 
-00:10:18.046 --> 00:10:20.556 A:middle
+
+172
+00:10:18,046 --> 00:10:20,556
 and we are ready to use it.
 
-00:10:21.486 --> 00:10:22.986 A:middle
+
+173
+00:10:21,486 --> 00:10:22,986
 So here we are in our callback.
 
-00:10:22.986 --> 00:10:24.796 A:middle
+
+174
+00:10:22,986 --> 00:10:24,796
 This is Swift closure syntax.
 
-00:10:25.396 --> 00:10:27.646 A:middle
+
+175
+00:10:25,396 --> 00:10:27,646
 We have our AV Audio Unit.
 
-00:10:29.306 --> 00:10:32.996 A:middle
+
+176
+00:10:29,306 --> 00:10:32,996
 And then we can attach
 it to our engine.
 
-00:10:33.476 --> 00:10:36.286 A:middle
+
+177
+00:10:33,476 --> 00:10:36,286
 We have stored it into a
 member variable, the effect.
 
-00:10:37.606 --> 00:10:43.806 A:middle
+
+178
+00:10:37,606 --> 00:10:43,806
 And now we have an AV Audio
 Unit know that's the effect.
 
-00:10:43.806 --> 00:10:45.576 A:middle
+
+179
+00:10:43,806 --> 00:10:45,576
 We are going to patch
 that into the engine.
 
-00:10:46.156 --> 00:10:48.506 A:middle
+
+180
+00:10:46,156 --> 00:10:48,506
 We will disconnect the
 effect from the main mixer,
 
-00:10:49.206 --> 00:10:51.586 A:middle
+
+181
+00:10:49,206 --> 00:10:51,586
 then connect from the
 player to the effect.
 
-00:10:52.896 --> 00:10:55.896 A:middle
+
+182
+00:10:52,896 --> 00:10:55,896
 And then from the effect
 to the main mixer node.
 
-00:10:57.446 --> 00:10:59.576 A:middle
+
+183
+00:10:57,446 --> 00:10:59,576
 So now we have got an
 effect in our play engine.
 
 
-
-00:11:01.426 --> 00:11:05.626 A:middle
+184
+00:11:01,426 --> 00:11:05,626
 And now we can store the
 actual AU Audio Unit.
 
-00:11:06.066 --> 00:11:08.346 A:middle
+
+185
+00:11:06,066 --> 00:11:08,346
 That's the plug-in, and
 here we can do all kinds
 
-00:11:08.346 --> 00:11:09.246 A:middle
+
+186
+00:11:08,346 --> 00:11:09,246
 of interesting things
 
-00:11:09.246 --> 00:11:13.626 A:middle
+
+187
+00:11:09,246 --> 00:11:13,626
 like manipulate the component's
 effect, presets, and parameters.
 
-00:11:14.936 --> 00:11:18.946 A:middle
+
+188
+00:11:14,936 --> 00:11:18,946
 For instance, here, we will just
 get the list of factory presets.
 
-00:11:20.586 --> 00:11:23.476 A:middle
+
+189
+00:11:20,586 --> 00:11:23,476
 And this too can
 populate a field
 
-00:11:23.476 --> 00:11:25.426 A:middle
+
+190
+00:11:23,476 --> 00:11:25,426
 in the table view --
 rather, in the UI.
 
-00:11:27.236 --> 00:11:29.356 A:middle
+
+191
+00:11:27,236 --> 00:11:29,356
 So the user can choose
 the factory preset.
 
-00:11:31.236 --> 00:11:34.106 A:middle
+
+192
+00:11:31,236 --> 00:11:34,106
 And finally, I would
 like to show you how
 
-00:11:34.316 --> 00:11:35.876 A:middle
+
+193
+00:11:34,316 --> 00:11:35,876
 in the app I will
 show you in a minute,
 
-00:11:36.446 --> 00:11:39.146 A:middle
+
+194
+00:11:36,446 --> 00:11:39,146
 we can get the Audio Unit's
 custom view and embed it
 
-00:11:39.196 --> 00:11:40.966 A:middle
+
+195
+00:11:39,196 --> 00:11:40,966
 into the host application's
 view.
 
-00:11:41.546 --> 00:11:43.906 A:middle
+
+196
+00:11:41,546 --> 00:11:43,906
 Here we are in the View
 Controller of the host,
 
-00:11:43.906 --> 00:11:47.476 A:middle
+
+197
+00:11:43,906 --> 00:11:47,476
 so we are going to ask the play
 engine, give me your Audio Unit,
 
-00:11:47.866 --> 00:11:49.816 A:middle
+
+198
+00:11:47,866 --> 00:11:49,816
 and then we are going
 to ask the Audio Unit
 
-00:11:49.896 --> 00:11:50.896 A:middle
+
+199
+00:11:49,896 --> 00:11:50,896
 for a View Controller.
 
-00:11:51.216 --> 00:11:52.916 A:middle
+
+200
+00:11:51,216 --> 00:11:52,916
 When it's done with that,
 it will call us back
 
-00:11:52.916 --> 00:11:56.486 A:middle
+
+201
+00:11:52,916 --> 00:11:56,486
 with a View Controller that we
 can embed in the host's view.
 
-00:11:58.266 --> 00:12:00.826 A:middle
+
+202
+00:11:58,266 --> 00:12:00,826
 Okay. I would like to bring up
 my colleague Michael Hopkins now
 
 
-
-00:11:58.266 --> 00:12:00.826 A:middle
-Okay. I would like to bring up
-my colleague Michael Hopkins now
-
-00:12:01.266 --> 00:12:03.396 A:middle
+203
+00:12:01,266 --> 00:12:03,396
 to show you this app
 actually running now.
 
-00:12:06.516 --> 00:12:12.216 A:middle
+
+204
+00:12:06,516 --> 00:12:12,216
 [Applause]
 
-00:12:12.716 --> 00:12:13.856 A:middle
-&gt;&gt; MICHAEL HOPKINS: Thank
+
+205
+00:12:12,716 --> 00:12:13,856
+>> MICHAEL HOPKINS: Thank
 you very much, Doug.
 
-00:12:14.176 --> 00:12:16.446 A:middle
+
+206
+00:12:14,176 --> 00:12:16,446
 I'm delighted to have
 this opportunity today
 
-00:12:16.446 --> 00:12:21.316 A:middle
+
+207
+00:12:16,446 --> 00:12:21,316
 to show you this
 AVAudioEngine-based v3 host
 
-00:12:21.316 --> 00:12:23.356 A:middle
+
+208
+00:12:21,316 --> 00:12:23,356
 application running
 on an iPad here.
 
-00:12:24.156 --> 00:12:25.766 A:middle
+
+209
+00:12:24,156 --> 00:12:25,766
 As you can see, I'm
 going to launch
 
-00:12:25.766 --> 00:12:28.146 A:middle
+
+210
+00:12:25,766 --> 00:12:28,146
 that by tapping the
 icon for the host.
 
-00:12:29.126 --> 00:12:31.936 A:middle
+
+211
+00:12:29,126 --> 00:12:31,936
 And on the left-hand side of
 the screen we have a list of all
 
-00:12:31.936 --> 00:12:35.106 A:middle
+
+212
+00:12:31,936 --> 00:12:35,106
 of the effects Audio Units
 that are present on the system.
 
-00:12:35.486 --> 00:12:38.196 A:middle
+
+213
+00:12:35,486 --> 00:12:38,196
 And this includes both
 the built-in Apple audio
 
-00:12:38.196 --> 00:12:40.486 A:middle
+
+214
+00:12:38,196 --> 00:12:40,486
 component-based effects as well
 
-00:12:40.486 --> 00:12:43.566 A:middle
+
+215
+00:12:40,486 --> 00:12:43,566
 as several new extension-based
 v3 Audio Units I
 
-00:12:43.566 --> 00:12:44.566 A:middle
+
+216
+00:12:43,566 --> 00:12:44,566
 installed myself.
 
-00:12:45.776 --> 00:12:48.956 A:middle
+
+217
+00:12:45,776 --> 00:12:48,956
 At the top of the screen, I have
 a Play button that I can tap
 
-00:12:49.056 --> 00:12:51.656 A:middle
+
+218
+00:12:49,056 --> 00:12:51,656
 to toggle the playback
 of a drum loop.
 
-00:12:52.736 --> 00:12:56.006 A:middle
+
+219
+00:12:52,736 --> 00:12:56,006
 Now, let's see how I can
 apply some effect nodes
 
-00:12:56.216 --> 00:12:57.386 A:middle
+
+220
+00:12:56,216 --> 00:12:57,386
 and add them to the graph.
 
-00:12:57.956 --> 00:12:59.596 A:middle
+
+221
+00:12:57,956 --> 00:12:59,596
 First, I will play
 this with no effect
 
-00:12:59.596 --> 00:13:01.436 A:middle
+
+222
+00:12:59,596 --> 00:13:01,436
 and then I will add
 a couple effects
 
 
-
-00:12:59.596 --> 00:13:01.436 A:middle
-and then I will add
-a couple effects
-
-00:13:01.436 --> 00:13:02.666 A:middle
+223
+00:13:01,436 --> 00:13:02,666
 so you can hear that working.
 
-00:13:03.516 --> 00:13:08.626 A:middle
+
+224
+00:13:03,516 --> 00:13:08,626
 [Music]
 
-00:13:09.126 --> 00:13:12.896 A:middle
+
+225
+00:13:09,126 --> 00:13:12,896
 With the high pass filter,
 it's filtering out almost all
 
-00:13:12.896 --> 00:13:16.186 A:middle
+
+226
+00:13:12,896 --> 00:13:16,186
 of the sounds of the cymbals
 and other higher frequencies.
 
-00:13:17.046 --> 00:13:21.916 A:middle
+
+227
+00:13:17,046 --> 00:13:21,916
 A delay, which is a little
 bit hard to hear in this room.
 
-00:13:22.366 --> 00:13:24.476 A:middle
+
+228
+00:13:22,366 --> 00:13:24,476
 And I'm going to go
 ahead and stop that.
 
-00:13:24.876 --> 00:13:26.096 A:middle
+
+229
+00:13:24,876 --> 00:13:26,096
 So now I would like to show you
 
-00:13:26.096 --> 00:13:29.556 A:middle
+
+230
+00:13:26,096 --> 00:13:29,556
 for the first time an
 extension-based Audio Unit
 
-00:13:29.556 --> 00:13:31.006 A:middle
+
+231
+00:13:29,556 --> 00:13:31,006
 running on this iPad.
 
-00:13:31.006 --> 00:13:33.896 A:middle
+
+232
+00:13:31,006 --> 00:13:33,896
 That is the distortion demo.
 
-00:13:34.696 --> 00:13:37.576 A:middle
+
+233
+00:13:34,696 --> 00:13:37,576
 When I select that, now
 you can see the list of all
 
-00:13:37.576 --> 00:13:40.436 A:middle
+
+234
+00:13:37,576 --> 00:13:40,436
 of the factory presets that
 the Audio Unit is publishing.
 
-00:13:41.246 --> 00:13:43.816 A:middle
+
+235
+00:13:41,246 --> 00:13:43,816
 These include some
 drum-specific ones as well
 
-00:13:43.816 --> 00:13:47.156 A:middle
+
+236
+00:13:43,816 --> 00:13:47,156
 as some really crazy, wild
 effects like alien chatter.
 
-00:13:48.466 --> 00:13:49.666 A:middle
+
+237
+00:13:48,466 --> 00:13:49,666
 Now, as Doug mentioned ,
 
-00:13:49.816 --> 00:13:53.916 A:middle
+
+238
+00:13:49,816 --> 00:13:53,916
 v3 Audio Unit can have
 a custom view on iOS.
 
-00:13:54.566 --> 00:13:56.156 A:middle
+
+239
+00:13:54,566 --> 00:13:56,156
 And I'm going to show you that.
 
-00:13:56.156 --> 00:13:57.906 A:middle
+
+240
+00:13:56,156 --> 00:13:57,906
 I'm going to go ahead
 and tap the View button.
 
-00:13:58.396 --> 00:14:02.506 A:middle
+
+241
+00:13:58,396 --> 00:14:02,506
 And what we have done is we
 have loaded that View Controller
 
 
-
-00:13:58.396 --> 00:14:02.506 A:middle
-And what we have done is we
-have loaded that View Controller
-
-00:14:02.506 --> 00:14:04.486 A:middle
+242
+00:14:02,506 --> 00:14:04,486
 from the Audio Unit
 and I have installed it
 
-00:14:04.486 --> 00:14:08.426 A:middle
+
+243
+00:14:04,486 --> 00:14:08,426
 as a child View Controller
 within our application context.
 
-00:14:08.426 --> 00:14:11.846 A:middle
+
+244
+00:14:08,426 --> 00:14:11,846
 So for the first time, we
 have a built in Audio Unit
 
-00:14:11.846 --> 00:14:13.936 A:middle
+
+245
+00:14:11,846 --> 00:14:13,936
 with a UI running in our host.
 
-00:14:15.096 --> 00:14:20.176 A:middle
+
+246
+00:14:15,096 --> 00:14:20,176
 We have a large slider, excuse
 me, a large knob that I can use
 
-00:14:20.176 --> 00:14:21.806 A:middle
+
+247
+00:14:20,176 --> 00:14:21,806
 to control the amount
 of distortion.
 
-00:14:22.876 --> 00:14:24.566 A:middle
+
+248
+00:14:22,876 --> 00:14:24,566
 And let me go ahead
 and play that for you
 
-00:14:24.566 --> 00:14:25.916 A:middle
+
+249
+00:14:24,566 --> 00:14:25,916
 so you can hear that in action.
 
-00:14:27.516 --> 00:14:43.546 A:middle
+
+250
+00:14:27,516 --> 00:14:43,546
 [Music]
 
-00:14:44.046 --> 00:14:45.416 A:middle
+
+251
+00:14:44,046 --> 00:14:45,416
 It's really a lot of fun.
 
-00:14:45.416 --> 00:14:47.896 A:middle
+
+252
+00:14:45,416 --> 00:14:47,896
 It's an amazing experience
 to be able to have
 
-00:14:47.896 --> 00:14:52.366 A:middle
+
+253
+00:14:47,896 --> 00:14:52,366
 that Multi-Touch UI working
 fluidly in a host application
 
-00:14:52.366 --> 00:14:55.316 A:middle
+
+254
+00:14:52,366 --> 00:14:55,316
 without having to go through
 all of the hassle of switching
 
-00:14:55.316 --> 00:14:57.676 A:middle
+
+255
+00:14:55,316 --> 00:14:57,676
 out to another application,
 doing some tweaks,
 
-00:14:57.676 --> 00:14:59.036 A:middle
+
+256
+00:14:57,676 --> 00:14:59,036
 switching back to your host,
 
-00:14:59.366 --> 00:15:01.306 A:middle
+
+257
+00:14:59,366 --> 00:15:01,306
 starting recording,
 switching back.
 
 
-
-00:14:59.366 --> 00:15:01.306 A:middle
-starting recording,
-switching back.
-
-00:15:01.306 --> 00:15:03.046 A:middle
+258
+00:15:01,306 --> 00:15:03,046
 Now, you won't have
 to do that ever again.
 
-00:15:04.516 --> 00:15:08.586 A:middle
+
+259
+00:15:04,516 --> 00:15:08,586
 [Applause]
 
-00:15:09.086 --> 00:15:09.516 A:middle
+
+260
+00:15:09,086 --> 00:15:09,516
 Thank you.
 
-00:15:10.746 --> 00:15:12.456 A:middle
+
+261
+00:15:10,746 --> 00:15:12,456
 And I'd also like
 to point out further
 
-00:15:12.456 --> 00:15:15.876 A:middle
+
+262
+00:15:12,456 --> 00:15:15,876
 that this is the same Audio Unit
 that you saw running in Logic
 
-00:15:15.876 --> 00:15:17.566 A:middle
+
+263
+00:15:15,876 --> 00:15:17,566
 in Doug's earlier demo.
 
-00:15:17.956 --> 00:15:21.056 A:middle
+
+264
+00:15:17,956 --> 00:15:21,056
 In fact, the source code for
 the Audio Unit is identical.
 
-00:15:21.056 --> 00:15:22.336 A:middle
+
+265
+00:15:21,056 --> 00:15:22,336
 No changes were required.
 
-00:15:22.906 --> 00:15:26.666 A:middle
+
+266
+00:15:22,906 --> 00:15:26,666
 The drawing code is also
 very similar because I chose
 
-00:15:26.666 --> 00:15:28.526 A:middle
+
+267
+00:15:26,666 --> 00:15:28,526
 to write this using
 Core Animation
 
-00:15:28.526 --> 00:15:30.826 A:middle
+
+268
+00:15:28,526 --> 00:15:30,826
 so that API is almost
 fully portable.
 
-00:15:31.486 --> 00:15:33.316 A:middle
+
+269
+00:15:31,486 --> 00:15:33,316
 The only changes
 that were necessary
 
-00:15:33.316 --> 00:15:36.936 A:middle
+
+270
+00:15:33,316 --> 00:15:36,936
 to bring this Audio Unit to
 iOS are in the event model,
 
-00:15:36.936 --> 00:15:39.486 A:middle
+
+271
+00:15:36,936 --> 00:15:39,486
 whereas we have had to use
 the touch events in UIKit
 
-00:15:39.546 --> 00:15:45.086 A:middle
+
+272
+00:15:39,546 --> 00:15:45,086
 versus the AppKit mouse
 events on the desktop.
 
-00:15:45.496 --> 00:15:47.666 A:middle
+
+273
+00:15:45,496 --> 00:15:47,666
 So really you guys
 have an opportunity
 
-00:15:47.666 --> 00:15:52.486 A:middle
+
+274
+00:15:47,666 --> 00:15:52,486
 to with only a few changes
 to publish an Audio Unit both
 
-00:15:52.486 --> 00:15:54.216 A:middle
+
+275
+00:15:52,486 --> 00:15:54,216
 on the desktop and on iOS.
 
-00:15:54.696 --> 00:15:55.976 A:middle
+
+276
+00:15:54,696 --> 00:15:55,976
 Thank you very much.
 
-00:15:56.016 --> 00:15:57.256 A:middle
+
+277
+00:15:56,016 --> 00:15:57,256
 [Applause]
 
-00:15:57.256 --> 00:15:57.846 A:middle
+
+278
+00:15:57,256 --> 00:15:57,846
 Back to you, Doug.
 
 
-
-00:16:00.236 --> 00:16:02.056 A:middle
-&gt;&gt; DOUG WYATT: Thank
+279
+00:16:00,236 --> 00:16:02,056
+>> DOUG WYATT: Thank
 you, Michael.
 
-00:16:05.656 --> 00:16:08.806 A:middle
+
+280
+00:16:05,656 --> 00:16:08,806
 So I would like to talk
 about using Audio Units
 
-00:16:09.176 --> 00:16:11.626 A:middle
+
+281
+00:16:09,176 --> 00:16:11,626
 in your host applications
 in situations
 
-00:16:11.626 --> 00:16:13.626 A:middle
+
+282
+00:16:11,626 --> 00:16:13,626
 where you are not
 using AVAudioEngine.
 
-00:16:14.446 --> 00:16:18.026 A:middle
+
+283
+00:16:14,446 --> 00:16:18,026
 We have a similar method
 on the AU Audio Unit class
 
-00:16:18.546 --> 00:16:20.706 A:middle
+
+284
+00:16:18,546 --> 00:16:20,706
 to asynchronously
 create an instance
 
-00:16:20.706 --> 00:16:21.986 A:middle
+
+285
+00:16:20,706 --> 00:16:21,986
 of the component description.
 
-00:16:21.986 --> 00:16:22.736 A:middle
+
+286
+00:16:21,986 --> 00:16:22,736
 You see that there.
 
-00:16:23.566 --> 00:16:26.726 A:middle
+
+287
+00:16:23,566 --> 00:16:26,726
 We also, for those of you
 with existing version 2 hosts,
 
-00:16:27.066 --> 00:16:29.886 A:middle
+
+288
+00:16:27,066 --> 00:16:29,886
 a minimal translation path is
 
-00:16:29.946 --> 00:16:32.406 A:middle
+
+289
+00:16:29,946 --> 00:16:32,406
 to start using audio
 component instantiate.
 
-00:16:32.796 --> 00:16:35.916 A:middle
+
+290
+00:16:32,796 --> 00:16:35,916
 We will talk about that
 in detail in a bit.
 
-00:16:37.626 --> 00:16:39.556 A:middle
+
+291
+00:16:37,626 --> 00:16:39,556
 Now, I would like to
 talk about the subject
 
-00:16:39.556 --> 00:16:42.116 A:middle
+
+292
+00:16:39,556 --> 00:16:42,116
 of extension service processes
 
-00:16:42.116 --> 00:16:45.306 A:middle
+
+293
+00:16:42,116 --> 00:16:45,306
 versus plug-ins loaded
 into host processes.
 
-00:16:47.066 --> 00:16:50.356 A:middle
+
+294
+00:16:47,066 --> 00:16:50,356
 Now, as anybody who has worked
 with Audio Units is aware,
 
-00:16:50.356 --> 00:16:52.306 A:middle
+
+295
+00:16:50,356 --> 00:16:52,306
 of course, with our
 existing plug-in model,
 
-00:16:52.636 --> 00:16:55.456 A:middle
+
+296
+00:16:52,636 --> 00:16:55,456
 the plug-ins are always loaded
 into the host's progress,
 
-00:16:55.876 --> 00:16:59.566 A:middle
+
+297
+00:16:55,876 --> 00:16:59,566
 and this remains true
 for version 3 hosts.
 
-00:16:59.796 --> 00:17:03.336 A:middle
+
+298
+00:16:59,796 --> 00:17:03,336
 If it's a version 2 existing
 plug-in, and that might be one
 
 
-
-00:16:59.796 --> 00:17:03.336 A:middle
-If it's a version 2 existing
-plug-in, and that might be one
-
-00:17:03.336 --> 00:17:05.616 A:middle
+299
+00:17:03,336 --> 00:17:05,616
 of the Apple built-in
 ones on iOS
 
-00:17:05.616 --> 00:17:09.136 A:middle
+
+300
+00:17:05,616 --> 00:17:09,136
 or it could be a third-party
 one on OS X, but in any case
 
-00:17:09.796 --> 00:17:13.465 A:middle
+
+301
+00:17:09,796 --> 00:17:13,465
 if it's a version 2 Audio Unit,
 regardless of any other factor,
 
-00:17:13.465 --> 00:17:15.376 A:middle
+
+302
+00:17:13,465 --> 00:17:15,376
 it's always in the
 host's process.
 
-00:17:17.016 --> 00:17:20.346 A:middle
+
+303
+00:17:17,016 --> 00:17:20,346
 Now, version 3 Audio Units have
 a slightly more complicated
 
-00:17:20.346 --> 00:17:21.016 A:middle
+
+304
+00:17:20,346 --> 00:17:21,016
 story here.
 
-00:17:21.665 --> 00:17:25.415 A:middle
+
+305
+00:17:21,665 --> 00:17:25,415
 By default, version 3
 Audio Units are loaded
 
-00:17:25.415 --> 00:17:28.096 A:middle
+
+306
+00:17:25,415 --> 00:17:28,096
 into a separate extension
 service process.
 
-00:17:28.435 --> 00:17:31.186 A:middle
+
+307
+00:17:28,435 --> 00:17:31,186
 And this is the diagram
 we saw before with Logic.
 
-00:17:32.306 --> 00:17:35.766 A:middle
+
+308
+00:17:32,306 --> 00:17:35,766
 This is true, again,
 whether it's a version 2 host
 
-00:17:35.766 --> 00:17:36.976 A:middle
+
+309
+00:17:35,766 --> 00:17:36,976
 or a version 3 host.
 
-00:17:38.086 --> 00:17:43.326 A:middle
+
+310
+00:17:38,086 --> 00:17:43,326
 Now, on OS X only it is
 possible for the plug-in
 
-00:17:43.326 --> 00:17:46.096 A:middle
+
+311
+00:17:43,326 --> 00:17:46,096
 to be loaded directly
 into the host's process.
 
-00:17:46.616 --> 00:17:50.096 A:middle
+
+312
+00:17:46,616 --> 00:17:50,096
 Now, for this to happen,
 both parties have to opt in.
 
-00:17:50.626 --> 00:17:54.136 A:middle
+
+313
+00:17:50,626 --> 00:17:54,136
 The host when instantiating
 the Audio Unit has
 
-00:17:54.136 --> 00:17:55.836 A:middle
+
+314
+00:17:54,136 --> 00:17:55,836
 to pass this option to any
 
-00:17:55.836 --> 00:17:58.806 A:middle
+
+315
+00:17:55,836 --> 00:17:58,806
 of the asynchronous
 creation methods we just saw,
 
-00:17:59.996 --> 00:18:02.696 A:middle
+
+316
+00:17:59,996 --> 00:18:02,696
 and you see the name of that
 new flag there called Load
 
 
-
-00:17:59.996 --> 00:18:02.696 A:middle
-and you see the name of that
-new flag there called Load
-
-00:18:02.696 --> 00:18:03.526 A:middle
+317
+00:18:02,696 --> 00:18:03,526
 in Process.
 
-00:18:04.066 --> 00:18:07.556 A:middle
+
+318
+00:18:04,066 --> 00:18:07,556
 And the Audio Unit also has
 to be packaged specially
 
-00:18:07.886 --> 00:18:12.216 A:middle
+
+319
+00:18:07,886 --> 00:18:12,216
 and consent to this with
 a plist entry called Audio
 
-00:18:12.216 --> 00:18:13.176 A:middle
+
+320
+00:18:12,216 --> 00:18:13,176
 Component Bundle.
 
-00:18:13.856 --> 00:18:15.866 A:middle
+
+321
+00:18:13,856 --> 00:18:15,866
 So if both parties do opt in,
 
-00:18:16.246 --> 00:18:19.776 A:middle
+
+322
+00:18:16,246 --> 00:18:19,776
 then the framework will
 actually load the plug-in
 
-00:18:19.836 --> 00:18:21.256 A:middle
+
+323
+00:18:19,836 --> 00:18:21,256
 into the host's process.
 
-00:18:21.416 --> 00:18:23.586 A:middle
+
+324
+00:18:21,416 --> 00:18:23,586
 So the host will be
 communicating directly
 
-00:18:23.586 --> 00:18:27.466 A:middle
+
+325
+00:18:23,586 --> 00:18:27,466
 with the plug-in's AU
 Audio Unit subclass.
 
-00:18:30.016 --> 00:18:33.036 A:middle
+
+326
+00:18:30,016 --> 00:18:33,036
 Now, as a host author, why
 would you want to do this?
 
-00:18:33.556 --> 00:18:35.986 A:middle
+
+327
+00:18:33,556 --> 00:18:35,986
 There is a tradeoff
 here between safety
 
-00:18:35.986 --> 00:18:37.396 A:middle
+
+328
+00:18:35,986 --> 00:18:37,396
 and performance is the reason.
 
-00:18:37.896 --> 00:18:41.326 A:middle
+
+329
+00:18:37,896 --> 00:18:41,326
 Of course, it's a security risk
 to be loading third-party code
 
-00:18:41.326 --> 00:18:46.056 A:middle
+
+330
+00:18:41,326 --> 00:18:46,056
 into your app, and if it
 crashes inside your app,
 
-00:18:46.406 --> 00:18:48.796 A:middle
+
+331
+00:18:46,406 --> 00:18:48,796
 then users might
 blame you instead
 
-00:18:48.796 --> 00:18:50.076 A:middle
+
+332
+00:18:48,796 --> 00:18:50,076
 of the misbehaving plug-in.
 
-00:18:51.516 --> 00:18:54.316 A:middle
+
+333
+00:18:51,516 --> 00:18:54,316
 But on the other hand, we
 have performance reasons
 
-00:18:54.316 --> 00:18:57.836 A:middle
+
+334
+00:18:54,316 --> 00:18:57,836
 where you may want to load
 plug-ins into your process
 
-00:18:57.836 --> 00:19:00.656 A:middle
+
+335
+00:18:57,836 --> 00:19:00,656
 if you are a host, because
 there is some overhead
 
 
-
-00:18:57.836 --> 00:19:00.656 A:middle
-if you are a host, because
-there is some overhead
-
-00:19:00.766 --> 00:19:03.176 A:middle
+336
+00:19:00,766 --> 00:19:03,176
 to communicating with
 that separate extension
 
-00:19:03.176 --> 00:19:04.256 A:middle
+
+337
+00:19:03,176 --> 00:19:04,256
 service process.
 
-00:19:04.856 --> 00:19:07.056 A:middle
+
+338
+00:19:04,856 --> 00:19:07,056
 And we have measured that
 as being on the order
 
-00:19:07.056 --> 00:19:09.326 A:middle
+
+339
+00:19:07,056 --> 00:19:09,326
 of 40 seconds microseconds
 per render cycle ,
 
-00:19:09.326 --> 00:19:13.146 A:middle
+
+340
+00:19:09,326 --> 00:19:13,146
 o you can do the math to figure
 out how significant that is
 
-00:19:13.146 --> 00:19:14.796 A:middle
+
+341
+00:19:13,146 --> 00:19:14,796
 in the context of your host.
 
-00:19:15.356 --> 00:19:16.446 A:middle
+
+342
+00:19:15,356 --> 00:19:16,446
 You have some number
 
-00:19:16.446 --> 00:19:19.526 A:middle
+
+343
+00:19:16,446 --> 00:19:19,526
 of out-of-process plug-ins you
 might be communicating with,
 
-00:19:20.066 --> 00:19:21.676 A:middle
+
+344
+00:19:20,066 --> 00:19:21,676
 so you have to add that up.
 
-00:19:22.236 --> 00:19:23.626 A:middle
+
+345
+00:19:22,236 --> 00:19:23,626
 And there is also the factor
 
-00:19:23.626 --> 00:19:26.856 A:middle
+
+346
+00:19:23,626 --> 00:19:26,856
 of how much audio you are
 asking them to render.
 
-00:19:27.656 --> 00:19:30.436 A:middle
+
+347
+00:19:27,656 --> 00:19:30,436
 For example, if you are
 rendering at a very low latency
 
-00:19:30.436 --> 00:19:33.676 A:middle
+
+348
+00:19:30,436 --> 00:19:33,676
 of 32 frames, that's a 1
 millisecond render interval,
 
-00:19:34.016 --> 00:19:37.196 A:middle
+
+349
+00:19:34,016 --> 00:19:37,196
 so overhead of 40 microseconds
 could be significant
 
-00:19:37.196 --> 00:19:38.496 A:middle
+
+350
+00:19:37,196 --> 00:19:38,496
 at 5.5 percent.
 
-00:19:39.096 --> 00:19:43.226 A:middle
+
+351
+00:19:39,096 --> 00:19:43,226
 So that's your tradeoff
 if you are a host author.
 
-00:19:44.996 --> 00:19:45.896 A:middle
+
+352
+00:19:44,996 --> 00:19:45,896
 I mentioned earlier
 
-00:19:45.896 --> 00:19:49.486 A:middle
+
+353
+00:19:45,896 --> 00:19:49,486
 that existing version 2 Audio
 Unit hosts need a few changes
 
-00:19:49.856 --> 00:19:52.146 A:middle
+
+354
+00:19:49,856 --> 00:19:52,146
 to work with version
 3 Audio Units,
 
-00:19:52.146 --> 00:19:53.986 A:middle
+
+355
+00:19:52,146 --> 00:19:53,986
 and here is what has to change.
 
-00:19:55.226 --> 00:19:58.556 A:middle
+
+356
+00:19:55,226 --> 00:19:58,556
 I mentioned the audio
 component description flags,
 
-00:19:59.166 --> 00:20:01.186 A:middle
+
+357
+00:19:59,166 --> 00:20:01,186
 and in there, the
 component flags.
 
 
-
-00:19:59.166 --> 00:20:01.186 A:middle
-and in there, the
-component flags.
-
-00:20:01.186 --> 00:20:04.646 A:middle
+358
+00:20:01,186 --> 00:20:04,646
 There is a new flag called
 Requires Async Instantiation.
 
-00:20:05.236 --> 00:20:09.566 A:middle
+
+359
+00:20:05,236 --> 00:20:09,566
 That's set for most if not
 all new version 3 Audio Units,
 
-00:20:10.006 --> 00:20:12.916 A:middle
+
+360
+00:20:10,006 --> 00:20:12,916
 so if you see that flag set
 in the component description,
 
-00:20:12.916 --> 00:20:16.556 A:middle
+
+361
+00:20:12,916 --> 00:20:16,556
 you have to use the new Audio
 Component Instantiate method
 
-00:20:16.936 --> 00:20:19.006 A:middle
+
+362
+00:20:16,936 --> 00:20:19,006
 instead of Audio
 Component Instance New.
 
-00:20:21.026 --> 00:20:23.746 A:middle
+
+363
+00:20:21,026 --> 00:20:23,746
 Now, similarly in an
 existing v ersion 2 host,
 
-00:20:24.386 --> 00:20:27.356 A:middle
+
+364
+00:20:24,386 --> 00:20:27,356
 if you want to access an
 Audio Unit's View Controller,
 
-00:20:28.146 --> 00:20:31.686 A:middle
+
+365
+00:20:28,146 --> 00:20:31,686
 then you also need to use a new
 asynchronous method to do that.
 
-00:20:32.096 --> 00:20:34.806 A:middle
+
+366
+00:20:32,096 --> 00:20:34,806
 There is a new property,
 Request View Controller.
 
-00:20:35.266 --> 00:20:36.546 A:middle
+
+367
+00:20:35,266 --> 00:20:36,546
 It is also asynchronous.
 
-00:20:36.546 --> 00:20:38.906 A:middle
+
+368
+00:20:36,546 --> 00:20:38,906
 You can read about
 the details of that
 
-00:20:39.116 --> 00:20:41.226 A:middle
+
+369
+00:20:39,116 --> 00:20:41,226
 in Audio Unit properties.h.
 
-00:20:43.606 --> 00:20:46.186 A:middle
+
+370
+00:20:43,606 --> 00:20:46,186
 So about these asynchronous
 methods.
 
-00:20:46.566 --> 00:20:49.886 A:middle
+
+371
+00:20:46,566 --> 00:20:49,886
 You can use the new methods
 with version 2 units,
 
-00:20:49.996 --> 00:20:53.616 A:middle
+
+372
+00:20:49,996 --> 00:20:53,616
 but you must use them
 with version 3 units
 
-00:20:53.616 --> 00:20:56.196 A:middle
+
+373
+00:20:53,616 --> 00:20:56,196
 when the flags are set.
 
-00:20:56.196 --> 00:20:58.836 A:middle
+
+374
+00:20:56,196 --> 00:20:58,836
 And the reasoning here,
 well, the big sort
 
-00:20:58.836 --> 00:21:01.926 A:middle
+
+375
+00:20:58,836 --> 00:21:01,926
 of externally facing reason is
 that it helps responsiveness.
 
 
-
-00:20:58.836 --> 00:21:01.926 A:middle
-of externally facing reason is
-that it helps responsiveness.
-
-00:21:02.236 --> 00:21:04.986 A:middle
+376
+00:21:02,236 --> 00:21:04,986
 If it's going to take half
 a second to instantiate
 
-00:21:04.986 --> 00:21:08.576 A:middle
+
+377
+00:21:04,986 --> 00:21:08,576
 that Audio Unit, well, if
 you unblock the main thread,
 
-00:21:09.186 --> 00:21:10.986 A:middle
+
+378
+00:21:09,186 --> 00:21:10,986
 your host applications, meters,
 
-00:21:10.986 --> 00:21:13.306 A:middle
+
+379
+00:21:10,986 --> 00:21:13,306
 or other animations will
 keep drawing smoothly.
 
-00:21:14.446 --> 00:21:16.976 A:middle
+
+380
+00:21:14,446 --> 00:21:16,976
 Now, especially when
 updating existing code --
 
-00:21:16.976 --> 00:21:18.336 A:middle
+
+381
+00:21:16,976 --> 00:21:18,336
 and this was the
 first thing I did
 
-00:21:18.336 --> 00:21:23.506 A:middle
+
+382
+00:21:18,336 --> 00:21:23,506
 when testing internal test code
 -- it's tempting to sit there
 
-00:21:23.506 --> 00:21:24.756 A:middle
+
+383
+00:21:23,506 --> 00:21:24,756
 and wait on the main thread
 
-00:21:24.756 --> 00:21:27.056 A:middle
+
+384
+00:21:24,756 --> 00:21:27,056
 for the asynchronous
 operation to complete.
 
-00:21:27.736 --> 00:21:31.906 A:middle
+
+385
+00:21:27,736 --> 00:21:31,906
 Well, don't do that, because not
 only will you block any graphics
 
-00:21:31.906 --> 00:21:35.786 A:middle
+
+386
+00:21:31,906 --> 00:21:35,786
 you are doing, but you will also
 block some underlying operations
 
-00:21:35.786 --> 00:21:38.226 A:middle
+
+387
+00:21:35,786 --> 00:21:38,226
 in the framework that
 are actually required
 
-00:21:38.226 --> 00:21:40.956 A:middle
+
+388
+00:21:38,226 --> 00:21:40,956
 for the Audio Unit
 to be instantiated.
 
-00:21:41.376 --> 00:21:43.756 A:middle
+
+389
+00:21:41,376 --> 00:21:43,756
 So you will deadlock if you
 block on the main thread.
 
-00:21:43.966 --> 00:21:47.546 A:middle
+
+390
+00:21:43,966 --> 00:21:47,546
 Don't do that.
 
-00:21:47.546 --> 00:21:49.476 A:middle
+
+391
+00:21:47,546 --> 00:21:49,476
 Now, I would like to
 switch gears from talking
 
-00:21:49.476 --> 00:21:53.006 A:middle
+
+392
+00:21:49,476 --> 00:21:53,006
 about hosting Audio Units
 to creating Audio Units
 
-00:21:53.006 --> 00:21:54.976 A:middle
+
+393
+00:21:53,006 --> 00:21:54,976
 with the new version 3 API.
 
-00:21:57.316 --> 00:21:59.776 A:middle
+
+394
+00:21:57,316 --> 00:21:59,776
 First, a few words
 about app extensions
 
-00:21:59.826 --> 00:22:04.246 A:middle
+
+395
+00:21:59,826 --> 00:22:04,246
 since the new Audio Unit model
 is based on app extensions.
 
 
-
-00:21:59.826 --> 00:22:04.246 A:middle
-since the new Audio Unit model
-is based on app extensions.
-
-00:22:05.466 --> 00:22:09.986 A:middle
+396
+00:22:05,466 --> 00:22:09,986
 App extensions are bundles with
 a file type extension of .appex.
 
-00:22:10.366 --> 00:22:13.606 A:middle
+
+397
+00:22:10,366 --> 00:22:13,606
 Xcode will build them into
 an app's plug-ins directory,
 
-00:22:14.026 --> 00:22:18.496 A:middle
+
+398
+00:22:14,026 --> 00:22:18,496
 and we saw how they get
 loaded by the system
 
-00:22:18.896 --> 00:22:21.526 A:middle
+
+399
+00:22:18,896 --> 00:22:21,526
 into separate extension
 service processes.
 
-00:22:22.206 --> 00:22:26.326 A:middle
+
+400
+00:22:22,206 --> 00:22:26,326
 You can read all about the nuts
 and bolts of app extensions
 
-00:22:26.586 --> 00:22:28.476 A:middle
+
+401
+00:22:26,586 --> 00:22:28,476
 in the app extension
 programming guide.
 
-00:22:31.206 --> 00:22:35.496 A:middle
+
+402
+00:22:31,206 --> 00:22:35,496
 Now, our new sample code
 project, Audio Unit v3 Example,
 
-00:22:35.956 --> 00:22:39.206 A:middle
+
+403
+00:22:35,956 --> 00:22:39,206
 contains a sample Audio
 Unit implementation called
 
-00:22:39.206 --> 00:22:39.916 A:middle
+
+404
+00:22:39,206 --> 00:22:39,916
 Filter Demo.
 
-00:22:42.656 --> 00:22:44.106 A:middle
+
+405
+00:22:42,656 --> 00:22:44,106
 Filter Demo, when you look
 
-00:22:44.106 --> 00:22:46.816 A:middle
+
+406
+00:22:44,106 --> 00:22:46,816
 at that sample project,
 has three targets.
 
-00:22:47.306 --> 00:22:49.316 A:middle
+
+407
+00:22:47,306 --> 00:22:49,316
 It has what we call
 the containing app,
 
-00:22:50.076 --> 00:22:54.556 A:middle
+
+408
+00:22:50,076 --> 00:22:54,556
 and what it contains is the app
 extension as well as a framework
 
-00:22:55.136 --> 00:22:58.506 A:middle
+
+409
+00:22:55,136 --> 00:22:58,506
 where a lot of its
 common code exists.
 
-00:22:58.616 --> 00:23:01.806 A:middle
+
+410
+00:22:58,616 --> 00:23:01,806
 Both the app and the extension
 link against this framework.
 
 
-
-00:22:58.616 --> 00:23:01.806 A:middle
-Both the app and the extension
-link against this framework.
-
-00:23:03.486 --> 00:23:06.756 A:middle
+411
+00:23:03,486 --> 00:23:06,756
 Now, inside this framework,
 we have two main classes.
 
-00:23:07.126 --> 00:23:08.866 A:middle
+
+412
+00:23:07,126 --> 00:23:08,866
 There is AU v3 Filter Demo,
 
-00:23:08.866 --> 00:23:11.436 A:middle
+
+413
+00:23:08,866 --> 00:23:11,436
 that's the AU Audio
 Unit subclass,
 
-00:23:11.706 --> 00:23:13.936 A:middle
+
+414
+00:23:11,706 --> 00:23:13,936
 and the Filter Demo
 View Controller
 
-00:23:14.766 --> 00:23:20.076 A:middle
+
+415
+00:23:14,766 --> 00:23:20,076
 that controls the custom
 view of the Audio Unit.
 
-00:23:20.486 --> 00:23:23.276 A:middle
+
+416
+00:23:20,486 --> 00:23:23,276
 Now, what's cool about
 doing things this way is
 
-00:23:23.336 --> 00:23:26.916 A:middle
+
+417
+00:23:23,336 --> 00:23:26,916
 that while we are developing our
 signal processing and view code,
 
-00:23:27.356 --> 00:23:30.016 A:middle
+
+418
+00:23:27,356 --> 00:23:30,016
 we can do this all in the
 context of our own app
 
-00:23:30.816 --> 00:23:34.676 A:middle
+
+419
+00:23:30,816 --> 00:23:34,676
 so we are debugging not in a
 separate SPC service process,
 
-00:23:35.116 --> 00:23:35.996 A:middle
+
+420
+00:23:35,116 --> 00:23:35,996
 but we are debugging
 
-00:23:35.996 --> 00:23:38.466 A:middle
+
+421
+00:23:35,996 --> 00:23:38,466
 and developing our code
 right there interactively
 
-00:23:38.726 --> 00:23:39.456 A:middle
+
+422
+00:23:38,726 --> 00:23:39,456
 in our own app.
 
-00:23:40.536 --> 00:23:43.516 A:middle
+
+423
+00:23:40,536 --> 00:23:43,516
 We also let our app
 look like something
 
-00:23:43.516 --> 00:23:44.666 A:middle
+
+424
+00:23:43,516 --> 00:23:44,666
 when the user opens it.
 
-00:23:44.666 --> 00:23:46.636 A:middle
+
+425
+00:23:44,666 --> 00:23:46,636
 It's not just a plug-in
 for somebody else.
 
-00:23:47.136 --> 00:23:49.976 A:middle
+
+426
+00:23:47,136 --> 00:23:49,976
 And we are not duplicating
 any code
 
-00:23:49.976 --> 00:23:51.286 A:middle
+
+427
+00:23:49,976 --> 00:23:51,286
 to be able to accomplish that.
 
-00:23:52.446 --> 00:23:57.246 A:middle
+
+428
+00:23:52,446 --> 00:23:57,246
 There is one extra bonus here
 that on OS X, if we want to,
 
-00:23:57.786 --> 00:24:00.516 A:middle
+
+429
+00:23:57,786 --> 00:24:00,516
 we can designate this
 framework as being the bundle
 
 
-
-00:23:57.786 --> 00:24:00.516 A:middle
-we can designate this
-framework as being the bundle
-
-00:24:00.716 --> 00:24:03.326 A:middle
+430
+00:24:00,716 --> 00:24:03,326
 that a host process
 can load into itself.
 
-00:24:03.946 --> 00:24:09.146 A:middle
+
+431
+00:24:03,946 --> 00:24:09,146
 So let's look at
 the app extension.
 
-00:24:09.146 --> 00:24:11.936 A:middle
+
+432
+00:24:09,146 --> 00:24:11,936
 It has an info plist
 with important entries.
 
-00:24:12.336 --> 00:24:15.516 A:middle
+
+433
+00:24:12,336 --> 00:24:15,516
 The NSExtensionPointIdentifier
 tells the system what kind
 
-00:24:15.516 --> 00:24:18.986 A:middle
+
+434
+00:24:15,516 --> 00:24:18,986
 of extension it is, the main
 storyboard tells the system,
 
-00:24:19.396 --> 00:24:22.276 A:middle
+
+435
+00:24:19,396 --> 00:24:22,276
 when you launch my
 extension service process,
 
-00:24:22.716 --> 00:24:23.946 A:middle
+
+436
+00:24:22,716 --> 00:24:23,946
 open the storyboard.
 
-00:24:25.206 --> 00:24:28.086 A:middle
+
+437
+00:24:25,206 --> 00:24:28,086
 And finally, there is an
 Audio Components array
 
-00:24:28.396 --> 00:24:32.136 A:middle
+
+438
+00:24:28,396 --> 00:24:32,136
 that tells the system, here are
 the audio component descriptions
 
-00:24:32.656 --> 00:24:33.716 A:middle
+
+439
+00:24:32,656 --> 00:24:33,716
 that I am registering.
 
-00:24:37.306 --> 00:24:40.626 A:middle
+
+440
+00:24:37,306 --> 00:24:40,626
 Just a quick reminder here, in
 your storyboard, you will want
 
-00:24:40.666 --> 00:24:44.506 A:middle
+
+441
+00:24:40,666 --> 00:24:44,506
 to be sure to specify
 your custom class.
 
-00:24:44.666 --> 00:24:47.496 A:middle
+
+442
+00:24:44,666 --> 00:24:47,496
 You may need to specify the
 module if you are building it
 
-00:24:47.496 --> 00:24:49.336 A:middle
+
+443
+00:24:47,496 --> 00:24:49,336
 into a separate framework
 like we are here.
 
-00:24:50.476 --> 00:24:53.326 A:middle
+
+444
+00:24:50,476 --> 00:24:53,326
 Then the extension actually
 has no code in it other
 
-00:24:53.326 --> 00:24:54.676 A:middle
+
+445
+00:24:53,326 --> 00:24:54,676
 than this little
 bit of dummy code
 
-00:24:54.676 --> 00:24:56.186 A:middle
+
+446
+00:24:54,676 --> 00:24:56,186
 to keep it from being empty.
 
-00:24:56.876 --> 00:24:59.076 A:middle
+
+447
+00:24:56,876 --> 00:24:59,076
 We have to link against
 the Filter Demo framework.
 
-00:24:59.176 --> 00:25:00.366 A:middle
+
+448
+00:24:59,176 --> 00:25:00,366
 All of the good stuff
 is in there,
 
 
-
-00:24:59.176 --> 00:25:00.366 A:middle
-All of the good stuff
-is in there,
-
-00:25:00.906 --> 00:25:05.656 A:middle
+449
+00:25:00,906 --> 00:25:05,656
 and here we just have a global
 variable referring to it.
 
-00:25:06.386 --> 00:25:07.936 A:middle
+
+450
+00:25:06,386 --> 00:25:07,936
 Let's move onto the
 framework now.
 
-00:25:09.366 --> 00:25:10.666 A:middle
+
+451
+00:25:09,366 --> 00:25:10,666
 So the main class
 
-00:25:10.666 --> 00:25:13.306 A:middle
+
+452
+00:25:10,666 --> 00:25:13,306
 in the framework is the
 Filter Demo View Controller.
 
-00:25:13.826 --> 00:25:15.436 A:middle
+
+453
+00:25:13,826 --> 00:25:15,436
 In extension terminology,
 
-00:25:15.436 --> 00:25:17.316 A:middle
+
+454
+00:25:15,436 --> 00:25:17,316
 this is the extension's
 principal class.
 
-00:25:17.736 --> 00:25:20.526 A:middle
+
+455
+00:25:17,736 --> 00:25:20,526
 Whenever the extension
 is created or loaded,
 
-00:25:20.926 --> 00:25:22.896 A:middle
+
+456
+00:25:20,926 --> 00:25:22,896
 the system will create
 an instance
 
-00:25:22.896 --> 00:25:24.586 A:middle
+
+457
+00:25:22,896 --> 00:25:24,586
 of that principal class.
 
-00:25:25.136 --> 00:25:26.596 A:middle
+
+458
+00:25:25,136 --> 00:25:26,596
 And it's got two main jobs.
 
-00:25:26.886 --> 00:25:30.796 A:middle
+
+459
+00:25:26,886 --> 00:25:30,796
 It in turn creates the AU
 Audio Unit subclass and,
 
-00:25:30.876 --> 00:25:33.526 A:middle
+
+460
+00:25:30,876 --> 00:25:33,526
 as a View Controller as you
 would expect, it creates
 
-00:25:33.526 --> 00:25:36.296 A:middle
+
+461
+00:25:33,526 --> 00:25:36,296
 and manages the plug-ins
 custom view.
 
-00:25:38.436 --> 00:25:39.896 A:middle
+
+462
+00:25:38,436 --> 00:25:39,896
 Here is the class declaration
 
-00:25:39.896 --> 00:25:41.526 A:middle
+
+463
+00:25:39,896 --> 00:25:41,526
 for the Filter Demo
 View Controller.
 
-00:25:42.226 --> 00:25:44.886 A:middle
+
+464
+00:25:42,226 --> 00:25:44,886
 It derives from AU
 View Controller,
 
-00:25:45.566 --> 00:25:48.656 A:middle
+
+465
+00:25:45,566 --> 00:25:48,656
 which is either an NS or UI
 View Controller basically,
 
-00:25:49.386 --> 00:25:52.396 A:middle
+
+466
+00:25:49,386 --> 00:25:52,396
 and it also implements a
 protocol called AU Audio
 
-00:25:52.396 --> 00:25:53.426 A:middle
+
+467
+00:25:52,396 --> 00:25:53,426
 Unit factory.
 
-00:25:53.916 --> 00:25:57.516 A:middle
+
+468
+00:25:53,916 --> 00:25:57,516
 That's a simple protocol and
 implements exactly one method,
 
-00:25:59.056 --> 00:26:01.236 A:middle
+
+469
+00:25:59,056 --> 00:26:01,236
 Create Audio Unit with
 Component Description.
 
 
-
-00:25:59.056 --> 00:26:01.236 A:middle
-Create Audio Unit with
-Component Description.
-
-00:26:02.546 --> 00:26:04.756 A:middle
+470
+00:26:02,546 --> 00:26:04,756
 And the job of this method is
 
-00:26:04.756 --> 00:26:07.266 A:middle
+
+471
+00:26:04,756 --> 00:26:07,266
 to create the AU
 Audio Unit subclass.
 
-00:26:08.706 --> 00:26:12.466 A:middle
+
+472
+00:26:08,706 --> 00:26:12,466
 And here it is, the
 AU v3 Filter Demo.
 
-00:26:14.606 --> 00:26:17.566 A:middle
+
+473
+00:26:14,606 --> 00:26:17,566
 Now, let's look at that
 AU Audio Unit subclass.
 
-00:26:18.236 --> 00:26:22.486 A:middle
+
+474
+00:26:18,236 --> 00:26:22,486
 So for reasons we will
 get into in a bit,
 
-00:26:22.946 --> 00:26:27.946 A:middle
+
+475
+00:26:22,946 --> 00:26:27,946
 these are actually embedded
 C++ classes or objects.
 
-00:26:28.006 --> 00:26:31.396 A:middle
+
+476
+00:26:28,006 --> 00:26:31,396
 The filter DSP kernel is
 where all of the math happens.
 
-00:26:33.256 --> 00:26:34.186 A:middle
+
+477
+00:26:33,256 --> 00:26:34,186
 We will listen to it later.
 
-00:26:34.186 --> 00:26:37.836 A:middle
+
+478
+00:26:34,186 --> 00:26:37,836
 It's a little more interesting
 than looking at its code.
 
-00:26:37.936 --> 00:26:42.806 A:middle
+
+479
+00:26:37,936 --> 00:26:42,806
 We have some code here
 dealing with the buses.
 
-00:26:43.136 --> 00:26:43.896 A:middle
+
+480
+00:26:43,136 --> 00:26:43,896
 This is an effect.
 
-00:26:43.896 --> 00:26:47.656 A:middle
+
+481
+00:26:43,896 --> 00:26:47,656
 It has one input and one output,
 and our base class is going
 
-00:26:47.656 --> 00:26:51.006 A:middle
+
+482
+00:26:47,656 --> 00:26:51,006
 to want us to provide
 arrays of buses
 
-00:26:51.126 --> 00:26:52.736 A:middle
+
+483
+00:26:51,126 --> 00:26:52,736
 so we have numbers
 to support that.
 
-00:26:53.176 --> 00:26:55.446 A:middle
+
+484
+00:26:53,176 --> 00:26:55,446
 And we have something
 called a parameter tree.
 
-00:26:55.516 --> 00:26:57.916 A:middle
+
+485
+00:26:55,516 --> 00:26:57,916
 We will see what that
 is in just a second.
 
-00:26:58.476 --> 00:26:59.496 A:middle
+
+486
+00:26:58,476 --> 00:26:59,496
 Here is the initializer.
 
 
-
-00:27:00.586 --> 00:27:03.196 A:middle
+487
+00:27:00,586 --> 00:27:03,196
 So the first thing we do
 is initialize our input
 
-00:27:03.196 --> 00:27:07.606 A:middle
+
+488
+00:27:03,196 --> 00:27:07,606
 and output buses, and then
 we wrap them in bus arrays.
 
-00:27:09.086 --> 00:27:12.136 A:middle
+
+489
+00:27:09,086 --> 00:27:12,136
 And these arrays each
 contain a single bus.
 
-00:27:16.346 --> 00:27:18.346 A:middle
+
+490
+00:27:16,346 --> 00:27:18,346
 And now we are looking
 at parameters.
 
-00:27:18.946 --> 00:27:23.446 A:middle
+
+491
+00:27:18,946 --> 00:27:23,446
 So every parameter is an object,
 and you can think of this object
 
-00:27:23.446 --> 00:27:26.356 A:middle
+
+492
+00:27:23,446 --> 00:27:26,356
 as kind of the bridge
 between your implementation
 
-00:27:26.716 --> 00:27:27.436 A:middle
+
+493
+00:27:26,716 --> 00:27:27,436
 and the host.
 
-00:27:27.436 --> 00:27:30.516 A:middle
+
+494
+00:27:27,436 --> 00:27:30,516
 In the middle, there is
 the parameter object.
 
-00:27:30.896 --> 00:27:32.486 A:middle
+
+495
+00:27:30,896 --> 00:27:32,486
 This is a simple
 low-pass filter,
 
-00:27:32.486 --> 00:27:34.096 A:middle
+
+496
+00:27:32,486 --> 00:27:34,096
 so it's only got two parameters,
 
-00:27:34.356 --> 00:27:36.086 A:middle
+
+497
+00:27:34,356 --> 00:27:36,086
 a cutoff frequency
 and residence.
 
-00:27:36.936 --> 00:27:39.146 A:middle
+
+498
+00:27:36,936 --> 00:27:39,146
 Every parameter has
 an identifier,
 
-00:27:39.426 --> 00:27:41.176 A:middle
+
+499
+00:27:39,426 --> 00:27:41,176
 so here we are saying
 it's cutoff.
 
-00:27:41.176 --> 00:27:42.886 A:middle
+
+500
+00:27:41,176 --> 00:27:42,886
 It has a localizalbe name.
 
-00:27:42.886 --> 00:27:44.806 A:middle
+
+501
+00:27:42,886 --> 00:27:44,806
 We are being bad and
 not localizing it here.
 
-00:27:45.616 --> 00:27:47.006 A:middle
+
+502
+00:27:45,616 --> 00:27:47,006
 It has an address.
 
-00:27:47.006 --> 00:27:48.326 A:middle
+
+503
+00:27:47,006 --> 00:27:48,326
 We will talk about
 that in a bit.
 
-00:27:48.926 --> 00:27:52.906 A:middle
+
+504
+00:27:48,926 --> 00:27:52,906
 Arrange, and some units, and
 flags which you will recognize
 
-00:27:52.906 --> 00:27:55.066 A:middle
+
+505
+00:27:52,906 --> 00:27:55,066
 as being almost identical
 to what we do
 
-00:27:55.066 --> 00:27:56.596 A:middle
+
+506
+00:27:55,066 --> 00:27:56,596
 with version 2 Audio Units.
 
-00:27:57.366 --> 00:27:59.366 A:middle
+
+507
+00:27:57,366 --> 00:27:59,366
 So here we have created
 our first parameter.
 
-00:27:59.366 --> 00:28:02.726 A:middle
+
+508
+00:27:59,366 --> 00:28:02,726
 We will create our second
 one almost identically.
 
 
-
-00:27:59.366 --> 00:28:02.726 A:middle
-We will create our second
-one almost identically.
-
-00:28:03.736 --> 00:28:06.656 A:middle
+509
+00:28:03,736 --> 00:28:06,656
 And then finally we can
 create our parameter tree,
 
-00:28:07.206 --> 00:28:09.736 A:middle
+
+510
+00:28:07,206 --> 00:28:09,736
 passing an array of
 those two parameters.
 
-00:28:11.126 --> 00:28:14.976 A:middle
+
+511
+00:28:11,126 --> 00:28:14,976
 Now, we have our parameter tree,
 and we want to wire it up so
 
-00:28:14.976 --> 00:28:17.276 A:middle
+
+512
+00:28:14,976 --> 00:28:17,276
 that it's connected
 to our DSP code.
 
-00:28:19.126 --> 00:28:21.536 A:middle
+
+513
+00:28:19,126 --> 00:28:21,536
 And the way we do this
 is install a block
 
-00:28:21.796 --> 00:28:25.556 A:middle
+
+514
+00:28:21,796 --> 00:28:25,556
 into the parameter tree called
 the Implementer Value Observer.
 
-00:28:26.866 --> 00:28:30.276 A:middle
+
+515
+00:28:26,866 --> 00:28:30,276
 So this block will get
 called any time somebody,
 
-00:28:30.276 --> 00:28:33.866 A:middle
+
+516
+00:28:30,276 --> 00:28:33,866
 whether it's the host or our
 own view, changes a parameter,
 
-00:28:34.556 --> 00:28:37.696 A:middle
+
+517
+00:28:34,556 --> 00:28:37,696
 And so in response to that
 change, we will simply set
 
-00:28:37.756 --> 00:28:40.466 A:middle
+
+518
+00:28:37,756 --> 00:28:40,466
 that new value on
 our filter DSP kernel
 
-00:28:40.996 --> 00:28:43.286 A:middle
+
+519
+00:28:40,996 --> 00:28:43,286
 so that it takes
 immediate audible effect.
 
-00:28:45.576 --> 00:28:47.726 A:middle
+
+520
+00:28:45,576 --> 00:28:47,726
 Now, in the other
 direction, there are times
 
-00:28:47.726 --> 00:28:51.536 A:middle
+
+521
+00:28:47,726 --> 00:28:51,536
 when the tree needs to refresh
 its value based on what we have
 
-00:28:51.536 --> 00:28:52.756 A:middle
+
+522
+00:28:51,536 --> 00:28:52,756
 in our signal processing.
 
-00:28:53.326 --> 00:28:55.066 A:middle
+
+523
+00:28:53,326 --> 00:28:55,066
 That's what this block does.
 
-00:28:55.636 --> 00:28:59.146 A:middle
+
+524
+00:28:55,636 --> 00:28:59,146
 It fetches the current
 value from the DSP
 
-00:28:59.146 --> 00:29:00.766 A:middle
+
+525
+00:28:59,146 --> 00:29:00,766
 and returns it to the tree.
 
 
-
-00:28:59.146 --> 00:29:00.766 A:middle
-and returns it to the tree.
-
-00:29:04.086 --> 00:29:07.066 A:middle
+526
+00:29:04,086 --> 00:29:07,066
 Next, this is an
 important override method.
 
-00:29:07.586 --> 00:29:09.926 A:middle
+
+527
+00:29:07,586 --> 00:29:09,926
 If you're familiar with the
 version 2 Audio Unit API,
 
-00:29:10.136 --> 00:29:12.746 A:middle
+
+528
+00:29:10,136 --> 00:29:12,746
 this was called Audio
 Unit Initialize,
 
-00:29:13.866 --> 00:29:17.196 A:middle
+
+529
+00:29:13,866 --> 00:29:17,196
 which is not a good name choice
 in the Objective-C world.
 
-00:29:17.676 --> 00:29:19.996 A:middle
+
+530
+00:29:17,676 --> 00:29:19,996
 So we decided to make
 it very specific.
 
-00:29:20.946 --> 00:29:25.116 A:middle
+
+531
+00:29:20,946 --> 00:29:25,116
 What was initialize time
 is really prepare to render
 
-00:29:25.456 --> 00:29:28.666 A:middle
+
+532
+00:29:25,456 --> 00:29:28,666
 and allocate the resources that
 are associated with rendering.
 
-00:29:29.936 --> 00:29:33.636 A:middle
+
+533
+00:29:29,936 --> 00:29:33,636
 So there are things like
 buffers, DSP state, and so on.
 
-00:29:34.546 --> 00:29:37.636 A:middle
+
+534
+00:29:34,546 --> 00:29:37,636
 So the first thing we do here
 is called the base class method.
 
-00:29:39.126 --> 00:29:42.596 A:middle
+
+535
+00:29:39,126 --> 00:29:42,596
 Then we can ask our input
 bus to allocate some memory
 
-00:29:42.786 --> 00:29:44.646 A:middle
+
+536
+00:29:42,786 --> 00:29:44,646
 for audio input to the plug-in,
 
-00:29:45.776 --> 00:29:50.806 A:middle
+
+537
+00:29:45,776 --> 00:29:50,806
 and we can initialize our signal
 processing code here based
 
-00:29:50.806 --> 00:29:55.636 A:middle
+
+538
+00:29:50,806 --> 00:29:55,636
 on the current channel count and
 sample rate of the output bus.
 
-00:29:58.456 --> 00:30:01.276 A:middle
+
+539
+00:29:58,456 --> 00:30:01,276
 So entirely parallel, we
 have a method that's called
 
 
-
-00:29:58.456 --> 00:30:01.276 A:middle
-So entirely parallel, we
-have a method that's called
-
-00:30:01.566 --> 00:30:03.496 A:middle
+540
+00:30:01,566 --> 00:30:03,496
 to deallocate render resources.
 
-00:30:03.886 --> 00:30:05.746 A:middle
+
+541
+00:30:03,886 --> 00:30:05,746
 And here, too, we
 call the base class
 
-00:30:06.106 --> 00:30:09.526 A:middle
+
+542
+00:30:06,106 --> 00:30:09,526
 and basically undo whatever
 we did when allocating.
 
-00:30:12.536 --> 00:30:15.886 A:middle
+
+543
+00:30:12,536 --> 00:30:15,886
 So the process of rendering
 works through a block
 
-00:30:16.886 --> 00:30:21.406 A:middle
+
+544
+00:30:16,886 --> 00:30:21,406
 that gets called every render
 cycle, but we are asked
 
-00:30:21.506 --> 00:30:24.436 A:middle
+
+545
+00:30:21,506 --> 00:30:24,436
 to provide this block
 before starting to render.
 
-00:30:25.806 --> 00:30:30.366 A:middle
+
+546
+00:30:25,806 --> 00:30:30,366
 Here we are going to
 capture our C++ members
 
-00:30:30.366 --> 00:30:32.586 A:middle
+
+547
+00:30:30,366 --> 00:30:32,586
 into local variables
 that are pointers.
 
-00:30:33.236 --> 00:30:37.856 A:middle
+
+548
+00:30:33,236 --> 00:30:37,856
 Now, the reason for this
 is that we are going
 
-00:30:38.196 --> 00:30:41.816 A:middle
+
+549
+00:30:38,196 --> 00:30:41,816
 to be running our block for
 rendering in a real-time context
 
-00:30:42.296 --> 00:30:46.136 A:middle
+
+550
+00:30:42,296 --> 00:30:46,136
 where it's not safe to access
 any Objective-C objects
 
-00:30:46.476 --> 00:30:49.296 A:middle
+
+551
+00:30:46,476 --> 00:30:49,296
 because the runtime could block
 and cause an audio glitch.
 
-00:30:50.076 --> 00:30:51.906 A:middle
+
+552
+00:30:50,076 --> 00:30:51,906
 So, again, we are just going
 
-00:30:51.906 --> 00:30:54.696 A:middle
+
+553
+00:30:51,906 --> 00:30:54,696
 to capture our C++
 member variables.
 
-00:30:57.406 --> 00:30:58.846 A:middle
+
+554
+00:30:57,406 --> 00:30:58,846
 And then we can return
 the block.
 
-00:30:59.936 --> 00:31:02.036 A:middle
+
+555
+00:30:59,936 --> 00:31:02,036
 It returns AU Audio Unit status.
 
 
-
-00:30:59.936 --> 00:31:02.036 A:middle
-It returns AU Audio Unit status.
-
-00:31:03.086 --> 00:31:05.436 A:middle
+556
+00:31:03,086 --> 00:31:05,436
 And if you are familiar
 with the version 2 API,
 
-00:31:05.606 --> 00:31:07.466 A:middle
+
+557
+00:31:05,606 --> 00:31:07,466
 the parameters are
 largely the same.
 
-00:31:07.846 --> 00:31:10.456 A:middle
+
+558
+00:31:07,846 --> 00:31:10,456
 There is a time stamp, a
 number of sample frames,
 
-00:31:11.016 --> 00:31:12.486 A:middle
+
+559
+00:31:11,016 --> 00:31:12,486
 an output audio buffer list,
 
-00:31:13.046 --> 00:31:15.906 A:middle
+
+560
+00:31:13,046 --> 00:31:15,906
 and here is something new called
 the real-time event list head.
 
-00:31:16.886 --> 00:31:19.786 A:middle
+
+561
+00:31:16,886 --> 00:31:19,786
 I will talk about that
 in detail, but it relates
 
-00:31:19.786 --> 00:31:22.576 A:middle
+
+562
+00:31:19,786 --> 00:31:22,576
 to scheduled parameters
 and MIDI events.
 
-00:31:25.536 --> 00:31:27.356 A:middle
+
+563
+00:31:25,536 --> 00:31:27,356
 And finally, the
 Pull Input block.
 
-00:31:27.896 --> 00:31:31.076 A:middle
+
+564
+00:31:27,896 --> 00:31:31,076
 This is how the host
 tells us, the implementer
 
-00:31:31.076 --> 00:31:33.926 A:middle
+
+565
+00:31:31,076 --> 00:31:33,926
 of the Audio Unit,
 where to get input from.
 
-00:31:35.596 --> 00:31:37.106 A:middle
+
+566
+00:31:35,596 --> 00:31:37,106
 So in the guts of
 the input block,
 
-00:31:37.416 --> 00:31:40.876 A:middle
+
+567
+00:31:37,416 --> 00:31:40,876
 the first thing we will do
 is pass that Pull Input block
 
-00:31:41.146 --> 00:31:46.096 A:middle
+
+568
+00:31:41,146 --> 00:31:46,096
 to our input C++ object
 and ask that input object
 
-00:31:46.336 --> 00:31:49.476 A:middle
+
+569
+00:31:46,336 --> 00:31:49,476
 to fetch the audio input
 for this render cycle.
 
-00:31:51.056 --> 00:31:53.316 A:middle
+
+570
+00:31:51,056 --> 00:31:53,316
 Then we are going to do some
 housekeeping with buffers.
 
-00:31:53.316 --> 00:31:58.546 A:middle
+
+571
+00:31:53,316 --> 00:31:58,546
 We will send them down to
 the DSP state, and finally,
 
-00:31:59.046 --> 00:32:03.336 A:middle
+
+572
+00:31:59,046 --> 00:32:03,336
 we ask the DSP state to process
 the audio for this render cycle.
 
 
-
-00:31:59.046 --> 00:32:03.336 A:middle
-we ask the DSP state to process
-the audio for this render cycle.
-
-00:32:04.376 --> 00:32:06.806 A:middle
+573
+00:32:04,376 --> 00:32:06,806
 It's already been
 informed of the buffers,
 
-00:32:06.896 --> 00:32:09.966 A:middle
+
+574
+00:32:06,896 --> 00:32:09,966
 and we are just going to give it
 a time stamp, the frame count,
 
-00:32:10.176 --> 00:32:12.426 A:middle
+
+575
+00:32:10,176 --> 00:32:12,426
 and the linked list
 of real-time events.
 
-00:32:12.896 --> 00:32:15.636 A:middle
+
+576
+00:32:12,896 --> 00:32:15,636
 So that's the guts
 of this Audio Unit,
 
-00:32:15.636 --> 00:32:16.636 A:middle
+
+577
+00:32:15,636 --> 00:32:16,636
 there is not a whole
 lot of code.
 
-00:32:16.636 --> 00:32:18.006 A:middle
+
+578
+00:32:16,636 --> 00:32:18,006
 There is a lot more code
 
-00:32:18.006 --> 00:32:19.766 A:middle
+
+579
+00:32:18,006 --> 00:32:19,766
 that does the actual
 signal processing,
 
-00:32:20.366 --> 00:32:23.046 A:middle
+
+580
+00:32:20,366 --> 00:32:23,046
 but as I mentioned before,
 it's better to listen
 
-00:32:23.046 --> 00:32:24.076 A:middle
+
+581
+00:32:23,046 --> 00:32:24,076
 to that than to look at it.
 
-00:32:24.076 --> 00:32:25.736 A:middle
+
+582
+00:32:24,076 --> 00:32:25,736
 So I would like to bring
 Michael Hopkins back
 
-00:32:25.736 --> 00:32:29.326 A:middle
+
+583
+00:32:25,736 --> 00:32:29,326
 up to show us the
 AU v3 Filter Demo.
 
-00:32:31.316 --> 00:32:32.906 A:middle
-&gt;&gt; MICHAEL HOPKINS:
+
+584
+00:32:31,316 --> 00:32:32,906
+>> MICHAEL HOPKINS:
 Thank you, Doug.
 
-00:32:33.516 --> 00:32:39.836 A:middle
+
+585
+00:32:33,516 --> 00:32:39,836
 [Applause]
 
-00:32:40.336 --> 00:32:44.316 A:middle
+
+586
+00:32:40,336 --> 00:32:44,316
 I'm going to go ahead and
 start with the app container
 
-00:32:44.316 --> 00:32:46.056 A:middle
+
+587
+00:32:44,316 --> 00:32:46,056
 that contains the extension.
 
-00:32:46.906 --> 00:32:49.686 A:middle
+
+588
+00:32:46,906 --> 00:32:49,686
 You will see first on the screen
 
-00:32:49.686 --> 00:32:51.916 A:middle
+
+589
+00:32:49,686 --> 00:32:51,916
 in the left-hand side
 is our Filter Demo,
 
-00:32:52.286 --> 00:32:54.156 A:middle
+
+590
+00:32:52,286 --> 00:32:54,156
 which we have distributed
 as sample code.
 
-00:32:54.676 --> 00:32:58.166 A:middle
+
+591
+00:32:54,676 --> 00:32:58,166
 To the right of it is the
 distortion demo application
 
-00:32:58.166 --> 00:32:59.296 A:middle
+
+592
+00:32:58,166 --> 00:32:59,296
 that I showed you earlier.
 
-00:32:59.896 --> 00:33:02.026 A:middle
+
+593
+00:32:59,896 --> 00:33:02,026
 I will go ahead and
 launch the Filter Demo.
 
 
-
-00:32:59.896 --> 00:33:02.026 A:middle
-I will go ahead and
-launch the Filter Demo.
-
-00:33:03.236 --> 00:33:04.966 A:middle
+594
+00:33:03,236 --> 00:33:04,966
 Now, at the top of the screen,
 
-00:33:04.966 --> 00:33:06.416 A:middle
+
+595
+00:33:04,966 --> 00:33:06,416
 you will notice the
 two parameters
 
-00:33:06.416 --> 00:33:07.656 A:middle
+
+596
+00:33:06,416 --> 00:33:07,656
 that Doug talked about.
 
-00:33:08.116 --> 00:33:10.406 A:middle
+
+597
+00:33:08,116 --> 00:33:10,406
 We have the cutoff in
 the residence parameter,
 
-00:33:10.866 --> 00:33:12.766 A:middle
+
+598
+00:33:10,866 --> 00:33:12,766
 and these are represented
 in our UI
 
-00:33:12.766 --> 00:33:14.836 A:middle
+
+599
+00:33:12,766 --> 00:33:14,836
 with a slider and a text field.
 
-00:33:15.326 --> 00:33:18.406 A:middle
+
+600
+00:33:15,326 --> 00:33:18,406
 And this portion of the
 UI is actually contained
 
-00:33:18.406 --> 00:33:22.686 A:middle
+
+601
+00:33:18,406 --> 00:33:22,686
 in the application, whereas the
 larger area in the main screen
 
-00:33:22.686 --> 00:33:26.146 A:middle
+
+602
+00:33:22,686 --> 00:33:26,146
 with the graph is
 actually our embedded view
 
-00:33:26.546 --> 00:33:28.636 A:middle
+
+603
+00:33:26,546 --> 00:33:28,636
 from the Audio Unit.
 
-00:33:29.066 --> 00:33:32.816 A:middle
+
+604
+00:33:29,066 --> 00:33:32,816
 I can go ahead and change
 the value of the parameters
 
-00:33:32.816 --> 00:33:34.186 A:middle
+
+605
+00:33:32,816 --> 00:33:34,186
 by dragging the slider.
 
-00:33:35.006 --> 00:33:38.596 A:middle
+
+606
+00:33:35,006 --> 00:33:38,596
 And what's happening here is
 the application is changing the
 
-00:33:38.596 --> 00:33:39.936 A:middle
+
+607
+00:33:38,596 --> 00:33:39,936
 value of that parameter.
 
-00:33:40.446 --> 00:33:43.866 A:middle
+
+608
+00:33:40,446 --> 00:33:43,866
 And the view is listening for
 changes to that parameter,
 
-00:33:43.866 --> 00:33:44.866 A:middle
+
+609
+00:33:43,866 --> 00:33:44,866
 and then it's updating.
 
-00:33:45.586 --> 00:33:47.856 A:middle
+
+610
+00:33:45,586 --> 00:33:47,856
 As you will see,
 that update is live.
 
-00:33:48.536 --> 00:33:50.866 A:middle
+
+611
+00:33:48,536 --> 00:33:50,866
 Conversely, I can
 interact directly
 
-00:33:50.866 --> 00:33:54.386 A:middle
+
+612
+00:33:50,866 --> 00:33:54,386
 with our embedded Audio
 Unit view by tapping
 
-00:33:54.386 --> 00:33:55.726 A:middle
+
+613
+00:33:54,386 --> 00:33:55,726
 in the graph and dragging.
 
-00:33:56.046 --> 00:33:58.746 A:middle
+
+614
+00:33:56,046 --> 00:33:58,746
 And you will notice that as
 I drag that with my finger,
 
-00:33:58.746 --> 00:34:01.206 A:middle
+
+615
+00:33:58,746 --> 00:34:01,206
 the application is
 receiving notifications
 
 
-
-00:33:58.746 --> 00:34:01.206 A:middle
-the application is
-receiving notifications
-
-00:34:01.206 --> 00:34:04.496 A:middle
+616
+00:34:01,206 --> 00:34:04,496
 that the parameters have changed
 and it's updating in turn.
 
-00:34:04.856 --> 00:34:08.396 A:middle
+
+617
+00:34:04,856 --> 00:34:08,396
 But that's kind of a boring
 demo without any audio going
 
-00:34:08.396 --> 00:34:09.286 A:middle
+
+618
+00:34:08,396 --> 00:34:09,286
 through it, wouldn't you say?
 
-00:34:09.976 --> 00:34:12.286 A:middle
+
+619
+00:34:09,976 --> 00:34:12,286
 Let's go ahead and
 take a listen to that.
 
-00:34:14.516 --> 00:34:29.746 A:middle
+
+620
+00:34:14,516 --> 00:34:29,746
 [Music]
 
-00:34:30.246 --> 00:34:31.976 A:middle
+
+621
+00:34:30,246 --> 00:34:31,976
 I could do this all day.
 
-00:34:32.085 --> 00:34:32.735 A:middle
+
+622
+00:34:32,085 --> 00:34:32,735
 You got time?
 
-00:34:34.996 --> 00:34:40.085 A:middle
+
+623
+00:34:34,996 --> 00:34:40,085
 Now, it's really, really
 cool to just, the fluidity.
 
-00:34:40.545 --> 00:34:41.146 A:middle
+
+624
+00:34:40,545 --> 00:34:41,146
 Thank you.
 
-00:34:41.255 --> 00:34:44.596 A:middle
+
+625
+00:34:41,255 --> 00:34:44,596
 Just how fun it is to use your
 fingers to just be able to play
 
-00:34:44.596 --> 00:34:45.956 A:middle
+
+626
+00:34:44,596 --> 00:34:45,956
 with that in a Multi-Touch UI.
 
-00:34:46.446 --> 00:34:47.616 A:middle
+
+627
+00:34:46,446 --> 00:34:47,616
 It's phenomenal.
 
-00:34:47.696 --> 00:34:51.545 A:middle
+
+628
+00:34:47,696 --> 00:34:51,545
 Another thing that's
 cool about this is
 
-00:34:51.545 --> 00:34:55.766 A:middle
+
+629
+00:34:51,545 --> 00:34:55,766
 because we have designed the
 user interface in such a way
 
-00:34:55.766 --> 00:35:00.006 A:middle
+
+630
+00:34:55,766 --> 00:35:00,006
 that it can adapt to any
 size that it's embedded in,
 
 
-
-00:34:55.766 --> 00:35:00.006 A:middle
-that it can adapt to any
-size that it's embedded in,
-
-00:35:00.466 --> 00:35:04.586 A:middle
+631
+00:35:00,466 --> 00:35:04,586
 we can actually take this iPad
 and we can rotate it sideways,
 
-00:35:04.586 --> 00:35:07.616 A:middle
+
+632
+00:35:04,586 --> 00:35:07,616
 and you can see that now the
 user interface is updated.
 
-00:35:07.956 --> 00:35:12.366 A:middle
+
+633
+00:35:07,956 --> 00:35:12,366
 And from a portrait view to a
 landscape view, and vice versa.
 
-00:35:14.566 --> 00:35:17.886 A:middle
+
+634
+00:35:14,566 --> 00:35:17,886
 Now, we are doing that because
 we are supporting Auto Layout
 
-00:35:17.886 --> 00:35:20.866 A:middle
+
+635
+00:35:17,886 --> 00:35:20,866
 and we are looking at size
 classes, so that's really great.
 
-00:35:20.866 --> 00:35:23.806 A:middle
+
+636
+00:35:20,866 --> 00:35:23,806
 But what happens when we go
 and we take this and we put it
 
-00:35:23.806 --> 00:35:26.156 A:middle
+
+637
+00:35:23,806 --> 00:35:26,156
 into our host app, which
 has a much smaller amount
 
-00:35:26.156 --> 00:35:29.236 A:middle
+
+638
+00:35:26,156 --> 00:35:29,236
 of screen real estate
 dedicated to plug-ins?
 
-00:35:30.076 --> 00:35:33.246 A:middle
+
+639
+00:35:30,076 --> 00:35:33,246
 So I will go ahead and
 switch back, and we are going
 
-00:35:33.246 --> 00:35:34.396 A:middle
+
+640
+00:35:33,246 --> 00:35:34,396
 to open the host there.
 
-00:35:34.536 --> 00:35:37.416 A:middle
+
+641
+00:35:34,536 --> 00:35:37,416
 I'm going to get rid of the
 beautiful distortion demo
 
-00:35:37.516 --> 00:35:40.436 A:middle
+
+642
+00:35:37,516 --> 00:35:40,436
 and embed our Filter Demo view.
 
-00:35:40.466 --> 00:35:41.846 A:middle
+
+643
+00:35:40,466 --> 00:35:41,846
 Tap on View to load that.
 
-00:35:42.276 --> 00:35:43.986 A:middle
+
+644
+00:35:42,276 --> 00:35:43,986
 And now you can see
 that that's being loaded
 
-00:35:43.986 --> 00:35:50.096 A:middle
+
+645
+00:35:43,986 --> 00:35:50,096
 in a constrained vertical space
 and a very wide horizontal space
 
-00:35:50.636 --> 00:35:52.586 A:middle
+
+646
+00:35:50,636 --> 00:35:52,586
 yet it still works
 as you would expect,
 
-00:35:52.586 --> 00:35:55.806 A:middle
+
+647
+00:35:52,586 --> 00:35:55,806
 and none of the labels overlap.
 
-00:35:56.176 --> 00:36:00.606 A:middle
+
+648
+00:35:56,176 --> 00:36:00,606
 It still works exactly
 as we would expect.
 
 
-
-00:35:56.176 --> 00:36:00.606 A:middle
-It still works exactly
-as we would expect.
-
-00:36:02.156 --> 00:36:04.186 A:middle
+649
+00:36:02,156 --> 00:36:04,186
 So this is a fantastic
 new technology,
 
-00:36:04.186 --> 00:36:06.926 A:middle
+
+650
+00:36:04,186 --> 00:36:06,926
 and we are so excited to be able
 to finally bring it to you guys
 
-00:36:07.216 --> 00:36:10.996 A:middle
+
+651
+00:36:07,216 --> 00:36:10,996
 and I can't wait to see what
 do in your own iOS apps.
 
-00:36:11.676 --> 00:36:11.976 A:middle
+
+652
+00:36:11,676 --> 00:36:11,976
 Thank you.
 
-00:36:12.516 --> 00:36:15.616 A:middle
+
+653
+00:36:12,516 --> 00:36:15,616
 [Applause]
 
-00:36:16.116 --> 00:36:17.356 A:middle
-&gt;&gt; DOUG WYATT: Thank
+
+654
+00:36:16,116 --> 00:36:17,356
+>> DOUG WYATT: Thank
 you, Michael.
 
-00:36:18.926 --> 00:36:24.126 A:middle
+
+655
+00:36:18,926 --> 00:36:24,126
 Just a few words now about
 the containing app in general.
 
-00:36:24.746 --> 00:36:27.146 A:middle
+
+656
+00:36:24,746 --> 00:36:27,146
 It is a vehicle for your
 plug-in and helps you
 
-00:36:27.146 --> 00:36:30.826 A:middle
+
+657
+00:36:27,146 --> 00:36:30,826
 with rapid iteration and
 development, but you can think
 
-00:36:30.826 --> 00:36:33.556 A:middle
+
+658
+00:36:30,826 --> 00:36:33,556
 about putting some extra
 things in that containing app.
 
-00:36:34.076 --> 00:36:36.886 A:middle
+
+659
+00:36:34,076 --> 00:36:36,886
 We saw with the Filter Demo that
 it has the simple play engine,
 
-00:36:37.376 --> 00:36:40.526 A:middle
+
+660
+00:36:37,376 --> 00:36:40,526
 you may for whatever reason
 want a more complex play engine
 
-00:36:40.526 --> 00:36:41.146 A:middle
+
+661
+00:36:40,526 --> 00:36:41,146
 of some sort.
 
-00:36:41.496 --> 00:36:44.396 A:middle
+
+662
+00:36:41,496 --> 00:36:44,396
 This is also a good
 place, the containing app,
 
-00:36:44.466 --> 00:36:47.556 A:middle
+
+663
+00:36:44,466 --> 00:36:47,556
 to try putting creative
 touch controller.
 
-00:36:47.826 --> 00:36:49.736 A:middle
+
+664
+00:36:47,826 --> 00:36:49,736
 There may not be room
 in a plug-in view
 
-00:36:50.036 --> 00:36:51.286 A:middle
+
+665
+00:36:50,036 --> 00:36:51,286
 for your full touch controller.
 
-00:36:51.356 --> 00:36:54.936 A:middle
+
+666
+00:36:51,356 --> 00:36:54,936
 Maybe there is, but you might
 think about having extra,
 
-00:36:55.336 --> 00:36:56.866 A:middle
+
+667
+00:36:55,336 --> 00:36:56,866
 an extra-large version
 or something
 
-00:36:56.866 --> 00:36:57.906 A:middle
+
+668
+00:36:56,866 --> 00:36:57,906
 in your containing app.
 
-00:36:58.786 --> 00:37:02.186 A:middle
+
+669
+00:36:58,786 --> 00:37:02,186
 The app is also a good place
 for any documentation or help
 
 
-
-00:36:58.786 --> 00:37:02.186 A:middle
-The app is also a good place
-for any documentation or help
-
-00:37:02.726 --> 00:37:07.466 A:middle
+670
+00:37:02,726 --> 00:37:07,466
 that would make the
 plug-in view a little dense.
 
-00:37:08.266 --> 00:37:11.246 A:middle
+
+671
+00:37:08,266 --> 00:37:11,246
 A few final words about
 creating an app extension here.
 
-00:37:11.856 --> 00:37:14.696 A:middle
+
+672
+00:37:11,856 --> 00:37:14,696
 So if you are going to build
 a framework to be loaded
 
-00:37:14.696 --> 00:37:18.926 A:middle
+
+673
+00:37:14,696 --> 00:37:18,926
 in process on OS X, despite what
 we are doing here with Swift,
 
-00:37:19.796 --> 00:37:22.676 A:middle
+
+674
+00:37:19,796 --> 00:37:22,676
 we can't recommend that
 you do this on OS X
 
-00:37:22.676 --> 00:37:26.136 A:middle
+
+675
+00:37:22,676 --> 00:37:26,136
 because the Swift API
 is subject to change.
 
-00:37:26.486 --> 00:37:29.776 A:middle
+
+676
+00:37:26,486 --> 00:37:29,776
 If you build your plug-in
 against one version
 
-00:37:29.776 --> 00:37:32.946 A:middle
+
+677
+00:37:29,776 --> 00:37:32,946
 of the Swift runtime and you are
 loaded into a host that happens
 
-00:37:32.946 --> 00:37:35.736 A:middle
+
+678
+00:37:32,946 --> 00:37:35,736
 to be using another version,
 there could be collisions,
 
-00:37:35.736 --> 00:37:37.716 A:middle
+
+679
+00:37:35,736 --> 00:37:37,716
 and that would be bad.
 
-00:37:38.536 --> 00:37:43.116 A:middle
+
+680
+00:37:38,536 --> 00:37:43,116
 We realize when you look at the
 sample code here and you try
 
-00:37:43.116 --> 00:37:45.926 A:middle
+
+681
+00:37:43,116 --> 00:37:45,926
 to build your own plug-ins,
 there is a lot, you know,
 
-00:37:45.926 --> 00:37:48.906 A:middle
+
+682
+00:37:45,926 --> 00:37:48,906
 there is three related targets
 that have to be built properly.
 
-00:37:48.906 --> 00:37:50.416 A:middle
+
+683
+00:37:48,906 --> 00:37:50,416
 It's a little bit complicated.
 
-00:37:50.726 --> 00:37:52.746 A:middle
+
+684
+00:37:50,726 --> 00:37:52,746
 We do plan in Xcode's template,
 
-00:37:53.166 --> 00:37:56.056 A:middle
+
+685
+00:37:53,166 --> 00:37:56,056
 but for now you can copy
 liberally from the Filter Demo.
 
-00:37:59.026 --> 00:38:02.126 A:middle
+
+686
+00:37:59,026 --> 00:38:02,126
 Okay. Now I would like
 to talk in general
 
 
-
-00:37:59.026 --> 00:38:02.126 A:middle
-Okay. Now I would like
-to talk in general
-
-00:38:02.126 --> 00:38:07.126 A:middle
+687
+00:38:02,126 --> 00:38:07,126
 about the modernized AU Audio
 Unit API from both the host
 
-00:38:07.326 --> 00:38:09.556 A:middle
+
+688
+00:38:07,326 --> 00:38:09,556
 and the implementation sides.
 
-00:38:09.556 --> 00:38:15.556 A:middle
+
+689
+00:38:09,556 --> 00:38:15,556
 I would like to compare the
 way that properties are handled
 
-00:38:15.556 --> 00:38:17.986 A:middle
+
+690
+00:38:15,556 --> 00:38:17,986
 in version 2 versus version 3.
 
-00:38:18.616 --> 00:38:22.126 A:middle
+
+691
+00:38:18,616 --> 00:38:22,126
 In version 2 Audio Unit
 API, we have scope-
 
-00:38:22.126 --> 00:38:23.716 A:middle
+
+692
+00:38:22,126 --> 00:38:23,716
 and element-based properties.
 
-00:38:24.196 --> 00:38:26.996 A:middle
+
+693
+00:38:24,196 --> 00:38:26,996
 A large number of properties
 are in the global scope
 
-00:38:26.996 --> 00:38:29.006 A:middle
+
+694
+00:38:26,996 --> 00:38:29,006
 so you have a bunch of
 code where you type.
 
-00:38:29.306 --> 00:38:32.266 A:middle
+
+695
+00:38:29,306 --> 00:38:32,266
 K Audio Unit scope
 global, element 0.
 
-00:38:34.256 --> 00:38:37.146 A:middle
+
+696
+00:38:34,256 --> 00:38:37,146
 And it's painful,
 especially from Swift,
 
-00:38:37.776 --> 00:38:41.376 A:middle
+
+697
+00:38:37,776 --> 00:38:41,376
 where we have property values
 that are void pointers.
 
-00:38:41.916 --> 00:38:44.996 A:middle
+
+698
+00:38:41,916 --> 00:38:44,996
 You end up typing unsafe mutable
 pointer all over the place,
 
-00:38:44.996 --> 00:38:46.566 A:middle
+
+699
+00:38:44,996 --> 00:38:46,566
 and that makes my head hurt.
 
-00:38:47.316 --> 00:38:50.736 A:middle
+
+700
+00:38:47,316 --> 00:38:50,736
 We have these functions
 with long argument lists.
 
-00:38:52.486 --> 00:38:55.806 A:middle
+
+701
+00:38:52,486 --> 00:38:55,806
 And by comparison in
 the version 3 API, well,
 
-00:38:55.806 --> 00:38:57.116 A:middle
+
+702
+00:38:55,806 --> 00:38:57,116
 properties are properties.
 
-00:38:57.926 --> 00:39:00.796 A:middle
+
+703
+00:38:57,926 --> 00:39:00,796
 We use a dot syntax in
 Objective-C and Swift,
 
 
-
-00:38:57.926 --> 00:39:00.796 A:middle
-We use a dot syntax in
-Objective-C and Swift,
-
-00:39:00.796 --> 00:39:04.166 A:middle
+704
+00:39:00,796 --> 00:39:04,166
 so you can write
 AU.maximum frames to render.
 
-00:39:05.106 --> 00:39:09.656 A:middle
+
+705
+00:39:05,106 --> 00:39:09,656
 We also implement our
 classes to be key-value coding
 
-00:39:09.656 --> 00:39:12.966 A:middle
+
+706
+00:39:09,656 --> 00:39:12,966
 and key-value observing
 compliant so you can use value
 
-00:39:12.966 --> 00:39:15.796 A:middle
+
+707
+00:39:12,966 --> 00:39:15,796
 for key, and add
 observer for key path.
 
-00:39:16.806 --> 00:39:20.306 A:middle
+
+708
+00:39:16,806 --> 00:39:20,306
 We also added a special KVO
 method to the bus array,
 
-00:39:20.656 --> 00:39:23.116 A:middle
+
+709
+00:39:20,656 --> 00:39:23,116
 add observer to all
 buses, so you don't have
 
-00:39:23.116 --> 00:39:27.056 A:middle
+
+710
+00:39:23,116 --> 00:39:27,056
 to simultaneously be watching
 for buses to come and go just
 
-00:39:27.056 --> 00:39:30.076 A:middle
+
+711
+00:39:27,056 --> 00:39:30,076
 so that you can add
 KVO observers on them.
 
-00:39:30.556 --> 00:39:34.176 A:middle
+
+712
+00:39:30,556 --> 00:39:34,176
 That can be a painful
 cycle to chase.
 
-00:39:35.756 --> 00:39:38.626 A:middle
+
+713
+00:39:35,756 --> 00:39:38,626
 Speaking of buses, they
 are full-fledged objects
 
-00:39:38.626 --> 00:39:40.036 A:middle
+
+714
+00:39:38,626 --> 00:39:40,036
 in the new API.
 
-00:39:40.036 --> 00:39:42.706 A:middle
+
+715
+00:39:40,036 --> 00:39:42,706
 We have the AU Audio
 Unit bus array.
 
-00:39:42.786 --> 00:39:46.186 A:middle
+
+716
+00:39:42,786 --> 00:39:46,186
 The AU Audio Unit has
 an array of input buses,
 
-00:39:46.186 --> 00:39:47.516 A:middle
+
+717
+00:39:46,186 --> 00:39:47,516
 an array of output buses.
 
-00:39:48.686 --> 00:39:51.296 A:middle
+
+718
+00:39:48,686 --> 00:39:51,296
 And the buses have
 two major properties.
 
-00:39:51.706 --> 00:39:54.016 A:middle
+
+719
+00:39:51,706 --> 00:39:54,016
 They have a format and a name.
 
-00:39:54.526 --> 00:39:58.286 A:middle
+
+720
+00:39:54,526 --> 00:39:58,286
 The format is manipulated
 by the host.
 
-00:39:58.666 --> 00:40:01.436 A:middle
+
+721
+00:39:58,666 --> 00:40:01,436
 We are able to reject
 formats that we don't like.
 
 
-
-00:39:58.666 --> 00:40:01.436 A:middle
-We are able to reject
-formats that we don't like.
-
-00:40:01.436 --> 00:40:02.786 A:middle
+722
+00:40:01,436 --> 00:40:02,786
 We use the same formats
 
-00:40:02.786 --> 00:40:04.906 A:middle
+
+723
+00:40:02,786 --> 00:40:04,906
 in version 3 Audio
 Units as version 2.
 
-00:40:08.296 --> 00:40:09.486 A:middle
+
+724
+00:40:08,296 --> 00:40:09,486
 Let's look at parameters.
 
-00:40:09.486 --> 00:40:11.286 A:middle
+
+725
+00:40:09,486 --> 00:40:11,286
 We have some of the
 same problems here
 
-00:40:11.396 --> 00:40:14.116 A:middle
+
+726
+00:40:11,396 --> 00:40:14,116
 in the version 2
 API with parameters
 
-00:40:14.116 --> 00:40:15.346 A:middle
+
+727
+00:40:14,116 --> 00:40:15,346
 as we did with properties.
 
-00:40:15.836 --> 00:40:18.846 A:middle
+
+728
+00:40:15,836 --> 00:40:18,846
 We have these unwieldy
 scope element ID tuples.
 
-00:40:18.846 --> 00:40:22.886 A:middle
+
+729
+00:40:18,846 --> 00:40:22,886
 And furthermore, in some very
 complex AUs we just didn't have
 
-00:40:22.886 --> 00:40:23.626 A:middle
+
+730
+00:40:22,886 --> 00:40:23,626
 enough bits.
 
-00:40:24.536 --> 00:40:27.466 A:middle
+
+731
+00:40:24,536 --> 00:40:27,466
 We have these functions with
 long argument lists again,
 
-00:40:27.866 --> 00:40:30.666 A:middle
+
+732
+00:40:27,866 --> 00:40:30,666
 and we also have a complicated
 AU event listener API.
 
-00:40:33.566 --> 00:40:36.506 A:middle
+
+733
+00:40:33,566 --> 00:40:36,506
 In the version 3 API, I
 hinted at this earlier
 
-00:40:38.056 --> 00:40:40.326 A:middle
+
+734
+00:40:38,056 --> 00:40:40,326
 with the parameter tree
 and the Filter Demo.
 
-00:40:40.696 --> 00:40:42.146 A:middle
+
+735
+00:40:40,696 --> 00:40:42,146
 Well, it is a full tree.
 
-00:40:42.246 --> 00:40:45.776 A:middle
+
+736
+00:40:42,246 --> 00:40:45,776
 Parameters can be grouped,
 and here we have an example
 
-00:40:45.776 --> 00:40:48.576 A:middle
+
+737
+00:40:45,776 --> 00:40:48,576
 of a simple analog
 synthesizer emulation.
 
-00:40:48.916 --> 00:40:51.436 A:middle
+
+738
+00:40:48,916 --> 00:40:51,436
 It has groups for oscillator,
 filter, and amplifier.
 
-00:40:51.916 --> 00:40:55.566 A:middle
+
+739
+00:40:51,916 --> 00:40:55,566
 The filter and amplifier have
 envelope groups beneath them.
 
-00:40:55.866 --> 00:40:58.896 A:middle
+
+740
+00:40:55,866 --> 00:40:58,896
 And the most brightly
 colored boxes beneath are
 
-00:40:58.896 --> 00:40:59.716 A:middle
+
+741
+00:40:58,896 --> 00:40:59,716
 the parameters.
 
 
-
-00:41:00.266 --> 00:41:03.326 A:middle
+742
+00:41:00,266 --> 00:41:03,326
 So the waveform octave,
 filter cutoff and resonance,
 
-00:41:03.326 --> 00:41:06.266 A:middle
+
+743
+00:41:03,326 --> 00:41:06,266
 and the envelope attack,
 sustain, and release.
 
-00:41:07.226 --> 00:41:10.606 A:middle
+
+744
+00:41:07,226 --> 00:41:10,606
 So these boxes are all nodes,
 whether they are groups
 
-00:41:10.606 --> 00:41:12.896 A:middle
+
+745
+00:41:10,606 --> 00:41:12,896
 or parameters, and every node
 
-00:41:12.896 --> 00:41:17.136 A:middle
+
+746
+00:41:12,896 --> 00:41:17,136
 in the parameter tree has
 a unique and permanent ID.
 
-00:41:17.136 --> 00:41:19.816 A:middle
+
+747
+00:41:17,136 --> 00:41:19,816
 This is like a C identifier.
 
-00:41:21.436 --> 00:41:25.496 A:middle
+
+748
+00:41:21,436 --> 00:41:25,496
 So using these unique
 IDs, we can use KVC to go
 
-00:41:25.496 --> 00:41:27.456 A:middle
+
+749
+00:41:25,496 --> 00:41:27,456
 and find a parameter
 we are looking for,
 
-00:41:27.796 --> 00:41:32.176 A:middle
+
+750
+00:41:27,796 --> 00:41:32,176
 such as oscillator.wave
 or filter.envelope.attack.
 
-00:41:32.586 --> 00:41:34.816 A:middle
+
+751
+00:41:32,586 --> 00:41:34,816
 And this would be
 a lot more flexible
 
-00:41:34.816 --> 00:41:37.096 A:middle
+
+752
+00:41:34,816 --> 00:41:37,096
 for these very complex
 audio units
 
-00:41:37.096 --> 00:41:39.506 A:middle
+
+753
+00:41:37,096 --> 00:41:39,506
 that have very large
 parameter trees.
 
-00:41:40.526 --> 00:41:41.626 A:middle
+
+754
+00:41:40,526 --> 00:41:41,626
 Now, you will notice
 
-00:41:41.676 --> 00:41:44.146 A:middle
+
+755
+00:41:41,676 --> 00:41:44,146
 that parameters have
 numeric addresses
 
-00:41:44.266 --> 00:41:48.296 A:middle
+
+756
+00:41:44,266 --> 00:41:48,296
 and that they are 64 bits,
 but we do have to treat them
 
-00:41:48.296 --> 00:41:53.306 A:middle
+
+757
+00:41:48,296 --> 00:41:53,306
 as transient in any situation
 where we aren't the one who made
 
-00:41:53.306 --> 00:41:54.586 A:middle
+
+758
+00:41:53,306 --> 00:41:54,586
 up that addressing scheme.
 
-00:41:56.946 --> 00:42:00.156 A:middle
+
+759
+00:41:56,946 --> 00:42:00,156
 So that means if I'm a
 host application and I want
 
 
-
-00:41:56.946 --> 00:42:00.156 A:middle
-So that means if I'm a
-host application and I want
-
-00:42:00.156 --> 00:42:03.196 A:middle
+760
+00:42:00,156 --> 00:42:03,196
 to record some parameter
 automation, I should record
 
-00:42:03.196 --> 00:42:06.556 A:middle
+
+761
+00:42:03,196 --> 00:42:06,556
 that automation using
 the key value path --
 
-00:42:07.106 --> 00:42:10.656 A:middle
+
+762
+00:42:07,106 --> 00:42:10,656
 I'm sorry, the key path of that
 parameter and not its address.
 
-00:42:11.236 --> 00:42:15.086 A:middle
+
+763
+00:42:11,236 --> 00:42:15,086
 I alluded to this earlier.
 
-00:42:15.796 --> 00:42:20.256 A:middle
+
+764
+00:42:15,796 --> 00:42:20,256
 The AU parameter object is
 the focus of communication
 
-00:42:20.326 --> 00:42:24.116 A:middle
+
+765
+00:42:20,326 --> 00:42:24,116
 for parameter values
 between hosts and views,
 
-00:42:24.416 --> 00:42:27.166 A:middle
+
+766
+00:42:24,416 --> 00:42:27,166
 and on the other side, the
 Audio Unit implementations.
 
-00:42:29.766 --> 00:42:31.866 A:middle
+
+767
+00:42:29,766 --> 00:42:31,866
 Now, from the host's
 point of view,
 
-00:42:32.176 --> 00:42:36.306 A:middle
+
+768
+00:42:32,176 --> 00:42:36,306
 the parameter object has
 properties like its value,
 
-00:42:36.306 --> 00:42:38.686 A:middle
+
+769
+00:42:36,306 --> 00:42:38,686
 also a minimum and
 maximum value, and so on.
 
-00:42:39.476 --> 00:42:44.126 A:middle
+
+770
+00:42:39,476 --> 00:42:44,126
 So we can set and get parameter
 values using dot notation
 
-00:42:44.126 --> 00:42:44.926 A:middle
+
+771
+00:42:44,126 --> 00:42:44,926
 as you would expect.
 
-00:42:45.836 --> 00:42:48.366 A:middle
+
+772
+00:42:45,836 --> 00:42:48,366
 Now, we can also set
 values in such a way
 
-00:42:48.366 --> 00:42:52.416 A:middle
+
+773
+00:42:48,366 --> 00:42:52,416
 to prevent a feedback
 loop, which is useful both
 
-00:42:52.446 --> 00:42:56.256 A:middle
+
+774
+00:42:52,446 --> 00:42:56,256
 for performance and for
 keeping the UI smooth.
 
-00:42:56.396 --> 00:42:58.536 A:middle
+
+775
+00:42:56,396 --> 00:42:58,536
 We don't want to be
 getting notifications
 
-00:42:58.536 --> 00:42:59.556 A:middle
+
+776
+00:42:58,536 --> 00:42:59,556
 that are slightly different
 
-00:42:59.626 --> 00:43:02.196 A:middle
+
+777
+00:42:59,626 --> 00:43:02,196
 from what we are doing
 as we move a slider.
 
 
-
-00:42:59.626 --> 00:43:02.196 A:middle
-from what we are doing
-as we move a slider.
-
-00:43:02.646 --> 00:43:06.486 A:middle
+778
+00:43:02,646 --> 00:43:06,486
 So the set value method
 accomplishes that.
 
-00:43:07.396 --> 00:43:12.686 A:middle
+
+779
+00:43:07,396 --> 00:43:12,686
 And that token is obtained from
 a method to add an observer
 
-00:43:12.686 --> 00:43:15.856 A:middle
+
+780
+00:43:12,686 --> 00:43:15,856
 to a parameter, or its tree,
 or a group in the tree.
 
-00:43:16.866 --> 00:43:19.056 A:middle
+
+781
+00:43:16,866 --> 00:43:19,056
 And when we do that, then
 we can get called back
 
-00:43:19.056 --> 00:43:19.936 A:middle
+
+782
+00:43:19,056 --> 00:43:19,936
 from the parameter.
 
-00:43:19.936 --> 00:43:21.326 A:middle
+
+783
+00:43:19,936 --> 00:43:21,326
 That's what we see
 at the bottom there.
 
-00:43:21.836 --> 00:43:24.386 A:middle
+
+784
+00:43:21,836 --> 00:43:24,386
 There is the block called
 the AU parameter observer,
 
-00:43:24.866 --> 00:43:27.996 A:middle
+
+785
+00:43:24,866 --> 00:43:27,996
 and it passes us the
 address and the new value
 
-00:43:27.996 --> 00:43:29.316 A:middle
+
+786
+00:43:27,996 --> 00:43:29,316
 of the parameter that changed.
 
-00:43:29.876 --> 00:43:35.586 A:middle
+
+787
+00:43:29,876 --> 00:43:35,586
 As for the implementation, we
 saw this in the Filter Demo.
 
-00:43:36.046 --> 00:43:38.176 A:middle
+
+788
+00:43:36,046 --> 00:43:38,176
 It has the implementer
 value observer
 
-00:43:38.416 --> 00:43:40.106 A:middle
+
+789
+00:43:38,416 --> 00:43:40,106
 and value provider blocks.
 
-00:43:40.736 --> 00:43:42.256 A:middle
+
+790
+00:43:40,736 --> 00:43:42,256
 Now, in Filter Demo,
 
-00:43:42.256 --> 00:43:44.356 A:middle
+
+791
+00:43:42,256 --> 00:43:44,356
 it installed these
 blocks on the tree.
 
-00:43:44.516 --> 00:43:48.046 A:middle
+
+792
+00:43:44,516 --> 00:43:48,046
 It's also possible to install
 them at any level of the tree,
 
-00:43:48.466 --> 00:43:50.096 A:middle
+
+793
+00:43:48,466 --> 00:43:50,096
 even on individual parameters.
 
-00:43:50.926 --> 00:43:56.776 A:middle
+
+794
+00:43:50,926 --> 00:43:56,776
 I would also like to show
 off what we have done
 
-00:43:56.776 --> 00:43:57.996 A:middle
+
+795
+00:43:56,776 --> 00:43:57,996
 with parameter scheduling
 
-00:43:57.996 --> 00:43:59.816 A:middle
+
+796
+00:43:57,996 --> 00:43:59,816
 because I think this
 is a big improvement
 
 
-
-00:44:00.186 --> 00:44:02.346 A:middle
+797
+00:44:00,186 --> 00:44:02,346
 over the version 2
 API in this area.
 
-00:44:03.726 --> 00:44:06.696 A:middle
+
+798
+00:44:03,726 --> 00:44:06,696
 We have the host and the
 implementation dealing
 
-00:44:06.696 --> 00:44:08.226 A:middle
+
+799
+00:44:06,696 --> 00:44:08,226
 with things somewhat separately,
 
-00:44:08.776 --> 00:44:13.406 A:middle
+
+800
+00:44:08,776 --> 00:44:13,406
 but here we have the AU Audio
 Unit base class doing some help,
 
-00:44:13.486 --> 00:44:15.246 A:middle
+
+801
+00:44:13,486 --> 00:44:15,246
 it's helping us implement this.
 
-00:44:15.536 --> 00:44:20.456 A:middle
+
+802
+00:44:15,536 --> 00:44:20,456
 So the host can obtain from the
 AU Audio Unit a block called the
 
-00:44:20.456 --> 00:44:21.776 A:middle
+
+803
+00:44:20,456 --> 00:44:21,776
 schedule parameter block.
 
-00:44:22.496 --> 00:44:26.696 A:middle
+
+804
+00:44:22,496 --> 00:44:26,696
 And at render time, it can call
 this block to change parameters
 
-00:44:26.736 --> 00:44:28.786 A:middle
+
+805
+00:44:26,736 --> 00:44:28,786
 in sample-accurate way.
 
-00:44:29.856 --> 00:44:32.726 A:middle
+
+806
+00:44:29,856 --> 00:44:32,726
 So the first argument to do
 schedule is a sample time,
 
-00:44:33.446 --> 00:44:35.556 A:middle
+
+807
+00:44:33,446 --> 00:44:35,556
 the parameter value
 can ramp over time
 
-00:44:35.556 --> 00:44:38.756 A:middle
+
+808
+00:44:35,556 --> 00:44:38,756
 if the Audio Unit has
 advertised it as being rampable.
 
-00:44:39.346 --> 00:44:43.516 A:middle
+
+809
+00:44:39,346 --> 00:44:43,516
 For example, the
 Apple Mixer does this.
 
-00:44:44.266 --> 00:44:46.436 A:middle
+
+810
+00:44:44,266 --> 00:44:46,436
 And the last two
 parameters, of course,
 
-00:44:46.846 --> 00:44:50.066 A:middle
+
+811
+00:44:46,846 --> 00:44:50,066
 are function parameters -- are
 the address of the parameter
 
-00:44:50.066 --> 00:44:52.656 A:middle
+
+812
+00:44:50,066 --> 00:44:52,656
 to be changed and the
 new parameter value.
 
-00:44:54.226 --> 00:44:55.706 A:middle
+
+813
+00:44:54,226 --> 00:44:55,706
 Now, things are a
 little bit different
 
-00:44:55.706 --> 00:44:57.066 A:middle
+
+814
+00:44:55,706 --> 00:44:57,066
 on the implementation side.
 
-00:44:57.066 --> 00:45:00.096 A:middle
+
+815
+00:44:57,066 --> 00:45:00,096
 We don't just get a
 pass-through call from the host.
 
 
-
-00:44:57.066 --> 00:45:00.096 A:middle
-We don't just get a
-pass-through call from the host.
-
-00:45:00.946 --> 00:45:03.196 A:middle
+816
+00:45:00,946 --> 00:45:03,196
 Instead, the base class is going
 
-00:45:03.196 --> 00:45:05.546 A:middle
+
+817
+00:45:03,196 --> 00:45:05,546
 to fetch the internal
 render block, which we saw
 
-00:45:05.546 --> 00:45:08.516 A:middle
+
+818
+00:45:05,546 --> 00:45:08,516
 in the Filter Demo,
 and it's going to pass
 
-00:45:08.566 --> 00:45:11.516 A:middle
+
+819
+00:45:08,566 --> 00:45:11,516
 that render block
 the real-time events
 
-00:45:12.166 --> 00:45:14.796 A:middle
+
+820
+00:45:12,166 --> 00:45:14,796
 that pertain only to
 that render cycle.
 
-00:45:15.136 --> 00:45:19.086 A:middle
+
+821
+00:45:15,136 --> 00:45:19,086
 So the base class is maintaining
 the full schedule of all
 
-00:45:19.086 --> 00:45:21.866 A:middle
+
+822
+00:45:19,086 --> 00:45:21,866
 of the pending scheduled
 parameter changes
 
-00:45:22.236 --> 00:45:25.146 A:middle
+
+823
+00:45:22,236 --> 00:45:25,146
 and just parceling out
 the relevant pieces of it
 
-00:45:25.146 --> 00:45:27.496 A:middle
+
+824
+00:45:25,146 --> 00:45:27,496
 to the Audio Unit
 at rendering time.
 
-00:45:29.886 --> 00:45:31.376 A:middle
+
+825
+00:45:29,886 --> 00:45:31,376
 So that's parameter scheduling,
 
-00:45:31.376 --> 00:45:34.186 A:middle
+
+826
+00:45:31,376 --> 00:45:34,186
 and we have done the exact
 same thing with MIDI events.
 
-00:45:35.086 --> 00:45:36.416 A:middle
+
+827
+00:45:35,086 --> 00:45:36,416
 The host fetches a block
 
-00:45:36.926 --> 00:45:39.166 A:middle
+
+828
+00:45:36,926 --> 00:45:39,166
 from the Audio Unit
 before starting to render.
 
-00:45:40.006 --> 00:45:42.496 A:middle
+
+829
+00:45:40,006 --> 00:45:42,496
 It calls that block
 at render time.
 
-00:45:43.376 --> 00:45:47.466 A:middle
+
+830
+00:45:43,376 --> 00:45:47,466
 Now, you will notice here we
 have added a function argument
 
-00:45:47.506 --> 00:45:50.286 A:middle
+
+831
+00:45:47,506 --> 00:45:50,286
 called cable where,
 
-00:45:50.286 --> 00:45:54.036 A:middle
+
+832
+00:45:50,286 --> 00:45:54,036
 in the version 2 Audio Unit API
 there is only one MIDI cable
 
-00:45:54.036 --> 00:45:59.076 A:middle
+
+833
+00:45:54,036 --> 00:45:59,076
 with 16 channels, now we
 have 256 virtual MIDI cables.
 
-00:45:59.536 --> 00:46:00.816 A:middle
+
+834
+00:45:59,536 --> 00:46:00,816
 So if you have an Audio Unit
 
 
-
-00:45:59.536 --> 00:46:00.816 A:middle
-So if you have an Audio Unit
-
-00:46:01.386 --> 00:46:04.476 A:middle
+835
+00:46:01,386 --> 00:46:04,476
 that wants huge sample
 banks, you can do that.
 
-00:46:04.476 --> 00:46:07.346 A:middle
+
+836
+00:46:04,476 --> 00:46:07,346
 You can address them all
 on virtual MIDI cables.
 
-00:46:09.186 --> 00:46:11.226 A:middle
+
+837
+00:46:09,186 --> 00:46:11,226
 On the implementation
 side for MIDI events,
 
-00:46:11.276 --> 00:46:14.346 A:middle
+
+838
+00:46:11,276 --> 00:46:14,346
 this is exactly the same as
 for scheduled parameters.
 
-00:46:15.126 --> 00:46:19.006 A:middle
+
+839
+00:46:15,126 --> 00:46:19,006
 The base class AU Audio Unit is
 maintaining internal schedule
 
-00:46:19.806 --> 00:46:23.076 A:middle
+
+840
+00:46:19,806 --> 00:46:23,076
 and passing events to
 the internal render block
 
-00:46:23.606 --> 00:46:28.246 A:middle
+
+841
+00:46:23,606 --> 00:46:28,246
 through the real-time event list
 only during the render cycle
 
-00:46:28.246 --> 00:46:30.196 A:middle
+
+842
+00:46:28,246 --> 00:46:30,196
 during which they are
 supposed to take effect.
 
-00:46:32.016 --> 00:46:34.836 A:middle
+
+843
+00:46:32,016 --> 00:46:34,836
 So we think this is
 a big improvement.
 
-00:46:34.836 --> 00:46:36.596 A:middle
+
+844
+00:46:34,836 --> 00:46:36,596
 It saves the implementer
 a lot of work.
 
-00:46:39.086 --> 00:46:43.456 A:middle
+
+845
+00:46:39,086 --> 00:46:43,456
 Now, about rendering in general,
 we are still using a pull model,
 
-00:46:43.456 --> 00:46:47.826 A:middle
+
+846
+00:46:43,456 --> 00:46:47,826
 meaning that an output unit
 pulls a mixer, pulls an effect,
 
-00:46:47.996 --> 00:46:49.746 A:middle
+
+847
+00:46:47,996 --> 00:46:49,746
 pulls another effect,
 pulls the player.
 
-00:46:49.746 --> 00:46:51.776 A:middle
+
+848
+00:46:49,746 --> 00:46:51,776
 Audio flows back down
 through the chain.
 
-00:46:52.736 --> 00:46:55.236 A:middle
+
+849
+00:46:52,736 --> 00:46:55,236
 One difference here is
 in the version 2 API,
 
-00:46:55.236 --> 00:46:58.206 A:middle
+
+850
+00:46:55,236 --> 00:46:58,206
 the Audio Unit needs
 to maintain some state.
 
-00:46:58.206 --> 00:47:02.426 A:middle
+
+851
+00:46:58,206 --> 00:47:02,426
 It needs to have a notion of
 whether it's getting its input
 
 
-
-00:46:58.206 --> 00:47:02.426 A:middle
-It needs to have a notion of
-whether it's getting its input
-
-00:47:02.426 --> 00:47:05.976 A:middle
+852
+00:47:02,426 --> 00:47:05,976
 from another Audio Unit
 upstream or a function callback.
 
-00:47:06.606 --> 00:47:09.776 A:middle
+
+853
+00:47:06,606 --> 00:47:09,776
 Now, in the version 3
 API, it's much simpler,
 
-00:47:09.776 --> 00:47:12.436 A:middle
+
+854
+00:47:09,776 --> 00:47:12,436
 the AU doesn't have to
 maintain that state.
 
-00:47:12.916 --> 00:47:15.306 A:middle
+
+855
+00:47:12,916 --> 00:47:15,306
 This callback, as we
 saw in the Filter Demo,
 
-00:47:15.736 --> 00:47:19.216 A:middle
+
+856
+00:47:15,736 --> 00:47:19,216
 comes from the host, and
 it is passed during every
 
-00:47:19.216 --> 00:47:20.026 A:middle
+
+857
+00:47:19,216 --> 00:47:20,026
 render cycle.
 
-00:47:21.536 --> 00:47:24.936 A:middle
+
+858
+00:47:21,536 --> 00:47:24,936
 But otherwise, the APIs are
 pretty much functionally
 
-00:47:24.936 --> 00:47:28.126 A:middle
+
+859
+00:47:24,936 --> 00:47:28,126
 identical, and this lets
 us bridge very efficiently
 
-00:47:28.126 --> 00:47:28.776 A:middle
+
+860
+00:47:28,126 --> 00:47:28,776
 between them.
 
-00:47:32.586 --> 00:47:37.396 A:middle
+
+861
+00:47:32,586 --> 00:47:37,396
 Now, if your host is calling AU
 Audio Unit directly to render
 
-00:47:37.706 --> 00:47:40.656 A:middle
+
+862
+00:47:37,706 --> 00:47:40,656
 as opposed to using AU
 graph or AVAudioEngine,
 
-00:47:41.616 --> 00:47:45.906 A:middle
+
+863
+00:47:41,616 --> 00:47:45,906
 here you will want to call
 allocate render resources
 
-00:47:45.906 --> 00:47:49.066 A:middle
+
+864
+00:47:45,906 --> 00:47:49,066
 as usual and then hold
 onto the render block.
 
-00:47:50.076 --> 00:47:51.656 A:middle
+
+865
+00:47:50,076 --> 00:47:51,656
 You can call the
 render block to render.
 
-00:47:52.496 --> 00:47:54.876 A:middle
+
+866
+00:47:52,496 --> 00:47:54,876
 It looks very similar to
 the internal render block.
 
-00:47:55.716 --> 00:47:59.656 A:middle
+
+867
+00:47:55,716 --> 00:47:59,656
 It's worth reviewing
 here some rules
 
-00:47:59.656 --> 00:48:03.296 A:middle
+
+868
+00:47:59,656 --> 00:48:03,296
 about the audio buffer lists
 that appear at render time.
 
 
-
-00:47:59.656 --> 00:48:03.296 A:middle
-about the audio buffer lists
-that appear at render time.
-
-00:48:03.946 --> 00:48:06.826 A:middle
+869
+00:48:03,946 --> 00:48:06,826
 Now, the host provides an
 output audio buffer list,
 
-00:48:07.366 --> 00:48:11.296 A:middle
+
+870
+00:48:07,366 --> 00:48:11,296
 and in that audio buffer list
 the M data pointer can be null.
 
-00:48:12.286 --> 00:48:15.696 A:middle
+
+871
+00:48:12,286 --> 00:48:15,696
 The Audio Unit must replace this
 with an internally owned buffer
 
-00:48:15.876 --> 00:48:19.516 A:middle
+
+872
+00:48:15,876 --> 00:48:19,516
 and at the same time,
 the AU has to promise
 
-00:48:19.566 --> 00:48:21.346 A:middle
+
+873
+00:48:19,566 --> 00:48:21,346
 that that buffer
 will remain valid
 
-00:48:21.346 --> 00:48:22.706 A:middle
+
+874
+00:48:21,346 --> 00:48:22,706
 until the next render cycle.
 
-00:48:23.266 --> 00:48:25.066 A:middle
+
+875
+00:48:23,266 --> 00:48:25,066
 This is all, by the
 way, exactly the same
 
-00:48:25.066 --> 00:48:27.856 A:middle
+
+876
+00:48:25,066 --> 00:48:27,856
 as with version 2 Audio Units,
 I'm just reemphasizing it
 
-00:48:28.496 --> 00:48:29.406 A:middle
+
+877
+00:48:28,496 --> 00:48:29,406
 because it's important.
 
-00:48:31.456 --> 00:48:35.816 A:middle
+
+878
+00:48:31,456 --> 00:48:35,816
 Now, in the render block, we
 have some rules, similar rules
 
-00:48:35.816 --> 00:48:37.706 A:middle
+
+879
+00:48:35,816 --> 00:48:37,706
 but not the same,
 about input buffers.
 
-00:48:38.146 --> 00:48:41.256 A:middle
+
+880
+00:48:38,146 --> 00:48:41,256
 The host provides that
 input block, the AU calls it
 
-00:48:41.256 --> 00:48:45.116 A:middle
+
+881
+00:48:41,256 --> 00:48:45,116
 for input, and when the AU
 calls that block for input,
 
-00:48:45.526 --> 00:48:48.456 A:middle
+
+882
+00:48:45,526 --> 00:48:48,456
 it has to supply valid
 audio buffer lists
 
-00:48:48.646 --> 00:48:52.016 A:middle
+
+883
+00:48:48,646 --> 00:48:52,016
 with non-null M data
 pointers to that block.
 
-00:48:52.846 --> 00:48:56.966 A:middle
+
+884
+00:48:52,846 --> 00:48:56,966
 Now, the host is allowed to
 replace those pointers to memory
 
-00:48:56.966 --> 00:49:00.736 A:middle
+
+885
+00:48:56,966 --> 00:49:00,736
 that it owns and can
 promise to keep valid
 
 
-
-00:48:56.966 --> 00:49:00.736 A:middle
-that it owns and can
-promise to keep valid
-
-00:49:00.736 --> 00:49:04.476 A:middle
+886
+00:49:00,736 --> 00:49:04,476
 until the next render cycle or
 deallocate render resources,
 
-00:49:05.166 --> 00:49:08.446 A:middle
+
+887
+00:49:05,166 --> 00:49:08,446
 and all of this accomplishes
 an important goal,
 
-00:49:08.446 --> 00:49:11.266 A:middle
+
+888
+00:49:08,446 --> 00:49:11,266
 which is to absolutely
 minimize copying.
 
-00:49:12.076 --> 00:49:17.526 A:middle
+
+889
+00:49:12,076 --> 00:49:17,526
 Okay. Here is the scary
 slide for those of you
 
-00:49:18.596 --> 00:49:23.276 A:middle
+
+890
+00:49:18,596 --> 00:49:23,276
 who are writing code to
 run in rendering context.
 
-00:49:23.696 --> 00:49:26.786 A:middle
+
+891
+00:49:23,696 --> 00:49:26,786
 So audio rendering
 almost always happens
 
-00:49:26.786 --> 00:49:28.656 A:middle
+
+892
+00:49:26,786 --> 00:49:28,656
 in a real-time thread context.
 
-00:49:28.966 --> 00:49:30.956 A:middle
+
+893
+00:49:28,966 --> 00:49:30,956
 And this is a restrictive
 environment
 
-00:49:31.096 --> 00:49:32.966 A:middle
+
+894
+00:49:31,096 --> 00:49:32,966
 because we can't
 allocate memory,
 
-00:49:33.546 --> 00:49:36.386 A:middle
+
+895
+00:49:33,546 --> 00:49:36,386
 which means that we really
 shouldn't even be calling
 
-00:49:36.386 --> 00:49:38.066 A:middle
+
+896
+00:49:36,386 --> 00:49:38,066
 dispatch async, for instance.
 
-00:49:38.346 --> 00:49:42.046 A:middle
+
+897
+00:49:38,346 --> 00:49:42,046
 And in fact we can't make any
 call at all which might block,
 
-00:49:42.636 --> 00:49:47.046 A:middle
+
+898
+00:49:42,636 --> 00:49:47,046
 for example, taking a mutex
 or waiting on a semaphore.
 
-00:49:47.436 --> 00:49:51.846 A:middle
+
+899
+00:49:47,436 --> 00:49:51,846
 The reason is if we do block and
 we block for any length of time,
 
-00:49:52.276 --> 00:49:53.866 A:middle
+
+900
+00:49:52,276 --> 00:49:53,866
 then the audio rendering thread
 
-00:49:53.866 --> 00:49:55.686 A:middle
+
+901
+00:49:53,866 --> 00:49:55,686
 in the system will
 miss its deadline,
 
-00:49:56.186 --> 00:49:59.316 A:middle
+
+902
+00:49:56,186 --> 00:49:59,316
 and the user will
 experience that as a glitch.
 
 
-
-00:50:00.526 --> 00:50:05.426 A:middle
+903
+00:50:00,526 --> 00:50:05,426
 So we have to be very careful
 when both using and calling or,
 
-00:50:05.426 --> 00:50:06.316 A:middle
+
+904
+00:50:05,426 --> 00:50:06,316
 I'm sorry, both using
 
-00:50:06.316 --> 00:50:08.536 A:middle
+
+905
+00:50:06,316 --> 00:50:08,536
 and implementing
 these render blocks.
 
-00:50:10.286 --> 00:50:14.096 A:middle
+
+906
+00:50:10,286 --> 00:50:14,096
 So you will see in the Filter
 Demo how we went to some lengths
 
-00:50:14.266 --> 00:50:17.366 A:middle
+
+907
+00:50:14,266 --> 00:50:17,366
 to not capture our Self object
 
-00:50:17.366 --> 00:50:20.256 A:middle
+
+908
+00:50:17,366 --> 00:50:20,256
 or any other Objective-C
 object for that matter.
 
-00:50:21.276 --> 00:50:24.346 A:middle
+
+909
+00:50:21,276 --> 00:50:24,346
 In that block, we avoid
 the Objective-C runtime
 
-00:50:24.346 --> 00:50:27.716 A:middle
+
+910
+00:50:24,346 --> 00:50:27,716
 because it's inherently unsafe.
 
-00:50:27.716 --> 00:50:28.756 A:middle
+
+911
+00:50:27,716 --> 00:50:28,756
 It can take blocks.
 
-00:50:29.426 --> 00:50:31.756 A:middle
+
+912
+00:50:29,426 --> 00:50:31,756
 Unfortunately, the Swift
 run-time is exactly the
 
-00:50:31.756 --> 00:50:31.936 A:middle
+
+913
+00:50:31,756 --> 00:50:31,936
 same way.
 
-00:50:32.396 --> 00:50:37.556 A:middle
+
+914
+00:50:32,396 --> 00:50:37,556
 So this is why in the Filter
 Demo you'll see we have C++
 
-00:50:37.556 --> 00:50:41.776 A:middle
+
+915
+00:50:37,556 --> 00:50:41,776
 objects and we capture
 pointers to those C++ objects.
 
-00:50:42.246 --> 00:50:44.106 A:middle
+
+916
+00:50:42,246 --> 00:50:44,106
 Now, if you are allergic
 to C++, you are free
 
-00:50:44.106 --> 00:50:47.026 A:middle
+
+917
+00:50:44,106 --> 00:50:47,026
 to do the same thing
 in plain vanilla C,
 
-00:50:47.026 --> 00:50:51.276 A:middle
+
+918
+00:50:47,026 --> 00:50:51,276
 although I'm not sure why
 you would want to do that.
 
-00:50:51.276 --> 00:50:52.276 A:middle
+
+919
+00:50:51,276 --> 00:50:52,276
 Enough scary stuff.
 
-00:50:52.276 --> 00:50:54.046 A:middle
+
+920
+00:50:52,276 --> 00:50:54,046
 I would like to bring
 up Alec Little now
 
-00:50:54.156 --> 00:50:57.926 A:middle
+
+921
+00:50:54,156 --> 00:50:57,926
 to show Audio Unit extensions
 in Apple Music creation apps.
 
-00:50:58.516 --> 00:51:03.916 A:middle
+
+922
+00:50:58,516 --> 00:51:03,916
 [Applause]
 
 
+923
+00:51:04,416 --> 00:51:04,856
+>> ALEC LITTLE: Thanks, Doug.
 
-00:50:58.516 --> 00:51:03.916 A:middle
-[Applause]
 
-00:51:04.416 --> 00:51:04.856 A:middle
-&gt;&gt; ALEC LITTLE: Thanks, Doug.
-
-00:51:05.106 --> 00:51:09.446 A:middle
+924
+00:51:05,106 --> 00:51:09,446
 I'm Alec. I work on the music
 creation applications for Apple,
 
-00:51:09.446 --> 00:51:10.846 A:middle
+
+925
+00:51:09,446 --> 00:51:10,846
 things like GarageBand
 and Logic.
 
-00:51:11.276 --> 00:51:14.826 A:middle
+
+926
+00:51:11,276 --> 00:51:14,826
 We are excited about the
 new Audio Unit extensions.
 
-00:51:14.826 --> 00:51:18.086 A:middle
+
+927
+00:51:14,826 --> 00:51:18,086
 We think they will add real
 power and creative possibilities
 
-00:51:18.086 --> 00:51:19.836 A:middle
+
+928
+00:51:18,086 --> 00:51:19,836
 for developers and users.
 
-00:51:19.836 --> 00:51:21.556 A:middle
+
+929
+00:51:19,836 --> 00:51:21,556
 So I wanted to talk a little bit
 
-00:51:21.556 --> 00:51:23.566 A:middle
+
+930
+00:51:21,556 --> 00:51:23,566
 about what some of
 our plans are.
 
-00:51:23.666 --> 00:51:25.396 A:middle
+
+931
+00:51:23,666 --> 00:51:25,396
 So first of all, we plan
 
-00:51:25.396 --> 00:51:27.586 A:middle
+
+932
+00:51:25,396 --> 00:51:27,586
 to support the Audio Unit
 extension, of course,
 
-00:51:27.586 --> 00:51:29.686 A:middle
+
+933
+00:51:27,586 --> 00:51:29,686
 in all of our main applications.
 
-00:51:29.686 --> 00:51:34.466 A:middle
+
+934
+00:51:29,686 --> 00:51:34,466
 So that's GarageBand iOS,
 GarageBand Mac, Logic Pro X,
 
-00:51:34.466 --> 00:51:35.906 A:middle
+
+935
+00:51:34,466 --> 00:51:35,906
 Logic Pro 10, and Mainstage.
 
-00:51:37.326 --> 00:51:42.836 A:middle
+
+936
+00:51:37,326 --> 00:51:42,836
 So what I thought we would do
 today is look at some examples,
 
-00:51:42.836 --> 00:51:46.286 A:middle
+
+937
+00:51:42,836 --> 00:51:46,286
 some pretty pictures, if you
 will, from GarageBand iOS.
 
-00:51:46.286 --> 00:51:47.966 A:middle
+
+938
+00:51:46,286 --> 00:51:47,966
 And this is just
 preliminary stuff,
 
-00:51:47.966 --> 00:51:49.616 A:middle
+
+939
+00:51:47,966 --> 00:51:49,616
 but I think it will
 give you an idea of kind
 
-00:51:49.616 --> 00:51:51.976 A:middle
+
+940
+00:51:49,616 --> 00:51:51,976
 of what we are planning
 to do as a host
 
-00:51:52.286 --> 00:51:53.786 A:middle
+
+941
+00:51:52,286 --> 00:51:53,786
 to support Audio
 Unit extensions.
 
-00:51:55.136 --> 00:51:58.926 A:middle
+
+942
+00:51:55,136 --> 00:51:58,926
 So first of all, we are going
 to be supporting AU instruments.
 
-00:51:59.206 --> 00:52:02.126 A:middle
+
+943
+00:51:59,206 --> 00:52:02,126
 So the example I'm going to be
 giving is about how we're going
 
 
-
-00:51:59.206 --> 00:52:02.126 A:middle
-So the example I'm going to be
-giving is about how we're going
-
-00:52:02.126 --> 00:52:03.626 A:middle
+944
+00:52:02,126 --> 00:52:03,626
 to implement those
 AU instruments.
 
-00:52:04.796 --> 00:52:07.136 A:middle
+
+945
+00:52:04,796 --> 00:52:07,136
 So first of all, just a
 little graphic to explain
 
-00:52:07.136 --> 00:52:08.936 A:middle
+
+946
+00:52:07,136 --> 00:52:08,936
 about what we are going to
 do, something simple here,
 
-00:52:08.936 --> 00:52:10.786 A:middle
+
+947
+00:52:08,936 --> 00:52:10,786
 but GarageBand is
 going to request
 
-00:52:10.786 --> 00:52:14.756 A:middle
+
+948
+00:52:10,786 --> 00:52:14,756
 from the View Controller
 a custom UI dimension
 
-00:52:14.756 --> 00:52:15.976 A:middle
+
+949
+00:52:14,756 --> 00:52:15,976
 that we will talk
 about in a second.
 
-00:52:16.556 --> 00:52:18.526 A:middle
+
+950
+00:52:16,556 --> 00:52:18,526
 Pass MIDI events over to
 the Audio Unit and then
 
-00:52:18.526 --> 00:52:22.316 A:middle
+
+951
+00:52:18,526 --> 00:52:22,316
 of course receive audio
 back over the audio bus.
 
-00:52:22.876 --> 00:52:26.276 A:middle
+
+952
+00:52:22,876 --> 00:52:26,276
 On to the promised pictures.
 
-00:52:27.236 --> 00:52:31.286 A:middle
+
+953
+00:52:27,236 --> 00:52:31,286
 So GarageBand, our main
 launch screen launches
 
-00:52:31.286 --> 00:52:35.836 A:middle
+
+954
+00:52:31,286 --> 00:52:35,836
 into what we call our
 touch instrument carousel.
 
-00:52:35.836 --> 00:52:38.556 A:middle
+
+955
+00:52:35,836 --> 00:52:38,556
 We have all of our touch
 instruments here: keyboards,
 
-00:52:38.556 --> 00:52:40.936 A:middle
+
+956
+00:52:38,556 --> 00:52:40,936
 drums, smart guitars,
 all of those things.
 
-00:52:41.966 --> 00:52:44.956 A:middle
+
+957
+00:52:41,966 --> 00:52:44,956
 Then if you see on the left
 there is this container,
 
-00:52:44.956 --> 00:52:47.426 A:middle
+
+958
+00:52:44,956 --> 00:52:47,426
 and if GarageBand is seeing
 
-00:52:47.426 --> 00:52:49.556 A:middle
+
+959
+00:52:47,426 --> 00:52:49,556
 that there are Audio Unit
 instruments installed
 
-00:52:49.556 --> 00:52:51.596 A:middle
+
+960
+00:52:49,556 --> 00:52:51,596
 on the device, we will
 show that container.
 
-00:52:51.596 --> 00:52:53.686 A:middle
+
+961
+00:52:51,596 --> 00:52:53,686
 I can swipe over
 to that container,
 
-00:52:54.276 --> 00:52:55.826 A:middle
+
+962
+00:52:54,276 --> 00:52:55,826
 and that's where my
 Audio Units live.
 
-00:52:55.826 --> 00:53:00.786 A:middle
+
+963
+00:52:55,826 --> 00:53:00,786
 If I tap on it, then
 we will see all
 
 
-
-00:52:55.826 --> 00:53:00.786 A:middle
-If I tap on it, then
-we will see all
-
-00:53:00.786 --> 00:53:04.656 A:middle
+964
+00:53:00,786 --> 00:53:04,656
 of the Audio Unit instruments
 installed on the device.
 
-00:53:04.656 --> 00:53:07.066 A:middle
+
+965
+00:53:04,656 --> 00:53:07,066
 Now, if I tap on one
 of those instruments,
 
-00:53:07.826 --> 00:53:10.196 A:middle
+
+966
+00:53:07,826 --> 00:53:10,196
 we will show a big gray
 box and a keyboard -- no.
 
-00:53:10.706 --> 00:53:13.876 A:middle
+
+967
+00:53:10,706 --> 00:53:13,876
 We will show your
 custom UI up there
 
-00:53:14.336 --> 00:53:17.416 A:middle
+
+968
+00:53:14,336 --> 00:53:17,416
 in that nice embedded
 view inside GarageBand,
 
-00:53:17.416 --> 00:53:19.546 A:middle
+
+969
+00:53:17,416 --> 00:53:19,546
 and I think that's the coolest
 part of this whole thing is
 
-00:53:19.586 --> 00:53:22.596 A:middle
+
+970
+00:53:19,586 --> 00:53:22,596
 that we get to show
 the actual identity
 
-00:53:22.596 --> 00:53:25.606 A:middle
+
+971
+00:53:22,596 --> 00:53:25,606
 of your Audio Unit
 inside our host there.
 
-00:53:25.606 --> 00:53:28.846 A:middle
+
+972
+00:53:25,606 --> 00:53:28,846
 And we will be providing our
 standard GarageBand keyboard
 
-00:53:28.846 --> 00:53:30.966 A:middle
+
+973
+00:53:28,846 --> 00:53:30,966
 for you to be able to play that.
 
-00:53:31.416 --> 00:53:35.326 A:middle
+
+974
+00:53:31,416 --> 00:53:35,326
 We will be recording the MIDI
 and receiving the audio back.
 
-00:53:35.466 --> 00:53:38.926 A:middle
+
+975
+00:53:35,466 --> 00:53:38,926
 So that just kind of brings
 up a pretty obvious point.
 
-00:53:39.316 --> 00:53:41.516 A:middle
+
+976
+00:53:39,316 --> 00:53:41,516
 When you are providing
 these custom UIs,
 
-00:53:41.516 --> 00:53:44.936 A:middle
+
+977
+00:53:41,516 --> 00:53:44,936
 make sure you are not putting
 any sort of custom, you know,
 
-00:53:45.086 --> 00:53:47.136 A:middle
+
+978
+00:53:45,086 --> 00:53:47,136
 MIDI controller-type
 device there
 
-00:53:47.136 --> 00:53:49.426 A:middle
+
+979
+00:53:47,136 --> 00:53:49,426
 because we won't be capturing
 your MIDI in GarageBand.
 
-00:53:51.236 --> 00:53:54.456 A:middle
+
+980
+00:53:51,236 --> 00:53:54,456
 Just a quick look what we
 plan to do on the phone.
 
-00:53:55.406 --> 00:53:59.196 A:middle
+
+981
+00:53:55,406 --> 00:53:59,196
 Is, again, we have a lot more
 limited screen real estate
 
-00:53:59.196 --> 00:54:01.646 A:middle
+
+982
+00:53:59,196 --> 00:54:01,646
 there, so there is a button
 in the top-right corner,
 
 
-
-00:53:59.196 --> 00:54:01.646 A:middle
-there, so there is a button
-in the top-right corner,
-
-00:54:01.736 --> 00:54:03.326 A:middle
+983
+00:54:01,736 --> 00:54:03,326
 which pulls up the
 controls view,
 
-00:54:04.056 --> 00:54:06.096 A:middle
+
+984
+00:54:04,056 --> 00:54:06,096
 and there is the custom UI.
 
-00:54:06.416 --> 00:54:08.586 A:middle
+
+985
+00:54:06,416 --> 00:54:08,586
 So all of the control there,
 and a little bit of room
 
-00:54:08.586 --> 00:54:10.856 A:middle
+
+986
+00:54:08,586 --> 00:54:10,856
 for the user to still play on
 the keyboard down at the bottom.
 
-00:54:10.986 --> 00:54:14.746 A:middle
+
+987
+00:54:10,986 --> 00:54:14,746
 So here is the most important
 slide probably from me today,
 
-00:54:14.746 --> 00:54:17.656 A:middle
+
+988
+00:54:14,746 --> 00:54:17,656
 and this is the dimensions
 we will be requesting
 
-00:54:17.876 --> 00:54:19.986 A:middle
+
+989
+00:54:17,876 --> 00:54:19,986
 from the View Controller.
 
-00:54:20.806 --> 00:54:23.806 A:middle
+
+990
+00:54:20,806 --> 00:54:23,806
 So you want to have your
 stuff look good in GarageBand,
 
-00:54:24.306 --> 00:54:25.666 A:middle
+
+991
+00:54:24,306 --> 00:54:25,666
 pay attention to
 those dimensions,
 
-00:54:25.666 --> 00:54:29.726 A:middle
+
+992
+00:54:25,666 --> 00:54:29,726
 and we will do something
 pretty cool together.
 
-00:54:30.376 --> 00:54:32.936 A:middle
+
+993
+00:54:30,376 --> 00:54:32,936
 So, again, we think it's going
 to be really exciting to be able
 
-00:54:32.936 --> 00:54:35.636 A:middle
+
+994
+00:54:32,936 --> 00:54:35,636
 to see and have the
 users be able to play
 
-00:54:35.636 --> 00:54:37.556 A:middle
+
+995
+00:54:35,636 --> 00:54:37,556
 with the actual interface
 
-00:54:37.556 --> 00:54:39.936 A:middle
+
+996
+00:54:37,556 --> 00:54:39,936
 of your Audio Units
 right inside GarageBand,
 
-00:54:39.936 --> 00:54:42.316 A:middle
+
+997
+00:54:39,936 --> 00:54:42,316
 and we are really excited to
 work with you guys to come
 
-00:54:42.316 --> 00:54:43.246 A:middle
+
+998
+00:54:42,316 --> 00:54:43,246
 up with really cool stuff!
 
-00:54:44.516 --> 00:54:51.816 A:middle
+
+999
+00:54:44,516 --> 00:54:51,816
 [Applause]
 
-00:54:52.316 --> 00:54:52.916 A:middle
-&gt;&gt; DOUG WYATT: Thanks, Alec.
 
-00:54:54.416 --> 00:54:57.516 A:middle
+1000
+00:54:52,316 --> 00:54:52,916
+>> DOUG WYATT: Thanks, Alec.
+
+
+1001
+00:54:54,416 --> 00:54:57,516
 So I imagine you may have
 questions at this point.
 
-00:54:57.966 --> 00:55:01.306 A:middle
+
+1002
+00:54:57,966 --> 00:55:01,306
 I would like to try to
 anticipate a few of them.
 
 
-
-00:54:57.966 --> 00:55:01.306 A:middle
-I would like to try to
-anticipate a few of them.
-
-00:55:01.956 --> 00:55:04.836 A:middle
+1003
+00:55:01,956 --> 00:55:04,836
 What about inter-app
 audio on iOS?
 
-00:55:05.656 --> 00:55:07.226 A:middle
+
+1004
+00:55:05,656 --> 00:55:07,226
 This is a couple
 of years old now.
 
-00:55:08.236 --> 00:55:10.596 A:middle
+
+1005
+00:55:08,236 --> 00:55:10,596
 And there is a number of
 apps that have supported it.
 
-00:55:11.116 --> 00:55:13.876 A:middle
+
+1006
+00:55:11,116 --> 00:55:13,876
 Well, from our point of view,
 this uses a small subset
 
-00:55:13.876 --> 00:55:17.406 A:middle
+
+1007
+00:55:13,876 --> 00:55:17,406
 of the version 2 API, and it
 doesn't support a bunch of thing
 
-00:55:17.406 --> 00:55:18.746 A:middle
+
+1008
+00:55:17,406 --> 00:55:18,746
 that people have asked us for,
 
-00:55:18.746 --> 00:55:21.446 A:middle
+
+1009
+00:55:18,746 --> 00:55:21,446
 like parameter support,
 presets, and so on.
 
-00:55:22.096 --> 00:55:25.106 A:middle
+
+1010
+00:55:22,096 --> 00:55:25,106
 And we get these requests
 and I think, well,
 
-00:55:25.106 --> 00:55:26.976 A:middle
+
+1011
+00:55:25,106 --> 00:55:26,976
 we should have a
 full plug-in model,
 
-00:55:27.386 --> 00:55:29.606 A:middle
+
+1012
+00:55:27,386 --> 00:55:29,606
 which is what we have now.
 
-00:55:29.816 --> 00:55:32.296 A:middle
+
+1013
+00:55:29,816 --> 00:55:32,296
 So while we are not
 deprecating inter-app audio,
 
-00:55:32.296 --> 00:55:36.436 A:middle
+
+1014
+00:55:32,296 --> 00:55:36,436
 we do see the way forward to add
 all of these missing features is
 
-00:55:36.436 --> 00:55:38.746 A:middle
+
+1015
+00:55:36,436 --> 00:55:38,746
 through Audio Unit extensions.
 
-00:55:39.466 --> 00:55:43.206 A:middle
+
+1016
+00:55:39,466 --> 00:55:43,206
 Now on OS X, you
 may be wondering
 
-00:55:43.206 --> 00:55:44.996 A:middle
+
+1017
+00:55:43,206 --> 00:55:44,996
 about the compatibility story
 
-00:55:45.356 --> 00:55:47.546 A:middle
+
+1018
+00:55:45,356 --> 00:55:47,546
 if you have existing
 hosts and Audio Units.
 
-00:55:48.256 --> 00:55:51.156 A:middle
+
+1019
+00:55:48,256 --> 00:55:51,156
 The bridges should save
 you from a lot of pain.
 
-00:55:51.156 --> 00:55:54.066 A:middle
+
+1020
+00:55:51,156 --> 00:55:54,066
 They are compatible, and we
 have gone to a lot of work
 
-00:55:54.256 --> 00:55:57.406 A:middle
+
+1021
+00:55:54,256 --> 00:55:57,406
 to make things work
 as well as we can.
 
-00:55:58.096 --> 00:56:01.726 A:middle
+
+1022
+00:55:58,096 --> 00:56:01,726
 So I would recommend that you
 update to version 3 when you can
 
 
-
-00:55:58.096 --> 00:56:01.726 A:middle
-So I would recommend that you
-update to version 3 when you can
-
-00:56:01.906 --> 00:56:03.846 A:middle
+1023
+00:56:01,906 --> 00:56:03,846
 or need to for some feature.
 
-00:56:03.846 --> 00:56:06.746 A:middle
+
+1024
+00:56:03,846 --> 00:56:06,746
 Maybe you want to redo the
 way you handle MIDI events
 
-00:56:06.746 --> 00:56:08.456 A:middle
+
+1025
+00:56:06,746 --> 00:56:08,456
 or scheduled parameters,
 for example.
 
-00:56:09.736 --> 00:56:12.316 A:middle
+
+1026
+00:56:09,736 --> 00:56:12,316
 We do have a shortcut
 for porting.
 
-00:56:12.316 --> 00:56:15.056 A:middle
+
+1027
+00:56:12,316 --> 00:56:15,056
 It's called AU Audio
 Unit v2 Bridge.
 
-00:56:15.056 --> 00:56:18.546 A:middle
+
+1028
+00:56:15,056 --> 00:56:18,546
 This is an AU Audio Unit
 subclass that is implemented
 
-00:56:18.546 --> 00:56:21.876 A:middle
+
+1029
+00:56:18,546 --> 00:56:21,876
 on top of a version 2 AU, so you
 might be able to start with that
 
-00:56:21.916 --> 00:56:25.736 A:middle
+
+1030
+00:56:21,916 --> 00:56:25,736
 and evolve to a more fully
 native implementation.
 
-00:56:26.326 --> 00:56:30.356 A:middle
+
+1031
+00:56:26,326 --> 00:56:30,356
 And as Michael mentioned
 earlier,
 
-00:56:31.216 --> 00:56:34.176 A:middle
+
+1032
+00:56:31,216 --> 00:56:34,176
 version 3 Audio Units are
 largely cross-platform
 
-00:56:34.176 --> 00:56:36.536 A:middle
+
+1033
+00:56:34,176 --> 00:56:36,536
 between iOS and OS X.
 
-00:56:36.716 --> 00:56:38.076 A:middle
+
+1034
+00:56:36,716 --> 00:56:38,076
 The signal processing code
 
-00:56:38.076 --> 00:56:41.556 A:middle
+
+1035
+00:56:38,076 --> 00:56:41,556
 in AU Audio Unit should be
 absolutely fully portable
 
-00:56:41.556 --> 00:56:43.786 A:middle
+
+1036
+00:56:41,556 --> 00:56:43,786
 because there are no
 UI implementations,
 
-00:56:44.216 --> 00:56:45.526 A:middle
+
+1037
+00:56:44,216 --> 00:56:45,526
 or dependencies, rather.
 
-00:56:46.196 --> 00:56:51.136 A:middle
+
+1038
+00:56:46,196 --> 00:56:51,136
 AU View Controller derives from
 either UI or NSViewController
 
-00:56:51.136 --> 00:56:54.126 A:middle
+
+1039
+00:56:51,136 --> 00:56:54,126
 so you get a little bit of
 insulation, but you will
 
-00:56:54.126 --> 00:56:56.126 A:middle
+
+1040
+00:56:54,126 --> 00:56:56,126
 at some point run into
 platform-specific UI.
 
-00:56:56.126 --> 00:57:00.576 A:middle
+
+1041
+00:56:56,126 --> 00:57:00,576
 We are running out of
 time, and there is way more
 
 
-
-00:56:56.126 --> 00:57:00.576 A:middle
-We are running out of
-time, and there is way more
-
-00:57:00.576 --> 00:57:03.406 A:middle
+1042
+00:57:00,576 --> 00:57:03,406
 than I could possibly go
 through in an hour here.
 
-00:57:03.546 --> 00:57:06.876 A:middle
+
+1043
+00:57:03,546 --> 00:57:06,876
 At this point I would like to
 refer you to your header files
 
-00:57:06.876 --> 00:57:08.856 A:middle
+
+1044
+00:57:06,876 --> 00:57:08,856
 in the Audio Unit framework.
 
-00:57:09.006 --> 00:57:13.216 A:middle
+
+1045
+00:57:09,006 --> 00:57:13,216
 You do need to link AudioToolbox
 for historical reasons.
 
-00:57:13.556 --> 00:57:16.806 A:middle
+
+1046
+00:57:13,556 --> 00:57:16,806
 The main header file is AU Audio
 Unit.h but there are others,
 
-00:57:17.306 --> 00:57:20.356 A:middle
+
+1047
+00:57:17,306 --> 00:57:20,356
 AU View Controllers in the
 Core Audio kit framework,
 
-00:57:20.906 --> 00:57:24.436 A:middle
+
+1048
+00:57:20,906 --> 00:57:24,436
 and as we mentioned, there
 is the AVFoundation framework
 
-00:57:24.436 --> 00:57:28.796 A:middle
+
+1049
+00:57:24,436 --> 00:57:28,796
 with AU Audio Unit component.h.
 We have good HeaderDoc in all
 
-00:57:28.796 --> 00:57:32.276 A:middle
+
+1050
+00:57:28,796 --> 00:57:32,276
 of these, so I would like to
 urge you to check them out.
 
-00:57:34.376 --> 00:57:38.216 A:middle
+
+1051
+00:57:34,376 --> 00:57:38,216
 Finally, if you would like to
 use our Audio Unit's logo --
 
-00:57:38.306 --> 00:57:39.546 A:middle
+
+1052
+00:57:38,306 --> 00:57:39,546
 there is a white version, too --
 
-00:57:39.546 --> 00:57:43.266 A:middle
+
+1053
+00:57:39,546 --> 00:57:43,266
 you can go check out
 this link for a license.
 
-00:57:44.616 --> 00:57:46.086 A:middle
+
+1054
+00:57:44,616 --> 00:57:46,086
 And that brings us to the end.
 
-00:57:46.466 --> 00:57:48.426 A:middle
+
+1055
+00:57:46,466 --> 00:57:48,426
 So we have seen how we now have
 
-00:57:48.426 --> 00:57:52.736 A:middle
+
+1056
+00:57:48,426 --> 00:57:52,736
 for the first time a full
 plug-in model for audio on iOS,
 
-00:57:52.866 --> 00:57:54.356 A:middle
+
+1057
+00:57:52,866 --> 00:57:54,356
 and it's the same on OS X.
 
-00:57:55.056 --> 00:57:58.446 A:middle
+
+1058
+00:57:55,056 --> 00:57:58,446
 And, again, it lets you sell
 Audio Units in both the iOS
 
-00:57:58.666 --> 00:58:02.566 A:middle
+
+1059
+00:57:58,666 --> 00:58:02,566
 and OS X App Stores by
 packaging your Audio Units
 
 
-
-00:57:58.666 --> 00:58:02.566 A:middle
-and OS X App Stores by
-packaging your Audio Units
-
-00:58:02.566 --> 00:58:03.716 A:middle
+1060
+00:58:02,566 --> 00:58:03,716
 as app extensions.
 
-00:58:04.606 --> 00:58:08.416 A:middle
+
+1061
+00:58:04,606 --> 00:58:08,416
 We looked at the simple host
 applications that are possible
 
-00:58:08.416 --> 00:58:12.316 A:middle
+
+1062
+00:58:08,416 --> 00:58:12,316
 with AVAudioEngine, and that's
 illustrated in our new sample,
 
-00:58:12.706 --> 00:58:14.126 A:middle
+
+1063
+00:58:12,706 --> 00:58:14,126
 Audio Unit v3 Example.
 
-00:58:14.876 --> 00:58:17.346 A:middle
+
+1064
+00:58:14,876 --> 00:58:17,346
 So I would like to encourage
 you to write bugs as you work
 
-00:58:17.346 --> 00:58:19.526 A:middle
+
+1065
+00:58:17,346 --> 00:58:19,526
 through the sample code,
 read the documentation,
 
-00:58:20.036 --> 00:58:23.156 A:middle
+
+1066
+00:58:20,036 --> 00:58:23,156
 and work on the great AU hosts
 
-00:58:23.156 --> 00:58:25.616 A:middle
+
+1067
+00:58:23,156 --> 00:58:25,616
 and implementations
 that I know you will.
 
-00:58:26.236 --> 00:58:34.026 A:middle
+
+1068
+00:58:26,236 --> 00:58:34,026
 So for more information, this
 was our session yesterday,
 
-00:58:34.756 --> 00:58:35.676 A:middle
+
+1069
+00:58:34,756 --> 00:58:35,676
 so thank you very much!
 
-00:58:36.516 --> 00:58:39.500 A:middle
+
+1070
+00:58:36,516 --> 00:58:39,500
 [Applause]
 

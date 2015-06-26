@@ -1,4671 +1,6724 @@
-
-00:00:23.516 --> 00:00:25.676 A:middle
-&gt;&gt; NICK SHEARER: So,
+1
+00:00:23,516 --> 00:00:25,676
+>> NICK SHEARER: So,
 hello, everybody!
 
-00:00:26.276 --> 00:00:28.786 A:middle
+
+2
+00:00:26,276 --> 00:00:28,786
 Welcome to WWDC and
 welcome to learning
 
-00:00:28.786 --> 00:00:31.106 A:middle
+
+3
+00:00:28,786 --> 00:00:31,106
 about Apple Pay within
 applications.
 
-00:00:31.606 --> 00:00:34.156 A:middle
+
+4
+00:00:31,606 --> 00:00:34,156
 Now my name is Nick and
 I'm a software engineer
 
-00:00:34.156 --> 00:00:36.056 A:middle
+
+5
+00:00:34,156 --> 00:00:36,056
 on the iOS Apps and
 Frameworks team.
 
-00:00:36.056 --> 00:00:39.806 A:middle
+
+6
+00:00:36,056 --> 00:00:39,806
 I'm going to be joined here
 by Rachel and we're going
 
-00:00:39.806 --> 00:00:42.556 A:middle
+
+7
+00:00:39,806 --> 00:00:42,556
 to be talking all
 about Apple Pay!
 
-00:00:43.286 --> 00:00:46.666 A:middle
+
+8
+00:00:43,286 --> 00:00:46,666
 Now, hopefully you are all
 pretty familiar with Apple Pay,
 
-00:00:46.666 --> 00:00:48.156 A:middle
+
+9
+00:00:46,666 --> 00:00:48,156
 perhaps you have
 even tried it out.
 
-00:00:48.156 --> 00:00:49.246 A:middle
+
+10
+00:00:48,156 --> 00:00:49,246
 Maybe you have gone into a store
 
-00:00:49.246 --> 00:00:50.796 A:middle
+
+11
+00:00:49,246 --> 00:00:50,796
 around here and bought
 something.
 
-00:00:51.326 --> 00:00:55.016 A:middle
+
+12
+00:00:51,326 --> 00:00:55,016
 But you can also use Apple Pay
 inside of your own applications.
 
-00:00:55.466 --> 00:00:57.936 A:middle
+
+13
+00:00:55,466 --> 00:00:57,936
 That's what we're going to
 talk about in today's session.
 
-00:00:58.186 --> 00:01:01.666 A:middle
+
+14
+00:00:58,186 --> 00:01:01,666
 Now it's an extra long
 bumper hour long session.
 
 
-
-00:00:58.186 --> 00:01:01.666 A:middle
-Now it's an extra long
-bumper hour long session.
-
-00:01:01.666 --> 00:01:03.286 A:middle
+15
+00:01:01,666 --> 00:01:03,286
 Set your watches to silent.
 
-00:01:03.516 --> 00:01:04.556 A:middle
+
+16
+00:01:03,516 --> 00:01:04,556
 You won't be standing up.
 
-00:01:05.016 --> 00:01:08.476 A:middle
+
+17
+00:01:05,016 --> 00:01:08,476
 And we're going to run through
 four main sections today.
 
-00:01:08.996 --> 00:01:10.106 A:middle
+
+18
+00:01:08,996 --> 00:01:10,106
 So first thing we're
 going to talk
 
-00:01:10.106 --> 00:01:12.226 A:middle
+
+19
+00:01:10,106 --> 00:01:12,226
 about what Apple
 Pay actually is.
 
-00:01:12.586 --> 00:01:14.876 A:middle
+
+20
+00:01:12,586 --> 00:01:14,876
 We're going to talk about how
 you can use it in your app
 
-00:01:15.156 --> 00:01:18.926 A:middle
+
+21
+00:01:15,156 --> 00:01:18,926
 and more importantly, why you'd
 want to use it in your app.
 
-00:01:18.926 --> 00:01:20.626 A:middle
+
+22
+00:01:18,926 --> 00:01:20,626
 And then we will move
 on to architecture,
 
-00:01:21.126 --> 00:01:23.246 A:middle
+
+23
+00:01:21,126 --> 00:01:23,246
 how does that Apple Pay
 actually make a payment
 
-00:01:23.316 --> 00:01:25.746 A:middle
+
+24
+00:01:23,316 --> 00:01:25,746
 from a technical perspective,
 what's happening there?
 
-00:01:25.746 --> 00:01:26.846 A:middle
+
+25
+00:01:25,746 --> 00:01:26,846
 What's going on?
 
-00:01:27.476 --> 00:01:29.416 A:middle
+
+26
+00:01:27,476 --> 00:01:29,416
 Following on from that, my
 colleague Rachel is going
 
-00:01:29.416 --> 00:01:32.496 A:middle
+
+27
+00:01:29,416 --> 00:01:32,496
 to come out and talk to
 you all about design.
 
-00:01:32.856 --> 00:01:35.026 A:middle
+
+28
+00:01:32,856 --> 00:01:35,026
 How to get your apps ready
 for Apple Pay and how
 
-00:01:35.026 --> 00:01:36.916 A:middle
+
+29
+00:01:35,026 --> 00:01:36,916
 to make them look and
 feel really great.
 
-00:01:36.916 --> 00:01:41.006 A:middle
+
+30
+00:01:36,916 --> 00:01:41,006
 And after all that I think we
 will be ready to dive into Xcode
 
-00:01:41.076 --> 00:01:42.846 A:middle
+
+31
+00:01:41,076 --> 00:01:42,846
 and we'll actually
 look at how we can
 
-00:01:42.846 --> 00:01:45.676 A:middle
+
+32
+00:01:42,846 --> 00:01:45,676
 in just a few dozen
 lines really quickly
 
-00:01:45.676 --> 00:01:48.946 A:middle
+
+33
+00:01:45,676 --> 00:01:48,946
 and easily get Apple Pay set
 up in our own applications.
 
-00:01:49.546 --> 00:01:51.156 A:middle
+
+34
+00:01:49,546 --> 00:01:51,156
 I think we will have
 a lot of fun.
 
-00:01:52.026 --> 00:01:52.766 A:middle
+
+35
+00:01:52,026 --> 00:01:52,766
 Let's dive right in.
 
-00:01:54.356 --> 00:01:55.226 A:middle
+
+36
+00:01:54,356 --> 00:01:55,226
 What is Apple Pay?
 
-00:01:55.766 --> 00:01:58.626 A:middle
+
+37
+00:01:55,766 --> 00:01:58,626
 And how are you going to
 use it inside of your app?
 
-00:01:59.436 --> 00:02:05.166 A:middle
+
+38
+00:01:59,436 --> 00:02:05,166
 So Apple Pay is an easy
 private and secure way to pay
 
 
-
-00:01:59.436 --> 00:02:05.166 A:middle
-So Apple Pay is an easy
-private and secure way to pay
-
-00:02:05.476 --> 00:02:09.496 A:middle
+39
+00:02:05,476 --> 00:02:09,496
 within applications as well as
 contactlessly, and it allows
 
-00:02:09.496 --> 00:02:12.496 A:middle
+
+40
+00:02:09,496 --> 00:02:12,496
 for one touch payments
 and you can use it
 
-00:02:12.496 --> 00:02:14.206 A:middle
+
+41
+00:02:12,496 --> 00:02:14,206
 for physical goods and services.
 
-00:02:14.746 --> 00:02:17.416 A:middle
+
+42
+00:02:14,746 --> 00:02:17,416
 So here's an example
 from Groupon.
 
-00:02:18.266 --> 00:02:23.036 A:middle
+
+43
+00:02:18,266 --> 00:02:23,036
 Apple Pay has loads of
 benefits, both for you
 
-00:02:23.036 --> 00:02:25.246 A:middle
+
+44
+00:02:23,036 --> 00:02:25,246
 as developers and for users.
 
-00:02:26.246 --> 00:02:28.626 A:middle
+
+45
+00:02:26,246 --> 00:02:28,626
 So for users, Apple Pay is easy.
 
-00:02:28.626 --> 00:02:32.186 A:middle
+
+46
+00:02:28,626 --> 00:02:32,186
 You don't need to reenter any
 payment or contact information.
 
-00:02:32.306 --> 00:02:34.876 A:middle
+
+47
+00:02:32,306 --> 00:02:34,876
 You don't need to, like,
 remember the password I created
 
-00:02:34.876 --> 00:02:36.546 A:middle
+
+48
+00:02:34,876 --> 00:02:36,546
 for that sites months ago.
 
-00:02:36.976 --> 00:02:39.156 A:middle
+
+49
+00:02:36,976 --> 00:02:39,156
 It's all there, ready for me.
 
-00:02:39.586 --> 00:02:40.796 A:middle
+
+50
+00:02:39,586 --> 00:02:40,796
 And it's also secure.
 
-00:02:41.766 --> 00:02:43.036 A:middle
+
+51
+00:02:41,766 --> 00:02:43,036
 I'm paying using Touch ID.
 
-00:02:43.036 --> 00:02:47.046 A:middle
+
+52
+00:02:43,036 --> 00:02:47,046
 It's really great, and most
 importantly, it's private.
 
-00:02:47.756 --> 00:02:50.296 A:middle
+
+53
+00:02:47,756 --> 00:02:50,296
 The card number isn't
 exposed to the merchant.
 
-00:02:50.716 --> 00:02:53.356 A:middle
+
+54
+00:02:50,716 --> 00:02:53,356
 Instead, you are sending
 a device number along
 
-00:02:53.356 --> 00:02:56.466 A:middle
+
+55
+00:02:53,356 --> 00:02:56,466
 with a unique token that's
 valid only for that purchase.
 
-00:02:56.736 --> 00:02:59.226 A:middle
+
+56
+00:02:56,736 --> 00:02:59,226
 So it's really secure,
 and really private.
 
 
-
-00:03:00.286 --> 00:03:03.386 A:middle
+57
+00:03:00,286 --> 00:03:03,386
 And all of these things combine
 together to bring many benefits
 
-00:03:03.386 --> 00:03:05.156 A:middle
+
+58
+00:03:03,386 --> 00:03:05,156
 for you as well as developers.
 
-00:03:05.576 --> 00:03:07.676 A:middle
+
+59
+00:03:05,576 --> 00:03:07,676
 So because you are not
 getting real card numbers,
 
-00:03:07.946 --> 00:03:09.166 A:middle
+
+60
+00:03:07,946 --> 00:03:09,166
 you don't need to handle them.
 
-00:03:09.496 --> 00:03:11.996 A:middle
+
+61
+00:03:09,496 --> 00:03:11,996
 If you have worked on e-commerce
 before, I'm sure you know
 
-00:03:11.996 --> 00:03:14.296 A:middle
+
+62
+00:03:11,996 --> 00:03:14,296
 of all the problems you
 have handling, like,
 
-00:03:14.296 --> 00:03:15.386 A:middle
+
+63
+00:03:14,296 --> 00:03:15,386
 actual card information.
 
-00:03:16.176 --> 00:03:18.406 A:middle
+
+64
+00:03:16,176 --> 00:03:18,406
 And you will also see
 higher conversion rates
 
-00:03:18.456 --> 00:03:22.476 A:middle
+
+65
+00:03:18,456 --> 00:03:22,476
 and faster checkouts because
 Apple Pay is so easy to use.
 
-00:03:23.096 --> 00:03:25.686 A:middle
+
+66
+00:03:23,096 --> 00:03:25,686
 It's so easy that you don't
 even need to onboard your users.
 
-00:03:26.026 --> 00:03:28.806 A:middle
+
+67
+00:03:26,026 --> 00:03:28,806
 They can just open up your app
 and immediately start purchasing
 
-00:03:28.856 --> 00:03:30.436 A:middle
+
+68
+00:03:28,856 --> 00:03:30,436
 without needing an
 existing account.
 
-00:03:31.646 --> 00:03:36.146 A:middle
+
+69
+00:03:31,646 --> 00:03:36,146
 And most importantly,
 users really love Apple Pay
 
-00:03:36.276 --> 00:03:37.816 A:middle
+
+70
+00:03:36,276 --> 00:03:37,816
 and they love apps that use it.
 
-00:03:37.996 --> 00:03:39.396 A:middle
+
+71
+00:03:37,996 --> 00:03:39,396
 They love taking
 advantage of it.
 
-00:03:40.206 --> 00:03:43.086 A:middle
+
+72
+00:03:40,206 --> 00:03:43,086
 And you don't really have
 to take my word for that.
 
-00:03:43.086 --> 00:03:46.596 A:middle
+
+73
+00:03:43,086 --> 00:03:46,596
 We went and spoke to just a
 few of the hundreds of apps
 
-00:03:46.596 --> 00:03:48.686 A:middle
+
+74
+00:03:46,596 --> 00:03:48,686
 that are already using
 Apple Pay on the store
 
-00:03:49.156 --> 00:03:51.206 A:middle
+
+75
+00:03:49,156 --> 00:03:51,206
 and they have seen
 some amazing successes.
 
-00:03:51.206 --> 00:03:53.896 A:middle
+
+76
+00:03:51,206 --> 00:03:53,896
 So first of all, I want
 to talk about StubHub.
 
-00:03:54.516 --> 00:03:55.806 A:middle
+
+77
+00:03:54,516 --> 00:03:55,806
 They have a great iPhone app.
 
-00:03:56.276 --> 00:03:59.166 A:middle
+
+78
+00:03:56,276 --> 00:03:59,166
 You can buy event tickets
 directly on the phone.
 
-00:03:59.166 --> 00:04:01.006 A:middle
+
+79
+00:03:59,166 --> 00:04:01,006
 They integrated with
 Apple Pay and they found
 
 
-
-00:03:59.166 --> 00:04:01.006 A:middle
-They integrated with
-Apple Pay and they found
-
-00:04:01.006 --> 00:04:04.256 A:middle
+80
+00:04:01,006 --> 00:04:04,256
 that Apple Pay users
 transact 20% more frequently
 
-00:04:04.606 --> 00:04:05.816 A:middle
+
+81
+00:04:04,606 --> 00:04:05,816
 than regular customers.
 
-00:04:06.136 --> 00:04:06.906 A:middle
+
+82
+00:04:06,136 --> 00:04:06,906
 It's a great result.
 
-00:04:07.986 --> 00:04:10.426 A:middle
+
+83
+00:04:07,986 --> 00:04:10,426
 Another app that's seen
 really great things
 
-00:04:10.426 --> 00:04:12.446 A:middle
+
+84
+00:04:10,426 --> 00:04:12,446
 from Apple Pay is OpenTable.
 
-00:04:12.966 --> 00:04:14.406 A:middle
+
+85
+00:04:12,966 --> 00:04:14,406
 You should try to use
 this app this week.
 
-00:04:14.406 --> 00:04:16.685 A:middle
+
+86
+00:04:14,406 --> 00:04:16,685
 You cannot only book a
 reservation but you can go
 
-00:04:16.685 --> 00:04:19.416 A:middle
+
+87
+00:04:16,685 --> 00:04:19,416
 into a restaurant and pay
 for your meal directly
 
-00:04:19.416 --> 00:04:20.826 A:middle
+
+88
+00:04:19,416 --> 00:04:20,826
 on your phone at the table.
 
-00:04:20.826 --> 00:04:23.656 A:middle
+
+89
+00:04:20,826 --> 00:04:23,656
 And when they integrated
 that product with Apple Pay,
 
-00:04:23.656 --> 00:04:26.546 A:middle
+
+90
+00:04:23,656 --> 00:04:26,546
 they saw transaction
 growth of 50%.
 
-00:04:27.906 --> 00:04:29.236 A:middle
+
+91
+00:04:27,906 --> 00:04:29,236
 But it gets even better!
 
-00:04:29.776 --> 00:04:31.496 A:middle
+
+92
+00:04:29,776 --> 00:04:31,496
 We also spoke to Staples,
 
-00:04:32.236 --> 00:04:34.506 A:middle
+
+93
+00:04:32,236 --> 00:04:34,506
 Staples have a really
 nice app you can buy all
 
-00:04:34.506 --> 00:04:36.596 A:middle
+
+94
+00:04:34,506 --> 00:04:36,596
 of your office supplies
 directly from your phone
 
-00:04:36.966 --> 00:04:39.176 A:middle
+
+95
+00:04:36,966 --> 00:04:39,176
 and they saw an increase
 in overall conversion,
 
-00:04:39.256 --> 00:04:42.366 A:middle
+
+96
+00:04:39,256 --> 00:04:42,366
 that's the percentage of users
 who became paying customers
 
-00:04:42.756 --> 00:04:45.656 A:middle
+
+97
+00:04:42,756 --> 00:04:45,656
 of 109% with Apple Pay!
 
-00:04:46.346 --> 00:04:48.906 A:middle
+
+98
+00:04:46,346 --> 00:04:48,906
 So these are really
 impressive figures.
 
-00:04:49.186 --> 00:04:51.526 A:middle
+
+99
+00:04:49,186 --> 00:04:51,526
 App developers are
 loving Apple Pay.
 
-00:04:51.976 --> 00:04:54.846 A:middle
+
+100
+00:04:51,976 --> 00:04:54,846
 We spoke to Joe Einhorn,
 the CEO of Fancy.
 
-00:04:54.846 --> 00:04:59.896 A:middle
+
+101
+00:04:54,846 --> 00:04:59,896
 He said Apple Pay is not
 only driving more purchases
 
 
-
-00:05:00.516 --> 00:05:03.586 A:middle
+102
+00:05:00,516 --> 00:05:03,586
 but activating our
 biggest spenders.
 
-00:05:03.666 --> 00:05:09.816 A:middle
+
+103
+00:05:03,666 --> 00:05:09,816
 I can also tell you that iOS
 users of Fancy out spend all
 
-00:05:09.816 --> 00:05:13.536 A:middle
+
+104
+00:05:09,816 --> 00:05:13,536
 over mobile platforms combined
 by a factor of two to one.
 
-00:05:14.246 --> 00:05:17.806 A:middle
+
+105
+00:05:14,246 --> 00:05:17,806
 These are customers would
 really like using Apple Pay
 
-00:05:17.806 --> 00:05:20.446 A:middle
+
+106
+00:05:17,806 --> 00:05:20,446
 to buy things and they
 want to buy lots of things.
 
-00:05:20.446 --> 00:05:23.116 A:middle
+
+107
+00:05:20,446 --> 00:05:23,116
 So it's great for your apps.
 
-00:05:23.116 --> 00:05:26.466 A:middle
+
+108
+00:05:23,116 --> 00:05:26,466
 Now, some of you might
 be thinking, well,
 
-00:05:26.466 --> 00:05:29.366 A:middle
+
+109
+00:05:26,466 --> 00:05:29,366
 Apple already has a
 mechanism to allow apps
 
-00:05:29.366 --> 00:05:31.226 A:middle
+
+110
+00:05:29,366 --> 00:05:31,226
 to purchase things
 inside of the app
 
-00:05:31.376 --> 00:05:32.866 A:middle
+
+111
+00:05:31,376 --> 00:05:32,866
 and that's an In-App Purchase.
 
-00:05:33.716 --> 00:05:36.546 A:middle
+
+112
+00:05:33,716 --> 00:05:36,546
 Where does Apple Pay sit with
 regard to In-App Purchase.
 
-00:05:37.466 --> 00:05:38.996 A:middle
+
+113
+00:05:37,466 --> 00:05:38,996
 There are a few differences
 and I want
 
-00:05:38.996 --> 00:05:40.016 A:middle
+
+114
+00:05:38,996 --> 00:05:40,016
 to run you through them now.
 
-00:05:41.286 --> 00:05:43.336 A:middle
+
+115
+00:05:41,286 --> 00:05:43,336
 One of the main differences is
 
-00:05:43.336 --> 00:05:46.006 A:middle
+
+116
+00:05:43,336 --> 00:05:46,006
 where they are actually
 located in the SDK.
 
-00:05:46.006 --> 00:05:47.726 A:middle
+
+117
+00:05:46,006 --> 00:05:47,726
 So Apple Pay lives inside
 
-00:05:47.726 --> 00:05:52.146 A:middle
+
+118
+00:05:47,726 --> 00:05:52,146
 of the PassKit framework whereas
 In-App lives inside of StoreKit
 
-00:05:52.146 --> 00:05:53.676 A:middle
+
+119
+00:05:52,146 --> 00:05:53,676
 and they are different
 code bases
 
-00:05:54.106 --> 00:05:55.766 A:middle
+
+120
+00:05:54,106 --> 00:05:55,766
 and you also use them
 for different things.
 
-00:05:56.916 --> 00:06:00.816 A:middle
+
+121
+00:05:56,916 --> 00:06:00,816
 So for Apple Pay, you use it
 for physical goods and services.
 
 
-
-00:05:56.916 --> 00:06:00.816 A:middle
-So for Apple Pay, you use it
-for physical goods and services.
-
-00:06:01.216 --> 00:06:03.686 A:middle
+122
+00:06:01,216 --> 00:06:03,686
 What do I mean by that, I mean
 things like gym membership,
 
-00:06:03.986 --> 00:06:06.996 A:middle
+
+123
+00:06:03,986 --> 00:06:06,996
 ride sharing, grocery
 delivery and buying stuff
 
-00:06:06.996 --> 00:06:08.646 A:middle
+
+124
+00:06:06,996 --> 00:06:08,646
 in a brick and mortar store.
 
-00:06:09.136 --> 00:06:09.986 A:middle
+
+125
+00:06:09,136 --> 00:06:09,986
 Physical things.
 
-00:06:10.176 --> 00:06:13.066 A:middle
+
+126
+00:06:10,176 --> 00:06:13,066
 Where In-App Purchase is
 used for in-app content
 
-00:06:13.066 --> 00:06:16.396 A:middle
+
+127
+00:06:13,066 --> 00:06:16,396
 and functionality,
 in-app currency, services,
 
-00:06:16.396 --> 00:06:17.646 A:middle
+
+128
+00:06:16,396 --> 00:06:17,646
 digital subscriptions.
 
-00:06:18.966 --> 00:06:21.146 A:middle
+
+129
+00:06:18,966 --> 00:06:21,146
 Another really big difference
 is who is responsible
 
-00:06:21.146 --> 00:06:22.366 A:middle
+
+130
+00:06:21,146 --> 00:06:22,366
 for processing the payments.
 
-00:06:22.766 --> 00:06:25.616 A:middle
+
+131
+00:06:22,766 --> 00:06:25,616
 When you use Apple Pay, you will
 process the payments yourself
 
-00:06:26.026 --> 00:06:27.346 A:middle
+
+132
+00:06:26,026 --> 00:06:27,346
 through your own
 payment platform,
 
-00:06:28.206 --> 00:06:29.796 A:middle
+
+133
+00:06:28,206 --> 00:06:29,796
 whereas when you
 use In-App Purchase,
 
-00:06:30.096 --> 00:06:32.206 A:middle
+
+134
+00:06:30,096 --> 00:06:32,206
 Apple processes the
 payments on your behalf
 
-00:06:32.286 --> 00:06:34.156 A:middle
+
+135
+00:06:32,286 --> 00:06:34,156
 and sends you the money
 along with the rest
 
-00:06:34.156 --> 00:06:36.406 A:middle
+
+136
+00:06:34,156 --> 00:06:36,406
 of your app sales
 on a monthly basis.
 
-00:06:36.406 --> 00:06:38.296 A:middle
+
+137
+00:06:36,406 --> 00:06:38,296
 SO there is a little
 difference there.
 
-00:06:38.806 --> 00:06:41.116 A:middle
+
+138
+00:06:38,806 --> 00:06:41,116
 They're also subject to slightly
 different App Store guidelines.
 
-00:06:41.626 --> 00:06:44.516 A:middle
+
+139
+00:06:41,626 --> 00:06:44,516
 If you are interested in that
 it's Section 29 for Apple Pay,
 
-00:06:44.946 --> 00:06:46.446 A:middle
+
+140
+00:06:44,946 --> 00:06:46,446
 Section 11 for In-App Purchase.
 
-00:06:46.696 --> 00:06:49.056 A:middle
+
+141
+00:06:46,696 --> 00:06:49,056
 Got a few different guidelines
 over what you can and can't do.
 
-00:06:49.406 --> 00:06:55.136 A:middle
+
+142
+00:06:49,406 --> 00:06:55,136
 So do check those out Now
 Apple Pay is available on all
 
-00:06:55.136 --> 00:06:58.776 A:middle
+
+143
+00:06:55,136 --> 00:06:58,776
 of our devices that has
 a Secure Element chip.
 
-00:06:59.076 --> 00:07:02.996 A:middle
+
+144
+00:06:59,076 --> 00:07:02,996
 So the Secure Element is this
 hardware chip that's dedicated
 
 
-
-00:06:59.076 --> 00:07:02.996 A:middle
-So the Secure Element is this
-hardware chip that's dedicated
-
-00:07:02.996 --> 00:07:05.106 A:middle
+145
+00:07:02,996 --> 00:07:05,106
 to securely storing
 your card information.
 
-00:07:05.106 --> 00:07:09.056 A:middle
+
+146
+00:07:05,106 --> 00:07:09,056
 And this is available on the
 iPhone 6, the iPhone 6 Plus,
 
-00:07:09.706 --> 00:07:12.696 A:middle
+
+147
+00:07:09,706 --> 00:07:12,696
 the iPad Air 2 and
 the iPad mini 3.
 
-00:07:13.326 --> 00:07:15.216 A:middle
+
+148
+00:07:13,326 --> 00:07:15,216
 So all of these devices
 can support Apple Pay.
 
-00:07:15.986 --> 00:07:19.306 A:middle
+
+149
+00:07:15,986 --> 00:07:19,306
 And until recently Apple
 Pay was available in the US,
 
-00:07:19.816 --> 00:07:24.156 A:middle
+
+150
+00:07:19,816 --> 00:07:24,156
 as we announced yesterday it's
 also coming to the UK very soon.
 
-00:07:24.566 --> 00:07:26.496 A:middle
+
+151
+00:07:24,566 --> 00:07:26,496
 But we do have long-term
 goals for Apple Pay.
 
-00:07:26.496 --> 00:07:28.356 A:middle
+
+152
+00:07:26,496 --> 00:07:28,356
 So if you're a developer
 not from either
 
-00:07:28.356 --> 00:07:30.546 A:middle
+
+153
+00:07:28,356 --> 00:07:30,546
 of these countries it's
 still well worth thinking
 
-00:07:30.546 --> 00:07:32.386 A:middle
+
+154
+00:07:30,546 --> 00:07:32,386
 about how Apple Pay
 might integrate
 
-00:07:32.666 --> 00:07:34.936 A:middle
+
+155
+00:07:32,666 --> 00:07:34,936
 into your own application
 for the future.
 
-00:07:35.586 --> 00:07:40.406 A:middle
+
+156
+00:07:35,586 --> 00:07:40,406
 So that was a quick
 overview of Apple Pay.
 
-00:07:41.076 --> 00:07:43.096 A:middle
+
+157
+00:07:41,076 --> 00:07:43,096
 Hopefully I have
 managed to convince you
 
-00:07:43.296 --> 00:07:45.586 A:middle
+
+158
+00:07:43,296 --> 00:07:45,586
 that Apple Pay is well
 worth using in your own app.
 
-00:07:46.446 --> 00:07:49.226 A:middle
+
+159
+00:07:46,446 --> 00:07:49,226
 So now I want to answer a few
 questions about the architecture
 
-00:07:49.226 --> 00:07:52.196 A:middle
+
+160
+00:07:49,226 --> 00:07:52,196
 of Apple Pay, how
 payments are actually made
 
-00:07:52.786 --> 00:07:54.096 A:middle
+
+161
+00:07:52,786 --> 00:07:54,096
 from a technical perspective.
 
-00:07:54.616 --> 00:07:57.986 A:middle
+
+162
+00:07:54,616 --> 00:07:57,986
 So Apple Pay, the very
 first thing you need
 
-00:07:57.986 --> 00:08:00.616 A:middle
+
+163
+00:07:57,986 --> 00:08:00,616
 to do is create a
 Merchant Identifier.
 
 
-
-00:07:57.986 --> 00:08:00.616 A:middle
-to do is create a
-Merchant Identifier.
-
-00:08:01.446 --> 00:08:04.926 A:middle
+164
+00:08:01,446 --> 00:08:04,926
 We require this and it uniquely
 identifies you as a merchant.
 
-00:08:05.436 --> 00:08:07.486 A:middle
+
+165
+00:08:05,436 --> 00:08:07,486
 Now, you can set your
 Merchant Identifier
 
-00:08:07.486 --> 00:08:09.116 A:middle
+
+166
+00:08:07,486 --> 00:08:09,116
 up on the developer portal
 
-00:08:09.196 --> 00:08:11.126 A:middle
+
+167
+00:08:09,196 --> 00:08:11,126
 or through the Xcode
 capabilities window
 
-00:08:11.376 --> 00:08:14.116 A:middle
+
+168
+00:08:11,376 --> 00:08:14,116
 and it's backed by a
 private key in a certificate.
 
-00:08:14.496 --> 00:08:17.086 A:middle
+
+169
+00:08:14,496 --> 00:08:17,086
 It's very similar to some of
 the other identifiers we have
 
-00:08:17.086 --> 00:08:19.296 A:middle
+
+170
+00:08:17,086 --> 00:08:19,296
 on iOS, like push
 token identifiers,
 
-00:08:19.636 --> 00:08:21.626 A:middle
+
+171
+00:08:19,636 --> 00:08:21,626
 or pass identifiers
 for the Wallet App.
 
-00:08:22.516 --> 00:08:24.106 A:middle
+
+172
+00:08:22,516 --> 00:08:24,106
 Now we use this certificate
 
-00:08:24.396 --> 00:08:27.336 A:middle
+
+173
+00:08:24,396 --> 00:08:27,336
 to security encrypt the payment
 information that we generate
 
-00:08:27.746 --> 00:08:29.646 A:middle
+
+174
+00:08:27,746 --> 00:08:29,646
 so it's unique to
 you as a merchant.
 
-00:08:30.036 --> 00:08:32.926 A:middle
+
+175
+00:08:30,036 --> 00:08:32,926
 Nobody else can decrypt
 the payment information,
 
-00:08:32.926 --> 00:08:35.616 A:middle
+
+176
+00:08:32,926 --> 00:08:35,616
 it's just another great
 security benefit of Apple Pay
 
-00:08:35.756 --> 00:08:38.626 A:middle
+
+177
+00:08:35,756 --> 00:08:38,626
 and we recommend
 that you style it
 
-00:08:38.626 --> 00:08:40.096 A:middle
+
+178
+00:08:38,626 --> 00:08:40,096
 like a standard reverse
 DNS format,
 
-00:08:40.246 --> 00:08:42.426 A:middle
+
+179
+00:08:40,246 --> 00:08:42,426
 like many of our
 other identifiers,
 
-00:08:42.686 --> 00:08:43.606 A:middle
+
+180
+00:08:42,686 --> 00:08:43,606
 beginning with merchant.
 
-00:08:43.966 --> 00:08:45.556 A:middle
+
+181
+00:08:43,966 --> 00:08:45,556
 So here is an example
 we are going
 
-00:08:45.556 --> 00:08:46.916 A:middle
+
+182
+00:08:45,556 --> 00:08:46,916
 to use later in out sample app.
 
-00:08:47.216 --> 00:08:50.036 A:middle
+
+183
+00:08:47,216 --> 00:08:50,036
 This is the very first thing
 you need to do to use Apple Pay.
 
-00:08:50.036 --> 00:08:52.986 A:middle
+
+184
+00:08:50,036 --> 00:08:52,986
 Once we have a merchant
 identifier, we're actually ready
 
-00:08:52.986 --> 00:08:55.606 A:middle
+
+185
+00:08:52,986 --> 00:08:55,606
 to get Apple Pay up in our app.
 
-00:08:56.226 --> 00:09:00.166 A:middle
+
+186
+00:08:56,226 --> 00:09:00,166
 The first thing you do is
 display what we call the payment
 
 
-
-00:08:56.226 --> 00:09:00.166 A:middle
-The first thing you do is
-display what we call the payment
-
-00:09:00.166 --> 00:09:02.396 A:middle
+187
+00:09:00,166 --> 00:09:02,396
 sheet which is vendored by us
 
-00:09:02.536 --> 00:09:04.046 A:middle
+
+188
+00:09:02,536 --> 00:09:04,046
 and it summarizes
 all the charges
 
-00:09:04.046 --> 00:09:05.146 A:middle
+
+189
+00:09:04,046 --> 00:09:05,146
 that your app is
 going to want to make.
 
-00:09:06.286 --> 00:09:08.836 A:middle
+
+190
+00:09:06,286 --> 00:09:08,836
 The user then Touch
 IDs to authorize
 
-00:09:09.366 --> 00:09:12.666 A:middle
+
+191
+00:09:09,366 --> 00:09:12,666
 and your app will receive a
 payment token in response.
 
-00:09:12.856 --> 00:09:15.616 A:middle
+
+192
+00:09:12,856 --> 00:09:15,616
 Now a payment token contains
 all the information you need
 
-00:09:15.616 --> 00:09:16.606 A:middle
+
+193
+00:09:15,616 --> 00:09:16,606
 to charge the payment.
 
-00:09:17.756 --> 00:09:20.566 A:middle
+
+194
+00:09:17,756 --> 00:09:20,566
 It's encrypted using your
 Merchant ID certificate.
 
-00:09:21.076 --> 00:09:24.586 A:middle
+
+195
+00:09:21,076 --> 00:09:24,586
 So unique to you, only you as
 the developer can decrypt it.
 
-00:09:25.166 --> 00:09:27.786 A:middle
+
+196
+00:09:25,166 --> 00:09:27,786
 And then you can validate this
 and send it for processing
 
-00:09:28.006 --> 00:09:30.306 A:middle
+
+197
+00:09:28,006 --> 00:09:30,306
 and display a success
 sheet in your app.
 
-00:09:31.586 --> 00:09:34.226 A:middle
+
+198
+00:09:31,586 --> 00:09:34,226
 Thats a lot of information
 so let's look in more detail.
 
-00:09:35.226 --> 00:09:37.376 A:middle
+
+199
+00:09:35,226 --> 00:09:37,376
 Little flow here.
 
-00:09:37.506 --> 00:09:40.866 A:middle
+
+200
+00:09:37,506 --> 00:09:40,866
 I have broken down they
 system into two components iOS
 
-00:09:40.866 --> 00:09:42.036 A:middle
+
+201
+00:09:40,866 --> 00:09:42,036
 and the Secure Element.
 
-00:09:42.156 --> 00:09:45.166 A:middle
+
+202
+00:09:42,156 --> 00:09:45,166
 Remember the Secure Element
 is the unique hard chip
 
-00:09:46.086 --> 00:09:47.796 A:middle
+
+203
+00:09:46,086 --> 00:09:47,796
 that security stores
 your card information.
 
-00:09:48.796 --> 00:09:51.316 A:middle
+
+204
+00:09:48,796 --> 00:09:51,316
 So first, your app will display
 your regular checkout flow
 
-00:09:51.506 --> 00:09:54.506 A:middle
+
+205
+00:09:51,506 --> 00:09:54,506
 and you will ask iOS whether
 the user has any Apple Pay
 
-00:09:54.506 --> 00:09:55.406 A:middle
+
+206
+00:09:54,506 --> 00:09:55,406
 cards available.
 
-00:09:56.156 --> 00:09:59.036 A:middle
+
+207
+00:09:56,156 --> 00:09:59,036
 Because if the user doesn't have
 any Apple Pay cards available,
 
-00:09:59.166 --> 00:10:01.276 A:middle
+
+208
+00:09:59,166 --> 00:10:01,276
 or the device doesn't
 support it, you want them
 
 
-
-00:09:59.166 --> 00:10:01.276 A:middle
-or the device doesn't
-support it, you want them
-
-00:10:01.276 --> 00:10:02.786 A:middle
+209
+00:10:01,276 --> 00:10:02,786
 through your traditional
 checkout flow.
 
-00:10:03.406 --> 00:10:06.686 A:middle
+
+210
+00:10:03,406 --> 00:10:06,686
 Now assuming they do,
 you will then want
 
-00:10:06.686 --> 00:10:09.526 A:middle
+
+211
+00:10:06,686 --> 00:10:09,526
 to present the Apple Pay
 sheet, and you will then check
 
-00:10:09.526 --> 00:10:12.816 A:middle
+
+212
+00:10:09,526 --> 00:10:12,816
 or rather iOS will check
 whether the Touch ID is valid.
 
-00:10:14.246 --> 00:10:15.386 A:middle
+
+213
+00:10:14,246 --> 00:10:15,386
 Now, assuming it is valid,
 
-00:10:15.386 --> 00:10:16.806 A:middle
+
+214
+00:10:15,386 --> 00:10:16,806
 we will actually
 pass some information
 
-00:10:16.806 --> 00:10:19.326 A:middle
+
+215
+00:10:16,806 --> 00:10:19,326
 down to the dedicated Secure
 Element, which is going
 
-00:10:19.326 --> 00:10:21.726 A:middle
+
+216
+00:10:19,326 --> 00:10:21,726
 to securely wrap all of
 this payment information up,
 
-00:10:22.026 --> 00:10:25.596 A:middle
+
+217
+00:10:22,026 --> 00:10:25,596
 this includes the cryptogram
 which is an encrypted piece
 
-00:10:25.596 --> 00:10:27.176 A:middle
+
+218
+00:10:25,596 --> 00:10:27,176
 of data required to
 make the payment.
 
-00:10:28.136 --> 00:10:29.576 A:middle
+
+219
+00:10:28,136 --> 00:10:29,576
 It's then going to
 send it to our servers.
 
-00:10:29.576 --> 00:10:33.076 A:middle
+
+220
+00:10:29,576 --> 00:10:33,076
 Now on our servers it just
 gets rewrapped using your
 
-00:10:33.076 --> 00:10:33.956 A:middle
+
+221
+00:10:33,076 --> 00:10:33,956
 Merchant Identifier.
 
-00:10:33.956 --> 00:10:34.816 A:middle
+
+222
+00:10:33,956 --> 00:10:34,816
 So that's all we're doing.
 
-00:10:34.816 --> 00:10:35.876 A:middle
+
+223
+00:10:34,816 --> 00:10:35,876
 This is because we don't want
 
-00:10:35.876 --> 00:10:38.856 A:middle
+
+224
+00:10:35,876 --> 00:10:38,856
 to ship your certificate
 in the app, right?
 
-00:10:38.936 --> 00:10:41.076 A:middle
+
+225
+00:10:38,936 --> 00:10:41,076
 So our server reroutes
 the payment,
 
-00:10:41.076 --> 00:10:43.466 A:middle
+
+226
+00:10:41,076 --> 00:10:43,466
 and encrypts it uniquely
 to you and it's passed back
 
-00:10:43.616 --> 00:10:47.136 A:middle
+
+227
+00:10:43,616 --> 00:10:47,136
 up through the system where you
 can then send it for processing.
 
-00:10:47.686 --> 00:10:50.686 A:middle
+
+228
+00:10:47,686 --> 00:10:50,686
 Now, assuming the
 processing is successful,
 
-00:10:50.686 --> 00:10:52.546 A:middle
+
+229
+00:10:50,686 --> 00:10:52,546
 you can dismiss the
 payment sheet
 
-00:10:52.546 --> 00:10:54.856 A:middle
+
+230
+00:10:52,546 --> 00:10:54,856
 and display your own
 confirmation screen.
 
-00:10:55.426 --> 00:10:59.186 A:middle
+
+231
+00:10:55,426 --> 00:10:59,186
 I think many of you
 might be wondering, well,
 
-00:10:59.186 --> 00:11:00.526 A:middle
+
+232
+00:10:59,186 --> 00:11:00,526
 that's all very well
 and good, Nick,
 
 
-
-00:10:59.186 --> 00:11:00.526 A:middle
-that's all very well
-and good, Nick,
-
-00:11:00.526 --> 00:11:02.386 A:middle
+233
+00:11:00,526 --> 00:11:02,386
 but how do I process
 the payment?
 
-00:11:03.016 --> 00:11:04.086 A:middle
+
+234
+00:11:03,016 --> 00:11:04,086
 How does that actually work?
 
-00:11:04.416 --> 00:11:05.136 A:middle
+
+235
+00:11:04,416 --> 00:11:05,136
 Let's talk about that.
 
-00:11:05.136 --> 00:11:06.436 A:middle
+
+236
+00:11:05,136 --> 00:11:06,436
 Let's talk about how
 you can get your money.
 
-00:11:06.436 --> 00:11:09.696 A:middle
+
+237
+00:11:06,436 --> 00:11:09,696
 It's probably a subject
 close to your heart.
 
-00:11:09.696 --> 00:11:11.946 A:middle
+
+238
+00:11:09,696 --> 00:11:11,946
 So there's two way to
 process Apple payments.
 
-00:11:12.746 --> 00:11:14.866 A:middle
+
+239
+00:11:12,746 --> 00:11:14,866
 The first one, and the one
 we recommend for most of you,
 
-00:11:14.866 --> 00:11:16.186 A:middle
+
+240
+00:11:14,866 --> 00:11:16,186
 is to use a payment platform.
 
-00:11:16.866 --> 00:11:19.396 A:middle
+
+241
+00:11:16,866 --> 00:11:19,396
 The payment platform can
 handle this decryption
 
-00:11:19.626 --> 00:11:23.026 A:middle
+
+242
+00:11:19,626 --> 00:11:23,026
 and the understanding of the
 cryptogram on your behalf.
 
-00:11:23.486 --> 00:11:25.146 A:middle
+
+243
+00:11:23,486 --> 00:11:25,146
 You, when you sign
 up, you provide them
 
-00:11:25.146 --> 00:11:26.806 A:middle
+
+244
+00:11:25,146 --> 00:11:26,806
 with your Merchant
 ID and certificate
 
-00:11:26.806 --> 00:11:28.076 A:middle
+
+245
+00:11:26,806 --> 00:11:28,076
 and they can decrypt it for you
 
-00:11:28.076 --> 00:11:29.696 A:middle
+
+246
+00:11:28,076 --> 00:11:29,696
 and you simply send
 them a payment token.
 
-00:11:30.446 --> 00:11:33.476 A:middle
+
+247
+00:11:30,446 --> 00:11:33,476
 And some payment platforms
 actually provide native iOS
 
-00:11:33.476 --> 00:11:36.126 A:middle
+
+248
+00:11:33,476 --> 00:11:36,126
 development kits in
 Swift or Objective-C.
 
-00:11:36.126 --> 00:11:38.546 A:middle
+
+249
+00:11:36,126 --> 00:11:38,546
 So you can really easily
 get up and running.
 
-00:11:39.426 --> 00:11:41.776 A:middle
+
+250
+00:11:39,426 --> 00:11:41,776
 It's because of that, we think
 it's the preferred option
 
-00:11:42.296 --> 00:11:43.576 A:middle
+
+251
+00:11:42,296 --> 00:11:43,576
 for most developers.
 
-00:11:44.106 --> 00:11:48.376 A:middle
+
+252
+00:11:44,106 --> 00:11:48,376
 And many, many payment platforms
 support Apple Pay already.
 
-00:11:49.036 --> 00:11:50.196 A:middle
+
+253
+00:11:49,036 --> 00:11:50,196
 Here are just a few.
 
-00:11:50.196 --> 00:11:51.126 A:middle
+
+254
+00:11:50,196 --> 00:11:51,126
 There are many more.
 
-00:11:51.606 --> 00:11:52.896 A:middle
+
+255
+00:11:51,606 --> 00:11:52,896
 We have a list on our website.
 
-00:11:54.076 --> 00:11:54.936 A:middle
+
+256
+00:11:54,076 --> 00:11:54,936
 These are in the US.
 
-00:11:55.556 --> 00:11:57.706 A:middle
+
+257
+00:11:55,556 --> 00:11:57,706
 Chances are maybe you are
 already using one of these.
 
-00:11:57.706 --> 00:12:01.176 A:middle
+
+258
+00:11:57,706 --> 00:12:01,176
 And a number of UK payment
 processes are already set
 
 
-
-00:11:57.706 --> 00:12:01.176 A:middle
-And a number of UK payment
-processes are already set
-
-00:12:01.176 --> 00:12:02.376 A:middle
+259
+00:12:01,176 --> 00:12:02,376
 up to support Apple Pay.
 
-00:12:02.476 --> 00:12:04.426 A:middle
+
+260
+00:12:02,476 --> 00:12:04,426
 So if you are in the
 UK, you can go and talk
 
-00:12:04.426 --> 00:12:08.006 A:middle
+
+261
+00:12:04,426 --> 00:12:08,006
 to your payment processor today.
 
-00:12:08.186 --> 00:12:10.446 A:middle
+
+262
+00:12:08,186 --> 00:12:10,446
 Now, like I said,
 there's another way,
 
-00:12:10.496 --> 00:12:12.846 A:middle
+
+263
+00:12:10,496 --> 00:12:12,846
 and that's to process
 the payments yourself.
 
-00:12:14.146 --> 00:12:16.916 A:middle
+
+264
+00:12:14,146 --> 00:12:16,916
 Now, we recommend this if
 you are experienced working
 
-00:12:16.916 --> 00:12:20.206 A:middle
+
+265
+00:12:16,916 --> 00:12:20,206
 with payments, and you have some
 existing payment infrastructure,
 
-00:12:20.706 --> 00:12:22.326 A:middle
+
+266
+00:12:20,706 --> 00:12:22,326
 and if you do this,
 you are going
 
-00:12:22.326 --> 00:12:25.076 A:middle
+
+267
+00:12:22,326 --> 00:12:25,076
 to decrypt the payment
 token on your own servers
 
-00:12:25.646 --> 00:12:28.006 A:middle
+
+268
+00:12:25,646 --> 00:12:28,006
 and then you are going to send
 the underlying cryptogram,
 
-00:12:28.146 --> 00:12:29.566 A:middle
+
+269
+00:12:28,146 --> 00:12:29,566
 that the Secure Element
 generated
 
-00:12:30.356 --> 00:12:32.766 A:middle
+
+270
+00:12:30,356 --> 00:12:32,766
 to your merchant acquirer,
 your acquiring bank.
 
-00:12:32.766 --> 00:12:36.776 A:middle
+
+271
+00:12:32,766 --> 00:12:36,776
 If that didn't make any
 sense to you, again,
 
-00:12:37.106 --> 00:12:39.446 A:middle
+
+272
+00:12:37,106 --> 00:12:39,446
 we only recommend this if
 you've got existing payment
 
-00:12:39.446 --> 00:12:40.986 A:middle
+
+273
+00:12:39,446 --> 00:12:40,986
 infrastructure and
 we're not going
 
-00:12:40.986 --> 00:12:43.306 A:middle
+
+274
+00:12:40,986 --> 00:12:43,306
 to cover decrypting the
 token in today's session.
 
-00:12:43.926 --> 00:12:45.516 A:middle
+
+275
+00:12:43,926 --> 00:12:45,516
 However if you do
 want to learn more
 
-00:12:45.516 --> 00:12:47.946 A:middle
+
+276
+00:12:45,516 --> 00:12:47,946
 about this we've got some
 documentation on the website,
 
-00:12:48.246 --> 00:12:49.756 A:middle
+
+277
+00:12:48,246 --> 00:12:49,756
 search for payment
 token reference
 
-00:12:50.056 --> 00:12:52.686 A:middle
+
+278
+00:12:50,056 --> 00:12:52,686
 and we will also have staff
 in the labs today and tomorrow
 
-00:12:52.686 --> 00:12:54.366 A:middle
+
+279
+00:12:52,686 --> 00:12:54,366
 who can answer any
 questions you might have
 
-00:12:54.366 --> 00:12:55.836 A:middle
+
+280
+00:12:54,366 --> 00:12:55,836
 about processing the
 payments yourself.
 
-00:12:56.376 --> 00:13:02.096 A:middle
+
+281
+00:12:56,376 --> 00:13:02,096
 Okay. That was a bit of a
 whistle-stop tour of how
 
 
-
-00:12:56.376 --> 00:13:02.096 A:middle
-Okay. That was a bit of a
-whistle-stop tour of how
-
-00:13:02.096 --> 00:13:04.226 A:middle
+282
+00:13:02,096 --> 00:13:04,226
 to use Apple Pay, how
 it makes payments.
 
-00:13:04.226 --> 00:13:08.556 A:middle
+
+283
+00:13:04,226 --> 00:13:08,556
 I think we are ready to look at
 the actual iOS side of things
 
-00:13:09.436 --> 00:13:11.526 A:middle
+
+284
+00:13:09,436 --> 00:13:11,526
 and the very first step
 is to look at design.
 
-00:13:12.046 --> 00:13:14.436 A:middle
+
+285
+00:13:12,046 --> 00:13:14,436
 It's very important when you
 use Apple Pay to make sure
 
-00:13:14.436 --> 00:13:16.536 A:middle
+
+286
+00:13:14,436 --> 00:13:16,536
 that your app takes as advantage
 of what we're providing
 
-00:13:16.736 --> 00:13:18.376 A:middle
+
+287
+00:13:16,736 --> 00:13:18,376
 and designed in the
 best way possible.
 
-00:13:18.856 --> 00:13:21.676 A:middle
+
+288
+00:13:18,856 --> 00:13:21,676
 And to talk more about that,
 I would like to ask Rachel up,
 
-00:13:22.256 --> 00:13:23.066 A:middle
+
+289
+00:13:22,256 --> 00:13:23,066
 to run you through how
 
-00:13:23.066 --> 00:13:24.796 A:middle
+
+290
+00:13:23,066 --> 00:13:24,796
 to get the best user
 experience of Apple Pay.
 
-00:13:25.246 --> 00:13:25.536 A:middle
+
+291
+00:13:25,246 --> 00:13:25,536
 Rachel?
 
-00:13:25.616 --> 00:13:25.886 A:middle
-&gt;&gt; RACHEL ROTH: Thanks, Nick.
 
-00:13:26.516 --> 00:13:31.066 A:middle
+292
+00:13:25,616 --> 00:13:25,886
+>> RACHEL ROTH: Thanks, Nick.
+
+
+293
+00:13:26,516 --> 00:13:31,066
 [Applause]
 
-00:13:31.566 --> 00:13:35.646 A:middle
-&gt;&gt; RACHEL ROTH: Hi, everybody,
+
+294
+00:13:31,566 --> 00:13:35,646
+>> RACHEL ROTH: Hi, everybody,
 I'm a User Experience Evangelist
 
-00:13:35.716 --> 00:13:38.426 A:middle
+
+295
+00:13:35,716 --> 00:13:38,426
 at Apple and I'm here
 today to hell you how
 
-00:13:38.426 --> 00:13:40.206 A:middle
+
+296
+00:13:38,426 --> 00:13:40,206
 to create the optimal
 experience,
 
-00:13:40.706 --> 00:13:43.056 A:middle
+
+297
+00:13:40,706 --> 00:13:43,056
 using Apple Pay in your apps.
 
-00:13:43.646 --> 00:13:46.676 A:middle
+
+298
+00:13:43,646 --> 00:13:46,676
 Now, as Nick said,
 customers love Apple Pay,
 
-00:13:46.676 --> 00:13:48.506 A:middle
+
+299
+00:13:46,676 --> 00:13:48,506
 because it makes shopping easy.
 
-00:13:48.886 --> 00:13:51.066 A:middle
+
+300
+00:13:48,886 --> 00:13:51,066
 And as a merchant,
 that's great for you,
 
-00:13:51.066 --> 00:13:53.576 A:middle
+
+301
+00:13:51,066 --> 00:13:53,576
 because the easier it
 is to buy something,
 
-00:13:54.076 --> 00:13:55.886 A:middle
+
+302
+00:13:54,076 --> 00:13:55,886
 the more likely you
 are to make a sale.
 
-00:13:56.916 --> 00:14:00.276 A:middle
+
+303
+00:13:56,916 --> 00:14:00,276
 Now a person's desire to buy
 something can be fleeting.
 
 
-
-00:13:56.916 --> 00:14:00.276 A:middle
-Now a person's desire to buy
-something can be fleeting.
-
-00:14:00.726 --> 00:14:02.926 A:middle
+304
+00:14:00,726 --> 00:14:02,926
 So any obstacle that interferes
 
-00:14:02.926 --> 00:14:05.846 A:middle
+
+305
+00:14:02,926 --> 00:14:05,846
 with that transaction flow
 could compromise the sale.
 
-00:14:06.846 --> 00:14:10.546 A:middle
+
+306
+00:14:06,846 --> 00:14:10,546
 The great news is that Apple Pay
 will provide everything you need
 
-00:14:10.546 --> 00:14:13.516 A:middle
+
+307
+00:14:10,546 --> 00:14:13,516
 to complete the transaction,
 so you can eliminate a lot
 
-00:14:13.516 --> 00:14:15.756 A:middle
+
+308
+00:14:13,516 --> 00:14:15,756
 of the obstacles that
 people experienced today.
 
-00:14:17.266 --> 00:14:19.506 A:middle
+
+309
+00:14:17,266 --> 00:14:19,506
 There is no need
 to make people set
 
-00:14:19.586 --> 00:14:21.626 A:middle
+
+310
+00:14:19,586 --> 00:14:21,626
 up an account before they
 have even bought something.
 
-00:14:21.626 --> 00:14:25.676 A:middle
+
+311
+00:14:21,626 --> 00:14:25,676
 And I don't know
 anyone who likes looking
 
-00:14:25.676 --> 00:14:27.656 A:middle
+
+312
+00:14:25,676 --> 00:14:27,656
 at lengthy forms and
 filling them out.
 
-00:14:28.676 --> 00:14:32.146 A:middle
+
+313
+00:14:28,676 --> 00:14:32,146
 And you don't have to worry
 about outdated billing
 
-00:14:32.146 --> 00:14:34.236 A:middle
+
+314
+00:14:32,146 --> 00:14:34,236
 or shipping information
 interfering
 
-00:14:34.236 --> 00:14:35.656 A:middle
+
+315
+00:14:34,236 --> 00:14:35,656
 with someone buying something.
 
-00:14:36.696 --> 00:14:40.086 A:middle
+
+316
+00:14:36,696 --> 00:14:40,086
 I recently moved, and any
 time I go to make a purchase,
 
-00:14:40.736 --> 00:14:43.386 A:middle
+
+317
+00:14:40,736 --> 00:14:43,386
 if the app isn't using
 Apple Pay, I have to go
 
-00:14:43.386 --> 00:14:46.656 A:middle
+
+318
+00:14:43,386 --> 00:14:46,656
 through that tedious process
 of updating all of my billing
 
-00:14:46.656 --> 00:14:47.696 A:middle
+
+319
+00:14:46,656 --> 00:14:47,696
 and shipping information.
 
-00:14:47.696 --> 00:14:51.826 A:middle
+
+320
+00:14:47,696 --> 00:14:51,826
 And if I'm short on time, or
 just not in the mood to fill
 
-00:14:51.826 --> 00:14:54.536 A:middle
+
+321
+00:14:51,826 --> 00:14:54,536
 out a bunch of forms, well
 being I will just walk away,
 
-00:14:54.786 --> 00:14:56.936 A:middle
+
+322
+00:14:54,786 --> 00:14:56,936
 rather than completing
 that transaction.
 
-00:14:57.806 --> 00:14:59.106 A:middle
+
+323
+00:14:57,806 --> 00:14:59,106
 Let me give you an example
 
-00:14:59.106 --> 00:15:02.016 A:middle
+
+324
+00:14:59,106 --> 00:15:02,016
 of how this looks
 without Apple Pay.
 
 
-
-00:14:59.106 --> 00:15:02.016 A:middle
-of how this looks
-without Apple Pay.
-
-00:15:02.476 --> 00:15:04.966 A:middle
+325
+00:15:02,476 --> 00:15:04,966
 So let's say my dog
 needs a new collar.
 
-00:15:05.516 --> 00:15:07.216 A:middle
+
+326
+00:15:05,516 --> 00:15:07,216
 My friend told me
 about this store
 
-00:15:07.216 --> 00:15:08.946 A:middle
+
+327
+00:15:07,216 --> 00:15:08,946
 that makes really
 cool dog stuff.
 
-00:15:09.206 --> 00:15:13.426 A:middle
+
+328
+00:15:09,206 --> 00:15:13,426
 I downloaded their app,
 I'm going to check it out.
 
-00:15:13.426 --> 00:15:16.386 A:middle
+
+329
+00:15:13,426 --> 00:15:16,386
 Oh, the first thing I
 have to do is sign up?
 
-00:15:16.476 --> 00:15:20.626 A:middle
+
+330
+00:15:16,476 --> 00:15:20,626
 Well, my friend promised
 me the dog stuff is cool,
 
-00:15:20.626 --> 00:15:23.726 A:middle
+
+331
+00:15:20,626 --> 00:15:23,726
 and this picture is
 really cute of this dog.
 
-00:15:23.786 --> 00:15:24.976 A:middle
+
+332
+00:15:23,786 --> 00:15:24,976
 So I will go ahead and do it.
 
-00:15:25.556 --> 00:15:26.516 A:middle
+
+333
+00:15:25,556 --> 00:15:26,516
 Even though I'm probably going
 
-00:15:26.516 --> 00:15:28.916 A:middle
+
+334
+00:15:26,516 --> 00:15:28,916
 to get some email
 newsletter I didn't want now.
 
-00:15:29.616 --> 00:15:33.196 A:middle
+
+335
+00:15:29,616 --> 00:15:33,196
 Ugh! And now the next
 step is create an account.
 
-00:15:33.196 --> 00:15:34.996 A:middle
+
+336
+00:15:33,196 --> 00:15:34,996
 I haven't bought anything yet
 
-00:15:34.996 --> 00:15:37.516 A:middle
+
+337
+00:15:34,996 --> 00:15:37,516
 and I'm not even sure I'm
 going to buy something.
 
-00:15:38.076 --> 00:15:41.046 A:middle
+
+338
+00:15:38,076 --> 00:15:41,046
 So this is the point at which
 I would normally just walk away
 
-00:15:41.046 --> 00:15:42.116 A:middle
+
+339
+00:15:41,046 --> 00:15:42,116
 entirely from this app,
 
-00:15:42.626 --> 00:15:46.096 A:middle
+
+340
+00:15:42,626 --> 00:15:46,096
 but since you are all
 here, we will go forward.
 
-00:15:46.096 --> 00:15:47.146 A:middle
+
+341
+00:15:46,096 --> 00:15:47,146
 I will fill this all out.
 
-00:15:47.996 --> 00:15:50.986 A:middle
+
+342
+00:15:47,996 --> 00:15:50,986
 Finally, I find a dog
 collar, and this is great.
 
-00:15:50.986 --> 00:15:52.416 A:middle
+
+343
+00:15:50,986 --> 00:15:52,416
 My dog is going to
 look awesome in it.
 
-00:15:52.966 --> 00:15:56.966 A:middle
+
+344
+00:15:52,966 --> 00:15:56,966
 So I'm going to start
 the transaction process.
 
-00:15:56.966 --> 00:15:58.786 A:middle
+
+345
+00:15:56,966 --> 00:15:58,786
 Okay, first billing information.
 
-00:15:59.226 --> 00:16:03.046 A:middle
+
+346
+00:15:59,226 --> 00:16:03,046
 Lots to type there and I
 happen to live in an apartment
 
 
-
-00:15:59.226 --> 00:16:03.046 A:middle
-Lots to type there and I
-happen to live in an apartment
-
-00:16:03.046 --> 00:16:05.426 A:middle
+347
+00:16:03,046 --> 00:16:05,426
 so I have to find that number
 sign on the keyboard to go
 
-00:16:05.426 --> 00:16:06.626 A:middle
+
+348
+00:16:05,426 --> 00:16:06,626
 with my apartment number.
 
-00:16:08.216 --> 00:16:11.236 A:middle
+
+349
+00:16:08,216 --> 00:16:11,236
 And I want it to ship to work
 instead of home and so I have
 
-00:16:11.236 --> 00:16:13.576 A:middle
+
+350
+00:16:11,236 --> 00:16:13,576
 to type in all of this
 information as well.
 
-00:16:15.126 --> 00:16:17.086 A:middle
+
+351
+00:16:15,126 --> 00:16:17,086
 Okay shipping options.
 
-00:16:17.086 --> 00:16:20.076 A:middle
+
+352
+00:16:17,086 --> 00:16:20,076
 Okay, okay, I'm going
 to pick one of those.
 
-00:16:20.076 --> 00:16:22.406 A:middle
+
+353
+00:16:20,076 --> 00:16:22,406
 And finally, here is where I
 have to pull my credit card
 
-00:16:22.406 --> 00:16:25.376 A:middle
+
+354
+00:16:22,406 --> 00:16:25,376
 out of my pocket and type
 in all of this information.
 
-00:16:26.726 --> 00:16:29.836 A:middle
+
+355
+00:16:26,726 --> 00:16:29,836
 That's six taps and
 a ton of typing.
 
-00:16:30.606 --> 00:16:34.476 A:middle
+
+356
+00:16:30,606 --> 00:16:34,476
 There's plenty of opportunity in
 there for me to get distracted,
 
-00:16:34.686 --> 00:16:38.046 A:middle
+
+357
+00:16:34,686 --> 00:16:38,046
 interrupted, frustrated,
 and walk away.
 
-00:16:38.836 --> 00:16:41.906 A:middle
+
+358
+00:16:38,836 --> 00:16:41,906
 And if I was looking for
 this dog collar while I'm
 
-00:16:41.906 --> 00:16:45.466 A:middle
+
+359
+00:16:41,906 --> 00:16:45,466
 on my morning commute,
 well, I'm not really excited
 
-00:16:45.466 --> 00:16:47.606 A:middle
+
+360
+00:16:45,466 --> 00:16:47,606
 about pulling my credit
 card out when I'm standing
 
-00:16:47.606 --> 00:16:49.236 A:middle
+
+361
+00:16:47,606 --> 00:16:49,236
 on a crowded train platform.
 
-00:16:49.506 --> 00:16:50.676 A:middle
+
+362
+00:16:49,506 --> 00:16:50,676
 It's just not going to happen.
 
-00:16:51.826 --> 00:16:55.616 A:middle
+
+363
+00:16:51,826 --> 00:16:55,616
 Here's how much faster
 this can go with Apple Pay.
 
-00:16:55.616 --> 00:16:56.256 A:middle
+
+364
+00:16:55,616 --> 00:16:56,256
 Launch the app.
 
-00:16:57.386 --> 00:16:58.126 A:middle
+
+365
+00:16:57,386 --> 00:16:58,126
 Find a product.
 
-00:16:58.216 --> 00:17:00.026 A:middle
+
+366
+00:16:58,216 --> 00:17:00,026
 No account setup necessary.
 
 
-
-00:16:58.216 --> 00:17:00.026 A:middle
-No account setup necessary.
-
-00:17:00.806 --> 00:17:02.256 A:middle
+367
+00:17:00,806 --> 00:17:02,256
 Tap the Apple Pay button.
 
-00:17:03.256 --> 00:17:05.296 A:middle
+
+368
+00:17:03,256 --> 00:17:05,296
 Put my thumb down
 for Touch ID, done!
 
-00:17:06.126 --> 00:17:08.126 A:middle
+
+369
+00:17:06,126 --> 00:17:08,126
 Two taps. No typing.
 
-00:17:08.816 --> 00:17:10.425 A:middle
+
+370
+00:17:08,816 --> 00:17:10,425
 That is fast.
 
-00:17:11.955 --> 00:17:14.546 A:middle
+
+371
+00:17:11,955 --> 00:17:14,546
 So thanks to Apple Pay,
 you can eliminate a lot
 
-00:17:14.546 --> 00:17:15.656 A:middle
+
+372
+00:17:14,546 --> 00:17:15,656
 of these obstacles.
 
-00:17:16.226 --> 00:17:18.086 A:middle
+
+373
+00:17:16,226 --> 00:17:18,086
 Fewer taps means more sales.
 
-00:17:18.086 --> 00:17:22.965 A:middle
+
+374
+00:17:18,086 --> 00:17:22,965
 So next, let's talk about
 how to integrate Apple Pay
 
-00:17:22.965 --> 00:17:24.175 A:middle
+
+375
+00:17:22,965 --> 00:17:24,175
 into your transaction flows.
 
-00:17:24.175 --> 00:17:26.796 A:middle
+
+376
+00:17:24,175 --> 00:17:26,796
 And the first thing to think
 
-00:17:26.796 --> 00:17:29.426 A:middle
+
+377
+00:17:26,796 --> 00:17:29,426
 about is giving people a
 shortcut to buying something.
 
-00:17:30.156 --> 00:17:32.786 A:middle
+
+378
+00:17:30,156 --> 00:17:32,786
 You don't have to put everything
 into a shopping cart first
 
-00:17:32.786 --> 00:17:34.996 A:middle
+
+379
+00:17:32,786 --> 00:17:34,996
 in order to start that
 transaction process.
 
-00:17:36.526 --> 00:17:38.586 A:middle
+
+380
+00:17:36,526 --> 00:17:38,586
 So this is Chairish, I'm looking
 for something interesting
 
-00:17:38.586 --> 00:17:40.996 A:middle
+
+381
+00:17:38,586 --> 00:17:40,996
 for my home, these
 glasses look interesting.
 
-00:17:41.626 --> 00:17:43.116 A:middle
+
+382
+00:17:41,626 --> 00:17:43,116
 The Apple Pay button
 is right there.
 
-00:17:43.836 --> 00:17:46.506 A:middle
+
+383
+00:17:43,836 --> 00:17:46,506
 I don't have to put it in a
 shopping cart and then go tap
 
-00:17:46.506 --> 00:17:49.176 A:middle
+
+384
+00:17:46,506 --> 00:17:49,176
 on the shopping cart and then
 say I'm ready to check out.
 
-00:17:49.876 --> 00:17:52.296 A:middle
+
+385
+00:17:49,876 --> 00:17:52,296
 This a way to reduce the
 number of taps it takes
 
-00:17:52.366 --> 00:17:55.906 A:middle
+
+386
+00:17:52,366 --> 00:17:55,906
 to complete the transaction.
 
-00:17:55.906 --> 00:17:58.006 A:middle
+
+387
+00:17:55,906 --> 00:17:58,006
 Groupon takes a very
 similar approach.
 
-00:17:58.736 --> 00:18:01.006 A:middle
+
+388
+00:17:58,736 --> 00:18:01,006
 So I'm going to be in
 Chicago in a couple of weeks.
 
 
-
-00:17:58.736 --> 00:18:01.006 A:middle
-So I'm going to be in
-Chicago in a couple of weeks.
-
-00:18:01.196 --> 00:18:02.926 A:middle
+389
+00:18:01,196 --> 00:18:02,926
 I'm looking for something
 fun to do.
 
-00:18:02.926 --> 00:18:04.096 A:middle
+
+390
+00:18:02,926 --> 00:18:04,096
 This looks interesting.
 
-00:18:04.846 --> 00:18:06.576 A:middle
+
+391
+00:18:04,846 --> 00:18:06,576
 So when I tap for
 more information,
 
-00:18:06.576 --> 00:18:09.096 A:middle
+
+392
+00:18:06,576 --> 00:18:09,096
 that Apple Pay button
 is right there.
 
-00:18:09.646 --> 00:18:12.706 A:middle
+
+393
+00:18:09,646 --> 00:18:12,706
 It's so easy for me to
 quickly make a purchase.
 
-00:18:12.706 --> 00:18:17.876 A:middle
+
+394
+00:18:12,706 --> 00:18:17,876
 So think about adding Apple
 Pay buttons right next
 
-00:18:17.876 --> 00:18:18.686 A:middle
+
+395
+00:18:17,876 --> 00:18:18,686
 to your product details.
 
-00:18:19.166 --> 00:18:23.896 A:middle
+
+396
+00:18:19,166 --> 00:18:23,896
 Give people that shortcut
 to starting the transaction.
 
-00:18:23.896 --> 00:18:27.136 A:middle
+
+397
+00:18:23,896 --> 00:18:27,136
 Now, as Nick said,
 customers love Apple Pay.
 
-00:18:27.276 --> 00:18:29.586 A:middle
+
+398
+00:18:27,276 --> 00:18:29,586
 So if they are on
 a supported device
 
-00:18:30.266 --> 00:18:32.096 A:middle
+
+399
+00:18:30,266 --> 00:18:32,096
 and they have activated
 a card you accept,
 
-00:18:32.656 --> 00:18:34.826 A:middle
+
+400
+00:18:32,656 --> 00:18:34,826
 it's highly likely they are
 going to want to use Apple Pay,
 
-00:18:35.376 --> 00:18:36.416 A:middle
+
+401
+00:18:35,376 --> 00:18:36,416
 so you should default to it.
 
-00:18:37.496 --> 00:18:38.616 A:middle
+
+402
+00:18:37,496 --> 00:18:38,616
 Now Nick will show
 you how to test
 
-00:18:38.876 --> 00:18:39.846 A:middle
+
+403
+00:18:38,876 --> 00:18:39,846
 for this in a couple minutes.
 
-00:18:40.566 --> 00:18:42.126 A:middle
+
+404
+00:18:40,566 --> 00:18:42,126
 If they are not on
 a supported device
 
-00:18:42.966 --> 00:18:45.366 A:middle
+
+405
+00:18:42,966 --> 00:18:45,366
 and they haven't activated a
 card that you don't accept,
 
-00:18:45.496 --> 00:18:48.616 A:middle
+
+406
+00:18:45,496 --> 00:18:48,616
 there is no need to show any
 Apple Pay buttons or messaging
 
-00:18:48.616 --> 00:18:52.216 A:middle
+
+407
+00:18:48,616 --> 00:18:52,216
 at all, just complete the
 transaction as you do today.
 
-00:18:53.276 --> 00:18:56.906 A:middle
+
+408
+00:18:53,276 --> 00:18:56,906
 But if they are, default to
 Apple Pay as the payment method
 
-00:18:57.016 --> 00:18:59.056 A:middle
+
+409
+00:18:57,016 --> 00:18:59,056
 and then display those
 buttons prominently.
 
 
-
-00:19:00.766 --> 00:19:05.066 A:middle
+410
+00:19:00,766 --> 00:19:05,066
 Now, with iOS 8.3, the Apple Pay
 buttons are available via API.
 
-00:19:05.876 --> 00:19:08.366 A:middle
+
+411
+00:19:05,876 --> 00:19:08,366
 So you don't have to worry
 about resizing graphics
 
-00:19:08.366 --> 00:19:10.096 A:middle
+
+412
+00:19:08,366 --> 00:19:10,096
 and embedding them
 in your app anymore.
 
-00:19:10.376 --> 00:19:11.426 A:middle
+
+413
+00:19:10,376 --> 00:19:11,426
 It's very easy.
 
-00:19:12.196 --> 00:19:14.236 A:middle
+
+414
+00:19:12,196 --> 00:19:14,236
 And when you're thinking
 about where to put them
 
-00:19:14.356 --> 00:19:17.936 A:middle
+
+415
+00:19:14,356 --> 00:19:17,936
 in your layouts, they
 should be at least as large
 
-00:19:18.316 --> 00:19:20.036 A:middle
+
+416
+00:19:18,316 --> 00:19:20,036
 as your other payment
 method buttons.
 
-00:19:21.046 --> 00:19:22.776 A:middle
+
+417
+00:19:21,046 --> 00:19:22,776
 Larger is also fine by us.
 
-00:19:23.041 --> 00:19:25.041 A:middle
+
+418
+00:19:23,041 --> 00:19:25,041
 [Laughter]
 
-00:19:25.066 --> 00:19:26.406 A:middle
+
+419
+00:19:25,066 --> 00:19:26,406
 So here's how Fancy does it.
 
-00:19:26.406 --> 00:19:28.806 A:middle
+
+420
+00:19:26,406 --> 00:19:28,806
 They've got their Apple Pay
 button right above the Add
 
-00:19:28.856 --> 00:19:32.716 A:middle
+
+421
+00:19:28,856 --> 00:19:32,716
 to Cart button and Shoptiques
 puts it side by side.
 
-00:19:32.886 --> 00:19:34.846 A:middle
+
+422
+00:19:32,886 --> 00:19:34,846
 These are both great
 implementations.
 
-00:19:35.386 --> 00:19:39.826 A:middle
+
+423
+00:19:35,386 --> 00:19:39,826
 Now once your customers
 tap the Apple Pay button,
 
-00:19:40.146 --> 00:19:41.506 A:middle
+
+424
+00:19:40,146 --> 00:19:41,506
 the next thing they
 are expecting
 
-00:19:41.506 --> 00:19:44.336 A:middle
+
+425
+00:19:41,506 --> 00:19:44,336
 to see is a payment sheet, so
 they can quickly put their thumb
 
-00:19:44.336 --> 00:19:45.766 A:middle
+
+426
+00:19:44,336 --> 00:19:45,766
 down and complete
 the transaction.
 
-00:19:46.746 --> 00:19:48.606 A:middle
+
+427
+00:19:46,746 --> 00:19:48,606
 You don't want to interrupt this
 
-00:19:48.606 --> 00:19:50.156 A:middle
+
+428
+00:19:48,606 --> 00:19:50,156
 with asking any other
 information.
 
-00:19:51.006 --> 00:19:53.486 A:middle
+
+429
+00:19:51,006 --> 00:19:53,486
 It'll be disruptive and
 could interrupt them right
 
-00:19:53.486 --> 00:19:56.906 A:middle
+
+430
+00:19:53,486 --> 00:19:56,906
 when you are about
 to make that sale.
 
-00:19:57.086 --> 00:19:59.906 A:middle
+
+431
+00:19:57,086 --> 00:19:59,906
 Apple Pay is going to provide
 you all the core information you
 
-00:19:59.906 --> 00:20:01.586 A:middle
+
+432
+00:19:59,906 --> 00:20:01,586
 need to complete
 the transaction.
 
 
-
-00:19:59.906 --> 00:20:01.586 A:middle
-need to complete
-the transaction.
-
-00:20:01.916 --> 00:20:05.466 A:middle
+433
+00:20:01,916 --> 00:20:05,466
 The one thing you might need to
 take in advance is promo codes
 
-00:20:05.466 --> 00:20:07.166 A:middle
+
+434
+00:20:05,466 --> 00:20:07,166
 or other discount codes.
 
-00:20:08.106 --> 00:20:10.376 A:middle
+
+435
+00:20:08,106 --> 00:20:10,376
 So find a place in your app
 where that could feel at home,
 
-00:20:10.376 --> 00:20:12.966 A:middle
+
+436
+00:20:10,376 --> 00:20:12,966
 where it wouldn't interrupt
 the payment sheet appearing
 
-00:20:12.966 --> 00:20:16.556 A:middle
+
+437
+00:20:12,966 --> 00:20:16,556
 after someone taps
 that Apple Pay button.
 
-00:20:16.706 --> 00:20:18.996 A:middle
+
+438
+00:20:16,706 --> 00:20:18,996
 Okay, we talked a lot
 about the payment sheet
 
-00:20:18.996 --> 00:20:20.336 A:middle
+
+439
+00:20:18,996 --> 00:20:20,336
 so let me give you some tips
 
-00:20:20.426 --> 00:20:22.426 A:middle
+
+440
+00:20:20,426 --> 00:20:22,426
 on customizing it
 for what you need.
 
-00:20:23.306 --> 00:20:25.826 A:middle
+
+441
+00:20:23,306 --> 00:20:25,826
 So of course, you are going
 to want the payment method
 
-00:20:25.896 --> 00:20:28.826 A:middle
+
+442
+00:20:25,896 --> 00:20:28,826
 but you will request
 billing and shipping
 
-00:20:28.826 --> 00:20:31.726 A:middle
+
+443
+00:20:28,826 --> 00:20:31,726
 and contact information
 if you need it.
 
-00:20:32.386 --> 00:20:35.906 A:middle
+
+444
+00:20:32,386 --> 00:20:35,906
 As Nick was saying, Apple
 Pay is incredibly secure.
 
-00:20:36.026 --> 00:20:38.946 A:middle
+
+445
+00:20:36,026 --> 00:20:38,946
 So we're hoping that you don't
 need the billing information
 
-00:20:39.046 --> 00:20:40.616 A:middle
+
+446
+00:20:39,046 --> 00:20:40,616
 just for verification purposes.
 
-00:20:41.386 --> 00:20:44.056 A:middle
+
+447
+00:20:41,386 --> 00:20:44,056
 But it is available if your
 system still requires it.
 
-00:20:44.056 --> 00:20:48.296 A:middle
+
+448
+00:20:44,056 --> 00:20:48,296
 And then if you are selling
 physical products and you need
 
-00:20:48.296 --> 00:20:50.636 A:middle
+
+449
+00:20:48,296 --> 00:20:50,636
 to send them to someone,
 you'll want a shipping address.
 
-00:20:51.566 --> 00:20:54.806 A:middle
+
+450
+00:20:51,566 --> 00:20:54,806
 It's very easy for
 customers to change this right
 
-00:20:54.806 --> 00:20:55.896 A:middle
+
+451
+00:20:54,806 --> 00:20:55,896
 within the payment sheet.
 
-00:20:55.896 --> 00:20:59.066 A:middle
+
+452
+00:20:55,896 --> 00:20:59,066
 They just tap on it, and the
 payment sheet will display a
 
-00:20:59.066 --> 00:21:02.716 A:middle
+
+453
+00:20:59,066 --> 00:21:02,716
 list of recently used
 addresses as well as the ability
 
 
-
-00:20:59.066 --> 00:21:02.716 A:middle
-list of recently used
-addresses as well as the ability
-
-00:21:02.716 --> 00:21:04.696 A:middle
+454
+00:21:02,716 --> 00:21:04,696
 to quickly add one
 in for contacts.
 
-00:21:05.676 --> 00:21:09.296 A:middle
+
+455
+00:21:05,676 --> 00:21:09,296
 You may have previously
 collected shipping information
 
-00:21:09.296 --> 00:21:11.416 A:middle
+
+456
+00:21:09,296 --> 00:21:11,416
 for your customers that
 are already existing
 
-00:21:11.566 --> 00:21:14.946 A:middle
+
+457
+00:21:11,566 --> 00:21:14,946
 but like I was saying
 earlier, it's highly likely
 
-00:21:14.946 --> 00:21:18.356 A:middle
+
+458
+00:21:14,946 --> 00:21:18,356
 that the Apple Pay information
 will be current so we recommend
 
-00:21:18.356 --> 00:21:21.156 A:middle
+
+459
+00:21:18,356 --> 00:21:21,156
 that you rely on that.
 
-00:21:21.366 --> 00:21:24.666 A:middle
+
+460
+00:21:21,366 --> 00:21:24,666
 You can also request a contact
 email and a phone number,
 
-00:21:25.086 --> 00:21:27.446 A:middle
+
+461
+00:21:25,086 --> 00:21:27,446
 so if you wanted to
 follow up the transaction
 
-00:21:27.446 --> 00:21:30.596 A:middle
+
+462
+00:21:27,446 --> 00:21:30,596
 with a confirmation email or you
 will might need a phone number
 
-00:21:30.596 --> 00:21:33.356 A:middle
+
+463
+00:21:30,596 --> 00:21:33,356
 in case of any shipping
 questions, that's available.
 
-00:21:34.196 --> 00:21:37.986 A:middle
+
+464
+00:21:34,196 --> 00:21:37,986
 And with iOS 9, you can also
 request just a contact name.
 
-00:21:38.916 --> 00:21:41.666 A:middle
+
+465
+00:21:38,916 --> 00:21:41,666
 So let's say somebody
 wanted to order some food
 
-00:21:41.836 --> 00:21:43.156 A:middle
+
+466
+00:21:41,836 --> 00:21:43,156
 and go pick it up
 at a restaurant.
 
-00:21:43.356 --> 00:21:45.586 A:middle
+
+467
+00:21:43,356 --> 00:21:45,586
 You might just need a
 contact name so when they get
 
-00:21:45.626 --> 00:21:50.206 A:middle
+
+468
+00:21:45,626 --> 00:21:50,206
 to the counter, you can tell
 the clerk who the order is for.
 
-00:21:50.666 --> 00:21:52.486 A:middle
+
+469
+00:21:50,666 --> 00:21:52,486
 Now, if you don't need all
 
-00:21:52.486 --> 00:21:54.546 A:middle
+
+470
+00:21:52,486 --> 00:21:54,546
 of that information,
 don't request it.
 
-00:21:55.316 --> 00:21:58.656 A:middle
+
+471
+00:21:55,316 --> 00:21:58,656
 Respect your customers' privacy
 and only ask for what you need.
 
-00:21:59.306 --> 00:22:01.736 A:middle
+
+472
+00:21:59,306 --> 00:22:01,736
 Uber only requires
 email and phone number.
 
 
-
-00:21:59.306 --> 00:22:01.736 A:middle
-Uber only requires
-email and phone number.
-
-00:22:01.856 --> 00:22:03.226 A:middle
+473
+00:22:01,856 --> 00:22:03,226
 So they are not taking
 a shipping address
 
-00:22:03.456 --> 00:22:07.866 A:middle
+
+474
+00:22:03,456 --> 00:22:07,866
 because they don't need it.
 
-00:22:08.156 --> 00:22:11.676 A:middle
+
+475
+00:22:08,156 --> 00:22:11,676
 Now, you can also specify
 shipping method or pickup right
 
-00:22:11.676 --> 00:22:12.746 A:middle
+
+476
+00:22:11,676 --> 00:22:12,746
 within the payment sheet.
 
-00:22:13.786 --> 00:22:16.406 A:middle
+
+477
+00:22:13,786 --> 00:22:16,406
 The Apple Store offers
 multiple shipping options.
 
-00:22:16.456 --> 00:22:18.646 A:middle
+
+478
+00:22:16,456 --> 00:22:18,646
 So customers can tap on that
 
-00:22:18.646 --> 00:22:20.616 A:middle
+
+479
+00:22:18,646 --> 00:22:20,616
 and see the other
 choices available to them.
 
-00:22:21.236 --> 00:22:23.166 A:middle
+
+480
+00:22:21,236 --> 00:22:23,166
 There's room to include
 delivery estimates,
 
-00:22:23.166 --> 00:22:26.606 A:middle
+
+481
+00:22:23,166 --> 00:22:26,606
 so you can help your customers
 choose the right option
 
-00:22:27.386 --> 00:22:29.336 A:middle
+
+482
+00:22:27,386 --> 00:22:29,336
 for them.
 
-00:22:29.566 --> 00:22:33.666 A:middle
+
+483
+00:22:29,566 --> 00:22:33,666
 And you also have the ability
 to list shipping costs, taxes,
 
-00:22:33.666 --> 00:22:35.206 A:middle
+
+484
+00:22:33,666 --> 00:22:35,206
 or even negative value items
 
-00:22:35.236 --> 00:22:37.336 A:middle
+
+485
+00:22:35,236 --> 00:22:37,336
 like discounts after
 the subtotal.
 
-00:22:38.116 --> 00:22:42.526 A:middle
+
+486
+00:22:38,116 --> 00:22:42,526
 Now, this is not intended to
 be a line-by-line itemized list
 
-00:22:42.526 --> 00:22:43.906 A:middle
+
+487
+00:22:42,526 --> 00:22:43,906
 of everything someone purchases.
 
-00:22:44.476 --> 00:22:45.946 A:middle
+
+488
+00:22:44,476 --> 00:22:45,946
 It's only things that are added
 
-00:22:46.106 --> 00:22:47.706 A:middle
+
+489
+00:22:46,106 --> 00:22:47,706
 to the subtotal of
 the merchandise.
 
-00:22:48.286 --> 00:22:53.046 A:middle
+
+490
+00:22:48,286 --> 00:22:53,046
 So here you can see how Keep
 is listing shipping and tax
 
-00:22:53.046 --> 00:22:56.556 A:middle
+
+491
+00:22:53,046 --> 00:22:56,556
 and handling in addition to
 the merchandise subtotal.
 
-00:22:57.826 --> 00:23:00.776 A:middle
+
+492
+00:22:57,826 --> 00:23:00,776
 Now, if you don't have any of
 those items, you don't even have
 
 
-
-00:22:57.826 --> 00:23:00.776 A:middle
-Now, if you don't have any of
-those items, you don't even have
-
-00:23:00.836 --> 00:23:03.806 A:middle
+493
+00:23:00,836 --> 00:23:03,806
 to list the subtotal, you
 can just list the total.
 
-00:23:04.416 --> 00:23:07.346 A:middle
+
+494
+00:23:04,416 --> 00:23:07,346
 This keeps the payment sheet
 nice and short and it's less
 
-00:23:07.486 --> 00:23:12.626 A:middle
+
+495
+00:23:07,486 --> 00:23:12,626
 for your customers to review and
 means faster transaction times.
 
-00:23:12.866 --> 00:23:15.246 A:middle
+
+496
+00:23:12,866 --> 00:23:15,246
 If you have the additional
 items you can list them,
 
-00:23:15.376 --> 00:23:17.456 A:middle
+
+497
+00:23:15,376 --> 00:23:17,456
 and if you don't, you
 can just show the total.
 
-00:23:18.986 --> 00:23:20.696 A:middle
+
+498
+00:23:18,986 --> 00:23:20,696
 Now, there might be some cases
 
-00:23:20.696 --> 00:23:23.606 A:middle
+
+499
+00:23:20,696 --> 00:23:23,606
 where the total may
 not yet be known.
 
-00:23:23.606 --> 00:23:26.446 A:middle
+
+500
+00:23:23,606 --> 00:23:26,446
 And in these situations,
 it's really important
 
-00:23:26.526 --> 00:23:28.106 A:middle
+
+501
+00:23:26,526 --> 00:23:28,106
 that you make estimates clear.
 
-00:23:29.706 --> 00:23:32.746 A:middle
+
+502
+00:23:29,706 --> 00:23:32,746
 Uber is a very popular car
 service here in the Bay area
 
-00:23:33.336 --> 00:23:35.666 A:middle
+
+503
+00:23:33,336 --> 00:23:35,666
 and the total price
 isn't calculated
 
-00:23:35.666 --> 00:23:36.906 A:middle
+
+504
+00:23:35,666 --> 00:23:36,906
 until the ride concludes.
 
-00:23:37.576 --> 00:23:39.526 A:middle
+
+505
+00:23:37,576 --> 00:23:39,526
 Now, the way that they
 handle their language
 
-00:23:39.526 --> 00:23:41.286 A:middle
+
+506
+00:23:39,526 --> 00:23:41,286
 in the payment sheet
 is very clear.
 
-00:23:41.286 --> 00:23:45.336 A:middle
+
+507
+00:23:41,286 --> 00:23:45,336
 I can see that the total cost
 is going to be calculated
 
-00:23:45.336 --> 00:23:48.146 A:middle
+
+508
+00:23:45,336 --> 00:23:48,146
 in the future based
 on time and distance.
 
-00:23:48.956 --> 00:23:51.246 A:middle
+
+509
+00:23:48,956 --> 00:23:51,246
 So if you are dealing
 with subscriptions,
 
-00:23:51.246 --> 00:23:54.606 A:middle
+
+510
+00:23:51,246 --> 00:23:54,606
 recurring payments or situations
 where you have estimates,
 
-00:23:54.706 --> 00:23:56.496 A:middle
+
+511
+00:23:54,706 --> 00:23:56,496
 make sure the language
 that you are using
 
-00:23:56.496 --> 00:23:57.916 A:middle
+
+512
+00:23:56,496 --> 00:23:57,916
 in the payment sheet is clear,
 
-00:23:58.116 --> 00:24:00.606 A:middle
+
+513
+00:23:58,116 --> 00:24:00,606
 because no one likes
 surprise charges later.
 
 
-
-00:23:58.116 --> 00:24:00.606 A:middle
-because no one likes
-surprise charges later.
-
-00:24:01.216 --> 00:24:06.686 A:middle
+514
+00:24:01,216 --> 00:24:06,686
 And then finally, make sure you
 place your business name next
 
-00:24:06.686 --> 00:24:10.056 A:middle
+
+515
+00:24:06,686 --> 00:24:10,056
 to the total amount at the
 bottom of the payment sheet.
 
-00:24:10.446 --> 00:24:13.136 A:middle
+
+516
+00:24:10,446 --> 00:24:13,136
 Now this is the name
 and the total amount
 
-00:24:13.136 --> 00:24:15.886 A:middle
+
+517
+00:24:13,136 --> 00:24:15,886
 that the customers will expect
 to see on their bank charge.
 
-00:24:16.406 --> 00:24:18.266 A:middle
+
+518
+00:24:16,406 --> 00:24:18,266
 So here I can clearly expect
 
-00:24:18.456 --> 00:24:21.896 A:middle
+
+519
+00:24:18,456 --> 00:24:21,896
 that I will see a
 charge for $229 to Fancy.
 
-00:24:22.776 --> 00:24:26.946 A:middle
+
+520
+00:24:22,776 --> 00:24:26,946
 Again, no one likes questionable
 charges and surprise amounts
 
-00:24:26.946 --> 00:24:28.126 A:middle
+
+521
+00:24:26,946 --> 00:24:28,126
 on their bank statements.
 
-00:24:28.336 --> 00:24:30.006 A:middle
+
+522
+00:24:28,336 --> 00:24:30,006
 So you want to be
 very clear here.
 
-00:24:30.746 --> 00:24:34.576 A:middle
+
+523
+00:24:30,746 --> 00:24:34,576
 So, that's what goes into
 customizing the payment sheet.
 
-00:24:34.576 --> 00:24:35.796 A:middle
+
+524
+00:24:34,576 --> 00:24:35,796
 The only other thing
 that you need
 
-00:24:35.836 --> 00:24:37.746 A:middle
+
+525
+00:24:35,836 --> 00:24:37,746
 to do is confirm
 the transaction,
 
-00:24:37.746 --> 00:24:39.036 A:middle
+
+526
+00:24:37,746 --> 00:24:39,036
 just like you are
 already doing today.
 
-00:24:40.386 --> 00:24:42.986 A:middle
+
+527
+00:24:40,386 --> 00:24:42,986
 So once a customer
 pays with Touch ID,
 
-00:24:42.986 --> 00:24:45.516 A:middle
+
+528
+00:24:42,986 --> 00:24:45,516
 that thumb print button will
 change to a done status,
 
-00:24:46.586 --> 00:24:49.486 A:middle
+
+529
+00:24:46,586 --> 00:24:49,486
 the sheet will dismiss,
 and customers will be back
 
-00:24:49.486 --> 00:24:51.286 A:middle
+
+530
+00:24:49,486 --> 00:24:51,286
 in your app, so you
 can give them
 
-00:24:51.286 --> 00:24:54.496 A:middle
+
+531
+00:24:51,286 --> 00:24:54,496
 that nice reassuring
 confirmation telling them
 
-00:24:54.496 --> 00:24:57.366 A:middle
+
+532
+00:24:54,496 --> 00:24:57,366
 that the order has been
 processed and letting them know
 
-00:24:57.366 --> 00:25:02.706 A:middle
+
+533
+00:24:57,366 --> 00:25:02,706
 that they will get more
 information at their email.
 
 
-
-00:24:57.366 --> 00:25:02.706 A:middle
-that they will get more
-information at their email.
-
-00:25:02.706 --> 00:25:05.536 A:middle
+534
+00:25:02,706 --> 00:25:05,536
 So when you are thinking about
 how to integrate Apple Pay
 
-00:25:05.536 --> 00:25:07.876 A:middle
+
+535
+00:25:05,536 --> 00:25:07,876
 into your apps try to remove all
 
-00:25:07.876 --> 00:25:09.756 A:middle
+
+536
+00:25:07,876 --> 00:25:09,756
 of those obstacles
 to making a purchase.
 
-00:25:10.476 --> 00:25:12.246 A:middle
+
+537
+00:25:10,476 --> 00:25:12,246
 There's no need to
 require people to set
 
-00:25:12.246 --> 00:25:14.456 A:middle
+
+538
+00:25:12,246 --> 00:25:14,456
 up an account before they
 have purchased something.
 
-00:25:14.956 --> 00:25:18.926 A:middle
+
+539
+00:25:14,956 --> 00:25:18,926
 Display the Apple Pay button's
 prominently if they are
 
-00:25:18.926 --> 00:25:21.626 A:middle
+
+540
+00:25:18,926 --> 00:25:21,626
 on a supported device with an
 activated card that you accept.
 
-00:25:22.756 --> 00:25:25.046 A:middle
+
+541
+00:25:22,756 --> 00:25:25,046
 And make sure that you are
 customizing the payment
 
-00:25:25.096 --> 00:25:26.016 A:middle
+
+542
+00:25:25,096 --> 00:25:26,016
 sheet appropriately.
 
-00:25:26.376 --> 00:25:29.086 A:middle
+
+543
+00:25:26,376 --> 00:25:29,086
 Don't forget to put your
 business name next to the total
 
-00:25:29.086 --> 00:25:32.596 A:middle
+
+544
+00:25:29,086 --> 00:25:32,596
 at the bottom, and then
 confirm the transaction just
 
-00:25:32.596 --> 00:25:33.156 A:middle
+
+545
+00:25:32,596 --> 00:25:33,156
 like you do today.
 
-00:25:34.576 --> 00:25:38.116 A:middle
+
+546
+00:25:34,576 --> 00:25:38,116
 So I hope this sets you all up
 for creating a great experience
 
-00:25:38.116 --> 00:25:40.036 A:middle
+
+547
+00:25:38,116 --> 00:25:40,036
 with Apple Pay in your apps.
 
-00:25:40.036 --> 00:25:42.016 A:middle
+
+548
+00:25:40,036 --> 00:25:42,016
 I'm going to be in the
 Apple Pay Lab this afternoon
 
-00:25:42.016 --> 00:25:45.286 A:middle
+
+549
+00:25:42,016 --> 00:25:45,286
 and if you have more questions
 about UI as it pertains
 
-00:25:45.286 --> 00:25:47.956 A:middle
+
+550
+00:25:45,286 --> 00:25:47,956
 to Apple Pay or want some
 advice on how to approach it
 
-00:25:48.806 --> 00:25:52.036 A:middle
+
+551
+00:25:48,806 --> 00:25:52,036
 in your apps, I'm happy to
 take a look, but for now,
 
-00:25:52.706 --> 00:25:54.796 A:middle
+
+552
+00:25:52,706 --> 00:25:54,796
 I going to pass it back
 to Nick to show you how
 
-00:25:54.796 --> 00:25:56.276 A:middle
+
+553
+00:25:54,796 --> 00:25:56,276
 to put this all together
 in code.
 
-00:25:56.276 --> 00:25:56.566 A:middle
+
+554
+00:25:56,276 --> 00:25:56,566
 Thanks.
 
-00:25:57.516 --> 00:26:04.636 A:middle
+
+555
+00:25:57,516 --> 00:26:04,636
 [ Applause ]
 
 
+556
+00:26:05,136 --> 00:26:06,476
+>> NICK SHEARER: Thanks, Rachel.
 
-00:25:57.516 --> 00:26:04.636 A:middle
-[ Applause ]
 
-00:26:05.136 --> 00:26:06.476 A:middle
-&gt;&gt; NICK SHEARER: Thanks, Rachel.
-
-00:26:07.136 --> 00:26:09.826 A:middle
+557
+00:26:07,136 --> 00:26:09,826
 Okay. I think we are ready
 to put it all together.
 
-00:26:09.996 --> 00:26:11.536 A:middle
+
+558
+00:26:09,996 --> 00:26:11,536
 I think we are ready to
 talk about some code.
 
-00:26:11.536 --> 00:26:12.816 A:middle
+
+559
+00:26:11,536 --> 00:26:12,816
 It's very exciting.
 
-00:26:14.766 --> 00:26:18.216 A:middle
+
+560
+00:26:14,766 --> 00:26:18,216
 So we will build
 out a sample app.
 
-00:26:18.216 --> 00:26:21.846 A:middle
+
+561
+00:26:18,216 --> 00:26:21,846
 It will be based off the
 app that Rachel showed you,
 
-00:26:22.106 --> 00:26:24.256 A:middle
+
+562
+00:26:22,106 --> 00:26:24,256
 but I've simplified the UI a
 lot, because we really want
 
-00:26:24.256 --> 00:26:25.096 A:middle
+
+563
+00:26:24,256 --> 00:26:25,096
 to concentrate on the code.
 
-00:26:25.096 --> 00:26:27.016 A:middle
+
+564
+00:26:25,096 --> 00:26:27,016
 It is going to request
 a payment.
 
-00:26:27.356 --> 00:26:29.886 A:middle
+
+565
+00:26:27,356 --> 00:26:29,886
 It will display the payment
 sheet and then it's going
 
-00:26:29.886 --> 00:26:30.926 A:middle
+
+566
+00:26:29,886 --> 00:26:30,926
 to handle the authorization.
 
-00:26:31.526 --> 00:26:35.866 A:middle
+
+567
+00:26:31,526 --> 00:26:35,866
 So before we dive into Xcode
 let's look at the classes
 
-00:26:36.166 --> 00:26:37.936 A:middle
+
+568
+00:26:36,166 --> 00:26:37,936
 that make up Apple Pay.
 
-00:26:39.196 --> 00:26:42.666 A:middle
+
+569
+00:26:39,196 --> 00:26:42,666
 So the first class
 I want to talk
 
-00:26:42.666 --> 00:26:44.596 A:middle
+
+570
+00:26:42,666 --> 00:26:44,596
 about is PKPaymentSummaryItem.
 
-00:26:44.756 --> 00:26:46.806 A:middle
+
+571
+00:26:44,756 --> 00:26:46,806
 Again, Apple Pay
 exists in PassKit
 
-00:26:47.296 --> 00:26:49.636 A:middle
+
+572
+00:26:47,296 --> 00:26:49,636
 so that's where you'll find it.
 
-00:26:49.636 --> 00:26:53.286 A:middle
+
+573
+00:26:49,636 --> 00:26:53,286
 PKPaymentSummaryItem
 describes an individual item
 
-00:26:53.286 --> 00:26:55.546 A:middle
+
+574
+00:26:53,286 --> 00:26:55,546
 that you would like to charge
 for on the payment sheet, like,
 
-00:26:55.586 --> 00:27:00.216 A:middle
+
+575
+00:26:55,586 --> 00:27:00,216
 tax, shipping or total and you
 take all the summary items you
 
 
-
-00:26:55.586 --> 00:27:00.216 A:middle
-tax, shipping or total and you
-take all the summary items you
-
-00:27:00.246 --> 00:27:03.976 A:middle
+576
+00:27:00,246 --> 00:27:03,976
 would like to use and you pass
 them into a PKPaymentRequest.
 
-00:27:05.086 --> 00:27:08.216 A:middle
+
+577
+00:27:05,086 --> 00:27:08,216
 Now a PKPaymentRequest
 is an object
 
-00:27:08.216 --> 00:27:10.546 A:middle
+
+578
+00:27:08,216 --> 00:27:10,546
 that describes both the
 items you'd like to charge
 
-00:27:10.736 --> 00:27:13.726 A:middle
+
+579
+00:27:10,736 --> 00:27:13,726
 and the information about how
 you'd like to make the payment,
 
-00:27:13.726 --> 00:27:15.846 A:middle
+
+580
+00:27:13,726 --> 00:27:15,846
 so what card networks
 you'd like to support
 
-00:27:15.846 --> 00:27:17.436 A:middle
+
+581
+00:27:15,846 --> 00:27:17,436
 and what shipping
 information you would
 
-00:27:17.436 --> 00:27:19.016 A:middle
+
+582
+00:27:17,436 --> 00:27:19,016
 like to request,
 that kind of thing.
 
-00:27:20.456 --> 00:27:22.186 A:middle
+
+583
+00:27:20,456 --> 00:27:22,186
 You take the request and pass it
 
-00:27:22.266 --> 00:27:25.126 A:middle
+
+584
+00:27:22,266 --> 00:27:25,126
 into a PKPaymentAuthorization
 ViewController
 
-00:27:25.416 --> 00:27:26.886 A:middle
+
+585
+00:27:25,416 --> 00:27:26,886
 which is the payment
 sheet class.
 
-00:27:27.656 --> 00:27:29.126 A:middle
+
+586
+00:27:27,656 --> 00:27:29,126
 Now it's like any
 other view controller,
 
-00:27:29.126 --> 00:27:31.276 A:middle
+
+587
+00:27:29,126 --> 00:27:31,276
 you present it using
 presentViewController.
 
-00:27:31.566 --> 00:27:37.286 A:middle
+
+588
+00:27:31,566 --> 00:27:37,286
 And then when that's done you'll
 receive a PKPayment object back.
 
-00:27:37.286 --> 00:27:40.156 A:middle
+
+589
+00:27:37,286 --> 00:27:40,156
 A PKPayment object contains both
 the informations information you
 
-00:27:40.156 --> 00:27:41.266 A:middle
+
+590
+00:27:40,156 --> 00:27:41,266
 need to process the payment,
 
-00:27:42.046 --> 00:27:43.726 A:middle
+
+591
+00:27:42,046 --> 00:27:43,726
 as well as information
 you might need
 
-00:27:43.726 --> 00:27:45.286 A:middle
+
+592
+00:27:43,726 --> 00:27:45,286
 to display a confirmation sheet
 
-00:27:45.286 --> 00:27:47.976 A:middle
+
+593
+00:27:45,286 --> 00:27:47,976
 or a receipt on the
 device itself.
 
-00:27:48.546 --> 00:27:54.906 A:middle
+
+594
+00:27:48,546 --> 00:27:54,906
 So the very first thing we want
 to do, before we do any of this,
 
-00:27:55.276 --> 00:27:58.956 A:middle
+
+595
+00:27:55,276 --> 00:27:58,956
 is to check whether the
 device supports Apple Pay.
 
-00:27:59.896 --> 00:28:01.996 A:middle
+
+596
+00:27:59,896 --> 00:28:01,996
 We want to see whether
 they have payment cards
 
 
-
-00:27:59.896 --> 00:28:01.996 A:middle
-We want to see whether
-they have payment cards
-
-00:28:02.226 --> 00:28:03.336 A:middle
+597
+00:28:02,226 --> 00:28:03,336
 that we can accept.
 
-00:28:03.916 --> 00:28:07.976 A:middle
+
+598
+00:28:03,916 --> 00:28:07,976
 So firstly, I'm creating
 an array of paymentNetworks
 
-00:28:08.666 --> 00:28:11.366 A:middle
+
+599
+00:28:08,666 --> 00:28:11,366
 that we provide these string
 constants that you can use
 
-00:28:11.666 --> 00:28:13.626 A:middle
+
+600
+00:28:11,666 --> 00:28:13,626
 for all the networks
 that Apple Pay supports.
 
-00:28:13.626 --> 00:28:17.566 A:middle
+
+601
+00:28:13,626 --> 00:28:17,566
 So here I'm checking whether the
 user has any MasterCard or Visa.
 
-00:28:18.156 --> 00:28:20.966 A:middle
+
+602
+00:28:18,156 --> 00:28:20,966
 You then pass this array
 
-00:28:21.296 --> 00:28:24.286 A:middle
+
+603
+00:28:21,296 --> 00:28:24,286
 into a class method open
 PKPaymentAuthorization
 
-00:28:24.286 --> 00:28:24.916 A:middle
+
+604
+00:28:24,286 --> 00:28:24,916
 ViewController.
 
-00:28:25.216 --> 00:28:27.666 A:middle
+
+605
+00:28:25,216 --> 00:28:27,666
 It's called
 canMakePaymentsUsingNetworks.
 
-00:28:29.036 --> 00:28:32.936 A:middle
+
+606
+00:28:29,036 --> 00:28:32,936
 Now, if this returns true,
 you'll know that the user is set
 
-00:28:32.936 --> 00:28:34.916 A:middle
+
+607
+00:28:32,936 --> 00:28:34,916
 up for Apple Pay
 and they have cards
 
-00:28:35.096 --> 00:28:36.446 A:middle
+
+608
+00:28:35,096 --> 00:28:36,446
 that match what you
 are requesting.
 
-00:28:36.566 --> 00:28:37.496 A:middle
+
+609
+00:28:36,566 --> 00:28:37,496
 They can make the payment.
 
-00:28:38.646 --> 00:28:41.376 A:middle
+
+610
+00:28:38,646 --> 00:28:41,376
 If this returns false,
 you can take the user
 
-00:28:41.556 --> 00:28:43.126 A:middle
+
+611
+00:28:41,556 --> 00:28:43,126
 through your traditional
 checkout flow.
 
-00:28:44.436 --> 00:28:47.406 A:middle
+
+612
+00:28:44,436 --> 00:28:47,406
 Now, we have a few other
 methods you can use as well.
 
-00:28:48.046 --> 00:28:50.786 A:middle
+
+613
+00:28:48,046 --> 00:28:50,786
 We have one to test whether
 the hardware itself supports
 
-00:28:50.786 --> 00:28:51.306 A:middle
+
+614
+00:28:50,786 --> 00:28:51,306
 Apple Pay.
 
-00:28:51.306 --> 00:28:53.586 A:middle
+
+615
+00:28:51,306 --> 00:28:53,586
 So you don't need to do
 any messy device checks.
 
-00:28:53.586 --> 00:28:55.476 A:middle
+
+616
+00:28:53,586 --> 00:28:55,476
 You can just call
 canMakePayments
 
-00:28:55.826 --> 00:28:56.826 A:middle
+
+617
+00:28:55,826 --> 00:28:56,826
 and that will return yes
 
-00:28:56.966 --> 00:28:59.186 A:middle
+
+618
+00:28:56,966 --> 00:28:59,186
 if the device has hardware
 support for Apple Pay.
 
 
-
-00:29:00.116 --> 00:29:03.546 A:middle
+619
+00:29:00,116 --> 00:29:03,546
 And new in iOS 9, you can also
 now check for capabilities
 
-00:29:03.546 --> 00:29:07.446 A:middle
+
+620
+00:29:03,546 --> 00:29:07,446
 of cards, and by capabilities I
 primarily mean credit or debit.
 
-00:29:07.446 --> 00:29:11.776 A:middle
+
+621
+00:29:07,446 --> 00:29:11,776
 I think that's going to be very
 useful in the UK and in Europe,
 
-00:29:11.776 --> 00:29:15.756 A:middle
+
+622
+00:29:11,776 --> 00:29:15,756
 where you may want to check
 or charge only to debit cards.
 
-00:29:16.286 --> 00:29:22.406 A:middle
+
+623
+00:29:16,286 --> 00:29:22,406
 So let's assume the user
 has cards they can make a
 
-00:29:22.456 --> 00:29:22.876 A:middle
+
+624
+00:29:22,456 --> 00:29:22,876
 payment with.
 
-00:29:24.256 --> 00:29:26.146 A:middle
+
+625
+00:29:24,256 --> 00:29:26,146
 So let as create a
 PK payment request.
 
-00:29:26.996 --> 00:29:28.446 A:middle
+
+626
+00:29:26,996 --> 00:29:28,446
 Let's get our payments
 up and running.
 
-00:29:29.666 --> 00:29:32.716 A:middle
+
+627
+00:29:29,666 --> 00:29:32,716
 So the very first thing
 we want to do is pass
 
-00:29:32.716 --> 00:29:36.096 A:middle
+
+628
+00:29:32,716 --> 00:29:36,096
 in our merchantIdentifier
 so that we know how
 
-00:29:36.096 --> 00:29:37.916 A:middle
+
+629
+00:29:36,096 --> 00:29:37,916
 to encrypt your payment
 correctly.
 
-00:29:37.916 --> 00:29:41.106 A:middle
+
+630
+00:29:37,916 --> 00:29:41,106
 Now, you will have already set
 this up on the developer portal
 
-00:29:41.106 --> 00:29:43.956 A:middle
+
+631
+00:29:41,106 --> 00:29:43,956
 or the Xcode capabilities
 window and if you use Xcode,
 
-00:29:43.956 --> 00:29:46.706 A:middle
+
+632
+00:29:43,956 --> 00:29:46,706
 you've also got the entitlement
 set up on your behalf
 
-00:29:47.046 --> 00:29:48.936 A:middle
+
+633
+00:29:47,046 --> 00:29:48,936
 because all of these
 APIs are entitled.
 
-00:29:50.396 --> 00:29:52.656 A:middle
+
+634
+00:29:50,396 --> 00:29:52,656
 Then you pass in a countryCode.
 
-00:29:52.656 --> 00:29:54.566 A:middle
+
+635
+00:29:52,656 --> 00:29:54,566
 This is a standard
 ISO countryCode
 
-00:29:54.566 --> 00:29:55.896 A:middle
+
+636
+00:29:54,566 --> 00:29:55,896
 and it should be the countryCode
 
-00:29:56.586 --> 00:29:58.326 A:middle
+
+637
+00:29:56,586 --> 00:29:58,326
 that your payment
 processor is in,
 
-00:29:58.326 --> 00:30:00.326 A:middle
+
+638
+00:29:58,326 --> 00:30:00,326
 the country in which
 you'll be making the charge.
 
 
-
-00:29:58.326 --> 00:30:00.326 A:middle
-the country in which
-you'll be making the charge.
-
-00:30:00.326 --> 00:30:02.886 A:middle
+639
+00:30:00,326 --> 00:30:02,886
 So it's not the country
 that the user is in
 
-00:30:02.886 --> 00:30:05.356 A:middle
+
+640
+00:30:02,886 --> 00:30:05,356
 or the currency either,
 because the currency is covered
 
-00:30:05.356 --> 00:30:09.636 A:middle
+
+641
+00:30:05,356 --> 00:30:09,636
 by the currencyCode, that's
 also in ISO standard code.
 
-00:30:10.526 --> 00:30:13.776 A:middle
+
+642
+00:30:10,526 --> 00:30:13,776
 You can charge any currency
 you'd like in Apple Pay.
 
-00:30:13.776 --> 00:30:17.086 A:middle
+
+643
+00:30:13,776 --> 00:30:17,086
 Here I'm just using USD but if
 you want to charge in Pounds
 
-00:30:17.086 --> 00:30:20.776 A:middle
+
+644
+00:30:17,086 --> 00:30:20,776
 or Euros, you can
 easily do that.
 
-00:30:20.946 --> 00:30:23.016 A:middle
+
+645
+00:30:20,946 --> 00:30:23,016
 Next you provide some
 supportedNetworks.
 
-00:30:24.096 --> 00:30:25.996 A:middle
+
+646
+00:30:24,096 --> 00:30:25,996
 supportedNetworks,
 again, it's an array just
 
-00:30:25.996 --> 00:30:29.086 A:middle
+
+647
+00:30:25,996 --> 00:30:29,086
 like the canMakePayments check
 of networks that you can accept.
 
-00:30:29.376 --> 00:30:31.156 A:middle
+
+648
+00:30:29,376 --> 00:30:31,156
 So here, I have changed
 it up a little.
 
-00:30:31.156 --> 00:30:34.036 A:middle
+
+649
+00:30:31,156 --> 00:30:34,036
 I'm saying I can support
 American Express and Visa.
 
-00:30:34.596 --> 00:30:39.286 A:middle
+
+650
+00:30:34,596 --> 00:30:39,286
 Now there's another required
 property on PaymentRequest
 
-00:30:39.356 --> 00:30:40.976 A:middle
+
+651
+00:30:39,356 --> 00:30:40,976
 that may at first
 look a little cryptic,
 
-00:30:40.976 --> 00:30:43.436 A:middle
+
+652
+00:30:40,976 --> 00:30:43,436
 and that's merchantCapabilities.
 
-00:30:44.346 --> 00:30:47.246 A:middle
+
+653
+00:30:44,346 --> 00:30:47,246
 So it turns out that we
 have two different ways
 
-00:30:47.246 --> 00:30:48.586 A:middle
+
+654
+00:30:47,246 --> 00:30:48,586
 of generating payment data.
 
-00:30:48.656 --> 00:30:51.356 A:middle
+
+655
+00:30:48,656 --> 00:30:51,356
 One of them is called 3DS
 and the other is called EMV.
 
-00:30:51.356 --> 00:30:54.686 A:middle
+
+656
+00:30:51,356 --> 00:30:54,686
 Now you don't need to
 know the intricacies
 
-00:30:54.686 --> 00:30:55.716 A:middle
+
+657
+00:30:54,686 --> 00:30:55,716
 of how these will work.
 
-00:30:56.166 --> 00:30:58.816 A:middle
+
+658
+00:30:56,166 --> 00:30:58,816
 Most of you will use
 3DS, and you should check
 
-00:30:58.816 --> 00:31:01.166 A:middle
+
+659
+00:30:58,816 --> 00:31:01,166
 with your payment processor
 or your inquiring bank
 
 
-
-00:30:58.816 --> 00:31:01.166 A:middle
-with your payment processor
-or your inquiring bank
-
-00:31:01.166 --> 00:31:02.956 A:middle
+660
+00:31:01,166 --> 00:31:02,956
 as to the right setting for you.
 
-00:31:03.306 --> 00:31:05.276 A:middle
+
+661
+00:31:03,306 --> 00:31:05,276
 So again, the majority
 of you will be 3DS
 
-00:31:05.536 --> 00:31:06.806 A:middle
+
+662
+00:31:05,536 --> 00:31:06,806
 but the payment platform
 
-00:31:06.806 --> 00:31:09.636 A:middle
+
+663
+00:31:06,806 --> 00:31:09,636
 or processor can give you the
 exact advice that you need here.
 
-00:31:10.106 --> 00:31:12.776 A:middle
+
+664
+00:31:10,106 --> 00:31:12,776
 So I'm going to leave this
 at the standard which is 3DS.
 
-00:31:13.266 --> 00:31:16.036 A:middle
+
+665
+00:31:13,266 --> 00:31:16,036
 And then finally, the last
 
-00:31:16.036 --> 00:31:18.736 A:middle
+
+666
+00:31:16,036 --> 00:31:18,736
 and probably the most important
 property of the PaymentRequest,
 
-00:31:19.266 --> 00:31:21.886 A:middle
+
+667
+00:31:19,266 --> 00:31:21,886
 what we actually want to charge.
 
-00:31:22.076 --> 00:31:24.266 A:middle
+
+668
+00:31:22,076 --> 00:31:24,266
 Now, before we look at
 that, there's a couple
 
-00:31:24.266 --> 00:31:26.666 A:middle
+
+669
+00:31:24,266 --> 00:31:26,666
 of new things in iOS 9.
 
-00:31:27.456 --> 00:31:29.696 A:middle
+
+670
+00:31:27,456 --> 00:31:29,696
 You can use this
 merchantCapabilities property
 
-00:31:29.736 --> 00:31:32.516 A:middle
+
+671
+00:31:29,736 --> 00:31:32,516
 to only allow certain types
 of cards to make payments.
 
-00:31:32.846 --> 00:31:34.046 A:middle
+
+672
+00:31:32,846 --> 00:31:34,046
 So it's a bit mask.
 
-00:31:34.046 --> 00:31:36.206 A:middle
+
+673
+00:31:34,046 --> 00:31:36,206
 And if you'd like to limit
 cards to debit cards,
 
-00:31:36.626 --> 00:31:39.066 A:middle
+
+674
+00:31:36,626 --> 00:31:39,066
 again it's a scenario more
 common in Europe than it is
 
-00:31:39.066 --> 00:31:41.626 A:middle
+
+675
+00:31:39,066 --> 00:31:41,626
 in the US, you can
 easily do that.
 
-00:31:43.396 --> 00:31:48.016 A:middle
+
+676
+00:31:43,396 --> 00:31:48,016
 So a PKPaymentSummaryItem,
 like I said describes a piece
 
-00:31:48.016 --> 00:31:49.556 A:middle
+
+677
+00:31:48,016 --> 00:31:49,556
 of information that you
 would like to charge.
 
-00:31:49.906 --> 00:31:52.526 A:middle
+
+678
+00:31:49,906 --> 00:31:52,526
 It has an amount and a label.
 
-00:31:52.576 --> 00:31:54.036 A:middle
+
+679
+00:31:52,576 --> 00:31:54,036
 Now the label is a string,
 
-00:31:54.036 --> 00:31:57.566 A:middle
+
+680
+00:31:54,036 --> 00:31:57,566
 and the amount is this class
 called NSDecimalNumber.
 
-00:31:58.076 --> 00:31:58.586 A:middle
+
+681
+00:31:58,076 --> 00:31:58,586
 You may have come
 
-00:31:58.586 --> 00:32:01.896 A:middle
+
+682
+00:31:58,586 --> 00:32:01,896
 across NSDecimalNumber
 before it's a Cocoa class
 
 
-
-00:31:58.586 --> 00:32:01.896 A:middle
-across NSDecimalNumber
-before it's a Cocoa class
-
-00:32:01.896 --> 00:32:04.206 A:middle
+683
+00:32:01,896 --> 00:32:04,206
 and it precisely represents
 floating point numbers
 
-00:32:04.206 --> 00:32:07.596 A:middle
+
+684
+00:32:04,206 --> 00:32:07,596
 in base 10, which is very
 important when you are working
 
-00:32:07.596 --> 00:32:09.666 A:middle
+
+685
+00:32:07,596 --> 00:32:09,666
 in finance and with currency.
 
-00:32:10.606 --> 00:32:13.696 A:middle
+
+686
+00:32:10,606 --> 00:32:13,696
 So it avoids any nasty base
 2 floating point errors.
 
-00:32:14.026 --> 00:32:16.416 A:middle
+
+687
+00:32:14,026 --> 00:32:16,416
 And it's got a few
 convenience initializers
 
-00:32:16.416 --> 00:32:17.706 A:middle
+
+688
+00:32:16,416 --> 00:32:17,706
 and it has string initializer.
 
-00:32:18.406 --> 00:32:20.876 A:middle
+
+689
+00:32:18,406 --> 00:32:20,876
 It also has a double initializer
 and you can initialize
 
-00:32:20.876 --> 00:32:22.226 A:middle
+
+690
+00:32:20,876 --> 00:32:22,226
 if from another NSDecimalNumber.
 
-00:32:22.226 --> 00:32:24.296 A:middle
+
+691
+00:32:22,226 --> 00:32:24,296
 So I'm going to use the string.
 
-00:32:24.906 --> 00:32:27.406 A:middle
+
+692
+00:32:24,906 --> 00:32:27,406
 So here I'm creating
 just one summary item
 
-00:32:27.456 --> 00:32:30.546 A:middle
+
+693
+00:32:27,456 --> 00:32:30,546
 because as Rachel said if I only
 one want one thing to charge,
 
-00:32:30.546 --> 00:32:31.936 A:middle
+
+694
+00:32:30,546 --> 00:32:31,936
 I should just have
 a single total.
 
-00:32:32.446 --> 00:32:35.466 A:middle
+
+695
+00:32:32,446 --> 00:32:35,466
 And the label is Apple Inc.,
 because that's what's going
 
-00:32:35.466 --> 00:32:36.316 A:middle
+
+696
+00:32:35,466 --> 00:32:36,316
 to appear on the statement.
 
-00:32:37.116 --> 00:32:40.696 A:middle
+
+697
+00:32:37,116 --> 00:32:40,696
 And I'm creating an amount
 from a string for $349.99.
 
-00:32:40.846 --> 00:32:43.666 A:middle
+
+698
+00:32:40,846 --> 00:32:43,666
 I just have a single item
 in my array which I pass
 
-00:32:43.666 --> 00:32:44.696 A:middle
+
+699
+00:32:43,666 --> 00:32:44,696
 through to my SummaryItems.
 
-00:32:45.256 --> 00:32:48.056 A:middle
+
+700
+00:32:45,256 --> 00:32:48,056
 To reinforce the
 point, the last item
 
-00:32:48.056 --> 00:32:50.096 A:middle
+
+701
+00:32:48,056 --> 00:32:50,096
 of the summary items
 array is the total
 
-00:32:50.096 --> 00:32:50.926 A:middle
+
+702
+00:32:50,096 --> 00:32:50,926
 that you want to charge.
 
-00:32:50.926 --> 00:32:53.386 A:middle
+
+703
+00:32:50,926 --> 00:32:53,386
 That's what we're going to
 authorize and send to you.
 
-00:32:53.966 --> 00:32:58.286 A:middle
+
+704
+00:32:53,966 --> 00:32:58,286
 So payment request is good.
 
-00:32:58.286 --> 00:32:59.636 A:middle
+
+705
+00:32:58,286 --> 00:32:59,636
 We are ready to present it
 
 
-
-00:33:00.196 --> 00:33:02.166 A:middle
+706
+00:33:00,196 --> 00:33:02,166
 into our payment
 authorization view controller.
 
-00:33:02.726 --> 00:33:05.826 A:middle
+
+707
+00:33:02,726 --> 00:33:05,826
 This displays the
 payment information
 
-00:33:06.056 --> 00:33:08.286 A:middle
+
+708
+00:33:06,056 --> 00:33:08,286
 and it's modally displayed
 over your app like this.
 
-00:33:09.166 --> 00:33:12.546 A:middle
+
+709
+00:33:09,166 --> 00:33:12,546
 On iPad, it's a form sheet and
 on the new multitasking on iPad,
 
-00:33:12.546 --> 00:33:14.516 A:middle
+
+710
+00:33:12,546 --> 00:33:14,516
 it will actually cover
 the entire screen.
 
-00:33:14.516 --> 00:33:16.376 A:middle
+
+711
+00:33:14,516 --> 00:33:16,376
 We do that so that if
 you've got two apps side
 
-00:33:16.376 --> 00:33:19.256 A:middle
+
+712
+00:33:16,376 --> 00:33:19,256
 by side they don't try to charge
 two things at the same time,
 
-00:33:19.446 --> 00:33:20.736 A:middle
+
+713
+00:33:19,446 --> 00:33:20,736
 so it's completely
 modally displayed.
 
-00:33:21.246 --> 00:33:24.876 A:middle
+
+714
+00:33:21,246 --> 00:33:24,876
 And it's initialized
 really simply,
 
-00:33:25.216 --> 00:33:26.286 A:middle
+
+715
+00:33:25,216 --> 00:33:26,286
 just with paymentRequest.
 
-00:33:26.856 --> 00:33:30.586 A:middle
+
+716
+00:33:26,856 --> 00:33:30,586
 It also has a delegate
 which we will come on to.
 
-00:33:30.586 --> 00:33:32.396 A:middle
+
+717
+00:33:30,586 --> 00:33:32,396
 And you present it like
 any other controller.
 
-00:33:32.516 --> 00:33:34.896 A:middle
+
+718
+00:33:32,516 --> 00:33:34,896
 You will probably want to
 present it with an animation.
 
-00:33:35.446 --> 00:33:39.806 A:middle
+
+719
+00:33:35,446 --> 00:33:39,806
 And you will want to present
 it using an Apple Pay button.
 
-00:33:40.726 --> 00:33:45.546 A:middle
+
+720
+00:33:40,726 --> 00:33:45,546
 Now, from iOS 8.3, we have this
 great class, PKPaymentButton.
 
-00:33:46.796 --> 00:33:49.206 A:middle
+
+721
+00:33:46,796 --> 00:33:49,206
 It comes prestyled in
 a variety of colors
 
-00:33:49.496 --> 00:33:51.746 A:middle
+
+722
+00:33:49,496 --> 00:33:51,746
 and very importantly it's
 completely localized,
 
-00:33:51.806 --> 00:33:53.186 A:middle
+
+723
+00:33:51,806 --> 00:33:53,186
 so we really encourage
 you to use it.
 
-00:33:54.606 --> 00:33:57.026 A:middle
+
+724
+00:33:54,606 --> 00:33:57,026
 It's just like a UI button,
 its a UIButton subclass.
 
-00:33:57.176 --> 00:33:59.596 A:middle
+
+725
+00:33:57,176 --> 00:33:59,596
 Now if you do need
 to target below 8.3,
 
-00:33:59.696 --> 00:34:01.406 A:middle
+
+726
+00:33:59,696 --> 00:34:01,406
 we also have some
 imagery available
 
 
-
-00:33:59.696 --> 00:34:01.406 A:middle
-we also have some
-imagery available
-
-00:34:01.596 --> 00:34:03.256 A:middle
+727
+00:34:01,596 --> 00:34:03,256
 on our developer site
 that you can use.
 
-00:34:03.416 --> 00:34:08.096 A:middle
+
+728
+00:34:03,416 --> 00:34:08,096
 There'll be a link that
 at the end of the session.
 
-00:34:08.366 --> 00:34:13.676 A:middle
+
+729
+00:34:08,366 --> 00:34:13,676
 Moment of truth, let's see if we
 can get this working on a demo.
 
-00:34:14.436 --> 00:34:16.656 A:middle
+
+730
+00:34:14,436 --> 00:34:16,656
 So we will switch over
 to the demo machine.
 
-00:34:19.446 --> 00:34:19.826 A:middle
+
+731
+00:34:19,446 --> 00:34:19,826
 Beautiful!
 
-00:34:20.596 --> 00:34:23.106 A:middle
+
+732
+00:34:20,596 --> 00:34:23,106
 Okay. So I have got a
 really simple app here
 
-00:34:23.226 --> 00:34:25.396 A:middle
+
+733
+00:34:23,226 --> 00:34:25,396
 that I have built and all
 of this sample code is going
 
-00:34:25.396 --> 00:34:28.346 A:middle
+
+734
+00:34:25,396 --> 00:34:28,346
 to be available on the
 developer site as well.
 
-00:34:29.896 --> 00:34:31.426 A:middle
+
+735
+00:34:29,896 --> 00:34:31,426
 So lets see what
 it's like right now,
 
-00:34:31.426 --> 00:34:33.246 A:middle
+
+736
+00:34:31,426 --> 00:34:33,246
 I haven't implemented
 anything in Apple Pay yet.
 
-00:34:33.315 --> 00:34:37.416 A:middle
+
+737
+00:34:33,315 --> 00:34:37,416
 Let's make the simulator
 a little smaller.
 
-00:34:37.766 --> 00:34:39.136 A:middle
+
+738
+00:34:37,766 --> 00:34:39,136
 A little shopping app.
 
-00:34:40.565 --> 00:34:42.726 A:middle
+
+739
+00:34:40,565 --> 00:34:42,726
 And you can see I have got a
 little description of the price
 
-00:34:42.726 --> 00:34:43.795 A:middle
+
+740
+00:34:42,726 --> 00:34:43,795
 and the buy with
 Apple Pay button.
 
-00:34:44.766 --> 00:34:45.985 A:middle
+
+741
+00:34:44,766 --> 00:34:45,985
 Okay, nothing is
 really happening.
 
-00:34:46.696 --> 00:34:47.626 A:middle
+
+742
+00:34:46,696 --> 00:34:47,626
 So let's put that code in.
 
-00:34:48.545 --> 00:34:50.226 A:middle
+
+743
+00:34:48,545 --> 00:34:50,226
 Let's talk about what I
 have got so far first.
 
-00:34:50.226 --> 00:34:54.166 A:middle
+
+744
+00:34:50,226 --> 00:34:54,166
 You can see here, I have a
 canMakePaymentsUsingNetworks
 
-00:34:54.166 --> 00:34:54.446 A:middle
+
+745
+00:34:54,166 --> 00:34:54,446
 check.
 
-00:34:55.085 --> 00:34:58.286 A:middle
+
+746
+00:34:55,085 --> 00:34:58,286
 And I have got this
 supportedNetworks property.
 
-00:34:58.286 --> 00:35:00.316 A:middle
+
+747
+00:34:58,286 --> 00:35:00,316
 So I have actually
 defined this further up.
 
 
-
-00:34:58.286 --> 00:35:00.316 A:middle
-So I have actually
-defined this further up.
-
-00:35:00.316 --> 00:35:01.326 A:middle
+748
+00:35:00,316 --> 00:35:01,326
 Let's go take a look at that.
 
-00:35:02.236 --> 00:35:02.886 A:middle
+
+749
+00:35:02,236 --> 00:35:02,886
 There it is.
 
-00:35:02.886 --> 00:35:07.696 A:middle
+
+750
+00:35:02,886 --> 00:35:07,696
 You can see I am supporting all
 four networks, American Express,
 
-00:35:08.096 --> 00:35:10.286 A:middle
+
+751
+00:35:08,096 --> 00:35:10,286
 Discover, MasterCard, and Visa.
 
-00:35:10.866 --> 00:35:14.036 A:middle
+
+752
+00:35:10,866 --> 00:35:14,036
 And I'm adding the button
 if support is available
 
-00:35:14.826 --> 00:35:18.156 A:middle
+
+753
+00:35:14,826 --> 00:35:18,156
 and I have this
 applePayButtonPressed method.
 
-00:35:18.306 --> 00:35:20.086 A:middle
+
+754
+00:35:18,306 --> 00:35:20,086
 So I'm going to want
 to add stuff to that.
 
-00:35:20.606 --> 00:35:22.076 A:middle
+
+755
+00:35:20,606 --> 00:35:22,076
 So let's set up our
 paymentRequest.
 
-00:35:23.266 --> 00:35:24.426 A:middle
+
+756
+00:35:23,266 --> 00:35:24,426
 Well, actually before we set
 
-00:35:24.426 --> 00:35:26.306 A:middle
+
+757
+00:35:24,426 --> 00:35:26,306
 up my paymentRequest we should
 double check we've got our
 
-00:35:26.306 --> 00:35:27.546 A:middle
+
+758
+00:35:26,306 --> 00:35:27,546
 entitlements set up.
 
-00:35:27.886 --> 00:35:30.066 A:middle
+
+759
+00:35:27,886 --> 00:35:30,066
 So they're all listed
 here in entitlements.
 
-00:35:30.726 --> 00:35:32.296 A:middle
+
+760
+00:35:30,726 --> 00:35:32,296
 You can see that
 mine is a little red
 
-00:35:32.416 --> 00:35:33.346 A:middle
+
+761
+00:35:32,416 --> 00:35:33,346
 but don't worry about that.
 
-00:35:33.346 --> 00:35:35.726 A:middle
+
+762
+00:35:33,346 --> 00:35:35,726
 You will see why in a second.
 
-00:35:36.926 --> 00:35:38.666 A:middle
+
+763
+00:35:36,926 --> 00:35:38,666
 Okay. Let's go back to our code.
 
-00:35:39.686 --> 00:35:41.596 A:middle
+
+764
+00:35:39,686 --> 00:35:41,596
 Let's get this set up, lets
 create our paymentRequest.
 
-00:35:41.596 --> 00:35:44.846 A:middle
+
+765
+00:35:41,596 --> 00:35:44,846
 So let's run through line by
 line what is going on here.
 
-00:35:45.536 --> 00:35:46.286 A:middle
+
+766
+00:35:45,536 --> 00:35:46,286
 Scroll this up a bit.
 
-00:35:47.656 --> 00:35:51.086 A:middle
+
+767
+00:35:47,656 --> 00:35:51,086
 Okay, so first of all we are
 creating the paymentRequest
 
-00:35:51.666 --> 00:35:54.986 A:middle
+
+768
+00:35:51,666 --> 00:35:54,986
 and then we're passing it, our
 merchantIdentifier which just
 
-00:35:54.986 --> 00:35:56.626 A:middle
+
+769
+00:35:54,986 --> 00:35:56,626
 for convenience sake,
 I've defined
 
-00:35:56.626 --> 00:35:58.256 A:middle
+
+770
+00:35:56,626 --> 00:35:58,256
 in generic configuration class.
 
-00:35:58.796 --> 00:36:02.186 A:middle
+
+771
+00:35:58,796 --> 00:36:02,186
 I'm then passing the mandatory
 properties the countryCode
 
 
-
-00:35:58.796 --> 00:36:02.186 A:middle
-I'm then passing the mandatory
-properties the countryCode
-
-00:36:02.186 --> 00:36:02.986 A:middle
+772
+00:36:02,186 --> 00:36:02,986
 and the currencyCode.
 
-00:36:02.986 --> 00:36:06.256 A:middle
+
+773
+00:36:02,986 --> 00:36:06,256
 Now in this case my app
 is only charging in USD.
 
-00:36:06.966 --> 00:36:09.076 A:middle
+
+774
+00:36:06,966 --> 00:36:09,076
 And I'm also passing in
 the supportedNetworks.
 
-00:36:09.586 --> 00:36:13.626 A:middle
+
+775
+00:36:09,586 --> 00:36:13,626
 Now, I talked to my payment
 processor and they told me
 
-00:36:13.626 --> 00:36:15.856 A:middle
+
+776
+00:36:13,626 --> 00:36:15,856
 that I should use
 3DS as my capability.
 
-00:36:15.856 --> 00:36:17.366 A:middle
+
+777
+00:36:15,856 --> 00:36:17,366
 So I've done that.
 
-00:36:18.826 --> 00:36:21.766 A:middle
+
+778
+00:36:18,826 --> 00:36:21,766
 And I also want to
 create my SummaryItems.
 
-00:36:21.766 --> 00:36:24.266 A:middle
+
+779
+00:36:21,766 --> 00:36:24,266
 I have a convenience
 method here, I've hidden it.
 
-00:36:24.266 --> 00:36:25.856 A:middle
+
+780
+00:36:24,266 --> 00:36:25,856
 But it's going to
 create a product.
 
-00:36:25.856 --> 00:36:28.996 A:middle
+
+781
+00:36:25,856 --> 00:36:28,996
 So in this app, all the products
 come in from appealists.
 
-00:36:28.996 --> 00:36:30.726 A:middle
+
+782
+00:36:28,996 --> 00:36:30,726
 It's a very contrived example.
 
-00:36:30.726 --> 00:36:32.936 A:middle
+
+783
+00:36:30,726 --> 00:36:32,936
 And it will generate a
 summarized version for me.
 
-00:36:33.586 --> 00:36:36.186 A:middle
+
+784
+00:36:33,586 --> 00:36:36,186
 We'll take a look at that
 method in more detail in a bit.
 
-00:36:37.466 --> 00:36:38.376 A:middle
+
+785
+00:36:37,466 --> 00:36:38,376
 Okay so now I'm ready
 
-00:36:38.446 --> 00:36:40.796 A:middle
+
+786
+00:36:38,446 --> 00:36:40,796
 to actually display
 the view controller.
 
-00:36:40.796 --> 00:36:43.976 A:middle
+
+787
+00:36:40,796 --> 00:36:43,976
 So again, it's initialized
 with the PaymentRequest
 
-00:36:44.326 --> 00:36:45.146 A:middle
+
+788
+00:36:44,326 --> 00:36:45,146
 and its got a delegate.
 
-00:36:46.476 --> 00:36:47.906 A:middle
+
+789
+00:36:46,476 --> 00:36:47,906
 My delegate method is here
 and we will take a look
 
-00:36:47.906 --> 00:36:49.626 A:middle
+
+790
+00:36:47,906 --> 00:36:49,626
 at those again in a bit.
 
-00:36:49.626 --> 00:36:50.466 A:middle
+
+791
+00:36:49,626 --> 00:36:50,466
 I can just present it.
 
-00:36:51.026 --> 00:36:53.446 A:middle
+
+792
+00:36:51,026 --> 00:36:53,446
 So let's run it.
 
-00:36:55.436 --> 00:36:58.806 A:middle
+
+793
+00:36:55,436 --> 00:36:58,806
 So I've just thought of
 something, I don't know if any
 
-00:36:58.806 --> 00:37:00.836 A:middle
+
+794
+00:36:58,806 --> 00:37:00,836
 of you tried to use
 Apple Pay on iOS 8.
 
 
-
-00:36:58.806 --> 00:37:00.836 A:middle
-of you tried to use
-Apple Pay on iOS 8.
-
-00:37:00.836 --> 00:37:02.926 A:middle
+795
+00:37:00,836 --> 00:37:02,926
 It doesn't actually
 work on the simulator.
 
-00:37:02.926 --> 00:37:05.556 A:middle
+
+796
+00:37:02,926 --> 00:37:05,556
 So I might have a
 bit of a problem.
 
-00:37:06.016 --> 00:37:06.566 A:middle
+
+797
+00:37:06,016 --> 00:37:06,566
 Let's see.
 
-00:37:07.976 --> 00:37:10.976 A:middle
+
+798
+00:37:07,976 --> 00:37:10,976
 Oh okay, I guess Apple Pay
 does work on the simulator now.
 
-00:37:11.331 --> 00:37:13.331 A:middle
+
+799
+00:37:11,331 --> 00:37:13,331
 [Applause]
 
-00:37:13.646 --> 00:37:17.006 A:middle
+
+800
+00:37:13,646 --> 00:37:17,006
 As of iOS 9 we support
 Apple Pay.
 
-00:37:17.006 --> 00:37:19.246 A:middle
+
+801
+00:37:17,006 --> 00:37:19,246
 We'll vend you these
 simulated cards
 
-00:37:19.766 --> 00:37:21.946 A:middle
+
+802
+00:37:19,766 --> 00:37:21,946
 for every card network
 that you request.
 
-00:37:22.246 --> 00:37:23.156 A:middle
+
+803
+00:37:22,246 --> 00:37:23,156
 So they're hiding here.
 
-00:37:23.686 --> 00:37:27.786 A:middle
+
+804
+00:37:23,686 --> 00:37:27,786
 Let's pay with pass code,
 cause Touch ID doesn't exist.
 
-00:37:27.786 --> 00:37:30.596 A:middle
+
+805
+00:37:27,786 --> 00:37:30,596
 Oh, okay. I guess I
 have one more hurdle
 
-00:37:30.596 --> 00:37:33.266 A:middle
+
+806
+00:37:30,596 --> 00:37:33,266
 and that's these pesky
 delegate methods here.
 
-00:37:34.246 --> 00:37:36.496 A:middle
+
+807
+00:37:34,246 --> 00:37:36,496
 So let's talk about what
 needs to go in there.
 
-00:37:36.526 --> 00:37:39.236 A:middle
+
+808
+00:37:36,526 --> 00:37:39,236
 Let's talk about how we actually
 handle authorization once
 
-00:37:40.276 --> 00:37:41.806 A:middle
+
+809
+00:37:40,276 --> 00:37:41,806
 it happens.
 
-00:37:43.816 --> 00:37:45.936 A:middle
+
+810
+00:37:43,816 --> 00:37:45,936
 So once the users Touch ID,
 
-00:37:45.936 --> 00:37:47.856 A:middle
+
+811
+00:37:45,936 --> 00:37:47,856
 we're going to receive
 some callbacks
 
-00:37:48.126 --> 00:37:50.576 A:middle
+
+812
+00:37:48,126 --> 00:37:50,576
 in our PaymentAuthorization
 ViewControllerDelegate.
 
-00:37:50.576 --> 00:37:52.976 A:middle
+
+813
+00:37:50,576 --> 00:37:52,976
 And we can use this delegate
 
-00:37:52.976 --> 00:37:55.676 A:middle
+
+814
+00:37:52,976 --> 00:37:55,676
 to confirm whether we've
 received the payments
 
-00:37:56.156 --> 00:37:57.666 A:middle
+
+815
+00:37:56,156 --> 00:37:57,666
 and whether we've been
 able to process them.
 
-00:37:59.006 --> 00:38:01.726 A:middle
+
+816
+00:37:59,006 --> 00:38:01,726
 Now, it has two required
 delegate methods.
 
 
-
-00:37:59.006 --> 00:38:01.726 A:middle
-Now, it has two required
-delegate methods.
-
-00:38:02.356 --> 00:38:05.286 A:middle
+817
+00:38:02,356 --> 00:38:05,286
 The first method is
 paymentAuthorization
 
-00:38:05.286 --> 00:38:07.766 A:middle
+
+818
+00:38:05,286 --> 00:38:07,766
 ViewController
 didAuthorizationPayment.
 
-00:38:08.596 --> 00:38:10.826 A:middle
+
+819
+00:38:08,596 --> 00:38:10,826
 So you will get back
 a PKPayment object,
 
-00:38:11.506 --> 00:38:15.946 A:middle
+
+820
+00:38:11,506 --> 00:38:15,946
 and you return a completion
 handler, a block with a status
 
-00:38:16.106 --> 00:38:18.736 A:middle
+
+821
+00:38:16,106 --> 00:38:18,736
 and that status will tell us
 whether you have been able
 
-00:38:18.796 --> 00:38:20.736 A:middle
+
+822
+00:38:18,796 --> 00:38:20,736
 to process the payment
 on your own servers,
 
-00:38:21.076 --> 00:38:23.186 A:middle
+
+823
+00:38:21,076 --> 00:38:23,186
 in which case we will display
 a nice check mark on the sheet,
 
-00:38:23.736 --> 00:38:25.546 A:middle
+
+824
+00:38:23,736 --> 00:38:25,546
 or if something has gone
 wrong in which case we'll try
 
-00:38:25.546 --> 00:38:26.976 A:middle
+
+825
+00:38:25,546 --> 00:38:26,976
 to tell the user what happened.
 
-00:38:28.316 --> 00:38:30.196 A:middle
+
+826
+00:38:28,316 --> 00:38:30,196
 You then need to dismiss
 the payment view controller,
 
-00:38:30.356 --> 00:38:32.046 A:middle
+
+827
+00:38:30,356 --> 00:38:32,046
 and that happens in
 another delegate method.
 
-00:38:32.046 --> 00:38:33.836 A:middle
+
+828
+00:38:32,046 --> 00:38:33,836
 So you shouldn't dismiss
 the view controller
 
-00:38:33.956 --> 00:38:35.726 A:middle
+
+829
+00:38:33,956 --> 00:38:35,726
 in didAuthorizationPayment.
 
-00:38:35.726 --> 00:38:37.266 A:middle
+
+830
+00:38:35,726 --> 00:38:37,266
 You want to dismiss it,
 
-00:38:37.266 --> 00:38:40.146 A:middle
+
+831
+00:38:37,266 --> 00:38:40,146
 paymentAuthorization
 ViewControllerDidFinish.
 
-00:38:40.366 --> 00:38:43.066 A:middle
+
+832
+00:38:40,366 --> 00:38:43,066
 Now PKPayment, the object
 
-00:38:43.066 --> 00:38:46.306 A:middle
+
+833
+00:38:43,066 --> 00:38:46,306
 that you will get back
 contains another object
 
-00:38:46.306 --> 00:38:48.866 A:middle
+
+834
+00:38:46,306 --> 00:38:48,866
 with PKPayment token,
 and it's returned
 
-00:38:48.866 --> 00:38:52.006 A:middle
+
+835
+00:38:48,866 --> 00:38:52,006
 after a successful authorization
 and that's what you will send
 
-00:38:52.006 --> 00:38:54.296 A:middle
+
+836
+00:38:52,006 --> 00:38:54,296
 up to your payment processor
 or to your own servers
 
-00:38:54.976 --> 00:38:56.836 A:middle
+
+837
+00:38:54,976 --> 00:38:56,836
 and it's got the
 encrypted payment data,
 
-00:38:57.166 --> 00:38:59.376 A:middle
+
+838
+00:38:57,166 --> 00:38:59,376
 as well as any other metadata
 that you might have requested.
 
-00:38:59.926 --> 00:39:01.406 A:middle
+
+839
+00:38:59,926 --> 00:39:01,406
 So a shipping address.
 
 
-
-00:38:59.926 --> 00:39:01.406 A:middle
-So a shipping address.
-
-00:39:02.306 --> 00:39:03.496 A:middle
+840
+00:39:02,306 --> 00:39:03,496
 Okay. Let's add those in.
 
-00:39:03.656 --> 00:39:07.646 A:middle
+
+841
+00:39:03,656 --> 00:39:07,646
 Let's get that into our app.
 
-00:39:10.106 --> 00:39:14.426 A:middle
+
+842
+00:39:10,106 --> 00:39:14,426
 Okay. So let's do
 didAuthorizationPayment first.
 
-00:39:14.426 --> 00:39:16.156 A:middle
+
+843
+00:39:14,426 --> 00:39:16,156
 Now, I'm not going to integrate
 
-00:39:16.156 --> 00:39:17.696 A:middle
+
+844
+00:39:16,156 --> 00:39:17,696
 with a payment processor
 for today.
 
-00:39:18.186 --> 00:39:20.646 A:middle
+
+845
+00:39:18,186 --> 00:39:20,646
 So you'll just have to
 imagine that this completion,
 
-00:39:21.246 --> 00:39:25.286 A:middle
+
+846
+00:39:21,246 --> 00:39:25,286
 this is where I posted
 it to my server.
 
-00:39:25.286 --> 00:39:27.276 A:middle
+
+847
+00:39:25,286 --> 00:39:27,276
 There we go.
 
-00:39:27.426 --> 00:39:29.776 A:middle
+
+848
+00:39:27,426 --> 00:39:29,776
 Now, I have also got
 a segue in this app
 
-00:39:29.866 --> 00:39:31.936 A:middle
+
+849
+00:39:29,866 --> 00:39:31,936
 to send a confirmation sheet.
 
-00:39:32.916 --> 00:39:36.166 A:middle
+
+850
+00:39:32,916 --> 00:39:36,166
 So that's defined --
 I have to find it.
 
-00:39:36.716 --> 00:39:37.066 A:middle
+
+851
+00:39:36,716 --> 00:39:37,066
 Here we are.
 
-00:39:37.066 --> 00:39:40.266 A:middle
+
+852
+00:39:37,066 --> 00:39:40,266
 So I have a really simple segue
 and it's taking this property
 
-00:39:40.266 --> 00:39:42.436 A:middle
+
+853
+00:39:40,266 --> 00:39:42,436
 on paymentToken called
 transactionIdentifier.
 
-00:39:43.236 --> 00:39:45.256 A:middle
+
+854
+00:39:43,236 --> 00:39:45,256
 So the PKPayment
 token, like I said,
 
-00:39:45.256 --> 00:39:47.266 A:middle
+
+855
+00:39:45,256 --> 00:39:47,266
 it contains the information
 you need to make the payment,
 
-00:39:47.266 --> 00:39:49.466 A:middle
+
+856
+00:39:47,266 --> 00:39:49,466
 it's also got some useful
 metadata you might want
 
-00:39:49.466 --> 00:39:50.306 A:middle
+
+857
+00:39:49,466 --> 00:39:50,306
 to display in a receipt.
 
-00:39:51.056 --> 00:39:54.046 A:middle
+
+858
+00:39:51,056 --> 00:39:54,046
 So things like a sanitized
 version of the card name
 
-00:39:54.626 --> 00:39:56.576 A:middle
+
+859
+00:39:54,626 --> 00:39:56,576
 and also this thing called
 a transactionIdentifier.
 
-00:39:57.126 --> 00:39:58.656 A:middle
+
+860
+00:39:57,126 --> 00:39:58,656
 Now that's guaranteed unique.
 
-00:39:58.776 --> 00:39:59.766 A:middle
+
+861
+00:39:58,776 --> 00:39:59,766
 You can use it if you'd like.
 
-00:39:59.766 --> 00:40:00.796 A:middle
+
+862
+00:39:59,766 --> 00:40:00,796
 You can use it for receipts.
 
 
-
-00:39:59.766 --> 00:40:00.796 A:middle
-You can use it for receipts.
-
-00:40:00.796 --> 00:40:02.856 A:middle
+863
+00:40:00,796 --> 00:40:02,856
 It's unique to every
 Apple Pay purchase.
 
-00:40:03.346 --> 00:40:07.116 A:middle
+
+864
+00:40:03,346 --> 00:40:07,116
 And last but not
 least, I probably want
 
-00:40:07.116 --> 00:40:08.536 A:middle
+
+865
+00:40:07,116 --> 00:40:08,536
 to dismiss my view controller.
 
-00:40:09.896 --> 00:40:10.686 A:middle
+
+866
+00:40:09,896 --> 00:40:10,686
 There we go.
 
-00:40:12.056 --> 00:40:14.136 A:middle
+
+867
+00:40:12,056 --> 00:40:14,136
 Now, here I'm sending success,
 
-00:40:14.426 --> 00:40:16.216 A:middle
+
+868
+00:40:14,426 --> 00:40:16,216
 but we do have a
 few other statuses
 
-00:40:16.216 --> 00:40:18.326 A:middle
+
+869
+00:40:16,216 --> 00:40:18,326
 that you can send if you'd like.
 
-00:40:20.416 --> 00:40:23.896 A:middle
+
+870
+00:40:20,416 --> 00:40:23,896
 So success and failure, if
 maybe something went wrong
 
-00:40:23.896 --> 00:40:25.016 A:middle
+
+871
+00:40:23,896 --> 00:40:25,016
 when you tried to authorize it.
 
-00:40:25.476 --> 00:40:28.266 A:middle
+
+872
+00:40:25,476 --> 00:40:28,266
 As we see later, we
 have some other statuses
 
-00:40:28.266 --> 00:40:31.606 A:middle
+
+873
+00:40:28,266 --> 00:40:31,606
 for invalid billing address
 and invalid postal address
 
-00:40:32.106 --> 00:40:34.036 A:middle
+
+874
+00:40:32,106 --> 00:40:34,036
 or they haven't supplied
 enough contact information.
 
-00:40:34.616 --> 00:40:36.676 A:middle
+
+875
+00:40:34,616 --> 00:40:36,676
 Okay. So let's run that.
 
-00:40:36.796 --> 00:40:43.276 A:middle
+
+876
+00:40:36,796 --> 00:40:43,276
 So I'm going to go for the
 aluminum color because I feel
 
-00:40:43.276 --> 00:40:45.766 A:middle
+
+877
+00:40:43,276 --> 00:40:45,766
 at this WWDC we haven't
 had enough aluminum.
 
-00:40:46.916 --> 00:40:49.026 A:middle
+
+878
+00:40:46,916 --> 00:40:49,026
 Okay Pay with Passcode.
 
-00:40:50.156 --> 00:40:50.706 A:middle
+
+879
+00:40:50,156 --> 00:40:50,706
 Okay great.
 
-00:40:51.236 --> 00:40:52.876 A:middle
+
+880
+00:40:51,236 --> 00:40:52,876
 You see the transaction
 identifier here says
 
-00:40:53.006 --> 00:40:54.046 A:middle
+
+881
+00:40:53,006 --> 00:40:54,046
 Simulated Identifier.
 
-00:40:54.516 --> 00:40:55.016 A:middle
+
+882
+00:40:54,516 --> 00:40:55,016
 That's because I'm
 
-00:40:55.016 --> 00:40:57.856 A:middle
+
+883
+00:40:55,016 --> 00:40:57,856
 on the Simulator it's
 returning me dummy information.
 
-00:40:58.006 --> 00:40:59.986 A:middle
+
+884
+00:40:58,006 --> 00:40:59,986
 If this was a real
 device I'd have an actual
 
 
-
-00:41:00.196 --> 00:41:01.366 A:middle
+885
+00:41:00,196 --> 00:41:01,366
 transaction identifier.
 
-00:41:02.516 --> 00:41:04.876 A:middle
+
+886
+00:41:02,516 --> 00:41:04,876
 I'd also send it off to my
 own service for processing.
 
-00:41:05.856 --> 00:41:08.796 A:middle
+
+887
+00:41:05,856 --> 00:41:08,796
 I have an app that can accept
 Apple Pay and make payments.
 
-00:41:08.796 --> 00:41:11.166 A:middle
+
+888
+00:41:08,796 --> 00:41:11,166
 It didn't seem like I needed
 that much code, right?
 
-00:41:11.166 --> 00:41:13.826 A:middle
+
+889
+00:41:11,166 --> 00:41:13,826
 I thinks thats only
 a dozen lines.
 
-00:41:13.826 --> 00:41:15.336 A:middle
+
+890
+00:41:13,826 --> 00:41:15,336
 There is one small
 problem with my app.
 
-00:41:15.426 --> 00:41:18.896 A:middle
+
+891
+00:41:15,426 --> 00:41:18,896
 I'm buying dog collars but I
 have no idea where to ship them.
 
-00:41:19.596 --> 00:41:21.526 A:middle
+
+892
+00:41:19,596 --> 00:41:21,526
 So we should probably
 get that fixed up.
 
-00:41:21.526 --> 00:41:22.476 A:middle
+
+893
+00:41:21,526 --> 00:41:22,476
 We should probably look
 
-00:41:22.476 --> 00:41:25.516 A:middle
+
+894
+00:41:22,476 --> 00:41:25,516
 at how we can actually
 get contact information.
 
-00:41:27.136 --> 00:41:28.836 A:middle
+
+895
+00:41:27,136 --> 00:41:28,836
 So you can request
 contact information
 
-00:41:28.836 --> 00:41:31.686 A:middle
+
+896
+00:41:28,836 --> 00:41:31,686
 from users using a bit mask
 on the payment request.
 
-00:41:31.686 --> 00:41:33.976 A:middle
+
+897
+00:41:31,686 --> 00:41:33,976
 It's called
 requiredShippingAddressFields.
 
-00:41:34.796 --> 00:41:39.176 A:middle
+
+898
+00:41:34,796 --> 00:41:39,176
 We have postal address, email
 and phone and then in iOS 8.3,
 
-00:41:39.406 --> 00:41:41.546 A:middle
+
+899
+00:41:39,406 --> 00:41:41,546
 we introduced name
 which is name only.
 
-00:41:41.546 --> 00:41:43.616 A:middle
+
+900
+00:41:41,546 --> 00:41:43,616
 So if you are a ride sharing
 app and you don't want
 
-00:41:43.616 --> 00:41:44.926 A:middle
+
+901
+00:41:43,616 --> 00:41:44,926
 to collect the user's
 postal name,
 
-00:41:45.316 --> 00:41:47.466 A:middle
+
+902
+00:41:45,316 --> 00:41:47,466
 but you do want their name,
 so the driver knows what
 
-00:41:47.466 --> 00:41:51.576 A:middle
+
+903
+00:41:47,466 --> 00:41:51,576
 to call them, you can use that.
 
-00:41:51.796 --> 00:41:56.106 A:middle
+
+904
+00:41:51,796 --> 00:41:56,106
 Now, optionally, you can request
 billing, the billing address.
 
-00:41:56.446 --> 00:41:59.106 A:middle
+
+905
+00:41:56,446 --> 00:41:59,106
 That's another bit mask with
 required billing address fields.
 
-00:41:59.766 --> 00:42:02.716 A:middle
+
+906
+00:41:59,766 --> 00:42:02,716
 Now for all of this contact
 information, we recommend
 
 
-
-00:41:59.766 --> 00:42:02.716 A:middle
-Now for all of this contact
-information, we recommend
-
-00:42:02.716 --> 00:42:05.446 A:middle
+907
+00:42:02,716 --> 00:42:05,446
 that you don't request it
 unless you absolutely need it.
 
-00:42:05.446 --> 00:42:07.066 A:middle
+
+908
+00:42:05,446 --> 00:42:07,066
 It's very important.
 
-00:42:07.066 --> 00:42:09.566 A:middle
+
+909
+00:42:07,066 --> 00:42:09,566
 Users love that Apple Pay
 is so quick and easy to use.
 
-00:42:09.566 --> 00:42:11.336 A:middle
+
+910
+00:42:09,566 --> 00:42:11,336
 So you don't want to
 get in the way of that,
 
-00:42:12.076 --> 00:42:13.026 A:middle
+
+911
+00:42:12,076 --> 00:42:13,026
 especially for billing address.
 
-00:42:13.026 --> 00:42:15.306 A:middle
+
+912
+00:42:13,026 --> 00:42:15,306
 It's not required
 to process Apple Pay
 
-00:42:15.416 --> 00:42:17.016 A:middle
+
+913
+00:42:15,416 --> 00:42:17,016
 and no payment processes
 should require it.
 
-00:42:17.016 --> 00:42:19.946 A:middle
+
+914
+00:42:17,016 --> 00:42:19,946
 For that reason we recommend
 you don't request it but,
 
-00:42:19.946 --> 00:42:21.966 A:middle
+
+915
+00:42:19,946 --> 00:42:21,966
 we do understand that some
 of you might have platforms,
 
-00:42:22.006 --> 00:42:24.176 A:middle
+
+916
+00:42:22,006 --> 00:42:24,176
 fraud systems, existing
 infrastructure
 
-00:42:24.176 --> 00:42:27.006 A:middle
+
+917
+00:42:24,176 --> 00:42:27,006
 where you need it, so it's
 there in case you want it,
 
-00:42:27.076 --> 00:42:29.846 A:middle
+
+918
+00:42:27,076 --> 00:42:29,846
 but think about ways you
 might want to avoid it.
 
-00:42:31.076 --> 00:42:35.706 A:middle
+
+919
+00:42:31,076 --> 00:42:35,706
 So in conjunction with
 contact information comes
 
-00:42:36.106 --> 00:42:36.876 A:middle
+
+920
+00:42:36,106 --> 00:42:36,876
 shipping costs.
 
-00:42:37.756 --> 00:42:40.416 A:middle
+
+921
+00:42:37,756 --> 00:42:40,416
 And because the user can update
 their shipping information
 
-00:42:40.416 --> 00:42:42.756 A:middle
+
+922
+00:42:40,416 --> 00:42:42,756
 inside of the Apple Pay
 sheet, perhaps you'll want
 
-00:42:42.756 --> 00:42:44.026 A:middle
+
+923
+00:42:42,756 --> 00:42:44,026
 to update the amount
 they get charged.
 
-00:42:45.146 --> 00:42:48.296 A:middle
+
+924
+00:42:45,146 --> 00:42:48,296
 So you will receive a callback
 in an optional delegate method.
 
-00:42:48.776 --> 00:42:50.846 A:middle
+
+925
+00:42:48,776 --> 00:42:50,846
 It's paymentAuthorization
 ViewController
 
-00:42:51.276 --> 00:42:52.866 A:middle
+
+926
+00:42:51,276 --> 00:42:52,866
 didSelectShippingContact.
 
-00:42:53.406 --> 00:42:58.846 A:middle
+
+927
+00:42:53,406 --> 00:42:58,846
 And it returns to you a contact
 and it has completion handler.
 
-00:42:59.746 --> 00:43:01.546 A:middle
+
+928
+00:42:59,746 --> 00:43:01,546
 Now, the completion
 handler has a status.
 
 
-
-00:42:59.746 --> 00:43:01.546 A:middle
-Now, the completion
-handler has a status.
-
-00:43:01.876 --> 00:43:04.306 A:middle
+929
+00:43:01,876 --> 00:43:04,306
 So you can have success
 or invalid information
 
-00:43:04.916 --> 00:43:05.816 A:middle
+
+930
+00:43:04,916 --> 00:43:05,816
 and it's got two arrays.
 
-00:43:06.586 --> 00:43:08.946 A:middle
+
+931
+00:43:06,586 --> 00:43:08,946
 The last array is an array
 of PaymentSummaryItems,
 
-00:43:09.726 --> 00:43:11.956 A:middle
+
+932
+00:43:09,726 --> 00:43:11,956
 seems sensible enough, you can
 update the summary items you'd
 
-00:43:11.956 --> 00:43:13.836 A:middle
+
+933
+00:43:11,956 --> 00:43:13,836
 like to charge, but
 also there's an array
 
-00:43:13.836 --> 00:43:15.196 A:middle
+
+934
+00:43:13,836 --> 00:43:15,196
 of things called
 ShippingMethods.
 
-00:43:15.546 --> 00:43:19.576 A:middle
+
+935
+00:43:15,546 --> 00:43:19,576
 So the Apple Pay sheet can also
 display shipping methods along
 
-00:43:19.636 --> 00:43:23.826 A:middle
+
+936
+00:43:19,636 --> 00:43:23,826
 with costs, and that's
 a separate array.
 
-00:43:23.826 --> 00:43:26.976 A:middle
+
+937
+00:43:23,826 --> 00:43:26,976
 PKShippingMethod is a subclass
 of PKPaymentSummaryItem.
 
-00:43:27.416 --> 00:43:31.586 A:middle
+
+938
+00:43:27,416 --> 00:43:31,586
 So like the of SummaryItem it
 has a label and it has an amount
 
-00:43:32.096 --> 00:43:34.746 A:middle
+
+939
+00:43:32,096 --> 00:43:34,746
 but it has another string
 property called detail.
 
-00:43:35.196 --> 00:43:36.576 A:middle
+
+940
+00:43:35,196 --> 00:43:36,576
 And you can use that to say,
 
-00:43:37.326 --> 00:43:39.276 A:middle
+
+941
+00:43:37,326 --> 00:43:39,276
 tell the user how long it
 will take to be delivered.
 
-00:43:39.546 --> 00:43:42.616 A:middle
+
+942
+00:43:39,546 --> 00:43:42,616
 So here I'm creating a single
 shipping method, assigning it
 
-00:43:42.616 --> 00:43:47.026 A:middle
+
+943
+00:43:42,616 --> 00:43:47,026
 to my payment request, so that
 will be displayed in the sheet.
 
-00:43:47.166 --> 00:43:48.176 A:middle
+
+944
+00:43:47,166 --> 00:43:48,176
 Contact information.
 
-00:43:48.436 --> 00:43:52.576 A:middle
+
+945
+00:43:48,436 --> 00:43:52,576
 So for the users privacy,
 in this delegate callback,
 
-00:43:53.346 --> 00:43:56.076 A:middle
+
+946
+00:43:53,346 --> 00:43:56,076
 you won't get the full
 un-redacted contact information
 
-00:43:56.136 --> 00:43:57.556 A:middle
+
+947
+00:43:56,136 --> 00:43:57,556
 because the user has
 not Touch IDed yet.
 
-00:43:57.556 --> 00:44:01.016 A:middle
+
+948
+00:43:57,556 --> 00:44:01,016
 And we take the user's Touch
 ID as consent to release
 
 
-
-00:43:57.556 --> 00:44:01.016 A:middle
-And we take the user's Touch
-ID as consent to release
-
-00:44:01.016 --> 00:44:02.046 A:middle
+949
+00:44:01,016 --> 00:44:02,046
 that information into your app.
 
-00:44:02.856 --> 00:44:08.656 A:middle
+
+950
+00:44:02,856 --> 00:44:08,656
 So you will receive city, state,
 and ZIP code or postal code
 
-00:44:08.656 --> 00:44:14.726 A:middle
+
+951
+00:44:08,656 --> 00:44:14,726
 in the UK, or sanitized postal
 code in the UK, I should say.
 
-00:44:14.726 --> 00:44:16.876 A:middle
+
+952
+00:44:14,726 --> 00:44:16,876
 We think that's enough to
 estimate shipping costs,
 
-00:44:16.946 --> 00:44:18.816 A:middle
+
+953
+00:44:16,946 --> 00:44:18,816
 for example, out-of-state,
 international,
 
-00:44:19.526 --> 00:44:22.386 A:middle
+
+954
+00:44:19,526 --> 00:44:22,386
 but then in the final
 payment, once you get it back
 
-00:44:22.386 --> 00:44:25.896 A:middle
+
+955
+00:44:22,386 --> 00:44:25,896
 in did authorize, you can get
 the full contact information.
 
-00:44:26.666 --> 00:44:29.616 A:middle
+
+956
+00:44:26,666 --> 00:44:29,616
 Now, these APIs might look
 a little unfamiliar to you.
 
-00:44:29.616 --> 00:44:32.116 A:middle
+
+957
+00:44:29,616 --> 00:44:32,116
 That's because they are using
 the new Contacts framework
 
-00:44:32.116 --> 00:44:33.316 A:middle
+
+958
+00:44:32,116 --> 00:44:33,316
 in iOS 9.
 
-00:44:33.316 --> 00:44:36.896 A:middle
+
+959
+00:44:33,316 --> 00:44:36,896
 So address book has been
 deprecated in this release.
 
-00:44:37.016 --> 00:44:38.086 A:middle
+
+960
+00:44:37,016 --> 00:44:38,086
 [Applause]
 
-00:44:38.086 --> 00:44:39.506 A:middle
+
+961
+00:44:38,086 --> 00:44:39,506
 Yes, don't applaud me.
 
-00:44:39.506 --> 00:44:40.676 A:middle
+
+962
+00:44:39,506 --> 00:44:40,676
 Applaud the Contacts team.
 
-00:44:41.346 --> 00:44:42.086 A:middle
+
+963
+00:44:41,346 --> 00:44:42,086
 I know I did.
 
-00:44:42.406 --> 00:44:45.576 A:middle
+
+964
+00:44:42,406 --> 00:44:45,576
 They've gone away.
 
-00:44:45.716 --> 00:44:47.906 A:middle
+
+965
+00:44:45,716 --> 00:44:47,906
 We replaced it in
 Apple Pay as well.
 
-00:44:48.096 --> 00:44:50.246 A:middle
+
+966
+00:44:48,096 --> 00:44:50,246
 Now, we are going change
 the APIs a little bit
 
-00:44:50.346 --> 00:44:51.616 A:middle
+
+967
+00:44:50,346 --> 00:44:51,616
 in an upcoming seed.
 
-00:44:51.616 --> 00:44:53.296 A:middle
+
+968
+00:44:51,616 --> 00:44:53,296
 So they won't be
 exactly the same.
 
-00:44:53.296 --> 00:44:54.596 A:middle
+
+969
+00:44:53,296 --> 00:44:54,596
 If you are watching
 the video online,
 
-00:44:54.736 --> 00:44:56.236 A:middle
+
+970
+00:44:54,736 --> 00:44:56,236
 check the developer
 documentation
 
-00:44:56.236 --> 00:44:58.236 A:middle
+
+971
+00:44:56,236 --> 00:44:58,236
 for the latest information
 informationBut here is a really
 
-00:44:58.236 --> 00:45:01.706 A:middle
+
+972
+00:44:58,236 --> 00:45:01,706
 simple example of extracting
 a name and an email address.
 
 
-
-00:44:58.236 --> 00:45:01.706 A:middle
-simple example of extracting
-a name and an email address.
-
-00:45:02.556 --> 00:45:04.776 A:middle
+973
+00:45:02,556 --> 00:45:04,776
 So let's finish our app up.
 
-00:45:05.536 --> 00:45:08.156 A:middle
+
+974
+00:45:05,536 --> 00:45:08,156
 Let's put all of that
 information into the code.
 
-00:45:08.156 --> 00:45:11.446 A:middle
+
+975
+00:45:08,156 --> 00:45:11,446
 So the first thing
 I'm going to want
 
-00:45:11.446 --> 00:45:15.466 A:middle
+
+976
+00:45:11,446 --> 00:45:15,466
 to do is actually request
 the shipping information.
 
-00:45:20.576 --> 00:45:22.566 A:middle
+
+977
+00:45:20,576 --> 00:45:22,566
 Then I'm going to just
 want postal address.
 
-00:45:22.736 --> 00:45:25.416 A:middle
+
+978
+00:45:22,736 --> 00:45:25,416
 That's what I will ask for.
 
-00:45:25.586 --> 00:45:27.536 A:middle
+
+979
+00:45:25,586 --> 00:45:27,536
 Then we will need to put
 in our delegate method.
 
-00:45:28.446 --> 00:45:29.846 A:middle
+
+980
+00:45:28,446 --> 00:45:29,846
 So let's find the right one.
 
-00:45:29.846 --> 00:45:30.216 A:middle
+
+981
+00:45:29,846 --> 00:45:30,216
 There we are.
 
-00:45:30.326 --> 00:45:33.516 A:middle
+
+982
+00:45:30,326 --> 00:45:33,516
 didSelectShippingContact
 and let's put our code in.
 
-00:45:34.056 --> 00:45:35.236 A:middle
+
+983
+00:45:34,056 --> 00:45:35,236
 So what I will do in this app,
 
-00:45:35.236 --> 00:45:37.136 A:middle
+
+984
+00:45:35,236 --> 00:45:37,136
 I will have a very
 contrived example.
 
-00:45:37.136 --> 00:45:38.596 A:middle
+
+985
+00:45:37,136 --> 00:45:38,596
 I going to run you
 through it line by line.
 
-00:45:39.046 --> 00:45:41.136 A:middle
+
+986
+00:45:39,046 --> 00:45:41,136
 I'm going to charge a surcharge.
 
-00:45:41.246 --> 00:45:43.316 A:middle
+
+987
+00:45:41,246 --> 00:45:43,316
 If a user selects a
 shipping address that's not
 
-00:45:43.316 --> 00:45:45.766 A:middle
+
+988
+00:45:43,316 --> 00:45:45,766
 in the United States, so
 an international surcharge.
 
-00:45:45.836 --> 00:45:49.306 A:middle
+
+989
+00:45:45,836 --> 00:45:49,306
 Now this paymentAuthorization
 ViewController
 
-00:45:49.496 --> 00:45:52.206 A:middle
+
+990
+00:45:49,496 --> 00:45:52,206
 didSelectShippingContact
 method is always called
 
-00:45:52.266 --> 00:45:53.676 A:middle
+
+991
+00:45:52,266 --> 00:45:53,676
 if the user has an
 address in the sheet.
 
-00:45:53.676 --> 00:45:56.346 A:middle
+
+992
+00:45:53,676 --> 00:45:56,346
 So if the users had
 a default address,
 
-00:45:56.346 --> 00:45:58.636 A:middle
+
+993
+00:45:56,346 --> 00:45:58,636
 perhaps from the me card, you
 will get a call back as soon
 
-00:45:58.636 --> 00:45:59.706 A:middle
+
+994
+00:45:58,636 --> 00:45:59,706
 as the sheet is presented.
 
-00:45:59.826 --> 00:46:02.016 A:middle
+
+995
+00:45:59,826 --> 00:46:02,016
 I'm setting up a shipping
 method, I'm only going
 
 
-
-00:45:59.826 --> 00:46:02.016 A:middle
-I'm setting up a shipping
-method, I'm only going
-
-00:46:02.016 --> 00:46:03.726 A:middle
+996
+00:46:02,016 --> 00:46:03,726
 to have one, standard shipping.
 
-00:46:04.276 --> 00:46:07.736 A:middle
+
+997
+00:46:04,276 --> 00:46:07,736
 And then I will check
 the address.
 
-00:46:07.856 --> 00:46:10.796 A:middle
+
+998
+00:46:07,856 --> 00:46:10,796
 So here I'm getting the address
 out using the new contact APIs.
 
-00:46:10.796 --> 00:46:13.216 A:middle
+
+999
+00:46:10,796 --> 00:46:13,216
 There's another session
 on the contact APIs.
 
-00:46:13.216 --> 00:46:14.706 A:middle
+
+1000
+00:46:13,216 --> 00:46:14,706
 So don't worry too
 much about this.
 
-00:46:14.706 --> 00:46:16.506 A:middle
+
+1001
+00:46:14,706 --> 00:46:16,506
 There's a chance to find
 out about them later.
 
-00:46:17.536 --> 00:46:21.146 A:middle
+
+1002
+00:46:17,536 --> 00:46:21,146
 Then I'm checking in a contrived
 example whether the country is
 
-00:46:21.146 --> 00:46:22.106 A:middle
+
+1003
+00:46:21,146 --> 00:46:22,106
 the United States.
 
-00:46:22.536 --> 00:46:26.146 A:middle
+
+1004
+00:46:22,536 --> 00:46:26,146
 Now the reason I say this
 is contrived is the address
 
-00:46:26.146 --> 00:46:28.756 A:middle
+
+1005
+00:46:26,146 --> 00:46:28,756
 information on iOS can come
 from many different sources.
 
-00:46:29.136 --> 00:46:30.676 A:middle
+
+1006
+00:46:29,136 --> 00:46:30,676
 It can come from the
 user inputting it
 
-00:46:30.676 --> 00:46:32.926 A:middle
+
+1007
+00:46:30,676 --> 00:46:32,926
 into the Contacts app,
 but it can also be synced
 
-00:46:32.926 --> 00:46:35.136 A:middle
+
+1008
+00:46:32,926 --> 00:46:35,136
 from from Facebook, or one of
 the many other social networks
 
-00:46:35.136 --> 00:46:35.916 A:middle
+
+1009
+00:46:35,136 --> 00:46:35,916
 that integrate with iOS.
 
-00:46:35.916 --> 00:46:39.136 A:middle
+
+1010
+00:46:35,916 --> 00:46:39,136
 So it's important that you
 validate addresses correctly
 
-00:46:39.136 --> 00:46:42.016 A:middle
+
+1011
+00:46:39,136 --> 00:46:42,016
 and don't assume that they
 will always have the exact
 
-00:46:42.016 --> 00:46:42.986 A:middle
+
+1012
+00:46:42,016 --> 00:46:42,986
 information you are after.
 
-00:46:42.986 --> 00:46:45.336 A:middle
+
+1013
+00:46:42,986 --> 00:46:45,336
 So, again for demo purposes,
 
-00:46:45.686 --> 00:46:47.086 A:middle
+
+1014
+00:46:45,686 --> 00:46:47,086
 I'm just simplifying
 things a little.
 
-00:46:48.456 --> 00:46:51.216 A:middle
+
+1015
+00:46:48,456 --> 00:46:51,216
 So earlier, we saw I
 had this helper function
 
-00:46:51.216 --> 00:46:52.596 A:middle
+
+1016
+00:46:51,216 --> 00:46:52,596
 called makeSummaryItems.
 
-00:46:52.906 --> 00:46:55.686 A:middle
+
+1017
+00:46:52,906 --> 00:46:55,686
 So what this actually does and
 you can check the sample code
 
-00:46:55.686 --> 00:47:00.366 A:middle
+
+1018
+00:46:55,686 --> 00:47:00,366
 out is adds an additional
 surcharge into my payment items,
 
 
-
-00:46:55.686 --> 00:47:00.366 A:middle
-out is adds an additional
-surcharge into my payment items,
-
-00:47:00.736 --> 00:47:01.696 A:middle
+1019
+00:47:00,736 --> 00:47:01,696
 if it's international.
 
-00:47:01.906 --> 00:47:04.016 A:middle
+
+1020
+00:47:01,906 --> 00:47:04,016
 So that's why there's this
 Boolean property here called
 
-00:47:04.016 --> 00:47:05.676 A:middle
+
+1021
+00:47:04,016 --> 00:47:05,676
 requiresInternationalSurcharge.
 
-00:47:06.976 --> 00:47:10.246 A:middle
+
+1022
+00:47:06,976 --> 00:47:10,246
 Then I return my completion
 handler, which is of Success.
 
-00:47:10.716 --> 00:47:13.326 A:middle
+
+1023
+00:47:10,716 --> 00:47:13,326
 It's got an array of
 shipping methods, just one.
 
-00:47:14.316 --> 00:47:16.286 A:middle
+
+1024
+00:47:14,316 --> 00:47:16,286
 And my summaryItems array.
 
-00:47:17.076 --> 00:47:19.836 A:middle
+
+1025
+00:47:17,076 --> 00:47:19,836
 Now, again, you can also
 return a failure state here.
 
-00:47:20.176 --> 00:47:23.476 A:middle
+
+1026
+00:47:20,176 --> 00:47:23,476
 Perhaps the user put a
 city or state or country
 
-00:47:23.476 --> 00:47:26.446 A:middle
+
+1027
+00:47:23,476 --> 00:47:26,446
 that you don't deliver to in
 which case you could return one
 
-00:47:26.446 --> 00:47:28.336 A:middle
+
+1028
+00:47:26,446 --> 00:47:28,336
 of the invalid postal
 address states.
 
-00:47:28.936 --> 00:47:29.986 A:middle
+
+1029
+00:47:28,936 --> 00:47:29,986
 All right.
 
-00:47:30.156 --> 00:47:32.786 A:middle
+
+1030
+00:47:30,156 --> 00:47:32,786
 Let's try this out.
 
-00:47:34.316 --> 00:47:37.356 A:middle
+
+1031
+00:47:34,316 --> 00:47:37,356
 So I have got some addresses
 already in my Apple Pay sheet.
 
-00:47:37.906 --> 00:47:39.736 A:middle
+
+1032
+00:47:37,906 --> 00:47:39,736
 So here I have got
 an address in Canada.
 
-00:47:40.416 --> 00:47:41.176 A:middle
+
+1033
+00:47:40,416 --> 00:47:41,176
 It's not in Canada.
 
-00:47:41.466 --> 00:47:42.776 A:middle
+
+1034
+00:47:41,466 --> 00:47:42,776
 I just put it together.
 
-00:47:43.226 --> 00:47:45.056 A:middle
+
+1035
+00:47:43,226 --> 00:47:45,056
 You can see it has
 international handling here,
 
-00:47:45.166 --> 00:47:48.276 A:middle
+
+1036
+00:47:45,166 --> 00:47:48,276
 but if I change it to a
 US address, you will see
 
-00:47:49.596 --> 00:47:51.756 A:middle
+
+1037
+00:47:49,596 --> 00:47:51,756
 that the international
 handling has gone away
 
-00:47:51.756 --> 00:47:52.736 A:middle
+
+1038
+00:47:51,756 --> 00:47:52,736
 as has the subtitle.
 
-00:47:52.736 --> 00:47:54.026 A:middle
+
+1039
+00:47:52,736 --> 00:47:54,026
 It's a single title.
 
-00:47:54.486 --> 00:47:56.826 A:middle
+
+1040
+00:47:54,486 --> 00:47:56,826
 It's really easy in the
 Apple Pay sheet to update all
 
-00:47:56.946 --> 00:48:00.676 A:middle
+
+1041
+00:47:56,946 --> 00:48:00,676
 of your shipping costs
 which are again listed
 
 
-
-00:47:56.946 --> 00:48:00.676 A:middle
-of your shipping costs
-which are again listed
-
-00:48:00.676 --> 00:48:01.696 A:middle
+1042
+00:48:00,676 --> 00:48:01,696
 in a separate screen.
 
-00:48:02.626 --> 00:48:03.586 A:middle
+
+1043
+00:48:02,626 --> 00:48:03,586
 So here I have just got one.
 
-00:48:03.586 --> 00:48:04.816 A:middle
+
+1044
+00:48:03,586 --> 00:48:04,816
 There's only one to choose from.
 
-00:48:05.376 --> 00:48:06.536 A:middle
+
+1045
+00:48:05,376 --> 00:48:06,536
 It's a really great way
 
-00:48:06.536 --> 00:48:08.626 A:middle
+
+1046
+00:48:06,536 --> 00:48:08,626
 to get your shipping information
 directly into the sheet
 
-00:48:08.776 --> 00:48:11.646 A:middle
+
+1047
+00:48:08,776 --> 00:48:11,646
 and get another step of the
 purchase flow out of the way.
 
-00:48:11.646 --> 00:48:15.986 A:middle
+
+1048
+00:48:11,646 --> 00:48:15,986
 So all of that sample code
 is going to be available
 
-00:48:15.986 --> 00:48:16.796 A:middle
+
+1049
+00:48:15,986 --> 00:48:16,796
 on the developer site.
 
-00:48:18.326 --> 00:48:20.026 A:middle
+
+1050
+00:48:18,326 --> 00:48:20,026
 There are a few other things
 I would like to talk about.
 
-00:48:20.876 --> 00:48:24.106 A:middle
+
+1051
+00:48:20,876 --> 00:48:24,106
 We have got some
 new API in iOS 9.
 
-00:48:25.436 --> 00:48:27.656 A:middle
+
+1052
+00:48:25,436 --> 00:48:27,656
 One of them is something
 called PKPaymentMethod.
 
-00:48:28.356 --> 00:48:30.846 A:middle
+
+1053
+00:48:28,356 --> 00:48:30,846
 So this lets you find out more
 about the payment instrument
 
-00:48:31.086 --> 00:48:34.756 A:middle
+
+1054
+00:48:31,086 --> 00:48:34,756
 and by instrument, I mean the
 card that the user selected.
 
-00:48:35.696 --> 00:48:36.866 A:middle
+
+1055
+00:48:35,696 --> 00:48:36,866
 And it lets you do
 things like --
 
-00:48:36.866 --> 00:48:39.836 A:middle
+
+1056
+00:48:36,866 --> 00:48:39,836
 like apply debit or credit
 surcharges or discounts.
 
-00:48:39.926 --> 00:48:43.166 A:middle
+
+1057
+00:48:39,926 --> 00:48:43,166
 So again, not too common
 in the US, but something
 
-00:48:43.166 --> 00:48:44.676 A:middle
+
+1058
+00:48:43,166 --> 00:48:44,676
 that can happen elsewhere
 in the world.
 
-00:48:45.416 --> 00:48:47.706 A:middle
+
+1059
+00:48:45,416 --> 00:48:47,706
 And you'll receive a delegate
 callback whenever the user
 
-00:48:47.746 --> 00:48:48.986 A:middle
+
+1060
+00:48:47,746 --> 00:48:48,986
 changes their payment method.
 
-00:48:50.066 --> 00:48:51.196 A:middle
+
+1061
+00:48:50,066 --> 00:48:51,196
 So here I'm inspecting
 
-00:48:51.556 --> 00:48:53.556 A:middle
+
+1062
+00:48:51,556 --> 00:48:53,556
 for a confirmation screen
 whether these are paid
 
-00:48:53.556 --> 00:48:54.886 A:middle
+
+1063
+00:48:53,556 --> 00:48:54,886
 with debit or not.
 
-00:48:55.396 --> 00:48:56.996 A:middle
+
+1064
+00:48:55,396 --> 00:48:56,996
 It's a really nice
 API that you can use.
 
-00:48:56.996 --> 00:48:58.366 A:middle
+
+1065
+00:48:56,996 --> 00:48:58,366
 It might be useful for you.
 
-00:48:59.576 --> 00:49:03.006 A:middle
+
+1066
+00:48:59,576 --> 00:49:03,006
 Now there is a caveat, a
 minority of older cards added
 
 
-
-00:48:59.576 --> 00:49:03.006 A:middle
-Now there is a caveat, a
-minority of older cards added
-
-00:49:03.006 --> 00:49:06.246 A:middle
+1067
+00:49:03,006 --> 00:49:06,246
 to Apple Pay, we don't know
 the type of card they are.
 
-00:49:06.436 --> 00:49:08.996 A:middle
+
+1068
+00:49:06,436 --> 00:49:08,996
 So you will receive
 PKPaymentMethodTypeUnknown.
 
-00:49:09.716 --> 00:49:12.416 A:middle
+
+1069
+00:49:09,716 --> 00:49:12,416
 Now, because this API is
 primarily targeted at Europe
 
-00:49:12.416 --> 00:49:14.246 A:middle
+
+1070
+00:49:12,416 --> 00:49:14,246
 and the UK we are
 launching next month,
 
-00:49:14.776 --> 00:49:16.946 A:middle
+
+1071
+00:49:14,776 --> 00:49:16,946
 this won't be a problem
 there, but if you're in the US
 
-00:49:16.946 --> 00:49:19.436 A:middle
+
+1072
+00:49:16,946 --> 00:49:19,436
 and you want to use this API,
 do just bear that in mind.
 
-00:49:19.436 --> 00:49:22.786 A:middle
+
+1073
+00:49:19,436 --> 00:49:22,786
 You will need to
 code around this.
 
-00:49:22.996 --> 00:49:26.706 A:middle
+
+1074
+00:49:22,996 --> 00:49:26,706
 We have also got a new property
 on PKPaymentSummaryItem.
 
-00:49:26.926 --> 00:49:29.686 A:middle
+
+1075
+00:49:26,926 --> 00:49:29,686
 Something that people,
 developers have really requested
 
-00:49:29.766 --> 00:49:33.876 A:middle
+
+1076
+00:49:29,766 --> 00:49:33,876
 and that's the ability to change
 the type of the summary item.
 
-00:49:33.956 --> 00:49:34.896 A:middle
+
+1077
+00:49:33,956 --> 00:49:34,896
 We have two types.
 
-00:49:34.896 --> 00:49:37.596 A:middle
+
+1078
+00:49:34,896 --> 00:49:37,596
 One is called final,
 self-explanatory,
 
-00:49:37.596 --> 00:49:38.586 A:middle
+
+1079
+00:49:37,596 --> 00:49:38,586
 and one is called pending.
 
-00:49:39.506 --> 00:49:42.666 A:middle
+
+1080
+00:49:39,506 --> 00:49:42,666
 And you can use that to indicate
 that your charge isn't final.
 
-00:49:42.666 --> 00:49:43.836 A:middle
+
+1081
+00:49:42,666 --> 00:49:43,836
 So if you're a ride sharing app
 
-00:49:44.386 --> 00:49:46.296 A:middle
+
+1082
+00:49:44,386 --> 00:49:46,296
 and you don't know how much
 it's going to cost the user.
 
-00:49:46.766 --> 00:49:48.826 A:middle
+
+1083
+00:49:46,766 --> 00:49:48,826
 You can select the
 type to pending.
 
-00:49:49.926 --> 00:49:52.276 A:middle
+
+1084
+00:49:49,926 --> 00:49:52,276
 Now additional documentation
 for this will be coming
 
-00:49:52.276 --> 00:49:54.836 A:middle
+
+1085
+00:49:52,276 --> 00:49:54,836
 in a future seed and we might
 make a couple of changes
 
-00:49:55.076 --> 00:49:56.506 A:middle
+
+1086
+00:49:55,076 --> 00:49:56,506
 so again, if you
 are watching online,
 
-00:49:56.996 --> 00:49:58.406 A:middle
+
+1087
+00:49:56,996 --> 00:49:58,406
 check the developer
 documentation
 
-00:49:58.406 --> 00:49:59.576 A:middle
+
+1088
+00:49:58,406 --> 00:49:59,576
 for the latest information.
 
 
-
-00:50:00.156 --> 00:50:05.276 A:middle
+1089
+00:50:00,156 --> 00:50:05,276
 I already talked about
 Simulator support.
 
-00:50:06.136 --> 00:50:08.426 A:middle
+
+1090
+00:50:06,136 --> 00:50:08,426
 It's really important that even
 though we have added support
 
-00:50:08.426 --> 00:50:10.926 A:middle
+
+1091
+00:50:08,426 --> 00:50:10,926
 for the Simulator, you still
 ten your apps on real hardware.
 
-00:50:11.496 --> 00:50:14.056 A:middle
+
+1092
+00:50:11,496 --> 00:50:14,056
 I think this is a great
 feature if you have developers
 
-00:50:14.056 --> 00:50:16.766 A:middle
+
+1093
+00:50:14,056 --> 00:50:16,766
 in another country and you
 are in the UK now and you want
 
-00:50:16.766 --> 00:50:18.226 A:middle
+
+1094
+00:50:16,766 --> 00:50:18,226
 to get up and running
 before we launch.
 
-00:50:18.626 --> 00:50:20.376 A:middle
+
+1095
+00:50:18,626 --> 00:50:20,376
 It's very important
 that before you go
 
-00:50:20.376 --> 00:50:23.126 A:middle
+
+1096
+00:50:20,376 --> 00:50:23,126
 in the store you test your apps
 on real hardware and make sure
 
-00:50:23.126 --> 00:50:24.836 A:middle
+
+1097
+00:50:23,126 --> 00:50:24,836
 that payments can be
 processed successfully.
 
-00:50:24.836 --> 00:50:28.906 A:middle
+
+1098
+00:50:24,836 --> 00:50:28,906
 I also want to talk
 about Apple Watch.
 
-00:50:29.056 --> 00:50:31.516 A:middle
+
+1099
+00:50:29,056 --> 00:50:31,516
 So when I showed you
 the hardware slides,
 
-00:50:31.516 --> 00:50:34.506 A:middle
+
+1100
+00:50:31,516 --> 00:50:34,506
 you are thinking the Apple
 Watch has a Secure Element.
 
-00:50:35.076 --> 00:50:37.916 A:middle
+
+1101
+00:50:35,076 --> 00:50:37,916
 The Apple Watch does not
 support Apple Pay inside
 
-00:50:37.916 --> 00:50:39.176 A:middle
+
+1102
+00:50:37,916 --> 00:50:39,176
 of WatchKit apps.
 
-00:50:39.626 --> 00:50:41.996 A:middle
+
+1103
+00:50:39,626 --> 00:50:41,996
 However it is possible to
 trigger payments directly
 
-00:50:42.056 --> 00:50:43.796 A:middle
+
+1104
+00:50:42,056 --> 00:50:43,796
 from the apple watch
 using Handoff.
 
-00:50:43.946 --> 00:50:47.016 A:middle
+
+1105
+00:50:43,946 --> 00:50:47,016
 You can handoff directly
 to your app on the phone
 
-00:50:47.016 --> 00:50:48.786 A:middle
+
+1106
+00:50:47,016 --> 00:50:48,786
 and display an Apple
 Pay sheet as soon
 
-00:50:48.786 --> 00:50:51.156 A:middle
+
+1107
+00:50:48,786 --> 00:50:51,156
 as the user launches the
 app from the lock screen.
 
-00:50:51.586 --> 00:50:54.336 A:middle
+
+1108
+00:50:51,586 --> 00:50:54,336
 I have some sample code that
 shows you how to do that.
 
-00:50:54.336 --> 00:50:57.676 A:middle
+
+1109
+00:50:54,336 --> 00:50:57,676
 In the app I just demoed I
 have a WatchKit extension
 
-00:50:57.676 --> 00:51:00.426 A:middle
+
+1110
+00:50:57,676 --> 00:51:00,426
 and WatchKit app that triggers
 a payment on the phone.
 
 
-
-00:50:57.676 --> 00:51:00.426 A:middle
-and WatchKit app that triggers
-a payment on the phone.
-
-00:51:01.036 --> 00:51:02.576 A:middle
+1111
+00:51:01,036 --> 00:51:02,576
 If you are interested
 in that take a look.
 
-00:51:03.016 --> 00:51:05.216 A:middle
+
+1112
+00:51:03,016 --> 00:51:05,216
 We have also actually
 opened up the PassKit APIs
 
-00:51:05.216 --> 00:51:06.876 A:middle
+
+1113
+00:51:05,216 --> 00:51:06,876
 for the watch as well.
 
-00:51:06.876 --> 00:51:08.386 A:middle
+
+1114
+00:51:06,876 --> 00:51:08,386
 If you would like to
 know more than that,
 
-00:51:08.976 --> 00:51:11.886 A:middle
+
+1115
+00:51:08,976 --> 00:51:11,886
 the session that just happened,
 Wallet, the home for Apple Pay,
 
-00:51:12.396 --> 00:51:17.466 A:middle
+
+1116
+00:51:12,396 --> 00:51:17,466
 that's available online and
 you can take a look there.
 
-00:51:17.466 --> 00:51:21.846 A:middle
+
+1117
+00:51:17,466 --> 00:51:21,846
 So in summary, Apple Pay,
 it's really easy to use.
 
-00:51:22.356 --> 00:51:24.556 A:middle
+
+1118
+00:51:22,356 --> 00:51:24,556
 It's private and it's secure.
 
-00:51:24.946 --> 00:51:27.026 A:middle
+
+1119
+00:51:24,946 --> 00:51:27,026
 And I really encourage
 you to go give it a go.
 
-00:51:27.026 --> 00:51:28.956 A:middle
+
+1120
+00:51:27,026 --> 00:51:28,956
 Go download and app
 from the store.
 
-00:51:28.956 --> 00:51:31.836 A:middle
+
+1121
+00:51:28,956 --> 00:51:31,836
 We have a great featured section
 on the store that has loads
 
-00:51:31.836 --> 00:51:32.836 A:middle
+
+1122
+00:51:31,836 --> 00:51:32,836
 of amazing app that
 use Apple Pay.
 
-00:51:32.836 --> 00:51:36.456 A:middle
+
+1123
+00:51:32,836 --> 00:51:36,456
 Try it out tonight and think
 about how you can integrate it
 
-00:51:36.456 --> 00:51:40.016 A:middle
+
+1124
+00:51:36,456 --> 00:51:40,016
 in your own apps think about
 not just how you can improve the
 
-00:51:40.016 --> 00:51:43.376 A:middle
+
+1125
+00:51:40,016 --> 00:51:43,376
 user experience but how you can
 actually see your apps really
 
-00:51:43.376 --> 00:51:45.976 A:middle
+
+1126
+00:51:43,376 --> 00:51:45,976
 shine and improve your own
 results with Apple Pay.
 
-00:51:46.476 --> 00:51:47.526 A:middle
+
+1127
+00:51:46,476 --> 00:51:47,526
 Delight your users with it.
 
-00:51:47.786 --> 00:51:49.746 A:middle
+
+1128
+00:51:47,786 --> 00:51:49,746
 I know they will appreciate it.
 
-00:51:50.536 --> 00:51:53.466 A:middle
+
+1129
+00:51:50,536 --> 00:51:53,466
 So we have more information
 for you.
 
-00:51:54.126 --> 00:51:55.376 A:middle
+
+1130
+00:51:54,126 --> 00:51:55,376
 We've got some documentation.
 
-00:51:55.376 --> 00:51:57.656 A:middle
+
+1131
+00:51:55,376 --> 00:51:57,656
 We have an Apple Pay for
 developers microsite.
 
-00:51:58.466 --> 00:52:01.006 A:middle
+
+1132
+00:51:58,466 --> 00:52:01,006
 If you are interested about the
 Secure Element and the hardware,
 
 
-
-00:51:58.466 --> 00:52:01.006 A:middle
-If you are interested about the
-Secure Element and the hardware,
-
-00:52:01.006 --> 00:52:03.486 A:middle
+1133
+00:52:01,006 --> 00:52:03,486
 which is kind of interesting, we
 have more information about that
 
-00:52:03.616 --> 00:52:05.376 A:middle
+
+1134
+00:52:03,616 --> 00:52:05,376
 in the iOS Security White Paper.
 
-00:52:05.376 --> 00:52:06.576 A:middle
+
+1135
+00:52:05,376 --> 00:52:06,576
 It goes into a lot of detail
 
-00:52:06.576 --> 00:52:09.386 A:middle
+
+1136
+00:52:06,576 --> 00:52:09,386
 about how we actually generate
 these payments, and the process
 
-00:52:09.386 --> 00:52:10.876 A:middle
+
+1137
+00:52:09,386 --> 00:52:10,876
 of getting these
 cards onto the device.
 
-00:52:11.226 --> 00:52:12.086 A:middle
+
+1138
+00:52:11,226 --> 00:52:12,086
 It's quite an interesting read.
 
-00:52:12.086 --> 00:52:14.186 A:middle
+
+1139
+00:52:12,086 --> 00:52:14,186
 You might want to check it out.
 
-00:52:14.746 --> 00:52:16.926 A:middle
+
+1140
+00:52:14,746 --> 00:52:16,926
 We also have technical
 support available through DTS
 
-00:52:16.926 --> 00:52:20.176 A:middle
+
+1141
+00:52:16,926 --> 00:52:20,176
 and the developer forums and
 if you have any questions,
 
-00:52:20.346 --> 00:52:23.836 A:middle
+
+1142
+00:52:20,346 --> 00:52:23,836
 you can talk to our Evangelist
 Paul or talk to Rachel,
 
-00:52:23.836 --> 00:52:25.066 A:middle
+
+1143
+00:52:23,836 --> 00:52:25,066
 who you saw up on stage earlier,
 
-00:52:25.066 --> 00:52:27.696 A:middle
+
+1144
+00:52:25,066 --> 00:52:27,696
 our User Experience
 Evangelists any design questions
 
-00:52:27.696 --> 00:52:28.856 A:middle
+
+1145
+00:52:27,696 --> 00:52:28,856
 for Apple Pay.
 
-00:52:29.796 --> 00:52:31.386 A:middle
+
+1146
+00:52:29,796 --> 00:52:31,386
 There's the related sessions,
 
-00:52:31.586 --> 00:52:33.336 A:middle
+
+1147
+00:52:31,586 --> 00:52:33,336
 the Wallet session,
 I already mentioned.
 
-00:52:33.336 --> 00:52:34.466 A:middle
+
+1148
+00:52:33,336 --> 00:52:34,466
 You can grab that online.
 
-00:52:35.106 --> 00:52:37.246 A:middle
+
+1149
+00:52:35,106 --> 00:52:37,246
 If you are interested about
 the new Contacts framework,
 
-00:52:37.576 --> 00:52:39.966 A:middle
+
+1150
+00:52:37,576 --> 00:52:39,966
 I strongly recommend go
 check out their session,
 
-00:52:39.966 --> 00:52:42.166 A:middle
+
+1151
+00:52:39,966 --> 00:52:42,166
 it's on Thursday at 3:30.
 
-00:52:42.636 --> 00:52:44.106 A:middle
+
+1152
+00:52:42,636 --> 00:52:44,106
 Learn all about what
 we have done
 
-00:52:44.106 --> 00:52:45.986 A:middle
+
+1153
+00:52:44,106 --> 00:52:45,986
 to make Contacts easy to use.
 
-00:52:46.816 --> 00:52:50.516 A:middle
+
+1154
+00:52:46,816 --> 00:52:50,516
 And lastly, but not
 least, we have labs.
 
-00:52:51.156 --> 00:52:53.076 A:middle
+
+1155
+00:52:51,156 --> 00:52:53,076
 There are labs today and
 tomorrow for Apple Pay
 
-00:52:53.246 --> 00:52:55.486 A:middle
+
+1156
+00:52:53,246 --> 00:52:55,486
 in the afternoon,
 please come to them.
 
-00:52:55.486 --> 00:52:57.826 A:middle
+
+1157
+00:52:55,486 --> 00:52:57,826
 We will have people from the
 server teams to answer questions
 
-00:52:57.826 --> 00:52:59.696 A:middle
+
+1158
+00:52:57,826 --> 00:52:59,696
 about cryptography,
 and we'll have people
 
-00:52:59.696 --> 00:53:01.466 A:middle
+
+1159
+00:52:59,696 --> 00:53:01,466
 from the client the iOS side,
 
 
-
-00:52:59.696 --> 00:53:01.466 A:middle
-from the client the iOS side,
-
-00:53:01.786 --> 00:53:03.766 A:middle
+1160
+00:53:01,786 --> 00:53:03,766
 we'll have some business team
 there if you have any questions
 
-00:53:03.766 --> 00:53:05.936 A:middle
+
+1161
+00:53:03,766 --> 00:53:05,936
 about how to accept Apple
 Pay and payment processes.
 
-00:53:06.196 --> 00:53:07.756 A:middle
+
+1162
+00:53:06,196 --> 00:53:07,756
 And Rachel is going
 to be at today's lab,
 
-00:53:08.056 --> 00:53:09.986 A:middle
+
+1163
+00:53:08,056 --> 00:53:09,986
 which is a great time
 to get design feedback.
 
-00:53:10.386 --> 00:53:12.846 A:middle
+
+1164
+00:53:10,386 --> 00:53:12,846
 So it's well worth attending,
 we'll be real happy to see you.
 
-00:53:13.936 --> 00:53:15.346 A:middle
+
+1165
+00:53:13,936 --> 00:53:15,346
 That's it for me and Rachel.
 
-00:53:15.836 --> 00:53:16.846 A:middle
+
+1166
+00:53:15,836 --> 00:53:16,846
 Thank you so much.
 
-00:53:16.976 --> 00:53:18.296 A:middle
+
+1167
+00:53:16,976 --> 00:53:18,296
 I hope you enjoy the
 rest of the conference.
 
-00:53:18.626 --> 00:53:19.376 A:middle
+
+1168
+00:53:18,626 --> 00:53:19,376
 Have a great lunch.
 
-00:53:19.586 --> 00:53:19.976 A:middle
+
+1169
+00:53:19,586 --> 00:53:19,976
 Goodbye.
 
-00:53:20.516 --> 00:53:23.500 A:middle
+
+1170
+00:53:20,516 --> 00:53:23,500
 [Applause]
 

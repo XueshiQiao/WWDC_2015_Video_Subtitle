@@ -1,5215 +1,7458 @@
-
-00:00:25.516 --> 00:00:30.236 A:middle
+1
+00:00:25,516 --> 00:00:30,236
 [Applause]
 
-00:00:30.736 --> 00:00:31.096 A:middle
-&gt;&gt; JOHN EARL: Hello.
 
-00:00:31.786 --> 00:00:33.676 A:middle
+2
+00:00:30,736 --> 00:00:31,096
+>> JOHN EARL: Hello.
+
+
+3
+00:00:31,786 --> 00:00:33,676
 My name is John Earl,
 and I'm an engineer
 
-00:00:33.676 --> 00:00:34.616 A:middle
+
+4
+00:00:33,676 --> 00:00:34,616
 on the ResearchKit team.
 
-00:00:35.336 --> 00:00:37.976 A:middle
+
+5
+00:00:35,336 --> 00:00:37,976
 Today I will be talking about
 ResearchKit and about building
 
-00:00:37.976 --> 00:00:39.786 A:middle
+
+6
+00:00:37,976 --> 00:00:39,786
 and contributing
 to research apps.
 
-00:00:40.356 --> 00:00:42.346 A:middle
+
+7
+00:00:40,356 --> 00:00:42,346
 So our agenda today
 has four parts.
 
-00:00:43.466 --> 00:00:46.276 A:middle
+
+8
+00:00:43,466 --> 00:00:46,276
 First, we will cover
 what ResearchKit is.
 
-00:00:46.866 --> 00:00:49.266 A:middle
+
+9
+00:00:46,866 --> 00:00:49,266
 Then, I will cover a few issues
 
-00:00:49.516 --> 00:00:51.986 A:middle
+
+10
+00:00:49,516 --> 00:00:51,986
 that may affect the design the
 design of your app-based study.
 
-00:00:53.166 --> 00:00:56.736 A:middle
+
+11
+00:00:53,166 --> 00:00:56,736
 The meat of the talk though will
 be when I cover building apps
 
-00:00:56.736 --> 00:00:58.906 A:middle
+
+12
+00:00:56,736 --> 00:00:58,906
 with ResearchKit, how
 ResearchKit can help you
 
-00:00:59.006 --> 00:00:59.876 A:middle
+
+13
+00:00:59,006 --> 00:00:59,876
 to build research apps.
 
 
-
-00:01:00.336 --> 00:01:03.746 A:middle
+14
+00:01:00,336 --> 00:01:03,746
 And finally, since it's
 an open source project,
 
-00:01:03.746 --> 00:01:06.366 A:middle
+
+15
+00:01:03,746 --> 00:01:06,366
 I will talk about how you can
 contribute to ResearchKit.
 
-00:01:06.806 --> 00:01:11.206 A:middle
+
+16
+00:01:06,806 --> 00:01:11,206
 So let's get started.
 
-00:01:12.676 --> 00:01:13.446 A:middle
+
+17
+00:01:12,676 --> 00:01:13,446
 What is ResearchKit?
 
-00:01:14.436 --> 00:01:17.236 A:middle
+
+18
+00:01:14,436 --> 00:01:17,236
 Well, the short answer is that
 it's an open source project
 
-00:01:17.326 --> 00:01:18.376 A:middle
+
+19
+00:01:17,326 --> 00:01:18,376
 and it's available on GitHub.
 
-00:01:19.536 --> 00:01:20.896 A:middle
+
+20
+00:01:19,536 --> 00:01:20,896
 But for a slightly
 longer answer,
 
-00:01:21.296 --> 00:01:22.666 A:middle
+
+21
+00:01:21,296 --> 00:01:22,666
 we'll need to start
 with some motivation.
 
-00:01:23.576 --> 00:01:26.476 A:middle
+
+22
+00:01:23,576 --> 00:01:26,476
 Even if you never participated
 in a medical research study,
 
-00:01:27.306 --> 00:01:28.766 A:middle
+
+23
+00:01:27,306 --> 00:01:28,766
 you probably have seen
 something like this
 
-00:01:29.106 --> 00:01:30.816 A:middle
+
+24
+00:01:29,106 --> 00:01:30,816
 at a university or
 at a hospital.
 
-00:01:32.086 --> 00:01:33.586 A:middle
+
+25
+00:01:32,086 --> 00:01:33,586
 And if you have participated
 in one,
 
-00:01:33.876 --> 00:01:36.266 A:middle
+
+26
+00:01:33,876 --> 00:01:36,266
 you probably rang the
 number, met the investigator,
 
-00:01:36.626 --> 00:01:38.906 A:middle
+
+27
+00:01:36,626 --> 00:01:38,906
 and had the study and its risks
 and benefits explained to you.
 
-00:01:39.846 --> 00:01:41.556 A:middle
+
+28
+00:01:39,846 --> 00:01:41,556
 Then you might have
 come in a few more times
 
-00:01:41.636 --> 00:01:44.646 A:middle
+
+29
+00:01:41,636 --> 00:01:44,646
 to answer questions and
 perhaps have samples taken.
 
-00:01:45.536 --> 00:01:47.726 A:middle
+
+30
+00:01:45,536 --> 00:01:47,726
 Now, this is a pretty
 heavyweight model
 
-00:01:48.136 --> 00:01:49.206 A:middle
+
+31
+00:01:48,136 --> 00:01:49,206
 and researchers have told us
 
-00:01:49.206 --> 00:01:51.006 A:middle
+
+32
+00:01:49,206 --> 00:01:51,006
 that there are three
 problems with it.
 
-00:01:51.556 --> 00:01:55.116 A:middle
+
+33
+00:01:51,556 --> 00:01:55,116
 The first problem is
 limited participation.
 
-00:01:57.896 --> 00:02:01.196 A:middle
+
+34
+00:01:57,896 --> 00:02:01,196
 Posting flyers around university
 campuses limits participation
 
 
-
-00:01:57.896 --> 00:02:01.196 A:middle
-Posting flyers around university
-campuses limits participation
-
-00:02:01.576 --> 00:02:03.366 A:middle
+35
+00:02:01,576 --> 00:02:03,366
 to those that live
 near that institution,
 
-00:02:03.956 --> 00:02:06.436 A:middle
+
+36
+00:02:03,956 --> 00:02:06,436
 and to make a large study,
 you need collaboration
 
-00:02:06.436 --> 00:02:07.696 A:middle
+
+37
+00:02:06,436 --> 00:02:07,696
 across multiple research groups
 
-00:02:08.356 --> 00:02:10.436 A:middle
+
+38
+00:02:08,356 --> 00:02:10,436
 which means these studies
 happen infrequently
 
-00:02:10.436 --> 00:02:11.246 A:middle
+
+39
+00:02:10,436 --> 00:02:11,246
 if they happen at all.
 
-00:02:12.696 --> 00:02:15.996 A:middle
+
+40
+00:02:12,696 --> 00:02:15,996
 The second problem is
 subjective and infrequent data.
 
-00:02:17.006 --> 00:02:19.596 A:middle
+
+41
+00:02:17,006 --> 00:02:19,596
 Data is often collected
 using surveys at monthly
 
-00:02:20.966 --> 00:02:21.966 A:middle
+
+42
+00:02:20,966 --> 00:02:21,966
 or even longer intervals
 
-00:02:22.586 --> 00:02:25.096 A:middle
+
+43
+00:02:22,586 --> 00:02:25,096
 and this affects both
 the questions you can ask
 
-00:02:25.096 --> 00:02:26.096 A:middle
+
+44
+00:02:25,096 --> 00:02:26,096
 and limits data quality.
 
-00:02:26.676 --> 00:02:30.166 A:middle
+
+45
+00:02:26,676 --> 00:02:30,166
 The third problem is that
 communication is one way.
 
-00:02:30.966 --> 00:02:32.276 A:middle
+
+46
+00:02:30,966 --> 00:02:32,276
 You probably never
 heard of the results
 
-00:02:32.276 --> 00:02:33.276 A:middle
+
+47
+00:02:32,276 --> 00:02:33,276
 of the study you participated
 
-00:02:33.276 --> 00:02:35.356 A:middle
+
+48
+00:02:33,276 --> 00:02:35,356
 in unless you knew the
 investigators personally
 
-00:02:36.776 --> 00:02:38.416 A:middle
+
+49
+00:02:36,776 --> 00:02:38,416
 and that's where we
 think apps can help.
 
-00:02:39.916 --> 00:02:42.896 A:middle
+
+50
+00:02:39,916 --> 00:02:42,896
 The wide reach of the App Store
 distribution model can help
 
-00:02:42.896 --> 00:02:45.056 A:middle
+
+51
+00:02:42,896 --> 00:02:45,056
 researchers to reach a
 broader subject population.
 
-00:02:45.636 --> 00:02:48.766 A:middle
+
+52
+00:02:45,636 --> 00:02:48,766
 So the first five research
 apps using ResearchKit have
 
-00:02:48.766 --> 00:02:52.006 A:middle
+
+53
+00:02:48,766 --> 00:02:52,006
 over 70,000 participants
 enrolled which makes them some
 
-00:02:52.006 --> 00:02:53.806 A:middle
+
+54
+00:02:52,006 --> 00:02:53,806
 of the largest studies
 ever conducted
 
-00:02:53.806 --> 00:02:54.676 A:middle
+
+55
+00:02:53,806 --> 00:02:54,676
 in their respective fields.
 
-00:02:54.676 --> 00:02:59.876 A:middle
+
+56
+00:02:54,676 --> 00:02:59,876
 Secondly, apps can stream
 data continuously in contrast
 
-00:02:59.876 --> 00:03:02.126 A:middle
+
+57
+00:02:59,876 --> 00:03:02,126
 to subjective and infrequent
 manual data collection.
 
 
-
-00:02:59.876 --> 00:03:02.126 A:middle
-to subjective and infrequent
-manual data collection.
-
-00:03:03.326 --> 00:03:05.956 A:middle
+58
+00:03:03,326 --> 00:03:05,956
 And finally, apps can
 keep a local record
 
-00:03:05.956 --> 00:03:09.756 A:middle
+
+59
+00:03:05,956 --> 00:03:09,756
 for each participant
 to give them feedback
 
-00:03:09.756 --> 00:03:11.436 A:middle
+
+60
+00:03:09,756 --> 00:03:11,436
 on how they are doing in
 managing their symptoms.
 
-00:03:12.136 --> 00:03:14.116 A:middle
+
+61
+00:03:12,136 --> 00:03:14,116
 And this helps to
 keep them engaged
 
-00:03:14.246 --> 00:03:15.796 A:middle
+
+62
+00:03:14,246 --> 00:03:15,796
 without raising the
 burden on the investigator.
 
-00:03:16.316 --> 00:03:19.006 A:middle
+
+63
+00:03:16,316 --> 00:03:19,006
 Now, at Apple, we wanted
 to help make this a reality
 
-00:03:19.006 --> 00:03:21.516 A:middle
+
+64
+00:03:19,006 --> 00:03:21,516
 for more studies and that's
 why we built ResearchKit.
 
-00:03:22.966 --> 00:03:24.546 A:middle
+
+65
+00:03:22,966 --> 00:03:24,546
 ResearchKit is an
 open source framework,
 
-00:03:24.666 --> 00:03:25.966 A:middle
+
+66
+00:03:24,666 --> 00:03:25,966
 and it's available on GitHub.
 
-00:03:27.116 --> 00:03:29.596 A:middle
+
+67
+00:03:27,116 --> 00:03:29,596
 You can use it to more easily
 create research apps whether
 
-00:03:29.596 --> 00:03:32.656 A:middle
+
+68
+00:03:29,596 --> 00:03:32,656
 they are commercial apps
 or they're for part of --
 
-00:03:32.656 --> 00:03:34.806 A:middle
+
+69
+00:03:32,656 --> 00:03:34,806
 for an academic study.
 
-00:03:35.276 --> 00:03:38.076 A:middle
+
+70
+00:03:35,276 --> 00:03:38,076
 Now, iOS already has great APIs
 
-00:03:38.076 --> 00:03:39.526 A:middle
+
+71
+00:03:38,076 --> 00:03:39,526
 for collecting passive
 data information,
 
-00:03:39.826 --> 00:03:41.376 A:middle
+
+72
+00:03:39,826 --> 00:03:41,376
 like HealthKit and CoreMotion.
 
-00:03:41.846 --> 00:03:44.796 A:middle
+
+73
+00:03:41,846 --> 00:03:44,796
 But there are quite a few other
 things that you need in order
 
-00:03:44.796 --> 00:03:48.886 A:middle
+
+74
+00:03:44,796 --> 00:03:48,886
 to conduct a successful research
 study from an app and we hope
 
-00:03:48.886 --> 00:03:50.696 A:middle
+
+75
+00:03:48,886 --> 00:03:50,696
 that ResearchKit can help you
 with some of those things.
 
-00:03:51.776 --> 00:03:53.996 A:middle
+
+76
+00:03:51,776 --> 00:03:53,996
 Right now, ResearchKit
 has three modules.
 
-00:03:55.306 --> 00:03:56.686 A:middle
+
+77
+00:03:55,306 --> 00:03:56,686
 The first module is surveys.
 
-00:03:57.436 --> 00:04:00.056 A:middle
+
+78
+00:03:57,436 --> 00:04:00,056
 ResearchKit provides standard
 UI templates that you can use
 
 
-
-00:03:57.436 --> 00:04:00.056 A:middle
-ResearchKit provides standard
-UI templates that you can use
-
-00:04:00.056 --> 00:04:02.166 A:middle
+79
+00:04:00,056 --> 00:04:02,166
 for doing surveys on
 an iPhone or on an iPad
 
-00:04:02.686 --> 00:04:03.556 A:middle
+
+80
+00:04:02,686 --> 00:04:03,556
 and we've tested it with some
 
-00:04:03.556 --> 00:04:05.016 A:middle
+
+81
+00:04:03,556 --> 00:04:05,016
 of the most common
 survey instruments
 
-00:04:05.466 --> 00:04:07.996 A:middle
+
+82
+00:04:05,466 --> 00:04:07,996
 from health research,
 like SF12 or EQ5D.
 
-00:04:07.996 --> 00:04:11.756 A:middle
+
+83
+00:04:07,996 --> 00:04:11,756
 The second module
 is informed consent.
 
-00:04:12.946 --> 00:04:15.756 A:middle
+
+84
+00:04:12,946 --> 00:04:15,756
 It's a common requirement in
 human observational research.
 
-00:04:16.565 --> 00:04:19.516 A:middle
+
+85
+00:04:16,565 --> 00:04:19,516
 To obtain consent from
 participants while making sure
 
-00:04:19.516 --> 00:04:21.565 A:middle
+
+86
+00:04:19,516 --> 00:04:21,565
 that they are fully informed
 about the details of the study.
 
-00:04:22.396 --> 00:04:24.506 A:middle
+
+87
+00:04:22,396 --> 00:04:24,506
 The details will
 differ for every study,
 
-00:04:24.586 --> 00:04:26.496 A:middle
+
+88
+00:04:24,586 --> 00:04:26,496
 and so again ResearchKit
 provides templates
 
-00:04:26.856 --> 00:04:29.686 A:middle
+
+89
+00:04:26,856 --> 00:04:29,686
 that you can use to
 show this in your apps.
 
-00:04:31.656 --> 00:04:34.126 A:middle
+
+90
+00:04:31,656 --> 00:04:34,126
 ResearchKit's third
 module is active tasks.
 
-00:04:35.156 --> 00:04:37.486 A:middle
+
+91
+00:04:35,156 --> 00:04:37,486
 An active task is a
 semicontrolled test
 
-00:04:37.786 --> 00:04:39.976 A:middle
+
+92
+00:04:37,786 --> 00:04:39,976
 where the participant is given
 step-by-step instructions
 
-00:04:40.046 --> 00:04:43.606 A:middle
+
+93
+00:04:40,046 --> 00:04:43,606
 to perform the task while data
 is collected using sensors
 
-00:04:43.606 --> 00:04:44.066 A:middle
+
+94
+00:04:43,606 --> 00:04:44,066
 on the device.
 
-00:04:44.066 --> 00:04:49.036 A:middle
+
+95
+00:04:44,066 --> 00:04:49,036
 For example, in this gait and
 balance task, the phone is
 
-00:04:49.036 --> 00:04:51.256 A:middle
+
+96
+00:04:49,036 --> 00:04:51,256
 in your pocket while
 you walk back and forth,
 
-00:04:51.496 --> 00:04:54.756 A:middle
+
+97
+00:04:51,496 --> 00:04:54,756
 and accelerometer and the
 gyro are used to collect data
 
-00:04:54.756 --> 00:04:55.636 A:middle
+
+98
+00:04:54,756 --> 00:04:55,636
 that can assess your gait.
 
-00:04:56.506 --> 00:04:59.216 A:middle
+
+99
+00:04:56,506 --> 00:04:59,216
 So again, we've got three
 things in ResearchKit.
 
-00:04:59.386 --> 00:05:04.006 A:middle
+
+100
+00:04:59,386 --> 00:05:04,006
 We've got surveys, informed
 consent and active tasks.
 
 
-
-00:04:59.386 --> 00:05:04.006 A:middle
-We've got surveys, informed
-consent and active tasks.
-
-00:05:04.426 --> 00:05:06.146 A:middle
+101
+00:05:04,426 --> 00:05:06,146
 Now, when we announced
 ResearchKit,
 
-00:05:06.786 --> 00:05:07.896 A:middle
+
+102
+00:05:06,786 --> 00:05:07,896
 the investigators we worked
 
-00:05:07.896 --> 00:05:10.136 A:middle
+
+103
+00:05:07,896 --> 00:05:10,136
 with simultaneously released
 their apps to the App Store.
 
-00:05:11.256 --> 00:05:14.116 A:middle
+
+104
+00:05:11,256 --> 00:05:14,116
 And even now, these apps are
 being used to collect study data
 
-00:05:14.356 --> 00:05:17.616 A:middle
+
+105
+00:05:14,356 --> 00:05:17,616
 from conditions as diverse
 as Parkinson's, diabetes,
 
-00:05:17.876 --> 00:05:20.446 A:middle
+
+106
+00:05:17,876 --> 00:05:20,446
 cardiovascular disease,
 asthma and breast cancer.
 
-00:05:21.606 --> 00:05:24.756 A:middle
+
+107
+00:05:21,606 --> 00:05:24,756
 And with these partner
 institutions we've open sourced
 
-00:05:24.926 --> 00:05:25.776 A:middle
+
+108
+00:05:24,926 --> 00:05:25,776
 the codes for these apps,
 
-00:05:26.086 --> 00:05:28.496 A:middle
+
+109
+00:05:26,086 --> 00:05:28,496
 as well as the app core common
 library that they all share,
 
-00:05:29.096 --> 00:05:32.266 A:middle
+
+110
+00:05:29,096 --> 00:05:32,266
 so that can help you
 get started on your app
 
-00:05:32.266 --> 00:05:33.086 A:middle
+
+111
+00:05:32,266 --> 00:05:33,086
 if you need a jumpstart.
 
-00:05:33.446 --> 00:05:35.406 A:middle
+
+112
+00:05:33,446 --> 00:05:35,406
 Now what do the apps
 actually do?
 
-00:05:36.896 --> 00:05:39.376 A:middle
+
+113
+00:05:36,896 --> 00:05:39,376
 Well, they all used the
 informed consent module
 
-00:05:39.376 --> 00:05:41.766 A:middle
+
+114
+00:05:39,376 --> 00:05:41,766
 from ResearchKit during
 the onboarding process,
 
-00:05:42.416 --> 00:05:44.596 A:middle
+
+115
+00:05:42,416 --> 00:05:44,596
 but then after that, once the
 participants are enrolled,
 
-00:05:45.586 --> 00:05:46.936 A:middle
+
+116
+00:05:45,586 --> 00:05:46,936
 they collect data
 in a couple of ways.
 
-00:05:47.506 --> 00:05:50.026 A:middle
+
+117
+00:05:47,506 --> 00:05:50,026
 First they use scheduled
 activities,
 
-00:05:51.106 --> 00:05:53.356 A:middle
+
+118
+00:05:51,106 --> 00:05:53,356
 using ResearchKit's surveys
 and active task modules
 
-00:05:53.666 --> 00:05:55.096 A:middle
+
+119
+00:05:53,666 --> 00:05:55,096
 to collect more subjective
 measures.
 
-00:05:55.956 --> 00:05:58.386 A:middle
+
+120
+00:05:55,956 --> 00:05:58,386
 In addition, they get
 objective measures
 
-00:05:58.696 --> 00:06:02.076 A:middle
+
+121
+00:05:58,696 --> 00:06:02,076
 by doing passive data collection
 using HealthKit and CoreMotion.
 
 
-
-00:05:58.696 --> 00:06:02.076 A:middle
-by doing passive data collection
-using HealthKit and CoreMotion.
-
-00:06:03.946 --> 00:06:07.586 A:middle
+122
+00:06:03,946 --> 00:06:07,586
 And in addition, they address
 
-00:06:07.706 --> 00:06:09.986 A:middle
+
+123
+00:06:07,706 --> 00:06:09,986
 that one-way communication
 problem
 
-00:06:10.156 --> 00:06:13.926 A:middle
+
+124
+00:06:10,156 --> 00:06:13,926
 by including a dashboard tab,
 which allows participants to see
 
-00:06:14.296 --> 00:06:16.786 A:middle
+
+125
+00:06:14,296 --> 00:06:16,786
 and track both subjective
 measures like their mood,
 
-00:06:16.786 --> 00:06:19.526 A:middle
+
+126
+00:06:16,786 --> 00:06:19,526
 perhaps derived from surveys
 and objective measures
 
-00:06:19.846 --> 00:06:24.396 A:middle
+
+127
+00:06:19,846 --> 00:06:24,396
 like their weight which might
 be derived from HealthKit.
 
-00:06:24.396 --> 00:06:27.126 A:middle
+
+128
+00:06:24,396 --> 00:06:27,126
 So that's ResearchKit and
 the apps that are using it.
 
-00:06:28.006 --> 00:06:31.176 A:middle
+
+129
+00:06:28,006 --> 00:06:31,176
 But as we developed ResearchKit,
 we learned a few things
 
-00:06:31.526 --> 00:06:34.216 A:middle
+
+130
+00:06:31,526 --> 00:06:34,216
 about what else is involved
 in building an app-based study
 
-00:06:34.496 --> 00:06:36.016 A:middle
+
+131
+00:06:34,496 --> 00:06:36,016
 that we thought is
 important to share with you.
 
-00:06:36.246 --> 00:06:37.676 A:middle
+
+132
+00:06:36,246 --> 00:06:37,676
 So during this section
 of the talk,
 
-00:06:37.676 --> 00:06:39.206 A:middle
+
+133
+00:06:37,676 --> 00:06:39,206
 I'll share some of
 those with you.
 
-00:06:40.156 --> 00:06:42.646 A:middle
+
+134
+00:06:40,156 --> 00:06:42,646
 So if you're an engineer
 building a research app,
 
-00:06:43.276 --> 00:06:45.076 A:middle
+
+135
+00:06:43,276 --> 00:06:45,076
 you're probably not the
 only person on the project
 
-00:06:45.246 --> 00:06:48.106 A:middle
+
+136
+00:06:45,246 --> 00:06:48,106
 and the rest of your team
 will have a variety of things
 
-00:06:48.596 --> 00:06:51.346 A:middle
+
+137
+00:06:48,596 --> 00:06:51,346
 that they'll need to do, and
 I'll cover some of those now.
 
-00:06:52.156 --> 00:06:54.546 A:middle
+
+138
+00:06:52,156 --> 00:06:54,546
 Probably the most
 important will be
 
-00:06:54.546 --> 00:06:57.426 A:middle
+
+139
+00:06:54,546 --> 00:06:57,426
 to approach an ethics committee
 
-00:06:57.616 --> 00:07:00.096 A:middle
+
+140
+00:06:57,616 --> 00:07:00,096
 or institutional
 review board associated
 
 
-
-00:06:57.616 --> 00:07:00.096 A:middle
-or institutional
-review board associated
-
-00:07:00.096 --> 00:07:02.216 A:middle
+141
+00:07:00,096 --> 00:07:02,216
 with your institution,
 in order to --
 
-00:07:03.566 --> 00:07:05.606 A:middle
+
+142
+00:07:03,566 --> 00:07:05,606
 in order to obtain some
 sort of ethics review
 
-00:07:05.866 --> 00:07:06.746 A:middle
+
+143
+00:07:05,866 --> 00:07:06,746
 for the study protocol.
 
-00:07:07.316 --> 00:07:11.466 A:middle
+
+144
+00:07:07,316 --> 00:07:11,466
 As part of this, you'll
 need to decide what it means
 
-00:07:11.466 --> 00:07:15.496 A:middle
+
+145
+00:07:11,466 --> 00:07:15,496
 for the participant to be
 informed about the study.
 
-00:07:15.656 --> 00:07:17.496 A:middle
+
+146
+00:07:15,656 --> 00:07:17,496
 You'll take this
 paper-based form
 
-00:07:17.796 --> 00:07:19.136 A:middle
+
+147
+00:07:17,796 --> 00:07:19,136
 and hopefully you will
 be able to compress it
 
-00:07:19.136 --> 00:07:21.696 A:middle
+
+148
+00:07:19,136 --> 00:07:21,696
 down into something that's
 appropriate for a mobile app,
 
-00:07:21.956 --> 00:07:23.996 A:middle
+
+149
+00:07:21,956 --> 00:07:23,996
 and we will cover that into a
 little more detail when we get
 
-00:07:23.996 --> 00:07:25.936 A:middle
+
+150
+00:07:23,996 --> 00:07:25,936
 to the inform and consent
 module of ResearchKit.
 
-00:07:27.806 --> 00:07:32.586 A:middle
+
+151
+00:07:27,806 --> 00:07:32,586
 Next, since ResearchKit doesn't
 provide a back end service,
 
-00:07:32.876 --> 00:07:35.066 A:middle
+
+152
+00:07:32,876 --> 00:07:35,066
 you need to plan for how
 you'll store your study data.
 
-00:07:35.416 --> 00:07:38.356 A:middle
+
+153
+00:07:35,416 --> 00:07:38,356
 So that might mean you stand up
 the survey yourself or contract
 
-00:07:38.356 --> 00:07:39.526 A:middle
+
+154
+00:07:38,356 --> 00:07:39,526
 with a third-party
 service provider.
 
-00:07:40.566 --> 00:07:43.406 A:middle
+
+155
+00:07:40,566 --> 00:07:43,406
 Either way, you'll
 need to account
 
-00:07:43.406 --> 00:07:45.326 A:middle
+
+156
+00:07:43,406 --> 00:07:45,326
 for both data security
 and privacy.
 
-00:07:45.896 --> 00:07:49.626 A:middle
+
+157
+00:07:45,896 --> 00:07:49,626
 And lastly, you'll need to plan
 
-00:07:49.786 --> 00:07:51.556 A:middle
+
+158
+00:07:49,786 --> 00:07:51,556
 for sharing your
 study data whether
 
-00:07:51.556 --> 00:07:53.866 A:middle
+
+159
+00:07:51,556 --> 00:07:53,866
 with participants perhaps in
 the form of a dashboard tab
 
-00:07:53.866 --> 00:07:57.306 A:middle
+
+160
+00:07:53,866 --> 00:07:57,306
 or some other method, or
 with other investigators
 
-00:07:57.706 --> 00:08:00.106 A:middle
+
+161
+00:07:57,706 --> 00:08:00,106
 which might require you
 generating a very broad
 
 
-
-00:07:57.706 --> 00:08:00.106 A:middle
-which might require you
-generating a very broad
-
-00:08:00.196 --> 00:08:00.906 A:middle
+162
+00:08:00,196 --> 00:08:00,906
 informed consent.
 
-00:08:00.966 --> 00:08:03.716 A:middle
+
+163
+00:08:00,966 --> 00:08:03,716
 So as you can see,
 there are a variety
 
-00:08:03.716 --> 00:08:05.646 A:middle
+
+164
+00:08:03,716 --> 00:08:05,646
 of issues outside
 the actual app build
 
-00:08:05.996 --> 00:08:07.956 A:middle
+
+165
+00:08:05,996 --> 00:08:07,956
 that will affect the design
 of your study-based app
 
-00:08:08.716 --> 00:08:10.176 A:middle
+
+166
+00:08:08,716 --> 00:08:10,176
 and for more resources on these,
 
-00:08:10.556 --> 00:08:11.746 A:middle
+
+167
+00:08:10,556 --> 00:08:11,746
 I would point you
 to ResearchKit.
 
-00:08:11.746 --> 00:08:14.236 A:middle
+
+168
+00:08:11,746 --> 00:08:14,236
 org, our website, and also
 
-00:08:14.516 --> 00:08:16.346 A:middle
+
+169
+00:08:14,516 --> 00:08:16,346
 to our ResearchKit
 user's mailing list
 
-00:08:16.656 --> 00:08:18.216 A:middle
+
+170
+00:08:16,656 --> 00:08:18,216
 where you can reach others
 
-00:08:18.286 --> 00:08:19.666 A:middle
+
+171
+00:08:18,286 --> 00:08:19,666
 who have also been
 through this before.
 
-00:08:20.216 --> 00:08:22.966 A:middle
+
+172
+00:08:20,216 --> 00:08:22,966
 So without further adieu,
 
-00:08:22.966 --> 00:08:24.946 A:middle
+
+173
+00:08:22,966 --> 00:08:24,946
 let's get on to building
 apps with ResearchKit.
 
-00:08:25.166 --> 00:08:26.606 A:middle
+
+174
+00:08:25,166 --> 00:08:26,606
 How can ResearchKit help
 you in your studies?
 
-00:08:26.606 --> 00:08:32.366 A:middle
+
+175
+00:08:26,606 --> 00:08:32,366
 So as I mentioned before,
 there are three modules
 
-00:08:32.366 --> 00:08:34.905 A:middle
+
+176
+00:08:32,366 --> 00:08:34,905
 in ResearchKit, surveys,
 informed consent
 
-00:08:35.275 --> 00:08:37.775 A:middle
+
+177
+00:08:35,275 --> 00:08:37,775
 and active tasks and
 all of those modules
 
-00:08:37.775 --> 00:08:40.846 A:middle
+
+178
+00:08:37,775 --> 00:08:40,846
 in ResearchKit behave
 more or less the same way.
 
-00:08:41.486 --> 00:08:45.576 A:middle
+
+179
+00:08:41,486 --> 00:08:45,576
 Each activity that
 the user is asked
 
-00:08:45.576 --> 00:08:47.366 A:middle
+
+180
+00:08:45,576 --> 00:08:47,366
 to do is modeled as a task.
 
-00:08:47.946 --> 00:08:51.906 A:middle
+
+181
+00:08:47,946 --> 00:08:51,906
 And each task can
 contain one or more steps.
 
-00:08:52.036 --> 00:08:54.536 A:middle
+
+182
+00:08:52,036 --> 00:08:54,536
 Now, in order to use a task,
 you will want to present it
 
-00:08:54.536 --> 00:08:57.986 A:middle
+
+183
+00:08:54,536 --> 00:08:57,986
 to the user and to do that, you
 will use task view controller.
 
-00:08:59.046 --> 00:09:02.406 A:middle
+
+184
+00:08:59,046 --> 00:09:02,406
 Now, a task view controller is
 a container view controller,
 
 
-
-00:08:59.046 --> 00:09:02.406 A:middle
-Now, a task view controller is
-a container view controller,
-
-00:09:02.406 --> 00:09:04.166 A:middle
+185
+00:09:02,406 --> 00:09:04,166
 a bit like a navigation
 controller
 
-00:09:04.166 --> 00:09:05.956 A:middle
+
+186
+00:09:04,166 --> 00:09:05,956
 or a tab bar controller that
 you are probably familiar
 
-00:09:05.956 --> 00:09:08.536 A:middle
+
+187
+00:09:05,956 --> 00:09:08,536
 with from the UI kit.
 
-00:09:08.746 --> 00:09:12.366 A:middle
+
+188
+00:09:08,746 --> 00:09:12,366
 Now, when you present
 the task view controller,
 
-00:09:13.096 --> 00:09:16.276 A:middle
+
+189
+00:09:13,096 --> 00:09:16,276
 it will get the first step
 from the task and then display
 
-00:09:16.276 --> 00:09:18.966 A:middle
+
+190
+00:09:16,276 --> 00:09:18,966
 within the task view controller
 a step view controller
 
-00:09:18.966 --> 00:09:21.066 A:middle
+
+191
+00:09:18,966 --> 00:09:21,066
 that displays the
 data for that step.
 
-00:09:21.676 --> 00:09:24.916 A:middle
+
+192
+00:09:21,676 --> 00:09:24,916
 Then when the step completes
 the task view controller will
 
-00:09:24.916 --> 00:09:26.836 A:middle
+
+193
+00:09:24,916 --> 00:09:26,836
 collect the result from
 it and collate the results
 
-00:09:26.836 --> 00:09:29.306 A:middle
+
+194
+00:09:26,836 --> 00:09:29,306
 from all the steps in that task.
 
-00:09:29.906 --> 00:09:32.556 A:middle
+
+195
+00:09:29,906 --> 00:09:32,556
 Finally, the task view
 controller will notify its
 
-00:09:32.556 --> 00:09:33.926 A:middle
+
+196
+00:09:32,556 --> 00:09:33,926
 delegate when the
 task is complete
 
-00:09:34.836 --> 00:09:36.006 A:middle
+
+197
+00:09:34,836 --> 00:09:36,006
 and you will get a task result.
 
-00:09:36.896 --> 00:09:39.346 A:middle
+
+198
+00:09:36,896 --> 00:09:39,346
 This task result will have
 a corresponding step result
 
-00:09:39.346 --> 00:09:40.546 A:middle
+
+199
+00:09:39,346 --> 00:09:40,546
 for the step you
 have been through,
 
-00:09:40.546 --> 00:09:41.876 A:middle
+
+200
+00:09:40,546 --> 00:09:41,876
 and if you have more steps,
 
-00:09:41.876 --> 00:09:44.316 A:middle
+
+201
+00:09:41,876 --> 00:09:44,316
 you will have correspondingly
 more step results.
 
-00:09:44.726 --> 00:09:47.826 A:middle
+
+202
+00:09:44,726 --> 00:09:47,826
 So that's the object
 model in ResearchKit
 
-00:09:48.216 --> 00:09:51.696 A:middle
+
+203
+00:09:48,216 --> 00:09:51,696
 and now let's take a little
 bit deeper dive into one
 
-00:09:51.696 --> 00:09:53.416 A:middle
+
+204
+00:09:51,696 --> 00:09:53,416
 of the core objects
 which is the step.
 
-00:09:53.976 --> 00:10:00.346 A:middle
+
+205
+00:09:53,976 --> 00:10:00,346
 So we will look at steps next.
 
 
-
-00:09:53.976 --> 00:10:00.346 A:middle
-So we will look at steps next.
-
-00:10:00.346 --> 00:10:03.176 A:middle
+206
+00:10:00,346 --> 00:10:03,176
 In ResearchKit, a step
 really corresponds
 
-00:10:03.176 --> 00:10:06.006 A:middle
+
+207
+00:10:03,176 --> 00:10:06,006
 to the basic template that
 you use for each screen
 
-00:10:06.236 --> 00:10:07.206 A:middle
+
+208
+00:10:06,236 --> 00:10:07,206
 in a ResearchKit task.
 
-00:10:08.226 --> 00:10:10.186 A:middle
+
+209
+00:10:08,226 --> 00:10:10,186
 And subclasses are
 a kind of step,
 
-00:10:10.426 --> 00:10:13.226 A:middle
+
+210
+00:10:10,426 --> 00:10:13,226
 which is just an abstract base
 class, can be used for each
 
-00:10:13.226 --> 00:10:14.456 A:middle
+
+211
+00:10:13,226 --> 00:10:14,456
 of the different types for
 each of the different steps
 
-00:10:14.456 --> 00:10:16.076 A:middle
+
+212
+00:10:14,456 --> 00:10:16,076
 that you might need
 for different modules
 
-00:10:16.076 --> 00:10:17.436 A:middle
+
+213
+00:10:16,076 --> 00:10:17,436
 in ResearchKit, like surveys.
 
-00:10:17.436 --> 00:10:19.296 A:middle
+
+214
+00:10:17,436 --> 00:10:19,296
 So you might have an
 instruction, survey question
 
-00:10:19.296 --> 00:10:21.986 A:middle
+
+215
+00:10:19,296 --> 00:10:21,986
 and multiquestion forms or for
 other things like active tasks
 
-00:10:21.986 --> 00:10:23.236 A:middle
+
+216
+00:10:21,986 --> 00:10:23,236
 where you need countdown timers
 
-00:10:23.616 --> 00:10:29.106 A:middle
+
+217
+00:10:23,616 --> 00:10:29,106
 and perhaps a memory game
 for a cognitive task.
 
-00:10:29.276 --> 00:10:32.706 A:middle
+
+218
+00:10:29,276 --> 00:10:32,706
 So this basic template generally
 presents the step content
 
-00:10:32.706 --> 00:10:35.956 A:middle
+
+219
+00:10:32,706 --> 00:10:35,956
 in the middle of the
 screen and this will --
 
-00:10:36.126 --> 00:10:39.646 A:middle
+
+220
+00:10:36,126 --> 00:10:39,646
 this has some predefined
 elements which we'll see next.
 
-00:10:40.256 --> 00:10:43.546 A:middle
+
+221
+00:10:40,256 --> 00:10:43,546
 In addition, it generally
 includes the forward navigation
 
-00:10:43.546 --> 00:10:46.216 A:middle
+
+222
+00:10:43,546 --> 00:10:46,216
 controls which are displayed
 within the step view controller.
 
-00:10:46.216 --> 00:10:51.696 A:middle
+
+223
+00:10:46,216 --> 00:10:51,696
 So what does that
 look like in code?
 
-00:10:52.516 --> 00:10:57.156 A:middle
+
+224
+00:10:52,516 --> 00:10:57,156
 Well, you will get an ORKStep
 as the abstract base class,
 
-00:10:57.206 --> 00:10:59.196 A:middle
+
+225
+00:10:57,206 --> 00:10:59,196
 and you'll see here that it's
 a subclass within this object.
 
-00:10:59.526 --> 00:11:02.116 A:middle
+
+226
+00:10:59,526 --> 00:11:02,116
 Now, I should mention that the
 framework itself is written
 
 
-
-00:10:59.526 --> 00:11:02.116 A:middle
-Now, I should mention that the
-framework itself is written
-
-00:11:02.116 --> 00:11:04.276 A:middle
+227
+00:11:02,116 --> 00:11:04,276
 in Objective-C but it's
 perfectly usable from Swift
 
-00:11:04.506 --> 00:11:07.306 A:middle
+
+228
+00:11:04,506 --> 00:11:07,306
 and we added both
 nullability and generics to it
 
-00:11:07.306 --> 00:11:09.036 A:middle
+
+229
+00:11:07,306 --> 00:11:09,036
 so you can use it with Swift 2.
 
-00:11:09.036 --> 00:11:10.836 A:middle
+
+230
+00:11:09,036 --> 00:11:10,836
 0. So what are some
 
-00:11:11.016 --> 00:11:15.516 A:middle
+
+231
+00:11:11,016 --> 00:11:15,516
 of the important
 properties of the base class.
 
-00:11:15.896 --> 00:11:19.216 A:middle
+
+232
+00:11:15,896 --> 00:11:19,216
 The first and probably the most
 key property is the identifier
 
-00:11:19.516 --> 00:11:21.416 A:middle
+
+233
+00:11:19,516 --> 00:11:21,416
 and this is a string that
 you the developer provide.
 
-00:11:22.036 --> 00:11:25.336 A:middle
+
+234
+00:11:22,036 --> 00:11:25,336
 It could be a human readable
 string, or it could be a UUID,
 
-00:11:25.336 --> 00:11:26.916 A:middle
+
+235
+00:11:25,336 --> 00:11:26,916
 or an identifier that
 corresponds to a record
 
-00:11:26.916 --> 00:11:29.066 A:middle
+
+236
+00:11:26,916 --> 00:11:29,066
 of this step and the
 corresponding task
 
-00:11:29.066 --> 00:11:29.706 A:middle
+
+237
+00:11:29,066 --> 00:11:29,706
 in your database.
 
-00:11:31.696 --> 00:11:33.366 A:middle
+
+238
+00:11:31,696 --> 00:11:33,366
 The importance of
 this identifier is
 
-00:11:33.366 --> 00:11:36.116 A:middle
+
+239
+00:11:33,366 --> 00:11:36,116
 that it links the step with
 the corresponding step result
 
-00:11:36.296 --> 00:11:40.186 A:middle
+
+240
+00:11:36,296 --> 00:11:40,186
 and it needs to be unique
 within the context of your task.
 
-00:11:40.386 --> 00:11:44.616 A:middle
+
+241
+00:11:40,386 --> 00:11:44,616
 Next, all steps have
 a title, and text.
 
-00:11:45.276 --> 00:11:48.346 A:middle
+
+242
+00:11:45,276 --> 00:11:48,346
 And these generally fit into
 the same corresponding place
 
-00:11:48.346 --> 00:11:49.276 A:middle
+
+243
+00:11:48,346 --> 00:11:49,276
 in each step template.
 
-00:11:49.816 --> 00:11:54.186 A:middle
+
+244
+00:11:49,816 --> 00:11:54,186
 If you are writing a question,
 for example, for a question step
 
-00:11:54.186 --> 00:11:56.686 A:middle
+
+245
+00:11:54,186 --> 00:11:56,686
 in a survey, you will
 typically put a short title
 
-00:11:57.006 --> 00:12:02.756 A:middle
+
+246
+00:11:57,006 --> 00:12:02,756
 and the actual question itself
 will go into the text property.
 
 
-
-00:11:57.006 --> 00:12:02.756 A:middle
-and the actual question itself
-will go into the text property.
-
-00:12:02.836 --> 00:12:04.526 A:middle
+247
+00:12:02,836 --> 00:12:04,526
 One more property
 worth mentioning is the
 
-00:12:04.526 --> 00:12:05.296 A:middle
+
+248
+00:12:04,526 --> 00:12:05,296
 optional property.
 
-00:12:05.666 --> 00:12:08.736 A:middle
+
+249
+00:12:05,666 --> 00:12:08,736
 So each of the steps in a survey
 and ResearchKit or, in fact many
 
-00:12:08.736 --> 00:12:11.556 A:middle
+
+250
+00:12:08,736 --> 00:12:11,556
 of the other steps can
 be optional and, in fact,
 
-00:12:11.556 --> 00:12:12.466 A:middle
+
+251
+00:12:11,556 --> 00:12:12,466
 they are optional by default.
 
-00:12:12.706 --> 00:12:13.716 A:middle
+
+252
+00:12:12,706 --> 00:12:13,716
 If you need to turn that off,
 
-00:12:13.716 --> 00:12:15.606 A:middle
+
+253
+00:12:13,716 --> 00:12:15,606
 for example because a
 particular answer is required,
 
-00:12:15.856 --> 00:12:16.776 A:middle
+
+254
+00:12:15,856 --> 00:12:16,776
 then you can use this property.
 
-00:12:17.786 --> 00:12:20.926 A:middle
+
+255
+00:12:17,786 --> 00:12:20,926
 So that's steps, but to use
 a step you need to put it
 
-00:12:20.926 --> 00:12:23.616 A:middle
+
+256
+00:12:20,926 --> 00:12:23,616
 in the context of a task.
 
-00:12:23.706 --> 00:12:27.566 A:middle
+
+257
+00:12:23,706 --> 00:12:27,566
 Now tasks in ResearchKit don't
 have an abstract base class,
 
-00:12:27.566 --> 00:12:28.576 A:middle
+
+258
+00:12:27,566 --> 00:12:28,576
 instead it's just a protocol
 
-00:12:29.126 --> 00:12:32.316 A:middle
+
+259
+00:12:29,126 --> 00:12:32,316
 which defines how the task
 view controller will interact
 
-00:12:32.316 --> 00:12:33.106 A:middle
+
+260
+00:12:32,316 --> 00:12:33,106
 with each task.
 
-00:12:34.356 --> 00:12:36.716 A:middle
+
+261
+00:12:34,356 --> 00:12:36,716
 Again, there's a key property
 which is the identifier
 
-00:12:37.206 --> 00:12:39.716 A:middle
+
+262
+00:12:37,206 --> 00:12:39,716
 which uniquely identifies
 this task result compared
 
-00:12:39.716 --> 00:12:44.866 A:middle
+
+263
+00:12:39,716 --> 00:12:44,866
 to other task results that
 you might collect in this app.
 
-00:12:45.126 --> 00:12:47.776 A:middle
+
+264
+00:12:45,126 --> 00:12:47,776
 Next, though, the task
 view controller needs
 
-00:12:47.776 --> 00:12:50.966 A:middle
+
+265
+00:12:47,776 --> 00:12:50,966
 to know what is the next step
 in this task, and for that,
 
-00:12:50.966 --> 00:12:53.186 A:middle
+
+266
+00:12:50,966 --> 00:12:53,186
 we define the step after
 step protocol method
 
-00:12:53.266 --> 00:12:55.656 A:middle
+
+267
+00:12:53,266 --> 00:12:55,656
 where we pass the current step
 from the task view controller.
 
-00:12:58.296 --> 00:13:00.076 A:middle
+
+268
+00:12:58,296 --> 00:13:00,076
 Often, you'll just
 return the next step.
 
 
-
-00:12:58.296 --> 00:13:00.076 A:middle
-Often, you'll just
-return the next step.
-
-00:13:00.736 --> 00:13:02.606 A:middle
+269
+00:13:00,736 --> 00:13:02,606
 But sometimes you
 will want to know --
 
-00:13:02.606 --> 00:13:03.836 A:middle
+
+270
+00:13:02,606 --> 00:13:03,836
 you will want to
 decide what test --
 
-00:13:04.366 --> 00:13:07.936 A:middle
+
+271
+00:13:04,366 --> 00:13:07,936
 what step to show based
 on the results so far.
 
-00:13:08.056 --> 00:13:10.486 A:middle
+
+272
+00:13:08,056 --> 00:13:10,486
 So, for instance, if I answered
 A, you want to get to step A,
 
-00:13:10.486 --> 00:13:14.306 A:middle
+
+273
+00:13:10,486 --> 00:13:14,306
 and if I answered B, you want
 to go to step B and for that,
 
-00:13:14.556 --> 00:13:17.136 A:middle
+
+274
+00:13:14,556 --> 00:13:17,136
 the task view controller will
 pass the task a result --
 
-00:13:17.376 --> 00:13:20.126 A:middle
+
+275
+00:13:17,376 --> 00:13:20,126
 the task result so far, that you
 can use to make that decision.
 
-00:13:22.116 --> 00:13:24.056 A:middle
+
+276
+00:13:22,116 --> 00:13:24,056
 When looking for the
 first step in the task,
 
-00:13:24.336 --> 00:13:26.366 A:middle
+
+277
+00:13:24,336 --> 00:13:26,366
 the task view controller will
 pass nil as the current step
 
-00:13:26.926 --> 00:13:28.746 A:middle
+
+278
+00:13:26,926 --> 00:13:28,746
 and when the task is complete
 
-00:13:28.746 --> 00:13:31.036 A:middle
+
+279
+00:13:28,746 --> 00:13:31,036
 and there are no more
 steps you can return nil
 
-00:13:31.036 --> 00:13:32.186 A:middle
+
+280
+00:13:31,036 --> 00:13:32,186
 to tell the task view controller
 
-00:13:32.186 --> 00:13:35.656 A:middle
+
+281
+00:13:32,186 --> 00:13:35,656
 that there are no
 more steps to go to.
 
-00:13:35.876 --> 00:13:38.016 A:middle
+
+282
+00:13:35,876 --> 00:13:38,016
 Similarly, the task
 view controller may want
 
-00:13:38.176 --> 00:13:40.316 A:middle
+
+283
+00:13:38,176 --> 00:13:40,316
 to ask your task what the
 previous steps should be.
 
-00:13:40.836 --> 00:13:43.556 A:middle
+
+284
+00:13:40,836 --> 00:13:43,556
 So the step before method
 allows to you do things
 
-00:13:43.556 --> 00:13:44.906 A:middle
+
+285
+00:13:43,556 --> 00:13:44,906
 like prevent backward
 navigation.
 
-00:13:45.486 --> 00:13:48.906 A:middle
+
+286
+00:13:45,486 --> 00:13:48,906
 So there are a variety
 of other properties
 
-00:13:48.906 --> 00:13:50.816 A:middle
+
+287
+00:13:48,906 --> 00:13:50,816
 and methods on the
 task protocol.
 
-00:13:51.256 --> 00:13:53.726 A:middle
+
+288
+00:13:51,256 --> 00:13:53,726
 And implementing a task can
 be a complicated endeavor
 
-00:13:54.136 --> 00:13:57.756 A:middle
+
+289
+00:13:54,136 --> 00:13:57,756
 and so ResearchKit includes
 an implementation of ORKTask
 
-00:13:58.266 --> 00:14:01.266 A:middle
+
+290
+00:13:58,266 --> 00:14:01,266
 which is ORKOrder task for
 the simple case where you want
 
 
-
-00:13:58.266 --> 00:14:01.266 A:middle
-which is ORKOrder task for
-the simple case where you want
-
-00:14:01.266 --> 00:14:03.376 A:middle
+291
+00:14:01,266 --> 00:14:03,376
 to present your steps
 in consecutive order.
 
-00:14:04.006 --> 00:14:06.516 A:middle
+
+292
+00:14:04,006 --> 00:14:06,516
 So here you pass an
 identifier and an array of steps
 
-00:14:07.456 --> 00:14:09.956 A:middle
+
+293
+00:14:07,456 --> 00:14:09,956
 and you can get those steps
 back from a read only property.
 
-00:14:09.956 --> 00:14:12.266 A:middle
+
+294
+00:14:09,956 --> 00:14:12,266
 But the task view
 controller only interacts
 
-00:14:12.266 --> 00:14:15.286 A:middle
+
+295
+00:14:12,266 --> 00:14:15,286
 with its ordered task
 through the ORKtask protocol,
 
-00:14:15.286 --> 00:14:16.956 A:middle
+
+296
+00:14:15,286 --> 00:14:16,956
 so you call it step
 after step instead
 
-00:14:16.956 --> 00:14:19.066 A:middle
+
+297
+00:14:16,956 --> 00:14:19,066
 of accessing that
 step's property.
 
-00:14:20.406 --> 00:14:22.146 A:middle
+
+298
+00:14:20,406 --> 00:14:22,146
 Now if you need conditional
 logic,
 
-00:14:22.586 --> 00:14:25.506 A:middle
+
+299
+00:14:22,586 --> 00:14:25,506
 there is now another version of
 ordered task, a subclass of it,
 
-00:14:25.506 --> 00:14:27.866 A:middle
+
+300
+00:14:25,506 --> 00:14:27,866
 called ORKNavigable ordered
 task, which allows you
 
-00:14:27.866 --> 00:14:29.296 A:middle
+
+301
+00:14:27,866 --> 00:14:29,296
 to specify predicates
 on the results
 
-00:14:29.296 --> 00:14:30.646 A:middle
+
+302
+00:14:29,296 --> 00:14:30,646
 and corresponding
 destination steps.
 
-00:14:31.386 --> 00:14:33.046 A:middle
+
+303
+00:14:31,386 --> 00:14:33,046
 This is a recent
 addition to the framework
 
-00:14:33.176 --> 00:14:35.546 A:middle
+
+304
+00:14:33,176 --> 00:14:35,546
 from an external contributor
 and we don't have time
 
-00:14:35.546 --> 00:14:37.946 A:middle
+
+305
+00:14:35,546 --> 00:14:37,946
 to cover it today but you can
 find the details on GitHub.
 
-00:14:38.946 --> 00:14:39.936 A:middle
+
+306
+00:14:38,946 --> 00:14:39,936
 So that's tasks.
 
-00:14:41.416 --> 00:14:43.106 A:middle
+
+307
+00:14:41,416 --> 00:14:43,106
 But to use a task, you
 will need to present it
 
-00:14:43.106 --> 00:14:44.106 A:middle
+
+308
+00:14:43,106 --> 00:14:44,106
 with a task view controller.
 
-00:14:44.886 --> 00:14:46.386 A:middle
+
+309
+00:14:44,886 --> 00:14:46,386
 So let's look at the task
 view controller next.
 
-00:14:47.416 --> 00:14:48.436 A:middle
+
+310
+00:14:47,416 --> 00:14:48,436
 So you'll start with a task.
 
-00:14:49.076 --> 00:14:52.866 A:middle
+
+311
+00:14:49,076 --> 00:14:52,866
 And you'll create a task view
 controller passing at the task.
 
-00:14:53.116 --> 00:14:55.576 A:middle
+
+312
+00:14:53,116 --> 00:14:55,576
 But you notice this second
 property, task run UUID
 
-00:14:55.576 --> 00:14:58.286 A:middle
+
+313
+00:14:55,576 --> 00:14:58,286
 and that is a UUID
 
-00:14:58.426 --> 00:15:00.946 A:middle
+
+314
+00:14:58,426 --> 00:15:00,946
 which uniquely identifies this
 particular run of the task.
 
 
-
-00:14:58.426 --> 00:15:00.946 A:middle
-which uniquely identifies this
-particular run of the task.
-
-00:15:01.496 --> 00:15:04.506 A:middle
+315
+00:15:01,496 --> 00:15:04,506
 So if here we pass nil
 
-00:15:04.576 --> 00:15:08.206 A:middle
+
+316
+00:15:04,576 --> 00:15:08,206
 which indicates this
 is a new task instance.
 
-00:15:08.686 --> 00:15:09.616 A:middle
+
+317
+00:15:08,686 --> 00:15:09,616
 We're starting from scratch.
 
-00:15:10.096 --> 00:15:13.016 A:middle
+
+318
+00:15:10,096 --> 00:15:13,016
 But if I were to save my
 work, say I had a long survey
 
-00:15:13.016 --> 00:15:16.566 A:middle
+
+319
+00:15:13,016 --> 00:15:16,566
 and I wanted to pause in the
 middle, then I might save
 
-00:15:16.566 --> 00:15:18.596 A:middle
+
+320
+00:15:16,566 --> 00:15:18,596
 and when we restarted
 this task by scheduling it
 
-00:15:18.596 --> 00:15:20.006 A:middle
+
+321
+00:15:18,596 --> 00:15:20,006
 in new task view
 controller, we would want
 
-00:15:20.006 --> 00:15:21.746 A:middle
+
+322
+00:15:20,006 --> 00:15:21,746
 to restore the old task run UUID
 
-00:15:21.746 --> 00:15:25.466 A:middle
+
+323
+00:15:21,746 --> 00:15:25,466
 because it's really
 the same run of a task.
 
-00:15:25.646 --> 00:15:27.076 A:middle
+
+324
+00:15:25,646 --> 00:15:27,076
 Then you need to
 set the delegate.
 
-00:15:27.346 --> 00:15:28.816 A:middle
+
+325
+00:15:27,346 --> 00:15:28,816
 If you want to find out
 when the task is finished,
 
-00:15:29.066 --> 00:15:30.356 A:middle
+
+326
+00:15:29,066 --> 00:15:30,356
 you use the delegate callback.
 
-00:15:30.756 --> 00:15:32.836 A:middle
+
+327
+00:15:30,756 --> 00:15:32,836
 But similarly, there are
 also delegate callbacks
 
-00:15:32.836 --> 00:15:33.886 A:middle
+
+328
+00:15:32,836 --> 00:15:33,886
 that give you opportunities
 
-00:15:33.886 --> 00:15:35.746 A:middle
+
+329
+00:15:33,886 --> 00:15:35,746
 to customize the task
 view controller's behavior
 
-00:15:36.066 --> 00:15:39.306 A:middle
+
+330
+00:15:36,066 --> 00:15:39,306
 for example, substituting a new
 step view controller in place
 
-00:15:39.306 --> 00:15:41.526 A:middle
+
+331
+00:15:39,306 --> 00:15:41,526
 of the default one
 for a particular step.
 
-00:15:42.606 --> 00:15:46.226 A:middle
+
+332
+00:15:42,606 --> 00:15:46,226
 In addition, some tasks
 can produce output,
 
-00:15:46.226 --> 00:15:47.306 A:middle
+
+333
+00:15:46,226 --> 00:15:47,306
 a file-based output.
 
-00:15:47.536 --> 00:15:50.826 A:middle
+
+334
+00:15:47,536 --> 00:15:50,826
 So for example if you are
 using a microphone in your task
 
-00:15:50.966 --> 00:15:53.046 A:middle
+
+335
+00:15:50,966 --> 00:15:53,046
 to collect audio data, we'd
 want to write that data
 
-00:15:53.046 --> 00:15:55.846 A:middle
+
+336
+00:15:53,046 --> 00:15:55,846
 to audio file during the task.
 
-00:15:56.006 --> 00:15:57.656 A:middle
+
+337
+00:15:56,006 --> 00:15:57,656
 In ResearchKit, to support that,
 
-00:15:57.656 --> 00:15:59.036 A:middle
+
+338
+00:15:57,656 --> 00:15:59,036
 you'll specify an
 output directory
 
-00:15:59.036 --> 00:16:01.746 A:middle
+
+339
+00:15:59,036 --> 00:16:01,746
 to your task view controller
 where the file-based output
 
 
-
-00:15:59.036 --> 00:16:01.746 A:middle
-to your task view controller
-where the file-based output
-
-00:16:01.746 --> 00:16:02.826 A:middle
+340
+00:16:01,746 --> 00:16:02,826
 from that task should go.
 
-00:16:03.336 --> 00:16:05.836 A:middle
+
+341
+00:16:03,336 --> 00:16:05,836
 When the task completes, you
 will need to process those files
 
-00:16:05.836 --> 00:16:07.616 A:middle
+
+342
+00:16:05,836 --> 00:16:07,616
 and then be responsible
 for cleaning them up.
 
-00:16:08.286 --> 00:16:10.546 A:middle
+
+343
+00:16:08,286 --> 00:16:10,546
 Finally you'll present the
 task view controller modally
 
-00:16:10.546 --> 00:16:11.456 A:middle
+
+344
+00:16:10,546 --> 00:16:11,456
 and get something like this.
 
-00:16:12.566 --> 00:16:15.986 A:middle
+
+345
+00:16:12,566 --> 00:16:15,986
 So, this task view
 controller as you can see,
 
-00:16:16.586 --> 00:16:17.926 A:middle
+
+346
+00:16:16,586 --> 00:16:17,926
 has a fairly standard behavior
 
-00:16:18.206 --> 00:16:20.556 A:middle
+
+347
+00:16:18,206 --> 00:16:20,556
 and the task view controller
 itself only controls a very
 
-00:16:20.556 --> 00:16:21.936 A:middle
+
+348
+00:16:20,556 --> 00:16:21,936
 small amount of the
 screen real estate.
 
-00:16:22.516 --> 00:16:24.386 A:middle
+
+349
+00:16:22,516 --> 00:16:24,386
 So it controls this
 navigation bar,
 
-00:16:24.676 --> 00:16:25.946 A:middle
+
+350
+00:16:24,676 --> 00:16:25,946
 setting the progress indication,
 
-00:16:25.986 --> 00:16:27.906 A:middle
+
+351
+00:16:25,986 --> 00:16:27,906
 and possibly some backward
 navigation controls.
 
-00:16:28.546 --> 00:16:31.056 A:middle
+
+352
+00:16:28,546 --> 00:16:31,056
 In addition, it gives the step
 view controller just enough
 
-00:16:31.056 --> 00:16:34.116 A:middle
+
+353
+00:16:31,056 --> 00:16:34,116
 information in order to
 show the forward navigation
 
-00:16:34.116 --> 00:16:34.846 A:middle
+
+354
+00:16:34,116 --> 00:16:34,846
 controls correctly.
 
-00:16:34.846 --> 00:16:37.636 A:middle
+
+355
+00:16:34,846 --> 00:16:37,636
 So that's the task
 view controller.
 
-00:16:38.296 --> 00:16:39.406 A:middle
+
+356
+00:16:38,296 --> 00:16:39,406
 But what about getting results?
 
-00:16:39.676 --> 00:16:41.906 A:middle
+
+357
+00:16:39,676 --> 00:16:41,906
 Well, let's look at how
 you get results next.
 
-00:16:43.096 --> 00:16:45.636 A:middle
+
+358
+00:16:43,096 --> 00:16:45,636
 So here's the did finish
 with reason delegate callback
 
-00:16:46.206 --> 00:16:49.376 A:middle
+
+359
+00:16:46,206 --> 00:16:49,376
 and your delegate will receive
 this when the task is complete.
 
-00:16:50.186 --> 00:16:52.676 A:middle
+
+360
+00:16:50,186 --> 00:16:52,676
 At that point you will get
 a reason why the task view
 
-00:16:52.676 --> 00:16:55.556 A:middle
+
+361
+00:16:52,676 --> 00:16:55,556
 controller finished and one
 reason it might finish is
 
-00:16:55.556 --> 00:16:57.696 A:middle
+
+362
+00:16:55,556 --> 00:16:57,696
 that the user chose to save
 their work in the middle of task
 
-00:16:58.146 --> 00:17:00.906 A:middle
+
+363
+00:16:58,146 --> 00:17:00,906
 and in that case you'll want
 to extract the restoration data
 
 
-
-00:16:58.146 --> 00:17:00.906 A:middle
-and in that case you'll want
-to extract the restoration data
-
-00:17:01.246 --> 00:17:04.665 A:middle
+364
+00:17:01,246 --> 00:17:04,665
 which is an opaque NSData
 property and then save it
 
-00:17:04.665 --> 00:17:06.056 A:middle
+
+365
+00:17:04,665 --> 00:17:06,056
 for later, when you want
 
-00:17:06.056 --> 00:17:08.586 A:middle
+
+366
+00:17:06,056 --> 00:17:08,586
 to resume the task you will
 instantiate a new task view
 
-00:17:08.586 --> 00:17:10.616 A:middle
+
+367
+00:17:08,586 --> 00:17:10,616
 controller and pass it
 that restoration data
 
-00:17:10.616 --> 00:17:11.586 A:middle
+
+368
+00:17:10,616 --> 00:17:11,586
 in a special initializer.
 
-00:17:12.455 --> 00:17:17.016 A:middle
+
+369
+00:17:12,455 --> 00:17:17,016
 But in the usual case, your task
 will have completed successfully
 
-00:17:17.316 --> 00:17:18.886 A:middle
+
+370
+00:17:17,316 --> 00:17:18,886
 and in that case you
 want to grab the result
 
-00:17:18.915 --> 00:17:21.316 A:middle
+
+371
+00:17:18,915 --> 00:17:21,316
 from the task view controller's
 result property and do something
 
-00:17:21.316 --> 00:17:23.846 A:middle
+
+372
+00:17:21,316 --> 00:17:23,846
 with it, like serialize
 it, send it to a server
 
-00:17:24.175 --> 00:17:27.136 A:middle
+
+373
+00:17:24,175 --> 00:17:27,136
 or perhaps analyze it
 in order to display some
 
-00:17:27.136 --> 00:17:28.316 A:middle
+
+374
+00:17:27,136 --> 00:17:28,316
 of the information to the user.
 
-00:17:29.296 --> 00:17:31.976 A:middle
+
+375
+00:17:29,296 --> 00:17:31,976
 Finally, you'll need to dismiss
 the task view controller,
 
-00:17:32.586 --> 00:17:34.576 A:middle
+
+376
+00:17:32,586 --> 00:17:34,576
 ecause you presented the
 task view controller,
 
-00:17:34.576 --> 00:17:36.606 A:middle
+
+377
+00:17:34,576 --> 00:17:36,606
 you are also responsible
 for dismissing it.
 
-00:17:38.156 --> 00:17:41.886 A:middle
+
+378
+00:17:38,156 --> 00:17:41,886
 Now you have seen a basic
 overview of ResearchKit and how
 
-00:17:41.886 --> 00:17:43.416 A:middle
+
+379
+00:17:41,886 --> 00:17:43,416
 to use itsthe task-based model.
 
-00:17:44.086 --> 00:17:45.846 A:middle
+
+380
+00:17:44,086 --> 00:17:45,846
 Now let's see how that
 fits in with the first
 
-00:17:45.846 --> 00:17:47.736 A:middle
+
+381
+00:17:45,846 --> 00:17:47,736
 of ResearchKit's modules,
 the surveys module.
 
-00:17:49.296 --> 00:17:51.886 A:middle
+
+382
+00:17:49,296 --> 00:17:51,886
 So surveys in ResearchKit
 are made up of three things:
 
-00:17:52.096 --> 00:17:55.196 A:middle
+
+383
+00:17:52,096 --> 00:17:55,196
 instructions, survey questions
 and multiquestion forms.
 
-00:17:55.806 --> 00:17:57.806 A:middle
+
+384
+00:17:55,806 --> 00:17:57,806
 And in turn, each of those
 corresponds to a step.
 
-00:17:58.396 --> 00:17:59.726 A:middle
+
+385
+00:17:58,396 --> 00:17:59,726
 So we have a survey question --
 
-00:17:59.726 --> 00:18:01.906 A:middle
+
+386
+00:17:59,726 --> 00:18:01,906
 I'm sorry, we have
 an instruction step,
 
 
-
-00:17:59.726 --> 00:18:01.906 A:middle
-I'm sorry, we have
-an instruction step,
-
-00:18:02.136 --> 00:18:04.076 A:middle
+387
+00:18:02,136 --> 00:18:04,076
 and a question step,
 and a form step.
 
-00:18:05.126 --> 00:18:07.076 A:middle
+
+388
+00:18:05,126 --> 00:18:07,076
 Now, instruction steps
 add very little on top
 
-00:18:07.076 --> 00:18:09.296 A:middle
+
+389
+00:18:07,076 --> 00:18:09,296
 of what we already have
 in the ORKStep base class
 
-00:18:09.676 --> 00:18:11.446 A:middle
+
+390
+00:18:09,676 --> 00:18:11,446
 but question steps and form
 stems have a little more
 
-00:18:11.446 --> 00:18:11.786 A:middle
+
+391
+00:18:11,446 --> 00:18:11,786
 to them.
 
-00:18:12.316 --> 00:18:13.606 A:middle
+
+392
+00:18:12,316 --> 00:18:13,606
 So we will look at that next.
 
-00:18:14.456 --> 00:18:16.716 A:middle
+
+393
+00:18:14,456 --> 00:18:16,716
 Here's a question step,
 and like any other step,
 
-00:18:16.716 --> 00:18:19.356 A:middle
+
+394
+00:18:16,716 --> 00:18:19,356
 it has an identifier which needs
 to be unique within the task
 
-00:18:20.216 --> 00:18:22.836 A:middle
+
+395
+00:18:20,216 --> 00:18:22,836
 and that question step
 also has an answer format.
 
-00:18:23.696 --> 00:18:26.416 A:middle
+
+396
+00:18:23,696 --> 00:18:26,416
 That answer format is a
 subclass of ORKAnswer format
 
-00:18:26.416 --> 00:18:27.856 A:middle
+
+397
+00:18:26,416 --> 00:18:27,856
 that corresponds to
 the particular type
 
-00:18:27.856 --> 00:18:29.016 A:middle
+
+398
+00:18:27,856 --> 00:18:29,016
 of step you want to present.
 
-00:18:29.826 --> 00:18:32.576 A:middle
+
+399
+00:18:29,826 --> 00:18:32,576
 So for the subclasses
 cover a wide gamut
 
-00:18:32.636 --> 00:18:34.166 A:middle
+
+400
+00:18:32,636 --> 00:18:34,166
 so we might have a
 Boolean answer format
 
-00:18:34.166 --> 00:18:36.546 A:middle
+
+401
+00:18:34,166 --> 00:18:36,546
 for a yes/no question, a
 text choice answer format,
 
-00:18:36.736 --> 00:18:38.846 A:middle
+
+402
+00:18:36,736 --> 00:18:38,846
 an image choice answer format
 to give an image scale,
 
-00:18:39.186 --> 00:18:41.586 A:middle
+
+403
+00:18:39,186 --> 00:18:41,586
 or date based and
 time interval formats
 
-00:18:41.846 --> 00:18:42.686 A:middle
+
+404
+00:18:41,846 --> 00:18:42,686
 and there's a wide variety.
 
-00:18:42.686 --> 00:18:43.476 A:middle
+
+405
+00:18:42,686 --> 00:18:43,476
 You can see them on GitHub.
 
-00:18:44.096 --> 00:18:46.496 A:middle
+
+406
+00:18:44,096 --> 00:18:46,496
 So that's question steps.
 
-00:18:46.496 --> 00:18:47.376 A:middle
+
+407
+00:18:46,496 --> 00:18:47,376
 What about form steps?
 
-00:18:47.946 --> 00:18:52.456 A:middle
+
+408
+00:18:47,946 --> 00:18:52,456
 So here's a form step, and the
 form step has an identifier,
 
-00:18:52.456 --> 00:18:54.326 A:middle
+
+409
+00:18:52,456 --> 00:18:54,326
 and it also has an
 array of form items.
 
-00:18:55.246 --> 00:18:56.436 A:middle
+
+410
+00:18:55,246 --> 00:18:56,436
 So here's the array
 of form items
 
-00:18:56.436 --> 00:18:58.716 A:middle
+
+411
+00:18:56,436 --> 00:18:58,716
 and each form item has
 an identifier which needs
 
-00:18:58.716 --> 00:19:01.056 A:middle
+
+412
+00:18:58,716 --> 00:19:01,056
 to be unique within the
 context of that form step.
 
 
-
-00:18:58.716 --> 00:19:01.056 A:middle
-to be unique within the
-context of that form step.
-
-00:19:01.566 --> 00:19:06.276 A:middle
+413
+00:19:01,566 --> 00:19:06,276
 Like a question step, a form
 item has an answer format
 
-00:19:06.686 --> 00:19:10.806 A:middle
+
+414
+00:19:06,686 --> 00:19:10,806
 and ResearchKit supports
 all the same answer formats
 
-00:19:10.806 --> 00:19:13.826 A:middle
+
+415
+00:19:10,806 --> 00:19:13,826
 in form items that are
 supported in questions.
 
-00:19:14.046 --> 00:19:16.906 A:middle
+
+416
+00:19:14,046 --> 00:19:16,906
 So, for example, we might mix
 a text choice answer format
 
-00:19:17.486 --> 00:19:19.756 A:middle
+
+417
+00:19:17,486 --> 00:19:19,756
 with a numeric answer
 format in the same form.
 
-00:19:19.836 --> 00:19:24.766 A:middle
+
+418
+00:19:19,836 --> 00:19:24,766
 So that's the object model
 for the model objects
 
-00:19:24.826 --> 00:19:26.696 A:middle
+
+419
+00:19:24,826 --> 00:19:26,696
 for ResearchKit surveys.
 
-00:19:27.516 --> 00:19:28.666 A:middle
+
+420
+00:19:27,516 --> 00:19:28,666
 Now how do you get the results?
 
-00:19:29.086 --> 00:19:32.636 A:middle
+
+421
+00:19:29,086 --> 00:19:32,636
 So here's an ordered
 task with an identifier
 
-00:19:32.636 --> 00:19:33.436 A:middle
+
+422
+00:19:32,636 --> 00:19:33,436
 and an array of steps.
 
-00:19:34.526 --> 00:19:37.916 A:middle
+
+423
+00:19:34,526 --> 00:19:37,916
 And when the task completes
 you will get a task result.
 
-00:19:38.336 --> 00:19:41.616 A:middle
+
+424
+00:19:38,336 --> 00:19:41,616
 Again, with an identifier which
 matches and an array of results.
 
-00:19:42.186 --> 00:19:45.516 A:middle
+
+425
+00:19:42,186 --> 00:19:45,516
 If this ordered task started
 with an instruction step,
 
-00:19:46.146 --> 00:19:47.986 A:middle
+
+426
+00:19:46,146 --> 00:19:47,986
 then that instruction step
 would have an identifier
 
-00:19:48.046 --> 00:19:51.076 A:middle
+
+427
+00:19:48,046 --> 00:19:51,076
 and when the task completes
 you have a step result
 
-00:19:51.316 --> 00:19:52.446 A:middle
+
+428
+00:19:51,316 --> 00:19:52,446
 with a corresponding identifier.
 
-00:19:53.336 --> 00:19:56.316 A:middle
+
+429
+00:19:53,336 --> 00:19:56,316
 The results property of this
 step result will be empty,
 
-00:19:56.316 --> 00:19:58.206 A:middle
+
+430
+00:19:56,316 --> 00:19:58,206
 however because there's no
 data being collected during
 
-00:19:58.206 --> 00:19:58.906 A:middle
+
+431
+00:19:58,206 --> 00:19:58,906
 that instruction step.
 
-00:19:58.906 --> 00:20:00.376 A:middle
+
+432
+00:19:58,906 --> 00:20:00,376
 All we did is show
 them the instruction.
 
 
-
-00:19:58.906 --> 00:20:00.376 A:middle
-All we did is show
-them the instruction.
-
-00:20:01.676 --> 00:20:03.916 A:middle
+433
+00:20:01,676 --> 00:20:03,916
 This object does have some
 useful properties, though,
 
-00:20:04.086 --> 00:20:06.336 A:middle
+
+434
+00:20:04,086 --> 00:20:06,336
 like the start date and the
 end date to show you how long
 
-00:20:06.336 --> 00:20:09.916 A:middle
+
+435
+00:20:06,336 --> 00:20:09,916
 that instruction
 was on the screen.
 
-00:20:10.096 --> 00:20:11.576 A:middle
+
+436
+00:20:10,096 --> 00:20:11,576
 In addition, you might
 have a question step.
 
-00:20:11.576 --> 00:20:15.696 A:middle
+
+437
+00:20:11,576 --> 00:20:15,696
 And that question step
 will have an identifier
 
-00:20:15.696 --> 00:20:17.386 A:middle
+
+438
+00:20:15,696 --> 00:20:17,386
 that matches its
 corresponding step result.
 
-00:20:17.936 --> 00:20:22.606 A:middle
+
+439
+00:20:17,936 --> 00:20:22,606
 And then unlike the step result
 for the instruction step,
 
-00:20:22.746 --> 00:20:24.056 A:middle
+
+440
+00:20:22,746 --> 00:20:24,056
 this will actually
 have a child result
 
-00:20:24.446 --> 00:20:26.636 A:middle
+
+441
+00:20:24,446 --> 00:20:26,636
 which carries the actual
 answer corresponding
 
-00:20:26.636 --> 00:20:27.436 A:middle
+
+442
+00:20:26,636 --> 00:20:27,436
 to that answer format.
 
-00:20:29.766 --> 00:20:31.206 A:middle
+
+443
+00:20:29,766 --> 00:20:31,206
 Results from forms
 work very similarly,
 
-00:20:31.586 --> 00:20:33.676 A:middle
+
+444
+00:20:31,586 --> 00:20:33,676
 so here's an ordered task
 containing a single form step,
 
-00:20:34.486 --> 00:20:37.406 A:middle
+
+445
+00:20:34,486 --> 00:20:37,406
 with two form items and again
 these identifiers are unique
 
-00:20:37.676 --> 00:20:40.276 A:middle
+
+446
+00:20:37,676 --> 00:20:40,276
 within the form step.
 
-00:20:40.466 --> 00:20:42.036 A:middle
+
+447
+00:20:40,466 --> 00:20:42,036
 And when you get
 the results back,
 
-00:20:42.466 --> 00:20:44.876 A:middle
+
+448
+00:20:42,466 --> 00:20:44,876
 you will have a task result
 with the identifier that matches
 
-00:20:45.876 --> 00:20:48.216 A:middle
+
+449
+00:20:45,876 --> 00:20:48,216
 and you will have a step
 result with identifier
 
-00:20:48.216 --> 00:20:49.166 A:middle
+
+450
+00:20:48,216 --> 00:20:49,166
 that matches that form step.
 
-00:20:50.506 --> 00:20:53.156 A:middle
+
+451
+00:20:50,506 --> 00:20:53,156
 And then you will have
 corresponding child question
 
-00:20:53.156 --> 00:20:55.736 A:middle
+
+452
+00:20:53,156 --> 00:20:55,736
 results, this time you will have
 an array of question results one
 
-00:20:55.736 --> 00:20:56.546 A:middle
+
+453
+00:20:55,736 --> 00:20:56,546
 for each form item
 
-00:20:56.916 --> 00:21:00.006 A:middle
+
+454
+00:20:56,916 --> 00:21:00,006
 with identifiers matching
 the corresponding form items.
 
 
-
-00:20:56.916 --> 00:21:00.006 A:middle
-with identifiers matching
-the corresponding form items.
-
-00:21:02.626 --> 00:21:05.796 A:middle
+455
+00:21:02,626 --> 00:21:05,796
 So that's the object
 model in ResearchKit
 
-00:21:05.796 --> 00:21:08.186 A:middle
+
+456
+00:21:05,796 --> 00:21:08,186
 and how you can use survey,
 use it to present surveys.
 
-00:21:09.576 --> 00:21:11.136 A:middle
+
+457
+00:21:09,576 --> 00:21:11,136
 Now I will show you a
 brief demo in Xcode.
 
-00:21:11.716 --> 00:21:21.816 A:middle
+
+458
+00:21:11,716 --> 00:21:21,816
 So here we have an example app,
 which displays the table view
 
-00:21:21.816 --> 00:21:25.036 A:middle
+
+459
+00:21:21,816 --> 00:21:25,036
 with a list of the available
 tasks and here I'm going
 
-00:21:25.036 --> 00:21:27.076 A:middle
+
+460
+00:21:25,036 --> 00:21:27,076
 to be putting together a
 survey task to show you some
 
-00:21:27.076 --> 00:21:30.936 A:middle
+
+461
+00:21:27,076 --> 00:21:30,936
 of the features that I
 have just been through.
 
-00:21:30.986 --> 00:21:33.686 A:middle
+
+462
+00:21:30,986 --> 00:21:33,686
 Now, the table view
 controller here,
 
-00:21:34.316 --> 00:21:43.406 A:middle
+
+463
+00:21:34,316 --> 00:21:43,406
 the table view controller here
 has a -- when you select a row,
 
-00:21:43.636 --> 00:21:46.246 A:middle
+
+464
+00:21:43,636 --> 00:21:46,246
 it will instantiate a task
 view controller and display
 
-00:21:46.246 --> 00:21:47.716 A:middle
+
+465
+00:21:46,246 --> 00:21:47,716
 that particular task,
 setting the delegate
 
-00:21:47.716 --> 00:21:50.296 A:middle
+
+466
+00:21:47,716 --> 00:21:50,296
 and the output directory
 and when the task completes,
 
-00:21:50.926 --> 00:21:55.646 A:middle
+
+467
+00:21:50,926 --> 00:21:55,646
 we'll display -- we will
 dismiss the task view controller
 
-00:21:55.646 --> 00:21:56.726 A:middle
+
+468
+00:21:55,646 --> 00:21:56,726
 in the did finish callback.
 
-00:21:58.766 --> 00:22:00.736 A:middle
+
+469
+00:21:58,766 --> 00:22:00,736
 Now, switching over to
 the task enumeration
 
 
-
-00:21:58.766 --> 00:22:00.736 A:middle
-Now, switching over to
-the task enumeration
-
-00:22:00.736 --> 00:22:02.806 A:middle
+470
+00:22:00,736 --> 00:22:02,806
 which holds the actual
 tasks you'll see
 
-00:22:02.806 --> 00:22:05.396 A:middle
+
+471
+00:22:02,806 --> 00:22:05,396
 that I defined all cases to
 include just the survey case
 
-00:22:05.816 --> 00:22:08.656 A:middle
+
+472
+00:22:05,816 --> 00:22:08,656
 and the represented task
 is currently an empty task
 
-00:22:08.656 --> 00:22:10.776 A:middle
+
+473
+00:22:08,656 --> 00:22:10,776
 but I will now define
 it to be a survey task,
 
-00:22:11.336 --> 00:22:13.586 A:middle
+
+474
+00:22:11,336 --> 00:22:13,586
 which I will create next.
 
-00:22:15.456 --> 00:22:20.756 A:middle
+
+475
+00:22:15,456 --> 00:22:20,756
 So to create my survey task, I
 will define a computed property,
 
-00:22:20.876 --> 00:22:23.926 A:middle
+
+476
+00:22:20,876 --> 00:22:23,926
 survey task in which I
 create an ordered task
 
-00:22:23.926 --> 00:22:26.386 A:middle
+
+477
+00:22:23,926 --> 00:22:26,386
 with an identifier survey
 and attach an array of steps.
 
-00:22:26.716 --> 00:22:27.976 A:middle
+
+478
+00:22:26,716 --> 00:22:27,976
 Right now this array is empty.
 
-00:22:28.316 --> 00:22:29.416 A:middle
+
+479
+00:22:28,316 --> 00:22:29,416
 So I will add an
 instruction step.
 
-00:22:30.186 --> 00:22:32.106 A:middle
+
+480
+00:22:30,186 --> 00:22:32,106
 Now this instruction
 step has an identifier.
 
-00:22:32.286 --> 00:22:33.726 A:middle
+
+481
+00:22:32,286 --> 00:22:33,726
 Here I'm just generating
 the identifiers
 
-00:22:33.726 --> 00:22:36.916 A:middle
+
+482
+00:22:33,726 --> 00:22:36,916
 because I know they will
 be unique within this task.
 
-00:22:36.916 --> 00:22:40.026 A:middle
+
+483
+00:22:36,916 --> 00:22:40,026
 I set a title and text,
 
-00:22:40.026 --> 00:22:41.336 A:middle
+
+484
+00:22:40,026 --> 00:22:41,336
 which will be displayed
 on that screen.
 
-00:22:41.446 --> 00:22:42.416 A:middle
+
+485
+00:22:41,446 --> 00:22:42,416
 And you'll notice
 that I've marked these
 
-00:22:42.416 --> 00:22:43.306 A:middle
+
+486
+00:22:42,416 --> 00:22:43,306
 as localized strings.
 
-00:22:43.306 --> 00:22:44.846 A:middle
+
+487
+00:22:43,306 --> 00:22:44,846
 And that's because the content
 
-00:22:44.846 --> 00:22:47.076 A:middle
+
+488
+00:22:44,846 --> 00:22:47,076
 of these model objects is
 really localized content.
 
-00:22:47.076 --> 00:22:49.326 A:middle
+
+489
+00:22:47,076 --> 00:22:49,326
 So if you're going to use
 your app in multiple locales,
 
-00:22:49.626 --> 00:22:52.656 A:middle
+
+490
+00:22:49,626 --> 00:22:52,656
 then you'll need to
 localize this content as well
 
-00:22:52.656 --> 00:22:55.166 A:middle
+
+491
+00:22:52,656 --> 00:22:55,166
 as other things you might
 localize in your app.
 
-00:22:55.586 --> 00:22:58.676 A:middle
+
+492
+00:22:55,586 --> 00:22:58,676
 Then I might add a question step
 
-00:22:59.316 --> 00:23:02.016 A:middle
+
+493
+00:22:59,316 --> 00:23:02,016
 and this question step
 is a yes/no question.
 
 
-
-00:22:59.316 --> 00:23:02.016 A:middle
-and this question step
-is a yes/no question.
-
-00:23:02.016 --> 00:23:03.246 A:middle
+494
+00:23:02,016 --> 00:23:03,246
 So it's got a boolean
 answer format,
 
-00:23:03.686 --> 00:23:06.696 A:middle
+
+495
+00:23:03,686 --> 00:23:06,696
 it's got an identifier set and
 a title, and the question is:
 
-00:23:06.946 --> 00:23:08.956 A:middle
+
+496
+00:23:06,946 --> 00:23:08,956
 During a typical day, does
 your health now limit you
 
-00:23:08.956 --> 00:23:10.386 A:middle
+
+497
+00:23:08,956 --> 00:23:10,386
 when climbing several
 flights of stairs?
 
-00:23:11.006 --> 00:23:13.076 A:middle
+
+498
+00:23:11,006 --> 00:23:13,076
 This is a fairly typical
 question that you might see
 
-00:23:13.126 --> 00:23:14.156 A:middle
+
+499
+00:23:13,126 --> 00:23:14,156
 in a general health survey.
 
-00:23:14.986 --> 00:23:17.456 A:middle
+
+500
+00:23:14,986 --> 00:23:17,456
 Since we've been talking about
 forms, I will add a form step.
 
-00:23:17.456 --> 00:23:21.516 A:middle
+
+501
+00:23:17,456 --> 00:23:21,516
 So here's a form with its
 identifier, and a title
 
-00:23:21.516 --> 00:23:24.066 A:middle
+
+502
+00:23:21,516 --> 00:23:24,066
 and a general question: Over the
 last two weeks how often have
 
-00:23:24.066 --> 00:23:25.936 A:middle
+
+503
+00:23:24,066 --> 00:23:25,936
 you been bothered by any
 of the following problems?
 
-00:23:26.936 --> 00:23:29.546 A:middle
+
+504
+00:23:26,936 --> 00:23:29,546
 Now we are listing
 problems and each one
 
-00:23:29.546 --> 00:23:30.876 A:middle
+
+505
+00:23:29,546 --> 00:23:30,876
 of those problems
 will be a form item.
 
-00:23:31.566 --> 00:23:36.226 A:middle
+
+506
+00:23:31,566 --> 00:23:36,226
 So each of these problems
 will be a question
 
-00:23:36.396 --> 00:23:38.766 A:middle
+
+507
+00:23:36,396 --> 00:23:38,766
 that is a text choice
 answer format.
 
-00:23:38.766 --> 00:23:39.986 A:middle
+
+508
+00:23:38,766 --> 00:23:39,986
 So it's a multiple
 choice question
 
-00:23:40.336 --> 00:23:41.916 A:middle
+
+509
+00:23:40,336 --> 00:23:41,916
 where you can select
 only one answer.
 
-00:23:42.556 --> 00:23:45.456 A:middle
+
+510
+00:23:42,556 --> 00:23:45,456
 And you can see the answers I
 have given here are not at all,
 
-00:23:45.456 --> 00:23:47.736 A:middle
+
+511
+00:23:45,456 --> 00:23:47,736
 several days, more than half
 the days and nearly every day
 
-00:23:48.156 --> 00:23:50.156 A:middle
+
+512
+00:23:48,156 --> 00:23:50,156
 and they have corresponding
 values as well
 
-00:23:50.156 --> 00:23:51.856 A:middle
+
+513
+00:23:50,156 --> 00:23:51,856
 and these are the values
 that will be encoded
 
-00:23:51.856 --> 00:23:55.796 A:middle
+
+514
+00:23:51,856 --> 00:23:55,796
 into the result object so that
 you can analyze the result later
 
-00:23:55.796 --> 00:23:58.526 A:middle
+
+515
+00:23:55,796 --> 00:23:58,526
 and these could equally be any
 value that's a property list
 
-00:23:58.526 --> 00:24:00.786 A:middle
+
+516
+00:23:58,526 --> 00:24:00,786
 type, it could be an integer
 -- an s-number, rather,
 
 
-
-00:23:58.526 --> 00:24:00.786 A:middle
-type, it could be an integer
--- an s-number, rather,
-
-00:24:01.106 --> 00:24:04.226 A:middle
+517
+00:24:01,106 --> 00:24:04,226
 or it could be a
 string like this.
 
-00:24:04.416 --> 00:24:06.296 A:middle
+
+518
+00:24:04,416 --> 00:24:06,296
 So we have got this
 interest item,
 
-00:24:06.686 --> 00:24:08.526 A:middle
+
+519
+00:24:06,686 --> 00:24:08,526
 one problem I might have is
 little interest or pleasure
 
-00:24:08.526 --> 00:24:10.346 A:middle
+
+520
+00:24:08,526 --> 00:24:10,346
 in doing things and we will
 add a couple more items
 
-00:24:11.206 --> 00:24:12.766 A:middle
+
+521
+00:24:11,206 --> 00:24:12,766
 to round out our form.
 
-00:24:13.336 --> 00:24:18.756 A:middle
+
+522
+00:24:13,336 --> 00:24:18,756
 So having set that up,
 one more thing I want
 
-00:24:18.756 --> 00:24:20.746 A:middle
+
+523
+00:24:18,756 --> 00:24:20,746
 to do is show you the
 results and to do that,
 
-00:24:20.956 --> 00:24:23.996 A:middle
+
+524
+00:24:20,956 --> 00:24:23,996
 I could have built you
 some UI so we could look
 
-00:24:23.996 --> 00:24:28.706 A:middle
+
+525
+00:24:23,996 --> 00:24:28,706
 through some results in the
 app itself, and we actually do
 
-00:24:28.706 --> 00:24:32.006 A:middle
+
+526
+00:24:28,706 --> 00:24:32,006
 that in the ORKCatalog
 sample app on GitHub
 
-00:24:32.356 --> 00:24:34.626 A:middle
+
+527
+00:24:32,356 --> 00:24:34,626
 but today I will just
 serialize to JSON
 
-00:24:34.676 --> 00:24:36.956 A:middle
+
+528
+00:24:34,676 --> 00:24:36,956
 and show you what the JSON
 output might look like.
 
-00:24:37.626 --> 00:24:40.276 A:middle
+
+529
+00:24:37,626 --> 00:24:40,276
 So to do that, we'll
 go back here
 
-00:24:40.276 --> 00:24:42.556 A:middle
+
+530
+00:24:40,276 --> 00:24:42,556
 to the task view controller
 delegate DidFinishWithReason --
 
-00:24:43.646 --> 00:24:44.846 A:middle
+
+531
+00:24:43,646 --> 00:24:44,846
 oops, it wanted one more step.
 
-00:24:44.996 --> 00:24:47.976 A:middle
+
+532
+00:24:44,996 --> 00:24:47,976
 I'll just move that over.
 
-00:24:47.976 --> 00:24:49.606 A:middle
+
+533
+00:24:47,976 --> 00:24:49,606
 I'll just add the
 conclusion step to the task.
 
-00:24:49.606 --> 00:24:50.846 A:middle
+
+534
+00:24:49,606 --> 00:24:50,846
 I forgot to do that.
 
-00:24:52.326 --> 00:24:53.566 A:middle
+
+535
+00:24:52,326 --> 00:24:53,566
 So there's our conclusion step.
 
-00:24:53.906 --> 00:24:54.776 A:middle
+
+536
+00:24:53,906 --> 00:24:54,776
 So switching back here.
 
-00:24:54.776 --> 00:24:56.566 A:middle
+
+537
+00:24:54,776 --> 00:24:56,566
 I will be switching
 on the reason.
 
-00:24:57.526 --> 00:24:59.946 A:middle
+
+538
+00:24:57,526 --> 00:24:59,946
 So in the case that the task is
 actually completed successfully,
 
 
-
-00:25:00.146 --> 00:25:02.096 A:middle
+539
+00:25:00,146 --> 00:25:02,096
 I will extract the result
 from the task view controller.
 
-00:25:02.096 --> 00:25:04.476 A:middle
+
+540
+00:25:02,096 --> 00:25:04,476
 Then I will want to
 serialize that to JSON
 
-00:25:04.906 --> 00:25:08.736 A:middle
+
+541
+00:25:04,906 --> 00:25:08,736
 and the ResearchKit framework
 itself does not include any JSON
 
-00:25:08.736 --> 00:25:11.116 A:middle
+
+542
+00:25:08,736 --> 00:25:11,116
 serialization, we did
 include something in one
 
-00:25:11.116 --> 00:25:12.776 A:middle
+
+543
+00:25:11,116 --> 00:25:12,776
 of our test apps
 in order to prove
 
-00:25:12.776 --> 00:25:15.176 A:middle
+
+544
+00:25:12,776 --> 00:25:15,176
 that the JSON serialization
 would work for a real app
 
-00:25:15.666 --> 00:25:19.566 A:middle
+
+545
+00:25:15,666 --> 00:25:19,566
 and so I've included that here
 now so I can demo it to you.
 
-00:25:19.756 --> 00:25:22.586 A:middle
+
+546
+00:25:19,756 --> 00:25:22,586
 So I will run this and
 show you what surveys look
 
-00:25:22.586 --> 00:25:23.286 A:middle
+
+547
+00:25:22,586 --> 00:25:23,286
 like in ResearchKit.
 
-00:25:31.776 --> 00:25:34.546 A:middle
+
+548
+00:25:31,776 --> 00:25:34,546
 So when I start my task,
 I'm presented immediately
 
-00:25:34.546 --> 00:25:35.476 A:middle
+
+549
+00:25:34,546 --> 00:25:35,476
 with this instruction step.
 
-00:25:35.896 --> 00:25:37.926 A:middle
+
+550
+00:25:35,896 --> 00:25:37,926
 It has some indication
 of progress.
 
-00:25:38.136 --> 00:25:39.386 A:middle
+
+551
+00:25:38,136 --> 00:25:39,386
 I can cancel out of the task.
 
-00:25:39.556 --> 00:25:42.836 A:middle
+
+552
+00:25:39,556 --> 00:25:42,836
 I've got my title and text and
 I've got my navigation controls.
 
-00:25:43.206 --> 00:25:45.246 A:middle
+
+553
+00:25:43,206 --> 00:25:45,246
 And you can see that it's been
 prepopulated to get started
 
-00:25:45.246 --> 00:25:46.996 A:middle
+
+554
+00:25:45,246 --> 00:25:46,996
 and that's automatic
 from the framework set
 
-00:25:46.996 --> 00:25:47.976 A:middle
+
+555
+00:25:46,996 --> 00:25:47,976
 up from the task
 view controller.
 
-00:25:48.946 --> 00:25:50.446 A:middle
+
+556
+00:25:48,946 --> 00:25:50,446
 When I come in I get
 my boolean question,
 
-00:25:50.646 --> 00:25:53.046 A:middle
+
+557
+00:25:50,646 --> 00:25:53,046
 I can choose my answer, If I
 choose to skip this question,
 
-00:25:53.216 --> 00:25:54.306 A:middle
+
+558
+00:25:53,216 --> 00:25:54,306
 the answer I entered
 gets cleared.
 
-00:25:54.306 --> 00:25:55.576 A:middle
+
+559
+00:25:54,306 --> 00:25:55,576
 So if I come back,
 the answer is gone
 
-00:25:56.206 --> 00:25:58.106 A:middle
+
+560
+00:25:56,206 --> 00:25:58,106
 and I can answer something
 different when I come back.
 
-00:25:59.156 --> 00:26:00.876 A:middle
+
+561
+00:25:59,156 --> 00:26:00,876
 So I'll just go through,
 and give some answers,
 
 
-
-00:25:59.156 --> 00:26:00.876 A:middle
-So I'll just go through,
-and give some answers,
-
-00:26:01.296 --> 00:26:03.596 A:middle
+562
+00:26:01,296 --> 00:26:03,596
 and maybe I don't answer all the
 questions and I can continue.
 
-00:26:03.596 --> 00:26:05.356 A:middle
+
+563
+00:26:03,596 --> 00:26:05,356
 And finally, I'm done.
 
-00:26:06.096 --> 00:26:10.576 A:middle
+
+564
+00:26:06,096 --> 00:26:10,576
 So let's take a look
 at the results.
 
-00:26:10.576 --> 00:26:13.556 A:middle
+
+565
+00:26:10,576 --> 00:26:13,556
 So as I described before,
 we've got a task result here,
 
-00:26:13.626 --> 00:26:14.456 A:middle
+
+566
+00:26:13,626 --> 00:26:14,456
 and it's got a start date
 
-00:26:14.456 --> 00:26:16.346 A:middle
+
+567
+00:26:14,456 --> 00:26:16,346
 and an end date showing how
 long we were actually looking
 
-00:26:16.346 --> 00:26:16.876 A:middle
+
+568
+00:26:16,346 --> 00:26:16,876
 at that survey.
 
-00:26:17.486 --> 00:26:19.736 A:middle
+
+569
+00:26:17,486 --> 00:26:19,736
 We've got an output
 directory a task run UUID
 
-00:26:19.736 --> 00:26:21.396 A:middle
+
+570
+00:26:19,736 --> 00:26:21,396
 that comes straight through
 from the task view controller
 
-00:26:21.756 --> 00:26:25.336 A:middle
+
+571
+00:26:21,756 --> 00:26:25,336
 and we've got the identifier
 that came from the task.
 
-00:26:25.496 --> 00:26:27.956 A:middle
+
+572
+00:26:25,496 --> 00:26:27,956
 The child results array contains
 an array of step results.
 
-00:26:28.186 --> 00:26:29.816 A:middle
+
+573
+00:26:28,186 --> 00:26:29,816
 So we have it instruction
 step result
 
-00:26:29.816 --> 00:26:32.416 A:middle
+
+574
+00:26:29,816 --> 00:26:32,416
 for that initial instruction
 step that has no children
 
-00:26:32.636 --> 00:26:34.586 A:middle
+
+575
+00:26:32,636 --> 00:26:34,586
 because we collected no
 additional information
 
-00:26:34.586 --> 00:26:35.076 A:middle
+
+576
+00:26:34,586 --> 00:26:35,076
 from the user.
 
-00:26:36.396 --> 00:26:39.916 A:middle
+
+577
+00:26:36,396 --> 00:26:39,916
 In addition, we have
 a question step result
 
-00:26:39.916 --> 00:26:42.246 A:middle
+
+578
+00:26:39,916 --> 00:26:42,246
 which contains a Boolean
 question result that contains
 
-00:26:42.246 --> 00:26:43.676 A:middle
+
+579
+00:26:42,246 --> 00:26:43,676
 in the actual answer
 to my question.
 
-00:26:43.676 --> 00:26:44.806 A:middle
+
+580
+00:26:43,676 --> 00:26:44,806
 So in this case, I answered yes.
 
-00:26:45.036 --> 00:26:50.066 A:middle
+
+581
+00:26:45,036 --> 00:26:50,066
 And then from the form step
 here, we have a form step result
 
-00:26:50.196 --> 00:26:53.096 A:middle
+
+582
+00:26:50,196 --> 00:26:53,096
 with the feeling form
 identifier and then each
 
-00:26:53.096 --> 00:26:54.236 A:middle
+
+583
+00:26:53,096 --> 00:26:54,236
 of the answers I entered.
 
-00:26:54.236 --> 00:26:55.536 A:middle
+
+584
+00:26:54,236 --> 00:26:55,536
 I answered the first
 two questions
 
-00:26:55.836 --> 00:26:59.836 A:middle
+
+585
+00:26:55,836 --> 00:26:59,836
 and the final form item in
 that form I didn't answer
 
-00:26:59.836 --> 00:27:02.096 A:middle
+
+586
+00:26:59,836 --> 00:27:02,096
 and you can see there's no
 actual answer property here
 
 
-
-00:26:59.836 --> 00:27:02.096 A:middle
-and you can see there's no
-actual answer property here
-
-00:27:03.566 --> 00:27:05.016 A:middle
+587
+00:27:03,566 --> 00:27:05,016
 and finally we have
 another step result
 
-00:27:05.016 --> 00:27:06.236 A:middle
+
+588
+00:27:05,016 --> 00:27:06,236
 for that closing
 instruction step.
 
-00:27:06.736 --> 00:27:10.726 A:middle
+
+589
+00:27:06,736 --> 00:27:10,726
 Now I will show you how easy it
 is to modify the answer formats
 
-00:27:10.726 --> 00:27:12.416 A:middle
+
+590
+00:27:10,726 --> 00:27:12,416
 if you need to change
 things around in your survey
 
-00:27:12.416 --> 00:27:16.526 A:middle
+
+591
+00:27:12,416 --> 00:27:16,526
 as you develop your app.
 
-00:27:16.796 --> 00:27:18.536 A:middle
+
+592
+00:27:16,796 --> 00:27:18,536
 One thing I might want to
 do is change is my boolean
 
-00:27:18.536 --> 00:27:19.156 A:middle
+
+593
+00:27:18,536 --> 00:27:19,156
 answer format.
 
-00:27:19.536 --> 00:27:21.486 A:middle
+
+594
+00:27:19,536 --> 00:27:21,486
 Maybe yes isn't enough
 information.
 
-00:27:21.486 --> 00:27:23.426 A:middle
+
+595
+00:27:21,486 --> 00:27:23,426
 Maybe my health is limited a lot
 
-00:27:23.426 --> 00:27:25.736 A:middle
+
+596
+00:27:23,426 --> 00:27:25,736
 or maybe it's limited
 only a little and so to do
 
-00:27:25.736 --> 00:27:27.656 A:middle
+
+597
+00:27:25,736 --> 00:27:27,656
 that I can switch to a
 text choice answer format
 
-00:27:28.066 --> 00:27:30.966 A:middle
+
+598
+00:27:28,066 --> 00:27:30,966
 and provide some detailed text
 on each choice which allows me
 
-00:27:30.966 --> 00:27:34.136 A:middle
+
+599
+00:27:30,966 --> 00:27:34,136
 to qualify the overall answers,
 so I can have yes, limited a lot
 
-00:27:34.136 --> 00:27:37.446 A:middle
+
+600
+00:27:34,136 --> 00:27:37,446
 or yes, limited a little.
 
-00:27:37.446 --> 00:27:41.186 A:middle
+
+601
+00:27:37,446 --> 00:27:41,186
 One other thing you'll notice
 here is the exclusive setting,
 
-00:27:41.536 --> 00:27:44.186 A:middle
+
+602
+00:27:41,536 --> 00:27:44,186
 which if this were a multiple
 choice question would allow you
 
-00:27:44.186 --> 00:27:46.756 A:middle
+
+603
+00:27:44,186 --> 00:27:46,756
 to set one or more choices
 as being an exclusive choice.
 
-00:27:46.756 --> 00:27:48.636 A:middle
+
+604
+00:27:46,756 --> 00:27:48,636
 If you selected that choice
 all the other choices would
 
-00:27:48.636 --> 00:27:49.246 A:middle
+
+605
+00:27:48,636 --> 00:27:49,246
 be deselected.
 
-00:27:49.596 --> 00:27:52.346 A:middle
+
+606
+00:27:49,596 --> 00:27:52,346
 I might also want to
 change my form step.
 
-00:27:52.746 --> 00:27:55.536 A:middle
+
+607
+00:27:52,746 --> 00:27:55,536
 So as you saw, that was a very
 long, vertically scrolling form
 
-00:27:55.536 --> 00:27:56.966 A:middle
+
+608
+00:27:55,536 --> 00:27:56,966
 and maybe that's not
 what I want in my app.
 
-00:27:57.366 --> 00:27:59.876 A:middle
+
+609
+00:27:57,366 --> 00:27:59,876
 Perhaps I'd like to have
 some horizontal slidders
 
-00:27:59.876 --> 00:28:02.496 A:middle
+
+610
+00:27:59,876 --> 00:28:02,496
 that I could use to display
 more or less the same content,
 
 
-
-00:27:59.876 --> 00:28:02.496 A:middle
-that I could use to display
-more or less the same content,
-
-00:28:02.816 --> 00:28:06.156 A:middle
+611
+00:28:02,816 --> 00:28:06,156
 get the same answer, but in
 a different presentation.
 
-00:28:06.346 --> 00:28:09.166 A:middle
+
+612
+00:28:06,346 --> 00:28:09,166
 I can do that very easily in
 ResearchKit just by switching
 
-00:28:09.166 --> 00:28:11.926 A:middle
+
+613
+00:28:09,166 --> 00:28:11,926
 to the ORKScale format and
 specifying descriptions
 
-00:28:12.226 --> 00:28:13.856 A:middle
+
+614
+00:28:12,226 --> 00:28:13,856
 for the minimum and
 the maximum values.
 
-00:28:14.696 --> 00:28:17.646 A:middle
+
+615
+00:28:14,696 --> 00:28:17,646
 So I will run that again and
 show what you that looks like.
 
-00:28:21.216 --> 00:28:22.466 A:middle
+
+616
+00:28:21,216 --> 00:28:22,466
 Here's our survey again.
 
-00:28:22.956 --> 00:28:23.586 A:middle
+
+617
+00:28:22,956 --> 00:28:23,586
 Very similar.
 
-00:28:23.986 --> 00:28:25.636 A:middle
+
+618
+00:28:23,986 --> 00:28:25,636
 And now we have got some
 different options here
 
-00:28:25.636 --> 00:28:26.156 A:middle
+
+619
+00:28:25,636 --> 00:28:26,156
 in this step.
 
-00:28:27.156 --> 00:28:32.016 A:middle
+
+620
+00:28:27,156 --> 00:28:32,016
 And what used to be multiple
 choice questions are now sliders
 
-00:28:32.016 --> 00:28:33.296 A:middle
+
+621
+00:28:32,016 --> 00:28:33,296
 that I can use to
 adjust the value.
 
-00:28:35.536 --> 00:28:37.576 A:middle
+
+622
+00:28:35,536 --> 00:28:37,576
 When I come through and
 look at the results,
 
-00:28:38.196 --> 00:28:41.426 A:middle
+
+623
+00:28:38,196 --> 00:28:41,426
 the results are very similar
 in structure but the types
 
-00:28:41.426 --> 00:28:42.356 A:middle
+
+624
+00:28:41,426 --> 00:28:42,356
 of results are different,
 
-00:28:42.676 --> 00:28:44.856 A:middle
+
+625
+00:28:42,676 --> 00:28:44,856
 because the corresponding
 answer formats are different.
 
-00:28:44.916 --> 00:28:46.996 A:middle
+
+626
+00:28:44,916 --> 00:28:46,996
 So your interpretation of those
 results would need to change.
 
-00:28:47.436 --> 00:28:49.696 A:middle
+
+627
+00:28:47,436 --> 00:28:49,696
 So that's surveys
 in ResearchKit.
 
-00:28:51.516 --> 00:28:57.156 A:middle
+
+628
+00:28:51,516 --> 00:28:57,156
 [Applause]
 
-00:28:57.656 --> 00:28:59.326 A:middle
+
+629
+00:28:57,656 --> 00:28:59,326
 So the second module
 in informed consent --
 
-00:28:59.526 --> 00:29:02.006 A:middle
+
+630
+00:28:59,526 --> 00:29:02,006
 the second module in
 ResearchKit is informed consent.
 
 
-
-00:28:59.526 --> 00:29:02.006 A:middle
-the second module in
-ResearchKit is informed consent.
-
-00:29:03.366 --> 00:29:04.546 A:middle
+631
+00:29:03,366 --> 00:29:04,546
 So we will look at that now.
 
-00:29:04.876 --> 00:29:08.946 A:middle
+
+632
+00:29:04,876 --> 00:29:08,946
 So what is informed consent?
 
-00:29:10.486 --> 00:29:12.376 A:middle
+
+633
+00:29:10,486 --> 00:29:12,376
 Informed consent is
 the process of ensuring
 
-00:29:12.376 --> 00:29:14.596 A:middle
+
+634
+00:29:12,376 --> 00:29:14,596
 that participants fully
 understand the why
 
-00:29:14.596 --> 00:29:15.536 A:middle
+
+635
+00:29:14,596 --> 00:29:15,536
 and the how of the study.
 
-00:29:16.206 --> 00:29:18.956 A:middle
+
+636
+00:29:16,206 --> 00:29:18,956
 What does the study
 entail and also the risks
 
-00:29:18.956 --> 00:29:20.136 A:middle
+
+637
+00:29:18,956 --> 00:29:20,136
 and benefits of participation.
 
-00:29:20.686 --> 00:29:22.916 A:middle
+
+638
+00:29:20,686 --> 00:29:22,916
 Now, this will often
 be conducted in person.
 
-00:29:24.206 --> 00:29:26.596 A:middle
+
+639
+00:29:24,206 --> 00:29:26,596
 And the detailed
 requirements of what needs to go
 
-00:29:26.596 --> 00:29:28.706 A:middle
+
+640
+00:29:26,596 --> 00:29:28,706
 into your consent
 process will come both
 
-00:29:28.706 --> 00:29:31.366 A:middle
+
+641
+00:29:28,706 --> 00:29:31,366
 from your study protocol and
 from your ethics review process.
 
-00:29:31.586 --> 00:29:36.646 A:middle
+
+642
+00:29:31,586 --> 00:29:36,646
 Now, as the participant and the
 investigator review the consent
 
-00:29:36.646 --> 00:29:39.836 A:middle
+
+643
+00:29:36,646 --> 00:29:39,836
 together, they will
 often initial each page
 
-00:29:39.946 --> 00:29:41.856 A:middle
+
+644
+00:29:39,946 --> 00:29:41,856
 and perhaps sign at the end.
 
-00:29:42.596 --> 00:29:44.736 A:middle
+
+645
+00:29:42,596 --> 00:29:44,736
 And so you probably need to
 sign during your informed
 
-00:29:44.736 --> 00:29:45.456 A:middle
+
+646
+00:29:44,736 --> 00:29:45,456
 consent process.
 
-00:29:45.886 --> 00:29:49.326 A:middle
+
+647
+00:29:45,886 --> 00:29:49,326
 And finally, this informed
 consent is usually a
 
-00:29:49.326 --> 00:29:49.936 A:middle
+
+648
+00:29:49,326 --> 00:29:49,936
 legal document.
 
-00:29:50.446 --> 00:29:54.396 A:middle
+
+649
+00:29:50,446 --> 00:29:54,396
 Now App Store submissions
 
-00:29:54.396 --> 00:29:57.586 A:middle
+
+650
+00:29:54,396 --> 00:29:57,586
 for human subject research
 must now include evidence
 
-00:29:57.586 --> 00:29:58.886 A:middle
+
+651
+00:29:57,586 --> 00:29:58,886
 of some form of ethical review.
 
-00:29:59.796 --> 00:30:01.766 A:middle
+
+652
+00:29:59,796 --> 00:30:01,766
 That doesn't necessarily
 mean that you need
 
 
-
-00:29:59.796 --> 00:30:01.766 A:middle
-That doesn't necessarily
-mean that you need
-
-00:30:01.766 --> 00:30:03.436 A:middle
+653
+00:30:01,766 --> 00:30:03,436
 to include an informed
 consent process
 
-00:30:03.436 --> 00:30:05.106 A:middle
+
+654
+00:30:03,436 --> 00:30:05,106
 like the one we will
 be discussing as part
 
-00:30:05.106 --> 00:30:06.886 A:middle
+
+655
+00:30:05,106 --> 00:30:06,886
 of this ResearchKit
 informed consent module.
 
-00:30:07.486 --> 00:30:10.146 A:middle
+
+656
+00:30:07,486 --> 00:30:10,146
 Because low-risk
 studies might be exempted
 
-00:30:10.146 --> 00:30:11.476 A:middle
+
+657
+00:30:10,146 --> 00:30:11,476
 from informed consent
 
-00:30:11.746 --> 00:30:14.266 A:middle
+
+658
+00:30:11,746 --> 00:30:14,266
 and certain high-risk
 studies may actually need
 
-00:30:14.266 --> 00:30:15.996 A:middle
+
+659
+00:30:14,266 --> 00:30:15,996
 to work in person.
 
-00:30:15.996 --> 00:30:18.176 A:middle
+
+660
+00:30:15,996 --> 00:30:18,176
 But in many cases, the
 informed consent module
 
-00:30:18.176 --> 00:30:19.766 A:middle
+
+661
+00:30:18,176 --> 00:30:19,766
 in ResearchKit will
 be appropriate.
 
-00:30:20.536 --> 00:30:22.336 A:middle
+
+662
+00:30:20,536 --> 00:30:22,336
 And you will be able to
 determine that during the course
 
-00:30:22.336 --> 00:30:23.456 A:middle
+
+663
+00:30:22,336 --> 00:30:23,456
 of your ethical review process.
 
-00:30:25.856 --> 00:30:27.586 A:middle
+
+664
+00:30:25,856 --> 00:30:27,586
 So assuming ResearchKit
 can help,
 
-00:30:27.916 --> 00:30:30.106 A:middle
+
+665
+00:30:27,916 --> 00:30:30,106
 let's look at how the
 informed consent module works.
 
-00:30:30.656 --> 00:30:37.156 A:middle
+
+666
+00:30:30,656 --> 00:30:37,156
 So there are two steps in
 ResearchKit for informed consent
 
-00:30:37.316 --> 00:30:38.416 A:middle
+
+667
+00:30:37,316 --> 00:30:38,416
 which need to present consent
 
-00:30:38.506 --> 00:30:39.636 A:middle
+
+668
+00:30:38,506 --> 00:30:39,636
 from the informed
 consent document.
 
-00:30:40.356 --> 00:30:42.906 A:middle
+
+669
+00:30:40,356 --> 00:30:42,906
 And so both of those
 steps get their content
 
-00:30:42.956 --> 00:30:44.526 A:middle
+
+670
+00:30:42,956 --> 00:30:44,526
 from the ORKConsent document.
 
-00:30:44.526 --> 00:30:46.586 A:middle
+
+671
+00:30:44,526 --> 00:30:46,586
 And this consent document
 is made up of two arrays.
 
-00:30:47.066 --> 00:30:48.636 A:middle
+
+672
+00:30:47,066 --> 00:30:48,636
 The first array is
 an array of sections
 
-00:30:48.636 --> 00:30:50.666 A:middle
+
+673
+00:30:48,636 --> 00:30:50,666
 and these sections might
 be of predefined types
 
-00:30:50.956 --> 00:30:52.706 A:middle
+
+674
+00:30:50,956 --> 00:30:52,706
 like data gathering,
 privacy, and data use,
 
-00:30:52.926 --> 00:30:55.136 A:middle
+
+675
+00:30:52,926 --> 00:30:55,136
 which are the types of
 sections you might expect to see
 
-00:30:55.136 --> 00:30:56.196 A:middle
+
+676
+00:30:55,136 --> 00:30:56,196
 in an informed consent document.
 
-00:30:56.836 --> 00:30:58.436 A:middle
+
+677
+00:30:56,836 --> 00:30:58,436
 But they also might
 be custom sections.
 
-00:30:58.766 --> 00:31:02.106 A:middle
+
+678
+00:30:58,766 --> 00:31:02,106
 So ResearchKit doesn't intend
 to provide a full solution,
 
 
-
-00:30:58.766 --> 00:31:02.106 A:middle
-So ResearchKit doesn't intend
-to provide a full solution,
-
-00:31:02.256 --> 00:31:03.516 A:middle
+679
+00:31:02,256 --> 00:31:03,516
 we provide an 80% solution.
 
-00:31:03.516 --> 00:31:06.016 A:middle
+
+680
+00:31:03,516 --> 00:31:06,016
 And for your app, if you
 need additional sections,
 
-00:31:06.016 --> 00:31:07.526 A:middle
+
+681
+00:31:06,016 --> 00:31:07,526
 you should add them.
 
-00:31:07.846 --> 00:31:10.726 A:middle
+
+682
+00:31:07,846 --> 00:31:10,726
 In addition the consent
 document will have an array
 
-00:31:10.726 --> 00:31:11.856 A:middle
+
+683
+00:31:10,726 --> 00:31:11,856
 of signatures.
 
-00:31:12.186 --> 00:31:13.796 A:middle
+
+684
+00:31:12,186 --> 00:31:13,796
 So we might have an
 investigative signature
 
-00:31:13.796 --> 00:31:15.906 A:middle
+
+685
+00:31:13,796 --> 00:31:15,906
 that contains a prepopulated
 name and image
 
-00:31:15.906 --> 00:31:20.866 A:middle
+
+686
+00:31:15,906 --> 00:31:20,866
 and a participant signature
 where we collect the name
 
-00:31:20.866 --> 00:31:23.096 A:middle
+
+687
+00:31:20,866 --> 00:31:23,096
 and image during the course
 of the consent review process.
 
-00:31:24.856 --> 00:31:29.006 A:middle
+
+688
+00:31:24,856 --> 00:31:29,006
 So let's see how these
 look in ResearchKit.
 
-00:31:29.066 --> 00:31:32.926 A:middle
+
+689
+00:31:29,066 --> 00:31:32,926
 We have got the visual consent
 step, the consent sharing step
 
-00:31:32.926 --> 00:31:35.816 A:middle
+
+690
+00:31:32,926 --> 00:31:35,816
 and the consent review step
 and I will dive into those each
 
-00:31:35.856 --> 00:31:37.326 A:middle
+
+691
+00:31:35,856 --> 00:31:37,326
 in a little bit more detail.
 
-00:31:39.296 --> 00:31:42.366 A:middle
+
+692
+00:31:39,296 --> 00:31:42,366
 The visual consent flow
 typically has one screen per
 
-00:31:42.366 --> 00:31:43.246 A:middle
+
+693
+00:31:42,366 --> 00:31:43,246
 section in the document.
 
-00:31:43.786 --> 00:31:46.126 A:middle
+
+694
+00:31:43,786 --> 00:31:46,126
 It has neat animated transitions
 that I'll show you in a demo
 
-00:31:46.126 --> 00:31:47.936 A:middle
+
+695
+00:31:46,126 --> 00:31:47,936
 in a minute for the
 predefined sections
 
-00:31:48.156 --> 00:31:50.666 A:middle
+
+696
+00:31:48,156 --> 00:31:50,666
 and it's fully customizable,
 so you can replace the imagery,
 
-00:31:50.896 --> 00:31:54.426 A:middle
+
+697
+00:31:50,896 --> 00:31:54,426
 you can replace the
 animations and you can fill
 
-00:31:54.426 --> 00:31:56.286 A:middle
+
+698
+00:31:54,426 --> 00:31:56,286
 in the exact content from
 your consent document.
 
-00:31:56.966 --> 00:31:58.196 A:middle
+
+699
+00:31:56,966 --> 00:31:58,196
 So let's look at how
 you do that in code.
 
-00:31:59.136 --> 00:32:01.186 A:middle
+
+700
+00:31:59,136 --> 00:32:01,186
 You'll create a consent
 section of a particular type,
 
 
-
-00:31:59.136 --> 00:32:01.186 A:middle
-You'll create a consent
-section of a particular type,
-
-00:32:01.366 --> 00:32:02.516 A:middle
+701
+00:32:01,366 --> 00:32:02,516
 so in this case, data gathering.
 
-00:32:03.856 --> 00:32:05.916 A:middle
+
+702
+00:32:03,856 --> 00:32:05,916
 Then, you'll set
 some properties.
 
-00:32:06.126 --> 00:32:07.626 A:middle
+
+703
+00:32:06,126 --> 00:32:07,626
 In this case I didn't
 need to set a title
 
-00:32:07.726 --> 00:32:09.166 A:middle
+
+704
+00:32:07,726 --> 00:32:09,166
 because that would have
 already been localized
 
-00:32:09.166 --> 00:32:10.256 A:middle
+
+705
+00:32:09,166 --> 00:32:10,256
 to all the languages in iOS
 
-00:32:10.256 --> 00:32:11.746 A:middle
+
+706
+00:32:10,256 --> 00:32:11,746
 because I chose a
 predefined section,
 
-00:32:12.366 --> 00:32:14.916 A:middle
+
+707
+00:32:12,366 --> 00:32:14,916
 but if I didn't use a
 predefined section or if I need
 
-00:32:14.916 --> 00:32:17.196 A:middle
+
+708
+00:32:14,916 --> 00:32:17,196
 to specify my own, then I
 can override them like this.
 
-00:32:18.116 --> 00:32:20.676 A:middle
+
+709
+00:32:18,116 --> 00:32:20,676
 I can specify a summary which is
 shown during the visual consent
 
-00:32:20.676 --> 00:32:23.676 A:middle
+
+710
+00:32:20,676 --> 00:32:23,676
 process and I can specify
 some content which is shown
 
-00:32:23.676 --> 00:32:25.866 A:middle
+
+711
+00:32:23,676 --> 00:32:25,866
 if the user taps learn more as
 they go through visual consent
 
-00:32:26.406 --> 00:32:28.996 A:middle
+
+712
+00:32:26,406 --> 00:32:28,996
 or if you are going
 through the whole document
 
-00:32:28.996 --> 00:32:30.486 A:middle
+
+713
+00:32:28,996 --> 00:32:30,486
 which is displayed
 in consent review.
 
-00:32:33.016 --> 00:32:34.936 A:middle
+
+714
+00:32:33,016 --> 00:32:34,936
 In addition, you can set
 a couple of other things,
 
-00:32:35.376 --> 00:32:37.786 A:middle
+
+715
+00:32:35,376 --> 00:32:37,786
 so you can set a custom
 image or custom animation.
 
-00:32:37.976 --> 00:32:40.116 A:middle
+
+716
+00:32:37,976 --> 00:32:40,116
 This custom animation
 is just a video file
 
-00:32:40.116 --> 00:32:41.206 A:middle
+
+717
+00:32:40,116 --> 00:32:41,206
 that you might include
 with your app
 
-00:32:42.306 --> 00:32:44.046 A:middle
+
+718
+00:32:42,306 --> 00:32:44,046
 which would override
 whatever the default is,
 
-00:32:44.106 --> 00:32:48.026 A:middle
+
+719
+00:32:44,106 --> 00:32:48,026
 or provide something new,
 if it's a custom step type.
 
-00:32:48.226 --> 00:32:49.486 A:middle
+
+720
+00:32:48,226 --> 00:32:49,486
 Once you have the
 consent section,
 
-00:32:49.746 --> 00:32:53.946 A:middle
+
+721
+00:32:49,746 --> 00:32:53,946
 you attach your document
 to a visual consent step
 
-00:32:53.946 --> 00:32:55.536 A:middle
+
+722
+00:32:53,946 --> 00:32:55,536
 to present your visual
 consent sequence.
 
-00:32:55.536 --> 00:33:00.666 A:middle
+
+723
+00:32:55,536 --> 00:33:00,666
 The next step in the informed
 consent module is the consent
 
 
-
-00:32:55.536 --> 00:33:00.666 A:middle
-The next step in the informed
-consent module is the consent
-
-00:33:00.666 --> 00:33:01.216 A:middle
+724
+00:33:00,666 --> 00:33:01,216
 sharing step.
 
-00:33:02.466 --> 00:33:03.876 A:middle
+
+725
+00:33:02,466 --> 00:33:03,876
 Research data collection
 is hard work.
 
-00:33:03.876 --> 00:33:05.156 A:middle
+
+726
+00:33:03,876 --> 00:33:05,156
 So it makes sense to reuse it
 
-00:33:05.156 --> 00:33:06.976 A:middle
+
+727
+00:33:05,156 --> 00:33:06,976
 across multiple studies
 when that's possible.
 
-00:33:07.516 --> 00:33:10.396 A:middle
+
+728
+00:33:07,516 --> 00:33:10,396
 So it often makes sense
 to obtain a broad consent
 
-00:33:10.716 --> 00:33:12.566 A:middle
+
+729
+00:33:10,716 --> 00:33:12,566
 that will allow you to share
 the data that you collect
 
-00:33:13.036 --> 00:33:13.846 A:middle
+
+730
+00:33:13,036 --> 00:33:13,846
 with other researchers.
 
-00:33:15.006 --> 00:33:16.876 A:middle
+
+731
+00:33:15,006 --> 00:33:16,876
 But that can pose a
 problem for participants.
 
-00:33:17.676 --> 00:33:19.866 A:middle
+
+732
+00:33:17,676 --> 00:33:19,866
 If the data is really sensitive
 they might want to contribute
 
-00:33:19.866 --> 00:33:21.076 A:middle
+
+733
+00:33:19,866 --> 00:33:21,076
 to your study but not to others.
 
-00:33:22.366 --> 00:33:24.606 A:middle
+
+734
+00:33:22,366 --> 00:33:24,606
 This issue came up while we
 were developing the initial apps
 
-00:33:24.606 --> 00:33:27.286 A:middle
+
+735
+00:33:24,606 --> 00:33:27,286
 using ResearchKit and so
 
-00:33:27.436 --> 00:33:29.386 A:middle
+
+736
+00:33:27,436 --> 00:33:29,386
 as a result we created
 the consent sharing step
 
-00:33:29.646 --> 00:33:31.396 A:middle
+
+737
+00:33:29,646 --> 00:33:31,396
 which has been prelocalized
 to all the languages
 
-00:33:31.396 --> 00:33:33.396 A:middle
+
+738
+00:33:31,396 --> 00:33:33,396
 that iOS supports
 where we can substitute
 
-00:33:33.396 --> 00:33:35.816 A:middle
+
+739
+00:33:33,396 --> 00:33:35,816
 in just your institution name
 and a couple other details
 
-00:33:36.326 --> 00:33:38.156 A:middle
+
+740
+00:33:36,326 --> 00:33:38,156
 to allow you to ask
 this question
 
-00:33:38.536 --> 00:33:40.026 A:middle
+
+741
+00:33:38,536 --> 00:33:40,026
 of participants whether
 they would
 
-00:33:40.026 --> 00:33:41.326 A:middle
+
+742
+00:33:40,026 --> 00:33:41,326
 like to share their
 data more widely.
 
-00:33:46.196 --> 00:33:48.216 A:middle
+
+743
+00:33:46,196 --> 00:33:48,216
 Over 80% of participants
 
-00:33:48.216 --> 00:33:50.026 A:middle
+
+744
+00:33:48,216 --> 00:33:50,026
 in these initial studies
 have actually said yes
 
-00:33:50.026 --> 00:33:52.606 A:middle
+
+745
+00:33:50,026 --> 00:33:52,606
 to this question but we still
 think it's an important thing
 
-00:33:52.606 --> 00:33:55.796 A:middle
+
+746
+00:33:52,606 --> 00:33:55,796
 to include if you are looking
 at such a broad consent.
 
-00:33:56.546 --> 00:33:58.456 A:middle
+
+747
+00:33:56,546 --> 00:33:58,456
 So that's consent sharing step.
 
-00:33:59.066 --> 00:33:59.696 A:middle
+
+748
+00:33:59,066 --> 00:33:59,696
 The final step
 
-00:33:59.776 --> 00:34:03.556 A:middle
+
+749
+00:33:59,776 --> 00:34:03,556
 in the ResearchKit informed
 consent module is the consent
 
 
-
-00:33:59.776 --> 00:34:03.556 A:middle
-in the ResearchKit informed
-consent module is the consent
-
-00:34:03.556 --> 00:34:06.266 A:middle
+750
+00:34:03,556 --> 00:34:06,266
 review step and here the
 participant reviews the actual
 
-00:34:06.266 --> 00:34:08.505 A:middle
+
+751
+00:34:06,266 --> 00:34:08,505
 document and possibly
 enters their name
 
-00:34:08.505 --> 00:34:09.985 A:middle
+
+752
+00:34:08,505 --> 00:34:09,985
 and maybe signs with
 their finger.
 
-00:34:10.416 --> 00:34:12.386 A:middle
+
+753
+00:34:10,416 --> 00:34:12,386
 And to show you how
 that works in code,
 
-00:34:12.386 --> 00:34:14.146 A:middle
+
+754
+00:34:12,386 --> 00:34:14,146
 we will look at that next.
 
-00:34:14.146 --> 00:34:16.726 A:middle
+
+755
+00:34:14,146 --> 00:34:16,726
 You might start with your
 consent document here
 
-00:34:16.726 --> 00:34:18.576 A:middle
+
+756
+00:34:16,726 --> 00:34:18,576
 and then you'll need
 to add a signature
 
-00:34:19.085 --> 00:34:20.396 A:middle
+
+757
+00:34:19,085 --> 00:34:20,396
 which is the signature
 you want to collect.
 
-00:34:20.636 --> 00:34:22.016 A:middle
+
+758
+00:34:20,636 --> 00:34:22,016
 So this is the participant
 signature.
 
-00:34:22.356 --> 00:34:23.676 A:middle
+
+759
+00:34:22,356 --> 00:34:23,676
 You set the title
 for the participant
 
-00:34:23.676 --> 00:34:25.386 A:middle
+
+760
+00:34:23,676 --> 00:34:25,386
 which is wat goes beneath the
 signature line if you were
 
-00:34:25.386 --> 00:34:26.835 A:middle
+
+761
+00:34:25,386 --> 00:34:26,835
 to generate a PDF
 of the document.
 
-00:34:27.466 --> 00:34:29.706 A:middle
+
+762
+00:34:27,466 --> 00:34:29,706
 And we've got an
 identifier which identifies
 
-00:34:29.706 --> 00:34:32.806 A:middle
+
+763
+00:34:29,706 --> 00:34:32,806
 which signature this
 is if we are trying
 
-00:34:32.806 --> 00:34:34.846 A:middle
+
+764
+00:34:32,806 --> 00:34:34,846
 to find a particular signature
 in the consent document.
 
-00:34:35.356 --> 00:34:41.005 A:middle
+
+765
+00:34:35,356 --> 00:34:41,005
 You can turn off either
 the name collection
 
-00:34:41.005 --> 00:34:42.525 A:middle
+
+766
+00:34:41,005 --> 00:34:42,525
 or the signature
 image collection,
 
-00:34:43.386 --> 00:34:45.295 A:middle
+
+767
+00:34:43,386 --> 00:34:45,295
 in this case we're
 turning off the
 
-00:34:45.376 --> 00:34:47.556 A:middle
+
+768
+00:34:45,376 --> 00:34:47,556
 by setting
 RequiresSignatureImage to false.
 
-00:34:50.096 --> 00:34:52.516 A:middle
+
+769
+00:34:50,096 --> 00:34:52,516
 Then you'll add the signature
 to your consent document
 
-00:34:53.186 --> 00:34:55.266 A:middle
+
+770
+00:34:53,186 --> 00:34:55,266
 and you will attach
 your consent document
 
-00:34:55.266 --> 00:34:58.546 A:middle
+
+771
+00:34:55,266 --> 00:34:58,546
 to a consent review step while
 also specifying what signature
 
-00:34:58.546 --> 00:35:00.986 A:middle
+
+772
+00:34:58,546 --> 00:35:00,986
 it is that you are
 trying to collect.
 
 
-
-00:34:58.546 --> 00:35:00.986 A:middle
-it is that you are
-trying to collect.
-
-00:35:00.986 --> 00:35:02.736 A:middle
+773
+00:35:00,986 --> 00:35:02,736
 You can use more than
 one consent review step
 
-00:35:02.736 --> 00:35:04.976 A:middle
+
+774
+00:35:02,736 --> 00:35:04,976
 if you have more than one person
 reviewing the same document
 
-00:35:04.976 --> 00:35:06.396 A:middle
+
+775
+00:35:04,976 --> 00:35:06,396
 on the same device,
 which might happen
 
-00:35:06.396 --> 00:35:07.346 A:middle
+
+776
+00:35:06,396 --> 00:35:07,346
 if you are doing this in person.
 
-00:35:07.886 --> 00:35:13.106 A:middle
+
+777
+00:35:07,886 --> 00:35:13,106
 So those are the steps that make
 up the informed consent module
 
-00:35:13.106 --> 00:35:15.756 A:middle
+
+778
+00:35:13,106 --> 00:35:15,756
 in ResearchKit but to really
 understand what this means
 
-00:35:15.816 --> 00:35:17.746 A:middle
+
+779
+00:35:15,816 --> 00:35:17,746
 when you are running through the
 app, I need to show you a demo.
 
-00:35:17.746 --> 00:35:18.976 A:middle
+
+780
+00:35:17,746 --> 00:35:18,976
 So we will do that next.
 
-00:35:28.046 --> 00:35:31.906 A:middle
+
+781
+00:35:28,046 --> 00:35:31,906
 So to begin doing the
 informed consent in code,
 
-00:35:32.226 --> 00:35:33.956 A:middle
+
+782
+00:35:32,226 --> 00:35:33,956
 we'll need to start by
 creating a consent document.
 
-00:35:33.956 --> 00:35:35.566 A:middle
+
+783
+00:35:33,956 --> 00:35:35,566
 So I will do that first.
 
-00:35:35.566 --> 00:35:36.576 A:middle
+
+784
+00:35:35,566 --> 00:35:36,576
 Here's my consent document
 
-00:35:37.186 --> 00:35:39.286 A:middle
+
+785
+00:35:37,186 --> 00:35:39,286
 and the first thing I'll
 need some consent sections
 
-00:35:39.286 --> 00:35:40.606 A:middle
+
+786
+00:35:39,286 --> 00:35:40,606
 to display during
 the visual consent.
 
-00:35:41.626 --> 00:35:43.816 A:middle
+
+787
+00:35:41,626 --> 00:35:43,816
 So here I've created an
 array of consent sections
 
-00:35:44.146 --> 00:35:46.046 A:middle
+
+788
+00:35:44,146 --> 00:35:46,046
 and created a consent
 section of TypeOverview
 
-00:35:46.316 --> 00:35:47.216 A:middle
+
+789
+00:35:46,316 --> 00:35:47,216
 on which I set a summary.
 
-00:35:47.286 --> 00:35:48.936 A:middle
+
+790
+00:35:47,286 --> 00:35:48,936
 I don't need to set the title
 
-00:35:48.936 --> 00:35:51.076 A:middle
+
+791
+00:35:48,936 --> 00:35:51,076
 because that's already been
 propopulated from my language.
 
-00:35:54.966 --> 00:35:57.506 A:middle
+
+792
+00:35:54,966 --> 00:35:57,506
 I'll also want to add some more
 sections so you can see some
 
-00:35:57.506 --> 00:35:59.966 A:middle
+
+793
+00:35:57,506 --> 00:35:59,966
 of these animations, so I'll
 add a data gathering section
 
 
-
-00:36:00.376 --> 00:36:03.806 A:middle
+794
+00:36:00,376 --> 00:36:03,806
 and a privacy section, each
 with some lorem ipsum text.
 
-00:36:05.416 --> 00:36:09.846 A:middle
+
+795
+00:36:05,416 --> 00:36:09,846
 In addition, I'll want to show
 you how you add actual content
 
-00:36:09.846 --> 00:36:10.796 A:middle
+
+796
+00:36:09,846 --> 00:36:10,796
 to your consent document.
 
-00:36:10.796 --> 00:36:12.746 A:middle
+
+797
+00:36:10,796 --> 00:36:12,746
 So the consent that would
 go within the section
 
-00:36:12.746 --> 00:36:16.506 A:middle
+
+798
+00:36:12,746 --> 00:36:16,506
 in the consent review document
 or also what you would find
 
-00:36:16.506 --> 00:36:17.436 A:middle
+
+799
+00:36:16,506 --> 00:36:17,436
 if you tapped learn more
 
-00:36:17.436 --> 00:36:19.816 A:middle
+
+800
+00:36:17,436 --> 00:36:19,816
 from a particular
 visual consent section.
 
-00:36:19.946 --> 00:36:22.276 A:middle
+
+801
+00:36:19,946 --> 00:36:22,276
 You can specify the
 content property directly,
 
-00:36:22.476 --> 00:36:25.486 A:middle
+
+802
+00:36:22,476 --> 00:36:25,486
 which is just text, or you
 could specify some HTML
 
-00:36:25.726 --> 00:36:27.926 A:middle
+
+803
+00:36:25,726 --> 00:36:27,926
 if that's what you wanted,
 so I'll leave the HTML in.
 
-00:36:28.346 --> 00:36:30.266 A:middle
+
+804
+00:36:28,346 --> 00:36:30,266
 So those are my consent
 sections,
 
-00:36:31.076 --> 00:36:32.426 A:middle
+
+805
+00:36:31,076 --> 00:36:32,426
 Additionally I will
 need some signatures
 
-00:36:32.426 --> 00:36:33.496 A:middle
+
+806
+00:36:32,426 --> 00:36:33,496
 for the consent review step.
 
-00:36:34.226 --> 00:36:35.696 A:middle
+
+807
+00:36:34,226 --> 00:36:35,696
 So I'll add a participant
 signature,
 
-00:36:36.606 --> 00:36:38.586 A:middle
+
+808
+00:36:36,606 --> 00:36:38,586
 just like the code I showed
 you before on the slides
 
-00:36:38.926 --> 00:36:41.936 A:middle
+
+809
+00:36:38,926 --> 00:36:41,936
 and the investigator signature
 with a different title
 
-00:36:42.076 --> 00:36:45.266 A:middle
+
+810
+00:36:42,076 --> 00:36:45,266
 and a different identifier,
 with a name
 
-00:36:45.266 --> 00:36:46.666 A:middle
+
+811
+00:36:45,266 --> 00:36:46,666
 and an image prepopulated.
 
-00:36:47.006 --> 00:36:49.506 A:middle
+
+812
+00:36:47,006 --> 00:36:49,506
 And I've added those to
 the consent document.
 
-00:36:50.456 --> 00:36:52.226 A:middle
+
+813
+00:36:50,456 --> 00:36:52,226
 Then, once I have
 my consent document,
 
-00:36:52.756 --> 00:36:55.866 A:middle
+
+814
+00:36:52,756 --> 00:36:55,866
 I'll need to create a task to
 display this consent process.
 
-00:36:56.366 --> 00:36:58.766 A:middle
+
+815
+00:36:56,366 --> 00:36:58,766
 So here's my consent task,
 with the identifier Consent,
 
-00:36:59.136 --> 00:37:00.856 A:middle
+
+816
+00:36:59,136 --> 00:37:00,856
 I've just chosen that because
 it's different from Survey
 
 
-
-00:36:59.136 --> 00:37:00.856 A:middle
-I've just chosen that because
-it's different from Survey
-
-00:37:00.856 --> 00:37:03.156 A:middle
+817
+00:37:00,856 --> 00:37:03,156
 and it's something that I can
 understand when I read it.
 
-00:37:03.856 --> 00:37:06.236 A:middle
+
+818
+00:37:03,856 --> 00:37:06,236
 So I've got an array of steps
 which is currently empty
 
-00:37:06.406 --> 00:37:08.366 A:middle
+
+819
+00:37:06,406 --> 00:37:08,366
 and the first thing I'll want
 is a visual consent step.
 
-00:37:08.366 --> 00:37:11.996 A:middle
+
+820
+00:37:08,366 --> 00:37:11,996
 So I will add that here and this
 has the identifier VisualConsent
 
-00:37:11.996 --> 00:37:14.156 A:middle
+
+821
+00:37:11,996 --> 00:37:14,156
 and I pass the document
 from my computed property.
 
-00:37:15.236 --> 00:37:18.116 A:middle
+
+822
+00:37:15,236 --> 00:37:18,116
 Next, I'll want to show you
 the consent sharing step,
 
-00:37:19.136 --> 00:37:21.216 A:middle
+
+823
+00:37:19,136 --> 00:37:21,216
 with just a few properties
 that I have to set in order
 
-00:37:21.216 --> 00:37:22.186 A:middle
+
+824
+00:37:21,216 --> 00:37:22,186
 to fully populate the text.
 
-00:37:22.186 --> 00:37:27.756 A:middle
+
+825
+00:37:22,186 --> 00:37:27,756
 And last, we will want
 a consent review step
 
-00:37:28.136 --> 00:37:29.456 A:middle
+
+826
+00:37:28,136 --> 00:37:29,456
 where the participant
 has an opportunity
 
-00:37:29.456 --> 00:37:32.486 A:middle
+
+827
+00:37:29,456 --> 00:37:32,486
 to enter their signature and
 review their overall document.
 
-00:37:33.026 --> 00:37:34.446 A:middle
+
+828
+00:37:33,026 --> 00:37:34,446
 So here I grab the
 first signature
 
-00:37:34.446 --> 00:37:35.906 A:middle
+
+829
+00:37:34,446 --> 00:37:35,906
 from the consent
 document, which I happen
 
-00:37:35.906 --> 00:37:37.656 A:middle
+
+830
+00:37:35,906 --> 00:37:37,656
 to know is the participant
 signature,
 
-00:37:38.246 --> 00:37:40.176 A:middle
+
+831
+00:37:38,246 --> 00:37:40,176
 and the consent document
 itself and attach them
 
-00:37:40.176 --> 00:37:41.256 A:middle
+
+832
+00:37:40,176 --> 00:37:41,256
 to this consent review step
 
-00:37:41.646 --> 00:37:43.826 A:middle
+
+833
+00:37:41,646 --> 00:37:43,826
 with another unique
 identifier within this task.
 
-00:37:44.886 --> 00:37:46.776 A:middle
+
+834
+00:37:44,886 --> 00:37:46,776
 There are a couple of things
 I can additionally customize
 
-00:37:46.776 --> 00:37:49.126 A:middle
+
+835
+00:37:46,776 --> 00:37:49,126
 on the consent review step
 like the text that is displayed
 
-00:37:49.126 --> 00:37:51.206 A:middle
+
+836
+00:37:49,126 --> 00:37:51,206
 as the user enters their name
 and the text that's displayed
 
-00:37:51.206 --> 00:37:52.776 A:middle
+
+837
+00:37:51,206 --> 00:37:52,776
 in the confirmation
 dialog when they agree.
 
-00:37:53.456 --> 00:37:55.316 A:middle
+
+838
+00:37:53,456 --> 00:37:55,316
 And I've added all these
 steps to my step array.
 
-00:37:56.206 --> 00:38:07.316 A:middle
+
+839
+00:37:56,206 --> 00:38:07,316
 Then I'll justneed to extend my
 table view to display that task.
 
 
-
-00:37:56.206 --> 00:38:07.316 A:middle
-Then I'll justneed to extend my
-table view to display that task.
-
-00:38:07.426 --> 00:38:12.786 A:middle
+840
+00:38:07,426 --> 00:38:12,786
 And specify that that's the
 actual task I want to display
 
-00:38:12.786 --> 00:38:14.896 A:middle
+
+841
+00:38:12,786 --> 00:38:14,896
 and I'll show you
 the consent process.
 
-00:38:20.476 --> 00:38:23.926 A:middle
+
+842
+00:38:20,476 --> 00:38:23,926
 So when I start my informed
 consent task now we jump
 
-00:38:23.926 --> 00:38:25.306 A:middle
+
+843
+00:38:23,926 --> 00:38:25,306
 straight into the
 visual consent step.
 
-00:38:25.906 --> 00:38:27.756 A:middle
+
+844
+00:38:25,906 --> 00:38:27,756
 And in contrast to some of
 the other steps we've seen,
 
-00:38:27.946 --> 00:38:30.836 A:middle
+
+845
+00:38:27,946 --> 00:38:30,836
 this visual consent step
 has multiple screens
 
-00:38:30.836 --> 00:38:31.426 A:middle
+
+846
+00:38:30,836 --> 00:38:31,426
 for each section.
 
-00:38:31.726 --> 00:38:34.146 A:middle
+
+847
+00:38:31,726 --> 00:38:34,146
 So this corresponds to the first
 section in my consent document.
 
-00:38:35.216 --> 00:38:37.586 A:middle
+
+848
+00:38:35,216 --> 00:38:37,586
 When I navigate to the second,
 I get this beautiful animation
 
-00:38:38.346 --> 00:38:40.646 A:middle
+
+849
+00:38:38,346 --> 00:38:40,646
 as I transition from
 one screen to the next.
 
-00:38:41.916 --> 00:38:44.106 A:middle
+
+850
+00:38:41,916 --> 00:38:44,106
 These animations are the
 predefined animations
 
-00:38:44.106 --> 00:38:46.386 A:middle
+
+851
+00:38:44,106 --> 00:38:46,386
 that I was talking about.
 
-00:38:46.386 --> 00:38:49.056 A:middle
+
+852
+00:38:46,386 --> 00:38:49,056
 NowYou can further customize
 this screen, for instance,
 
-00:38:49.056 --> 00:38:50.986 A:middle
+
+853
+00:38:49,056 --> 00:38:50,986
 in order to make it
 fit in with your app.
 
-00:38:51.346 --> 00:38:53.256 A:middle
+
+854
+00:38:51,346 --> 00:38:53,256
 If you set the tint
 color using UIAppearance
 
-00:38:53.616 --> 00:38:55.896 A:middle
+
+855
+00:38:53,616 --> 00:38:55,896
 that would override both
 these controls at the top
 
-00:38:55.896 --> 00:38:57.646 A:middle
+
+856
+00:38:55,896 --> 00:38:57,646
 of the screen and the
 next button down here
 
-00:38:57.826 --> 00:38:59.756 A:middle
+
+857
+00:38:57,826 --> 00:38:59,756
 and actually change the
 tint color of this image
 
-00:38:59.756 --> 00:39:02.136 A:middle
+
+858
+00:38:59,756 --> 00:39:02,136
 and the corresponding
 animation so it can fit nicely
 
 
-
-00:38:59.756 --> 00:39:02.136 A:middle
-and the corresponding
-animation so it can fit nicely
-
-00:39:02.136 --> 00:39:03.136 A:middle
+859
+00:39:02,136 --> 00:39:03,136
 into whatever app
 you're building.
 
-00:39:04.506 --> 00:39:05.876 A:middle
+
+860
+00:39:04,506 --> 00:39:05,876
 As I proceed to my next section,
 
-00:39:06.236 --> 00:39:07.636 A:middle
+
+861
+00:39:06,236 --> 00:39:07,636
 you'll see I've got this
 "Learn more" button.
 
-00:39:07.966 --> 00:39:10.846 A:middle
+
+862
+00:39:07,966 --> 00:39:10,846
 And when I tap that "Learn more"
 I can see the actual content
 
-00:39:10.846 --> 00:39:12.196 A:middle
+
+863
+00:39:10,846 --> 00:39:12,196
 from the particular
 consent document.
 
-00:39:12.686 --> 00:39:16.956 A:middle
+
+864
+00:39:12,686 --> 00:39:16,956
 As I proceed, I'll come on
 to the consent sharing step
 
-00:39:16.956 --> 00:39:18.256 A:middle
+
+865
+00:39:16,956 --> 00:39:18,256
 and this is really
 just a question step
 
-00:39:18.466 --> 00:39:20.206 A:middle
+
+866
+00:39:18,466 --> 00:39:20,206
 where I'm asked whether
 I want to share data just
 
-00:39:20.206 --> 00:39:22.516 A:middle
+
+867
+00:39:20,206 --> 00:39:22,516
 with your institution or
 with researchers worldwide.
 
-00:39:22.806 --> 00:39:25.556 A:middle
+
+868
+00:39:22,806 --> 00:39:25,556
 And I want to share my
 data with all researchers
 
-00:39:25.556 --> 00:39:26.426 A:middle
+
+869
+00:39:25,556 --> 00:39:26,426
 that you think are qualified.
 
-00:39:27.256 --> 00:39:30.046 A:middle
+
+870
+00:39:27,256 --> 00:39:30,046
 And as you continue, I see
 this consent review step
 
-00:39:30.046 --> 00:39:31.226 A:middle
+
+871
+00:39:30,046 --> 00:39:31,226
 which summarizes the document.
 
-00:39:31.226 --> 00:39:34.356 A:middle
+
+872
+00:39:31,226 --> 00:39:34,356
 I have got the titles for each
 of the sections and the content
 
-00:39:34.356 --> 00:39:36.516 A:middle
+
+873
+00:39:34,356 --> 00:39:36,516
 for each section and I only
 set the content for one section
 
-00:39:36.746 --> 00:39:39.306 A:middle
+
+874
+00:39:36,746 --> 00:39:39,306
 but if you set them for all of
 those for the particular consent
 
-00:39:39.306 --> 00:39:43.066 A:middle
+
+875
+00:39:39,306 --> 00:39:43,066
 for your consent document, this
 would be a full legal document
 
-00:39:43.066 --> 00:39:44.896 A:middle
+
+876
+00:39:43,066 --> 00:39:44,896
 that the user might
 be agreeing to.
 
-00:39:46.416 --> 00:39:48.766 A:middle
+
+877
+00:39:46,416 --> 00:39:48,766
 Now, sometimes the
 sections you want to show
 
-00:39:48.766 --> 00:39:50.586 A:middle
+
+878
+00:39:48,766 --> 00:39:50,586
 in this document will be
 different from what you want
 
-00:39:50.586 --> 00:39:52.916 A:middle
+
+879
+00:39:50,586 --> 00:39:52,916
 to show in the visual
 consent and you can accomplish
 
-00:39:52.916 --> 00:39:54.526 A:middle
+
+880
+00:39:52,916 --> 00:39:54,526
 that easily in ResearchKit
 either
 
-00:39:54.526 --> 00:39:57.406 A:middle
+
+881
+00:39:54,526 --> 00:39:57,406
 by using only in-document
 sections, which will only appear
 
-00:39:57.406 --> 00:39:58.356 A:middle
+
+882
+00:39:57,406 --> 00:39:58,356
 in this consent review step
 
-00:39:58.806 --> 00:40:01.096 A:middle
+
+883
+00:39:58,806 --> 00:40:01,096
 or by using a completely
 different consent document
 
 
-
-00:39:58.806 --> 00:40:01.096 A:middle
-or by using a completely
-different consent document
-
-00:40:01.096 --> 00:40:03.616 A:middle
+884
+00:40:01,096 --> 00:40:03,616
 object to represent
 this or a third option,
 
-00:40:03.956 --> 00:40:05.826 A:middle
+
+885
+00:40:03,956 --> 00:40:05,826
 you could set the
 HTML review content
 
-00:40:06.036 --> 00:40:08.786 A:middle
+
+886
+00:40:06,036 --> 00:40:08,786
 which completely supplies
 your own HTML to display
 
-00:40:08.786 --> 00:40:11.876 A:middle
+
+887
+00:40:08,786 --> 00:40:11,876
 in this consent review if you
 need complete customization.
 
-00:40:12.276 --> 00:40:17.036 A:middle
+
+888
+00:40:12,276 --> 00:40:17,036
 Once I agree, you will see
 whatever custom text I provided
 
-00:40:17.696 --> 00:40:18.876 A:middle
+
+889
+00:40:17,696 --> 00:40:18,876
 and I will enter my name.
 
-00:40:22.996 --> 00:40:25.906 A:middle
+
+890
+00:40:22,996 --> 00:40:25,906
 Continue. I might sign,
 which I won't do very well.
 
-00:40:26.546 --> 00:40:28.476 A:middle
+
+891
+00:40:26,546 --> 00:40:28,476
 And finally when I
 complete the task,
 
-00:40:28.846 --> 00:40:29.906 A:middle
+
+892
+00:40:28,846 --> 00:40:29,906
 you'll get back a result just
 
-00:40:29.906 --> 00:40:31.496 A:middle
+
+893
+00:40:29,906 --> 00:40:31,496
 like for any other
 task in ResearchKit.
 
-00:40:31.736 --> 00:40:34.266 A:middle
+
+894
+00:40:31,736 --> 00:40:34,266
 And this has a step
 result corresponding
 
-00:40:34.266 --> 00:40:35.906 A:middle
+
+895
+00:40:34,266 --> 00:40:35,906
 to the visual consent
 showing how long it was
 
-00:40:35.906 --> 00:40:37.456 A:middle
+
+896
+00:40:35,906 --> 00:40:37,456
 that I was looking at the
 visual consent process.
 
-00:40:38.746 --> 00:40:42.976 A:middle
+
+897
+00:40:38,746 --> 00:40:42,976
 A step result for that sharing
 question step with an answer
 
-00:40:42.976 --> 00:40:44.416 A:middle
+
+898
+00:40:42,976 --> 00:40:44,416
 of true because I answered yes.
 
-00:40:45.136 --> 00:40:49.246 A:middle
+
+899
+00:40:45,136 --> 00:40:49,246
 And you will see a result for
 that final consent review step
 
-00:40:49.536 --> 00:40:52.296 A:middle
+
+900
+00:40:49,536 --> 00:40:52,296
 that includes the data for the
 actual signature that I entered.
 
-00:40:52.296 --> 00:40:55.266 A:middle
+
+901
+00:40:52,296 --> 00:40:55,266
 So my name, and if I were
 looking at the actual object
 
-00:40:55.266 --> 00:40:59.116 A:middle
+
+902
+00:40:55,266 --> 00:40:59,116
 in Swift then I'd be able to
 pull out the actual UI image
 
-00:40:59.146 --> 00:41:01.756 A:middle
+
+903
+00:40:59,146 --> 00:41:01,756
 to the signature that I drew.
 
 
-
-00:40:59.146 --> 00:41:01.756 A:middle
-to the signature that I drew.
-
-00:41:01.946 --> 00:41:04.316 A:middle
+904
+00:41:01,946 --> 00:41:04,316
 So that's informed
 consent in ResearchKit.
 
-00:41:04.316 --> 00:41:06.886 A:middle
+
+905
+00:41:04,316 --> 00:41:06,886
 Now there are a couple
 of other things we need
 
-00:41:06.886 --> 00:41:10.726 A:middle
+
+906
+00:41:06,886 --> 00:41:10,726
 to cover before we move
 on that are worth noting
 
-00:41:10.726 --> 00:41:13.046 A:middle
+
+907
+00:41:10,726 --> 00:41:13,046
 about this informed consent
 process that we learned
 
-00:41:13.046 --> 00:41:14.686 A:middle
+
+908
+00:41:13,046 --> 00:41:14,686
 in developing these
 initial apps.
 
-00:41:14.686 --> 00:41:16.456 A:middle
+
+909
+00:41:14,686 --> 00:41:16,456
 I will divide them
 into two categories.
 
-00:41:16.956 --> 00:41:18.976 A:middle
+
+910
+00:41:16,956 --> 00:41:18,976
 The first category
 is the informed part.
 
-00:41:21.036 --> 00:41:23.306 A:middle
+
+911
+00:41:21,036 --> 00:41:23,306
 The first part of
 this is form factor.
 
-00:41:24.336 --> 00:41:27.376 A:middle
+
+912
+00:41:24,336 --> 00:41:27,376
 We have tried to make the
 visual consent work really well
 
-00:41:27.376 --> 00:41:28.686 A:middle
+
+913
+00:41:27,376 --> 00:41:28,686
 adapting your consent document
 
-00:41:28.936 --> 00:41:31.616 A:middle
+
+914
+00:41:28,936 --> 00:41:31,616
 to this smaller iPhone
 form factor.
 
-00:41:33.416 --> 00:41:35.046 A:middle
+
+915
+00:41:33,416 --> 00:41:35,046
 However, for your
 app, you may need
 
-00:41:35.046 --> 00:41:37.086 A:middle
+
+916
+00:41:35,046 --> 00:41:37,086
 to add additional custom
 content and when do you that,
 
-00:41:37.426 --> 00:41:37.986 A:middle
+
+917
+00:41:37,426 --> 00:41:37,986
 you just try and make
 
-00:41:37.986 --> 00:41:40.246 A:middle
+
+918
+00:41:37,986 --> 00:41:40,246
 that content fit well
 on these devices.
 
-00:41:40.686 --> 00:41:44.946 A:middle
+
+919
+00:41:40,686 --> 00:41:44,946
 Next, we really encourage
 you to use custom sections.
 
-00:41:45.656 --> 00:41:47.436 A:middle
+
+920
+00:41:45,656 --> 00:41:47,436
 What we put in ResearchKit
 is only there
 
-00:41:47.746 --> 00:41:48.946 A:middle
+
+921
+00:41:47,746 --> 00:41:48,946
 in an advisory fashion.
 
-00:41:49.376 --> 00:41:53.046 A:middle
+
+922
+00:41:49,376 --> 00:41:53,046
 We want you to actually
 represent what you need,
 
-00:41:53.046 --> 00:41:55.766 A:middle
+
+923
+00:41:53,046 --> 00:41:55,766
 what comes out of
 your ethical --
 
-00:41:55.926 --> 00:41:57.076 A:middle
+
+924
+00:41:55,926 --> 00:41:57,076
 of your ethics review process.
 
-00:41:59.186 --> 00:42:01.116 A:middle
+
+925
+00:41:59,186 --> 00:42:01,116
 Next, you should plan
 for accepting questions
 
 
-
-00:41:59.186 --> 00:42:01.116 A:middle
-Next, you should plan
-for accepting questions
-
-00:42:01.116 --> 00:42:03.696 A:middle
+926
+00:42:01,116 --> 00:42:03,696
 from participants, whether
 during the consent process,
 
-00:42:03.756 --> 00:42:05.376 A:middle
+
+927
+00:42:03,756 --> 00:42:05,376
 that is, before the
 user has fully consented
 
-00:42:05.776 --> 00:42:08.226 A:middle
+
+928
+00:42:05,776 --> 00:42:08,226
 and afterward once they have
 actually joined your study.
 
-00:42:08.226 --> 00:42:09.626 A:middle
+
+929
+00:42:08,226 --> 00:42:09,626
 Maybe they will have
 more questions once they
 
-00:42:09.626 --> 00:42:10.366 A:middle
+
+930
+00:42:09,626 --> 00:42:10,366
 start participating.
 
-00:42:10.886 --> 00:42:13.196 A:middle
+
+931
+00:42:10,886 --> 00:42:13,196
 And finally many of the apps
 
-00:42:13.196 --> 00:42:16.156 A:middle
+
+932
+00:42:13,196 --> 00:42:16,156
 that are already using
 ResearchKit have incorporated a
 
-00:42:16.826 --> 00:42:18.126 A:middle
+
+933
+00:42:16,826 --> 00:42:18,126
 comprehension quiz.
 
-00:42:18.126 --> 00:42:21.356 A:middle
+
+934
+00:42:18,126 --> 00:42:21,356
 Now, this can be a
 bit of an extra load,
 
-00:42:21.656 --> 00:42:23.566 A:middle
+
+935
+00:42:21,656 --> 00:42:23,566
 but it can also give you
 a lot more peace of mind
 
-00:42:23.566 --> 00:42:25.456 A:middle
+
+936
+00:42:23,566 --> 00:42:25,456
 that participants really
 understand what it is
 
-00:42:25.456 --> 00:42:27.536 A:middle
+
+937
+00:42:25,456 --> 00:42:27,536
 that you are trying to convey to
 them during this visual consent.
 
-00:42:28.656 --> 00:42:31.336 A:middle
+
+938
+00:42:28,656 --> 00:42:31,336
 And to do that, you can
 just use the same steps
 
-00:42:31.336 --> 00:42:35.206 A:middle
+
+939
+00:42:31,336 --> 00:42:35,206
 from the surveys module and
 mix them into your consent task
 
-00:42:35.466 --> 00:42:36.966 A:middle
+
+940
+00:42:35,466 --> 00:42:36,966
 in order to accomplish
 that kind of behavior.
 
-00:42:37.536 --> 00:42:40.876 A:middle
+
+941
+00:42:37,536 --> 00:42:40,876
 On the other side,
 we have got consent.
 
-00:42:40.876 --> 00:42:42.826 A:middle
+
+942
+00:42:40,876 --> 00:42:42,826
 And there are a couple
 of points here.
 
-00:42:43.816 --> 00:42:45.406 A:middle
+
+943
+00:42:43,816 --> 00:42:45,406
 One is verifying identity.
 
-00:42:46.006 --> 00:42:47.446 A:middle
+
+944
+00:42:46,006 --> 00:42:47,446
 ResearchKit itself
 doesn't do anything
 
-00:42:47.446 --> 00:42:50.426 A:middle
+
+945
+00:42:47,446 --> 00:42:50,426
 to actually verify the
 identity of your participants,
 
-00:42:50.736 --> 00:42:53.256 A:middle
+
+946
+00:42:50,736 --> 00:42:53,256
 but the initial apps using
 ResearchKit actually did some
 
-00:42:53.256 --> 00:42:55.076 A:middle
+
+947
+00:42:53,256 --> 00:42:55,076
 form of email verification
 to make sure
 
-00:42:55.076 --> 00:42:58.896 A:middle
+
+948
+00:42:55,076 --> 00:42:58,896
 that they were actually talking
 to a person, but for your study,
 
-00:42:59.176 --> 00:43:01.026 A:middle
+
+949
+00:42:59,176 --> 00:43:01,026
 possibly coming out of
 your ethics review process,
 
 
-
-00:42:59.176 --> 00:43:01.026 A:middle
-possibly coming out of
-your ethics review process,
-
-00:43:01.236 --> 00:43:03.116 A:middle
+950
+00:43:01,236 --> 00:43:03,116
 you may need either
 less or more than that.
 
-00:43:03.116 --> 00:43:05.006 A:middle
+
+951
+00:43:03,116 --> 00:43:05,006
 For instance, you may need
 to use a third party service
 
-00:43:05.006 --> 00:43:06.636 A:middle
+
+952
+00:43:05,006 --> 00:43:06,636
 to identify identity
 more robustly.
 
-00:43:07.766 --> 00:43:10.236 A:middle
+
+953
+00:43:07,766 --> 00:43:10,236
 And once you have a concept
 of identity, you probably want
 
-00:43:10.236 --> 00:43:12.636 A:middle
+
+954
+00:43:10,236 --> 00:43:12,636
 to tie that identity with the
 actual record of that consent,
 
-00:43:13.036 --> 00:43:14.806 A:middle
+
+955
+00:43:13,036 --> 00:43:14,806
 in which case it might
 make sense to use some form
 
-00:43:14.806 --> 00:43:15.716 A:middle
+
+956
+00:43:14,806 --> 00:43:15,716
 of cryptographic signature.
 
-00:43:16.276 --> 00:43:18.756 A:middle
+
+957
+00:43:16,276 --> 00:43:18,756
 So that's informed consent.
 
-00:43:21.096 --> 00:43:24.846 A:middle
+
+958
+00:43:21,096 --> 00:43:24,846
 The third module in
 ResearchKit is active tasks.
 
-00:43:28.436 --> 00:43:31.256 A:middle
+
+959
+00:43:28,436 --> 00:43:31,256
 An active task is a
 semicontrolled test
 
-00:43:31.976 --> 00:43:34.076 A:middle
+
+960
+00:43:31,976 --> 00:43:34,076
 in which the participant is
 given step-by-step instructions
 
-00:43:34.076 --> 00:43:36.586 A:middle
+
+961
+00:43:34,076 --> 00:43:36,586
 to perform the task while data
 is collected using sensors
 
-00:43:36.586 --> 00:43:36.996 A:middle
+
+962
+00:43:36,586 --> 00:43:36,996
 on the device.
 
-00:43:37.706 --> 00:43:39.586 A:middle
+
+963
+00:43:37,706 --> 00:43:39,586
 And the key properties
 of such tasks are
 
-00:43:39.706 --> 00:43:42.036 A:middle
+
+964
+00:43:39,706 --> 00:43:42,036
 that they're interactive
 and very short in duration.
 
-00:43:42.096 --> 00:43:43.946 A:middle
+
+965
+00:43:42,096 --> 00:43:43,946
 So these are session-based
 tasks.
 
-00:43:44.536 --> 00:43:47.026 A:middle
+
+966
+00:43:44,536 --> 00:43:47,026
 The longest task in one of
 the ResearchKit apps so far is
 
-00:43:47.026 --> 00:43:49.316 A:middle
+
+967
+00:43:47,026 --> 00:43:49,316
 about six minutes and most
 of these tasks are about one
 
-00:43:49.316 --> 00:43:50.246 A:middle
+
+968
+00:43:49,316 --> 00:43:50,246
 or two minutes in duration.
 
-00:43:52.586 --> 00:43:54.466 A:middle
+
+969
+00:43:52,586 --> 00:43:54,466
 Let's look at the
 structure in some
 
-00:43:54.466 --> 00:43:56.056 A:middle
+
+970
+00:43:54,466 --> 00:43:56,056
 of the predefined
 tasks in ResearchKit.
 
-00:43:58.676 --> 00:44:02.146 A:middle
+
+971
+00:43:58,676 --> 00:44:02,146
 These tasks typically have a
 couple of instruction steps
 
 
-
-00:43:58.676 --> 00:44:02.146 A:middle
-These tasks typically have a
-couple of instruction steps
-
-00:44:02.146 --> 00:44:05.686 A:middle
+972
+00:44:02,146 --> 00:44:05,686
 to introduce you to the task
 basically tell you what it's
 
-00:44:05.686 --> 00:44:07.336 A:middle
+
+973
+00:44:05,686 --> 00:44:07,336
 about, and then what
 you will need to do.
 
-00:44:07.936 --> 00:44:10.396 A:middle
+
+974
+00:44:07,936 --> 00:44:10,396
 Then some kind of introduction
 to get you ready to act,
 
-00:44:10.396 --> 00:44:13.936 A:middle
+
+975
+00:44:10,396 --> 00:44:13,936
 and then an active step
 in which data is actually
 
-00:44:13.936 --> 00:44:14.486 A:middle
+
+976
+00:44:13,936 --> 00:44:14,486
 being collected.
 
-00:44:15.076 --> 00:44:17.456 A:middle
+
+977
+00:44:15,076 --> 00:44:17,456
 And finally when the task is
 complete, we will thank you
 
-00:44:17.456 --> 00:44:18.246 A:middle
+
+978
+00:44:17,456 --> 00:44:18,246
 for your participation.
 
-00:44:18.356 --> 00:44:22.646 A:middle
+
+979
+00:44:18,356 --> 00:44:22,646
 What makes this an active
 task is the existence
 
-00:44:22.646 --> 00:44:23.356 A:middle
+
+980
+00:44:22,646 --> 00:44:23,356
 of the active step.
 
-00:44:24.076 --> 00:44:26.086 A:middle
+
+981
+00:44:24,076 --> 00:44:26,086
 And the active step here is
 really a base class in each
 
-00:44:26.086 --> 00:44:29.316 A:middle
+
+982
+00:44:26,086 --> 00:44:29,316
 of the individual active
 tasks that we predefined,
 
-00:44:29.586 --> 00:44:32.886 A:middle
+
+983
+00:44:29,586 --> 00:44:32,886
 subclasses that to produce the
 special behaviors that we need
 
-00:44:32.886 --> 00:44:34.566 A:middle
+
+984
+00:44:32,886 --> 00:44:34,566
 for each of these tasks.
 
-00:44:34.566 --> 00:44:36.916 A:middle
+
+985
+00:44:34,566 --> 00:44:36,916
 Now, when we released
 ResearchKit,
 
-00:44:37.276 --> 00:44:38.446 A:middle
+
+986
+00:44:37,276 --> 00:44:38,446
 there were five active tasks.
 
-00:44:39.556 --> 00:44:42.176 A:middle
+
+987
+00:44:39,556 --> 00:44:42,176
 The first three collected data
 using sensors open the device.
 
-00:44:42.826 --> 00:44:45.296 A:middle
+
+988
+00:44:42,826 --> 00:44:45,296
 So we have the gait and
 balance task, where you're asked
 
-00:44:45.296 --> 00:44:47.766 A:middle
+
+989
+00:44:45,296 --> 00:44:47,766
 to walk back and forth we
 collected accelerometer
 
-00:44:47.766 --> 00:44:48.496 A:middle
+
+990
+00:44:47,766 --> 00:44:48,496
 and gyroscope data.
 
-00:44:48.496 --> 00:44:51.086 A:middle
+
+991
+00:44:48,496 --> 00:44:51,086
 And we have the fitness task
 where you are asked to walk
 
-00:44:51.086 --> 00:44:54.026 A:middle
+
+992
+00:44:51,086 --> 00:44:54,026
 for six minutes as we collect
 heart rate and podometry data
 
-00:44:54.026 --> 00:44:56.966 A:middle
+
+993
+00:44:54,026 --> 00:44:56,966
 and the voice task, where
 we use the microphone
 
-00:44:57.266 --> 00:44:59.306 A:middle
+
+994
+00:44:57,266 --> 00:44:59,306
 to collect information
 about your voice.
 
 
-
-00:45:00.316 --> 00:45:02.956 A:middle
+995
+00:45:00,316 --> 00:45:02,956
 In addition to these,
 we have two more tasks
 
-00:45:02.956 --> 00:45:04.816 A:middle
+
+996
+00:45:02,956 --> 00:45:04,816
 which are more cognitive
 measurement tasks.
 
-00:45:05.266 --> 00:45:09.016 A:middle
+
+997
+00:45:05,266 --> 00:45:09,016
 So these use sort of more
 interactive touch behavior,
 
-00:45:09.326 --> 00:45:11.776 A:middle
+
+998
+00:45:09,326 --> 00:45:11,776
 so we have spatial memory task
 in which you have a sequence
 
-00:45:11.856 --> 00:45:14.356 A:middle
+
+999
+00:45:11,856 --> 00:45:14,356
 and asked to repeat it
 and the tapping speed task
 
-00:45:14.356 --> 00:45:16.476 A:middle
+
+1000
+00:45:14,356 --> 00:45:16,476
 where you are asked to
 rapidly alternate tapping
 
-00:45:16.476 --> 00:45:17.236 A:middle
+
+1001
+00:45:16,476 --> 00:45:17,236
 between two buttons.
 
-00:45:19.256 --> 00:45:21.186 A:middle
+
+1002
+00:45:19,256 --> 00:45:21,186
 In addition since we
 released ResearchKit,
 
-00:45:21.186 --> 00:45:23.156 A:middle
+
+1003
+00:45:21,186 --> 00:45:23,156
 there have been two
 more active tests added,
 
-00:45:23.516 --> 00:45:26.186 A:middle
+
+1004
+00:45:23,516 --> 00:45:26,186
 we've got a hearing test,
 and now a reaction time test
 
-00:45:26.186 --> 00:45:27.556 A:middle
+
+1005
+00:45:26,186 --> 00:45:27,556
 where you are shown
 a stimulus and have
 
-00:45:27.556 --> 00:45:29.086 A:middle
+
+1006
+00:45:27,556 --> 00:45:29,086
 to shake the device in response.
 
-00:45:30.736 --> 00:45:33.296 A:middle
+
+1007
+00:45:30,736 --> 00:45:33,296
 To give you a flavor of how
 these active tasks worked
 
-00:45:33.296 --> 00:45:34.986 A:middle
+
+1008
+00:45:33,296 --> 00:45:34,986
 in practice, I will
 need to show you a demo.
 
-00:45:35.356 --> 00:45:37.086 A:middle
+
+1009
+00:45:35,356 --> 00:45:37,086
 So that's next.
 
-00:45:48.836 --> 00:45:51.166 A:middle
+
+1010
+00:45:48,836 --> 00:45:51,166
 So this is a really short
 demo because all I need
 
-00:45:51.166 --> 00:45:54.706 A:middle
+
+1011
+00:45:51,166 --> 00:45:54,706
 to do is instantiate one of
 these simple predefined tasks.
 
-00:45:55.686 --> 00:45:58.446 A:middle
+
+1012
+00:45:55,686 --> 00:45:58,446
 So I will create this active
 task computed property
 
-00:45:59.066 --> 00:46:01.636 A:middle
+
+1013
+00:45:59,066 --> 00:46:01,636
 which returns a two finger
 tapping interval task,
 
 
-
-00:45:59.066 --> 00:46:01.636 A:middle
-which returns a two finger
-tapping interval task,
-
-00:46:01.926 --> 00:46:03.606 A:middle
+1014
+00:46:01,926 --> 00:46:03,606
 and I just have to
 specify a few parameters.
 
-00:46:03.696 --> 00:46:05.036 A:middle
+
+1015
+00:46:03,696 --> 00:46:05,036
 This is basically
 the same for each
 
-00:46:05.036 --> 00:46:06.586 A:middle
+
+1016
+00:46:05,036 --> 00:46:06,586
 of the different active
 tasks that we provide.
 
-00:46:07.826 --> 00:46:09.276 A:middle
+
+1017
+00:46:07,826 --> 00:46:09,276
 So you specify an identifier
 
-00:46:09.406 --> 00:46:10.656 A:middle
+
+1018
+00:46:09,406 --> 00:46:10,656
 which should be unique
 within your study.
 
-00:46:11.706 --> 00:46:13.296 A:middle
+
+1019
+00:46:11,706 --> 00:46:13,296
 You specify an intended
 use description
 
-00:46:13.396 --> 00:46:16.326 A:middle
+
+1020
+00:46:13,396 --> 00:46:16,326
 which is a localized string
 that will be substituted
 
-00:46:16.326 --> 00:46:19.016 A:middle
+
+1021
+00:46:16,326 --> 00:46:19,016
 in into the prelocalized
 content that we provide for each
 
-00:46:19.016 --> 00:46:21.426 A:middle
+
+1022
+00:46:19,016 --> 00:46:21,426
 of these active tasks and
 you specify the duration
 
-00:46:21.426 --> 00:46:23.016 A:middle
+
+1023
+00:46:21,426 --> 00:46:23,016
 which is how long you
 want the user to tap for.
 
-00:46:23.736 --> 00:46:25.496 A:middle
+
+1024
+00:46:23,736 --> 00:46:25,496
 It could also specify
 some additional options
 
-00:46:25.496 --> 00:46:28.506 A:middle
+
+1025
+00:46:25,496 --> 00:46:28,506
 which control whether we include
 the actual instruction steps
 
-00:46:29.156 --> 00:46:31.816 A:middle
+
+1026
+00:46:29,156 --> 00:46:31,816
 at the beginning and end of
 the task because you might want
 
-00:46:31.816 --> 00:46:33.036 A:middle
+
+1027
+00:46:31,816 --> 00:46:33,036
 to provide your own instructions
 
-00:46:33.036 --> 00:46:36.896 A:middle
+
+1028
+00:46:33,036 --> 00:46:36,896
 if the ones we provide
 don't work for you.
 
-00:46:37.086 --> 00:46:40.566 A:middle
+
+1029
+00:46:37,086 --> 00:46:40,566
 So now we have got our
 active task, and we'll want
 
-00:46:40.566 --> 00:46:41.746 A:middle
+
+1030
+00:46:40,566 --> 00:46:41,746
 to add it to our table view.
 
-00:46:41.826 --> 00:46:43.706 A:middle
+
+1031
+00:46:41,826 --> 00:46:43,706
 So I just have to make a couple
 of changes to support that.
 
-00:46:44.216 --> 00:46:46.766 A:middle
+
+1032
+00:46:44,216 --> 00:46:46,766
 I will add it to
 my list of tasks
 
-00:46:47.276 --> 00:46:51.506 A:middle
+
+1033
+00:46:47,276 --> 00:46:51,506
 and mention my computed
 property as a represented task
 
-00:46:52.046 --> 00:46:54.846 A:middle
+
+1034
+00:46:52,046 --> 00:46:54,846
 and when I run this, I
 should have a third task now,
 
-00:46:55.146 --> 00:46:59.376 A:middle
+
+1035
+00:46:55,146 --> 00:46:59,376
 which will be this two
 finger tapping task.
 
-00:46:59.506 --> 00:47:02.266 A:middle
+
+1036
+00:46:59,506 --> 00:47:02,266
 So the intended use description
 gets populated in here
 
 
-
-00:46:59.506 --> 00:47:02.266 A:middle
-So the intended use description
-gets populated in here
-
-00:47:02.266 --> 00:47:05.786 A:middle
+1037
+00:47:02,266 --> 00:47:05,786
 and the rest of this content is
 localized to all the languages
 
-00:47:05.786 --> 00:47:07.536 A:middle
+
+1038
+00:47:05,786 --> 00:47:07,536
 that iOS supports and
 we will be maintaining
 
-00:47:07.536 --> 00:47:10.946 A:middle
+
+1039
+00:47:07,536 --> 00:47:10,946
 that for all the new
 active tasks we add.
 
-00:47:11.176 --> 00:47:13.756 A:middle
+
+1040
+00:47:11,176 --> 00:47:13,756
 So here's our next instruction
 
-00:47:13.756 --> 00:47:15.036 A:middle
+
+1041
+00:47:13,756 --> 00:47:15,036
 which tells me what
 to actually do.
 
-00:47:15.036 --> 00:47:16.796 A:middle
+
+1042
+00:47:15,036 --> 00:47:16,796
 So I will be tapping on each
 of the buttons alternately.
 
-00:47:16.796 --> 00:47:20.486 A:middle
+
+1043
+00:47:16,796 --> 00:47:20,486
 And when I come into the task
 thetimer doesn't actually start
 
-00:47:20.486 --> 00:47:23.546 A:middle
+
+1044
+00:47:20,486 --> 00:47:23,546
 until I start tapping,
 so as I start tapping,
 
-00:47:23.546 --> 00:47:26.516 A:middle
+
+1045
+00:47:23,546 --> 00:47:26,516
 we start to see the timer
 going faster and faster
 
-00:47:27.116 --> 00:47:28.686 A:middle
+
+1046
+00:47:27,116 --> 00:47:28,686
 and the task completes.
 
-00:47:29.006 --> 00:47:31.486 A:middle
+
+1047
+00:47:29,006 --> 00:47:31,486
 When the task is finished, I
 will get some results back.
 
-00:47:31.706 --> 00:47:32.976 A:middle
+
+1048
+00:47:31,706 --> 00:47:32,976
 We'll take a look
 at how that works.
 
-00:47:33.856 --> 00:47:34.646 A:middle
+
+1049
+00:47:33,856 --> 00:47:34,646
 So because this is one
 
-00:47:34.646 --> 00:47:38.406 A:middle
+
+1050
+00:47:34,646 --> 00:47:38,406
 of the more cognitive tasks
 the data aren't written
 
-00:47:38.406 --> 00:47:39.096 A:middle
+
+1051
+00:47:38,406 --> 00:47:39,096
 out to files.
 
-00:47:39.506 --> 00:47:41.756 A:middle
+
+1052
+00:47:39,506 --> 00:47:41,756
 Instead they are returned
 as object in memory
 
-00:47:42.446 --> 00:47:44.506 A:middle
+
+1053
+00:47:42,446 --> 00:47:44,506
 which I've serialized to
 JSON so we can have a look.
 
-00:47:44.506 --> 00:47:46.626 A:middle
+
+1054
+00:47:44,506 --> 00:47:46,626
 And so here we have our
 task result as usual
 
-00:47:46.626 --> 00:47:47.616 A:middle
+
+1055
+00:47:46,626 --> 00:47:47,616
 with our start date
 and the end date
 
-00:47:47.616 --> 00:47:48.506 A:middle
+
+1056
+00:47:47,616 --> 00:47:48,506
 and various other properties.
 
-00:47:49.286 --> 00:47:51.086 A:middle
+
+1057
+00:47:49,286 --> 00:47:51,086
 We have a couple of step
 results which corresponds
 
-00:47:51.086 --> 00:47:52.256 A:middle
+
+1058
+00:47:51,086 --> 00:47:52,256
 to the introductory
 instructions,
 
-00:47:52.696 --> 00:47:54.916 A:middle
+
+1059
+00:47:52,696 --> 00:47:54,916
 and then we've got another
 step result that corresponds
 
-00:47:54.916 --> 00:47:57.736 A:middle
+
+1060
+00:47:54,916 --> 00:47:57,736
 to the active step and it
 contains a child result
 
-00:47:57.926 --> 00:47:59.206 A:middle
+
+1061
+00:47:57,926 --> 00:47:59,206
 which is the tapping
 interval result
 
-00:47:59.206 --> 00:48:02.246 A:middle
+
+1062
+00:47:59,206 --> 00:48:02,246
 for the two finger
 tapping interval task.
 
 
-
-00:47:59.206 --> 00:48:02.246 A:middle
-for the two finger
-tapping interval task.
-
-00:48:02.246 --> 00:48:05.086 A:middle
+1063
+00:48:02,246 --> 00:48:05,086
 That in turn contains an array
 of samples which contain --
 
-00:48:05.306 --> 00:48:07.316 A:middle
+
+1064
+00:48:05,306 --> 00:48:07,316
 which in turn contain time
 stamps for each of the taps
 
-00:48:07.316 --> 00:48:10.776 A:middle
+
+1065
+00:48:07,316 --> 00:48:10,776
 that I have made and locations,
 which are just coordinates
 
-00:48:10.776 --> 00:48:12.926 A:middle
+
+1066
+00:48:10,776 --> 00:48:12,926
 on the screen and a
 button identifier showing
 
-00:48:12.926 --> 00:48:13.776 A:middle
+
+1067
+00:48:12,926 --> 00:48:13,776
 which button I tapped.
 
-00:48:14.386 --> 00:48:16.666 A:middle
+
+1068
+00:48:14,386 --> 00:48:16,666
 and taps outside the buttons
 would be recorded here.
 
-00:48:17.466 --> 00:48:20.266 A:middle
+
+1069
+00:48:17,466 --> 00:48:20,266
 In addition, there's some other
 properties in this result,
 
-00:48:20.266 --> 00:48:22.476 A:middle
+
+1070
+00:48:20,266 --> 00:48:22,476
 which detail where
 things were on screen,
 
-00:48:22.476 --> 00:48:25.546 A:middle
+
+1071
+00:48:22,476 --> 00:48:25,546
 so I can actually tell what
 those locations corresponded to.
 
-00:48:27.006 --> 00:48:28.946 A:middle
+
+1072
+00:48:27,006 --> 00:48:28,946
 For other types of
 active tasks you will tend
 
-00:48:28.946 --> 00:48:31.436 A:middle
+
+1073
+00:48:28,946 --> 00:48:31,436
 to see file-based results and
 those would be an ORKFile result
 
-00:48:31.756 --> 00:48:34.936 A:middle
+
+1074
+00:48:31,756 --> 00:48:34,936
 with a file URL that points to
 a particular location on disk
 
-00:48:35.436 --> 00:48:37.556 A:middle
+
+1075
+00:48:35,436 --> 00:48:37,556
 that would be inside the output
 directory that you specified
 
-00:48:37.556 --> 00:48:38.816 A:middle
+
+1076
+00:48:37,556 --> 00:48:38,816
 when you set up your
 task controller.
 
-00:48:39.386 --> 00:48:44.116 A:middle
+
+1077
+00:48:39,386 --> 00:48:44,116
 So that's my demo for
 active tasks in ResearchKit.
 
-00:48:45.516 --> 00:48:51.126 A:middle
+
+1078
+00:48:45,516 --> 00:48:51,126
 [Applause]
 
-00:48:51.626 --> 00:48:53.966 A:middle
+
+1079
+00:48:51,626 --> 00:48:53,966
 Now today we've covered
 three modules in ResearchKit.
 
-00:48:53.966 --> 00:48:57.096 A:middle
+
+1080
+00:48:53,966 --> 00:48:57,096
 We'vecovered surveys, informed
 consent and active tasks
 
-00:48:57.516 --> 00:48:59.826 A:middle
+
+1081
+00:48:57,516 --> 00:48:59,826
 but we really don't
 think it will stop there.
 
 
-
-00:49:00.556 --> 00:49:03.926 A:middle
+1082
+00:49:00,556 --> 00:49:03,926
 We think that ResearchKit is
 going to continue to expand both
 
-00:49:03.926 --> 00:49:06.486 A:middle
+
+1083
+00:49:03,926 --> 00:49:06,486
 as third parties continue to
 contribute, so that's you,
 
-00:49:07.096 --> 00:49:10.346 A:middle
+
+1084
+00:49:07,096 --> 00:49:10,346
 and as we continue to add
 additional features and keep it
 
-00:49:10.346 --> 00:49:12.616 A:middle
+
+1085
+00:49:10,346 --> 00:49:12,616
 up to date with the latest
 versions of our software.
 
-00:49:13.206 --> 00:49:16.966 A:middle
+
+1086
+00:49:13,206 --> 00:49:16,966
 So it will only get
 better if you contribute.
 
-00:49:17.086 --> 00:49:25.056 A:middle
+
+1087
+00:49:17,086 --> 00:49:25,056
 So let's talk about
 how you can do that.
 
-00:49:25.206 --> 00:49:28.066 A:middle
+
+1088
+00:49:25,206 --> 00:49:28,066
 Now ResearchKit is just an
 open source project on GitHub.
 
-00:49:28.636 --> 00:49:30.736 A:middle
+
+1089
+00:49:28,636 --> 00:49:30,736
 So that means you will
 interact with it in the same way
 
-00:49:30.736 --> 00:49:33.176 A:middle
+
+1090
+00:49:30,736 --> 00:49:33,176
 that you would interact with any
 other such open source project.
 
-00:49:34.016 --> 00:49:37.136 A:middle
+
+1091
+00:49:34,016 --> 00:49:37,136
 First, you'll need to pick an
 existing issue or open a new one
 
-00:49:37.456 --> 00:49:40.126 A:middle
+
+1092
+00:49:37,456 --> 00:49:40,126
 and ideally comment on it, so we
 know that you're working on it.
 
-00:49:40.696 --> 00:49:43.246 A:middle
+
+1093
+00:49:40,696 --> 00:49:43,246
 Then, when you've got something
 that you want to share with us,
 
-00:49:43.246 --> 00:49:44.606 A:middle
+
+1094
+00:49:43,246 --> 00:49:44,606
 you will submit a pull request.
 
-00:49:44.836 --> 00:49:46.756 A:middle
+
+1095
+00:49:44,836 --> 00:49:46,756
 And at that point,
 reviewers both from Apple
 
-00:49:47.226 --> 00:49:51.196 A:middle
+
+1096
+00:49:47,226 --> 00:49:51,196
 and our other active external
 contributors will review your
 
-00:49:51.196 --> 00:49:54.006 A:middle
+
+1097
+00:49:51,196 --> 00:49:54,006
 contribution both for the
 quality of the submission
 
-00:49:54.006 --> 00:49:56.146 A:middle
+
+1098
+00:49:54,006 --> 00:49:56,146
 and also for how it matches
 up with the ResearchKit
 
-00:49:56.276 --> 00:49:57.506 A:middle
+
+1099
+00:49:56,276 --> 00:49:57,506
 and how it fits in
 with the project.
 
-00:49:59.236 --> 00:50:01.376 A:middle
+
+1100
+00:49:59,236 --> 00:50:01,376
 Now, so far, about 90%
 
 
-
-00:49:59.236 --> 00:50:01.376 A:middle
-Now, so far, about 90%
-
-00:50:01.376 --> 00:50:04.246 A:middle
+1101
+00:50:01,376 --> 00:50:04,246
 of the changes we received
 have eventually got merged
 
-00:50:04.356 --> 00:50:05.486 A:middle
+
+1102
+00:50:04,356 --> 00:50:05,486
 into the code base.
 
-00:50:05.946 --> 00:50:07.356 A:middle
+
+1103
+00:50:05,946 --> 00:50:07,356
 I think that's a really
 good starting point
 
-00:50:08.106 --> 00:50:10.146 A:middle
+
+1104
+00:50:08,106 --> 00:50:10,146
 for how we want things
 to be going forward.
 
-00:50:11.616 --> 00:50:13.736 A:middle
+
+1105
+00:50:11,616 --> 00:50:13,736
 Once your change is merged,
 
-00:50:13.736 --> 00:50:15.086 A:middle
+
+1106
+00:50:13,736 --> 00:50:15,086
 though that's not
 the end of the story.
 
-00:50:15.766 --> 00:50:16.846 A:middle
+
+1107
+00:50:15,766 --> 00:50:16,846
 At some point after that,
 
-00:50:18.306 --> 00:50:20.266 A:middle
+
+1108
+00:50:18,306 --> 00:50:20,266
 we will start the
 convergence process
 
-00:50:20.426 --> 00:50:22.366 A:middle
+
+1109
+00:50:20,426 --> 00:50:22,366
 to bring ResearchKit
 towards a new release.
 
-00:50:22.366 --> 00:50:25.816 A:middle
+
+1110
+00:50:22,366 --> 00:50:25,816
 And in fact we actually
 concluded our first release done
 
-00:50:25.816 --> 00:50:27.636 A:middle
+
+1111
+00:50:25,816 --> 00:50:27,636
 using this process
 yesterday with ResearchKit 1.
 
-00:50:27.636 --> 00:50:31.996 A:middle
+
+1112
+00:50:27,636 --> 00:50:31,996
 1. During that process, we
 will review your change again,
 
-00:50:32.216 --> 00:50:34.196 A:middle
+
+1113
+00:50:32,216 --> 00:50:34,196
 both for things like
 accessibility and also
 
-00:50:34.196 --> 00:50:36.646 A:middle
+
+1114
+00:50:34,196 --> 00:50:36,646
 to localize it to all the
 languages that iOS supports
 
-00:50:37.236 --> 00:50:39.476 A:middle
+
+1115
+00:50:37,236 --> 00:50:39,476
 and we may ask you
 to help out again.
 
-00:50:40.316 --> 00:50:44.106 A:middle
+
+1116
+00:50:40,316 --> 00:50:44,106
 Hopefully this doesn't
 sound like too much work
 
-00:50:44.286 --> 00:50:45.376 A:middle
+
+1117
+00:50:44,286 --> 00:50:45,376
 and you would like
 to help us out.
 
-00:50:45.526 --> 00:50:48.666 A:middle
+
+1118
+00:50:45,526 --> 00:50:48,666
 Let's look at some of the areas
 where you could contribute.
 
-00:50:49.166 --> 00:50:54.236 A:middle
+
+1119
+00:50:49,166 --> 00:50:54,236
 One area where we've already
 mentioned contributions is
 
-00:50:54.236 --> 00:50:56.896 A:middle
+
+1120
+00:50:54,236 --> 00:50:56,896
 active tasks and we've already
 had those two new active tasks
 
-00:50:56.896 --> 00:50:58.676 A:middle
+
+1121
+00:50:56,896 --> 00:50:58,676
 contributed in the
 last month and a half
 
-00:50:58.896 --> 00:51:00.186 A:middle
+
+1122
+00:50:58,896 --> 00:51:00,186
 with this project public.
 
 
-
-00:50:58.896 --> 00:51:00.186 A:middle
-with this project public.
-
-00:51:01.976 --> 00:51:04.356 A:middle
+1123
+00:51:01,976 --> 00:51:04,356
 But other areas where we've seen
 contributions have been answer
 
-00:51:04.356 --> 00:51:08.066 A:middle
+
+1124
+00:51:04,356 --> 00:51:08,066
 formats, where someone's added
 a vertical slider answer format,
 
-00:51:09.006 --> 00:51:13.336 A:middle
+
+1125
+00:51:09,006 --> 00:51:13,336
 and new steps where someone
 added an image capture step.
 
-00:51:15.796 --> 00:51:19.016 A:middle
+
+1126
+00:51:15,796 --> 00:51:19,016
 In addition, going forward we
 expect to see more contributions
 
-00:51:19.016 --> 00:51:20.366 A:middle
+
+1127
+00:51:19,016 --> 00:51:20,366
 in areas like device support.
 
-00:51:21.056 --> 00:51:24.136 A:middle
+
+1128
+00:51:21,056 --> 00:51:24,136
 So if you have a hardware device
 that you think would make sense
 
-00:51:24.136 --> 00:51:26.486 A:middle
+
+1129
+00:51:24,136 --> 00:51:26,486
 to be used by people in
 medical research studies,
 
-00:51:26.736 --> 00:51:28.876 A:middle
+
+1130
+00:51:26,736 --> 00:51:28,876
 then you can add some support
 for it into ResearchKit
 
-00:51:28.876 --> 00:51:31.116 A:middle
+
+1131
+00:51:28,876 --> 00:51:31,116
 to help more researchers
 use it in their apps.
 
-00:51:32.176 --> 00:51:34.926 A:middle
+
+1132
+00:51:32,176 --> 00:51:34,926
 Also, we expect to add
 some back integrations.
 
-00:51:35.216 --> 00:51:37.056 A:middle
+
+1133
+00:51:35,216 --> 00:51:37,056
 So if you have a
 back end service
 
-00:51:37.206 --> 00:51:38.996 A:middle
+
+1134
+00:51:37,206 --> 00:51:38,996
 and you think it would
 integrate well with ResearchKit
 
-00:51:38.996 --> 00:51:40.446 A:middle
+
+1135
+00:51:38,996 --> 00:51:40,446
 and be a great data
 solution storage
 
-00:51:40.446 --> 00:51:42.726 A:middle
+
+1136
+00:51:40,446 --> 00:51:42,726
 for researchers then it would
 make some sense to add some code
 
-00:51:42.726 --> 00:51:44.556 A:middle
+
+1137
+00:51:42,726 --> 00:51:44,556
 to ResearchKit to support
 your particular back end.
 
-00:51:45.366 --> 00:51:46.946 A:middle
+
+1138
+00:51:45,366 --> 00:51:46,946
 We know there are several
 contributors out there
 
-00:51:46.946 --> 00:51:48.766 A:middle
+
+1139
+00:51:46,946 --> 00:51:48,766
 who are already interested
 in doing this.
 
-00:51:50.396 --> 00:51:52.596 A:middle
+
+1140
+00:51:50,396 --> 00:51:52,596
 So I don't have time to
 talk about all of these
 
-00:51:52.676 --> 00:51:54.676 A:middle
+
+1141
+00:51:52,676 --> 00:51:54,676
 in much detail but
 what I do want to look
 
-00:51:54.676 --> 00:52:01.696 A:middle
+
+1142
+00:51:54,676 --> 00:52:01,696
 at a little more
 is active tasks.
 
 
-
-00:51:54.676 --> 00:52:01.696 A:middle
-at a little more
-is active tasks.
-
-00:52:01.766 --> 00:52:04.656 A:middle
+1143
+00:52:01,766 --> 00:52:04,656
 So you have already seen this
 structure for active tasks
 
-00:52:04.656 --> 00:52:06.766 A:middle
+
+1144
+00:52:04,656 --> 00:52:06,766
 where we have some instruction
 steps, a countdown step,
 
-00:52:07.626 --> 00:52:09.296 A:middle
+
+1145
+00:52:07,626 --> 00:52:09,296
 an active step and
 a completion step.
 
-00:52:10.516 --> 00:52:14.166 A:middle
+
+1146
+00:52:10,516 --> 00:52:14,166
 And this active step, base
 class actually has some other
 
-00:52:14.166 --> 00:52:16.776 A:middle
+
+1147
+00:52:14,166 --> 00:52:16,776
 behaviors that will be
 useful for you when you go
 
-00:52:16.776 --> 00:52:19.716 A:middle
+
+1148
+00:52:16,776 --> 00:52:19,716
 to implement your
 own active step.
 
-00:52:19.856 --> 00:52:22.986 A:middle
+
+1149
+00:52:19,856 --> 00:52:22,986
 So, active steps support
 recorder configurations,
 
-00:52:23.276 --> 00:52:24.706 A:middle
+
+1150
+00:52:23,276 --> 00:52:24,706
 where you can configure
 the active step
 
-00:52:25.036 --> 00:52:28.266 A:middle
+
+1151
+00:52:25,036 --> 00:52:28,266
 to automatically collect
 data from various sensors
 
-00:52:28.266 --> 00:52:30.176 A:middle
+
+1152
+00:52:28,266 --> 00:52:30,176
 on the device during the
 duration of that step
 
-00:52:30.176 --> 00:52:31.256 A:middle
+
+1153
+00:52:30,176 --> 00:52:31,256
 without writing very much code.
 
-00:52:32.006 --> 00:52:37.596 A:middle
+
+1154
+00:52:32,006 --> 00:52:37,596
 So take a closer look at how
 those work -- at how those work.
 
-00:52:37.786 --> 00:52:39.556 A:middle
+
+1155
+00:52:37,786 --> 00:52:39,556
 Right now, we have
 five recorders built
 
-00:52:39.556 --> 00:52:40.276 A:middle
+
+1156
+00:52:39,556 --> 00:52:40,276
 into ResearchKit.
 
-00:52:40.846 --> 00:52:44.246 A:middle
+
+1157
+00:52:40,846 --> 00:52:44,246
 We have an accelerometer
 and device motion recorder
 
-00:52:44.246 --> 00:52:46.946 A:middle
+
+1158
+00:52:44,246 --> 00:52:46,946
 and a pedometer recorder that
 collect data from CoreMotion
 
-00:52:47.106 --> 00:52:49.386 A:middle
+
+1159
+00:52:47,106 --> 00:52:49,386
 and we have a health
 quality type recorder
 
-00:52:49.386 --> 00:52:50.536 A:middle
+
+1160
+00:52:49,386 --> 00:52:50,536
 for pulling data from HealthKit.
 
-00:52:50.776 --> 00:52:53.146 A:middle
+
+1161
+00:52:50,776 --> 00:52:53,146
 So for instance, that could
 be used to collect heart rate.
 
-00:52:54.496 --> 00:52:56.206 A:middle
+
+1162
+00:52:54,496 --> 00:52:56,206
 Finally we have a
 location recorder
 
-00:52:56.206 --> 00:52:57.576 A:middle
+
+1163
+00:52:56,206 --> 00:52:57,576
 that can pull some information
 
-00:52:57.576 --> 00:53:02.706 A:middle
+
+1164
+00:52:57,576 --> 00:53:02,706
 from CoreLocation during the
 duration of your active step.
 
 
-
-00:52:57.576 --> 00:53:02.706 A:middle
-from CoreLocation during the
-duration of your active step.
-
-00:53:02.856 --> 00:53:05.996 A:middle
+1165
+00:53:02,856 --> 00:53:05,996
 Now, when you use these on
 iOS, you would normally need
 
-00:53:05.996 --> 00:53:08.106 A:middle
+
+1166
+00:53:05,996 --> 00:53:08,106
 to obtain user permission
 to get access to that data
 
-00:53:08.576 --> 00:53:10.266 A:middle
+
+1167
+00:53:08,576 --> 00:53:10,266
 and ResearchKit isn't
 a system framework
 
-00:53:10.266 --> 00:53:12.076 A:middle
+
+1168
+00:53:10,266 --> 00:53:12,076
 and doesn't let you bypass
 any of those controls.
 
-00:53:12.476 --> 00:53:15.146 A:middle
+
+1169
+00:53:12,476 --> 00:53:15,146
 But we do try to smooth out
 the process so if you use these
 
-00:53:15.146 --> 00:53:17.746 A:middle
+
+1170
+00:53:15,146 --> 00:53:17,746
 in one or more of your steps
 then the task view controller
 
-00:53:17.746 --> 00:53:19.316 A:middle
+
+1171
+00:53:17,746 --> 00:53:19,316
 will notice that and try to ask
 
-00:53:19.316 --> 00:53:22.006 A:middle
+
+1172
+00:53:19,316 --> 00:53:22,006
 for those permissions upfront
 just after the instructions
 
-00:53:22.136 --> 00:53:24.506 A:middle
+
+1173
+00:53:22,136 --> 00:53:24,506
 but before beginning the
 actual steps themselves.
 
-00:53:25.106 --> 00:53:29.466 A:middle
+
+1174
+00:53:25,106 --> 00:53:29,466
 So to give you a bit of flavor
 of how recorders are used,
 
-00:53:29.736 --> 00:53:31.326 A:middle
+
+1175
+00:53:29,736 --> 00:53:31,326
 I thought I'd use the
 fitness step example
 
-00:53:31.536 --> 00:53:33.486 A:middle
+
+1176
+00:53:31,536 --> 00:53:33,486
 from the six-minute walk
 task in ResearchKit.
 
-00:53:34.506 --> 00:53:35.546 A:middle
+
+1177
+00:53:34,506 --> 00:53:35,546
 So here's our fitness step,
 
-00:53:35.776 --> 00:53:37.576 A:middle
+
+1178
+00:53:35,776 --> 00:53:37,576
 which is a subclass
 of ORKActiveStep.
 
-00:53:38.436 --> 00:53:41.696 A:middle
+
+1179
+00:53:38,436 --> 00:53:41,696
 And when you subclass
 ORKActiveStep you also subclass
 
-00:53:41.696 --> 00:53:42.776 A:middle
+
+1180
+00:53:41,696 --> 00:53:42,776
 the active step view controller.
 
-00:53:43.366 --> 00:53:44.966 A:middle
+
+1181
+00:53:43,366 --> 00:53:44,966
 You have an active
 step view controller
 
-00:53:45.286 --> 00:53:49.086 A:middle
+
+1182
+00:53:45,286 --> 00:53:49,086
 which has a pointer
 back to the step.
 
-00:53:49.286 --> 00:53:51.686 A:middle
+
+1183
+00:53:49,286 --> 00:53:51,686
 Now this fitness step is
 configured with a couple
 
-00:53:51.686 --> 00:53:52.726 A:middle
+
+1184
+00:53:51,686 --> 00:53:52,726
 of recorder configurations.
 
-00:53:53.176 --> 00:53:55.636 A:middle
+
+1185
+00:53:53,176 --> 00:53:55,636
 It will have a health
 quantity recorder configuration
 
-00:53:56.256 --> 00:53:58.266 A:middle
+
+1186
+00:53:56,256 --> 00:53:58,266
 with a particular identifier
 which needs to be unique
 
-00:53:58.266 --> 00:54:00.506 A:middle
+
+1187
+00:53:58,266 --> 00:54:00,506
 within this step because
 this is going to correspond
 
 
-
-00:53:58.266 --> 00:54:00.506 A:middle
-within this step because
-this is going to correspond
-
-00:54:00.506 --> 00:54:02.616 A:middle
+1188
+00:54:00,506 --> 00:54:02,616
 to the result as you
 will see in a minute.
 
-00:54:03.026 --> 00:54:05.476 A:middle
+
+1189
+00:54:03,026 --> 00:54:05,476
 This recorder configuration
 has a couple of parameters.
 
-00:54:05.816 --> 00:54:07.056 A:middle
+
+1190
+00:54:05,816 --> 00:54:07,056
 So it's got a quantity type
 
-00:54:07.296 --> 00:54:10.446 A:middle
+
+1191
+00:54:07,296 --> 00:54:10,446
 which in this case is the heart
 rate quantity type and the unit,
 
-00:54:10.446 --> 00:54:12.746 A:middle
+
+1192
+00:54:10,446 --> 00:54:12,746
 which in this case
 is beats per minute
 
-00:54:12.806 --> 00:54:13.956 A:middle
+
+1193
+00:54:12,806 --> 00:54:13,956
 from your heart rate monitor.
 
-00:54:14.506 --> 00:54:17.216 A:middle
+
+1194
+00:54:14,506 --> 00:54:17,216
 You can have more than
 one recorder configuration
 
-00:54:17.326 --> 00:54:19.466 A:middle
+
+1195
+00:54:17,326 --> 00:54:19,466
 so in this case we will
 have the pedommeter recorder
 
-00:54:19.466 --> 00:54:21.806 A:middle
+
+1196
+00:54:19,466 --> 00:54:21,806
 configuration, again with
 a different identifier,
 
-00:54:21.806 --> 00:54:24.386 A:middle
+
+1197
+00:54:21,806 --> 00:54:24,386
 so that you can identify the
 results from this recorder.
 
-00:54:25.876 --> 00:54:26.966 A:middle
+
+1198
+00:54:25,876 --> 00:54:26,966
 When you run the fitness step,
 
-00:54:27.496 --> 00:54:30.846 A:middle
+
+1199
+00:54:27,496 --> 00:54:30,846
 you will get two
 recorders instantiated
 
-00:54:30.846 --> 00:54:33.306 A:middle
+
+1200
+00:54:30,846 --> 00:54:33,306
 when the step begins this will
 be a health quantity recorder
 
-00:54:33.666 --> 00:54:35.546 A:middle
+
+1201
+00:54:33,666 --> 00:54:35,546
 and a pedometer recorder
 and each
 
-00:54:35.546 --> 00:54:37.926 A:middle
+
+1202
+00:54:35,546 --> 00:54:37,926
 of these will configure
 themselves based
 
-00:54:37.926 --> 00:54:40.676 A:middle
+
+1203
+00:54:37,926 --> 00:54:40,676
 on the configuration
 model object attached
 
-00:54:40.676 --> 00:54:41.486 A:middle
+
+1204
+00:54:40,676 --> 00:54:41,486
 to the fitness step.
 
-00:54:42.006 --> 00:54:45.556 A:middle
+
+1205
+00:54:42,006 --> 00:54:45,556
 When the task completes, you
 will get back a step result,
 
-00:54:45.556 --> 00:54:47.186 A:middle
+
+1206
+00:54:45,556 --> 00:54:47,186
 as part of your task result
 
-00:54:47.186 --> 00:54:50.446 A:middle
+
+1207
+00:54:47,186 --> 00:54:50,446
 and that step result will
 contain two child file results
 
-00:54:50.676 --> 00:54:54.486 A:middle
+
+1208
+00:54:50,676 --> 00:54:54,486
 one for each of those recorders,
 with identifiers that correspond
 
-00:54:54.646 --> 00:54:56.266 A:middle
+
+1209
+00:54:54,646 --> 00:54:56,266
 to the corresponding
 recorder configurations.
 
-00:54:56.886 --> 00:55:00.666 A:middle
+
+1210
+00:54:56,886 --> 00:55:00,666
 The file URL as I mentioned
 already will point to a file
 
 
-
-00:54:56.886 --> 00:55:00.666 A:middle
-The file URL as I mentioned
-already will point to a file
-
-00:55:00.666 --> 00:55:02.726 A:middle
+1211
+00:55:00,666 --> 00:55:02,726
 in the output directory
 where that data got recorded.
 
-00:55:03.626 --> 00:55:05.226 A:middle
+
+1212
+00:55:03,626 --> 00:55:05,226
 The actual serialization format
 
-00:55:05.646 --> 00:55:07.346 A:middle
+
+1213
+00:55:05,646 --> 00:55:07,346
 in ResearchKit right
 now is JSON,
 
-00:55:07.416 --> 00:55:09.186 A:middle
+
+1214
+00:55:07,416 --> 00:55:09,186
 but if you needed a different
 format then it would be
 
-00:55:09.186 --> 00:55:11.006 A:middle
+
+1215
+00:55:09,186 --> 00:55:11,006
 straightforward to add
 a different formatter.
 
-00:55:11.496 --> 00:55:14.156 A:middle
+
+1216
+00:55:11,496 --> 00:55:14,156
 So that's recorders.
 
-00:55:14.256 --> 00:55:16.226 A:middle
+
+1217
+00:55:14,256 --> 00:55:16,226
 Now, I have alluded
 already to some
 
-00:55:16.226 --> 00:55:17.306 A:middle
+
+1218
+00:55:16,226 --> 00:55:17,306
 of the process you
 will need to go
 
-00:55:17.306 --> 00:55:19.016 A:middle
+
+1219
+00:55:17,306 --> 00:55:19,016
 through to make a
 custom active step
 
-00:55:19.636 --> 00:55:22.506 A:middle
+
+1220
+00:55:19,636 --> 00:55:22,506
 but let's delineate those
 points now before we finish.
 
-00:55:23.716 --> 00:55:25.406 A:middle
+
+1221
+00:55:23,716 --> 00:55:25,406
 So when you go to create
 your custom active step,
 
-00:55:26.186 --> 00:55:28.126 A:middle
+
+1222
+00:55:26,186 --> 00:55:28,126
 you will first subclass
 ORKActiveStep
 
-00:55:28.486 --> 00:55:30.126 A:middle
+
+1223
+00:55:28,486 --> 00:55:30,126
 and subclass the active
 step view controller.
 
-00:55:30.506 --> 00:55:32.736 A:middle
+
+1224
+00:55:30,506 --> 00:55:32,736
 Usually we have pairs
 of these classes.
 
-00:55:33.266 --> 00:55:34.996 A:middle
+
+1225
+00:55:33,266 --> 00:55:34,996
 Then you will need
 to build the UI.
 
-00:55:35.946 --> 00:55:37.966 A:middle
+
+1226
+00:55:35,946 --> 00:55:37,966
 And that could mean that you
 completely override the UI
 
-00:55:37.966 --> 00:55:39.636 A:middle
+
+1227
+00:55:37,966 --> 00:55:39,636
 of your active step view
 controller if you need
 
-00:55:39.636 --> 00:55:42.016 A:middle
+
+1228
+00:55:39,636 --> 00:55:42,016
 to control the whole
 screen or it could mean
 
-00:55:42.016 --> 00:55:43.346 A:middle
+
+1229
+00:55:42,016 --> 00:55:43,346
 that you just set
 the custom view,
 
-00:55:43.516 --> 00:55:45.906 A:middle
+
+1230
+00:55:43,516 --> 00:55:45,906
 which fits into the
 built-in active step template
 
-00:55:45.906 --> 00:55:46.456 A:middle
+
+1231
+00:55:45,906 --> 00:55:46,456
 in ResearchKit.
 
-00:55:46.956 --> 00:55:49.766 A:middle
+
+1232
+00:55:46,956 --> 00:55:49,766
 You will need to configure
 some recorders if you need
 
-00:55:49.766 --> 00:55:52.496 A:middle
+
+1233
+00:55:49,766 --> 00:55:52,496
 to actually collect sensor data
 using the recorders we already
 
-00:55:52.496 --> 00:55:56.206 A:middle
+
+1234
+00:55:52,496 --> 00:55:56,206
 have and you may need to
 add some new result classes.
 
-00:55:56.856 --> 00:55:58.786 A:middle
+
+1235
+00:55:56,856 --> 00:55:58,786
 So for the cognitive
 game, for example,
 
-00:55:58.786 --> 00:56:02.156 A:middle
+
+1236
+00:55:58,786 --> 00:56:02,156
 you saw we had the tapping
 interval task result there.
 
 
-
-00:55:58.786 --> 00:56:02.156 A:middle
-you saw we had the tapping
-interval task result there.
-
-00:56:02.706 --> 00:56:05.216 A:middle
+1237
+00:56:02,706 --> 00:56:05,216
 That was an example
 of a result class
 
-00:56:05.216 --> 00:56:07.186 A:middle
+
+1238
+00:56:05,216 --> 00:56:07,186
 that was created
 specifically for that step.
 
-00:56:07.186 --> 00:56:09.736 A:middle
+
+1239
+00:56:07,186 --> 00:56:09,736
 And when you create an active
 step that's like that one,
 
-00:56:09.786 --> 00:56:12.316 A:middle
+
+1240
+00:56:09,786 --> 00:56:12,316
 you will need to correspondingly
 create your own class structure
 
-00:56:12.606 --> 00:56:17.666 A:middle
+
+1241
+00:56:12,606 --> 00:56:17,666
 which needs to be serializable
 and that will introduce a couple
 
-00:56:17.666 --> 00:56:19.756 A:middle
+
+1242
+00:56:17,666 --> 00:56:19,756
 of limitations on what you
 will include in those results.
 
-00:56:22.656 --> 00:56:24.256 A:middle
+
+1243
+00:56:22,656 --> 00:56:24,256
 That's it for active steps.
 
-00:56:24.586 --> 00:56:27.686 A:middle
+
+1244
+00:56:24,586 --> 00:56:27,686
 We talked about our three
 modules and we talked about how
 
-00:56:27.686 --> 00:56:28.666 A:middle
+
+1245
+00:56:27,686 --> 00:56:28,666
 to contribute to ResearchKit.
 
-00:56:29.176 --> 00:56:31.816 A:middle
+
+1246
+00:56:29,176 --> 00:56:31,816
 And I just want to leave
 you with a few thoughts.
 
-00:56:32.146 --> 00:56:36.246 A:middle
+
+1247
+00:56:32,146 --> 00:56:36,246
 First, ResearchKit is open
 source and as a result,
 
-00:56:36.246 --> 00:56:37.746 A:middle
+
+1248
+00:56:36,246 --> 00:56:37,746
 if there's one thing
 I want you to do
 
-00:56:37.746 --> 00:56:40.856 A:middle
+
+1249
+00:56:37,746 --> 00:56:40,856
 after this result is go away
 and clone it and have a look
 
-00:56:40.856 --> 00:56:42.456 A:middle
+
+1250
+00:56:40,856 --> 00:56:42,456
 and see how it will
 fit into your apps.
 
-00:56:43.716 --> 00:56:45.646 A:middle
+
+1251
+00:56:43,716 --> 00:56:45,646
 And since it's open
 source, you can contribute.
 
-00:56:45.896 --> 00:56:47.936 A:middle
+
+1252
+00:56:45,896 --> 00:56:47,936
 You can make a difference to
 the future of medical research.
 
-00:56:48.616 --> 00:56:49.716 A:middle
+
+1253
+00:56:48,616 --> 00:56:49,716
 And that's really
 the main point.
 
-00:56:49.876 --> 00:56:52.946 A:middle
+
+1254
+00:56:49,876 --> 00:56:52,946
 This is an open project and it
 will become what you make it.
 
-00:56:53.836 --> 00:56:55.136 A:middle
+
+1255
+00:56:53,836 --> 00:56:55,136
 There are a few other areas
 
-00:56:55.136 --> 00:56:56.376 A:middle
+
+1256
+00:56:55,136 --> 00:56:56,376
 where you can get some
 additional information
 
-00:56:56.376 --> 00:56:56.986 A:middle
+
+1257
+00:56:56,376 --> 00:56:56,986
 about ResearchKit.
 
-00:56:57.496 --> 00:57:00.696 A:middle
+
+1258
+00:56:57,496 --> 00:57:00,696
 We have the ResearchKit.
 
 
-
-00:56:57.496 --> 00:57:00.696 A:middle
-We have the ResearchKit.
-
-00:57:00.906 --> 00:57:03.266 A:middle
+1259
+00:57:00,906 --> 00:57:03,266
 org which is our
 primary landing page.
 
-00:57:03.836 --> 00:57:05.906 A:middle
+
+1260
+00:57:03,836 --> 00:57:05,906
 And that will have links to all
 the different projects included
 
-00:57:05.906 --> 00:57:08.266 A:middle
+
+1261
+00:57:05,906 --> 00:57:08,266
 in ResearchKit, both the
 apps using ResearchKit
 
-00:57:08.656 --> 00:57:10.676 A:middle
+
+1262
+00:57:08,656 --> 00:57:10,676
 and the framework
 itself we've linked here.
 
-00:57:11.056 --> 00:57:13.576 A:middle
+
+1263
+00:57:11,056 --> 00:57:13,576
 For general inquiries,
 for instance,
 
-00:57:13.576 --> 00:57:16.686 A:middle
+
+1264
+00:57:13,576 --> 00:57:16,686
 if you are a principal
 investigator and you want to get
 
-00:57:16.686 --> 00:57:18.856 A:middle
+
+1265
+00:57:16,686 --> 00:57:18,856
 in touch with others who
 might be able to help you
 
-00:57:18.856 --> 00:57:22.056 A:middle
+
+1266
+00:57:18,856 --> 00:57:22,056
 with your project, then you can
 reach us at ResearchKit@apple.
 
-00:57:22.056 --> 00:57:24.886 A:middle
+
+1267
+00:57:22,056 --> 00:57:24,886
 com. And finally, for
 technical support,
 
-00:57:24.886 --> 00:57:25.786 A:middle
+
+1268
+00:57:24,886 --> 00:57:25,786
 we've two mailing lists.
 
-00:57:25.786 --> 00:57:29.726 A:middle
+
+1269
+00:57:25,786 --> 00:57:29,726
 We'vegot ResearchKit Users
 if you need to reach others
 
-00:57:29.726 --> 00:57:31.456 A:middle
+
+1270
+00:57:29,726 --> 00:57:31,456
 who are using the framework
 or ask questions about how
 
-00:57:31.456 --> 00:57:33.676 A:middle
+
+1271
+00:57:31,456 --> 00:57:33,676
 to use it, and ResearchKit
 Dev if you have questions
 
-00:57:33.676 --> 00:57:34.416 A:middle
+
+1272
+00:57:33,676 --> 00:57:34,416
 about how to contribute.
 
-00:57:36.436 --> 00:57:38.576 A:middle
+
+1273
+00:57:36,436 --> 00:57:38,576
 There are some related sessions
 that may help you as you try
 
-00:57:38.576 --> 00:57:39.626 A:middle
+
+1274
+00:57:38,576 --> 00:57:39,626
 to put together a research app.
 
-00:57:40.126 --> 00:57:41.746 A:middle
+
+1275
+00:57:40,126 --> 00:57:41,746
 So there's What's New
 in HealthKit yesterday.
 
-00:57:42.026 --> 00:57:45.426 A:middle
+
+1276
+00:57:42,026 --> 00:57:45,426
 We introduced some new data
 types among other things.
 
-00:57:45.426 --> 00:57:48.216 A:middle
+
+1277
+00:57:45,426 --> 00:57:48,216
 So you can go and
 visit that online
 
-00:57:48.846 --> 00:57:51.176 A:middle
+
+1278
+00:57:48,846 --> 00:57:51,176
 and also we had a HealthKit and
 ResearchKit lab this morning
 
-00:57:51.176 --> 00:57:53.096 A:middle
+
+1279
+00:57:51,176 --> 00:57:53,096
 and there's another one
 tomorrow morning at 11:00.
 
-00:57:53.926 --> 00:57:55.306 A:middle
+
+1280
+00:57:53,926 --> 00:57:55,306
 Finally there's a
 health, fitness,
 
-00:57:55.306 --> 00:57:57.916 A:middle
+
+1281
+00:57:55,306 --> 00:57:57,916
 and research get together
 in just a half hour
 
-00:57:57.916 --> 00:57:59.926 A:middle
+
+1282
+00:57:57,916 --> 00:57:59,926
 and I hope you'll
 join us for that.
 
-00:57:59.926 --> 00:58:02.416 A:middle
+
+1283
+00:57:59,926 --> 00:58:02,416
 With that, thank you very
 much and thanks for listening.
 
 
-
-00:57:59.926 --> 00:58:02.416 A:middle
-With that, thank you very
-much and thanks for listening.
-
-00:58:03.516 --> 00:58:06.500 A:middle
+1284
+00:58:03,516 --> 00:58:06,500
 [Applause]
 

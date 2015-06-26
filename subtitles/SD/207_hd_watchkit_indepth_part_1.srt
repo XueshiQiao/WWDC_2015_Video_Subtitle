@@ -1,2487 +1,3547 @@
-
-00:00:24.516 --> 00:00:30.856 A:middle
+1
+00:00:24,516 --> 00:00:30,856
 [ Applause ]
 
-00:00:31.356 --> 00:00:32.106 A:middle
-&gt;&gt; ANDREW PLATZER:
+
+2
+00:00:31,356 --> 00:00:32,106
+>> ANDREW PLATZER:
 Good morning, everyone,
 
-00:00:32.326 --> 00:00:34.756 A:middle
+
+3
+00:00:32,326 --> 00:00:34,756
 and welcome to WatchKit
 in Depth Part 1,
 
-00:00:34.756 --> 00:00:37.716 A:middle
+
+4
+00:00:34,756 --> 00:00:37,716
 the first of two sessions
 to explore a bit more
 
-00:00:37.716 --> 00:00:40.016 A:middle
+
+5
+00:00:37,716 --> 00:00:40,016
 about the changes in WatchKit.
 
-00:00:40.386 --> 00:00:41.586 A:middle
+
+6
+00:00:40,386 --> 00:00:41,586
 My name is Andrew
 Platzer and along
 
-00:00:41.586 --> 00:00:45.266 A:middle
+
+7
+00:00:41,586 --> 00:00:45,266
 with Forest Hill we will be
 covering some topics today
 
-00:00:45.576 --> 00:00:46.986 A:middle
+
+8
+00:00:45,576 --> 00:00:46,986
 hopefully of interest to you.
 
-00:00:48.346 --> 00:00:51.686 A:middle
+
+9
+00:00:48,346 --> 00:00:51,686
 I'm going to be covering
 three sections, architecture,
 
-00:00:51.686 --> 00:00:55.276 A:middle
+
+10
+00:00:51,686 --> 00:00:55,276
 the basic layout of how a
 watch extension works inside a
 
-00:00:55.276 --> 00:00:55.906 A:middle
+
+11
+00:00:55,276 --> 00:00:55,906
 watch app.
 
-00:00:55.906 --> 00:00:58.486 A:middle
+
+12
+00:00:55,906 --> 00:00:58,486
 I will talk about where
 resources and data live
 
-00:00:58.556 --> 00:01:00.416 A:middle
+
+13
+00:00:58,556 --> 00:01:00,416
 because it is a two-part system,
 
 
-
-00:00:58.556 --> 00:01:00.416 A:middle
-because it is a two-part system,
-
-00:01:00.416 --> 00:01:02.286 A:middle
+14
+00:01:00,416 --> 00:01:02,286
 and so it may be a bit
 confusing to start with.
 
-00:01:02.286 --> 00:01:05.316 A:middle
+
+15
+00:01:02,286 --> 00:01:05,316
 For those who have already
 worked on watchOS 1,
 
-00:01:05.596 --> 00:01:08.216 A:middle
+
+16
+00:01:05,596 --> 00:01:08,216
 a WatchKit extension, a
 watch app, I will talk a bit
 
-00:01:08.216 --> 00:01:11.316 A:middle
+
+17
+00:01:08,216 --> 00:01:11,316
 about migrating over, what's
 changed, what's the same,
 
-00:01:11.776 --> 00:01:15.016 A:middle
+
+18
+00:01:11,776 --> 00:01:15,016
 and then Forest will carry on
 and talk a bit more about some
 
-00:01:15.016 --> 00:01:17.496 A:middle
+
+19
+00:01:15,016 --> 00:01:17,496
 of the new API and the
 new classes in WatchKit.
 
-00:01:17.676 --> 00:01:19.446 A:middle
+
+20
+00:01:17,676 --> 00:01:19,446
 So your Watch app
 has three parts.
 
-00:01:19.956 --> 00:01:21.566 A:middle
+
+21
+00:01:19,956 --> 00:01:21,566
 It's got an iOS application,
 
-00:01:22.076 --> 00:01:25.186 A:middle
+
+22
+00:01:22,076 --> 00:01:25,186
 and that is what you would
 get installed on the phone,
 
-00:01:25.186 --> 00:01:27.746 A:middle
+
+23
+00:01:25,186 --> 00:01:27,746
 as well as that, you
 provide a WatchKit extension,
 
-00:01:27.746 --> 00:01:31.246 A:middle
+
+24
+00:01:27,746 --> 00:01:31,246
 this is the code you write,
 and then a watch OS application
 
-00:01:31.406 --> 00:01:34.136 A:middle
+
+25
+00:01:31,406 --> 00:01:34,136
 which contains resources
 and interface description.
 
-00:01:36.706 --> 00:01:38.826 A:middle
+
+26
+00:01:36,706 --> 00:01:38,826
 You have your phone and
 you download your app,
 
-00:01:38.826 --> 00:01:44.156 A:middle
+
+27
+00:01:38,826 --> 00:01:44,156
 and what we have done is
 added a new bundle of data,
 
-00:01:44.396 --> 00:01:47.656 A:middle
+
+28
+00:01:44,396 --> 00:01:47,656
 bundle of files that get along
 with, install along with it,
 
-00:01:47.796 --> 00:01:49.076 A:middle
+
+29
+00:01:47,796 --> 00:01:49,076
 and that's the Watch app,
 
-00:01:49.076 --> 00:01:50.866 A:middle
+
+30
+00:01:49,076 --> 00:01:50,866
 that contains your
 interface description
 
-00:01:50.896 --> 00:01:54.066 A:middle
+
+31
+00:01:50,896 --> 00:01:54,066
 and maybe some resources, and
 then your WatchKit extension
 
-00:01:54.206 --> 00:01:57.766 A:middle
+
+32
+00:01:54,206 --> 00:01:57,766
 which contains code and
 additional resources.
 
-00:01:58.756 --> 00:02:01.916 A:middle
+
+33
+00:01:58,756 --> 00:02:01,916
 So when you pair it with
 your watch, we copy over all
 
 
-
-00:01:58.756 --> 00:02:01.916 A:middle
-So when you pair it with
-your watch, we copy over all
-
-00:02:01.916 --> 00:02:04.186 A:middle
+34
+00:02:01,916 --> 00:02:04,186
 of that information, and it
 appears on the Home screen
 
-00:02:04.646 --> 00:02:05.646 A:middle
+
+35
+00:02:04,646 --> 00:02:05,646
 as a full application.
 
-00:02:06.596 --> 00:02:11.596 A:middle
+
+36
+00:02:06,596 --> 00:02:11,596
 Of course, a copy is still
 left on the phone for later
 
-00:02:11.596 --> 00:02:12.896 A:middle
+
+37
+00:02:11,596 --> 00:02:12,896
 in case it needs
 to be reinstalled.
 
-00:02:14.166 --> 00:02:15.836 A:middle
+
+38
+00:02:14,166 --> 00:02:15,836
 So I want to talk
 about the two parts
 
-00:02:16.716 --> 00:02:18.096 A:middle
+
+39
+00:02:16,716 --> 00:02:18,096
 that you are going
 to be providing.
 
-00:02:18.226 --> 00:02:20.876 A:middle
+
+40
+00:02:18,226 --> 00:02:20,876
 One is the interface and
 the other is the actual code
 
-00:02:20.876 --> 00:02:23.256 A:middle
+
+41
+00:02:20,876 --> 00:02:23,256
 and the extension.
 
-00:02:23.396 --> 00:02:26.866 A:middle
+
+42
+00:02:23,396 --> 00:02:26,866
 When you create a
 new WatchKit App,
 
-00:02:27.286 --> 00:02:29.236 A:middle
+
+43
+00:02:27,286 --> 00:02:29,236
 you can see there are
 actually two separate targets,
 
-00:02:29.786 --> 00:02:32.786 A:middle
+
+44
+00:02:29,786 --> 00:02:32,786
 two separate components, the app
 with the interface storyboard
 
-00:02:33.006 --> 00:02:35.666 A:middle
+
+45
+00:02:33,006 --> 00:02:35,666
 and your code, in this
 case in Swift, and you have
 
-00:02:35.936 --> 00:02:40.076 A:middle
+
+46
+00:02:35,936 --> 00:02:40,076
 up to four different
 things you can add code for.
 
-00:02:40.076 --> 00:02:44.666 A:middle
+
+47
+00:02:40,076 --> 00:02:44,666
 So for the storyboard, this
 is the interface part of it,
 
-00:02:45.086 --> 00:02:48.086 A:middle
+
+48
+00:02:45,086 --> 00:02:48,086
 you can edit in IB just like
 you would an iOS application,
 
-00:02:49.016 --> 00:02:53.566 A:middle
+
+49
+00:02:49,016 --> 00:02:53,566
 and we provide a reasonably
 rich set of interface elements,
 
-00:02:53.606 --> 00:02:54.996 A:middle
+
+50
+00:02:53,606 --> 00:02:54,996
 labels, images, et cetera.
 
-00:02:55.116 --> 00:02:58.146 A:middle
+
+51
+00:02:55,116 --> 00:02:58,146
 This is all in watchOS 1 and we
 have added a couple of new ones
 
-00:02:58.146 --> 00:02:59.856 A:middle
+
+52
+00:02:58,146 --> 00:02:59,856
 in watchOS 2, the thicker view,
 
-00:02:59.856 --> 00:03:02.136 A:middle
+
+53
+00:02:59,856 --> 00:03:02,136
 which will give you a
 lot more rich interface,
 
 
-
-00:02:59.856 --> 00:03:02.136 A:middle
-which will give you a
-lot more rich interface,
-
-00:03:02.136 --> 00:03:02.806 A:middle
+54
+00:03:02,136 --> 00:03:02,806
 and the movie view.
 
-00:03:03.546 --> 00:03:09.706 A:middle
+
+55
+00:03:03,546 --> 00:03:09,706
 So, for example, here are three
 standard possible controllers
 
-00:03:09.706 --> 00:03:11.156 A:middle
+
+56
+00:03:09,706 --> 00:03:11,156
 with all of the controls
 you can see,
 
-00:03:11.376 --> 00:03:13.156 A:middle
+
+57
+00:03:11,376 --> 00:03:13,156
 and these are created
 in interface builder.
 
-00:03:14.276 --> 00:03:16.656 A:middle
+
+58
+00:03:14,276 --> 00:03:16,656
 We also have custom interfaces
 for specific functions,
 
-00:03:17.036 --> 00:03:20.026 A:middle
+
+59
+00:03:17,036 --> 00:03:20,026
 one is Glances, and it's
 got a more specific layout
 
-00:03:20.026 --> 00:03:22.186 A:middle
+
+60
+00:03:20,026 --> 00:03:22,186
 and the other two are
 for notifications.
 
-00:03:22.496 --> 00:03:25.476 A:middle
+
+61
+00:03:22,496 --> 00:03:25,476
 One is for static, one is
 for more dynamic information
 
-00:03:25.476 --> 00:03:27.466 A:middle
+
+62
+00:03:25,476 --> 00:03:27,466
 which you provide at run time.
 
-00:03:29.136 --> 00:03:32.386 A:middle
+
+63
+00:03:29,136 --> 00:03:32,386
 So as I said, there are four
 roles for your extension.
 
-00:03:33.406 --> 00:03:34.506 A:middle
+
+64
+00:03:33,406 --> 00:03:34,506
 There is an application role,
 
-00:03:34.506 --> 00:03:36.316 A:middle
+
+65
+00:03:34,506 --> 00:03:36,316
 so when your application is
 launched from the Home screen,
 
-00:03:36.566 --> 00:03:37.586 A:middle
+
+66
+00:03:36,566 --> 00:03:37,586
 we call your extension.
 
-00:03:37.836 --> 00:03:40.486 A:middle
+
+67
+00:03:37,836 --> 00:03:40,486
 It's also used for the single
 page glance that appears
 
-00:03:40.866 --> 00:03:44.076 A:middle
+
+68
+00:03:40,866 --> 00:03:44,076
 from the clock, notifications
 when you receive one,
 
-00:03:44.386 --> 00:03:45.616 A:middle
+
+69
+00:03:44,386 --> 00:03:45,616
 and now complications.
 
-00:03:47.346 --> 00:03:50.536 A:middle
+
+70
+00:03:47,346 --> 00:03:50,536
 And for each of these, there
 is an associated controller,
 
-00:03:50.536 --> 00:03:52.406 A:middle
+
+71
+00:03:50,536 --> 00:03:52,406
 for the Glances and the
 regular application,
 
-00:03:52.406 --> 00:03:53.696 A:middle
+
+72
+00:03:52,406 --> 00:03:53,696
 there are WKInterfaceController.
 
-00:03:54.066 --> 00:03:57.976 A:middle
+
+73
+00:03:54,066 --> 00:03:57,976
 There is the specific sub class
 called WK user notification
 
-00:03:58.046 --> 00:04:00.556 A:middle
+
+74
+00:03:58,046 --> 00:04:00,556
 controller which you should
 use for notifications,
 
 
-
-00:03:58.046 --> 00:04:00.556 A:middle
-controller which you should
-use for notifications,
-
-00:04:00.966 --> 00:04:04.576 A:middle
+75
+00:04:00,966 --> 00:04:04,576
 and there is a new data
 source object CLK complication
 
-00:04:04.576 --> 00:04:05.086 A:middle
+
+76
+00:04:04,576 --> 00:04:05,086
 data source.
 
-00:04:06.036 --> 00:04:08.186 A:middle
+
+77
+00:04:06,036 --> 00:04:08,186
 I won't talk anymore
 about the complications.
 
-00:04:08.526 --> 00:04:11.396 A:middle
+
+78
+00:04:08,526 --> 00:04:11,396
 There is a session
 later today that will go
 
-00:04:11.396 --> 00:04:14.856 A:middle
+
+79
+00:04:11,396 --> 00:04:14,856
 into great detail about this.
 
-00:04:15.506 --> 00:04:19.516 A:middle
+
+80
+00:04:15,506 --> 00:04:19,516
 So your WKInterfaceController
 is your main connection
 
-00:04:19.516 --> 00:04:20.476 A:middle
+
+81
+00:04:19,516 --> 00:04:20,476
 to your interface.
 
-00:04:21.146 --> 00:04:24.496 A:middle
+
+82
+00:04:21,146 --> 00:04:24,496
 The main thing it does is it
 provides automatic creation
 
-00:04:24.496 --> 00:04:27.116 A:middle
+
+83
+00:04:24,496 --> 00:04:27,116
 of interface properties so
 you tag an interface element
 
-00:04:27.796 --> 00:04:32.336 A:middle
+
+84
+00:04:27,796 --> 00:04:32,336
 in your interface design and
 say this is like, for example,
 
-00:04:32.336 --> 00:04:34.836 A:middle
+
+85
+00:04:32,336 --> 00:04:34,836
 my label, and then we
 create an associated object
 
-00:04:35.276 --> 00:04:37.816 A:middle
+
+86
+00:04:35,276 --> 00:04:37,816
 on the controller and we connect
 it up automatically for you.
 
-00:04:38.516 --> 00:04:42.136 A:middle
+
+87
+00:04:38,516 --> 00:04:42,136
 The controller also
 supports menu handling.
 
-00:04:42.206 --> 00:04:45.336 A:middle
+
+88
+00:04:42,206 --> 00:04:45,336
 You can customize menus
 or have static ones.
 
-00:04:45.336 --> 00:04:48.576 A:middle
+
+89
+00:04:45,336 --> 00:04:48,576
 We provide navigation,
 push and so on, or paging,
 
-00:04:49.286 --> 00:04:51.106 A:middle
+
+90
+00:04:49,286 --> 00:04:51,106
 modal presentation
 of controllers
 
-00:04:51.896 --> 00:04:55.086 A:middle
+
+91
+00:04:51,896 --> 00:04:55,086
 and alerts, and action sheets.
 
-00:04:56.096 --> 00:04:59.766 A:middle
+
+92
+00:04:56,096 --> 00:04:59,766
 One other thing we do provide
 is a number of system UI sheets,
 
 
-
-00:05:00.056 --> 00:05:03.886 A:middle
+93
+00:05:00,056 --> 00:05:03,886
 text input, video play
 back, audio recording.
 
-00:05:07.076 --> 00:05:09.846 A:middle
+
+94
+00:05:07,076 --> 00:05:09,846
 So, for example, here is
 a very simple interface
 
-00:05:10.046 --> 00:05:10.706 A:middle
+
+95
+00:05:10,046 --> 00:05:10,706
 controller class.
 
-00:05:10.706 --> 00:05:14.996 A:middle
+
+96
+00:05:10,706 --> 00:05:14,996
 It has one outlet, app image
 and we have loaded up in IB
 
-00:05:14.996 --> 00:05:18.606 A:middle
+
+97
+00:05:14,996 --> 00:05:18,606
 and when we run the application
 we see it pulls the image
 
-00:05:18.606 --> 00:05:19.666 A:middle
+
+98
+00:05:18,606 --> 00:05:19,666
 and displays it on the screen.
 
-00:05:19.666 --> 00:05:25.456 A:middle
+
+99
+00:05:19,666 --> 00:05:25,456
 So I want to talk a little bit
 about the location of stuff,
 
-00:05:25.516 --> 00:05:28.176 A:middle
+
+100
+00:05:25,516 --> 00:05:28,176
 where your resources live, where
 you can pull your data from.
 
-00:05:29.656 --> 00:05:33.706 A:middle
+
+101
+00:05:29,656 --> 00:05:33,706
 Because there are two
 parts to this watch app,
 
-00:05:33.886 --> 00:05:36.086 A:middle
+
+102
+00:05:33,886 --> 00:05:36,086
 there is the watch app itself
 and the WatchKit extension,
 
-00:05:36.476 --> 00:05:38.316 A:middle
+
+103
+00:05:36,476 --> 00:05:38,316
 there are two places
 where data is stored,
 
-00:05:38.316 --> 00:05:40.826 A:middle
+
+104
+00:05:38,316 --> 00:05:40,826
 there's the WatchApp bundle and
 the WatchKit extension bundle,
 
-00:05:41.266 --> 00:05:44.036 A:middle
+
+105
+00:05:41,266 --> 00:05:44,036
 and you have got to be sure
 you remember where it is.
 
-00:05:44.036 --> 00:05:46.746 A:middle
+
+106
+00:05:44,036 --> 00:05:46,746
 For example, here I have
 created another project,
 
-00:05:47.036 --> 00:05:48.646 A:middle
+
+107
+00:05:47,036 --> 00:05:48,646
 it has an interface
 storyboard as before
 
-00:05:48.646 --> 00:05:50.216 A:middle
+
+108
+00:05:48,646 --> 00:05:50,216
 and also an application
 image.png
 
-00:05:50.556 --> 00:05:53.066 A:middle
+
+109
+00:05:50,556 --> 00:05:53,066
 and the localized string file
 
-00:05:53.436 --> 00:05:55.656 A:middle
+
+110
+00:05:53,436 --> 00:05:55,656
 and the extension itself also
 has the same kind of thing.
 
-00:05:55.656 --> 00:05:58.796 A:middle
+
+111
+00:05:55,656 --> 00:05:58,796
 It has another .png file
 and a localizable string.
 
 
-
-00:06:00.216 --> 00:06:03.706 A:middle
+112
+00:06:00,216 --> 00:06:03,706
 So now if we do the obvious,
 which would be create a couple
 
-00:06:03.706 --> 00:06:07.726 A:middle
+
+113
+00:06:03,706 --> 00:06:07,726
 of outlets, wire them up
 using IB outlet to indicate
 
-00:06:07.726 --> 00:06:11.096 A:middle
+
+114
+00:06:07,726 --> 00:06:11,096
 that these are the properties,
 and call set image, well,
 
-00:06:11.096 --> 00:06:12.336 A:middle
+
+115
+00:06:11,096 --> 00:06:12,336
 we don't get an extension image.
 
-00:06:13.376 --> 00:06:16.976 A:middle
+
+116
+00:06:13,376 --> 00:06:16,976
 The reason for that is that
 when you call set image named
 
-00:06:16.976 --> 00:06:20.036 A:middle
+
+117
+00:06:16,976 --> 00:06:20,036
 on a WKInterfaceImage,
 it doesn't look
 
-00:06:20.036 --> 00:06:21.446 A:middle
+
+118
+00:06:20,036 --> 00:06:21,446
 up in the applications bundle,
 
-00:06:21.716 --> 00:06:24.296 A:middle
+
+119
+00:06:21,716 --> 00:06:24,296
 but the extension image doesn't
 live in the applications bundle.
 
-00:06:24.996 --> 00:06:27.236 A:middle
+
+120
+00:06:24,996 --> 00:06:27,236
 So instead, what you need
 to do is directly fetch it
 
-00:06:27.296 --> 00:06:30.096 A:middle
+
+121
+00:06:27,296 --> 00:06:30,096
 in the code that's running
 in that particular bundle.
 
-00:06:30.176 --> 00:06:34.366 A:middle
+
+122
+00:06:30,176 --> 00:06:34,366
 So in the extension code, you
 call UI image 'image named,
 
-00:06:34.716 --> 00:06:37.236 A:middle
+
+123
+00:06:34,716 --> 00:06:37,236
 and it will pull the image
 locally since it knows how
 
-00:06:37.236 --> 00:06:38.516 A:middle
+
+124
+00:06:37,236 --> 00:06:38,516
 to search inside its own bundle.
 
-00:06:38.896 --> 00:06:40.136 A:middle
+
+125
+00:06:38,896 --> 00:06:40,136
 Then you send that across.
 
-00:06:40.136 --> 00:06:43.976 A:middle
+
+126
+00:06:40,136 --> 00:06:43,976
 You call set imagine instead of
 set image named so it will pass
 
-00:06:43.976 --> 00:06:47.216 A:middle
+
+127
+00:06:43,976 --> 00:06:47,216
 over the image and both will
 appear in your application.
 
-00:06:50.296 --> 00:06:51.706 A:middle
+
+128
+00:06:50,296 --> 00:06:51,706
 So now you want to
 store some data.
 
-00:06:51.776 --> 00:06:54.096 A:middle
+
+129
+00:06:51,776 --> 00:06:54,096
 You don't want just
 pull some static images.
 
-00:06:54.096 --> 00:06:55.736 A:middle
+
+130
+00:06:54,096 --> 00:06:55,736
 You have a much more
 dynamic application,
 
-00:06:56.306 --> 00:06:59.596 A:middle
+
+131
+00:06:56,306 --> 00:06:59,596
 so there are two folders
 that are of interest.
 
 
-
-00:07:00.096 --> 00:07:01.346 A:middle
+132
+00:07:00,096 --> 00:07:01,346
 One is the documents folder,
 
-00:07:01.786 --> 00:07:04.426 A:middle
+
+133
+00:07:01,786 --> 00:07:04,426
 this is where you would store
 more persistent information.
 
-00:07:05.166 --> 00:07:05.896 A:middle
+
+134
+00:07:05,166 --> 00:07:05,896
 It's not purgeable.
 
-00:07:05.896 --> 00:07:08.676 A:middle
+
+135
+00:07:05,896 --> 00:07:08,676
 That means it hangs around
 between reboots, et cetera,
 
-00:07:09.146 --> 00:07:12.616 A:middle
+
+136
+00:07:09,146 --> 00:07:12,616
 but one thing to note, it is
 not restored, so you may have
 
-00:07:12.656 --> 00:07:15.446 A:middle
+
+137
+00:07:12,656 --> 00:07:15,446
 to check for that if
 the watch was erased
 
-00:07:15.446 --> 00:07:16.686 A:middle
+
+138
+00:07:15,446 --> 00:07:16,686
 or you go to a new watch.
 
-00:07:17.896 --> 00:07:19.166 A:middle
+
+139
+00:07:17,896 --> 00:07:19,166
 There is also a caches folder.
 
-00:07:19.586 --> 00:07:22.416 A:middle
+
+140
+00:07:19,586 --> 00:07:22,416
 This one is purgeable, so if
 the system decides it needs more
 
-00:07:23.166 --> 00:07:26.486 A:middle
+
+141
+00:07:23,166 --> 00:07:26,486
 storage for music or
 pictures or other apps,
 
-00:07:26.546 --> 00:07:27.736 A:middle
+
+142
+00:07:26,546 --> 00:07:27,736
 it will remove those images,
 
-00:07:27.966 --> 00:07:30.946 A:middle
+
+143
+00:07:27,966 --> 00:07:30,946
 so you should consider those
 may go away at any time.
 
-00:07:33.026 --> 00:07:36.016 A:middle
+
+144
+00:07:33,026 --> 00:07:36,016
 And so here is a quick
 example of where to find it.
 
-00:07:37.216 --> 00:07:40.536 A:middle
+
+145
+00:07:37,216 --> 00:07:40,536
 In this case, the main call here
 is the document directory class
 
-00:07:40.726 --> 00:07:42.696 A:middle
+
+146
+00:07:40,726 --> 00:07:42,696
 file manager for
 URLs for directory.
 
-00:07:42.966 --> 00:07:47.626 A:middle
+
+147
+00:07:42,966 --> 00:07:47,626
 It will ask for the first
 one and that's the URL.
 
-00:07:47.676 --> 00:07:51.166 A:middle
+
+148
+00:07:47,676 --> 00:07:51,166
 So we can create a URL
 including our file name
 
-00:07:51.426 --> 00:07:55.466 A:middle
+
+149
+00:07:51,426 --> 00:07:55,466
 and write some data to it.
 
-00:07:56.036 --> 00:07:58.486 A:middle
+
+150
+00:07:56,036 --> 00:07:58,486
 Now, media presents
 another interesting problem
 
-00:07:59.176 --> 00:08:02.236 A:middle
+
+151
+00:07:59,176 --> 00:08:02,236
 because the application is in
 charge of playing the media,
 
 
-
-00:07:59.176 --> 00:08:02.236 A:middle
-because the application is in
-charge of playing the media,
-
-00:08:02.656 --> 00:08:06.186 A:middle
+152
+00:08:02,656 --> 00:08:06,186
 and it's also in charge of
 recording it audio somewhere.
 
-00:08:06.186 --> 00:08:09.306 A:middle
+
+153
+00:08:06,186 --> 00:08:09,306
 So when you, your extension
 requests to play a movie
 
-00:08:09.306 --> 00:08:11.406 A:middle
+
+154
+00:08:09,306 --> 00:08:11,406
 or play audio or record audio,
 
-00:08:11.766 --> 00:08:13.136 A:middle
+
+155
+00:08:11,766 --> 00:08:13,136
 we send that off
 to the application.
 
-00:08:14.346 --> 00:08:16.476 A:middle
+
+156
+00:08:14,346 --> 00:08:16,476
 On the other hand, the extension
 is in charge of getting
 
-00:08:16.476 --> 00:08:20.776 A:middle
+
+157
+00:08:16,476 --> 00:08:20,776
 that media, downloading it from
 the internet or generating it
 
-00:08:20.776 --> 00:08:22.826 A:middle
+
+158
+00:08:20,776 --> 00:08:22,826
 or whatever, and
 it's also in charge
 
-00:08:22.826 --> 00:08:25.586 A:middle
+
+159
+00:08:22,826 --> 00:08:25,586
 of getting the recorded audio
 files that you may have set up
 
-00:08:26.056 --> 00:08:28.586 A:middle
+
+160
+00:08:26,056 --> 00:08:28,586
 and sending them
 out to your server.
 
-00:08:30.286 --> 00:08:31.486 A:middle
+
+161
+00:08:30,286 --> 00:08:31,486
 So what you need to do is set
 
-00:08:31.486 --> 00:08:34.186 A:middle
+
+162
+00:08:31,486 --> 00:08:34,186
 up what's called a
 shared container.
 
-00:08:34.916 --> 00:08:37.716 A:middle
+
+163
+00:08:34,916 --> 00:08:37,716
 And that basically lets both
 processes, the application
 
-00:08:37.716 --> 00:08:41.696 A:middle
+
+164
+00:08:37,716 --> 00:08:41,696
 and the extension have a
 common place to access.
 
-00:08:42.326 --> 00:08:45.556 A:middle
+
+165
+00:08:42,326 --> 00:08:45,556
 Because for security reasons,
 normally you can't access
 
-00:08:45.556 --> 00:08:49.346 A:middle
+
+166
+00:08:45,556 --> 00:08:49,346
 from one process into
 another's storage area.
 
-00:08:50.686 --> 00:08:51.936 A:middle
+
+167
+00:08:50,686 --> 00:08:51,936
 And you enable this index code.
 
-00:08:51.936 --> 00:08:55.416 A:middle
+
+168
+00:08:51,936 --> 00:08:55,416
 You use something called 'app
 groups' for both the extension
 
-00:08:55.616 --> 00:08:58.076 A:middle
+
+169
+00:08:55,616 --> 00:08:58,076
 and the application you
 give a unique identifier
 
-00:08:58.656 --> 00:09:00.526 A:middle
+
+170
+00:08:58,656 --> 00:09:00,526
 and that's your application
 group.
 
 
-
-00:08:58.656 --> 00:09:00.526 A:middle
-and that's your application
-group.
-
-00:09:01.236 --> 00:09:06.046 A:middle
+171
+00:09:01,236 --> 00:09:06,046
 And so the only real thing
 here you need to worry
 
-00:09:06.046 --> 00:09:08.366 A:middle
+
+172
+00:09:06,046 --> 00:09:08,366
 about is there is a
 single function, again,
 
-00:09:08.966 --> 00:09:11.266 A:middle
+
+173
+00:09:08,966 --> 00:09:11,266
 the file manager, you
 can ask container URL
 
-00:09:11.436 --> 00:09:14.146 A:middle
+
+174
+00:09:11,436 --> 00:09:14,146
 for security application group
 identifier and you will pass
 
-00:09:14.146 --> 00:09:15.746 A:middle
+
+175
+00:09:14,146 --> 00:09:15,746
 in the group identifier
 that you created
 
-00:09:16.206 --> 00:09:19.186 A:middle
+
+176
+00:09:16,206 --> 00:09:19,186
 and that will give you URL
 to a shared storage area.
 
-00:09:19.996 --> 00:09:25.196 A:middle
+
+177
+00:09:19,996 --> 00:09:25,196
 So from there, you can save
 files that the app can read
 
-00:09:25.196 --> 00:09:27.426 A:middle
+
+178
+00:09:25,196 --> 00:09:27,426
 from the extension or pull
 files that the app wrote
 
-00:09:27.666 --> 00:09:28.576 A:middle
+
+179
+00:09:27,666 --> 00:09:28,576
 into the extension
 
-00:09:28.616 --> 00:09:30.836 A:middle
+
+180
+00:09:28,616 --> 00:09:30,836
 and an example here we have
 a present audio recording
 
-00:09:30.836 --> 00:09:33.716 A:middle
+
+181
+00:09:30,836 --> 00:09:33,716
 controller and that takes the
 URL from the shared container,
 
-00:09:33.716 --> 00:09:37.716 A:middle
+
+182
+00:09:33,716 --> 00:09:37,716
 so it will record the
 audio to that file.
 
-00:09:37.756 --> 00:09:41.016 A:middle
+
+183
+00:09:37,756 --> 00:09:41,016
 So now, I want to talk about
 getting the data to the watch.
 
-00:09:42.186 --> 00:09:43.516 A:middle
+
+184
+00:09:42,186 --> 00:09:43,516
 There are two ways
 of doing that,
 
-00:09:43.516 --> 00:09:45.506 A:middle
+
+185
+00:09:43,516 --> 00:09:45,506
 one is NSURLSession,
 whichs in foundation.
 
-00:09:45.626 --> 00:09:48.896 A:middle
+
+186
+00:09:45,626 --> 00:09:48,896
 And the other is a new framework
 called watch connectivity.
 
-00:09:49.216 --> 00:09:53.886 A:middle
+
+187
+00:09:49,216 --> 00:09:53,886
 So the NSURLSession is the
 one you use a lot to get stuff
 
-00:09:53.926 --> 00:09:57.076 A:middle
+
+188
+00:09:53,926 --> 00:09:57,076
 from the internet, if you have
 got a chat app or something
 
-00:09:57.076 --> 00:10:00.486 A:middle
+
+189
+00:09:57,076 --> 00:10:00,486
 like that, you will want
 to talk to your server,
 
 
-
-00:09:57.076 --> 00:10:00.486 A:middle
-like that, you will want
-to talk to your server,
-
-00:10:00.486 --> 00:10:03.506 A:middle
+190
+00:10:00,486 --> 00:10:03,506
 it gives you direct access
 to the internet using HTTP
 
-00:10:03.506 --> 00:10:09.756 A:middle
+
+191
+00:10:03,506 --> 00:10:09,756
 and HTTPS and there are
 several ways of configuring it.
 
-00:10:10.066 --> 00:10:11.776 A:middle
+
+192
+00:10:10,066 --> 00:10:11,776
 And it allows for
 backgrounds and downloads.
 
-00:10:11.986 --> 00:10:14.206 A:middle
+
+193
+00:10:11,986 --> 00:10:14,206
 The reason for that is your
 extension is often not running,
 
-00:10:14.206 --> 00:10:17.296 A:middle
+
+194
+00:10:14,206 --> 00:10:17,296
 your watch screen is turned
 off, your extension is sleeping,
 
-00:10:17.536 --> 00:10:19.386 A:middle
+
+195
+00:10:17,536 --> 00:10:19,386
 your extension may not
 even be running for awhile
 
-00:10:19.386 --> 00:10:20.906 A:middle
+
+196
+00:10:19,386 --> 00:10:20,906
 that it takes to
 download the data.
 
-00:10:21.936 --> 00:10:25.386 A:middle
+
+197
+00:10:21,936 --> 00:10:25,386
 One thing to note is once we
 tell you the data is there,
 
-00:10:25.446 --> 00:10:27.096 A:middle
+
+198
+00:10:25,446 --> 00:10:27,096
 once the file is
 completely downloaded,
 
-00:10:27.306 --> 00:10:28.886 A:middle
+
+199
+00:10:27,306 --> 00:10:28,886
 you need to grab it right away,
 
-00:10:29.016 --> 00:10:32.106 A:middle
+
+200
+00:10:29,016 --> 00:10:32,106
 because otherwise it will be
 removed from a temporary cache.
 
-00:10:33.806 --> 00:10:35.626 A:middle
+
+201
+00:10:33,806 --> 00:10:35,626
 So here is some code,
 a couple of pages,
 
-00:10:35.816 --> 00:10:37.016 A:middle
+
+202
+00:10:35,816 --> 00:10:37,016
 a simple downloader class.
 
-00:10:37.016 --> 00:10:40.986 A:middle
+
+203
+00:10:37,016 --> 00:10:40,986
 The first thing we do is cut an
 NSURLSession, we do it lazily
 
-00:10:41.056 --> 00:10:42.716 A:middle
+
+204
+00:10:41,056 --> 00:10:42,716
 in case we don't
 need to ever call it.
 
-00:10:42.716 --> 00:10:45.826 A:middle
+
+205
+00:10:42,716 --> 00:10:45,826
 And the main call here
 is to create the session.
 
-00:10:45.826 --> 00:10:46.986 A:middle
+
+206
+00:10:45,826 --> 00:10:46,986
 And there's really two lines.
 
-00:10:46.986 --> 00:10:49.386 A:middle
+
+207
+00:10:46,986 --> 00:10:49,386
 One is you configure
 it for the background,
 
-00:10:49.436 --> 00:10:52.596 A:middle
+
+208
+00:10:49,436 --> 00:10:52,596
 so you want to say here
 is a background session,
 
-00:10:52.696 --> 00:10:54.756 A:middle
+
+209
+00:10:52,696 --> 00:10:54,756
 and we want to pass in an
 ID, and I'll talk about that
 
-00:10:54.756 --> 00:10:57.716 A:middle
+
+210
+00:10:54,756 --> 00:10:57,716
 in a moment, and we
 create the URL session
 
-00:10:57.716 --> 00:10:58.776 A:middle
+
+211
+00:10:57,716 --> 00:10:58,776
 with that configuration
 
-00:10:59.016 --> 00:11:01.346 A:middle
+
+212
+00:10:59,016 --> 00:11:01,346
 and we make the downloader
 class itself the instance
 
 
-
-00:10:59.016 --> 00:11:01.346 A:middle
-and we make the downloader
-class itself the instance
-
-00:11:01.346 --> 00:11:03.756 A:middle
+213
+00:11:01,346 --> 00:11:03,756
 after a delegate so
 we get notification
 
-00:11:03.756 --> 00:11:04.626 A:middle
+
+214
+00:11:03,756 --> 00:11:04,626
 when the file comes in.
 
-00:11:05.586 --> 00:11:09.626 A:middle
+
+215
+00:11:05,586 --> 00:11:09,626
 Then to start the URL
 download, we ask for a new task
 
-00:11:10.236 --> 00:11:13.636 A:middle
+
+216
+00:11:10,236 --> 00:11:13,636
 and tell it to go, and it
 will send off the request
 
-00:11:14.126 --> 00:11:15.836 A:middle
+
+217
+00:11:14,126 --> 00:11:15,836
 and start the download.
 
-00:11:17.496 --> 00:11:20.646 A:middle
+
+218
+00:11:17,496 --> 00:11:20,646
 So as I said, often your
 extension is shut down
 
-00:11:20.646 --> 00:11:22.886 A:middle
+
+219
+00:11:20,646 --> 00:11:22,886
 or not awake while
 that's happening.
 
-00:11:23.226 --> 00:11:26.676 A:middle
+
+220
+00:11:23,226 --> 00:11:26,676
 In the case where it's shut
 down, you will want to reconnect
 
-00:11:26.966 --> 00:11:29.506 A:middle
+
+221
+00:11:26,966 --> 00:11:29,506
 to all of those download
 tasks you have set up.
 
-00:11:29.976 --> 00:11:31.486 A:middle
+
+222
+00:11:29,976 --> 00:11:31,486
 So what you will set
 up is, for example,
 
-00:11:31.486 --> 00:11:34.066 A:middle
+
+223
+00:11:31,486 --> 00:11:34,066
 a function here called
 restart that you might call
 
-00:11:34.236 --> 00:11:37.996 A:middle
+
+224
+00:11:34,236 --> 00:11:37,996
 from your WK extension, and
 Forest will talk about that,
 
-00:11:38.236 --> 00:11:40.236 A:middle
+
+225
+00:11:38,236 --> 00:11:40,236
 at start up to restart
 the download
 
-00:11:40.296 --> 00:11:42.146 A:middle
+
+226
+00:11:40,296 --> 00:11:42,146
 so that you know
 they are coming.
 
-00:11:42.146 --> 00:11:44.346 A:middle
+
+227
+00:11:42,146 --> 00:11:44,346
 Actually they will be
 going, but you won't know
 
-00:11:44.346 --> 00:11:45.136 A:middle
+
+228
+00:11:44,346 --> 00:11:45,136
 that they have finished.
 
-00:11:47.616 --> 00:11:49.666 A:middle
+
+229
+00:11:47,616 --> 00:11:49,666
 And so here is the
 actual delegate method.
 
-00:11:49.666 --> 00:11:53.176 A:middle
+
+230
+00:11:49,666 --> 00:11:53,176
 This is the one you are
 wired up to the NSURLSession,
 
-00:11:53.176 --> 00:11:56.606 A:middle
+
+231
+00:11:53,176 --> 00:11:56,606
 and it's called when the
 file finishes downloading,
 
-00:11:56.606 --> 00:11:58.606 A:middle
+
+232
+00:11:56,606 --> 00:11:58,606
 and as I said, we need to
 copy the file immediately
 
-00:11:58.656 --> 00:12:01.996 A:middle
+
+233
+00:11:58,656 --> 00:12:01,996
 so it doesn't go away, so
 the system doesn't remove it.
 
 
-
-00:11:58.656 --> 00:12:01.996 A:middle
-so it doesn't go away, so
-the system doesn't remove it.
-
-00:12:02.216 --> 00:12:03.686 A:middle
+234
+00:12:02,216 --> 00:12:03,686
 In this case, we will
 get the caches directory
 
-00:12:03.686 --> 00:12:05.256 A:middle
+
+235
+00:12:03,686 --> 00:12:05,256
 because maybe we will
 need it a short while.
 
-00:12:05.996 --> 00:12:10.416 A:middle
+
+236
+00:12:05,996 --> 00:12:10,416
 We will generate a URL, and
 we will call the file manager
 
-00:12:10.716 --> 00:12:13.146 A:middle
+
+237
+00:12:10,716 --> 00:12:13,146
 to copy that from the
 original URL that passed in,
 
-00:12:13.146 --> 00:12:16.366 A:middle
+
+238
+00:12:13,146 --> 00:12:16,366
 the location URL to the
 cache's directory URL.
 
-00:12:16.976 --> 00:12:20.126 A:middle
+
+239
+00:12:16,976 --> 00:12:20,126
 So we have a copy of it and we
 will keep track of it for later
 
-00:12:20.406 --> 00:12:22.906 A:middle
+
+240
+00:12:20,406 --> 00:12:22,906
 so we can access whatever
 the data is you downloaded.
 
-00:12:24.676 --> 00:12:27.086 A:middle
+
+241
+00:12:24,676 --> 00:12:27,086
 There is also the WatchKit
 connectivity framework.
 
-00:12:27.826 --> 00:12:29.156 A:middle
+
+242
+00:12:27,826 --> 00:12:29,156
 It actually exists
 on both sides.
 
-00:12:29.656 --> 00:12:32.156 A:middle
+
+243
+00:12:29,656 --> 00:12:32,156
 If you share data between them
 so, for example, you could set
 
-00:12:32.156 --> 00:12:33.166 A:middle
+
+244
+00:12:32,156 --> 00:12:33,166
 up a dictionary that could share
 
-00:12:33.166 --> 00:12:35.496 A:middle
+
+245
+00:12:33,166 --> 00:12:35,496
 between the watch
 and the iPhone.
 
-00:12:36.066 --> 00:12:38.426 A:middle
+
+246
+00:12:36,066 --> 00:12:38,426
 It lets you transfer files
 over, again, the background,
 
-00:12:39.246 --> 00:12:41.886 A:middle
+
+247
+00:12:39,246 --> 00:12:41,886
 and it lets you send direct
 requests from the watch
 
-00:12:42.176 --> 00:12:43.616 A:middle
+
+248
+00:12:42,176 --> 00:12:43,616
 to the phone app your parents,
 
-00:12:44.176 --> 00:12:45.846 A:middle
+
+249
+00:12:44,176 --> 00:12:45,846
 your parent iPhone,
 parent application.
 
-00:12:46.976 --> 00:12:49.606 A:middle
+
+250
+00:12:46,976 --> 00:12:49,606
 And there is a session
 on that tomorrow,
 
-00:12:49.606 --> 00:12:52.476 A:middle
+
+251
+00:12:49,606 --> 00:12:52,476
 and I suggest you definitely
 listen to it because it is new
 
-00:12:52.686 --> 00:12:57.576 A:middle
+
+252
+00:12:52,686 --> 00:12:57,576
 and does exist on both
 the watch and the iPhone.
 
-00:12:58.896 --> 00:13:04.056 A:middle
+
+253
+00:12:58,896 --> 00:13:04,056
 So just a few slides on
 migration, for those of you
 
 
-
-00:12:58.896 --> 00:13:04.056 A:middle
-So just a few slides on
-migration, for those of you
-
-00:13:04.656 --> 00:13:07.326 A:middle
+254
+00:13:04,656 --> 00:13:07,326
 who have started
 a watchOS 1 app,
 
-00:13:08.506 --> 00:13:09.976 A:middle
+
+255
+00:13:08,506 --> 00:13:09,976
 you have probably run into this.
 
-00:13:10.636 --> 00:13:11.686 A:middle
+
+256
+00:13:10,636 --> 00:13:11,686
 The WatchKit extension
 
-00:13:12.546 --> 00:13:15.396 A:middle
+
+257
+00:13:12,546 --> 00:13:15,396
 for watchOS 1 is something
 you have created already,
 
-00:13:15.396 --> 00:13:16.646 A:middle
+
+258
+00:13:15,396 --> 00:13:16,646
 there is a target
 in your project,
 
-00:13:17.446 --> 00:13:20.466 A:middle
+
+259
+00:13:17,446 --> 00:13:20,466
 but it uses the iOS
 platform in SDK.
 
-00:13:20.576 --> 00:13:24.406 A:middle
+
+260
+00:13:20,576 --> 00:13:24,406
 So it lives on the iPhone
 rather than on the watch.
 
-00:13:25.056 --> 00:13:31.606 A:middle
+
+261
+00:13:25,056 --> 00:13:31,606
 Because of that, it lets you
 share a framework on the phone,
 
-00:13:31.946 --> 00:13:33.376 A:middle
+
+262
+00:13:31,946 --> 00:13:33,376
 so you might have some
 code that's common
 
-00:13:33.376 --> 00:13:34.896 A:middle
+
+263
+00:13:33,376 --> 00:13:34,896
 to both the extensions,
 for example,
 
-00:13:34.956 --> 00:13:37.906 A:middle
+
+264
+00:13:34,956 --> 00:13:37,906
 fetching your information from
 the network, and you will have
 
-00:13:37.906 --> 00:13:41.696 A:middle
+
+265
+00:13:37,906 --> 00:13:41,696
 that same code being run by
 both the iPhone application
 
-00:13:41.816 --> 00:13:43.016 A:middle
+
+266
+00:13:41,816 --> 00:13:43,016
 and the watch application.
 
-00:13:44.076 --> 00:13:48.576 A:middle
+
+267
+00:13:44,076 --> 00:13:48,576
 Because you have no direct
 storage access to the watch,
 
-00:13:49.266 --> 00:13:50.776 A:middle
+
+268
+00:13:49,266 --> 00:13:50,776
 we gave you a way
 of caching images
 
-00:13:50.916 --> 00:13:53.526 A:middle
+
+269
+00:13:50,916 --> 00:13:53,526
 of basically saying here is
 an image and here is a name
 
-00:13:53.526 --> 00:13:55.636 A:middle
+
+270
+00:13:53,526 --> 00:13:55,636
 and later on when I
 say 'said image named,
 
-00:13:56.216 --> 00:13:58.946 A:middle
+
+271
+00:13:56,216 --> 00:13:58,946
 we will have already downloaded
 that asset, those resources
 
-00:13:58.986 --> 00:14:01.376 A:middle
+
+272
+00:13:58,986 --> 00:14:01,376
 to the watch, and it
 will be much faster.
 
 
-
-00:13:58.986 --> 00:14:01.376 A:middle
-to the watch, and it
-will be much faster.
-
-00:14:02.516 --> 00:14:05.516 A:middle
+273
+00:14:02,516 --> 00:14:05,516
 So we gave you a way of directly
 talking to the application.
 
-00:14:06.046 --> 00:14:07.826 A:middle
+
+274
+00:14:06,046 --> 00:14:07,826
 Obviously this is from the phone
 
-00:14:07.826 --> 00:14:10.066 A:middle
+
+275
+00:14:07,826 --> 00:14:10,066
 to the phone process
 so it's very fast.
 
-00:14:11.526 --> 00:14:15.666 A:middle
+
+276
+00:14:11,526 --> 00:14:15,666
 With watchOS 2 we
 have added a new SDK.
 
-00:14:15.666 --> 00:14:17.546 A:middle
+
+277
+00:14:15,666 --> 00:14:17,546
 It's completely separate,
 
-00:14:17.736 --> 00:14:21.036 A:middle
+
+278
+00:14:17,736 --> 00:14:21,036
 similar to the iPhone
 and OS 10 SDKs.
 
-00:14:21.036 --> 00:14:24.906 A:middle
+
+279
+00:14:21,036 --> 00:14:24,906
 It does give you a subset
 of available iOS frameworks,
 
-00:14:25.256 --> 00:14:27.206 A:middle
+
+280
+00:14:25,256 --> 00:14:27,206
 so you won't get the complete
 set of functionality as you do
 
-00:14:27.206 --> 00:14:31.916 A:middle
+
+281
+00:14:27,206 --> 00:14:31,916
 on the phone, but
 you will get a lot.
 
-00:14:32.116 --> 00:14:36.496 A:middle
+
+282
+00:14:32,116 --> 00:14:36,496
 You can, in your project,
 include a framework just
 
-00:14:36.496 --> 00:14:41.276 A:middle
+
+283
+00:14:36,496 --> 00:14:41,276
 like you did on your iPhone
 watchOS 1 app, but, of course,
 
-00:14:41.276 --> 00:14:44.466 A:middle
+
+284
+00:14:41,276 --> 00:14:44,466
 this framework is downloaded
 with the watch application,
 
-00:14:44.856 --> 00:14:49.026 A:middle
+
+285
+00:14:44,856 --> 00:14:49,026
 watch extension, and so you
 don't get to share the code
 
-00:14:49.256 --> 00:14:51.716 A:middle
+
+286
+00:14:49,256 --> 00:14:51,716
 in one device, but it does
 let you still separate
 
-00:14:51.716 --> 00:14:55.186 A:middle
+
+287
+00:14:51,716 --> 00:14:55,186
 out your network access code
 into a separate framework
 
-00:14:55.676 --> 00:14:56.756 A:middle
+
+288
+00:14:55,676 --> 00:14:56,756
 that the watch can use.
 
-00:14:57.146 --> 00:14:59.806 A:middle
+
+289
+00:14:57,146 --> 00:14:59,806
 Now, of course, the watch, for
 example, for watch framework
 
 
-
-00:15:00.516 --> 00:15:03.056 A:middle
+290
+00:15:00,516 --> 00:15:03,056
 that you provide, for
 example, might use NSURLSession
 
-00:15:03.316 --> 00:15:04.496 A:middle
+
+291
+00:15:03,316 --> 00:15:04,496
 to access information.
 
-00:15:05.166 --> 00:15:10.536 A:middle
+
+292
+00:15:05,166 --> 00:15:10,536
 So if you have done a
 watchOS 1 application,
 
-00:15:10.536 --> 00:15:12.766 A:middle
+
+293
+00:15:10,536 --> 00:15:12,766
 you have actually already
 actually got a lot ready
 
-00:15:12.936 --> 00:15:13.896 A:middle
+
+294
+00:15:12,936 --> 00:15:13,896
 for watchOS 2.
 
-00:15:15.026 --> 00:15:18.186 A:middle
+
+295
+00:15:15,026 --> 00:15:18,186
 It's got the same API with
 some changes and additions.
 
-00:15:18.996 --> 00:15:20.946 A:middle
+
+296
+00:15:18,996 --> 00:15:20,946
 But you should be able
 to compile a lot of it
 
-00:15:20.946 --> 00:15:24.466 A:middle
+
+297
+00:15:20,946 --> 00:15:24,466
 without any changes at all
 and copy resources over,
 
-00:15:24.466 --> 00:15:28.556 A:middle
+
+298
+00:15:24,466 --> 00:15:28,556
 so if you have images in your
 watchOS 1 extension you could
 
-00:15:28.556 --> 00:15:31.086 A:middle
+
+299
+00:15:28,556 --> 00:15:31,086
 add them to the target of
 the watchOS 2 extension
 
-00:15:31.086 --> 00:15:32.566 A:middle
+
+300
+00:15:31,086 --> 00:15:32,566
 and have them copied
 to the watch.
 
-00:15:33.316 --> 00:15:35.386 A:middle
+
+301
+00:15:33,316 --> 00:15:35,386
 But you do want to make sure
 they are sized appropriately
 
-00:15:35.386 --> 00:15:35.936 A:middle
+
+302
+00:15:35,386 --> 00:15:35,936
 for the watch.
 
-00:15:37.136 --> 00:15:38.196 A:middle
+
+303
+00:15:37,136 --> 00:15:38,196
 There are a couple
 of new things.
 
-00:15:39.066 --> 00:15:42.476 A:middle
+
+304
+00:15:39,066 --> 00:15:42,476
 The main thing, of course, is
 that your watch app is running
 
-00:15:42.916 --> 00:15:45.396 A:middle
+
+305
+00:15:42,916 --> 00:15:45,396
 on your watch, and so
 the extension is running,
 
-00:15:45.506 --> 00:15:48.246 A:middle
+
+306
+00:15:45,506 --> 00:15:48,246
 and that means UI
 responsiveness is much better.
 
-00:15:48.486 --> 00:15:52.466 A:middle
+
+307
+00:15:48,486 --> 00:15:52,466
 You tab a button, and
 it immediately responds.
 
-00:15:52.906 --> 00:15:54.756 A:middle
+
+308
+00:15:52,906 --> 00:15:54,756
 Of course, you have also got
 independent operation now
 
-00:15:54.756 --> 00:15:57.006 A:middle
+
+309
+00:15:54,756 --> 00:15:57,006
 and you don't have to worry
 about the phone being nearby,
 
-00:15:57.886 --> 00:15:58.456 A:middle
+
+310
+00:15:57,886 --> 00:15:58,456
 you don't need to worry
 
-00:15:58.526 --> 00:16:00.746 A:middle
+
+311
+00:15:58,526 --> 00:16:00,746
 about the phone being
 connected or on the network.
 
 
-
-00:15:58.526 --> 00:16:00.746 A:middle
-about the phone being
-connected or on the network.
-
-00:16:01.866 --> 00:16:05.446 A:middle
+312
+00:16:01,866 --> 00:16:05,446
 We added a couple of
 UI elements as well
 
-00:16:05.446 --> 00:16:10.296 A:middle
+
+313
+00:16:05,446 --> 00:16:10,296
 as some new system UI sheets and
 those will be talked about later
 
-00:16:10.416 --> 00:16:11.946 A:middle
+
+314
+00:16:10,416 --> 00:16:11,946
 in the session and
 in other sessions.
 
-00:16:12.876 --> 00:16:16.716 A:middle
+
+315
+00:16:12,876 --> 00:16:16,716
 We have added animation, so now
 you can animate the transitions
 
-00:16:16.786 --> 00:16:23.396 A:middle
+
+316
+00:16:16,786 --> 00:16:23,396
 between changing, for example,
 the size of a graph or a graphic
 
-00:16:23.396 --> 00:16:25.326 A:middle
+
+317
+00:16:23,396 --> 00:16:25,326
 or a size or something
 like that or the opacity
 
-00:16:25.326 --> 00:16:26.726 A:middle
+
+318
+00:16:25,326 --> 00:16:26,726
 of a string, you
 can animate that.
 
-00:16:27.006 --> 00:16:28.746 A:middle
+
+319
+00:16:27,006 --> 00:16:28,746
 There is a session
 for that tomorrow.
 
-00:16:29.206 --> 00:16:31.106 A:middle
+
+320
+00:16:29,206 --> 00:16:31,106
 So I suggest you take a
 look at that one as well.
 
-00:16:33.606 --> 00:16:38.736 A:middle
+
+321
+00:16:33,606 --> 00:16:38,736
 So for controllers, the API
 is pretty much the same.
 
-00:16:39.176 --> 00:16:40.596 A:middle
+
+322
+00:16:39,176 --> 00:16:40,596
 So you have got the same
 interface controller
 
-00:16:40.756 --> 00:16:42.466 A:middle
+
+323
+00:16:40,756 --> 00:16:42,466
 and the same, you
 will use the glance,
 
-00:16:42.516 --> 00:16:45.106 A:middle
+
+324
+00:16:42,516 --> 00:16:45,106
 nothing has changed there and
 the same for the notification,
 
-00:16:45.106 --> 00:16:47.076 A:middle
+
+325
+00:16:45,106 --> 00:16:47,076
 you don't need to make
 any changes there.
 
-00:16:47.076 --> 00:16:49.426 A:middle
+
+326
+00:16:47,076 --> 00:16:49,426
 There are a couple of APIs
 which are no longer there,
 
-00:16:49.676 --> 00:16:53.556 A:middle
+
+327
+00:16:49,676 --> 00:16:53,556
 image caching and open parent,
 those have been replaced
 
-00:16:53.556 --> 00:16:56.306 A:middle
+
+328
+00:16:53,556 --> 00:16:56,306
 with direct images and
 watch connectivity.
 
-00:16:57.626 --> 00:17:01.366 A:middle
+
+329
+00:16:57,626 --> 00:17:01,366
 Two new things are the extension
 delegate which Forest will talk
 
 
-
-00:16:57.626 --> 00:17:01.366 A:middle
-Two new things are the extension
-delegate which Forest will talk
-
-00:17:01.366 --> 00:17:04.396 A:middle
+330
+00:17:01,366 --> 00:17:04,396
 about in a bit, and the
 complication data source
 
-00:17:04.396 --> 00:17:07.386 A:middle
+
+331
+00:17:04,396 --> 00:17:07,386
 which is used to provide
 the images and text
 
-00:17:07.386 --> 00:17:09.386 A:middle
+
+332
+00:17:07,386 --> 00:17:09,386
 for complications
 display on the watch face.
 
-00:17:11.296 --> 00:17:16.066 A:middle
+
+333
+00:17:11,296 --> 00:17:16,066
 For those having
 existing Xcode projects,
 
-00:17:16.066 --> 00:17:19.856 A:middle
+
+334
+00:17:16,066 --> 00:17:19,856
 you can add a new target.
 
-00:17:20.036 --> 00:17:22.165 A:middle
+
+335
+00:17:20,036 --> 00:17:22,165
 You can have the
 watchOS 1 there,
 
-00:17:22.376 --> 00:17:26.455 A:middle
+
+336
+00:17:22,376 --> 00:17:26,455
 you can say give me a
 watchOS 2 and add files in,
 
-00:17:26.665 --> 00:17:29.196 A:middle
+
+337
+00:17:26,665 --> 00:17:29,196
 mark files as part of
 the same target, so on,
 
-00:17:29.196 --> 00:17:30.806 A:middle
+
+338
+00:17:29,196 --> 00:17:30,806
 add the frameworks
 to be compiled
 
-00:17:30.806 --> 00:17:31.836 A:middle
+
+339
+00:17:30,806 --> 00:17:31,836
 and loaded on the watch.
 
-00:17:33.296 --> 00:17:38.956 A:middle
+
+340
+00:17:33,296 --> 00:17:38,956
 If you want, you can start from
 Xcode with a whole new project,
 
-00:17:39.036 --> 00:17:42.306 A:middle
+
+341
+00:17:39,036 --> 00:17:42,306
 and it will automatically create
 the iOS and the watchOS 2 app
 
-00:17:42.716 --> 00:17:44.266 A:middle
+
+342
+00:17:42,716 --> 00:17:44,266
 so you can start it
 filling in from there.
 
-00:17:44.826 --> 00:17:46.946 A:middle
+
+343
+00:17:44,826 --> 00:17:46,946
 There was a session yesterday,
 I suggest you take a look
 
-00:17:46.946 --> 00:17:52.096 A:middle
+
+344
+00:17:46,946 --> 00:17:52,096
 at the videos that detail
 this procedure much better.
 
-00:17:53.026 --> 00:17:54.436 A:middle
+
+345
+00:17:53,026 --> 00:17:54,436
 And that's it for me.
 
-00:17:54.436 --> 00:17:56.276 A:middle
+
+346
+00:17:54,436 --> 00:17:56,276
 So now I will hand it
 over to Forest who will go
 
-00:17:56.276 --> 00:17:58.226 A:middle
+
+347
+00:17:56,276 --> 00:17:58,226
 into more detail
 about the new classes
 
-00:17:58.226 --> 00:17:59.676 A:middle
+
+348
+00:17:58,226 --> 00:17:59,676
 and changes to the existing API.
 
 
-
-00:18:01.516 --> 00:18:03.556 A:middle
+349
+00:18:01,516 --> 00:18:03,556
 [ Applause ]
 
-00:18:04.056 --> 00:18:04.736 A:middle
-&gt;&gt; FOREST HILL: My
+
+350
+00:18:04,056 --> 00:18:04,736
+>> FOREST HILL: My
 name is Forest,
 
-00:18:04.736 --> 00:18:05.536 A:middle
+
+351
+00:18:04,736 --> 00:18:05,536
 I'm an engineer on WatchKit.
 
-00:18:05.536 --> 00:18:08.006 A:middle
+
+352
+00:18:05,536 --> 00:18:08,006
 I would like to talk to you
 about the APIs we have added
 
-00:18:08.086 --> 00:18:09.636 A:middle
+
+353
+00:18:08,086 --> 00:18:09,636
 in WatchKit for watchOS 2.
 
-00:18:10.416 --> 00:18:13.896 A:middle
+
+354
+00:18:10,416 --> 00:18:13,896
 First I'd like to talk
 about WK extension delegate.
 
-00:18:15.026 --> 00:18:20.266 A:middle
+
+355
+00:18:15,026 --> 00:18:20,266
 On iOS we have UI
 Application Delegate.
 
-00:18:20.876 --> 00:18:21.896 A:middle
+
+356
+00:18:20,876 --> 00:18:21,896
 Among other things, this serves
 
-00:18:21.896 --> 00:18:24.166 A:middle
+
+357
+00:18:21,896 --> 00:18:24,166
 to help you track your app's
 life cycle, this includes things
 
-00:18:24.166 --> 00:18:25.986 A:middle
+
+358
+00:18:24,166 --> 00:18:25,986
 like your did launch,
 your did become active.
 
-00:18:25.986 --> 00:18:28.606 A:middle
+
+359
+00:18:25,986 --> 00:18:28,606
 And your will resign active.
 
-00:18:28.606 --> 00:18:31.186 A:middle
+
+360
+00:18:28,606 --> 00:18:31,186
 We have added WK
 extension delegate
 
-00:18:31.186 --> 00:18:32.736 A:middle
+
+361
+00:18:31,186 --> 00:18:32,736
 to track your application's
 lifecycle.
 
-00:18:33.396 --> 00:18:36.746 A:middle
+
+362
+00:18:33,396 --> 00:18:36,746
 First up, I will start
 
-00:18:36.746 --> 00:18:38.286 A:middle
+
+363
+00:18:36,746 --> 00:18:38,286
 with application did
 finish launching.
 
-00:18:38.556 --> 00:18:39.666 A:middle
+
+364
+00:18:38,556 --> 00:18:39,666
 This will be called once
 
-00:18:39.666 --> 00:18:41.536 A:middle
+
+365
+00:18:39,666 --> 00:18:41,536
 when the application
 has finishes launching
 
-00:18:41.956 --> 00:18:44.586 A:middle
+
+366
+00:18:41,956 --> 00:18:44,586
 from when your extension
 hasn't been run at all.
 
-00:18:45.306 --> 00:18:47.466 A:middle
+
+367
+00:18:45,306 --> 00:18:47,466
 This is a great place to
 perform initialization steps
 
-00:18:47.466 --> 00:18:48.876 A:middle
+
+368
+00:18:47,466 --> 00:18:48,876
 that your application
 might need,
 
-00:18:48.966 --> 00:18:51.456 A:middle
+
+369
+00:18:48,966 --> 00:18:51,456
 set up notification
 observers and warm
 
-00:18:51.456 --> 00:18:52.896 A:middle
+
+370
+00:18:51,456 --> 00:18:52,896
 up any services you
 might need later.
 
-00:18:52.956 --> 00:18:55.496 A:middle
+
+371
+00:18:52,956 --> 00:18:55,496
 It's important to note that at
 this time your application is
 
-00:18:55.496 --> 00:18:56.236 A:middle
+
+372
+00:18:55,496 --> 00:18:56,236
 not yet active.
 
-00:18:56.826 --> 00:18:59.946 A:middle
+
+373
+00:18:56,826 --> 00:18:59,946
 Next we have application
 did become active.
 
-00:18:59.946 --> 00:19:02.826 A:middle
+
+374
+00:18:59,946 --> 00:19:02,826
 This will be called each time
 your application is brought
 
 
-
-00:18:59.946 --> 00:19:02.826 A:middle
-This will be called each time
-your application is brought
-
-00:19:03.036 --> 00:19:04.526 A:middle
+375
+00:19:03,036 --> 00:19:04,526
 from the background
 to the foreground
 
-00:19:05.006 --> 00:19:07.126 A:middle
+
+376
+00:19:05,006 --> 00:19:07,126
 or after first launch.
 
-00:19:08.456 --> 00:19:10.836 A:middle
+
+377
+00:19:08,456 --> 00:19:10,836
 This is a great time to
 start any code that needs
 
-00:19:10.836 --> 00:19:14.536 A:middle
+
+378
+00:19:10,836 --> 00:19:14,536
 to be running only while your
 application is actually active,
 
-00:19:14.536 --> 00:19:16.416 A:middle
+
+379
+00:19:14,536 --> 00:19:16,416
 activate any timers
 you might need
 
-00:19:16.416 --> 00:19:18.076 A:middle
+
+380
+00:19:16,416 --> 00:19:18,076
 and especially update any state
 
-00:19:18.076 --> 00:19:20.426 A:middle
+
+381
+00:19:18,076 --> 00:19:20,426
 that might have changed while
 your application was either
 
-00:19:20.426 --> 00:19:23.716 A:middle
+
+382
+00:19:20,426 --> 00:19:23,716
 in the background or
 not running at all.
 
-00:19:24.456 --> 00:19:26.866 A:middle
+
+383
+00:19:24,456 --> 00:19:26,866
 Application will resign
 active is called prior
 
-00:19:26.866 --> 00:19:29.276 A:middle
+
+384
+00:19:26,866 --> 00:19:29,276
 to your app resigning
 being active,
 
-00:19:29.276 --> 00:19:30.746 A:middle
+
+385
+00:19:29,276 --> 00:19:30,746
 moving to the background.
 
-00:19:30.746 --> 00:19:33.376 A:middle
+
+386
+00:19:30,746 --> 00:19:33,376
 You want to prepare to
 be in an inactive state.
 
-00:19:33.746 --> 00:19:35.346 A:middle
+
+387
+00:19:33,746 --> 00:19:35,346
 If you have started any timers,
 
-00:19:36.076 --> 00:19:37.686 A:middle
+
+388
+00:19:36,076 --> 00:19:37,686
 this is a good place
 to pause them.
 
-00:19:37.726 --> 00:19:40.666 A:middle
+
+389
+00:19:37,726 --> 00:19:40,666
 If you choose not to pause them
 at this time, they won't run
 
-00:19:40.666 --> 00:19:42.846 A:middle
+
+390
+00:19:40,666 --> 00:19:42,846
 in the background, you won't
 get background running time,
 
-00:19:43.166 --> 00:19:44.286 A:middle
+
+391
+00:19:43,166 --> 00:19:44,286
 but you will lose control
 
-00:19:44.286 --> 00:19:45.876 A:middle
+
+392
+00:19:44,286 --> 00:19:45,876
 over the exact cycle
 in which they run.
 
-00:19:45.926 --> 00:19:48.526 A:middle
+
+393
+00:19:45,926 --> 00:19:48,526
 So if you want control
 over that, it's a good idea
 
-00:19:48.526 --> 00:19:49.906 A:middle
+
+394
+00:19:48,526 --> 00:19:49,906
 to pause them when
 you become inactive
 
-00:19:50.386 --> 00:19:52.866 A:middle
+
+395
+00:19:50,386 --> 00:19:52,866
 and restart them specifically
 on did become active.
 
-00:19:53.346 --> 00:19:56.106 A:middle
+
+396
+00:19:53,346 --> 00:19:56,106
 And you want to save your
 application state at this time.
 
-00:19:56.106 --> 00:19:58.576 A:middle
+
+397
+00:19:56,106 --> 00:19:58,576
 Because after this point,
 your extension may be killed
 
-00:19:58.856 --> 00:20:01.006 A:middle
+
+398
+00:19:58,856 --> 00:20:01,006
 if another process on the
 system needs that memory.
 
 
-
-00:19:58.856 --> 00:20:01.006 A:middle
-if another process on the
-system needs that memory.
-
-00:20:01.606 --> 00:20:06.866 A:middle
+399
+00:20:01,606 --> 00:20:06,866
 So in summary, WK extension
 delegate will help you
 
-00:20:06.926 --> 00:20:09.506 A:middle
+
+400
+00:20:06,926 --> 00:20:09,506
 to track your application
 life cycle.
 
-00:20:09.856 --> 00:20:11.766 A:middle
+
+401
+00:20:09,856 --> 00:20:11,766
 It's very important to note that
 this does have not have anything
 
-00:20:11.766 --> 00:20:14.346 A:middle
+
+402
+00:20:11,766 --> 00:20:14,346
 to do with your notification
 UI, your glance UI,
 
-00:20:14.346 --> 00:20:15.576 A:middle
+
+403
+00:20:14,346 --> 00:20:15,576
 or your complication data.
 
-00:20:15.576 --> 00:20:17.576 A:middle
+
+404
+00:20:15,576 --> 00:20:17,576
 This is only about tracking
 the application's lifecycle.
 
-00:20:18.076 --> 00:20:22.806 A:middle
+
+405
+00:20:18,076 --> 00:20:22,806
 Next up I would like to talk
 about handle user activity.
 
-00:20:23.576 --> 00:20:25.986 A:middle
+
+406
+00:20:23,576 --> 00:20:25,986
 Handle user activity is an
 existing call from watchOS 1.
 
-00:20:26.516 --> 00:20:29.406 A:middle
+
+407
+00:20:26,516 --> 00:20:29,406
 In watchOS 1 it was used
 when application was launched
 
-00:20:29.696 --> 00:20:32.886 A:middle
+
+408
+00:20:29,696 --> 00:20:32,886
 by a tap on your
 glance to navigate
 
-00:20:32.886 --> 00:20:35.656 A:middle
+
+409
+00:20:32,886 --> 00:20:35,656
 to the appropriate
 location in your application
 
-00:20:35.926 --> 00:20:37.376 A:middle
+
+410
+00:20:35,926 --> 00:20:37,376
 that was reflected
 from the glance.
 
-00:20:37.376 --> 00:20:40.876 A:middle
+
+411
+00:20:37,376 --> 00:20:40,876
 We are building on that
 in watchOS 2 in two ways.
 
-00:20:41.376 --> 00:20:42.826 A:middle
+
+412
+00:20:41,376 --> 00:20:42,826
 First is that this
 will also be called
 
-00:20:42.826 --> 00:20:45.676 A:middle
+
+413
+00:20:42,826 --> 00:20:45,676
 if your application is launched
 by a tap on your complication.
 
-00:20:45.946 --> 00:20:48.336 A:middle
+
+414
+00:20:45,946 --> 00:20:48,336
 So similarly any
 state you reflected
 
-00:20:48.336 --> 00:20:49.786 A:middle
+
+415
+00:20:48,336 --> 00:20:49,786
 in your complication you
 will want to navigate
 
-00:20:49.786 --> 00:20:52.666 A:middle
+
+416
+00:20:49,786 --> 00:20:52,666
 to the appropriate place in
 your application for that state.
 
-00:20:53.406 --> 00:20:55.966 A:middle
+
+417
+00:20:53,406 --> 00:20:55,966
 Additionally, we are moving it
 to WK extension delegate rather
 
-00:20:55.966 --> 00:20:57.696 A:middle
+
+418
+00:20:55,966 --> 00:20:57,696
 than calling it on the
 root interface controller,
 
-00:20:57.696 --> 00:20:58.656 A:middle
+
+419
+00:20:57,696 --> 00:20:58,656
 which is what we used to do.
 
-00:20:59.116 --> 00:21:01.656 A:middle
+
+420
+00:20:59,116 --> 00:21:01,656
 This should give you greater
 flexibility with what you want
 
 
-
-00:20:59.116 --> 00:21:01.656 A:middle
-This should give you greater
-flexibility with what you want
-
-00:21:01.656 --> 00:21:08.936 A:middle
+421
+00:21:01,656 --> 00:21:08,936
 to do to handle your
 state maintenance.
 
-00:21:09.206 --> 00:21:14.386 A:middle
+
+422
+00:21:09,206 --> 00:21:14,386
 So we have a new call on a new
 object called WK extension.
 
-00:21:14.386 --> 00:21:16.876 A:middle
+
+423
+00:21:14,386 --> 00:21:16,876
 The new call is root interface
 controller, which I have
 
-00:21:16.876 --> 00:21:18.266 A:middle
+
+424
+00:21:16,876 --> 00:21:18,266
 to warn you this is
 coming in a future seed.
 
-00:21:18.266 --> 00:21:19.226 A:middle
+
+425
+00:21:18,266 --> 00:21:19,226
 It's not in the existing seed.
 
-00:21:19.266 --> 00:21:20.496 A:middle
+
+426
+00:21:19,266 --> 00:21:20,496
 So in order to approximate
 this for now,
 
-00:21:20.496 --> 00:21:22.446 A:middle
+
+427
+00:21:20,496 --> 00:21:22,446
 you'll have to save off
 your interface controller
 
-00:21:22.446 --> 00:21:23.426 A:middle
+
+428
+00:21:22,446 --> 00:21:23,426
 when it's first created.
 
-00:21:24.356 --> 00:21:27.136 A:middle
+
+429
+00:21:24,356 --> 00:21:27,136
 With that in mind, here is how
 you might implement handle user
 
-00:21:27.136 --> 00:21:29.356 A:middle
+
+430
+00:21:27,136 --> 00:21:29,356
 activity on you are WK
 extension delegate for now.
 
-00:21:29.946 --> 00:21:32.756 A:middle
+
+431
+00:21:29,946 --> 00:21:32,756
 I will get the root
 controller with the new call,
 
-00:21:32.966 --> 00:21:35.816 A:middle
+
+432
+00:21:32,966 --> 00:21:35,816
 pop back to the root and then
 I will ask the root controller
 
-00:21:35.816 --> 00:21:37.826 A:middle
+
+433
+00:21:35,816 --> 00:21:37,826
 to go ahead and do whatever it
 is that would be appropriate
 
-00:21:37.826 --> 00:21:38.716 A:middle
+
+434
+00:21:37,826 --> 00:21:38,716
 to restore your state.
 
-00:21:39.016 --> 00:21:40.986 A:middle
+
+435
+00:21:39,016 --> 00:21:40,986
 Note there are lots of other
 things you could do here.
 
-00:21:40.986 --> 00:21:44.206 A:middle
+
+436
+00:21:40,986 --> 00:21:44,206
 You might put up a modal
 alert or other things
 
-00:21:44.896 --> 00:21:50.236 A:middle
+
+437
+00:21:44,896 --> 00:21:50,236
 to handle the user activity
 you have been handed.
 
-00:21:50.236 --> 00:21:54.136 A:middle
+
+438
+00:21:50,236 --> 00:21:54,136
 Next up, on IOS we
 have UI application
 
-00:21:54.136 --> 00:21:56.146 A:middle
+
+439
+00:21:54,136 --> 00:21:56,146
 which is a singleton object
 
-00:21:56.146 --> 00:21:57.616 A:middle
+
+440
+00:21:56,146 --> 00:21:57,616
 that represents the
 running application.
 
-00:21:58.556 --> 00:22:02.796 A:middle
+
+441
+00:21:58,556 --> 00:22:02,796
 So on watchOS 2 we
 have added WK extension
 
 
-
-00:21:58.556 --> 00:22:02.796 A:middle
-So on watchOS 2 we
-have added WK extension
-
-00:22:02.796 --> 00:22:05.886 A:middle
+442
+00:22:02,796 --> 00:22:05,886
 which is roughly
 analogous to that.
 
-00:22:06.096 --> 00:22:08.466 A:middle
+
+443
+00:22:06,096 --> 00:22:08,466
 Among other things this
 is the main interface
 
-00:22:08.466 --> 00:22:10.136 A:middle
+
+444
+00:22:08,466 --> 00:22:10,136
 for opening standard
 system URLs.
 
-00:22:10.866 --> 00:22:14.306 A:middle
+
+445
+00:22:10,866 --> 00:22:14,306
 So you will be able to open the
 open system URL API to do things
 
-00:22:14.306 --> 00:22:17.136 A:middle
+
+446
+00:22:14,306 --> 00:22:17,136
 like start a phone call,
 send a text message
 
-00:22:17.466 --> 00:22:18.686 A:middle
+
+447
+00:22:17,466 --> 00:22:18,686
 or display PassKit UI.
 
-00:22:19.476 --> 00:22:21.776 A:middle
+
+448
+00:22:19,476 --> 00:22:21,776
 That's open system
 URL and WK extension.
 
-00:22:21.776 --> 00:22:25.916 A:middle
+
+449
+00:22:21,776 --> 00:22:25,916
 Now, I would like to talk a
 little bit about notifications.
 
-00:22:26.526 --> 00:22:30.536 A:middle
+
+450
+00:22:26,526 --> 00:22:30,536
 First, I would like to talk
 about remote notifications.
 
-00:22:31.076 --> 00:22:33.166 A:middle
+
+451
+00:22:31,076 --> 00:22:33,166
 Remote notifications
 come from the internet,
 
-00:22:34.316 --> 00:22:36.416 A:middle
+
+452
+00:22:34,316 --> 00:22:36,416
 and they always go
 to your phone first.
 
-00:22:36.906 --> 00:22:38.576 A:middle
+
+453
+00:22:36,906 --> 00:22:38,576
 At that point, your
 phone will decide whether
 
-00:22:38.576 --> 00:22:41.736 A:middle
+
+454
+00:22:38,576 --> 00:22:41,736
 to display the notification
 itself or whether to forward it
 
-00:22:41.736 --> 00:22:42.966 A:middle
+
+455
+00:22:41,736 --> 00:22:42,966
 on to be displayed on the watch.
 
-00:22:46.116 --> 00:22:51.096 A:middle
+
+456
+00:22:46,116 --> 00:22:51,096
 Now, the phone uses a set
 of rules to determine this,
 
-00:22:51.096 --> 00:22:53.036 A:middle
+
+457
+00:22:51,096 --> 00:22:53,036
 and the criteria in these
 rules include whether
 
-00:22:53.036 --> 00:22:55.806 A:middle
+
+458
+00:22:53,036 --> 00:22:55,806
 or not your phone screen is
 locked and whether your watch is
 
-00:22:55.806 --> 00:23:01.106 A:middle
+
+459
+00:22:55,806 --> 00:23:01,106
 on your wrist and unlocked.
 
 
-
-00:22:55.806 --> 00:23:01.106 A:middle
-on your wrist and unlocked.
-
-00:23:01.226 --> 00:23:05.046 A:middle
+460
+00:23:01,226 --> 00:23:05,046
 So like watchOS 1, your WK
 user notification interface
 
-00:23:05.046 --> 00:23:07.126 A:middle
+
+461
+00:23:05,046 --> 00:23:07,126
 controller is run when a
 notification is received
 
-00:23:07.126 --> 00:23:08.366 A:middle
+
+462
+00:23:07,126 --> 00:23:08,366
 for your app while
 it is inactive.
 
-00:23:09.766 --> 00:23:11.176 A:middle
+
+463
+00:23:09,766 --> 00:23:11,176
 When this happens,
 one of these calls,
 
-00:23:11.246 --> 00:23:12.436 A:middle
+
+464
+00:23:11,246 --> 00:23:12,436
 did receive remote notification
 
-00:23:12.436 --> 00:23:14.766 A:middle
+
+465
+00:23:12,436 --> 00:23:14,766
 or did receive local
 notification, will be called
 
-00:23:14.766 --> 00:23:17.876 A:middle
+
+466
+00:23:14,766 --> 00:23:17,876
 on your controller,
 and it's up to you
 
-00:23:17.876 --> 00:23:20.306 A:middle
+
+467
+00:23:17,876 --> 00:23:20,306
 to call the completion
 handler in a timely manner.
 
-00:23:20.666 --> 00:23:24.896 A:middle
+
+468
+00:23:20,666 --> 00:23:24,896
 If you take too long, your
 default interface will be shown,
 
-00:23:25.056 --> 00:23:27.096 A:middle
+
+469
+00:23:25,056 --> 00:23:27,096
 which is a little
 bit less lively.
 
-00:23:27.226 --> 00:23:30.226 A:middle
+
+470
+00:23:27,226 --> 00:23:30,226
 So it's up to you to do this
 in a reasonable amount of time.
 
-00:23:30.786 --> 00:23:34.676 A:middle
+
+471
+00:23:30,786 --> 00:23:34,676
 Next up, I would like to talk
 about local notifications.
 
-00:23:35.296 --> 00:23:37.466 A:middle
+
+472
+00:23:35,296 --> 00:23:37,466
 Local notifications must
 be fired on the phone
 
-00:23:37.466 --> 00:23:40.396 A:middle
+
+473
+00:23:37,466 --> 00:23:40,396
 by your iPhone app, but you
 can message your iPhone app
 
-00:23:40.396 --> 00:23:41.846 A:middle
+
+474
+00:23:40,396 --> 00:23:41,846
 from your WatchKit
 extension and ask it
 
-00:23:41.846 --> 00:23:42.936 A:middle
+
+475
+00:23:41,846 --> 00:23:42,936
 to fire the local notification.
 
-00:23:44.416 --> 00:23:47.736 A:middle
+
+476
+00:23:44,416 --> 00:23:47,736
 The same logic will be applied
 as for remote notification,
 
-00:23:48.026 --> 00:23:49.816 A:middle
+
+477
+00:23:48,026 --> 00:23:49,816
 where the phone will
 decide whether
 
-00:23:49.816 --> 00:23:52.816 A:middle
+
+478
+00:23:49,816 --> 00:23:52,816
 to display the notification
 itself or whether
 
-00:23:52.816 --> 00:23:55.076 A:middle
+
+479
+00:23:52,816 --> 00:23:55,076
 to send it back to the
 watch to be displayed there.
 
-00:23:56.796 --> 00:23:58.996 A:middle
+
+480
+00:23:56,796 --> 00:23:58,996
 So let's walk through an example
 
-00:23:58.996 --> 00:24:01.496 A:middle
+
+481
+00:23:58,996 --> 00:24:01,496
 of how you would go
 about doing that.
 
 
-
-00:23:58.996 --> 00:24:01.496 A:middle
-of how you would go
-about doing that.
-
-00:24:02.086 --> 00:24:04.806 A:middle
+482
+00:24:02,086 --> 00:24:04,806
 Here, I'm going to use watch
 connectivity send message call
 
-00:24:04.806 --> 00:24:09.146 A:middle
+
+483
+00:24:04,806 --> 00:24:09,146
 to send the message from
 the watch to the phone app.
 
-00:24:09.406 --> 00:24:10.786 A:middle
+
+484
+00:24:09,406 --> 00:24:10,786
 When my iPhone app
 receives that message,
 
-00:24:10.786 --> 00:24:12.166 A:middle
+
+485
+00:24:10,786 --> 00:24:12,166
 it can fire the local
 notification
 
-00:24:12.226 --> 00:24:14.006 A:middle
+
+486
+00:24:12,226 --> 00:24:14,006
 to kick off the normal
 logic to determine
 
-00:24:14.146 --> 00:24:15.326 A:middle
+
+487
+00:24:14,146 --> 00:24:15,326
 where the display the alert.
 
-00:24:16.306 --> 00:24:17.846 A:middle
+
+488
+00:24:16,306 --> 00:24:17,846
 Relatively simple code.
 
-00:24:19.116 --> 00:24:21.456 A:middle
+
+489
+00:24:19,116 --> 00:24:21,456
 So now we have the alert
 visible on your watch.
 
-00:24:21.606 --> 00:24:24.326 A:middle
+
+490
+00:24:21,606 --> 00:24:24,326
 I would like to talk about
 launching your application
 
-00:24:24.546 --> 00:24:25.596 A:middle
+
+491
+00:24:24,546 --> 00:24:25,596
 from your notification UI.
 
-00:24:26.666 --> 00:24:28.276 A:middle
+
+492
+00:24:26,666 --> 00:24:28,276
 The app can be launched
 in two ways from here.
 
-00:24:28.896 --> 00:24:33.116 A:middle
+
+493
+00:24:28,896 --> 00:24:33,116
 Either you can launch from
 a notification action button
 
-00:24:33.266 --> 00:24:35.026 A:middle
+
+494
+00:24:33,266 --> 00:24:35,026
 which in this case I have
 set up with the reply button.
 
-00:24:35.666 --> 00:24:38.086 A:middle
+
+495
+00:24:35,666 --> 00:24:38,086
 The user can also launch the
 application for notification
 
-00:24:38.086 --> 00:24:42.806 A:middle
+
+496
+00:24:38,086 --> 00:24:42,806
 by tapping on the application
 iCon in the upper left corner.
 
-00:24:42.946 --> 00:24:44.306 A:middle
+
+497
+00:24:42,946 --> 00:24:44,306
 When one of these
 actions happens
 
-00:24:44.516 --> 00:24:46.406 A:middle
+
+498
+00:24:44,516 --> 00:24:46,406
 or when the user does
 one of these things,
 
-00:24:47.276 --> 00:24:53.126 A:middle
+
+499
+00:24:47,276 --> 00:24:53,126
 one of these calls will be made
 on your WK extension delegate,
 
-00:24:53.636 --> 00:24:54.716 A:middle
+
+500
+00:24:53,636 --> 00:24:54,716
 either the handle
 
-00:24:54.856 --> 00:24:57.266 A:middle
+
+501
+00:24:54,856 --> 00:24:57,266
 with identifier call will
 be made either for remote
 
-00:24:57.266 --> 00:24:58.216 A:middle
+
+502
+00:24:57,266 --> 00:24:58,216
 or local notification.
 
-00:24:58.216 --> 00:25:01.846 A:middle
+
+503
+00:24:58,216 --> 00:25:01,846
 You will receive the identifier
 of the action that was tapped.
 
 
-
-00:24:58.216 --> 00:25:01.846 A:middle
-You will receive the identifier
-of the action that was tapped.
-
-00:25:01.846 --> 00:25:02.286 A:middle
+504
+00:25:01,846 --> 00:25:02,286
 If they tapped
 
-00:25:02.286 --> 00:25:05.166 A:middle
+
+505
+00:25:02,286 --> 00:25:05,166
 on the application iCon you
 will receive a nil for that,
 
-00:25:05.166 --> 00:25:07.816 A:middle
+
+506
+00:25:05,166 --> 00:25:07,816
 and in the remote case, you
 will get a dictionary containing
 
-00:25:07.816 --> 00:25:08.806 A:middle
+
+507
+00:25:07,816 --> 00:25:08,806
 notification payload.
 
-00:25:08.806 --> 00:25:11.776 A:middle
+
+508
+00:25:08,806 --> 00:25:11,776
 In the local case, you will
 receive the UI notification
 
-00:25:11.776 --> 00:25:14.506 A:middle
+
+509
+00:25:11,776 --> 00:25:14,506
 object that you created
 in the beginning
 
-00:25:14.506 --> 00:25:15.986 A:middle
+
+510
+00:25:14,506 --> 00:25:15,986
 to fire your notification
 to begin with.
 
-00:25:16.646 --> 00:25:18.256 A:middle
+
+511
+00:25:16,646 --> 00:25:18,256
 So that's launching your
 app from a notification.
 
-00:25:18.256 --> 00:25:21.576 A:middle
+
+512
+00:25:18,256 --> 00:25:21,576
 Next, I would like to talk
 
-00:25:21.576 --> 00:25:23.576 A:middle
+
+513
+00:25:21,576 --> 00:25:23,576
 about inline notification
 text replies.
 
-00:25:24.536 --> 00:25:27.566 A:middle
+
+514
+00:25:24,536 --> 00:25:27,566
 In iOS 9 and watchOS 2 we
 have added third party support
 
-00:25:27.566 --> 00:25:29.446 A:middle
+
+515
+00:25:27,566 --> 00:25:29,446
 for inline notification
 text replies.
 
-00:25:29.796 --> 00:25:34.446 A:middle
+
+516
+00:25:29,796 --> 00:25:34,446
 In this example, the reply
 action has been designated
 
-00:25:34.446 --> 00:25:38.046 A:middle
+
+517
+00:25:34,446 --> 00:25:38,046
 as having text input behavior.
 
-00:25:38.046 --> 00:25:41.326 A:middle
+
+518
+00:25:38,046 --> 00:25:41,326
 When the user taps this action,
 instead of launching the app
 
-00:25:41.416 --> 00:25:44.946 A:middle
+
+519
+00:25:41,416 --> 00:25:44,946
 or sending a signal
 back to your iPhone app,
 
-00:25:45.226 --> 00:25:46.946 A:middle
+
+520
+00:25:45,226 --> 00:25:46,946
 the user will be presented
 with text input UI.
 
-00:25:47.606 --> 00:25:50.786 A:middle
+
+521
+00:25:47,606 --> 00:25:50,786
 So you can see in this UI
 the user is able to tap
 
-00:25:50.786 --> 00:25:52.686 A:middle
+
+522
+00:25:50,786 --> 00:25:52,686
 on the microphone in order
 to dictate the response,
 
-00:25:53.256 --> 00:25:56.626 A:middle
+
+523
+00:25:53,256 --> 00:25:56,626
 they are able to tap on the
 emoji iCon in order to enter
 
-00:25:56.966 --> 00:26:02.236 A:middle
+
+524
+00:25:56,966 --> 00:26:02,236
 from the emoji picker, or pick
 from a list of suggestions
 
 
-
-00:25:56.966 --> 00:26:02.236 A:middle
-from the emoji picker, or pick
-from a list of suggestions
-
-00:26:02.546 --> 00:26:05.026 A:middle
+525
+00:26:02,546 --> 00:26:05,026
 which you as the app developer
 will be able to supply.
 
-00:26:05.026 --> 00:26:09.586 A:middle
+
+526
+00:26:05,026 --> 00:26:09,586
 And the way you will do that
 is by implementing suggestions
 
-00:26:09.586 --> 00:26:11.396 A:middle
+
+527
+00:26:09,586 --> 00:26:11,396
 to response to actions
 identifier call
 
-00:26:12.956 --> 00:26:15.656 A:middle
+
+528
+00:26:12,956 --> 00:26:15,656
 on your WK user /notification
 interface controller.
 
-00:26:18.776 --> 00:26:20.966 A:middle
+
+529
+00:26:18,776 --> 00:26:20,966
 So once the user has selected,
 
-00:26:21.106 --> 00:26:23.306 A:middle
+
+530
+00:26:21,106 --> 00:26:23,306
 or has provided their text
 input either through one
 
-00:26:23.306 --> 00:26:25.176 A:middle
+
+531
+00:26:23,306 --> 00:26:25,176
 of your selections or
 one of the other methods,
 
-00:26:25.936 --> 00:26:27.906 A:middle
+
+532
+00:26:25,936 --> 00:26:27,906
 your application
 will be launched,
 
-00:26:28.166 --> 00:26:30.846 A:middle
+
+533
+00:26:28,166 --> 00:26:30,846
 and you will receive this handle
 action with identifier call
 
-00:26:30.846 --> 00:26:33.876 A:middle
+
+534
+00:26:30,846 --> 00:26:33,876
 on your WK or your WK
 extension delegate.
 
-00:26:33.876 --> 00:26:39.796 A:middle
+
+535
+00:26:33,876 --> 00:26:39,796
 You will note that this
 variant has a new parameter,
 
-00:26:39.796 --> 00:26:43.136 A:middle
+
+536
+00:26:39,796 --> 00:26:43,136
 the response info, and the
 response info will contain the
 
-00:26:43.136 --> 00:26:44.046 A:middle
+
+537
+00:26:43,136 --> 00:26:44,046
 text that the user entered
 
-00:26:44.046 --> 00:26:50.196 A:middle
+
+538
+00:26:44,046 --> 00:26:50,196
 in the UI user notification
 action response typed text key.
 
-00:26:50.796 --> 00:26:53.216 A:middle
+
+539
+00:26:50,796 --> 00:26:53,216
 So another new feature
 I like to talk about is
 
-00:26:53.216 --> 00:26:54.366 A:middle
+
+540
+00:26:53,216 --> 00:26:54,366
 on the fly language selection.
 
-00:26:55.426 --> 00:26:57.296 A:middle
+
+541
+00:26:55,426 --> 00:26:57,296
 Here you can see we have
 standard text input.
 
-00:26:57.756 --> 00:27:01.476 A:middle
+
+542
+00:26:57,756 --> 00:27:01,476
 Any time the user has the
 standard text input UI up,
 
 
-
-00:26:57.756 --> 00:27:01.476 A:middle
-Any time the user has the
-standard text input UI up,
-
-00:27:01.476 --> 00:27:03.856 A:middle
+543
+00:27:01,476 --> 00:27:03,856
 they can choose to do
 a Force Touch to bring
 
-00:27:03.856 --> 00:27:04.786 A:middle
+
+544
+00:27:03,856 --> 00:27:04,786
 up a language chooser.
 
-00:27:05.456 --> 00:27:07.096 A:middle
+
+545
+00:27:05,456 --> 00:27:07,096
 The language chooser
 will offer an option
 
-00:27:07.476 --> 00:27:10.056 A:middle
+
+546
+00:27:07,476 --> 00:27:10,056
 of all languages
 that are available.
 
-00:27:10.056 --> 00:27:11.946 A:middle
+
+547
+00:27:10,056 --> 00:27:11,946
 These are selected based
 
-00:27:11.946 --> 00:27:15.056 A:middle
+
+548
+00:27:11,946 --> 00:27:15,056
 on the keyboards you have
 made available on your iPhone.
 
-00:27:15.056 --> 00:27:17.416 A:middle
+
+549
+00:27:15,056 --> 00:27:17,416
 So I have made English
 and Spanish available.
 
-00:27:17.416 --> 00:27:19.166 A:middle
+
+550
+00:27:17,416 --> 00:27:19,166
 So I will go ahead
 and switch to Spanish
 
-00:27:19.936 --> 00:27:22.816 A:middle
+
+551
+00:27:19,936 --> 00:27:22,816
 which will switch the text
 input UI to Spanish and allow it
 
-00:27:22.816 --> 00:27:24.086 A:middle
+
+552
+00:27:22,816 --> 00:27:24,086
 to populate with a list
 
-00:27:24.086 --> 00:27:25.786 A:middle
+
+553
+00:27:24,086 --> 00:27:25,786
 of Spanish suggestions
 instead of English ones.
 
-00:27:25.986 --> 00:27:28.066 A:middle
+
+554
+00:27:25,986 --> 00:27:28,066
 So that's on the fly
 language selection.
 
-00:27:28.846 --> 00:27:33.016 A:middle
+
+555
+00:27:28,846 --> 00:27:33,016
 Next up I would like to
 talk about another way
 
-00:27:33.016 --> 00:27:33.986 A:middle
+
+556
+00:27:33,016 --> 00:27:33,986
 to handle notifications.
 
-00:27:34.386 --> 00:27:37.356 A:middle
+
+557
+00:27:34,386 --> 00:27:37,356
 In watchOS 1, whether your
 app was active or not,
 
-00:27:37.576 --> 00:27:40.796 A:middle
+
+558
+00:27:37,576 --> 00:27:40,796
 we would always instantiate your
 WK user notification interface
 
-00:27:40.796 --> 00:27:43.576 A:middle
+
+559
+00:27:40,796 --> 00:27:43,576
 controller, and the system
 would display that over the top
 
-00:27:43.576 --> 00:27:45.426 A:middle
+
+560
+00:27:43,576 --> 00:27:45,426
 of whatever was on the screen
 including your own app.
 
-00:27:46.146 --> 00:27:48.056 A:middle
+
+561
+00:27:46,146 --> 00:27:48,056
 In watchOS 2, if
 your app is active,
 
-00:27:48.056 --> 00:27:49.106 A:middle
+
+562
+00:27:48,056 --> 00:27:49,106
 we will no longer be doing that.
 
-00:27:49.296 --> 00:27:53.196 A:middle
+
+563
+00:27:49,296 --> 00:27:53,196
 Instead the WK extension
 delegate will receive a did
 
-00:27:53.196 --> 00:27:54.296 A:middle
+
+564
+00:27:53,196 --> 00:27:54,296
 receive notification calls.
 
-00:27:55.206 --> 00:27:58.836 A:middle
+
+565
+00:27:55,206 --> 00:27:58,836
 It will be up to your app to
 handle, to display the contents
 
-00:27:58.836 --> 00:28:00.156 A:middle
+
+566
+00:27:58,836 --> 00:28:00,156
 of the notification
 as appropriate.
 
 
-
-00:27:58.836 --> 00:28:00.156 A:middle
-of the notification
-as appropriate.
-
-00:28:00.846 --> 00:28:03.486 A:middle
+567
+00:28:00,846 --> 00:28:03,486
 So, for example, if you
 are writing a chat app,
 
-00:28:03.486 --> 00:28:06.986 A:middle
+
+568
+00:28:03,486 --> 00:28:06,986
 you might append the contents to
 the end of the chat transcript.
 
-00:28:08.336 --> 00:28:10.646 A:middle
+
+569
+00:28:08,336 --> 00:28:10,646
 Again, the system will no longer
 be putting up the alert for you
 
-00:28:10.646 --> 00:28:12.926 A:middle
+
+570
+00:28:10,646 --> 00:28:12,926
 so if you want the user to
 know the notification happened,
 
-00:28:12.926 --> 00:28:16.516 A:middle
+
+571
+00:28:12,926 --> 00:28:16,516
 you need to present
 it in your UI.
 
-00:28:16.516 --> 00:28:19.766 A:middle
+
+572
+00:28:16,516 --> 00:28:19,766
 Next I would like to
 talk about modal alerts.
 
-00:28:20.396 --> 00:28:29.206 A:middle
+
+573
+00:28:20,396 --> 00:28:29,206
 In WatchOS 1, you could unhide
 a hidden group to show an alert.
 
-00:28:30.146 --> 00:28:32.356 A:middle
+
+574
+00:28:30,146 --> 00:28:32,356
 In watchOS 2 we have allowed
 present alert controller
 
-00:28:32.356 --> 00:28:33.996 A:middle
+
+575
+00:28:32,356 --> 00:28:33,996
 with title which should
 make it much easier
 
-00:28:33.996 --> 00:28:36.366 A:middle
+
+576
+00:28:33,996 --> 00:28:36,366
 to present modal
 alerts to users.
 
-00:28:37.996 --> 00:28:40.996 A:middle
+
+577
+00:28:37,996 --> 00:28:40,996
 There are three variants
 on this call.
 
-00:28:40.996 --> 00:28:42.066 A:middle
+
+578
+00:28:40,996 --> 00:28:42,066
 The first one is alert.
 
-00:28:42.476 --> 00:28:44.216 A:middle
+
+579
+00:28:42,476 --> 00:28:44,216
 This is a simple call
 for telling the user
 
-00:28:44.216 --> 00:28:47.126 A:middle
+
+580
+00:28:44,216 --> 00:28:47,126
 that something has happened.
 
-00:28:47.316 --> 00:28:49.036 A:middle
+
+581
+00:28:47,316 --> 00:28:49,036
 Next we have the side
 by side buttons alert.
 
-00:28:49.426 --> 00:28:54.326 A:middle
+
+582
+00:28:49,426 --> 00:28:54,326
 This is presenting
 either-or options to the user
 
-00:28:54.326 --> 00:28:57.986 A:middle
+
+583
+00:28:54,326 --> 00:28:57,986
 and we think the third-party
 developers will want to use this
 
-00:28:57.986 --> 00:28:58.916 A:middle
+
+584
+00:28:57,986 --> 00:28:58,916
 in their application as well.
 
-00:28:59.506 --> 00:29:02.146 A:middle
+
+585
+00:28:59,506 --> 00:29:02,146
 And finally, we have
 the action sheet.
 
 
-
-00:28:59.506 --> 00:29:02.146 A:middle
-And finally, we have
-the action sheet.
-
-00:29:02.756 --> 00:29:03.586 A:middle
+586
+00:29:02,756 --> 00:29:03,586
 The action sheet can have
 
-00:29:03.586 --> 00:29:06.406 A:middle
+
+587
+00:29:03,586 --> 00:29:06,406
 up to four main actions plus
 a customizable cancel action.
 
-00:29:06.406 --> 00:29:07.616 A:middle
+
+588
+00:29:06,406 --> 00:29:07,616
 You can see the never mind,
 
-00:29:07.696 --> 00:29:10.606 A:middle
+
+589
+00:29:07,696 --> 00:29:10,606
 the action I have
 customized to be never mind.
 
-00:29:10.976 --> 00:29:13.556 A:middle
+
+590
+00:29:10,976 --> 00:29:13,556
 Actiions can be optionally
 marked destructive
 
-00:29:13.556 --> 00:29:14.756 A:middle
+
+591
+00:29:13,556 --> 00:29:14,756
 which I have done with
 the delete button.
 
-00:29:15.136 --> 00:29:16.706 A:middle
+
+592
+00:29:15,136 --> 00:29:16,706
 Currently that means they
 will be displayed in red.
 
-00:29:17.916 --> 00:29:21.396 A:middle
+
+593
+00:29:17,916 --> 00:29:21,396
 Once the user selects
 from the cancel or one
 
-00:29:21.396 --> 00:29:23.686 A:middle
+
+594
+00:29:21,396 --> 00:29:23,686
 of the four main actions
 you will receive a call back
 
-00:29:23.936 --> 00:29:26.086 A:middle
+
+595
+00:29:23,936 --> 00:29:26,086
 indicating which
 one was selected.
 
-00:29:27.576 --> 00:29:31.866 A:middle
+
+596
+00:29:27,576 --> 00:29:31,866
 So in summary, we have got a
 new architecture it watchOS 2,
 
-00:29:33.616 --> 00:29:35.376 A:middle
+
+597
+00:29:33,616 --> 00:29:35,376
 we've added WK extension
 delegate
 
-00:29:35.376 --> 00:29:37.156 A:middle
+
+598
+00:29:35,376 --> 00:29:37,156
 to help you manage your
 application's lifecycle.
 
-00:29:37.156 --> 00:29:40.196 A:middle
+
+599
+00:29:37,156 --> 00:29:40,196
 We have got a whole
 host of new APIs.
 
-00:29:41.856 --> 00:29:44.806 A:middle
+
+600
+00:29:41,856 --> 00:29:44,806
 And, of course, there
 is more to come.
 
-00:29:45.016 --> 00:29:47.226 A:middle
+
+601
+00:29:45,016 --> 00:29:47,226
 If you -- for further
 info on the things Andrew
 
-00:29:47.226 --> 00:29:49.046 A:middle
+
+602
+00:29:47,226 --> 00:29:49,046
 and I have talked about
 here, please check
 
-00:29:49.046 --> 00:29:51.496 A:middle
+
+603
+00:29:49,046 --> 00:29:51,496
 out the documentation,
 the sample code
 
-00:29:51.496 --> 00:29:53.366 A:middle
+
+604
+00:29:51,496 --> 00:29:53,366
 and if you have specific
 inquiries,
 
-00:29:53.426 --> 00:29:55.656 A:middle
+
+605
+00:29:53,426 --> 00:29:55,656
 please contact Jake
 Behrens at this address
 
-00:29:55.696 --> 00:29:58.276 A:middle
+
+606
+00:29:55,696 --> 00:29:58,276
 and there is a whole host
 
-00:29:58.276 --> 00:30:01.436 A:middle
+
+607
+00:29:58,276 --> 00:30:01,436
 of related sessions including
 the next session in here
 
 
-
-00:29:58.276 --> 00:30:01.436 A:middle
-of related sessions including
-the next session in here
-
-00:30:01.586 --> 00:30:02.866 A:middle
+608
+00:30:01,586 --> 00:30:02,866
 which is part 2 of this talk.
 
-00:30:03.336 --> 00:30:06.976 A:middle
+
+609
+00:30:03,336 --> 00:30:06,976
 So thank you all
 very much for coming.
 
-00:30:07.516 --> 00:30:20.420 A:middle
+
+610
+00:30:07,516 --> 00:30:20,420
 [ Applause ]
 

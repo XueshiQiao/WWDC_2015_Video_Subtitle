@@ -1,3126 +1,4465 @@
-
-00:00:27.516 --> 00:00:31.156 A:middle
+1
+00:00:27,516 --> 00:00:31,156
 [Applause]
 
-00:00:31.656 --> 00:00:32.146 A:middle
-&gt;&gt; BEN ENGLERT: Good morning.
 
-00:00:34.006 --> 00:00:35.146 A:middle
+2
+00:00:31,656 --> 00:00:32,146
+>> BEN ENGLERT: Good morning.
+
+
+3
+00:00:34,006 --> 00:00:35,146
 My name's Ben.
 
-00:00:35.146 --> 00:00:38.126 A:middle
+
+4
+00:00:35,146 --> 00:00:38,126
 I am an iOS Performance
 Engineer, and today we are going
 
-00:00:38.126 --> 00:00:40.906 A:middle
+
+5
+00:00:38,126 --> 00:00:40,906
 to talk about "Performance
 on iOS and watchOS."
 
-00:00:41.746 --> 00:00:44.296 A:middle
+
+6
+00:00:41,746 --> 00:00:44,296
 So we are going to
 start by telling you,
 
-00:00:44.686 --> 00:00:46.156 A:middle
+
+7
+00:00:44,686 --> 00:00:46,156
 why should you think
 about performance?
 
-00:00:46.676 --> 00:00:48.146 A:middle
+
+8
+00:00:46,676 --> 00:00:48,146
 If you've never thought
 about performance
 
-00:00:48.146 --> 00:00:51.706 A:middle
+
+9
+00:00:48,146 --> 00:00:51,706
 in your app before,
 why start now?
 
-00:00:51.926 --> 00:00:54.216 A:middle
+
+10
+00:00:51,926 --> 00:00:54,216
 Hopefully I'll convince
 you to stay in your seats,
 
-00:00:55.196 --> 00:00:56.516 A:middle
+
+11
+00:00:55,196 --> 00:00:56,516
 and then we can move on to,
 
-00:00:56.646 --> 00:00:57.966 A:middle
+
+12
+00:00:56,646 --> 00:00:57,966
 how should you think
 about performance?
 
-00:00:58.536 --> 00:01:01.756 A:middle
+
+13
+00:00:58,536 --> 00:01:01,756
 It can be like a very broad
 and sometimes daunting topic,
 
 
-
-00:00:58.536 --> 00:01:01.756 A:middle
-It can be like a very broad
-and sometimes daunting topic,
-
-00:01:01.756 --> 00:01:04.566 A:middle
+14
+00:01:01,756 --> 00:01:04,566
 but we are going to break it
 down into a couple of categories
 
-00:01:05.075 --> 00:01:07.076 A:middle
+
+15
+00:01:05,075 --> 00:01:07,076
 and give you a few
 specific strategies
 
-00:01:07.146 --> 00:01:09.936 A:middle
+
+16
+00:01:07,146 --> 00:01:09,936
 for improving the performance
 of your app in those areas.
 
-00:01:11.066 --> 00:01:13.406 A:middle
+
+17
+00:01:11,066 --> 00:01:13,406
 And finally, you're
 hopefully really excited
 
-00:01:13.546 --> 00:01:16.646 A:middle
+
+18
+00:01:13,546 --> 00:01:16,646
 to bring native code to watchOS
 2, and we are going to dig
 
-00:01:16.646 --> 00:01:19.306 A:middle
+
+19
+00:01:16,646 --> 00:01:19,306
 into what you can do to get
 the best user experience
 
-00:01:19.426 --> 00:01:20.896 A:middle
+
+20
+00:01:19,426 --> 00:01:20,896
 in your app on that platform.
 
-00:01:22.056 --> 00:01:24.426 A:middle
+
+21
+00:01:22,056 --> 00:01:24,426
 So why should you think
 about performance?
 
-00:01:25.246 --> 00:01:29.146 A:middle
+
+22
+00:01:25,246 --> 00:01:29,146
 The easiest way to sum it up is
 that performance is a feature.
 
-00:01:29.966 --> 00:01:31.786 A:middle
+
+23
+00:01:29,966 --> 00:01:31,786
 It's a core and central element
 
-00:01:31.786 --> 00:01:34.596 A:middle
+
+24
+00:01:31,786 --> 00:01:34,596
 of giving your users a great
 experience in your app.
 
-00:01:35.236 --> 00:01:37.876 A:middle
+
+25
+00:01:35,236 --> 00:01:37,876
 It's not an extra or a bonus
 or something you can get
 
-00:01:37.876 --> 00:01:39.576 A:middle
+
+26
+00:01:37,876 --> 00:01:39,576
 to at the end if you have time.
 
-00:01:40.506 --> 00:01:41.846 A:middle
+
+27
+00:01:40,506 --> 00:01:41,846
 It's actually something
 that should be
 
-00:01:41.846 --> 00:01:44.616 A:middle
+
+28
+00:01:41,846 --> 00:01:44,616
 on your mind all the time
 while you are writing your app.
 
-00:01:45.336 --> 00:01:46.466 A:middle
+
+29
+00:01:45,336 --> 00:01:46,466
 There's a couple of
 reasons for that.
 
-00:01:48.056 --> 00:01:49.706 A:middle
+
+30
+00:01:48,056 --> 00:01:49,706
 If your app is really
 responsive,
 
-00:01:49.936 --> 00:01:52.606 A:middle
+
+31
+00:01:49,936 --> 00:01:52,606
 if it always responds to
 user input right away,
 
-00:01:53.576 --> 00:01:55.886 A:middle
+
+32
+00:01:53,576 --> 00:01:55,886
 that actually builds
 the trust of your users.
 
-00:01:56.886 --> 00:02:00.516 A:middle
+
+33
+00:01:56,886 --> 00:02:00,516
 That lets them know that if they
 quickly need to access a piece
 
 
-
-00:01:56.886 --> 00:02:00.516 A:middle
-That lets them know that if they
-quickly need to access a piece
-
-00:02:00.516 --> 00:02:03.396 A:middle
+34
+00:02:00,516 --> 00:02:03,396
 of information or service
 some interaction in your app,
 
-00:02:03.646 --> 00:02:04.936 A:middle
+
+35
+00:02:03,646 --> 00:02:04,936
 it's not going to
 keep them waiting,
 
-00:02:05.536 --> 00:02:08.116 A:middle
+
+36
+00:02:05,536 --> 00:02:08,116
 and that makes them really happy
 and keeps them coming back.
 
-00:02:08.116 --> 00:02:13.586 A:middle
+
+37
+00:02:08,116 --> 00:02:13,586
 If you are going to adopt
 Multitasking on iPad in iOS 9,
 
-00:02:14.206 --> 00:02:17.316 A:middle
+
+38
+00:02:14,206 --> 00:02:17,316
 not only does your app no longer
 have full run of the screen,
 
-00:02:18.136 --> 00:02:19.536 A:middle
+
+39
+00:02:18,136 --> 00:02:19,536
 it actually doesn't
 have full run
 
-00:02:19.536 --> 00:02:21.246 A:middle
+
+40
+00:02:19,536 --> 00:02:21,246
 of the system's resources
 either.
 
-00:02:22.106 --> 00:02:25.726 A:middle
+
+41
+00:02:22,106 --> 00:02:25,726
 So a performance problem in your
 app doesn't just cause a bad
 
-00:02:25.726 --> 00:02:27.316 A:middle
+
+42
+00:02:25,726 --> 00:02:27,316
 experience in your app anymore;
 
-00:02:27.656 --> 00:02:29.306 A:middle
+
+43
+00:02:27,656 --> 00:02:29,306
 it can actually cause
 a bad experience
 
-00:02:29.426 --> 00:02:30.636 A:middle
+
+44
+00:02:29,426 --> 00:02:30,636
 in another app as well.
 
-00:02:31.596 --> 00:02:34.356 A:middle
+
+45
+00:02:31,596 --> 00:02:34,356
 You really want to be known as
 a good neighbor in Multitasking.
 
-00:02:34.906 --> 00:02:39.876 A:middle
+
+46
+00:02:34,906 --> 00:02:39,876
 Apps that are architected to be
 efficient with system resources,
 
-00:02:40.156 --> 00:02:42.926 A:middle
+
+47
+00:02:40,156 --> 00:02:42,926
 like CPU or memory,
 don't just feel great
 
-00:02:42.926 --> 00:02:45.726 A:middle
+
+48
+00:02:42,926 --> 00:02:45,726
 when you are using them; they
 actually save battery power
 
-00:02:45.796 --> 00:02:47.226 A:middle
+
+49
+00:02:45,796 --> 00:02:47,226
 and let your user get
 through their day,
 
-00:02:47.556 --> 00:02:48.746 A:middle
+
+50
+00:02:47,556 --> 00:02:48,746
 and they really appreciate that.
 
-00:02:50.166 --> 00:02:53.826 A:middle
+
+51
+00:02:50,166 --> 00:02:53,826
 And finally, iOS 9 supports
 a huge range of hardware,
 
-00:02:54.326 --> 00:02:57.026 A:middle
+
+52
+00:02:54,326 --> 00:02:57,026
 and performance is a
 prerequisite of continuing
 
-00:02:57.026 --> 00:03:00.316 A:middle
+
+53
+00:02:57,026 --> 00:03:00,316
 to bring great apps and features
 to all of your customers.
 
 
-
-00:02:57.026 --> 00:03:00.316 A:middle
-to bring great apps and features
-to all of your customers.
-
-00:03:03.576 --> 00:03:05.886 A:middle
+54
+00:03:03,576 --> 00:03:05,886
 So hopefully I have convinced
 you, you don't have to walk out.
 
-00:03:07.566 --> 00:03:08.956 A:middle
+
+55
+00:03:07,566 --> 00:03:08,956
 How should you think
 about performance?
 
-00:03:09.496 --> 00:03:11.216 A:middle
+
+56
+00:03:09,496 --> 00:03:11,216
 Well, the very first step
 
-00:03:11.566 --> 00:03:14.166 A:middle
+
+57
+00:03:11,566 --> 00:03:14,166
 when you are building your
 app is choosing technologies.
 
-00:03:15.076 --> 00:03:17.876 A:middle
+
+58
+00:03:15,076 --> 00:03:17,876
 This is critical because
 you need to choose
 
-00:03:18.006 --> 00:03:19.076 A:middle
+
+59
+00:03:18,006 --> 00:03:19,076
 which technologies are going
 
-00:03:19.076 --> 00:03:22.286 A:middle
+
+60
+00:03:19,076 --> 00:03:22,286
 to give your users the best
 experience in your app.
 
-00:03:22.556 --> 00:03:25.376 A:middle
+
+61
+00:03:22,556 --> 00:03:25,376
 Once you are a little bit of
 the way into building your app,
 
-00:03:26.106 --> 00:03:27.786 A:middle
+
+62
+00:03:26,106 --> 00:03:27,786
 you can start taking
 measurements
 
-00:03:27.786 --> 00:03:30.626 A:middle
+
+63
+00:03:27,786 --> 00:03:30,626
 and actually understanding
 what the user experience is
 
-00:03:30.856 --> 00:03:33.806 A:middle
+
+64
+00:03:30,856 --> 00:03:33,806
 in the critical interactions
 in your app.
 
-00:03:34.076 --> 00:03:37.276 A:middle
+
+65
+00:03:34,076 --> 00:03:37,276
 Your measurements will inform
 you how your app is doing today.
 
-00:03:37.926 --> 00:03:40.446 A:middle
+
+66
+00:03:37,926 --> 00:03:40,446
 Once you've got those, you
 can actually set some goals
 
-00:03:40.676 --> 00:03:42.336 A:middle
+
+67
+00:03:40,676 --> 00:03:42,336
 for what state you
 want your app to be
 
-00:03:42.336 --> 00:03:43.946 A:middle
+
+68
+00:03:42,336 --> 00:03:43,946
 in before you submit
 it to the Store.
 
-00:03:45.066 --> 00:03:47.746 A:middle
+
+69
+00:03:45,066 --> 00:03:47,746
 And finally, once you've
 got all that, you are ready
 
-00:03:47.746 --> 00:03:50.496 A:middle
+
+70
+00:03:47,746 --> 00:03:50,496
 to start making code changes
 to improve the performance
 
-00:03:50.496 --> 00:03:53.066 A:middle
+
+71
+00:03:50,496 --> 00:03:53,066
 in your app, and there's a
 great workflow you can follow
 
-00:03:53.296 --> 00:03:54.456 A:middle
+
+72
+00:03:53,296 --> 00:03:54,456
 to converge on your targets.
 
-00:03:55.696 --> 00:03:57.956 A:middle
+
+73
+00:03:55,696 --> 00:03:57,956
 So let's start with
 choosing technologies.
 
-00:03:59.006 --> 00:04:02.206 A:middle
+
+74
+00:03:59,006 --> 00:04:02,206
 Picking the right tool for
 the job is a really early
 
 
-
-00:03:59.006 --> 00:04:02.206 A:middle
-Picking the right tool for
-the job is a really early
-
-00:04:02.206 --> 00:04:03.186 A:middle
+75
+00:04:02,206 --> 00:04:03,186
 and critical aspect
 
-00:04:03.436 --> 00:04:06.456 A:middle
+
+76
+00:04:03,436 --> 00:04:06,456
 of proactively architecting
 your app for great performance.
 
-00:04:07.226 --> 00:04:09.946 A:middle
+
+77
+00:04:07,226 --> 00:04:09,946
 And the very first step of
 choosing technologies is
 
-00:04:09.996 --> 00:04:11.116 A:middle
+
+78
+00:04:09,996 --> 00:04:11,116
 to know the technologies.
 
-00:04:11.656 --> 00:04:13.366 A:middle
+
+79
+00:04:11,656 --> 00:04:13,366
 So over the course of this talk,
 
-00:04:13.366 --> 00:04:16.166 A:middle
+
+80
+00:04:13,366 --> 00:04:16,166
 I'm going to reference several
 other talks from this year
 
-00:04:16.245 --> 00:04:19.046 A:middle
+
+81
+00:04:16,245 --> 00:04:19,046
 and previous years
 that cover technologies
 
-00:04:19.286 --> 00:04:20.745 A:middle
+
+82
+00:04:19,286 --> 00:04:20,745
 that we have found
 really helpful
 
-00:04:20.866 --> 00:04:23.956 A:middle
+
+83
+00:04:20,866 --> 00:04:23,956
 for getting great
 performance in apps.
 
-00:04:24.186 --> 00:04:27.206 A:middle
+
+84
+00:04:24,186 --> 00:04:27,206
 Once you know the universe of
 technologies that are available
 
-00:04:27.206 --> 00:04:30.106 A:middle
+
+85
+00:04:27,206 --> 00:04:30,106
 to you, then you can start
 to bring in your knowledge
 
-00:04:30.106 --> 00:04:32.246 A:middle
+
+86
+00:04:30,106 --> 00:04:32,246
 of how your app works
 and what it needs to do,
 
-00:04:33.446 --> 00:04:35.036 A:middle
+
+87
+00:04:33,446 --> 00:04:35,036
 and pick the best
 ones for your app.
 
-00:04:36.056 --> 00:04:38.726 A:middle
+
+88
+00:04:36,056 --> 00:04:38,726
 A great example here
 is if your app needs
 
-00:04:38.786 --> 00:04:42.556 A:middle
+
+89
+00:04:38,786 --> 00:04:42,556
 to store three strings, it's
 probably okay to write those
 
-00:04:42.556 --> 00:04:44.696 A:middle
+
+90
+00:04:42,556 --> 00:04:44,696
 out to a plist or put
 them in user defaults.
 
-00:04:45.476 --> 00:04:48.816 A:middle
+
+91
+00:04:45,476 --> 00:04:48,816
 On the other hand, if your app
 needs to use 3,000 strings,
 
-00:04:49.556 --> 00:04:51.556 A:middle
+
+92
+00:04:49,556 --> 00:04:51,556
 you might want to
 consider Core Data.
 
-00:04:52.176 --> 00:04:55.746 A:middle
+
+93
+00:04:52,176 --> 00:04:55,746
 Speaking of Core Data, when
 you are choosing technologies,
 
-00:04:56.296 --> 00:04:57.316 A:middle
+
+94
+00:04:56,296 --> 00:04:57,316
 I strongly encourage you
 
-00:04:57.316 --> 00:04:59.436 A:middle
+
+95
+00:04:57,316 --> 00:04:59,436
 to consider Apple
 APIs and frameworks.
 
 
-
-00:05:00.336 --> 00:05:03.016 A:middle
+96
+00:05:00,336 --> 00:05:03,016
 We spent a lot of time trying
 to make those great for you
 
-00:05:03.016 --> 00:05:07.436 A:middle
+
+97
+00:05:03,016 --> 00:05:07,436
 and your users, and we build
 our own products on them.
 
-00:05:07.646 --> 00:05:11.356 A:middle
+
+98
+00:05:07,646 --> 00:05:11,356
 One benefit of adopting
 Apple APIs and frameworks is
 
-00:05:11.356 --> 00:05:13.736 A:middle
+
+99
+00:05:11,356 --> 00:05:13,736
 that after the user
 installs your app,
 
-00:05:14.666 --> 00:05:16.376 A:middle
+
+100
+00:05:14,666 --> 00:05:16,376
 they might install
 an iOS update,
 
-00:05:16.876 --> 00:05:19.916 A:middle
+
+101
+00:05:16,876 --> 00:05:19,916
 and these frequently contain
 performance improvements
 
-00:05:19.966 --> 00:05:21.536 A:middle
+
+102
+00:05:19,966 --> 00:05:21,536
 to core APIs and technologies.
 
-00:05:21.996 --> 00:05:23.826 A:middle
+
+103
+00:05:21,996 --> 00:05:23,826
 So the next time
 they open your app
 
-00:05:23.826 --> 00:05:27.016 A:middle
+
+104
+00:05:23,826 --> 00:05:27,016
 after installing an iOS
 update, it magically got faster.
 
-00:05:28.186 --> 00:05:29.696 A:middle
+
+105
+00:05:28,186 --> 00:05:29,696
 So you've chosen
 some technologies,
 
-00:05:29.836 --> 00:05:31.706 A:middle
+
+106
+00:05:29,836 --> 00:05:31,706
 and you've started
 building your app.
 
-00:05:32.816 --> 00:05:33.876 A:middle
+
+107
+00:05:32,816 --> 00:05:33,876
 Let's measure a few things.
 
-00:05:34.676 --> 00:05:36.486 A:middle
+
+108
+00:05:34,676 --> 00:05:36,486
 There's a couple of
 categories of performance
 
-00:05:36.486 --> 00:05:37.626 A:middle
+
+109
+00:05:36,486 --> 00:05:37,626
 that we can think
 about measuring.
 
-00:05:38.936 --> 00:05:40.236 A:middle
+
+110
+00:05:38,936 --> 00:05:40,236
 Let's start with animations.
 
-00:05:40.856 --> 00:05:43.756 A:middle
+
+111
+00:05:40,856 --> 00:05:43,756
 Animations are what make
 your app feel alive and fluid
 
-00:05:43.756 --> 00:05:46.706 A:middle
+
+112
+00:05:43,756 --> 00:05:46,706
 and let your user know where
 they are and what's going on.
 
-00:05:47.566 --> 00:05:49.416 A:middle
+
+113
+00:05:47,566 --> 00:05:49,416
 The easiest way to
 measure the performance
 
-00:05:49.416 --> 00:05:52.186 A:middle
+
+114
+00:05:49,416 --> 00:05:52,186
 of your animations is the
 Core Animation instrument.
 
-00:05:55.336 --> 00:05:59.326 A:middle
+
+115
+00:05:55,336 --> 00:05:59,326
 Responsiveness is all about how
 quickly you react to user input,
 
-00:05:59.876 --> 00:06:01.706 A:middle
+
+116
+00:05:59,876 --> 00:06:01,706
 and actually, the simplest way
 
 
-
-00:05:59.876 --> 00:06:01.706 A:middle
-and actually, the simplest way
-
-00:06:01.706 --> 00:06:05.176 A:middle
+117
+00:06:01,706 --> 00:06:05,176
 of measuring responsiveness
 may seem a little bit low tech,
 
-00:06:05.596 --> 00:06:06.616 A:middle
+
+118
+00:06:05,596 --> 00:06:06,616
 but it's really powerful,
 
-00:06:06.616 --> 00:06:09.336 A:middle
+
+119
+00:06:06,616 --> 00:06:09,336
 and that is simply
 instrumenting your actual code.
 
-00:06:09.336 --> 00:06:11.186 A:middle
+
+120
+00:06:09,336 --> 00:06:11,186
 I am going to go into
 an example of that.
 
-00:06:12.676 --> 00:06:15.816 A:middle
+
+121
+00:06:12,676 --> 00:06:15,816
 For more complex scenarios that
 maybe involve several threads
 
-00:06:15.816 --> 00:06:17.246 A:middle
+
+122
+00:06:15,816 --> 00:06:17,246
 or lots of system interactions,
 
-00:06:17.246 --> 00:06:19.526 A:middle
+
+123
+00:06:17,246 --> 00:06:19,526
 there is a great instrument
 called System Trace.
 
-00:06:21.176 --> 00:06:22.566 A:middle
+
+124
+00:06:21,176 --> 00:06:22,566
 And finally, memory.
 
-00:06:23.426 --> 00:06:26.336 A:middle
+
+125
+00:06:23,426 --> 00:06:26,336
 Memory is the most precious
 resource on mobile devices,
 
-00:06:26.976 --> 00:06:27.996 A:middle
+
+126
+00:06:26,976 --> 00:06:27,996
 and it's really important
 
-00:06:27.996 --> 00:06:30.836 A:middle
+
+127
+00:06:27,996 --> 00:06:30,836
 to make sure your app is
 using exactly as much memory
 
-00:06:30.836 --> 00:06:32.276 A:middle
+
+128
+00:06:30,836 --> 00:06:32,276
 as it needs and no more.
 
-00:06:33.456 --> 00:06:35.866 A:middle
+
+129
+00:06:33,456 --> 00:06:35,866
 Again, a simple but powerful way
 
-00:06:35.866 --> 00:06:37.726 A:middle
+
+130
+00:06:35,866 --> 00:06:37,726
 to understand your
 app's memory use --
 
-00:06:37.726 --> 00:06:40.206 A:middle
+
+131
+00:06:37,726 --> 00:06:40,206
 which I am going to go into
 -- is the Xcode debugger.
 
-00:06:41.356 --> 00:06:42.646 A:middle
+
+132
+00:06:41,356 --> 00:06:42,646
 When you are ready
 to dig in more,
 
-00:06:43.106 --> 00:06:44.886 A:middle
+
+133
+00:06:43,106 --> 00:06:44,886
 there's a great instrument
 called Allocations.
 
-00:06:45.636 --> 00:06:48.136 A:middle
+
+134
+00:06:45,636 --> 00:06:48,136
 And if you think you have
 leaks, there's an instrument
 
-00:06:48.136 --> 00:06:51.116 A:middle
+
+135
+00:06:48,136 --> 00:06:51,116
 to help you track
 those down as well.
 
-00:06:51.346 --> 00:06:55.616 A:middle
+
+136
+00:06:51,346 --> 00:06:55,616
 So let's go into a code
 instrumentation example.
 
-00:06:55.616 --> 00:06:58.856 A:middle
+
+137
+00:06:55,616 --> 00:06:58,856
 Here I've got an IBAction
 that's wired to a button,
 
-00:06:58.856 --> 00:07:01.926 A:middle
+
+138
+00:06:58,856 --> 00:07:01,926
 so when my user taps this,
 I am going to load an image
 
 
-
-00:06:58.856 --> 00:07:01.926 A:middle
-so when my user taps this,
-I am going to load an image
-
-00:07:01.926 --> 00:07:02.756 A:middle
+139
+00:07:01,926 --> 00:07:02,756
 and put it in my view.
 
-00:07:03.526 --> 00:07:04.976 A:middle
+
+140
+00:07:03,526 --> 00:07:04,976
 And I want to know
 how long this takes.
 
-00:07:05.136 --> 00:07:09.276 A:middle
+
+141
+00:07:05,136 --> 00:07:09,276
 So I am going to use an API
 called 'CF absolute time
 
-00:07:09.276 --> 00:07:09.786 A:middle
+
+142
+00:07:09,276 --> 00:07:09,786
 get current.'
 
-00:07:10.746 --> 00:07:12.916 A:middle
+
+143
+00:07:10,746 --> 00:07:12,916
 Now, I don't actually care
 about the absolute value
 
-00:07:12.916 --> 00:07:14.706 A:middle
+
+144
+00:07:12,916 --> 00:07:14,706
 of the current time,
 but I do care
 
-00:07:14.706 --> 00:07:17.106 A:middle
+
+145
+00:07:14,706 --> 00:07:17,106
 about the difference
 between these.
 
-00:07:17.716 --> 00:07:21.206 A:middle
+
+146
+00:07:17,716 --> 00:07:21,206
 This API, although this is
 Swift and it's type inference
 
-00:07:21.206 --> 00:07:24.026 A:middle
+
+147
+00:07:21,206 --> 00:07:24,026
 and it's wonderful, I will
 tell you this returns a double,
 
-00:07:24.436 --> 00:07:27.266 A:middle
+
+148
+00:07:24,436 --> 00:07:27,266
 and specifically, that double
 represents the current time
 
-00:07:27.266 --> 00:07:27.856 A:middle
+
+149
+00:07:27,266 --> 00:07:27,856
 in seconds.
 
-00:07:28.696 --> 00:07:30.906 A:middle
+
+150
+00:07:28,696 --> 00:07:30,906
 A second is actually
 a really long time.
 
-00:07:31.176 --> 00:07:33.196 A:middle
+
+151
+00:07:31,176 --> 00:07:33,196
 Your user is really going
 to feel it if something
 
-00:07:33.196 --> 00:07:34.386 A:middle
+
+152
+00:07:33,196 --> 00:07:34,386
 in your app takes a second.
 
-00:07:35.286 --> 00:07:37.186 A:middle
+
+153
+00:07:35,286 --> 00:07:37,186
 So we actually find milliseconds
 
-00:07:37.396 --> 00:07:39.336 A:middle
+
+154
+00:07:37,396 --> 00:07:39,336
 to be a more actionable
 unit of measure here.
 
-00:07:40.026 --> 00:07:42.336 A:middle
+
+155
+00:07:40,026 --> 00:07:42,336
 So we are going to subtract the
 start time from the end time
 
-00:07:42.336 --> 00:07:44.156 A:middle
+
+156
+00:07:42,336 --> 00:07:44,156
 and multiply the
 result by a thousand
 
-00:07:44.476 --> 00:07:46.346 A:middle
+
+157
+00:07:44,476 --> 00:07:46,346
 to get our measurement
 in milliseconds.
 
-00:07:48.826 --> 00:07:52.506 A:middle
+
+158
+00:07:48,826 --> 00:07:52,506
 It's important to profile
 the release configuration
 
-00:07:52.506 --> 00:07:55.926 A:middle
+
+159
+00:07:52,506 --> 00:07:55,926
 of your app so that you get
 all the compiler optimizations
 
-00:07:56.536 --> 00:07:57.716 A:middle
+
+160
+00:07:56,536 --> 00:07:57,716
 that your users will get and so
 
-00:07:57.716 --> 00:07:59.836 A:middle
+
+161
+00:07:57,716 --> 00:07:59,836
 that you understand how your
 app is actually behaving
 
-00:07:59.836 --> 00:08:03.476 A:middle
+
+162
+00:07:59,836 --> 00:08:03,476
 in the field; however,
 it's equally important not
 
 
-
-00:07:59.836 --> 00:08:03.476 A:middle
-in the field; however,
-it's equally important not
-
-00:08:03.476 --> 00:08:05.616 A:middle
+163
+00:08:03,476 --> 00:08:05,616
 to submit your performance
 instrumentation
 
-00:08:05.616 --> 00:08:06.306 A:middle
+
+164
+00:08:05,616 --> 00:08:06,306
 to the App Store.
 
-00:08:06.976 --> 00:08:09.416 A:middle
+
+165
+00:08:06,976 --> 00:08:09,416
 So my suggestion is that
 you actually create a copy
 
-00:08:09.416 --> 00:08:13.966 A:middle
+
+166
+00:08:09,416 --> 00:08:13,966
 of your release scheme in Xcode
 and define one additional define
 
-00:08:14.236 --> 00:08:17.496 A:middle
+
+167
+00:08:14,236 --> 00:08:17,496
 so that you can build a
 release version of your app
 
-00:08:17.846 --> 00:08:20.206 A:middle
+
+168
+00:08:17,846 --> 00:08:20,206
 with the performance
 instrumentation quickly
 
-00:08:20.206 --> 00:08:20.716 A:middle
+
+169
+00:08:20,206 --> 00:08:20,716
 and easily.
 
-00:08:21.886 --> 00:08:25.306 A:middle
+
+170
+00:08:21,886 --> 00:08:25,306
 So what types of responsiveness
 are we interested in measuring?
 
-00:08:25.766 --> 00:08:28.076 A:middle
+
+171
+00:08:25,766 --> 00:08:28,076
 Well, definitely taps
 and button presses.
 
-00:08:29.416 --> 00:08:32.635 A:middle
+
+172
+00:08:29,416 --> 00:08:32,635
 Most commonly, you'll be
 doing these in IBActions.
 
-00:08:33.336 --> 00:08:37.155 A:middle
+
+173
+00:08:33,336 --> 00:08:37,155
 You may also do them in
 UIView touch handling code.
 
-00:08:37.936 --> 00:08:39.996 A:middle
+
+174
+00:08:37,936 --> 00:08:39,996
 Or you may have a
 gesture recognizer target.
 
-00:08:40.356 --> 00:08:44.246 A:middle
+
+175
+00:08:40,356 --> 00:08:44,246
 Another aspect of your app's
 performance that's interesting
 
-00:08:44.246 --> 00:08:47.006 A:middle
+
+176
+00:08:44,246 --> 00:08:47,006
 to understand is what it
 feels for the user to move
 
-00:08:47.006 --> 00:08:49.046 A:middle
+
+177
+00:08:47,006 --> 00:08:49,046
 around in your app and
 switch to different views,
 
-00:08:49.516 --> 00:08:51.456 A:middle
+
+178
+00:08:49,516 --> 00:08:51,456
 whether that's using a
 tab bar or modal views.
 
-00:08:52.126 --> 00:08:55.526 A:middle
+
+179
+00:08:52,126 --> 00:08:55,526
 In this case, we find
 it interesting to think
 
-00:08:55.526 --> 00:08:57.266 A:middle
+
+180
+00:08:55,526 --> 00:08:57,266
 about the time between
 'view will appear'
 
-00:08:57.266 --> 00:08:59.776 A:middle
+
+181
+00:08:57,266 --> 00:08:59,776
 and 'view did appear'
 because that lets you compare
 
 
-
-00:09:00.106 --> 00:09:03.096 A:middle
+182
+00:09:00,106 --> 00:09:03,096
 which of your views take longer
 to get ready to get on screen.
 
-00:09:05.596 --> 00:09:07.546 A:middle
+
+183
+00:09:05,596 --> 00:09:07,546
 So you've taken some
 measurements,
 
-00:09:07.646 --> 00:09:09.396 A:middle
+
+184
+00:09:07,646 --> 00:09:09,396
 and you understand how
 your app is behaving.
 
-00:09:10.386 --> 00:09:12.346 A:middle
+
+185
+00:09:10,386 --> 00:09:12,346
 How do you set goals for
 where you want your app
 
-00:09:12.406 --> 00:09:14.116 A:middle
+
+186
+00:09:12,406 --> 00:09:14,116
 to be before you
 submit it to the Store?
 
-00:09:15.576 --> 00:09:18.896 A:middle
+
+187
+00:09:15,576 --> 00:09:18,896
 Animations feel great, they feel
 realistic and fluid and alive
 
-00:09:19.206 --> 00:09:20.976 A:middle
+
+188
+00:09:19,206 --> 00:09:20,976
 when they run at 60
 frames per second.
 
-00:09:22.146 --> 00:09:23.986 A:middle
+
+189
+00:09:22,146 --> 00:09:23,986
 I'm not going to talk too
 much about them this year
 
-00:09:24.436 --> 00:09:26.396 A:middle
+
+190
+00:09:24,436 --> 00:09:26,396
 because there's a great talk
 from last year you can check
 
-00:09:26.396 --> 00:09:29.386 A:middle
+
+191
+00:09:26,396 --> 00:09:29,386
 out called "Advanced Graphics
 and Animations in iOS Apps,"
 
-00:09:30.326 --> 00:09:33.026 A:middle
+
+192
+00:09:30,326 --> 00:09:33,026
 and there they cover the
 Core Animation instrument
 
-00:09:33.026 --> 00:09:34.906 A:middle
+
+193
+00:09:33,026 --> 00:09:34,906
 and how you can use it to
 measure the performance
 
-00:09:34.906 --> 00:09:36.826 A:middle
+
+194
+00:09:34,906 --> 00:09:36,826
 of your animations
 and also improve it
 
-00:09:36.826 --> 00:09:38.196 A:middle
+
+195
+00:09:36,826 --> 00:09:38,196
 across the full range
 of hardware.
 
-00:09:39.506 --> 00:09:42.486 A:middle
+
+196
+00:09:39,506 --> 00:09:42,486
 We are going to spend a lot of
 time today on responsiveness.
 
-00:09:43.336 --> 00:09:45.896 A:middle
+
+197
+00:09:43,336 --> 00:09:45,896
 Responsiveness is
 all about, again,
 
-00:09:45.896 --> 00:09:47.506 A:middle
+
+198
+00:09:45,896 --> 00:09:47,506
 how you react to user input.
 
-00:09:47.996 --> 00:09:50.566 A:middle
+
+199
+00:09:47,996 --> 00:09:50,566
 And we've found that if
 it takes too much longer
 
-00:09:50.566 --> 00:09:53.226 A:middle
+
+200
+00:09:50,566 --> 00:09:53,226
 than a hundred milliseconds,
 your user starts to feel it.
 
-00:09:53.636 --> 00:09:56.406 A:middle
+
+201
+00:09:53,636 --> 00:09:56,406
 So your goal for any
 responsiveness scenario should
 
-00:09:56.406 --> 00:09:57.726 A:middle
+
+202
+00:09:56,406 --> 00:09:57,726
 be 100 milliseconds.
 
-00:09:58.756 --> 00:10:00.376 A:middle
+
+203
+00:09:58,756 --> 00:10:00,376
 By the way, you want to think
 
 
-
-00:09:58.756 --> 00:10:00.376 A:middle
-By the way, you want to think
-
-00:10:00.376 --> 00:10:02.466 A:middle
+204
+00:10:00,376 --> 00:10:02,466
 about reaching these
 performance goals
 
-00:10:02.686 --> 00:10:04.896 A:middle
+
+205
+00:10:02,686 --> 00:10:04,896
 on the oldest hardware
 you intend to support.
 
-00:10:05.486 --> 00:10:10.736 A:middle
+
+206
+00:10:05,486 --> 00:10:10,736
 If you are targeting iOS 9, that
 might be the original iPad mini,
 
-00:10:11.106 --> 00:10:13.416 A:middle
+
+207
+00:10:11,106 --> 00:10:13,416
 the iPhone 4s, or
 even the iPad 2.
 
-00:10:14.586 --> 00:10:15.826 A:middle
+
+208
+00:10:14,586 --> 00:10:15,826
 If you've already
 got one of those --
 
-00:10:15.826 --> 00:10:17.616 A:middle
+
+209
+00:10:15,826 --> 00:10:17,616
 or rather, if you've
 still got one of those --
 
-00:10:18.206 --> 00:10:21.646 A:middle
+
+210
+00:10:18,206 --> 00:10:21,646
 please keep it, continue to
 use it, continue testing on it.
 
-00:10:22.546 --> 00:10:25.756 A:middle
+
+211
+00:10:22,546 --> 00:10:25,756
 And if you don't, well, there's
 a great refurbished section
 
-00:10:25.936 --> 00:10:27.126 A:middle
+
+212
+00:10:25,936 --> 00:10:27,126
 on the Apple Online Store.
 
-00:10:28.516 --> 00:10:30.936 A:middle
+
+213
+00:10:28,516 --> 00:10:30,936
 [Laughter]
 
-00:10:31.436 --> 00:10:33.066 A:middle
+
+214
+00:10:31,436 --> 00:10:33,066
 So you've set goals.
 
-00:10:33.426 --> 00:10:34.316 A:middle
+
+215
+00:10:33,426 --> 00:10:34,316
 You've taken measurements.
 
-00:10:34.896 --> 00:10:37.746 A:middle
+
+216
+00:10:34,896 --> 00:10:37,746
 And now you want to proceed with
 making code changes in your app
 
-00:10:38.186 --> 00:10:39.356 A:middle
+
+217
+00:10:38,186 --> 00:10:39,356
 to improve the performance.
 
-00:10:40.576 --> 00:10:41.176 A:middle
+
+218
+00:10:40,576 --> 00:10:41,176
 How do we start?
 
-00:10:42.626 --> 00:10:43.916 A:middle
+
+219
+00:10:42,626 --> 00:10:43,916
 First of all, don't guess.
 
-00:10:45.106 --> 00:10:48.676 A:middle
+
+220
+00:10:45,106 --> 00:10:48,676
 You really would like to profile
 with tools and act on evidence
 
-00:10:48.676 --> 00:10:51.216 A:middle
+
+221
+00:10:48,676 --> 00:10:51,216
 of what's causing the
 performance issues in your app.
 
-00:10:51.796 --> 00:10:54.746 A:middle
+
+222
+00:10:51,796 --> 00:10:54,746
 It's charming to think that your
 intuition will be right all the
 
-00:10:54.746 --> 00:10:58.666 A:middle
+
+223
+00:10:54,746 --> 00:10:58,666
 time, but it's probably
 closer to a coin toss.
 
-00:10:58.866 --> 00:11:02.016 A:middle
+
+224
+00:10:58,866 --> 00:11:02,016
 Along those lines, avoid
 premature optimization.
 
 
-
-00:10:58.866 --> 00:11:02.016 A:middle
-Along those lines, avoid
-premature optimization.
-
-00:11:02.586 --> 00:11:05.506 A:middle
+225
+00:11:02,586 --> 00:11:05,506
 Don't complexify your code
 until you have evidence
 
-00:11:05.796 --> 00:11:08.936 A:middle
+
+226
+00:11:05,796 --> 00:11:08,936
 that the simplest possible
 implementation is not sufficient
 
-00:11:08.936 --> 00:11:09.776 A:middle
+
+227
+00:11:08,936 --> 00:11:09,776
 for great performance.
 
-00:11:10.466 --> 00:11:13.456 A:middle
+
+228
+00:11:10,466 --> 00:11:13,456
 Frequently, the mechanisms
 that people introduce to try
 
-00:11:13.456 --> 00:11:16.596 A:middle
+
+229
+00:11:13,456 --> 00:11:16,596
 to proactively stave off
 performance problems end
 
-00:11:16.596 --> 00:11:20.836 A:middle
+
+230
+00:11:16,596 --> 00:11:20,836
 up causing performance
 problems of their own.
 
-00:11:20.926 --> 00:11:22.386 A:middle
+
+231
+00:11:20,926 --> 00:11:22,386
 Make one change at a time.
 
-00:11:22.776 --> 00:11:28.006 A:middle
+
+232
+00:11:22,776 --> 00:11:28,006
 You do want to start to hone and
 develop your intuition for how
 
-00:11:28.006 --> 00:11:29.896 A:middle
+
+233
+00:11:28,006 --> 00:11:29,896
 to approach improving the
 performance of your app,
 
-00:11:30.486 --> 00:11:33.636 A:middle
+
+234
+00:11:30,486 --> 00:11:33,636
 and it's very hard to
 understand which thing you did
 
-00:11:33.906 --> 00:11:36.456 A:middle
+
+235
+00:11:33,906 --> 00:11:36,456
 that actually ended up improving
 the performance of your app,
 
-00:11:36.956 --> 00:11:38.596 A:middle
+
+236
+00:11:36,956 --> 00:11:38,596
 so make one change at a time.
 
-00:11:39.316 --> 00:11:41.296 A:middle
+
+237
+00:11:39,316 --> 00:11:41,296
 And what I am really
 trying to say here is
 
-00:11:41.296 --> 00:11:42.526 A:middle
+
+238
+00:11:41,296 --> 00:11:42,526
 that there's no magic.
 
-00:11:42.996 --> 00:11:44.686 A:middle
+
+239
+00:11:42,996 --> 00:11:44,686
 This is just like
 ordinary debugging.
 
-00:11:45.086 --> 00:11:48.406 A:middle
+
+240
+00:11:45,086 --> 00:11:48,406
 So bring the same rigorous,
 scientific mindset you would
 
-00:11:48.406 --> 00:11:51.296 A:middle
+
+241
+00:11:48,406 --> 00:11:51,296
 to debugging an app crash
 or a functional issue.
 
-00:11:51.866 --> 00:11:57.166 A:middle
+
+242
+00:11:51,866 --> 00:11:57,166
 So here is the picture
 I want you to print out,
 
-00:11:57.166 --> 00:12:00.016 A:middle
+
+243
+00:11:57,166 --> 00:12:00,016
 stick on your wall, set as
 the wallpaper on your Mac.
 
 
-
-00:11:57.166 --> 00:12:00.016 A:middle
-stick on your wall, set as
-the wallpaper on your Mac.
-
-00:12:01.126 --> 00:12:03.556 A:middle
+244
+00:12:01,126 --> 00:12:03,556
 This is how we go through
 making code changes
 
-00:12:03.786 --> 00:12:04.906 A:middle
+
+245
+00:12:03,786 --> 00:12:04,906
 to improve performance
 in an app.
 
-00:12:05.816 --> 00:12:08.416 A:middle
+
+246
+00:12:05,816 --> 00:12:08,416
 The first thing you need to
 do is reproduce the issue.
 
-00:12:09.646 --> 00:12:14.486 A:middle
+
+247
+00:12:09,646 --> 00:12:14,486
 Then profile with tools to get
 an understanding of which areas
 
-00:12:14.486 --> 00:12:15.976 A:middle
+
+248
+00:12:14,486 --> 00:12:15,976
 of your code are
 actually contributing
 
-00:12:15.976 --> 00:12:16.876 A:middle
+
+249
+00:12:15,976 --> 00:12:16,876
 to a performance issue.
 
-00:12:17.616 --> 00:12:19.266 A:middle
+
+250
+00:12:17,616 --> 00:12:19,266
 In a sufficiently
 large code base,
 
-00:12:19.806 --> 00:12:22.266 A:middle
+
+251
+00:12:19,806 --> 00:12:22,266
 your intuition may actually
 not be correct here,
 
-00:12:22.376 --> 00:12:23.876 A:middle
+
+252
+00:12:22,376 --> 00:12:23,876
 so it's good to collect
 evidence.
 
-00:12:24.926 --> 00:12:28.186 A:middle
+
+253
+00:12:24,926 --> 00:12:28,186
 Then, once you've zoomed in on
 the specific sections of code
 
-00:12:28.466 --> 00:12:31.226 A:middle
+
+254
+00:12:28,466 --> 00:12:31,226
 that are causing
 less-than-desirable performance
 
-00:12:31.226 --> 00:12:34.226 A:middle
+
+255
+00:12:31,226 --> 00:12:34,226
 in your app, you can measure
 exactly how much time you are
 
-00:12:34.226 --> 00:12:34.786 A:middle
+
+256
+00:12:34,226 --> 00:12:34,786
 spending there.
 
-00:12:35.476 --> 00:12:38.706 A:middle
+
+257
+00:12:35,476 --> 00:12:38,706
 And finally, you can make a
 single targeted code change
 
-00:12:38.926 --> 00:12:40.586 A:middle
+
+258
+00:12:38,926 --> 00:12:40,586
 to try and advance
 towards your goals.
 
-00:12:40.586 --> 00:12:46.286 A:middle
+
+259
+00:12:40,586 --> 00:12:46,286
 Often it's the case that one
 single change doesn't get you
 
-00:12:46.286 --> 00:12:48.706 A:middle
+
+260
+00:12:46,286 --> 00:12:48,706
 all the way to where you
 want to be, and in fact,
 
-00:12:49.056 --> 00:12:51.036 A:middle
+
+261
+00:12:49,056 --> 00:12:51,036
 several different
 changes will combine
 
-00:12:51.366 --> 00:12:52.996 A:middle
+
+262
+00:12:51,366 --> 00:12:52,996
 to eventually get
 you to your goal.
 
-00:12:53.706 --> 00:12:55.896 A:middle
+
+263
+00:12:53,706 --> 00:12:55,896
 So that's why this is a
 cycle because you may find
 
-00:12:56.136 --> 00:12:59.196 A:middle
+
+264
+00:12:56,136 --> 00:12:59,196
 that after you change code and
 reproduce again, it's better,
 
-00:12:59.196 --> 00:13:00.456 A:middle
+
+265
+00:12:59,196 --> 00:13:00,456
 but you are not where
 you want to be.
 
 
-
-00:12:59.196 --> 00:13:00.456 A:middle
-but you are not where
-you want to be.
-
-00:13:01.256 --> 00:13:08.326 A:middle
+266
+00:13:01,256 --> 00:13:08,326
 So you can keep going through
 the cycle until you are happy.
 
-00:13:09.626 --> 00:13:13.536 A:middle
+
+267
+00:13:09,626 --> 00:13:13,536
 Profiling and measuring are on
 that slide, and maybe they seem
 
-00:13:13.536 --> 00:13:15.436 A:middle
+
+268
+00:13:13,536 --> 00:13:15,436
 like they are similar,
 but actually,
 
-00:13:15.436 --> 00:13:16.796 A:middle
+
+269
+00:13:15,436 --> 00:13:16,796
 they are two discrete steps
 
-00:13:17.036 --> 00:13:18.466 A:middle
+
+270
+00:13:17,036 --> 00:13:18,466
 of improving the
 performance of your app.
 
-00:13:19.036 --> 00:13:22.636 A:middle
+
+271
+00:13:19,036 --> 00:13:22,636
 Profiling, again, is using
 tools like the Xcode debugger
 
-00:13:22.826 --> 00:13:25.546 A:middle
+
+272
+00:13:22,826 --> 00:13:25,546
 and Instruments: Time
 Profiler to get an overview
 
-00:13:25.626 --> 00:13:28.336 A:middle
+
+273
+00:13:25,626 --> 00:13:28,336
 of all the aspects of your
 code that are contributing
 
-00:13:28.336 --> 00:13:29.456 A:middle
+
+274
+00:13:28,336 --> 00:13:29,456
 to your performance scenario.
 
-00:13:30.356 --> 00:13:34.086 A:middle
+
+275
+00:13:30,356 --> 00:13:34,086
 Measuring means instrumenting
 a specific area of your code
 
-00:13:34.086 --> 00:13:36.916 A:middle
+
+276
+00:13:34,086 --> 00:13:36,916
 to understand precisely how
 much time the user spends
 
-00:13:36.916 --> 00:13:37.536 A:middle
+
+277
+00:13:36,916 --> 00:13:37,536
 waiting there.
 
-00:13:38.126 --> 00:13:42.376 A:middle
+
+278
+00:13:38,126 --> 00:13:42,376
 And again, the 'CF absolute time
 get current' example I gave is
 
-00:13:42.376 --> 00:13:44.136 A:middle
+
+279
+00:13:42,376 --> 00:13:44,136
 actually a really
 powerful way to do that.
 
-00:13:45.096 --> 00:13:48.086 A:middle
+
+280
+00:13:45,096 --> 00:13:48,086
 Again, for more complex
 scenarios, there's System Trace.
 
-00:13:50.276 --> 00:13:52.086 A:middle
+
+281
+00:13:50,276 --> 00:13:52,086
 So let's talk about
 responsiveness.
 
-00:13:56.996 --> 00:14:00.206 A:middle
+
+282
+00:13:56,996 --> 00:14:00,206
 Responsiveness is all about
 reacting to user input.
 
 
-
-00:13:56.996 --> 00:14:00.206 A:middle
-Responsiveness is all about
-reacting to user input.
-
-00:14:00.836 --> 00:14:03.266 A:middle
+283
+00:14:00,836 --> 00:14:03,266
 And we can't talk about
 responsiveness without talking
 
-00:14:03.266 --> 00:14:04.906 A:middle
+
+284
+00:14:03,266 --> 00:14:04,906
 about your app's main thread
 
-00:14:05.396 --> 00:14:06.736 A:middle
+
+285
+00:14:05,396 --> 00:14:06,736
 because your app's
 main thread is
 
-00:14:06.736 --> 00:14:08.526 A:middle
+
+286
+00:14:06,736 --> 00:14:08,526
 where you consume
 all the user input.
 
-00:14:09.026 --> 00:14:10.906 A:middle
+
+287
+00:14:09,026 --> 00:14:10,906
 That's anything from
 the touchscreen --
 
-00:14:10.906 --> 00:14:14.226 A:middle
+
+288
+00:14:10,906 --> 00:14:14,226
 a tap or a scroll -- anything
 from the other sensors
 
-00:14:14.226 --> 00:14:16.026 A:middle
+
+289
+00:14:14,226 --> 00:14:16,026
 on the device, like
 an orientation change,
 
-00:14:16.736 --> 00:14:20.306 A:middle
+
+290
+00:14:16,736 --> 00:14:20,306
 and multitasking resizes and
 other system state events.
 
-00:14:21.686 --> 00:14:24.336 A:middle
+
+291
+00:14:21,686 --> 00:14:24,336
 If your main thread is
 mostly dedicated to the task
 
-00:14:24.456 --> 00:14:25.766 A:middle
+
+292
+00:14:24,456 --> 00:14:25,766
 of responding to user input,
 
-00:14:26.236 --> 00:14:28.416 A:middle
+
+293
+00:14:26,236 --> 00:14:28,416
 your app will feel
 really great all the time.
 
-00:14:29.756 --> 00:14:31.726 A:middle
+
+294
+00:14:29,756 --> 00:14:31,726
 If you're a little less
 careful with what you do
 
-00:14:31.726 --> 00:14:33.666 A:middle
+
+295
+00:14:31,726 --> 00:14:33,666
 on your main thread or
 maybe you do everything
 
-00:14:33.666 --> 00:14:34.446 A:middle
+
+296
+00:14:33,666 --> 00:14:34,446
 on your main thread,
 
-00:14:34.996 --> 00:14:37.746 A:middle
+
+297
+00:14:34,996 --> 00:14:37,746
 it's possible your app
 will appear hung or frozen.
 
-00:14:38.346 --> 00:14:43.226 A:middle
+
+298
+00:14:38,346 --> 00:14:43,226
 So what should we avoid
 doing on our main thread?
 
-00:14:44.376 --> 00:14:47.826 A:middle
+
+299
+00:14:44,376 --> 00:14:47,826
 Specific things to watch out
 for include CPU-intensive work.
 
-00:14:48.496 --> 00:14:51.256 A:middle
+
+300
+00:14:48,496 --> 00:14:51,256
 That can mean parsing a long
 string that you downloaded
 
-00:14:51.256 --> 00:14:54.126 A:middle
+
+301
+00:14:51,256 --> 00:14:54,126
 from the network, maybe
 applying a filter to an image,
 
-00:14:54.696 --> 00:14:57.146 A:middle
+
+302
+00:14:54,696 --> 00:14:57,146
 and tasks that depend
 on an external resource.
 
-00:14:57.146 --> 00:14:58.296 A:middle
+
+303
+00:14:57,146 --> 00:14:58,296
 And I will come back to that.
 
-00:14:58.946 --> 00:15:02.106 A:middle
+
+304
+00:14:58,946 --> 00:15:02,106
 I am not going to spend too much
 time on CPU-intensive work today
 
 
-
-00:14:58.946 --> 00:15:02.106 A:middle
-I am not going to spend too much
-time on CPU-intensive work today
-
-00:15:02.106 --> 00:15:04.746 A:middle
+305
+00:15:02,106 --> 00:15:04,746
 because there was a great talk
 earlier this week from the folks
 
-00:15:04.796 --> 00:15:07.316 A:middle
+
+306
+00:15:04,796 --> 00:15:07,316
 that made Instruments
 called "Profiling in Depth,"
 
-00:15:08.036 --> 00:15:10.516 A:middle
+
+307
+00:15:08,036 --> 00:15:10,516
 and they actually talk about
 improving the performance
 
-00:15:10.516 --> 00:15:14.256 A:middle
+
+308
+00:15:10,516 --> 00:15:14,256
 of CPU-intensive code in
 Instruments using Instruments.
 
-00:15:14.726 --> 00:15:15.186 A:middle
+
+309
+00:15:14,726 --> 00:15:15,186
 It's awesome.
 
-00:15:16.736 --> 00:15:19.756 A:middle
+
+310
+00:15:16,736 --> 00:15:19,756
 So let's go back to tasks that
 depend on an external resource.
 
-00:15:20.136 --> 00:15:22.556 A:middle
+
+311
+00:15:20,136 --> 00:15:22,556
 Another name for these
 is a blocking call.
 
-00:15:23.356 --> 00:15:25.036 A:middle
+
+312
+00:15:23,356 --> 00:15:25,036
 It's called that because
 it prevents your thread
 
-00:15:25.036 --> 00:15:26.686 A:middle
+
+313
+00:15:25,036 --> 00:15:26,686
 from making progress,
 so you are blocked.
 
-00:15:27.666 --> 00:15:28.586 A:middle
+
+314
+00:15:27,666 --> 00:15:28,586
 Now, what's a blocking call?
 
-00:15:29.416 --> 00:15:31.906 A:middle
+
+315
+00:15:29,416 --> 00:15:31,906
 Some of you may be familiar
 with the concept of a syscall.
 
-00:15:33.246 --> 00:15:34.456 A:middle
+
+316
+00:15:33,246 --> 00:15:34,456
 Any code path that ends
 
-00:15:34.456 --> 00:15:37.016 A:middle
+
+317
+00:15:34,456 --> 00:15:37,016
 up making a syscall is
 considered a blocking call.
 
-00:15:37.536 --> 00:15:41.926 A:middle
+
+318
+00:15:37,536 --> 00:15:41,926
 As I mentioned, these
 typically involve resources
 
-00:15:41.966 --> 00:15:44.966 A:middle
+
+319
+00:15:41,966 --> 00:15:44,966
 that are not currently in
 memory, commonly things
 
-00:15:44.966 --> 00:15:46.746 A:middle
+
+320
+00:15:44,966 --> 00:15:46,746
 like loading things
 from the disk
 
-00:15:46.966 --> 00:15:48.616 A:middle
+
+321
+00:15:46,966 --> 00:15:48,616
 or fetching stuff
 over the network.
 
-00:15:49.966 --> 00:15:52.236 A:middle
+
+322
+00:15:49,966 --> 00:15:52,236
 Occasionally, your main
 thread will also get blocked
 
-00:15:52.896 --> 00:15:55.146 A:middle
+
+323
+00:15:52,896 --> 00:15:55,146
 because it's waiting for a
 resource that is available,
 
-00:15:55.766 --> 00:15:57.666 A:middle
+
+324
+00:15:55,766 --> 00:15:57,666
 but it's waiting for
 someone else to finish using
 
-00:15:57.666 --> 00:16:00.476 A:middle
+
+325
+00:15:57,666 --> 00:16:00,476
 that resource because that
 resource only allows one client
 
 
-
-00:15:57.666 --> 00:16:00.476 A:middle
-that resource because that
-resource only allows one client
-
-00:16:00.476 --> 00:16:04.016 A:middle
+326
+00:16:00,476 --> 00:16:04,016
 at a time.
 
-00:16:04.186 --> 00:16:06.346 A:middle
+
+327
+00:16:04,186 --> 00:16:06,346
 So, how do you spot blocking
 calls in your thread?
 
-00:16:06.856 --> 00:16:08.406 A:middle
+
+328
+00:16:06,856 --> 00:16:08,406
 Well, sometimes they
 jump right out at you.
 
-00:16:09.336 --> 00:16:11.756 A:middle
+
+329
+00:16:09,336 --> 00:16:11,756
 The word "synchronous" is
 a synonym for blocking.
 
-00:16:12.506 --> 00:16:13.336 A:middle
+
+330
+00:16:12,506 --> 00:16:13,336
 So that's a clue.
 
-00:16:13.336 --> 00:16:15.266 A:middle
+
+331
+00:16:13,336 --> 00:16:15,266
 When you are reading through
 your code, that should light
 
-00:16:15.266 --> 00:16:16.286 A:middle
+
+332
+00:16:15,266 --> 00:16:16,286
 up and draw your eyes.
 
-00:16:17.416 --> 00:16:19.536 A:middle
+
+333
+00:16:17,416 --> 00:16:19,536
 So, great, we spotted this
 blocking call in my code,
 
-00:16:19.536 --> 00:16:21.836 A:middle
+
+334
+00:16:19,536 --> 00:16:21,836
 'NSURLConnection send
 synchronous request.'
 
-00:16:21.916 --> 00:16:23.856 A:middle
+
+335
+00:16:21,916 --> 00:16:23,856
 Well, what do I do now?
 
-00:16:25.026 --> 00:16:27.926 A:middle
+
+336
+00:16:25,026 --> 00:16:27,926
 Well, sometimes there is
 an asynchronous API --
 
-00:16:28.096 --> 00:16:30.296 A:middle
+
+337
+00:16:28,096 --> 00:16:30,296
 especially for APIs
 that specifically call
 
-00:16:30.296 --> 00:16:31.746 A:middle
+
+338
+00:16:30,296 --> 00:16:31,746
 out that they're
 synchronous in their name --
 
-00:16:32.436 --> 00:16:33.876 A:middle
+
+339
+00:16:32,436 --> 00:16:33,876
 that you can easily
 switch over to.
 
-00:16:34.516 --> 00:16:37.436 A:middle
+
+340
+00:16:34,516 --> 00:16:37,436
 In this case, we got
 lucky, and in fact,
 
-00:16:37.436 --> 00:16:39.936 A:middle
+
+341
+00:16:37,436 --> 00:16:39,936
 this one helpfully has the word
 "asynchronous" in the name,
 
-00:16:40.386 --> 00:16:42.356 A:middle
+
+342
+00:16:40,386 --> 00:16:42,356
 so we know exactly what we
 are getting ourselves into.
 
-00:16:43.536 --> 00:16:46.166 A:middle
+
+343
+00:16:43,536 --> 00:16:46,166
 Unfortunately, it's not quite
 as simple as search and replace.
 
-00:16:46.706 --> 00:16:49.566 A:middle
+
+344
+00:16:46,706 --> 00:16:49,566
 You are changing the order
 that your code executes in,
 
-00:16:49.826 --> 00:16:51.576 A:middle
+
+345
+00:16:49,826 --> 00:16:51,576
 and you may have other
 code that depends
 
-00:16:51.576 --> 00:16:53.016 A:middle
+
+346
+00:16:51,576 --> 00:16:53,016
 on the result of this operation.
 
-00:16:53.556 --> 00:16:56.386 A:middle
+
+347
+00:16:53,556 --> 00:16:56,386
 So unfortunately, some
 restructuring is required.
 
-00:16:58.216 --> 00:17:01.846 A:middle
+
+348
+00:16:58,216 --> 00:17:01,846
 But let's say you don't
 have an async equivalent
 
 
-
-00:16:58.216 --> 00:17:01.846 A:middle
-But let's say you don't
-have an async equivalent
-
-00:17:01.846 --> 00:17:05.516 A:middle
+349
+00:17:01,846 --> 00:17:05,516
 that you can easily switch to or
 you want to move a whole section
 
-00:17:05.516 --> 00:17:07.736 A:middle
+
+350
+00:17:05,516 --> 00:17:07,736
 of code off the main
 thread in one operation.
 
-00:17:08.516 --> 00:17:10.996 A:middle
+
+351
+00:17:08,516 --> 00:17:10,996
 In that case, use
 Grand Central Dispatch.
 
-00:17:12.386 --> 00:17:14.496 A:middle
+
+352
+00:17:12,386 --> 00:17:14,496
 Grand Central Dispatch
 is an Apple technology
 
-00:17:15.006 --> 00:17:17.435 A:middle
+
+353
+00:17:15,006 --> 00:17:17,435
 that manages a global
 thread pool in your app.
 
-00:17:17.606 --> 00:17:18.296 A:middle
+
+354
+00:17:17,606 --> 00:17:18,296
 It's already there.
 
-00:17:18.566 --> 00:17:20.066 A:middle
+
+355
+00:17:18,566 --> 00:17:20,066
 Even if you don't notice it.
 
-00:17:20.636 --> 00:17:22.846 A:middle
+
+356
+00:17:20,636 --> 00:17:22,846
 If you are familiar with
 programming with threads
 
-00:17:22.846 --> 00:17:26.425 A:middle
+
+357
+00:17:22,846 --> 00:17:26,425
 on other platforms, Grand
 Central Dispatch sort of takes
 
-00:17:26.425 --> 00:17:29.016 A:middle
+
+358
+00:17:26,425 --> 00:17:29,016
 out all the confusion
 and trouble of worrying
 
-00:17:29.016 --> 00:17:31.466 A:middle
+
+359
+00:17:29,016 --> 00:17:31,466
 about starting threads and what
 state they are in and so on,
 
-00:17:32.166 --> 00:17:34.246 A:middle
+
+360
+00:17:32,166 --> 00:17:34,246
 and lets you express tasks
 that you'd like to run
 
-00:17:34.246 --> 00:17:36.286 A:middle
+
+361
+00:17:34,246 --> 00:17:36,286
 as closures or blocks.
 
-00:17:37.316 --> 00:17:40.176 A:middle
+
+362
+00:17:37,316 --> 00:17:40,176
 These closures, once you submit
 them to Grand Central Dispatch,
 
-00:17:40.616 --> 00:17:48.826 A:middle
+
+363
+00:17:40,616 --> 00:17:48,826
 run on an arbitrary
 thread in your process.
 
-00:17:48.946 --> 00:17:51.386 A:middle
+
+364
+00:17:48,946 --> 00:17:51,386
 Arbitrary threads are awesome
 because you didn't have to deal
 
-00:17:51.386 --> 00:17:52.566 A:middle
+
+365
+00:17:51,386 --> 00:17:52,566
 with starting them, and
 you don't have to think
 
-00:17:52.566 --> 00:17:55.146 A:middle
+
+366
+00:17:52,566 --> 00:17:55,146
 about how many there are,
 but they have the caveat.
 
-00:17:55.546 --> 00:17:58.896 A:middle
+
+367
+00:17:55,546 --> 00:17:58,896
 Since you don't control which
 thread your code is running on,
 
-00:17:59.606 --> 00:18:01.786 A:middle
+
+368
+00:17:59,606 --> 00:18:01,786
 any operation you
 express in a closure
 
 
-
-00:17:59.606 --> 00:18:01.786 A:middle
-any operation you
-express in a closure
-
-00:18:01.786 --> 00:18:04.686 A:middle
+369
+00:18:01,786 --> 00:18:04,686
 or block must be safe
 to do on any thread.
 
-00:18:05.276 --> 00:18:08.106 A:middle
+
+370
+00:18:05,276 --> 00:18:08,106
 What are some examples?
 
-00:18:08.106 --> 00:18:12.306 A:middle
+
+371
+00:18:08,106 --> 00:18:12,306
 Well, some objects are
 actually restricted to access
 
-00:18:12.306 --> 00:18:13.356 A:middle
+
+372
+00:18:12,306 --> 00:18:13,356
 on the main thread only.
 
-00:18:13.876 --> 00:18:17.936 A:middle
+
+373
+00:18:13,876 --> 00:18:17,936
 UIKit views and controllers,
 for example, must be created,
 
-00:18:17.936 --> 00:18:21.166 A:middle
+
+374
+00:18:17,936 --> 00:18:21,166
 modified, and destroyed
 only on the main thread.
 
-00:18:22.506 --> 00:18:25.356 A:middle
+
+375
+00:18:22,506 --> 00:18:25,356
 Some objects, like Foundation
 and Core Graphics objects,
 
-00:18:25.846 --> 00:18:27.536 A:middle
+
+376
+00:18:25,846 --> 00:18:27,536
 allow use from any thread.
 
-00:18:28.466 --> 00:18:31.256 A:middle
+
+377
+00:18:28,466 --> 00:18:31,256
 However, many of these have
 the additional stipulation
 
-00:18:31.576 --> 00:18:33.156 A:middle
+
+378
+00:18:31,576 --> 00:18:33,156
 that the caller is responsible
 
-00:18:33.156 --> 00:18:37.426 A:middle
+
+379
+00:18:33,156 --> 00:18:37,426
 for ensuring only one thread
 accesses them at the time.
 
-00:18:38.106 --> 00:18:39.926 A:middle
+
+380
+00:18:38,106 --> 00:18:39,926
 They don't protect
 themselves internally.
 
-00:18:40.406 --> 00:18:42.666 A:middle
+
+381
+00:18:40,406 --> 00:18:42,666
 So if you intend to use
 them for multiple threads,
 
-00:18:43.016 --> 00:18:45.666 A:middle
+
+382
+00:18:43,016 --> 00:18:45,666
 you frequently have to implement
 the protection yourself,
 
-00:18:46.016 --> 00:18:49.086 A:middle
+
+383
+00:18:46,016 --> 00:18:49,086
 and the preferred way of doing
 this is a serial GCD queue.
 
-00:18:50.546 --> 00:18:52.646 A:middle
+
+384
+00:18:50,546 --> 00:18:52,646
 The best way to find out
 how your objects expect
 
-00:18:52.646 --> 00:18:54.586 A:middle
+
+385
+00:18:52,646 --> 00:18:54,586
 to be treated is to
 read the headers.
 
-00:18:54.916 --> 00:18:56.866 A:middle
+
+386
+00:18:54,916 --> 00:18:56,866
 Per object, usually
 near the initializer,
 
-00:18:57.096 --> 00:18:59.666 A:middle
+
+387
+00:18:57,096 --> 00:18:59,666
 there should be a description
 of exactly how it expects
 
-00:18:59.666 --> 00:19:01.246 A:middle
+
+388
+00:18:59,666 --> 00:19:01,246
 to be accessed by
 threads in your app.
 
 
-
-00:18:59.666 --> 00:19:01.246 A:middle
-to be accessed by
-threads in your app.
-
-00:19:01.986 --> 00:19:03.416 A:middle
+389
+00:19:01,986 --> 00:19:03,416
 So, let's go back
 to my example here.
 
-00:19:04.366 --> 00:19:05.516 A:middle
+
+390
+00:19:04,366 --> 00:19:05,516
 What do I do in this code?
 
-00:19:05.516 --> 00:19:07.116 A:middle
+
+391
+00:19:05,516 --> 00:19:07,116
 I load some data from a file.
 
-00:19:08.416 --> 00:19:09.796 A:middle
+
+392
+00:19:08,416 --> 00:19:09,796
 I process and filter an image.
 
-00:19:10.806 --> 00:19:13.626 A:middle
+
+393
+00:19:10,806 --> 00:19:13,626
 And finally, I put it in image
 view in my view hierarchy.
 
-00:19:14.666 --> 00:19:17.426 A:middle
+
+394
+00:19:14,666 --> 00:19:17,426
 So right now when the user
 taps a button in my app,
 
-00:19:18.426 --> 00:19:19.866 A:middle
+
+395
+00:19:18,426 --> 00:19:19,866
 my main thread looks a
 little bit like this.
 
-00:19:20.376 --> 00:19:23.456 A:middle
+
+396
+00:19:20,376 --> 00:19:23,456
 It does those three things
 in order one after another.
 
-00:19:24.456 --> 00:19:27.496 A:middle
+
+397
+00:19:24,456 --> 00:19:27,496
 Simple, straightforward,
 easy to understand, great.
 
-00:19:28.846 --> 00:19:32.366 A:middle
+
+398
+00:19:28,846 --> 00:19:32,366
 Unfortunately, should the
 user happen to try and scroll
 
-00:19:32.366 --> 00:19:34.796 A:middle
+
+399
+00:19:32,366 --> 00:19:34,796
 or rotate right when I am
 in the middle of doing this,
 
-00:19:35.896 --> 00:19:40.956 A:middle
+
+400
+00:19:35,896 --> 00:19:40,956
 we won't be able to service
 that input until later.
 
-00:19:42.326 --> 00:19:45.196 A:middle
+
+401
+00:19:42,326 --> 00:19:45,196
 And the thing with blocking
 calls is you never really know
 
-00:19:45.196 --> 00:19:46.086 A:middle
+
+402
+00:19:45,196 --> 00:19:46,086
 how long they are going to take.
 
-00:19:46.086 --> 00:19:46.926 A:middle
+
+403
+00:19:46,086 --> 00:19:46,926
 It's sort of like the weather.
 
-00:19:47.596 --> 00:19:50.886 A:middle
+
+404
+00:19:47,596 --> 00:19:50,886
 So the user is going to be kept
 waiting for some unknown amount
 
-00:19:50.886 --> 00:19:52.796 A:middle
+
+405
+00:19:50,886 --> 00:19:52,796
 of time, and that
 will make them sad.
 
-00:19:54.116 --> 00:19:54.876 A:middle
+
+406
+00:19:54,116 --> 00:19:54,876
 So how do we fix this?
 
-00:19:55.876 --> 00:19:58.066 A:middle
+
+407
+00:19:55,876 --> 00:19:58,066
 Well, we can use Grand
 Central Dispatch,
 
-00:19:58.396 --> 00:20:01.026 A:middle
+
+408
+00:19:58,396 --> 00:20:01,026
 and we can use a Grand
 Central Dispatch API called
 
 
-
-00:19:58.396 --> 00:20:01.026 A:middle
-and we can use a Grand
-Central Dispatch API called
-
-00:20:01.026 --> 00:20:01.836 A:middle
+409
+00:20:01,026 --> 00:20:01,836
 'dispatch async.'
 
-00:20:02.686 --> 00:20:04.736 A:middle
+
+410
+00:20:02,686 --> 00:20:04,736
 Now, 'dispatch async'
 takes two arguments.
 
-00:20:05.886 --> 00:20:08.066 A:middle
+
+411
+00:20:05,886 --> 00:20:08,066
 The first thing you
 need to pass in is
 
-00:20:08.066 --> 00:20:10.096 A:middle
+
+412
+00:20:08,066 --> 00:20:10,096
 which queue you want it to use.
 
-00:20:10.876 --> 00:20:13.126 A:middle
+
+413
+00:20:10,876 --> 00:20:13,126
 As I mentioned, there's already
 several queues in your app
 
-00:20:13.766 --> 00:20:15.146 A:middle
+
+414
+00:20:13,766 --> 00:20:15,146
 that GCD has created for you.
 
-00:20:15.146 --> 00:20:16.546 A:middle
+
+415
+00:20:15,146 --> 00:20:16,546
 And I am going to get one
 
-00:20:16.546 --> 00:20:19.056 A:middle
+
+416
+00:20:16,546 --> 00:20:19,056
 of them using the 'dispatch
 get global queue' API.
 
-00:20:20.406 --> 00:20:23.066 A:middle
+
+417
+00:20:20,406 --> 00:20:23,066
 Because there are several,
 I have to actually tell GCD
 
-00:20:23.296 --> 00:20:25.466 A:middle
+
+418
+00:20:23,296 --> 00:20:25,466
 which one I want,
 and here I am going
 
-00:20:25.466 --> 00:20:27.356 A:middle
+
+419
+00:20:25,466 --> 00:20:27,356
 to use a 'Quality
 of Service' class.
 
-00:20:28.206 --> 00:20:31.276 A:middle
+
+420
+00:20:28,206 --> 00:20:31,276
 'Quality of Service' is how you
 tell the system how important
 
-00:20:31.276 --> 00:20:34.166 A:middle
+
+421
+00:20:31,276 --> 00:20:34,166
 the work you are asking it to do
 is relative to both other work
 
-00:20:34.166 --> 00:20:36.466 A:middle
+
+422
+00:20:34,166 --> 00:20:36,466
 on your app and work across
 the rest of the system.
 
-00:20:37.236 --> 00:20:39.766 A:middle
+
+423
+00:20:37,236 --> 00:20:39,766
 In this case, because
 this is the direct result
 
-00:20:39.766 --> 00:20:43.406 A:middle
+
+424
+00:20:39,766 --> 00:20:43,406
 of a user action and the user is
 probably waiting for the result,
 
-00:20:43.406 --> 00:20:48.436 A:middle
+
+425
+00:20:43,406 --> 00:20:48,436
 I am going to use the
 'user-initiated' QOS class.
 
-00:20:48.606 --> 00:20:52.646 A:middle
+
+426
+00:20:48,606 --> 00:20:52,646
 The final argument to 'dispatch
 async' is a closure containing
 
-00:20:52.646 --> 00:20:55.496 A:middle
+
+427
+00:20:52,646 --> 00:20:55,496
 the code you would
 like it to run.
 
-00:20:55.646 --> 00:20:56.516 A:middle
+
+428
+00:20:55,646 --> 00:20:56,516
 So, great.
 
-00:20:56.516 --> 00:20:57.126 A:middle
+
+429
+00:20:56,516 --> 00:20:57,126
 I am done.
 
-00:20:57.426 --> 00:20:58.276 A:middle
+
+430
+00:20:57,426 --> 00:20:58,276
 It's off the main thread.
 
-00:20:58.476 --> 00:21:00.986 A:middle
+
+431
+00:20:58,476 --> 00:21:00,986
 Right? Not quite.
 
 
-
-00:20:58.476 --> 00:21:00.986 A:middle
-Right? Not quite.
-
-00:21:01.906 --> 00:21:05.236 A:middle
+432
+00:21:01,906 --> 00:21:05,236
 As I mentioned, UIKit views
 and controllers are only safe
 
-00:21:05.286 --> 00:21:09.906 A:middle
+
+433
+00:21:05,286 --> 00:21:09,906
 for use on the main thread, so I
 can't put them in this closure.
 
-00:21:10.086 --> 00:21:12.456 A:middle
+
+434
+00:21:10,086 --> 00:21:12,456
 So that wasn't really the
 particularly slow part
 
-00:21:12.456 --> 00:21:13.536 A:middle
+
+435
+00:21:12,456 --> 00:21:13,536
 of my code anyway, right?
 
-00:21:13.576 --> 00:21:15.256 A:middle
+
+436
+00:21:13,576 --> 00:21:15,256
 The first two lines
 were the blocking calls.
 
-00:21:16.156 --> 00:21:19.856 A:middle
+
+437
+00:21:16,156 --> 00:21:19,856
 Why don't I just move this
 back out onto the main thread?
 
-00:21:20.056 --> 00:21:22.116 A:middle
+
+438
+00:21:20,056 --> 00:21:22,116
 Unfortunately, that's not
 quite going to work either
 
-00:21:22.446 --> 00:21:24.116 A:middle
+
+439
+00:21:22,446 --> 00:21:24,116
 because I have actually
 changed the order
 
-00:21:24.116 --> 00:21:25.446 A:middle
+
+440
+00:21:24,116 --> 00:21:25,446
 that this code executes in.
 
-00:21:26.456 --> 00:21:28.746 A:middle
+
+441
+00:21:26,456 --> 00:21:28,746
 This closure is not
 guaranteed to have run
 
-00:21:29.046 --> 00:21:30.986 A:middle
+
+442
+00:21:29,046 --> 00:21:30,986
 by the time 'dispatch
 async' returns.
 
-00:21:31.556 --> 00:21:33.766 A:middle
+
+443
+00:21:31,556 --> 00:21:33,766
 Hopefully it will run
 quite shortly afterwards.
 
-00:21:34.486 --> 00:21:37.996 A:middle
+
+444
+00:21:34,486 --> 00:21:37,996
 But most likely, once GCD
 has fired the work off
 
-00:21:37.996 --> 00:21:40.166 A:middle
+
+445
+00:21:37,996 --> 00:21:40,166
 to the dispatch queue,
 it will immediately move
 
-00:21:40.166 --> 00:21:42.286 A:middle
+
+446
+00:21:40,166 --> 00:21:42,286
 on to the next line,
 and at this point,
 
-00:21:42.926 --> 00:21:44.496 A:middle
+
+447
+00:21:42,926 --> 00:21:44,496
 my image is still
 likely to be nil.
 
-00:21:45.086 --> 00:21:46.426 A:middle
+
+448
+00:21:45,086 --> 00:21:46,426
 The user will never
 see their image.
 
-00:21:47.076 --> 00:21:48.946 A:middle
+
+449
+00:21:47,076 --> 00:21:48,946
 That will also make them sad.
 
-00:21:49.596 --> 00:21:50.806 A:middle
+
+450
+00:21:49,596 --> 00:21:50,806
 So how do we fix this?
 
-00:21:51.776 --> 00:21:54.356 A:middle
+
+451
+00:21:51,776 --> 00:21:54,356
 Well, we can actually make
 another call to 'dispatch async,
 
-00:21:54.976 --> 00:21:57.926 A:middle
+
+452
+00:21:54,976 --> 00:21:57,926
 and this time we'll use a
 very special queue called the
 
-00:21:57.926 --> 00:21:58.586 A:middle
+
+453
+00:21:57,926 --> 00:21:58,586
 main queue.
 
-00:21:59.086 --> 00:22:02.326 A:middle
+
+454
+00:21:59,086 --> 00:22:02,326
 The main queue is guaranteed to
 be serviced by the main thread.
 
 
-
-00:21:59.086 --> 00:22:02.326 A:middle
-The main queue is guaranteed to
-be serviced by the main thread.
-
-00:22:02.756 --> 00:22:06.146 A:middle
+455
+00:22:02,756 --> 00:22:06,146
 You can get it using the API
 dispatch 'get main queue.'
 
-00:22:07.226 --> 00:22:10.766 A:middle
+
+456
+00:22:07,226 --> 00:22:10,766
 What that means is if you have
 objects that require access
 
-00:22:10.766 --> 00:22:13.296 A:middle
+
+457
+00:22:10,766 --> 00:22:13,296
 on the main thread, you can
 still put them in a closure
 
-00:22:13.296 --> 00:22:14.346 A:middle
+
+458
+00:22:13,296 --> 00:22:14,346
 and pass it to dispatch.
 
-00:22:14.746 --> 00:22:16.336 A:middle
+
+459
+00:22:14,746 --> 00:22:16,336
 You just have to make sure
 they run on this queue.
 
-00:22:16.336 --> 00:22:20.296 A:middle
+
+460
+00:22:16,336 --> 00:22:20,296
 So I have done that here and now
 my imageView is safe and happy.
 
-00:22:21.686 --> 00:22:24.766 A:middle
+
+461
+00:22:21,686 --> 00:22:24,766
 With this, we've moved that
 work off the main thread,
 
-00:22:25.386 --> 00:22:27.176 A:middle
+
+462
+00:22:25,386 --> 00:22:27,176
 but then when we've
 needed to use objects
 
-00:22:27.216 --> 00:22:29.486 A:middle
+
+463
+00:22:27,216 --> 00:22:29,486
 that must be accessed on the
 main thread, we have done
 
-00:22:29.486 --> 00:22:31.356 A:middle
+
+464
+00:22:29,486 --> 00:22:31,356
 so once the data
 is ready for them.
 
-00:22:32.426 --> 00:22:35.136 A:middle
+
+465
+00:22:32,426 --> 00:22:35,136
 And by the way, the original
 problem we were trying to solve,
 
-00:22:35.866 --> 00:22:37.616 A:middle
+
+466
+00:22:35,866 --> 00:22:37,616
 should the user try
 and scroll or rotate,
 
-00:22:37.616 --> 00:22:40.556 A:middle
+
+467
+00:22:37,616 --> 00:22:40,556
 that will get serviced right
 away, and they will be happy.
 
-00:22:41.436 --> 00:22:42.616 A:middle
+
+468
+00:22:41,436 --> 00:22:42,616
 Thank you.
 
-00:22:43.516 --> 00:22:46.856 A:middle
+
+469
+00:22:43,516 --> 00:22:46,856
 [Applause]
 
-00:22:47.356 --> 00:22:49.746 A:middle
+
+470
+00:22:47,356 --> 00:22:49,746
 So what types of blocking
 calls are you likely
 
-00:22:49.746 --> 00:22:50.596 A:middle
+
+471
+00:22:49,746 --> 00:22:50,596
 to find in your code?
 
-00:22:50.776 --> 00:22:52.876 A:middle
+
+472
+00:22:50,776 --> 00:22:52,876
 They are sneaky and they
 hide in all kinds of places.
 
-00:22:53.436 --> 00:22:55.896 A:middle
+
+473
+00:22:53,436 --> 00:22:55,896
 As I mentioned, networking.
 
-00:22:56.186 --> 00:22:57.766 A:middle
+
+474
+00:22:56,186 --> 00:22:57,766
 NSURLConnection and friends.
 
-00:22:57.766 --> 00:23:00.426 A:middle
+
+475
+00:22:57,766 --> 00:23:00,426
 It's very easy to,
 without meaning to,
 
 
-
-00:22:57.766 --> 00:23:00.426 A:middle
-It's very easy to,
-without meaning to,
-
-00:23:00.796 --> 00:23:02.446 A:middle
+476
+00:23:00,796 --> 00:23:02,446
 make a synchronous
 call to the network.
 
-00:23:03.506 --> 00:23:05.756 A:middle
+
+477
+00:23:03,506 --> 00:23:05,756
 Usually you can switch
 to asynchronous API,
 
-00:23:06.856 --> 00:23:09.416 A:middle
+
+478
+00:23:06,856 --> 00:23:09,416
 or if you actually
 want even more control
 
-00:23:09.666 --> 00:23:11.626 A:middle
+
+479
+00:23:09,666 --> 00:23:11,626
 over when your application
 accesses the network --
 
-00:23:12.436 --> 00:23:14.376 A:middle
+
+480
+00:23:12,436 --> 00:23:14,376
 and in some cases even
 let it download things
 
-00:23:14.376 --> 00:23:15.096 A:middle
+
+481
+00:23:14,376 --> 00:23:15,096
 when it's not running --
 
-00:23:15.596 --> 00:23:18.806 A:middle
+
+482
+00:23:15,596 --> 00:23:18,806
 I encourage you to check out the
 NSURLSession background session.
 
-00:23:20.316 --> 00:23:21.786 A:middle
+
+483
+00:23:20,316 --> 00:23:21,786
 Foundation initializers.
 
-00:23:21.906 --> 00:23:23.476 A:middle
+
+484
+00:23:21,906 --> 00:23:23,476
 When you come across
 these in your code,
 
-00:23:23.956 --> 00:23:25.056 A:middle
+
+485
+00:23:23,956 --> 00:23:25,056
 they don't look that scary.
 
-00:23:25.196 --> 00:23:25.876 A:middle
+
+486
+00:23:25,196 --> 00:23:25,876
 It's one line.
 
-00:23:26.136 --> 00:23:26.926 A:middle
+
+487
+00:23:26,136 --> 00:23:26,926
 How bad can it be?
 
-00:23:27.606 --> 00:23:29.006 A:middle
+
+488
+00:23:27,606 --> 00:23:29,006
 But actually, some of these,
 
-00:23:29.256 --> 00:23:32.896 A:middle
+
+489
+00:23:29,256 --> 00:23:32,896
 like ones with the name
 'contents of file' or 'contents
 
-00:23:32.896 --> 00:23:36.636 A:middle
+
+490
+00:23:32,896 --> 00:23:36,636
 of URL,' may end up having to
 use the disk or other resources
 
-00:23:36.696 --> 00:23:37.676 A:middle
+
+491
+00:23:36,696 --> 00:23:37,676
 to service your request.
 
-00:23:39.076 --> 00:23:40.826 A:middle
+
+492
+00:23:39,076 --> 00:23:40,826
 And finally, Core Data.
 
-00:23:41.536 --> 00:23:44.696 A:middle
+
+493
+00:23:41,536 --> 00:23:44,696
 Again, they just look like
 objects, not bad, right?
 
-00:23:45.416 --> 00:23:48.206 A:middle
+
+494
+00:23:45,416 --> 00:23:48,206
 Core Data frequently does a
 lot of I/O on your behalf.
 
-00:23:49.366 --> 00:23:51.446 A:middle
+
+495
+00:23:49,366 --> 00:23:51,446
 Luckily, it's pretty
 easy to move some
 
-00:23:51.446 --> 00:23:53.126 A:middle
+
+496
+00:23:51,446 --> 00:23:53,126
 of your heavy recorded
 operations
 
-00:23:53.346 --> 00:23:54.796 A:middle
+
+497
+00:23:53,346 --> 00:23:54,796
 to different concurrency modes.
 
-00:23:55.336 --> 00:23:57.996 A:middle
+
+498
+00:23:55,336 --> 00:23:57,996
 And actually, there's great
 new API in Core Data this year
 
-00:23:58.246 --> 00:24:01.406 A:middle
+
+499
+00:23:58,246 --> 00:24:01,406
 to simplify that and other
 common bulk operations.
 
 
-
-00:23:58.246 --> 00:24:01.406 A:middle
-to simplify that and other
-common bulk operations.
-
-00:24:02.066 --> 00:24:04.086 A:middle
+500
+00:24:02,066 --> 00:24:04,086
 You can go learn about it in
 the session from the other day,
 
-00:24:04.446 --> 00:24:05.396 A:middle
+
+501
+00:24:04,446 --> 00:24:05,396
 "What's New in Core Data."
 
-00:24:06.376 --> 00:24:08.466 A:middle
+
+502
+00:24:06,376 --> 00:24:08,466
 So if you find a blocking call,
 
-00:24:08.986 --> 00:24:11.626 A:middle
+
+503
+00:24:08,986 --> 00:24:11,626
 switch to asynchronous
 API or use GCD.
 
-00:24:11.626 --> 00:24:15.156 A:middle
+
+504
+00:24:11,626 --> 00:24:15,156
 If you want to know more
 about GCD, including, again,
 
-00:24:15.156 --> 00:24:18.266 A:middle
+
+505
+00:24:15,156 --> 00:24:18,266
 new API this year that's going
 to simplify common operations
 
-00:24:18.736 --> 00:24:20.596 A:middle
+
+506
+00:24:18,736 --> 00:24:20,596
 and also the quality
 of service classes
 
-00:24:20.596 --> 00:24:22.966 A:middle
+
+507
+00:24:20,596 --> 00:24:22,966
 that I mentioned earlier,
 there's a great talk
 
-00:24:22.966 --> 00:24:25.476 A:middle
+
+508
+00:24:22,966 --> 00:24:25,476
 from just an hour ago
 called "Building Responsive
 
-00:24:25.476 --> 00:24:26.606 A:middle
+
+509
+00:24:25,476 --> 00:24:26,606
 and Efficient Apps with GCD,"
 
-00:24:26.606 --> 00:24:29.066 A:middle
+
+510
+00:24:26,606 --> 00:24:29,066
 and I encourage you
 to go watch it.
 
-00:24:31.956 --> 00:24:34.316 A:middle
+
+511
+00:24:31,956 --> 00:24:34,316
 Let's move on to memory.
 
-00:24:35.426 --> 00:24:38.296 A:middle
+
+512
+00:24:35,426 --> 00:24:38,296
 Like I said, memory is
 the most precious resource
 
-00:24:38.586 --> 00:24:39.386 A:middle
+
+513
+00:24:38,586 --> 00:24:39,386
 on mobile devices.
 
-00:24:39.386 --> 00:24:45.016 A:middle
+
+514
+00:24:39,386 --> 00:24:45,016
 If you are planning to adopt
 multitasking in your app, again,
 
-00:24:45.956 --> 00:24:48.816 A:middle
+
+515
+00:24:45,956 --> 00:24:48,816
 you don't have full run of the
 screen anymore, so it stands
 
-00:24:48.816 --> 00:24:51.286 A:middle
+
+516
+00:24:48,816 --> 00:24:51,286
 to reason that you also don't
 have full run of the rest
 
-00:24:51.286 --> 00:24:52.516 A:middle
+
+517
+00:24:51,286 --> 00:24:52,516
 of the system's resources.
 
-00:24:52.976 --> 00:24:56.506 A:middle
+
+518
+00:24:52,976 --> 00:24:56,506
 If you are going to bring
 some of the code from your app
 
-00:24:56.506 --> 00:24:58.636 A:middle
+
+519
+00:24:56,506 --> 00:24:58,636
 to watchOS, it's
 especially important
 
-00:24:58.636 --> 00:25:02.266 A:middle
+
+520
+00:24:58,636 --> 00:25:02,266
 that its memory footprint
 be compact.
 
 
-
-00:24:58.636 --> 00:25:02.266 A:middle
-that its memory footprint
-be compact.
-
-00:25:02.346 --> 00:25:05.236 A:middle
+521
+00:25:02,346 --> 00:25:05,236
 Once again, iOS 9 supports
 a huge range of hardware.
 
-00:25:05.856 --> 00:25:08.816 A:middle
+
+522
+00:25:05,856 --> 00:25:08,816
 If you want to bring your
 great apps and features to some
 
-00:25:08.816 --> 00:25:10.826 A:middle
+
+523
+00:25:08,816 --> 00:25:10,826
 of the lower-end devices
 supported by the OS,
 
-00:25:11.506 --> 00:25:13.666 A:middle
+
+524
+00:25:11,506 --> 00:25:13,666
 memory is extremely
 important on those systems.
 
-00:25:14.486 --> 00:25:17.086 A:middle
+
+525
+00:25:14,486 --> 00:25:17,086
 And finally, if you are the
 developer of an extension,
 
-00:25:17.646 --> 00:25:20.046 A:middle
+
+526
+00:25:17,646 --> 00:25:20,046
 think about the fact that your
 extension may now be called
 
-00:25:20.046 --> 00:25:23.226 A:middle
+
+527
+00:25:20,046 --> 00:25:23,226
 on to run when there are two
 other apps on the screen.
 
-00:25:24.186 --> 00:25:26.836 A:middle
+
+528
+00:25:24,186 --> 00:25:26,836
 So memory will be in high
 demand, and you need to be able
 
-00:25:26.836 --> 00:25:29.176 A:middle
+
+529
+00:25:26,836 --> 00:25:29,176
 to get away with using
 as little as possible.
 
-00:25:29.566 --> 00:25:34.046 A:middle
+
+530
+00:25:29,566 --> 00:25:34,046
 So let's get a little bit
 into how memory works on iOS.
 
-00:25:35.036 --> 00:25:36.016 A:middle
+
+531
+00:25:35,036 --> 00:25:36,016
 Ground rules.
 
-00:25:36.476 --> 00:25:39.456 A:middle
+
+532
+00:25:36,476 --> 00:25:39,456
 There is not enough physical
 memory on any iOS device
 
-00:25:39.736 --> 00:25:43.446 A:middle
+
+533
+00:25:39,736 --> 00:25:43,446
 to keep all the suspended
 apps in RAM at the same time.
 
-00:25:44.636 --> 00:25:47.306 A:middle
+
+534
+00:25:44,636 --> 00:25:47,306
 When we come under memory
 pressure, we actually have
 
-00:25:47.366 --> 00:25:50.486 A:middle
+
+535
+00:25:47,366 --> 00:25:50,486
 to evict things to make
 room for the foreground app.
 
-00:25:51.476 --> 00:25:55.256 A:middle
+
+536
+00:25:51,476 --> 00:25:55,256
 On OS X or a PC operating
 system, we might write the state
 
-00:25:55.256 --> 00:25:57.826 A:middle
+
+537
+00:25:55,256 --> 00:25:57,826
 of those apps out to
 disk first, but it turns
 
-00:25:57.826 --> 00:26:00.086 A:middle
+
+538
+00:25:57,826 --> 00:26:00,086
 out that doesn't make
 sense on mobile devices,
 
 
-
-00:25:57.826 --> 00:26:00.086 A:middle
-out that doesn't make
-sense on mobile devices,
-
-00:26:00.586 --> 00:26:04.536 A:middle
+539
+00:26:00,586 --> 00:26:04,536
 so when you get evicted,
 you are just gone.
 
-00:26:04.756 --> 00:26:06.886 A:middle
+
+540
+00:26:04,756 --> 00:26:06,886
 There's lots more detail
 here and lots to get into,
 
-00:26:07.446 --> 00:26:10.646 A:middle
+
+541
+00:26:07,446 --> 00:26:10,646
 and there's actually a great
 talk from a few years ago called
 
-00:26:10.736 --> 00:26:12.176 A:middle
+
+542
+00:26:10,736 --> 00:26:12,176
 "iOS App Performance Memory."
 
-00:26:13.036 --> 00:26:15.106 A:middle
+
+543
+00:26:13,036 --> 00:26:15,106
 The slide template and colors
 are a little different,
 
-00:26:15.106 --> 00:26:19.256 A:middle
+
+544
+00:26:15,106 --> 00:26:19,256
 but the information is really
 solid, so please go watch
 
-00:26:19.256 --> 00:26:20.066 A:middle
+
+545
+00:26:19,256 --> 00:26:20,066
 that one if you are interested
 
-00:26:20.066 --> 00:26:21.156 A:middle
+
+546
+00:26:20,066 --> 00:26:21,156
 to learn more about
 how this works.
 
-00:26:22.466 --> 00:26:24.786 A:middle
+
+547
+00:26:22,466 --> 00:26:24,786
 But if you've never thought
 about memory in your app before,
 
-00:26:25.196 --> 00:26:28.696 A:middle
+
+548
+00:26:25,196 --> 00:26:28,696
 it boils down to this --
 reclaiming memory takes time.
 
-00:26:29.186 --> 00:26:31.496 A:middle
+
+549
+00:26:29,186 --> 00:26:31,496
 If you've already used up
 all the available memory
 
-00:26:31.496 --> 00:26:33.446 A:middle
+
+550
+00:26:31,496 --> 00:26:33,446
 in the system and then
 you need some more,
 
-00:26:33.876 --> 00:26:36.306 A:middle
+
+551
+00:26:33,876 --> 00:26:36,306
 you might be kept waiting
 while the system evicts things
 
-00:26:36.306 --> 00:26:36.916 A:middle
+
+552
+00:26:36,306 --> 00:26:36,916
 on your behalf.
 
-00:26:37.936 --> 00:26:40.216 A:middle
+
+553
+00:26:37,936 --> 00:26:40,216
 If you suddenly request
 a large amount of memory,
 
-00:26:40.966 --> 00:26:42.976 A:middle
+
+554
+00:26:40,966 --> 00:26:42,976
 the system might need to
 evict several different things
 
-00:26:43.026 --> 00:26:43.946 A:middle
+
+555
+00:26:43,026 --> 00:26:43,946
 to service your request,
 
-00:26:44.366 --> 00:26:47.346 A:middle
+
+556
+00:26:44,366 --> 00:26:47,346
 and that can influence the
 responsiveness of your app.
 
-00:26:48.636 --> 00:26:50.866 A:middle
+
+557
+00:26:48,636 --> 00:26:50,866
 Conversely, when you
 are in the background,
 
-00:26:51.536 --> 00:26:53.196 A:middle
+
+558
+00:26:51,536 --> 00:26:53,196
 if your footprint
 is very compact,
 
-00:26:53.696 --> 00:26:55.556 A:middle
+
+559
+00:26:53,696 --> 00:26:55,556
 it's actually less likely
 that you will be one
 
-00:26:55.556 --> 00:26:56.916 A:middle
+
+560
+00:26:55,556 --> 00:26:56,916
 of the things that gets evicted.
 
-00:26:57.426 --> 00:26:59.336 A:middle
+
+561
+00:26:57,426 --> 00:26:59,336
 And so when the user
 then returns to your app,
 
-00:26:59.726 --> 00:27:02.076 A:middle
+
+562
+00:26:59,726 --> 00:27:02,076
 you will be able to resume
 instead of launching,
 
 
-
-00:26:59.726 --> 00:27:02.076 A:middle
-you will be able to resume
-instead of launching,
-
-00:27:02.076 --> 00:27:05.286 A:middle
+563
+00:27:02,076 --> 00:27:05,286
 and that will feel a lot faster.
 
-00:27:05.476 --> 00:27:07.516 A:middle
+
+564
+00:27:05,476 --> 00:27:07,516
 So if you've never thought
 about memory before,
 
-00:27:08.326 --> 00:27:09.946 A:middle
+
+565
+00:27:08,326 --> 00:27:09,946
 it's really important
 as a first step
 
-00:27:10.076 --> 00:27:11.946 A:middle
+
+566
+00:27:10,076 --> 00:27:11,946
 to rationalize your
 app's memory footprint.
 
-00:27:12.586 --> 00:27:14.746 A:middle
+
+567
+00:27:12,586 --> 00:27:14,746
 And what that means is
 to think about the types
 
-00:27:14.746 --> 00:27:16.166 A:middle
+
+568
+00:27:14,746 --> 00:27:16,166
 of resources that it uses.
 
-00:27:17.056 --> 00:27:20.866 A:middle
+
+569
+00:27:17,056 --> 00:27:20,866
 These might be strings; maybe
 long blobs of JSON or XML
 
-00:27:20.866 --> 00:27:24.036 A:middle
+
+570
+00:27:20,866 --> 00:27:24,036
 that you downloaded from the
 network; images that, again,
 
-00:27:24.036 --> 00:27:26.376 A:middle
+
+571
+00:27:24,036 --> 00:27:26,376
 came from the network or the
 user took them with the camera;
 
-00:27:27.086 --> 00:27:29.976 A:middle
+
+572
+00:27:27,086 --> 00:27:29,976
 and again, Core Data managed
 objects, which use a lot
 
-00:27:29.976 --> 00:27:34.206 A:middle
+
+573
+00:27:29,976 --> 00:27:34,206
 of underlying resources to
 sort of make the magic happen.
 
-00:27:34.396 --> 00:27:36.816 A:middle
+
+574
+00:27:34,396 --> 00:27:36,816
 Once you've thought about
 these resources, you can start
 
-00:27:36.816 --> 00:27:40.206 A:middle
+
+575
+00:27:36,816 --> 00:27:40,206
 to group them according to
 which user interactions depend
 
-00:27:40.206 --> 00:27:43.476 A:middle
+
+576
+00:27:40,206 --> 00:27:43,476
 on each kind, and that helps
 you establish a mental model
 
-00:27:43.476 --> 00:27:45.146 A:middle
+
+577
+00:27:43,476 --> 00:27:45,146
 of the resources
 that your app uses.
 
-00:27:46.366 --> 00:27:47.066 A:middle
+
+578
+00:27:46,366 --> 00:27:47,066
 Once you've done that,
 
-00:27:47.546 --> 00:27:50.086 A:middle
+
+579
+00:27:47,546 --> 00:27:50,086
 we can quickly check our work
 using the Xcode debugger.
 
-00:27:51.526 --> 00:27:54.416 A:middle
+
+580
+00:27:51,526 --> 00:27:54,416
 To get into more detail, we
 would reach for the Allocations
 
-00:27:54.416 --> 00:27:55.466 A:middle
+
+581
+00:27:54,416 --> 00:27:55,466
 and Leaks Instruments.
 
-00:27:55.576 --> 00:27:58.466 A:middle
+
+582
+00:27:55,576 --> 00:27:58,466
 I am not going to go into
 those today, but please check
 
-00:27:58.466 --> 00:28:00.496 A:middle
+
+583
+00:27:58,466 --> 00:28:00,496
 out this talk from last year
 called "Improving Your App
 
 
-
-00:27:58.466 --> 00:28:00.496 A:middle
-out this talk from last year
-called "Improving Your App
-
-00:28:00.496 --> 00:28:03.526 A:middle
+584
+00:28:00,496 --> 00:28:03,526
 with Instruments" to
 get started with those.
 
-00:28:03.736 --> 00:28:05.546 A:middle
+
+585
+00:28:03,736 --> 00:28:05,546
 So let's go back to
 the Xcode debugger.
 
-00:28:05.546 --> 00:28:09.046 A:middle
+
+586
+00:28:05,546 --> 00:28:09,046
 I have downloaded the
 Photos framework example app
 
-00:28:09.216 --> 00:28:10.536 A:middle
+
+587
+00:28:09,216 --> 00:28:10,536
 from the Apple Developer
 website.
 
-00:28:11.276 --> 00:28:13.306 A:middle
+
+588
+00:28:11,276 --> 00:28:13,306
 I've plugged in my phone,
 opened the Xcode project,
 
-00:28:13.676 --> 00:28:14.466 A:middle
+
+589
+00:28:13,676 --> 00:28:14,466
 and hit build and run.
 
-00:28:15.266 --> 00:28:16.886 A:middle
+
+590
+00:28:15,266 --> 00:28:16,886
 And now I am just going
 to look at the top left
 
-00:28:16.886 --> 00:28:18.916 A:middle
+
+591
+00:28:16,886 --> 00:28:18,916
 of my Xcode window
 at the debugger.
 
-00:28:19.476 --> 00:28:20.106 A:middle
+
+592
+00:28:19,476 --> 00:28:20,106
 Zoom in on that.
 
-00:28:21.506 --> 00:28:23.246 A:middle
+
+593
+00:28:21,506 --> 00:28:23,246
 So, here, right away I can see
 
-00:28:23.486 --> 00:28:26.106 A:middle
+
+594
+00:28:23,486 --> 00:28:26,106
 without touching my phone the
 first number that's interesting
 
-00:28:26.106 --> 00:28:26.316 A:middle
+
+595
+00:28:26,106 --> 00:28:26,316
 to me.
 
-00:28:27.356 --> 00:28:29.576 A:middle
+
+596
+00:28:27,356 --> 00:28:29,576
 Now I know that right
 after my app launches,
 
-00:28:29.616 --> 00:28:31.046 A:middle
+
+597
+00:28:29,616 --> 00:28:31,046
 before the user does anything,
 
-00:28:31.386 --> 00:28:33.966 A:middle
+
+598
+00:28:31,386 --> 00:28:33,966
 I am using about 10
 megabytes of memory.
 
-00:28:35.636 --> 00:28:39.406 A:middle
+
+599
+00:28:35,636 --> 00:28:39,406
 The next data point that I want
 to collect is that I want to go
 
-00:28:39.406 --> 00:28:42.396 A:middle
+
+600
+00:28:39,406 --> 00:28:42,396
 and do whatever the most common
 user interaction in my app is,
 
-00:28:42.866 --> 00:28:45.516 A:middle
+
+601
+00:28:42,866 --> 00:28:45,516
 so because this is a Photos
 app, I am going to open a photo.
 
-00:28:46.466 --> 00:28:49.636 A:middle
+
+602
+00:28:46,466 --> 00:28:49,636
 And now I've learned that to
 open a photo, my app needs
 
-00:28:49.636 --> 00:28:51.656 A:middle
+
+603
+00:28:49,636 --> 00:28:51,656
 about another 2.5
 megabytes of memory.
 
-00:28:53.106 --> 00:28:56.486 A:middle
+
+604
+00:28:53,106 --> 00:28:56,486
 At this point, an additional
 interesting experiment is
 
-00:28:56.486 --> 00:28:58.526 A:middle
+
+605
+00:28:56,486 --> 00:28:58,526
 to repeat the same
 action over and over.
 
-00:28:58.706 --> 00:29:01.736 A:middle
+
+606
+00:28:58,706 --> 00:29:01,736
 So I might open the
 same photo or a couple
 
 
-
-00:28:58.706 --> 00:29:01.736 A:middle
-So I might open the
-same photo or a couple
-
-00:29:01.736 --> 00:29:03.226 A:middle
+607
+00:29:01,736 --> 00:29:03,226
 of different photos a few times.
 
-00:29:04.066 --> 00:29:06.036 A:middle
+
+608
+00:29:04,066 --> 00:29:06,036
 If my memory footprint
 continues to grow,
 
-00:29:06.506 --> 00:29:08.466 A:middle
+
+609
+00:29:06,506 --> 00:29:08,466
 I may have a memory issue
 worth investigating.
 
-00:29:10.236 --> 00:29:13.086 A:middle
+
+610
+00:29:10,236 --> 00:29:13,086
 The final point of
 interest here is I am going
 
-00:29:13.086 --> 00:29:15.746 A:middle
+
+611
+00:29:13,086 --> 00:29:15,746
 to use the Home button on my
 device to suspend the app,
 
-00:29:16.196 --> 00:29:17.726 A:middle
+
+612
+00:29:16,196 --> 00:29:17,726
 and I am going to
 see what happens
 
-00:29:17.726 --> 00:29:18.806 A:middle
+
+613
+00:29:17,726 --> 00:29:18,806
 when it goes into
 the background.
 
-00:29:19.466 --> 00:29:22.596 A:middle
+
+614
+00:29:19,466 --> 00:29:22,596
 And it looks like it shrank down
 to actually a little bit smaller
 
-00:29:22.596 --> 00:29:24.256 A:middle
+
+615
+00:29:22,596 --> 00:29:24,256
 than it was right
 after it launched.
 
-00:29:25.296 --> 00:29:26.836 A:middle
+
+616
+00:29:25,296 --> 00:29:26,836
 This is a great balance
 to strike.
 
-00:29:27.746 --> 00:29:29.946 A:middle
+
+617
+00:29:27,746 --> 00:29:29,946
 You don't want to repeat work
 that you did during launch
 
-00:29:30.136 --> 00:29:33.636 A:middle
+
+618
+00:29:30,136 --> 00:29:33,636
 on resume, but you also want to
 stay compact in the background
 
-00:29:33.846 --> 00:29:41.166 A:middle
+
+619
+00:29:33,846 --> 00:29:41,166
 to make sure your users actually
 get to experience that resume.
 
-00:29:41.296 --> 00:29:43.916 A:middle
+
+620
+00:29:41,296 --> 00:29:43,916
 Important to note that the
 Photos framework example app
 
-00:29:43.996 --> 00:29:46.456 A:middle
+
+621
+00:29:43,996 --> 00:29:46,456
 didn't actually have to do
 anything special or magical
 
-00:29:46.646 --> 00:29:47.676 A:middle
+
+622
+00:29:46,646 --> 00:29:47,676
 to achieve that behavior.
 
-00:29:48.136 --> 00:29:50.266 A:middle
+
+623
+00:29:48,136 --> 00:29:50,266
 It's actually just a
 really straightforward
 
-00:29:50.266 --> 00:29:52.816 A:middle
+
+624
+00:29:50,266 --> 00:29:52,816
 and minimal implementation
 of Apple technologies,
 
-00:29:53.436 --> 00:29:57.046 A:middle
+
+625
+00:29:53,436 --> 00:29:57,046
 and Apple technologies actually
 have this behavior often built
 
-00:29:57.046 --> 00:29:59.786 A:middle
+
+626
+00:29:57,046 --> 00:29:59,786
 in, and they manage sort of
 their underlying resources
 
 
-
-00:30:00.046 --> 00:30:02.956 A:middle
+627
+00:30:00,046 --> 00:30:02,956
 in response to application
 lifecycle events automatically.
 
-00:30:03.286 --> 00:30:04.256 A:middle
+
+628
+00:30:03,286 --> 00:30:04,256
 So you don't need
 to worry about it.
 
-00:30:05.606 --> 00:30:08.236 A:middle
+
+629
+00:30:05,606 --> 00:30:08,236
 However, if you have large
 objects or other resources
 
-00:30:08.236 --> 00:30:11.406 A:middle
+
+630
+00:30:08,236 --> 00:30:11,406
 of your own that you'd like
 to sort of dynamically lose
 
-00:30:11.406 --> 00:30:14.076 A:middle
+
+631
+00:30:11,406 --> 00:30:14,076
 and get back in response to
 application lifecycle events,
 
-00:30:14.556 --> 00:30:16.456 A:middle
+
+632
+00:30:14,556 --> 00:30:16,456
 the easiest way to do
 it is to use NSCache.
 
-00:30:18.176 --> 00:30:20.726 A:middle
+
+633
+00:30:18,176 --> 00:30:20,726
 In some cases, though,
 you might have things
 
-00:30:20.726 --> 00:30:23.516 A:middle
+
+634
+00:30:20,726 --> 00:30:23,516
 that can't be neatly
 represented as evictable objects
 
-00:30:23.516 --> 00:30:25.446 A:middle
+
+635
+00:30:23,516 --> 00:30:25,446
 for NSCache, and then you have
 
-00:30:25.476 --> 00:30:28.066 A:middle
+
+636
+00:30:25,476 --> 00:30:28,066
 to actually implement
 custom code that responds
 
-00:30:28.116 --> 00:30:30.396 A:middle
+
+637
+00:30:28,116 --> 00:30:30,396
 to system lifecycle
 notifications in your app.
 
-00:30:31.696 --> 00:30:32.856 A:middle
+
+638
+00:30:31,696 --> 00:30:32,856
 A few that you might
 be interested
 
-00:30:32.856 --> 00:30:35.566 A:middle
+
+639
+00:30:32,856 --> 00:30:35,566
 in are the 'did enter
 background' notification.
 
-00:30:36.346 --> 00:30:38.266 A:middle
+
+640
+00:30:36,346 --> 00:30:38,266
 Your app will get this
 when it's suspended,
 
-00:30:38.266 --> 00:30:41.626 A:middle
+
+641
+00:30:38,266 --> 00:30:41,626
 and this is what NSCache
 uses to actually shrink
 
-00:30:41.816 --> 00:30:42.706 A:middle
+
+642
+00:30:41,816 --> 00:30:42,706
 when you go into the background.
 
-00:30:43.696 --> 00:30:46.796 A:middle
+
+643
+00:30:43,696 --> 00:30:46,796
 Another interesting one is the
 memory warning notification.
 
-00:30:47.316 --> 00:30:50.356 A:middle
+
+644
+00:30:47,316 --> 00:30:50,356
 The system actually sends
 this before it starts evicting
 
-00:30:50.406 --> 00:30:52.786 A:middle
+
+645
+00:30:50,406 --> 00:30:52,786
 suspended apps to give
 them a chance to shrink,
 
-00:30:53.736 --> 00:30:55.346 A:middle
+
+646
+00:30:53,736 --> 00:30:55,346
 and maybe they can
 avoid getting evicted
 
-00:30:55.586 --> 00:30:56.706 A:middle
+
+647
+00:30:55,586 --> 00:30:56,706
 if their footprint goes down.
 
-00:30:56.706 --> 00:30:59.146 A:middle
+
+648
+00:30:56,706 --> 00:30:59,146
 So here is a quick
 example of that.
 
-00:30:59.146 --> 00:31:03.266 A:middle
+
+649
+00:30:59,146 --> 00:31:03,266
 I am going to use the
 default NSNotificationCenter.
 
 
-
-00:30:59.146 --> 00:31:03.266 A:middle
-I am going to use the
-default NSNotificationCenter.
-
-00:31:03.266 --> 00:31:05.666 A:middle
+650
+00:31:03,266 --> 00:31:05,666
 I am going to add an
 observer for, in this case,
 
-00:31:06.036 --> 00:31:07.926 A:middle
+
+651
+00:31:06,036 --> 00:31:07,926
 the 'did receive memory
 warning' notification.
 
-00:31:08.466 --> 00:31:12.056 A:middle
+
+652
+00:31:08,466 --> 00:31:12,056
 And all I am going to do
 is call some 'custom cache
 
-00:31:12.156 --> 00:31:12.826 A:middle
+
+653
+00:31:12,156 --> 00:31:12,826
 purging' code.
 
-00:31:14.056 --> 00:31:16.826 A:middle
+
+654
+00:31:14,056 --> 00:31:16,826
 Maybe this walks a
 linked use of C structures
 
-00:31:16.826 --> 00:31:18.126 A:middle
+
+655
+00:31:16,826 --> 00:31:18,126
 and frees some other memory.
 
-00:31:18.706 --> 00:31:22.336 A:middle
+
+656
+00:31:18,706 --> 00:31:22,336
 An important note,
 if you do register
 
-00:31:22.336 --> 00:31:26.066 A:middle
+
+657
+00:31:22,336 --> 00:31:26,066
 for NSNotificationCenter
 observer, especially in init,
 
-00:31:26.626 --> 00:31:28.786 A:middle
+
+658
+00:31:26,626 --> 00:31:28,786
 please be sure to remove
 yourself on deinit.
 
-00:31:29.636 --> 00:31:31.076 A:middle
+
+659
+00:31:29,636 --> 00:31:31,076
 So memory is actually
 so important
 
-00:31:31.336 --> 00:31:32.686 A:middle
+
+660
+00:31:31,336 --> 00:31:32,686
 that there's another
 talk I am going
 
-00:31:32.686 --> 00:31:33.836 A:middle
+
+661
+00:31:32,686 --> 00:31:33,836
 to encourage you to go watch.
 
-00:31:35.246 --> 00:31:36.726 A:middle
+
+662
+00:31:35,246 --> 00:31:36,726
 It's called "Optimizing Your App
 
-00:31:36.876 --> 00:31:39.346 A:middle
+
+663
+00:31:36,876 --> 00:31:39,346
 for Multitasking
 on iPad in iOS 9."
 
-00:31:40.146 --> 00:31:42.706 A:middle
+
+664
+00:31:40,146 --> 00:31:42,706
 But actually, even if your
 app doesn't run on iPad,
 
-00:31:42.706 --> 00:31:44.886 A:middle
+
+665
+00:31:42,706 --> 00:31:44,886
 or you have no plans to
 support Multitasking,
 
-00:31:45.106 --> 00:31:46.396 A:middle
+
+666
+00:31:45,106 --> 00:31:46,396
 please go watch this talk.
 
-00:31:47.136 --> 00:31:50.036 A:middle
+
+667
+00:31:47,136 --> 00:31:50,036
 They go into a lot of detail
 about the types of resources
 
-00:31:50.036 --> 00:31:51.086 A:middle
+
+668
+00:31:50,036 --> 00:31:51,086
 that applications use,
 
-00:31:51.556 --> 00:31:53.476 A:middle
+
+669
+00:31:51,556 --> 00:31:53,476
 the patterns they
 typically access them in,
 
-00:31:53.936 --> 00:31:56.796 A:middle
+
+670
+00:31:53,936 --> 00:31:56,796
 and more information about
 how to have your app respond
 
-00:31:56.796 --> 00:31:57.846 A:middle
+
+671
+00:31:56,796 --> 00:31:57,846
 to system memory state.
 
-00:31:58.436 --> 00:31:58.956 A:middle
+
+672
+00:31:58,436 --> 00:31:58,956
 It's really great.
 
-00:31:59.466 --> 00:32:04.396 A:middle
+
+673
+00:31:59,466 --> 00:32:04,396
 Last but not least, I hope
 you are all really excited
 
 
-
-00:31:59.466 --> 00:32:04.396 A:middle
-Last but not least, I hope
-you are all really excited
-
-00:32:04.396 --> 00:32:06.366 A:middle
+674
+00:32:04,396 --> 00:32:06,366
 to bring native code
 to watchOS 2.
 
-00:32:06.926 --> 00:32:10.716 A:middle
+
+675
+00:32:06,926 --> 00:32:10,716
 When you are thinking about how
 to build your watchOS 2 app,
 
-00:32:11.496 --> 00:32:13.396 A:middle
+
+676
+00:32:11,496 --> 00:32:13,396
 you have to start
 with a great design,
 
-00:32:14.026 --> 00:32:16.906 A:middle
+
+677
+00:32:14,026 --> 00:32:16,906
 a design that really focuses
 on the essential functions
 
-00:32:16.906 --> 00:32:19.366 A:middle
+
+678
+00:32:16,906 --> 00:32:19,366
 of your app and makes
 them easy, delightful,
 
-00:32:19.366 --> 00:32:20.506 A:middle
+
+679
+00:32:19,366 --> 00:32:20,506
 and accessible to the user.
 
-00:32:21.476 --> 00:32:22.386 A:middle
+
+680
+00:32:21,476 --> 00:32:22,386
 If you need help with that,
 
-00:32:22.836 --> 00:32:24.856 A:middle
+
+681
+00:32:22,836 --> 00:32:24,856
 there's a great session
 you can go watch called
 
-00:32:24.856 --> 00:32:27.566 A:middle
+
+682
+00:32:24,856 --> 00:32:27,566
 "Designing for Apple Watch."
 
-00:32:27.766 --> 00:32:30.356 A:middle
+
+683
+00:32:27,766 --> 00:32:30,356
 Once you've got a great design
 for your Apple Watch app,
 
-00:32:31.356 --> 00:32:33.726 A:middle
+
+684
+00:32:31,356 --> 00:32:33,726
 then you can start to
 think about which aspects
 
-00:32:33.726 --> 00:32:36.246 A:middle
+
+685
+00:32:33,726 --> 00:32:36,246
 of your iOS app it might
 make sense to reuse.
 
-00:32:37.226 --> 00:32:42.416 A:middle
+
+686
+00:32:37,226 --> 00:32:42,416
 This could include actual code
 or familiar access patterns
 
-00:32:42.756 --> 00:32:46.926 A:middle
+
+687
+00:32:42,756 --> 00:32:46,926
 to APIs and frameworks that are
 shared between the platforms.
 
-00:32:46.926 --> 00:32:48.776 A:middle
+
+688
+00:32:46,926 --> 00:32:48,776
 Sometimes something
 you are doing
 
-00:32:48.776 --> 00:32:51.336 A:middle
+
+689
+00:32:48,776 --> 00:32:51,336
 on iOS might actually
 not make sense on watchOS
 
-00:32:51.696 --> 00:32:52.756 A:middle
+
+690
+00:32:51,696 --> 00:32:52,756
 for performance reasons.
 
-00:32:53.236 --> 00:32:55.386 A:middle
+
+691
+00:32:53,236 --> 00:32:55,386
 And you will end up
 implementing new mechanisms
 
-00:32:55.596 --> 00:33:05.426 A:middle
+
+692
+00:32:55,596 --> 00:33:05,426
 to achieve the same result
 on the other platform.
 
 
-
-00:32:55.596 --> 00:33:05.426 A:middle
-to achieve the same result
-on the other platform.
-
-00:33:05.426 --> 00:33:08.426 A:middle
+693
+00:33:05,426 --> 00:33:08,426
 watchOS users expect
 short, simple interactions,
 
-00:33:09.016 --> 00:33:12.046 A:middle
+
+694
+00:33:09,016 --> 00:33:12,046
 and they expect to always
 see recent and relevant data
 
-00:33:12.396 --> 00:33:14.556 A:middle
+
+695
+00:33:12,396 --> 00:33:14,556
 in Apps, Notifications,
 and Glances.
 
-00:33:15.736 --> 00:33:18.066 A:middle
+
+696
+00:33:15,736 --> 00:33:18,066
 What does this mean for
 you as an app developer?
 
-00:33:19.146 --> 00:33:21.056 A:middle
+
+697
+00:33:19,146 --> 00:33:21,056
 The most likely thing
 the user will do
 
-00:33:21.056 --> 00:33:24.136 A:middle
+
+698
+00:33:21,056 --> 00:33:24,136
 on watchOS is just
 launch the app and look
 
-00:33:24.136 --> 00:33:26.956 A:middle
+
+699
+00:33:24,136 --> 00:33:26,956
 at the one thing it shows
 immediately afterwards.
 
-00:33:28.296 --> 00:33:30.776 A:middle
+
+700
+00:33:28,296 --> 00:33:30,776
 So what are some things we can
 do to get great launch time
 
-00:33:30.776 --> 00:33:32.776 A:middle
+
+701
+00:33:30,776 --> 00:33:32,776
 and great responsiveness
 on watchOS?
 
-00:33:34.496 --> 00:33:37.086 A:middle
+
+702
+00:33:34,496 --> 00:33:37,086
 Focus on minimizing
 both the amount
 
-00:33:37.086 --> 00:33:40.046 A:middle
+
+703
+00:33:37,086 --> 00:33:40,046
 of network traffic you generate
 and the amount of work you have
 
-00:33:40.046 --> 00:33:42.576 A:middle
+
+704
+00:33:40,046 --> 00:33:42,576
 to do on the device to do
 something sensible with it.
 
-00:33:43.876 --> 00:33:46.306 A:middle
+
+705
+00:33:43,876 --> 00:33:46,306
 If you are accessing a
 server that you can control
 
-00:33:46.356 --> 00:33:50.806 A:middle
+
+706
+00:33:46,356 --> 00:33:50,806
 and add new APIs to, make sure
 you are sending appropriately
 
-00:33:50.806 --> 00:33:52.956 A:middle
+
+707
+00:33:50,806 --> 00:33:52,956
 sized and formatted
 responses down to the Watch.
 
-00:33:54.116 --> 00:33:57.566 A:middle
+
+708
+00:33:54,116 --> 00:33:57,566
 This can include something as
 simple as removing unused keys
 
-00:33:57.686 --> 00:34:01.496 A:middle
+
+709
+00:33:57,686 --> 00:34:01,496
 from JSON or XML
 blobs; resizing images
 
 
-
-00:33:57.686 --> 00:34:01.496 A:middle
-from JSON or XML
-blobs; resizing images
-
-00:34:01.786 --> 00:34:03.926 A:middle
+710
+00:34:01,786 --> 00:34:03,926
 so that the Watch can
 just display them exactly
 
-00:34:03.926 --> 00:34:05.596 A:middle
+
+711
+00:34:03,926 --> 00:34:05,596
 as they came over the
 wire and doesn't have
 
-00:34:05.626 --> 00:34:09.616 A:middle
+
+712
+00:34:05,626 --> 00:34:09,616
 to do any extra work; and
 if your API is accustomed
 
-00:34:09.616 --> 00:34:13.186 A:middle
+
+713
+00:34:09,616 --> 00:34:13,186
 to feeding devices with large
 screens that can show 10
 
-00:34:13.186 --> 00:34:16.496 A:middle
+
+714
+00:34:13,186 --> 00:34:16,496
 or 20 records at a time,
 it may be sending back all
 
-00:34:16.496 --> 00:34:17.946 A:middle
+
+715
+00:34:16,496 --> 00:34:17,946
 that information in one call.
 
-00:34:18.485 --> 00:34:19.585 A:middle
+
+716
+00:34:18,485 --> 00:34:19,585
 But actually, for the Watch,
 
-00:34:19.946 --> 00:34:21.766 A:middle
+
+717
+00:34:19,946 --> 00:34:21,766
 you should send only
 the appropriate number
 
-00:34:21.766 --> 00:34:24.466 A:middle
+
+718
+00:34:21,766 --> 00:34:24,466
 of records needed to
 display a single screen.
 
-00:34:25.746 --> 00:34:28.246 A:middle
+
+719
+00:34:25,746 --> 00:34:28,246
 To show fresh, relevant
 information all the time,
 
-00:34:28.806 --> 00:34:30.576 A:middle
+
+720
+00:34:28,806 --> 00:34:30,576
 it's important to
 use your iPhone app
 
-00:34:30.706 --> 00:34:32.386 A:middle
+
+721
+00:34:30,706 --> 00:34:32,386
 to keep the app context updated.
 
-00:34:33.196 --> 00:34:36.505 A:middle
+
+722
+00:34:33,196 --> 00:34:36,505
 The app context is a piece
 of bidirectional shared state
 
-00:34:36.556 --> 00:34:37.436 A:middle
+
+723
+00:34:36,556 --> 00:34:37,436
 between the platforms.
 
-00:34:37.876 --> 00:34:40.216 A:middle
+
+724
+00:34:37,876 --> 00:34:40,216
 So when the user takes
 an action on either end
 
-00:34:40.216 --> 00:34:42.746 A:middle
+
+725
+00:34:40,216 --> 00:34:42,746
 that will cause them to expect
 to see something different
 
-00:34:42.746 --> 00:34:45.065 A:middle
+
+726
+00:34:42,746 --> 00:34:45,065
 on the other end,
 that can be updated.
 
-00:34:45.676 --> 00:34:49.235 A:middle
+
+727
+00:34:45,676 --> 00:34:49,235
 The API for doing this is
 'watch connectivity update
 
-00:34:49.235 --> 00:34:50.315 A:middle
+
+728
+00:34:49,235 --> 00:34:50,315
 application context.'
 
-00:34:51.346 --> 00:34:55.036 A:middle
+
+729
+00:34:51,346 --> 00:34:55,036
 A great time to do this is
 when your iPhone app gets woken
 
-00:34:55.036 --> 00:34:56.686 A:middle
+
+730
+00:34:55,036 --> 00:34:56,686
 up by background app refresh.
 
-00:34:57.616 --> 00:34:59.286 A:middle
+
+731
+00:34:57,616 --> 00:34:59,286
 When it's done downloading
 new information
 
-00:34:59.286 --> 00:35:02.156 A:middle
+
+732
+00:34:59,286 --> 00:35:02,156
 and updating its own
 snapshot, it can also push
 
 
-
-00:34:59.286 --> 00:35:02.156 A:middle
-and updating its own
-snapshot, it can also push
-
-00:35:02.156 --> 00:35:03.596 A:middle
+733
+00:35:02,156 --> 00:35:03,596
 that information
 over to the Watch
 
-00:35:03.906 --> 00:35:06.236 A:middle
+
+734
+00:35:03,906 --> 00:35:06,236
 so that it will be ready
 next time the user launches.
 
-00:35:09.276 --> 00:35:12.816 A:middle
+
+735
+00:35:09,276 --> 00:35:12,816
 Finally, in case you're
 relying on a server
 
-00:35:12.816 --> 00:35:14.516 A:middle
+
+736
+00:35:12,816 --> 00:35:14,516
 that you can't change
 for some reason,
 
-00:35:15.246 --> 00:35:17.156 A:middle
+
+737
+00:35:15,246 --> 00:35:17,156
 let's say you're hitting
 a third-party API,
 
-00:35:18.306 --> 00:35:21.166 A:middle
+
+738
+00:35:18,306 --> 00:35:21,166
 you can use the power of your
 iPhone's network connection
 
-00:35:21.456 --> 00:35:25.226 A:middle
+
+739
+00:35:21,456 --> 00:35:25,226
 and CPU to actually implement
 an intermediary that formats
 
-00:35:25.226 --> 00:35:26.936 A:middle
+
+740
+00:35:25,226 --> 00:35:26,936
 and sizes responses
 for the Watch.
 
-00:35:27.946 --> 00:35:30.866 A:middle
+
+741
+00:35:27,946 --> 00:35:30,866
 The API you would use to do
 this is 'watch connectivity
 
-00:35:31.036 --> 00:35:32.396 A:middle
+
+742
+00:35:31,036 --> 00:35:32,396
 send message.'
 
-00:35:33.156 --> 00:35:35.296 A:middle
+
+743
+00:35:33,156 --> 00:35:35,296
 So you would send a
 message to the iPhone,
 
-00:35:36.176 --> 00:35:38.256 A:middle
+
+744
+00:35:36,176 --> 00:35:38,256
 requesting whatever you need,
 
-00:35:38.256 --> 00:35:39.436 A:middle
+
+745
+00:35:38,256 --> 00:35:39,436
 and the iPhone would
 download it,
 
-00:35:40.276 --> 00:35:43.196 A:middle
+
+746
+00:35:40,276 --> 00:35:43,196
 and do all the operations I
 mentioned, remove unused keys,
 
-00:35:43.386 --> 00:35:45.436 A:middle
+
+747
+00:35:43,386 --> 00:35:45,436
 reduce the number of
 records, resize images.
 
-00:35:46.286 --> 00:35:49.466 A:middle
+
+748
+00:35:46,286 --> 00:35:49,466
 Then it could send a compact and
 actionable reply to the Watch,
 
-00:35:49.846 --> 00:35:51.366 A:middle
+
+749
+00:35:49,846 --> 00:35:51,366
 again, over WC Session.
 
-00:35:51.926 --> 00:35:55.336 A:middle
+
+750
+00:35:51,926 --> 00:35:55,336
 So wrapping up, performance
 is a feature.
 
-00:35:56.026 --> 00:35:57.336 A:middle
+
+751
+00:35:56,026 --> 00:35:57,336
 It's an essential aspect
 
-00:35:57.656 --> 00:36:00.006 A:middle
+
+752
+00:35:57,656 --> 00:36:00,006
 of giving your users a great
 experience in your apps.
 
 
-
-00:35:57.656 --> 00:36:00.006 A:middle
-of giving your users a great
-experience in your apps.
-
-00:36:00.756 --> 00:36:02.676 A:middle
+753
+00:36:00,756 --> 00:36:02,676
 And it should be on
 your mind from day one
 
-00:36:02.726 --> 00:36:04.416 A:middle
+
+754
+00:36:02,726 --> 00:36:04,416
 when you are building your apps.
 
-00:36:05.376 --> 00:36:07.686 A:middle
+
+755
+00:36:05,376 --> 00:36:07,686
 Efficient apps feel great
 when you are using them,
 
-00:36:08.126 --> 00:36:12.186 A:middle
+
+756
+00:36:08,126 --> 00:36:12,186
 they build your users' trust,
 and they save battery power.
 
-00:36:13.416 --> 00:36:16.826 A:middle
+
+757
+00:36:13,416 --> 00:36:16,826
 Please go learn about all the
 Apple technologies I mentioned,
 
-00:36:17.266 --> 00:36:17.846 A:middle
+
+758
+00:36:17,266 --> 00:36:17,846
 and when you are thinking
 
-00:36:17.846 --> 00:36:19.626 A:middle
+
+759
+00:36:17,846 --> 00:36:19,626
 about building your app,
 choose the best ones.
 
-00:36:20.916 --> 00:36:22.986 A:middle
+
+760
+00:36:20,916 --> 00:36:22,986
 Keep your main thread
 always ready for user input.
 
-00:36:24.346 --> 00:36:26.426 A:middle
+
+761
+00:36:24,346 --> 00:36:26,426
 Understand when and why
 your app uses memory.
 
-00:36:27.416 --> 00:36:30.086 A:middle
+
+762
+00:36:27,416 --> 00:36:30,086
 And to get a great
 experience on watchOS, download
 
-00:36:30.086 --> 00:36:32.036 A:middle
+
+763
+00:36:30,086 --> 00:36:32,036
 and process a minimal
 set of information.
 
-00:36:32.536 --> 00:36:36.126 A:middle
+
+764
+00:36:32,536 --> 00:36:36,126
 Here's some great written
 documentation you can get
 
-00:36:36.126 --> 00:36:38.216 A:middle
+
+765
+00:36:36,126 --> 00:36:38,216
 into if you are starting to
 get interested in this stuff.
 
-00:36:39.376 --> 00:36:41.456 A:middle
+
+766
+00:36:39,376 --> 00:36:41,456
 And again, here are the
 sessions that I mentioned.
 
-00:36:42.456 --> 00:36:44.716 A:middle
+
+767
+00:36:42,456 --> 00:36:44,716
 The first few are
 about technologies
 
-00:36:44.716 --> 00:36:46.416 A:middle
+
+768
+00:36:44,716 --> 00:36:46,416
 that we covered this
 year, and there's a few
 
-00:36:46.416 --> 00:36:47.496 A:middle
+
+769
+00:36:46,416 --> 00:36:47,496
 from previous years as well.
 
-00:36:47.496 --> 00:36:48.766 A:middle
+
+770
+00:36:47,496 --> 00:36:48,766
 Thanks, and have a great Friday.
 
-00:36:49.516 --> 00:36:52.500 A:middle
+
+771
+00:36:49,516 --> 00:36:52,500
 [Applause]
 

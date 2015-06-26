@@ -1,3416 +1,4901 @@
-
-00:00:20.516 --> 00:00:23.216 A:middle
+1
+00:00:20,516 --> 00:00:23,216
 [Applause]
 
-00:00:23.716 --> 00:00:24.266 A:middle
-&gt;&gt; JESSE DONALDSON:
+
+2
+00:00:23,716 --> 00:00:24,266
+>> JESSE DONALDSON:
 Hi, everyone.
 
-00:00:24.986 --> 00:00:25.646 A:middle
+
+3
+00:00:24,986 --> 00:00:25,646
 Thanks for coming.
 
-00:00:25.776 --> 00:00:28.656 A:middle
+
+4
+00:00:25,776 --> 00:00:28,656
 My name is Jesse, and I am
 responsible for Auto Layout
 
-00:00:28.746 --> 00:00:30.386 A:middle
+
+5
+00:00:28,746 --> 00:00:30,386
 in the AppKit and
 Foundation frameworks.
 
-00:00:31.106 --> 00:00:33.206 A:middle
+
+6
+00:00:31,106 --> 00:00:33,206
 Layout is one of the
 most fundamental tasks
 
-00:00:33.396 --> 00:00:36.666 A:middle
+
+7
+00:00:33,396 --> 00:00:36,666
 that we perform when we build an
 application, and Auto Layout is
 
-00:00:36.666 --> 00:00:39.656 A:middle
+
+8
+00:00:36,666 --> 00:00:39,656
 about the neatest thing ever,
 but sometimes it can seem kind
 
-00:00:39.656 --> 00:00:42.246 A:middle
+
+9
+00:00:39,656 --> 00:00:42,246
 of mysterious, and so today I
 want to look at a few aspects
 
-00:00:42.246 --> 00:00:44.996 A:middle
+
+10
+00:00:42,246 --> 00:00:44,996
 of Auto Layout that are
 less well understood and go
 
-00:00:45.046 --> 00:00:46.086 A:middle
+
+11
+00:00:45,046 --> 00:00:46,086
 through them in some detail.
 
-00:00:47.326 --> 00:00:49.866 A:middle
+
+12
+00:00:47,326 --> 00:00:49,866
 This is the second part
 of our two-part series,
 
-00:00:49.916 --> 00:00:51.026 A:middle
+
+13
+00:00:49,916 --> 00:00:51,026
 and here's a brief list
 
-00:00:51.026 --> 00:00:52.916 A:middle
+
+14
+00:00:51,026 --> 00:00:52,916
 of the topics we're
 going to be looking at.
 
-00:00:53.416 --> 00:00:55.056 A:middle
+
+15
+00:00:53,416 --> 00:00:55,056
 I would like to start
 with the layout cycle.
 
-00:00:55.606 --> 00:00:59.046 A:middle
+
+16
+00:00:55,606 --> 00:00:59,046
 You probably know how to
 configure your user interface,
 
-00:00:59.596 --> 00:01:03.176 A:middle
+
+17
+00:00:59,596 --> 00:01:03,176
 but Auto Layout can still be
 a little bit of a black box.
 
 
-
-00:00:59.596 --> 00:01:03.176 A:middle
-but Auto Layout can still be
-a little bit of a black box.
-
-00:01:03.506 --> 00:01:04.896 A:middle
+18
+00:01:03,506 --> 00:01:04,896
 You kind of configure things,
 
-00:01:04.896 --> 00:01:07.836 A:middle
+
+19
+00:01:04,896 --> 00:01:07,836
 you run your application,
 you get some layout.
 
-00:01:08.366 --> 00:01:11.286 A:middle
+
+20
+00:01:08,366 --> 00:01:11,286
 Hopefully it's the layout that
 you want, but if it's not,
 
-00:01:11.286 --> 00:01:12.656 A:middle
+
+21
+00:01:11,286 --> 00:01:12,656
 it can be hard to
 know where to look.
 
-00:01:13.076 --> 00:01:15.946 A:middle
+
+22
+00:01:13,076 --> 00:01:15,946
 So I want to look at what
 happens in the middle here,
 
-00:01:16.056 --> 00:01:18.646 A:middle
+
+23
+00:01:16,056 --> 00:01:18,646
 how we actually go from
 having constraints on the view
 
-00:01:18.646 --> 00:01:21.156 A:middle
+
+24
+00:01:18,646 --> 00:01:21,156
 to having the frames
 assigned to those views.
 
-00:01:22.496 --> 00:01:25.306 A:middle
+
+25
+00:01:22,496 --> 00:01:25,306
 So here is a high-level
 overview of the process.
 
-00:01:25.376 --> 00:01:27.846 A:middle
+
+26
+00:01:25,376 --> 00:01:27,846
 We start with the application
 run loop cheerfully iterating
 
-00:01:28.296 --> 00:01:30.736 A:middle
+
+27
+00:01:28,296 --> 00:01:30,736
 until the constraints
 change in such a way
 
-00:01:30.736 --> 00:01:33.216 A:middle
+
+28
+00:01:30,736 --> 00:01:33,216
 that the calculated layout
 needs to be different.
 
-00:01:33.646 --> 00:01:36.326 A:middle
+
+29
+00:01:33,646 --> 00:01:36,326
 This causes a deferred
 layout pass to be scheduled.
 
-00:01:36.716 --> 00:01:38.706 A:middle
+
+30
+00:01:36,716 --> 00:01:38,706
 When that layout pass
 eventually comes around,
 
-00:01:38.986 --> 00:01:40.166 A:middle
+
+31
+00:01:38,986 --> 00:01:40,166
 we go through the hierarchy
 
-00:01:40.206 --> 00:01:41.886 A:middle
+
+32
+00:01:40,206 --> 00:01:41,886
 and update all the
 frames for the views.
 
-00:01:41.886 --> 00:01:45.666 A:middle
+
+33
+00:01:41,886 --> 00:01:45,666
 This is a little abstract, so
 I made a simple example here.
 
-00:01:45.666 --> 00:01:49.886 A:middle
+
+34
+00:01:45,666 --> 00:01:49,886
 The idea is that when we
 uncheck this top checkbox,
 
-00:01:50.256 --> 00:01:52.846 A:middle
+
+35
+00:01:50,256 --> 00:01:52,846
 we'll modify a constraint
 to shrink the window
 
-00:01:52.846 --> 00:01:55.966 A:middle
+
+36
+00:01:52,846 --> 00:01:55,966
 and hide the checkboxes
 on the bottom.
 
-00:01:55.966 --> 00:01:58.326 A:middle
+
+37
+00:01:55,966 --> 00:01:58,326
 So we start with frames
 looking like this.
 
-00:01:58.666 --> 00:02:01.576 A:middle
+
+38
+00:01:58,666 --> 00:02:01,576
 When we change the constraint,
 the layout engine's notion
 
 
-
-00:01:58.666 --> 00:02:01.576 A:middle
-When we change the constraint,
-the layout engine's notion
-
-00:02:01.576 --> 00:02:03.386 A:middle
+39
+00:02:01,576 --> 00:02:03,386
 of where everything is
 has already changed,
 
-00:02:03.446 --> 00:02:05.136 A:middle
+
+40
+00:02:03,446 --> 00:02:05,136
 but the UI hasn't updated yet.
 
-00:02:05.136 --> 00:02:07.576 A:middle
+
+41
+00:02:05,136 --> 00:02:07,576
 And then when the
 layout pass comes along,
 
-00:02:07.856 --> 00:02:10.436 A:middle
+
+42
+00:02:07,856 --> 00:02:10,436
 the UI actually changes to
 match what the engine thinks
 
-00:02:10.436 --> 00:02:10.795 A:middle
+
+43
+00:02:10,436 --> 00:02:10,795
 should be.
 
-00:02:11.936 --> 00:02:13.536 A:middle
+
+44
+00:02:11,936 --> 00:02:13,536
 So let's talk about
 constraint changes.
 
-00:02:14.566 --> 00:02:16.856 A:middle
+
+45
+00:02:14,566 --> 00:02:16,856
 The constraints that
 you create are converted
 
-00:02:16.856 --> 00:02:19.826 A:middle
+
+46
+00:02:16,856 --> 00:02:19,826
 to mathematical expressions and
 kept inside the Layout Engine.
 
-00:02:20.326 --> 00:02:23.796 A:middle
+
+47
+00:02:20,326 --> 00:02:23,796
 So a constraints change
 is really just anything
 
-00:02:23.796 --> 00:02:27.046 A:middle
+
+48
+00:02:23,796 --> 00:02:27,046
 that affects these expressions,
 and so that includes some
 
-00:02:27.046 --> 00:02:28.616 A:middle
+
+49
+00:02:27,046 --> 00:02:28,616
 of the obvious things
 like activating
 
-00:02:28.616 --> 00:02:31.506 A:middle
+
+50
+00:02:28,616 --> 00:02:31,506
 or deactivating constraints
 or changing the priority
 
-00:02:31.506 --> 00:02:34.856 A:middle
+
+51
+00:02:31,506 --> 00:02:34,856
 or the constant on a constraint,
 but also less obvious things
 
-00:02:34.856 --> 00:02:36.836 A:middle
+
+52
+00:02:34,856 --> 00:02:36,836
 like manipulating
 the view hierarchy
 
-00:02:36.836 --> 00:02:38.986 A:middle
+
+53
+00:02:36,836 --> 00:02:38,986
 or reconfiguring certain
 kinds of controls.
 
-00:02:38.986 --> 00:02:41.716 A:middle
+
+54
+00:02:38,986 --> 00:02:41,716
 Because those may cause
 constraint changes indirectly.
 
-00:02:43.326 --> 00:02:45.406 A:middle
+
+55
+00:02:43,326 --> 00:02:45,406
 So what happens when
 a constraint changes?
 
-00:02:46.326 --> 00:02:47.516 A:middle
+
+56
+00:02:46,326 --> 00:02:47,516
 Well, the first thing
 that happens is
 
-00:02:47.516 --> 00:02:49.236 A:middle
+
+57
+00:02:47,516 --> 00:02:49,236
 that the Layout Engine
 will recompute the layout.
 
-00:02:49.566 --> 00:02:52.826 A:middle
+
+58
+00:02:49,566 --> 00:02:52,826
 These expressions are made up of
 variables that represent things
 
-00:02:52.826 --> 00:02:56.086 A:middle
+
+59
+00:02:52,826 --> 00:02:56,086
 like the origin or the
 size of a particular view.
 
-00:02:56.406 --> 00:02:58.136 A:middle
+
+60
+00:02:56,406 --> 00:02:58,136
 And when we recalculate
 the layout,
 
-00:02:58.186 --> 00:03:00.466 A:middle
+
+61
+00:02:58,186 --> 00:03:00,466
 these variables may
 receive new values.
 
 
-
-00:02:58.186 --> 00:03:00.466 A:middle
-these variables may
-receive new values.
-
-00:03:00.966 --> 00:03:02.566 A:middle
+62
+00:03:00,966 --> 00:03:02,566
 When this happens, the views
 
-00:03:02.566 --> 00:03:03.976 A:middle
+
+63
+00:03:02,566 --> 00:03:03,976
 that they represent
 are notified,
 
-00:03:04.106 --> 00:03:05.866 A:middle
+
+64
+00:03:04,106 --> 00:03:05,866
 and they mark their
 superview as needing layout.
 
-00:03:06.276 --> 00:03:08.776 A:middle
+
+65
+00:03:06,276 --> 00:03:08,776
 This is actually what causes
 the deferred layout pass
 
-00:03:08.896 --> 00:03:09.416 A:middle
+
+66
+00:03:08,896 --> 00:03:09,416
 to be scheduled.
 
-00:03:10.726 --> 00:03:13.666 A:middle
+
+67
+00:03:10,726 --> 00:03:13,666
 So if we look at
 the example here,
 
-00:03:14.366 --> 00:03:17.436 A:middle
+
+68
+00:03:14,366 --> 00:03:17,436
 this is where you see
 the frame actually change
 
-00:03:17.436 --> 00:03:20.226 A:middle
+
+69
+00:03:17,436 --> 00:03:20,226
 in the Layout Engine but not
 yet in the view hierarchy.
 
-00:03:20.846 --> 00:03:24.256 A:middle
+
+70
+00:03:20,846 --> 00:03:24,256
 So when the deferred
 layout pass comes along,
 
-00:03:24.766 --> 00:03:27.806 A:middle
+
+71
+00:03:24,766 --> 00:03:27,806
 the purpose of this, of course,
 is to reposition any views
 
-00:03:27.886 --> 00:03:29.096 A:middle
+
+72
+00:03:27,886 --> 00:03:29,096
 that are not in the right place.
 
-00:03:29.236 --> 00:03:31.516 A:middle
+
+73
+00:03:29,236 --> 00:03:31,516
 So when we are finished,
 everything is in the right spot.
 
-00:03:32.786 --> 00:03:35.136 A:middle
+
+74
+00:03:32,786 --> 00:03:35,136
 And a pass is actually a
 little bit of a misnomer.
 
-00:03:35.136 --> 00:03:37.566 A:middle
+
+75
+00:03:35,136 --> 00:03:37,566
 There are a couple of
 passes that happen here.
 
-00:03:38.476 --> 00:03:40.656 A:middle
+
+76
+00:03:38,476 --> 00:03:40,656
 The first is for
 updating constraints.
 
-00:03:40.656 --> 00:03:42.716 A:middle
+
+77
+00:03:40,656 --> 00:03:42,716
 The idea with this
 is to make sure
 
-00:03:42.716 --> 00:03:45.576 A:middle
+
+78
+00:03:42,716 --> 00:03:45,576
 that if there are any pending
 changes to constraints,
 
-00:03:45.626 --> 00:03:48.296 A:middle
+
+79
+00:03:45,626 --> 00:03:48,296
 they happen now, before
 we go to all the trouble
 
-00:03:48.296 --> 00:03:51.246 A:middle
+
+80
+00:03:48,296 --> 00:03:51,246
 to traverse the view hierarchy
 and reposition all the views.
 
-00:03:51.986 --> 00:03:54.976 A:middle
+
+81
+00:03:51,986 --> 00:03:54,976
 And then the second pass is when
 we do that view repositioning.
 
-00:03:56.206 --> 00:03:58.016 A:middle
+
+82
+00:03:56,206 --> 00:03:58,016
 So let's talk about
 update constraints.
 
-00:03:58.816 --> 00:04:00.996 A:middle
+
+83
+00:03:58,816 --> 00:04:00,996
 Views need to explicitly request
 
 
-
-00:03:58.816 --> 00:04:00.996 A:middle
-Views need to explicitly request
-
-00:04:01.376 --> 00:04:03.846 A:middle
+84
+00:04:01,376 --> 00:04:03,846
 that their update
 constraints method be called.
 
-00:04:03.906 --> 00:04:06.766 A:middle
+
+85
+00:04:03,906 --> 00:04:06,766
 And this pretty much works the
 same way as setNeedsDisplay.
 
-00:04:07.346 --> 00:04:08.986 A:middle
+
+86
+00:04:07,346 --> 00:04:08,986
 You call
 setNeedsUpdateConstraints,
 
-00:04:09.376 --> 00:04:12.336 A:middle
+
+87
+00:04:09,376 --> 00:04:12,336
 and then some time later your
 update constraints method will
 
-00:04:13.366 --> 00:04:14.236 A:middle
+
+88
+00:04:13,366 --> 00:04:14,236
 be called.
 
-00:04:14.286 --> 00:04:17.916 A:middle
+
+89
+00:04:14,286 --> 00:04:17,916
 Really, all this is is a way
 for views to have a chance
 
-00:04:17.916 --> 00:04:20.016 A:middle
+
+90
+00:04:17,916 --> 00:04:20,016
 to make changes to
 constraints just in time
 
-00:04:20.206 --> 00:04:23.996 A:middle
+
+91
+00:04:20,206 --> 00:04:23,996
 for the next layout pass, but
 it's often not actually needed.
 
-00:04:25.206 --> 00:04:27.556 A:middle
+
+92
+00:04:25,206 --> 00:04:27,556
 All of your initial constraint
 setup should ideally happen
 
-00:04:27.556 --> 00:04:28.656 A:middle
+
+93
+00:04:27,556 --> 00:04:28,656
 inside Interface Builder.
 
-00:04:29.156 --> 00:04:30.536 A:middle
+
+94
+00:04:29,156 --> 00:04:30,536
 Or if you really
 find that you need
 
-00:04:30.536 --> 00:04:32.696 A:middle
+
+95
+00:04:30,536 --> 00:04:32,696
 to allocate your
 constraints programmatically,
 
-00:04:32.946 --> 00:04:34.956 A:middle
+
+96
+00:04:32,946 --> 00:04:34,956
 some place like viewDidLoad
 is much better.
 
-00:04:35.226 --> 00:04:37.266 A:middle
+
+97
+00:04:35,226 --> 00:04:37,266
 Update constraints is really
 just for work that needs
 
-00:04:37.296 --> 00:04:38.836 A:middle
+
+98
+00:04:37,296 --> 00:04:38,836
 to be repeated periodically.
 
-00:04:39.886 --> 00:04:42.236 A:middle
+
+99
+00:04:39,886 --> 00:04:42,236
 Also, it's pretty
 straightforward
 
-00:04:42.236 --> 00:04:45.886 A:middle
+
+100
+00:04:42,236 --> 00:04:45,886
 to just change constraints when
 you find the need to do that;
 
-00:04:47.046 --> 00:04:48.926 A:middle
+
+101
+00:04:47,046 --> 00:04:48,926
 whereas, if you take
 that logic apart
 
-00:04:48.926 --> 00:04:51.036 A:middle
+
+102
+00:04:48,926 --> 00:04:51,036
 from the other code that's
 related to it and you move it
 
-00:04:51.036 --> 00:04:53.786 A:middle
+
+103
+00:04:51,036 --> 00:04:53,786
 into a separate method that
 gets executed at a later time,
 
-00:04:54.146 --> 00:04:56.656 A:middle
+
+104
+00:04:54,146 --> 00:04:56,656
 your code becomes a lot harder
 to follow, so it will be harder
 
-00:04:56.656 --> 00:04:58.466 A:middle
+
+105
+00:04:56,656 --> 00:04:58,466
 for you to maintain,
 it will be a lot harder
 
-00:04:58.466 --> 00:05:00.286 A:middle
+
+106
+00:04:58,466 --> 00:05:00,286
 for other people to understand.
 
 
-
-00:04:58.466 --> 00:05:00.286 A:middle
-for other people to understand.
-
-00:05:01.236 --> 00:05:03.696 A:middle
+107
+00:05:01,236 --> 00:05:03,696
 So when would you need to
 use update constraints?
 
-00:05:04.376 --> 00:05:06.096 A:middle
+
+108
+00:05:04,376 --> 00:05:06,096
 Well, it boils down
 to performance.
 
-00:05:07.126 --> 00:05:09.376 A:middle
+
+109
+00:05:07,126 --> 00:05:09,376
 If you find that just
 changing your constraints
 
-00:05:09.376 --> 00:05:10.606 A:middle
+
+110
+00:05:09,376 --> 00:05:10,606
 in place is too slow,
 
-00:05:10.636 --> 00:05:13.396 A:middle
+
+111
+00:05:10,636 --> 00:05:13,396
 then update constraints might
 be able to help you out.
 
-00:05:13.896 --> 00:05:16.576 A:middle
+
+112
+00:05:13,896 --> 00:05:16,576
 It turns out that changing
 a constraint inside update
 
-00:05:16.576 --> 00:05:17.946 A:middle
+
+113
+00:05:16,576 --> 00:05:17,946
 constraints is actually faster
 
-00:05:18.086 --> 00:05:20.826 A:middle
+
+114
+00:05:18,086 --> 00:05:20,826
 than changing a constraint
 at other times.
 
-00:05:20.826 --> 00:05:22.726 A:middle
+
+115
+00:05:20,826 --> 00:05:22,726
 The reason for that is
 because the engine is able
 
-00:05:22.726 --> 00:05:25.016 A:middle
+
+116
+00:05:22,726 --> 00:05:25,016
 to treat all the constraint
 changes that happen
 
-00:05:25.016 --> 00:05:26.416 A:middle
+
+117
+00:05:25,016 --> 00:05:26,416
 in this pass as a batch.
 
-00:05:26.996 --> 00:05:29.396 A:middle
+
+118
+00:05:26,996 --> 00:05:29,396
 This is the same kind of
 performance benefit that you get
 
-00:05:29.446 --> 00:05:32.426 A:middle
+
+119
+00:05:29,446 --> 00:05:32,426
 by calling activate
 constraints on an entire array
 
-00:05:32.426 --> 00:05:34.846 A:middle
+
+120
+00:05:32,426 --> 00:05:34,846
 of constraints as
 opposed to activating each
 
-00:05:34.846 --> 00:05:36.366 A:middle
+
+121
+00:05:34,846 --> 00:05:36,366
 of those constraints
 individually.
 
-00:05:38.176 --> 00:05:40.466 A:middle
+
+122
+00:05:38,176 --> 00:05:40,466
 One of the common
 patterns where we find
 
-00:05:40.606 --> 00:05:43.096 A:middle
+
+123
+00:05:40,606 --> 00:05:43,096
 that this is really useful
 is if you have a view
 
-00:05:43.386 --> 00:05:46.126 A:middle
+
+124
+00:05:43,386 --> 00:05:46,126
 that will rebuild constraints
 in response to some kind
 
-00:05:46.126 --> 00:05:47.196 A:middle
+
+125
+00:05:46,126 --> 00:05:47,196
 of a configuration change.
 
-00:05:47.886 --> 00:05:50.706 A:middle
+
+126
+00:05:47,886 --> 00:05:50,706
 It turns out to be very common
 for clients of these kinds
 
-00:05:50.706 --> 00:05:53.046 A:middle
+
+127
+00:05:50,706 --> 00:05:53,046
 of views to need to configure
 more than one property,
 
-00:05:53.356 --> 00:05:55.836 A:middle
+
+128
+00:05:53,356 --> 00:05:55,836
 so it's very easy
 for the view, then,
 
-00:05:55.836 --> 00:05:58.276 A:middle
+
+129
+00:05:55,836 --> 00:05:58,276
 to end up rebuilding its
 constraints multiple times.
 
-00:05:58.336 --> 00:05:59.796 A:middle
+
+130
+00:05:58,336 --> 00:05:59,796
 That's just a lot
 of wasted work.
 
 
-
-00:06:00.256 --> 00:06:02.936 A:middle
+131
+00:06:00,256 --> 00:06:02,936
 It's much more efficient in
 these kinds of situations
 
-00:06:02.936 --> 00:06:06.466 A:middle
+
+132
+00:06:02,936 --> 00:06:06,466
 to have the view just call
 setNeedsUpdateConstraints
 
-00:06:06.876 --> 00:06:09.436 A:middle
+
+133
+00:06:06,876 --> 00:06:09,436
 and then when the update
 constraints pass comes along,
 
-00:06:09.486 --> 00:06:11.126 A:middle
+
+134
+00:06:09,486 --> 00:06:11,126
 it can rebuild its
 constraints once
 
-00:06:11.226 --> 00:06:12.956 A:middle
+
+135
+00:06:11,226 --> 00:06:12,956
 to match whatever the
 current configuration is.
 
-00:06:14.466 --> 00:06:17.066 A:middle
+
+136
+00:06:14,466 --> 00:06:17,066
 In any case, once
 this pass is complete,
 
-00:06:17.066 --> 00:06:19.306 A:middle
+
+137
+00:06:17,066 --> 00:06:19,306
 we know the constraints are
 all up-to-date, we are ready
 
-00:06:19.306 --> 00:06:21.326 A:middle
+
+138
+00:06:19,306 --> 00:06:21,326
 to proceed with repositioning
 the views.
 
-00:06:22.276 --> 00:06:25.626 A:middle
+
+139
+00:06:22,276 --> 00:06:25,626
 So this is where we
 traverse the view hierarchy
 
-00:06:25.626 --> 00:06:28.186 A:middle
+
+140
+00:06:25,626 --> 00:06:28,186
 from the top down, and
 we'll call layoutSubviews
 
-00:06:28.186 --> 00:06:30.216 A:middle
+
+141
+00:06:28,186 --> 00:06:30,216
 on any view marked
 as needing layout.
 
-00:06:31.056 --> 00:06:33.646 A:middle
+
+142
+00:06:31,056 --> 00:06:33,646
 On OS X, this method
 is called layout,
 
-00:06:33.736 --> 00:06:34.956 A:middle
+
+143
+00:06:33,736 --> 00:06:34,956
 but the idea is the same.
 
-00:06:35.496 --> 00:06:39.276 A:middle
+
+144
+00:06:35,496 --> 00:06:39,276
 The purpose is for the receiver
 to reposition its subviews.
 
-00:06:39.626 --> 00:06:41.786 A:middle
+
+145
+00:06:39,626 --> 00:06:41,786
 It's not for the receiver
 to reposition itself.
 
-00:06:43.626 --> 00:06:46.566 A:middle
+
+146
+00:06:43,626 --> 00:06:46,566
 So what the framework
 implementation does is it will
 
-00:06:46.566 --> 00:06:48.356 A:middle
+
+147
+00:06:46,566 --> 00:06:48,356
 read frames for the subviews
 
-00:06:48.356 --> 00:06:50.316 A:middle
+
+148
+00:06:48,356 --> 00:06:50,316
 out of the Layout Engine
 and then assign them.
 
-00:06:50.736 --> 00:06:54.106 A:middle
+
+149
+00:06:50,736 --> 00:06:54,106
 On the Mac we use setFrame for
 this, and on iOS, it's setBounds
 
-00:06:54.106 --> 00:06:56.116 A:middle
+
+150
+00:06:54,106 --> 00:06:56,116
 and setCenter, but
 the idea is the same.
 
-00:06:57.536 --> 00:06:59.286 A:middle
+
+151
+00:06:57,536 --> 00:06:59,286
 So if we look at
 the example again,
 
-00:06:59.286 --> 00:07:01.586 A:middle
+
+152
+00:06:59,286 --> 00:07:01,586
 this is where you
 actually see the UI update
 
 
-
-00:06:59.286 --> 00:07:01.586 A:middle
-this is where you
-actually see the UI update
-
-00:07:01.666 --> 00:07:03.966 A:middle
+153
+00:07:01,666 --> 00:07:03,966
 to match the frames that
 are in the Layout Engine.
 
-00:07:05.296 --> 00:07:07.106 A:middle
+
+154
+00:07:05,296 --> 00:07:07,106
 One other note about
 layoutSubviews:
 
-00:07:07.156 --> 00:07:10.666 A:middle
+
+155
+00:07:07,156 --> 00:07:10,666
 A lot of people will override
 this in order to get some kind
 
-00:07:10.666 --> 00:07:13.716 A:middle
+
+156
+00:07:10,666 --> 00:07:13,716
 of a custom layout, and it's
 fine if you need to do this,
 
-00:07:14.106 --> 00:07:16.646 A:middle
+
+157
+00:07:14,106 --> 00:07:16,646
 but there are some things
 that you need to know
 
-00:07:16.646 --> 00:07:18.866 A:middle
+
+158
+00:07:16,646 --> 00:07:18,866
 because it can be very
 easy to do things here
 
-00:07:18.866 --> 00:07:19.946 A:middle
+
+159
+00:07:18,866 --> 00:07:19,946
 that can get you into trouble.
 
-00:07:19.946 --> 00:07:21.686 A:middle
+
+160
+00:07:19,946 --> 00:07:21,686
 So I want to look at this
 in a little more detail.
 
-00:07:23.376 --> 00:07:26.286 A:middle
+
+161
+00:07:23,376 --> 00:07:26,286
 You should really only need
 to override layoutSubviews
 
-00:07:26.286 --> 00:07:27.786 A:middle
+
+162
+00:07:26,286 --> 00:07:27,786
 if you need some
 kind of a layout
 
-00:07:27.786 --> 00:07:31.176 A:middle
+
+163
+00:07:27,786 --> 00:07:31,176
 that just can't be
 expressed using constraints.
 
-00:07:31.176 --> 00:07:33.066 A:middle
+
+164
+00:07:31,176 --> 00:07:33,066
 If you can find a way to
 do it using constraints,
 
-00:07:33.066 --> 00:07:36.056 A:middle
+
+165
+00:07:33,066 --> 00:07:36,056
 that's usually more
 robust, more trouble free.
 
-00:07:37.906 --> 00:07:43.436 A:middle
+
+166
+00:07:37,906 --> 00:07:43,436
 If you do choose to override
 this, you should keep in mind
 
-00:07:43.436 --> 00:07:45.636 A:middle
+
+167
+00:07:43,436 --> 00:07:45,636
 that we're in the middle of the
 layout ceremony at this point.
 
-00:07:45.756 --> 00:07:48.046 A:middle
+
+168
+00:07:45,756 --> 00:07:48,046
 Some views have already
 been laid out,
 
-00:07:48.046 --> 00:07:50.686 A:middle
+
+169
+00:07:48,046 --> 00:07:50,686
 other views haven't been, but
 they probably will be soon,
 
-00:07:51.106 --> 00:07:53.766 A:middle
+
+170
+00:07:51,106 --> 00:07:53,766
 and so it's a bit of
 a delicate moment.
 
-00:07:53.986 --> 00:07:58.486 A:middle
+
+171
+00:07:53,986 --> 00:07:58,486
 There are some special
 rules to follow.
 
-00:07:58.486 --> 00:08:01.826 A:middle
+
+172
+00:07:58,486 --> 00:08:01,826
 One is that you need to invoke
 the superclass implementation.
 
 
-
-00:07:58.486 --> 00:08:01.826 A:middle
-One is that you need to invoke
-the superclass implementation.
-
-00:08:02.196 --> 00:08:04.366 A:middle
+173
+00:08:02,196 --> 00:08:04,366
 We need that for various
 bookkeeping purposes.
 
-00:08:05.266 --> 00:08:08.306 A:middle
+
+174
+00:08:05,266 --> 00:08:08,306
 Also, it's fine to
 invalidate the layout of views
 
-00:08:08.306 --> 00:08:11.796 A:middle
+
+175
+00:08:08,306 --> 00:08:11,796
 within your subtree, but you
 should do that before you call
 
-00:08:11.846 --> 00:08:13.346 A:middle
+
+176
+00:08:11,846 --> 00:08:13,346
 through to the superclass
 implementation.
 
-00:08:13.836 --> 00:08:20.846 A:middle
+
+177
+00:08:13,836 --> 00:08:20,846
 Second, you don't want to call
 setNeedsUpdateConstraints.
 
-00:08:20.846 --> 00:08:22.526 A:middle
+
+178
+00:08:20,846 --> 00:08:22,526
 There was an update
 constraints pass.
 
-00:08:22.616 --> 00:08:23.636 A:middle
+
+179
+00:08:22,616 --> 00:08:23,636
 We went through that,
 
-00:08:23.726 --> 00:08:27.016 A:middle
+
+180
+00:08:23,726 --> 00:08:27,016
 we finished it, and
 so we missed it.
 
-00:08:27.166 --> 00:08:28.756 A:middle
+
+181
+00:08:27,166 --> 00:08:28,756
 If we still need it
 now, it's too late.
 
-00:08:29.606 --> 00:08:32.426 A:middle
+
+182
+00:08:29,606 --> 00:08:32,426
 Also, you want to make sure
 you don't invalidate the layout
 
-00:08:32.426 --> 00:08:34.166 A:middle
+
+183
+00:08:32,426 --> 00:08:34,166
 of views outside your subtree.
 
-00:08:34.385 --> 00:08:37.106 A:middle
+
+184
+00:08:34,385 --> 00:08:37,106
 If you do this, it
 can be very easy
 
-00:08:37.106 --> 00:08:39.196 A:middle
+
+185
+00:08:37,106 --> 00:08:39,196
 to cause layout feedback
 loops where the act
 
-00:08:39.456 --> 00:08:42.166 A:middle
+
+186
+00:08:39,456 --> 00:08:42,166
 of performing layout
 actually causes the layout
 
-00:08:42.166 --> 00:08:43.086 A:middle
+
+187
+00:08:42,166 --> 00:08:43,086
 to be dirtied again.
 
-00:08:43.765 --> 00:08:45.486 A:middle
+
+188
+00:08:43,765 --> 00:08:45,486
 Then we can just end
 up iterating forever,
 
-00:08:45.486 --> 00:08:46.876 A:middle
+
+189
+00:08:45,486 --> 00:08:46,876
 and that's no fun for anybody.
 
-00:08:48.616 --> 00:08:52.306 A:middle
+
+190
+00:08:48,616 --> 00:08:52,306
 You'll often find inside
 a layoutSubviews override
 
-00:08:52.306 --> 00:08:54.526 A:middle
+
+191
+00:08:52,306 --> 00:08:54,526
 that you need to modify
 constraints in order
 
-00:08:54.526 --> 00:08:57.766 A:middle
+
+192
+00:08:54,526 --> 00:08:57,766
 to get your views in the right
 places, and that's fine too,
 
-00:08:57.766 --> 00:08:59.236 A:middle
+
+193
+00:08:57,766 --> 00:08:59,236
 but again, you need
 to be careful.
 
-00:08:59.676 --> 00:09:01.196 A:middle
+
+194
+00:08:59,676 --> 00:09:01,196
 It can be difficult to predict
 
 
-
-00:08:59.676 --> 00:09:01.196 A:middle
-It can be difficult to predict
-
-00:09:01.416 --> 00:09:03.996 A:middle
+195
+00:09:01,416 --> 00:09:03,996
 when you modify a
 constraint what other views
 
-00:09:03.996 --> 00:09:05.536 A:middle
+
+196
+00:09:03,996 --> 00:09:05,536
 in the hierarchy
 might be affected.
 
-00:09:05.936 --> 00:09:08.066 A:middle
+
+197
+00:09:05,936 --> 00:09:08,066
 So if you are changing
 constraints, it's very easy
 
-00:09:08.066 --> 00:09:11.346 A:middle
+
+198
+00:09:08,066 --> 00:09:11,346
 to accidentally invalidate
 layout outside your subtree.
 
-00:09:11.346 --> 00:09:15.656 A:middle
+
+199
+00:09:11,346 --> 00:09:15,656
 In any case, assuming that
 all this goes smoothly,
 
-00:09:15.806 --> 00:09:18.176 A:middle
+
+200
+00:09:15,806 --> 00:09:18,176
 layout cycle is complete at
 this point, everything is
 
-00:09:18.176 --> 00:09:20.456 A:middle
+
+201
+00:09:18,176 --> 00:09:20,456
 in the right place, and our
 constraints change has been
 
-00:09:20.546 --> 00:09:21.066 A:middle
+
+202
+00:09:20,546 --> 00:09:21,066
 fully applied.
 
-00:09:22.356 --> 00:09:25.046 A:middle
+
+203
+00:09:22,356 --> 00:09:25,046
 So some things to remember
 about the layout cycle: First,
 
-00:09:25.456 --> 00:09:27.726 A:middle
+
+204
+00:09:25,456 --> 00:09:27,726
 don't expect view frames
 to change immediately
 
-00:09:27.726 --> 00:09:28.846 A:middle
+
+205
+00:09:27,726 --> 00:09:28,846
 when you modify a constraint.
 
-00:09:28.896 --> 00:09:31.206 A:middle
+
+206
+00:09:28,896 --> 00:09:31,206
 We've just been through
 this whole process
 
-00:09:31.206 --> 00:09:32.506 A:middle
+
+207
+00:09:31,206 --> 00:09:32,506
 about how that happens later.
 
-00:09:33.056 --> 00:09:36.286 A:middle
+
+208
+00:09:33,056 --> 00:09:36,286
 And if you do find that you
 need to override layoutSubviews,
 
-00:09:36.676 --> 00:09:39.096 A:middle
+
+209
+00:09:36,676 --> 00:09:39,096
 be very careful to avoid
 layout feedback loops
 
-00:09:39.096 --> 00:09:43.116 A:middle
+
+210
+00:09:39,096 --> 00:09:43,116
 because they can
 be a pain to debug.
 
-00:09:43.116 --> 00:09:45.986 A:middle
+
+211
+00:09:43,116 --> 00:09:45,986
 So next I'd like to talk about
 how Auto Layout interacts
 
-00:09:45.986 --> 00:09:47.316 A:middle
+
+212
+00:09:45,986 --> 00:09:47,316
 with the Legacy Layout system.
 
-00:09:49.106 --> 00:09:52.136 A:middle
+
+213
+00:09:49,106 --> 00:09:52,136
 Traditionally we positioned
 views just by setting the frame,
 
-00:09:52.136 --> 00:09:54.716 A:middle
+
+214
+00:09:52,136 --> 00:09:54,716
 then we have an autoresizingMask
 
-00:09:54.766 --> 00:09:57.916 A:middle
+
+215
+00:09:54,766 --> 00:09:57,916
 that specifies how the
 view should be resized
 
-00:09:58.506 --> 00:10:00.016 A:middle
+
+216
+00:09:58,506 --> 00:10:00,016
 when its superview changes size.
 
 
-
-00:09:58.506 --> 00:10:00.016 A:middle
-when its superview changes size.
-
-00:10:00.256 --> 00:10:03.406 A:middle
+217
+00:10:00,256 --> 00:10:03,406
 Then under Auto Layout, we just
 do everything with constraints.
 
-00:10:03.696 --> 00:10:06.126 A:middle
+
+218
+00:10:03,696 --> 00:10:06,126
 And in fact, subframe
 doesn't even work the way you
 
-00:10:06.126 --> 00:10:07.396 A:middle
+
+219
+00:10:06,126 --> 00:10:07,396
 might expect.
 
-00:10:07.396 --> 00:10:10.406 A:middle
+
+220
+00:10:07,396 --> 00:10:10,406
 You can still set the
 frame of view, but --
 
-00:10:10.996 --> 00:10:13.196 A:middle
+
+221
+00:10:10,996 --> 00:10:13,196
 and it will move
 where you put it,
 
-00:10:13.556 --> 00:10:15.796 A:middle
+
+222
+00:10:13,556 --> 00:10:15,796
 but that frame may be
 overwritten at any time
 
-00:10:15.846 --> 00:10:19.596 A:middle
+
+223
+00:10:15,846 --> 00:10:19,596
 if a layout pass comes along and
 the framework copies the frame
 
-00:10:19.596 --> 00:10:21.316 A:middle
+
+224
+00:10:19,596 --> 00:10:21,316
 from the Layout Engine and
 applies it to that view.
 
-00:10:21.776 --> 00:10:23.296 A:middle
+
+225
+00:10:21,776 --> 00:10:23,296
 The trouble with this is
 
-00:10:23.336 --> 00:10:26.156 A:middle
+
+226
+00:10:23,336 --> 00:10:26,156
 that sometimes you just
 need to set the frame.
 
-00:10:26.236 --> 00:10:28.706 A:middle
+
+227
+00:10:26,236 --> 00:10:28,706
 For example, if you are
 overriding layoutSubviews,
 
-00:10:29.446 --> 00:10:31.506 A:middle
+
+228
+00:10:29,446 --> 00:10:31,506
 you may need to set the
 frame of those views.
 
-00:10:32.666 --> 00:10:34.756 A:middle
+
+229
+00:10:32,666 --> 00:10:34,756
 And so luckily, there's
 a flag for that.
 
-00:10:35.356 --> 00:10:37.256 A:middle
+
+230
+00:10:35,356 --> 00:10:37,256
 It's called
 translatesAutoResizingMask
 
-00:10:37.256 --> 00:10:38.146 A:middle
+
+231
+00:10:37,256 --> 00:10:38,146
 IntoConstraints [without space].
 
-00:10:38.496 --> 00:10:41.096 A:middle
+
+232
+00:10:38,496 --> 00:10:41,096
 It's a bit of a mouthful, but it
 pretty much does what it says.
 
-00:10:41.096 --> 00:10:43.256 A:middle
+
+233
+00:10:41,096 --> 00:10:43,256
 It makes views behave
 the way that they did
 
-00:10:43.346 --> 00:10:46.426 A:middle
+
+234
+00:10:43,346 --> 00:10:46,426
 under the Legacy Layout system
 but in an Auto Layout world.
 
-00:10:47.306 --> 00:10:51.206 A:middle
+
+235
+00:10:47,306 --> 00:10:51,206
 So if you set the frame
 on a view with this flag,
 
-00:10:51.596 --> 00:10:53.716 A:middle
+
+236
+00:10:51,596 --> 00:10:53,716
 the framework will actually
 generate constraints
 
-00:10:53.776 --> 00:10:56.336 A:middle
+
+237
+00:10:53,776 --> 00:10:56,336
 that enforce that frame
 in the Layout Engine.
 
-00:10:57.246 --> 00:11:00.436 A:middle
+
+238
+00:10:57,246 --> 00:11:00,436
 What this means is that you
 can set the frame as often
 
 
-
-00:10:57.246 --> 00:11:00.436 A:middle
-What this means is that you
-can set the frame as often
-
-00:11:00.436 --> 00:11:02.626 A:middle
+239
+00:11:00,436 --> 00:11:02,626
 as you like, and you
 can count on Auto Layout
 
-00:11:02.666 --> 00:11:05.206 A:middle
+
+240
+00:11:02,666 --> 00:11:05,206
 to keep the view
 where you put it.
 
-00:11:05.476 --> 00:11:08.566 A:middle
+
+241
+00:11:05,476 --> 00:11:08,566
 Furthermore, these constraints
 actually implement the behavior
 
-00:11:09.016 --> 00:11:10.276 A:middle
+
+242
+00:11:09,016 --> 00:11:10,276
 of the autoresizingMask.
 
-00:11:10.756 --> 00:11:14.366 A:middle
+
+243
+00:11:10,756 --> 00:11:14,366
 So if you have some portion of
 your application, for example,
 
-00:11:14.366 --> 00:11:16.896 A:middle
+
+244
+00:11:14,366 --> 00:11:16,896
 that isn't updated to Auto
 Layout yet and you are depending
 
-00:11:16.896 --> 00:11:18.526 A:middle
+
+245
+00:11:16,896 --> 00:11:18,526
 on this auto-resizing behavior,
 
-00:11:18.876 --> 00:11:20.676 A:middle
+
+246
+00:11:18,876 --> 00:11:20,676
 it should still behave
 the way that you expect.
 
-00:11:22.096 --> 00:11:25.586 A:middle
+
+247
+00:11:22,096 --> 00:11:25,586
 And finally, by actually
 using the Auto Layout Engine
 
-00:11:25.586 --> 00:11:28.966 A:middle
+
+248
+00:11:25,586 --> 00:11:28,966
 to enforce the frame that
 you set, it makes it possible
 
-00:11:28.966 --> 00:11:31.646 A:middle
+
+249
+00:11:28,966 --> 00:11:31,646
 to use constraints to
 position other views relative
 
-00:11:31.706 --> 00:11:33.616 A:middle
+
+250
+00:11:31,706 --> 00:11:33,616
 to this one.
 
-00:11:33.616 --> 00:11:35.476 A:middle
+
+251
+00:11:33,616 --> 00:11:35,476
 Since you set the frame,
 you can't move the view
 
-00:11:35.476 --> 00:11:38.996 A:middle
+
+252
+00:11:35,476 --> 00:11:38,996
 around itself, but if we
 didn't tell the Layout Engine
 
-00:11:38.996 --> 00:11:42.226 A:middle
+
+253
+00:11:38,996 --> 00:11:42,226
 where this view needed to be,
 then as soon as you reference it
 
-00:11:42.226 --> 00:11:44.996 A:middle
+
+254
+00:11:42,226 --> 00:11:44,996
 with a constraint, we
 can run into problems
 
-00:11:44.996 --> 00:11:48.576 A:middle
+
+255
+00:11:44,996 --> 00:11:48,576
 where you'll see the size or
 the origin collapse to zero.
 
-00:11:48.576 --> 00:11:51.396 A:middle
+
+256
+00:11:48,576 --> 00:11:51,396
 And that kind of behavior
 can be very confusing
 
-00:11:51.526 --> 00:11:53.966 A:middle
+
+257
+00:11:51,526 --> 00:11:53,966
 if you are not expecting it.
 
-00:11:54.416 --> 00:11:58.666 A:middle
+
+258
+00:11:54,416 --> 00:11:58,666
 So another note here is
 that when you are planning
 
-00:11:58.666 --> 00:12:00.686 A:middle
+
+259
+00:11:58,666 --> 00:12:00,686
 to position your view
 using constraints,
 
 
-
-00:11:58.666 --> 00:12:00.686 A:middle
-to position your view
-using constraints,
-
-00:12:00.916 --> 00:12:02.226 A:middle
+260
+00:12:00,916 --> 00:12:02,226
 you need to make sure
 that this is off.
 
-00:12:02.386 --> 00:12:04.516 A:middle
+
+261
+00:12:02,386 --> 00:12:04,516
 And if you are building your
 UI in Interface Builder,
 
-00:12:04.516 --> 00:12:07.506 A:middle
+
+262
+00:12:04,516 --> 00:12:07,506
 it will take good care of you
 and set this flag appropriately.
 
-00:12:08.026 --> 00:12:10.416 A:middle
+
+263
+00:12:08,026 --> 00:12:10,416
 But if you are allocating
 your UI programmatically,
 
-00:12:10.416 --> 00:12:12.176 A:middle
+
+264
+00:12:10,416 --> 00:12:12,176
 this actually defaults
 to being on.
 
-00:12:12.216 --> 00:12:14.786 A:middle
+
+265
+00:12:12,216 --> 00:12:14,786
 It needs to because
 there's just a lot of code
 
-00:12:14.786 --> 00:12:16.536 A:middle
+
+266
+00:12:14,786 --> 00:12:16,536
 that allocates a view
 and then expects it
 
-00:12:16.536 --> 00:12:18.816 A:middle
+
+267
+00:12:16,536 --> 00:12:18,816
 to behave in a certain way.
 
-00:12:19.466 --> 00:12:22.966 A:middle
+
+268
+00:12:19,466 --> 00:12:22,966
 So it defaults to on, and if
 you are allocating your UI
 
-00:12:22.966 --> 00:12:24.896 A:middle
+
+269
+00:12:22,966 --> 00:12:24,896
 programmatically and you
 forget to turn this off,
 
-00:12:24.896 --> 00:12:27.246 A:middle
+
+270
+00:12:24,896 --> 00:12:27,246
 it can cause a number
 of unexpected problems.
 
-00:12:27.806 --> 00:12:29.536 A:middle
+
+271
+00:12:27,806 --> 00:12:29,536
 Let's look at what
 happens if you forget.
 
-00:12:30.356 --> 00:12:32.536 A:middle
+
+272
+00:12:30,356 --> 00:12:32,536
 So this is a pretty
 simple piece of code.
 
-00:12:32.536 --> 00:12:34.606 A:middle
+
+273
+00:12:32,536 --> 00:12:34,606
 We just allocate a
 button and configure it,
 
-00:12:34.606 --> 00:12:36.596 A:middle
+
+274
+00:12:34,606 --> 00:12:36,596
 and then we create
 two constraints
 
-00:12:36.666 --> 00:12:39.106 A:middle
+
+275
+00:12:36,666 --> 00:12:39,106
 that position this button
 ten points from the top,
 
-00:12:39.256 --> 00:12:41.046 A:middle
+
+276
+00:12:39,256 --> 00:12:41,046
 ten points from the left.
 
-00:12:41.046 --> 00:12:42.666 A:middle
+
+277
+00:12:41,046 --> 00:12:42,666
 So it's very straightforward,
 
-00:12:42.666 --> 00:12:44.226 A:middle
+
+278
+00:12:42,666 --> 00:12:44,226
 but if you run it,
 this is what you get.
 
-00:12:44.766 --> 00:12:46.736 A:middle
+
+279
+00:12:44,766 --> 00:12:46,736
 The window is too small,
 it doesn't behave the way
 
-00:12:46.736 --> 00:12:48.736 A:middle
+
+280
+00:12:46,736 --> 00:12:48,736
 that you expect, the button
 is nowhere to be seen.
 
-00:12:49.776 --> 00:12:52.206 A:middle
+
+281
+00:12:49,776 --> 00:12:52,206
 And you get all this
 spew in the console.
 
-00:12:53.066 --> 00:12:56.266 A:middle
+
+282
+00:12:53,066 --> 00:12:56,266
 So there's actually a hint
 about the problem in this spew.
 
-00:12:56.266 --> 00:12:58.726 A:middle
+
+283
+00:12:56,266 --> 00:12:58,726
 You can see this is an
 NSAutoresizingMaskLayout
 
-00:12:58.726 --> 00:12:59.196 A:middle
+
+284
+00:12:58,726 --> 00:12:59,196
 Constraint [without space].
 
-00:12:59.866 --> 00:13:01.766 A:middle
+
+285
+00:12:59,866 --> 00:13:01,766
 This is the class
 of layout constraint
 
 
-
-00:12:59.866 --> 00:13:01.766 A:middle
-This is the class
-of layout constraint
-
-00:13:02.226 --> 00:13:04.306 A:middle
+286
+00:13:02,226 --> 00:13:04,306
 that the framework
 will create for views
 
-00:13:04.306 --> 00:13:06.146 A:middle
+
+287
+00:13:04,306 --> 00:13:06,146
 that have
 translatesAutoResizingMask
 
-00:13:06.146 --> 00:13:07.196 A:middle
+
+288
+00:13:06,146 --> 00:13:07,196
 IntoConstraints [without
 space] set.
 
-00:13:08.726 --> 00:13:11.336 A:middle
+
+289
+00:13:08,726 --> 00:13:11,336
 What actually happened
 here is because we forgot
 
-00:13:11.596 --> 00:13:15.246 A:middle
+
+290
+00:13:11,596 --> 00:13:15,246
 to clear this flag, the
 framework generated constraints
 
-00:13:15.246 --> 00:13:16.896 A:middle
+
+291
+00:13:15,246 --> 00:13:16,896
 for the initial frame
 on this button.
 
-00:13:17.256 --> 00:13:19.886 A:middle
+
+292
+00:13:17,256 --> 00:13:19,886
 That frame was empty, the origin
 and the size were both zero,
 
-00:13:20.476 --> 00:13:23.006 A:middle
+
+293
+00:13:20,476 --> 00:13:23,006
 so it's not very useful,
 but the real problem came
 
-00:13:23.006 --> 00:13:24.796 A:middle
+
+294
+00:13:23,006 --> 00:13:24,796
 up when we then added
 constraints to try
 
-00:13:24.796 --> 00:13:27.016 A:middle
+
+295
+00:13:24,796 --> 00:13:27,016
 to position the button at 10,10.
 
-00:13:27.196 --> 00:13:29.926 A:middle
+
+296
+00:13:27,196 --> 00:13:29,926
 It can't be at 0,0 and
 10,10 simultaneously,
 
-00:13:29.926 --> 00:13:32.296 A:middle
+
+297
+00:13:29,926 --> 00:13:32,296
 so the Layout Engine
 suddenly can't satisfy all the
 
-00:13:32.296 --> 00:13:35.146 A:middle
+
+298
+00:13:32,296 --> 00:13:35,146
 constraints, and things go
 wrong in unexpected ways.
 
-00:13:36.496 --> 00:13:39.976 A:middle
+
+299
+00:13:36,496 --> 00:13:39,976
 If we go back to the code
 and we just add a line
 
-00:13:39.976 --> 00:13:43.896 A:middle
+
+300
+00:13:39,976 --> 00:13:43,896
 to clear this flag, then
 things get much better.
 
-00:13:43.896 --> 00:13:46.696 A:middle
+
+301
+00:13:43,896 --> 00:13:46,696
 We get the layout that we
 are expecting, the button is
 
-00:13:46.696 --> 00:13:50.476 A:middle
+
+302
+00:13:46,696 --> 00:13:50,476
 in the right place, the window
 behaves the way we would expect.
 
-00:13:50.586 --> 00:13:52.876 A:middle
+
+303
+00:13:50,586 --> 00:13:52,876
 So some things to keep in mind
 
-00:13:52.876 --> 00:13:55.296 A:middle
+
+304
+00:13:52,876 --> 00:13:55,296
 about translatesAutoResizingMask
 IntoConstraints [without space]:
 
-00:13:55.606 --> 00:13:58.726 A:middle
+
+305
+00:13:55,606 --> 00:13:58,726
 You usually won't need this
 flag at all, but if you find
 
-00:13:58.726 --> 00:14:00.816 A:middle
+
+306
+00:13:58,726 --> 00:14:00,816
 that you have a view
 that you need to position
 
 
-
-00:13:58.726 --> 00:14:00.816 A:middle
-that you have a view
-that you need to position
-
-00:14:00.906 --> 00:14:04.166 A:middle
+307
+00:14:00,906 --> 00:14:04,166
 by setting the frame directly,
 then this will help you out.
 
-00:14:04.916 --> 00:14:07.236 A:middle
+
+308
+00:14:04,916 --> 00:14:07,236
 And again, if you are
 planning to position things
 
-00:14:07.236 --> 00:14:09.956 A:middle
+
+309
+00:14:07,236 --> 00:14:09,956
 with constraints, you need
 to make sure that this is off
 
-00:14:09.956 --> 00:14:12.896 A:middle
+
+310
+00:14:09,956 --> 00:14:12,896
 if you are not using
 Interface Builder.
 
-00:14:13.786 --> 00:14:15.996 A:middle
+
+311
+00:14:13,786 --> 00:14:15,996
 So next I'd like to talk
 about constraint creation.
 
-00:14:16.976 --> 00:14:20.476 A:middle
+
+312
+00:14:16,976 --> 00:14:20,476
 We can do that most easily,
 I think, just by looking
 
-00:14:20.476 --> 00:14:22.226 A:middle
+
+313
+00:14:20,476 --> 00:14:22,226
 at the code we just
 had up on the screen,
 
-00:14:22.626 --> 00:14:24.406 A:middle
+
+314
+00:14:22,626 --> 00:14:24,406
 specifically the
 piece at the end,
 
-00:14:24.406 --> 00:14:25.686 A:middle
+
+315
+00:14:24,406 --> 00:14:25,686
 where we are building
 these constraints.
 
-00:14:26.936 --> 00:14:30.336 A:middle
+
+316
+00:14:26,936 --> 00:14:30,336
 This is the same constraint
 factory method that we've had
 
-00:14:30.386 --> 00:14:31.926 A:middle
+
+317
+00:14:30,386 --> 00:14:31,926
 since the beginning
 of Auto Layout,
 
-00:14:31.926 --> 00:14:33.096 A:middle
+
+318
+00:14:31,926 --> 00:14:33,096
 and it's perfectly effective,
 
-00:14:33.286 --> 00:14:35.266 A:middle
+
+319
+00:14:33,286 --> 00:14:35,266
 but it can be a little
 bit awkward to use.
 
-00:14:35.946 --> 00:14:37.676 A:middle
+
+320
+00:14:35,946 --> 00:14:37,676
 The code is pretty verbose,
 
-00:14:37.676 --> 00:14:40.066 A:middle
+
+321
+00:14:37,676 --> 00:14:40,066
 and it's a little bit
 difficult to read.
 
-00:14:40.066 --> 00:14:42.096 A:middle
+
+322
+00:14:40,066 --> 00:14:42,096
 What we are really trying
 to express here is just
 
-00:14:42.126 --> 00:14:44.226 A:middle
+
+323
+00:14:42,126 --> 00:14:44,226
 that we want to position the
 button ten points from the top
 
-00:14:44.346 --> 00:14:45.546 A:middle
+
+324
+00:14:44,346 --> 00:14:45,546
 and ten points from the left.
 
-00:14:46.256 --> 00:14:48.376 A:middle
+
+325
+00:14:46,256 --> 00:14:48,376
 But in order to understand
 that, you need to read
 
-00:14:48.376 --> 00:14:49.886 A:middle
+
+326
+00:14:48,376 --> 00:14:49,886
 through this code
 pretty carefully and kind
 
-00:14:49.886 --> 00:14:50.866 A:middle
+
+327
+00:14:49,886 --> 00:14:50,866
 of put the pieces together.
 
-00:14:51.556 --> 00:14:54.246 A:middle
+
+328
+00:14:51,556 --> 00:14:54,246
 So in the new release
 of OS X and iOS,
 
-00:14:54.336 --> 00:14:56.806 A:middle
+
+329
+00:14:54,336 --> 00:14:56,806
 we are introducing a
 new, more concise syntax
 
-00:14:56.906 --> 00:14:57.956 A:middle
+
+330
+00:14:56,906 --> 00:14:57,956
 for creating constraints.
 
-00:14:58.536 --> 00:14:59.926 A:middle
+
+331
+00:14:58,536 --> 00:14:59,926
 Here is what it looks like.
 
 
-
-00:15:00.476 --> 00:15:03.966 A:middle
+332
+00:15:00,476 --> 00:15:03,966
 This syntax works using
 objects called layout anchors.
 
-00:15:04.516 --> 00:15:10.596 A:middle
+
+333
+00:15:04,516 --> 00:15:10,596
 [Applause]
 
-00:15:11.096 --> 00:15:12.956 A:middle
+
+334
+00:15:11,096 --> 00:15:12,956
 Thanks. I am glad you like them.
 
-00:15:13.031 --> 00:15:15.031 A:middle
+
+335
+00:15:13,031 --> 00:15:15,031
 [Laughter]
 
-00:15:15.046 --> 00:15:16.816 A:middle
+
+336
+00:15:15,046 --> 00:15:16,816
 A layout anchor represents
 a particular attribute
 
-00:15:16.926 --> 00:15:20.376 A:middle
+
+337
+00:15:16,926 --> 00:15:20,376
 of a particular view, and
 anchor objects expose a variety
 
-00:15:20.376 --> 00:15:23.426 A:middle
+
+338
+00:15:20,376 --> 00:15:23,426
 of factory methods for creating
 different forms of constraints.
 
-00:15:24.026 --> 00:15:26.956 A:middle
+
+339
+00:15:24,026 --> 00:15:26,956
 So in this case we see we are
 constraining the top anchor
 
-00:15:26.956 --> 00:15:31.656 A:middle
+
+340
+00:15:26,956 --> 00:15:31,656
 to be the same as the top
 anchor of the view plus ten.
 
-00:15:31.656 --> 00:15:33.416 A:middle
+
+341
+00:15:31,656 --> 00:15:33,416
 If you are working
 in Objective-C still,
 
-00:15:33.416 --> 00:15:35.096 A:middle
+
+342
+00:15:33,416 --> 00:15:35,096
 they are available
 there as well,
 
-00:15:35.096 --> 00:15:37.156 A:middle
+
+343
+00:15:35,096 --> 00:15:37,156
 and the difference is
 even more striking.
 
-00:15:37.156 --> 00:15:41.376 A:middle
+
+344
+00:15:37,156 --> 00:15:41,376
 We go from nearly seven
 lines down to just two.
 
-00:15:41.376 --> 00:15:43.296 A:middle
+
+345
+00:15:41,376 --> 00:15:43,296
 So this new syntax
 still conforms
 
-00:15:43.296 --> 00:15:46.036 A:middle
+
+346
+00:15:43,296 --> 00:15:46,036
 to all our naming conventions,
 but it reads a lot more
 
-00:15:46.036 --> 00:15:48.136 A:middle
+
+347
+00:15:46,036 --> 00:15:48,136
 like an expression and, I
 think, makes it a lot easier
 
-00:15:48.136 --> 00:15:49.706 A:middle
+
+348
+00:15:48,136 --> 00:15:49,706
 to see the intent of the code.
 
-00:15:50.956 --> 00:15:53.596 A:middle
+
+349
+00:15:50,956 --> 00:15:53,596
 All valid forms of constraints
 can be created using this
 
-00:15:53.596 --> 00:15:57.706 A:middle
+
+350
+00:15:53,596 --> 00:15:57,706
 syntax, and you'll actually even
 get compiler errors for many
 
-00:15:57.706 --> 00:15:59.396 A:middle
+
+351
+00:15:57,706 --> 00:15:59,396
 of the invalid forms
 of constraints.
 
 
-
-00:16:00.216 --> 00:16:03.726 A:middle
+352
+00:16:00,216 --> 00:16:03,726
 So at the moment, you only
 get the errors in Objective-C,
 
-00:16:03.726 --> 00:16:05.296 A:middle
+
+353
+00:16:03,726 --> 00:16:05,296
 but they will be
 coming to Swift as well.
 
-00:16:06.406 --> 00:16:08.676 A:middle
+
+354
+00:16:06,406 --> 00:16:08,676
 For example, it doesn't
 make sense to say
 
-00:16:08.676 --> 00:16:11.606 A:middle
+
+355
+00:16:08,676 --> 00:16:11,606
 that the leading edge
 of a view should be 100
 
-00:16:11.716 --> 00:16:14.486 A:middle
+
+356
+00:16:11,716 --> 00:16:14,486
 because there's no context in
 which to interpret that 100.
 
-00:16:14.876 --> 00:16:17.236 A:middle
+
+357
+00:16:14,876 --> 00:16:17,236
 So you get an error that
 this method isn't available
 
-00:16:17.376 --> 00:16:20.096 A:middle
+
+358
+00:16:17,376 --> 00:16:20,096
 on a location anchor.
 
-00:16:20.096 --> 00:16:22.996 A:middle
+
+359
+00:16:20,096 --> 00:16:22,996
 Similarly, it doesn't make
 sense to say the leading edge
 
-00:16:22.996 --> 00:16:25.186 A:middle
+
+360
+00:16:22,996 --> 00:16:25,186
 of your view is the same as
 the width of a different view.
 
-00:16:25.896 --> 00:16:29.096 A:middle
+
+361
+00:16:25,896 --> 00:16:29,096
 Locations and sizes are
 fundamentally incompatible types
 
-00:16:29.236 --> 00:16:34.856 A:middle
+
+362
+00:16:29,236 --> 00:16:34,856
 in Auto Layout, so you get
 an incompatible pointer type.
 
-00:16:34.946 --> 00:16:37.866 A:middle
+
+363
+00:16:34,946 --> 00:16:37,866
 So previously, these
 things were still errors,
 
-00:16:38.156 --> 00:16:39.676 A:middle
+
+364
+00:16:38,156 --> 00:16:39,676
 but they would only
 show up at runtime,
 
-00:16:39.866 --> 00:16:42.686 A:middle
+
+365
+00:16:39,866 --> 00:16:42,686
 so I think making them compile
 time errors will help us all get
 
-00:16:42.686 --> 00:16:44.946 A:middle
+
+366
+00:16:42,686 --> 00:16:44,946
 our constraints right
 the first time,
 
-00:16:44.946 --> 00:16:47.156 A:middle
+
+367
+00:16:44,946 --> 00:16:47,156
 as well as write more readable,
 more maintainable code.
 
-00:16:49.516 --> 00:16:54.346 A:middle
+
+368
+00:16:49,516 --> 00:16:54,346
 [Applause]
 
-00:16:54.846 --> 00:16:58.096 A:middle
+
+369
+00:16:54,846 --> 00:16:58,096
 So next I'd like to talk about
 constraining negative space.
 
-00:16:58.426 --> 00:17:00.576 A:middle
+
+370
+00:16:58,426 --> 00:17:00,576
 There are a few different
 kinds of layouts that come
 
 
-
-00:16:58.426 --> 00:17:00.576 A:middle
-There are a few different
-kinds of layouts that come
-
-00:17:00.576 --> 00:17:03.546 A:middle
+371
+00:17:00,576 --> 00:17:03,546
 up from time to time where it's
 not immediately obvious how
 
-00:17:03.546 --> 00:17:04.156 A:middle
+
+372
+00:17:03,546 --> 00:17:04,156
 to achieve them.
 
-00:17:04.685 --> 00:17:06.215 A:middle
+
+373
+00:17:04,685 --> 00:17:06,215
 Here's a couple examples.
 
-00:17:06.215 --> 00:17:10.266 A:middle
+
+374
+00:17:06,215 --> 00:17:10,266
 In the first case here, the goal
 is to make sure that the space
 
-00:17:10.266 --> 00:17:11.896 A:middle
+
+375
+00:17:10,266 --> 00:17:11,896
 between these buttons
 remains the same
 
-00:17:12.076 --> 00:17:13.376 A:middle
+
+376
+00:17:12,076 --> 00:17:13,376
 when the window is resized.
 
-00:17:13.866 --> 00:17:16.165 A:middle
+
+377
+00:17:13,866 --> 00:17:16,165
 And in the bottom, we
 have an image and a label,
 
-00:17:16.955 --> 00:17:20.646 A:middle
+
+378
+00:17:16,955 --> 00:17:20,646
 and we want to center
 them as a group rather
 
-00:17:20.646 --> 00:17:23.406 A:middle
+
+379
+00:17:20,646 --> 00:17:23,406
 than center each piece of
 the content individually.
 
-00:17:24.156 --> 00:17:25.596 A:middle
+
+380
+00:17:24,156 --> 00:17:25,596
 So it turns out that
 the solution
 
-00:17:25.596 --> 00:17:27.576 A:middle
+
+381
+00:17:25,596 --> 00:17:27,576
 to these layout problems
 is the same,
 
-00:17:27.965 --> 00:17:29.486 A:middle
+
+382
+00:17:27,965 --> 00:17:29,486
 and that's to use dummy views.
 
-00:17:30.096 --> 00:17:33.096 A:middle
+
+383
+00:17:30,096 --> 00:17:33,096
 We actually allocate empty
 views, and we constrain them
 
-00:17:33.096 --> 00:17:34.916 A:middle
+
+384
+00:17:33,096 --> 00:17:34,916
 to fill the spaces
 between the buttons.
 
-00:17:34.976 --> 00:17:37.246 A:middle
+
+385
+00:17:34,976 --> 00:17:37,246
 Once we have views
 in these spots,
 
-00:17:37.636 --> 00:17:40.006 A:middle
+
+386
+00:17:37,636 --> 00:17:40,006
 we can use an equal width
 constraint to make sure
 
-00:17:40.006 --> 00:17:43.706 A:middle
+
+387
+00:17:40,006 --> 00:17:43,706
 that their size remains the
 same as the window is resized.
 
-00:17:43.706 --> 00:17:46.106 A:middle
+
+388
+00:17:43,706 --> 00:17:46,106
 And in the bottom case,
 we can do the same thing.
 
-00:17:46.106 --> 00:17:49.286 A:middle
+
+389
+00:17:46,106 --> 00:17:49,286
 We use an empty view, and
 we constrain it to the edges
 
-00:17:49.286 --> 00:17:50.686 A:middle
+
+390
+00:17:49,286 --> 00:17:50,686
 of the image and the label,
 
-00:17:50.686 --> 00:17:53.026 A:middle
+
+391
+00:17:50,686 --> 00:17:53,026
 and then we can place
 a centering constraint
 
-00:17:53.116 --> 00:17:55.626 A:middle
+
+392
+00:17:53,116 --> 00:17:55,626
 on that empty view
 rather than on any
 
-00:17:55.626 --> 00:17:57.156 A:middle
+
+393
+00:17:55,626 --> 00:17:57,156
 of the content views themselves.
 
-00:17:57.916 --> 00:18:00.646 A:middle
+
+394
+00:17:57,916 --> 00:18:00,646
 So this works, and it's how
 we've traditionally solved these
 
 
-
-00:17:57.916 --> 00:18:00.646 A:middle
-So this works, and it's how
-we've traditionally solved these
-
-00:18:00.646 --> 00:18:03.546 A:middle
+395
+00:18:00,646 --> 00:18:03,546
 layout problems, but
 it's a little bit
 
-00:18:03.546 --> 00:18:04.976 A:middle
+
+396
+00:18:03,546 --> 00:18:04,976
 of an obscure trick, right?
 
-00:18:04.976 --> 00:18:07.836 A:middle
+
+397
+00:18:04,976 --> 00:18:07,836
 And it's also inefficient,
 especially on iOS,
 
-00:18:07.836 --> 00:18:09.876 A:middle
+
+398
+00:18:07,836 --> 00:18:09,876
 where every view has a
 layer associated with it.
 
-00:18:10.756 --> 00:18:12.056 A:middle
+
+399
+00:18:10,756 --> 00:18:12,056
 And so in the new release,
 
-00:18:12.056 --> 00:18:16.796 A:middle
+
+400
+00:18:12,056 --> 00:18:16,796
 we are exposing a new public
 class for layout guides.
 
-00:18:17.776 --> 00:18:20.366 A:middle
+
+401
+00:18:17,776 --> 00:18:20,366
 A layout guide simply
 represents a rectangle
 
-00:18:20.416 --> 00:18:21.136 A:middle
+
+402
+00:18:20,416 --> 00:18:21,136
 in the Layout Engine.
 
-00:18:21.986 --> 00:18:23.756 A:middle
+
+403
+00:18:21,986 --> 00:18:23,756
 They're very easy to use.
 
-00:18:23.956 --> 00:18:27.496 A:middle
+
+404
+00:18:23,956 --> 00:18:27,496
 All you need to do is
 allocate them and then add them
 
-00:18:27.496 --> 00:18:30.046 A:middle
+
+405
+00:18:27,496 --> 00:18:30,046
 to an owning view, and then
 you can constrain them just
 
-00:18:30.046 --> 00:18:30.856 A:middle
+
+406
+00:18:30,046 --> 00:18:30,856
 like you can a view.
 
-00:18:31.336 --> 00:18:33.106 A:middle
+
+407
+00:18:31,336 --> 00:18:33,106
 They expose anchor
 objects, so they work
 
-00:18:33.106 --> 00:18:35.186 A:middle
+
+408
+00:18:33,106 --> 00:18:35,186
 with the new constraint
 creation syntax,
 
-00:18:35.346 --> 00:18:36.866 A:middle
+
+409
+00:18:35,346 --> 00:18:36,866
 but you can also just pass them
 
-00:18:37.436 --> 00:18:39.636 A:middle
+
+410
+00:18:37,436 --> 00:18:39,636
 to the existing constraint
 factory methods.
 
-00:18:39.696 --> 00:18:42.336 A:middle
+
+411
+00:18:39,696 --> 00:18:42,336
 So they will work with
 visual format language
 
-00:18:42.336 --> 00:18:42.946 A:middle
+
+412
+00:18:42,336 --> 00:18:42,946
 and things like that.
 
-00:18:44.076 --> 00:18:46.156 A:middle
+
+413
+00:18:44,076 --> 00:18:46,156
 We are converting
 existing layout guides
 
-00:18:46.156 --> 00:18:52.006 A:middle
+
+414
+00:18:46,156 --> 00:18:52,006
 to use these internally, and
 here is a good example of that.
 
-00:18:52.006 --> 00:18:55.336 A:middle
+
+415
+00:18:52,006 --> 00:18:55,336
 UIView, you may notice, doesn't
 actually expose layout anchors
 
-00:18:55.426 --> 00:18:56.546 A:middle
+
+416
+00:18:55,426 --> 00:18:56,546
 for the margin attributes.
 
-00:18:57.066 --> 00:19:00.076 A:middle
+
+417
+00:18:57,066 --> 00:19:00,076
 Instead, UI View has a
 new layout margins guide.
 
 
-
-00:18:57.066 --> 00:19:00.076 A:middle
-Instead, UI View has a
-new layout margins guide.
-
-00:19:00.286 --> 00:19:02.786 A:middle
+418
+00:19:00,286 --> 00:19:02,786
 This layout guide just
 represents the area
 
-00:19:02.786 --> 00:19:04.546 A:middle
+
+419
+00:19:02,786 --> 00:19:04,546
 of the view inside the margins.
 
-00:19:05.686 --> 00:19:08.776 A:middle
+
+420
+00:19:05,686 --> 00:19:08,776
 And so if you need to constrain
 something to the margins,
 
-00:19:08.776 --> 00:19:11.746 A:middle
+
+421
+00:19:08,776 --> 00:19:11,746
 it's easiest to just go
 through this layout guide.
 
-00:19:12.456 --> 00:19:16.216 A:middle
+
+422
+00:19:12,456 --> 00:19:16,216
 So layout guides don't really
 enable any fundamentally
 
-00:19:16.216 --> 00:19:16.886 A:middle
+
+423
+00:19:16,216 --> 00:19:16,886
 new behavior.
 
-00:19:16.886 --> 00:19:20.226 A:middle
+
+424
+00:19:16,886 --> 00:19:20,226
 You can do all of these
 things today using views.
 
-00:19:20.706 --> 00:19:22.536 A:middle
+
+425
+00:19:20,706 --> 00:19:22,536
 But they let you solve
 these kinds of problems
 
-00:19:22.536 --> 00:19:24.916 A:middle
+
+426
+00:19:22,536 --> 00:19:24,916
 in a much more lightweight
 manner and also
 
-00:19:24.976 --> 00:19:28.456 A:middle
+
+427
+00:19:24,976 --> 00:19:28,456
 without cluttering your
 view hierarchy with views
 
-00:19:28.456 --> 00:19:29.936 A:middle
+
+428
+00:19:28,456 --> 00:19:29,936
 that don't actually
 need to draw.
 
-00:19:31.386 --> 00:19:35.736 A:middle
+
+429
+00:19:31,386 --> 00:19:35,736
 So next I'd like to invite Kasia
 back on stage to talk to you
 
-00:19:35.736 --> 00:19:38.026 A:middle
+
+430
+00:19:35,736 --> 00:19:38,026
 about some debugging
 strategies for problems
 
-00:19:38.026 --> 00:19:38.866 A:middle
+
+431
+00:19:38,026 --> 00:19:38,866
 that come up with Auto Layout.
 
-00:19:39.516 --> 00:19:46.406 A:middle
+
+432
+00:19:39,516 --> 00:19:46,406
 [Applause]
 
-00:19:46.906 --> 00:19:47.256 A:middle
-&gt;&gt; KASIA WAWER: Hello.
 
-00:19:47.766 --> 00:19:49.666 A:middle
+433
+00:19:46,906 --> 00:19:47,256
+>> KASIA WAWER: Hello.
+
+
+434
+00:19:47,766 --> 00:19:49,666
 I saw some of you
 this morning, I think.
 
-00:19:50.116 --> 00:19:50.816 A:middle
+
+435
+00:19:50,116 --> 00:19:50,816
 My name is Kasia.
 
-00:19:50.906 --> 00:19:53.826 A:middle
+
+436
+00:19:50,906 --> 00:19:53,826
 I am on the iOS Keyboards Team,
 and I am here to talk to you
 
-00:19:53.826 --> 00:19:55.936 A:middle
+
+437
+00:19:53,826 --> 00:19:55,936
 about debugging your
 layout, what you should do
 
-00:19:55.936 --> 00:19:56.896 A:middle
+
+438
+00:19:55,936 --> 00:19:56,896
 when something goes wrong.
 
-00:19:57.616 --> 00:19:59.976 A:middle
+
+439
+00:19:57,616 --> 00:19:59,976
 Those of you who have used
 Auto Layout in the past --
 
-00:19:59.976 --> 00:20:02.946 A:middle
+
+440
+00:19:59,976 --> 00:20:02,946
 which I hope is most of you --
 have probably run into something
 
 
-
-00:19:59.976 --> 00:20:02.946 A:middle
-which I hope is most of you --
-have probably run into something
-
-00:20:02.946 --> 00:20:07.136 A:middle
+441
+00:20:02,946 --> 00:20:07,136
 like this: You design a
 UI, and it's beautiful,
 
-00:20:07.536 --> 00:20:09.086 A:middle
+
+442
+00:20:07,536 --> 00:20:09,086
 and you're trying to
 implement it in your code,
 
-00:20:09.086 --> 00:20:10.596 A:middle
+
+443
+00:20:09,086 --> 00:20:10,596
 and you put in all your
 constraints carefully,
 
-00:20:10.596 --> 00:20:11.346 A:middle
+
+444
+00:20:10,596 --> 00:20:11,346
 and you adjust things.
 
-00:20:11.686 --> 00:20:13.696 A:middle
+
+445
+00:20:11,686 --> 00:20:13,696
 And you hit build and
 run, and this happens.
 
-00:20:14.896 --> 00:20:17.336 A:middle
+
+446
+00:20:14,896 --> 00:20:17,336
 Totally the wrong thing,
 and in the debugger,
 
-00:20:17.456 --> 00:20:19.796 A:middle
+
+447
+00:20:17,456 --> 00:20:19,796
 you see something like this.
 
-00:20:20.056 --> 00:20:22.056 A:middle
+
+448
+00:20:20,056 --> 00:20:22,056
 That's a lot of text; it can
 be a little intimidating.
 
-00:20:22.056 --> 00:20:24.006 A:middle
+
+449
+00:20:22,056 --> 00:20:24,006
 But it's actually a
 really useful log.
 
-00:20:24.756 --> 00:20:28.466 A:middle
+
+450
+00:20:24,756 --> 00:20:28,466
 And this happens when you hit an
 unsatisfiable constraint error.
 
-00:20:28.946 --> 00:20:31.006 A:middle
+
+451
+00:20:28,946 --> 00:20:31,006
 The engine has looked at the set
 of constraints you've given it
 
-00:20:31.396 --> 00:20:33.916 A:middle
+
+452
+00:20:31,396 --> 00:20:33,916
 and decided that it can't
 actually solve your layout
 
-00:20:33.916 --> 00:20:35.836 A:middle
+
+453
+00:20:33,916 --> 00:20:35,836
 because something is
 conflicting with something else,
 
-00:20:36.286 --> 00:20:37.936 A:middle
+
+454
+00:20:36,286 --> 00:20:37,936
 so it needs to break
 one of your constraints
 
-00:20:37.936 --> 00:20:39.616 A:middle
+
+455
+00:20:37,936 --> 00:20:39,616
 in order to solve your view.
 
-00:20:40.016 --> 00:20:43.136 A:middle
+
+456
+00:20:40,016 --> 00:20:43,136
 And so it throws this error
 to tell you what it did,
 
-00:20:43.946 --> 00:20:47.226 A:middle
+
+457
+00:20:43,946 --> 00:20:47,226
 and you know, then you need
 to go and dig in and find
 
-00:20:47.226 --> 00:20:48.416 A:middle
+
+458
+00:20:47,226 --> 00:20:48,416
 that extra competing constraint.
 
-00:20:49.166 --> 00:20:51.306 A:middle
+
+459
+00:20:49,166 --> 00:20:51,306
 So let's try reading
 this log a little bit.
 
-00:20:51.576 --> 00:20:54.206 A:middle
+
+460
+00:20:51,576 --> 00:20:54,206
 So here's the view we just
 saw and the log we got.
 
-00:20:54.206 --> 00:20:55.936 A:middle
+
+461
+00:20:54,206 --> 00:20:55,936
 We've moved some
 stuff from the top
 
-00:20:56.006 --> 00:20:57.366 A:middle
+
+462
+00:20:56,006 --> 00:20:57,366
 to make it fit on the screen.
 
-00:20:57.856 --> 00:21:00.296 A:middle
+
+463
+00:20:57,856 --> 00:21:00,296
 But the first place to start
 is by looking at the bottom.
 
 
-
-00:20:57.856 --> 00:21:00.296 A:middle
-But the first place to start
-is by looking at the bottom.
-
-00:21:01.166 --> 00:21:03.156 A:middle
+464
+00:21:01,166 --> 00:21:03,156
 The last thing you
 see is the constraint
 
-00:21:03.156 --> 00:21:04.126 A:middle
+
+465
+00:21:03,156 --> 00:21:04,126
 that was actually broken.
 
-00:21:04.626 --> 00:21:06.936 A:middle
+
+466
+00:21:04,626 --> 00:21:06,936
 This is not necessarily the
 constraint that's causing the
 
-00:21:06.936 --> 00:21:09.736 A:middle
+
+467
+00:21:06,936 --> 00:21:09,736
 problem but the one the
 engine had to break in order
 
-00:21:09.736 --> 00:21:12.226 A:middle
+
+468
+00:21:09,736 --> 00:21:12,226
 to solve your layout, so it's
 a really good place to start.
 
-00:21:13.216 --> 00:21:15.226 A:middle
+
+469
+00:21:13,216 --> 00:21:15,226
 You start with checking
 translatesAutoResizingMask
 
-00:21:15.226 --> 00:21:16.486 A:middle
+
+470
+00:21:15,226 --> 00:21:16,486
 IntoConstraints [without
 space] on that view.
 
-00:21:16.906 --> 00:21:19.776 A:middle
+
+471
+00:21:16,906 --> 00:21:19,776
 As you saw with Jesse's
 example, that will show up also
 
-00:21:19.776 --> 00:21:21.596 A:middle
+
+472
+00:21:19,776 --> 00:21:21,596
 in the log, but it's
 usually a good thing
 
-00:21:21.596 --> 00:21:23.116 A:middle
+
+473
+00:21:21,596 --> 00:21:23,116
 to make sure you've
 done that first.
 
-00:21:23.586 --> 00:21:26.626 A:middle
+
+474
+00:21:23,586 --> 00:21:26,626
 In this case, we have an
 aspect ratio constraint
 
-00:21:26.626 --> 00:21:27.726 A:middle
+
+475
+00:21:26,626 --> 00:21:27,726
 on Saturn that was broken.
 
-00:21:28.436 --> 00:21:30.146 A:middle
+
+476
+00:21:28,436 --> 00:21:30,146
 So let's highlight that
 higher up in the log.
 
-00:21:30.146 --> 00:21:32.096 A:middle
+
+477
+00:21:30,146 --> 00:21:32,096
 It will show up in
 the log itself.
 
-00:21:32.096 --> 00:21:36.306 A:middle
+
+478
+00:21:32,096 --> 00:21:36,306
 The next thing to do is to
 find the other constraints
 
-00:21:36.306 --> 00:21:38.186 A:middle
+
+479
+00:21:36,306 --> 00:21:38,186
 that are affecting that view
 that show up in the log.
 
-00:21:39.026 --> 00:21:42.856 A:middle
+
+480
+00:21:39,026 --> 00:21:42,856
 So in this case, we next see a
 leading to superview constraint
 
-00:21:42.856 --> 00:21:46.396 A:middle
+
+481
+00:21:42,856 --> 00:21:46,396
 and a trailing to superview
 constraint, and one to the top,
 
-00:21:47.346 --> 00:21:49.256 A:middle
+
+482
+00:21:47,346 --> 00:21:49,256
 and then one to the
 label view underneath it.
 
-00:21:50.216 --> 00:21:51.106 A:middle
+
+483
+00:21:50,216 --> 00:21:51,106
 And all of these are fine.
 
-00:21:51.106 --> 00:21:52.686 A:middle
+
+484
+00:21:51,106 --> 00:21:52,686
 None of these are
 directly conflicting.
 
-00:21:53.316 --> 00:21:55.906 A:middle
+
+485
+00:21:53,316 --> 00:21:55,906
 So the next thing to look at
 are the views it's tied to,
 
-00:21:55.936 --> 00:21:56.916 A:middle
+
+486
+00:21:55,936 --> 00:21:56,916
 in this case, the label.
 
-00:21:58.046 --> 00:22:00.336 A:middle
+
+487
+00:21:58,046 --> 00:22:00,336
 So this label has the same
 constraint that ties it
 
 
-
-00:21:58.046 --> 00:22:00.336 A:middle
-So this label has the same
-constraint that ties it
-
-00:22:00.336 --> 00:22:03.446 A:middle
+488
+00:22:00,336 --> 00:22:03,446
 to the bottom of Saturn, and the
 next constraint it has is one
 
-00:22:03.446 --> 00:22:04.896 A:middle
+
+489
+00:22:03,446 --> 00:22:04,896
 that ties it to the
 top of a superview.
 
-00:22:04.896 --> 00:22:08.076 A:middle
+
+490
+00:22:04,896 --> 00:22:08,076
 And this is a problem because
 Saturn is supposed to be more
 
-00:22:08.076 --> 00:22:10.616 A:middle
+
+491
+00:22:08,076 --> 00:22:10,616
 than 100 points tall, and
 this constraint is telling it
 
-00:22:10.616 --> 00:22:11.136 A:middle
+
+492
+00:22:10,616 --> 00:22:11,136
 to be that way.
 
-00:22:11.776 --> 00:22:14.626 A:middle
+
+493
+00:22:11,776 --> 00:22:14,626
 You'll notice that
 the constraint next
 
-00:22:14.706 --> 00:22:19.386 A:middle
+
+494
+00:22:14,706 --> 00:22:19,386
 to the label there tells you
 exactly what the constraint
 
-00:22:19.386 --> 00:22:20.836 A:middle
+
+495
+00:22:19,386 --> 00:22:20,836
 looks like in something
 very similar
 
-00:22:20.836 --> 00:22:23.166 A:middle
+
+496
+00:22:20,836 --> 00:22:23,166
 to the visual format language
 that you may have used
 
-00:22:23.166 --> 00:22:24.506 A:middle
+
+497
+00:22:23,166 --> 00:22:24,506
 for creating your
 constraints in the past.
 
-00:22:24.686 --> 00:22:27.416 A:middle
+
+498
+00:22:24,686 --> 00:22:27,416
 So we see that it's 100 points
 from the top of the superview,
 
-00:22:27.906 --> 00:22:29.706 A:middle
+
+499
+00:22:27,906 --> 00:22:29,706
 and again, since Saturn
 needs to be more than that,
 
-00:22:30.086 --> 00:22:31.276 A:middle
+
+500
+00:22:30,086 --> 00:22:31,276
 it had to break one
 of the constraints
 
-00:22:31.276 --> 00:22:32.256 A:middle
+
+501
+00:22:31,276 --> 00:22:32,256
 in order to solve your layout.
 
-00:22:33.036 --> 00:22:35.246 A:middle
+
+502
+00:22:33,036 --> 00:22:35,246
 So it's actually not
 that difficult to read.
 
-00:22:36.116 --> 00:22:38.726 A:middle
+
+503
+00:22:36,116 --> 00:22:38,726
 Now, I have made it
 a little bit easier
 
-00:22:38.886 --> 00:22:41.576 A:middle
+
+504
+00:22:38,886 --> 00:22:41,576
 because you probably are used
 to seeing constraints logs
 
-00:22:41.576 --> 00:22:44.076 A:middle
+
+505
+00:22:41,576 --> 00:22:44,076
 that look more like this,
 where there's just a bunch
 
-00:22:44.076 --> 00:22:47.586 A:middle
+
+506
+00:22:44,076 --> 00:22:47,586
 of memory addresses and class
 names and there's nothing really
 
-00:22:47.586 --> 00:22:49.846 A:middle
+
+507
+00:22:47,586 --> 00:22:49,846
 to tell you what's what unless
 you have nav text in your view.
 
-00:22:50.766 --> 00:22:52.646 A:middle
+
+508
+00:22:50,766 --> 00:22:52,646
 It's much easier if it
 looks something like this.
 
-00:22:53.736 --> 00:22:55.236 A:middle
+
+509
+00:22:53,736 --> 00:22:55,236
 In order to achieve
 that, all you need
 
-00:22:55.236 --> 00:22:57.156 A:middle
+
+510
+00:22:55,236 --> 00:22:57,156
 to do is add identifiers
 to your constraints.
 
-00:22:57.766 --> 00:22:59.096 A:middle
+
+511
+00:22:57,766 --> 00:22:59,096
 And there's a couple
 easy ways to do that.
 
-00:22:59.096 --> 00:23:02.026 A:middle
+
+512
+00:22:59,096 --> 00:23:02,026
 If you are using
 explicit constraints,
 
 
-
-00:22:59.096 --> 00:23:02.026 A:middle
-If you are using
-explicit constraints,
-
-00:23:02.026 --> 00:23:02.886 A:middle
+513
+00:23:02,026 --> 00:23:02,886
 it's just a property.
 
-00:23:03.666 --> 00:23:06.446 A:middle
+
+514
+00:23:03,666 --> 00:23:06,446
 I suggest naming the
 identifier the same thing
 
-00:23:06.446 --> 00:23:08.396 A:middle
+
+515
+00:23:06,446 --> 00:23:08,396
 as you are naming your
 constraint just so it's easy
 
-00:23:08.396 --> 00:23:10.756 A:middle
+
+516
+00:23:08,396 --> 00:23:10,756
 to find later if you need
 to dig it out of your code.
 
-00:23:11.376 --> 00:23:15.026 A:middle
+
+517
+00:23:11,376 --> 00:23:15,026
 But you can name it anything
 you want, so go forth and do so.
 
-00:23:15.026 --> 00:23:18.046 A:middle
+
+518
+00:23:15,026 --> 00:23:18,046
 If you are using Visual Format
 Language, you get an array back,
 
-00:23:18.046 --> 00:23:19.946 A:middle
+
+519
+00:23:18,046 --> 00:23:19,946
 you don't get a constraint
 back, so you have to loop
 
-00:23:19.946 --> 00:23:22.626 A:middle
+
+520
+00:23:19,946 --> 00:23:22,626
 through that array and set the
 identifier on every constraint.
 
-00:23:23.176 --> 00:23:25.086 A:middle
+
+521
+00:23:23,176 --> 00:23:25,086
 You can set the same
 identifier on every constraint
 
-00:23:25.086 --> 00:23:27.026 A:middle
+
+522
+00:23:25,086 --> 00:23:27,026
 in the array, and that's
 generally a good idea.
 
-00:23:27.366 --> 00:23:29.636 A:middle
+
+523
+00:23:27,366 --> 00:23:29,636
 If you try to pick out the
 individual constraints there
 
-00:23:29.636 --> 00:23:32.096 A:middle
+
+524
+00:23:29,636 --> 00:23:32,096
 and set identifiers on them
 and you change something
 
-00:23:32.096 --> 00:23:33.786 A:middle
+
+525
+00:23:32,096 --> 00:23:33,786
 in that array later, the
 ordering is going to change
 
-00:23:33.786 --> 00:23:34.666 A:middle
+
+526
+00:23:33,786 --> 00:23:34,666
 and you are going
 to have to go back
 
-00:23:34.666 --> 00:23:36.396 A:middle
+
+527
+00:23:34,666 --> 00:23:36,396
 and change your identifier
 order as well.
 
-00:23:37.016 --> 00:23:40.806 A:middle
+
+528
+00:23:37,016 --> 00:23:40,806
 Plus once you see that phrase
 in your log, you know exactly
 
-00:23:40.806 --> 00:23:42.256 A:middle
+
+529
+00:23:40,806 --> 00:23:42,256
 where you are going to
 look for the problem,
 
-00:23:42.256 --> 00:23:45.356 A:middle
+
+530
+00:23:42,256 --> 00:23:45,356
 so you don't really need to have
 each specific constraint laid
 
-00:23:45.356 --> 00:23:45.706 A:middle
+
+531
+00:23:45,356 --> 00:23:45,706
 out there.
 
-00:23:46.446 --> 00:23:47.476 A:middle
+
+532
+00:23:46,446 --> 00:23:47,476
 Finally, Interface Builder
 
-00:23:48.086 --> 00:23:50.646 A:middle
+
+533
+00:23:48,086 --> 00:23:50,646
 in the constraint inspector just
 has an identifier property right
 
-00:23:50.646 --> 00:23:53.226 A:middle
+
+534
+00:23:50,646 --> 00:23:53,226
 there, so that's super easy.
 
-00:23:54.276 --> 00:23:54.516 A:middle
+
+535
+00:23:54,276 --> 00:23:54,516
 Let's see.
 
-00:23:54.516 --> 00:23:58.106 A:middle
+
+536
+00:23:54,516 --> 00:23:58,106
 So let's talk about, you
 know, understanding this log,
 
-00:23:58.546 --> 00:24:01.516 A:middle
+
+537
+00:23:58,546 --> 00:24:01,516
 and making it even easier
 to know what's going on.
 
 
-
-00:23:58.546 --> 00:24:01.516 A:middle
-and making it even easier
-to know what's going on.
-
-00:24:02.566 --> 00:24:06.216 A:middle
+538
+00:24:02,566 --> 00:24:06,216
 First, if you set accessibility
 identifiers on your views,
 
-00:24:07.046 --> 00:24:08.936 A:middle
+
+539
+00:24:07,046 --> 00:24:08,936
 those identifiers will
 show up in the log paired
 
-00:24:08.936 --> 00:24:10.816 A:middle
+
+540
+00:24:08,936 --> 00:24:10,816
 with those views, so you
 can find the view you are
 
-00:24:10.816 --> 00:24:11.246 A:middle
+
+541
+00:24:10,816 --> 00:24:11,246
 looking for.
 
-00:24:11.246 --> 00:24:13.946 A:middle
+
+542
+00:24:11,246 --> 00:24:13,946
 That's how I got Saturn from
 the constraints we saw earlier.
 
-00:24:13.976 --> 00:24:16.396 A:middle
+
+543
+00:24:13,976 --> 00:24:16,396
 It has an accessibility
 identifier called Saturn.
 
-00:24:17.156 --> 00:24:19.516 A:middle
+
+544
+00:24:17,156 --> 00:24:19,516
 You can also set identifiers
 on our new layout guides,
 
-00:24:20.076 --> 00:24:22.286 A:middle
+
+545
+00:24:20,076 --> 00:24:22,286
 and that's just a flat-out
 identifier property,
 
-00:24:22.286 --> 00:24:25.216 A:middle
+
+546
+00:24:22,286 --> 00:24:25,216
 nothing special about it, which
 makes it super easy, again,
 
-00:24:25.696 --> 00:24:27.316 A:middle
+
+547
+00:24:25,696 --> 00:24:27,316
 to debug layouts that
 are using layout guides,
 
-00:24:27.656 --> 00:24:29.176 A:middle
+
+548
+00:24:27,656 --> 00:24:29,176
 and since they're awesome I'm
 pretty sure all of you are going
 
-00:24:29.176 --> 00:24:30.196 A:middle
+
+549
+00:24:29,176 --> 00:24:30,196
 to be using them at some point.
 
-00:24:30.926 --> 00:24:31.956 A:middle
+
+550
+00:24:30,926 --> 00:24:31,956
 Add them as you go.
 
-00:24:32.806 --> 00:24:35.946 A:middle
+
+551
+00:24:32,806 --> 00:24:35,946
 If you try and take a very
 complex layout now and throw all
 
-00:24:35.946 --> 00:24:37.546 A:middle
+
+552
+00:24:35,946 --> 00:24:37,546
 of your identifiers
 in, you can do it.
 
-00:24:37.546 --> 00:24:38.366 A:middle
+
+553
+00:24:37,546 --> 00:24:38,366
 It will take time.
 
-00:24:38.366 --> 00:24:41.046 A:middle
+
+554
+00:24:38,366 --> 00:24:41,046
 It's worth it because you will
 be able to read this log later.
 
-00:24:41.046 --> 00:24:43.916 A:middle
+
+555
+00:24:41,046 --> 00:24:43,916
 But if you are doing it as
 you go, that's a lot less work
 
-00:24:43.916 --> 00:24:45.996 A:middle
+
+556
+00:24:43,916 --> 00:24:45,996
 down the road because
 you can't really predict
 
-00:24:45.996 --> 00:24:47.706 A:middle
+
+557
+00:24:45,996 --> 00:24:47,706
 when you are going to run into
 this problem, necessarily,
 
-00:24:48.046 --> 00:24:50.246 A:middle
+
+558
+00:24:48,046 --> 00:24:50,246
 and you want to have it
 there when you need it.
 
-00:24:51.046 --> 00:24:54.056 A:middle
+
+559
+00:24:51,046 --> 00:24:54,056
 Finally, if you have an
 unsatisfiable constraints log
 
-00:24:54.056 --> 00:24:55.346 A:middle
+
+560
+00:24:54,056 --> 00:24:55,346
 that just has too
 much information,
 
-00:24:55.716 --> 00:24:57.896 A:middle
+
+561
+00:24:55,716 --> 00:24:57,896
 you have a very complex
 layout, there are hundreds
 
-00:24:57.896 --> 00:24:59.986 A:middle
+
+562
+00:24:57,896 --> 00:24:59,986
 of lines there, you
 can take that view
 
-00:24:59.986 --> 00:25:02.136 A:middle
+
+563
+00:24:59,986 --> 00:25:02,136
 at the bottom especially and
 other views that you are looking
 
 
-
-00:24:59.986 --> 00:25:02.136 A:middle
-at the bottom especially and
-other views that you are looking
-
-00:25:02.136 --> 00:25:04.716 A:middle
+564
+00:25:02,136 --> 00:25:04,716
 at and actually view the
 constraints affecting them one
 
-00:25:04.716 --> 00:25:05.866 A:middle
+
+565
+00:25:04,716 --> 00:25:05,866
 at a time in the debugger.
 
-00:25:06.496 --> 00:25:06.916 A:middle
+
+566
+00:25:06,496 --> 00:25:06,916
 On iOS,
 
-00:25:06.916 --> 00:25:08.626 A:middle
+
+567
+00:25:06,916 --> 00:25:08,626
 it's constraintsAffectingLayout
 ForAxis [without space],
 
-00:25:09.106 --> 00:25:09.776 A:middle
+
+568
+00:25:09,106 --> 00:25:09,776
 and on OS X,
 
-00:25:09.776 --> 00:25:11.896 A:middle
+
+569
+00:25:09,776 --> 00:25:11,896
 it's constraintsAffectingLayout
 ForOrientation [without space].
 
-00:25:11.896 --> 00:25:15.256 A:middle
+
+570
+00:25:11,896 --> 00:25:15,256
 And that will tell you just the
 constraints that are affecting
 
-00:25:15.256 --> 00:25:18.926 A:middle
+
+571
+00:25:15,256 --> 00:25:18,926
 that view in one
 axis or another.
 
-00:25:19.546 --> 00:25:23.666 A:middle
+
+572
+00:25:19,546 --> 00:25:23,666
 So let's look at how
 that works for here.
 
-00:25:25.026 --> 00:25:31.456 A:middle
+
+573
+00:25:25,026 --> 00:25:31,456
 So I've got that view
 that we just looked at.
 
-00:25:31.716 --> 00:25:33.036 A:middle
+
+574
+00:25:31,716 --> 00:25:33,036
 We see the same log down here.
 
-00:25:33.786 --> 00:25:35.846 A:middle
+
+575
+00:25:33,786 --> 00:25:35,846
 But let's wipe that out for the
 moment because I really want
 
-00:25:35.846 --> 00:25:38.796 A:middle
+
+576
+00:25:35,846 --> 00:25:38,796
 to show you how else
 to look at this.
 
-00:25:38.866 --> 00:25:41.146 A:middle
+
+577
+00:25:38,866 --> 00:25:41,146
 I have set a two-finger
 double-tap just to break here
 
-00:25:41.146 --> 00:25:42.286 A:middle
+
+578
+00:25:41,146 --> 00:25:42,286
 so I don't have to
 use memory addresses.
 
-00:25:42.286 --> 00:25:43.836 A:middle
+
+579
+00:25:42,286 --> 00:25:43,836
 I can use the names I've set up.
 
-00:25:43.836 --> 00:25:49.186 A:middle
+
+580
+00:25:43,836 --> 00:25:49,186
 So we are going to break into
 the debugger here and ask it
 
-00:25:49.366 --> 00:25:54.906 A:middle
+
+581
+00:25:49,366 --> 00:25:54,906
 to print out Saturn's
 constraintsAffectingLayout
 
-00:25:54.906 --> 00:25:56.546 A:middle
+
+582
+00:25:54,906 --> 00:25:56,546
 ForAxis [without space]
 and its vertical axis.
 
-00:25:57.456 --> 00:26:00.976 A:middle
+
+583
+00:25:57,456 --> 00:26:00,976
 Vertical is 1, horizontal is 0.
 
 
-
-00:25:57.456 --> 00:26:00.976 A:middle
-Vertical is 1, horizontal is 0.
-
-00:26:00.976 --> 00:26:02.786 A:middle
+584
+00:26:00,976 --> 00:26:02,786
 If you use the wrong one, you
 only have one other option,
 
-00:26:02.786 --> 00:26:04.626 A:middle
+
+585
+00:26:02,786 --> 00:26:04,626
 so it's pretty easy
 to get back to it.
 
-00:26:04.846 --> 00:26:07.336 A:middle
+
+586
+00:26:04,846 --> 00:26:07,336
 So here we see the
 view has a layout guide
 
-00:26:07.466 --> 00:26:10.276 A:middle
+
+587
+00:26:07,466 --> 00:26:10,276
 at the top, and that's fine.
 
-00:26:10.506 --> 00:26:11.726 A:middle
+
+588
+00:26:10,506 --> 00:26:11,726
 That's the view's constraints.
 
-00:26:12.466 --> 00:26:14.406 A:middle
+
+589
+00:26:12,466 --> 00:26:14,406
 One of the other benefits
 to naming your constraints
 
-00:26:14.406 --> 00:26:15.876 A:middle
+
+590
+00:26:14,406 --> 00:26:15,876
 in your views is that
 you know pretty quickly
 
-00:26:15.876 --> 00:26:18.106 A:middle
+
+591
+00:26:15,876 --> 00:26:18,106
 which ones were set up
 outside of your constraints
 
-00:26:18.106 --> 00:26:19.306 A:middle
+
+592
+00:26:18,106 --> 00:26:19,306
 and which ones were
 set up by you.
 
-00:26:19.596 --> 00:26:22.896 A:middle
+
+593
+00:26:19,596 --> 00:26:22,896
 So our vertical layout for
 Saturn tells us that it's tied
 
-00:26:22.896 --> 00:26:23.896 A:middle
+
+594
+00:26:22,896 --> 00:26:23,896
 to the top layout guide.
 
-00:26:24.946 --> 00:26:25.386 A:middle
+
+595
+00:26:24,946 --> 00:26:25,386
 That's great.
 
-00:26:25.386 --> 00:26:29.176 A:middle
+
+596
+00:26:25,386 --> 00:26:29,176
 It also tells us that Saturn is
 tied to the label underneath it.
 
-00:26:30.146 --> 00:26:32.306 A:middle
+
+597
+00:26:30,146 --> 00:26:32,306
 And then in another
 constraint that affects Saturn
 
-00:26:32.376 --> 00:26:33.836 A:middle
+
+598
+00:26:32,376 --> 00:26:33,836
 but isn't directly
 related to Saturn,
 
-00:26:34.136 --> 00:26:36.466 A:middle
+
+599
+00:26:34,136 --> 00:26:36,466
 we see that constraint
 that's tying the label
 
-00:26:36.466 --> 00:26:37.356 A:middle
+
+600
+00:26:36,466 --> 00:26:37,356
 to the top of the view.
 
-00:26:37.866 --> 00:26:39.806 A:middle
+
+601
+00:26:37,866 --> 00:26:39,806
 Since it doesn't
 mention Saturn anywhere,
 
-00:26:39.806 --> 00:26:42.036 A:middle
+
+602
+00:26:39,806 --> 00:26:42,036
 that's a pretty good clue
 that it's the wrong one --
 
-00:26:42.376 --> 00:26:43.866 A:middle
+
+603
+00:26:42,376 --> 00:26:43,866
 also that whole Saturn
 is supposed to be more
 
-00:26:43.866 --> 00:26:46.256 A:middle
+
+604
+00:26:43,866 --> 00:26:46,256
 than a hundred points thing,
 which I happen to know
 
-00:26:46.256 --> 00:26:48.346 A:middle
+
+605
+00:26:46,256 --> 00:26:48,346
 since I wrote this code.
 
-00:26:48.596 --> 00:26:51.866 A:middle
+
+606
+00:26:48,596 --> 00:26:51,866
 Now that I've got this
 nice handy label here,
 
-00:26:51.866 --> 00:26:54.596 A:middle
+
+607
+00:26:51,866 --> 00:26:54,596
 I can simply search for
 it, find the constraint
 
-00:26:54.596 --> 00:26:55.916 A:middle
+
+608
+00:26:54,596 --> 00:26:55,916
 that I made, and there we go.
 
-00:26:55.916 --> 00:26:58.246 A:middle
+
+609
+00:26:55,916 --> 00:26:58,246
 I have tied it to the top
 anchor by a hundred points.
 
-00:26:58.956 --> 00:27:01.666 A:middle
+
+610
+00:26:58,956 --> 00:27:01,666
 And find out where
 it's activated.
 
 
-
-00:26:58.956 --> 00:27:01.666 A:middle
-And find out where
-it's activated.
-
-00:27:02.616 --> 00:27:04.786 A:middle
+611
+00:27:02,616 --> 00:27:04,786
 And get rid of it.
 
-00:27:05.036 --> 00:27:05.726 A:middle
+
+612
+00:27:05,036 --> 00:27:05,726
 Build again.
 
-00:27:06.446 --> 00:27:08.706 A:middle
+
+613
+00:27:06,446 --> 00:27:08,706
 That's much better.
 
-00:27:08.706 --> 00:27:10.136 A:middle
+
+614
+00:27:08,706 --> 00:27:10,136
 That's exactly what
 I was looking for.
 
-00:27:10.556 --> 00:27:12.906 A:middle
+
+615
+00:27:10,556 --> 00:27:12,906
 And so it's really
 easy to kind of drill
 
-00:27:12.906 --> 00:27:13.906 A:middle
+
+616
+00:27:12,906 --> 00:27:13,906
 down into those problems,
 
-00:27:13.906 --> 00:27:15.546 A:middle
+
+617
+00:27:13,906 --> 00:27:15,546
 even when you have a
 very complex layout,
 
-00:27:15.716 --> 00:27:18.966 A:middle
+
+618
+00:27:15,716 --> 00:27:18,966
 if you are using
 identifiers properly.
 
-00:27:19.906 --> 00:27:23.476 A:middle
+
+619
+00:27:19,906 --> 00:27:23,476
 So where are we with this log?
 
-00:27:24.486 --> 00:27:25.906 A:middle
+
+620
+00:27:24,486 --> 00:27:25,906
 Start from the bottom.
 
-00:27:26.666 --> 00:27:28.416 A:middle
+
+621
+00:27:26,666 --> 00:27:28,416
 Finding the constraint that
 was broken gives you a lot
 
-00:27:28.416 --> 00:27:31.496 A:middle
+
+622
+00:27:28,416 --> 00:27:31,496
 of information about
 why it was broken.
 
-00:27:31.496 --> 00:27:34.366 A:middle
+
+623
+00:27:31,496 --> 00:27:34,366
 Check translatesAutoResizingMask
 IntoConstraints [without
 
-00:27:34.366 --> 00:27:34.636 A:middle
+
+624
+00:27:34,366 --> 00:27:34,636
 space] first.
 
-00:27:35.096 --> 00:27:37.686 A:middle
+
+625
+00:27:35,096 --> 00:27:37,686
 It is the culprit
 in many situations.
 
-00:27:37.956 --> 00:27:41.126 A:middle
+
+626
+00:27:37,956 --> 00:27:41,126
 Set identifiers on both your
 constraints and your views,
 
-00:27:41.826 --> 00:27:43.946 A:middle
+
+627
+00:27:41,826 --> 00:27:43,946
 and finally, if the log
 is just too complex,
 
-00:27:44.556 --> 00:27:44.686 A:middle
+
+628
+00:27:44,556 --> 00:27:44,686
 go
 
-00:27:44.686 --> 00:27:46.346 A:middle
+
+629
+00:27:44,686 --> 00:27:46,346
 for constraintsAffectingLayout
 ForAxis [without space]
 
-00:27:46.426 --> 00:27:47.176 A:middle
+
+630
+00:27:46,426 --> 00:27:47,176
 to narrow it down.
 
-00:27:48.276 --> 00:27:53.486 A:middle
+
+631
+00:27:48,276 --> 00:27:53,486
 Okay. So that's what
 happens when the engine looks
 
-00:27:53.486 --> 00:27:57.286 A:middle
+
+632
+00:27:53,486 --> 00:27:57,286
 at your constraints and knows
 that it can't get a solution.
 
-00:27:57.286 --> 00:27:59.256 A:middle
+
+633
+00:27:57,286 --> 00:27:59,256
 There is no solution that
 fits all of your constraints.
 
-00:27:59.616 --> 00:28:01.766 A:middle
+
+634
+00:27:59,616 --> 00:28:01,766
 But what happens if it has
 more than one solution?
 
 
-
-00:27:59.616 --> 00:28:01.766 A:middle
-But what happens if it has
-more than one solution?
-
-00:28:02.086 --> 00:28:03.456 A:middle
+635
+00:28:02,086 --> 00:28:03,456
 That's when we hit ambiguity.
 
-00:28:04.266 --> 00:28:06.646 A:middle
+
+636
+00:28:04,266 --> 00:28:06,646
 This is our final
 mystery, so congratulations
 
-00:28:06.646 --> 00:28:07.496 A:middle
+
+637
+00:28:06,646 --> 00:28:07,496
 for making it this far.
 
-00:28:07.966 --> 00:28:09.166 A:middle
+
+638
+00:28:07,966 --> 00:28:09,166
 We don't have that
 much farther to go.
 
-00:28:09.916 --> 00:28:10.346 A:middle
+
+639
+00:28:09,916 --> 00:28:10,346
 Let's see.
 
-00:28:10.466 --> 00:28:11.686 A:middle
+
+640
+00:28:10,466 --> 00:28:11,686
 So, ambiguous layouts.
 
-00:28:11.936 --> 00:28:13.726 A:middle
+
+641
+00:28:11,936 --> 00:28:13,726
 A couple of possible causes
 
-00:28:13.726 --> 00:28:16.986 A:middle
+
+642
+00:28:13,726 --> 00:28:16,986
 of ambiguous layouts are
 simply too few constraints.
 
-00:28:17.866 --> 00:28:21.526 A:middle
+
+643
+00:28:17,866 --> 00:28:21,526
 If you are doing a planets'
 layout like this and you know
 
-00:28:21.526 --> 00:28:22.566 A:middle
+
+644
+00:28:21,526 --> 00:28:22,566
 that you want Saturn
 in the middle
 
-00:28:23.226 --> 00:28:25.636 A:middle
+
+645
+00:28:23,226 --> 00:28:25,636
 but your horizontal constraints
 aren't set up properly,
 
-00:28:25.796 --> 00:28:27.086 A:middle
+
+646
+00:28:25,796 --> 00:28:27,086
 the view may have to
 guess where to put it.
 
-00:28:28.056 --> 00:28:29.326 A:middle
+
+647
+00:28:28,056 --> 00:28:29,326
 Again, reminder, it
 should be in the middle.
 
-00:28:29.326 --> 00:28:32.496 A:middle
+
+648
+00:28:29,326 --> 00:28:32,496
 The engine put it
 off to the side.
 
-00:28:32.866 --> 00:28:35.236 A:middle
+
+649
+00:28:32,866 --> 00:28:35,236
 The other solution it has for
 it is off to the other side,
 
-00:28:35.326 --> 00:28:37.006 A:middle
+
+650
+00:28:35,326 --> 00:28:37,006
 and it never actually
 lands in the middle.
 
-00:28:37.006 --> 00:28:39.696 A:middle
+
+651
+00:28:37,006 --> 00:28:39,696
 And that can be a problem
 because if it doesn't know
 
-00:28:39.696 --> 00:28:41.196 A:middle
+
+652
+00:28:39,696 --> 00:28:41,196
 where to put it, it's just
 going to put it somewhere.
 
-00:28:41.316 --> 00:28:42.816 A:middle
+
+653
+00:28:41,316 --> 00:28:42,816
 That's not what you want.
 
-00:28:42.816 --> 00:28:44.836 A:middle
+
+654
+00:28:42,816 --> 00:28:44,836
 You need to go back and add
 constraints on that view.
 
-00:28:45.596 --> 00:28:47.276 A:middle
+
+655
+00:28:45,596 --> 00:28:47,276
 Another cause of
 ambiguous layouts is
 
-00:28:47.276 --> 00:28:48.286 A:middle
+
+656
+00:28:47,276 --> 00:28:48,286
 conflicting priorities.
 
-00:28:48.726 --> 00:28:51.446 A:middle
+
+657
+00:28:48,726 --> 00:28:51,446
 We talked about this a
 little bit in Part 1.
 
-00:28:51.446 --> 00:28:54.386 A:middle
+
+658
+00:28:51,446 --> 00:28:54,386
 At the bottom of this view that
 we just fixed here, you will see
 
-00:28:54.386 --> 00:28:56.676 A:middle
+
+659
+00:28:54,386 --> 00:28:56,676
 that it can actually end up in
 a situation where the text field
 
-00:28:56.676 --> 00:28:59.136 A:middle
+
+660
+00:28:56,676 --> 00:28:59,136
 and button are kind of
 the wrong proportions.
 
-00:28:59.136 --> 00:29:00.466 A:middle
+
+661
+00:28:59,136 --> 00:29:00,466
 I want it to look
 more like this,
 
 
-
-00:28:59.136 --> 00:29:00.466 A:middle
-I want it to look
-more like this,
-
-00:29:02.356 --> 00:29:04.606 A:middle
+662
+00:29:02,356 --> 00:29:04,606
 where the text field is
 taking up most of the view.
 
-00:29:05.196 --> 00:29:07.606 A:middle
+
+663
+00:29:05,196 --> 00:29:07,606
 And the reason that it ended up
 that way is that the engine had
 
-00:29:07.606 --> 00:29:10.166 A:middle
+
+664
+00:29:07,606 --> 00:29:10,166
 to make a choice between
 those two layouts for me.
 
-00:29:11.086 --> 00:29:13.576 A:middle
+
+665
+00:29:11,086 --> 00:29:13,576
 And it did that because the
 content hugging priorities
 
-00:29:13.576 --> 00:29:15.316 A:middle
+
+666
+00:29:13,576 --> 00:29:15,316
 on these two views are the same.
 
-00:29:15.316 --> 00:29:18.066 A:middle
+
+667
+00:29:15,316 --> 00:29:18,066
 They are both 250, and I
 don't have any other way --
 
-00:29:18.066 --> 00:29:19.926 A:middle
+
+668
+00:29:18,066 --> 00:29:19,926
 I am not telling the
 engine any other way
 
-00:29:19.926 --> 00:29:21.966 A:middle
+
+669
+00:29:19,926 --> 00:29:21,966
 to size those views
 horizontally.
 
-00:29:22.436 --> 00:29:24.116 A:middle
+
+670
+00:29:22,436 --> 00:29:24,116
 So it had to kind of take
 a guess, and it guessed
 
-00:29:24.216 --> 00:29:27.416 A:middle
+
+671
+00:29:24,216 --> 00:29:27,416
 that maybe I wanted the text
 view to hug its content closely
 
-00:29:27.726 --> 00:29:29.166 A:middle
+
+672
+00:29:27,726 --> 00:29:29,166
 and go ahead and let
 the label spread out,
 
-00:29:29.716 --> 00:29:30.836 A:middle
+
+673
+00:29:29,716 --> 00:29:30,836
 but I really wanted
 it to do this
 
-00:29:30.966 --> 00:29:32.436 A:middle
+
+674
+00:29:30,966 --> 00:29:32,436
 and hug the button
 content closely.
 
-00:29:33.106 --> 00:29:36.396 A:middle
+
+675
+00:29:33,106 --> 00:29:36,396
 So as I -- this is going to
 be repeat for a couple of you,
 
-00:29:36.396 --> 00:29:38.186 A:middle
+
+676
+00:29:36,396 --> 00:29:38,186
 but if the content
 hugging priority
 
-00:29:38.186 --> 00:29:40.826 A:middle
+
+677
+00:29:38,186 --> 00:29:40,826
 on the button is set lower
 than that on the text field,
 
-00:29:41.306 --> 00:29:45.596 A:middle
+
+678
+00:29:41,306 --> 00:29:45,596
 the edges of the view are able
 to stretch away from its content
 
-00:29:45.596 --> 00:29:48.086 A:middle
+
+679
+00:29:45,596 --> 00:29:48,086
 because it's less important
 that it hug its content closely.
 
-00:29:48.246 --> 00:29:49.606 A:middle
+
+680
+00:29:48,246 --> 00:29:49,606
 Or you are telling the
 engine it's less important
 
-00:29:49.606 --> 00:29:51.156 A:middle
+
+681
+00:29:49,606 --> 00:29:51,156
 that that view hug
 its content closely.
 
-00:29:51.876 --> 00:29:54.676 A:middle
+
+682
+00:29:51,876 --> 00:29:54,676
 Meanwhile, if you set it above,
 the content hugging priority
 
-00:29:54.676 --> 00:29:57.966 A:middle
+
+683
+00:29:54,676 --> 00:29:57,966
 of the text view, the
 button now hugs it closely
 
-00:29:58.116 --> 00:29:59.286 A:middle
+
+684
+00:29:58,116 --> 00:29:59,286
 and the text field stretches.
 
-00:29:59.746 --> 00:30:02.086 A:middle
+
+685
+00:29:59,746 --> 00:30:02,086
 This is consistently how the
 engine will solve the layout
 
 
-
-00:29:59.746 --> 00:30:02.086 A:middle
-This is consistently how the
-engine will solve the layout
-
-00:30:02.086 --> 00:30:03.546 A:middle
+686
+00:30:02,086 --> 00:30:03,546
 in this particular circumstance.
 
-00:30:03.696 --> 00:30:06.956 A:middle
+
+687
+00:30:03,696 --> 00:30:06,956
 So if you set these priorities
 properly, you can resolve some
 
-00:30:06.956 --> 00:30:09.866 A:middle
+
+688
+00:30:06,956 --> 00:30:09,866
 of these ambiguous
 layouts that you run into.
 
-00:30:09.866 --> 00:30:13.366 A:middle
+
+689
+00:30:09,866 --> 00:30:13,366
 We have a couple of tools
 for resolving ambiguity.
 
-00:30:14.546 --> 00:30:15.936 A:middle
+
+690
+00:30:14,546 --> 00:30:15,936
 Interface Builder
 is a big help here.
 
-00:30:16.286 --> 00:30:20.546 A:middle
+
+691
+00:30:16,286 --> 00:30:20,546
 It has these little icons on the
 edge, and if you click on those,
 
-00:30:20.676 --> 00:30:22.636 A:middle
+
+692
+00:30:20,676 --> 00:30:22,636
 it will tell you what's
 going on with your layout
 
-00:30:22.636 --> 00:30:23.626 A:middle
+
+693
+00:30:22,636 --> 00:30:23,626
 that it doesn't understand.
 
-00:30:24.626 --> 00:30:26.366 A:middle
+
+694
+00:30:24,626 --> 00:30:26,366
 And in many cases,
 it will tell you
 
-00:30:26.366 --> 00:30:29.906 A:middle
+
+695
+00:30:26,366 --> 00:30:29,906
 that you are missing constraints
 and what it can't solve for.
 
-00:30:30.276 --> 00:30:32.416 A:middle
+
+696
+00:30:30,276 --> 00:30:32,416
 I need constraints for
 the Y position or height.
 
-00:30:32.706 --> 00:30:37.566 A:middle
+
+697
+00:30:32,706 --> 00:30:37,566
 When you build and run an
 app that has this issue,
 
-00:30:38.006 --> 00:30:41.796 A:middle
+
+698
+00:30:38,006 --> 00:30:41,796
 you are going to end up
 with these views somewhere
 
-00:30:41.796 --> 00:30:45.366 A:middle
+
+699
+00:30:41,796 --> 00:30:45,366
 in the Y-axis, where the engine
 kind of decided it had to go
 
-00:30:45.366 --> 00:30:46.796 A:middle
+
+700
+00:30:45,366 --> 00:30:46,796
 because it didn't have
 any information from you.
 
-00:30:47.556 --> 00:30:48.376 A:middle
+
+701
+00:30:47,556 --> 00:30:48,376
 That makes it really easy.
 
-00:30:48.376 --> 00:30:52.156 A:middle
+
+702
+00:30:48,376 --> 00:30:52,156
 When you are not using Interface
 Builder or when you get passed
 
-00:30:52.156 --> 00:30:53.316 A:middle
+
+703
+00:30:52,156 --> 00:30:53,316
 and you are still
 running into this,
 
-00:30:53.316 --> 00:30:55.546 A:middle
+
+704
+00:30:53,316 --> 00:30:55,546
 we have a really cool method
 called autolayoutTrace,
 
-00:30:56.396 --> 00:30:59.706 A:middle
+
+705
+00:30:56,396 --> 00:30:59,706
 and you just use that in
 the debugger on a view,
 
-00:30:59.786 --> 00:31:03.546 A:middle
+
+706
+00:30:59,786 --> 00:31:03,546
 and it will just tell you in
 all caps that you have a view
 
 
-
-00:30:59.786 --> 00:31:03.546 A:middle
-and it will just tell you in
-all caps that you have a view
-
-00:31:03.546 --> 00:31:05.626 A:middle
+707
+00:31:03,546 --> 00:31:05,626
 that has an ambiguous
 layout, and you can then go
 
-00:31:05.626 --> 00:31:07.896 A:middle
+
+708
+00:31:05,626 --> 00:31:07,896
 about diagnosing the
 problem with that view.
 
-00:31:08.856 --> 00:31:11.246 A:middle
+
+709
+00:31:08,856 --> 00:31:11,246
 We also have the view
 debugger in the debug menu,
 
-00:31:11.976 --> 00:31:15.556 A:middle
+
+710
+00:31:11,976 --> 00:31:15,556
 which will allow you to view the
 frames and the alignment recs
 
-00:31:15.846 --> 00:31:17.816 A:middle
+
+711
+00:31:15,846 --> 00:31:17,816
 that the layout engine has
 calculated for your view.
 
-00:31:18.526 --> 00:31:19.436 A:middle
+
+712
+00:31:18,526 --> 00:31:19,436
 It will look something
 like this.
 
-00:31:19.436 --> 00:31:20.966 A:middle
+
+713
+00:31:19,436 --> 00:31:20,966
 It will just draw
 it right on the view
 
-00:31:20.966 --> 00:31:22.106 A:middle
+
+714
+00:31:20,966 --> 00:31:22,106
 that it's looking at right now.
 
-00:31:22.666 --> 00:31:25.236 A:middle
+
+715
+00:31:22,666 --> 00:31:25,236
 Here you can see that
 Saturn, who is supposed
 
-00:31:25.236 --> 00:31:28.026 A:middle
+
+716
+00:31:25,236 --> 00:31:28,026
 to have an alignment rect
 that comes very closely
 
-00:31:28.026 --> 00:31:29.686 A:middle
+
+717
+00:31:28,026 --> 00:31:29,686
 to its content, is
 stretched very wide.
 
-00:31:30.066 --> 00:31:32.086 A:middle
+
+718
+00:31:30,066 --> 00:31:32,086
 And that's problematic because
 that's not what I wanted.
 
-00:31:32.896 --> 00:31:37.376 A:middle
+
+719
+00:31:32,896 --> 00:31:37,376
 But over here, its actual size
 is correct; it's just pinned
 
-00:31:37.436 --> 00:31:39.486 A:middle
+
+720
+00:31:37,436 --> 00:31:39,486
 to the side which is,
 again, not what I wanted,
 
-00:31:39.486 --> 00:31:40.906 A:middle
+
+721
+00:31:39,486 --> 00:31:40,906
 but I know it's not
 a size problem,
 
-00:31:41.256 --> 00:31:45.286 A:middle
+
+722
+00:31:41,256 --> 00:31:45,286
 it's a tied-to-where
 sort of problem.
 
-00:31:46.766 --> 00:31:48.306 A:middle
+
+723
+00:31:46,766 --> 00:31:48,306
 The other solution is to
 look in the view debugger;
 
-00:31:48.386 --> 00:31:50.816 A:middle
+
+724
+00:31:48,386 --> 00:31:50,816
 right next to all of your
 breakpoint navigation,
 
-00:31:50.816 --> 00:31:52.026 A:middle
+
+725
+00:31:50,816 --> 00:31:52,026
 you have this little
 button here.
 
-00:31:52.156 --> 00:31:54.706 A:middle
+
+726
+00:31:52,156 --> 00:31:54,706
 When you press that, it
 pulls up your layout in a way
 
-00:31:54.706 --> 00:31:57.456 A:middle
+
+727
+00:31:54,706 --> 00:31:57,456
 that you can click through and
 view things like constraints,
 
-00:31:57.846 --> 00:32:00.666 A:middle
+
+728
+00:31:57,846 --> 00:32:00,666
 just the wireframes for the
 views, you can see stuff in 3D.
 
 
-
-00:31:57.846 --> 00:32:00.666 A:middle
-just the wireframes for the
-views, you can see stuff in 3D.
-
-00:32:01.006 --> 00:32:02.796 A:middle
+729
+00:32:01,006 --> 00:32:02,796
 It gives you a really nice
 view of all your layers,
 
-00:32:03.246 --> 00:32:06.596 A:middle
+
+730
+00:32:03,246 --> 00:32:06,596
 and that can really help with a
 lot of view debugging scenarios.
 
-00:32:07.256 --> 00:32:09.316 A:middle
+
+731
+00:32:07,256 --> 00:32:09,316
 Finally, we have
 another debugger method,
 
-00:32:09.316 --> 00:32:10.806 A:middle
+
+732
+00:32:09,316 --> 00:32:10,806
 because I really
 like using LLDB,
 
-00:32:11.186 --> 00:32:12.966 A:middle
+
+733
+00:32:11,186 --> 00:32:12,966
 called
 exerciseAmbiguityInLayout.
 
-00:32:13.196 --> 00:32:16.276 A:middle
+
+734
+00:32:13,196 --> 00:32:16,276
 If you have a view that you know
 is ambiguous and you run this
 
-00:32:16.276 --> 00:32:19.026 A:middle
+
+735
+00:32:16,276 --> 00:32:19,026
 on that view in the
 debugger and continue,
 
-00:32:19.026 --> 00:32:21.596 A:middle
+
+736
+00:32:19,026 --> 00:32:21,596
 the Layout Engine will show
 you the other solution it had,
 
-00:32:22.316 --> 00:32:24.306 A:middle
+
+737
+00:32:22,316 --> 00:32:24,306
 which is a great clue when
 you are trying to figure
 
-00:32:24.306 --> 00:32:25.726 A:middle
+
+738
+00:32:24,306 --> 00:32:25,726
 out where the problem
 is coming from.
 
-00:32:26.456 --> 00:32:27.626 A:middle
+
+739
+00:32:26,456 --> 00:32:27,626
 And I will show you
 how that looks now.
 
-00:32:28.926 --> 00:32:32.156 A:middle
+
+740
+00:32:28,926 --> 00:32:32,156
 Okay. So we are back to this
 view that we just saw a bit ago,
 
-00:32:32.646 --> 00:32:35.746 A:middle
+
+741
+00:32:32,646 --> 00:32:35,746
 and when it's in its regular
 layout, Saturn is flying off
 
-00:32:35.746 --> 00:32:39.296 A:middle
+
+742
+00:32:35,746 --> 00:32:39,296
 to the side, so I have,
 again, my debug gesture
 
-00:32:39.296 --> 00:32:42.066 A:middle
+
+743
+00:32:39,296 --> 00:32:42,066
 that I can use just because
 I need an easy way to break.
 
-00:32:42.656 --> 00:32:44.806 A:middle
+
+744
+00:32:42,656 --> 00:32:44,806
 The first thing I can
 do is see what's going
 
-00:32:44.806 --> 00:32:48.836 A:middle
+
+745
+00:32:44,806 --> 00:32:48,836
 on with the whole view by
 running auto layout trace on it,
 
-00:32:49.766 --> 00:32:52.516 A:middle
+
+746
+00:32:49,766 --> 00:32:52,516
 and you see that everything
 is okay, except for Saturn,
 
-00:32:52.516 --> 00:32:53.586 A:middle
+
+747
+00:32:52,516 --> 00:32:53,586
 which has an ambiguous layout.
 
-00:32:53.586 --> 00:32:55.476 A:middle
+
+748
+00:32:53,586 --> 00:32:55,476
 That's where I am going
 to concentrate my efforts.
 
-00:32:56.426 --> 00:32:58.546 A:middle
+
+749
+00:32:56,426 --> 00:32:58,546
 There's also a Boolean
 that will tell you view
 
-00:32:58.546 --> 00:33:01.706 A:middle
+
+750
+00:32:58,546 --> 00:33:01,706
 by view whether it has
 an ambiguous layout.
 
 
-
-00:32:58.546 --> 00:33:01.706 A:middle
-by view whether it has
-an ambiguous layout.
-
-00:33:01.926 --> 00:33:04.096 A:middle
+751
+00:33:01,926 --> 00:33:04,096
 And that's just
 hasAmbiguousLayout --
 
-00:33:04.926 --> 00:33:07.316 A:middle
+
+752
+00:33:04,926 --> 00:33:07,316
 pretty easy to remember, and
 in Saturn's case, it's true.
 
-00:33:08.376 --> 00:33:11.846 A:middle
+
+753
+00:33:08,376 --> 00:33:11,846
 And if you have that happening,
 you can also exercise ambiguity
 
-00:33:11.846 --> 00:33:14.146 A:middle
+
+754
+00:33:11,846 --> 00:33:14,146
 in layout and continue,
 
-00:33:14.946 --> 00:33:18.716 A:middle
+
+755
+00:33:14,946 --> 00:33:18,716
 and it will show you the other
 solution it had for that issue.
 
-00:33:18.716 --> 00:33:20.546 A:middle
+
+756
+00:33:18,716 --> 00:33:20,546
 So let's run that again.
 
-00:33:21.406 --> 00:33:22.656 A:middle
+
+757
+00:33:21,406 --> 00:33:22,656
 And -- oops.
 
-00:33:22.966 --> 00:33:24.186 A:middle
+
+758
+00:33:22,966 --> 00:33:24,186
 Wrong thing to run again.
 
-00:33:24.726 --> 00:33:30.106 A:middle
+
+759
+00:33:24,726 --> 00:33:30,106
 And now it's over
 to the side again.
 
-00:33:30.576 --> 00:33:32.486 A:middle
+
+760
+00:33:30,576 --> 00:33:32,486
 So in this case, it looks
 like the layout guides I put
 
-00:33:32.486 --> 00:33:35.026 A:middle
+
+761
+00:33:32,486 --> 00:33:35,026
 on either side of Saturn
 aren't working for some reason,
 
-00:33:35.386 --> 00:33:39.126 A:middle
+
+762
+00:33:35,386 --> 00:33:39,126
 so I am going to go up
 and find my constraints
 
-00:33:39.126 --> 00:33:40.966 A:middle
+
+763
+00:33:39,126 --> 00:33:40,966
 that are tying my planets
 to their specific areas,
 
-00:33:40.966 --> 00:33:45.016 A:middle
+
+764
+00:33:40,966 --> 00:33:45,016
 and they are doing that by
 having a ratio of layout guides
 
-00:33:45.016 --> 00:33:47.256 A:middle
+
+765
+00:33:45,016 --> 00:33:47,256
 on either side in order
 to determine where it is.
 
-00:33:47.336 --> 00:33:49.126 A:middle
+
+766
+00:33:47,336 --> 00:33:49,126
 I've got one for
 Saturn right here,
 
-00:33:49.836 --> 00:33:51.956 A:middle
+
+767
+00:33:49,836 --> 00:33:51,956
 and it should have equal
 layout guides on either side,
 
-00:33:51.956 --> 00:33:53.596 A:middle
+
+768
+00:33:51,956 --> 00:33:53,596
 which should put it pretty
 much exactly in the middle.
 
-00:33:53.596 --> 00:33:58.176 A:middle
+
+769
+00:33:53,596 --> 00:33:58,176
 The problem appears to be that
 I did not actually add this
 
-00:33:58.256 --> 00:34:01.886 A:middle
+
+770
+00:33:58,256 --> 00:34:01,886
 to the constraints array I
 am activating for that view.
 
 
-
-00:33:58.256 --> 00:34:01.886 A:middle
-to the constraints array I
-am activating for that view.
-
-00:34:02.196 --> 00:34:07.026 A:middle
+771
+00:34:02,196 --> 00:34:07,026
 And so if I add it,
 things go much better.
 
-00:34:07.426 --> 00:34:10.045 A:middle
+
+772
+00:34:07,426 --> 00:34:10,045
 Saturn stays put exactly
 where I wanted it to be.
 
-00:34:10.085 --> 00:34:12.255 A:middle
+
+773
+00:34:10,085 --> 00:34:12,255
 And that's really
 all that's involved
 
-00:34:12.396 --> 00:34:14.326 A:middle
+
+774
+00:34:12,396 --> 00:34:14,326
 in diagnosing ambiguity.
 
-00:34:14.326 --> 00:34:17.565 A:middle
+
+775
+00:34:14,326 --> 00:34:17,565
 It's pretty easy
 once you start kind
 
-00:34:17.565 --> 00:34:20.985 A:middle
+
+776
+00:34:17,565 --> 00:34:20,985
 of working with it a little bit.
 
-00:34:21.735 --> 00:34:22.815 A:middle
+
+777
+00:34:21,735 --> 00:34:22,815
 So, debugging your layout.
 
-00:34:23.146 --> 00:34:25.085 A:middle
+
+778
+00:34:23,146 --> 00:34:25,085
 The most important thing
 is to think carefully
 
-00:34:25.446 --> 00:34:27.025 A:middle
+
+779
+00:34:25,446 --> 00:34:27,025
 about the information
 that your engine needs.
 
-00:34:27.585 --> 00:34:28.706 A:middle
+
+780
+00:34:27,585 --> 00:34:28,706
 This morning we talked a lot
 
-00:34:28.706 --> 00:34:32.166 A:middle
+
+781
+00:34:28,706 --> 00:34:32,166
 about giving the Layout
 Engine all of its information
 
-00:34:32.166 --> 00:34:34.286 A:middle
+
+782
+00:34:32,166 --> 00:34:34,286
 so that it can calculate
 your layout properly
 
-00:34:34.286 --> 00:34:35.806 A:middle
+
+783
+00:34:34,286 --> 00:34:35,806
 in various adaptive scenarios.
 
-00:34:36.406 --> 00:34:40.806 A:middle
+
+784
+00:34:36,406 --> 00:34:40,806
 If you can kind of pull that all
 together, you are going to run
 
-00:34:40.806 --> 00:34:43.406 A:middle
+
+785
+00:34:40,806 --> 00:34:43,406
 into a lot fewer problems
 as opposed to just trying
 
-00:34:43.406 --> 00:34:44.936 A:middle
+
+786
+00:34:43,406 --> 00:34:44,936
 to make a couple
 of constraints here
 
-00:34:44.936 --> 00:34:46.596 A:middle
+
+787
+00:34:44,936 --> 00:34:46,596
 and there and throwing it in.
 
-00:34:47.726 --> 00:34:50.505 A:middle
+
+788
+00:34:47,726 --> 00:34:50,505
 But if you do run into
 problems, use the logs
 
-00:34:50.766 --> 00:34:52.196 A:middle
+
+789
+00:34:50,766 --> 00:34:52,196
 if constraints are
 unsatisfiable.
 
-00:34:52.196 --> 00:34:53.886 A:middle
+
+790
+00:34:52,196 --> 00:34:53,886
 It gives you a lot of
 really good information.
 
-00:34:54.065 --> 00:34:56.846 A:middle
+
+791
+00:34:54,065 --> 00:34:56,846
 In order to make good use of
 those logs, add identifiers
 
-00:34:57.356 --> 00:34:58.466 A:middle
+
+792
+00:34:57,356 --> 00:34:58,466
 for all those constraints
 and views.
 
-00:34:58.866 --> 00:35:01.036 A:middle
+
+793
+00:34:58,866 --> 00:35:01,036
 You also want to regularly
 check for ambiguity.
 
 
-
-00:34:58.866 --> 00:35:01.036 A:middle
-You also want to regularly
-check for ambiguity.
-
-00:35:01.346 --> 00:35:03.256 A:middle
+794
+00:35:01,346 --> 00:35:03,256
 You won't necessarily
 see it on the first run.
 
-00:35:03.706 --> 00:35:05.916 A:middle
+
+795
+00:35:03,706 --> 00:35:05,916
 This is a good thing to put
 in something like a unit test
 
-00:35:05.916 --> 00:35:08.106 A:middle
+
+796
+00:35:05,916 --> 00:35:08,106
 and just run it on all your
 views regularly, so if you run
 
-00:35:08.106 --> 00:35:11.116 A:middle
+
+797
+00:35:08,106 --> 00:35:11,116
 into ambiguous layout, you can
 diagnose it before you see it.
 
-00:35:12.186 --> 00:35:13.646 A:middle
+
+798
+00:35:12,186 --> 00:35:13,646
 And then we have several tools
 
-00:35:13.646 --> 00:35:14.786 A:middle
+
+799
+00:35:13,646 --> 00:35:14,786
 to help you resolve
 these issues.
 
-00:35:15.016 --> 00:35:17.866 A:middle
+
+800
+00:35:15,016 --> 00:35:17,866
 Interface builder is helpful,
 as always, the view debugger,
 
-00:35:17.946 --> 00:35:20.146 A:middle
+
+801
+00:35:17,946 --> 00:35:20,146
 and our various methods in lldb.
 
-00:35:21.916 --> 00:35:22.316 A:middle
+
+802
+00:35:21,916 --> 00:35:22,316
 All right.
 
-00:35:22.406 --> 00:35:25.186 A:middle
+
+803
+00:35:22,406 --> 00:35:25,186
 So we have come a
 very long way today.
 
-00:35:26.046 --> 00:35:29.086 A:middle
+
+804
+00:35:26,046 --> 00:35:29,086
 If you were with us this
 morning, you saw us talking
 
-00:35:29.086 --> 00:35:30.826 A:middle
+
+805
+00:35:29,086 --> 00:35:30,826
 about maintainable
 layouts with stack views
 
-00:35:31.276 --> 00:35:32.826 A:middle
+
+806
+00:35:31,276 --> 00:35:32,826
 and changing constraints
 properly,
 
-00:35:33.256 --> 00:35:35.546 A:middle
+
+807
+00:35:33,256 --> 00:35:35,546
 working with view sizing and
 making self-sizing views,
 
-00:35:35.646 --> 00:35:37.796 A:middle
+
+808
+00:35:35,646 --> 00:35:37,796
 and then using priorities
 and alignment to make sure
 
-00:35:37.796 --> 00:35:39.606 A:middle
+
+809
+00:35:37,796 --> 00:35:39,606
 that your layout stays
 exactly the way you want it
 
-00:35:39.686 --> 00:35:41.716 A:middle
+
+810
+00:35:39,686 --> 00:35:41,716
 to in various adaptive
 environments.
 
-00:35:42.486 --> 00:35:45.976 A:middle
+
+811
+00:35:42,486 --> 00:35:45,976
 And then just now, we talked
 about the layout cycle in depth,
 
-00:35:46.126 --> 00:35:49.386 A:middle
+
+812
+00:35:46,126 --> 00:35:49,386
 interacting with legacy
 layout, creating constraints
 
-00:35:49.386 --> 00:35:52.946 A:middle
+
+813
+00:35:49,386 --> 00:35:52,946
 with layout anchors rather
 than the old methods,
 
-00:35:52.946 --> 00:35:55.376 A:middle
+
+814
+00:35:52,946 --> 00:35:55,376
 and constraining negative
 space with layout guides.
 
-00:35:56.016 --> 00:35:58.806 A:middle
+
+815
+00:35:56,016 --> 00:35:58,806
 And we just now talked about
 unsatisfiable constraints
 
-00:35:58.806 --> 00:36:00.966 A:middle
+
+816
+00:35:58,806 --> 00:36:00,966
 and resolving ambiguity,
 which are two problems
 
 
-
-00:35:58.806 --> 00:36:00.966 A:middle
-and resolving ambiguity,
-which are two problems
-
-00:36:00.966 --> 00:36:02.796 A:middle
+817
+00:36:00,966 --> 00:36:02,796
 that people tend to
 run into regularly
 
-00:36:02.796 --> 00:36:03.776 A:middle
+
+818
+00:36:02,796 --> 00:36:03,776
 when they are using Auto Layout.
 
-00:36:03.916 --> 00:36:06.496 A:middle
+
+819
+00:36:03,916 --> 00:36:06,496
 So those are all
 of our mysteries.
 
-00:36:07.226 --> 00:36:09.166 A:middle
+
+820
+00:36:07,226 --> 00:36:09,166
 I hope we laid them all out
 for you pretty well here.
 
-00:36:09.906 --> 00:36:13.256 A:middle
+
+821
+00:36:09,906 --> 00:36:13,256
 If you haven't seen Part
 1, I recommend going back
 
-00:36:13.256 --> 00:36:15.756 A:middle
+
+822
+00:36:13,256 --> 00:36:15,756
 and viewing it because there
 was a lot of information there
 
-00:36:16.026 --> 00:36:19.016 A:middle
+
+823
+00:36:16,026 --> 00:36:19,016
 that can be very useful to
 you, and the video should be
 
-00:36:19.016 --> 00:36:20.246 A:middle
+
+824
+00:36:19,016 --> 00:36:20,246
 up at some point
 in the near future,
 
-00:36:20.506 --> 00:36:22.186 A:middle
+
+825
+00:36:20,506 --> 00:36:22,186
 or you can travel
 back in time to 11:00.
 
-00:36:22.526 --> 00:36:22.866 A:middle
+
+826
+00:36:22,526 --> 00:36:22,866
 Either way.
 
-00:36:23.606 --> 00:36:27.156 A:middle
+
+827
+00:36:23,606 --> 00:36:27,156
 So to get more information on
 all of this, we, of course,
 
-00:36:27.156 --> 00:36:29.876 A:middle
+
+828
+00:36:27,156 --> 00:36:29,876
 have documentation up on
 the website, and we do have
 
-00:36:29.876 --> 00:36:32.586 A:middle
+
+829
+00:36:29,876 --> 00:36:32,586
 that planets code, which is
 more for the first session
 
-00:36:32.586 --> 00:36:33.546 A:middle
+
+830
+00:36:32,586 --> 00:36:33,546
 but we also used here.
 
-00:36:33.546 --> 00:36:36.846 A:middle
+
+831
+00:36:33,546 --> 00:36:36,846
 The planets code that you
 see here is not broken.
 
-00:36:36.846 --> 00:36:38.096 A:middle
+
+832
+00:36:36,846 --> 00:36:38,096
 It actually works properly.
 
-00:36:38.096 --> 00:36:40.256 A:middle
+
+833
+00:36:38,096 --> 00:36:40,256
 You will have to break it if you
 want to play around with some
 
-00:36:40.256 --> 00:36:41.576 A:middle
+
+834
+00:36:40,256 --> 00:36:41,576
 of the debugging
 methods you saw here.
 
-00:36:41.626 --> 00:36:43.906 A:middle
+
+835
+00:36:41,626 --> 00:36:43,906
 We have some related sessions.
 
-00:36:44.166 --> 00:36:47.426 A:middle
+
+836
+00:36:44,166 --> 00:36:47,426
 So again, Part 1 was earlier
 today, and we have a couple
 
-00:36:47.426 --> 00:36:49.186 A:middle
+
+837
+00:36:47,426 --> 00:36:49,186
 of sessions tomorrow that
 you might be interested in.
 
-00:36:49.186 --> 00:36:51.696 A:middle
+
+838
+00:36:49,186 --> 00:36:51,696
 We are also going to head
 down to the lab after this,
 
-00:36:52.236 --> 00:36:54.336 A:middle
+
+839
+00:36:52,236 --> 00:36:54,336
 and we will be there to
 answer questions that you have
 
-00:36:54.336 --> 00:36:55.896 A:middle
+
+840
+00:36:54,336 --> 00:36:55,896
 about Auto Layout and
 Interface Builder.
 
-00:36:56.836 --> 00:36:58.186 A:middle
+
+841
+00:36:56,836 --> 00:36:58,186
 And that's what we've
 got for you today.
 
-00:36:58.516 --> 00:36:58.946 A:middle
+
+842
+00:36:58,516 --> 00:36:58,946
 Have a good one.
 
-00:36:59.516 --> 00:37:03.500 A:middle
+
+843
+00:36:59,516 --> 00:37:03,500
 [Applause]
 

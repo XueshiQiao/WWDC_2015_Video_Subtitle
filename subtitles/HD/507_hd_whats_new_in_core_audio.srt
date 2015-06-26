@@ -1,3720 +1,5252 @@
-
-00:00:25.516 --> 00:00:30.606 A:middle
+1
+00:00:25,516 --> 00:00:30,606
 [ Applause ]
 
-00:00:31.106 --> 00:00:31.806 A:middle
-&gt;&gt;AKSHATHA NAGESH: Thank you.
 
-00:00:32.246 --> 00:00:34.256 A:middle
+2
+00:00:31,106 --> 00:00:31,806
+>>AKSHATHA NAGESH: Thank you.
+
+
+3
+00:00:32,246 --> 00:00:34,256
 Good afternoon everyone, welcome
 
-00:00:34.256 --> 00:00:36.466 A:middle
+
+4
+00:00:34,256 --> 00:00:36,466
 to the session What's
 New in Code Audio.
 
-00:00:37.366 --> 00:00:40.576 A:middle
+
+5
+00:00:37,366 --> 00:00:40,576
 I am Akshatha Nagesh, and
 I will be the first speaker
 
-00:00:40.576 --> 00:00:44.126 A:middle
+
+6
+00:00:40,576 --> 00:00:44,126
 in this session.
 
-00:00:44.126 --> 00:00:47.646 A:middle
+
+7
+00:00:44,126 --> 00:00:47,646
 I will be talking about
 [unintelligible] AVAudioEngine
 
-00:00:48.306 --> 00:00:52.686 A:middle
+
+8
+00:00:48,306 --> 00:00:52,686
 and its new features for this
 year's iOS and OS X releases.
 
-00:00:53.936 --> 00:00:56.186 A:middle
+
+9
+00:00:53,936 --> 00:00:56,186
 Later, my colleague
 Torrey will be talking
 
-00:00:56.186 --> 00:00:58.986 A:middle
+
+10
+00:00:56,186 --> 00:00:58,986
 about other exciting
 new features we have
 
-00:00:58.986 --> 00:01:02.046 A:middle
+
+11
+00:00:58,986 --> 00:01:02,046
 for you this year like
 inter-device audio
 
 
-
-00:00:58.986 --> 00:01:02.046 A:middle
-for you this year like
-inter-device audio
-
-00:01:02.516 --> 00:01:05.866 A:middle
+12
+00:01:02,516 --> 00:01:05,866
 and what's new in our
 good old AVAudioSession.
 
-00:01:07.066 --> 00:01:10.966 A:middle
+
+13
+00:01:07,066 --> 00:01:10,966
 Tomorrow morning we have another
 Core Audio presentation called
 
-00:01:11.036 --> 00:01:15.276 A:middle
+
+14
+00:01:11,036 --> 00:01:15,276
 Audio Unit Extensions and it's
 about a whole new set of APIs
 
-00:01:15.276 --> 00:01:18.306 A:middle
+
+15
+00:01:15,276 --> 00:01:18,306
 which I am sure you will
 find very interesting,
 
-00:01:18.746 --> 00:01:23.386 A:middle
+
+16
+00:01:18,746 --> 00:01:23,386
 so do catch that
 session as well.
 
-00:01:23.546 --> 00:01:23.886 A:middle
+
+17
+00:01:23,546 --> 00:01:23,886
 All right.
 
-00:01:24.476 --> 00:01:28.006 A:middle
+
+18
+00:01:24,476 --> 00:01:28,006
 Let's begin with a
 recap of AVAudioEngine.
 
-00:01:28.596 --> 00:01:33.516 A:middle
+
+19
+00:01:28,596 --> 00:01:33,516
 If you know about Core
 Audio, you may be aware
 
-00:01:33.886 --> 00:01:36.956 A:middle
+
+20
+00:01:33,886 --> 00:01:36,956
 that we offer a wide
 variety of APIs
 
-00:01:37.306 --> 00:01:39.756 A:middle
+
+21
+00:01:37,306 --> 00:01:39,756
 for implementing
 powerful audio features.
 
-00:01:40.836 --> 00:01:45.266 A:middle
+
+22
+00:01:40,836 --> 00:01:45,266
 Last year, in iOS 8
 and OS X Yosemite,
 
-00:01:45.756 --> 00:01:47.456 A:middle
+
+23
+00:01:45,756 --> 00:01:47,456
 we introduced a new set
 
-00:01:47.456 --> 00:01:51.876 A:middle
+
+24
+00:01:47,456 --> 00:01:51,876
 of Objective-C APIs called
 AVAudioEngine as a part
 
-00:01:51.876 --> 00:01:54.066 A:middle
+
+25
+00:01:51,876 --> 00:01:54,066
 of AVFoundation framework.
 
-00:01:55.496 --> 00:01:58.386 A:middle
+
+26
+00:01:55,496 --> 00:01:58,386
 If you are not very
 familiar with AVAudioEngine,
 
-00:01:58.606 --> 00:02:00.856 A:middle
+
+27
+00:01:58,606 --> 00:02:00,856
 I would highly encourage
 you to check
 
 
-
-00:01:58.606 --> 00:02:00.856 A:middle
-I would highly encourage
-you to check
-
-00:02:00.856 --> 00:02:05.976 A:middle
+28
+00:02:00,856 --> 00:02:05,976
 out our last year's WWDC session
 AVAudioEngine In Practice.
 
-00:02:06.526 --> 00:02:10.886 A:middle
+
+29
+00:02:06,526 --> 00:02:10,886
 Let's look at some of the
 goals behind this effort.
 
-00:02:11.756 --> 00:02:13.536 A:middle
+
+30
+00:02:11,756 --> 00:02:13,536
 There were three
 important goals.
 
-00:02:14.276 --> 00:02:19.216 A:middle
+
+31
+00:02:14,276 --> 00:02:19,216
 First, to provide a powerful
 and a feature-rich API set.
 
-00:02:20.716 --> 00:02:25.866 A:middle
+
+32
+00:02:20,716 --> 00:02:25,866
 AVAudioEngine is built on top
 of our C frameworks; hence,
 
-00:02:25.926 --> 00:02:28.516 A:middle
+
+33
+00:02:25,926 --> 00:02:28,516
 it supports most of
 the powerful features
 
-00:02:28.796 --> 00:02:31.436 A:middle
+
+34
+00:02:28,796 --> 00:02:31,436
 that our C frameworks
 already do.
 
-00:02:32.056 --> 00:02:36.286 A:middle
+
+35
+00:02:32,056 --> 00:02:36,286
 The second goal was to
 enable you to achieve simple,
 
-00:02:36.286 --> 00:02:40.926 A:middle
+
+36
+00:02:36,286 --> 00:02:40,926
 as well as complex tasks with
 only a fraction of the amount
 
-00:02:40.926 --> 00:02:45.126 A:middle
+
+37
+00:02:40,926 --> 00:02:45,126
 of code that you would write if
 using our C frameworks directly.
 
-00:02:46.276 --> 00:02:50.446 A:middle
+
+38
+00:02:46,276 --> 00:02:50,446
 Now, the task can be as simple
 as a playback of an audio file
 
-00:02:51.086 --> 00:02:53.066 A:middle
+
+39
+00:02:51,086 --> 00:02:53,066
 to as complex as, say,
 
-00:02:53.066 --> 00:02:56.136 A:middle
+
+40
+00:02:53,066 --> 00:02:56,136
 implementing an entire
 audio engine for a game.
 
-00:02:56.696 --> 00:03:01.716 A:middle
+
+41
+00:02:56,696 --> 00:03:01,716
 The third important goal was
 to simplify real-time audio.
 
 
-
-00:02:56.696 --> 00:03:01.716 A:middle
-The third important goal was
-to simplify real-time audio.
-
-00:03:02.916 --> 00:03:06.316 A:middle
+42
+00:03:02,916 --> 00:03:06,316
 AVAudioEngine is a
 real-time audio system,
 
-00:03:07.046 --> 00:03:11.476 A:middle
+
+43
+00:03:07,046 --> 00:03:11,476
 but yet it offers a
 non-real-time interface for you
 
-00:03:11.476 --> 00:03:15.886 A:middle
+
+44
+00:03:11,476 --> 00:03:15,886
 to interact with and, hence,
 hides most of the complexities
 
-00:03:15.996 --> 00:03:19.086 A:middle
+
+45
+00:03:15,996 --> 00:03:19,086
 in dealing with real-time
 audio underneath.
 
-00:03:20.426 --> 00:03:24.736 A:middle
+
+46
+00:03:20,426 --> 00:03:24,736
 This, again, enhances the ease
 of usability of AVAudioEngine.
 
-00:03:25.276 --> 00:03:28.506 A:middle
+
+47
+00:03:25,276 --> 00:03:28,506
 On to some of the features.
 
-00:03:29.906 --> 00:03:32.766 A:middle
+
+48
+00:03:29,906 --> 00:03:32,766
 It is an Objective-C
 API set and, hence,
 
-00:03:32.976 --> 00:03:35.086 A:middle
+
+49
+00:03:32,976 --> 00:03:35,086
 accessible from Swift as well.
 
-00:03:36.316 --> 00:03:39.406 A:middle
+
+50
+00:03:36,316 --> 00:03:39,406
 It supports low latency
 real-time audio.
 
-00:03:40.616 --> 00:03:44.406 A:middle
+
+51
+00:03:40,616 --> 00:03:44,406
 Using AVAudioEngine, you will
 be able to perform a variety
 
-00:03:44.406 --> 00:03:47.706 A:middle
+
+52
+00:03:44,406 --> 00:03:47,706
 of audio tasks, like
 play and record audio,
 
-00:03:48.746 --> 00:03:51.796 A:middle
+
+53
+00:03:48,746 --> 00:03:51,796
 connect various audio
 processing blocks together
 
-00:03:51.986 --> 00:03:53.476 A:middle
+
+54
+00:03:51,986 --> 00:03:53,476
 to form your processing chain.
 
-00:03:54.516 --> 00:03:58.406 A:middle
+
+55
+00:03:54,516 --> 00:03:58,406
 You could capture audio at any
 point in this processing chain,
 
-00:03:58.586 --> 00:04:00.836 A:middle
+
+56
+00:03:58,586 --> 00:04:00,836
 say for your analysis
 or debugging.
 
 
-
-00:03:58.586 --> 00:04:00.836 A:middle
-say for your analysis
-or debugging.
-
-00:04:01.766 --> 00:04:05.226 A:middle
+57
+00:04:01,766 --> 00:04:05,226
 And also, you could
 implement 3D audio for games.
 
-00:04:07.876 --> 00:04:10.336 A:middle
+
+58
+00:04:07,876 --> 00:04:10,336
 Now, what is the
 engine comprised of?
 
-00:04:11.616 --> 00:04:14.606 A:middle
+
+59
+00:04:11,616 --> 00:04:14,606
 A node is a basic building
 block of the engine.
 
-00:04:15.676 --> 00:04:18.856 A:middle
+
+60
+00:04:15,676 --> 00:04:18,856
 The engine itself
 manages a graph of nodes
 
-00:04:19.026 --> 00:04:20.546 A:middle
+
+61
+00:04:19,026 --> 00:04:20,546
 that you connect together.
 
-00:04:21.956 --> 00:04:25.976 A:middle
+
+62
+00:04:21,956 --> 00:04:25,976
 A node can be one of
 three types, source nodes
 
-00:04:26.426 --> 00:04:30.096 A:middle
+
+63
+00:04:26,426 --> 00:04:30,096
 that provide data for
 entering, processing nodes
 
-00:04:30.156 --> 00:04:33.656 A:middle
+
+64
+00:04:30,156 --> 00:04:33,656
 that process this data,
 and the destination node,
 
-00:04:33.906 --> 00:04:37.396 A:middle
+
+65
+00:04:33,906 --> 00:04:37,396
 which is usually the terminating
 node in your processing graph
 
-00:04:37.696 --> 00:04:40.106 A:middle
+
+66
+00:04:37,696 --> 00:04:40,106
 and refers to the
 output node connected
 
-00:04:40.166 --> 00:04:41.286 A:middle
+
+67
+00:04:40,166 --> 00:04:41,286
 to the output hardware.
 
-00:04:41.286 --> 00:04:45.346 A:middle
+
+68
+00:04:41,286 --> 00:04:45,346
 Now, let's look at a
 sample engine setup.
 
-00:04:46.016 --> 00:04:49.506 A:middle
+
+69
+00:04:46,016 --> 00:04:49,506
 This could represent
 a simple karaoke app.
 
-00:04:51.216 --> 00:04:53.286 A:middle
+
+70
+00:04:51,216 --> 00:04:53,286
 You could be capturing
 users voice
 
-00:04:53.546 --> 00:04:55.936 A:middle
+
+71
+00:04:53,546 --> 00:04:55,936
 through the microphone
 implicitly connected
 
-00:04:56.006 --> 00:04:59.996 A:middle
+
+72
+00:04:56,006 --> 00:04:59,996
 to the input node, processing
 it through an effect node,
 
-00:04:59.996 --> 00:05:01.436 A:middle
+
+73
+00:04:59,996 --> 00:05:01,436
 which could be a simple delay.
 
 
-
-00:04:59.996 --> 00:05:01.436 A:middle
-which could be a simple delay.
-
-00:05:02.606 --> 00:05:05.866 A:middle
+74
+00:05:02,606 --> 00:05:05,866
 You could also be
 tapping the users voice
 
-00:05:06.326 --> 00:05:10.396 A:middle
+
+75
+00:05:06,326 --> 00:05:10,396
 through a node tap block,
 and analyzing it say
 
-00:05:10.396 --> 00:05:14.556 A:middle
+
+76
+00:05:10,396 --> 00:05:14,556
 to determine how the user is
 performing and based on that,
 
-00:05:14.846 --> 00:05:18.086 A:middle
+
+77
+00:05:14,846 --> 00:05:18,086
 you could be playing some sound
 effects through the player node,
 
-00:05:19.266 --> 00:05:22.156 A:middle
+
+78
+00:05:19,266 --> 00:05:22,156
 and you could have another
 player node that's playing a
 
-00:05:22.156 --> 00:05:24.896 A:middle
+
+79
+00:05:22,156 --> 00:05:24,896
 backing track in your app.
 
-00:05:24.896 --> 00:05:28.426 A:middle
+
+80
+00:05:24,896 --> 00:05:28,426
 And all these signals can be
 mixed together using a mixer
 
-00:05:28.426 --> 00:05:32.176 A:middle
+
+81
+00:05:28,426 --> 00:05:32,176
 node and finally played
 through the speaker connected
 
-00:05:32.176 --> 00:05:33.166 A:middle
+
+82
+00:05:32,176 --> 00:05:33,166
 to the output node.
 
-00:05:34.326 --> 00:05:37.246 A:middle
+
+83
+00:05:34,326 --> 00:05:37,246
 Now, in this setup, your input
 
-00:05:37.246 --> 00:05:39.436 A:middle
+
+84
+00:05:37,246 --> 00:05:39,436
 and the players form
 the source nodes.
 
-00:05:40.886 --> 00:05:45.076 A:middle
+
+85
+00:05:40,886 --> 00:05:45,076
 The effect and the mixer are
 your processing nodes input
 
-00:05:45.076 --> 00:05:48.526 A:middle
+
+86
+00:05:45,076 --> 00:05:48,526
 and the output node is
 the destination node.
 
-00:05:50.956 --> 00:05:54.756 A:middle
+
+87
+00:05:50,956 --> 00:05:54,756
 Now let's look at these mixer
 nodes in a little bit of detail.
 
-00:05:55.926 --> 00:05:59.286 A:middle
+
+88
+00:05:55,926 --> 00:05:59,286
 There are two kinds of
 mixer nodes in the engine.
 
 
-
-00:06:00.056 --> 00:06:03.606 A:middle
+89
+00:06:00,056 --> 00:06:03,606
 First is the AV audio
 mixer node that we just saw
 
-00:06:03.606 --> 00:06:07.226 A:middle
+
+90
+00:06:03,606 --> 00:06:07,226
 in the previous example,
 and this is mainly used
 
-00:06:07.606 --> 00:06:11.156 A:middle
+
+91
+00:06:07,606 --> 00:06:11,156
 for sample rate conversion,
 up or down mixing of channels,
 
-00:06:12.336 --> 00:06:15.906 A:middle
+
+92
+00:06:12,336 --> 00:06:15,906
 it supports mono, stereo,
 and multichannel inputs.
 
-00:06:17.216 --> 00:06:20.746 A:middle
+
+93
+00:06:17,216 --> 00:06:20,746
 And the second type of mixer
 is called the environment node,
 
-00:06:20.976 --> 00:06:23.516 A:middle
+
+94
+00:06:20,976 --> 00:06:23,516
 which is mainly used
 in gaming applications.
 
-00:06:24.996 --> 00:06:30.046 A:middle
+
+95
+00:06:24,996 --> 00:06:30,046
 It simulates a 3D space in which
 the sources that are connected
 
-00:06:30.046 --> 00:06:33.456 A:middle
+
+96
+00:06:30,046 --> 00:06:33,456
 to the environment node are
 specialized with respect
 
-00:06:33.516 --> 00:06:34.876 A:middle
+
+97
+00:06:33,516 --> 00:06:34,876
 to an implicit listener.
 
-00:06:36.246 --> 00:06:40.046 A:middle
+
+98
+00:06:36,246 --> 00:06:40,046
 And environment node supports
 mono and stereo inputs
 
-00:06:40.276 --> 00:06:43.126 A:middle
+
+99
+00:06:40,276 --> 00:06:43,126
 and spatializes mono inputs.
 
-00:06:45.556 --> 00:06:49.426 A:middle
+
+100
+00:06:45,556 --> 00:06:49,426
 Now, associated with the mixer
 nodes and the source nodes,
 
-00:06:49.676 --> 00:06:52.796 A:middle
+
+101
+00:06:49,676 --> 00:06:52,796
 there is something called
 AVAudioMixing protocol.
 
-00:06:53.976 --> 00:06:58.046 A:middle
+
+102
+00:06:53,976 --> 00:06:58,046
 This protocol defines a set of
 properties that are applicable
 
-00:06:58.046 --> 00:07:00.366 A:middle
+
+103
+00:06:58,046 --> 00:07:00,366
 at the input bus
 of a mixer node.
 
 
-
-00:06:58.046 --> 00:07:00.366 A:middle
-at the input bus
-of a mixer node.
-
-00:07:01.626 --> 00:07:05.706 A:middle
+104
+00:07:01,626 --> 00:07:05,706
 And the source nodes conform
 to this protocol and, in turn,
 
-00:07:06.206 --> 00:07:08.436 A:middle
+
+105
+00:07:06,206 --> 00:07:08,436
 control the properties
 on the mixers
 
-00:07:08.526 --> 00:07:10.516 A:middle
+
+106
+00:07:08,526 --> 00:07:10,516
 that they are connected to.
 
-00:07:11.396 --> 00:07:15.246 A:middle
+
+107
+00:07:11,396 --> 00:07:15,246
 Now, if you set these properties
 before making a connection
 
-00:07:15.286 --> 00:07:19.096 A:middle
+
+108
+00:07:15,286 --> 00:07:19,096
 from the source to the mixer
 node, the properties are cached
 
-00:07:19.346 --> 00:07:20.546 A:middle
+
+109
+00:07:19,346 --> 00:07:20,546
 at the source node level.
 
-00:07:21.676 --> 00:07:24.386 A:middle
+
+110
+00:07:21,676 --> 00:07:24,386
 And when you actually make a
 connection between the source
 
-00:07:24.386 --> 00:07:27.866 A:middle
+
+111
+00:07:24,386 --> 00:07:27,866
 and the mixer, the properties
 take effect on the mixer.
 
-00:07:28.426 --> 00:07:32.396 A:middle
+
+112
+00:07:28,426 --> 00:07:32,396
 Let's look at some of the
 examples for these properties.
 
-00:07:33.586 --> 00:07:34.966 A:middle
+
+113
+00:07:33,586 --> 00:07:34,966
 There are mainly three types --
 
-00:07:35.906 --> 00:07:38.456 A:middle
+
+114
+00:07:35,906 --> 00:07:38,456
 common mixing properties
 that are applicable
 
-00:07:38.576 --> 00:07:40.076 A:middle
+
+115
+00:07:38,576 --> 00:07:40,076
 on all the mixer nodes.
 
-00:07:40.616 --> 00:07:42.266 A:middle
+
+116
+00:07:40,616 --> 00:07:42,266
 The example is volume.
 
-00:07:43.246 --> 00:07:47.616 A:middle
+
+117
+00:07:43,246 --> 00:07:47,616
 Stereo mixing properties like
 pan that's applicable only
 
-00:07:47.616 --> 00:07:49.276 A:middle
+
+118
+00:07:47,616 --> 00:07:49,276
 on the AV audio mixer node.
 
-00:07:50.526 --> 00:07:54.196 A:middle
+
+119
+00:07:50,526 --> 00:07:54,196
 And 3D mixing properties
 like position, obstruction,
 
-00:07:54.196 --> 00:07:57.276 A:middle
+
+120
+00:07:54,196 --> 00:07:57,276
 occlusion, which is mainly
 used in the gaming use case,
 
-00:07:57.526 --> 00:08:00.746 A:middle
+
+121
+00:07:57,526 --> 00:08:00,746
 and those are applicable
 on the environment node.
 
 
-
-00:07:57.526 --> 00:08:00.746 A:middle
-and those are applicable
-on the environment node.
-
-00:08:02.596 --> 00:08:04.486 A:middle
+122
+00:08:02,596 --> 00:08:04,486
 Now let's look at
 a sample setup.
 
-00:08:05.076 --> 00:08:08.706 A:middle
+
+123
+00:08:05,076 --> 00:08:08,706
 Suppose you have a player
 node and both these mixers,
 
-00:08:09.036 --> 00:08:11.786 A:middle
+
+124
+00:08:09,036 --> 00:08:11,786
 mixer node and the
 environment node in your engine,
 
-00:08:12.336 --> 00:08:15.316 A:middle
+
+125
+00:08:12,336 --> 00:08:15,316
 and suppose you set a bunch
 
-00:08:15.316 --> 00:08:17.446 A:middle
+
+126
+00:08:15,316 --> 00:08:17,446
 of mixing properties
 on the player node.
 
-00:08:17.766 --> 00:08:22.196 A:middle
+
+127
+00:08:17,766 --> 00:08:22,196
 Now, at this point, since
 the player is not connected
 
-00:08:22.196 --> 00:08:23.326 A:middle
+
+128
+00:08:22,196 --> 00:08:23,326
 to either of the mixers,
 
-00:08:23.656 --> 00:08:28.676 A:middle
+
+129
+00:08:23,656 --> 00:08:28,676
 the properties remain
 cached at the player level.
 
-00:08:28.676 --> 00:08:30.956 A:middle
+
+130
+00:08:28,676 --> 00:08:30,956
 Now suppose you make a
 connection to the mixer node.
 
-00:08:31.776 --> 00:08:36.196 A:middle
+
+131
+00:08:31,776 --> 00:08:36,196
 Now the properties like
 volume and pan take effect
 
-00:08:36.196 --> 00:08:40.416 A:middle
+
+132
+00:08:36,196 --> 00:08:40,416
 on the mixer node, while the 3D
 mixing property, like position,
 
-00:08:40.765 --> 00:08:43.275 A:middle
+
+133
+00:08:40,765 --> 00:08:43,275
 does not affect the mixer node.
 
-00:08:43.826 --> 00:08:47.556 A:middle
+
+134
+00:08:43,826 --> 00:08:47,556
 Now, if you disconnect
 from the mixer and connect
 
-00:08:47.626 --> 00:08:48.846 A:middle
+
+135
+00:08:47,626 --> 00:08:48,846
 to the environment node,
 
-00:08:49.396 --> 00:08:53.366 A:middle
+
+136
+00:08:49,396 --> 00:08:53,366
 volume and position take
 effect while pan has no effect
 
-00:08:53.546 --> 00:08:54.556 A:middle
+
+137
+00:08:53,546 --> 00:08:54,556
 on the environment node.
 
-00:08:55.576 --> 00:08:59.176 A:middle
+
+138
+00:08:55,576 --> 00:08:59,176
 So this way you could have a
 bunch of mixing properties set
 
-00:08:59.176 --> 00:09:02.906 A:middle
+
+139
+00:08:59,176 --> 00:09:02,906
 on a player and move the
 player from one mixer
 
 
-
-00:08:59.176 --> 00:09:02.906 A:middle
-on a player and move the
-player from one mixer
-
-00:09:03.176 --> 00:09:05.496 A:middle
+140
+00:09:03,176 --> 00:09:05,496
 to the other mixer
 in your application
 
-00:09:05.696 --> 00:09:07.516 A:middle
+
+141
+00:09:05,696 --> 00:09:07,516
 with the mixing settings intact.
 
-00:09:09.056 --> 00:09:12.106 A:middle
+
+142
+00:09:09,056 --> 00:09:12,106
 We will revisit this
 AVAudioMixing protocol
 
-00:09:12.276 --> 00:09:14.616 A:middle
+
+143
+00:09:12,276 --> 00:09:14,616
 when we discuss one
 of our new features
 
-00:09:14.616 --> 00:09:16.776 A:middle
+
+144
+00:09:14,616 --> 00:09:16,776
 for this year in a few minutes.
 
-00:09:17.366 --> 00:09:23.266 A:middle
+
+145
+00:09:17,366 --> 00:09:23,266
 Now, I would like to review
 another important aspect
 
-00:09:23.656 --> 00:09:26.506 A:middle
+
+146
+00:09:23,656 --> 00:09:26,506
 that is how to handle
 multichannel audio
 
-00:09:26.756 --> 00:09:28.136 A:middle
+
+147
+00:09:26,756 --> 00:09:28,136
 with AVAudioEngine.
 
-00:09:28.546 --> 00:09:32.156 A:middle
+
+148
+00:09:28,546 --> 00:09:32,156
 There are two parts to
 the setup involved here.
 
-00:09:32.986 --> 00:09:37.046 A:middle
+
+149
+00:09:32,986 --> 00:09:37,046
 First is configuring
 your hardware to be able
 
-00:09:37.046 --> 00:09:38.956 A:middle
+
+150
+00:09:37,046 --> 00:09:38,956
 to receive multichannel audio.
 
-00:09:40.026 --> 00:09:42.626 A:middle
+
+151
+00:09:40,026 --> 00:09:42,626
 Now, the hardware
 could be HDMI device
 
-00:09:42.826 --> 00:09:44.736 A:middle
+
+152
+00:09:42,826 --> 00:09:44,736
 or a USB device and so on.
 
-00:09:46.066 --> 00:09:49.446 A:middle
+
+153
+00:09:46,066 --> 00:09:49,446
 And the second part is actually
 setting the engine itself
 
-00:09:49.806 --> 00:09:52.376 A:middle
+
+154
+00:09:49,806 --> 00:09:52,376
 to be able to render
 multichannel audio
 
-00:09:52.586 --> 00:09:53.456 A:middle
+
+155
+00:09:52,586 --> 00:09:53,456
 to this hardware.
 
-00:09:54.036 --> 00:09:58.976 A:middle
+
+156
+00:09:54,036 --> 00:09:58,976
 We will look at these
 one by one.
 
-00:09:59.406 --> 00:10:01.446 A:middle
+
+157
+00:09:59,406 --> 00:10:01,446
 First, hardware setup on OS X.
 
 
-
-00:09:59.406 --> 00:10:01.446 A:middle
-First, hardware setup on OS X.
-
-00:10:01.446 --> 00:10:07.576 A:middle
+158
+00:10:01,446 --> 00:10:07,576
 On OS X, there is a built-in
 system tool called audio MIDI
 
-00:10:07.576 --> 00:10:11.216 A:middle
+
+159
+00:10:07,576 --> 00:10:11,216
 setup, using which the
 user can configure his
 
-00:10:11.256 --> 00:10:12.456 A:middle
+
+160
+00:10:11,256 --> 00:10:12,456
 multichannel hardware.
 
-00:10:13.366 --> 00:10:15.396 A:middle
+
+161
+00:10:13,366 --> 00:10:15,396
 So he could use this
 tool to, say,
 
-00:10:15.396 --> 00:10:17.316 A:middle
+
+162
+00:10:15,396 --> 00:10:17,316
 set up the speaker
 configuration,
 
-00:10:17.576 --> 00:10:19.166 A:middle
+
+163
+00:10:17,576 --> 00:10:19,166
 channel layout, et cetera.
 
-00:10:20.116 --> 00:10:24.166 A:middle
+
+164
+00:10:20,116 --> 00:10:24,166
 And then the app can
 set up AVAudioEngine
 
-00:10:24.386 --> 00:10:27.386 A:middle
+
+165
+00:10:24,386 --> 00:10:27,386
 to use this hardware for
 multichannel rendering.
 
-00:10:29.416 --> 00:10:34.546 A:middle
+
+166
+00:10:29,416 --> 00:10:34,546
 But on iOS, in order to enable
 multichannel on the hardware,
 
-00:10:34.876 --> 00:10:38.056 A:middle
+
+167
+00:10:34,876 --> 00:10:38,056
 the app needs to configure
 its AVAudioSession.
 
-00:10:38.596 --> 00:10:41.386 A:middle
+
+168
+00:10:38,596 --> 00:10:41,386
 We will assume a
 playback use case
 
-00:10:41.516 --> 00:10:43.796 A:middle
+
+169
+00:10:41,516 --> 00:10:43,796
 and see what are
 the steps involved.
 
-00:10:45.466 --> 00:10:49.546 A:middle
+
+170
+00:10:45,466 --> 00:10:49,546
 The first thing to do would be
 to activate your audio session.
 
-00:10:50.456 --> 00:10:55.856 A:middle
+
+171
+00:10:50,456 --> 00:10:55,856
 Next you need to check for the
 maximum number of open channels
 
-00:10:56.046 --> 00:10:58.116 A:middle
+
+172
+00:10:56,046 --> 00:10:58,116
 that are available
 for your session.
 
-00:10:59.496 --> 00:11:02.016 A:middle
+
+173
+00:10:59,496 --> 00:11:02,016
 Then you set your
 preferred number of channels,
 
 
-
-00:10:59.496 --> 00:11:02.016 A:middle
-Then you set your
-preferred number of channels,
-
-00:11:02.746 --> 00:11:06.696 A:middle
+174
+00:11:02,746 --> 00:11:06,696
 and as a final step, you
 query back the actual number
 
-00:11:06.756 --> 00:11:09.946 A:middle
+
+175
+00:11:06,756 --> 00:11:09,946
 of output channels to
 verify whether the request
 
-00:11:09.996 --> 00:11:12.026 A:middle
+
+176
+00:11:09,996 --> 00:11:12,026
 that you just made
 went through or not.
 
-00:11:13.706 --> 00:11:17.966 A:middle
+
+177
+00:11:13,706 --> 00:11:17,966
 Now, note that whenever you make
 a request for a certain number
 
-00:11:17.966 --> 00:11:20.476 A:middle
+
+178
+00:11:17,966 --> 00:11:20,476
 of channels, it does
 not guarantee
 
-00:11:20.476 --> 00:11:22.526 A:middle
+
+179
+00:11:20,476 --> 00:11:22,526
 that the request
 is always accepted.
 
-00:11:23.176 --> 00:11:24.436 A:middle
+
+180
+00:11:23,176 --> 00:11:24,436
 Hence, the final step
 
-00:11:24.646 --> 00:11:28.506 A:middle
+
+181
+00:11:24,646 --> 00:11:28,506
 of verifying the actual output
 number of channels is necessary.
 
-00:11:29.066 --> 00:11:32.706 A:middle
+
+182
+00:11:29,066 --> 00:11:32,706
 Now, in code, it
 looks like this.
 
-00:11:32.706 --> 00:11:36.596 A:middle
+
+183
+00:11:32,706 --> 00:11:36,596
 We will assume an
 audio playback use case
 
-00:11:36.866 --> 00:11:39.856 A:middle
+
+184
+00:11:36,866 --> 00:11:39,856
 and assume you want
 a 5.1 rendering.
 
-00:11:40.416 --> 00:11:45.006 A:middle
+
+185
+00:11:40,416 --> 00:11:45,006
 So the first thing to do would
 be to get a shared instance
 
-00:11:45.186 --> 00:11:48.846 A:middle
+
+186
+00:11:45,186 --> 00:11:48,846
 of the audio session,
 set your category
 
-00:11:49.076 --> 00:11:50.896 A:middle
+
+187
+00:11:49,076 --> 00:11:50,896
 and make the session active.
 
-00:11:51.426 --> 00:11:56.596 A:middle
+
+188
+00:11:51,426 --> 00:11:56,596
 Next, check the maximum
 number of output channels
 
-00:11:56.596 --> 00:11:58.246 A:middle
+
+189
+00:11:56,596 --> 00:11:58,246
 that are available
 in your session.
 
-00:11:58.796 --> 00:12:03.006 A:middle
+
+190
+00:11:58,796 --> 00:12:03,006
 And based on that, you
 set your preferred number
 
 
-
-00:11:58.796 --> 00:12:03.006 A:middle
-And based on that, you
-set your preferred number
-
-00:12:03.006 --> 00:12:04.396 A:middle
+191
+00:12:03,006 --> 00:12:04,396
 of channels on the session.
 
-00:12:04.826 --> 00:12:09.636 A:middle
+
+192
+00:12:04,826 --> 00:12:09,636
 And as a final step, you
 query back the actual number
 
-00:12:09.636 --> 00:12:11.366 A:middle
+
+193
+00:12:09,636 --> 00:12:11,366
 of output channels
 and then adapt
 
-00:12:11.856 --> 00:12:16.816 A:middle
+
+194
+00:12:11,856 --> 00:12:16,816
 to the corresponding
 channel count.
 
-00:12:16.986 --> 00:12:19.486 A:middle
+
+195
+00:12:16,986 --> 00:12:19,486
 Okay. So this was all
 the hardware setup part.
 
-00:12:20.036 --> 00:12:23.136 A:middle
+
+196
+00:12:20,036 --> 00:12:23,136
 Now we'll see how to set
 up the engine to be able
 
-00:12:23.136 --> 00:12:24.726 A:middle
+
+197
+00:12:23,136 --> 00:12:24,726
 to render multichannel audio.
 
-00:12:26.536 --> 00:12:28.696 A:middle
+
+198
+00:12:26,536 --> 00:12:28,696
 Again here there
 are two use cases.
 
-00:12:29.496 --> 00:12:33.396 A:middle
+
+199
+00:12:29,496 --> 00:12:33,396
 First, say you have a
 multichannel audio content
 
-00:12:33.396 --> 00:12:35.506 A:middle
+
+200
+00:12:33,396 --> 00:12:35,506
 available that needs
 to be played back
 
-00:12:35.646 --> 00:12:37.036 A:middle
+
+201
+00:12:35,646 --> 00:12:37,036
 through the multichannel
 hardware.
 
-00:12:37.866 --> 00:12:41.396 A:middle
+
+202
+00:12:37,866 --> 00:12:41,396
 And in this case, you would
 use an AV audio mixer node.
 
-00:12:41.396 --> 00:12:46.426 A:middle
+
+203
+00:12:41,396 --> 00:12:46,426
 And in the second case,
 as a gaming scenario
 
-00:12:46.626 --> 00:12:50.286 A:middle
+
+204
+00:12:46,626 --> 00:12:50,286
 where you want your content to
 be spatialized and then played
 
-00:12:50.286 --> 00:12:51.976 A:middle
+
+205
+00:12:50,286 --> 00:12:51,976
 through the multichannel
 hardware.
 
-00:12:52.626 --> 00:12:55.586 A:middle
+
+206
+00:12:52,626 --> 00:12:55,586
 And here you would use
 an environment node.
 
-00:12:57.776 --> 00:13:01.566 A:middle
+
+207
+00:12:57,776 --> 00:13:01,566
 Case one, you have a
 multichannel audio content
 
 
-
-00:12:57.776 --> 00:13:01.566 A:middle
-Case one, you have a
-multichannel audio content
-
-00:13:02.126 --> 00:13:04.936 A:middle
+208
+00:13:02,126 --> 00:13:04,936
 and a multichannel hardware
 that's just been set
 
-00:13:04.936 --> 00:13:06.756 A:middle
+
+209
+00:13:04,936 --> 00:13:06,756
 up as we discussed
 a few minutes back.
 
-00:13:08.486 --> 00:13:11.636 A:middle
+
+210
+00:13:08,486 --> 00:13:11,636
 Now, note that although
 the format of the content
 
-00:13:11.636 --> 00:13:14.496 A:middle
+
+211
+00:13:11,636 --> 00:13:14,496
 and the hardware are shown
 to be identical here,
 
-00:13:14.626 --> 00:13:15.896 A:middle
+
+212
+00:13:14,626 --> 00:13:15,896
 they could very well differ.
 
-00:13:17.176 --> 00:13:21.016 A:middle
+
+213
+00:13:17,176 --> 00:13:21,016
 And the mixer node here will
 take care of channel mapping
 
-00:13:21.546 --> 00:13:23.786 A:middle
+
+214
+00:13:21,546 --> 00:13:23,786
 between the content and
 the hardware format.
 
-00:13:24.466 --> 00:13:27.536 A:middle
+
+215
+00:13:24,466 --> 00:13:27,536
 So the first thing you need
 
-00:13:27.586 --> 00:13:32.186 A:middle
+
+216
+00:13:27,586 --> 00:13:32,186
 to do is propagate the hardware
 format to the connection
 
-00:13:32.336 --> 00:13:34.606 A:middle
+
+217
+00:13:32,336 --> 00:13:34,606
 between the mixer
 and the output node.
 
-00:13:35.626 --> 00:13:38.216 A:middle
+
+218
+00:13:35,626 --> 00:13:38,216
 So in code, it looks like this.
 
-00:13:39.246 --> 00:13:43.406 A:middle
+
+219
+00:13:39,246 --> 00:13:43,406
 You would query the output
 format of the output node,
 
-00:13:43.596 --> 00:13:48.076 A:middle
+
+220
+00:13:43,596 --> 00:13:48,076
 which is the hardware format,
 and then use that format
 
-00:13:48.316 --> 00:13:51.036 A:middle
+
+221
+00:13:48,316 --> 00:13:51,036
 to make the connection
 between the mixer node
 
-00:13:51.356 --> 00:13:52.826 A:middle
+
+222
+00:13:51,356 --> 00:13:52,826
 and the output node.
 
-00:13:55.496 --> 00:13:58.676 A:middle
+
+223
+00:13:55,496 --> 00:13:58,676
 The next thing is similar
 on the content side.
 
-00:13:58.906 --> 00:14:02.126 A:middle
+
+224
+00:13:58,906 --> 00:14:02,126
 You propagate the content
 format to the connection
 
 
-
-00:13:58.906 --> 00:14:02.126 A:middle
-You propagate the content
-format to the connection
-
-00:14:02.226 --> 00:14:04.946 A:middle
+225
+00:14:02,226 --> 00:14:04,946
 between the player
 and the mixer node.
 
-00:14:05.796 --> 00:14:08.946 A:middle
+
+226
+00:14:05,796 --> 00:14:08,946
 So assume you have the
 multichannel audio content
 
-00:14:08.946 --> 00:14:09.956 A:middle
+
+227
+00:14:08,946 --> 00:14:09,956
 in the form of a file.
 
-00:14:10.586 --> 00:14:12.456 A:middle
+
+228
+00:14:10,586 --> 00:14:12,456
 You can open the
 file for reading
 
-00:14:12.756 --> 00:14:16.326 A:middle
+
+229
+00:14:12,756 --> 00:14:16,326
 and use its processing
 format to make the connection
 
-00:14:16.366 --> 00:14:18.316 A:middle
+
+230
+00:14:16,366 --> 00:14:18,316
 from the player to
 the mixer node.
 
-00:14:18.806 --> 00:14:24.006 A:middle
+
+231
+00:14:18,806 --> 00:14:24,006
 And then you schedule
 your file on the player,
 
-00:14:24.506 --> 00:14:26.766 A:middle
+
+232
+00:14:24,506 --> 00:14:26,766
 you start your engine
 and start the player,
 
-00:14:26.846 --> 00:14:30.066 A:middle
+
+233
+00:14:26,846 --> 00:14:30,066
 and the content will flow
 through your processing chain.
 
-00:14:30.646 --> 00:14:37.836 A:middle
+
+234
+00:14:30,646 --> 00:14:37,836
 Now case two, where it's
 typically a gaming scenario
 
-00:14:37.836 --> 00:14:40.946 A:middle
+
+235
+00:14:37,836 --> 00:14:40,946
 and you need your content to
 be spatialized and then played
 
-00:14:40.946 --> 00:14:42.226 A:middle
+
+236
+00:14:40,946 --> 00:14:42,226
 through the multichannel
 hardware.
 
-00:14:43.506 --> 00:14:47.526 A:middle
+
+237
+00:14:43,506 --> 00:14:47,526
 So the steps here are very
 much similar, except a couple
 
-00:14:47.526 --> 00:14:48.836 A:middle
+
+238
+00:14:47,526 --> 00:14:48,836
 of subtle differences.
 
-00:14:49.466 --> 00:14:53.146 A:middle
+
+239
+00:14:49,466 --> 00:14:53,146
 So the first thing is you
 get your hardware format
 
-00:14:53.366 --> 00:14:54.806 A:middle
+
+240
+00:14:53,366 --> 00:14:54,806
 and set the connection format
 
-00:14:54.806 --> 00:14:59.136 A:middle
+
+241
+00:14:54,806 --> 00:14:59,136
 between your environment
 node and the output node.
 
-00:14:59.346 --> 00:15:03.426 A:middle
+
+242
+00:14:59,346 --> 00:15:03,426
 Now, since the environment node
 supports only specific channel
 
 
-
-00:14:59.346 --> 00:15:03.426 A:middle
-Now, since the environment node
-supports only specific channel
-
-00:15:03.426 --> 00:15:08.046 A:middle
+243
+00:15:03,426 --> 00:15:08,046
 layouts, you need to map the
 hardware format to a layout
 
-00:15:08.106 --> 00:15:09.806 A:middle
+
+244
+00:15:08,106 --> 00:15:09,806
 that the environment
 node supports.
 
-00:15:10.696 --> 00:15:12.226 A:middle
+
+245
+00:15:10,696 --> 00:15:12,226
 So that's the first difference.
 
-00:15:12.576 --> 00:15:15.506 A:middle
+
+246
+00:15:12,576 --> 00:15:15,506
 So assuming we have
 a 5.1 hardware,
 
-00:15:16.186 --> 00:15:20.016 A:middle
+
+247
+00:15:16,186 --> 00:15:20,016
 we can choose audio
 unit 5.0 layout pack
 
-00:15:20.676 --> 00:15:22.736 A:middle
+
+248
+00:15:20,676 --> 00:15:22,736
 that is supported
 by the audio node.
 
-00:15:23.546 --> 00:15:26.516 A:middle
+
+249
+00:15:23,546 --> 00:15:26,516
 We can create an AV audio
 channel layout using this
 
-00:15:26.516 --> 00:15:27.266 A:middle
+
+250
+00:15:26,516 --> 00:15:27,266
 layout tag.
 
-00:15:27.896 --> 00:15:31.766 A:middle
+
+251
+00:15:27,896 --> 00:15:31,766
 And then an AV audio
 format using this layout.
 
-00:15:32.516 --> 00:15:36.806 A:middle
+
+252
+00:15:32,516 --> 00:15:36,806
 And then you make a connection
 from the environment node
 
-00:15:36.906 --> 00:15:39.766 A:middle
+
+253
+00:15:36,906 --> 00:15:39,766
 to the output node
 using this format.
 
-00:15:41.236 --> 00:15:43.606 A:middle
+
+254
+00:15:41,236 --> 00:15:43,606
 The second step is
 exactly the same,
 
-00:15:43.846 --> 00:15:46.886 A:middle
+
+255
+00:15:43,846 --> 00:15:46,886
 propagating your content
 format between the connection
 
-00:15:47.466 --> 00:15:49.446 A:middle
+
+256
+00:15:47,466 --> 00:15:49,446
 from player to the
 environment node.
 
-00:15:50.536 --> 00:15:54.706 A:middle
+
+257
+00:15:50,536 --> 00:15:54,706
 So we open the file for reading
 and use its processing format
 
-00:15:55.206 --> 00:15:57.976 A:middle
+
+258
+00:15:55,206 --> 00:15:57,976
 to make a connection from the
 player to the environment.
 
-00:15:58.576 --> 00:16:03.676 A:middle
+
+259
+00:15:58,576 --> 00:16:03,676
 And the next thing here is
 to set a rendering algorithm
 
 
-
-00:15:58.576 --> 00:16:03.676 A:middle
-And the next thing here is
-to set a rendering algorithm
-
-00:16:03.676 --> 00:16:08.176 A:middle
+260
+00:16:03,676 --> 00:16:08,176
 on the player to one which
 supports multichannel rendering.
 
-00:16:09.456 --> 00:16:11.946 A:middle
+
+261
+00:16:09,456 --> 00:16:11,946
 This rendering algorithm is one
 
-00:16:11.946 --> 00:16:14.396 A:middle
+
+262
+00:16:11,946 --> 00:16:14,396
 of the 3D mixing
 protocol properties
 
-00:16:14.436 --> 00:16:17.316 A:middle
+
+263
+00:16:14,436 --> 00:16:17,316
 that we just saw a
 few minutes back,
 
-00:16:17.316 --> 00:16:19.806 A:middle
+
+264
+00:16:17,316 --> 00:16:19,806
 and this will tell
 the environment node
 
-00:16:20.146 --> 00:16:22.996 A:middle
+
+265
+00:16:20,146 --> 00:16:22,996
 that the corresponding
 source is requesting a
 
-00:16:22.996 --> 00:16:24.386 A:middle
+
+266
+00:16:22,996 --> 00:16:24,386
 multichannel rendering.
 
-00:16:24.916 --> 00:16:28.246 A:middle
+
+267
+00:16:24,916 --> 00:16:28,246
 And then the usual stuff.
 
-00:16:28.326 --> 00:16:32.696 A:middle
+
+268
+00:16:28,326 --> 00:16:32,696
 You schedule your file on the
 player, you start your engine
 
-00:16:32.696 --> 00:16:35.776 A:middle
+
+269
+00:16:32,696 --> 00:16:35,776
 and the player, and then your
 content will be spatialized
 
-00:16:35.926 --> 00:16:37.666 A:middle
+
+270
+00:16:35,926 --> 00:16:37,666
 by the environment node.
 
-00:16:41.246 --> 00:16:46.786 A:middle
+
+271
+00:16:41,246 --> 00:16:46,786
 Okay. So this was
 AVAudioEngine as it existed
 
-00:16:46.946 --> 00:16:49.526 A:middle
+
+272
+00:16:46,946 --> 00:16:49,526
 in iOS 8 and OS X Yosemite.
 
-00:16:50.726 --> 00:16:52.596 A:middle
+
+273
+00:16:50,726 --> 00:16:52,596
 Now on to the more
 exciting stuff.
 
-00:16:53.406 --> 00:16:54.916 A:middle
+
+274
+00:16:53,406 --> 00:16:54,916
 What's new for this year?
 
-00:16:55.296 --> 00:17:00.676 A:middle
+
+275
+00:16:55,296 --> 00:17:00,676
 We have three main new features.
 
 
-
-00:16:55.296 --> 00:17:00.676 A:middle
-We have three main new features.
-
-00:17:01.676 --> 00:17:03.936 A:middle
+276
+00:17:01,676 --> 00:17:03,936
 First is the splitting support,
 
-00:17:04.215 --> 00:17:06.606 A:middle
+
+277
+00:17:04,215 --> 00:17:06,606
 which I will be talking
 about in a minute.
 
-00:17:07.616 --> 00:17:11.006 A:middle
+
+278
+00:17:07,616 --> 00:17:11,006
 Second is the audio
 format conversion support,
 
-00:17:11.195 --> 00:17:13.506 A:middle
+
+279
+00:17:11,195 --> 00:17:13,506
 and we have a couple
 of new classes here,
 
-00:17:13.836 --> 00:17:16.266 A:middle
+
+280
+00:17:13,836 --> 00:17:16,266
 the main one being
 AVAudioConverter.
 
-00:17:17.776 --> 00:17:20.965 A:middle
+
+281
+00:17:17,776 --> 00:17:20,965
 And then finally, we have
 another new class called
 
-00:17:20.965 --> 00:17:24.826 A:middle
+
+282
+00:17:20,965 --> 00:17:24,826
 AVAudioSequencer, which supports
 play back of MIDI files.
 
-00:17:25.425 --> 00:17:30.126 A:middle
+
+283
+00:17:25,425 --> 00:17:30,126
 Moving to the splitting support.
 
-00:17:30.886 --> 00:17:34.016 A:middle
+
+284
+00:17:30,886 --> 00:17:34,016
 Now, let's consider
 this sample setup,
 
-00:17:34.796 --> 00:17:37.156 A:middle
+
+285
+00:17:34,796 --> 00:17:37,156
 which by now I guess
 should be pretty familiar.
 
-00:17:38.086 --> 00:17:42.876 A:middle
+
+286
+00:17:38,086 --> 00:17:42,876
 So in the API that
 existed as of last week,
 
-00:17:43.576 --> 00:17:47.226 A:middle
+
+287
+00:17:43,576 --> 00:17:47,226
 only one-to-one connections
 were supported in the engine.
 
-00:17:47.956 --> 00:17:52.566 A:middle
+
+288
+00:17:47,956 --> 00:17:52,566
 That is the output of any
 node could only be connected
 
-00:17:52.566 --> 00:17:54.846 A:middle
+
+289
+00:17:52,566 --> 00:17:54,846
 to one other node in the engine.
 
-00:17:55.386 --> 00:18:02.526 A:middle
+
+290
+00:17:55,386 --> 00:18:02,526
 But now, instead of this, we
 have added support to do this.
 
 
-
-00:17:55.386 --> 00:18:02.526 A:middle
-But now, instead of this, we
-have added support to do this.
-
-00:18:03.356 --> 00:18:07.796 A:middle
+291
+00:18:03,356 --> 00:18:07,796
 That is to be able to
 split output of a node
 
-00:18:07.886 --> 00:18:11.156 A:middle
+
+292
+00:18:07,886 --> 00:18:11,156
 into multiple paths in
 your processing chain.
 
-00:18:11.216 --> 00:18:16.356 A:middle
+
+293
+00:18:11,216 --> 00:18:16,356
 So in this example, the
 output of the player is split
 
-00:18:16.416 --> 00:18:17.766 A:middle
+
+294
+00:18:16,416 --> 00:18:17,766
 into three different paths
 
-00:18:18.216 --> 00:18:20.986 A:middle
+
+295
+00:18:18,216 --> 00:18:20,986
 and then eventually
 connected to the mixer node.
 
-00:18:22.356 --> 00:18:26.686 A:middle
+
+296
+00:18:22,356 --> 00:18:26,686
 Now, splitting is very useful
 in use cases like mixing
 
-00:18:27.046 --> 00:18:32.106 A:middle
+
+297
+00:18:27,046 --> 00:18:32,106
 where you need to blend in some
 amount of wet or process signals
 
-00:18:32.706 --> 00:18:35.976 A:middle
+
+298
+00:18:32,706 --> 00:18:35,976
 with a dry signal all
 driven by the same source.
 
-00:18:37.106 --> 00:18:40.066 A:middle
+
+299
+00:18:37,106 --> 00:18:40,066
 In this example, the
 connection from the player
 
-00:18:40.326 --> 00:18:44.646 A:middle
+
+300
+00:18:40,326 --> 00:18:44,646
 to the mixer node forms your dry
 signal path while the other two
 
-00:18:44.716 --> 00:18:48.196 A:middle
+
+301
+00:18:44,716 --> 00:18:48,196
 paths going through the
 effect nodes forms your wet
 
-00:18:48.266 --> 00:18:48.776 A:middle
+
+302
+00:18:48,266 --> 00:18:48,776
 signal paths.
 
-00:18:49.626 --> 00:18:53.246 A:middle
+
+303
+00:18:49,626 --> 00:18:53,246
 And all these three signals are
 mixed together using a mixer
 
-00:18:53.246 --> 00:18:56.426 A:middle
+
+304
+00:18:53,246 --> 00:18:56,426
 node to give you the mix.
 
-00:18:56.616 --> 00:18:59.616 A:middle
+
+305
+00:18:56,616 --> 00:18:59,616
 Now, note that when you
 split the output of a node,
 
 
-
-00:19:00.066 --> 00:19:04.026 A:middle
+306
+00:19:00,066 --> 00:19:04,026
 the entire output is actually
 rendered through multiple paths,
 
-00:19:04.636 --> 00:19:07.626 A:middle
+
+307
+00:19:04,636 --> 00:19:07,626
 and there is no splitting
 of channels involved.
 
-00:19:10.556 --> 00:19:14.926 A:middle
+
+308
+00:19:10,556 --> 00:19:14,926
 Now let's see in code how
 to set these connections up.
 
-00:19:16.766 --> 00:19:19.876 A:middle
+
+309
+00:19:16,766 --> 00:19:19,876
 As you can see, the
 player is connected
 
-00:19:19.876 --> 00:19:21.186 A:middle
+
+310
+00:19:19,876 --> 00:19:21,186
 to three different nodes.
 
-00:19:22.486 --> 00:19:26.236 A:middle
+
+311
+00:19:22,486 --> 00:19:26,236
 We will call these as
 connection points represented
 
-00:19:26.526 --> 00:19:29.586 A:middle
+
+312
+00:19:26,526 --> 00:19:29,586
 by a very simple new
 class called AV audio
 
-00:19:29.586 --> 00:19:30.546 A:middle
+
+313
+00:19:29,586 --> 00:19:30,546
 connection point.
 
-00:19:30.546 --> 00:19:36.656 A:middle
+
+314
+00:19:30,546 --> 00:19:36,656
 The first thing to do
 is to create an array
 
-00:19:36.656 --> 00:19:39.486 A:middle
+
+315
+00:19:36,656 --> 00:19:39,486
 of connection points that
 you want your player node
 
-00:19:39.486 --> 00:19:40.396 A:middle
+
+316
+00:19:39,486 --> 00:19:40,396
 to be connected to.
 
-00:19:41.156 --> 00:19:45.776 A:middle
+
+317
+00:19:41,156 --> 00:19:45,776
 So in this example, we want
 connections to the input bus:
 
-00:19:45.846 --> 00:19:51.886 A:middle
+
+318
+00:19:45,846 --> 00:19:51,886
 0 of the two effects and input
 bus: 1 of the mixer node.
 
-00:19:53.606 --> 00:19:56.926 A:middle
+
+319
+00:19:53,606 --> 00:19:56,926
 Then you use the new
 connection API we have
 
-00:19:57.336 --> 00:20:00.216 A:middle
+
+320
+00:19:57,336 --> 00:20:00,216
 to connect the player to
 these connection points.
 
 
-
-00:19:57.336 --> 00:20:00.216 A:middle
-to connect the player to
-these connection points.
-
-00:20:00.856 --> 00:20:04.866 A:middle
+321
+00:20:00,856 --> 00:20:04,866
 And that's it, so you are set
 up for the split connections.
 
-00:20:05.266 --> 00:20:08.586 A:middle
+
+322
+00:20:05,266 --> 00:20:08,586
 So you move on and make
 your other connections
 
-00:20:08.586 --> 00:20:13.976 A:middle
+
+323
+00:20:08,586 --> 00:20:13,976
 in the engine as you need.
 
-00:20:14.066 --> 00:20:16.786 A:middle
+
+324
+00:20:14,066 --> 00:20:16,786
 Now let's revisit the
 AVAudioMixing protocol
 
-00:20:16.786 --> 00:20:18.736 A:middle
+
+325
+00:20:16,786 --> 00:20:18,736
 that we discussed sometime back
 
-00:20:18.736 --> 00:20:22.716 A:middle
+
+326
+00:20:18,736 --> 00:20:22,716
 and see how it affects
 splitting use case.
 
-00:20:23.176 --> 00:20:26.256 A:middle
+
+327
+00:20:23,176 --> 00:20:26,256
 Assume we have a player
 node whose output is split
 
-00:20:26.256 --> 00:20:27.956 A:middle
+
+328
+00:20:26,256 --> 00:20:27,956
 into two different paths,
 
-00:20:27.956 --> 00:20:30.606 A:middle
+
+329
+00:20:27,956 --> 00:20:30,606
 going through the effect
 nodes to a mixer node.
 
-00:20:31.906 --> 00:20:35.776 A:middle
+
+330
+00:20:31,906 --> 00:20:35,776
 Now, suppose you set a
 property on the player node.
 
-00:20:36.326 --> 00:20:38.776 A:middle
+
+331
+00:20:36,326 --> 00:20:38,776
 In this example,
 say you set volume.
 
-00:20:38.776 --> 00:20:44.906 A:middle
+
+332
+00:20:38,776 --> 00:20:44,906
 Now, at this point, the
 property will take effect on all
 
-00:20:44.906 --> 00:20:49.086 A:middle
+
+333
+00:20:44,906 --> 00:20:49,086
 of its existing mixer
 connections, so in this example,
 
-00:20:49.266 --> 00:20:52.066 A:middle
+
+334
+00:20:49,266 --> 00:20:52,066
 both input bus: 0 and input bus:
 
-00:20:52.066 --> 00:20:58.466 A:middle
+
+335
+00:20:52,066 --> 00:20:58,466
 1 of the mixer node
 get a volume of .5.
 
-00:20:58.676 --> 00:21:02.426 A:middle
+
+336
+00:20:58,676 --> 00:21:02,426
 But if you wanted to
 overwrite any of the properties
 
 
-
-00:20:58.676 --> 00:21:02.426 A:middle
-But if you wanted to
-overwrite any of the properties
-
-00:21:02.496 --> 00:21:04.306 A:middle
+337
+00:21:02,496 --> 00:21:04,306
 on a particular mixer
 connection,
 
-00:21:04.576 --> 00:21:05.776 A:middle
+
+338
+00:21:04,576 --> 00:21:05,776
 you could still do that.
 
-00:21:06.386 --> 00:21:10.066 A:middle
+
+339
+00:21:06,386 --> 00:21:10,066
 And the way to do it is
 using our new class called
 
-00:21:10.066 --> 00:21:11.936 A:middle
+
+340
+00:21:10,066 --> 00:21:11,936
 AVAudioMixing destination.
 
-00:21:13.196 --> 00:21:14.876 A:middle
+
+341
+00:21:13,196 --> 00:21:14,876
 So you query the player node
 
-00:21:15.346 --> 00:21:18.396 A:middle
+
+342
+00:21:15,346 --> 00:21:18,396
 to give you the destination
 object corresponding
 
-00:21:18.456 --> 00:21:19.956 A:middle
+
+343
+00:21:18,456 --> 00:21:19,956
 to the mixer that you want,
 
-00:21:20.756 --> 00:21:23.656 A:middle
+
+344
+00:21:20,756 --> 00:21:23,656
 and you then set a
 property on that object.
 
-00:21:24.486 --> 00:21:28.086 A:middle
+
+345
+00:21:24,486 --> 00:21:28,086
 So in this example, we
 are overwriting the volume
 
-00:21:28.266 --> 00:21:33.606 A:middle
+
+346
+00:21:28,266 --> 00:21:33,606
 on mixer input bus: 0 to .8.
 
-00:21:33.886 --> 00:21:39.076 A:middle
+
+347
+00:21:33,886 --> 00:21:39,076
 Now, okay, so similarly, you can
 also overwrite the properties
 
-00:21:39.146 --> 00:21:43.476 A:middle
+
+348
+00:21:39,146 --> 00:21:43,476
 on the other mixer
 connection as well.
 
-00:21:43.686 --> 00:21:45.716 A:middle
+
+349
+00:21:43,686 --> 00:21:45,716
 Now, let's see what
 happens in a disconnection.
 
-00:21:46.826 --> 00:21:49.446 A:middle
+
+350
+00:21:46,826 --> 00:21:49,446
 Suppose you disconnect
 the effect
 
-00:21:49.756 --> 00:21:51.786 A:middle
+
+351
+00:21:49,756 --> 00:21:51,786
 to mixer input bus:
 1 connection.
 
-00:21:52.896 --> 00:21:57.466 A:middle
+
+352
+00:21:52,896 --> 00:21:57,466
 Now, note that the settings
 that you may have overwritten
 
-00:21:57.466 --> 00:21:59.806 A:middle
+
+353
+00:21:57,466 --> 00:21:59,806
 on that particular mixer
 connection will not
 
-00:21:59.806 --> 00:22:00.466 A:middle
+
+354
+00:21:59,806 --> 00:22:00,466
 be preserved.
 
 
-
-00:21:59.806 --> 00:22:00.466 A:middle
-be preserved.
-
-00:22:01.126 --> 00:22:05.536 A:middle
+355
+00:22:01,126 --> 00:22:05,536
 Hence, the state of mixing
 settings will look like this.
 
-00:22:06.036 --> 00:22:09.746 A:middle
+
+356
+00:22:06,036 --> 00:22:09,746
 The player's mixing
 settings remain intact,
 
-00:22:09.746 --> 00:22:13.826 A:middle
+
+357
+00:22:09,746 --> 00:22:13,826
 and the other connection that is
 active will also have its mixing
 
-00:22:13.826 --> 00:22:15.586 A:middle
+
+358
+00:22:13,826 --> 00:22:15,586
 settings intact.
 
-00:22:17.236 --> 00:22:20.536 A:middle
+
+359
+00:22:17,236 --> 00:22:20,536
 Now, if you end up making
 the connection back again
 
-00:22:20.736 --> 00:22:25.076 A:middle
+
+360
+00:22:20,736 --> 00:22:25,076
 to mixer input bus: 1, since
 the earliest settings were not
 
-00:22:25.166 --> 00:22:29.226 A:middle
+
+361
+00:22:25,166 --> 00:22:29,226
 preserved, the base settings off
 the player node will now take
 
-00:22:29.226 --> 00:22:30.836 A:middle
+
+362
+00:22:29,226 --> 00:22:30,836
 effect in this new connection.
 
-00:22:32.136 --> 00:22:36.326 A:middle
+
+363
+00:22:32,136 --> 00:22:36,326
 So hence, the volume of input
 bus: 1 will again be set
 
-00:22:36.386 --> 00:22:39.416 A:middle
+
+364
+00:22:36,386 --> 00:22:39,416
 to .5 based on the
 player's mixing settings.
 
-00:22:39.946 --> 00:22:45.736 A:middle
+
+365
+00:22:39,946 --> 00:22:45,736
 So to summarize, when a
 source node is connected
 
-00:22:45.806 --> 00:22:50.676 A:middle
+
+366
+00:22:45,806 --> 00:22:50,676
 to multiple mixers, the
 properties that you set
 
-00:22:50.676 --> 00:22:53.316 A:middle
+
+367
+00:22:50,676 --> 00:22:53,316
 on the source node
 will be applied to all
 
-00:22:53.316 --> 00:22:56.646 A:middle
+
+368
+00:22:53,316 --> 00:22:56,646
 of its existing mixer
 connections as well
 
-00:22:56.646 --> 00:22:59.686 A:middle
+
+369
+00:22:56,646 --> 00:22:59,686
 as any new mixer
 connection that you make.
 
 
-
-00:23:00.286 --> 00:23:02.436 A:middle
+370
+00:23:00,286 --> 00:23:02,436
 And the properties
 
-00:23:02.436 --> 00:23:05.786 A:middle
+
+371
+00:23:02,436 --> 00:23:05,786
 on the individual mixer
 connections can be overwritten
 
-00:23:05.786 --> 00:23:09.466 A:middle
+
+372
+00:23:05,786 --> 00:23:09,466
 if you want to, but remember
 that they will not be preserved
 
-00:23:09.656 --> 00:23:10.926 A:middle
+
+373
+00:23:09,656 --> 00:23:10,926
 on any disconnections.
 
-00:23:14.536 --> 00:23:16.686 A:middle
+
+374
+00:23:14,536 --> 00:23:16,686
 Final words on the
 splitting support.
 
-00:23:16.686 --> 00:23:20.656 A:middle
+
+375
+00:23:16,686 --> 00:23:20,656
 The engine supports
 splitting of any node
 
-00:23:20.986 --> 00:23:24.796 A:middle
+
+376
+00:23:20,986 --> 00:23:24,796
 in the processing graph,
 provided you adhere
 
-00:23:24.896 --> 00:23:26.156 A:middle
+
+377
+00:23:24,896 --> 00:23:26,156
 to a couple of restrictions.
 
-00:23:27.446 --> 00:23:31.656 A:middle
+
+378
+00:23:27,446 --> 00:23:31,656
 Now, starting from the node
 whose output is split till the
 
-00:23:31.656 --> 00:23:36.956 A:middle
+
+379
+00:23:31,656 --> 00:23:36,956
 mixer where all the parts
 terminate, you cannot have any
 
-00:23:36.956 --> 00:23:38.176 A:middle
+
+380
+00:23:36,956 --> 00:23:38,176
 of the time effect nodes.
 
-00:23:38.576 --> 00:23:41.826 A:middle
+
+381
+00:23:38,576 --> 00:23:41,826
 That is you cannot have
 speed and time pitch.
 
-00:23:42.386 --> 00:23:45.946 A:middle
+
+382
+00:23:42,386 --> 00:23:45,946
 Nor can you have any
 rate conversions.
 
-00:23:47.276 --> 00:23:51.086 A:middle
+
+383
+00:23:47,276 --> 00:23:51,086
 So in other words,
 all the split parts
 
-00:23:51.446 --> 00:23:55.146 A:middle
+
+384
+00:23:51,446 --> 00:23:55,146
 from the base node should be
 rendering at the same rate
 
-00:23:55.426 --> 00:23:57.136 A:middle
+
+385
+00:23:55,426 --> 00:23:57,136
 until they reach a common mixer.
 
-00:23:57.136 --> 00:24:01.096 A:middle
+
+386
+00:23:57,136 --> 00:24:01,096
 So if you stick to
 these restrictions,
 
 
-
-00:23:57.136 --> 00:24:01.096 A:middle
-So if you stick to
-these restrictions,
-
-00:24:01.256 --> 00:24:04.206 A:middle
+387
+00:24:01,256 --> 00:24:04,206
 then you could split
 the output of any node
 
-00:24:04.356 --> 00:24:07.466 A:middle
+
+388
+00:24:04,356 --> 00:24:07,466
 in the engine into
 multiple parts.
 
-00:24:10.386 --> 00:24:15.596 A:middle
+
+389
+00:24:10,386 --> 00:24:15,596
 Okay. So now moving on to the
 second new feature we have
 
-00:24:16.106 --> 00:24:18.936 A:middle
+
+390
+00:24:16,106 --> 00:24:18,936
 for this year, audio
 format conversion support.
 
-00:24:20.096 --> 00:24:22.066 A:middle
+
+391
+00:24:20,096 --> 00:24:22,066
 So we have a couple
 of new classes here,
 
-00:24:22.156 --> 00:24:25.936 A:middle
+
+392
+00:24:22,156 --> 00:24:25,936
 AVAudioCompressedBuffer,
 and AV Audio Converter.
 
-00:24:26.566 --> 00:24:32.046 A:middle
+
+393
+00:24:26,566 --> 00:24:32,046
 Now, in the API that
 existed as of last week,
 
-00:24:32.346 --> 00:24:36.006 A:middle
+
+394
+00:24:32,346 --> 00:24:36,006
 we have an AVAudioBuffer and one
 
-00:24:36.006 --> 00:24:38.826 A:middle
+
+395
+00:24:36,006 --> 00:24:38,826
 of its subclasses
 called AVAudioPCMBuffer,
 
-00:24:39.826 --> 00:24:41.086 A:middle
+
+396
+00:24:39,826 --> 00:24:41,086
 and as the name suggests,
 
-00:24:41.396 --> 00:24:44.516 A:middle
+
+397
+00:24:41,396 --> 00:24:44,516
 the PCM buffer holds
 uncompressed audio data,
 
-00:24:45.386 --> 00:24:47.756 A:middle
+
+398
+00:24:45,386 --> 00:24:47,756
 and the data flow
 through the engine is
 
-00:24:47.756 --> 00:24:49.386 A:middle
+
+399
+00:24:47,756 --> 00:24:49,386
 in the form of PCM buffers.
 
-00:24:51.046 --> 00:24:53.686 A:middle
+
+400
+00:24:51,046 --> 00:24:53,686
 Now, starting this year,
 we have another subclass
 
-00:24:53.686 --> 00:24:57.366 A:middle
+
+401
+00:24:53,686 --> 00:24:57,366
 of AVAudioBuffer called
 AVAudioCompressedBuffer,
 
-00:24:58.256 --> 00:25:00.716 A:middle
+
+402
+00:24:58,256 --> 00:25:00,716
 and this holds compressed
 audio data.
 
 
-
-00:24:58.256 --> 00:25:00.716 A:middle
-and this holds compressed
-audio data.
-
-00:25:02.026 --> 00:25:06.246 A:middle
+403
+00:25:02,026 --> 00:25:06,246
 And this can be used with
 the new class we have called
 
-00:25:06.246 --> 00:25:09.586 A:middle
+
+404
+00:25:06,246 --> 00:25:09,586
 AVAudioConverter that
 I will talk about next.
 
-00:25:12.876 --> 00:25:15.766 A:middle
+
+405
+00:25:12,876 --> 00:25:15,766
 AVAudioConverter is
 a new utility class,
 
-00:25:16.286 --> 00:25:18.346 A:middle
+
+406
+00:25:16,286 --> 00:25:18,346
 and it's a higher-level
 equivalent
 
-00:25:18.566 --> 00:25:22.586 A:middle
+
+407
+00:25:18,566 --> 00:25:22,586
 for our audio converter from
 the audio toolbox framework.
 
-00:25:23.896 --> 00:25:28.406 A:middle
+
+408
+00:25:23,896 --> 00:25:28,406
 This supports all audio format
 conversion, so you could convert
 
-00:25:28.466 --> 00:25:32.946 A:middle
+
+409
+00:25:28,466 --> 00:25:32,946
 from PCM to PCM format while
 changing, say, integer to float,
 
-00:25:33.296 --> 00:25:36.046 A:middle
+
+410
+00:25:33,296 --> 00:25:36,046
 bit depth, sample
 rate, et cetera.
 
-00:25:36.676 --> 00:25:41.166 A:middle
+
+411
+00:25:36,676 --> 00:25:41,166
 Or you could convert between
 PCM and compressed format
 
-00:25:41.406 --> 00:25:45.216 A:middle
+
+412
+00:25:41,406 --> 00:25:45,216
 that is you can use it for
 encoding and decoding purposes.
 
-00:25:45.826 --> 00:25:50.156 A:middle
+
+413
+00:25:45,826 --> 00:25:50,156
 And AVAudioConverter can
 be used in conjunction
 
-00:25:50.156 --> 00:25:56.396 A:middle
+
+414
+00:25:50,156 --> 00:25:56,396
 with AVAudioEngine, as we
 will see in an example.
 
-00:25:56.396 --> 00:26:00.546 A:middle
+
+415
+00:25:56,396 --> 00:26:00,546
 Okay. So suppose you have your
 engine set up for a playback.
 
 
-
-00:25:56.396 --> 00:26:00.546 A:middle
-Okay. So suppose you have your
-engine set up for a playback.
-
-00:26:00.626 --> 00:26:03.146 A:middle
+416
+00:26:00,626 --> 00:26:03,146
 So we have a player
 node connected
 
-00:26:03.186 --> 00:26:04.996 A:middle
+
+417
+00:26:03,186 --> 00:26:04,996
 to an effect node
 and an output node.
 
-00:26:06.366 --> 00:26:09.376 A:middle
+
+418
+00:26:06,366 --> 00:26:09,376
 And suppose you have a
 compressed audio stream
 
-00:26:09.446 --> 00:26:10.576 A:middle
+
+419
+00:26:09,446 --> 00:26:10,576
 coming in.
 
-00:26:11.816 --> 00:26:15.726 A:middle
+
+420
+00:26:11,816 --> 00:26:15,726
 Now, we know that the data
 flow through the engine is
 
-00:26:15.726 --> 00:26:17.966 A:middle
+
+421
+00:26:15,726 --> 00:26:17,966
 in the form of PCM buffers.
 
-00:26:18.916 --> 00:26:22.366 A:middle
+
+422
+00:26:18,916 --> 00:26:22,366
 So now you could use
 an AVAudioConverter
 
-00:26:22.716 --> 00:26:27.046 A:middle
+
+423
+00:26:22,716 --> 00:26:27,046
 to convert your input compressed
 stream into PCM buffers,
 
-00:26:27.316 --> 00:26:30.396 A:middle
+
+424
+00:26:27,316 --> 00:26:30,396
 and then you can use
 these buffers to schedule
 
-00:26:30.396 --> 00:26:33.596 A:middle
+
+425
+00:26:30,396 --> 00:26:33,596
 on the player node, hence
 the playback can happen
 
-00:26:33.756 --> 00:26:34.486 A:middle
+
+426
+00:26:33,756 --> 00:26:34,486
 through the engine.
 
-00:26:35.046 --> 00:26:41.666 A:middle
+
+427
+00:26:35,046 --> 00:26:41,666
 Now let's consider a
 code example and see how
 
-00:26:41.666 --> 00:26:44.656 A:middle
+
+428
+00:26:41,666 --> 00:26:44,656
 to use AVAudioConverter
 for encoding purposes.
 
-00:26:45.906 --> 00:26:48.776 A:middle
+
+429
+00:26:45,906 --> 00:26:48,776
 Now, here we want to
 convert from a PCM
 
-00:26:49.076 --> 00:26:50.776 A:middle
+
+430
+00:26:49,076 --> 00:26:50,776
 to an ASC compressed format.
 
-00:26:51.386 --> 00:26:55.406 A:middle
+
+431
+00:26:51,386 --> 00:26:55,406
 So the first thing to
 do is define your input
 
-00:26:55.546 --> 00:26:56.736 A:middle
+
+432
+00:26:55,546 --> 00:26:56,736
 as well as output format.
 
-00:26:57.486 --> 00:27:01.256 A:middle
+
+433
+00:26:57,486 --> 00:27:01,256
 So here I have an input
 format which is a PCM format,
 
 
-
-00:26:57.486 --> 00:27:01.256 A:middle
-So here I have an input
-format which is a PCM format,
-
-00:27:01.836 --> 00:27:04.956 A:middle
+434
+00:27:01,836 --> 00:27:04,956
 and I have an output format,
 
-00:27:05.136 --> 00:27:10.446 A:middle
+
+435
+00:27:05,136 --> 00:27:10,446
 which is a compressed
 ASC format.
 
-00:27:10.566 --> 00:27:14.826 A:middle
+
+436
+00:27:10,566 --> 00:27:14,826
 Next you create an
 AVAudioConverter and asking it
 
-00:27:15.006 --> 00:27:18.526 A:middle
+
+437
+00:27:15,006 --> 00:27:18,526
 to convert from your input
 to the output format.
 
-00:27:20.136 --> 00:27:22.646 A:middle
+
+438
+00:27:20,136 --> 00:27:22,646
 Then you create your
 audio buffers.
 
-00:27:23.596 --> 00:27:26.206 A:middle
+
+439
+00:27:23,596 --> 00:27:26,206
 The input buffer in this
 case is a PCM buffer,
 
-00:27:26.206 --> 00:27:31.086 A:middle
+
+440
+00:27:26,206 --> 00:27:31,086
 and the output buffer is our
 new AVAudioCompressedBuffer
 
-00:27:31.526 --> 00:27:33.826 A:middle
+
+441
+00:27:31,526 --> 00:27:33,826
 in the ASC format.
 
-00:27:35.936 --> 00:27:37.746 A:middle
+
+442
+00:27:35,936 --> 00:27:37,746
 The next thing to do is
 
-00:27:37.776 --> 00:27:43.226 A:middle
+
+443
+00:27:37,776 --> 00:27:43,226
 to define something called
 AVAudioConverter input block.
 
-00:27:43.226 --> 00:27:46.886 A:middle
+
+444
+00:27:43,226 --> 00:27:46,886
 This is the block that the
 converter will call whenever it
 
-00:27:46.886 --> 00:27:47.926 A:middle
+
+445
+00:27:46,886 --> 00:27:47,926
 needs input data.
 
-00:27:49.446 --> 00:27:51.876 A:middle
+
+446
+00:27:49,446 --> 00:27:51,876
 So there are a couple of things
 that you need to do here.
 
-00:27:53.086 --> 00:27:55.636 A:middle
+
+447
+00:27:53,086 --> 00:27:55,636
 First, you need to
 inform the converter
 
-00:27:55.976 --> 00:27:57.826 A:middle
+
+448
+00:27:55,976 --> 00:27:57,826
 about the status of your input.
 
-00:27:58.816 --> 00:28:01.026 A:middle
+
+449
+00:27:58,816 --> 00:28:01,026
 So suppose when the
 block gets called,
 
 
-
-00:27:58.816 --> 00:28:01.026 A:middle
-So suppose when the
-block gets called,
-
-00:28:01.336 --> 00:28:03.596 A:middle
+450
+00:28:01,336 --> 00:28:03,596
 you do not have any
 input data available.
 
-00:28:04.386 --> 00:28:07.806 A:middle
+
+451
+00:28:04,386 --> 00:28:07,806
 So at that point, you
 can say no data now
 
-00:28:08.206 --> 00:28:10.486 A:middle
+
+452
+00:28:08,206 --> 00:28:10,486
 and return a nil
 buffer to the converter.
 
-00:28:11.066 --> 00:28:14.606 A:middle
+
+453
+00:28:11,066 --> 00:28:14,606
 Now, suppose you have
 reached end of stream,
 
-00:28:15.116 --> 00:28:18.096 A:middle
+
+454
+00:28:15,116 --> 00:28:18,096
 so you can inform the converter
 saying it's end of stream
 
-00:28:18.296 --> 00:28:21.276 A:middle
+
+455
+00:28:18,296 --> 00:28:21,276
 and again return a nil buffer.
 
-00:28:22.226 --> 00:28:23.986 A:middle
+
+456
+00:28:22,226 --> 00:28:23,986
 Otherwise, in the normal cases,
 
-00:28:24.156 --> 00:28:27.356 A:middle
+
+457
+00:28:24,156 --> 00:28:27,356
 you can see that you
 do have data, and fill
 
-00:28:27.356 --> 00:28:33.086 A:middle
+
+458
+00:28:27,356 --> 00:28:33,086
 and return your input
 buffer to the converter.
 
-00:28:33.196 --> 00:28:35.096 A:middle
+
+459
+00:28:33,196 --> 00:28:35,096
 Now, this is the
 main conversion loop.
 
-00:28:36.256 --> 00:28:39.896 A:middle
+
+460
+00:28:36,256 --> 00:28:39,896
 In every operation of this loop,
 we are asking the converter
 
-00:28:40.116 --> 00:28:42.446 A:middle
+
+461
+00:28:40,116 --> 00:28:42,446
 to produce one output
 buffer of data,
 
-00:28:43.236 --> 00:28:46.306 A:middle
+
+462
+00:28:43,236 --> 00:28:46,306
 and we are providing the input
 block that we just defined
 
-00:28:46.646 --> 00:28:49.956 A:middle
+
+463
+00:28:46,646 --> 00:28:49,956
 to the converter so that it
 can be called by the converter
 
-00:28:50.056 --> 00:28:52.376 A:middle
+
+464
+00:28:50,056 --> 00:28:52,376
 as many times as it needs input.
 
-00:28:52.846 --> 00:28:57.476 A:middle
+
+465
+00:28:52,846 --> 00:28:57,476
 Now, the converter will
 also return your status,
 
-00:28:57.536 --> 00:29:00.616 A:middle
+
+466
+00:28:57,536 --> 00:29:00,616
 which you can check to see
 the state of conversion.
 
 
-
-00:28:57.536 --> 00:29:00.616 A:middle
-which you can check to see
-the state of conversion.
-
-00:29:01.216 --> 00:29:03.836 A:middle
+467
+00:29:01,216 --> 00:29:03,836
 So if the converter
 says it's end of stream
 
-00:29:04.046 --> 00:29:06.146 A:middle
+
+468
+00:29:04,046 --> 00:29:06,146
 or if it says there
 was an error,
 
-00:29:06.146 --> 00:29:09.956 A:middle
+
+469
+00:29:06,146 --> 00:29:09,956
 you could handle it accordingly.
 
-00:29:09.956 --> 00:29:11.696 A:middle
+
+470
+00:29:09,956 --> 00:29:11,696
 Otherwise, in the normal cases,
 
-00:29:11.866 --> 00:29:15.686 A:middle
+
+471
+00:29:11,866 --> 00:29:15,686
 every iteration will provide
 you one output buffer of data.
 
-00:29:19.696 --> 00:29:23.116 A:middle
+
+472
+00:29:19,696 --> 00:29:23,116
 Okay. So coming to
 our final new class
 
-00:29:23.116 --> 00:29:26.276 A:middle
+
+473
+00:29:23,116 --> 00:29:26,276
 for this year, AVAudioSequencer.
 
-00:29:30.036 --> 00:29:33.146 A:middle
+
+474
+00:29:30,036 --> 00:29:33,146
 This supports playback
 of MIDI files,
 
-00:29:33.696 --> 00:29:39.326 A:middle
+
+475
+00:29:33,696 --> 00:29:39,326
 and AVAudioSequencer is
 associated with an AVAudioEngine
 
-00:29:39.326 --> 00:29:41.876 A:middle
+
+476
+00:29:39,326 --> 00:29:41,876
 at the time of instantiation.
 
-00:29:42.346 --> 00:29:48.106 A:middle
+
+477
+00:29:42,346 --> 00:29:48,106
 And the sequencer is responsible
 for sending MIDI events
 
-00:29:48.516 --> 00:29:52.266 A:middle
+
+478
+00:29:48,516 --> 00:29:52,266
 to the instrument nodes that you
 may have attached in the engine.
 
-00:29:52.996 --> 00:29:56.436 A:middle
+
+479
+00:29:52,996 --> 00:29:56,436
 Now, the example for instrument
 nodes, audio samplers,
 
-00:29:56.556 --> 00:29:58.626 A:middle
+
+480
+00:29:56,556 --> 00:29:58,626
 MIDI events et cetera.
 
 
-
-00:30:01.486 --> 00:30:03.356 A:middle
+481
+00:30:01,486 --> 00:30:03,356
 Now let's look at
 a sample setup.
 
-00:30:04.036 --> 00:30:06.416 A:middle
+
+482
+00:30:04,036 --> 00:30:06,416
 Suppose you have your
 AVAudioEngine set
 
-00:30:06.416 --> 00:30:09.766 A:middle
+
+483
+00:30:06,416 --> 00:30:09,766
 up with an instrument node
 connected to a mixer node
 
-00:30:10.036 --> 00:30:13.636 A:middle
+
+484
+00:30:10,036 --> 00:30:13,636
 and to the output node.
 
-00:30:13.856 --> 00:30:16.586 A:middle
+
+485
+00:30:13,856 --> 00:30:16,586
 You can now create
 an AVAudioSequencer
 
-00:30:16.586 --> 00:30:19.056 A:middle
+
+486
+00:30:16,586 --> 00:30:19,056
 and associate it
 with this engine.
 
-00:30:19.616 --> 00:30:24.746 A:middle
+
+487
+00:30:19,616 --> 00:30:24,746
 And then, when you start your
 sequencer and start your engine,
 
-00:30:25.026 --> 00:30:29.626 A:middle
+
+488
+00:30:25,026 --> 00:30:29,626
 the sequencer will automatically
 discover the first instrument
 
-00:30:29.626 --> 00:30:32.816 A:middle
+
+489
+00:30:29,626 --> 00:30:32,816
 node in the engine and
 start sending MIDI events
 
-00:30:32.966 --> 00:30:34.846 A:middle
+
+490
+00:30:32,966 --> 00:30:34,846
 to that instrument node.
 
-00:30:35.396 --> 00:30:39.586 A:middle
+
+491
+00:30:35,396 --> 00:30:39,586
 And in code, it looks like this.
 
-00:30:40.426 --> 00:30:42.866 A:middle
+
+492
+00:30:40,426 --> 00:30:42,866
 So the first part is
 your engine setup,
 
-00:30:42.956 --> 00:30:44.596 A:middle
+
+493
+00:30:42,956 --> 00:30:44,596
 which is outside
 of the sequencer.
 
-00:30:45.576 --> 00:30:49.556 A:middle
+
+494
+00:30:45,576 --> 00:30:49,556
 So here we have an instrument
 node that is a sampler,
 
-00:30:50.176 --> 00:30:53.536 A:middle
+
+495
+00:30:50,176 --> 00:30:53,536
 so you make your required
 connections in the engine,
 
-00:30:54.686 --> 00:30:56.876 A:middle
+
+496
+00:30:54,686 --> 00:30:56,876
 and then you start your engine.
 
-00:30:58.026 --> 00:31:01.126 A:middle
+
+497
+00:30:58,026 --> 00:31:01,126
 Now, at this point, there
 will be no audio playback
 
 
-
-00:30:58.026 --> 00:31:01.126 A:middle
-Now, at this point, there
-will be no audio playback
-
-00:31:01.266 --> 00:31:02.876 A:middle
+498
+00:31:01,266 --> 00:31:02,876
 because there isn't anything
 
-00:31:02.876 --> 00:31:05.146 A:middle
+
+499
+00:31:02,876 --> 00:31:05,146
 that is driving the
 instrument node.
 
-00:31:06.576 --> 00:31:10.736 A:middle
+
+500
+00:31:06,576 --> 00:31:10,736
 Then next you create your
 sequencer and associate it
 
-00:31:10.956 --> 00:31:12.946 A:middle
+
+501
+00:31:10,956 --> 00:31:12,946
 with the engine that
 you just configured.
 
-00:31:13.716 --> 00:31:17.666 A:middle
+
+502
+00:31:13,716 --> 00:31:17,666
 You load your MIDI file
 onto the sequencer.
 
-00:31:18.316 --> 00:31:21.176 A:middle
+
+503
+00:31:18,316 --> 00:31:21,176
 And then you can
 start your sequencer.
 
-00:31:21.666 --> 00:31:25.716 A:middle
+
+504
+00:31:21,666 --> 00:31:25,716
 So at this point, the sequencer
 will implicitly discover your
 
-00:31:25.716 --> 00:31:28.776 A:middle
+
+505
+00:31:25,716 --> 00:31:28,776
 sampler node that you have
 attached in the engine
 
-00:31:29.016 --> 00:31:31.896 A:middle
+
+506
+00:31:29,016 --> 00:31:31,896
 and start sending MIDI
 events to the sampler node.
 
-00:31:32.306 --> 00:31:35.706 A:middle
+
+507
+00:31:32,306 --> 00:31:35,706
 And hence, your audio
 playback will start.
 
-00:31:37.896 --> 00:31:41.606 A:middle
+
+508
+00:31:37,896 --> 00:31:41,606
 Now, suppose you had multiple
 tracks in your MIDI file.
 
-00:31:43.066 --> 00:31:45.996 A:middle
+
+509
+00:31:43,066 --> 00:31:45,996
 Now, the default behavior
 of the sequencer is
 
-00:31:45.996 --> 00:31:49.836 A:middle
+
+510
+00:31:45,996 --> 00:31:49,836
 to send all the tracks to
 the first instrument node
 
-00:31:50.006 --> 00:31:53.086 A:middle
+
+511
+00:31:50,006 --> 00:31:53,086
 that it finds in the engine.
 
-00:31:53.226 --> 00:31:56.296 A:middle
+
+512
+00:31:53,226 --> 00:31:56,296
 But in case you wanted
 to direct your tracks
 
-00:31:56.566 --> 00:31:58.446 A:middle
+
+513
+00:31:56,566 --> 00:31:58,446
 to the individual
 instrument nodes,
 
-00:31:59.386 --> 00:32:02.446 A:middle
+
+514
+00:31:59,386 --> 00:32:02,446
 you can do that with
 just a few lines of code.
 
 
-
-00:31:59.386 --> 00:32:02.446 A:middle
-you can do that with
-just a few lines of code.
-
-00:32:02.966 --> 00:32:06.996 A:middle
+515
+00:32:02,966 --> 00:32:06,996
 Now, the creation and
 setting up of the engine
 
-00:32:06.996 --> 00:32:09.346 A:middle
+
+516
+00:32:06,996 --> 00:32:09,346
 in the sequencer is
 the same as earlier.
 
-00:32:09.716 --> 00:32:13.166 A:middle
+
+517
+00:32:09,716 --> 00:32:13,166
 The only additional thing that
 you need to do is you need
 
-00:32:13.166 --> 00:32:15.156 A:middle
+
+518
+00:32:13,166 --> 00:32:15,156
 to get the tracks
 from your sequencer
 
-00:32:15.776 --> 00:32:18.746 A:middle
+
+519
+00:32:15,776 --> 00:32:18,746
 and set the destination
 for each of your tracks
 
-00:32:19.096 --> 00:32:21.606 A:middle
+
+520
+00:32:19,096 --> 00:32:21,606
 to the instrument
 node that you want.
 
-00:32:25.816 --> 00:32:27.826 A:middle
+
+521
+00:32:25,816 --> 00:32:27,826
 Final few words on
 the sequencer.
 
-00:32:28.636 --> 00:32:31.916 A:middle
+
+522
+00:32:28,636 --> 00:32:31,916
 The sequencer has its own
 set of transport controls
 
-00:32:32.226 --> 00:32:36.116 A:middle
+
+523
+00:32:32,226 --> 00:32:36,116
 for the MIDI events, unlike the
 transport controls on the engine
 
-00:32:36.266 --> 00:32:38.136 A:middle
+
+524
+00:32:36,266 --> 00:32:38,136
 that control the flow of audio.
 
-00:32:39.246 --> 00:32:42.616 A:middle
+
+525
+00:32:39,246 --> 00:32:42,616
 So here you can prepare
 the sequencer for playback,
 
-00:32:42.756 --> 00:32:44.826 A:middle
+
+526
+00:32:42,756 --> 00:32:44,826
 which basically does prerolling.
 
-00:32:45.626 --> 00:32:47.836 A:middle
+
+527
+00:32:45,626 --> 00:32:47,836
 You can start/stop
 the MIDI events.
 
-00:32:48.866 --> 00:32:51.676 A:middle
+
+528
+00:32:48,866 --> 00:32:51,676
 You can set the playback
 position of the MIDI events
 
-00:32:51.736 --> 00:32:53.656 A:middle
+
+529
+00:32:51,736 --> 00:32:53,656
 in terms of seconds or beats.
 
-00:32:54.736 --> 00:32:56.976 A:middle
+
+530
+00:32:54,736 --> 00:32:56,976
 And also, you can
 set the playback rate
 
-00:32:57.276 --> 00:32:58.266 A:middle
+
+531
+00:32:57,276 --> 00:32:58,266
 of the MIDI events.
 
 
-
-00:33:02.176 --> 00:33:06.036 A:middle
+532
+00:33:02,176 --> 00:33:06,036
 Okay. So with that, we
 have seen the new features
 
-00:33:06.036 --> 00:33:10.146 A:middle
+
+533
+00:33:06,036 --> 00:33:10,146
 in AVAudioEngine for this
 year's iOS and OS X releases.
 
-00:33:10.636 --> 00:33:12.966 A:middle
+
+534
+00:33:10,636 --> 00:33:12,966
 Now I would like to
 show you a quick demo
 
-00:33:13.236 --> 00:33:15.636 A:middle
+
+535
+00:33:13,236 --> 00:33:15,636
 to see these new
 features in action.
 
-00:33:16.236 --> 00:33:20.136 A:middle
+
+536
+00:33:16,236 --> 00:33:20,136
 And for that, I would like to
 invite Torrey onto the stage
 
-00:33:20.826 --> 00:33:23.466 A:middle
+
+537
+00:33:20,826 --> 00:33:23,466
 to help me with the demo.
 
-00:33:24.516 --> 00:33:26.676 A:middle
+
+538
+00:33:24,516 --> 00:33:26,676
 [ Applause ]
 
-00:33:27.176 --> 00:33:27.696 A:middle
+
+539
+00:33:27,176 --> 00:33:27,696
 Okay.
 
-00:33:33.106 --> 00:33:35.566 A:middle
+
+540
+00:33:33,106 --> 00:33:35,566
 So in this demo, we
 have an AVAudioEngine
 
-00:33:35.596 --> 00:33:39.776 A:middle
+
+541
+00:33:35,596 --> 00:33:39,776
 and an AVAudioSequencer that
 is associated with this engine.
 
-00:33:41.116 --> 00:33:44.826 A:middle
+
+542
+00:33:41,116 --> 00:33:44,826
 So in the engine, we have an
 instrument node that you can see
 
-00:33:44.826 --> 00:33:50.666 A:middle
+
+543
+00:33:44,826 --> 00:33:50,666
 at the top whose output is split
 into three different paths.
 
-00:33:50.666 --> 00:33:54.216 A:middle
+
+544
+00:33:50,666 --> 00:33:54,216
 One of the paths is directly
 connected to the main mixer node
 
-00:33:54.366 --> 00:33:58.226 A:middle
+
+545
+00:33:54,366 --> 00:33:58,226
 in the engine, and two of
 the other paths are connected
 
-00:33:58.706 --> 00:34:04.446 A:middle
+
+546
+00:33:58,706 --> 00:34:04,446
 through two different effects,
 and then to the main mixer.
 
 
-
-00:33:58.706 --> 00:34:04.446 A:middle
-through two different effects,
-and then to the main mixer.
-
-00:34:04.446 --> 00:34:07.146 A:middle
+547
+00:34:04,446 --> 00:34:07,146
 Now, using the AVAudioMixing
 protocol properties we
 
-00:34:07.146 --> 00:34:11.275 A:middle
+
+548
+00:34:07,146 --> 00:34:11,275
 discussed, there are
 volume controls on each
 
-00:34:11.275 --> 00:34:13.005 A:middle
+
+549
+00:34:11,275 --> 00:34:13,005
 of these mixer input buses.
 
-00:34:13.786 --> 00:34:16.666 A:middle
+
+550
+00:34:13,786 --> 00:34:16,666
 So the slightest that you
 see for distortion volume,
 
-00:34:16.766 --> 00:34:20.735 A:middle
+
+551
+00:34:16,766 --> 00:34:20,735
 direct volume, and reverb
 volume are the volume controls
 
-00:34:20.956 --> 00:34:22.606 A:middle
+
+552
+00:34:20,956 --> 00:34:22,606
 and controls through
 mixing protocol.
 
-00:34:24.005 --> 00:34:28.226 A:middle
+
+553
+00:34:24,005 --> 00:34:28,226
 Now, at the top, in
 the light gray box,
 
-00:34:28.226 --> 00:34:31.666 A:middle
+
+554
+00:34:28,226 --> 00:34:31,666
 you can see this transport
 controls for the sequencer.
 
-00:34:32.436 --> 00:34:36.306 A:middle
+
+555
+00:34:32,436 --> 00:34:36,306
 You can see that we have a play
 stop control on the sequencer
 
-00:34:36.485 --> 00:34:40.186 A:middle
+
+556
+00:34:36,485 --> 00:34:40,186
 as well as sliders for
 setting the playback position
 
-00:34:40.585 --> 00:34:43.306 A:middle
+
+557
+00:34:40,585 --> 00:34:43,306
 and the playback
 rate of the MIDIs.
 
-00:34:44.545 --> 00:34:47.596 A:middle
+
+558
+00:34:44,545 --> 00:34:47,596
 There is also a master
 volume on the main mixer
 
-00:34:47.735 --> 00:34:52.036 A:middle
+
+559
+00:34:47,735 --> 00:34:52,036
 to control the volume
 of your mix.
 
-00:34:52.916 --> 00:34:57.986 A:middle
+
+560
+00:34:52,916 --> 00:34:57,986
 Now let's go ahead and
 start the sequencer [music].
 
-00:34:57.986 --> 00:35:01.786 A:middle
+
+561
+00:34:57,986 --> 00:35:01,786
 So at this point, the
 MIDI events are being sent
 
 
-
-00:34:57.986 --> 00:35:01.786 A:middle
-So at this point, the
-MIDI events are being sent
-
-00:35:02.006 --> 00:35:06.126 A:middle
+562
+00:35:02,006 --> 00:35:06,126
 to the instrument node
 that is in the engine.
 
-00:35:06.126 --> 00:35:12.056 A:middle
+
+563
+00:35:06,126 --> 00:35:12,056
 You can dynamically change
 the position of playback
 
-00:35:14.086 --> 00:35:17.766 A:middle
+
+564
+00:35:14,086 --> 00:35:17,766
 of the MIDI events
 and the playback rate.
 
-00:35:17.836 --> 00:35:28.496 A:middle
+
+565
+00:35:17,836 --> 00:35:28,496
 Using the volume controls, you
 can blend in the required amount
 
-00:35:28.496 --> 00:35:30.736 A:middle
+
+566
+00:35:28,496 --> 00:35:30,736
 of effects that you
 want in your mix.
 
-00:35:30.736 --> 00:35:34.476 A:middle
+
+567
+00:35:30,736 --> 00:35:34,476
 You could increase
 the distortion volume.
 
-00:35:35.656 --> 00:35:41.296 A:middle
+
+568
+00:35:35,656 --> 00:35:41,296
 Or the reverb volume.
 
-00:35:41.376 --> 00:35:49.896 A:middle
+
+569
+00:35:41,376 --> 00:35:49,896
 So effectively, you can play
 around with these volumes
 
-00:35:49.996 --> 00:35:52.586 A:middle
+
+570
+00:35:49,996 --> 00:35:52,586
 and create the mix
 that you desire.
 
-00:35:52.586 --> 00:35:58.066 A:middle
+
+571
+00:35:52,586 --> 00:35:58,066
 And finally, using the master
 volume on the mixer node,
 
-00:35:58.456 --> 00:36:08.856 A:middle
+
+572
+00:35:58,456 --> 00:36:08,856
 you could control the volume of
 the overall mix [audio fading].
 
 
-
-00:35:58.456 --> 00:36:08.856 A:middle
-you could control the volume of
-the overall mix [audio fading].
-
-00:36:09.396 --> 00:36:12.456 A:middle
+573
+00:36:09,396 --> 00:36:12,456
 Okay. So that was a
 demo of the new features
 
-00:36:12.456 --> 00:36:13.976 A:middle
+
+574
+00:36:12,456 --> 00:36:13,976
 that we just discussed.
 
-00:36:15.516 --> 00:36:20.546 A:middle
+
+575
+00:36:15,516 --> 00:36:20,546
 [ Applause ]
 
-00:36:21.046 --> 00:36:24.126 A:middle
+
+576
+00:36:21,046 --> 00:36:24,126
 So the sample code for this demo
 should be available sometime
 
-00:36:24.126 --> 00:36:26.886 A:middle
+
+577
+00:36:24,126 --> 00:36:26,886
 later this year.
 
-00:36:27.086 --> 00:36:31.276 A:middle
+
+578
+00:36:27,086 --> 00:36:31,276
 Now final words on what we
 saw today in AVAudioEngine.
 
-00:36:32.176 --> 00:36:37.046 A:middle
+
+579
+00:36:32,176 --> 00:36:37,046
 We saw a recap, and we reviewed
 how to handle multichannel audio
 
-00:36:37.046 --> 00:36:41.166 A:middle
+
+580
+00:36:37,046 --> 00:36:41,166
 with AVAudioEngine, and then
 we saw three new features
 
-00:36:41.326 --> 00:36:45.466 A:middle
+
+581
+00:36:41,326 --> 00:36:45,466
 for this year -- first,
 splitting support; second,
 
-00:36:45.586 --> 00:36:47.426 A:middle
+
+582
+00:36:45,586 --> 00:36:47,426
 audio format conversion support,
 
-00:36:47.746 --> 00:36:53.016 A:middle
+
+583
+00:36:47,746 --> 00:36:53,016
 the main class being
 AVAudioConverter; and finally,
 
-00:36:53.016 --> 00:36:55.946 A:middle
+
+584
+00:36:53,016 --> 00:36:55,946
 we saw another new class
 called AVAudioSequencer
 
-00:36:56.196 --> 00:36:58.346 A:middle
+
+585
+00:36:56,196 --> 00:36:58,346
 that supports playback
 of MIDI files.
 
-00:36:59.726 --> 00:37:02.716 A:middle
+
+586
+00:36:59,726 --> 00:37:02,716
 I hope you will use these
 new features in your apps
 
 
-
-00:36:59.726 --> 00:37:02.716 A:middle
-I hope you will use these
-new features in your apps
-
-00:37:03.196 --> 00:37:04.706 A:middle
+587
+00:37:03,196 --> 00:37:04,706
 and provide us feedback.
 
-00:37:05.376 --> 00:37:05.726 A:middle
+
+588
+00:37:05,376 --> 00:37:05,726
 Thank you.
 
-00:37:06.646 --> 00:37:08.646 A:middle
+
+589
+00:37:06,646 --> 00:37:08,646
 Over to Torrey to
 take it from here.
 
-00:37:08.836 --> 00:37:09.406 A:middle
+
+590
+00:37:08,836 --> 00:37:09,406
 Thanks, Torrey.
 
-00:37:10.516 --> 00:37:18.546 A:middle
+
+591
+00:37:10,516 --> 00:37:18,546
 [ Applause ]
 
-00:37:19.046 --> 00:37:19.756 A:middle
+
+592
+00:37:19,046 --> 00:37:19,756
 Thanks, Akshatha.
 
-00:37:20.416 --> 00:37:21.356 A:middle
+
+593
+00:37:20,416 --> 00:37:21,356
 Good afternoon, everyone.
 
-00:37:21.916 --> 00:37:24.106 A:middle
+
+594
+00:37:21,916 --> 00:37:24,106
 I'm Torrey, and let's
 keep it rolling
 
-00:37:24.106 --> 00:37:25.876 A:middle
+
+595
+00:37:24,106 --> 00:37:25,876
 with Inter-Device
 Audio Mode for iOS.
 
-00:37:26.966 --> 00:37:29.066 A:middle
+
+596
+00:37:26,966 --> 00:37:29,066
 It's no secret that
 the iPad is one
 
-00:37:29.066 --> 00:37:31.536 A:middle
+
+597
+00:37:29,066 --> 00:37:31,536
 of the most versatile musical
 instruments on the planet,
 
-00:37:31.536 --> 00:37:33.616 A:middle
+
+598
+00:37:31,536 --> 00:37:33,616
 and that's primarily
 thanks to all of you-all,
 
-00:37:34.256 --> 00:37:37.896 A:middle
+
+599
+00:37:34,256 --> 00:37:37,896
 with digital audio workstation
 apps, synthesizer apps,
 
-00:37:37.896 --> 00:37:39.956 A:middle
+
+600
+00:37:37,896 --> 00:37:39,956
 drum machine apps, sound toys.
 
-00:37:39.956 --> 00:37:41.946 A:middle
+
+601
+00:37:39,956 --> 00:37:41,946
 There's an endless
 amount of audio content
 
-00:37:41.946 --> 00:37:43.566 A:middle
+
+602
+00:37:41,946 --> 00:37:43,566
 that you can generate
 with the same device.
 
-00:37:44.326 --> 00:37:47.376 A:middle
+
+603
+00:37:44,326 --> 00:37:47,376
 So how do you get that audio
 content from your iOS device
 
-00:37:47.446 --> 00:37:50.216 A:middle
+
+604
+00:37:47,446 --> 00:37:50,216
 into your project that you
 are working on on your Mac?
 
-00:37:51.036 --> 00:37:55.076 A:middle
+
+605
+00:37:51,036 --> 00:37:55,076
 Well, you could plug in a
 cable into the headphone jack,
 
-00:37:55.076 --> 00:37:57.596 A:middle
+
+606
+00:37:55,076 --> 00:37:57,596
 run that into an audio
 breakout box that's connected
 
-00:37:57.596 --> 00:38:00.166 A:middle
+
+607
+00:37:57,596 --> 00:38:00,166
 to your Mac, but that
 would be digital to analog
 
 
-
-00:37:57.596 --> 00:38:00.166 A:middle
-to your Mac, but that
-would be digital to analog
-
-00:38:00.166 --> 00:38:01.506 A:middle
+608
+00:38:00,166 --> 00:38:01,506
 and back again to digital.
 
-00:38:01.506 --> 00:38:03.866 A:middle
+
+609
+00:38:01,506 --> 00:38:03,866
 I am sure that we can all
 agree that's less than ideal.
 
-00:38:04.426 --> 00:38:07.536 A:middle
+
+610
+00:38:04,426 --> 00:38:07,536
 So to record audio
 digitally from an iOS device,
 
-00:38:08.676 --> 00:38:11.466 A:middle
+
+611
+00:38:08,676 --> 00:38:11,466
 we attach a lightning-to-USB
 adapter.
 
-00:38:11.936 --> 00:38:15.546 A:middle
+
+612
+00:38:11,936 --> 00:38:15,546
 We attach a USB audio
 class-compliant interface that's
 
-00:38:15.546 --> 00:38:19.406 A:middle
+
+613
+00:38:15,546 --> 00:38:19,406
 capable of doing digital audio
 output; a digital audio cable;
 
-00:38:19.796 --> 00:38:21.616 A:middle
+
+614
+00:38:19,796 --> 00:38:21,616
 another interface that's capable
 
-00:38:21.616 --> 00:38:23.456 A:middle
+
+615
+00:38:21,616 --> 00:38:23,456
 of receiving digital
 audio input;
 
-00:38:23.456 --> 00:38:25.316 A:middle
+
+616
+00:38:23,456 --> 00:38:25,316
 and we attach that to the Mac.
 
-00:38:26.116 --> 00:38:28.456 A:middle
+
+617
+00:38:26,116 --> 00:38:28,456
 It works. But it's
 a lot of hardware.
 
-00:38:29.506 --> 00:38:31.546 A:middle
+
+618
+00:38:29,506 --> 00:38:31,546
 There's also third-party
 software that attempts
 
-00:38:31.546 --> 00:38:36.006 A:middle
+
+619
+00:38:31,546 --> 00:38:36,006
 to solve this same problem,
 which is great if your app uses
 
-00:38:36.006 --> 00:38:38.756 A:middle
+
+620
+00:38:36,006 --> 00:38:38,756
 that or if your favorite
 app uses that.
 
-00:38:39.516 --> 00:38:41.636 A:middle
+
+621
+00:38:39,516 --> 00:38:41,636
 But wouldn't it be
 great if you didn't have
 
-00:38:41.666 --> 00:38:45.686 A:middle
+
+622
+00:38:41,666 --> 00:38:45,686
 to use any extra hardware or
 install any extra software
 
-00:38:45.686 --> 00:38:49.306 A:middle
+
+623
+00:38:45,686 --> 00:38:49,306
 and you could just record audio
 digitally through the darn cable
 
-00:38:49.306 --> 00:38:52.596 A:middle
+
+624
+00:38:49,306 --> 00:38:52,596
 that came with the darn thing?
 
-00:38:53.136 --> 00:38:54.316 A:middle
+
+625
+00:38:53,136 --> 00:38:54,316
 Well, drumroll, please.
 
-00:38:55.906 --> 00:39:00.406 A:middle
+
+626
+00:38:55,906 --> 00:39:00,406
 Oh, great latency
 on that [laughter].
 
 
-
-00:38:55.906 --> 00:39:00.406 A:middle
-Oh, great latency
-on that [laughter].
-
-00:39:01.176 --> 00:39:04.126 A:middle
+627
+00:39:01,176 --> 00:39:04,126
 Introducing Inter-Device
 Audio Mode,
 
-00:39:04.806 --> 00:39:07.566 A:middle
+
+628
+00:39:04,806 --> 00:39:07,566
 or as we like to call
 it internally, IDAM.
 
-00:39:07.916 --> 00:39:12.686 A:middle
+
+629
+00:39:07,916 --> 00:39:12,686
 IDAM allows you to record
 audio digitally through the USB
 
-00:39:12.686 --> 00:39:15.356 A:middle
+
+630
+00:39:12,686 --> 00:39:15,356
 to lightning cable that
 came with your device.
 
-00:39:16.076 --> 00:39:19.336 A:middle
+
+631
+00:39:16,076 --> 00:39:19,336
 It records at a hardware
 audio stream format
 
-00:39:19.336 --> 00:39:22.976 A:middle
+
+632
+00:39:19,336 --> 00:39:22,976
 of two channel 24-bit at
 48 kilohertz sample rate,
 
-00:39:23.396 --> 00:39:27.716 A:middle
+
+633
+00:39:23,396 --> 00:39:27,716
 and it is a USB 2.0 audio
 class-compliant implementation
 
-00:39:27.716 --> 00:39:28.456 A:middle
+
+634
+00:39:27,716 --> 00:39:28,456
 from end to end.
 
-00:39:29.186 --> 00:39:31.536 A:middle
+
+635
+00:39:29,186 --> 00:39:31,536
 What that means is
 on the Mac side,
 
-00:39:31.816 --> 00:39:34.876 A:middle
+
+636
+00:39:31,816 --> 00:39:34,876
 you are using the class
 Mac USB audio driver.
 
-00:39:35.086 --> 00:39:37.986 A:middle
+
+637
+00:39:35,086 --> 00:39:37,986
 You will get the same great
 performance and low latency
 
-00:39:37.986 --> 00:39:41.566 A:middle
+
+638
+00:39:37,986 --> 00:39:41,566
 that class-compliant USB
 audio devices currently get.
 
-00:39:41.886 --> 00:39:43.966 A:middle
+
+639
+00:39:41,886 --> 00:39:43,966
 Also, on the iOS side,
 
-00:39:44.176 --> 00:39:48.136 A:middle
+
+640
+00:39:44,176 --> 00:39:48,136
 the implementation is
 USBISOCHRONOUS audio.
 
-00:39:48.446 --> 00:39:50.826 A:middle
+
+641
+00:39:48,446 --> 00:39:50,826
 That means your bandwidth
 is reserved.
 
-00:39:51.286 --> 00:39:55.126 A:middle
+
+642
+00:39:51,286 --> 00:39:55,126
 If you want to backup
 120 gigabytes of data
 
-00:39:55.406 --> 00:39:57.896 A:middle
+
+643
+00:39:55,406 --> 00:39:57,896
 to your Mac while you are
 tapping out a drum beat
 
-00:39:57.896 --> 00:39:59.996 A:middle
+
+644
+00:39:57,896 --> 00:39:59,996
 and recording it,
 you can rest assured
 
-00:39:59.996 --> 00:40:03.436 A:middle
+
+645
+00:39:59,996 --> 00:40:03,436
 that your audio is not
 going to have any artifacts.
 
 
-
-00:39:59.996 --> 00:40:03.436 A:middle
-that your audio is not
-going to have any artifacts.
-
-00:40:04.796 --> 00:40:07.006 A:middle
+646
+00:40:04,796 --> 00:40:07,006
 Next, my no slide.
 
-00:40:07.646 --> 00:40:09.466 A:middle
+
+647
+00:40:07,646 --> 00:40:09,466
 No additional hardware required.
 
-00:40:09.616 --> 00:40:11.416 A:middle
+
+648
+00:40:09,616 --> 00:40:11,416
 There's no additional
 software required.
 
-00:40:11.416 --> 00:40:13.926 A:middle
+
+649
+00:40:11,416 --> 00:40:13,926
 You don't need to modify
 your OS X application
 
-00:40:14.196 --> 00:40:15.836 A:middle
+
+650
+00:40:14,196 --> 00:40:15,836
 to take advantage
 of this feature.
 
-00:40:16.076 --> 00:40:19.386 A:middle
+
+651
+00:40:16,076 --> 00:40:19,386
 If your iOS application
 already properly adapts
 
-00:40:19.386 --> 00:40:23.646 A:middle
+
+652
+00:40:19,386 --> 00:40:23,646
 to a two-channel 24-bit
 48-kilohertz audio stream
 
-00:40:23.646 --> 00:40:26.346 A:middle
+
+653
+00:40:23,646 --> 00:40:26,346
 format, you don't have to
 modify your iOS application.
 
-00:40:27.126 --> 00:40:29.736 A:middle
+
+654
+00:40:27,126 --> 00:40:29,736
 And if you get a calendar alert
 while you are in the middle
 
-00:40:29.736 --> 00:40:31.376 A:middle
+
+655
+00:40:29,736 --> 00:40:31,376
 of jamming out a
 sample baseline,
 
-00:40:31.506 --> 00:40:33.496 A:middle
+
+656
+00:40:31,506 --> 00:40:33,496
 that alert is not going
 to go out over the USB.
 
-00:40:33.546 --> 00:40:36.606 A:middle
+
+657
+00:40:33,546 --> 00:40:36,606
 It goes out over the speaker
 like it's supposed to.
 
-00:40:37.516 --> 00:40:41.636 A:middle
+
+658
+00:40:37,516 --> 00:40:41,636
 [ Applause ]
 
-00:40:42.136 --> 00:40:45.556 A:middle
+
+659
+00:40:42,136 --> 00:40:45,556
 Okay. So Inter-Device Audio
 Mode, your device can charge
 
-00:40:45.556 --> 00:40:49.316 A:middle
+
+660
+00:40:45,556 --> 00:40:49,316
 and sync in this mode; however,
 photo import, tethering,
 
-00:40:49.356 --> 00:40:52.046 A:middle
+
+661
+00:40:49,356 --> 00:40:52,046
 and QuickTime screen capture
 will be temporarily disabled.
 
-00:40:52.426 --> 00:40:54.316 A:middle
+
+662
+00:40:52,426 --> 00:40:54,316
 You want those back,
 click a button
 
-00:40:54.406 --> 00:40:55.776 A:middle
+
+663
+00:40:54,406 --> 00:40:55,776
 or just unplug the device.
 
-00:40:56.666 --> 00:40:58.736 A:middle
+
+664
+00:40:56,666 --> 00:40:58,736
 Torrey, how do I
 use it, you may ask?
 
-00:40:59.466 --> 00:41:03.056 A:middle
+
+665
+00:40:59,466 --> 00:41:03,056
 So we built support directly
 into audio MIDI setup.
 
 
-
-00:40:59.466 --> 00:41:03.056 A:middle
-So we built support directly
-into audio MIDI setup.
-
-00:41:03.216 --> 00:41:06.036 A:middle
+666
+00:41:03,216 --> 00:41:06,036
 If you look under the window
 menu, you will see a new option,
 
-00:41:06.776 --> 00:41:10.086 A:middle
+
+667
+00:41:06,776 --> 00:41:10,086
 show iOS device browser,
 and if you click that,
 
-00:41:10.086 --> 00:41:11.656 A:middle
+
+668
+00:41:10,086 --> 00:41:11,656
 you get this fancy-pants view.
 
-00:41:12.206 --> 00:41:14.596 A:middle
+
+669
+00:41:12,206 --> 00:41:14,596
 It shows you all your
 connected iOS devices.
 
-00:41:15.086 --> 00:41:18.166 A:middle
+
+670
+00:41:15,086 --> 00:41:18,166
 You want to enter or exit
 the IDAM configuration,
 
-00:41:18.286 --> 00:41:19.266 A:middle
+
+671
+00:41:18,286 --> 00:41:19,266
 you click the button.
 
-00:41:20.036 --> 00:41:24.086 A:middle
+
+672
+00:41:20,036 --> 00:41:24,086
 Now, you can actually embed this
 view into your OS X application
 
-00:41:24.086 --> 00:41:26.736 A:middle
+
+673
+00:41:24,086 --> 00:41:26,736
 if you choose to do so, and I
 am going to show you some code
 
-00:41:26.736 --> 00:41:29.376 A:middle
+
+674
+00:41:26,736 --> 00:41:29,376
 for how to do that,
 but before that,
 
-00:41:29.376 --> 00:41:31.106 A:middle
+
+675
+00:41:29,376 --> 00:41:31,106
 you've guessed it,
 it's demo time.
 
-00:41:36.136 --> 00:41:39.236 A:middle
+
+676
+00:41:36,136 --> 00:41:39,236
 I've got one of these
 fancy iPads up here.
 
-00:41:39.436 --> 00:41:40.126 A:middle
+
+677
+00:41:39,436 --> 00:41:40,126
 All right.
 
-00:41:41.616 --> 00:41:45.956 A:middle
+
+678
+00:41:41,616 --> 00:41:45,956
 Here on this iPad, I am running
 a synthesizer application
 
-00:41:45.956 --> 00:41:46.766 A:middle
+
+679
+00:41:45,956 --> 00:41:46,766
 called Nave.
 
-00:41:47.066 --> 00:41:48.576 A:middle
+
+680
+00:41:47,066 --> 00:41:48,576
 I like this application
 because some
 
-00:41:48.576 --> 00:41:52.446 A:middle
+
+681
+00:41:48,576 --> 00:41:52,446
 of the patches you can actually
 get a nice touch interface
 
-00:41:52.566 --> 00:41:53.006 A:middle
+
+682
+00:41:52,566 --> 00:41:53,006
 for it.
 
-00:41:53.626 --> 00:41:55.296 A:middle
+
+683
+00:41:53,626 --> 00:41:55,296
 You can potentially
 do aftertouch with it,
 
-00:41:55.296 --> 00:41:57.306 A:middle
+
+684
+00:41:55,296 --> 00:41:57,306
 which is something that's
 not on every MIDI controller
 
-00:41:57.306 --> 00:41:58.216 A:middle
+
+685
+00:41:57,306 --> 00:41:58,216
 that you buy on the market.
 
-00:41:58.526 --> 00:42:01.626 A:middle
+
+686
+00:41:58,526 --> 00:42:01,626
 It's one reason why iPads are
 such great musical instruments.
 
 
-
-00:41:58.526 --> 00:42:01.626 A:middle
-It's one reason why iPads are
-such great musical instruments.
-
-00:42:02.316 --> 00:42:04.926 A:middle
+687
+00:42:02,316 --> 00:42:04,926
 So I selected a patch here
 that sounds like this.
 
-00:42:05.516 --> 00:42:11.556 A:middle
+
+688
+00:42:05,516 --> 00:42:11,556
 [ Music ]
 
-00:42:12.056 --> 00:42:13.516 A:middle
+
+689
+00:42:12,056 --> 00:42:13,516
 I like those sounds, so
 I want to record them
 
-00:42:13.516 --> 00:42:16.356 A:middle
+
+690
+00:42:13,516 --> 00:42:16,356
 into a hip hop project that
 I am working on on the Mac.
 
-00:42:16.906 --> 00:42:22.026 A:middle
+
+691
+00:42:16,906 --> 00:42:22,026
 So let's move over to the Mac,
 
-00:42:26.346 --> 00:42:29.646 A:middle
+
+692
+00:42:26,346 --> 00:42:29,646
 okay here on the Mac I already
 have audio MIDI setup running.
 
-00:42:29.646 --> 00:42:35.536 A:middle
+
+693
+00:42:29,646 --> 00:42:35,536
 I am going to go to the window
 menu, show iOS device browser,
 
-00:42:35.536 --> 00:42:39.136 A:middle
+
+694
+00:42:35,536 --> 00:42:39,136
 and I can see I currently
 have no connected iOS devices.
 
-00:42:39.596 --> 00:42:42.066 A:middle
+
+695
+00:42:39,596 --> 00:42:42,066
 So I will plug in my iPad.
 
-00:42:43.766 --> 00:42:45.286 A:middle
+
+696
+00:42:43,766 --> 00:42:45,286
 It shows up immediately.
 
-00:42:46.046 --> 00:42:48.016 A:middle
+
+697
+00:42:46,046 --> 00:42:48,016
 Blink and you miss
 it, but click Enable,
 
-00:42:48.916 --> 00:42:52.826 A:middle
+
+698
+00:42:48,916 --> 00:42:52,826
 and now you've got an extra
 audio device right here.
 
-00:42:53.206 --> 00:42:54.986 A:middle
+
+699
+00:42:53,206 --> 00:42:54,986
 Yes, Logic, we will
 get to you shortly.
 
-00:42:55.816 --> 00:42:58.556 A:middle
+
+700
+00:42:55,816 --> 00:42:58,556
 You can see there's a
 two-channel input audio device
 
-00:42:58.616 --> 00:42:59.526 A:middle
+
+701
+00:42:58,616 --> 00:42:59,526
 that's been added here.
 
-00:42:59.576 --> 00:43:02.746 A:middle
+
+702
+00:42:59,576 --> 00:43:02,746
 And we do want to use this in
 my Logic project, so I am going
 
 
-
-00:42:59.576 --> 00:43:02.746 A:middle
-And we do want to use this in
-my Logic project, so I am going
-
-00:43:02.746 --> 00:43:04.126 A:middle
+703
+00:43:02,746 --> 00:43:04,126
 to go ahead and say Use Here.
 
-00:43:08.516 --> 00:43:10.066 A:middle
+
+704
+00:43:08,516 --> 00:43:10,066
 Let's bring Logic back up.
 
-00:43:10.896 --> 00:43:11.956 A:middle
+
+705
+00:43:10,896 --> 00:43:11,956
 All right.
 
-00:43:12.236 --> 00:43:13.636 A:middle
+
+706
+00:43:12,236 --> 00:43:13,636
 Here is the beat I
 have been working on.
 
-00:43:14.516 --> 00:43:20.706 A:middle
+
+707
+00:43:14,516 --> 00:43:20,706
 [ Music ]
 
-00:43:21.206 --> 00:43:25.396 A:middle
+
+708
+00:43:21,206 --> 00:43:25,396
 And I want to record in an
 audio track here, so I am going
 
-00:43:25.396 --> 00:43:27.666 A:middle
+
+709
+00:43:25,396 --> 00:43:27,666
 to create a new audio track.
 
-00:43:28.836 --> 00:43:31.746 A:middle
+
+710
+00:43:28,836 --> 00:43:31,746
 Record monitor that
 and record enable.
 
-00:43:32.766 --> 00:43:38.346 A:middle
+
+711
+00:43:32,766 --> 00:43:38,346
 Bring the volume down a little
 bit because it will be at unity.
 
-00:43:38.346 --> 00:43:42.346 A:middle
+
+712
+00:43:38,346 --> 00:43:42,346
 And now [music] I can hear that
 coming directly into my track.
 
-00:43:42.436 --> 00:43:43.976 A:middle
+
+713
+00:43:42,436 --> 00:43:43,976
 So let's record a piece.
 
-00:43:44.516 --> 00:44:01.946 A:middle
+
+714
+00:43:44,516 --> 00:44:01,946
 [ Music ]
 
 
-
-00:43:44.516 --> 00:44:01.946 A:middle
-[ Music ]
-
-00:44:02.446 --> 00:44:07.166 A:middle
+715
+00:44:02,446 --> 00:44:07,166
 And if I play back my
 performance [music] the audio's
 
-00:44:07.196 --> 00:44:08.966 A:middle
+
+716
+00:44:07,196 --> 00:44:08,966
 captured exactly like I expect.
 
-00:44:15.046 --> 00:44:16.036 A:middle
+
+717
+00:44:15,046 --> 00:44:16,036
 Sick beat, Bro.
 
-00:44:17.516 --> 00:44:23.826 A:middle
+
+718
+00:44:17,516 --> 00:44:23,826
 [ Applause ]
 
-00:44:24.326 --> 00:44:27.046 A:middle
+
+719
+00:44:24,326 --> 00:44:27,046
 Now, that concludes my demo,
 but I am not a professional.
 
-00:44:27.076 --> 00:44:28.346 A:middle
+
+720
+00:44:27,076 --> 00:44:28,346
 Please try this at home.
 
-00:44:28.346 --> 00:44:29.766 A:middle
+
+721
+00:44:28,346 --> 00:44:29,766
 It's in your betas right now.
 
-00:44:29.946 --> 00:44:32.026 A:middle
+
+722
+00:44:29,946 --> 00:44:32,026
 If you find any bugs
 with it whatsoever,
 
-00:44:32.026 --> 00:44:35.906 A:middle
+
+723
+00:44:32,026 --> 00:44:35,906
 just go to bugreport.apple.com,
 and file that bug for us.
 
-00:44:36.606 --> 00:44:39.346 A:middle
+
+724
+00:44:36,606 --> 00:44:39,346
 Okay. So a few last
 words about IDAM.
 
-00:44:39.646 --> 00:44:43.026 A:middle
+
+725
+00:44:39,646 --> 00:44:43,026
 It requires OS X El
 Capitan and iOS 9.
 
-00:44:43.646 --> 00:44:45.926 A:middle
+
+726
+00:44:43,646 --> 00:44:45,926
 It will work on all iPhones
 with a lightning connector.
 
-00:44:45.996 --> 00:44:47.496 A:middle
+
+727
+00:44:45,996 --> 00:44:47,496
 It works on all iPads
 
-00:44:47.496 --> 00:44:51.016 A:middle
+
+728
+00:44:47,496 --> 00:44:51,016
 with a lightning connector
 except our very first iPad mini.
 
-00:44:51.636 --> 00:44:55.816 A:middle
+
+729
+00:44:51,636 --> 00:44:55,816
 And if you've got a home iPhone,
 a work iPhone, a home iPad,
 
-00:44:55.816 --> 00:44:59.156 A:middle
+
+730
+00:44:55,816 --> 00:44:59,156
 a work iPad, and an iPad for
 the kids and the power hubs
 
-00:44:59.156 --> 00:45:02.286 A:middle
+
+731
+00:44:59,156 --> 00:45:02,286
 to support it, you can plug all
 of those in at the same time,
 
 
-
-00:44:59.156 --> 00:45:02.286 A:middle
-to support it, you can plug all
-of those in at the same time,
-
-00:45:02.546 --> 00:45:05.476 A:middle
+732
+00:45:02,546 --> 00:45:05,476
 aggregate them together as a
 massive ten-channel input device
 
-00:45:05.476 --> 00:45:06.636 A:middle
+
+733
+00:45:05,476 --> 00:45:06,636
 if you want to, and record it.
 
-00:45:06.636 --> 00:45:09.916 A:middle
+
+734
+00:45:06,636 --> 00:45:09,916
 And if you've got USB
 ports left over after that,
 
-00:45:09.956 --> 00:45:13.496 A:middle
+
+735
+00:45:09,956 --> 00:45:13,496
 please point your Safari browser
 at store.apple.com [laughter].
 
-00:45:15.516 --> 00:45:20.566 A:middle
+
+736
+00:45:15,516 --> 00:45:20,566
 [ Applause ]
 
-00:45:21.066 --> 00:45:22.966 A:middle
+
+737
+00:45:21,066 --> 00:45:22,966
 Okay. I said earlier
 that I would tell you how
 
-00:45:23.036 --> 00:45:25.616 A:middle
+
+738
+00:45:23,036 --> 00:45:25,616
 to embed the view controller
 into your OS X application
 
-00:45:25.616 --> 00:45:27.156 A:middle
+
+739
+00:45:25,616 --> 00:45:27,156
 if you choose to do
 that, and I am going
 
-00:45:27.156 --> 00:45:28.436 A:middle
+
+740
+00:45:27,156 --> 00:45:28,436
 to show you the code
 for that now.
 
-00:45:32.376 --> 00:45:35.616 A:middle
+
+741
+00:45:32,376 --> 00:45:35,616
 This code is pretty boilerplate,
 so I took the liberty
 
-00:45:35.616 --> 00:45:36.886 A:middle
+
+742
+00:45:35,616 --> 00:45:36,886
 of highlighting the
 important part,
 
-00:45:36.946 --> 00:45:39.606 A:middle
+
+743
+00:45:36,946 --> 00:45:39,606
 if you will let your eyes
 slide down to the yellow text,
 
-00:45:39.906 --> 00:45:42.646 A:middle
+
+744
+00:45:39,906 --> 00:45:42,646
 and you will see CA Inter-
 Device Audio View Controller.
 
-00:45:43.076 --> 00:45:46.276 A:middle
+
+745
+00:45:43,076 --> 00:45:46,276
 You just want to create one of
 those and then add the subview
 
-00:45:46.276 --> 00:45:47.396 A:middle
+
+746
+00:45:46,276 --> 00:45:47,396
 to your view container.
 
-00:45:47.996 --> 00:45:51.936 A:middle
+
+747
+00:45:47,996 --> 00:45:51,936
 As long as I am talking about
 new view controllers that are
 
-00:45:51.936 --> 00:45:53.796 A:middle
+
+748
+00:45:51,936 --> 00:45:53,796
 in CoreAudioKit, I
 also wanted to tell you
 
-00:45:53.796 --> 00:45:56.656 A:middle
+
+749
+00:45:53,796 --> 00:45:56,656
 about a couple more you
 might be interested in.
 
-00:45:56.956 --> 00:46:00.776 A:middle
+
+750
+00:45:56,956 --> 00:46:00,776
 We've also added
 CABTLEMIDI window controller.
 
 
-
-00:45:56.956 --> 00:46:00.776 A:middle
-We've also added
-CABTLEMIDI window controller.
-
-00:46:01.436 --> 00:46:05.056 A:middle
+751
+00:46:01,436 --> 00:46:05,056
 This is the UI for configuring
 your Bluetooth Low Energy MIDI
 
-00:46:05.056 --> 00:46:07.686 A:middle
+
+752
+00:46:05,056 --> 00:46:07,686
 devices, it's a feature
 that we debuted last year.
 
-00:46:08.166 --> 00:46:11.216 A:middle
+
+753
+00:46:08,166 --> 00:46:11,216
 It's an NS window controller
 subclass, and that view looks
 
-00:46:11.216 --> 00:46:13.956 A:middle
+
+754
+00:46:11,216 --> 00:46:13,956
 like this, so you can
 now embed this directly
 
-00:46:13.956 --> 00:46:18.166 A:middle
+
+755
+00:46:13,956 --> 00:46:18,166
 into your OS X application
 if you choose to do so.
 
-00:46:18.426 --> 00:46:19.306 A:middle
+
+756
+00:46:18,426 --> 00:46:19,306
 One more for you.
 
-00:46:19.826 --> 00:46:22.716 A:middle
+
+757
+00:46:19,826 --> 00:46:22,716
 We also have CA Network
 Browser Window Controller.
 
-00:46:22.876 --> 00:46:26.866 A:middle
+
+758
+00:46:22,876 --> 00:46:26,866
 This is the UI for configuring
 your Audio Video Bridge
 
-00:46:26.916 --> 00:46:27.696 A:middle
+
+759
+00:46:26,916 --> 00:46:27,696
 audio devices.
 
-00:46:28.166 --> 00:46:30.106 A:middle
+
+760
+00:46:28,166 --> 00:46:30,106
 Also an NS window
 controller subclass,
 
-00:46:30.106 --> 00:46:36.876 A:middle
+
+761
+00:46:30,106 --> 00:46:36,876
 and that view looks like this.
 
-00:46:37.086 --> 00:46:40.996 A:middle
+
+762
+00:46:37,086 --> 00:46:40,996
 Okay. Let's push in the clutch
 and switch gears as we talk
 
-00:46:40.996 --> 00:46:43.166 A:middle
+
+763
+00:46:40,996 --> 00:46:43,166
 about what's new
 in AVAudioSession.
 
-00:46:43.716 --> 00:46:46.496 A:middle
+
+764
+00:46:43,716 --> 00:46:46,496
 So how many of you listen
 to podcasts and audio books?
 
-00:46:47.596 --> 00:46:47.956 A:middle
+
+765
+00:46:47,596 --> 00:46:47,956
 All right.
 
-00:46:47.956 --> 00:46:48.436 A:middle
+
+766
+00:46:47,956 --> 00:46:48,436
 A lot of you.
 
-00:46:48.746 --> 00:46:50.546 A:middle
+
+767
+00:46:48,746 --> 00:46:50,546
 How many of you also
 use your iPhone
 
-00:46:50.546 --> 00:46:52.026 A:middle
+
+768
+00:46:50,546 --> 00:46:52,026
 as your primary navigation
 device?
 
-00:46:53.046 --> 00:46:55.076 A:middle
+
+769
+00:46:53,046 --> 00:46:55,076
 A lot of you too.
 
-00:46:55.346 --> 00:46:57.366 A:middle
+
+770
+00:46:55,346 --> 00:46:57,366
 Okay. So you may have
 seen this problem before.
 
-00:46:57.636 --> 00:46:59.636 A:middle
+
+771
+00:46:57,636 --> 00:46:59,636
 Let's say you are going
 to a soul food restaurant
 
-00:46:59.636 --> 00:47:00.576 A:middle
+
+772
+00:46:59,636 --> 00:47:00,576
 that you've never been to.
 
 
-
-00:46:59.636 --> 00:47:00.576 A:middle
-that you've never been to.
-
-00:47:01.096 --> 00:47:02.036 A:middle
+773
+00:47:01,096 --> 00:47:02,036
 You are navigating.
 
-00:47:02.036 --> 00:47:03.566 A:middle
+
+774
+00:47:02,036 --> 00:47:03,566
 Then you are listening
 to a podcast.
 
-00:47:03.896 --> 00:47:06.906 A:middle
+
+775
+00:47:03,896 --> 00:47:06,906
 This podcast is hosted
 by podcast personality X,
 
-00:47:07.456 --> 00:47:11.406 A:middle
+
+776
+00:47:07,456 --> 00:47:11,406
 and they are interviewing your
 favorite currently relevant
 
-00:47:11.406 --> 00:47:14.786 A:middle
+
+777
+00:47:11,406 --> 00:47:14,786
 celebrity Y, and in the
 middle of this interview,
 
-00:47:14.986 --> 00:47:17.146 A:middle
+
+778
+00:47:14,986 --> 00:47:17,146
 the conversation is
 getting really juicy
 
-00:47:17.246 --> 00:47:20.766 A:middle
+
+779
+00:47:17,246 --> 00:47:20,766
 when your navigation pipes
 up and says in 500 feet,
 
-00:47:20.876 --> 00:47:23.056 A:middle
+
+780
+00:47:20,876 --> 00:47:23,056
 keep to the right, followed
 by a -- keep to the right.
 
-00:47:24.286 --> 00:47:26.316 A:middle
+
+781
+00:47:24,286 --> 00:47:26,316
 Then after that you
 hear raucous laughter.
 
-00:47:26.316 --> 00:47:28.556 A:middle
+
+782
+00:47:26,316 --> 00:47:28,556
 Some great joke happened,
 and you just missed it.
 
-00:47:28.646 --> 00:47:31.776 A:middle
+
+783
+00:47:28,646 --> 00:47:31,776
 So you back up the audio, and
 you start playing it again,
 
-00:47:31.776 --> 00:47:34.156 A:middle
+
+784
+00:47:31,776 --> 00:47:34,156
 and just as you get to the
 joke, "keep to the right."
 
-00:47:34.816 --> 00:47:41.116 A:middle
+
+785
+00:47:34,816 --> 00:47:41,116
 You pump your fist and say "I am
 having a bad user experience."
 
-00:47:42.186 --> 00:47:45.806 A:middle
+
+786
+00:47:42,186 --> 00:47:45,806
 Okay. So we have a solution
 for that [laughter].
 
-00:47:45.956 --> 00:47:47.366 A:middle
+
+787
+00:47:45,956 --> 00:47:47,366
 I took some liberties
 with that one.
 
-00:47:49.056 --> 00:47:51.246 A:middle
+
+788
+00:47:49,056 --> 00:47:51,246
 We have a solution for
 that for you in iOS 9.
 
-00:47:51.526 --> 00:47:54.236 A:middle
+
+789
+00:47:51,526 --> 00:47:54,236
 So now podcasts and audio
 book apps can use a new
 
-00:47:54.236 --> 00:47:57.546 A:middle
+
+790
+00:47:54,236 --> 00:47:57,546
 AVAudioSession mode called
 AVAudioSession mode spoken
 
-00:47:57.546 --> 00:48:01.026 A:middle
+
+791
+00:47:57,546 --> 00:48:01,026
 audio, and for navigation
 and fitness apps or apps
 
 
-
-00:47:57.546 --> 00:48:01.026 A:middle
-audio, and for navigation
-and fitness apps or apps
-
-00:48:01.096 --> 00:48:02.336 A:middle
+792
+00:48:01,096 --> 00:48:02,336
 that issue vocal prompts
 
-00:48:02.336 --> 00:48:04.286 A:middle
+
+793
+00:48:02,336 --> 00:48:04,286
 that interrupt other
 applications' audio,
 
-00:48:04.686 --> 00:48:08.396 A:middle
+
+794
+00:48:04,686 --> 00:48:08,396
 there's a new AVAudioSession
 category option called Interrupt
 
-00:48:08.396 --> 00:48:10.146 A:middle
+
+795
+00:48:08,396 --> 00:48:10,146
 Spoken Audio and
 Mix with Others.
 
-00:48:10.696 --> 00:48:13.386 A:middle
+
+796
+00:48:10,696 --> 00:48:13,386
 Now, Maps already uses
 Interrupt Spoken Audio and Mix
 
-00:48:13.386 --> 00:48:15.306 A:middle
+
+797
+00:48:13,386 --> 00:48:15,306
 with Others, and podcasts
 
-00:48:15.356 --> 00:48:17.756 A:middle
+
+798
+00:48:15,356 --> 00:48:17,756
 and iBooks are already
 using AVAudioSession mode
 
-00:48:17.816 --> 00:48:18.586 A:middle
+
+799
+00:48:17,816 --> 00:48:18,586
 spoken audio.
 
-00:48:19.176 --> 00:48:21.136 A:middle
+
+800
+00:48:19,176 --> 00:48:21,136
 How can you use these
 in your application?
 
-00:48:21.696 --> 00:48:23.046 A:middle
+
+801
+00:48:21,696 --> 00:48:23,046
 Well, let's look at some code.
 
-00:48:23.426 --> 00:48:26.576 A:middle
+
+802
+00:48:23,426 --> 00:48:26,576
 I am just going to go through
 these pieces of code line
 
-00:48:26.576 --> 00:48:28.206 A:middle
+
+803
+00:48:26,576 --> 00:48:28,206
 by line so you can
 see what we are doing.
 
-00:48:28.436 --> 00:48:30.746 A:middle
+
+804
+00:48:28,436 --> 00:48:30,746
 First we will start with
 your audio session setup.
 
-00:48:30.976 --> 00:48:33.156 A:middle
+
+805
+00:48:30,976 --> 00:48:33,156
 You will get the shared
 instance of the audio session,
 
-00:48:33.606 --> 00:48:37.896 A:middle
+
+806
+00:48:33,606 --> 00:48:37,896
 set your category to
 playback, and for your options,
 
-00:48:37.896 --> 00:48:39.656 A:middle
+
+807
+00:48:37,896 --> 00:48:39,656
 you will use the
 option duck others.
 
-00:48:39.766 --> 00:48:42.416 A:middle
+
+808
+00:48:39,766 --> 00:48:42,416
 Now we are going to use
 something new in Swift 2,
 
-00:48:42.986 --> 00:48:44.576 A:middle
+
+809
+00:48:42,986 --> 00:48:44,576
 this new if # available.
 
-00:48:44.796 --> 00:48:47.966 A:middle
+
+810
+00:48:44,796 --> 00:48:47,966
 If will allow you to deploy
 the same code in iOS 9
 
-00:48:48.106 --> 00:48:50.106 A:middle
+
+811
+00:48:48,106 --> 00:48:50,106
 that you can deploy
 to earlier iOS's.
 
-00:48:50.856 --> 00:48:54.406 A:middle
+
+812
+00:48:50,856 --> 00:48:54,406
 So only if you are on
 iOS 9 or greater, you can
 
-00:48:54.406 --> 00:48:56.246 A:middle
+
+813
+00:48:54,406 --> 00:48:56,246
 or in this extra option,
 
-00:48:56.286 --> 00:48:58.356 A:middle
+
+814
+00:48:56,286 --> 00:48:58,356
 Interrupt Spoken Audio
 and Mix with Others.
 
-00:48:59.046 --> 00:49:00.936 A:middle
+
+815
+00:48:59,046 --> 00:49:00,936
 Then you will set your
 audio session category.
 
 
-
-00:48:59.046 --> 00:49:00.936 A:middle
-Then you will set your
-audio session category.
-
-00:49:01.516 --> 00:49:04.346 A:middle
+816
+00:49:01,516 --> 00:49:04,346
 Okay. Let's actually
 look at the nav prompt.
 
-00:49:05.086 --> 00:49:07.266 A:middle
+
+817
+00:49:05,086 --> 00:49:07,266
 Now you are going to play
 your navigation prompt
 
-00:49:07.396 --> 00:49:08.246 A:middle
+
+818
+00:49:07,396 --> 00:49:08,246
 that looks like this.
 
-00:49:08.856 --> 00:49:11.206 A:middle
+
+819
+00:49:08,856 --> 00:49:11,206
 First get the shared
 instance of the audio session.
 
-00:49:11.366 --> 00:49:14.646 A:middle
+
+820
+00:49:11,366 --> 00:49:14,646
 You will create an AV audio
 player using the URL that's
 
-00:49:14.696 --> 00:49:16.376 A:middle
+
+821
+00:49:14,696 --> 00:49:16,376
 supplied in the function
 prototype.
 
-00:49:17.326 --> 00:49:19.186 A:middle
+
+822
+00:49:17,326 --> 00:49:19,186
 You set the player's
 delegate to self.
 
-00:49:19.726 --> 00:49:22.906 A:middle
+
+823
+00:49:19,726 --> 00:49:22,906
 What this will do for you is it
 will allow the delegate method
 
-00:49:22.906 --> 00:49:24.576 A:middle
+
+824
+00:49:22,906 --> 00:49:24,576
 to be called on your behalf
 
-00:49:24.576 --> 00:49:26.716 A:middle
+
+825
+00:49:24,576 --> 00:49:26,716
 when your audio prompt
 is finished playing.
 
-00:49:27.246 --> 00:49:30.056 A:middle
+
+826
+00:49:27,246 --> 00:49:30,056
 Set your audio session
 to active,
 
-00:49:30.196 --> 00:49:31.616 A:middle
+
+827
+00:49:30,196 --> 00:49:31,616
 and then play on, player.
 
-00:49:32.306 --> 00:49:35.166 A:middle
+
+828
+00:49:32,306 --> 00:49:35,166
 Now, here we go.
 
-00:49:35.166 --> 00:49:37.176 A:middle
+
+829
+00:49:35,166 --> 00:49:37,176
 Now we are -- your
 audio is done playing,
 
-00:49:37.216 --> 00:49:38.966 A:middle
+
+830
+00:49:37,216 --> 00:49:38,966
 so your delegate
 method is being called.
 
-00:49:38.966 --> 00:49:40.576 A:middle
+
+831
+00:49:38,966 --> 00:49:40,576
 Audio player did finish playing.
 
-00:49:40.996 --> 00:49:41.976 A:middle
+
+832
+00:49:40,996 --> 00:49:41,976
 The code looks like this.
 
-00:49:42.566 --> 00:49:44.416 A:middle
+
+833
+00:49:42,566 --> 00:49:44,416
 Get the shared instance
 of the audio session.
 
-00:49:45.186 --> 00:49:47.496 A:middle
+
+834
+00:49:45,186 --> 00:49:47,496
 Set your audio session
 to be inactive.
 
-00:49:47.916 --> 00:49:51.566 A:middle
+
+835
+00:49:47,916 --> 00:49:51,566
 And use the option, option
 notify others on deactivation.
 
-00:49:52.396 --> 00:49:55.316 A:middle
+
+836
+00:49:52,396 --> 00:49:55,316
 This means any other audio
 that was playing before you
 
-00:49:55.316 --> 00:49:57.386 A:middle
+
+837
+00:49:55,316 --> 00:49:57,386
 from another process
 can get notified
 
-00:49:57.386 --> 00:49:59.846 A:middle
+
+838
+00:49:57,386 --> 00:49:59,846
 that you are done
 interrupting them.
 
 
-
-00:50:00.046 --> 00:50:01.256 A:middle
+839
+00:50:00,046 --> 00:50:01,256
 Now let's look at
 the other side.
 
-00:50:01.256 --> 00:50:05.526 A:middle
+
+840
+00:50:01,256 --> 00:50:05,526
 Let's go to the podcast or
 spoken audio application.
 
-00:50:06.256 --> 00:50:08.576 A:middle
+
+841
+00:50:06,256 --> 00:50:08,576
 Here's the audio
 session setup for that.
 
-00:50:08.766 --> 00:50:10.516 A:middle
+
+842
+00:50:08,766 --> 00:50:10,516
 Get the shared instance
 of the audio session,
 
-00:50:11.026 --> 00:50:12.736 A:middle
+
+843
+00:50:11,026 --> 00:50:12,736
 set your category to playback.
 
-00:50:12.986 --> 00:50:16.936 A:middle
+
+844
+00:50:12,986 --> 00:50:16,936
 You let the mode be default for
 now, but if you were running
 
-00:50:16.936 --> 00:50:19.966 A:middle
+
+845
+00:50:16,936 --> 00:50:19,966
 in iOS 9 or later, you
 can use this new mode,
 
-00:50:20.056 --> 00:50:22.156 A:middle
+
+846
+00:50:20,056 --> 00:50:22,156
 AVAudioSession mode
 spoken audio,
 
-00:50:22.766 --> 00:50:24.306 A:middle
+
+847
+00:50:22,766 --> 00:50:24,306
 then set your category
 and your mode.
 
-00:50:25.566 --> 00:50:27.596 A:middle
+
+848
+00:50:25,566 --> 00:50:27,596
 The next thing you're
 going to want to do is
 
-00:50:27.596 --> 00:50:28.756 A:middle
+
+849
+00:50:27,596 --> 00:50:28,756
 to add an interruption handler.
 
-00:50:28.996 --> 00:50:32.836 A:middle
+
+850
+00:50:28,996 --> 00:50:32,836
 We are going add an interruption
 handler called handle
 
-00:50:32.836 --> 00:50:35.886 A:middle
+
+851
+00:50:32,836 --> 00:50:35,886
 interruption and we want
 it to be called in response
 
-00:50:36.046 --> 00:50:39.196 A:middle
+
+852
+00:50:36,046 --> 00:50:39,196
 to AVAudioSession
 interruption notification.
 
-00:50:40.716 --> 00:50:43.706 A:middle
+
+853
+00:50:40,716 --> 00:50:43,706
 This is also a good time to
 register for other notifications
 
-00:50:43.706 --> 00:50:46.546 A:middle
+
+854
+00:50:43,706 --> 00:50:46,546
 of interest; for example, if the
 media server died and you want
 
-00:50:46.546 --> 00:50:49.026 A:middle
+
+855
+00:50:46,546 --> 00:50:49,026
 to be notified about that so
 you can reset your audio state.
 
-00:50:49.536 --> 00:50:52.686 A:middle
+
+856
+00:50:49,536 --> 00:50:52,686
 Okay. So now let's look at
 the interruption handler.
 
-00:50:54.196 --> 00:50:56.196 A:middle
+
+857
+00:50:54,196 --> 00:50:56,196
 The first thing we'll do here
 is we will get the user info
 
-00:50:56.196 --> 00:50:58.576 A:middle
+
+858
+00:50:56,196 --> 00:50:58,576
 dictionary from the NS
 notification object that's
 
-00:50:58.576 --> 00:51:01.496 A:middle
+
+859
+00:50:58,576 --> 00:51:01,496
 supplied in the function
 prototype and from
 
 
-
-00:50:58.576 --> 00:51:01.496 A:middle
-supplied in the function
-prototype and from
-
-00:51:01.496 --> 00:51:03.276 A:middle
+860
+00:51:01,496 --> 00:51:03,276
 that user info dictionary
 we will look
 
-00:51:03.276 --> 00:51:06.276 A:middle
+
+861
+00:51:03,276 --> 00:51:06,276
 at the key AVAudioSession
 interruption type key.
 
-00:51:06.846 --> 00:51:09.346 A:middle
+
+862
+00:51:06,846 --> 00:51:09,346
 Now we are going to
 switch on that type.
 
-00:51:09.876 --> 00:51:12.286 A:middle
+
+863
+00:51:09,876 --> 00:51:12,286
 The first part of this is
 going to be what happens
 
-00:51:12.736 --> 00:51:15.556 A:middle
+
+864
+00:51:12,736 --> 00:51:15,556
 when your audio session is
 beginning to be interrupted,
 
-00:51:15.946 --> 00:51:17.736 A:middle
+
+865
+00:51:15,946 --> 00:51:17,736
 and then the second part
 will be on the next slide,
 
-00:51:17.736 --> 00:51:18.556 A:middle
+
+866
+00:51:17,736 --> 00:51:18,556
 and that's for the end.
 
-00:51:18.656 --> 00:51:21.276 A:middle
+
+867
+00:51:18,656 --> 00:51:21,276
 So if this is a begin
 interruption,
 
-00:51:21.566 --> 00:51:23.656 A:middle
+
+868
+00:51:21,566 --> 00:51:23,656
 the first thing you will
 want to do is update your UI
 
-00:51:23.656 --> 00:51:25.656 A:middle
+
+869
+00:51:23,656 --> 00:51:25,656
 to indicate your playback
 has already been stopped.
 
-00:51:26.316 --> 00:51:29.756 A:middle
+
+870
+00:51:26,316 --> 00:51:29,756
 Then if your internal state
 dictated that you were playing,
 
-00:51:29.886 --> 00:51:31.606 A:middle
+
+871
+00:51:29,886 --> 00:51:31,606
 then you will set
 was playing to true.
 
-00:51:31.606 --> 00:51:35.216 A:middle
+
+872
+00:51:31,606 --> 00:51:35,216
 That will let you know later
 on when this interruption is
 
-00:51:35.216 --> 00:51:39.336 A:middle
+
+873
+00:51:35,216 --> 00:51:39,336
 over that you are okay to resume
 audio, if that's appropriate.
 
-00:51:39.686 --> 00:51:42.706 A:middle
+
+874
+00:51:39,686 --> 00:51:42,706
 Then, of course, update
 your internal state.
 
-00:51:44.016 --> 00:51:46.006 A:middle
+
+875
+00:51:44,016 --> 00:51:46,006
 So now this is the
 end interruption,
 
-00:51:46.186 --> 00:51:48.396 A:middle
+
+876
+00:51:46,186 --> 00:51:48,396
 so in case this is
 the end interruption,
 
-00:51:48.706 --> 00:51:50.996 A:middle
+
+877
+00:51:48,706 --> 00:51:50,996
 you'll get the flag from
 the user info dictionary
 
-00:51:50.996 --> 00:51:53.456 A:middle
+
+878
+00:51:50,996 --> 00:51:53,456
 at AVAudioSession
 interruption option key,
 
-00:51:54.076 --> 00:51:57.146 A:middle
+
+879
+00:51:54,076 --> 00:51:57,146
 and if that flag is
 option should resume
 
-00:51:57.196 --> 00:51:59.536 A:middle
+
+880
+00:51:57,196 --> 00:51:59,536
 and you were playing before
 when you were interrupted,
 
 
-
-00:52:00.006 --> 00:52:02.146 A:middle
+881
+00:52:00,006 --> 00:52:02,146
 rewind the audio
 just a little bit
 
-00:52:02.146 --> 00:52:04.456 A:middle
+
+882
+00:52:02,146 --> 00:52:04,456
 because your audio was
 ducked before it was stopped,
 
-00:52:04.686 --> 00:52:06.236 A:middle
+
+883
+00:52:04,686 --> 00:52:06,236
 and then you can play
 your player again,
 
-00:52:06.806 --> 00:52:09.896 A:middle
+
+884
+00:52:06,806 --> 00:52:09,896
 update your internal state, and
 then update the UI to reflect
 
-00:52:09.896 --> 00:52:11.206 A:middle
+
+885
+00:52:09,896 --> 00:52:11,206
 that the playback has resumed.
 
-00:52:11.786 --> 00:52:14.166 A:middle
+
+886
+00:52:11,786 --> 00:52:14,166
 And that's all the
 code I have for you.
 
-00:52:15.376 --> 00:52:16.446 A:middle
+
+887
+00:52:15,376 --> 00:52:16,446
 Quick recap.
 
-00:52:16.446 --> 00:52:17.446 A:middle
+
+888
+00:52:16,446 --> 00:52:17,446
 Today we have told you
 
-00:52:17.446 --> 00:52:20.286 A:middle
+
+889
+00:52:17,446 --> 00:52:20,286
 about some exciting new
 enhancements in AVAudioEngine.
 
-00:52:20.586 --> 00:52:23.016 A:middle
+
+890
+00:52:20,586 --> 00:52:23,016
 We have introduced
 Inter-Device Audio Mode.
 
-00:52:23.756 --> 00:52:26.126 A:middle
+
+891
+00:52:23,756 --> 00:52:26,126
 We've told you about some new
 CoreAudioKit view controllers
 
-00:52:26.126 --> 00:52:28.096 A:middle
+
+892
+00:52:26,126 --> 00:52:28,096
 that you can embed into
 your OS X applications
 
-00:52:28.476 --> 00:52:31.686 A:middle
+
+893
+00:52:28,476 --> 00:52:31,686
 for Inter-Device Audio Mode,
 Bluetooth Low Energy, MIDI,
 
-00:52:31.686 --> 00:52:32.896 A:middle
+
+894
+00:52:31,686 --> 00:52:32,896
 and Audio Video Bridge.
 
-00:52:33.776 --> 00:52:36.846 A:middle
+
+895
+00:52:33,776 --> 00:52:36,846
 And we've also introduced
 AVAudioSession mode spoken audio
 
-00:52:37.296 --> 00:52:40.536 A:middle
+
+896
+00:52:37,296 --> 00:52:40,536
 and the new AVAudioSession
 category option Interrupt Spoken
 
-00:52:40.536 --> 00:52:41.886 A:middle
+
+897
+00:52:40,536 --> 00:52:41,886
 Audio and Mix with Others.
 
-00:52:42.666 --> 00:52:43.746 A:middle
+
+898
+00:52:42,666 --> 00:52:43,746
 But that's not all.
 
-00:52:44.046 --> 00:52:47.436 A:middle
+
+899
+00:52:44,046 --> 00:52:47,436
 We have another session
 coming up tomorrow at 11 a.m.
 
-00:52:47.696 --> 00:52:51.186 A:middle
+
+900
+00:52:47,696 --> 00:52:51,186
 on all the exciting changes
 to Audio Unit Extensions,
 
-00:52:51.186 --> 00:52:52.326 A:middle
+
+901
+00:52:51,186 --> 00:52:52,326
 so we hope to see you all there.
 
-00:52:53.126 --> 00:52:55.886 A:middle
+
+902
+00:52:53,126 --> 00:52:55,886
 Also some related sessions
 that happened earlier today,
 
-00:52:55.886 --> 00:52:57.706 A:middle
+
+903
+00:52:55,886 --> 00:52:57,706
 if you want to go
 back and look at them,
 
-00:52:57.706 --> 00:53:00.976 A:middle
+
+904
+00:52:57,706 --> 00:53:00,976
 especially if you are coming
 in from the game audio side.
 
 
-
-00:52:57.706 --> 00:53:00.976 A:middle
-especially if you are coming
-in from the game audio side.
-
-00:53:02.136 --> 00:53:04.576 A:middle
+905
+00:53:02,136 --> 00:53:04,576
 If we are not able to answer
 all your questions at the labs,
 
-00:53:04.766 --> 00:53:08.606 A:middle
+
+906
+00:53:04,766 --> 00:53:08,606
 these are some very useful
 websites that you can go to,
 
-00:53:08.686 --> 00:53:12.566 A:middle
+
+907
+00:53:08,686 --> 00:53:12,566
 and any general inquiries can
 be directed to Craig Keithley,
 
-00:53:12.566 --> 00:53:17.296 A:middle
+
+908
+00:53:12,566 --> 00:53:17,296
 whose contact information is
 at the bottom, and we out.
 
-00:53:18.516 --> 00:53:31.780 A:middle
+
+909
+00:53:18,516 --> 00:53:31,780
 [ Applause ]
 

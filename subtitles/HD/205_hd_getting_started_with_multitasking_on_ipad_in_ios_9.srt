@@ -1,4469 +1,6415 @@
-
-00:00:24.016 --> 00:00:25.146 A:middle
+1
+00:00:24,016 --> 00:00:25,146
 [Applause]
 
-00:00:25.146 --> 00:00:28.776 A:middle
-&gt;&gt; Peter Hajas: I am so excited
+
+2
+00:00:25,146 --> 00:00:28,776
+>> Peter Hajas: I am so excited
 to be here today to talk to you
 
-00:00:28.876 --> 00:00:30.976 A:middle
+
+3
+00:00:28,876 --> 00:00:30,976
 about multitasking on iPad.
 
-00:00:32.066 --> 00:00:36.016 A:middle
+
+4
+00:00:32,066 --> 00:00:36,016
 My name is Peter Hajas, I'm
 a UIKit Frameworks Engineer,
 
-00:00:36.916 --> 00:00:39.376 A:middle
+
+5
+00:00:36,916 --> 00:00:39,376
 and later on I'll be
 joined by my colleagues,
 
-00:00:40.046 --> 00:00:42.346 A:middle
+
+6
+00:00:40,046 --> 00:00:42,346
 Jacob Xiao and Kurt Revis.
 
-00:00:42.566 --> 00:00:47.226 A:middle
+
+7
+00:00:42,566 --> 00:00:47,226
 So you can see that even UIKit
 is multitasking for this talk.
 
-00:00:47.436 --> 00:00:49.796 A:middle
+
+8
+00:00:47,436 --> 00:00:49,796
 Multitasking is a giant feature,
 
-00:00:50.366 --> 00:00:52.946 A:middle
+
+9
+00:00:50,366 --> 00:00:52,946
 and so we have split
 it among three talks,
 
-00:00:53.446 --> 00:00:54.666 A:middle
+
+10
+00:00:53,446 --> 00:00:54,666
 of which this is the first.
 
-00:00:56.046 --> 00:00:58.226 A:middle
+
+11
+00:00:56,046 --> 00:00:58,226
 Tomorrow afternoon
 you can hear all
 
-00:00:58.226 --> 00:01:00.866 A:middle
+
+12
+00:00:58,226 --> 00:01:00,866
 about the great new
 media enhancements
 
 
-
-00:00:58.226 --> 00:01:00.866 A:middle
-about the great new
-media enhancements
-
-00:01:00.926 --> 00:01:03.346 A:middle
+13
+00:01:00,926 --> 00:01:03,346
 that we have brought
 to iPad and iOS 9,
 
-00:01:04.066 --> 00:01:06.466 A:middle
+
+14
+00:01:04,066 --> 00:01:06,466
 and learn about
 picture-in-picture video
 
-00:01:07.016 --> 00:01:10.736 A:middle
+
+15
+00:01:07,016 --> 00:01:10,736
 and how your app can use the
 camera alongside other apps
 
-00:01:10.736 --> 00:01:11.626 A:middle
+
+16
+00:01:10,736 --> 00:01:11,626
 in multitasking.
 
-00:01:12.876 --> 00:01:15.576 A:middle
+
+17
+00:01:12,876 --> 00:01:15,576
 Later that same day
 is a really great talk
 
-00:01:15.776 --> 00:01:20.336 A:middle
+
+18
+00:01:15,776 --> 00:01:20,336
 about how your app can be a
 great citizen alongside other
 
-00:01:20.336 --> 00:01:22.856 A:middle
+
+19
+00:01:20,336 --> 00:01:22,856
 apps that are multitasking
 on iPad.
 
-00:01:23.466 --> 00:01:25.556 A:middle
+
+20
+00:01:23,466 --> 00:01:25,556
 I really encourage
 you to check out both
 
-00:01:25.556 --> 00:01:27.066 A:middle
+
+21
+00:01:25,556 --> 00:01:27,066
 of these talks tomorrow.
 
-00:01:29.836 --> 00:01:33.456 A:middle
+
+22
+00:01:29,836 --> 00:01:33,456
 Today we're going to
 go over three topics.
 
-00:01:35.036 --> 00:01:39.926 A:middle
+
+23
+00:01:35,036 --> 00:01:39,926
 The first, multitasking
 in your app: what is it,
 
-00:01:40.546 --> 00:01:43.416 A:middle
+
+24
+00:01:40,546 --> 00:01:43,416
 why should you adopt it,
 how you can adopt it,
 
-00:01:44.086 --> 00:01:46.196 A:middle
+
+25
+00:01:44,086 --> 00:01:46,196
 and what does it mean
 at the UIKit level?
 
-00:01:47.636 --> 00:01:51.516 A:middle
+
+26
+00:01:47,636 --> 00:01:51,516
 The second is changes
 that we have made to UIKit
 
-00:01:52.326 --> 00:01:55.806 A:middle
+
+27
+00:01:52,326 --> 00:01:55,806
 to make your multitasking
 adoption experience really easy.
 
-00:01:57.176 --> 00:02:00.496 A:middle
+
+28
+00:01:57,176 --> 00:02:00,496
 And the third is making
 the most of the latest
 
 
-
-00:01:57.176 --> 00:02:00.496 A:middle
-And the third is making
-the most of the latest
-
-00:02:00.496 --> 00:02:04.776 A:middle
+29
+00:02:00,496 --> 00:02:04,776
 and greatest UIKit APIs to make
 sure your app really shines
 
-00:02:05.456 --> 00:02:06.296 A:middle
+
+30
+00:02:05,456 --> 00:02:06,296
 in multitasking.
 
-00:02:06.816 --> 00:02:12.656 A:middle
+
+31
+00:02:06,816 --> 00:02:12,656
 Let's get started.
 
-00:02:12.756 --> 00:02:14.056 A:middle
+
+32
+00:02:12,756 --> 00:02:14,056
 As you saw in the keynote,
 
-00:02:14.376 --> 00:02:19.326 A:middle
+
+33
+00:02:14,376 --> 00:02:19,326
 multitasking brings a great new
 experience to users on iPad.
 
-00:02:19.916 --> 00:02:22.016 A:middle
+
+34
+00:02:19,916 --> 00:02:22,016
 They can be doing one of
 their favorite things,
 
-00:02:22.216 --> 00:02:25.356 A:middle
+
+35
+00:02:22,216 --> 00:02:25,356
 like browsing the web, and
 slide in from the right
 
-00:02:25.766 --> 00:02:27.586 A:middle
+
+36
+00:02:25,766 --> 00:02:27,586
 to interact with another app.
 
-00:02:29.166 --> 00:02:32.666 A:middle
+
+37
+00:02:29,166 --> 00:02:32,666
 We call this mode 'slide over.'
 
-00:02:41.656 --> 00:02:46.026 A:middle
+
+38
+00:02:41,656 --> 00:02:46,026
 The user can then tap the
 divider to the left of the slide
 
-00:02:46.026 --> 00:02:50.386 A:middle
+
+39
+00:02:46,026 --> 00:02:50,386
 over tap to pin the
 apps side by side.
 
-00:02:50.966 --> 00:02:55.386 A:middle
+
+40
+00:02:50,966 --> 00:02:55,386
 As you saw on the keynote, we
 call this mode 'split view.'
 
-00:02:56.796 --> 00:02:59.446 A:middle
+
+41
+00:02:56,796 --> 00:02:59,446
 Being that you're all
 iOS developers I'm sure
 
-00:02:59.446 --> 00:03:03.126 A:middle
+
+42
+00:02:59,446 --> 00:03:03,126
 that you're really familiar with
 our UISplitview Controller API.
 
 
-
-00:02:59.446 --> 00:03:03.126 A:middle
-that you're really familiar with
-our UISplitview Controller API.
-
-00:03:04.146 --> 00:03:06.676 A:middle
+43
+00:03:04,146 --> 00:03:06,676
 And I can assure you that
 that's completely different
 
-00:03:06.676 --> 00:03:07.326 A:middle
+
+44
+00:03:06,676 --> 00:03:07,326
 from split view.
 
-00:03:08.181 --> 00:03:10.181 A:middle
+
+45
+00:03:08,181 --> 00:03:10,181
 [Laughter]
 
-00:03:10.346 --> 00:03:11.906 A:middle
-&gt;&gt; Peter Hajas: The user
+
+46
+00:03:10,346 --> 00:03:11,906
+>> Peter Hajas: The user
 can grab the divider
 
-00:03:12.016 --> 00:03:15.416 A:middle
+
+47
+00:03:12,016 --> 00:03:15,416
 between the two applications
 and resize them
 
-00:03:15.586 --> 00:03:18.636 A:middle
+
+48
+00:03:15,586 --> 00:03:18,636
 for a 50/50 split view UI.
 
-00:03:25.156 --> 00:03:28.606 A:middle
+
+49
+00:03:25,156 --> 00:03:28,606
 They can then take the divider
 and keep dragging to the left
 
-00:03:29.406 --> 00:03:34.406 A:middle
+
+50
+00:03:29,406 --> 00:03:34,406
 to promote the side app, in this
 case, Maps, to be full screen.
 
-00:03:34.966 --> 00:03:38.616 A:middle
+
+51
+00:03:34,966 --> 00:03:38,616
 Then they may choose to
 slide in another app,
 
-00:03:38.926 --> 00:03:41.136 A:middle
+
+52
+00:03:38,926 --> 00:03:41,136
 or the same one,
 again from the side.
 
-00:03:42.506 --> 00:03:47.706 A:middle
+
+53
+00:03:42,506 --> 00:03:47,706
 With multitasking on iPad in
 iOS 9 the user is in control
 
-00:03:47.876 --> 00:03:51.996 A:middle
+
+54
+00:03:47,876 --> 00:03:51,996
 of the experience, the apps
 that are running, and the sizes
 
-00:03:51.996 --> 00:03:54.286 A:middle
+
+55
+00:03:51,996 --> 00:03:54,286
 that those apps are running at.
 
-00:03:54.956 --> 00:03:59.966 A:middle
+
+56
+00:03:54,956 --> 00:03:59,966
 There is another really cool
 feature of multitasking in iOS 9
 
 
-
-00:04:00.196 --> 00:04:04.506 A:middle
+57
+00:04:00,196 --> 00:04:04,506
 on iPad, and that's
 picture-in-picture video,
 
-00:04:05.636 --> 00:04:08.966 A:middle
+
+58
+00:04:05,636 --> 00:04:08,966
 which you can hear all
 about at tomorrow's media
 
-00:04:08.966 --> 00:04:10.096 A:middle
+
+59
+00:04:08,966 --> 00:04:10,096
 multitasking talk.
 
-00:04:11.566 --> 00:04:16.356 A:middle
+
+60
+00:04:11,566 --> 00:04:16,356
 Today we'll be covering how your
 applications can adopt split
 
-00:04:16.356 --> 00:04:17.966 A:middle
+
+61
+00:04:16,356 --> 00:04:17,966
 view and slide over.
 
-00:04:19.276 --> 00:04:23.156 A:middle
+
+62
+00:04:19,276 --> 00:04:23,156
 In order to understand how to
 adopt those, it is important
 
-00:04:23.156 --> 00:04:26.176 A:middle
+
+63
+00:04:23,156 --> 00:04:26,176
 that we talk about something
 that's become increasingly
 
-00:04:26.176 --> 00:04:29.976 A:middle
+
+64
+00:04:26,176 --> 00:04:29,976
 important in UIKit apps
 and that's adaptivity.
 
-00:04:38.146 --> 00:04:40.356 A:middle
+
+65
+00:04:38,146 --> 00:04:40,356
 In the past, we have
 encouraged you
 
-00:04:40.406 --> 00:04:42.636 A:middle
+
+66
+00:04:40,406 --> 00:04:42,636
 to make your applications
 universal.
 
-00:04:43.346 --> 00:04:49.696 A:middle
+
+67
+00:04:43,346 --> 00:04:49,696
 This means the same app can run
 on the iPhone and on the iPad.
 
-00:04:49.886 --> 00:04:53.876 A:middle
+
+68
+00:04:49,886 --> 00:04:53,876
 Last year we introduced
 a simplified way for you
 
-00:04:53.876 --> 00:04:55.536 A:middle
+
+69
+00:04:53,876 --> 00:04:55,536
 to do the check for what type
 
-00:04:55.536 --> 00:04:57.686 A:middle
+
+70
+00:04:55,536 --> 00:04:57,686
 of interface you should
 be providing to your user,
 
-00:04:57.686 --> 00:05:05.206 A:middle
+
+71
+00:04:57,686 --> 00:05:05,206
 through the introduction of
 the horizontal size class.
 
 
-
-00:04:57.686 --> 00:05:05.206 A:middle
-through the introduction of
-the horizontal size class.
-
-00:05:05.386 --> 00:05:10.006 A:middle
+72
+00:05:05,386 --> 00:05:10,006
 Last year, iPhones in portrait
 have the compact horizontal
 
-00:05:10.126 --> 00:05:10.886 A:middle
+
+73
+00:05:10,126 --> 00:05:10,886
 size class.
 
-00:05:12.116 --> 00:05:15.216 A:middle
+
+74
+00:05:12,116 --> 00:05:15,216
 They traditionally display,
 for example, a single column
 
-00:05:15.396 --> 00:05:20.756 A:middle
+
+75
+00:05:15,396 --> 00:05:20,756
 of content, whereas iPads
 have the regular horizontal
 
-00:05:20.916 --> 00:05:21.446 A:middle
+
+76
+00:05:20,916 --> 00:05:21,446
 size class.
 
-00:05:22.666 --> 00:05:26.116 A:middle
+
+77
+00:05:22,666 --> 00:05:26,116
 Many of Apple's own system
 apps use this to indicate
 
-00:05:26.116 --> 00:05:28.886 A:middle
+
+78
+00:05:26,116 --> 00:05:28,886
 that they should show
 multiple columns of content
 
-00:05:30.156 --> 00:05:32.166 A:middle
+
+79
+00:05:30,156 --> 00:05:32,166
 and change the information
 architecture
 
-00:05:32.426 --> 00:05:36.486 A:middle
+
+80
+00:05:32,426 --> 00:05:36,486
 that they present to the user.
 
-00:05:36.646 --> 00:05:39.666 A:middle
+
+81
+00:05:36,646 --> 00:05:39,666
 Also with the devices at last
 year's Worldwide Developer
 
-00:05:39.666 --> 00:05:43.966 A:middle
+
+82
+00:05:39,666 --> 00:05:43,966
 Conference, this held true
 while the devices were held
 
-00:05:43.966 --> 00:05:47.966 A:middle
+
+83
+00:05:43,966 --> 00:05:47,966
 in landscape, compact
 horizontal for the iPhone,
 
-00:05:48.586 --> 00:05:52.636 A:middle
+
+84
+00:05:48,586 --> 00:05:52,636
 and regular horizontal
 for the iPad.
 
-00:05:52.856 --> 00:05:56.316 A:middle
+
+85
+00:05:52,856 --> 00:05:56,316
 So that was last year's
 Worldwide Developer Conference.
 
-00:05:56.846 --> 00:05:59.876 A:middle
+
+86
+00:05:56,846 --> 00:05:59,876
 But if you look closely,
 
-00:05:59.936 --> 00:06:02.896 A:middle
+
+87
+00:05:59,936 --> 00:06:02,896
 there was another message last
 year that's really obvious
 
 
-
-00:05:59.936 --> 00:06:02.896 A:middle
-there was another message last
-year that's really obvious
-
-00:06:02.896 --> 00:06:06.206 A:middle
+88
+00:06:02,896 --> 00:06:06,206
 if you use a microscope;
 we were telling you
 
-00:06:06.206 --> 00:06:11.566 A:middle
+
+89
+00:06:06,206 --> 00:06:11,566
 to get ready for the iPhone 6+.
 
-00:06:11.776 --> 00:06:13.716 A:middle
+
+90
+00:06:11,776 --> 00:06:13,716
 Like our existing iPhones,
 
-00:06:14.226 --> 00:06:19.186 A:middle
+
+91
+00:06:14,226 --> 00:06:19,186
 the iPhone 6+ has a compact
 horizontal size class.
 
-00:06:19.936 --> 00:06:22.026 A:middle
+
+92
+00:06:19,936 --> 00:06:22,026
 But when rotated into landscape,
 
-00:06:23.006 --> 00:06:26.056 A:middle
+
+93
+00:06:23,006 --> 00:06:26,056
 it has the regular
 horizontal size class.
 
-00:06:27.016 --> 00:06:30.956 A:middle
+
+94
+00:06:27,016 --> 00:06:30,956
 This is the first time that
 an app can have different size
 
-00:06:30.956 --> 00:06:32.716 A:middle
+
+95
+00:06:30,956 --> 00:06:32,716
 classes while it's running.
 
-00:06:33.346 --> 00:06:37.956 A:middle
+
+96
+00:06:33,346 --> 00:06:37,956
 And that brings us to this year.
 
-00:06:38.156 --> 00:06:40.806 A:middle
+
+97
+00:06:38,156 --> 00:06:40,806
 Similarly, if you take
 this year's invitation
 
-00:06:40.806 --> 00:06:43.106 A:middle
+
+98
+00:06:40,806 --> 00:06:43,106
 and draw the lines and rotate it
 
-00:06:43.106 --> 00:06:45.796 A:middle
+
+99
+00:06:43,106 --> 00:06:45,796
 where you know it logically
 makes sense, it forms a P,
 
-00:06:46.136 --> 00:06:49.716 A:middle
+
+100
+00:06:46,136 --> 00:06:49,716
 the P of iPad multitasking;
 it is obvious.
 
-00:06:50.516 --> 00:06:55.836 A:middle
+
+101
+00:06:50,516 --> 00:06:55,836
 [Laughter]
 
-00:06:56.336 --> 00:06:57.036 A:middle
-&gt;&gt; Thank you.
 
-00:06:57.756 --> 00:07:01.396 A:middle
+102
+00:06:56,336 --> 00:06:57,036
+>> Thank you.
+
+
+103
+00:06:57,756 --> 00:07:01,396
 So how does iPad multitasking
 work with adaptivity?
 
 
-
-00:06:57.756 --> 00:07:01.396 A:middle
-So how does iPad multitasking
-work with adaptivity?
-
-00:07:01.866 --> 00:07:06.826 A:middle
+104
+00:07:01,866 --> 00:07:06,826
 Let's take an example
 of a slide over app.
 
-00:07:07.456 --> 00:07:10.236 A:middle
+
+105
+00:07:07,456 --> 00:07:10,236
 The user slides over from
 the right side of the display
 
-00:07:10.236 --> 00:07:16.046 A:middle
+
+106
+00:07:10,236 --> 00:07:16,046
 and the app comes up in a
 compact horizontal size class.
 
-00:07:17.216 --> 00:07:19.546 A:middle
+
+107
+00:07:17,216 --> 00:07:19,546
 It shows what we would
 traditionally refer
 
-00:07:19.546 --> 00:07:21.666 A:middle
+
+108
+00:07:19,546 --> 00:07:21,666
 to as the iPhone experience.
 
-00:07:22.046 --> 00:07:25.696 A:middle
+
+109
+00:07:22,046 --> 00:07:25,696
 Then the user may choose
 to resize their app
 
-00:07:25.696 --> 00:07:28.076 A:middle
+
+110
+00:07:25,696 --> 00:07:28,076
 to be full screen and
 then it will change
 
-00:07:28.436 --> 00:07:31.226 A:middle
+
+111
+00:07:28,436 --> 00:07:31,226
 into the regular
 horizontal size class
 
-00:07:31.646 --> 00:07:34.386 A:middle
+
+112
+00:07:31,646 --> 00:07:34,386
 and display its traditional
 iPad UI.
 
-00:07:35.616 --> 00:07:37.376 A:middle
+
+113
+00:07:35,616 --> 00:07:37,376
 Two new things happened here
 
-00:07:37.596 --> 00:07:39.776 A:middle
+
+114
+00:07:37,596 --> 00:07:39,776
 that never have been
 possible before on iPad.
 
-00:07:41.066 --> 00:07:46.766 A:middle
+
+115
+00:07:41,066 --> 00:07:46,766
 First, the app began its life as
 a compact horizontal size class,
 
-00:07:47.286 --> 00:07:49.956 A:middle
+
+116
+00:07:47,286 --> 00:07:49,956
 something that has never
 been possible on iPad before.
 
-00:07:51.016 --> 00:07:54.316 A:middle
+
+117
+00:07:51,016 --> 00:07:54,316
 Second, the app changed
 size classes
 
-00:07:54.586 --> 00:07:55.776 A:middle
+
+118
+00:07:54,586 --> 00:07:55,776
 when the user resized it.
 
-00:07:56.286 --> 00:07:58.896 A:middle
+
+119
+00:07:56,286 --> 00:07:58,896
 This is also brand new to iOS 9.
 
 
-
-00:08:06.176 --> 00:08:09.876 A:middle
+120
+00:08:06,176 --> 00:08:09,876
 So what does this mean for
 your app and your users?
 
-00:08:10.976 --> 00:08:13.396 A:middle
+
+121
+00:08:10,976 --> 00:08:13,396
 Let's look at it from
 those users' perspectives.
 
-00:08:15.116 --> 00:08:18.796 A:middle
+
+122
+00:08:15,116 --> 00:08:18,796
 They could be browsing the
 web and want to interact
 
-00:08:18.966 --> 00:08:21.456 A:middle
+
+123
+00:08:18,966 --> 00:08:21,456
 with another one of their
 favorite apps on iPad.
 
-00:08:22.666 --> 00:08:25.026 A:middle
+
+124
+00:08:22,666 --> 00:08:25,026
 So they'll slide in from
 the right and they'll want
 
-00:08:25.026 --> 00:08:28.426 A:middle
+
+125
+00:08:25,026 --> 00:08:28,426
 to see your app in this list.
 
-00:08:30.236 --> 00:08:35.246 A:middle
+
+126
+00:08:30,236 --> 00:08:35,246
 By adopting multitasking in
 your app on iPad and iOS 9,
 
-00:08:36.206 --> 00:08:40.966 A:middle
+
+127
+00:08:36,206 --> 00:08:40,966
 you will let users get into
 your app more, spend more time
 
-00:08:40.966 --> 00:08:44.476 A:middle
+
+128
+00:08:40,966 --> 00:08:44,476
 in your app while they use it
 alongside their other favorite
 
-00:08:44.476 --> 00:08:48.666 A:middle
+
+129
+00:08:44,476 --> 00:08:48,666
 apps on iPad, and use
 your app in brand-new ways
 
-00:08:48.666 --> 00:08:51.556 A:middle
+
+130
+00:08:48,666 --> 00:08:51,556
 that you may have never
 imagined in concert
 
-00:08:51.556 --> 00:08:52.576 A:middle
+
+131
+00:08:51,556 --> 00:08:52,576
 with their other apps.
 
-00:08:53.676 --> 00:08:56.216 A:middle
+
+132
+00:08:53,676 --> 00:08:56,216
 Users will expect that all apps
 
-00:08:56.216 --> 00:08:58.496 A:middle
+
+133
+00:08:56,216 --> 00:08:58,496
 on their iPad support
 multitasking,
 
-00:08:59.006 --> 00:09:00.996 A:middle
+
+134
+00:08:59,006 --> 00:09:00,996
 and we're here to
 help you adopt it.
 
 
-
-00:08:59.006 --> 00:09:00.996 A:middle
-and we're here to
-help you adopt it.
-
-00:09:02.396 --> 00:09:04.526 A:middle
+135
+00:09:02,396 --> 00:09:04,526
 Let's go through
 just how easy it is
 
-00:09:04.526 --> 00:09:07.196 A:middle
+
+136
+00:09:04,526 --> 00:09:07,196
 to add multitasking
 to your iOS app.
 
-00:09:08.196 --> 00:09:10.726 A:middle
+
+137
+00:09:08,196 --> 00:09:10,726
 I have got great news for
 you: it is really easy.
 
-00:09:11.816 --> 00:09:16.146 A:middle
+
+138
+00:09:11,816 --> 00:09:16,146
 All you have to do is
 use the Xcode 7 beta
 
-00:09:16.146 --> 00:09:17.356 A:middle
+
+139
+00:09:16,146 --> 00:09:17,356
 and create a new project.
 
-00:09:18.196 --> 00:09:19.806 A:middle
+
+140
+00:09:18,196 --> 00:09:19,806
 All new projects created
 
-00:09:19.806 --> 00:09:23.696 A:middle
+
+141
+00:09:19,806 --> 00:09:23,696
 in Xcode 7 have iPad
 multitasking enabled by default,
 
-00:09:24.256 --> 00:09:26.176 A:middle
+
+142
+00:09:24,256 --> 00:09:26,176
 and all the code you
 write will be running
 
-00:09:26.176 --> 00:09:27.936 A:middle
+
+143
+00:09:26,176 --> 00:09:27,936
 in multitasking, and that's it.
 
-00:09:28.026 --> 00:09:28.946 A:middle
+
+144
+00:09:28,026 --> 00:09:28,946
 Just make a new project.
 
-00:09:29.126 --> 00:09:31.126 A:middle
+
+145
+00:09:29,126 --> 00:09:31,126
 [Laughter]
 
-00:09:31.236 --> 00:09:33.586 A:middle
-&gt;&gt; Peter Hajas: Now, right
+
+146
+00:09:31,236 --> 00:09:33,586
+>> Peter Hajas: Now, right
 before this talk, off stage,
 
-00:09:33.586 --> 00:09:35.486 A:middle
+
+147
+00:09:33,586 --> 00:09:35,486
 some of my colleagues
 reminded me that there are one
 
-00:09:35.486 --> 00:09:38.946 A:middle
+
+148
+00:09:35,486 --> 00:09:38,946
 or two existing apps that may
 choose to adopt multitasking.
 
-00:09:39.666 --> 00:09:42.166 A:middle
+
+149
+00:09:39,666 --> 00:09:42,166
 And for those apps,
 it is easy also.
 
-00:09:42.586 --> 00:09:45.776 A:middle
+
+150
+00:09:42,586 --> 00:09:45,776
 You just need to follow
 three simple steps.
 
-00:09:46.756 --> 00:09:50.676 A:middle
+
+151
+00:09:46,756 --> 00:09:50,676
 First, build your app
 with the iOS 9 SDK.
 
-00:09:51.586 --> 00:09:55.026 A:middle
+
+152
+00:09:51,586 --> 00:09:55,026
 You can do so in the build
 settings of your Xcode project.
 
-00:09:56.816 --> 00:10:03.686 A:middle
+
+153
+00:09:56,816 --> 00:10:03,686
 Second, support all orientations
 in the iPad version of your app.
 
 
-
-00:09:56.816 --> 00:10:03.686 A:middle
-Second, support all orientations
-in the iPad version of your app.
-
-00:10:04.466 --> 00:10:07.866 A:middle
+154
+00:10:04,466 --> 00:10:07,866
 At last year's conference,
 we encouraged you to think
 
-00:10:08.006 --> 00:10:11.926 A:middle
+
+155
+00:10:08,006 --> 00:10:11,926
 of orientation changes as
 simple bounds size changes.
 
-00:10:12.506 --> 00:10:15.056 A:middle
+
+156
+00:10:12,506 --> 00:10:15,056
 And this advice continues
 with iOS 9,
 
-00:10:16.216 --> 00:10:20.386 A:middle
+
+157
+00:10:16,216 --> 00:10:20,386
 because a multitasking resize is
 just that, a bounds size change.
 
-00:10:20.906 --> 00:10:23.936 A:middle
+
+158
+00:10:20,906 --> 00:10:23,936
 But because the user
 is in control
 
-00:10:24.986 --> 00:10:27.396 A:middle
+
+159
+00:10:24,986 --> 00:10:27,396
 of what orientation they're
 holding their iPad in,
 
-00:10:27.716 --> 00:10:29.966 A:middle
+
+160
+00:10:27,716 --> 00:10:29,966
 in multitasking it is important
 
-00:10:29.966 --> 00:10:33.276 A:middle
+
+161
+00:10:29,966 --> 00:10:33,276
 that your iPad app
 supports all orientations.
 
-00:10:35.096 --> 00:10:37.616 A:middle
+
+162
+00:10:35,096 --> 00:10:37,616
 Finally, the third
 thing you'll need
 
-00:10:37.616 --> 00:10:40.426 A:middle
+
+163
+00:10:37,616 --> 00:10:40,426
 to do is use Launch Storyboards.
 
-00:10:41.766 --> 00:10:45.586 A:middle
+
+164
+00:10:41,766 --> 00:10:45,586
 Introduced last year, Launch
 Storyboards are a great way
 
-00:10:45.586 --> 00:10:48.006 A:middle
+
+165
+00:10:45,586 --> 00:10:48,006
 for you to specify
 one storyboard
 
-00:10:48.476 --> 00:10:51.986 A:middle
+
+166
+00:10:48,476 --> 00:10:51,986
 as the launch appearance
 for your app in all sizes,
 
-00:10:52.396 --> 00:10:57.036 A:middle
+
+167
+00:10:52,396 --> 00:10:57,036
 configurations, orientations,
 and devices that iOS supports.
 
-00:10:58.196 --> 00:11:01.856 A:middle
+
+168
+00:10:58,196 --> 00:11:01,856
 With all the different sizes
 supported by iPad multitasking,
 
 
-
-00:10:58.196 --> 00:11:01.856 A:middle
-With all the different sizes
-supported by iPad multitasking,
-
-00:11:02.416 --> 00:11:06.146 A:middle
+169
+00:11:02,416 --> 00:11:06,146
 using Launch Storyboards is
 a requirement for adding it.
 
-00:11:06.856 --> 00:11:08.306 A:middle
+
+170
+00:11:06,856 --> 00:11:08,306
 One important note here --
 
-00:11:09.056 --> 00:11:11.736 A:middle
+
+171
+00:11:09,056 --> 00:11:11,736
 if your app requires a
 full-screen experience,
 
-00:11:12.156 --> 00:11:15.836 A:middle
+
+172
+00:11:12,156 --> 00:11:15,836
 you can opt out by using the
 UI Requires Fullscreen key
 
-00:11:16.246 --> 00:11:17.446 A:middle
+
+173
+00:11:16,246 --> 00:11:17,446
 in your info.plist.
 
-00:11:25.156 --> 00:11:27.886 A:middle
+
+174
+00:11:25,156 --> 00:11:27,886
 Now that we've gone
 over just how easy it is
 
-00:11:28.176 --> 00:11:30.736 A:middle
+
+175
+00:11:28,176 --> 00:11:30,736
 to create a new project
 with multitasking or add it
 
-00:11:30.736 --> 00:11:33.876 A:middle
+
+176
+00:11:30,736 --> 00:11:33,876
 to your existing project,
 let's go through how it works
 
-00:11:33.876 --> 00:11:35.746 A:middle
+
+177
+00:11:33,876 --> 00:11:35,746
 in your app at the UIKit level.
 
-00:11:36.316 --> 00:11:37.986 A:middle
+
+178
+00:11:36,316 --> 00:11:37,986
 There are some very
 important changes
 
-00:11:38.046 --> 00:11:39.026 A:middle
+
+179
+00:11:38,046 --> 00:11:39,026
 that you should be aware of.
 
-00:11:39.716 --> 00:11:46.456 A:middle
+
+180
+00:11:39,716 --> 00:11:46,456
 In the past, UIScreen Bounds
 has returned the visible bounds
 
-00:11:46.456 --> 00:11:48.686 A:middle
+
+181
+00:11:46,456 --> 00:11:48,686
 of the entire display
 of the device.
 
-00:11:49.716 --> 00:11:51.776 A:middle
+
+182
+00:11:49,716 --> 00:11:51,776
 And this continues in iOS 9.
 
-00:11:53.076 --> 00:11:58.006 A:middle
+
+183
+00:11:53,076 --> 00:11:58,006
 Whether your app is running
 in full screen or is resized
 
-00:11:58.206 --> 00:12:02.976 A:middle
+
+184
+00:11:58,206 --> 00:12:02,976
 for multitasking, one
 really important change is
 
 
-
-00:11:58.206 --> 00:12:02.976 A:middle
-for multitasking, one
-really important change is
-
-00:12:02.976 --> 00:12:06.776 A:middle
+185
+00:12:02,976 --> 00:12:06,776
 that UI Window Bounds, well, it
 returns your window's bounds.
 
-00:12:07.526 --> 00:12:11.086 A:middle
+
+186
+00:12:07,526 --> 00:12:11,086
 But your window's bounds will
 no longer always be the same
 
-00:12:11.236 --> 00:12:14.056 A:middle
+
+187
+00:12:11,236 --> 00:12:14,056
 as the screen bounds of
 the device, for example,
 
-00:12:14.526 --> 00:12:17.116 A:middle
+
+188
+00:12:14,526 --> 00:12:17,116
 when your app is
 resized in multitasking.
 
-00:12:18.546 --> 00:12:20.896 A:middle
+
+189
+00:12:18,546 --> 00:12:20,896
 Another important change is
 
-00:12:20.896 --> 00:12:25.776 A:middle
+
+190
+00:12:20,896 --> 00:12:25,776
 that your window's frame origin
 is always in the top left,
 
-00:12:26.256 --> 00:12:29.556 A:middle
+
+191
+00:12:26,256 --> 00:12:29,556
 (0,0), whether you're
 running on the left side
 
-00:12:29.746 --> 00:12:33.706 A:middle
+
+192
+00:12:29,746 --> 00:12:33,706
 of the screen or
 on the right side.
 
-00:12:34.976 --> 00:12:38.456 A:middle
+
+193
+00:12:34,976 --> 00:12:38,456
 We don't want you to have
 to worry about which side
 
-00:12:38.456 --> 00:12:41.106 A:middle
+
+194
+00:12:38,456 --> 00:12:41,106
 of the screen you're on or what
 other apps you might be running
 
-00:12:41.106 --> 00:12:41.626 A:middle
+
+195
+00:12:41,106 --> 00:12:41,626
 next to.
 
-00:12:42.086 --> 00:12:46.386 A:middle
+
+196
+00:12:42,086 --> 00:12:46,386
 We only want you to focus on
 the experience in your app.
 
-00:12:47.736 --> 00:12:50.696 A:middle
+
+197
+00:12:47,736 --> 00:12:50,696
 Now let's talk about the
 different types of transitions
 
-00:12:51.246 --> 00:12:54.326 A:middle
+
+198
+00:12:51,246 --> 00:12:54,326
 that can take place when
 your app is being resized.
 
-00:12:55.116 --> 00:12:58.916 A:middle
+
+199
+00:12:55,116 --> 00:12:58,916
 We'll use an example, an app
 that's great with multitasking
 
-00:12:58.916 --> 00:13:03.106 A:middle
+
+200
+00:12:58,916 --> 00:13:03,106
 in iOS 9, the brand-new
 Notes app.
 
 
-
-00:12:58.916 --> 00:13:03.106 A:middle
-in iOS 9, the brand-new
-Notes app.
-
-00:13:03.676 --> 00:13:05.796 A:middle
+201
+00:13:03,676 --> 00:13:05,796
 This is the new Notes
 app running
 
-00:13:05.796 --> 00:13:08.136 A:middle
+
+202
+00:13:05,796 --> 00:13:08,136
 as a slide over app on iPad.
 
-00:13:09.406 --> 00:13:11.096 A:middle
+
+203
+00:13:09,406 --> 00:13:11,096
 You will notice that
 it looks a lot
 
-00:13:11.166 --> 00:13:12.856 A:middle
+
+204
+00:13:11,166 --> 00:13:12,856
 like the Notes app on iPhone.
 
-00:13:13.996 --> 00:13:16.406 A:middle
+
+205
+00:13:13,996 --> 00:13:16,406
 It shows a single column of UI.
 
-00:13:16.996 --> 00:13:24.396 A:middle
+
+206
+00:13:16,996 --> 00:13:24,396
 We call this the
 horizontally compact size class.
 
-00:13:24.586 --> 00:13:27.196 A:middle
+
+207
+00:13:24,586 --> 00:13:27,196
 Later on, the user
 may resize our app
 
-00:13:28.376 --> 00:13:32.646 A:middle
+
+208
+00:13:28,376 --> 00:13:32,646
 and at a certain point
 we'll change what class
 
-00:13:32.646 --> 00:13:36.946 A:middle
+
+209
+00:13:32,646 --> 00:13:36,946
 of experience we should
 be providing to the user.
 
-00:13:37.116 --> 00:13:40.896 A:middle
+
+210
+00:13:37,116 --> 00:13:40,896
 Notice that Notes now displays
 two columns of content.
 
-00:13:42.216 --> 00:13:46.506 A:middle
+
+211
+00:13:42,216 --> 00:13:46,506
 This is that same
 horizontally regular size class
 
-00:13:46.506 --> 00:13:47.696 A:middle
+
+212
+00:13:46,506 --> 00:13:47,696
 that we saw earlier.
 
-00:13:50.536 --> 00:13:54.136 A:middle
+
+213
+00:13:50,536 --> 00:13:54,136
 Notice how Notes has changed
 the information architecture
 
-00:13:54.246 --> 00:13:57.386 A:middle
+
+214
+00:13:54,246 --> 00:13:57,386
 of the app to show your
 notes list on the left
 
-00:13:58.106 --> 00:13:59.486 A:middle
+
+215
+00:13:58,106 --> 00:13:59,486
 and a note on the right.
 
 
-
-00:14:00.376 --> 00:14:01.746 A:middle
+216
+00:14:00,376 --> 00:14:01,746
 This is the type of change
 
-00:14:02.166 --> 00:14:05.696 A:middle
+
+217
+00:14:02,166 --> 00:14:05,696
 that you should use size class
 transitions to influence.
 
-00:14:07.896 --> 00:14:11.786 A:middle
+
+218
+00:14:07,896 --> 00:14:11,786
 One important thing to note
 about these transitions is
 
-00:14:11.786 --> 00:14:15.606 A:middle
+
+219
+00:14:11,786 --> 00:14:15,606
 that not all resizes will
 trigger a size class change.
 
-00:14:16.996 --> 00:14:21.856 A:middle
+
+220
+00:14:16,996 --> 00:14:21,856
 For example, if Notes is
 running in split view on iPad
 
-00:14:21.856 --> 00:14:25.256 A:middle
+
+221
+00:14:21,856 --> 00:14:25,256
 and the user resizes
 the app a little bit,
 
-00:14:26.766 --> 00:14:28.906 A:middle
+
+222
+00:14:26,766 --> 00:14:28,906
 it won't change size classes.
 
-00:14:30.146 --> 00:14:35.796 A:middle
+
+223
+00:14:30,146 --> 00:14:35,796
 It still shows a
 single column of UI.
 
-00:14:35.996 --> 00:14:38.116 A:middle
+
+224
+00:14:35,996 --> 00:14:38,116
 Instead of changing
 the experience class,
 
-00:14:39.206 --> 00:14:40.896 A:middle
+
+225
+00:14:39,206 --> 00:14:40,896
 Notes uses this new size
 
-00:14:40.896 --> 00:14:44.106 A:middle
+
+226
+00:14:40,896 --> 00:14:44,106
 to influence its view's
 positioning and layout.
 
-00:14:44.776 --> 00:14:48.426 A:middle
+
+227
+00:14:44,776 --> 00:14:48,426
 Look again as we make the
 app a little bit smaller.
 
-00:14:49.206 --> 00:14:54.076 A:middle
+
+228
+00:14:49,206 --> 00:14:54,076
 Still a single column of UI.
 
-00:14:54.276 --> 00:14:57.846 A:middle
+
+229
+00:14:54,276 --> 00:14:57,846
 UIKit has made some important
 changes to our current API
 
-00:14:58.486 --> 00:15:00.696 A:middle
+
+230
+00:14:58,486 --> 00:15:00,696
 to make this really easy
 for your app to adopt.
 
 
-
-00:14:58.486 --> 00:15:00.696 A:middle
-to make this really easy
-for your app to adopt.
-
-00:15:02.016 --> 00:15:03.816 A:middle
+231
+00:15:02,016 --> 00:15:03,816
 One of these technologies
 that we encourage you
 
-00:15:03.816 --> 00:15:07.396 A:middle
+
+232
+00:15:03,816 --> 00:15:07,396
 to use is Auto Layout, UIKit
 
-00:15:07.396 --> 00:15:10.316 A:middle
+
+233
+00:15:07,396 --> 00:15:10,316
 and AppKit's declarative
 view layout system.
 
-00:15:11.546 --> 00:15:13.186 A:middle
+
+234
+00:15:11,546 --> 00:15:13,186
 Auto Layout allows you
 
-00:15:13.286 --> 00:15:16.426 A:middle
+
+235
+00:15:13,286 --> 00:15:16,426
 to position your views
 using constraints,
 
-00:15:17.086 --> 00:15:18.626 A:middle
+
+236
+00:15:17,086 --> 00:15:18,626
 and then when bounds changes,
 
-00:15:18.996 --> 00:15:21.176 A:middle
+
+237
+00:15:18,996 --> 00:15:21,176
 Auto Layout will
 reset their centers
 
-00:15:21.176 --> 00:15:22.456 A:middle
+
+238
+00:15:21,176 --> 00:15:22,456
 and frames appropriately.
 
-00:15:22.506 --> 00:15:24.236 A:middle
+
+239
+00:15:22,506 --> 00:15:24,236
 It is really easy to use.
 
-00:15:25.466 --> 00:15:30.456 A:middle
+
+240
+00:15:25,466 --> 00:15:30,456
 New in iOS 9, we have added some
 great new constraint convenience
 
-00:15:30.456 --> 00:15:34.316 A:middle
+
+241
+00:15:30,456 --> 00:15:34,316
 API that makes it really easy to
 create Auto Layout constraints.
 
-00:15:35.466 --> 00:15:39.626 A:middle
+
+242
+00:15:35,466 --> 00:15:39,626
 Also if you use the leading
 and trailing layout attributes,
 
-00:15:40.286 --> 00:15:40.866 A:middle
+
+243
+00:15:40,286 --> 00:15:40,866
 you'll get a lot
 
-00:15:40.866 --> 00:15:52.866 A:middle
+
+244
+00:15:40,866 --> 00:15:52,866
 of the right-to-left language
 support for free in your app.
 
-00:15:53.136 --> 00:15:55.846 A:middle
+
+245
+00:15:53,136 --> 00:15:55,846
 Another area of importance
 that we saw
 
-00:15:56.196 --> 00:16:01.146 A:middle
+
+246
+00:15:56,196 --> 00:16:01,146
 for helping apps handle resizing
 is in the form of legibility.
 
 
-
-00:15:56.196 --> 00:16:01.146 A:middle
-for helping apps handle resizing
-is in the form of legibility.
-
-00:16:02.476 --> 00:16:05.556 A:middle
+247
+00:16:02,476 --> 00:16:05,556
 We're introducing a
 new API on UIView,
 
-00:16:06.246 --> 00:16:07.596 A:middle
+
+248
+00:16:06,246 --> 00:16:07,596
 'readable content guide.'
 
-00:16:08.956 --> 00:16:11.156 A:middle
+
+249
+00:16:08,956 --> 00:16:11,156
 This will return
 a UI layout guide,
 
-00:16:11.686 --> 00:16:15.256 A:middle
+
+250
+00:16:11,686 --> 00:16:15,256
 which represents the
 legible region in a UIView.
 
-00:16:16.806 --> 00:16:20.026 A:middle
+
+251
+00:16:16,806 --> 00:16:20,026
 This means that if you use
 this readable content guide
 
-00:16:20.786 --> 00:16:22.186 A:middle
+
+252
+00:16:20,786 --> 00:16:22,186
 to position your views,
 
-00:16:22.446 --> 00:16:24.876 A:middle
+
+253
+00:16:22,446 --> 00:16:24,876
 they will always be
 at a legible width.
 
-00:16:25.606 --> 00:16:29.056 A:middle
+
+254
+00:16:25,606 --> 00:16:29,056
 For example, in this sample app,
 
-00:16:29.206 --> 00:16:33.416 A:middle
+
+255
+00:16:29,206 --> 00:16:33,416
 which uses readable content
 guide, the view is full size,
 
-00:16:33.416 --> 00:16:35.086 A:middle
+
+256
+00:16:33,416 --> 00:16:35,086
 it is the size of
 the whole iPad.
 
-00:16:36.006 --> 00:16:39.126 A:middle
+
+257
+00:16:36,006 --> 00:16:39,126
 But the readable content guide
 has given it some generous
 
-00:16:39.126 --> 00:16:43.646 A:middle
+
+258
+00:16:39,126 --> 00:16:43,646
 margins to make sure that the
 lines are really easy to read.
 
-00:16:44.756 --> 00:16:47.796 A:middle
+
+259
+00:16:44,756 --> 00:16:47,796
 A great feature of using
 readable content guide is it
 
-00:16:47.796 --> 00:16:51.586 A:middle
+
+260
+00:16:47,796 --> 00:16:51,586
 will automatically adjust
 depending on what size
 
-00:16:51.966 --> 00:16:54.206 A:middle
+
+261
+00:16:51,966 --> 00:16:54,206
 and device the app
 is running on.
 
-00:16:55.186 --> 00:16:57.936 A:middle
+
+262
+00:16:55,186 --> 00:16:57,936
 It also works great
 with dynamic type,
 
-00:16:58.236 --> 00:17:00.966 A:middle
+
+263
+00:16:58,236 --> 00:17:00,966
 something that we
 encourage all apps to adopt.
 
 
-
-00:16:58.236 --> 00:17:00.966 A:middle
-something that we
-encourage all apps to adopt.
-
-00:17:02.166 --> 00:17:05.396 A:middle
+264
+00:17:02,166 --> 00:17:05,396
 You can also use it with
 or without Auto Layout.
 
-00:17:05.986 --> 00:17:11.116 A:middle
+
+265
+00:17:05,986 --> 00:17:11,116
 A common component in many
 iOS apps is UI Table View.
 
-00:17:11.656 --> 00:17:14.915 A:middle
+
+266
+00:17:11,656 --> 00:17:14,915
 And we wanted to make legibility
 really easy there too.
 
-00:17:16.006 --> 00:17:19.126 A:middle
+
+267
+00:17:16,006 --> 00:17:19,126
 So we have introduced a new
 property on UITableView,
 
-00:17:19.826 --> 00:17:22.906 A:middle
+
+268
+00:17:19,826 --> 00:17:22,906
 'cell layout margins
 follow readable width.'
 
-00:17:24.256 --> 00:17:25.955 A:middle
+
+269
+00:17:24,256 --> 00:17:25,955
 When this property
 is set to yes,
 
-00:17:26.705 --> 00:17:30.976 A:middle
+
+270
+00:17:26,705 --> 00:17:30,976
 your table view's cells' content
 view will have layout margins
 
-00:17:31.236 --> 00:17:35.736 A:middle
+
+271
+00:17:31,236 --> 00:17:35,736
 set such that content laid out
 relative to those margins is
 
-00:17:35.736 --> 00:17:38.686 A:middle
+
+272
+00:17:35,736 --> 00:17:38,686
 at a comfortable, legible
 width for the user.
 
-00:17:40.016 --> 00:17:43.496 A:middle
+
+273
+00:17:40,016 --> 00:17:43,496
 This means that by simply
 using the layout margins
 
-00:17:43.616 --> 00:17:47.886 A:middle
+
+274
+00:17:43,616 --> 00:17:47,886
 in your UITableView cells'
 content view, the contents
 
-00:17:47.886 --> 00:17:49.236 A:middle
+
+275
+00:17:47,886 --> 00:17:49,236
 in your cells will be
 
-00:17:49.236 --> 00:17:55.546 A:middle
+
+276
+00:17:49,236 --> 00:17:55,546
 at a comfortable width whether
 running in full screen on iPad
 
-00:17:55.766 --> 00:17:58.676 A:middle
+
+277
+00:17:55,766 --> 00:17:58,676
 or in a smaller screen such
 as an iPhone in portrait.
 
-00:17:58.676 --> 00:18:03.476 A:middle
+
+278
+00:17:58,676 --> 00:18:03,476
 Now that we have talked about
 some of the great improvements
 
 
-
-00:17:58.676 --> 00:18:03.476 A:middle
-Now that we have talked about
-some of the great improvements
-
-00:18:03.826 --> 00:18:06.906 A:middle
+279
+00:18:03,826 --> 00:18:06,906
 for multitasking, I would like
 to hand it off to my friend
 
-00:18:06.906 --> 00:18:09.696 A:middle
+
+280
+00:18:06,906 --> 00:18:09,696
 and colleague, Jacob
 Xiao, who is going to talk
 
-00:18:09.696 --> 00:18:12.556 A:middle
+
+281
+00:18:09,696 --> 00:18:12,556
 about what's changed in
 UIKit and some best practices
 
-00:18:12.556 --> 00:18:13.476 A:middle
+
+282
+00:18:12,556 --> 00:18:13,476
 for your apps to follow.
 
-00:18:13.726 --> 00:18:13.966 A:middle
+
+283
+00:18:13,726 --> 00:18:13,966
 Jacob?
 
-00:18:14.516 --> 00:18:20.106 A:middle
+
+284
+00:18:14,516 --> 00:18:20,106
 [Applause]
 
-00:18:20.606 --> 00:18:21.096 A:middle
-&gt;&gt; Jacob Xiao: Thanks, Peter.
 
-00:18:22.256 --> 00:18:25.686 A:middle
+285
+00:18:20,606 --> 00:18:21,096
+>> Jacob Xiao: Thanks, Peter.
+
+
+286
+00:18:22,256 --> 00:18:25,686
 I would like to tell you
 some of the changes to iOS
 
-00:18:26.276 --> 00:18:29.476 A:middle
+
+287
+00:18:26,276 --> 00:18:29,476
 to support multitasking,
 and also some best practices
 
-00:18:30.166 --> 00:18:32.636 A:middle
+
+288
+00:18:30,166 --> 00:18:32,636
 for working with those
 changes in your apps.
 
-00:18:33.776 --> 00:18:37.126 A:middle
+
+289
+00:18:33,776 --> 00:18:37,126
 So, last year, we asked to
 you make your apps adaptive
 
-00:18:37.766 --> 00:18:39.866 A:middle
+
+290
+00:18:37,766 --> 00:18:39,866
 by using traits and
 size classes.
 
-00:18:40.926 --> 00:18:43.186 A:middle
+
+291
+00:18:40,926 --> 00:18:43,186
 And you can see more
 information about that in the
 
-00:18:43.186 --> 00:18:45.926 A:middle
+
+292
+00:18:43,186 --> 00:18:45,926
 "Building Adaptive Apps with
 UIKit" talk from last year.
 
-00:18:47.476 --> 00:18:51.416 A:middle
+
+293
+00:18:47,476 --> 00:18:51,416
 So now that iPad multitasking
 is here, what has changed?
 
-00:18:52.406 --> 00:18:54.446 A:middle
+
+294
+00:18:52,406 --> 00:18:54,446
 Well, the answer is not much.
 
-00:18:55.526 --> 00:18:56.226 A:middle
+
+295
+00:18:55,526 --> 00:18:56,226
 That's all for us.
 
-00:18:56.226 --> 00:18:57.156 A:middle
+
+296
+00:18:56,226 --> 00:18:57,156
 Enjoy the conference.
 
-00:18:58.031 --> 00:19:00.031 A:middle
+
+297
+00:18:58,031 --> 00:19:00,031
 [Laughter]
 
 
-
-00:18:58.031 --> 00:19:00.031 A:middle
-[Laughter]
-
-00:19:00.046 --> 00:19:01.686 A:middle
-&gt;&gt; Jacob Xiao: Okay, so, there
+298
+00:19:00,046 --> 00:19:01,686
+>> Jacob Xiao: Okay, so, there
 are a few important changes
 
-00:19:01.686 --> 00:19:02.716 A:middle
+
+299
+00:19:01,686 --> 00:19:02,716
 that you want to keep in mind
 
-00:19:03.076 --> 00:19:05.366 A:middle
+
+300
+00:19:03,076 --> 00:19:05,366
 to give your app a great
 experience with multitasking.
 
-00:19:05.366 --> 00:19:07.086 A:middle
+
+301
+00:19:05,366 --> 00:19:07,086
 And let's talk about
 a few of those.
 
-00:19:08.426 --> 00:19:09.966 A:middle
+
+302
+00:19:08,426 --> 00:19:09,966
 Let's start with orientation.
 
-00:19:10.526 --> 00:19:13.036 A:middle
+
+303
+00:19:10,526 --> 00:19:13,036
 How many of you have
 code in your app
 
-00:19:13.036 --> 00:19:14.106 A:middle
+
+304
+00:19:13,036 --> 00:19:14,106
 that looks something like this?
 
-00:19:14.106 --> 00:19:15.766 A:middle
+
+305
+00:19:14,106 --> 00:19:15,766
 It is okay.
 
-00:19:15.766 --> 00:19:16.936 A:middle
+
+306
+00:19:15,766 --> 00:19:16,936
 This is a judgment-free zone.
 
-00:19:17.526 --> 00:19:20.726 A:middle
+
+307
+00:19:17,526 --> 00:19:20,726
 This kind of code made a
 lot of sense in the past,
 
-00:19:21.986 --> 00:19:24.606 A:middle
+
+308
+00:19:21,986 --> 00:19:24,606
 to give your app a different
 layout when it was in portrait
 
-00:19:25.186 --> 00:19:28.326 A:middle
+
+309
+00:19:25,186 --> 00:19:28,326
 or landscape, to really make
 the best use of the space
 
-00:19:28.326 --> 00:19:29.346 A:middle
+
+310
+00:19:28,326 --> 00:19:29,346
 that was available to you.
 
-00:19:30.816 --> 00:19:32.936 A:middle
+
+311
+00:19:30,816 --> 00:19:32,936
 But you want to think
 about how that should work
 
-00:19:33.186 --> 00:19:34.406 A:middle
+
+312
+00:19:33,186 --> 00:19:34,406
 with iPad multitasking.
 
-00:19:35.226 --> 00:19:38.916 A:middle
+
+313
+00:19:35,226 --> 00:19:38,916
 For example, here, although the
 iPad itself is in landscape,
 
-00:19:39.976 --> 00:19:41.826 A:middle
+
+314
+00:19:39,976 --> 00:19:41,826
 we don't really want to
 use the landscape version
 
-00:19:41.826 --> 00:19:44.066 A:middle
+
+315
+00:19:41,826 --> 00:19:44,066
 of our layout here,
 because we have
 
-00:19:44.116 --> 00:19:45.476 A:middle
+
+316
+00:19:44,116 --> 00:19:45,476
 so much more vertical space.
 
-00:19:46.226 --> 00:19:48.886 A:middle
+
+317
+00:19:46,226 --> 00:19:48,886
 It makes a lot more sense
 to use the previous layout
 
-00:19:48.886 --> 00:19:50.466 A:middle
+
+318
+00:19:48,886 --> 00:19:50,466
 that we would have called
 the portrait layout.
 
-00:19:51.816 --> 00:19:54.426 A:middle
+
+319
+00:19:51,816 --> 00:19:54,426
 So with multitasking it is
 better to avoid thinking
 
-00:19:54.426 --> 00:19:55.276 A:middle
+
+320
+00:19:54,426 --> 00:19:55,276
 about things in terms
 
-00:19:55.276 --> 00:19:57.366 A:middle
+
+321
+00:19:55,276 --> 00:19:57,366
 of the interface
 orientation specifically.
 
-00:19:58.186 --> 00:20:00.046 A:middle
+
+322
+00:19:58,186 --> 00:20:00,046
 Let's take a look at
 what you can use instead
 
 
-
-00:19:58.186 --> 00:20:00.046 A:middle
-Let's take a look at
-what you can use instead
-
-00:20:00.176 --> 00:20:01.156 A:middle
+323
+00:20:00,176 --> 00:20:01,156
 for these kinds of changes.
 
-00:20:01.716 --> 00:20:05.216 A:middle
+
+324
+00:20:01,716 --> 00:20:05,216
 To get a better idea of this,
 let's take a closer look
 
-00:20:05.296 --> 00:20:07.236 A:middle
+
+325
+00:20:05,296 --> 00:20:07,236
 at what happens during rotation.
 
-00:20:08.246 --> 00:20:10.446 A:middle
+
+326
+00:20:08,246 --> 00:20:10,446
 First let's take a look
 at an iPhone rotation.
 
-00:20:11.716 --> 00:20:14.256 A:middle
+
+327
+00:20:11,716 --> 00:20:14,256
 As the device rotates,
 your app is resized
 
-00:20:14.786 --> 00:20:15.736 A:middle
+
+328
+00:20:14,786 --> 00:20:15,736
 and rotates along with it.
 
-00:20:15.736 --> 00:20:18.676 A:middle
+
+329
+00:20:15,736 --> 00:20:18,676
 But we can actually break
 apart this transition
 
-00:20:18.966 --> 00:20:21.986 A:middle
+
+330
+00:20:18,966 --> 00:20:21,986
 into two changes
 that make it up.
 
-00:20:22.256 --> 00:20:25.756 A:middle
+
+331
+00:20:22,256 --> 00:20:25,756
 First, your app is resized
 to be the new content size,
 
-00:20:25.756 --> 00:20:28.946 A:middle
+
+332
+00:20:25,756 --> 00:20:28,946
 and then it is actually
 rotated to face
 
-00:20:28.946 --> 00:20:29.866 A:middle
+
+333
+00:20:28,946 --> 00:20:29,866
 where the user is looking.
 
-00:20:30.256 --> 00:20:33.886 A:middle
+
+334
+00:20:30,256 --> 00:20:33,886
 Now we can do something
 similar with rotation
 
-00:20:33.886 --> 00:20:35.936 A:middle
+
+335
+00:20:33,886 --> 00:20:35,936
 on iPad including
 with multitasking.
 
-00:20:37.086 --> 00:20:39.996 A:middle
+
+336
+00:20:37,086 --> 00:20:39,996
 Once again, this is what the
 rotation itself looks like,
 
-00:20:40.946 --> 00:20:44.586 A:middle
+
+337
+00:20:40,946 --> 00:20:44,586
 and we can break it apart into
 first, that content resize,
 
-00:20:45.216 --> 00:20:47.216 A:middle
+
+338
+00:20:45,216 --> 00:20:47,216
 and then, the rotation.
 
-00:20:47.786 --> 00:20:51.326 A:middle
+
+339
+00:20:47,786 --> 00:20:51,326
 Now, when the user is
 actually viewing this rotation,
 
-00:20:51.416 --> 00:20:53.156 A:middle
+
+340
+00:20:51,416 --> 00:20:53,156
 these two changes
 happen at the same time.
 
-00:20:53.256 --> 00:20:56.486 A:middle
+
+341
+00:20:53,256 --> 00:20:56,486
 But it is useful to think about
 them as two independent changes.
 
-00:20:57.406 --> 00:20:59.016 A:middle
+
+342
+00:20:57,406 --> 00:20:59,016
 And one of the great
 things about doing that is
 
-00:20:59.016 --> 00:21:02.436 A:middle
+
+343
+00:20:59,016 --> 00:21:02,436
 that you can really share a
 lot with multitasking resizes.
 
 
-
-00:20:59.016 --> 00:21:02.436 A:middle
-that you can really share a
-lot with multitasking resizes.
-
-00:21:03.256 --> 00:21:05.016 A:middle
+344
+00:21:03,256 --> 00:21:05,016
 Here the same kind of
 thing is happening,
 
-00:21:05.406 --> 00:21:07.926 A:middle
+
+345
+00:21:05,406 --> 00:21:07,926
 but just the resize
 portion, not the rotation.
 
-00:21:08.786 --> 00:21:10.386 A:middle
+
+346
+00:21:08,786 --> 00:21:10,386
 So as the user resizes your app,
 
-00:21:11.556 --> 00:21:13.626 A:middle
+
+347
+00:21:11,556 --> 00:21:13,626
 it is just a content
 bounds size change.
 
-00:21:14.276 --> 00:21:18.066 A:middle
+
+348
+00:21:14,276 --> 00:21:18,066
 So, in the past, if you were
 using the interface orientation
 
-00:21:18.066 --> 00:21:20.916 A:middle
+
+349
+00:21:18,066 --> 00:21:20,916
 explicitly, I would
 encourage you instead to think
 
-00:21:20.916 --> 00:21:24.166 A:middle
+
+350
+00:21:20,916 --> 00:21:24,166
 about how you want to deal in
 terms of the view size changing
 
-00:21:24.606 --> 00:21:25.896 A:middle
+
+351
+00:21:24,606 --> 00:21:25,896
 for these kinds of
 layout changes.
 
-00:21:26.856 --> 00:21:29.426 A:middle
+
+352
+00:21:26,856 --> 00:21:29,426
 Another good option to
 consider is the vertical
 
-00:21:29.426 --> 00:21:32.376 A:middle
+
+353
+00:21:29,426 --> 00:21:32,376
 or horizontal size
 class, and by using either
 
-00:21:32.376 --> 00:21:34.426 A:middle
+
+354
+00:21:32,376 --> 00:21:34,426
 of these approaches
 your app will work great
 
-00:21:34.426 --> 00:21:35.226 A:middle
+
+355
+00:21:34,426 --> 00:21:35,226
 with multitasking.
 
-00:21:35.846 --> 00:21:39.396 A:middle
+
+356
+00:21:35,846 --> 00:21:39,396
 So next, let's take a
 closer look at transitions
 
-00:21:39.776 --> 00:21:42.166 A:middle
+
+357
+00:21:39,776 --> 00:21:42,166
 like rotation and
 multitasking resizes.
 
-00:21:43.516 --> 00:21:47.486 A:middle
+
+358
+00:21:43,516 --> 00:21:47,486
 Previously we had callbacks for
 your app related to rotation.
 
-00:21:48.926 --> 00:21:51.046 A:middle
+
+359
+00:21:48,926 --> 00:21:51,046
 But these callbacks work
 specifically in terms
 
-00:21:51.046 --> 00:21:52.706 A:middle
+
+360
+00:21:51,046 --> 00:21:52,706
 of the interface
 orientation changing.
 
-00:21:53.416 --> 00:21:57.446 A:middle
+
+361
+00:21:53,416 --> 00:21:57,446
 So instead, in iOS 8, we
 introduced new callbacks related
 
-00:21:57.446 --> 00:21:59.816 A:middle
+
+362
+00:21:57,446 --> 00:21:59,816
 to the trait collection
 or the view size changing,
 
-00:21:59.816 --> 00:22:02.596 A:middle
+
+363
+00:21:59,816 --> 00:22:02,596
 and we strongly encourage
 you to use these instead.
 
 
-
-00:21:59.816 --> 00:22:02.596 A:middle
-and we strongly encourage
-you to use these instead.
-
-00:22:04.006 --> 00:22:06.266 A:middle
+364
+00:22:04,006 --> 00:22:06,266
 Now, to get a better
 idea about how this kind
 
-00:22:06.266 --> 00:22:10.456 A:middle
+
+365
+00:22:06,266 --> 00:22:10,456
 of rotation transitions happen,
 let's take a look at a timeline
 
-00:22:10.756 --> 00:22:11.816 A:middle
+
+366
+00:22:10,756 --> 00:22:11,816
 of one of those transitions.
 
-00:22:12.816 --> 00:22:13.826 A:middle
+
+367
+00:22:12,816 --> 00:22:13,826
 Let's start with rotation.
 
-00:22:15.236 --> 00:22:17.766 A:middle
+
+368
+00:22:15,236 --> 00:22:17,766
 Now we can divide this
 rotation transition
 
-00:22:17.856 --> 00:22:19.126 A:middle
+
+369
+00:22:17,856 --> 00:22:19,126
 into a few different stages.
 
-00:22:20.176 --> 00:22:22.866 A:middle
+
+370
+00:22:20,176 --> 00:22:22,866
 First, we'll set up for the
 change that's about to occur.
 
-00:22:24.096 --> 00:22:26.506 A:middle
+
+371
+00:22:24,096 --> 00:22:26,506
 Then, we'll create the
 animations we'll be showing
 
-00:22:26.506 --> 00:22:27.166 A:middle
+
+372
+00:22:26,506 --> 00:22:27,166
 to the user.
 
-00:22:27.166 --> 00:22:29.846 A:middle
+
+373
+00:22:27,166 --> 00:22:29,846
 And then we'll actually
 run those animations.
 
-00:22:30.106 --> 00:22:32.766 A:middle
+
+374
+00:22:30,106 --> 00:22:32,766
 And this stage is the part
 that the user actually sees
 
-00:22:32.916 --> 00:22:33.986 A:middle
+
+375
+00:22:32,916 --> 00:22:33,986
 as the rotation happened.
 
-00:22:35.216 --> 00:22:38.346 A:middle
+
+376
+00:22:35,216 --> 00:22:38,346
 Then, when everything is done,
 we'll perform some clean up.
 
-00:22:38.906 --> 00:22:41.336 A:middle
+
+377
+00:22:38,906 --> 00:22:41,336
 Now the point during this
 transition where the size
 
-00:22:41.336 --> 00:22:43.336 A:middle
+
+378
+00:22:41,336 --> 00:22:43,336
 and size classes actually
 change for your app,
 
-00:22:43.676 --> 00:22:45.696 A:middle
+
+379
+00:22:43,676 --> 00:22:45,696
 is just at the end
 of the 'setup' stage.
 
-00:22:47.136 --> 00:22:48.726 A:middle
+
+380
+00:22:47,136 --> 00:22:48,726
 So now that we have seen
 the different stages
 
-00:22:48.726 --> 00:22:51.396 A:middle
+
+381
+00:22:48,726 --> 00:22:51,396
 of this transition, let's see
 how those callbacks fit in.
 
-00:22:52.866 --> 00:22:55.646 A:middle
+
+382
+00:22:52,866 --> 00:22:55,646
 Both of the transition
 callbacks happen as part
 
-00:22:55.646 --> 00:22:57.976 A:middle
+
+383
+00:22:55,646 --> 00:22:57,976
 of the 'setup' stage
 of these transitions.
 
-00:22:59.316 --> 00:23:01.626 A:middle
+
+384
+00:22:59,316 --> 00:23:01,626
 Now, similarly, as the
 size class is changing,
 
 
-
-00:22:59.316 --> 00:23:01.626 A:middle
-Now, similarly, as the
-size class is changing,
-
-00:23:02.306 --> 00:23:04.326 A:middle
+385
+00:23:02,306 --> 00:23:04,326
 the 'trait collection did
 change' method is called
 
-00:23:04.526 --> 00:23:06.216 A:middle
+
+386
+00:23:04,526 --> 00:23:06,216
 on your views and
 view controllers.
 
-00:23:06.786 --> 00:23:10.986 A:middle
+
+387
+00:23:06,786 --> 00:23:10,986
 Now the two transition
 callbacks will not only give you
 
-00:23:10.986 --> 00:23:13.246 A:middle
+
+388
+00:23:10,986 --> 00:23:13,246
 information about the change
 that's about to occur,
 
-00:23:13.766 --> 00:23:16.016 A:middle
+
+389
+00:23:13,766 --> 00:23:16,016
 they also pass your app
 a transition coordinator.
 
-00:23:16.016 --> 00:23:19.386 A:middle
+
+390
+00:23:16,016 --> 00:23:19,386
 And transition coordinators
 have great API that you can use
 
-00:23:19.386 --> 00:23:22.616 A:middle
+
+391
+00:23:19,386 --> 00:23:22,616
 to add your own alongside
 animation blocks to be run
 
-00:23:22.616 --> 00:23:24.016 A:middle
+
+392
+00:23:22,616 --> 00:23:24,016
 as part of the main animation.
 
-00:23:24.896 --> 00:23:26.336 A:middle
+
+393
+00:23:24,896 --> 00:23:26,336
 And if you do those,
 they'll be set
 
-00:23:26.336 --> 00:23:28.866 A:middle
+
+394
+00:23:26,336 --> 00:23:28,866
 up during the 'create
 animations' stage.
 
-00:23:29.596 --> 00:23:31.836 A:middle
+
+395
+00:23:29,596 --> 00:23:31,836
 Similarly, if you
 add completion blocks
 
-00:23:31.956 --> 00:23:34.546 A:middle
+
+396
+00:23:31,956 --> 00:23:34,546
 to the transition coordinator,
 those'll be run at the end,
 
-00:23:34.546 --> 00:23:36.006 A:middle
+
+397
+00:23:34,546 --> 00:23:36,006
 as part of the 'cleanup' stage.
 
-00:23:36.826 --> 00:23:38.346 A:middle
+
+398
+00:23:36,826 --> 00:23:38,346
 Now, notice that there
 aren't any callbacks
 
-00:23:38.346 --> 00:23:40.896 A:middle
+
+399
+00:23:38,346 --> 00:23:40,896
 to your app during the 'run
 animations' stage specifically.
 
-00:23:40.896 --> 00:23:43.146 A:middle
+
+400
+00:23:40,896 --> 00:23:43,146
 And that's because it
 is generally better
 
-00:23:43.146 --> 00:23:45.836 A:middle
+
+401
+00:23:43,146 --> 00:23:45,836
 to perform the work that
 you want to do either
 
-00:23:45.836 --> 00:23:48.526 A:middle
+
+402
+00:23:45,836 --> 00:23:48,526
 at the very beginning or the
 very end of these transitions.
 
-00:23:49.936 --> 00:23:51.956 A:middle
+
+403
+00:23:49,936 --> 00:23:51,956
 So now that we have seen
 the rotation transition
 
-00:23:51.956 --> 00:23:54.746 A:middle
+
+404
+00:23:51,956 --> 00:23:54,746
 and the timeline for what
 happens, let's take a look
 
-00:23:54.946 --> 00:23:56.256 A:middle
+
+405
+00:23:54,946 --> 00:23:56,256
 at a multitasking resize.
 
-00:23:57.696 --> 00:24:00.906 A:middle
+
+406
+00:23:57,696 --> 00:24:00,906
 Now, during this transition,
 we first perform some setup,
 
 
-
-00:23:57.696 --> 00:24:00.906 A:middle
-Now, during this transition,
-we first perform some setup,
-
-00:24:01.776 --> 00:24:03.206 A:middle
+407
+00:24:01,776 --> 00:24:03,206
 then we create some
 animations --
 
-00:24:03.996 --> 00:24:05.766 A:middle
+
+408
+00:24:03,996 --> 00:24:05,766
 well, hopefully you
 see the pattern here.
 
-00:24:05.766 --> 00:24:08.776 A:middle
+
+409
+00:24:05,766 --> 00:24:08,776
 These are the exact same
 stages, and the callbacks happen
 
-00:24:08.776 --> 00:24:11.236 A:middle
+
+410
+00:24:08,776 --> 00:24:11,236
 in the exact same way
 with multitasking resizes.
 
-00:24:11.236 --> 00:24:14.156 A:middle
+
+411
+00:24:11,236 --> 00:24:14,156
 And that's what's really great
 about these new callbacks.
 
-00:24:14.846 --> 00:24:17.776 A:middle
+
+412
+00:24:14,846 --> 00:24:17,776
 They allow you to use the
 same code between rotation
 
-00:24:17.776 --> 00:24:19.426 A:middle
+
+413
+00:24:17,776 --> 00:24:19,426
 and multitasking resizes.
 
-00:24:20.086 --> 00:24:23.086 A:middle
+
+414
+00:24:20,086 --> 00:24:23,086
 Now, there is one
 important thing to keep
 
-00:24:23.086 --> 00:24:25.796 A:middle
+
+415
+00:24:23,086 --> 00:24:25,796
 in mind specifically
 about resize transitions.
 
-00:24:25.796 --> 00:24:29.336 A:middle
+
+416
+00:24:25,796 --> 00:24:29,336
 And that's that your app has
 only a limited amount of time
 
-00:24:29.406 --> 00:24:31.266 A:middle
+
+417
+00:24:29,406 --> 00:24:31,266
 to perform the changes
 that it wants to do.
 
-00:24:32.356 --> 00:24:35.146 A:middle
+
+418
+00:24:32,356 --> 00:24:35,146
 Just like with app start up,
 if your app takes too long
 
-00:24:35.146 --> 00:24:37.156 A:middle
+
+419
+00:24:35,146 --> 00:24:37,156
 to make these changes,
 then it will be terminated.
 
-00:24:38.226 --> 00:24:41.826 A:middle
+
+420
+00:24:38,226 --> 00:24:41,826
 But I'm sure that won't
 happen to any of you.
 
-00:24:42.086 --> 00:24:44.006 A:middle
+
+421
+00:24:42,086 --> 00:24:44,006
 So, one important
 thing to keep in mind,
 
-00:24:44.186 --> 00:24:45.536 A:middle
+
+422
+00:24:44,186 --> 00:24:45,536
 if you're implementing
 both of these
 
-00:24:45.536 --> 00:24:47.976 A:middle
+
+423
+00:24:45,536 --> 00:24:47,976
 to your transition callbacks,
 is that 'will transition
 
-00:24:47.976 --> 00:24:50.256 A:middle
+
+424
+00:24:47,976 --> 00:24:50,256
 to trait collection' will
 be called before 'view will
 
-00:24:50.256 --> 00:24:51.166 A:middle
+
+425
+00:24:50,256 --> 00:24:51,166
 transition to size.'
 
-00:24:51.166 --> 00:24:52.886 A:middle
+
+426
+00:24:51,166 --> 00:24:52,886
 And this is useful
 to keep in mind.
 
-00:24:53.856 --> 00:24:55.596 A:middle
+
+427
+00:24:53,856 --> 00:24:55,596
 However, as Peter
 mentioned earlier,
 
-00:24:55.596 --> 00:24:57.846 A:middle
+
+428
+00:24:55,596 --> 00:24:57,846
 there are some multitasking
 resizes
 
-00:24:58.176 --> 00:24:59.906 A:middle
+
+429
+00:24:58,176 --> 00:24:59,906
 where only the size
 will change in your app
 
-00:24:59.906 --> 00:25:02.016 A:middle
+
+430
+00:24:59,906 --> 00:25:02,016
 and the size class
 will stay the same.
 
 
-
-00:24:59.906 --> 00:25:02.016 A:middle
-and the size class
-will stay the same.
-
-00:25:02.946 --> 00:25:05.416 A:middle
+431
+00:25:02,946 --> 00:25:05,416
 When this happens, the trait
 collections don't change,
 
-00:25:05.906 --> 00:25:08.296 A:middle
+
+432
+00:25:05,906 --> 00:25:08,296
 and so we won't call the trait
 collection change callback
 
-00:25:08.296 --> 00:25:11.266 A:middle
+
+433
+00:25:08,296 --> 00:25:11,266
 methods, we'll only call 'view
 will transition to size.'
 
-00:25:12.216 --> 00:25:16.016 A:middle
+
+434
+00:25:12,216 --> 00:25:16,016
 You can still use the
 transition coordinator APIs
 
-00:25:16.126 --> 00:25:18.576 A:middle
+
+435
+00:25:16,126 --> 00:25:18,576
 to add alongside animation
 and completion blocks.
 
-00:25:19.246 --> 00:25:21.776 A:middle
+
+436
+00:25:19,246 --> 00:25:21,776
 Now, similarly, there
 are some cases
 
-00:25:22.086 --> 00:25:24.196 A:middle
+
+437
+00:25:22,086 --> 00:25:24,196
 where only the trait collection
 of your app will change,
 
-00:25:24.376 --> 00:25:25.586 A:middle
+
+438
+00:25:24,376 --> 00:25:25,586
 but the size will stay the same.
 
-00:25:26.406 --> 00:25:27.496 A:middle
+
+439
+00:25:26,406 --> 00:25:27,496
 This can happen, for example,
 
-00:25:27.496 --> 00:25:29.236 A:middle
+
+440
+00:25:27,496 --> 00:25:29,236
 when you're overwriting
 the trait collection
 
-00:25:29.236 --> 00:25:29.996 A:middle
+
+441
+00:25:29,236 --> 00:25:29,996
 of a view controller.
 
-00:25:31.516 --> 00:25:33.036 A:middle
+
+442
+00:25:31,516 --> 00:25:33,036
 So as you're implementing
 these callbacks,
 
-00:25:33.486 --> 00:25:35.326 A:middle
+
+443
+00:25:33,486 --> 00:25:35,326
 make sure that you don't
 assume that just because one
 
-00:25:35.326 --> 00:25:37.316 A:middle
+
+444
+00:25:35,326 --> 00:25:37,316
 of them is called, the others
 will be called as well.
 
-00:25:37.406 --> 00:25:39.486 A:middle
+
+445
+00:25:37,406 --> 00:25:39,486
 And that's transitions.
 
-00:25:39.486 --> 00:25:43.026 A:middle
+
+446
+00:25:39,486 --> 00:25:43,026
 Next, let's take
 a look at windows
 
-00:25:43.256 --> 00:25:45.056 A:middle
+
+447
+00:25:43,256 --> 00:25:45,056
 and specifically UIWindow.
 
-00:25:46.616 --> 00:25:50.076 A:middle
+
+448
+00:25:46,616 --> 00:25:50,076
 Generally, when your app starts
 up, you'll create a new UIWindow
 
-00:25:50.076 --> 00:25:53.146 A:middle
+
+449
+00:25:50,076 --> 00:25:53,146
 and give it a frame
 that's equal to the bounds
 
-00:25:53.366 --> 00:25:54.746 A:middle
+
+450
+00:25:53,366 --> 00:25:54,746
 of your main UI screen.
 
-00:25:56.046 --> 00:25:56.816 A:middle
+
+451
+00:25:56,046 --> 00:25:56,816
 Now, when that happens,
 
-00:25:56.816 --> 00:25:59.746 A:middle
+
+452
+00:25:56,816 --> 00:25:59,746
 if the user resizes your
 app during multitasking,
 
 
-
-00:26:00.096 --> 00:26:02.886 A:middle
+453
+00:26:00,096 --> 00:26:02,886
 then that UI window's frame
 will automatically be resized
 
-00:26:03.166 --> 00:26:04.606 A:middle
+
+454
+00:26:03,166 --> 00:26:04,606
 to match the new
 size of your app.
 
-00:26:04.606 --> 00:26:07.316 A:middle
+
+455
+00:26:04,606 --> 00:26:07,316
 And that will continue as long
 
-00:26:07.316 --> 00:26:09.016 A:middle
+
+456
+00:26:07,316 --> 00:26:09,016
 as the user is resizing
 your app.
 
-00:26:10.356 --> 00:26:12.116 A:middle
+
+457
+00:26:10,356 --> 00:26:12,116
 However, if you create
 a UIWindow
 
-00:26:12.116 --> 00:26:14.626 A:middle
+
+458
+00:26:12,116 --> 00:26:14,626
 that has a size that's different
 from the screen's bounds,
 
-00:26:15.296 --> 00:26:17.676 A:middle
+
+459
+00:26:15,296 --> 00:26:17,676
 then we'll leave that
 window to have the same size
 
-00:26:17.726 --> 00:26:19.106 A:middle
+
+460
+00:26:17,726 --> 00:26:19,106
 as your app is resized.
 
-00:26:19.106 --> 00:26:24.496 A:middle
+
+461
+00:26:19,106 --> 00:26:24,496
 As Peter mentioned, the origin
 of UI windows is in the top left
 
-00:26:24.496 --> 00:26:26.366 A:middle
+
+462
+00:26:24,496 --> 00:26:26,366
 of your app even
 as they're resized.
 
-00:26:26.736 --> 00:26:28.716 A:middle
+
+463
+00:26:26,736 --> 00:26:28,716
 So all of these UIWindows
 will move along
 
-00:26:28.716 --> 00:26:30.146 A:middle
+
+464
+00:26:28,716 --> 00:26:30,146
 with the rest of your app.
 
-00:26:30.916 --> 00:26:34.736 A:middle
+
+465
+00:26:30,916 --> 00:26:34,736
 Now, generally, in the past, to
 make a full-screen sized window,
 
-00:26:35.606 --> 00:26:38.256 A:middle
+
+466
+00:26:35,606 --> 00:26:38,256
 you would create the UIWindow
 and explicitly give it a frame
 
-00:26:38.256 --> 00:26:40.576 A:middle
+
+467
+00:26:38,256 --> 00:26:40,576
 that was equal to the
 main UI screen's bounds.
 
-00:26:41.486 --> 00:26:43.686 A:middle
+
+468
+00:26:41,486 --> 00:26:43,686
 And you can still do that
 with iPad multitasking,
 
-00:26:44.386 --> 00:26:46.506 A:middle
+
+469
+00:26:44,386 --> 00:26:46,506
 but in iOS 9 we've
 made this even easier.
 
-00:26:47.276 --> 00:26:49.346 A:middle
+
+470
+00:26:47,276 --> 00:26:49,346
 Now you can just
 create a new UIWindow
 
-00:26:49.536 --> 00:26:51.066 A:middle
+
+471
+00:26:49,536 --> 00:26:51,066
 without passing any
 explicit frame,
 
-00:26:51.616 --> 00:26:52.806 A:middle
+
+472
+00:26:51,616 --> 00:26:52,806
 and we'll make it
 the correct size
 
-00:26:52.806 --> 00:26:54.156 A:middle
+
+473
+00:26:52,806 --> 00:26:54,156
 that your app is
 using right now,
 
-00:26:54.156 --> 00:26:56.516 A:middle
+
+474
+00:26:54,156 --> 00:26:56,516
 and automatically
 resize it along
 
-00:26:56.516 --> 00:26:58.266 A:middle
+
+475
+00:26:56,516 --> 00:26:58,266
 with all multitasking resizes.
 
 
-
-00:27:00.046 --> 00:27:05.836 A:middle
+476
+00:27:00,046 --> 00:27:05,836
 Okay. Now let's take a
 look at presentations.
 
-00:27:05.836 --> 00:27:08.656 A:middle
+
+477
+00:27:05,836 --> 00:27:08,656
 In iOS 8, we introduced UI
 Presentation Controller.
 
-00:27:08.656 --> 00:27:11.976 A:middle
+
+478
+00:27:08,656 --> 00:27:11,976
 And this is a great class for
 making custom presentations
 
-00:27:12.486 --> 00:27:14.596 A:middle
+
+479
+00:27:12,486 --> 00:27:14,596
 or for working with
 system-provided presentations.
 
-00:27:15.416 --> 00:27:18.096 A:middle
+
+480
+00:27:15,416 --> 00:27:18,096
 And you can see "A Look Inside
 Presentation Controllers,"
 
-00:27:18.096 --> 00:27:21.666 A:middle
+
+481
+00:27:18,096 --> 00:27:21,666
 a talk from last year's
 WWDC, for more information
 
-00:27:21.666 --> 00:27:24.106 A:middle
+
+482
+00:27:21,666 --> 00:27:24,106
 about using this class.
 
-00:27:24.256 --> 00:27:26.686 A:middle
+
+483
+00:27:24,256 --> 00:27:26,686
 One of the great things about
 presentation controllers
 
-00:27:27.056 --> 00:27:29.566 A:middle
+
+484
+00:27:27,056 --> 00:27:29,566
 with multitasking is their
 support for adaptivity.
 
-00:27:29.986 --> 00:27:36.026 A:middle
+
+485
+00:27:29,986 --> 00:27:36,026
 So, for example, you can show a
 popover presentation on an iPad,
 
-00:27:37.216 --> 00:27:40.286 A:middle
+
+486
+00:27:37,216 --> 00:27:40,286
 and when your app size
 class changes, in this case
 
-00:27:40.286 --> 00:27:42.146 A:middle
+
+487
+00:27:40,286 --> 00:27:42,146
 to the compact horizontal
 size class,
 
-00:27:42.216 --> 00:27:44.836 A:middle
+
+488
+00:27:42,216 --> 00:27:44,836
 it will automatically
 transform that presentation
 
-00:27:45.086 --> 00:27:46.756 A:middle
+
+489
+00:27:45,086 --> 00:27:46,756
 into a style that makes sense.
 
-00:27:47.646 --> 00:27:50.076 A:middle
+
+490
+00:27:47,646 --> 00:27:50,076
 So, here, we have adapted to
 a modal full screen style.
 
-00:27:50.126 --> 00:27:53.136 A:middle
+
+491
+00:27:50,126 --> 00:27:53,136
 And this happens
 between devices as well.
 
-00:27:53.866 --> 00:27:57.026 A:middle
+
+492
+00:27:53,866 --> 00:27:57,026
 For example, if you perform
 that same popover presentation
 
-00:27:57.066 --> 00:27:59.256 A:middle
+
+493
+00:27:57,066 --> 00:27:59,256
 on an iPhone, it will
 automatically show it
 
-00:27:59.256 --> 00:28:01.666 A:middle
+
+494
+00:27:59,256 --> 00:28:01,666
 as a modal full screen
 presentation there as well.
 
 
-
-00:27:59.256 --> 00:28:01.666 A:middle
-as a modal full screen
-presentation there as well.
-
-00:28:03.276 --> 00:28:05.826 A:middle
+495
+00:28:03,276 --> 00:28:05,826
 On an iPhone 6+ in
 landscape, we'll also make
 
-00:28:05.826 --> 00:28:08.396 A:middle
+
+496
+00:28:05,826 --> 00:28:08,396
 that presentation a form
 sheet presentation for you.
 
-00:28:09.546 --> 00:28:12.396 A:middle
+
+497
+00:28:09,546 --> 00:28:12,396
 And all of these changes happen
 automatically in your app just
 
-00:28:12.396 --> 00:28:14.046 A:middle
+
+498
+00:28:12,396 --> 00:28:14,046
 by using 'view controller
 presentations.'
 
-00:28:14.486 --> 00:28:23.006 A:middle
+
+499
+00:28:14,486 --> 00:28:23,006
 However, you may
 want to interact
 
-00:28:23.006 --> 00:28:25.336 A:middle
+
+500
+00:28:23,006 --> 00:28:25,336
 with how these changes
 occur as well.
 
-00:28:26.836 --> 00:28:28.076 A:middle
+
+501
+00:28:26,836 --> 00:28:28,076
 For example, in this app,
 
-00:28:28.786 --> 00:28:31.356 A:middle
+
+502
+00:28:28,786 --> 00:28:31,356
 as we're showing a popover
 presentation when we're
 
-00:28:31.356 --> 00:28:33.906 A:middle
+
+503
+00:28:31,356 --> 00:28:33,906
 in the modal full screen
 style, we'll want to show a
 
-00:28:33.906 --> 00:28:35.896 A:middle
+
+504
+00:28:33,906 --> 00:28:35,896
 "Done" button inside
 of a navigation bar
 
-00:28:35.896 --> 00:28:38.186 A:middle
+
+505
+00:28:35,896 --> 00:28:38,186
 so that the user can
 dismiss this presentation.
 
-00:28:39.056 --> 00:28:42.006 A:middle
+
+506
+00:28:39,056 --> 00:28:42,006
 But when we're using the native
 popover presentation style,
 
-00:28:42.006 --> 00:28:43.726 A:middle
+
+507
+00:28:42,006 --> 00:28:43,726
 we don't need to show
 that "Done" button,
 
-00:28:44.086 --> 00:28:45.966 A:middle
+
+508
+00:28:44,086 --> 00:28:45,966
 since the user can just
 tap anywhere outside
 
-00:28:45.966 --> 00:28:47.086 A:middle
+
+509
+00:28:45,966 --> 00:28:47,086
 of the popover to dismiss it.
 
-00:28:47.086 --> 00:28:50.016 A:middle
+
+510
+00:28:47,086 --> 00:28:50,016
 And we can make these
 kinds of changes
 
-00:28:50.016 --> 00:28:52.976 A:middle
+
+511
+00:28:50,016 --> 00:28:52,976
 with the 'adaptive presentation
 controller delegate' API.
 
-00:28:54.446 --> 00:28:56.156 A:middle
+
+512
+00:28:54,446 --> 00:28:56,156
 In fact, we introduced
 some new methods
 
-00:28:56.156 --> 00:28:58.766 A:middle
+
+513
+00:28:56,156 --> 00:28:58,766
 to this protocol in iOS 8.3.
 
-00:28:59.566 --> 00:29:02.246 A:middle
+
+514
+00:28:59,566 --> 00:29:02,246
 These methods allow you a lot
 of control over the changes
 
 
-
-00:28:59.566 --> 00:29:02.246 A:middle
-These methods allow you a lot
-of control over the changes
-
-00:29:02.246 --> 00:29:04.806 A:middle
+515
+00:29:02,246 --> 00:29:04,806
 that happen as your view
 controller presentation
 
-00:29:04.916 --> 00:29:05.546 A:middle
+
+516
+00:29:04,916 --> 00:29:05,546
 is adapted.
 
-00:29:06.616 --> 00:29:09.466 A:middle
+
+517
+00:29:06,616 --> 00:29:09,466
 So you can do things like
 hide and show navigation bars
 
-00:29:09.466 --> 00:29:12.066 A:middle
+
+518
+00:29:09,466 --> 00:29:12,066
 or whatever other changes
 make sense for your app.
 
-00:29:13.236 --> 00:29:15.336 A:middle
+
+519
+00:29:13,236 --> 00:29:15,336
 Now, one last thing to
 keep in mind specifically
 
-00:29:15.336 --> 00:29:18.816 A:middle
+
+520
+00:29:15,336 --> 00:29:18,816
 about popover presentations,
 it is to always make sure
 
-00:29:18.886 --> 00:29:20.496 A:middle
+
+521
+00:29:18,886 --> 00:29:20,496
 that the arrow from
 the popover points
 
-00:29:20.496 --> 00:29:22.266 A:middle
+
+522
+00:29:20,496 --> 00:29:22,266
 to the right source
 for that popover.
 
-00:29:23.496 --> 00:29:27.476 A:middle
+
+523
+00:29:23,496 --> 00:29:27,476
 This is particularly important
 as your app is adapting
 
-00:29:27.476 --> 00:29:31.526 A:middle
+
+524
+00:29:27,476 --> 00:29:31,526
 between the horizontally compact
 and regular size classes.
 
-00:29:32.446 --> 00:29:33.626 A:middle
+
+525
+00:29:32,446 --> 00:29:33,626
 You can easily do this
 
-00:29:33.626 --> 00:29:35.556 A:middle
+
+526
+00:29:33,626 --> 00:29:35,556
 with a popover presentation
 controller API.
 
-00:29:36.466 --> 00:29:37.916 A:middle
+
+527
+00:29:36,466 --> 00:29:37,916
 Either set the barButtonItem
 
-00:29:38.306 --> 00:29:40.406 A:middle
+
+528
+00:29:38,306 --> 00:29:40,406
 or set the sourceView
 in sourceRect.
 
-00:29:41.936 --> 00:29:42.826 A:middle
+
+529
+00:29:41,936 --> 00:29:42,826
 So that's presentations.
 
-00:29:43.796 --> 00:29:45.906 A:middle
+
+530
+00:29:43,796 --> 00:29:45,906
 The last thing I'd like to
 tell you about is some changes
 
-00:29:45.906 --> 00:29:47.836 A:middle
+
+531
+00:29:45,906 --> 00:29:47,836
 to the keyboard with
 multitasking.
 
-00:29:48.446 --> 00:29:51.876 A:middle
+
+532
+00:29:48,446 --> 00:29:51,876
 Now, when the user is
 multitasking with your app,
 
-00:29:52.936 --> 00:29:55.626 A:middle
+
+533
+00:29:52,936 --> 00:29:55,626
 if they tap on a text field,
 like the search bar in Maps,
 
-00:29:56.506 --> 00:29:59.176 A:middle
+
+534
+00:29:56,506 --> 00:29:59,176
 then the keyboard will actually
 be shown over top both apps
 
-00:29:59.356 --> 00:30:00.466 A:middle
+
+535
+00:29:59,356 --> 00:30:00,466
 that the user is
 interacting with.
 
 
-
-00:29:59.356 --> 00:30:00.466 A:middle
-that the user is
-interacting with.
-
-00:30:00.466 --> 00:30:02.786 A:middle
+536
+00:30:00,466 --> 00:30:02,786
 And this means it is
 really important for you
 
-00:30:02.786 --> 00:30:04.956 A:middle
+
+537
+00:30:02,786 --> 00:30:04,956
 to consider whether you want
 to move pieces of your app
 
-00:30:04.956 --> 00:30:06.316 A:middle
+
+538
+00:30:04,956 --> 00:30:06,316
 out of the way of the keyboard
 
-00:30:06.586 --> 00:30:08.186 A:middle
+
+539
+00:30:06,586 --> 00:30:08,186
 so that the user can
 still interact with them.
 
-00:30:09.176 --> 00:30:12.236 A:middle
+
+540
+00:30:09,176 --> 00:30:12,236
 You can do that by using the
 UIKeyboard Notification API,
 
-00:30:12.806 --> 00:30:15.316 A:middle
+
+541
+00:30:12,806 --> 00:30:15,316
 just as you had in the past.
 
-00:30:15.496 --> 00:30:18.386 A:middle
+
+542
+00:30:15,496 --> 00:30:18,386
 You can use these notifications
 to make changes to your app
 
-00:30:18.836 --> 00:30:21.276 A:middle
+
+543
+00:30:18,836 --> 00:30:21,276
 like setting scroll
 views content insets
 
-00:30:21.446 --> 00:30:24.146 A:middle
+
+544
+00:30:21,446 --> 00:30:24,146
 or moving important UI
 elements to stay visible.
 
-00:30:25.156 --> 00:30:26.326 A:middle
+
+545
+00:30:25,156 --> 00:30:26,326
 So, for example, in this app,
 
-00:30:26.966 --> 00:30:30.036 A:middle
+
+546
+00:30:26,966 --> 00:30:30,036
 we may want to move the comment
 field and the ratings view
 
-00:30:30.036 --> 00:30:31.856 A:middle
+
+547
+00:30:30,036 --> 00:30:31,856
 to still be visible by the user.
 
-00:30:33.196 --> 00:30:34.736 A:middle
+
+548
+00:30:33,196 --> 00:30:34,736
 And this is a really
 important change
 
-00:30:34.926 --> 00:30:36.656 A:middle
+
+549
+00:30:34,926 --> 00:30:36,656
 because in the past
 the only time
 
-00:30:36.656 --> 00:30:38.756 A:middle
+
+550
+00:30:36,656 --> 00:30:38,756
 that your app would
 interact with the keyboard is
 
-00:30:38.756 --> 00:30:40.606 A:middle
+
+551
+00:30:38,756 --> 00:30:40,606
 when it had explicitly
 shown it itself.
 
-00:30:41.216 --> 00:30:43.366 A:middle
+
+552
+00:30:41,216 --> 00:30:43,366
 But now, with multitasking,
 the other app
 
-00:30:43.366 --> 00:30:46.266 A:middle
+
+553
+00:30:43,366 --> 00:30:46,266
 that the user is using can
 cause the keyboard to appear.
 
-00:30:46.486 --> 00:30:48.536 A:middle
+
+554
+00:30:46,486 --> 00:30:48,536
 So you'll want to consider
 whether any of the views
 
-00:30:48.536 --> 00:30:51.796 A:middle
+
+555
+00:30:48,536 --> 00:30:51,796
 in your app need to move pieces
 of their UI to stay visible
 
-00:30:51.796 --> 00:30:52.676 A:middle
+
+556
+00:30:51,796 --> 00:30:52,676
 as the keyboard is shown.
 
-00:30:53.386 --> 00:30:56.516 A:middle
+
+557
+00:30:53,386 --> 00:30:56,516
 So those are some
 changes and best practices
 
-00:30:56.516 --> 00:30:57.626 A:middle
+
+558
+00:30:56,516 --> 00:30:57,626
 for iPad multitasking.
 
-00:30:58.346 --> 00:31:01.506 A:middle
+
+559
+00:30:58,346 --> 00:31:01,506
 A few important things to
 remember are to consider size
 
 
-
-00:30:58.346 --> 00:31:01.506 A:middle
-A few important things to
-remember are to consider size
-
-00:31:01.506 --> 00:31:03.916 A:middle
+560
+00:31:01,506 --> 00:31:03,916
 and size classes
 instead of orientation
 
-00:31:04.066 --> 00:31:05.236 A:middle
+
+561
+00:31:04,066 --> 00:31:05,236
 as your app is rotating.
 
-00:31:05.236 --> 00:31:09.066 A:middle
+
+562
+00:31:05,236 --> 00:31:09,066
 And to think about how you shall
 want to respond to transitions
 
-00:31:09.236 --> 00:31:11.736 A:middle
+
+563
+00:31:09,236 --> 00:31:11,736
 like rotations and
 multitasking resizes.
 
-00:31:12.476 --> 00:31:15.056 A:middle
+
+564
+00:31:12,476 --> 00:31:15,056
 And finally, to use
 adaptive presentations
 
-00:31:15.156 --> 00:31:18.026 A:middle
+
+565
+00:31:15,156 --> 00:31:18,026
 to make your app work great
 on all of our devices and all
 
-00:31:18.026 --> 00:31:20.026 A:middle
+
+566
+00:31:18,026 --> 00:31:20,026
 of the different
 contexts that it is used.
 
-00:31:21.036 --> 00:31:23.126 A:middle
+
+567
+00:31:21,036 --> 00:31:23,126
 Now I would like to
 turn things over to Kurt
 
-00:31:23.126 --> 00:31:25.326 A:middle
+
+568
+00:31:23,126 --> 00:31:25,326
 to tell you how you can make
 the most out of multitasking.
 
-00:31:26.516 --> 00:31:30.666 A:middle
+
+569
+00:31:26,516 --> 00:31:30,666
 [Applause]
 
-00:31:31.166 --> 00:31:31.456 A:middle
-&gt;&gt; Kurt Revis: Thank you.
 
-00:31:32.316 --> 00:31:32.906 A:middle
+570
+00:31:31,166 --> 00:31:31,456
+>> Kurt Revis: Thank you.
+
+
+571
+00:31:32,316 --> 00:31:32,906
 Thank you, Jacob.
 
-00:31:32.906 --> 00:31:33.476 A:middle
+
+572
+00:31:32,906 --> 00:31:33,476
 Thank you, Peter.
 
-00:31:34.656 --> 00:31:38.816 A:middle
+
+573
+00:31:34,656 --> 00:31:38,816
 So now you know how and why
 your app can adopt multitasking.
 
-00:31:39.556 --> 00:31:41.216 A:middle
+
+574
+00:31:39,556 --> 00:31:41,216
 You know what's changed
 -- not much.
 
-00:31:41.796 --> 00:31:44.076 A:middle
+
+575
+00:31:41,796 --> 00:31:44,076
 You know what to
 do, what not to do.
 
-00:31:44.266 --> 00:31:46.836 A:middle
+
+576
+00:31:44,266 --> 00:31:46,836
 So I'm here to tell you how
 your app can make the most
 
-00:31:46.836 --> 00:31:49.426 A:middle
+
+577
+00:31:46,836 --> 00:31:49,426
 out of multitasking and
 deliver a great experience
 
-00:31:49.496 --> 00:31:50.336 A:middle
+
+578
+00:31:49,496 --> 00:31:50,336
 to your users.
 
-00:31:51.816 --> 00:31:55.636 A:middle
+
+579
+00:31:51,816 --> 00:31:55,636
 So really your app needs to
 be designed for adaptivity.
 
-00:31:56.086 --> 00:31:58.206 A:middle
+
+580
+00:31:56,086 --> 00:31:58,206
 And I'll reiterate three
 things we talked about earlier.
 
-00:31:58.886 --> 00:32:01.046 A:middle
+
+581
+00:31:58,886 --> 00:32:01,046
 First, your app should
 be universal;
 
 
-
-00:31:58.886 --> 00:32:01.046 A:middle
-First, your app should
-be universal;
-
-00:32:01.276 --> 00:32:03.686 A:middle
+582
+00:32:01,276 --> 00:32:03,686
 your app should run
 on iPhone and iPad.
 
-00:32:05.186 --> 00:32:08.586 A:middle
+
+583
+00:32:05,186 --> 00:32:08,586
 Second, don't think of those
 user experiences as being iPhone
 
-00:32:08.586 --> 00:32:11.686 A:middle
+
+584
+00:32:08,586 --> 00:32:11,686
 and iPad anymore; think of
 them as being for compact
 
-00:32:12.196 --> 00:32:14.066 A:middle
+
+585
+00:32:12,196 --> 00:32:14,066
 and regular widths, because now
 
-00:32:14.066 --> 00:32:16.756 A:middle
+
+586
+00:32:14,066 --> 00:32:16,756
 that compact width experience
 can happen on the iPad.
 
-00:32:18.236 --> 00:32:21.806 A:middle
+
+587
+00:32:18,236 --> 00:32:21,806
 And then last, use adaptivity
 to change between them
 
-00:32:21.916 --> 00:32:23.706 A:middle
+
+588
+00:32:21,916 --> 00:32:23,706
 when the user changes
 the size of your app.
 
-00:32:24.946 --> 00:32:26.416 A:middle
+
+589
+00:32:24,946 --> 00:32:26,416
 So, the challenge when designing
 
-00:32:26.416 --> 00:32:28.666 A:middle
+
+590
+00:32:26,416 --> 00:32:28,666
 for adaptivity is
 making your app adapt
 
-00:32:29.256 --> 00:32:30.686 A:middle
+
+591
+00:32:29,256 --> 00:32:30,686
 to these dynamic size changes.
 
-00:32:31.756 --> 00:32:35.616 A:middle
+
+592
+00:32:31,756 --> 00:32:35,616
 And I'll give you two things,
 actually six strategies
 
-00:32:36.666 --> 00:32:40.156 A:middle
+
+593
+00:32:36,666 --> 00:32:40,156
 that your app can adopt in
 order to make it flexible
 
-00:32:40.156 --> 00:32:43.216 A:middle
+
+594
+00:32:40,156 --> 00:32:43,216
 and make it handle dynamic size
 changes, and then I'll talk
 
-00:32:43.216 --> 00:32:44.756 A:middle
+
+595
+00:32:43,216 --> 00:32:44,756
 about some finer points
 that will come up,
 
-00:32:45.306 --> 00:32:47.436 A:middle
+
+596
+00:32:45,306 --> 00:32:47,436
 some things you will run into
 when you adopt multitasking
 
-00:32:47.756 --> 00:32:49.566 A:middle
+
+597
+00:32:47,756 --> 00:32:49,566
 and some guidelines of how
 to handle those things.
 
-00:32:50.396 --> 00:32:51.506 A:middle
+
+598
+00:32:50,396 --> 00:32:51,506
 So let's get started.
 
-00:32:52.016 --> 00:32:54.786 A:middle
+
+599
+00:32:52,016 --> 00:32:54,786
 The first strategy: be flexible.
 
-00:32:55.886 --> 00:32:57.226 A:middle
+
+600
+00:32:55,886 --> 00:32:57,226
 Don't hard code sizes.
 
-00:32:57.266 --> 00:32:58.246 A:middle
+
+601
+00:32:57,266 --> 00:32:58,246
 Don't make assumptions.
 
-00:32:58.546 --> 00:33:00.856 A:middle
+
+602
+00:32:58,546 --> 00:33:00,856
 Your app should look
 at what size it is
 
 
-
-00:32:58.546 --> 00:33:00.856 A:middle
-Your app should look
-at what size it is
-
-00:33:01.726 --> 00:33:02.876 A:middle
+603
+00:33:01,726 --> 00:33:02,876
 and do something based on that.
 
-00:33:03.856 --> 00:33:05.976 A:middle
+
+604
+00:33:03,856 --> 00:33:05,976
 And it should also react
 to changes in its size.
 
-00:33:07.076 --> 00:33:09.826 A:middle
+
+605
+00:33:07,076 --> 00:33:09,826
 So the only way to find out
 if your app is really flexible
 
-00:33:09.826 --> 00:33:11.896 A:middle
+
+606
+00:33:09,826 --> 00:33:11,896
 or not is really to try
 it out, try stretching.
 
-00:33:12.366 --> 00:33:14.396 A:middle
+
+607
+00:33:12,366 --> 00:33:14,396
 So let's do a little exercise
 here, a little warm-up.
 
-00:33:14.396 --> 00:33:16.636 A:middle
+
+608
+00:33:14,396 --> 00:33:16,636
 You will find there's a yoga
 mat under your seats in front
 
-00:33:16.636 --> 00:33:17.896 A:middle
+
+609
+00:33:16,636 --> 00:33:17,896
 of you, so please get that out!
 
-00:33:18.626 --> 00:33:20.936 A:middle
+
+610
+00:33:18,626 --> 00:33:20,936
 No. Unfortunately, I'm only
 talking about your app.
 
-00:33:21.016 --> 00:33:22.156 A:middle
+
+611
+00:33:21,016 --> 00:33:22,156
 But we'll do the same thing.
 
-00:33:22.716 --> 00:33:24.626 A:middle
+
+612
+00:33:22,716 --> 00:33:24,626
 We'll take your app
 through a warm-up exercise.
 
-00:33:25.546 --> 00:33:27.646 A:middle
+
+613
+00:33:25,546 --> 00:33:27,646
 We'll run through all
 the multitasking cases
 
-00:33:27.646 --> 00:33:31.476 A:middle
+
+614
+00:33:27,646 --> 00:33:31,476
 and we'll watch your
 app's UI carefully.
 
-00:33:31.636 --> 00:33:32.246 A:middle
+
+615
+00:33:31,636 --> 00:33:32,246
 Take notes.
 
-00:33:32.366 --> 00:33:34.126 A:middle
+
+616
+00:33:32,366 --> 00:33:34,126
 What works; what doesn't work?
 
-00:33:34.896 --> 00:33:37.156 A:middle
+
+617
+00:33:34,896 --> 00:33:37,156
 When you're doing this,
 concentrate on the layout
 
-00:33:37.336 --> 00:33:39.186 A:middle
+
+618
+00:33:37,336 --> 00:33:39,186
 of what your views are,
 don't worry so much
 
-00:33:39.186 --> 00:33:40.916 A:middle
+
+619
+00:33:39,186 --> 00:33:40,916
 about the animations
 or anything like that,
 
-00:33:40.916 --> 00:33:42.366 A:middle
+
+620
+00:33:40,916 --> 00:33:42,366
 especially if you're
 doing it in the simulator,
 
-00:33:42.456 --> 00:33:44.856 A:middle
+
+621
+00:33:42,456 --> 00:33:44,856
 because the experience will
 be different on a real device.
 
-00:33:46.106 --> 00:33:46.676 A:middle
+
+622
+00:33:46,106 --> 00:33:46,676
 So let's start.
 
-00:33:48.196 --> 00:33:49.846 A:middle
+
+623
+00:33:48,196 --> 00:33:49,846
 Your app has adopted
 multitasking
 
-00:33:50.716 --> 00:33:52.366 A:middle
+
+624
+00:33:50,716 --> 00:33:52,366
 and you can start
 it by sliding over.
 
-00:33:53.626 --> 00:33:54.766 A:middle
+
+625
+00:33:53,626 --> 00:33:54,766
 Then resize your app bigger.
 
-00:33:54.936 --> 00:33:55.856 A:middle
+
+626
+00:33:54,936 --> 00:33:55,856
 That's a size change.
 
-00:33:56.786 --> 00:33:57.496 A:middle
+
+627
+00:33:56,786 --> 00:33:57,496
 Make it bigger again.
 
-00:33:57.666 --> 00:33:59.546 A:middle
+
+628
+00:33:57,666 --> 00:33:59,546
 It will be full screen,
 another size change.
 
 
-
-00:34:00.476 --> 00:34:01.786 A:middle
+629
+00:34:00,476 --> 00:34:01,786
 Now Slide Over another app
 
-00:34:02.476 --> 00:34:03.956 A:middle
+
+630
+00:34:02,476 --> 00:34:03,956
 and press the button
 to use Split View.
 
-00:34:04.336 --> 00:34:05.296 A:middle
+
+631
+00:34:04,336 --> 00:34:05,296
 Your app will get smaller.
 
-00:34:06.566 --> 00:34:10.826 A:middle
+
+632
+00:34:06,566 --> 00:34:10,826
 Finally let's rotate the whole
 iPad, so we'll get a size change
 
-00:34:11.456 --> 00:34:13.936 A:middle
+
+633
+00:34:11,456 --> 00:34:13,936
 and the rotation will happen,
 the orientation will change,
 
-00:34:14.216 --> 00:34:15.226 A:middle
+
+634
+00:34:14,216 --> 00:34:15,226
 and that will be animated.
 
-00:34:16.306 --> 00:34:18.025 A:middle
+
+635
+00:34:16,306 --> 00:34:18,025
 So these are all things
 that can happen to your app
 
-00:34:18.025 --> 00:34:21.146 A:middle
+
+636
+00:34:18,025 --> 00:34:21,146
 and you should try out every
 place everywhere in your app
 
-00:34:21.536 --> 00:34:22.886 A:middle
+
+637
+00:34:21,536 --> 00:34:22,886
 to make sure that it
 can handle these things.
 
-00:34:23.815 --> 00:34:25.626 A:middle
+
+638
+00:34:23,815 --> 00:34:25,626
 When you try this, probably
 you'll find some things work,
 
-00:34:25.626 --> 00:34:26.386 A:middle
+
+639
+00:34:25,626 --> 00:34:26,386
 some things don't.
 
-00:34:27.235 --> 00:34:31.565 A:middle
+
+640
+00:34:27,235 --> 00:34:31,565
 So for help on fixing the things
 that don't work, keep listening.
 
-00:34:32.116 --> 00:34:35.656 A:middle
+
+641
+00:34:32,116 --> 00:34:35,656
 The second strategy:
 use Auto Layout.
 
-00:34:35.656 --> 00:34:37.716 A:middle
+
+642
+00:34:35,656 --> 00:34:37,716
 This should be no
 surprise; this is the way
 
-00:34:37.835 --> 00:34:39.446 A:middle
+
+643
+00:34:37,835 --> 00:34:39,446
 to make your app's UI flexible.
 
-00:34:40.606 --> 00:34:43.106 A:middle
+
+644
+00:34:40,606 --> 00:34:43,106
 All you have to do is
 provide views and constraints,
 
-00:34:43.726 --> 00:34:45.496 A:middle
+
+645
+00:34:43,726 --> 00:34:45,496
 the system will consider
 all those constraints
 
-00:34:46.045 --> 00:34:47.795 A:middle
+
+646
+00:34:46,045 --> 00:34:47,795
 and set your views'
 frames based on those.
 
-00:34:47.795 --> 00:34:49.326 A:middle
+
+647
+00:34:47,795 --> 00:34:49,326
 So you don't have to
 hard code anything.
 
-00:34:50.706 --> 00:34:54.315 A:middle
+
+648
+00:34:50,706 --> 00:34:54,315
 You can also use the margins and
 the guides that UIKit gives you
 
-00:34:54.545 --> 00:34:55.826 A:middle
+
+649
+00:34:54,545 --> 00:34:55,826
 to construct these constraints.
 
-00:34:56.856 --> 00:34:59.226 A:middle
+
+650
+00:34:56,856 --> 00:34:59,226
 And also in iOS 9,
 there's new APIs
 
-00:34:59.226 --> 00:35:01.046 A:middle
+
+651
+00:34:59,226 --> 00:35:01,046
 to make this whole process
 much more convenient.
 
 
-
-00:34:59.226 --> 00:35:01.046 A:middle
-to make this whole process
-much more convenient.
-
-00:35:02.536 --> 00:35:05.916 A:middle
+652
+00:35:02,536 --> 00:35:05,916
 So, to find out more about that,
 see the two Auto Layout talks
 
-00:35:05.916 --> 00:35:09.006 A:middle
+
+653
+00:35:05,916 --> 00:35:09,006
 on Thursday; I guarantee
 you'll learn a lot.
 
-00:35:10.256 --> 00:35:12.946 A:middle
+
+654
+00:35:10,256 --> 00:35:12,946
 So let's run through this
 example that we saw earlier.
 
-00:35:16.736 --> 00:35:18.406 A:middle
+
+655
+00:35:16,736 --> 00:35:18,406
 We have -- excuse me.
 
-00:35:20.456 --> 00:35:23.326 A:middle
+
+656
+00:35:20,456 --> 00:35:23,326
 We have this app
 showing some text,
 
-00:35:23.326 --> 00:35:24.806 A:middle
+
+657
+00:35:23,326 --> 00:35:24,806
 and it is using those
 readable margins.
 
-00:35:25.566 --> 00:35:30.516 A:middle
+
+658
+00:35:25,566 --> 00:35:30,516
 Now, how this works is
 your view size is large,
 
-00:35:30.596 --> 00:35:32.376 A:middle
+
+659
+00:35:30,596 --> 00:35:32,376
 but the readable
 content guide is smaller.
 
-00:35:33.326 --> 00:35:34.566 A:middle
+
+660
+00:35:33,326 --> 00:35:34,566
 We don't want your
 app to have to worry
 
-00:35:34.566 --> 00:35:36.656 A:middle
+
+661
+00:35:34,566 --> 00:35:36,656
 about thinking, 'This
 is an iPad.
 
-00:35:36.656 --> 00:35:38.056 A:middle
+
+662
+00:35:36,656 --> 00:35:38,056
 It is big; it is wide.
 
-00:35:38.056 --> 00:35:39.916 A:middle
+
+663
+00:35:38,056 --> 00:35:39,916
 I need to handle these
 margins differently.'
 
-00:35:40.046 --> 00:35:42.106 A:middle
+
+664
+00:35:40,046 --> 00:35:42,106
 You just use the guide and
 it will work automatically.
 
-00:35:42.896 --> 00:35:44.146 A:middle
+
+665
+00:35:42,896 --> 00:35:44,146
 So here is how to
 do this in code.
 
-00:35:45.696 --> 00:35:48.126 A:middle
+
+666
+00:35:45,696 --> 00:35:48,126
 First, make a label; we'll
 put our text inside of that.
 
-00:35:49.416 --> 00:35:51.506 A:middle
+
+667
+00:35:49,416 --> 00:35:51,506
 Second, the label goes
 in some super view
 
-00:35:52.126 --> 00:35:53.836 A:middle
+
+668
+00:35:52,126 --> 00:35:53,836
 and we'll get the
 readable content guide
 
-00:35:54.046 --> 00:35:54.826 A:middle
+
+669
+00:35:54,046 --> 00:35:54,826
 from that super view.
 
-00:35:56.146 --> 00:35:57.666 A:middle
+
+670
+00:35:56,146 --> 00:35:57,666
 Now we'll set up some
 constraints to make
 
-00:35:57.666 --> 00:35:59.836 A:middle
+
+671
+00:35:57,666 --> 00:35:59,836
 that label match that
 readable content guide.
 
 
-
-00:36:00.736 --> 00:36:03.266 A:middle
+672
+00:36:00,736 --> 00:36:03,266
 So the constraints is an
 array, and the first one
 
-00:36:03.266 --> 00:36:05.626 A:middle
+
+673
+00:36:03,266 --> 00:36:05,626
 that we do is make the
 label's leading anchor,
 
-00:36:05.626 --> 00:36:06.676 A:middle
+
+674
+00:36:05,626 --> 00:36:06,676
 that's the leading side,
 
-00:36:07.296 --> 00:36:10.306 A:middle
+
+675
+00:36:07,296 --> 00:36:10,306
 equal to the readable content
 guide's leading anchor,
 
-00:36:10.306 --> 00:36:11.046 A:middle
+
+676
+00:36:10,306 --> 00:36:11,046
 the leading side.
 
-00:36:12.306 --> 00:36:15.016 A:middle
+
+677
+00:36:12,306 --> 00:36:15,016
 This is, note -- note that
 this is using the new iOS 9
 
-00:36:15.066 --> 00:36:15.826 A:middle
+
+678
+00:36:15,066 --> 00:36:15,826
 convenience API.
 
-00:36:17.086 --> 00:36:19.726 A:middle
+
+679
+00:36:17,086 --> 00:36:19,726
 We do the same thing for the
 trailing anchor on both sides.
 
-00:36:19.966 --> 00:36:22.536 A:middle
+
+680
+00:36:19,966 --> 00:36:22,536
 So now, that label's width
 will match the readable content
 
-00:36:22.536 --> 00:36:23.086 A:middle
+
+681
+00:36:22,536 --> 00:36:23,086
 guide's width.
 
-00:36:24.316 --> 00:36:27.136 A:middle
+
+682
+00:36:24,316 --> 00:36:27,136
 Then all we have to do is
 activate those two constraints
 
-00:36:27.486 --> 00:36:28.586 A:middle
+
+683
+00:36:27,486 --> 00:36:28,586
 and Auto Layout does the rest.
 
-00:36:28.926 --> 00:36:31.786 A:middle
+
+684
+00:36:28,926 --> 00:36:31,786
 We didn't have to do anything.
 
-00:36:31.786 --> 00:36:33.456 A:middle
+
+685
+00:36:31,786 --> 00:36:33,456
 So I could have also
 done this in Xcode.
 
-00:36:33.456 --> 00:36:35.816 A:middle
+
+686
+00:36:33,456 --> 00:36:35,816
 I could have set this up in
 my storyboard, which leads me
 
-00:36:35.816 --> 00:36:38.226 A:middle
+
+687
+00:36:35,816 --> 00:36:38,226
 to the next strategy:
 take advantage
 
-00:36:38.356 --> 00:36:40.176 A:middle
+
+688
+00:36:38,356 --> 00:36:40,176
 of the size class
 support in Xcode.
 
-00:36:40.976 --> 00:36:42.866 A:middle
+
+689
+00:36:40,976 --> 00:36:42,866
 You can set up your UI
 to do different things
 
-00:36:43.006 --> 00:36:44.056 A:middle
+
+690
+00:36:43,006 --> 00:36:44,056
 in different size classes.
 
-00:36:44.996 --> 00:36:46.746 A:middle
+
+691
+00:36:44,996 --> 00:36:46,746
 For instance, using
 interface builder
 
-00:36:47.036 --> 00:36:50.386 A:middle
+
+692
+00:36:47,036 --> 00:36:50,386
 when you're editing a storyboard
 or a XIB file, you can add
 
-00:36:50.386 --> 00:36:53.336 A:middle
+
+693
+00:36:50,386 --> 00:36:53,336
 or remove user constraints
 from different size classes,
 
-00:36:54.416 --> 00:36:56.146 A:middle
+
+694
+00:36:54,416 --> 00:36:56,146
 and you can also
 change the attributes
 
-00:36:56.146 --> 00:36:57.616 A:middle
+
+695
+00:36:56,146 --> 00:36:57,616
 of views like the font size.
 
-00:36:58.086 --> 00:37:00.886 A:middle
+
+696
+00:36:58,086 --> 00:37:00,886
 You can also take
 advantage of asset catalogs
 
 
-
-00:36:58.086 --> 00:37:00.886 A:middle
-You can also take
-advantage of asset catalogs
-
-00:37:00.966 --> 00:37:04.056 A:middle
+697
+00:37:00,966 --> 00:37:04,056
 to make different versions
 of images that are used
 
-00:37:04.056 --> 00:37:05.136 A:middle
+
+698
+00:37:04,056 --> 00:37:05,136
 in different size classes.
 
-00:37:06.256 --> 00:37:07.646 A:middle
+
+699
+00:37:06,256 --> 00:37:07,646
 And note that this
 applies not only
 
-00:37:07.646 --> 00:37:10.316 A:middle
+
+700
+00:37:07,646 --> 00:37:10,316
 when you're initially loading
 your UI the first time,
 
-00:37:10.776 --> 00:37:12.726 A:middle
+
+701
+00:37:10,776 --> 00:37:12,726
 but also when dynamic
 size changes happen.
 
-00:37:13.156 --> 00:37:14.856 A:middle
+
+702
+00:37:13,156 --> 00:37:14,856
 We remember all of this
 stuff behind the scenes
 
-00:37:14.856 --> 00:37:17.906 A:middle
+
+703
+00:37:14,856 --> 00:37:17,906
 and we'll apply these things
 when a size change happens.
 
-00:37:18.576 --> 00:37:19.736 A:middle
+
+704
+00:37:18,576 --> 00:37:19,736
 So I'll give an example.
 
-00:37:20.556 --> 00:37:22.156 A:middle
+
+705
+00:37:20,556 --> 00:37:22,156
 Here I've made this
 storyboard and I've set
 
-00:37:22.156 --> 00:37:24.116 A:middle
+
+706
+00:37:22,156 --> 00:37:24,116
 up a UI with two views.
 
-00:37:24.366 --> 00:37:25.526 A:middle
+
+707
+00:37:24,366 --> 00:37:25,526
 There is an image and some text.
 
-00:37:25.526 --> 00:37:28.226 A:middle
+
+708
+00:37:25,526 --> 00:37:28,226
 I put them side by side; I made
 the constraints to do this.
 
-00:37:29.666 --> 00:37:31.846 A:middle
+
+709
+00:37:29,666 --> 00:37:31,846
 I'm working on the
 default UI for my app;
 
-00:37:32.266 --> 00:37:33.866 A:middle
+
+710
+00:37:32,266 --> 00:37:33,866
 that's using the
 'any width' class.
 
-00:37:33.866 --> 00:37:36.996 A:middle
+
+711
+00:37:33,866 --> 00:37:36,996
 I would like to make a version
 that's a little bit different
 
-00:37:37.046 --> 00:37:38.196 A:middle
+
+712
+00:37:37,046 --> 00:37:38,196
 for compact width class.
 
-00:37:38.196 --> 00:37:40.266 A:middle
+
+713
+00:37:38,196 --> 00:37:40,266
 So what I do is I
 click that control,
 
-00:37:40.266 --> 00:37:41.476 A:middle
+
+714
+00:37:40,266 --> 00:37:41,476
 I change it to compact width.
 
-00:37:42.606 --> 00:37:45.416 A:middle
+
+715
+00:37:42,606 --> 00:37:45,416
 I have got the same two views,
 but I changed my constraints
 
-00:37:45.416 --> 00:37:46.776 A:middle
+
+716
+00:37:45,416 --> 00:37:46,776
 around to make the
 layout different.
 
-00:37:47.036 --> 00:37:49.146 A:middle
+
+717
+00:37:47,036 --> 00:37:49,146
 Now the image is on top,
 the text is on the bottom.
 
-00:37:50.616 --> 00:37:52.706 A:middle
+
+718
+00:37:50,616 --> 00:37:52,706
 I did that by clicking
 that control at the bottom,
 
-00:37:52.706 --> 00:37:55.896 A:middle
+
+719
+00:37:52,706 --> 00:37:55,896
 changing it to compact, and you
 see there's blue telling me I'm
 
-00:37:56.046 --> 00:37:58.456 A:middle
+
+720
+00:37:56,046 --> 00:37:58,456
 in a different, more
 specialized mode.
 
 
-
-00:38:00.336 --> 00:38:02.216 A:middle
+721
+00:38:00,336 --> 00:38:02,216
 Now I could at this
 point run my app
 
-00:38:02.606 --> 00:38:04.146 A:middle
+
+722
+00:38:02,606 --> 00:38:04,146
 and try resizing it
 and see what happens.
 
-00:38:04.976 --> 00:38:06.956 A:middle
+
+723
+00:38:04,976 --> 00:38:06,956
 But the nice thing is I don't
 actually have to do that.
 
-00:38:07.066 --> 00:38:09.866 A:middle
+
+724
+00:38:07,066 --> 00:38:09,866
 I can see a live
 preview inside of Xcode.
 
-00:38:10.946 --> 00:38:15.126 A:middle
+
+725
+00:38:10,946 --> 00:38:15,126
 Just use the assistant pane in
 Xcode and you can bring up more
 
-00:38:15.126 --> 00:38:18.346 A:middle
+
+726
+00:38:15,126 --> 00:38:18,346
 than one preview at a
 time of your storyboard
 
-00:38:18.536 --> 00:38:19.676 A:middle
+
+727
+00:38:18,536 --> 00:38:19,676
 in different configurations.
 
-00:38:20.516 --> 00:38:22.226 A:middle
+
+728
+00:38:20,516 --> 00:38:22,226
 So here I have got
 iPad one-third width,
 
-00:38:22.496 --> 00:38:24.016 A:middle
+
+729
+00:38:22,496 --> 00:38:24,016
 that's what happens when
 you Slide Over your app,
 
-00:38:24.776 --> 00:38:26.066 A:middle
+
+730
+00:38:24,776 --> 00:38:26,066
 that's using the compact layout.
 
-00:38:27.186 --> 00:38:28.396 A:middle
+
+731
+00:38:27,186 --> 00:38:28,396
 At the same time I'm looking
 
-00:38:28.606 --> 00:38:30.666 A:middle
+
+732
+00:38:28,606 --> 00:38:30,666
 at iPad full screen,
 the other layout.
 
-00:38:31.686 --> 00:38:33.696 A:middle
+
+733
+00:38:31,686 --> 00:38:33,696
 So you can make as many of
 these previews as you want,
 
-00:38:33.996 --> 00:38:37.316 A:middle
+
+734
+00:38:33,996 --> 00:38:37,316
 just press the "+" button in
 the corner, and choose any size
 
-00:38:37.316 --> 00:38:40.316 A:middle
+
+735
+00:38:37,316 --> 00:38:40,316
 of iPhone, any size of iPad
 multitasking configuration.
 
-00:38:40.316 --> 00:38:49.066 A:middle
+
+736
+00:38:40,316 --> 00:38:49,066
 You can see them all at
 once and they're all live.
 
-00:38:49.356 --> 00:38:50.816 A:middle
+
+737
+00:38:49,356 --> 00:38:50,816
 We can also use asset catalogs.
 
-00:38:51.666 --> 00:38:52.556 A:middle
+
+738
+00:38:51,666 --> 00:38:52,556
 I'll show how that works.
 
-00:38:53.206 --> 00:38:54.396 A:middle
+
+739
+00:38:53,206 --> 00:38:54,396
 Here I've got an asset catalog;
 
-00:38:54.396 --> 00:38:55.856 A:middle
+
+740
+00:38:54,396 --> 00:38:55,856
 I'm looking at one
 particular asset.
 
-00:38:56.846 --> 00:38:59.536 A:middle
+
+741
+00:38:56,846 --> 00:38:59,536
 I'll set this thing
 up to be universal;
 
-00:38:59.786 --> 00:39:00.886 A:middle
+
+742
+00:38:59,786 --> 00:39:00,886
 it'll work on all devices.
 
 
-
-00:38:59.786 --> 00:39:00.886 A:middle
-it'll work on all devices.
-
-00:39:01.796 --> 00:39:04.026 A:middle
+743
+00:39:01,796 --> 00:39:04,026
 And then I'll do much the
 same process as before,
 
-00:39:04.026 --> 00:39:05.586 A:middle
+
+744
+00:39:04,026 --> 00:39:05,586
 I'll set up two different
 versions of it.
 
-00:39:06.186 --> 00:39:07.946 A:middle
+
+745
+00:39:06,186 --> 00:39:07,946
 One for any width, the default.
 
-00:39:08.426 --> 00:39:09.486 A:middle
+
+746
+00:39:08,426 --> 00:39:09,486
 And one for compact width.
 
-00:39:10.876 --> 00:39:12.466 A:middle
+
+747
+00:39:10,876 --> 00:39:12,466
 Now you see I have got
 those two images there,
 
-00:39:12.606 --> 00:39:13.606 A:middle
+
+748
+00:39:12,606 --> 00:39:13,606
 that's the two different
 versions.
 
-00:39:14.446 --> 00:39:16.746 A:middle
+
+749
+00:39:14,446 --> 00:39:16,746
 I can drag in a large
 star to work
 
-00:39:16.746 --> 00:39:19.716 A:middle
+
+750
+00:39:16,746 --> 00:39:19,716
 for the any regular
 width configuration.
 
-00:39:20.586 --> 00:39:24.406 A:middle
+
+751
+00:39:20,586 --> 00:39:24,406
 I drag in a smaller image
 to be the compact width.
 
-00:39:25.436 --> 00:39:26.516 A:middle
+
+752
+00:39:25,436 --> 00:39:26,516
 So that's Xcode.
 
-00:39:27.396 --> 00:39:29.996 A:middle
+
+753
+00:39:27,396 --> 00:39:29,996
 Now, you can also drop down
 and do this in texture,
 
-00:39:30.306 --> 00:39:32.846 A:middle
+
+754
+00:39:30,306 --> 00:39:32,846
 in code yourself, if
 you would like to.
 
-00:39:33.346 --> 00:39:35.456 A:middle
+
+755
+00:39:33,346 --> 00:39:35,456
 Just take advantage of
 the adaptivity callbacks.
 
-00:39:35.456 --> 00:39:37.406 A:middle
+
+756
+00:39:35,456 --> 00:39:37,406
 So here is how to do this.
 
-00:39:37.956 --> 00:39:39.026 A:middle
+
+757
+00:39:37,956 --> 00:39:39,026
 If you are in a view controller,
 
-00:39:39.716 --> 00:39:42.576 A:middle
+
+758
+00:39:39,716 --> 00:39:42,576
 you would override 'will
 transition to trait collection.'
 
-00:39:43.346 --> 00:39:44.986 A:middle
+
+759
+00:39:43,346 --> 00:39:44,986
 We'll give you the
 new collection
 
-00:39:44.986 --> 00:39:46.266 A:middle
+
+760
+00:39:44,986 --> 00:39:46,266
 that we're going to change to.
 
-00:39:47.806 --> 00:39:50.436 A:middle
+
+761
+00:39:47,806 --> 00:39:50,436
 Or you can override 'view
 will transition to size,
 
-00:39:50.436 --> 00:39:51.416 A:middle
+
+762
+00:39:50,436 --> 00:39:51,416
 and we'll give you the new size
 
-00:39:51.416 --> 00:39:52.556 A:middle
+
+763
+00:39:51,416 --> 00:39:52,556
 that we're going
 to transition to.
 
-00:39:53.926 --> 00:39:57.036 A:middle
+
+764
+00:39:53,926 --> 00:39:57,036
 Now let's say I want my app
 to have different UI depending
 
-00:39:57.036 --> 00:39:58.526 A:middle
+
+765
+00:39:57,036 --> 00:39:58,526
 on the horizontal size class.
 
-00:39:58.526 --> 00:39:59.186 A:middle
+
+766
+00:39:58,526 --> 00:39:59,186
 That's pretty normal.
 
-00:39:59.876 --> 00:40:02.776 A:middle
+
+767
+00:39:59,876 --> 00:40:02,776
 How we'll do that is
 override 'will transition
 
 
-
-00:39:59.876 --> 00:40:02.776 A:middle
-How we'll do that is
-override 'will transition
-
-00:40:02.776 --> 00:40:03.516 A:middle
+768
+00:40:02,776 --> 00:40:03,516
 to trait collection.'
 
-00:40:04.996 --> 00:40:07.676 A:middle
+
+769
+00:40:04,996 --> 00:40:07,676
 And the first thing we
 should do is call 'super,
 
-00:40:07.996 --> 00:40:09.756 A:middle
+
+770
+00:40:07,996 --> 00:40:09,756
 let the system do what it
 would normally would do.
 
-00:40:10.996 --> 00:40:11.816 A:middle
+
+771
+00:40:10,996 --> 00:40:11,816
 Then we'll add our code.
 
-00:40:12.576 --> 00:40:14.966 A:middle
+
+772
+00:40:12,576 --> 00:40:14,966
 We'll look at the new
 collection's horizontal size
 
-00:40:15.066 --> 00:40:17.876 A:middle
+
+773
+00:40:15,066 --> 00:40:17,876
 class, and depending
 on what that is,
 
-00:40:18.266 --> 00:40:19.076 A:middle
+
+774
+00:40:18,266 --> 00:40:19,076
 we'll do something different.
 
-00:40:20.106 --> 00:40:21.316 A:middle
+
+775
+00:40:20,106 --> 00:40:21,316
 So here is where you
 put your code in.
 
-00:40:22.616 --> 00:40:26.356 A:middle
+
+776
+00:40:22,616 --> 00:40:26,356
 If it is compact, change
 your UI for a compact width.
 
-00:40:26.356 --> 00:40:29.546 A:middle
+
+777
+00:40:26,356 --> 00:40:29,546
 If it's regular, change
 your UI for a regular width.
 
-00:40:30.226 --> 00:40:32.066 A:middle
+
+778
+00:40:30,226 --> 00:40:32,066
 If it's unspecified, that
 means we're in the middle
 
-00:40:32.066 --> 00:40:33.846 A:middle
+
+779
+00:40:32,066 --> 00:40:33,846
 of setting things up
 or tearing them down,
 
-00:40:34.076 --> 00:40:34.896 A:middle
+
+780
+00:40:34,076 --> 00:40:34,896
 and just don't do anything.
 
-00:40:36.856 --> 00:40:39.486 A:middle
+
+781
+00:40:36,856 --> 00:40:39,486
 Now let's say I have that
 similar change, but I want it
 
-00:40:39.486 --> 00:40:42.346 A:middle
+
+782
+00:40:39,486 --> 00:40:42,346
 to animate alongside other
 things, like the case
 
-00:40:42.346 --> 00:40:45.296 A:middle
+
+783
+00:40:42,346 --> 00:40:45,296
 when I rotated the iPad,
 I would like my change
 
-00:40:45.326 --> 00:40:47.606 A:middle
+
+784
+00:40:45,326 --> 00:40:47,606
 to animate alongside that
 rotation, at the same time.
 
-00:40:48.576 --> 00:40:48.976 A:middle
+
+785
+00:40:48,576 --> 00:40:48,976
 Here is how.
 
-00:40:50.136 --> 00:40:51.786 A:middle
+
+786
+00:40:50,136 --> 00:40:51,786
 We start out exactly
 the same way.
 
-00:40:52.626 --> 00:40:54.136 A:middle
+
+787
+00:40:52,626 --> 00:40:54,136
 Override the same
 method; call super.
 
-00:40:54.946 --> 00:40:57.146 A:middle
+
+788
+00:40:54,946 --> 00:40:57,146
 Then, instead of making
 the change directly,
 
-00:40:57.536 --> 00:41:01.026 A:middle
+
+789
+00:40:57,536 --> 00:41:01,026
 we'll provide a block and
 we'll put our changes inside
 
 
-
-00:40:57.536 --> 00:41:01.026 A:middle
-we'll provide a block and
-we'll put our changes inside
-
-00:41:01.026 --> 00:41:01.606 A:middle
+790
+00:41:01,026 --> 00:41:01,606
 of that block.
 
-00:41:02.366 --> 00:41:03.886 A:middle
+
+791
+00:41:02,366 --> 00:41:03,886
 So, here we've got a
 block, called 'animation,
 
-00:41:03.886 --> 00:41:08.016 A:middle
+
+792
+00:41:03,886 --> 00:41:08,016
 and we'll put our code to
 change the UI inside of there.
 
-00:41:08.216 --> 00:41:09.396 A:middle
+
+793
+00:41:08,216 --> 00:41:09,396
 Then pass that block
 
-00:41:09.796 --> 00:41:12.356 A:middle
+
+794
+00:41:09,796 --> 00:41:12,356
 to the coordinator's 'animate
 alongside transition' method.
 
-00:41:13.316 --> 00:41:15.806 A:middle
+
+795
+00:41:13,316 --> 00:41:15,806
 It will take care of remembering
 that block and calling it
 
-00:41:15.806 --> 00:41:18.546 A:middle
+
+796
+00:41:15,806 --> 00:41:18,546
 at the right time, once
 the animation is set up.
 
-00:41:19.126 --> 00:41:20.316 A:middle
+
+797
+00:41:19,126 --> 00:41:20,316
 And any changes you make inside
 
-00:41:20.316 --> 00:41:22.026 A:middle
+
+798
+00:41:20,316 --> 00:41:22,026
 that block will automatically
 get animated.
 
-00:41:22.506 --> 00:41:26.056 A:middle
+
+799
+00:41:22,506 --> 00:41:26,056
 So that's how to do it at
 the low level, in code.
 
-00:41:27.146 --> 00:41:28.776 A:middle
+
+800
+00:41:27,146 --> 00:41:28,776
 I'll talk about some
 of the high-level API
 
-00:41:28.776 --> 00:41:34.756 A:middle
+
+801
+00:41:28,776 --> 00:41:34,756
 that UIKit provides to you.
 
-00:41:35.586 --> 00:41:36.966 A:middle
+
+802
+00:41:35,586 --> 00:41:36,966
 First, as Jacob mentioned
 earlier,
 
-00:41:36.966 --> 00:41:38.686 A:middle
+
+803
+00:41:36,966 --> 00:41:38,686
 there is adaptive
 presentation controllers.
 
-00:41:39.976 --> 00:41:41.166 A:middle
+
+804
+00:41:39,976 --> 00:41:41,166
 Second, there is the classics --
 
-00:41:41.856 --> 00:41:43.696 A:middle
+
+805
+00:41:41,856 --> 00:41:43,696
 UI Table View, UI
 Collection View.
 
-00:41:43.746 --> 00:41:46.546 A:middle
+
+806
+00:41:43,746 --> 00:41:46,546
 These let you build up a
 larger UI out of small things
 
-00:41:46.546 --> 00:41:49.376 A:middle
+
+807
+00:41:46,546 --> 00:41:49,376
 like a single row or a
 single item in a collection.
 
-00:41:50.946 --> 00:41:53.666 A:middle
+
+808
+00:41:50,946 --> 00:41:53,666
 Also new in iOS 9,
 there is UI Stack View.
 
-00:41:54.476 --> 00:41:56.426 A:middle
+
+809
+00:41:54,476 --> 00:41:56,426
 This lets you take a list
 of views and put them
 
-00:41:56.426 --> 00:41:58.656 A:middle
+
+810
+00:41:56,426 --> 00:41:58,656
 in a vertical stack
 or a horizontal row,
 
-00:41:58.656 --> 00:42:01.146 A:middle
+
+811
+00:41:58,656 --> 00:42:01,146
 and set up some parameters
 on how they get laid out.
 
 
-
-00:41:58.656 --> 00:42:01.146 A:middle
-and set up some parameters
-on how they get laid out.
-
-00:42:01.906 --> 00:42:03.436 A:middle
+812
+00:42:01,906 --> 00:42:03,436
 Again, to find out
 more about that,
 
-00:42:03.546 --> 00:42:05.626 A:middle
+
+813
+00:42:03,546 --> 00:42:05,626
 check out the first
 Auto Layout talk.
 
-00:42:06.636 --> 00:42:09.976 A:middle
+
+814
+00:42:06,636 --> 00:42:09,976
 The last bit of high-level API
 is big enough it deserves its
 
-00:42:09.976 --> 00:42:10.386 A:middle
+
+815
+00:42:09,976 --> 00:42:10,386
 own number.
 
-00:42:11.006 --> 00:42:12.716 A:middle
+
+816
+00:42:11,006 --> 00:42:12,716
 And that's UI Split
 View Controller.
 
-00:42:13.856 --> 00:42:16.176 A:middle
+
+817
+00:42:13,856 --> 00:42:16,176
 We use this in a lot
 of our apps like Mail
 
-00:42:16.266 --> 00:42:17.356 A:middle
+
+818
+00:42:16,266 --> 00:42:17,356
 and Messages and Notes.
 
-00:42:18.296 --> 00:42:21.986 A:middle
+
+819
+00:42:18,296 --> 00:42:21,986
 And if it makes sense
 for your app too, use it.
 
-00:42:22.536 --> 00:42:24.276 A:middle
+
+820
+00:42:22,536 --> 00:42:24,276
 I'll give you Mail
 as an example.
 
-00:42:24.486 --> 00:42:27.286 A:middle
+
+821
+00:42:24,486 --> 00:42:27,286
 Here we're looking at full
 screen iPad and you see
 
-00:42:27.286 --> 00:42:29.426 A:middle
+
+822
+00:42:27,286 --> 00:42:29,426
 that the app is divided
 into two parts.
 
-00:42:29.976 --> 00:42:31.346 A:middle
+
+823
+00:42:29,976 --> 00:42:31,346
 And note that this
 isn't the same thing
 
-00:42:31.346 --> 00:42:33.986 A:middle
+
+824
+00:42:31,346 --> 00:42:33,986
 as split view multitasking where
 you're looking at two apps.
 
-00:42:34.056 --> 00:42:35.526 A:middle
+
+825
+00:42:34,056 --> 00:42:35,526
 This is one app.
 
-00:42:36.556 --> 00:42:40.176 A:middle
+
+826
+00:42:36,556 --> 00:42:40,176
 So, we have on one side a
 list of messages to look at.
 
-00:42:40.486 --> 00:42:41.126 A:middle
+
+827
+00:42:40,486 --> 00:42:41,126
 You can pick one.
 
-00:42:42.216 --> 00:42:45.786 A:middle
+
+828
+00:42:42,216 --> 00:42:45,786
 On the other side, we have a
 view that shows the details.
 
-00:42:46.276 --> 00:42:47.856 A:middle
+
+829
+00:42:46,276 --> 00:42:47,856
 In this case it is a
 particular message.
 
-00:42:48.426 --> 00:42:53.346 A:middle
+
+830
+00:42:48,426 --> 00:42:53,346
 So if your app can handle a
 configuration like that or works
 
-00:42:53.396 --> 00:42:55.356 A:middle
+
+831
+00:42:53,396 --> 00:42:55,356
 that way, we really
 highly recommend
 
-00:42:55.356 --> 00:42:57.126 A:middle
+
+832
+00:42:55,356 --> 00:42:57,126
 that you adopt Split
 View Controller,
 
-00:42:57.126 --> 00:42:59.996 A:middle
+
+833
+00:42:57,126 --> 00:42:59,996
 because it will do a lot of work
 for you in multitasking cases.
 
 
-
-00:43:00.066 --> 00:43:01.586 A:middle
+834
+00:43:00,066 --> 00:43:01,586
 I'll show you that
 a little bit later.
 
-00:43:02.586 --> 00:43:03.776 A:middle
+
+835
+00:43:02,586 --> 00:43:03,776
 But first, here is
 how you adopt it.
 
-00:43:04.946 --> 00:43:07.256 A:middle
+
+836
+00:43:04,946 --> 00:43:07,256
 You make a UI Split View
 Controller in your app.
 
-00:43:07.666 --> 00:43:09.406 A:middle
+
+837
+00:43:07,666 --> 00:43:09,406
 That's typically the
 root view controller,
 
-00:43:09.476 --> 00:43:11.126 A:middle
+
+838
+00:43:09,476 --> 00:43:11,126
 so the top level of your UI.
 
-00:43:11.666 --> 00:43:15.116 A:middle
+
+839
+00:43:11,666 --> 00:43:15,116
 And it is a container view
 controller, so it has children.
 
-00:43:15.466 --> 00:43:18.566 A:middle
+
+840
+00:43:15,466 --> 00:43:18,566
 We call these the primary and
 the secondary view controllers.
 
-00:43:19.926 --> 00:43:24.366 A:middle
+
+841
+00:43:19,926 --> 00:43:24,366
 In Mail, these are a table
 view that contains that list
 
-00:43:24.366 --> 00:43:27.606 A:middle
+
+842
+00:43:24,366 --> 00:43:27,606
 of messages, and on
 the secondary side,
 
-00:43:27.766 --> 00:43:29.706 A:middle
+
+843
+00:43:27,766 --> 00:43:29,706
 a custom view showing a message.
 
-00:43:30.236 --> 00:43:31.586 A:middle
+
+844
+00:43:30,236 --> 00:43:31,586
 In your app you fill these in.
 
-00:43:31.836 --> 00:43:33.096 A:middle
+
+845
+00:43:31,836 --> 00:43:33,096
 You provide the view
 controllers.
 
-00:43:33.996 --> 00:43:37.486 A:middle
+
+846
+00:43:33,996 --> 00:43:37,486
 UI Split View Controller is
 responsible for deciding where
 
-00:43:37.686 --> 00:43:40.546 A:middle
+
+847
+00:43:37,686 --> 00:43:40,546
 and when to show these
 two view controllers.
 
-00:43:42.146 --> 00:43:45.256 A:middle
+
+848
+00:43:42,146 --> 00:43:45,256
 Going back to Mail, in full
 screen we have got lots of room;
 
-00:43:45.256 --> 00:43:47.076 A:middle
+
+849
+00:43:45,256 --> 00:43:47,076
 we can show both of
 these side by side.
 
-00:43:48.076 --> 00:43:51.656 A:middle
+
+850
+00:43:48,076 --> 00:43:51,656
 What happens if the user
 switches to a different app
 
-00:43:51.656 --> 00:43:53.846 A:middle
+
+851
+00:43:51,656 --> 00:43:53,846
 and then slides Mail
 over in from the side?
 
-00:43:54.986 --> 00:43:57.956 A:middle
+
+852
+00:43:54,986 --> 00:43:57,956
 In that case it is a compact
 width, there is less room,
 
-00:43:58.576 --> 00:44:00.666 A:middle
+
+853
+00:43:58,576 --> 00:44:00,666
 so the Split View
 Controller adapts to this.
 
 
-
-00:43:58.576 --> 00:44:00.666 A:middle
-so the Split View
-Controller adapts to this.
-
-00:44:01.046 --> 00:44:03.886 A:middle
+854
+00:44:01,046 --> 00:44:03,886
 It decides it will show the
 secondary view controller
 
-00:44:03.886 --> 00:44:05.296 A:middle
+
+855
+00:44:03,886 --> 00:44:05,296
 to start that mail message,
 
-00:44:06.226 --> 00:44:09.096 A:middle
+
+856
+00:44:06,226 --> 00:44:09,096
 and it also provides
 navigation controls to go back
 
-00:44:09.886 --> 00:44:11.326 A:middle
+
+857
+00:44:09,886 --> 00:44:11,326
 to the other list,
 the primary list.
 
-00:44:12.336 --> 00:44:14.866 A:middle
+
+858
+00:44:12,336 --> 00:44:14,866
 Once the user picks one of
 those, they can go forward again
 
-00:44:14.866 --> 00:44:15.736 A:middle
+
+859
+00:44:14,866 --> 00:44:15,736
 to the secondary list.
 
-00:44:17.176 --> 00:44:19.126 A:middle
+
+860
+00:44:17,176 --> 00:44:19,126
 So those view controllers
 are still independent;
 
-00:44:19.226 --> 00:44:20.666 A:middle
+
+861
+00:44:19,226 --> 00:44:20,666
 they didn't have to make
 any of these choices.
 
-00:44:22.426 --> 00:44:25.546 A:middle
+
+862
+00:44:22,426 --> 00:44:25,546
 So the thing to note here is
 
-00:44:25.546 --> 00:44:27.986 A:middle
+
+863
+00:44:25,546 --> 00:44:27,986
 that these are the same
 exact two view controllers
 
-00:44:28.016 --> 00:44:29.186 A:middle
+
+864
+00:44:28,016 --> 00:44:29,186
 that we were looking at earlier.
 
-00:44:29.576 --> 00:44:33.966 A:middle
+
+865
+00:44:29,576 --> 00:44:33,966
 The differences are, they're
 smaller, and we're navigating
 
-00:44:33.966 --> 00:44:35.236 A:middle
+
+866
+00:44:33,966 --> 00:44:35,236
 between them in a different way.
 
-00:44:37.166 --> 00:44:39.716 A:middle
+
+867
+00:44:37,166 --> 00:44:39,716
 So if you want to try this out,
 you have already got the code
 
-00:44:39.716 --> 00:44:40.606 A:middle
+
+868
+00:44:39,716 --> 00:44:40,606
 on your computer, in fact.
 
-00:44:40.956 --> 00:44:44.756 A:middle
+
+869
+00:44:40,956 --> 00:44:44,756
 Just make a new Xcode, in Xcode
 make a new iOS application,
 
-00:44:45.316 --> 00:44:47.506 A:middle
+
+870
+00:44:45,316 --> 00:44:47,506
 and use the 'master-detail
 application' template.
 
-00:44:48.006 --> 00:44:49.816 A:middle
+
+871
+00:44:48,006 --> 00:44:49,816
 It is automatically set
 up with a storyboard
 
-00:44:49.906 --> 00:44:51.616 A:middle
+
+872
+00:44:49,906 --> 00:44:51,616
 that contains a Split
 View Controller
 
-00:44:52.166 --> 00:44:53.526 A:middle
+
+873
+00:44:52,166 --> 00:44:53,526
 and view controllers
 for each side.
 
-00:44:54.406 --> 00:44:56.286 A:middle
+
+874
+00:44:54,406 --> 00:44:56,286
 You can build on this
 to make your own app
 
-00:44:56.656 --> 00:44:58.346 A:middle
+
+875
+00:44:56,656 --> 00:44:58,346
 or you can just use it
 as a test bed to play
 
-00:44:58.346 --> 00:45:02.306 A:middle
+
+876
+00:44:58,346 --> 00:45:02,306
 with Split View Controller
 and see what it can do.
 
 
-
-00:44:58.346 --> 00:45:02.306 A:middle
-with Split View Controller
-and see what it can do.
-
-00:45:02.306 --> 00:45:03.816 A:middle
+877
+00:45:02,306 --> 00:45:03,816
 So those are the 6
 strategies I'll give you.
 
-00:45:04.766 --> 00:45:12.046 A:middle
+
+878
+00:45:04,766 --> 00:45:12,046
 And please mix and match these
 however makes sense in your app.
 
-00:45:12.046 --> 00:45:13.366 A:middle
+
+879
+00:45:12,046 --> 00:45:13,366
 You can take a look
 at our sample code
 
-00:45:13.366 --> 00:45:14.596 A:middle
+
+880
+00:45:13,366 --> 00:45:14,596
 to see all of them in action.
 
-00:45:15.006 --> 00:45:16.776 A:middle
+
+881
+00:45:15,006 --> 00:45:16,776
 This is an app called
 'Adaptive Photos.'
 
-00:45:16.776 --> 00:45:18.276 A:middle
+
+882
+00:45:16,776 --> 00:45:18,276
 You can search for it
 on the developer site.
 
-00:45:19.716 --> 00:45:22.856 A:middle
+
+883
+00:45:19,716 --> 00:45:22,856
 Try it out in all sizes
 of iPhone and iPad
 
-00:45:22.856 --> 00:45:25.116 A:middle
+
+884
+00:45:22,856 --> 00:45:25,116
 and iPad multitasking
 and see what it can do.
 
-00:45:25.726 --> 00:45:28.326 A:middle
+
+885
+00:45:25,726 --> 00:45:28,326
 So that's the strategies.
 
-00:45:28.326 --> 00:45:31.046 A:middle
+
+886
+00:45:28,326 --> 00:45:31,046
 If you use these, your app
 will start resizing nicely;
 
-00:45:31.146 --> 00:45:32.666 A:middle
+
+887
+00:45:31,146 --> 00:45:32,666
 it will probably
 work pretty well.
 
-00:45:33.206 --> 00:45:35.056 A:middle
+
+888
+00:45:33,206 --> 00:45:35,056
 But you will run into some
 new things that happen.
 
-00:45:36.316 --> 00:45:38.026 A:middle
+
+889
+00:45:36,316 --> 00:45:38,026
 So once you adopt multitasking,
 
-00:45:38.026 --> 00:45:39.586 A:middle
+
+890
+00:45:38,026 --> 00:45:39,586
 these new things may
 be a little tricky.
 
-00:45:40.126 --> 00:45:42.056 A:middle
+
+891
+00:45:40,126 --> 00:45:42,056
 I'll give you some guidelines
 on how to handle them.
 
-00:45:43.256 --> 00:45:45.026 A:middle
+
+892
+00:45:43,256 --> 00:45:45,026
 The first guideline,
 most important,
 
-00:45:45.956 --> 00:45:47.866 A:middle
+
+893
+00:45:45,956 --> 00:45:47,866
 the user controls
 your app's size.
 
-00:45:48.856 --> 00:45:51.266 A:middle
+
+894
+00:45:48,856 --> 00:45:51,266
 The user is always in
 control of how big things are.
 
-00:45:52.266 --> 00:45:54.926 A:middle
+
+895
+00:45:52,266 --> 00:45:54,926
 So your app cannot prevent
 size changes from happening.
 
-00:45:55.166 --> 00:45:56.576 A:middle
+
+896
+00:45:55,166 --> 00:45:56,576
 I know sometimes
 it is inconvenient
 
-00:45:56.636 --> 00:45:57.856 A:middle
+
+897
+00:45:56,636 --> 00:45:57,856
 but your app can't prevent it.
 
-00:45:58.896 --> 00:46:01.716 A:middle
+
+898
+00:45:58,896 --> 00:46:01,716
 Also your app can't
 cause a size change.
 
 
-
-00:45:58.896 --> 00:46:01.716 A:middle
-Also your app can't
-cause a size change.
-
-00:46:02.256 --> 00:46:04.666 A:middle
+899
+00:46:02,256 --> 00:46:04,666
 You can't say, 'My app wants
 to be full screen now.'
 
-00:46:04.666 --> 00:46:05.436 A:middle
+
+900
+00:46:04,666 --> 00:46:05,436
 It doesn't work that way.
 
-00:46:06.946 --> 00:46:10.346 A:middle
+
+901
+00:46:06,946 --> 00:46:10,346
 And we really do mean that size
 changes can happen at any time.
 
-00:46:10.516 --> 00:46:13.646 A:middle
+
+902
+00:46:10,516 --> 00:46:13,646
 The user might choose to
 resize the apps any time.
 
-00:46:13.886 --> 00:46:15.046 A:middle
+
+903
+00:46:13,886 --> 00:46:15,046
 It's just like pressing
 the Home button.
 
-00:46:15.266 --> 00:46:17.656 A:middle
+
+904
+00:46:15,266 --> 00:46:17,656
 They can do that any time.
 
-00:46:17.656 --> 00:46:19.256 A:middle
+
+905
+00:46:17,656 --> 00:46:19,256
 So how do we react
 to size changes?
 
-00:46:19.396 --> 00:46:22.456 A:middle
+
+906
+00:46:19,396 --> 00:46:22,456
 Well, our guideline is
 keep the user oriented.
 
-00:46:23.036 --> 00:46:24.206 A:middle
+
+907
+00:46:23,036 --> 00:46:24,206
 Don't let the user get lost.
 
-00:46:25.416 --> 00:46:27.796 A:middle
+
+908
+00:46:25,416 --> 00:46:27,796
 I'll illustrate that with a
 concrete example of a real app.
 
-00:46:27.796 --> 00:46:29.936 A:middle
+
+909
+00:46:27,796 --> 00:46:29,936
 I have got a To-Do List app.
 
-00:46:30.816 --> 00:46:32.736 A:middle
+
+910
+00:46:30,816 --> 00:46:32,736
 It has got a bunch of
 items I need to check off.
 
-00:46:32.736 --> 00:46:34.776 A:middle
+
+911
+00:46:32,736 --> 00:46:34,776
 And I have got them
 in three categories:
 
-00:46:35.006 --> 00:46:36.686 A:middle
+
+912
+00:46:35,006 --> 00:46:36,686
 home, work, and school.
 
-00:46:36.686 --> 00:46:41.326 A:middle
+
+913
+00:46:36,686 --> 00:46:41,326
 Now I'll put on my designer hat
 and I'll choose to make some UIs
 
-00:46:41.326 --> 00:46:43.536 A:middle
+
+914
+00:46:41,326 --> 00:46:43,536
 for regular width
 and compact width.
 
-00:46:44.926 --> 00:46:46.776 A:middle
+
+915
+00:46:44,926 --> 00:46:46,776
 In regular width, I think,
 'Well, it makes sense
 
-00:46:46.806 --> 00:46:47.996 A:middle
+
+916
+00:46:46,806 --> 00:46:47,996
 to put these all
 in a scroll view.
 
-00:46:47.996 --> 00:46:49.196 A:middle
+
+917
+00:46:47,996 --> 00:46:49,196
 We'll put them on
 top of each other.
 
-00:46:49.786 --> 00:46:52.006 A:middle
+
+918
+00:46:49,786 --> 00:46:52,006
 We'll let the user
 scroll through them.'
 
-00:46:54.356 --> 00:46:57.826 A:middle
+
+919
+00:46:54,356 --> 00:46:57,826
 In compact width, I think,
 'Well, let's just show one
 
-00:46:58.326 --> 00:47:02.906 A:middle
+
+920
+00:46:58,326 --> 00:47:02,906
 of these categories at a
 time, each on a separate page,
 
 
-
-00:46:58.326 --> 00:47:02.906 A:middle
-of these categories at a
-time, each on a separate page,
-
-00:47:03.086 --> 00:47:05.046 A:middle
+921
+00:47:03,086 --> 00:47:05,046
 and let the user scroll
 from page to page.
 
-00:47:05.486 --> 00:47:08.696 A:middle
+
+922
+00:47:05,486 --> 00:47:08,696
 But only one is visible
 at a time.'
 
-00:47:08.926 --> 00:47:09.546 A:middle
+
+923
+00:47:08,926 --> 00:47:09,546
 So that's great.
 
-00:47:09.756 --> 00:47:10.786 A:middle
+
+924
+00:47:09,756 --> 00:47:10,786
 I have got two UIs.
 
-00:47:10.786 --> 00:47:13.056 A:middle
+
+925
+00:47:10,786 --> 00:47:13,056
 But now I need to think
 about how to change
 
-00:47:13.176 --> 00:47:14.006 A:middle
+
+926
+00:47:13,176 --> 00:47:14,006
 from one to the other.
 
-00:47:15.226 --> 00:47:17.246 A:middle
+
+927
+00:47:15,226 --> 00:47:17,246
 Let's say I'm looking
 at School right now.
 
-00:47:18.486 --> 00:47:21.166 A:middle
+
+928
+00:47:18,486 --> 00:47:21,166
 And the user resizes the
 app to be regular width.
 
-00:47:21.466 --> 00:47:21.896 A:middle
+
+929
+00:47:21,466 --> 00:47:21,896
 What do I do?
 
-00:47:23.116 --> 00:47:26.366 A:middle
+
+930
+00:47:23,116 --> 00:47:26,366
 Well, by default, if I just
 go and make a new scroll view,
 
-00:47:26.366 --> 00:47:28.886 A:middle
+
+931
+00:47:26,366 --> 00:47:28,886
 and put my stuff into it, it's
 probably going to be scrolled
 
-00:47:28.886 --> 00:47:30.426 A:middle
+
+932
+00:47:28,886 --> 00:47:30,426
 to the very top, at (0,0),
 
-00:47:31.046 --> 00:47:32.856 A:middle
+
+933
+00:47:31,046 --> 00:47:32,856
 and now School isn't
 visible anymore.
 
-00:47:33.566 --> 00:47:34.586 A:middle
+
+934
+00:47:33,566 --> 00:47:34,586
 So the user might get lost.
 
-00:47:34.796 --> 00:47:35.556 A:middle
+
+935
+00:47:34,796 --> 00:47:35,556
 We don't want to do that.
 
-00:47:36.426 --> 00:47:39.336 A:middle
+
+936
+00:47:36,426 --> 00:47:39,336
 The app should choose and make
 a good decision and scroll
 
-00:47:39.336 --> 00:47:40.846 A:middle
+
+937
+00:47:39,336 --> 00:47:40,846
 so that the same thing
 is visible again.
 
-00:47:41.006 --> 00:47:41.936 A:middle
+
+938
+00:47:41,006 --> 00:47:41,936
 So School is visible.
 
-00:47:43.016 --> 00:47:44.916 A:middle
+
+939
+00:47:43,016 --> 00:47:44,916
 This doesn't happen
 automatically; your app needs
 
-00:47:44.916 --> 00:47:46.116 A:middle
+
+940
+00:47:44,916 --> 00:47:46,116
 to make this kind of decision.
 
-00:47:46.806 --> 00:47:49.936 A:middle
+
+941
+00:47:46,806 --> 00:47:49,936
 Let's say the user keeps
 working with the app,
 
-00:47:50.006 --> 00:47:51.076 A:middle
+
+942
+00:47:50,006 --> 00:47:51,076
 they scroll down a little bit.
 
-00:47:51.746 --> 00:47:53.346 A:middle
+
+943
+00:47:51,746 --> 00:47:53,346
 They write some code;
 they check that off.
 
-00:47:53.376 --> 00:47:54.496 A:middle
+
+944
+00:47:53,376 --> 00:47:54,496
 Great. Wrote some code today.
 
-00:47:55.236 --> 00:47:59.256 A:middle
+
+945
+00:47:55,236 --> 00:47:59,256
 And then they decide to
 resize the app to be compact.
 
 
-
-00:48:00.416 --> 00:48:00.846 A:middle
+946
+00:48:00,416 --> 00:48:00,846
 What do we do?
 
-00:48:00.846 --> 00:48:04.586 A:middle
+
+947
+00:48:00,846 --> 00:48:04,586
 You will see that all three
 categories are visible
 
-00:48:04.586 --> 00:48:06.106 A:middle
+
+948
+00:48:04,586 --> 00:48:06,106
 on the screen at the same time.
 
-00:48:06.106 --> 00:48:08.416 A:middle
+
+949
+00:48:06,106 --> 00:48:08,416
 So we could make a case for
 any one of them to be visible.
 
-00:48:09.316 --> 00:48:10.826 A:middle
+
+950
+00:48:09,316 --> 00:48:10,826
 But in this case it
 probably makes sense,
 
-00:48:11.056 --> 00:48:12.756 A:middle
+
+951
+00:48:11,056 --> 00:48:12,756
 since they last checked
 something off in Work,
 
-00:48:13.916 --> 00:48:14.966 A:middle
+
+952
+00:48:13,916 --> 00:48:14,966
 and they're still looking at it
 
-00:48:14.966 --> 00:48:16.076 A:middle
+
+953
+00:48:14,966 --> 00:48:16,076
 and they haven't
 controlled away,
 
-00:48:16.426 --> 00:48:18.076 A:middle
+
+954
+00:48:16,426 --> 00:48:18,076
 that we should choose
 to go to that page.
 
-00:48:18.846 --> 00:48:20.856 A:middle
+
+955
+00:48:18,846 --> 00:48:20,856
 But again, that's a
 decision the app had to make.
 
-00:48:21.016 --> 00:48:24.946 A:middle
+
+956
+00:48:21,016 --> 00:48:24,946
 And your app will have to
 make decisions just like this.
 
-00:48:25.426 --> 00:48:32.886 A:middle
+
+957
+00:48:25,426 --> 00:48:32,886
 So to keep the user oriented,
 don't make abrupt changes
 
-00:48:33.286 --> 00:48:35.026 A:middle
+
+958
+00:48:33,286 --> 00:48:35,026
 when the size changes
 from one thing to another.
 
-00:48:35.226 --> 00:48:36.566 A:middle
+
+959
+00:48:35,226 --> 00:48:36,566
 Try to keep the same
 things visible.
 
-00:48:37.916 --> 00:48:39.546 A:middle
+
+960
+00:48:37,916 --> 00:48:39,546
 You might have to be
 smart in new ways.
 
-00:48:40.146 --> 00:48:41.796 A:middle
+
+961
+00:48:40,146 --> 00:48:41,796
 You might have to do
 something like keep track
 
-00:48:41.796 --> 00:48:44.226 A:middle
+
+962
+00:48:41,796 --> 00:48:44,226
 of what the user most
 recently looked at or touched
 
-00:48:44.676 --> 00:48:47.316 A:middle
+
+963
+00:48:44,676 --> 00:48:47,316
 that you didn't have
 to do before.
 
-00:48:47.486 --> 00:48:49.586 A:middle
+
+964
+00:48:47,486 --> 00:48:49,586
 And also it is especially
 important when you're going
 
-00:48:49.586 --> 00:48:52.476 A:middle
+
+965
+00:48:49,586 --> 00:48:52,476
 from large sizes to small sizes,
 because you can't show all
 
-00:48:52.476 --> 00:48:53.856 A:middle
+
+966
+00:48:52,476 --> 00:48:53,856
 of the stuff that you
 were showing before.
 
-00:48:55.726 --> 00:48:58.446 A:middle
+
+967
+00:48:55,726 --> 00:48:58,446
 So speaking of resizing,
 here is another new thing
 
-00:48:58.446 --> 00:48:59.926 A:middle
+
+968
+00:48:58,446 --> 00:48:59,926
 that can happen with --
 
 
-
-00:49:00.166 --> 00:49:02.056 A:middle
+969
+00:49:00,166 --> 00:49:02,056
 once your app has
 adopted multitasking.
 
-00:49:03.066 --> 00:49:04.186 A:middle
+
+970
+00:49:03,066 --> 00:49:04,186
 Let's say your app
 becomes inactive;
 
-00:49:04.226 --> 00:49:05.496 A:middle
+
+971
+00:49:04,226 --> 00:49:05,496
 the user presses
 the Home button.
 
-00:49:06.616 --> 00:49:09.406 A:middle
+
+972
+00:49:06,616 --> 00:49:09,406
 After that happens, your
 app's size may change.
 
-00:49:09.716 --> 00:49:11.466 A:middle
+
+973
+00:49:09,716 --> 00:49:11,466
 The system might want
 to take a snapshot
 
-00:49:11.466 --> 00:49:12.926 A:middle
+
+974
+00:49:11,466 --> 00:49:12,926
 of your app in a different size.
 
-00:49:14.486 --> 00:49:16.886 A:middle
+
+975
+00:49:14,486 --> 00:49:16,886
 When that happens, the
 same adaptivity methods
 
-00:49:16.886 --> 00:49:20.266 A:middle
+
+976
+00:49:16,886 --> 00:49:20,266
 as before will get called,
 but nothing will be visible,
 
-00:49:20.416 --> 00:49:21.556 A:middle
+
+977
+00:49:20,416 --> 00:49:21,556
 the user won't see any of this.
 
-00:49:22.596 --> 00:49:25.246 A:middle
+
+978
+00:49:22,596 --> 00:49:25,246
 When it is done, the
 system will restore you back
 
-00:49:25.286 --> 00:49:26.166 A:middle
+
+979
+00:49:25,286 --> 00:49:26,166
 to the original size.
 
-00:49:27.226 --> 00:49:28.686 A:middle
+
+980
+00:49:27,226 --> 00:49:28,686
 Now this can be a little
 tricky to deal with,
 
-00:49:28.756 --> 00:49:30.496 A:middle
+
+981
+00:49:28,756 --> 00:49:30,496
 but I'll give you some
 guidelines on how to handle it.
 
-00:49:30.626 --> 00:49:31.896 A:middle
+
+982
+00:49:30,626 --> 00:49:31,896
 And I'll show you
 a concrete example.
 
-00:49:32.646 --> 00:49:33.536 A:middle
+
+983
+00:49:32,646 --> 00:49:33,536
 I have got my app again.
 
-00:49:34.606 --> 00:49:36.896 A:middle
+
+984
+00:49:34,606 --> 00:49:36,896
 I'm active; it is
 in compact width
 
-00:49:36.896 --> 00:49:38.196 A:middle
+
+985
+00:49:36,896 --> 00:49:38,196
 and I'm looking at
 that Work page.
 
-00:49:38.986 --> 00:49:40.426 A:middle
+
+986
+00:49:38,986 --> 00:49:40,426
 Now the user presses
 the Home button.
 
-00:49:41.836 --> 00:49:44.326 A:middle
+
+987
+00:49:41,836 --> 00:49:44,326
 And the system will take
 a snapshot right now.
 
-00:49:44.976 --> 00:49:48.206 A:middle
+
+988
+00:49:44,976 --> 00:49:48,206
 Now, this is not a new thing; we
 have done this for a long time.
 
-00:49:48.886 --> 00:49:50.916 A:middle
+
+989
+00:49:48,886 --> 00:49:50,916
 What's going to happen is
 the user takes that snapshot
 
-00:49:51.026 --> 00:49:54.336 A:middle
+
+990
+00:49:51,026 --> 00:49:54,336
 and then when the app comes
 back active, we'll first show
 
-00:49:54.336 --> 00:49:57.526 A:middle
+
+991
+00:49:54,336 --> 00:49:57,526
 that snapshot and then we'll
 fade into the live app as it is.
 
-00:49:58.096 --> 00:49:59.496 A:middle
+
+992
+00:49:58,096 --> 00:49:59,496
 So remember this
 snapshot right here,
 
-00:49:59.496 --> 00:50:00.616 A:middle
+
+993
+00:49:59,496 --> 00:50:00,616
 we're purple, we're at Work.
 
 
-
-00:49:59.496 --> 00:50:00.616 A:middle
-we're purple, we're at Work.
-
-00:50:02.176 --> 00:50:06.316 A:middle
+994
+00:50:02,176 --> 00:50:06,316
 Now, with multitasking, the
 system will resize us to regular
 
-00:50:06.586 --> 00:50:08.476 A:middle
+
+995
+00:50:06,586 --> 00:50:08,476
 and take a snapshot
 for its own purposes.
 
-00:50:10.056 --> 00:50:12.556 A:middle
+
+996
+00:50:10,056 --> 00:50:12,556
 And now the system is going
 to resize us back to compact.
 
-00:50:13.546 --> 00:50:15.436 A:middle
+
+997
+00:50:13,546 --> 00:50:15,436
 Now here is the point where
 the app has to make a decision.
 
-00:50:15.616 --> 00:50:17.866 A:middle
+
+998
+00:50:15,616 --> 00:50:17,866
 And I'll show you what happens
 when we make a bad decision
 
-00:50:18.086 --> 00:50:20.896 A:middle
+
+999
+00:50:18,086 --> 00:50:20,896
 and then a good decision, and
 the ramifications of both.
 
-00:50:21.416 --> 00:50:22.856 A:middle
+
+1000
+00:50:21,416 --> 00:50:22,856
 Let's make the bad
 decision first.
 
-00:50:24.326 --> 00:50:26.386 A:middle
+
+1001
+00:50:24,326 --> 00:50:26,386
 We go back to compact,
 and my app decides, 'well,
 
-00:50:26.386 --> 00:50:28.366 A:middle
+
+1002
+00:50:26,386 --> 00:50:28,366
 Home was at the top, so
 we'll show Home again.'
 
-00:50:29.656 --> 00:50:32.296 A:middle
+
+1003
+00:50:29,656 --> 00:50:32,296
 The app stays inactive for
 a while; the user comes back
 
-00:50:32.646 --> 00:50:33.446 A:middle
+
+1004
+00:50:32,646 --> 00:50:33,446
 and activates the app.
 
-00:50:34.516 --> 00:50:37.346 A:middle
+
+1005
+00:50:34,516 --> 00:50:37,346
 Then the system shows that
 snapshot again from Step 3.
 
-00:50:38.006 --> 00:50:38.936 A:middle
+
+1006
+00:50:38,006 --> 00:50:38,936
 Remember, we were at Work.
 
-00:50:39.106 --> 00:50:39.606 A:middle
+
+1007
+00:50:39,106 --> 00:50:39,606
 It's purple.
 
-00:50:39.606 --> 00:50:40.616 A:middle
+
+1008
+00:50:39,606 --> 00:50:40,616
 It's that same snapshot.
 
-00:50:41.976 --> 00:50:46.376 A:middle
+
+1009
+00:50:41,976 --> 00:50:46,376
 And now the system will
 crossfade from that
 
-00:50:46.376 --> 00:50:47.936 A:middle
+
+1010
+00:50:46,376 --> 00:50:47,936
 into the live app,
 which is at Home.
 
-00:50:48.756 --> 00:50:49.546 A:middle
+
+1011
+00:50:48,756 --> 00:50:49,546
 So that looked bad.
 
-00:50:49.866 --> 00:50:52.266 A:middle
+
+1012
+00:50:49,866 --> 00:50:52,266
 It was a really ugly
 animation, and it didn't use --
 
-00:50:52.566 --> 00:50:53.736 A:middle
+
+1013
+00:50:52,566 --> 00:50:53,736
 do what the user wanted.
 
-00:50:54.226 --> 00:50:55.926 A:middle
+
+1014
+00:50:54,226 --> 00:50:55,926
 They were in one place,
 they left the app,
 
-00:50:56.016 --> 00:50:57.486 A:middle
+
+1015
+00:50:56,016 --> 00:50:57,486
 they came back, it
 is somewhere else.
 
-00:50:57.646 --> 00:50:58.086 A:middle
+
+1016
+00:50:57,646 --> 00:50:58,086
 That's no good.
 
-00:50:58.086 --> 00:51:01.826 A:middle
+
+1017
+00:50:58,086 --> 00:51:01,826
 So what we should do,
 backing all the way up....
 
 
-
-00:50:58.086 --> 00:51:01.826 A:middle
-So what we should do,
-backing all the way up....
-
-00:51:02.926 --> 00:51:04.626 A:middle
+1018
+00:51:02,926 --> 00:51:04,626
 We're in regular width;
 the system is going
 
-00:51:04.626 --> 00:51:05.996 A:middle
+
+1019
+00:51:04,626 --> 00:51:05,996
 to resize us back to compact.
 
-00:51:06.986 --> 00:51:10.176 A:middle
+
+1020
+00:51:06,986 --> 00:51:10,176
 We should resize -- we should
 change the app back to the state
 
-00:51:10.226 --> 00:51:12.836 A:middle
+
+1021
+00:51:10,226 --> 00:51:12,836
 that it was in when
 we were inactivated.
 
-00:51:12.836 --> 00:51:16.416 A:middle
+
+1022
+00:51:12,836 --> 00:51:16,416
 And then going forward,
 user activates the app;
 
-00:51:17.176 --> 00:51:19.116 A:middle
+
+1023
+00:51:17,176 --> 00:51:19,116
 system shows the snapshot;
 it is the same thing.
 
-00:51:19.776 --> 00:51:21.816 A:middle
+
+1024
+00:51:19,776 --> 00:51:21,816
 We fade into the live
 app, it is the same thing.
 
-00:51:21.816 --> 00:51:22.626 A:middle
+
+1025
+00:51:21,816 --> 00:51:22,626
 It is seamless.
 
-00:51:23.676 --> 00:51:26.776 A:middle
+
+1026
+00:51:23,676 --> 00:51:26,776
 So that's the way you
 want to handle things.
 
-00:51:27.146 --> 00:51:30.266 A:middle
+
+1027
+00:51:27,146 --> 00:51:30,266
 When the app is inactive,
 maintain the same appearance
 
-00:51:30.526 --> 00:51:31.246 A:middle
+
+1028
+00:51:30,526 --> 00:51:31,246
 when the size changes.
 
-00:51:31.246 --> 00:51:35.896 A:middle
+
+1029
+00:51:31,246 --> 00:51:35,896
 You can do this by, when
 the app is deactivated,
 
-00:51:35.976 --> 00:51:39.146 A:middle
+
+1030
+00:51:35,976 --> 00:51:39,146
 remember your size and state,
 remember what page you're on.
 
-00:51:39.696 --> 00:51:42.686 A:middle
+
+1031
+00:51:39,696 --> 00:51:42,686
 When you get a size change,
 and you're still inactive,
 
-00:51:43.226 --> 00:51:45.536 A:middle
+
+1032
+00:51:43,226 --> 00:51:45,536
 and it is sizing back
 to that original size,
 
-00:51:46.276 --> 00:51:47.726 A:middle
+
+1033
+00:51:46,276 --> 00:51:47,726
 then apply that state
 that you remembered,
 
-00:51:47.946 --> 00:51:51.206 A:middle
+
+1034
+00:51:47,946 --> 00:51:51,206
 go back to that original page.
 
-00:51:53.536 --> 00:51:58.036 A:middle
+
+1035
+00:51:53,536 --> 00:51:58,036
 So we're down to the last two
 guidelines, and these will touch
 
-00:51:58.036 --> 00:51:58.906 A:middle
+
+1036
+00:51:58,036 --> 00:51:58,906
 on some things that we'll talk
 
-00:51:58.906 --> 00:52:01.396 A:middle
+
+1037
+00:51:58,906 --> 00:52:01,396
 about in the later multitasking
 talks, but first I need
 
 
-
-00:51:58.906 --> 00:52:01.396 A:middle
-about in the later multitasking
-talks, but first I need
-
-00:52:01.396 --> 00:52:02.596 A:middle
+1038
+00:52:01,396 --> 00:52:02,596
 to introduce some terminology.
 
-00:52:03.796 --> 00:52:04.806 A:middle
+
+1039
+00:52:03,796 --> 00:52:04,806
 So, there is two apps running.
 
-00:52:05.666 --> 00:52:09.066 A:middle
+
+1040
+00:52:05,666 --> 00:52:09,066
 The primary app is the one
 that starts out in full screen;
 
-00:52:09.456 --> 00:52:10.706 A:middle
+
+1041
+00:52:09,456 --> 00:52:10,706
 it is what you think
 of traditionally
 
-00:52:10.706 --> 00:52:12.106 A:middle
+
+1042
+00:52:10,706 --> 00:52:12,106
 as the app that's running.
 
-00:52:13.216 --> 00:52:16.066 A:middle
+
+1043
+00:52:13,216 --> 00:52:16,066
 When you Slide Over another app
 we call that the secondary app.
 
-00:52:17.316 --> 00:52:20.036 A:middle
+
+1044
+00:52:17,316 --> 00:52:20,036
 Now no matter how you resize the
 apps, they keep this identity;
 
-00:52:20.096 --> 00:52:22.386 A:middle
+
+1045
+00:52:20,096 --> 00:52:22,386
 they're always the same.
 
-00:52:22.386 --> 00:52:24.976 A:middle
+
+1046
+00:52:22,386 --> 00:52:24,976
 And normally we treat these
 apps exactly the same.
 
-00:52:25.046 --> 00:52:26.496 A:middle
+
+1047
+00:52:25,046 --> 00:52:26,496
 There really are not
 too many differences.
 
-00:52:27.036 --> 00:52:29.686 A:middle
+
+1048
+00:52:27,036 --> 00:52:29,686
 The differences come in when
 we're talking about resources
 
-00:52:29.736 --> 00:52:32.096 A:middle
+
+1049
+00:52:29,736 --> 00:52:32,096
 that can't be shared
 easily across both apps.
 
-00:52:33.186 --> 00:52:35.276 A:middle
+
+1050
+00:52:33,186 --> 00:52:35,276
 One of those might be
 an external display.
 
-00:52:36.286 --> 00:52:40.176 A:middle
+
+1051
+00:52:36,286 --> 00:52:40,176
 If you plug in a TV to your
 iPad or use Airplane Mirroring
 
-00:52:40.346 --> 00:52:45.446 A:middle
+
+1052
+00:52:40,346 --> 00:52:45,446
 with an Apple TV, you can
 show UI both on the iPad
 
-00:52:45.516 --> 00:52:46.586 A:middle
+
+1053
+00:52:45,516 --> 00:52:46,586
 and that external display.
 
-00:52:47.936 --> 00:52:51.226 A:middle
+
+1054
+00:52:47,936 --> 00:52:51,226
 With multitasking only the
 primary app will see the
 
-00:52:51.226 --> 00:52:53.046 A:middle
+
+1055
+00:52:51,226 --> 00:52:53,046
 external display,
 not the secondary --
 
-00:52:53.146 --> 00:52:54.146 A:middle
+
+1056
+00:52:53,146 --> 00:52:54,146
 not the secondary app.
 
-00:52:55.886 --> 00:52:58.586 A:middle
+
+1057
+00:52:55,886 --> 00:52:58,586
 So normally apps that use the
 external display will split
 
-00:52:58.586 --> 00:53:01.646 A:middle
+
+1058
+00:52:58,586 --> 00:53:01,646
 their UI across the iPad
 and the external screen
 
 
-
-00:52:58.586 --> 00:53:01.646 A:middle
-their UI across the iPad
-and the external screen
-
-00:53:01.646 --> 00:53:04.156 A:middle
+1059
+00:53:01,646 --> 00:53:04,156
 when a screen is activated, when
 the user plugs something in.
 
-00:53:04.156 --> 00:53:05.486 A:middle
+
+1060
+00:53:04,156 --> 00:53:05,486
 And they are expecting that.
 
-00:53:05.646 --> 00:53:07.746 A:middle
+
+1061
+00:53:05,646 --> 00:53:07,746
 They just plug something in and
 they expect something to happen.
 
-00:53:08.316 --> 00:53:10.426 A:middle
+
+1062
+00:53:08,316 --> 00:53:10,426
 There is a quirk with
 multitasking now though.
 
-00:53:11.356 --> 00:53:12.846 A:middle
+
+1063
+00:53:11,356 --> 00:53:12,846
 Let's say your app
 is the secondary app
 
-00:53:12.846 --> 00:53:17.066 A:middle
+
+1064
+00:53:12,846 --> 00:53:17,066
 and the user quickly resizes
 it to become the primary app,
 
-00:53:17.296 --> 00:53:18.116 A:middle
+
+1065
+00:53:17,296 --> 00:53:18,116
 once it is full screen.
 
-00:53:19.576 --> 00:53:22.346 A:middle
+
+1066
+00:53:19,576 --> 00:53:22,346
 When that happens, your
 app will get a notification
 
-00:53:22.456 --> 00:53:24.086 A:middle
+
+1067
+00:53:22,456 --> 00:53:24,086
 that that screen
 is now available,
 
-00:53:24.296 --> 00:53:25.826 A:middle
+
+1068
+00:53:24,296 --> 00:53:25,826
 the external display
 is now available.
 
-00:53:26.866 --> 00:53:29.146 A:middle
+
+1069
+00:53:26,866 --> 00:53:29,146
 And if your app chooses
 to immediately take its UI
 
-00:53:29.236 --> 00:53:31.876 A:middle
+
+1070
+00:53:29,236 --> 00:53:31,876
 and split it across the
 iPad and the other screen,
 
-00:53:32.276 --> 00:53:34.676 A:middle
+
+1071
+00:53:32,276 --> 00:53:34,676
 the user might not be expecting
 that, depending on your app.
 
-00:53:35.596 --> 00:53:36.836 A:middle
+
+1072
+00:53:35,596 --> 00:53:36,836
 So try that out in your app.
 
-00:53:37.186 --> 00:53:39.706 A:middle
+
+1073
+00:53:37,186 --> 00:53:39,706
 Make sure you do something
 that makes sense to the user.
 
-00:53:40.596 --> 00:53:43.346 A:middle
+
+1074
+00:53:40,596 --> 00:53:43,346
 The last guideline
 is about performance.
 
-00:53:43.416 --> 00:53:44.856 A:middle
+
+1075
+00:53:43,416 --> 00:53:44,856
 And, again, we have
 a whole talk on this,
 
-00:53:44.856 --> 00:53:46.146 A:middle
+
+1076
+00:53:44,856 --> 00:53:46,146
 so I'll only touch
 on some high points.
 
-00:53:47.316 --> 00:53:49.916 A:middle
+
+1077
+00:53:47,316 --> 00:53:49,916
 As we said before, if
 your app doesn't react
 
-00:53:49.916 --> 00:53:52.406 A:middle
+
+1078
+00:53:49,916 --> 00:53:52,406
 to a size change fast enough,
 it will get terminated.
 
-00:53:52.746 --> 00:53:54.806 A:middle
+
+1079
+00:53:52,746 --> 00:53:54,806
 So when the size
 changes, do as little work
 
-00:53:54.926 --> 00:53:56.586 A:middle
+
+1080
+00:53:54,926 --> 00:53:56,586
 as you can get away with.
 
-00:53:57.666 --> 00:54:00.866 A:middle
+
+1081
+00:53:57,666 --> 00:54:00,866
 If you have anything slow to
 do, use the completion block
 
 
-
-00:53:57.666 --> 00:54:00.866 A:middle
-If you have anything slow to
-do, use the completion block
-
-00:54:01.506 --> 00:54:02.946 A:middle
+1082
+00:54:01,506 --> 00:54:02,946
 and 'view will transition
 to size'
 
-00:54:02.946 --> 00:54:04.406 A:middle
+
+1083
+00:54:02,946 --> 00:54:04,406
 or 'will transition
 to trait collection.'
 
-00:54:05.616 --> 00:54:07.226 A:middle
+
+1084
+00:54:05,616 --> 00:54:07,226
 And also, in the
 animation block,
 
-00:54:08.266 --> 00:54:11.126 A:middle
+
+1085
+00:54:08,266 --> 00:54:11,126
 don't do any extra layouts;
 don't call 'layout if needed.'
 
-00:54:11.806 --> 00:54:14.366 A:middle
+
+1086
+00:54:11,806 --> 00:54:14,366
 The system is going to do a
 layout at the appropriate time,
 
-00:54:14.836 --> 00:54:15.766 A:middle
+
+1087
+00:54:14,836 --> 00:54:15,766
 and take advantage of that.
 
-00:54:16.156 --> 00:54:18.616 A:middle
+
+1088
+00:54:16,156 --> 00:54:18,616
 Just call 'set needs layout'
 and let the layout happen,
 
-00:54:18.616 --> 00:54:20.126 A:middle
+
+1089
+00:54:18,616 --> 00:54:20,126
 because layouts can
 be time consuming.
 
-00:54:20.626 --> 00:54:24.936 A:middle
+
+1090
+00:54:20,626 --> 00:54:24,936
 So that's the strategies;
 that's the guidelines.
 
-00:54:24.966 --> 00:54:26.406 A:middle
+
+1091
+00:54:24,966 --> 00:54:26,406
 Now you know a lot about how
 
-00:54:26.406 --> 00:54:28.416 A:middle
+
+1092
+00:54:26,406 --> 00:54:28,416
 to make your app work
 great with multitasking.
 
-00:54:30.486 --> 00:54:35.716 A:middle
+
+1093
+00:54:30,486 --> 00:54:35,716
 Now you know how and why to
 adopt multitasking in your app.
 
-00:54:35.716 --> 00:54:38.336 A:middle
+
+1094
+00:54:35,716 --> 00:54:38,336
 You know that adaptivity
 has been around since iOS 8;
 
-00:54:38.336 --> 00:54:40.806 A:middle
+
+1095
+00:54:38,336 --> 00:54:40,806
 it is not a big stretch
 what we're doing in iOS 9.
 
-00:54:41.776 --> 00:54:46.116 A:middle
+
+1096
+00:54:41,776 --> 00:54:46,116
 And you know how to deliver
 a great user experience.
 
-00:54:46.366 --> 00:54:47.336 A:middle
+
+1097
+00:54:46,366 --> 00:54:47,336
 You have the technology.
 
-00:54:48.336 --> 00:54:51.886 A:middle
+
+1098
+00:54:48,336 --> 00:54:51,886
 So your users want to use
 multitasking; let them have it.
 
-00:54:53.706 --> 00:54:55.726 A:middle
+
+1099
+00:54:53,706 --> 00:54:55,726
 For more information, check
 out our documentation,
 
-00:54:55.726 --> 00:54:58.106 A:middle
+
+1100
+00:54:55,726 --> 00:54:58,106
 especially "Adopting
 Multitasking Enhancements
 
-00:54:58.196 --> 00:54:58.716 A:middle
+
+1101
+00:54:58,196 --> 00:54:58,716
 on iPad."
 
-00:54:59.396 --> 00:55:00.396 A:middle
+
+1102
+00:54:59,396 --> 00:55:00,396
 Check out our sample code.
 
 
-
-00:54:59.396 --> 00:55:00.396 A:middle
-Check out our sample code.
-
-00:55:01.286 --> 00:55:04.166 A:middle
+1103
+00:55:01,286 --> 00:55:04,166
 You can talk to tech support,
 the developer forums, DTS.
 
-00:55:04.946 --> 00:55:07.526 A:middle
+
+1104
+00:55:04,946 --> 00:55:07,526
 For general inquiries, talk to
 Curt Rothert, our Evangelist.
 
-00:55:08.196 --> 00:55:10.486 A:middle
+
+1105
+00:55:08,196 --> 00:55:10,486
 And if you have more questions,
 we have more sessions.
 
-00:55:11.246 --> 00:55:13.396 A:middle
+
+1106
+00:55:11,246 --> 00:55:13,396
 Again, if you want to find
 out about picture-in-picture
 
-00:55:13.396 --> 00:55:16.256 A:middle
+
+1107
+00:55:13,396 --> 00:55:16,256
 or sharing the camera, go
 to "Multitasking Essentials
 
-00:55:16.256 --> 00:55:17.126 A:middle
+
+1108
+00:55:16,256 --> 00:55:17,126
 for Media-Based Apps."
 
-00:55:18.016 --> 00:55:20.076 A:middle
+
+1109
+00:55:18,016 --> 00:55:20,076
 If you want to find out
 how to be a good citizen
 
-00:55:20.236 --> 00:55:23.456 A:middle
+
+1110
+00:55:20,236 --> 00:55:23,456
 and share resources like CPU
 and memory across the apps,
 
-00:55:24.386 --> 00:55:26.136 A:middle
+
+1111
+00:55:24,386 --> 00:55:26,136
 go to "Optimizing Your
 App for Multitasking."
 
-00:55:27.356 --> 00:55:29.846 A:middle
+
+1112
+00:55:27,356 --> 00:55:29,846
 Last, visit us in the "Cocoa
 Touch and Multitasking Lab."
 
-00:55:29.846 --> 00:55:32.526 A:middle
+
+1113
+00:55:29,846 --> 00:55:32,526
 We'll help you out
 with your app.
 
-00:55:32.526 --> 00:55:33.406 A:middle
+
+1114
+00:55:32,526 --> 00:55:33,406
 So thank you for coming.
 
-00:55:33.526 --> 00:55:34.926 A:middle
+
+1115
+00:55:33,526 --> 00:55:34,926
 Go forth and multitask.
 

@@ -1,3435 +1,4947 @@
-
-00:00:21.516 --> 00:00:23.546 A:middle
+1
+00:00:21,516 --> 00:00:23,546
 [ Applause ]
 
-00:00:24.046 --> 00:00:24.176 A:middle
-&gt;&gt; CORBIN DUNN: Hi.
 
-00:00:25.386 --> 00:00:27.686 A:middle
+2
+00:00:24,046 --> 00:00:24,176
+>> CORBIN DUNN: Hi.
+
+
+3
+00:00:25,386 --> 00:00:27,686
 Welcome to Improving the
 Full-Screen Window Experience.
 
-00:00:28.506 --> 00:00:29.436 A:middle
+
+4
+00:00:28,506 --> 00:00:29,436
 My name is Corbin Dunn.
 
-00:00:29.486 --> 00:00:31.226 A:middle
+
+5
+00:00:29,486 --> 00:00:31,226
 I'm an AppKit Software Engineer.
 
-00:00:31.376 --> 00:00:32.846 A:middle
+
+6
+00:00:31,376 --> 00:00:32,846
 And I'll be giving
 this talk today
 
-00:00:32.846 --> 00:00:34.186 A:middle
+
+7
+00:00:32,846 --> 00:00:34,186
 with my colleague, Taylor Kelly.
 
-00:00:34.686 --> 00:00:36.056 A:middle
+
+8
+00:00:34,686 --> 00:00:36,056
 And let's jump right in to it.
 
-00:00:36.726 --> 00:00:38.286 A:middle
+
+9
+00:00:36,726 --> 00:00:38,286
 So what are we going
 to talk about today?
 
-00:00:38.496 --> 00:00:40.616 A:middle
+
+10
+00:00:38,496 --> 00:00:40,616
 First I'm going to talk about
 Full Screen, and I'm going
 
-00:00:40.616 --> 00:00:42.146 A:middle
+
+11
+00:00:40,616 --> 00:00:42,146
 to cover three sections.
 
-00:00:42.676 --> 00:00:44.766 A:middle
+
+12
+00:00:42,676 --> 00:00:44,766
 I'm going to talk about
 adopting Full Screen
 
-00:00:44.766 --> 00:00:45.966 A:middle
+
+13
+00:00:44,766 --> 00:00:45,966
 and how to properly adopt it.
 
-00:00:45.966 --> 00:00:49.046 A:middle
+
+14
+00:00:45,966 --> 00:00:49,046
 I'm going to talk about Title
 Bar Accessory View Controllers,
 
-00:00:49.326 --> 00:00:50.846 A:middle
+
+15
+00:00:49,326 --> 00:00:50,846
 what they are and
 how to use them.
 
-00:00:50.846 --> 00:00:54.326 A:middle
+
+16
+00:00:50,846 --> 00:00:54,326
 Then I'm going to talk about
 Full Screen Tiling API to see
 
-00:00:54.326 --> 00:00:55.626 A:middle
+
+17
+00:00:54,326 --> 00:00:55,626
 and utilize some
 of the new features
 
-00:00:55.626 --> 00:00:57.496 A:middle
+
+18
+00:00:55,626 --> 00:00:57,496
 that you've seen
 in Mac OS X v11.
 
-00:00:58.326 --> 00:01:00.346 A:middle
+
+19
+00:00:58,326 --> 00:01:00,346
 Taylor's going to come up and
 talk about flexible layout
 
 
-
-00:00:58.326 --> 00:01:00.346 A:middle
-Taylor's going to come up and
-talk about flexible layout
-
-00:01:00.346 --> 00:01:03.526 A:middle
+20
+00:01:00,346 --> 00:01:03,526
 within a Split View Controller,
 Auto Layout, Stack View,
 
-00:01:04.006 --> 00:01:06.026 A:middle
+
+21
+00:01:04,006 --> 00:01:06,026
 and finally some
 Collection View things.
 
-00:01:06.606 --> 00:01:09.016 A:middle
+
+22
+00:01:06,606 --> 00:01:09,016
 So Full Screen.
 
-00:01:09.936 --> 00:01:11.216 A:middle
+
+23
+00:01:09,936 --> 00:01:11,216
 What is the purpose
 of Full Screen?
 
-00:01:11.216 --> 00:01:14.166 A:middle
+
+24
+00:01:11,216 --> 00:01:14,166
 It's to focus your user's
 attention on a single task.
 
-00:01:14.896 --> 00:01:16.956 A:middle
+
+25
+00:01:14,896 --> 00:01:16,956
 You can make the most of
 your screen real estate.
 
-00:01:17.316 --> 00:01:18.806 A:middle
+
+26
+00:01:17,316 --> 00:01:18,806
 Everything extra
 is out of the way,
 
-00:01:18.806 --> 00:01:22.356 A:middle
+
+27
+00:01:18,806 --> 00:01:22,356
 and you have one window
 there to concentrate on.
 
-00:01:23.146 --> 00:01:26.026 A:middle
+
+28
+00:01:23,146 --> 00:01:26,026
 So why did we make
 it a system feature?
 
-00:01:26.706 --> 00:01:28.046 A:middle
+
+29
+00:01:26,706 --> 00:01:28,046
 We have it as a system feature
 
-00:01:28.046 --> 00:01:31.196 A:middle
+
+30
+00:01:28,046 --> 00:01:31,196
 because it's a very
 consistent user experience.
 
-00:01:31.656 --> 00:01:33.556 A:middle
+
+31
+00:01:31,656 --> 00:01:33,556
 The way you get into Full
 Screen, the way you get
 
-00:01:33.556 --> 00:01:35.466 A:middle
+
+32
+00:01:33,556 --> 00:01:35,466
 out of Full Screen,
 it's all the same.
 
-00:01:35.746 --> 00:01:37.796 A:middle
+
+33
+00:01:35,746 --> 00:01:37,796
 The way you navigate
 across spaces, etcetera.
 
-00:01:39.236 --> 00:01:42.636 A:middle
+
+34
+00:01:39,236 --> 00:01:42,636
 So what is a Full
 Screen-capable window?
 
-00:01:43.046 --> 00:01:45.076 A:middle
+
+35
+00:01:43,046 --> 00:01:45,076
 Here's an example of a
 window such as Safari.
 
-00:01:45.616 --> 00:01:48.536 A:middle
+
+36
+00:01:45,616 --> 00:01:48,536
 And I'm sure you're aware of
 that you click the green button,
 
-00:01:48.816 --> 00:01:50.096 A:middle
+
+37
+00:01:48,816 --> 00:01:50,096
 it'll take you into Full Screen.
 
-00:01:51.376 --> 00:01:53.866 A:middle
+
+38
+00:01:51,376 --> 00:01:53,866
 Once you're into Full Screen,
 you can mouse on up to the top
 
-00:01:53.866 --> 00:01:56.716 A:middle
+
+39
+00:01:53,866 --> 00:01:56,716
 of the window, and the title
 bar and toolbar will drop down.
 
-00:01:57.246 --> 00:01:58.696 A:middle
+
+40
+00:01:57,246 --> 00:01:58,696
 And you can hit that
 green button again,
 
-00:01:58.786 --> 00:02:00.696 A:middle
+
+41
+00:01:58,786 --> 00:02:00,696
 and it can take you
 back out of Full Screen.
 
 
-
-00:01:58.786 --> 00:02:00.696 A:middle
-and it can take you
-back out of Full Screen.
-
-00:02:01.286 --> 00:02:05.126 A:middle
+42
+00:02:01,286 --> 00:02:05,126
 So what are the things to
 do to adopt Full Screen?
 
-00:02:05.326 --> 00:02:06.806 A:middle
+
+43
+00:02:05,326 --> 00:02:06,806
 Hopefully you're
 already aware of this,
 
-00:02:07.076 --> 00:02:08.235 A:middle
+
+44
+00:02:07,076 --> 00:02:08,235
 but it's pretty easy to do.
 
-00:02:08.526 --> 00:02:10.705 A:middle
+
+45
+00:02:08,526 --> 00:02:10,705
 You're going to specify
 which windows you want
 
-00:02:10.705 --> 00:02:11.776 A:middle
+
+46
+00:02:10,705 --> 00:02:11,776
 to be Full Screen-capable.
 
-00:02:11.776 --> 00:02:14.026 A:middle
+
+47
+00:02:11,776 --> 00:02:14,026
 You're going to add
 a menu item for it,
 
-00:02:14.026 --> 00:02:16.566 A:middle
+
+48
+00:02:14,026 --> 00:02:16,566
 and you're probably going
 to do some extra stuff.
 
-00:02:16.566 --> 00:02:17.706 A:middle
+
+49
+00:02:16,566 --> 00:02:17,706
 The extra stuff that
 you might want
 
-00:02:17.706 --> 00:02:21.706 A:middle
+
+50
+00:02:17,706 --> 00:02:21,706
 to do is auto hide your
 toolbar, modify your contents
 
-00:02:21.836 --> 00:02:24.706 A:middle
+
+51
+00:02:21,836 --> 00:02:24,706
 to take more advantage
 of the Full Screen space
 
-00:02:24.706 --> 00:02:28.106 A:middle
+
+52
+00:02:24,706 --> 00:02:28,106
 that you now have, use the
 new title bar accessory
 
-00:02:28.106 --> 00:02:28.946 A:middle
+
+53
+00:02:28,106 --> 00:02:28,946
 view controllers.
 
-00:02:28.946 --> 00:02:31.116 A:middle
+
+54
+00:02:28,946 --> 00:02:31,116
 And I'm going to talk about how
 and why you're going to do that.
 
-00:02:31.856 --> 00:02:33.976 A:middle
+
+55
+00:02:31,856 --> 00:02:33,976
 And of course, you want to work
 well with Full Screen tiles.
 
-00:02:34.246 --> 00:02:36.846 A:middle
+
+56
+00:02:34,246 --> 00:02:36,846
 So I'm going to discuss some
 API that we have for that.
 
-00:02:37.426 --> 00:02:41.106 A:middle
+
+57
+00:02:37,426 --> 00:02:41,106
 First of all, there are
 two types of windows that,
 
-00:02:41.556 --> 00:02:44.946 A:middle
+
+58
+00:02:41,556 --> 00:02:44,946
 or two options for windows
 to be in Full Screen.
 
-00:02:45.706 --> 00:02:47.406 A:middle
+
+59
+00:02:45,706 --> 00:02:47,406
 Normally when a window
 is in Full Screen,
 
-00:02:47.926 --> 00:02:49.146 A:middle
+
+60
+00:02:47,926 --> 00:02:49,146
 nothing else is allowed with it.
 
-00:02:49.646 --> 00:02:52.286 A:middle
+
+61
+00:02:49,646 --> 00:02:52,286
 And that window is what we
 call the primary window.
 
-00:02:52.666 --> 00:02:55.366 A:middle
+
+62
+00:02:52,666 --> 00:02:55,366
 It's something such as
 your main document window
 
-00:02:55.366 --> 00:02:56.226 A:middle
+
+63
+00:02:55,366 --> 00:02:56,226
 for your application.
 
-00:02:56.646 --> 00:02:58.596 A:middle
+
+64
+00:02:56,646 --> 00:02:58,596
 It's the thing that you can
 go into Full Screen with.
 
-00:02:59.866 --> 00:03:02.336 A:middle
+
+65
+00:02:59,866 --> 00:03:02,336
 However, there's also another
 option if you've seen this.
 
 
-
-00:02:59.866 --> 00:03:02.336 A:middle
-However, there's also another
-option if you've seen this.
-
-00:03:02.576 --> 00:03:05.696 A:middle
+66
+00:03:02,576 --> 00:03:05,696
 It's an auxiliary window, and
 usually you don't need this.
 
-00:03:06.076 --> 00:03:09.256 A:middle
+
+67
+00:03:06,076 --> 00:03:09,256
 What its purpose is if you
 have a window in an application
 
-00:03:09.256 --> 00:03:11.836 A:middle
+
+68
+00:03:09,256 --> 00:03:11,836
 that wants to be on another
 application's Full Screen space,
 
-00:03:11.836 --> 00:03:13.046 A:middle
+
+69
+00:03:11,836 --> 00:03:13,046
 it allows you to do that.
 
-00:03:13.046 --> 00:03:15.106 A:middle
+
+70
+00:03:13,046 --> 00:03:15,106
 And I'm not going
 to talk about it.
 
-00:03:15.696 --> 00:03:17.696 A:middle
+
+71
+00:03:15,696 --> 00:03:17,696
 And I encourage you to look
 at the AppKit release notes
 
-00:03:17.696 --> 00:03:20.786 A:middle
+
+72
+00:03:17,696 --> 00:03:20,786
 from a few years ago to
 see some details on it.
 
-00:03:21.356 --> 00:03:23.976 A:middle
+
+73
+00:03:21,356 --> 00:03:23,976
 So how do you adopt
 Full Screen windows?
 
-00:03:24.656 --> 00:03:26.976 A:middle
+
+74
+00:03:24,656 --> 00:03:26,976
 In Xcode and Interface
 Builder, it's very simple.
 
-00:03:27.416 --> 00:03:28.606 A:middle
+
+75
+00:03:27,416 --> 00:03:28,606
 You select your window.
 
-00:03:28.606 --> 00:03:29.946 A:middle
+
+76
+00:03:28,606 --> 00:03:29,946
 There's a Full Screen section.
 
-00:03:30.456 --> 00:03:31.676 A:middle
+
+77
+00:03:30,456 --> 00:03:31,676
 You drop down the menu item,
 
-00:03:31.676 --> 00:03:33.876 A:middle
+
+78
+00:03:31,676 --> 00:03:33,876
 and you have either
 primary or auxiliary.
 
-00:03:33.876 --> 00:03:35.796 A:middle
+
+79
+00:03:33,876 --> 00:03:35,796
 So you're going to probably
 want to set primary window
 
-00:03:36.256 --> 00:03:37.586 A:middle
+
+80
+00:03:36,256 --> 00:03:37,586
 on your primary Full
 Screen window.
 
-00:03:38.186 --> 00:03:43.196 A:middle
+
+81
+00:03:38,186 --> 00:03:43,196
 Of course you can do it in code,
 and the thing under the hood
 
-00:03:43.196 --> 00:03:46.766 A:middle
+
+82
+00:03:43,196 --> 00:03:46,766
 of what that Interface Builder
 option is doing is just changing
 
-00:03:46.766 --> 00:03:49.406 A:middle
+
+83
+00:03:46,766 --> 00:03:49,406
 the window collection
 behavior, and it's adding
 
-00:03:49.406 --> 00:03:52.796 A:middle
+
+84
+00:03:49,406 --> 00:03:52,796
 in dot Full Screen primary
 or dot Full Screen auxiliary
 
-00:03:52.796 --> 00:03:55.616 A:middle
+
+85
+00:03:52,796 --> 00:03:55,616
 to the window to get those
 options into that window
 
-00:03:56.116 --> 00:03:57.386 A:middle
+
+86
+00:03:56,116 --> 00:03:57,386
 and make it Full Screen-capable.
 
-00:03:59.226 --> 00:04:02.196 A:middle
+
+87
+00:03:59,226 --> 00:04:02,196
 Once you are in Full
 Screen, you may need
 
 
-
-00:03:59.226 --> 00:04:02.196 A:middle
-Once you are in Full
-Screen, you may need
-
-00:04:02.196 --> 00:04:05.006 A:middle
+88
+00:04:02,196 --> 00:04:05,006
 to do different things based
 on being in Full Screen.
 
-00:04:05.506 --> 00:04:08.426 A:middle
+
+89
+00:04:05,506 --> 00:04:08,426
 And you can check that by
 looking at the style mask.
 
-00:04:09.036 --> 00:04:10.576 A:middle
+
+90
+00:04:09,036 --> 00:04:10,576
 It's when your window
 goes into Full Screen,
 
-00:04:10.926 --> 00:04:12.806 A:middle
+
+91
+00:04:10,926 --> 00:04:12,806
 we add the
 NSFullScreenWindowMask
 
-00:04:13.176 --> 00:04:14.456 A:middle
+
+92
+00:04:13,176 --> 00:04:14,456
 for you automatically.
 
-00:04:14.456 --> 00:04:16.836 A:middle
+
+93
+00:04:14,456 --> 00:04:16,836
 And you can check that
 in the style mask to see
 
-00:04:16.836 --> 00:04:18.486 A:middle
+
+94
+00:04:16,836 --> 00:04:18,486
 if your window is in
 Full Screen or not
 
-00:04:18.916 --> 00:04:20.226 A:middle
+
+95
+00:04:18,916 --> 00:04:20,226
 and potentially do
 different things.
 
-00:04:20.356 --> 00:04:22.556 A:middle
+
+96
+00:04:20,356 --> 00:04:22,556
 Now let's talk
 
-00:04:22.766 --> 00:04:25.976 A:middle
+
+97
+00:04:22,766 --> 00:04:25,976
 about automatically
 hiding the toolbar.
 
-00:04:26.426 --> 00:04:28.046 A:middle
+
+98
+00:04:26,426 --> 00:04:28,046
 Normally if you have a
 toolbar in your window,
 
-00:04:28.196 --> 00:04:29.766 A:middle
+
+99
+00:04:28,196 --> 00:04:29,766
 it's always visible, like
 it's showing up here.
 
-00:04:31.106 --> 00:04:33.466 A:middle
+
+100
+00:04:31,106 --> 00:04:33,466
 When you mouse on up to
 the top of the window,
 
-00:04:33.466 --> 00:04:34.706 A:middle
+
+101
+00:04:33,466 --> 00:04:34,706
 the menu bar drops down.
 
-00:04:35.216 --> 00:04:36.706 A:middle
+
+102
+00:04:35,216 --> 00:04:36,706
 The title bar controls
 drop down.
 
-00:04:37.196 --> 00:04:38.956 A:middle
+
+103
+00:04:37,196 --> 00:04:38,956
 And the toolbar is revealed.
 
-00:04:40.136 --> 00:04:41.076 A:middle
+
+104
+00:04:40,136 --> 00:04:41,076
 There's an option for you
 
-00:04:41.076 --> 00:04:42.556 A:middle
+
+105
+00:04:41,076 --> 00:04:42,556
 to automatically have
 the toolbar hidden.
 
-00:04:42.916 --> 00:04:45.516 A:middle
+
+106
+00:04:42,916 --> 00:04:45,516
 So when you go to Full
 Screen, nothing else is seen,
 
-00:04:45.516 --> 00:04:47.596 A:middle
+
+107
+00:04:45,516 --> 00:04:47,596
 and you get the most use
 of your screen real estate.
 
-00:04:48.116 --> 00:04:50.466 A:middle
+
+108
+00:04:48,116 --> 00:04:50,466
 When you're mousing
 up to the menu bar,
 
-00:04:50.866 --> 00:04:54.286 A:middle
+
+109
+00:04:50,866 --> 00:04:54,286
 the toolbar is dropped down,
 along with the menu bar
 
-00:04:54.286 --> 00:04:55.446 A:middle
+
+110
+00:04:54,286 --> 00:04:55,446
 and the title bar
 at the same time.
 
-00:04:56.396 --> 00:04:57.766 A:middle
+
+111
+00:04:56,396 --> 00:04:57,766
 It's really easy to do this.
 
-00:04:58.306 --> 00:04:59.566 A:middle
+
+112
+00:04:58,306 --> 00:04:59,566
 There's a window
 delegate method,
 
 
-
-00:05:00.006 --> 00:05:03.986 A:middle
+113
+00:05:00,006 --> 00:05:03,986
 Window Will Use Full
 Screen Presentation Options,
 
-00:05:04.686 --> 00:05:05.866 A:middle
+
+114
+00:05:04,686 --> 00:05:05,866
 with the proposed options.
 
-00:05:06.486 --> 00:05:09.726 A:middle
+
+115
+00:05:06,486 --> 00:05:09,726
 You take those proposed options,
 and you add Auto Hide Toolbar
 
-00:05:09.726 --> 00:05:10.906 A:middle
+
+116
+00:05:09,726 --> 00:05:10,906
 to it and return that.
 
-00:05:10.936 --> 00:05:12.946 A:middle
+
+117
+00:05:10,936 --> 00:05:12,946
 And the toolbar will
 automatically be hidden.
 
-00:05:13.386 --> 00:05:16.296 A:middle
+
+118
+00:05:13,386 --> 00:05:16,296
 So it's very easy to do.
 
-00:05:16.556 --> 00:05:20.406 A:middle
+
+119
+00:05:16,556 --> 00:05:20,406
 So custom animations, you
 can create a custom animation
 
-00:05:20.406 --> 00:05:22.466 A:middle
+
+120
+00:05:20,406 --> 00:05:22,466
 to enter and exit
 from Full Screen.
 
-00:05:22.886 --> 00:05:24.426 A:middle
+
+121
+00:05:22,886 --> 00:05:24,426
 We have two delegate
 methods to do it.
 
-00:05:25.166 --> 00:05:27.146 A:middle
+
+122
+00:05:25,166 --> 00:05:27,146
 The custom windows to enter
 Full Screen for a window
 
-00:05:27.506 --> 00:05:30.486 A:middle
+
+123
+00:05:27,506 --> 00:05:30,486
 where you return an array of
 windows that do your animation.
 
-00:05:31.246 --> 00:05:33.226 A:middle
+
+124
+00:05:31,246 --> 00:05:33,226
 And then we call you
 back and say, hey,
 
-00:05:33.566 --> 00:05:35.456 A:middle
+
+125
+00:05:33,566 --> 00:05:35,456
 start your custom animation
 to enter Full Screen
 
-00:05:35.686 --> 00:05:36.846 A:middle
+
+126
+00:05:35,686 --> 00:05:36,846
 with a particular duration.
 
-00:05:37.566 --> 00:05:40.776 A:middle
+
+127
+00:05:37,566 --> 00:05:40,776
 The thing to note about these
 now with the way that we enter
 
-00:05:40.776 --> 00:05:42.396 A:middle
+
+128
+00:05:40,776 --> 00:05:42,396
 into Full Screen
 in Mac OS X v11,
 
-00:05:42.766 --> 00:05:44.156 A:middle
+
+129
+00:05:42,766 --> 00:05:44,156
 you may not get these called.
 
-00:05:44.546 --> 00:05:46.526 A:middle
+
+130
+00:05:44,546 --> 00:05:46,526
 So it's important
 to not be dependent
 
-00:05:46.526 --> 00:05:49.356 A:middle
+
+131
+00:05:46,526 --> 00:05:49,356
 on these always being called
 and setting up state there.
 
-00:05:49.726 --> 00:05:51.546 A:middle
+
+132
+00:05:49,726 --> 00:05:51,546
 Instead, there's better ways
 to do that, which I'll talk
 
-00:05:51.546 --> 00:05:55.166 A:middle
+
+133
+00:05:51,546 --> 00:05:55,166
 about in a little bit.
 
-00:05:55.346 --> 00:05:57.196 A:middle
+
+134
+00:05:55,346 --> 00:05:57,196
 Okay, so that was
 talking about Full Screen
 
-00:05:57.286 --> 00:05:58.886 A:middle
+
+135
+00:05:57,286 --> 00:05:58,886
 and how to properly adopt it.
 
-00:05:59.256 --> 00:06:01.416 A:middle
+
+136
+00:05:59,256 --> 00:06:01,416
 Let's move forward
 and go about talking
 
 
-
-00:05:59.256 --> 00:06:01.416 A:middle
-Let's move forward
-and go about talking
-
-00:06:01.416 --> 00:06:03.336 A:middle
+137
+00:06:01,416 --> 00:06:03,336
 about Title Bar Accessory
 View Controllers.
 
-00:06:05.016 --> 00:06:08.336 A:middle
+
+138
+00:06:05,016 --> 00:06:08,336
 So before I talk about a title
 bar accessory controller,
 
-00:06:08.586 --> 00:06:11.326 A:middle
+
+139
+00:06:08,586 --> 00:06:11,326
 let's take a look at a window
 in Full Screen, and I'm going
 
-00:06:11.326 --> 00:06:13.346 A:middle
+
+140
+00:06:11,326 --> 00:06:13,346
 to highlight the area
 that is the title bar
 
-00:06:13.556 --> 00:06:14.386 A:middle
+
+141
+00:06:13,556 --> 00:06:14,386
 so you're aware of it.
 
-00:06:14.926 --> 00:06:16.426 A:middle
+
+142
+00:06:14,926 --> 00:06:16,426
 So this is the title
 bar in Full Screen.
 
-00:06:17.136 --> 00:06:19.246 A:middle
+
+143
+00:06:17,136 --> 00:06:19,246
 Underneath the title
 bar is the toolbar.
 
-00:06:19.246 --> 00:06:23.086 A:middle
+
+144
+00:06:19,246 --> 00:06:23,086
 And underneath the toolbar
 are what we have called the
 
-00:06:23.086 --> 00:06:24.096 A:middle
+
+145
+00:06:23,086 --> 00:06:24,096
 accessory views.
 
-00:06:24.596 --> 00:06:27.146 A:middle
+
+146
+00:06:24,596 --> 00:06:27,146
 And so you can add your own
 title bar accessory view
 
-00:06:27.146 --> 00:06:29.976 A:middle
+
+147
+00:06:27,146 --> 00:06:29,976
 controllers at this
 location in the window.
 
-00:06:30.356 --> 00:06:33.746 A:middle
+
+148
+00:06:30,356 --> 00:06:33,746
 And the nice thing is that
 they can also be added
 
-00:06:33.746 --> 00:06:35.336 A:middle
+
+149
+00:06:33,746 --> 00:06:35,336
 when your window
 isn't in Full Screen.
 
-00:06:35.846 --> 00:06:36.836 A:middle
+
+150
+00:06:35,846 --> 00:06:36,836
 So this is what they would look
 
-00:06:36.836 --> 00:06:38.696 A:middle
+
+151
+00:06:36,836 --> 00:06:38,696
 for one that's not
 in Full Screen.
 
-00:06:39.026 --> 00:06:40.776 A:middle
+
+152
+00:06:39,026 --> 00:06:40,776
 And they're automatically
 managed back and forth.
 
-00:06:41.546 --> 00:06:44.226 A:middle
+
+153
+00:06:41,546 --> 00:06:44,226
 To understand why this
 important, it's also good
 
-00:06:44.226 --> 00:06:47.566 A:middle
+
+154
+00:06:44,226 --> 00:06:47,566
 to understand some of the
 reasons that we have it.
 
-00:06:47.666 --> 00:06:49.446 A:middle
+
+155
+00:06:47,666 --> 00:06:49,446
 So let's take a look
 at your window.
 
-00:06:50.146 --> 00:06:54.596 A:middle
+
+156
+00:06:50,146 --> 00:06:54,596
 And normally, the area under
 the toolbar and title bar area,
 
-00:06:54.596 --> 00:06:57.156 A:middle
+
+157
+00:06:54,596 --> 00:06:57,156
 that's where your
 content is placed.
 
-00:06:57.376 --> 00:06:58.716 A:middle
+
+158
+00:06:57,376 --> 00:06:58,716
 Your content's underneath it.
 
-00:06:59.616 --> 00:07:06.886 A:middle
+
+159
+00:06:59,616 --> 00:07:06,886
 But as of Mac OS X v10, you can
 actually utilize a full content
 
 
-
-00:06:59.616 --> 00:07:06.886 A:middle
-But as of Mac OS X v10, you can
-actually utilize a full content
-
-00:07:06.886 --> 00:07:11.166 A:middle
+160
+00:07:06,886 --> 00:07:11,166
 area that can extend underneath
 the title bar toolbar.
 
-00:07:11.496 --> 00:07:12.496 A:middle
+
+161
+00:07:11,496 --> 00:07:12,496
 And so your title bar
 
-00:07:12.696 --> 00:07:15.896 A:middle
+
+162
+00:07:12,696 --> 00:07:15,896
 and toolbar will have a
 blur automatically handled
 
-00:07:15.896 --> 00:07:16.596 A:middle
+
+163
+00:07:15,896 --> 00:07:16,596
 for you behind it.
 
-00:07:16.596 --> 00:07:18.846 A:middle
+
+164
+00:07:16,596 --> 00:07:18,846
 And you can have your
 Full Screen accessory view
 
-00:07:18.846 --> 00:07:21.456 A:middle
+
+165
+00:07:18,846 --> 00:07:21,456
 controllers for your
 views in this location.
 
-00:07:22.066 --> 00:07:25.906 A:middle
+
+166
+00:07:22,066 --> 00:07:25,906
 So how do you get
 that Full Screen mask?
 
-00:07:25.976 --> 00:07:26.966 A:middle
+
+167
+00:07:25,976 --> 00:07:26,966
 It's really easy.
 
-00:07:26.966 --> 00:07:28.496 A:middle
+
+168
+00:07:26,966 --> 00:07:28,496
 You just add to the
 window style mask
 
-00:07:28.586 --> 00:07:30.456 A:middle
+
+169
+00:07:28,586 --> 00:07:30,456
 in its full size
 content view window mask,
 
-00:07:30.456 --> 00:07:35.066 A:middle
+
+170
+00:07:30,456 --> 00:07:35,066
 and that makes your content be
 full size under the title bar.
 
-00:07:35.716 --> 00:07:38.876 A:middle
+
+171
+00:07:35,716 --> 00:07:38,876
 The actual API for using
 the title bar accessory view
 
-00:07:38.876 --> 00:07:41.296 A:middle
+
+172
+00:07:38,876 --> 00:07:41,296
 dontrollers, they're
 a very simple subclass
 
-00:07:41.296 --> 00:07:42.356 A:middle
+
+173
+00:07:41,296 --> 00:07:42,356
 of NSViewController.
 
-00:07:42.706 --> 00:07:44.836 A:middle
+
+174
+00:07:42,706 --> 00:07:44,836
 So all the standard view
 controller stuff will come
 
-00:07:44.836 --> 00:07:46.416 A:middle
+
+175
+00:07:44,836 --> 00:07:46,416
 into play with it
 for how to load them.
 
-00:07:46.416 --> 00:07:49.676 A:middle
+
+176
+00:07:46,416 --> 00:07:49,676
 And it adds two properties,
 a layout attribute
 
-00:07:49.676 --> 00:07:51.406 A:middle
+
+177
+00:07:49,676 --> 00:07:51,406
 and a Full Screen min height.
 
-00:07:52.026 --> 00:07:53.646 A:middle
+
+178
+00:07:52,026 --> 00:07:53,646
 So I'm going to talk
 about those in a minute.
 
-00:07:54.426 --> 00:07:55.526 A:middle
+
+179
+00:07:54,426 --> 00:07:55,526
 But let's look at a few things
 
-00:07:55.526 --> 00:07:58.266 A:middle
+
+180
+00:07:55,526 --> 00:07:58,266
 that the title bar accessory
 view controllers do for you.
 
-00:07:58.936 --> 00:08:00.196 A:middle
+
+181
+00:07:58,936 --> 00:08:00,196
 Well like I said before,
 
 
-
-00:07:58.936 --> 00:08:00.196 A:middle
-Well like I said before,
-
-00:08:00.196 --> 00:08:04.556 A:middle
+182
+00:08:00,196 --> 00:08:04,556
 they will automatically blur
 everything behind them for you.
 
-00:08:04.556 --> 00:08:05.956 A:middle
+
+183
+00:08:04,556 --> 00:08:05,956
 You don't have to
 do anything special.
 
-00:08:06.686 --> 00:08:08.796 A:middle
+
+184
+00:08:06,686 --> 00:08:08,796
 It's automatically contained
 in a visual effect for you,
 
-00:08:08.996 --> 00:08:10.696 A:middle
+
+185
+00:08:08,996 --> 00:08:10,696
 which is what does
 the actual blurring.
 
-00:08:11.206 --> 00:08:13.226 A:middle
+
+186
+00:08:11,206 --> 00:08:13,226
 They automatically
 work in Full Screen.
 
-00:08:13.596 --> 00:08:15.796 A:middle
+
+187
+00:08:13,596 --> 00:08:15,796
 So when your window goes to Full
 Screen and out of Full Screen,
 
-00:08:15.796 --> 00:08:17.266 A:middle
+
+188
+00:08:15,796 --> 00:08:17,266
 they're placed in
 the correct location.
 
-00:08:17.956 --> 00:08:20.266 A:middle
+
+189
+00:08:17,956 --> 00:08:20,266
 And the size is kind of
 managed for you automatically.
 
-00:08:20.266 --> 00:08:24.276 A:middle
+
+190
+00:08:20,266 --> 00:08:24,276
 And we'll discuss a little bit
 more about that in a minute.
 
-00:08:24.446 --> 00:08:26.966 A:middle
+
+191
+00:08:24,446 --> 00:08:26,966
 So let's look at the first
 property, the layout attribute.
 
-00:08:29.436 --> 00:08:34.145 A:middle
+
+192
+00:08:29,436 --> 00:08:34,145
 So here is the layout attribute
 when it's set to dot bottom.
 
-00:08:34.876 --> 00:08:37.096 A:middle
+
+193
+00:08:34,876 --> 00:08:37,096
 Dot bottom means
 your view is going
 
-00:08:37.096 --> 00:08:39.606 A:middle
+
+194
+00:08:37,096 --> 00:08:39,606
 to be placed below
 the title bar.
 
-00:08:40.576 --> 00:08:42.765 A:middle
+
+195
+00:08:40,576 --> 00:08:42,765
 Its height is whatever height
 you've actually specified
 
-00:08:42.765 --> 00:08:45.296 A:middle
+
+196
+00:08:42,765 --> 00:08:45,296
 for that view in your nib
 or however you specified it.
 
-00:08:45.926 --> 00:08:47.816 A:middle
+
+197
+00:08:45,926 --> 00:08:47,816
 And the width is
 automatically changed
 
-00:08:47.816 --> 00:08:48.966 A:middle
+
+198
+00:08:47,816 --> 00:08:48,966
 as the window is resized.
 
-00:08:51.056 --> 00:08:52.666 A:middle
+
+199
+00:08:51,056 --> 00:08:52,666
 Another option is dot right.
 
-00:08:53.466 --> 00:08:55.276 A:middle
+
+200
+00:08:53,466 --> 00:08:55,276
 And this is an example
 of Safari.
 
-00:08:55.786 --> 00:08:57.616 A:middle
+
+201
+00:08:55,786 --> 00:08:57,616
 They're using the dot
 right option in order
 
-00:08:57.616 --> 00:09:01.126 A:middle
+
+202
+00:08:57,616 --> 00:09:01,126
 to add the plus button to the
 Safari window when it's not
 
 
-
-00:08:57.616 --> 00:09:01.126 A:middle
-to add the plus button to the
-Safari window when it's not
-
-00:09:01.126 --> 00:09:02.536 A:middle
+203
+00:09:01,126 --> 00:09:02,536
 in Full Screen or
 in Full Screen.
 
-00:09:03.516 --> 00:09:06.206 A:middle
+
+204
+00:09:03,516 --> 00:09:06,206
 The width is whatever width
 the view has specified.
 
-00:09:06.596 --> 00:09:08.556 A:middle
+
+205
+00:09:06,596 --> 00:09:08,556
 And the height is
 automatically set to the height
 
-00:09:08.556 --> 00:09:11.626 A:middle
+
+206
+00:09:08,556 --> 00:09:11,626
 of the title bar or tool bar.
 
-00:09:11.846 --> 00:09:16.436 A:middle
+
+207
+00:09:11,846 --> 00:09:16,436
 New to Mac OS X v11 is the
 ability to specify a dot left.
 
-00:09:17.176 --> 00:09:20.156 A:middle
+
+208
+00:09:17,176 --> 00:09:20,156
 And with that, you can put
 the [inaudible] to the side
 
-00:09:20.156 --> 00:09:21.876 A:middle
+
+209
+00:09:20,156 --> 00:09:21,876
 of the window buttons.
 
-00:09:22.026 --> 00:09:25.076 A:middle
+
+210
+00:09:22,026 --> 00:09:25,076
 So you could add something
 like a register button here
 
-00:09:25.076 --> 00:09:27.726 A:middle
+
+211
+00:09:25,076 --> 00:09:27,726
 or some other notes that you
 want to show to your user.
 
-00:09:28.566 --> 00:09:34.076 A:middle
+
+212
+00:09:28,566 --> 00:09:34,076
 And it's another
 new thing to X v11.
 
-00:09:34.286 --> 00:09:36.896 A:middle
+
+213
+00:09:34,286 --> 00:09:36,896
 Next we have the Full
 Screen min height.
 
-00:09:38.146 --> 00:09:39.436 A:middle
+
+214
+00:09:38,146 --> 00:09:39,436
 Let's take a look
 at that property.
 
-00:09:40.366 --> 00:09:41.536 A:middle
+
+215
+00:09:40,366 --> 00:09:41,536
 So the Full Screen min height.
 
-00:09:41.856 --> 00:09:42.756 A:middle
+
+216
+00:09:41,856 --> 00:09:42,756
 What does this mean?
 
-00:09:43.056 --> 00:09:45.526 A:middle
+
+217
+00:09:43,056 --> 00:09:45,526
 Well this property
 is only applicable
 
-00:09:45.726 --> 00:09:47.736 A:middle
+
+218
+00:09:45,726 --> 00:09:47,736
 when you're actually
 in Full Screen.
 
-00:09:47.736 --> 00:09:50.676 A:middle
+
+219
+00:09:47,736 --> 00:09:50,676
 And this is the minimum
 height that's visible
 
-00:09:50.746 --> 00:09:52.126 A:middle
+
+220
+00:09:50,746 --> 00:09:52,126
 when you're in Full Screen.
 
-00:09:53.116 --> 00:09:56.656 A:middle
+
+221
+00:09:53,116 --> 00:09:56,656
 Anything that's not shown
 will automatically be shown
 
-00:09:56.656 --> 00:09:58.066 A:middle
+
+222
+00:09:56,656 --> 00:09:58,066
 when you mouse up
 to the toolbar.
 
-00:09:58.066 --> 00:09:59.456 A:middle
+
+223
+00:09:58,066 --> 00:09:59,456
 And I'll show you
 some screenshots
 
-00:09:59.456 --> 00:10:00.376 A:middle
+
+224
+00:09:59,456 --> 00:10:00,376
 of that in just a second.
 
 
-
-00:09:59.456 --> 00:10:00.376 A:middle
-of that in just a second.
-
-00:10:01.076 --> 00:10:02.536 A:middle
+225
+00:10:01,076 --> 00:10:02,536
 The default body is zero.
 
-00:10:02.536 --> 00:10:05.186 A:middle
+
+226
+00:10:02,536 --> 00:10:05,186
 So let's take a look
 at what that means.
 
-00:10:06.256 --> 00:10:07.816 A:middle
+
+227
+00:10:06,256 --> 00:10:07,816
 So a Full Screen
 minimum height of zero.
 
-00:10:07.866 --> 00:10:12.446 A:middle
+
+228
+00:10:07,866 --> 00:10:12,446
 So here's a toolbar, and now
 there is an accessory view
 
-00:10:12.446 --> 00:10:13.976 A:middle
+
+229
+00:10:12,446 --> 00:10:13,976
 controller there,
 but it's hidden
 
-00:10:13.976 --> 00:10:15.126 A:middle
+
+230
+00:10:13,976 --> 00:10:15,126
 because the height is zero.
 
-00:10:15.856 --> 00:10:17.156 A:middle
+
+231
+00:10:15,856 --> 00:10:17,156
 If the height was non-zero,
 
-00:10:17.386 --> 00:10:20.656 A:middle
+
+232
+00:10:17,386 --> 00:10:20,656
 you would see whatever
 value you set always there.
 
-00:10:20.746 --> 00:10:24.276 A:middle
+
+233
+00:10:20,746 --> 00:10:24,276
 And the way it's revealed by the
 user is you mouse up to the top
 
-00:10:24.276 --> 00:10:27.126 A:middle
+
+234
+00:10:24,276 --> 00:10:27,126
 of that menu bar, and the
 title bar is revealed.
 
-00:10:27.606 --> 00:10:31.336 A:middle
+
+235
+00:10:27,606 --> 00:10:31,336
 And your Full Screen accessory
 view is revealed automatically
 
-00:10:31.336 --> 00:10:32.426 A:middle
+
+236
+00:10:31,336 --> 00:10:32,426
 with it.
 
-00:10:33.536 --> 00:10:35.186 A:middle
+
+237
+00:10:33,536 --> 00:10:35,186
 So that's highlighting
 that location.
 
-00:10:37.156 --> 00:10:40.446 A:middle
+
+238
+00:10:37,156 --> 00:10:40,446
 Now if you've used NSToolbar,
 you may already be familiar
 
-00:10:40.446 --> 00:10:43.026 A:middle
+
+239
+00:10:40,446 --> 00:10:43,026
 with Full Screen
 accessory view on NSToolbar.
 
-00:10:43.466 --> 00:10:47.026 A:middle
+
+240
+00:10:43,466 --> 00:10:47,026
 And this new Title Bar Accessory
 View Controller supersedes this
 
-00:10:47.026 --> 00:10:47.556 A:middle
+
+241
+00:10:47,026 --> 00:10:47,556
 older API.
 
-00:10:47.816 --> 00:10:50.046 A:middle
+
+242
+00:10:47,816 --> 00:10:50,046
 And so we're encouraging
 you to not use it anymore.
 
-00:10:50.676 --> 00:10:53.196 A:middle
+
+243
+00:10:50,676 --> 00:10:53,196
 But the min height and max
 height properties work very
 
-00:10:53.196 --> 00:10:56.116 A:middle
+
+244
+00:10:53,196 --> 00:10:56,116
 similar to what's in title
 bar accessory view controller.
 
-00:10:56.706 --> 00:11:00.516 A:middle
+
+245
+00:10:56,706 --> 00:11:00,516
 So how do you actually add them?
 
 
-
-00:10:56.706 --> 00:11:00.516 A:middle
-So how do you actually add them?
-
-00:11:00.516 --> 00:11:02.496 A:middle
+246
+00:11:00,516 --> 00:11:02,496
 Well we have four
 methods on NSWindow.
 
-00:11:02.896 --> 00:11:06.256 A:middle
+
+247
+00:11:02,896 --> 00:11:06,256
 We have an array of title bar
 accessory view controllers.
 
-00:11:06.256 --> 00:11:08.076 A:middle
+
+248
+00:11:06,256 --> 00:11:08,076
 You can access what's
 attached to the window.
 
-00:11:09.046 --> 00:11:09.796 A:middle
+
+249
+00:11:09,046 --> 00:11:09,796
 You can add them.
 
-00:11:10.876 --> 00:11:12.376 A:middle
+
+250
+00:11:10,876 --> 00:11:12,376
 You can insert them
 at a particular index.
 
-00:11:13.096 --> 00:11:14.996 A:middle
+
+251
+00:11:13,096 --> 00:11:14,996
 And you can remove them
 at a particular index.
 
-00:11:15.996 --> 00:11:18.476 A:middle
+
+252
+00:11:15,996 --> 00:11:18,476
 But it's really easy
 to just add and remove.
 
-00:11:18.476 --> 00:11:19.846 A:middle
+
+253
+00:11:18,476 --> 00:11:19,846
 And so here's what
 you'll typically do.
 
-00:11:20.236 --> 00:11:22.996 A:middle
+
+254
+00:11:20,236 --> 00:11:22,996
 You'll call Window Add Title
 Bar Accessory View Controller,
 
-00:11:23.736 --> 00:11:25.146 A:middle
+
+255
+00:11:23,736 --> 00:11:25,146
 pass in your accessory
 view controller.
 
-00:11:25.466 --> 00:11:27.046 A:middle
+
+256
+00:11:25,466 --> 00:11:27,046
 And when you want to remove it,
 
-00:11:27.046 --> 00:11:29.536 A:middle
+
+257
+00:11:27,046 --> 00:11:29,536
 you'll use our default
 NSViewController API,
 
-00:11:30.056 --> 00:11:31.186 A:middle
+
+258
+00:11:30,056 --> 00:11:31,186
 remove from parent
 view controller.
 
-00:11:31.186 --> 00:11:32.666 A:middle
+
+259
+00:11:31,186 --> 00:11:32,666
 Which just automatically
 figured it
 
-00:11:32.666 --> 00:11:34.236 A:middle
+
+260
+00:11:32,666 --> 00:11:34,236
 out where it is and removes it.
 
-00:11:34.826 --> 00:11:39.976 A:middle
+
+261
+00:11:34,826 --> 00:11:39,976
 So that was talking about Title
 Bar Accessory View Controllers.
 
-00:11:40.546 --> 00:11:41.966 A:middle
+
+262
+00:11:40,546 --> 00:11:41,966
 Let's talk about
 Full Screen tiles
 
-00:11:42.346 --> 00:11:46.136 A:middle
+
+263
+00:11:42,346 --> 00:11:46,136
 and some new things
 in Mac OS X v11.
 
-00:11:46.406 --> 00:11:49.256 A:middle
+
+264
+00:11:46,406 --> 00:11:49,256
 So Full Screen tiles,
 what's the purpose of these?
 
-00:11:49.576 --> 00:11:51.566 A:middle
+
+265
+00:11:49,576 --> 00:11:51,566
 They still allow you
 to focus your attention
 
-00:11:51.566 --> 00:11:53.286 A:middle
+
+266
+00:11:51,566 --> 00:11:53,286
 or user's attention
 on a single task,
 
-00:11:54.076 --> 00:11:55.796 A:middle
+
+267
+00:11:54,076 --> 00:11:55,796
 but it just might
 involve multiple windows.
 
-00:11:56.606 --> 00:11:58.566 A:middle
+
+268
+00:11:56,606 --> 00:11:58,566
 You get to use all that
 screen real estate.
 
-00:11:58.966 --> 00:12:01.956 A:middle
+
+269
+00:11:58,966 --> 00:12:01,956
 So in this screen shot we have
 Safari, and we have reminders
 
 
-
-00:11:58.966 --> 00:12:01.956 A:middle
-So in this screen shot we have
-Safari, and we have reminders
-
-00:12:01.956 --> 00:12:07.296 A:middle
+270
+00:12:01,956 --> 00:12:07,296
 on the side to focus on a
 couple tasks at the same time.
 
-00:12:07.526 --> 00:12:09.276 A:middle
+
+271
+00:12:07,526 --> 00:12:09,276
 So let's take a look
 at what happens
 
-00:12:09.276 --> 00:12:10.926 A:middle
+
+272
+00:12:09,276 --> 00:12:10,926
 when you resize the splitter,
 
-00:12:10.926 --> 00:12:12.366 A:middle
+
+273
+00:12:10,926 --> 00:12:12,366
 when you are actually
 in this mode.
 
-00:12:12.756 --> 00:12:16.646 A:middle
+
+274
+00:12:12,756 --> 00:12:16,646
 Notice that as I resize,
 Safari's window hits a min size
 
-00:12:17.196 --> 00:12:18.696 A:middle
+
+275
+00:12:17,196 --> 00:12:18,696
 and Reminders hits a min size.
 
-00:12:18.696 --> 00:12:23.566 A:middle
+
+276
+00:12:18,696 --> 00:12:23,566
 And it doesn't let it shrink
 too far for a given window.
 
-00:12:23.736 --> 00:12:26.536 A:middle
+
+277
+00:12:23,736 --> 00:12:26,536
 So it has a minimum and
 maximum that can hit.
 
-00:12:27.916 --> 00:12:29.146 A:middle
+
+278
+00:12:27,916 --> 00:12:29,146
 So I'm going to talk
 about how to do that
 
-00:12:29.706 --> 00:12:30.706 A:middle
+
+279
+00:12:29,706 --> 00:12:30,706
 and what you need to do.
 
-00:12:31.486 --> 00:12:35.066 A:middle
+
+280
+00:12:31,486 --> 00:12:35,066
 But first let's talk about,
 well, what windows can be put
 
-00:12:35.066 --> 00:12:36.316 A:middle
+
+281
+00:12:35,066 --> 00:12:36,316
 into a Full Screen tile?
 
-00:12:37.726 --> 00:12:40.896 A:middle
+
+282
+00:12:37,726 --> 00:12:40,896
 We will implicitly allow
 any window to be put
 
-00:12:40.896 --> 00:12:46.046 A:middle
+
+283
+00:12:40,896 --> 00:12:46,046
 into a Full Screen tile if it's
 resizable and it's not a panel.
 
-00:12:46.206 --> 00:12:48.306 A:middle
+
+284
+00:12:46,206 --> 00:12:48,306
 So that means your
 window doesn't have
 
-00:12:48.366 --> 00:12:49.916 A:middle
+
+285
+00:12:48,366 --> 00:12:49,916
 to be Full Screen-capable.
 
-00:12:50.286 --> 00:12:52.426 A:middle
+
+286
+00:12:50,286 --> 00:12:52,426
 But it could still
 be added as a tile
 
-00:12:52.666 --> 00:12:54.466 A:middle
+
+287
+00:12:52,666 --> 00:12:54,466
 to another Full Screen-capable
 window.
 
-00:12:55.016 --> 00:12:57.296 A:middle
+
+288
+00:12:55,016 --> 00:12:57,296
 The heuristics in
 exactly what we do
 
-00:12:57.296 --> 00:12:59.246 A:middle
+
+289
+00:12:57,296 --> 00:12:59,246
 and how we determine this
 might change over time.
 
 
-
-00:13:00.026 --> 00:13:02.436 A:middle
+290
+00:13:00,026 --> 00:13:02,436
 So you might want to
 make it more explicit.
 
-00:13:03.416 --> 00:13:06.596 A:middle
+
+291
+00:13:03,416 --> 00:13:06,596
 So let's say that you
 have a nonresizable window
 
-00:13:06.696 --> 00:13:09.266 A:middle
+
+292
+00:13:06,696 --> 00:13:09,266
 that can't be put into a tile,
 and you want it to be able
 
-00:13:09.306 --> 00:13:10.186 A:middle
+
+293
+00:13:09,306 --> 00:13:10,186
 to be put into a tile.
 
-00:13:10.766 --> 00:13:11.686 A:middle
+
+294
+00:13:10,766 --> 00:13:11,686
 You can explicitly add
 
-00:13:11.786 --> 00:13:14.786 A:middle
+
+295
+00:13:11,786 --> 00:13:14,786
 to the collection behavior
 Full Screen Allows Tiling
 
-00:13:15.236 --> 00:13:17.286 A:middle
+
+296
+00:13:15,236 --> 00:13:17,286
 to make it allow it
 to be put into a tile.
 
-00:13:18.466 --> 00:13:21.096 A:middle
+
+297
+00:13:18,466 --> 00:13:21,096
 Similarly, you might have
 a window which you want
 
-00:13:21.096 --> 00:13:22.656 A:middle
+
+298
+00:13:21,096 --> 00:13:22,656
 to never be put into a tile.
 
-00:13:23.246 --> 00:13:26.316 A:middle
+
+299
+00:13:23,246 --> 00:13:26,316
 So we determine it -- it
 could be put into a tile,
 
-00:13:26.316 --> 00:13:27.276 A:middle
+
+300
+00:13:26,316 --> 00:13:27,276
 but you don't want it to be.
 
-00:13:27.276 --> 00:13:30.046 A:middle
+
+301
+00:13:27,276 --> 00:13:30,046
 So you can make Full
 Screen Disallows Tiling
 
-00:13:30.206 --> 00:13:31.656 A:middle
+
+302
+00:13:30,206 --> 00:13:31,656
 to prevent that.
 
-00:13:32.096 --> 00:13:35.216 A:middle
+
+303
+00:13:32,096 --> 00:13:35,216
 In addition, you might have a
 window, you take it Full Screen,
 
-00:13:35.216 --> 00:13:36.836 A:middle
+
+304
+00:13:35,216 --> 00:13:36,836
 and you want it to
 always be alone.
 
-00:13:37.356 --> 00:13:39.886 A:middle
+
+305
+00:13:37,356 --> 00:13:39,886
 You can set Full Screen
 Disallows Tiling on that window
 
-00:13:40.306 --> 00:13:44.766 A:middle
+
+306
+00:13:40,306 --> 00:13:44,766
 to have no other
 windows be put with it.
 
-00:13:45.026 --> 00:13:48.076 A:middle
+
+307
+00:13:45,026 --> 00:13:48,076
 So now you know if a
 window can be allowed
 
-00:13:48.076 --> 00:13:49.056 A:middle
+
+308
+00:13:48,076 --> 00:13:49,056
 to be put into a tile.
 
-00:13:49.476 --> 00:13:50.856 A:middle
+
+309
+00:13:49,476 --> 00:13:50,856
 Let's talk about
 some of the minimum,
 
-00:13:50.856 --> 00:13:52.636 A:middle
+
+310
+00:13:50,856 --> 00:13:52,636
 maximum sizes for that window.
 
-00:13:52.986 --> 00:13:55.846 A:middle
+
+311
+00:13:52,986 --> 00:13:55,846
 Well normally, when your
 window is not in Full Screen,
 
-00:13:56.126 --> 00:13:59.606 A:middle
+
+312
+00:13:56,126 --> 00:13:59,606
 you can resize it, and it's
 automatically restricted
 
-00:13:59.606 --> 00:14:00.656 A:middle
+
+313
+00:13:59,606 --> 00:14:00,656
 by its min and max size.
 
 
-
-00:13:59.606 --> 00:14:00.656 A:middle
-by its min and max size.
-
-00:14:00.656 --> 00:14:04.846 A:middle
+314
+00:14:00,656 --> 00:14:04,846
 And that's usually determined
 automatically by Auto Layout
 
-00:14:04.846 --> 00:14:05.926 A:middle
+
+315
+00:14:04,846 --> 00:14:05,926
 when you're using Auto Layout.
 
-00:14:06.996 --> 00:14:08.966 A:middle
+
+316
+00:14:06,996 --> 00:14:08,966
 If you're using, if you're
 not using Auto Layout,
 
-00:14:09.346 --> 00:14:12.496 A:middle
+
+317
+00:14:09,346 --> 00:14:12,496
 then the window's min size
 and max size come into play.
 
-00:14:12.556 --> 00:14:14.486 A:middle
+
+318
+00:14:12,556 --> 00:14:14,486
 And those are just
 explicit properties
 
-00:14:14.486 --> 00:14:15.506 A:middle
+
+319
+00:14:14,486 --> 00:14:15,506
 that you set in the window.
 
-00:14:16.046 --> 00:14:17.926 A:middle
+
+320
+00:14:16,046 --> 00:14:17,926
 Or content min size
 or content max size,
 
-00:14:17.926 --> 00:14:18.866 A:middle
+
+321
+00:14:17,926 --> 00:14:18,866
 depending on what you're using.
 
-00:14:20.006 --> 00:14:22.296 A:middle
+
+322
+00:14:20,006 --> 00:14:22,296
 Now if you're taking a window
 and you're going to Full Screen
 
-00:14:22.296 --> 00:14:26.126 A:middle
+
+323
+00:14:22,296 --> 00:14:26,126
 or you're going to a Full Screen
 tile, those are the values
 
-00:14:26.126 --> 00:14:27.556 A:middle
+
+324
+00:14:26,126 --> 00:14:27,556
 that you should just
 normally use.
 
-00:14:28.096 --> 00:14:29.886 A:middle
+
+325
+00:14:28,096 --> 00:14:29,886
 But there might be
 exceptions to that rule,
 
-00:14:29.886 --> 00:14:32.346 A:middle
+
+326
+00:14:29,886 --> 00:14:32,346
 and so we have some
 more API to solve that.
 
-00:14:33.076 --> 00:14:35.496 A:middle
+
+327
+00:14:33,076 --> 00:14:35,496
 First of all, let's talk about
 an exception to that rule
 
-00:14:35.496 --> 00:14:36.166 A:middle
+
+328
+00:14:35,496 --> 00:14:36,166
 and what you're doing.
 
-00:14:36.386 --> 00:14:38.026 A:middle
+
+329
+00:14:36,386 --> 00:14:38,026
 So here's something
 that might be a little
 
-00:14:38.066 --> 00:14:39.126 A:middle
+
+330
+00:14:38,066 --> 00:14:39,126
 calculator application.
 
-00:14:39.546 --> 00:14:41.206 A:middle
+
+331
+00:14:39,546 --> 00:14:41,206
 And its size is not resizable.
 
-00:14:41.656 --> 00:14:44.426 A:middle
+
+332
+00:14:41,656 --> 00:14:44,426
 So this developer might say,
 okay, we're going to allow this
 
-00:14:44.426 --> 00:14:45.376 A:middle
+
+333
+00:14:44,426 --> 00:14:45,376
 to be put into a tile.
 
-00:14:46.306 --> 00:14:49.746 A:middle
+
+334
+00:14:46,306 --> 00:14:49,746
 But when it's put into
 a tile, as shown here,
 
-00:14:50.116 --> 00:14:53.006 A:middle
+
+335
+00:14:50,116 --> 00:14:53,006
 that calculator's app
 height is now a lot larger
 
-00:14:53.006 --> 00:14:55.796 A:middle
+
+336
+00:14:53,006 --> 00:14:55,796
 than it was before, even
 though it wasn't resizable.
 
-00:14:56.196 --> 00:14:58.526 A:middle
+
+337
+00:14:56,196 --> 00:14:58,526
 And so it needs to handle
 that and do something special.
 
-00:14:59.326 --> 00:15:02.266 A:middle
+
+338
+00:14:59,326 --> 00:15:02,266
 You might also add extra views
 there to show more information
 
 
-
-00:14:59.326 --> 00:15:02.266 A:middle
-You might also add extra views
-there to show more information
-
-00:15:02.266 --> 00:15:04.786 A:middle
+339
+00:15:02,266 --> 00:15:04,786
 to the user when it's
 in a Full Screen tile.
 
-00:15:05.356 --> 00:15:06.896 A:middle
+
+340
+00:15:05,356 --> 00:15:06,896
 So you can dynamically do this.
 
-00:15:07.246 --> 00:15:08.956 A:middle
+
+341
+00:15:07,246 --> 00:15:08,956
 And you just use some
 window delegate methods,
 
-00:15:09.536 --> 00:15:11.166 A:middle
+
+342
+00:15:09,536 --> 00:15:11,166
 Window Will Enter Full Screen.
 
-00:15:11.756 --> 00:15:14.236 A:middle
+
+343
+00:15:11,756 --> 00:15:14,236
 And in this particular case,
 when we enter Full Screen,
 
-00:15:14.606 --> 00:15:15.986 A:middle
+
+344
+00:15:14,606 --> 00:15:15,986
 we're unhiding some views,
 
-00:15:16.466 --> 00:15:17.946 A:middle
+
+345
+00:15:16,466 --> 00:15:17,946
 changing some constraint
 priorities,
 
-00:15:18.026 --> 00:15:20.216 A:middle
+
+346
+00:15:18,026 --> 00:15:20,216
 which allow the window
 to actually be resized
 
-00:15:20.216 --> 00:15:21.696 A:middle
+
+347
+00:15:20,216 --> 00:15:21,696
 by the system when
 it's in Full Screen.
 
-00:15:22.016 --> 00:15:24.596 A:middle
+
+348
+00:15:22,016 --> 00:15:24,596
 And it just undoes that work
 when it exits Full Screen.
 
-00:15:24.596 --> 00:15:27.236 A:middle
+
+349
+00:15:24,596 --> 00:15:27,236
 It is important to know that
 you might actually get these
 
-00:15:27.236 --> 00:15:31.896 A:middle
+
+350
+00:15:27,236 --> 00:15:31,896
 delegate methods even if your
 window does not normally make
 
-00:15:31.896 --> 00:15:33.686 A:middle
+
+351
+00:15:31,896 --> 00:15:33,686
 itself a Full Screen
 primary window.
 
-00:15:34.166 --> 00:15:36.276 A:middle
+
+352
+00:15:34,166 --> 00:15:36,276
 So this might be called
 for a tile window.
 
-00:15:38.296 --> 00:15:42.636 A:middle
+
+353
+00:15:38,296 --> 00:15:42,636
 Now those windows had a
 particular thick size before it
 
-00:15:42.636 --> 00:15:43.466 A:middle
+
+354
+00:15:42,636 --> 00:15:43,466
 was in Full Screen.
 
-00:15:44.026 --> 00:15:45.996 A:middle
+
+355
+00:15:44,026 --> 00:15:45,996
 But when it's in Full
 Screen, it sizes different.
 
-00:15:46.746 --> 00:15:49.776 A:middle
+
+356
+00:15:46,746 --> 00:15:49,776
 You will probably need to
 tell the system those sizes
 
-00:15:49.896 --> 00:15:51.366 A:middle
+
+357
+00:15:49,896 --> 00:15:51,366
 when it's going to
 be in Full Screen.
 
-00:15:51.856 --> 00:15:53.826 A:middle
+
+358
+00:15:51,856 --> 00:15:53,826
 So we have explicit
 API to do that.
 
-00:15:54.366 --> 00:15:56.206 A:middle
+
+359
+00:15:54,366 --> 00:15:56,206
 We have a min Full
 Screen content size
 
-00:15:56.366 --> 00:15:58.506 A:middle
+
+360
+00:15:56,366 --> 00:15:58,506
 and a max Full Screen
 content size to do that.
 
-00:15:59.796 --> 00:16:02.166 A:middle
+
+361
+00:15:59,796 --> 00:16:02,166
 You need to set these
 early, because if you played
 
 
-
-00:15:59.796 --> 00:16:02.166 A:middle
-You need to set these
-early, because if you played
-
-00:16:02.166 --> 00:16:04.916 A:middle
+362
+00:16:02,166 --> 00:16:04,916
 around with Mac OS X v11,
 you may notice when you click
 
-00:16:04.916 --> 00:16:07.646 A:middle
+
+363
+00:16:04,916 --> 00:16:07,646
 and hold in the green button,
 you're provided with a selection
 
-00:16:07.646 --> 00:16:09.626 A:middle
+
+364
+00:16:07,646 --> 00:16:09,626
 of other candidate
 windows that can fit
 
-00:16:09.626 --> 00:16:10.786 A:middle
+
+365
+00:16:09,626 --> 00:16:10,786
 into that available space.
 
-00:16:11.546 --> 00:16:14.816 A:middle
+
+366
+00:16:11,546 --> 00:16:14,816
 So you as the developer need
 to set these min sizes early
 
-00:16:15.416 --> 00:16:16.536 A:middle
+
+367
+00:16:15,416 --> 00:16:16,536
 so the system can figure
 
-00:16:16.536 --> 00:16:18.886 A:middle
+
+368
+00:16:16,536 --> 00:16:18,886
 out what is a potential
 candidate for that area.
 
-00:16:20.016 --> 00:16:22.046 A:middle
+
+369
+00:16:20,016 --> 00:16:22,046
 Like I said before, normally
 you don't need to use these.
 
-00:16:22.346 --> 00:16:23.376 A:middle
+
+370
+00:16:22,346 --> 00:16:23,376
 They're pretty much automatic
 
-00:16:23.526 --> 00:16:25.466 A:middle
+
+371
+00:16:23,526 --> 00:16:25,466
 when your window is
 just normally resizable.
 
-00:16:26.066 --> 00:16:28.546 A:middle
+
+372
+00:16:26,066 --> 00:16:28,546
 So that presents a dilemma.
 
-00:16:28.706 --> 00:16:32.356 A:middle
+
+373
+00:16:28,706 --> 00:16:32,356
 What happens if your window
 has a min size that's something
 
-00:16:32.356 --> 00:16:36.586 A:middle
+
+374
+00:16:32,356 --> 00:16:36,586
 like 1200, and there is
 another window, a window B,
 
-00:16:36.636 --> 00:16:38.696 A:middle
+
+375
+00:16:36,636 --> 00:16:38,696
 that says hey, my size is 1300?
 
-00:16:40.096 --> 00:16:41.276 A:middle
+
+376
+00:16:40,096 --> 00:16:41,276
 Well, the system is going
 
-00:16:41.276 --> 00:16:44.126 A:middle
+
+377
+00:16:41,276 --> 00:16:44,126
 to not allow these two
 windows to be together.
 
-00:16:44.536 --> 00:16:48.116 A:middle
+
+378
+00:16:44,536 --> 00:16:48,116
 Their min Full Screen
 content size is just too large
 
-00:16:48.356 --> 00:16:49.396 A:middle
+
+379
+00:16:48,356 --> 00:16:49,396
 to actually make it work out.
 
-00:16:50.516 --> 00:16:52.996 A:middle
+
+380
+00:16:50,516 --> 00:16:52,996
 So what do you need
 to do as a developer?
 
-00:16:54.526 --> 00:16:57.006 A:middle
+
+381
+00:16:54,526 --> 00:16:57,006
 And for that, I'm going to bring
 up my colleague, Taylor Kelly,
 
-00:16:57.006 --> 00:16:59.326 A:middle
+
+382
+00:16:57,006 --> 00:16:59,326
 and he's going to discuss
 how to handle that by talking
 
-00:16:59.326 --> 00:17:00.156 A:middle
+
+383
+00:16:59,326 --> 00:17:00,156
 about flexible layout.
 
 
-
-00:16:59.326 --> 00:17:00.156 A:middle
-about flexible layout.
-
-00:17:01.136 --> 00:17:01.376 A:middle
+384
+00:17:01,136 --> 00:17:01,376
 Thank you.
 
-00:17:02.516 --> 00:17:13.675 A:middle
+
+385
+00:17:02,516 --> 00:17:13,675
 [ Applause ]
 
-00:17:14.175 --> 00:17:14.776 A:middle
-&gt;&gt; TAYLOR KELLY: Hello.
 
-00:17:15.116 --> 00:17:16.656 A:middle
+386
+00:17:14,175 --> 00:17:14,776
+>> TAYLOR KELLY: Hello.
+
+
+387
+00:17:15,116 --> 00:17:16,656
 In this half we're
 going to talk about how
 
-00:17:16.656 --> 00:17:19.175 A:middle
+
+388
+00:17:16,656 --> 00:17:19,175
 to make your layouts more
 flexible, especially in terms
 
-00:17:19.175 --> 00:17:21.586 A:middle
+
+389
+00:17:19,175 --> 00:17:21,586
 of how narrow they can be made
 while in a new split view.
 
-00:17:21.586 --> 00:17:26.776 A:middle
+
+390
+00:17:21,586 --> 00:17:26,776
 On the Mac platform, we have a
 wide variety of display sizes
 
-00:17:26.776 --> 00:17:28.016 A:middle
+
+391
+00:17:26,776 --> 00:17:28,016
 that your application
 can run on.
 
-00:17:28.016 --> 00:17:31.256 A:middle
+
+392
+00:17:28,016 --> 00:17:31,256
 And with Full Screen, users
 are able to immerse themselves,
 
-00:17:31.436 --> 00:17:32.686 A:middle
+
+393
+00:17:31,436 --> 00:17:32,686
 taking up the entire display.
 
-00:17:33.836 --> 00:17:36.466 A:middle
+
+394
+00:17:33,836 --> 00:17:36,466
 With split view, users are now
 able to bring another window
 
-00:17:36.466 --> 00:17:39.326 A:middle
+
+395
+00:17:36,466 --> 00:17:39,326
 into this environment to
 create a richer experience.
 
-00:17:40.086 --> 00:17:43.156 A:middle
+
+396
+00:17:40,086 --> 00:17:43,156
 But this requires that both
 windows are flexible in terms
 
-00:17:43.256 --> 00:17:45.496 A:middle
+
+397
+00:17:43,256 --> 00:17:45,496
 of how small and large
 they can be sized
 
-00:17:45.966 --> 00:17:47.366 A:middle
+
+398
+00:17:45,966 --> 00:17:47,366
 to prevent the conflict
 situations
 
-00:17:47.406 --> 00:17:48.586 A:middle
+
+399
+00:17:47,406 --> 00:17:48,586
 that Corbin talked
 about earlier.
 
-00:17:49.806 --> 00:17:52.736 A:middle
+
+400
+00:17:49,806 --> 00:17:52,736
 This can be particularly tight
 on the smaller display sizes
 
-00:17:52.956 --> 00:17:54.236 A:middle
+
+401
+00:17:52,956 --> 00:17:54,236
 such as the new Retina MacBook.
 
-00:17:55.006 --> 00:17:58.586 A:middle
+
+402
+00:17:55,006 --> 00:17:58,586
 This has a default resolution
 of 1280 by 800 points.
 
-00:17:59.426 --> 00:18:00.616 A:middle
+
+403
+00:17:59,426 --> 00:18:00,616
 Meaning that while
 in split view,
 
 
-
-00:17:59.426 --> 00:18:00.616 A:middle
-Meaning that while
-in split view,
-
-00:18:01.086 --> 00:18:04.106 A:middle
+404
+00:18:01,086 --> 00:18:04,106
 each window is approximately
 allocated 638 points
 
-00:18:04.226 --> 00:18:05.046 A:middle
+
+405
+00:18:04,226 --> 00:18:05,046
 when divided equally.
 
-00:18:05.996 --> 00:18:08.026 A:middle
+
+406
+00:18:05,996 --> 00:18:08,026
 If your application's minimum
 width is currently larger
 
-00:18:08.026 --> 00:18:10.866 A:middle
+
+407
+00:18:08,026 --> 00:18:10,866
 than this, users of these
 display sizes are often not
 
-00:18:10.866 --> 00:18:12.456 A:middle
+
+408
+00:18:10,866 --> 00:18:12,456
 going to be able to
 tile your applications.
 
-00:18:13.736 --> 00:18:17.016 A:middle
+
+409
+00:18:13,736 --> 00:18:17,016
 So I'm going to talk about four
 techniques that you can use
 
-00:18:17.086 --> 00:18:19.566 A:middle
+
+410
+00:18:17,086 --> 00:18:19,566
 to make sure your windows
 behave nicely in Full Screen.
 
-00:18:20.386 --> 00:18:22.636 A:middle
+
+411
+00:18:20,386 --> 00:18:22,636
 First, there's using Auto
 Layout and priorities.
 
-00:18:23.516 --> 00:18:26.296 A:middle
+
+412
+00:18:23,516 --> 00:18:26,296
 Second is the new sidebar
 behavior with autocollapsing.
 
-00:18:27.336 --> 00:18:30.186 A:middle
+
+413
+00:18:27,336 --> 00:18:30,186
 Then is using NSStackView
 to easily build portions
 
-00:18:30.186 --> 00:18:32.676 A:middle
+
+414
+00:18:30,186 --> 00:18:32,676
 of your interface with
 flexibility built right in.
 
-00:18:33.686 --> 00:18:35.926 A:middle
+
+415
+00:18:33,686 --> 00:18:35,926
 And finally, the
 updated NSCollectionView
 
-00:18:35.926 --> 00:18:37.606 A:middle
+
+416
+00:18:35,926 --> 00:18:37,606
 with its new powerful
 layout support.
 
-00:18:39.656 --> 00:18:43.296 A:middle
+
+417
+00:18:39,656 --> 00:18:43,296
 So Auto Layout is a
 constraint-based layout system
 
-00:18:43.296 --> 00:18:45.896 A:middle
+
+418
+00:18:43,296 --> 00:18:45,896
 we introduced in OS
 X Lion and iOS 6.
 
-00:18:46.336 --> 00:18:47.786 A:middle
+
+419
+00:18:46,336 --> 00:18:47,786
 It lets you declare
 the relationships
 
-00:18:47.786 --> 00:18:49.956 A:middle
+
+420
+00:18:47,786 --> 00:18:49,956
 between different UI
 elements, such as the spacing
 
-00:18:49.956 --> 00:18:51.386 A:middle
+
+421
+00:18:49,956 --> 00:18:51,386
 between them or their alignment.
 
-00:18:51.386 --> 00:18:53.686 A:middle
+
+422
+00:18:51,386 --> 00:18:53,686
 And this is really powerful.
 
-00:18:53.686 --> 00:18:55.366 A:middle
+
+423
+00:18:53,686 --> 00:18:55,366
 Windows views are
 dynamically resized,
 
-00:18:55.626 --> 00:18:56.766 A:middle
+
+424
+00:18:55,626 --> 00:18:56,766
 such as with localization.
 
-00:18:57.826 --> 00:18:59.806 A:middle
+
+425
+00:18:57,826 --> 00:18:59,806
 You can establish priorities
 between those constraints
 
-00:18:59.806 --> 00:19:01.836 A:middle
+
+426
+00:18:59,806 --> 00:19:01,836
 so that stronger ones
 can override weaker ones.
 
 
-
-00:18:59.806 --> 00:19:01.836 A:middle
-so that stronger ones
-can override weaker ones.
-
-00:19:02.026 --> 00:19:04.866 A:middle
+427
+00:19:02,026 --> 00:19:04,866
 I'm not going to go into
 too many details about this.
 
-00:19:04.866 --> 00:19:06.456 A:middle
+
+428
+00:19:04,866 --> 00:19:06,456
 There were two talks
 earlier today,
 
-00:19:06.456 --> 00:19:08.046 A:middle
+
+429
+00:19:06,456 --> 00:19:08,046
 Mysteries of Auto
 Layout Part One and Two
 
-00:19:08.366 --> 00:19:10.176 A:middle
+
+430
+00:19:08,366 --> 00:19:10,176
 that whether you're new or
 experienced with Auto Layout,
 
-00:19:10.176 --> 00:19:11.236 A:middle
+
+431
+00:19:10,176 --> 00:19:11,236
 had some really great content.
 
-00:19:12.226 --> 00:19:13.806 A:middle
+
+432
+00:19:12,226 --> 00:19:13,806
 Instead, I want to
 focus on priorities
 
-00:19:14.116 --> 00:19:14.846 A:middle
+
+433
+00:19:14,116 --> 00:19:14,846
 through this example UI.
 
-00:19:14.846 --> 00:19:18.956 A:middle
+
+434
+00:19:14,846 --> 00:19:18,956
 We have a label centered in
 the middle with buttons pinned
 
-00:19:18.956 --> 00:19:19.956 A:middle
+
+435
+00:19:18,956 --> 00:19:19,956
 to the left and right sides.
 
-00:19:19.956 --> 00:19:21.786 A:middle
+
+436
+00:19:19,956 --> 00:19:21,786
 And these might be the
 horizontal constraints
 
-00:19:21.786 --> 00:19:22.866 A:middle
+
+437
+00:19:21,786 --> 00:19:22,866
 that you'd use to create that.
 
-00:19:23.636 --> 00:19:26.316 A:middle
+
+438
+00:19:23,636 --> 00:19:26,316
 With just these constraints, if
 the view is dynamically sized,
 
-00:19:26.826 --> 00:19:27.936 A:middle
+
+439
+00:19:26,826 --> 00:19:27,936
 you could end up
 with this overlap
 
-00:19:27.936 --> 00:19:29.386 A:middle
+
+440
+00:19:27,936 --> 00:19:29,386
 between the label
 and the wide button.
 
-00:19:30.086 --> 00:19:31.246 A:middle
+
+441
+00:19:30,086 --> 00:19:31,246
 It's pretty easy to fix.
 
-00:19:31.476 --> 00:19:32.906 A:middle
+
+442
+00:19:31,476 --> 00:19:32,906
 You'd add a minimum
 spacing constraint
 
-00:19:32.996 --> 00:19:34.106 A:middle
+
+443
+00:19:32,996 --> 00:19:34,106
 between that button
 and the label.
 
-00:19:34.756 --> 00:19:36.206 A:middle
+
+444
+00:19:34,756 --> 00:19:36,206
 And now when the
 container's resized,
 
-00:19:36.496 --> 00:19:38.696 A:middle
+
+445
+00:19:36,496 --> 00:19:38,696
 it can only resize far enough
 to where it can satisfy both
 
-00:19:38.696 --> 00:19:40.986 A:middle
+
+446
+00:19:38,696 --> 00:19:40,986
 that center alignment
 and that minimum spacing.
 
-00:19:40.986 --> 00:19:44.576 A:middle
+
+447
+00:19:40,986 --> 00:19:44,576
 This is a perfect layout,
 except it'd be great
 
-00:19:44.576 --> 00:19:46.286 A:middle
+
+448
+00:19:44,576 --> 00:19:46,286
 if this view can become
 even more compact,
 
-00:19:46.736 --> 00:19:47.806 A:middle
+
+449
+00:19:46,736 --> 00:19:47,806
 eliminating that white space
 
-00:19:47.806 --> 00:19:49.476 A:middle
+
+450
+00:19:47,806 --> 00:19:49,476
 between the thin
 button and the label.
 
-00:19:50.966 --> 00:19:53.586 A:middle
+
+451
+00:19:50,966 --> 00:19:53,586
 Going back, we can make this
 center alignment constraint be
 
-00:19:53.586 --> 00:19:56.746 A:middle
+
+452
+00:19:53,586 --> 00:19:56,746
 optional, meaning it can be
 broken by stronger constraints.
 
-00:19:57.556 --> 00:19:59.676 A:middle
+
+453
+00:19:57,556 --> 00:19:59,676
 In addition, we'll add a minimum
 spacing between the label
 
-00:19:59.676 --> 00:20:02.666 A:middle
+
+454
+00:19:59,676 --> 00:20:02,666
 and the thin button to prevent
 overlapping on that side.
 
 
-
-00:19:59.676 --> 00:20:02.666 A:middle
-and the thin button to prevent
-overlapping on that side.
-
-00:20:03.156 --> 00:20:05.646 A:middle
+455
+00:20:03,156 --> 00:20:05,646
 This time, the label is
 centered as long as possible
 
-00:20:05.966 --> 00:20:07.616 A:middle
+
+456
+00:20:05,966 --> 00:20:07,616
 up until it hits
 that minimum padding.
 
-00:20:07.616 --> 00:20:11.126 A:middle
+
+457
+00:20:07,616 --> 00:20:11,126
 And if we continue to resize
 the container, we can break
 
-00:20:11.126 --> 00:20:12.886 A:middle
+
+458
+00:20:11,126 --> 00:20:12,886
 that centering in order
 to squeeze the most
 
-00:20:12.886 --> 00:20:14.866 A:middle
+
+459
+00:20:12,886 --> 00:20:14,866
 out of our layout,
 up to the point
 
-00:20:14.866 --> 00:20:17.496 A:middle
+
+460
+00:20:14,866 --> 00:20:17,496
 to where we satisfy the
 minimum padding on both sides.
 
-00:20:18.966 --> 00:20:20.246 A:middle
+
+461
+00:20:18,966 --> 00:20:20,246
 You can get this
 for your constraints
 
-00:20:20.246 --> 00:20:21.516 A:middle
+
+462
+00:20:20,246 --> 00:20:21,516
 by just setting the
 Priority property.
 
-00:20:21.516 --> 00:20:24.186 A:middle
+
+463
+00:20:21,516 --> 00:20:24,186
 And this is also exposed
 through Interface Builder.
 
-00:20:25.736 --> 00:20:27.746 A:middle
+
+464
+00:20:25,736 --> 00:20:27,746
 By default, constraints
 are required,
 
-00:20:27.926 --> 00:20:29.166 A:middle
+
+465
+00:20:27,926 --> 00:20:29,166
 meaning they must be satisfied.
 
-00:20:29.166 --> 00:20:32.136 A:middle
+
+466
+00:20:29,166 --> 00:20:32,136
 But anything lower than that and
 the constraint becomes optional.
 
-00:20:32.936 --> 00:20:35.076 A:middle
+
+467
+00:20:32,936 --> 00:20:35,076
 We have some key points to help
 you decide what priority your
 
-00:20:35.076 --> 00:20:35.916 A:middle
+
+468
+00:20:35,076 --> 00:20:35,916
 constraint should be.
 
-00:20:36.746 --> 00:20:38.626 A:middle
+
+469
+00:20:36,746 --> 00:20:38,626
 There's Default Low,
 which is a priority
 
-00:20:38.626 --> 00:20:40.416 A:middle
+
+470
+00:20:38,626 --> 00:20:40,416
 at which your constraint
 is typically weaker
 
-00:20:40.416 --> 00:20:41.216 A:middle
+
+471
+00:20:40,416 --> 00:20:41,216
 than most others.
 
-00:20:42.226 --> 00:20:43.756 A:middle
+
+472
+00:20:42,226 --> 00:20:43,756
 There's Drag That
 Cannot Resize Window,
 
-00:20:43.806 --> 00:20:45.166 A:middle
+
+473
+00:20:43,806 --> 00:20:45,166
 which is the specific priority
 
-00:20:45.166 --> 00:20:47.386 A:middle
+
+474
+00:20:45,166 --> 00:20:47,386
 at which a split view
 divider is dragged at.
 
-00:20:47.726 --> 00:20:49.366 A:middle
+
+475
+00:20:47,726 --> 00:20:49,366
 If you want your constraint
 to be more powerful
 
-00:20:49.366 --> 00:20:51.346 A:middle
+
+476
+00:20:49,366 --> 00:20:51,346
 than this behavior, you'd
 make your priority higher,
 
-00:20:51.346 --> 00:20:52.646 A:middle
+
+477
+00:20:51,346 --> 00:20:52,646
 otherwise lower.
 
-00:20:52.966 --> 00:20:54.996 A:middle
+
+478
+00:20:52,966 --> 00:20:54,996
 You'd typically never make
 it this priority exactly.
 
-00:20:56.306 --> 00:20:58.536 A:middle
+
+479
+00:20:56,306 --> 00:20:58,536
 There's also Windows Size Stay
 Put, which is the priority
 
-00:20:58.536 --> 00:21:00.156 A:middle
+
+480
+00:20:58,536 --> 00:21:00,156
 at which a window
 holds its current size.
 
 
-
-00:20:58.536 --> 00:21:00.156 A:middle
-at which a window
-holds its current size.
-
-00:21:00.736 --> 00:21:03.796 A:middle
+481
+00:21:00,736 --> 00:21:03,796
 And finally, there's also
 Drag That Can Resize Window,
 
-00:21:03.796 --> 00:21:05.496 A:middle
+
+482
+00:21:03,796 --> 00:21:05,496
 which the priority at which
 a window is dragged at.
 
-00:21:05.496 --> 00:21:08.776 A:middle
+
+483
+00:21:05,496 --> 00:21:08,776
 But there's also Default High,
 which is another general level
 
-00:21:08.776 --> 00:21:10.566 A:middle
+
+484
+00:21:08,776 --> 00:21:10,566
 at which your constraint
 is typically stronger
 
-00:21:10.626 --> 00:21:11.976 A:middle
+
+485
+00:21:10,626 --> 00:21:11,976
 than most others.
 
-00:21:12.536 --> 00:21:14.676 A:middle
+
+486
+00:21:12,536 --> 00:21:14,676
 So that's Auto Layout
 priorities.
 
-00:21:14.676 --> 00:21:17.046 A:middle
+
+487
+00:21:14,676 --> 00:21:17,046
 I'm going to refer back to
 the concept of priorities
 
-00:21:17.046 --> 00:21:18.086 A:middle
+
+488
+00:21:17,046 --> 00:21:18,086
 in a few later sections.
 
-00:21:18.486 --> 00:21:20.336 A:middle
+
+489
+00:21:18,486 --> 00:21:20,336
 But next I'm going to talk
 about NSSplitViewController.
 
-00:21:21.346 --> 00:21:23.226 A:middle
+
+490
+00:21:21,346 --> 00:21:23,226
 This is a Container View
 Controller class we introduced
 
-00:21:23.226 --> 00:21:23.836 A:middle
+
+491
+00:21:23,226 --> 00:21:23,836
 in Yosemite.
 
-00:21:24.866 --> 00:21:27.266 A:middle
+
+492
+00:21:24,866 --> 00:21:27,266
 It allows your children
 view controllers
 
-00:21:27.266 --> 00:21:28.976 A:middle
+
+493
+00:21:27,266 --> 00:21:28,976
 to be arranged inside
 of an NSSplitView
 
-00:21:29.396 --> 00:21:31.536 A:middle
+
+494
+00:21:29,396 --> 00:21:31,536
 and exposes the notion
 of NSSplitView items,
 
-00:21:31.676 --> 00:21:32.826 A:middle
+
+495
+00:21:31,676 --> 00:21:32,826
 which encapsulates state
 
-00:21:32.826 --> 00:21:34.596 A:middle
+
+496
+00:21:32,826 --> 00:21:34,596
 about those children
 while in the split view.
 
-00:21:35.236 --> 00:21:36.706 A:middle
+
+497
+00:21:35,236 --> 00:21:36,706
 These are things like
 the holding priority,
 
-00:21:37.046 --> 00:21:39.466 A:middle
+
+498
+00:21:37,046 --> 00:21:39,466
 the collapse state, and it
 allows a really easy way
 
-00:21:39.466 --> 00:21:40.686 A:middle
+
+499
+00:21:39,466 --> 00:21:40,686
 to get animated collapses.
 
-00:21:41.866 --> 00:21:44.576 A:middle
+
+500
+00:21:41,866 --> 00:21:44,576
 Last year's talk Storyboard and
 Controllers on OS X talked more
 
-00:21:44.576 --> 00:21:46.436 A:middle
+
+501
+00:21:44,576 --> 00:21:46,436
 about this and other
 view controller features.
 
-00:21:46.436 --> 00:21:49.176 A:middle
+
+502
+00:21:46,436 --> 00:21:49,176
 But I want to focus on
 what's new in OS X v11.
 
-00:21:50.146 --> 00:21:52.556 A:middle
+
+503
+00:21:50,146 --> 00:21:52,556
 First is the explicit
 concept of sidebars
 
-00:21:52.556 --> 00:21:54.266 A:middle
+
+504
+00:21:52,556 --> 00:21:54,266
 and the special behavior
 that that comes with,
 
-00:21:55.266 --> 00:21:57.236 A:middle
+
+505
+00:21:55,266 --> 00:21:57,236
 as well as spring loading,
 which is the behavior
 
-00:21:57.236 --> 00:22:00.066 A:middle
+
+506
+00:21:57,236 --> 00:22:00,066
 when an item is dragged within
 a split view that can occur,
 
 
-
-00:21:57.236 --> 00:22:00.066 A:middle
-when an item is dragged within
-a split view that can occur,
-
-00:22:00.396 --> 00:22:02.156 A:middle
+507
+00:22:00,396 --> 00:22:02,156
 as well as several new metrics
 
-00:22:02.156 --> 00:22:06.136 A:middle
+
+508
+00:22:02,156 --> 00:22:06,136
 which let you declare exactly
 how your split view behaves
 
-00:22:06.526 --> 00:22:07.376 A:middle
+
+509
+00:22:06,526 --> 00:22:07,376
 during resizes.
 
-00:22:08.646 --> 00:22:11.206 A:middle
+
+510
+00:22:08,646 --> 00:22:11,206
 To go through an example,
 here's the sidebar in Safari.
 
-00:22:11.896 --> 00:22:14.896 A:middle
+
+511
+00:22:11,896 --> 00:22:14,896
 As the window is resized, once
 it hits a point, there's a point
 
-00:22:14.896 --> 00:22:16.436 A:middle
+
+512
+00:22:14,896 --> 00:22:16,436
 at which the sidebar
 will autocollapse,
 
-00:22:16.606 --> 00:22:19.366 A:middle
+
+513
+00:22:16,606 --> 00:22:19,366
 and if it's explicitly
 reshown while in Full Screen,
 
-00:22:19.366 --> 00:22:21.856 A:middle
+
+514
+00:22:19,366 --> 00:22:21,856
 it will overlay on top of
 the other window content.
 
-00:22:22.536 --> 00:22:25.006 A:middle
+
+515
+00:22:22,536 --> 00:22:25,006
 This is transient, similar to
 popovers, so clicking outside
 
-00:22:25.006 --> 00:22:26.906 A:middle
+
+516
+00:22:25,006 --> 00:22:26,906
 of it will autodismiss it.
 
-00:22:27.456 --> 00:22:29.036 A:middle
+
+517
+00:22:27,456 --> 00:22:29,036
 This is really easy to get.
 
-00:22:29.036 --> 00:22:31.416 A:middle
+
+518
+00:22:29,036 --> 00:22:31,416
 You just have to use the sidebar
 with view controller constructor
 
-00:22:31.616 --> 00:22:34.736 A:middle
+
+519
+00:22:31,616 --> 00:22:34,736
 on NSSplitViewItem, or
 by sending the behavior
 
-00:22:34.736 --> 00:22:36.296 A:middle
+
+520
+00:22:34,736 --> 00:22:36,296
 to sidebar in Interface Builder.
 
-00:22:36.356 --> 00:22:39.146 A:middle
+
+521
+00:22:36,356 --> 00:22:39,146
 This will give you back a split
 view item that you can then add
 
-00:22:39.246 --> 00:22:40.246 A:middle
+
+522
+00:22:39,246 --> 00:22:40,246
 to your split view controller.
 
-00:22:40.246 --> 00:22:42.046 A:middle
+
+523
+00:22:40,246 --> 00:22:42,046
 And it comes with
 some special behaviors
 
-00:22:42.546 --> 00:22:44.596 A:middle
+
+524
+00:22:42,546 --> 00:22:44,596
 such as the built-in
 translucent material background
 
-00:22:44.596 --> 00:22:47.186 A:middle
+
+525
+00:22:44,596 --> 00:22:47,186
 and vibrant divider that will
 be introduced in Yosemite.
 
-00:22:47.786 --> 00:22:48.736 A:middle
+
+526
+00:22:47,786 --> 00:22:48,736
 You no longer have to add
 
-00:22:48.736 --> 00:22:50.636 A:middle
+
+527
+00:22:48,736 --> 00:22:50,636
 in your own visual effect
 view to get this effect.
 
-00:22:50.866 --> 00:22:53.306 A:middle
+
+528
+00:22:50,866 --> 00:22:53,306
 NSSplitViewItem will add
 and manage that all for you.
 
-00:22:54.636 --> 00:22:56.046 A:middle
+
+529
+00:22:54,636 --> 00:22:56,046
 There's also the autocollapse
 
-00:22:56.046 --> 00:22:58.146 A:middle
+
+530
+00:22:56,046 --> 00:22:58,146
 and autouncollapse
 behavior that you just saw.
 
-00:22:58.286 --> 00:23:00.526 A:middle
+
+531
+00:22:58,286 --> 00:23:00,526
 And with that, the overlays
 will in Full Screen.
 
 
-
-00:22:58.286 --> 00:23:00.526 A:middle
-And with that, the overlays
-will in Full Screen.
-
-00:23:01.916 --> 00:23:03.916 A:middle
+532
+00:23:01,916 --> 00:23:03,916
 In addition, a default several
 of the other properties,
 
-00:23:03.916 --> 00:23:05.336 A:middle
+
+533
+00:23:03,916 --> 00:23:05,336
 the standard value for sidebars.
 
-00:23:05.696 --> 00:23:08.296 A:middle
+
+534
+00:23:05,696 --> 00:23:08,296
 So your sidebar behaved just
 like the rest on the system.
 
-00:23:09.706 --> 00:23:11.376 A:middle
+
+535
+00:23:09,706 --> 00:23:11,376
 With this there's also
 a new action method
 
-00:23:11.376 --> 00:23:13.476 A:middle
+
+536
+00:23:11,376 --> 00:23:13,476
 on split view controller,
 toggle sidebar,
 
-00:23:13.476 --> 00:23:15.636 A:middle
+
+537
+00:23:13,476 --> 00:23:15,636
 which will animatedly collapse
 
-00:23:15.636 --> 00:23:17.576 A:middle
+
+538
+00:23:15,636 --> 00:23:17,576
 or uncollapse the first
 sidebar it contains.
 
-00:23:18.526 --> 00:23:20.746 A:middle
+
+539
+00:23:18,526 --> 00:23:20,746
 This way, writing no lines
 of code, you can hook
 
-00:23:20.746 --> 00:23:26.196 A:middle
+
+540
+00:23:20,746 --> 00:23:26,196
 to a menu item to have this
 effect, or a toolbar button.
 
-00:23:26.336 --> 00:23:28.226 A:middle
+
+541
+00:23:26,336 --> 00:23:28,226
 Another really cool
 behavior is spring loading.
 
-00:23:28.806 --> 00:23:31.196 A:middle
+
+542
+00:23:28,806 --> 00:23:31,196
 This happens when a user
 has a collapsed pane on one
 
-00:23:31.196 --> 00:23:32.286 A:middle
+
+543
+00:23:31,196 --> 00:23:32,286
 of the edges of your split view,
 
-00:23:32.576 --> 00:23:34.796 A:middle
+
+544
+00:23:32,576 --> 00:23:34,796
 and they drag an item
 over to that edge.
 
-00:23:35.526 --> 00:23:38.146 A:middle
+
+545
+00:23:35,526 --> 00:23:38,146
 We'll translate, uncollapse
 that sidebar and allow them
 
-00:23:38.146 --> 00:23:40.456 A:middle
+
+546
+00:23:38,146 --> 00:23:40,456
 to interact with it and
 then recollapse it once they
 
-00:23:40.456 --> 00:23:40.966 A:middle
+
+547
+00:23:40,456 --> 00:23:40,966
 have finished.
 
-00:23:41.446 --> 00:23:44.656 A:middle
+
+548
+00:23:41,446 --> 00:23:44,656
 You can get this by just
 setting spring loaded to True
 
-00:23:44.656 --> 00:23:46.916 A:middle
+
+549
+00:23:44,656 --> 00:23:46,916
 in your split view item, and
 you'll get this behavior.
 
-00:23:46.916 --> 00:23:49.816 A:middle
+
+550
+00:23:46,916 --> 00:23:49,816
 And this applies to both
 sidebars and non-sidebars.
 
-00:23:50.156 --> 00:23:50.656 A:middle
+
+551
+00:23:50,156 --> 00:23:50,656
 The difference being
 
-00:23:50.656 --> 00:23:52.426 A:middle
+
+552
+00:23:50,656 --> 00:23:52,426
 that sidebars will
 default this to True.
 
-00:23:52.876 --> 00:23:54.626 A:middle
+
+553
+00:23:52,876 --> 00:23:54,626
 We believe that most sidebars
 will want this behavior.
 
-00:23:55.126 --> 00:23:58.586 A:middle
+
+554
+00:23:55,126 --> 00:23:58,586
 Next I want to talk about
 several new metrics that we have
 
-00:23:58.726 --> 00:24:00.436 A:middle
+
+555
+00:23:58,726 --> 00:24:00,436
 on NSSplitViewItem
 and controller.
 
 
-
-00:23:58.726 --> 00:24:00.436 A:middle
-on NSSplitViewItem
-and controller.
-
-00:24:00.436 --> 00:24:02.116 A:middle
+556
+00:24:00,436 --> 00:24:02,116
 I'm going to go through
 them a couple at a time.
 
-00:24:03.686 --> 00:24:05.886 A:middle
+
+557
+00:24:03,686 --> 00:24:05,886
 First are minimum thickness
 and maximum thickness.
 
-00:24:06.246 --> 00:24:07.766 A:middle
+
+558
+00:24:06,246 --> 00:24:07,766
 These directly relate
 to constraints
 
-00:24:07.766 --> 00:24:09.726 A:middle
+
+559
+00:24:07,766 --> 00:24:09,726
 that the split view item
 is managing on itself.
 
-00:24:10.276 --> 00:24:13.276 A:middle
+
+560
+00:24:10,276 --> 00:24:13,276
 They describe how large or small
 this item can actually get.
 
-00:24:14.016 --> 00:24:15.976 A:middle
+
+561
+00:24:14,016 --> 00:24:15,976
 Sidebars will default
 these to standard values.
 
-00:24:16.276 --> 00:24:17.496 A:middle
+
+562
+00:24:16,276 --> 00:24:17,496
 But this is a really
 convenient way
 
-00:24:17.736 --> 00:24:20.626 A:middle
+
+563
+00:24:17,736 --> 00:24:20,626
 to set these constraints
 up for yourself.
 
-00:24:22.076 --> 00:24:25.156 A:middle
+
+564
+00:24:22,076 --> 00:24:25,156
 Holding priority is the only
 non-new metric in OS X v11.
 
-00:24:25.156 --> 00:24:26.976 A:middle
+
+565
+00:24:25,156 --> 00:24:26,976
 It describes the priority
 
-00:24:26.976 --> 00:24:29.006 A:middle
+
+566
+00:24:26,976 --> 00:24:29,006
 at which a split view items
 holds its current size.
 
-00:24:29.636 --> 00:24:31.386 A:middle
+
+567
+00:24:29,636 --> 00:24:31,386
 In this example,
 sidebar is default
 
-00:24:31.386 --> 00:24:33.716 A:middle
+
+568
+00:24:31,386 --> 00:24:33,716
 to a slightly higher value, so
 it means they're less likely
 
-00:24:33.716 --> 00:24:35.386 A:middle
+
+569
+00:24:33,716 --> 00:24:35,386
 to resize than other items.
 
-00:24:36.236 --> 00:24:38.206 A:middle
+
+570
+00:24:36,236 --> 00:24:38,206
 So as an example, when
 it resizes this window,
 
-00:24:38.316 --> 00:24:40.346 A:middle
+
+571
+00:24:38,316 --> 00:24:40,346
 all of that resize weight
 goes to the content area,
 
-00:24:40.346 --> 00:24:42.316 A:middle
+
+572
+00:24:40,346 --> 00:24:42,316
 and the sidebar stays
 the same width.
 
-00:24:43.876 --> 00:24:45.166 A:middle
+
+573
+00:24:43,876 --> 00:24:45,166
 Going back, you might
 also set this
 
-00:24:45.166 --> 00:24:46.806 A:middle
+
+574
+00:24:45,166 --> 00:24:46,806
 up to have equal
 holding priorities
 
-00:24:46.916 --> 00:24:48.016 A:middle
+
+575
+00:24:46,916 --> 00:24:48,016
 between the two items.
 
-00:24:48.726 --> 00:24:50.756 A:middle
+
+576
+00:24:48,726 --> 00:24:50,756
 If you're familiar with Auto
 Layout, you might recognize this
 
-00:24:50.756 --> 00:24:51.976 A:middle
+
+577
+00:24:50,756 --> 00:24:51,976
 as an ambiguous situation.
 
-00:24:52.486 --> 00:24:54.086 A:middle
+
+578
+00:24:52,486 --> 00:24:54,086
 But NSSplitView treats
 this specially.
 
-00:24:55.026 --> 00:24:55.996 A:middle
+
+579
+00:24:55,026 --> 00:24:55,996
 This time when you resize it,
 
-00:24:56.446 --> 00:24:58.436 A:middle
+
+580
+00:24:56,446 --> 00:24:58,436
 the two views sized
 proportionally according
 
-00:24:58.436 --> 00:25:00.796 A:middle
+
+581
+00:24:58,436 --> 00:25:00,796
 to how large they were
 before the resize.
 
 
-
-00:24:58.436 --> 00:25:00.796 A:middle
-to how large they were
-before the resize.
-
-00:25:01.066 --> 00:25:02.806 A:middle
+582
+00:25:01,066 --> 00:25:02,806
 So both views get sized
 a little bit larger.
 
-00:25:03.286 --> 00:25:05.326 A:middle
+
+583
+00:25:03,286 --> 00:25:05,326
 That's holding priority.
 
-00:25:05.566 --> 00:25:08.466 A:middle
+
+584
+00:25:05,566 --> 00:25:08,466
 The next metric is
 preferred thickness fraction.
 
-00:25:08.926 --> 00:25:11.306 A:middle
+
+585
+00:25:08,926 --> 00:25:11,306
 This describes the ideal
 percentage of the split view
 
-00:25:11.306 --> 00:25:12.696 A:middle
+
+586
+00:25:11,306 --> 00:25:12,696
 that a split view
 item wants to be in.
 
-00:25:13.366 --> 00:25:15.596 A:middle
+
+587
+00:25:13,366 --> 00:25:15,596
 For instance, sidebars
 will default to 15 percent.
 
-00:25:16.386 --> 00:25:19.046 A:middle
+
+588
+00:25:16,386 --> 00:25:19,046
 When the user enters Full Screen
 or double-clicks on the divider,
 
-00:25:19.046 --> 00:25:21.716 A:middle
+
+589
+00:25:19,046 --> 00:25:21,716
 that item will snap to
 that preferred thickness.
 
-00:25:21.936 --> 00:25:23.286 A:middle
+
+590
+00:25:21,936 --> 00:25:23,286
 It's a really easy way
 for them to get back
 
-00:25:23.286 --> 00:25:24.106 A:middle
+
+591
+00:25:23,286 --> 00:25:24,106
 to that standard value.
 
-00:25:25.446 --> 00:25:28.186 A:middle
+
+592
+00:25:25,446 --> 00:25:28,186
 Automatic maximum thickness
 comes into play to act as a cap
 
-00:25:28.266 --> 00:25:30.196 A:middle
+
+593
+00:25:28,266 --> 00:25:30,196
 for all of these
 automatic sizing behaviors.
 
-00:25:30.616 --> 00:25:32.926 A:middle
+
+594
+00:25:30,616 --> 00:25:32,926
 If that 15 percent was
 going to correspond to 350,
 
-00:25:32.926 --> 00:25:35.346 A:middle
+
+595
+00:25:32,926 --> 00:25:35,346
 it would instead
 be capped at 280.
 
-00:25:37.236 --> 00:25:39.396 A:middle
+
+596
+00:25:37,236 --> 00:25:39,396
 Those are all of the
 NSSplitViewItem metrics.
 
-00:25:39.746 --> 00:25:41.606 A:middle
+
+597
+00:25:39,746 --> 00:25:41,606
 There's one more metric
 on NSSplitViewController,
 
-00:25:41.916 --> 00:25:44.216 A:middle
+
+598
+00:25:41,916 --> 00:25:44,216
 which is minimum thickness
 for inline sidebars.
 
-00:25:44.986 --> 00:25:47.106 A:middle
+
+599
+00:25:44,986 --> 00:25:47,106
 This describes the width
 at which the sidebars
 
-00:25:47.106 --> 00:25:48.916 A:middle
+
+600
+00:25:47,106 --> 00:25:48,916
 in your split view
 controller will autocollapse.
 
-00:25:49.546 --> 00:25:51.436 A:middle
+
+601
+00:25:49,546 --> 00:25:51,436
 So sizing right up to that
 will leave them inline.
 
-00:25:51.436 --> 00:25:54.546 A:middle
+
+602
+00:25:51,436 --> 00:25:54,546
 And any further will
 collapse your sidebar.
 
-00:25:55.176 --> 00:25:57.116 A:middle
+
+603
+00:25:55,176 --> 00:25:57,116
 This also applies
 while in Full Screen,
 
-00:25:57.636 --> 00:25:59.646 A:middle
+
+604
+00:25:57,636 --> 00:25:59,646
 except the key difference
 is that when in Full Screen
 
-00:25:59.646 --> 00:26:02.176 A:middle
+
+605
+00:25:59,646 --> 00:26:02,176
 if it's explicitly reshown,
 it shows as that overlay.
 
 
-
-00:25:59.646 --> 00:26:02.176 A:middle
-if it's explicitly reshown,
-it shows as that overlay.
-
-00:26:03.176 --> 00:26:05.146 A:middle
+606
+00:26:03,176 --> 00:26:05,146
 This illustrates an important
 concept in Full Screen,
 
-00:26:05.146 --> 00:26:07.546 A:middle
+
+607
+00:26:05,146 --> 00:26:07,546
 where we want to avoid
 running the window
 
-00:26:07.636 --> 00:26:09.286 A:middle
+
+608
+00:26:07,636 --> 00:26:09,286
 to prevent possible
 conflicts with the neighbor.
 
-00:26:09.916 --> 00:26:11.926 A:middle
+
+609
+00:26:09,916 --> 00:26:11,926
 It's always better to
 try to rearrange contents
 
-00:26:11.926 --> 00:26:14.506 A:middle
+
+610
+00:26:11,926 --> 00:26:14,506
 within your window
 than growing it.
 
-00:26:15.756 --> 00:26:17.486 A:middle
+
+611
+00:26:15,756 --> 00:26:17,486
 To support some of
 these new features
 
-00:26:17.676 --> 00:26:19.936 A:middle
+
+612
+00:26:17,676 --> 00:26:19,936
 in NSSplitViewController,
 we've made some enhancements
 
-00:26:19.936 --> 00:26:23.136 A:middle
+
+613
+00:26:19,936 --> 00:26:23,136
 to NSSplitView, specifically
 with the arranged subviews.
 
-00:26:24.356 --> 00:26:26.906 A:middle
+
+614
+00:26:24,356 --> 00:26:26,906
 Before El Capitan,
 all the subviews
 
-00:26:26.906 --> 00:26:28.716 A:middle
+
+615
+00:26:26,906 --> 00:26:28,716
 in a split view were
 treated as split panes.
 
-00:26:30.116 --> 00:26:30.836 A:middle
+
+616
+00:26:30,116 --> 00:26:30,836
 This meant that the API
 
-00:26:30.836 --> 00:26:33.076 A:middle
+
+617
+00:26:30,836 --> 00:26:33,076
 to manage this was just
 the subview API inherited
 
-00:26:33.076 --> 00:26:33.726 A:middle
+
+618
+00:26:33,076 --> 00:26:33,726
 from NSView.
 
-00:26:33.726 --> 00:26:36.996 A:middle
+
+619
+00:26:33,726 --> 00:26:36,996
 And this is convenient but came
 with two really big problems.
 
-00:26:37.816 --> 00:26:39.966 A:middle
+
+620
+00:26:37,816 --> 00:26:39,966
 One is that you're not
 able to add subviews
 
-00:26:40.036 --> 00:26:41.776 A:middle
+
+621
+00:26:40,036 --> 00:26:41,776
 that you don't want
 treated as split panes.
 
-00:26:42.436 --> 00:26:43.916 A:middle
+
+622
+00:26:42,436 --> 00:26:43,916
 For instance, dividers.
 
-00:26:44.196 --> 00:26:45.456 A:middle
+
+623
+00:26:44,196 --> 00:26:45,456
 Dividers just couldn't
 be represented
 
-00:26:45.456 --> 00:26:46.326 A:middle
+
+624
+00:26:45,456 --> 00:26:46,326
 by views with this model.
 
-00:26:47.306 --> 00:26:49.686 A:middle
+
+625
+00:26:47,306 --> 00:26:49,686
 In addition, you can't
 separate the Z-order
 
-00:26:49.976 --> 00:26:51.516 A:middle
+
+626
+00:26:49,976 --> 00:26:51,516
 from the arranged
 order of the subviews.
 
-00:26:51.856 --> 00:26:55.276 A:middle
+
+627
+00:26:51,856 --> 00:26:55,276
 So your zero index subview is
 both the leadingmost and lowest
 
-00:26:55.276 --> 00:26:57.636 A:middle
+
+628
+00:26:55,276 --> 00:26:57,636
 in Z order, and there's
 no way to separate that.
 
-00:26:58.756 --> 00:27:01.306 A:middle
+
+629
+00:26:58,756 --> 00:27:01,306
 So now in X v11 you can
 designate certain subviews
 
 
-
-00:26:58.756 --> 00:27:01.306 A:middle
-So now in X v11 you can
-designate certain subviews
-
-00:27:01.306 --> 00:27:03.956 A:middle
+630
+00:27:01,306 --> 00:27:03,956
 as being arranged by the
 split view using new API
 
-00:27:03.956 --> 00:27:05.076 A:middle
+
+631
+00:27:03,956 --> 00:27:05,076
 on NSSplitView.
 
-00:27:05.636 --> 00:27:09.046 A:middle
+
+632
+00:27:05,636 --> 00:27:09,046
 This API exactly matches that
 on NSStackView and UIStackView
 
-00:27:09.356 --> 00:27:11.116 A:middle
+
+633
+00:27:09,356 --> 00:27:11,116
 for managing their
 arranged subviews.
 
-00:27:12.266 --> 00:27:14.196 A:middle
+
+634
+00:27:12,266 --> 00:27:14,196
 There's also this property,
 Arranges All Subviews,
 
-00:27:14.646 --> 00:27:15.836 A:middle
+
+635
+00:27:14,646 --> 00:27:15,836
 which by default is True,
 
-00:27:16.256 --> 00:27:18.246 A:middle
+
+636
+00:27:16,256 --> 00:27:18,246
 meaning that your subviews
 is still always identical
 
-00:27:18.246 --> 00:27:20.656 A:middle
+
+637
+00:27:18,246 --> 00:27:20,656
 to arrange subviews,
 matching that legacy behavior.
 
-00:27:21.726 --> 00:27:24.976 A:middle
+
+638
+00:27:21,726 --> 00:27:24,976
 But even when you set this to
 False, NSSplitView still ensures
 
-00:27:24.976 --> 00:27:27.066 A:middle
+
+639
+00:27:24,976 --> 00:27:27,066
 that your subviews, that
 your arranged subviews,
 
-00:27:27.106 --> 00:27:29.146 A:middle
+
+640
+00:27:27,106 --> 00:27:29,146
 are always a subset of subviews.
 
-00:27:29.786 --> 00:27:32.186 A:middle
+
+641
+00:27:29,786 --> 00:27:32,186
 For instance, if you add an
 arranged subview that's not
 
-00:27:32.186 --> 00:27:35.256 A:middle
+
+642
+00:27:32,186 --> 00:27:35,256
 already a subview, it'll
 be added as one for you.
 
-00:27:35.846 --> 00:27:39.716 A:middle
+
+643
+00:27:35,846 --> 00:27:39,716
 And finally, we encourage you
 to begin using arranged subviews
 
-00:27:39.746 --> 00:27:41.446 A:middle
+
+644
+00:27:39,746 --> 00:27:41,446
 and setting Arranges
 All Subviews to False,
 
-00:27:41.876 --> 00:27:44.646 A:middle
+
+645
+00:27:41,876 --> 00:27:44,646
 because when you do, NSSplitView
 is now able to use views
 
-00:27:44.646 --> 00:27:47.206 A:middle
+
+646
+00:27:44,646 --> 00:27:47,206
 to represent its dividers,
 allowing for things
 
-00:27:47.206 --> 00:27:50.486 A:middle
+
+647
+00:27:47,206 --> 00:27:50,486
 like vibrancy and special
 window-dragging behaviors.
 
-00:27:51.586 --> 00:27:53.346 A:middle
+
+648
+00:27:51,586 --> 00:27:53,346
 You can also control this
 through Interface Builder,
 
-00:27:53.456 --> 00:27:55.296 A:middle
+
+649
+00:27:53,456 --> 00:27:55,296
 using this Arranges
 All Subviews checkbox.
 
-00:27:55.946 --> 00:27:57.396 A:middle
+
+650
+00:27:55,946 --> 00:27:57,396
 Upgraded nibs will
 have this checked
 
-00:27:57.756 --> 00:27:58.836 A:middle
+
+651
+00:27:57,756 --> 00:27:58,836
 at do not legacy behavior.
 
-00:27:59.276 --> 00:28:00.166 A:middle
+
+652
+00:27:59,276 --> 00:28:00,166
 But new split views dragged
 
 
-
-00:27:59.276 --> 00:28:00.166 A:middle
-But new split views dragged
-
-00:28:00.166 --> 00:28:02.206 A:middle
+653
+00:28:00,166 --> 00:28:02,206
 out from the object library
 will have this unchecked,
 
-00:28:02.636 --> 00:28:04.366 A:middle
+
+654
+00:28:02,636 --> 00:28:04,366
 which is the behavior we
 encourage going forward.
 
-00:28:06.776 --> 00:28:09.166 A:middle
+
+655
+00:28:06,776 --> 00:28:09,166
 To help investigate problems
 that you may be having
 
-00:28:09.166 --> 00:28:10.066 A:middle
+
+656
+00:28:09,166 --> 00:28:10,066
 with your split view or trying
 
-00:28:10.066 --> 00:28:11.506 A:middle
+
+657
+00:28:10,066 --> 00:28:11,506
 to understand how your
 split view is working,
 
-00:28:11.886 --> 00:28:14.266 A:middle
+
+658
+00:28:11,886 --> 00:28:14,266
 we've enhanced the debug
 description to tell you things
 
-00:28:14.266 --> 00:28:17.216 A:middle
+
+659
+00:28:14,266 --> 00:28:17,216
 like how it's performing its
 layout and what it's using
 
-00:28:17.216 --> 00:28:18.236 A:middle
+
+660
+00:28:17,216 --> 00:28:18,236
 to represent its dividers.
 
-00:28:18.236 --> 00:28:20.926 A:middle
+
+661
+00:28:18,236 --> 00:28:20,926
 For the layout, there
 are few possibilities,
 
-00:28:21.226 --> 00:28:22.376 A:middle
+
+662
+00:28:21,226 --> 00:28:22,376
 but we recommend making sure
 
-00:28:22.376 --> 00:28:23.916 A:middle
+
+663
+00:28:22,376 --> 00:28:23,916
 that your split view
 is using constraints.
 
-00:28:24.636 --> 00:28:26.536 A:middle
+
+664
+00:28:24,636 --> 00:28:26,536
 This allows it to simply
 describe the relationships
 
-00:28:26.536 --> 00:28:28.286 A:middle
+
+665
+00:28:26,536 --> 00:28:28,286
 between its split
 panes and interact
 
-00:28:28.286 --> 00:28:29.806 A:middle
+
+666
+00:28:28,286 --> 00:28:29,806
 with other constraints
 you have in your window.
 
-00:28:30.376 --> 00:28:34.256 A:middle
+
+667
+00:28:30,376 --> 00:28:34,256
 In addition, it'll allow for
 automatic right-to-left flipping
 
-00:28:34.546 --> 00:28:35.456 A:middle
+
+668
+00:28:34,546 --> 00:28:35,456
 of your split view panes.
 
-00:28:36.116 --> 00:28:39.586 A:middle
+
+669
+00:28:36,116 --> 00:28:39,586
 And with that, we also
 recommend that dividers begin
 
-00:28:39.586 --> 00:28:41.816 A:middle
+
+670
+00:28:39,586 --> 00:28:41,816
 to be represented using views
 
-00:28:41.816 --> 00:28:45.546 A:middle
+
+671
+00:28:41,816 --> 00:28:45,546
 for the reasons I
 mentioned before.
 
-00:28:45.546 --> 00:28:48.526 A:middle
+
+672
+00:28:45,546 --> 00:28:48,526
 To help figure out why
 your split view may
 
-00:28:48.566 --> 00:28:50.956 A:middle
+
+673
+00:28:48,566 --> 00:28:50,956
 or not be using constraints,
 we've added this Debug Reason
 
-00:28:50.956 --> 00:28:53.516 A:middle
+
+674
+00:28:50,956 --> 00:28:53,516
 For Layout mode, which will give
 you a human-readable description
 
-00:28:53.936 --> 00:28:55.816 A:middle
+
+675
+00:28:53,936 --> 00:28:55,816
 for why it is or isn't
 using constraints.
 
-00:28:56.726 --> 00:28:57.586 A:middle
+
+676
+00:28:56,726 --> 00:28:57,586
 The most common reason is
 
-00:28:57.586 --> 00:28:59.326 A:middle
+
+677
+00:28:57,586 --> 00:28:59,326
 that the delegate is
 overriding certain methods
 
-00:28:59.376 --> 00:29:00.686 A:middle
+
+678
+00:28:59,376 --> 00:29:00,686
 that are incompatible
 with Auto Layout.
 
 
-
-00:28:59.376 --> 00:29:00.686 A:middle
-that are incompatible
-with Auto Layout.
-
-00:29:00.686 --> 00:29:02.966 A:middle
+679
+00:29:00,686 --> 00:29:02,966
 And it'll tell you exactly
 which ones those are.
 
-00:29:03.986 --> 00:29:05.846 A:middle
+
+680
+00:29:03,986 --> 00:29:05,846
 Whether or not it's in a window
 that's using Auto Layout will
 
-00:29:05.846 --> 00:29:08.026 A:middle
+
+681
+00:29:05,846 --> 00:29:08,026
 also determine whether
 it can use constraints.
 
-00:29:08.646 --> 00:29:11.466 A:middle
+
+682
+00:29:08,646 --> 00:29:11,466
 And finally, if it's being
 used by NSSplitViewController,
 
-00:29:11.966 --> 00:29:13.556 A:middle
+
+683
+00:29:11,966 --> 00:29:13,556
 it's required to
 use constraints.
 
-00:29:14.076 --> 00:29:18.186 A:middle
+
+684
+00:29:14,076 --> 00:29:18,186
 And if you've ever tried to
 debug some layout problem
 
-00:29:18.186 --> 00:29:20.136 A:middle
+
+685
+00:29:18,186 --> 00:29:20,136
 with your split view and
 printed out the constraints,
 
-00:29:20.136 --> 00:29:21.976 A:middle
+
+686
+00:29:20,136 --> 00:29:21,976
 it probably looks
 something like this.
 
-00:29:22.546 --> 00:29:23.756 A:middle
+
+687
+00:29:22,546 --> 00:29:23,756
 It's pretty difficult to parse.
 
-00:29:23.756 --> 00:29:25.706 A:middle
+
+688
+00:29:23,756 --> 00:29:25,706
 If you really want to understand
 you have to draw a picture.
 
-00:29:26.156 --> 00:29:28.526 A:middle
+
+689
+00:29:26,156 --> 00:29:28,526
 You can't quite tell which
 constraints your app has added
 
-00:29:28.646 --> 00:29:30.986 A:middle
+
+690
+00:29:28,646 --> 00:29:30,986
 versus which constraints
 the framework has added.
 
-00:29:31.536 --> 00:29:35.396 A:middle
+
+691
+00:29:31,536 --> 00:29:35,396
 In OS X v11, NSSplitView
 now gives identifiers to all
 
-00:29:35.396 --> 00:29:36.356 A:middle
+
+692
+00:29:35,396 --> 00:29:36,356
 of the constraints it adds.
 
-00:29:36.356 --> 00:29:38.726 A:middle
+
+693
+00:29:36,356 --> 00:29:38,726
 So you can not only tell
 which constraints it's using,
 
-00:29:38.726 --> 00:29:40.466 A:middle
+
+694
+00:29:38,726 --> 00:29:40,466
 but what it's trying to
 do with that constraint.
 
-00:29:41.536 --> 00:29:42.236 A:middle
+
+695
+00:29:41,536 --> 00:29:42,236
 You can quickly tell
 
-00:29:42.236 --> 00:29:44.026 A:middle
+
+696
+00:29:42,236 --> 00:29:44,026
 which constraints your
 application's added,
 
-00:29:44.556 --> 00:29:46.166 A:middle
+
+697
+00:29:44,556 --> 00:29:46,166
 or if there's some
 weird sizing behavior
 
-00:29:46.166 --> 00:29:48.486 A:middle
+
+698
+00:29:46,166 --> 00:29:48,486
 that you're not sure what's
 going on, you can quickly see
 
-00:29:48.486 --> 00:29:51.976 A:middle
+
+699
+00:29:48,486 --> 00:29:51,976
 which constraints
 likely deal with that.
 
-00:29:51.976 --> 00:29:53.626 A:middle
+
+700
+00:29:51,976 --> 00:29:53,626
 NSStackView has similar
 identifiers
 
-00:29:53.956 --> 00:29:55.036 A:middle
+
+701
+00:29:53,956 --> 00:29:55,036
 for each of its constraints.
 
-00:29:55.036 --> 00:29:58.056 A:middle
+
+702
+00:29:55,036 --> 00:29:58,056
 I want to talk about
 NSStackView now.
 
-00:29:58.766 --> 00:30:00.906 A:middle
+
+703
+00:29:58,766 --> 00:30:00,906
 So this is a class we
 introduced in Mavericks
 
 
-
-00:29:58.766 --> 00:30:00.906 A:middle
-So this is a class we
-introduced in Mavericks
-
-00:30:00.946 --> 00:30:02.906 A:middle
+704
+00:30:00,946 --> 00:30:02,906
 that makes it really
 easy to create horizontal
 
-00:30:02.906 --> 00:30:06.946 A:middle
+
+705
+00:30:02,906 --> 00:30:06,946
 or vertical stacks of views,
 all using Auto Layout.
 
-00:30:07.046 --> 00:30:08.786 A:middle
+
+706
+00:30:07,046 --> 00:30:08,786
 It's completely compatible
 with other constraints you have
 
-00:30:08.786 --> 00:30:10.856 A:middle
+
+707
+00:30:08,786 --> 00:30:10,856
 in your window, but
 it manages all
 
-00:30:10.856 --> 00:30:13.086 A:middle
+
+708
+00:30:10,856 --> 00:30:13,086
 of the constraints it
 uses to create its stack.
 
-00:30:13.086 --> 00:30:15.176 A:middle
+
+709
+00:30:13,086 --> 00:30:15,176
 So you can add or remove
 views and not have to worry
 
-00:30:15.176 --> 00:30:16.576 A:middle
+
+710
+00:30:15,176 --> 00:30:16,576
 about updating those
 constraints.
 
-00:30:17.486 --> 00:30:20.046 A:middle
+
+711
+00:30:17,486 --> 00:30:20,046
 It has built-in notions of
 alignment and distribution,
 
-00:30:20.046 --> 00:30:22.256 A:middle
+
+712
+00:30:20,046 --> 00:30:22,256
 so you can control how
 your views are positioned
 
-00:30:22.256 --> 00:30:24.446 A:middle
+
+713
+00:30:22,256 --> 00:30:24,446
 within the stack view,
 as well as clipping
 
-00:30:24.446 --> 00:30:26.846 A:middle
+
+714
+00:30:24,446 --> 00:30:26,846
 and attaching behaviors so
 you can control what happens
 
-00:30:26.846 --> 00:30:28.366 A:middle
+
+715
+00:30:26,846 --> 00:30:28,366
 when the stack views
 try to make smaller
 
-00:30:28.366 --> 00:30:29.726 A:middle
+
+716
+00:30:28,366 --> 00:30:29,726
 than the views it contains.
 
-00:30:31.046 --> 00:30:33.166 A:middle
+
+717
+00:30:31,046 --> 00:30:33,166
 In addition, in X v11
 we've made a series
 
-00:30:33.166 --> 00:30:35.036 A:middle
+
+718
+00:30:33,166 --> 00:30:35,036
 of performance improvements,
 decreasing the number
 
-00:30:35.036 --> 00:30:36.736 A:middle
+
+719
+00:30:35,036 --> 00:30:36,736
 of constraints it
 uses and moving
 
-00:30:36.736 --> 00:30:39.606 A:middle
+
+720
+00:30:36,736 --> 00:30:39,606
 from using private internal
 views to using NS layout guides.
 
-00:30:40.256 --> 00:30:42.466 A:middle
+
+721
+00:30:40,256 --> 00:30:42,466
 And we've seen some pretty
 great performance improvements.
 
-00:30:43.706 --> 00:30:45.656 A:middle
+
+722
+00:30:43,706 --> 00:30:45,656
 Mysteries of Auto Layout
 Part One talks about this
 
-00:30:45.656 --> 00:30:48.296 A:middle
+
+723
+00:30:45,656 --> 00:30:48,296
 and the new UIStackView
 on iOS as well
 
-00:30:48.296 --> 00:30:49.926 A:middle
+
+724
+00:30:48,296 --> 00:30:49,926
 as the awesome new
 Interface Builder support
 
-00:30:49.926 --> 00:30:51.426 A:middle
+
+725
+00:30:49,926 --> 00:30:51,426
 that we now have.
 
-00:30:51.426 --> 00:30:54.706 A:middle
+
+726
+00:30:51,426 --> 00:30:54,706
 I do want to focus on
 the new distributions,
 
-00:30:54.996 --> 00:30:57.166 A:middle
+
+727
+00:30:54,996 --> 00:30:57,166
 which describe how the stack
 views are arranged along the
 
-00:30:57.166 --> 00:30:58.246 A:middle
+
+728
+00:30:57,166 --> 00:30:58,246
 stacking axis.
 
-00:30:58.916 --> 00:31:01.096 A:middle
+
+729
+00:30:58,916 --> 00:31:01,096
 You can set this with
 the Distribution property
 
 
-
-00:30:58.916 --> 00:31:01.096 A:middle
-You can set this with
-the Distribution property
-
-00:31:01.176 --> 00:31:02.036 A:middle
+730
+00:31:01,176 --> 00:31:02,036
 on NSStackView.
 
-00:31:02.136 --> 00:31:03.736 A:middle
+
+731
+00:31:02,136 --> 00:31:03,736
 I'm going to go through
 illustrations
 
-00:31:03.736 --> 00:31:05.006 A:middle
+
+732
+00:31:03,736 --> 00:31:05,006
 on how each one of these work.
 
-00:31:06.076 --> 00:31:08.376 A:middle
+
+733
+00:31:06,076 --> 00:31:08,376
 So Gravity Areas matches
 the pre-X v11 behavior,
 
-00:31:08.376 --> 00:31:10.536 A:middle
+
+734
+00:31:08,376 --> 00:31:10,536
 where you can designate
 certain views as being attracted
 
-00:31:10.566 --> 00:31:11.706 A:middle
+
+735
+00:31:10,566 --> 00:31:11,706
 to certain edges
 of the split view.
 
-00:31:12.216 --> 00:31:14.196 A:middle
+
+736
+00:31:12,216 --> 00:31:14,196
 For horizontal, that's
 leading, center, and training.
 
-00:31:14.586 --> 00:31:16.276 A:middle
+
+737
+00:31:14,586 --> 00:31:16,276
 For vertical that's
 top, center, and bottom.
 
-00:31:16.276 --> 00:31:18.456 A:middle
+
+738
+00:31:16,276 --> 00:31:18,456
 So in this case as we
 grow the stack view,
 
-00:31:18.896 --> 00:31:22.126 A:middle
+
+739
+00:31:18,896 --> 00:31:22,126
 those views will tend
 towards those edges.
 
-00:31:22.346 --> 00:31:25.106 A:middle
+
+740
+00:31:22,346 --> 00:31:25,106
 Fill is a new behavior
 where the views are required
 
-00:31:25.106 --> 00:31:26.436 A:middle
+
+741
+00:31:25,106 --> 00:31:26,436
 to completely fill
 the stack view.
 
-00:31:26.516 --> 00:31:30.016 A:middle
+
+742
+00:31:26,516 --> 00:31:30,016
 And using other constraints,
 you can determine how they grow
 
-00:31:30.016 --> 00:31:31.006 A:middle
+
+743
+00:31:30,016 --> 00:31:31,006
 or distribute that size.
 
-00:31:31.876 --> 00:31:35.446 A:middle
+
+744
+00:31:31,876 --> 00:31:35,446
 In this example, tiny has set
 to the lowest tugging priority,
 
-00:31:36.096 --> 00:31:37.156 A:middle
+
+745
+00:31:36,096 --> 00:31:37,156
 so as we grow the stack view,
 
-00:31:37.356 --> 00:31:39.016 A:middle
+
+746
+00:31:37,356 --> 00:31:39,016
 it receives all of
 the resize weight.
 
-00:31:40.316 --> 00:31:41.566 A:middle
+
+747
+00:31:40,316 --> 00:31:41,566
 Fill Equally is similar,
 
-00:31:41.566 --> 00:31:43.686 A:middle
+
+748
+00:31:41,566 --> 00:31:43,686
 except now stack view
 is adding constraints
 
-00:31:43.756 --> 00:31:45.486 A:middle
+
+749
+00:31:43,756 --> 00:31:45,486
 that prefers the views
 to be equally sized.
 
-00:31:46.216 --> 00:31:48.286 A:middle
+
+750
+00:31:46,216 --> 00:31:48,286
 In this case we're adding
 even stronger constraints
 
-00:31:48.346 --> 00:31:49.506 A:middle
+
+751
+00:31:48,346 --> 00:31:49,506
 to squeeze the stack view down,
 
-00:31:49.506 --> 00:31:52.056 A:middle
+
+752
+00:31:49,506 --> 00:31:52,056
 and it can override these
 equal filling constraints.
 
-00:31:52.726 --> 00:31:53.846 A:middle
+
+753
+00:31:52,726 --> 00:31:53,846
 But as we grow the stack view,
 
-00:31:54.236 --> 00:31:56.226 A:middle
+
+754
+00:31:54,236 --> 00:31:56,226
 those views will tend
 towards that equal sizing.
 
-00:31:56.836 --> 00:32:01.246 A:middle
+
+755
+00:31:56,836 --> 00:32:01,246
 Fill Proportionally is
 similar, except here they grow
 
 
-
-00:31:56.836 --> 00:32:01.246 A:middle
-Fill Proportionally is
-similar, except here they grow
-
-00:32:01.246 --> 00:32:03.756 A:middle
+756
+00:32:01,246 --> 00:32:03,756
 in proportion to how big their
 intrinsic content sizes are.
 
-00:32:04.336 --> 00:32:06.386 A:middle
+
+757
+00:32:04,336 --> 00:32:06,386
 So in this case, the larger
 views grow even larger,
 
-00:32:06.456 --> 00:32:10.736 A:middle
+
+758
+00:32:06,456 --> 00:32:10,736
 and the smaller views
 not so much.
 
-00:32:10.956 --> 00:32:13.306 A:middle
+
+759
+00:32:10,956 --> 00:32:13,306
 Equal Spacing is a distribution
 where it's the not views
 
-00:32:13.306 --> 00:32:15.296 A:middle
+
+760
+00:32:13,306 --> 00:32:15,296
 that receive the
 additional size,
 
-00:32:15.566 --> 00:32:17.116 A:middle
+
+761
+00:32:15,566 --> 00:32:17,116
 but it's the spacing
 between the views.
 
-00:32:17.906 --> 00:32:20.546 A:middle
+
+762
+00:32:17,906 --> 00:32:20,546
 In this case, as we grow,
 the spacing between the edges
 
-00:32:20.666 --> 00:32:22.556 A:middle
+
+763
+00:32:20,666 --> 00:32:22,556
 of each of the views
 are all made equivalent.
 
-00:32:24.236 --> 00:32:27.046 A:middle
+
+764
+00:32:24,236 --> 00:32:27,046
 Equal Centering is
 similar, except here,
 
-00:32:27.506 --> 00:32:30.416 A:middle
+
+765
+00:32:27,506 --> 00:32:30,416
 it's not the spacing between
 the edges of the views
 
-00:32:30.766 --> 00:32:32.546 A:middle
+
+766
+00:32:30,766 --> 00:32:32,546
 but between the centers
 of the views.
 
-00:32:33.066 --> 00:32:35.566 A:middle
+
+767
+00:32:33,066 --> 00:32:35,566
 With these new distribution
 behaviors,
 
-00:32:35.566 --> 00:32:38.266 A:middle
+
+768
+00:32:35,566 --> 00:32:38,266
 we think you can use stack view
 in even more places of your UI
 
-00:32:38.266 --> 00:32:40.826 A:middle
+
+769
+00:32:38,266 --> 00:32:40,826
 and really benefit from
 the things it brings.
 
-00:32:42.316 --> 00:32:45.826 A:middle
+
+770
+00:32:42,316 --> 00:32:45,826
 Another aspect of stack views
 is the clipping behaviors.
 
-00:32:46.206 --> 00:32:48.996 A:middle
+
+771
+00:32:46,206 --> 00:32:48,996
 So by default, stack views
 can be made larger or up
 
-00:32:48.996 --> 00:32:51.486 A:middle
+
+772
+00:32:48,996 --> 00:32:51,486
 to the minimum size necessary
 to contain all of their items.
 
-00:32:52.246 --> 00:32:54.316 A:middle
+
+773
+00:32:52,246 --> 00:32:54,316
 But you can also set the
 clipping resistance priority
 
-00:32:54.416 --> 00:32:57.286 A:middle
+
+774
+00:32:54,416 --> 00:32:57,286
 to allow it to begin clipping
 its contents at that priority.
 
-00:32:57.976 --> 00:32:58.956 A:middle
+
+775
+00:32:57,976 --> 00:32:58,956
 So now we can actually be made,
 
-00:32:58.956 --> 00:33:03.506 A:middle
+
+776
+00:32:58,956 --> 00:33:03,506
 the stack view be made
 smaller than its container.
 
 
-
-00:32:58.956 --> 00:33:03.506 A:middle
-the stack view be made
-smaller than its container.
-
-00:33:03.586 --> 00:33:05.736 A:middle
+777
+00:33:03,586 --> 00:33:05,736
 Often you don't want this
 partial clipping of the views,
 
-00:33:05.736 --> 00:33:06.906 A:middle
+
+778
+00:33:05,736 --> 00:33:06,906
 but it would be better
 for the views
 
-00:33:06.906 --> 00:33:08.186 A:middle
+
+779
+00:33:06,906 --> 00:33:08,186
 to entirely be dropped off.
 
-00:33:08.916 --> 00:33:11.266 A:middle
+
+780
+00:33:08,916 --> 00:33:11,266
 You can control this by
 setting the visibility priority
 
-00:33:11.266 --> 00:33:12.336 A:middle
+
+781
+00:33:11,266 --> 00:33:12,336
 for the different views.
 
-00:33:13.056 --> 00:33:14.976 A:middle
+
+782
+00:33:13,056 --> 00:33:14,976
 The view at the lowest
 visibility priority will be
 
-00:33:14.976 --> 00:33:17.266 A:middle
+
+783
+00:33:14,976 --> 00:33:17,266
 completely dropped once
 the stack view starts
 
-00:33:17.296 --> 00:33:18.116 A:middle
+
+784
+00:33:17,296 --> 00:33:18,116
 to clip its views.
 
-00:33:19.026 --> 00:33:21.776 A:middle
+
+785
+00:33:19,026 --> 00:33:21,776
 In this case, we're going to set
 it in descending order so that
 
-00:33:21.776 --> 00:33:23.236 A:middle
+
+786
+00:33:21,776 --> 00:33:23,236
 as the stack view
 starts to clip a view,
 
-00:33:23.236 --> 00:33:25.696 A:middle
+
+787
+00:33:23,236 --> 00:33:25,696
 it'll just completely
 temporarily detach off.
 
-00:33:26.406 --> 00:33:29.356 A:middle
+
+788
+00:33:26,406 --> 00:33:29,356
 So in this case, the six
 is not visible anymore.
 
-00:33:29.906 --> 00:33:32.716 A:middle
+
+789
+00:33:29,906 --> 00:33:32,716
 If the stack view
 grows larger again,
 
-00:33:32.716 --> 00:33:35.566 A:middle
+
+790
+00:33:32,716 --> 00:33:35,566
 it'll reattach those views as
 there's enough size to fit them.
 
-00:33:36.376 --> 00:33:37.986 A:middle
+
+791
+00:33:36,376 --> 00:33:37,986
 In addition, you
 can get callbacks
 
-00:33:38.326 --> 00:33:40.606 A:middle
+
+792
+00:33:38,326 --> 00:33:40,606
 for when this detaching
 or reattaching happens.
 
-00:33:40.686 --> 00:33:43.186 A:middle
+
+793
+00:33:40,686 --> 00:33:43,186
 So you can perhaps make
 adjustments to other portions
 
-00:33:43.186 --> 00:33:45.226 A:middle
+
+794
+00:33:43,186 --> 00:33:45,226
 of your [inaudible], such
 as adding an overflow menu.
 
-00:33:45.766 --> 00:33:49.006 A:middle
+
+795
+00:33:45,766 --> 00:33:49,006
 Next, I want to give
 a quick overview
 
-00:33:49.006 --> 00:33:50.636 A:middle
+
+796
+00:33:49,006 --> 00:33:50,636
 of the new updated
 collection view,
 
-00:33:50.746 --> 00:33:53.576 A:middle
+
+797
+00:33:50,746 --> 00:33:53,576
 which now has feature parity
 with the UI collection view.
 
-00:33:54.256 --> 00:33:55.806 A:middle
+
+798
+00:33:54,256 --> 00:33:55,806
 This includes reusability
 of items
 
-00:33:55.856 --> 00:33:57.606 A:middle
+
+799
+00:33:55,856 --> 00:33:57,606
 so you can have really
 scalable presentations
 
-00:33:57.606 --> 00:34:00.346 A:middle
+
+800
+00:33:57,606 --> 00:34:00,346
 of large collections with
 items with section support.
 
 
-
-00:33:57.606 --> 00:34:00.346 A:middle
-of large collections with
-items with section support.
-
-00:34:01.246 --> 00:34:03.326 A:middle
+801
+00:34:01,246 --> 00:34:03,326
 In addition, there's some
 really powerful layout support,
 
-00:34:03.326 --> 00:34:05.876 A:middle
+
+802
+00:34:03,326 --> 00:34:05,876
 so your collection view behaves
 great no matter what the size.
 
-00:34:06.836 --> 00:34:08.446 A:middle
+
+803
+00:34:06,836 --> 00:34:08,446
 This includes built-in
 grid layout,
 
-00:34:08.856 --> 00:34:11.906 A:middle
+
+804
+00:34:08,856 --> 00:34:11,906
 flow layout that matches
 iOS, as well the ability
 
-00:34:11.906 --> 00:34:13.146 A:middle
+
+805
+00:34:11,906 --> 00:34:13,146
 to create your own
 custom layouts.
 
-00:34:13.835 --> 00:34:15.946 A:middle
+
+806
+00:34:13,835 --> 00:34:15,946
 Troy has an awesome talk
 about this later today,
 
-00:34:15.946 --> 00:34:16.976 A:middle
+
+807
+00:34:15,946 --> 00:34:16,976
 What's New in Collection View.
 
-00:34:17.416 --> 00:34:20.346 A:middle
+
+808
+00:34:17,416 --> 00:34:20,346
 I really recommend
 checking that out.
 
-00:34:20.616 --> 00:34:22.626 A:middle
+
+809
+00:34:20,616 --> 00:34:22,626
 With this talk we also have
 Sample Code associated.
 
-00:34:23.926 --> 00:34:27.275 A:middle
+
+810
+00:34:23,926 --> 00:34:27,275
 It's a photo-browsing app that
 shows off various features, API,
 
-00:34:27.275 --> 00:34:29.335 A:middle
+
+811
+00:34:27,275 --> 00:34:29,335
 and behaviors that
 Corbin and I talked about.
 
-00:34:30.056 --> 00:34:31.966 A:middle
+
+812
+00:34:30,056 --> 00:34:31,966
 For instance, it shows up
 different Full Screen API,
 
-00:34:32.356 --> 00:34:33.626 A:middle
+
+813
+00:34:32,356 --> 00:34:33,626
 specifically the new tiling API.
 
-00:34:33.626 --> 00:34:36.505 A:middle
+
+814
+00:34:33,626 --> 00:34:36,505
 We have this little standalone
 window that's normally required
 
-00:34:36.505 --> 00:34:39.286 A:middle
+
+815
+00:34:36,505 --> 00:34:39,286
 to be aspect-ratio sized
 and isn't Full Screenable.
 
-00:34:39.835 --> 00:34:41.426 A:middle
+
+816
+00:34:39,835 --> 00:34:41,426
 However, we have
 made it tileable
 
-00:34:41.656 --> 00:34:43.585 A:middle
+
+817
+00:34:41,656 --> 00:34:43,585
 with a custom layout
 once it's in that tile.
 
-00:34:45.096 --> 00:34:47.005 A:middle
+
+818
+00:34:45,096 --> 00:34:47,005
 It also uses the new split
 view controller features,
 
-00:34:47.005 --> 00:34:49.646 A:middle
+
+819
+00:34:47,005 --> 00:34:49,646
 such as the autocollapsing
 sidebar with the overlay,
 
-00:34:50.726 --> 00:34:51.876 A:middle
+
+820
+00:34:50,726 --> 00:34:51,876
 as well as NSStackView.
 
-00:34:52.396 --> 00:34:55.366 A:middle
+
+821
+00:34:52,396 --> 00:34:55,366
 It creates this bottom
 toolbar using zero constraints,
 
-00:34:55.706 --> 00:34:56.716 A:middle
+
+822
+00:34:55,706 --> 00:34:56,716
 which is really, really awesome.
 
-00:34:57.526 --> 00:34:59.056 A:middle
+
+823
+00:34:57,526 --> 00:34:59,056
 It also uses that
 detaching behavior
 
-00:34:59.396 --> 00:35:01.596 A:middle
+
+824
+00:34:59,396 --> 00:35:01,596
 so that it can be made
 smaller than those items
 
 
-
-00:34:59.396 --> 00:35:01.596 A:middle
-so that it can be made
-smaller than those items
-
-00:35:02.056 --> 00:35:03.586 A:middle
+825
+00:35:02,056 --> 00:35:03,586
 and shows this little
 overflow menu
 
-00:35:03.586 --> 00:35:07.126 A:middle
+
+826
+00:35:03,586 --> 00:35:07,126
 so the user still
 has access to them.
 
-00:35:07.346 --> 00:35:09.816 A:middle
+
+827
+00:35:07,346 --> 00:35:09,816
 It also uses the
 updated NSCollectionView
 
-00:35:09.816 --> 00:35:13.266 A:middle
+
+828
+00:35:09,816 --> 00:35:13,266
 for this little grid of photos
 that behaves really responsibly.
 
-00:35:16.456 --> 00:35:19.936 A:middle
+
+829
+00:35:16,456 --> 00:35:19,936
 So Corbin took us through
 the aspects of Full Screen,
 
-00:35:20.216 --> 00:35:22.656 A:middle
+
+830
+00:35:20,216 --> 00:35:22,656
 such as how to adopt Full
 Screen into our applications.
 
-00:35:22.996 --> 00:35:25.686 A:middle
+
+831
+00:35:22,996 --> 00:35:25,686
 And using title bar accessory
 reviews, to have those bars
 
-00:35:25.686 --> 00:35:27.656 A:middle
+
+832
+00:35:25,686 --> 00:35:27,656
 that live beneath the
 toolbar behave really great
 
-00:35:27.656 --> 00:35:28.406 A:middle
+
+833
+00:35:27,656 --> 00:35:28,406
 in Full Screen.
 
-00:35:29.406 --> 00:35:31.566 A:middle
+
+834
+00:35:29,406 --> 00:35:31,566
 In addition, he showed us some
 of the Full Screen Tiling API
 
-00:35:31.566 --> 00:35:32.966 A:middle
+
+835
+00:35:31,566 --> 00:35:32,966
 so that we can make sure
 
-00:35:32.966 --> 00:35:35.626 A:middle
+
+836
+00:35:32,966 --> 00:35:35,626
 that our special case
 windows behave properly while
 
-00:35:35.626 --> 00:35:36.176 A:middle
+
+837
+00:35:35,626 --> 00:35:36,176
 in Full Screen.
 
-00:35:37.556 --> 00:35:39.186 A:middle
+
+838
+00:35:37,556 --> 00:35:39,186
 And finally, some of the ways
 
-00:35:39.186 --> 00:35:41.006 A:middle
+
+839
+00:35:39,186 --> 00:35:41,006
 to make sure our layouts
 are really flexible,
 
-00:35:41.006 --> 00:35:42.566 A:middle
+
+840
+00:35:41,006 --> 00:35:42,566
 especially in this
 narrow environment,
 
-00:35:43.376 --> 00:35:45.906 A:middle
+
+841
+00:35:43,376 --> 00:35:45,906
 such as using the new sidebars
 with Split View Controller.
 
-00:35:46.726 --> 00:35:49.086 A:middle
+
+842
+00:35:46,726 --> 00:35:49,086
 Auto Layout and NSStackView
 to build flexibility
 
-00:35:49.086 --> 00:35:50.446 A:middle
+
+843
+00:35:49,086 --> 00:35:50,446
 into other portions your UI.
 
-00:35:51.286 --> 00:35:54.466 A:middle
+
+844
+00:35:51,286 --> 00:35:54,466
 And NSCollectionView, with its
 really awesome layout support.
 
-00:35:54.466 --> 00:35:58.056 A:middle
+
+845
+00:35:54,466 --> 00:35:58,056
 If you have any questions,
 you can contact Paul Marcos.
 
-00:35:58.146 --> 00:35:59.226 A:middle
+
+846
+00:35:58,146 --> 00:35:59,226
 He loves getting emails.
 
 
-
-00:36:00.436 --> 00:36:02.116 A:middle
+847
+00:36:00,436 --> 00:36:02,116
 In addition, we have
 some related sessions
 
-00:36:02.116 --> 00:36:02.956 A:middle
+
+848
+00:36:02,116 --> 00:36:02,956
 that I mentioned earlier.
 
-00:36:02.956 --> 00:36:05.586 A:middle
+
+849
+00:36:02,956 --> 00:36:05,586
 They're all passed now, but
 you can catch them on video.
 
-00:36:05.586 --> 00:36:08.516 A:middle
+
+850
+00:36:05,586 --> 00:36:08,516
 In addition, we have some
 labs that are later today,
 
-00:36:08.516 --> 00:36:10.946 A:middle
+
+851
+00:36:08,516 --> 00:36:10,946
 well currently ongoing, and will
 be later on today and tomorrow
 
-00:36:11.416 --> 00:36:12.216 A:middle
+
+852
+00:36:11,416 --> 00:36:12,216
 if you have any questions.
 
-00:36:13.516 --> 00:36:14.506 A:middle
+
+853
+00:36:13,516 --> 00:36:14,506
 Have a great WWDC.
 
-00:36:14.646 --> 00:36:15.436 A:middle
+
+854
+00:36:14,646 --> 00:36:15,436
 Enjoy the bash.
 
-00:36:16.046 --> 00:36:16.436 A:middle
+
+855
+00:36:16,046 --> 00:36:16,436
 See you later.
 
-00:36:18.516 --> 00:36:32.150 A:middle
+
+856
+00:36:18,516 --> 00:36:32,150
 [ Applause ]
 

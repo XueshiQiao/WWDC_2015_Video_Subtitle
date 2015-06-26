@@ -1,2932 +1,4145 @@
-
-00:00:26.516 --> 00:00:33.406 A:middle
+1
+00:00:26,516 --> 00:00:33,406
 [Applause]
 
-00:00:33.906 --> 00:00:34.676 A:middle
-&gt;&gt; LUKE HIESTERMAN:
+
+2
+00:00:33,906 --> 00:00:34,676
+>> LUKE HIESTERMAN:
 Hello, everyone.
 
-00:00:35.226 --> 00:00:38.716 A:middle
+
+3
+00:00:35,226 --> 00:00:38,716
 Thank you so much for coming
 to Cocoa Touch best practices.
 
-00:00:39.386 --> 00:00:42.246 A:middle
+
+4
+00:00:39,386 --> 00:00:42,246
 I am Luke Hiesterman, an
 engineer on the UIKit team,
 
-00:00:42.646 --> 00:00:44.736 A:middle
+
+5
+00:00:42,646 --> 00:00:44,736
 and it will be my
 pleasure to walk you
 
-00:00:44.796 --> 00:00:48.946 A:middle
+
+6
+00:00:44,796 --> 00:00:48,946
 through today a collection of
 pieces of wisdom, practical bits
 
-00:00:48.946 --> 00:00:52.086 A:middle
+
+7
+00:00:48,946 --> 00:00:52,086
 of advice that you can apply
 directly to the applications
 
-00:00:52.376 --> 00:00:54.766 A:middle
+
+8
+00:00:52,376 --> 00:00:54,766
 that you are writing
 today and into the future.
 
-00:00:54.766 --> 00:00:59.736 A:middle
+
+9
+00:00:54,766 --> 00:00:59,736
 So I am going to do this by
 walking across a collection
 
-00:00:59.826 --> 00:01:02.686 A:middle
+
+10
+00:00:59,826 --> 00:01:02,686
 of topics that will
 be of strong interest
 
 
-
-00:00:59.826 --> 00:01:02.686 A:middle
-of topics that will
-be of strong interest
-
-00:01:02.686 --> 00:01:07.086 A:middle
+11
+00:01:02,686 --> 00:01:07,086
 to any Cocoa Touch application,
 and in each of these topics,
 
-00:01:07.086 --> 00:01:10.186 A:middle
+
+12
+00:01:07,086 --> 00:01:10,186
 I will have sort of a series
 of best practice tips to give
 
-00:01:10.186 --> 00:01:16.896 A:middle
+
+13
+00:01:10,186 --> 00:01:16,896
 to you, and those topics are
 app life cycle, number one;
 
-00:01:17.716 --> 00:01:22.736 A:middle
+
+14
+00:01:17,716 --> 00:01:22,736
 views and view controllers;
 Auto Layout; and finally,
 
-00:01:23.136 --> 00:01:24.556 A:middle
+
+15
+00:01:23,136 --> 00:01:24,556
 table and collection views.
 
-00:01:25.256 --> 00:01:27.406 A:middle
+
+16
+00:01:25,256 --> 00:01:27,406
 Now, as I go across
 these topics,
 
-00:01:27.856 --> 00:01:31.066 A:middle
+
+17
+00:01:27,856 --> 00:01:31,066
 I am going to have a series
 of goals that I want to impart
 
-00:01:31.066 --> 00:01:35.176 A:middle
+
+18
+00:01:31,066 --> 00:01:35,176
 to you with each of the bits
 of wisdom that I am giving
 
-00:01:35.586 --> 00:01:37.946 A:middle
+
+19
+00:01:35,586 --> 00:01:37,946
 because everything is sort
 
-00:01:37.946 --> 00:01:41.196 A:middle
+
+20
+00:01:37,946 --> 00:01:41,196
 of corralled towards
 accomplishing a few basic ideas
 
-00:01:41.296 --> 00:01:43.326 A:middle
+
+21
+00:01:41,296 --> 00:01:43,326
 that you definitely want
 to have in your app.
 
-00:01:43.326 --> 00:01:45.216 A:middle
+
+22
+00:01:43,326 --> 00:01:45,216
 So you know, number one
 is going to be you want
 
-00:01:45.216 --> 00:01:46.326 A:middle
+
+23
+00:01:45,216 --> 00:01:46,326
 to have peak performance.
 
-00:01:46.696 --> 00:01:48.486 A:middle
+
+24
+00:01:46,696 --> 00:01:48,486
 Your apps want to
 be silky smooth,
 
-00:01:48.716 --> 00:01:50.646 A:middle
+
+25
+00:01:48,716 --> 00:01:50,646
 so you look like
 rock star developers
 
-00:01:50.646 --> 00:01:53.496 A:middle
+
+26
+00:01:50,646 --> 00:01:53,496
 and everybody loves you.
 
-00:01:53.736 --> 00:01:56.716 A:middle
+
+27
+00:01:53,736 --> 00:01:56,716
 You also want to have a
 top-notch user experience
 
-00:01:56.716 --> 00:01:57.226 A:middle
+
+28
+00:01:56,716 --> 00:01:57,226
 in your app.
 
-00:01:57.736 --> 00:01:59.246 A:middle
+
+29
+00:01:57,736 --> 00:01:59,246
 That way everybody thinks
 
-00:01:59.246 --> 00:02:01.176 A:middle
+
+30
+00:01:59,246 --> 00:02:01,176
 that your app looks
 polished and it's awesome.
 
 
-
-00:01:59.246 --> 00:02:01.176 A:middle
-that your app looks
-polished and it's awesome.
-
-00:02:01.966 --> 00:02:05.436 A:middle
+31
+00:02:01,966 --> 00:02:05,436
 And finally, you want to
 write your code in such a way
 
-00:02:05.436 --> 00:02:07.856 A:middle
+
+32
+00:02:05,436 --> 00:02:07,856
 that it's as future-proof
 as possible so that
 
-00:02:07.856 --> 00:02:10.666 A:middle
+
+33
+00:02:07,856 --> 00:02:10,666
 as future versions of iOS
 come out, you're writing
 
-00:02:10.666 --> 00:02:14.446 A:middle
+
+34
+00:02:10,666 --> 00:02:14,446
 as little code as possible to
 adapt to those revisions of iOS.
 
-00:02:15.256 --> 00:02:16.886 A:middle
+
+35
+00:02:15,256 --> 00:02:16,886
 So those are the goals we
 are going to have in mind
 
-00:02:16.886 --> 00:02:17.996 A:middle
+
+36
+00:02:16,886 --> 00:02:17,996
 as we go through these topics.
 
-00:02:18.426 --> 00:02:21.156 A:middle
+
+37
+00:02:18,426 --> 00:02:21,156
 And I will start off by
 talking about app life cycle.
 
-00:02:22.116 --> 00:02:26.756 A:middle
+
+38
+00:02:22,116 --> 00:02:26,756
 The very first best practice
 I want to impart upon you has
 
-00:02:26.806 --> 00:02:29.816 A:middle
+
+39
+00:02:26,806 --> 00:02:29,816
 to do with the very first
 experience that the user has
 
-00:02:29.816 --> 00:02:31.706 A:middle
+
+40
+00:02:29,816 --> 00:02:31,706
 with your app, and
 that's launching it.
 
-00:02:32.136 --> 00:02:35.766 A:middle
+
+41
+00:02:32,136 --> 00:02:35,766
 So the first best
 practice is launch quickly.
 
-00:02:36.676 --> 00:02:40.086 A:middle
+
+42
+00:02:36,676 --> 00:02:40,086
 That's how you appear responsive
 when the user taps on your icon
 
-00:02:40.136 --> 00:02:43.136 A:middle
+
+43
+00:02:40,136 --> 00:02:43,136
 and right away they get your
 app ready to interact with.
 
-00:02:43.316 --> 00:02:45.676 A:middle
+
+44
+00:02:43,316 --> 00:02:45,676
 And the way that you launch
 quickly is extremely simple.
 
-00:02:46.066 --> 00:02:49.576 A:middle
+
+45
+00:02:46,066 --> 00:02:49,576
 It's return quickly from the
 Application Did Finish Launching
 
-00:02:49.906 --> 00:02:51.286 A:middle
+
+46
+00:02:49,906 --> 00:02:51,286
 UI application delegate event.
 
-00:02:52.266 --> 00:02:54.816 A:middle
+
+47
+00:02:52,266 --> 00:02:54,816
 That in itself is really simple.
 
-00:02:54.816 --> 00:02:56.336 A:middle
+
+48
+00:02:54,816 --> 00:02:56,336
 I am sure you all
 already know how to do it.
 
-00:02:57.866 --> 00:03:00.596 A:middle
+
+49
+00:02:57,866 --> 00:03:00,596
 Take all the long-running work
 you might have to do to set
 
 
-
-00:02:57.866 --> 00:03:00.596 A:middle
-Take all the long-running work
-you might have to do to set
-
-00:03:00.596 --> 00:03:02.436 A:middle
+50
+00:03:00,596 --> 00:03:02,436
 up an application
 and defer that out
 
-00:03:02.576 --> 00:03:05.066 A:middle
+
+51
+00:03:02,576 --> 00:03:05,066
 of Application Did Finish
 Launching because you want
 
-00:03:05.066 --> 00:03:07.566 A:middle
+
+52
+00:03:05,066 --> 00:03:07,566
 to return as fast as possible
 doing the minimum amount
 
-00:03:07.566 --> 00:03:10.576 A:middle
+
+53
+00:03:07,566 --> 00:03:10,576
 of work, set up a
 basic UI for your users
 
-00:03:10.576 --> 00:03:12.366 A:middle
+
+54
+00:03:10,576 --> 00:03:12,366
 to interact with, and return.
 
-00:03:12.526 --> 00:03:15.516 A:middle
+
+55
+00:03:12,526 --> 00:03:15,516
 So if you are loading data,
 whatever you need to do,
 
-00:03:15.516 --> 00:03:17.886 A:middle
+
+56
+00:03:15,516 --> 00:03:17,886
 from a database,
 network, defer that out
 
-00:03:17.886 --> 00:03:19.356 A:middle
+
+57
+00:03:17,886 --> 00:03:19,356
 of Application Did
 Finish Launching.
 
-00:03:20.016 --> 00:03:24.106 A:middle
+
+58
+00:03:20,016 --> 00:03:24,106
 If you take too much time, of
 course, your app will be killed
 
-00:03:24.106 --> 00:03:25.956 A:middle
+
+59
+00:03:24,106 --> 00:03:25,956
 because it just looks like
 it's hung to the system,
 
-00:03:26.256 --> 00:03:29.926 A:middle
+
+60
+00:03:26,256 --> 00:03:29,926
 so you really want to return
 as fast as possible from that.
 
-00:03:30.266 --> 00:03:33.636 A:middle
+
+61
+00:03:30,266 --> 00:03:33,636
 Now, being a superresponsive
 app doesn't end
 
-00:03:33.636 --> 00:03:35.016 A:middle
+
+62
+00:03:33,636 --> 00:03:35,016
 at application launch.
 
-00:03:35.276 --> 00:03:36.326 A:middle
+
+63
+00:03:35,276 --> 00:03:36,326
 We want to think beyond that.
 
-00:03:36.326 --> 00:03:38.376 A:middle
+
+64
+00:03:36,326 --> 00:03:38,376
 We want to be superresponsive
 all the time.
 
-00:03:39.276 --> 00:03:42.266 A:middle
+
+65
+00:03:39,276 --> 00:03:42,266
 So I want to delve deeper into
 this technique of what it means
 
-00:03:42.266 --> 00:03:45.836 A:middle
+
+66
+00:03:42,266 --> 00:03:45,836
 to be responsive in general
 so we can build a technique
 
-00:03:45.836 --> 00:03:47.716 A:middle
+
+67
+00:03:45,836 --> 00:03:47,716
 that works not just
 at app launch
 
-00:03:47.746 --> 00:03:50.476 A:middle
+
+68
+00:03:47,746 --> 00:03:50,476
 but throughout the
 life cycle of your app.
 
-00:03:50.476 --> 00:03:53.006 A:middle
+
+69
+00:03:50,476 --> 00:03:53,006
 So even though I just talked
 about deferring all of this work
 
-00:03:53.006 --> 00:03:54.726 A:middle
+
+70
+00:03:53,006 --> 00:03:54,726
 out of Application
 Did Finish Launching,
 
-00:03:55.606 --> 00:03:56.376 A:middle
+
+71
+00:03:55,606 --> 00:03:56,376
 what we are really getting
 
-00:03:56.376 --> 00:03:59.296 A:middle
+
+72
+00:03:56,376 --> 00:03:59,296
 at for a best practice
 isn't just about asynchrony.
 
 
-
-00:04:00.046 --> 00:04:03.016 A:middle
+73
+00:04:00,046 --> 00:04:03,016
 It's actually about taking
 long-running work and putting
 
-00:04:03.016 --> 00:04:04.536 A:middle
+
+74
+00:04:03,016 --> 00:04:04,536
 that on background queues.
 
-00:04:04.916 --> 00:04:07.026 A:middle
+
+75
+00:04:04,916 --> 00:04:07,026
 If you need to load
 data from a database,
 
-00:04:07.026 --> 00:04:08.026 A:middle
+
+76
+00:04:07,026 --> 00:04:08,026
 if you are hitting the network,
 
-00:04:08.386 --> 00:04:10.416 A:middle
+
+77
+00:04:08,386 --> 00:04:10,416
 that's work that can be
 done in the background.
 
-00:04:10.926 --> 00:04:13.206 A:middle
+
+78
+00:04:10,926 --> 00:04:13,206
 So if we revisit Application
 Did Finish Launching
 
-00:04:13.206 --> 00:04:16.315 A:middle
+
+79
+00:04:13,206 --> 00:04:16,315
 and we have this sort
 of very simple approach
 
-00:04:16.315 --> 00:04:20.396 A:middle
+
+80
+00:04:16,315 --> 00:04:20,396
 to a naive Application Did
 Finish Launching, you know,
 
-00:04:20.396 --> 00:04:22.686 A:middle
+
+81
+00:04:20,396 --> 00:04:22,686
 we see we load our data directly
 
-00:04:22.856 --> 00:04:24.246 A:middle
+
+82
+00:04:22,856 --> 00:04:24,246
 in Application Did
 Finish Launching,
 
-00:04:24.246 --> 00:04:25.756 A:middle
+
+83
+00:04:24,246 --> 00:04:25,756
 and I just said defer that.
 
-00:04:25.756 --> 00:04:27.826 A:middle
+
+84
+00:04:25,756 --> 00:04:27,826
 Okay. So we can do
 that pretty easily.
 
-00:04:28.146 --> 00:04:31.546 A:middle
+
+85
+00:04:28,146 --> 00:04:31,546
 We dispatch that, and it's gone.
 
-00:04:31.546 --> 00:04:33.706 A:middle
+
+86
+00:04:31,546 --> 00:04:33,706
 It's out of Application
 Did Finish Launching.
 
-00:04:34.006 --> 00:04:37.586 A:middle
+
+87
+00:04:34,006 --> 00:04:37,586
 We are able to launch quickly,
 and things are better at launch.
 
-00:04:37.946 --> 00:04:40.216 A:middle
+
+88
+00:04:37,946 --> 00:04:40,216
 But that still introduces
 the possibility
 
-00:04:40.976 --> 00:04:43.896 A:middle
+
+89
+00:04:40,976 --> 00:04:43,896
 of blocking the main
 queue later on and, thus,
 
-00:04:43.966 --> 00:04:45.386 A:middle
+
+90
+00:04:43,966 --> 00:04:45,386
 blocking user interaction.
 
-00:04:46.036 --> 00:04:49.396 A:middle
+
+91
+00:04:46,036 --> 00:04:49,396
 So really, the best
 practice is move that work
 
-00:04:49.396 --> 00:04:53.166 A:middle
+
+92
+00:04:49,396 --> 00:04:53,166
 onto a background queue so
 that whenever it does run,
 
-00:04:53.586 --> 00:04:55.696 A:middle
+
+93
+00:04:53,586 --> 00:04:55,696
 user interaction
 continues to happen,
 
-00:04:55.986 --> 00:04:58.366 A:middle
+
+94
+00:04:55,986 --> 00:04:58,366
 and your application seems
 responsive all the time.
 
-00:04:59.266 --> 00:05:02.686 A:middle
+
+95
+00:04:59,266 --> 00:05:02,686
 So this technique, putting
 the work on background queues,
 
 
-
-00:04:59.266 --> 00:05:02.686 A:middle
-So this technique, putting
-the work on background queues,
-
-00:05:02.686 --> 00:05:06.766 A:middle
+96
+00:05:02,686 --> 00:05:06,766
 can be applied anytime in
 your app, not just at launch.
 
-00:05:07.626 --> 00:05:10.446 A:middle
+
+97
+00:05:07,626 --> 00:05:10,446
 Then, you take that work that
 you do in the background working
 
-00:05:10.446 --> 00:05:12.336 A:middle
+
+98
+00:05:10,446 --> 00:05:12,336
 with data, and when
 you are done with it,
 
-00:05:12.336 --> 00:05:14.526 A:middle
+
+99
+00:05:12,336 --> 00:05:14,526
 that's when you come back to
 the main queue to interact
 
-00:05:14.646 --> 00:05:17.316 A:middle
+
+100
+00:05:14,646 --> 00:05:17,316
 with UIKit elements like
 views and view launchers.
 
-00:05:18.166 --> 00:05:19.856 A:middle
+
+101
+00:05:18,166 --> 00:05:19,856
 So that's being really
 responsive.
 
-00:05:20.576 --> 00:05:23.666 A:middle
+
+102
+00:05:20,576 --> 00:05:23,666
 The next thing you
 want to do besides
 
-00:05:23.666 --> 00:05:26.066 A:middle
+
+103
+00:05:23,666 --> 00:05:26,066
 that first launch is
 be superresponsive
 
-00:05:26.476 --> 00:05:29.076 A:middle
+
+104
+00:05:26,476 --> 00:05:29,076
 on the second time the
 user launches your app,
 
-00:05:29.236 --> 00:05:30.596 A:middle
+
+105
+00:05:29,236 --> 00:05:30,596
 and the third time, and so on.
 
-00:05:31.236 --> 00:05:32.936 A:middle
+
+106
+00:05:31,236 --> 00:05:32,936
 And this comes from the fact
 
-00:05:33.016 --> 00:05:36.986 A:middle
+
+107
+00:05:33,016 --> 00:05:36,986
 that when the user exits your
 app, the app doesn't just die,
 
-00:05:37.156 --> 00:05:39.446 A:middle
+
+108
+00:05:37,156 --> 00:05:39,446
 it goes into a suspended
 state on iOS.
 
-00:05:40.416 --> 00:05:43.506 A:middle
+
+109
+00:05:40,416 --> 00:05:43,506
 And so to be superfast the
 second time the user goes
 
-00:05:43.506 --> 00:05:45.846 A:middle
+
+110
+00:05:43,506 --> 00:05:45,846
 to your app, you really
 just want to resume
 
-00:05:45.846 --> 00:05:47.056 A:middle
+
+111
+00:05:45,846 --> 00:05:47,056
 from that suspended state,
 
-00:05:47.516 --> 00:05:50.666 A:middle
+
+112
+00:05:47,516 --> 00:05:50,666
 and that's contingent upon
 you still being in memory.
 
-00:05:51.256 --> 00:05:53.076 A:middle
+
+113
+00:05:51,256 --> 00:05:53,076
 So if we take a look
 at a picture
 
-00:05:53.076 --> 00:05:55.366 A:middle
+
+114
+00:05:53,076 --> 00:05:55,366
 of what system memory
 looks like, you know,
 
-00:05:55.366 --> 00:05:57.506 A:middle
+
+115
+00:05:55,366 --> 00:05:57,506
 we know that some of it
 is taken up by the kernel
 
-00:05:57.506 --> 00:05:59.076 A:middle
+
+116
+00:05:57,506 --> 00:05:59,076
 and the operating
 system processes.
 
-00:05:59.706 --> 00:06:02.686 A:middle
+
+117
+00:05:59,706 --> 00:06:02,686
 A good chunk is going to be
 taken up by the foreground app.
 
 
-
-00:05:59.706 --> 00:06:02.686 A:middle
-A good chunk is going to be
-taken up by the foreground app.
-
-00:06:02.686 --> 00:06:05.836 A:middle
+118
+00:06:02,686 --> 00:06:05,836
 And then a bunch of it
 is going to be taken
 
-00:06:05.836 --> 00:06:07.846 A:middle
+
+119
+00:06:05,836 --> 00:06:07,846
 up by background apps.
 
-00:06:08.856 --> 00:06:11.476 A:middle
+
+120
+00:06:08,856 --> 00:06:11,476
 Now, you'll notice that
 there's one sort of hog
 
-00:06:11.476 --> 00:06:13.466 A:middle
+
+121
+00:06:11,476 --> 00:06:13,466
 of a background app in
 this picture that's using
 
-00:06:13.466 --> 00:06:14.886 A:middle
+
+122
+00:06:13,466 --> 00:06:14,886
 up more memory than
 everyone else.
 
-00:06:15.596 --> 00:06:18.596 A:middle
+
+123
+00:06:15,596 --> 00:06:18,596
 You don't want your
 app to be that app,
 
-00:06:18.596 --> 00:06:20.056 A:middle
+
+124
+00:06:18,596 --> 00:06:20,056
 and the reason you
 don't want that is
 
-00:06:20.056 --> 00:06:23.476 A:middle
+
+125
+00:06:20,056 --> 00:06:23,476
 because that app is the
 first one that's going to die
 
-00:06:23.626 --> 00:06:25.566 A:middle
+
+126
+00:06:23,626 --> 00:06:25,566
 when the foreground app
 needs additional memory.
 
-00:06:25.906 --> 00:06:30.916 A:middle
+
+127
+00:06:25,906 --> 00:06:30,916
 So you want your app to be the
 one that's using UI application
 
-00:06:30.916 --> 00:06:33.646 A:middle
+
+128
+00:06:30,916 --> 00:06:33,646
 delegate methods to know when
 it's going into the background,
 
-00:06:34.116 --> 00:06:36.406 A:middle
+
+129
+00:06:34,116 --> 00:06:36,406
 get rid of unneeded
 memory resources,
 
-00:06:36.446 --> 00:06:39.106 A:middle
+
+130
+00:06:36,446 --> 00:06:39,106
 take its memory footprint and
 get it as small as possible
 
-00:06:39.106 --> 00:06:40.396 A:middle
+
+131
+00:06:39,106 --> 00:06:40,396
 when it's going into
 the background.
 
-00:06:40.836 --> 00:06:43.336 A:middle
+
+132
+00:06:40,836 --> 00:06:43,336
 This is even more
 important in the world
 
-00:06:43.336 --> 00:06:45.136 A:middle
+
+133
+00:06:43,336 --> 00:06:45,136
 when we have split view
 
-00:06:45.366 --> 00:06:47.456 A:middle
+
+134
+00:06:45,366 --> 00:06:47,456
 and there can be
 multiple foreground apps.
 
-00:06:48.166 --> 00:06:50.796 A:middle
+
+135
+00:06:48,166 --> 00:06:50,796
 You know when a second
 foreground app comes,
 
-00:06:51.086 --> 00:06:53.936 A:middle
+
+136
+00:06:51,086 --> 00:06:53,936
 that big hog of an app
 isn't going to survive.
 
-00:06:54.816 --> 00:06:57.026 A:middle
+
+137
+00:06:54,816 --> 00:06:57,026
 So you don't want to be that.
 
-00:06:57.026 --> 00:06:59.726 A:middle
+
+138
+00:06:57,026 --> 00:06:59,726
 So that's being superresponsive
 and thinking
 
-00:06:59.726 --> 00:07:01.826 A:middle
+
+139
+00:06:59,726 --> 00:07:01,826
 about performance throughout
 the life cycle of your app.
 
 
-
-00:06:59.726 --> 00:07:01.826 A:middle
-about performance throughout
-the life cycle of your app.
-
-00:07:02.286 --> 00:07:05.876 A:middle
+140
+00:07:02,286 --> 00:07:05,876
 The next best practices I want
 to talk about with respect
 
-00:07:05.946 --> 00:07:07.766 A:middle
+
+141
+00:07:05,946 --> 00:07:07,766
 to general application
 programming is
 
-00:07:07.766 --> 00:07:08.956 A:middle
+
+142
+00:07:07,766 --> 00:07:08,956
 leveraging frameworks.
 
-00:07:10.016 --> 00:07:13.446 A:middle
+
+143
+00:07:10,016 --> 00:07:13,446
 Now, this is maybe the most
 basic best practice I can give
 
-00:07:13.446 --> 00:07:15.166 A:middle
+
+144
+00:07:13,446 --> 00:07:15,166
 to you, but that's: do it!
 
-00:07:15.316 --> 00:07:17.186 A:middle
+
+145
+00:07:15,316 --> 00:07:17,186
 Leverage frameworks
 that Apple provides.
 
-00:07:17.906 --> 00:07:21.026 A:middle
+
+146
+00:07:17,906 --> 00:07:21,026
 We spend our lives throughout
 the year building great
 
-00:07:21.126 --> 00:07:24.356 A:middle
+
+147
+00:07:21,126 --> 00:07:24,356
 frameworks for you to build
 on top of, and doing so comes
 
-00:07:24.356 --> 00:07:25.926 A:middle
+
+148
+00:07:24,356 --> 00:07:25,926
 with several basic advantages
 
-00:07:25.926 --> 00:07:27.016 A:middle
+
+149
+00:07:25,926 --> 00:07:27,016
 that I am sure you
 are familiar with.
 
-00:07:27.016 --> 00:07:29.376 A:middle
+
+150
+00:07:27,016 --> 00:07:29,376
 It reduces your maintenance
 burden.
 
-00:07:29.816 --> 00:07:32.736 A:middle
+
+151
+00:07:29,816 --> 00:07:32,736
 You know? If you use UI
 Navigation Controller,
 
-00:07:32.736 --> 00:07:34.636 A:middle
+
+152
+00:07:32,736 --> 00:07:34,636
 for example, then you don't have
 
-00:07:34.666 --> 00:07:37.376 A:middle
+
+153
+00:07:34,666 --> 00:07:37,376
 to maintain the Navigation
 Controller across releases
 
-00:07:37.686 --> 00:07:40.066 A:middle
+
+154
+00:07:37,686 --> 00:07:40,066
 as you would if you built your
 own Navigation Controller.
 
-00:07:40.476 --> 00:07:43.726 A:middle
+
+155
+00:07:40,476 --> 00:07:43,726
 And as we make improvements, you
 get those improvements for free.
 
-00:07:44.346 --> 00:07:45.426 A:middle
+
+156
+00:07:44,346 --> 00:07:45,426
 For example, you know,
 
-00:07:45.426 --> 00:07:49.016 A:middle
+
+157
+00:07:45,426 --> 00:07:49,016
 Navigation Controller
 gained a swipe gesture
 
-00:07:49.306 --> 00:07:51.286 A:middle
+
+158
+00:07:49,306 --> 00:07:51,286
 for going back a
 couple of releases ago.
 
-00:07:51.676 --> 00:07:54.846 A:middle
+
+159
+00:07:51,676 --> 00:07:54,846
 Everyone who built on top of it
 got that improvement for free.
 
-00:07:55.356 --> 00:07:57.636 A:middle
+
+160
+00:07:55,356 --> 00:07:57,636
 If you had your own, you would
 have had to go implement it
 
-00:07:57.636 --> 00:08:00.976 A:middle
+
+161
+00:07:57,636 --> 00:08:00,976
 or not have a feel that fit
 with the rest of the system.
 
 
-
-00:07:57.636 --> 00:08:00.976 A:middle
-or not have a feel that fit
-with the rest of the system.
-
-00:08:01.306 --> 00:08:05.316 A:middle
+162
+00:08:01,306 --> 00:08:05,316
 So that's what you want because
 you really want to be able
 
-00:08:05.316 --> 00:08:09.116 A:middle
+
+163
+00:08:05,316 --> 00:08:09,116
 to spend your time focusing on
 what makes your app special.
 
-00:08:09.116 --> 00:08:10.196 A:middle
+
+164
+00:08:09,116 --> 00:08:10,196
 That's what we all want.
 
-00:08:10.196 --> 00:08:12.936 A:middle
+
+165
+00:08:10,196 --> 00:08:12,936
 We want you to write fantastic
 apps and spend your time
 
-00:08:12.936 --> 00:08:14.926 A:middle
+
+166
+00:08:12,936 --> 00:08:14,926
 on that rather than things
 
-00:08:14.926 --> 00:08:16.806 A:middle
+
+167
+00:08:14,926 --> 00:08:16,806
 that you could leave
 to our framework.
 
-00:08:16.856 --> 00:08:19.296 A:middle
+
+168
+00:08:16,856 --> 00:08:19,296
 So that's what we want
 to encourage you to do.
 
-00:08:20.316 --> 00:08:22.206 A:middle
+
+169
+00:08:20,316 --> 00:08:22,206
 And of course, while
 you are doing that,
 
-00:08:22.206 --> 00:08:24.416 A:middle
+
+170
+00:08:22,206 --> 00:08:24,416
 something that you're
 going to have to keep
 
-00:08:24.416 --> 00:08:27.426 A:middle
+
+171
+00:08:24,416 --> 00:08:27,426
 in mind is how you
 deal with versioning.
 
-00:08:27.876 --> 00:08:30.336 A:middle
+
+172
+00:08:27,876 --> 00:08:30,336
 So one of the biggest
 questions we get is:
 
-00:08:30.636 --> 00:08:33.775 A:middle
+
+173
+00:08:30,636 --> 00:08:33,775
 How many versions should
 apps deploy against?
 
-00:08:34.176 --> 00:08:36.186 A:middle
+
+174
+00:08:34,176 --> 00:08:36,186
 And our advice to
 you is going to be,
 
-00:08:36.525 --> 00:08:39.966 A:middle
+
+175
+00:08:36,525 --> 00:08:39,966
 target the two most
 major releases of iOS.
 
-00:08:40.806 --> 00:08:43.756 A:middle
+
+176
+00:08:40,806 --> 00:08:43,756
 So starting this fall when iOS
 9 comes out and going forward,
 
-00:08:43.756 --> 00:08:45.946 A:middle
+
+177
+00:08:43,756 --> 00:08:45,946
 that's going to mean
 iOS 8 and 9.
 
-00:08:46.696 --> 00:08:50.416 A:middle
+
+178
+00:08:46,696 --> 00:08:50,416
 This technique will give you the
 best mix of getting a whole lot
 
-00:08:50.416 --> 00:08:53.286 A:middle
+
+179
+00:08:50,416 --> 00:08:53,286
 of users while not taking
 on the maintenance burden
 
-00:08:53.726 --> 00:08:56.566 A:middle
+
+180
+00:08:53,726 --> 00:08:56,566
 of deploying back
 several iOS releases
 
-00:08:56.566 --> 00:08:57.636 A:middle
+
+181
+00:08:56,566 --> 00:08:57,636
 and having to deal with that.
 
-00:08:58.876 --> 00:09:02.186 A:middle
+
+182
+00:08:58,876 --> 00:09:02,186
 Now, in this process,
 you might find yourself
 
 
-
-00:08:58.876 --> 00:09:02.186 A:middle
-Now, in this process,
-you might find yourself
-
-00:09:02.736 --> 00:09:06.606 A:middle
+183
+00:09:02,736 --> 00:09:06,606
 at times needing specific
 logic to check the version
 
-00:09:06.606 --> 00:09:07.766 A:middle
+
+184
+00:09:06,606 --> 00:09:07,766
 of what system you're on.
 
-00:09:08.336 --> 00:09:11.566 A:middle
+
+185
+00:09:08,336 --> 00:09:11,566
 And another best practice for
 that is going to be to make sure
 
-00:09:11.566 --> 00:09:14.256 A:middle
+
+186
+00:09:11,566 --> 00:09:14,256
 that you include
 fallbacks for your logic
 
-00:09:14.536 --> 00:09:16.096 A:middle
+
+187
+00:09:14,536 --> 00:09:16,096
 that is based on system version.
 
-00:09:16.636 --> 00:09:19.746 A:middle
+
+188
+00:09:16,636 --> 00:09:19,746
 So that means definitely don't
 write code that looks like this,
 
-00:09:19.746 --> 00:09:22.176 A:middle
+
+189
+00:09:19,746 --> 00:09:22,176
 where you check for
 a specific version
 
-00:09:22.176 --> 00:09:24.566 A:middle
+
+190
+00:09:22,176 --> 00:09:24,566
 like iOS 9 before
 doing something.
 
-00:09:24.996 --> 00:09:27.366 A:middle
+
+191
+00:09:24,996 --> 00:09:27,366
 If you make a check like this,
 it is almost certainly going
 
-00:09:27.366 --> 00:09:31.436 A:middle
+
+192
+00:09:27,366 --> 00:09:31,436
 to cause a bug in your program
 when iOS 9.1, for example,
 
-00:09:31.696 --> 00:09:34.486 A:middle
+
+193
+00:09:31,696 --> 00:09:34,486
 is released that causes
 this check to fail.
 
-00:09:35.276 --> 00:09:38.016 A:middle
+
+194
+00:09:35,276 --> 00:09:38,016
 Instead, you want to think
 about anything that's
 
-00:09:38.016 --> 00:09:43.176 A:middle
+
+195
+00:09:38,016 --> 00:09:43,176
 in iOS 9 is going to be in
 future releases, so any logic
 
-00:09:43.216 --> 00:09:46.216 A:middle
+
+196
+00:09:43,216 --> 00:09:46,216
 that you put in iOS 9 you'd
 want for versions greater
 
-00:09:46.216 --> 00:09:47.836 A:middle
+
+197
+00:09:46,216 --> 00:09:47,836
 than or equal to iOS 9.
 
-00:09:48.716 --> 00:09:51.576 A:middle
+
+198
+00:09:48,716 --> 00:09:51,576
 And even better, if you are
 writing your app in Swift,
 
-00:09:51.876 --> 00:09:55.116 A:middle
+
+199
+00:09:51,876 --> 00:09:55,116
 you can take advantage of the
 new pound availability syntax
 
-00:09:55.496 --> 00:09:59.636 A:middle
+
+200
+00:09:55,496 --> 00:09:59,636
 to put all your version-specific
 code into a block
 
-00:09:59.636 --> 00:10:02.246 A:middle
+
+201
+00:09:59,636 --> 00:10:02,246
 that the compiler can
 understand and reason about
 
 
-
-00:09:59.636 --> 00:10:02.246 A:middle
-that the compiler can
-understand and reason about
-
-00:10:02.246 --> 00:10:04.436 A:middle
+202
+00:10:02,246 --> 00:10:04,436
 and let you know if you
 are doing anything wrong
 
-00:10:04.706 --> 00:10:05.746 A:middle
+
+203
+00:10:04,706 --> 00:10:05,746
 for a particular version.
 
-00:10:06.726 --> 00:10:09.316 A:middle
+
+204
+00:10:06,726 --> 00:10:09,316
 Whichever technique
 that you end up using,
 
-00:10:09.796 --> 00:10:12.226 A:middle
+
+205
+00:10:09,796 --> 00:10:12,226
 think through whether you
 need to have an Else clause
 
-00:10:12.576 --> 00:10:14.276 A:middle
+
+206
+00:10:12,576 --> 00:10:14,276
 because you don't want
 to make the mistake
 
-00:10:14.276 --> 00:10:19.216 A:middle
+
+207
+00:10:14,276 --> 00:10:19,216
 of putting some specific logic
 in that handles a core piece
 
-00:10:19.216 --> 00:10:23.656 A:middle
+
+208
+00:10:19,216 --> 00:10:23,656
 of your application for some
 system version but fails
 
-00:10:23.656 --> 00:10:27.516 A:middle
+
+209
+00:10:23,656 --> 00:10:27,516
 to do other work that it needs
 to do if it's not that version,
 
-00:10:27.516 --> 00:10:31.116 A:middle
+
+210
+00:10:27,516 --> 00:10:31,116
 and you get a bug on versions
 that aren't what you expected.
 
-00:10:31.726 --> 00:10:34.006 A:middle
+
+211
+00:10:31,726 --> 00:10:34,006
 So that's some basic
 best practices
 
-00:10:34.036 --> 00:10:35.446 A:middle
+
+212
+00:10:34,036 --> 00:10:35,446
 for general application
 life cycle.
 
-00:10:35.906 --> 00:10:38.836 A:middle
+
+213
+00:10:35,906 --> 00:10:38,836
 Let's talk about view and view
 controller best practices.
 
-00:10:39.516 --> 00:10:42.856 A:middle
+
+214
+00:10:39,516 --> 00:10:42,856
 And the first idea I want
 to hit there is how we think
 
-00:10:42.856 --> 00:10:44.736 A:middle
+
+215
+00:10:42,856 --> 00:10:44,736
 about layout on modern devices.
 
-00:10:45.836 --> 00:10:48.806 A:middle
+
+216
+00:10:45,836 --> 00:10:48,806
 You all know that last
 fall we introduced iPhone 6
 
-00:10:49.276 --> 00:10:53.016 A:middle
+
+217
+00:10:49,276 --> 00:10:53,016
 and iPhone 6 Plus, and I am
 sure you are aware that along
 
-00:10:53.016 --> 00:10:55.896 A:middle
+
+218
+00:10:53,016 --> 00:10:55,896
 with this we had
 four new dimensions
 
-00:10:56.176 --> 00:11:00.166 A:middle
+
+219
+00:10:56,176 --> 00:11:00,166
 that had never been
 seen on iOS devices
 
 
-
-00:10:56.176 --> 00:11:00.166 A:middle
-that had never been
-seen on iOS devices
-
-00:11:00.166 --> 00:11:01.326 A:middle
+220
+00:11:00,166 --> 00:11:01,326
 for your apps to lay out in.
 
-00:11:02.326 --> 00:11:06.246 A:middle
+
+221
+00:11:02,326 --> 00:11:06,246
 When you add that to the
 dimensions of various iPhones
 
-00:11:06.246 --> 00:11:09.926 A:middle
+
+222
+00:11:06,246 --> 00:11:09,926
 that we already had plus
 iPad, now the matrix
 
-00:11:10.056 --> 00:11:13.116 A:middle
+
+223
+00:11:10,056 --> 00:11:13,116
 for possible dimensions that
 your app needs to lay out in,
 
-00:11:13.116 --> 00:11:16.396 A:middle
+
+224
+00:11:13,116 --> 00:11:16,396
 especially when you throw
 in split view on iPad Air 2,
 
-00:11:17.636 --> 00:11:19.086 A:middle
+
+225
+00:11:17,636 --> 00:11:19,086
 that matrix is fairly large.
 
-00:11:19.476 --> 00:11:22.006 A:middle
+
+226
+00:11:19,476 --> 00:11:22,006
 So it no longer makes
 sense to build layouts
 
-00:11:22.006 --> 00:11:25.926 A:middle
+
+227
+00:11:22,006 --> 00:11:25,926
 that are built specific
 for a particular dimension
 
-00:11:25.926 --> 00:11:27.956 A:middle
+
+228
+00:11:25,926 --> 00:11:27,956
 that your view controller
 expects to be in.
 
-00:11:28.296 --> 00:11:32.956 A:middle
+
+229
+00:11:28,296 --> 00:11:32,956
 Instead, layout in general wants
 to think of itself as being done
 
-00:11:32.996 --> 00:11:35.036 A:middle
+
+230
+00:11:32,996 --> 00:11:35,036
 to proportions, and we do
 
-00:11:35.036 --> 00:11:39.166 A:middle
+
+231
+00:11:35,036 --> 00:11:39,166
 that by specifically avoiding
 hard-coded values in the layout
 
-00:11:39.166 --> 00:11:40.646 A:middle
+
+232
+00:11:39,166 --> 00:11:40,646
 of our views and
 view controllers.
 
-00:11:41.476 --> 00:11:45.836 A:middle
+
+233
+00:11:41,476 --> 00:11:45,836
 If we imagine a view that simply
 puts a label into a superview,
 
-00:11:46.416 --> 00:11:49.376 A:middle
+
+234
+00:11:46,416 --> 00:11:49,376
 we might have a couple of
 years ago thought of the layout
 
-00:11:49.376 --> 00:11:54.866 A:middle
+
+235
+00:11:49,376 --> 00:11:54,866
 of this as being done as a label
 described as 260 points wide
 
-00:11:54.866 --> 00:11:57.856 A:middle
+
+236
+00:11:54,866 --> 00:11:57,856
 with a 30-point margin
 from the left.
 
-00:11:58.106 --> 00:12:00.836 A:middle
+
+237
+00:11:58,106 --> 00:12:00,836
 We don't want to do that
 because we want to think
 
 
-
-00:11:58.106 --> 00:12:00.836 A:middle
-We don't want to do that
-because we want to think
-
-00:12:01.456 --> 00:12:02.916 A:middle
+238
+00:12:01,456 --> 00:12:02,916
 about the dimension scaling.
 
-00:12:02.916 --> 00:12:04.396 A:middle
+
+239
+00:12:02,916 --> 00:12:04,396
 Either or both of
 them might scale.
 
-00:12:04.396 --> 00:12:07.786 A:middle
+
+240
+00:12:04,396 --> 00:12:07,786
 In this case, if the width
 scales, this layout breaks,
 
-00:12:07.786 --> 00:12:12.016 A:middle
+
+241
+00:12:07,786 --> 00:12:12,016
 it just doesn't work because the
 offset no longer makes sense.
 
-00:12:12.016 --> 00:12:15.356 A:middle
+
+242
+00:12:12,016 --> 00:12:15,356
 So if we had instead thought
 of this as a centered label,
 
-00:12:15.906 --> 00:12:18.706 A:middle
+
+243
+00:12:15,906 --> 00:12:18,706
 then that makes sense
 as the dimensions scale.
 
-00:12:18.816 --> 00:12:20.866 A:middle
+
+244
+00:12:18,816 --> 00:12:20,866
 And we will revisit this
 example a bit when I talk
 
-00:12:20.866 --> 00:12:22.986 A:middle
+
+245
+00:12:20,866 --> 00:12:22,986
 about Auto Layout
 best practices.
 
-00:12:23.996 --> 00:12:28.296 A:middle
+
+246
+00:12:23,996 --> 00:12:28,296
 I want to talk a little bit
 about an API that we introduced
 
-00:12:28.356 --> 00:12:30.736 A:middle
+
+247
+00:12:28,356 --> 00:12:30,736
 in iOS 8 to help you
 with this idea of laying
 
-00:12:30.736 --> 00:12:34.706 A:middle
+
+248
+00:12:30,736 --> 00:12:34,706
 out to proportions because
 part of the goal was to get rid
 
-00:12:34.706 --> 00:12:36.896 A:middle
+
+249
+00:12:34,706 --> 00:12:36,896
 of the idea of orientation.
 
-00:12:36.896 --> 00:12:40.816 A:middle
+
+250
+00:12:36,896 --> 00:12:40,816
 You know, we no longer want you
 to ever think about orientation.
 
-00:12:41.196 --> 00:12:43.306 A:middle
+
+251
+00:12:41,196 --> 00:12:43,306
 In fact, I am going
 to tell you if,
 
-00:12:43.306 --> 00:12:45.896 A:middle
+
+252
+00:12:43,306 --> 00:12:45,896
 when you are designing your
 app, you have the thought
 
-00:12:45.896 --> 00:12:48.686 A:middle
+
+253
+00:12:45,896 --> 00:12:48,686
 in your head that thinks
 about portrait or landscape
 
-00:12:48.686 --> 00:12:50.476 A:middle
+
+254
+00:12:48,686 --> 00:12:50,476
 or you have that
 conversation with your designer
 
-00:12:50.476 --> 00:12:52.406 A:middle
+
+255
+00:12:50,476 --> 00:12:52,406
 where the word "portrait"
 or "landscape" comes out,
 
-00:12:53.096 --> 00:12:54.726 A:middle
+
+256
+00:12:53,096 --> 00:12:54,726
 you are already thinking
 about it wrong.
 
-00:12:55.106 --> 00:12:57.296 A:middle
+
+257
+00:12:55,106 --> 00:12:57,296
 We only think about
 things in terms of size.
 
-00:12:58.196 --> 00:13:02.986 A:middle
+
+258
+00:12:58,196 --> 00:13:02,986
 And so size classes are here
 to help us think about things
 
 
-
-00:12:58.196 --> 00:13:02.986 A:middle
-And so size classes are here
-to help us think about things
-
-00:13:02.986 --> 00:13:05.476 A:middle
+259
+00:13:02,986 --> 00:13:05,476
 in terms of size, do
 proportional layout,
 
-00:13:06.026 --> 00:13:08.356 A:middle
+
+260
+00:13:06,026 --> 00:13:08,356
 while also recognizing
 and embracing
 
-00:13:08.496 --> 00:13:11.416 A:middle
+
+261
+00:13:08,496 --> 00:13:11,416
 that there are certain
 size thresholds
 
-00:13:12.056 --> 00:13:15.696 A:middle
+
+262
+00:13:12,056 --> 00:13:15,696
 where the fundamental
 UI we have changes.
 
-00:13:16.046 --> 00:13:17.796 A:middle
+
+263
+00:13:16,046 --> 00:13:17,796
 As an example, Settings
 
-00:13:17.886 --> 00:13:21.026 A:middle
+
+264
+00:13:17,886 --> 00:13:21,026
 on iPhone 4S is a simple
 one-column table view.
 
-00:13:21.196 --> 00:13:25.236 A:middle
+
+265
+00:13:21,196 --> 00:13:25,236
 When we go to the iPhone
 5, it's still a table view.
 
-00:13:25.236 --> 00:13:26.116 A:middle
+
+266
+00:13:25,236 --> 00:13:26,116
 It's just a little taller.
 
-00:13:26.766 --> 00:13:29.346 A:middle
+
+267
+00:13:26,766 --> 00:13:29,346
 On iPhone 6, it's
 taller and wider,
 
-00:13:29.456 --> 00:13:30.806 A:middle
+
+268
+00:13:29,456 --> 00:13:30,806
 still basically a table view.
 
-00:13:31.066 --> 00:13:33.246 A:middle
+
+269
+00:13:31,066 --> 00:13:33,246
 iPhone 6 Plus, bigger still.
 
-00:13:34.056 --> 00:13:36.156 A:middle
+
+270
+00:13:34,056 --> 00:13:36,156
 However, when we
 transition to iPad,
 
-00:13:36.706 --> 00:13:39.506 A:middle
+
+271
+00:13:36,706 --> 00:13:39,506
 we cross a certain
 width threshold
 
-00:13:40.026 --> 00:13:45.866 A:middle
+
+272
+00:13:40,026 --> 00:13:45,866
 where now this view changes
 fundamentally how it appears.
 
-00:13:45.866 --> 00:13:48.746 A:middle
+
+273
+00:13:45,866 --> 00:13:48,746
 It's now two columns
 of scrolling content.
 
-00:13:49.226 --> 00:13:51.086 A:middle
+
+274
+00:13:49,226 --> 00:13:51,086
 So we've crossed
 some threshold there.
 
-00:13:51.286 --> 00:13:55.226 A:middle
+
+275
+00:13:51,286 --> 00:13:55,226
 And in fact, you find that that
 same threshold has been crossed
 
-00:13:55.636 --> 00:13:57.436 A:middle
+
+276
+00:13:55,636 --> 00:13:57,436
 when we view in iPhone 6,
 
-00:13:57.436 --> 00:13:59.416 A:middle
+
+277
+00:13:57,436 --> 00:13:59,416
 and I will use the dirty
 word, landscape mode.
 
-00:13:59.976 --> 00:14:05.996 A:middle
+
+278
+00:13:59,976 --> 00:14:05,996
 And size classes are
 the API that's there.
 
 
-
-00:13:59.976 --> 00:14:05.996 A:middle
-And size classes are
-the API that's there.
-
-00:14:06.276 --> 00:14:08.756 A:middle
+279
+00:14:06,276 --> 00:14:08,756
 For Apple to communicate
 to your app
 
-00:14:09.196 --> 00:14:11.996 A:middle
+
+280
+00:14:09,196 --> 00:14:11,996
 where those fundamental
 thresholds are crossed
 
-00:14:12.486 --> 00:14:16.446 A:middle
+
+281
+00:14:12,486 --> 00:14:16,446
 so that you can then react
 to those thresholds and think
 
-00:14:16.446 --> 00:14:19.776 A:middle
+
+282
+00:14:16,446 --> 00:14:19,776
 about having a fundamentally
 changed UI according
 
-00:14:19.776 --> 00:14:20.616 A:middle
+
+283
+00:14:19,776 --> 00:14:20,616
 to those thresholds.
 
-00:14:20.876 --> 00:14:23.806 A:middle
+
+284
+00:14:20,876 --> 00:14:23,806
 And you get notified of
 those thresholds changing
 
-00:14:24.076 --> 00:14:28.976 A:middle
+
+285
+00:14:24,076 --> 00:14:28,976
 as size classes are packaged
 in UITraitCollection objects,
 
-00:14:28.976 --> 00:14:31.046 A:middle
+
+286
+00:14:28,976 --> 00:14:31,046
 which your view controller
 will have access to.
 
-00:14:31.706 --> 00:14:32.846 A:middle
+
+287
+00:14:31,706 --> 00:14:32,846
 So that's layout.
 
-00:14:33.496 --> 00:14:35.886 A:middle
+
+288
+00:14:33,496 --> 00:14:35,886
 The next best practice I
 want to impart upon you is
 
-00:14:35.886 --> 00:14:37.756 A:middle
+
+289
+00:14:35,886 --> 00:14:37,756
 to use properties
 in your classes
 
-00:14:37.756 --> 00:14:40.706 A:middle
+
+290
+00:14:37,756 --> 00:14:40,706
 as an alternative
 to tags on UIView.
 
-00:14:41.156 --> 00:14:45.026 A:middle
+
+291
+00:14:41,156 --> 00:14:45,026
 So what I mean here is if
 you are using View With Tag
 
-00:14:45.206 --> 00:14:47.986 A:middle
+
+292
+00:14:45,206 --> 00:14:47,986
 or Set Tag UIView API
 and shipping code,
 
-00:14:47.986 --> 00:14:50.676 A:middle
+
+293
+00:14:47,986 --> 00:14:50,676
 I am going to encourage
 you to move away from that.
 
-00:14:51.406 --> 00:14:53.126 A:middle
+
+294
+00:14:51,406 --> 00:14:53,126
 Reasons are this is just --
 
-00:14:54.016 --> 00:14:55.266 A:middle
+
+295
+00:14:54,016 --> 00:14:55,266
 [Applause]
 
-00:14:55.266 --> 00:14:55.536 A:middle
+
+296
+00:14:55,266 --> 00:14:55,536
 Thank you.
 
-00:14:55.536 --> 00:15:01.516 A:middle
+
+297
+00:14:55,536 --> 00:15:01,516
 I am really, really glad that
 somebody is happy about that.
 
 
-
-00:14:55.536 --> 00:15:01.516 A:middle
-I am really, really glad that
-somebody is happy about that.
-
-00:15:02.206 --> 00:15:04.586 A:middle
+298
+00:15:02,206 --> 00:15:04,586
 Yes. So I mean, the reasons
 for this should be obvious.
 
-00:15:04.586 --> 00:15:07.886 A:middle
+
+299
+00:15:04,586 --> 00:15:07,886
 It's just an integer, and it
 has collisions potentially
 
-00:15:07.886 --> 00:15:08.616 A:middle
+
+300
+00:15:07,886 --> 00:15:08,616
 with other code.
 
-00:15:08.616 --> 00:15:10.106 A:middle
+
+301
+00:15:08,616 --> 00:15:10,106
 Maybe it's other
 code that you write.
 
-00:15:10.316 --> 00:15:12.586 A:middle
+
+302
+00:15:10,316 --> 00:15:12,586
 Maybe it's the new guy on
 your team who doesn't know
 
-00:15:12.586 --> 00:15:14.456 A:middle
+
+303
+00:15:12,586 --> 00:15:14,456
 about your carefully
 managed integers.
 
-00:15:14.896 --> 00:15:18.076 A:middle
+
+304
+00:15:14,896 --> 00:15:18,076
 Maybe it's a framework
 that you use
 
-00:15:18.076 --> 00:15:20.026 A:middle
+
+305
+00:15:18,076 --> 00:15:20,026
 that you have no
 visibility into.
 
-00:15:20.916 --> 00:15:22.746 A:middle
+
+306
+00:15:20,916 --> 00:15:22,746
 And whenever these
 collisions happen,
 
-00:15:22.746 --> 00:15:24.826 A:middle
+
+307
+00:15:22,746 --> 00:15:24,826
 you get no compiler
 warnings about them.
 
-00:15:25.066 --> 00:15:26.306 A:middle
+
+308
+00:15:25,066 --> 00:15:26,306
 The compiler has
 no way to reason
 
-00:15:26.306 --> 00:15:27.586 A:middle
+
+309
+00:15:26,306 --> 00:15:27,586
 about your integer management.
 
-00:15:28.546 --> 00:15:31.966 A:middle
+
+310
+00:15:28,546 --> 00:15:31,966
 And when you not only do
 not get a compiler warning,
 
-00:15:32.296 --> 00:15:35.356 A:middle
+
+311
+00:15:32,296 --> 00:15:35,356
 but any runtime errors you
 get will not say anything
 
-00:15:35.356 --> 00:15:36.766 A:middle
+
+312
+00:15:35,356 --> 00:15:36,766
 about your use of
 View With Tags.
 
-00:15:36.826 --> 00:15:40.156 A:middle
+
+313
+00:15:36,826 --> 00:15:40,156
 At best, you'll get a crash
 for unrecognized selector.
 
-00:15:40.406 --> 00:15:41.906 A:middle
+
+314
+00:15:40,406 --> 00:15:41,906
 You won't know what happened.
 
-00:15:42.816 --> 00:15:45.786 A:middle
+
+315
+00:15:42,816 --> 00:15:45,786
 As a replacement to
 this, declare properties
 
-00:15:45.986 --> 00:15:50.356 A:middle
+
+316
+00:15:45,986 --> 00:15:50,356
 on your classes, and then you
 will have real connections
 
-00:15:50.356 --> 00:15:51.886 A:middle
+
+317
+00:15:50,356 --> 00:15:51,886
 to those views that
 you need later.
 
-00:15:52.546 --> 00:15:58.206 A:middle
+
+318
+00:15:52,546 --> 00:15:58,206
 As a simple code example,
 imagine that I wrote some code
 
-00:15:58.206 --> 00:16:01.056 A:middle
+
+319
+00:15:58,206 --> 00:16:01,056
 that creates an image view, and
 I keep track of it with a tag
 
 
-
-00:15:58.206 --> 00:16:01.056 A:middle
-that creates an image view, and
-I keep track of it with a tag
-
-00:16:01.056 --> 00:16:02.936 A:middle
+320
+00:16:01,056 --> 00:16:02,936
 of 1,000 because I'm sure
 
-00:16:02.936 --> 00:16:07.096 A:middle
+
+321
+00:16:02,936 --> 00:16:07,096
 in all my cleverness nobody else
 will ever use a tag of 1,000.
 
-00:16:07.626 --> 00:16:11.646 A:middle
+
+322
+00:16:07,626 --> 00:16:11,646
 But then I watch my own
 talk, and I say no, no,
 
-00:16:12.096 --> 00:16:14.506 A:middle
+
+323
+00:16:12,096 --> 00:16:14,506
 let me create an actual property
 
-00:16:14.826 --> 00:16:16.536 A:middle
+
+324
+00:16:14,826 --> 00:16:16,536
 that declares it
 a UI image view.
 
-00:16:16.536 --> 00:16:19.166 A:middle
+
+325
+00:16:16,536 --> 00:16:19,166
 Then I keep a real
 reference to that view
 
-00:16:19.516 --> 00:16:23.176 A:middle
+
+326
+00:16:19,516 --> 00:16:23,176
 that also has better type
 information because View
 
-00:16:23.176 --> 00:16:25.896 A:middle
+
+327
+00:16:23,176 --> 00:16:25,896
 With Tag only is a type UI view.
 
-00:16:26.356 --> 00:16:29.106 A:middle
+
+328
+00:16:26,356 --> 00:16:29,106
 Now that I use a
 property-typed UI image view,
 
-00:16:29.316 --> 00:16:32.236 A:middle
+
+329
+00:16:29,316 --> 00:16:32,236
 the compiler can actually reason
 about what I do and help me
 
-00:16:32.236 --> 00:16:33.406 A:middle
+
+330
+00:16:32,236 --> 00:16:33,406
 out if I make mistakes.
 
-00:16:34.066 --> 00:16:36.756 A:middle
+
+331
+00:16:34,066 --> 00:16:36,756
 So please heed that.
 
-00:16:36.756 --> 00:16:39.346 A:middle
+
+332
+00:16:36,756 --> 00:16:39,346
 The last best practice for
 view and view controllers is
 
-00:16:39.346 --> 00:16:41.776 A:middle
+
+333
+00:16:39,346 --> 00:16:41,776
 about making timing
 deterministic.
 
-00:16:42.696 --> 00:16:47.006 A:middle
+
+334
+00:16:42,696 --> 00:16:47,006
 This is, for those of you who
 may have been in the position
 
-00:16:47.096 --> 00:16:51.876 A:middle
+
+335
+00:16:47,096 --> 00:16:51,876
 of doing something
 alongside a system animation
 
-00:16:52.366 --> 00:16:55.636 A:middle
+
+336
+00:16:52,366 --> 00:16:55,636
 or you have some work
 that you want to fire off
 
-00:16:55.636 --> 00:16:58.256 A:middle
+
+337
+00:16:55,636 --> 00:16:58,256
 when an animation is
 complete, and so you are left
 
-00:16:58.256 --> 00:17:01.116 A:middle
+
+338
+00:16:58,256 --> 00:17:01,116
 in the position of trying to
 make a guess about how long
 
 
-
-00:16:58.256 --> 00:17:01.116 A:middle
-in the position of trying to
-make a guess about how long
-
-00:17:01.116 --> 00:17:02.516 A:middle
+339
+00:17:01,116 --> 00:17:02,516
 that animation is going to take
 
-00:17:02.516 --> 00:17:04.685 A:middle
+
+340
+00:17:02,516 --> 00:17:04,685
 and perhaps implementing
 an NSTimer
 
-00:17:05.026 --> 00:17:06.826 A:middle
+
+341
+00:17:05,026 --> 00:17:06,826
 to take care of that
 time for you.
 
-00:17:06.826 --> 00:17:09.576 A:middle
+
+342
+00:17:06,826 --> 00:17:09,576
 Well, you don't want
 to do that because
 
-00:17:09.576 --> 00:17:12.046 A:middle
+
+343
+00:17:09,576 --> 00:17:12,046
 that introduces indeterminism
 into your app,
 
-00:17:12.086 --> 00:17:14.195 A:middle
+
+344
+00:17:12,086 --> 00:17:14,195
 especially with the possibility
 
-00:17:14.195 --> 00:17:16.935 A:middle
+
+345
+00:17:14,195 --> 00:17:16,935
 that animation timings can
 change from release to release.
 
-00:17:17.586 --> 00:17:19.876 A:middle
+
+346
+00:17:17,586 --> 00:17:19,876
 You are really the
 opposite of future-proof
 
-00:17:19.876 --> 00:17:21.766 A:middle
+
+347
+00:17:19,876 --> 00:17:21,766
 if that's what you are doing.
 
-00:17:21.766 --> 00:17:25.185 A:middle
+
+348
+00:17:21,766 --> 00:17:25,185
 Instead, leverage
 UIViewTransitionCoordinator,
 
-00:17:25.486 --> 00:17:30.346 A:middle
+
+349
+00:17:25,486 --> 00:17:30,346
 an API on UIViewController,
 to know what the timings are
 
-00:17:30.346 --> 00:17:31.786 A:middle
+
+350
+00:17:30,346 --> 00:17:31,786
 for the animations
 that you have.
 
-00:17:32.316 --> 00:17:33.516 A:middle
+
+351
+00:17:32,316 --> 00:17:33,516
 This has the capability
 
-00:17:33.516 --> 00:17:36.406 A:middle
+
+352
+00:17:33,516 --> 00:17:36,406
 to let you do any
 animation you want alongside
 
-00:17:36.636 --> 00:17:38.036 A:middle
+
+353
+00:17:36,636 --> 00:17:38,036
 of view controller transition.
 
-00:17:39.286 --> 00:17:43.316 A:middle
+
+354
+00:17:39,286 --> 00:17:43,316
 You know for sure when that
 transition is completed.
 
-00:17:44.146 --> 00:17:47.936 A:middle
+
+355
+00:17:44,146 --> 00:17:47,936
 And it has built-in support
 for cancelable animations
 
-00:17:48.286 --> 00:17:49.716 A:middle
+
+356
+00:17:48,286 --> 00:17:49,716
 and interactive animations.
 
-00:17:50.076 --> 00:17:52.956 A:middle
+
+357
+00:17:50,076 --> 00:17:52,956
 So if you imagine that
 navigation swipe gesture again,
 
-00:17:53.366 --> 00:17:56.306 A:middle
+
+358
+00:17:53,366 --> 00:17:56,306
 the user may move his or
 her hand back and forth,
 
-00:17:56.386 --> 00:17:59.596 A:middle
+
+359
+00:17:56,386 --> 00:17:59,596
 changing the speed,
 direction, and even decide not
 
-00:17:59.626 --> 00:18:01.836 A:middle
+
+360
+00:17:59,626 --> 00:18:01,836
 to pop the view controller
 and cancel it altogether.
 
 
-
-00:17:59.626 --> 00:18:01.836 A:middle
-to pop the view controller
-and cancel it altogether.
-
-00:18:02.566 --> 00:18:04.906 A:middle
+361
+00:18:02,566 --> 00:18:04,906
 If you use the Transition
 Coordinator, you are prepared
 
-00:18:04.906 --> 00:18:07.106 A:middle
+
+362
+00:18:04,906 --> 00:18:07,106
 to handle all of that.
 
-00:18:07.656 --> 00:18:09.606 A:middle
+
+363
+00:18:07,656 --> 00:18:09,606
 Let's talk about Auto
 Layout best practices.
 
-00:18:10.546 --> 00:18:13.406 A:middle
+
+364
+00:18:10,546 --> 00:18:13,406
 Auto Layout is a tool that I am
 sure many of you know and love,
 
-00:18:13.826 --> 00:18:17.156 A:middle
+
+365
+00:18:13,826 --> 00:18:17,156
 and it's kind of
 built there designed
 
-00:18:17.156 --> 00:18:22.136 A:middle
+
+366
+00:18:17,156 --> 00:18:22,136
 to help you be adaptable and
 future-proof in your code.
 
-00:18:22.136 --> 00:18:23.836 A:middle
+
+367
+00:18:22,136 --> 00:18:23,836
 And of course, we are
 going to talk about that.
 
-00:18:23.836 --> 00:18:26.546 A:middle
+
+368
+00:18:23,836 --> 00:18:26,546
 Future-proofing is one of
 the goals with Auto Layout.
 
-00:18:27.256 --> 00:18:30.606 A:middle
+
+369
+00:18:27,256 --> 00:18:30,606
 But first I want to hit
 on some best practices
 
-00:18:30.606 --> 00:18:33.276 A:middle
+
+370
+00:18:30,606 --> 00:18:33,276
 for high performance
 in your Auto Layout.
 
-00:18:33.716 --> 00:18:37.126 A:middle
+
+371
+00:18:33,716 --> 00:18:37,126
 And that's going to start
 with managing your constraints
 
-00:18:37.406 --> 00:18:38.916 A:middle
+
+372
+00:18:37,406 --> 00:18:38,916
 in the most efficient
 way possible.
 
-00:18:39.866 --> 00:18:44.316 A:middle
+
+373
+00:18:39,866 --> 00:18:44,316
 So the way that you do that is
 imagining all the constraints
 
-00:18:44.376 --> 00:18:48.216 A:middle
+
+374
+00:18:44,376 --> 00:18:48,216
 that will be in your view and
 identify those constraints
 
-00:18:48.516 --> 00:18:50.866 A:middle
+
+375
+00:18:48,516 --> 00:18:50,866
 that might change throughout
 the lifetime of the view.
 
-00:18:52.066 --> 00:18:56.366 A:middle
+
+376
+00:18:52,066 --> 00:18:56,366
 What that does when you identify
 what changes is you'll be able
 
-00:18:56.366 --> 00:19:01.626 A:middle
+
+377
+00:18:56,366 --> 00:19:01,626
 to make targeted changes
 and not change the things
 
 
-
-00:18:56.366 --> 00:19:01.626 A:middle
-to make targeted changes
-and not change the things
-
-00:19:01.736 --> 00:19:02.946 A:middle
+378
+00:19:01,736 --> 00:19:02,946
 that don't need to change
 
-00:19:03.146 --> 00:19:06.276 A:middle
+
+379
+00:19:03,146 --> 00:19:06,276
 because when you keep
 some things constant,
 
-00:19:06.696 --> 00:19:09.766 A:middle
+
+380
+00:19:06,696 --> 00:19:09,766
 you allow the Auto Layout engine
 to optimize for those things
 
-00:19:09.766 --> 00:19:12.716 A:middle
+
+381
+00:19:09,766 --> 00:19:12,716
 that don't change and,
 therefore, it doesn't have
 
-00:19:12.786 --> 00:19:16.616 A:middle
+
+382
+00:19:12,786 --> 00:19:16,616
 to make certain calculations
 over again, and your app lays
 
-00:19:16.616 --> 00:19:18.726 A:middle
+
+383
+00:19:16,616 --> 00:19:18,726
 out faster, which is
 especially important
 
-00:19:18.726 --> 00:19:21.526 A:middle
+
+384
+00:19:18,726 --> 00:19:21,526
 if you are doing
 re-layout during scrolling
 
-00:19:21.746 --> 00:19:23.346 A:middle
+
+385
+00:19:21,746 --> 00:19:23,346
 or something else
 user interactive.
 
-00:19:24.436 --> 00:19:27.466 A:middle
+
+386
+00:19:24,436 --> 00:19:27,466
 So part of that, a
 definite best practice --
 
-00:19:27.466 --> 00:19:29.716 A:middle
+
+387
+00:19:27,466 --> 00:19:29,716
 while this is a worst practice
 and the best practice is
 
-00:19:29.776 --> 00:19:31.386 A:middle
+
+388
+00:19:29,776 --> 00:19:31,386
 to avoid the worst practice --
 
-00:19:31.856 --> 00:19:34.616 A:middle
+
+389
+00:19:31,856 --> 00:19:34,616
 is removing all the
 constraints from a view.
 
-00:19:35.196 --> 00:19:38.606 A:middle
+
+390
+00:19:35,196 --> 00:19:38,606
 This is bad not only in
 terms of the performance
 
-00:19:38.606 --> 00:19:40.626 A:middle
+
+391
+00:19:38,606 --> 00:19:40,626
 of your app enforcing
 the Auto Layout engine
 
-00:19:40.626 --> 00:19:42.526 A:middle
+
+392
+00:19:40,626 --> 00:19:42,526
 to do the most work possible,
 
-00:19:43.066 --> 00:19:46.556 A:middle
+
+393
+00:19:43,066 --> 00:19:46,556
 but it's also actually a
 potential compatibility issue
 
-00:19:46.556 --> 00:19:51.126 A:middle
+
+394
+00:19:46,556 --> 00:19:51,126
 because future versions of iOS
 may have additional constraints
 
-00:19:51.126 --> 00:19:53.606 A:middle
+
+395
+00:19:51,126 --> 00:19:53,606
 that the framework has added,
 which you'll be removing
 
-00:19:53.606 --> 00:19:55.306 A:middle
+
+396
+00:19:53,606 --> 00:19:55,306
 when you call Remove
 All Constraints.
 
-00:19:55.806 --> 00:19:58.436 A:middle
+
+397
+00:19:55,806 --> 00:19:58,436
 So you want to avoid calling
 Remove All Constraints
 
-00:19:58.436 --> 00:20:00.206 A:middle
+
+398
+00:19:58,436 --> 00:20:00,206
 on a view as much as possible.
 
 
-
-00:19:58.436 --> 00:20:00.206 A:middle
-on a view as much as possible.
-
-00:20:01.436 --> 00:20:05.456 A:middle
+399
+00:20:01,436 --> 00:20:05,456
 So the way that you sort of
 tie this together and are able
 
-00:20:05.546 --> 00:20:07.546 A:middle
+
+400
+00:20:05,546 --> 00:20:07,546
 to manage your constraints
 efficiently is
 
-00:20:07.546 --> 00:20:11.546 A:middle
+
+401
+00:20:07,546 --> 00:20:11,546
 by having explicit references
 to them using the same strategy
 
-00:20:11.546 --> 00:20:14.586 A:middle
+
+402
+00:20:11,546 --> 00:20:14,586
 that we just talked about
 by replacing view tags,
 
-00:20:14.886 --> 00:20:18.656 A:middle
+
+403
+00:20:14,886 --> 00:20:18,656
 having actual properties
 that point out the views
 
-00:20:18.656 --> 00:20:20.506 A:middle
+
+404
+00:20:18,656 --> 00:20:20,506
 or the constraints
 that you might need
 
-00:20:20.506 --> 00:20:22.836 A:middle
+
+405
+00:20:20,506 --> 00:20:22,836
 to change throughout the
 lifetime of the view.
 
-00:20:23.586 --> 00:20:26.346 A:middle
+
+406
+00:20:23,586 --> 00:20:26,346
 So we can look at a
 very simple example
 
-00:20:26.696 --> 00:20:30.006 A:middle
+
+407
+00:20:26,696 --> 00:20:30,006
 of how you might write your
 update view constraints code,
 
-00:20:30.336 --> 00:20:32.616 A:middle
+
+408
+00:20:30,336 --> 00:20:32,616
 and this does the most
 naive thing possible,
 
-00:20:32.616 --> 00:20:35.696 A:middle
+
+409
+00:20:32,616 --> 00:20:35,696
 and that is it says hey, I
 need to update my constraints.
 
-00:20:36.036 --> 00:20:37.466 A:middle
+
+410
+00:20:36,036 --> 00:20:37,466
 Let me just remove all of them,
 
-00:20:37.726 --> 00:20:39.396 A:middle
+
+411
+00:20:37,726 --> 00:20:39,396
 and then I will recalculate
 them and add them back.
 
-00:20:40.846 --> 00:20:41.796 A:middle
+
+412
+00:20:40,846 --> 00:20:41,796
 We don't want to do this.
 
-00:20:41.836 --> 00:20:43.246 A:middle
+
+413
+00:20:41,836 --> 00:20:43,246
 This is not the best practice.
 
-00:20:43.596 --> 00:20:47.916 A:middle
+
+414
+00:20:43,596 --> 00:20:47,916
 The best practice is if we have
 one constraint, for example,
 
-00:20:48.246 --> 00:20:51.346 A:middle
+
+415
+00:20:48,246 --> 00:20:51,346
 that needs to be changed, we
 can remove that constraint,
 
-00:20:52.526 --> 00:20:56.076 A:middle
+
+416
+00:20:52,526 --> 00:20:56,076
 rebuild just that
 constraint, and add it back.
 
-00:20:56.786 --> 00:20:59.176 A:middle
+
+417
+00:20:56,786 --> 00:20:59,176
 The Auto Layout engine again
 knows what didn't change
 
-00:20:59.296 --> 00:21:02.136 A:middle
+
+418
+00:20:59,296 --> 00:21:02,136
 and is able to optimize
 for us around that.
 
 
-
-00:20:59.296 --> 00:21:02.136 A:middle
-and is able to optimize
-for us around that.
-
-00:21:03.916 --> 00:21:07.456 A:middle
+419
+00:21:03,916 --> 00:21:07,456
 So the next set of best
 practices I have for you
 
-00:21:07.456 --> 00:21:09.786 A:middle
+
+420
+00:21:07,456 --> 00:21:09,786
 around constraints
 are around this idea
 
-00:21:09.786 --> 00:21:13.796 A:middle
+
+421
+00:21:09,786 --> 00:21:13,796
 of how specific you are when
 you describe your constraints.
 
-00:21:14.386 --> 00:21:16.766 A:middle
+
+422
+00:21:14,386 --> 00:21:16,766
 In general, you want
 your constraints
 
-00:21:16.766 --> 00:21:21.306 A:middle
+
+423
+00:21:16,766 --> 00:21:21,306
 to describe your layout exactly
 as precisely as is necessary.
 
-00:21:21.636 --> 00:21:23.956 A:middle
+
+424
+00:21:21,636 --> 00:21:23,956
 That is, you want to
 say what is needed
 
-00:21:23.956 --> 00:21:27.206 A:middle
+
+425
+00:21:23,956 --> 00:21:27,206
 to get the layout you
 desire, and you don't want
 
-00:21:27.206 --> 00:21:29.026 A:middle
+
+426
+00:21:27,206 --> 00:21:29,026
 to say any more, and you
 don't want to say any less.
 
-00:21:30.036 --> 00:21:34.756 A:middle
+
+427
+00:21:30,036 --> 00:21:34,756
 And there are potential problems
 that can happen on both sides
 
-00:21:35.296 --> 00:21:38.676 A:middle
+
+428
+00:21:35,296 --> 00:21:38,676
 of this specificity problem,
 and I am going to talk
 
-00:21:38.676 --> 00:21:39.716 A:middle
+
+429
+00:21:38,676 --> 00:21:39,716
 about each of these now.
 
-00:21:40.246 --> 00:21:43.006 A:middle
+
+430
+00:21:40,246 --> 00:21:43,006
 The first one is a
 performance problem.
 
-00:21:43.446 --> 00:21:47.556 A:middle
+
+431
+00:21:43,446 --> 00:21:47,556
 So the first one is about
 adding duplicate constraints
 
-00:21:47.556 --> 00:21:48.256 A:middle
+
+432
+00:21:47,556 --> 00:21:48,256
 to your views.
 
-00:21:48.566 --> 00:21:52.586 A:middle
+
+433
+00:21:48,566 --> 00:21:52,586
 Duplicate constraints are those
 ones that if you removed them,
 
-00:21:53.076 --> 00:21:54.936 A:middle
+
+434
+00:21:53,076 --> 00:21:54,936
 the layout would
 be exactly the same
 
-00:21:55.126 --> 00:21:58.236 A:middle
+
+435
+00:21:55,126 --> 00:21:58,236
 because they're just implied
 by what's already there.
 
-00:21:58.946 --> 00:22:01.246 A:middle
+
+436
+00:21:58,946 --> 00:22:01,246
 And when you have that, it
 causes the layout engine
 
 
-
-00:21:58.946 --> 00:22:01.246 A:middle
-And when you have that, it
-causes the layout engine
-
-00:22:01.246 --> 00:22:03.396 A:middle
+437
+00:22:01,246 --> 00:22:03,396
 to do more work than it
 needs to because it's solving
 
-00:22:03.396 --> 00:22:04.916 A:middle
+
+438
+00:22:03,396 --> 00:22:04,916
 for these constraints
 because they are there,
 
-00:22:05.136 --> 00:22:07.016 A:middle
+
+439
+00:22:05,136 --> 00:22:07,016
 but it didn't actually
 need to solve for them.
 
-00:22:07.016 --> 00:22:11.696 A:middle
+
+440
+00:22:07,016 --> 00:22:11,696
 An example of this can be seen
 in this sort of simple layout.
 
-00:22:12.216 --> 00:22:14.456 A:middle
+
+441
+00:22:12,216 --> 00:22:14,456
 I've got a couple of
 views inside a superview,
 
-00:22:14.856 --> 00:22:21.246 A:middle
+
+442
+00:22:14,856 --> 00:22:21,246
 and I might describe the layout
 first by doing the vertical axis
 
-00:22:21.786 --> 00:22:25.276 A:middle
+
+443
+00:22:21,786 --> 00:22:25,276
 and say, hey, there's
 some margin between my top
 
-00:22:25.276 --> 00:22:29.246 A:middle
+
+444
+00:22:25,276 --> 00:22:29,246
 and bottom view, and I give
 it an alignment option to say
 
-00:22:29.246 --> 00:22:31.926 A:middle
+
+445
+00:22:29,246 --> 00:22:31,926
 that the left edges of both of
 those views are also aligned.
 
-00:22:32.736 --> 00:22:35.326 A:middle
+
+446
+00:22:32,736 --> 00:22:35,326
 Then I say, okay, let me go
 to the horizontal dimension.
 
-00:22:35.686 --> 00:22:39.196 A:middle
+
+447
+00:22:35,686 --> 00:22:39,196
 I provide some spacing
 for the top view,
 
-00:22:39.516 --> 00:22:41.906 A:middle
+
+448
+00:22:39,516 --> 00:22:41,906
 so now I know what
 its left margin is.
 
-00:22:42.346 --> 00:22:45.146 A:middle
+
+449
+00:22:42,346 --> 00:22:45,146
 Then I think, well, I've got
 to specify that bottom view
 
-00:22:45.146 --> 00:22:48.106 A:middle
+
+450
+00:22:45,146 --> 00:22:48,106
 as well, so I specify a
 margin for that bottom view.
 
-00:22:48.786 --> 00:22:52.076 A:middle
+
+451
+00:22:48,786 --> 00:22:52,076
 But what I've just done
 is provided a margin
 
-00:22:52.076 --> 00:22:55.656 A:middle
+
+452
+00:22:52,076 --> 00:22:55,656
 that I really didn't need in
 that bottom view left margin.
 
-00:22:56.186 --> 00:22:58.856 A:middle
+
+453
+00:22:56,186 --> 00:22:58,856
 Since I already knew what
 the top view's margin was
 
-00:22:59.386 --> 00:23:02.496 A:middle
+
+454
+00:22:59,386 --> 00:23:02,496
 and I also knew that the
 left edges of the bottom
 
 
-
-00:22:59.386 --> 00:23:02.496 A:middle
-and I also knew that the
-left edges of the bottom
-
-00:23:02.496 --> 00:23:04.876 A:middle
+455
+00:23:02,496 --> 00:23:04,876
 and the top view were going
 to align to each other,
 
-00:23:05.476 --> 00:23:09.436 A:middle
+
+456
+00:23:05,476 --> 00:23:09,436
 this view hierarchy would
 have laid out exactly the same
 
-00:23:09.436 --> 00:23:14.086 A:middle
+
+457
+00:23:09,436 --> 00:23:14,086
 if I hadn't specified the left
 margin of the bottom view.
 
-00:23:14.416 --> 00:23:17.136 A:middle
+
+458
+00:23:14,416 --> 00:23:17,136
 So that extra constraint just
 causes the engine to do work
 
-00:23:17.136 --> 00:23:18.326 A:middle
+
+459
+00:23:17,136 --> 00:23:18,326
 that it doesn't need to do.
 
-00:23:19.326 --> 00:23:21.556 A:middle
+
+460
+00:23:19,326 --> 00:23:21,556
 Get rid of that,
 we'll be faster.
 
-00:23:22.256 --> 00:23:24.856 A:middle
+
+461
+00:23:22,256 --> 00:23:24,856
 The next problem that
 can happen as a result
 
-00:23:24.856 --> 00:23:27.306 A:middle
+
+462
+00:23:24,856 --> 00:23:27,306
 of overspecifying your
 constraints actually isn't a
 
-00:23:27.306 --> 00:23:30.796 A:middle
+
+463
+00:23:27,306 --> 00:23:30,796
 performance problem, but
 it's an adaptability problem.
 
-00:23:30.796 --> 00:23:32.906 A:middle
+
+464
+00:23:30,796 --> 00:23:32,906
 It's a future problem
 for your app.
 
-00:23:32.906 --> 00:23:35.746 A:middle
+
+465
+00:23:32,906 --> 00:23:35,746
 And that's when your constraints
 simply aren't flexible enough.
 
-00:23:36.296 --> 00:23:40.366 A:middle
+
+466
+00:23:36,296 --> 00:23:40,366
 So if we think about hard-coded
 values, we know we hate them,
 
-00:23:40.996 --> 00:23:42.466 A:middle
+
+467
+00:23:40,996 --> 00:23:42,466
 and let's go back
 to this example
 
-00:23:42.466 --> 00:23:46.396 A:middle
+
+468
+00:23:42,466 --> 00:23:46,396
 that I promised we'd come back
 to about a label in a view.
 
-00:23:47.156 --> 00:23:51.446 A:middle
+
+469
+00:23:47,156 --> 00:23:51,446
 Again, if we think about this in
 terms of it's a 30-point margin
 
-00:23:51.446 --> 00:23:53.376 A:middle
+
+470
+00:23:51,446 --> 00:23:53,376
 from the left and
 it's 260 points wide,
 
-00:23:53.886 --> 00:23:55.906 A:middle
+
+471
+00:23:53,886 --> 00:23:55,906
 we might describe
 its constraints
 
-00:23:56.336 --> 00:23:58.156 A:middle
+
+472
+00:23:56,336 --> 00:23:58,156
 in terms of those hard values.
 
-00:23:58.706 --> 00:24:02.276 A:middle
+
+473
+00:23:58,706 --> 00:24:02,276
 But those hard values cause
 us to be rigid and unchanging,
 
 
-
-00:23:58.706 --> 00:24:02.276 A:middle
-But those hard values cause
-us to be rigid and unchanging,
-
-00:24:02.476 --> 00:24:05.606 A:middle
+474
+00:24:02,476 --> 00:24:05,606
 which kind of defeats the
 entire purpose of Auto Layout
 
-00:24:05.606 --> 00:24:07.216 A:middle
+
+475
+00:24:05,606 --> 00:24:07,216
 as a future-proofing tool.
 
-00:24:07.916 --> 00:24:11.866 A:middle
+
+476
+00:24:07,916 --> 00:24:11,866
 What we really want to do is
 describe our constraints using
 
-00:24:11.866 --> 00:24:13.696 A:middle
+
+477
+00:24:11,866 --> 00:24:13,696
 the bounds of the
 views that they're in.
 
-00:24:14.186 --> 00:24:17.916 A:middle
+
+478
+00:24:14,186 --> 00:24:17,916
 So this should have been
 something that used the bounds
 
-00:24:17.916 --> 00:24:21.806 A:middle
+
+479
+00:24:17,916 --> 00:24:21,806
 of the superview and
 described minimum margins
 
-00:24:21.806 --> 00:24:22.606 A:middle
+
+480
+00:24:21,806 --> 00:24:22,606
 around that view.
 
-00:24:22.916 --> 00:24:27.966 A:middle
+
+481
+00:24:22,916 --> 00:24:27,966
 So let's talk about the other
 side of constraint specificity,
 
-00:24:28.176 --> 00:24:30.726 A:middle
+
+482
+00:24:28,176 --> 00:24:30,726
 which is underspecifying
 your constraints.
 
-00:24:30.726 --> 00:24:31.536 A:middle
+
+483
+00:24:30,726 --> 00:24:31,536
 You don't want to
 do that either.
 
-00:24:31.536 --> 00:24:33.906 A:middle
+
+484
+00:24:31,536 --> 00:24:33,906
 You want to make sure you've
 specified everything you need.
 
-00:24:34.616 --> 00:24:38.096 A:middle
+
+485
+00:24:34,616 --> 00:24:38,096
 If you think about this view
 here and imagine what happens
 
-00:24:38.096 --> 00:24:41.586 A:middle
+
+486
+00:24:38,096 --> 00:24:41,586
 if we underspecified, we'd
 be introducing ambiguity.
 
-00:24:42.246 --> 00:24:45.836 A:middle
+
+487
+00:24:42,246 --> 00:24:45,836
 So focus in on constraints
 I might have specified here.
 
-00:24:46.126 --> 00:24:49.906 A:middle
+
+488
+00:24:46,126 --> 00:24:49,906
 If I set left and right
 margins around this label
 
-00:24:50.406 --> 00:24:54.206 A:middle
+
+489
+00:24:50,406 --> 00:24:54,206
 and I set a top margin as well,
 there's something missing,
 
-00:24:54.256 --> 00:24:55.966 A:middle
+
+490
+00:24:54,256 --> 00:24:55,966
 and it should be
 pretty obvious to you
 
-00:24:56.216 --> 00:24:58.616 A:middle
+
+491
+00:24:56,216 --> 00:24:58,616
 that there's no bottom
 margin, and there needs to be.
 
-00:24:59.046 --> 00:25:03.046 A:middle
+
+492
+00:24:59,046 --> 00:25:03,046
 And there needs to be because if
 it's ambiguous, it's undefined,
 
 
-
-00:24:59.046 --> 00:25:03.046 A:middle
-And there needs to be because if
-it's ambiguous, it's undefined,
-
-00:25:03.116 --> 00:25:06.236 A:middle
+493
+00:25:03,116 --> 00:25:06,236
 and that means my
 view might come
 
-00:25:06.236 --> 00:25:09.336 A:middle
+
+494
+00:25:06,236 --> 00:25:09,336
 out different ways
 different times I run my app.
 
-00:25:09.656 --> 00:25:11.136 A:middle
+
+495
+00:25:09,656 --> 00:25:11,136
 Maybe if this is a table cell,
 
-00:25:11.476 --> 00:25:13.316 A:middle
+
+496
+00:25:11,476 --> 00:25:13,316
 it changes when I
 call Reload Data,
 
-00:25:13.316 --> 00:25:14.716 A:middle
+
+497
+00:25:13,316 --> 00:25:14,716
 and I am mystified by that.
 
-00:25:15.256 --> 00:25:17.436 A:middle
+
+498
+00:25:15,256 --> 00:25:17,436
 Maybe it will change on the
 next version of iOS because,
 
-00:25:17.636 --> 00:25:21.566 A:middle
+
+499
+00:25:17,636 --> 00:25:21,566
 you know, the cosmic rays
 hit the phone differently.
 
-00:25:21.956 --> 00:25:22.556 A:middle
+
+500
+00:25:21,956 --> 00:25:22,556
 Who knows.
 
-00:25:23.176 --> 00:25:25.496 A:middle
+
+501
+00:25:23,176 --> 00:25:25,496
 We don't want undefined
 behavior.
 
-00:25:25.816 --> 00:25:28.096 A:middle
+
+502
+00:25:25,816 --> 00:25:28,096
 We don't want our view to
 come out looking like this.
 
-00:25:28.856 --> 00:25:31.816 A:middle
+
+503
+00:25:28,856 --> 00:25:31,816
 We want it to be the height
 that we want it to be.
 
-00:25:32.176 --> 00:25:34.726 A:middle
+
+504
+00:25:32,176 --> 00:25:34,726
 So make sure you fully
 specify your constraints.
 
-00:25:35.436 --> 00:25:38.146 A:middle
+
+505
+00:25:35,436 --> 00:25:38,146
 I want to give you a best
 practice in terms of testing
 
-00:25:38.146 --> 00:25:39.686 A:middle
+
+506
+00:25:38,146 --> 00:25:39,686
 and debugging your
 Auto Layout code.
 
-00:25:40.816 --> 00:25:44.956 A:middle
+
+507
+00:25:40,816 --> 00:25:44,956
 You can use a method on UIView
 called Has Ambiguous Layout.
 
-00:25:45.316 --> 00:25:47.036 A:middle
+
+508
+00:25:45,316 --> 00:25:47,036
 If you are in a debugger,
 you are trying to figure
 
-00:25:47.036 --> 00:25:50.166 A:middle
+
+509
+00:25:47,036 --> 00:25:50,166
 out why your view isn't
 laying out the way
 
-00:25:50.166 --> 00:25:53.306 A:middle
+
+510
+00:25:50,166 --> 00:25:53,306
 that you expect it to,
 call Has Ambiguous Layout.
 
-00:25:53.306 --> 00:25:56.586 A:middle
+
+511
+00:25:53,306 --> 00:25:56,586
 It will let you know if
 there's ambiguity in your view.
 
-00:25:57.726 --> 00:26:02.186 A:middle
+
+512
+00:25:57,726 --> 00:26:02,186
 Moreover, you call this method
 on a UIWindow, it will tell you
 
 
-
-00:25:57.726 --> 00:26:02.186 A:middle
-Moreover, you call this method
-on a UIWindow, it will tell you
-
-00:26:02.216 --> 00:26:05.956 A:middle
+513
+00:26:02,216 --> 00:26:05,956
 if any view in the window
 tree has ambiguous layout.
 
-00:26:06.486 --> 00:26:07.516 A:middle
+
+514
+00:26:06,486 --> 00:26:07,516
 So that's pretty handy.
 
-00:26:09.026 --> 00:26:13.536 A:middle
+
+515
+00:26:09,026 --> 00:26:13,536
 You can call UIView Auto Layout
 Trace, then, to get a picture
 
-00:26:13.536 --> 00:26:16.416 A:middle
+
+516
+00:26:13,536 --> 00:26:16,416
 of all the constraints
 throughout your entire view tree
 
-00:26:17.126 --> 00:26:19.866 A:middle
+
+517
+00:26:17,126 --> 00:26:19,866
 and use those constraints
 to go find ambiguity.
 
-00:26:20.466 --> 00:26:24.186 A:middle
+
+518
+00:26:20,466 --> 00:26:24,186
 A really interesting
 best practice is
 
-00:26:24.186 --> 00:26:28.446 A:middle
+
+519
+00:26:24,186 --> 00:26:28,446
 to take these methods as they
 are, put them into a unit test.
 
-00:26:29.836 --> 00:26:34.986 A:middle
+
+520
+00:26:29,836 --> 00:26:34,986
 You can imagine for each view
 tree, each basic UI in your app,
 
-00:26:34.986 --> 00:26:40.526 A:middle
+
+521
+00:26:34,986 --> 00:26:40,526
 you could call UIWindow
 Has Ambiguous Layout,
 
-00:26:41.476 --> 00:26:43.616 A:middle
+
+522
+00:26:41,476 --> 00:26:43,616
 and if it does have
 ambiguous layout,
 
-00:26:44.076 --> 00:26:48.376 A:middle
+
+523
+00:26:44,076 --> 00:26:48,376
 then you could call UIView
 Auto Layout Trace to find
 
-00:26:48.416 --> 00:26:51.586 A:middle
+
+524
+00:26:48,416 --> 00:26:51,586
 where the ambiguous
 constraints are.
 
-00:26:52.036 --> 00:26:55.666 A:middle
+
+525
+00:26:52,036 --> 00:26:55,666
 Just package that up into a
 report, and then you have a test
 
-00:26:56.306 --> 00:26:58.716 A:middle
+
+526
+00:26:56,306 --> 00:26:58,716
 which both lets you know
 when there's ambiguity
 
-00:26:58.716 --> 00:27:01.076 A:middle
+
+527
+00:26:58,716 --> 00:27:01,076
 and provides debugging
 information
 
 
-
-00:26:58.716 --> 00:27:01.076 A:middle
-and provides debugging
-information
-
-00:27:01.336 --> 00:27:02.756 A:middle
+528
+00:27:01,336 --> 00:27:02,756
 for whoever comes along and sees
 
-00:27:02.756 --> 00:27:04.436 A:middle
+
+529
+00:27:02,756 --> 00:27:04,436
 that there is a failure
 in the test.
 
-00:27:05.146 --> 00:27:07.866 A:middle
+
+530
+00:27:05,146 --> 00:27:07,866
 So that's a great best
 practice you can use
 
-00:27:07.866 --> 00:27:08.816 A:middle
+
+531
+00:27:07,866 --> 00:27:08,816
 with your Auto Layout apps.
 
-00:27:09.516 --> 00:27:15.736 A:middle
+
+532
+00:27:09,516 --> 00:27:15,736
 [Applause]
 
-00:27:16.236 --> 00:27:16.656 A:middle
+
+533
+00:27:16,236 --> 00:27:16,656
 All right.
 
-00:27:16.656 --> 00:27:21.436 A:middle
+
+534
+00:27:16,656 --> 00:27:21,436
 So I will transition now to our
 last topic for best practices,
 
-00:27:21.786 --> 00:27:23.506 A:middle
+
+535
+00:27:21,786 --> 00:27:23,506
 and that's table and
 collection views.
 
-00:27:24.026 --> 00:27:26.516 A:middle
+
+536
+00:27:24,026 --> 00:27:26,516
 I know that this is
 something that is important
 
-00:27:26.516 --> 00:27:29.426 A:middle
+
+537
+00:27:26,516 --> 00:27:29,426
 to almost every iOS
 app out there,
 
-00:27:29.886 --> 00:27:31.846 A:middle
+
+538
+00:27:29,886 --> 00:27:31,846
 and it's certainly
 important to me, too.
 
-00:27:32.296 --> 00:27:36.116 A:middle
+
+539
+00:27:32,296 --> 00:27:36,116
 So the first best practice
 is use self-sizing cells
 
-00:27:36.196 --> 00:27:39.856 A:middle
+
+540
+00:27:36,196 --> 00:27:39,856
 when you have content
 that needs to change --
 
-00:27:39.896 --> 00:27:41.296 A:middle
+
+541
+00:27:39,896 --> 00:27:41,296
 or you have cells that need
 
-00:27:41.296 --> 00:27:42.726 A:middle
+
+542
+00:27:41,296 --> 00:27:42,726
 to change size based
 on the content.
 
-00:27:43.876 --> 00:27:47.806 A:middle
+
+543
+00:27:43,876 --> 00:27:47,806
 I am sure most all of
 you have at some point
 
-00:27:47.806 --> 00:27:50.796 A:middle
+
+544
+00:27:47,806 --> 00:27:50,796
 in your iOS development
 life been in this situation
 
-00:27:51.126 --> 00:27:54.966 A:middle
+
+545
+00:27:51,126 --> 00:27:54,966
 where you have a basic table
 view with some content in there,
 
-00:27:55.256 --> 00:27:58.026 A:middle
+
+546
+00:27:55,256 --> 00:27:58,026
 and you realize,
 oh, each cell needs
 
-00:27:58.026 --> 00:28:00.406 A:middle
+
+547
+00:27:58,026 --> 00:28:00,406
 to be a different height based
 on the content that's in it.
 
 
-
-00:27:58.026 --> 00:28:00.406 A:middle
-to be a different height based
-on the content that's in it.
-
-00:28:00.406 --> 00:28:02.936 A:middle
+548
+00:28:00,406 --> 00:28:02,936
 I can't just have one
 height for every cell.
 
-00:28:04.076 --> 00:28:07.576 A:middle
+
+549
+00:28:04,076 --> 00:28:07,576
 And self-sizing cells introduced
 in iOS 8 make it easier
 
-00:28:07.576 --> 00:28:10.286 A:middle
+
+550
+00:28:07,576 --> 00:28:10,286
 than ever to transition
 to what you really want,
 
-00:28:10.606 --> 00:28:13.156 A:middle
+
+551
+00:28:10,606 --> 00:28:13,156
 which is a table view where all
 the cells are the height they
 
-00:28:13.156 --> 00:28:15.756 A:middle
+
+552
+00:28:13,156 --> 00:28:15,756
 need for the content.
 
-00:28:15.756 --> 00:28:18.136 A:middle
+
+553
+00:28:15,756 --> 00:28:18,136
 So I'll run through the
 best practice mechanism
 
-00:28:18.416 --> 00:28:21.806 A:middle
+
+554
+00:28:18,416 --> 00:28:21,806
 for how you get self-sizing
 cells in your app.
 
-00:28:21.806 --> 00:28:23.856 A:middle
+
+555
+00:28:21,806 --> 00:28:23,856
 And it starts just
 like we talked
 
-00:28:23.856 --> 00:28:25.436 A:middle
+
+556
+00:28:23,856 --> 00:28:25,436
 about in the Auto Layout section
 
-00:28:25.776 --> 00:28:27.746 A:middle
+
+557
+00:28:25,776 --> 00:28:27,746
 by fully specifying
 your constraints.
 
-00:28:28.816 --> 00:28:31.946 A:middle
+
+558
+00:28:28,816 --> 00:28:31,946
 You want to use all those
 tips that I just talked about,
 
-00:28:32.446 --> 00:28:38.136 A:middle
+
+559
+00:28:32,446 --> 00:28:38,136
 thinking about this idea of
 your Auto Layout system is this
 
-00:28:38.136 --> 00:28:41.536 A:middle
+
+560
+00:28:38,136 --> 00:28:41,536
 machine that's taking
 width in as an input
 
-00:28:42.206 --> 00:28:44.736 A:middle
+
+561
+00:28:42,206 --> 00:28:44,736
 because the table view
 has a fixed width,
 
-00:28:44.926 --> 00:28:46.586 A:middle
+
+562
+00:28:44,926 --> 00:28:46,586
 and so your cell is
 going to be that wide.
 
-00:28:46.586 --> 00:28:50.806 A:middle
+
+563
+00:28:46,586 --> 00:28:50,806
 And then it's producing as an
 output the height of the cell.
 
-00:28:51.516 --> 00:28:54.216 A:middle
+
+564
+00:28:51,516 --> 00:28:54,216
 So any ambiguity in there,
 
-00:28:54.216 --> 00:28:56.336 A:middle
+
+565
+00:28:54,216 --> 00:28:56,336
 if you haven't fully
 specified your constraints,
 
-00:28:56.336 --> 00:29:00.766 A:middle
+
+566
+00:28:56,336 --> 00:29:00,766
 comes out as the height
 isn't what you want it to be.
 
 
-
-00:28:56.336 --> 00:29:00.766 A:middle
-comes out as the height
-isn't what you want it to be.
-
-00:29:01.016 --> 00:29:03.856 A:middle
+567
+00:29:01,016 --> 00:29:03,856
 If we use the simple
 example of a table view cell,
 
-00:29:04.106 --> 00:29:05.166 A:middle
+
+568
+00:29:04,106 --> 00:29:05,166
 here it's really easy.
 
-00:29:05.656 --> 00:29:09.086 A:middle
+
+569
+00:29:05,656 --> 00:29:09,086
 We can just put margins
 around all of our content,
 
-00:29:09.086 --> 00:29:10.766 A:middle
+
+570
+00:29:09,086 --> 00:29:10,766
 which in this case
 is just a label,
 
-00:29:10.766 --> 00:29:12.906 A:middle
+
+571
+00:29:10,766 --> 00:29:12,906
 and it has an intrinsic
 content size.
 
-00:29:12.906 --> 00:29:15.046 A:middle
+
+572
+00:29:12,906 --> 00:29:15,046
 So when we put margins
 around it,
 
-00:29:15.266 --> 00:29:18.796 A:middle
+
+573
+00:29:15,266 --> 00:29:18,796
 we fully specified
 the constraints
 
-00:29:18.796 --> 00:29:23.146 A:middle
+
+574
+00:29:18,796 --> 00:29:23,146
 of this particular cell, and
 we'll get the size that we want.
 
-00:29:23.326 --> 00:29:26.426 A:middle
+
+575
+00:29:23,326 --> 00:29:26,426
 You, however, might have some
 more complex cells than this.
 
-00:29:26.486 --> 00:29:28.356 A:middle
+
+576
+00:29:26,486 --> 00:29:28,356
 I understand that
 this is an easy case.
 
-00:29:28.996 --> 00:29:33.286 A:middle
+
+577
+00:29:28,996 --> 00:29:33,286
 And if you are in the position
 where you find, you know, hey,
 
-00:29:33.546 --> 00:29:35.116 A:middle
+
+578
+00:29:33,546 --> 00:29:35,116
 I've specified all
 my constraints,
 
-00:29:35.116 --> 00:29:37.426 A:middle
+
+579
+00:29:35,116 --> 00:29:37,426
 but I am not getting the height
 that I thought I should get,
 
-00:29:37.426 --> 00:29:42.176 A:middle
+
+580
+00:29:37,426 --> 00:29:42,176
 I want to give you a tip, which
 is try adding a constraint
 
-00:29:42.176 --> 00:29:43.466 A:middle
+
+581
+00:29:42,176 --> 00:29:43,466
 to your content view
 
-00:29:43.756 --> 00:29:45.976 A:middle
+
+582
+00:29:43,756 --> 00:29:45,976
 that specifies the height
 of the content view.
 
-00:29:45.976 --> 00:29:48.276 A:middle
+
+583
+00:29:45,976 --> 00:29:48,276
 So you are using, in fact,
 
-00:29:48.276 --> 00:29:49.976 A:middle
+
+584
+00:29:48,276 --> 00:29:49,976
 a height constraint
 on the content view.
 
-00:29:50.446 --> 00:29:52.716 A:middle
+
+585
+00:29:50,446 --> 00:29:52,716
 Then you can specify that
 in terms of your content.
 
-00:29:52.776 --> 00:29:56.196 A:middle
+
+586
+00:29:52,776 --> 00:29:56,196
 Here I can say hey, content
 view height should be equal
 
-00:29:56.196 --> 00:29:59.826 A:middle
+
+587
+00:29:56,196 --> 00:29:59,826
 to the height of the label
 plus my top and bottom margins.
 
 
-
-00:30:00.376 --> 00:30:03.016 A:middle
+588
+00:30:00,376 --> 00:30:03,016
 In this case, that's
 repeating work.
 
-00:30:03.016 --> 00:30:05.036 A:middle
+
+589
+00:30:03,016 --> 00:30:05,036
 I don't really need
 to do that here,
 
-00:30:05.356 --> 00:30:07.026 A:middle
+
+590
+00:30:05,356 --> 00:30:07,026
 and I'll get the same thing.
 
-00:30:07.426 --> 00:30:10.076 A:middle
+
+591
+00:30:07,426 --> 00:30:10,076
 But if in your app you are
 not getting what you expect
 
-00:30:11.116 --> 00:30:13.806 A:middle
+
+592
+00:30:11,116 --> 00:30:13,806
 and you add a height
 constraint to your view,
 
-00:30:13.806 --> 00:30:18.076 A:middle
+
+593
+00:30:13,806 --> 00:30:18,076
 and then that causes the
 height of the cell to change,
 
-00:30:18.906 --> 00:30:20.466 A:middle
+
+594
+00:30:18,906 --> 00:30:20,466
 then that's a great indication
 
-00:30:20.466 --> 00:30:25.236 A:middle
+
+595
+00:30:20,466 --> 00:30:25,236
 that your constraints aren't
 giving you quite the logic
 
-00:30:25.516 --> 00:30:26.736 A:middle
+
+596
+00:30:25,516 --> 00:30:26,736
 that you expected them to.
 
-00:30:27.266 --> 00:30:31.296 A:middle
+
+597
+00:30:27,266 --> 00:30:31,296
 So that's a great tool that
 you can use to figure that out.
 
-00:30:31.496 --> 00:30:34.906 A:middle
+
+598
+00:30:31,496 --> 00:30:34,906
 Now, once you have that,
 you might want to think
 
-00:30:34.906 --> 00:30:38.906 A:middle
+
+599
+00:30:34,906 --> 00:30:38,906
 about how you animate the height
 changes of your cells, you know,
 
-00:30:39.416 --> 00:30:42.976 A:middle
+
+600
+00:30:39,416 --> 00:30:42,976
 even using self-sizing
 cells and Auto Layout.
 
-00:30:44.096 --> 00:30:49.046 A:middle
+
+601
+00:30:44,096 --> 00:30:49,046
 Now, you can imagine if you had
 some cell in here that you want
 
-00:30:49.046 --> 00:30:52.996 A:middle
+
+602
+00:30:49,046 --> 00:30:52,996
 to change its content, you might
 take the very naive approach
 
-00:30:53.406 --> 00:30:56.536 A:middle
+
+603
+00:30:53,406 --> 00:30:56,536
 and update your model and
 then call Reload Data.
 
-00:30:56.536 --> 00:30:59.336 A:middle
+
+604
+00:30:56,536 --> 00:30:59,336
 And if you do that, it's
 going to look like this,
 
-00:30:59.636 --> 00:31:02.556 A:middle
+
+605
+00:30:59,636 --> 00:31:02,556
 where it snaps to the new
 position of the table,
 
 
-
-00:30:59.636 --> 00:31:02.556 A:middle
-where it snaps to the new
-position of the table,
-
-00:31:02.876 --> 00:31:08.476 A:middle
+606
+00:31:02,876 --> 00:31:08,476
 and it gets the job done, but it
 just isn't the user experience
 
-00:31:08.476 --> 00:31:09.616 A:middle
+
+607
+00:31:08,476 --> 00:31:09,616
 that you wanted out of your app.
 
-00:31:09.616 --> 00:31:11.696 A:middle
+
+608
+00:31:09,616 --> 00:31:11,696
 It doesn't quite look as
 polished as it should be.
 
-00:31:12.556 --> 00:31:16.686 A:middle
+
+609
+00:31:12,556 --> 00:31:16,686
 What you wanted was to have
 that cell animate its height
 
-00:31:17.196 --> 00:31:20.186 A:middle
+
+610
+00:31:17,196 --> 00:31:20,186
 and the cells around it
 animate their positions smoothly
 
-00:31:20.666 --> 00:31:23.426 A:middle
+
+611
+00:31:20,666 --> 00:31:23,426
 so everything dropped into place
 
-00:31:23.426 --> 00:31:26.506 A:middle
+
+612
+00:31:23,426 --> 00:31:26,506
 and the user understood
 what was happening.
 
-00:31:26.666 --> 00:31:28.666 A:middle
+
+613
+00:31:26,666 --> 00:31:28,666
 So let's walk through
 how you do that.
 
-00:31:29.326 --> 00:31:30.466 A:middle
+
+614
+00:31:29,326 --> 00:31:30,466
 Thankfully, it's pretty simple.
 
-00:31:31.486 --> 00:31:34.736 A:middle
+
+615
+00:31:31,486 --> 00:31:34,736
 Whenever you want to
 specify a geometry change is
 
-00:31:34.736 --> 00:31:40.496 A:middle
+
+616
+00:31:34,736 --> 00:31:40,496
 to be animated in table
 view, you use a begin update
 
-00:31:40.496 --> 00:31:43.306 A:middle
+
+617
+00:31:40,496 --> 00:31:43,306
 and update block with
 the Table View API.
 
-00:31:43.546 --> 00:31:47.076 A:middle
+
+618
+00:31:43,546 --> 00:31:47,076
 So first step is to call
 Table View Begin Updates.
 
-00:31:47.346 --> 00:31:50.036 A:middle
+
+619
+00:31:47,346 --> 00:31:50,036
 This is true whether you are
 using self-sizing cells or not.
 
-00:31:50.166 --> 00:31:52.656 A:middle
+
+620
+00:31:50,166 --> 00:31:52,656
 This is the general way you
 animate geometry changes
 
-00:31:52.656 --> 00:31:53.266 A:middle
+
+621
+00:31:52,656 --> 00:31:53,266
 in table view.
 
-00:31:54.026 --> 00:31:55.636 A:middle
+
+622
+00:31:54,026 --> 00:31:55,636
 Then you update your model.
 
-00:31:56.836 --> 00:31:57.436 A:middle
+
+623
+00:31:56,836 --> 00:31:57,436
 That's easy.
 
-00:31:58.086 --> 00:32:02.856 A:middle
+
+624
+00:31:58,086 --> 00:32:02,856
 Third step is if you're changing
 the height of an onscreen cell,
 
 
-
-00:31:58.086 --> 00:32:02.856 A:middle
-Third step is if you're changing
-the height of an onscreen cell,
-
-00:32:03.356 --> 00:32:05.746 A:middle
+625
+00:32:03,356 --> 00:32:05,746
 you can just reach into
 that cell, get a reference
 
-00:32:05.746 --> 00:32:08.076 A:middle
+
+626
+00:32:05,746 --> 00:32:08,076
 by calling Table View Cell
 For Row At Index Path,
 
-00:32:08.586 --> 00:32:10.436 A:middle
+
+627
+00:32:08,586 --> 00:32:10,436
 and change the contents
 of that cell,
 
-00:32:10.436 --> 00:32:12.376 A:middle
+
+628
+00:32:10,436 --> 00:32:12,376
 even changing the
 constraints as needed.
 
-00:32:12.636 --> 00:32:13.866 A:middle
+
+629
+00:32:12,636 --> 00:32:13,866
 Sometimes people think they need
 
-00:32:13.866 --> 00:32:16.406 A:middle
+
+630
+00:32:13,866 --> 00:32:16,406
 to call Reload Rows
 Of Index Path.
 
-00:32:16.456 --> 00:32:17.686 A:middle
+
+631
+00:32:16,456 --> 00:32:17,686
 You don't actually
 need to do that,
 
-00:32:17.686 --> 00:32:20.516 A:middle
+
+632
+00:32:17,686 --> 00:32:20,516
 and it won't get you quite
 the optimal experience.
 
-00:32:21.246 --> 00:32:23.086 A:middle
+
+633
+00:32:21,246 --> 00:32:23,086
 You actually can just
 reach into the cell
 
-00:32:23.086 --> 00:32:24.106 A:middle
+
+634
+00:32:23,086 --> 00:32:24,106
 and change its contents.
 
-00:32:24.796 --> 00:32:25.946 A:middle
+
+635
+00:32:24,796 --> 00:32:25,946
 Then when you are
 done with that,
 
-00:32:26.596 --> 00:32:30.116 A:middle
+
+636
+00:32:26,596 --> 00:32:30,116
 you say Table View End
 Updates, and table view
 
-00:32:30.116 --> 00:32:33.816 A:middle
+
+637
+00:32:30,116 --> 00:32:33,816
 at that time recalculates
 the geometry of all the rows,
 
-00:32:34.346 --> 00:32:36.506 A:middle
+
+638
+00:32:34,346 --> 00:32:36,506
 including asking all
 the onscreen rows
 
-00:32:36.506 --> 00:32:38.856 A:middle
+
+639
+00:32:36,506 --> 00:32:38,856
 for their Auto Layout
 information to get their height,
 
-00:32:38.856 --> 00:32:42.436 A:middle
+
+640
+00:32:38,856 --> 00:32:42,436
 and everything animates
 into place as you saw.
 
-00:32:42.846 --> 00:32:45.946 A:middle
+
+641
+00:32:42,846 --> 00:32:45,946
 So begin updates, end
 updates is the key to that.
 
-00:32:47.356 --> 00:32:51.716 A:middle
+
+642
+00:32:47,356 --> 00:32:51,716
 So the last best practice
 that I want to give you is how
 
-00:32:51.716 --> 00:32:56.986 A:middle
+
+643
+00:32:51,716 --> 00:32:56,986
 to implement custom
 collection view layouts
 
-00:32:56.986 --> 00:33:00.606 A:middle
+
+644
+00:32:56,986 --> 00:33:00,606
 that invalidate themselves and
 are very fast as they do it.
 
 
-
-00:32:56.986 --> 00:33:00.606 A:middle
-that invalidate themselves and
-are very fast as they do it.
-
-00:33:01.156 --> 00:33:03.196 A:middle
+645
+00:33:01,156 --> 00:33:03,196
 So I know this comes up a lot,
 
-00:33:03.196 --> 00:33:05.566 A:middle
+
+646
+00:33:03,196 --> 00:33:05,566
 people write custom
 collection view layouts,
 
-00:33:05.856 --> 00:33:08.286 A:middle
+
+647
+00:33:05,856 --> 00:33:08,286
 and they're doing something,
 they are changing something
 
-00:33:08.286 --> 00:33:10.586 A:middle
+
+648
+00:33:08,286 --> 00:33:10,586
 about themselves as
 the user is scrolling,
 
-00:33:10.706 --> 00:33:13.546 A:middle
+
+649
+00:33:10,706 --> 00:33:13,546
 and they have a hard time
 keeping up with that layout.
 
-00:33:14.156 --> 00:33:17.096 A:middle
+
+650
+00:33:14,156 --> 00:33:17,096
 Well, I am going to tell you
 exactly how the Photos app
 
-00:33:17.096 --> 00:33:21.116 A:middle
+
+651
+00:33:17,096 --> 00:33:21,116
 in iOS does this job so that
 you can take that technique
 
-00:33:21.186 --> 00:33:25.206 A:middle
+
+652
+00:33:21,186 --> 00:33:25,206
 and put it into your
 custom layout that you have.
 
-00:33:25.386 --> 00:33:28.986 A:middle
+
+653
+00:33:25,386 --> 00:33:28,986
 So the Photos layout has this
 header, which is expressed
 
-00:33:28.986 --> 00:33:31.926 A:middle
+
+654
+00:33:28,986 --> 00:33:31,926
 as a supplementary view
 in collection view terms,
 
-00:33:32.516 --> 00:33:35.606 A:middle
+
+655
+00:33:32,516 --> 00:33:35,606
 and when the user scrolls,
 even though the cells move
 
-00:33:35.666 --> 00:33:39.956 A:middle
+
+656
+00:33:35,666 --> 00:33:39,956
 with the scrolling, that header
 view stays in place on screen.
 
-00:33:41.106 --> 00:33:44.196 A:middle
+
+657
+00:33:41,106 --> 00:33:44,196
 This is the same basic idea
 that I know many people want
 
-00:33:44.196 --> 00:33:46.286 A:middle
+
+658
+00:33:44,196 --> 00:33:46,286
 to implement in their
 collection views,
 
-00:33:46.766 --> 00:33:50.256 A:middle
+
+659
+00:33:46,766 --> 00:33:50,256
 and the Photos layout
 is able to do this
 
-00:33:50.576 --> 00:33:54.696 A:middle
+
+660
+00:33:50,576 --> 00:33:54,696
 by using a UICollectionView
 invalidation context instance.
 
-00:33:54.696 --> 00:33:58.556 A:middle
+
+661
+00:33:54,696 --> 00:33:58,556
 This is API that you can
 find in UICollectionView.
 
-00:33:59.646 --> 00:34:02.816 A:middle
+
+662
+00:33:59,646 --> 00:34:02,816
 So the steps to this
 are just a few.
 
 
-
-00:33:59.646 --> 00:34:02.816 A:middle
-So the steps to this
-are just a few.
-
-00:34:03.306 --> 00:34:04.886 A:middle
+663
+00:34:03,306 --> 00:34:04,886
 Number one is the most obvious.
 
-00:34:05.236 --> 00:34:08.775 A:middle
+
+664
+00:34:05,236 --> 00:34:08,775
 The Photos layout is invalidated
 on every bounds change.
 
-00:34:08.775 --> 00:34:10.806 A:middle
+
+665
+00:34:08,775 --> 00:34:10,806
 So every frame as the
 user is scrolling,
 
-00:34:11.545 --> 00:34:13.255 A:middle
+
+666
+00:34:11,545 --> 00:34:13,255
 the Photos layout
 gets invalidated.
 
-00:34:13.606 --> 00:34:14.166 A:middle
+
+667
+00:34:13,606 --> 00:34:14,166
 Piece of cake.
 
-00:34:14.466 --> 00:34:15.376 A:middle
+
+668
+00:34:14,466 --> 00:34:15,376
 That's the easy part.
 
-00:34:15.376 --> 00:34:17.106 A:middle
+
+669
+00:34:15,376 --> 00:34:17,106
 The question is, how
 do we make that fast?
 
-00:34:17.545 --> 00:34:22.516 A:middle
+
+670
+00:34:17,545 --> 00:34:22,516
 And the answer is, the Photos
 layout builds a targeted
 
-00:34:22.516 --> 00:34:26.786 A:middle
+
+671
+00:34:22,516 --> 00:34:26,786
 invalidation context that is
 specified to invalidate just
 
-00:34:26.966 --> 00:34:30.846 A:middle
+
+672
+00:34:26,966 --> 00:34:30,846
 that header view so that
 the collection view is able
 
-00:34:30.846 --> 00:34:33.626 A:middle
+
+673
+00:34:30,846 --> 00:34:33,626
 to optimize, understanding
 that the only view
 
-00:34:33.626 --> 00:34:35.826 A:middle
+
+674
+00:34:33,626 --> 00:34:35,826
 that is being invalidated
 is the header view
 
-00:34:36.235 --> 00:34:37.416 A:middle
+
+675
+00:34:36,235 --> 00:34:37,416
 and none of the cells are.
 
-00:34:37.876 --> 00:34:40.416 A:middle
+
+676
+00:34:37,876 --> 00:34:40,416
 That allows the collection
 view to do the entire operation
 
-00:34:40.476 --> 00:34:43.226 A:middle
+
+677
+00:34:40,476 --> 00:34:43,226
 as fast as possible,
 and it's so fast
 
-00:34:43.226 --> 00:34:45.946 A:middle
+
+678
+00:34:43,226 --> 00:34:45,946
 that this can just be
 repeated as necessary
 
-00:34:46.136 --> 00:34:48.076 A:middle
+
+679
+00:34:46,136 --> 00:34:48,076
 at frame rate scrolling as fast,
 
-00:34:48.525 --> 00:34:52.045 A:middle
+
+680
+00:34:48,525 --> 00:34:52,045
 even though the layout is being
 invalidated on every frame.
 
-00:34:52.545 --> 00:34:55.966 A:middle
+
+681
+00:34:52,545 --> 00:34:55,966
 So you can use that same
 technique in any layout if,
 
-00:34:55.996 --> 00:35:00.056 A:middle
+
+682
+00:34:55,996 --> 00:35:00,056
 in general, if you have
 performance concerns using a
 
 
-
-00:34:55.996 --> 00:35:00.056 A:middle
-in general, if you have
-performance concerns using a
-
-00:35:00.056 --> 00:35:00.896 A:middle
+683
+00:35:00,056 --> 00:35:00,896
 custom layout.
 
-00:35:01.266 --> 00:35:02.396 A:middle
+
+684
+00:35:01,266 --> 00:35:02,396
 Generally speaking,
 
-00:35:02.586 --> 00:35:05.736 A:middle
+
+685
+00:35:02,586 --> 00:35:05,736
 UICollectionView
 invalidation context is the key
 
-00:35:05.736 --> 00:35:07.986 A:middle
+
+686
+00:35:05,736 --> 00:35:07,986
 to overcoming those
 performance concerns.
 
-00:35:08.256 --> 00:35:11.626 A:middle
+
+687
+00:35:08,256 --> 00:35:11,626
 So I encourage you to
 check out that API.
 
-00:35:12.056 --> 00:35:16.296 A:middle
+
+688
+00:35:12,056 --> 00:35:16,296
 Okay. So I've talked
 about a whole collection
 
-00:35:16.366 --> 00:35:18.316 A:middle
+
+689
+00:35:16,366 --> 00:35:18,316
 of best practices here.
 
-00:35:19.236 --> 00:35:21.366 A:middle
+
+690
+00:35:19,236 --> 00:35:21,366
 We talked about performance
 and how
 
-00:35:21.366 --> 00:35:24.236 A:middle
+
+691
+00:35:21,366 --> 00:35:24,236
 to make your apps
 superresponsive at launch
 
-00:35:24.236 --> 00:35:26.516 A:middle
+
+692
+00:35:24,236 --> 00:35:26,516
 and throughout its
 life cycle and how
 
-00:35:26.516 --> 00:35:28.526 A:middle
+
+693
+00:35:26,516 --> 00:35:28,526
 to make your Auto Layout
 as fast as possible.
 
-00:35:29.626 --> 00:35:32.926 A:middle
+
+694
+00:35:29,626 --> 00:35:32,926
 We've discussed user experience
 as one of your great goals
 
-00:35:32.926 --> 00:35:36.976 A:middle
+
+695
+00:35:32,926 --> 00:35:36,976
 and animating your table views
 around and laying out properly
 
-00:35:36.976 --> 00:35:39.126 A:middle
+
+696
+00:35:36,976 --> 00:35:39,126
 across the myriad
 of iOS devices.
 
-00:35:39.866 --> 00:35:43.836 A:middle
+
+697
+00:35:39,866 --> 00:35:43,836
 And of course, I've given you
 tips for how to write your code
 
-00:35:43.836 --> 00:35:47.086 A:middle
+
+698
+00:35:43,836 --> 00:35:47,086
 in the most future-proof way so
 that it's running on versions
 
-00:35:47.086 --> 00:35:48.846 A:middle
+
+699
+00:35:47,086 --> 00:35:48,846
 of iOS for generations to come.
 
-00:35:50.026 --> 00:35:53.436 A:middle
+
+700
+00:35:50,026 --> 00:35:53,436
 Now, I encourage you to use
 this entire talk as a reference,
 
-00:35:53.856 --> 00:35:56.126 A:middle
+
+701
+00:35:53,856 --> 00:35:56,126
 something you can come
 back, watch the video
 
-00:35:56.126 --> 00:35:57.616 A:middle
+
+702
+00:35:56,126 --> 00:35:57,616
 as you are building
 your future apps.
 
-00:35:57.616 --> 00:36:01.336 A:middle
+
+703
+00:35:57,616 --> 00:36:01,336
 There's a lot of best practices
 here that you can use this
 
 
-
-00:35:57.616 --> 00:36:01.336 A:middle
-There's a lot of best practices
-here that you can use this
-
-00:36:01.416 --> 00:36:05.276 A:middle
+704
+00:36:01,416 --> 00:36:05,276
 as a launching board to then
 go into the documentation,
 
-00:36:05.566 --> 00:36:08.176 A:middle
+
+705
+00:36:05,566 --> 00:36:08,176
 look up the specific APIs
 that I've referenced,
 
-00:36:08.506 --> 00:36:11.126 A:middle
+
+706
+00:36:08,506 --> 00:36:11,126
 and you will be able to
 put that to -- well --
 
-00:36:11.126 --> 00:36:13.336 A:middle
+
+707
+00:36:11,126 --> 00:36:13,336
 best practice in all
 of your future apps.
 
-00:36:13.926 --> 00:36:17.156 A:middle
+
+708
+00:36:13,926 --> 00:36:17,156
 So you know, with that, I
 thank you, and I am glad
 
-00:36:17.186 --> 00:36:19.516 A:middle
+
+709
+00:36:17,186 --> 00:36:19,516
 that you have come here to WWDC,
 and I hope you have a best rest
 
-00:36:19.516 --> 00:36:20.916 A:middle
+
+710
+00:36:19,516 --> 00:36:20,916
 of your afternoon possible.
 
-00:36:21.516 --> 00:36:24.500 A:middle
+
+711
+00:36:21,516 --> 00:36:24,500
 [Applause]
 

@@ -1,2828 +1,4068 @@
-
-00:00:31.271 --> 00:00:33.271 A:middle
+1
+00:00:31,271 --> 00:00:33,271
 [ Applause ]
 
-00:00:33.526 --> 00:00:34.106 A:middle
-&gt;&gt; MIGUEL SANCHEZ:
+
+2
+00:00:33,526 --> 00:00:34,106
+>> MIGUEL SANCHEZ:
 Hello, everyone.
 
-00:00:36.046 --> 00:00:38.346 A:middle
+
+3
+00:00:36,046 --> 00:00:38,346
 Welcome session 216, Layout
 
-00:00:38.346 --> 00:00:39.856 A:middle
+
+4
+00:00:38,346 --> 00:00:39,856
 and Animation Techniques
 for WatchKit.
 
-00:00:39.856 --> 00:00:42.086 A:middle
+
+5
+00:00:39,856 --> 00:00:42,086
 My name is Miguel Sanchez,
 I'm a WatchKit engineer.
 
-00:00:42.436 --> 00:00:45.696 A:middle
+
+6
+00:00:42,436 --> 00:00:45,696
 Later you will hear from
 my colleague Tom Witkin.
 
-00:00:47.236 --> 00:00:51.406 A:middle
+
+7
+00:00:47,236 --> 00:00:51,406
 So the agenda for today
 is to give you an overview
 
-00:00:51.406 --> 00:00:53.476 A:middle
+
+8
+00:00:51,406 --> 00:00:53,476
 of the layout fundamentals
 of WatchKit.
 
-00:00:54.206 --> 00:00:58.136 A:middle
+
+9
+00:00:54,206 --> 00:00:58,136
 I will be going into more detail
 about how to use groups to set
 
-00:00:58.136 --> 00:01:01.256 A:middle
+
+10
+00:00:58,136 --> 00:01:01,256
 up your complex layouts, and
 then you will hear from Tom,
 
 
-
-00:00:58.136 --> 00:01:01.256 A:middle
-up your complex layouts, and
-then you will hear from Tom,
-
-00:01:01.666 --> 00:01:04.736 A:middle
+11
+00:01:01,666 --> 00:01:04,736
 talking to you about animation
 techniques existing already
 
-00:01:04.736 --> 00:01:06.866 A:middle
+
+12
+00:01:04,736 --> 00:01:06,866
 in Watch OS 1, as well
 as in the new APIs
 
-00:01:06.866 --> 00:01:09.246 A:middle
+
+13
+00:01:06,866 --> 00:01:09,246
 that we are introducing
 in Watch OS 2.
 
-00:01:09.976 --> 00:01:13.146 A:middle
+
+14
+00:01:09,976 --> 00:01:13,146
 So our target audience for
 this talk is the whole range
 
-00:01:13.146 --> 00:01:14.396 A:middle
+
+15
+00:01:13,146 --> 00:01:14,396
 of WatchKit developers,
 
-00:01:14.396 --> 00:01:17.816 A:middle
+
+16
+00:01:14,396 --> 00:01:17,816
 people that haven't seen the
 platform yet, and are learning
 
-00:01:17.816 --> 00:01:19.186 A:middle
+
+17
+00:01:17,816 --> 00:01:19,186
 about the layout as well as --
 
-00:01:19.646 --> 00:01:23.976 A:middle
+
+18
+00:01:19,646 --> 00:01:23,976
 as well as those of you who have
 already had experience with it.
 
-00:01:24.376 --> 00:01:26.266 A:middle
+
+19
+00:01:24,376 --> 00:01:26,266
 So let's start with the
 layout fundamentals.
 
-00:01:27.416 --> 00:01:29.556 A:middle
+
+20
+00:01:27,416 --> 00:01:29,556
 The WatchKit layout model,
 
-00:01:29.956 --> 00:01:32.666 A:middle
+
+21
+00:01:29,956 --> 00:01:32,666
 I should say off the bat
 is the same layout model
 
-00:01:32.666 --> 00:01:34.686 A:middle
+
+22
+00:01:32,666 --> 00:01:34,686
 that we have since
 WatchKit OS 1.
 
-00:01:35.646 --> 00:01:37.906 A:middle
+
+23
+00:01:35,646 --> 00:01:37,906
 WatchKit and Watch OS q.
 
-00:01:37.956 --> 00:01:42.326 A:middle
+
+24
+00:01:37,956 --> 00:01:42,326
 If you haven't used it yet, it's
 a different model from the UIKit
 
-00:01:42.326 --> 00:01:44.586 A:middle
+
+25
+00:01:42,326 --> 00:01:44,586
 and the AppKit models that you
 may have had experiences with.
 
-00:01:45.716 --> 00:01:49.076 A:middle
+
+26
+00:01:45,716 --> 00:01:49,076
 The difference is that in
 WatchKit we are using a flow
 
-00:01:49.076 --> 00:01:53.506 A:middle
+
+27
+00:01:49,076 --> 00:01:53,506
 based layout and what
 I mean by that is,
 
-00:01:53.836 --> 00:01:56.086 A:middle
+
+28
+00:01:53,836 --> 00:01:56,086
 you've probably seen
 this animation before,
 
-00:01:56.086 --> 00:01:58.456 A:middle
+
+29
+00:01:56,086 --> 00:01:58,456
 in Interface Builder,
 you have your library of,
 
-00:01:58.456 --> 00:02:00.476 A:middle
+
+30
+00:01:58,456 --> 00:02:00,476
 and your catalog
 of WatchKit objects
 
 
-
-00:01:58.456 --> 00:02:00.476 A:middle
-and your catalog
-of WatchKit objects
-
-00:02:00.996 --> 00:02:03.316 A:middle
+31
+00:02:00,996 --> 00:02:03,316
 and you are dragging them
 on to your controller.
 
-00:02:04.046 --> 00:02:07.086 A:middle
+
+32
+00:02:04,046 --> 00:02:07,086
 As you are dragging
 them, they are falling
 
-00:02:07.086 --> 00:02:09.895 A:middle
+
+33
+00:02:07,086 --> 00:02:09,895
 on the next available
 slot on the flow.
 
-00:02:09.946 --> 00:02:11.956 A:middle
+
+34
+00:02:09,946 --> 00:02:11,956
 And that flow is
 initially vertical.
 
-00:02:12.486 --> 00:02:14.416 A:middle
+
+35
+00:02:12,486 --> 00:02:14,416
 So here you have
 a second element.
 
-00:02:14.466 --> 00:02:17.186 A:middle
+
+36
+00:02:14,466 --> 00:02:17,186
 It falls on its set
 slot, and, of course,
 
-00:02:17.186 --> 00:02:21.406 A:middle
+
+37
+00:02:17,186 --> 00:02:21,406
 you can add a horizontal flow if
 you introduce a grouping object
 
-00:02:21.406 --> 00:02:23.476 A:middle
+
+38
+00:02:21,406 --> 00:02:23,476
 and tell it to use
 horizontal layout.
 
-00:02:26.156 --> 00:02:29.266 A:middle
+
+39
+00:02:26,156 --> 00:02:29,266
 So some important
 points as a programmer
 
-00:02:29.266 --> 00:02:31.406 A:middle
+
+40
+00:02:29,266 --> 00:02:31,406
 of WatchKit applications is
 
-00:02:31.406 --> 00:02:34.876 A:middle
+
+41
+00:02:31,406 --> 00:02:34,876
 that you are not writing
 object creation code.
 
-00:02:35.086 --> 00:02:38.056 A:middle
+
+42
+00:02:35,086 --> 00:02:38,056
 All of your UI creation is
 happening in story boards
 
-00:02:38.056 --> 00:02:39.066 A:middle
+
+43
+00:02:38,056 --> 00:02:39,066
 and Interface Builder.
 
-00:02:39.066 --> 00:02:42.386 A:middle
+
+44
+00:02:39,066 --> 00:02:42,386
 We are not providing APIsor
 allocating your typical
 
-00:02:42.386 --> 00:02:43.266 A:middle
+
+45
+00:02:42,386 --> 00:02:43,266
 WatchKit objects.
 
-00:02:44.446 --> 00:02:47.126 A:middle
+
+46
+00:02:44,446 --> 00:02:47,126
 This does not mean that you
 don't have fine-tune control
 
-00:02:47.126 --> 00:02:51.216 A:middle
+
+47
+00:02:47,126 --> 00:02:51,216
 of your layout hierarchies
 and alignment and sizing,
 
-00:02:51.216 --> 00:02:53.066 A:middle
+
+48
+00:02:51,216 --> 00:02:53,066
 as well as animation,
 as you will see here.
 
-00:02:53.066 --> 00:02:56.006 A:middle
+
+49
+00:02:53,066 --> 00:02:56,006
 So we'll go into each
 one of these in detail.
 
-00:02:56.336 --> 00:02:58.876 A:middle
+
+50
+00:02:56,336 --> 00:02:58,876
 Let's start out with
 alignment and sizing.
 
 
-
-00:03:00.506 --> 00:03:01.706 A:middle
+51
+00:03:00,506 --> 00:03:01,706
 All of your instances
 
-00:03:01.706 --> 00:03:06.136 A:middle
+
+52
+00:03:01,706 --> 00:03:06,136
 of WatchKit objects are
 subclasses of WKInterfaceObject.
 
-00:03:08.056 --> 00:03:11.546 A:middle
+
+53
+00:03:08,056 --> 00:03:11,546
 All of these have properties
 for setting the alignment,
 
-00:03:12.616 --> 00:03:14.046 A:middle
+
+54
+00:03:12,616 --> 00:03:14,046
 and the sizing heuristics.
 
-00:03:14.176 --> 00:03:16.106 A:middle
+
+55
+00:03:14,176 --> 00:03:16,106
 So alignment, we are referring
 
-00:03:16.106 --> 00:03:18.506 A:middle
+
+56
+00:03:16,106 --> 00:03:18,506
 to the alignment inside
 the containing object.
 
-00:03:19.306 --> 00:03:22.266 A:middle
+
+57
+00:03:19,306 --> 00:03:22,266
 This is the horizontal
 and the vertical alignment
 
-00:03:22.266 --> 00:03:24.126 A:middle
+
+58
+00:03:22,266 --> 00:03:24,126
 and it can either be
 left, center or right.
 
-00:03:24.826 --> 00:03:29.456 A:middle
+
+59
+00:03:24,826 --> 00:03:29,456
 For sizing, you are telling us
 what rules you want us to use
 
-00:03:29.456 --> 00:03:33.356 A:middle
+
+60
+00:03:29,456 --> 00:03:33,356
 when sizing your objects both
 width-wise and height-wise
 
-00:03:34.286 --> 00:03:41.426 A:middle
+
+61
+00:03:34,286 --> 00:03:41,426
 and this is either fixed,
 relative or sized to fit.
 
-00:03:41.426 --> 00:03:45.796 A:middle
+
+62
+00:03:41,426 --> 00:03:45,796
 In Watch OS 2, these -- these
 properties have been available
 
-00:03:45.796 --> 00:03:48.686 A:middle
+
+63
+00:03:45,796 --> 00:03:48,686
 in Interface Builder since
 Watch OS 1, but in Watch OS 2,
 
-00:03:48.686 --> 00:03:50.966 A:middle
+
+64
+00:03:48,686 --> 00:03:50,966
 we are exposing more
 of these through APIs.
 
-00:03:51.796 --> 00:03:54.896 A:middle
+
+65
+00:03:51,796 --> 00:03:54,896
 We want to give you more
 control in your code but also
 
-00:03:54.896 --> 00:03:57.136 A:middle
+
+66
+00:03:54,896 --> 00:03:57,136
 to animate them as
 you'll see later.
 
-00:03:57.136 --> 00:03:59.806 A:middle
+
+67
+00:03:57,136 --> 00:03:59,806
 This is a new API set horizontal
 
-00:03:59.806 --> 00:04:03.776 A:middle
+
+68
+00:03:59,806 --> 00:04:03,776
 and vertical alignment
 with new enum types.
 
 
-
-00:03:59.806 --> 00:04:03.776 A:middle
-and vertical alignment
-with new enum types.
-
-00:04:03.986 --> 00:04:05.576 A:middle
+69
+00:04:03,986 --> 00:04:05,576
 This does what you expect.
 
-00:04:05.576 --> 00:04:08.146 A:middle
+
+70
+00:04:05,576 --> 00:04:08,146
 Here you have the world premier
 
-00:04:08.146 --> 00:04:13.596 A:middle
+
+71
+00:04:08,146 --> 00:04:13,596
 of WK blue box doing a
 left top alignment, center,
 
-00:04:13.596 --> 00:04:15.716 A:middle
+
+72
+00:04:13,596 --> 00:04:15,716
 center, and right bottom.
 
-00:04:16.946 --> 00:04:19.446 A:middle
+
+73
+00:04:16,946 --> 00:04:19,446
 On the sizing API side,
 
-00:04:19.636 --> 00:04:22.046 A:middle
+
+74
+00:04:19,636 --> 00:04:22,046
 we already had said
 width and said height.
 
-00:04:22.806 --> 00:04:26.916 A:middle
+
+75
+00:04:22,806 --> 00:04:26,916
 For washWatch OS 2, we are
 exposing the relative width
 
-00:04:26.916 --> 00:04:29.276 A:middle
+
+76
+00:04:26,916 --> 00:04:29,276
 and the sizing to fit APIs.
 
-00:04:29.366 --> 00:04:31.386 A:middle
+
+77
+00:04:29,366 --> 00:04:31,386
 Again, it gives you more
 control in your code.
 
-00:04:33.236 --> 00:04:35.156 A:middle
+
+78
+00:04:33,236 --> 00:04:35,156
 Graphically this looks
 like the following:
 
-00:04:35.606 --> 00:04:37.456 A:middle
+
+79
+00:04:35,606 --> 00:04:37,456
 so here's a fixed
 width and height
 
-00:04:37.876 --> 00:04:40.156 A:middle
+
+80
+00:04:37,876 --> 00:04:40,156
 of our blue square, once again.
 
-00:04:42.416 --> 00:04:45.266 A:middle
+
+81
+00:04:42,416 --> 00:04:45,266
 If you have been using this
 in the previous release,
 
-00:04:45.806 --> 00:04:47.806 A:middle
+
+82
+00:04:45,806 --> 00:04:47,806
 you should know that
 we interpret the value
 
-00:04:47.806 --> 00:04:48.836 A:middle
+
+83
+00:04:47,806 --> 00:04:48,836
 of zero differently.
 
-00:04:49.396 --> 00:04:52.946 A:middle
+
+84
+00:04:49,396 --> 00:04:52,946
 In Watch OS 1, if you give us
 a zero in code, we revert it
 
-00:04:52.946 --> 00:04:55.706 A:middle
+
+85
+00:04:52,946 --> 00:04:55,706
 to the storyboard
 value, in Watch OS 2,
 
-00:04:56.006 --> 00:04:58.916 A:middle
+
+86
+00:04:56,006 --> 00:04:58,916
 we are interpreting the zero
 as an absolute zero value.
 
-00:04:58.916 --> 00:04:59.976 A:middle
+
+87
+00:04:58,916 --> 00:04:59,976
 So just keep that in mind.
 
 
-
-00:05:02.336 --> 00:05:06.646 A:middle
+88
+00:05:02,336 --> 00:05:06,646
 Let's say that you want to
 size the rectangle to be 75%
 
-00:05:06.646 --> 00:05:08.476 A:middle
+
+89
+00:05:06,646 --> 00:05:08,476
 of the width of the
 containing element.
 
-00:05:08.906 --> 00:05:12.806 A:middle
+
+90
+00:05:08,906 --> 00:05:12,806
 So you can use said relative
 width, with a .75 value
 
-00:05:12.806 --> 00:05:15.306 A:middle
+
+91
+00:05:12,806 --> 00:05:15,306
 and you get three-fourths
 of the width.
 
-00:05:15.306 --> 00:05:19.666 A:middle
+
+92
+00:05:15,306 --> 00:05:19,666
 And you can do the same for
 the height, if you want it
 
-00:05:19.666 --> 00:05:22.936 A:middle
+
+93
+00:05:19,666 --> 00:05:22,936
 to be half of the height
 of your containing element.
 
-00:05:24.256 --> 00:05:28.326 A:middle
+
+94
+00:05:24,256 --> 00:05:28,326
 The second parameter in these
 APIs is an adjustment value,
 
-00:05:28.726 --> 00:05:31.936 A:middle
+
+95
+00:05:28,726 --> 00:05:31,936
 which can be positive or
 negative, and it's applied
 
-00:05:31.936 --> 00:05:33.806 A:middle
+
+96
+00:05:31,936 --> 00:05:33,806
 after you do the initial sizing.
 
-00:05:33.806 --> 00:05:37.246 A:middle
+
+97
+00:05:33,806 --> 00:05:37,246
 So in this case, I will
 be adding 30 to the width
 
-00:05:37.246 --> 00:05:41.196 A:middle
+
+98
+00:05:37,246 --> 00:05:41,196
 and subtracting 30 to the
 height and I get the following.
 
-00:05:42.186 --> 00:05:46.126 A:middle
+
+99
+00:05:42,186 --> 00:05:46,126
 And finally, the
 sizing to fit and sizing
 
-00:05:46.126 --> 00:05:49.046 A:middle
+
+100
+00:05:46,126 --> 00:05:49,046
 to height does what
 you probably expect.
 
-00:05:49.046 --> 00:05:51.316 A:middle
+
+101
+00:05:49,046 --> 00:05:51,316
 You know, depending on the
 content inside your rectangle,
 
-00:05:51.316 --> 00:05:53.836 A:middle
+
+102
+00:05:51,316 --> 00:05:53,836
 we are sizing appropriately.
 
-00:05:55.246 --> 00:05:57.726 A:middle
+
+103
+00:05:55,246 --> 00:05:57,726
 Now, let's move on
 to group elements.
 
-00:05:59.026 --> 00:06:01.306 A:middle
+
+104
+00:05:59,026 --> 00:06:01,306
 This is where you really start
 to fine tune your layout.
 
 
-
-00:05:59.026 --> 00:06:01.306 A:middle
-This is where you really start
-to fine tune your layout.
-
-00:06:02.056 --> 00:06:07.176 A:middle
+105
+00:06:02,056 --> 00:06:07,176
 WKInterfaceGroup, think of
 it initially as a container
 
-00:06:07.176 --> 00:06:08.576 A:middle
+
+106
+00:06:07,176 --> 00:06:08,576
 without default content.
 
-00:06:08.806 --> 00:06:11.756 A:middle
+
+107
+00:06:08,806 --> 00:06:11,756
 It can have content as
 I will illustrate later
 
-00:06:12.076 --> 00:06:14.716 A:middle
+
+108
+00:06:12,076 --> 00:06:14,716
 but initially it's
 just a container.
 
-00:06:15.356 --> 00:06:18.296 A:middle
+
+109
+00:06:15,356 --> 00:06:18,296
 It's a tool for arranging
 all of your elements.
 
-00:06:19.546 --> 00:06:21.006 A:middle
+
+110
+00:06:19,546 --> 00:06:21,006
 This is where you get the chance
 
-00:06:21.006 --> 00:06:23.806 A:middle
+
+111
+00:06:21,006 --> 00:06:23,806
 to pick whether you want a
 vertical or horizontal layout.
 
-00:06:25.256 --> 00:06:27.466 A:middle
+
+112
+00:06:25,256 --> 00:06:27,466
 This is also where you
 start to introduce nesting.
 
-00:06:29.216 --> 00:06:33.266 A:middle
+
+113
+00:06:29,216 --> 00:06:33,266
 And this is where you are
 tweaking the alignment
 
-00:06:33.266 --> 00:06:34.996 A:middle
+
+114
+00:06:33,266 --> 00:06:34,996
 and the sizing that
 we just saw before
 
-00:06:34.996 --> 00:06:36.306 A:middle
+
+115
+00:06:34,996 --> 00:06:36,306
 on the containing elements.
 
-00:06:37.606 --> 00:06:40.776 A:middle
+
+116
+00:06:37,606 --> 00:06:40,776
 So as we saw in the first set
 of slides, now I'm abstracting
 
-00:06:40.776 --> 00:06:44.506 A:middle
+
+117
+00:06:40,776 --> 00:06:44,506
 to the blue shapes, you
 are laying your interface
 
-00:06:44.506 --> 00:06:46.966 A:middle
+
+118
+00:06:44,506 --> 00:06:46,966
 in Interface Builder and you
 have the vertical layout.
 
-00:06:48.486 --> 00:06:51.296 A:middle
+
+119
+00:06:48,486 --> 00:06:51,296
 You introduce a group and you
 tell it in Interface Builder
 
-00:06:51.296 --> 00:06:54.046 A:middle
+
+120
+00:06:51,296 --> 00:06:54,046
 that you want the horizontal
 layout and you start laying
 
-00:06:54.046 --> 00:06:55.496 A:middle
+
+121
+00:06:54,046 --> 00:06:55,496
 out your objects there.
 
-00:06:57.456 --> 00:06:59.746 A:middle
+
+122
+00:06:57,456 --> 00:06:59,746
 So once you have defined
 your containment hierarchy,
 
 
-
-00:07:00.816 --> 00:07:04.206 A:middle
+123
+00:07:00,816 --> 00:07:04,206
 you are able to define
 things like insets
 
-00:07:04.206 --> 00:07:05.706 A:middle
+
+124
+00:07:04,206 --> 00:07:05,706
 and spacings within your group.
 
-00:07:06.486 --> 00:07:09.706 A:middle
+
+125
+00:07:06,486 --> 00:07:09,706
 So you can define
 the left inset here.
 
-00:07:09.706 --> 00:07:11.106 A:middle
+
+126
+00:07:09,706 --> 00:07:11,106
 These are point values.
 
-00:07:11.896 --> 00:07:15.906 A:middle
+
+127
+00:07:11,896 --> 00:07:15,906
 Left inset, bottom inset, top
 inset, right inset and right,
 
-00:07:16.556 --> 00:07:21.346 A:middle
+
+128
+00:07:16,556 --> 00:07:21,346
 as well as the spacing that
 is used to put aside --
 
-00:07:21.346 --> 00:07:23.566 A:middle
+
+129
+00:07:21,346 --> 00:07:23,566
 to separate each one
 of your elements.
 
-00:07:24.906 --> 00:07:29.846 A:middle
+
+130
+00:07:24,906 --> 00:07:29,846
 Now, don't forget that your top
 level container object is also
 
-00:07:29.846 --> 00:07:30.666 A:middle
+
+131
+00:07:29,846 --> 00:07:30,666
 -- is also a group.
 
-00:07:31.176 --> 00:07:33.646 A:middle
+
+132
+00:07:31,176 --> 00:07:33,646
 So you can set the
 insets at that level,
 
-00:07:34.976 --> 00:07:36.176 A:middle
+
+133
+00:07:34,976 --> 00:07:36,176
 as well as the spacing.
 
-00:07:36.176 --> 00:07:38.686 A:middle
+
+134
+00:07:36,176 --> 00:07:38,686
 So we use the same spacing
 for the number of elements
 
-00:07:38.686 --> 00:07:39.736 A:middle
+
+135
+00:07:38,686 --> 00:07:39,736
 that you have inside
 of your group.
 
-00:07:39.736 --> 00:07:42.556 A:middle
+
+136
+00:07:39,736 --> 00:07:42,556
 So here you have a
 spacing of 10 that is used
 
-00:07:42.556 --> 00:07:46.326 A:middle
+
+137
+00:07:42,556 --> 00:07:46,326
 for the three top level
 elements in your group.
 
-00:07:47.296 --> 00:07:49.946 A:middle
+
+138
+00:07:47,296 --> 00:07:49,946
 Now, once you apply -- once
 you start using nesting,
 
-00:07:50.266 --> 00:07:52.736 A:middle
+
+139
+00:07:50,266 --> 00:07:52,736
 you are able to achieve
 your complex layouts.
 
-00:07:52.736 --> 00:07:54.226 A:middle
+
+140
+00:07:52,736 --> 00:07:54,226
 Here's a very simple example.
 
-00:07:54.696 --> 00:07:57.176 A:middle
+
+141
+00:07:54,696 --> 00:07:57,176
 If you want the two squares
 stacked on top of each other,
 
-00:07:57.176 --> 00:07:59.666 A:middle
+
+142
+00:07:57,176 --> 00:07:59,666
 followed by two squares
 right next to each other,
 
 
-
-00:08:00.066 --> 00:08:04.466 A:middle
+143
+00:08:00,066 --> 00:08:04,466
 you first use a group
 with a vertical layout.
 
-00:08:05.026 --> 00:08:07.046 A:middle
+
+144
+00:08:05,026 --> 00:08:07,046
 Then you use another group
 with a horizontal layout
 
-00:08:07.046 --> 00:08:09.646 A:middle
+
+145
+00:08:07,046 --> 00:08:09,646
 and you wrap those
 two in another group
 
-00:08:09.646 --> 00:08:11.886 A:middle
+
+146
+00:08:09,646 --> 00:08:11,886
 because that's the way you
 achieve the horizontal layout
 
-00:08:11.886 --> 00:08:12.906 A:middle
+
+147
+00:08:11,886 --> 00:08:12,906
 of those two elements.
 
-00:08:13.406 --> 00:08:17.146 A:middle
+
+148
+00:08:13,406 --> 00:08:17,146
 And by default, there's
 no content in your groups.
 
-00:08:17.396 --> 00:08:19.846 A:middle
+
+149
+00:08:17,396 --> 00:08:19,846
 So they are transparent and
 you only see your squares.
 
-00:08:21.336 --> 00:08:24.816 A:middle
+
+150
+00:08:21,336 --> 00:08:24,816
 Now, let's make this more
 concrete with an example
 
-00:08:24.816 --> 00:08:27.246 A:middle
+
+151
+00:08:24,816 --> 00:08:27,246
 that I will be introducing
 in this part of the session
 
-00:08:27.246 --> 00:08:30.186 A:middle
+
+152
+00:08:27,246 --> 00:08:30,186
 and then Tom will
 start animating.
 
-00:08:30.696 --> 00:08:31.806 A:middle
+
+153
+00:08:30,696 --> 00:08:31,806
 So we have WKRecipes.
 
-00:08:32.015 --> 00:08:33.796 A:middle
+
+154
+00:08:32,015 --> 00:08:33,796
 This is a very simple
 recipe viewer.
 
-00:08:34.316 --> 00:08:35.395 A:middle
+
+155
+00:08:34,316 --> 00:08:35,395
 It lists your recipes.
 
-00:08:36.416 --> 00:08:38.546 A:middle
+
+156
+00:08:36,416 --> 00:08:38,546
 Fish tacos, pizza,
 barbecue wings.
 
-00:08:40.275 --> 00:08:42.785 A:middle
+
+157
+00:08:40,275 --> 00:08:42,785
 You can see the list of
 ingredients for each one
 
-00:08:42.785 --> 00:08:46.076 A:middle
+
+158
+00:08:42,785 --> 00:08:46,076
 of your recipes, and you can
 see the number of servings
 
-00:08:46.076 --> 00:08:47.226 A:middle
+
+159
+00:08:46,076 --> 00:08:47,226
 for each one of the recipes.
 
-00:08:47.716 --> 00:08:50.326 A:middle
+
+160
+00:08:47,716 --> 00:08:50,326
 And there are other
 screens which Tom will talk
 
-00:08:50.326 --> 00:08:51.846 A:middle
+
+161
+00:08:50,326 --> 00:08:51,846
 about in the context
 of animation.
 
-00:08:52.116 --> 00:08:54.716 A:middle
+
+162
+00:08:52,116 --> 00:08:54,716
 For here, we are focusing
 on the static layout
 
-00:08:54.716 --> 00:08:56.066 A:middle
+
+163
+00:08:54,716 --> 00:08:56,066
 of these three elements.
 
-00:08:56.866 --> 00:08:57.816 A:middle
+
+164
+00:08:56,866 --> 00:08:57,816
 So how do we do this?
 
-00:08:58.956 --> 00:09:02.826 A:middle
+
+165
+00:08:58,956 --> 00:09:02,826
 The first screen that we
 see is a table of recipes.
 
 
-
-00:08:58.956 --> 00:09:02.826 A:middle
-The first screen that we
-see is a table of recipes.
-
-00:09:02.946 --> 00:09:06.456 A:middle
+166
+00:09:02,946 --> 00:09:06,456
 So in WatchKit, you have a table
 controller that you can use
 
-00:09:06.486 --> 00:09:09.176 A:middle
+
+167
+00:09:06,486 --> 00:09:09,176
 to layout your rows, but
 it's your responsibility
 
-00:09:09.176 --> 00:09:10.876 A:middle
+
+168
+00:09:09,176 --> 00:09:10,876
 to tell us what each
 row looks like.
 
-00:09:12.006 --> 00:09:13.666 A:middle
+
+169
+00:09:12,006 --> 00:09:13,666
 What is the structure of that?
 
-00:09:13.666 --> 00:09:16.806 A:middle
+
+170
+00:09:13,666 --> 00:09:16,806
 So here we want an
 image and a label.
 
-00:09:18.306 --> 00:09:20.376 A:middle
+
+171
+00:09:18,306 --> 00:09:20,376
 So we have a horizontal layout,
 
-00:09:20.376 --> 00:09:22.966 A:middle
+
+172
+00:09:20,376 --> 00:09:22,966
 that should automatically
 tell you that that's a group
 
-00:09:23.296 --> 00:09:25.306 A:middle
+
+173
+00:09:23,296 --> 00:09:25,306
 with a horizontal layout.
 
-00:09:27.376 --> 00:09:30.426 A:middle
+
+174
+00:09:27,376 --> 00:09:30,426
 Then you have defined your
 containment hierarchy,
 
-00:09:30.426 --> 00:09:32.446 A:middle
+
+175
+00:09:30,426 --> 00:09:32,446
 and now you are going
 to define your spacings.
 
-00:09:32.446 --> 00:09:33.746 A:middle
+
+176
+00:09:32,446 --> 00:09:33,746
 So you have your left inset,
 
-00:09:34.206 --> 00:09:37.736 A:middle
+
+177
+00:09:34,206 --> 00:09:37,736
 your bottom, top,
 and the spacing.
 
-00:09:39.486 --> 00:09:40.246 A:middle
+
+178
+00:09:39,486 --> 00:09:40,246
 And your alignment.
 
-00:09:41.186 --> 00:09:45.266 A:middle
+
+179
+00:09:41,186 --> 00:09:45,266
 Right? Your image is
 aligned center, vertically,
 
-00:09:45.776 --> 00:09:50.386 A:middle
+
+180
+00:09:45,776 --> 00:09:50,386
 but it's aligned to the left in
 the next slot that it falls on.
 
-00:09:50.716 --> 00:09:53.026 A:middle
+
+181
+00:09:50,716 --> 00:09:53,026
 And the label also has
 a vertical alignment
 
-00:09:53.026 --> 00:09:53.956 A:middle
+
+182
+00:09:53,026 --> 00:09:53,956
 but left aligned.
 
-00:09:54.046 --> 00:09:57.116 A:middle
+
+183
+00:09:54,046 --> 00:09:57,116
 Notice that it's left aligned in
 the slot that it corresponds to,
 
-00:09:57.116 --> 00:10:01.066 A:middle
+
+184
+00:09:57,116 --> 00:10:01,066
 right, because there's an image
 before it, so right next to it.
 
 
-
-00:09:57.116 --> 00:10:01.066 A:middle
-right, because there's an image
-before it, so right next to it.
-
-00:10:02.286 --> 00:10:04.386 A:middle
+185
+00:10:02,286 --> 00:10:04,386
 Sizing our images are square.
 
-00:10:04.846 --> 00:10:05.486 A:middle
+
+186
+00:10:04,846 --> 00:10:05,486
 Resources.
 
-00:10:05.486 --> 00:10:09.076 A:middle
+
+187
+00:10:05,486 --> 00:10:09,076
 So we have a fixed size
 of 30 points on each side.
 
-00:10:10.056 --> 00:10:14.836 A:middle
+
+188
+00:10:10,056 --> 00:10:14,836
 And the label, obviously
 sizes to fit.
 
-00:10:15.276 --> 00:10:20.816 A:middle
+
+189
+00:10:15,276 --> 00:10:20,816
 So table row layouts show us
 that we can use the groups
 
-00:10:20.816 --> 00:10:24.516 A:middle
+
+190
+00:10:20,816 --> 00:10:24,516
 for horizontal sizing, and then
 we can fine tune our alignments,
 
-00:10:24.516 --> 00:10:25.656 A:middle
+
+191
+00:10:24,516 --> 00:10:25,656
 and set some spacing.
 
-00:10:26.306 --> 00:10:29.726 A:middle
+
+192
+00:10:26,306 --> 00:10:29,726
 Now, let's move on to the
 ingredients controller.
 
-00:10:30.546 --> 00:10:33.526 A:middle
+
+193
+00:10:30,546 --> 00:10:33,526
 Some of you might be
 noticing that five hot sauce,
 
-00:10:33.526 --> 00:10:36.186 A:middle
+
+194
+00:10:33,526 --> 00:10:36,186
 whatever units that is, is
 probably too much hot sauce
 
-00:10:36.186 --> 00:10:39.826 A:middle
+
+195
+00:10:36,186 --> 00:10:39,826
 for any taco recipe, but that's
 the wrong thing to focus on.
 
-00:10:42.356 --> 00:10:43.456 A:middle
+
+196
+00:10:42,356 --> 00:10:43,456
 You actually want to notice
 
-00:10:43.456 --> 00:10:47.146 A:middle
+
+197
+00:10:43,456 --> 00:10:47,146
 that although we have our
 table layout, we have rows,
 
-00:10:47.786 --> 00:10:49.306 A:middle
+
+198
+00:10:47,786 --> 00:10:49,306
 we now have the circle element.
 
-00:10:49.526 --> 00:10:51.486 A:middle
+
+199
+00:10:49,526 --> 00:10:51,486
 How do we achieve this?
 
-00:10:52.096 --> 00:10:54.486 A:middle
+
+200
+00:10:52,096 --> 00:10:54,486
 The horizontal layout
 is the same.
 
-00:10:54.486 --> 00:10:55.376 A:middle
+
+201
+00:10:54,486 --> 00:10:55,376
 We still have a group.
 
-00:10:55.816 --> 00:10:58.836 A:middle
+
+202
+00:10:55,816 --> 00:10:58,836
 We have the label, obviously,
 
-00:10:58.836 --> 00:11:01.936 A:middle
+
+203
+00:10:58,836 --> 00:11:01,936
 but what is that red
 circle on the top left?
 
 
-
-00:10:58.836 --> 00:11:01.936 A:middle
-but what is that red
-circle on the top left?
-
-00:11:03.156 --> 00:11:05.076 A:middle
+204
+00:11:03,156 --> 00:11:05,076
 We can nest groups,
 as I said before.
 
-00:11:05.076 --> 00:11:06.386 A:middle
+
+205
+00:11:05,076 --> 00:11:06,386
 So we are using a group here.
 
-00:11:07.196 --> 00:11:10.506 A:middle
+
+206
+00:11:07,196 --> 00:11:10,506
 And here we are now
 moving into the area
 
-00:11:10.506 --> 00:11:13.946 A:middle
+
+207
+00:11:10,506 --> 00:11:13,946
 where groups do have
 backgrounds.
 
-00:11:13.996 --> 00:11:16.536 A:middle
+
+208
+00:11:13,996 --> 00:11:16,536
 They don't have default content,
 but they can have backgrounds.
 
-00:11:16.656 --> 00:11:19.576 A:middle
+
+209
+00:11:16,656 --> 00:11:19,576
 The backgrounds can be
 either colors or images.
 
-00:11:20.246 --> 00:11:22.386 A:middle
+
+210
+00:11:20,246 --> 00:11:22,386
 So we can select the
 image of this group,
 
-00:11:22.576 --> 00:11:26.856 A:middle
+
+211
+00:11:22,576 --> 00:11:26,856
 as well as the radius that is
 used to draw the background.
 
-00:11:26.856 --> 00:11:30.866 A:middle
+
+212
+00:11:26,856 --> 00:11:30,866
 And so we are setting a group
 with a colored background,
 
-00:11:31.316 --> 00:11:34.906 A:middle
+
+213
+00:11:31,316 --> 00:11:34,906
 blue in the schematic, red in
 the real example with a radius
 
-00:11:34.906 --> 00:11:38.926 A:middle
+
+214
+00:11:34,906 --> 00:11:38,926
 of 8 and then you get
 the nice blue circle.
 
-00:11:39.476 --> 00:11:42.476 A:middle
+
+215
+00:11:39,476 --> 00:11:42,476
 Once you have a group, you
 can nest the label inside it
 
-00:11:42.476 --> 00:11:44.276 A:middle
+
+216
+00:11:42,476 --> 00:11:44,276
 and it's centered in the group.
 
-00:11:44.276 --> 00:11:46.216 A:middle
+
+217
+00:11:44,276 --> 00:11:46,216
 Now you have the horizontal
 and the vertical centering
 
-00:11:46.216 --> 00:11:49.156 A:middle
+
+218
+00:11:46,216 --> 00:11:49,156
 so this is where you start to
 see the building of concepts
 
-00:11:49.156 --> 00:11:50.726 A:middle
+
+219
+00:11:49,156 --> 00:11:50,726
 that we have been talking about.
 
-00:11:53.016 --> 00:11:55.786 A:middle
+
+220
+00:11:53,016 --> 00:11:55,786
 And yet again, sorry
 to be repetitive,
 
-00:11:55.786 --> 00:11:56.786 A:middle
+
+221
+00:11:55,786 --> 00:11:56,786
 but this is the model.
 
-00:11:56.786 --> 00:12:00.076 A:middle
+
+222
+00:11:56,786 --> 00:12:00,076
 Now you define -- you
 find tune your left inset,
 
 
-
-00:11:56.786 --> 00:12:00.076 A:middle
-Now you define -- you
-find tune your left inset,
-
-00:12:00.126 --> 00:12:04.696 A:middle
+223
+00:12:00,126 --> 00:12:04,696
 top, bottom, and spacing.
 
-00:12:06.276 --> 00:12:11.426 A:middle
+
+224
+00:12:06,276 --> 00:12:11,426
 So remember, for nested
 groups, you can use nesting
 
-00:12:11.496 --> 00:12:16.556 A:middle
+
+225
+00:12:11,496 --> 00:12:16,556
 to achieve complex layouts,
 as well as using backgrounds
 
-00:12:16.556 --> 00:12:20.306 A:middle
+
+226
+00:12:16,556 --> 00:12:20,306
 within your groups whether
 that's a color, or an image.
 
-00:12:22.726 --> 00:12:24.996 A:middle
+
+227
+00:12:22,726 --> 00:12:24,996
 Lastly, we have the
 servings controller,
 
-00:12:24.996 --> 00:12:27.786 A:middle
+
+228
+00:12:24,996 --> 00:12:27,786
 which it highlights
 the number --
 
-00:12:27.786 --> 00:12:30.686 A:middle
+
+229
+00:12:27,786 --> 00:12:30,686
 it's a circle that highlights
 the number of servings,
 
-00:12:31.086 --> 00:12:33.126 A:middle
+
+230
+00:12:31,086 --> 00:12:33,126
 four in this example, for
 your particular recipe.
 
-00:12:34.046 --> 00:12:35.496 A:middle
+
+231
+00:12:34,046 --> 00:12:35,496
 So some of you might
 be thinking,
 
-00:12:35.736 --> 00:12:37.206 A:middle
+
+232
+00:12:35,736 --> 00:12:37,206
 this is a circular layout.
 
-00:12:37.206 --> 00:12:38.826 A:middle
+
+233
+00:12:37,206 --> 00:12:38,826
 How does this --
 how is this achieved
 
-00:12:38.826 --> 00:12:40.606 A:middle
+
+234
+00:12:38,826 --> 00:12:40,606
 in the grid-like flow layout
 
-00:12:40.606 --> 00:12:42.726 A:middle
+
+235
+00:12:40,606 --> 00:12:42,726
 that you have been
 talking about so far?
 
-00:12:43.656 --> 00:12:47.066 A:middle
+
+236
+00:12:43,656 --> 00:12:47,066
 So we have a circle of 12 --
 
-00:12:47.126 --> 00:12:51.186 A:middle
+
+237
+00:12:47,126 --> 00:12:51,186
 well, a circular pattern of 12
 objects, but if we look at them
 
-00:12:51.186 --> 00:12:55.816 A:middle
+
+238
+00:12:51,186 --> 00:12:55,816
 in detail, these are actually
 just three top level groups.
 
-00:12:57.336 --> 00:12:59.296 A:middle
+
+239
+00:12:57,336 --> 00:12:59,296
 So we have the first group,
 
 
-
-00:13:00.306 --> 00:13:05.266 A:middle
+240
+00:13:00,306 --> 00:13:05,266
 the second group,
 and the third group.
 
-00:13:05.466 --> 00:13:08.986 A:middle
+
+241
+00:13:05,466 --> 00:13:08,986
 Inside of those groups, we
 subsequently use more nesting.
 
-00:13:09.076 --> 00:13:10.526 A:middle
+
+242
+00:13:09,076 --> 00:13:10,526
 So let's focus on
 the middle group.
 
-00:13:11.876 --> 00:13:13.556 A:middle
+
+243
+00:13:11,876 --> 00:13:13,556
 Sorry, let me talk about the --
 
-00:13:13.616 --> 00:13:16.726 A:middle
+
+244
+00:13:13,616 --> 00:13:16,726
 at the top level groups we do
 have alignment of the groups.
 
-00:13:16.726 --> 00:13:21.186 A:middle
+
+245
+00:13:16,726 --> 00:13:21,186
 For example, the top group
 is horizontally aligned
 
-00:13:21.186 --> 00:13:23.346 A:middle
+
+246
+00:13:21,186 --> 00:13:23,346
 in the center and fixed size.
 
-00:13:24.346 --> 00:13:28.016 A:middle
+
+247
+00:13:24,346 --> 00:13:28,016
 The middle one is
 sized to fit --
 
-00:13:28.046 --> 00:13:29.876 A:middle
+
+248
+00:13:28,046 --> 00:13:29,876
 to take up the whole
 width of the container.
 
-00:13:31.386 --> 00:13:36.906 A:middle
+
+249
+00:13:31,386 --> 00:13:36,906
 So now the second group has
 more groups inside of it, right?
 
-00:13:36.906 --> 00:13:38.906 A:middle
+
+250
+00:13:36,906 --> 00:13:38,906
 So we have a group
 with vertical layout.
 
-00:13:39.626 --> 00:13:41.556 A:middle
+
+251
+00:13:39,626 --> 00:13:41,556
 Then we have a group
 with horizontal layout
 
-00:13:41.556 --> 00:13:43.726 A:middle
+
+252
+00:13:41,556 --> 00:13:43,726
 and finally we have a third
 group with horizontal --
 
-00:13:44.026 --> 00:13:45.526 A:middle
+
+253
+00:13:44,026 --> 00:13:45,526
 with another vertical layout.
 
-00:13:46.036 --> 00:13:47.586 A:middle
+
+254
+00:13:46,036 --> 00:13:47,586
 And if we look at
 each one of those,
 
-00:13:47.956 --> 00:13:50.676 A:middle
+
+255
+00:13:47,956 --> 00:13:50,676
 those themselves are made
 up of more subgroups.
 
-00:13:52.796 --> 00:13:55.596 A:middle
+
+256
+00:13:52,796 --> 00:13:55,596
 Once we have this
 level of definition,
 
-00:13:56.396 --> 00:13:59.366 A:middle
+
+257
+00:13:56,396 --> 00:13:59,366
 we can indicate the
 alignment, the precise alignment
 
-00:13:59.516 --> 00:14:00.816 A:middle
+
+258
+00:13:59,516 --> 00:14:00,816
 on each one of those circles.
 
 
-
-00:13:59.516 --> 00:14:00.816 A:middle
-on each one of those circles.
-
-00:14:01.086 --> 00:14:02.426 A:middle
+259
+00:14:01,086 --> 00:14:02,426
 Now you can clearly see
 
-00:14:02.426 --> 00:14:06.336 A:middle
+
+260
+00:14:02,426 --> 00:14:06,336
 that that circle is horizontally
 aligned to the right
 
-00:14:06.886 --> 00:14:08.546 A:middle
+
+261
+00:14:06,886 --> 00:14:08,546
 and vertically on the top.
 
-00:14:09.796 --> 00:14:11.656 A:middle
+
+262
+00:14:09,796 --> 00:14:11,656
 Then you have the left
 alignment and the center
 
-00:14:11.656 --> 00:14:12.906 A:middle
+
+263
+00:14:11,656 --> 00:14:12,906
 for this particular circle.
 
-00:14:13.736 --> 00:14:17.246 A:middle
+
+264
+00:14:13,736 --> 00:14:17,246
 And right bottom for
 the other, right?
 
-00:14:17.476 --> 00:14:20.876 A:middle
+
+265
+00:14:17,476 --> 00:14:20,876
 So you have seen how the
 grid-like flow layout really
 
-00:14:20.876 --> 00:14:23.396 A:middle
+
+266
+00:14:20,876 --> 00:14:23,396
 gives you a lot of
 power in terms
 
-00:14:23.576 --> 00:14:26.136 A:middle
+
+267
+00:14:23,576 --> 00:14:26,136
 of the things you can achieve
 and that's the same pattern
 
-00:14:26.136 --> 00:14:28.956 A:middle
+
+268
+00:14:26,136 --> 00:14:28,956
 that we follow for the whole
 -- for the whole circle here.
 
-00:14:29.646 --> 00:14:35.606 A:middle
+
+269
+00:14:29,646 --> 00:14:35,606
 So group nesting is your key
 to achieving complex layouts.
 
-00:14:36.856 --> 00:14:40.296 A:middle
+
+270
+00:14:36,856 --> 00:14:40,296
 Now that I have given you all of
 this rope, I need to warn you,
 
-00:14:40.526 --> 00:14:41.646 A:middle
+
+271
+00:14:40,526 --> 00:14:41,646
 don't hang yourself with it.
 
-00:14:42.696 --> 00:14:46.046 A:middle
+
+272
+00:14:42,696 --> 00:14:46,046
 It is possible to
 abuse groups, right?
 
-00:14:46.046 --> 00:14:48.016 A:middle
+
+273
+00:14:46,046 --> 00:14:48,016
 You have to keep that in mind.
 
-00:14:48.016 --> 00:14:50.926 A:middle
+
+274
+00:14:48,016 --> 00:14:50,926
 You can go overboard by
 trying to nest everything.
 
-00:14:51.556 --> 00:14:53.516 A:middle
+
+275
+00:14:51,556 --> 00:14:53,516
 So some things to keep in mind.
 
-00:14:54.836 --> 00:14:56.436 A:middle
+
+276
+00:14:54,836 --> 00:14:56,436
 I can't give you
 an exact number.
 
-00:14:56.436 --> 00:14:58.626 A:middle
+
+277
+00:14:56,436 --> 00:14:58,626
 It depends on what
 your backgrounds are
 
-00:14:58.626 --> 00:15:02.776 A:middle
+
+278
+00:14:58,626 --> 00:15:02,776
 or how your layout is behaving,
 but keep these things in mind.
 
 
-
-00:14:58.626 --> 00:15:02.776 A:middle
-or how your layout is behaving,
-but keep these things in mind.
-
-00:15:02.776 --> 00:15:05.026 A:middle
+279
+00:15:02,776 --> 00:15:05,026
 At the beginning of
 the presentation,
 
-00:15:05.026 --> 00:15:07.786 A:middle
+
+280
+00:15:05,026 --> 00:15:07,786
 I said that we are
 not offering you APIs
 
-00:15:07.786 --> 00:15:10.036 A:middle
+
+281
+00:15:07,786 --> 00:15:10,036
 for direct element
 creation, or destruction.
 
-00:15:11.336 --> 00:15:13.366 A:middle
+
+282
+00:15:11,336 --> 00:15:13,366
 This is all done
 in the storyboards
 
-00:15:13.366 --> 00:15:14.276 A:middle
+
+283
+00:15:13,366 --> 00:15:14,276
 and Interface Builder.
 
-00:15:14.956 --> 00:15:16.246 A:middle
+
+284
+00:15:14,956 --> 00:15:16,246
 So anything you create
 
-00:15:16.246 --> 00:15:18.506 A:middle
+
+285
+00:15:16,246 --> 00:15:18,506
 in Interface Builder
 is instantiated.
 
-00:15:18.506 --> 00:15:19.306 A:middle
+
+286
+00:15:18,506 --> 00:15:19,306
 It's created.
 
-00:15:19.446 --> 00:15:22.216 A:middle
+
+287
+00:15:19,446 --> 00:15:22,216
 When you're instantiating
 one of your controllers,
 
-00:15:22.416 --> 00:15:27.296 A:middle
+
+288
+00:15:22,416 --> 00:15:27,296
 you're instantiating all of
 the elements inside of it.
 
-00:15:27.716 --> 00:15:29.386 A:middle
+
+289
+00:15:27,716 --> 00:15:29,386
 It's possible to
 hide some of them.
 
-00:15:29.386 --> 00:15:31.206 A:middle
+
+290
+00:15:29,386 --> 00:15:31,206
 That's one of the properties
 that you have for some
 
-00:15:31.206 --> 00:15:34.176 A:middle
+
+291
+00:15:31,206 --> 00:15:34,176
 of the elements, but even
 though they are hidden,
 
-00:15:34.176 --> 00:15:36.926 A:middle
+
+292
+00:15:34,176 --> 00:15:36,926
 you are still -- we are
 still creating them.
 
-00:15:38.736 --> 00:15:40.426 A:middle
+
+293
+00:15:38,736 --> 00:15:40,426
 So you might -- you are
 still taking the hit
 
-00:15:40.426 --> 00:15:41.446 A:middle
+
+294
+00:15:40,426 --> 00:15:41,446
 of the creation costs.
 
-00:15:41.676 --> 00:15:43.396 A:middle
+
+295
+00:15:41,676 --> 00:15:43,396
 You might save on
 the layout costs
 
-00:15:43.396 --> 00:15:44.726 A:middle
+
+296
+00:15:43,396 --> 00:15:44,726
 because we are not
 doing the layout,
 
-00:15:44.726 --> 00:15:46.266 A:middle
+
+297
+00:15:44,726 --> 00:15:46,266
 but the creation
 is still happening.
 
-00:15:46.706 --> 00:15:50.206 A:middle
+
+298
+00:15:46,706 --> 00:15:50,206
 So keep this in mind as you
 start adding a bunch of objects
 
-00:15:50.206 --> 00:15:51.296 A:middle
+
+299
+00:15:50,206 --> 00:15:51,296
 into your controllers, right?
 
-00:15:51.296 --> 00:15:54.316 A:middle
+
+300
+00:15:51,296 --> 00:15:54,316
 Keep them -- in mind that those
 are all being created even
 
-00:15:54.316 --> 00:15:58.806 A:middle
+
+301
+00:15:54,316 --> 00:15:58,806
 if they are not visible
 at that particular time.
 
-00:15:59.136 --> 00:16:03.766 A:middle
+
+302
+00:15:59,136 --> 00:16:03,766
 And finally, as I showed you
 with groups and their ability
 
 
-
-00:15:59.136 --> 00:16:03.766 A:middle
-And finally, as I showed you
-with groups and their ability
-
-00:16:03.766 --> 00:16:10.176 A:middle
+303
+00:16:03,766 --> 00:16:10,176
 to have images, keep in mind
 that images have a transfer cost
 
-00:16:10.176 --> 00:16:13.466 A:middle
+
+304
+00:16:10,176 --> 00:16:13,466
 over into your Apple Watch.
 
-00:16:13.666 --> 00:16:17.266 A:middle
+
+305
+00:16:13,666 --> 00:16:17,266
 In Watch OS 1 apps, the
 extension was running
 
-00:16:17.266 --> 00:16:19.746 A:middle
+
+306
+00:16:17,266 --> 00:16:19,746
 on the phone, and
 they have to get --
 
-00:16:19.946 --> 00:16:22.896 A:middle
+
+307
+00:16:19,946 --> 00:16:22,896
 we have to get those images
 over into your watch, right?
 
-00:16:22.896 --> 00:16:26.166 A:middle
+
+308
+00:16:22,896 --> 00:16:26,166
 Each time your user is
 using your interface.
 
-00:16:26.166 --> 00:16:27.156 A:middle
+
+309
+00:16:26,166 --> 00:16:27,156
 So keep that in mind.
 
-00:16:27.416 --> 00:16:30.506 A:middle
+
+310
+00:16:27,416 --> 00:16:30,506
 We have APIs for image
 caching which we kind of --
 
-00:16:30.826 --> 00:16:32.626 A:middle
+
+311
+00:16:30,826 --> 00:16:32,626
 you tell us to move a
 certain set of images
 
-00:16:32.626 --> 00:16:35.916 A:middle
+
+312
+00:16:32,626 --> 00:16:35,916
 but they still have to get
 over the air to your watch.
 
-00:16:36.656 --> 00:16:38.786 A:middle
+
+313
+00:16:36,656 --> 00:16:38,786
 In Watch OS 2, this
 is less relevant
 
-00:16:38.786 --> 00:16:40.886 A:middle
+
+314
+00:16:38,786 --> 00:16:40,886
 because the extension is
 running on your watch,
 
-00:16:41.476 --> 00:16:43.476 A:middle
+
+315
+00:16:41,476 --> 00:16:43,476
 but you still have
 to install the app.
 
-00:16:43.476 --> 00:16:45.736 A:middle
+
+316
+00:16:43,476 --> 00:16:45,736
 So you still have
 a set of resources
 
-00:16:45.736 --> 00:16:46.576 A:middle
+
+317
+00:16:45,736 --> 00:16:46,576
 that you are installing.
 
-00:16:46.576 --> 00:16:49.156 A:middle
+
+318
+00:16:46,576 --> 00:16:49,156
 So there is still a
 transfer cost for your users
 
-00:16:49.156 --> 00:16:50.486 A:middle
+
+319
+00:16:49,156 --> 00:16:50,486
 from an installation
 point of view.
 
-00:16:52.236 --> 00:16:53.516 A:middle
+
+320
+00:16:52,236 --> 00:16:53,516
 So always remember
 
-00:16:53.516 --> 00:16:55.806 A:middle
+
+321
+00:16:53,516 --> 00:16:55,806
 to use appropriate
 sizes for your images.
 
-00:16:56.486 --> 00:16:59.446 A:middle
+
+322
+00:16:56,486 --> 00:16:59,446
 If you give us an
 image, we will resize it
 
-00:16:59.446 --> 00:17:02.216 A:middle
+
+323
+00:16:59,446 --> 00:17:02,216
 for whatever you tell us
 to display on the screen.
 
 
-
-00:16:59.446 --> 00:17:02.216 A:middle
-for whatever you tell us
-to display on the screen.
-
-00:17:03.286 --> 00:17:06.076 A:middle
+324
+00:17:03,286 --> 00:17:06,076
 But by doing, that you are
 adding more processing cycles
 
-00:17:06.286 --> 00:17:08.965 A:middle
+
+325
+00:17:06,286 --> 00:17:08,965
 from our -- from the WatchKit
 side on the watch, right?
 
-00:17:08.965 --> 00:17:12.316 A:middle
+
+326
+00:17:08,965 --> 00:17:12,316
 So you have the ability to
 resize your images properly,
 
-00:17:13.026 --> 00:17:15.175 A:middle
+
+327
+00:17:13,026 --> 00:17:15,175
 either on the phone or in
 your servers, if they happen
 
-00:17:15.175 --> 00:17:18.195 A:middle
+
+328
+00:17:15,175 --> 00:17:18,195
 to be dynamic images and
 this makes an impact,
 
-00:17:18.356 --> 00:17:20.896 A:middle
+
+329
+00:17:18,356 --> 00:17:20,896
 in terms of the rendering
 of your UI.
 
-00:17:22.316 --> 00:17:25.425 A:middle
+
+330
+00:17:22,316 --> 00:17:25,425
 Finally, you will have
 some images that need
 
-00:17:25.425 --> 00:17:27.146 A:middle
+
+331
+00:17:25,425 --> 00:17:27,146
 to be resized, for
 example, buttons.
 
-00:17:28.566 --> 00:17:30.886 A:middle
+
+332
+00:17:28,566 --> 00:17:30,886
 You can use -- you don't
 need multiple sizes.
 
-00:17:30.886 --> 00:17:32.396 A:middle
+
+333
+00:17:30,886 --> 00:17:32,396
 You can use image slicing.
 
-00:17:32.396 --> 00:17:35.256 A:middle
+
+334
+00:17:32,396 --> 00:17:35,256
 This is a UI that you have
 in your asset catalogs
 
-00:17:35.256 --> 00:17:37.336 A:middle
+
+335
+00:17:35,256 --> 00:17:37,336
 and Interface Builder,
 you can slice your images
 
-00:17:37.336 --> 00:17:38.816 A:middle
+
+336
+00:17:37,336 --> 00:17:38,816
 and tell us how they
 are resizing
 
-00:17:39.326 --> 00:17:40.586 A:middle
+
+337
+00:17:39,326 --> 00:17:40,586
 and we do the right thing.
 
-00:17:40.586 --> 00:17:43.346 A:middle
+
+338
+00:17:40,586 --> 00:17:43,346
 So you can give us one
 particular image set
 
-00:17:43.936 --> 00:17:45.676 A:middle
+
+339
+00:17:43,936 --> 00:17:45,676
 and we will -- it
 will be applicable
 
-00:17:45.676 --> 00:17:48.536 A:middle
+
+340
+00:17:45,676 --> 00:17:48,536
 for different sizes in your UI.
 
-00:17:49.596 --> 00:17:53.006 A:middle
+
+341
+00:17:49,596 --> 00:17:53,006
 So this is the end of the static
 part of the talk and now I would
 
-00:17:53.006 --> 00:17:56.816 A:middle
+
+342
+00:17:53,006 --> 00:17:56,816
 like to invite Tom up to
 add more dynamic aspects
 
-00:17:56.816 --> 00:17:57.506 A:middle
+
+343
+00:17:56,816 --> 00:17:57,506
 to this model.
 
-00:17:58.516 --> 00:18:01.006 A:middle
+
+344
+00:17:58,516 --> 00:18:01,006
 [ Applause ]
 
 
+345
+00:18:01,506 --> 00:18:01,646
+>> TOM WITKIN: Awesome.
 
-00:17:58.516 --> 00:18:01.006 A:middle
-[ Applause ]
 
-00:18:01.506 --> 00:18:01.646 A:middle
-&gt;&gt; TOM WITKIN: Awesome.
-
-00:18:03.626 --> 00:18:06.936 A:middle
+346
+00:18:03,626 --> 00:18:06,936
 Hello. I'm Tom, I
 also work on WatchKit.
 
-00:18:06.936 --> 00:18:09.856 A:middle
+
+347
+00:18:06,936 --> 00:18:09,856
 We will be discussing
 animations and introducing those
 
-00:18:10.136 --> 00:18:13.046 A:middle
+
+348
+00:18:10,136 --> 00:18:13,046
 into both your existing and
 your new Watch OS 2 apps.
 
-00:18:13.696 --> 00:18:15.546 A:middle
+
+349
+00:18:13,696 --> 00:18:15,546
 We will start off with
 some existing types
 
-00:18:15.546 --> 00:18:17.566 A:middle
+
+350
+00:18:15,546 --> 00:18:17,566
 of animation available
 in Watch OS 1.
 
-00:18:18.206 --> 00:18:20.396 A:middle
+
+351
+00:18:18,206 --> 00:18:20,396
 So tables are really flexible.
 
-00:18:20.836 --> 00:18:23.686 A:middle
+
+352
+00:18:20,836 --> 00:18:23,686
 In certain updates on
 tables will already animate.
 
-00:18:24.226 --> 00:18:27.426 A:middle
+
+353
+00:18:24,226 --> 00:18:27,426
 If you insert rows,
 if you remove rows
 
-00:18:27.946 --> 00:18:29.996 A:middle
+
+354
+00:18:27,946 --> 00:18:29,996
 or if you update the
 content within a row,
 
-00:18:29.996 --> 00:18:34.106 A:middle
+
+355
+00:18:29,996 --> 00:18:34,106
 they will actually animate and
 we will talk about all of these.
 
-00:18:34.306 --> 00:18:35.886 A:middle
+
+356
+00:18:34,306 --> 00:18:35,886
 So all of our examples
 are going to be
 
-00:18:35.886 --> 00:18:37.496 A:middle
+
+357
+00:18:35,886 --> 00:18:37,496
 within the context
 of our recipe app.
 
-00:18:38.116 --> 00:18:39.856 A:middle
+
+358
+00:18:38,116 --> 00:18:39,856
 So let's start on
 the recipe list.
 
-00:18:40.266 --> 00:18:43.396 A:middle
+
+359
+00:18:40,266 --> 00:18:43,396
 And it would be great if
 we could provide a way
 
-00:18:43.396 --> 00:18:47.556 A:middle
+
+360
+00:18:43,396 --> 00:18:47,556
 to sort the list, either -- so
 by ranking that we have assigned
 
-00:18:47.966 --> 00:18:49.036 A:middle
+
+361
+00:18:47,966 --> 00:18:49,036
 or maybe alphabetical.
 
-00:18:49.656 --> 00:18:54.416 A:middle
+
+362
+00:18:49,656 --> 00:18:54,416
 It's not extremely clear
 how the list is being sorted
 
-00:18:54.416 --> 00:18:55.326 A:middle
+
+363
+00:18:54,416 --> 00:18:55,326
 as we are doing this.
 
-00:18:55.636 --> 00:18:58.546 A:middle
+
+364
+00:18:55,636 --> 00:18:58,546
 And so it would be great if
 we could possibly insert a row
 
-00:18:58.856 --> 00:19:01.326 A:middle
+
+365
+00:18:58,856 --> 00:19:01,326
 and say how the list is
 sorted and then after a couple
 
 
-
-00:18:58.856 --> 00:19:01.326 A:middle
-and say how the list is
-sorted and then after a couple
-
-00:19:01.326 --> 00:19:02.966 A:middle
+366
+00:19:01,326 --> 00:19:02,966
 of seconds, take
 it out of the UI.
 
-00:19:02.966 --> 00:19:05.216 A:middle
+
+367
+00:19:02,966 --> 00:19:05,216
 So how are we doing this?
 
-00:19:06.226 --> 00:19:07.166 A:middle
+
+368
+00:19:06,226 --> 00:19:07,166
 It's really simple.
 
-00:19:07.376 --> 00:19:08.006 A:middle
+
+369
+00:19:07,376 --> 00:19:08,006
 We have a table.
 
-00:19:08.006 --> 00:19:11.186 A:middle
+
+370
+00:19:08,006 --> 00:19:11,186
 And we are calling
 insert rows and indexes
 
-00:19:11.186 --> 00:19:13.516 A:middle
+
+371
+00:19:11,186 --> 00:19:13,516
 and we are inserting
 a row of status type.
 
-00:19:13.896 --> 00:19:18.236 A:middle
+
+372
+00:19:13,896 --> 00:19:18,236
 And then we are getting the row
 controller and updating the text
 
-00:19:18.236 --> 00:19:21.716 A:middle
+
+373
+00:19:18,236 --> 00:19:21,716
 on that row and then we
 are scheduling a timer
 
-00:19:22.176 --> 00:19:24.016 A:middle
+
+374
+00:19:22,176 --> 00:19:24,016
 for a few seconds
 to remove the row
 
-00:19:24.636 --> 00:19:25.996 A:middle
+
+375
+00:19:24,636 --> 00:19:25,996
 and that method is
 then implemented here.
 
-00:19:26.546 --> 00:19:31.796 A:middle
+
+376
+00:19:26,546 --> 00:19:31,796
 And so inserting and removing
 rows can really add flexibility
 
-00:19:31.796 --> 00:19:33.036 A:middle
+
+377
+00:19:31,796 --> 00:19:33,036
 into your interfaces.
 
-00:19:33.836 --> 00:19:35.706 A:middle
+
+378
+00:19:33,836 --> 00:19:35,706
 And one thing to point
 out is you can insert
 
-00:19:35.706 --> 00:19:37.116 A:middle
+
+379
+00:19:35,706 --> 00:19:37,116
 or remove rows of any type.
 
-00:19:37.646 --> 00:19:40.316 A:middle
+
+380
+00:19:37,646 --> 00:19:40,316
 So for example, here we
 have a list of recipes,
 
-00:19:40.316 --> 00:19:43.456 A:middle
+
+381
+00:19:40,316 --> 00:19:43,456
 all the same type of cell,
 however we are inserting a row
 
-00:19:43.456 --> 00:19:45.476 A:middle
+
+382
+00:19:43,456 --> 00:19:45,476
 of an entirely different type.
 
-00:19:45.966 --> 00:19:48.626 A:middle
+
+383
+00:19:45,966 --> 00:19:48,626
 So, again, it allows you to
 have extremely dynamic content.
 
-00:19:49.116 --> 00:19:50.186 A:middle
+
+384
+00:19:49,116 --> 00:19:50,186
 So within your interfaces.
 
-00:19:50.796 --> 00:19:54.506 A:middle
+
+385
+00:19:50,796 --> 00:19:54,506
 I will also point out that if
 you want to update your tables
 
-00:19:54.706 --> 00:19:57.286 A:middle
+
+386
+00:19:54,706 --> 00:19:57,286
 and not animate we have 2 API
 that I'm sure you all know
 
-00:19:57.286 --> 00:19:59.956 A:middle
+
+387
+00:19:57,286 --> 00:19:59,956
 if you've used WatchKit
 or Watch OS 1.
 
 
-
-00:20:02.006 --> 00:20:05.746 A:middle
+388
+00:20:02,006 --> 00:20:05,746
 So moving on to the content
 within a row and we will tap
 
-00:20:05.746 --> 00:20:08.576 A:middle
+
+389
+00:20:05,746 --> 00:20:08,576
 into our detailed
 view of our recipe.
 
-00:20:08.836 --> 00:20:09.776 A:middle
+
+390
+00:20:08,836 --> 00:20:09,776
 And we have a description.
 
-00:20:10.356 --> 00:20:12.766 A:middle
+
+391
+00:20:10,356 --> 00:20:12,766
 And because of the size of
 Apple Watch, and the length
 
-00:20:12.766 --> 00:20:14.806 A:middle
+
+392
+00:20:12,766 --> 00:20:14,806
 of a description, we
 probably don't want
 
-00:20:14.806 --> 00:20:16.716 A:middle
+
+393
+00:20:14,806 --> 00:20:16,716
 to have the full description
 there all the time.
 
-00:20:17.376 --> 00:20:19.956 A:middle
+
+394
+00:20:17,376 --> 00:20:19,956
 And so we have implemented our
 description within a table row
 
-00:20:19.956 --> 00:20:21.476 A:middle
+
+395
+00:20:19,956 --> 00:20:21,476
 and we show a truncated version.
 
-00:20:22.066 --> 00:20:26.856 A:middle
+
+396
+00:20:22,066 --> 00:20:26,856
 It would be great if you tap on
 the row, it will expand in place
 
-00:20:26.856 --> 00:20:28.086 A:middle
+
+397
+00:20:26,856 --> 00:20:28,086
 and give the full description.
 
-00:20:28.966 --> 00:20:34.016 A:middle
+
+398
+00:20:28,966 --> 00:20:34,016
 And so it's really nice --
 it's a nice animation and it --
 
-00:20:34.246 --> 00:20:36.716 A:middle
+
+399
+00:20:34,246 --> 00:20:36,716
 it provides you -- and so
 the information you want,
 
-00:20:36.716 --> 00:20:38.436 A:middle
+
+400
+00:20:36,716 --> 00:20:38,436
 exactly when you want it.
 
-00:20:38.836 --> 00:20:40.046 A:middle
+
+401
+00:20:38,836 --> 00:20:40,046
 So how are we achieving this?
 
-00:20:40.046 --> 00:20:41.556 A:middle
+
+402
+00:20:40,046 --> 00:20:41,556
 I will go back to
 our blue boxes.
 
-00:20:43.106 --> 00:20:44.126 A:middle
+
+403
+00:20:43,106 --> 00:20:44,126
 So we have our table cell.
 
-00:20:44.156 --> 00:20:47.366 A:middle
+
+404
+00:20:44,156 --> 00:20:47,366
 And within the cell,
 we have a few labels.
 
-00:20:47.956 --> 00:20:50.096 A:middle
+
+405
+00:20:47,956 --> 00:20:50,096
 So we have our short label,
 which has a description
 
-00:20:50.096 --> 00:20:51.236 A:middle
+
+406
+00:20:50,096 --> 00:20:51,236
 with the truncated text.
 
-00:20:51.486 --> 00:20:55.196 A:middle
+
+407
+00:20:51,486 --> 00:20:55,196
 We have another label,
 which says tap to show more.
 
-00:20:56.186 --> 00:20:58.016 A:middle
+
+408
+00:20:56,186 --> 00:20:58,016
 And then also we actually
 have a third label.
 
-00:20:58.466 --> 00:20:59.906 A:middle
+
+409
+00:20:58,466 --> 00:20:59,906
 So that's a full
 descriptionlabel.
 
 
-
-00:21:01.186 --> 00:21:06.416 A:middle
+410
+00:21:01,186 --> 00:21:06,416
 So the initial state of our cell
 has the full description label
 
-00:21:06.416 --> 00:21:10.566 A:middle
+
+411
+00:21:06,416 --> 00:21:10,566
 hidden and all we are doing
 is the user taps on the cell,
 
-00:21:10.776 --> 00:21:12.406 A:middle
+
+412
+00:21:10,776 --> 00:21:12,406
 is we are reversing this.
 
-00:21:12.956 --> 00:21:15.606 A:middle
+
+413
+00:21:12,956 --> 00:21:15,606
 So we will unhide the
 full description label
 
-00:21:15.606 --> 00:21:19.556 A:middle
+
+414
+00:21:15,606 --> 00:21:19,556
 and we will hide the other
 ones and just this will allow
 
-00:21:19.556 --> 00:21:21.986 A:middle
+
+415
+00:21:19,556 --> 00:21:21,986
 that animation to happen,
 that we handle in WatchKit.
 
-00:21:22.296 --> 00:21:23.216 A:middle
+
+416
+00:21:22,296 --> 00:21:23,216
 So it's really simple.
 
-00:21:23.716 --> 00:21:24.956 A:middle
+
+417
+00:21:23,716 --> 00:21:24,956
 And, again, here's the code.
 
-00:21:24.956 --> 00:21:28.906 A:middle
+
+418
+00:21:24,956 --> 00:21:28,906
 So just in a few lines of code
 -- within your application,
 
-00:21:29.266 --> 00:21:31.116 A:middle
+
+419
+00:21:29,266 --> 00:21:31,116
 and it's a really
 great experience.
 
-00:21:35.276 --> 00:21:37.686 A:middle
+
+420
+00:21:35,276 --> 00:21:37,686
 And so, again, rows reload,
 
-00:21:37.686 --> 00:21:39.856 A:middle
+
+421
+00:21:37,686 --> 00:21:39,856
 whenever their content
 changes in height.
 
-00:21:40.186 --> 00:21:42.066 A:middle
+
+422
+00:21:40,186 --> 00:21:42,066
 So if you are reloading a
 row but it doesn't change
 
-00:21:42.066 --> 00:21:44.126 A:middle
+
+423
+00:21:42,066 --> 00:21:44,126
 in height, there's no animation.
 
-00:21:44.766 --> 00:21:49.086 A:middle
+
+424
+00:21:44,766 --> 00:21:49,086
 And so in order to achieve this,
 make sure your rows have a size
 
-00:21:49.126 --> 00:21:51.276 A:middle
+
+425
+00:21:49,126 --> 00:21:51,276
 to fit height, because if
 they have a fixed height,
 
-00:21:51.276 --> 00:21:52.686 A:middle
+
+426
+00:21:51,276 --> 00:21:52,686
 again the row isn't
 actually changing.
 
-00:21:57.636 --> 00:22:00.186 A:middle
+
+427
+00:21:57,636 --> 00:22:00,186
 So now we will go back
 to our recipe list
 
 
-
-00:21:57.636 --> 00:22:00.186 A:middle
-So now we will go back
-to our recipe list
-
-00:22:00.186 --> 00:22:02.036 A:middle
+428
+00:22:00,186 --> 00:22:02,036
 and visit a different
 type of animation.
 
-00:22:02.496 --> 00:22:07.186 A:middle
+
+429
+00:22:02,496 --> 00:22:07,186
 And back to our cell and I will
 call out these arrows here.
 
-00:22:07.756 --> 00:22:10.066 A:middle
+
+430
+00:22:07,756 --> 00:22:10,066
 It would be great
 if, as its displayed,
 
-00:22:10.276 --> 00:22:11.716 A:middle
+
+431
+00:22:10,276 --> 00:22:11,716
 we could add a flourish
 of some type
 
-00:22:12.106 --> 00:22:14.966 A:middle
+
+432
+00:22:12,106 --> 00:22:14,966
 so the arrows spin
 around, for example.
 
-00:22:15.616 --> 00:22:19.206 A:middle
+
+433
+00:22:15,616 --> 00:22:19,206
 We can accomplish this
 with an animated image.
 
-00:22:19.866 --> 00:22:23.366 A:middle
+
+434
+00:22:19,866 --> 00:22:23,366
 So animated images are really
 powerful, and they allow you
 
-00:22:23.366 --> 00:22:27.306 A:middle
+
+435
+00:22:23,366 --> 00:22:27,306
 to cycle through a series of
 images over a given duration.
 
-00:22:27.856 --> 00:22:32.506 A:middle
+
+436
+00:22:27,856 --> 00:22:32,506
 And they also allow you to
 repeat and reverse animations.
 
-00:22:32.846 --> 00:22:34.506 A:middle
+
+437
+00:22:32,846 --> 00:22:34,506
 And it's the only
 type of animation
 
-00:22:34.626 --> 00:22:36.176 A:middle
+
+438
+00:22:34,626 --> 00:22:36,176
 within WatchKit that
 will allow that.
 
-00:22:36.246 --> 00:22:38.046 A:middle
+
+439
+00:22:36,246 --> 00:22:38,046
 So, again, there
 are very powerful.
 
-00:22:39.216 --> 00:22:42.046 A:middle
+
+440
+00:22:39,216 --> 00:22:42,046
 I do want to point out,
 though, if you do have a series
 
-00:22:42.046 --> 00:22:45.336 A:middle
+
+441
+00:22:42,046 --> 00:22:45,336
 of images -- so the number
 of images can quickly add up
 
-00:22:45.606 --> 00:22:48.956 A:middle
+
+442
+00:22:45,606 --> 00:22:48,956
 and so their costs in terms
 of load times and performance,
 
-00:22:48.956 --> 00:22:51.516 A:middle
+
+443
+00:22:48,956 --> 00:22:51,516
 as well as -- and
 so memory usage.
 
-00:22:51.976 --> 00:22:55.256 A:middle
+
+444
+00:22:51,976 --> 00:22:55,256
 Keep that in mind and reduce
 the number of images as far
 
-00:22:55.256 --> 00:22:58.176 A:middle
+
+445
+00:22:55,256 --> 00:22:58,176
 as you can, and the size of the
 -- and the size of the images
 
-00:22:58.176 --> 00:22:59.456 A:middle
+
+446
+00:22:58,176 --> 00:22:59,456
 and you will get
 better performance.
 
 
-
-00:23:02.496 --> 00:23:05.526 A:middle
+447
+00:23:02,496 --> 00:23:05,526
 I also want to point out
 now our new picker object,
 
-00:23:05.596 --> 00:23:10.376 A:middle
+
+448
+00:23:05,596 --> 00:23:10,376
 in Watch OS 2, and it allows
 you to scrub through the images
 
-00:23:10.586 --> 00:23:13.336 A:middle
+
+449
+00:23:10,586 --> 00:23:13,336
 within an animated image
 so with a Digital Crown.
 
-00:23:13.866 --> 00:23:16.446 A:middle
+
+450
+00:23:13,866 --> 00:23:16,446
 It's really powerful and
 it's a great experience.
 
-00:23:16.996 --> 00:23:21.156 A:middle
+
+451
+00:23:16,996 --> 00:23:21,156
 If you would like more
 information, there is a session,
 
-00:23:21.156 --> 00:23:25.006 A:middle
+
+452
+00:23:21,156 --> 00:23:25,006
 it's WatchKit In-Depth
 Part 2, it's to learn
 
-00:23:25.006 --> 00:23:26.186 A:middle
+
+453
+00:23:25,006 --> 00:23:26,186
 about the new picker object.
 
-00:23:26.586 --> 00:23:31.976 A:middle
+
+454
+00:23:26,586 --> 00:23:31,976
 So that's existing
 functionality in WatchKit.
 
-00:23:31.976 --> 00:23:34.516 A:middle
+
+455
+00:23:31,976 --> 00:23:34,516
 I know a lot of people are
 interested in the new stuff,
 
-00:23:34.516 --> 00:23:37.236 A:middle
+
+456
+00:23:34,516 --> 00:23:37,236
 and so the animation API that we
 are introducing in Watch OS 2.
 
-00:23:38.216 --> 00:23:43.356 A:middle
+
+457
+00:23:38,216 --> 00:23:43,356
 So the animation API allows to
 you animate certain properties
 
-00:23:43.356 --> 00:23:49.246 A:middle
+
+458
+00:23:43,356 --> 00:23:49,246
 on your interface objects,
 including the opacity, the width
 
-00:23:49.246 --> 00:23:54.266 A:middle
+
+459
+00:23:49,246 --> 00:23:54,266
 and the height, the
 alignment, so left to right
 
-00:23:54.266 --> 00:23:55.646 A:middle
+
+460
+00:23:54,266 --> 00:23:55,646
 or top and bottom or center.
 
-00:23:57.086 --> 00:24:01.746 A:middle
+
+461
+00:23:57,086 --> 00:24:01,746
 The background colors on
 groups, so the color or the tint
 
 
-
-00:23:57.086 --> 00:24:01.746 A:middle
-The background colors on
-groups, so the color or the tint
-
-00:24:01.746 --> 00:24:06.546 A:middle
+462
+00:24:01,746 --> 00:24:06,546
 on an image like we have here on
 the slide and the group insets.
 
-00:24:07.836 --> 00:24:09.316 A:middle
+
+463
+00:24:07,836 --> 00:24:09,316
 So a lot of stuff
 that you can animate.
 
-00:24:09.316 --> 00:24:14.956 A:middle
+
+464
+00:24:09,316 --> 00:24:14,956
 If you have used -- if you
 have programmed on iOS,
 
-00:24:15.606 --> 00:24:17.546 A:middle
+
+465
+00:24:15,606 --> 00:24:17,546
 the API may look familiar.
 
-00:24:17.966 --> 00:24:20.466 A:middle
+
+466
+00:24:17,966 --> 00:24:20,466
 It takes a duration
 and an animation block
 
-00:24:20.926 --> 00:24:22.626 A:middle
+
+467
+00:24:20,926 --> 00:24:22,626
 and all the updates you perform
 
-00:24:22.626 --> 00:24:24.456 A:middle
+
+468
+00:24:22,626 --> 00:24:24,456
 within the animation
 block will be animated
 
-00:24:24.826 --> 00:24:25.866 A:middle
+
+469
+00:24:24,826 --> 00:24:25,866
 to the given duration.
 
-00:24:26.486 --> 00:24:30.686 A:middle
+
+470
+00:24:26,486 --> 00:24:30,686
 So we will just jump right in
 and talk about some examples
 
-00:24:31.056 --> 00:24:32.616 A:middle
+
+471
+00:24:31,056 --> 00:24:32,616
 and hopefully show
 some techniques,
 
-00:24:32.666 --> 00:24:36.966 A:middle
+
+472
+00:24:32,666 --> 00:24:36,966
 as well as how you can integrate
 this into your WatchKit apps.
 
-00:24:38.306 --> 00:24:41.796 A:middle
+
+473
+00:24:38,306 --> 00:24:41,796
 And so our first example will
 go back to our detailed view
 
-00:24:41.796 --> 00:24:44.666 A:middle
+
+474
+00:24:41,796 --> 00:24:44,666
 in the app and tap into
 the serving screen.
 
-00:24:45.406 --> 00:24:48.346 A:middle
+
+475
+00:24:45,406 --> 00:24:48,346
 And we are going to add an
 animation of where the circles
 
-00:24:48.676 --> 00:24:50.646 A:middle
+
+476
+00:24:48,676 --> 00:24:50,646
 around the ring will
 fade in sequentially.
 
-00:24:51.146 --> 00:24:55.376 A:middle
+
+477
+00:24:51,146 --> 00:24:55,376
 So like this.
 
-00:24:55.606 --> 00:24:59.366 A:middle
+
+478
+00:24:55,606 --> 00:24:59,366
 So in code, we are going
 to loop through our groups
 
-00:24:59.366 --> 00:25:00.296 A:middle
+
+479
+00:24:59,366 --> 00:25:00,296
 around that outer ring.
 
 
-
-00:24:59.366 --> 00:25:00.296 A:middle
-around that outer ring.
-
-00:25:00.296 --> 00:25:01.726 A:middle
+480
+00:25:00,296 --> 00:25:01,726
 So every circle is a group.
 
-00:25:02.796 --> 00:25:06.776 A:middle
+
+481
+00:25:02,796 --> 00:25:06,776
 We will create a dispatch block
 and schedule our animation.
 
-00:25:07.456 --> 00:25:10.236 A:middle
+
+482
+00:25:07,456 --> 00:25:10,236
 And then within the block,
 we will animate the alpha
 
-00:25:10.236 --> 00:25:13.376 A:middle
+
+483
+00:25:10,236 --> 00:25:13,376
 of the group, and
 it will fade in.
 
-00:25:13.746 --> 00:25:17.326 A:middle
+
+484
+00:25:13,746 --> 00:25:17,326
 So it's a very simple,
 but you get a cool effect.
 
-00:25:18.186 --> 00:25:20.826 A:middle
+
+485
+00:25:18,186 --> 00:25:20,826
 I also want to point out, we
 are introducing two new API.
 
-00:25:21.596 --> 00:25:24.396 A:middle
+
+486
+00:25:21,596 --> 00:25:24,396
 So did appear and will
 disappear and they are
 
-00:25:24.396 --> 00:25:25.966 A:middle
+
+487
+00:25:24,396 --> 00:25:25,966
 on WKInterfaceController.
 
-00:25:26.416 --> 00:25:29.206 A:middle
+
+488
+00:25:26,416 --> 00:25:29,206
 These are important for your
 animation and I will talk
 
-00:25:29.206 --> 00:25:31.556 A:middle
+
+489
+00:25:29,206 --> 00:25:31,556
 about that in a moment,
 I'll also point
 
-00:25:31.556 --> 00:25:32.996 A:middle
+
+490
+00:25:31,556 --> 00:25:32,996
 out that this is
 coming in a future seed.
 
-00:25:33.626 --> 00:25:42.016 A:middle
+
+491
+00:25:33,626 --> 00:25:42,016
 So in this interface, use
 did appear not will activate
 
-00:25:42.086 --> 00:25:43.786 A:middle
+
+492
+00:25:42,086 --> 00:25:43,786
 if you are beginning
 an animation
 
-00:25:43.986 --> 00:25:45.466 A:middle
+
+493
+00:25:43,986 --> 00:25:45,466
 on the appearance of a view.
 
-00:25:46.226 --> 00:25:48.856 A:middle
+
+494
+00:25:46,226 --> 00:25:48,856
 I know a lot of people are
 using will activate right now
 
-00:25:48.856 --> 00:25:52.556 A:middle
+
+495
+00:25:48,856 --> 00:25:52,556
 to start an animation, so will
 activate is probably called
 
-00:25:52.676 --> 00:25:55.846 A:middle
+
+496
+00:25:52,676 --> 00:25:55,846
 prior to it appearing on the
 screen so it's not a good place
 
-00:25:55.846 --> 00:25:56.776 A:middle
+
+497
+00:25:55,846 --> 00:25:56,776
 to start your animation.
 
-00:25:57.056 --> 00:26:00.636 A:middle
+
+498
+00:25:57,056 --> 00:26:00,636
 So use the did appear method.
 
 
-
-00:25:57.056 --> 00:26:00.636 A:middle
-So use the did appear method.
-
-00:26:00.636 --> 00:26:03.786 A:middle
+499
+00:26:00,636 --> 00:26:03,786
 Also you can stagger your
 animations with timers or GCD.
 
-00:26:03.786 --> 00:26:06.556 A:middle
+
+500
+00:26:03,786 --> 00:26:06,556
 If you do this, keep in mind,
 
-00:26:06.766 --> 00:26:10.106 A:middle
+
+501
+00:26:06,766 --> 00:26:10,106
 that you can only update a
 controller if it's active and so
 
-00:26:10.106 --> 00:26:12.756 A:middle
+
+502
+00:26:10,106 --> 00:26:12,756
 if you are animating after the
 controller has deactivated.
 
-00:26:13.366 --> 00:26:16.196 A:middle
+
+503
+00:26:13,366 --> 00:26:16,196
 So those updates won't
 actually be applied and so keep
 
-00:26:16.196 --> 00:26:18.256 A:middle
+
+504
+00:26:16,196 --> 00:26:18,256
 that in mind and make sure
 your controller is active.
 
-00:26:19.596 --> 00:26:23.126 A:middle
+
+505
+00:26:19,596 --> 00:26:23,126
 Also keep track of the total
 duration of your animation.
 
-00:26:23.476 --> 00:26:25.296 A:middle
+
+506
+00:26:23,476 --> 00:26:25,296
 If you are chaining
 a lot of animations,
 
-00:26:25.296 --> 00:26:27.166 A:middle
+
+507
+00:26:25,296 --> 00:26:27,166
 the duration can quickly add up,
 
-00:26:27.846 --> 00:26:30.476 A:middle
+
+508
+00:26:27,846 --> 00:26:30,476
 and most likely the user is
 only interacting with your app
 
-00:26:30.476 --> 00:26:33.896 A:middle
+
+509
+00:26:30,476 --> 00:26:33,896
 for a few seconds and if you
 have a multisecond animation,
 
-00:26:34.036 --> 00:26:38.006 A:middle
+
+510
+00:26:34,036 --> 00:26:38,006
 it's just prolonging your
 times within your apps.
 
-00:26:38.066 --> 00:26:41.026 A:middle
+
+511
+00:26:38,066 --> 00:26:41,026
 So be mindful of that.
 
-00:26:41.156 --> 00:26:44.376 A:middle
+
+512
+00:26:41,156 --> 00:26:44,376
 And also just for convenience,
 you can set your initial values
 
-00:26:44.376 --> 00:26:45.346 A:middle
+
+513
+00:26:44,376 --> 00:26:45,346
 within the storyboard.
 
-00:26:45.596 --> 00:26:48.906 A:middle
+
+514
+00:26:45,596 --> 00:26:48,906
 So for example, in this
 interface, all of the --
 
-00:26:48.956 --> 00:26:52.656 A:middle
+
+515
+00:26:48,956 --> 00:26:52,656
 so all the circles are initially
 hidden and have an alpha zero
 
-00:26:52.656 --> 00:26:55.016 A:middle
+
+516
+00:26:52,656 --> 00:26:55,016
 at the start and we can
 have that in the storyboard
 
-00:26:55.296 --> 00:26:56.806 A:middle
+
+517
+00:26:55,296 --> 00:26:56,806
 and not have to worry
 about it at runtime.
 
-00:26:57.376 --> 00:27:00.996 A:middle
+
+518
+00:26:57,376 --> 00:27:00,996
 So we will move on to
 our second example,
 
 
-
-00:26:57.376 --> 00:27:00.996 A:middle
-So we will move on to
-our second example,
-
-00:27:01.216 --> 00:27:03.696 A:middle
+519
+00:27:01,216 --> 00:27:03,696
 which is our ingredients screen.
 
-00:27:04.536 --> 00:27:06.946 A:middle
+
+520
+00:27:04,536 --> 00:27:06,946
 And it would be nice if we
 could have the labels fly in.
 
-00:27:07.626 --> 00:27:10.426 A:middle
+
+521
+00:27:07,626 --> 00:27:10,426
 So as you can see here.
 
-00:27:10.426 --> 00:27:12.516 A:middle
+
+522
+00:27:10,426 --> 00:27:12,516
 So we'll break out
 to our blue boxes.
 
-00:27:13.176 --> 00:27:16.396 A:middle
+
+523
+00:27:13,176 --> 00:27:16,396
 And so we have our table row.
 
-00:27:17.646 --> 00:27:20.526 A:middle
+
+524
+00:27:17,646 --> 00:27:20,526
 And as we showed earlier, we
 have our number background
 
-00:27:20.526 --> 00:27:21.996 A:middle
+
+525
+00:27:20,526 --> 00:27:21,996
 on the left which is the group
 
-00:27:22.416 --> 00:27:23.636 A:middle
+
+526
+00:27:22,416 --> 00:27:23,636
 and we have our label
 on the right.
 
-00:27:24.376 --> 00:27:26.626 A:middle
+
+527
+00:27:24,376 --> 00:27:26,626
 And now we are going to add a
 new group in between the two
 
-00:27:26.626 --> 00:27:28.126 A:middle
+
+528
+00:27:26,626 --> 00:27:28,126
 and we will call
 it a spacer group.
 
-00:27:28.636 --> 00:27:31.286 A:middle
+
+529
+00:27:28,636 --> 00:27:31,286
 And groups are really
 powerful in terms of laying
 
-00:27:31.286 --> 00:27:32.436 A:middle
+
+530
+00:27:31,286 --> 00:27:32,436
 out the content within them
 
-00:27:32.436 --> 00:27:34.706 A:middle
+
+531
+00:27:32,436 --> 00:27:34,706
 but they can also affect
 the content around them.
 
-00:27:34.746 --> 00:27:36.476 A:middle
+
+532
+00:27:34,746 --> 00:27:36,476
 So because the content --
 
-00:27:36.836 --> 00:27:39.826 A:middle
+
+533
+00:27:36,836 --> 00:27:39,826
 and so because our layout
 in WatchKit is flow based,
 
-00:27:40.406 --> 00:27:43.076 A:middle
+
+534
+00:27:40,406 --> 00:27:43,076
 a group within the flow
 can affect the other ones.
 
-00:27:43.636 --> 00:27:46.516 A:middle
+
+535
+00:27:43,636 --> 00:27:46,516
 So, for example, here,
 our initial state
 
-00:27:46.516 --> 00:27:50.336 A:middle
+
+536
+00:27:46,516 --> 00:27:50,336
 of the cell has the spacer group
 to be a full width and what
 
-00:27:50.336 --> 00:27:52.946 A:middle
+
+537
+00:27:50,336 --> 00:27:52,946
 that does is it actually
 pushes the label off the side
 
-00:27:52.946 --> 00:27:55.826 A:middle
+
+538
+00:27:52,946 --> 00:27:55,826
 of the screen, and so you
 can use this within --
 
-00:27:56.066 --> 00:27:58.486 A:middle
+
+539
+00:27:56,066 --> 00:27:58,486
 so within your apps,
 both for horizontal flow
 
-00:27:58.786 --> 00:28:00.546 A:middle
+
+540
+00:27:58,786 --> 00:28:00,546
 and vertical flow
 to kind of affect
 
 
-
-00:27:58.786 --> 00:28:00.546 A:middle
-and vertical flow
-to kind of affect
-
-00:28:00.546 --> 00:28:01.716 A:middle
+541
+00:28:00,546 --> 00:28:01,716
 where things are laying out.
 
-00:28:02.256 --> 00:28:05.636 A:middle
+
+542
+00:28:02,256 --> 00:28:05,636
 And then as we animate, all we
 are doing is updating the width
 
-00:28:05.636 --> 00:28:08.476 A:middle
+
+543
+00:28:05,636 --> 00:28:08,476
 of our spacer group and that
 label then will come in,
 
-00:28:08.736 --> 00:28:11.816 A:middle
+
+544
+00:28:08,736 --> 00:28:11,816
 because we are recalculating
 how our flow is laying
 
-00:28:11.816 --> 00:28:12.996 A:middle
+
+545
+00:28:11,816 --> 00:28:12,996
 out the interface.
 
-00:28:13.586 --> 00:28:19.106 A:middle
+
+546
+00:28:13,586 --> 00:28:19,106
 So in code, we are looping
 through all of our table rows
 
-00:28:20.326 --> 00:28:22.996 A:middle
+
+547
+00:28:20,326 --> 00:28:22,996
 and we are fading in both our
 number background and label,
 
-00:28:23.386 --> 00:28:25.246 A:middle
+
+548
+00:28:23,386 --> 00:28:25,246
 as well as setting the
 width on that spacer group
 
-00:28:25.616 --> 00:28:26.866 A:middle
+
+549
+00:28:25,616 --> 00:28:26,866
 and we are wrapping all of this
 
-00:28:26.866 --> 00:28:28.246 A:middle
+
+550
+00:28:26,866 --> 00:28:28,246
 within in a single
 animation block.
 
-00:28:28.706 --> 00:28:31.976 A:middle
+
+551
+00:28:28,706 --> 00:28:31,976
 If you can, you can improve
 your performance by wrapping all
 
-00:28:31.976 --> 00:28:34.436 A:middle
+
+552
+00:28:31,976 --> 00:28:34,436
 of your animations within
 a single block, however,
 
-00:28:34.436 --> 00:28:35.926 A:middle
+
+553
+00:28:34,436 --> 00:28:35,926
 as I just -- as I showed,
 
-00:28:35.926 --> 00:28:37.996 A:middle
+
+554
+00:28:35,926 --> 00:28:37,996
 if you are doing a sequential
 animation that's fine,
 
-00:28:37.996 --> 00:28:40.906 A:middle
+
+555
+00:28:37,996 --> 00:28:40,906
 but just keep in mind that
 having a lot of animations
 
-00:28:40.906 --> 00:28:42.626 A:middle
+
+556
+00:28:40,906 --> 00:28:42,626
 at once can affect
 the performance.
 
-00:28:43.136 --> 00:28:48.586 A:middle
+
+557
+00:28:43,136 --> 00:28:48,586
 So invisible spacer
 groups are really powerful
 
-00:28:48.816 --> 00:28:51.886 A:middle
+
+558
+00:28:48,816 --> 00:28:51,886
 and you can adjust the width,
 height or alignment of them
 
-00:28:51.886 --> 00:28:52.846 A:middle
+
+559
+00:28:51,886 --> 00:28:52,846
 and affect your layout.
 
-00:28:53.476 --> 00:28:57.306 A:middle
+
+560
+00:28:53,476 --> 00:28:57,306
 And one thing to point out is as
 you animate, we actually relay
 
-00:28:57.306 --> 00:29:00.846 A:middle
+
+561
+00:28:57,306 --> 00:29:00,846
 out your entire interface and
 this is how I can set the width
 
 
-
-00:28:57.306 --> 00:29:00.846 A:middle
-out your entire interface and
-this is how I can set the width
-
-00:29:00.846 --> 00:29:05.106 A:middle
+562
+00:29:00,846 --> 00:29:05,106
 on that group and the label is
 actually changing its position,
 
-00:29:05.106 --> 00:29:08.236 A:middle
+
+563
+00:29:05,106 --> 00:29:08,236
 even though I'm not -- and so
 I'm not changing it myself.
 
-00:29:11.976 --> 00:29:13.846 A:middle
+
+564
+00:29:11,976 --> 00:29:13,846
 And so now on to
 our third example,
 
-00:29:13.846 --> 00:29:16.016 A:middle
+
+565
+00:29:13,846 --> 00:29:16,016
 which is the most
 complex of the examples.
 
-00:29:16.496 --> 00:29:20.466 A:middle
+
+566
+00:29:16,496 --> 00:29:20,466
 So we have this screen where
 you can add a note, and we'll --
 
-00:29:20.526 --> 00:29:23.186 A:middle
+
+567
+00:29:20,526 --> 00:29:23,186
 and if you tap on add note,
 we will have our default
 
-00:29:23.186 --> 00:29:24.546 A:middle
+
+568
+00:29:23,186 --> 00:29:24,546
 on text input on the system.
 
-00:29:24.946 --> 00:29:28.846 A:middle
+
+569
+00:29:24,946 --> 00:29:28,846
 If you choose an
 option, we'll insert --
 
-00:29:29.386 --> 00:29:31.406 A:middle
+
+570
+00:29:29,386 --> 00:29:31,406
 or we'll animate
 in a speech bubble.
 
-00:29:31.576 --> 00:29:34.126 A:middle
+
+571
+00:29:31,576 --> 00:29:34,126
 And so already we have
 a more complex animation
 
-00:29:34.586 --> 00:29:36.956 A:middle
+
+572
+00:29:34,586 --> 00:29:36,956
 but we're going to go
 one step further on this.
 
-00:29:37.646 --> 00:29:42.086 A:middle
+
+573
+00:29:37,646 --> 00:29:42,086
 And if you tap confirm,
 we will animate
 
-00:29:42.086 --> 00:29:43.296 A:middle
+
+574
+00:29:42,086 --> 00:29:43,296
 in a confirmation screen.
 
-00:29:43.616 --> 00:29:45.776 A:middle
+
+575
+00:29:43,616 --> 00:29:45,776
 So all of this is
 within one interface
 
-00:29:46.006 --> 00:29:47.826 A:middle
+
+576
+00:29:46,006 --> 00:29:47,826
 and it's all using
 the new animation API.
 
-00:29:48.856 --> 00:29:51.106 A:middle
+
+577
+00:29:48,856 --> 00:29:51,106
 And so we will break
 this up into two parts.
 
-00:29:51.106 --> 00:29:53.336 A:middle
+
+578
+00:29:51,106 --> 00:29:53,336
 Let's talk about the
 speech bubble first.
 
-00:29:56.416 --> 00:29:57.636 A:middle
+
+579
+00:29:56,416 --> 00:29:57,636
 So back to a wire frame.
 
-00:29:58.816 --> 00:30:00.676 A:middle
+
+580
+00:29:58,816 --> 00:30:00,676
 Within our interface,
 we have a group
 
 
-
-00:29:58.816 --> 00:30:00.676 A:middle
-Within our interface,
-we have a group
-
-00:30:01.136 --> 00:30:04.166 A:middle
+581
+00:30:01,136 --> 00:30:04,166
 and that's the text
 container I will call it.
 
-00:30:04.436 --> 00:30:06.896 A:middle
+
+582
+00:30:04,436 --> 00:30:06,896
 Within that, we have our
 text bubble which is on top,
 
-00:30:06.896 --> 00:30:07.956 A:middle
+
+583
+00:30:06,896 --> 00:30:07,956
 which has our label in it.
 
-00:30:08.426 --> 00:30:13.636 A:middle
+
+584
+00:30:08,426 --> 00:30:13,636
 And then below that, we have
 our confirmation button.
 
-00:30:13.636 --> 00:30:18.826 A:middle
+
+585
+00:30:13,636 --> 00:30:18,826
 As we animate, our initial
 state has our text, so bottom
 
-00:30:18.956 --> 00:30:22.226 A:middle
+
+586
+00:30:18,956 --> 00:30:22,226
 and right aligned,
 as you can see here,
 
-00:30:22.226 --> 00:30:23.386 A:middle
+
+587
+00:30:22,226 --> 00:30:23,386
 the button is faded out.
 
-00:30:24.426 --> 00:30:27.726 A:middle
+
+588
+00:30:24,426 --> 00:30:27,726
 As we animate, we will update
 the width of our text bubble
 
-00:30:27.726 --> 00:30:29.916 A:middle
+
+589
+00:30:27,726 --> 00:30:29,916
 and the height and
 fade both that
 
-00:30:30.356 --> 00:30:33.216 A:middle
+
+590
+00:30:30,356 --> 00:30:33,216
 and the button in,
 as you can see here.
 
-00:30:33.806 --> 00:30:37.616 A:middle
+
+591
+00:30:33,806 --> 00:30:37,616
 And so we get that effect --
 
-00:30:37.616 --> 00:30:41.446 A:middle
+
+592
+00:30:37,616 --> 00:30:41,446
 and so we get that effect
 with just a few lines of code.
 
-00:30:41.446 --> 00:30:43.406 A:middle
+
+593
+00:30:41,446 --> 00:30:43,406
 On the text bubble, we
 were updating the width,
 
-00:30:43.576 --> 00:30:46.706 A:middle
+
+594
+00:30:43,576 --> 00:30:46,706
 the height and alpha as I said.
 
-00:30:46.706 --> 00:30:48.906 A:middle
+
+595
+00:30:46,706 --> 00:30:48,906
 And the size to fit
 height is because we want
 
-00:30:48.906 --> 00:30:50.406 A:middle
+
+596
+00:30:48,906 --> 00:30:50,406
 to fit the full text
 of that label.
 
-00:30:50.956 --> 00:30:54.486 A:middle
+
+597
+00:30:50,956 --> 00:30:54,486
 Regardless of how long
 that note is, it will fit.
 
-00:30:55.896 --> 00:30:59.066 A:middle
+
+598
+00:30:55,896 --> 00:30:59,066
 We will fade in the button
 by updating the alpha
 
 
-
-00:31:00.466 --> 00:31:02.536 A:middle
+599
+00:31:00,466 --> 00:31:02,536
 and we'll update the
 height of the text container
 
-00:31:02.536 --> 00:31:03.566 A:middle
+
+600
+00:31:02,536 --> 00:31:03,566
 as well to fit everything.
 
-00:31:04.856 --> 00:31:07.226 A:middle
+
+601
+00:31:04,856 --> 00:31:07,226
 And wrapping all of that
 within an animation block.
 
-00:31:07.746 --> 00:31:11.346 A:middle
+
+602
+00:31:07,746 --> 00:31:11,346
 So that's part one
 of that animation.
 
-00:31:12.466 --> 00:31:15.556 A:middle
+
+603
+00:31:12,466 --> 00:31:15,556
 Part two is where we show
 the confirmation screen.
 
-00:31:16.086 --> 00:31:21.066 A:middle
+
+604
+00:31:16,086 --> 00:31:21,066
 And so back to our blue boxes.
 
-00:31:21.706 --> 00:31:25.876 A:middle
+
+605
+00:31:21,706 --> 00:31:25,876
 Here we have our text container
 and I won't include the objects
 
-00:31:25.876 --> 00:31:27.236 A:middle
+
+606
+00:31:25,876 --> 00:31:27,236
 within that here
 just for clarity.
 
-00:31:28.006 --> 00:31:31.756 A:middle
+
+607
+00:31:28,006 --> 00:31:31,756
 But also within the interface
 below, we have another group,
 
-00:31:31.756 --> 00:31:34.086 A:middle
+
+608
+00:31:31,756 --> 00:31:34,086
 which I will call the
 confirmation container.
 
-00:31:34.086 --> 00:31:37.046 A:middle
+
+609
+00:31:34,086 --> 00:31:37,046
 And so what we are doing here
 is we are wrapping the different
 
-00:31:37.046 --> 00:31:39.746 A:middle
+
+610
+00:31:37,046 --> 00:31:39,746
 parts of our interfaces
 in their own groups,
 
-00:31:40.006 --> 00:31:42.886 A:middle
+
+611
+00:31:40,006 --> 00:31:42,886
 and what that allows
 us is we can --
 
-00:31:42.886 --> 00:31:45.716 A:middle
+
+612
+00:31:42,886 --> 00:31:45,716
 we can collapse or expand them
 
-00:31:46.006 --> 00:31:47.846 A:middle
+
+613
+00:31:46,006 --> 00:31:47,846
 to show different
 parts of the interface.
 
-00:31:48.336 --> 00:31:51.666 A:middle
+
+614
+00:31:48,336 --> 00:31:51,666
 For example, here is the
 initial state of that interface.
 
-00:31:52.126 --> 00:31:53.996 A:middle
+
+615
+00:31:52,126 --> 00:31:53,996
 So the text container
 is full height
 
-00:31:54.516 --> 00:31:57.826 A:middle
+
+616
+00:31:54,516 --> 00:31:57,826
 and the confirmation container
 actually has a height of zero
 
-00:31:58.116 --> 00:32:00.596 A:middle
+
+617
+00:31:58,116 --> 00:32:00,596
 and so it's hidden on screen.
 
 
-
-00:31:58.116 --> 00:32:00.596 A:middle
-and so it's hidden on screen.
-
-00:32:01.076 --> 00:32:04.176 A:middle
+618
+00:32:01,076 --> 00:32:04,176
 And because of how our new
 behavior in the set width
 
-00:32:04.176 --> 00:32:07.496 A:middle
+
+619
+00:32:04,176 --> 00:32:07,496
 and set height API, you can
 actually achieve a higher width
 
-00:32:07.496 --> 00:32:07.966 A:middle
+
+620
+00:32:07,496 --> 00:32:07,966
 -than zero.
 
-00:32:09.076 --> 00:32:12.706 A:middle
+
+621
+00:32:09,076 --> 00:32:12,706
 As we animate, all we're
 doing is reversing the heights
 
-00:32:12.706 --> 00:32:13.116 A:middle
+
+622
+00:32:12,706 --> 00:32:13,116
 of these.
 
-00:32:13.726 --> 00:32:16.706 A:middle
+
+623
+00:32:13,726 --> 00:32:16,706
 So the text container
 now has a height of zero
 
-00:32:17.226 --> 00:32:20.986 A:middle
+
+624
+00:32:17,226 --> 00:32:20,986
 and the confirmation
 container now is a full height
 
-00:32:21.286 --> 00:32:22.826 A:middle
+
+625
+00:32:21,286 --> 00:32:22,826
 of the screen.
 
-00:32:23.876 --> 00:32:27.426 A:middle
+
+626
+00:32:23,876 --> 00:32:27,426
 In code, it's exactly what I
 said, we are updating the height
 
-00:32:27.496 --> 00:32:28.376 A:middle
+
+627
+00:32:27,496 --> 00:32:28,376
 of the text container,
 
-00:32:29.646 --> 00:32:32.626 A:middle
+
+628
+00:32:29,646 --> 00:32:32,626
 the height of the confirmation
 container and just wrapping
 
-00:32:32.626 --> 00:32:34.006 A:middle
+
+629
+00:32:32,626 --> 00:32:34,006
 that within an animation block.
 
-00:32:34.986 --> 00:32:37.836 A:middle
+
+630
+00:32:34,986 --> 00:32:37,836
 And so that's how you get
 the effect of one part
 
-00:32:37.836 --> 00:32:39.596 A:middle
+
+631
+00:32:37,836 --> 00:32:39,596
 of the interface sort
 of zooming off screen
 
-00:32:39.896 --> 00:32:41.616 A:middle
+
+632
+00:32:39,896 --> 00:32:41,616
 and the other zooming on.
 
-00:32:43.376 --> 00:32:48.406 A:middle
+
+633
+00:32:43,376 --> 00:32:48,406
 And so I want to bring out a few
 notes on animation, just to kind
 
-00:32:48.406 --> 00:32:50.556 A:middle
+
+634
+00:32:48,406 --> 00:32:50,556
 of wrap up and summarize
 but also just to point
 
-00:32:50.556 --> 00:32:52.566 A:middle
+
+635
+00:32:50,556 --> 00:32:52,566
 out a few gotchas that
 you might run into.
 
-00:32:54.316 --> 00:32:56.686 A:middle
+
+636
+00:32:54,316 --> 00:32:56,686
 So any update that
 affects the sizing
 
-00:32:56.726 --> 00:32:59.096 A:middle
+
+637
+00:32:56,726 --> 00:32:59,096
 of your interface
 objects can actually --
 
-00:32:59.516 --> 00:33:00.816 A:middle
+
+638
+00:32:59,516 --> 00:33:00,816
 can actually animate the layout.
 
 
-
-00:32:59.516 --> 00:33:00.816 A:middle
-can actually animate the layout.
-
-00:33:01.336 --> 00:33:04.206 A:middle
+639
+00:33:01,336 --> 00:33:04,206
 So, for example, if you
 update the text of a label,
 
-00:33:04.946 --> 00:33:08.636 A:middle
+
+640
+00:33:04,946 --> 00:33:08,636
 that is sized to fit, that label
 is changing in width or height
 
-00:33:09.166 --> 00:33:11.956 A:middle
+
+641
+00:33:09,166 --> 00:33:11,956
 and so if you do that
 within an animation block,
 
-00:33:11.956 --> 00:33:14.696 A:middle
+
+642
+00:33:11,956 --> 00:33:14,696
 it will actually animate to
 the new frame of that label.
 
-00:33:15.346 --> 00:33:18.516 A:middle
+
+643
+00:33:15,346 --> 00:33:18,516
 However, you won't actually
 be animating the application
 
-00:33:18.516 --> 00:33:20.706 A:middle
+
+644
+00:33:18,516 --> 00:33:20,706
 of the text, but just
 the sizing of that label.
 
-00:33:22.846 --> 00:33:25.576 A:middle
+
+645
+00:33:22,846 --> 00:33:25,576
 If you have lots of
 animations at once
 
-00:33:25.886 --> 00:33:30.386 A:middle
+
+646
+00:33:25,886 --> 00:33:30,386
 or if you have a complex type
 of layout within your interface,
 
-00:33:30.646 --> 00:33:33.006 A:middle
+
+647
+00:33:30,646 --> 00:33:33,006
 that can affect the performance,
 and so definitely keep
 
-00:33:33.006 --> 00:33:36.696 A:middle
+
+648
+00:33:33,006 --> 00:33:36,696
 that in mind, and absolutely
 make sure to test on hardware.
 
-00:33:37.076 --> 00:33:40.286 A:middle
+
+649
+00:33:37,076 --> 00:33:40,286
 So the simulator is a great
 way to build up your animations
 
-00:33:40.546 --> 00:33:42.056 A:middle
+
+650
+00:33:40,546 --> 00:33:42,056
 and to make sure
 everything is working,
 
-00:33:42.336 --> 00:33:43.686 A:middle
+
+651
+00:33:42,336 --> 00:33:43,686
 but for actual performance
 
-00:33:43.686 --> 00:33:45.406 A:middle
+
+652
+00:33:43,686 --> 00:33:45,406
 and to see how things
 will actually work,
 
-00:33:45.676 --> 00:33:46.876 A:middle
+
+653
+00:33:45,676 --> 00:33:46,876
 make sure to test on hardware.
 
-00:33:46.876 --> 00:33:48.196 A:middle
+
+654
+00:33:46,876 --> 00:33:48,196
 That's extremely important.
 
-00:33:49.696 --> 00:33:51.626 A:middle
+
+655
+00:33:49,696 --> 00:33:51,626
 And also a thing to point out is
 
-00:33:51.626 --> 00:33:52.936 A:middle
+
+656
+00:33:51,626 --> 00:33:52,936
 that this animation
 is functional
 
-00:33:52.936 --> 00:33:54.026 A:middle
+
+657
+00:33:52,936 --> 00:33:54,026
 within your applications.
 
-00:33:54.496 --> 00:33:57.836 A:middle
+
+658
+00:33:54,496 --> 00:33:57,836
 However, if you call it within
 a glance or notification.
 
-00:33:58.306 --> 00:34:00.126 A:middle
+
+659
+00:33:58,306 --> 00:34:00,126
 So those updates
 will still be applied
 
 
-
-00:33:58.306 --> 00:34:00.126 A:middle
-So those updates
-will still be applied
-
-00:34:00.126 --> 00:34:01.166 A:middle
+660
+00:34:00,126 --> 00:34:01,166
 but they won't be animated.
 
-00:34:01.906 --> 00:34:04.156 A:middle
+
+661
+00:34:01,906 --> 00:34:04,156
 And so there's no
 point in using this
 
-00:34:04.156 --> 00:34:05.516 A:middle
+
+662
+00:34:04,156 --> 00:34:05,516
 within a glance or
 a notification.
 
-00:34:06.106 --> 00:34:08.835 A:middle
+
+663
+00:34:06,106 --> 00:34:08,835
 A few more notes.
 
-00:34:10.045 --> 00:34:11.196 A:middle
+
+664
+00:34:10,045 --> 00:34:11,196
 So use with restraint.
 
-00:34:11.436 --> 00:34:12.876 A:middle
+
+665
+00:34:11,436 --> 00:34:12,876
 And that's because animation,
 
-00:34:13.005 --> 00:34:15.146 A:middle
+
+666
+00:34:13,005 --> 00:34:15,146
 it should never be the
 focus of your interface.
 
-00:34:15.706 --> 00:34:20.036 A:middle
+
+667
+00:34:15,706 --> 00:34:20,036
 If the animation is the reason
 that your interface exists,
 
-00:34:20.036 --> 00:34:22.596 A:middle
+
+668
+00:34:20,036 --> 00:34:22,596
 it probably is time
 to rethink that.
 
-00:34:22.916 --> 00:34:25.696 A:middle
+
+669
+00:34:22,916 --> 00:34:25,696
 And also, again, keep
 the total duration short.
 
-00:34:25.696 --> 00:34:29.786 A:middle
+
+670
+00:34:25,696 --> 00:34:29,786
 We -- so the amount of time
 within your app is probably
 
-00:34:29.786 --> 00:34:32.775 A:middle
+
+671
+00:34:29,786 --> 00:34:32,775
 on the order of seconds and so
 don't prolong the animation,
 
-00:34:32.775 --> 00:34:33.726 A:middle
+
+672
+00:34:32,775 --> 00:34:33,726
 like, any more than you have to.
 
-00:34:34.116 --> 00:34:35.596 A:middle
+
+673
+00:34:34,116 --> 00:34:35,596
 And there's a great
 session on this,
 
-00:34:35.596 --> 00:34:39.275 A:middle
+
+674
+00:34:35,596 --> 00:34:39,275
 "Designing with Animation",
 I highly recommend that.
 
-00:34:39.275 --> 00:34:42.496 A:middle
+
+675
+00:34:39,275 --> 00:34:42,496
 And so to wrap up and conclude
 the talk, and so layout
 
-00:34:42.496 --> 00:34:45.266 A:middle
+
+676
+00:34:42,496 --> 00:34:45,266
 in WatchKit is different
 than UIKit and AppKitt
 
-00:34:45.266 --> 00:34:46.866 A:middle
+
+677
+00:34:45,266 --> 00:34:46,866
 where it's specified
 in design time
 
-00:34:47.416 --> 00:34:49.876 A:middle
+
+678
+00:34:47,416 --> 00:34:49,876
 but very flexible at runtime.
 
-00:34:49.926 --> 00:34:54.056 A:middle
+
+679
+00:34:49,926 --> 00:34:54,056
 We have a lot of API and we're
 introducing a lot of new API
 
-00:34:54.156 --> 00:34:57.946 A:middle
+
+680
+00:34:54,156 --> 00:34:57,946
 that allows you to update, to
 update your UI at one time.
 
-00:34:59.136 --> 00:35:00.376 A:middle
+
+681
+00:34:59,136 --> 00:35:00,376
 Again, it's flow based
 
 
-
-00:34:59.136 --> 00:35:00.376 A:middle
-Again, it's flow based
-
-00:35:00.666 --> 00:35:04.296 A:middle
+682
+00:35:00,666 --> 00:35:04,296
 and so you are specifying
 the layout heuristics
 
-00:35:04.546 --> 00:35:07.856 A:middle
+
+683
+00:35:04,546 --> 00:35:07,856
 of your objects but WatchKit
 itself is doing all the layout.
 
-00:35:08.636 --> 00:35:10.246 A:middle
+
+684
+00:35:08,636 --> 00:35:10,246
 And groups are really powerful.
 
-00:35:10.646 --> 00:35:13.996 A:middle
+
+685
+00:35:10,646 --> 00:35:13,996
 And as you have seen, you can
 build very complex interfaces
 
-00:35:14.466 --> 00:35:19.416 A:middle
+
+686
+00:35:14,466 --> 00:35:19,416
 that you may not have thought
 were possible within WatchKit.
 
-00:35:19.416 --> 00:35:21.996 A:middle
+
+687
+00:35:19,416 --> 00:35:21,996
 And now to add animation
 within your apps.
 
-00:35:22.766 --> 00:35:26.116 A:middle
+
+688
+00:35:22,766 --> 00:35:26,116
 So animation is a great way
 to add liveliness or feedback
 
-00:35:26.116 --> 00:35:27.646 A:middle
+
+689
+00:35:26,116 --> 00:35:27,646
 within your apps, I'm
 sure you all know that.
 
-00:35:28.346 --> 00:35:30.646 A:middle
+
+690
+00:35:28,346 --> 00:35:30,646
 We have lots of ways
 already within WatchKit
 
-00:35:30.646 --> 00:35:35.136 A:middle
+
+691
+00:35:30,646 --> 00:35:35,136
 that you can introduce these
 animations and we are making
 
-00:35:35.136 --> 00:35:38.506 A:middle
+
+692
+00:35:35,136 --> 00:35:38,506
 that even more powerful
 in Watch OS 2.
 
-00:35:38.756 --> 00:35:41.526 A:middle
+
+693
+00:35:38,756 --> 00:35:41,526
 So for more information,
 there's a lot of documentation
 
-00:35:41.526 --> 00:35:44.426 A:middle
+
+694
+00:35:41,526 --> 00:35:44,426
 and technical support, we will
 also be releasing our sample
 
-00:35:44.426 --> 00:35:47.236 A:middle
+
+695
+00:35:44,426 --> 00:35:47,236
 code as a project on
 developer.Apple.com.
 
-00:35:47.966 --> 00:35:51.456 A:middle
+
+696
+00:35:47,966 --> 00:35:51,456
 And for general questions
 we have our evangelist,
 
-00:35:51.456 --> 00:35:52.956 A:middle
+
+697
+00:35:51,456 --> 00:35:52,956
 Jake Barrens.
 
-00:35:52.956 --> 00:35:56.296 A:middle
+
+698
+00:35:52,956 --> 00:35:56,296
 So ask him all the
 questions you may have.
 
-00:35:56.596 --> 00:35:59.496 A:middle
+
+699
+00:35:56,596 --> 00:35:59,496
 There's tons of related
 content this week
 
-00:35:59.956 --> 00:36:01.276 A:middle
+
+700
+00:35:59,956 --> 00:36:01,276
 and some are still happening.
 
 
-
-00:35:59.956 --> 00:36:01.276 A:middle
-and some are still happening.
-
-00:36:01.886 --> 00:36:05.216 A:middle
+701
+00:36:01,886 --> 00:36:05,216
 I want to point out the Tips
 and Tricks one tomorrow morning,
 
-00:36:05.546 --> 00:36:08.746 A:middle
+
+702
+00:36:05,546 --> 00:36:08,746
 and the Design Tips and
 Tricks one tomorrow afternoon.
 
-00:36:09.126 --> 00:36:09.976 A:middle
+
+703
+00:36:09,126 --> 00:36:09,976
 So both are very good.
 
-00:36:11.296 --> 00:36:11.946 A:middle
+
+704
+00:36:11,296 --> 00:36:11,946
 So thank you.
 
-00:36:11.946 --> 00:36:14.646 A:middle
+
+705
+00:36:11,946 --> 00:36:14,646
 Enjoy your time here.
 
-00:36:14.936 --> 00:36:15.286 A:middle
+
+706
+00:36:14,936 --> 00:36:15,286
 Thanks.
 
-00:36:16.516 --> 00:36:28.870 A:middle
+
+707
+00:36:16,516 --> 00:36:28,870
 [ Applause ]
 

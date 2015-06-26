@@ -1,3980 +1,5648 @@
-
-00:00:21.356 --> 00:00:22.976 A:middle
-&gt;&gt; CHRIS LATTNER: Welcome
+1
+00:00:21,356 --> 00:00:22,976
+>> CHRIS LATTNER: Welcome
 to What's New in Swift.
 
-00:00:23.516 --> 00:00:28.596 A:middle
+
+2
+00:00:23,516 --> 00:00:28,596
 [ Applause ]
 
-00:00:29.096 --> 00:00:30.096 A:middle
+
+3
+00:00:29,096 --> 00:00:30,096
 I'm Chris Lattner.
 
-00:00:30.096 --> 00:00:31.886 A:middle
+
+4
+00:00:30,096 --> 00:00:31,886
 I'll start off this talk
 
-00:00:31.886 --> 00:00:33.656 A:middle
+
+5
+00:00:31,886 --> 00:00:33,656
 and my colleague John
 McCall will take you
 
-00:00:33.656 --> 00:00:35.696 A:middle
+
+6
+00:00:33,656 --> 00:00:35,696
 through the second half to
 take you through what's new.
 
-00:00:36.626 --> 00:00:38.776 A:middle
+
+7
+00:00:36,626 --> 00:00:38,776
 Before we get going, I
 thought it would be interesting
 
-00:00:38.776 --> 00:00:41.466 A:middle
+
+8
+00:00:38,776 --> 00:00:41,466
 or helpful to look at what
 we're trying to do here.
 
-00:00:41.556 --> 00:00:44.456 A:middle
+
+9
+00:00:41,556 --> 00:00:44,456
 What are the goals and what are
 the philosophies behind Swift 2?
 
-00:00:45.426 --> 00:00:47.536 A:middle
+
+10
+00:00:45,426 --> 00:00:47,536
 We had three big things
 we were going for.
 
-00:00:48.276 --> 00:00:49.936 A:middle
+
+11
+00:00:48,276 --> 00:00:49,936
 First, fundamentals.
 
-00:00:50.356 --> 00:00:53.036 A:middle
+
+12
+00:00:50,356 --> 00:00:53,036
 We want the core features
 and the core behavior
 
-00:00:53.036 --> 00:00:55.146 A:middle
+
+13
+00:00:53,036 --> 00:00:55,146
 of the language and
 the tools to be great.
 
-00:00:55.846 --> 00:00:58.696 A:middle
+
+14
+00:00:55,846 --> 00:00:58,696
 A lot of this is taking a
 look at the feedback that many
 
-00:00:58.696 --> 00:01:01.276 A:middle
+
+15
+00:00:58,696 --> 00:01:01,276
 of you have produced in
 the process of using Swift.
 
 
-
-00:00:58.696 --> 00:01:01.276 A:middle
-of you have produced in
-the process of using Swift.
-
-00:01:01.616 --> 00:01:06.996 A:middle
+16
+00:01:01,616 --> 00:01:06,996
 So a lot of what this is is --
 
-00:01:06.996 --> 00:01:09.756 A:middle
+
+17
+00:01:06,996 --> 00:01:09,756
 I want to thank you for
 all the feedback you have.
 
-00:01:10.156 --> 00:01:11.856 A:middle
+
+18
+00:01:10,156 --> 00:01:11,856
 You guys are continuing
 to shape Swift
 
-00:01:12.276 --> 00:01:14.686 A:middle
+
+19
+00:01:12,276 --> 00:01:14,686
 through all the great feedback
 the producers have that use it.
 
-00:01:15.916 --> 00:01:17.266 A:middle
+
+20
+00:01:15,916 --> 00:01:17,266
 Second up is safety.
 
-00:01:18.096 --> 00:01:20.236 A:middle
+
+21
+00:01:18,096 --> 00:01:20,236
 Safety is a core value of Swift.
 
-00:01:21.326 --> 00:01:24.466 A:middle
+
+22
+00:01:21,326 --> 00:01:24,466
 We really want it to be easy
 to write safe code by default,
 
-00:01:24.896 --> 00:01:26.466 A:middle
+
+23
+00:01:24,896 --> 00:01:26,466
 and we think that
 the new availability
 
-00:01:26.466 --> 00:01:29.396 A:middle
+
+24
+00:01:26,466 --> 00:01:29,396
 in error handling constructs
 will be a great new way
 
-00:01:29.396 --> 00:01:30.006 A:middle
+
+25
+00:01:29,396 --> 00:01:30,006
 to do this.
 
-00:01:30.776 --> 00:01:32.086 A:middle
+
+26
+00:01:30,776 --> 00:01:32,086
 Third, beauty.
 
-00:01:33.086 --> 00:01:34.516 A:middle
+
+27
+00:01:33,086 --> 00:01:34,516
 We want your code
 to be beautiful.
 
-00:01:34.966 --> 00:01:38.156 A:middle
+
+28
+00:01:34,966 --> 00:01:38,156
 As programmers, we work
 with code all the time.
 
-00:01:38.316 --> 00:01:40.006 A:middle
+
+29
+00:01:38,316 --> 00:01:40,006
 This is quite important to us.
 
-00:01:40.386 --> 00:01:42.536 A:middle
+
+30
+00:01:40,386 --> 00:01:42,536
 We have added new things
 to Swift making it easier
 
-00:01:42.536 --> 00:01:44.776 A:middle
+
+31
+00:01:42,536 --> 00:01:44,776
 to write more beautiful
 and natural code.
 
-00:01:45.836 --> 00:01:48.706 A:middle
+
+32
+00:01:45,836 --> 00:01:48,706
 Today we'll talk about
 five new things in Swift.
 
-00:01:50.816 --> 00:01:53.246 A:middle
+
+33
+00:01:50,816 --> 00:01:53,246
 Before we get diving into
 what's new in Swift 2,
 
-00:01:53.246 --> 00:01:54.136 A:middle
+
+34
+00:01:53,246 --> 00:01:54,136
 I think it is important to point
 
-00:01:54.136 --> 00:01:57.146 A:middle
+
+35
+00:01:54,136 --> 00:01:57,146
 out that Swift 1.2 was
 also a huge update.
 
-00:01:57.146 --> 00:01:58.976 A:middle
+
+36
+00:01:57,146 --> 00:01:58,976
 It was released just
 three months ago.
 
-00:01:59.606 --> 00:02:01.846 A:middle
+
+37
+00:01:59,606 --> 00:02:01,846
 Because of time limitations,
 we don't have time
 
 
-
-00:01:59.606 --> 00:02:01.846 A:middle
-Because of time limitations,
-we don't have time
-
-00:02:01.846 --> 00:02:02.896 A:middle
+38
+00:02:01,846 --> 00:02:02,896
 to talk about it much.
 
-00:02:02.896 --> 00:02:04.926 A:middle
+
+39
+00:02:02,896 --> 00:02:04,926
 But if you're interested and
 you haven't seen it already,
 
-00:02:04.926 --> 00:02:07.686 A:middle
+
+40
+00:02:04,926 --> 00:02:07,686
 check out the Swift
 programming language book
 
-00:02:08.116 --> 00:02:09.526 A:middle
+
+41
+00:02:08,116 --> 00:02:09,526
 and the Xcode 6 release notes.
 
-00:02:10.666 --> 00:02:12.446 A:middle
+
+42
+00:02:10,666 --> 00:02:12,446
 Let's dive in and talk
 about fundamentals.
 
-00:02:13.656 --> 00:02:16.956 A:middle
+
+43
+00:02:13,656 --> 00:02:16,956
 Fundamentals is about
 refining the core behavior
 
-00:02:16.956 --> 00:02:18.366 A:middle
+
+44
+00:02:16,956 --> 00:02:18,366
 of the language and
 how it works together.
 
-00:02:19.026 --> 00:02:20.626 A:middle
+
+45
+00:02:19,026 --> 00:02:20,626
 So there are a lot of
 little things here.
 
-00:02:20.626 --> 00:02:23.806 A:middle
+
+46
+00:02:20,626 --> 00:02:23,806
 This will feel like a bit of a
 random walk, but stick with me.
 
-00:02:24.526 --> 00:02:25.586 A:middle
+
+47
+00:02:24,526 --> 00:02:25,586
 We'll start off with enums.
 
-00:02:26.796 --> 00:02:29.656 A:middle
+
+48
+00:02:26,796 --> 00:02:29,656
 Enums are one of
 Swift's best features.
 
-00:02:29.656 --> 00:02:33.156 A:middle
+
+49
+00:02:29,656 --> 00:02:33,156
 Here I have an enum enumerating
 some common household pets.
 
-00:02:33.686 --> 00:02:37.656 A:middle
+
+50
+00:02:33,686 --> 00:02:37,656
 Enums are great because they're
 simple to define and use.
 
-00:02:38.666 --> 00:02:41.656 A:middle
+
+51
+00:02:38,666 --> 00:02:41,656
 On the other hand, if you have
 played with them in a playground
 
-00:02:41.656 --> 00:02:44.906 A:middle
+
+52
+00:02:41,656 --> 00:02:44,906
 or printed one out, you may
 have been left wanting for more.
 
-00:02:46.306 --> 00:02:49.036 A:middle
+
+53
+00:02:46,306 --> 00:02:49,036
 In Swift 2, enums now carry
 enough reflection information
 
-00:02:49.036 --> 00:02:50.466 A:middle
+
+54
+00:02:49,036 --> 00:02:50,466
 that you can print them,
 and they work great.
 
-00:02:51.516 --> 00:02:56.546 A:middle
+
+55
+00:02:51,516 --> 00:02:56,546
 [ Applause ]
 
-00:02:57.046 --> 00:02:58.096 A:middle
-&gt;&gt; CHRIS LATTNER: Next,
+
+56
+00:02:57,046 --> 00:02:58,096
+>> CHRIS LATTNER: Next,
 associated values.
 
-00:02:59.056 --> 00:03:01.686 A:middle
+
+57
+00:02:59,056 --> 00:03:01,686
 Enums are also great because
 they're the perfect model
 
 
-
-00:02:59.056 --> 00:03:01.686 A:middle
-Enums are also great because
-they're the perfect model
-
-00:03:01.686 --> 00:03:04.126 A:middle
+58
+00:03:01,686 --> 00:03:04,126
 for discriminated
 union, which is great
 
-00:03:04.126 --> 00:03:07.266 A:middle
+
+59
+00:03:04,126 --> 00:03:07,266
 when you have two values of
 different types that you want
 
-00:03:07.266 --> 00:03:08.796 A:middle
+
+60
+00:03:07,266 --> 00:03:08,796
 to store in one thing.
 
-00:03:09.706 --> 00:03:12.086 A:middle
+
+61
+00:03:09,706 --> 00:03:12,086
 Right? Associated values are
 very powerful, maybe you went
 
-00:03:12.086 --> 00:03:14.826 A:middle
+
+62
+00:03:12,086 --> 00:03:14,826
 and tried to write the
 obvious thing in either type.
 
-00:03:15.446 --> 00:03:17.716 A:middle
+
+63
+00:03:15,446 --> 00:03:17,716
 This is a perfect way to
 model this, but when you went
 
-00:03:17.716 --> 00:03:20.796 A:middle
+
+64
+00:03:17,716 --> 00:03:20,796
 to use it, you got something
 depressing like this.
 
-00:03:22.076 --> 00:03:24.586 A:middle
+
+65
+00:03:22,076 --> 00:03:24,586
 Well, this has been very sad,
 and none of us like this.
 
-00:03:24.716 --> 00:03:26.816 A:middle
+
+66
+00:03:24,716 --> 00:03:26,816
 Now with Swift 2 it just works.
 
-00:03:27.516 --> 00:03:32.546 A:middle
+
+67
+00:03:27,516 --> 00:03:32,546
 [ Applause ]
 
-00:03:33.046 --> 00:03:34.836 A:middle
-&gt;&gt; CHRIS LATTNER: Let's
+
+68
+00:03:33,046 --> 00:03:34,836
+>> CHRIS LATTNER: Let's
 talk about recursion.
 
-00:03:34.836 --> 00:03:37.386 A:middle
+
+69
+00:03:34,836 --> 00:03:37,386
 Enums in Swift are actually
 algebraic data types,
 
-00:03:37.596 --> 00:03:38.666 A:middle
+
+70
+00:03:37,596 --> 00:03:38,666
 and in other languages,
 
-00:03:38.666 --> 00:03:41.726 A:middle
+
+71
+00:03:38,666 --> 00:03:41,726
 recursive algebraic data
 types are really powerful.
 
-00:03:41.726 --> 00:03:42.846 A:middle
+
+72
+00:03:41,726 --> 00:03:42,846
 You can do some really
 great things.
 
-00:03:42.846 --> 00:03:44.966 A:middle
+
+73
+00:03:42,846 --> 00:03:44,966
 The problem is in Swift,
 
-00:03:45.016 --> 00:03:47.096 A:middle
+
+74
+00:03:45,016 --> 00:03:47,096
 the values in an enum
 are stored inline.
 
-00:03:47.766 --> 00:03:49.246 A:middle
+
+75
+00:03:47,766 --> 00:03:49,246
 This means if you
 have a recursive enum,
 
-00:03:49.406 --> 00:03:51.966 A:middle
+
+76
+00:03:49,406 --> 00:03:51,966
 it has an infinite
 size, which is hard
 
-00:03:51.966 --> 00:03:53.536 A:middle
+
+77
+00:03:51,966 --> 00:03:53,536
 for our current devices to hold.
 
-00:03:53.706 --> 00:03:54.296 A:middle
+
+78
+00:03:53,706 --> 00:03:54,296
 Maybe next year.
 
-00:03:55.086 --> 00:03:58.386 A:middle
+
+79
+00:03:55,086 --> 00:03:58,386
 There are workarounds for this.
 
-00:03:58.386 --> 00:04:02.006 A:middle
+
+80
+00:03:58,386 --> 00:04:02,006
 Everybody has seen probably
 the box-type that you can turn
 
 
-
-00:03:58.386 --> 00:04:02.006 A:middle
-Everybody has seen probably
-the box-type that you can turn
-
-00:04:02.006 --> 00:04:04.166 A:middle
+81
+00:04:02,006 --> 00:04:04,166
 into a reference, but that
 breaks pattern matching,
 
-00:04:04.166 --> 00:04:05.236 A:middle
+
+82
+00:04:04,166 --> 00:04:05,236
 it is ugly and horrible.
 
-00:04:05.776 --> 00:04:08.196 A:middle
+
+83
+00:04:05,776 --> 00:04:08,196
 With Swift 2, there
 is a better way.
 
-00:04:08.606 --> 00:04:10.796 A:middle
+
+84
+00:04:08,606 --> 00:04:10,796
 It didn't quite make
 it into beta 1,
 
-00:04:10.976 --> 00:04:11.946 A:middle
+
+85
+00:04:10,976 --> 00:04:11,946
 but coming soon you'll be able
 
-00:04:11.946 --> 00:04:14.116 A:middle
+
+86
+00:04:11,946 --> 00:04:14,116
 to mark your cases
 indirect allowing you
 
-00:04:14.116 --> 00:04:16.656 A:middle
+
+87
+00:04:14,116 --> 00:04:16,656
 to express this naturally, and
 pattern matching works great.
 
-00:04:17.185 --> 00:04:20.125 A:middle
+
+88
+00:04:17,185 --> 00:04:20,125
 Let's move on and talk
 about scoping [applause].
 
-00:04:24.006 --> 00:04:26.546 A:middle
-&gt;&gt; CHRIS LATTNER: So sometimes
+
+89
+00:04:24,006 --> 00:04:26,546
+>> CHRIS LATTNER: So sometimes
 you have a name that you want
 
-00:04:26.546 --> 00:04:28.356 A:middle
+
+90
+00:04:26,546 --> 00:04:28,356
 to reuse or maybe a
 resource that you want
 
-00:04:28.356 --> 00:04:29.756 A:middle
+
+91
+00:04:28,356 --> 00:04:29,756
 to make sure is released early.
 
-00:04:30.836 --> 00:04:32.976 A:middle
+
+92
+00:04:30,836 --> 00:04:32,976
 We have introduced a new
 Do statement allowing you
 
-00:04:33.186 --> 00:04:34.806 A:middle
+
+93
+00:04:33,186 --> 00:04:34,806
 to introduce an explicit scope.
 
-00:04:35.546 --> 00:04:38.816 A:middle
+
+94
+00:04:35,546 --> 00:04:38,816
 In this case, we all have to
 deal with Internet trolls now
 
-00:04:38.866 --> 00:04:40.906 A:middle
+
+95
+00:04:38,866 --> 00:04:40,906
 and then, but we try
 to keep them bound
 
-00:04:40.906 --> 00:04:42.836 A:middle
+
+96
+00:04:40,906 --> 00:04:42,836
 as tightly as possible.
 
-00:04:42.836 --> 00:04:44.866 A:middle
+
+97
+00:04:42,836 --> 00:04:44,866
 Do is really important
 when we bring
 
-00:04:44.866 --> 00:04:46.146 A:middle
+
+98
+00:04:44,866 --> 00:04:46,146
 up error handling
 later in the talk.
 
-00:04:46.766 --> 00:04:50.016 A:middle
+
+99
+00:04:46,766 --> 00:04:50,016
 But taking Do as a keyword led
 to some potential ambiguity.
 
-00:04:50.326 --> 00:04:52.046 A:middle
+
+100
+00:04:50,326 --> 00:04:52,046
 It's not ambiguity
 for the compiler;
 
-00:04:52.146 --> 00:04:53.966 A:middle
+
+101
+00:04:52,146 --> 00:04:53,966
 it's ambiguity as we read code.
 
-00:04:54.896 --> 00:04:57.306 A:middle
+
+102
+00:04:54,896 --> 00:04:57,306
 You don't always see the bottom
 of a big, long statement,
 
-00:04:57.306 --> 00:04:58.546 A:middle
+
+103
+00:04:57,306 --> 00:04:58,546
 and we have a Do While loop.
 
-00:04:59.856 --> 00:05:03.736 A:middle
+
+104
+00:04:59,856 --> 00:05:03,736
 To make it superclear by just
 looking at the introducer
 
 
-
-00:04:59.856 --> 00:05:03.736 A:middle
-To make it superclear by just
-looking at the introducer
-
-00:05:03.736 --> 00:05:08.026 A:middle
+105
+00:05:03,736 --> 00:05:08,026
 for a statement of what it does,
 we want to make it superclear,
 
-00:05:08.396 --> 00:05:09.676 A:middle
+
+106
+00:05:08,396 --> 00:05:09,676
 what something does by looking
 
-00:05:09.676 --> 00:05:11.576 A:middle
+
+107
+00:05:09,676 --> 00:05:11,576
 at the introducer
 keyword for the statement.
 
-00:05:12.026 --> 00:05:15.646 A:middle
+
+108
+00:05:12,026 --> 00:05:15,646
 So we have taken the Do While
 loop and renamed it to Repeat.
 
-00:05:15.646 --> 00:05:18.866 A:middle
+
+109
+00:05:15,646 --> 00:05:18,866
 You can immediately tell from
 the top it that it is a loop,
 
-00:05:18.996 --> 00:05:19.966 A:middle
+
+110
+00:05:18,996 --> 00:05:19,966
 making it really
 easy [applause].
 
-00:05:20.336 --> 00:05:25.816 A:middle
-&gt;&gt; CHRIS LATTNER: Let's
+
+111
+00:05:20,336 --> 00:05:25,816
+>> CHRIS LATTNER: Let's
 talk about option sets.
 
-00:05:26.456 --> 00:05:29.546 A:middle
+
+112
+00:05:26,456 --> 00:05:29,546
 Option sets are a
 lightweight, superefficient way
 
-00:05:29.546 --> 00:05:31.186 A:middle
+
+113
+00:05:29,546 --> 00:05:31,186
 to represent a set of Booleans.
 
-00:05:31.836 --> 00:05:33.786 A:middle
+
+114
+00:05:31,836 --> 00:05:33,786
 You may have seen them if you've
 worked with various Cocoa APIs,
 
-00:05:33.786 --> 00:05:36.886 A:middle
+
+115
+00:05:33,786 --> 00:05:36,886
 and you use the see the See
 Like syntax to Or them together.
 
-00:05:37.796 --> 00:05:39.786 A:middle
+
+116
+00:05:37,796 --> 00:05:39,786
 The basic syntax like this
 is actually pretty nice.
 
-00:05:40.146 --> 00:05:43.496 A:middle
+
+117
+00:05:40,146 --> 00:05:43,496
 The problem is, when you get
 to the other syntaxes you end
 
-00:05:43.496 --> 00:05:45.616 A:middle
+
+118
+00:05:43,496 --> 00:05:45,616
 up using, it is a bit less nice.
 
-00:05:45.776 --> 00:05:48.066 A:middle
+
+119
+00:05:45,776 --> 00:05:48,066
 You create an empty-option
 set with nil --
 
-00:05:48.066 --> 00:05:50.296 A:middle
+
+120
+00:05:48,066 --> 00:05:50,296
 it doesn't make sense
 because option sets
 
-00:05:50.296 --> 00:05:52.466 A:middle
+
+121
+00:05:50,296 --> 00:05:52,466
 and optionals are
 completely different concepts
 
-00:05:52.466 --> 00:05:53.616 A:middle
+
+122
+00:05:52,466 --> 00:05:53,616
 and they're conflated together.
 
-00:05:54.186 --> 00:05:57.006 A:middle
+
+123
+00:05:54,186 --> 00:05:57,006
 You extract them with bitwise
 operations, which is a pain
 
-00:05:57.006 --> 00:06:00.836 A:middle
+
+124
+00:05:57,006 --> 00:06:00,836
 and super error-prone, and
 you can get it wrong easily.
 
 
-
-00:05:57.006 --> 00:06:00.836 A:middle
-and super error-prone, and
-you can get it wrong easily.
-
-00:06:00.886 --> 00:06:02.796 A:middle
+125
+00:06:00,886 --> 00:06:02,796
 With Swift 2 we have
 taken the option sets --
 
-00:06:02.876 --> 00:06:06.596 A:middle
+
+126
+00:06:02,876 --> 00:06:06,596
 this is even worse, because
 Swift 1.2 had a first-class set
 
-00:06:06.596 --> 00:06:09.326 A:middle
+
+127
+00:06:06,596 --> 00:06:09,326
 type, and now the
 combination of all
 
-00:06:09.326 --> 00:06:12.006 A:middle
+
+128
+00:06:09,326 --> 00:06:12,006
 of this makes option sets seem
 like an archaic throwback to C,
 
-00:06:12.556 --> 00:06:13.696 A:middle
+
+129
+00:06:12,556 --> 00:06:13,696
 which they are [laughter].
 
-00:06:15.726 --> 00:06:16.806 A:middle
-&gt;&gt; CHRIS LATTNER: But
+
+130
+00:06:15,726 --> 00:06:16,806
+>> CHRIS LATTNER: But
 Swift 2 solves this.
 
-00:06:16.806 --> 00:06:18.166 A:middle
+
+131
+00:06:16,806 --> 00:06:18,166
 It makes option sets set-like.
 
-00:06:18.866 --> 00:06:20.926 A:middle
+
+132
+00:06:18,866 --> 00:06:20,926
 That means option sets
 and sets are now formed
 
-00:06:20.926 --> 00:06:21.686 A:middle
+
+133
+00:06:20,926 --> 00:06:21,686
 with square brackets.
 
-00:06:22.226 --> 00:06:24.236 A:middle
+
+134
+00:06:22,226 --> 00:06:24,236
 That means you get empty
 sets with an empty set
 
-00:06:24.236 --> 00:06:27.566 A:middle
+
+135
+00:06:24,236 --> 00:06:27,566
 of square brackets, and you get
 the full set of standard set API
 
-00:06:27.566 --> 00:06:28.906 A:middle
+
+136
+00:06:27,566 --> 00:06:28,906
 to work with option sets.
 
-00:06:28.906 --> 00:06:30.766 A:middle
+
+137
+00:06:28,906 --> 00:06:30,766
 It is supereasy and great.
 
-00:06:31.516 --> 00:06:36.556 A:middle
+
+138
+00:06:31,516 --> 00:06:36,556
 [ Applause ]
 
-00:06:37.056 --> 00:06:37.496 A:middle
-&gt;&gt; CHRIS LATTNER:
+
+139
+00:06:37,056 --> 00:06:37,496
+>> CHRIS LATTNER:
 Now, it is also nice
 
-00:06:37.496 --> 00:06:39.186 A:middle
+
+140
+00:06:37,496 --> 00:06:39,186
 because you can define
 your own option sets
 
-00:06:39.186 --> 00:06:40.226 A:middle
+
+141
+00:06:39,186 --> 00:06:40,226
 in an easier way now.
 
-00:06:40.956 --> 00:06:43.266 A:middle
+
+142
+00:06:40,956 --> 00:06:43,266
 Now all you have to do is
 define your own set type,
 
-00:06:43.456 --> 00:06:48.696 A:middle
+
+143
+00:06:43,456 --> 00:06:48,696
 or struct type, struct type for
 your set, and have it conform
 
-00:06:48.696 --> 00:06:53.086 A:middle
+
+144
+00:06:48,696 --> 00:06:53,086
 to the new option set type
 protocol, find storage
 
-00:06:53.086 --> 00:06:55.916 A:middle
+
+145
+00:06:53,086 --> 00:06:55,916
 to hold your bits, and
 define the elements you want
 
-00:06:55.916 --> 00:06:57.206 A:middle
+
+146
+00:06:55,916 --> 00:06:57,206
 for your option set.
 
-00:06:58.366 --> 00:06:59.956 A:middle
+
+147
+00:06:58,366 --> 00:06:59,956
 With just a simple definition,
 
-00:06:59.956 --> 00:07:01.956 A:middle
+
+148
+00:06:59,956 --> 00:07:01,956
 you now get all the
 syntax we talked about.
 
 
-
-00:06:59.956 --> 00:07:01.956 A:middle
-you now get all the
-syntax we talked about.
-
-00:07:02.576 --> 00:07:04.386 A:middle
+149
+00:07:02,576 --> 00:07:04,386
 The thing that's
 supercool about this,
 
-00:07:04.386 --> 00:07:05.966 A:middle
+
+150
+00:07:04,386 --> 00:07:05,966
 it doesn't require
 any compiler matching.
 
-00:07:06.246 --> 00:07:07.726 A:middle
+
+151
+00:07:06,246 --> 00:07:07,726
 This is done automatically
 
-00:07:07.966 --> 00:07:10.276 A:middle
+
+152
+00:07:07,966 --> 00:07:10,276
 through a new feature called
 Default Implementations
 
-00:07:10.276 --> 00:07:13.816 A:middle
+
+153
+00:07:10,276 --> 00:07:13,816
 and Protocols provided
 by option set type.
 
-00:07:13.936 --> 00:07:16.496 A:middle
+
+154
+00:07:13,936 --> 00:07:16,496
 We don't have time to talk
 about Default Implementations
 
-00:07:16.496 --> 00:07:19.596 A:middle
+
+155
+00:07:16,496 --> 00:07:19,596
 and Protocols in detail here,
 but we have a session talking
 
-00:07:19.596 --> 00:07:21.566 A:middle
+
+156
+00:07:19,596 --> 00:07:21,566
 about protocols going
 into it deeply.
 
-00:07:21.566 --> 00:07:22.156 A:middle
+
+157
+00:07:21,566 --> 00:07:22,156
 It is great.
 
-00:07:23.276 --> 00:07:26.956 A:middle
+
+158
+00:07:23,276 --> 00:07:26,956
 Let's talk about
 functions and methods.
 
-00:07:27.416 --> 00:07:30.206 A:middle
+
+159
+00:07:27,416 --> 00:07:30,206
 Swift unifies functions
 and methods together
 
-00:07:30.206 --> 00:07:31.456 A:middle
+
+160
+00:07:30,206 --> 00:07:31,456
 into a single func declaration.
 
-00:07:31.866 --> 00:07:36.046 A:middle
+
+161
+00:07:31,866 --> 00:07:36,046
 This is a great thing that pulls
 two disparate concepts together
 
-00:07:36.046 --> 00:07:38.836 A:middle
+
+162
+00:07:36,046 --> 00:07:38,836
 in the type system into a
 beautiful functional core.
 
-00:07:39.576 --> 00:07:42.056 A:middle
+
+163
+00:07:39,576 --> 00:07:42,056
 This beautiful functional
 core is a key part of Swift
 
-00:07:42.236 --> 00:07:44.236 A:middle
+
+164
+00:07:42,236 --> 00:07:44,236
 that immediately falls
 apart when you try
 
-00:07:44.236 --> 00:07:46.776 A:middle
+
+165
+00:07:44,236 --> 00:07:46,776
 to call these things
 because they take different
 
-00:07:46.776 --> 00:07:48.956 A:middle
+
+166
+00:07:46,776 --> 00:07:48,956
 argument labels.
 
-00:07:48.956 --> 00:07:50.926 A:middle
+
+167
+00:07:48,956 --> 00:07:50,926
 This has been a huge
 pain for a lot of people.
 
-00:07:51.046 --> 00:07:53.836 A:middle
+
+168
+00:07:51,046 --> 00:07:53,836
 If we look at where
 this came from,
 
-00:07:53.976 --> 00:07:56.626 A:middle
+
+169
+00:07:53,976 --> 00:07:56,626
 Swift was following the
 precedent of Objective-C.
 
-00:07:57.246 --> 00:07:58.806 A:middle
+
+170
+00:07:57,246 --> 00:07:58,806
 C doesn't have argument labels,
 
-00:07:59.076 --> 00:08:00.886 A:middle
+
+171
+00:07:59,076 --> 00:08:00,886
 argument labels are
 superimportant for methods
 
 
-
-00:07:59.076 --> 00:08:00.886 A:middle
-argument labels are
-superimportant for methods
-
-00:08:00.886 --> 00:08:02.766 A:middle
+172
+00:08:00,886 --> 00:08:02,766
 in Objective-C, and
 Swift followed.
 
-00:08:04.006 --> 00:08:06.116 A:middle
+
+173
+00:08:04,006 --> 00:08:06,116
 With Swift 2, we
 fixed this and more.
 
-00:08:06.946 --> 00:08:10.396 A:middle
+
+174
+00:08:06,946 --> 00:08:10,396
 Now functions and methods have
 the same declaration syntax,
 
-00:08:10.966 --> 00:08:12.326 A:middle
+
+175
+00:08:10,966 --> 00:08:12,326
 and they work the same way.
 
-00:08:13.866 --> 00:08:15.646 A:middle
+
+176
+00:08:13,866 --> 00:08:15,646
 Now when you call
 a global function,
 
-00:08:15.646 --> 00:08:19.826 A:middle
+
+177
+00:08:15,646 --> 00:08:19,826
 you provide argument
 labels by default.
 
-00:08:19.826 --> 00:08:20.826 A:middle
+
+178
+00:08:19,826 --> 00:08:20,826
 Everything is uniform.
 
-00:08:21.516 --> 00:08:25.686 A:middle
+
+179
+00:08:21,516 --> 00:08:25,686
 [ Applause ]
 
-00:08:26.186 --> 00:08:27.446 A:middle
-&gt;&gt; CHRIS LATTNER: So the
+
+180
+00:08:26,186 --> 00:08:27,446
+>> CHRIS LATTNER: So the
 key thing to know here is
 
-00:08:27.446 --> 00:08:29.226 A:middle
+
+181
+00:08:27,446 --> 00:08:29,226
 that this affects
 pure Swift code.
 
-00:08:29.226 --> 00:08:30.866 A:middle
+
+182
+00:08:29,226 --> 00:08:30,866
 If you declare a global
 function in Swift,
 
-00:08:30.866 --> 00:08:32.155 A:middle
+
+183
+00:08:30,866 --> 00:08:32,155
 you get this behavior
 by default.
 
-00:08:33.256 --> 00:08:35.506 A:middle
+
+184
+00:08:33,256 --> 00:08:35,506
 Functions imported from
 C continue to behave
 
-00:08:35.506 --> 00:08:38.466 A:middle
+
+185
+00:08:35,506 --> 00:08:38,466
 in the same way they always
 have because argument names
 
-00:08:38.466 --> 00:08:40.576 A:middle
+
+186
+00:08:38,466 --> 00:08:40,576
 in C functions are
 not part of API
 
-00:08:40.576 --> 00:08:42.166 A:middle
+
+187
+00:08:40,576 --> 00:08:42,166
 and are not thought
 about as API.
 
-00:08:43.006 --> 00:08:45.416 A:middle
+
+188
+00:08:43,006 --> 00:08:45,416
 But we like Swift
 code going forward
 
-00:08:45.416 --> 00:08:46.936 A:middle
+
+189
+00:08:45,416 --> 00:08:46,936
 to include argument
 labels on functions.
 
-00:08:47.786 --> 00:08:49.386 A:middle
+
+190
+00:08:47,786 --> 00:08:49,386
 If you look deeper
 in what's going
 
-00:08:49.386 --> 00:08:51.716 A:middle
+
+191
+00:08:49,386 --> 00:08:51,716
 on here, there is even more.
 
-00:08:52.676 --> 00:08:55.216 A:middle
+
+192
+00:08:52,676 --> 00:08:55,216
 Swift functions take parameters,
 
-00:08:55.526 --> 00:08:58.566 A:middle
+
+193
+00:08:55,526 --> 00:08:58,566
 parameters can have two
 different names for each value.
 
-00:08:58.566 --> 00:09:01.816 A:middle
+
+194
+00:08:58,566 --> 00:09:01,816
 So when you declare
 something with the syntax,
 
 
-
-00:08:58.566 --> 00:09:01.816 A:middle
-So when you declare
-something with the syntax,
-
-00:09:02.066 --> 00:09:03.636 A:middle
+195
+00:09:02,066 --> 00:09:03,636
 you're actually getting
 a default behavior.
 
-00:09:04.676 --> 00:09:08.266 A:middle
+
+196
+00:09:04,676 --> 00:09:08,266
 The two names that a parameter
 can get are an external name
 
-00:09:08.266 --> 00:09:10.476 A:middle
+
+197
+00:09:08,266 --> 00:09:10,476
 that the caller sees
 and the internal name
 
-00:09:10.476 --> 00:09:11.626 A:middle
+
+198
+00:09:10,476 --> 00:09:11,626
 that the implementation sees.
 
-00:09:12.226 --> 00:09:16.406 A:middle
+
+199
+00:09:12,226 --> 00:09:16,406
 By default that first
 argument has no label shown
 
-00:09:16.406 --> 00:09:19.476 A:middle
+
+200
+00:09:16,406 --> 00:09:19,476
 to the external client of it and
 has a name you're probably using
 
-00:09:19.476 --> 00:09:20.426 A:middle
+
+201
+00:09:19,476 --> 00:09:20,426
 when you implement the method.
 
-00:09:21.506 --> 00:09:24.656 A:middle
+
+202
+00:09:21,506 --> 00:09:24,656
 Likewise, the second and
 later arguments all default
 
-00:09:24.656 --> 00:09:26.396 A:middle
+
+203
+00:09:24,656 --> 00:09:26,396
 to being the same
 inside and outside.
 
-00:09:26.396 --> 00:09:28.356 A:middle
+
+204
+00:09:26,396 --> 00:09:28,356
 And that's why you
 see this behavior
 
-00:09:28.356 --> 00:09:30.506 A:middle
+
+205
+00:09:28,356 --> 00:09:30,506
 of having an argument
 label for that argument.
 
-00:09:31.236 --> 00:09:32.556 A:middle
+
+206
+00:09:31,236 --> 00:09:32,556
 The great thing about
 this model is
 
-00:09:32.556 --> 00:09:35.486 A:middle
+
+207
+00:09:32,556 --> 00:09:35,486
 that when you understand
 this, you can customize it.
 
-00:09:35.486 --> 00:09:39.236 A:middle
+
+208
+00:09:35,486 --> 00:09:39,236
 For example, in this case, it
 would make sense to have a label
 
-00:09:39.236 --> 00:09:42.126 A:middle
+
+209
+00:09:39,236 --> 00:09:42,126
 on that first argument
 so you know what it is.
 
-00:09:42.126 --> 00:09:44.936 A:middle
+
+210
+00:09:42,126 --> 00:09:44,936
 You can do that simply by
 duplicating that argument name.
 
-00:09:45.026 --> 00:09:45.646 A:middle
+
+211
+00:09:45,026 --> 00:09:45,646
 It is simple.
 
-00:09:46.316 --> 00:09:47.896 A:middle
+
+212
+00:09:46,316 --> 00:09:47,896
 Similarly, if you want
 to remove something,
 
-00:09:47.896 --> 00:09:50.996 A:middle
+
+213
+00:09:47,896 --> 00:09:50,996
 you can explicitly set the
 name of that to the underscore
 
-00:09:50.996 --> 00:09:52.286 A:middle
+
+214
+00:09:50,996 --> 00:09:52,286
 to say remove this
 argument label.
 
-00:09:52.926 --> 00:09:54.576 A:middle
+
+215
+00:09:52,926 --> 00:09:54,576
 In doing so, we have
 committed one
 
-00:09:54.576 --> 00:09:56.816 A:middle
+
+216
+00:09:54,576 --> 00:09:56,816
 of the most heinous
 naming crimes imaginable
 
-00:09:56.816 --> 00:09:58.216 A:middle
+
+217
+00:09:56,816 --> 00:09:58,216
 by having a Boolean
 without a label.
 
-00:09:58.966 --> 00:10:05.386 A:middle
+
+218
+00:09:58,966 --> 00:10:05,386
 Go me! The even better
 thing, this whole change,
 
 
-
-00:09:58.966 --> 00:10:05.386 A:middle
-Go me! The even better
-thing, this whole change,
-
-00:10:05.386 --> 00:10:07.886 A:middle
+219
+00:10:05,386 --> 00:10:07,886
 this makes labels much more
 prominent in the system.
 
-00:10:07.886 --> 00:10:10.346 A:middle
+
+220
+00:10:07,886 --> 00:10:10,346
 This is great for having
 APIs that are friendly to use
 
-00:10:10.346 --> 00:10:13.916 A:middle
+
+221
+00:10:10,346 --> 00:10:13,916
 and means that we can simplify
 away a ton of complexity.
 
-00:10:14.386 --> 00:10:16.126 A:middle
+
+222
+00:10:14,386 --> 00:10:16,126
 So now functions and
 methods work the same,
 
-00:10:16.126 --> 00:10:18.116 A:middle
+
+223
+00:10:16,126 --> 00:10:18,116
 but we can also get
 rid of special rules
 
-00:10:18.116 --> 00:10:20.736 A:middle
+
+224
+00:10:18,116 --> 00:10:20,736
 for the default arguments and
 there is the weird pound syntax,
 
-00:10:20.736 --> 00:10:23.146 A:middle
+
+225
+00:10:20,736 --> 00:10:23,146
 nobody remembered what it
 did, so now that's gone too.
 
-00:10:23.146 --> 00:10:24.046 A:middle
+
+226
+00:10:23,146 --> 00:10:24,046
 It is much better.
 
-00:10:25.776 --> 00:10:28.586 A:middle
+
+227
+00:10:25,776 --> 00:10:28,586
 We'll talk about the compiler
 and talk about the warnings
 
-00:10:28.586 --> 00:10:32.036 A:middle
+
+228
+00:10:28,586 --> 00:10:32,036
 and the error messages
 compiled by the compiler.
 
-00:10:32.036 --> 00:10:33.816 A:middle
+
+229
+00:10:32,036 --> 00:10:33,816
 Here is code that's
 reasonable code,
 
-00:10:33.816 --> 00:10:35.296 A:middle
+
+230
+00:10:33,816 --> 00:10:35,296
 maybe you have written
 something like this before,
 
-00:10:35.296 --> 00:10:37.646 A:middle
+
+231
+00:10:35,296 --> 00:10:37,646
 where I'm trying
 to update a point.
 
-00:10:37.826 --> 00:10:39.426 A:middle
+
+232
+00:10:37,826 --> 00:10:39,426
 If you gave this a
 Swift 1 compiler,
 
-00:10:39.426 --> 00:10:41.016 A:middle
+
+233
+00:10:39,426 --> 00:10:41,016
 it would produce
 something like this.
 
-00:10:41.476 --> 00:10:45.736 A:middle
+
+234
+00:10:41,476 --> 00:10:45,736
 I don't know about you, but
 that's not helping much.
 
-00:10:45.996 --> 00:10:48.436 A:middle
+
+235
+00:10:45,996 --> 00:10:48,436
 Swift 1.2 made this better.
 
-00:10:48.436 --> 00:10:52.076 A:middle
+
+236
+00:10:48,436 --> 00:10:52,076
 Swift 1.2 made the error
 message actually tell me
 
-00:10:52.076 --> 00:10:53.066 A:middle
+
+237
+00:10:52,076 --> 00:10:53,066
 that there is a problem.
 
-00:10:53.156 --> 00:10:55.756 A:middle
+
+238
+00:10:53,156 --> 00:10:55,756
 Now I see that indeed I
 cannot assign to this.
 
-00:10:56.156 --> 00:10:57.636 A:middle
+
+239
+00:10:56,156 --> 00:10:57,636
 Of course, this is not
 good enough either.
 
-00:10:57.796 --> 00:10:59.666 A:middle
+
+240
+00:10:57,796 --> 00:10:59,666
 We have continued to
 invest in the error messages
 
-00:10:59.666 --> 00:11:01.116 A:middle
+
+241
+00:10:59,666 --> 00:11:01,116
 and warnings produced
 by the compiler,
 
 
-
-00:10:59.666 --> 00:11:01.116 A:middle
-and warnings produced
-by the compiler,
-
-00:11:01.476 --> 00:11:04.136 A:middle
+242
+00:11:01,476 --> 00:11:04,136
 and in Swift 2 it says,
 hey, you can't assign to x
 
-00:11:04.136 --> 00:11:05.576 A:middle
+
+243
+00:11:04,136 --> 00:11:05,576
 because Self is immutable.
 
-00:11:06.106 --> 00:11:08.646 A:middle
+
+244
+00:11:06,106 --> 00:11:08,646
 And Xcode will tell you
 that you can fix this
 
-00:11:08.696 --> 00:11:10.256 A:middle
+
+245
+00:11:08,696 --> 00:11:10,256
 by marking the method
 as mutating.
 
-00:11:11.186 --> 00:11:13.346 A:middle
+
+246
+00:11:11,186 --> 00:11:13,346
 This is a great way I
 think many people --
 
-00:11:13.346 --> 00:11:15.626 A:middle
+
+247
+00:11:13,346 --> 00:11:15,626
 it will help many people
 understand the mutability model
 
-00:11:15.626 --> 00:11:17.976 A:middle
+
+248
+00:11:15,626 --> 00:11:17,976
 in Swift better and lead
 to better code everywhere.
 
-00:11:18.516 --> 00:11:24.546 A:middle
+
+249
+00:11:18,516 --> 00:11:24,546
 [ Applause ]
 
-00:11:25.046 --> 00:11:26.406 A:middle
-&gt;&gt; CHRIS LATTNER: Of course,
+
+250
+00:11:25,046 --> 00:11:26,406
+>> CHRIS LATTNER: Of course,
 this is just one example.
 
-00:11:26.406 --> 00:11:27.286 A:middle
+
+251
+00:11:26,406 --> 00:11:27,286
 There is a bunch more.
 
-00:11:27.676 --> 00:11:31.546 A:middle
+
+252
+00:11:27,676 --> 00:11:31,546
 Another example of
 warnings we have added are
 
-00:11:31.546 --> 00:11:34.806 A:middle
+
+253
+00:11:31,546 --> 00:11:34,806
 for if you have a variable that
 can be declared as a constant,
 
-00:11:34.806 --> 00:11:37.466 A:middle
+
+254
+00:11:34,806 --> 00:11:37,466
 we now produce a warning, say,
 hey, use Let instead of Are.
 
-00:11:37.936 --> 00:11:40.196 A:middle
+
+255
+00:11:37,936 --> 00:11:40,196
 The Swift migrator also
 automatically moves a lot
 
-00:11:40.196 --> 00:11:42.806 A:middle
+
+256
+00:11:40,196 --> 00:11:42,806
 of code to using Let
 instead of Are in many cases.
 
-00:11:42.806 --> 00:11:45.856 A:middle
+
+257
+00:11:42,806 --> 00:11:45,856
 We'll warn if you declare
 a value, either Let
 
-00:11:45.856 --> 00:11:47.716 A:middle
+
+258
+00:11:45,856 --> 00:11:47,716
 or Are, but don't use it.
 
-00:11:48.266 --> 00:11:51.036 A:middle
+
+259
+00:11:48,266 --> 00:11:51,036
 We even have warnings if
 you use a functional method
 
-00:11:51.896 --> 00:11:53.976 A:middle
+
+260
+00:11:51,896 --> 00:11:53,976
 and then ignore the result
 because you probably meant
 
-00:11:53.976 --> 00:11:56.286 A:middle
+
+261
+00:11:53,976 --> 00:11:56,286
 to use an in-place
 mutating method instead,
 
-00:11:56.466 --> 00:11:57.846 A:middle
+
+262
+00:11:56,466 --> 00:11:57,846
 and we can produce
 warnings for those.
 
-00:11:58.036 --> 00:12:01.716 A:middle
+
+263
+00:11:58,036 --> 00:12:01,716
 Those are simple examples.
 
 
-
-00:11:58.036 --> 00:12:01.716 A:middle
-Those are simple examples.
-
-00:12:02.366 --> 00:12:05.746 A:middle
+264
+00:12:02,366 --> 00:12:05,746
 Let's talk about the SDK.
 
-00:12:05.746 --> 00:12:08.816 A:middle
+
+265
+00:12:05,746 --> 00:12:08,816
 It's a core part of Swift, it's
 how well it works with Cocoa.
 
-00:12:09.076 --> 00:12:10.936 A:middle
+
+266
+00:12:09,076 --> 00:12:10,936
 With plain Objective-C APIs,
 
-00:12:11.256 --> 00:12:13.976 A:middle
+
+267
+00:12:11,256 --> 00:12:13,976
 the Swift compiler has no idea
 whether pointers can be null
 
-00:12:13.976 --> 00:12:16.206 A:middle
+
+268
+00:12:13,976 --> 00:12:16,206
 or not and what the element
 types of collections are.
 
-00:12:16.866 --> 00:12:18.446 A:middle
+
+269
+00:12:16,866 --> 00:12:18,446
 We have introduced a
 number of new features
 
-00:12:18.446 --> 00:12:21.276 A:middle
+
+270
+00:12:18,446 --> 00:12:21,276
 to Objective-C including the
 ability to express nullability
 
-00:12:21.656 --> 00:12:24.746 A:middle
+
+271
+00:12:21,656 --> 00:12:24,746
 and the element types of
 collections in Objective-C.
 
-00:12:25.396 --> 00:12:27.616 A:middle
+
+272
+00:12:25,396 --> 00:12:27,616
 There is a whole bunch
 of other features
 
-00:12:28.136 --> 00:12:31.126 A:middle
+
+273
+00:12:28,136 --> 00:12:31,126
 that make a great experience
 for Objective-C code in Swift.
 
-00:12:31.956 --> 00:12:34.706 A:middle
+
+274
+00:12:31,956 --> 00:12:34,706
 The best news about this, is
 that the framework engineers
 
-00:12:34.706 --> 00:12:37.996 A:middle
+
+275
+00:12:34,706 --> 00:12:37,996
 at Apple have done a phenomenal
 job adopting all these modern
 
-00:12:37.996 --> 00:12:42.176 A:middle
+
+276
+00:12:37,996 --> 00:12:42,176
 Objective-C features, and
 the Cocoa SDK in general
 
-00:12:42.176 --> 00:12:44.466 A:middle
+
+277
+00:12:42,176 --> 00:12:44,466
 across all the platforms
 feels great in Swift
 
-00:12:44.466 --> 00:12:45.536 A:middle
+
+278
+00:12:44,466 --> 00:12:45,536
 with no work on your part.
 
-00:12:46.576 --> 00:12:49.906 A:middle
+
+279
+00:12:46,576 --> 00:12:49,906
 However, if you have Objective-C
 code, maybe you're mixing
 
-00:12:49.906 --> 00:12:51.866 A:middle
+
+280
+00:12:49,906 --> 00:12:51,866
 and matching with Objective-C
 code in your project,
 
-00:12:52.206 --> 00:12:54.066 A:middle
+
+281
+00:12:52,206 --> 00:12:54,066
 or maybe you have an Objective-C
 framework that you want
 
-00:12:54.066 --> 00:12:56.396 A:middle
+
+282
+00:12:54,066 --> 00:12:56,396
 to be beautiful and
 awesome in Swift,
 
-00:12:56.396 --> 00:12:58.946 A:middle
+
+283
+00:12:56,396 --> 00:12:58,946
 go to some of these sessions
 later today to learn more
 
-00:12:58.946 --> 00:13:01.316 A:middle
+
+284
+00:12:58,946 --> 00:13:01,316
 about these features so you
 can provide a really great
 
 
-
-00:12:58.946 --> 00:13:01.316 A:middle
-about these features so you
-can provide a really great
-
-00:13:01.496 --> 00:13:02.206 A:middle
+285
+00:13:01,496 --> 00:13:02,206
 Swift experience.
 
-00:13:02.296 --> 00:13:04.586 A:middle
+
+286
+00:13:02,296 --> 00:13:04,586
 You probably have to watch
 one of those on video.
 
-00:13:05.146 --> 00:13:07.786 A:middle
+
+287
+00:13:05,146 --> 00:13:07,786
 Let's talk about unit testing.
 
-00:13:08.346 --> 00:13:11.806 A:middle
+
+288
+00:13:08,346 --> 00:13:11,806
 Across the entire tools team,
 testing is superimportant.
 
-00:13:11.806 --> 00:13:16.006 A:middle
+
+289
+00:13:11,806 --> 00:13:16,006
 Testing is great in Swift until
 you bring up access control.
 
-00:13:16.566 --> 00:13:18.786 A:middle
+
+290
+00:13:16,566 --> 00:13:18,786
 The problem is that
 Swift requires you
 
-00:13:18.786 --> 00:13:22.426 A:middle
+
+291
+00:13:18,786 --> 00:13:22,426
 to mark symbols Public to be
 visible to your unit test bundle
 
-00:13:22.726 --> 00:13:25.376 A:middle
+
+292
+00:13:22,726 --> 00:13:25,376
 so you can test them, leading
 to tons of stuff being public
 
-00:13:25.376 --> 00:13:26.236 A:middle
+
+293
+00:13:25,376 --> 00:13:26,236
 that really shouldn't be.
 
-00:13:26.686 --> 00:13:29.586 A:middle
+
+294
+00:13:26,686 --> 00:13:29,586
 Swift 2 and Xcode 7 has
 solved this problem.
 
-00:13:30.286 --> 00:13:32.486 A:middle
+
+295
+00:13:30,286 --> 00:13:32,486
 Now your code is automatically
 built in a special mode,
 
-00:13:32.786 --> 00:13:35.796 A:middle
+
+296
+00:13:32,786 --> 00:13:35,796
 meaning that for your tests they
 can get access to your public
 
-00:13:35.796 --> 00:13:37.636 A:middle
+
+297
+00:13:35,796 --> 00:13:37,636
 and internal symbols by default.
 
-00:13:38.066 --> 00:13:39.676 A:middle
+
+298
+00:13:38,066 --> 00:13:39,676
 You have to use the
 new app to --
 
-00:13:40.516 --> 00:13:44.726 A:middle
+
+299
+00:13:40,516 --> 00:13:44,726
 [ Applause ]
 
-00:13:45.226 --> 00:13:46.786 A:middle
-&gt;&gt; CHRIS LATTNER: The
+
+300
+00:13:45,226 --> 00:13:46,786
+>> CHRIS LATTNER: The
 even better part of this,
 
-00:13:46.786 --> 00:13:49.036 A:middle
+
+301
+00:13:46,786 --> 00:13:49,036
 not only is it easy,
 it is also --
 
-00:13:49.436 --> 00:13:51.546 A:middle
+
+302
+00:13:49,436 --> 00:13:51,546
 you still get the right behavior
 for your release builds,
 
-00:13:51.586 --> 00:13:52.666 A:middle
+
+303
+00:13:51,586 --> 00:13:52,666
 so you get the performance
 
-00:13:52.666 --> 00:13:55.106 A:middle
+
+304
+00:13:52,666 --> 00:13:55,106
 and the protection
 benefits of access control.
 
-00:13:55.606 --> 00:13:57.826 A:middle
+
+305
+00:13:55,606 --> 00:13:57,826
 We have a bunch of
 talks on testing,
 
-00:13:57.826 --> 00:14:00.396 A:middle
+
+306
+00:13:57,826 --> 00:14:00,396
 UI Testing in Xcode will
 be a fantastic talk.
 
 
-
-00:13:57.826 --> 00:14:00.396 A:middle
-UI Testing in Xcode will
-be a fantastic talk.
-
-00:14:00.396 --> 00:14:01.156 A:middle
+307
+00:14:00,396 --> 00:14:01,156
 I highly recommend it.
 
-00:14:01.716 --> 00:14:03.256 A:middle
+
+308
+00:14:01,716 --> 00:14:03,256
 Let's talk about rich comments.
 
-00:14:04.036 --> 00:14:07.266 A:middle
+
+309
+00:14:04,036 --> 00:14:07,266
 Playgrounds, they're
 great, and Xcode allows you
 
-00:14:07.266 --> 00:14:09.676 A:middle
+
+310
+00:14:07,266 --> 00:14:09,676
 to build beautiful
 Swift playgrounds right
 
-00:14:09.676 --> 00:14:13.586 A:middle
+
+311
+00:14:09,676 --> 00:14:13,586
 in the editor using a comment
 syntax, a rich comment syntax.
 
-00:14:13.956 --> 00:14:17.176 A:middle
+
+312
+00:14:13,956 --> 00:14:17,176
 The syntax is a variant of
 Markdown, which is a great,
 
-00:14:17.176 --> 00:14:19.926 A:middle
+
+313
+00:14:17,176 --> 00:14:19,926
 well-known, very
 popular, loved syntax.
 
-00:14:20.276 --> 00:14:22.096 A:middle
+
+314
+00:14:20,276 --> 00:14:22,096
 We brought that to
 documentation comments as well.
 
-00:14:22.506 --> 00:14:24.416 A:middle
+
+315
+00:14:22,506 --> 00:14:24,416
 This means you can build rich
 
-00:14:24.526 --> 00:14:28.186 A:middle
+
+316
+00:14:24,526 --> 00:14:28,186
 and pretty beautiful
 documentation comments,
 
-00:14:28.446 --> 00:14:30.016 A:middle
+
+317
+00:14:28,446 --> 00:14:30,016
 and it shows up for
 clients in your API.
 
-00:14:30.156 --> 00:14:31.316 A:middle
+
+318
+00:14:30,156 --> 00:14:31,316
 So if you're producing
 a library,
 
-00:14:31.366 --> 00:14:32.546 A:middle
+
+319
+00:14:31,366 --> 00:14:32,546
 you can do great things here.
 
-00:14:33.636 --> 00:14:35.386 A:middle
+
+320
+00:14:33,636 --> 00:14:35,386
 Finally, the migrator in Xcode.
 
-00:14:36.046 --> 00:14:38.996 A:middle
+
+321
+00:14:36,046 --> 00:14:38,996
 As soon as you open the
 Swift 1 project in Xcode 7,
 
-00:14:38.996 --> 00:14:40.456 A:middle
+
+322
+00:14:38,996 --> 00:14:40,456
 it will prompt you and say, hey,
 
-00:14:40.726 --> 00:14:42.316 A:middle
+
+323
+00:14:40,726 --> 00:14:42,316
 I can upgrade this
 to Swift 2 for you.
 
-00:14:42.976 --> 00:14:44.336 A:middle
+
+324
+00:14:42,976 --> 00:14:44,336
 It takes you through
 a couple steps,
 
-00:14:44.336 --> 00:14:46.706 A:middle
+
+325
+00:14:44,336 --> 00:14:46,706
 you can pick your targets,
 and then it gives you a dif.
 
-00:14:47.216 --> 00:14:49.606 A:middle
+
+326
+00:14:47,216 --> 00:14:49,606
 The Swift 2 migrator is
 actually pretty phenomenal.
 
-00:14:49.836 --> 00:14:52.236 A:middle
+
+327
+00:14:49,836 --> 00:14:52,236
 It covers the vast majority
 of the problems and cases
 
-00:14:52.236 --> 00:14:55.516 A:middle
+
+328
+00:14:52,236 --> 00:14:55,516
 that you will see moving
 from Swift 1 to Swift 2,
 
-00:14:55.836 --> 00:14:58.506 A:middle
+
+329
+00:14:55,836 --> 00:14:58,506
 including the error handling
 model, moving things to methods,
 
-00:14:58.926 --> 00:15:03.216 A:middle
+
+330
+00:14:58,926 --> 00:15:03,216
 changes to the SDK, a ton
 of the option set changes,
 
 
-
-00:14:58.926 --> 00:15:03.216 A:middle
-changes to the SDK, a ton
-of the option set changes,
-
-00:15:03.216 --> 00:15:05.636 A:middle
+331
+00:15:03,216 --> 00:15:05,636
 all of these things are
 built in the migrator,
 
-00:15:05.636 --> 00:15:07.016 A:middle
+
+332
+00:15:05,636 --> 00:15:07,016
 and it does a great job.
 
-00:15:08.046 --> 00:15:10.736 A:middle
+
+333
+00:15:08,046 --> 00:15:10,736
 There is a ton of new stuff
 in Swift 2, we don't have time
 
-00:15:10.736 --> 00:15:13.496 A:middle
+
+334
+00:15:10,736 --> 00:15:13,496
 to talk about all
 of it right now.
 
-00:15:13.496 --> 00:15:14.726 A:middle
+
+335
+00:15:13,496 --> 00:15:14,726
 If you're interested
 in more detail,
 
-00:15:14.726 --> 00:15:17.336 A:middle
+
+336
+00:15:14,726 --> 00:15:17,336
 I recommend taking a look at the
 Swift programming language book,
 
-00:15:17.336 --> 00:15:18.356 A:middle
+
+337
+00:15:17,336 --> 00:15:18,356
 there is a new version up.
 
-00:15:19.196 --> 00:15:21.466 A:middle
+
+338
+00:15:19,196 --> 00:15:21,466
 Also the Xcode 7 release
 notes talks about a lot
 
-00:15:21.466 --> 00:15:22.636 A:middle
+
+339
+00:15:21,466 --> 00:15:22,636
 of these changes in more detail.
 
-00:15:23.686 --> 00:15:25.636 A:middle
+
+340
+00:15:23,686 --> 00:15:25,636
 Let's move on now and talk
 about pattern matching.
 
-00:15:26.286 --> 00:15:30.726 A:middle
+
+341
+00:15:26,286 --> 00:15:30,726
 So probably the first place you
 encounter pattern matches was
 
-00:15:30.726 --> 00:15:31.846 A:middle
+
+342
+00:15:30,726 --> 00:15:31,846
 with the if-let statement.
 
-00:15:32.326 --> 00:15:35.936 A:middle
+
+343
+00:15:32,326 --> 00:15:35,936
 It is a great way
 to take an optional,
 
-00:15:37.296 --> 00:15:39.466 A:middle
+
+344
+00:15:37,296 --> 00:15:39,466
 conditionally unwrap it,
 and then bind that result
 
-00:15:39.636 --> 00:15:42.096 A:middle
+
+345
+00:15:39,636 --> 00:15:42,096
 to a name with safety.
 
-00:15:42.096 --> 00:15:44.326 A:middle
+
+346
+00:15:42,096 --> 00:15:44,326
 It is a great thing.
 
-00:15:44.326 --> 00:15:46.426 A:middle
+
+347
+00:15:44,326 --> 00:15:46,426
 There can be too much of
 a great thing, of course.
 
-00:15:46.426 --> 00:15:49.636 A:middle
+
+348
+00:15:46,426 --> 00:15:49,636
 One of the things we saw is that
 there is the "pyramid of doom,"
 
-00:15:50.156 --> 00:15:52.936 A:middle
+
+349
+00:15:50,156 --> 00:15:52,936
 which is what happens when you
 get too many if-lets all nestled
 
-00:15:52.936 --> 00:15:55.076 A:middle
+
+350
+00:15:52,936 --> 00:15:55,076
 together, and suddenly your
 code is fifteen levels deep
 
-00:15:55.076 --> 00:15:57.526 A:middle
+
+351
+00:15:55,076 --> 00:15:57,526
 and you can't understand it.
 
-00:15:57.526 --> 00:15:59.066 A:middle
+
+352
+00:15:57,526 --> 00:15:59,066
 Swift 1.2 solved this problem
 
-00:15:59.066 --> 00:16:01.756 A:middle
+
+353
+00:15:59,066 --> 00:16:01,756
 by introducing a compound
 condition into if statements.
 
 
-
-00:15:59.066 --> 00:16:01.756 A:middle
-by introducing a compound
-condition into if statements.
-
-00:16:02.066 --> 00:16:03.336 A:middle
+354
+00:16:02,066 --> 00:16:03,336
 Which makes this really natural.
 
-00:16:03.336 --> 00:16:04.966 A:middle
+
+355
+00:16:03,336 --> 00:16:04,966
 You can check multiple optionals
 
-00:16:05.396 --> 00:16:08.996 A:middle
+
+356
+00:16:05,396 --> 00:16:08,996
 and Boolean conditions right
 inline, and it is a lot nicer.
 
-00:16:09.546 --> 00:16:11.506 A:middle
+
+357
+00:16:09,546 --> 00:16:11,506
 This didn't solve the
 problem of early exits.
 
-00:16:12.286 --> 00:16:16.126 A:middle
+
+358
+00:16:12,286 --> 00:16:16,126
 I'll show you some of what
 might be the most horrible JSON
 
-00:16:16.126 --> 00:16:18.186 A:middle
+
+359
+00:16:16,126 --> 00:16:18,186
 processing code you
 can ever imagine.
 
-00:16:18.716 --> 00:16:20.846 A:middle
+
+360
+00:16:18,716 --> 00:16:20,846
 It will get better over time.
 
-00:16:20.846 --> 00:16:22.356 A:middle
+
+361
+00:16:20,846 --> 00:16:22,356
 Let's go with this.
 
-00:16:22.356 --> 00:16:23.766 A:middle
+
+362
+00:16:22,356 --> 00:16:23,766
 Here I'm pulling various fields
 
-00:16:23.766 --> 00:16:25.216 A:middle
+
+363
+00:16:23,766 --> 00:16:25,216
 out of an untyped
 JSON dictionary.
 
-00:16:25.346 --> 00:16:27.396 A:middle
+
+364
+00:16:25,346 --> 00:16:27,396
 So I'm pulling out a name,
 converting it to string,
 
-00:16:27.396 --> 00:16:29.726 A:middle
+
+365
+00:16:27,396 --> 00:16:29,726
 produces an optional, if it
 doesn't match, I bail out.
 
-00:16:30.336 --> 00:16:32.976 A:middle
+
+366
+00:16:30,336 --> 00:16:32,976
 Likewise, pull the year
 out, convert it to an In,
 
-00:16:33.016 --> 00:16:34.166 A:middle
+
+367
+00:16:33,016 --> 00:16:34,166
 if that doesn't match, bail out.
 
-00:16:34.696 --> 00:16:36.986 A:middle
+
+368
+00:16:34,696 --> 00:16:36,986
 This pattern is very common
 if you're pulling lots
 
-00:16:36.986 --> 00:16:40.686 A:middle
+
+369
+00:16:36,986 --> 00:16:40,686
 of values out, it is better
 to do this bailout approach
 
-00:16:40.686 --> 00:16:42.226 A:middle
+
+370
+00:16:40,686 --> 00:16:42,226
 than to deeply nest your code.
 
-00:16:43.046 --> 00:16:44.776 A:middle
+
+371
+00:16:43,046 --> 00:16:44,776
 The problem with this
 approach is that then you have
 
-00:16:44.806 --> 00:16:48.656 A:middle
+
+372
+00:16:44,806 --> 00:16:48,656
 to force unwrap the optional
 values when you're done.
 
-00:16:49.076 --> 00:16:51.076 A:middle
+
+373
+00:16:49,076 --> 00:16:51,076
 Here I only use them once,
 but if you have a bunch
 
-00:16:51.076 --> 00:16:53.946 A:middle
+
+374
+00:16:51,076 --> 00:16:53,946
 of code using them, you're force
 unwrapping this everywhere.
 
-00:16:53.946 --> 00:16:55.456 A:middle
+
+375
+00:16:53,946 --> 00:16:55,456
 You can do things
 to factor this,
 
-00:16:55.456 --> 00:16:57.696 A:middle
+
+376
+00:16:55,456 --> 00:16:57,696
 so the implicitly unwrapped
 optional is a great way
 
-00:16:57.696 --> 00:17:03.736 A:middle
+
+377
+00:16:57,696 --> 00:17:03,736
 to factor force unwraps into
 a Mecca of unsafety for you.
 
 
-
-00:16:57.696 --> 00:17:03.736 A:middle
-to factor force unwraps into
-a Mecca of unsafety for you.
-
-00:17:04.116 --> 00:17:07.016 A:middle
+378
+00:17:04,116 --> 00:17:07,016
 This is maybe not the
 right approach either.
 
-00:17:07.016 --> 00:17:08.396 A:middle
+
+379
+00:17:07,016 --> 00:17:08,396
 This is ugly.
 
-00:17:08.546 --> 00:17:10.925 A:middle
+
+380
+00:17:08,546 --> 00:17:10,925
 We introduced a new
 Guard statement.
 
-00:17:11.096 --> 00:17:14.316 A:middle
+
+381
+00:17:11,096 --> 00:17:14,316
 The way to look at Guard is
 it does a check and then bales
 
-00:17:14.316 --> 00:17:17.036 A:middle
+
+382
+00:17:14,316 --> 00:17:17,036
 out if that check doesn't match.
 
-00:17:17.096 --> 00:17:18.856 A:middle
+
+383
+00:17:17,096 --> 00:17:18,856
 You can do a lot of things
 in a Guard statement.
 
-00:17:18.896 --> 00:17:20.906 A:middle
+
+384
+00:17:18,896 --> 00:17:20,906
 Here we're doing
 our optional check
 
-00:17:20.906 --> 00:17:22.626 A:middle
+
+385
+00:17:20,906 --> 00:17:22,626
 and we're binding
 a value to a name.
 
-00:17:23.126 --> 00:17:25.016 A:middle
+
+386
+00:17:23,126 --> 00:17:25,016
 The way that it works,
 the way it can work,
 
-00:17:25.066 --> 00:17:29.786 A:middle
+
+387
+00:17:25,066 --> 00:17:29,786
 is that it guarantees that your
 Else exits the current scope.
 
-00:17:29.786 --> 00:17:33.416 A:middle
+
+388
+00:17:29,786 --> 00:17:33,416
 You can do this in one of two
 ways, either return, throw,
 
-00:17:33.416 --> 00:17:36.516 A:middle
+
+389
+00:17:33,416 --> 00:17:36,516
 brake, a lot of ways
 to exit a scope.
 
-00:17:37.796 --> 00:17:38.406 A:middle
+
+390
+00:17:37,796 --> 00:17:38,406
 That's fine.
 
-00:17:38.656 --> 00:17:42.526 A:middle
+
+391
+00:17:38,656 --> 00:17:42,526
 You can also call a No Return
 function like Precondition Fail
 
-00:17:42.526 --> 00:17:44.736 A:middle
+
+392
+00:17:42,526 --> 00:17:44,736
 or Abort, and that's a
 good way of stopping.
 
-00:17:45.756 --> 00:17:49.366 A:middle
+
+393
+00:17:45,756 --> 00:17:49,366
 What this guarantees for the
 compiler, it knows with safety
 
-00:17:49.406 --> 00:17:52.596 A:middle
+
+394
+00:17:49,406 --> 00:17:52,596
 and certainty that the names
 that are bound can be visible
 
-00:17:52.596 --> 00:17:54.066 A:middle
+
+395
+00:17:52,596 --> 00:17:54,066
 after the code in
 the fall-through.
 
-00:17:54.746 --> 00:17:57.456 A:middle
+
+396
+00:17:54,746 --> 00:17:57,456
 If we take this to our
 example, our example gets nicer
 
-00:17:57.566 --> 00:18:00.246 A:middle
+
+397
+00:17:57,566 --> 00:18:00,246
 because now we can use
 Guard, and we have very safe,
 
 
-
-00:17:57.566 --> 00:18:00.246 A:middle
-because now we can use
-Guard, and we have very safe,
-
-00:18:00.346 --> 00:18:03.576 A:middle
+398
+00:18:00,346 --> 00:18:03,576
 concise checks for this
 as we would expect.
 
-00:18:04.776 --> 00:18:08.766 A:middle
+
+399
+00:18:04,776 --> 00:18:08,766
 The other nice thing about
 this, this builds on the rich,
 
-00:18:08.946 --> 00:18:12.376 A:middle
+
+400
+00:18:08,946 --> 00:18:12,376
 compound conditionals
 we had with If.
 
-00:18:12.376 --> 00:18:14.656 A:middle
+
+401
+00:18:12,376 --> 00:18:14,656
 Now you can merge them together
 and check multiple Boolean
 
-00:18:14.656 --> 00:18:17.866 A:middle
+
+402
+00:18:14,656 --> 00:18:17,866
 and optional and other cases
 we'll talk about later right
 
-00:18:17.866 --> 00:18:19.526 A:middle
+
+403
+00:18:17,866 --> 00:18:19,526
 in line in your Guard statement.
 
-00:18:19.526 --> 00:18:20.886 A:middle
+
+404
+00:18:19,526 --> 00:18:20,886
 It is pretty nice.
 
-00:18:21.516 --> 00:18:27.616 A:middle
+
+405
+00:18:21,516 --> 00:18:27,616
 [ Applause ]
 
-00:18:28.116 --> 00:18:30.596 A:middle
-&gt;&gt; CHRIS LATTNER: Let's
+
+406
+00:18:28,116 --> 00:18:30,596
+>> CHRIS LATTNER: Let's
 talk about the more exciting
 
-00:18:30.596 --> 00:18:32.816 A:middle
+
+407
+00:18:30,596 --> 00:18:32,816
 and powerful form of
 pattern matching, switches.
 
-00:18:33.666 --> 00:18:37.476 A:middle
+
+408
+00:18:33,666 --> 00:18:37,476
 Switches are I think maybe
 other people's favorite feature
 
-00:18:37.476 --> 00:18:40.436 A:middle
+
+409
+00:18:37,476 --> 00:18:40,436
 of Swift because you can do
 so much with pattern matching
 
-00:18:40.436 --> 00:18:41.286 A:middle
+
+410
+00:18:40,436 --> 00:18:41,286
 in a switch statement.
 
-00:18:41.626 --> 00:18:43.566 A:middle
+
+411
+00:18:41,626 --> 00:18:43,566
 You check against an
 optional like here,
 
-00:18:43.806 --> 00:18:45.746 A:middle
+
+412
+00:18:43,806 --> 00:18:45,746
 you can do class hierarchy
 checks, you can check
 
-00:18:45.746 --> 00:18:49.696 A:middle
+
+413
+00:18:45,746 --> 00:18:49,696
 against ranges, there is no end
 to what you can do in a switch.
 
-00:18:50.706 --> 00:18:53.616 A:middle
+
+414
+00:18:50,706 --> 00:18:53,616
 They're great when you want
 to write a lot of cases,
 
-00:18:53.696 --> 00:18:55.646 A:middle
+
+415
+00:18:53,696 --> 00:18:55,646
 but they're kind of
 syntactically heavyweight
 
-00:18:55.646 --> 00:18:56.956 A:middle
+
+416
+00:18:55,646 --> 00:18:56,956
 when you want to
 check just one case.
 
-00:18:56.956 --> 00:18:58.726 A:middle
+
+417
+00:18:56,956 --> 00:18:58,726
 They have to be exhaustive,
 
-00:18:58.726 --> 00:19:00.716 A:middle
+
+418
+00:18:58,726 --> 00:19:00,716
 you have to have a
 default, it is a pain.
 
 
-
-00:18:58.726 --> 00:19:00.716 A:middle
-you have to have a
-default, it is a pain.
-
-00:19:00.716 --> 00:19:04.246 A:middle
+419
+00:19:00,716 --> 00:19:04,246
 What we have done, we have taken
 the power of pattern matching
 
-00:19:04.666 --> 00:19:06.416 A:middle
+
+420
+00:19:04,666 --> 00:19:06,416
 with switch and with
 case and brought it
 
-00:19:06.416 --> 00:19:08.336 A:middle
+
+421
+00:19:06,416 --> 00:19:08,336
 to the other control
 statements in the language.
 
-00:19:08.786 --> 00:19:12.086 A:middle
+
+422
+00:19:08,786 --> 00:19:12,086
 This example can be written
 with a new If case, check,
 
-00:19:12.086 --> 00:19:13.516 A:middle
+
+423
+00:19:12,086 --> 00:19:13,516
 and you can pattern match
 
-00:19:13.516 --> 00:19:15.406 A:middle
+
+424
+00:19:13,516 --> 00:19:15,406
 and bind variable
 names right in line.
 
-00:19:16.516 --> 00:19:20.746 A:middle
+
+425
+00:19:16,516 --> 00:19:20,746
 [ Applause ]
 
-00:19:21.246 --> 00:19:22.076 A:middle
-&gt;&gt; CHRIS LATTNER: We
+
+426
+00:19:21,246 --> 00:19:22,076
+>> CHRIS LATTNER: We
 have gone further.
 
-00:19:22.196 --> 00:19:25.276 A:middle
+
+427
+00:19:22,196 --> 00:19:25,276
 Another great statement in
 Swift is the for...in loop.
 
-00:19:25.666 --> 00:19:27.646 A:middle
+
+428
+00:19:25,666 --> 00:19:27,646
 So it's very common to
 want to do some amount
 
-00:19:27.646 --> 00:19:29.526 A:middle
+
+429
+00:19:27,646 --> 00:19:29,526
 of filtering in a for...in loop.
 
-00:19:29.526 --> 00:19:30.656 A:middle
+
+430
+00:19:29,526 --> 00:19:30,656
 Some languages have gone so far
 
-00:19:30.656 --> 00:19:32.796 A:middle
+
+431
+00:19:30,656 --> 00:19:32,796
 as to introduce entirely
 new language constructs
 
-00:19:32.796 --> 00:19:35.936 A:middle
+
+432
+00:19:32,796 --> 00:19:35,936
 like list comprehensions to
 model this kind of pattern.
 
-00:19:36.816 --> 00:19:38.006 A:middle
+
+433
+00:19:36,816 --> 00:19:38,006
 With Swift we have
 done two things.
 
-00:19:38.256 --> 00:19:39.656 A:middle
+
+434
+00:19:38,256 --> 00:19:39,656
 We have added the ability
 
-00:19:39.656 --> 00:19:42.156 A:middle
+
+435
+00:19:39,656 --> 00:19:42,156
 to do a simple Boolean
 a filter right inline
 
-00:19:42.156 --> 00:19:43.196 A:middle
+
+436
+00:19:42,156 --> 00:19:43,196
 in your for...in statement.
 
-00:19:43.906 --> 00:19:47.106 A:middle
+
+437
+00:19:43,906 --> 00:19:47,106
 But you can also do full-on
 pattern matching right in your
 
-00:19:47.106 --> 00:19:50.266 A:middle
+
+438
+00:19:47,106 --> 00:19:50,266
 for loop to give you
 powerful conditions.
 
-00:19:51.516 --> 00:19:55.656 A:middle
+
+439
+00:19:51,516 --> 00:19:55,656
 [ Applause ]
 
-00:19:56.156 --> 00:19:57.666 A:middle
-&gt;&gt; CHRIS LATTNER:
+
+440
+00:19:56,156 --> 00:19:57,666
+>> CHRIS LATTNER:
 That's all I have to say
 
-00:19:57.666 --> 00:19:59.396 A:middle
+
+441
+00:19:57,666 --> 00:19:59,396
 about our quick tour
 of pattern matching.
 
-00:19:59.726 --> 00:20:01.946 A:middle
+
+442
+00:19:59,726 --> 00:20:01,946
 We talked about the new Guard
 statement, which is great
 
 
-
-00:19:59.726 --> 00:20:01.946 A:middle
-We talked about the new Guard
-statement, which is great
-
-00:20:01.946 --> 00:20:03.436 A:middle
+443
+00:20:01,946 --> 00:20:03,436
 for early exits, talked
 
-00:20:03.436 --> 00:20:06.496 A:middle
+
+444
+00:20:03,436 --> 00:20:06,496
 about bringing pattern matching
 pervasively to the language,
 
-00:20:06.876 --> 00:20:08.816 A:middle
+
+445
+00:20:06,876 --> 00:20:08,816
 and we didn't talk about some
 of the other improvements
 
-00:20:08.816 --> 00:20:10.586 A:middle
+
+446
+00:20:08,816 --> 00:20:10,586
 that you can discover as
 you start to use Swift.
 
-00:20:11.186 --> 00:20:11.776 A:middle
+
+447
+00:20:11,186 --> 00:20:11,776
 Thank you.
 
-00:20:11.776 --> 00:20:13.546 A:middle
+
+448
+00:20:11,776 --> 00:20:13,546
 I will hand it over to
 John, who will tell you
 
-00:20:13.546 --> 00:20:15.076 A:middle
+
+449
+00:20:13,546 --> 00:20:15,076
 about availability checking.
 
-00:20:16.516 --> 00:20:20.946 A:middle
+
+450
+00:20:16,516 --> 00:20:20,946
 [ Applause ]
 
-00:20:21.446 --> 00:20:21.876 A:middle
-&gt;&gt; JOHN MCCALL: Thank
+
+451
+00:20:21,446 --> 00:20:21,876
+>> JOHN MCCALL: Thank
 you, Chris.
 
-00:20:23.546 --> 00:20:26.626 A:middle
+
+452
+00:20:23,546 --> 00:20:26,626
 We often roll out new
 features, you may have heard
 
-00:20:26.626 --> 00:20:28.206 A:middle
+
+453
+00:20:26,626 --> 00:20:28,206
 of one called Force Touch.
 
-00:20:30.046 --> 00:20:33.376 A:middle
+
+454
+00:20:30,046 --> 00:20:33,376
 Force Touch is mostly a hardware
 feature, of course, but it comes
 
-00:20:33.376 --> 00:20:35.216 A:middle
+
+455
+00:20:33,376 --> 00:20:35,216
 with a number of APIs.
 
-00:20:35.216 --> 00:20:36.976 A:middle
+
+456
+00:20:35,216 --> 00:20:36,976
 Like this one on NSButton,
 
-00:20:37.456 --> 00:20:43.356 A:middle
+
+457
+00:20:37,456 --> 00:20:43,356
 letting me change how a button
 responds to drags over it.
 
-00:20:43.356 --> 00:20:46.296 A:middle
+
+458
+00:20:43,356 --> 00:20:46,296
 If I want to adopt
 this in my own app,
 
-00:20:46.896 --> 00:20:48.136 A:middle
+
+459
+00:20:46,896 --> 00:20:48,136
 that's pretty easy, right?
 
-00:20:48.136 --> 00:20:50.516 A:middle
+
+460
+00:20:48,136 --> 00:20:50,516
 I have to write some
 new event handling code
 
-00:20:50.926 --> 00:20:52.516 A:middle
+
+461
+00:20:50,926 --> 00:20:52,516
 and then I just need
 to take my button
 
-00:20:52.516 --> 00:20:55.436 A:middle
+
+462
+00:20:52,516 --> 00:20:55,436
 and set this spring
 loaded property on it.
 
-00:20:56.236 --> 00:21:00.456 A:middle
+
+463
+00:20:56,236 --> 00:21:00,456
 The problem is that this may
 work great on my dev machine,
 
 
-
-00:20:56.236 --> 00:21:00.456 A:middle
-The problem is that this may
-work great on my dev machine,
-
-00:21:00.456 --> 00:21:03.126 A:middle
+464
+00:21:00,456 --> 00:21:03,126
 but when I farm it out
 to my test hardware,
 
-00:21:04.146 --> 00:21:06.266 A:middle
+
+465
+00:21:04,146 --> 00:21:06,266
 I'm going to get a crash
 like this almost certainly.
 
-00:21:07.006 --> 00:21:10.086 A:middle
+
+466
+00:21:07,006 --> 00:21:10,086
 That's because this
 is a new API.
 
-00:21:10.086 --> 00:21:12.156 A:middle
+
+467
+00:21:10,086 --> 00:21:12,156
 It was introduced in X v10.3.
 
-00:21:12.706 --> 00:21:20.266 A:middle
+
+468
+00:21:12,706 --> 00:21:20,266
 And, like many of you in this
 situation, you still have a need
 
-00:21:20.316 --> 00:21:24.136 A:middle
+
+469
+00:21:20,316 --> 00:21:24,136
 to support an older
 version of the OS.
 
-00:21:24.136 --> 00:21:28.446 A:middle
+
+470
+00:21:24,136 --> 00:21:28,446
 How would I fix this?
 
-00:21:28.446 --> 00:21:31.056 A:middle
+
+471
+00:21:28,446 --> 00:21:31,056
 The way I used to
 fix this is, okay,
 
-00:21:31.056 --> 00:21:34.736 A:middle
+
+472
+00:21:31,056 --> 00:21:34,736
 I'm getting this error message
 about the method not existing,
 
-00:21:34.736 --> 00:21:36.886 A:middle
+
+473
+00:21:34,736 --> 00:21:36,886
 let me check to see
 if the method exists.
 
-00:21:37.846 --> 00:21:39.726 A:middle
+
+474
+00:21:37,846 --> 00:21:39,726
 One way -- there are a
 lot of different idioms
 
-00:21:39.726 --> 00:21:42.446 A:middle
+
+475
+00:21:39,726 --> 00:21:42,446
 that people have
 developed for doing this,
 
-00:21:42.446 --> 00:21:46.386 A:middle
+
+476
+00:21:42,446 --> 00:21:46,386
 this is common idiom,
 using Responds to Selector.
 
-00:21:46.806 --> 00:21:50.516 A:middle
+
+477
+00:21:46,806 --> 00:21:50,516
 The problem is that this is a
 fraught, error-prone pattern.
 
-00:21:51.306 --> 00:21:57.586 A:middle
+
+478
+00:21:51,306 --> 00:21:57,586
 For example, I actually have to
 figure out what the selector is,
 
-00:21:57.676 --> 00:22:01.056 A:middle
+
+479
+00:21:57,676 --> 00:22:01,056
 the mapping from some
 Swift language feature back
 
 
-
-00:21:57.676 --> 00:22:01.056 A:middle
-the mapping from some
-Swift language feature back
-
-00:22:01.056 --> 00:22:05.386 A:middle
+480
+00:22:01,056 --> 00:22:05,386
 to some Objective-C selector, it
 is really not the sort of detail
 
-00:22:05.386 --> 00:22:06.756 A:middle
+
+481
+00:22:05,386 --> 00:22:06,756
 that anybody should
 need to know.
 
-00:22:07.476 --> 00:22:11.336 A:middle
+
+482
+00:22:07,476 --> 00:22:11,336
 It is also, you know, not being
 checked for me by the compiler
 
-00:22:11.336 --> 00:22:14.166 A:middle
+
+483
+00:22:11,336 --> 00:22:14,166
 because I'm sort of
 intrinsically escaping the sort
 
-00:22:14.166 --> 00:22:15.546 A:middle
+
+484
+00:22:14,166 --> 00:22:15,546
 of checking that the
 compiler provides.
 
-00:22:16.446 --> 00:22:18.806 A:middle
+
+485
+00:22:16,446 --> 00:22:18,806
 For example, in this case
 I have actually forgotten
 
-00:22:18.806 --> 00:22:20.256 A:middle
+
+486
+00:22:18,806 --> 00:22:20,256
 to add this colon, which means
 
-00:22:20.256 --> 00:22:22.696 A:middle
+
+487
+00:22:20,256 --> 00:22:22,696
 that check will never
 actually be true.
 
-00:22:23.426 --> 00:22:25.746 A:middle
+
+488
+00:22:23,426 --> 00:22:25,746
 In Swift 2 we have
 a better solution.
 
-00:22:26.666 --> 00:22:29.506 A:middle
+
+489
+00:22:26,666 --> 00:22:29,506
 By default, the compiler
 is checking to make sure
 
-00:22:29.506 --> 00:22:33.296 A:middle
+
+490
+00:22:29,506 --> 00:22:33,296
 that you don't use any
 APIs that are not available
 
-00:22:33.296 --> 00:22:36.936 A:middle
+
+491
+00:22:33,296 --> 00:22:36,936
 on your minimum deployment
 target.
 
-00:22:37.516 --> 00:22:42.546 A:middle
+
+492
+00:22:37,516 --> 00:22:42,546
 [ Applause ]
 
-00:22:43.046 --> 00:22:44.016 A:middle
-&gt;&gt; JOHN MCCALL: If I
+
+493
+00:22:43,046 --> 00:22:44,016
+>> JOHN MCCALL: If I
 do something like this,
 
-00:22:44.016 --> 00:22:45.676 A:middle
+
+494
+00:22:44,016 --> 00:22:45,676
 I'm always going to
 get a diagnostic.
 
-00:22:46.086 --> 00:22:50.996 A:middle
+
+495
+00:22:46,086 --> 00:22:50,996
 What that lets me have is a
 sort of safe core assumption
 
-00:22:50.996 --> 00:22:52.466 A:middle
+
+496
+00:22:50,996 --> 00:22:52,466
 that as long as my code --
 
-00:22:52.466 --> 00:22:55.786 A:middle
+
+497
+00:22:52,466 --> 00:22:55,786
 as long as my project fully
 compiles, it is at least free
 
-00:22:55.786 --> 00:22:58.336 A:middle
+
+498
+00:22:55,786 --> 00:22:58,336
 of this sort of trivial
 deployment [unintelligible].
 
-00:22:58.916 --> 00:23:02.256 A:middle
+
+499
+00:22:58,916 --> 00:23:02,256
 Now that's not the entirety
 of the compatibility story,
 
 
-
-00:22:58.916 --> 00:23:02.256 A:middle
-Now that's not the entirety
-of the compatibility story,
-
-00:23:02.256 --> 00:23:08.026 A:middle
+500
+00:23:02,256 --> 00:23:08,026
 of course, but this is a great
 way to help you adopt new APIs.
 
-00:23:08.026 --> 00:23:12.646 A:middle
+
+501
+00:23:08,026 --> 00:23:12,646
 I do want to use this.
 
-00:23:12.736 --> 00:23:13.626 A:middle
+
+502
+00:23:12,736 --> 00:23:13,626
 How do I do that?
 
-00:23:14.246 --> 00:23:17.716 A:middle
+
+503
+00:23:14,246 --> 00:23:17,716
 We added a new #available
 condition.
 
-00:23:18.536 --> 00:23:23.036 A:middle
+
+504
+00:23:18,536 --> 00:23:23,036
 In #available, you list out
 the OS versions you want
 
-00:23:23.036 --> 00:23:24.186 A:middle
+
+505
+00:23:23,036 --> 00:23:24,186
 to make sure you test for.
 
-00:23:24.186 --> 00:23:27.076 A:middle
+
+506
+00:23:24,186 --> 00:23:27,076
 And at the end you use
 this star to make sure
 
-00:23:27.076 --> 00:23:29.686 A:middle
+
+507
+00:23:27,076 --> 00:23:29,686
 that if there are any new OSs
 
-00:23:30.616 --> 00:23:32.606 A:middle
+
+508
+00:23:30,616 --> 00:23:32,606
 that you haven't
 written this code for,
 
-00:23:32.726 --> 00:23:35.526 A:middle
+
+509
+00:23:32,726 --> 00:23:35,526
 you at least get diagnostics
 about the availability there.
 
-00:23:36.866 --> 00:23:38.596 A:middle
+
+510
+00:23:36,866 --> 00:23:38,596
 Here I've used an If statement,
 
-00:23:38.596 --> 00:23:40.726 A:middle
+
+511
+00:23:38,596 --> 00:23:40,726
 but I could have used
 the Guard statement
 
-00:23:40.726 --> 00:23:42.066 A:middle
+
+512
+00:23:40,726 --> 00:23:42,066
 that Chris showed us before.
 
-00:23:42.066 --> 00:23:44.746 A:middle
+
+513
+00:23:42,066 --> 00:23:44,746
 It is the exact same
 sort of condition logic
 
-00:23:44.806 --> 00:23:45.716 A:middle
+
+514
+00:23:44,806 --> 00:23:45,716
 in all of these places.
 
-00:23:45.756 --> 00:23:46.606 A:middle
+
+515
+00:23:45,756 --> 00:23:46,606
 That's it.
 
-00:23:47.416 --> 00:23:49.646 A:middle
+
+516
+00:23:47,416 --> 00:23:49,646
 That's availability checking.
 
-00:23:49.706 --> 00:23:52.776 A:middle
+
+517
+00:23:49,706 --> 00:23:52,776
 We think this is a great new
 way for you to be able to adopt
 
-00:23:52.776 --> 00:23:54.696 A:middle
+
+518
+00:23:52,776 --> 00:23:54,696
 and take advantage
 of the new features
 
-00:23:54.696 --> 00:23:58.306 A:middle
+
+519
+00:23:54,696 --> 00:23:58,306
 of new OSs automatically
 and safely in your projects.
 
-00:23:59.076 --> 00:24:01.406 A:middle
+
+520
+00:23:59,076 --> 00:24:01,406
 We'll talk more about this
 in a talk later today.
 
 
-
-00:23:59.076 --> 00:24:01.406 A:middle
-We'll talk more about this
-in a talk later today.
-
-00:24:01.406 --> 00:24:03.486 A:middle
+521
+00:24:01,406 --> 00:24:03,486
 I really suggest
 that you come to it.
 
-00:24:05.456 --> 00:24:08.216 A:middle
+
+522
+00:24:05,456 --> 00:24:08,216
 The next thing I want to talk
 about is protocol extensions.
 
-00:24:09.156 --> 00:24:11.866 A:middle
+
+523
+00:24:09,156 --> 00:24:11,866
 Extensions are a really
 great feature in Swift.
 
-00:24:12.496 --> 00:24:15.186 A:middle
+
+524
+00:24:12,496 --> 00:24:15,186
 I can take an arbitrary
 type like Array
 
-00:24:15.476 --> 00:24:17.376 A:middle
+
+525
+00:24:15,476 --> 00:24:17,376
 and add my own methods to it.
 
-00:24:18.126 --> 00:24:23.556 A:middle
+
+526
+00:24:18,126 --> 00:24:23,556
 It is not necessarily obvious
 why this is an important thing,
 
-00:24:23.556 --> 00:24:29.276 A:middle
+
+527
+00:24:23,556 --> 00:24:29,276
 but a method is a core part,
 it is how the native APIs
 
-00:24:29.276 --> 00:24:31.336 A:middle
+
+528
+00:24:29,276 --> 00:24:31,336
 of that type are expressed.
 
-00:24:31.616 --> 00:24:33.176 A:middle
+
+529
+00:24:31,616 --> 00:24:33,176
 When I'm adding an extension,
 
-00:24:33.176 --> 00:24:36.286 A:middle
+
+530
+00:24:33,176 --> 00:24:36,286
 I'm really adding new
 functionality to a type
 
-00:24:36.586 --> 00:24:41.786 A:middle
+
+531
+00:24:36,586 --> 00:24:41,786
 that feels just as first
 class, just as core to the API
 
-00:24:41.786 --> 00:24:44.296 A:middle
+
+532
+00:24:41,786 --> 00:24:44,296
 of the type of anything
 of the designer
 
-00:24:44.296 --> 00:24:45.836 A:middle
+
+533
+00:24:44,296 --> 00:24:45,836
 of the type may have
 already added.
 
-00:24:46.486 --> 00:24:49.016 A:middle
+
+534
+00:24:46,486 --> 00:24:49,016
 That has a lot of advantages.
 
-00:24:49.016 --> 00:24:54.536 A:middle
+
+535
+00:24:49,016 --> 00:24:54,536
 Here I've added a
 Count If method,
 
-00:24:54.536 --> 00:25:00.336 A:middle
+
+536
+00:24:54,536 --> 00:25:00,336
 that simply calls a closure for
 every other array and counts
 
 
-
-00:24:54.536 --> 00:25:00.336 A:middle
-that simply calls a closure for
-every other array and counts
-
-00:25:00.336 --> 00:25:03.596 A:middle
+537
+00:25:00,336 --> 00:25:03,596
 up the number of times
 that return True.
 
-00:25:03.596 --> 00:25:07.176 A:middle
+
+538
+00:25:03,596 --> 00:25:07,176
 There is nothing in this
 method that's actually specific
 
-00:25:07.176 --> 00:25:08.006 A:middle
+
+539
+00:25:07,176 --> 00:25:08,006
 to array at all.
 
-00:25:08.286 --> 00:25:10.646 A:middle
+
+540
+00:25:08,286 --> 00:25:10,646
 This ought to work for
 an arbitrary collection.
 
-00:25:12.116 --> 00:25:16.496 A:middle
+
+541
+00:25:12,116 --> 00:25:16,496
 Unfortunately, in Swift
 1 I couldn't express this
 
-00:25:16.496 --> 00:25:17.536 A:middle
+
+542
+00:25:16,496 --> 00:25:17,536
 as a method anymore.
 
-00:25:18.126 --> 00:25:20.886 A:middle
+
+543
+00:25:18,126 --> 00:25:20,886
 To make this generic over
 an arbitrary collection,
 
-00:25:21.226 --> 00:25:23.026 A:middle
+
+544
+00:25:21,226 --> 00:25:23,026
 I would have had to write
 something like this.
 
-00:25:24.506 --> 00:25:26.296 A:middle
+
+545
+00:25:24,506 --> 00:25:26,296
 As a lot of you have
 pointed out to us,
 
-00:25:26.296 --> 00:25:28.396 A:middle
+
+546
+00:25:26,296 --> 00:25:28,396
 this is not exactly optimal.
 
-00:25:28.906 --> 00:25:32.846 A:middle
+
+547
+00:25:28,906 --> 00:25:32,846
 The first thing is that this
 is a lot of extra syntax,
 
-00:25:32.846 --> 00:25:36.696 A:middle
+
+548
+00:25:32,846 --> 00:25:36,696
 there is sort of a blindness
 about all of the angle brackets
 
-00:25:36.696 --> 00:25:40.046 A:middle
+
+549
+00:25:36,696 --> 00:25:40,046
 in it, all of the extra crust
 to just make this generic.
 
-00:25:41.286 --> 00:25:44.506 A:middle
+
+550
+00:25:41,286 --> 00:25:44,506
 The second thing is it
 is no longer a method.
 
-00:25:45.316 --> 00:25:47.776 A:middle
+
+551
+00:25:45,316 --> 00:25:47,776
 Because it is no longer
 a method, first off,
 
-00:25:47.776 --> 00:25:50.896 A:middle
+
+552
+00:25:47,776 --> 00:25:50,896
 it doesn't feel like a
 natural part of using the type.
 
-00:25:51.526 --> 00:25:54.106 A:middle
+
+553
+00:25:51,526 --> 00:25:54,106
 Second off, it is a
 lot less discoverable.
 
-00:25:54.546 --> 00:25:58.136 A:middle
+
+554
+00:25:54,546 --> 00:25:58,136
 It won't show up in any lists
 of the functionality on array,
 
-00:25:58.476 --> 00:26:01.236 A:middle
+
+555
+00:25:58,476 --> 00:26:01,236
 and in particular it's not
 going to show up in the list
 
 
-
-00:25:58.476 --> 00:26:01.236 A:middle
-and in particular it's not
-going to show up in the list
-
-00:26:01.326 --> 00:26:04.176 A:middle
+556
+00:26:01,326 --> 00:26:04,176
 of functionality provided
 by code completion.
 
-00:26:04.676 --> 00:26:09.796 A:middle
+
+557
+00:26:04,676 --> 00:26:09,796
 Which means that great, you
 have written this awesome Count
 
-00:26:09.796 --> 00:26:15.196 A:middle
+
+558
+00:26:09,796 --> 00:26:15,196
 If thing, but nobody using this
 will realize it exists unless
 
-00:26:15.196 --> 00:26:18.986 A:middle
+
+559
+00:26:15,196 --> 00:26:18,986
 you point it out to them.
 
-00:26:19.186 --> 00:26:19.606 A:middle
+
+560
+00:26:19,186 --> 00:26:19,606
 All right.
 
-00:26:19.606 --> 00:26:20.266 A:middle
+
+561
+00:26:19,606 --> 00:26:20,266
 Let's go back.
 
-00:26:20.736 --> 00:26:24.166 A:middle
+
+562
+00:26:20,736 --> 00:26:24,166
 We had this extension on array
 just to add the method to array.
 
-00:26:24.496 --> 00:26:27.476 A:middle
+
+563
+00:26:24,496 --> 00:26:27,476
 Why can't we just
 extend -- I don't know --
 
-00:26:27.586 --> 00:26:30.686 A:middle
+
+564
+00:26:27,586 --> 00:26:30,686
 everything that implements
 collection type?
 
-00:26:30.686 --> 00:26:33.426 A:middle
+
+565
+00:26:30,686 --> 00:26:33,426
 In Swift 2, I'm happy
 to say that now you can.
 
-00:26:34.556 --> 00:26:38.976 A:middle
+
+566
+00:26:34,556 --> 00:26:38,976
 You extend collection type
 rather than extending array.
 
-00:26:39.626 --> 00:26:40.406 A:middle
+
+567
+00:26:39,626 --> 00:26:40,406
 When you do this,
 
-00:26:40.406 --> 00:26:43.676 A:middle
+
+568
+00:26:40,406 --> 00:26:43,676
 you're automatically
 adding the method everywhere
 
-00:26:43.676 --> 00:26:46.256 A:middle
+
+569
+00:26:43,676 --> 00:26:46,256
 to every single type that
 implements collection type,
 
-00:26:46.576 --> 00:26:51.036 A:middle
+
+570
+00:26:46,576 --> 00:26:51,036
 not just from the standard
 library or anything but even
 
-00:26:51.376 --> 00:26:56.456 A:middle
+
+571
+00:26:51,376 --> 00:26:56,456
 in your own types that
 happen to conform to this.
 
-00:26:56.456 --> 00:26:59.496 A:middle
+
+572
+00:26:56,456 --> 00:26:59,496
 Not only is that great for
 writing your own generic code,
 
-00:26:59.496 --> 00:27:03.026 A:middle
+
+573
+00:26:59,496 --> 00:27:03,026
 but we found it really lets
 us overhaul a lot of things
 
 
-
-00:26:59.496 --> 00:27:03.026 A:middle
-but we found it really lets
-us overhaul a lot of things
-
-00:27:03.026 --> 00:27:04.606 A:middle
+574
+00:27:03,026 --> 00:27:04,606
 that we weren't really
 happy with about
 
-00:27:04.606 --> 00:27:06.346 A:middle
+
+575
+00:27:04,606 --> 00:27:06,346
 with the standard
 library in Swift 1.
 
-00:27:07.416 --> 00:27:10.406 A:middle
+
+576
+00:27:07,416 --> 00:27:10,406
 There were a lot of
 things in Swift 1 that had
 
-00:27:10.556 --> 00:27:14.456 A:middle
+
+577
+00:27:10,556 --> 00:27:14,456
 to be global functions
 because they had to be generic
 
-00:27:14.546 --> 00:27:15.996 A:middle
+
+578
+00:27:14,546 --> 00:27:15,996
 or because we wrote
 them generic.
 
-00:27:16.746 --> 00:27:19.996 A:middle
+
+579
+00:27:16,746 --> 00:27:19,996
 Then worse, in order to
 make the methods we sort
 
-00:27:19.996 --> 00:27:23.656 A:middle
+
+580
+00:27:19,996 --> 00:27:23,656
 of special-cased certain
 types, like array has a lot
 
-00:27:23.656 --> 00:27:25.606 A:middle
+
+581
+00:27:23,656 --> 00:27:25,606
 of these map and
 filter methods on it.
 
-00:27:26.096 --> 00:27:29.036 A:middle
+
+582
+00:27:26,096 --> 00:27:29,036
 Other types like
 Set may not have.
 
-00:27:30.296 --> 00:27:34.706 A:middle
+
+583
+00:27:30,296 --> 00:27:34,706
 In Swift 2, this functionality
 is going to be available,
 
-00:27:34.936 --> 00:27:38.276 A:middle
+
+584
+00:27:34,936 --> 00:27:38,276
 this sort of filter and map
 functionality is expressed
 
-00:27:38.276 --> 00:27:42.826 A:middle
+
+585
+00:27:38,276 --> 00:27:42,826
 with extensions, meaning it is
 available on every single thing.
 
-00:27:42.826 --> 00:27:45.006 A:middle
+
+586
+00:27:42,826 --> 00:27:45,006
 It makes it a lot
 more discoverable,
 
-00:27:45.336 --> 00:27:48.466 A:middle
+
+587
+00:27:45,336 --> 00:27:48,466
 means using the standard
 library is more uniform,
 
-00:27:49.046 --> 00:27:51.096 A:middle
+
+588
+00:27:49,046 --> 00:27:51,096
 and we really think
 that you'll love it.
 
-00:27:52.516 --> 00:27:58.026 A:middle
+
+589
+00:27:52,516 --> 00:27:58,026
 [ Applause ]
 
-00:27:58.526 --> 00:28:00.946 A:middle
-&gt;&gt; JOHN MCCALL: I really
+
+590
+00:27:58,526 --> 00:28:00,946
+>> JOHN MCCALL: I really
 haven't even gone into a third
 
 
-
-00:27:58.526 --> 00:28:00.946 A:middle
-&gt;&gt; JOHN MCCALL: I really
-haven't even gone into a third
-
-00:28:00.946 --> 00:28:05.516 A:middle
+591
+00:28:00,946 --> 00:28:05,516
 of the complexity in the awesome
 new power of this feature.
 
-00:28:07.266 --> 00:28:09.366 A:middle
+
+592
+00:28:07,266 --> 00:28:09,366
 We're going to have a
 talk dedicated to this,
 
-00:28:09.476 --> 00:28:11.256 A:middle
+
+593
+00:28:09,476 --> 00:28:11,256
 it is a great talk tomorrow.
 
-00:28:11.736 --> 00:28:14.206 A:middle
+
+594
+00:28:11,736 --> 00:28:14,206
 I strongly suggest
 you come to it.
 
-00:28:14.206 --> 00:28:17.506 A:middle
+
+595
+00:28:14,206 --> 00:28:17,506
 It is about the great
 new design patterns
 
-00:28:17.576 --> 00:28:19.386 A:middle
+
+596
+00:28:17,576 --> 00:28:19,386
 that protocols enable in Swift.
 
-00:28:20.346 --> 00:28:22.376 A:middle
+
+597
+00:28:20,346 --> 00:28:22,376
 The rest of the talk is going
 to be about error handling.
 
-00:28:23.286 --> 00:28:25.466 A:middle
+
+598
+00:28:23,286 --> 00:28:25,466
 I don't think anyone
 really likes thinking
 
-00:28:25.466 --> 00:28:26.496 A:middle
+
+599
+00:28:25,466 --> 00:28:26,496
 about error handling.
 
-00:28:26.496 --> 00:28:32.996 A:middle
+
+600
+00:28:26,496 --> 00:28:32,996
 It is always sort of this guilty
 thing in the back of our minds
 
-00:28:32.996 --> 00:28:36.666 A:middle
+
+601
+00:28:32,996 --> 00:28:36,666
 if you're at all like me.
 
-00:28:36.666 --> 00:28:38.796 A:middle
+
+602
+00:28:36,666 --> 00:28:38,796
 It is really, really important.
 
-00:28:38.796 --> 00:28:42.516 A:middle
+
+603
+00:28:38,796 --> 00:28:42,516
 When we were looking at
 what we could do to Swift
 
-00:28:42.906 --> 00:28:44.966 A:middle
+
+604
+00:28:42,906 --> 00:28:44,966
 that would really
 make it a more robust,
 
-00:28:44.966 --> 00:28:48.106 A:middle
+
+605
+00:28:44,966 --> 00:28:48,106
 more expressive language,
 we said, okay,
 
-00:28:48.106 --> 00:28:50.126 A:middle
+
+606
+00:28:48,106 --> 00:28:50,126
 the most important
 thing here is going
 
-00:28:50.126 --> 00:28:54.036 A:middle
+
+607
+00:28:50,126 --> 00:28:54,036
 to be doing something
 about error handling.
 
-00:28:54.036 --> 00:28:58.706 A:middle
+
+608
+00:28:54,036 --> 00:28:58,706
 When we looked at the
 solutions that were out there,
 
-00:28:58.706 --> 00:29:00.306 A:middle
+
+609
+00:28:58,706 --> 00:29:00,306
 in other languages, in Cocoa,
 
 
-
-00:28:58.706 --> 00:29:00.306 A:middle
-in other languages, in Cocoa,
-
-00:29:00.306 --> 00:29:03.186 A:middle
+610
+00:29:00,306 --> 00:29:03,186
 we weren't really
 happy with any of them.
 
-00:29:03.186 --> 00:29:06.876 A:middle
+
+611
+00:29:03,186 --> 00:29:06,876
 They all have sort
 of major pitfalls
 
-00:29:06.876 --> 00:29:08.266 A:middle
+
+612
+00:29:06,876 --> 00:29:08,266
 that we didn't really like.
 
-00:29:09.316 --> 00:29:10.926 A:middle
+
+613
+00:29:09,316 --> 00:29:10,926
 Some of them, you know,
 
-00:29:10.926 --> 00:29:13.966 A:middle
+
+614
+00:29:10,926 --> 00:29:13,966
 are based around propagating
 the errors around automatically
 
-00:29:13.966 --> 00:29:16.086 A:middle
+
+615
+00:29:13,966 --> 00:29:16,086
 like with NSError
 in Objective-C,
 
-00:29:16.396 --> 00:29:19.846 A:middle
+
+616
+00:29:16,396 --> 00:29:19,846
 what that creates is a lot of
 repetitive error-prone code
 
-00:29:19.846 --> 00:29:20.696 A:middle
+
+617
+00:29:19,846 --> 00:29:20,696
 where you end up having
 
-00:29:20.696 --> 00:29:23.736 A:middle
+
+618
+00:29:20,696 --> 00:29:23,736
 to duplicate logic
 all over the place.
 
-00:29:24.006 --> 00:29:26.566 A:middle
+
+619
+00:29:24,006 --> 00:29:26,566
 That means it is very
 easy to get wrong.
 
-00:29:26.896 --> 00:29:29.606 A:middle
+
+620
+00:29:26,896 --> 00:29:29,606
 More importantly, when
 you propagate error values
 
-00:29:29.606 --> 00:29:34.796 A:middle
+
+621
+00:29:29,606 --> 00:29:34,796
 around yourself, the
 implicit default behavior is
 
-00:29:34.796 --> 00:29:36.546 A:middle
+
+622
+00:29:34,796 --> 00:29:36,546
 that you're ignoring errors.
 
-00:29:37.086 --> 00:29:39.146 A:middle
+
+623
+00:29:37,086 --> 00:29:39,146
 That's just never
 the right default.
 
-00:29:39.436 --> 00:29:42.276 A:middle
+
+624
+00:29:39,436 --> 00:29:42,276
 You should have to think about
 errors at least a little bit.
 
-00:29:43.276 --> 00:29:45.456 A:middle
+
+625
+00:29:43,276 --> 00:29:45,456
 On the other end of the
 spectrum, there are languages
 
-00:29:45.516 --> 00:29:48.376 A:middle
+
+626
+00:29:45,516 --> 00:29:48,376
 that propagate errors
 around implicitly,
 
-00:29:48.916 --> 00:29:50.316 A:middle
+
+627
+00:29:48,916 --> 00:29:50,316
 like with exception handling.
 
-00:29:50.366 --> 00:29:52.946 A:middle
+
+628
+00:29:50,366 --> 00:29:52,946
 But we didn't like how any
 of those worked either.
 
-00:29:52.946 --> 00:29:58.686 A:middle
+
+629
+00:29:52,946 --> 00:29:58,686
 There is too much that was
 implicit, it was too easy not
 
-00:29:58.686 --> 00:30:01.626 A:middle
+
+630
+00:29:58,686 --> 00:30:01,626
 to think of errors again,
 and you end up with pitfalls
 
 
-
-00:29:58.686 --> 00:30:01.626 A:middle
-to think of errors again,
-and you end up with pitfalls
-
-00:30:01.626 --> 00:30:06.566 A:middle
+631
+00:30:01,626 --> 00:30:06,566
 where you just didn't
 understand what could go wrong
 
-00:30:06.566 --> 00:30:07.286 A:middle
+
+632
+00:30:06,566 --> 00:30:07,286
 in your program.
 
-00:30:07.486 --> 00:30:10.786 A:middle
+
+633
+00:30:07,486 --> 00:30:10,786
 You didn't understand
 how control could flow
 
-00:30:10.786 --> 00:30:12.056 A:middle
+
+634
+00:30:10,786 --> 00:30:12,056
 from one place to another.
 
-00:30:12.576 --> 00:30:16.106 A:middle
+
+635
+00:30:12,576 --> 00:30:16,106
 Again, it wasn't a safe,
 reliable programming model.
 
-00:30:16.636 --> 00:30:22.426 A:middle
+
+636
+00:30:16,636 --> 00:30:22,426
 There are really three different
 ways that functions can fail.
 
-00:30:23.796 --> 00:30:27.786 A:middle
+
+637
+00:30:23,796 --> 00:30:27,786
 One way is that they can simply
 -- a lot of functions just fail
 
-00:30:27.786 --> 00:30:32.486 A:middle
+
+638
+00:30:27,786 --> 00:30:32,486
 in one fairly simple,
 innate, obvious way.
 
-00:30:32.986 --> 00:30:35.016 A:middle
+
+639
+00:30:32,986 --> 00:30:35,016
 For example, unless
 you're running a compiler,
 
-00:30:35.086 --> 00:30:38.526 A:middle
+
+640
+00:30:35,086 --> 00:30:38,526
 you probably don't care
 why parsing an integer
 
-00:30:38.526 --> 00:30:41.236 A:middle
+
+641
+00:30:38,526 --> 00:30:41,236
 out of a string failed, this
 isn't going to be something
 
-00:30:41.236 --> 00:30:43.936 A:middle
+
+642
+00:30:41,236 --> 00:30:43,936
 that you're getting
 the juicy details of
 
-00:30:43.936 --> 00:30:45.276 A:middle
+
+643
+00:30:43,936 --> 00:30:45,276
 and reporting to the user.
 
-00:30:45.556 --> 00:30:48.016 A:middle
+
+644
+00:30:45,556 --> 00:30:48,016
 Probably you want to
 handle that directly.
 
-00:30:48.786 --> 00:30:51.126 A:middle
+
+645
+00:30:48,786 --> 00:30:51,126
 That's already something
 that when we looked at it,
 
-00:30:51.256 --> 00:30:53.826 A:middle
+
+646
+00:30:51,256 --> 00:30:53,826
 this is handled extremely
 well in Swift already,
 
-00:30:53.896 --> 00:30:55.676 A:middle
+
+647
+00:30:53,896 --> 00:30:55,676
 just with optional results.
 
-00:30:56.246 --> 00:30:58.146 A:middle
+
+648
+00:30:56,246 --> 00:30:58,146
 We didn't think we needed
 to do anything here.
 
-00:30:58.146 --> 00:31:00.066 A:middle
+
+649
+00:30:58,146 --> 00:31:00,066
 We're really happy with
 how that works already.
 
 
-
-00:30:58.146 --> 00:31:00.066 A:middle
-We're really happy with
-how that works already.
-
-00:31:00.526 --> 00:31:04.006 A:middle
+650
+00:31:00,526 --> 00:31:04,006
 On the other end of the
 spectrum, there are a lot
 
-00:31:04.006 --> 00:31:06.786 A:middle
+
+651
+00:31:04,006 --> 00:31:06,786
 of things that are logic
 failures in your program
 
-00:31:07.126 --> 00:31:09.996 A:middle
+
+652
+00:31:07,126 --> 00:31:09,996
 that are programmer
 mistakes, assertions,
 
-00:31:10.736 --> 00:31:14.326 A:middle
+
+653
+00:31:10,736 --> 00:31:14,326
 indexes out of bounds,
 the vast majority of ways
 
-00:31:14.326 --> 00:31:18.616 A:middle
+
+654
+00:31:14,326 --> 00:31:18,616
 in which people use
 NSException, that kind of thing.
 
-00:31:18.806 --> 00:31:21.276 A:middle
+
+655
+00:31:18,806 --> 00:31:21,276
 For these things, they
 really actually shouldn't
 
-00:31:21.336 --> 00:31:22.306 A:middle
+
+656
+00:31:21,336 --> 00:31:22,306
 be recoverable.
 
-00:31:22.656 --> 00:31:25.026 A:middle
+
+657
+00:31:22,656 --> 00:31:25,026
 When you can recover
 from this kind of thing,
 
-00:31:25.026 --> 00:31:30.366 A:middle
+
+658
+00:31:25,026 --> 00:31:30,366
 you're just promoting a
 less stable program overall.
 
-00:31:30.656 --> 00:31:33.676 A:middle
+
+659
+00:31:30,656 --> 00:31:33,676
 You don't know what state
 your program is actually
 
-00:31:33.676 --> 00:31:37.166 A:middle
+
+660
+00:31:33,676 --> 00:31:37,166
 in if you randomly recover
 from an index out of bounds.
 
-00:31:37.566 --> 00:31:39.956 A:middle
+
+661
+00:31:37,566 --> 00:31:39,956
 You could even be
 creating security problems
 
-00:31:39.956 --> 00:31:40.956 A:middle
+
+662
+00:31:39,956 --> 00:31:40,956
 in your application.
 
-00:31:41.516 --> 00:31:48.646 A:middle
+
+663
+00:31:41,516 --> 00:31:48,646
 In the middle, there is
 this large spectrum of APIs
 
-00:31:48.646 --> 00:31:51.606 A:middle
+
+664
+00:31:48,646 --> 00:31:51,606
 that can fail in a
 very rich set of ways.
 
-00:31:52.356 --> 00:31:54.276 A:middle
+
+665
+00:31:52,356 --> 00:31:54,276
 That's really what we
 wanted to focus on.
 
-00:31:54.576 --> 00:31:58.296 A:middle
+
+666
+00:31:54,576 --> 00:31:58,296
 The things that you today in
 Cocoa would use NSError for.
 
-00:31:58.296 --> 00:32:03.506 A:middle
+
+667
+00:31:58,296 --> 00:32:03,506
 I want to work through
 an example for you.
 
 
-
-00:31:58.296 --> 00:32:03.506 A:middle
-I want to work through
-an example for you.
-
-00:32:03.686 --> 00:32:05.926 A:middle
+668
+00:32:03,686 --> 00:32:05,926
 This is a preflight
 method, I have some sort
 
-00:32:05.926 --> 00:32:09.086 A:middle
+
+669
+00:32:05,926 --> 00:32:09,086
 of operation I want to
 prefly to make sure it works.
 
-00:32:09.126 --> 00:32:11.966 A:middle
+
+670
+00:32:09,126 --> 00:32:11,966
 This is something that a lot of
 you have written I think before.
 
-00:32:12.586 --> 00:32:15.546 A:middle
+
+671
+00:32:12,586 --> 00:32:15,546
 I'll check to see whether some
 file is actually reachable,
 
-00:32:15.546 --> 00:32:18.396 A:middle
+
+672
+00:32:15,546 --> 00:32:18,396
 and then I'm going to
 reset some state associated
 
-00:32:18.446 --> 00:32:20.556 A:middle
+
+673
+00:32:18,446 --> 00:32:20,556
 with the operation.
 
-00:32:20.676 --> 00:32:23.396 A:middle
+
+674
+00:32:20,676 --> 00:32:23,396
 Now checking whether the
 resource is reachable,
 
-00:32:23.396 --> 00:32:25.616 A:middle
+
+675
+00:32:23,396 --> 00:32:25,616
 this is an operation
 that can fail.
 
-00:32:25.986 --> 00:32:28.036 A:middle
+
+676
+00:32:25,986 --> 00:32:28,036
 It can fail in a
 wide variety of ways.
 
-00:32:28.036 --> 00:32:30.426 A:middle
+
+677
+00:32:28,036 --> 00:32:30,426
 It should report
 something back because, hey,
 
-00:32:30.856 --> 00:32:32.786 A:middle
+
+678
+00:32:30,856 --> 00:32:32,786
 somebody calling
 this really may want
 
-00:32:32.786 --> 00:32:35.266 A:middle
+
+679
+00:32:32,786 --> 00:32:35,266
 to know why something
 isn't reachable
 
-00:32:35.496 --> 00:32:38.086 A:middle
+
+680
+00:32:35,496 --> 00:32:38,086
 and maybe treat it
 differently depending on why.
 
-00:32:38.656 --> 00:32:45.316 A:middle
+
+681
+00:32:38,656 --> 00:32:45,316
 If I wanted to use NSError
 for this, this is kind
 
-00:32:45.316 --> 00:32:46.836 A:middle
+
+682
+00:32:45,316 --> 00:32:46,836
 of what the code
 ends up looking like.
 
-00:32:47.206 --> 00:32:50.916 A:middle
+
+683
+00:32:47,206 --> 00:32:50,916
 I'm taking this error, I'm
 propagating it out to my caller.
 
-00:32:52.496 --> 00:32:56.206 A:middle
+
+684
+00:32:52,496 --> 00:32:56,206
 There are things
 to like about this.
 
-00:32:56.206 --> 00:32:58.296 A:middle
+
+685
+00:32:56,206 --> 00:32:58,296
 There are a lot of things
 we don't really like.
 
-00:32:59.346 --> 00:33:02.436 A:middle
+
+686
+00:32:59,346 --> 00:33:02,436
 It adds a lot of
 boilerplate to my logic.
 
 
-
-00:32:59.346 --> 00:33:02.436 A:middle
-It adds a lot of
-boilerplate to my logic.
-
-00:33:02.996 --> 00:33:08.356 A:middle
+687
+00:33:02,996 --> 00:33:08,356
 I had a tight little two-line
 function, now it is turned
 
-00:33:08.356 --> 00:33:10.916 A:middle
+
+688
+00:33:08,356 --> 00:33:10,916
 into this -- you know,
 it has this If statement,
 
-00:33:10.916 --> 00:33:13.016 A:middle
+
+689
+00:33:10,916 --> 00:33:13,016
 extra nesting, the
 extra parameter,
 
-00:33:13.016 --> 00:33:16.336 A:middle
+
+690
+00:33:13,016 --> 00:33:16,336
 there is a lot here
 whose sole purpose is
 
-00:33:16.336 --> 00:33:18.516 A:middle
+
+691
+00:33:16,336 --> 00:33:18,516
 to express there is an error,
 
-00:33:18.746 --> 00:33:22.366 A:middle
+
+692
+00:33:18,746 --> 00:33:22,366
 and we're propagating
 it out to the caller.
 
-00:33:22.366 --> 00:33:28.016 A:middle
+
+693
+00:33:22,366 --> 00:33:28,016
 Worse, again, there
 is a convention here,
 
-00:33:28.596 --> 00:33:30.666 A:middle
+
+694
+00:33:28,596 --> 00:33:30,666
 that's a convention
 you need to know about.
 
-00:33:30.666 --> 00:33:33.416 A:middle
+
+695
+00:33:30,666 --> 00:33:33,416
 And it's a convention you
 have to implement manually,
 
-00:33:33.416 --> 00:33:36.866 A:middle
+
+696
+00:33:33,416 --> 00:33:36,866
 and the compiler's not really
 going to help you with it.
 
-00:33:37.336 --> 00:33:40.506 A:middle
+
+697
+00:33:37,336 --> 00:33:40,506
 Again, I made a mistake here.
 
-00:33:40.976 --> 00:33:44.896 A:middle
+
+698
+00:33:40,976 --> 00:33:44,896
 The convention is that an error
 happens when you return False,
 
-00:33:44.896 --> 00:33:48.026 A:middle
+
+699
+00:33:44,896 --> 00:33:48,026
 I'm actually checking
 it the wrong way.
 
-00:33:48.386 --> 00:33:50.546 A:middle
+
+700
+00:33:48,386 --> 00:33:50,546
 I don't know why they
 trust me to even work
 
-00:33:50.546 --> 00:33:51.296 A:middle
+
+701
+00:33:50,546 --> 00:33:51,296
 with compilers [laughter].
 
-00:33:54.136 --> 00:33:55.936 A:middle
+
+702
+00:33:54,136 --> 00:33:55,936
 I need to add this
 Not here in order
 
-00:33:55.936 --> 00:33:57.146 A:middle
+
+703
+00:33:55,936 --> 00:33:57,146
 to get the behavior I want.
 
-00:33:58.426 --> 00:34:01.186 A:middle
+
+704
+00:33:58,426 --> 00:34:01,186
 Okay. That's -- well, no, sorry.
 
 
-
-00:33:58.426 --> 00:34:01.186 A:middle
-Okay. That's -- well, no, sorry.
-
-00:34:02.446 --> 00:34:03.786 A:middle
+705
+00:34:02,446 --> 00:34:03,786
 Those are the downsides of this.
 
-00:34:03.786 --> 00:34:05.956 A:middle
+
+706
+00:34:03,786 --> 00:34:05,956
 There is actually a lot
 that we like about it too.
 
-00:34:07.446 --> 00:34:10.976 A:middle
+
+707
+00:34:07,446 --> 00:34:10,976
 The first thing is, it is
 obvious from reading this code
 
-00:34:11.396 --> 00:34:14.966 A:middle
+
+708
+00:34:11,396 --> 00:34:14,966
 that check resource is reachable
 is something that can fail.
 
-00:34:15.226 --> 00:34:17.476 A:middle
+
+709
+00:34:15,226 --> 00:34:17,476
 It says right there in the
 name, it talks about errors,
 
-00:34:17.795 --> 00:34:19.666 A:middle
+
+710
+00:34:17,795 --> 00:34:19,666
 it has the explicit
 error handling thing,
 
-00:34:19.936 --> 00:34:21.596 A:middle
+
+711
+00:34:19,936 --> 00:34:21,596
 this explicit error parameter.
 
-00:34:22.735 --> 00:34:24.766 A:middle
+
+712
+00:34:22,735 --> 00:34:24,766
 Similarly, it is obvious
 
-00:34:24.766 --> 00:34:26.985 A:middle
+
+713
+00:34:24,766 --> 00:34:26,985
 that preflight is an
 operation that can fail.
 
-00:34:27.206 --> 00:34:31.426 A:middle
+
+714
+00:34:27,206 --> 00:34:31,426
 Again, explicit error parameter,
 the return value, et cetera.
 
-00:34:32.676 --> 00:34:36.826 A:middle
+
+715
+00:34:32,676 --> 00:34:36,826
 The third thing is, there
 isn't implicit control flow.
 
-00:34:37.716 --> 00:34:40.396 A:middle
+
+716
+00:34:37,716 --> 00:34:40,396
 I can just look at this
 thing and understand
 
-00:34:41.596 --> 00:34:43.025 A:middle
+
+717
+00:34:41,596 --> 00:34:43,025
 where all the jumps in it are.
 
-00:34:43.456 --> 00:34:48.065 A:middle
+
+718
+00:34:43,456 --> 00:34:48,065
 I can analyze my code statically
 as a human, not as a compiler.
 
-00:34:48.226 --> 00:34:51.036 A:middle
+
+719
+00:34:48,226 --> 00:34:51,036
 As a human, I can look
 at this code and reason
 
-00:34:51.036 --> 00:34:53.126 A:middle
+
+720
+00:34:51,036 --> 00:34:53,126
 about what it is
 doing without needing
 
-00:34:53.126 --> 00:34:54.886 A:middle
+
+721
+00:34:53,126 --> 00:34:54,886
 to know every last detail
 
-00:34:54.886 --> 00:34:59.606 A:middle
+
+722
+00:34:54,886 --> 00:34:59,606
 of every single function
 that I'm calling.
 
-00:34:59.746 --> 00:35:00.026 A:middle
+
+723
+00:34:59,746 --> 00:35:00,026
 All right.
 
 
-
-00:34:59.746 --> 00:35:00.026 A:middle
-All right.
-
-00:35:00.706 --> 00:35:01.936 A:middle
+724
+00:35:00,706 --> 00:35:01,936
 Now let's go back
 to the example.
 
-00:35:02.076 --> 00:35:03.346 A:middle
+
+725
+00:35:02,076 --> 00:35:03,346
 This is how it looked before.
 
-00:35:04.316 --> 00:35:07.026 A:middle
+
+726
+00:35:04,316 --> 00:35:07,026
 What's going to happen if I
 try to compile this in Swift?
 
-00:35:07.436 --> 00:35:10.846 A:middle
+
+727
+00:35:07,436 --> 00:35:10,846
 I'm going to get
 an error message
 
-00:35:10.906 --> 00:35:12.376 A:middle
+
+728
+00:35:10,906 --> 00:35:12,376
 because I'm not handling
 the error.
 
-00:35:13.876 --> 00:35:20.166 A:middle
+
+729
+00:35:13,876 --> 00:35:20,166
 There are two components to
 handling errors in Swift.
 
-00:35:20.976 --> 00:35:23.906 A:middle
+
+730
+00:35:20,976 --> 00:35:23,906
 The first is that whenever
 you're calling an API
 
-00:35:23.906 --> 00:35:26.726 A:middle
+
+731
+00:35:23,906 --> 00:35:26,726
 that can fail, you have
 to use this Try keyword.
 
-00:35:27.526 --> 00:35:30.986 A:middle
+
+732
+00:35:27,526 --> 00:35:30,986
 The Try communicates, it
 is really there primarily
 
-00:35:30.986 --> 00:35:32.256 A:middle
+
+733
+00:35:30,986 --> 00:35:32,256
 for someone reading the code.
 
-00:35:32.466 --> 00:35:36.186 A:middle
+
+734
+00:35:32,466 --> 00:35:36,186
 It communicates to you, hey,
 this is something that can fail.
 
-00:35:36.576 --> 00:35:37.946 A:middle
+
+735
+00:35:36,576 --> 00:35:37,946
 That means when you're
 coming back,
 
-00:35:37.946 --> 00:35:40.026 A:middle
+
+736
+00:35:37,946 --> 00:35:40,026
 when you're maintaining
 this in the future,
 
-00:35:40.386 --> 00:35:42.786 A:middle
+
+737
+00:35:40,386 --> 00:35:42,786
 I know straight off --
 
-00:35:43.656 --> 00:35:46.526 A:middle
+
+738
+00:35:43,656 --> 00:35:46,526
 Reset State, that's
 not necessarily going
 
-00:35:46.526 --> 00:35:49.246 A:middle
+
+739
+00:35:46,526 --> 00:35:49,246
 to be called every single
 time to this function.
 
-00:35:49.636 --> 00:35:51.726 A:middle
+
+740
+00:35:49,636 --> 00:35:51,726
 That may be a really
 important thing for me to know.
 
-00:35:52.076 --> 00:35:55.616 A:middle
+
+741
+00:35:52,076 --> 00:35:55,616
 When I'm writing this code in
 the first place, it is something
 
-00:35:55.616 --> 00:35:56.586 A:middle
+
+742
+00:35:55,616 --> 00:35:56,586
 for me to think about.
 
-00:35:56.866 --> 00:36:01.466 A:middle
+
+743
+00:35:56,866 --> 00:36:01,466
 Hey, should Reset State be
 called every single time I exit
 
 
-
-00:35:56.866 --> 00:36:01.466 A:middle
-Hey, should Reset State be
-called every single time I exit
-
-00:36:01.466 --> 00:36:01.956 A:middle
+744
+00:36:01,466 --> 00:36:01,956
 the function?
 
-00:36:02.646 --> 00:36:03.766 A:middle
+
+745
+00:36:02,646 --> 00:36:03,766
 For a preflight operation?
 
-00:36:03.766 --> 00:36:07.656 A:middle
+
+746
+00:36:03,766 --> 00:36:07,656
 Maybe. That alone isn't enough,
 
-00:36:07.656 --> 00:36:10.026 A:middle
+
+747
+00:36:07,656 --> 00:36:10,026
 I'm not actually handling
 the error in any way.
 
-00:36:10.416 --> 00:36:15.116 A:middle
+
+748
+00:36:10,416 --> 00:36:15,116
 This is because in Swift, by
 default, functions can't throw.
 
-00:36:16.096 --> 00:36:19.516 A:middle
+
+749
+00:36:16,096 --> 00:36:19,516
 That's actually a really
 core aspect of our design
 
-00:36:20.996 --> 00:36:23.986 A:middle
+
+750
+00:36:20,996 --> 00:36:23,986
 because what it means
 is errors are bounded.
 
-00:36:24.546 --> 00:36:27.846 A:middle
+
+751
+00:36:24,546 --> 00:36:27,846
 You don't have to think about
 literally everything being able
 
-00:36:27.846 --> 00:36:30.466 A:middle
+
+752
+00:36:27,846 --> 00:36:30,466
 to throw an exception
 like it can in Java or C#
 
-00:36:30.556 --> 00:36:32.946 A:middle
+
+753
+00:36:30,556 --> 00:36:32,946
 or basically every
 language using exceptions.
 
-00:36:34.856 --> 00:36:39.036 A:middle
+
+754
+00:36:34,856 --> 00:36:39,036
 Instead, it is really
 just very specific things
 
-00:36:39.036 --> 00:36:42.076 A:middle
+
+755
+00:36:39,036 --> 00:36:42,076
 that you know you need to worry
 about whether they can throw.
 
-00:36:42.266 --> 00:36:43.846 A:middle
+
+756
+00:36:42,266 --> 00:36:43,846
 And when you call
 them in your code,
 
-00:36:43.846 --> 00:36:45.386 A:middle
+
+757
+00:36:43,846 --> 00:36:45,386
 it is always marked with Try.
 
-00:36:45.666 --> 00:36:49.006 A:middle
+
+758
+00:36:45,666 --> 00:36:49,006
 That combination
 communicates a lot.
 
-00:36:49.266 --> 00:36:51.376 A:middle
+
+759
+00:36:49,266 --> 00:36:51,376
 Okay. Well, suppose I do want
 
-00:36:51.376 --> 00:36:53.356 A:middle
+
+760
+00:36:51,376 --> 00:36:53,356
 to just propagate the
 error out to my caller.
 
-00:36:53.906 --> 00:36:57.386 A:middle
+
+761
+00:36:53,906 --> 00:36:57,386
 In order to do that, all I have
 to do is tell the compiler, hey,
 
-00:36:57.386 --> 00:37:00.036 A:middle
+
+762
+00:36:57,386 --> 00:37:00,036
 it is okay for this thing
 to throw the error out.
 
 
-
-00:36:57.386 --> 00:37:00.036 A:middle
-it is okay for this thing
-to throw the error out.
-
-00:37:00.716 --> 00:37:02.486 A:middle
+763
+00:37:00,716 --> 00:37:02,486
 I do that with throws.
 
-00:37:03.156 --> 00:37:05.946 A:middle
+
+764
+00:37:03,156 --> 00:37:05,946
 That may not be how I
 want to handle this.
 
-00:37:06.086 --> 00:37:07.816 A:middle
+
+765
+00:37:06,086 --> 00:37:07,816
 This is a preflight operation.
 
-00:37:08.066 --> 00:37:11.826 A:middle
+
+766
+00:37:08,066 --> 00:37:11,826
 I probably want to
 just swallow the error
 
-00:37:11.826 --> 00:37:14.096 A:middle
+
+767
+00:37:11,826 --> 00:37:14,096
 and tell whoever is
 calling me whether
 
-00:37:14.096 --> 00:37:15.476 A:middle
+
+768
+00:37:14,096 --> 00:37:15,476
 or not the preflight succeeded.
 
-00:37:16.576 --> 00:37:18.436 A:middle
+
+769
+00:37:16,576 --> 00:37:18,436
 To do that, I have to handle it.
 
-00:37:18.436 --> 00:37:21.156 A:middle
+
+770
+00:37:18,436 --> 00:37:21,156
 I handle it by writing
 this Do Catch.
 
-00:37:22.496 --> 00:37:26.946 A:middle
+
+771
+00:37:22,496 --> 00:37:26,946
 Any code that's within the Do,
 any error arising within it,
 
-00:37:26.946 --> 00:37:30.226 A:middle
+
+772
+00:37:26,946 --> 00:37:30,226
 is forwarded, sort of filtered
 through all of the catches.
 
-00:37:31.256 --> 00:37:33.786 A:middle
+
+773
+00:37:31,256 --> 00:37:33,786
 So what comes after
 a catch, well,
 
-00:37:34.726 --> 00:37:36.426 A:middle
+
+774
+00:37:34,726 --> 00:37:36,426
 anything that you could
 write in a switch.
 
-00:37:36.756 --> 00:37:41.526 A:middle
+
+775
+00:37:36,756 --> 00:37:41,526
 The entire power of Swift's
 pattern matching syntax is
 
-00:37:41.526 --> 00:37:44.266 A:middle
+
+776
+00:37:41,526 --> 00:37:44,266
 available in a catch.
 
-00:37:44.436 --> 00:37:47.656 A:middle
+
+777
+00:37:44,436 --> 00:37:47,656
 As a very simple, common
 syntactic refinement,
 
-00:37:48.046 --> 00:37:54.306 A:middle
+
+778
+00:37:48,046 --> 00:37:54,306
 catches alone like this is
 a shorthand for catching it
 
-00:37:54.306 --> 00:37:58.326 A:middle
+
+779
+00:37:54,306 --> 00:37:58,326
 and binding this special
 error variable to it.
 
-00:37:58.326 --> 00:38:00.616 A:middle
+
+780
+00:37:58,326 --> 00:38:00,616
 I could also write a much
 more elaborate thing.
 
 
-
-00:37:58.326 --> 00:38:00.616 A:middle
-I could also write a much
-more elaborate thing.
-
-00:38:00.616 --> 00:38:04.826 A:middle
+781
+00:38:00,616 --> 00:38:04,826
 For example, I may want to
 treat certain kinds of error
 
-00:38:05.326 --> 00:38:10.556 A:middle
+
+782
+00:38:05,326 --> 00:38:10,556
 as special, maybe they're
 acceptable in my preflight.
 
-00:38:10.666 --> 00:38:13.646 A:middle
+
+783
+00:38:10,666 --> 00:38:13,646
 I don't know why the file
 not existing would be okay,
 
-00:38:13.646 --> 00:38:18.456 A:middle
+
+784
+00:38:13,646 --> 00:38:18,456
 maybe I really want to check
 if it exists and, you know,
 
-00:38:18.496 --> 00:38:21.586 A:middle
+
+785
+00:38:18,496 --> 00:38:21,586
 isn't actually usable for
 some permissions reason.
 
-00:38:21.956 --> 00:38:28.446 A:middle
+
+786
+00:38:21,956 --> 00:38:28,446
 If I wanted to, I can pattern
 match against the error code
 
-00:38:28.446 --> 00:38:34.326 A:middle
+
+787
+00:38:28,446 --> 00:38:34,326
 and domain directly like this.
 
-00:38:34.536 --> 00:38:38.616 A:middle
+
+788
+00:38:34,536 --> 00:38:38,616
 As an aside, there is a third
 way of "handling errors."
 
-00:38:39.296 --> 00:38:43.916 A:middle
+
+789
+00:38:39,296 --> 00:38:43,916
 It does often happen that
 you set up preconditions
 
-00:38:44.416 --> 00:38:47.526 A:middle
+
+790
+00:38:44,416 --> 00:38:47,526
 such that you know that a
 particular call to something
 
-00:38:47.526 --> 00:38:52.096 A:middle
+
+791
+00:38:47,526 --> 00:38:52,096
 that can formally throw
 can't actually throw.
 
-00:38:52.096 --> 00:38:55.476 A:middle
+
+792
+00:38:52,096 --> 00:38:55,476
 For example, maybe this file
 is actually in my app bundle
 
-00:38:55.796 --> 00:39:02.736 A:middle
+
+793
+00:38:55,796 --> 00:39:02,736
 and I know that if I can't read
 a file in my own app bundle,
 
 
-
-00:38:55.796 --> 00:39:02.736 A:middle
-and I know that if I can't read
-a file in my own app bundle,
-
-00:39:03.026 --> 00:39:04.716 A:middle
+794
+00:39:03,026 --> 00:39:04,716
 something is really,
 really wrong.
 
-00:39:04.926 --> 00:39:07.336 A:middle
+
+795
+00:39:04,926 --> 00:39:07,336
 There's probably no real
 way to recover from this.
 
-00:39:08.386 --> 00:39:10.016 A:middle
+
+796
+00:39:08,386 --> 00:39:10,016
 So with this common pattern,
 
-00:39:10.016 --> 00:39:11.686 A:middle
+
+797
+00:39:10,016 --> 00:39:11,686
 where you really
 want a fatal error
 
-00:39:11.686 --> 00:39:14.386 A:middle
+
+798
+00:39:11,686 --> 00:39:14,386
 because an error is thrown,
 
-00:39:14.926 --> 00:39:20.386 A:middle
+
+799
+00:39:14,926 --> 00:39:20,386
 it has a very compact syntax
 associated with it, this Try!
 
-00:39:20.616 --> 00:39:25.186 A:middle
+
+800
+00:39:20,616 --> 00:39:25,186
 All that really does is creates
 an assertion that the code
 
-00:39:25.186 --> 00:39:29.606 A:middle
+
+801
+00:39:25,186 --> 00:39:29,606
 within the Try doesn't
 actually throw.
 
-00:39:29.946 --> 00:39:32.346 A:middle
+
+802
+00:39:29,946 --> 00:39:32,346
 If it does, your
 program will crash just
 
-00:39:32.346 --> 00:39:33.806 A:middle
+
+803
+00:39:32,346 --> 00:39:33,806
 like any sort of
 assertion failure.
 
-00:39:34.466 --> 00:39:36.806 A:middle
+
+804
+00:39:34,466 --> 00:39:36,806
 That's something that you
 can debug very, very easily.
 
-00:39:37.606 --> 00:39:39.426 A:middle
+
+805
+00:39:37,606 --> 00:39:39,426
 It is not something you
 want to use all the time,
 
-00:39:39.586 --> 00:39:44.826 A:middle
+
+806
+00:39:39,586 --> 00:39:44,826
 but when you need it, it
 is really, really handy.
 
-00:39:44.896 --> 00:39:47.536 A:middle
+
+807
+00:39:44,896 --> 00:39:47,536
 Going back a bit.
 
-00:39:47.756 --> 00:39:48.626 A:middle
+
+808
+00:39:47,756 --> 00:39:48,626
 I caught an error.
 
-00:39:49.546 --> 00:39:51.386 A:middle
+
+809
+00:39:49,546 --> 00:39:51,386
 What kind of thing is an error?
 
-00:39:52.506 --> 00:39:54.676 A:middle
+
+810
+00:39:52,506 --> 00:39:54,676
 Well, we have a protocol built
 
-00:39:54.676 --> 00:40:00.566 A:middle
+
+811
+00:39:54,676 --> 00:40:00,566
 in to the standard
 library called ErrorType.
 
 
-
-00:39:54.676 --> 00:40:00.566 A:middle
-in to the standard
-library called ErrorType.
-
-00:40:00.896 --> 00:40:05.916 A:middle
+812
+00:40:00,896 --> 00:40:05,916
 You can throw any value whose
 type conforms to the ErrorType.
 
-00:40:06.596 --> 00:40:07.886 A:middle
+
+813
+00:40:06,596 --> 00:40:07,886
 When you catch something,
 
-00:40:09.046 --> 00:40:10.786 A:middle
+
+814
+00:40:09,046 --> 00:40:10,786
 that thing that you're
 pattern matching
 
-00:40:10.786 --> 00:40:13.836 A:middle
+
+815
+00:40:10,786 --> 00:40:13,836
 against is an arbitrary
 value of ErrorType.
 
-00:40:14.266 --> 00:40:15.966 A:middle
+
+816
+00:40:14,266 --> 00:40:15,966
 We think it is actually
 really important
 
-00:40:16.006 --> 00:40:22.076 A:middle
+
+817
+00:40:16,006 --> 00:40:22,076
 that we don't track errors more
 precisely than just whether
 
-00:40:22.076 --> 00:40:23.396 A:middle
+
+818
+00:40:22,076 --> 00:40:23,396
 or not an error was thrown.
 
-00:40:23.396 --> 00:40:27.086 A:middle
+
+819
+00:40:23,396 --> 00:40:27,086
 It is not like Java, where you
 end up with a pedantic list
 
-00:40:27.086 --> 00:40:29.986 A:middle
+
+820
+00:40:27,086 --> 00:40:29,986
 of every single exception that
 might have been thrown out
 
-00:40:29.986 --> 00:40:32.736 A:middle
+
+821
+00:40:29,986 --> 00:40:32,736
 and then you end up with this
 really complicated propagation
 
-00:40:32.736 --> 00:40:34.456 A:middle
+
+822
+00:40:32,736 --> 00:40:34,456
 problem every time
 you change errors.
 
-00:40:36.016 --> 00:40:40.456 A:middle
+
+823
+00:40:36,016 --> 00:40:40,456
 Just tracking whether an error
 can be thrown is usually good
 
-00:40:40.456 --> 00:40:41.636 A:middle
+
+824
+00:40:40,456 --> 00:40:41,636
 enough, almost always.
 
-00:40:42.016 --> 00:40:43.236 A:middle
+
+825
+00:40:42,016 --> 00:40:43,236
 We think this is a great model.
 
-00:40:43.806 --> 00:40:47.626 A:middle
+
+826
+00:40:43,806 --> 00:40:47,626
 You can make your own
 types conform to ErrorType.
 
-00:40:47.626 --> 00:40:50.496 A:middle
+
+827
+00:40:47,626 --> 00:40:50,496
 This is a process
 that's a lot easier
 
-00:40:50.496 --> 00:40:52.326 A:middle
+
+828
+00:40:50,496 --> 00:40:52,326
 to do than it was in Cocoa.
 
-00:40:53.896 --> 00:40:56.826 A:middle
+
+829
+00:40:53,896 --> 00:40:56,826
 Enums are a great way
 of expressing this.
 
-00:40:57.426 --> 00:41:00.496 A:middle
+
+830
+00:40:57,426 --> 00:41:00,496
 They're a great way to express
 a group of related problems,
 
 
-
-00:40:57.426 --> 00:41:00.496 A:middle
-They're a great way to express
-a group of related problems,
-
-00:41:00.876 --> 00:41:04.896 A:middle
+831
+00:41:00,876 --> 00:41:04,896
 just like they're -- you know,
 so that's especially true
 
-00:41:04.896 --> 00:41:10.176 A:middle
+
+832
+00:41:04,896 --> 00:41:10,176
 because you can associate data
 with each case in an enum.
 
-00:41:10.176 --> 00:41:12.346 A:middle
+
+833
+00:41:10,176 --> 00:41:12,346
 If I want to report a
 richer error message
 
-00:41:12.576 --> 00:41:15.256 A:middle
+
+834
+00:41:12,576 --> 00:41:15,256
 with maybe something
 about the --
 
-00:41:15.256 --> 00:41:18.286 A:middle
+
+835
+00:41:15,256 --> 00:41:18,286
 maybe I'm checking for some
 invalid state and I want
 
-00:41:18.286 --> 00:41:20.086 A:middle
+
+836
+00:41:18,286 --> 00:41:20,086
 to remember what the
 invalid state was,
 
-00:41:20.436 --> 00:41:25.046 A:middle
+
+837
+00:41:20,436 --> 00:41:25,046
 I can embed that directly in
 my enum as an associated value
 
-00:41:25.046 --> 00:41:28.306 A:middle
+
+838
+00:41:25,046 --> 00:41:28,306
 for that particular case.
 
-00:41:28.506 --> 00:41:32.116 A:middle
+
+839
+00:41:28,506 --> 00:41:32,116
 All you need to do in order
 to make an enum usable
 
-00:41:32.876 --> 00:41:35.406 A:middle
+
+840
+00:41:32,876 --> 00:41:35,406
 as an error is make it
 conform to ErrorType.
 
-00:41:35.816 --> 00:41:38.596 A:middle
+
+841
+00:41:35,816 --> 00:41:38,596
 The compiler automatically
 handles the details
 
-00:41:38.596 --> 00:41:39.506 A:middle
+
+842
+00:41:38,596 --> 00:41:39,506
 of the synthesis.
 
-00:41:39.996 --> 00:41:42.686 A:middle
+
+843
+00:41:39,996 --> 00:41:42,686
 This is much better
 than the process
 
-00:41:42.686 --> 00:41:46.516 A:middle
+
+844
+00:41:42,686 --> 00:41:46,516
 of creating a new NSError domain
 and associating things with it.
 
-00:41:46.516 --> 00:41:48.986 A:middle
+
+845
+00:41:46,516 --> 00:41:48,986
 We think that this will
 really help you make great,
 
-00:41:48.986 --> 00:41:52.156 A:middle
+
+846
+00:41:48,986 --> 00:41:52,156
 expressive error-throwing APIs
 
-00:41:52.156 --> 00:41:53.996 A:middle
+
+847
+00:41:52,156 --> 00:41:53,996
 in your own code
 when you need to.
 
-00:41:57.716 --> 00:42:00.696 A:middle
+
+848
+00:41:57,716 --> 00:42:00,696
 Let's go back to that
 example that Chris had
 
 
-
-00:41:57.716 --> 00:42:00.696 A:middle
-Let's go back to that
-example that Chris had
-
-00:42:00.696 --> 00:42:03.216 A:middle
+849
+00:42:00,696 --> 00:42:03,216
 up before, this JSON processor.
 
-00:42:04.326 --> 00:42:07.286 A:middle
+
+850
+00:42:04,326 --> 00:42:07,286
 Here I'm returning an error
 back using an Either type
 
-00:42:07.286 --> 00:42:07.776 A:middle
+
+851
+00:42:07,286 --> 00:42:07,776
 in the string.
 
-00:42:09.156 --> 00:42:11.896 A:middle
+
+852
+00:42:09,156 --> 00:42:11,896
 Let's make this look more
 like it would in Swift.
 
-00:42:12.926 --> 00:42:15.976 A:middle
+
+853
+00:42:12,926 --> 00:42:15,976
 The first thing is,
 instead of the string,
 
-00:42:16.236 --> 00:42:21.326 A:middle
+
+854
+00:42:16,236 --> 00:42:21,326
 I'll use that data error
 enum I just talked about.
 
-00:42:22.776 --> 00:42:25.716 A:middle
+
+855
+00:42:22,776 --> 00:42:25,716
 I just have to throw, use the
 new throw statement in order
 
-00:42:25.716 --> 00:42:28.126 A:middle
+
+856
+00:42:25,716 --> 00:42:28,126
 to throw those values,
 and that just works.
 
-00:42:29.166 --> 00:42:30.896 A:middle
+
+857
+00:42:29,166 --> 00:42:30,896
 The other side of this,
 of course, is I'll need
 
-00:42:30.896 --> 00:42:32.226 A:middle
+
+858
+00:42:30,896 --> 00:42:32,226
 to change the return type.
 
-00:42:32.226 --> 00:42:34.116 A:middle
+
+859
+00:42:32,226 --> 00:42:34,116
 I'm no longer returning
 an Either type.
 
-00:42:34.486 --> 00:42:37.006 A:middle
+
+860
+00:42:34,486 --> 00:42:37,006
 This isn't something that
 every single caller has
 
-00:42:37.006 --> 00:42:40.446 A:middle
+
+861
+00:42:37,006 --> 00:42:40,446
 to carefully micromanage
 the return value
 
-00:42:40.446 --> 00:42:42.116 A:middle
+
+862
+00:42:40,446 --> 00:42:42,116
 of in order to check for errors.
 
-00:42:43.486 --> 00:42:47.006 A:middle
+
+863
+00:42:43,486 --> 00:42:47,006
 I just change it so
 that it returns Person
 
-00:42:47.576 --> 00:42:50.506 A:middle
+
+864
+00:42:47,576 --> 00:42:50,506
 and is also a throwing method,
 then I don't have to mess
 
-00:42:50.506 --> 00:42:54.476 A:middle
+
+865
+00:42:50,506 --> 00:42:54,476
 around with these
 little details.
 
-00:42:54.696 --> 00:42:56.536 A:middle
+
+866
+00:42:54,696 --> 00:42:56,536
 Let's make a new
 example that culls
 
-00:42:56.576 --> 00:43:00.756 A:middle
+
+867
+00:42:56,576 --> 00:43:00,756
 that method we just created.
 
 
-
-00:42:56.576 --> 00:43:00.756 A:middle
-that method we just created.
-
-00:43:00.756 --> 00:43:05.336 A:middle
+868
+00:43:00,756 --> 00:43:05,336
 We parsed out, we have a snippet
 of JSON, we parsed out a person.
 
-00:43:06.236 --> 00:43:11.106 A:middle
+
+869
+00:43:06,236 --> 00:43:11,106
 Now we'll use that to parse out
 an entire sales record involving
 
-00:43:11.106 --> 00:43:16.466 A:middle
+
+870
+00:43:11,106 --> 00:43:16,466
 that person and some item.
 
-00:43:17.666 --> 00:43:25.296 A:middle
+
+871
+00:43:17,666 --> 00:43:25,296
 Sometimes it happens that you
 need to, you know, this is a bit
 
-00:43:25.296 --> 00:43:26.196 A:middle
+
+872
+00:43:25,296 --> 00:43:26,196
 of a contrived example.
 
-00:43:26.266 --> 00:43:31.176 A:middle
+
+873
+00:43:26,266 --> 00:43:31,176
 Sorry. Sometimes I want to
 observe this kind of process.
 
-00:43:31.176 --> 00:43:35.966 A:middle
+
+874
+00:43:31,176 --> 00:43:35,966
 I'm going to have some sort
 of delegate, I'll let it know
 
-00:43:35.966 --> 00:43:38.076 A:middle
+
+875
+00:43:35,966 --> 00:43:38,076
 that I have started
 reading a sales record.
 
-00:43:38.076 --> 00:43:42.456 A:middle
+
+876
+00:43:38,076 --> 00:43:42,456
 I have now told it
 I started reading,
 
-00:43:42.746 --> 00:43:45.646 A:middle
+
+877
+00:43:42,746 --> 00:43:45,646
 obviously I should tell it
 when I'm finished reading.
 
-00:43:45.646 --> 00:43:49.616 A:middle
+
+878
+00:43:45,646 --> 00:43:49,616
 I can add that code down here.
 
-00:43:49.616 --> 00:43:53.996 A:middle
+
+879
+00:43:49,616 --> 00:43:53,996
 The problem is I'm not
 doing anything right
 
-00:43:54.106 --> 00:43:55.016 A:middle
+
+880
+00:43:54,106 --> 00:43:55,016
 with error handling.
 
-00:43:55.366 --> 00:43:57.766 A:middle
+
+881
+00:43:55,366 --> 00:43:57,766
 It is really easy for
 all of these -- like --
 
-00:43:57.866 --> 00:44:01.186 A:middle
+
+882
+00:43:57,866 --> 00:44:01,186
 if my delegate actually has
 Careful and Variants set
 
 
-
-00:43:57.866 --> 00:44:01.186 A:middle
-if my delegate actually has
-Careful and Variants set
-
-00:44:01.186 --> 00:44:04.736 A:middle
+883
+00:44:01,186 --> 00:44:04,736
 up around necessarily getting
 called every single time --
 
-00:44:05.226 --> 00:44:08.036 A:middle
+
+884
+00:44:05,226 --> 00:44:08,036
 getting called when
 the sale finishes.
 
-00:44:08.546 --> 00:44:11.196 A:middle
+
+885
+00:44:08,546 --> 00:44:11,196
 If my delegate has variance
 it wants to maintain
 
-00:44:11.196 --> 00:44:14.526 A:middle
+
+886
+00:44:11,196 --> 00:44:14,526
 about getting called on
 both ends, I'll mess them
 
-00:44:14.526 --> 00:44:16.296 A:middle
+
+887
+00:44:14,526 --> 00:44:16,296
 up if I actually
 fail the process.
 
-00:44:16.706 --> 00:44:18.826 A:middle
+
+888
+00:44:16,706 --> 00:44:18,826
 This is a sort of problem
 that comes up a lot
 
-00:44:18.926 --> 00:44:22.286 A:middle
+
+889
+00:44:18,926 --> 00:44:22,286
 and makes error handling
 seem so fragile.
 
-00:44:23.696 --> 00:44:27.176 A:middle
+
+890
+00:44:23,696 --> 00:44:27,176
 Okay. One way I could
 solve this, of course,
 
-00:44:27.286 --> 00:44:33.846 A:middle
+
+891
+00:44:27,286 --> 00:44:33,846
 is that I simply add my call
 to Did End Reading Sale on both
 
-00:44:33.846 --> 00:44:36.366 A:middle
+
+892
+00:44:33,846 --> 00:44:36,366
 of these throw sites
 and then, of course,
 
-00:44:36.366 --> 00:44:39.836 A:middle
+
+893
+00:44:36,366 --> 00:44:39,836
 I'm still not handling this
 call down to Process Person.
 
-00:44:39.876 --> 00:44:42.856 A:middle
+
+894
+00:44:39,876 --> 00:44:42,856
 In order to do something there,
 I have to add this Do Catch.
 
-00:44:43.976 --> 00:44:47.556 A:middle
+
+895
+00:44:43,976 --> 00:44:47,556
 This is a really, really --
 one, this is incredibly verbose.
 
-00:44:47.556 --> 00:44:50.376 A:middle
+
+896
+00:44:47,556 --> 00:44:50,376
 But it's also really error
 prone because it is easy for me
 
-00:44:50.376 --> 00:44:53.416 A:middle
+
+897
+00:44:50,376 --> 00:44:53,416
 to add new code to this,
 new kinds of processing
 
-00:44:53.726 --> 00:44:56.416 A:middle
+
+898
+00:44:53,726 --> 00:44:56,416
 that it then immediately
 will get out of date
 
-00:44:56.416 --> 00:44:57.896 A:middle
+
+899
+00:44:56,416 --> 00:44:57,896
 if I actually do something.
 
-00:44:58.546 --> 00:45:02.756 A:middle
+
+900
+00:44:58,546 --> 00:45:02,756
 If I forget to add Did
 End Reading Sale along
 
 
-
-00:44:58.546 --> 00:45:02.756 A:middle
-If I forget to add Did
-End Reading Sale along
-
-00:45:02.936 --> 00:45:04.646 A:middle
+901
+00:45:02,936 --> 00:45:04,646
 that particular path.
 
-00:45:06.366 --> 00:45:08.486 A:middle
+
+902
+00:45:06,366 --> 00:45:08,486
 Swift 2 has a much
 better option.
 
-00:45:09.026 --> 00:45:11.466 A:middle
+
+903
+00:45:09,026 --> 00:45:11,466
 It is called Defer.
 
-00:45:13.656 --> 00:45:16.766 A:middle
+
+904
+00:45:13,656 --> 00:45:16,766
 A Defer statement
 creates an action.
 
-00:45:17.656 --> 00:45:21.886 A:middle
+
+905
+00:45:17,656 --> 00:45:21,886
 When you execute it,
 that action is going
 
-00:45:21.886 --> 00:45:25.956 A:middle
+
+906
+00:45:21,886 --> 00:45:25,956
 to be executed no matter how
 the current scope is left.
 
-00:45:27.096 --> 00:45:30.976 A:middle
+
+907
+00:45:27,096 --> 00:45:30,976
 If I return out of it, if I fall
 out of it, if I throw an error
 
-00:45:30.976 --> 00:45:32.736 A:middle
+
+908
+00:45:30,976 --> 00:45:32,736
 out of it, no matter how,
 
-00:45:33.676 --> 00:45:36.276 A:middle
+
+909
+00:45:33,676 --> 00:45:36,276
 I know that that thing
 is going to be executed.
 
-00:45:37.436 --> 00:45:40.066 A:middle
+
+910
+00:45:37,436 --> 00:45:40,066
 That means that as
 someone reading this code,
 
-00:45:40.476 --> 00:45:41.916 A:middle
+
+911
+00:45:40,476 --> 00:45:41,916
 maintaining this code,
 
-00:45:42.216 --> 00:45:46.876 A:middle
+
+912
+00:45:42,216 --> 00:45:46,876
 I feel perfectly confident
 Did End Reading Sale will be
 
-00:45:46.876 --> 00:45:51.426 A:middle
+
+913
+00:45:46,876 --> 00:45:51,426
 executed no matter what I do
 to finish reading the sale.
 
-00:45:52.006 --> 00:45:54.636 A:middle
+
+914
+00:45:52,006 --> 00:45:54,636
 That's a really, really
 valuable thing to know.
 
-00:45:55.516 --> 00:46:06.696 A:middle
+
+915
+00:45:55,516 --> 00:46:06,696
 [ Applause ]
 
 
-
-00:45:55.516 --> 00:46:06.696 A:middle
-[ Applause ]
-
-00:46:07.196 --> 00:46:09.426 A:middle
-&gt;&gt; JOHN MCCALL: I want to make a
+916
+00:46:07,196 --> 00:46:09,426
+>> JOHN MCCALL: I want to make a
 quick note about implementation.
 
-00:46:10.266 --> 00:46:14.946 A:middle
+
+917
+00:46:10,266 --> 00:46:14,946
 Some of you who are used to
 exception handling may be aware
 
-00:46:14.946 --> 00:46:18.306 A:middle
+
+918
+00:46:14,946 --> 00:46:18,306
 that exception handling in
 many languages is implemented
 
-00:46:18.306 --> 00:46:21.196 A:middle
+
+919
+00:46:18,306 --> 00:46:21,196
 in a way that's very,
 very highly biased
 
-00:46:21.276 --> 00:46:23.456 A:middle
+
+920
+00:46:21,276 --> 00:46:23,456
 against errors actually
 being thrown.
 
-00:46:23.956 --> 00:46:29.116 A:middle
+
+921
+00:46:23,956 --> 00:46:29,116
 It is often three, maybe even
 four orders of magnitude slower
 
-00:46:29.396 --> 00:46:34.306 A:middle
+
+922
+00:46:29,396 --> 00:46:34,306
 to return out of a function by
 throwing an error than it is
 
-00:46:34.356 --> 00:46:38.386 A:middle
+
+923
+00:46:34,356 --> 00:46:38,386
 to simply return out
 in the normal manner.
 
-00:46:38.506 --> 00:46:42.696 A:middle
+
+924
+00:46:38,506 --> 00:46:42,696
 Now, that's necessitated by some
 aspects of the language designs.
 
-00:46:42.826 --> 00:46:46.496 A:middle
+
+925
+00:46:42,826 --> 00:46:46,496
 It is not really something that
 we wanted to imitate in Swift.
 
-00:46:47.056 --> 00:46:50.706 A:middle
+
+926
+00:46:47,056 --> 00:46:50,706
 All you really need
 to know here is
 
-00:46:50.706 --> 00:46:54.546 A:middle
+
+927
+00:46:50,706 --> 00:46:54,546
 that the Swift implementation
 here is far more balanced,
 
-00:46:55.326 --> 00:46:59.206 A:middle
+
+928
+00:46:55,326 --> 00:46:59,206
 much more like, basically, an
 If statement in the caller.
 
-00:46:59.696 --> 00:47:02.926 A:middle
+
+929
+00:46:59,696 --> 00:47:02,926
 That means it is not completely
 free in order to call something
 
 
-
-00:46:59.696 --> 00:47:02.926 A:middle
-That means it is not completely
-free in order to call something
-
-00:47:02.926 --> 00:47:03.866 A:middle
+930
+00:47:02,926 --> 00:47:03,866
 that can throw an error.
 
-00:47:03.866 --> 00:47:06.916 A:middle
+
+931
+00:47:03,866 --> 00:47:06,916
 But it means that you
 don't have to worry
 
-00:47:06.916 --> 00:47:11.836 A:middle
+
+932
+00:47:06,916 --> 00:47:11,836
 about our error-handling
 feature being so expensive
 
-00:47:11.836 --> 00:47:16.946 A:middle
+
+933
+00:47:11,836 --> 00:47:16,946
 that you can't use it in
 order for the actual reasons
 
-00:47:16.946 --> 00:47:19.096 A:middle
+
+934
+00:47:16,946 --> 00:47:19,096
 that you need to if
 you do need to care
 
-00:47:19.096 --> 00:47:22.366 A:middle
+
+935
+00:47:19,096 --> 00:47:22,366
 about the efficiency
 of the error path.
 
-00:47:24.816 --> 00:47:27.756 A:middle
+
+936
+00:47:24,816 --> 00:47:27,756
 Finally, I just want
 to note, Swift,
 
-00:47:28.356 --> 00:47:31.426 A:middle
+
+937
+00:47:28,356 --> 00:47:31,426
 the Swift error handling
 design works beautifully
 
-00:47:31.626 --> 00:47:32.616 A:middle
+
+938
+00:47:31,626 --> 00:47:32,616
 with Cocoa APIs.
 
-00:47:33.926 --> 00:47:38.556 A:middle
+
+939
+00:47:33,926 --> 00:47:38,556
 We automatically recognize the
 most common conventions you see
 
-00:47:38.616 --> 00:47:39.696 A:middle
+
+940
+00:47:38,616 --> 00:47:39,696
 in Cocoa.
 
-00:47:39.696 --> 00:47:44.926 A:middle
+
+941
+00:47:39,696 --> 00:47:44,926
 For example, methods that
 have an NSError Out parameter
 
-00:47:44.926 --> 00:47:48.496 A:middle
+
+942
+00:47:44,926 --> 00:47:48,496
 and return Bool automatically
 become throwing methods
 
-00:47:48.496 --> 00:47:50.466 A:middle
+
+943
+00:47:48,496 --> 00:47:50,466
 and the Bool return
 value goes away.
 
-00:47:51.366 --> 00:47:55.826 A:middle
+
+944
+00:47:51,366 --> 00:47:55,826
 Similarly if it returns an
 optional result, we recognize
 
-00:47:55.826 --> 00:48:00.166 A:middle
+
+945
+00:47:55,826 --> 00:48:00,166
 that pattern as the nil
 indicates an invalid thing,
 
 
-
-00:47:55.826 --> 00:48:00.166 A:middle
-that pattern as the nil
-indicates an invalid thing,
-
-00:48:00.716 --> 00:48:06.786 A:middle
+946
+00:48:00,716 --> 00:48:06,786
 and it no longer returns an
 optional result because the nil,
 
-00:48:06.786 --> 00:48:09.466 A:middle
+
+947
+00:48:06,786 --> 00:48:09,466
 of course, is subsumed
 within error handling.
 
-00:48:10.516 --> 00:48:14.846 A:middle
+
+948
+00:48:10,516 --> 00:48:14,846
 [ Applause ]
 
-00:48:15.346 --> 00:48:18.506 A:middle
-&gt;&gt; JOHN MCCALL: Just with these
+
+949
+00:48:15,346 --> 00:48:18,506
+>> JOHN MCCALL: Just with these
 two very simple rules we found
 
-00:48:18.506 --> 00:48:22.666 A:middle
+
+950
+00:48:18,506 --> 00:48:22,666
 that the vast, vast majority
 of APIs in the system import
 
-00:48:22.936 --> 00:48:26.436 A:middle
+
+951
+00:48:22,936 --> 00:48:26,436
 and automatically work with this
 new Swift error handling model
 
-00:48:26.846 --> 00:48:30.396 A:middle
+
+952
+00:48:26,846 --> 00:48:30,396
 seamlessly and beautifully, and
 we think this is a great new way
 
-00:48:30.396 --> 00:48:35.086 A:middle
+
+953
+00:48:30,396 --> 00:48:35,086
 to handle errors in Swift.
 
-00:48:35.086 --> 00:48:37.336 A:middle
+
+954
+00:48:35,086 --> 00:48:37,336
 I really strongly suggest
 that you check this out.
 
-00:48:37.456 --> 00:48:39.226 A:middle
+
+955
+00:48:37,456 --> 00:48:39,226
 You probably don't really
 have much of a choice,
 
-00:48:39.296 --> 00:48:41.006 A:middle
+
+956
+00:48:39,296 --> 00:48:41,006
 they're all over the
 place [laughter].
 
-00:48:44.586 --> 00:48:47.066 A:middle
-&gt;&gt; JOHN MCCALL: You know, we
+
+957
+00:48:44,586 --> 00:48:47,066
+>> JOHN MCCALL: You know, we
 really are proud of this design.
 
-00:48:47.386 --> 00:48:50.886 A:middle
+
+958
+00:48:47,386 --> 00:48:50,886
 We think it is going to
 greatly improve the robustness
 
-00:48:51.156 --> 00:48:52.906 A:middle
+
+959
+00:48:51,156 --> 00:48:52,906
 and the expressiveness
 of writing code
 
-00:48:53.146 --> 00:48:56.566 A:middle
+
+960
+00:48:53,146 --> 00:48:56,566
 and let you design your own
 APIs that work just wonderfully.
 
-00:48:57.126 --> 00:48:59.576 A:middle
+
+961
+00:48:57,126 --> 00:48:59,576
 Let me sum up.
 
-00:48:59.576 --> 00:49:04.196 A:middle
+
+962
+00:48:59,576 --> 00:49:04,196
 We have been working in Swift
 2 really hard to present,
 
 
-
-00:48:59.576 --> 00:49:04.196 A:middle
-We have been working in Swift
-2 really hard to present,
-
-00:49:04.376 --> 00:49:07.506 A:middle
+963
+00:49:04,376 --> 00:49:07,506
 to give you a new
 language, really flesh
 
-00:49:07.506 --> 00:49:13.376 A:middle
+
+964
+00:49:07,506 --> 00:49:13,376
 out the core aspects of
 programming in Swift,
 
-00:49:13.596 --> 00:49:17.546 A:middle
+
+965
+00:49:13,596 --> 00:49:17,546
 using the tools in
 Swift, giving you a safer,
 
-00:49:17.636 --> 00:49:22.626 A:middle
+
+966
+00:49:17,636 --> 00:49:22,626
 more robust environment, and
 generally making things great.
 
-00:49:24.596 --> 00:49:27.946 A:middle
+
+967
+00:49:24,596 --> 00:49:27,946
 An invaluable tool to
 us, this entire time,
 
-00:49:28.326 --> 00:49:29.666 A:middle
+
+968
+00:49:28,326 --> 00:49:29,666
 has been your feedback.
 
-00:49:30.126 --> 00:49:31.896 A:middle
+
+969
+00:49:30,126 --> 00:49:31,896
 We really, really appreciate it.
 
-00:49:32.126 --> 00:49:33.536 A:middle
+
+970
+00:49:32,126 --> 00:49:33,536
 We are listening, I promise.
 
-00:49:35.546 --> 00:49:37.886 A:middle
+
+971
+00:49:35,546 --> 00:49:37,886
 If you have things to say to us,
 
-00:49:38.246 --> 00:49:40.916 A:middle
+
+972
+00:49:38,246 --> 00:49:40,916
 of course you can
 simply use bug reporter,
 
-00:49:41.276 --> 00:49:47.066 A:middle
+
+973
+00:49:41,276 --> 00:49:47,066
 but you can also email Stefan
 Lesser, come on the dev forums,
 
-00:49:47.066 --> 00:49:49.056 A:middle
+
+974
+00:49:47,066 --> 00:49:49,056
 most of us are there
 all the time.
 
-00:49:49.346 --> 00:49:51.816 A:middle
+
+975
+00:49:49,346 --> 00:49:51,816
 We're really happy to
 respond to any question,
 
-00:49:52.136 --> 00:49:53.516 A:middle
+
+976
+00:49:52,136 --> 00:49:53,516
 hear your feedback about it.
 
-00:49:53.846 --> 00:49:55.896 A:middle
+
+977
+00:49:53,846 --> 00:49:55,896
 We really, really value you.
 
-00:49:57.116 --> 00:49:59.836 A:middle
+
+978
+00:49:57,116 --> 00:49:59,836
 Thank you very much [applause].
 
 
-
-00:50:03.106 --> 00:50:04.966 A:middle
+979
+00:50:03,106 --> 00:50:04,966
 Have a great WWDC 2015.
 
-00:50:05.516 --> 00:50:18.270 A:middle
+
+980
+00:50:05,516 --> 00:50:18,270
 [ Applause ]
 

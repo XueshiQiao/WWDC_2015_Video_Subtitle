@@ -1,3154 +1,4483 @@
-
-00:00:07.516 --> 00:00:14.546 A:middle
+1
+00:00:07,516 --> 00:00:14,546
 [ Music ]
 
-00:00:15.046 --> 00:00:16.026 A:middle
+
+2
+00:00:15,046 --> 00:00:16,026
 (Applause)
 
-00:00:26.296 --> 00:00:33.396 A:middle
-&gt;&gt; PHILIPPE HAUSLER:
+
+3
+00:00:26,296 --> 00:00:33,396
+>> PHILIPPE HAUSLER:
 Good morning.
 
-00:00:33.566 --> 00:00:34.906 A:middle
+
+4
+00:00:33,566 --> 00:00:34,906
 My name is Philippe Hausler.
 
-00:00:35.006 --> 00:00:37.616 A:middle
+
+5
+00:00:35,006 --> 00:00:37,616
 I work in the Frameworks
 Group, on Foundation.
 
-00:00:37.616 --> 00:00:39.516 A:middle
+
+6
+00:00:37,616 --> 00:00:39,516
 And today we are going to talk
 
-00:00:39.516 --> 00:00:42.656 A:middle
+
+7
+00:00:39,516 --> 00:00:42,656
 about NSOperation
 and NSOperationQueue.
 
-00:00:43.516 --> 00:00:46.486 A:middle
+
+8
+00:00:43,516 --> 00:00:46,486
 These are two extremely
 powerful classes
 
-00:00:46.976 --> 00:00:48.946 A:middle
+
+9
+00:00:46,976 --> 00:00:48,946
 that can transform
 your application
 
-00:00:49.316 --> 00:00:56.626 A:middle
+
+10
+00:00:49,316 --> 00:00:56,626
 from running tasks linearly
 to a hybrid scenario
 
-00:00:56.926 --> 00:01:00.036 A:middle
+
+11
+00:00:56,926 --> 00:01:00,036
 of both the object-orientated
 
 
-
-00:00:56.926 --> 00:01:00.036 A:middle
-of both the object-orientated
-
-00:01:00.036 --> 00:01:02.306 A:middle
+12
+00:01:00,036 --> 00:01:02,306
 and functionally
 asynchronous concepts.
 
-00:01:03.106 --> 00:01:05.025 A:middle
+
+13
+00:01:03,106 --> 00:01:05,025
 Now, I am pretty sure that all
 
-00:01:05.025 --> 00:01:06.976 A:middle
+
+14
+00:01:05,025 --> 00:01:06,976
 of you have seen
 this application.
 
-00:01:09.336 --> 00:01:12.366 A:middle
+
+15
+00:01:09,336 --> 00:01:12,366
 The WWDC app uses NSOperation
 
-00:01:12.366 --> 00:01:14.506 A:middle
+
+16
+00:01:12,366 --> 00:01:14,506
 and NSOperationQueue
 extensively.
 
-00:01:15.826 --> 00:01:22.616 A:middle
+
+17
+00:01:15,826 --> 00:01:22,616
 To be able to accomplish
 numerous different tasks all the
 
-00:01:23.196 --> 00:01:26.616 A:middle
+
+18
+00:01:23,196 --> 00:01:26,616
 way from downloading content
 from the Internet all the way
 
-00:01:26.616 --> 00:01:30.026 A:middle
+
+19
+00:01:26,616 --> 00:01:30,026
 to synchronizing the database
 as well as even concepts
 
-00:01:30.026 --> 00:01:33.356 A:middle
+
+20
+00:01:30,026 --> 00:01:33,356
 like presenting alerts
 or displaying videos.
 
-00:01:33.976 --> 00:01:37.926 A:middle
+
+21
+00:01:33,976 --> 00:01:37,926
 And here to take you more
 in depth of NSOperation
 
-00:01:37.956 --> 00:01:42.026 A:middle
+
+22
+00:01:37,956 --> 00:01:42,026
 and NSOperationQueue and how
 it actually was used to be able
 
-00:01:42.026 --> 00:01:44.906 A:middle
+
+23
+00:01:42,026 --> 00:01:44,906
 to implement the WWDC
 app is Dave DeLong.
 
-00:01:45.276 --> 00:01:45.426 A:middle
+
+24
+00:01:45,276 --> 00:01:45,426
 Dave?
 
-00:01:46.516 --> 00:01:53.716 A:middle
+
+25
+00:01:46,516 --> 00:01:53,716
 [ Applause ]
 
-00:01:54.216 --> 00:01:54.976 A:middle
-&gt;&gt; DAVE DeLONG: Thanks,
+
+26
+00:01:54,216 --> 00:01:54,976
+>> DAVE DeLONG: Thanks,
 Philippe.
 
-00:01:55.516 --> 00:02:01.546 A:middle
+
+27
+00:01:55,516 --> 00:02:01,546
 [ Silence ]
 
 
-
-00:01:55.516 --> 00:02:01.546 A:middle
-[ Silence ]
-
-00:02:02.046 --> 00:02:05.456 A:middle
+28
+00:02:02,046 --> 00:02:05,456
 So, my name is Dave DeLong, and
 I am a Frameworks Evangelist
 
-00:02:05.456 --> 00:02:08.045 A:middle
+
+29
+00:02:05,456 --> 00:02:08,045
 at Apple, and I am also
 the primary engineer
 
-00:02:08.045 --> 00:02:11.126 A:middle
+
+30
+00:02:08,045 --> 00:02:11,126
 on the WWDC app, which hopefully
 you are all familiar with.
 
-00:02:13.266 --> 00:02:16.776 A:middle
+
+31
+00:02:13,266 --> 00:02:16,776
 Today we are going to be
 covering three main areas
 
-00:02:16.916 --> 00:02:19.466 A:middle
+
+32
+00:02:16,916 --> 00:02:19,466
 of the WWDC app and NSOperation.
 
-00:02:20.126 --> 00:02:23.326 A:middle
+
+33
+00:02:20,126 --> 00:02:23,326
 First, we are going to go over
 the core concepts of NSOperation
 
-00:02:23.526 --> 00:02:26.996 A:middle
+
+34
+00:02:23,526 --> 00:02:26,996
 and how you can understand
 its API and take advantage
 
-00:02:26.996 --> 00:02:28.366 A:middle
+
+35
+00:02:26,996 --> 00:02:28,366
 of its powerful state machine.
 
-00:02:29.276 --> 00:02:32.686 A:middle
+
+36
+00:02:29,276 --> 00:02:32,686
 Next, we are going to go
 beyond those basics and look
 
-00:02:32.686 --> 00:02:35.886 A:middle
+
+37
+00:02:32,686 --> 00:02:35,886
 at the challenges of
 the WWDC app across
 
-00:02:36.306 --> 00:02:37.416 A:middle
+
+38
+00:02:36,306 --> 00:02:37,416
 and how we solved them.
 
-00:02:38.206 --> 00:02:41.136 A:middle
+
+39
+00:02:38,206 --> 00:02:41,136
 And finally, we are going to
 talk about some sample code
 
-00:02:41.426 --> 00:02:43.356 A:middle
+
+40
+00:02:41,426 --> 00:02:43,356
 that we have provided for you.
 
-00:02:46.356 --> 00:02:48.976 A:middle
+
+41
+00:02:46,356 --> 00:02:48,976
 So first, let's look
 at some core concepts.
 
-00:02:53.226 --> 00:02:55.076 A:middle
+
+42
+00:02:53,226 --> 00:02:55,076
 Any time you use an NSOperation,
 
-00:02:55.076 --> 00:02:58.026 A:middle
+
+43
+00:02:55,076 --> 00:02:58,026
 you will always be using
 an NSOperationQueue.
 
-00:02:58.886 --> 00:03:01.886 A:middle
+
+44
+00:02:58,886 --> 00:03:01,886
 And the way to think about
 an NSOperationQueue is
 
 
-
-00:02:58.886 --> 00:03:01.886 A:middle
-And the way to think about
-an NSOperationQueue is
-
-00:03:01.886 --> 00:03:04.366 A:middle
+45
+00:03:01,886 --> 00:03:04,366
 that it's a high-level
 dispatch queue.
 
-00:03:04.996 --> 00:03:07.556 A:middle
+
+46
+00:03:04,996 --> 00:03:07,556
 Hopefully you are all
 familiar with dispatch queues
 
-00:03:07.666 --> 00:03:09.436 A:middle
+
+47
+00:03:07,666 --> 00:03:09,436
 from using Grand
 Central Dispatch.
 
-00:03:10.396 --> 00:03:13.446 A:middle
+
+48
+00:03:10,396 --> 00:03:13,446
 Now, by providing a wrapper
 around an NSOperationQueue,
 
-00:03:13.666 --> 00:03:15.516 A:middle
+
+49
+00:03:13,666 --> 00:03:15,516
 we can gain some
 additional functionality.
 
-00:03:17.066 --> 00:03:23.726 A:middle
+
+50
+00:03:17,066 --> 00:03:23,726
 For example, NSOperationQueue
 makes it very easy
 
-00:03:23.836 --> 00:03:27.806 A:middle
+
+51
+00:03:23,836 --> 00:03:27,806
 to cancel operations that
 have not yet begun executing.
 
-00:03:28.686 --> 00:03:31.566 A:middle
+
+52
+00:03:28,686 --> 00:03:31,566
 While you can perform
 cancellation of dispatch blocks,
 
-00:03:31.946 --> 00:03:33.396 A:middle
+
+53
+00:03:31,946 --> 00:03:33,396
 it is somewhat tricky to do so,
 
-00:03:33.666 --> 00:03:35.976 A:middle
+
+54
+00:03:33,666 --> 00:03:35,976
 but NSOperationQueue
 makes this quite easy.
 
-00:03:39.046 --> 00:03:39.956 A:middle
+
+55
+00:03:39,046 --> 00:03:39,956
 Another thing that you get
 
-00:03:39.956 --> 00:03:42.876 A:middle
+
+56
+00:03:39,956 --> 00:03:42,876
 with NSOperationQueue is
 a property called the max
 
-00:03:42.926 --> 00:03:44.506 A:middle
+
+57
+00:03:42,926 --> 00:03:44,506
 concurrent operation count.
 
-00:03:44.506 --> 00:03:47.506 A:middle
+
+58
+00:03:44,506 --> 00:03:47,506
 And to understand what
 this is, let's take a look
 
-00:03:47.506 --> 00:03:48.716 A:middle
+
+59
+00:03:47,506 --> 00:03:48,716
 at a little animation.
 
-00:03:52.156 --> 00:03:54.646 A:middle
+
+60
+00:03:52,156 --> 00:03:54,646
 If we set the max
 concurrent operation count
 
-00:03:54.716 --> 00:03:57.046 A:middle
+
+61
+00:03:54,716 --> 00:03:57,046
 of an NSOperationQueue to be 1,
 
-00:03:58.026 --> 00:04:00.666 A:middle
+
+62
+00:03:58,026 --> 00:04:00,666
 then we essentially make
 our NSOperationQueue
 
 
-
-00:03:58.026 --> 00:04:00.666 A:middle
-then we essentially make
-our NSOperationQueue
-
-00:04:00.716 --> 00:04:01.976 A:middle
+63
+00:04:00,716 --> 00:04:01,976
 into a serial operation queue.
 
-00:04:04.266 --> 00:04:07.546 A:middle
+
+64
+00:04:04,266 --> 00:04:07,546
 So let's load up a bunch of
 operations onto this queue.
 
-00:04:09.336 --> 00:04:12.226 A:middle
+
+65
+00:04:09,336 --> 00:04:12,226
 With the max concurrent
 operation count of 1,
 
-00:04:12.766 --> 00:04:15.526 A:middle
+
+66
+00:04:12,766 --> 00:04:15,526
 the queue will pull off
 these operations one by one
 
-00:04:15.836 --> 00:04:17.166 A:middle
+
+67
+00:04:15,836 --> 00:04:17,166
 and execute them in order.
 
-00:04:17.776 --> 00:04:20.466 A:middle
+
+68
+00:04:17,776 --> 00:04:20,466
 The next operation will
 not begin executing
 
-00:04:20.606 --> 00:04:22.366 A:middle
+
+69
+00:04:20,606 --> 00:04:22,366
 until the previous
 one has finished.
 
-00:04:23.576 --> 00:04:24.726 A:middle
+
+70
+00:04:23,576 --> 00:04:24,726
 That's a serial queue.
 
-00:04:27.476 --> 00:04:30.216 A:middle
+
+71
+00:04:27,476 --> 00:04:30,216
 However, by default, the value
 
-00:04:30.216 --> 00:04:32.426 A:middle
+
+72
+00:04:30,216 --> 00:04:32,426
 of this property
 is a default value,
 
-00:04:32.926 --> 00:04:35.766 A:middle
+
+73
+00:04:32,926 --> 00:04:35,766
 which means as many
 as the system allows.
 
-00:04:36.446 --> 00:04:41.896 A:middle
+
+74
+00:04:36,446 --> 00:04:41,896
 So this means that our operation
 queue can perform multiple
 
-00:04:41.896 --> 00:04:45.076 A:middle
+
+75
+00:04:41,896 --> 00:04:45,076
 operations simultaneously
 as system resources allow.
 
-00:04:46.526 --> 00:04:50.386 A:middle
+
+76
+00:04:46,526 --> 00:04:50,386
 So in this case, our operation
 queue might be performing two
 
-00:04:50.386 --> 00:04:51.446 A:middle
+
+77
+00:04:50,386 --> 00:04:51,446
 operations at once.
 
-00:04:52.216 --> 00:04:56.306 A:middle
+
+78
+00:04:52,216 --> 00:04:56,306
 The ability to change the
 behavior of an operation queue
 
-00:04:56.306 --> 00:04:58.186 A:middle
+
+79
+00:04:56,306 --> 00:04:58,186
 like this can be very powerful.
 
-00:04:58.496 --> 00:05:00.856 A:middle
+
+80
+00:04:58,496 --> 00:05:00,856
 We don't have to decide
 this at creation time
 
 
-
-00:04:58.496 --> 00:05:00.856 A:middle
-We don't have to decide
-this at creation time
-
-00:05:00.966 --> 00:05:02.096 A:middle
+81
+00:05:00,966 --> 00:05:02,096
 of our operation queue.
 
-00:05:07.516 --> 00:05:09.856 A:middle
+
+82
+00:05:07,516 --> 00:05:09,856
 So that's NSOperationQueue.
 
-00:05:10.466 --> 00:05:12.386 A:middle
+
+83
+00:05:10,466 --> 00:05:12,386
 Now let's take a
 look at NSOperation.
 
-00:05:13.006 --> 00:05:17.546 A:middle
+
+84
+00:05:13,006 --> 00:05:17,546
 Where the queue is a high-level
 wrapper around a dispatch queue,
 
-00:05:17.966 --> 00:05:21.236 A:middle
+
+85
+00:05:17,966 --> 00:05:21,236
 you can think of an NSOperation
 as a high-level wrapper
 
-00:05:21.236 --> 00:05:22.776 A:middle
+
+86
+00:05:21,236 --> 00:05:22,776
 around a dispatch block.
 
-00:05:24.416 --> 00:05:29.096 A:middle
+
+87
+00:05:24,416 --> 00:05:29,096
 Now, in general, NSOperations
 run for a little bit longer
 
-00:05:29.096 --> 00:05:30.916 A:middle
+
+88
+00:05:29,096 --> 00:05:30,916
 than you would expect
 a block to run,
 
-00:05:31.796 --> 00:05:34.866 A:middle
+
+89
+00:05:31,796 --> 00:05:34,866
 so blocks usually take
 a few nanoseconds,
 
-00:05:34.866 --> 00:05:37.376 A:middle
+
+90
+00:05:34,866 --> 00:05:37,376
 maybe at most a millisecond,
 to execute.
 
-00:05:38.356 --> 00:05:42.366 A:middle
+
+91
+00:05:38,356 --> 00:05:42,366
 NSOperations, on the other hand,
 can be much longer, for anywhere
 
-00:05:42.366 --> 00:05:45.156 A:middle
+
+92
+00:05:42,366 --> 00:05:45,156
 from a couple of milliseconds
 to even several minutes,
 
-00:05:45.236 --> 00:05:46.676 A:middle
+
+93
+00:05:45,236 --> 00:05:46,676
 as we will talk about later.
 
-00:05:49.186 --> 00:05:51.896 A:middle
+
+94
+00:05:49,186 --> 00:05:51,896
 The other thing that's really
 nice about an NSOperation is
 
-00:05:51.986 --> 00:05:55.506 A:middle
+
+95
+00:05:51,986 --> 00:05:55,506
 that since it's a class,
 you can subclass it
 
-00:05:55.736 --> 00:05:59.146 A:middle
+
+96
+00:05:55,736 --> 00:05:59,146
 and provide your own custom
 logic on how it executes.
 
-00:05:59.836 --> 00:06:02.486 A:middle
+
+97
+00:05:59,836 --> 00:06:02,486
 So in order to subclass
 NSOperation,
 
 
-
-00:05:59.836 --> 00:06:02.486 A:middle
-So in order to subclass
-NSOperation,
-
-00:06:03.036 --> 00:06:04.796 A:middle
+98
+00:06:03,036 --> 00:06:04,796
 let's take a look
 at its lifecycle.
 
-00:06:06.096 --> 00:06:11.396 A:middle
+
+99
+00:06:06,096 --> 00:06:11,396
 When you create an NSOperation,
 it always starts off in a state
 
-00:06:12.736 --> 00:06:14.206 A:middle
+
+100
+00:06:12,736 --> 00:06:14,206
 that we call the pending state.
 
-00:06:14.266 --> 00:06:16.526 A:middle
+
+101
+00:06:14,266 --> 00:06:16,526
 So this is the operation
 when it's initialized
 
-00:06:16.856 --> 00:06:19.966 A:middle
+
+102
+00:06:16,856 --> 00:06:19,966
 and as it's being put
 onto its operation queue.
 
-00:06:21.516 --> 00:06:24.506 A:middle
+
+103
+00:06:21,516 --> 00:06:24,506
 Now, at some point,
 the operation is going
 
-00:06:24.746 --> 00:06:27.606 A:middle
+
+104
+00:06:24,746 --> 00:06:27,606
 to become ready to execute,
 and it enters the ready state.
 
-00:06:28.356 --> 00:06:32.376 A:middle
+
+105
+00:06:28,356 --> 00:06:32,376
 And after it becomes ready, the
 operation queue will pull it off
 
-00:06:32.376 --> 00:06:34.266 A:middle
+
+106
+00:06:32,376 --> 00:06:34,266
 of the queue and
 begin executing it.
 
-00:06:34.896 --> 00:06:37.496 A:middle
+
+107
+00:06:34,896 --> 00:06:37,496
 And like I said, this execution
 can be anywhere from a couple
 
-00:06:37.496 --> 00:06:40.456 A:middle
+
+108
+00:06:37,496 --> 00:06:40,456
 of milliseconds to several
 minutes to even longer.
 
-00:06:44.436 --> 00:06:46.336 A:middle
+
+109
+00:06:44,436 --> 00:06:46,336
 After execution finishes,
 
-00:06:47.766 --> 00:06:51.406 A:middle
+
+110
+00:06:47,766 --> 00:06:51,406
 the operation enters the
 finish state, its final state.
 
-00:06:51.986 --> 00:06:53.626 A:middle
+
+111
+00:06:51,986 --> 00:06:53,626
 So that's pretty simple.
 
-00:06:54.276 --> 00:06:57.896 A:middle
+
+112
+00:06:54,276 --> 00:06:57,896
 The other thing that
 an operation can do is
 
-00:06:57.896 --> 00:07:01.556 A:middle
+
+113
+00:06:57,896 --> 00:07:01,556
 at any point, it can
 enter a canceled state.
 
 
-
-00:06:57.896 --> 00:07:01.556 A:middle
-at any point, it can
-enter a canceled state.
-
-00:07:02.936 --> 00:07:04.626 A:middle
+114
+00:07:02,936 --> 00:07:04,626
 So let's take a look
 at cancellation.
 
-00:07:08.376 --> 00:07:11.486 A:middle
+
+115
+00:07:08,376 --> 00:07:11,486
 Cancellation on an
 NSOperation is defined
 
-00:07:11.486 --> 00:07:14.506 A:middle
+
+116
+00:07:11,486 --> 00:07:14,506
 as a simple Boolean
 property, is canceled.
 
-00:07:14.506 --> 00:07:16.586 A:middle
+
+117
+00:07:14,506 --> 00:07:16,586
 And the important
 thing to understand
 
-00:07:16.586 --> 00:07:20.646 A:middle
+
+118
+00:07:16,586 --> 00:07:20,646
 about this property is that
 it only changes the state
 
-00:07:20.746 --> 00:07:21.526 A:middle
+
+119
+00:07:20,746 --> 00:07:21,526
 of the property.
 
-00:07:21.906 --> 00:07:24.586 A:middle
+
+120
+00:07:21,906 --> 00:07:24,586
 When you cancel an operation,
 all that's happening is
 
-00:07:24.586 --> 00:07:26.416 A:middle
+
+121
+00:07:24,586 --> 00:07:26,416
 that a Boolean value
 is getting flipped.
 
-00:07:28.176 --> 00:07:31.716 A:middle
+
+122
+00:07:28,176 --> 00:07:31,716
 So as you subclass
 NSOperation, it is up to you
 
-00:07:31.716 --> 00:07:35.616 A:middle
+
+123
+00:07:31,716 --> 00:07:35,616
 to decide what it means for
 your NSOperation to be canceled.
 
-00:07:36.316 --> 00:07:39.396 A:middle
+
+124
+00:07:36,316 --> 00:07:39,396
 So, for example, if your
 operation is performing a
 
-00:07:39.396 --> 00:07:43.406 A:middle
+
+125
+00:07:39,396 --> 00:07:43,406
 network task, then maybe
 canceling your operation is akin
 
-00:07:43.666 --> 00:07:46.506 A:middle
+
+126
+00:07:43,666 --> 00:07:46,506
 to canceling your
 network communication.
 
-00:07:47.536 --> 00:07:49.096 A:middle
+
+127
+00:07:47,536 --> 00:07:49,096
 Or perhaps if you are
 performing some sort
 
-00:07:49.096 --> 00:07:51.636 A:middle
+
+128
+00:07:49,096 --> 00:07:51,636
 of database transaction
 in your operation,
 
-00:07:51.926 --> 00:07:54.736 A:middle
+
+129
+00:07:51,926 --> 00:07:54,736
 then perhaps canceling
 your operation would be
 
-00:07:54.736 --> 00:07:56.696 A:middle
+
+130
+00:07:54,736 --> 00:07:56,696
 like discarding that
 transaction.
 
-00:07:57.406 --> 00:07:59.346 A:middle
+
+131
+00:07:57,406 --> 00:07:59,346
 So as you subclass NSOperation,
 
-00:07:59.636 --> 00:08:03.176 A:middle
+
+132
+00:07:59,636 --> 00:08:03,176
 be sure to observe this value
 changing and react appropriately
 
 
-
-00:07:59.636 --> 00:08:03.176 A:middle
-be sure to observe this value
-changing and react appropriately
-
-00:08:03.466 --> 00:08:04.976 A:middle
+133
+00:08:03,466 --> 00:08:04,976
 if there's any reaction
 you need to do.
 
-00:08:07.296 --> 00:08:08.666 A:middle
+
+134
+00:08:07,296 --> 00:08:08,666
 The other thing to be aware
 
-00:08:08.666 --> 00:08:11.816 A:middle
+
+135
+00:08:08,666 --> 00:08:11,816
 of with cancellation is it is
 susceptible to race conditions.
 
-00:08:13.276 --> 00:08:14.066 A:middle
+
+136
+00:08:13,276 --> 00:08:14,066
 What do I mean by this?
 
-00:08:14.626 --> 00:08:16.966 A:middle
+
+137
+00:08:14,626 --> 00:08:16,966
 Well, let's consider an
 operation that's executing
 
-00:08:16.966 --> 00:08:21.916 A:middle
+
+138
+00:08:16,966 --> 00:08:21,916
 in the background, and maybe in
 your UI you have a cancel button
 
-00:08:22.126 --> 00:08:23.576 A:middle
+
+139
+00:08:22,126 --> 00:08:23,576
 that would cancel
 this operation.
 
-00:08:24.146 --> 00:08:27.036 A:middle
+
+140
+00:08:24,146 --> 00:08:27,036
 If the user taps
 the cancel button,
 
-00:08:27.296 --> 00:08:30.606 A:middle
+
+141
+00:08:27,296 --> 00:08:30,606
 it's going to take a small
 amount of time for that message,
 
-00:08:30.676 --> 00:08:33.106 A:middle
+
+142
+00:08:30,676 --> 00:08:33,106
 to cancel, to move
 from the main queue
 
-00:08:33.736 --> 00:08:35.296 A:middle
+
+143
+00:08:33,736 --> 00:08:35,296
 to the operation
 in the background.
 
-00:08:36.436 --> 00:08:38.416 A:middle
+
+144
+00:08:36,436 --> 00:08:38,416
 And if in that small window
 
-00:08:38.416 --> 00:08:41.986 A:middle
+
+145
+00:08:38,416 --> 00:08:41,986
 of time your operation
 finishes executing,
 
-00:08:42.655 --> 00:08:45.236 A:middle
+
+146
+00:08:42,655 --> 00:08:45,236
 then your operation will
 actually never be canceled
 
-00:08:45.476 --> 00:08:48.346 A:middle
+
+147
+00:08:45,476 --> 00:08:48,346
 because an operation cannot
 go from the finished state
 
-00:08:48.666 --> 00:08:49.856 A:middle
+
+148
+00:08:48,666 --> 00:08:49,856
 to the canceled state.
 
-00:08:51.136 --> 00:08:54.526 A:middle
+
+149
+00:08:51,136 --> 00:08:54,526
 So it is important to understand
 that just because you try
 
-00:08:54.526 --> 00:08:57.476 A:middle
+
+150
+00:08:54,526 --> 00:08:57,476
 to cancel an operation,
 there are some cases
 
-00:08:57.776 --> 00:08:59.446 A:middle
+
+151
+00:08:57,776 --> 00:08:59,446
 where it won't actually cancel.
 
 
-
-00:09:00.956 --> 00:09:04.036 A:middle
+152
+00:09:00,956 --> 00:09:04,036
 However, if you do need
 to cancel an operation,
 
-00:09:04.386 --> 00:09:05.936 A:middle
+
+153
+00:09:04,386 --> 00:09:05,936
 it is very easy to do so.
 
-00:09:06.456 --> 00:09:08.706 A:middle
+
+154
+00:09:06,456 --> 00:09:08,706
 All you need to do is
 call the cancel method.
 
-00:09:11.196 --> 00:09:12.746 A:middle
+
+155
+00:09:11,196 --> 00:09:12,746
 So that's cancellation.
 
-00:09:12.746 --> 00:09:16.476 A:middle
+
+156
+00:09:12,746 --> 00:09:16,476
 Now let's take a look at
 this other interesting state
 
-00:09:17.256 --> 00:09:18.436 A:middle
+
+157
+00:09:17,256 --> 00:09:18,436
 called Ready.
 
-00:09:20.616 --> 00:09:24.826 A:middle
+
+158
+00:09:20,616 --> 00:09:24,826
 The readiness of an
 NSOperation, like cancellation,
 
-00:09:25.196 --> 00:09:28.356 A:middle
+
+159
+00:09:25,196 --> 00:09:28,356
 is defined as a simple
 Boolean property, is ready.
 
-00:09:29.806 --> 00:09:32.026 A:middle
+
+160
+00:09:29,806 --> 00:09:32,026
 And what this property means is
 
-00:09:32.026 --> 00:09:34.506 A:middle
+
+161
+00:09:32,026 --> 00:09:34,506
 that the operation
 is ready to execute.
 
-00:09:35.366 --> 00:09:38.996 A:middle
+
+162
+00:09:35,366 --> 00:09:38,996
 So let's take a look at how
 this interacts with operations
 
-00:09:39.146 --> 00:09:40.256 A:middle
+
+163
+00:09:39,146 --> 00:09:40,256
 on an operation queue.
 
-00:09:41.656 --> 00:09:44.566 A:middle
+
+164
+00:09:41,656 --> 00:09:44,566
 So again, we've got our
 serial operation queue,
 
-00:09:44.736 --> 00:09:48.126 A:middle
+
+165
+00:09:44,736 --> 00:09:48,126
 and we are going to load
 up a bunch of operations,
 
-00:09:48.126 --> 00:09:51.036 A:middle
+
+166
+00:09:48,126 --> 00:09:51,036
 and they are all in the
 initial blue pending state.
 
-00:09:52.216 --> 00:09:54.126 A:middle
+
+167
+00:09:52,216 --> 00:09:54,126
 Now, the first operation
 
-00:09:54.326 --> 00:09:58.686 A:middle
+
+168
+00:09:54,326 --> 00:09:58,686
 to enter the ready state
 is the first operation
 
-00:09:58.686 --> 00:10:02.926 A:middle
+
+169
+00:09:58,686 --> 00:10:02,926
 that will be executed, even,
 for example, in this case,
 
 
-
-00:09:58.686 --> 00:10:02.926 A:middle
-that will be executed, even,
-for example, in this case,
-
-00:10:03.076 --> 00:10:06.346 A:middle
+170
+00:10:03,076 --> 00:10:06,346
 if it's the fourth operation
 that was put onto the queue.
 
-00:10:06.956 --> 00:10:09.936 A:middle
+
+171
+00:10:06,956 --> 00:10:09,936
 So once the operation is
 ready, it begins executing.
 
-00:10:11.426 --> 00:10:14.266 A:middle
+
+172
+00:10:11,426 --> 00:10:14,266
 Then, as other operations
 become ready,
 
-00:10:14.846 --> 00:10:17.526 A:middle
+
+173
+00:10:14,846 --> 00:10:17,526
 they are pulled off
 the queue and executed.
 
-00:10:19.056 --> 00:10:21.146 A:middle
+
+174
+00:10:19,056 --> 00:10:21,146
 And in this case, since
 we have a serial queue,
 
-00:10:21.146 --> 00:10:25.556 A:middle
+
+175
+00:10:21,146 --> 00:10:25,556
 only executing one at a time,
 if two operations become ready
 
-00:10:25.706 --> 00:10:28.246 A:middle
+
+176
+00:10:25,706 --> 00:10:28,246
 at the same time,
 then the first one
 
-00:10:28.816 --> 00:10:31.146 A:middle
+
+177
+00:10:28,816 --> 00:10:31,146
 that has a higher priority
 will be pulled off first,
 
-00:10:31.526 --> 00:10:33.326 A:middle
+
+178
+00:10:31,526 --> 00:10:33,326
 and then the second
 one will be executed.
 
-00:10:33.946 --> 00:10:37.146 A:middle
+
+179
+00:10:33,946 --> 00:10:37,146
 And then, as the other
 operations become ready,
 
-00:10:37.396 --> 00:10:39.976 A:middle
+
+180
+00:10:37,396 --> 00:10:39,976
 they are also pulled off
 the queue and executed.
 
-00:10:42.046 --> 00:10:43.346 A:middle
+
+181
+00:10:42,046 --> 00:10:43,346
 So that's brief look
 at readiness.
 
-00:10:46.176 --> 00:10:48.146 A:middle
+
+182
+00:10:46,176 --> 00:10:48,146
 Now, what can we do with this?
 
-00:10:49.056 --> 00:10:51.916 A:middle
+
+183
+00:10:49,056 --> 00:10:51,916
 Well, we can make dependencies.
 
-00:10:53.086 --> 00:10:57.086 A:middle
+
+184
+00:10:53,086 --> 00:10:57,086
 Dependencies are a way for us
 to express a strict ordering
 
-00:10:57.506 --> 00:10:59.686 A:middle
+
+185
+00:10:57,506 --> 00:10:59,686
 between our operations,
 that first we want
 
-00:10:59.686 --> 00:11:03.166 A:middle
+
+186
+00:10:59,686 --> 00:11:03,166
 to execute this thing, and then
 we want to execute that thing.
 
 
-
-00:10:59.686 --> 00:11:03.166 A:middle
-to execute this thing, and then
-we want to execute that thing.
-
-00:11:07.656 --> 00:11:08.906 A:middle
+187
+00:11:07,656 --> 00:11:08,906
 And the neat thing
 
-00:11:08.906 --> 00:11:13.306 A:middle
+
+188
+00:11:08,906 --> 00:11:13,306
 about dependencies is they
 provide the base definition
 
-00:11:13.546 --> 00:11:16.586 A:middle
+
+189
+00:11:13,546 --> 00:11:16,586
 for what it means for an
 operation to be ready.
 
-00:11:18.606 --> 00:11:23.186 A:middle
+
+190
+00:11:18,606 --> 00:11:23,186
 By default, an operation
 will become ready if all
 
-00:11:23.186 --> 00:11:25.516 A:middle
+
+191
+00:11:23,186 --> 00:11:25,516
 of its dependencies
 have finished executing.
 
-00:11:25.516 --> 00:11:27.526 A:middle
+
+192
+00:11:25,516 --> 00:11:27,526
 This is behavior that
 you get for free.
 
-00:11:30.106 --> 00:11:32.826 A:middle
+
+193
+00:11:30,106 --> 00:11:32,826
 The other neat thing
 about dependencies is
 
-00:11:32.826 --> 00:11:36.556 A:middle
+
+194
+00:11:32,826 --> 00:11:36,556
 that they are not limited
 by operation queues.
 
-00:11:36.786 --> 00:11:37.626 A:middle
+
+195
+00:11:36,786 --> 00:11:37,626
 Now, what do I mean by this?
 
-00:11:38.366 --> 00:11:41.536 A:middle
+
+196
+00:11:38,366 --> 00:11:41,536
 If you have two operation
 queues in your application,
 
-00:11:42.766 --> 00:11:46.406 A:middle
+
+197
+00:11:42,766 --> 00:11:46,406
 operations in the first
 queue can be dependent
 
-00:11:46.406 --> 00:11:48.996 A:middle
+
+198
+00:11:46,406 --> 00:11:48,996
 on the operations
 in the second queue.
 
-00:11:49.116 --> 00:11:52.826 A:middle
+
+199
+00:11:49,116 --> 00:11:52,826
 And we are going to see later
 how this can enable some really
 
-00:11:52.826 --> 00:11:53.806 A:middle
+
+200
+00:11:52,826 --> 00:11:53,806
 powerful patterns.
 
-00:11:55.366 --> 00:11:57.766 A:middle
+
+201
+00:11:55,366 --> 00:11:57,766
 Now, setting up dependencies
 amongst your operations,
 
-00:11:58.316 --> 00:11:59.876 A:middle
+
+202
+00:11:58,316 --> 00:11:59,876
 again, is extremely simple.
 
 
-
-00:12:00.666 --> 00:12:04.226 A:middle
+203
+00:12:00,666 --> 00:12:04,226
 All we need to do is use
 the add dependency method.
 
-00:12:04.726 --> 00:12:08.566 A:middle
+
+204
+00:12:04,726 --> 00:12:08,566
 So in this case, operation
 B will become dependent
 
-00:12:08.836 --> 00:12:12.536 A:middle
+
+205
+00:12:08,836 --> 00:12:12,536
 on the successful
 exectution of operation A.
 
-00:12:12.536 --> 00:12:18.566 A:middle
+
+206
+00:12:12,536 --> 00:12:18,566
 And so operation B will not
 execute until after operation A.
 
-00:12:18.676 --> 00:12:22.306 A:middle
+
+207
+00:12:18,676 --> 00:12:22,306
 This is guaranteed.
 
-00:12:22.306 --> 00:12:26.656 A:middle
+
+208
+00:12:22,306 --> 00:12:26,656
 Now, with dependencies, we can
 run into a couple of problems,
 
-00:12:27.356 --> 00:12:29.116 A:middle
+
+209
+00:12:27,356 --> 00:12:29,116
 like operation deadlock.
 
-00:12:30.436 --> 00:12:34.276 A:middle
+
+210
+00:12:30,436 --> 00:12:34,276
 So if I have an operation
 A and another operation B
 
-00:12:34.626 --> 00:12:38.806 A:middle
+
+211
+00:12:34,626 --> 00:12:38,806
 that is dependent upon the
 execution of A, this is fine.
 
-00:12:39.866 --> 00:12:45.826 A:middle
+
+212
+00:12:39,866 --> 00:12:45,826
 However, if I inadvertently
 make A also dependent on B,
 
-00:12:46.756 --> 00:12:49.736 A:middle
+
+213
+00:12:46,756 --> 00:12:49,736
 then these two operations
 will never execute
 
-00:12:50.036 --> 00:12:52.796 A:middle
+
+214
+00:12:50,036 --> 00:12:52,796
 because they will both be
 waiting on each other to finish,
 
-00:12:52.796 --> 00:12:56.406 A:middle
+
+215
+00:12:52,796 --> 00:12:56,406
 and since they are both waiting,
 they will both never start.
 
-00:12:57.286 --> 00:12:59.006 A:middle
+
+216
+00:12:57,286 --> 00:12:59,006
 So as you are setting
 up dependencies
 
-00:12:59.006 --> 00:13:01.676 A:middle
+
+217
+00:12:59,006 --> 00:13:01,676
 in your application,
 don't do this.
 
 
-
-00:12:59.006 --> 00:13:01.676 A:middle
-in your application,
-don't do this.
-
-00:13:05.316 --> 00:13:08.936 A:middle
+218
+00:13:05,316 --> 00:13:08,936
 Now, the WWDC app uses
 dependencies all over the place.
 
-00:13:09.736 --> 00:13:13.356 A:middle
+
+219
+00:13:09,736 --> 00:13:13,356
 And a really simple example is
 what happens when you tap the
 
-00:13:13.356 --> 00:13:16.396 A:middle
+
+220
+00:13:13,356 --> 00:13:16,396
 "add to favorites" button
 on a session in the app,
 
-00:13:16.556 --> 00:13:18.586 A:middle
+
+221
+00:13:16,556 --> 00:13:18,586
 which hopefully you all
 did for this session.
 
-00:13:20.636 --> 00:13:21.776 A:middle
+
+222
+00:13:20,636 --> 00:13:21,776
 When you tap that button,
 
-00:13:22.326 --> 00:13:24.386 A:middle
+
+223
+00:13:22,326 --> 00:13:24,386
 we're going to first create
 an operation called the
 
-00:13:24.386 --> 00:13:25.556 A:middle
+
+224
+00:13:24,386 --> 00:13:25,556
 login operation.
 
-00:13:25.676 --> 00:13:30.136 A:middle
+
+225
+00:13:25,676 --> 00:13:30,136
 This is an operation that
 guarantees that you have logged
 
-00:13:30.136 --> 00:13:33.556 A:middle
+
+226
+00:13:30,136 --> 00:13:33,556
 into the app with your
 developer name and password.
 
-00:13:34.086 --> 00:13:39.316 A:middle
+
+227
+00:13:34,086 --> 00:13:39,316
 Next, we are going to create
 another operation called the
 
-00:13:39.946 --> 00:13:41.346 A:middle
+
+228
+00:13:39,946 --> 00:13:41,346
 User Info operation.
 
-00:13:42.086 --> 00:13:45.226 A:middle
+
+229
+00:13:42,086 --> 00:13:45,226
 This is an operation that
 guarantees that the user name
 
-00:13:45.226 --> 00:13:48.986 A:middle
+
+230
+00:13:45,226 --> 00:13:48,986
 and password are actually a
 developer username and password
 
-00:13:48.986 --> 00:13:53.046 A:middle
+
+231
+00:13:48,986 --> 00:13:53,046
 and not, for example, your
 iTunes username and password.
 
-00:13:53.836 --> 00:13:57.706 A:middle
+
+232
+00:13:53,836 --> 00:13:57,706
 So your Apple ID is an
 appropriate developer Apple ID.
 
-00:13:59.076 --> 00:14:03.486 A:middle
+
+233
+00:13:59,076 --> 00:14:03,486
 Now, favorites in the WWDC
 app are stored in CloudKit,
 
 
-
-00:13:59.076 --> 00:14:03.486 A:middle
-Now, favorites in the WWDC
-app are stored in CloudKit,
-
-00:14:03.766 --> 00:14:06.246 A:middle
+234
+00:14:03,766 --> 00:14:06,246
 so we also need another
 operation to make sure
 
-00:14:06.496 --> 00:14:09.006 A:middle
+
+235
+00:14:06,496 --> 00:14:09,006
 that we have access to
 your iCloud account.
 
-00:14:09.726 --> 00:14:11.456 A:middle
+
+236
+00:14:09,726 --> 00:14:11,456
 So this happens silently,
 
-00:14:11.756 --> 00:14:14.066 A:middle
+
+237
+00:14:11,756 --> 00:14:14,066
 because we are not
 requesting permission
 
-00:14:14.126 --> 00:14:16.126 A:middle
+
+238
+00:14:14,126 --> 00:14:16,126
 to see your first name
 and last name in the app,
 
-00:14:17.276 --> 00:14:19.326 A:middle
+
+239
+00:14:17,276 --> 00:14:19,326
 so we need to make sure that
 you have an iCloud account.
 
-00:14:20.106 --> 00:14:24.516 A:middle
+
+240
+00:14:20,106 --> 00:14:24,516
 And finally, we can set up
 the save favorite operation,
 
-00:14:24.716 --> 00:14:27.206 A:middle
+
+241
+00:14:24,716 --> 00:14:27,206
 and this is dependent on
 the successful completion
 
-00:14:27.256 --> 00:14:28.926 A:middle
+
+242
+00:14:27,256 --> 00:14:28,926
 of verifying that
 you are a developer
 
-00:14:29.346 --> 00:14:31.556 A:middle
+
+243
+00:14:29,346 --> 00:14:31,556
 and the successful
 completion of verifying
 
-00:14:31.786 --> 00:14:33.786 A:middle
+
+244
+00:14:31,786 --> 00:14:33,786
 that you have an iCloud account.
 
-00:14:34.996 --> 00:14:36.496 A:middle
+
+245
+00:14:34,996 --> 00:14:36,496
 So that's a simple example.
 
-00:14:37.006 --> 00:14:38.736 A:middle
+
+246
+00:14:37,006 --> 00:14:38,736
 Let's take a look at a
 bit more complex one.
 
-00:14:40.156 --> 00:14:44.146 A:middle
+
+247
+00:14:40,156 --> 00:14:44,146
 When the WWDC app starts
 up, there's a bunch
 
-00:14:44.146 --> 00:14:45.966 A:middle
+
+248
+00:14:44,146 --> 00:14:45,966
 of setup that we need to do.
 
-00:14:47.026 --> 00:14:50.686 A:middle
+
+249
+00:14:47,026 --> 00:14:50,686
 First, we are going to download
 a small configuration file,
 
-00:14:51.216 --> 00:14:53.076 A:middle
+
+250
+00:14:51,216 --> 00:14:53,076
 and this file will
 tell us small things
 
-00:14:53.076 --> 00:14:55.426 A:middle
+
+251
+00:14:53,076 --> 00:14:55,426
 like what's the most
 recently supported version
 
-00:14:55.426 --> 00:14:56.326 A:middle
+
+252
+00:14:55,426 --> 00:14:56,326
 of the application,
 
-00:14:56.836 --> 00:14:59.586 A:middle
+
+253
+00:14:56,836 --> 00:14:59,586
 what features we have
 enabled, and so on.
 
 
-
-00:15:00.516 --> 00:15:02.966 A:middle
+254
+00:15:00,516 --> 00:15:02,966
 So after we download
 this file, we are going
 
-00:15:02.966 --> 00:15:04.716 A:middle
+
+255
+00:15:02,966 --> 00:15:04,716
 to perform a version
 check to make sure
 
-00:15:04.716 --> 00:15:07.336 A:middle
+
+256
+00:15:04,716 --> 00:15:07,336
 that you are running the
 latest version of the WWDC app.
 
-00:15:08.726 --> 00:15:11.166 A:middle
+
+257
+00:15:08,726 --> 00:15:11,166
 And then after we check
 the version of the app,
 
-00:15:11.656 --> 00:15:14.236 A:middle
+
+258
+00:15:11,656 --> 00:15:14,236
 we can start downloading
 useful pieces of information,
 
-00:15:14.696 --> 00:15:17.196 A:middle
+
+259
+00:15:14,696 --> 00:15:17,196
 such as the news that
 we show in the News tab
 
-00:15:17.626 --> 00:15:21.206 A:middle
+
+260
+00:15:17,626 --> 00:15:21,206
 and the schedule
 for the conference.
 
-00:15:21.206 --> 00:15:22.966 A:middle
+
+261
+00:15:21,206 --> 00:15:22,966
 After we've downloaded
 the schedule,
 
-00:15:23.476 --> 00:15:26.166 A:middle
+
+262
+00:15:23,476 --> 00:15:26,166
 then we can start importing
 any favorites that you've saved
 
-00:15:26.166 --> 00:15:28.716 A:middle
+
+263
+00:15:26,166 --> 00:15:28,716
 to iCloud, any feedback
 that you've submitted
 
-00:15:28.886 --> 00:15:31.476 A:middle
+
+264
+00:15:28,886 --> 00:15:31,476
 so you can see it in the
 app, and we are also going
 
-00:15:31.476 --> 00:15:34.856 A:middle
+
+265
+00:15:31,476 --> 00:15:34,856
 to start downloading
 the list of videos.
 
-00:15:34.936 --> 00:15:37.956 A:middle
+
+266
+00:15:34,936 --> 00:15:37,956
 All of these things require the
 schedule to first be in place.
 
-00:15:39.096 --> 00:15:44.306 A:middle
+
+267
+00:15:39,096 --> 00:15:44,306
 And then finally, we can save
 our NSManaged object context,
 
-00:15:45.116 --> 00:15:46.836 A:middle
+
+268
+00:15:45,116 --> 00:15:46,836
 where we are saving all
 of this information.
 
-00:15:47.816 --> 00:15:49.786 A:middle
+
+269
+00:15:47,816 --> 00:15:49,786
 So let's see how dependencies
 
-00:15:50.066 --> 00:15:53.956 A:middle
+
+270
+00:15:50,066 --> 00:15:53,956
 and operation lifecycle
 affect the execution
 
-00:15:54.286 --> 00:15:55.286 A:middle
+
+271
+00:15:54,286 --> 00:15:55,286
 of these operations.
 
-00:15:55.536 --> 00:15:56.836 A:middle
+
+272
+00:15:55,536 --> 00:15:56,836
 And we are going
 to move them all
 
-00:15:57.106 --> 00:15:58.976 A:middle
+
+273
+00:15:57,106 --> 00:15:58,976
 into the Pending
 Operations state.
 
 
-
-00:16:00.026 --> 00:16:01.396 A:middle
+274
+00:16:00,026 --> 00:16:01,396
 Now, the first operation
 
-00:16:01.396 --> 00:16:04.306 A:middle
+
+275
+00:16:01,396 --> 00:16:04,306
 to download the app
 settings has no dependencies,
 
-00:16:04.566 --> 00:16:06.876 A:middle
+
+276
+00:16:04,566 --> 00:16:06,876
 so it immediately
 becomes ready to execute.
 
-00:16:07.566 --> 00:16:11.216 A:middle
+
+277
+00:16:07,566 --> 00:16:11,216
 And so our operation queue
 is going to pull it off,
 
-00:16:11.406 --> 00:16:13.786 A:middle
+
+278
+00:16:11,406 --> 00:16:13,786
 execute it, and then
 it's going to finish.
 
-00:16:14.696 --> 00:16:15.736 A:middle
+
+279
+00:16:14,696 --> 00:16:15,736
 Now, when it finishes,
 
-00:16:16.926 --> 00:16:20.496 A:middle
+
+280
+00:16:16,926 --> 00:16:20,496
 the version check operation
 also immediately becomes ready
 
-00:16:20.496 --> 00:16:22.756 A:middle
+
+281
+00:16:20,496 --> 00:16:22,756
 to execute, and so it's going
 
-00:16:22.756 --> 00:16:24.686 A:middle
+
+282
+00:16:22,756 --> 00:16:24,686
 to get pulled off the
 queue and executed.
 
-00:16:27.046 --> 00:16:31.566 A:middle
+
+283
+00:16:27,046 --> 00:16:31,566
 When it finishes, the next three
 operations simultaneously become
 
-00:16:31.566 --> 00:16:32.626 A:middle
+
+284
+00:16:31,566 --> 00:16:32,626
 ready to execute.
 
-00:16:33.166 --> 00:16:36.476 A:middle
+
+285
+00:16:33,166 --> 00:16:36,476
 So they're going
 to start executing.
 
-00:16:37.856 --> 00:16:39.436 A:middle
+
+286
+00:16:37,856 --> 00:16:39,436
 And as they finish executing,
 
-00:16:40.136 --> 00:16:42.686 A:middle
+
+287
+00:16:40,136 --> 00:16:42,686
 more and more operations
 will become ready to execute.
 
-00:16:43.116 --> 00:16:45.456 A:middle
+
+288
+00:16:43,116 --> 00:16:45,456
 They will be pulled off
 the queue and executed.
 
-00:16:46.746 --> 00:16:49.646 A:middle
+
+289
+00:16:46,746 --> 00:16:49,646
 Now, the important thing to
 realize here and to notice is
 
-00:16:49.646 --> 00:16:51.256 A:middle
+
+290
+00:16:49,646 --> 00:16:51,256
 that this final operation
 
-00:16:51.606 --> 00:16:55.496 A:middle
+
+291
+00:16:51,606 --> 00:16:55,496
 to save our context does
 not become ready to execute
 
-00:16:55.716 --> 00:16:58.246 A:middle
+
+292
+00:16:55,716 --> 00:16:58,246
 until everything else
 has already finished.
 
-00:16:58.736 --> 00:17:02.116 A:middle
+
+293
+00:16:58,736 --> 00:17:02,116
 By using dependencies, we can
 guarantee that things happen
 
 
-
-00:16:58.736 --> 00:17:02.116 A:middle
-By using dependencies, we can
-guarantee that things happen
-
-00:17:02.166 --> 00:17:06.306 A:middle
+294
+00:17:02,166 --> 00:17:06,306
 in the correct order and that
 nothing will get out of order.
 
-00:17:06.925 --> 00:17:08.316 A:middle
+
+295
+00:17:06,925 --> 00:17:08,316
 So now that this one is ready,
 
-00:17:08.715 --> 00:17:11.205 A:middle
+
+296
+00:17:08,715 --> 00:17:11,205
 it can be executed,
 and it can finish.
 
-00:17:11.386 --> 00:17:13.116 A:middle
+
+297
+00:17:11,386 --> 00:17:13,116
 And App Start-up can continue.
 
-00:17:14.226 --> 00:17:15.996 A:middle
+
+298
+00:17:14,226 --> 00:17:15,996
 So that's a look
 at dependencies.
 
-00:17:19.526 --> 00:17:22.816 A:middle
+
+299
+00:17:19,526 --> 00:17:22,816
 Overall, NSOperations
 are a fantastic way
 
-00:17:22.816 --> 00:17:24.846 A:middle
+
+300
+00:17:22,816 --> 00:17:24,846
 to abstract logic in your code.
 
-00:17:26.195 --> 00:17:30.676 A:middle
+
+301
+00:17:26,195 --> 00:17:30,676
 By putting our logic inside of
 operations, it makes it easier
 
-00:17:31.436 --> 00:17:33.946 A:middle
+
+302
+00:17:31,436 --> 00:17:33,946
 to simplify these logic
 changes because we are dealing
 
-00:17:33.946 --> 00:17:36.886 A:middle
+
+303
+00:17:33,946 --> 00:17:36,886
 with isolated pieces of
 work, much like we do
 
-00:17:36.886 --> 00:17:38.126 A:middle
+
+304
+00:17:36,886 --> 00:17:38,126
 when we are dealing
 with a block.
 
-00:17:38.756 --> 00:17:44.346 A:middle
+
+305
+00:17:38,756 --> 00:17:44,346
 As an example of this, the
 WWDC app this year moved
 
-00:17:44.346 --> 00:17:47.676 A:middle
+
+306
+00:17:44,346 --> 00:17:47,676
 from being -- from saving
 your favorites and feedback
 
-00:17:47.676 --> 00:17:50.806 A:middle
+
+307
+00:17:47,676 --> 00:17:50,806
 on a custom backend,
 to being on CloudKit.
 
-00:17:51.926 --> 00:17:53.706 A:middle
+
+308
+00:17:51,926 --> 00:17:53,706
 Now, at this point I want
 you all to think about,
 
-00:17:54.026 --> 00:17:58.136 A:middle
+
+309
+00:17:54,026 --> 00:17:58,136
 what would it take to move
 your application from a custom,
 
-00:17:58.246 --> 00:18:01.346 A:middle
+
+310
+00:17:58,246 --> 00:18:01,346
 from whatever service you
 are using now to CloudKit?
 
 
-
-00:17:58.246 --> 00:18:01.346 A:middle
-from whatever service you
-are using now to CloudKit?
-
-00:18:02.236 --> 00:18:04.986 A:middle
+311
+00:18:02,236 --> 00:18:04,986
 And if you are suddenly
 panicking, and all of the places
 
-00:18:04.986 --> 00:18:07.276 A:middle
+
+312
+00:18:04,986 --> 00:18:07,276
 in your code where you've
 got network communication,
 
-00:18:07.276 --> 00:18:10.506 A:middle
+
+313
+00:18:07,276 --> 00:18:10,506
 and all these dependencies
 on, you know, the intricacies
 
-00:18:10.506 --> 00:18:14.056 A:middle
+
+314
+00:18:10,506 --> 00:18:14,056
 of your server provider,
 then this is a good sign
 
-00:18:14.056 --> 00:18:15.476 A:middle
+
+315
+00:18:14,056 --> 00:18:15,476
 that you should be
 using operations.
 
-00:18:16.756 --> 00:18:18.336 A:middle
+
+316
+00:18:16,756 --> 00:18:18,336
 In the WWDC app, all
 
-00:18:18.336 --> 00:18:21.586 A:middle
+
+317
+00:18:18,336 --> 00:18:21,586
 of our network communication
 is hidden behind operations,
 
-00:18:22.016 --> 00:18:24.306 A:middle
+
+318
+00:18:22,016 --> 00:18:24,306
 which means that in order
 to change the backend
 
-00:18:24.306 --> 00:18:27.366 A:middle
+
+319
+00:18:24,306 --> 00:18:27,366
 from using a custom
 service to using CloudKit,
 
-00:18:28.006 --> 00:18:31.416 A:middle
+
+320
+00:18:28,006 --> 00:18:31,416
 all we had to do was
 rewrite four small classes.
 
-00:18:31.606 --> 00:18:34.296 A:middle
+
+321
+00:18:31,606 --> 00:18:34,296
 It took us less than a day
 and then a couple more days
 
-00:18:34.296 --> 00:18:35.836 A:middle
+
+322
+00:18:34,296 --> 00:18:35,836
 to successfully test
 our changes.
 
-00:18:36.136 --> 00:18:38.776 A:middle
+
+323
+00:18:36,136 --> 00:18:38,776
 It was a simple, trivial change.
 
-00:18:41.396 --> 00:18:43.736 A:middle
+
+324
+00:18:41,396 --> 00:18:43,736
 Now, in all of this, you
 might be wondering, well,
 
-00:18:43.736 --> 00:18:45.356 A:middle
+
+325
+00:18:43,736 --> 00:18:45,356
 what about Grand
 Central Dispatch?
 
-00:18:45.906 --> 00:18:50.346 A:middle
+
+326
+00:18:45,906 --> 00:18:50,346
 Grand Central Dispatch
 absolutely has its place.
 
-00:18:50.676 --> 00:18:52.616 A:middle
+
+327
+00:18:50,676 --> 00:18:52,616
 In fact, when you
 download the sample code
 
-00:18:52.616 --> 00:18:55.786 A:middle
+
+328
+00:18:52,616 --> 00:18:55,786
 for this presentation and look
 through it, you will see places
 
-00:18:55.786 --> 00:18:59.106 A:middle
+
+329
+00:18:55,786 --> 00:18:59,106
 where we are using Grand Central
 Dispatch in that sample code
 
 
-
-00:19:00.276 --> 00:19:02.976 A:middle
+330
+00:19:00,276 --> 00:19:02,976
 for things that are not really
 appropriate to NSOperations.
 
-00:19:03.556 --> 00:19:05.456 A:middle
+
+331
+00:19:03,556 --> 00:19:05,456
 So for example, anytime
 you simply need
 
-00:19:05.456 --> 00:19:09.636 A:middle
+
+332
+00:19:05,456 --> 00:19:09,636
 to bounce a method call from
 one queue to another queue,
 
-00:19:10.206 --> 00:19:12.156 A:middle
+
+333
+00:19:10,206 --> 00:19:12,156
 you don't need to wrap
 that in an operation.
 
-00:19:12.706 --> 00:19:15.596 A:middle
+
+334
+00:19:12,706 --> 00:19:15,596
 That's something you want to
 keep fast and very lightweight.
 
-00:19:16.096 --> 00:19:18.066 A:middle
+
+335
+00:19:16,096 --> 00:19:18,066
 Or if you are doing
 anything with semaphores
 
-00:19:18.286 --> 00:19:21.556 A:middle
+
+336
+00:19:18,286 --> 00:19:21,556
 or dispatch group, these
 are all perfect use cases
 
-00:19:21.766 --> 00:19:22.976 A:middle
+
+337
+00:19:21,766 --> 00:19:22,976
 for Grand Central Dispatch.
 
-00:19:25.296 --> 00:19:27.466 A:middle
+
+338
+00:19:25,296 --> 00:19:27,466
 So that's a look at the basics.
 
-00:19:28.726 --> 00:19:29.486 A:middle
+
+339
+00:19:28,726 --> 00:19:29,486
 Let's go beyond them.
 
-00:19:32.136 --> 00:19:35.256 A:middle
+
+340
+00:19:32,136 --> 00:19:35,256
 Now, one of the things that
 we realized in the WWDC app is
 
-00:19:35.256 --> 00:19:40.146 A:middle
+
+341
+00:19:35,256 --> 00:19:40,146
 that there are places where
 we want to have UI interaction
 
-00:19:40.586 --> 00:19:43.836 A:middle
+
+342
+00:19:40,586 --> 00:19:43,836
 but still have it participate
 in the operation chain.
 
-00:19:44.346 --> 00:19:45.996 A:middle
+
+343
+00:19:44,346 --> 00:19:45,996
 So for example, authentication.
 
-00:19:45.996 --> 00:19:48.046 A:middle
+
+344
+00:19:45,996 --> 00:19:48,046
 We talked earlier about
 saving a favorite.
 
-00:19:48.696 --> 00:19:50.036 A:middle
+
+345
+00:19:48,696 --> 00:19:50,036
 We need to make sure
 that you are logged in.
 
-00:19:50.186 --> 00:19:51.336 A:middle
+
+346
+00:19:50,186 --> 00:19:51,336
 But what if you are not?
 
-00:19:52.946 --> 00:19:57.556 A:middle
+
+347
+00:19:52,946 --> 00:19:57,556
 Well, we realized that
 we can put UI elements,
 
-00:19:57.636 --> 00:20:01.036 A:middle
+
+348
+00:19:57,636 --> 00:20:01,036
 UI functionality
 within our operations.
 
 
-
-00:19:57.636 --> 00:20:01.036 A:middle
-UI functionality
-within our operations.
-
-00:20:01.366 --> 00:20:04.076 A:middle
+349
+00:20:01,366 --> 00:20:04,076
 So for example, the
 authentication dialogue
 
-00:20:04.186 --> 00:20:08.646 A:middle
+
+350
+00:20:04,186 --> 00:20:08,646
 that slides up in the WWDC app
 is actually an NSOperation.
 
-00:20:11.206 --> 00:20:14.496 A:middle
+
+351
+00:20:11,206 --> 00:20:14,496
 Or anytime that you are watching
 a video in the WWDC app,
 
-00:20:14.836 --> 00:20:19.556 A:middle
+
+352
+00:20:14,836 --> 00:20:19,556
 we encapsulated this inside
 a "watch video" operation.
 
-00:20:20.036 --> 00:20:22.736 A:middle
+
+353
+00:20:20,036 --> 00:20:22,736
 So all we need to do is
 create one of these operations
 
-00:20:22.896 --> 00:20:25.666 A:middle
+
+354
+00:20:22,896 --> 00:20:25,666
 with the appropriate
 video asset and put it
 
-00:20:25.666 --> 00:20:26.796 A:middle
+
+355
+00:20:25,666 --> 00:20:26,796
 on our operation queue,
 
-00:20:27.056 --> 00:20:29.316 A:middle
+
+356
+00:20:27,056 --> 00:20:29,316
 and everything else will
 just fall into place.
 
-00:20:32.046 --> 00:20:36.896 A:middle
+
+357
+00:20:32,046 --> 00:20:36,896
 Even more broadly, any time you
 see an alert in the WWDC app,
 
-00:20:37.236 --> 00:20:40.196 A:middle
+
+358
+00:20:37,236 --> 00:20:40,196
 this is something that we
 thought was also a really good
 
-00:20:40.196 --> 00:20:43.916 A:middle
+
+359
+00:20:40,196 --> 00:20:43,916
 use case for putting UI
 inside an NSOperation.
 
-00:20:45.366 --> 00:20:47.986 A:middle
+
+360
+00:20:45,366 --> 00:20:47,986
 And we discovered that the
 underlying principle we found
 
-00:20:48.016 --> 00:20:51.796 A:middle
+
+361
+00:20:48,016 --> 00:20:51,796
 here was that when we're dealing
 with any sort of modal UI,
 
-00:20:52.146 --> 00:20:56.026 A:middle
+
+362
+00:20:52,146 --> 00:20:56,026
 so a UI that takes over
 generally the entire real estate
 
-00:20:56.156 --> 00:20:59.406 A:middle
+
+363
+00:20:56,156 --> 00:20:59,406
 of your application, this
 is an excellent thing
 
-00:20:59.566 --> 00:21:02.336 A:middle
+
+364
+00:20:59,566 --> 00:21:02,336
 to encapsulate inside
 of an NSOperation.
 
 
-
-00:20:59.566 --> 00:21:02.336 A:middle
-to encapsulate inside
-of an NSOperation.
-
-00:21:02.966 --> 00:21:07.646 A:middle
+365
+00:21:02,966 --> 00:21:07,646
 So to reiterate, the first
 time you launch the WWDC app,
 
-00:21:07.996 --> 00:21:10.186 A:middle
+
+366
+00:21:07,996 --> 00:21:10,186
 you saw this dialogue asking
 
-00:21:10.186 --> 00:21:12.546 A:middle
+
+367
+00:21:10,186 --> 00:21:12,546
 if we could collect
 some simple usage data
 
-00:21:12.546 --> 00:21:14.586 A:middle
+
+368
+00:21:12,546 --> 00:21:14,586
 on how you are using the app.
 
-00:21:14.826 --> 00:21:18.656 A:middle
+
+369
+00:21:14,826 --> 00:21:18,656
 This dialogue that appears,
 this UI alert controller,
 
-00:21:18.996 --> 00:21:21.906 A:middle
+
+370
+00:21:18,996 --> 00:21:21,906
 is actually being run from
 inside an NSOperation.
 
-00:21:24.396 --> 00:21:25.766 A:middle
+
+371
+00:21:24,396 --> 00:21:25,766
 Or the login sheet.
 
-00:21:25.906 --> 00:21:28.946 A:middle
+
+372
+00:21:25,906 --> 00:21:28,946
 If you try to add something
 to Favorites or leave feedback
 
-00:21:28.946 --> 00:21:32.776 A:middle
+
+373
+00:21:28,946 --> 00:21:32,776
 on a session, this is
 also an NSOperation.
 
-00:21:36.716 --> 00:21:38.676 A:middle
+
+374
+00:21:36,716 --> 00:21:38,676
 The next thing we encountered is
 
-00:21:39.076 --> 00:21:42.226 A:middle
+
+375
+00:21:39,076 --> 00:21:42,226
 that there are some times we
 want to perform simple pieces
 
-00:21:42.226 --> 00:21:46.356 A:middle
+
+376
+00:21:42,226 --> 00:21:46,356
 of logic as a block,
 but we also wanted
 
-00:21:46.356 --> 00:21:50.316 A:middle
+
+377
+00:21:46,356 --> 00:21:50,316
 to participate inside
 the operation mechanism.
 
-00:21:50.886 --> 00:21:54.336 A:middle
+
+378
+00:21:50,886 --> 00:21:54,336
 So we turned to block
 operations, NSBlock operation
 
-00:21:54.336 --> 00:21:56.366 A:middle
+
+379
+00:21:54,336 --> 00:21:56,366
 and other custom
 operations that we created.
 
-00:21:58.586 --> 00:22:01.396 A:middle
+
+380
+00:21:58,586 --> 00:22:01,396
 So this is really just an
 NSOperation to execute a block.
 
 
-
-00:21:58.586 --> 00:22:01.396 A:middle
-So this is really just an
-NSOperation to execute a block.
-
-00:22:01.426 --> 00:22:03.166 A:middle
+381
+00:22:01,426 --> 00:22:03,166
 And you may be asking, well,
 
-00:22:03.166 --> 00:22:07.106 A:middle
+
+382
+00:22:03,166 --> 00:22:07,106
 if NSOperation is just an
 abstraction around a block,
 
-00:22:07.716 --> 00:22:11.766 A:middle
+
+383
+00:22:07,716 --> 00:22:11,766
 why would I then return to using
 blocks inside an NSOperation?
 
-00:22:13.056 --> 00:22:16.476 A:middle
+
+384
+00:22:13,056 --> 00:22:16,476
 And that's because by putting
 a block inside an NSOperation,
 
-00:22:16.746 --> 00:22:20.086 A:middle
+
+385
+00:22:16,746 --> 00:22:20,086
 you gain all of the great
 features of NSOperation
 
-00:22:21.126 --> 00:22:23.086 A:middle
+
+386
+00:22:21,126 --> 00:22:23,086
 for that block that you do
 
-00:22:23.086 --> 00:22:25.446 A:middle
+
+387
+00:22:23,086 --> 00:22:25,446
 for NSOperation,
 such as dependencies.
 
-00:22:27.246 --> 00:22:29.196 A:middle
+
+388
+00:22:27,246 --> 00:22:29,196
 Let's take a look at
 what we can do with this
 
-00:22:29.666 --> 00:22:33.266 A:middle
+
+389
+00:22:29,666 --> 00:22:33,266
 and see what happens when you
 tap the Leave Feedback button
 
-00:22:33.576 --> 00:22:35.446 A:middle
+
+390
+00:22:33,576 --> 00:22:35,446
 in the WWDC app.
 
-00:22:38.636 --> 00:22:43.666 A:middle
+
+391
+00:22:38,636 --> 00:22:43,666
 Well, the Leave Feedback button
 wants to perform a segue.
 
-00:22:44.206 --> 00:22:46.596 A:middle
+
+392
+00:22:44,206 --> 00:22:46,596
 It wants to present
 the view controller
 
-00:22:46.596 --> 00:22:49.506 A:middle
+
+393
+00:22:46,596 --> 00:22:49,506
 where you can leave some
 five-star ratings or maybe four
 
-00:22:49.506 --> 00:22:52.436 A:middle
+
+394
+00:22:49,506 --> 00:22:52,436
 if they were really good
 but not truly excellent.
 
-00:22:54.386 --> 00:22:55.636 A:middle
+
+395
+00:22:54,386 --> 00:22:55,636
 We want to perform this segue.
 
-00:22:56.206 --> 00:22:58.856 A:middle
+
+396
+00:22:56,206 --> 00:22:58,856
 So we are going to put this
 segue inside of a block,
 
-00:22:58.856 --> 00:22:59.806 A:middle
+
+397
+00:22:58,856 --> 00:22:59,806
 and then we are going
 
-00:22:59.806 --> 00:23:03.116 A:middle
+
+398
+00:22:59,806 --> 00:23:03,116
 to put this block inside
 of a block operation.
 
 
-
-00:22:59.806 --> 00:23:03.116 A:middle
-to put this block inside
-of a block operation.
-
-00:23:03.746 --> 00:23:07.316 A:middle
+399
+00:23:03,746 --> 00:23:07,316
 Now, we only want to allow
 you to leave feedback
 
-00:23:07.476 --> 00:23:08.826 A:middle
+
+400
+00:23:07,476 --> 00:23:08,826
 if you've signed into the app.
 
-00:23:09.496 --> 00:23:12.266 A:middle
+
+401
+00:23:09,496 --> 00:23:12,266
 So we need to verify
 that you've signed
 
-00:23:12.266 --> 00:23:14.656 A:middle
+
+402
+00:23:12,266 --> 00:23:14,656
 in with your developer
 account, just like we do
 
-00:23:14.656 --> 00:23:17.336 A:middle
+
+403
+00:23:14,656 --> 00:23:17,336
 when you save a favorite.
 
-00:23:17.446 --> 00:23:20.626 A:middle
+
+404
+00:23:17,446 --> 00:23:20,626
 And in order to verify that
 you have a developer account,
 
-00:23:20.846 --> 00:23:22.626 A:middle
+
+405
+00:23:20,846 --> 00:23:22,626
 we need to make sure that
 you are logged in at all.
 
-00:23:23.206 --> 00:23:28.306 A:middle
+
+406
+00:23:23,206 --> 00:23:28,306
 So by putting the
 perform segue call inside
 
-00:23:28.306 --> 00:23:32.036 A:middle
+
+407
+00:23:28,306 --> 00:23:32,036
 of a block operation,
 we can guarantee
 
-00:23:32.906 --> 00:23:35.926 A:middle
+
+408
+00:23:32,906 --> 00:23:35,926
 that we will never
 present the login sheet
 
-00:23:36.726 --> 00:23:39.296 A:middle
+
+409
+00:23:36,726 --> 00:23:39,296
 until after you have logged in.
 
-00:23:40.056 --> 00:23:42.256 A:middle
+
+410
+00:23:40,056 --> 00:23:42,256
 This is really powerful.
 
-00:23:42.606 --> 00:23:45.126 A:middle
+
+411
+00:23:42,606 --> 00:23:45,126
 We have described a
 really complex behavior,
 
-00:23:45.126 --> 00:23:47.846 A:middle
+
+412
+00:23:45,126 --> 00:23:47,846
 a sequence of things
 that must occur simply
 
-00:23:48.046 --> 00:23:50.546 A:middle
+
+413
+00:23:48,046 --> 00:23:50,546
 by using operations
 and dependencies.
 
-00:23:53.066 --> 00:23:54.466 A:middle
+
+414
+00:23:53,066 --> 00:23:54,466
 Now, as we were writing
 the WWDC app,
 
-00:23:54.466 --> 00:23:58.496 A:middle
+
+415
+00:23:54,466 --> 00:23:58,496
 we noticed that there were some
 cases where we were doing a lot
 
-00:23:58.496 --> 00:24:00.846 A:middle
+
+416
+00:23:58,496 --> 00:24:00,846
 of the same operations
 over and over again.
 
 
-
-00:23:58.496 --> 00:24:00.846 A:middle
-of the same operations
-over and over again.
-
-00:24:00.926 --> 00:24:03.466 A:middle
+417
+00:24:00,926 --> 00:24:03,466
 So for example, we've
 already seen this login
 
-00:24:03.536 --> 00:24:07.426 A:middle
+
+418
+00:24:03,536 --> 00:24:07,426
 and user info operation
 a couple of times.
 
-00:24:08.726 --> 00:24:12.126 A:middle
+
+419
+00:24:08,726 --> 00:24:12,126
 So we thought wouldn't it
 be great if there were a way
 
-00:24:12.126 --> 00:24:14.576 A:middle
+
+420
+00:24:12,126 --> 00:24:14,576
 where we could just
 automatically have those
 
-00:24:14.576 --> 00:24:15.716 A:middle
+
+421
+00:24:14,576 --> 00:24:15,716
 operations created?
 
-00:24:16.866 --> 00:24:19.266 A:middle
+
+422
+00:24:16,866 --> 00:24:19,266
 So we came up with a
 way for an operation
 
-00:24:19.266 --> 00:24:21.746 A:middle
+
+423
+00:24:19,266 --> 00:24:21,746
 to generate its own
 dependencies.
 
-00:24:22.606 --> 00:24:26.356 A:middle
+
+424
+00:24:22,606 --> 00:24:26,356
 In other words, we're expressing
 the idea that we never want
 
-00:24:26.356 --> 00:24:30.986 A:middle
+
+425
+00:24:26,356 --> 00:24:30,986
 to execute this thing
 without always executing this
 
-00:24:30.986 --> 00:24:31.556 A:middle
+
+426
+00:24:30,986 --> 00:24:31,556
 other thing.
 
-00:24:32.876 --> 00:24:36.486 A:middle
+
+427
+00:24:32,876 --> 00:24:36,486
 So again, let's take a look at
 saving a favorite to CloudKit,
 
-00:24:37.836 --> 00:24:40.616 A:middle
+
+428
+00:24:37,836 --> 00:24:40,616
 or perhaps downloading
 a pass, or really,
 
-00:24:40.616 --> 00:24:45.286 A:middle
+
+429
+00:24:40,616 --> 00:24:45,286
 anything in the WWDC app that
 requires you to be logged in.
 
-00:24:47.416 --> 00:24:50.416 A:middle
+
+430
+00:24:47,416 --> 00:24:50,416
 So when you tap the "add
 to favorites" button,
 
-00:24:50.816 --> 00:24:55.166 A:middle
+
+431
+00:24:50,816 --> 00:24:55,166
 all we are really doing is
 creating a single operation
 
-00:24:55.556 --> 00:24:56.696 A:middle
+
+432
+00:24:55,556 --> 00:24:56,696
 to save the favorite.
 
-00:24:57.056 --> 00:24:59.466 A:middle
+
+433
+00:24:57,056 --> 00:24:59,466
 And this is going to
 encapsulate some small pieces
 
-00:24:59.466 --> 00:25:02.896 A:middle
+
+434
+00:24:59,466 --> 00:25:02,896
 of information, the session
 identifier and whether
 
 
-
-00:24:59.466 --> 00:25:02.896 A:middle
-of information, the session
-identifier and whether
-
-00:25:02.896 --> 00:25:05.296 A:middle
+435
+00:25:02,896 --> 00:25:05,296
 or not you want it added
 to favorites or removed
 
-00:25:05.366 --> 00:25:07.066 A:middle
+
+436
+00:25:05,366 --> 00:25:07,066
 from favorites, a
 little Boolean flag.
 
-00:25:08.966 --> 00:25:11.656 A:middle
+
+437
+00:25:08,966 --> 00:25:11,656
 Now, this "save favorite"
 operation knows
 
-00:25:11.656 --> 00:25:14.076 A:middle
+
+438
+00:25:11,656 --> 00:25:14,076
 that it requires
 permission to run,
 
-00:25:14.626 --> 00:25:17.886 A:middle
+
+439
+00:25:14,626 --> 00:25:17,886
 so it is automatically going
 to generate two dependencies,
 
-00:25:18.986 --> 00:25:21.486 A:middle
+
+440
+00:25:18,986 --> 00:25:21,486
 the one to check that you
 are a developer and the other
 
-00:25:21.486 --> 00:25:25.286 A:middle
+
+441
+00:25:21,486 --> 00:25:25,286
 to guarantee that we have
 access to your iCloud account.
 
-00:25:26.106 --> 00:25:29.726 A:middle
+
+442
+00:25:26,106 --> 00:25:29,726
 Now, the operation to guarantee
 
-00:25:29.726 --> 00:25:33.176 A:middle
+
+443
+00:25:29,726 --> 00:25:33,176
 that you are a developer
 itself needs to guarantee
 
-00:25:33.596 --> 00:25:36.786 A:middle
+
+444
+00:25:33,596 --> 00:25:36,786
 that you are logged in, so it
 generates its own dependency
 
-00:25:37.646 --> 00:25:39.026 A:middle
+
+445
+00:25:37,646 --> 00:25:39,026
 to make sure you are logged in.
 
-00:25:39.816 --> 00:25:45.276 A:middle
+
+446
+00:25:39,816 --> 00:25:45,276
 And so we are able to keep
 our app code quite simple.
 
-00:25:45.276 --> 00:25:47.746 A:middle
+
+447
+00:25:45,276 --> 00:25:47,746
 We only need to create
 a single operation,
 
-00:25:48.526 --> 00:25:51.326 A:middle
+
+448
+00:25:48,526 --> 00:25:51,326
 and then it automatically
 generates its own dependencies.
 
-00:25:51.776 --> 00:25:55.836 A:middle
+
+449
+00:25:51,776 --> 00:25:55,836
 And perhaps later, if we decide
 to remove the requirement
 
-00:25:56.596 --> 00:25:58.636 A:middle
+
+450
+00:25:56,596 --> 00:25:58,636
 that you need to be logged
 in to save a favorite,
 
-00:25:58.966 --> 00:26:01.126 A:middle
+
+451
+00:25:58,966 --> 00:26:01,126
 then we simply remove
 the small line of code
 
 
-
-00:25:58.966 --> 00:26:01.126 A:middle
-then we simply remove
-the small line of code
-
-00:26:01.466 --> 00:26:04.576 A:middle
+452
+00:26:01,466 --> 00:26:04,576
 that instructs this favorite
 operation to generate
 
-00:26:04.576 --> 00:26:07.286 A:middle
+
+453
+00:26:04,576 --> 00:26:07,286
 that particular dependency,
 and we have now removed
 
-00:26:07.286 --> 00:26:10.656 A:middle
+
+454
+00:26:07,286 --> 00:26:10,656
 that requirement across
 the entire application.
 
-00:26:11.306 --> 00:26:13.436 A:middle
+
+455
+00:26:11,306 --> 00:26:13,436
 We don't have to go
 through every single place
 
-00:26:13.436 --> 00:26:15.206 A:middle
+
+456
+00:26:13,436 --> 00:26:15,206
 where we have an "add
 to favorite" button
 
-00:26:15.496 --> 00:26:16.666 A:middle
+
+457
+00:26:15,496 --> 00:26:16,666
 and modify code there.
 
-00:26:23.046 --> 00:26:27.326 A:middle
+
+458
+00:26:23,046 --> 00:26:27,326
 Now, we also wanted to
 make sure that other kinds
 
-00:26:27.326 --> 00:26:28.666 A:middle
+
+459
+00:26:27,326 --> 00:26:28,666
 of conditions were met.
 
-00:26:30.236 --> 00:26:33.756 A:middle
+
+460
+00:26:30,236 --> 00:26:33,756
 We wanted to be able to expand
 upon this idea of readiness,
 
-00:26:34.156 --> 00:26:37.376 A:middle
+
+461
+00:26:34,156 --> 00:26:37,376
 expand upon the idea
 of when we're allowed
 
-00:26:37.666 --> 00:26:39.376 A:middle
+
+462
+00:26:37,666 --> 00:26:39,376
 to execute an operation.
 
-00:26:39.906 --> 00:26:44.366 A:middle
+
+463
+00:26:39,906 --> 00:26:44,366
 Some examples that we came
 up with include, we only want
 
-00:26:44.456 --> 00:26:45.616 A:middle
+
+464
+00:26:44,456 --> 00:26:45,616
 to execute this operation
 
-00:26:45.616 --> 00:26:47.536 A:middle
+
+465
+00:26:45,616 --> 00:26:47,536
 if you are actually
 connected to the network.
 
-00:26:47.746 --> 00:26:50.086 A:middle
+
+466
+00:26:47,746 --> 00:26:50,086
 If you try to add the
 favorite in while your phone is
 
-00:26:50.086 --> 00:26:52.556 A:middle
+
+467
+00:26:50,086 --> 00:26:52,556
 in airplane mode, for
 example, we, of course,
 
-00:26:52.556 --> 00:26:55.436 A:middle
+
+468
+00:26:52,556 --> 00:26:55,436
 don't want to try executing
 our CloudKit operation.
 
-00:26:58.416 --> 00:27:01.866 A:middle
+
+469
+00:26:58,416 --> 00:27:01,866
 We also want to guarantee,
 perhaps, that maybe we only want
 
 
-
-00:26:58.416 --> 00:27:01.866 A:middle
-We also want to guarantee,
-perhaps, that maybe we only want
-
-00:27:01.976 --> 00:27:04.616 A:middle
+470
+00:27:01,976 --> 00:27:04,616
 to execute an operation if we
 have access to your location.
 
-00:27:05.476 --> 00:27:07.716 A:middle
+
+471
+00:27:05,476 --> 00:27:07,716
 So we need a way to
 express this as well.
 
-00:27:11.116 --> 00:27:14.216 A:middle
+
+472
+00:27:11,116 --> 00:27:14,216
 Or for example, we only want
 to execute certain kinds
 
-00:27:14.216 --> 00:27:17.086 A:middle
+
+473
+00:27:14,216 --> 00:27:17,086
 of operations if you are
 actually logged into the app.
 
-00:27:18.976 --> 00:27:22.426 A:middle
+
+474
+00:27:18,976 --> 00:27:22,426
 So by extending the concept of
 what it means for an operation
 
-00:27:22.426 --> 00:27:26.496 A:middle
+
+475
+00:27:22,426 --> 00:27:26,496
 to be ready, we can make our
 operations even more powerful.
 
-00:27:27.986 --> 00:27:31.816 A:middle
+
+476
+00:27:27,986 --> 00:27:31,816
 So hopefully you won't ever
 see this error, but if you do,
 
-00:27:32.396 --> 00:27:34.956 A:middle
+
+477
+00:27:32,396 --> 00:27:34,956
 this is an example of
 an operation failing
 
-00:27:35.186 --> 00:27:38.636 A:middle
+
+478
+00:27:35,186 --> 00:27:38,636
 because it was never able to
 become fully ready to execute.
 
-00:27:39.656 --> 00:27:41.846 A:middle
+
+479
+00:27:39,656 --> 00:27:41,846
 In this case because
 it was unable
 
-00:27:41.916 --> 00:27:43.666 A:middle
+
+480
+00:27:41,916 --> 00:27:43,666
 to connect to the network.
 
-00:27:44.456 --> 00:27:47.986 A:middle
+
+481
+00:27:44,456 --> 00:27:47,986
 So extending the readiness
 concept can also be
 
-00:27:47.986 --> 00:27:48.816 A:middle
+
+482
+00:27:47,986 --> 00:27:48,816
 really powerful.
 
-00:27:52.856 --> 00:27:56.756 A:middle
+
+483
+00:27:52,856 --> 00:27:56,756
 Next, there were a couple
 of operations where we found
 
-00:27:56.756 --> 00:27:59.356 A:middle
+
+484
+00:27:56,756 --> 00:27:59,356
 that they were always
 being done together.
 
 
-
-00:28:00.296 --> 00:28:03.016 A:middle
+485
+00:28:00,296 --> 00:28:03,016
 So we thought, wouldn't it
 be neat if instead of having
 
-00:28:03.016 --> 00:28:06.066 A:middle
+
+486
+00:28:03,016 --> 00:28:06,066
 to create the same sequence of
 operations over and over again,
 
-00:28:06.066 --> 00:28:09.056 A:middle
+
+487
+00:28:06,066 --> 00:28:09,056
 if we could just create
 one operation and then
 
-00:28:09.056 --> 00:28:11.706 A:middle
+
+488
+00:28:09,056 --> 00:28:11,706
 under the hood it would
 create the same sequence
 
-00:28:11.706 --> 00:28:13.556 A:middle
+
+489
+00:28:11,706 --> 00:28:13,556
 of operations for us?
 
-00:28:13.846 --> 00:28:17.916 A:middle
+
+490
+00:28:13,846 --> 00:28:17,916
 A common example of this is the
 idea of downloading something
 
-00:28:17.916 --> 00:28:21.506 A:middle
+
+491
+00:28:17,916 --> 00:28:21,506
 and then parsing it to
 save into a local storage.
 
-00:28:22.826 --> 00:28:24.996 A:middle
+
+492
+00:28:22,826 --> 00:28:24,996
 I am sure this is a
 concept that almost all
 
-00:28:24.996 --> 00:28:25.986 A:middle
+
+493
+00:28:24,996 --> 00:28:25,986
 of you are familiar with.
 
-00:28:26.416 --> 00:28:29.336 A:middle
+
+494
+00:28:26,416 --> 00:28:29,336
 So let's take a look at how
 we can compose operations
 
-00:28:30.016 --> 00:28:31.006 A:middle
+
+495
+00:28:30,016 --> 00:28:31,006
 to make them simpler.
 
-00:28:31.756 --> 00:28:34.666 A:middle
+
+496
+00:28:31,756 --> 00:28:34,666
 So let's say we have a
 generic import data operation,
 
-00:28:34.666 --> 00:28:36.376 A:middle
+
+497
+00:28:34,666 --> 00:28:36,376
 and then it's dependent
 on something
 
-00:28:36.376 --> 00:28:38.176 A:middle
+
+498
+00:28:36,376 --> 00:28:38,176
 and other things
 are dependent on it.
 
-00:28:38.966 --> 00:28:41.186 A:middle
+
+499
+00:28:38,966 --> 00:28:41,186
 We have this import idea.
 
-00:28:41.856 --> 00:28:45.326 A:middle
+
+500
+00:28:41,856 --> 00:28:45,326
 Well, we want this to actually
 do two things, so it's going
 
-00:28:45.326 --> 00:28:50.396 A:middle
+
+501
+00:28:45,326 --> 00:28:50,396
 to wrap another NSOperation, and
 this operation is simply going
 
-00:28:50.396 --> 00:28:51.896 A:middle
+
+502
+00:28:50,396 --> 00:28:51,896
 to perform the download.
 
-00:28:52.656 --> 00:28:55.016 A:middle
+
+503
+00:28:52,656 --> 00:28:55,016
 It's a single, isolated
 piece of work.
 
-00:28:56.676 --> 00:28:59.296 A:middle
+
+504
+00:28:56,676 --> 00:28:59,296
 And then it's going to
 create a second operation
 
-00:28:59.616 --> 00:29:04.196 A:middle
+
+505
+00:28:59,616 --> 00:29:04,196
 to parse whatever was
 downloaded and make it dependent
 
 
-
-00:28:59.616 --> 00:29:04.196 A:middle
-to parse whatever was
-downloaded and make it dependent
-
-00:29:04.466 --> 00:29:05.626 A:middle
+506
+00:29:04,466 --> 00:29:05,626
 on the download operation
 
-00:29:05.676 --> 00:29:08.486 A:middle
+
+507
+00:29:05,676 --> 00:29:08,486
 so that parsing will always
 occur after downloading.
 
-00:29:09.496 --> 00:29:13.086 A:middle
+
+508
+00:29:09,496 --> 00:29:13,086
 Now, by encapsulating
 those two operations inside
 
-00:29:13.086 --> 00:29:18.586 A:middle
+
+509
+00:29:13,086 --> 00:29:18,586
 of a larger operation, we can
 now easily change perhaps,
 
-00:29:18.726 --> 00:29:22.646 A:middle
+
+510
+00:29:18,726 --> 00:29:22,646
 maybe where our data is coming
 from, what format it's in,
 
-00:29:22.936 --> 00:29:24.616 A:middle
+
+511
+00:29:22,936 --> 00:29:24,616
 and even how we handle errors.
 
-00:29:25.476 --> 00:29:27.676 A:middle
+
+512
+00:29:25,476 --> 00:29:27,676
 And we only have to
 do this in one place,
 
-00:29:28.126 --> 00:29:32.286 A:middle
+
+513
+00:29:28,126 --> 00:29:32,286
 inside our import operation,
 because that's the only thing
 
-00:29:32.286 --> 00:29:36.646 A:middle
+
+514
+00:29:32,286 --> 00:29:36,646
 that the rest of
 our app knows about.
 
-00:29:36.646 --> 00:29:39.556 A:middle
+
+515
+00:29:36,646 --> 00:29:39,556
 Now, you don't always know
 ahead of time, perhaps,
 
-00:29:39.816 --> 00:29:43.326 A:middle
+
+516
+00:29:39,816 --> 00:29:43,326
 the exact operations
 that you need to perform.
 
-00:29:44.766 --> 00:29:47.616 A:middle
+
+517
+00:29:44,766 --> 00:29:47,616
 In the WWDC app, we cannot know
 
-00:29:47.736 --> 00:29:51.786 A:middle
+
+518
+00:29:47,736 --> 00:29:51,786
 at compile time how many
 favorites you've saved
 
-00:29:51.786 --> 00:29:54.726 A:middle
+
+519
+00:29:51,786 --> 00:29:54,726
 to CloudKit, so we
 needed a way to be able
 
-00:29:54.726 --> 00:29:57.446 A:middle
+
+520
+00:29:54,726 --> 00:29:57,446
 to dynamically compose
 operations.
 
-00:29:59.956 --> 00:30:03.636 A:middle
+
+521
+00:29:59,956 --> 00:30:03,636
 So we created this wrapper
 called a Fetch Favorites
 
 
-
-00:29:59.956 --> 00:30:03.636 A:middle
-So we created this wrapper
-called a Fetch Favorites
-
-00:30:03.766 --> 00:30:07.366 A:middle
+522
+00:30:03,766 --> 00:30:07,366
 operation, and since
 we are using CloudKit,
 
-00:30:07.716 --> 00:30:11.826 A:middle
+
+523
+00:30:07,716 --> 00:30:11,826
 under the hood we are going to
 perform a CK query operation,
 
-00:30:12.636 --> 00:30:15.516 A:middle
+
+524
+00:30:12,636 --> 00:30:15,516
 because CloudKit is also
 built on NSOperation.
 
-00:30:16.736 --> 00:30:18.876 A:middle
+
+525
+00:30:16,736 --> 00:30:18,876
 So we are going to perform
 our first query operation.
 
-00:30:18.876 --> 00:30:22.616 A:middle
+
+526
+00:30:18,876 --> 00:30:22,616
 And maybe you have every single
 session favorited at WWDC,
 
-00:30:22.616 --> 00:30:24.716 A:middle
+
+527
+00:30:22,616 --> 00:30:24,716
 so this is going to indicate
 
-00:30:24.876 --> 00:30:27.466 A:middle
+
+528
+00:30:24,876 --> 00:30:27,466
 that there are still
 more favorites to fetch.
 
-00:30:28.006 --> 00:30:31.216 A:middle
+
+529
+00:30:28,006 --> 00:30:31,216
 So we are going to keep on
 executing query operations
 
-00:30:31.566 --> 00:30:34.846 A:middle
+
+530
+00:30:31,566 --> 00:30:34,846
 until we have received a
 response that that's all of them
 
-00:30:34.846 --> 00:30:35.706 A:middle
+
+531
+00:30:34,846 --> 00:30:35,706
 and we've got them all.
 
-00:30:36.906 --> 00:30:40.316 A:middle
+
+532
+00:30:36,906 --> 00:30:40,316
 So by using this
 composition model,
 
-00:30:40.596 --> 00:30:45.456 A:middle
+
+533
+00:30:40,596 --> 00:30:45,456
 we can still simply express our
 operation chain as a single --
 
-00:30:45.456 --> 00:30:49.986 A:middle
+
+534
+00:30:45,456 --> 00:30:49,986
 with a single "fetch favorites"
 operation, but under the hood,
 
-00:30:50.656 --> 00:30:53.456 A:middle
+
+535
+00:30:50,656 --> 00:30:53,456
 actually be performing
 many operations,
 
-00:30:53.506 --> 00:30:55.106 A:middle
+
+536
+00:30:53,506 --> 00:30:55,106
 potentially, in sequence.
 
-00:30:58.076 --> 00:30:59.986 A:middle
+
+537
+00:30:58,076 --> 00:30:59,986
 Now, in the code, it
 looks something like this.
 
 
-
-00:31:00.736 --> 00:31:03.576 A:middle
+538
+00:31:00,736 --> 00:31:03,576
 Our operations have
 an execute method,
 
-00:31:03.576 --> 00:31:05.776 A:middle
+
+539
+00:31:03,576 --> 00:31:05,776
 and this is where they all
 start doing their work.
 
-00:31:06.806 --> 00:31:11.046 A:middle
+
+540
+00:31:06,806 --> 00:31:11,046
 So the first time the fetch
 favorite operation starts
 
-00:31:11.046 --> 00:31:14.126 A:middle
+
+541
+00:31:11,046 --> 00:31:14,126
 executing, it's going to
 set up the initial query.
 
-00:31:14.166 --> 00:31:18.836 A:middle
+
+542
+00:31:14,166 --> 00:31:18,836
 We are going to look for session
 favorite records created by you.
 
-00:31:19.586 --> 00:31:22.686 A:middle
+
+543
+00:31:19,586 --> 00:31:22,686
 So we are going to construct
 our query operation and pass it
 
-00:31:22.686 --> 00:31:24.886 A:middle
+
+544
+00:31:22,686 --> 00:31:24,886
 to this method called
 execute query operation.
 
-00:31:25.446 --> 00:31:28.436 A:middle
+
+545
+00:31:25,446 --> 00:31:28,436
 And this is the execute
 query operation.
 
-00:31:29.006 --> 00:31:33.056 A:middle
+
+546
+00:31:29,006 --> 00:31:33,056
 As this query operation
 completes, we are going
 
-00:31:33.056 --> 00:31:36.156 A:middle
+
+547
+00:31:33,056 --> 00:31:36,156
 to first check, was there
 an error, and if there was,
 
-00:31:36.406 --> 00:31:38.586 A:middle
+
+548
+00:31:36,406 --> 00:31:38,586
 let's abort the process
 and handle the error.
 
-00:31:39.226 --> 00:31:44.146 A:middle
+
+549
+00:31:39,226 --> 00:31:44,146
 If there wasn't an error, but
 instead, there was a cursor,
 
-00:31:44.646 --> 00:31:46.456 A:middle
+
+550
+00:31:44,646 --> 00:31:46,456
 this is how CloudKit tells us
 
-00:31:46.606 --> 00:31:48.966 A:middle
+
+551
+00:31:46,606 --> 00:31:48,966
 that there are still more
 things for us to fetch.
 
-00:31:49.536 --> 00:31:53.046 A:middle
+
+552
+00:31:49,536 --> 00:31:53,046
 So we're going to create
 the next CK query operation
 
-00:31:53.046 --> 00:31:55.016 A:middle
+
+553
+00:31:53,046 --> 00:31:55,016
 in the sequence using
 this cursor
 
-00:31:55.826 --> 00:32:00.476 A:middle
+
+554
+00:31:55,826 --> 00:32:00,476
 and semi-recursively call
 this execute query operation.
 
 
-
-00:31:55.826 --> 00:32:00.476 A:middle
-and semi-recursively call
-this execute query operation.
-
-00:32:00.886 --> 00:32:04.546 A:middle
+555
+00:32:00,886 --> 00:32:04,546
 And this is how we can be
 executing many query operations.
 
-00:32:06.506 --> 00:32:09.856 A:middle
+
+556
+00:32:06,506 --> 00:32:09,856
 And then if we get neither
 the cursor nor the error,
 
-00:32:10.086 --> 00:32:13.126 A:middle
+
+557
+00:32:10,086 --> 00:32:13,126
 this is how CloudKit indicates
 that we have fetched everything,
 
-00:32:13.416 --> 00:32:17.516 A:middle
+
+558
+00:32:13,416 --> 00:32:17,516
 and so we can begin
 to import the records
 
-00:32:17.516 --> 00:32:18.366 A:middle
+
+559
+00:32:17,516 --> 00:32:18,366
 that we have downloaded.
 
-00:32:26.106 --> 00:32:30.786 A:middle
+
+560
+00:32:26,106 --> 00:32:30,786
 Next, during development, there
 were some times when we came
 
-00:32:30.786 --> 00:32:32.976 A:middle
+
+561
+00:32:30,786 --> 00:32:32,976
 up with some visual glitches,
 
-00:32:33.706 --> 00:32:35.786 A:middle
+
+562
+00:32:33,706 --> 00:32:35,786
 the things that we thought
 were visual glitches.
 
-00:32:36.546 --> 00:32:39.336 A:middle
+
+563
+00:32:36,546 --> 00:32:39,336
 Now, perhaps you've all had
 the experience of using an app
 
-00:32:39.766 --> 00:32:42.546 A:middle
+
+564
+00:32:39,766 --> 00:32:42,546
 and an alert pops up,
 and then as you are
 
-00:32:42.546 --> 00:32:45.426 A:middle
+
+565
+00:32:42,546 --> 00:32:45,426
 about to tap the button,
 another alert pops up.
 
-00:32:46.136 --> 00:32:48.386 A:middle
+
+566
+00:32:46,136 --> 00:32:48,386
 And you think, oh, great, man,
 what is even going on now?
 
-00:32:48.806 --> 00:32:50.536 A:middle
+
+567
+00:32:48,806 --> 00:32:50,536
 And as you are about
 to tap that button,
 
-00:32:50.726 --> 00:32:54.136 A:middle
+
+568
+00:32:50,726 --> 00:32:54,136
 maybe another alert pops up,
 and with all of the animations
 
-00:32:54.136 --> 00:32:56.686 A:middle
+
+569
+00:32:54,136 --> 00:32:56,686
 of coming and going, you are no
 longer even sure if you are back
 
-00:32:56.686 --> 00:32:59.046 A:middle
+
+570
+00:32:56,686 --> 00:32:59,046
 on the first alert or if
 you are now on the third.
 
 
-
-00:33:00.316 --> 00:33:03.966 A:middle
+571
+00:33:00,316 --> 00:33:03,966
 We really wanted to avoid
 this confusing scenario.
 
-00:33:06.196 --> 00:33:09.766 A:middle
+
+572
+00:33:06,196 --> 00:33:09,766
 Another thing we wanted to
 do is we wanted to guarantee
 
-00:33:10.786 --> 00:33:14.656 A:middle
+
+573
+00:33:10,786 --> 00:33:14,656
 that you could never,
 ever try to watch more
 
-00:33:14.656 --> 00:33:15.826 A:middle
+
+574
+00:33:14,656 --> 00:33:15,826
 than one video at once.
 
-00:33:15.826 --> 00:33:18.946 A:middle
+
+575
+00:33:15,826 --> 00:33:18,946
 This is something that the
 WWDC app does not know how
 
-00:33:18.946 --> 00:33:21.776 A:middle
+
+576
+00:33:18,946 --> 00:33:21,776
 to handle correctly, so
 we wanted to guarantee
 
-00:33:21.776 --> 00:33:23.186 A:middle
+
+577
+00:33:21,776 --> 00:33:23,186
 that no matter what you did,
 
-00:33:23.656 --> 00:33:27.746 A:middle
+
+578
+00:33:23,656 --> 00:33:27,746
 we would never allow
 you to do that.
 
-00:33:27.916 --> 00:33:30.276 A:middle
+
+579
+00:33:27,916 --> 00:33:30,276
 Another thing we
 wanted to guarantee is
 
-00:33:30.276 --> 00:33:34.926 A:middle
+
+580
+00:33:30,276 --> 00:33:34,926
 that we would never try to load
 our underlying database more
 
-00:33:34.926 --> 00:33:36.466 A:middle
+
+581
+00:33:34,926 --> 00:33:36,466
 than once.
 
-00:33:37.076 --> 00:33:41.676 A:middle
+
+582
+00:33:37,076 --> 00:33:41,676
 So we came up with a way of
 describing mutual exclusivity,
 
-00:33:41.996 --> 00:33:44.856 A:middle
+
+583
+00:33:41,996 --> 00:33:44,856
 the idea that only one
 of these particular kind
 
-00:33:44.856 --> 00:33:49.556 A:middle
+
+584
+00:33:44,856 --> 00:33:49,556
 of operations can be
 running at a time.
 
-00:33:49.756 --> 00:33:50.906 A:middle
+
+585
+00:33:49,756 --> 00:33:50,906
 Now, you are probably
 thinking, wow,
 
-00:33:50.906 --> 00:33:52.686 A:middle
+
+586
+00:33:50,906 --> 00:33:52,686
 this is a really complex idea.
 
-00:33:52.686 --> 00:33:54.206 A:middle
+
+587
+00:33:52,686 --> 00:33:54,206
 How would we even do this?
 
-00:33:55.836 --> 00:33:57.426 A:middle
+
+588
+00:33:55,836 --> 00:33:57,426
 And it is really simple.
 
-00:33:58.116 --> 00:34:00.026 A:middle
+
+589
+00:33:58,116 --> 00:34:00,026
 So let's go back to
 the alert example.
 
 
-
-00:33:58.116 --> 00:34:00.026 A:middle
-So let's go back to
-the alert example.
-
-00:34:01.546 --> 00:34:05.306 A:middle
+590
+00:34:01,546 --> 00:34:05,306
 Let's say we create an operation
 to display alert and alert
 
-00:34:05.306 --> 00:34:08.476 A:middle
+
+591
+00:34:05,306 --> 00:34:08,476
 to the user, and we put it
 onto an operation queue.
 
-00:34:08.755 --> 00:34:11.186 A:middle
+
+592
+00:34:08,755 --> 00:34:11,186
 And maybe it's there waiting
 for something else to finish,
 
-00:34:11.476 --> 00:34:13.966 A:middle
+
+593
+00:34:11,476 --> 00:34:13,966
 maybe it's already in
 the middle of executing.
 
-00:34:14.106 --> 00:34:14.376 A:middle
+
+594
+00:34:14,106 --> 00:34:14,376
 Who knows?
 
-00:34:15.766 --> 00:34:18.326 A:middle
+
+595
+00:34:15,766 --> 00:34:18,326
 But then something
 happens, and we decide
 
-00:34:18.596 --> 00:34:20.786 A:middle
+
+596
+00:34:18,596 --> 00:34:20,786
 to create another
 alert operation.
 
-00:34:21.606 --> 00:34:25.735 A:middle
+
+597
+00:34:21,606 --> 00:34:25,735
 Well, all we need to do is
 make the second alert operation
 
-00:34:26.036 --> 00:34:28.156 A:middle
+
+598
+00:34:26,036 --> 00:34:28,156
 dependent on the first one.
 
-00:34:29.146 --> 00:34:32.835 A:middle
+
+599
+00:34:29,146 --> 00:34:32,835
 And this is where
 cross-queue dependencies are
 
-00:34:32.835 --> 00:34:33.826 A:middle
+
+600
+00:34:32,835 --> 00:34:33,826
 really powerful.
 
-00:34:34.726 --> 00:34:36.906 A:middle
+
+601
+00:34:34,726 --> 00:34:36,906
 Because it does not matter
 
-00:34:37.045 --> 00:34:40.956 A:middle
+
+602
+00:34:37,045 --> 00:34:40,956
 which queue this alert
 operation is executing on,
 
-00:34:41.476 --> 00:34:44.815 A:middle
+
+603
+00:34:41,476 --> 00:34:44,815
 as long as the second operation
 is dependent on the first,
 
-00:34:45.446 --> 00:34:48.286 A:middle
+
+604
+00:34:45,446 --> 00:34:48,286
 then the second operation
 will never execute
 
-00:34:48.476 --> 00:34:52.106 A:middle
+
+605
+00:34:48,476 --> 00:34:52,106
 until after the first
 operation completes.
 
-00:34:52.966 --> 00:34:56.446 A:middle
+
+606
+00:34:52,966 --> 00:34:56,446
 And so for some -- if
 for some insane reason,
 
-00:34:56.446 --> 00:34:58.826 A:middle
+
+607
+00:34:56,446 --> 00:34:58,826
 we decide to create
 more alert operations,
 
-00:34:59.066 --> 00:35:02.176 A:middle
+
+608
+00:34:59,066 --> 00:35:02,176
 even more alert operations,
 as long as we set
 
 
-
-00:34:59.066 --> 00:35:02.176 A:middle
-even more alert operations,
-as long as we set
-
-00:35:02.176 --> 00:35:06.046 A:middle
+609
+00:35:02,176 --> 00:35:06,046
 up these dependencies of the
 next operation being dependent
 
-00:35:06.046 --> 00:35:10.326 A:middle
+
+610
+00:35:06,046 --> 00:35:10,326
 on the previous, like a singly
 linked list back in time,
 
-00:35:10.826 --> 00:35:14.076 A:middle
+
+611
+00:35:10,826 --> 00:35:14,076
 we are guaranteeing that
 our operations will be
 
-00:35:14.076 --> 00:35:15.396 A:middle
+
+612
+00:35:14,076 --> 00:35:15,396
 mutually exclusive.
 
-00:35:16.816 --> 00:35:19.026 A:middle
+
+613
+00:35:16,816 --> 00:35:19,026
 This is really powerful.
 
-00:35:20.006 --> 00:35:21.536 A:middle
+
+614
+00:35:20,006 --> 00:35:21,536
 By using dependencies,
 
-00:35:22.026 --> 00:35:26.246 A:middle
+
+615
+00:35:22,026 --> 00:35:26,246
 we can guarantee correct
 behavior in our application.
 
-00:35:26.516 --> 00:35:29.396 A:middle
+
+616
+00:35:26,516 --> 00:35:29,396
 We can guarantee that
 you will never see more
 
-00:35:29.396 --> 00:35:30.646 A:middle
+
+617
+00:35:29,396 --> 00:35:30,646
 than one alert at once.
 
-00:35:30.766 --> 00:35:34.146 A:middle
+
+618
+00:35:30,766 --> 00:35:34,146
 We can guarantee that you will
 never be able to watch more
 
-00:35:34.146 --> 00:35:35.536 A:middle
+
+619
+00:35:34,146 --> 00:35:35,536
 than one video at a time.
 
-00:35:35.846 --> 00:35:40.366 A:middle
+
+620
+00:35:35,846 --> 00:35:40,366
 We can guarantee that we will
 never try to load two copies
 
-00:35:40.366 --> 00:35:42.626 A:middle
+
+621
+00:35:40,366 --> 00:35:42,626
 of our data store
 simultaneously.
 
-00:35:45.416 --> 00:35:48.456 A:middle
+
+622
+00:35:45,416 --> 00:35:48,456
 So those are a taste of some
 of the challenges that we came
 
-00:35:48.456 --> 00:35:51.476 A:middle
+
+623
+00:35:48,456 --> 00:35:51,476
 up with when writing
 the WWDC app.
 
-00:35:52.066 --> 00:35:52.836 A:middle
+
+624
+00:35:52,066 --> 00:35:52,836
 There are more.
 
-00:35:54.276 --> 00:35:56.466 A:middle
+
+625
+00:35:54,276 --> 00:35:56,466
 But we think these
 ones are really cool.
 
-00:35:56.866 --> 00:35:59.586 A:middle
+
+626
+00:35:56,866 --> 00:35:59,586
 And we came up with what we
 thought was a pretty neat way
 
-00:35:59.586 --> 00:36:01.926 A:middle
+
+627
+00:35:59,586 --> 00:36:01,926
 to solve them.
 
 
-
-00:35:59.586 --> 00:36:01.926 A:middle
-to solve them.
-
-00:36:02.136 --> 00:36:04.726 A:middle
+628
+00:36:02,136 --> 00:36:04,726
 So let's talk about
 the sample code.
 
-00:36:05.326 --> 00:36:10.306 A:middle
+
+629
+00:36:05,326 --> 00:36:10,306
 On the WWDC website, under
 the sample code section,
 
-00:36:10.306 --> 00:36:12.456 A:middle
+
+630
+00:36:10,306 --> 00:36:12,456
 you can find a piece
 of sample code called
 
-00:36:12.456 --> 00:36:13.906 A:middle
+
+631
+00:36:12,456 --> 00:36:13,906
 Advanced NSOperations.
 
-00:36:14.716 --> 00:36:18.066 A:middle
+
+632
+00:36:14,716 --> 00:36:18,066
 And this is a simple app
 to show recent earthquakes.
 
-00:36:19.026 --> 00:36:22.706 A:middle
+
+633
+00:36:19,026 --> 00:36:22,706
 But under the hood, it's built
 entirely on NSOperations,
 
-00:36:23.426 --> 00:36:27.586 A:middle
+
+634
+00:36:23,426 --> 00:36:27,586
 and the operations that it's
 using in the app is code
 
-00:36:27.586 --> 00:36:30.536 A:middle
+
+635
+00:36:27,586 --> 00:36:30,536
 that we have extracted
 from the WWDC app
 
-00:36:31.166 --> 00:36:32.456 A:middle
+
+636
+00:36:31,166 --> 00:36:32,456
 and put into the sample.
 
-00:36:32.456 --> 00:36:35.066 A:middle
+
+637
+00:36:32,456 --> 00:36:35,066
 And this is code that's
 been in the app, actually,
 
-00:36:35.116 --> 00:36:36.286 A:middle
+
+638
+00:36:35,116 --> 00:36:36,286
 for a couple of years.
 
-00:36:36.536 --> 00:36:37.376 A:middle
+
+639
+00:36:36,536 --> 00:36:37,376
 It is stable.
 
-00:36:40.356 --> 00:36:45.196 A:middle
+
+640
+00:36:40,356 --> 00:36:45,196
 Now, the primary class that this
 sample code uses is operation.
 
-00:36:45.636 --> 00:36:49.196 A:middle
+
+641
+00:36:45,636 --> 00:36:49,196
 And this is a basic
 subclass of NSOperation.
 
-00:36:50.096 --> 00:36:54.366 A:middle
+
+642
+00:36:50,096 --> 00:36:54,366
 And in the sample code, this
 operation adds two key features.
 
-00:36:55.676 --> 00:37:00.116 A:middle
+
+643
+00:36:55,676 --> 00:37:00,116
 The first is the
 idea of a condition,
 
 
-
-00:36:55.676 --> 00:37:00.116 A:middle
-The first is the
-idea of a condition,
-
-00:37:00.196 --> 00:37:01.426 A:middle
+644
+00:37:00,196 --> 00:37:01,426
 which we will talk
 about in a second.
 
-00:37:02.446 --> 00:37:06.146 A:middle
+
+645
+00:37:02,446 --> 00:37:06,146
 And the second is a concept
 that we call "observers."
 
-00:37:06.596 --> 00:37:08.896 A:middle
+
+646
+00:37:06,596 --> 00:37:08,896
 Now, we've got a bunch
 of different kinds
 
-00:37:08.896 --> 00:37:11.646 A:middle
+
+647
+00:37:08,896 --> 00:37:11,646
 of operations in
 the sample code.
 
-00:37:11.956 --> 00:37:14.646 A:middle
+
+648
+00:37:11,956 --> 00:37:14,646
 We have group operations,
 so it's very easy
 
-00:37:14.766 --> 00:37:18.406 A:middle
+
+649
+00:37:14,766 --> 00:37:18,406
 to make operations internally
 perform more operations.
 
-00:37:19.016 --> 00:37:22.486 A:middle
+
+650
+00:37:19,016 --> 00:37:22,486
 We also have an operation
 subclass in the sample code
 
-00:37:22.966 --> 00:37:27.046 A:middle
+
+651
+00:37:22,966 --> 00:37:27,046
 that allows you to take an
 NSURLSession task and wrap it
 
-00:37:27.046 --> 00:37:30.706 A:middle
+
+652
+00:37:27,046 --> 00:37:30,706
 up inside of an NSOperation so
 that you can make it, perhaps,
 
-00:37:30.786 --> 00:37:33.606 A:middle
+
+653
+00:37:30,786 --> 00:37:33,606
 dependent on something else
 or make other things dependent
 
-00:37:33.606 --> 00:37:37.376 A:middle
+
+654
+00:37:33,606 --> 00:37:37,376
 on this, or perhaps add
 conditions or observers to it.
 
-00:37:38.236 --> 00:37:40.986 A:middle
+
+655
+00:37:38,236 --> 00:37:40,986
 There's a simple operation to
 request your current location.
 
-00:37:41.326 --> 00:37:43.156 A:middle
+
+656
+00:37:41,326 --> 00:37:43,156
 There's one -- because
 it's sometimes useful --
 
-00:37:43.156 --> 00:37:46.176 A:middle
+
+657
+00:37:43,156 --> 00:37:46,176
 to just simply wait
 a little bit of time.
 
-00:37:46.176 --> 00:37:48.846 A:middle
+
+658
+00:37:46,176 --> 00:37:48,846
 There's even an operation
 to show an alert to the user
 
-00:37:48.986 --> 00:37:50.786 A:middle
+
+659
+00:37:48,986 --> 00:37:50,786
 with buttons and block handlers.
 
-00:37:51.846 --> 00:37:54.136 A:middle
+
+660
+00:37:51,846 --> 00:37:54,136
 So lots of great kinds
 
-00:37:54.136 --> 00:37:57.646 A:middle
+
+661
+00:37:54,136 --> 00:37:57,646
 of NSOperation subclasses
 in the sample code.
 
-00:37:58.476 --> 00:38:02.256 A:middle
+
+662
+00:37:58,476 --> 00:38:02,256
 Now, this operation has
 a concept of a condition.
 
 
-
-00:37:58.476 --> 00:38:02.256 A:middle
-Now, this operation has
-a concept of a condition.
-
-00:38:02.596 --> 00:38:05.226 A:middle
+663
+00:38:02,596 --> 00:38:05,226
 And a condition is a
 protocol that we have defined,
 
-00:38:05.226 --> 00:38:07.536 A:middle
+
+664
+00:38:05,226 --> 00:38:07,536
 and it's a way for an operation
 
-00:38:07.536 --> 00:38:09.996 A:middle
+
+665
+00:38:07,536 --> 00:38:09,996
 to express how it
 generates dependencies,
 
-00:38:10.706 --> 00:38:13.376 A:middle
+
+666
+00:38:10,706 --> 00:38:13,376
 how it defines mutual
 exclusivity,
 
-00:38:14.926 --> 00:38:17.996 A:middle
+
+667
+00:38:14,926 --> 00:38:17,996
 and also how it extends
 the concept of readiness.
 
-00:38:18.886 --> 00:38:21.706 A:middle
+
+668
+00:38:18,886 --> 00:38:21,706
 So some kind of conditions
 
-00:38:21.956 --> 00:38:24.116 A:middle
+
+669
+00:38:21,956 --> 00:38:24,116
 that we have provided
 in the sample code.
 
-00:38:24.306 --> 00:38:27.256 A:middle
+
+670
+00:38:24,306 --> 00:38:27,256
 One is the mutually
 exclusive generic condition,
 
-00:38:27.826 --> 00:38:29.606 A:middle
+
+671
+00:38:27,826 --> 00:38:29,606
 and this is a way of describing
 
-00:38:29.876 --> 00:38:33.636 A:middle
+
+672
+00:38:29,876 --> 00:38:33,636
 that an operation is mutually
 exclusive with other kinds
 
-00:38:33.636 --> 00:38:36.126 A:middle
+
+673
+00:38:33,636 --> 00:38:36,126
 of operations with
 the same generic type.
 
-00:38:37.296 --> 00:38:40.616 A:middle
+
+674
+00:38:37,296 --> 00:38:40,616
 We have a reachability condition
 in there, so you can simply,
 
-00:38:40.616 --> 00:38:42.416 A:middle
+
+675
+00:38:40,616 --> 00:38:42,416
 with one line of code, express
 
-00:38:42.576 --> 00:38:44.496 A:middle
+
+676
+00:38:42,576 --> 00:38:44,496
 that an operation
 can only execute
 
-00:38:44.776 --> 00:38:47.346 A:middle
+
+677
+00:38:44,776 --> 00:38:47,346
 if the network is reachable
 at a very high level.
 
-00:38:48.146 --> 00:38:51.506 A:middle
+
+678
+00:38:48,146 --> 00:38:51,506
 And we've got a plethora
 of permission conditions,
 
-00:38:52.196 --> 00:38:56.006 A:middle
+
+679
+00:38:52,196 --> 00:38:56,006
 such as only execute this
 operation if we have access
 
-00:38:56.006 --> 00:38:59.596 A:middle
+
+680
+00:38:56,006 --> 00:38:59,596
 to a certain CloudKit container,
 or only execute this operation
 
-00:38:59.596 --> 00:39:01.156 A:middle
+
+681
+00:38:59,596 --> 00:39:01,156
 if we have access
 to your calendar
 
 
-
-00:38:59.596 --> 00:39:01.156 A:middle
-if we have access
-to your calendar
-
-00:39:01.256 --> 00:39:03.926 A:middle
+682
+00:39:01,256 --> 00:39:03,926
 or to your photo library
 or to your contacts
 
-00:39:04.536 --> 00:39:06.366 A:middle
+
+683
+00:39:04,536 --> 00:39:06,366
 or whatever else you'd like.
 
-00:39:07.136 --> 00:39:08.456 A:middle
+
+684
+00:39:07,136 --> 00:39:08,456
 So that's conditions.
 
-00:39:09.196 --> 00:39:12.906 A:middle
+
+685
+00:39:09,196 --> 00:39:12,906
 And the final piece is
 operation observers.
 
-00:39:14.776 --> 00:39:19.496 A:middle
+
+686
+00:39:14,776 --> 00:39:19,496
 An operation observer is again
 a protocol type, and it's a way
 
-00:39:19.496 --> 00:39:22.816 A:middle
+
+687
+00:39:19,496 --> 00:39:22,816
 for this value to be notified
 about significant events
 
-00:39:22.966 --> 00:39:27.126 A:middle
+
+688
+00:39:22,966 --> 00:39:27,126
 in operation lifecycle, such
 as start or the beginning
 
-00:39:27.126 --> 00:39:28.776 A:middle
+
+689
+00:39:27,126 --> 00:39:28,776
 of execution, the
 end of execution,
 
-00:39:29.116 --> 00:39:31.436 A:middle
+
+690
+00:39:29,116 --> 00:39:31,436
 and also if the operation
 decides
 
-00:39:31.736 --> 00:39:34.926 A:middle
+
+691
+00:39:31,736 --> 00:39:34,926
 to produce another operation
 that should be executed later,
 
-00:39:35.316 --> 00:39:38.726 A:middle
+
+692
+00:39:35,316 --> 00:39:38,726
 such as if an operation decides
 that it failed and it wants
 
-00:39:38.726 --> 00:39:43.166 A:middle
+
+693
+00:39:38,726 --> 00:39:43,166
 to show an alert, it can produce
 or generate an alert operation.
 
-00:39:44.876 --> 00:39:49.756 A:middle
+
+694
+00:39:44,876 --> 00:39:49,756
 And we have a couple of examples
 of observers, such as timeouts.
 
-00:39:50.736 --> 00:39:53.536 A:middle
+
+695
+00:39:50,736 --> 00:39:53,536
 By simply adding a timeout
 observer to an operation,
 
-00:39:54.396 --> 00:39:57.016 A:middle
+
+696
+00:39:54,396 --> 00:39:57,016
 that observer is going
 to watch to make sure
 
-00:39:57.016 --> 00:39:58.446 A:middle
+
+697
+00:39:57,016 --> 00:39:58,446
 that the operation completes
 
-00:39:58.446 --> 00:40:00.726 A:middle
+
+698
+00:39:58,446 --> 00:40:00,726
 within whatever time
 interval you specified,
 
 
-
-00:39:58.446 --> 00:40:00.726 A:middle
-within whatever time
-interval you specified,
-
-00:40:01.136 --> 00:40:02.286 A:middle
+699
+00:40:01,136 --> 00:40:02,286
 and if it takes too long,
 
-00:40:02.286 --> 00:40:04.826 A:middle
+
+700
+00:40:02,286 --> 00:40:04,826
 it's going to automatically
 cancel it.
 
-00:40:05.746 --> 00:40:08.986 A:middle
+
+701
+00:40:05,746 --> 00:40:08,986
 One that I think is really
 neat is a background observer,
 
-00:40:09.426 --> 00:40:12.686 A:middle
+
+702
+00:40:09,426 --> 00:40:12,686
 so this is an observer that
 when you attach it to one
 
-00:40:12.686 --> 00:40:16.596 A:middle
+
+703
+00:40:12,686 --> 00:40:16,596
 of these operations is
 going to watch the state
 
-00:40:17.126 --> 00:40:18.666 A:middle
+
+704
+00:40:17,126 --> 00:40:18,666
 of your UI application,
 
-00:40:19.346 --> 00:40:21.956 A:middle
+
+705
+00:40:19,346 --> 00:40:21,956
 and if your application
 enters the background,
 
-00:40:21.956 --> 00:40:24.636 A:middle
+
+706
+00:40:21,956 --> 00:40:24,636
 it's going to automatically
 begin a background task,
 
-00:40:25.166 --> 00:40:26.836 A:middle
+
+707
+00:40:25,166 --> 00:40:26,836
 and then automatically end it
 
-00:40:27.266 --> 00:40:29.026 A:middle
+
+708
+00:40:27,266 --> 00:40:29,026
 when the operation
 finishes executing.
 
-00:40:29.706 --> 00:40:32.006 A:middle
+
+709
+00:40:29,706 --> 00:40:32,006
 So if you have some sort
 of critical operation,
 
-00:40:32.006 --> 00:40:34.506 A:middle
+
+710
+00:40:32,006 --> 00:40:34,506
 perhaps you are uploading data
 to a server and you don't want
 
-00:40:34.506 --> 00:40:36.436 A:middle
+
+711
+00:40:34,506 --> 00:40:36,436
 that to be interrupted
 or suspended,
 
-00:40:37.486 --> 00:40:39.796 A:middle
+
+712
+00:40:37,486 --> 00:40:39,796
 one way you can accomplish
 this is by adding one
 
-00:40:39.796 --> 00:40:42.196 A:middle
+
+713
+00:40:39,796 --> 00:40:42,196
 of these background
 observers to the operation,
 
-00:40:42.196 --> 00:40:45.046 A:middle
+
+714
+00:40:42,196 --> 00:40:45,046
 and it will guarantee
 that you have some time
 
-00:40:45.046 --> 00:40:48.336 A:middle
+
+715
+00:40:45,046 --> 00:40:48,336
 in the background during which
 you can complete this operation.
 
-00:40:48.846 --> 00:40:53.166 A:middle
+
+716
+00:40:48,846 --> 00:40:53,166
 And another one that's really
 cool is the network activity
 
-00:40:53.166 --> 00:40:54.156 A:middle
+
+717
+00:40:53,166 --> 00:40:54,156
 indicator observer.
 
-00:40:54.886 --> 00:40:57.926 A:middle
+
+718
+00:40:54,886 --> 00:40:57,926
 This is a simple observer you
 can attach to an operation,
 
-00:40:57.976 --> 00:41:00.676 A:middle
+
+719
+00:40:57,976 --> 00:41:00,676
 and when it begins, it's
 going to increment a sort
 
 
-
-00:40:57.976 --> 00:41:00.676 A:middle
-and when it begins, it's
-going to increment a sort
-
-00:41:00.676 --> 00:41:05.746 A:middle
+720
+00:41:00,676 --> 00:41:05,746
 of retain count on the
 activity indicator spinner
 
-00:41:05.906 --> 00:41:08.846 A:middle
+
+721
+00:41:05,906 --> 00:41:08,846
 in the status bar, and then
 when the operation ends,
 
-00:41:09.216 --> 00:41:10.966 A:middle
+
+722
+00:41:09,216 --> 00:41:10,966
 it's going to decrement
 that retain count.
 
-00:41:11.306 --> 00:41:15.076 A:middle
+
+723
+00:41:11,306 --> 00:41:15,076
 So you can have multiple
 networking operations in flight
 
-00:41:15.076 --> 00:41:17.726 A:middle
+
+724
+00:41:15,076 --> 00:41:17,726
 at the same time, and
 by simply attaching one
 
-00:41:17.726 --> 00:41:20.796 A:middle
+
+725
+00:41:17,726 --> 00:41:20,796
 of these network indicator
 -- or, observers --
 
-00:41:20.866 --> 00:41:23.276 A:middle
+
+726
+00:41:20,866 --> 00:41:23,276
 it will automatically show
 
-00:41:23.276 --> 00:41:26.026 A:middle
+
+727
+00:41:23,276 --> 00:41:26,026
 and hide the network activity
 indicator as appropriate.
 
-00:41:26.026 --> 00:41:28.146 A:middle
+
+728
+00:41:26,026 --> 00:41:28,146
 It is no longer this crazy --
 
-00:41:30.456 --> 00:41:32.496 A:middle
+
+729
+00:41:30,456 --> 00:41:32,496
 crazy state that you
 have to manage yourself.
 
-00:41:32.496 --> 00:41:34.256 A:middle
+
+730
+00:41:32,496 --> 00:41:34,256
 It all kind of happens
 automatically.
 
-00:41:34.256 --> 00:41:35.156 A:middle
+
+731
+00:41:34,256 --> 00:41:35,156
 It's really cool.
 
-00:41:35.156 --> 00:41:37.236 A:middle
+
+732
+00:41:35,156 --> 00:41:37,236
 And then there are other
 observers that we have
 
-00:41:37.556 --> 00:41:40.016 A:middle
+
+733
+00:41:37,556 --> 00:41:40,016
 in the sample code for
 you, such as being able
 
-00:41:40.016 --> 00:41:43.686 A:middle
+
+734
+00:41:40,016 --> 00:41:43,686
 to attach arbitrary blocks
 to one of those three events
 
-00:41:43.966 --> 00:41:45.806 A:middle
+
+735
+00:41:43,966 --> 00:41:45,806
 and have them react
 appropriately.
 
-00:41:46.896 --> 00:41:48.906 A:middle
+
+736
+00:41:46,896 --> 00:41:48,906
 So that's a quick look
 at the sample code.
 
-00:41:49.606 --> 00:41:52.806 A:middle
+
+737
+00:41:49,606 --> 00:41:52,806
 On the surface, it looks like
 a really simple application,
 
-00:41:52.806 --> 00:41:55.786 A:middle
+
+738
+00:41:52,806 --> 00:41:55,786
 but under the hood, there is
 lots of really meaty goodness,
 
-00:41:55.876 --> 00:41:59.966 A:middle
+
+739
+00:41:55,876 --> 00:41:59,966
 and I really encourage you to
 download it and check it out.
 
 
-
-00:42:00.266 --> 00:42:03.946 A:middle
+740
+00:42:00,266 --> 00:42:03,946
 So, in summary, use operations
 
-00:42:04.086 --> 00:42:06.356 A:middle
+
+741
+00:42:04,086 --> 00:42:06,356
 to abstract the logic
 in your app.
 
-00:42:06.606 --> 00:42:10.156 A:middle
+
+742
+00:42:06,606 --> 00:42:10,156
 By putting your logic inside of
 operations, it becomes very easy
 
-00:42:10.156 --> 00:42:13.546 A:middle
+
+743
+00:42:10,156 --> 00:42:13,546
 to change it later, such as
 how we converted the WWDC app
 
-00:42:13.546 --> 00:42:15.336 A:middle
+
+744
+00:42:13,546 --> 00:42:15,336
 to use CloudKit.
 
-00:42:15.636 --> 00:42:17.526 A:middle
+
+745
+00:42:15,636 --> 00:42:17,526
 It was a simple change for us.
 
-00:42:19.156 --> 00:42:22.436 A:middle
+
+746
+00:42:19,156 --> 00:42:22,436
 Use dependencies to
 express the relationships
 
-00:42:22.486 --> 00:42:23.576 A:middle
+
+747
+00:42:22,486 --> 00:42:23,576
 between your operations.
 
-00:42:24.106 --> 00:42:27.526 A:middle
+
+748
+00:42:24,106 --> 00:42:27,526
 It makes it very simple
 to guarantee certain kinds
 
-00:42:27.526 --> 00:42:31.446 A:middle
+
+749
+00:42:27,526 --> 00:42:31,446
 of behaviors, that B
 must always follow A.
 
-00:42:33.496 --> 00:42:38.776 A:middle
+
+750
+00:42:33,496 --> 00:42:38,776
 Next, operations allow you to
 describe complex behaviors,
 
-00:42:39.476 --> 00:42:43.126 A:middle
+
+751
+00:42:39,476 --> 00:42:43,126
 such as mutual exclusivity
 or composition.
 
-00:42:43.496 --> 00:42:46.036 A:middle
+
+752
+00:42:43,496 --> 00:42:46,036
 These are all simple
 with operations.
 
-00:42:46.696 --> 00:42:50.486 A:middle
+
+753
+00:42:46,696 --> 00:42:50,486
 And overall NSOperation
 allows you
 
-00:42:50.486 --> 00:42:54.786 A:middle
+
+754
+00:42:50,486 --> 00:42:54,786
 to perform some very powerful
 things with very minimal effort.
 
-00:42:56.346 --> 00:42:58.176 A:middle
+
+755
+00:42:56,346 --> 00:42:58,176
 So we have a couple of
 related sessions for you.
 
-00:42:58.666 --> 00:43:02.606 A:middle
+
+756
+00:42:58,666 --> 00:43:02,606
 Immediately after this
 session is "Building Responsive
 
 
-
-00:42:58.666 --> 00:43:02.606 A:middle
-Immediately after this
-session is "Building Responsive
-
-00:43:02.606 --> 00:43:03.996 A:middle
+757
+00:43:02,606 --> 00:43:03,996
 and Efficient Apps with GCD."
 
-00:43:03.996 --> 00:43:06.726 A:middle
+
+758
+00:43:03,996 --> 00:43:06,726
 We don't want you
 to leave GCD behind.
 
-00:43:06.726 --> 00:43:10.186 A:middle
+
+759
+00:43:06,726 --> 00:43:10,186
 It is still a perfectly
 appropriate technology to use.
 
-00:43:10.186 --> 00:43:12.896 A:middle
+
+760
+00:43:10,186 --> 00:43:12,896
 So I encourage you to go to
 this session or watch the video
 
-00:43:13.266 --> 00:43:15.876 A:middle
+
+761
+00:43:13,266 --> 00:43:15,876
 and see when you should
 be using GCD in your apps.
 
-00:43:16.786 --> 00:43:17.856 A:middle
+
+762
+00:43:16,786 --> 00:43:17,856
 And then if you want to see more
 
-00:43:17.856 --> 00:43:22.306 A:middle
+
+763
+00:43:17,856 --> 00:43:22,306
 about how our frameworks use
 NSOperation, you can watch the
 
-00:43:22.306 --> 00:43:24.856 A:middle
+
+764
+00:43:22,306 --> 00:43:24,856
 "CloudKit Tips and Tricks"
 session from this year
 
-00:43:25.216 --> 00:43:27.876 A:middle
+
+765
+00:43:25,216 --> 00:43:27,876
 or the "Advanced CloudKit"
 session from last year.
 
-00:43:31.216 --> 00:43:34.466 A:middle
+
+766
+00:43:31,216 --> 00:43:34,466
 Like I said, we have sample code
 available on the WWDC website.
 
-00:43:34.466 --> 00:43:35.776 A:middle
+
+767
+00:43:34,466 --> 00:43:35,776
 I encourage you to check it out.
 
-00:43:36.466 --> 00:43:39.196 A:middle
+
+768
+00:43:36,466 --> 00:43:39,196
 I also want you to read the
 'Threading Programming Guide'
 
-00:43:39.376 --> 00:43:40.626 A:middle
+
+769
+00:43:39,376 --> 00:43:40,626
 in the Developer Library.
 
-00:43:40.896 --> 00:43:44.276 A:middle
+
+770
+00:43:40,896 --> 00:43:44,276
 This has a lot of really great
 information on other ways
 
-00:43:44.276 --> 00:43:45.886 A:middle
+
+771
+00:43:44,276 --> 00:43:45,886
 that you can use NSOperation.
 
-00:43:46.376 --> 00:43:49.206 A:middle
+
+772
+00:43:46,376 --> 00:43:49,206
 And if you need any technical
 support, we encourage you
 
-00:43:49.206 --> 00:43:54.056 A:middle
+
+773
+00:43:49,206 --> 00:43:54,056
 to post your questions in the
 Developer Forums or contact DTS.
 
-00:43:54.596 --> 00:43:56.976 A:middle
+
+774
+00:43:54,596 --> 00:43:56,976
 Thank you very much, and have
 a great rest of the conference.
 
-00:43:57.508 --> 00:43:59.508 A:middle
+
+775
+00:43:57,508 --> 00:43:59,508
 [ Applause ]
 

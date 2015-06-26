@@ -1,3605 +1,5174 @@
-
-00:00:25.516 --> 00:00:32.766 A:middle
+1
+00:00:25,516 --> 00:00:32,766
 [Applause]
 
-00:00:33.266 --> 00:00:36.246 A:middle
-&gt;&gt; Good morning, and welcome to
+
+2
+00:00:33,266 --> 00:00:36,246
+>> Good morning, and welcome to
 Optimizing Swift Performance.
 
-00:00:36.546 --> 00:00:39.676 A:middle
+
+3
+00:00:36,546 --> 00:00:39,676
 My name is Nadav, and together
 with my colleagues, Michael
 
-00:00:39.836 --> 00:00:41.836 A:middle
+
+4
+00:00:39,836 --> 00:00:41,836
 and Joe, I am going
 to show you how
 
-00:00:41.836 --> 00:00:43.456 A:middle
+
+5
+00:00:41,836 --> 00:00:43,456
 to optimize your Swift programs.
 
-00:00:44.356 --> 00:00:48.626 A:middle
+
+6
+00:00:44,356 --> 00:00:48,626
 Now, we, the engineers on the
 Compiler Team, are passionate
 
-00:00:48.626 --> 00:00:49.936 A:middle
+
+7
+00:00:48,626 --> 00:00:49,936
 about making code run fast.
 
-00:00:50.296 --> 00:00:52.636 A:middle
+
+8
+00:00:50,296 --> 00:00:52,636
 We believe that you can
 build amazing things
 
-00:00:52.636 --> 00:00:54.136 A:middle
+
+9
+00:00:52,636 --> 00:00:54,136
 when your apps are
 highly optimized.
 
-00:00:54.406 --> 00:01:00.736 A:middle
+
+10
+00:00:54,406 --> 00:01:00,736
 And if you feel the same way,
 then this talk is for you.
 
 
-
-00:00:54.406 --> 00:01:00.736 A:middle
-And if you feel the same way,
-then this talk is for you.
-
-00:01:01.916 --> 00:01:04.075 A:middle
+11
+00:01:01,916 --> 00:01:04,075
 Today I'll start by
 telling you about some
 
-00:01:04.075 --> 00:01:05.716 A:middle
+
+12
+00:01:04,075 --> 00:01:05,716
 of the new compiler
 optimizations
 
-00:01:05.836 --> 00:01:07.316 A:middle
+
+13
+00:01:05,836 --> 00:01:07,316
 that we have added
 over the last year.
 
-00:01:07.996 --> 00:01:11.756 A:middle
+
+14
+00:01:07,996 --> 00:01:11,756
 Later, Michael will describe
 the underlying implementation
 
-00:01:11.756 --> 00:01:13.506 A:middle
+
+15
+00:01:11,756 --> 00:01:13,506
 of Swift and give
 you some advice
 
-00:01:13.736 --> 00:01:15.436 A:middle
+
+16
+00:01:13,736 --> 00:01:15,436
 on writing high-performance
 Swift code.
 
-00:01:15.956 --> 00:01:18.446 A:middle
+
+17
+00:01:15,956 --> 00:01:18,446
 And finally, Joe
 will demonstrate how
 
-00:01:18.446 --> 00:01:20.556 A:middle
+
+18
+00:01:18,446 --> 00:01:20,556
 to use instruments to identify
 
-00:01:20.936 --> 00:01:25.786 A:middle
+
+19
+00:01:20,936 --> 00:01:25,786
 and analyze performance
 bottlenecks in your Swift code.
 
-00:01:26.736 --> 00:01:32.106 A:middle
+
+20
+00:01:26,736 --> 00:01:32,106
 So Swift is a flexible and safe
 programming language with lots
 
-00:01:32.106 --> 00:01:36.786 A:middle
+
+21
+00:01:32,106 --> 00:01:36,786
 of great features, like closures
 and protocols and generics and,
 
-00:01:36.786 --> 00:01:38.526 A:middle
+
+22
+00:01:36,786 --> 00:01:38,526
 of course, automatic
 reference counting.
 
-00:01:38.986 --> 00:01:42.606 A:middle
+
+23
+00:01:38,986 --> 00:01:42,606
 Now, some of you may associate
 these features with slowness
 
-00:01:42.826 --> 00:01:45.236 A:middle
+
+24
+00:01:42,826 --> 00:01:45,236
 because the program
 has to do more work
 
-00:01:45.356 --> 00:01:46.896 A:middle
+
+25
+00:01:45,356 --> 00:01:46,896
 to implement these
 high-level features.
 
-00:01:47.616 --> 00:01:50.806 A:middle
+
+26
+00:01:47,616 --> 00:01:50,806
 But Swift is a very fast
 programming language that's
 
-00:01:50.856 --> 00:01:53.086 A:middle
+
+27
+00:01:50,856 --> 00:01:53,086
 compiled to highly
 optimized native code.
 
-00:01:54.096 --> 00:01:56.206 A:middle
+
+28
+00:01:54,096 --> 00:01:56,206
 So how did we make Swift fast?
 
-00:01:57.226 --> 00:01:59.756 A:middle
+
+29
+00:01:57,226 --> 00:01:59,756
 Well, we made Swift fast
 
 
-
-00:02:00.066 --> 00:02:04.016 A:middle
+30
+00:02:00,066 --> 00:02:04,016
 by implementing compiler
 optimizations that target all
 
-00:02:04.016 --> 00:02:05.396 A:middle
+
+31
+00:02:04,016 --> 00:02:05,396
 of these high-level features.
 
-00:02:05.866 --> 00:02:09.265 A:middle
+
+32
+00:02:05,866 --> 00:02:09,265
 These compiler optimizations
 make sure that the overhead
 
-00:02:09.596 --> 00:02:12.496 A:middle
+
+33
+00:02:09,596 --> 00:02:12,496
 of the high-level
 features is minimal.
 
-00:02:14.476 --> 00:02:16.916 A:middle
+
+34
+00:02:14,476 --> 00:02:16,916
 Now, we have lots of
 compiler optimizations,
 
-00:02:16.916 --> 00:02:19.376 A:middle
+
+35
+00:02:16,916 --> 00:02:19,376
 and we don't have enough
 time to go over all of them,
 
-00:02:19.676 --> 00:02:22.056 A:middle
+
+36
+00:02:19,676 --> 00:02:22,056
 so I decided to bring
 you one example
 
-00:02:22.136 --> 00:02:23.556 A:middle
+
+37
+00:02:22,136 --> 00:02:23,556
 of one compiler optimization.
 
-00:02:24.126 --> 00:02:26.986 A:middle
+
+38
+00:02:24,126 --> 00:02:26,986
 This optimization is called
 bounds checks elimination.
 
-00:02:29.636 --> 00:02:31.926 A:middle
+
+39
+00:02:29,636 --> 00:02:31,926
 On the screen, you can
 see a very simple loop.
 
-00:02:32.186 --> 00:02:34.076 A:middle
+
+40
+00:02:32,186 --> 00:02:34,076
 This loop encrypts the
 content of the array
 
-00:02:34.346 --> 00:02:37.646 A:middle
+
+41
+00:02:34,346 --> 00:02:37,646
 by X-raying all the elements in
 the array with the number 13.
 
-00:02:37.906 --> 00:02:39.056 A:middle
+
+42
+00:02:37,906 --> 00:02:39,056
 It's not a very good encryption.
 
-00:02:39.846 --> 00:02:43.116 A:middle
+
+43
+00:02:39,846 --> 00:02:43,116
 The reading and writing
 outside of the bounds
 
-00:02:43.116 --> 00:02:45.046 A:middle
+
+44
+00:02:43,116 --> 00:02:45,046
 of the array is a serious bug
 
-00:02:45.506 --> 00:02:47.386 A:middle
+
+45
+00:02:45,506 --> 00:02:47,386
 and can also have
 security implications,
 
-00:02:48.086 --> 00:02:52.456 A:middle
+
+46
+00:02:48,086 --> 00:02:52,456
 and Swift is protecting you
 by adding a little bit of code
 
-00:02:52.546 --> 00:02:54.596 A:middle
+
+47
+00:02:52,546 --> 00:02:54,596
 that checks that you don't
 read or write outside
 
-00:02:54.596 --> 00:02:55.426 A:middle
+
+48
+00:02:54,596 --> 00:02:55,426
 of the bounds of the array.
 
-00:02:56.106 --> 00:03:00.056 A:middle
+
+49
+00:02:56,106 --> 00:03:00,056
 Now, the problem is that this
 check slows your code down.
 
 
-
-00:02:56.106 --> 00:03:00.056 A:middle
-Now, the problem is that this
-check slows your code down.
-
-00:03:02.186 --> 00:03:05.366 A:middle
+50
+00:03:02,186 --> 00:03:05,366
 Another problem is that it
 blocks other optimizations.
 
-00:03:05.366 --> 00:03:07.976 A:middle
+
+51
+00:03:05,366 --> 00:03:07,976
 For example, we cannot
 vectorize this code
 
-00:03:08.396 --> 00:03:09.316 A:middle
+
+52
+00:03:08,396 --> 00:03:09,316
 with this check in place.
 
-00:03:10.536 --> 00:03:13.186 A:middle
+
+53
+00:03:10,536 --> 00:03:13,186
 So we've implemented a
 compiler optimization
 
-00:03:13.616 --> 00:03:17.046 A:middle
+
+54
+00:03:13,616 --> 00:03:17,046
 for hoisting this check outside
 of the loop, making the cost
 
-00:03:17.046 --> 00:03:19.976 A:middle
+
+55
+00:03:17,046 --> 00:03:19,976
 of the check negligible,
 because instead of checking
 
-00:03:20.056 --> 00:03:21.476 A:middle
+
+56
+00:03:20,056 --> 00:03:21,476
 on each iteration of the loop
 
-00:03:21.796 --> 00:03:24.046 A:middle
+
+57
+00:03:21,796 --> 00:03:24,046
 that we are hitting inside
 the bounds of the array,
 
-00:03:24.266 --> 00:03:26.676 A:middle
+
+58
+00:03:24,266 --> 00:03:26,676
 we are only checking once
 when we enter the array.
 
-00:03:27.186 --> 00:03:28.936 A:middle
+
+59
+00:03:27,186 --> 00:03:28,936
 So this is a very
 powerful optimization
 
-00:03:29.456 --> 00:03:32.966 A:middle
+
+60
+00:03:29,456 --> 00:03:32,966
 that makes numeric
 code run faster.
 
-00:03:33.076 --> 00:03:36.316 A:middle
+
+61
+00:03:33,076 --> 00:03:36,316
 Okay. So this was one
 example of one optimization,
 
-00:03:36.616 --> 00:03:38.626 A:middle
+
+62
+00:03:36,616 --> 00:03:38,626
 and we have lots
 of optimizations.
 
-00:03:39.316 --> 00:03:41.016 A:middle
+
+63
+00:03:39,316 --> 00:03:41,016
 And we know that these
 optimizations work
 
-00:03:41.206 --> 00:03:44.866 A:middle
+
+64
+00:03:41,206 --> 00:03:44,866
 and that they are very effective
 because we are tracking hundreds
 
-00:03:44.866 --> 00:03:47.586 A:middle
+
+65
+00:03:44,866 --> 00:03:47,586
 of programs and benchmarks,
 and over the last year,
 
-00:03:47.836 --> 00:03:50.926 A:middle
+
+66
+00:03:47,836 --> 00:03:50,926
 we noticed that these programs
 became significantly faster.
 
-00:03:51.386 --> 00:03:53.556 A:middle
+
+67
+00:03:51,386 --> 00:03:53,556
 Every time we added
 a new optimization,
 
-00:03:53.926 --> 00:03:55.536 A:middle
+
+68
+00:03:53,926 --> 00:03:55,536
 every time we made
 an improvement
 
-00:03:55.776 --> 00:03:57.186 A:middle
+
+69
+00:03:55,776 --> 00:03:57,186
 to existing optimizations,
 
-00:03:57.456 --> 00:03:59.656 A:middle
+
+70
+00:03:57,456 --> 00:03:59,656
 we noticed that these
 programs became faster.
 
 
-
-00:04:00.786 --> 00:04:03.546 A:middle
+71
+00:04:00,786 --> 00:04:03,546
 Now, it's not going to be very
 interesting for you to see all
 
-00:04:03.546 --> 00:04:06.956 A:middle
+
+72
+00:04:03,546 --> 00:04:06,956
 of these programs, so I decided
 to bring you five programs.
 
-00:04:08.116 --> 00:04:09.096 A:middle
+
+73
+00:04:08,116 --> 00:04:09,096
 The programs that you see
 
-00:04:09.096 --> 00:04:11.406 A:middle
+
+74
+00:04:09,096 --> 00:04:11,406
 on the screen behind me
 right now are programs
 
-00:04:11.406 --> 00:04:12.356 A:middle
+
+75
+00:04:11,406 --> 00:04:12,356
 from multiple domains.
 
-00:04:13.286 --> 00:04:15.966 A:middle
+
+76
+00:04:13,286 --> 00:04:15,966
 One is an object-oriented
 program.
 
-00:04:16.055 --> 00:04:17.305 A:middle
+
+77
+00:04:16,055 --> 00:04:17,305
 Another one is numeric.
 
-00:04:17.466 --> 00:04:19.146 A:middle
+
+78
+00:04:17,466 --> 00:04:19,146
 Another one is functional.
 
-00:04:20.456 --> 00:04:22.786 A:middle
+
+79
+00:04:20,456 --> 00:04:22,786
 And I believe that these
 programs represent the kind
 
-00:04:22.786 --> 00:04:25.406 A:middle
+
+80
+00:04:22,786 --> 00:04:25,406
 of code that users
 write today in Swift.
 
-00:04:26.346 --> 00:04:27.996 A:middle
+
+81
+00:04:26,346 --> 00:04:27,996
 And as you can see,
 over the last year,
 
-00:04:28.566 --> 00:04:30.346 A:middle
+
+82
+00:04:28,566 --> 00:04:30,346
 these programs became
 significantly faster,
 
-00:04:30.346 --> 00:04:33.046 A:middle
+
+83
+00:04:30,346 --> 00:04:33,046
 between two to eight times
 faster, which is great.
 
-00:04:33.506 --> 00:04:36.306 A:middle
+
+84
+00:04:33,506 --> 00:04:36,306
 Now, these programs are
 optimized in release mode.
 
-00:04:37.226 --> 00:04:39.766 A:middle
+
+85
+00:04:37,226 --> 00:04:39,766
 But I know that you also
 care about the performance
 
-00:04:39.766 --> 00:04:42.826 A:middle
+
+86
+00:04:39,766 --> 00:04:42,826
 of unoptimized programs
 because you are spending a lot
 
-00:04:42.826 --> 00:04:45.646 A:middle
+
+87
+00:04:42,826 --> 00:04:45,646
 of time writing your code and
 debugging it and running it
 
-00:04:45.646 --> 00:04:46.816 A:middle
+
+88
+00:04:45,646 --> 00:04:46,816
 in simulator, so you care
 
-00:04:46.816 --> 00:04:48.396 A:middle
+
+89
+00:04:46,816 --> 00:04:48,396
 about the performance
 of unoptimized code.
 
-00:04:49.486 --> 00:04:51.416 A:middle
+
+90
+00:04:49,486 --> 00:04:51,416
 So, these are the
 same five programs,
 
-00:04:51.986 --> 00:04:54.046 A:middle
+
+91
+00:04:51,986 --> 00:04:54,046
 this time in debug mode.
 
-00:04:54.516 --> 00:04:55.316 A:middle
+
+92
+00:04:54,516 --> 00:04:55,316
 They are unoptimized.
 
-00:04:55.996 --> 00:04:58.626 A:middle
+
+93
+00:04:55,996 --> 00:04:58,626
 So you are probably
 asking yourself, wait,
 
-00:04:58.716 --> 00:04:59.946 A:middle
+
+94
+00:04:58,716 --> 00:04:59,946
 how can improvements
 
-00:04:59.946 --> 00:05:04.306 A:middle
+
+95
+00:04:59,946 --> 00:05:04,306
 to the optimizer improve the
 performance of unoptimized code.
 
 
-
-00:04:59.946 --> 00:05:04.306 A:middle
-to the optimizer improve the
-performance of unoptimized code.
-
-00:05:04.626 --> 00:05:08.146 A:middle
+96
+00:05:04,626 --> 00:05:08,146
 Right? Well, we made
 unoptimized code run faster
 
-00:05:08.146 --> 00:05:09.046 A:middle
+
+97
+00:05:08,146 --> 00:05:09,046
 by doing two things.
 
-00:05:09.406 --> 00:05:12.526 A:middle
+
+98
+00:05:09,406 --> 00:05:12,526
 First of all, we improved
 the Swift runtime component.
 
-00:05:12.806 --> 00:05:17.096 A:middle
+
+99
+00:05:12,806 --> 00:05:17,096
 The runtime is responsible
 for allocating memory,
 
-00:05:17.096 --> 00:05:19.426 A:middle
+
+100
+00:05:17,096 --> 00:05:19,426
 accessing metadata,
 things like that.
 
-00:05:19.506 --> 00:05:20.426 A:middle
+
+101
+00:05:19,506 --> 00:05:20,426
 So we optimized that.
 
-00:05:20.946 --> 00:05:24.436 A:middle
+
+102
+00:05:20,946 --> 00:05:24,436
 And the second thing that we
 did is that now we are able
 
-00:05:24.436 --> 00:05:26.926 A:middle
+
+103
+00:05:24,436 --> 00:05:26,926
 to optimize the Swift
 Standard Library better.
 
-00:05:27.076 --> 00:05:28.406 A:middle
+
+104
+00:05:27,076 --> 00:05:28,406
 The Standard Library
 is the component
 
-00:05:28.406 --> 00:05:31.966 A:middle
+
+105
+00:05:28,406 --> 00:05:31,966
 that has the implementation of
 array and dictionary and set.
 
-00:05:32.286 --> 00:05:35.756 A:middle
+
+106
+00:05:32,286 --> 00:05:35,756
 So by optimizing the
 Standard Library better,
 
-00:05:36.056 --> 00:05:38.206 A:middle
+
+107
+00:05:36,056 --> 00:05:38,206
 we are able to accelerate
 the performance
 
-00:05:38.206 --> 00:05:41.016 A:middle
+
+108
+00:05:38,206 --> 00:05:41,016
 of unoptimized programs.
 
-00:05:41.396 --> 00:05:43.656 A:middle
+
+109
+00:05:41,396 --> 00:05:43,656
 We know that over the
 last year, the performance
 
-00:05:43.656 --> 00:05:45.156 A:middle
+
+110
+00:05:43,656 --> 00:05:45,156
 of both optimized
 
-00:05:45.476 --> 00:05:48.866 A:middle
+
+111
+00:05:45,476 --> 00:05:48,866
 and unoptimized programs
 became significantly better.
 
-00:05:49.436 --> 00:05:50.616 A:middle
+
+112
+00:05:49,436 --> 00:05:50,616
 But to get the full picture,
 
-00:05:50.616 --> 00:05:53.986 A:middle
+
+113
+00:05:50,616 --> 00:05:53,986
 I want to show you a
 comparison to Objective-C.
 
-00:05:54.536 --> 00:05:58.706 A:middle
+
+114
+00:05:54,536 --> 00:05:58,706
 So on the screen you can see
 two very well-known benchmarks.
 
-00:05:59.116 --> 00:06:01.176 A:middle
+
+115
+00:05:59,116 --> 00:06:01,176
 It's Richards and
 DeltaBlue, both written
 
 
-
-00:05:59.116 --> 00:06:01.176 A:middle
-It's Richards and
-DeltaBlue, both written
-
-00:06:01.176 --> 00:06:02.686 A:middle
+116
+00:06:01,176 --> 00:06:02,686
 in object-oriented style.
 
-00:06:03.216 --> 00:06:04.266 A:middle
+
+117
+00:06:03,216 --> 00:06:04,266
 And on these benchmarks,
 
-00:06:04.516 --> 00:06:06.796 A:middle
+
+118
+00:06:04,516 --> 00:06:06,796
 Swift is a lot faster
 than Objective-C.
 
-00:06:07.476 --> 00:06:09.646 A:middle
+
+119
+00:06:07,476 --> 00:06:09,646
 At this point in the
 talk, I am not going
 
-00:06:09.646 --> 00:06:12.226 A:middle
+
+120
+00:06:09,646 --> 00:06:12,226
 to tell you why Swift is
 faster than Objective-C,
 
-00:06:12.686 --> 00:06:14.856 A:middle
+
+121
+00:06:12,686 --> 00:06:14,856
 but I promise you that we
 will get back to this slide
 
-00:06:15.256 --> 00:06:18.466 A:middle
+
+122
+00:06:15,256 --> 00:06:18,466
 and we will talk about
 why Swift is faster.
 
-00:06:19.416 --> 00:06:22.556 A:middle
+
+123
+00:06:19,416 --> 00:06:22,556
 Okay. Now I am going to talk
 about something different.
 
-00:06:22.856 --> 00:06:25.816 A:middle
+
+124
+00:06:22,856 --> 00:06:25,816
 I want to talk about a new
 compiler optimization mode
 
-00:06:25.946 --> 00:06:28.116 A:middle
+
+125
+00:06:25,946 --> 00:06:28,116
 that's called "Whole
 Module Optimization"
 
-00:06:28.376 --> 00:06:30.696 A:middle
+
+126
+00:06:28,376 --> 00:06:30,696
 that can make your programs
 run significantly faster.
 
-00:06:31.526 --> 00:06:33.466 A:middle
+
+127
+00:06:31,526 --> 00:06:33,466
 But before I do that,
 I would like to talk
 
-00:06:33.466 --> 00:06:36.526 A:middle
+
+128
+00:06:33,466 --> 00:06:36,526
 about the way Xcode
 compiles files.
 
-00:06:37.496 --> 00:06:41.436 A:middle
+
+129
+00:06:37,496 --> 00:06:41,436
 So Xcode compiles your
 files individually.
 
-00:06:42.156 --> 00:06:45.236 A:middle
+
+130
+00:06:42,156 --> 00:06:45,236
 And this is a good idea because
 it can compile many files
 
-00:06:45.236 --> 00:06:47.656 A:middle
+
+131
+00:06:45,236 --> 00:06:47,656
 in parallel on multiple
 cores in your machine.
 
-00:06:48.156 --> 00:06:48.636 A:middle
+
+132
+00:06:48,156 --> 00:06:48,636
 That's good.
 
-00:06:49.046 --> 00:06:52.856 A:middle
+
+133
+00:06:49,046 --> 00:06:52,856
 It can also recompile only
 files that need to be updated.
 
-00:06:53.366 --> 00:06:53.916 A:middle
+
+134
+00:06:53,366 --> 00:06:53,916
 So that's good.
 
-00:06:54.536 --> 00:06:56.956 A:middle
+
+135
+00:06:54,536 --> 00:06:56,956
 But the problem is that
 the optimizer is limited
 
-00:06:56.956 --> 00:06:59.006 A:middle
+
+136
+00:06:56,956 --> 00:06:59,006
 to the scope of one file.
 
-00:06:59.826 --> 00:07:05.156 A:middle
+
+137
+00:06:59,826 --> 00:07:05,156
 With Whole Module Optimization,
 the compiler is able
 
 
-
-00:06:59.826 --> 00:07:05.156 A:middle
-With Whole Module Optimization,
-the compiler is able
-
-00:07:05.156 --> 00:07:09.016 A:middle
+138
+00:07:05,156 --> 00:07:09,016
 to optimize the entire module
 at once, which is great
 
-00:07:09.126 --> 00:07:10.786 A:middle
+
+139
+00:07:09,126 --> 00:07:10,786
 because it can analyze
 everything
 
-00:07:10.786 --> 00:07:12.936 A:middle
+
+140
+00:07:10,786 --> 00:07:12,936
 and make aggressive
 optimizations.
 
-00:07:13.566 --> 00:07:17.266 A:middle
+
+141
+00:07:13,566 --> 00:07:17,266
 Now, naturally, Whole Module
 Optimization builds take longer.
 
-00:07:19.106 --> 00:07:22.226 A:middle
+
+142
+00:07:19,106 --> 00:07:22,226
 But the generated binaries
 usually run faster.
 
-00:07:24.636 --> 00:07:27.236 A:middle
+
+143
+00:07:24,636 --> 00:07:27,236
 In Swift 2, we made
 two major improvements
 
-00:07:27.286 --> 00:07:28.506 A:middle
+
+144
+00:07:27,286 --> 00:07:28,506
 to Whole Module Optimizations.
 
-00:07:28.586 --> 00:07:33.016 A:middle
+
+145
+00:07:28,586 --> 00:07:33,016
 So first, we added new
 optimizations that rely
 
-00:07:33.506 --> 00:07:35.086 A:middle
+
+146
+00:07:33,506 --> 00:07:35,086
 on Whole Module Optimization
 mode.
 
-00:07:36.016 --> 00:07:38.266 A:middle
+
+147
+00:07:36,016 --> 00:07:38,266
 So your programs are
 likely to run faster.
 
-00:07:38.976 --> 00:07:43.166 A:middle
+
+148
+00:07:38,976 --> 00:07:43,166
 And second, we were able
 to parallelize some parts
 
-00:07:43.166 --> 00:07:44.316 A:middle
+
+149
+00:07:43,166 --> 00:07:44,316
 of the compilation pipeline.
 
-00:07:44.816 --> 00:07:48.546 A:middle
+
+150
+00:07:44,816 --> 00:07:48,546
 So compiling projects in Whole
 Module Optimization mode should
 
-00:07:48.576 --> 00:07:49.846 A:middle
+
+151
+00:07:48,576 --> 00:07:49,846
 take less time.
 
-00:07:50.446 --> 00:07:55.206 A:middle
+
+152
+00:07:50,446 --> 00:07:55,206
 On the screen behind me,
 you can see two programs
 
-00:07:55.206 --> 00:07:57.926 A:middle
+
+153
+00:07:55,206 --> 00:07:57,926
 that became significantly faster
 with Whole Module Optimization
 
-00:07:58.046 --> 00:08:01.036 A:middle
+
+154
+00:07:58,046 --> 00:08:01,036
 because the compiler was able
 to make better decisions,
 
 
-
-00:07:58.046 --> 00:08:01.036 A:middle
-because the compiler was able
-to make better decisions,
-
-00:08:01.076 --> 00:08:03.366 A:middle
+155
+00:08:01,076 --> 00:08:03,366
 it was able to analyze
 the entire module
 
-00:08:03.726 --> 00:08:05.726 A:middle
+
+156
+00:08:03,726 --> 00:08:05,726
 and make more aggressive
 optimizations
 
-00:08:06.106 --> 00:08:09.006 A:middle
+
+157
+00:08:06,106 --> 00:08:09,006
 with the information
 that it had.
 
-00:08:10.126 --> 00:08:12.316 A:middle
+
+158
+00:08:10,126 --> 00:08:12,316
 In Xcode 7, we've
 made some changes
 
-00:08:12.316 --> 00:08:13.706 A:middle
+
+159
+00:08:12,316 --> 00:08:13,706
 to the optimization level menu,
 
-00:08:14.206 --> 00:08:16.896 A:middle
+
+160
+00:08:14,206 --> 00:08:16,896
 and now Whole Module
 Optimization is one
 
-00:08:16.896 --> 00:08:18.656 A:middle
+
+161
+00:08:16,896 --> 00:08:18,656
 of the options that
 you can select.
 
-00:08:19.226 --> 00:08:21.436 A:middle
+
+162
+00:08:19,226 --> 00:08:21,436
 And I encourage you to try
 Whole Module Optimization
 
-00:08:21.796 --> 00:08:22.456 A:middle
+
+163
+00:08:21,796 --> 00:08:22,456
 on your programs.
 
-00:08:23.006 --> 00:08:25.896 A:middle
+
+164
+00:08:23,006 --> 00:08:25,896
 At this point, I would like
 to invite Michael on stage
 
-00:08:25.946 --> 00:08:28.666 A:middle
+
+165
+00:08:25,946 --> 00:08:28,666
 to tell you about the underlying
 implementation of Swift
 
-00:08:28.666 --> 00:08:30.196 A:middle
+
+166
+00:08:28,666 --> 00:08:30,196
 and give you some advice
 
-00:08:30.196 --> 00:08:32.176 A:middle
+
+167
+00:08:30,196 --> 00:08:32,176
 on writing high-performance
 Swift code.
 
-00:08:32.655 --> 00:08:32.905 A:middle
+
+168
+00:08:32,655 --> 00:08:32,905
 Thank you.
 
-00:08:33.515 --> 00:08:43.706 A:middle
+
+169
+00:08:33,515 --> 00:08:43,706
 [Applause]
 
-00:08:44.206 --> 00:08:45.596 A:middle
-&gt;&gt; MICHAEL GOTTESMAN:
+
+170
+00:08:44,206 --> 00:08:45,596
+>> MICHAEL GOTTESMAN:
 Thanks, Nadav.
 
-00:08:46.186 --> 00:08:47.846 A:middle
+
+171
+00:08:46,186 --> 00:08:47,846
 Today I would like
 to speak to you
 
-00:08:48.186 --> 00:08:51.466 A:middle
+
+172
+00:08:48,186 --> 00:08:51,466
 about three different aspects of
 the Swift programming language
 
-00:08:51.536 --> 00:08:53.146 A:middle
+
+173
+00:08:51,536 --> 00:08:53,146
 and their performance
 characteristics.
 
-00:08:53.736 --> 00:08:57.266 A:middle
+
+174
+00:08:53,736 --> 00:08:57,266
 For each I will give specific
 techniques that you can use
 
-00:08:57.416 --> 00:08:59.766 A:middle
+
+175
+00:08:57,416 --> 00:08:59,766
 to improve the performance
 of your app today.
 
 
-
-00:09:00.506 --> 00:09:04.126 A:middle
+176
+00:09:00,506 --> 00:09:04,126
 Let's begin by talking
 about reference counting.
 
-00:09:04.756 --> 00:09:07.956 A:middle
+
+177
+00:09:04,756 --> 00:09:07,956
 In general, the compiler
 can eliminate most reference
 
-00:09:07.956 --> 00:09:09.626 A:middle
+
+178
+00:09:07,956 --> 00:09:09,626
 counting overhead
 without any help.
 
-00:09:10.436 --> 00:09:13.686 A:middle
+
+179
+00:09:10,436 --> 00:09:13,686
 But sometimes you may still
 find slowdowns in your code due
 
-00:09:13.686 --> 00:09:14.996 A:middle
+
+180
+00:09:13,686 --> 00:09:14,996
 to reference counting overhead.
 
-00:09:15.946 --> 00:09:19.586 A:middle
+
+181
+00:09:15,946 --> 00:09:19,586
 Today I'm going to present two
 techniques that you can use
 
-00:09:19.856 --> 00:09:22.096 A:middle
+
+182
+00:09:19,856 --> 00:09:22,096
 to reduce or even
 eliminate this overhead.
 
-00:09:23.516 --> 00:09:26.026 A:middle
+
+183
+00:09:23,516 --> 00:09:26,026
 Let's begin by looking at the
 basics of reference counting
 
-00:09:26.356 --> 00:09:28.166 A:middle
+
+184
+00:09:26,356 --> 00:09:28,166
 by looking at how
 reference counting
 
-00:09:28.166 --> 00:09:29.176 A:middle
+
+185
+00:09:28,166 --> 00:09:29,176
 and classes go together.
 
-00:09:30.656 --> 00:09:32.866 A:middle
+
+186
+00:09:30,656 --> 00:09:32,866
 So here I have a block of code.
 
-00:09:33.106 --> 00:09:36.266 A:middle
+
+187
+00:09:33,106 --> 00:09:36,266
 It consists of a class C,
 a function foo that takes
 
-00:09:36.266 --> 00:09:39.146 A:middle
+
+188
+00:09:36,266 --> 00:09:39,146
 in an optional C, and a couple
 of variable definitions.
 
-00:09:39.606 --> 00:09:41.926 A:middle
+
+189
+00:09:39,606 --> 00:09:41,926
 Let's walk through the code's
 execution line by line.
 
-00:09:43.656 --> 00:09:46.766 A:middle
+
+190
+00:09:43,656 --> 00:09:46,766
 First we begin by allocating
 new instance of class C
 
-00:09:46.766 --> 00:09:48.816 A:middle
+
+191
+00:09:46,766 --> 00:09:48,816
 and assign it to the variable X.
 
-00:09:49.776 --> 00:09:52.546 A:middle
+
+192
+00:09:49,776 --> 00:09:52,546
 Notice how at the top of the
 class instance, there is a box
 
-00:09:52.546 --> 00:09:53.376 A:middle
+
+193
+00:09:52,546 --> 00:09:53,376
 with the number 1 in it.
 
-00:09:53.546 --> 00:09:56.226 A:middle
+
+194
+00:09:53,546 --> 00:09:56,226
 This represents the reference
 count of the class instance.
 
-00:09:56.996 --> 00:09:59.446 A:middle
+
+195
+00:09:56,996 --> 00:09:59,446
 Of course, it's 1 because
 there's only one reference
 
-00:09:59.486 --> 00:10:01.426 A:middle
+
+196
+00:09:59,486 --> 00:10:01,426
 to the class instance
 currently, namely x.
 
 
-
-00:09:59.486 --> 00:10:01.426 A:middle
-to the class instance
-currently, namely x.
-
-00:10:02.896 --> 00:10:05.856 A:middle
+197
+00:10:02,896 --> 00:10:05,856
 Then we assign x
 to the variable y.
 
-00:10:06.016 --> 00:10:08.036 A:middle
+
+198
+00:10:06,016 --> 00:10:08,036
 This creates a new reference
 to the class instance,
 
-00:10:08.326 --> 00:10:10.406 A:middle
+
+199
+00:10:08,326 --> 00:10:10,406
 causing us to increment
 the reference count
 
-00:10:10.406 --> 00:10:13.606 A:middle
+
+200
+00:10:10,406 --> 00:10:13,606
 of the class instance, giving
 us a reference count of 2.
 
-00:10:14.856 --> 00:10:16.636 A:middle
+
+201
+00:10:14,856 --> 00:10:16,636
 Then we pass off y to foo,
 
-00:10:16.636 --> 00:10:18.776 A:middle
+
+202
+00:10:16,636 --> 00:10:18,776
 but we don't actually
 pass off y itself.
 
-00:10:18.856 --> 00:10:24.686 A:middle
+
+203
+00:10:18,856 --> 00:10:24,686
 Instead, we create a temporary
 C, and then we assign y to C.
 
-00:10:25.176 --> 00:10:29.266 A:middle
+
+204
+00:10:25,176 --> 00:10:29,266
 This then acts as a third
 reference to the class instance,
 
-00:10:29.526 --> 00:10:31.586 A:middle
+
+205
+00:10:29,526 --> 00:10:31,586
 which then causes us to
 increment the reference count
 
-00:10:31.586 --> 00:10:32.816 A:middle
+
+206
+00:10:31,586 --> 00:10:32,816
 of the class instance once more.
 
-00:10:33.916 --> 00:10:37.326 A:middle
+
+207
+00:10:33,916 --> 00:10:37,326
 Then when foo exits, C is
 destroyed, which then causes us
 
-00:10:37.326 --> 00:10:39.476 A:middle
+
+208
+00:10:37,326 --> 00:10:39,476
 to decrement the reference
 count of the class instance,
 
-00:10:39.716 --> 00:10:42.106 A:middle
+
+209
+00:10:39,716 --> 00:10:42,106
 bringing us to a
 reference count of 2.
 
-00:10:42.356 --> 00:10:45.436 A:middle
+
+210
+00:10:42,356 --> 00:10:45,436
 Then finally, we assign
 nil to y and nil to x,
 
-00:10:45.856 --> 00:10:48.166 A:middle
+
+211
+00:10:45,856 --> 00:10:48,166
 bringing the reference count
 of our class instance to 0,
 
-00:10:48.166 --> 00:10:49.896 A:middle
+
+212
+00:10:48,166 --> 00:10:49,896
 and then it's deallocated.
 
-00:10:51.656 --> 00:10:55.266 A:middle
+
+213
+00:10:51,656 --> 00:10:55,266
 Notice how every time
 we made an assignment,
 
-00:10:55.556 --> 00:10:58.066 A:middle
+
+214
+00:10:55,556 --> 00:10:58,066
 we had to perform a
 reference counting operation
 
-00:10:58.226 --> 00:11:00.346 A:middle
+
+215
+00:10:58,226 --> 00:11:00,346
 to maintain the reference
 count of the class instance.
 
 
-
-00:10:58.226 --> 00:11:00.346 A:middle
-to maintain the reference
-count of the class instance.
-
-00:11:01.246 --> 00:11:02.836 A:middle
+216
+00:11:01,246 --> 00:11:02,836
 This is important
 since we always have
 
-00:11:02.836 --> 00:11:05.766 A:middle
+
+217
+00:11:02,836 --> 00:11:05,766
 to maintain memory safety.
 
-00:11:05.876 --> 00:11:09.296 A:middle
+
+218
+00:11:05,876 --> 00:11:09,296
 Now, for those of you who are
 familiar with Objective-C,
 
-00:11:09.296 --> 00:11:11.856 A:middle
+
+219
+00:11:09,296 --> 00:11:11,856
 of course, nothing new is
 happening here with, of course,
 
-00:11:12.296 --> 00:11:17.016 A:middle
+
+220
+00:11:12,296 --> 00:11:17,016
 increment and decrement
 being respectfully retained
 
-00:11:17.676 --> 00:11:18.316 A:middle
+
+221
+00:11:17,676 --> 00:11:18,316
 and released.
 
-00:11:19.246 --> 00:11:21.216 A:middle
+
+222
+00:11:19,246 --> 00:11:21,216
 But now I'd like to talk to you
 
-00:11:21.216 --> 00:11:23.496 A:middle
+
+223
+00:11:21,216 --> 00:11:23,496
 about something that's
 perhaps a bit more exotic,
 
-00:11:23.496 --> 00:11:24.436 A:middle
+
+224
+00:11:23,496 --> 00:11:24,436
 more unfamiliar.
 
-00:11:24.856 --> 00:11:28.086 A:middle
+
+225
+00:11:24,856 --> 00:11:28,086
 Namely, how structs interact
 with reference counting.
 
-00:11:29.356 --> 00:11:33.426 A:middle
+
+226
+00:11:29,356 --> 00:11:33,426
 I'll begin -- let's begin this
 discussion by looking at a class
 
-00:11:33.546 --> 00:11:35.176 A:middle
+
+227
+00:11:33,546 --> 00:11:35,176
 that doesn't contain
 any references.
 
-00:11:36.686 --> 00:11:37.836 A:middle
+
+228
+00:11:36,686 --> 00:11:37,836
 Here I have a class, Point.
 
-00:11:37.836 --> 00:11:40.016 A:middle
+
+229
+00:11:37,836 --> 00:11:40,016
 Of course, it doesn't
 contain any references,
 
-00:11:40.446 --> 00:11:41.936 A:middle
+
+230
+00:11:40,446 --> 00:11:41,936
 but it does have two
 properties in it,
 
-00:11:41.936 --> 00:11:43.776 A:middle
+
+231
+00:11:41,936 --> 00:11:43,776
 x and y, that are both floats.
 
-00:11:44.716 --> 00:11:47.036 A:middle
+
+232
+00:11:44,716 --> 00:11:47,036
 If I store one of these
 points in an array,
 
-00:11:47.466 --> 00:11:48.786 A:middle
+
+233
+00:11:47,466 --> 00:11:48,786
 because it's a class, of course,
 
-00:11:48.786 --> 00:11:50.716 A:middle
+
+234
+00:11:48,786 --> 00:11:50,716
 I don't store it
 directly in the array.
 
-00:11:51.006 --> 00:11:53.706 A:middle
+
+235
+00:11:51,006 --> 00:11:53,706
 Instead, I store reference
 to the points in the array.
 
-00:11:54.636 --> 00:11:56.906 A:middle
+
+236
+00:11:54,636 --> 00:11:56,906
 So when I iterate
 over the array,
 
-00:11:56.906 --> 00:12:01.346 A:middle
+
+237
+00:11:56,906 --> 00:12:01,346
 when I initialize
 the loop variable p,
 
 
-
-00:11:56.906 --> 00:12:01.346 A:middle
-when I initialize
-the loop variable p,
-
-00:12:01.346 --> 00:12:04.876 A:middle
+238
+00:12:01,346 --> 00:12:04,876
 I am actually creating a new
 reference to the class instance,
 
-00:12:05.296 --> 00:12:07.926 A:middle
+
+239
+00:12:05,296 --> 00:12:07,926
 meaning that I have to perform
 a reference count increment.
 
-00:12:08.946 --> 00:12:11.786 A:middle
+
+240
+00:12:08,946 --> 00:12:11,786
 Then, when p is destroyed at
 the end of the loop iteration,
 
-00:12:11.836 --> 00:12:14.166 A:middle
+
+241
+00:12:11,836 --> 00:12:14,166
 I then have to decrement
 that reference count.
 
-00:12:15.296 --> 00:12:17.806 A:middle
+
+242
+00:12:15,296 --> 00:12:17,806
 In Objective-C, one
 would oftentimes have
 
-00:12:17.956 --> 00:12:20.536 A:middle
+
+243
+00:12:17,956 --> 00:12:20,536
 to make simple data
 structures, like Point,
 
-00:12:20.536 --> 00:12:22.716 A:middle
+
+244
+00:12:20,536 --> 00:12:22,716
 a class so you could
 use data structures
 
-00:12:22.716 --> 00:12:24.226 A:middle
+
+245
+00:12:22,716 --> 00:12:24,226
 from Foundation like NSRA.
 
-00:12:24.986 --> 00:12:27.606 A:middle
+
+246
+00:12:24,986 --> 00:12:27,606
 Then whenever you manipulated
 the simple data structure,
 
-00:12:27.786 --> 00:12:29.716 A:middle
+
+247
+00:12:27,786 --> 00:12:29,716
 you would have the
 overhead of having a class.
 
-00:12:30.676 --> 00:12:32.936 A:middle
+
+248
+00:12:30,676 --> 00:12:32,936
 In Swift, we can use structs --
 
-00:12:33.176 --> 00:12:36.056 A:middle
+
+249
+00:12:33,176 --> 00:12:36,056
 in Swift, we can work around
 this issue by using a struct
 
-00:12:36.056 --> 00:12:37.396 A:middle
+
+250
+00:12:36,056 --> 00:12:37,396
 in this case instead of a class.
 
-00:12:38.516 --> 00:12:41.056 A:middle
+
+251
+00:12:38,516 --> 00:12:41,056
 So let's make Point a struct.
 
-00:12:41.566 --> 00:12:44.926 A:middle
+
+252
+00:12:41,566 --> 00:12:44,926
 Immediately, we can store each
 Point in the array directly,
 
-00:12:44.926 --> 00:12:47.206 A:middle
+
+253
+00:12:44,926 --> 00:12:47,206
 since Swift arrays can
 store structs directly.
 
-00:12:47.206 --> 00:12:51.156 A:middle
+
+254
+00:12:47,206 --> 00:12:51,156
 But more importantly, since
 a struct does not inherently
 
-00:12:51.156 --> 00:12:54.176 A:middle
+
+255
+00:12:51,156 --> 00:12:54,176
 require reference counting
 and both properties
 
-00:12:54.496 --> 00:12:57.136 A:middle
+
+256
+00:12:54,496 --> 00:12:57,136
 of the struct also don't
 require reference counting,
 
-00:12:57.366 --> 00:13:00.636 A:middle
+
+257
+00:12:57,366 --> 00:13:00,636
 we can immediately eliminate all
 the reference counting overhead
 
 
-
-00:12:57.366 --> 00:13:00.636 A:middle
-we can immediately eliminate all
-the reference counting overhead
-
-00:13:00.636 --> 00:13:02.846 A:middle
+258
+00:13:00,636 --> 00:13:02,846
 from the loop.
 
-00:13:03.106 --> 00:13:06.416 A:middle
+
+259
+00:13:03,106 --> 00:13:06,416
 Let's now consider a slightly
 more elaborate example of this
 
-00:13:06.416 --> 00:13:12.806 A:middle
+
+260
+00:13:06,416 --> 00:13:12,806
 by considering a struct with
 a reference inside of it.
 
-00:13:13.086 --> 00:13:15.956 A:middle
+
+261
+00:13:13,086 --> 00:13:15,956
 While a struct itself does not
 inherently require reference
 
-00:13:15.956 --> 00:13:17.556 A:middle
+
+262
+00:13:15,956 --> 00:13:17,556
 counting modifications
 on assignment,
 
-00:13:17.556 --> 00:13:21.026 A:middle
+
+263
+00:13:17,556 --> 00:13:21,026
 like I mentioned before, it
 does require such modifications
 
-00:13:21.076 --> 00:13:22.836 A:middle
+
+264
+00:13:21,076 --> 00:13:22,836
 if the struct contains
 a reference.
 
-00:13:23.836 --> 00:13:26.866 A:middle
+
+265
+00:13:23,836 --> 00:13:26,866
 This is because assigning
 a struct is equivalent
 
-00:13:27.016 --> 00:13:28.026 A:middle
+
+266
+00:13:27,016 --> 00:13:28,026
 to assigning each one
 
-00:13:28.026 --> 00:13:30.166 A:middle
+
+267
+00:13:28,026 --> 00:13:30,166
 of its properties
 independently of each other.
 
-00:13:31.266 --> 00:13:33.606 A:middle
+
+268
+00:13:31,266 --> 00:13:33,606
 So consider that the struct
 Point that we saw previously,
 
-00:13:35.096 --> 00:13:36.426 A:middle
+
+269
+00:13:35,096 --> 00:13:36,426
 it is copied efficiently,
 
-00:13:36.426 --> 00:13:38.736 A:middle
+
+270
+00:13:36,426 --> 00:13:38,736
 there are no reference counting
 needed when we assign it.
 
-00:13:39.166 --> 00:13:42.766 A:middle
+
+271
+00:13:39,166 --> 00:13:42,766
 But let's say that one
 day I'm working on my app
 
-00:13:42.766 --> 00:13:44.776 A:middle
+
+272
+00:13:42,766 --> 00:13:44,776
 and I decide that, well, I
 would like to make each one
 
-00:13:44.776 --> 00:13:47.476 A:middle
+
+273
+00:13:44,776 --> 00:13:47,476
 of my Points to be
 drawn a different color.
 
-00:13:47.576 --> 00:13:51.586 A:middle
+
+274
+00:13:47,576 --> 00:13:51,586
 So I add a UIColor
 property to my struct.
 
-00:13:52.086 --> 00:13:53.486 A:middle
+
+275
+00:13:52,086 --> 00:13:53,486
 Of course, UIColor
 being a class,
 
-00:13:53.486 --> 00:13:56.366 A:middle
+
+276
+00:13:53,486 --> 00:13:56,366
 this is actually adding
 a reference to my struct.
 
-00:13:56.986 --> 00:14:00.906 A:middle
+
+277
+00:13:56,986 --> 00:14:00,906
 Now, this means that every
 time I assign this struct,
 
 
-
-00:13:56.986 --> 00:14:00.906 A:middle
-Now, this means that every
-time I assign this struct,
-
-00:14:01.326 --> 00:14:03.926 A:middle
+278
+00:14:01,326 --> 00:14:03,926
 it's equivalent to assigning
 this UIColor independently
 
-00:14:03.926 --> 00:14:05.896 A:middle
+
+279
+00:14:03,926 --> 00:14:05,896
 of the struct, which
 means that I have
 
-00:14:05.896 --> 00:14:08.896 A:middle
+
+280
+00:14:05,896 --> 00:14:08,896
 to perform a reference
 counting modification.
 
-00:14:10.326 --> 00:14:14.626 A:middle
+
+281
+00:14:10,326 --> 00:14:14,626
 Now, while having a struct with
 one reference count in it is not
 
-00:14:14.626 --> 00:14:17.756 A:middle
+
+282
+00:14:14,626 --> 00:14:17,756
 that expensive, I mean, we
 work with classes all the time,
 
-00:14:17.756 --> 00:14:19.356 A:middle
+
+283
+00:14:17,756 --> 00:14:19,356
 and classes have
 the same property.
 
-00:14:19.896 --> 00:14:23.746 A:middle
+
+284
+00:14:19,896 --> 00:14:23,746
 I would now like to present
 to you a more extreme example,
 
-00:14:24.296 --> 00:14:27.496 A:middle
+
+285
+00:14:24,296 --> 00:14:27,496
 namely, a struct with many
 reference counted fields.
 
-00:14:29.066 --> 00:14:32.436 A:middle
+
+286
+00:14:29,066 --> 00:14:32,436
 Here I have a struct user, and
 I am using it to model users
 
-00:14:32.436 --> 00:14:33.356 A:middle
+
+287
+00:14:32,436 --> 00:14:33,356
 in an app I am writing.
 
-00:14:33.706 --> 00:14:37.056 A:middle
+
+288
+00:14:33,706 --> 00:14:37,056
 And each user instance has some
 data associated with it, namely,
 
-00:14:37.136 --> 00:14:40.916 A:middle
+
+289
+00:14:37,136 --> 00:14:40,916
 three strings -- one for
 the first name of the user,
 
-00:14:41.366 --> 00:14:43.536 A:middle
+
+290
+00:14:41,366 --> 00:14:43,536
 one for the last
 name of the user,
 
-00:14:43.576 --> 00:14:45.766 A:middle
+
+291
+00:14:43,576 --> 00:14:45,766
 and one for the user's address.
 
-00:14:46.876 --> 00:14:49.706 A:middle
+
+292
+00:14:46,876 --> 00:14:49,706
 I also have a field for
 an array and a dictionary
 
-00:14:49.706 --> 00:14:52.766 A:middle
+
+293
+00:14:49,706 --> 00:14:52,766
 that stores app-specific
 data about the user.
 
-00:14:54.376 --> 00:14:57.706 A:middle
+
+294
+00:14:54,376 --> 00:14:57,706
 Even though all of these
 properties are value types,
 
-00:14:58.606 --> 00:15:02.006 A:middle
+
+295
+00:14:58,606 --> 00:15:02,006
 internally, they contain
 a class which is used
 
 
-
-00:14:58.606 --> 00:15:02.006 A:middle
-internally, they contain
-a class which is used
-
-00:15:02.416 --> 00:15:05.756 A:middle
+296
+00:15:02,416 --> 00:15:05,756
 to manage the lifetime
 of their internal data.
 
-00:15:06.966 --> 00:15:10.086 A:middle
+
+297
+00:15:06,966 --> 00:15:10,086
 So this means that every time
 I assign one of these structs,
 
-00:15:11.396 --> 00:15:14.366 A:middle
+
+298
+00:15:11,396 --> 00:15:14,366
 every time I pass it off to
 a function, I actually have
 
-00:15:14.366 --> 00:15:17.796 A:middle
+
+299
+00:15:14,366 --> 00:15:17,796
 to perform five reference
 counting modifications.
 
-00:15:19.226 --> 00:15:22.056 A:middle
+
+300
+00:15:19,226 --> 00:15:22,056
 Well, we can work around this
 by using a wrapper class.
 
-00:15:23.416 --> 00:15:26.206 A:middle
+
+301
+00:15:23,416 --> 00:15:26,206
 Here again, I have my user
 struct, but this time,
 
-00:15:26.206 --> 00:15:28.606 A:middle
+
+302
+00:15:26,206 --> 00:15:28,606
 instead of standing on
 its own, it's contained
 
-00:15:28.606 --> 00:15:29.476 A:middle
+
+303
+00:15:28,606 --> 00:15:29,476
 within a wrapper class.
 
-00:15:30.126 --> 00:15:32.816 A:middle
+
+304
+00:15:30,126 --> 00:15:32,816
 I can still manipulate the
 struct using the class reference
 
-00:15:32.816 --> 00:15:36.296 A:middle
+
+305
+00:15:32,816 --> 00:15:36,296
 and, more importantly, if I pass
 off this reference to a function
 
-00:15:36.506 --> 00:15:38.296 A:middle
+
+306
+00:15:36,506 --> 00:15:38,296
 or I declare -- or I sign --
 
-00:15:38.296 --> 00:15:39.766 A:middle
+
+307
+00:15:38,296 --> 00:15:39,766
 initialize a variable
 with the reference,
 
-00:15:39.826 --> 00:15:43.156 A:middle
+
+308
+00:15:39,826 --> 00:15:43,156
 I am only performing one
 reference count increment.
 
-00:15:44.466 --> 00:15:46.836 A:middle
+
+309
+00:15:44,466 --> 00:15:46,836
 Now, it's important to note
 
-00:15:47.476 --> 00:15:49.686 A:middle
+
+310
+00:15:47,476 --> 00:15:49,686
 that there's been a
 change in semantics here.
 
-00:15:50.366 --> 00:15:54.386 A:middle
+
+311
+00:15:50,366 --> 00:15:54,386
 We've changed from using
 something with value semantics
 
-00:15:54.866 --> 00:15:56.996 A:middle
+
+312
+00:15:54,866 --> 00:15:56,996
 to something with
 reference semantics.
 
-00:15:58.356 --> 00:16:02.346 A:middle
+
+313
+00:15:58,356 --> 00:16:02,346
 This may cause unexpected
 data sharing that may lead
 
 
-
-00:15:58.356 --> 00:16:02.346 A:middle
-This may cause unexpected
-data sharing that may lead
-
-00:16:02.346 --> 00:16:04.676 A:middle
+314
+00:16:02,346 --> 00:16:04,676
 to weird results or things
 that you may not expect.
 
-00:16:06.086 --> 00:16:08.506 A:middle
+
+315
+00:16:06,086 --> 00:16:08,506
 But turns out there is a way
 
-00:16:08.506 --> 00:16:12.566 A:middle
+
+316
+00:16:08,506 --> 00:16:12,566
 that you can have value
 semantics and benefit
 
-00:16:12.566 --> 00:16:13.586 A:middle
+
+317
+00:16:12,566 --> 00:16:13,586
 from this optimization.
 
-00:16:14.616 --> 00:16:15.976 A:middle
+
+318
+00:16:14,616 --> 00:16:15,976
 If you'd like to
 learn more about this,
 
-00:16:16.126 --> 00:16:20.256 A:middle
+
+319
+00:16:16,126 --> 00:16:20,256
 please go to the Building Better
 Apps with Value Types talk
 
-00:16:20.256 --> 00:16:22.366 A:middle
+
+320
+00:16:20,256 --> 00:16:22,366
 in Swift tomorrow in Mission
 
-00:16:22.366 --> 00:16:24.686 A:middle
+
+321
+00:16:22,366 --> 00:16:24,686
 at 2:30 p.m. It's going
 to be a great talk.
 
-00:16:24.686 --> 00:16:29.686 A:middle
+
+322
+00:16:24,686 --> 00:16:29,686
 I really suggest that you go.
 
-00:16:29.686 --> 00:16:32.106 A:middle
+
+323
+00:16:29,686 --> 00:16:32,106
 Now that we've talked
 about reference counting,
 
-00:16:32.876 --> 00:16:36.426 A:middle
+
+324
+00:16:32,876 --> 00:16:36,426
 I'd like to continue by talking
 a little bit about generics.
 
-00:16:39.736 --> 00:16:41.796 A:middle
+
+325
+00:16:39,736 --> 00:16:41,796
 Here I have a generic
 function min.
 
-00:16:41.956 --> 00:16:44.276 A:middle
+
+326
+00:16:41,956 --> 00:16:44,276
 It's generic over
 type T that conforms
 
-00:16:44.276 --> 00:16:47.276 A:middle
+
+327
+00:16:44,276 --> 00:16:47,276
 to the comparable protocol from
 the Swift Standard Library.
 
-00:16:47.766 --> 00:16:49.476 A:middle
+
+328
+00:16:47,766 --> 00:16:49,476
 From a source code perspective,
 
-00:16:49.756 --> 00:16:51.116 A:middle
+
+329
+00:16:49,756 --> 00:16:51,116
 this doesn't really
 look that big.
 
-00:16:51.116 --> 00:16:52.396 A:middle
+
+330
+00:16:51,116 --> 00:16:52,396
 I mean, it's just three lines.
 
-00:16:53.136 --> 00:16:55.426 A:middle
+
+331
+00:16:53,136 --> 00:16:55,426
 But in reality, a
 lot more is going
 
-00:16:55.426 --> 00:16:57.366 A:middle
+
+332
+00:16:55,426 --> 00:16:57,366
 on behind the scenes
 than one might think.
 
-00:16:57.916 --> 00:17:00.896 A:middle
+
+333
+00:16:57,916 --> 00:17:00,896
 For instance, the code
 that's actually emitted --
 
 
-
-00:16:57.916 --> 00:17:00.896 A:middle
-For instance, the code
-that's actually emitted --
-
-00:17:00.896 --> 00:17:02.686 A:middle
+334
+00:17:00,896 --> 00:17:02,686
 here, again I am
 using a pseudo-Swift
 
-00:17:02.686 --> 00:17:04.195 A:middle
+
+335
+00:17:02,686 --> 00:17:04,195
 to represent the code
 the compiler emits --
 
-00:17:04.195 --> 00:17:07.175 A:middle
+
+336
+00:17:04,195 --> 00:17:07,175
 the code the compiler emits
 is not these three lines.
 
-00:17:07.266 --> 00:17:09.965 A:middle
+
+337
+00:17:07,266 --> 00:17:09,965
 Instead, it's this.
 
-00:17:10.695 --> 00:17:13.656 A:middle
+
+338
+00:17:10,695 --> 00:17:13,656
 First notice that the
 compiler is using indirection
 
-00:17:13.656 --> 00:17:15.056 A:middle
+
+339
+00:17:13,656 --> 00:17:15,056
 to compare both x and y.
 
-00:17:15.506 --> 00:17:18.136 A:middle
+
+340
+00:17:15,506 --> 00:17:18,136
 This is because we could
 be passing in two integers
 
-00:17:18.136 --> 00:17:22.116 A:middle
+
+341
+00:17:18,136 --> 00:17:22,116
 to the min function, or we
 could be passing in two floats
 
-00:17:22.116 --> 00:17:24.685 A:middle
+
+342
+00:17:22,116 --> 00:17:24,685
 or two strings, or we could be
 passing in any comparable type.
 
-00:17:24.685 --> 00:17:28.016 A:middle
+
+343
+00:17:24,685 --> 00:17:28,016
 So the compiler must be
 correct in all cases and be able
 
-00:17:28.016 --> 00:17:29.796 A:middle
+
+344
+00:17:28,016 --> 00:17:29,796
 to handle any of them.
 
-00:17:30.116 --> 00:17:32.796 A:middle
+
+345
+00:17:30,116 --> 00:17:32,796
 Additionally, because
 the compiler can't know
 
-00:17:32.976 --> 00:17:35.696 A:middle
+
+346
+00:17:32,976 --> 00:17:35,696
 if T requires reference
 counting modifications or not,
 
-00:17:35.926 --> 00:17:37.786 A:middle
+
+347
+00:17:35,926 --> 00:17:37,786
 it must insert additional
 indirection
 
-00:17:38.076 --> 00:17:41.586 A:middle
+
+348
+00:17:38,076 --> 00:17:41,586
 so the min T function
 can handle both types T
 
-00:17:41.586 --> 00:17:45.936 A:middle
+
+349
+00:17:41,586 --> 00:17:45,936
 that require reference counting
 and those types T that do not.
 
-00:17:46.116 --> 00:17:47.876 A:middle
+
+350
+00:17:46,116 --> 00:17:47,876
 In the case of an
 integer, for instance,
 
-00:17:48.166 --> 00:17:51.116 A:middle
+
+351
+00:17:48,166 --> 00:17:51,116
 these are just no-up calls
 into the Swift runtime.
 
-00:17:52.716 --> 00:17:55.896 A:middle
+
+352
+00:17:52,716 --> 00:17:55,896
 In both of these cases, the
 compiler is being conservative
 
-00:17:56.126 --> 00:17:59.986 A:middle
+
+353
+00:17:56,126 --> 00:17:59,986
 since it must be able to
 handle any type T in this case.
 
 
-
-00:18:01.536 --> 00:18:03.796 A:middle
+354
+00:18:01,536 --> 00:18:03,796
 Luckily, there is a
 compiler optimization
 
-00:18:03.796 --> 00:18:06.036 A:middle
+
+355
+00:18:03,796 --> 00:18:06,036
 that can help us here, that
 can remove this overhead.
 
-00:18:06.736 --> 00:18:09.796 A:middle
+
+356
+00:18:06,736 --> 00:18:09,796
 This compiler optimization is
 called generic specialization.
 
-00:18:10.906 --> 00:18:13.816 A:middle
+
+357
+00:18:10,906 --> 00:18:13,816
 Here I have a function
 foo, it passes two integers
 
-00:18:13.816 --> 00:18:15.216 A:middle
+
+358
+00:18:13,816 --> 00:18:15,216
 to the generic min-T function.
 
-00:18:15.986 --> 00:18:18.746 A:middle
+
+359
+00:18:15,986 --> 00:18:18,746
 When the compiler performs
 generic specialization,
 
-00:18:19.056 --> 00:18:21.696 A:middle
+
+360
+00:18:19,056 --> 00:18:21,696
 first it looks at the call
 to min and foo and sees, oh,
 
-00:18:22.326 --> 00:18:23.726 A:middle
+
+361
+00:18:22,326 --> 00:18:23,726
 there are two integers
 being passed
 
-00:18:23.926 --> 00:18:25.396 A:middle
+
+362
+00:18:23,926 --> 00:18:25,396
 to the generic min-T
 function here.
 
-00:18:26.276 --> 00:18:30.666 A:middle
+
+363
+00:18:26,276 --> 00:18:30,666
 Then since the compiler
 can see the definition
 
-00:18:30.666 --> 00:18:34.386 A:middle
+
+364
+00:18:30,666 --> 00:18:34,386
 of the generic min-T
 function, it can clone min-T
 
-00:18:34.386 --> 00:18:36.286 A:middle
+
+365
+00:18:34,386 --> 00:18:36,286
 and specialize this
 clone function
 
-00:18:36.286 --> 00:18:41.416 A:middle
+
+366
+00:18:36,286 --> 00:18:41,416
 by replacing the generic type T
 with the specialized type Int.
 
-00:18:42.596 --> 00:18:45.156 A:middle
+
+367
+00:18:42,596 --> 00:18:45,156
 Then the specialized
 function is optimized for Int,
 
-00:18:45.676 --> 00:18:49.136 A:middle
+
+368
+00:18:45,676 --> 00:18:49,136
 and all the overhead associated
 with this function is removed,
 
-00:18:49.136 --> 00:18:50.276 A:middle
+
+369
+00:18:49,136 --> 00:18:50,276
 so all the reference count --
 
-00:18:50.276 --> 00:18:52.546 A:middle
+
+370
+00:18:50,276 --> 00:18:52,546
 the unnecessary reference
 counting calls are removed,
 
-00:18:52.546 --> 00:18:54.866 A:middle
+
+371
+00:18:52,546 --> 00:18:54,866
 and we can compare the
 two integers directly.
 
-00:18:56.356 --> 00:18:58.556 A:middle
+
+372
+00:18:56,356 --> 00:18:58,556
 Finally, the compiler
 replaces the call
 
-00:18:58.556 --> 00:19:01.126 A:middle
+
+373
+00:18:58,556 --> 00:19:01,126
 to the generic min-T
 function with a call
 
 
-
-00:18:58.556 --> 00:19:01.126 A:middle
-to the generic min-T
-function with a call
-
-00:19:01.126 --> 00:19:04.066 A:middle
+374
+00:19:01,126 --> 00:19:04,066
 to the specialized
 min Int function,
 
-00:19:04.306 --> 00:19:06.046 A:middle
+
+375
+00:19:04,306 --> 00:19:06,046
 enabling further optimizations.
 
-00:19:07.756 --> 00:19:11.756 A:middle
+
+376
+00:19:07,756 --> 00:19:11,756
 While generic specialization is
 a very powerful optimization,
 
-00:19:12.466 --> 00:19:15.986 A:middle
+
+377
+00:19:12,466 --> 00:19:15,986
 it does have one
 limitation; namely, that --
 
-00:19:15.986 --> 00:19:18.386 A:middle
+
+378
+00:19:15,986 --> 00:19:18,386
 namely, the visibility of
 the generic definition.
 
-00:19:18.596 --> 00:19:20.616 A:middle
+
+379
+00:19:18,596 --> 00:19:20,616
 For instance, this case,
 the generic definition
 
-00:19:20.616 --> 00:19:21.626 A:middle
+
+380
+00:19:20,616 --> 00:19:21,626
 of the min-T function.
 
-00:19:22.956 --> 00:19:24.426 A:middle
+
+381
+00:19:22,956 --> 00:19:24,426
 Here we have a function compute
 
-00:19:24.956 --> 00:19:27.176 A:middle
+
+382
+00:19:24,956 --> 00:19:27,176
 which calls a generic min-T
 function with two integers.
 
-00:19:27.906 --> 00:19:31.776 A:middle
+
+383
+00:19:27,906 --> 00:19:31,776
 In this case, can we perform
 generic specialization?
 
-00:19:32.566 --> 00:19:34.476 A:middle
+
+384
+00:19:32,566 --> 00:19:34,476
 Well, even though
 the compiler can see
 
-00:19:34.476 --> 00:19:36.096 A:middle
+
+385
+00:19:34,476 --> 00:19:36,096
 that two integers
 are being passed
 
-00:19:36.096 --> 00:19:37.516 A:middle
+
+386
+00:19:36,096 --> 00:19:37,516
 to the generic min-T function,
 
-00:19:38.336 --> 00:19:40.426 A:middle
+
+387
+00:19:38,336 --> 00:19:40,426
 because we are compiling
 file 1.Swift
 
-00:19:41.046 --> 00:19:44.756 A:middle
+
+388
+00:19:41,046 --> 00:19:44,756
 and file 2.Swift separately,
 the definition of functions
 
-00:19:44.756 --> 00:19:47.506 A:middle
+
+389
+00:19:44,756 --> 00:19:47,506
 from file 2 are not
 visible to the compiler
 
-00:19:47.676 --> 00:19:49.946 A:middle
+
+390
+00:19:47,676 --> 00:19:49,946
 when the compiler
 is compiling file 1.
 
-00:19:50.116 --> 00:19:54.186 A:middle
+
+391
+00:19:50,116 --> 00:19:54,186
 So in this case, the compiler
 cannot see the definition
 
-00:19:54.366 --> 00:19:57.536 A:middle
+
+392
+00:19:54,366 --> 00:19:57,536
 of the generic min-T function
 when it's compiling file 1,
 
-00:19:57.536 --> 00:20:01.206 A:middle
+
+393
+00:19:57,536 --> 00:20:01,206
 and so we must call the
 generic min-T function.
 
 
-
-00:19:57.536 --> 00:20:01.206 A:middle
-and so we must call the
-generic min-T function.
-
-00:20:02.576 --> 00:20:06.466 A:middle
+394
+00:20:02,576 --> 00:20:06,466
 But what if we have Whole
 Module Optimization enabled?
 
-00:20:07.856 --> 00:20:10.876 A:middle
+
+395
+00:20:07,856 --> 00:20:10,876
 Well, if we have Whole
 Module Optimization enabled,
 
-00:20:11.216 --> 00:20:15.536 A:middle
+
+396
+00:20:11,216 --> 00:20:15,536
 both file 1.Swift and file
 2.Swift are compiled together.
 
-00:20:16.046 --> 00:20:17.976 A:middle
+
+397
+00:20:16,046 --> 00:20:17,976
 This means that definitions
 from file 1
 
-00:20:17.976 --> 00:20:19.976 A:middle
+
+398
+00:20:17,976 --> 00:20:19,976
 and file 2 are both visible
 
-00:20:19.976 --> 00:20:22.656 A:middle
+
+399
+00:20:19,976 --> 00:20:22,656
 when you are compiling
 file 1 or file 2 together.
 
-00:20:22.656 --> 00:20:26.656 A:middle
+
+400
+00:20:22,656 --> 00:20:26,656
 So basically, this means that
 the generic min-T function,
 
-00:20:26.656 --> 00:20:28.046 A:middle
+
+401
+00:20:26,656 --> 00:20:28,046
 even though it's in file 2,
 
-00:20:29.046 --> 00:20:32.606 A:middle
+
+402
+00:20:29,046 --> 00:20:32,606
 can be seen when we
 are compiling file 1.
 
-00:20:33.726 --> 00:20:36.706 A:middle
+
+403
+00:20:33,726 --> 00:20:36,706
 Thus, we are able to specialize
 the generic min-T function
 
-00:20:36.736 --> 00:20:41.246 A:middle
+
+404
+00:20:36,736 --> 00:20:41,246
 into min int and replace the
 call to min-T with min Int.
 
-00:20:42.396 --> 00:20:44.716 A:middle
+
+405
+00:20:42,396 --> 00:20:44,716
 This is but one case
 where the power
 
-00:20:44.716 --> 00:20:46.466 A:middle
+
+406
+00:20:44,716 --> 00:20:46,466
 of whole module optimization
 is apparent.
 
-00:20:47.166 --> 00:20:50.326 A:middle
+
+407
+00:20:47,166 --> 00:20:50,326
 The only reason the compiler can
 perform generic specification
 
-00:20:50.326 --> 00:20:54.186 A:middle
+
+408
+00:20:50,326 --> 00:20:54,186
 in this case is because of the
 extra information provided to it
 
-00:20:54.266 --> 00:20:56.866 A:middle
+
+409
+00:20:54,266 --> 00:20:56,866
 by having Whole Module
 Optimization being enabled.
 
 
-
-00:21:00.876 --> 00:21:05.466 A:middle
+410
+00:21:00,876 --> 00:21:05,466
 Now that I have spoken about
 generics, I'd like to conclude
 
-00:21:05.896 --> 00:21:08.656 A:middle
+
+411
+00:21:05,896 --> 00:21:08,656
 by talking about
 dynamic dispatch.
 
-00:21:11.236 --> 00:21:14.166 A:middle
+
+412
+00:21:11,236 --> 00:21:14,166
 Here I have a class
 hierarchy for the class Pet.
 
-00:21:15.196 --> 00:21:19.716 A:middle
+
+413
+00:21:15,196 --> 00:21:19,716
 Notice that Pet has a method
 noise, a property name,
 
-00:21:20.126 --> 00:21:22.656 A:middle
+
+414
+00:21:20,126 --> 00:21:22,656
 and a method noiseimpl,
 which is used
 
-00:21:22.656 --> 00:21:23.816 A:middle
+
+415
+00:21:22,656 --> 00:21:23,816
 to implement the method nose.
 
-00:21:24.686 --> 00:21:27.026 A:middle
+
+416
+00:21:24,686 --> 00:21:27,026
 Also notice it has a subclass
 
-00:21:27.026 --> 00:21:29.596 A:middle
+
+417
+00:21:27,026 --> 00:21:29,596
 of Pet called Dog
 that overrides noise.
 
-00:21:30.186 --> 00:21:32.526 A:middle
+
+418
+00:21:30,186 --> 00:21:32,526
 Now consider the
 function make noise.
 
-00:21:33.136 --> 00:21:34.526 A:middle
+
+419
+00:21:33,136 --> 00:21:34,526
 It's a very simple function,
 
-00:21:34.656 --> 00:21:38.476 A:middle
+
+420
+00:21:34,656 --> 00:21:38,476
 it takes an argument p that's
 an instance of class Pet.
 
-00:21:38.886 --> 00:21:42.016 A:middle
+
+421
+00:21:38,886 --> 00:21:42,016
 Even though this block of code
 only involves a small amount
 
-00:21:42.016 --> 00:21:45.806 A:middle
+
+422
+00:21:42,016 --> 00:21:45,806
 of source again, a lot more is
 occurring here behind the scenes
 
-00:21:45.806 --> 00:21:46.566 A:middle
+
+423
+00:21:45,806 --> 00:21:46,566
 than one might think.
 
-00:21:46.866 --> 00:21:50.056 A:middle
+
+424
+00:21:46,866 --> 00:21:50,056
 For instance, the following
 pseudo-Swift code is not what is
 
-00:21:50.056 --> 00:21:51.476 A:middle
+
+425
+00:21:50,056 --> 00:21:51,476
 actually emitted
 by the compiler.
 
-00:21:51.846 --> 00:21:53.796 A:middle
+
+426
+00:21:51,846 --> 00:21:53,796
 Name and noise are
 not called directly.
 
-00:21:53.876 --> 00:21:56.466 A:middle
+
+427
+00:21:53,876 --> 00:21:56,466
 Instead, the compiler
 emits this code.
 
-00:21:57.176 --> 00:21:58.956 A:middle
+
+428
+00:21:57,176 --> 00:21:58,956
 Notice the indirection
 here that's used
 
-00:21:58.956 --> 00:22:02.266 A:middle
+
+429
+00:21:58,956 --> 00:22:02,266
 to call names getter
 or the method noise.
 
 
-
-00:21:58.956 --> 00:22:02.266 A:middle
-to call names getter
-or the method noise.
-
-00:22:02.436 --> 00:22:04.516 A:middle
+430
+00:22:02,436 --> 00:22:04,516
 The compiler must
 insert this indirection
 
-00:22:04.826 --> 00:22:08.076 A:middle
+
+431
+00:22:04,826 --> 00:22:08,076
 because it cannot know given the
 current class hierarchy whether
 
-00:22:08.076 --> 00:22:11.846 A:middle
+
+432
+00:22:08,076 --> 00:22:11,846
 or not the property name or
 the method noise are meant
 
-00:22:11.846 --> 00:22:13.476 A:middle
+
+433
+00:22:11,846 --> 00:22:13,476
 to be overridden by subclasses.
 
-00:22:14.606 --> 00:22:17.316 A:middle
+
+434
+00:22:14,606 --> 00:22:17,316
 The compiler in this
 case can only emit --
 
-00:22:17.876 --> 00:22:21.356 A:middle
+
+435
+00:22:17,876 --> 00:22:21,356
 can only emit direct
 calls if it can prove
 
-00:22:21.856 --> 00:22:24.536 A:middle
+
+436
+00:22:21,856 --> 00:22:24,536
 that there are no
 possible overrides
 
-00:22:24.756 --> 00:22:27.546 A:middle
+
+437
+00:22:24,756 --> 00:22:27,546
 by any subclasses
 of name or noise.
 
-00:22:28.766 --> 00:22:32.056 A:middle
+
+438
+00:22:28,766 --> 00:22:32,056
 In the case of noise, this
 is exactly what we want.
 
-00:22:32.456 --> 00:22:34.446 A:middle
+
+439
+00:22:32,456 --> 00:22:34,446
 We want noise to be
 able to be overridden
 
-00:22:34.446 --> 00:22:35.746 A:middle
+
+440
+00:22:34,446 --> 00:22:35,746
 by subclasses in this API.
 
-00:22:36.396 --> 00:22:38.296 A:middle
+
+441
+00:22:36,396 --> 00:22:38,296
 We want to make it so
 that if I have an instance
 
-00:22:38.296 --> 00:22:42.636 A:middle
+
+442
+00:22:38,296 --> 00:22:42,636
 of Pet that's really a dog, the
 dog barks when I call noise.
 
-00:22:42.636 --> 00:22:45.916 A:middle
+
+443
+00:22:42,636 --> 00:22:45,916
 And if I have an instance of
 Pet that's actually a class,
 
-00:22:46.246 --> 00:22:47.986 A:middle
+
+444
+00:22:46,246 --> 00:22:47,986
 that when I call
 noise, we have a meow.
 
-00:22:48.246 --> 00:22:49.266 A:middle
+
+445
+00:22:48,246 --> 00:22:49,266
 That makes perfect sense.
 
-00:22:50.626 --> 00:22:54.626 A:middle
+
+446
+00:22:50,626 --> 00:22:54,626
 But in the case of name,
 this is actually undesirable.
 
-00:22:55.326 --> 00:22:56.586 A:middle
+
+447
+00:22:55,326 --> 00:22:56,586
 This is because in this API,
 
-00:22:57.226 --> 00:23:01.006 A:middle
+
+448
+00:22:57,226 --> 00:23:01,006
 name is not -- is
 never overridden.
 
 
-
-00:22:57.226 --> 00:23:01.006 A:middle
-name is not -- is
-never overridden.
-
-00:23:01.006 --> 00:23:02.696 A:middle
+449
+00:23:01,006 --> 00:23:02,696
 It's not necessary
 to override name.
 
-00:23:03.226 --> 00:23:04.106 A:middle
+
+450
+00:23:03,226 --> 00:23:04,106
 We can model this
 
-00:23:04.606 --> 00:23:06.766 A:middle
+
+451
+00:23:04,606 --> 00:23:06,766
 by constraining this
 API's class hierarchy.
 
-00:23:08.186 --> 00:23:10.086 A:middle
+
+452
+00:23:08,186 --> 00:23:10,086
 There are two Swift language
 features that I am going
 
-00:23:10.086 --> 00:23:11.686 A:middle
+
+453
+00:23:10,086 --> 00:23:11,686
 to show you today
 that you can use
 
-00:23:11.716 --> 00:23:13.616 A:middle
+
+454
+00:23:11,716 --> 00:23:13,616
 to constrain your
 API's class hierarchy.
 
-00:23:14.066 --> 00:23:15.706 A:middle
+
+455
+00:23:14,066 --> 00:23:15,706
 The first are constraints
 on inheritance,
 
-00:23:16.176 --> 00:23:19.536 A:middle
+
+456
+00:23:16,176 --> 00:23:19,536
 and the second are constrains
 on access via access control.
 
-00:23:19.616 --> 00:23:23.586 A:middle
+
+457
+00:23:19,616 --> 00:23:23,586
 Let's begin by talking about
 inheritance constraints,
 
-00:23:23.646 --> 00:23:25.136 A:middle
+
+458
+00:23:23,646 --> 00:23:25,136
 namely, the final keyword.
 
-00:23:25.646 --> 00:23:29.496 A:middle
+
+459
+00:23:25,646 --> 00:23:29,496
 When an API contains
 a declaration
 
-00:23:29.496 --> 00:23:32.556 A:middle
+
+460
+00:23:29,496 --> 00:23:32,556
 with the final keyword attached,
 the API is communicating
 
-00:23:32.556 --> 00:23:35.746 A:middle
+
+461
+00:23:32,556 --> 00:23:35,746
 that this declaration will never
 be overridden by a subclass.
 
-00:23:36.846 --> 00:23:38.476 A:middle
+
+462
+00:23:36,846 --> 00:23:38,476
 Consider again the
 make noise example.
 
-00:23:38.986 --> 00:23:42.006 A:middle
+
+463
+00:23:38,986 --> 00:23:42,006
 By default, the compiler
 must use indirection
 
-00:23:42.446 --> 00:23:44.196 A:middle
+
+464
+00:23:42,446 --> 00:23:44,196
 to call the getter for name.
 
-00:23:44.576 --> 00:23:49.096 A:middle
+
+465
+00:23:44,576 --> 00:23:49,096
 This is because without more
 information, it can't know
 
-00:23:49.326 --> 00:23:51.226 A:middle
+
+466
+00:23:49,326 --> 00:23:51,226
 if name is overridden
 by a subclass.
 
-00:23:51.626 --> 00:23:56.096 A:middle
+
+467
+00:23:51,626 --> 00:23:56,096
 But we know that in this API,
 name is never overridden,
 
-00:23:56.096 --> 00:24:00.236 A:middle
+
+468
+00:23:56,096 --> 00:24:00,236
 and we know that in this API,
 it's not intended for name
 
 
-
-00:23:56.096 --> 00:24:00.236 A:middle
-and we know that in this API,
-it's not intended for name
-
-00:24:00.236 --> 00:24:02.056 A:middle
+469
+00:24:00,236 --> 00:24:02,056
 to be able to be overridden.
 
-00:24:02.226 --> 00:24:04.956 A:middle
+
+470
+00:24:02,226 --> 00:24:04,956
 So we can enforce this
 and communicate this
 
-00:24:05.026 --> 00:24:07.516 A:middle
+
+471
+00:24:05,026 --> 00:24:07,516
 by attaching the
 final keyword to name.
 
-00:24:08.956 --> 00:24:12.586 A:middle
+
+472
+00:24:08,956 --> 00:24:12,586
 Then the compiler can look
 at name and realize, oh,
 
-00:24:12.586 --> 00:24:14.256 A:middle
+
+473
+00:24:12,586 --> 00:24:14,256
 this will never be
 overridden by a subclass,
 
-00:24:14.256 --> 00:24:17.696 A:middle
+
+474
+00:24:14,256 --> 00:24:17,696
 and the dynamic dispatch, the
 indirection, can be eliminated.
 
-00:24:17.696 --> 00:24:22.866 A:middle
+
+475
+00:24:17,696 --> 00:24:22,866
 Now that we've talked about
 final inheritance constraints,
 
-00:24:22.936 --> 00:24:25.086 A:middle
+
+476
+00:24:22,936 --> 00:24:25,086
 I'd like to talk a little
 bit about access control.
 
-00:24:26.296 --> 00:24:30.776 A:middle
+
+477
+00:24:26,296 --> 00:24:30,776
 Turns out in this API, pet and
 dog are both in separate files,
 
-00:24:31.086 --> 00:24:35.056 A:middle
+
+478
+00:24:31,086 --> 00:24:35,056
 pet.Swift and dog.Swift, but are
 in the same module, module A.
 
-00:24:35.526 --> 00:24:39.046 A:middle
+
+479
+00:24:35,526 --> 00:24:39,046
 Additionally, there is another
 subclass of pet called Cat
 
-00:24:39.376 --> 00:24:42.446 A:middle
+
+480
+00:24:39,376 --> 00:24:42,446
 in a different module but
 in the file cat.Swift.
 
-00:24:42.596 --> 00:24:44.036 A:middle
+
+481
+00:24:42,596 --> 00:24:44,036
 The question I'd like to ask is,
 
-00:24:44.116 --> 00:24:47.476 A:middle
+
+482
+00:24:44,116 --> 00:24:47,476
 can the compiler emit a
 direct call to noiseimpl?
 
-00:24:49.036 --> 00:24:50.466 A:middle
+
+483
+00:24:49,036 --> 00:24:50,466
 By default, it cannot.
 
-00:24:51.146 --> 00:24:53.536 A:middle
+
+484
+00:24:51,146 --> 00:24:53,536
 This is because by default,
 the compiler must assume
 
-00:24:53.536 --> 00:24:56.986 A:middle
+
+485
+00:24:53,536 --> 00:24:56,986
 that this API intended for
 noiseimpl to be overridden
 
-00:24:56.986 --> 00:24:58.896 A:middle
+
+486
+00:24:56,986 --> 00:24:58,896
 in subclasses like Cat and Dog.
 
-00:24:59.916 --> 00:25:02.516 A:middle
+
+487
+00:24:59,916 --> 00:25:02,516
 But we know that
 this is not true.
 
 
-
-00:24:59.916 --> 00:25:02.516 A:middle
-But we know that
-this is not true.
-
-00:25:02.806 --> 00:25:06.936 A:middle
+488
+00:25:02,806 --> 00:25:06,936
 We know that noiseimpl is a
 private implementation detail
 
-00:25:07.376 --> 00:25:11.026 A:middle
+
+489
+00:25:07,376 --> 00:25:11,026
 of pet.Swift and that it
 shouldn't be visible outside
 
-00:25:11.026 --> 00:25:11.746 A:middle
+
+490
+00:25:11,026 --> 00:25:11,746
 of pet.swift.
 
-00:25:12.616 --> 00:25:16.036 A:middle
+
+491
+00:25:12,616 --> 00:25:16,036
 We can enforce this by
 attaching the private keyword
 
-00:25:16.266 --> 00:25:16.956 A:middle
+
+492
+00:25:16,266 --> 00:25:16,956
 to noiseimpl.
 
-00:25:18.136 --> 00:25:20.186 A:middle
+
+493
+00:25:18,136 --> 00:25:20,186
 Once we attach the private
 keyword to noiseimpl,
 
-00:25:20.506 --> 00:25:23.566 A:middle
+
+494
+00:25:20,506 --> 00:25:23,566
 noiseimpl is no longer
 visible outside of pet.Swift.
 
-00:25:24.436 --> 00:25:26.756 A:middle
+
+495
+00:25:24,436 --> 00:25:26,756
 This means that the
 compiler can immediately know
 
-00:25:27.016 --> 00:25:30.486 A:middle
+
+496
+00:25:27,016 --> 00:25:30,486
 that there cannot be any
 overrides of noiseimpl in cat
 
-00:25:30.486 --> 00:25:33.016 A:middle
+
+497
+00:25:30,486 --> 00:25:33,016
 or dog because, well,
 they are not in pet.Swift,
 
-00:25:33.016 --> 00:25:36.066 A:middle
+
+498
+00:25:33,016 --> 00:25:36,066
 and since there is only
 one class in pet.Swift
 
-00:25:36.566 --> 00:25:39.256 A:middle
+
+499
+00:25:36,566 --> 00:25:39,256
 that implements noiseimpl,
 namely Pet,
 
-00:25:39.416 --> 00:25:43.186 A:middle
+
+500
+00:25:39,416 --> 00:25:43,186
 the compiler can emit a direct
 call to noiseimpl in this case.
 
-00:25:44.546 --> 00:25:47.376 A:middle
+
+501
+00:25:44,546 --> 00:25:47,376
 Now that we've spoken about
 private, I would like to talk
 
-00:25:47.376 --> 00:25:50.156 A:middle
+
+502
+00:25:47,376 --> 00:25:50,156
 about the interaction between
 Whole Module Optimization
 
-00:25:50.156 --> 00:25:50.976 A:middle
+
+503
+00:25:50,156 --> 00:25:50,976
 and access control.
 
-00:25:51.516 --> 00:25:54.246 A:middle
+
+504
+00:25:51,516 --> 00:25:54,246
 We have been talking a lot
 
-00:25:54.246 --> 00:25:56.966 A:middle
+
+505
+00:25:54,246 --> 00:25:56,966
 about the class Pet,
 but what about Dog?
 
-00:25:58.036 --> 00:26:00.906 A:middle
+
+506
+00:25:58,036 --> 00:26:00,906
 Remember that Dog
 is a subclass of Pet
 
 
-
-00:25:58.036 --> 00:26:00.906 A:middle
-Remember that Dog
-is a subclass of Pet
-
-00:26:00.906 --> 00:26:05.086 A:middle
+507
+00:26:00,906 --> 00:26:05,086
 that has internal access
 instead of public access.
 
-00:26:05.956 --> 00:26:08.356 A:middle
+
+508
+00:26:05,956 --> 00:26:08,356
 If we call noise on an
 instance of class Dog,
 
-00:26:08.786 --> 00:26:12.096 A:middle
+
+509
+00:26:08,786 --> 00:26:12,096
 without more information, the
 compiler must insert indirection
 
-00:26:12.626 --> 00:26:15.176 A:middle
+
+510
+00:26:12,626 --> 00:26:15,176
 because it cannot know if
 there is a subclass of Dog
 
-00:26:15.176 --> 00:26:16.826 A:middle
+
+511
+00:26:15,176 --> 00:26:16,826
 in a different file of module A.
 
-00:26:17.896 --> 00:26:20.306 A:middle
+
+512
+00:26:17,896 --> 00:26:20,306
 But when we have Whole
 Module Optimization enabled,
 
-00:26:21.006 --> 00:26:23.456 A:middle
+
+513
+00:26:21,006 --> 00:26:23,456
 the compiler has
 module-wide visibility.
 
-00:26:23.976 --> 00:26:26.436 A:middle
+
+514
+00:26:23,976 --> 00:26:26,436
 It can see all the files
 in the module together.
 
-00:26:27.016 --> 00:26:29.946 A:middle
+
+515
+00:26:27,016 --> 00:26:29,946
 And so the compiler is
 able to see, well, no,
 
-00:26:29.946 --> 00:26:31.426 A:middle
+
+516
+00:26:29,946 --> 00:26:31,426
 there are no subclasses of dog,
 
-00:26:31.846 --> 00:26:35.036 A:middle
+
+517
+00:26:31,846 --> 00:26:35,036
 so the compiler can
 call noise directly
 
-00:26:35.036 --> 00:26:36.806 A:middle
+
+518
+00:26:35,036 --> 00:26:36,806
 on instances of class Dog.
 
-00:26:37.086 --> 00:26:40.146 A:middle
+
+519
+00:26:37,086 --> 00:26:40,146
 The key thing to notice here
 is that all I needed to do was
 
-00:26:40.146 --> 00:26:42.026 A:middle
+
+520
+00:26:40,146 --> 00:26:42,026
 to turn on Whole
 Module Optimization.
 
-00:26:42.546 --> 00:26:44.926 A:middle
+
+521
+00:26:42,546 --> 00:26:44,926
 I didn't need to
 change my code at all.
 
-00:26:45.706 --> 00:26:47.846 A:middle
+
+522
+00:26:45,706 --> 00:26:47,846
 By giving the compiler
 more information,
 
-00:26:48.186 --> 00:26:50.886 A:middle
+
+523
+00:26:48,186 --> 00:26:50,886
 by allowing the compiler to
 understand my class hierarchy,
 
-00:26:51.186 --> 00:26:54.206 A:middle
+
+524
+00:26:51,186 --> 00:26:54,206
 with more information I was
 able to get this optimization
 
-00:26:54.426 --> 00:26:59.356 A:middle
+
+525
+00:26:54,426 --> 00:26:59,356
 for free without
 any work on my part.
 
-00:26:59.526 --> 00:27:01.496 A:middle
+
+526
+00:26:59,526 --> 00:27:01,496
 Now I'd like to bring
 back that graph
 
 
-
-00:26:59.526 --> 00:27:01.496 A:middle
-Now I'd like to bring
-back that graph
-
-00:27:01.496 --> 00:27:02.676 A:middle
+527
+00:27:01,496 --> 00:27:02,676
 that Nadav introduced earlier.
 
-00:27:03.506 --> 00:27:10.306 A:middle
+
+528
+00:27:03,506 --> 00:27:10,306
 Why Is Swift so much
 faster than Objective-C
 
-00:27:11.286 --> 00:27:14.206 A:middle
+
+529
+00:27:11,286 --> 00:27:14,206
 on these object-oriented
 benchmarks?
 
-00:27:16.596 --> 00:27:20.016 A:middle
+
+530
+00:27:16,596 --> 00:27:20,016
 The reason why is
 that in Objective-C,
 
-00:27:20.856 --> 00:27:23.856 A:middle
+
+531
+00:27:20,856 --> 00:27:23,856
 the compiler cannot
 eliminate the dynamic dispatch
 
-00:27:23.856 --> 00:27:24.886 A:middle
+
+532
+00:27:23,856 --> 00:27:24,886
 through Ob-C message send.
 
-00:27:25.126 --> 00:27:26.316 A:middle
+
+533
+00:27:25,126 --> 00:27:26,316
 It can't inline through it.
 
-00:27:26.316 --> 00:27:27.706 A:middle
+
+534
+00:27:26,316 --> 00:27:27,706
 It can't perform any analysis.
 
-00:27:27.826 --> 00:27:30.216 A:middle
+
+535
+00:27:27,826 --> 00:27:30,216
 The compiler must assume
 that there could be anything
 
-00:27:30.336 --> 00:27:32.046 A:middle
+
+536
+00:27:30,336 --> 00:27:32,046
 on the other side of
 an Ob-C message send.
 
-00:27:32.886 --> 00:27:35.906 A:middle
+
+537
+00:27:32,886 --> 00:27:35,906
 But in Swift, the compiler
 has more information.
 
-00:27:36.236 --> 00:27:39.466 A:middle
+
+538
+00:27:36,236 --> 00:27:39,466
 It's able to see all the certain
 things on the other side.
 
-00:27:39.466 --> 00:27:42.146 A:middle
+
+539
+00:27:39,466 --> 00:27:42,146
 It's able to eliminate this
 dynamic dispatch in many cases.
 
-00:27:43.246 --> 00:27:44.996 A:middle
+
+540
+00:27:43,246 --> 00:27:44,996
 And in those cases
 where it does,
 
-00:27:45.396 --> 00:27:47.476 A:middle
+
+541
+00:27:45,396 --> 00:27:47,476
 a lot more performance results,
 
-00:27:47.736 --> 00:27:51.426 A:middle
+
+542
+00:27:47,736 --> 00:27:51,426
 resulting in significantly
 faster code.
 
-00:27:51.646 --> 00:27:55.406 A:middle
+
+543
+00:27:51,646 --> 00:27:55,406
 So please, use the final
 keyword in access control
 
-00:27:55.406 --> 00:27:57.036 A:middle
+
+544
+00:27:55,406 --> 00:27:57,036
 to communicate your
 API's intent.
 
-00:27:57.686 --> 00:28:00.426 A:middle
+
+545
+00:27:57,686 --> 00:28:00,426
 This will help the compiler to
 understand your class hierarchy,
 
 
-
-00:27:57.686 --> 00:28:00.426 A:middle
-This will help the compiler to
-understand your class hierarchy,
-
-00:28:01.306 --> 00:28:03.806 A:middle
+546
+00:28:01,306 --> 00:28:03,806
 which will enable
 additional optimizations.
 
-00:28:04.016 --> 00:28:07.906 A:middle
+
+547
+00:28:04,016 --> 00:28:07,906
 However, keep in mind that
 existing clients may need
 
-00:28:07.906 --> 00:28:10.006 A:middle
+
+548
+00:28:07,906 --> 00:28:10,006
 to be updated in
 response to such changes.
 
-00:28:10.576 --> 00:28:12.186 A:middle
+
+549
+00:28:10,576 --> 00:28:12,186
 And try out Whole
 Module Optimization
 
-00:28:12.186 --> 00:28:12.986 A:middle
+
+550
+00:28:12,186 --> 00:28:12,986
 in your release builds.
 
-00:28:12.986 --> 00:28:16.366 A:middle
+
+551
+00:28:12,986 --> 00:28:16,366
 It will enable the compiler to
 make further optimizations --
 
-00:28:16.456 --> 00:28:18.466 A:middle
+
+552
+00:28:16,456 --> 00:28:18,466
 for instance, more
 aggressive specialization --
 
-00:28:18.736 --> 00:28:20.736 A:middle
+
+553
+00:28:18,736 --> 00:28:20,736
 and by allowing the compiler
 
-00:28:20.736 --> 00:28:22.996 A:middle
+
+554
+00:28:20,736 --> 00:28:22,996
 to better understand your
 API's class hierarchy,
 
-00:28:23.316 --> 00:28:25.686 A:middle
+
+555
+00:28:23,316 --> 00:28:25,686
 without any work on your
 part, you can benefit
 
-00:28:25.686 --> 00:28:30.326 A:middle
+
+556
+00:28:25,686 --> 00:28:30,326
 from increased elimination
 of dynamic dispatch.
 
-00:28:30.426 --> 00:28:32.716 A:middle
+
+557
+00:28:30,426 --> 00:28:32,716
 Now I'd like to turn this
 presentation over to Joe,
 
-00:28:32.716 --> 00:28:35.206 A:middle
+
+558
+00:28:32,716 --> 00:28:35,206
 who will show you how you
 can use these techniques
 
-00:28:35.276 --> 00:28:37.396 A:middle
+
+559
+00:28:35,276 --> 00:28:37,396
 and instruments to
 improve the performance
 
-00:28:37.606 --> 00:28:39.386 A:middle
+
+560
+00:28:37,606 --> 00:28:39,386
 of your application today.
 
-00:28:40.516 --> 00:28:46.366 A:middle
+
+561
+00:28:40,516 --> 00:28:46,366
 [Applause]
 
-00:28:46.866 --> 00:28:48.356 A:middle
-&gt;&gt; JOE GRZYWACZ:
+
+562
+00:28:46,866 --> 00:28:48,356
+>> JOE GRZYWACZ:
 Thank you, Michael.
 
-00:28:48.766 --> 00:28:49.796 A:middle
+
+563
+00:28:48,766 --> 00:28:49,796
 My name is Joe Grzywacz.
 
-00:28:49.796 --> 00:28:51.396 A:middle
+
+564
+00:28:49,796 --> 00:28:51,396
 I am an engineer on
 the Instruments Team,
 
-00:28:51.526 --> 00:28:52.256 A:middle
+
+565
+00:28:51,526 --> 00:28:52,256
 and today I want to take you
 
-00:28:52.256 --> 00:28:54.806 A:middle
+
+566
+00:28:52,256 --> 00:28:54,806
 through a demo application
 that's running a little slowly
 
-00:28:54.806 --> 00:29:03.686 A:middle
+
+567
+00:28:54,806 --> 00:29:03,686
 right now, so let's get started.
 
 
-
-00:28:54.806 --> 00:29:03.686 A:middle
-right now, so let's get started.
-
-00:29:03.766 --> 00:29:04.566 A:middle
+568
+00:29:03,766 --> 00:29:04,566
 All right.
 
-00:29:08.596 --> 00:29:11.576 A:middle
+
+569
+00:29:08,596 --> 00:29:11,576
 So here we have my Swift
 application that's running
 
-00:29:11.576 --> 00:29:14.966 A:middle
+
+570
+00:29:11,576 --> 00:29:14,966
 slowly, so what I want to do
 is go ahead and click and hold
 
-00:29:14.966 --> 00:29:17.126 A:middle
+
+571
+00:29:14,966 --> 00:29:17,126
 on the Run button
 and choose Profile.
 
-00:29:17.126 --> 00:29:19.436 A:middle
+
+572
+00:29:17,126 --> 00:29:19,436
 That's going to build my
 application in release mode
 
-00:29:19.496 --> 00:29:21.316 A:middle
+
+573
+00:29:19,496 --> 00:29:21,316
 and then launch instruments
 as template choosers
 
-00:29:21.316 --> 00:29:23.066 A:middle
+
+574
+00:29:21,316 --> 00:29:23,066
 so we can decide how we
 want to profile this.
 
-00:29:23.376 --> 00:29:25.726 A:middle
+
+575
+00:29:23,376 --> 00:29:25,726
 Since it's running slowly,
 a good place to start is
 
-00:29:25.726 --> 00:29:27.076 A:middle
+
+576
+00:29:25,726 --> 00:29:27,076
 with the time profiler template.
 
-00:29:28.256 --> 00:29:30.316 A:middle
+
+577
+00:29:28,256 --> 00:29:30,316
 From Instruments,
 just press Record,
 
-00:29:30.816 --> 00:29:33.736 A:middle
+
+578
+00:29:30,816 --> 00:29:33,736
 your application launches, and
 Instruments is recording data
 
-00:29:33.736 --> 00:29:35.086 A:middle
+
+579
+00:29:33,736 --> 00:29:35,086
 in the background
 about what it's doing.
 
-00:29:35.666 --> 00:29:36.546 A:middle
+
+580
+00:29:35,666 --> 00:29:36,546
 So here we can see
 we are running
 
-00:29:36.546 --> 00:29:38.596 A:middle
+
+581
+00:29:36,546 --> 00:29:38,596
 at 60 frames per second
 before I've started anything,
 
-00:29:38.926 --> 00:29:41.256 A:middle
+
+582
+00:29:38,926 --> 00:29:41,256
 which is my target performance.
 
-00:29:41.636 --> 00:29:43.456 A:middle
+
+583
+00:29:41,636 --> 00:29:43,456
 But as soon as I add these
 particles to the screen,
 
-00:29:43.546 --> 00:29:45.136 A:middle
+
+584
+00:29:43,546 --> 00:29:45,136
 they are moving around and
 avoiding each other just
 
-00:29:45.136 --> 00:29:47.246 A:middle
+
+585
+00:29:45,136 --> 00:29:47,246
 like I wanted, but we
 are running at only
 
-00:29:47.246 --> 00:29:48.606 A:middle
+
+586
+00:29:47,246 --> 00:29:48,606
 about 38 frames per second.
 
-00:29:48.646 --> 00:29:50.306 A:middle
+
+587
+00:29:48,646 --> 00:29:50,306
 We lost about a third
 of our performance.
 
-00:29:50.306 --> 00:29:52.226 A:middle
+
+588
+00:29:50,306 --> 00:29:52,226
 Now that we have
 reproduced the problem,
 
-00:29:52.666 --> 00:29:55.296 A:middle
+
+589
+00:29:52,666 --> 00:29:55,296
 we can quit our application
 and come back to Instruments.
 
-00:29:56.106 --> 00:29:57.136 A:middle
+
+590
+00:29:56,106 --> 00:29:57,136
 Let me make this a
 little bit larger
 
-00:29:57.136 --> 00:29:58.086 A:middle
+
+591
+00:29:57,136 --> 00:29:58,086
 so we can see what's going on.
 
-00:29:58.846 --> 00:30:01.606 A:middle
+
+592
+00:29:58,846 --> 00:30:01,606
 You can just drag
 this, drag that around.
 
 
-
-00:29:58.846 --> 00:30:01.606 A:middle
-You can just drag
-this, drag that around.
-
-00:30:01.816 --> 00:30:03.416 A:middle
+593
+00:30:01,816 --> 00:30:03,416
 View Snap Track to Fit is handy
 
-00:30:03.416 --> 00:30:05.146 A:middle
+
+594
+00:30:03,416 --> 00:30:05,146
 to make your data fill
 your horizontal time.
 
-00:30:05.836 --> 00:30:06.796 A:middle
+
+595
+00:30:05,836 --> 00:30:06,796
 Now what are we looking at?
 
-00:30:06.866 --> 00:30:09.356 A:middle
+
+596
+00:30:06,866 --> 00:30:09,356
 Here in the track view,
 this is our CPU usage
 
-00:30:09.356 --> 00:30:10.086 A:middle
+
+597
+00:30:09,356 --> 00:30:10,086
 of our application.
 
-00:30:10.196 --> 00:30:13.366 A:middle
+
+598
+00:30:10,196 --> 00:30:13,366
 We can see on the left before I
 did anything, CPU usage was low;
 
-00:30:13.756 --> 00:30:16.256 A:middle
+
+599
+00:30:13,756 --> 00:30:16,256
 after I added those particles,
 CPU usage became higher.
 
-00:30:16.656 --> 00:30:18.726 A:middle
+
+600
+00:30:16,656 --> 00:30:18,726
 You can see what those values
 are by moving your mouse
 
-00:30:18.726 --> 00:30:20.816 A:middle
+
+601
+00:30:18,726 --> 00:30:20,816
 and hovering it inside
 this ruler view.
 
-00:30:21.226 --> 00:30:24.276 A:middle
+
+602
+00:30:21,226 --> 00:30:24,276
 You can see prior we were around
 10% or so, not doing much.
 
-00:30:24.656 --> 00:30:26.926 A:middle
+
+603
+00:30:24,656 --> 00:30:26,926
 Later on we moved around 100%.
 
-00:30:26.926 --> 00:30:28.336 A:middle
+
+604
+00:30:26,926 --> 00:30:28,336
 So we saturated our CPU.
 
-00:30:28.646 --> 00:30:30.606 A:middle
+
+605
+00:30:28,646 --> 00:30:30,606
 In order to increase
 our performance,
 
-00:30:30.836 --> 00:30:32.516 A:middle
+
+606
+00:30:30,836 --> 00:30:32,516
 we need to decrease how
 much work we're doing.
 
-00:30:33.166 --> 00:30:34.386 A:middle
+
+607
+00:30:33,166 --> 00:30:34,386
 So what work were we doing?
 
-00:30:34.716 --> 00:30:37.236 A:middle
+
+608
+00:30:34,716 --> 00:30:37,236
 That's where this detail
 pane down below comes in.
 
-00:30:38.496 --> 00:30:39.846 A:middle
+
+609
+00:30:38,496 --> 00:30:39,846
 So here's all of our threads.
 
-00:30:40.226 --> 00:30:41.606 A:middle
+
+610
+00:30:40,226 --> 00:30:41,606
 Go ahead and open
 this up a little bit.
 
-00:30:41.606 --> 00:30:43.576 A:middle
+
+611
+00:30:41,606 --> 00:30:43,576
 You are probably familiar
 with this call stack
 
-00:30:43.576 --> 00:30:46.056 A:middle
+
+612
+00:30:43,576 --> 00:30:46,056
 from seeing it inside of
 Xcode in the debugger.
 
-00:30:46.316 --> 00:30:49.346 A:middle
+
+613
+00:30:46,316 --> 00:30:49,346
 Start, calls main, calls NS
 application main, et cetera.
 
-00:30:49.346 --> 00:30:51.046 A:middle
+
+614
+00:30:49,346 --> 00:30:51,046
 But what Instruments
 is also going
 
-00:30:51.046 --> 00:30:53.636 A:middle
+
+615
+00:30:51,046 --> 00:30:53,636
 to tell you is how much time
 you were spending inside
 
-00:30:53.636 --> 00:30:55.446 A:middle
+
+616
+00:30:53,636 --> 00:30:55,446
 of that function,
 including its children,
 
-00:30:55.846 --> 00:30:57.466 A:middle
+
+617
+00:30:55,846 --> 00:30:57,466
 right here in this first
 column Running Time.
 
-00:30:57.546 --> 00:31:01.436 A:middle
+
+618
+00:30:57,546 --> 00:31:01,436
 We can see 11,220 milliseconds,
 or 99% of our time,
 
 
-
-00:30:57.546 --> 00:31:01.436 A:middle
-We can see 11,220 milliseconds,
-or 99% of our time,
-
-00:31:01.796 --> 00:31:04.136 A:middle
+619
+00:31:01,796 --> 00:31:04,136
 was spent in NSApplication
 Main or the things it called.
 
-00:31:04.666 --> 00:31:05.776 A:middle
+
+620
+00:31:04,666 --> 00:31:05,776
 The second column, Self,
 
-00:31:05.776 --> 00:31:07.516 A:middle
+
+621
+00:31:05,776 --> 00:31:07,516
 is how much time the
 instrument sampled inside
 
-00:31:07.516 --> 00:31:09.996 A:middle
+
+622
+00:31:07,516 --> 00:31:09,996
 that function itself, so
 it excludes its children.
 
-00:31:10.876 --> 00:31:11.996 A:middle
+
+623
+00:31:10,876 --> 00:31:11,996
 So what I want to
 do is see where does
 
-00:31:11.996 --> 00:31:13.766 A:middle
+
+624
+00:31:11,996 --> 00:31:13,766
 that self number get
 larger, and that means
 
-00:31:13.766 --> 00:31:15.586 A:middle
+
+625
+00:31:13,766 --> 00:31:15,586
 that function is actually
 performing a lot of work.
 
-00:31:16.096 --> 00:31:18.546 A:middle
+
+626
+00:31:16,096 --> 00:31:18,546
 You can continue opening these
 up one by one, hunting around,
 
-00:31:18.606 --> 00:31:19.686 A:middle
+
+627
+00:31:18,606 --> 00:31:19,686
 but that can take
 a little while.
 
-00:31:20.436 --> 00:31:22.616 A:middle
+
+628
+00:31:20,436 --> 00:31:22,616
 Instead we recommend you come
 over here to the right side,
 
-00:31:22.806 --> 00:31:24.046 A:middle
+
+629
+00:31:22,806 --> 00:31:24,046
 this extended detail view,
 
-00:31:24.046 --> 00:31:26.886 A:middle
+
+630
+00:31:24,046 --> 00:31:26,886
 and Instruments will show you
 the single heaviest stack trace
 
-00:31:26.886 --> 00:31:27.596 A:middle
+
+631
+00:31:26,886 --> 00:31:27,596
 in your application.
 
-00:31:27.596 --> 00:31:29.726 A:middle
+
+632
+00:31:27,596 --> 00:31:29,726
 That's where it sampled
 the most number of times.
 
-00:31:30.036 --> 00:31:31.396 A:middle
+
+633
+00:31:30,036 --> 00:31:31,396
 You can see again here
 is our main thread,
 
-00:31:31.396 --> 00:31:34.006 A:middle
+
+634
+00:31:31,396 --> 00:31:34,006
 it took 11,229 milliseconds.
 
-00:31:34.236 --> 00:31:35.856 A:middle
+
+635
+00:31:34,236 --> 00:31:35,856
 It began in Start.
 
-00:31:35.936 --> 00:31:37.986 A:middle
+
+636
+00:31:35,936 --> 00:31:37,986
 Symbols in gray are
 system frameworks.
 
-00:31:38.276 --> 00:31:40.616 A:middle
+
+637
+00:31:38,276 --> 00:31:40,616
 Symbols in black here,
 like Main, are your code.
 
-00:31:40.616 --> 00:31:42.966 A:middle
+
+638
+00:31:40,616 --> 00:31:42,966
 And what I'd like to do is just
 look down this list and see
 
-00:31:42.966 --> 00:31:43.926 A:middle
+
+639
+00:31:42,966 --> 00:31:43,926
 if it's kind of a big jump.
 
-00:31:43.926 --> 00:31:46.626 A:middle
+
+640
+00:31:43,926 --> 00:31:46,626
 That means something interesting
 happened around this time.
 
-00:31:46.626 --> 00:31:47.496 A:middle
+
+641
+00:31:46,626 --> 00:31:47,496
 If I scan down this list,
 
-00:31:47.496 --> 00:31:49.046 A:middle
+
+642
+00:31:47,496 --> 00:31:49,046
 the number is slowly
 getting smaller,
 
-00:31:49.046 --> 00:31:52.026 A:middle
+
+643
+00:31:49,046 --> 00:31:52,026
 but there's no big jumps going
 on, until I get down here
 
-00:31:52.106 --> 00:31:54.696 A:middle
+
+644
+00:31:52,106 --> 00:31:54,696
 where I see a jump from
 about 9,000 to about 4,000.
 
-00:31:54.696 --> 00:31:55.756 A:middle
+
+645
+00:31:54,696 --> 00:31:55,756
 So something happened there.
 
-00:31:55.756 --> 00:31:57.536 A:middle
+
+646
+00:31:55,756 --> 00:31:57,536
 I am going to go ahead
 and click on my code,
 
-00:31:58.176 --> 00:32:00.246 A:middle
+
+647
+00:31:58,176 --> 00:32:00,246
 and Instruments has
 automatically expanded the call
 
 
-
-00:31:58.176 --> 00:32:00.246 A:middle
-and Instruments has
-automatically expanded the call
-
-00:32:00.246 --> 00:32:02.336 A:middle
+648
+00:32:00,246 --> 00:32:02,336
 tree on the left side so you can
 see what you just clicked on.
 
-00:32:03.566 --> 00:32:04.796 A:middle
+
+649
+00:32:03,566 --> 00:32:04,796
 Let me frame this up.
 
-00:32:06.226 --> 00:32:07.196 A:middle
+
+650
+00:32:06,226 --> 00:32:07,196
 And what's going on here?
 
-00:32:07.816 --> 00:32:09.476 A:middle
+
+651
+00:32:07,816 --> 00:32:09,476
 Well, if I back up just a
 little bit for a moment,
 
-00:32:09.476 --> 00:32:12.616 A:middle
+
+652
+00:32:09,476 --> 00:32:12,616
 here is my NSFiretimer call,
 what's driving my simulation,
 
-00:32:12.616 --> 00:32:14.156 A:middle
+
+653
+00:32:12,616 --> 00:32:14,156
 trying to get at 60
 frames per second.
 
-00:32:14.736 --> 00:32:18.766 A:middle
+
+654
+00:32:14,736 --> 00:32:18,766
 Down here is my particle
 Sim.app delegate.update routine,
 
-00:32:19.106 --> 00:32:20.846 A:middle
+
+655
+00:32:19,106 --> 00:32:20,846
 that's my Swift routine
 driving my simulation.
 
-00:32:21.446 --> 00:32:25.006 A:middle
+
+656
+00:32:21,446 --> 00:32:25,006
 But in between is this weird
 @objc thing sitting here.
 
-00:32:25.586 --> 00:32:27.706 A:middle
+
+657
+00:32:25,586 --> 00:32:27,706
 I want to point out
 that's just a thunk.
 
-00:32:27.826 --> 00:32:30.856 A:middle
+
+658
+00:32:27,826 --> 00:32:30,856
 Basically, it's a compiler
 inserted function that gets us
 
-00:32:30.856 --> 00:32:34.026 A:middle
+
+659
+00:32:30,856 --> 00:32:34,026
 from the Objective-C
 world here in NSFiretimer
 
-00:32:34.466 --> 00:32:36.956 A:middle
+
+660
+00:32:34,466 --> 00:32:36,956
 down to the Swift world
 down here inside of my code.
 
-00:32:37.316 --> 00:32:37.916 A:middle
+
+661
+00:32:37,316 --> 00:32:37,916
 That's all it is.
 
-00:32:37.916 --> 00:32:38.806 A:middle
+
+662
+00:32:37,916 --> 00:32:38,806
 Otherwise, we can ignore it.
 
-00:32:39.566 --> 00:32:42.456 A:middle
+
+663
+00:32:39,566 --> 00:32:42,456
 Now, we can see my update
 routine is taking 89%
 
-00:32:42.456 --> 00:32:43.916 A:middle
+
+664
+00:32:42,456 --> 00:32:43,916
 of the time, so continuing
 
-00:32:43.916 --> 00:32:45.656 A:middle
+
+665
+00:32:43,916 --> 00:32:45,656
 to optimize this
 function is a good idea.
 
-00:32:45.656 --> 00:32:48.056 A:middle
+
+666
+00:32:45,656 --> 00:32:48,056
 So everything else above it is
 not really interesting to me.
 
-00:32:48.146 --> 00:32:50.236 A:middle
+
+667
+00:32:48,146 --> 00:32:50,236
 I am going to go ahead
 and hide it by focusing
 
-00:32:50.236 --> 00:32:51.896 A:middle
+
+668
+00:32:50,236 --> 00:32:51,896
 in on just this update routine
 
-00:32:51.896 --> 00:32:53.586 A:middle
+
+669
+00:32:51,896 --> 00:32:53,586
 by clicking this arrow
 here on the right.
 
-00:32:54.536 --> 00:32:56.106 A:middle
+
+670
+00:32:54,536 --> 00:32:56,106
 Everything else around
 this has been hidden.
 
-00:32:56.556 --> 00:32:59.406 A:middle
+
+671
+00:32:56,556 --> 00:32:59,406
 Running time has been
 renormalized to 100%,
 
-00:32:59.406 --> 00:33:02.356 A:middle
+
+672
+00:32:59,406 --> 00:33:02,356
 just to help you do a
 little less mental math.
 
 
-
-00:32:59.406 --> 00:33:02.356 A:middle
-just to help you do a
-little less mental math.
-
-00:33:02.356 --> 00:33:04.126 A:middle
+673
+00:33:02,356 --> 00:33:04,126
 If we look in on what's
 going on in this function,
 
-00:33:04.166 --> 00:33:06.636 A:middle
+
+674
+00:33:04,166 --> 00:33:06,636
 Update Phase Avoid calls
 Find Nearest Neighbor,
 
-00:33:07.076 --> 00:33:09.416 A:middle
+
+675
+00:33:07,076 --> 00:33:09,416
 that calls down into something
 really interesting here.
 
-00:33:09.856 --> 00:33:12.956 A:middle
+
+676
+00:33:09,856 --> 00:33:12,956
 We see Swift release is
 taking 40% of our time,
 
-00:33:13.026 --> 00:33:15.996 A:middle
+
+677
+00:33:13,026 --> 00:33:15,996
 and Swift retain is taking
 another 35% of our time.
 
-00:33:16.106 --> 00:33:19.546 A:middle
+
+678
+00:33:16,106 --> 00:33:19,546
 So between just these two
 functions, we are doing
 
-00:33:19.546 --> 00:33:20.396 A:middle
+
+679
+00:33:19,546 --> 00:33:20,396
 about three-quarters
 
-00:33:20.396 --> 00:33:22.876 A:middle
+
+680
+00:33:20,396 --> 00:33:22,876
 of our update routine is just
 managing reference counts.
 
-00:33:23.616 --> 00:33:24.526 A:middle
+
+681
+00:33:23,616 --> 00:33:24,526
 Far from ideal.
 
-00:33:24.626 --> 00:33:26.046 A:middle
+
+682
+00:33:24,626 --> 00:33:26,046
 So what's going on here?
 
-00:33:26.566 --> 00:33:28.676 A:middle
+
+683
+00:33:26,566 --> 00:33:28,676
 Well, if I double-click on my
 Find Nearest Neighbor routine
 
-00:33:29.686 --> 00:33:31.366 A:middle
+
+684
+00:33:29,686 --> 00:33:31,366
 that calls those
 retains releases,
 
-00:33:31.366 --> 00:33:32.776 A:middle
+
+685
+00:33:31,366 --> 00:33:32,776
 Instruments will show
 you the source code.
 
-00:33:33.256 --> 00:33:35.736 A:middle
+
+686
+00:33:33,256 --> 00:33:35,736
 However, Swift is an automatic
 reference counted language,
 
-00:33:35.736 --> 00:33:37.376 A:middle
+
+687
+00:33:35,736 --> 00:33:37,376
 so you are not going
 to see the releases
 
-00:33:37.376 --> 00:33:38.556 A:middle
+
+688
+00:33:37,376 --> 00:33:38,556
 and retains here directly.
 
-00:33:39.206 --> 00:33:41.946 A:middle
+
+689
+00:33:39,206 --> 00:33:41,946
 But you can, if you go over
 to the disassembly view,
 
-00:33:42.636 --> 00:33:43.656 A:middle
+
+690
+00:33:42,636 --> 00:33:43,656
 click on that button there,
 
-00:33:44.206 --> 00:33:46.336 A:middle
+
+691
+00:33:44,206 --> 00:33:46,336
 Instruments will show you what
 the compiler actually generated.
 
-00:33:46.856 --> 00:33:47.946 A:middle
+
+692
+00:33:46,856 --> 00:33:47,946
 And you can hunt around in here
 
-00:33:47.946 --> 00:33:49.616 A:middle
+
+693
+00:33:47,946 --> 00:33:49,616
 and see there's a
 bunch of calls here.
 
-00:33:49.616 --> 00:33:52.426 A:middle
+
+694
+00:33:49,616 --> 00:33:52,426
 There's 23% of the
 time on this release.
 
-00:33:52.746 --> 00:33:54.646 A:middle
+
+695
+00:33:52,746 --> 00:33:54,646
 There's some more
 retains and releases here.
 
-00:33:54.646 --> 00:33:55.946 A:middle
+
+696
+00:33:54,646 --> 00:33:55,946
 There is another
 release down here.
 
-00:33:55.946 --> 00:33:57.076 A:middle
+
+697
+00:33:55,946 --> 00:33:57,076
 They are all over the place.
 
-00:33:57.156 --> 00:33:58.686 A:middle
+
+698
+00:33:57,156 --> 00:33:58,686
 So what can we do about that?
 
-00:33:59.846 --> 00:34:04.176 A:middle
+
+699
+00:33:59,846 --> 00:34:04,176
 Let's return to our code here
 and go to my particle file.
 
 
-
-00:33:59.846 --> 00:34:04.176 A:middle
-Let's return to our code here
-and go to my particle file.
-
-00:34:04.316 --> 00:34:05.596 A:middle
+700
+00:34:04,316 --> 00:34:05,596
 Here is my class Particle,
 
-00:34:05.636 --> 00:34:07.056 A:middle
+
+701
+00:34:05,636 --> 00:34:07,056
 so it's an internal
 class by default.
 
-00:34:07.056 --> 00:34:09.306 A:middle
+
+702
+00:34:07,056 --> 00:34:09,306
 And it adheres to some
 collidable protocol.
 
-00:34:09.686 --> 00:34:10.016 A:middle
+
+703
+00:34:09,686 --> 00:34:10,016
 All right.
 
-00:34:11.106 --> 00:34:13.775 A:middle
+
+704
+00:34:11,106 --> 00:34:13,775
 Down below is -- this is the
 Find Nearest Neighbor routine
 
-00:34:13.775 --> 00:34:15.286 A:middle
+
+705
+00:34:13,775 --> 00:34:15,286
 that was taking all
 of that time before.
 
-00:34:15.956 --> 00:34:19.255 A:middle
+
+706
+00:34:15,956 --> 00:34:19,255
 Now, I know that when the update
 timer fires, that code is going
 
-00:34:19.255 --> 00:34:21.246 A:middle
+
+707
+00:34:19,255 --> 00:34:21,246
 to call Find Nearest Neighbor
 on every single particle
 
-00:34:21.246 --> 00:34:24.786 A:middle
+
+708
+00:34:21,246 --> 00:34:24,786
 on the screen, and then there's
 this interfor loop that's going
 
-00:34:24.786 --> 00:34:26.926 A:middle
+
+709
+00:34:24,786 --> 00:34:26,926
 to iterate over every single
 particle on the screen.
 
-00:34:27.076 --> 00:34:30.396 A:middle
+
+710
+00:34:27,076 --> 00:34:30,396
 We have an N-squared
 algorithm here or effectively,
 
-00:34:30.396 --> 00:34:32.146 A:middle
+
+711
+00:34:30,396 --> 00:34:32,146
 the stuff that happens
 inside this for loop is going
 
-00:34:32.146 --> 00:34:33.806 A:middle
+
+712
+00:34:32,146 --> 00:34:33,806
 to happen a really
 large number of times.
 
-00:34:34.436 --> 00:34:37.216 A:middle
+
+713
+00:34:34,436 --> 00:34:37,216
 Whatever we do to optimize this
 thing should have big payoff.
 
-00:34:37.815 --> 00:34:38.636 A:middle
+
+714
+00:34:37,815 --> 00:34:38,636
 So what is going on?
 
-00:34:39.016 --> 00:34:40.466 A:middle
+
+715
+00:34:39,016 --> 00:34:40,466
 We have our for loop itself
 
-00:34:40.466 --> 00:34:42.275 A:middle
+
+716
+00:34:40,466 --> 00:34:42,275
 where we access one
 of those particles.
 
-00:34:42.275 --> 00:34:43.735 A:middle
+
+717
+00:34:42,275 --> 00:34:43,735
 So there's some retain
 release overhead.
 
-00:34:44.416 --> 00:34:46.755 A:middle
+
+718
+00:34:44,416 --> 00:34:46,755
 There are property
 getters being called here,
 
-00:34:46.755 --> 00:34:47.896 A:middle
+
+719
+00:34:46,755 --> 00:34:47,896
 this dot ID property.
 
-00:34:48.246 --> 00:34:49.426 A:middle
+
+720
+00:34:48,246 --> 00:34:49,426
 And as Michael was
 talking about,
 
-00:34:49.426 --> 00:34:50.755 A:middle
+
+721
+00:34:49,426 --> 00:34:50,755
 since this is an internal class,
 
-00:34:50.786 --> 00:34:52.246 A:middle
+
+722
+00:34:50,786 --> 00:34:52,246
 there might be some other
 Swift files somewhere
 
-00:34:52.246 --> 00:34:54.866 A:middle
+
+723
+00:34:52,246 --> 00:34:54,866
 that overrides these property
 getters, so we are going
 
-00:34:54.866 --> 00:34:56.565 A:middle
+
+724
+00:34:54,866 --> 00:34:56,565
 to be performing
 a dynamic dispatch
 
-00:34:56.886 --> 00:34:57.916 A:middle
+
+725
+00:34:56,886 --> 00:34:57,916
 to these property getters,
 
-00:34:57.916 --> 00:34:59.706 A:middle
+
+726
+00:34:57,916 --> 00:34:59,706
 which has retain/release
 overhead as well.
 
 
-
-00:35:00.976 --> 00:35:03.096 A:middle
+727
+00:35:00,976 --> 00:35:03,096
 Down here there is this
 distance squared function call.
 
-00:35:03.616 --> 00:35:06.596 A:middle
+
+728
+00:35:03,616 --> 00:35:06,596
 Despite the fact that it lives
 literally a dozen source code
 
-00:35:06.596 --> 00:35:08.426 A:middle
+
+729
+00:35:06,596 --> 00:35:08,426
 lines away, once
 again, we are going
 
-00:35:08.426 --> 00:35:11.306 A:middle
+
+730
+00:35:08,426 --> 00:35:11,306
 to be doing a dynamic dispatch
 to this routine with all
 
-00:35:11.306 --> 00:35:13.236 A:middle
+
+731
+00:35:11,306 --> 00:35:13,236
 of that overhead as well as
 the retain release overhead.
 
-00:35:13.676 --> 00:35:16.076 A:middle
+
+732
+00:35:13,676 --> 00:35:16,076
 So what can we do
 about this code?
 
-00:35:16.336 --> 00:35:18.006 A:middle
+
+733
+00:35:16,336 --> 00:35:18,006
 Well, this code is complete.
 
-00:35:18.316 --> 00:35:20.096 A:middle
+
+734
+00:35:18,316 --> 00:35:20,096
 I wrote this application,
 I am finished,
 
-00:35:20.096 --> 00:35:21.576 A:middle
+
+735
+00:35:20,096 --> 00:35:21,576
 my particle class is complete,
 
-00:35:21.716 --> 00:35:23.366 A:middle
+
+736
+00:35:21,716 --> 00:35:23,366
 and I have no need
 to subclass it.
 
-00:35:23.576 --> 00:35:25.586 A:middle
+
+737
+00:35:23,576 --> 00:35:25,586
 So what I should do is
 communicate my intention
 
-00:35:25.586 --> 00:35:28.186 A:middle
+
+738
+00:35:25,586 --> 00:35:28,186
 to the compiler by marking
 this class as final.
 
-00:35:28.226 --> 00:35:32.746 A:middle
+
+739
+00:35:28,226 --> 00:35:32,746
 So with that one little
 change, let's go ahead
 
-00:35:32.746 --> 00:35:35.066 A:middle
+
+740
+00:35:32,746 --> 00:35:35,066
 and profile application
 again and see what happened.
 
-00:35:36.516 --> 00:35:39.386 A:middle
+
+741
+00:35:36,516 --> 00:35:39,386
 This time, the compiler was
 able to compile that file,
 
-00:35:39.386 --> 00:35:41.856 A:middle
+
+742
+00:35:39,386 --> 00:35:41,856
 knowing that there are
 no other subclasses
 
-00:35:41.856 --> 00:35:44.456 A:middle
+
+743
+00:35:41,856 --> 00:35:44,456
 of that particle file --
 particle class, excuse me --
 
-00:35:44.876 --> 00:35:46.356 A:middle
+
+744
+00:35:44,876 --> 00:35:46,356
 and that means it's able
 
-00:35:46.356 --> 00:35:48.606 A:middle
+
+745
+00:35:46,356 --> 00:35:48,606
 to perform additional
 optimizations.
 
-00:35:48.856 --> 00:35:50.536 A:middle
+
+746
+00:35:48,856 --> 00:35:50,536
 It can call those
 functions directly,
 
-00:35:50.536 --> 00:35:53.396 A:middle
+
+747
+00:35:50,536 --> 00:35:53,396
 maybe even inline them, or any
 other number of optimizations
 
-00:35:53.626 --> 00:35:55.796 A:middle
+
+748
+00:35:53,626 --> 00:35:55,796
 that can reduce the
 overhead that we had before.
 
-00:35:56.586 --> 00:36:00.276 A:middle
+
+749
+00:35:56,586 --> 00:36:00,276
 So if we record, this time
 when I add the particles,
 
 
-
-00:35:56.586 --> 00:36:00.276 A:middle
-So if we record, this time
-when I add the particles,
-
-00:36:00.276 --> 00:36:01.926 A:middle
+750
+00:36:00,276 --> 00:36:01,926
 we can see they are
 moving around and running
 
-00:36:01.926 --> 00:36:03.586 A:middle
+
+751
+00:36:01,926 --> 00:36:03,586
 around at 60 frames per
 second at this time,
 
-00:36:03.586 --> 00:36:05.566 A:middle
+
+752
+00:36:03,586 --> 00:36:05,566
 so we got back 20 frames
 per second with just
 
-00:36:05.566 --> 00:36:06.666 A:middle
+
+753
+00:36:05,566 --> 00:36:06,666
 that one small change.
 
-00:36:07.286 --> 00:36:08.246 A:middle
+
+754
+00:36:07,286 --> 00:36:08,246
 That's looking good.
 
-00:36:08.456 --> 00:36:09.926 A:middle
+
+755
+00:36:08,456 --> 00:36:09,926
 However, as you may guess,
 
-00:36:09.926 --> 00:36:12.136 A:middle
+
+756
+00:36:09,926 --> 00:36:12,136
 I have a second phase
 here called collision
 
-00:36:12.136 --> 00:36:13.586 A:middle
+
+757
+00:36:12,136 --> 00:36:13,586
 where we swap the algorithm
 
-00:36:13.586 --> 00:36:14.936 A:middle
+
+758
+00:36:13,586 --> 00:36:14,936
 and now they are
 bouncing off one another,
 
-00:36:15.246 --> 00:36:17.776 A:middle
+
+759
+00:36:15,246 --> 00:36:17,776
 and again our frame rate
 dropped by about 25 percent
 
-00:36:17.776 --> 00:36:19.346 A:middle
+
+760
+00:36:17,776 --> 00:36:19,346
 down to 45 frames per second.
 
-00:36:19.966 --> 00:36:23.096 A:middle
+
+761
+00:36:19,966 --> 00:36:23,096
 We reproduced the problem again,
 let's return to Instruments
 
-00:36:23.256 --> 00:36:24.746 A:middle
+
+762
+00:36:23,256 --> 00:36:24,746
 and see what's happening.
 
-00:36:24.746 --> 00:36:28.496 A:middle
+
+763
+00:36:24,746 --> 00:36:28,496
 We will do what we do before,
 make this a little bit larger,
 
-00:36:29.036 --> 00:36:32.376 A:middle
+
+764
+00:36:29,036 --> 00:36:32,376
 Snap Track to Fit, and
 now what do we see?
 
-00:36:32.376 --> 00:36:35.466 A:middle
+
+765
+00:36:32,376 --> 00:36:35,466
 Over here on the left, this
 was our avoidance phase.
 
-00:36:35.566 --> 00:36:39.456 A:middle
+
+766
+00:36:35,566 --> 00:36:39,456
 Things are running much
 better, around 30%, 40% or so,
 
-00:36:39.456 --> 00:36:41.586 A:middle
+
+767
+00:36:39,456 --> 00:36:41,586
 so that's why we are hitting
 our 60 frames per second.
 
-00:36:42.376 --> 00:36:45.186 A:middle
+
+768
+00:36:42,376 --> 00:36:45,186
 But over here on the right,
 this is our collision phase.
 
-00:36:45.216 --> 00:36:48.486 A:middle
+
+769
+00:36:45,216 --> 00:36:48,486
 And now this is capping
 out at 100% of our CPU,
 
-00:36:48.746 --> 00:36:50.286 A:middle
+
+770
+00:36:48,746 --> 00:36:50,286
 and that's why our frame
 rate is suffering again.
 
-00:36:50.966 --> 00:36:54.996 A:middle
+
+771
+00:36:50,966 --> 00:36:54,996
 We did what we did a moment ago
 right now, this call tree data
 
-00:36:54.996 --> 00:36:57.656 A:middle
+
+772
+00:36:54,996 --> 00:36:57,656
 down here in the detail
 pane is going to have data
 
-00:36:57.656 --> 00:36:59.666 A:middle
+
+773
+00:36:57,656 --> 00:36:59,666
 from this avoidance phase,
 which is running fine,
 
-00:36:59.966 --> 00:37:02.516 A:middle
+
+774
+00:36:59,966 --> 00:37:02,516
 as well as this collision phase,
 which is what I really want
 
 
-
-00:36:59.966 --> 00:37:02.516 A:middle
-as well as this collision phase,
-which is what I really want
-
-00:37:02.516 --> 00:37:04.216 A:middle
+775
+00:37:02,516 --> 00:37:04,216
 to actually be focusing on.
 
-00:37:04.216 --> 00:37:06.956 A:middle
+
+776
+00:37:04,216 --> 00:37:06,956
 So that avoidance
 sample over here is going
 
-00:37:06.956 --> 00:37:08.156 A:middle
+
+777
+00:37:06,956 --> 00:37:08,156
 to water down our results.
 
-00:37:08.516 --> 00:37:10.996 A:middle
+
+778
+00:37:08,516 --> 00:37:10,996
 Instead, I would like to set a
 time filter so I am only looking
 
-00:37:10.996 --> 00:37:11.926 A:middle
+
+779
+00:37:10,996 --> 00:37:11,926
 at my collision phase.
 
-00:37:12.286 --> 00:37:13.376 A:middle
+
+780
+00:37:12,286 --> 00:37:13,376
 That's really simple to do.
 
-00:37:13.376 --> 00:37:15.496 A:middle
+
+781
+00:37:13,376 --> 00:37:15,496
 Just click and drag
 in the timeline view,
 
-00:37:16.076 --> 00:37:17.596 A:middle
+
+782
+00:37:16,076 --> 00:37:17,596
 and now our detail
 pane has been updated
 
-00:37:17.596 --> 00:37:19.916 A:middle
+
+783
+00:37:17,596 --> 00:37:19,916
 to only consider the samples
 from our collision phase.
 
-00:37:20.856 --> 00:37:22.486 A:middle
+
+784
+00:37:20,856 --> 00:37:22,486
 Now we can do what
 we did before,
 
-00:37:22.486 --> 00:37:24.766 A:middle
+
+785
+00:37:22,486 --> 00:37:24,766
 head over to our
 extended detail view.
 
-00:37:25.696 --> 00:37:28.766 A:middle
+
+786
+00:37:25,696 --> 00:37:28,766
 Look down this list,
 see where we see a jump,
 
-00:37:28.766 --> 00:37:30.406 A:middle
+
+787
+00:37:28,766 --> 00:37:30,406
 and something interesting
 happens here,
 
-00:37:30.406 --> 00:37:32.646 A:middle
+
+788
+00:37:30,406 --> 00:37:32,646
 we went from about
 8,000 milliseconds
 
-00:37:32.646 --> 00:37:33.916 A:middle
+
+789
+00:37:32,646 --> 00:37:33,916
 to 2,000 milliseconds.
 
-00:37:33.916 --> 00:37:36.616 A:middle
+
+790
+00:37:33,916 --> 00:37:36,616
 So I am going to click on my
 collision detection class here.
 
-00:37:37.696 --> 00:37:40.216 A:middle
+
+791
+00:37:37,696 --> 00:37:40,216
 Instruments once again
 automatically expands this call
 
-00:37:40.216 --> 00:37:40.896 A:middle
+
+792
+00:37:40,216 --> 00:37:40,896
 tree for us.
 
-00:37:41.636 --> 00:37:43.386 A:middle
+
+793
+00:37:41,636 --> 00:37:43,386
 And if we just kind of look
 at what's going on here,
 
-00:37:43.536 --> 00:37:47.036 A:middle
+
+794
+00:37:43,536 --> 00:37:47,036
 88% of my time is spend inside
 of this runtime step routine.
 
-00:37:47.036 --> 00:37:48.356 A:middle
+
+795
+00:37:47,036 --> 00:37:48,356
 This is a good place to dig in.
 
-00:37:48.936 --> 00:37:50.516 A:middle
+
+796
+00:37:48,936 --> 00:37:50,516
 I'll do what I did
 before and click
 
-00:37:50.516 --> 00:37:52.006 A:middle
+
+797
+00:37:50,516 --> 00:37:52,006
 on this Focus arrow
 here on the right.
 
-00:37:52.056 --> 00:37:54.576 A:middle
+
+798
+00:37:52,056 --> 00:37:54,576
 Now we are looking at just
 our runtime step routine,
 
-00:37:55.306 --> 00:37:56.416 A:middle
+
+799
+00:37:55,306 --> 00:37:56,416
 and let's see what it's doing.
 
-00:37:57.286 --> 00:37:57.546 A:middle
+
+800
+00:37:57,286 --> 00:37:57,546
 All right.
 
-00:37:57.546 --> 00:37:59.756 A:middle
+
+801
+00:37:57,546 --> 00:37:59,756
 Well, 25% of its time
 is being spent inside
 
-00:37:59.756 --> 00:38:02.286 A:middle
+
+802
+00:37:59,756 --> 00:38:02,286
 of Swift.array.underscore
 getelement.
 
 
-
-00:37:59.756 --> 00:38:02.286 A:middle
-of Swift.array.underscore
-getelement.
-
-00:38:02.956 --> 00:38:05.726 A:middle
+803
+00:38:02,956 --> 00:38:05,726
 When you see this A
 inside of angle brackets,
 
-00:38:05.816 --> 00:38:07.706 A:middle
+
+804
+00:38:05,816 --> 00:38:07,706
 that means you are calling
 into the generic form
 
-00:38:07.706 --> 00:38:10.166 A:middle
+
+805
+00:38:07,706 --> 00:38:10,166
 of that function and all
 the overhead that entails.
 
-00:38:10.786 --> 00:38:12.976 A:middle
+
+806
+00:38:10,786 --> 00:38:12,976
 You will see this
 again here inside
 
-00:38:12.976 --> 00:38:15.416 A:middle
+
+807
+00:38:12,976 --> 00:38:15,416
 of Swift array is
 valid subscript,
 
-00:38:15.716 --> 00:38:17.646 A:middle
+
+808
+00:38:15,716 --> 00:38:17,646
 there's that A inside
 of angle brackets.
 
-00:38:18.036 --> 00:38:19.356 A:middle
+
+809
+00:38:18,036 --> 00:38:19,356
 It also happens when you have
 
-00:38:19.356 --> 00:38:20.896 A:middle
+
+810
+00:38:19,356 --> 00:38:20,896
 that A inside of
 square brackets.
 
-00:38:20.896 --> 00:38:23.426 A:middle
+
+811
+00:38:20,896 --> 00:38:23,426
 So we are calling a generic
 property getter here.
 
-00:38:23.676 --> 00:38:26.276 A:middle
+
+812
+00:38:23,676 --> 00:38:26,276
 So just between these
 three generic functions,
 
-00:38:26.276 --> 00:38:31.006 A:middle
+
+813
+00:38:26,276 --> 00:38:31,006
 we are looking at about 50% of
 our time is being spent inside
 
-00:38:31.006 --> 00:38:32.126 A:middle
+
+814
+00:38:31,006 --> 00:38:32,126
 of these generic functions.
 
-00:38:32.456 --> 00:38:34.726 A:middle
+
+815
+00:38:32,456 --> 00:38:34,726
 So what can we do about
 getting rid of that overhead?
 
-00:38:34.726 --> 00:38:37.226 A:middle
+
+816
+00:38:34,726 --> 00:38:37,226
 All right, back over to Xcode.
 
-00:38:38.456 --> 00:38:40.326 A:middle
+
+817
+00:38:38,456 --> 00:38:40,326
 Here is my collision
 detection file.
 
-00:38:40.866 --> 00:38:43.006 A:middle
+
+818
+00:38:40,866 --> 00:38:43,006
 Here we can see that
 collidable protocol
 
-00:38:43.106 --> 00:38:44.586 A:middle
+
+819
+00:38:43,106 --> 00:38:44,586
 that my particle
 was adhering to.
 
-00:38:45.016 --> 00:38:47.356 A:middle
+
+820
+00:38:45,016 --> 00:38:47,356
 Here is that generic
 class, class detection,
 
-00:38:47.666 --> 00:38:50.226 A:middle
+
+821
+00:38:47,666 --> 00:38:50,226
 type T that adheres to
 a collidable protocol.
 
-00:38:50.776 --> 00:38:53.526 A:middle
+
+822
+00:38:50,776 --> 00:38:53,526
 What does it do, well it has
 this collidables array here,
 
-00:38:53.526 --> 00:38:54.816 A:middle
+
+823
+00:38:53,526 --> 00:38:54,816
 that's of generic type T.
 
-00:38:55.446 --> 00:38:58.296 A:middle
+
+824
+00:38:55,446 --> 00:38:58,296
 And here down below is
 our runtime step routine,
 
-00:38:58.436 --> 00:39:00.566 A:middle
+
+825
+00:38:58,436 --> 00:39:00,566
 and that's where we were
 spending all of our time.
 
 
-
-00:38:58.436 --> 00:39:00.566 A:middle
-and that's where we were
-spending all of our time.
-
-00:39:00.976 --> 00:39:02.286 A:middle
+826
+00:39:00,976 --> 00:39:02,286
 So what does this function do?
 
-00:39:02.646 --> 00:39:05.796 A:middle
+
+827
+00:39:02,646 --> 00:39:05,796
 Well, it iterates over all
 our collidables, accesses one
 
-00:39:05.796 --> 00:39:08.306 A:middle
+
+828
+00:39:05,796 --> 00:39:08,306
 of the collidables from
 that array, calls a bunch
 
-00:39:08.306 --> 00:39:09.726 A:middle
+
+829
+00:39:08,306 --> 00:39:09,726
 of property getters here.
 
-00:39:10.026 --> 00:39:10.726 A:middle
+
+830
+00:39:10,026 --> 00:39:10,726
 Here's some more.
 
-00:39:11.056 --> 00:39:13.366 A:middle
+
+831
+00:39:11,056 --> 00:39:13,366
 There is an interfor
 loop, where we do kind
 
-00:39:13.366 --> 00:39:14.536 A:middle
+
+832
+00:39:13,366 --> 00:39:14,536
 of the same thing again, we pull
 
-00:39:14.536 --> 00:39:16.426 A:middle
+
+833
+00:39:14,536 --> 00:39:16,426
 out another second
 collidable from that array.
 
-00:39:16.726 --> 00:39:18.406 A:middle
+
+834
+00:39:16,726 --> 00:39:18,406
 Then all sorts of property
 getters down below.
 
-00:39:18.566 --> 00:39:21.386 A:middle
+
+835
+00:39:18,566 --> 00:39:21,386
 We're doing a lot of generic
 operations here, and we'd really
 
-00:39:21.386 --> 00:39:22.856 A:middle
+
+836
+00:39:21,386 --> 00:39:22,856
 like to get rid of that.
 
-00:39:22.856 --> 00:39:23.626 A:middle
+
+837
+00:39:22,856 --> 00:39:23,626
 How do we do that?
 
-00:39:24.176 --> 00:39:28.406 A:middle
+
+838
+00:39:24,176 --> 00:39:28,406
 Well, this time you can see my
 collision detection class is
 
-00:39:28.406 --> 00:39:29.726 A:middle
+
+839
+00:39:28,406 --> 00:39:29,726
 here inside of this Swift file.
 
-00:39:30.096 --> 00:39:33.996 A:middle
+
+840
+00:39:30,096 --> 00:39:33,996
 However, the users of this,
 
-00:39:34.126 --> 00:39:36.196 A:middle
+
+841
+00:39:34,126 --> 00:39:36,196
 where I am using this class
 is inside this app delegate
 
-00:39:36.196 --> 00:39:38.746 A:middle
+
+842
+00:39:36,196 --> 00:39:38,746
 routine, this particle Swift
 file, so it's in other parts
 
-00:39:38.746 --> 00:39:40.676 A:middle
+
+843
+00:39:38,746 --> 00:39:40,676
 of this module, so we
 are going to have to turn
 
-00:39:40.676 --> 00:39:41.966 A:middle
+
+844
+00:39:40,676 --> 00:39:41,966
 to Whole Module Optimization.
 
-00:39:42.716 --> 00:39:45.166 A:middle
+
+845
+00:39:42,716 --> 00:39:45,166
 Doing that's really easy,
 just click on your project.
 
-00:39:46.356 --> 00:39:48.206 A:middle
+
+846
+00:39:46,356 --> 00:39:48,206
 Go over here to build settings.
 
-00:39:48.626 --> 00:39:50.436 A:middle
+
+847
+00:39:48,626 --> 00:39:50,436
 Make sure you are looking at
 all of your build settings.
 
-00:39:50.916 --> 00:39:52.906 A:middle
+
+848
+00:39:50,916 --> 00:39:52,906
 Then just do a search
 for optimization.
 
-00:39:54.046 --> 00:39:57.006 A:middle
+
+849
+00:39:54,046 --> 00:39:57,006
 And here is that setting that
 Nadav showed you earlier.
 
-00:39:57.106 --> 00:39:58.786 A:middle
+
+850
+00:39:57,106 --> 00:39:58,786
 You just want to switch
 your release build
 
-00:39:58.816 --> 00:40:00.376 A:middle
+
+851
+00:39:58,816 --> 00:40:00,376
 over to Whole Module
 Optimization.
 
 
-
-00:39:58.816 --> 00:40:00.376 A:middle
-over to Whole Module
-Optimization.
-
-00:40:01.046 --> 00:40:03.406 A:middle
+852
+00:40:01,046 --> 00:40:03,406
 And now when we profile, the
 compiler is going to look
 
-00:40:03.406 --> 00:40:07.236 A:middle
+
+853
+00:40:03,406 --> 00:40:07,236
 at all those files together and
 build a more optimized binary,
 
-00:40:07.446 --> 00:40:08.606 A:middle
+
+854
+00:40:07,446 --> 00:40:08,606
 but let's check and
 see what happened.
 
-00:40:09.286 --> 00:40:11.306 A:middle
+
+855
+00:40:09,286 --> 00:40:11,306
 So we will launch time profiler
 for the third time here,
 
-00:40:12.006 --> 00:40:15.746 A:middle
+
+856
+00:40:12,006 --> 00:40:15,746
 start our recording, and
 60 frames per second,
 
-00:40:16.166 --> 00:40:18.566 A:middle
+
+857
+00:40:16,166 --> 00:40:18,566
 we add our particles, this
 avoidance phase still running
 
-00:40:18.566 --> 00:40:19.736 A:middle
+
+858
+00:40:18,566 --> 00:40:19,736
 at 60 frames per second.
 
-00:40:19.876 --> 00:40:21.426 A:middle
+
+859
+00:40:19,876 --> 00:40:21,426
 Good, I expected
 that not to change.
 
-00:40:21.466 --> 00:40:22.426 A:middle
+
+860
+00:40:21,466 --> 00:40:22,426
 Always good to verify.
 
-00:40:23.046 --> 00:40:24.906 A:middle
+
+861
+00:40:23,046 --> 00:40:24,906
 Then we move over to
 our collision phase.
 
-00:40:24.976 --> 00:40:27.666 A:middle
+
+862
+00:40:24,976 --> 00:40:27,666
 Now that is running at 60
 frames per second as well.
 
-00:40:28.076 --> 00:40:30.376 A:middle
+
+863
+00:40:28,076 --> 00:40:30,376
 All it took was a couple
 minutes of analysis
 
-00:40:30.376 --> 00:40:31.626 A:middle
+
+864
+00:40:30,376 --> 00:40:31,626
 and a few small tweaks,
 
-00:40:31.726 --> 00:40:33.496 A:middle
+
+865
+00:40:31,726 --> 00:40:33,496
 and we made our application
 a lot faster.
 
-00:40:34.516 --> 00:40:41.696 A:middle
+
+866
+00:40:34,516 --> 00:40:41,696
 [Applause]
 
-00:40:42.196 --> 00:40:42.846 A:middle
+
+867
+00:40:42,196 --> 00:40:42,846
 All right.
 
-00:40:42.846 --> 00:40:44.166 A:middle
+
+868
+00:40:42,846 --> 00:40:44,166
 So to summarize what
 we saw here today,
 
-00:40:44.566 --> 00:40:47.006 A:middle
+
+869
+00:40:44,566 --> 00:40:47,006
 we know that Swift is a
 flexible programming language
 
-00:40:47.296 --> 00:40:48.686 A:middle
+
+870
+00:40:47,296 --> 00:40:48,686
 that uses -- that's safe
 
-00:40:48.686 --> 00:40:50.236 A:middle
+
+871
+00:40:48,686 --> 00:40:50,236
 and uses automatic
 reference counting
 
-00:40:50.306 --> 00:40:51.656 A:middle
+
+872
+00:40:50,306 --> 00:40:51,656
 to perform its memory
 management.
 
-00:40:51.936 --> 00:40:53.916 A:middle
+
+873
+00:40:51,936 --> 00:40:53,916
 Now, those powerful features
 are what make it a delight
 
-00:40:53.916 --> 00:40:56.416 A:middle
+
+874
+00:40:53,916 --> 00:40:56,416
 to program in, but they
 can come with a cost.
 
-00:40:56.596 --> 00:40:59.446 A:middle
+
+875
+00:40:56,596 --> 00:40:59,446
 What we want you to do is focus
 on your APIs and your code
 
-00:40:59.446 --> 00:41:01.816 A:middle
+
+876
+00:40:59,446 --> 00:41:01,816
 that when you are writing them,
 you keep performance in mind.
 
 
-
-00:40:59.446 --> 00:41:01.816 A:middle
-that when you are writing them,
-you keep performance in mind.
-
-00:41:01.816 --> 00:41:04.316 A:middle
+877
+00:41:01,816 --> 00:41:04,316
 And how do you know what
 costs you are paying for?
 
-00:41:04.766 --> 00:41:06.596 A:middle
+
+878
+00:41:04,766 --> 00:41:06,596
 Profile your application
 inside of Instruments,
 
-00:41:06.596 --> 00:41:07.976 A:middle
+
+879
+00:41:06,596 --> 00:41:07,976
 and do it throughout
 the lifetime
 
-00:41:07.976 --> 00:41:10.756 A:middle
+
+880
+00:41:07,976 --> 00:41:10,756
 of your application development
 so that when you find a problem,
 
-00:41:10.786 --> 00:41:13.506 A:middle
+
+881
+00:41:10,786 --> 00:41:13,506
 you find it sooner and you
 can react to that more easily,
 
-00:41:13.506 --> 00:41:16.686 A:middle
+
+882
+00:41:13,506 --> 00:41:16,686
 especially if it involves
 changing some of your APIs.
 
-00:41:17.456 --> 00:41:19.506 A:middle
+
+883
+00:41:17,456 --> 00:41:19,506
 There's documentation
 online, of course.
 
-00:41:19.506 --> 00:41:22.146 A:middle
+
+884
+00:41:19,506 --> 00:41:22,146
 The Developer Forums where you
 can go, and you will be able
 
-00:41:22.146 --> 00:41:23.876 A:middle
+
+885
+00:41:22,146 --> 00:41:23,876
 to ask questions about
 Swift and get them answered,
 
-00:41:23.876 --> 00:41:25.086 A:middle
+
+886
+00:41:23,876 --> 00:41:25,086
 as well as Instruments.
 
-00:41:26.336 --> 00:41:28.356 A:middle
+
+887
+00:41:26,336 --> 00:41:28,356
 And speaking of Instruments,
 there's a Profiling
 
-00:41:28.356 --> 00:41:30.586 A:middle
+
+888
+00:41:28,356 --> 00:41:30,586
 in Depth talk today
 in Mission at 3:30.
 
-00:41:30.586 --> 00:41:33.056 A:middle
+
+889
+00:41:30,586 --> 00:41:33,056
 There is an entire session
 devoted to Time Profiler
 
-00:41:33.056 --> 00:41:34.446 A:middle
+
+890
+00:41:33,056 --> 00:41:34,446
 and getting into even more depth
 
-00:41:34.506 --> 00:41:35.956 A:middle
+
+891
+00:41:34,506 --> 00:41:35,956
 than we're able to
 get into today.
 
-00:41:36.386 --> 00:41:37.596 A:middle
+
+892
+00:41:36,386 --> 00:41:37,596
 And as Michael talked
 about earlier,
 
-00:41:37.596 --> 00:41:40.106 A:middle
+
+893
+00:41:37,596 --> 00:41:40,106
 there is a Building Better
 Apps with Value Types in Swift
 
-00:41:40.106 --> 00:41:42.086 A:middle
+
+894
+00:41:40,106 --> 00:41:42,086
 that will also build
 upon what you saw today.
 
-00:41:42.086 --> 00:41:42.906 A:middle
+
+895
+00:41:42,086 --> 00:41:42,906
 So thank you very much.
 
-00:41:43.516 --> 00:41:47.500 A:middle
+
+896
+00:41:43,516 --> 00:41:47,500
 [Applause]
 

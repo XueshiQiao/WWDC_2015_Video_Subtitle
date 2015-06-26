@@ -1,3249 +1,4658 @@
-
-00:00:22.516 --> 00:00:25.886 A:middle
+1
+00:00:22,516 --> 00:00:25,886
 [ Applause ]
 
-00:00:26.386 --> 00:00:28.356 A:middle
-&gt;&gt; PETER TSOI: Hey, everyone.
 
-00:00:28.416 --> 00:00:28.926 A:middle
+2
+00:00:26,386 --> 00:00:28,356
+>> PETER TSOI: Hey, everyone.
+
+
+3
+00:00:28,416 --> 00:00:28,926
 Good afternoon.
 
-00:00:28.926 --> 00:00:31.606 A:middle
+
+4
+00:00:28,926 --> 00:00:31,606
 And welcome to Advanced
 Touch Input on iOS.
 
-00:00:32.476 --> 00:00:33.256 A:middle
+
+5
+00:00:32,476 --> 00:00:33,256
 My name is Peter.
 
-00:00:33.566 --> 00:00:35.636 A:middle
+
+6
+00:00:33,566 --> 00:00:35,636
 I work on the iOS
 Performance team on Apple.
 
-00:00:36.306 --> 00:00:39.236 A:middle
+
+7
+00:00:36,306 --> 00:00:39,236
 Today with my friend
 Jacob, from the UIKit team,
 
-00:00:39.236 --> 00:00:41.116 A:middle
+
+8
+00:00:39,236 --> 00:00:41,116
 we would like to tell
 you a little bit more
 
-00:00:41.386 --> 00:00:44.706 A:middle
+
+9
+00:00:41,386 --> 00:00:44,706
 about how touch input works
 on iOS and how you can use
 
-00:00:44.706 --> 00:00:47.266 A:middle
+
+10
+00:00:44,706 --> 00:00:47,266
 that information to make
 your applications even more
 
-00:00:47.266 --> 00:00:48.586 A:middle
+
+11
+00:00:47,266 --> 00:00:48,586
 responsive to touch input.
 
-00:00:49.576 --> 00:00:51.386 A:middle
+
+12
+00:00:49,576 --> 00:00:51,386
 We've got a lot to
 talk about today.
 
-00:00:51.906 --> 00:00:56.016 A:middle
+
+13
+00:00:51,906 --> 00:00:56,016
 As the previous slide alluded
 to, reducing latency is the name
 
-00:00:56.016 --> 00:00:57.396 A:middle
+
+14
+00:00:56,016 --> 00:00:57,396
 of the game when it comes
 
-00:00:57.526 --> 00:00:59.556 A:middle
+
+15
+00:00:57,526 --> 00:00:59,556
 to making your applications
 even more responsive.
 
-00:00:59.556 --> 00:01:03.136 A:middle
+
+16
+00:00:59,556 --> 00:01:03,136
 We will talk about what latency
 is and why you should care
 
 
-
-00:00:59.556 --> 00:01:03.136 A:middle
-We will talk about what latency
-is and why you should care
-
-00:01:03.136 --> 00:01:04.696 A:middle
+17
+00:01:03,136 --> 00:01:04,696
 about latency in
 your application
 
-00:01:05.135 --> 00:01:06.906 A:middle
+
+18
+00:01:05,135 --> 00:01:06,906
 and latency in iOS as a whole.
 
-00:01:08.046 --> 00:01:10.336 A:middle
+
+19
+00:01:08,046 --> 00:01:10,336
 In order to discuss where
 this latency comes from,
 
-00:01:10.566 --> 00:01:14.306 A:middle
+
+20
+00:01:10,566 --> 00:01:14,306
 we will discuss and dissect
 the major pieces of iOS,
 
-00:01:14.306 --> 00:01:16.106 A:middle
+
+21
+00:01:14,306 --> 00:01:16,106
 which are responsible
 for everything
 
-00:01:16.106 --> 00:01:17.576 A:middle
+
+22
+00:01:16,106 --> 00:01:17,576
 between handling
 your touch input
 
-00:01:17.966 --> 00:01:20.086 A:middle
+
+23
+00:01:17,966 --> 00:01:20,086
 to drawing the pixels
 underneath your finger
 
-00:01:20.086 --> 00:01:21.336 A:middle
+
+24
+00:01:20,086 --> 00:01:21,336
 in response to that touch.
 
-00:01:22.506 --> 00:01:25.006 A:middle
+
+25
+00:01:22,506 --> 00:01:25,006
 We have made a lot of
 improvements to this system
 
-00:01:25.176 --> 00:01:27.666 A:middle
+
+26
+00:01:25,176 --> 00:01:27,666
 over the last year in iOS 9,
 and we would like to tell you
 
-00:01:27.666 --> 00:01:29.306 A:middle
+
+27
+00:01:27,666 --> 00:01:29,306
 about the improvements
 as well as some
 
-00:01:29.306 --> 00:01:31.616 A:middle
+
+28
+00:01:29,306 --> 00:01:31,616
 of the APIs you guys can
 use to take advantage
 
-00:01:31.616 --> 00:01:33.096 A:middle
+
+29
+00:01:31,616 --> 00:01:33,096
 of all these improvements
 we have made.
 
-00:01:34.166 --> 00:01:36.586 A:middle
+
+30
+00:01:34,166 --> 00:01:36,586
 And finally, we would like
 to leave you with some tips
 
-00:01:36.656 --> 00:01:39.846 A:middle
+
+31
+00:01:36,656 --> 00:01:39,846
 and best practices about
 how to find, diagnose,
 
-00:01:40.116 --> 00:01:42.916 A:middle
+
+32
+00:01:40,116 --> 00:01:42,916
 and fix the performance
 bottlenecks in your application.
 
-00:01:43.446 --> 00:01:45.886 A:middle
+
+33
+00:01:43,446 --> 00:01:45,886
 So why should you care
 
-00:01:46.146 --> 00:01:48.136 A:middle
+
+34
+00:01:46,146 --> 00:01:48,136
 about reducing latency
 in your application?
 
-00:01:49.346 --> 00:01:51.856 A:middle
+
+35
+00:01:49,346 --> 00:01:51,856
 Touch input on iOS is
 built around the idea
 
-00:01:51.856 --> 00:01:53.386 A:middle
+
+36
+00:01:51,856 --> 00:01:53,386
 of direct manipulation.
 
-00:01:53.846 --> 00:01:57.416 A:middle
+
+37
+00:01:53,846 --> 00:01:57,416
 This is the idea that a user
 is actually touching a physical
 
-00:01:57.416 --> 00:01:59.826 A:middle
+
+38
+00:01:57,416 --> 00:01:59,826
 object with their
 finger and moving it
 
-00:01:59.826 --> 00:02:00.926 A:middle
+
+39
+00:01:59,826 --> 00:02:00,926
 around in a virtual space.
 
 
-
-00:01:59.826 --> 00:02:00.926 A:middle
-around in a virtual space.
-
-00:02:01.956 --> 00:02:06.076 A:middle
+40
+00:02:01,956 --> 00:02:06,076
 For example, if a user was
 trying to move this circle
 
-00:02:06.076 --> 00:02:11.076 A:middle
+
+41
+00:02:06,076 --> 00:02:11,076
 from point A to point B,
 the expected result is
 
-00:02:11.076 --> 00:02:13.866 A:middle
+
+42
+00:02:11,076 --> 00:02:13,866
 that the circle feels glued
 to the end of the finger.
 
-00:02:14.836 --> 00:02:16.036 A:middle
+
+43
+00:02:14,836 --> 00:02:16,036
 You'll notice that
 in this example,
 
-00:02:16.306 --> 00:02:19.466 A:middle
+
+44
+00:02:16,306 --> 00:02:19,466
 the circle tracks very
 precisely and responsively
 
-00:02:19.836 --> 00:02:20.736 A:middle
+
+45
+00:02:19,836 --> 00:02:20,736
 with the user's finger.
 
-00:02:22.086 --> 00:02:24.556 A:middle
+
+46
+00:02:22,086 --> 00:02:24,556
 However, as soon as
 you reduce latency,
 
-00:02:24.836 --> 00:02:26.936 A:middle
+
+47
+00:02:24,836 --> 00:02:26,936
 or the lag between
 when the finger moves
 
-00:02:27.346 --> 00:02:29.866 A:middle
+
+48
+00:02:27,346 --> 00:02:29,866
 and the circle moves,
 this illusion
 
-00:02:29.866 --> 00:02:31.836 A:middle
+
+49
+00:02:29,866 --> 00:02:31,836
 of direct manipulation
 starts to break down.
 
-00:02:31.836 --> 00:02:33.806 A:middle
+
+50
+00:02:31,836 --> 00:02:33,806
 In this case, you can see
 
-00:02:33.806 --> 00:02:36.946 A:middle
+
+51
+00:02:33,806 --> 00:02:36,946
 that the circle is following
 the finger and it doesn't feel
 
-00:02:36.946 --> 00:02:38.676 A:middle
+
+52
+00:02:36,946 --> 00:02:38,676
 like you are moving it around
 with your finger anymore.
 
-00:02:40.056 --> 00:02:41.736 A:middle
+
+53
+00:02:40,056 --> 00:02:41,736
 This effect is compounded
 
-00:02:41.846 --> 00:02:43.416 A:middle
+
+54
+00:02:41,846 --> 00:02:43,416
 when the user is
 moving really quickly.
 
-00:02:44.066 --> 00:02:47.236 A:middle
+
+55
+00:02:44,066 --> 00:02:47,236
 In this case, the finger gets
 a substantial distance away
 
-00:02:47.236 --> 00:02:49.496 A:middle
+
+56
+00:02:47,236 --> 00:02:49,496
 from the circle, and
 it no longer feels
 
-00:02:49.496 --> 00:02:51.456 A:middle
+
+57
+00:02:49,496 --> 00:02:51,456
 like the finger is
 glued to the circle,
 
-00:02:51.636 --> 00:02:54.766 A:middle
+
+58
+00:02:51,636 --> 00:02:54,766
 rather the circle is now playing
 catch-up with the finger.
 
-00:02:55.876 --> 00:03:01.516 A:middle
+
+59
+00:02:55,876 --> 00:03:01,516
 So this type of latency affects
 iOS as a whole, from everything
 
 
-
-00:02:55.876 --> 00:03:01.516 A:middle
-So this type of latency affects
-iOS as a whole, from everything
-
-00:03:01.516 --> 00:03:03.946 A:middle
+60
+00:03:01,516 --> 00:03:03,946
 from button presses to
 moving objects around,
 
-00:03:04.376 --> 00:03:06.826 A:middle
+
+61
+00:03:04,376 --> 00:03:06,826
 to scrolling anything
 even a web page.
 
-00:03:07.836 --> 00:03:11.106 A:middle
+
+62
+00:03:07,836 --> 00:03:11,106
 But we have identified a couple
 of applications where increases
 
-00:03:11.106 --> 00:03:13.136 A:middle
+
+63
+00:03:11,106 --> 00:03:13,136
 in latency are even
 more noticeable.
 
-00:03:13.796 --> 00:03:15.686 A:middle
+
+64
+00:03:13,796 --> 00:03:15,686
 One of these types
 
-00:03:15.686 --> 00:03:17.806 A:middle
+
+65
+00:03:15,686 --> 00:03:17,806
 of applications are
 drawing applications.
 
-00:03:18.456 --> 00:03:21.336 A:middle
+
+66
+00:03:18,456 --> 00:03:21,336
 Not only is the artist then
 distracted by the amount
 
-00:03:21.336 --> 00:03:24.896 A:middle
+
+67
+00:03:21,336 --> 00:03:24,896
 of distance between the end of
 the line and a user's finger.
 
-00:03:26.236 --> 00:03:29.856 A:middle
+
+68
+00:03:26,236 --> 00:03:29,856
 Artists often rely on
 quick, responsive updates
 
-00:03:29.976 --> 00:03:33.386 A:middle
+
+69
+00:03:29,976 --> 00:03:33,386
 to their application or to
 the user interface in order
 
-00:03:33.386 --> 00:03:36.476 A:middle
+
+70
+00:03:33,386 --> 00:03:36,476
 to quickly adjust their
 physical behaviors in order
 
-00:03:36.476 --> 00:03:38.006 A:middle
+
+71
+00:03:36,476 --> 00:03:38,006
 to get the result
 they are going for.
 
-00:03:39.086 --> 00:03:41.866 A:middle
+
+72
+00:03:39,086 --> 00:03:41,866
 In addition, latency
 in applications
 
-00:03:41.896 --> 00:03:43.866 A:middle
+
+73
+00:03:41,896 --> 00:03:43,866
 like games makes the
 games harder to play,
 
-00:03:44.596 --> 00:03:47.156 A:middle
+
+74
+00:03:44,596 --> 00:03:47,156
 in effect the perceived
 quality of your application.
 
-00:03:48.696 --> 00:03:50.396 A:middle
+
+75
+00:03:48,696 --> 00:03:50,396
 Where does this latency
 come from?
 
-00:03:50.396 --> 00:03:52.176 A:middle
+
+76
+00:03:50,396 --> 00:03:52,176
 It comes from a lot
 of different places.
 
-00:03:52.626 --> 00:03:57.306 A:middle
+
+77
+00:03:52,626 --> 00:03:57,306
 In order to discuss where
 it's caused, we'll discuss all
 
-00:03:57.306 --> 00:03:59.506 A:middle
+
+78
+00:03:57,306 --> 00:03:59,506
 of the different parts
 of the system involved
 
-00:03:59.506 --> 00:04:02.716 A:middle
+
+79
+00:03:59,506 --> 00:04:02,716
 in handling your touches and
 drawing the touches in response.
 
 
-
-00:03:59.506 --> 00:04:02.716 A:middle
-in handling your touches and
-drawing the touches in response.
-
-00:04:04.156 --> 00:04:05.816 A:middle
+80
+00:04:04,156 --> 00:04:05,816
 Throughout the next
 portion of the talk,
 
-00:04:05.816 --> 00:04:08.506 A:middle
+
+81
+00:04:05,816 --> 00:04:08,506
 we will be relying heavily
 on these pipeline diagrams.
 
-00:04:08.866 --> 00:04:09.856 A:middle
+
+82
+00:04:08,866 --> 00:04:09,856
 So let's make sure we are all
 
-00:04:09.856 --> 00:04:11.456 A:middle
+
+83
+00:04:09,856 --> 00:04:11,456
 on the same page as
 to what they mean.
 
-00:04:12.306 --> 00:04:14.516 A:middle
+
+84
+00:04:12,306 --> 00:04:14,516
 Up on the screen, you
 see five different boxes.
 
-00:04:15.126 --> 00:04:17.286 A:middle
+
+85
+00:04:15,126 --> 00:04:17,286
 Each of these boxes
 represents the amount
 
-00:04:17.286 --> 00:04:19.666 A:middle
+
+86
+00:04:17,286 --> 00:04:19,666
 of time a frame is shown
 on the display for.
 
-00:04:19.666 --> 00:04:23.386 A:middle
+
+87
+00:04:19,666 --> 00:04:23,386
 Our products refresh
 the screen at 60 hertz
 
-00:04:23.616 --> 00:04:24.846 A:middle
+
+88
+00:04:23,616 --> 00:04:24,846
 or 60 times per second.
 
-00:04:25.216 --> 00:04:27.796 A:middle
+
+89
+00:04:25,216 --> 00:04:27,796
 So the amount of time
 represented by each
 
-00:04:27.796 --> 00:04:32.496 A:middle
+
+90
+00:04:27,796 --> 00:04:32,496
 of these boxes is approximately
 one-sixtieth of a second.
 
-00:04:32.496 --> 00:04:36.836 A:middle
+
+91
+00:04:32,496 --> 00:04:36,836
 You may hear me refer to each of
 these boxes as a display frame,
 
-00:04:37.076 --> 00:04:39.236 A:middle
+
+92
+00:04:37,076 --> 00:04:39,236
 a display interval,
 or a display cycle.
 
-00:04:39.616 --> 00:04:42.026 A:middle
+
+93
+00:04:39,616 --> 00:04:42,026
 They all mean the same thing.
 
-00:04:42.246 --> 00:04:44.256 A:middle
+
+94
+00:04:42,246 --> 00:04:44,256
 Now, the vertical
 lines separating each
 
-00:04:44.256 --> 00:04:46.496 A:middle
+
+95
+00:04:44,256 --> 00:04:46,496
 of these boxes is
 the display refresh.
 
-00:04:46.826 --> 00:04:48.946 A:middle
+
+96
+00:04:46,826 --> 00:04:48,946
 This is the point in
 time where one frame
 
-00:04:48.946 --> 00:04:51.776 A:middle
+
+97
+00:04:48,946 --> 00:04:51,776
 on the display is swapped out
 with the next one to be shown.
 
-00:04:52.636 --> 00:04:56.066 A:middle
+
+98
+00:04:52,636 --> 00:04:56,066
 You will hear me refer to this
 as either the display refresh
 
-00:04:56.156 --> 00:04:59.126 A:middle
+
+99
+00:04:56,156 --> 00:04:59,126
 or the v-sync, again they
 mean basically the same thing.
 
-00:04:59.946 --> 00:05:02.306 A:middle
+
+100
+00:04:59,946 --> 00:05:02,306
 The display refresh
 is important in iOS
 
 
-
-00:04:59.946 --> 00:05:02.306 A:middle
-The display refresh
-is important in iOS
-
-00:05:02.606 --> 00:05:06.896 A:middle
+101
+00:05:02,606 --> 00:05:06,896
 because many important system
 processes are kicked off
 
-00:05:06.896 --> 00:05:09.116 A:middle
+
+102
+00:05:06,896 --> 00:05:09,116
 or triggered by this
 display refresh.
 
-00:05:09.446 --> 00:05:11.596 A:middle
+
+103
+00:05:09,446 --> 00:05:11,596
 So let's actually talk
 about what's going
 
-00:05:11.596 --> 00:05:12.946 A:middle
+
+104
+00:05:11,596 --> 00:05:12,946
 on inside this pipeline.
 
-00:05:13.296 --> 00:05:15.946 A:middle
+
+105
+00:05:13,296 --> 00:05:15,946
 The first stage of the
 pipeline is Multi-Touch.
 
-00:05:16.586 --> 00:05:20.996 A:middle
+
+106
+00:05:16,586 --> 00:05:20,996
 This is the process where the
 hardware will scan the surface
 
-00:05:20.996 --> 00:05:22.846 A:middle
+
+107
+00:05:20,996 --> 00:05:22,846
 of the display looking
 for touches.
 
-00:05:23.876 --> 00:05:26.176 A:middle
+
+108
+00:05:23,876 --> 00:05:26,176
 On most of our products,
 this can take less
 
-00:05:26.176 --> 00:05:30.036 A:middle
+
+109
+00:05:26,176 --> 00:05:30,036
 than the entire display frame,
 but on some of our products,
 
-00:05:30.036 --> 00:05:32.536 A:middle
+
+110
+00:05:30,036 --> 00:05:32,536
 it can take up to that
 entire display frame.
 
-00:05:33.006 --> 00:05:34.526 A:middle
+
+111
+00:05:33,006 --> 00:05:34,526
 In order to symbolize
 that, we will fill
 
-00:05:34.526 --> 00:05:36.176 A:middle
+
+112
+00:05:34,526 --> 00:05:36,176
 in the entire box
 with this green box.
 
-00:05:37.076 --> 00:05:42.316 A:middle
+
+113
+00:05:37,076 --> 00:05:42,316
 Once Multi-Touch is finished
 scanning this display
 
-00:05:42.966 --> 00:05:46.626 A:middle
+
+114
+00:05:42,966 --> 00:05:46,626
 and is finished filtering
 out any of the noise
 
-00:05:46.736 --> 00:05:48.586 A:middle
+
+115
+00:05:46,736 --> 00:05:48,586
 which was present
 on this screen,
 
-00:05:49.346 --> 00:05:53.126 A:middle
+
+116
+00:05:49,346 --> 00:05:53,126
 your UI application's UITouch
 callback will be called near the
 
-00:05:53.126 --> 00:05:56.206 A:middle
+
+117
+00:05:53,126 --> 00:05:56,206
 beginning of the next
 touch frame, usually right
 
-00:05:56.206 --> 00:05:57.676 A:middle
+
+118
+00:05:56,206 --> 00:05:57,676
 after a display refresh
 has occurred.
 
-00:05:58.526 --> 00:06:01.906 A:middle
+
+119
+00:05:58,526 --> 00:06:01,906
 This is the point in time where
 your application should respond
 
 
-
-00:05:58.526 --> 00:06:01.906 A:middle
-This is the point in time where
-your application should respond
-
-00:06:01.906 --> 00:06:04.526 A:middle
+120
+00:06:01,906 --> 00:06:04,526
 to the touch inputs and,
 in a drawing application,
 
-00:06:04.966 --> 00:06:07.586 A:middle
+
+121
+00:06:04,966 --> 00:06:07,586
 maybe plot the points and
 connect the dots in between.
 
-00:06:08.336 --> 00:06:11.136 A:middle
+
+122
+00:06:08,336 --> 00:06:11,136
 You may want to do any smoothing
 to make the line very smooth.
 
-00:06:11.136 --> 00:06:14.156 A:middle
+
+123
+00:06:11,136 --> 00:06:14,156
 In an application that
 isn't a drawing application,
 
-00:06:14.466 --> 00:06:16.866 A:middle
+
+124
+00:06:14,466 --> 00:06:16,866
 this is where you would
 respond to button presses
 
-00:06:16.866 --> 00:06:21.076 A:middle
+
+125
+00:06:16,866 --> 00:06:21,076
 or key presses, maybe create
 views, view controllers
 
-00:06:21.136 --> 00:06:22.356 A:middle
+
+126
+00:06:21,136 --> 00:06:22,356
 and present them to the user.
 
-00:06:23.216 --> 00:06:26.036 A:middle
+
+127
+00:06:23,216 --> 00:06:26,036
 The amount of time spent here
 is variable, but can take
 
-00:06:26.036 --> 00:06:27.236 A:middle
+
+128
+00:06:26,036 --> 00:06:27,236
 up to one display frame.
 
-00:06:27.516 --> 00:06:29.306 A:middle
+
+129
+00:06:27,516 --> 00:06:29,306
 So, again, I filled
 in the entire box.
 
-00:06:30.856 --> 00:06:33.636 A:middle
+
+130
+00:06:30,856 --> 00:06:33,636
 Once your application is done
 responding to the touch events
 
-00:06:33.666 --> 00:06:35.766 A:middle
+
+131
+00:06:33,666 --> 00:06:35,766
 and has updated the
 state accordingly,
 
-00:06:36.346 --> 00:06:39.796 A:middle
+
+132
+00:06:36,346 --> 00:06:39,796
 Core Animation will wake up
 at the next display refresh
 
-00:06:40.256 --> 00:06:43.836 A:middle
+
+133
+00:06:40,256 --> 00:06:43,836
 and begin translating
 your views and your layers
 
-00:06:44.476 --> 00:06:47.136 A:middle
+
+134
+00:06:44,476 --> 00:06:47,136
 into GPU commands that can
 be rendered by the GPU.
 
-00:06:47.216 --> 00:06:51.086 A:middle
+
+135
+00:06:47,216 --> 00:06:51,086
 You will notice that the
 GPU does not have to wait
 
-00:06:51.086 --> 00:06:52.956 A:middle
+
+136
+00:06:51,086 --> 00:06:52,956
 until the next display
 refresh to begin.
 
-00:06:53.186 --> 00:06:54.776 A:middle
+
+137
+00:06:53,186 --> 00:06:54,776
 It begins immediately as soon
 
-00:06:54.776 --> 00:06:57.636 A:middle
+
+138
+00:06:54,776 --> 00:06:57,636
 as Core Animation has
 given it the instructions
 
-00:06:57.636 --> 00:06:59.216 A:middle
+
+139
+00:06:57,636 --> 00:06:59,216
 that it needs to
 render the frame.
 
 
-
-00:07:00.016 --> 00:07:03.296 A:middle
+140
+00:07:00,016 --> 00:07:03,296
 Again, the time in these
 stages is variable,
 
-00:07:03.896 --> 00:07:07.266 A:middle
+
+141
+00:07:03,896 --> 00:07:07,266
 based upon how complicated the
 views in your application are.
 
-00:07:08.406 --> 00:07:11.046 A:middle
+
+142
+00:07:08,406 --> 00:07:11,046
 Finally, once the GPU has
 finished rendering your frame,
 
-00:07:11.446 --> 00:07:13.496 A:middle
+
+143
+00:07:11,446 --> 00:07:13,496
 that frame is then
 enqueued to be displayed
 
-00:07:13.886 --> 00:07:16.716 A:middle
+
+144
+00:07:13,886 --> 00:07:16,716
 on the display once the
 next display refresh occurs.
 
-00:07:17.316 --> 00:07:23.156 A:middle
+
+145
+00:07:17,316 --> 00:07:23,156
 As you can tell, between sensing
 your touch on the display,
 
-00:07:23.386 --> 00:07:26.106 A:middle
+
+146
+00:07:23,386 --> 00:07:26,106
 all the way through to drawing
 it, can take several frames.
 
-00:07:26.316 --> 00:07:27.846 A:middle
+
+147
+00:07:26,316 --> 00:07:27,846
 In this case, it
 takes four frames.
 
-00:07:28.596 --> 00:07:29.506 A:middle
+
+148
+00:07:28,596 --> 00:07:29,506
 So it's not instant.
 
-00:07:30.846 --> 00:07:32.456 A:middle
+
+149
+00:07:30,846 --> 00:07:32,456
 In addition, this is a pipeline.
 
-00:07:32.796 --> 00:07:36.386 A:middle
+
+150
+00:07:32,796 --> 00:07:36,386
 So other touches that may
 occur while your application is
 
-00:07:36.386 --> 00:07:38.816 A:middle
+
+151
+00:07:36,386 --> 00:07:38,816
 processing that previous
 touch can also be happening.
 
-00:07:39.456 --> 00:07:40.826 A:middle
+
+152
+00:07:39,456 --> 00:07:40,826
 These just go through
 the process
 
-00:07:40.826 --> 00:07:42.816 A:middle
+
+153
+00:07:40,826 --> 00:07:42,816
 at different points
 in the pipeline.
 
-00:07:43.346 --> 00:07:46.656 A:middle
+
+154
+00:07:43,346 --> 00:07:46,656
 Let's talk about what you as
 a developer have control over.
 
-00:07:47.226 --> 00:07:50.506 A:middle
+
+155
+00:07:47,226 --> 00:07:50,506
 There are no APIs to alter the
 behavior of the Multi-Touch
 
-00:07:50.556 --> 00:07:51.996 A:middle
+
+156
+00:07:50,556 --> 00:07:51,996
 or the display hardware layers.
 
-00:07:52.336 --> 00:07:54.186 A:middle
+
+157
+00:07:52,336 --> 00:07:54,186
 This is handled for
 you by the system.
 
-00:07:55.146 --> 00:07:56.886 A:middle
+
+158
+00:07:55,146 --> 00:07:56,886
 You exercise indirect control
 
-00:07:57.156 --> 00:08:00.626 A:middle
+
+159
+00:07:57,156 --> 00:08:00,626
 over the Core Animation render
 server and the GPU based
 
 
-
-00:07:57.156 --> 00:08:00.626 A:middle
-over the Core Animation render
-server and the GPU based
-
-00:08:00.626 --> 00:08:03.066 A:middle
+160
+00:08:00,626 --> 00:08:03,066
 on how complicated the views
 in your application are.
 
-00:08:03.456 --> 00:08:06.616 A:middle
+
+161
+00:08:03,456 --> 00:08:06,616
 But you have almost complete
 control over your application.
 
-00:08:07.186 --> 00:08:08.576 A:middle
+
+162
+00:08:07,186 --> 00:08:08,576
 So that's where we will begin.
 
-00:08:09.346 --> 00:08:12.466 A:middle
+
+163
+00:08:09,346 --> 00:08:12,466
 As I mentioned earlier,
 this is the point
 
-00:08:12.466 --> 00:08:14.476 A:middle
+
+164
+00:08:12,466 --> 00:08:14,476
 where you update the
 stay of your application
 
-00:08:14.636 --> 00:08:16.276 A:middle
+
+165
+00:08:14,636 --> 00:08:16,276
 in response to the touch inputs.
 
-00:08:16.916 --> 00:08:19.016 A:middle
+
+166
+00:08:16,916 --> 00:08:19,016
 For example, in a drawing
 application, you plot the points
 
-00:08:19.016 --> 00:08:21.206 A:middle
+
+167
+00:08:19,016 --> 00:08:21,206
 and connect them,
 or you create views
 
-00:08:21.206 --> 00:08:22.426 A:middle
+
+168
+00:08:21,206 --> 00:08:22,426
 in response to button presses.
 
-00:08:22.906 --> 00:08:25.246 A:middle
+
+169
+00:08:22,906 --> 00:08:25,246
 This also might be where
 you issue your OpenGL
 
-00:08:25.246 --> 00:08:25.926 A:middle
+
+170
+00:08:25,246 --> 00:08:25,926
 or Metal commands.
 
-00:08:26.206 --> 00:08:28.606 A:middle
+
+171
+00:08:26,206 --> 00:08:28,606
 The amount of time
 spent here is variable.
 
-00:08:28.976 --> 00:08:32.356 A:middle
+
+172
+00:08:28,976 --> 00:08:32,356
 You can optimize this to take
 a smaller amount of time,
 
-00:08:32.395 --> 00:08:35.316 A:middle
+
+173
+00:08:32,395 --> 00:08:35,316
 and we encourage you to do
 this, but you will notice
 
-00:08:35.676 --> 00:08:37.765 A:middle
+
+174
+00:08:35,676 --> 00:08:37,765
 that when we optimize
 the application,
 
-00:08:38.076 --> 00:08:41.796 A:middle
+
+175
+00:08:38,076 --> 00:08:41,796
 Core Animation does not slide in
 to fill in the space left behind
 
-00:08:41.796 --> 00:08:44.116 A:middle
+
+176
+00:08:41,796 --> 00:08:44,116
 by UIKit or your application.
 
-00:08:45.326 --> 00:08:47.486 A:middle
+
+177
+00:08:45,326 --> 00:08:47,486
 This is because of how updates
 
-00:08:47.486 --> 00:08:50.456 A:middle
+
+178
+00:08:47,486 --> 00:08:50,456
 to your views have worked
 historically in the past on iOS.
 
-00:08:51.636 --> 00:08:53.446 A:middle
+
+179
+00:08:51,636 --> 00:08:53,446
 When you update the state
 of your views on iOS,
 
-00:08:53.756 --> 00:08:56.576 A:middle
+
+180
+00:08:53,756 --> 00:08:56,576
 you can either explicitly
 commit A CATransaction
 
-00:08:57.296 --> 00:08:59.906 A:middle
+
+181
+00:08:57,296 --> 00:08:59,906
 or UIKit will implicitly
 generate one for you
 
 
-
-00:09:00.306 --> 00:09:02.806 A:middle
+182
+00:09:00,306 --> 00:09:02,806
 if you update the views
 properties with the UIMethods.
 
-00:09:03.506 --> 00:09:06.576 A:middle
+
+183
+00:09:03,506 --> 00:09:06,576
 We will represent this
 CATransaction commit
 
-00:09:06.576 --> 00:09:07.356 A:middle
+
+184
+00:09:06,576 --> 00:09:07,356
 with this red dot.
 
-00:09:08.816 --> 00:09:11.756 A:middle
+
+185
+00:09:08,816 --> 00:09:11,756
 Now, the reason why Core
 Animation doesn't slide
 
-00:09:11.756 --> 00:09:13.436 A:middle
+
+186
+00:09:11,756 --> 00:09:13,436
 in to fill in the time is
 
-00:09:13.436 --> 00:09:14.996 A:middle
+
+187
+00:09:13,436 --> 00:09:14,996
 because your application
 is allowed
 
-00:09:15.226 --> 00:09:18.316 A:middle
+
+188
+00:09:15,226 --> 00:09:18,316
 to update its state several
 time during one display frame,
 
-00:09:18.476 --> 00:09:21.016 A:middle
+
+189
+00:09:18,476 --> 00:09:21,016
 in this case, symbolized
 by the second dot.
 
-00:09:22.006 --> 00:09:25.096 A:middle
+
+190
+00:09:22,006 --> 00:09:25,096
 Now, in order to reduce the
 amount of redundant work or work
 
-00:09:25.096 --> 00:09:26.726 A:middle
+
+191
+00:09:25,096 --> 00:09:26,726
 that will never be
 shown on the display,
 
-00:09:27.166 --> 00:09:31.496 A:middle
+
+192
+00:09:27,166 --> 00:09:31,496
 Core Animation will batch
 up all of your updates
 
-00:09:31.496 --> 00:09:33.726 A:middle
+
+193
+00:09:31,496 --> 00:09:33,726
 and render it once at
 the display refresh.
 
-00:09:34.106 --> 00:09:37.006 A:middle
+
+194
+00:09:34,106 --> 00:09:37,006
 So we will only render
 the combined state of both
 
-00:09:37.006 --> 00:09:39.576 A:middle
+
+195
+00:09:37,006 --> 00:09:39,576
 of those Core Animation
 transactions.
 
-00:09:39.956 --> 00:09:44.366 A:middle
+
+196
+00:09:39,956 --> 00:09:44,366
 Once Core Animation decides
 to snapshot your view
 
-00:09:44.496 --> 00:09:48.646 A:middle
+
+197
+00:09:44,496 --> 00:09:48,646
 at the display refresh, it
 will begin translating all
 
-00:09:48.646 --> 00:09:51.896 A:middle
+
+198
+00:09:48,646 --> 00:09:51,896
 of the logical views and layers
 that you have created for it
 
-00:09:51.896 --> 00:09:54.346 A:middle
+
+199
+00:09:51,896 --> 00:09:54,346
 into GPU commands that can
 be rendered by the GPU.
 
-00:09:54.996 --> 00:09:58.366 A:middle
+
+200
+00:09:54,996 --> 00:09:58,366
 As I mentioned earlier, the
 GPU starts immediately as soon
 
-00:09:58.366 --> 00:10:00.026 A:middle
+
+201
+00:09:58,366 --> 00:10:00,026
 as it has the necessary
 instructions
 
 
-
-00:09:58.366 --> 00:10:00.026 A:middle
-as it has the necessary
-instructions
-
-00:10:00.026 --> 00:10:00.816 A:middle
+202
+00:10:00,026 --> 00:10:00,816
 from Core Animation.
 
-00:10:01.276 --> 00:10:04.786 A:middle
+
+203
+00:10:01,276 --> 00:10:04,786
 So if you optimize the amount
 of time spent in Core Animation
 
-00:10:04.786 --> 00:10:07.796 A:middle
+
+204
+00:10:04,786 --> 00:10:07,796
 or in the GPU, the GPU
 will fill in the space
 
-00:10:07.796 --> 00:10:09.806 A:middle
+
+205
+00:10:07,796 --> 00:10:09,806
 that was left behind it.
 
-00:10:10.106 --> 00:10:12.366 A:middle
+
+206
+00:10:10,106 --> 00:10:12,366
 The view debugger in Xcode
 is a very helpful way
 
-00:10:12.366 --> 00:10:15.116 A:middle
+
+207
+00:10:12,366 --> 00:10:15,116
 to understand how complicated
 your view hierarchy is
 
-00:10:15.416 --> 00:10:18.636 A:middle
+
+208
+00:10:15,416 --> 00:10:18,636
 and a great way to find
 views that you can take out
 
-00:10:18.636 --> 00:10:20.406 A:middle
+
+209
+00:10:18,636 --> 00:10:20,406
 and therefore optimize
 your application.
 
-00:10:22.006 --> 00:10:24.976 A:middle
+
+210
+00:10:22,006 --> 00:10:24,976
 However, we recognize
 the need for views
 
-00:10:24.976 --> 00:10:26.146 A:middle
+
+211
+00:10:24,976 --> 00:10:26,146
 that are very complicated,
 
-00:10:26.376 --> 00:10:28.256 A:middle
+
+212
+00:10:26,376 --> 00:10:28,256
 that can't possibly
 be represented
 
-00:10:28.256 --> 00:10:29.206 A:middle
+
+213
+00:10:28,256 --> 00:10:29,206
 in one display frame.
 
-00:10:30.296 --> 00:10:33.506 A:middle
+
+214
+00:10:30,296 --> 00:10:33,506
 So the iOS pipeline is
 flexible enough to handle that.
 
-00:10:34.446 --> 00:10:35.626 A:middle
+
+215
+00:10:34,446 --> 00:10:35,626
 If your application needs
 
-00:10:35.626 --> 00:10:37.186 A:middle
+
+216
+00:10:35,626 --> 00:10:37,186
 to spend additional
 time rendering views,
 
-00:10:37.316 --> 00:10:39.566 A:middle
+
+217
+00:10:37,316 --> 00:10:39,566
 we can split the Core
 Animation and GPU work
 
-00:10:39.616 --> 00:10:41.236 A:middle
+
+218
+00:10:39,616 --> 00:10:41,236
 over two display frames.
 
-00:10:41.856 --> 00:10:43.966 A:middle
+
+219
+00:10:41,856 --> 00:10:43,966
 Of course, this adds an
 additional frame of latency,
 
-00:10:44.196 --> 00:10:47.426 A:middle
+
+220
+00:10:44,196 --> 00:10:47,426
 but you can still get 60 frames
 per second smooth animations
 
-00:10:47.756 --> 00:10:50.506 A:middle
+
+221
+00:10:47,756 --> 00:10:50,506
 everywhere in your application,
 with more complicated views.
 
-00:10:51.556 --> 00:10:54.176 A:middle
+
+222
+00:10:51,556 --> 00:10:54,176
 There is no manual trigger to go
 
-00:10:54.176 --> 00:10:56.586 A:middle
+
+223
+00:10:54,176 --> 00:10:56,586
 between the faster mode
 and the slower mode.
 
-00:10:56.946 --> 00:11:00.256 A:middle
+
+224
+00:10:56,946 --> 00:11:00,256
 This, again, happens for you
 and is arbitrated by the system.
 
 
-
-00:10:56.946 --> 00:11:00.256 A:middle
-This, again, happens for you
-and is arbitrated by the system.
-
-00:11:00.746 --> 00:11:03.546 A:middle
+225
+00:11:00,746 --> 00:11:03,546
 So it's important that we
 understand what things can
 
-00:11:03.546 --> 00:11:05.076 A:middle
+
+226
+00:11:03,546 --> 00:11:05,076
 trigger you into the faster mode
 
-00:11:05.326 --> 00:11:10.406 A:middle
+
+227
+00:11:05,326 --> 00:11:10,406
 and what things can trigger
 you into the slower mode.
 
-00:11:10.406 --> 00:11:13.486 A:middle
+
+228
+00:11:10,406 --> 00:11:13,486
 The faster mode is called double
 buffering, and we call it this
 
-00:11:13.486 --> 00:11:16.846 A:middle
+
+229
+00:11:13,486 --> 00:11:16,846
 because there are two buffers,
 one for the GPU to draw into,
 
-00:11:17.026 --> 00:11:19.336 A:middle
+
+230
+00:11:17,026 --> 00:11:19,336
 and one for the LCD
 to show to the user.
 
-00:11:20.126 --> 00:11:23.036 A:middle
+
+231
+00:11:20,126 --> 00:11:23,036
 At the display refresh,
 as you will recall,
 
-00:11:23.036 --> 00:11:26.116 A:middle
+
+232
+00:11:23,036 --> 00:11:26,116
 Core Animation grabs a buffer
 for it and the GPU to use,
 
-00:11:26.116 --> 00:11:28.746 A:middle
+
+233
+00:11:26,116 --> 00:11:28,746
 and it will begin outputting
 GPU commands for that frame.
 
-00:11:29.506 --> 00:11:32.696 A:middle
+
+234
+00:11:29,506 --> 00:11:32,696
 Once the GPU has those commands,
 the GPU will begin rendering,
 
-00:11:33.176 --> 00:11:36.116 A:middle
+
+235
+00:11:33,176 --> 00:11:36,116
 and if the render completes
 before the next display refresh
 
-00:11:36.116 --> 00:11:40.216 A:middle
+
+236
+00:11:36,116 --> 00:11:40,216
 has to occur, we enqueue
 that frame for display
 
-00:11:40.476 --> 00:11:41.716 A:middle
+
+237
+00:11:40,476 --> 00:11:41,716
 at the next display refresh.
 
-00:11:42.386 --> 00:11:43.896 A:middle
+
+238
+00:11:42,386 --> 00:11:43,896
 Once we reach that
 display refresh,
 
-00:11:44.436 --> 00:11:46.416 A:middle
+
+239
+00:11:44,436 --> 00:11:46,416
 the frame is then
 swapped onto the screen
 
-00:11:46.736 --> 00:11:48.886 A:middle
+
+240
+00:11:46,736 --> 00:11:48,886
 and we begin the process
 with the next frame.
 
-00:11:49.876 --> 00:11:52.846 A:middle
+
+241
+00:11:49,876 --> 00:11:52,846
 Again, the GPU will render
 and then enqueue the frame
 
-00:11:52.846 --> 00:11:54.466 A:middle
+
+242
+00:11:52,846 --> 00:11:54,466
 for display at the
 next display refresh.
 
-00:11:55.036 --> 00:11:56.416 A:middle
+
+243
+00:11:55,036 --> 00:11:56,416
 Once we hit that
 display refresh,
 
-00:11:56.716 --> 00:11:59.576 A:middle
+
+244
+00:11:56,716 --> 00:11:59,576
 these two frames
 will swap places,
 
-00:11:59.576 --> 00:12:03.076 A:middle
+
+245
+00:11:59,576 --> 00:12:03,076
 we will reclaim the green buffer
 and continue this process,
 
 
-
-00:11:59.576 --> 00:12:03.076 A:middle
-we will reclaim the green buffer
-and continue this process,
-
-00:12:03.216 --> 00:12:06.406 A:middle
+246
+00:12:03,216 --> 00:12:06,406
 as long as your application has
 views that it wants to render.
 
-00:12:07.666 --> 00:12:08.796 A:middle
+
+247
+00:12:07,666 --> 00:12:08,796
 Now, this is all fine and good.
 
-00:12:08.856 --> 00:12:11.456 A:middle
+
+248
+00:12:08,856 --> 00:12:11,456
 We have finished our Core
 Animation and our GPU work
 
-00:12:11.706 --> 00:12:12.746 A:middle
+
+249
+00:12:11,706 --> 00:12:12,746
 within one display frame.
 
-00:12:13.106 --> 00:12:14.056 A:middle
+
+250
+00:12:13,106 --> 00:12:14,056
 We have good performance.
 
-00:12:14.056 --> 00:12:17.576 A:middle
+
+251
+00:12:14,056 --> 00:12:17,576
 But what happens if you
 can't do all of this?
 
-00:12:18.426 --> 00:12:19.616 A:middle
+
+252
+00:12:18,426 --> 00:12:19,616
 If you can't do it in one frame?
 
-00:12:20.256 --> 00:12:22.176 A:middle
+
+253
+00:12:20,256 --> 00:12:22,176
 Then we fall into a mode
 called triple buffering.
 
-00:12:22.876 --> 00:12:25.776 A:middle
+
+254
+00:12:22,876 --> 00:12:25,776
 Again, Core Animation
 will output GPU commands,
 
-00:12:25.886 --> 00:12:28.866 A:middle
+
+255
+00:12:25,886 --> 00:12:28,866
 which the GPU will then
 render but in this example,
 
-00:12:29.306 --> 00:12:31.756 A:middle
+
+256
+00:12:29,306 --> 00:12:31,756
 the GPU hasn't finished
 rendering the green frame
 
-00:12:31.876 --> 00:12:33.906 A:middle
+
+257
+00:12:31,876 --> 00:12:33,906
 by the time we hit
 the display refresh.
 
-00:12:34.706 --> 00:12:38.056 A:middle
+
+258
+00:12:34,706 --> 00:12:38,056
 In this example, since we can't
 show it yet, the blue frame has
 
-00:12:38.056 --> 00:12:40.566 A:middle
+
+259
+00:12:38,056 --> 00:12:40,566
 to be extended on the
 screen for an extra frame.
 
-00:12:42.096 --> 00:12:44.386 A:middle
+
+260
+00:12:42,096 --> 00:12:44,386
 Core Animation now needs
 to allocate a third buffer
 
-00:12:44.386 --> 00:12:47.236 A:middle
+
+261
+00:12:44,386 --> 00:12:47,236
 to begin work on the next
 frame, and it will do
 
-00:12:47.236 --> 00:12:48.856 A:middle
+
+262
+00:12:47,236 --> 00:12:48,856
 so by creating this
 third buffer.
 
-00:12:49.636 --> 00:12:52.116 A:middle
+
+263
+00:12:49,636 --> 00:12:52,116
 Then Core Animation will
 start outputting GPU commands
 
-00:12:52.116 --> 00:12:54.876 A:middle
+
+264
+00:12:52,116 --> 00:12:54,876
 for it while the GPU finishes
 rendering the previous frame.
 
-00:12:55.896 --> 00:12:58.716 A:middle
+
+265
+00:12:55,896 --> 00:12:58,716
 And then the previous frame
 will be enqueued for display
 
-00:12:58.876 --> 00:13:00.266 A:middle
+
+266
+00:12:58,876 --> 00:13:00,266
 at the next display refresh.
 
 
-
-00:12:58.876 --> 00:13:00.266 A:middle
-at the next display refresh.
-
-00:13:01.386 --> 00:13:02.486 A:middle
+267
+00:13:01,386 --> 00:13:02,486
 This process then repeats
 
-00:13:02.876 --> 00:13:06.946 A:middle
+
+268
+00:13:02,876 --> 00:13:06,946
 with the Core Animation render
 server outputting GPU commands,
 
-00:13:06.946 --> 00:13:08.606 A:middle
+
+269
+00:13:06,946 --> 00:13:08,606
 and the GPU will
 then render them.
 
-00:13:09.206 --> 00:13:10.076 A:middle
+
+270
+00:13:09,206 --> 00:13:10,076
 You get the idea.
 
-00:13:10.156 --> 00:13:12.576 A:middle
+
+271
+00:13:10,156 --> 00:13:12,576
 We swap the buffers,
 reclaim the buffer,
 
-00:13:12.906 --> 00:13:14.746 A:middle
+
+272
+00:13:12,906 --> 00:13:14,746
 and then the process repeats.
 
-00:13:16.896 --> 00:13:20.906 A:middle
+
+273
+00:13:16,896 --> 00:13:20,906
 So you might be thinking, all of
 these slides say Core Animation.
 
-00:13:21.336 --> 00:13:22.526 A:middle
+
+274
+00:13:21,336 --> 00:13:22,526
 What if I don't use
 Core Animation?
 
-00:13:22.786 --> 00:13:24.946 A:middle
+
+275
+00:13:22,786 --> 00:13:24,946
 What if I have optimized
 my application
 
-00:13:25.336 --> 00:13:27.096 A:middle
+
+276
+00:13:25,336 --> 00:13:27,096
 to use Metal or OpenGL?
 
-00:13:28.086 --> 00:13:31.476 A:middle
+
+277
+00:13:28,086 --> 00:13:31,476
 You might think instead of
 your pipeline looking like this
 
-00:13:31.906 --> 00:13:34.926 A:middle
+
+278
+00:13:31,906 --> 00:13:34,926
 and getting your frame out
 to the display in four frames
 
-00:13:34.926 --> 00:13:37.966 A:middle
+
+279
+00:13:34,926 --> 00:13:37,966
 of latency, that you can do
 it in three frames of latency.
 
-00:13:39.676 --> 00:13:42.456 A:middle
+
+280
+00:13:39,676 --> 00:13:42,456
 Unfortunately that's
 not the case.
 
-00:13:42.566 --> 00:13:45.796 A:middle
+
+281
+00:13:42,566 --> 00:13:45,796
 Under iOS 8, if you
 use Metal or OpenGL,
 
-00:13:46.216 --> 00:13:48.826 A:middle
+
+282
+00:13:46,216 --> 00:13:48,826
 Core Animation still acts
 an arbiter, to make sure
 
-00:13:48.826 --> 00:13:51.756 A:middle
+
+283
+00:13:48,826 --> 00:13:51,756
 that any updates you make to
 any Core Animation content
 
-00:13:51.756 --> 00:13:56.146 A:middle
+
+284
+00:13:51,756 --> 00:13:56,146
 on the screen are synchronized
 with any GPU, OpenGL,
 
-00:13:56.146 --> 00:13:58.536 A:middle
+
+285
+00:13:56,146 --> 00:13:58,536
 Metal updates that you
 make to those layers.
 
-00:13:59.556 --> 00:14:01.596 A:middle
+
+286
+00:13:59,556 --> 00:14:01,596
 So you still have
 four frames of latency
 
 
-
-00:13:59.556 --> 00:14:01.596 A:middle
-So you still have
-four frames of latency
-
-00:14:01.926 --> 00:14:05.866 A:middle
+287
+00:14:01,926 --> 00:14:05,866
 when you use OpenGL
 or Metal in iOS 8.
 
-00:14:06.636 --> 00:14:11.796 A:middle
+
+288
+00:14:06,636 --> 00:14:11,796
 So we talked about how the iOS
 pipeline is flexible enough
 
-00:14:11.866 --> 00:14:13.506 A:middle
+
+289
+00:14:11,866 --> 00:14:13,506
 to handle very complicated
 views,
 
-00:14:13.796 --> 00:14:18.166 A:middle
+
+290
+00:14:13,796 --> 00:14:18,166
 getting you 60 frames per second
 animation but at five frames
 
-00:14:18.166 --> 00:14:21.326 A:middle
+
+291
+00:14:18,166 --> 00:14:21,326
 of latency and how you can
 optimize your application
 
-00:14:21.656 --> 00:14:23.676 A:middle
+
+292
+00:14:21,656 --> 00:14:23,676
 to bring that latency
 down to four frames
 
-00:14:23.966 --> 00:14:25.836 A:middle
+
+293
+00:14:23,966 --> 00:14:25,836
 by optimizing what
 you are drawing.
 
-00:14:26.786 --> 00:14:30.576 A:middle
+
+294
+00:14:26,786 --> 00:14:30,576
 However, in this example,
 there is no real way
 
-00:14:30.576 --> 00:14:33.286 A:middle
+
+295
+00:14:30,576 --> 00:14:33,286
 to make it any faster, because
 Core Animation needs to wait
 
-00:14:33.286 --> 00:14:34.556 A:middle
+
+296
+00:14:33,286 --> 00:14:34,556
 until the display refresh
 
-00:14:34.936 --> 00:14:37.386 A:middle
+
+297
+00:14:34,936 --> 00:14:37,386
 to start generating
 the GPU commands.
 
-00:14:37.916 --> 00:14:42.436 A:middle
+
+298
+00:14:37,916 --> 00:14:42,436
 In iOS 9, we are
 removing that dependency.
 
-00:14:43.556 --> 00:14:46.406 A:middle
+
+299
+00:14:43,556 --> 00:14:46,406
 You can now start Core Animation
 work immediately as soon
 
-00:14:46.406 --> 00:14:48.186 A:middle
+
+300
+00:14:46,406 --> 00:14:48,186
 as your application is
 done updating the state
 
-00:14:48.186 --> 00:14:48.886 A:middle
+
+301
+00:14:48,186 --> 00:14:48,886
 of your application.
 
-00:14:49.906 --> 00:14:51.556 A:middle
+
+302
+00:14:49,906 --> 00:14:51,556
 In order to take
 advantage of these,
 
-00:14:51.556 --> 00:14:53.966 A:middle
+
+303
+00:14:51,556 --> 00:14:53,966
 we have introduced some new APIs
 
-00:14:53.966 --> 00:14:55.856 A:middle
+
+304
+00:14:53,966 --> 00:14:55,856
 and new tricks in
 the iOS system.
 
-00:14:56.206 --> 00:14:57.676 A:middle
+
+305
+00:14:56,206 --> 00:14:57,676
 To tell you a little
 bit more about them,
 
-00:14:57.676 --> 00:14:59.476 A:middle
+
+306
+00:14:57,676 --> 00:14:59,476
 I would like to introduce
 Jacob [applause].
 
 
+307
+00:15:01,186 --> 00:15:01,626
+>> JACOB XIAO: Thanks, Peter.
 
-00:15:01.186 --> 00:15:01.626 A:middle
-&gt;&gt; JACOB XIAO: Thanks, Peter.
 
-00:15:02.686 --> 00:15:04.186 A:middle
+308
+00:15:02,686 --> 00:15:04,186
 So I would like to tell you
 
-00:15:04.466 --> 00:15:06.736 A:middle
+
+309
+00:15:04,466 --> 00:15:06,736
 about some additions
 we have made in iOS 9,
 
-00:15:07.346 --> 00:15:10.886 A:middle
+
+310
+00:15:07,346 --> 00:15:10,886
 and how you can use them to get
 even lower latency in your apps.
 
-00:15:11.936 --> 00:15:13.726 A:middle
+
+311
+00:15:11,936 --> 00:15:13,726
 I will be talking about
 three things today.
 
-00:15:14.526 --> 00:15:17.536 A:middle
+
+312
+00:15:14,526 --> 00:15:17,536
 First, low latency
 support in Core Animation.
 
-00:15:18.576 --> 00:15:22.796 A:middle
+
+313
+00:15:18,576 --> 00:15:22,796
 Then, a new system for touch
 coalescing, and finally,
 
-00:15:23.156 --> 00:15:24.936 A:middle
+
+314
+00:15:23,156 --> 00:15:24,936
 a really cool system
 for touch prediction
 
-00:15:25.156 --> 00:15:26.406 A:middle
+
+315
+00:15:25,156 --> 00:15:26,406
 that we built into UIKit.
 
-00:15:27.936 --> 00:15:30.736 A:middle
+
+316
+00:15:27,936 --> 00:15:30,736
 So let's get started with low
 latency in Core Animation.
 
-00:15:31.356 --> 00:15:34.806 A:middle
+
+317
+00:15:31,356 --> 00:15:34,806
 As Peter just showed
 you in iOS 8,
 
-00:15:35.166 --> 00:15:37.646 A:middle
+
+318
+00:15:35,166 --> 00:15:37,646
 even with a well-optimized
 app there was a limit
 
-00:15:37.646 --> 00:15:39.386 A:middle
+
+319
+00:15:37,646 --> 00:15:39,386
 to how far you could
 get your latency down.
 
-00:15:40.636 --> 00:15:43.406 A:middle
+
+320
+00:15:40,636 --> 00:15:43,406
 By using low latency
 Core Animation in iOS 9,
 
-00:15:43.956 --> 00:15:47.026 A:middle
+
+321
+00:15:43,956 --> 00:15:47,026
 we can combine the app's frame
 with Core Animation frame,
 
-00:15:47.236 --> 00:15:48.836 A:middle
+
+322
+00:15:47,236 --> 00:15:48,836
 and this gives you
 much lower latency.
 
-00:15:49.786 --> 00:15:51.356 A:middle
+
+323
+00:15:49,786 --> 00:15:51,356
 The best thing about
 this feature is
 
-00:15:51.356 --> 00:15:52.376 A:middle
+
+324
+00:15:51,356 --> 00:15:52,376
 that it happens automatically.
 
-00:15:52.376 --> 00:15:54.846 A:middle
+
+325
+00:15:52,376 --> 00:15:54,846
 There are no changes you have
 to make to your app other
 
-00:15:54.846 --> 00:15:56.176 A:middle
+
+326
+00:15:54,846 --> 00:15:56,176
 than optimizing your
 performance.
 
-00:15:57.776 --> 00:15:59.506 A:middle
+
+327
+00:15:57,776 --> 00:15:59,506
 However, there's one
 thing to keep in mind,
 
-00:15:59.816 --> 00:16:02.616 A:middle
+
+328
+00:15:59,816 --> 00:16:02,616
 which is that this low latency
 mode is automatically disabled
 
 
-
-00:15:59.816 --> 00:16:02.616 A:middle
-which is that this low latency
-mode is automatically disabled
-
-00:16:02.996 --> 00:16:05.386 A:middle
+329
+00:16:02,996 --> 00:16:05,386
 when you have animations
 active in your app.
 
-00:16:05.926 --> 00:16:09.056 A:middle
+
+330
+00:16:05,926 --> 00:16:09,056
 This includes CA animations
 and UIKit animations,
 
-00:16:09.546 --> 00:16:12.036 A:middle
+
+331
+00:16:09,546 --> 00:16:12,036
 so if you want the absolute
 lowest latency in your app,
 
-00:16:12.476 --> 00:16:15.316 A:middle
+
+332
+00:16:12,476 --> 00:16:15,316
 you want to make sure to disable
 those animations while touches
 
-00:16:15.316 --> 00:16:21.986 A:middle
+
+333
+00:16:15,316 --> 00:16:21,986
 are active on the display.
 
-00:16:22.916 --> 00:16:26.306 A:middle
+
+334
+00:16:22,916 --> 00:16:26,306
 Now this system also works
 with Metal and OpenGL content.
 
-00:16:26.976 --> 00:16:29.726 A:middle
+
+335
+00:16:26,976 --> 00:16:29,726
 So as you saw earlier
 before in iOS 8,
 
-00:16:30.206 --> 00:16:31.646 A:middle
+
+336
+00:16:30,206 --> 00:16:31,646
 we had to wait an
 additional frame
 
-00:16:31.826 --> 00:16:33.616 A:middle
+
+337
+00:16:31,826 --> 00:16:33,616
 to get your GPU content
 to the display.
 
-00:16:33.616 --> 00:16:37.146 A:middle
+
+338
+00:16:33,616 --> 00:16:37,146
 But with the new low
 latency mode, we can now get
 
-00:16:37.186 --> 00:16:39.426 A:middle
+
+339
+00:16:37,186 --> 00:16:39,426
 that content to the display
 as quickly as possible
 
-00:16:39.426 --> 00:16:40.366 A:middle
+
+340
+00:16:39,426 --> 00:16:40,366
 in the very next frame.
 
-00:16:41.416 --> 00:16:43.116 A:middle
+
+341
+00:16:41,416 --> 00:16:43,116
 This happens automatically just
 
-00:16:43.116 --> 00:16:45.566 A:middle
+
+342
+00:16:43,116 --> 00:16:45,566
 by using CAeagllayer
 or CAMetalLayer.
 
-00:16:45.816 --> 00:16:49.076 A:middle
+
+343
+00:16:45,816 --> 00:16:49,076
 However, if there's one thing
 to keep in mind in your app
 
-00:16:49.556 --> 00:16:51.546 A:middle
+
+344
+00:16:49,556 --> 00:16:51,546
 if you have Core Animation
 content that you want
 
-00:16:51.546 --> 00:16:54.196 A:middle
+
+345
+00:16:51,546 --> 00:16:54,196
 to draw along with this
 OpenGL or Metal content.
 
-00:16:55.426 --> 00:16:58.626 A:middle
+
+346
+00:16:55,426 --> 00:16:58,626
 In this case, the GPU content
 will be drawn to the display
 
-00:16:58.626 --> 00:17:02.266 A:middle
+
+347
+00:16:58,626 --> 00:17:02,266
 as quickly as possible but your
 Core Animation content may take
 
 
-
-00:16:58.626 --> 00:17:02.266 A:middle
-as quickly as possible but your
-Core Animation content may take
-
-00:17:02.266 --> 00:17:03.816 A:middle
+348
+00:17:02,266 --> 00:17:03,816
 a little longer to go through.
 
-00:17:04.685 --> 00:17:08.116 A:middle
+
+349
+00:17:04,685 --> 00:17:08,116
 And if that happens, then by
 default, it's not guaranteed
 
-00:17:08.376 --> 00:17:11.165 A:middle
+
+350
+00:17:08,376 --> 00:17:11,165
 that your GPU content will
 arrive in the same frame
 
-00:17:11.165 --> 00:17:12.445 A:middle
+
+351
+00:17:11,165 --> 00:17:12,445
 as your Core Animation content.
 
-00:17:13.326 --> 00:17:15.915 A:middle
+
+352
+00:17:13,326 --> 00:17:15,915
 Now this may be a problem if you
 want those two to be in sync,
 
-00:17:15.915 --> 00:17:17.816 A:middle
+
+353
+00:17:15,915 --> 00:17:17,816
 and that could happen,
 for example,
 
-00:17:17.816 --> 00:17:20.316 A:middle
+
+354
+00:17:17,816 --> 00:17:20,316
 if you had an OpenGL map
 view, that you wanted
 
-00:17:20.316 --> 00:17:22.016 A:middle
+
+355
+00:17:20,316 --> 00:17:22,016
 to draw UIKit content on top of.
 
-00:17:23.096 --> 00:17:25.935 A:middle
+
+356
+00:17:23,096 --> 00:17:25,935
 In that case, you may want
 to synchronize those updates
 
-00:17:26.185 --> 00:17:28.626 A:middle
+
+357
+00:17:26,185 --> 00:17:28,626
 in something like this,
 and there's a property
 
-00:17:28.626 --> 00:17:29.366 A:middle
+
+358
+00:17:28,626 --> 00:17:29,366
 that allows you to do
 
-00:17:29.366 --> 00:17:31.816 A:middle
+
+359
+00:17:29,366 --> 00:17:31,816
 that called Presents
 With Transaction.
 
-00:17:32.206 --> 00:17:34.466 A:middle
+
+360
+00:17:32,206 --> 00:17:34,466
 It's on CAeagllayer
 and CAMetalLayer.
 
-00:17:35.316 --> 00:17:37.536 A:middle
+
+361
+00:17:35,316 --> 00:17:37,536
 When this is set to False,
 which is the default value,
 
-00:17:38.206 --> 00:17:40.426 A:middle
+
+362
+00:17:38,206 --> 00:17:40,426
 then it will get your GPU
 content to the display
 
-00:17:40.426 --> 00:17:41.476 A:middle
+
+363
+00:17:40,426 --> 00:17:41,476
 as quickly as possible.
 
-00:17:42.266 --> 00:17:43.536 A:middle
+
+364
+00:17:42,266 --> 00:17:43,536
 But when you set it to True,
 
-00:17:44.076 --> 00:17:45.986 A:middle
+
+365
+00:17:44,076 --> 00:17:45,986
 then we synchronize
 your GPU content
 
-00:17:46.256 --> 00:17:48.836 A:middle
+
+366
+00:17:46,256 --> 00:17:48,836
 with the Core Animation
 content so they both appear
 
-00:17:48.916 --> 00:17:50.726 A:middle
+
+367
+00:17:48,916 --> 00:17:50,726
 on the display at the same time.
 
-00:17:51.296 --> 00:17:52.326 A:middle
+
+368
+00:17:51,296 --> 00:17:52,326
 All right.
 
-00:17:52.496 --> 00:17:55.256 A:middle
+
+369
+00:17:52,496 --> 00:17:55,256
 Next, let's talk about
 touch coalescing.
 
-00:17:56.256 --> 00:17:57.406 A:middle
+
+370
+00:17:56,256 --> 00:17:57,406
 But before we do, I would
 
-00:17:57.406 --> 00:17:59.826 A:middle
+
+371
+00:17:57,406 --> 00:17:59,826
 like to tell you a little
 bit about the iPad Air 2.
 
 
-
-00:18:01.086 --> 00:18:02.956 A:middle
+372
+00:18:01,086 --> 00:18:02,956
 We introduced the
 iPad Air 2 last year,
 
-00:18:03.746 --> 00:18:05.936 A:middle
+
+373
+00:18:03,746 --> 00:18:05,936
 and it has a 60-hertz
 display update rate,
 
-00:18:06.246 --> 00:18:09.186 A:middle
+
+374
+00:18:06,246 --> 00:18:09,186
 which means the display
 updates at 60 times per second
 
-00:18:09.606 --> 00:18:10.886 A:middle
+
+375
+00:18:09,606 --> 00:18:10,886
 like our other iOS devices.
 
-00:18:11.786 --> 00:18:14.456 A:middle
+
+376
+00:18:11,786 --> 00:18:14,456
 It also has a really cool
 feature that affects touch
 
-00:18:14.456 --> 00:18:16.456 A:middle
+
+377
+00:18:14,456 --> 00:18:16,456
 and touch latency that
 I'm really excited
 
-00:18:16.456 --> 00:18:17.136 A:middle
+
+378
+00:18:16,456 --> 00:18:17,136
 to announce to you today.
 
-00:18:17.136 --> 00:18:21.316 A:middle
+
+379
+00:18:17,136 --> 00:18:21,316
 And that's the fact that it has
 a 120-hertz touch scan update
 
-00:18:21.316 --> 00:18:21.536 A:middle
+
+380
+00:18:21,316 --> 00:18:21,536
 rate [applause].
 
-00:18:25.366 --> 00:18:25.796 A:middle
+
+381
+00:18:25,366 --> 00:18:25,796
 It's pretty cool.
 
-00:18:27.606 --> 00:18:30.006 A:middle
+
+382
+00:18:27,606 --> 00:18:30,006
 This means that it scans for
 touches at twice the rate
 
-00:18:30.136 --> 00:18:31.516 A:middle
+
+383
+00:18:30,136 --> 00:18:31,516
 of all other iOS devices.
 
-00:18:31.616 --> 00:18:34.286 A:middle
+
+384
+00:18:31,616 --> 00:18:34,286
 And this is great, because you
 can get a lot more information
 
-00:18:34.506 --> 00:18:35.986 A:middle
+
+385
+00:18:34,506 --> 00:18:35,986
 about where the user's
 finger is going
 
-00:18:36.036 --> 00:18:37.386 A:middle
+
+386
+00:18:36,036 --> 00:18:37,386
 as they interact
 with the display.
 
-00:18:38.976 --> 00:18:41.776 A:middle
+
+387
+00:18:38,976 --> 00:18:41,776
 Let's take a look at how this
 affects your app in practice.
 
-00:18:42.976 --> 00:18:46.356 A:middle
+
+388
+00:18:42,976 --> 00:18:46,356
 With the 60-hertz touch scan
 rate, as the user's finger moves
 
-00:18:46.356 --> 00:18:48.866 A:middle
+
+389
+00:18:46,356 --> 00:18:48,866
 across the display, we
 will periodically sample
 
-00:18:48.866 --> 00:18:52.016 A:middle
+
+390
+00:18:48,866 --> 00:18:52,016
 where that finger is and give
 that information to the app.
 
-00:18:53.456 --> 00:18:56.036 A:middle
+
+391
+00:18:53,456 --> 00:18:56,036
 The same thing happens with
 the 120-hertz scan rate,
 
-00:18:56.456 --> 00:18:59.716 A:middle
+
+392
+00:18:56,456 --> 00:18:59,716
 but since it's twice as fast,
 you get twice as many samples,
 
-00:18:59.716 --> 00:19:02.296 A:middle
+
+393
+00:18:59,716 --> 00:19:02,296
 and this gives you a
 lot more information
 
 
-
-00:18:59.716 --> 00:19:02.296 A:middle
-and this gives you a
-lot more information
-
-00:19:02.296 --> 00:19:09.206 A:middle
+394
+00:19:02,296 --> 00:19:09,206
 about what the user is doing.
 
-00:19:09.396 --> 00:19:12.196 A:middle
+
+395
+00:19:09,396 --> 00:19:12,196
 Now, once we get those samples,
 we will pass them to your app,
 
-00:19:12.196 --> 00:19:15.496 A:middle
+
+396
+00:19:12,196 --> 00:19:15,496
 and you can use those to
 know what the user is trying
 
-00:19:15.496 --> 00:19:16.336 A:middle
+
+397
+00:19:15,496 --> 00:19:16,336
 to do with their touches.
 
-00:19:16.806 --> 00:19:19.726 A:middle
+
+398
+00:19:16,806 --> 00:19:19,726
 For example, in a drawing app,
 you might connect them together
 
-00:19:20.056 --> 00:19:22.346 A:middle
+
+399
+00:19:20,056 --> 00:19:22,346
 to represent the drawing that
 the user is trying to perform,
 
-00:19:23.346 --> 00:19:26.856 A:middle
+
+400
+00:19:23,346 --> 00:19:26,856
 and this 120-hertz information
 gives you a lot more information
 
-00:19:26.976 --> 00:19:29.766 A:middle
+
+401
+00:19:26,976 --> 00:19:29,766
 that you can use to get a better
 representation of their drawing.
 
-00:19:30.306 --> 00:19:32.806 A:middle
+
+402
+00:19:30,306 --> 00:19:32,806
 So now that we have
 seen the benefits
 
-00:19:32.806 --> 00:19:36.046 A:middle
+
+403
+00:19:32,806 --> 00:19:36,046
 of 120-hertz touch scan
 rate, let's take a look
 
-00:19:36.046 --> 00:19:39.446 A:middle
+
+404
+00:19:36,046 --> 00:19:39,446
 at how it affects the
 touch to display pipeline.
 
-00:19:40.026 --> 00:19:43.146 A:middle
+
+405
+00:19:40,026 --> 00:19:43,146
 This is the 60-hertz
 touch scan rate pipeline
 
-00:19:43.146 --> 00:19:43.866 A:middle
+
+406
+00:19:43,146 --> 00:19:43,866
 that we saw earlier.
 
-00:19:44.706 --> 00:19:46.906 A:middle
+
+407
+00:19:44,706 --> 00:19:46,906
 And let's focus in on
 just the Multi-Touch stage
 
-00:19:46.976 --> 00:19:47.636 A:middle
+
+408
+00:19:46,976 --> 00:19:47,636
 of the pipeline.
 
-00:19:49.096 --> 00:19:52.726 A:middle
+
+409
+00:19:49,096 --> 00:19:52,726
 At 60 hertz, we get a new
 touch sample every frame.
 
-00:19:53.776 --> 00:19:56.906 A:middle
+
+410
+00:19:53,776 --> 00:19:56,906
 And with 120 hertz, we'll now
 get two samples every time.
 
-00:19:57.786 --> 00:19:59.196 A:middle
+
+411
+00:19:57,786 --> 00:19:59,196
 However, note that the size
 
-00:19:59.196 --> 00:20:00.886 A:middle
+
+412
+00:19:59,196 --> 00:20:00,886
 of the display frame
 is still the same,
 
 
-
-00:19:59.196 --> 00:20:00.886 A:middle
-of the display frame
-is still the same,
-
-00:20:01.246 --> 00:20:03.816 A:middle
+413
+00:20:01,246 --> 00:20:03,816
 since we have the same update
 rate for the display itself.
 
-00:20:03.946 --> 00:20:08.076 A:middle
+
+414
+00:20:03,946 --> 00:20:08,076
 Now, we could take those new
 touch samples and pass them
 
-00:20:08.076 --> 00:20:11.316 A:middle
+
+415
+00:20:08,076 --> 00:20:11,316
 to your app, and your app could
 use that to update its drawing,
 
-00:20:11.666 --> 00:20:13.826 A:middle
+
+416
+00:20:11,666 --> 00:20:13,826
 which would update what it
 showed in Core Animation
 
-00:20:13.826 --> 00:20:15.066 A:middle
+
+417
+00:20:13,826 --> 00:20:15,066
 and on to the display.
 
-00:20:16.076 --> 00:20:17.346 A:middle
+
+418
+00:20:16,076 --> 00:20:17,346
 But you will notice
 that if we did,
 
-00:20:17.346 --> 00:20:20.056 A:middle
+
+419
+00:20:17,346 --> 00:20:20,056
 that your app would actually
 be updating twice as often
 
-00:20:20.056 --> 00:20:21.806 A:middle
+
+420
+00:20:20,056 --> 00:20:21,806
 as the display updates,
 which would lead
 
-00:20:21.806 --> 00:20:23.746 A:middle
+
+421
+00:20:21,806 --> 00:20:23,746
 to wasted work in your app.
 
-00:20:24.026 --> 00:20:26.016 A:middle
+
+422
+00:20:24,026 --> 00:20:26,016
 So we introduced the
 touch coalescing system
 
-00:20:26.116 --> 00:20:27.316 A:middle
+
+423
+00:20:26,116 --> 00:20:27,316
 to get the best of both worlds.
 
-00:20:28.076 --> 00:20:30.196 A:middle
+
+424
+00:20:28,076 --> 00:20:30,196
 This allows you to get
 the increased information
 
-00:20:30.196 --> 00:20:32.936 A:middle
+
+425
+00:20:30,196 --> 00:20:32,936
 from the 120-hertz
 touch scan rate but not
 
-00:20:32.936 --> 00:20:35.586 A:middle
+
+426
+00:20:32,936 --> 00:20:35,586
 to have any wasted work in
 your app withdrawing too much.
 
-00:20:36.336 --> 00:20:38.926 A:middle
+
+427
+00:20:36,336 --> 00:20:38,926
 Let's take a look at how
 this pipeline changes
 
-00:20:38.926 --> 00:20:39.666 A:middle
+
+428
+00:20:38,926 --> 00:20:39,666
 with coalescing.
 
-00:20:41.026 --> 00:20:42.756 A:middle
+
+429
+00:20:41,026 --> 00:20:42,756
 Now we will only deliver a touch
 
-00:20:42.756 --> 00:20:45.166 A:middle
+
+430
+00:20:42,756 --> 00:20:45,166
 to your app once
 per display frame,
 
-00:20:45.756 --> 00:20:48.106 A:middle
+
+431
+00:20:45,756 --> 00:20:48,106
 so when the first touch comes
 in, we will deliver that to you.
 
-00:20:49.036 --> 00:20:51.926 A:middle
+
+432
+00:20:49,036 --> 00:20:51,926
 And then in the next frame,
 we will deliver you the touch
 
-00:20:51.926 --> 00:20:54.816 A:middle
+
+433
+00:20:51,926 --> 00:20:54,816
 for that frame, and also
 any intermediate touches
 
-00:20:54.816 --> 00:20:56.916 A:middle
+
+434
+00:20:54,816 --> 00:20:56,916
 that happened since the
 last time we sent touches
 
-00:20:56.916 --> 00:20:58.326 A:middle
+
+435
+00:20:56,916 --> 00:20:58,326
 to your app.
 
-00:20:58.836 --> 00:21:02.656 A:middle
+
+436
+00:20:58,836 --> 00:21:02,656
 This repeats each time the
 user makes more touches
 
 
-
-00:20:58.836 --> 00:21:02.656 A:middle
-This repeats each time the
-user makes more touches
-
-00:21:02.656 --> 00:21:03.186 A:middle
+437
+00:21:02,656 --> 00:21:03,186
 to the display.
 
-00:21:03.686 --> 00:21:05.856 A:middle
+
+438
+00:21:03,686 --> 00:21:05,856
 We'll give you the current
 touch and any coalesce touches,
 
-00:21:06.206 --> 00:21:08.476 A:middle
+
+439
+00:21:06,206 --> 00:21:08,476
 and that continues as long
 as touches are active.
 
-00:21:09.056 --> 00:21:12.636 A:middle
+
+440
+00:21:09,056 --> 00:21:12,636
 Now, the API to use these
 coalesced touches is
 
-00:21:12.636 --> 00:21:13.196 A:middle
+
+441
+00:21:12,636 --> 00:21:13,196
 really simple.
 
-00:21:13.926 --> 00:21:16.556 A:middle
+
+442
+00:21:13,926 --> 00:21:16,556
 It's a new method on UIEvent
 called Coalesce Touches
 
-00:21:16.556 --> 00:21:17.106 A:middle
+
+443
+00:21:16,556 --> 00:21:17,106
 For Touch.
 
-00:21:18.056 --> 00:21:20.276 A:middle
+
+444
+00:21:18,056 --> 00:21:20,276
 You pass into that method the
 touch that you're looking at,
 
-00:21:20.766 --> 00:21:23.496 A:middle
+
+445
+00:21:20,766 --> 00:21:23,496
 and we'll give you back an array
 of all the coalesced touches
 
-00:21:23.496 --> 00:21:27.246 A:middle
+
+446
+00:21:23,496 --> 00:21:27,246
 since the last time we delivered
 that touch to your app.
 
-00:21:28.116 --> 00:21:30.186 A:middle
+
+447
+00:21:28,116 --> 00:21:30,186
 To get a better idea
 of how to use this API,
 
-00:21:30.186 --> 00:21:33.146 A:middle
+
+448
+00:21:30,186 --> 00:21:33,146
 let's look at how touch handling
 works in iOS in general.
 
-00:21:33.746 --> 00:21:36.786 A:middle
+
+449
+00:21:33,746 --> 00:21:36,786
 When the user first
 touches the display,
 
-00:21:36.786 --> 00:21:40.016 A:middle
+
+450
+00:21:36,786 --> 00:21:40,016
 we will call Touches
 Began on your app.
 
-00:21:40.246 --> 00:21:43.616 A:middle
+
+451
+00:21:40,246 --> 00:21:43,616
 As their finger moves, we will
 call Touches Moved, and finally,
 
-00:21:43.936 --> 00:21:45.666 A:middle
+
+452
+00:21:43,936 --> 00:21:45,666
 as their finger is
 removed from the display,
 
-00:21:45.666 --> 00:21:46.856 A:middle
+
+453
+00:21:45,666 --> 00:21:46,856
 we will call Touches Ended.
 
-00:21:48.066 --> 00:21:50.016 A:middle
+
+454
+00:21:48,066 --> 00:21:50,016
 Now, as we are talking
 about these touch callbacks,
 
-00:21:50.476 --> 00:21:53.016 A:middle
+
+455
+00:21:50,476 --> 00:21:53,016
 another very important
 callback is Touches Canceled.
 
-00:21:54.076 --> 00:21:55.726 A:middle
+
+456
+00:21:54,076 --> 00:21:55,726
 This gets called when
 the stream of touches
 
-00:21:55.726 --> 00:21:56.906 A:middle
+
+457
+00:21:55,726 --> 00:21:56,906
 to your app is interrupted.
 
-00:21:57.516 --> 00:21:59.496 A:middle
+
+458
+00:21:57,516 --> 00:21:59,496
 For example, if the user
 swipes from the bottom
 
-00:21:59.636 --> 00:22:00.686 A:middle
+
+459
+00:21:59,636 --> 00:22:00,686
 to activate Control Center.
 
 
-
-00:21:59.636 --> 00:22:00.686 A:middle
-to activate Control Center.
-
-00:22:02.126 --> 00:22:04.986 A:middle
+460
+00:22:02,126 --> 00:22:04,986
 In that case, your app will get
 some the initial touch callback,
 
-00:22:04.986 --> 00:22:06.616 A:middle
+
+461
+00:22:04,986 --> 00:22:06,616
 and we will get Touches Canceled
 
-00:22:07.146 --> 00:22:09.286 A:middle
+
+462
+00:22:07,146 --> 00:22:09,286
 when the system gesture
 takes over.
 
-00:22:09.916 --> 00:22:13.476 A:middle
+
+463
+00:22:09,916 --> 00:22:13,476
 It's important to implement
 this method to do any cleanup
 
-00:22:13.476 --> 00:22:16.636 A:middle
+
+464
+00:22:13,476 --> 00:22:16,636
 for things that you started in
 the previous touch callbacks
 
-00:22:17.056 --> 00:22:18.616 A:middle
+
+465
+00:22:17,056 --> 00:22:18,616
 and roll back any
 changes you made.
 
-00:22:19.246 --> 00:22:21.376 A:middle
+
+466
+00:22:19,246 --> 00:22:21,376
 For example, in a drawing
 app, you might want
 
-00:22:21.376 --> 00:22:23.176 A:middle
+
+467
+00:22:21,376 --> 00:22:23,176
 to remove the line that
 the user was drawing.
 
-00:22:23.536 --> 00:22:27.016 A:middle
+
+468
+00:22:23,536 --> 00:22:27,016
 So now that we have seen how
 these touch callbacks work,
 
-00:22:27.326 --> 00:22:29.376 A:middle
+
+469
+00:22:27,326 --> 00:22:29,376
 let's see how they interact
 with coalesce touches.
 
-00:22:30.576 --> 00:22:32.066 A:middle
+
+470
+00:22:30,576 --> 00:22:32,066
 The touches we deliver to all
 
-00:22:32.066 --> 00:22:34.136 A:middle
+
+471
+00:22:32,066 --> 00:22:34,136
 of those callbacks are
 what we call main touches,
 
-00:22:34.596 --> 00:22:38.046 A:middle
+
+472
+00:22:34,596 --> 00:22:38,046
 and these work the same with the
 120-hertz scan rate as they do
 
-00:22:38.046 --> 00:22:39.186 A:middle
+
+473
+00:22:38,046 --> 00:22:39,186
 with 60-hertz devices.
 
-00:22:39.256 --> 00:22:43.756 A:middle
+
+474
+00:22:39,256 --> 00:22:43,756
 However, with the Coalesce
 Touches For Touch method,
 
-00:22:43.966 --> 00:22:46.116 A:middle
+
+475
+00:22:43,966 --> 00:22:46,116
 you can get access
 to more information
 
-00:22:46.116 --> 00:22:47.186 A:middle
+
+476
+00:22:46,116 --> 00:22:47,186
 with these coalesced touches.
 
-00:22:48.286 --> 00:22:51.566 A:middle
+
+477
+00:22:48,286 --> 00:22:51,566
 The coalesced touches
 not only have information
 
-00:22:51.566 --> 00:22:54.966 A:middle
+
+478
+00:22:51,566 --> 00:22:54,966
 about the intermediate touches
 but they also give you a copy
 
-00:22:55.176 --> 00:22:56.176 A:middle
+
+479
+00:22:55,176 --> 00:22:56,176
 of the main touch itself.
 
-00:22:56.826 --> 00:22:59.686 A:middle
+
+480
+00:22:56,826 --> 00:22:59,686
 And the great thing about this
 is that it allows you a choice.
 
 
-
-00:23:00.176 --> 00:23:01.776 A:middle
+481
+00:23:00,176 --> 00:23:01,776
 You can look at the main touches
 
-00:23:02.126 --> 00:23:03.866 A:middle
+
+482
+00:23:02,126 --> 00:23:03,866
 if you don't need the
 increased information
 
-00:23:04.376 --> 00:23:07.556 A:middle
+
+483
+00:23:04,376 --> 00:23:07,556
 of the higher touch scan
 rate in your app, or,
 
-00:23:07.556 --> 00:23:09.406 A:middle
+
+484
+00:23:07,556 --> 00:23:09,406
 if you want that
 information, you can look
 
-00:23:09.406 --> 00:23:11.726 A:middle
+
+485
+00:23:09,406 --> 00:23:11,726
 at just the coalesced touches
 and you don't have to worry
 
-00:23:11.726 --> 00:23:12.576 A:middle
+
+486
+00:23:11,726 --> 00:23:12,576
 about the main touches.
 
-00:23:17.276 --> 00:23:21.166 A:middle
+
+487
+00:23:17,276 --> 00:23:21,166
 So now let's revisit the touch
 sequence that we saw and see how
 
-00:23:21.166 --> 00:23:23.836 A:middle
+
+488
+00:23:21,166 --> 00:23:23,836
 that works with both main
 touches and coalesced touches.
 
-00:23:24.776 --> 00:23:26.566 A:middle
+
+489
+00:23:24,776 --> 00:23:26,566
 As the user's finger comes down,
 
-00:23:26.566 --> 00:23:29.886 A:middle
+
+490
+00:23:26,566 --> 00:23:29,886
 we will give your app a
 main touch, and also a copy
 
-00:23:29.886 --> 00:23:31.176 A:middle
+
+491
+00:23:29,886 --> 00:23:31,176
 of that as a coalesced touch.
 
-00:23:32.346 --> 00:23:33.416 A:middle
+
+492
+00:23:32,346 --> 00:23:33,416
 Then as their finger moves,
 
-00:23:33.416 --> 00:23:35.756 A:middle
+
+493
+00:23:33,416 --> 00:23:35,756
 we will deliver you new
 main touches and a set
 
-00:23:35.756 --> 00:23:37.226 A:middle
+
+494
+00:23:35,756 --> 00:23:37,226
 of coalesced touches
 for each one.
 
-00:23:38.066 --> 00:23:39.536 A:middle
+
+495
+00:23:38,066 --> 00:23:39,536
 And finally, as their
 finger leaves,
 
-00:23:39.646 --> 00:23:41.066 A:middle
+
+496
+00:23:39,646 --> 00:23:41,066
 we will give you
 the last main touch
 
-00:23:41.526 --> 00:23:42.946 A:middle
+
+497
+00:23:41,526 --> 00:23:42,946
 and any remaining
 coalesced touches.
 
-00:23:43.606 --> 00:23:45.986 A:middle
+
+498
+00:23:43,606 --> 00:23:45,986
 Now here, I have shown only one
 
-00:23:45.986 --> 00:23:48.836 A:middle
+
+499
+00:23:45,986 --> 00:23:48,836
 or two coalesced touches
 for each main touch.
 
-00:23:49.396 --> 00:23:50.626 A:middle
+
+500
+00:23:49,396 --> 00:23:50,626
 But it's important
 to keep in mind
 
-00:23:50.626 --> 00:23:52.076 A:middle
+
+501
+00:23:50,626 --> 00:23:52,076
 that your app can receive
 a different amount.
 
-00:23:53.036 --> 00:23:55.216 A:middle
+
+502
+00:23:53,036 --> 00:23:55,216
 If your app takes a long
 time to process a touch,
 
-00:23:55.616 --> 00:23:57.636 A:middle
+
+503
+00:23:55,616 --> 00:23:57,636
 then we will give you some
 time to catch up and wait
 
-00:23:57.636 --> 00:24:00.866 A:middle
+
+504
+00:23:57,636 --> 00:24:00,866
 to send you new touches
 until you have caught up.
 
 
-
-00:23:57.636 --> 00:24:00.866 A:middle
-to send you new touches
-until you have caught up.
-
-00:24:01.106 --> 00:24:02.696 A:middle
+505
+00:24:01,106 --> 00:24:02,696
 And if this happens,
 then the touches
 
-00:24:02.696 --> 00:24:04.256 A:middle
+
+506
+00:24:02,696 --> 00:24:04,256
 that weren't delivered
 you to will be sent
 
-00:24:04.256 --> 00:24:05.886 A:middle
+
+507
+00:24:04,256 --> 00:24:05,886
 to you later as coalesced
 touches.
 
-00:24:06.416 --> 00:24:08.506 A:middle
+
+508
+00:24:06,416 --> 00:24:08,506
 So make sure that you don't
 hard code any dependencies
 
-00:24:08.736 --> 00:24:10.536 A:middle
+
+509
+00:24:08,736 --> 00:24:10,536
 on the number of coalesced
 touches that you receive.
 
-00:24:11.226 --> 00:24:14.786 A:middle
+
+510
+00:24:11,226 --> 00:24:14,786
 Now, there are a few
 differences between the way
 
-00:24:14.786 --> 00:24:16.716 A:middle
+
+511
+00:24:14,786 --> 00:24:16,716
 that coalesced touches
 behave and the way
 
-00:24:16.716 --> 00:24:17.666 A:middle
+
+512
+00:24:16,716 --> 00:24:17,666
 that main touches behave.
 
-00:24:18.496 --> 00:24:20.736 A:middle
+
+513
+00:24:18,496 --> 00:24:20,736
 One of those is related
 to previous location.
 
-00:24:21.776 --> 00:24:24.696 A:middle
+
+514
+00:24:21,776 --> 00:24:24,696
 And previous location is
 something that you can get
 
-00:24:24.696 --> 00:24:27.406 A:middle
+
+515
+00:24:24,696 --> 00:24:27,406
 with the method Previous
 Location In View from UITouch.
 
-00:24:28.336 --> 00:24:32.106 A:middle
+
+516
+00:24:28,336 --> 00:24:32,106
 For main touches, this gives
 your app the last location
 
-00:24:32.106 --> 00:24:33.696 A:middle
+
+517
+00:24:32,106 --> 00:24:33,696
 that that touch had when
 it was delivered to you.
 
-00:24:34.436 --> 00:24:36.676 A:middle
+
+518
+00:24:34,436 --> 00:24:36,676
 And for coalesced touches,
 it behaves very similarly.
 
-00:24:36.856 --> 00:24:38.226 A:middle
+
+519
+00:24:36,856 --> 00:24:38,226
 It gives you the location
 
-00:24:38.326 --> 00:24:40.366 A:middle
+
+520
+00:24:38,326 --> 00:24:40,366
 of the last coalesced
 touch to your app.
 
-00:24:41.606 --> 00:24:43.696 A:middle
+
+521
+00:24:41,606 --> 00:24:43,696
 And this is one of the reasons
 that it's really important
 
-00:24:43.696 --> 00:24:45.216 A:middle
+
+522
+00:24:43,696 --> 00:24:45,216
 to focus on just
 the main touches
 
-00:24:45.426 --> 00:24:46.586 A:middle
+
+523
+00:24:45,426 --> 00:24:46,586
 or just the coalesced touches.
 
-00:24:47.346 --> 00:24:49.546 A:middle
+
+524
+00:24:47,346 --> 00:24:49,546
 That way, you won't
 get any confusion
 
-00:24:49.546 --> 00:24:50.616 A:middle
+
+525
+00:24:49,546 --> 00:24:50,616
 with the previous locations.
 
-00:24:51.056 --> 00:24:52.936 A:middle
+
+526
+00:24:51,056 --> 00:24:52,936
 So it's really important
 not to cross the streams.
 
-00:24:54.516 --> 00:24:58.576 A:middle
+
+527
+00:24:54,516 --> 00:24:58,576
 [ Applause ]
 
-00:24:59.076 --> 00:25:00.866 A:middle
+
+528
+00:24:59,076 --> 00:25:00,866
 Now, another difference
 between main touches
 
 
-
-00:24:59.076 --> 00:25:00.866 A:middle
-Now, another difference
-between main touches
-
-00:25:00.866 --> 00:25:02.196 A:middle
+529
+00:25:00,866 --> 00:25:02,196
 and coalesced touches is
 
-00:25:02.196 --> 00:25:04.236 A:middle
+
+530
+00:25:02,196 --> 00:25:04,236
 in how the UITouch
 objects themselves behave.
 
-00:25:05.666 --> 00:25:09.156 A:middle
+
+531
+00:25:05,666 --> 00:25:09,156
 With main touches, the same
 UITouch instance is reused every
 
-00:25:09.156 --> 00:25:11.836 A:middle
+
+532
+00:25:09,156 --> 00:25:11,836
 time the touch is
 delivered to your app.
 
-00:25:12.246 --> 00:25:14.566 A:middle
+
+533
+00:25:12,246 --> 00:25:14,566
 This is helpful because it
 allows you to differentiate
 
-00:25:14.726 --> 00:25:17.606 A:middle
+
+534
+00:25:14,726 --> 00:25:17,606
 between different touches if
 the users has multiple fingers
 
-00:25:17.606 --> 00:25:18.566 A:middle
+
+535
+00:25:17,606 --> 00:25:18,566
 on the display at once.
 
-00:25:19.216 --> 00:25:22.866 A:middle
+
+536
+00:25:19,216 --> 00:25:22,866
 And for coalesced touches, this
 works a little bit differently.
 
-00:25:23.596 --> 00:25:26.386 A:middle
+
+537
+00:25:23,596 --> 00:25:26,386
 There, each time we deliver a
 coalesced touch to your app,
 
-00:25:26.896 --> 00:25:28.476 A:middle
+
+538
+00:25:26,896 --> 00:25:28,476
 we deliver a new
 UITouch instance
 
-00:25:29.486 --> 00:25:30.626 A:middle
+
+539
+00:25:29,486 --> 00:25:30,626
 that has the new properties.
 
-00:25:30.726 --> 00:25:33.696 A:middle
+
+540
+00:25:30,726 --> 00:25:33,696
 And so you can think of
 these as snapshots instead
 
-00:25:33.696 --> 00:25:35.906 A:middle
+
+541
+00:25:33,696 --> 00:25:35,906
 of the shared identity
 that the main touches have.
 
-00:25:35.966 --> 00:25:39.476 A:middle
+
+542
+00:25:35,966 --> 00:25:39,476
 So now that you understand
 how touch coalescing works,
 
-00:25:39.616 --> 00:25:42.426 A:middle
+
+543
+00:25:39,616 --> 00:25:42,426
 let's dig into some code for
 how to use coalesced touches.
 
-00:25:43.216 --> 00:25:45.106 A:middle
+
+544
+00:25:43,216 --> 00:25:45,106
 This is some code that
 you might have in an app
 
-00:25:45.566 --> 00:25:48.326 A:middle
+
+545
+00:25:45,566 --> 00:25:48,326
 that does something like drawing
 and you could have something
 
-00:25:48.326 --> 00:25:49.456 A:middle
+
+546
+00:25:48,326 --> 00:25:49,456
 like this in touches moved.
 
-00:25:50.466 --> 00:25:52.836 A:middle
+
+547
+00:25:50,466 --> 00:25:52,836
 Here we are iterating through
 the touches that we have,
 
-00:25:53.436 --> 00:25:55.776 A:middle
+
+548
+00:25:53,436 --> 00:25:55,776
 and we are grabbing the line
 that corresponds to each touch.
 
-00:25:57.066 --> 00:25:59.446 A:middle
+
+549
+00:25:57,066 --> 00:25:59,446
 Then we are adding the
 latest touch as a new sample
 
-00:25:59.446 --> 00:26:00.526 A:middle
+
+550
+00:25:59,446 --> 00:26:00,526
 onto the end of that line.
 
 
-
-00:25:59.446 --> 00:26:00.526 A:middle
-onto the end of that line.
-
-00:26:01.116 --> 00:26:04.786 A:middle
+551
+00:26:01,116 --> 00:26:04,786
 And to add touch coalescing
 support, we just need
 
-00:26:04.786 --> 00:26:06.106 A:middle
+
+552
+00:26:04,786 --> 00:26:06,106
 to add this small bit of code.
 
-00:26:07.136 --> 00:26:09.956 A:middle
+
+553
+00:26:07,136 --> 00:26:09,956
 Now, we are iterating through
 all the coalesced touches
 
-00:26:09.956 --> 00:26:12.516 A:middle
+
+554
+00:26:09,956 --> 00:26:12,516
 for the given main
 touch, and for each
 
-00:26:12.516 --> 00:26:14.276 A:middle
+
+555
+00:26:12,516 --> 00:26:14,276
 of those coalesced
 touches, we are adding it
 
-00:26:14.276 --> 00:26:15.896 A:middle
+
+556
+00:26:14,276 --> 00:26:15,896
 for the sample to the line.
 
-00:26:16.726 --> 00:26:18.616 A:middle
+
+557
+00:26:16,726 --> 00:26:18,616
 Notice that we are only
 adding the coalesced touches
 
-00:26:18.616 --> 00:26:20.236 A:middle
+
+558
+00:26:18,616 --> 00:26:20,236
 of the samples, not
 the main touches.
 
-00:26:21.056 --> 00:26:22.246 A:middle
+
+559
+00:26:21,056 --> 00:26:22,246
 And that's touch coalescing.
 
-00:26:22.246 --> 00:26:29.346 A:middle
+
+560
+00:26:22,246 --> 00:26:29,346
 Now I would like to tell
 you about touch prediction.
 
-00:26:30.066 --> 00:26:32.396 A:middle
+
+561
+00:26:30,066 --> 00:26:32,396
 This is a really cool system
 that we have added right
 
-00:26:32.396 --> 00:26:34.156 A:middle
+
+562
+00:26:32,396 --> 00:26:34,156
 into UIKit that you can use
 
-00:26:34.156 --> 00:26:36.006 A:middle
+
+563
+00:26:34,156 --> 00:26:36,006
 to get even lower
 latency in your apps.
 
-00:26:37.086 --> 00:26:38.946 A:middle
+
+564
+00:26:37,086 --> 00:26:38,946
 Now, as we deliver your app,
 
-00:26:38.946 --> 00:26:42.156 A:middle
+
+565
+00:26:38,946 --> 00:26:42,156
 new touches will also give
 you a look into the future
 
-00:26:42.426 --> 00:26:44.696 A:middle
+
+566
+00:26:42,426 --> 00:26:44,696
 at what we predict that the
 user's touches will be doing
 
-00:26:44.776 --> 00:26:45.496 A:middle
+
+567
+00:26:44,776 --> 00:26:45,496
 in the near future.
 
-00:26:46.436 --> 00:26:49.416 A:middle
+
+568
+00:26:46,436 --> 00:26:49,416
 And the API for this works
 very similarly to the API
 
-00:26:49.556 --> 00:26:50.396 A:middle
+
+569
+00:26:49,556 --> 00:26:50,396
 for coalesced touches.
 
-00:26:51.326 --> 00:26:54.026 A:middle
+
+570
+00:26:51,326 --> 00:26:54,026
 It's another method on UIEvent
 called Predicted Touches
 
-00:26:54.026 --> 00:26:54.536 A:middle
+
+571
+00:26:54,026 --> 00:26:54,536
 For Touch.
 
-00:26:55.726 --> 00:26:58.016 A:middle
+
+572
+00:26:55,726 --> 00:26:58,016
 Once again, you pass in a
 main touch to this method
 
-00:26:58.016 --> 00:27:00.276 A:middle
+
+573
+00:26:58,016 --> 00:27:00,276
 and you will get back an
 array of predicted touches.
 
 
-
-00:26:58.016 --> 00:27:00.276 A:middle
-and you will get back an
-array of predicted touches.
-
-00:27:01.526 --> 00:27:04.916 A:middle
+574
+00:27:01,526 --> 00:27:04,916
 And you can use those predicted
 touches to update your drawing
 
-00:27:05.026 --> 00:27:07.156 A:middle
+
+575
+00:27:05,026 --> 00:27:07,156
 or whatever else you are
 doing with the user's touches,
 
-00:27:07.946 --> 00:27:09.026 A:middle
+
+576
+00:27:07,946 --> 00:27:09,026
 to get even lower latency.
 
-00:27:10.556 --> 00:27:12.506 A:middle
+
+577
+00:27:10,556 --> 00:27:12,506
 So earlier, we saw
 how main touches
 
-00:27:12.506 --> 00:27:13.846 A:middle
+
+578
+00:27:12,506 --> 00:27:13,846
 and coalesced touches
 are related,
 
-00:27:14.696 --> 00:27:16.816 A:middle
+
+579
+00:27:14,696 --> 00:27:16,816
 and predicted touches work
 in a very similar way.
 
-00:27:17.536 --> 00:27:20.466 A:middle
+
+580
+00:27:17,536 --> 00:27:20,466
 They are another set of touches
 associated with a main touch,
 
-00:27:21.556 --> 00:27:25.566 A:middle
+
+581
+00:27:21,556 --> 00:27:25,566
 and they behave as snapshots
 just like coalesced touches do.
 
-00:27:25.826 --> 00:27:27.986 A:middle
+
+582
+00:27:25,826 --> 00:27:27,986
 Now, one thing that's different
 about predicted touches compared
 
-00:27:27.986 --> 00:27:30.006 A:middle
+
+583
+00:27:27,986 --> 00:27:30,006
 to coalesced touches
 is what happens
 
-00:27:30.006 --> 00:27:31.076 A:middle
+
+584
+00:27:30,006 --> 00:27:31,076
 when new touches come in.
 
-00:27:31.976 --> 00:27:34.096 A:middle
+
+585
+00:27:31,976 --> 00:27:34,096
 As you get a new main touch,
 you will get a new set
 
-00:27:34.096 --> 00:27:38.246 A:middle
+
+586
+00:27:34,096 --> 00:27:38,246
 of predicted touches, and the
 new predicted touches are the
 
-00:27:38.246 --> 00:27:39.726 A:middle
+
+587
+00:27:38,246 --> 00:27:39,726
 only thing you want to use then.
 
-00:27:40.236 --> 00:27:42.536 A:middle
+
+588
+00:27:40,236 --> 00:27:42,536
 Any previous predicted
 touches are no longer useful
 
-00:27:42.806 --> 00:27:44.106 A:middle
+
+589
+00:27:42,806 --> 00:27:44,106
 since we now have information
 
-00:27:44.106 --> 00:27:46.416 A:middle
+
+590
+00:27:44,106 --> 00:27:46,416
 about where the user actually
 touched during that time.
 
-00:27:46.736 --> 00:27:50.126 A:middle
+
+591
+00:27:46,736 --> 00:27:50,126
 So you generally want to throw
 those old predicted touches out.
 
-00:27:51.156 --> 00:27:53.446 A:middle
+
+592
+00:27:51,156 --> 00:27:53,446
 Now, previous location
 in view works similarly
 
-00:27:53.446 --> 00:27:55.656 A:middle
+
+593
+00:27:53,446 --> 00:27:55,656
 for predicted touches as it
 does for other touch types.
 
-00:27:56.546 --> 00:27:57.806 A:middle
+
+594
+00:27:56,546 --> 00:27:57,806
 It points to the location
 
-00:27:57.806 --> 00:28:00.526 A:middle
+
+595
+00:27:57,806 --> 00:28:00,526
 that the previous
 predicted touch had, or,
 
 
-
-00:27:57.806 --> 00:28:00.526 A:middle
-that the previous
-predicted touch had, or,
-
-00:28:00.526 --> 00:28:03.346 A:middle
+596
+00:28:00,526 --> 00:28:03,346
 for the first predicted touch,
 it points to the last location
 
-00:28:03.456 --> 00:28:05.286 A:middle
+
+597
+00:28:03,456 --> 00:28:05,286
 that was delivered to your app.
 
-00:28:05.916 --> 00:28:08.336 A:middle
+
+598
+00:28:05,916 --> 00:28:08,336
 So you may be wondering how we
 actually get these predicted
 
-00:28:08.336 --> 00:28:09.676 A:middle
+
+599
+00:28:08,336 --> 00:28:09,676
 touches, and it's pretty simple.
 
-00:28:10.476 --> 00:28:12.516 A:middle
+
+600
+00:28:10,476 --> 00:28:12,516
 We built a time machine into
 every iOS device [laughter].
 
-00:28:14.596 --> 00:28:15.556 A:middle
+
+601
+00:28:14,596 --> 00:28:15,556
 That's not quite how it works.
 
-00:28:16.216 --> 00:28:19.186 A:middle
+
+602
+00:28:16,216 --> 00:28:19,186
 What we are actually doing
 is looking at the touches
 
-00:28:19.286 --> 00:28:21.636 A:middle
+
+603
+00:28:19,286 --> 00:28:21,636
 that are delivered to
 your app and using a set
 
-00:28:21.636 --> 00:28:24.026 A:middle
+
+604
+00:28:21,636 --> 00:28:24,026
 of highly tuned algorithms
 to determine
 
-00:28:24.026 --> 00:28:27.386 A:middle
+
+605
+00:28:24,026 --> 00:28:27,386
 where the user's finger looks
 like it's going at this time.
 
-00:28:28.186 --> 00:28:30.826 A:middle
+
+606
+00:28:28,186 --> 00:28:30,826
 And as we get new touch samples,
 we will update our prediction
 
-00:28:30.936 --> 00:28:34.006 A:middle
+
+607
+00:28:30,936 --> 00:28:34,006
 and deliver new predicted
 touches to your app.
 
-00:28:34.236 --> 00:28:37.496 A:middle
+
+608
+00:28:34,236 --> 00:28:37,496
 Now, each of those predicted
 touches are complete UITouch
 
-00:28:37.496 --> 00:28:39.816 A:middle
+
+609
+00:28:37,496 --> 00:28:39,816
 objects and they have all of
 their properties filled out,
 
-00:28:40.126 --> 00:28:42.246 A:middle
+
+610
+00:28:40,126 --> 00:28:42,246
 like their location
 and time stamp.
 
-00:28:43.156 --> 00:28:46.196 A:middle
+
+611
+00:28:43,156 --> 00:28:46,196
 So now we can look at how those
 predicted touches affect the
 
-00:28:46.196 --> 00:28:47.946 A:middle
+
+612
+00:28:46,196 --> 00:28:47,946
 pipeline that we
 have been looking at.
 
-00:28:48.796 --> 00:28:50.996 A:middle
+
+613
+00:28:48,796 --> 00:28:50,996
 This is what we saw
 earlier from main touches
 
-00:28:51.026 --> 00:28:53.316 A:middle
+
+614
+00:28:51,026 --> 00:28:53,316
 and coalesced touches,
 and we can easily add
 
-00:28:53.316 --> 00:28:54.646 A:middle
+
+615
+00:28:53,316 --> 00:28:54,646
 in predicted touches as well.
 
-00:28:56.166 --> 00:28:58.246 A:middle
+
+616
+00:28:56,166 --> 00:28:58,246
 Each frame, as your
 app gets a main touch,
 
-00:28:58.346 --> 00:29:00.306 A:middle
+
+617
+00:28:58,346 --> 00:29:00,306
 you also get a set
 of predicted touches.
 
 
-
-00:28:58.346 --> 00:29:00.306 A:middle
-you also get a set
-of predicted touches.
-
-00:29:00.676 --> 00:29:04.106 A:middle
+618
+00:29:00,676 --> 00:29:04,106
 And if you get main touches
 and coalesced touches as well,
 
-00:29:04.396 --> 00:29:06.356 A:middle
+
+619
+00:29:04,396 --> 00:29:06,356
 then the predicted touches
 are just more information
 
-00:29:06.356 --> 00:29:07.836 A:middle
+
+620
+00:29:06,356 --> 00:29:07,836
 that you have available to you.
 
-00:29:08.686 --> 00:29:11.356 A:middle
+
+621
+00:29:08,686 --> 00:29:11,356
 And this process just repeats
 as new touches are delivered.
 
-00:29:12.436 --> 00:29:14.936 A:middle
+
+622
+00:29:12,436 --> 00:29:14,936
 One thing to note is
 that coalesced touches
 
-00:29:14.936 --> 00:29:16.506 A:middle
+
+623
+00:29:14,936 --> 00:29:16,506
 and predicted touches
 are independent.
 
-00:29:16.506 --> 00:29:17.966 A:middle
+
+624
+00:29:16,506 --> 00:29:17,966
 You can use one without
 the other,
 
-00:29:18.756 --> 00:29:21.356 A:middle
+
+625
+00:29:18,756 --> 00:29:21,356
 and predicted touches are
 supported on both 60-hertz
 
-00:29:21.406 --> 00:29:23.686 A:middle
+
+626
+00:29:21,406 --> 00:29:23,686
 and 120-hertz touch
 scan rate devices.
 
-00:29:24.346 --> 00:29:27.716 A:middle
+
+627
+00:29:24,346 --> 00:29:27,716
 So now let's take a look at
 how we can add touch prediction
 
-00:29:28.056 --> 00:29:30.386 A:middle
+
+628
+00:29:28,056 --> 00:29:30,386
 to the code that we were
 taking a look at earlier.
 
-00:29:30.436 --> 00:29:34.216 A:middle
+
+629
+00:29:30,436 --> 00:29:34,216
 All you need to do is add
 this small bit of code,
 
-00:29:34.216 --> 00:29:38.676 A:middle
+
+630
+00:29:34,216 --> 00:29:38,676
 and what we are doing is first
 removing any previous predicted
 
-00:29:38.676 --> 00:29:39.996 A:middle
+
+631
+00:29:38,676 --> 00:29:39,996
 touches that we added
 to our line.
 
-00:29:40.216 --> 00:29:43.116 A:middle
+
+632
+00:29:40,216 --> 00:29:43,116
 And this is important since we
 now have the actual locations
 
-00:29:43.416 --> 00:29:44.286 A:middle
+
+633
+00:29:43,416 --> 00:29:44,286
 where those touches were.
 
-00:29:44.886 --> 00:29:53.336 A:middle
+
+634
+00:29:44,886 --> 00:29:53,336
 Then we are iterating through
 the predicted touches we have.
 
-00:29:54.216 --> 00:29:56.806 A:middle
+
+635
+00:29:54,216 --> 00:29:56,806
 And for each of those predicted
 touches, we are adding it
 
-00:29:56.966 --> 00:29:58.696 A:middle
+
+636
+00:29:56,966 --> 00:29:58,696
 as a sample to our line.
 
-00:29:59.706 --> 00:30:01.556 A:middle
+
+637
+00:29:59,706 --> 00:30:01,556
 But notice that we are
 calling a different method here
 
 
-
-00:29:59.706 --> 00:30:01.556 A:middle
-But notice that we are
-calling a different method here
-
-00:30:01.666 --> 00:30:03.936 A:middle
+638
+00:30:01,666 --> 00:30:03,936
 to add the predicted
 sample as what we called
 
-00:30:03.936 --> 00:30:05.266 A:middle
+
+639
+00:30:03,936 --> 00:30:05,266
 to call the normal samples.
 
-00:30:05.776 --> 00:30:08.066 A:middle
+
+640
+00:30:05,776 --> 00:30:08,066
 This is so that we can mark
 that sample as something
 
-00:30:08.066 --> 00:30:09.786 A:middle
+
+641
+00:30:08,066 --> 00:30:09,786
 that will need to be
 removed the next time we go
 
-00:30:09.786 --> 00:30:11.106 A:middle
+
+642
+00:30:09,786 --> 00:30:11,106
 through this code.
 
-00:30:11.676 --> 00:30:13.836 A:middle
+
+643
+00:30:11,676 --> 00:30:13,836
 So that's touch coalescing
 and touch prediction.
 
-00:30:14.226 --> 00:30:16.746 A:middle
+
+644
+00:30:14,226 --> 00:30:16,746
 Now that you have seen
 all of these techniques,
 
-00:30:17.066 --> 00:30:18.906 A:middle
+
+645
+00:30:17,066 --> 00:30:18,906
 let's see what happens when
 we combine them all together.
 
-00:30:20.326 --> 00:30:23.536 A:middle
+
+646
+00:30:20,326 --> 00:30:23,536
 In iOS 8, with a
 well-optimized app,
 
-00:30:24.136 --> 00:30:25.806 A:middle
+
+647
+00:30:24,136 --> 00:30:25,806
 this was the touch latency
 view that you could get.
 
-00:30:25.806 --> 00:30:28.356 A:middle
+
+648
+00:30:25,806 --> 00:30:28,356
 We measured the latency
 as the time
 
-00:30:28.356 --> 00:30:30.946 A:middle
+
+649
+00:30:28,356 --> 00:30:30,946
 between when the touch
 first comes down to
 
-00:30:30.946 --> 00:30:33.436 A:middle
+
+650
+00:30:30,946 --> 00:30:33,436
 when the display has updated
 with that touch's information.
 
-00:30:34.246 --> 00:30:35.836 A:middle
+
+651
+00:30:34,246 --> 00:30:35,836
 And so you can see
 that in iOS 8,
 
-00:30:35.836 --> 00:30:37.536 A:middle
+
+652
+00:30:35,836 --> 00:30:37,536
 we would have four
 frames of latency.
 
-00:30:38.186 --> 00:30:42.586 A:middle
+
+653
+00:30:38,186 --> 00:30:42,586
 Now by using low latency
 Core Animation and iOS 9,
 
-00:30:42.876 --> 00:30:44.606 A:middle
+
+654
+00:30:42,876 --> 00:30:44,606
 we can remove one frame
 of latency from that.
 
-00:30:45.656 --> 00:30:48.576 A:middle
+
+655
+00:30:45,656 --> 00:30:48,576
 And by using touch
 coalescing and running
 
-00:30:48.576 --> 00:30:50.156 A:middle
+
+656
+00:30:48,576 --> 00:30:50,156
 on a high-touch-scan-rate
 device,
 
-00:30:50.816 --> 00:30:52.566 A:middle
+
+657
+00:30:50,816 --> 00:30:52,566
 you can not only get
 increased information
 
-00:30:52.566 --> 00:30:55.476 A:middle
+
+658
+00:30:52,566 --> 00:30:55,476
 about the user's touch, you
 can also remove a half frame
 
-00:30:55.476 --> 00:30:58.936 A:middle
+
+659
+00:30:55,476 --> 00:30:58,936
 of latency from the
 beginning [applause].
 
-00:30:59.046 --> 00:30:59.576 A:middle
+
+660
+00:30:59,046 --> 00:30:59,576
 But there's more!
 
 
-
-00:31:02.356 --> 00:31:05.296 A:middle
+661
+00:31:02,356 --> 00:31:05,296
 By also using touch prediction
 you can get information
 
-00:31:05.296 --> 00:31:07.166 A:middle
+
+662
+00:31:05,296 --> 00:31:07,166
 about approximately a
 frame into the future
 
-00:31:07.216 --> 00:31:08.636 A:middle
+
+663
+00:31:07,216 --> 00:31:08,636
 of where the user's
 touches are going.
 
-00:31:09.186 --> 00:31:13.026 A:middle
+
+664
+00:31:09,186 --> 00:31:13,026
 And this lets you give the user
 an effective latency that's
 
-00:31:13.026 --> 00:31:14.936 A:middle
+
+665
+00:31:13,026 --> 00:31:14,936
 reduced by about a
 frame more as well.
 
-00:31:15.646 --> 00:31:17.466 A:middle
+
+666
+00:31:15,646 --> 00:31:17,466
 And so altogether, in iOS 9,
 
-00:31:17.466 --> 00:31:19.246 A:middle
+
+667
+00:31:17,466 --> 00:31:19,246
 you can get down to
 approximately one
 
-00:31:19.246 --> 00:31:21.136 A:middle
+
+668
+00:31:19,246 --> 00:31:21,136
 and a half frames of
 latency for your users
 
-00:31:21.366 --> 00:31:24.056 A:middle
+
+669
+00:31:21,366 --> 00:31:24,056
 which is a huge improvement from
 iOS 8's four frames of latency.
 
-00:31:25.516 --> 00:31:31.586 A:middle
+
+670
+00:31:25,516 --> 00:31:31,586
 [ Applause ]
 
-00:31:32.086 --> 00:31:33.096 A:middle
+
+671
+00:31:32,086 --> 00:31:33,096
 So we think this
 is really great,
 
-00:31:33.096 --> 00:31:35.256 A:middle
+
+672
+00:31:33,096 --> 00:31:35,256
 and I highly encourage you
 to adopt these techniques
 
-00:31:35.256 --> 00:31:38.296 A:middle
+
+673
+00:31:35,256 --> 00:31:38,296
 in your app to give your users
 a great low latency experience.
 
-00:31:38.766 --> 00:31:41.126 A:middle
+
+674
+00:31:38,766 --> 00:31:41,126
 Now I would like to turn
 things back over to Peter
 
-00:31:41.126 --> 00:31:42.716 A:middle
+
+675
+00:31:41,126 --> 00:31:42,716
 to tell you how to
 fine-tune your app.
 
-00:31:44.516 --> 00:31:48.956 A:middle
+
+676
+00:31:44,516 --> 00:31:48,956
 [ Applause ]
 
-00:31:49.456 --> 00:31:50.446 A:middle
-&gt;&gt; PETER TSOI: Thanks, Jacob.
 
-00:31:50.506 --> 00:31:53.196 A:middle
+677
+00:31:49,456 --> 00:31:50,446
+>> PETER TSOI: Thanks, Jacob.
+
+
+678
+00:31:50,506 --> 00:31:53,196
 So now that you know about all
 of the new low latency modes
 
-00:31:53.546 --> 00:31:56.526 A:middle
+
+679
+00:31:53,546 --> 00:31:56,526
 in iOS 9, we would like to tell
 you how you can take advantage
 
-00:31:56.526 --> 00:31:59.866 A:middle
+
+680
+00:31:56,526 --> 00:31:59,866
 of those by fine-tuning your
 applications so you can fit
 
-00:31:59.866 --> 00:32:03.616 A:middle
+
+681
+00:31:59,866 --> 00:32:03,616
 within one display frame of
 time so you can get your frames
 
 
-
-00:31:59.866 --> 00:32:03.616 A:middle
-within one display frame of
-time so you can get your frames
-
-00:32:03.616 --> 00:32:05.316 A:middle
+682
+00:32:03,616 --> 00:32:05,316
 out to the display that quickly.
 
-00:32:05.726 --> 00:32:08.326 A:middle
+
+683
+00:32:05,726 --> 00:32:08,326
 The first way to ensure
 
-00:32:08.326 --> 00:32:11.346 A:middle
+
+684
+00:32:08,326 --> 00:32:11,346
 that your application is doing
 the least amount of work is
 
-00:32:11.376 --> 00:32:13.326 A:middle
+
+685
+00:32:11,376 --> 00:32:13,326
 to minimize the amount of work
 
-00:32:13.606 --> 00:32:15.306 A:middle
+
+686
+00:32:13,606 --> 00:32:15,306
 that your application
 needs to do.
 
-00:32:15.596 --> 00:32:18.626 A:middle
+
+687
+00:32:15,596 --> 00:32:18,626
 By using the coalesced touches
 API that Jacob just introduced
 
-00:32:18.626 --> 00:32:22.426 A:middle
+
+688
+00:32:18,626 --> 00:32:22,426
 to you, you can get the benefits
 of high-fidelity touch inputs
 
-00:32:22.686 --> 00:32:24.816 A:middle
+
+689
+00:32:22,686 --> 00:32:24,816
 of the iPad Air 2
 while making sure
 
-00:32:24.816 --> 00:32:26.906 A:middle
+
+690
+00:32:24,816 --> 00:32:26,906
 that your application
 only renders images
 
-00:32:27.096 --> 00:32:28.446 A:middle
+
+691
+00:32:27,096 --> 00:32:28,446
 that will make it
 onto the screen.
 
-00:32:29.196 --> 00:32:32.176 A:middle
+
+692
+00:32:29,196 --> 00:32:32,176
 In addition, keep in mind
 that your user only cares
 
-00:32:32.176 --> 00:32:35.406 A:middle
+
+693
+00:32:32,176 --> 00:32:35,406
 about the content that they can
 see on the device's display.
 
-00:32:36.026 --> 00:32:40.096 A:middle
+
+694
+00:32:36,026 --> 00:32:40,096
 Your application may do the
 work to keep track of the state
 
-00:32:40.246 --> 00:32:43.166 A:middle
+
+695
+00:32:40,246 --> 00:32:43,166
 of the world outside of
 the screen, but ultimately,
 
-00:32:43.166 --> 00:32:46.336 A:middle
+
+696
+00:32:43,166 --> 00:32:46,336
 you should make sure that the
 rendering work is restricted
 
-00:32:46.676 --> 00:32:50.096 A:middle
+
+697
+00:32:46,676 --> 00:32:50,096
 to only the work that is
 necessary to generate the image
 
-00:32:50.316 --> 00:32:52.416 A:middle
+
+698
+00:32:50,316 --> 00:32:52,416
 that ultimately shows
 up on the screen.
 
-00:32:53.466 --> 00:32:57.356 A:middle
+
+699
+00:32:53,466 --> 00:32:57,356
 If you are trying to
 profile your application,
 
-00:32:57.526 --> 00:33:00.436 A:middle
+
+700
+00:32:57,526 --> 00:33:00,436
 to figure out how much time
 your application is spending
 
 
-
-00:32:57.526 --> 00:33:00.436 A:middle
-to figure out how much time
-your application is spending
-
-00:33:00.436 --> 00:33:03.986 A:middle
+701
+00:33:00,436 --> 00:33:03,986
 on the CPU, Time Profiler
 is a great way to do this.
 
-00:33:04.626 --> 00:33:07.366 A:middle
+
+702
+00:33:04,626 --> 00:33:07,366
 Time Profiler will show you how
 much time your application is
 
-00:33:07.366 --> 00:33:10.786 A:middle
+
+703
+00:33:07,366 --> 00:33:10,786
 using on the CPU by sampling
 it at a fixed interval.
 
-00:33:11.436 --> 00:33:14.286 A:middle
+
+704
+00:33:11,436 --> 00:33:14,286
 In this case, in Time Profiler,
 
-00:33:14.286 --> 00:33:17.386 A:middle
+
+705
+00:33:14,286 --> 00:33:17,386
 I selected a 16-millisecond
 interval,
 
-00:33:17.616 --> 00:33:19.716 A:middle
+
+706
+00:33:17,616 --> 00:33:19,716
 which corresponds roughly
 to one display frame.
 
-00:33:20.726 --> 00:33:23.616 A:middle
+
+707
+00:33:20,726 --> 00:33:23,616
 You can also tell
 that my application
 
-00:33:23.856 --> 00:33:26.516 A:middle
+
+708
+00:33:23,856 --> 00:33:26,516
 in this case is using
 only a small fraction
 
-00:33:26.516 --> 00:33:27.406 A:middle
+
+709
+00:33:26,516 --> 00:33:27,406
 of that amount of time.
 
-00:33:28.066 --> 00:33:29.706 A:middle
+
+710
+00:33:28,066 --> 00:33:29,706
 In this case, 3 milliseconds.
 
-00:33:30.256 --> 00:33:33.196 A:middle
+
+711
+00:33:30,256 --> 00:33:33,196
 Now this is all fine and good
 if you are trying to measure
 
-00:33:33.196 --> 00:33:36.316 A:middle
+
+712
+00:33:33,196 --> 00:33:36,316
 and profile how you are
 doing in terms of CPU work.
 
-00:33:36.816 --> 00:33:37.886 A:middle
+
+713
+00:33:36,816 --> 00:33:37,886
 What about GPU work?
 
-00:33:39.196 --> 00:33:42.696 A:middle
+
+714
+00:33:39,196 --> 00:33:42,696
 The frames per second gauge
 in the GPU report available
 
-00:33:42.696 --> 00:33:47.036 A:middle
+
+715
+00:33:42,696 --> 00:33:47,036
 in the Xcode debugging session
 give you a high-level view
 
-00:33:47.086 --> 00:33:48.826 A:middle
+
+716
+00:33:47,086 --> 00:33:48,826
 of your application's
 GPU performance.
 
-00:33:49.566 --> 00:33:50.856 A:middle
+
+717
+00:33:49,566 --> 00:33:50,856
 In this case, you can see
 
-00:33:50.856 --> 00:33:53.276 A:middle
+
+718
+00:33:50,856 --> 00:33:53,276
 that this application is
 hitting 60 frames per second,
 
-00:33:53.806 --> 00:33:57.346 A:middle
+
+719
+00:33:53,806 --> 00:33:57,346
 and it has a relatively low
 amount of GPU frame time.
 
-00:33:57.706 --> 00:33:59.806 A:middle
+
+720
+00:33:57,706 --> 00:33:59,806
 In this case, just
 3.8 milliseconds.
 
 
-
-00:34:00.786 --> 00:34:04.506 A:middle
+721
+00:34:00,786 --> 00:34:04,506
 Keep in mind, though, that this
 is just a high-level overview
 
-00:34:04.916 --> 00:34:06.306 A:middle
+
+722
+00:34:04,916 --> 00:34:06,306
 of what your application
 is doing.
 
-00:34:06.846 --> 00:34:09.176 A:middle
+
+723
+00:34:06,846 --> 00:34:09,176
 It doesn't give you
 fine-grained information
 
-00:34:09.206 --> 00:34:13.025 A:middle
+
+724
+00:34:09,206 --> 00:34:13,025
 about individual frames that may
 be causing you to drop frames.
 
-00:34:14.126 --> 00:34:17.366 A:middle
+
+725
+00:34:14,126 --> 00:34:17,366
 If you require that type of
 precision, then you will want
 
-00:34:17.366 --> 00:34:20.366 A:middle
+
+726
+00:34:17,366 --> 00:34:20,366
 to turn to the new
 GPU driver instrument,
 
-00:34:20.766 --> 00:34:22.696 A:middle
+
+727
+00:34:20,766 --> 00:34:22,696
 which we have introduced
 in Xcode this year.
 
-00:34:23.686 --> 00:34:27.166 A:middle
+
+728
+00:34:23,686 --> 00:34:27,166
 The GPU driver instrument can
 show you exactly how long the
 
-00:34:27.166 --> 00:34:30.206 A:middle
+
+729
+00:34:27,166 --> 00:34:30,206
 GPU is active for while you
 are using your application.
 
-00:34:30.866 --> 00:34:33.795 A:middle
+
+730
+00:34:30,866 --> 00:34:33,795
 In this case, you can see
 that the amount of time spent
 
-00:34:33.795 --> 00:34:35.436 A:middle
+
+731
+00:34:33,795 --> 00:34:35,436
 in the vertex and
 fragment shaders
 
-00:34:35.466 --> 00:34:38.065 A:middle
+
+732
+00:34:35,466 --> 00:34:38,065
 of my application
 is relatively small.
 
-00:34:38.206 --> 00:34:41.076 A:middle
+
+733
+00:34:38,206 --> 00:34:41,076
 In fact, it's just a small
 fraction of the amount of time
 
-00:34:41.426 --> 00:34:43.666 A:middle
+
+734
+00:34:41,426 --> 00:34:43,666
 that a frame is shown
 on the display for.
 
-00:34:45.176 --> 00:34:48.416 A:middle
+
+735
+00:34:45,176 --> 00:34:48,416
 Notice you only see
 two colors here.
 
-00:34:49.045 --> 00:34:52.076 A:middle
+
+736
+00:34:49,045 --> 00:34:52,076
 These two colors represent
 the two buffers which are used
 
-00:34:52.076 --> 00:34:53.366 A:middle
+
+737
+00:34:52,076 --> 00:34:53,366
 in the double-buffering scheme.
 
-00:34:54.485 --> 00:34:58.106 A:middle
+
+738
+00:34:54,485 --> 00:34:58,106
 If our application is spending
 more time in Core Animation
 
-00:34:58.106 --> 00:35:01.426 A:middle
+
+739
+00:34:58,106 --> 00:35:01,426
 and in GPU, you will
 see three colors here
 
 
-
-00:34:58.106 --> 00:35:01.426 A:middle
-and in GPU, you will
-see three colors here
-
-00:35:01.426 --> 00:35:03.426 A:middle
+740
+00:35:01,426 --> 00:35:03,426
 to represent the
 triple buffering
 
-00:35:03.426 --> 00:35:04.906 A:middle
+
+741
+00:35:03,426 --> 00:35:04,906
 which is happening
 in the system.
 
-00:35:05.456 --> 00:35:10.676 A:middle
+
+742
+00:35:05,456 --> 00:35:10,676
 We have talked a lot about
 reducing latency and how
 
-00:35:10.676 --> 00:35:13.406 A:middle
+
+743
+00:35:10,676 --> 00:35:13,406
 to make your application more
 responsive, but ultimately,
 
-00:35:13.486 --> 00:35:17.026 A:middle
+
+744
+00:35:13,486 --> 00:35:17,026
 building a great iOS experience
 is about building a natural
 
-00:35:17.026 --> 00:35:18.976 A:middle
+
+745
+00:35:17,026 --> 00:35:18,976
 and intuitive experience
 for your user
 
-00:35:19.316 --> 00:35:22.966 A:middle
+
+746
+00:35:19,316 --> 00:35:22,966
 and making your application feel
 more alive is another great way
 
-00:35:22.966 --> 00:35:24.506 A:middle
+
+747
+00:35:22,966 --> 00:35:24,506
 of doing that.
 
-00:35:24.506 --> 00:35:28.166 A:middle
+
+748
+00:35:24,506 --> 00:35:28,166
 Over the last year, we thought
 long and hard about each part
 
-00:35:28.166 --> 00:35:29.826 A:middle
+
+749
+00:35:28,166 --> 00:35:29,826
 of our system, and we found ways
 
-00:35:29.966 --> 00:35:31.916 A:middle
+
+750
+00:35:29,966 --> 00:35:31,916
 to make it better
 and faster than ever.
 
-00:35:32.706 --> 00:35:34.876 A:middle
+
+751
+00:35:32,706 --> 00:35:34,876
 Throughout this process,
 we have improved our APIs
 
-00:35:35.246 --> 00:35:37.626 A:middle
+
+752
+00:35:35,246 --> 00:35:37,626
 to give you more control
 and more information
 
-00:35:37.926 --> 00:35:39.056 A:middle
+
+753
+00:35:37,926 --> 00:35:39,056
 over how the system works.
 
-00:35:40.006 --> 00:35:43.276 A:middle
+
+754
+00:35:40,006 --> 00:35:43,276
 With the new low latency
 modes on OpenGL, Metal,
 
-00:35:43.366 --> 00:35:46.456 A:middle
+
+755
+00:35:43,366 --> 00:35:46,456
 and Core Animation,
 you have more control
 
-00:35:46.456 --> 00:35:50.026 A:middle
+
+756
+00:35:46,456 --> 00:35:50,026
 over when your frame is shown to
 the user and how it synchronizes
 
-00:35:50.136 --> 00:35:51.906 A:middle
+
+757
+00:35:50,136 --> 00:35:51,906
 with any other content
 you have on the screen.
 
-00:35:52.846 --> 00:35:56.366 A:middle
+
+758
+00:35:52,846 --> 00:35:56,366
 With touch coalescing, you
 can take advantage of all
 
-00:35:56.366 --> 00:35:58.786 A:middle
+
+759
+00:35:56,366 --> 00:35:58,786
 of our hardware and all of
 its awesome capabilities
 
-00:35:59.136 --> 00:36:00.326 A:middle
+
+760
+00:35:59,136 --> 00:36:00,326
 to provide that to your user.
 
 
-
-00:35:59.136 --> 00:36:00.326 A:middle
-to provide that to your user.
-
-00:36:00.616 --> 00:36:02.996 A:middle
+761
+00:36:00,616 --> 00:36:02,996
 And with touch prediction, we
 are offering you a small glimpse
 
-00:36:02.996 --> 00:36:05.896 A:middle
+
+762
+00:36:02,996 --> 00:36:05,896
 into the future as to where
 that touch is going to go.
 
-00:36:06.876 --> 00:36:10.426 A:middle
+
+763
+00:36:06,876 --> 00:36:10,426
 And finally, we have built
 and created some great tools
 
-00:36:10.426 --> 00:36:12.606 A:middle
+
+764
+00:36:10,426 --> 00:36:12,606
 in order for you to
 understand the performance
 
-00:36:12.606 --> 00:36:15.036 A:middle
+
+765
+00:36:12,606 --> 00:36:15,036
 of your application so that
 you can improve upon it
 
-00:36:15.166 --> 00:36:17.546 A:middle
+
+766
+00:36:15,166 --> 00:36:17,546
 to provide an even better
 experience for your users.
 
-00:36:18.016 --> 00:36:21.826 A:middle
+
+767
+00:36:18,016 --> 00:36:21,826
 We at Apple are committed
 to making the experience
 
-00:36:21.826 --> 00:36:24.756 A:middle
+
+768
+00:36:21,826 --> 00:36:24,756
 of using our products
 feel more alive than ever,
 
-00:36:24.796 --> 00:36:27.356 A:middle
+
+769
+00:36:24,796 --> 00:36:27,356
 and we think reducing latency
 is a great way of doing that,
 
-00:36:27.636 --> 00:36:29.506 A:middle
+
+770
+00:36:27,636 --> 00:36:29,506
 and we would like to invite
 you along on this journey.
 
-00:36:30.106 --> 00:36:33.736 A:middle
+
+771
+00:36:30,106 --> 00:36:33,736
 You can find more information
 about the technology, tools,
 
-00:36:33.736 --> 00:36:36.996 A:middle
+
+772
+00:36:33,736 --> 00:36:36,996
 and APIs we've discussed
 today at developer.apple.com.
 
-00:36:36.996 --> 00:36:39.726 A:middle
+
+773
+00:36:36,996 --> 00:36:39,726
 We would also like to
 invite you to take part
 
-00:36:39.726 --> 00:36:43.536 A:middle
+
+774
+00:36:39,726 --> 00:36:43,536
 in the developer
 technical conversation
 
-00:36:43.956 --> 00:36:46.116 A:middle
+
+775
+00:36:43,956 --> 00:36:46,116
 on our developer forums.
 
-00:36:46.676 --> 00:36:48.656 A:middle
+
+776
+00:36:46,676 --> 00:36:48,656
 We talked about a lot
 
-00:36:48.656 --> 00:36:50.636 A:middle
+
+777
+00:36:48,656 --> 00:36:50,636
 of different new
 technologies today,
 
-00:36:50.966 --> 00:36:53.716 A:middle
+
+778
+00:36:50,966 --> 00:36:53,716
 and there have been really
 great sessions both this year
 
-00:36:53.716 --> 00:36:55.996 A:middle
+
+779
+00:36:53,716 --> 00:36:55,996
 and in previous years
 that go over topics
 
-00:36:56.306 --> 00:36:57.616 A:middle
+
+780
+00:36:56,306 --> 00:36:57,616
 which are related to this talk.
 
-00:36:58.436 --> 00:37:00.056 A:middle
+
+781
+00:36:58,436 --> 00:37:00,056
 For example, if you
 are very interested
 
 
-
-00:36:58.436 --> 00:37:00.056 A:middle
-For example, if you
-are very interested
-
-00:37:00.056 --> 00:37:03.246 A:middle
+782
+00:37:00,056 --> 00:37:03,246
 in profiling the GPU
 performance of your application,
 
-00:37:03.696 --> 00:37:07.266 A:middle
+
+783
+00:37:03,696 --> 00:37:07,266
 and if you are really, really,
 really excited to get your hands
 
-00:37:07.266 --> 00:37:10.856 A:middle
+
+784
+00:37:07,266 --> 00:37:10,856
 on that new GPU instrument,
 I would like to point you
 
-00:37:10.856 --> 00:37:13.236 A:middle
+
+785
+00:37:10,856 --> 00:37:13,236
 at the Metal Performance
 Optimization Techniques talk,
 
-00:37:13.516 --> 00:37:16.236 A:middle
+
+786
+00:37:13,516 --> 00:37:16,236
 which was given earlier
 today, where they talk
 
-00:37:16.236 --> 00:37:20.366 A:middle
+
+787
+00:37:16,236 --> 00:37:20,366
 about a whole bunch of different
 techniques that you can use
 
-00:37:20.366 --> 00:37:23.836 A:middle
+
+788
+00:37:20,366 --> 00:37:23,836
 to optimize your GPU work, not
 just if you are using Metal.
 
-00:37:25.216 --> 00:37:29.236 A:middle
+
+789
+00:37:25,216 --> 00:37:29,236
 In addition, if Time Profiler is
 your jam, then you want to check
 
-00:37:29.236 --> 00:37:33.046 A:middle
+
+790
+00:37:29,236 --> 00:37:33,046
 out the new Profiling in Depth
 talk, which was given yesterday,
 
-00:37:33.556 --> 00:37:36.536 A:middle
+
+791
+00:37:33,556 --> 00:37:36,536
 which goes into a deep dive
 on how to use Time Profiler
 
-00:37:36.586 --> 00:37:38.886 A:middle
+
+792
+00:37:36,586 --> 00:37:38,886
 to get a great idea of what
 your application is doing.
 
-00:37:39.896 --> 00:37:42.176 A:middle
+
+793
+00:37:39,896 --> 00:37:42,176
 And finally, if you guys
 are really interested
 
-00:37:42.176 --> 00:37:44.896 A:middle
+
+794
+00:37:42,176 --> 00:37:44,896
 in what is happening in the
 Core Animation and GPU stages
 
-00:37:44.896 --> 00:37:46.596 A:middle
+
+795
+00:37:44,896 --> 00:37:46,596
 of the pipeline we
 have discussed today,
 
-00:37:46.596 --> 00:37:48.836 A:middle
+
+796
+00:37:46,596 --> 00:37:48,836
 I would like to point you
 to the Advanced Graphics
 
-00:37:48.836 --> 00:37:52.426 A:middle
+
+797
+00:37:48,836 --> 00:37:52,426
 and Animation talk
 from last year's WWDC.
 
-00:37:52.616 --> 00:37:55.466 A:middle
+
+798
+00:37:52,616 --> 00:37:55,466
 All of these talks and
 many, many more can be found
 
-00:37:55.466 --> 00:37:57.906 A:middle
+
+799
+00:37:55,466 --> 00:37:57,906
 on our developer portal
 at developer.apple.com.
 
-00:37:58.716 --> 00:38:02.346 A:middle
+
+800
+00:37:58,716 --> 00:38:02,346
 I hope you learned a lot today
 and over the entire course
 
 
-
-00:37:58.716 --> 00:38:02.346 A:middle
-I hope you learned a lot today
-and over the entire course
-
-00:38:02.346 --> 00:38:05.636 A:middle
+801
+00:38:02,346 --> 00:38:05,636
 of this week, and I hope
 you had an enjoyable WWDC.
 
-00:38:06.106 --> 00:38:06.436 A:middle
+
+802
+00:38:06,106 --> 00:38:06,436
 Thank you.
 
-00:38:07.516 --> 00:38:21.230 A:middle
+
+803
+00:38:07,516 --> 00:38:21,230
 [ Applause ]
 

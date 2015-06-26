@@ -1,3688 +1,5311 @@
-
-00:00:28.516 --> 00:00:33.106 A:middle
+1
+00:00:28,516 --> 00:00:33,106
 [Applause]
 
-00:00:33.606 --> 00:00:34.226 A:middle
-&gt;&gt; Good morning.
 
-00:00:35.406 --> 00:00:36.966 A:middle
+2
+00:00:33,606 --> 00:00:34,226
+>> Good morning.
+
+
+3
+00:00:35,406 --> 00:00:36,966
 Welcome to Continuous
 Integration
 
-00:00:36.966 --> 00:00:38.466 A:middle
+
+4
+00:00:36,966 --> 00:00:38,466
 and Code Coverage in Xcode.
 
-00:00:38.926 --> 00:00:40.036 A:middle
+
+5
+00:00:38,926 --> 00:00:40,036
 My name is Matt Moriarity.
 
-00:00:40.186 --> 00:00:41.846 A:middle
+
+6
+00:00:40,186 --> 00:00:41,846
 I am an engineer
 on the Xcode team.
 
-00:00:42.236 --> 00:00:44.306 A:middle
+
+7
+00:00:42,236 --> 00:00:44,306
 I am really excited to
 be here today to talk
 
-00:00:44.306 --> 00:00:47.046 A:middle
+
+8
+00:00:44,306 --> 00:00:47,046
 about some tools we have in
 Xcode to help you get more
 
-00:00:47.046 --> 00:00:48.996 A:middle
+
+9
+00:00:47,046 --> 00:00:48,996
 out of testing and
 hopefully motivate you
 
-00:00:48.996 --> 00:00:50.496 A:middle
+
+10
+00:00:48,996 --> 00:00:50,496
 to write more tests.
 
-00:00:52.816 --> 00:00:54.946 A:middle
+
+11
+00:00:52,816 --> 00:00:54,946
 Today we are going
 to start by talking
 
-00:00:54.946 --> 00:00:56.246 A:middle
+
+12
+00:00:54,946 --> 00:00:56,246
 about what Xcode Server is.
 
-00:00:56.596 --> 00:00:58.846 A:middle
+
+13
+00:00:56,596 --> 00:00:58,846
 Xcode Server is a
 continuous integration product
 
-00:00:58.946 --> 00:01:00.086 A:middle
+
+14
+00:00:58,946 --> 00:01:00,086
 that we bundle with Xcode.
 
 
-
-00:00:58.946 --> 00:01:00.086 A:middle
-that we bundle with Xcode.
-
-00:01:01.276 --> 00:01:04.756 A:middle
+15
+00:01:01,276 --> 00:01:04,756
 Then we will step into what's
 new in Xcode Server and Xcode 7,
 
-00:01:05.156 --> 00:01:07.896 A:middle
+
+16
+00:01:05,156 --> 00:01:07,896
 with a special focus on the
 new code coverage feature
 
-00:01:07.976 --> 00:01:09.026 A:middle
+
+17
+00:01:07,976 --> 00:01:09,026
 that we introduced this year.
 
-00:01:10.056 --> 00:01:12.896 A:middle
+
+18
+00:01:10,056 --> 00:01:12,896
 Then we will spend the second
 half of the session talking
 
-00:01:12.896 --> 00:01:14.976 A:middle
+
+19
+00:01:12,896 --> 00:01:14,976
 about some more advanced
 features of Xcode Server
 
-00:01:15.226 --> 00:01:17.076 A:middle
+
+20
+00:01:15,226 --> 00:01:17,076
 that will allow you to
 integrate it into some
 
-00:01:17.076 --> 00:01:18.446 A:middle
+
+21
+00:01:17,076 --> 00:01:18,446
 of your team's unique workflows.
 
-00:01:19.626 --> 00:01:20.736 A:middle
+
+22
+00:01:19,626 --> 00:01:20,736
 And of course, all throughout,
 
-00:01:20.776 --> 00:01:22.786 A:middle
+
+23
+00:01:20,776 --> 00:01:22,786
 we will have demos showing
 you how all this great stuff
 
-00:01:22.786 --> 00:01:23.126 A:middle
+
+24
+00:01:22,786 --> 00:01:23,126
 is done.
 
-00:01:24.066 --> 00:01:25.946 A:middle
+
+25
+00:01:24,066 --> 00:01:25,946
 So let's jump right in.
 
-00:01:26.716 --> 00:01:30.506 A:middle
+
+26
+00:01:26,716 --> 00:01:30,506
 So Xcode Server is a feature
 we introduced in Xcode
 
-00:01:30.556 --> 00:01:34.286 A:middle
+
+27
+00:01:30,556 --> 00:01:34,286
 with Xcode 5, and it's all
 about supporting a process known
 
-00:01:34.286 --> 00:01:35.596 A:middle
+
+28
+00:01:34,286 --> 00:01:35,596
 as continuous integration.
 
-00:01:36.816 --> 00:01:38.146 A:middle
+
+29
+00:01:36,816 --> 00:01:38,146
 And continuous integration
 is all
 
-00:01:38.146 --> 00:01:41.076 A:middle
+
+30
+00:01:38,146 --> 00:01:41,076
 about improving collaboration
 with your team to allow you
 
-00:01:41.076 --> 00:01:42.156 A:middle
+
+31
+00:01:41,076 --> 00:01:42,156
 to build better software.
 
-00:01:43.306 --> 00:01:43.956 A:middle
+
+32
+00:01:43,306 --> 00:01:43,956
 So what does that mean?
 
-00:01:43.956 --> 00:01:47.716 A:middle
+
+33
+00:01:43,956 --> 00:01:47,716
 It means pulling down all
 of your code regularly
 
-00:01:47.996 --> 00:01:50.646 A:middle
+
+34
+00:01:47,996 --> 00:01:50,646
 and then building and testing
 it and surfacing issues
 
-00:01:50.646 --> 00:01:53.666 A:middle
+
+35
+00:01:50,646 --> 00:01:53,666
 like build errors or test
 failures as soon as possible
 
-00:01:53.936 --> 00:01:55.506 A:middle
+
+36
+00:01:53,936 --> 00:01:55,506
 so you can fix things
 right away.
 
-00:01:56.166 --> 00:02:00.336 A:middle
+
+37
+00:01:56,166 --> 00:02:00,336
 Now, there's a lot of ways you
 can do continuous integration
 
 
-
-00:01:56.166 --> 00:02:00.336 A:middle
-Now, there's a lot of ways you
-can do continuous integration
-
-00:02:00.336 --> 00:02:02.786 A:middle
+38
+00:02:00,336 --> 00:02:02,786
 out there, but we think Xcode
 Server is especially great
 
-00:02:02.786 --> 00:02:04.846 A:middle
+
+39
+00:02:02,786 --> 00:02:04,846
 for app developers like
 you for two reasons.
 
-00:02:05.376 --> 00:02:08.295 A:middle
+
+40
+00:02:05,376 --> 00:02:08,295
 First of all, it's
 really easy to set up.
 
-00:02:08.645 --> 00:02:10.506 A:middle
+
+41
+00:02:08,645 --> 00:02:10,506
 Thanks to integration
 with OS X Server,
 
-00:02:10.756 --> 00:02:12.936 A:middle
+
+42
+00:02:10,756 --> 00:02:12,936
 if you've got OS X Server
 and Xcode on your Mac,
 
-00:02:13.186 --> 00:02:15.786 A:middle
+
+43
+00:02:13,186 --> 00:02:15,786
 you are minutes away from having
 a continuous integration server
 
-00:02:15.996 --> 00:02:17.356 A:middle
+
+44
+00:02:15,996 --> 00:02:17,356
 testing your project regularly.
 
-00:02:17.906 --> 00:02:22.336 A:middle
+
+45
+00:02:17,906 --> 00:02:22,336
 And second, Xcode Server
 has deep integration
 
-00:02:22.336 --> 00:02:23.336 A:middle
+
+46
+00:02:22,336 --> 00:02:23,336
 with Xcode itself.
 
-00:02:23.546 --> 00:02:25.806 A:middle
+
+47
+00:02:23,546 --> 00:02:25,806
 We know a lot about how
 Xcode projects are built,
 
-00:02:26.196 --> 00:02:28.776 A:middle
+
+48
+00:02:26,196 --> 00:02:28,776
 how we work with devices
 and things like that,
 
-00:02:28.776 --> 00:02:31.236 A:middle
+
+49
+00:02:28,776 --> 00:02:31,236
 so we can ask you as few
 questions as possible to get up
 
-00:02:31.236 --> 00:02:34.056 A:middle
+
+50
+00:02:31,236 --> 00:02:34,056
 and running with your code
 checking out regularly.
 
-00:02:34.656 --> 00:02:38.756 A:middle
+
+51
+00:02:34,656 --> 00:02:38,756
 So before we go any
 further, I want to talk
 
-00:02:38.756 --> 00:02:40.506 A:middle
+
+52
+00:02:38,756 --> 00:02:40,506
 about a few concepts
 that we talk
 
-00:02:40.506 --> 00:02:42.136 A:middle
+
+53
+00:02:40,506 --> 00:02:42,136
 about when we are talking
 about Xcode Server.
 
-00:02:42.766 --> 00:02:45.126 A:middle
+
+54
+00:02:42,766 --> 00:02:45,126
 The first is something you are
 probably familiar with even
 
-00:02:45.126 --> 00:02:46.766 A:middle
+
+55
+00:02:45,126 --> 00:02:46,766
 if you have never used
 Xcode Server before,
 
-00:02:47.176 --> 00:02:48.356 A:middle
+
+56
+00:02:47,176 --> 00:02:48,356
 and that is a scheme.
 
-00:02:49.266 --> 00:02:52.546 A:middle
+
+57
+00:02:49,266 --> 00:02:52,546
 Every time you run your
 project or run tests in Xcode,
 
-00:02:52.546 --> 00:02:53.376 A:middle
+
+58
+00:02:52,546 --> 00:02:53,376
 you are running a scheme.
 
-00:02:53.776 --> 00:02:55.436 A:middle
+
+59
+00:02:53,776 --> 00:02:55,436
 A lot of times they are
 auto created for you,
 
-00:02:55.436 --> 00:02:57.106 A:middle
+
+60
+00:02:55,436 --> 00:02:57,106
 but you can create your
 own custom schemes,
 
-00:02:57.456 --> 00:02:59.926 A:middle
+
+61
+00:02:57,456 --> 00:02:59,926
 and they basically form a recipe
 for building your project,
 
-00:02:59.926 --> 00:03:03.566 A:middle
+
+62
+00:02:59,926 --> 00:03:03,566
 so they tell you what targets to
 build, what test bundles to run,
 
 
-
-00:02:59.926 --> 00:03:03.566 A:middle
-so they tell you what targets to
-build, what test bundles to run,
-
-00:03:03.746 --> 00:03:06.166 A:middle
+63
+00:03:03,746 --> 00:03:06,166
 arguments to pass to your
 executables, things like that.
 
-00:03:07.186 --> 00:03:09.076 A:middle
+
+64
+00:03:07,186 --> 00:03:09,076
 Schemes are important
 for Xcode Server
 
-00:03:09.326 --> 00:03:11.106 A:middle
+
+65
+00:03:09,326 --> 00:03:11,106
 when it comes time
 to set up a bot.
 
-00:03:12.636 --> 00:03:14.976 A:middle
+
+66
+00:03:12,636 --> 00:03:14,976
 Now, a bot is -- we
 like to think about it
 
-00:03:14.976 --> 00:03:18.196 A:middle
+
+67
+00:03:14,976 --> 00:03:18,196
 as having another
 member of your team,
 
-00:03:18.396 --> 00:03:21.376 A:middle
+
+68
+00:03:18,396 --> 00:03:21,376
 that it's basically taking a
 particular scheme and building
 
-00:03:21.376 --> 00:03:22.946 A:middle
+
+69
+00:03:21,376 --> 00:03:22,946
 and running it on the
 schedule you define
 
-00:03:23.206 --> 00:03:25.196 A:middle
+
+70
+00:03:23,206 --> 00:03:25,196
 and doing exactly the
 actions you tell it to
 
-00:03:25.646 --> 00:03:27.266 A:middle
+
+71
+00:03:25,646 --> 00:03:27,266
 and then reporting those
 results back to you.
 
-00:03:27.826 --> 00:03:32.496 A:middle
+
+72
+00:03:27,826 --> 00:03:32,496
 And each time that schedule goes
 off and we run your project,
 
-00:03:32.776 --> 00:03:33.906 A:middle
+
+73
+00:03:32,776 --> 00:03:33,906
 we call that an integration.
 
-00:03:33.906 --> 00:03:36.416 A:middle
+
+74
+00:03:33,906 --> 00:03:36,416
 It's like the act of
 integrating all the changes
 
-00:03:36.416 --> 00:03:37.886 A:middle
+
+75
+00:03:36,416 --> 00:03:37,886
 from every member of
 your team together
 
-00:03:38.166 --> 00:03:40.566 A:middle
+
+76
+00:03:38,166 --> 00:03:40,566
 and seeing how everything
 comes together.
 
-00:03:41.226 --> 00:03:44.946 A:middle
+
+77
+00:03:41,226 --> 00:03:44,946
 Now that we are all
 on the same page,
 
-00:03:45.156 --> 00:03:48.076 A:middle
+
+78
+00:03:45,156 --> 00:03:48,076
 let's talk about what's new
 in Xcode 7 and Xcode Server.
 
-00:03:49.586 --> 00:03:52.946 A:middle
+
+79
+00:03:49,586 --> 00:03:52,946
 To start, if you've used Xcode
 Server before in Xcode 6,
 
-00:03:53.226 --> 00:03:55.676 A:middle
+
+80
+00:03:53,226 --> 00:03:55,676
 you know when you go to edit one
 of your bots, we would take you
 
-00:03:55.676 --> 00:03:58.476 A:middle
+
+81
+00:03:55,676 --> 00:03:58,476
 through the entire workflow
 for creating a bot again,
 
-00:03:58.476 --> 00:04:00.326 A:middle
+
+82
+00:03:58,476 --> 00:04:00,326
 just with a lot of the
 values already filled in.
 
 
-
-00:03:58.476 --> 00:04:00.326 A:middle
-just with a lot of the
-values already filled in.
-
-00:04:01.036 --> 00:04:03.906 A:middle
+83
+00:04:01,036 --> 00:04:03,906
 Now, that's a little
 tedious when you want
 
-00:04:03.906 --> 00:04:06.056 A:middle
+
+84
+00:04:03,906 --> 00:04:06,056
 to make a simple change
 like adding a trigger,
 
-00:04:06.056 --> 00:04:07.726 A:middle
+
+85
+00:04:06,056 --> 00:04:07,726
 changing your schedule,
 something like that.
 
-00:04:08.066 --> 00:04:10.266 A:middle
+
+86
+00:04:08,066 --> 00:04:10,266
 Now we have this tabbed
 interface that allows you
 
-00:04:10.266 --> 00:04:12.916 A:middle
+
+87
+00:04:10,266 --> 00:04:12,916
 to get right in, make the change
 you want to do, and get out.
 
-00:04:13.516 --> 00:04:18.526 A:middle
+
+88
+00:04:13,516 --> 00:04:18,526
 [Applause]
 
-00:04:19.026 --> 00:04:20.536 A:middle
+
+89
+00:04:19,026 --> 00:04:20,536
 A lot of fans of tagged
 workflows out there.
 
-00:04:22.446 --> 00:04:25.006 A:middle
+
+90
+00:04:22,446 --> 00:04:25,006
 We've also made improvements
 to source control in Xcode 7.
 
-00:04:25.596 --> 00:04:28.486 A:middle
+
+91
+00:04:25,596 --> 00:04:28,486
 So whereas previously
 we would kind of try
 
-00:04:28.486 --> 00:04:30.266 A:middle
+
+92
+00:04:28,486 --> 00:04:30,266
 to automatically handle
 all your source control
 
-00:04:30.266 --> 00:04:32.696 A:middle
+
+93
+00:04:30,266 --> 00:04:32,696
 and hide the details from you,
 we now surface more of that
 
-00:04:32.696 --> 00:04:33.916 A:middle
+
+94
+00:04:32,696 --> 00:04:33,916
 to you so you can see exactly
 
-00:04:33.916 --> 00:04:36.616 A:middle
+
+95
+00:04:33,916 --> 00:04:36,616
 which repositories your
 bot is going to check out,
 
-00:04:37.236 --> 00:04:39.836 A:middle
+
+96
+00:04:37,236 --> 00:04:39,836
 and you can select to not
 include some of those.
 
-00:04:40.166 --> 00:04:43.026 A:middle
+
+97
+00:04:40,166 --> 00:04:43,026
 And for the repositories you are
 checking out, you can now see
 
-00:04:43.026 --> 00:04:45.976 A:middle
+
+98
+00:04:43,026 --> 00:04:45,976
 and choose which branch you'll
 check out instead of just -
 
-00:04:46.516 --> 00:04:50.596 A:middle
+
+99
+00:04:46,516 --> 00:04:50,596
 [Applause]
 
-00:04:51.096 --> 00:04:51.276 A:middle
+
+100
+00:04:51,096 --> 00:04:51,276
 Thank you.
 
-00:04:51.276 --> 00:04:57.146 A:middle
+
+101
+00:04:51,276 --> 00:04:57,146
 Instead of just hoping that
 Xcode figured it out correctly.
 
-00:04:57.236 --> 00:04:59.656 A:middle
+
+102
+00:04:57,236 --> 00:04:59,656
 We also made improvements to
 security in source control,
 
-00:04:59.926 --> 00:05:02.876 A:middle
+
+103
+00:04:59,926 --> 00:05:02,876
 specifically when it comes
 to SSH fingerprinting
 
 
-
-00:04:59.926 --> 00:05:02.876 A:middle
-specifically when it comes
-to SSH fingerprinting
-
-00:05:03.176 --> 00:05:04.846 A:middle
+104
+00:05:03,176 --> 00:05:04,846
 and self-signed certificates.
 
-00:05:05.386 --> 00:05:08.856 A:middle
+
+105
+00:05:05,386 --> 00:05:08,856
 Both of these are not
 automatically secure methods
 
-00:05:08.856 --> 00:05:09.756 A:middle
+
+106
+00:05:08,856 --> 00:05:09,756
 of transportation.
 
-00:05:09.756 --> 00:05:12.366 A:middle
+
+107
+00:05:09,756 --> 00:05:12,366
 They require you to trust the
 server you are connecting to,
 
-00:05:12.716 --> 00:05:16.106 A:middle
+
+108
+00:05:12,716 --> 00:05:16,106
 so that if the server
 changes later, you will know
 
-00:05:16.466 --> 00:05:17.496 A:middle
+
+109
+00:05:16,466 --> 00:05:17,496
 that they have a new fingerprint
 
-00:05:17.496 --> 00:05:19.776 A:middle
+
+110
+00:05:17,496 --> 00:05:19,776
 and may be impersonating the
 server you thought you were
 
-00:05:19.776 --> 00:05:20.926 A:middle
+
+111
+00:05:19,776 --> 00:05:20,926
 connecting to.
 
-00:05:21.306 --> 00:05:24.246 A:middle
+
+112
+00:05:21,306 --> 00:05:24,246
 Previously Xcode would
 automatically trust the servers
 
-00:05:24.586 --> 00:05:26.996 A:middle
+
+113
+00:05:24,586 --> 00:05:26,996
 and not do any verification.
 
-00:05:27.226 --> 00:05:29.886 A:middle
+
+114
+00:05:27,226 --> 00:05:29,886
 Now we require you to explicitly
 trust any of these servers
 
-00:05:30.166 --> 00:05:32.636 A:middle
+
+115
+00:05:30,166 --> 00:05:32,636
 and then we store the
 fingerprint so if it changes
 
-00:05:32.636 --> 00:05:35.496 A:middle
+
+116
+00:05:32,636 --> 00:05:35,496
 in the future, we won't check
 out from the wrong server.
 
-00:05:36.046 --> 00:05:40.426 A:middle
+
+117
+00:05:36,046 --> 00:05:40,426
 And we've also updated
 many of the reports
 
-00:05:40.426 --> 00:05:41.736 A:middle
+
+118
+00:05:40,426 --> 00:05:41,736
 that you see in your
 integrations.
 
-00:05:42.236 --> 00:05:44.516 A:middle
+
+119
+00:05:42,236 --> 00:05:44,516
 So the test report has been
 cleaned up and compacted.
 
-00:05:45.636 --> 00:05:47.876 A:middle
+
+120
+00:05:45,636 --> 00:05:47,876
 It's now easier to see
 any assertion failures
 
-00:05:47.876 --> 00:05:48.836 A:middle
+
+121
+00:05:47,876 --> 00:05:48,836
 that come up in your tests.
 
-00:05:49.456 --> 00:05:54.566 A:middle
+
+122
+00:05:49,456 --> 00:05:54,566
 And the logs view
 has gotten drastic
 
-00:05:54.566 --> 00:05:55.676 A:middle
+
+123
+00:05:54,566 --> 00:05:55,676
 performance improvements.
 
-00:05:55.926 --> 00:05:58.246 A:middle
+
+124
+00:05:55,926 --> 00:05:58,246
 Previously we would try to
 show you a stacked view of all
 
-00:05:58.246 --> 00:06:01.626 A:middle
+
+125
+00:05:58,246 --> 00:06:01,626
 of your logs, but that has
 some significant performance
 
 
-
-00:05:58.246 --> 00:06:01.626 A:middle
-of your logs, but that has
-some significant performance
-
-00:06:01.676 --> 00:06:03.906 A:middle
+126
+00:06:01,676 --> 00:06:03,906
 penalties when you try to
 expand one of those logs.
 
-00:06:04.186 --> 00:06:06.236 A:middle
+
+127
+00:06:04,186 --> 00:06:06,236
 We now show you one log at
 a time that you can choose
 
-00:06:06.236 --> 00:06:07.756 A:middle
+
+128
+00:06:06,236 --> 00:06:07,756
 from a pop-up button
 in the left corner,
 
-00:06:08.156 --> 00:06:11.166 A:middle
+
+129
+00:06:08,156 --> 00:06:11,166
 and now viewing large
 log files is super fast.
 
-00:06:12.516 --> 00:06:19.496 A:middle
+
+130
+00:06:12,516 --> 00:06:19,496
 [Applause]
 
-00:06:19.996 --> 00:06:23.216 A:middle
+
+131
+00:06:19,996 --> 00:06:23,216
 One of the other great things
 that makes Xcode Server special
 
-00:06:23.216 --> 00:06:26.136 A:middle
+
+132
+00:06:23,216 --> 00:06:26,136
 when it comes to continuous
 integration is it knows what
 
-00:06:26.136 --> 00:06:28.586 A:middle
+
+133
+00:06:26,136 --> 00:06:28,586
 kinds of issues Xcode
 projects can produce
 
-00:06:28.586 --> 00:06:31.466 A:middle
+
+134
+00:06:28,586 --> 00:06:31,466
 and knows what a build error
 looks like, a test failure.
 
-00:06:31.736 --> 00:06:35.216 A:middle
+
+135
+00:06:31,736 --> 00:06:35,216
 It's not just showing you
 some raw plain text log file
 
-00:06:35.446 --> 00:06:37.246 A:middle
+
+136
+00:06:35,446 --> 00:06:37,246
 and having you go
 through and figure
 
-00:06:37.246 --> 00:06:38.356 A:middle
+
+137
+00:06:37,246 --> 00:06:38,356
 out what actually happened.
 
-00:06:39.396 --> 00:06:42.016 A:middle
+
+138
+00:06:39,396 --> 00:06:42,016
 So we do a lot of smart things
 when it comes to these issues
 
-00:06:42.016 --> 00:06:44.106 A:middle
+
+139
+00:06:42,016 --> 00:06:44,106
 in order to surface that
 and make that issue useful.
 
-00:06:45.626 --> 00:06:46.746 A:middle
+
+140
+00:06:45,626 --> 00:06:46,746
 When you run an integration --
 
-00:06:46.896 --> 00:06:48.386 A:middle
+
+141
+00:06:46,896 --> 00:06:48,386
 this is true in Xcode
 6 as well --
 
-00:06:48.846 --> 00:06:51.326 A:middle
+
+142
+00:06:48,846 --> 00:06:51,326
 we show you this nice report
 showing you all the issues
 
-00:06:51.326 --> 00:06:52.906 A:middle
+
+143
+00:06:51,326 --> 00:06:52,906
 that came up in your build.
 
-00:06:53.856 --> 00:06:56.256 A:middle
+
+144
+00:06:53,856 --> 00:06:56,256
 And we surface which ones are
 new because we can compare them
 
-00:06:56.256 --> 00:06:58.326 A:middle
+
+145
+00:06:56,256 --> 00:06:58,326
 to the previous integration,
 and that allows us
 
-00:06:58.326 --> 00:07:00.376 A:middle
+
+146
+00:06:58,326 --> 00:07:00,376
 to pinpoint exactly what
 integration and thus
 
 
-
-00:06:58.326 --> 00:07:00.376 A:middle
-to pinpoint exactly what
-integration and thus
-
-00:07:00.376 --> 00:07:02.866 A:middle
+147
+00:07:00,376 --> 00:07:02,866
 which commits introduce
 a particular issue,
 
-00:07:03.276 --> 00:07:07.066 A:middle
+
+148
+00:07:03,276 --> 00:07:07,066
 and that makes it much
 easier to find the cause,
 
-00:07:07.346 --> 00:07:12.596 A:middle
+
+149
+00:07:07,346 --> 00:07:12,596
 track it down, and make a fix.
 
-00:07:12.806 --> 00:07:15.176 A:middle
+
+150
+00:07:12,806 --> 00:07:15,176
 We have added some new stuff
 in Xcode 7 around issues.
 
-00:07:15.626 --> 00:07:17.066 A:middle
+
+151
+00:07:15,626 --> 00:07:17,066
 Now if you see an
 issue that comes up
 
-00:07:17.376 --> 00:07:20.266 A:middle
+
+152
+00:07:17,376 --> 00:07:20,266
 and you either know it was your
 fault and you want to go fix it
 
-00:07:20.406 --> 00:07:22.506 A:middle
+
+153
+00:07:20,406 --> 00:07:22,506
 or you can see just from
 looking at the issue,
 
-00:07:22.506 --> 00:07:24.416 A:middle
+
+154
+00:07:22,506 --> 00:07:24,416
 like I know what's
 wrong there, I can go in
 
-00:07:24.416 --> 00:07:26.386 A:middle
+
+155
+00:07:24,416 --> 00:07:26,386
 and fix it real quick
 and get this cleared up.
 
-00:07:26.826 --> 00:07:29.436 A:middle
+
+156
+00:07:26,826 --> 00:07:29,436
 Then you can claim issues,
 and that puts your name on it
 
-00:07:29.476 --> 00:07:31.816 A:middle
+
+157
+00:07:29,476 --> 00:07:31,816
 so everyone on your team will
 see that when they go look
 
-00:07:31.816 --> 00:07:33.356 A:middle
+
+158
+00:07:31,816 --> 00:07:33,356
 at the report, and they will
 know that they don't have
 
-00:07:33.396 --> 00:07:36.866 A:middle
+
+159
+00:07:33,396 --> 00:07:36,866
 to worry about it;
 you are on the case.
 
-00:07:37.046 --> 00:07:38.946 A:middle
+
+160
+00:07:37,046 --> 00:07:38,946
 For issues that are
 either intermittent
 
-00:07:38.946 --> 00:07:41.936 A:middle
+
+161
+00:07:38,946 --> 00:07:41,936
 or know have been alre fixed,
 you can silence those issues
 
-00:07:41.936 --> 00:07:43.226 A:middle
+
+162
+00:07:41,936 --> 00:07:43,226
 for a certain period of time,
 
-00:07:43.446 --> 00:07:44.936 A:middle
+
+163
+00:07:43,446 --> 00:07:44,936
 and they will disappear
 from the report.
 
-00:07:46.406 --> 00:07:48.826 A:middle
+
+164
+00:07:46,406 --> 00:07:48,826
 That allows you to focus
 on exactly the things
 
-00:07:48.826 --> 00:07:51.176 A:middle
+
+165
+00:07:48,826 --> 00:07:51,176
 that actually need your
 attention without cluttering it
 
-00:07:51.176 --> 00:07:52.876 A:middle
+
+166
+00:07:51,176 --> 00:07:52,876
 up with things you know
 are already handled.
 
-00:07:57.976 --> 00:07:58.996 A:middle
+
+167
+00:07:57,976 --> 00:07:58,996
 But one of the best things
 
-00:07:58.996 --> 00:08:01.666 A:middle
+
+168
+00:07:58,996 --> 00:08:01,666
 about Xcode Server is
 how well we interact
 
 
-
-00:07:58.996 --> 00:08:01.666 A:middle
-about Xcode Server is
-how well we interact
-
-00:08:01.666 --> 00:08:04.116 A:middle
+169
+00:08:01,666 --> 00:08:04,116
 with all the other features
 that Xcode introduces.
 
-00:08:04.336 --> 00:08:06.426 A:middle
+
+170
+00:08:04,336 --> 00:08:06,426
 And since there are some
 great new features in Xcode 7,
 
-00:08:06.776 --> 00:08:09.676 A:middle
+
+171
+00:08:06,776 --> 00:08:09,676
 we have taken the special time
 to integrate those features
 
-00:08:09.676 --> 00:08:10.856 A:middle
+
+172
+00:08:09,676 --> 00:08:10,856
 in Xcode Server as well.
 
-00:08:11.306 --> 00:08:13.246 A:middle
+
+173
+00:08:11,306 --> 00:08:13,246
 I want to look at
 a few of those.
 
-00:08:14.516 --> 00:08:17.576 A:middle
+
+174
+00:08:14,516 --> 00:08:17,576
 So user interface
 testing is new in Xcode 7.
 
-00:08:19.016 --> 00:08:21.066 A:middle
+
+175
+00:08:19,016 --> 00:08:21,066
 And we've taken special
 care to make sure
 
-00:08:21.066 --> 00:08:22.696 A:middle
+
+176
+00:08:21,066 --> 00:08:22,696
 that works perfectly
 in Xcode Server.
 
-00:08:23.856 --> 00:08:26.486 A:middle
+
+177
+00:08:23,856 --> 00:08:26,486
 When you run Mac tests
 or iOS simulator tests,
 
-00:08:26.796 --> 00:08:28.346 A:middle
+
+178
+00:08:26,796 --> 00:08:28,346
 we create a full window session
 
-00:08:28.346 --> 00:08:29.626 A:middle
+
+179
+00:08:28,346 --> 00:08:29,626
 in the background
 on your server.
 
-00:08:29.876 --> 00:08:31.156 A:middle
+
+180
+00:08:29,876 --> 00:08:31,156
 That's where all
 of your tests run.
 
-00:08:31.386 --> 00:08:33.525 A:middle
+
+181
+00:08:31,386 --> 00:08:33,525
 That means you don't have
 to worry about is it going
 
-00:08:33.525 --> 00:08:36.806 A:middle
+
+182
+00:08:33,525 --> 00:08:36,806
 to be the right environment for
 Xcode 2, launch my application,
 
-00:08:37.015 --> 00:08:38.135 A:middle
+
+183
+00:08:37,015 --> 00:08:38,135
 we'll make sure it works fine.
 
-00:08:38.525 --> 00:08:40.236 A:middle
+
+184
+00:08:38,525 --> 00:08:40,236
 If you are using
 real iOS devices,
 
-00:08:40.466 --> 00:08:42.466 A:middle
+
+185
+00:08:40,466 --> 00:08:42,466
 then you will see
 the UI test stepping
 
-00:08:42.466 --> 00:08:45.786 A:middle
+
+186
+00:08:42,466 --> 00:08:45,786
 through the application
 right on the device.
 
-00:08:46.516 --> 00:08:50.546 A:middle
+
+187
+00:08:46,516 --> 00:08:50,546
 [Applause]
 
-00:08:51.046 --> 00:08:52.576 A:middle
+
+188
+00:08:51,046 --> 00:08:52,576
 So user interface
 testing is a great way
 
-00:08:52.576 --> 00:08:54.866 A:middle
+
+189
+00:08:52,576 --> 00:08:54,866
 to test your application
 at a high level,
 
-00:08:54.866 --> 00:08:56.176 A:middle
+
+190
+00:08:54,866 --> 00:08:56,176
 the same way your
 users will see it,
 
-00:08:56.416 --> 00:08:58.456 A:middle
+
+191
+00:08:56,416 --> 00:08:58,456
 and test all the different
 layers interacting together.
 
-00:08:59.006 --> 00:09:01.406 A:middle
+
+192
+00:08:59,006 --> 00:09:01,406
 It's even better when you have
 a server running those tests
 
 
-
-00:08:59.006 --> 00:09:01.406 A:middle
-It's even better when you have
-a server running those tests
-
-00:09:01.406 --> 00:09:05.696 A:middle
+193
+00:09:01,406 --> 00:09:05,696
 across multiple devices
 at the same time.
 
-00:09:05.796 --> 00:09:08.126 A:middle
+
+194
+00:09:05,796 --> 00:09:08,126
 And on a schedule.
 
-00:09:09.756 --> 00:09:13.306 A:middle
+
+195
+00:09:09,756 --> 00:09:13,306
 On-demand resources is a new
 feature in iOS 9 that allows you
 
-00:09:13.306 --> 00:09:16.716 A:middle
+
+196
+00:09:13,306 --> 00:09:16,716
 to make your apps bundle
 smaller by not storing
 
-00:09:16.716 --> 00:09:18.156 A:middle
+
+197
+00:09:16,716 --> 00:09:18,156
 as many resources in the bundle.
 
-00:09:18.376 --> 00:09:20.176 A:middle
+
+198
+00:09:18,376 --> 00:09:20,176
 Instead the App Store
 will host them for you
 
-00:09:20.666 --> 00:09:21.836 A:middle
+
+199
+00:09:20,666 --> 00:09:21,836
 when your app is on the Store.
 
-00:09:23.056 --> 00:09:25.126 A:middle
+
+200
+00:09:23,056 --> 00:09:25,126
 Then your application can
 download those resources
 
-00:09:25.336 --> 00:09:26.886 A:middle
+
+201
+00:09:25,336 --> 00:09:26,886
 when they are needed
 and they can be removed
 
-00:09:26.886 --> 00:09:29.486 A:middle
+
+202
+00:09:26,886 --> 00:09:29,486
 from disk when you are done.
 
-00:09:29.706 --> 00:09:31.946 A:middle
+
+203
+00:09:29,706 --> 00:09:31,946
 Now, that's great for when
 your app is in the App Store,
 
-00:09:31.946 --> 00:09:35.336 A:middle
+
+204
+00:09:31,946 --> 00:09:35,336
 but when you are doing QA
 internally before you release
 
-00:09:35.706 --> 00:09:38.236 A:middle
+
+205
+00:09:35,706 --> 00:09:38,236
 and you need to test out the
 builds of your application,
 
-00:09:38.846 --> 00:09:40.386 A:middle
+
+206
+00:09:38,846 --> 00:09:40,386
 what happens to the
 resources then?
 
-00:09:40.386 --> 00:09:42.036 A:middle
+
+207
+00:09:40,386 --> 00:09:42,036
 The App Store is not going
 to be hosting them then.
 
-00:09:42.036 --> 00:09:45.666 A:middle
+
+208
+00:09:42,036 --> 00:09:45,666
 You are changing too fast for
 that to really be practical.
 
-00:09:46.916 --> 00:09:49.346 A:middle
+
+209
+00:09:46,916 --> 00:09:49,346
 But if you get your QA
 builds from Xcode Server,
 
-00:09:49.346 --> 00:09:52.056 A:middle
+
+210
+00:09:49,346 --> 00:09:52,056
 if you let your integrations
 produce IPAS that you install
 
-00:09:52.056 --> 00:09:55.506 A:middle
+
+211
+00:09:52,056 --> 00:09:55,506
 on your devices, then this is
 handled completely automatically
 
-00:09:55.506 --> 00:09:55.856 A:middle
+
+212
+00:09:55,506 --> 00:09:55,856
 for you.
 
-00:09:56.196 --> 00:09:58.536 A:middle
+
+213
+00:09:56,196 --> 00:09:58,536
 You don't have to check a box,
 you don't have to do anything.
 
-00:09:58.746 --> 00:10:00.946 A:middle
+
+214
+00:09:58,746 --> 00:10:00,946
 Xcode Server will see you
 have on-demand resources
 
 
-
-00:09:58.746 --> 00:10:00.946 A:middle
-Xcode Server will see you
-have on-demand resources
-
-00:10:00.946 --> 00:10:03.516 A:middle
+215
+00:10:00,946 --> 00:10:03,516
 in your application, it will
 host them on its own server
 
-00:10:03.846 --> 00:10:06.346 A:middle
+
+216
+00:10:03,846 --> 00:10:06,346
 and will teach your
 application where to find them.
 
-00:10:08.516 --> 00:10:12.666 A:middle
+
+217
+00:10:08,516 --> 00:10:12,666
 [Applause]
 
-00:10:13.166 --> 00:10:15.576 A:middle
+
+218
+00:10:13,166 --> 00:10:15,576
 Finally, I want to dig
 deeper into another one
 
-00:10:15.576 --> 00:10:17.676 A:middle
+
+219
+00:10:15,576 --> 00:10:17,676
 of the new features in
 Xcode 7 that goes great
 
-00:10:17.676 --> 00:10:19.466 A:middle
+
+220
+00:10:17,676 --> 00:10:19,466
 with Xcode Server and
 continuous integration,
 
-00:10:19.666 --> 00:10:20.586 A:middle
+
+221
+00:10:19,666 --> 00:10:20,586
 and that's code coverage.
 
-00:10:21.166 --> 00:10:25.536 A:middle
+
+222
+00:10:21,166 --> 00:10:25,536
 So code coverage is
 a tool that's all
 
-00:10:25.536 --> 00:10:28.056 A:middle
+
+223
+00:10:25,536 --> 00:10:28,056
 about measuring the value
 of your tests, specifically,
 
-00:10:28.256 --> 00:10:30.326 A:middle
+
+224
+00:10:28,256 --> 00:10:30,326
 we want to know what
 code is actually running
 
-00:10:30.636 --> 00:10:31.456 A:middle
+
+225
+00:10:30,636 --> 00:10:31,456
 when we run tests.
 
-00:10:32.456 --> 00:10:35.986 A:middle
+
+226
+00:10:32,456 --> 00:10:35,986
 Because it's easy to go about
 building up a big test suite
 
-00:10:35.986 --> 00:10:39.106 A:middle
+
+227
+00:10:35,986 --> 00:10:39,106
 for your application and feel
 like you are resilient to change
 
-00:10:39.106 --> 00:10:40.646 A:middle
+
+228
+00:10:39,106 --> 00:10:40,646
 and that regressions
 aren't going to come
 
-00:10:40.646 --> 00:10:41.616 A:middle
+
+229
+00:10:40,646 --> 00:10:41,616
 up that you won't notice.
 
-00:10:42.596 --> 00:10:45.506 A:middle
+
+230
+00:10:42,596 --> 00:10:45,506
 But how do you really know how
 many tests is enough tests?
 
-00:10:45.886 --> 00:10:48.706 A:middle
+
+231
+00:10:45,886 --> 00:10:48,706
 Say I've got an application
 that's got 2,000 unit tests,
 
-00:10:49.116 --> 00:10:52.536 A:middle
+
+232
+00:10:49,116 --> 00:10:52,536
 but only 20% of my application
 is actually getting run
 
-00:10:52.536 --> 00:10:53.086 A:middle
+
+233
+00:10:52,536 --> 00:10:53,086
 by those tests?
 
-00:10:53.906 --> 00:10:56.686 A:middle
+
+234
+00:10:53,906 --> 00:10:56,686
 Well, that's still not as
 useful as I might think it is.
 
-00:10:57.016 --> 00:10:59.316 A:middle
+
+235
+00:10:57,016 --> 00:10:59,316
 So code coverage is all about
 surfacing this information
 
-00:10:59.316 --> 00:11:01.036 A:middle
+
+236
+00:10:59,316 --> 00:11:01,036
 to you so you can make
 informed decisions.
 
 
-
-00:10:59.316 --> 00:11:01.036 A:middle
-to you so you can make
-informed decisions.
-
-00:11:01.906 --> 00:11:03.756 A:middle
+237
+00:11:01,906 --> 00:11:03,756
 So it allows you to run your
 tests and measure exactly
 
-00:11:03.826 --> 00:11:06.596 A:middle
+
+238
+00:11:03,826 --> 00:11:06,596
 which code is getting exercised
 there and, more importantly,
 
-00:11:07.026 --> 00:11:09.446 A:middle
+
+239
+00:11:07,026 --> 00:11:09,446
 which code is completely
 untested and, thus,
 
-00:11:09.506 --> 00:11:11.776 A:middle
+
+240
+00:11:09,506 --> 00:11:11,776
 that's code that could
 have a regression
 
-00:11:11.776 --> 00:11:13.756 A:middle
+
+241
+00:11:11,776 --> 00:11:13,756
 as you go adding new
 features, and you wouldn't know
 
-00:11:13.756 --> 00:11:14.696 A:middle
+
+242
+00:11:13,756 --> 00:11:14,696
 about it from your tests.
 
-00:11:15.266 --> 00:11:19.566 A:middle
+
+243
+00:11:15,266 --> 00:11:19,566
 So we think code coverage is
 really important for teams
 
-00:11:19.566 --> 00:11:20.856 A:middle
+
+244
+00:11:19,566 --> 00:11:20,856
 that are serious about testing,
 
-00:11:21.146 --> 00:11:24.546 A:middle
+
+245
+00:11:21,146 --> 00:11:24,546
 and that's why we've integrated
 code coverage into Xcode.
 
-00:11:25.196 --> 00:11:27.146 A:middle
+
+246
+00:11:25,196 --> 00:11:27,146
 So like most great
 Xcode features,
 
-00:11:27.326 --> 00:11:29.696 A:middle
+
+247
+00:11:27,326 --> 00:11:29,696
 code coverage is built off of
 tight integration with LLVM.
 
-00:11:30.736 --> 00:11:33.776 A:middle
+
+248
+00:11:30,736 --> 00:11:33,776
 So when you have gathering code
 coverage enabled in your scheme,
 
-00:11:33.906 --> 00:11:35.636 A:middle
+
+249
+00:11:33,906 --> 00:11:35,636
 the compiler will
 instrument your code
 
-00:11:35.886 --> 00:11:38.586 A:middle
+
+250
+00:11:35,886 --> 00:11:38,586
 so we can count how often
 each expression is executed,
 
-00:11:39.166 --> 00:11:40.486 A:middle
+
+251
+00:11:39,166 --> 00:11:40,486
 then we will surface
 this information
 
-00:11:40.486 --> 00:11:41.366 A:middle
+
+252
+00:11:40,486 --> 00:11:41,366
 to you right in the IDE.
 
-00:11:42.996 --> 00:11:44.206 A:middle
+
+253
+00:11:42,996 --> 00:11:44,206
 Now, there's two ways
 we are going to do that.
 
-00:11:45.406 --> 00:11:48.566 A:middle
+
+254
+00:11:45,406 --> 00:11:48,566
 The first is if you go to the
 report navigator for your test,
 
-00:11:48.756 --> 00:11:51.916 A:middle
+
+255
+00:11:48,756 --> 00:11:51,916
 you could do this in
 Xcode 6, but now in 7,
 
-00:11:51.916 --> 00:11:53.646 A:middle
+
+256
+00:11:51,916 --> 00:11:53,646
 there is a new tab will
 labeled "coverage."
 
-00:11:53.646 --> 00:11:59.176 A:middle
+
+257
+00:11:53,646 --> 00:11:59,176
 If you look at that report, you
 can see by target and then file
 
-00:11:59.176 --> 00:12:02.136 A:middle
+
+258
+00:11:59,176 --> 00:12:02,136
 and then method exactly how
 well covered the different parts
 
 
-
-00:11:59.176 --> 00:12:02.136 A:middle
-and then method exactly how
-well covered the different parts
-
-00:12:02.136 --> 00:12:02.986 A:middle
+259
+00:12:02,136 --> 00:12:02,986
 of your application are.
 
-00:12:04.386 --> 00:12:07.366 A:middle
+
+260
+00:12:04,386 --> 00:12:07,366
 This is a great way to look at
 your application at a high level
 
-00:12:07.586 --> 00:12:10.136 A:middle
+
+261
+00:12:07,586 --> 00:12:10,136
 and then drill down and identify
 which parts need your attention.
 
-00:12:10.746 --> 00:12:16.346 A:middle
+
+262
+00:12:10,746 --> 00:12:16,346
 But if I get down to finding a
 method that has 75% coverage,
 
-00:12:17.036 --> 00:12:18.076 A:middle
+
+263
+00:12:17,036 --> 00:12:18,076
 well, that's good to know,
 
-00:12:18.076 --> 00:12:21.336 A:middle
+
+264
+00:12:18,076 --> 00:12:21,336
 but I don't really know what
 I need to know to fix that.
 
-00:12:21.336 --> 00:12:23.676 A:middle
+
+265
+00:12:21,336 --> 00:12:23,676
 I don't know which branches
 of my code are tested
 
-00:12:23.676 --> 00:12:24.426 A:middle
+
+266
+00:12:23,676 --> 00:12:24,426
 and which ones aren't.
 
-00:12:25.446 --> 00:12:28.666 A:middle
+
+267
+00:12:25,446 --> 00:12:28,666
 So if I hit the arrow that
 shows up when you hover over one
 
-00:12:28.666 --> 00:12:30.726 A:middle
+
+268
+00:12:28,666 --> 00:12:30,726
 of these methods or
 files, it will jump right
 
-00:12:30.726 --> 00:12:31.736 A:middle
+
+269
+00:12:30,726 --> 00:12:31,736
 to the source code editor
 
-00:12:31.736 --> 00:12:35.036 A:middle
+
+270
+00:12:31,736 --> 00:12:35,036
 where we show inline annotations
 highlighting exactly which parts
 
-00:12:35.036 --> 00:12:36.296 A:middle
+
+271
+00:12:35,036 --> 00:12:36,296
 of your application
 are uncovered.
 
-00:12:36.546 --> 00:12:38.906 A:middle
+
+272
+00:12:36,546 --> 00:12:38,906
 For the parts that are covered,
 we'll tell you how many times
 
-00:12:38.906 --> 00:12:39.876 A:middle
+
+273
+00:12:38,906 --> 00:12:39,876
 that executed in your test.
 
-00:12:41.516 --> 00:12:47.486 A:middle
+
+274
+00:12:41,516 --> 00:12:47,486
 [Applause]
 
-00:12:47.986 --> 00:12:51.006 A:middle
+
+275
+00:12:47,986 --> 00:12:51,006
 So code coverage is really great
 on its own in the Xcode IDE,
 
-00:12:51.066 --> 00:12:54.406 A:middle
+
+276
+00:12:51,066 --> 00:12:54,406
 but I think it gets even better
 when you put it on Xcode Server
 
-00:12:54.436 --> 00:12:56.796 A:middle
+
+277
+00:12:54,436 --> 00:12:56,796
 where you have a bot running
 your project over time
 
-00:12:56.886 --> 00:12:58.016 A:middle
+
+278
+00:12:56,886 --> 00:12:58,016
 across multiple devices.
 
-00:12:58.666 --> 00:13:01.466 A:middle
+
+279
+00:12:58,666 --> 00:13:01,466
 So that's one of the
 things that's special
 
 
-
-00:12:58.666 --> 00:13:01.466 A:middle
-So that's one of the
-things that's special
-
-00:13:01.466 --> 00:13:04.466 A:middle
+280
+00:13:01,466 --> 00:13:04,466
 about integrations and bots is
 that you can set them up to run
 
-00:13:04.466 --> 00:13:06.486 A:middle
+
+281
+00:13:04,466 --> 00:13:06,486
 on a suite of devices
 instead of just one
 
-00:13:06.486 --> 00:13:07.836 A:middle
+
+282
+00:13:06,486 --> 00:13:07,836
 at a time, like you do in Xcode.
 
-00:13:08.956 --> 00:13:11.326 A:middle
+
+283
+00:13:08,956 --> 00:13:11,326
 So when you do that, we'll show
 you the coverage data for all
 
-00:13:11.326 --> 00:13:13.636 A:middle
+
+284
+00:13:11,326 --> 00:13:13,636
 of your devices together,
 and we'll highlight
 
-00:13:13.636 --> 00:13:16.706 A:middle
+
+285
+00:13:13,636 --> 00:13:16,706
 in orange any methods
 or targets or files
 
-00:13:16.956 --> 00:13:19.036 A:middle
+
+286
+00:13:16,956 --> 00:13:19,036
 that had different coverage
 across your devices,
 
-00:13:19.036 --> 00:13:22.536 A:middle
+
+287
+00:13:19,036 --> 00:13:22,536
 so you can identify where
 things are different and decide
 
-00:13:22.536 --> 00:13:25.166 A:middle
+
+288
+00:13:22,536 --> 00:13:25,166
 if that's a bug or maybe
 that's expected behavior.
 
-00:13:26.066 --> 00:13:27.836 A:middle
+
+289
+00:13:26,066 --> 00:13:27,836
 It could be fairly
 common for you
 
-00:13:27.836 --> 00:13:30.386 A:middle
+
+290
+00:13:27,836 --> 00:13:30,386
 to have code coverage that's
 different on different devices,
 
-00:13:30.386 --> 00:13:32.116 A:middle
+
+291
+00:13:30,386 --> 00:13:32,116
 especially in user
 interface code,
 
-00:13:32.326 --> 00:13:33.986 A:middle
+
+292
+00:13:32,326 --> 00:13:33,986
 where you might be doing
 something different on, say,
 
-00:13:33.986 --> 00:13:35.336 A:middle
+
+293
+00:13:33,986 --> 00:13:35,336
 an iPad versus an iPhone.
 
-00:13:35.906 --> 00:13:40.366 A:middle
+
+294
+00:13:35,906 --> 00:13:40,366
 One of the things that
 Xcode Server provides you
 
-00:13:40.366 --> 00:13:42.396 A:middle
+
+295
+00:13:40,366 --> 00:13:42,396
 as well is a history
 that's stored
 
-00:13:42.396 --> 00:13:44.146 A:middle
+
+296
+00:13:42,396 --> 00:13:44,146
 and tracked along the
 life of your project.
 
-00:13:44.646 --> 00:13:47.036 A:middle
+
+297
+00:13:44,646 --> 00:13:47,036
 This allows us to, when you are
 looking at the code coverage
 
-00:13:47.036 --> 00:13:50.776 A:middle
+
+298
+00:13:47,036 --> 00:13:50,776
 for an integration, highlight
 when changes happen and exactly
 
-00:13:50.776 --> 00:13:53.966 A:middle
+
+299
+00:13:50,776 --> 00:13:53,966
 which methods and files had
 those changes in coverage
 
-00:13:53.966 --> 00:13:57.696 A:middle
+
+300
+00:13:53,966 --> 00:13:57,696
 so you can pinpoint that down
 to a specific set of commits.
 
-00:13:59.596 --> 00:14:03.266 A:middle
+
+301
+00:13:59,596 --> 00:14:03,266
 This history also allows us
 to show trends, so in Xcode 6,
 
 
-
-00:13:59.596 --> 00:14:03.266 A:middle
-This history also allows us
-to show trends, so in Xcode 6,
-
-00:14:03.266 --> 00:14:05.846 A:middle
+302
+00:14:03,266 --> 00:14:05,846
 we had build history and test
 history charts for your bot.
 
-00:14:06.316 --> 00:14:08.116 A:middle
+
+303
+00:14:06,316 --> 00:14:08,116
 That shows as you're
 adding more tests,
 
-00:14:08.116 --> 00:14:09.176 A:middle
+
+304
+00:14:08,116 --> 00:14:09,176
 you can see the chart grow,
 
-00:14:09.456 --> 00:14:11.816 A:middle
+
+305
+00:14:09,456 --> 00:14:11,816
 and you can see how well
 your issues have been going
 
-00:14:12.106 --> 00:14:13.516 A:middle
+
+306
+00:14:12,106 --> 00:14:13,516
 and how stable your
 bot has been.
 
-00:14:13.866 --> 00:14:15.836 A:middle
+
+307
+00:14:13,866 --> 00:14:15,836
 But now we also have a
 new code coverage graph
 
-00:14:16.106 --> 00:14:17.596 A:middle
+
+308
+00:14:16,106 --> 00:14:17,596
 that shows the overall coverage
 
-00:14:17.596 --> 00:14:18.956 A:middle
+
+309
+00:14:17,596 --> 00:14:18,956
 of your project trending
 over time.
 
-00:14:20.376 --> 00:14:23.246 A:middle
+
+310
+00:14:20,376 --> 00:14:23,246
 Now this is great to know if,
 for instance, if it's improving,
 
-00:14:23.246 --> 00:14:24.816 A:middle
+
+311
+00:14:23,246 --> 00:14:24,816
 then you know as
 you add features,
 
-00:14:24.816 --> 00:14:27.086 A:middle
+
+312
+00:14:24,816 --> 00:14:27,086
 you are either adding
 tests for those features
 
-00:14:27.476 --> 00:14:29.016 A:middle
+
+313
+00:14:27,476 --> 00:14:29,016
 or you're adding
 tests for features
 
-00:14:29.016 --> 00:14:30.436 A:middle
+
+314
+00:14:29,016 --> 00:14:30,436
 that previously had no coverage.
 
-00:14:31.056 --> 00:14:32.456 A:middle
+
+315
+00:14:31,056 --> 00:14:32,456
 Or maybe it's trending downward
 
-00:14:32.456 --> 00:14:33.766 A:middle
+
+316
+00:14:32,456 --> 00:14:33,766
 because you are moving
 a little too fast
 
-00:14:33.766 --> 00:14:35.536 A:middle
+
+317
+00:14:33,766 --> 00:14:35,536
 and not testing the
 features you are adding now.
 
-00:14:35.766 --> 00:14:37.946 A:middle
+
+318
+00:14:35,766 --> 00:14:37,946
 This can help you make
 informed decisions going forward
 
-00:14:38.076 --> 00:14:39.536 A:middle
+
+319
+00:14:38,076 --> 00:14:39,536
 about what you want
 to do and how you want
 
-00:14:39.536 --> 00:14:40.486 A:middle
+
+320
+00:14:39,536 --> 00:14:40,486
 to spend your development time.
 
-00:14:41.076 --> 00:14:46.886 A:middle
+
+321
+00:14:41,076 --> 00:14:46,886
 And of course, if you are using
 big screen in your workspace
 
-00:14:46.966 --> 00:14:50.166 A:middle
+
+322
+00:14:46,966 --> 00:14:50,166
 to show your overall bot status,
 right below the number of tests
 
-00:14:50.166 --> 00:14:52.426 A:middle
+
+323
+00:14:50,166 --> 00:14:52,426
 in your project we'll also
 show you your overall coverage
 
-00:14:52.426 --> 00:14:54.546 A:middle
+
+324
+00:14:52,426 --> 00:14:54,546
 percentage, so you can
 keep an eye on that.
 
-00:14:56.156 --> 00:14:57.376 A:middle
+
+325
+00:14:56,156 --> 00:14:57,376
 All right.
 
-00:14:57.786 --> 00:14:59.486 A:middle
+
+326
+00:14:57,786 --> 00:14:59,486
 So now I'd like to bring
 up my colleague, Eric,
 
-00:14:59.786 --> 00:15:01.756 A:middle
+
+327
+00:14:59,786 --> 00:15:01,756
 to demonstrate some of
 the code coverage features
 
 
-
-00:14:59.786 --> 00:15:01.756 A:middle
-to demonstrate some of
-the code coverage features
-
-00:15:01.756 --> 00:15:02.976 A:middle
+328
+00:15:01,756 --> 00:15:02,976
 in Xcode and Xcode Server.
 
-00:15:03.516 --> 00:15:10.706 A:middle
+
+329
+00:15:03,516 --> 00:15:10,706
 [Applause]
 
-00:15:11.206 --> 00:15:11.676 A:middle
-&gt;&gt; ERIC DUDIAK: Thank you, Matt.
 
-00:15:11.676 --> 00:15:14.656 A:middle
+330
+00:15:11,206 --> 00:15:11,676
+>> ERIC DUDIAK: Thank you, Matt.
+
+
+331
+00:15:11,676 --> 00:15:14,656
 I am going to show you an
 application that we've built
 
-00:15:14.656 --> 00:15:17.726 A:middle
+
+332
+00:15:14,656 --> 00:15:17,726
 for internal use that we
 use to track coffee owed
 
-00:15:17.726 --> 00:15:18.826 A:middle
+
+333
+00:15:17,726 --> 00:15:18,826
 from one person to another.
 
-00:15:18.826 --> 00:15:21.116 A:middle
+
+334
+00:15:18,826 --> 00:15:21,116
 You may have seen this
 application last year,
 
-00:15:21.116 --> 00:15:22.876 A:middle
+
+335
+00:15:21,116 --> 00:15:22,876
 we've made a few
 enhancements to it since then.
 
-00:15:24.046 --> 00:15:26.996 A:middle
+
+336
+00:15:24,046 --> 00:15:26,996
 Basically, the rule is you owe
 someone coffee if they fix a bug
 
-00:15:26.996 --> 00:15:29.166 A:middle
+
+337
+00:15:26,996 --> 00:15:29,166
 for you or otherwise
 owe you a favor.
 
-00:15:29.166 --> 00:15:31.606 A:middle
+
+338
+00:15:29,166 --> 00:15:31,606
 So we have a whole
 application to track that.
 
-00:15:32.186 --> 00:15:34.236 A:middle
+
+339
+00:15:32,186 --> 00:15:34,236
 And like any good application,
 we have unit testing
 
-00:15:34.236 --> 00:15:36.086 A:middle
+
+340
+00:15:34,236 --> 00:15:36,086
 to make sure as we are
 adding features to it,
 
-00:15:36.086 --> 00:15:39.766 A:middle
+
+341
+00:15:36,086 --> 00:15:39,766
 we are not impacting
 existing working code.
 
-00:15:39.966 --> 00:15:42.786 A:middle
+
+342
+00:15:39,966 --> 00:15:42,786
 So having you test those is
 really only half the battle.
 
-00:15:42.786 --> 00:15:45.666 A:middle
+
+343
+00:15:42,786 --> 00:15:45,666
 I don't know how many unit tests
 I am comfortable with in terms
 
-00:15:45.666 --> 00:15:49.256 A:middle
+
+344
+00:15:45,666 --> 00:15:49,256
 of when this application
 is actually fully tested,
 
-00:15:49.256 --> 00:15:51.786 A:middle
+
+345
+00:15:49,256 --> 00:15:51,786
 and I want to look at coverage
 and see what we have here.
 
-00:15:53.226 --> 00:15:55.076 A:middle
+
+346
+00:15:53,226 --> 00:15:55,076
 Because maybe we don't
 have that many tests.
 
-00:15:55.076 --> 00:15:56.666 A:middle
+
+347
+00:15:55,076 --> 00:15:56,666
 So let's take a look at it.
 
-00:15:56.666 --> 00:15:58.866 A:middle
+
+348
+00:15:56,666 --> 00:15:58,866
 I actually ran the test
 earlier before I got up here.
 
-00:15:58.866 --> 00:16:01.086 A:middle
+
+349
+00:15:58,866 --> 00:16:01,086
 We can just take a
 look on the device.
 
 
-
-00:15:58.866 --> 00:16:01.086 A:middle
-We can just take a
-look on the device.
-
-00:16:01.086 --> 00:16:02.396 A:middle
+350
+00:16:01,086 --> 00:16:02,396
 We only have about seven tests.
 
-00:16:02.556 --> 00:16:05.786 A:middle
+
+351
+00:16:02,556 --> 00:16:05,786
 That's pretty bad.
 
-00:16:06.626 --> 00:16:07.786 A:middle
+
+352
+00:16:06,626 --> 00:16:07,786
 But it's a small application.
 
-00:16:07.786 --> 00:16:09.906 A:middle
+
+353
+00:16:07,786 --> 00:16:09,906
 Maybe that's enough
 to cover everything.
 
-00:16:09.906 --> 00:16:11.676 A:middle
+
+354
+00:16:09,906 --> 00:16:11,676
 They are all passing at
 least, so that's a good start.
 
-00:16:11.676 --> 00:16:12.816 A:middle
+
+355
+00:16:11,676 --> 00:16:12,816
 Let's look at coverage.
 
-00:16:12.816 --> 00:16:16.656 A:middle
+
+356
+00:16:12,816 --> 00:16:16,656
 So if we look at the
 coverage report here,
 
-00:16:16.656 --> 00:16:19.186 A:middle
+
+357
+00:16:16,656 --> 00:16:19,186
 we see the application is
 broken down into two targets.
 
-00:16:19.226 --> 00:16:22.156 A:middle
+
+358
+00:16:19,226 --> 00:16:22,156
 We have a UI-level
 application, coffeeboard.app,
 
-00:16:22.706 --> 00:16:24.456 A:middle
+
+359
+00:16:22,706 --> 00:16:24,456
 which doesn't have
 much coverage.
 
-00:16:25.466 --> 00:16:25.876 A:middle
+
+360
+00:16:25,466 --> 00:16:25,876
 But that's okay.
 
-00:16:25.876 --> 00:16:26.766 A:middle
+
+361
+00:16:25,876 --> 00:16:26,766
 It's a UI application.
 
-00:16:26.766 --> 00:16:28.116 A:middle
+
+362
+00:16:26,766 --> 00:16:28,116
 I should write some
 UI tests for that.
 
-00:16:28.116 --> 00:16:30.806 A:middle
+
+363
+00:16:28,116 --> 00:16:30,806
 I am more concerned about this
 foundation level framework.
 
-00:16:31.016 --> 00:16:32.956 A:middle
+
+364
+00:16:31,016 --> 00:16:32,956
 Here we see only
 about 50% coverage.
 
-00:16:32.956 --> 00:16:36.386 A:middle
+
+365
+00:16:32,956 --> 00:16:36,386
 Now, that's pretty sad because
 this could be 100% covered
 
-00:16:36.386 --> 00:16:37.116 A:middle
+
+366
+00:16:36,386 --> 00:16:37,116
 if we tried hard.
 
-00:16:37.676 --> 00:16:40.946 A:middle
+
+367
+00:16:37,676 --> 00:16:40,946
 And it looks like the class
 that's really falling behind is
 
-00:16:40.946 --> 00:16:42.366 A:middle
+
+368
+00:16:40,946 --> 00:16:42,366
 this transaction class.
 
-00:16:43.186 --> 00:16:45.116 A:middle
+
+369
+00:16:43,186 --> 00:16:45,116
 And if we look at the
 transaction class,
 
-00:16:46.036 --> 00:16:47.346 A:middle
+
+370
+00:16:46,036 --> 00:16:47,346
 we see we have a bunch
 of methods in here
 
-00:16:47.346 --> 00:16:49.486 A:middle
+
+371
+00:16:47,346 --> 00:16:49,486
 that aren't getting called
 at all in our unit tests.
 
-00:16:49.686 --> 00:16:52.066 A:middle
+
+372
+00:16:49,686 --> 00:16:52,066
 We are creating a few
 transactions, and we can see
 
-00:16:52.066 --> 00:16:53.716 A:middle
+
+373
+00:16:52,066 --> 00:16:53,716
 that in the initializers
 being called,
 
-00:16:53.716 --> 00:16:56.336 A:middle
+
+374
+00:16:53,716 --> 00:16:56,336
 but we are never actually
 doing anything with them.
 
-00:16:56.446 --> 00:16:58.466 A:middle
+
+375
+00:16:56,446 --> 00:16:58,466
 So I should explain a
 little bit about our app.
 
-00:16:58.466 --> 00:16:59.716 A:middle
+
+376
+00:16:58,466 --> 00:16:59,716
 It has a really neat feature,
 
 
-
-00:17:00.226 --> 00:17:02.626 A:middle
+377
+00:17:00,226 --> 00:17:02,626
 which is using a proprietary
 algorithm that we have.
 
-00:17:02.726 --> 00:17:05.646 A:middle
+
+378
+00:17:02,726 --> 00:17:05,646
 If I owe Matt two coffees
 and he owes me one coffee,
 
-00:17:05.906 --> 00:17:06.976 A:middle
+
+379
+00:17:05,906 --> 00:17:06,976
 we actually merge that down
 
-00:17:06.976 --> 00:17:08.736 A:middle
+
+380
+00:17:06,976 --> 00:17:08,736
 to just a single
 coffee that I owe Matt.
 
-00:17:10.116 --> 00:17:11.376 A:middle
+
+381
+00:17:10,116 --> 00:17:11,376
 Really secret algorithm
 that I want
 
-00:17:11.376 --> 00:17:14.165 A:middle
+
+382
+00:17:11,376 --> 00:17:14,165
 to make sure is very well
 tested, and also I am not
 
-00:17:14.165 --> 00:17:16.986 A:middle
+
+383
+00:17:14,165 --> 00:17:16,986
 that good at math, so
 I have to make sure.
 
-00:17:17.925 --> 00:17:20.606 A:middle
+
+384
+00:17:17,925 --> 00:17:20,606
 So let's see and look at the
 actual source file for this,
 
-00:17:20.646 --> 00:17:22.766 A:middle
+
+385
+00:17:20,646 --> 00:17:22,766
 and just like Matt said, I
 am going to use the arrow
 
-00:17:22.766 --> 00:17:27.026 A:middle
+
+386
+00:17:22,766 --> 00:17:27,026
 that shows up on hover and jump
 straight into my source editor.
 
-00:17:28.146 --> 00:17:32.016 A:middle
+
+387
+00:17:28,146 --> 00:17:32,016
 Here we see a whole lot of these
 dark, highlighted sections.
 
-00:17:32.306 --> 00:17:35.236 A:middle
+
+388
+00:17:32,306 --> 00:17:35,236
 Anything that's using
 the default background
 
-00:17:35.236 --> 00:17:37.096 A:middle
+
+389
+00:17:35,236 --> 00:17:37,096
 of my source editor --
 white in this case --
 
-00:17:37.406 --> 00:17:39.616 A:middle
+
+390
+00:17:37,406 --> 00:17:39,616
 is code that's already
 covered, and I don't really need
 
-00:17:39.616 --> 00:17:40.526 A:middle
+
+391
+00:17:39,616 --> 00:17:40,526
 to worry about it too much.
 
-00:17:40.666 --> 00:17:43.336 A:middle
+
+392
+00:17:40,666 --> 00:17:43,336
 I am really more concerned about
 all of this code that's showing
 
-00:17:43.336 --> 00:17:44.406 A:middle
+
+393
+00:17:43,336 --> 00:17:44,406
 up with a gray background.
 
-00:17:44.806 --> 00:17:47.786 A:middle
+
+394
+00:17:44,806 --> 00:17:47,786
 I can confirm it's uncovered
 because on the right side here,
 
-00:17:48.146 --> 00:17:50.166 A:middle
+
+395
+00:17:48,146 --> 00:17:50,166
 we see a bunch of
 zeros indicating
 
-00:17:50.166 --> 00:17:51.246 A:middle
+
+396
+00:17:50,166 --> 00:17:51,246
 that this code was never passed
 
-00:17:51.246 --> 00:17:53.746 A:middle
+
+397
+00:17:51,246 --> 00:17:53,746
 over inside any of
 my unit tests.
 
-00:17:54.686 --> 00:17:55.436 A:middle
+
+398
+00:17:54,686 --> 00:17:55,436
 So that's not good.
 
-00:17:56.826 --> 00:17:58.546 A:middle
+
+399
+00:17:56,826 --> 00:17:58,546
 Now let's navigate
 over to the unit test
 
-00:17:58.546 --> 00:17:59.466 A:middle
+
+400
+00:17:58,546 --> 00:17:59,466
 and take a look at this.
 
 
-
-00:18:00.256 --> 00:18:02.006 A:middle
+401
+00:18:00,256 --> 00:18:02,006
 If I go to the transaction
 tests,
 
-00:18:02.086 --> 00:18:05.256 A:middle
+
+402
+00:18:02,086 --> 00:18:05,256
 I see that I just
 don't have any tests.
 
-00:18:05.256 --> 00:18:06.816 A:middle
+
+403
+00:18:05,256 --> 00:18:06,816
 That's kind of a problem.
 
-00:18:07.126 --> 00:18:08.786 A:middle
+
+404
+00:18:07,126 --> 00:18:08,786
 So let's fix that right now.
 
-00:18:08.786 --> 00:18:11.326 A:middle
+
+405
+00:18:08,786 --> 00:18:11,326
 I am going to go ahead and
 create a little blank space here
 
-00:18:11.326 --> 00:18:13.546 A:middle
+
+406
+00:18:11,326 --> 00:18:13,546
 and write in a little
 bit of Swift.
 
-00:18:14.446 --> 00:18:16.626 A:middle
+
+407
+00:18:14,446 --> 00:18:16,626
 And of course, I assume
 you all have magic macros
 
-00:18:16.626 --> 00:18:18.176 A:middle
+
+408
+00:18:16,626 --> 00:18:18,176
 that add all your
 unit tests for you.
 
-00:18:18.176 --> 00:18:19.566 A:middle
+
+409
+00:18:18,176 --> 00:18:19,566
 That's how we all
 develop, right?
 
-00:18:20.516 --> 00:18:25.586 A:middle
+
+410
+00:18:20,516 --> 00:18:25,586
 [Applause]
 
-00:18:26.086 --> 00:18:28.126 A:middle
+
+411
+00:18:26,086 --> 00:18:28,126
 I am going to go ahead and
 run the test on the device.
 
-00:18:28.126 --> 00:18:29.356 A:middle
+
+412
+00:18:28,126 --> 00:18:29,356
 It's going to take a second.
 
-00:18:29.356 --> 00:18:32.036 A:middle
+
+413
+00:18:29,356 --> 00:18:32,036
 As Matt said, we are
 using LLVM to go ahead
 
-00:18:32.036 --> 00:18:34.616 A:middle
+
+414
+00:18:32,036 --> 00:18:34,616
 and instrument your code while
 it's running so we know exactly
 
-00:18:34.616 --> 00:18:36.156 A:middle
+
+415
+00:18:34,616 --> 00:18:36,156
 which expressions are being run.
 
-00:18:36.796 --> 00:18:40.346 A:middle
+
+416
+00:18:36,796 --> 00:18:40,346
 When that runs on my device, I
 am going to look at the scheme.
 
-00:18:40.626 --> 00:18:43.316 A:middle
+
+417
+00:18:40,626 --> 00:18:43,316
 One thing to keep in mind,
 since it is a feature of LLVM,
 
-00:18:43.316 --> 00:18:44.726 A:middle
+
+418
+00:18:43,316 --> 00:18:44,726
 it's optional in Xcode.
 
-00:18:44.956 --> 00:18:47.826 A:middle
+
+419
+00:18:44,956 --> 00:18:47,826
 The way I turned it on is
 went into the scheme editor
 
-00:18:48.066 --> 00:18:49.336 A:middle
+
+420
+00:18:48,066 --> 00:18:49,336
 and selected the test action.
 
-00:18:49.756 --> 00:18:51.186 A:middle
+
+421
+00:18:49,756 --> 00:18:51,186
 I then made sure
 that check box for
 
-00:18:51.186 --> 00:18:52.846 A:middle
+
+422
+00:18:51,186 --> 00:18:52,846
 "gather data coverage"
 is selected.
 
-00:18:53.906 --> 00:18:55.486 A:middle
+
+423
+00:18:53,906 --> 00:18:55,486
 That ensures I get
 coverage data.
 
-00:18:56.256 --> 00:18:56.796 A:middle
+
+424
+00:18:56,256 --> 00:18:56,796
 Perfect timing.
 
-00:18:56.796 --> 00:18:58.026 A:middle
+
+425
+00:18:56,796 --> 00:18:58,026
 All my tests succeeded.
 
-00:18:58.246 --> 00:19:00.266 A:middle
+
+426
+00:18:58,246 --> 00:19:00,266
 Great, they always do when I
 build them with magic macros.
 
 
-
-00:18:58.246 --> 00:19:00.266 A:middle
-Great, they always do when I
-build them with magic macros.
-
-00:19:01.556 --> 00:19:03.696 A:middle
+427
+00:19:01,556 --> 00:19:03,696
 If I look at the
 test report now,
 
-00:19:03.746 --> 00:19:05.776 A:middle
+
+428
+00:19:03,746 --> 00:19:05,776
 I see I have more unit tests.
 
-00:19:05.966 --> 00:19:07.266 A:middle
+
+429
+00:19:05,966 --> 00:19:07,266
 But that's not really
 the whole story.
 
-00:19:07.266 --> 00:19:08.656 A:middle
+
+430
+00:19:07,266 --> 00:19:08,656
 Let's look at that
 coverage report again.
 
-00:19:09.186 --> 00:19:12.186 A:middle
+
+431
+00:19:09,186 --> 00:19:12,186
 Here we see a much
 prettier picture.
 
-00:19:12.186 --> 00:19:15.646 A:middle
+
+432
+00:19:12,186 --> 00:19:15,646
 If I zoom in on that, we will
 see I am now at 76% covered,
 
-00:19:15.896 --> 00:19:17.696 A:middle
+
+433
+00:19:15,896 --> 00:19:17,696
 not all the way there
 but doing a lot better
 
-00:19:17.696 --> 00:19:18.446 A:middle
+
+434
+00:19:17,696 --> 00:19:18,446
 than we were before.
 
-00:19:19.016 --> 00:19:20.886 A:middle
+
+435
+00:19:19,016 --> 00:19:20,886
 I'm going to go ahead
 
-00:19:20.886 --> 00:19:22.936 A:middle
+
+436
+00:19:20,886 --> 00:19:22,936
 and disclose the
 transaction class again,
 
-00:19:22.936 --> 00:19:24.016 A:middle
+
+437
+00:19:22,936 --> 00:19:24,016
 and here we see a lot more
 
-00:19:24.016 --> 00:19:25.176 A:middle
+
+438
+00:19:24,016 --> 00:19:25,176
 of these methods
 are getting covered.
 
-00:19:25.176 --> 00:19:27.576 A:middle
+
+439
+00:19:25,176 --> 00:19:27,576
 I am testing that merge code
 that I was worried about earlier
 
-00:19:27.996 --> 00:19:29.416 A:middle
+
+440
+00:19:27,996 --> 00:19:29,416
 and was causing me to
 lose a lot of sleep.
 
-00:19:29.936 --> 00:19:33.006 A:middle
+
+441
+00:19:29,936 --> 00:19:33,006
 Now one interesting thing, if
 we go back to the source editor,
 
-00:19:34.166 --> 00:19:36.546 A:middle
+
+442
+00:19:34,166 --> 00:19:36,546
 if we look at the
 is equal method,
 
-00:19:36.546 --> 00:19:38.686 A:middle
+
+443
+00:19:36,546 --> 00:19:38,686
 if you noticed before it
 was only partially covered.
 
-00:19:38.686 --> 00:19:41.186 A:middle
+
+444
+00:19:38,686 --> 00:19:41,186
 We can see here exactly
 why that is.
 
-00:19:41.766 --> 00:19:42.706 A:middle
+
+445
+00:19:41,766 --> 00:19:42,706
 If we look at the is equal,
 
-00:19:42.706 --> 00:19:45.026 A:middle
+
+446
+00:19:42,706 --> 00:19:45,026
 we don't actually compare our
 transaction class to something
 
-00:19:45.026 --> 00:19:46.426 A:middle
+
+447
+00:19:45,026 --> 00:19:46,426
 that isn't a transaction class,
 
-00:19:46.876 --> 00:19:49.046 A:middle
+
+448
+00:19:46,876 --> 00:19:49,046
 so this return false
 is never getting called
 
-00:19:49.046 --> 00:19:50.266 A:middle
+
+449
+00:19:49,046 --> 00:19:50,266
 in any of our unit tests.
 
-00:19:51.006 --> 00:19:53.266 A:middle
+
+450
+00:19:51,006 --> 00:19:53,266
 So being able to see
 this coverage as you go
 
-00:19:53.266 --> 00:19:55.556 A:middle
+
+451
+00:19:53,266 --> 00:19:55,556
 through different branches is
 very useful if you have a lot
 
-00:19:55.556 --> 00:19:58.326 A:middle
+
+452
+00:19:55,556 --> 00:19:58,326
 of branching logic in your code
 that you know has edge cases.
 
-00:19:58.766 --> 00:20:00.846 A:middle
+
+453
+00:19:58,766 --> 00:20:00,846
 This way you can ensure that
 every edge case is covered
 
 
-
-00:19:58.766 --> 00:20:00.846 A:middle
-This way you can ensure that
-every edge case is covered
-
-00:20:00.846 --> 00:20:02.126 A:middle
+454
+00:20:00,846 --> 00:20:02,126
 when you are writing
 your unit tests.
 
-00:20:02.986 --> 00:20:05.286 A:middle
+
+455
+00:20:02,986 --> 00:20:05,286
 We can also see a lot of this
 code is getting covered multiple
 
-00:20:05.286 --> 00:20:07.256 A:middle
+
+456
+00:20:05,286 --> 00:20:07,256
 times, and that's really
 important to make sure
 
-00:20:07.256 --> 00:20:09.276 A:middle
+
+457
+00:20:07,256 --> 00:20:09,276
 if you know there are multiple
 cases that hit the same path
 
-00:20:09.276 --> 00:20:10.916 A:middle
+
+458
+00:20:09,276 --> 00:20:10,916
 in your code but
 ultimately are different,
 
-00:20:10.916 --> 00:20:14.446 A:middle
+
+459
+00:20:10,916 --> 00:20:14,446
 you are getting coverage
 on all of them.
 
-00:20:14.636 --> 00:20:16.876 A:middle
+
+460
+00:20:14,636 --> 00:20:16,876
 Now, everything I just
 did was a bit tedious,
 
-00:20:16.876 --> 00:20:19.576 A:middle
+
+461
+00:20:16,876 --> 00:20:19,576
 and I wish I could just have
 someone run these unit tests all
 
-00:20:19.576 --> 00:20:21.896 A:middle
+
+462
+00:20:19,576 --> 00:20:21,896
 day not have to worry about it,
 
-00:20:21.896 --> 00:20:23.216 A:middle
+
+463
+00:20:21,896 --> 00:20:23,216
 not to compare them
 one to the other.
 
-00:20:23.216 --> 00:20:25.586 A:middle
+
+464
+00:20:23,216 --> 00:20:25,586
 I was told there wasn't
 money in the budget
 
-00:20:25.586 --> 00:20:26.926 A:middle
+
+465
+00:20:25,586 --> 00:20:26,926
 for an intern to do that.
 
-00:20:27.586 --> 00:20:29.226 A:middle
+
+466
+00:20:27,586 --> 00:20:29,226
 Let's look at Xcode Server.
 
-00:20:29.226 --> 00:20:32.016 A:middle
+
+467
+00:20:29,226 --> 00:20:32,016
 I already set up a bot for this
 and it's on a different branch
 
-00:20:32.016 --> 00:20:36.466 A:middle
+
+468
+00:20:32,016 --> 00:20:36,466
 that already has the commit,
 so let's look at the bot.
 
-00:20:36.466 --> 00:20:38.146 A:middle
+
+469
+00:20:36,466 --> 00:20:38,146
 Here just like Matt was
 showing in the slides earlier,
 
-00:20:38.146 --> 00:20:41.556 A:middle
+
+470
+00:20:38,146 --> 00:20:41,556
 we see a high-level overview of
 my project as it's been running
 
-00:20:41.556 --> 00:20:44.706 A:middle
+
+471
+00:20:41,556 --> 00:20:44,706
 for the past 24 hours
 and over the past amount
 
-00:20:44.706 --> 00:20:46.306 A:middle
+
+472
+00:20:44,706 --> 00:20:46,306
 of time I have been
 running this bot.
 
-00:20:46.736 --> 00:20:48.876 A:middle
+
+473
+00:20:46,736 --> 00:20:48,876
 At the top we surface
 high-level statistics,
 
-00:20:49.486 --> 00:20:52.246 A:middle
+
+474
+00:20:49,486 --> 00:20:52,246
 and you can show the statistics
 for any period of time, week,
 
-00:20:52.246 --> 00:20:56.066 A:middle
+
+475
+00:20:52,246 --> 00:20:56,066
 hour, month, year, or since
 the beginning of your bot.
 
-00:20:56.736 --> 00:20:58.076 A:middle
+
+476
+00:20:56,736 --> 00:20:58,076
 Then we see build history.
 
-00:20:58.076 --> 00:21:00.116 A:middle
+
+477
+00:20:58,076 --> 00:21:00,116
 This is where we
 surface errors, warnings,
 
 
-
-00:20:58.076 --> 00:21:00.116 A:middle
-This is where we
-surface errors, warnings,
-
-00:21:00.116 --> 00:21:01.366 A:middle
+478
+00:21:00,116 --> 00:21:01,366
 analysis issues over time.
 
-00:21:01.526 --> 00:21:03.296 A:middle
+
+479
+00:21:01,526 --> 00:21:03,296
 In this case, I had a
 few warnings earlier,
 
-00:21:03.296 --> 00:21:04.466 A:middle
+
+480
+00:21:03,296 --> 00:21:04,466
 but I've gone ahead
 and fixed those,
 
-00:21:04.466 --> 00:21:06.196 A:middle
+
+481
+00:21:04,466 --> 00:21:06,196
 so we are currently
 showing no issues.
 
-00:21:06.826 --> 00:21:09.196 A:middle
+
+482
+00:21:06,826 --> 00:21:09,196
 The next two graphs are
 probably most important
 
-00:21:09.196 --> 00:21:10.236 A:middle
+
+483
+00:21:09,196 --> 00:21:10,236
 for continuous integrations,
 
-00:21:10.236 --> 00:21:11.876 A:middle
+
+484
+00:21:10,236 --> 00:21:11,876
 assuming your project
 is building cleanly
 
-00:21:11.876 --> 00:21:13.076 A:middle
+
+485
+00:21:11,876 --> 00:21:13,076
 with no warnings or errors.
 
-00:21:13.656 --> 00:21:14.696 A:middle
+
+486
+00:21:13,656 --> 00:21:14,696
 And that is your tests.
 
-00:21:15.196 --> 00:21:17.436 A:middle
+
+487
+00:21:15,196 --> 00:21:17,436
 In this case we see I had
 a few test failures earlier
 
-00:21:17.436 --> 00:21:18.936 A:middle
+
+488
+00:21:17,436 --> 00:21:18,936
 but I've been steadily
 adding tests.
 
-00:21:19.596 --> 00:21:22.676 A:middle
+
+489
+00:21:19,596 --> 00:21:22,676
 That's great, but what we really
 want to see is a steady increase
 
-00:21:22.946 --> 00:21:26.136 A:middle
+
+490
+00:21:22,946 --> 00:21:26,136
 in tests all passing, but
 also a steady increase
 
-00:21:26.136 --> 00:21:27.696 A:middle
+
+491
+00:21:26,136 --> 00:21:27,696
 in code coverage
 with those tests.
 
-00:21:27.916 --> 00:21:29.886 A:middle
+
+492
+00:21:27,916 --> 00:21:29,886
 If you are adding tests
 but not adding coverage,
 
-00:21:29.886 --> 00:21:31.756 A:middle
+
+493
+00:21:29,886 --> 00:21:31,756
 you are not really
 adding as much value
 
-00:21:31.756 --> 00:21:32.486 A:middle
+
+494
+00:21:31,756 --> 00:21:32,486
 as you might think you are.
 
-00:21:33.356 --> 00:21:36.056 A:middle
+
+495
+00:21:33,356 --> 00:21:36,056
 If I look at the coverage,
 the last integration --
 
-00:21:36.056 --> 00:21:38.346 A:middle
+
+496
+00:21:36,056 --> 00:21:38,346
 this is that commit I
 just made you didn't see,
 
-00:21:38.346 --> 00:21:39.186 A:middle
+
+497
+00:21:38,346 --> 00:21:39,186
 but I promise I made it --
 
-00:21:39.186 --> 00:21:41.916 A:middle
+
+498
+00:21:39,186 --> 00:21:41,916
 we can actually go straight
 into the coverage report.
 
-00:21:43.296 --> 00:21:45.656 A:middle
+
+499
+00:21:43,296 --> 00:21:45,656
 So this looks a lot like
 what we just saw in Xcode
 
-00:21:45.656 --> 00:21:46.986 A:middle
+
+500
+00:21:45,656 --> 00:21:46,986
 when I ran my tests locally.
 
-00:21:47.716 --> 00:21:50.076 A:middle
+
+501
+00:21:47,716 --> 00:21:50,076
 Just like in Xcode, we
 break it down by target
 
-00:21:50.076 --> 00:21:51.716 A:middle
+
+502
+00:21:50,076 --> 00:21:51,716
 and across different classes.
 
-00:21:51.956 --> 00:21:53.516 A:middle
+
+503
+00:21:51,956 --> 00:21:53,516
 And I can expand that
 transaction class
 
-00:21:54.336 --> 00:21:56.236 A:middle
+
+504
+00:21:54,336 --> 00:21:56,236
 and see the exact same
 methods getting the same level
 
-00:21:56.236 --> 00:21:56.696 A:middle
+
+505
+00:21:56,236 --> 00:21:56,696
 of coverage.
 
-00:21:56.946 --> 00:21:58.656 A:middle
+
+506
+00:21:56,946 --> 00:21:58,656
 But there are two
 big differences.
 
-00:21:58.776 --> 00:22:00.676 A:middle
+
+507
+00:21:58,776 --> 00:22:00,676
 So in this case,
 I can see change
 
 
-
-00:21:58.776 --> 00:22:00.676 A:middle
-So in this case,
-I can see change
-
-00:22:00.676 --> 00:22:02.246 A:middle
+508
+00:22:00,676 --> 00:22:02,246
 over time right in the report.
 
-00:22:02.246 --> 00:22:04.086 A:middle
+
+509
+00:22:02,246 --> 00:22:04,086
 So instead of having to go
 through two different reports
 
-00:22:04.086 --> 00:22:06.406 A:middle
+
+510
+00:22:04,086 --> 00:22:06,406
 to see whether I actually
 increased the coverage,
 
-00:22:06.406 --> 00:22:08.006 A:middle
+
+511
+00:22:06,406 --> 00:22:08,006
 especially if it's a
 less drastic change
 
-00:22:08.006 --> 00:22:10.876 A:middle
+
+512
+00:22:08,006 --> 00:22:10,876
 than the one I just made, we
 can surface that right here.
 
-00:22:11.456 --> 00:22:13.606 A:middle
+
+513
+00:22:11,456 --> 00:22:13,606
 So my coverage is now 22% better
 
-00:22:13.676 --> 00:22:15.996 A:middle
+
+514
+00:22:13,676 --> 00:22:15,996
 in CB foundation.framework
 than it was before.
 
-00:22:16.856 --> 00:22:17.486 A:middle
+
+515
+00:22:16,856 --> 00:22:17,486
 And in particular,
 
-00:22:17.486 --> 00:22:21.146 A:middle
+
+516
+00:22:17,486 --> 00:22:21,146
 that transaction class
 increased 48% more covered.
 
-00:22:21.746 --> 00:22:24.486 A:middle
+
+517
+00:22:21,746 --> 00:22:24,486
 Now we highlight down here in
 orange an interesting thing,
 
-00:22:24.486 --> 00:22:26.816 A:middle
+
+518
+00:22:24,486 --> 00:22:26,816
 which is difference
 between devices.
 
-00:22:27.286 --> 00:22:30.036 A:middle
+
+519
+00:22:27,286 --> 00:22:30,036
 And actually, in Xcode
 Server's reports,
 
-00:22:30.036 --> 00:22:33.296 A:middle
+
+520
+00:22:30,036 --> 00:22:33,296
 I can click this checkbox and
 show the device differences
 
-00:22:33.776 --> 00:22:34.866 A:middle
+
+521
+00:22:33,776 --> 00:22:34,866
 and highlight that immediately.
 
-00:22:35.386 --> 00:22:36.236 A:middle
+
+522
+00:22:35,386 --> 00:22:36,236
 Now, in this case, it looks
 
-00:22:36.236 --> 00:22:38.756 A:middle
+
+523
+00:22:36,236 --> 00:22:38,756
 like this detail view
 controller isn't showing
 
-00:22:38.756 --> 00:22:40.756 A:middle
+
+524
+00:22:38,756 --> 00:22:40,756
 up at all on my iPhone.
 
-00:22:40.756 --> 00:22:42.106 A:middle
+
+525
+00:22:40,756 --> 00:22:42,106
 That's actually to be expected.
 
-00:22:42.106 --> 00:22:44.266 A:middle
+
+526
+00:22:42,106 --> 00:22:44,266
 In this case, our application
 uses the split view,
 
-00:22:44.796 --> 00:22:46.426 A:middle
+
+527
+00:22:44,796 --> 00:22:46,426
 and that second view
 controller doesn't show
 
-00:22:46.426 --> 00:22:48.556 A:middle
+
+528
+00:22:46,426 --> 00:22:48,556
 up on the iPhone unless
 someone actually were to tap it.
 
-00:22:48.556 --> 00:22:50.606 A:middle
+
+529
+00:22:48,556 --> 00:22:50,606
 And our unit tests don't
 exercise that code.
 
-00:22:51.116 --> 00:22:53.546 A:middle
+
+530
+00:22:51,116 --> 00:22:53,546
 This isn't particularly unusual,
 but it's important to make sure
 
-00:22:53.546 --> 00:22:54.946 A:middle
+
+531
+00:22:53,546 --> 00:22:54,946
 that every time you see
 something like this,
 
-00:22:54.946 --> 00:22:56.436 A:middle
+
+532
+00:22:54,946 --> 00:22:56,436
 that you expect it to happen.
 
-00:22:56.556 --> 00:22:58.526 A:middle
+
+533
+00:22:56,556 --> 00:22:58,526
 That's why we make it
 very easy in Xcode Server
 
-00:22:58.806 --> 00:23:00.936 A:middle
+
+534
+00:22:58,806 --> 00:23:00,936
 to see differences between
 different classes of devices.
 
 
-
-00:22:58.806 --> 00:23:00.936 A:middle
-to see differences between
-different classes of devices.
-
-00:23:01.776 --> 00:23:04.336 A:middle
+535
+00:23:01,776 --> 00:23:04,336
 It makes it very easy
 to determine when code
 
-00:23:04.336 --> 00:23:05.596 A:middle
+
+536
+00:23:04,336 --> 00:23:05,596
 that should be covered isn't.
 
-00:23:06.066 --> 00:23:09.966 A:middle
+
+537
+00:23:06,066 --> 00:23:09,966
 That's continuous integration
 showing code coverage.
 
-00:23:09.966 --> 00:23:11.436 A:middle
+
+538
+00:23:09,966 --> 00:23:11,436
 With that, I am going to
 let Matt talk about some
 
-00:23:11.436 --> 00:23:13.576 A:middle
+
+539
+00:23:11,436 --> 00:23:13,576
 of the more advanced
 features of Xcode Server.
 
-00:23:14.516 --> 00:23:20.406 A:middle
+
+540
+00:23:14,516 --> 00:23:20,406
 [Applause]
 
-00:23:20.906 --> 00:23:21.406 A:middle
-&gt;&gt; MATT MORIARITY:
+
+541
+00:23:20,906 --> 00:23:21,406
+>> MATT MORIARITY:
 Thank you, Eric.
 
-00:23:22.786 --> 00:23:24.916 A:middle
+
+542
+00:23:22,786 --> 00:23:24,916
 So like Eric said,
 I want to talk
 
-00:23:24.916 --> 00:23:26.776 A:middle
+
+543
+00:23:24,916 --> 00:23:26,776
 about some more advanced
 features in Xcode Server.
 
-00:23:27.466 --> 00:23:30.906 A:middle
+
+544
+00:23:27,466 --> 00:23:30,906
 I know that many of you
 developers are very interested
 
-00:23:31.196 --> 00:23:33.536 A:middle
+
+545
+00:23:31,196 --> 00:23:33,536
 in extending Xcode Server
 and integrating it to parts
 
-00:23:33.536 --> 00:23:34.726 A:middle
+
+546
+00:23:33,536 --> 00:23:34,726
 of your team's workflows.
 
-00:23:35.166 --> 00:23:39.076 A:middle
+
+547
+00:23:35,166 --> 00:23:39,076
 We know Xcode Server is
 not the only tools you use
 
-00:23:39.076 --> 00:23:41.936 A:middle
+
+548
+00:23:39,076 --> 00:23:41,936
 to get things done, so we want
 to provide ways for Xcode Server
 
-00:23:41.936 --> 00:23:43.206 A:middle
+
+549
+00:23:41,936 --> 00:23:43,206
 to work with everything you use
 
-00:23:43.586 --> 00:23:45.156 A:middle
+
+550
+00:23:43,586 --> 00:23:45,156
 and be a perfect
 fit for your tetam.
 
-00:23:45.746 --> 00:23:49.296 A:middle
+
+551
+00:23:45,746 --> 00:23:49,296
 So we have two ways I am going
 to talk about today in terms
 
-00:23:49.296 --> 00:23:52.126 A:middle
+
+552
+00:23:49,296 --> 00:23:52,126
 of integrating Xcode into
 everything else you are using.
 
-00:23:52.716 --> 00:23:54.186 A:middle
+
+553
+00:23:52,716 --> 00:23:54,186
 The first one is triggers.
 
-00:23:55.706 --> 00:23:59.316 A:middle
+
+554
+00:23:55,706 --> 00:23:59,316
 So triggers were introduced
 in Xcode 6, and they are all
 
-00:23:59.316 --> 00:24:02.626 A:middle
+
+555
+00:23:59,316 --> 00:24:02,626
 about providing custom actions
 that integrate in the lifecycle
 
 
-
-00:23:59.316 --> 00:24:02.626 A:middle
-about providing custom actions
-that integrate in the lifecycle
-
-00:24:02.776 --> 00:24:04.186 A:middle
+556
+00:24:02,776 --> 00:24:04,186
 of your bots and
 your integrations.
 
-00:24:05.026 --> 00:24:07.386 A:middle
+
+557
+00:24:05,026 --> 00:24:07,386
 So triggers can either
 be email notifications
 
-00:24:07.456 --> 00:24:09.616 A:middle
+
+558
+00:24:07,456 --> 00:24:09,616
 that provide details and
 configurable information
 
-00:24:09.616 --> 00:24:11.516 A:middle
+
+559
+00:24:09,616 --> 00:24:11,516
 about your integrations
 and how they ran,
 
-00:24:11.516 --> 00:24:15.126 A:middle
+
+560
+00:24:11,516 --> 00:24:15,126
 what issues they produced,
 committers, things like that.
 
-00:24:15.606 --> 00:24:18.976 A:middle
+
+561
+00:24:15,606 --> 00:24:18,976
 Or more interestingly, they can
 be arbitrary scripts written
 
-00:24:18.976 --> 00:24:20.466 A:middle
+
+562
+00:24:18,976 --> 00:24:20,466
 in the programming
 language of your choice.
 
-00:24:21.946 --> 00:24:24.196 A:middle
+
+563
+00:24:21,946 --> 00:24:24,196
 So by default, we will run
 these scripts using Bash
 
-00:24:24.196 --> 00:24:25.916 A:middle
+
+564
+00:24:24,196 --> 00:24:25,916
 so you can type any
 old shell command
 
-00:24:25.916 --> 00:24:27.926 A:middle
+
+565
+00:24:25,916 --> 00:24:27,926
 into your triggers
 and that should work.
 
-00:24:28.496 --> 00:24:30.756 A:middle
+
+566
+00:24:28,496 --> 00:24:30,756
 But if you include a hash
 bang at the top of your script
 
-00:24:30.756 --> 00:24:32.796 A:middle
+
+567
+00:24:30,756 --> 00:24:32,796
 like you would if you were
 writing a command line tool,
 
-00:24:32.906 --> 00:24:35.996 A:middle
+
+568
+00:24:32,906 --> 00:24:35,996
 then we will use that, and
 you can use any interpreter
 
-00:24:35.996 --> 00:24:36.426 A:middle
+
+569
+00:24:35,996 --> 00:24:36,426
 you like.
 
-00:24:36.986 --> 00:24:39.076 A:middle
+
+570
+00:24:36,986 --> 00:24:39,076
 You can even write your triggers
 in Swift if you so choose.
 
-00:24:40.696 --> 00:24:41.826 A:middle
+
+571
+00:24:40,696 --> 00:24:41,826
 Eric will demonstrate
 that later.
 
-00:24:42.406 --> 00:24:49.426 A:middle
+
+572
+00:24:42,406 --> 00:24:49,426
 A trigger can run either before
 or after your integration runs,
 
-00:24:49.896 --> 00:24:52.106 A:middle
+
+573
+00:24:49,896 --> 00:24:52,106
 and each of those phases
 provides a unique opportunity
 
-00:24:52.106 --> 00:24:53.666 A:middle
+
+574
+00:24:52,106 --> 00:24:53,666
 to do something cool
 with your bots.
 
-00:24:54.356 --> 00:24:56.756 A:middle
+
+575
+00:24:54,356 --> 00:24:56,756
 Triggers that run
 before integration run
 
-00:24:56.976 --> 00:24:58.246 A:middle
+
+576
+00:24:56,976 --> 00:24:58,246
 after your source
 code checks out.
 
-00:24:58.736 --> 00:25:00.716 A:middle
+
+577
+00:24:58,736 --> 00:25:00,716
 That's important because it
 means you have full access
 
 
-
-00:24:58.736 --> 00:25:00.716 A:middle
-That's important because it
-means you have full access
-
-00:25:00.716 --> 00:25:03.186 A:middle
+578
+00:25:00,716 --> 00:25:03,186
 to your project and you can make
 any automated changes you want
 
-00:25:03.186 --> 00:25:04.826 A:middle
+
+579
+00:25:03,186 --> 00:25:04,826
 to do before the build
 actually happens.
 
-00:25:05.416 --> 00:25:09.186 A:middle
+
+580
+00:25:05,416 --> 00:25:09,186
 And triggers that run after
 integration can be gated
 
-00:25:09.186 --> 00:25:10.526 A:middle
+
+581
+00:25:09,186 --> 00:25:10,526
 on the result of
 that integration,
 
-00:25:10.526 --> 00:25:13.166 A:middle
+
+582
+00:25:10,526 --> 00:25:13,166
 so they can run perhaps
 only on success or only
 
-00:25:13.166 --> 00:25:14.286 A:middle
+
+583
+00:25:13,166 --> 00:25:14,286
 when test failures happen.
 
-00:25:14.726 --> 00:25:17.526 A:middle
+
+584
+00:25:14,726 --> 00:25:17,526
 And they also have access
 to a lot of information
 
-00:25:17.726 --> 00:25:19.306 A:middle
+
+585
+00:25:17,726 --> 00:25:19,306
 about what happened
 in your integration.
 
-00:25:19.866 --> 00:25:23.806 A:middle
+
+586
+00:25:19,866 --> 00:25:23,806
 And one of the ways we provide
 access to that information is
 
-00:25:23.806 --> 00:25:24.946 A:middle
+
+587
+00:25:23,806 --> 00:25:24,946
 through environment variables.
 
-00:25:25.586 --> 00:25:29.136 A:middle
+
+588
+00:25:25,586 --> 00:25:29,136
 This is just a sample of some of
 the variables that are defined
 
-00:25:29.136 --> 00:25:29.986 A:middle
+
+589
+00:25:29,136 --> 00:25:29,986
 when your scripts run.
 
-00:25:30.276 --> 00:25:31.966 A:middle
+
+590
+00:25:30,276 --> 00:25:31,966
 Any scripting language
 worth using is going
 
-00:25:31.966 --> 00:25:32.946 A:middle
+
+591
+00:25:31,966 --> 00:25:32,946
 to give you an easy way to get
 
-00:25:32.946 --> 00:25:34.856 A:middle
+
+592
+00:25:32,946 --> 00:25:34,856
 at those environment
 variables and use them.
 
-00:25:36.376 --> 00:25:38.016 A:middle
+
+593
+00:25:36,376 --> 00:25:38,016
 So as an example of what
 you can do with these,
 
-00:25:38.316 --> 00:25:42.236 A:middle
+
+594
+00:25:38,316 --> 00:25:42,236
 last year we demonstrated a
 trigger that posted a message
 
-00:25:42.236 --> 00:25:44.506 A:middle
+
+595
+00:25:42,236 --> 00:25:44,506
 to a jabber chat room every
 time an integration completed.
 
-00:25:44.796 --> 00:25:46.636 A:middle
+
+596
+00:25:44,796 --> 00:25:46,636
 We used the bot name,
 integration number,
 
-00:25:46.636 --> 00:25:48.016 A:middle
+
+597
+00:25:46,636 --> 00:25:48,016
 and result to do that.
 
-00:25:49.196 --> 00:25:52.166 A:middle
+
+598
+00:25:49,196 --> 00:25:52,166
 It was really easy,
 very quick to set up.
 
-00:25:53.296 --> 00:25:55.856 A:middle
+
+599
+00:25:53,296 --> 00:25:55,856
 There's two things up
 here that I think I want
 
-00:25:55.856 --> 00:25:56.696 A:middle
+
+600
+00:25:55,856 --> 00:25:56,696
 to call your attention to,
 
-00:25:56.696 --> 00:25:58.386 A:middle
+
+601
+00:25:56,696 --> 00:25:58,386
 because they seem a little
 weird and out of place.
 
-00:25:59.026 --> 00:26:01.056 A:middle
+
+602
+00:25:59,026 --> 00:26:01,056
 So we have a bot ID
 and integration ID
 
 
-
-00:25:59.026 --> 00:26:01.056 A:middle
-So we have a bot ID
-and integration ID
-
-00:26:01.056 --> 00:26:03.456 A:middle
+603
+00:26:01,056 --> 00:26:03,456
 for the integration
 running and its bot.
 
-00:26:03.836 --> 00:26:06.166 A:middle
+
+604
+00:26:03,836 --> 00:26:06,166
 That's a little weird if
 this is all we give you.
 
-00:26:06.356 --> 00:26:07.886 A:middle
+
+605
+00:26:06,356 --> 00:26:07,886
 You can't really do
 much with just an ID.
 
-00:26:07.886 --> 00:26:09.546 A:middle
+
+606
+00:26:07,886 --> 00:26:09,546
 It's an arbitrary
 string of characters.
 
-00:26:10.306 --> 00:26:10.936 A:middle
+
+607
+00:26:10,306 --> 00:26:10,936
 What good is that?
 
-00:26:10.936 --> 00:26:12.076 A:middle
+
+608
+00:26:10,936 --> 00:26:12,076
 No user wants to see that.
 
-00:26:13.546 --> 00:26:16.076 A:middle
+
+609
+00:26:13,546 --> 00:26:16,076
 So they don't do a lot on their
 own but are very interesting
 
-00:26:16.076 --> 00:26:17.686 A:middle
+
+610
+00:26:16,076 --> 00:26:17,686
 when combined with
 the Xcode Server API.
 
-00:26:18.466 --> 00:26:22.886 A:middle
+
+611
+00:26:18,466 --> 00:26:22,886
 So the Xcode Server API
 forms the underpinnings
 
-00:26:22.886 --> 00:26:25.576 A:middle
+
+612
+00:26:22,886 --> 00:26:25,576
 of how the Xcode ID and
 Xcode Server communicate.
 
-00:26:25.876 --> 00:26:28.226 A:middle
+
+613
+00:26:25,876 --> 00:26:28,226
 You can also harness
 this API for your own use
 
-00:26:28.616 --> 00:26:30.746 A:middle
+
+614
+00:26:28,616 --> 00:26:30,746
 and do some pretty
 interesting things with it.
 
-00:26:31.696 --> 00:26:34.776 A:middle
+
+615
+00:26:31,696 --> 00:26:34,776
 So like most web services
 APIs, it's built off of open,
 
-00:26:34.866 --> 00:26:36.036 A:middle
+
+616
+00:26:34,866 --> 00:26:36,036
 well-established standards.
 
-00:26:37.546 --> 00:26:40.636 A:middle
+
+617
+00:26:37,546 --> 00:26:40,636
 We use HTTPS to do secure
 communication back and forth
 
-00:26:40.676 --> 00:26:41.676 A:middle
+
+618
+00:26:40,676 --> 00:26:41,676
 between client and server.
 
-00:26:41.866 --> 00:26:43.146 A:middle
+
+619
+00:26:41,866 --> 00:26:43,146
 And we use basic authentication
 
-00:26:43.146 --> 00:26:46.036 A:middle
+
+620
+00:26:43,146 --> 00:26:46,036
 over that encrypted
 channel for authentication.
 
-00:26:46.596 --> 00:26:52.106 A:middle
+
+621
+00:26:46,596 --> 00:26:52,106
 Our API follows a REST pattern,
 so it's all about interacting
 
-00:26:52.106 --> 00:26:54.036 A:middle
+
+622
+00:26:52,106 --> 00:26:54,036
 with resources, like
 bots and integrations
 
-00:26:54.256 --> 00:26:57.856 A:middle
+
+623
+00:26:54,256 --> 00:26:57,856
 and using the standard HTTP
 verbs like get, post, patch,
 
-00:26:57.856 --> 00:27:02.866 A:middle
+
+624
+00:26:57,856 --> 00:27:02,866
 and delete, to perform
 operations on those resources.
 
 
-
-00:26:57.856 --> 00:27:02.866 A:middle
-and delete, to perform
-operations on those resources.
-
-00:27:04.436 --> 00:27:07.556 A:middle
+625
+00:27:04,436 --> 00:27:07,556
 And of course, we communicate
 data back and forth using JSON.
 
-00:27:07.816 --> 00:27:09.526 A:middle
+
+626
+00:27:07,816 --> 00:27:09,526
 It's easy to use,
 it's easy to parse,
 
-00:27:09.526 --> 00:27:11.296 A:middle
+
+627
+00:27:09,526 --> 00:27:11,296
 it's the lingua franca
 of Web Services.
 
-00:27:11.486 --> 00:27:12.886 A:middle
+
+628
+00:27:11,486 --> 00:27:12,886
 Everybody is using it.
 
-00:27:14.976 --> 00:27:17.696 A:middle
+
+629
+00:27:14,976 --> 00:27:17,696
 This is great news for
 you, the aspiring extender
 
-00:27:17.696 --> 00:27:20.586 A:middle
+
+630
+00:27:17,696 --> 00:27:20,586
 of Xcode Server because it
 means no matter your preferred
 
-00:27:20.586 --> 00:27:21.946 A:middle
+
+631
+00:27:20,586 --> 00:27:21,946
 programming language
 or environment,
 
-00:27:22.316 --> 00:27:24.806 A:middle
+
+632
+00:27:22,316 --> 00:27:24,806
 you surely have a way
 to speak HTTPS and JSON,
 
-00:27:25.266 --> 00:27:31.056 A:middle
+
+633
+00:27:25,266 --> 00:27:31,056
 which means you can make almost
 anything talk to Xcode Server.
 
-00:27:31.186 --> 00:27:33.796 A:middle
+
+634
+00:27:31,186 --> 00:27:33,796
 Let's walk through how
 we might use this API.
 
-00:27:34.356 --> 00:27:37.106 A:middle
+
+635
+00:27:34,356 --> 00:27:37,106
 So what's the simplest question
 we could ask our server?
 
-00:27:37.796 --> 00:27:40.646 A:middle
+
+636
+00:27:37,796 --> 00:27:40,646
 Let's start with what
 bots are on my server?
 
-00:27:41.056 --> 00:27:42.366 A:middle
+
+637
+00:27:41,056 --> 00:27:42,366
 And this is very easy to do.
 
-00:27:42.496 --> 00:27:44.656 A:middle
+
+638
+00:27:42,496 --> 00:27:44,656
 We make a get request
 to the bots resource.
 
-00:27:45.416 --> 00:27:48.076 A:middle
+
+639
+00:27:45,416 --> 00:27:48,076
 If you look at the URL there,
 you will see that we communicate
 
-00:27:48.076 --> 00:27:52.776 A:middle
+
+640
+00:27:48,076 --> 00:27:52,776
 over port 20,343, and all our
 API requests have a /api prefix.
 
-00:27:53.416 --> 00:27:56.506 A:middle
+
+641
+00:27:53,416 --> 00:27:56,506
 It's not important here,
 but I want you to remember
 
-00:27:56.506 --> 00:27:59.876 A:middle
+
+642
+00:27:56,506 --> 00:27:59,876
 that when you try out the API
 yourself on your own server.
 
 
-
-00:28:00.386 --> 00:28:04.056 A:middle
+643
+00:28:00,386 --> 00:28:04,056
 When we make that request,
 we get a JSON object
 
-00:28:04.056 --> 00:28:05.976 A:middle
+
+644
+00:28:04,056 --> 00:28:05,976
 that tells us the count
 of the results we have
 
-00:28:06.226 --> 00:28:08.066 A:middle
+
+645
+00:28:06,226 --> 00:28:08,066
 and gives us an array of
 the results themselves.
 
-00:28:09.206 --> 00:28:11.056 A:middle
+
+646
+00:28:09,206 --> 00:28:11,056
 Each of these JSON
 objects represents one
 
-00:28:11.056 --> 00:28:13.416 A:middle
+
+647
+00:28:11,056 --> 00:28:13,416
 of the bots that's set up
 and configured on our server.
 
-00:28:14.416 --> 00:28:17.656 A:middle
+
+648
+00:28:14,416 --> 00:28:17,656
 Like most resources, bots
 have an ID, they have a name
 
-00:28:17.946 --> 00:28:20.216 A:middle
+
+649
+00:28:17,946 --> 00:28:20,216
 like you gave it in Xcode
 when you created it,
 
-00:28:20.216 --> 00:28:21.956 A:middle
+
+650
+00:28:20,216 --> 00:28:21,956
 and they have all the
 configuration parameters
 
-00:28:22.676 --> 00:28:25.126 A:middle
+
+651
+00:28:22,676 --> 00:28:25,126
 that you set up when you
 are setting up your bot.
 
-00:28:26.316 --> 00:28:26.836 A:middle
+
+652
+00:28:26,316 --> 00:28:26,836
 All right.
 
-00:28:26.836 --> 00:28:27.816 A:middle
+
+653
+00:28:26,836 --> 00:28:27,816
 So what's something
 else we can do?
 
-00:28:27.816 --> 00:28:28.676 A:middle
+
+654
+00:28:27,816 --> 00:28:28,676
 Now that we have a bot,
 
-00:28:29.046 --> 00:28:31.196 A:middle
+
+655
+00:28:29,046 --> 00:28:31,196
 let's see what integrations
 have run for this bot.
 
-00:28:32.636 --> 00:28:36.746 A:middle
+
+656
+00:28:32,636 --> 00:28:36,746
 So now we access the integration
 subresource for that bot.
 
-00:28:38.706 --> 00:28:40.896 A:middle
+
+657
+00:28:38,706 --> 00:28:40,896
 And we do that, we get
 a very similar result
 
-00:28:40.896 --> 00:28:44.306 A:middle
+
+658
+00:28:40,896 --> 00:28:44,306
 as what we saw before,
 except now the results are --
 
-00:28:44.306 --> 00:28:46.086 A:middle
+
+659
+00:28:44,306 --> 00:28:46,086
 represent integrations,
 not bots.
 
-00:28:47.506 --> 00:28:50.126 A:middle
+
+660
+00:28:47,506 --> 00:28:50,126
 But integrations are resources
 as well, they also have IDs.
 
-00:28:50.546 --> 00:28:53.696 A:middle
+
+661
+00:28:50,546 --> 00:28:53,696
 One interesting thing is that we
 also keep a snapshot of the bot
 
-00:28:53.956 --> 00:28:56.826 A:middle
+
+662
+00:28:53,956 --> 00:28:56,826
 on the integration, and that's
 important because as your --
 
-00:28:56.936 --> 00:28:58.726 A:middle
+
+663
+00:28:56,936 --> 00:28:58,726
 your project changes over time
 
-00:28:58.896 --> 00:29:01.136 A:middle
+
+664
+00:28:58,896 --> 00:29:01,136
 or maybe you adopt new Xcode
 features, things like that,
 
 
-
-00:28:58.896 --> 00:29:01.136 A:middle
-or maybe you adopt new Xcode
-features, things like that,
-
-00:29:01.456 --> 00:29:04.026 A:middle
+665
+00:29:01,456 --> 00:29:04,026
 the bot configuration might
 change when you edit it,
 
-00:29:04.026 --> 00:29:05.766 A:middle
+
+666
+00:29:04,026 --> 00:29:05,766
 so we store a snapshot
 on the integration
 
-00:29:05.766 --> 00:29:07.786 A:middle
+
+667
+00:29:05,766 --> 00:29:07,786
 so that you know exactly
 how your bot was configured
 
-00:29:07.976 --> 00:29:09.296 A:middle
+
+668
+00:29:07,976 --> 00:29:09,296
 when that integration ran.
 
-00:29:09.886 --> 00:29:14.396 A:middle
+
+669
+00:29:09,886 --> 00:29:14,396
 So we also keep track of the
 step in the build process
 
-00:29:14.396 --> 00:29:15.326 A:middle
+
+670
+00:29:14,396 --> 00:29:15,326
 that your integration is at.
 
-00:29:15.466 --> 00:29:17.226 A:middle
+
+671
+00:29:15,466 --> 00:29:17,226
 If it's completed, you
 will see a result there,
 
-00:29:17.546 --> 00:29:20.476 A:middle
+
+672
+00:29:17,546 --> 00:29:20,476
 and also a breakdown of all
 the different issue types
 
-00:29:20.726 --> 00:29:22.846 A:middle
+
+673
+00:29:20,726 --> 00:29:22,846
 that your integration can
 produce and the changes
 
-00:29:22.996 --> 00:29:24.736 A:middle
+
+674
+00:29:22,996 --> 00:29:24,736
 from the previous integration.
 
-00:29:25.316 --> 00:29:29.096 A:middle
+
+675
+00:29:25,316 --> 00:29:29,096
 So these are both get
 requests I've shown you so far.
 
-00:29:29.196 --> 00:29:31.766 A:middle
+
+676
+00:29:29,196 --> 00:29:31,766
 That's great for
 collecting information,
 
-00:29:32.166 --> 00:29:34.256 A:middle
+
+677
+00:29:32,166 --> 00:29:34,256
 but if you are using the
 API, you probably want
 
-00:29:34.256 --> 00:29:35.196 A:middle
+
+678
+00:29:34,256 --> 00:29:35,196
 to do something with it.
 
-00:29:36.166 --> 00:29:37.056 A:middle
+
+679
+00:29:36,166 --> 00:29:37,056
 So what's something we could do
 
-00:29:37.056 --> 00:29:38.526 A:middle
+
+680
+00:29:37,056 --> 00:29:38,526
 to actually have an
 impact on our server?
 
-00:29:39.236 --> 00:29:41.086 A:middle
+
+681
+00:29:39,236 --> 00:29:41,086
 Well, we could trigger
 an integration manually.
 
-00:29:41.646 --> 00:29:44.086 A:middle
+
+682
+00:29:41,646 --> 00:29:44,086
 Maybe we have some kind of other
 automated process that's not the
 
-00:29:44.086 --> 00:29:46.506 A:middle
+
+683
+00:29:44,086 --> 00:29:46,506
 built-in scheduler in Xcode
 Server, and we want to use
 
-00:29:46.506 --> 00:29:49.036 A:middle
+
+684
+00:29:46,506 --> 00:29:49,036
 that to trigger integrations
 for certain bots.
 
-00:29:49.776 --> 00:29:51.066 A:middle
+
+685
+00:29:49,776 --> 00:29:51,066
 That's easy to do.
 
-00:29:51.066 --> 00:29:52.516 A:middle
+
+686
+00:29:51,066 --> 00:29:52,516
 We can use the same URL
 
-00:29:52.716 --> 00:29:55.906 A:middle
+
+687
+00:29:52,716 --> 00:29:55,906
 and change our HTTP
 method to a post.
 
-00:29:57.536 --> 00:29:59.836 A:middle
+
+688
+00:29:57,536 --> 00:29:59,836
 When we do that, we've
 gone from saying I want
 
-00:29:59.836 --> 00:30:01.666 A:middle
+
+689
+00:29:59,836 --> 00:30:01,666
 to list the integrations
 for this bot to I want
 
 
-
-00:29:59.836 --> 00:30:01.666 A:middle
-to list the integrations
-for this bot to I want
-
-00:30:01.666 --> 00:30:05.246 A:middle
+690
+00:30:01,666 --> 00:30:05,246
 to create a new integration
 for this bot.
 
-00:30:05.446 --> 00:30:06.536 A:middle
+
+691
+00:30:05,446 --> 00:30:06,536
 If we make that request,
 
-00:30:07.066 --> 00:30:08.856 A:middle
+
+692
+00:30:07,066 --> 00:30:08,856
 we get an object
 representing an integration,
 
-00:30:08.856 --> 00:30:11.226 A:middle
+
+693
+00:30:08,856 --> 00:30:11,226
 much like you saw before,
 but a lot lighter this time.
 
-00:30:11.506 --> 00:30:12.906 A:middle
+
+694
+00:30:11,506 --> 00:30:12,906
 There's a lot of
 properties that get set
 
-00:30:13.316 --> 00:30:15.466 A:middle
+
+695
+00:30:13,316 --> 00:30:15,466
 on the integration during
 the process of building,
 
-00:30:15.766 --> 00:30:17.496 A:middle
+
+696
+00:30:15,766 --> 00:30:17,496
 but this integration is
 only in a pending state
 
-00:30:17.716 --> 00:30:19.406 A:middle
+
+697
+00:30:17,716 --> 00:30:19,406
 until the builder picks
 it up in the queue
 
-00:30:19.406 --> 00:30:22.606 A:middle
+
+698
+00:30:19,406 --> 00:30:22,606
 and actually starts
 running with it.
 
-00:30:22.876 --> 00:30:26.076 A:middle
+
+699
+00:30:22,876 --> 00:30:26,076
 Now, most of the post end points
 in our API actually require you
 
-00:30:26.076 --> 00:30:27.986 A:middle
+
+700
+00:30:26,076 --> 00:30:27,986
 to put some JSON
 data in the body
 
-00:30:28.056 --> 00:30:31.266 A:middle
+
+701
+00:30:28,056 --> 00:30:31,266
 that says this is the
 properties of this resource,
 
-00:30:31.326 --> 00:30:34.576 A:middle
+
+702
+00:30:31,326 --> 00:30:34,576
 the attributes I want set
 on the thing I am creating.
 
-00:30:35.176 --> 00:30:37.016 A:middle
+
+703
+00:30:35,176 --> 00:30:37,016
 Integrations are a bit
 of a special case here
 
-00:30:37.376 --> 00:30:40.886 A:middle
+
+704
+00:30:37,376 --> 00:30:40,886
 because bots are
 essentially already that.
 
-00:30:41.256 --> 00:30:43.776 A:middle
+
+705
+00:30:41,256 --> 00:30:43,776
 They are already the template
 for each new integration,
 
-00:30:44.046 --> 00:30:45.506 A:middle
+
+706
+00:30:44,046 --> 00:30:45,506
 and so they know
 everything they need to know
 
-00:30:45.506 --> 00:30:46.646 A:middle
+
+707
+00:30:45,506 --> 00:30:46,646
 to create a new integration.
 
-00:30:47.796 --> 00:30:50.146 A:middle
+
+708
+00:30:47,796 --> 00:30:50,146
 Or at least they know everything
 they need in the general case.
 
-00:30:50.386 --> 00:30:52.646 A:middle
+
+709
+00:30:50,386 --> 00:30:52,646
 You can have a bit of an
 impact on your integrations.
 
-00:30:52.646 --> 00:30:54.936 A:middle
+
+710
+00:30:52,646 --> 00:30:54,936
 For instance, if you want
 to have an integration
 
-00:30:54.936 --> 00:30:56.396 A:middle
+
+711
+00:30:54,936 --> 00:30:56,396
 that specifically runs cleanly
 
-00:30:56.686 --> 00:30:59.746 A:middle
+
+712
+00:30:56,686 --> 00:30:59,746
 with no leftover build
 artifacts, then you can do
 
-00:30:59.746 --> 00:31:02.296 A:middle
+
+713
+00:30:59,746 --> 00:31:02,296
 that by passing some
 JSON in the body to tell
 
 
-
-00:30:59.746 --> 00:31:02.296 A:middle
-that by passing some
-JSON in the body to tell
-
-00:31:02.426 --> 00:31:04.636 A:middle
+714
+00:31:02,426 --> 00:31:04,636
 that this integration
 should clean before it runs.
 
-00:31:05.156 --> 00:31:05.326 A:middle
+
+715
+00:31:05,156 --> 00:31:05,326
 All right.
 
-00:31:06.396 --> 00:31:07.846 A:middle
+
+716
+00:31:06,396 --> 00:31:07,846
 So that's an example of some
 
-00:31:07.846 --> 00:31:09.066 A:middle
+
+717
+00:31:07,846 --> 00:31:09,066
 of the things you
 can do with our API.
 
-00:31:09.446 --> 00:31:12.046 A:middle
+
+718
+00:31:09,446 --> 00:31:12,046
 Now I'd like to bring Eric back
 up to do a demonstration of some
 
-00:31:12.046 --> 00:31:13.376 A:middle
+
+719
+00:31:12,046 --> 00:31:13,376
 of these advanced
 Xcode features.
 
-00:31:14.516 --> 00:31:20.306 A:middle
+
+720
+00:31:14,516 --> 00:31:20,306
 [Applause]
 
-00:31:20.806 --> 00:31:21.926 A:middle
-&gt;&gt; ERIC DUDIAK: Thank
+
+721
+00:31:20,806 --> 00:31:21,926
+>> ERIC DUDIAK: Thank
 you again, Matt.
 
-00:31:22.736 --> 00:31:23.986 A:middle
+
+722
+00:31:22,736 --> 00:31:23,986
 So like Matt said, we
 are going to show some
 
-00:31:23.986 --> 00:31:26.946 A:middle
+
+723
+00:31:23,986 --> 00:31:26,946
 of the advanced features of
 Xcode Server with this project.
 
-00:31:27.996 --> 00:31:30.576 A:middle
+
+724
+00:31:27,996 --> 00:31:30,576
 Now, like many of you,
 
-00:31:30.826 --> 00:31:32.906 A:middle
+
+725
+00:31:30,826 --> 00:31:32,906
 we developed this
 app both internally,
 
-00:31:32.906 --> 00:31:35.446 A:middle
+
+726
+00:31:32,906 --> 00:31:35,446
 but we also distribute
 it, and I want to be able
 
-00:31:35.446 --> 00:31:37.366 A:middle
+
+727
+00:31:35,446 --> 00:31:37,366
 to easily differentiate
 my internal builds
 
-00:31:37.706 --> 00:31:38.716 A:middle
+
+728
+00:31:37,706 --> 00:31:38,716
 from my external builds.
 
-00:31:39.596 --> 00:31:41.426 A:middle
+
+729
+00:31:39,596 --> 00:31:41,426
 Now, one common strategy
 for that is if we look
 
-00:31:41.426 --> 00:31:43.726 A:middle
+
+730
+00:31:41,426 --> 00:31:43,726
 at our Asset Catalog, we
 see two different images.
 
-00:31:43.916 --> 00:31:46.356 A:middle
+
+731
+00:31:43,916 --> 00:31:46,356
 In the first case, we see
 the standard app icon,
 
-00:31:46.356 --> 00:31:48.406 A:middle
+
+732
+00:31:46,356 --> 00:31:48,406
 which is this white coffee cup.
 
-00:31:48.856 --> 00:31:51.696 A:middle
+
+733
+00:31:48,856 --> 00:31:51,696
 In the case of our
 internal builds,
 
-00:31:51.696 --> 00:31:55.386 A:middle
+
+734
+00:31:51,696 --> 00:31:55,386
 we want to always show this
 icon as an internal flag
 
-00:31:55.386 --> 00:31:56.556 A:middle
+
+735
+00:31:55,386 --> 00:31:56,556
 and a black coffee cup.
 
-00:31:56.916 --> 00:31:59.606 A:middle
+
+736
+00:31:56,916 --> 00:31:59,606
 This way when we are running
 internal builds on our device,
 
 
-
-00:32:00.366 --> 00:32:01.266 A:middle
+737
+00:32:00,366 --> 00:32:01,266
 we know that they are internal
 
-00:32:01.266 --> 00:32:02.996 A:middle
+
+738
+00:32:01,266 --> 00:32:02,996
 and not the ones we might have
 shipped through the App Store
 
-00:32:02.996 --> 00:32:05.636 A:middle
+
+739
+00:32:02,996 --> 00:32:05,636
 or somehow distributed
 through our normal channels.
 
-00:32:06.626 --> 00:32:08.796 A:middle
+
+740
+00:32:06,626 --> 00:32:08,796
 It's very useful so we
 know when we find a bug,
 
-00:32:09.416 --> 00:32:11.016 A:middle
+
+741
+00:32:09,416 --> 00:32:11,016
 we are hopefully the
 only ones seeing it.
 
-00:32:11.426 --> 00:32:14.356 A:middle
+
+742
+00:32:11,426 --> 00:32:14,356
 Now, the other way we want
 
-00:32:14.356 --> 00:32:16.276 A:middle
+
+743
+00:32:14,356 --> 00:32:16,276
 to differentiate
 our internal app is
 
-00:32:16.276 --> 00:32:17.936 A:middle
+
+744
+00:32:16,276 --> 00:32:17,936
 that when we're running
 internally,
 
-00:32:18.456 --> 00:32:20.266 A:middle
+
+745
+00:32:18,456 --> 00:32:20,266
 we normally have
 a settings bundle,
 
-00:32:20.266 --> 00:32:23.096 A:middle
+
+746
+00:32:20,266 --> 00:32:23,096
 and in that settings bundle, we
 define, like many applications,
 
-00:32:23.096 --> 00:32:25.386 A:middle
+
+747
+00:32:23,096 --> 00:32:25,386
 a version, in this
 case version 2.0,
 
-00:32:25.386 --> 00:32:27.426 A:middle
+
+748
+00:32:25,386 --> 00:32:27,426
 since we've made some
 recent major changes.
 
-00:32:28.056 --> 00:32:31.176 A:middle
+
+749
+00:32:28,056 --> 00:32:31,176
 Now, 2.0 is perfectly sufficient
 for our external users to see,
 
-00:32:31.176 --> 00:32:33.576 A:middle
+
+750
+00:32:31,176 --> 00:32:33,576
 we'll bump this version every
 time we submit to the App Store.
 
-00:32:34.376 --> 00:32:35.196 A:middle
+
+751
+00:32:34,376 --> 00:32:35,196
 But for internal use,
 
-00:32:35.196 --> 00:32:37.376 A:middle
+
+752
+00:32:35,196 --> 00:32:37,376
 we probably want a little bit
 more fine-grain information.
 
-00:32:37.566 --> 00:32:40.426 A:middle
+
+753
+00:32:37,566 --> 00:32:40,426
 More specifically, we want some
 unique identifier for the build.
 
-00:32:41.656 --> 00:32:43.706 A:middle
+
+754
+00:32:41,656 --> 00:32:43,706
 In this case, I think I
 want to use Xcode Server
 
-00:32:43.706 --> 00:32:44.716 A:middle
+
+755
+00:32:43,706 --> 00:32:44,716
 to actually distinguish
 
-00:32:44.716 --> 00:32:48.746 A:middle
+
+756
+00:32:44,716 --> 00:32:48,746
 which integration the build
 came from on my server.
 
-00:32:48.746 --> 00:32:51.266 A:middle
+
+757
+00:32:48,746 --> 00:32:51,266
 I am going to go ahead
 and go to the bot.
 
-00:32:51.266 --> 00:32:54.216 A:middle
+
+758
+00:32:51,266 --> 00:32:54,216
 And this is the same
 bot I was using before.
 
-00:32:54.216 --> 00:32:55.866 A:middle
+
+759
+00:32:54,216 --> 00:32:55,866
 I am going to go into
 the edit workflow.
 
-00:32:56.406 --> 00:32:59.636 A:middle
+
+760
+00:32:56,406 --> 00:32:59,636
 And just like Matt said, this
 is now completely nonlinear,
 
 
-
-00:33:00.006 --> 00:33:02.536 A:middle
+761
+00:33:00,006 --> 00:33:02,536
 so since I am most
 interested in the triggers,
 
-00:33:02.536 --> 00:33:03.886 A:middle
+
+762
+00:33:02,536 --> 00:33:03,886
 I can jump straight there.
 
-00:33:04.116 --> 00:33:05.406 A:middle
+
+763
+00:33:04,116 --> 00:33:05,406
 So let's take our first --
 
-00:33:05.406 --> 00:33:07.686 A:middle
+
+764
+00:33:05,406 --> 00:33:07,686
 our first step is to
 get the icon changed.
 
-00:33:07.686 --> 00:33:10.416 A:middle
+
+765
+00:33:07,686 --> 00:33:10,416
 I am going to open up a trigger
 script I have already written.
 
-00:33:10.416 --> 00:33:12.486 A:middle
+
+766
+00:33:10,416 --> 00:33:12,486
 In this case, it's a
 simple batch script
 
-00:33:12.486 --> 00:33:14.626 A:middle
+
+767
+00:33:12,486 --> 00:33:14,626
 because all we are going to
 do is simple file operations.
 
-00:33:14.626 --> 00:33:18.996 A:middle
+
+768
+00:33:14,626 --> 00:33:18,996
 We are going to go ahead and
 use the XES source directory
 
-00:33:18.996 --> 00:33:22.596 A:middle
+
+769
+00:33:18,996 --> 00:33:22,596
 environment variable to figure
 out the path to that app icon,
 
-00:33:23.706 --> 00:33:25.736 A:middle
+
+770
+00:33:23,706 --> 00:33:25,736
 and we are going to go
 ahead and delete it.
 
-00:33:26.126 --> 00:33:28.276 A:middle
+
+771
+00:33:26,126 --> 00:33:28,276
 Then we are going to
 take our server version
 
-00:33:28.276 --> 00:33:29.516 A:middle
+
+772
+00:33:28,276 --> 00:33:29,516
 and move it into its place.
 
-00:33:30.136 --> 00:33:32.126 A:middle
+
+773
+00:33:30,136 --> 00:33:32,126
 So this will be a before
 integration trigger
 
-00:33:32.126 --> 00:33:34.686 A:middle
+
+774
+00:33:32,126 --> 00:33:34,686
 because we want this to run
 after our source code is checked
 
-00:33:34.686 --> 00:33:37.156 A:middle
+
+775
+00:33:34,686 --> 00:33:37,156
 out and ready to build but
 before we actually do build.
 
-00:33:37.156 --> 00:33:39.056 A:middle
+
+776
+00:33:37,156 --> 00:33:39,056
 So I am going to
 go ahead and copy
 
-00:33:39.056 --> 00:33:41.136 A:middle
+
+777
+00:33:39,056 --> 00:33:41,136
 that as a run script trigger.
 
-00:33:41.746 --> 00:33:45.356 A:middle
+
+778
+00:33:41,746 --> 00:33:45,356
 Now, setting up the
 settings bundle is going
 
-00:33:45.356 --> 00:33:46.516 A:middle
+
+779
+00:33:45,356 --> 00:33:46,516
 to be a little trickier.
 
-00:33:46.516 --> 00:33:48.596 A:middle
+
+780
+00:33:46,516 --> 00:33:48,596
 I could do that with a batch
 script, but that's editing a lot
 
-00:33:48.596 --> 00:33:51.726 A:middle
+
+781
+00:33:48,596 --> 00:33:51,726
 of batch script code manually,
 or letting a lot of plist code
 
-00:33:51.726 --> 00:33:53.356 A:middle
+
+782
+00:33:51,726 --> 00:33:53,356
 in a batch script
 would be painful.
 
-00:33:53.356 --> 00:33:57.086 A:middle
+
+783
+00:33:53,356 --> 00:33:57,086
 So I am going to go ahead
 and pull up a Swift trigger.
 
-00:33:57.746 --> 00:34:00.766 A:middle
+
+784
+00:33:57,746 --> 00:34:00,766
 In this case, just like the bash
 trigger, I go ahead and set it
 
 
-
-00:33:57.746 --> 00:34:00.766 A:middle
-In this case, just like the bash
-trigger, I go ahead and set it
-
-00:34:00.766 --> 00:34:03.286 A:middle
+785
+00:34:00,766 --> 00:34:03,286
 up using the hash bang
 for user bin swift.
 
-00:34:04.256 --> 00:34:07.546 A:middle
+
+786
+00:34:04,256 --> 00:34:07,546
 I haven't finished writing it,
 so bear with me while I do that.
 
-00:34:07.546 --> 00:34:10.226 A:middle
+
+787
+00:34:07,546 --> 00:34:10,226
 I am going to get
 import foundation.
 
-00:34:10.226 --> 00:34:10.846 A:middle
+
+788
+00:34:10,226 --> 00:34:10,846
 This is where I am going
 
-00:34:10.846 --> 00:34:13.926 A:middle
+
+789
+00:34:10,846 --> 00:34:13,926
 to get all the extra
 power I want from Swift.
 
-00:34:14.716 --> 00:34:17.126 A:middle
+
+790
+00:34:14,716 --> 00:34:17,126
 With the foundation imported,
 I am going to go ahead
 
-00:34:17.126 --> 00:34:20.216 A:middle
+
+791
+00:34:17,126 --> 00:34:20,216
 and use NSProcess info to get
 those environment variables
 
-00:34:20.216 --> 00:34:22.366 A:middle
+
+792
+00:34:20,216 --> 00:34:22,366
 that I was using in the
 other script through bash,
 
-00:34:22.446 --> 00:34:24.906 A:middle
+
+793
+00:34:22,446 --> 00:34:24,906
 in this case, the
 XCS source directory.
 
-00:34:24.966 --> 00:34:30.755 A:middle
+
+794
+00:34:24,966 --> 00:34:30,755
 After that I am going to find
 the settings bundle I had.
 
-00:34:30.755 --> 00:34:33.076 A:middle
+
+795
+00:34:30,755 --> 00:34:33,076
 This is where things get
 more interesting with Swift.
 
-00:34:33.076 --> 00:34:37.085 A:middle
+
+796
+00:34:33,076 --> 00:34:37,085
 I can load the plist as a
 dictionary right in Swift.
 
-00:34:37.085 --> 00:34:38.896 A:middle
+
+797
+00:34:37,085 --> 00:34:38,896
 I don't have to do
 any manual editing
 
-00:34:38.896 --> 00:34:40.266 A:middle
+
+798
+00:34:38,896 --> 00:34:40,266
 of the plist file myself.
 
-00:34:40.266 --> 00:34:43.806 A:middle
+
+799
+00:34:40,266 --> 00:34:43,806
 That gets particularly useful
 when I want to add something
 
-00:34:43.806 --> 00:34:47.516 A:middle
+
+800
+00:34:43,806 --> 00:34:47,516
 to it, I simply just create a
 new dictionary literal in swift
 
-00:34:48.196 --> 00:34:50.456 A:middle
+
+801
+00:34:48,196 --> 00:34:50,456
 and go ahead and shove
 that into my dictionary.
 
-00:34:51.565 --> 00:34:53.636 A:middle
+
+802
+00:34:51,565 --> 00:34:53,636
 Here we grab the
 environment variable
 
-00:34:53.636 --> 00:34:56.636 A:middle
+
+803
+00:34:53,636 --> 00:34:56,636
 for the integration number to
 set as this build number title.
 
-00:34:56.916 --> 00:35:01.046 A:middle
+
+804
+00:34:56,916 --> 00:35:01,046
 Finally, I am going to go
 ahead and write that out
 
 
-
-00:34:56.916 --> 00:35:01.046 A:middle
-Finally, I am going to go
-ahead and write that out
-
-00:35:01.046 --> 00:35:02.826 A:middle
+805
+00:35:01,046 --> 00:35:02,826
 to disk before the
 script finishes so that
 
-00:35:02.826 --> 00:35:06.036 A:middle
+
+806
+00:35:02,826 --> 00:35:06,036
 when we actually go to
 build, that will be picked
 
-00:35:06.036 --> 00:35:07.316 A:middle
+
+807
+00:35:06,036 --> 00:35:07,316
 up in my settings bundle.
 
-00:35:07.376 --> 00:35:12.026 A:middle
+
+808
+00:35:07,376 --> 00:35:12,026
 And to do that, I am just going
 to add another trigger below.
 
-00:35:12.026 --> 00:35:12.746 A:middle
+
+809
+00:35:12,026 --> 00:35:12,746
 All right.
 
-00:35:13.816 --> 00:35:15.376 A:middle
+
+810
+00:35:13,816 --> 00:35:15,376
 So I now have two triggers.
 
-00:35:15.826 --> 00:35:19.286 A:middle
+
+811
+00:35:15,826 --> 00:35:19,286
 Now, this is where I could
 push the integrate now button
 
-00:35:19.286 --> 00:35:21.186 A:middle
+
+812
+00:35:19,286 --> 00:35:21,186
 and get a new integration,
 but I want to use some
 
-00:35:21.186 --> 00:35:24.866 A:middle
+
+813
+00:35:21,186 --> 00:35:24,866
 of the API Matt was talking
 about on the server to do that.
 
-00:35:25.376 --> 00:35:28.386 A:middle
+
+814
+00:35:25,376 --> 00:35:28,386
 I am going to go ahead and pull
 up another application I have.
 
-00:35:28.386 --> 00:35:32.856 A:middle
+
+815
+00:35:28,386 --> 00:35:32,856
 And if we look here,
 we see an application
 
-00:35:32.856 --> 00:35:34.066 A:middle
+
+816
+00:35:32,856 --> 00:35:34,066
 that actually is connected
 
-00:35:34.066 --> 00:35:36.006 A:middle
+
+817
+00:35:34,066 --> 00:35:36,006
 to a serial device
 plugged into my computer.
 
-00:35:37.066 --> 00:35:40.966 A:middle
+
+818
+00:35:37,066 --> 00:35:40,966
 And it's using some of
 the I/O kit sample code,
 
-00:35:40.966 --> 00:35:42.896 A:middle
+
+819
+00:35:40,966 --> 00:35:42,896
 and we are just going
 to read that buffer,
 
-00:35:42.996 --> 00:35:45.216 A:middle
+
+820
+00:35:42,996 --> 00:35:45,216
 and whenever we see something
 on it, we are going to go ahead
 
-00:35:45.216 --> 00:35:46.216 A:middle
+
+821
+00:35:45,216 --> 00:35:46,216
 and run through this
 block of code.
 
-00:35:46.216 --> 00:35:50.156 A:middle
+
+822
+00:35:46,216 --> 00:35:50,156
 So I am going to open up an
 NSURL session, and I am going
 
-00:35:50.156 --> 00:35:52.276 A:middle
+
+823
+00:35:50,156 --> 00:35:52,276
 to call the API for
 getting all of the bots.
 
-00:35:52.876 --> 00:35:54.236 A:middle
+
+824
+00:35:52,876 --> 00:35:54,236
 This is just local host.
 
-00:35:54.236 --> 00:35:57.016 A:middle
+
+825
+00:35:54,236 --> 00:35:57,016
 The port Matt mentioned
 earlier, API/bots,
 
-00:35:57.176 --> 00:35:58.966 A:middle
+
+826
+00:35:57,176 --> 00:35:58,966
 and it's going to
 be the get method.
 
-00:35:59.266 --> 00:36:00.646 A:middle
+
+827
+00:35:59,266 --> 00:36:00,646
 I go ahead and call that,
 
 
-
-00:35:59.266 --> 00:36:00.646 A:middle
-I go ahead and call that,
-
-00:36:00.646 --> 00:36:04.626 A:middle
+828
+00:36:00,646 --> 00:36:04,626
 and using the NS JSON
 serialization API, go ahead
 
-00:36:04.626 --> 00:36:09.226 A:middle
+
+829
+00:36:04,626 --> 00:36:09,226
 and read in each bot and find
 the ID for coffee board bot.
 
-00:36:09.226 --> 00:36:11.186 A:middle
+
+830
+00:36:09,226 --> 00:36:11,186
 That's the bot I
 want to integrate.
 
-00:36:12.676 --> 00:36:15.116 A:middle
+
+831
+00:36:12,676 --> 00:36:15,116
 With that ID, I am going
 to build up a new URL
 
-00:36:15.116 --> 00:36:16.536 A:middle
+
+832
+00:36:15,116 --> 00:36:16,536
 like Matt was showing earlier
 
-00:36:16.856 --> 00:36:22.896 A:middle
+
+833
+00:36:16,856 --> 00:36:22,896
 with the bots/my
 UUID/integrations and switch
 
-00:36:22.896 --> 00:36:25.256 A:middle
+
+834
+00:36:22,896 --> 00:36:25,256
 that request to be a post
 request, so this is going
 
-00:36:25.256 --> 00:36:26.636 A:middle
+
+835
+00:36:25,256 --> 00:36:26,636
 to create a new integration.
 
-00:36:26.896 --> 00:36:27.696 A:middle
+
+836
+00:36:26,896 --> 00:36:27,696
 For the purpose of this,
 
-00:36:27.696 --> 00:36:29.546 A:middle
+
+837
+00:36:27,696 --> 00:36:29,546
 we don't really care what the
 integration is going to do.
 
-00:36:30.456 --> 00:36:31.846 A:middle
+
+838
+00:36:30,456 --> 00:36:31,846
 Now, in order to trigger this,
 
-00:36:32.776 --> 00:36:35.076 A:middle
+
+839
+00:36:32,776 --> 00:36:35,076
 I managed to sneak past
 security a fun little button,
 
-00:36:35.876 --> 00:36:39.106 A:middle
+
+840
+00:36:35,876 --> 00:36:39,106
 and this button, I am going
 to plug it into my Mac.
 
-00:36:40.816 --> 00:36:43.226 A:middle
+
+841
+00:36:40,816 --> 00:36:43,226
 And I am going to
 run this application.
 
-00:36:43.816 --> 00:36:47.006 A:middle
+
+842
+00:36:43,816 --> 00:36:47,006
 Let's try that one more time.
 
-00:36:52.736 --> 00:36:54.696 A:middle
+
+843
+00:36:52,736 --> 00:36:54,696
 Make sure it's fully
 connected before I run.
 
-00:36:54.696 --> 00:36:56.236 A:middle
+
+844
+00:36:54,696 --> 00:36:56,236
 Don't want to get
 ahead of myself.
 
-00:36:56.236 --> 00:36:56.586 A:middle
+
+845
+00:36:56,236 --> 00:36:56,586
 All right.
 
-00:36:56.586 --> 00:36:59.216 A:middle
+
+846
+00:36:56,586 --> 00:36:59,216
 Good. So that application
 is now running.
 
-00:36:59.216 --> 00:37:00.436 A:middle
+
+847
+00:36:59,216 --> 00:37:00,436
 We have the modem picked up.
 
 
-
-00:36:59.216 --> 00:37:00.436 A:middle
-We have the modem picked up.
-
-00:37:00.436 --> 00:37:04.516 A:middle
+848
+00:37:00,436 --> 00:37:04,516
 So I am just going to zoom in
 here on my bot and step away
 
-00:37:04.516 --> 00:37:07.496 A:middle
+
+849
+00:37:04,516 --> 00:37:07,496
 for a second, and
 just with the button,
 
-00:37:08.576 --> 00:37:09.446 A:middle
+
+850
+00:37:08,576 --> 00:37:09,446
 create a new integration.
 
-00:37:10.516 --> 00:37:16.426 A:middle
+
+851
+00:37:10,516 --> 00:37:16,426
 [Applause]
 
-00:37:16.926 --> 00:37:18.846 A:middle
+
+852
+00:37:16,926 --> 00:37:18,846
 So that was entirely with
 the button in our API.
 
-00:37:18.846 --> 00:37:21.256 A:middle
+
+853
+00:37:18,846 --> 00:37:21,256
 I am not going to wait for
 that integration to finish just
 
-00:37:21.256 --> 00:37:24.396 A:middle
+
+854
+00:37:21,256 --> 00:37:24,396
 to show you what happened,
 here we see the integration,
 
-00:37:24.396 --> 00:37:27.296 A:middle
+
+855
+00:37:24,396 --> 00:37:27,296
 I can install that on my local
 device I was using earlier
 
-00:37:27.296 --> 00:37:27.876 A:middle
+
+856
+00:37:27,296 --> 00:37:27,876
 to test.
 
-00:37:29.266 --> 00:37:34.606 A:middle
+
+857
+00:37:29,266 --> 00:37:34,606
 Install. And if I open up
 QuickTime to see the --
 
-00:37:35.756 --> 00:37:37.446 A:middle
+
+858
+00:37:35,756 --> 00:37:37,446
 so you guys can see
 what I see -- all right.
 
-00:37:42.116 --> 00:37:43.146 A:middle
+
+859
+00:37:42,116 --> 00:37:43,146
 There's my device.
 
-00:37:44.356 --> 00:37:46.466 A:middle
+
+860
+00:37:44,356 --> 00:37:46,466
 You see that we have the
 internal icon on the device,
 
-00:37:46.466 --> 00:37:48.006 A:middle
+
+861
+00:37:46,466 --> 00:37:48,006
 even though I never
 switched it locally.
 
-00:37:48.006 --> 00:37:51.256 A:middle
+
+862
+00:37:48,006 --> 00:37:51,256
 We downloaded it from the
 server, and now our app,
 
-00:37:51.256 --> 00:37:52.486 A:middle
+
+863
+00:37:51,256 --> 00:37:52,486
 we know, is an internal build.
 
-00:37:52.486 --> 00:37:54.966 A:middle
+
+864
+00:37:52,486 --> 00:37:54,966
 So that's some of the
 more advanced features
 
-00:37:54.966 --> 00:37:56.836 A:middle
+
+865
+00:37:54,966 --> 00:37:56,836
 of Xcode Server, and I am going
 
-00:37:56.836 --> 00:38:00.246 A:middle
+
+866
+00:37:56,836 --> 00:38:00,246
 to let Matt talk a little bit
 more about where you can find us
 
 
-
-00:37:56.836 --> 00:38:00.246 A:middle
-to let Matt talk a little bit
-more about where you can find us
-
-00:38:00.246 --> 00:38:01.526 A:middle
+867
+00:38:00,246 --> 00:38:01,526
 in the labs and things
 like that.
 
-00:38:02.406 --> 00:38:02.896 A:middle
+
+868
+00:38:02,406 --> 00:38:02,896
 Matt?
 
-00:38:03.516 --> 00:38:08.686 A:middle
+
+869
+00:38:03,516 --> 00:38:08,686
 [Applause]
 
-00:38:09.186 --> 00:38:09.766 A:middle
-&gt;&gt; MATT MORIARITY: All right.
 
-00:38:10.056 --> 00:38:10.586 A:middle
+870
+00:38:09,186 --> 00:38:09,766
+>> MATT MORIARITY: All right.
+
+
+871
+00:38:10,056 --> 00:38:10,586
 Thank you, Eric.
 
-00:38:10.586 --> 00:38:11.706 A:middle
+
+872
+00:38:10,586 --> 00:38:11,706
 That was great.
 
-00:38:11.946 --> 00:38:14.526 A:middle
+
+873
+00:38:11,946 --> 00:38:14,526
 I love pressing big red
 buttons to make integrations.
 
-00:38:15.036 --> 00:38:17.336 A:middle
+
+874
+00:38:15,036 --> 00:38:17,336
 All right.
 
-00:38:17.886 --> 00:38:20.886 A:middle
+
+875
+00:38:17,886 --> 00:38:20,886
 So here are some more of the
 endpoints we have available
 
-00:38:20.886 --> 00:38:24.596 A:middle
+
+876
+00:38:20,886 --> 00:38:24,596
 in our API, at least to you
 guys, developers out there.
 
-00:38:24.986 --> 00:38:28.046 A:middle
+
+877
+00:38:24,986 --> 00:38:28,046
 There's a few more that are
 available, but they're locked
 
-00:38:28.046 --> 00:38:29.756 A:middle
+
+878
+00:38:28,046 --> 00:38:29,756
 down so that they
 are internal use.
 
-00:38:29.756 --> 00:38:31.056 A:middle
+
+879
+00:38:29,756 --> 00:38:31,056
 We want to be really
 secure and make sure
 
-00:38:31.056 --> 00:38:33.096 A:middle
+
+880
+00:38:31,056 --> 00:38:33,096
 that integrations
 don't get messed
 
-00:38:33.096 --> 00:38:34.996 A:middle
+
+881
+00:38:33,096 --> 00:38:34,996
 with too much while
 they are running,
 
-00:38:36.476 --> 00:38:38.586 A:middle
+
+882
+00:38:36,476 --> 00:38:38,586
 especially with the
 client server interaction
 
-00:38:38.796 --> 00:38:40.666 A:middle
+
+883
+00:38:38,796 --> 00:38:40,666
 where you might have your
 server exposed in more places
 
-00:38:40.726 --> 00:38:42.656 A:middle
+
+884
+00:38:40,726 --> 00:38:42,656
 than just your network.
 
-00:38:43.606 --> 00:38:46.116 A:middle
+
+885
+00:38:43,606 --> 00:38:46,116
 But I encourage you to
 reference this slide later
 
-00:38:46.626 --> 00:38:49.886 A:middle
+
+886
+00:38:46,626 --> 00:38:49,886
 when we've uploaded the videos
 and the slides and try out some
 
-00:38:49.886 --> 00:38:51.606 A:middle
+
+887
+00:38:49,886 --> 00:38:51,606
 of these endpoints
 yourself on your own servers
 
-00:38:51.836 --> 00:38:52.916 A:middle
+
+888
+00:38:51,836 --> 00:38:52,916
 and see what you
 can come up with
 
-00:38:53.216 --> 00:38:54.626 A:middle
+
+889
+00:38:53,216 --> 00:38:54,626
 and what's interesting
 for your team.
 
-00:38:55.126 --> 00:38:55.286 A:middle
+
+890
+00:38:55,126 --> 00:38:55,286
 All right.
 
-00:38:57.076 --> 00:39:00.786 A:middle
+
+891
+00:38:57,076 --> 00:39:00,786
 So today we looked at Xcode
 Server improvements we've made
 
 
-
-00:38:57.076 --> 00:39:00.786 A:middle
-So today we looked at Xcode
-Server improvements we've made
-
-00:39:00.786 --> 00:39:02.786 A:middle
+892
+00:39:00,786 --> 00:39:02,786
 in Xcode 7, both around quality
 
-00:39:02.946 --> 00:39:06.076 A:middle
+
+893
+00:39:02,946 --> 00:39:06,076
 and adopting new testing
 features that have been added
 
-00:39:06.076 --> 00:39:08.846 A:middle
+
+894
+00:39:06,076 --> 00:39:08,846
 in Xcode 7, especially the
 new code coverage feature
 
-00:39:09.146 --> 00:39:11.666 A:middle
+
+895
+00:39:09,146 --> 00:39:11,666
 that makes it really great
 for measuring how much
 
-00:39:11.666 --> 00:39:13.856 A:middle
+
+896
+00:39:11,666 --> 00:39:13,856
 of your applications code
 is actually getting used
 
-00:39:13.856 --> 00:39:14.346 A:middle
+
+897
+00:39:13,856 --> 00:39:14,346
 by your tests.
 
-00:39:14.346 --> 00:39:17.316 A:middle
+
+898
+00:39:14,346 --> 00:39:17,316
 And we, of course, showed
 you two great new ways
 
-00:39:17.606 --> 00:39:20.166 A:middle
+
+899
+00:39:17,606 --> 00:39:20,166
 to extend Xcode Server
 and integrate it better
 
-00:39:20.166 --> 00:39:23.796 A:middle
+
+900
+00:39:20,166 --> 00:39:23,796
 with your team with triggers
 and the Xcode Server API.
 
-00:39:24.336 --> 00:39:27.656 A:middle
+
+901
+00:39:24,336 --> 00:39:27,656
 So for more information,
 we have a --
 
-00:39:27.656 --> 00:39:30.776 A:middle
+
+902
+00:39:27,656 --> 00:39:30,776
 there's a Continuous Integration
 Guide on the developer library,
 
-00:39:31.266 --> 00:39:33.246 A:middle
+
+903
+00:39:31,266 --> 00:39:33,246
 and of course, you can
 come post any questions
 
-00:39:33.296 --> 00:39:34.226 A:middle
+
+904
+00:39:33,296 --> 00:39:34,226
 to the developer forums.
 
-00:39:34.796 --> 00:39:37.856 A:middle
+
+905
+00:39:34,796 --> 00:39:37,856
 There's a few related sessions.
 
-00:39:38.126 --> 00:39:40.386 A:middle
+
+906
+00:39:38,126 --> 00:39:40,386
 Both of them have
 already happened,
 
-00:39:40.556 --> 00:39:42.036 A:middle
+
+907
+00:39:40,556 --> 00:39:42,036
 some more recently than others.
 
-00:39:42.766 --> 00:39:46.086 A:middle
+
+908
+00:39:42,766 --> 00:39:46,086
 UI Testing in Xcode was
 yesterday, but I encourage you
 
-00:39:46.086 --> 00:39:46.966 A:middle
+
+909
+00:39:46,086 --> 00:39:46,966
 to go look at that video.
 
-00:39:47.186 --> 00:39:48.786 A:middle
+
+910
+00:39:47,186 --> 00:39:48,786
 We touched on UI
 testing but we didn't get
 
-00:39:48.786 --> 00:39:50.196 A:middle
+
+911
+00:39:48,786 --> 00:39:50,196
 to demonstrate how
 it works in Server.
 
-00:39:50.506 --> 00:39:53.556 A:middle
+
+912
+00:39:50,506 --> 00:39:53,556
 It is pretty automatic, but
 the UI testing feature is great
 
-00:39:53.556 --> 00:39:55.996 A:middle
+
+913
+00:39:53,556 --> 00:39:55,996
 and I encourage you
 to try it out.
 
-00:39:55.996 --> 00:39:58.036 A:middle
+
+914
+00:39:55,996 --> 00:39:58,036
 If you want to know more
 about getting started
 
-00:39:58.036 --> 00:40:00.976 A:middle
+
+915
+00:39:58,036 --> 00:40:00,976
 with Xcode Server, last
 year we demonstrated setting
 
 
-
-00:39:58.036 --> 00:40:00.976 A:middle
-with Xcode Server, last
-year we demonstrated setting
-
-00:40:00.976 --> 00:40:03.516 A:middle
+916
+00:40:00,976 --> 00:40:03,516
 up your server from scratch
 and getting your bots set
 
-00:40:03.516 --> 00:40:05.816 A:middle
+
+917
+00:40:03,516 --> 00:40:05,816
 up initially in the
 Continuous Integration
 
-00:40:05.816 --> 00:40:07.206 A:middle
+
+918
+00:40:05,816 --> 00:40:07,206
 with Xcode 6 session.
 
-00:40:08.616 --> 00:40:09.976 A:middle
+
+919
+00:40:08,616 --> 00:40:09,976
 Thank you, everyone.
 
-00:40:09.976 --> 00:40:10.976 A:middle
+
+920
+00:40:09,976 --> 00:40:10,976
 Have a great rest of your WWDC.
 
-00:40:11.508 --> 00:40:13.508 A:middle
+
+921
+00:40:11,508 --> 00:40:13,508
 [Applause]
 

@@ -1,2751 +1,3937 @@
-
-00:00:21.516 --> 00:00:27.716 A:middle
+1
+00:00:21,516 --> 00:00:27,716
 [ Applause ]
 
-00:00:28.216 --> 00:00:29.166 A:middle
-&gt;&gt; SUMIT LONKAR: Good
+
+2
+00:00:28,216 --> 00:00:29,166
+>> SUMIT LONKAR: Good
 afternoon, everyone.
 
-00:00:29.496 --> 00:00:31.166 A:middle
+
+3
+00:00:29,496 --> 00:00:31,166
 Welcome to Session 206.
 
-00:00:31.236 --> 00:00:32.866 A:middle
+
+4
+00:00:31,236 --> 00:00:32,866
 This is What's New
 In the MapKit.
 
-00:00:33.326 --> 00:00:34.416 A:middle
+
+5
+00:00:33,326 --> 00:00:34,416
 My name is Sumit Lonkar.
 
-00:00:34.496 --> 00:00:36.306 A:middle
+
+6
+00:00:34,496 --> 00:00:36,306
 I am a software engineer
 on the Maps team.
 
-00:00:36.766 --> 00:00:39.226 A:middle
+
+7
+00:00:36,766 --> 00:00:39,226
 So, we have got a jam-packed
 session for you this afternoon.
 
-00:00:39.436 --> 00:00:41.246 A:middle
+
+8
+00:00:39,436 --> 00:00:41,246
 So without further
 ado, let's get started.
 
-00:00:42.556 --> 00:00:44.316 A:middle
+
+9
+00:00:42,556 --> 00:00:44,316
 Before we begin,
 first take a look
 
-00:00:44.316 --> 00:00:45.496 A:middle
+
+10
+00:00:44,316 --> 00:00:45,496
 at today's session's agenda.
 
-00:00:46.116 --> 00:00:49.046 A:middle
+
+11
+00:00:46,116 --> 00:00:49,046
 Our first topic of today
 is going to be improvements
 
-00:00:49.046 --> 00:00:50.206 A:middle
+
+12
+00:00:49,046 --> 00:00:50,206
 to existing MapKit API.
 
-00:00:50.616 --> 00:00:52.826 A:middle
+
+13
+00:00:50,616 --> 00:00:52,826
 Here, I will mainly talk
 about new features --
 
-00:00:53.116 --> 00:00:57.506 A:middle
+
+14
+00:00:53,116 --> 00:00:57,506
 sorry, here, I'll mainly talk
 about our new APIs that we added
 
-00:00:57.506 --> 00:00:58.906 A:middle
+
+15
+00:00:57,506 --> 00:00:58,906
 to support our existing
 features.
 
-00:00:59.266 --> 00:01:02.956 A:middle
+
+16
+00:00:59,266 --> 00:01:02,956
 After that, I'll talk about
 Transit and we'll mainly focus
 
 
-
-00:00:59.266 --> 00:01:02.956 A:middle
-After that, I'll talk about
-Transit and we'll mainly focus
-
-00:01:02.956 --> 00:01:04.806 A:middle
+17
+00:01:02,956 --> 00:01:04,806
 on Transit in MapKit's
 perspective.
 
-00:01:04.806 --> 00:01:07.106 A:middle
+
+18
+00:01:04,806 --> 00:01:07,106
 And finally we will
 have a Flyover.
 
-00:01:07.476 --> 00:01:09.636 A:middle
+
+19
+00:01:07,476 --> 00:01:09,636
 Flyover is a brand
 new MapType to MapKit.
 
-00:01:10.006 --> 00:01:13.296 A:middle
+
+20
+00:01:10,006 --> 00:01:13,296
 It's been available to iOS
 applications since iOS 6,
 
-00:01:13.296 --> 00:01:15.246 A:middle
+
+21
+00:01:13,296 --> 00:01:15,246
 and now we are bringing
 it to you guys.
 
-00:01:15.246 --> 00:01:18.316 A:middle
+
+22
+00:01:15,246 --> 00:01:18,316
 And along with this topic we
 will have various demos for you.
 
-00:01:18.646 --> 00:01:21.326 A:middle
+
+23
+00:01:18,646 --> 00:01:21,326
 So you can see all these
 newly added API in action.
 
-00:01:21.676 --> 00:01:23.416 A:middle
+
+24
+00:01:21,676 --> 00:01:23,416
 So with that outline,
 let's jump right
 
-00:01:23.416 --> 00:01:26.446 A:middle
+
+25
+00:01:23,416 --> 00:01:26,446
 into our first topic today,
 Improvements to Existing API.
 
-00:01:29.656 --> 00:01:33.636 A:middle
+
+26
+00:01:29,656 --> 00:01:33,636
 Based on comments and requests
 from developers like you,
 
-00:01:33.746 --> 00:01:36.376 A:middle
+
+27
+00:01:33,746 --> 00:01:36,376
 this year we have taken some
 serious effort to make sure
 
-00:01:36.376 --> 00:01:40.036 A:middle
+
+28
+00:01:36,376 --> 00:01:40,036
 that you and your application
 get best out of MapKit.
 
-00:01:40.036 --> 00:01:42.076 A:middle
+
+29
+00:01:40,036 --> 00:01:42,076
 These newly added
 API will help you
 
-00:01:42.076 --> 00:01:45.196 A:middle
+
+30
+00:01:42,076 --> 00:01:45,196
 to customize your MapKit
 experience in your application
 
-00:01:45.506 --> 00:01:48.686 A:middle
+
+31
+00:01:45,506 --> 00:01:48,686
 as well as enable great user
 experience, and for developers
 
-00:01:48.686 --> 00:01:51.586 A:middle
+
+32
+00:01:48,686 --> 00:01:51,586
 like you, it means way
 less code on your side.
 
-00:01:51.996 --> 00:01:53.856 A:middle
+
+33
+00:01:51,996 --> 00:01:53,856
 So, let's look at
 these API one by one.
 
-00:01:54.236 --> 00:01:56.496 A:middle
+
+34
+00:01:54,236 --> 00:01:56,496
 To start with, Pin
 Color Customization.
 
-00:01:57.136 --> 00:02:02.036 A:middle
+
+35
+00:01:57,136 --> 00:02:02,036
 So, MapKit pins, are also
 known as MKAnnotationView,
 
 
-
-00:01:57.136 --> 00:02:02.036 A:middle
-So, MapKit pins, are also
-known as MKAnnotationView,
-
-00:02:02.226 --> 00:02:04.756 A:middle
+36
+00:02:02,226 --> 00:02:04,756
 has been an integral part of
 MapKit since the very beginning.
 
-00:02:05.446 --> 00:02:07.246 A:middle
+
+37
+00:02:05,446 --> 00:02:07,246
 They provide very
 concrete behavior
 
-00:02:07.536 --> 00:02:09.425 A:middle
+
+38
+00:02:07,536 --> 00:02:09,425
 to denote any singular
 point on a map.
 
-00:02:09.876 --> 00:02:11.516 A:middle
+
+39
+00:02:09,876 --> 00:02:11,516
 And when it comes
 to customization,
 
-00:02:11.656 --> 00:02:13.466 A:middle
+
+40
+00:02:11,656 --> 00:02:13,466
 there is not much you
 can do about with them.
 
-00:02:13.756 --> 00:02:16.736 A:middle
+
+41
+00:02:13,756 --> 00:02:16,736
 So, you can make them red
 or you can make them green.
 
-00:02:17.266 --> 00:02:18.256 A:middle
+
+42
+00:02:17,266 --> 00:02:18,256
 Or purple.
 
-00:02:18.256 --> 00:02:18.976 A:middle
+
+43
+00:02:18,256 --> 00:02:18,976
 And that's it.
 
-00:02:19.146 --> 00:02:21.536 A:middle
+
+44
+00:02:19,146 --> 00:02:21,536
 That's all you get, all you
 get is only three choices.
 
-00:02:21.536 --> 00:02:24.136 A:middle
+
+45
+00:02:21,536 --> 00:02:24,136
 And it's been like
 that since iOS 3.
 
-00:02:24.626 --> 00:02:27.096 A:middle
+
+46
+00:02:24,626 --> 00:02:27,096
 And now we are bringing
 you a new API
 
-00:02:27.416 --> 00:02:28.706 A:middle
+
+47
+00:02:27,416 --> 00:02:28,706
 that lets you customize this.
 
-00:02:29.156 --> 00:02:31.346 A:middle
+
+48
+00:02:29,156 --> 00:02:31,346
 So we are introducing
 it as a property
 
-00:02:31.346 --> 00:02:34.426 A:middle
+
+49
+00:02:31,346 --> 00:02:34,426
 on MKPinAnnotationView,
 called pinTintColor.
 
-00:02:34.966 --> 00:02:39.246 A:middle
+
+50
+00:02:34,966 --> 00:02:39,246
 On iOS it takes UIColor and
 on OS X it takes NSColor.
 
-00:02:39.666 --> 00:02:42.396 A:middle
+
+51
+00:02:39,666 --> 00:02:42,396
 Now, as underneath, it's
 UIColor and NSColor,
 
-00:02:42.396 --> 00:02:44.636 A:middle
+
+52
+00:02:42,396 --> 00:02:44,636
 that means you have
 millions of different colors
 
-00:02:44.636 --> 00:02:45.716 A:middle
+
+53
+00:02:44,636 --> 00:02:45,716
 that you can put on your Map.
 
-00:02:47.176 --> 00:02:50.106 A:middle
+
+54
+00:02:47,176 --> 00:02:50,106
 I would like to take
 this opportunity to point
 
-00:02:50.106 --> 00:02:52.936 A:middle
+
+55
+00:02:50,106 --> 00:02:52,936
 out that we are deprecating
 our old API called pinColor.
 
-00:02:53.306 --> 00:02:55.406 A:middle
+
+56
+00:02:53,306 --> 00:02:55,406
 So, if your application
 is using this API,
 
-00:02:55.846 --> 00:02:58.136 A:middle
+
+57
+00:02:55,846 --> 00:02:58,136
 make sure that you
 update it to the new API
 
-00:02:58.136 --> 00:03:00.126 A:middle
+
+58
+00:02:58,136 --> 00:03:00,126
 that we are providing.
 
 
-
-00:02:58.136 --> 00:03:00.126 A:middle
-that we are providing.
-
-00:03:00.126 --> 00:03:02.446 A:middle
+59
+00:03:00,126 --> 00:03:02,446
 That's all about Pin
 Color Customization.
 
-00:03:02.446 --> 00:03:04.636 A:middle
+
+60
+00:03:02,446 --> 00:03:04,636
 Let's move on to go to
 Callout Customization.
 
-00:03:05.026 --> 00:03:07.596 A:middle
+
+61
+00:03:05,026 --> 00:03:07,596
 And before we dive into
 callouts, I'll first take
 
-00:03:07.596 --> 00:03:09.246 A:middle
+
+62
+00:03:07,596 --> 00:03:09,246
 up some time to talk
 about callout.
 
-00:03:09.446 --> 00:03:11.446 A:middle
+
+63
+00:03:09,446 --> 00:03:11,446
 For those who have been
 using it for a long time,
 
-00:03:11.726 --> 00:03:13.656 A:middle
+
+64
+00:03:11,726 --> 00:03:13,656
 it is just going to
 be a refresher course.
 
-00:03:14.036 --> 00:03:16.886 A:middle
+
+65
+00:03:14,036 --> 00:03:16,886
 So, what is this callout, the
 callout is the white bubble
 
-00:03:16.886 --> 00:03:19.106 A:middle
+
+66
+00:03:16,886 --> 00:03:19,106
 that pops up when you
 tap on an annotation.
 
-00:03:19.446 --> 00:03:21.846 A:middle
+
+67
+00:03:19,446 --> 00:03:21,846
 Primarily it has four
 different components.
 
-00:03:22.096 --> 00:03:23.036 A:middle
+
+68
+00:03:22,096 --> 00:03:23,036
 One, the title.
 
-00:03:23.386 --> 00:03:26.466 A:middle
+
+69
+00:03:23,386 --> 00:03:26,466
 Second, you get a subtitle that
 goes right below the title,
 
-00:03:26.796 --> 00:03:29.676 A:middle
+
+70
+00:03:26,796 --> 00:03:29,676
 and you have a right accessory
 view and a left accessory view.
 
-00:03:30.186 --> 00:03:32.876 A:middle
+
+71
+00:03:30,186 --> 00:03:32,876
 Normally, these four
 components are good enough
 
-00:03:33.006 --> 00:03:35.876 A:middle
+
+72
+00:03:33,006 --> 00:03:35,876
 to provide us enough, good
 enough to give a little bit
 
-00:03:35.876 --> 00:03:37.896 A:middle
+
+73
+00:03:35,876 --> 00:03:37,896
 of information about the point
 
-00:03:38.316 --> 00:03:40.316 A:middle
+
+74
+00:03:38,316 --> 00:03:40,316
 or the coordinate
 they are representing,
 
-00:03:40.776 --> 00:03:43.666 A:middle
+
+75
+00:03:40,776 --> 00:03:43,666
 but the problem arises when
 the content size increases.
 
-00:03:43.946 --> 00:03:46.986 A:middle
+
+76
+00:03:43,946 --> 00:03:46,986
 For example, in this
 callout, all right,
 
-00:03:47.446 --> 00:03:49.636 A:middle
+
+77
+00:03:47,446 --> 00:03:49,636
 in this callout you can see
 the subtitle is getting clipped
 
-00:03:49.636 --> 00:03:50.476 A:middle
+
+78
+00:03:49,636 --> 00:03:50,476
 at one point.
 
-00:03:51.056 --> 00:03:53.466 A:middle
+
+79
+00:03:51,056 --> 00:03:53,466
 So what do you have to do
 to customize these callouts
 
-00:03:53.466 --> 00:03:54.936 A:middle
+
+80
+00:03:53,466 --> 00:03:54,936
 to fit your application needs?
 
-00:03:55.336 --> 00:03:57.276 A:middle
+
+81
+00:03:55,336 --> 00:03:57,276
 Well, it turns out, there
 are a couple of work-arounds
 
-00:03:57.276 --> 00:03:58.346 A:middle
+
+82
+00:03:57,276 --> 00:03:58,346
 that developers have
 been trying.
 
-00:03:58.766 --> 00:04:02.846 A:middle
+
+83
+00:03:58,766 --> 00:04:02,846
 Sometimes they run into
 issues, like, to start with,
 
 
-
-00:03:58.766 --> 00:04:02.846 A:middle
-Sometimes they run into
-issues, like, to start with,
-
-00:04:03.096 --> 00:04:04.766 A:middle
+84
+00:04:03,096 --> 00:04:04,766
 we have something like
 this in a map view
 
-00:04:05.036 --> 00:04:07.406 A:middle
+
+85
+00:04:05,036 --> 00:04:07,406
 where you tap -- a
 maps application.
 
-00:04:07.706 --> 00:04:10.306 A:middle
+
+86
+00:04:07,706 --> 00:04:10,306
 So, when you tap on
 annotations you get a POI
 
-00:04:10.446 --> 00:04:12.116 A:middle
+
+87
+00:04:10,446 --> 00:04:12,116
 and a callout with
 a Yelp review.
 
-00:04:12.816 --> 00:04:16.276 A:middle
+
+88
+00:04:12,816 --> 00:04:16,276
 And in order to implement
 a similar kind
 
-00:04:16.276 --> 00:04:18.676 A:middle
+
+89
+00:04:16,276 --> 00:04:18,676
 of behavior we have seen
 developers do something
 
-00:04:18.676 --> 00:04:21.406 A:middle
+
+90
+00:04:18,676 --> 00:04:21,406
 like this, where they put
 Emojis in their subtitle.
 
-00:04:21.736 --> 00:04:23.396 A:middle
+
+91
+00:04:21,736 --> 00:04:23,396
 I mean, it's fine for
 something like this.
 
-00:04:23.806 --> 00:04:26.776 A:middle
+
+92
+00:04:23,806 --> 00:04:26,776
 But what happens when you go
 implement something complex
 
-00:04:26.776 --> 00:04:27.126 A:middle
+
+93
+00:04:26,776 --> 00:04:27,126
 like this?
 
-00:04:27.446 --> 00:04:29.586 A:middle
+
+94
+00:04:27,446 --> 00:04:29,586
 Well, it turns out it
 is not a good solution.
 
-00:04:29.936 --> 00:04:32.776 A:middle
+
+95
+00:04:29,936 --> 00:04:32,776
 And in order to solve this
 problem we are introducing a new
 
-00:04:32.776 --> 00:04:35.806 A:middle
+
+96
+00:04:32,776 --> 00:04:35,806
 way, in terms of a
 property that will help you
 
-00:04:35.806 --> 00:04:37.416 A:middle
+
+97
+00:04:35,806 --> 00:04:37,416
 to customize the callout.
 
-00:04:37.416 --> 00:04:39.126 A:middle
+
+98
+00:04:37,416 --> 00:04:39,126
 The property we are
 introducing is called
 
-00:04:39.126 --> 00:04:40.386 A:middle
+
+99
+00:04:39,126 --> 00:04:40,386
 detailCalloutAccessoryView.
 
-00:04:40.826 --> 00:04:45.466 A:middle
+
+100
+00:04:40,826 --> 00:04:45,466
 On iOS it takes a UIView,
 and on OS X it takes NSView.
 
-00:04:45.826 --> 00:04:48.146 A:middle
+
+101
+00:04:45,826 --> 00:04:48,146
 Again, it's a UIView and NSView.
 
-00:04:48.306 --> 00:04:50.756 A:middle
+
+102
+00:04:48,306 --> 00:04:50,756
 That means you can customize
 it to a greater length.
 
-00:04:50.756 --> 00:04:52.846 A:middle
+
+103
+00:04:50,756 --> 00:04:52,846
 So, even if you want
 to use, like, a --
 
-00:04:52.986 --> 00:04:56.776 A:middle
+
+104
+00:04:52,986 --> 00:04:56,776
 you can do it and it will open
 up the endless possibilities
 
-00:04:56.776 --> 00:04:58.686 A:middle
+
+105
+00:04:56,776 --> 00:04:58,686
 of customizing these callouts.
 
-00:04:58.686 --> 00:05:02.556 A:middle
+
+106
+00:04:58,686 --> 00:05:02,556
 Again, these callouts
 support auto layout,
 
 
-
-00:04:58.686 --> 00:05:02.556 A:middle
-Again, these callouts
-support auto layout,
-
-00:05:02.646 --> 00:05:03.866 A:middle
+107
+00:05:02,646 --> 00:05:03,866
 right to left languages.
 
-00:05:03.896 --> 00:05:05.686 A:middle
+
+108
+00:05:03,896 --> 00:05:05,686
 That means everything
 is in there for you,
 
-00:05:05.686 --> 00:05:07.676 A:middle
+
+109
+00:05:05,686 --> 00:05:07,676
 and all you need is one
 single line of code.
 
-00:05:08.076 --> 00:05:09.506 A:middle
+
+110
+00:05:08,076 --> 00:05:09,506
 Let's quickly take a
 look at a sample code
 
-00:05:09.506 --> 00:05:11.586 A:middle
+
+111
+00:05:09,506 --> 00:05:11,586
 and how one would use
 it in their application.
 
-00:05:12.106 --> 00:05:14.966 A:middle
+
+112
+00:05:12,106 --> 00:05:14,966
 So, here, I have a callback
 method that gets fired
 
-00:05:14.966 --> 00:05:16.656 A:middle
+
+113
+00:05:14,966 --> 00:05:16,656
 when you tap on an annotation.
 
-00:05:17.036 --> 00:05:19.776 A:middle
+
+114
+00:05:17,036 --> 00:05:19,776
 I'll start off with just setting
 
-00:05:19.776 --> 00:05:21.466 A:middle
+
+115
+00:05:19,776 --> 00:05:21,466
 up detailCalloutAccessory
 property,
 
-00:05:21.786 --> 00:05:24.696 A:middle
+
+116
+00:05:21,786 --> 00:05:24,696
 detailCalloutAccessoryView
 property to be a UIImageView.
 
-00:05:24.986 --> 00:05:27.736 A:middle
+
+117
+00:05:24,986 --> 00:05:27,736
 As you can see I'm just placing
 an image of the Taj Mahal
 
-00:05:27.736 --> 00:05:30.386 A:middle
+
+118
+00:05:27,736 --> 00:05:30,386
 in that callout, and that's
 it, that's all you need to do
 
-00:05:30.386 --> 00:05:31.896 A:middle
+
+119
+00:05:30,386 --> 00:05:31,896
 to customize this callout.
 
-00:05:31.896 --> 00:05:32.456 A:middle
+
+120
+00:05:31,896 --> 00:05:32,456
 Isn't that great?
 
-00:05:33.516 --> 00:05:37.266 A:middle
+
+121
+00:05:33,516 --> 00:05:37,266
 [ Applause ]
 
-00:05:37.766 --> 00:05:40.706 A:middle
+
+122
+00:05:37,766 --> 00:05:40,706
 As I mentioned earlier, it
 is just a UIView and NSView.
 
-00:05:40.916 --> 00:05:43.096 A:middle
+
+123
+00:05:40,916 --> 00:05:43,096
 We are really excited to
 give it out to you guys
 
-00:05:43.096 --> 00:05:45.466 A:middle
+
+124
+00:05:43,096 --> 00:05:45,466
 and see what you guys can
 achieve with this thing.
 
-00:05:45.906 --> 00:05:48.076 A:middle
+
+125
+00:05:45,906 --> 00:05:48,076
 Hopefully we will see
 those results coming soon.
 
-00:05:48.076 --> 00:05:51.016 A:middle
+
+126
+00:05:48,076 --> 00:05:51,016
 So that's all about
 Callout Customization.
 
-00:05:51.286 --> 00:05:53.056 A:middle
+
+127
+00:05:51,286 --> 00:05:53,056
 Let's move on to
 Map Customizations.
 
-00:05:53.596 --> 00:05:58.566 A:middle
+
+128
+00:05:53,596 --> 00:05:58,566
 In this particular topic we will
 be talking about new handy APIs
 
-00:05:58.566 --> 00:06:01.406 A:middle
+
+129
+00:05:58,566 --> 00:06:01,406
 that will let you control
 what goes on your Map View.
 
 
-
-00:05:58.566 --> 00:06:01.406 A:middle
-that will let you control
-what goes on your Map View.
-
-00:06:01.406 --> 00:06:03.526 A:middle
+130
+00:06:01,406 --> 00:06:03,526
 Like, you have a map unit
 inside your application,
 
-00:06:03.856 --> 00:06:05.986 A:middle
+
+131
+00:06:03,856 --> 00:06:05,986
 how can you control the
 content of this Map View?
 
-00:06:06.206 --> 00:06:09.826 A:middle
+
+132
+00:06:06,206 --> 00:06:09,826
 These APIs have been
 available to maps applications
 
-00:06:09.826 --> 00:06:10.886 A:middle
+
+133
+00:06:09,826 --> 00:06:10,886
 for a couple of years now
 
-00:06:10.976 --> 00:06:12.696 A:middle
+
+134
+00:06:10,976 --> 00:06:12,696
 and now we are bringing
 it to you guys.
 
-00:06:12.696 --> 00:06:15.256 A:middle
+
+135
+00:06:12,696 --> 00:06:15,256
 Let's start off with traffic.
 
-00:06:15.916 --> 00:06:18.246 A:middle
+
+136
+00:06:15,916 --> 00:06:18,246
 Now you have an ability
 to show any high traffic
 
-00:06:18.246 --> 00:06:21.836 A:middle
+
+137
+00:06:18,246 --> 00:06:21,836
 on your Map View and all you
 have to do is put a flag, like,
 
-00:06:21.836 --> 00:06:24.026 A:middle
+
+138
+00:06:21,836 --> 00:06:24,026
 set a flag on the Map
 View called showsTraffic.
 
-00:06:24.756 --> 00:06:27.256 A:middle
+
+139
+00:06:24,756 --> 00:06:27,256
 Similar to the traffic,
 we're also providing a way
 
-00:06:27.256 --> 00:06:28.916 A:middle
+
+140
+00:06:27,256 --> 00:06:28,916
 to show or hide a scale.
 
-00:06:29.336 --> 00:06:32.396 A:middle
+
+141
+00:06:29,336 --> 00:06:32,396
 So you can either
 show or hide a scale
 
-00:06:32.396 --> 00:06:34.736 A:middle
+
+142
+00:06:32,396 --> 00:06:34,736
 in your left top
 corner of your Map View.
 
-00:06:34.736 --> 00:06:37.846 A:middle
+
+143
+00:06:34,736 --> 00:06:37,846
 And similar to a scale, you
 can also show and hide compass.
 
-00:06:38.246 --> 00:06:41.996 A:middle
+
+144
+00:06:38,246 --> 00:06:41,996
 You might have noticed that
 these APIs are very similar
 
-00:06:41.996 --> 00:06:43.056 A:middle
+
+145
+00:06:41,996 --> 00:06:43,056
 to our existing APIs
 
-00:06:43.246 --> 00:06:45.696 A:middle
+
+146
+00:06:43,246 --> 00:06:45,696
 like showsPointsOfInterest
 or showsBuildings.
 
-00:06:46.126 --> 00:06:49.146 A:middle
+
+147
+00:06:46,126 --> 00:06:49,146
 We believe with the use of
 these APIs, you will be able
 
-00:06:49.146 --> 00:06:51.596 A:middle
+
+148
+00:06:49,146 --> 00:06:51,596
 to customize Map View
 inside your application
 
-00:06:51.916 --> 00:06:53.956 A:middle
+
+149
+00:06:51,916 --> 00:06:53,956
 and provide a great
 user experience.
 
-00:06:54.476 --> 00:06:55.816 A:middle
+
+150
+00:06:54,476 --> 00:06:55,816
 So that's Map Customization.
 
-00:06:56.346 --> 00:07:00.786 A:middle
+
+151
+00:06:56,346 --> 00:07:00,786
 Other than maps, other than
 these APIs we talked about,
 
 
-
-00:06:56.346 --> 00:07:00.786 A:middle
-Other than maps, other than
-these APIs we talked about,
-
-00:07:01.216 --> 00:07:04.446 A:middle
+152
+00:07:01,216 --> 00:07:04,446
 we have various other
 improvements to MapKit as well.
 
-00:07:04.446 --> 00:07:05.996 A:middle
+
+153
+00:07:04,446 --> 00:07:05,996
 First of all, a time
 zone support.
 
-00:07:06.326 --> 00:07:09.336 A:middle
+
+154
+00:07:06,326 --> 00:07:09,336
 We have added a time zones
 property on our MK map item.
 
-00:07:09.646 --> 00:07:12.926 A:middle
+
+155
+00:07:09,646 --> 00:07:12,926
 You can use that property to
 get the associated time zone.
 
-00:07:13.376 --> 00:07:15.206 A:middle
+
+156
+00:07:13,376 --> 00:07:15,206
 You can use it with CLGeocoder.
 
-00:07:15.606 --> 00:07:17.586 A:middle
+
+157
+00:07:15,606 --> 00:07:17,586
 So you can find out a
 time zone associated
 
-00:07:17.586 --> 00:07:18.616 A:middle
+
+158
+00:07:17,586 --> 00:07:18,616
 with a particular coordinate.
 
-00:07:18.936 --> 00:07:21.976 A:middle
+
+159
+00:07:18,936 --> 00:07:21,976
 Or you can also use it
 with MKLocalSearch, so,
 
-00:07:21.976 --> 00:07:25.826 A:middle
+
+160
+00:07:21,976 --> 00:07:25,826
 you can search an area for a
 point of interest or anything
 
-00:07:25.826 --> 00:07:26.746 A:middle
+
+161
+00:07:25,826 --> 00:07:26,746
 that you would like to search.
 
-00:07:26.746 --> 00:07:29.096 A:middle
+
+162
+00:07:26,746 --> 00:07:29,096
 And you can find out a time
 zone associated with that.
 
-00:07:29.676 --> 00:07:32.726 A:middle
+
+163
+00:07:29,676 --> 00:07:32,726
 Besides that, we have also done
 various improvements to MapKit
 
-00:07:32.726 --> 00:07:34.416 A:middle
+
+164
+00:07:32,726 --> 00:07:34,416
 for better Swift compatibility,
 
-00:07:34.636 --> 00:07:36.576 A:middle
+
+165
+00:07:34,636 --> 00:07:36,576
 and we also added
 a WatchKit support
 
-00:07:37.106 --> 00:07:39.226 A:middle
+
+166
+00:07:37,106 --> 00:07:39,226
 to launch maps applications
 on your watch
 
-00:07:39.496 --> 00:07:40.986 A:middle
+
+167
+00:07:39,496 --> 00:07:40,986
 from your own application.
 
-00:07:41.406 --> 00:07:44.736 A:middle
+
+168
+00:07:41,406 --> 00:07:44,736
 So that's it, so that's all the
 improvements that we have done
 
-00:07:44.736 --> 00:07:46.576 A:middle
+
+169
+00:07:44,736 --> 00:07:46,576
 to existing features in MapKit.
 
-00:07:47.046 --> 00:07:48.246 A:middle
+
+170
+00:07:47,046 --> 00:07:48,246
 Let's move on to the next topic
 
-00:07:48.246 --> 00:07:50.476 A:middle
+
+171
+00:07:48,246 --> 00:07:50,476
 and personal favorite
 of mine, Transit.
 
-00:07:54.226 --> 00:07:57.246 A:middle
+
+172
+00:07:54,226 --> 00:07:57,246
 We were pretty excited
 about yesterday's keynote,
 
-00:07:57.246 --> 00:07:58.946 A:middle
+
+173
+00:07:57,246 --> 00:07:58,946
 with the moment we
 announced the new feature
 
-00:07:59.366 --> 00:08:00.776 A:middle
+
+174
+00:07:59,366 --> 00:08:00,776
 for maps application Transit.
 
 
-
-00:07:59.366 --> 00:08:00.776 A:middle
-for maps application Transit.
-
-00:08:01.106 --> 00:08:04.336 A:middle
+175
+00:08:01,106 --> 00:08:04,336
 And today we will mainly focus
 on what it means to MapKit.
 
-00:08:05.006 --> 00:08:07.236 A:middle
+
+176
+00:08:05,006 --> 00:08:07,236
 We have worked really
 hard on this feature.
 
-00:08:07.556 --> 00:08:10.766 A:middle
+
+177
+00:08:07,556 --> 00:08:10,766
 And while designing this feature
 we kept our user at the center
 
-00:08:10.766 --> 00:08:12.676 A:middle
+
+178
+00:08:10,766 --> 00:08:12,676
 of the development process.
 
-00:08:13.286 --> 00:08:16.346 A:middle
+
+179
+00:08:13,286 --> 00:08:16,346
 And in order to provide a
 similar kind of experience
 
-00:08:16.346 --> 00:08:18.286 A:middle
+
+180
+00:08:16,346 --> 00:08:18,286
 in your application,
 we would like you
 
-00:08:18.286 --> 00:08:21.986 A:middle
+
+181
+00:08:18,286 --> 00:08:21,986
 to leverage maps application to
 provide a similar experience.
 
-00:08:22.246 --> 00:08:25.636 A:middle
+
+182
+00:08:22,246 --> 00:08:25,636
 And the way we are
 going to do that is
 
-00:08:25.636 --> 00:08:27.436 A:middle
+
+183
+00:08:25,636 --> 00:08:27,436
 by providing you a
 distinct entry point
 
-00:08:27.846 --> 00:08:29.066 A:middle
+
+184
+00:08:27,846 --> 00:08:29,066
 to a Maps Transit feature.
 
-00:08:29.356 --> 00:08:30.756 A:middle
+
+185
+00:08:29,356 --> 00:08:30,756
 Let's look at this
 point one by one.
 
-00:08:31.146 --> 00:08:35.226 A:middle
+
+186
+00:08:31,146 --> 00:08:35,226
 First one, ability to
 request a Transit ETA.
 
-00:08:35.226 --> 00:08:39.176 A:middle
+
+187
+00:08:35,226 --> 00:08:39,176
 If you use MKDirections
 protocol, MKDirections class
 
-00:08:39.176 --> 00:08:41.775 A:middle
+
+188
+00:08:39,176 --> 00:08:41,775
 and related APIs before, then
 you know, you might be aware
 
-00:08:41.775 --> 00:08:44.596 A:middle
+
+189
+00:08:41,775 --> 00:08:44,596
 of these two TransportType
 that we already support,
 
-00:08:44.596 --> 00:08:45.726 A:middle
+
+190
+00:08:44,596 --> 00:08:45,726
 automobile and walking.
 
-00:08:46.066 --> 00:08:49.166 A:middle
+
+191
+00:08:46,066 --> 00:08:49,166
 You can request directions
 and ETAs
 
-00:08:49.166 --> 00:08:51.216 A:middle
+
+192
+00:08:49,166 --> 00:08:51,216
 for these two transport types.
 
-00:08:51.216 --> 00:08:53.806 A:middle
+
+193
+00:08:51,216 --> 00:08:53,806
 And this year we are
 adding a new TransportType,
 
-00:08:54.156 --> 00:08:55.936 A:middle
+
+194
+00:08:54,156 --> 00:08:55,936
 MKDirectionsTransportType,
 Transit.
 
-00:08:56.436 --> 00:09:00.396 A:middle
+
+195
+00:08:56,436 --> 00:09:00,396
 With this TransportType, you
 will be able to request ETAs.
 
 
-
-00:08:56.436 --> 00:09:00.396 A:middle
-With this TransportType, you
-will be able to request ETAs.
-
-00:09:00.806 --> 00:09:02.956 A:middle
+196
+00:09:00,806 --> 00:09:02,956
 And I would like to point
 it out, you will only,
 
-00:09:03.036 --> 00:09:05.696 A:middle
+
+197
+00:09:03,036 --> 00:09:05,696
 as of now you will only
 request ETAs for Transit.
 
-00:09:06.046 --> 00:09:08.066 A:middle
+
+198
+00:09:06,046 --> 00:09:08,066
 You won't get a Transit
 direction.
 
-00:09:08.456 --> 00:09:10.346 A:middle
+
+199
+00:09:08,456 --> 00:09:10,346
 So, let's see how you can --
 
-00:09:10.426 --> 00:09:13.606 A:middle
+
+200
+00:09:10,426 --> 00:09:13,606
 before we move on to a sample
 code, let's see how you can,
 
-00:09:14.206 --> 00:09:15.586 A:middle
+
+201
+00:09:14,206 --> 00:09:15,586
 what you get besides ETA.
 
-00:09:15.586 --> 00:09:17.986 A:middle
+
+202
+00:09:15,586 --> 00:09:17,986
 Well, you get expected
 arrival timing
 
-00:09:18.216 --> 00:09:19.676 A:middle
+
+203
+00:09:18,216 --> 00:09:19,676
 and expected departure timing.
 
-00:09:19.986 --> 00:09:22.336 A:middle
+
+204
+00:09:19,986 --> 00:09:22,336
 Given the frequency, given
 the nature of the frequency
 
-00:09:22.366 --> 00:09:25.586 A:middle
+
+205
+00:09:22,366 --> 00:09:25,586
 of our transit varies based on
 the time of the day and a place,
 
-00:09:25.656 --> 00:09:28.296 A:middle
+
+206
+00:09:25,656 --> 00:09:28,296
 it is really important that
 we provide this information.
 
-00:09:28.676 --> 00:09:31.966 A:middle
+
+207
+00:09:28,676 --> 00:09:31,966
 We believe with this
 information, you will be able
 
-00:09:32.086 --> 00:09:33.596 A:middle
+
+208
+00:09:32,086 --> 00:09:33,596
 to give out a great
 user experience
 
-00:09:33.666 --> 00:09:35.346 A:middle
+
+209
+00:09:33,666 --> 00:09:35,346
 to your application user base.
 
-00:09:35.876 --> 00:09:37.206 A:middle
+
+210
+00:09:35,876 --> 00:09:37,206
 Let's take a look
 at a sample code,
 
-00:09:37.296 --> 00:09:39.316 A:middle
+
+211
+00:09:37,296 --> 00:09:39,316
 how can we request
 these Transit ETAs.
 
-00:09:39.316 --> 00:09:43.146 A:middle
+
+212
+00:09:39,316 --> 00:09:43,146
 Here, I have a helper
 function called getTransitETA.
 
-00:09:43.606 --> 00:09:46.436 A:middle
+
+213
+00:09:43,606 --> 00:09:46,436
 So, I'll start off with
 creating an MKDirectionsRequest.
 
-00:09:46.826 --> 00:09:49.056 A:middle
+
+214
+00:09:46,826 --> 00:09:49,056
 After that I'll set a source
 and a destination on it,
 
-00:09:49.056 --> 00:09:53.036 A:middle
+
+215
+00:09:49,056 --> 00:09:53,036
 and once I have that, I'll set
 our transport type to be Transit
 
-00:09:53.306 --> 00:09:56.606 A:middle
+
+216
+00:09:53,306 --> 00:09:56,606
 because we are interested
 in getting our Transit ETA.
 
-00:09:56.686 --> 00:10:00.026 A:middle
+
+217
+00:09:56,686 --> 00:10:00,026
 Once, after that I will create
 MKDirections object using the
 
 
-
-00:09:56.686 --> 00:10:00.026 A:middle
-Once, after that I will create
-MKDirections object using the
-
-00:10:00.026 --> 00:10:03.256 A:middle
+218
+00:10:00,026 --> 00:10:03,256
 request that we just created,
 and I'll call it calculate ETA
 
-00:10:03.256 --> 00:10:05.316 A:middle
+
+219
+00:10:03,256 --> 00:10:05,316
 With Completion Handler
 on that direction object,
 
-00:10:05.716 --> 00:10:07.736 A:middle
+
+220
+00:10:05,716 --> 00:10:07,736
 and in CompletionHandler
 I will handle the response
 
-00:10:07.736 --> 00:10:08.966 A:middle
+
+221
+00:10:07,736 --> 00:10:08,966
 that is coming back
 from the server.
 
-00:10:09.926 --> 00:10:11.616 A:middle
+
+222
+00:10:09,926 --> 00:10:11,616
 So, that's a Transit ETA.
 
-00:10:11.616 --> 00:10:13.356 A:middle
+
+223
+00:10:11,616 --> 00:10:13,356
 Now, once we have
 the Transit ETA,
 
-00:10:13.656 --> 00:10:16.546 A:middle
+
+224
+00:10:13,656 --> 00:10:16,546
 in order to provide a complete
 experience we are giving you a
 
-00:10:16.546 --> 00:10:19.456 A:middle
+
+225
+00:10:16,546 --> 00:10:19,456
 way to launch maps applications
 into a Transit mode.
 
-00:10:19.926 --> 00:10:23.276 A:middle
+
+226
+00:10:19,926 --> 00:10:23,276
 As of now you can launch maps
 using various different launch
 
-00:10:23.276 --> 00:10:25.946 A:middle
+
+227
+00:10:23,276 --> 00:10:25,946
 options on a map,
 along with a map item,
 
-00:10:26.526 --> 00:10:28.296 A:middle
+
+228
+00:10:26,526 --> 00:10:28,296
 and the
 MKLaunchOptionsDirectionsModeKey
 
-00:10:28.656 --> 00:10:32.986 A:middle
+
+229
+00:10:28,656 --> 00:10:32,986
 helps you to point out which
 maps application mode you would
 
-00:10:32.986 --> 00:10:33.706 A:middle
+
+230
+00:10:32,986 --> 00:10:33,706
 like to launch in.
 
-00:10:34.106 --> 00:10:36.516 A:middle
+
+231
+00:10:34,106 --> 00:10:36,516
 So as of now, we are
 supporting a Driving mode
 
-00:10:36.516 --> 00:10:38.836 A:middle
+
+232
+00:10:36,516 --> 00:10:38,836
 and a Walking mode, and now
 
-00:10:38.836 --> 00:10:41.726 A:middle
+
+233
+00:10:38,836 --> 00:10:41,726
 with iOS 9 we are also
 introducing a Transit mode.
 
-00:10:42.566 --> 00:10:47.756 A:middle
+
+234
+00:10:42,566 --> 00:10:47,756
 By using this mode, you will be
 able to launch maps application
 
-00:10:47.756 --> 00:10:48.696 A:middle
+
+235
+00:10:47,756 --> 00:10:48,696
 from your application.
 
-00:10:49.116 --> 00:10:50.916 A:middle
+
+236
+00:10:49,116 --> 00:10:50,916
 Let's quickly take a look
 at a sample code here.
 
-00:10:51.416 --> 00:10:53.746 A:middle
+
+237
+00:10:51,416 --> 00:10:53,746
 So, here, I have a
 helper function called
 
-00:10:53.946 --> 00:10:56.676 A:middle
+
+238
+00:10:53,946 --> 00:10:56,676
 openInMapsTransit, which
 takes a coordinate.
 
-00:10:57.116 --> 00:11:01.566 A:middle
+
+239
+00:10:57,116 --> 00:11:01,566
 And I will just basically start
 off with creating an MK map item
 
 
-
-00:10:57.116 --> 00:11:01.566 A:middle
-And I will just basically start
-off with creating an MK map item
-
-00:11:01.566 --> 00:11:03.126 A:middle
+240
+00:11:01,566 --> 00:11:03,126
 with that parsing coordinate.
 
-00:11:03.566 --> 00:11:05.976 A:middle
+
+241
+00:11:03,566 --> 00:11:05,976
 After that I'll create a
 dictionary launch options
 
-00:11:06.586 --> 00:11:08.316 A:middle
+
+242
+00:11:06,586 --> 00:11:08,316
 with the mode set to be Transit.
 
-00:11:08.316 --> 00:11:10.636 A:middle
+
+243
+00:11:08,316 --> 00:11:10,636
 And once I have that, all I have
 
-00:11:10.636 --> 00:11:13.636 A:middle
+
+244
+00:11:10,636 --> 00:11:13,636
 to do is call
 openInMapsWithLaunchOptions
 
-00:11:13.766 --> 00:11:14.686 A:middle
+
+245
+00:11:13,766 --> 00:11:14,686
 on that map item.
 
-00:11:14.986 --> 00:11:18.236 A:middle
+
+246
+00:11:14,986 --> 00:11:18,236
 It will basically launch our
 maps application in Transit mode
 
-00:11:18.236 --> 00:11:21.416 A:middle
+
+247
+00:11:18,236 --> 00:11:21,416
 with the mapped item
 to be a destination.
 
-00:11:21.976 --> 00:11:23.666 A:middle
+
+248
+00:11:21,976 --> 00:11:23,666
 So that is enough
 of our talking.
 
-00:11:23.876 --> 00:11:25.366 A:middle
+
+249
+00:11:23,876 --> 00:11:25,366
 Let's see all these
 APIs in action.
 
-00:11:36.536 --> 00:11:37.076 A:middle
+
+250
+00:11:36,536 --> 00:11:37,076
 All right.
 
-00:11:37.496 --> 00:11:41.416 A:middle
+
+251
+00:11:37,496 --> 00:11:41,416
 So for this demo purpose I have
 created a city tour application
 
-00:11:41.416 --> 00:11:42.376 A:middle
+
+252
+00:11:41,416 --> 00:11:42,376
 for San Francisco.
 
-00:11:42.936 --> 00:11:45.636 A:middle
+
+253
+00:11:42,936 --> 00:11:45,636
 It is basically just
 a simple map view
 
-00:11:45.636 --> 00:11:47.316 A:middle
+
+254
+00:11:45,636 --> 00:11:47,316
 with various different
 annotations in it.
 
-00:11:47.606 --> 00:11:48.776 A:middle
+
+255
+00:11:47,606 --> 00:11:48,776
 I'm just going to quickly run it
 
-00:11:48.776 --> 00:11:50.696 A:middle
+
+256
+00:11:48,776 --> 00:11:50,696
 so you can see what
 I have so far.
 
-00:11:53.056 --> 00:11:56.106 A:middle
+
+257
+00:11:53,056 --> 00:11:56,106
 So, as you can see, we
 have a map of San Francisco
 
-00:11:56.106 --> 00:11:59.806 A:middle
+
+258
+00:11:56,106 --> 00:11:59,806
 and I plotted various different
 annotations with the landmarks,
 
-00:11:59.966 --> 00:12:02.916 A:middle
+
+259
+00:11:59,966 --> 00:12:02,916
 like we have Sutro
 Tower over here,
 
 
-
-00:11:59.966 --> 00:12:02.916 A:middle
-like we have Sutro
-Tower over here,
-
-00:12:02.916 --> 00:12:05.106 A:middle
+260
+00:12:02,916 --> 00:12:05,106
 we have Golden Gate
 bridge, and all that,
 
-00:12:05.106 --> 00:12:06.376 A:middle
+
+261
+00:12:05,106 --> 00:12:06,376
 and I have also taken
 the liberty
 
-00:12:06.376 --> 00:12:07.666 A:middle
+
+262
+00:12:06,376 --> 00:12:07,666
 to set the pin colors on these.
 
-00:12:07.746 --> 00:12:12.936 A:middle
+
+263
+00:12:07,746 --> 00:12:12,936
 So if I scroll down to the
 viewForAnnotation callback,
 
-00:12:12.936 --> 00:12:15.526 A:middle
+
+264
+00:12:12,936 --> 00:12:15,526
 you can see I have set in
 a pin tint color property
 
-00:12:15.876 --> 00:12:17.576 A:middle
+
+265
+00:12:15,876 --> 00:12:17,576
 to customize these pin colors.
 
-00:12:18.096 --> 00:12:18.916 A:middle
+
+266
+00:12:18,096 --> 00:12:18,916
 This is okay.
 
-00:12:19.326 --> 00:12:21.416 A:middle
+
+267
+00:12:19,326 --> 00:12:21,416
 As the demo progresses
 we will try
 
-00:12:21.416 --> 00:12:22.896 A:middle
+
+268
+00:12:21,416 --> 00:12:22,896
 to customize this more and more.
 
-00:12:23.436 --> 00:12:25.736 A:middle
+
+269
+00:12:23,436 --> 00:12:25,736
 To begin with, what I'm
 going to do is I'm going
 
-00:12:25.736 --> 00:12:29.156 A:middle
+
+270
+00:12:25,736 --> 00:12:29,156
 to add a Transit
 ETA into a subtitle.
 
-00:12:29.606 --> 00:12:31.846 A:middle
+
+271
+00:12:29,606 --> 00:12:31,846
 So in order to do so I
 have created a simple
 
-00:12:31.846 --> 00:12:32.656 A:middle
+
+272
+00:12:31,846 --> 00:12:32,656
 helper function.
 
-00:12:33.766 --> 00:12:36.146 A:middle
+
+273
+00:12:33,766 --> 00:12:36,146
 I am going to drag
 and drop that in here.
 
-00:12:36.656 --> 00:12:38.746 A:middle
+
+274
+00:12:36,656 --> 00:12:38,746
 So I have this helper function
 
-00:12:38.746 --> 00:12:40.426 A:middle
+
+275
+00:12:38,746 --> 00:12:40,426
 that basically takes
 our annotation,
 
-00:12:40.736 --> 00:12:43.586 A:middle
+
+276
+00:12:40,736 --> 00:12:43,586
 which is a landmark
 class for local object.
 
-00:12:44.096 --> 00:12:47.106 A:middle
+
+277
+00:12:44,096 --> 00:12:47,106
 And then I will create a
 MKDirectionsRequest in there.
 
-00:12:47.816 --> 00:12:51.086 A:middle
+
+278
+00:12:47,816 --> 00:12:51,086
 So you can see I have created
 an MKDirectionsRequest.
 
-00:12:51.566 --> 00:12:53.076 A:middle
+
+279
+00:12:51,566 --> 00:12:53,076
 After that I'm just
 setting a source
 
-00:12:53.076 --> 00:12:55.736 A:middle
+
+280
+00:12:53,076 --> 00:12:55,736
 and a destination
 on that request.
 
-00:12:56.736 --> 00:12:59.326 A:middle
+
+281
+00:12:56,736 --> 00:12:59,326
 And finally I'm setting a
 transport type to be Transit
 
-00:12:59.386 --> 00:13:01.106 A:middle
+
+282
+00:12:59,386 --> 00:13:01,106
 because we are interested
 in a Transit ETA.
 
 
-
-00:12:59.386 --> 00:13:01.106 A:middle
-because we are interested
-in a Transit ETA.
-
-00:13:01.976 --> 00:13:03.386 A:middle
+283
+00:13:01,976 --> 00:13:03,386
 Once I have that,
 I'm going to go
 
-00:13:03.386 --> 00:13:05.706 A:middle
+
+284
+00:13:03,386 --> 00:13:05,706
 and create an MKDirections
 object.
 
-00:13:08.096 --> 00:13:11.966 A:middle
+
+285
+00:13:08,096 --> 00:13:11,966
 So in here I have created an
 MKDirections object using the
 
-00:13:12.586 --> 00:13:15.826 A:middle
+
+286
+00:13:12,586 --> 00:13:15,826
 request and in CompletionHandler
 I'm just setting an
 
-00:13:15.826 --> 00:13:18.916 A:middle
+
+287
+00:13:15,826 --> 00:13:18,916
 annotation.subtitle to be our
 estimated time of arrival.
 
-00:13:19.356 --> 00:13:23.576 A:middle
+
+288
+00:13:19,356 --> 00:13:23,576
 And I am quickly going to call
 this function before I drop my
 
-00:13:23.576 --> 00:13:25.256 A:middle
+
+289
+00:13:23,576 --> 00:13:25,256
 annotation on a map view.
 
-00:13:25.876 --> 00:13:30.306 A:middle
+
+290
+00:13:25,876 --> 00:13:30,306
 So let's call that
 function here LandMarkPin.
 
-00:13:31.576 --> 00:13:34.426 A:middle
+
+291
+00:13:31,576 --> 00:13:34,426
 So, all right, let's run it.
 
-00:13:38.016 --> 00:13:40.686 A:middle
+
+292
+00:13:38,016 --> 00:13:40,686
 There we go, so city
 hall is about 22 minutes
 
-00:13:41.416 --> 00:13:44.236 A:middle
+
+293
+00:13:41,416 --> 00:13:44,236
 from Moscone West by
 using a public transport.
 
-00:13:44.266 --> 00:13:45.606 A:middle
+
+294
+00:13:44,266 --> 00:13:45,606
 Let's check out some other pins.
 
-00:13:46.006 --> 00:13:48.026 A:middle
+
+295
+00:13:46,006 --> 00:13:48,026
 Ferry Building, it's 17 minutes.
 
-00:13:48.456 --> 00:13:49.136 A:middle
+
+296
+00:13:48,456 --> 00:13:49,136
 So this is nice.
 
-00:13:49.136 --> 00:13:51.776 A:middle
+
+297
+00:13:49,136 --> 00:13:51,776
 I mean, this gives initial
 information to your user
 
-00:13:51.776 --> 00:13:53.796 A:middle
+
+298
+00:13:51,776 --> 00:13:53,796
 like how long will it take to go
 
-00:13:53.916 --> 00:13:57.056 A:middle
+
+299
+00:13:53,916 --> 00:13:57,056
 to this destination using
 Transit, but in order
 
-00:13:57.056 --> 00:13:59.596 A:middle
+
+300
+00:13:57,056 --> 00:13:59,596
 to provide a complete Transit
 experience we have to find
 
-00:13:59.596 --> 00:14:01.936 A:middle
+
+301
+00:13:59,596 --> 00:14:01,936
 out a way to bring them
 to a maps application.
 
 
-
-00:13:59.596 --> 00:14:01.936 A:middle
-out a way to bring them
-to a maps application.
-
-00:14:02.346 --> 00:14:04.296 A:middle
+302
+00:14:02,346 --> 00:14:04,296
 And for this demo purpose,
 what I am going to do is,
 
-00:14:04.296 --> 00:14:08.266 A:middle
+
+303
+00:14:04,296 --> 00:14:08,266
 I'm going to put a right callout
 accessory view on my callout,
 
-00:14:08.266 --> 00:14:11.906 A:middle
+
+304
+00:14:08,266 --> 00:14:11,906
 and when I tap it, I will take
 the user to a maps application.
 
-00:14:13.086 --> 00:14:18.056 A:middle
+
+305
+00:14:13,086 --> 00:14:18,056
 So we quickly stop it, and let's
 go back to our callback method.
 
-00:14:18.586 --> 00:14:23.116 A:middle
+
+306
+00:14:18,586 --> 00:14:23,116
 And in here I am going to set
 a rightCalloutAccessoryView
 
-00:14:23.146 --> 00:14:24.156 A:middle
+
+307
+00:14:23,146 --> 00:14:24,156
 on my AnnotationView.
 
-00:14:29.346 --> 00:14:31.396 A:middle
+
+308
+00:14:29,346 --> 00:14:31,396
 I added my
 rightCalloutAccessoryView.
 
-00:14:31.686 --> 00:14:33.006 A:middle
+
+309
+00:14:31,686 --> 00:14:33,006
 Let's run it.
 
-00:14:39.916 --> 00:14:40.426 A:middle
+
+310
+00:14:39,916 --> 00:14:40,426
 All right.
 
-00:14:41.316 --> 00:14:43.266 A:middle
+
+311
+00:14:41,316 --> 00:14:43,266
 So you can see a right
 callout accessory view.
 
-00:14:43.546 --> 00:14:45.196 A:middle
+
+312
+00:14:43,546 --> 00:14:45,196
 We have added a bus icon here.
 
-00:14:45.616 --> 00:14:48.186 A:middle
+
+313
+00:14:45,616 --> 00:14:48,186
 Nothing is happening because we
 haven't implemented the callback
 
-00:14:48.186 --> 00:14:51.426 A:middle
+
+314
+00:14:48,186 --> 00:14:51,426
 method that gets called every
 single time a callout accessory
 
-00:14:51.426 --> 00:14:52.306 A:middle
+
+315
+00:14:51,426 --> 00:14:52,306
 control is tapped.
 
-00:14:52.596 --> 00:14:55.266 A:middle
+
+316
+00:14:52,596 --> 00:14:55,266
 So let's quickly go and
 add that method down here.
 
 
-
-00:15:00.096 --> 00:15:01.476 A:middle
+317
+00:15:00,096 --> 00:15:01,476
 So this is the callback method
 
-00:15:01.476 --> 00:15:04.176 A:middle
+
+318
+00:15:01,476 --> 00:15:04,176
 that gets called every time
 a callout control accessory
 
-00:15:04.176 --> 00:15:05.036 A:middle
+
+319
+00:15:04,176 --> 00:15:05,036
 is pressed.
 
-00:15:06.176 --> 00:15:08.656 A:middle
+
+320
+00:15:06,176 --> 00:15:08,656
 Once I have this, I am
 going to add my code
 
-00:15:08.656 --> 00:15:12.816 A:middle
+
+321
+00:15:08,656 --> 00:15:12,816
 to launch a given map item
 into a maps application.
 
-00:15:13.446 --> 00:15:17.476 A:middle
+
+322
+00:15:13,446 --> 00:15:17,476
 So here I start off with
 creating a dictionary object
 
-00:15:17.476 --> 00:15:20.746 A:middle
+
+323
+00:15:17,476 --> 00:15:20,746
 with the mode Key, and the
 mode key set to be Transit.
 
-00:15:21.136 --> 00:15:23.986 A:middle
+
+324
+00:15:21,136 --> 00:15:23,986
 After that by getting
 a coordinate
 
-00:15:24.046 --> 00:15:27.246 A:middle
+
+325
+00:15:24,046 --> 00:15:27,246
 from the past annotation I'm
 going to create an MKMapItem.
 
-00:15:27.246 --> 00:15:30.856 A:middle
+
+326
+00:15:27,246 --> 00:15:30,856
 And once I have that, I am going
 to use open in launch options
 
-00:15:30.856 --> 00:15:34.646 A:middle
+
+327
+00:15:30,856 --> 00:15:34,646
 on mapItem to launch this
 map item into a Transit mode.
 
-00:15:35.226 --> 00:15:37.836 A:middle
+
+328
+00:15:35,226 --> 00:15:37,836
 Let's quickly go ahead and
 run our application again.
 
-00:15:41.376 --> 00:15:41.796 A:middle
+
+329
+00:15:41,376 --> 00:15:41,796
 All right.
 
-00:15:42.566 --> 00:15:47.396 A:middle
+
+330
+00:15:42,566 --> 00:15:47,396
 Let's see, Ferry Building.
 
-00:15:49.116 --> 00:15:50.696 A:middle
+
+331
+00:15:49,116 --> 00:15:50,696
 Tap on it and there we go.
 
-00:15:50.696 --> 00:15:53.946 A:middle
+
+332
+00:15:50,696 --> 00:15:53,946
 We have a maps application
 into a Transit mode
 
-00:15:53.946 --> 00:15:57.746 A:middle
+
+333
+00:15:53,946 --> 00:15:57,746
 and you can see it takes 18
 minutes by bus number 40.
 
-00:15:57.866 --> 00:16:00.826 A:middle
+
+334
+00:15:57,866 --> 00:16:00,826
 And let's go back to
 our sample app again
 
 
-
-00:15:57.866 --> 00:16:00.826 A:middle
-And let's go back to
-our sample app again
-
-00:16:00.826 --> 00:16:01.766 A:middle
+335
+00:16:00,826 --> 00:16:01,766
 and try something else.
 
-00:16:02.656 --> 00:16:04.386 A:middle
+
+336
+00:16:02,656 --> 00:16:04,386
 Let's see if we got
 a response for Sutro.
 
-00:16:04.436 --> 00:16:05.056 A:middle
+
+337
+00:16:04,436 --> 00:16:05,056
 Yeah, there we go.
 
-00:16:05.266 --> 00:16:07.586 A:middle
+
+338
+00:16:05,266 --> 00:16:07,586
 That's our response.
 
-00:16:08.206 --> 00:16:09.966 A:middle
+
+339
+00:16:08,206 --> 00:16:09,966
 Again 45 minutes by Transit.
 
-00:16:10.626 --> 00:16:12.046 A:middle
+
+340
+00:16:10,626 --> 00:16:12,046
 That's fairly long.
 
-00:16:12.046 --> 00:16:12.396 A:middle
+
+341
+00:16:12,046 --> 00:16:12,396
 Oh, I see.
 
-00:16:12.396 --> 00:16:14.896 A:middle
+
+342
+00:16:12,396 --> 00:16:14,896
 It is something wrong.
 
-00:16:14.896 --> 00:16:18.236 A:middle
+
+343
+00:16:14,896 --> 00:16:18,236
 Oh, bus stops moved, so probably
 that's the reason, long time.
 
-00:16:18.716 --> 00:16:22.226 A:middle
+
+344
+00:16:18,716 --> 00:16:22,226
 Anyway, that's a Transit
 experience in a MapKit.
 
-00:16:22.646 --> 00:16:26.836 A:middle
+
+345
+00:16:22,646 --> 00:16:26,836
 Now I would like to talk
 about how we previously talked
 
-00:16:26.836 --> 00:16:28.266 A:middle
+
+346
+00:16:26,836 --> 00:16:28,266
 about the callout customization.
 
-00:16:28.626 --> 00:16:32.136 A:middle
+
+347
+00:16:28,626 --> 00:16:32,136
 Now let's go and see how
 can we use those callouts
 
-00:16:32.476 --> 00:16:34.966 A:middle
+
+348
+00:16:32,476 --> 00:16:34,966
 in this, our sample app.
 
-00:16:36.376 --> 00:16:36.806 A:middle
+
+349
+00:16:36,376 --> 00:16:36,806
 All right.
 
-00:16:36.806 --> 00:16:39.986 A:middle
+
+350
+00:16:36,806 --> 00:16:39,986
 So, again, we are going to go
 back to our callback method
 
-00:16:39.986 --> 00:16:43.486 A:middle
+
+351
+00:16:39,986 --> 00:16:43,486
 that gets called every single
 time the annotation is tapped.
 
-00:16:44.136 --> 00:16:45.206 A:middle
+
+352
+00:16:44,136 --> 00:16:45,206
 And down here I'm just going
 
-00:16:45.206 --> 00:16:49.376 A:middle
+
+353
+00:16:45,206 --> 00:16:49,376
 to set a detailed callout
 accessory property on this view.
 
-00:16:49.696 --> 00:16:51.646 A:middle
+
+354
+00:16:49,696 --> 00:16:51,646
 For the data that I'm getting
 
-00:16:51.646 --> 00:16:54.946 A:middle
+
+355
+00:16:51,646 --> 00:16:54,946
 for these landmarks I
 have some of the images.
 
-00:16:56.056 --> 00:16:59.336 A:middle
+
+356
+00:16:56,056 --> 00:16:59,336
 So let's set a UIImageView
 in a detailCallout
 
-00:16:59.336 --> 00:17:01.296 A:middle
+
+357
+00:16:59,336 --> 00:17:01,296
 and see how they look
 in our annotation.
 
 
-
-00:16:59.336 --> 00:17:01.296 A:middle
-and see how they look
-in our annotation.
-
-00:17:02.326 --> 00:17:05.246 A:middle
+358
+00:17:02,326 --> 00:17:05,246
 So, here I'm just
 reading my image data,
 
-00:17:05.366 --> 00:17:08.415 A:middle
+
+359
+00:17:05,366 --> 00:17:08,415
 I'm reading my image name
 from a plist that I'm parsing,
 
-00:17:08.856 --> 00:17:10.425 A:middle
+
+360
+00:17:08,856 --> 00:17:10,425
 and then I'm creating a UIImage,
 
-00:17:10.816 --> 00:17:13.266 A:middle
+
+361
+00:17:10,816 --> 00:17:13,266
 and after that I'm creating
 a UIImageView and setting it
 
-00:17:13.266 --> 00:17:14.746 A:middle
+
+362
+00:17:13,266 --> 00:17:14,746
 on a detailCalloutAccessoryView.
 
-00:17:15.656 --> 00:17:16.976 A:middle
+
+363
+00:17:15,656 --> 00:17:16,976
 So let's run this thing.
 
-00:17:17.256 --> 00:17:17.646 A:middle
+
+364
+00:17:17,256 --> 00:17:17,646
 Okay. All right.
 
-00:17:20.976 --> 00:17:25.306 A:middle
+
+365
+00:17:20,976 --> 00:17:25,306
 So I think I have an image
 for Golden Gate Bridge.
 
-00:17:25.306 --> 00:17:26.866 A:middle
+
+366
+00:17:25,306 --> 00:17:26,866
 So let's go and take
 a look at it.
 
-00:17:27.316 --> 00:17:28.246 A:middle
+
+367
+00:17:27,316 --> 00:17:28,246
 So there we go.
 
-00:17:28.246 --> 00:17:30.866 A:middle
+
+368
+00:17:28,246 --> 00:17:30,866
 That's a nice image of
 the Golden Gate Bridge.
 
-00:17:31.066 --> 00:17:32.076 A:middle
+
+369
+00:17:31,066 --> 00:17:32,076
 Let's see what else I have.
 
-00:17:32.266 --> 00:17:34.716 A:middle
+
+370
+00:17:32,266 --> 00:17:34,716
 I have the Ferry
 Building as well.
 
-00:17:35.336 --> 00:17:38.346 A:middle
+
+371
+00:17:35,336 --> 00:17:38,346
 Okay, that's current location.
 
-00:17:39.416 --> 00:17:40.086 A:middle
+
+372
+00:17:39,416 --> 00:17:40,086
 All right.
 
-00:17:40.786 --> 00:17:43.066 A:middle
+
+373
+00:17:40,786 --> 00:17:43,066
 Okay. So, Transamerica
 Pyramid doesn't have a,
 
-00:17:43.066 --> 00:17:46.106 A:middle
+
+374
+00:17:43,066 --> 00:17:46,106
 Transamerica Pyramid
 doesn't have an image.
 
-00:17:46.266 --> 00:17:49.656 A:middle
+
+375
+00:17:46,266 --> 00:17:49,656
 So you can see when we set a
 detail callout accessory view
 
-00:17:49.656 --> 00:17:51.966 A:middle
+
+376
+00:17:49,656 --> 00:17:51,966
 on a callout, a detail
 callout accessory,
 
-00:17:52.286 --> 00:17:54.686 A:middle
+
+377
+00:17:52,286 --> 00:17:54,686
 we will always get
 precedence or a subtitle.
 
-00:17:55.126 --> 00:17:57.856 A:middle
+
+378
+00:17:55,126 --> 00:17:57,856
 For Golden Gate Bridge
 we did add a detail,
 
-00:17:57.886 --> 00:17:58.916 A:middle
+
+379
+00:17:57,886 --> 00:17:58,916
 we did have a subtitle,
 
-00:17:59.296 --> 00:18:02.966 A:middle
+
+380
+00:17:59,296 --> 00:18:02,966
 but as soon as we set a detail
 callout accessory view on it,
 
 
-
-00:17:59.296 --> 00:18:02.966 A:middle
-but as soon as we set a detail
-callout accessory view on it,
-
-00:18:02.966 --> 00:18:04.526 A:middle
+381
+00:18:02,966 --> 00:18:04,526
 it got a precedence
 or a subtitle.
 
-00:18:05.146 --> 00:18:08.166 A:middle
+
+382
+00:18:05,146 --> 00:18:08,166
 So, for some of these other
 landmarks, I don't have images.
 
-00:18:08.206 --> 00:18:09.946 A:middle
+
+383
+00:18:08,206 --> 00:18:09,946
 So, let's add text in there.
 
-00:18:09.946 --> 00:18:14.846 A:middle
+
+384
+00:18:09,946 --> 00:18:14,846
 So, I have also created
 a text view that will --
 
-00:18:15.606 --> 00:18:17.606 A:middle
+
+385
+00:18:15,606 --> 00:18:17,606
 so here I have a
 custom text view
 
-00:18:17.606 --> 00:18:21.156 A:middle
+
+386
+00:18:17,606 --> 00:18:21,156
 that basically I just have set
 some height and weight on it.
 
-00:18:21.676 --> 00:18:24.916 A:middle
+
+387
+00:18:21,676 --> 00:18:24,916
 And that will allow
 me to show the content
 
-00:18:25.526 --> 00:18:28.586 A:middle
+
+388
+00:18:25,526 --> 00:18:28,586
 in our detail callout
 accessory view.
 
-00:18:28.896 --> 00:18:32.466 A:middle
+
+389
+00:18:28,896 --> 00:18:32,466
 Similar to the images, I'm
 reading data from my plist
 
-00:18:32.466 --> 00:18:34.696 A:middle
+
+390
+00:18:32,466 --> 00:18:34,696
 that I have been using
 to plot these landmarks.
 
-00:18:35.236 --> 00:18:37.706 A:middle
+
+391
+00:18:35,236 --> 00:18:37,706
 I just set it that
 detailTextView
 
-00:18:37.706 --> 00:18:39.456 A:middle
+
+392
+00:18:37,706 --> 00:18:39,456
 to be a
 detailCalloutAccessoryView.
 
-00:18:40.686 --> 00:18:40.956 A:middle
+
+393
+00:18:40,686 --> 00:18:40,956
 All right.
 
-00:18:41.006 --> 00:18:43.176 A:middle
+
+394
+00:18:41,006 --> 00:18:43,176
 So I'm quickly going
 to run it again.
 
-00:18:48.186 --> 00:18:49.866 A:middle
+
+395
+00:18:48,186 --> 00:18:49,866
 Okay. All right.
 
-00:18:50.106 --> 00:18:50.736 A:middle
+
+396
+00:18:50,106 --> 00:18:50,736
 So let's see.
 
-00:18:51.566 --> 00:18:54.466 A:middle
+
+397
+00:18:51,566 --> 00:18:54,466
 As you can see now we have
 a nice text view down here
 
-00:18:54.466 --> 00:18:56.096 A:middle
+
+398
+00:18:54,466 --> 00:18:56,096
 in Sutro Tower callout.
 
-00:18:56.716 --> 00:18:57.666 A:middle
+
+399
+00:18:56,716 --> 00:18:57,666
 Let's check on something else.
 
-00:18:58.426 --> 00:19:00.416 A:middle
+
+400
+00:18:58,426 --> 00:19:00,416
 Same thing, for City Hall
 we also have a nice text.
 
 
-
-00:18:58.426 --> 00:19:00.416 A:middle
-Same thing, for City Hall
-we also have a nice text.
-
-00:19:00.776 --> 00:19:05.746 A:middle
+401
+00:19:00,776 --> 00:19:05,746
 So here I have like a one
 callout with a subtitle,
 
-00:19:05.866 --> 00:19:11.116 A:middle
+
+402
+00:19:05,866 --> 00:19:11,116
 one callout with a UIImageView
 and one callout with a TextView.
 
-00:19:11.366 --> 00:19:13.616 A:middle
+
+403
+00:19:11,366 --> 00:19:13,616
 That's all the beauty
 of this API.
 
-00:19:13.616 --> 00:19:18.396 A:middle
+
+404
+00:19:13,616 --> 00:19:18,396
 We are really excited to offer
 it to you and I am damn sure
 
-00:19:18.396 --> 00:19:20.226 A:middle
+
+405
+00:19:18,396 --> 00:19:20,226
 that you guys will come
 up with something amazing.
 
-00:19:21.516 --> 00:19:25.996 A:middle
+
+406
+00:19:21,516 --> 00:19:25,996
 [ Applause ]
 
-00:19:26.496 --> 00:19:29.546 A:middle
+
+407
+00:19:26,496 --> 00:19:29,546
 So what we learn from this demo,
 
-00:19:30.026 --> 00:19:31.976 A:middle
+
+408
+00:19:30,026 --> 00:19:31,976
 we learn how we can
 customize our pin colors,
 
-00:19:32.576 --> 00:19:35.436 A:middle
+
+409
+00:19:32,576 --> 00:19:35,436
 we learn how we can
 customize our callouts.
 
-00:19:35.436 --> 00:19:37.486 A:middle
+
+410
+00:19:35,436 --> 00:19:37,486
 We also learn how to
 request Transit ETAs
 
-00:19:37.926 --> 00:19:41.356 A:middle
+
+411
+00:19:37,926 --> 00:19:41,356
 and we also learn how to bring
 users to a maps application
 
-00:19:41.496 --> 00:19:43.146 A:middle
+
+412
+00:19:41,496 --> 00:19:43,146
 to provide a rich
 transit experience.
 
-00:19:43.876 --> 00:19:44.956 A:middle
+
+413
+00:19:43,876 --> 00:19:44,956
 That's all from my end.
 
-00:19:45.276 --> 00:19:47.736 A:middle
+
+414
+00:19:45,276 --> 00:19:47,736
 To talk about Flyover, I would
 like to call upon Elisabeth.
 
-00:19:48.516 --> 00:19:53.896 A:middle
+
+415
+00:19:48,516 --> 00:19:53,896
 [ Applause ]
 
-00:19:54.396 --> 00:19:54.756 A:middle
-&gt;&gt; ELISABETH LINDKVIST: Okay.
 
-00:19:56.056 --> 00:19:58.966 A:middle
+416
+00:19:54,396 --> 00:19:54,756
+>> ELISABETH LINDKVIST: Okay.
+
+
+417
+00:19:56,056 --> 00:19:58,966
 Right, let's talk about Flyover.
 
-00:19:59.876 --> 00:20:01.376 A:middle
+
+418
+00:19:59,876 --> 00:20:01,376
 My name is Elisabeth Lindkvist,
 
 
-
-00:19:59.876 --> 00:20:01.376 A:middle
-My name is Elisabeth Lindkvist,
-
-00:20:01.376 --> 00:20:03.386 A:middle
+419
+00:20:01,376 --> 00:20:03,386
 and I'm also an engineer
 on the maps team.
 
-00:20:03.646 --> 00:20:04.686 A:middle
+
+420
+00:20:03,646 --> 00:20:04,686
 And these are the things
 
-00:20:04.686 --> 00:20:06.676 A:middle
+
+421
+00:20:04,686 --> 00:20:06,676
 that I will be talking
 to you about today.
 
-00:20:07.266 --> 00:20:09.756 A:middle
+
+422
+00:20:07,266 --> 00:20:09,756
 So, first of all,
 what is Flyover?
 
-00:20:11.286 --> 00:20:13.026 A:middle
+
+423
+00:20:11,286 --> 00:20:13,026
 How will it work in
 your application?
 
-00:20:14.326 --> 00:20:17.416 A:middle
+
+424
+00:20:14,326 --> 00:20:17,416
 How do you set the right
 region and handle the camera
 
-00:20:17.416 --> 00:20:18.686 A:middle
+
+425
+00:20:17,416 --> 00:20:18,686
 when you are using Flyover?
 
-00:20:18.686 --> 00:20:22.986 A:middle
+
+426
+00:20:18,686 --> 00:20:22,986
 And I will also discuss how
 Flyover will work together
 
-00:20:22.986 --> 00:20:24.916 A:middle
+
+427
+00:20:22,986 --> 00:20:24,916
 with some of our
 existing MapKit API.
 
-00:20:26.256 --> 00:20:29.316 A:middle
+
+428
+00:20:26,256 --> 00:20:29,316
 But to start with, what do
 we actually mean by Flyover?
 
-00:20:29.796 --> 00:20:31.936 A:middle
+
+429
+00:20:29,796 --> 00:20:31,936
 For example, this is Flyover.
 
-00:20:32.956 --> 00:20:40.466 A:middle
+
+430
+00:20:32,956 --> 00:20:40,466
 It's photo-realistic 3D models
 of various cities and landmarks.
 
-00:20:41.246 --> 00:20:43.926 A:middle
+
+431
+00:20:41,246 --> 00:20:43,926
 They are available in
 many different places all
 
-00:20:43.926 --> 00:20:44.546 A:middle
+
+432
+00:20:43,926 --> 00:20:44,546
 around the world.
 
-00:20:45.256 --> 00:20:47.956 A:middle
+
+433
+00:20:45,256 --> 00:20:47,956
 And they have been available
 
-00:20:47.956 --> 00:20:51.146 A:middle
+
+434
+00:20:47,956 --> 00:20:51,146
 in the maps application
 since iOS 6.
 
-00:20:52.106 --> 00:20:54.086 A:middle
+
+435
+00:20:52,106 --> 00:20:54,086
 And we are now giving
 you the opportunity
 
-00:20:54.086 --> 00:20:57.466 A:middle
+
+436
+00:20:54,086 --> 00:20:57,466
 to show these interactive
 3D views to your users.
 
-00:20:57.466 --> 00:21:03.106 A:middle
+
+437
+00:20:57,466 --> 00:21:03,106
 As you might have noticed
 in the maps application
 
 
-
-00:20:57.466 --> 00:21:03.106 A:middle
-As you might have noticed
-in the maps application
-
-00:21:03.176 --> 00:21:06.746 A:middle
+438
+00:21:03,176 --> 00:21:06,746
 where satellite imagery is not
 available you will instead see
 
-00:21:06.746 --> 00:21:10.316 A:middle
+
+439
+00:21:06,746 --> 00:21:10,316
 flat satellite imagery
 being displayed on top
 
-00:21:10.356 --> 00:21:13.596 A:middle
+
+440
+00:21:10,356 --> 00:21:13,596
 of a 3D height map which
 represents the terrain.
 
-00:21:14.176 --> 00:21:18.186 A:middle
+
+441
+00:21:14,176 --> 00:21:18,186
 And this will also be
 the case in your apps.
 
-00:21:18.806 --> 00:21:21.886 A:middle
+
+442
+00:21:18,806 --> 00:21:21,886
 Another important aspect
 of Flyover is this:
 
-00:21:22.026 --> 00:21:25.386 A:middle
+
+443
+00:21:22,026 --> 00:21:25,386
 it is being displayed on a globe
 rather than being projected
 
-00:21:25.386 --> 00:21:27.716 A:middle
+
+444
+00:21:25,386 --> 00:21:27,716
 into 2D like our
 other map types are.
 
-00:21:27.716 --> 00:21:30.096 A:middle
+
+445
+00:21:27,716 --> 00:21:30,096
 This one has some implications
 
-00:21:30.096 --> 00:21:32.186 A:middle
+
+446
+00:21:30,096 --> 00:21:32,186
 for how you handle
 your region setting.
 
-00:21:32.956 --> 00:21:35.966 A:middle
+
+447
+00:21:32,956 --> 00:21:35,966
 And this is something that I
 will be returning to shortly.
 
-00:21:37.546 --> 00:21:39.856 A:middle
+
+448
+00:21:37,546 --> 00:21:39,856
 So, what do you need to do
 
-00:21:39.856 --> 00:21:42.016 A:middle
+
+449
+00:21:39,856 --> 00:21:42,016
 to get a Flyover view
 in your application?
 
-00:21:42.756 --> 00:21:45.726 A:middle
+
+450
+00:21:42,756 --> 00:21:45,726
 If you used MapKit before,
 I'm sure you are familiar
 
-00:21:45.726 --> 00:21:48.756 A:middle
+
+451
+00:21:45,726 --> 00:21:48,756
 with MK map type, which
 is the property you set
 
-00:21:48.756 --> 00:21:51.566 A:middle
+
+452
+00:21:48,756 --> 00:21:51,566
 on an MK map view, in
 order to choose which type
 
-00:21:51.566 --> 00:21:52.916 A:middle
+
+453
+00:21:51,566 --> 00:21:52,916
 of data you will be displaying.
 
-00:21:53.766 --> 00:21:56.646 A:middle
+
+454
+00:21:53,766 --> 00:21:56,646
 We have standard,
 which is a regular map.
 
-00:21:57.646 --> 00:22:01.346 A:middle
+
+455
+00:21:57,646 --> 00:22:01,346
 We have satellite, which is
 a top-down satellite view.
 
 
-
-00:21:57.646 --> 00:22:01.346 A:middle
-We have satellite, which is
-a top-down satellite view.
-
-00:22:01.346 --> 00:22:06.276 A:middle
+456
+00:22:01,346 --> 00:22:06,276
 And we have hybrid, which adds
 things like roads and labels
 
-00:22:06.276 --> 00:22:09.486 A:middle
+
+457
+00:22:06,276 --> 00:22:09,486
 and points of interest
 to the satellite view.
 
-00:22:10.856 --> 00:22:13.476 A:middle
+
+458
+00:22:10,856 --> 00:22:13,476
 And we are now introducing
 two new map types,
 
-00:22:14.036 --> 00:22:16.726 A:middle
+
+459
+00:22:14,036 --> 00:22:16,726
 Satellite Flyover
 and Hybrid Flyover.
 
-00:22:17.666 --> 00:22:20.586 A:middle
+
+460
+00:22:17,666 --> 00:22:20,586
 So in order to display
 something like this in your app,
 
-00:22:21.016 --> 00:22:23.616 A:middle
+
+461
+00:22:21,016 --> 00:22:23,616
 what you would do is
 just set the map type
 
-00:22:23.726 --> 00:22:27.016 A:middle
+
+462
+00:22:23,726 --> 00:22:27,016
 of your map view to
 Satellite Flyover.
 
-00:22:28.266 --> 00:22:32.496 A:middle
+
+463
+00:22:28,266 --> 00:22:32,496
 If you want to add things such
 as labels, points of interest,
 
-00:22:32.496 --> 00:22:37.256 A:middle
+
+464
+00:22:32,496 --> 00:22:37,256
 roads, and borders, you would
 instead use the Hybrid Flyover
 
-00:22:38.506 --> 00:22:39.326 A:middle
+
+465
+00:22:38,506 --> 00:22:39,326
 map type.
 
-00:22:39.936 --> 00:22:42.686 A:middle
+
+466
+00:22:39,936 --> 00:22:42,686
 Now, as I mentioned, there are
 some things you really need
 
-00:22:42.686 --> 00:22:44.536 A:middle
+
+467
+00:22:42,686 --> 00:22:44,536
 to consider when using Flyover.
 
-00:22:44.536 --> 00:22:47.286 A:middle
+
+468
+00:22:44,536 --> 00:22:47,286
 One of the most important ones
 is how you set the visible
 
-00:22:47.286 --> 00:22:48.136 A:middle
+
+469
+00:22:47,286 --> 00:22:48,136
 region of your map.
 
-00:22:49.236 --> 00:22:52.236 A:middle
+
+470
+00:22:49,236 --> 00:22:52,236
 You might be familiar with
 the several methods in MapKit
 
-00:22:52.236 --> 00:22:57.466 A:middle
+
+471
+00:22:52,236 --> 00:22:57,466
 that use rectangles such as
 MKCoordinateRegion and MKMapRect
 
-00:22:57.946 --> 00:23:00.406 A:middle
+
+472
+00:22:57,946 --> 00:23:00,406
 in order to set and get the
 visible region of your map.
 
 
-
-00:22:57.946 --> 00:23:00.406 A:middle
-in order to set and get the
-visible region of your map.
-
-00:23:01.136 --> 00:23:03.376 A:middle
+473
+00:23:01,136 --> 00:23:03,376
 However, the visible area
 
-00:23:03.836 --> 00:23:06.616 A:middle
+
+474
+00:23:03,836 --> 00:23:06,616
 of your map view is
 not always a rectangle.
 
-00:23:07.526 --> 00:23:10.486 A:middle
+
+475
+00:23:07,526 --> 00:23:10,486
 In iOS 7 we introduced
 the possibility
 
-00:23:10.486 --> 00:23:12.156 A:middle
+
+476
+00:23:10,486 --> 00:23:12,156
 to view a pitched map view
 
-00:23:12.156 --> 00:23:14.226 A:middle
+
+477
+00:23:12,156 --> 00:23:14,226
 where you are viewing
 the map at an angle.
 
-00:23:14.716 --> 00:23:17.606 A:middle
+
+478
+00:23:14,716 --> 00:23:17,606
 And when you do that,
 
-00:23:17.606 --> 00:23:20.186 A:middle
+
+479
+00:23:17,606 --> 00:23:20,186
 the visible area will not
 actually be a perfect rectangle,
 
-00:23:21.026 --> 00:23:23.526 A:middle
+
+480
+00:23:21,026 --> 00:23:23,526
 and this will also be
 the case in Flyover
 
-00:23:23.526 --> 00:23:26.686 A:middle
+
+481
+00:23:23,526 --> 00:23:26,686
 as you can view pitched
 map views there as well.
 
-00:23:27.996 --> 00:23:30.936 A:middle
+
+482
+00:23:27,996 --> 00:23:30,936
 Now, if we take a look
 at this region and zoom
 
-00:23:30.936 --> 00:23:34.126 A:middle
+
+483
+00:23:30,936 --> 00:23:34,126
 out a bit we can see the actual
 shape of the visible area.
 
-00:23:34.926 --> 00:23:37.116 A:middle
+
+484
+00:23:34,926 --> 00:23:37,116
 And what we do in this case is
 
-00:23:37.116 --> 00:23:39.696 A:middle
+
+485
+00:23:37,116 --> 00:23:39,696
 that we define the
 visible region of this map
 
-00:23:39.866 --> 00:23:43.226 A:middle
+
+486
+00:23:39,866 --> 00:23:43,226
 as the rectangle which is
 enclosing what you are actually
 
-00:23:43.226 --> 00:23:44.026 A:middle
+
+487
+00:23:43,226 --> 00:23:44,026
 seeing on screen.
 
-00:23:44.266 --> 00:23:46.926 A:middle
+
+488
+00:23:44,266 --> 00:23:46,926
 So it will be the blue
 rectangle in this case.
 
-00:23:47.216 --> 00:23:50.996 A:middle
+
+489
+00:23:47,216 --> 00:23:50,996
 And this will work exactly
 in the same way in Flyover.
 
-00:23:51.296 --> 00:23:54.186 A:middle
+
+490
+00:23:51,296 --> 00:23:54,186
 The visible region will be
 defined as the rectangle
 
-00:23:54.186 --> 00:23:56.366 A:middle
+
+491
+00:23:54,186 --> 00:23:56,366
 that is enclosing
 whatever you see on screen.
 
-00:23:58.256 --> 00:24:02.626 A:middle
+
+492
+00:23:58,256 --> 00:24:02,626
 Now, in Flyover, a view does not
 necessarily have to be pitched
 
 
-
-00:23:58.256 --> 00:24:02.626 A:middle
-Now, in Flyover, a view does not
-necessarily have to be pitched
-
-00:24:02.626 --> 00:24:04.286 A:middle
+493
+00:24:02,626 --> 00:24:04,286
 in order to not be rectangular.
 
-00:24:04.286 --> 00:24:07.926 A:middle
+
+494
+00:24:04,286 --> 00:24:07,926
 If you have a region such as
 this, which is fairly large,
 
-00:24:08.146 --> 00:24:11.136 A:middle
+
+495
+00:24:08,146 --> 00:24:11,136
 and you try to set the visible
 region to the blue rectangle
 
-00:24:11.136 --> 00:24:13.386 A:middle
+
+496
+00:24:11,136 --> 00:24:13,386
 in this case you end up
 with something like this.
 
-00:24:14.156 --> 00:24:16.266 A:middle
+
+497
+00:24:14,156 --> 00:24:16,266
 And the point here is
 
-00:24:16.266 --> 00:24:19.616 A:middle
+
+498
+00:24:16,266 --> 00:24:19,616
 that a rectangular
 representation will always be an
 
-00:24:19.616 --> 00:24:22.506 A:middle
+
+499
+00:24:19,616 --> 00:24:22,506
 approximation since Flyover
 is being shown on a globe.
 
-00:24:23.666 --> 00:24:27.566 A:middle
+
+500
+00:24:23,666 --> 00:24:27,566
 And, also, if you have a very
 large region there will be some
 
-00:24:27.566 --> 00:24:29.546 A:middle
+
+501
+00:24:27,566 --> 00:24:29,546
 areas that are not
 actually displayed.
 
-00:24:29.546 --> 00:24:30.676 A:middle
+
+502
+00:24:29,546 --> 00:24:30,676
 So, in this case, parts
 
-00:24:30.676 --> 00:24:33.026 A:middle
+
+503
+00:24:30,676 --> 00:24:33,026
 of the visible region are
 actually behind the globe.
 
-00:24:34.206 --> 00:24:38.996 A:middle
+
+504
+00:24:34,206 --> 00:24:38,996
 So, the recommended way, even
 though there are some cases
 
-00:24:38.996 --> 00:24:41.666 A:middle
+
+505
+00:24:38,996 --> 00:24:41,666
 where rectangular region setting
 works just fine in Flyover
 
-00:24:41.666 --> 00:24:43.896 A:middle
+
+506
+00:24:41,666 --> 00:24:43,896
 and with pitched map
 views, for example,
 
-00:24:43.956 --> 00:24:46.566 A:middle
+
+507
+00:24:43,956 --> 00:24:46,566
 if you have a top-down view
 where if you're very zoomed in,
 
-00:24:47.066 --> 00:24:49.006 A:middle
+
+508
+00:24:47,066 --> 00:24:49,006
 the recommended way to make sure
 
-00:24:49.006 --> 00:24:51.206 A:middle
+
+509
+00:24:49,006 --> 00:24:51,206
 that you are really
 displaying exactly the part
 
-00:24:51.206 --> 00:24:54.196 A:middle
+
+510
+00:24:51,206 --> 00:24:54,196
 of the world you want to
 is to use MKMapCamera.
 
-00:24:55.836 --> 00:25:00.146 A:middle
+
+511
+00:24:55,836 --> 00:25:00,146
 MKMapCamera was also
 introduced in iOS 7 in 2013.
 
 
-
-00:24:55.836 --> 00:25:00.146 A:middle
-MKMapCamera was also
-introduced in iOS 7 in 2013.
-
-00:25:00.416 --> 00:25:03.126 A:middle
+512
+00:25:00,416 --> 00:25:03,126
 And for more detailed
 information about MKMapCamera,
 
-00:25:03.126 --> 00:25:06.076 A:middle
+
+513
+00:25:03,126 --> 00:25:06,076
 and also about region setting
 in general, I really recommend
 
-00:25:06.076 --> 00:25:08.446 A:middle
+
+514
+00:25:06,076 --> 00:25:08,446
 that you check out Putting
 MapKit in Perspective,
 
-00:25:08.446 --> 00:25:10.436 A:middle
+
+515
+00:25:08,446 --> 00:25:10,436
 which is a talk from 2013.
 
-00:25:11.966 --> 00:25:15.626 A:middle
+
+516
+00:25:11,966 --> 00:25:15,626
 But I will briefly recap
 a bit about MKMapCamera.
 
-00:25:16.846 --> 00:25:18.686 A:middle
+
+517
+00:25:16,846 --> 00:25:18,686
 It has four basic properties.
 
-00:25:20.366 --> 00:25:23.326 A:middle
+
+518
+00:25:20,366 --> 00:25:23,326
 The center coordinate, which
 is the position in the world
 
-00:25:23.326 --> 00:25:25.536 A:middle
+
+519
+00:25:23,326 --> 00:25:25,536
 that you want to be shown in
 the middle of your screen.
 
-00:25:26.626 --> 00:25:29.376 A:middle
+
+520
+00:25:26,626 --> 00:25:29,376
 The heading which is the
 direction the camera will be
 
-00:25:29.376 --> 00:25:29.936 A:middle
+
+521
+00:25:29,376 --> 00:25:29,936
 looking in.
 
-00:25:31.066 --> 00:25:33.456 A:middle
+
+522
+00:25:31,066 --> 00:25:33,456
 The pitch, how tilted
 the view is,
 
-00:25:33.676 --> 00:25:37.456 A:middle
+
+523
+00:25:33,676 --> 00:25:37,456
 at what angle you are looking
 at the map, and the altitude,
 
-00:25:37.456 --> 00:25:39.776 A:middle
+
+524
+00:25:37,456 --> 00:25:39,776
 which is the height in
 meters above the map
 
-00:25:39.776 --> 00:25:42.376 A:middle
+
+525
+00:25:39,776 --> 00:25:42,376
 where you want your
 camera to be positioned.
 
-00:25:43.036 --> 00:25:46.706 A:middle
+
+526
+00:25:43,036 --> 00:25:46,706
 There is also a convenience
 initializer for MKMapCamera,
 
-00:25:47.236 --> 00:25:49.486 A:middle
+
+527
+00:25:47,236 --> 00:25:49,486
 which takes the center
 coordinates
 
-00:25:50.176 --> 00:25:52.546 A:middle
+
+528
+00:25:50,176 --> 00:25:52,546
 and the eye coordinates,
 where you want the camera
 
-00:25:52.546 --> 00:25:55.516 A:middle
+
+529
+00:25:52,546 --> 00:25:55,516
 to be positioned,
 and the eye altitude,
 
-00:25:55.516 --> 00:25:57.806 A:middle
+
+530
+00:25:55,516 --> 00:25:57,806
 how high up you want
 the camera to be,
 
-00:25:58.086 --> 00:26:00.046 A:middle
+
+531
+00:25:58,086 --> 00:26:00,046
 and gives you back the
 camera which is looking
 
 
-
-00:25:58.086 --> 00:26:00.046 A:middle
-and gives you back the
-camera which is looking
-
-00:26:00.046 --> 00:26:02.246 A:middle
+532
+00:26:00,046 --> 00:26:02,246
 at that center coordinate
 from the eye coordinate.
 
-00:26:03.456 --> 00:26:07.896 A:middle
+
+533
+00:26:03,456 --> 00:26:07,896
 So, however, in Flyover there
 is terrain and buildings
 
-00:26:07.896 --> 00:26:09.946 A:middle
+
+534
+00:26:07,896 --> 00:26:09,946
 and all other sorts
 of interesting things.
 
-00:26:10.376 --> 00:26:15.176 A:middle
+
+535
+00:26:10,376 --> 00:26:15,176
 And that means that the
 altitude is actually not
 
-00:26:15.226 --> 00:26:18.056 A:middle
+
+536
+00:26:15,226 --> 00:26:18,056
 as straightforward
 as you might think.
 
-00:26:18.056 --> 00:26:20.686 A:middle
+
+537
+00:26:18,056 --> 00:26:20,686
 For example, is it the
 height above the buildings?
 
-00:26:20.686 --> 00:26:21.786 A:middle
+
+538
+00:26:20,686 --> 00:26:21,786
 The height above the terrain?
 
-00:26:21.786 --> 00:26:23.116 A:middle
+
+539
+00:26:21,786 --> 00:26:23,116
 Or some sort of sea level?
 
-00:26:23.116 --> 00:26:26.866 A:middle
+
+540
+00:26:23,116 --> 00:26:26,866
 So instead the distance
 between the center coordinates
 
-00:26:26.926 --> 00:26:29.366 A:middle
+
+541
+00:26:26,926 --> 00:26:29,366
 and the camera is actually
 a much better measure
 
-00:26:29.366 --> 00:26:30.156 A:middle
+
+542
+00:26:29,366 --> 00:26:30,156
 for this case.
 
-00:26:30.496 --> 00:26:33.996 A:middle
+
+543
+00:26:30,496 --> 00:26:33,996
 And this is where we're adding a
 new initializer to MKMapCamera.
 
-00:26:34.516 --> 00:26:37.116 A:middle
+
+544
+00:26:34,516 --> 00:26:37,116
 And let me go through
 quickly what this does.
 
-00:26:38.966 --> 00:26:40.726 A:middle
+
+545
+00:26:38,966 --> 00:26:40,726
 You will start with
 the center coordinates,
 
-00:26:40.726 --> 00:26:42.606 A:middle
+
+546
+00:26:40,726 --> 00:26:42,606
 the position you want to be
 in the middle of the screen.
 
-00:26:42.606 --> 00:26:47.586 A:middle
+
+547
+00:26:42,606 --> 00:26:47,586
 And you will then specify a
 distance in meters, how far away
 
-00:26:47.586 --> 00:26:49.286 A:middle
+
+548
+00:26:47,586 --> 00:26:49,286
 from the center coordinate
 you want the camera
 
-00:26:49.286 --> 00:26:50.136 A:middle
+
+549
+00:26:49,286 --> 00:26:50,136
 to be positioned.
 
-00:26:50.516 --> 00:26:53.126 A:middle
+
+550
+00:26:50,516 --> 00:26:53,126
 And notice how this
 differs from the altitude.
 
-00:26:53.846 --> 00:26:58.466 A:middle
+
+551
+00:26:53,846 --> 00:26:58,466
 You will also specify the pitch,
 how angled you want the camera
 
-00:26:58.466 --> 00:27:00.476 A:middle
+
+552
+00:26:58,466 --> 00:27:00,476
 to be, and the heading,
 
 
-
-00:26:58.466 --> 00:27:00.476 A:middle
-to be, and the heading,
-
-00:27:00.476 --> 00:27:02.146 A:middle
+553
+00:27:00,476 --> 00:27:02,146
 the direction you
 want to be looking in.
 
-00:27:03.186 --> 00:27:05.976 A:middle
+
+554
+00:27:03,186 --> 00:27:05,976
 And using this initializer
 you can get a camera
 
-00:27:05.976 --> 00:27:08.966 A:middle
+
+555
+00:27:05,976 --> 00:27:08,966
 which is looking precisely
 where you want to without having
 
-00:27:08.966 --> 00:27:11.686 A:middle
+
+556
+00:27:08,966 --> 00:27:11,686
 to worry about what sort of
 terrain or buildings happens
 
-00:27:11.686 --> 00:27:12.796 A:middle
+
+557
+00:27:11,686 --> 00:27:12,796
 to be beneath your camera.
 
-00:27:14.386 --> 00:27:17.216 A:middle
+
+558
+00:27:14,386 --> 00:27:17,216
 And I will now give a
 short demo to show some
 
-00:27:17.216 --> 00:27:18.726 A:middle
+
+559
+00:27:17,216 --> 00:27:18,726
 of the cool things you
 can do with Flyover.
 
-00:27:23.356 --> 00:27:26.546 A:middle
+
+560
+00:27:23,356 --> 00:27:26,546
 Okay. So Sumit was showing you
 a tour application earlier.
 
-00:27:27.106 --> 00:27:30.966 A:middle
+
+561
+00:27:27,106 --> 00:27:30,966
 And I have a similar application
 here running on my Mac.
 
-00:27:30.966 --> 00:27:33.556 A:middle
+
+562
+00:27:30,966 --> 00:27:33,556
 You can see the landmarks here.
 
-00:27:35.426 --> 00:27:37.746 A:middle
+
+563
+00:27:35,426 --> 00:27:37,746
 For example here, Cliff House.
 
-00:27:38.676 --> 00:27:41.766 A:middle
+
+564
+00:27:38,676 --> 00:27:41,766
 And as you might remember there
 were some of these locations
 
-00:27:41.766 --> 00:27:44.186 A:middle
+
+565
+00:27:41,766 --> 00:27:44,186
 that we did not actually
 have any images for.
 
-00:27:44.186 --> 00:27:45.746 A:middle
+
+566
+00:27:44,186 --> 00:27:45,746
 And I thought we
 could use Flyover
 
-00:27:45.746 --> 00:27:46.756 A:middle
+
+567
+00:27:45,746 --> 00:27:46,756
 in order to correct that.
 
-00:27:48.236 --> 00:27:50.076 A:middle
+
+568
+00:27:48,236 --> 00:27:50,076
 So what I will be doing is,
 
-00:27:50.076 --> 00:27:52.996 A:middle
+
+569
+00:27:50,076 --> 00:27:52,996
 that I will be adding a
 detail callout accessory views
 
-00:27:52.996 --> 00:27:54.066 A:middle
+
+570
+00:27:52,996 --> 00:27:54,066
 to my callouts here.
 
-00:27:54.686 --> 00:27:57.986 A:middle
+
+571
+00:27:54,686 --> 00:27:57,986
 And I will use the
 MKMap snapshot in order
 
-00:27:57.986 --> 00:28:01.426 A:middle
+
+572
+00:27:57,986 --> 00:28:01,426
 to generate images from
 Flyover, to set as the image
 
 
-
-00:27:57.986 --> 00:28:01.426 A:middle
-to generate images from
-Flyover, to set as the image
-
-00:28:01.426 --> 00:28:04.686 A:middle
+573
+00:28:01,426 --> 00:28:04,686
 of the detail callout
 accessory view.
 
-00:28:04.686 --> 00:28:06.536 A:middle
+
+574
+00:28:04,686 --> 00:28:06,536
 The MKMap snapshot
 is very useful
 
-00:28:06.536 --> 00:28:08.716 A:middle
+
+575
+00:28:06,536 --> 00:28:08,716
 when you only really need
 a static image of a map,
 
-00:28:08.906 --> 00:28:10.626 A:middle
+
+576
+00:28:08,906 --> 00:28:10,626
 when you don't need
 it to be interactive.
 
-00:28:11.876 --> 00:28:14.886 A:middle
+
+577
+00:28:11,876 --> 00:28:14,886
 So I'm going to add a few
 options for the snapshotter,
 
-00:28:14.886 --> 00:28:16.746 A:middle
+
+578
+00:28:14,886 --> 00:28:16,746
 and the most important
 one here being
 
-00:28:16.746 --> 00:28:19.826 A:middle
+
+579
+00:28:16,746 --> 00:28:19,826
 that I'm setting the
 mapType to Satellite Flyover.
 
-00:28:22.366 --> 00:28:25.626 A:middle
+
+580
+00:28:22,366 --> 00:28:25,626
 I will then create an
 MKMapCamera using our new
 
-00:28:25.626 --> 00:28:29.846 A:middle
+
+581
+00:28:25,626 --> 00:28:29,846
 initializer to look at the
 coordinates of the annotation.
 
-00:28:30.756 --> 00:28:32.996 A:middle
+
+582
+00:28:30,756 --> 00:28:32,996
 And I will then use
 these options
 
-00:28:33.226 --> 00:28:35.686 A:middle
+
+583
+00:28:33,226 --> 00:28:35,686
 to create an MKMap snapshotter.
 
-00:28:36.986 --> 00:28:40.566 A:middle
+
+584
+00:28:36,986 --> 00:28:40,566
 I'll start the snapshotter
 and if it completes
 
-00:28:40.566 --> 00:28:43.836 A:middle
+
+585
+00:28:40,566 --> 00:28:43,836
 without any error, I will use
 the resulting image as the image
 
-00:28:43.876 --> 00:28:45.716 A:middle
+
+586
+00:28:43,876 --> 00:28:45,716
 on my detail callout
 accessory view.
 
-00:28:46.246 --> 00:28:49.576 A:middle
+
+587
+00:28:46,246 --> 00:28:49,576
 Let's of course,
 call this function.
 
-00:28:55.046 --> 00:29:02.206 A:middle
+
+588
+00:28:55,046 --> 00:29:02,206
 Okay. Let's take a look
 at what it looks like now.
 
 
-
-00:28:55.046 --> 00:29:02.206 A:middle
-Okay. Let's take a look
-at what it looks like now.
-
-00:29:02.206 --> 00:29:04.216 A:middle
+589
+00:29:02,206 --> 00:29:04,216
 So if I recall correctly,
 Cliff House was one of those
 
-00:29:04.216 --> 00:29:05.366 A:middle
+
+590
+00:29:04,216 --> 00:29:05,366
 that we didn't have
 an image for.
 
-00:29:05.366 --> 00:29:07.796 A:middle
+
+591
+00:29:05,366 --> 00:29:07,796
 And look at that, now we do.
 
-00:29:08.516 --> 00:29:16.816 A:middle
+
+592
+00:29:08,516 --> 00:29:16,816
 [ Applause ]
 
-00:29:17.316 --> 00:29:18.056 A:middle
-&gt;&gt; ELISABETH LINDKVIST:
+
+593
+00:29:17,316 --> 00:29:18,056
+>> ELISABETH LINDKVIST:
 And yeah,
 
-00:29:18.166 --> 00:29:19.586 A:middle
+
+594
+00:29:18,166 --> 00:29:19,586
 I think we have a
 few other ones here.
 
-00:29:19.616 --> 00:29:21.166 A:middle
+
+595
+00:29:19,616 --> 00:29:21,166
 Like City Hall, for example.
 
-00:29:21.576 --> 00:29:23.736 A:middle
+
+596
+00:29:21,576 --> 00:29:23,736
 Now, that's was pretty
 cool, but Flyover views are
 
-00:29:23.776 --> 00:29:25.276 A:middle
+
+597
+00:29:23,776 --> 00:29:25,276
 of course also interactive,
 
-00:29:25.776 --> 00:29:28.656 A:middle
+
+598
+00:29:25,776 --> 00:29:28,656
 so I'm thinking we can add a
 little animation to this view.
 
-00:29:29.646 --> 00:29:31.436 A:middle
+
+599
+00:29:29,646 --> 00:29:31,436
 And I created a new
 ViewController
 
-00:29:31.436 --> 00:29:35.536 A:middle
+
+600
+00:29:31,436 --> 00:29:35,536
 which doesn't really do much
 yet but it has an MKMapView.
 
-00:29:37.036 --> 00:29:41.616 A:middle
+
+601
+00:29:37,036 --> 00:29:41,616
 And I will add some constants
 that I think will be useful.
 
-00:29:42.456 --> 00:29:44.966 A:middle
+
+602
+00:29:42,456 --> 00:29:44,966
 And then I will set
 up the map view.
 
-00:29:49.446 --> 00:29:52.606 A:middle
+
+603
+00:29:49,446 --> 00:29:52,606
 And so as we can note here
 I'm also setting my map type
 
-00:29:52.606 --> 00:29:53.696 A:middle
+
+604
+00:29:52,606 --> 00:29:53,696
 to Satellite Flyover.
 
-00:29:54.596 --> 00:29:57.446 A:middle
+
+605
+00:29:54,596 --> 00:29:57,446
 I'm hiding the compass
 and the zoom controls
 
-00:29:57.556 --> 00:29:59.576 A:middle
+
+606
+00:29:57,556 --> 00:29:59,576
 that are visible in OS X.
 
 
-
-00:30:00.606 --> 00:30:04.816 A:middle
+607
+00:30:00,606 --> 00:30:04,816
 I'm also creating an MKMapCamera
 which initially looks
 
-00:30:04.816 --> 00:30:06.366 A:middle
+
+608
+00:30:04,816 --> 00:30:06,366
 at the coordinates
 of the landmark.
 
-00:30:07.846 --> 00:30:09.516 A:middle
+
+609
+00:30:07,846 --> 00:30:09,516
 And that's about all
 the setup I need.
 
-00:30:10.786 --> 00:30:13.776 A:middle
+
+610
+00:30:10,786 --> 00:30:13,776
 Then I'm going to
 create a couple
 
-00:30:13.776 --> 00:30:15.716 A:middle
+
+611
+00:30:13,776 --> 00:30:15,716
 of additionally MKMapCameras.
 
-00:30:17.136 --> 00:30:20.266 A:middle
+
+612
+00:30:17,136 --> 00:30:20,266
 First of all I have one
 which is a bit tilted down,
 
-00:30:20.766 --> 00:30:21.626 A:middle
+
+613
+00:30:20,766 --> 00:30:21,626
 my pitched camera.
 
-00:30:22.396 --> 00:30:24.666 A:middle
+
+614
+00:30:22,396 --> 00:30:24,666
 And I'm also adding
 a rotation here.
 
-00:30:24.666 --> 00:30:26.716 A:middle
+
+615
+00:30:24,666 --> 00:30:26,716
 So it will do a little
 spin around.
 
-00:30:27.486 --> 00:30:30.976 A:middle
+
+616
+00:30:27,486 --> 00:30:30,976
 And as MKMapCamera is
 an animatable property
 
-00:30:30.976 --> 00:30:34.066 A:middle
+
+617
+00:30:30,976 --> 00:30:34,066
 in MKMapView, I will do a
 little animation in order
 
-00:30:34.066 --> 00:30:35.826 A:middle
+
+618
+00:30:34,066 --> 00:30:35,826
 to switch between these.
 
-00:30:37.316 --> 00:30:41.116 A:middle
+
+619
+00:30:37,316 --> 00:30:41,116
 So here I am adding first
 a little short animation
 
-00:30:41.116 --> 00:30:44.436 A:middle
+
+620
+00:30:41,116 --> 00:30:44,436
 which will set the camera
 to my pitched camera,
 
-00:30:44.816 --> 00:30:46.676 A:middle
+
+621
+00:30:44,816 --> 00:30:46,676
 and we will tilt
 the view down a bit,
 
-00:30:47.206 --> 00:30:49.946 A:middle
+
+622
+00:30:47,206 --> 00:30:49,946
 and I am then adding a
 little longer animation
 
-00:30:49.946 --> 00:30:51.766 A:middle
+
+623
+00:30:49,946 --> 00:30:51,766
 which will do a little
 spin around.
 
-00:30:52.456 --> 00:30:57.696 A:middle
+
+624
+00:30:52,456 --> 00:30:57,696
 In my main View Controller
 I have added a little right
 
-00:30:58.076 --> 00:30:59.856 A:middle
+
+625
+00:30:58,076 --> 00:30:59,856
 callout accessory view here
 
 
-
-00:31:00.086 --> 00:31:02.736 A:middle
+626
+00:31:00,086 --> 00:31:02,736
 which will open my
 new View Controller.
 
-00:31:04.186 --> 00:31:06.456 A:middle
+
+627
+00:31:04,186 --> 00:31:06,456
 So let's add that
 button as well.
 
-00:31:07.516 --> 00:31:17.806 A:middle
+
+628
+00:31:07,516 --> 00:31:17,806
 [ Silence ]
 
-00:31:18.306 --> 00:31:21.256 A:middle
+
+629
+00:31:18,306 --> 00:31:21,256
 Okay. Let's take another
 look at Cliff House.
 
-00:31:21.466 --> 00:31:21.786 A:middle
+
+630
+00:31:21,466 --> 00:31:21,786
 There we go.
 
-00:31:21.786 --> 00:31:26.966 A:middle
+
+631
+00:31:21,786 --> 00:31:26,966
 And I have my little button
 here, and we are tilting down.
 
-00:31:27.796 --> 00:31:29.786 A:middle
+
+632
+00:31:27,796 --> 00:31:29,786
 And spinning around.
 
-00:31:32.516 --> 00:31:41.836 A:middle
+
+633
+00:31:32,516 --> 00:31:41,836
 [ Applause ]
 
-00:31:42.336 --> 00:31:43.716 A:middle
+
+634
+00:31:42,336 --> 00:31:43,716
 This was fun.
 
-00:31:43.796 --> 00:31:45.536 A:middle
+
+635
+00:31:43,796 --> 00:31:45,536
 We'll just look at
 this one, too,
 
-00:31:45.536 --> 00:31:46.706 A:middle
+
+636
+00:31:45,536 --> 00:31:46,706
 because I think it
 looks really cool.
 
-00:31:49.806 --> 00:31:50.336 A:middle
+
+637
+00:31:49,806 --> 00:31:50,336
 There we go.
 
-00:31:50.456 --> 00:31:51.646 A:middle
+
+638
+00:31:50,456 --> 00:31:51,646
 Transamerica Pyramid, too.
 
-00:31:52.516 --> 00:31:59.486 A:middle
+
+639
+00:31:52,516 --> 00:31:59,486
 [ Applause ]
 
-00:31:59.986 --> 00:32:01.646 A:middle
+
+640
+00:31:59,986 --> 00:32:01,646
 Okay. So now we have
 seen some of the things
 
 
-
-00:31:59.986 --> 00:32:01.646 A:middle
-Okay. So now we have
-seen some of the things
-
-00:32:01.646 --> 00:32:03.096 A:middle
+641
+00:32:01,646 --> 00:32:03,096
 that you can do with Flyover.
 
-00:32:03.356 --> 00:32:05.056 A:middle
+
+642
+00:32:03,356 --> 00:32:05,056
 So let's get back
 to the presentation.
 
-00:32:05.946 --> 00:32:08.536 A:middle
+
+643
+00:32:05,946 --> 00:32:08,536
 As I said at the beginning
 there are also some parts
 
-00:32:08.616 --> 00:32:11.646 A:middle
+
+644
+00:32:08,616 --> 00:32:11,646
 of the existing MapKit API that
 I would like to talk about,
 
-00:32:11.646 --> 00:32:13.446 A:middle
+
+645
+00:32:11,646 --> 00:32:13,446
 how they would work
 together with Flyover.
 
-00:32:14.546 --> 00:32:16.676 A:middle
+
+646
+00:32:14,546 --> 00:32:16,676
 And I'll start with
 MK annotations.
 
-00:32:17.076 --> 00:32:21.236 A:middle
+
+647
+00:32:17,076 --> 00:32:21,236
 MK annotations are used to
 annotate a single coordinate
 
-00:32:21.236 --> 00:32:24.086 A:middle
+
+648
+00:32:21,236 --> 00:32:24,086
 of the map and the most
 common use case is the pins
 
-00:32:24.086 --> 00:32:25.446 A:middle
+
+649
+00:32:24,086 --> 00:32:25,446
 that we have been
 working with today.
 
-00:32:26.486 --> 00:32:29.936 A:middle
+
+650
+00:32:26,486 --> 00:32:29,936
 If you are showing buildings
 on the standard map type,
 
-00:32:30.246 --> 00:32:33.516 A:middle
+
+651
+00:32:30,246 --> 00:32:33,516
 annotations will be
 placed on top of those.
 
-00:32:34.456 --> 00:32:36.326 A:middle
+
+652
+00:32:34,456 --> 00:32:36,326
 And this will also be the case
 
-00:32:36.326 --> 00:32:38.236 A:middle
+
+653
+00:32:36,326 --> 00:32:38,236
 when you are using
 the Flyover map types.
 
-00:32:38.716 --> 00:32:42.456 A:middle
+
+654
+00:32:38,716 --> 00:32:42,456
 Annotations will be placed on
 top of any buildings, trees,
 
-00:32:43.176 --> 00:32:45.586 A:middle
+
+655
+00:32:43,176 --> 00:32:45,586
 large boats, statues,
 whatever you may find
 
-00:32:45.586 --> 00:32:46.936 A:middle
+
+656
+00:32:45,586 --> 00:32:46,936
 when you are exploring Flyover.
 
-00:32:48.366 --> 00:32:50.946 A:middle
+
+657
+00:32:48,366 --> 00:32:50,946
 And next, MKOverlays.
 
-00:32:51.566 --> 00:32:54.876 A:middle
+
+658
+00:32:51,566 --> 00:32:54,876
 Overlays are used to highlight
 areas of the map rather
 
-00:32:54.876 --> 00:32:56.476 A:middle
+
+659
+00:32:54,876 --> 00:32:56,476
 than just a single coordinate.
 
-00:32:57.346 --> 00:33:00.766 A:middle
+
+660
+00:32:57,346 --> 00:33:00,766
 And if you are showing
 buildings on a 3D map
 
 
-
-00:32:57.346 --> 00:33:00.766 A:middle
-And if you are showing
-buildings on a 3D map
-
-00:33:00.916 --> 00:33:04.616 A:middle
+661
+00:33:00,916 --> 00:33:04,616
 in the standard map
 type, you will notice
 
-00:33:04.616 --> 00:33:07.186 A:middle
+
+662
+00:33:04,616 --> 00:33:07,186
 that overlays are being
 occluded by the buildings.
 
-00:33:08.176 --> 00:33:11.196 A:middle
+
+663
+00:33:08,176 --> 00:33:11,196
 This will work precisely
 in the same way in Flyover.
 
-00:33:11.606 --> 00:33:13.676 A:middle
+
+664
+00:33:11,606 --> 00:33:13,676
 Any overlays you
 have will be occluded
 
-00:33:13.676 --> 00:33:15.856 A:middle
+
+665
+00:33:13,676 --> 00:33:15,856
 by Flyover buildings and trees.
 
-00:33:16.956 --> 00:33:18.036 A:middle
+
+666
+00:33:16,956 --> 00:33:18,036
 Something like that.
 
-00:33:21.546 --> 00:33:25.336 A:middle
+
+667
+00:33:21,546 --> 00:33:25,336
 However, overlays will be
 drawn on top of the terrain
 
-00:33:25.336 --> 00:33:27.456 A:middle
+
+668
+00:33:25,336 --> 00:33:27,456
 so that they will
 follow the ground.
 
-00:33:28.696 --> 00:33:30.196 A:middle
+
+669
+00:33:28,696 --> 00:33:30,196
 Something like that.
 
-00:33:30.716 --> 00:33:33.866 A:middle
+
+670
+00:33:30,716 --> 00:33:33,866
 So I think that's about
 everything you need to know
 
-00:33:33.866 --> 00:33:37.026 A:middle
+
+671
+00:33:33,866 --> 00:33:37,026
 in order to get started with
 using Flyover in your apps
 
-00:33:37.136 --> 00:33:41.686 A:middle
+
+672
+00:33:37,136 --> 00:33:41,686
 and I can't wait to see what
 you will be doing with it.
 
-00:33:41.686 --> 00:33:43.936 A:middle
+
+673
+00:33:41,686 --> 00:33:43,936
 To summarize a bit what we
 have been talking about today,
 
-00:33:43.996 --> 00:33:48.016 A:middle
+
+674
+00:33:43,996 --> 00:33:48,016
 we have added some new ways
 for you to customize your pins,
 
-00:33:48.016 --> 00:33:51.156 A:middle
+
+675
+00:33:48,016 --> 00:33:51,156
 your callouts, and the way you
 display your map with traffic,
 
-00:33:51.156 --> 00:33:52.286 A:middle
+
+676
+00:33:51,156 --> 00:33:52,286
 and compass, and scale.
 
-00:33:53.526 --> 00:33:57.716 A:middle
+
+677
+00:33:53,526 --> 00:33:57,716
 We've added Transit ETA requests
 and ways for you to launch
 
-00:33:57.716 --> 00:33:59.946 A:middle
+
+678
+00:33:57,716 --> 00:33:59,946
 into the maps apps to
 show Transit directions.
 
 
-
-00:34:01.006 --> 00:34:03.396 A:middle
+679
+00:34:01,006 --> 00:34:03,396
 And we've also added
 the Satellite Flyover
 
-00:34:03.446 --> 00:34:05.176 A:middle
+
+680
+00:34:03,446 --> 00:34:05,176
 and Hybrid Flyover map types
 
-00:34:05.206 --> 00:34:07.716 A:middle
+
+681
+00:34:05,206 --> 00:34:07,716
 so that you can show
 photo-realistic 3D models
 
-00:34:07.716 --> 00:34:10.306 A:middle
+
+682
+00:34:07,716 --> 00:34:10,306
 and satellite imagery
 on terrain in your apps.
 
-00:34:10.956 --> 00:34:13.596 A:middle
+
+683
+00:34:10,956 --> 00:34:13,596
 For more information,
 please take a look
 
-00:34:13.596 --> 00:34:16.536 A:middle
+
+684
+00:34:13,596 --> 00:34:16,536
 at the MapKit documentation
 and the Developer Forums.
 
-00:34:17.766 --> 00:34:18.766 A:middle
+
+685
+00:34:17,766 --> 00:34:18,766
 Thank you so much for coming.
 
-00:34:19.016 --> 00:34:21.000 A:middle
+
+686
+00:34:19,016 --> 00:34:21,000
 [ Applause ]
 

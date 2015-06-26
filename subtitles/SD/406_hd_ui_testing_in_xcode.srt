@@ -1,3650 +1,5194 @@
+1
+00:00:28,136 --> 00:00:28,656
+>> WIL TURNER: Good morning.
 
-00:00:28.136 --> 00:00:28.656 A:middle
-&gt;&gt; WIL TURNER: Good morning.
 
-00:00:29.286 --> 00:00:32.356 A:middle
+2
+00:00:29,286 --> 00:00:32,356
 And welcome to UI
 testing in Xcode.
 
-00:00:33.146 --> 00:00:34.046 A:middle
+
+3
+00:00:33,146 --> 00:00:34,046
 My name is Wil Turner.
 
-00:00:34.636 --> 00:00:35.976 A:middle
+
+4
+00:00:34,636 --> 00:00:35,976
 With me is Brooke Callahan.
 
-00:00:36.716 --> 00:00:39.626 A:middle
+
+5
+00:00:36,716 --> 00:00:39,626
 We both work on the
 Xcode developer tools.
 
-00:00:40.536 --> 00:00:44.466 A:middle
+
+6
+00:00:40,536 --> 00:00:44,466
 And I am extremely excited
 today because we are sharing
 
-00:00:44.466 --> 00:00:48.506 A:middle
+
+7
+00:00:44,466 --> 00:00:48,506
 with you a huge expansion
 of the testing technology
 
-00:00:48.506 --> 00:00:50.166 A:middle
+
+8
+00:00:48,506 --> 00:00:50,166
 in the Xcode developer tools.
 
-00:00:51.316 --> 00:00:52.726 A:middle
+
+9
+00:00:51,316 --> 00:00:52,726
 That is UI testing.
 
-00:00:53.196 --> 00:00:57.986 A:middle
+
+10
+00:00:53,196 --> 00:00:57,986
 With UI testing you can find
 user interface elements,
 
-00:00:58.546 --> 00:01:03.086 A:middle
+
+11
+00:00:58,546 --> 00:01:03,086
 interact with them, and validate
 the UI properties in state.
 
 
-
-00:00:58.546 --> 00:01:03.086 A:middle
-interact with them, and validate
-the UI properties in state.
-
-00:01:04.256 --> 00:01:07.756 A:middle
+12
+00:01:04,256 --> 00:01:07,756
 Along with UI testing, we've
 introduced UI recording
 
-00:01:07.896 --> 00:01:10.796 A:middle
+
+13
+00:01:07,896 --> 00:01:10,796
 which will allow you
 to really rapidly set
 
-00:01:10.796 --> 00:01:12.996 A:middle
+
+14
+00:01:10,796 --> 00:01:12,996
 up UI testing for your projects.
 
-00:01:14.256 --> 00:01:17.806 A:middle
+
+15
+00:01:14,256 --> 00:01:17,806
 Finally, we've updated
 the test reports in Xcode,
 
-00:01:17.806 --> 00:01:21.516 A:middle
+
+16
+00:01:17,806 --> 00:01:21,516
 which show the pass and fail and
 results of your test outcomes,
 
-00:01:21.646 --> 00:01:24.466 A:middle
+
+17
+00:01:21,646 --> 00:01:24,466
 to accommodate new data
 we have with UI testing.
 
-00:01:26.166 --> 00:01:29.106 A:middle
+
+18
+00:01:26,166 --> 00:01:29,106
 So I want to talk about
 the core technologies
 
-00:01:29.386 --> 00:01:31.566 A:middle
+
+19
+00:01:29,386 --> 00:01:31,566
 for UI testing, the
 first is XCTest.
 
-00:01:32.566 --> 00:01:34.616 A:middle
+
+20
+00:01:32,566 --> 00:01:34,616
 The second is accessibility.
 
-00:01:35.766 --> 00:01:38.606 A:middle
+
+21
+00:01:35,766 --> 00:01:38,606
 So XCTest is Xcode's
 testing framework.
 
-00:01:38.926 --> 00:01:42.506 A:middle
+
+22
+00:01:38,926 --> 00:01:42,506
 In it, you create subclasses
 for your test cases,
 
-00:01:42.856 --> 00:01:46.956 A:middle
+
+23
+00:01:42,856 --> 00:01:46,956
 you implement test methods, and
 you use assertions to validate
 
-00:01:47.036 --> 00:01:49.356 A:middle
+
+24
+00:01:47,036 --> 00:01:49,356
 that your expected
 outcomes are holding true.
 
-00:01:50.676 --> 00:01:55.056 A:middle
+
+25
+00:01:50,676 --> 00:01:55,056
 XCtest is integrated with Xcode,
 which means you get everything
 
-00:01:55.056 --> 00:01:58.536 A:middle
+
+26
+00:01:55,056 --> 00:01:58,536
 from the ID in terms of
 code completion, debugging,
 
-00:01:58.536 --> 00:02:01.216 A:middle
+
+27
+00:01:58,536 --> 00:02:01,216
 and the ability to run
 your tests directly
 
 
-
-00:01:58.536 --> 00:02:01.216 A:middle
-and the ability to run
-your tests directly
-
-00:02:01.306 --> 00:02:04.356 A:middle
+28
+00:02:01,306 --> 00:02:04,356
 from your source code, and
 see the results right there.
 
-00:02:05.436 --> 00:02:08.656 A:middle
+
+29
+00:02:05,436 --> 00:02:08,656
 You also get continuous
 integration via Xcode Server
 
-00:02:08.656 --> 00:02:09.576 A:middle
+
+30
+00:02:08,656 --> 00:02:09,576
 and Xcodebuild.
 
-00:02:10.856 --> 00:02:14.806 A:middle
+
+31
+00:02:10,856 --> 00:02:14,806
 Finally, XCTest supports
 both Swift and Objective-C,
 
-00:02:14.906 --> 00:02:16.966 A:middle
+
+32
+00:02:14,906 --> 00:02:16,966
 so you can choose the
 native coding language
 
-00:02:17.026 --> 00:02:18.786 A:middle
+
+33
+00:02:17,026 --> 00:02:18,786
 that you're most
 comfortable with.
 
-00:02:20.116 --> 00:02:24.196 A:middle
+
+34
+00:02:20,116 --> 00:02:24,196
 XCTest was introduced in Xcode
 5 as a unit testing framework.
 
-00:02:24.376 --> 00:02:28.716 A:middle
+
+35
+00:02:24,376 --> 00:02:28,716
 In Xcode 6, we expanded it to
 support performance testing.
 
-00:02:29.246 --> 00:02:31.776 A:middle
+
+36
+00:02:29,246 --> 00:02:31,776
 This allows you to catch
 regressions in your code,
 
-00:02:31.976 --> 00:02:33.236 A:middle
+
+37
+00:02:31,976 --> 00:02:33,236
 and ensure that it continues
 
-00:02:33.236 --> 00:02:36.306 A:middle
+
+38
+00:02:33,236 --> 00:02:36,306
 to perform optimally,
 release to release.
 
-00:02:37.106 --> 00:02:40.886 A:middle
+
+39
+00:02:37,106 --> 00:02:40,886
 Now in Xcode 7, we've introduced
 UI testing which you can use
 
-00:02:40.886 --> 00:02:43.086 A:middle
+
+40
+00:02:40,886 --> 00:02:43,086
 for both correctness
 and performance testing.
 
-00:02:44.596 --> 00:02:45.366 A:middle
+
+41
+00:02:44,596 --> 00:02:45,366
 So that's XCTest.
 
-00:02:46.016 --> 00:02:47.676 A:middle
+
+42
+00:02:46,016 --> 00:02:47,676
 Now let's take a look
 at Accessibility.
 
-00:02:48.576 --> 00:02:51.456 A:middle
+
+43
+00:02:48,576 --> 00:02:51,456
 Accessibility is the
 technology on our platforms,
 
-00:02:51.666 --> 00:02:54.786 A:middle
+
+44
+00:02:51,666 --> 00:02:54,786
 that gives disabled people
 the same great experience
 
-00:02:54.786 --> 00:02:56.716 A:middle
+
+45
+00:02:54,786 --> 00:02:56,716
 on our devices and
 with our applications
 
-00:02:57.056 --> 00:02:58.416 A:middle
+
+46
+00:02:57,056 --> 00:02:58,416
 that all other users receive.
 
-00:02:59.116 --> 00:03:02.336 A:middle
+
+47
+00:02:59,116 --> 00:03:02,336
 To make Accessibility
 work, it offers a rich set
 
 
-
-00:02:59.116 --> 00:03:02.336 A:middle
-To make Accessibility
-work, it offers a rich set
-
-00:03:02.336 --> 00:03:05.966 A:middle
+48
+00:03:02,336 --> 00:03:05,966
 of semantic data about the UI
 that technologies like Voice
 
-00:03:05.966 --> 00:03:08.976 A:middle
+
+49
+00:03:05,966 --> 00:03:08,976
 Over can use to guide users
 through the application.
 
-00:03:09.676 --> 00:03:13.406 A:middle
+
+50
+00:03:09,676 --> 00:03:13,406
 UI testing uses that, and
 Accessibility is integrated
 
-00:03:13.406 --> 00:03:16.536 A:middle
+
+51
+00:03:13,406 --> 00:03:16,536
 with the UI kit, and app kit,
 so, when you use controls
 
-00:03:16.536 --> 00:03:19.516 A:middle
+
+52
+00:03:16,536 --> 00:03:19,516
 from those frameworks, you get
 a lot of accessibility support
 
-00:03:19.786 --> 00:03:21.336 A:middle
+
+53
+00:03:19,786 --> 00:03:21,336
 for free, right out of the box.
 
-00:03:22.306 --> 00:03:24.206 A:middle
+
+54
+00:03:22,306 --> 00:03:24,206
 It also provides
 APIs that allow you
 
-00:03:24.206 --> 00:03:27.256 A:middle
+
+55
+00:03:24,206 --> 00:03:27,256
 to fine tune the accessibility
 data that is exposed.
 
-00:03:28.646 --> 00:03:31.016 A:middle
+
+56
+00:03:28,646 --> 00:03:31,016
 The key about this is
 that with UI testing,
 
-00:03:31.176 --> 00:03:32.486 A:middle
+
+57
+00:03:31,176 --> 00:03:32,486
 your tests will interact
 
-00:03:32.926 --> 00:03:34.956 A:middle
+
+58
+00:03:32,926 --> 00:03:34,956
 with the application
 just the way a user does.
 
-00:03:36.636 --> 00:03:38.496 A:middle
+
+59
+00:03:36,636 --> 00:03:38,496
 UI testing has a
 few requirements
 
-00:03:38.646 --> 00:03:39.876 A:middle
+
+60
+00:03:38,646 --> 00:03:39,876
 that you should understand.
 
-00:03:39.946 --> 00:03:44.236 A:middle
+
+61
+00:03:39,946 --> 00:03:44,236
 The first is it depends
 on new features in the OS.
 
-00:03:44.236 --> 00:03:48.856 A:middle
+
+62
+00:03:44,236 --> 00:03:48,856
 For iOS you need iOS 9 and
 for OS X you need OS 10.11.
 
-00:03:50.746 --> 00:03:52.426 A:middle
+
+63
+00:03:50,746 --> 00:03:52,426
 UI testing protects
 your privacy.
 
-00:03:52.856 --> 00:03:57.126 A:middle
+
+64
+00:03:52,856 --> 00:03:57,126
 And to do so it means your
 iOS devices need to be enabled
 
-00:03:57.126 --> 00:04:02.546 A:middle
+
+65
+00:03:57,126 --> 00:04:02,546
 for development and connected
 to a trusted host running Xcode.
 
 
-
-00:03:57.126 --> 00:04:02.546 A:middle
-for development and connected
-to a trusted host running Xcode.
-
-00:04:03.496 --> 00:04:05.746 A:middle
+66
+00:04:03,496 --> 00:04:05,746
 On OS X you'll need
 to grant permission
 
-00:04:05.746 --> 00:04:09.066 A:middle
+
+67
+00:04:05,746 --> 00:04:09,066
 to a special Xcode helper app,
 and you will be prompted to do
 
-00:04:09.066 --> 00:04:12.996 A:middle
+
+68
+00:04:09,066 --> 00:04:12,996
 so the first time
 you run UI tests.
 
-00:04:13.246 --> 00:04:15.946 A:middle
+
+69
+00:04:13,246 --> 00:04:15,946
 Let's take a look at what
 you need to get started
 
-00:04:16.216 --> 00:04:17.486 A:middle
+
+70
+00:04:16,216 --> 00:04:17,486
 with UI test in your project.
 
-00:04:18.536 --> 00:04:20.826 A:middle
+
+71
+00:04:18,536 --> 00:04:20,826
 First of all there's a
 new Xcode target type.
 
-00:04:21.226 --> 00:04:24.596 A:middle
+
+72
+00:04:21,226 --> 00:04:24,596
 Traditionally, unit tests were
 a specific target type in Xcode,
 
-00:04:24.916 --> 00:04:27.166 A:middle
+
+73
+00:04:24,916 --> 00:04:27,166
 and now UI tests are
 target type as well.
 
-00:04:28.096 --> 00:04:30.876 A:middle
+
+74
+00:04:28,096 --> 00:04:30,876
 We've also introduced a
 large set of set of new APIs
 
-00:04:31.066 --> 00:04:35.486 A:middle
+
+75
+00:04:31,066 --> 00:04:35,486
 for UI test, and of
 course UI recording,
 
-00:04:35.646 --> 00:04:37.936 A:middle
+
+76
+00:04:35,646 --> 00:04:37,936
 which will really get
 you started quickly.
 
-00:04:38.506 --> 00:04:43.856 A:middle
+
+77
+00:04:38,506 --> 00:04:43,856
 So the Xcode testing targets
 support the special requirements
 
-00:04:43.966 --> 00:04:45.016 A:middle
+
+78
+00:04:43,966 --> 00:04:45,016
 that UI tests have.
 
-00:04:45.416 --> 00:04:47.726 A:middle
+
+79
+00:04:45,416 --> 00:04:47,726
 This includes executing
 in a separate process
 
-00:04:47.726 --> 00:04:49.296 A:middle
+
+80
+00:04:47,726 --> 00:04:49,296
 from your application
 that you are testing.
 
-00:04:49.296 --> 00:04:52.616 A:middle
+
+81
+00:04:49,296 --> 00:04:52,616
 And it also handles the
 permission to use Accessibility
 
-00:04:52.616 --> 00:04:53.736 A:middle
+
+82
+00:04:52,616 --> 00:04:53,736
 in the privacy protection.
 
-00:04:55.376 --> 00:04:59.346 A:middle
+
+83
+00:04:55,376 --> 00:04:59,346
 These targets have new templates
 for both Cocoa and Cocoa Touch
 
-00:04:59.896 --> 00:05:01.916 A:middle
+
+84
+00:04:59,896 --> 00:05:01,916
 and the assistant for
 these will set everything
 
 
-
-00:04:59.896 --> 00:05:01.916 A:middle
-and the assistant for
-these will set everything
-
-00:05:01.916 --> 00:05:04.156 A:middle
+85
+00:05:01,916 --> 00:05:04,156
 up the way you need
 it to get started.
 
-00:05:05.116 --> 00:05:08.196 A:middle
+
+86
+00:05:05,116 --> 00:05:08,196
 There's a target to be tested
 setting for UI test bundles
 
-00:05:08.236 --> 00:05:10.796 A:middle
+
+87
+00:05:08,236 --> 00:05:10,796
 that identifies the application
 that you are testing.
 
-00:05:11.446 --> 00:05:16.486 A:middle
+
+88
+00:05:11,446 --> 00:05:16,486
 In the new APIs there
 are three key classes.
 
-00:05:16.946 --> 00:05:18.376 A:middle
+
+89
+00:05:16,946 --> 00:05:18,376
 The first is applications.
 
-00:05:19.556 --> 00:05:20.956 A:middle
+
+90
+00:05:19,556 --> 00:05:20,956
 The second is elements.
 
-00:05:21.106 --> 00:05:23.386 A:middle
+
+91
+00:05:21,106 --> 00:05:23,386
 And the third is element query.
 
-00:05:23.906 --> 00:05:25.976 A:middle
+
+92
+00:05:23,906 --> 00:05:25,976
 We will take a deep dive
 
-00:05:25.976 --> 00:05:28.756 A:middle
+
+93
+00:05:25,976 --> 00:05:28,756
 into these APIs a little bit
 later in the presentation.
 
-00:05:30.356 --> 00:05:32.636 A:middle
+
+94
+00:05:30,356 --> 00:05:32,636
 UI Recording lets you interact
 
-00:05:32.636 --> 00:05:34.886 A:middle
+
+95
+00:05:32,636 --> 00:05:34,886
 with your application
 hands-on your device,
 
-00:05:34.886 --> 00:05:38.346 A:middle
+
+96
+00:05:34,886 --> 00:05:38,346
 the simulator, or OS X Mac.
 
-00:05:38.636 --> 00:05:42.406 A:middle
+
+97
+00:05:38,636 --> 00:05:42,406
 While you are doing so, it
 generates the code necessary
 
-00:05:42.406 --> 00:05:43.966 A:middle
+
+98
+00:05:42,406 --> 00:05:43,966
 to recreate those interactions.
 
-00:05:44.536 --> 00:05:50.256 A:middle
+
+99
+00:05:44,536 --> 00:05:50,256
 You can do this to create new
 tests or expand existing tests.
 
-00:05:51.126 --> 00:05:54.446 A:middle
+
+100
+00:05:51,126 --> 00:05:54,446
 So let's take a look at
 what this is all about.
 
-00:05:55.056 --> 00:05:56.696 A:middle
+
+101
+00:05:55,056 --> 00:05:56,696
 Brooke, let's see a quick demo.
 
-00:05:58.516 --> 00:06:04.276 A:middle
+
+102
+00:05:58,516 --> 00:06:04,276
 [Applause]
 
 
+103
+00:06:04,776 --> 00:06:05,116
+>> BROOKE CALLAHAN: Thanks, Wil.
 
-00:05:58.516 --> 00:06:04.276 A:middle
-[Applause]
 
-00:06:04.776 --> 00:06:05.116 A:middle
-&gt;&gt; BROOKE CALLAHAN: Thanks, Wil.
-
-00:06:05.606 --> 00:06:07.916 A:middle
+104
+00:06:05,606 --> 00:06:07,916
 So, without further ado.
 
-00:06:08.696 --> 00:06:10.246 A:middle
+
+105
+00:06:08,696 --> 00:06:10,246
 The project I'm going
 to be using
 
-00:06:10.246 --> 00:06:12.316 A:middle
+
+106
+00:06:10,246 --> 00:06:12,316
 for the demo today is
 the lister application.
 
-00:06:12.316 --> 00:06:14.486 A:middle
+
+107
+00:06:12,316 --> 00:06:14,486
 This is an example project
 that you can download
 
-00:06:14.486 --> 00:06:15.706 A:middle
+
+108
+00:06:14,486 --> 00:06:15,706
 from developer.Apple.com.
 
-00:06:16.246 --> 00:06:19.306 A:middle
+
+109
+00:06:16,246 --> 00:06:19,306
 So, let's get started, now it's
 got my target configured just
 
-00:06:19.306 --> 00:06:21.176 A:middle
+
+110
+00:06:19,306 --> 00:06:21,176
 the way I want, but the one
 part I want to point out is
 
-00:06:21.176 --> 00:06:23.656 A:middle
+
+111
+00:06:21,176 --> 00:06:23,656
 that the target to be tested
 is the lister application.
 
-00:06:23.656 --> 00:06:25.006 A:middle
+
+112
+00:06:23,656 --> 00:06:25,006
 This is the one application
 
-00:06:25.006 --> 00:06:30.826 A:middle
+
+113
+00:06:25,006 --> 00:06:30,826
 that my tests will be
 able to interact with.
 
-00:06:31.036 --> 00:06:35.316 A:middle
+
+114
+00:06:31,036 --> 00:06:35,316
 So now I've got my
 new test class here.
 
-00:06:35.886 --> 00:06:40.476 A:middle
+
+115
+00:06:35,886 --> 00:06:40,476
 And there's a little stub test
 method here and a setup function
 
-00:06:40.616 --> 00:06:43.336 A:middle
+
+116
+00:06:40,616 --> 00:06:43,336
 which is going to
 call, which is going
 
-00:06:43.336 --> 00:06:47.576 A:middle
+
+117
+00:06:43,336 --> 00:06:47,576
 to launch the application
 before my test method is called.
 
-00:06:47.576 --> 00:06:49.786 A:middle
+
+118
+00:06:47,576 --> 00:06:49,786
 And it's going to do that for
 all the test methods I add
 
-00:06:49.786 --> 00:06:50.416 A:middle
+
+119
+00:06:49,786 --> 00:06:50,416
 to this class.
 
-00:06:51.666 --> 00:06:54.446 A:middle
+
+120
+00:06:51,666 --> 00:06:54,446
 So Let's add a new test
 from the lister app.
 
-00:06:54.646 --> 00:06:59.806 A:middle
+
+121
+00:06:54,646 --> 00:06:59,806
 I'm going to put the keyboard
 cursor in the method and click
 
-00:06:59.806 --> 00:07:04.586 A:middle
+
+122
+00:06:59,806 --> 00:07:04,586
 on the record button
 down the debug bar.
 
 
-
-00:06:59.806 --> 00:07:04.586 A:middle
-on the record button
-down the debug bar.
-
-00:07:04.806 --> 00:07:06.356 A:middle
+123
+00:07:04,806 --> 00:07:06,356
 Now, Xcode is launching
 my application.
 
-00:07:06.926 --> 00:07:07.676 A:middle
+
+124
+00:07:06,926 --> 00:07:07,676
 And here it is.
 
-00:07:08.126 --> 00:07:12.026 A:middle
+
+125
+00:07:08,126 --> 00:07:12,026
 The lister application allows
 me to manage a series of lists.
 
-00:07:12.406 --> 00:07:17.366 A:middle
+
+126
+00:07:12,406 --> 00:07:17,366
 So probably the most common
 thing people do is add
 
-00:07:17.626 --> 00:07:19.136 A:middle
+
+127
+00:07:17,626 --> 00:07:19,136
 and remove items
 from their list.
 
-00:07:19.416 --> 00:07:21.066 A:middle
+
+128
+00:07:19,416 --> 00:07:21,066
 So I am going to
 click here, add item.
 
-00:07:21.496 --> 00:07:23.566 A:middle
+
+129
+00:07:21,496 --> 00:07:23,566
 It looks like we have a lot
 
-00:07:23.566 --> 00:07:25.886 A:middle
+
+130
+00:07:23,566 --> 00:07:25,886
 of health some things
 in this grocery list.
 
-00:07:25.886 --> 00:07:27.636 A:middle
+
+131
+00:07:25,886 --> 00:07:27,636
 So I'm going to add cookies.
 
-00:07:27.976 --> 00:07:33.216 A:middle
+
+132
+00:07:27,976 --> 00:07:33,216
 You can see that, as I'm typing,
 the source header is updating.
 
-00:07:33.216 --> 00:07:36.916 A:middle
+
+133
+00:07:33,216 --> 00:07:36,916
 If I press delete, it also
 removes what I removed
 
-00:07:36.916 --> 00:07:37.636 A:middle
+
+134
+00:07:36,916 --> 00:07:37,636
 from the text field.
 
-00:07:38.666 --> 00:07:45.776 A:middle
+
+135
+00:07:38,666 --> 00:07:45,776
 Next thing I'm going to do
 is tap on the cookies item
 
-00:07:46.026 --> 00:07:47.046 A:middle
+
+136
+00:07:46,026 --> 00:07:47,046
 to mark it as completed.
 
-00:07:47.586 --> 00:07:49.286 A:middle
+
+137
+00:07:47,586 --> 00:07:49,286
 And another thing I can do
 
-00:07:49.286 --> 00:07:51.816 A:middle
+
+138
+00:07:49,286 --> 00:07:51,816
 in this application is
 remove items from the list.
 
-00:07:51.816 --> 00:07:55.366 A:middle
+
+139
+00:07:51,816 --> 00:07:55,366
 So I'll click on edit,
 and then delete cookies,
 
-00:07:55.836 --> 00:07:58.296 A:middle
+
+140
+00:07:55,836 --> 00:07:58,296
 and the delete confirmation
 button, and finally done.
 
-00:07:59.406 --> 00:08:01.976 A:middle
+
+141
+00:07:59,406 --> 00:08:01,976
 Great. Now I have a
 simple test that adds
 
 
-
-00:07:59.406 --> 00:08:01.976 A:middle
-Great. Now I have a
-simple test that adds
-
-00:08:01.976 --> 00:08:03.546 A:middle
+142
+00:08:01,976 --> 00:08:03,546
 and removes an item
 from the list.
 
-00:08:03.546 --> 00:08:04.876 A:middle
+
+143
+00:08:03,546 --> 00:08:04,876
 So I'll click stop.
 
-00:08:05.796 --> 00:08:06.646 A:middle
+
+144
+00:08:05,796 --> 00:08:06,646
 Let's see that in action.
 
-00:08:14.686 --> 00:08:18.026 A:middle
+
+145
+00:08:14,686 --> 00:08:18,026
 It added the cookies
 and it is removing it.
 
-00:08:18.726 --> 00:08:19.216 A:middle
+
+146
+00:08:18,726 --> 00:08:19,216
 And we are done.
 
-00:08:20.516 --> 00:08:27.316 A:middle
+
+147
+00:08:20,516 --> 00:08:27,316
 [Applause]
 
-00:08:27.816 --> 00:08:30.626 A:middle
+
+148
+00:08:27,816 --> 00:08:30,626
 Thanks. As the test
 interacts with UI elements,
 
-00:08:30.626 --> 00:08:33.586 A:middle
+
+149
+00:08:30,626 --> 00:08:33,586
 we get implicit validation
 that those UI elements exist.
 
-00:08:33.905 --> 00:08:36.166 A:middle
+
+150
+00:08:33,905 --> 00:08:36,166
 But What we don't
 get validation of,
 
-00:08:36.265 --> 00:08:38.145 A:middle
+
+151
+00:08:36,265 --> 00:08:38,145
 are things like state
 changes in the application.
 
-00:08:38.265 --> 00:08:40.856 A:middle
+
+152
+00:08:38,265 --> 00:08:40,856
 For example, when we tapped
 on that cookies button,
 
-00:08:41.166 --> 00:08:43.866 A:middle
+
+153
+00:08:41,166 --> 00:08:43,866
 we don't get any
 validation that the state
 
-00:08:43.866 --> 00:08:45.166 A:middle
+
+154
+00:08:43,866 --> 00:08:45,166
 of the button actually changed.
 
-00:08:46.436 --> 00:08:49.696 A:middle
+
+155
+00:08:46,436 --> 00:08:49,696
 And later on in the
 test, when it taps
 
-00:08:49.696 --> 00:08:52.436 A:middle
+
+156
+00:08:49,696 --> 00:08:52,436
 on the delete confirmation
 button,
 
-00:08:52.856 --> 00:08:55.616 A:middle
+
+157
+00:08:52,856 --> 00:08:55,616
 we know that the delete
 confirmation button was tapped.
 
-00:08:56.036 --> 00:08:58.936 A:middle
+
+158
+00:08:56,036 --> 00:08:58,936
 but running the test
 doesn't validate
 
-00:08:58.936 --> 00:09:01.356 A:middle
+
+159
+00:08:58,936 --> 00:09:01,356
 that the cookies row
 actually is removed.
 
 
-
-00:08:58.936 --> 00:09:01.356 A:middle
-that the cookies row
-actually is removed.
-
-00:09:02.406 --> 00:09:04.846 A:middle
+160
+00:09:02,406 --> 00:09:04,846
 So to get validation
 of those for my test,
 
-00:09:04.846 --> 00:09:07.126 A:middle
+
+161
+00:09:04,846 --> 00:09:07,126
 I want to add some
 explicit assertions.
 
-00:09:07.156 --> 00:09:11.636 A:middle
+
+162
+00:09:07,156 --> 00:09:11,636
 First thing I am going
 to do is add an assertion
 
-00:09:11.676 --> 00:09:15.726 A:middle
+
+163
+00:09:11,676 --> 00:09:15,726
 that the cookies button here
 actually changes its state.
 
-00:09:15.806 --> 00:09:17.676 A:middle
+
+164
+00:09:15,806 --> 00:09:17,676
 To do that, I will
 add a new constant.
 
-00:09:17.676 --> 00:09:19.706 A:middle
+
+165
+00:09:17,676 --> 00:09:19,706
 Call this let cookies button.
 
-00:09:20.376 --> 00:09:27.436 A:middle
+
+166
+00:09:20,376 --> 00:09:27,436
 I'm going to change the test
 to tap on that constant.
 
-00:09:27.436 --> 00:09:31.196 A:middle
+
+167
+00:09:27,436 --> 00:09:31,196
 Now, to add the assertion I
 need some state, some properties
 
-00:09:31.196 --> 00:09:35.256 A:middle
+
+168
+00:09:31,196 --> 00:09:35,256
 of the element to assert on.
 
-00:09:35.616 --> 00:09:38.386 A:middle
+
+169
+00:09:35,616 --> 00:09:38,386
 And cookies button
 is XUI element
 
-00:09:39.036 --> 00:09:41.456 A:middle
+
+170
+00:09:39,036 --> 00:09:41,456
 and XUI elements have
 a value property.
 
-00:09:41.966 --> 00:09:43.836 A:middle
+
+171
+00:09:41,966 --> 00:09:43,836
 What I'm going to do, is I'm
 going to set a breakpoint here,
 
-00:09:44.706 --> 00:09:52.676 A:middle
+
+172
+00:09:44,706 --> 00:09:52,676
 and run the test to that point.
 
-00:09:53.056 --> 00:09:54.926 A:middle
+
+173
+00:09:53,056 --> 00:09:54,926
 So here we have the
 test in the state
 
-00:09:54.926 --> 00:09:56.646 A:middle
+
+174
+00:09:54,926 --> 00:09:56,646
 where it's added
 the cookies row.
 
-00:09:57.416 --> 00:09:59.396 A:middle
+
+175
+00:09:57,416 --> 00:09:59,396
 And it has yet to
 tap on that button.
 
-00:09:59.456 --> 00:10:03.316 A:middle
+
+176
+00:09:59,456 --> 00:10:03,316
 So I'm going to go
 in the debugger,
 
 
-
-00:09:59.456 --> 00:10:03.316 A:middle
-So I'm going to go
-in the debugger,
-
-00:10:03.926 --> 00:10:08.166 A:middle
+177
+00:10:03,926 --> 00:10:08,166
 and print out the value
 of this cookies button.
 
-00:10:08.166 --> 00:10:08.996 A:middle
+
+178
+00:10:08,166 --> 00:10:08,996
 Little typo.
 
-00:10:13.716 --> 00:10:17.186 A:middle
+
+179
+00:10:13,716 --> 00:10:17,186
 -- there we go.
 
-00:10:17.606 --> 00:10:28.566 A:middle
+
+180
+00:10:17,606 --> 00:10:28,566
 I can see that the value of the
 cookies button is the string
 
-00:10:28.916 --> 00:10:30.046 A:middle
+
+181
+00:10:28,916 --> 00:10:30,046
 with the number zero in it.
 
-00:10:32.006 --> 00:10:34.516 A:middle
+
+182
+00:10:32,006 --> 00:10:34,516
 Next I'm going to
 step over that line.
 
-00:10:34.696 --> 00:10:36.056 A:middle
+
+183
+00:10:34,696 --> 00:10:36,056
 So now it's tap the
 cookies button.
 
-00:10:36.146 --> 00:10:41.126 A:middle
+
+184
+00:10:36,146 --> 00:10:41,126
 I will print out the value
 of it again and now I can see
 
-00:10:41.126 --> 00:10:43.886 A:middle
+
+185
+00:10:41,126 --> 00:10:43,886
 that the value of the button is
 the string with the number one.
 
-00:10:44.436 --> 00:10:46.166 A:middle
+
+186
+00:10:44,436 --> 00:10:46,166
 Great. So now I have all
 the information that I need
 
-00:10:46.446 --> 00:10:51.436 A:middle
+
+187
+00:10:46,446 --> 00:10:51,436
 to assert that the value of the
 button changes when it's tapped.
 
-00:10:51.576 --> 00:10:56.416 A:middle
+
+188
+00:10:51,576 --> 00:10:56,416
 So I'm going to add an assertion
 using XCT assert equal.
 
-00:10:56.416 --> 00:11:02.296 A:middle
+
+189
+00:10:56,416 --> 00:11:02,296
 I'll assert that the value
 
 
-
-00:10:56.416 --> 00:11:02.296 A:middle
-I'll assert that the value
-
-00:11:02.296 --> 00:11:04.756 A:middle
+190
+00:11:02,296 --> 00:11:04,756
 after the tap is a string
 with the number one.
 
-00:11:05.196 --> 00:11:07.526 A:middle
+
+191
+00:11:05,196 --> 00:11:07,526
 The value is in any object.
 
-00:11:07.586 --> 00:11:11.546 A:middle
+
+192
+00:11:07,586 --> 00:11:11,546
 So I am going to need to
 assert that this is a string.
 
-00:11:11.956 --> 00:11:13.586 A:middle
+
+193
+00:11:11,956 --> 00:11:13,586
 So I'll use as string.
 
-00:11:13.586 --> 00:11:18.326 A:middle
+
+194
+00:11:13,586 --> 00:11:18,326
 And assert that it's
 number one after the tap.
 
-00:11:19.006 --> 00:11:21.846 A:middle
+
+195
+00:11:19,006 --> 00:11:21,846
 And I'll assert that
 it is the number string
 
-00:11:21.846 --> 00:11:25.716 A:middle
+
+196
+00:11:21,846 --> 00:11:25,716
 with the number zero
 before the tap.
 
-00:11:25.716 --> 00:11:30.926 A:middle
+
+197
+00:11:25,716 --> 00:11:30,926
 And lastly, after the delete
 confirmation button is tapped I
 
-00:11:30.926 --> 00:11:34.336 A:middle
+
+198
+00:11:30,926 --> 00:11:34,336
 want to assert that that
 cookies row goes away.
 
-00:11:34.336 --> 00:11:36.816 A:middle
+
+199
+00:11:34,336 --> 00:11:36,816
 I'll call XCT assert
 equal and assert
 
-00:11:37.136 --> 00:11:38.876 A:middle
+
+200
+00:11:37,136 --> 00:11:38,876
 that the button no
 longer exists.
 
-00:11:43.636 --> 00:11:46.406 A:middle
+
+201
+00:11:43,636 --> 00:11:46,406
 Now iIf I run this test again we
 should see it does all the same
 
-00:11:46.406 --> 00:11:48.176 A:middle
+
+202
+00:11:46,406 --> 00:11:48,176
 thing but also passing
 these assertions.
 
-00:11:57.516 --> 00:12:00.626 A:middle
+
+203
+00:11:57,516 --> 00:12:00,626
 Great, so now I have
 just added my first test.
 
 
-
-00:11:57.516 --> 00:12:00.626 A:middle
-Great, so now I have
-just added my first test.
-
-00:12:01.936 --> 00:12:02.436 A:middle
+204
+00:12:01,936 --> 00:12:02,436
 Back to you, Wil.
 
-00:12:03.516 --> 00:12:09.446 A:middle
+
+205
+00:12:03,516 --> 00:12:09,446
 [Applause]
 
-00:12:09.946 --> 00:12:10.946 A:middle
-&gt;&gt; WIL TURNER: That
+
+206
+00:12:09,946 --> 00:12:10,946
+>> WIL TURNER: That
 was pretty awesome.
 
-00:12:10.946 --> 00:12:13.446 A:middle
+
+207
+00:12:10,946 --> 00:12:13,446
 You can see just how easily
 Brooke took an existing
 
-00:12:13.446 --> 00:12:16.836 A:middle
+
+208
+00:12:13,446 --> 00:12:16,836
 application and used it,
 just like he would as a user,
 
-00:12:17.426 --> 00:12:19.816 A:middle
+
+209
+00:12:17,426 --> 00:12:19,816
 and in a handful of
 minutes he created a test.
 
-00:12:20.226 --> 00:12:22.676 A:middle
+
+210
+00:12:20,226 --> 00:12:22,676
 He could expand that
 test using XCT assert
 
-00:12:22.676 --> 00:12:27.136 A:middle
+
+211
+00:12:22,676 --> 00:12:27,136
 to do some additional validation
 and he just added reliability
 
-00:12:27.136 --> 00:12:29.256 A:middle
+
+212
+00:12:27,136 --> 00:12:29,256
 to his project with
 minimal effort.
 
-00:12:29.916 --> 00:12:32.846 A:middle
+
+213
+00:12:29,916 --> 00:12:32,846
 That's pretty exciting.
 
-00:12:33.216 --> 00:12:36.376 A:middle
+
+214
+00:12:33,216 --> 00:12:36,376
 So you can see we added
 UI testing target,
 
-00:12:36.736 --> 00:12:38.926 A:middle
+
+215
+00:12:36,736 --> 00:12:38,926
 very straightforward just like
 all our other other targets,
 
-00:12:38.926 --> 00:12:40.426 A:middle
+
+216
+00:12:38,926 --> 00:12:40,426
 with an assistant and templates.
 
-00:12:41.406 --> 00:12:46.636 A:middle
+
+217
+00:12:41,406 --> 00:12:46,636
 Used recording, interacted with
 the app, and it creates the code
 
-00:12:46.636 --> 00:12:49.206 A:middle
+
+218
+00:12:46,636 --> 00:12:49,206
 that uses the elements
 and synthesizes the events
 
-00:12:49.296 --> 00:12:53.446 A:middle
+
+219
+00:12:49,296 --> 00:12:53,446
 and then the additional
 validation with XCT assert.
 
-00:12:55.696 --> 00:12:58.856 A:middle
+
+220
+00:12:55,696 --> 00:12:58,856
 Let's take a look at
 this UI testing API.
 
 
-
-00:13:00.586 --> 00:13:02.596 A:middle
+221
+00:13:00,586 --> 00:13:02,596
 I mentioned earlier that
 there are three classes.
 
-00:13:02.846 --> 00:13:05.436 A:middle
+
+222
+00:13:02,846 --> 00:13:05,436
 They are XCUIApplication,
 
-00:13:05.666 --> 00:13:09.466 A:middle
+
+223
+00:13:05,666 --> 00:13:09,466
 XCUIElement, and
 XCUIElementQuery.
 
-00:13:10.166 --> 00:13:10.816 A:middle
+
+224
+00:13:10,166 --> 00:13:10,816
 How do they work?
 
-00:13:11.586 --> 00:13:14.606 A:middle
+
+225
+00:13:11,586 --> 00:13:14,606
 Let's start with a very
 simple, something even simpler
 
-00:13:14.956 --> 00:13:16.686 A:middle
+
+226
+00:13:14,956 --> 00:13:16,686
 than Brooke's example.
 
-00:13:17.276 --> 00:13:21.076 A:middle
+
+227
+00:13:17,276 --> 00:13:21,076
 Line-by-line going through here
 first I am instantiating my
 
-00:13:21.076 --> 00:13:22.126 A:middle
+
+228
+00:13:21,076 --> 00:13:22,126
 application object.
 
-00:13:22.126 --> 00:13:24.856 A:middle
+
+229
+00:13:22,126 --> 00:13:24,856
 This is a proxy for
 my application.
 
-00:13:25.606 --> 00:13:26.406 A:middle
+
+230
+00:13:25,606 --> 00:13:26,406
 Then I launch it.
 
-00:13:26.866 --> 00:13:27.936 A:middle
+
+231
+00:13:26,866 --> 00:13:27,936
 That brings it up for me.
 
-00:13:29.376 --> 00:13:32.646 A:middle
+
+232
+00:13:29,376 --> 00:13:32,646
 And then I use element and
 query to find the add button.
 
-00:13:33.756 --> 00:13:36.976 A:middle
+
+233
+00:13:33,756 --> 00:13:36,976
 And then I synthesize the
 event that taps on it.
 
-00:13:36.976 --> 00:13:40.156 A:middle
+
+234
+00:13:36,976 --> 00:13:40,156
 Finally, I add in an
 assertion just like Brooke did
 
-00:13:40.596 --> 00:13:43.016 A:middle
+
+235
+00:13:40,596 --> 00:13:43,016
 to make sure that the UI
 had the expected state
 
-00:13:43.156 --> 00:13:45.416 A:middle
+
+236
+00:13:43,156 --> 00:13:45,416
 at the end of the test.
 
-00:13:46.166 --> 00:13:48.916 A:middle
+
+237
+00:13:46,166 --> 00:13:48,916
 So I mentioned that
 UIApplication is a proxy
 
-00:13:49.006 --> 00:13:50.246 A:middle
+
+238
+00:13:49,006 --> 00:13:50,246
 for the tested application.
 
-00:13:51.206 --> 00:13:54.126 A:middle
+
+239
+00:13:51,206 --> 00:13:54,126
 It is independent of the
 lifecycle of the launch
 
-00:13:54.126 --> 00:13:55.866 A:middle
+
+240
+00:13:54,126 --> 00:13:55,866
 and termination lifecycle
 of your app.
 
-00:13:56.256 --> 00:13:58.316 A:middle
+
+241
+00:13:56,256 --> 00:13:58,316
 Because Your tests are
 running in a separate process.
 
-00:13:58.756 --> 00:14:01.586 A:middle
+
+242
+00:13:58,756 --> 00:14:01,586
 You get explicit control
 over when the app is launched
 
 
-
-00:13:58.756 --> 00:14:01.586 A:middle
-You get explicit control
-over when the app is launched
-
-00:14:01.926 --> 00:14:06.466 A:middle
+243
+00:14:01,926 --> 00:14:06,466
 and when it is terminated.
 
-00:14:06.466 --> 00:14:09.976 A:middle
+
+244
+00:14:06,466 --> 00:14:09,976
 When you launch we will
 always spawn a new process.
 
-00:14:10.246 --> 00:14:13.006 A:middle
+
+245
+00:14:10,246 --> 00:14:13,006
 So that's something
 we do to kind
 
-00:14:13.006 --> 00:14:17.076 A:middle
+
+246
+00:14:13,006 --> 00:14:17,076
 of not give you completely Clean
 Slate because you have a lot
 
-00:14:17.076 --> 00:14:19.586 A:middle
+
+247
+00:14:17,076 --> 00:14:19,586
 of state in your application
 that it's up to you to control.
 
-00:14:19.976 --> 00:14:23.016 A:middle
+
+248
+00:14:19,976 --> 00:14:23,016
 But by launching a
 process clean each time,
 
-00:14:23.316 --> 00:14:25.956 A:middle
+
+249
+00:14:23,316 --> 00:14:25,956
 we help you minimize the number
 of variables that you have
 
-00:14:25.996 --> 00:14:26.826 A:middle
+
+250
+00:14:25,996 --> 00:14:26,826
 to deal with in your test.
 
-00:14:27.916 --> 00:14:29.556 A:middle
+
+251
+00:14:27,916 --> 00:14:29,556
 So if it's already running,
 
-00:14:29.716 --> 00:14:32.746 A:middle
+
+252
+00:14:29,716 --> 00:14:32,746
 calling launch will terminate
 the previous existing instance.
 
-00:14:34.776 --> 00:14:38.466 A:middle
+
+253
+00:14:34,776 --> 00:14:38,466
 Application is also the starting
 point for finding elements.
 
-00:14:38.966 --> 00:14:40.266 A:middle
+
+254
+00:14:38,966 --> 00:14:40,266
 Let's talk about elements.
 
-00:14:40.926 --> 00:14:44.906 A:middle
+
+255
+00:14:40,926 --> 00:14:44,906
 XCUIElement, just like
 Application, is a proxy object,
 
-00:14:45.226 --> 00:14:47.456 A:middle
+
+256
+00:14:45,226 --> 00:14:47,456
 but this time for user
 interface elements
 
-00:14:47.646 --> 00:14:48.906 A:middle
+
+257
+00:14:47,646 --> 00:14:48,906
 in the tested application.
 
-00:14:49.596 --> 00:14:50.826 A:middle
+
+258
+00:14:49,596 --> 00:14:50,826
 Elements have types.
 
-00:14:51.476 --> 00:14:54.196 A:middle
+
+259
+00:14:51,476 --> 00:14:54,196
 Types are like button, or
 cell, or window, and so forth.
 
-00:14:54.326 --> 00:14:58.536 A:middle
+
+260
+00:14:54,326 --> 00:14:58,536
 They have what we call
 identifiers, strings of data
 
-00:14:58.536 --> 00:15:00.316 A:middle
+
+261
+00:14:58,536 --> 00:15:00,316
 that we get from the
 accessibility system,
 
 
-
-00:14:58.536 --> 00:15:00.316 A:middle
-that we get from the
-accessibility system,
-
-00:15:00.906 --> 00:15:04.376 A:middle
+262
+00:15:00,906 --> 00:15:04,376
 hich are an identifier or
 label or title, so forth.
 
-00:15:05.886 --> 00:15:08.656 A:middle
+
+263
+00:15:05,886 --> 00:15:08,656
 Most of the time you'll find
 elements using a combination
 
-00:15:08.656 --> 00:15:10.206 A:middle
+
+264
+00:15:08,656 --> 00:15:10,206
 of the type and the label.
 
-00:15:10.206 --> 00:15:12.276 A:middle
+
+265
+00:15:10,206 --> 00:15:12,276
 For example, if you have
 a bullton which is add,
 
-00:15:12.276 --> 00:15:16.786 A:middle
+
+266
+00:15:12,276 --> 00:15:16,786
 you'll look for the button
 type with the identifier add.
 
-00:15:17.496 --> 00:15:20.436 A:middle
+
+267
+00:15:17,496 --> 00:15:20,436
 Elements form a hierarchy
 in your application.
 
-00:15:20.496 --> 00:15:22.996 A:middle
+
+268
+00:15:20,496 --> 00:15:22,996
 The application is
 the root of a tree.
 
-00:15:23.296 --> 00:15:25.636 A:middle
+
+269
+00:15:23,296 --> 00:15:25,636
 If you think back to your
 computer science days you'll
 
-00:15:25.636 --> 00:15:26.916 A:middle
+
+270
+00:15:25,636 --> 00:15:26,916
 remember tree data structures.
 
-00:15:27.716 --> 00:15:33.026 A:middle
+
+271
+00:15:27,716 --> 00:15:33,026
 With the lister application we
 have this very simple tree here
 
-00:15:33.026 --> 00:15:35.036 A:middle
+
+272
+00:15:33,026 --> 00:15:35,036
 with the application
 at the top and we have
 
-00:15:35.036 --> 00:15:39.816 A:middle
+
+273
+00:15:35,036 --> 00:15:39,816
 like the nav bar
 and the add button.
 
-00:15:39.876 --> 00:15:40.946 A:middle
+
+274
+00:15:39,876 --> 00:15:40,946
 Groceries label.
 
-00:15:41.076 --> 00:15:42.116 A:middle
+
+275
+00:15:41,076 --> 00:15:42,116
 So on and so forth.
 
-00:15:42.696 --> 00:15:44.546 A:middle
+
+276
+00:15:42,696 --> 00:15:44,546
 So each of these is an element
 
-00:15:45.266 --> 00:15:47.376 A:middle
+
+277
+00:15:45,266 --> 00:15:47,376
 that you can reference
 in your tests.
 
-00:15:48.056 --> 00:15:50.196 A:middle
+
+278
+00:15:48,056 --> 00:15:50,196
 These are used by queries.
 
-00:15:50.666 --> 00:15:53.466 A:middle
+
+279
+00:15:50,666 --> 00:15:53,466
 This hierarchy, as well
 as type and identifier,
 
-00:15:53.626 --> 00:15:54.616 A:middle
+
+280
+00:15:53,626 --> 00:15:54,616
 to find your elements.
 
-00:15:56.376 --> 00:15:58.046 A:middle
+
+281
+00:15:56,376 --> 00:15:58,046
 Elements, when you
 work with them
 
-00:15:58.046 --> 00:16:00.166 A:middle
+
+282
+00:15:58,046 --> 00:16:00,166
 in your test, must be unique.
 
 
-
-00:15:58.046 --> 00:16:00.166 A:middle
-in your test, must be unique.
-
-00:16:00.876 --> 00:16:01.726 A:middle
+283
+00:16:00,876 --> 00:16:01,726
 So what does that mean?
 
-00:16:02.156 --> 00:16:04.666 A:middle
+
+284
+00:16:02,156 --> 00:16:04,666
 Well, every one of these
 elements is backed by a query.
 
-00:16:05.006 --> 00:16:07.856 A:middle
+
+285
+00:16:05,006 --> 00:16:07,856
 The query has to resolve
 to a single instance.
 
-00:16:09.206 --> 00:16:11.746 A:middle
+
+286
+00:16:09,206 --> 00:16:11,746
 Otherwise when we go to
 synthesize the events
 
-00:16:11.746 --> 00:16:14.406 A:middle
+
+287
+00:16:11,746 --> 00:16:14,406
 that you tell us to tap but
 there's multiple buttons
 
-00:16:14.406 --> 00:16:16.596 A:middle
+
+288
+00:16:14,406 --> 00:16:16,596
 that match that, it
 is not deterministic.
 
-00:16:16.596 --> 00:16:18.686 A:middle
+
+289
+00:16:16,596 --> 00:16:18,686
 We can't really know what
 you mean for us to do.
 
-00:16:19.086 --> 00:16:22.486 A:middle
+
+290
+00:16:19,086 --> 00:16:22,486
 Similarly, if you ask us for
 a property of the element,
 
-00:16:22.976 --> 00:16:25.946 A:middle
+
+291
+00:16:22,976 --> 00:16:25,946
 we don't know which one
 did you really mean?
 
-00:16:25.946 --> 00:16:27.166 A:middle
+
+292
+00:16:25,946 --> 00:16:27,166
 Maybe there wasn't one at all.
 
-00:16:27.626 --> 00:16:29.706 A:middle
+
+293
+00:16:27,626 --> 00:16:29,706
 So it's important to the
 queries for the elements
 
-00:16:29.706 --> 00:16:31.906 A:middle
+
+294
+00:16:29,706 --> 00:16:31,906
 to resolve to exactly one match.
 
-00:16:33.106 --> 00:16:36.636 A:middle
+
+295
+00:16:33,106 --> 00:16:36,636
 If they don't, when you access
 the element we'll raise a
 
-00:16:36.636 --> 00:16:37.376 A:middle
+
+296
+00:16:36,636 --> 00:16:37,376
 failure for that.
 
-00:16:38.306 --> 00:16:40.166 A:middle
+
+297
+00:16:38,306 --> 00:16:40,166
 There is one exception to this,
 
-00:16:40.266 --> 00:16:44.086 A:middle
+
+298
+00:16:40,266 --> 00:16:44,086
 which is an API called the
 exists property on XCUIElement.
 
-00:16:44.626 --> 00:16:48.186 A:middle
+
+299
+00:16:44,626 --> 00:16:48,186
 This allows you to test for the
 existence of the element safely.
 
-00:16:48.756 --> 00:16:50.916 A:middle
+
+300
+00:16:48,756 --> 00:16:50,916
 You can use this as
 Brooke did to verify
 
-00:16:50.916 --> 00:16:52.676 A:middle
+
+301
+00:16:50,916 --> 00:16:52,676
 that the element had
 been removed from the UI
 
-00:16:52.776 --> 00:16:56.086 A:middle
+
+302
+00:16:52,776 --> 00:16:56,086
 and you can also use
 this to handle cases
 
-00:16:56.086 --> 00:16:57.466 A:middle
+
+303
+00:16:56,086 --> 00:16:57,466
 where you have conditional UI
 
-00:16:57.596 --> 00:16:59.386 A:middle
+
+304
+00:16:57,596 --> 00:16:59,386
 that might display
 in some context.
 
-00:16:59.386 --> 00:17:02.506 A:middle
+
+305
+00:16:59,386 --> 00:17:02,506
 For example, if you are
 saving a file to a location
 
 
-
-00:16:59.386 --> 00:17:02.506 A:middle
-For example, if you are
-saving a file to a location
-
-00:17:02.506 --> 00:17:05.425 A:middle
+306
+00:17:02,506 --> 00:17:05,425
 where another file already
 exists, you might get some kind
 
-00:17:05.425 --> 00:17:06.526 A:middle
+
+307
+00:17:05,425 --> 00:17:06,526
 of confirmation sheet.
 
-00:17:06.945 --> 00:17:08.826 A:middle
+
+308
+00:17:06,945 --> 00:17:08,826
 That wouldn't be
 present all the time.
 
-00:17:08.826 --> 00:17:10.476 A:middle
+
+309
+00:17:08,826 --> 00:17:10,476
 Just the case where
 there's these conflicts.
 
-00:17:10.476 --> 00:17:13.826 A:middle
+
+310
+00:17:10,476 --> 00:17:13,826
 You can use an exist
 check for those cases.
 
-00:17:15.126 --> 00:17:18.256 A:middle
+
+311
+00:17:15,126 --> 00:17:18,256
 Elements are where event
 synthesis APIs live.
 
-00:17:18.886 --> 00:17:22.736 A:middle
+
+312
+00:17:18,886 --> 00:17:22,736
 Event synthesis is how we
 simulate user interaction,
 
-00:17:22.736 --> 00:17:26.165 A:middle
+
+313
+00:17:22,736 --> 00:17:26,165
 and do this at the lowest level
 of the system so everything goes
 
-00:17:26.165 --> 00:17:29.796 A:middle
+
+314
+00:17:26,165 --> 00:17:29,796
 through the same channels it
 would when the user interacts.
 
-00:17:29.796 --> 00:17:32.486 A:middle
+
+315
+00:17:29,796 --> 00:17:32,486
 The APIs for event synthesis
 are platform-specific
 
-00:17:33.006 --> 00:17:33.986 A:middle
+
+316
+00:17:33,006 --> 00:17:33,986
 with some exceptions.
 
-00:17:34.576 --> 00:17:37.136 A:middle
+
+317
+00:17:34,576 --> 00:17:37,136
 We have button click,
 for example in OS X
 
-00:17:37.136 --> 00:17:41.796 A:middle
+
+318
+00:17:37,136 --> 00:17:41,796
 and the corresponding
 is button tap on iOS.
 
-00:17:41.796 --> 00:17:44.806 A:middle
+
+319
+00:17:41,796 --> 00:17:44,806
 We have type text which is
 the same on both platforms
 
-00:17:44.806 --> 00:17:48.316 A:middle
+
+320
+00:17:44,806 --> 00:17:48,316
 and takes a string of text.
 
-00:17:48.856 --> 00:17:53.176 A:middle
+
+321
+00:17:48,856 --> 00:17:53,176
 XCUIElementQuery is our API
 for specifying elements.
 
-00:17:54.136 --> 00:17:58.806 A:middle
+
+322
+00:17:54,136 --> 00:17:58,806
 Queries resolve to collections
 of accessible elements.
 
-00:17:58.806 --> 00:18:01.856 A:middle
+
+323
+00:17:58,806 --> 00:18:01,856
 They can only find elements that
 are visible to Accessibility.
 
 
-
-00:17:58.806 --> 00:18:01.856 A:middle
-They can only find elements that
-are visible to Accessibility.
-
-00:18:02.756 --> 00:18:07.376 A:middle
+324
+00:18:02,756 --> 00:18:07,376
 And they will resolve
 to a set of these.
 
-00:18:07.596 --> 00:18:08.886 A:middle
+
+325
+00:18:07,596 --> 00:18:08,886
 That means you can
 get the number
 
-00:18:08.886 --> 00:18:10.656 A:middle
+
+326
+00:18:08,886 --> 00:18:10,656
 of matches using
 the count property.
 
-00:18:10.656 --> 00:18:15.116 A:middle
+
+327
+00:18:10,656 --> 00:18:15,116
 And you can also
 specify distinct elements
 
-00:18:15.386 --> 00:18:18.156 A:middle
+
+328
+00:18:15,386 --> 00:18:18,156
 in that set using
 subscripting with an identifier
 
-00:18:19.136 --> 00:18:21.076 A:middle
+
+329
+00:18:19,136 --> 00:18:21,076
 or using an element
 at index API.
 
-00:18:21.076 --> 00:18:23.906 A:middle
+
+330
+00:18:21,076 --> 00:18:23,906
 We will look at these
 more in a moment.
 
-00:18:24.436 --> 00:18:26.496 A:middle
+
+331
+00:18:24,436 --> 00:18:26,496
 So how do queries work?
 
-00:18:27.756 --> 00:18:29.566 A:middle
+
+332
+00:18:27,756 --> 00:18:29,566
 So I mentioned that
 element hierarchy.
 
-00:18:30.426 --> 00:18:34.016 A:middle
+
+333
+00:18:30,426 --> 00:18:34,016
 So the relationships in
 that hierarchy are one side
 
-00:18:34.016 --> 00:18:34.916 A:middle
+
+334
+00:18:34,016 --> 00:18:34,916
 of how queries work.
 
-00:18:35.126 --> 00:18:36.816 A:middle
+
+335
+00:18:35,126 --> 00:18:36,816
 The other side is by filtering.
 
-00:18:37.836 --> 00:18:40.456 A:middle
+
+336
+00:18:37,836 --> 00:18:40,456
 Filtering is taking
 one set and reducing
 
-00:18:40.456 --> 00:18:42.996 A:middle
+
+337
+00:18:40,456 --> 00:18:42,996
 that set according
 to certain criteria.
 
-00:18:44.416 --> 00:18:48.206 A:middle
+
+338
+00:18:44,416 --> 00:18:48,206
 With our lister example again
 here is how we might express
 
-00:18:48.206 --> 00:18:51.276 A:middle
+
+339
+00:18:48,206 --> 00:18:51,276
 certain relationships, the
 first of which is descendants.
 
-00:18:51.276 --> 00:18:54.076 A:middle
+
+340
+00:18:51,276 --> 00:18:54,076
 In this case I'm
 showing the view.
 
-00:18:54.756 --> 00:18:57.066 A:middle
+
+341
+00:18:54,756 --> 00:18:57,066
 All the gold cells
 are its descendents.
 
-00:18:58.226 --> 00:19:01.366 A:middle
+
+342
+00:18:58,226 --> 00:19:01,366
 On the other hand children is a
 more restrictive relationship.
 
 
-
-00:18:58.226 --> 00:19:01.366 A:middle
-On the other hand children is a
-more restrictive relationship.
-
-00:19:01.366 --> 00:19:04.906 A:middle
+343
+00:19:01,366 --> 00:19:04,906
 It's just the elements that
 are directly below the element
 
-00:19:04.906 --> 00:19:05.556 A:middle
+
+344
+00:19:04,906 --> 00:19:05,556
 you're querying.
 
-00:19:05.626 --> 00:19:08.016 A:middle
+
+345
+00:19:05,626 --> 00:19:08,016
 So, the table's children
 are just the cells.
 
-00:19:08.976 --> 00:19:11.746 A:middle
+
+346
+00:19:08,976 --> 00:19:11,746
 The final relationship
 we use is containment.
 
-00:19:12.176 --> 00:19:14.696 A:middle
+
+347
+00:19:12,176 --> 00:19:14,696
 This happens to be very
 useful when we have cases
 
-00:19:14.696 --> 00:19:17.406 A:middle
+
+348
+00:19:14,696 --> 00:19:17,406
 where the elements, like the
 cells, they don't have a lot
 
-00:19:17.406 --> 00:19:19.576 A:middle
+
+349
+00:19:17,406 --> 00:19:19,576
 of data that unique
 them from each other,
 
-00:19:19.946 --> 00:19:22.116 A:middle
+
+350
+00:19:19,946 --> 00:19:22,116
 but they contain
 elements which are unique.
 
-00:19:22.416 --> 00:19:25.226 A:middle
+
+351
+00:19:22,416 --> 00:19:25,226
 For example, the first cell
 contains the groceries label.
 
-00:19:26.706 --> 00:19:31.106 A:middle
+
+352
+00:19:26,706 --> 00:19:31,106
 Filtering lets us take
 things like the element type,
 
-00:19:32.266 --> 00:19:35.596 A:middle
+
+353
+00:19:32,266 --> 00:19:35,596
 or its identifiers,
 to create queries
 
-00:19:35.846 --> 00:19:37.816 A:middle
+
+354
+00:19:35,846 --> 00:19:37,816
 that filter a previous query.
 
-00:19:38.396 --> 00:19:41.976 A:middle
+
+355
+00:19:38,396 --> 00:19:41,976
 We can also do this with
 predicates which will allow us
 
-00:19:42.286 --> 00:19:45.316 A:middle
+
+356
+00:19:42,286 --> 00:19:45,316
 to go beyond the identifiers
 to look at the values
 
-00:19:45.646 --> 00:19:47.766 A:middle
+
+357
+00:19:45,646 --> 00:19:47,766
 or do partial matching
 such as "begins with"
 
-00:19:47.766 --> 00:19:50.576 A:middle
+
+358
+00:19:47,766 --> 00:19:50,576
 and that sort of thing.
 
-00:19:50.576 --> 00:19:54.066 A:middle
+
+359
+00:19:50,576 --> 00:19:54,066
 We combine relationships and
 the filtering in the APIs
 
-00:19:54.136 --> 00:19:57.196 A:middle
+
+360
+00:19:54,136 --> 00:19:57,196
 and the first of which is
 descendantsMatchingType.
 
-00:19:57.286 --> 00:19:59.166 A:middle
+
+361
+00:19:57,286 --> 00:19:59,166
 You can figure out
 what that does.
 
-00:19:59.626 --> 00:20:02.146 A:middle
+
+362
+00:19:59,626 --> 00:20:02,146
 It find the descendants
 that match a certain type.
 
 
-
-00:19:59.626 --> 00:20:02.146 A:middle
-It find the descendants
-that match a certain type.
-
-00:20:02.556 --> 00:20:05.276 A:middle
+363
+00:20:02,556 --> 00:20:05,276
 This turns out to be the
 most common query you'll use.
 
-00:20:05.666 --> 00:20:09.106 A:middle
+
+364
+00:20:05,666 --> 00:20:09,106
 Some examples of this are,
 I can find all the buttons
 
-00:20:09.106 --> 00:20:11.566 A:middle
+
+365
+00:20:09,106 --> 00:20:11,566
 in an application
 by calling app,
 
-00:20:12.256 --> 00:20:13.826 A:middle
+
+366
+00:20:12,256 --> 00:20:13,826
 descendentsMatchingType button.
 
-00:20:15.006 --> 00:20:17.746 A:middle
+
+367
+00:20:15,006 --> 00:20:17,746
 Similarly I can find
 all the cells in a table
 
-00:20:18.206 --> 00:20:21.386 A:middle
+
+368
+00:20:18,206 --> 00:20:21,386
 by telling the table to give me
 descendentsMatchingType cell,
 
-00:20:22.106 --> 00:20:24.116 A:middle
+
+369
+00:20:22,106 --> 00:20:24,116
 or, another example,
 with menu items.
 
-00:20:25.426 --> 00:20:29.076 A:middle
+
+370
+00:20:25,426 --> 00:20:29,076
 This is such a common query
 that we provide convenience API
 
-00:20:29.076 --> 00:20:32.096 A:middle
+
+371
+00:20:29,076 --> 00:20:32,096
 for every one of these types.
 
-00:20:32.456 --> 00:20:35.836 A:middle
+
+372
+00:20:32,456 --> 00:20:35,836
 DescendentsMatchingType
 buttons, becomes just buttons.
 
-00:20:37.486 --> 00:20:40.326 A:middle
+
+373
+00:20:37,486 --> 00:20:40,326
 DescendentsMatchingType
 cell becomes just cells,
 
-00:20:41.216 --> 00:20:43.136 A:middle
+
+374
+00:20:41,216 --> 00:20:43,136
 and so on and so forth.
 
-00:20:44.016 --> 00:20:48.216 A:middle
+
+375
+00:20:44,016 --> 00:20:48,216
 These convenience APIs help
 make your tests very expressive
 
-00:20:48.376 --> 00:20:49.346 A:middle
+
+376
+00:20:48,376 --> 00:20:49,346
 yet concise.
 
-00:20:51.516 --> 00:20:56.036 A:middle
+
+377
+00:20:51,516 --> 00:20:56,036
 [Applause]
 
-00:20:56.536 --> 00:20:59.036 A:middle
+
+378
+00:20:56,536 --> 00:20:59,036
 ChildrenMatchingType is
 the other combination
 
-00:20:59.036 --> 00:21:00.356 A:middle
+
+379
+00:20:59,036 --> 00:21:00,356
 of relationships in filtering.
 
 
-
-00:20:59.036 --> 00:21:00.356 A:middle
-of relationships in filtering.
-
-00:21:01.066 --> 00:21:03.816 A:middle
+380
+00:21:01,066 --> 00:21:03,816
 So in that, that allows
 us to differentiate
 
-00:21:03.816 --> 00:21:06.466 A:middle
+
+381
+00:21:03,816 --> 00:21:06,466
 between descendants, all the
 descendants that match a type,
 
-00:21:06.636 --> 00:21:08.796 A:middle
+
+382
+00:21:06,636 --> 00:21:08,796
 and just those that
 match, that are children.
 
-00:21:10.406 --> 00:21:13.696 A:middle
+
+383
+00:21:10,406 --> 00:21:13,696
 Again the all buttons
 example, is app.buttons,
 
-00:21:13.796 --> 00:21:17.086 A:middle
+
+384
+00:21:13,796 --> 00:21:17,086
 if I want to find just the
 buttons that are children
 
-00:21:17.086 --> 00:21:19.156 A:middle
+
+385
+00:21:17,086 --> 00:21:19,156
 of my nav bar, I
 can take my nav bar
 
-00:21:19.156 --> 00:21:20.696 A:middle
+
+386
+00:21:19,156 --> 00:21:20,696
 and say childrenMatchingType
 button.
 
-00:21:21.236 --> 00:21:24.096 A:middle
+
+387
+00:21:21,236 --> 00:21:24,096
 It is not as common a
 query, but there are cases
 
-00:21:24.096 --> 00:21:26.496 A:middle
+
+388
+00:21:24,096 --> 00:21:26,496
 where it becomes very
 useful to differentiate.
 
-00:21:28.016 --> 00:21:29.766 A:middle
+
+389
+00:21:28,016 --> 00:21:29,766
 Finally, containing type.
 
-00:21:30.366 --> 00:21:34.416 A:middle
+
+390
+00:21:30,366 --> 00:21:34,416
 This allows us to find elements
 by describing their descendants.
 
-00:21:35.306 --> 00:21:37.496 A:middle
+
+391
+00:21:35,306 --> 00:21:37,496
 So in the example
 we have the cells
 
-00:21:37.576 --> 00:21:40.716 A:middle
+
+392
+00:21:37,576 --> 00:21:40,716
 that are each somewhat
 anonymous.
 
-00:21:40.716 --> 00:21:43.076 A:middle
+
+393
+00:21:40,716 --> 00:21:43,076
 They don't have any
 identifying characteristics,
 
-00:21:43.696 --> 00:21:45.756 A:middle
+
+394
+00:21:43,696 --> 00:21:45,756
 but they do contain
 unique labels.
 
-00:21:46.426 --> 00:21:48.316 A:middle
+
+395
+00:21:46,426 --> 00:21:48,316
 Labels are also known
 as static texts.
 
-00:21:49.396 --> 00:21:53.226 A:middle
+
+396
+00:21:49,396 --> 00:21:53,226
 So here I can form a cell
 query which takes the cells
 
-00:21:53.286 --> 00:21:56.206 A:middle
+
+397
+00:21:53,286 --> 00:21:56,206
 and finds the one that is
 containing the type static text
 
-00:21:56.346 --> 00:21:58.166 A:middle
+
+398
+00:21:56,346 --> 00:21:58,166
 with the identifier groceries.
 
-00:21:58.666 --> 00:21:59.976 A:middle
+
+399
+00:21:58,666 --> 00:21:59,976
 That will find the
 first cell for me.
 
 
-
-00:22:00.706 --> 00:22:04.836 A:middle
+400
+00:22:00,706 --> 00:22:04,836
 There's also predicate
 variant for this API.
 
-00:22:05.486 --> 00:22:07.056 A:middle
+
+401
+00:22:05,486 --> 00:22:07,056
 So those are our three APIs
 
-00:22:07.056 --> 00:22:09.306 A:middle
+
+402
+00:22:07,056 --> 00:22:09,306
 that combine relationships
 and filtering.
 
-00:22:09.596 --> 00:22:12.046 A:middle
+
+403
+00:22:09,596 --> 00:22:12,046
 DescendentsMatchingType,
 childrenMatchingType,
 
-00:22:12.556 --> 00:22:15.526 A:middle
+
+404
+00:22:12,556 --> 00:22:15,526
 containingType, and of course
 all the convenience APIs
 
-00:22:15.526 --> 00:22:16.646 A:middle
+
+405
+00:22:15,526 --> 00:22:16,646
 for descendentsMatchingType.
 
-00:22:18.756 --> 00:22:20.676 A:middle
+
+406
+00:22:18,756 --> 00:22:20,676
 The other powerful
 thing about query is
 
-00:22:20.676 --> 00:22:22.376 A:middle
+
+407
+00:22:20,676 --> 00:22:22,376
 that they can be
 chained together.
 
-00:22:22.746 --> 00:22:26.906 A:middle
+
+408
+00:22:22,746 --> 00:22:26,906
 So we can take the output of
 one query and make it the input
 
-00:22:26.906 --> 00:22:29.556 A:middle
+
+409
+00:22:26,906 --> 00:22:29,556
 of the next, just like you
 would pipe commands together
 
-00:22:29.556 --> 00:22:30.636 A:middle
+
+410
+00:22:29,556 --> 00:22:30,636
 on a Unix command line.
 
-00:22:31.396 --> 00:22:33.316 A:middle
+
+411
+00:22:31,396 --> 00:22:33,316
 This is ver powerful,
 and lets you build
 
-00:22:33.316 --> 00:22:35.706 A:middle
+
+412
+00:22:33,316 --> 00:22:35,706
 up very complex queries,
 again in a way
 
-00:22:35.706 --> 00:22:37.146 A:middle
+
+413
+00:22:35,706 --> 00:22:37,146
 that is concise and expressive.
 
-00:22:38.266 --> 00:22:41.496 A:middle
+
+414
+00:22:38,266 --> 00:22:41,496
 So here we have our
 application and I want
 
-00:22:41.496 --> 00:22:43.496 A:middle
+
+415
+00:22:41,496 --> 00:22:43,496
 to find just the
 labels in the table.
 
-00:22:43.996 --> 00:22:44.946 A:middle
+
+416
+00:22:43,996 --> 00:22:44,946
 So I start with the app.
 
-00:22:45.866 --> 00:22:46.996 A:middle
+
+417
+00:22:45,866 --> 00:22:46,996
 And then I get the tables.
 
-00:22:47.646 --> 00:22:50.016 A:middle
+
+418
+00:22:47,646 --> 00:22:50,016
 And I ask for static
 texts and I'm done.
 
-00:22:50.166 --> 00:22:51.316 A:middle
+
+419
+00:22:50,166 --> 00:22:51,316
 I have those three labels.
 
-00:22:53.196 --> 00:22:56.656 A:middle
+
+420
+00:22:53,196 --> 00:22:56,656
 So queries are sometimes
 the end unto themselves.
 
-00:22:56.656 --> 00:22:59.426 A:middle
+
+421
+00:22:56,656 --> 00:22:59,426
 You want to get the count of
 the query and maybe assert
 
-00:22:59.426 --> 00:23:01.236 A:middle
+
+422
+00:22:59,426 --> 00:23:01,236
 that you have the right
 number of items in there.
 
 
-
-00:22:59.426 --> 00:23:01.236 A:middle
-that you have the right
-number of items in there.
-
-00:23:01.586 --> 00:23:04.576 A:middle
+423
+00:23:01,586 --> 00:23:04,576
 But often the goal of a
 query is to find an element.
 
-00:23:04.576 --> 00:23:06.886 A:middle
+
+424
+00:23:04,576 --> 00:23:06,886
 All of our elements
 are backed by a query.
 
-00:23:07.346 --> 00:23:10.616 A:middle
+
+425
+00:23:07,346 --> 00:23:10,616
 To get an element from a
 query we provide several
 
-00:23:10.616 --> 00:23:11.436 A:middle
+
+426
+00:23:10,616 --> 00:23:11,436
 different choices.
 
-00:23:11.756 --> 00:23:14.776 A:middle
+
+427
+00:23:11,756 --> 00:23:14,776
 The first is subscripting,
 which allows us to take a query
 
-00:23:14.776 --> 00:23:17.326 A:middle
+
+428
+00:23:14,776 --> 00:23:17,326
 and then subscript
 using an identifier.
 
-00:23:17.596 --> 00:23:19.176 A:middle
+
+429
+00:23:17,596 --> 00:23:19,176
 That would give me
 back an element
 
-00:23:19.406 --> 00:23:20.576 A:middle
+
+430
+00:23:19,406 --> 00:23:20,576
 which is the groceries label.
 
-00:23:20.576 --> 00:23:23.826 A:middle
+
+431
+00:23:20,576 --> 00:23:23,826
 It can also do this
 with element and index.
 
-00:23:24.076 --> 00:23:26.586 A:middle
+
+432
+00:23:24,076 --> 00:23:26,586
 If I have a set, maybe
 the rows in the table
 
-00:23:26.586 --> 00:23:27.856 A:middle
+
+433
+00:23:26,586 --> 00:23:27,856
 and I want to iterate over them.
 
-00:23:27.856 --> 00:23:32.256 A:middle
+
+434
+00:23:27,856 --> 00:23:32,256
 I could one at a time call
 element and index on these.
 
-00:23:32.256 --> 00:23:35.206 A:middle
+
+435
+00:23:32,256 --> 00:23:35,206
 If I have a query which
 I know resolves uniquely,
 
-00:23:35.496 --> 00:23:38.546 A:middle
+
+436
+00:23:35,496 --> 00:23:38,546
 hat is to a single thing, maybe
 I only have one navigation bar
 
-00:23:38.546 --> 00:23:41.346 A:middle
+
+437
+00:23:38,546 --> 00:23:41,346
 in my application, I can
 use the element property
 
-00:23:41.626 --> 00:23:45.506 A:middle
+
+438
+00:23:41,626 --> 00:23:45,506
 to create a new element
 backed by that query.
 
-00:23:46.666 --> 00:23:48.916 A:middle
+
+439
+00:23:46,666 --> 00:23:48,916
 So when are queries evaluated?
 
-00:23:49.546 --> 00:23:51.396 A:middle
+
+440
+00:23:49,546 --> 00:23:51,396
 So they are not actually
 evaluated just
 
-00:23:51.396 --> 00:23:52.366 A:middle
+
+441
+00:23:51,396 --> 00:23:52,366
 when you create them.
 
-00:23:52.426 --> 00:23:54.936 A:middle
+
+442
+00:23:52,426 --> 00:23:54,936
 They are evaluated on-demand
 or as they are needed.
 
-00:23:55.686 --> 00:23:59.786 A:middle
+
+443
+00:23:55,686 --> 00:23:59,786
 This means that with an element,
 the query will be evaluated
 
 
-
-00:24:00.066 --> 00:24:04.206 A:middle
+444
+00:24:00,066 --> 00:24:04,206
 when you synthesize events
 or read property values.
 
-00:24:04.206 --> 00:24:06.516 A:middle
+
+445
+00:24:04,206 --> 00:24:06,516
 You can create the element
 but until you use it,
 
-00:24:06.516 --> 00:24:07.826 A:middle
+
+446
+00:24:06,516 --> 00:24:07,826
 the query won't be evaluated.
 
-00:24:08.536 --> 00:24:12.106 A:middle
+
+447
+00:24:08,536 --> 00:24:12,106
 Similarly if you create a query
 directly it will be evaluated
 
-00:24:12.106 --> 00:24:15.216 A:middle
+
+448
+00:24:12,106 --> 00:24:15,216
 when you get the number of
 matches or if you call one
 
-00:24:15.216 --> 00:24:16.986 A:middle
+
+449
+00:24:15,216 --> 00:24:16,986
 of the APIs that
 returns all the matches.
 
-00:24:16.986 --> 00:24:19.236 A:middle
+
+450
+00:24:16,986 --> 00:24:19,236
 It will have to be
 evaluated at that point
 
-00:24:20.266 --> 00:24:23.896 A:middle
+
+451
+00:24:20,266 --> 00:24:23,896
 and we will reevaluate
 queries when the UI changes.
 
-00:24:24.216 --> 00:24:27.046 A:middle
+
+452
+00:24:24,216 --> 00:24:27,046
 So you are always working
 with the most current view
 
-00:24:27.046 --> 00:24:30.306 A:middle
+
+453
+00:24:27,046 --> 00:24:30,306
 of the application rather
 than data from ten seconds ago
 
-00:24:30.306 --> 00:24:32.336 A:middle
+
+454
+00:24:30,306 --> 00:24:32,336
 or two minutes ago, depending
 on the length of your test.
 
-00:24:33.946 --> 00:24:36.466 A:middle
+
+455
+00:24:33,946 --> 00:24:36,466
 So in this way you
 can think of queries
 
-00:24:36.466 --> 00:24:38.936 A:middle
+
+456
+00:24:36,466 --> 00:24:38,936
 and elements being
 somewhat similar to URLs.
 
-00:24:39.636 --> 00:24:42.636 A:middle
+
+457
+00:24:39,636 --> 00:24:42,636
 They are, with a URL
 you can create a URL
 
-00:24:42.636 --> 00:24:44.876 A:middle
+
+458
+00:24:42,636 --> 00:24:44,876
 but it doesn't fetch a
 resource immediately.
 
-00:24:44.876 --> 00:24:48.386 A:middle
+
+459
+00:24:44,876 --> 00:24:48,386
 It is not until you actually
 go to create your URL request
 
-00:24:48.386 --> 00:24:52.386 A:middle
+
+460
+00:24:48,386 --> 00:24:52,386
 or session that the
 actual URL gets resolved.
 
-00:24:52.866 --> 00:24:55.216 A:middle
+
+461
+00:24:52,866 --> 00:24:55,216
 And so even if the
 URL was invalid,
 
-00:24:55.406 --> 00:24:57.816 A:middle
+
+462
+00:24:55,406 --> 00:24:57,816
 no error would be
 raised until that point.
 
-00:24:58.746 --> 00:25:03.406 A:middle
+
+463
+00:24:58,746 --> 00:25:03,406
 Similarly, queries and elements,
 they are just specifications
 
 
-
-00:24:58.746 --> 00:25:03.406 A:middle
-Similarly, queries and elements,
-they are just specifications
-
-00:25:03.576 --> 00:25:06.136 A:middle
+464
+00:25:03,576 --> 00:25:06,136
 for accessible elements
 in the tested application.
 
-00:25:06.876 --> 00:25:11.746 A:middle
+
+465
+00:25:06,876 --> 00:25:11,746
 So creating them doesn't do
 anything until you need them
 
-00:25:11.866 --> 00:25:13.436 A:middle
+
+466
+00:25:11,866 --> 00:25:13,436
 and at that point
 they are resolved.
 
-00:25:14.126 --> 00:25:16.706 A:middle
+
+467
+00:25:14,126 --> 00:25:16,706
 So that's the API.
 
-00:25:17.736 --> 00:25:20.376 A:middle
+
+468
+00:25:17,736 --> 00:25:20,376
 There's three classes:
 The application
 
-00:25:20.376 --> 00:25:23.306 A:middle
+
+469
+00:25:20,376 --> 00:25:23,306
 for launching your
 application; elements,
 
-00:25:23.736 --> 00:25:26.736 A:middle
+
+470
+00:25:23,736 --> 00:25:26,736
 which like the application
 are proxy objects for elements
 
-00:25:26.736 --> 00:25:29.366 A:middle
+
+471
+00:25:26,736 --> 00:25:29,366
 in your app; and
 finally queries,
 
-00:25:29.696 --> 00:25:32.586 A:middle
+
+472
+00:25:29,696 --> 00:25:32,586
 which are more complex
 ways to specify elements.
 
-00:25:34.356 --> 00:25:36.036 A:middle
+
+473
+00:25:34,356 --> 00:25:36,036
 So now I want to
 talk a little bit
 
-00:25:36.036 --> 00:25:37.936 A:middle
+
+474
+00:25:36,036 --> 00:25:37,936
 about Accessibility
 and UI testing.
 
-00:25:38.396 --> 00:25:39.336 A:middle
+
+475
+00:25:38,396 --> 00:25:39,336
 I mentioned earlier
 
-00:25:39.646 --> 00:25:43.076 A:middle
+
+476
+00:25:39,646 --> 00:25:43,076
 that accessibility data is
 what makes UI testing possible.
 
-00:25:44.596 --> 00:25:48.856 A:middle
+
+477
+00:25:44,596 --> 00:25:48,856
 So given that, it is not
 hard to see how the quality
 
-00:25:49.116 --> 00:25:53.356 A:middle
+
+478
+00:25:49,116 --> 00:25:53,356
 of the accessibility data
 really impacts your testing.
 
-00:25:53.706 --> 00:25:55.556 A:middle
+
+479
+00:25:53,706 --> 00:25:55,556
 In fact, the better
 the accessibility data
 
-00:25:55.556 --> 00:25:58.316 A:middle
+
+480
+00:25:55,556 --> 00:25:58,316
 for your application, the
 easier it is to write tests
 
-00:25:58.316 --> 00:26:01.506 A:middle
+
+481
+00:25:58,316 --> 00:26:01,506
 and the more reliable
 those tests are over time.
 
 
-
-00:25:58.316 --> 00:26:01.506 A:middle
-and the more reliable
-those tests are over time.
-
-00:26:02.136 --> 00:26:05.296 A:middle
+482
+00:26:02,136 --> 00:26:05,296
 So you get a double benefit
 
-00:26:05.296 --> 00:26:07.236 A:middle
+
+483
+00:26:05,296 --> 00:26:07,236
 when you improve
 the accessibility
 
-00:26:07.236 --> 00:26:08.156 A:middle
+
+484
+00:26:07,236 --> 00:26:08,156
 in your application.
 
-00:26:08.836 --> 00:26:11.086 A:middle
+
+485
+00:26:08,836 --> 00:26:11,086
 You've not only made it
 easier for your own testing
 
-00:26:11.296 --> 00:26:13.376 A:middle
+
+486
+00:26:11,296 --> 00:26:13,376
 but you've improved
 the experience for all
 
-00:26:13.376 --> 00:26:14.506 A:middle
+
+487
+00:26:13,376 --> 00:26:14,506
 of our disabled users.
 
-00:26:14.916 --> 00:26:17.786 A:middle
+
+488
+00:26:14,916 --> 00:26:17,786
 I would really encourage you to
 keep that in mind when you work
 
-00:26:17.786 --> 00:26:19.346 A:middle
+
+489
+00:26:17,786 --> 00:26:19,346
 with UI testing and
 accessibility.
 
-00:26:21.436 --> 00:26:23.316 A:middle
+
+490
+00:26:21,436 --> 00:26:23,316
 Sometimes up's need
 to do some debugging.
 
-00:26:23.876 --> 00:26:27.536 A:middle
+
+491
+00:26:23,876 --> 00:26:27,536
 It's an element may not be
 accessible, may not be showing
 
-00:26:27.536 --> 00:26:29.576 A:middle
+
+492
+00:26:27,536 --> 00:26:29,576
 up for you even when
 you are using recording.
 
-00:26:30.456 --> 00:26:32.886 A:middle
+
+493
+00:26:30,456 --> 00:26:32,886
 That could be because of
 the custom view subclass
 
-00:26:32.956 --> 00:26:34.816 A:middle
+
+494
+00:26:32,956 --> 00:26:34,816
 that may not be accessible
 by default.
 
-00:26:35.526 --> 00:26:38.076 A:middle
+
+495
+00:26:35,526 --> 00:26:38,076
 Or it's actually not a view.
 
-00:26:38.256 --> 00:26:41.526 A:middle
+
+496
+00:26:38,256 --> 00:26:41,526
 It's a graphics object in a
 lower level graphics subsystem
 
-00:26:41.526 --> 00:26:43.576 A:middle
+
+497
+00:26:41,526 --> 00:26:43,576
 such as a layer and
 that sort of thing.
 
-00:26:44.686 --> 00:26:46.636 A:middle
+
+498
+00:26:44,686 --> 00:26:46,636
 In other cases, the
 element is visible
 
-00:26:46.636 --> 00:26:49.026 A:middle
+
+499
+00:26:46,636 --> 00:26:49,026
 but has poor accessibility data.
 
-00:26:49.356 --> 00:26:50.976 A:middle
+
+500
+00:26:49,356 --> 00:26:50,976
 All those table cells
 I was looking
 
-00:26:51.076 --> 00:26:54.756 A:middle
+
+501
+00:26:51,076 --> 00:26:54,756
 at in the containment query,
 partly that might have gone away
 
-00:26:54.756 --> 00:26:57.356 A:middle
+
+502
+00:26:54,756 --> 00:26:57,356
 if the cells themselves had
 better accessibility data.
 
-00:26:58.476 --> 00:27:00.816 A:middle
+
+503
+00:26:58,476 --> 00:27:00,816
 When this happens, there's
 a couple tools I would point
 
 
-
-00:26:58.476 --> 00:27:00.816 A:middle
-When this happens, there's
-a couple tools I would point
-
-00:27:00.816 --> 00:27:01.106 A:middle
+504
+00:27:00,816 --> 00:27:01,106
 you at.
 
-00:27:01.396 --> 00:27:04.006 A:middle
+
+505
+00:27:01,396 --> 00:27:04,006
 The first of which is
 UI recording itself
 
-00:27:04.286 --> 00:27:06.796 A:middle
+
+506
+00:27:04,286 --> 00:27:06,796
 because UI recording will
 give you the closest view
 
-00:27:07.106 --> 00:27:09.986 A:middle
+
+507
+00:27:07,106 --> 00:27:09,986
 into how the testing
 system sees the elements.
 
-00:27:10.416 --> 00:27:13.366 A:middle
+
+508
+00:27:10,416 --> 00:27:13,366
 But beyond that there's also
 great accessibility inspectors
 
-00:27:13.366 --> 00:27:14.126 A:middle
+
+509
+00:27:13,366 --> 00:27:14,126
 on our platform.
 
-00:27:14.426 --> 00:27:17.156 A:middle
+
+510
+00:27:14,426 --> 00:27:17,156
 They'll let you see the
 raw accessibility data
 
-00:27:17.456 --> 00:27:19.456 A:middle
+
+511
+00:27:17,456 --> 00:27:19,456
 as it is exposed
 by the application.
 
-00:27:20.046 --> 00:27:23.576 A:middle
+
+512
+00:27:20,046 --> 00:27:23,576
 When you need to go
 and improve that data,
 
-00:27:24.066 --> 00:27:25.996 A:middle
+
+513
+00:27:24,066 --> 00:27:25,996
 your first stop should
 be Interface Builder.
 
-00:27:26.606 --> 00:27:31.076 A:middle
+
+514
+00:27:26,606 --> 00:27:31,076
 Interface Builder has a
 great accessibility inspector
 
-00:27:31.506 --> 00:27:34.106 A:middle
+
+515
+00:27:31,506 --> 00:27:34,106
 which allows you to enable
 or disable accessibility,
 
-00:27:34.366 --> 00:27:37.116 A:middle
+
+516
+00:27:34,366 --> 00:27:37,116
 set values for the various
 accessibility attributes,
 
-00:27:37.526 --> 00:27:40.226 A:middle
+
+517
+00:27:37,526 --> 00:27:40,226
 and configure the traits
 which have a direct impact
 
-00:27:40.286 --> 00:27:43.366 A:middle
+
+518
+00:27:40,286 --> 00:27:43,366
 on how the element is expressed
 as a type in UI testing.
 
-00:27:45.126 --> 00:27:47.466 A:middle
+
+519
+00:27:45,126 --> 00:27:47,466
 There's also API if you're
 working with elements
 
-00:27:47.506 --> 00:27:50.316 A:middle
+
+520
+00:27:47,506 --> 00:27:50,316
 that you can't access
 through Interface Builder.
 
-00:27:50.896 --> 00:27:53.676 A:middle
+
+521
+00:27:50,896 --> 00:27:53,676
 You can use APIs
 in NSAccessibility
 
-00:27:53.736 --> 00:27:57.956 A:middle
+
+522
+00:27:53,736 --> 00:27:57,956
 and UIAccessibility to directly
 control how the element is
 
-00:27:57.956 --> 00:27:59.246 A:middle
+
+523
+00:27:57,956 --> 00:27:59,246
 expressed to Accessibility.
 
-00:27:59.886 --> 00:28:04.386 A:middle
+
+524
+00:27:59,886 --> 00:28:04,386
 So with that in mind,
 let's see another demo.
 
 
-
-00:27:59.886 --> 00:28:04.386 A:middle
-So with that in mind,
-let's see another demo.
-
-00:28:04.856 --> 00:28:05.976 A:middle
+525
+00:28:04,856 --> 00:28:05,976
 This time Brooke
 is going to take us
 
-00:28:05.976 --> 00:28:09.456 A:middle
+
+526
+00:28:05,976 --> 00:28:09,456
 through more complex test
 cases and also a little bit
 
-00:28:09.456 --> 00:28:10.656 A:middle
+
+527
+00:28:09,456 --> 00:28:10,656
 of accessibility debugging.
 
-00:28:11.166 --> 00:28:11.296 A:middle
+
+528
+00:28:11,166 --> 00:28:11,296
 Brooke?
 
-00:28:11.296 --> 00:28:11.556 A:middle
-&gt;&gt; BROOKE CALLAHAN: Thanks, Wil.
 
-00:28:12.516 --> 00:28:19.396 A:middle
+529
+00:28:11,296 --> 00:28:11,556
+>> BROOKE CALLAHAN: Thanks, Wil.
+
+
+530
+00:28:12,516 --> 00:28:19,396
 [Applause]
 
-00:28:19.896 --> 00:28:22.236 A:middle
-&gt;&gt; BROOKE CALLAHAN: So in the
+
+531
+00:28:19,896 --> 00:28:22,236
+>> BROOKE CALLAHAN: So in the
 last demo we saw adding a test
 
-00:28:22.236 --> 00:28:27.066 A:middle
+
+532
+00:28:22,236 --> 00:28:27,066
 that can add and remove
 an item from the list.
 
-00:28:27.596 --> 00:28:30.506 A:middle
+
+533
+00:28:27,596 --> 00:28:30,506
 So while I'm here I would
 like to add some more tests
 
-00:28:30.506 --> 00:28:32.006 A:middle
+
+534
+00:28:30,506 --> 00:28:32,006
 around this area
 of user interface.
 
-00:28:32.406 --> 00:28:33.586 A:middle
+
+535
+00:28:32,406 --> 00:28:33,586
 First I'm going to add a test
 
-00:28:34.106 --> 00:28:37.846 A:middle
+
+536
+00:28:34,106 --> 00:28:37,846
 that adds multiple
 items to the same list.
 
-00:28:38.316 --> 00:28:41.876 A:middle
+
+537
+00:28:38,316 --> 00:28:41,876
 With this multiple items
 with the same name to a list.
 
-00:28:42.586 --> 00:28:45.646 A:middle
+
+538
+00:28:42,586 --> 00:28:45,646
 So to do that I'm going
 to copy this code here
 
-00:28:45.646 --> 00:28:46.536 A:middle
+
+539
+00:28:45,646 --> 00:28:46,536
 from the last test.
 
-00:28:47.056 --> 00:28:51.926 A:middle
+
+540
+00:28:47,056 --> 00:28:51,926
 And I'll call this new
 test, add to cookies.
 
-00:28:53.036 --> 00:28:54.116 A:middle
+
+541
+00:28:53,036 --> 00:28:54,116
 I'll just paste that code in.
 
-00:28:55.306 --> 00:28:59.736 A:middle
+
+542
+00:28:55,306 --> 00:28:59,736
 Great. Now I have a test
 that is going to tap
 
-00:28:59.736 --> 00:29:01.746 A:middle
+
+543
+00:28:59,736 --> 00:29:01,746
 on the groceries label.
 
 
-
-00:28:59.736 --> 00:29:01.746 A:middle
-on the groceries label.
-
-00:29:02.456 --> 00:29:05.356 A:middle
+544
+00:29:02,456 --> 00:29:05,356
 Next it is going to add the
 new cookies item to the list,
 
-00:29:05.756 --> 00:29:08.656 A:middle
+
+545
+00:29:05,756 --> 00:29:08,656
 and then it is going to
 tap on that cookies button
 
-00:29:08.656 --> 00:29:12.146 A:middle
+
+546
+00:29:08,656 --> 00:29:12,146
 in that item, and verify
 that it actually gets
 
-00:29:12.146 --> 00:29:14.256 A:middle
+
+547
+00:29:12,146 --> 00:29:14,256
 to that tapped state.
 
-00:29:15.126 --> 00:29:16.976 A:middle
+
+548
+00:29:15,126 --> 00:29:16,976
 So to add the second
 item I'm just going
 
-00:29:16.976 --> 00:29:17.856 A:middle
+
+549
+00:29:16,976 --> 00:29:17,856
 to copy this code here.
 
-00:29:17.856 --> 00:29:23.816 A:middle
+
+550
+00:29:17,856 --> 00:29:23,816
 And then to verify that the new
 button exists and gets tapped,
 
-00:29:24.586 --> 00:29:26.126 A:middle
+
+551
+00:29:24,586 --> 00:29:26,126
 I'm going to copy that section.
 
-00:29:26.676 --> 00:29:34.406 A:middle
+
+552
+00:29:26,676 --> 00:29:34,406
 So let's run this test
 and see how that works.
 
-00:29:34.606 --> 00:29:35.836 A:middle
+
+553
+00:29:34,606 --> 00:29:35,836
 Now let's add the first one.
 
-00:29:37.116 --> 00:29:37.626 A:middle
+
+554
+00:29:37,116 --> 00:29:37,626
 Second one.
 
-00:29:38.786 --> 00:29:40.546 A:middle
+
+555
+00:29:38,786 --> 00:29:40,546
 Ahh, failed an assertion here.
 
-00:29:40.906 --> 00:29:44.566 A:middle
+
+556
+00:29:40,906 --> 00:29:44,566
 So on this line here, where
 we are getting the value
 
-00:29:44.766 --> 00:29:47.986 A:middle
+
+557
+00:29:44,766 --> 00:29:47,986
 of the cookies button for
 the second time around,
 
-00:29:48.636 --> 00:29:49.996 A:middle
+
+558
+00:29:48,636 --> 00:29:49,996
 we are actually failing
 the assertion.
 
-00:29:50.426 --> 00:29:52.586 A:middle
+
+559
+00:29:50,426 --> 00:29:52,586
 Looks like it's failing because
 multiple matches are found.
 
-00:29:53.036 --> 00:29:55.206 A:middle
+
+560
+00:29:53,036 --> 00:29:55,206
 I think I have an idea
 of what went wrong here.
 
-00:29:56.546 --> 00:30:00.246 A:middle
+
+561
+00:29:56,546 --> 00:30:00,246
 The way that the cookies
 button constant is specified,
 
 
-
-00:29:56.546 --> 00:30:00.246 A:middle
-The way that the cookies
-button constant is specified,
-
-00:30:00.246 --> 00:30:02.646 A:middle
+562
+00:30:00,246 --> 00:30:02,646
 it is just looking for all
 the buttons in the table,
 
-00:30:02.736 --> 00:30:05.726 A:middle
+
+563
+00:30:02,736 --> 00:30:05,726
 and giving me one
 that's called cookies.
 
-00:30:06.206 --> 00:30:07.796 A:middle
+
+564
+00:30:06,206 --> 00:30:07,796
 By this point in the test,
 
-00:30:07.796 --> 00:30:11.226 A:middle
+
+565
+00:30:07,796 --> 00:30:11,226
 there are two buttons
 called cookies in the table.
 
-00:30:11.226 --> 00:30:15.136 A:middle
+
+566
+00:30:11,226 --> 00:30:15,136
 It will find both of them
 and there is not going
 
-00:30:15.136 --> 00:30:17.946 A:middle
+
+567
+00:30:15,136 --> 00:30:17,946
 to be one value that
 the element can return
 
-00:30:17.946 --> 00:30:19.266 A:middle
+
+568
+00:30:17,946 --> 00:30:19,266
 because there's these
 two matches.
 
-00:30:20.236 --> 00:30:23.256 A:middle
+
+569
+00:30:20,236 --> 00:30:23,256
 Now, I only know that because
 I just saw the test running.
 
-00:30:23.686 --> 00:30:27.346 A:middle
+
+570
+00:30:23,686 --> 00:30:27,346
 Normally you are not going to be
 watching your test as it runs.
 
-00:30:28.356 --> 00:30:30.926 A:middle
+
+571
+00:30:28,356 --> 00:30:30,926
 So we thought we should
 provide a way for you
 
-00:30:30.926 --> 00:30:33.956 A:middle
+
+572
+00:30:30,926 --> 00:30:33,956
 to see what the test looks
 like when it last ran
 
-00:30:34.816 --> 00:30:38.126 A:middle
+
+573
+00:30:34,816 --> 00:30:38,126
 and we've added this information
 to the test reports in Xcode.
 
-00:30:39.596 --> 00:30:42.456 A:middle
+
+574
+00:30:39,596 --> 00:30:42,456
 So if I go to the report
 navigator and click
 
-00:30:42.456 --> 00:30:43.686 A:middle
+
+575
+00:30:42,456 --> 00:30:43,686
 on the most recent test report,
 
-00:30:44.066 --> 00:30:47.366 A:middle
+
+576
+00:30:44,066 --> 00:30:47,366
 you can see the test
 add to cookies test.
 
-00:30:48.336 --> 00:30:51.946 A:middle
+
+577
+00:30:48,336 --> 00:30:51,946
 If I expand this item, you
 can see all of the activities
 
-00:30:51.946 --> 00:30:53.376 A:middle
+
+578
+00:30:51,946 --> 00:30:53,376
 that happen during the test.
 
-00:30:54.216 --> 00:30:57.056 A:middle
+
+579
+00:30:54,216 --> 00:30:57,056
 And down here I see this last
 find the cookies button item.
 
-00:30:57.326 --> 00:30:58.066 A:middle
+
+580
+00:30:57,326 --> 00:30:58,066
 There's my failure.
 
-00:30:58.066 --> 00:30:59.156 A:middle
+
+581
+00:30:58,066 --> 00:30:59,156
 Multiple matches found.
 
-00:30:59.896 --> 00:31:03.626 A:middle
+
+582
+00:30:59,896 --> 00:31:03,626
 There's also a quick look button
 here, where I can look on that
 
 
-
-00:30:59.896 --> 00:31:03.626 A:middle
-There's also a quick look button
-here, where I can look on that
-
-00:31:03.626 --> 00:31:05.746 A:middle
+583
+00:31:03,626 --> 00:31:05,746
 and it will show
 me the exact state
 
-00:31:05.746 --> 00:31:07.246 A:middle
+
+584
+00:31:05,746 --> 00:31:07,246
 of the application
 when that happened.
 
-00:31:07.246 --> 00:31:09.516 A:middle
+
+585
+00:31:07,246 --> 00:31:09,516
 Just like we know
 happened, yeah,
 
-00:31:09.516 --> 00:31:10.946 A:middle
+
+586
+00:31:09,516 --> 00:31:10,946
 there's two rows called cookies.
 
-00:31:11.516 --> 00:31:13.596 A:middle
+
+587
+00:31:11,516 --> 00:31:13,596
 One of them is tapped and
 one of them is not tapped.
 
-00:31:14.516 --> 00:31:18.936 A:middle
+
+588
+00:31:14,516 --> 00:31:18,936
 [Applause]
 
-00:31:19.436 --> 00:31:21.876 A:middle
-&gt;&gt; BROOKE CALLAHAN: I am going
+
+589
+00:31:19,436 --> 00:31:21,876
+>> BROOKE CALLAHAN: I am going
 to close that and if I want
 
-00:31:21.876 --> 00:31:23.506 A:middle
+
+590
+00:31:21,876 --> 00:31:23,506
 to see the complete
 assertion failure,
 
-00:31:23.506 --> 00:31:25.426 A:middle
+
+591
+00:31:23,506 --> 00:31:25,426
 I can go to the log section
 
-00:31:26.506 --> 00:31:32.396 A:middle
+
+592
+00:31:26,506 --> 00:31:32,396
 and on this line I can
 expand the log for that test.
 
-00:31:32.566 --> 00:31:37.326 A:middle
+
+593
+00:31:32,566 --> 00:31:37,326
 And here we can see the complete
 assertion failure showing the
 
-00:31:37.326 --> 00:31:40.176 A:middle
+
+594
+00:31:37,326 --> 00:31:40,176
 accessibility hierarchy
 of both those buttons.
 
-00:31:40.776 --> 00:31:44.366 A:middle
+
+595
+00:31:40,776 --> 00:31:44,366
 And here on the side I can see
 that yeah, there's one button
 
-00:31:44.366 --> 00:31:46.686 A:middle
+
+596
+00:31:44,366 --> 00:31:46,686
 that is unchecked and
 the other one is checked,
 
-00:31:47.666 --> 00:31:49.186 A:middle
+
+597
+00:31:47,666 --> 00:31:49,186
 just like I expect.
 
-00:31:49.996 --> 00:31:51.436 A:middle
+
+598
+00:31:49,996 --> 00:31:51,436
 Let's go back and fix that test.
 
-00:31:52.626 --> 00:31:55.656 A:middle
+
+599
+00:31:52,626 --> 00:31:55,656
 The easiest way for
 me to fix this test is
 
-00:31:55.656 --> 00:31:56.556 A:middle
+
+600
+00:31:55,656 --> 00:31:56,556
 to use recording again.
 
-00:31:57.096 --> 00:31:59.576 A:middle
+
+601
+00:31:57,096 --> 00:31:59,576
 I'll set a breakpoint on this
 line right before the assertion
 
-00:31:59.576 --> 00:32:11.096 A:middle
+
+602
+00:31:59,576 --> 00:32:11,096
 failure, and run the
 test at that point.
 
 
-
-00:31:59.576 --> 00:32:11.096 A:middle
-failure, and run the
-test at that point.
-
-00:32:11.316 --> 00:32:11.586 A:middle
+603
+00:32:11,316 --> 00:32:11,586
 All right.
 
-00:32:11.656 --> 00:32:14.846 A:middle
+
+604
+00:32:11,656 --> 00:32:14,846
 So now I've got the application
 in exactly the state I need it
 
-00:32:14.846 --> 00:32:18.176 A:middle
+
+605
+00:32:14,846 --> 00:32:18,176
 to be to get the value
 of that unchecked button.
 
-00:32:18.326 --> 00:32:20.906 A:middle
+
+606
+00:32:18,326 --> 00:32:20,906
 All I'm going to do is I'm
 going to click on recording,
 
-00:32:20.906 --> 00:32:25.466 A:middle
+
+607
+00:32:20,906 --> 00:32:25,466
 tap on that button,
 and stop recording.
 
-00:32:26.506 --> 00:32:29.416 A:middle
+
+608
+00:32:26,506 --> 00:32:29,416
 Now I have a way to refer
 to that second button.
 
-00:32:30.206 --> 00:32:30.806 A:middle
+
+609
+00:32:30,206 --> 00:32:30,806
 I'm going to clean this
 
-00:32:30.806 --> 00:32:33.446 A:middle
+
+610
+00:32:30,806 --> 00:32:33,446
 up by using the table
 constant in both.
 
-00:32:33.446 --> 00:32:36.696 A:middle
+
+611
+00:32:33,446 --> 00:32:36,696
 I'm going to call this
 cookies button two,
 
-00:32:36.806 --> 00:32:38.866 A:middle
+
+612
+00:32:36,806 --> 00:32:38,866
 a new constant in my test.
 
-00:32:45.306 --> 00:32:47.856 A:middle
+
+613
+00:32:45,306 --> 00:32:47,856
 And now to fix the test
 I'm going to change each
 
-00:32:47.856 --> 00:32:49.656 A:middle
+
+614
+00:32:47,856 --> 00:32:49,656
 of the next three lines
 to use that new reference.
 
-00:32:53.476 --> 00:32:56.036 A:middle
+
+615
+00:32:53,476 --> 00:32:56,036
 And when I run the test again,
 we should see that it works.
 
 
-
-00:33:06.896 --> 00:33:07.156 A:middle
+616
+00:33:06,896 --> 00:33:07,156
 Great!
 
-00:33:08.516 --> 00:33:13.156 A:middle
+
+617
+00:33:08,516 --> 00:33:13,156
 [Applause]
 
-00:33:13.656 --> 00:33:13.916 A:middle
+
+618
+00:33:13,656 --> 00:33:13,916
 All right.
 
-00:33:14.246 --> 00:33:16.636 A:middle
+
+619
+00:33:14,246 --> 00:33:16,636
 Now I've got one test that
 can add and remove an item
 
-00:33:16.636 --> 00:33:18.816 A:middle
+
+620
+00:33:16,636 --> 00:33:18,816
 from the list and another
 test that can add two items
 
-00:33:18.816 --> 00:33:21.456 A:middle
+
+621
+00:33:18,816 --> 00:33:21,456
 to the same list, and
 verify they both exist.
 
-00:33:21.456 --> 00:33:23.226 A:middle
+
+622
+00:33:21,456 --> 00:33:23,226
 Now I want to build a test
 
-00:33:23.506 --> 00:33:26.296 A:middle
+
+623
+00:33:23,506 --> 00:33:26,296
 that will remove all
 the items from the list.
 
-00:33:26.896 --> 00:33:30.856 A:middle
+
+624
+00:33:26,896 --> 00:33:30,856
 Once again I'm going
 to use recording.
 
-00:33:30.856 --> 00:33:39.516 A:middle
+
+625
+00:33:30,856 --> 00:33:39,516
 I am going to tap on groceries,
 edit, and then I'm going
 
-00:33:39.516 --> 00:33:45.586 A:middle
+
+626
+00:33:39,516 --> 00:33:45,586
 to remove the apples
 row from the test.
 
-00:33:45.756 --> 00:33:46.036 A:middle
+
+627
+00:33:45,756 --> 00:33:46,036
 All right?
 
-00:33:46.126 --> 00:33:47.256 A:middle
+
+628
+00:33:46,126 --> 00:33:47,256
 I'll tap stop recording.
 
-00:33:48.026 --> 00:33:53.086 A:middle
+
+629
+00:33:48,026 --> 00:33:53,086
 So all this much of the test
 is pretty much how I want,
 
-00:33:53.646 --> 00:33:57.766 A:middle
+
+630
+00:33:53,646 --> 00:33:57,766
 but what I want to do is, I
 want to make my test agnostic
 
-00:33:57.766 --> 00:33:59.166 A:middle
+
+631
+00:33:57,766 --> 00:33:59,166
 to the data of the application.
 
-00:33:59.436 --> 00:34:01.766 A:middle
+
+632
+00:33:59,436 --> 00:34:01,766
 I want it to remove all these
 items, but I don't want it
 
 
-
-00:33:59.436 --> 00:34:01.766 A:middle
-I want it to remove all these
-items, but I don't want it
-
-00:34:01.766 --> 00:34:05.246 A:middle
+633
+00:34:01,766 --> 00:34:05,246
 to actually refer to the
 items by their labels.
 
-00:34:06.486 --> 00:34:08.286 A:middle
+
+634
+00:34:06,486 --> 00:34:08,286
 Because that is going to
 get kind of wordy here.
 
-00:34:08.716 --> 00:34:14.585 A:middle
+
+635
+00:34:08,716 --> 00:34:14,585
 So first thing I'm going to
 do, you see these tokens here,
 
-00:34:14.585 --> 00:34:20.565 A:middle
+
+636
+00:34:14,585 --> 00:34:20,565
 the tokens provide multiple ways
 to get to the same UI element.
 
-00:34:20.565 --> 00:34:23.846 A:middle
+
+637
+00:34:20,565 --> 00:34:23,846
 In this case, for that
 first delete apples button,
 
-00:34:23.846 --> 00:34:27.815 A:middle
+
+638
+00:34:23,846 --> 00:34:27,815
 I can get to this by calling
 table.button delete apples.
 
-00:34:28.016 --> 00:34:34.056 A:middle
+
+639
+00:34:28,016 --> 00:34:34,056
 I can be more specific and say
 it's the delete apples button
 
-00:34:34.565 --> 00:34:35.676 A:middle
+
+640
+00:34:34,565 --> 00:34:35,676
 in the cell called apples.
 
-00:34:35.716 --> 00:34:38.146 A:middle
+
+641
+00:34:35,716 --> 00:34:38,146
 So I'm going to use that.
 
-00:34:38.146 --> 00:34:45.136 A:middle
+
+642
+00:34:38,146 --> 00:34:45,136
 And I'm going to double click
 on it to convert it to text.
 
-00:34:45.136 --> 00:34:48.516 A:middle
+
+643
+00:34:45,136 --> 00:34:48,516
 So now I've got two rows here
 
-00:34:48.596 --> 00:34:50.985 A:middle
+
+644
+00:34:48,596 --> 00:34:50,985
 where we are getting the
 elements the same way.
 
-00:34:51.275 --> 00:34:55.156 A:middle
+
+645
+00:34:51,275 --> 00:34:55,156
 What I would like to do is
 get the cell simply by index.
 
-00:34:55.156 --> 00:35:00.116 A:middle
+
+646
+00:34:55,156 --> 00:35:00,116
 I will add a constant called let
 cell, table., and set this equal
 
 
-
-00:34:55.156 --> 00:35:00.116 A:middle
-I will add a constant called let
-cell, table., and set this equal
-
-00:35:00.436 --> 00:35:03.456 A:middle
+647
+00:35:00,436 --> 00:35:03,456
 to table.cells elements index.
 
-00:35:03.926 --> 00:35:09.126 A:middle
+
+648
+00:35:03,926 --> 00:35:09,126
 Since the apples row was index
 one, I'm going to use that.
 
-00:35:09.506 --> 00:35:17.406 A:middle
+
+649
+00:35:09,506 --> 00:35:17,406
 I can simply replace these with
 the reference to that constant.
 
-00:35:17.406 --> 00:35:17.586 A:middle
+
+650
+00:35:17,406 --> 00:35:17,586
 All right.
 
-00:35:17.586 --> 00:35:18.406 A:middle
+
+651
+00:35:17,586 --> 00:35:18,406
 I'm almost done.
 
-00:35:19.536 --> 00:35:22.486 A:middle
+
+652
+00:35:19,536 --> 00:35:22,486
 The next part I need to change
 here is how I'm getting the
 
-00:35:22.486 --> 00:35:25.836 A:middle
+
+653
+00:35:22,486 --> 00:35:25,836
 button out of the cell because
 the other rows are not going
 
-00:35:25.986 --> 00:35:27.296 A:middle
+
+654
+00:35:25,986 --> 00:35:27,296
 to have a delete apples button.
 
-00:35:27.296 --> 00:35:29.906 A:middle
+
+655
+00:35:27,296 --> 00:35:29,906
 They will have a delete
 oranges button or delete bread.
 
-00:35:30.276 --> 00:35:33.306 A:middle
+
+656
+00:35:30,276 --> 00:35:33,306
 What I need is a way
 to find the button
 
-00:35:33.846 --> 00:35:35.946 A:middle
+
+657
+00:35:33,846 --> 00:35:35,946
 where the label starts
 with the word delete.
 
-00:35:36.626 --> 00:35:41.806 A:middle
+
+658
+00:35:36,626 --> 00:35:41,806
 To do that I'm going
 to use a predicate.
 
-00:35:41.886 --> 00:35:45.706 A:middle
+
+659
+00:35:41,886 --> 00:35:45,706
 So here I'm using
 matching predicate
 
-00:35:45.836 --> 00:35:49.506 A:middle
+
+660
+00:35:45,836 --> 00:35:49,506
 to find the button whose label
 begins with the word delete.
 
-00:35:49.506 --> 00:35:50.226 A:middle
+
+661
+00:35:49,506 --> 00:35:50,226
 All right.
 
-00:35:51.096 --> 00:35:54.866 A:middle
+
+662
+00:35:51,096 --> 00:35:54,866
 So the last thing I
 need to change here,
 
-00:35:54.986 --> 00:35:56.776 A:middle
+
+663
+00:35:54,986 --> 00:35:56,776
 I want to add an
 assertion just like before.
 
-00:35:56.836 --> 00:35:59.106 A:middle
+
+664
+00:35:56,836 --> 00:35:59,106
 I want to verify that
 that cell goes away
 
-00:35:59.106 --> 00:36:00.566 A:middle
+
+665
+00:35:59,106 --> 00:36:00,566
 after we've removed it.
 
 
-
-00:35:59.106 --> 00:36:00.566 A:middle
-after we've removed it.
-
-00:36:00.566 --> 00:36:02.656 A:middle
+666
+00:36:00,566 --> 00:36:02,656
 I am going to use
 XCTAssertEqual,
 
-00:36:02.656 --> 00:36:06.676 A:middle
+
+667
+00:36:02,656 --> 00:36:06,676
 and assert that the cells
 exist property returns false
 
-00:36:06.676 --> 00:36:09.136 A:middle
+
+668
+00:36:06,676 --> 00:36:09,136
 after we tap that delete
 confirmation button.
 
-00:36:09.136 --> 00:36:11.756 A:middle
+
+669
+00:36:09,136 --> 00:36:11,756
 I'm going to run the test now.
 
-00:36:12.436 --> 00:36:26.176 A:middle
+
+670
+00:36:12,436 --> 00:36:26,176
 It is removing the apples
 row but failed the assertion.
 
-00:36:26.736 --> 00:36:28.886 A:middle
+
+671
+00:36:26,736 --> 00:36:28,886
 I have an idea what
 might be going on here.
 
-00:36:30.456 --> 00:36:33.506 A:middle
+
+672
+00:36:30,456 --> 00:36:33,506
 To show you what is going
 on I'll use the debugger.
 
-00:36:33.606 --> 00:36:36.216 A:middle
+
+673
+00:36:33,606 --> 00:36:36,216
 I'll set a breakpoint here
 and run the test again,
 
-00:36:36.256 --> 00:36:44.946 A:middle
+
+674
+00:36:36,256 --> 00:36:44,946
 to that same breakpoint.
 
-00:36:45.296 --> 00:36:45.596 A:middle
+
+675
+00:36:45,296 --> 00:36:45,596
 All right.
 
-00:36:45.656 --> 00:36:48.876 A:middle
+
+676
+00:36:45,656 --> 00:36:48,876
 Now in the debugger, I'm going
 
-00:36:48.876 --> 00:36:50.636 A:middle
+
+677
+00:36:48,876 --> 00:36:50,636
 to call debug description
 on the cell.
 
-00:36:58.556 --> 00:37:01.826 A:middle
+
+678
+00:36:58,556 --> 00:37:01,826
 So the debug description
 has a lot of information
 
 
-
-00:36:58.556 --> 00:37:01.826 A:middle
-So the debug description
-has a lot of information
-
-00:37:01.826 --> 00:37:03.906 A:middle
+679
+00:37:01,826 --> 00:37:03,906
 about how the cell
 is actually resolved.
 
-00:37:04.376 --> 00:37:07.116 A:middle
+
+680
+00:37:04,376 --> 00:37:07,116
 So I can see here
 that when I call it,
 
-00:37:07.886 --> 00:37:10.646 A:middle
+
+681
+00:37:07,886 --> 00:37:10,646
 this cell result first
 finds the application
 
-00:37:12.776 --> 00:37:16.046 A:middle
+
+682
+00:37:12,776 --> 00:37:16,046
 and then it finds the
 table in the application.
 
-00:37:17.296 --> 00:37:18.306 A:middle
+
+683
+00:37:17,296 --> 00:37:18,306
 Then all the cells.
 
-00:37:18.306 --> 00:37:21.946 A:middle
+
+684
+00:37:18,306 --> 00:37:21,946
 And then the element and
 index in those cells.
 
-00:37:22.596 --> 00:37:24.816 A:middle
+
+685
+00:37:22,596 --> 00:37:24,816
 I can see that it's actually
 finding the oranges row.
 
-00:37:25.966 --> 00:37:28.016 A:middle
+
+686
+00:37:25,966 --> 00:37:28,016
 It looks like what might
 be happening here is
 
-00:37:29.196 --> 00:37:34.886 A:middle
+
+687
+00:37:29,196 --> 00:37:34,886
 when we call the exist property
 on this element called cell,
 
-00:37:35.696 --> 00:37:37.526 A:middle
+
+688
+00:37:35,696 --> 00:37:37,526
 it is actually re-resolving
 itself.
 
-00:37:37.866 --> 00:37:41.096 A:middle
+
+689
+00:37:37,866 --> 00:37:41,096
 Even though we just
 removed the apples row
 
-00:37:41.096 --> 00:37:45.926 A:middle
+
+690
+00:37:41,096 --> 00:37:45,926
 from the table there's now
 a new cell at index one.
 
-00:37:46.836 --> 00:37:49.026 A:middle
+
+691
+00:37:46,836 --> 00:37:49,026
 So that is no problem.
 
-00:37:50.286 --> 00:37:52.986 A:middle
+
+692
+00:37:50,286 --> 00:37:52,986
 It just means I need to
 use a different way to find
 
-00:37:53.156 --> 00:37:55.456 A:middle
+
+693
+00:37:53,156 --> 00:37:55,456
 out whether or not
 we've removed the row.
 
-00:37:56.026 --> 00:37:57.996 A:middle
+
+694
+00:37:56,026 --> 00:37:57,996
 So I'm going to add
 an assertion,
 
-00:37:58.026 --> 00:37:59.936 A:middle
+
+695
+00:37:58,026 --> 00:37:59,936
 assert that the number of cells
 
 
-
-00:38:00.156 --> 00:38:03.396 A:middle
+696
+00:38:00,156 --> 00:38:03,396
 in the table goes
 down at this point.
 
-00:38:03.396 --> 00:38:05.886 A:middle
+
+697
+00:38:03,396 --> 00:38:05,886
 So I'm going to add a new
 constant called "count"
 
-00:38:06.466 --> 00:38:11.576 A:middle
+
+698
+00:38:06,466 --> 00:38:11,576
 and I'll set this equal to the
 count of the cells in the table.
 
-00:38:12.126 --> 00:38:18.356 A:middle
+
+699
+00:38:12,126 --> 00:38:18,356
 And then I'll simply assert that
 that's equal to count minus 1.
 
-00:38:18.356 --> 00:38:22.626 A:middle
+
+700
+00:38:18,356 --> 00:38:22,626
 Now, the last thing I need
 to do, I said this was going
 
-00:38:22.626 --> 00:38:24.346 A:middle
+
+701
+00:38:22,626 --> 00:38:24,346
 to be a remove all items test.
 
-00:38:24.346 --> 00:38:31.076 A:middle
+
+702
+00:38:24,346 --> 00:38:31,076
 I'm going to change it to add
 a wild loop and simply do this
 
-00:38:31.076 --> 00:38:33.196 A:middle
+
+703
+00:38:31,076 --> 00:38:33,196
 over and over again as
 long as there's more
 
-00:38:33.196 --> 00:38:39.016 A:middle
+
+704
+00:38:33,196 --> 00:38:39,016
 than one cell in the table.
 
-00:38:39.186 --> 00:38:40.366 A:middle
+
+705
+00:38:39,186 --> 00:38:40,366
 Let's run that.
 
-00:38:43.576 --> 00:38:49.426 A:middle
+
+706
+00:38:43,576 --> 00:38:49,426
 So it's removing the
 apples row, and oranges.
 
-00:38:55.556 --> 00:38:56.256 A:middle
+
+707
+00:38:55,556 --> 00:38:56,256
 All right.
 
-00:38:57.516 --> 00:39:04.096 A:middle
+
+708
+00:38:57,516 --> 00:39:04,096
 [Applause]
 
 
-
-00:38:57.516 --> 00:39:04.096 A:middle
-[Applause]
-
-00:39:04.596 --> 00:39:07.676 A:middle
-&gt;&gt; BROOKE CALLAHAN: Last thing
+709
+00:39:04,596 --> 00:39:07,676
+>> BROOKE CALLAHAN: Last thing
 I would like to do is add a test
 
-00:39:07.816 --> 00:39:10.626 A:middle
+
+710
+00:39:07,816 --> 00:39:10,626
 to use that color row that
 we saw in the edit UI.
 
-00:39:15.216 --> 00:39:20.666 A:middle
+
+711
+00:39:15,216 --> 00:39:20,666
 And once again I'm going to
 use the recorder for this.
 
-00:39:21.386 --> 00:39:23.526 A:middle
+
+712
+00:39:21,386 --> 00:39:23,526
 I'll tap on groceries and edit.
 
-00:39:24.066 --> 00:39:29.586 A:middle
+
+713
+00:39:24,066 --> 00:39:29,586
 Now, the color UI here lets me
 change the color for a list.
 
-00:39:29.866 --> 00:39:31.316 A:middle
+
+714
+00:39:29,866 --> 00:39:31,316
 It looks like right
 now this list is green.
 
-00:39:31.906 --> 00:39:35.726 A:middle
+
+715
+00:39:31,906 --> 00:39:35,726
 So I'll try changing it
 to red or how about blue?
 
-00:39:37.776 --> 00:39:40.006 A:middle
+
+716
+00:39:37,776 --> 00:39:40,006
 Okay, so when I tap on
 those buttons it looks
 
-00:39:40.006 --> 00:39:42.806 A:middle
+
+717
+00:39:40,006 --> 00:39:42,806
 like it's not actually
 recording what I want.
 
-00:39:42.806 --> 00:39:44.946 A:middle
+
+718
+00:39:42,806 --> 00:39:44,946
 It looks like it's
 recording a tap
 
-00:39:45.266 --> 00:39:47.826 A:middle
+
+719
+00:39:45,266 --> 00:39:47,826
 on the static text called
 color, which you see over here.
 
-00:39:48.566 --> 00:39:51.906 A:middle
+
+720
+00:39:48,566 --> 00:39:51,906
 So I think what might
 be going on here is
 
-00:39:51.906 --> 00:39:54.196 A:middle
+
+721
+00:39:51,906 --> 00:39:54,196
 that these UI elements
 simply might not be visible
 
-00:39:54.196 --> 00:39:54.956 A:middle
+
+722
+00:39:54,196 --> 00:39:54,956
 to Accessibility.
 
-00:39:54.956 --> 00:39:56.976 A:middle
+
+723
+00:39:54,956 --> 00:39:56,976
 So I'm going to stop recording,
 
-00:39:56.976 --> 00:40:01.696 A:middle
+
+724
+00:39:56,976 --> 00:40:01,696
 and I can actually use the
 accessibility inspector
 
 
-
-00:39:56.976 --> 00:40:01.696 A:middle
-and I can actually use the
-accessibility inspector
-
-00:40:01.696 --> 00:40:02.616 A:middle
+725
+00:40:01,696 --> 00:40:02,616
 to tell me what's going on.
 
-00:40:03.176 --> 00:40:05.706 A:middle
+
+726
+00:40:03,176 --> 00:40:05,706
 I'll right click on Xcode and
 go to open developer tool,
 
-00:40:05.736 --> 00:40:06.836 A:middle
+
+727
+00:40:05,736 --> 00:40:06,836
 accessibility inspector.
 
-00:40:08.326 --> 00:40:11.466 A:middle
+
+728
+00:40:08,326 --> 00:40:11,466
 And the accessibility inspector
 provides a lot of information,
 
-00:40:11.466 --> 00:40:15.776 A:middle
+
+729
+00:40:11,466 --> 00:40:15,776
 but all I want to use it for
 is ths shortcut, command S7.
 
-00:40:15.776 --> 00:40:18.716 A:middle
+
+730
+00:40:15,776 --> 00:40:18,716
 It will highlight the UI
 element that's underneath the
 
-00:40:18.716 --> 00:40:19.226 A:middle
+
+731
+00:40:18,716 --> 00:40:19,226
 mouse cursor.
 
-00:40:19.796 --> 00:40:22.976 A:middle
+
+732
+00:40:19,796 --> 00:40:22,976
 If I put the mouse cursor
 
-00:40:22.976 --> 00:40:26.126 A:middle
+
+733
+00:40:22,976 --> 00:40:26,126
 over the word bread here,
 and press command F7.
 
-00:40:26.126 --> 00:40:27.336 A:middle
+
+734
+00:40:26,126 --> 00:40:27,336
 it highlights bread.
 
-00:40:28.006 --> 00:40:31.416 A:middle
+
+735
+00:40:28,006 --> 00:40:31,416
 If I put it over the
 delete bread button,
 
-00:40:31.776 --> 00:40:33.426 A:middle
+
+736
+00:40:31,776 --> 00:40:33,426
 you can see that
 it highlights that.
 
-00:40:35.426 --> 00:40:37.976 A:middle
+
+737
+00:40:35,426 --> 00:40:37,976
 Now, let's see what happens
 if I put the mouse cursor
 
-00:40:37.976 --> 00:40:42.136 A:middle
+
+738
+00:40:37,976 --> 00:40:42,136
 over this yellow color button.
 
-00:40:42.276 --> 00:40:44.236 A:middle
+
+739
+00:40:42,276 --> 00:40:44,236
 Aha! So it highlighted
 the whole row.
 
-00:40:44.236 --> 00:40:46.916 A:middle
+
+740
+00:40:44,236 --> 00:40:46,916
 So that pretty much confirms
 
-00:40:46.916 --> 00:40:49.656 A:middle
+
+741
+00:40:46,916 --> 00:40:49,656
 that this UI element is simply
 not visible to accessibility.
 
-00:40:51.096 --> 00:40:52.466 A:middle
+
+742
+00:40:51,096 --> 00:40:52,466
 Luckily I can actually
 change this,
 
-00:40:52.816 --> 00:40:55.306 A:middle
+
+743
+00:40:52,816 --> 00:40:55,306
 and fix this problem
 using the story board.
 
-00:40:55.306 --> 00:41:05.316 A:middle
+
+744
+00:40:55,306 --> 00:41:05,316
 I'll open the story board now.
 
 
-
-00:40:55.306 --> 00:41:05.316 A:middle
-I'll open the story board now.
-
-00:41:05.546 --> 00:41:07.866 A:middle
+745
+00:41:05,546 --> 00:41:07,866
 So here I've got the same
 buttons in my story board
 
-00:41:09.696 --> 00:41:12.856 A:middle
+
+746
+00:41:09,696 --> 00:41:12,856
 and if I open the
 inspector, here I can see
 
-00:41:12.856 --> 00:41:17.986 A:middle
+
+747
+00:41:12,856 --> 00:41:17,986
 that these buttons actually have
 a class of color tappable view.
 
-00:41:18.276 --> 00:41:19.976 A:middle
+
+748
+00:41:18,276 --> 00:41:19,976
 I'm familiar with this class.
 
-00:41:19.976 --> 00:41:22.506 A:middle
+
+749
+00:41:19,976 --> 00:41:22,506
 I know it's actually
 not UI button.
 
-00:41:23.116 --> 00:41:24.436 A:middle
+
+750
+00:41:23,116 --> 00:41:24,436
 It's custom view.
 
-00:41:24.436 --> 00:41:26.566 A:middle
+
+751
+00:41:24,436 --> 00:41:26,566
 If I go down to the
 accessibility part
 
-00:41:26.706 --> 00:41:30.296 A:middle
+
+752
+00:41:26,706 --> 00:41:30,296
 of the inspector, I can see
 it's not enabled for them.
 
-00:41:30.296 --> 00:41:33.626 A:middle
+
+753
+00:41:30,296 --> 00:41:33,626
 I have gone through and
 added labels for them.
 
-00:41:34.276 --> 00:41:37.806 A:middle
+
+754
+00:41:34,276 --> 00:41:37,806
 To fix this all I need to do
 is select all of the buttons.
 
-00:41:37.806 --> 00:41:45.346 A:middle
+
+755
+00:41:37,806 --> 00:41:45,346
 And then I'll check the enabled
 for accessibility check box.
 
-00:41:45.616 --> 00:41:46.816 A:middle
+
+756
+00:41:45,616 --> 00:41:46,816
 Since they behave like buttons,
 
-00:41:46.816 --> 00:41:48.006 A:middle
+
+757
+00:41:46,816 --> 00:41:48,006
 I am going to give
 these the button trait.
 
-00:41:48.546 --> 00:41:48.706 A:middle
+
+758
+00:41:48,546 --> 00:41:48,706
 All right?
 
-00:41:51.336 --> 00:41:54.166 A:middle
+
+759
+00:41:51,336 --> 00:41:54,166
 Now let's run the
 application again.
 
 
-
-00:42:02.266 --> 00:42:05.806 A:middle
+760
+00:42:02,266 --> 00:42:05,806
 And now I'm going to record
 this test one more time.
 
-00:42:06.086 --> 00:42:08.626 A:middle
+
+761
+00:42:06,086 --> 00:42:08,626
 Tap on groceries and edit.
 
-00:42:09.486 --> 00:42:12.516 A:middle
+
+762
+00:42:09,486 --> 00:42:12,516
 Then red. And orange.
 
-00:42:12.806 --> 00:42:16.946 A:middle
+
+763
+00:42:12,806 --> 00:42:16,946
 Yellow, green, blue, and gray.
 
-00:42:17.196 --> 00:42:21.486 A:middle
+
+764
+00:42:17,196 --> 00:42:21,486
 Great. Now it actually
 recorded all those.
 
-00:42:21.646 --> 00:42:23.966 A:middle
+
+765
+00:42:21,646 --> 00:42:23,966
 I'll stop recording and
 let's run it and see
 
-00:42:23.966 --> 00:42:32.996 A:middle
+
+766
+00:42:23,966 --> 00:42:32,996
 if it can play it back as well.
 
-00:42:32.996 --> 00:42:35.946 A:middle
+
+767
+00:42:32,996 --> 00:42:35,946
 Great. I've fixed
 accessibility in my application.
 
-00:42:36.666 --> 00:42:38.276 A:middle
+
+768
+00:42:36,666 --> 00:42:38,276
 And I've also made
 it more testable.
 
-00:42:38.596 --> 00:42:40.326 A:middle
+
+769
+00:42:38,596 --> 00:42:40,326
 If I was going to
 complete this test,
 
-00:42:41.456 --> 00:42:43.886 A:middle
+
+770
+00:42:41,456 --> 00:42:43,886
 I would probably add
 some assertions to verify
 
-00:42:43.886 --> 00:42:45.246 A:middle
+
+771
+00:42:43,886 --> 00:42:45,246
 that the state of
 these buttons changes.
 
-00:42:45.466 --> 00:42:46.716 A:middle
+
+772
+00:42:45,466 --> 00:42:46,716
 For now, I'll hand
 the stage back to Wil.
 
-00:42:47.516 --> 00:42:53.426 A:middle
+
+773
+00:42:47,516 --> 00:42:53,426
 [Applause]
 
-00:42:53.926 --> 00:42:55.366 A:middle
-&gt;&gt; WIL TURNER: So that's
+
+774
+00:42:53,926 --> 00:42:55,366
+>> WIL TURNER: So that's
 really quite awesome,
 
-00:42:55.486 --> 00:42:58.916 A:middle
+
+775
+00:42:55,486 --> 00:42:58,916
 especially just how easy
 it was to make this view
 
-00:42:58.916 --> 00:43:01.356 A:middle
+
+776
+00:42:58,916 --> 00:43:01,356
 that previously a Voice Over
 user would have had no luck
 
 
-
-00:42:58.916 --> 00:43:01.356 A:middle
-that previously a Voice Over
-user would have had no luck
-
-00:43:01.356 --> 00:43:04.876 A:middle
+777
+00:43:01,356 --> 00:43:04,876
 with at all and just
 with a few quick changes
 
-00:43:04.876 --> 00:43:07.186 A:middle
+
+778
+00:43:04,876 --> 00:43:07,186
 in interface builder
 Brooke was able to make
 
-00:43:07.216 --> 00:43:09.656 A:middle
+
+779
+00:43:07,216 --> 00:43:09,656
 that both accessible
 and UI testable.
 
-00:43:10.266 --> 00:43:15.186 A:middle
+
+780
+00:43:10,266 --> 00:43:15,186
 So in the demo, some sort
 of more advanced UI testing.
 
-00:43:15.186 --> 00:43:17.786 A:middle
+
+781
+00:43:15,186 --> 00:43:17,786
 You saw he had cases where
 he dealt with a conflict
 
-00:43:17.786 --> 00:43:20.906 A:middle
+
+782
+00:43:17,786 --> 00:43:20,906
 and a query, and how to
 correct those queries,
 
-00:43:20.906 --> 00:43:25.296 A:middle
+
+783
+00:43:20,906 --> 00:43:25,296
 and how to debug it, and also
 how he can loop over elements
 
-00:43:25.736 --> 00:43:28.826 A:middle
+
+784
+00:43:25,736 --> 00:43:28,826
 and validate them, and how you
 can use the exists property
 
-00:43:28.826 --> 00:43:32.456 A:middle
+
+785
+00:43:28,826 --> 00:43:32,456
 and also highlighted how
 queries are reevaluated.
 
-00:43:32.696 --> 00:43:35.946 A:middle
+
+786
+00:43:32,696 --> 00:43:35,946
 They use the criteria that
 you created them with.
 
-00:43:35.996 --> 00:43:39.256 A:middle
+
+787
+00:43:35,996 --> 00:43:39,256
 That specification is
 what gets reevaluated.
 
-00:43:39.686 --> 00:43:41.976 A:middle
+
+788
+00:43:39,686 --> 00:43:41,976
 We used element at index one.
 
-00:43:41.976 --> 00:43:45.056 A:middle
+
+789
+00:43:41,976 --> 00:43:45,056
 That pointed to the apples
 label the first time through.
 
-00:43:45.276 --> 00:43:47.436 A:middle
+
+790
+00:43:45,276 --> 00:43:47,436
 As soon as that was
 gone and the UI changed,
 
-00:43:47.606 --> 00:43:50.866 A:middle
+
+791
+00:43:47,606 --> 00:43:50,866
 now that was pointing to the
 oranges label.And then finally,
 
-00:43:51.576 --> 00:43:52.766 A:middle
+
+792
+00:43:51,576 --> 00:43:52,766
 how to improve accessibility,
 
-00:43:53.016 --> 00:43:57.526 A:middle
+
+793
+00:43:53,016 --> 00:43:57,526
 and the rewards are truly
 fantastic for doing that.
 
-00:43:58.256 --> 00:44:01.116 A:middle
+
+794
+00:43:58,256 --> 00:44:01,116
 Brooke also gave you a
 peek at the test reports.
 
 
-
-00:43:58.256 --> 00:44:01.116 A:middle
-Brooke also gave you a
-peek at the test reports.
-
-00:44:01.116 --> 00:44:03.826 A:middle
+795
+00:44:01,116 --> 00:44:03,826
 We have done some
 work in Xcode 7
 
-00:44:03.906 --> 00:44:07.366 A:middle
+
+796
+00:44:03,906 --> 00:44:07,366
 to overhaul them for UI testing.
 
-00:44:07.716 --> 00:44:11.096 A:middle
+
+797
+00:44:07,716 --> 00:44:11,096
 To recap are, the test reports
 are where you see the results
 
-00:44:11.096 --> 00:44:12.376 A:middle
+
+798
+00:44:11,096 --> 00:44:12,376
 for all the tests that ran.
 
-00:44:12.956 --> 00:44:16.336 A:middle
+
+799
+00:44:12,956 --> 00:44:16,336
 It shows the pass or the
 fail, the failure message,
 
-00:44:16.976 --> 00:44:18.266 A:middle
+
+800
+00:44:16,976 --> 00:44:18,266
 performance metrics
 
-00:44:18.266 --> 00:44:20.296 A:middle
+
+801
+00:44:18,266 --> 00:44:20,296
 for performance tests
 are shown in the reports.
 
-00:44:21.056 --> 00:44:24.236 A:middle
+
+802
+00:44:21,056 --> 00:44:24,236
 You get the same UI in
 XCode and in Xcode server.
 
-00:44:24.366 --> 00:44:26.416 A:middle
+
+803
+00:44:24,366 --> 00:44:26,416
 It's a consistent
 experience regardless
 
-00:44:26.416 --> 00:44:28.946 A:middle
+
+804
+00:44:26,416 --> 00:44:28,946
 of whether you are looking
 at integrations or the run
 
-00:44:28.946 --> 00:44:30.576 A:middle
+
+805
+00:44:28,946 --> 00:44:30,576
 that you just did on
 your local computer.
 
-00:44:31.426 --> 00:44:34.016 A:middle
+
+806
+00:44:31,426 --> 00:44:34,016
 On Xcode server you also
 get per-device results,
 
-00:44:34.016 --> 00:44:36.886 A:middle
+
+807
+00:44:34,016 --> 00:44:36,886
 because you can have the devices
 integrating multiple devices
 
-00:44:36.886 --> 00:44:37.696 A:middle
+
+808
+00:44:36,886 --> 00:44:37,696
 at the same time.
 
-00:44:38.466 --> 00:44:41.116 A:middle
+
+809
+00:44:38,466 --> 00:44:41,116
 The additions for UI testing,
 
-00:44:41.536 --> 00:44:43.836 A:middle
+
+810
+00:44:41,536 --> 00:44:43,836
 we collected additional
 data during UI testing,
 
-00:44:43.836 --> 00:44:45.666 A:middle
+
+811
+00:44:43,836 --> 00:44:45,666
 and this includes screen shots.
 
-00:44:46.316 --> 00:44:50.366 A:middle
+
+812
+00:44:46,316 --> 00:44:50,366
 You saw how it helped Brooke
 debug the conflict in his query
 
-00:44:50.366 --> 00:44:53.066 A:middle
+
+813
+00:44:50,366 --> 00:44:53,066
 by pulling up the screen shot
 at the time that query failed.
 
-00:44:54.096 --> 00:44:59.126 A:middle
+
+814
+00:44:54,096 --> 00:44:59,126
 Also, we organized the API calls
 into these nested activities
 
-00:44:59.126 --> 00:45:02.126 A:middle
+
+815
+00:44:59,126 --> 00:45:02,126
 that help you understand
 how the API call is working.
 
 
-
-00:44:59.126 --> 00:45:02.126 A:middle
-that help you understand
-how the API call is working.
-
-00:45:02.766 --> 00:45:04.636 A:middle
+816
+00:45:02,766 --> 00:45:04,636
 So let's take a look
 at an example of this.
 
-00:45:04.986 --> 00:45:06.336 A:middle
+
+817
+00:45:04,986 --> 00:45:06,336
 This is not the list draft.
 
-00:45:06.336 --> 00:45:07.456 A:middle
+
+818
+00:45:06,336 --> 00:45:07,456
 It is a different application.
 
-00:45:07.876 --> 00:45:11.106 A:middle
+
+819
+00:45:07,876 --> 00:45:11,106
 But I'm going to show you
 how there are several steps
 
-00:45:11.106 --> 00:45:12.876 A:middle
+
+820
+00:45:11,106 --> 00:45:12,876
 in the nested activities
 breakdown.
 
-00:45:13.596 --> 00:45:15.806 A:middle
+
+821
+00:45:13,596 --> 00:45:15,806
 This example we're
 typing into a test field
 
-00:45:15.806 --> 00:45:18.876 A:middle
+
+822
+00:45:15,806 --> 00:45:18,876
 so the high level you
 call the API type test.
 
-00:45:19.686 --> 00:45:21.206 A:middle
+
+823
+00:45:19,686 --> 00:45:21,206
 But internally that breaks down.
 
-00:45:21.616 --> 00:45:24.246 A:middle
+
+824
+00:45:21,616 --> 00:45:24,246
 In the first step where we wait
 for the application to idle.
 
-00:45:24.626 --> 00:45:27.136 A:middle
+
+825
+00:45:24,626 --> 00:45:27,136
 We're actually observing
 the main run loop
 
-00:45:27.446 --> 00:45:28.776 A:middle
+
+826
+00:45:27,446 --> 00:45:28,776
 of the tested application.
 
-00:45:29.126 --> 00:45:31.276 A:middle
+
+827
+00:45:29,126 --> 00:45:31,276
 Because We don't want
 to send events to it,
 
-00:45:31.616 --> 00:45:33.026 A:middle
+
+828
+00:45:31,616 --> 00:45:33,026
 when it's busy processing.
 
-00:45:33.026 --> 00:45:34.996 A:middle
+
+829
+00:45:33,026 --> 00:45:34,996
 We want it to be
 responsive as possible.
 
-00:45:35.726 --> 00:45:41.186 A:middle
+
+830
+00:45:35,726 --> 00:45:41,186
 Once it's idled we capture the
 data we need from Accessibility
 
-00:45:41.586 --> 00:45:42.846 A:middle
+
+831
+00:45:41,586 --> 00:45:42,846
 and we resolve the query,
 
-00:45:42.846 --> 00:45:45.066 A:middle
+
+832
+00:45:42,846 --> 00:45:45,066
 make sure it matches
 exactly one thing.
 
-00:45:46.166 --> 00:45:48.616 A:middle
+
+833
+00:45:46,166 --> 00:45:48,616
 Next step, we synthesize
 the actual events
 
-00:45:48.716 --> 00:45:50.646 A:middle
+
+834
+00:45:48,716 --> 00:45:50,646
 that insert the text
 into that field.
 
-00:45:51.616 --> 00:45:55.086 A:middle
+
+835
+00:45:51,616 --> 00:45:55,086
 Finally, we wait one more time
 for the app to idle afterwards.
 
-00:45:55.166 --> 00:45:58.226 A:middle
+
+836
+00:45:55,166 --> 00:45:58,226
 Because, again, we want to
 hand off control in a way
 
-00:45:58.226 --> 00:46:01.446 A:middle
+
+837
+00:45:58,226 --> 00:46:01,446
 where things are reliable
 and deterministic.
 
 
-
-00:45:58.226 --> 00:46:01.446 A:middle
-where things are reliable
-and deterministic.
-
-00:46:01.976 --> 00:46:05.586 A:middle
+838
+00:46:01,976 --> 00:46:05,586
 The quick looks are
 provided for screen shots
 
-00:46:05.586 --> 00:46:07.586 A:middle
+
+839
+00:46:05,586 --> 00:46:07,586
 that are captured
 during critical steps.
 
-00:46:07.976 --> 00:46:11.476 A:middle
+
+840
+00:46:07,976 --> 00:46:11,476
 You can see here is the state
 right after I type that text in.
 
-00:46:11.736 --> 00:46:14.326 A:middle
+
+841
+00:46:11,736 --> 00:46:14,326
 Make sure everything looked
 just the way you expected.
 
-00:46:15.196 --> 00:46:19.986 A:middle
+
+842
+00:46:15,196 --> 00:46:19,986
 So UI testing is obviously
 a huge expansion of the kind
 
-00:46:19.986 --> 00:46:22.056 A:middle
+
+843
+00:46:19,986 --> 00:46:22,056
 of testing you can do
 for your applications.
 
-00:46:22.436 --> 00:46:24.046 A:middle
+
+844
+00:46:22,436 --> 00:46:24,046
 So when do you use it, right?
 
-00:46:24.466 --> 00:46:26.736 A:middle
+
+845
+00:46:24,466 --> 00:46:26,736
 We've got unit testing already.
 
-00:46:27.116 --> 00:46:30.166 A:middle
+
+846
+00:46:27,116 --> 00:46:30,166
 UI testing is a complement to
 UI testing, not a replacement.
 
-00:46:30.556 --> 00:46:33.536 A:middle
+
+847
+00:46:30,556 --> 00:46:33,536
 You should continue to use unit
 testing for your model objects,
 
-00:46:33.536 --> 00:46:35.196 A:middle
+
+848
+00:46:33,536 --> 00:46:35,196
 and your controller logic,
 
-00:46:35.536 --> 00:46:38.476 A:middle
+
+849
+00:46:35,536 --> 00:46:38,476
 because unit testing will more
 precisely pinpoint failures
 
-00:46:38.476 --> 00:46:39.506 A:middle
+
+850
+00:46:38,476 --> 00:46:39,506
 when they happen in your code.
 
-00:46:40.196 --> 00:46:43.446 A:middle
+
+851
+00:46:40,196 --> 00:46:43,446
 UI testing allows you to
 cover much broader ranges
 
-00:46:43.446 --> 00:46:45.726 A:middle
+
+852
+00:46:43,446 --> 00:46:45,726
 of functionality, but tracking
 
-00:46:45.726 --> 00:46:47.346 A:middle
+
+853
+00:46:45,726 --> 00:46:47,346
 down the failures can
 be more challenging.
 
-00:46:47.736 --> 00:46:51.156 A:middle
+
+854
+00:46:47,736 --> 00:46:51,156
 It's a balance in your project,
 of finding the right blend
 
-00:46:51.186 --> 00:46:53.106 A:middle
+
+855
+00:46:51,186 --> 00:46:53,106
 between unit testing
 and UI testing.
 
-00:46:54.796 --> 00:46:56.726 A:middle
+
+856
+00:46:54,796 --> 00:46:56,726
 Some great candidates
 for UI testing.
 
-00:46:57.216 --> 00:46:58.136 A:middle
+
+857
+00:46:57,216 --> 00:46:58,136
 Well, think about your app.
 
-00:46:58.186 --> 00:47:00.306 A:middle
+
+858
+00:46:58,186 --> 00:47:00,306
 You have customers,
 you show it to them,
 
 
-
-00:46:58.186 --> 00:47:00.306 A:middle
-You have customers,
-you show it to them,
-
-00:47:00.306 --> 00:47:02.826 A:middle
+859
+00:47:00,306 --> 00:47:02,826
 and you have little demo
 sequences that you show to them,
 
-00:47:02.826 --> 00:47:03.776 A:middle
+
+860
+00:47:02,826 --> 00:47:03,776
 and you walk them
 through, "well,
 
-00:47:03.776 --> 00:47:05.006 A:middle
+
+861
+00:47:03,776 --> 00:47:05,006
 here's how you do
 this with the app."
 
-00:47:05.506 --> 00:47:08.656 A:middle
+
+862
+00:47:05,506 --> 00:47:08,656
 Demo sequences are great
 candidates for UI testing.
 
-00:47:08.656 --> 00:47:11.926 A:middle
+
+863
+00:47:08,656 --> 00:47:11,926
 You'll know nightly
 build after nightly build
 
-00:47:12.256 --> 00:47:13.746 A:middle
+
+864
+00:47:12,256 --> 00:47:13,746
 that those demos are
 going to work for you.
 
-00:47:14.636 --> 00:47:17.056 A:middle
+
+865
+00:47:14,636 --> 00:47:17,056
 Second, beyond that,
 common workflows.
 
-00:47:17.646 --> 00:47:20.986 A:middle
+
+866
+00:47:17,646 --> 00:47:20,986
 What the app is used for,
 if it's an editing app,
 
-00:47:21.066 --> 00:47:22.426 A:middle
+
+867
+00:47:21,066 --> 00:47:22,426
 how you edit the documents.
 
-00:47:22.426 --> 00:47:25.916 A:middle
+
+868
+00:47:22,426 --> 00:47:25,916
 Any custom views you
 have in the application.
 
-00:47:26.526 --> 00:47:29.456 A:middle
+
+869
+00:47:26,526 --> 00:47:29,456
 And finally document-based
 workflows, opening and saving.
 
-00:47:29.756 --> 00:47:31.116 A:middle
+
+870
+00:47:29,756 --> 00:47:31,116
 These are all great
 things to automate.
 
-00:47:31.116 --> 00:47:33.596 A:middle
+
+871
+00:47:31,116 --> 00:47:33,596
 They are really hard to
 capture with unit testing.
 
-00:47:33.976 --> 00:47:36.646 A:middle
+
+872
+00:47:33,976 --> 00:47:36,646
 When they go wrong they
 have a huge impact on users.
 
-00:47:38.756 --> 00:47:40.496 A:middle
+
+873
+00:47:38,756 --> 00:47:40,496
 So UI testing.
 
-00:47:41.576 --> 00:47:42.706 A:middle
+
+874
+00:47:41,576 --> 00:47:42,706
 New in XCode 7.
 
-00:47:43.776 --> 00:47:45.606 A:middle
+
+875
+00:47:43,776 --> 00:47:45,606
 Opens up a world
 of possibilities
 
-00:47:45.606 --> 00:47:47.796 A:middle
+
+876
+00:47:45,606 --> 00:47:47,796
 for how you can test
 your applications.
 
-00:47:49.266 --> 00:47:51.916 A:middle
+
+877
+00:47:49,266 --> 00:47:51,916
 In UI testing you
 find and interact
 
-00:47:52.146 --> 00:47:55.256 A:middle
+
+878
+00:47:52,146 --> 00:47:55,256
 with user interface elements
 and you synthesize events
 
-00:47:55.296 --> 00:47:57.996 A:middle
+
+879
+00:47:55,296 --> 00:47:57,996
 that drives them, just
 the way a user does.
 
-00:47:58.986 --> 00:48:01.646 A:middle
+
+880
+00:47:58,986 --> 00:48:01,646
 You can validate the UI
 properties and state.
 
 
-
-00:47:58.986 --> 00:48:01.646 A:middle
-You can validate the UI
-properties and state.
-
-00:48:03.126 --> 00:48:06.616 A:middle
+881
+00:48:03,126 --> 00:48:06,616
 And UI recording lets you
 create these tests super quick,
 
-00:48:06.856 --> 00:48:07.646 A:middle
+
+882
+00:48:06,856 --> 00:48:07,646
 super easy.
 
-00:48:09.196 --> 00:48:11.586 A:middle
+
+883
+00:48:09,196 --> 00:48:11,586
 Finally, we've overhauled
 the test reports
 
-00:48:12.066 --> 00:48:15.566 A:middle
+
+884
+00:48:12,066 --> 00:48:15,566
 to make you better able to
 understand how your tests work
 
-00:48:16.066 --> 00:48:17.666 A:middle
+
+885
+00:48:16,066 --> 00:48:17,666
 and collect additional
 data about them.
 
-00:48:18.666 --> 00:48:19.446 A:middle
+
+886
+00:48:18,666 --> 00:48:19,446
 So that's UI testing.
 
-00:48:20.516 --> 00:48:27.916 A:middle
+
+887
+00:48:20,516 --> 00:48:27,916
 [Applause]
 
-00:48:28.416 --> 00:48:30.726 A:middle
-&gt;&gt; WIL TURNER: So for more
+
+888
+00:48:28,416 --> 00:48:30,726
+>> WIL TURNER: So for more
 information we've got great
 
-00:48:30.726 --> 00:48:32.026 A:middle
+
+889
+00:48:30,726 --> 00:48:32,026
 documentation on XCTest.
 
-00:48:32.236 --> 00:48:35.226 A:middle
+
+890
+00:48:32,236 --> 00:48:35,226
 You can get to it through Xcode
 itself and on our website.
 
-00:48:35.556 --> 00:48:37.866 A:middle
+
+891
+00:48:35,556 --> 00:48:37,866
 And Accessibility also
 has great documentation,
 
-00:48:37.866 --> 00:48:39.056 A:middle
+
+892
+00:48:37,866 --> 00:48:39,056
 and I encourage you
 to check out.
 
-00:48:40.516 --> 00:48:43.286 A:middle
+
+893
+00:48:40,516 --> 00:48:43,286
 Developer Forums are great
 places to raise questions
 
-00:48:43.286 --> 00:48:47.226 A:middle
+
+894
+00:48:43,286 --> 00:48:47,226
 and trade tips with other users
 about how you're using things.
 
-00:48:47.406 --> 00:48:50.346 A:middle
+
+895
+00:48:47,406 --> 00:48:50,346
 Our evangelist Stefan
 Lesser is a great contact
 
-00:48:50.566 --> 00:48:51.506 A:middle
+
+896
+00:48:50,566 --> 00:48:51,506
 to get you started.
 
-00:48:52.736 --> 00:48:55.546 A:middle
+
+897
+00:48:52,736 --> 00:48:55,546
 There's some related sessions
 if you want to dial back in time
 
-00:48:55.546 --> 00:48:58.036 A:middle
+
+898
+00:48:55,546 --> 00:48:58,036
 and watch the accessibility
 session from yesterday morning,
 
-00:48:58.456 --> 00:49:00.396 A:middle
+
+899
+00:48:58,456 --> 00:49:00,396
 probably watch the video
 on your lunch if you want,
 
 
-
-00:48:58.456 --> 00:49:00.396 A:middle
-probably watch the video
-on your lunch if you want,
-
-00:49:01.056 --> 00:49:04.466 A:middle
+900
+00:49:01,056 --> 00:49:04,466
 and continuous integration and
 code coverage, new technology
 
-00:49:04.796 --> 00:49:07.946 A:middle
+
+901
+00:49:04,796 --> 00:49:07,946
 in Xcode server, you can
 see tomorrow afternoon --
 
-00:49:07.946 --> 00:49:08.706 A:middle
+
+902
+00:49:07,946 --> 00:49:08,706
 tomorrow morning.
 
-00:49:09.096 --> 00:49:09.976 A:middle
+
+903
+00:49:09,096 --> 00:49:09,976
 Have great conference,
 everybody.
 
-00:49:10.516 --> 00:49:13.500 A:middle
+
+904
+00:49:10,516 --> 00:49:13,500
 [Applause]
 

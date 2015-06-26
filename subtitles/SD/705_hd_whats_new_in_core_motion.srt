@@ -1,3073 +1,4402 @@
-
-00:00:41.426 --> 00:00:42.856 A:middle
-&gt;&gt; ANIL KANDANGATH: Good
+1
+00:00:41,426 --> 00:00:42,856
+>> ANIL KANDANGATH: Good
 afternoon and welcome.
 
-00:00:44.146 --> 00:00:47.096 A:middle
+
+2
+00:00:44,146 --> 00:00:47,096
 My name is Anil Kandangath
 and today I'm going to talk
 
-00:00:47.096 --> 00:00:49.196 A:middle
+
+3
+00:00:47,096 --> 00:00:49,196
 about what is new
 in Core Motion.
 
-00:00:49.606 --> 00:00:51.316 A:middle
+
+4
+00:00:49,606 --> 00:00:51,316
 We have quite a few
 things to talk about.
 
-00:00:51.316 --> 00:00:53.996 A:middle
+
+5
+00:00:51,316 --> 00:00:53,996
 But today we will stick
 to a few key points.
 
-00:00:54.836 --> 00:00:59.776 A:middle
+
+6
+00:00:54,836 --> 00:00:59,776
 We will begin by talking
 about the Apple Watch.
 
-00:00:59.776 --> 00:01:02.656 A:middle
+
+7
+00:00:59,776 --> 00:01:02,656
 We have a new platform
 and we will talk about how
 
 
-
-00:00:59.776 --> 00:01:02.656 A:middle
-We have a new platform
-and we will talk about how
-
-00:01:02.656 --> 00:01:04.926 A:middle
+8
+00:01:02,656 --> 00:01:04,926
 to bring your Core Motion
 apps to the Apple Watch.
 
-00:01:06.006 --> 00:01:07.926 A:middle
+
+9
+00:01:06,006 --> 00:01:07,926
 We also have new updates
 
-00:01:07.986 --> 00:01:10.456 A:middle
+
+10
+00:01:07,986 --> 00:01:10,456
 to the pedometer
 including some new APIs.
 
-00:01:12.036 --> 00:01:14.286 A:middle
+
+11
+00:01:12,036 --> 00:01:14,286
 We will also talk
 about the altimeter
 
-00:01:14.396 --> 00:01:17.776 A:middle
+
+12
+00:01:14,396 --> 00:01:17,776
 which is a sensor we
 introduced in the iPhone 6.
 
-00:01:18.636 --> 00:01:22.036 A:middle
+
+13
+00:01:18,636 --> 00:01:22,036
 Gabrielle will then walk
 us through an application
 
-00:01:22.036 --> 00:01:25.176 A:middle
+
+14
+00:01:22,036 --> 00:01:25,176
 that uses Core Motion in a
 really, really interesting way.
 
-00:01:25.506 --> 00:01:26.946 A:middle
+
+15
+00:01:25,506 --> 00:01:26,946
 I've seen it and
 it's pretty awesome.
 
-00:01:27.826 --> 00:01:28.886 A:middle
+
+16
+00:01:27,826 --> 00:01:28,886
 So let's get started.
 
-00:01:29.656 --> 00:01:31.506 A:middle
+
+17
+00:01:29,656 --> 00:01:31,506
 Now this is not an
 introductory session
 
-00:01:32.016 --> 00:01:34.746 A:middle
+
+18
+00:01:32,016 --> 00:01:34,746
 but we will cover enough
 Core Motion concepts for you
 
-00:01:34.746 --> 00:01:36.756 A:middle
+
+19
+00:01:34,746 --> 00:01:36,756
 to be able to follow along even
 
-00:01:36.756 --> 00:01:39.786 A:middle
+
+20
+00:01:36,756 --> 00:01:39,786
 if you are not intimately
 familiar with Motion itself.
 
-00:01:40.156 --> 00:01:41.246 A:middle
+
+21
+00:01:40,156 --> 00:01:41,246
 But for those of you here
 
-00:01:41.246 --> 00:01:44.346 A:middle
+
+22
+00:01:41,246 --> 00:01:44,346
 at the conference we do have
 a lab immediately following
 
-00:01:44.346 --> 00:01:44.926 A:middle
+
+23
+00:01:44,346 --> 00:01:44,926
 the session.
 
-00:01:45.226 --> 00:01:47.216 A:middle
+
+24
+00:01:45,226 --> 00:01:47,216
 So please come by with
 all your questions.
 
-00:01:47.216 --> 00:01:49.026 A:middle
+
+25
+00:01:47,216 --> 00:01:49,026
 We have the engineers
 and scientists on hand.
 
-00:01:49.756 --> 00:01:52.106 A:middle
+
+26
+00:01:49,756 --> 00:01:52,106
 If you have no questions,
 congratulations.
 
-00:01:52.106 --> 00:01:52.556 A:middle
+
+27
+00:01:52,106 --> 00:01:52,556
 [Laughter.]
 
-00:01:52.556 --> 00:01:54.846 A:middle
-&gt;&gt; ANIL KANDANGATH:
+
+28
+00:01:52,556 --> 00:01:54,846
+>> ANIL KANDANGATH:
 Still come by
 
-00:01:54.846 --> 00:01:57.336 A:middle
+
+29
+00:01:54,846 --> 00:01:57,336
 and tell us how you are using
 Core Motion in your apps.
 
-00:01:57.456 --> 00:02:00.106 A:middle
+
+30
+00:01:57,456 --> 00:02:00,106
 We would love to hear from you.
 
 
-
-00:01:57.456 --> 00:02:00.106 A:middle
-We would love to hear from you.
-
-00:02:00.476 --> 00:02:04.066 A:middle
+31
+00:02:00,476 --> 00:02:04,066
 We do have some great past
 sessions on Apple developer
 
-00:02:04.366 --> 00:02:08.116 A:middle
+
+32
+00:02:04,366 --> 00:02:08,116
 where we go into great
 detail about motion sensing
 
-00:02:08.116 --> 00:02:09.756 A:middle
+
+33
+00:02:08,116 --> 00:02:09,756
 and motion activity
 and the pedometer.
 
-00:02:09.846 --> 00:02:11.266 A:middle
+
+34
+00:02:09,846 --> 00:02:11,266
 So do check them out.
 
-00:02:11.266 --> 00:02:12.816 A:middle
+
+35
+00:02:11,266 --> 00:02:12,816
 Let's get started.
 
-00:02:13.696 --> 00:02:16.746 A:middle
+
+36
+00:02:13,696 --> 00:02:16,746
 Now, motion sensing
 has come a long way
 
-00:02:16.746 --> 00:02:18.356 A:middle
+
+37
+00:02:16,746 --> 00:02:18,356
 in iOS since the early days.
 
-00:02:18.696 --> 00:02:21.386 A:middle
+
+38
+00:02:18,696 --> 00:02:21,386
 We will begin with
 just a quick overview
 
-00:02:21.386 --> 00:02:24.346 A:middle
+
+39
+00:02:21,386 --> 00:02:24,346
 of how things work today.
 
-00:02:24.766 --> 00:02:27.676 A:middle
+
+40
+00:02:24,766 --> 00:02:27,676
 This is a traditional
 motion sensing architecture.
 
-00:02:27.676 --> 00:02:30.676 A:middle
+
+41
+00:02:27,676 --> 00:02:30,676
 You take some sensors hook
 them up to the main processor
 
-00:02:31.106 --> 00:02:32.596 A:middle
+
+42
+00:02:31,106 --> 00:02:32,596
 and the drawback
 should be obvious.
 
-00:02:32.676 --> 00:02:34.996 A:middle
+
+43
+00:02:32,676 --> 00:02:34,996
 Any time you want to
 access sensor data,
 
-00:02:34.996 --> 00:02:38.196 A:middle
+
+44
+00:02:34,996 --> 00:02:38,196
 you do have to keep the
 main processor active.
 
-00:02:38.296 --> 00:02:39.976 A:middle
+
+45
+00:02:38,296 --> 00:02:39,976
 This severely limits the kinds
 
-00:02:39.976 --> 00:02:42.036 A:middle
+
+46
+00:02:39,976 --> 00:02:42,036
 of applications that
 you can write.
 
-00:02:42.766 --> 00:02:44.106 A:middle
+
+47
+00:02:42,766 --> 00:02:44,106
 So we thought we
 could do better.
 
-00:02:44.806 --> 00:02:49.186 A:middle
+
+48
+00:02:44,806 --> 00:02:49,186
 Starting with the iPhone 5S we
 introduced a motion coprocessor
 
-00:02:49.506 --> 00:02:51.616 A:middle
+
+49
+00:02:49,506 --> 00:02:51,616
 that we called the M7.
 
-00:02:51.786 --> 00:02:55.096 A:middle
+
+50
+00:02:51,786 --> 00:02:55,096
 This is a tiny processor
 whose sole job is
 
-00:02:55.096 --> 00:02:56.086 A:middle
+
+51
+00:02:55,096 --> 00:02:56,086
 to process Motion data.
 
-00:02:56.086 --> 00:03:00.076 A:middle
+
+52
+00:02:56,086 --> 00:03:00,076
 It can chug along all
 day long and only turn
 
 
-
-00:02:56.086 --> 00:03:00.076 A:middle
-It can chug along all
-day long and only turn
-
-00:03:00.276 --> 00:03:02.376 A:middle
+53
+00:03:00,276 --> 00:03:02,376
 on the main processor
 when it really needs to.
 
-00:03:03.176 --> 00:03:06.166 A:middle
+
+54
+00:03:03,176 --> 00:03:06,166
 This is great for the
 battery life of the users.
 
-00:03:06.836 --> 00:03:10.506 A:middle
+
+55
+00:03:06,836 --> 00:03:10,506
 In iPhone 6 we introduced
 the M8 processor
 
-00:03:10.786 --> 00:03:13.446 A:middle
+
+56
+00:03:10,786 --> 00:03:13,446
 and new sensor, the altimeter.
 
-00:03:13.806 --> 00:03:17.306 A:middle
+
+57
+00:03:13,806 --> 00:03:17,306
 This is what motion sensing
 looks like today on iOS.
 
-00:03:18.286 --> 00:03:19.816 A:middle
+
+58
+00:03:18,286 --> 00:03:19,816
 So what does it get you?
 
-00:03:20.416 --> 00:03:22.126 A:middle
+
+59
+00:03:20,416 --> 00:03:22,126
 Well, if you take the sensors
 
-00:03:22.636 --> 00:03:28.186 A:middle
+
+60
+00:03:22,636 --> 00:03:28,186
 and access data live you do get
 not just the raw sensor data
 
-00:03:28.186 --> 00:03:31.306 A:middle
+
+61
+00:03:28,186 --> 00:03:31,306
 but also features built
 on top of the sensors
 
-00:03:31.806 --> 00:03:35.116 A:middle
+
+62
+00:03:31,806 --> 00:03:35,116
 like device motion which gives
 you the altitude of the device
 
-00:03:35.116 --> 00:03:37.506 A:middle
+
+63
+00:03:35,116 --> 00:03:37,506
 or the pedometer
 or motion activity.
 
-00:03:38.036 --> 00:03:41.746 A:middle
+
+64
+00:03:38,036 --> 00:03:41,746
 On platforms that have the
 altimeter you also get access
 
-00:03:41.776 --> 00:03:47.626 A:middle
+
+65
+00:03:41,776 --> 00:03:47,626
 to the raw pressure, altitude
 changes and flights of stairs.
 
-00:03:48.456 --> 00:03:51.006 A:middle
+
+66
+00:03:48,456 --> 00:03:51,006
 So that is live data
 from the sensors.
 
-00:03:51.436 --> 00:03:53.656 A:middle
+
+67
+00:03:51,436 --> 00:03:53,656
 But the promise of the
 motion coprocessor is
 
-00:03:53.656 --> 00:03:55.046 A:middle
+
+68
+00:03:53,656 --> 00:03:55,046
 that you can do more
 than this, right.
 
-00:03:55.456 --> 00:03:56.476 A:middle
+
+69
+00:03:55,456 --> 00:03:56,476
 Indeed, you can.
 
-00:03:56.836 --> 00:03:59.816 A:middle
+
+70
+00:03:56,836 --> 00:03:59,816
 You also get 24/7
 access to motion activity
 
 
-
-00:04:00.086 --> 00:04:02.356 A:middle
+71
+00:04:00,086 --> 00:04:02,356
 and the pedometer
 and on platforms
 
-00:04:02.386 --> 00:04:06.066 A:middle
+
+72
+00:04:02,386 --> 00:04:06,066
 that have the altimeter you
 also get flights of stairs 24/7.
 
-00:04:06.406 --> 00:04:12.726 A:middle
+
+73
+00:04:06,406 --> 00:04:12,726
 So this is what you can do with
 motion sensing on iOS today.
 
-00:04:12.926 --> 00:04:16.336 A:middle
+
+74
+00:04:12,926 --> 00:04:16,336
 So what does motion sensing
 look like on the Apple Watch?
 
-00:04:17.065 --> 00:04:20.366 A:middle
+
+75
+00:04:17,065 --> 00:04:20,366
 Well, the Apple Watch
 also has a coprocessor
 
-00:04:20.366 --> 00:04:22.055 A:middle
+
+76
+00:04:20,366 --> 00:04:22,055
 and it has an accelerometer
 
-00:04:22.746 --> 00:04:26.836 A:middle
+
+77
+00:04:22,746 --> 00:04:26,836
 which means you get the same
 24/7 access to motion activity
 
-00:04:26.836 --> 00:04:31.296 A:middle
+
+78
+00:04:26,836 --> 00:04:31,296
 and the pedometer and in terms
 of live data you get sensor data
 
-00:04:31.296 --> 00:04:32.926 A:middle
+
+79
+00:04:31,296 --> 00:04:32,926
 in addition to these two.
 
-00:04:33.336 --> 00:04:35.826 A:middle
+
+80
+00:04:33,336 --> 00:04:35,826
 So if you are thinking gee,
 this all looks so familiar.
 
-00:04:35.826 --> 00:04:37.826 A:middle
+
+81
+00:04:35,826 --> 00:04:37,826
 Maybe Motion is very similar
 
-00:04:37.826 --> 00:04:40.736 A:middle
+
+82
+00:04:37,826 --> 00:04:40,736
 on the Apple Watch too,
 you would be right.
 
-00:04:41.456 --> 00:04:46.216 A:middle
+
+83
+00:04:41,456 --> 00:04:46,216
 Most Core Motion APIs on iOS
 are available on watchOS,
 
-00:04:46.216 --> 00:04:51.226 A:middle
+
+84
+00:04:46,216 --> 00:04:51,226
 and not only that most Core
 Motion APIs behave the same
 
-00:04:51.266 --> 00:04:53.196 A:middle
+
+85
+00:04:51,266 --> 00:04:53,196
 on iOS and watchOS.
 
-00:04:53.776 --> 00:04:56.446 A:middle
+
+86
+00:04:53,776 --> 00:04:56,446
 So this is a quick run down
 of the features we have
 
-00:04:56.446 --> 00:04:57.456 A:middle
+
+87
+00:04:56,446 --> 00:04:57,456
 on both OSs.
 
-00:04:59.206 --> 00:05:02.706 A:middle
+
+88
+00:04:59,206 --> 00:05:02,706
 But the Watch is fundamentally
 a different platform.
 
 
-
-00:04:59.206 --> 00:05:02.706 A:middle
-But the Watch is fundamentally
-a different platform.
-
-00:05:03.266 --> 00:05:05.576 A:middle
+89
+00:05:03,266 --> 00:05:05,576
 So there are some
 things we need to know
 
-00:05:05.576 --> 00:05:08.106 A:middle
+
+90
+00:05:05,576 --> 00:05:08,106
 as we build our applications
 for the Watch
 
-00:05:08.426 --> 00:05:09.246 A:middle
+
+91
+00:05:08,426 --> 00:05:09,246
 and I'll go through them.
 
-00:05:09.766 --> 00:05:11.886 A:middle
+
+92
+00:05:09,766 --> 00:05:11,886
 We'll start with
 motion activity.
 
-00:05:12.456 --> 00:05:15.516 A:middle
+
+93
+00:05:12,456 --> 00:05:15,516
 Motion activity is what gives
 us contextual information
 
-00:05:15.896 --> 00:05:17.426 A:middle
+
+94
+00:05:15,896 --> 00:05:17,426
 about what the user is doing.
 
-00:05:17.496 --> 00:05:19.076 A:middle
+
+95
+00:05:17,496 --> 00:05:19,076
 You can tell if they
 are walking, running,
 
-00:05:19.076 --> 00:05:20.576 A:middle
+
+96
+00:05:19,076 --> 00:05:20,576
 driving, cycling, et cetera.
 
-00:05:21.436 --> 00:05:24.826 A:middle
+
+97
+00:05:21,436 --> 00:05:24,826
 And the stage that you can
 obtain are very much dependent
 
-00:05:24.826 --> 00:05:26.616 A:middle
+
+98
+00:05:24,826 --> 00:05:26,616
 on the platform and
 how it is used.
 
-00:05:27.276 --> 00:05:30.746 A:middle
+
+99
+00:05:27,276 --> 00:05:30,746
 So this is a quick summary of
 the states that you can get
 
-00:05:30.876 --> 00:05:33.726 A:middle
+
+100
+00:05:30,876 --> 00:05:33,726
 on watchOS and you'll notice
 that you can get access
 
-00:05:33.726 --> 00:05:36.806 A:middle
+
+101
+00:05:33,726 --> 00:05:36,806
 to walking, running, cycling,
 and stationary states.
 
-00:05:37.486 --> 00:05:40.506 A:middle
+
+102
+00:05:37,486 --> 00:05:40,506
 And that's motion activity
 on the Apple Watch.
 
-00:05:42.376 --> 00:05:46.906 A:middle
+
+103
+00:05:42,376 --> 00:05:46,906
 Developers have wanted
 access to the sensors itself
 
-00:05:47.406 --> 00:05:49.686 A:middle
+
+104
+00:05:47,406 --> 00:05:49,686
 and we do provide access
 to the accelerometer
 
-00:05:50.026 --> 00:05:52.606 A:middle
+
+105
+00:05:50,026 --> 00:05:52,606
 through the familiar
 CMAccelerometer API.
 
-00:05:52.606 --> 00:05:55.856 A:middle
+
+106
+00:05:52,606 --> 00:05:55,856
 And that should be all there
 is to the accelerometer
 
-00:05:56.206 --> 00:05:58.526 A:middle
+
+107
+00:05:56,206 --> 00:05:58,526
 but it is a different platform
 
-00:05:58.526 --> 00:06:00.706 A:middle
+
+108
+00:05:58,526 --> 00:06:00,706
 and there are some
 considerations
 
 
-
-00:05:58.526 --> 00:06:00.706 A:middle
-and there are some
-considerations
-
-00:06:00.706 --> 00:06:01.976 A:middle
+109
+00:06:00,706 --> 00:06:01,976
 that we have to keep in mind.
 
-00:06:02.636 --> 00:06:06.226 A:middle
+
+110
+00:06:02,636 --> 00:06:06,226
 The first is that you are
 app may get a limited amount
 
-00:06:06.226 --> 00:06:08.476 A:middle
+
+111
+00:06:06,226 --> 00:06:08,476
 of processing time.
 
-00:06:08.476 --> 00:06:10.926 A:middle
+
+112
+00:06:08,476 --> 00:06:10,926
 There are no real background
 processing modes in the Watch,
 
-00:06:10.976 --> 00:06:13.116 A:middle
+
+113
+00:06:10,976 --> 00:06:13,116
 so your app pretty much runs
 
-00:06:13.166 --> 00:06:14.756 A:middle
+
+114
+00:06:13,166 --> 00:06:14,756
 when you are showing
 up on the screen.
 
-00:06:15.816 --> 00:06:19.356 A:middle
+
+115
+00:06:15,816 --> 00:06:19,356
 And the screen may turn
 off for many reasons.
 
-00:06:19.396 --> 00:06:20.276 A:middle
+
+116
+00:06:19,396 --> 00:06:20,276
 The screen may time out.
 
-00:06:21.006 --> 00:06:24.076 A:middle
+
+117
+00:06:21,006 --> 00:06:24,076
 But the Apple Watch screen is
 also designed to turn on only
 
-00:06:24.076 --> 00:06:25.156 A:middle
+
+118
+00:06:24,076 --> 00:06:25,156
 when you're looking at it.
 
-00:06:25.486 --> 00:06:27.676 A:middle
+
+119
+00:06:25,486 --> 00:06:27,676
 So if you want to turn
 the screen away from you,
 
-00:06:28.196 --> 00:06:30.576 A:middle
+
+120
+00:06:28,196 --> 00:06:30,576
 there is a good likelihood
 the screen may turn off
 
-00:06:30.826 --> 00:06:33.596 A:middle
+
+121
+00:06:30,826 --> 00:06:33,596
 and your app may not get
 processing time after that.
 
-00:06:34.306 --> 00:06:36.536 A:middle
+
+122
+00:06:34,306 --> 00:06:36,536
 So given all these
 considerations
 
-00:06:36.536 --> 00:06:38.786 A:middle
+
+123
+00:06:36,536 --> 00:06:38,786
 in mind there are a few
 best practices I would
 
-00:06:38.786 --> 00:06:39.766 A:middle
+
+124
+00:06:38,786 --> 00:06:39,766
 like to talk about.
 
-00:06:40.336 --> 00:06:45.016 A:middle
+
+125
+00:06:40,336 --> 00:06:45,016
 The first is to design your
 app to only expect data
 
-00:06:45.536 --> 00:06:46.806 A:middle
+
+126
+00:06:45,536 --> 00:06:46,806
 when the app is on screen.
 
-00:06:47.086 --> 00:06:48.866 A:middle
+
+127
+00:06:47,086 --> 00:06:48,866
 Now, I know this is
 easier said then done
 
-00:06:48.866 --> 00:06:50.386 A:middle
+
+128
+00:06:48,866 --> 00:06:50,386
 but something to keep in mind.
 
-00:06:51.096 --> 00:06:54.416 A:middle
+
+129
+00:06:51,096 --> 00:06:54,416
 The other is as you are
 accessing a streaming,
 
-00:06:54.416 --> 00:06:56.956 A:middle
+
+130
+00:06:54,416 --> 00:06:56,956
 a stream of sensor
 data you have to ensure
 
-00:06:56.956 --> 00:07:02.606 A:middle
+
+131
+00:06:56,956 --> 00:07:02,606
 that you can handle your
 task being suspended
 
 
-
-00:06:56.956 --> 00:07:02.606 A:middle
-that you can handle your
-task being suspended
-
-00:07:02.606 --> 00:07:03.676 A:middle
+132
+00:07:02,606 --> 00:07:03,676
 in a graceful way.
 
-00:07:04.106 --> 00:07:06.696 A:middle
+
+133
+00:07:04,106 --> 00:07:06,696
 And fortunately we do
 have a way to do this
 
-00:07:06.696 --> 00:07:08.256 A:middle
+
+134
+00:07:06,696 --> 00:07:08,256
 through NSProcessInfo.
 
-00:07:08.886 --> 00:07:11.446 A:middle
+
+135
+00:07:08,886 --> 00:07:11,446
 If you use this API
 performExpiring
 
-00:07:11.536 --> 00:07:14.916 A:middle
+
+136
+00:07:11,536 --> 00:07:14,916
 ActivityWithReason, you can
 perform your sensor data
 
-00:07:14.916 --> 00:07:16.786 A:middle
+
+137
+00:07:14,916 --> 00:07:16,786
 processing as a block
 in this API
 
-00:07:16.786 --> 00:07:20.726 A:middle
+
+138
+00:07:16,786 --> 00:07:20,726
 and this will inform your
 block that your task is
 
-00:07:20.726 --> 00:07:23.356 A:middle
+
+139
+00:07:20,726 --> 00:07:23,356
 about to be suspended so
 you can do the right thing.
 
-00:07:24.346 --> 00:07:27.686 A:middle
+
+140
+00:07:24,346 --> 00:07:27,686
 That is the CMAccelerometer API.
 
-00:07:28.776 --> 00:07:31.746 A:middle
+
+141
+00:07:28,776 --> 00:07:31,746
 But some of you want more,
 a lot more than that.
 
-00:07:32.116 --> 00:07:35.116 A:middle
+
+142
+00:07:32,116 --> 00:07:35,116
 In fact you wanted to
 get access to sensor data
 
-00:07:35.116 --> 00:07:37.006 A:middle
+
+143
+00:07:35,116 --> 00:07:37,006
 for a long period of time.
 
-00:07:37.446 --> 00:07:38.856 A:middle
+
+144
+00:07:37,446 --> 00:07:38,856
 So today I'm pleased to say
 
-00:07:38.856 --> 00:07:41.746 A:middle
+
+145
+00:07:38,856 --> 00:07:41,746
 that for the first time
 ever we are providing access
 
-00:07:41.746 --> 00:07:45.996 A:middle
+
+146
+00:07:41,746 --> 00:07:45,996
 to historical sensor data as
 the historical accelerometer.
 
-00:07:47.086 --> 00:07:49.426 A:middle
+
+147
+00:07:47,086 --> 00:07:49,426
 Now what does this do for you?
 
-00:07:49.756 --> 00:07:53.796 A:middle
+
+148
+00:07:49,756 --> 00:07:53,796
 It allows you to access
 data for long durations.
 
-00:07:54.086 --> 00:07:55.236 A:middle
+
+149
+00:07:54,086 --> 00:07:55,236
 For really long durations.
 
-00:07:55.986 --> 00:07:58.426 A:middle
+
+150
+00:07:55,986 --> 00:07:58,426
 And you can access
 this data even
 
-00:07:58.426 --> 00:07:59.896 A:middle
+
+151
+00:07:58,426 --> 00:07:59,896
 when your app is not running.
 
 
-
-00:08:01.356 --> 00:08:06.706 A:middle
+152
+00:08:01,356 --> 00:08:06,706
 So this enables you to perform
 your own custom algorithms
 
-00:08:06.706 --> 00:08:09.196 A:middle
+
+153
+00:08:06,706 --> 00:08:09,196
 on top of this long
 streams of sensor data.
 
-00:08:09.726 --> 00:08:11.176 A:middle
+
+154
+00:08:09,726 --> 00:08:11,176
 This is really cool
 and we expect you
 
-00:08:11.176 --> 00:08:12.576 A:middle
+
+155
+00:08:11,176 --> 00:08:12,576
 to make really cool
 apps with this.
 
-00:08:13.106 --> 00:08:14.236 A:middle
+
+156
+00:08:13,106 --> 00:08:14,236
 So how do you do this?
 
-00:08:14.796 --> 00:08:17.766 A:middle
+
+157
+00:08:14,796 --> 00:08:17,766
 We have a new API called
 the CMSensorRecorder,
 
-00:08:18.336 --> 00:08:22.066 A:middle
+
+158
+00:08:18,336 --> 00:08:22,066
 and this enables you to
 initiate historical sensor
 
-00:08:22.066 --> 00:08:22.846 A:middle
+
+159
+00:08:22,066 --> 00:08:22,846
 data recording.
 
-00:08:23.076 --> 00:08:25.236 A:middle
+
+160
+00:08:23,076 --> 00:08:25,236
 Now keep in mind, this
 is a key difference
 
-00:08:25.236 --> 00:08:27.056 A:middle
+
+161
+00:08:25,236 --> 00:08:27,056
 between this historical API
 
-00:08:27.056 --> 00:08:30.906 A:middle
+
+162
+00:08:27,056 --> 00:08:30,906
 and the other historical APIs
 we have such as the pedometer
 
-00:08:30.906 --> 00:08:33.316 A:middle
+
+163
+00:08:30,906 --> 00:08:33,316
 and motion activity where
 you do not really need
 
-00:08:33.316 --> 00:08:35.046 A:middle
+
+164
+00:08:33,316 --> 00:08:35,046
 to initiate any recording.
 
-00:08:35.626 --> 00:08:39.426 A:middle
+
+165
+00:08:35,626 --> 00:08:39,426
 But for the SensorRecorder
 you do need to initiate it,
 
-00:08:39.426 --> 00:08:42.496 A:middle
+
+166
+00:08:39,426 --> 00:08:42,496
 and the data is recorded
 at 50 Hertz,
 
-00:08:42.826 --> 00:08:45.506 A:middle
+
+167
+00:08:42,826 --> 00:08:45,506
 and you can query it
 for up to three days.
 
-00:08:46.806 --> 00:08:50.946 A:middle
+
+168
+00:08:46,806 --> 00:08:50,946
 So that's how you use
 the SensorRecorder.
 
-00:08:51.556 --> 00:08:54.386 A:middle
+
+169
+00:08:51,556 --> 00:08:54,386
 In terms of the implementation,
 here is how we do it.
 
-00:08:54.736 --> 00:08:57.806 A:middle
+
+170
+00:08:54,736 --> 00:08:57,806
 The first thing you want to
 do is initiate recording data
 
-00:08:57.806 --> 00:09:01.636 A:middle
+
+171
+00:08:57,806 --> 00:09:01,636
 and do it by saying
 recordAccelerometerDataFor
 
 
-
-00:08:57.806 --> 00:09:01.636 A:middle
-and do it by saying
-recordAccelerometerDataFor
-
-00:09:01.636 --> 00:09:03.276 A:middle
+172
+00:09:01,636 --> 00:09:03,276
 and provide a duration.
 
-00:09:04.206 --> 00:09:07.316 A:middle
+
+173
+00:09:04,206 --> 00:09:07,316
 Once you do this, the
 device may go to sleep.
 
-00:09:07.666 --> 00:09:09.356 A:middle
+
+174
+00:09:07,666 --> 00:09:09,356
 Your app may get suspended.
 
-00:09:09.356 --> 00:09:10.396 A:middle
+
+175
+00:09:09,356 --> 00:09:10,396
 It's all okay.
 
-00:09:10.716 --> 00:09:14.946 A:middle
+
+176
+00:09:10,716 --> 00:09:14,946
 Later the user may come
 and launch your app.
 
-00:09:15.396 --> 00:09:17.796 A:middle
+
+177
+00:09:15,396 --> 00:09:17,796
 When they launch your app
 you may decide to query
 
-00:09:17.796 --> 00:09:23.406 A:middle
+
+178
+00:09:17,796 --> 00:09:23,406
 for sensor data and you query it
 by saying accelerometerDataFrom
 
-00:09:23.676 --> 00:09:25.796 A:middle
+
+179
+00:09:23,676 --> 00:09:25,796
 and provide a time range.
 
-00:09:26.336 --> 00:09:30.176 A:middle
+
+180
+00:09:26,336 --> 00:09:30,176
 The accelerometer data
 will then be returned
 
-00:09:30.386 --> 00:09:32.076 A:middle
+
+181
+00:09:30,386 --> 00:09:32,076
 for the time ranges specified.
 
-00:09:32.076 --> 00:09:35.066 A:middle
+
+182
+00:09:32,076 --> 00:09:35,066
 And it should be obvious that
 the time range can be a subset
 
-00:09:35.066 --> 00:09:39.026 A:middle
+
+183
+00:09:35,066 --> 00:09:39,026
 of the time that you have
 been recording data for.
 
-00:09:39.496 --> 00:09:42.836 A:middle
+
+184
+00:09:39,496 --> 00:09:42,836
 Now, the data is
 returned as a sequence
 
-00:09:42.836 --> 00:09:44.816 A:middle
+
+185
+00:09:42,836 --> 00:09:44,816
 of CMAccelerometerData objects.
 
-00:09:45.436 --> 00:09:48.616 A:middle
+
+186
+00:09:45,436 --> 00:09:48,616
 Cast your mind back
 to what we said
 
-00:09:48.616 --> 00:09:51.856 A:middle
+
+187
+00:09:48,616 --> 00:09:51,856
 about handling task
 suspenses gracefully.
 
-00:09:51.856 --> 00:09:54.266 A:middle
+
+188
+00:09:51,856 --> 00:09:54,266
 You will encounter the
 same problem here, too.
 
-00:09:54.826 --> 00:09:57.576 A:middle
+
+189
+00:09:54,826 --> 00:09:57,576
 So as you are processing
 this big stream
 
-00:09:57.876 --> 00:10:00.586 A:middle
+
+190
+00:09:57,876 --> 00:10:00,586
 of historical data you do have
 
 
-
-00:09:57.876 --> 00:10:00.586 A:middle
-of historical data you do have
-
-00:10:00.586 --> 00:10:03.396 A:middle
+191
+00:10:00,586 --> 00:10:03,396
 to visit our old
 friend NSProcessInfo.
 
-00:10:04.286 --> 00:10:08.076 A:middle
+
+192
+00:10:04,286 --> 00:10:08,076
 Now, this will inform
 you when your task is
 
-00:10:08.076 --> 00:10:09.186 A:middle
+
+193
+00:10:08,076 --> 00:10:09,186
 about to be suspended.
 
-00:10:09.656 --> 00:10:13.016 A:middle
+
+194
+00:10:09,656 --> 00:10:13,016
 So if you look at the
 accelerometer data object,
 
-00:10:13.016 --> 00:10:16.156 A:middle
+
+195
+00:10:13,016 --> 00:10:16,156
 it contains not just the
 acceleration part you're
 
-00:10:16.156 --> 00:10:18.246 A:middle
+
+196
+00:10:16,156 --> 00:10:18,246
 familiar with, but
 also a startDate.
 
-00:10:18.566 --> 00:10:21.046 A:middle
+
+197
+00:10:18,566 --> 00:10:21,046
 And you can use this
 startDate as an anchor
 
-00:10:21.446 --> 00:10:24.146 A:middle
+
+198
+00:10:21,446 --> 00:10:24,146
 to make sure the next time the
 app is launched you can query
 
-00:10:24.146 --> 00:10:26.366 A:middle
+
+199
+00:10:24,146 --> 00:10:26,366
 from this point onwards.
 
-00:10:26.366 --> 00:10:30.126 A:middle
+
+200
+00:10:26,366 --> 00:10:30,126
 So that, is how SensorRecorder
 works.
 
-00:10:31.006 --> 00:10:34.566 A:middle
+
+201
+00:10:31,006 --> 00:10:34,566
 Now, this is great, but as you
 show there is one consideration.
 
-00:10:35.156 --> 00:10:36.866 A:middle
+
+202
+00:10:35,156 --> 00:10:36,866
 Well, two, power
 and performance.
 
-00:10:37.416 --> 00:10:39.626 A:middle
+
+203
+00:10:37,416 --> 00:10:39,626
 Now, the SensorRecorder
 is a powerful API
 
-00:10:39.956 --> 00:10:42.806 A:middle
+
+204
+00:10:39,956 --> 00:10:42,806
 but with great power
 comes great danger.
 
-00:10:42.806 --> 00:10:47.056 A:middle
+
+205
+00:10:42,806 --> 00:10:47,056
 And the danger here is that
 you may not have enough time
 
-00:10:47.056 --> 00:10:49.176 A:middle
+
+206
+00:10:47,056 --> 00:10:49,176
 to process large
 strings of sensor data.
 
-00:10:49.856 --> 00:10:52.496 A:middle
+
+207
+00:10:49,856 --> 00:10:52,496
 So a few best practices again.
 
-00:10:52.946 --> 00:10:56.706 A:middle
+
+208
+00:10:52,946 --> 00:10:56,706
 The first thing is to, and this
 may be obvious, is to record
 
-00:10:56.706 --> 00:11:00.436 A:middle
+
+209
+00:10:56,706 --> 00:11:00,436
 and query only data for the
 minimum duration required
 
 
-
-00:10:56.706 --> 00:11:00.436 A:middle
-and query only data for the
-minimum duration required
-
-00:11:00.436 --> 00:11:00.876 A:middle
+210
+00:11:00,436 --> 00:11:00,876
 by your app.
 
-00:11:00.996 --> 00:11:03.956 A:middle
+
+211
+00:11:00,996 --> 00:11:03,956
 So if you are a work out app
 you probably don't need 12 hours
 
-00:11:03.956 --> 00:11:04.176 A:middle
+
+212
+00:11:03,956 --> 00:11:04,176
 of data.
 
-00:11:04.176 --> 00:11:06.996 A:middle
+
+213
+00:11:04,176 --> 00:11:06,996
 You can probably get by with
 a couple of hours of data.
 
-00:11:06.996 --> 00:11:09.876 A:middle
+
+214
+00:11:06,996 --> 00:11:09,876
 The less amount of
 data you query for,
 
-00:11:09.876 --> 00:11:11.776 A:middle
+
+215
+00:11:09,876 --> 00:11:11,776
 the easier it will
 be for your app.
 
-00:11:12.926 --> 00:11:15.966 A:middle
+
+216
+00:11:12,926 --> 00:11:15,966
 You should also know the
 sensor data rate requirements.
 
-00:11:16.416 --> 00:11:18.576 A:middle
+
+217
+00:11:16,416 --> 00:11:18,576
 Now, the data is
 available at 50 Hertz,
 
-00:11:18.996 --> 00:11:21.686 A:middle
+
+218
+00:11:18,996 --> 00:11:21,686
 but unless you are planning to
 extract features from that data
 
-00:11:21.686 --> 00:11:25.596 A:middle
+
+219
+00:11:21,686 --> 00:11:25,596
 that require a high sensor rate
 you are better off just dropping
 
-00:11:25.596 --> 00:11:27.866 A:middle
+
+220
+00:11:25,596 --> 00:11:27,866
 data and process less data.
 
-00:11:28.466 --> 00:11:30.826 A:middle
+
+221
+00:11:28,466 --> 00:11:30,826
 So a few best practices
 and you should be good.
 
-00:11:31.436 --> 00:11:35.766 A:middle
+
+222
+00:11:31,436 --> 00:11:35,766
 And that's the Core Motion
 update for Apple Watch.
 
-00:11:36.386 --> 00:11:39.646 A:middle
+
+223
+00:11:36,386 --> 00:11:39,646
 As you've seen we had a
 lot of the familiar APIs
 
-00:11:39.646 --> 00:11:43.076 A:middle
+
+224
+00:11:39,646 --> 00:11:43,076
 and we also have access
 to historical sensor data.
 
-00:11:43.656 --> 00:11:45.186 A:middle
+
+225
+00:11:43,656 --> 00:11:45,186
 This should be really great,
 and you should be able
 
-00:11:45.186 --> 00:11:46.936 A:middle
+
+226
+00:11:45,186 --> 00:11:46,936
 to make really cool
 application with this.
 
-00:11:47.066 --> 00:11:49.536 A:middle
+
+227
+00:11:47,066 --> 00:11:49,536
 In terms of writing
 Watch applications,
 
-00:11:49.536 --> 00:11:51.616 A:middle
+
+228
+00:11:49,536 --> 00:11:51,616
 we did have a session
 earlier this morning
 
-00:11:51.976 --> 00:11:53.316 A:middle
+
+229
+00:11:51,976 --> 00:11:53,316
 that you can probably
 go watch now.
 
-00:11:53.846 --> 00:11:58.276 A:middle
+
+230
+00:11:53,846 --> 00:11:58,276
 For the rest of the talk I'll
 focus on iOS and I'll begin
 
-00:11:58.276 --> 00:11:59.956 A:middle
+
+231
+00:11:58,276 --> 00:11:59,956
 with updates to the pedometer.
 
 
-
-00:12:01.026 --> 00:12:04.206 A:middle
+232
+00:12:01,026 --> 00:12:04,206
 This is the pedometer that
 you are familiar with.
 
-00:12:04.476 --> 00:12:05.696 A:middle
+
+233
+00:12:04,476 --> 00:12:05,696
 Steps and distance.
 
-00:12:06.616 --> 00:12:08.176 A:middle
+
+234
+00:12:06,616 --> 00:12:08,176
 A quick recap.
 
-00:12:08.286 --> 00:12:10.436 A:middle
+
+235
+00:12:08,286 --> 00:12:10,436
 The pedometer is designed
 
-00:12:10.576 --> 00:12:12.086 A:middle
+
+236
+00:12:10,576 --> 00:12:12,086
 to give you consistent
 performance
 
-00:12:12.086 --> 00:12:13.676 A:middle
+
+237
+00:12:12,086 --> 00:12:13,676
 across body location.
 
-00:12:13.676 --> 00:12:16.156 A:middle
+
+238
+00:12:13,676 --> 00:12:16,156
 So whether it's in your hand
 or if it's in your pocket,
 
-00:12:16.276 --> 00:12:18.736 A:middle
+
+239
+00:12:16,276 --> 00:12:18,736
 the performance is
 supposed to be consistent,
 
-00:12:18.736 --> 00:12:22.346 A:middle
+
+240
+00:12:18,736 --> 00:12:22,346
 and it is also consistent
 for varying pace.
 
-00:12:23.436 --> 00:12:25.996 A:middle
+
+241
+00:12:23,436 --> 00:12:25,996
 Now a great feature
 of this pedometer is
 
-00:12:25.996 --> 00:12:27.926 A:middle
+
+242
+00:12:25,996 --> 00:12:27,926
 that it adapts to the user.
 
-00:12:28.186 --> 00:12:31.566 A:middle
+
+243
+00:12:28,186 --> 00:12:31,566
 So the more the user uses the
 pedometer, the better it gets
 
-00:12:31.566 --> 00:12:33.446 A:middle
+
+244
+00:12:31,566 --> 00:12:33,446
 by calibrating itself
 to the user.
 
-00:12:34.156 --> 00:12:38.556 A:middle
+
+245
+00:12:34,156 --> 00:12:38,556
 In iOS 9 we are making one big
 improvement to the pedometer
 
-00:12:38.626 --> 00:12:42.446 A:middle
+
+246
+00:12:38,626 --> 00:12:42,446
 which is it incorporates
 GPS when possible.
 
-00:12:43.726 --> 00:12:44.466 A:middle
+
+247
+00:12:43,726 --> 00:12:44,466
 Why do we do this?
 
-00:12:45.466 --> 00:12:47.746 A:middle
+
+248
+00:12:45,466 --> 00:12:47,746
 Well, you may have an app
 
-00:12:47.846 --> 00:12:50.136 A:middle
+
+249
+00:12:47,846 --> 00:12:50,136
 that is already subscribing
 to location.
 
-00:12:50.136 --> 00:12:52.586 A:middle
+
+250
+00:12:50,136 --> 00:12:52,586
 Maybe you are trying to
 plot the user's track
 
-00:12:52.586 --> 00:12:53.476 A:middle
+
+251
+00:12:52,586 --> 00:12:53,476
 as they go on a run.
 
-00:12:54.216 --> 00:12:56.946 A:middle
+
+252
+00:12:54,216 --> 00:12:56,946
 When you do that,
 the pedometer senses
 
-00:12:56.946 --> 00:12:58.506 A:middle
+
+253
+00:12:56,946 --> 00:12:58,506
 that GPS data is available
 
-00:12:58.866 --> 00:13:01.566 A:middle
+
+254
+00:12:58,866 --> 00:13:01,566
 and it gets more
 accurate by using it.
 
 
-
-00:12:58.866 --> 00:13:01.566 A:middle
-and it gets more
-accurate by using it.
-
-00:13:02.956 --> 00:13:05.286 A:middle
+255
+00:13:02,956 --> 00:13:05,286
 Well, why is this so critical?
 
-00:13:05.586 --> 00:13:08.176 A:middle
+
+256
+00:13:05,586 --> 00:13:08,176
 So take a look at this
 run that a colleague
 
-00:13:08.176 --> 00:13:09.726 A:middle
+
+257
+00:13:08,176 --> 00:13:09,726
 of mine did in San Francisco.
 
-00:13:09.726 --> 00:13:11.566 A:middle
+
+258
+00:13:09,726 --> 00:13:11,566
 San Francisco is urban canyon.
 
-00:13:11.566 --> 00:13:15.356 A:middle
+
+259
+00:13:11,566 --> 00:13:15,356
 It has tall buildings and it
 can be a challenging environment
 
-00:13:15.356 --> 00:13:16.256 A:middle
+
+260
+00:13:15,356 --> 00:13:16,256
 for any GPS.
 
-00:13:16.256 --> 00:13:18.946 A:middle
+
+261
+00:13:16,256 --> 00:13:18,946
 If you look at this
 segment here,
 
-00:13:19.476 --> 00:13:22.356 A:middle
+
+262
+00:13:19,476 --> 00:13:22,356
 GPS looks pretty solid here.
 
-00:13:23.126 --> 00:13:25.916 A:middle
+
+263
+00:13:23,126 --> 00:13:25,916
 If you were to rely on
 GPS we'd get really good
 
-00:13:26.046 --> 00:13:27.126 A:middle
+
+264
+00:13:26,046 --> 00:13:27,126
 distance estimates.
 
-00:13:28.056 --> 00:13:28.506 A:middle
+
+265
+00:13:28,056 --> 00:13:28,506
 That's good.
 
-00:13:29.306 --> 00:13:31.546 A:middle
+
+266
+00:13:29,306 --> 00:13:31,546
 If you look at a
 different segment here,
 
-00:13:31.546 --> 00:13:33.066 A:middle
+
+267
+00:13:31,546 --> 00:13:33,066
 you can see that
 there's quite a bit
 
-00:13:33.066 --> 00:13:34.746 A:middle
+
+268
+00:13:33,066 --> 00:13:34,746
 of wander in the user's track.
 
-00:13:35.376 --> 00:13:38.186 A:middle
+
+269
+00:13:35,376 --> 00:13:38,186
 Now granted there are quite
 a few pubs along the way --
 
-00:13:38.186 --> 00:13:41.976 A:middle
+
+270
+00:13:38,186 --> 00:13:41,976
 [Laughter.] but that is probably
 not really how this person
 
-00:13:42.906 --> 00:13:44.216 A:middle
+
+271
+00:13:42,906 --> 00:13:44,216
 really ran.
 
-00:13:44.716 --> 00:13:47.386 A:middle
+
+272
+00:13:44,716 --> 00:13:47,386
 The pedometer is smart
 enough to understand
 
-00:13:47.386 --> 00:13:50.316 A:middle
+
+273
+00:13:47,386 --> 00:13:50,316
 that this is a portion where
 it should not rely on the GPS,
 
-00:13:50.316 --> 00:13:53.466 A:middle
+
+274
+00:13:50,316 --> 00:13:53,466
 and it resorts to
 its own stride-based
 
-00:13:53.466 --> 00:13:54.456 A:middle
+
+275
+00:13:53,466 --> 00:13:54,456
 distance estimation.
 
-00:13:54.776 --> 00:13:59.156 A:middle
+
+276
+00:13:54,776 --> 00:13:59,156
 The end result if you use the
 pedometer you get a consistent
 
-00:13:59.296 --> 00:14:02.146 A:middle
+
+277
+00:13:59,296 --> 00:14:02,146
 performance and that's
 why you should use steps
 
 
-
-00:13:59.296 --> 00:14:02.146 A:middle
-performance and that's
-why you should use steps
-
-00:14:02.146 --> 00:14:09.016 A:middle
+278
+00:14:02,146 --> 00:14:09,016
 and distance from the pedometer.
 
-00:14:09.146 --> 00:14:13.136 A:middle
+
+279
+00:14:09,146 --> 00:14:13,136
 We have one big API improvement
 in the pedometer this year.
 
-00:14:13.216 --> 00:14:15.306 A:middle
+
+280
+00:14:13,216 --> 00:14:15,306
 That is -- well,
 before we go to that,
 
-00:14:15.306 --> 00:14:17.036 A:middle
+
+281
+00:14:15,306 --> 00:14:17,036
 let's talk about one
 you already know about
 
-00:14:17.036 --> 00:14:17.986 A:middle
+
+282
+00:14:17,036 --> 00:14:17,986
 and that's floor counting.
 
-00:14:18.546 --> 00:14:21.206 A:middle
+
+283
+00:14:18,546 --> 00:14:21,206
 So floor counting is available
 
-00:14:21.206 --> 00:14:23.076 A:middle
+
+284
+00:14:21,206 --> 00:14:23,076
 as floorsAscended
 and floorsDescended.
 
-00:14:23.876 --> 00:14:25.676 A:middle
+
+285
+00:14:23,876 --> 00:14:25,676
 Because this is part
 of the pedometer,
 
-00:14:25.676 --> 00:14:28.396 A:middle
+
+286
+00:14:25,676 --> 00:14:28,396
 there is a pedestrian aspect
 to it, which is that you have
 
-00:14:28.396 --> 00:14:29.396 A:middle
+
+287
+00:14:28,396 --> 00:14:29,396
 to actually take steps.
 
-00:14:30.166 --> 00:14:33.636 A:middle
+
+288
+00:14:30,166 --> 00:14:33,636
 What it means is that you
 really have to earn your floors
 
-00:14:33.916 --> 00:14:36.376 A:middle
+
+289
+00:14:33,916 --> 00:14:36,376
 to be awarded floors here.
 
-00:14:37.266 --> 00:14:41.206 A:middle
+
+290
+00:14:37,266 --> 00:14:41,206
 Let's take a deeper look
 at how this actually works.
 
-00:14:41.476 --> 00:14:42.596 A:middle
+
+291
+00:14:41,476 --> 00:14:42,596
 It has a few requirements.
 
-00:14:42.996 --> 00:14:46.366 A:middle
+
+292
+00:14:42,996 --> 00:14:46,366
 The first is that there is a
 minimum ascend rate requirement.
 
-00:14:47.226 --> 00:14:49.596 A:middle
+
+293
+00:14:47,226 --> 00:14:49,596
 There is also a steps
 requirement.
 
-00:14:50.076 --> 00:14:53.616 A:middle
+
+294
+00:14:50,076 --> 00:14:53,616
 What this all means for us
 is that if you were to say go
 
-00:14:53.616 --> 00:14:55.616 A:middle
+
+295
+00:14:53,616 --> 00:14:55,616
 on a long hike and you walk slow
 
-00:14:55.616 --> 00:14:58.466 A:middle
+
+296
+00:14:55,616 --> 00:14:58,466
 and eventually you accumulate
 quite a bit of altitude.
 
-00:14:58.746 --> 00:15:03.596 A:middle
+
+297
+00:14:58,746 --> 00:15:03,596
 The likelihood is that you won't
 hit the ascend rate requirements
 
 
-
-00:14:58.746 --> 00:15:03.596 A:middle
-The likelihood is that you won't
-hit the ascend rate requirements
-
-00:15:03.596 --> 00:15:04.936 A:middle
+298
+00:15:03,596 --> 00:15:04,936
 and we won't award you floors.
 
-00:15:05.866 --> 00:15:08.016 A:middle
+
+299
+00:15:05,866 --> 00:15:08,016
 But if you are walking
 in San Francisco
 
-00:15:08.016 --> 00:15:09.016 A:middle
+
+300
+00:15:08,016 --> 00:15:09,016
 where you have some really,
 
-00:15:09.016 --> 00:15:11.066 A:middle
+
+301
+00:15:09,016 --> 00:15:11,066
 really steep hills
 it is possible
 
-00:15:11.066 --> 00:15:12.666 A:middle
+
+302
+00:15:11,066 --> 00:15:12,666
 that you will get a few floors.
 
-00:15:14.156 --> 00:15:17.796 A:middle
+
+303
+00:15:14,156 --> 00:15:17,796
 Also because of the step
 rate requirements if you were
 
-00:15:17.796 --> 00:15:19.406 A:middle
+
+304
+00:15:17,796 --> 00:15:19,406
 to use the elevator
 
-00:15:19.406 --> 00:15:22.686 A:middle
+
+305
+00:15:19,406 --> 00:15:22,686
 or the escalator you are not
 likely to be awarded floors.
 
-00:15:22.806 --> 00:15:25.536 A:middle
+
+306
+00:15:22,806 --> 00:15:25,536
 So that is how floor
 counting works in iOS.
 
-00:15:25.856 --> 00:15:29.256 A:middle
+
+307
+00:15:25,856 --> 00:15:29,256
 Now it's time for the new API.
 
-00:15:30.276 --> 00:15:32.176 A:middle
+
+308
+00:15:30,276 --> 00:15:32,176
 That is pace.
 
-00:15:33.086 --> 00:15:33.876 A:middle
+
+309
+00:15:33,086 --> 00:15:33,876
 Pace is something
 
-00:15:33.876 --> 00:15:36.366 A:middle
+
+310
+00:15:33,876 --> 00:15:36,366
 that developers have
 long asked us to provide.
 
-00:15:36.366 --> 00:15:39.376 A:middle
+
+311
+00:15:36,366 --> 00:15:39,376
 We are happy to provide it now.
 
-00:15:39.376 --> 00:15:42.606 A:middle
+
+312
+00:15:39,376 --> 00:15:42,606
 When we talk about pace, we
 are referring to currentPace.
 
-00:15:43.226 --> 00:15:45.336 A:middle
+
+313
+00:15:43,226 --> 00:15:45,336
 So this is really the
 instantaneous pace
 
-00:15:45.336 --> 00:15:49.186 A:middle
+
+314
+00:15:45,336 --> 00:15:49,186
 and not the pace as estimated
 from the beginning of your run.
 
-00:15:49.226 --> 00:15:52.626 A:middle
+
+315
+00:15:49,226 --> 00:15:52,626
 And it is provided in units
 of time over distance.
 
-00:15:53.276 --> 00:15:56.806 A:middle
+
+316
+00:15:53,276 --> 00:15:56,806
 If you are wondering why it is
 provided in this way and not
 
-00:15:56.806 --> 00:15:59.676 A:middle
+
+317
+00:15:56,806 --> 00:15:59,676
 as speed, you know, that pace
 is normally analogous to,
 
 
-
-00:16:00.206 --> 00:16:03.396 A:middle
+318
+00:16:00,206 --> 00:16:03,396
 is because for runners,
 pace is the time taken
 
-00:16:03.396 --> 00:16:04.916 A:middle
+
+319
+00:16:03,396 --> 00:16:04,916
 to cover a known distance.
 
-00:16:06.206 --> 00:16:08.416 A:middle
+
+320
+00:16:06,206 --> 00:16:08,416
 If you have been following
 the Apple Watch updates
 
-00:16:08.496 --> 00:16:11.646 A:middle
+
+321
+00:16:08,496 --> 00:16:11,646
 on the website, this pace
 might be familiar to you.
 
-00:16:12.076 --> 00:16:15.206 A:middle
+
+322
+00:16:12,076 --> 00:16:15,206
 To me this is something
 that I'm envy just of.
 
-00:16:15.206 --> 00:16:15.946 A:middle
+
+323
+00:16:15,206 --> 00:16:15,946
 [Laughter.]
 
-00:16:15.946 --> 00:16:18.696 A:middle
-&gt;&gt; ANIL KANDANGATH: The
+
+324
+00:16:15,946 --> 00:16:18,696
+>> ANIL KANDANGATH: The
 pedometer has both a live
 
-00:16:18.696 --> 00:16:21.716 A:middle
+
+325
+00:16:18,696 --> 00:16:21,716
 and historical aspect to it,
 but pace is only available
 
-00:16:21.716 --> 00:16:23.176 A:middle
+
+326
+00:16:21,716 --> 00:16:23,176
 when you do live queries.
 
-00:16:23.936 --> 00:16:25.036 A:middle
+
+327
+00:16:23,936 --> 00:16:25,036
 So just keep that in mind.
 
-00:16:25.876 --> 00:16:27.766 A:middle
+
+328
+00:16:25,876 --> 00:16:27,766
 Now why do we provide pace?
 
-00:16:27.896 --> 00:16:31.506 A:middle
+
+329
+00:16:27,896 --> 00:16:31,506
 After all, we do provide
 distance and a notion of time
 
-00:16:31.506 --> 00:16:34.706 A:middle
+
+330
+00:16:31,506 --> 00:16:34,706
 in the pedometer, and we
 could just easily compute pace
 
-00:16:34.706 --> 00:16:35.156 A:middle
+
+331
+00:16:34,706 --> 00:16:35,156
 from there.
 
-00:16:36.376 --> 00:16:38.726 A:middle
+
+332
+00:16:36,376 --> 00:16:38,726
 The answer in one
 word is robustness.
 
-00:16:39.796 --> 00:16:42.136 A:middle
+
+333
+00:16:39,796 --> 00:16:42,136
 If you were to say do some
 finer difference and try
 
-00:16:42.136 --> 00:16:45.166 A:middle
+
+334
+00:16:42,136 --> 00:16:45,166
 to estimate pace just from
 those distance chunks,
 
-00:16:45.816 --> 00:16:49.786 A:middle
+
+335
+00:16:45,816 --> 00:16:49,786
 we would introduce an acceptable
 amount of jitter in the pace,
 
-00:16:50.766 --> 00:16:54.536 A:middle
+
+336
+00:16:50,766 --> 00:16:54,536
 and the pedometer takes
 care of this and ensures
 
-00:16:54.536 --> 00:16:57.006 A:middle
+
+337
+00:16:54,536 --> 00:16:57,006
 that the pace estimation
 is smooth.
 
-00:16:57.656 --> 00:17:02.346 A:middle
+
+338
+00:16:57,656 --> 00:17:02,346
 The other part is you could
 try to get a smooth pace
 
 
-
-00:16:57.656 --> 00:17:02.346 A:middle
-The other part is you could
-try to get a smooth pace
-
-00:17:02.346 --> 00:17:05.465 A:middle
+339
+00:17:02,346 --> 00:17:05,465
 by looking back at a much
 bigger chunk of the history
 
-00:17:05.776 --> 00:17:07.566 A:middle
+
+340
+00:17:05,776 --> 00:17:07,566
 and then try to average
 a pace over it.
 
-00:17:07.616 --> 00:17:11.726 A:middle
+
+341
+00:17:07,616 --> 00:17:11,726
 But the cost of doing that
 is you lose the ability
 
-00:17:11.726 --> 00:17:14.705 A:middle
+
+342
+00:17:11,726 --> 00:17:14,705
 to respond quickly to
 changes in the user's pace.
 
-00:17:15.156 --> 00:17:18.856 A:middle
+
+343
+00:17:15,156 --> 00:17:18,856
 Pace from CMPedometer
 also responds very quickly
 
-00:17:18.856 --> 00:17:20.316 A:middle
+
+344
+00:17:18,856 --> 00:17:20,316
 to changes and it is responsive.
 
-00:17:20.376 --> 00:17:24.226 A:middle
+
+345
+00:17:20,376 --> 00:17:24,226
 So smoothness and responsiveness
 is why you should use pace
 
-00:17:24.866 --> 00:17:26.126 A:middle
+
+346
+00:17:24,866 --> 00:17:26,126
 from CMPedometer.
 
-00:17:26.866 --> 00:17:28.046 A:middle
+
+347
+00:17:26,866 --> 00:17:28,046
 And that's pace.
 
-00:17:28.916 --> 00:17:33.616 A:middle
+
+348
+00:17:28,916 --> 00:17:33,616
 A close cousin of
 pace is cadence.
 
-00:17:34.496 --> 00:17:37.136 A:middle
+
+349
+00:17:34,496 --> 00:17:37,136
 And we now have cadence
 in the pedometer.
 
-00:17:37.846 --> 00:17:39.496 A:middle
+
+350
+00:17:37,846 --> 00:17:39,496
 Now, what is cadence?
 
-00:17:39.496 --> 00:17:43.206 A:middle
+
+351
+00:17:39,496 --> 00:17:43,206
 Cadence is the rate of your
 steps or in other terms,
 
-00:17:43.206 --> 00:17:46.306 A:middle
+
+352
+00:17:43,206 --> 00:17:46,306
 it is how often your feet
 are landing on the ground.
 
-00:17:46.786 --> 00:17:49.646 A:middle
+
+353
+00:17:46,786 --> 00:17:49,646
 We know that the cadence is
 really important to runners,
 
-00:17:49.726 --> 00:17:51.606 A:middle
+
+354
+00:17:49,726 --> 00:17:51,606
 so now you can provide cadence
 
-00:17:51.606 --> 00:17:53.706 A:middle
+
+355
+00:17:51,606 --> 00:17:53,706
 in your apps directly
 from the pedometer.
 
-00:17:56.076 --> 00:17:56.306 A:middle
+
+356
+00:17:56,076 --> 00:17:56,306
 Yeah! [Applause.]
 
-00:17:56.996 --> 00:18:01.376 A:middle
-&gt;&gt; ANIL KANDANGATH: So that is
+
+357
+00:17:56,996 --> 00:18:01,376
+>> ANIL KANDANGATH: So that is
 our update for the pedometer.
 
 
-
-00:17:56.996 --> 00:18:01.376 A:middle
-&gt;&gt; ANIL KANDANGATH: So that is
-our update for the pedometer.
-
-00:18:01.376 --> 00:18:05.666 A:middle
+358
+00:18:01,376 --> 00:18:05,666
 Here is a quick run down of
 the features across platforms
 
-00:18:05.666 --> 00:18:08.486 A:middle
+
+359
+00:18:05,666 --> 00:18:08,486
 and note that the
 pedometer is also available
 
-00:18:08.486 --> 00:18:09.336 A:middle
+
+360
+00:18:08,486 --> 00:18:09,336
 in the Apple Watch.
 
-00:18:09.796 --> 00:18:12.896 A:middle
+
+361
+00:18:09,796 --> 00:18:12,896
 Let's move on to
 pressure sensing.
 
-00:18:13.846 --> 00:18:17.546 A:middle
+
+362
+00:18:13,846 --> 00:18:17,546
 The pressure is available
 through the altimeter sensor.
 
-00:18:18.186 --> 00:18:21.476 A:middle
+
+363
+00:18:18,186 --> 00:18:21,476
 It is available as part
 of the CMAltimeter API.
 
-00:18:21.476 --> 00:18:23.336 A:middle
+
+364
+00:18:21,476 --> 00:18:23,336
 And it gives you two things.
 
-00:18:23.506 --> 00:18:26.226 A:middle
+
+365
+00:18:23,506 --> 00:18:26,226
 it gives you raw
 pressure which is nothing
 
-00:18:26.226 --> 00:18:28.776 A:middle
+
+366
+00:18:26,226 --> 00:18:28,776
 but a filtered version of the
 pressure from the sensor itself
 
-00:18:29.306 --> 00:18:31.716 A:middle
+
+367
+00:18:29,306 --> 00:18:31,716
 and gives you relative altitude.
 
-00:18:32.256 --> 00:18:34.036 A:middle
+
+368
+00:18:32,256 --> 00:18:34,036
 Let's take a deeper
 look at altitude.
 
-00:18:34.846 --> 00:18:37.406 A:middle
+
+369
+00:18:34,846 --> 00:18:37,406
 When we say relative,
 it is relative
 
-00:18:37.406 --> 00:18:39.266 A:middle
+
+370
+00:18:37,406 --> 00:18:39,266
 to the first sample provided.
 
-00:18:40.256 --> 00:18:42.986 A:middle
+
+371
+00:18:40,256 --> 00:18:42,986
 What it means is that
 the first sample you get
 
-00:18:42.986 --> 00:18:47.526 A:middle
+
+372
+00:18:42,986 --> 00:18:47,526
 from the altimeter will have
 a relative altitude of zero.
 
-00:18:47.996 --> 00:18:51.246 A:middle
+
+373
+00:18:47,996 --> 00:18:51,246
 And every subsequent sample
 will be baselined against that.
 
-00:18:52.306 --> 00:18:56.066 A:middle
+
+374
+00:18:52,306 --> 00:18:56,066
 What do we need to know about
 the altimeter to use it?
 
-00:18:56.596 --> 00:19:02.976 A:middle
+
+375
+00:18:56,596 --> 00:19:02,976
 Well, the altimeter is really
 great for floor level changes.
 
 
-
-00:18:56.596 --> 00:19:02.976 A:middle
-Well, the altimeter is really
-great for floor level changes.
-
-00:19:02.976 --> 00:19:05.046 A:middle
+376
+00:19:02,976 --> 00:19:05,046
 It is not really great
 for human level changes.
 
-00:19:05.676 --> 00:19:07.716 A:middle
+
+377
+00:19:05,676 --> 00:19:07,716
 So you should probably
 not use it to know
 
-00:19:07.716 --> 00:19:09.176 A:middle
+
+378
+00:19:07,716 --> 00:19:09,176
 if the user is raising
 their arm.
 
-00:19:09.506 --> 00:19:11.186 A:middle
+
+379
+00:19:09,506 --> 00:19:11,186
 The error is not going
 to be good for you.
 
-00:19:12.286 --> 00:19:14.606 A:middle
+
+380
+00:19:12,286 --> 00:19:14,606
 There are challenging
 situations for the sensor
 
-00:19:14.606 --> 00:19:17.326 A:middle
+
+381
+00:19:14,606 --> 00:19:17,326
 that you should keep in mind.
 
-00:19:17.406 --> 00:19:18.776 A:middle
+
+382
+00:19:17,406 --> 00:19:18,776
 One is the environment.
 
-00:19:19.516 --> 00:19:22.556 A:middle
+
+383
+00:19:19,516 --> 00:19:22,556
 The environment might change
 over time in the same location
 
-00:19:22.606 --> 00:19:25.246 A:middle
+
+384
+00:19:22,606 --> 00:19:25,246
 and give you a false
 sense of altitude changes.
 
-00:19:25.886 --> 00:19:28.226 A:middle
+
+385
+00:19:25,886 --> 00:19:28,226
 For example, the
 recent cold front
 
-00:19:28.226 --> 00:19:30.826 A:middle
+
+386
+00:19:28,226 --> 00:19:30,826
 in San Francisco would have
 changed the pressure enough
 
-00:19:31.136 --> 00:19:33.156 A:middle
+
+387
+00:19:31,136 --> 00:19:33,156
 for us to think that
 your altitude changed
 
-00:19:33.156 --> 00:19:34.726 A:middle
+
+388
+00:19:33,156 --> 00:19:34,726
 by say 15 meters.
 
-00:19:35.636 --> 00:19:37.646 A:middle
+
+389
+00:19:35,636 --> 00:19:37,646
 You should probably
 not use the sensor
 
-00:19:37.646 --> 00:19:40.836 A:middle
+
+390
+00:19:37,646 --> 00:19:40,836
 over long durations of time.
 
-00:19:41.416 --> 00:19:44.896 A:middle
+
+391
+00:19:41,416 --> 00:19:44,896
 The case that your device is in
 can also impact the pressure.
 
-00:19:44.896 --> 00:19:48.816 A:middle
+
+392
+00:19:44,896 --> 00:19:48,816
 If you are using a rigid sealed
 waterproof case for your phone,
 
-00:19:49.176 --> 00:19:50.926 A:middle
+
+393
+00:19:49,176 --> 00:19:50,926
 the pressure sensor
 is not your friend.
 
-00:19:52.606 --> 00:19:56.256 A:middle
+
+394
+00:19:52,606 --> 00:19:56,256
 In terms of using the API, it
 should be very familiar to you
 
-00:19:56.256 --> 00:19:59.266 A:middle
+
+395
+00:19:56,256 --> 00:19:59,266
 and it gives you pressure
 and altitude in the API.
 
 
-
-00:20:00.016 --> 00:20:03.336 A:middle
+396
+00:20:00,016 --> 00:20:03,336
 How fast can you access
 data from this sensor?
 
-00:20:04.066 --> 00:20:07.226 A:middle
+
+397
+00:20:04,066 --> 00:20:07,226
 So the first time you make a
 request, the first sample takes
 
-00:20:07.226 --> 00:20:09.566 A:middle
+
+398
+00:20:07,226 --> 00:20:09,566
 around 2.6 seconds to come.
 
-00:20:10.176 --> 00:20:13.916 A:middle
+
+399
+00:20:10,176 --> 00:20:13,916
 Every subsequent sample comes
 at a cadence of 1.3 seconds.
 
-00:20:14.206 --> 00:20:16.946 A:middle
+
+400
+00:20:14,206 --> 00:20:16,946
 That is how fast you can
 get data from the altimeter.
 
-00:20:18.336 --> 00:20:25.506 A:middle
+
+401
+00:20:18,336 --> 00:20:25,506
 So to summarize, Core
 Motion now has, is available
 
-00:20:25.506 --> 00:20:27.266 A:middle
+
+402
+00:20:25,506 --> 00:20:27,266
 on a multitude of platforms.
 
-00:20:27.266 --> 00:20:29.316 A:middle
+
+403
+00:20:27,266 --> 00:20:29,316
 It is available on
 the iPads, the iPhones
 
-00:20:29.626 --> 00:20:30.806 A:middle
+
+404
+00:20:29,626 --> 00:20:30,806
 and also the Apple Watch.
 
-00:20:31.326 --> 00:20:33.276 A:middle
+
+405
+00:20:31,326 --> 00:20:33,276
 On the Apple Watch
 we give you access
 
-00:20:33.276 --> 00:20:37.296 A:middle
+
+406
+00:20:33,276 --> 00:20:37,296
 and not just the familiar APIs
 but also historical sensor data.
 
-00:20:38.146 --> 00:20:41.326 A:middle
+
+407
+00:20:38,146 --> 00:20:41,326
 The pedometer has a bunch of
 really cool updates of its own.
 
-00:20:41.326 --> 00:20:46.556 A:middle
+
+408
+00:20:41,326 --> 00:20:46,556
 It's more accurate than
 ever, and it has two new APIs
 
-00:20:46.556 --> 00:20:48.286 A:middle
+
+409
+00:20:46,556 --> 00:20:48,286
 in the form of pace and cadence.
 
-00:20:48.286 --> 00:20:51.456 A:middle
+
+410
+00:20:48,286 --> 00:20:51,456
 So it is a well-rounded
 now and should be great
 
-00:20:51.456 --> 00:20:53.126 A:middle
+
+411
+00:20:51,456 --> 00:20:53,126
 for your fitness apps.
 
-00:20:54.236 --> 00:20:56.356 A:middle
+
+412
+00:20:54,236 --> 00:20:56,356
 Now Core Motion has
 traditionally been used
 
-00:20:56.356 --> 00:20:59.336 A:middle
+
+413
+00:20:56,356 --> 00:20:59,336
 for gaming, for gestures,
 for fitness.
 
-00:20:59.336 --> 00:21:02.296 A:middle
+
+414
+00:20:59,336 --> 00:21:02,296
 There's a bunch of
 applications for Core Motion,
 
 
-
-00:20:59.336 --> 00:21:02.296 A:middle
-There's a bunch of
-applications for Core Motion,
-
-00:21:02.686 --> 00:21:06.186 A:middle
+415
+00:21:02,686 --> 00:21:06,186
 but Core Motion can also be
 used to enhance the intelligence
 
-00:21:06.476 --> 00:21:07.706 A:middle
+
+416
+00:21:06,476 --> 00:21:07,706
 of other kinds of apps.
 
-00:21:08.396 --> 00:21:10.556 A:middle
+
+417
+00:21:08,396 --> 00:21:10,556
 To illustrate this
 concept I am going
 
-00:21:10.556 --> 00:21:11.976 A:middle
+
+418
+00:21:10,556 --> 00:21:11,976
 to invite Gabrielle on stage.
 
-00:21:12.516 --> 00:21:20.536 A:middle
+
+419
+00:21:12,516 --> 00:21:20,536
 [Applause.]
 
-00:21:21.036 --> 00:21:22.116 A:middle
-&gt;&gt; GABRIELLE BADIE:
+
+420
+00:21:21,036 --> 00:21:22,116
+>> GABRIELLE BADIE:
 Hi, everybody.
 
-00:21:23.336 --> 00:21:25.076 A:middle
+
+421
+00:21:23,336 --> 00:21:25,076
 I'm really excited to be here.
 
-00:21:25.826 --> 00:21:31.426 A:middle
+
+422
+00:21:25,826 --> 00:21:31,426
 As a developer, I never got to
 attend WWDC, but I spent every,
 
-00:21:31.426 --> 00:21:34.586 A:middle
+
+423
+00:21:31,426 --> 00:21:34,586
 that first week of June
 watching all of the sessions
 
-00:21:34.586 --> 00:21:37.366 A:middle
+
+424
+00:21:34,586 --> 00:21:37,366
 on my computer at home
 wherever I was working.
 
-00:21:38.446 --> 00:21:39.986 A:middle
+
+425
+00:21:38,446 --> 00:21:39,986
 I learned a lot of information,
 
-00:21:39.986 --> 00:21:41.696 A:middle
+
+426
+00:21:39,986 --> 00:21:41,696
 but one of the really
 difficult things was
 
-00:21:41.696 --> 00:21:43.856 A:middle
+
+427
+00:21:41,696 --> 00:21:43,856
 that there was too
 much information.
 
-00:21:44.796 --> 00:21:48.596 A:middle
+
+428
+00:21:44,796 --> 00:21:48,596
 Even in a given session
 there is so much to absorb
 
-00:21:48.876 --> 00:21:51.386 A:middle
+
+429
+00:21:48,876 --> 00:21:51,386
 that when you leave you may
 even forget all of the things
 
-00:21:51.386 --> 00:21:53.176 A:middle
+
+430
+00:21:51,386 --> 00:21:53,176
 that you learned
 in the last hour.
 
-00:21:54.486 --> 00:21:57.396 A:middle
+
+431
+00:21:54,486 --> 00:21:57,396
 What I'm here to do is to
 take a few of the great things
 
-00:21:57.396 --> 00:21:59.106 A:middle
+
+432
+00:21:57,396 --> 00:21:59,106
 that Anil just talked
 to you about
 
-00:21:59.556 --> 00:22:01.846 A:middle
+
+433
+00:21:59,556 --> 00:22:01,846
 and see exactly how you
 might want to use them
 
 
-
-00:21:59.556 --> 00:22:01.846 A:middle
-and see exactly how you
-might want to use them
-
-00:22:01.846 --> 00:22:04.576 A:middle
+434
+00:22:01,846 --> 00:22:04,576
 in your application and
 hopefully make them stick.
 
-00:22:05.226 --> 00:22:10.546 A:middle
+
+435
+00:22:05,226 --> 00:22:10,546
 Now Core Motion is really great
 because it can't be just used
 
-00:22:10.546 --> 00:22:12.856 A:middle
+
+436
+00:22:10,546 --> 00:22:12,856
 in a fitness context
 or gaming context.
 
-00:22:13.436 --> 00:22:16.156 A:middle
+
+437
+00:22:13,436 --> 00:22:16,156
 What I'm here to show you
 today is how you can use it
 
-00:22:16.156 --> 00:22:18.956 A:middle
+
+438
+00:22:16,156 --> 00:22:18,956
 in your app regardless of
 what category it falls in.
 
-00:22:18.956 --> 00:22:22.526 A:middle
+
+439
+00:22:18,956 --> 00:22:22,526
 So what can Core
 Motion do for you?
 
-00:22:23.736 --> 00:22:27.756 A:middle
+
+440
+00:22:23,736 --> 00:22:27,756
 Core Motion allows you to
 detect what a user is doing.
 
-00:22:28.906 --> 00:22:31.236 A:middle
+
+441
+00:22:28,906 --> 00:22:31,236
 You can see if a
 user is in their car,
 
-00:22:31.666 --> 00:22:34.336 A:middle
+
+442
+00:22:31,666 --> 00:22:34,336
 going on a run, if
 they are cycling.
 
-00:22:35.006 --> 00:22:37.616 A:middle
+
+443
+00:22:35,006 --> 00:22:37,616
 You can see their changes
 in pace as we've seen,
 
-00:22:37.786 --> 00:22:39.156 A:middle
+
+444
+00:22:37,786 --> 00:22:39,156
 we smooth that out for you.
 
-00:22:40.116 --> 00:22:42.066 A:middle
+
+445
+00:22:40,116 --> 00:22:42,066
 And so by using those updates,
 
-00:22:42.536 --> 00:22:46.456 A:middle
+
+446
+00:22:42,536 --> 00:22:46,456
 we can tell what context a user
 is in without prompting them
 
-00:22:46.456 --> 00:22:47.956 A:middle
+
+447
+00:22:46,456 --> 00:22:47,956
 and asking them to tell us.
 
-00:22:48.576 --> 00:22:52.706 A:middle
+
+448
+00:22:48,576 --> 00:22:52,706
 This makes that experience more
 magical and our apps smarter.
 
-00:22:54.086 --> 00:22:56.516 A:middle
+
+449
+00:22:54,086 --> 00:22:56,516
 The next thing we can
 do is engage the user.
 
-00:22:57.326 --> 00:23:01.146 A:middle
+
+450
+00:22:57,326 --> 00:23:01,146
 Because updates come in every
 few seconds we can see how their
 
 
-
-00:22:57.326 --> 00:23:01.146 A:middle
-Because updates come in every
-few seconds we can see how their
-
-00:23:01.146 --> 00:23:02.296 A:middle
+451
+00:23:01,146 --> 00:23:02,296
 pace is changing.
 
-00:23:02.516 --> 00:23:04.536 A:middle
+
+452
+00:23:02,516 --> 00:23:04,536
 We can see how their
 altitude is changing.
 
-00:23:04.786 --> 00:23:08.586 A:middle
+
+453
+00:23:04,786 --> 00:23:08,586
 We can update our app UI
 quickly and accordingly.
 
-00:23:10.096 --> 00:23:13.556 A:middle
+
+454
+00:23:10,096 --> 00:23:13,556
 The last thing we can
 do is reflect back.
 
-00:23:13.556 --> 00:23:15.366 A:middle
+
+455
+00:23:13,556 --> 00:23:15,366
 And I know that sounds
 really cheesy,
 
-00:23:15.826 --> 00:23:18.506 A:middle
+
+456
+00:23:15,826 --> 00:23:18,506
 but one of the great
 things about Core Motion is
 
-00:23:18.506 --> 00:23:21.106 A:middle
+
+457
+00:23:18,506 --> 00:23:21,106
 by running all the time
 we can make it look
 
-00:23:21.106 --> 00:23:24.086 A:middle
+
+458
+00:23:21,106 --> 00:23:24,086
 like your app is
 working really hard 24/7
 
-00:23:24.316 --> 00:23:27.366 A:middle
+
+459
+00:23:24,316 --> 00:23:27,366
 when actually the
 coprocessor is.
 
-00:23:27.526 --> 00:23:29.776 A:middle
+
+460
+00:23:27,526 --> 00:23:29,776
 We can look at your
 activity updates
 
-00:23:29.776 --> 00:23:32.016 A:middle
+
+461
+00:23:29,776 --> 00:23:32,016
 and your pedometer
 updates over the last week,
 
-00:23:32.246 --> 00:23:33.436 A:middle
+
+462
+00:23:32,246 --> 00:23:33,436
 which is pretty fantastic.
 
-00:23:35.076 --> 00:23:38.826 A:middle
+
+463
+00:23:35,076 --> 00:23:38,826
 So with these three things in
 mind, I decided I was going
 
-00:23:38.826 --> 00:23:40.126 A:middle
+
+464
+00:23:38,826 --> 00:23:40,126
 to make a music player.
 
-00:23:40.926 --> 00:23:43.866 A:middle
+
+465
+00:23:40,926 --> 00:23:43,866
 Nothing to rival Apple
 Music or anything like that.
 
-00:23:44.286 --> 00:23:47.726 A:middle
+
+466
+00:23:44,286 --> 00:23:47,726
 I wanted to see how Core Motion
 could make my app experience a
 
-00:23:47.726 --> 00:23:50.266 A:middle
+
+467
+00:23:47,726 --> 00:23:50,266
 little bit more engaging
 and more magical.
 
-00:23:50.846 --> 00:23:55.856 A:middle
+
+468
+00:23:50,846 --> 00:23:55,856
 Now a lot of music applications
 have this idea of playlists.
 
-00:23:56.286 --> 00:23:58.716 A:middle
+
+469
+00:23:56,286 --> 00:23:58,716
 I certainly listen to
 different music when I'm
 
-00:23:58.716 --> 00:24:02.316 A:middle
+
+470
+00:23:58,716 --> 00:24:02,316
 in my car I want podcasts, or
 if I'm studying or working hard,
 
 
-
-00:23:58.716 --> 00:24:02.316 A:middle
-in my car I want podcasts, or
-if I'm studying or working hard,
-
-00:24:02.316 --> 00:24:04.096 A:middle
+471
+00:24:02,316 --> 00:24:04,096
 I'm going to want maybe
 some classical music,
 
-00:24:04.396 --> 00:24:06.456 A:middle
+
+472
+00:24:04,396 --> 00:24:06,456
 and different app playlists
 for working out as well.
 
-00:24:07.176 --> 00:24:10.086 A:middle
+
+473
+00:24:07,176 --> 00:24:10,086
 By detecting what
 a user is doing,
 
-00:24:10.416 --> 00:24:14.236 A:middle
+
+474
+00:24:10,416 --> 00:24:14,236
 my music application can change
 my playlists accordingly instead
 
-00:24:14.236 --> 00:24:16.006 A:middle
+
+475
+00:24:14,236 --> 00:24:16,006
 of the user having to select it.
 
-00:24:16.906 --> 00:24:20.776 A:middle
+
+476
+00:24:16,906 --> 00:24:20,776
 Similarly, by seeing changes
 in pace we can say hey,
 
-00:24:20.776 --> 00:24:23.986 A:middle
+
+477
+00:24:20,776 --> 00:24:23,986
 you're going on a slow jog
 or maybe you went really fast
 
-00:24:24.266 --> 00:24:26.966 A:middle
+
+478
+00:24:24,266 --> 00:24:26,966
 and climbed up a really
 big hill and we are going
 
-00:24:26.966 --> 00:24:29.806 A:middle
+
+479
+00:24:26,966 --> 00:24:29,806
 to play you a really exciting
 song to make you feel good
 
-00:24:29.806 --> 00:24:32.116 A:middle
+
+480
+00:24:29,806 --> 00:24:32,116
 about that, or try to
 match your cadence.
 
-00:24:32.746 --> 00:24:35.156 A:middle
+
+481
+00:24:32,746 --> 00:24:35,156
 Then there's the
 reflection piece.
 
-00:24:35.866 --> 00:24:37.156 A:middle
+
+482
+00:24:35,866 --> 00:24:37,156
 There are two really
 great things
 
-00:24:37.156 --> 00:24:39.306 A:middle
+
+483
+00:24:37,156 --> 00:24:39,306
 about reflection
 especially in the context
 
-00:24:39.306 --> 00:24:40.626 A:middle
+
+484
+00:24:39,306 --> 00:24:40,626
 of my music application.
 
-00:24:41.876 --> 00:24:45.616 A:middle
+
+485
+00:24:41,876 --> 00:24:45,616
 One, I can look at data to
 see how a user has been doing.
 
-00:24:45.816 --> 00:24:47.546 A:middle
+
+486
+00:24:45,816 --> 00:24:47,546
 Hey, you haven't been
 running in a while.
 
-00:24:47.896 --> 00:24:50.746 A:middle
+
+487
+00:24:47,896 --> 00:24:50,746
 Maybe you want to go on a run
 really soon and maybe you want
 
-00:24:50.746 --> 00:24:52.636 A:middle
+
+488
+00:24:50,746 --> 00:24:52,636
 to use our application
 to do that
 
-00:24:52.816 --> 00:24:54.066 A:middle
+
+489
+00:24:52,816 --> 00:24:54,066
 and listen to your playlist.
 
-00:24:55.136 --> 00:24:57.076 A:middle
+
+490
+00:24:55,136 --> 00:24:57,076
 At the end of the day I
 want to motivate users
 
-00:24:57.176 --> 00:24:59.616 A:middle
+
+491
+00:24:57,176 --> 00:24:59,616
 to come back to our app.
 
-00:24:59.866 --> 00:25:01.916 A:middle
+
+492
+00:24:59,866 --> 00:25:01,916
 Also I thought it
 would be really great
 
 
-
-00:24:59.866 --> 00:25:01.916 A:middle
-Also I thought it
-would be really great
-
-00:25:01.916 --> 00:25:04.796 A:middle
+493
+00:25:01,916 --> 00:25:04,796
 if I said the user might want
 
-00:25:04.796 --> 00:25:06.536 A:middle
+
+494
+00:25:04,796 --> 00:25:06,536
 to know what playlist
 they were listening
 
-00:25:06.536 --> 00:25:07.846 A:middle
+
+495
+00:25:06,536 --> 00:25:07,846
 to in the car yesterday.
 
-00:25:08.226 --> 00:25:11.146 A:middle
+
+496
+00:25:08,226 --> 00:25:11,146
 And so by looking at activity
 information and paring it
 
-00:25:11.336 --> 00:25:12.246 A:middle
+
+497
+00:25:11,336 --> 00:25:12,246
 with my information
 
-00:25:12.246 --> 00:25:15.046 A:middle
+
+498
+00:25:12,246 --> 00:25:15,046
 about playlists I can
 give that info to them.
 
-00:25:16.256 --> 00:25:18.986 A:middle
+
+499
+00:25:16,256 --> 00:25:18,986
 So with these three
 ideas in mind,
 
-00:25:19.436 --> 00:25:22.516 A:middle
+
+500
+00:25:19,436 --> 00:25:22,516
 let's see what my application
 actually looks like.
 
-00:25:22.516 --> 00:25:27.836 A:middle
+
+501
+00:25:22,516 --> 00:25:27,836
 So when the user opens
 the app, we just want
 
-00:25:27.836 --> 00:25:30.026 A:middle
+
+502
+00:25:27,836 --> 00:25:30,026
 to show them a basic playlist.
 
-00:25:30.026 --> 00:25:32.966 A:middle
+
+503
+00:25:30,026 --> 00:25:32,966
 In my case I'm pretty much
 standing around, right?
 
-00:25:33.346 --> 00:25:35.416 A:middle
+
+504
+00:25:33,346 --> 00:25:35,416
 We're going to have
 low intensity music.
 
-00:25:35.516 --> 00:25:36.476 A:middle
+
+505
+00:25:35,516 --> 00:25:36,476
 Nothing too tough.
 
-00:25:37.576 --> 00:25:39.586 A:middle
+
+506
+00:25:37,576 --> 00:25:39,586
 As we detect that the
 user is speeding up.
 
-00:25:40.066 --> 00:25:42.006 A:middle
+
+507
+00:25:40,066 --> 00:25:42,006
 Maybe they start
 going for a workout.
 
-00:25:42.266 --> 00:25:44.386 A:middle
+
+508
+00:25:42,266 --> 00:25:44,386
 We're going to change
 the playlist
 
-00:25:44.386 --> 00:25:47.016 A:middle
+
+509
+00:25:44,386 --> 00:25:47,016
 and give them a little
 more upbeat music.
 
-00:25:48.076 --> 00:25:50.476 A:middle
+
+510
+00:25:48,076 --> 00:25:50,476
 But this is where the
 engagement part comes in.
 
-00:25:50.716 --> 00:25:53.526 A:middle
+
+511
+00:25:50,716 --> 00:25:53,526
 This is where we look at
 maybe changes in cadence
 
-00:25:53.886 --> 00:25:57.876 A:middle
+
+512
+00:25:53,886 --> 00:25:57,876
 and maybe changes in altitude,
 and we really engage with them
 
-00:25:57.946 --> 00:26:01.126 A:middle
+
+513
+00:25:57,946 --> 00:26:01,126
 and follow along, so we can
 give them a more high intensity
 
 
-
-00:25:57.946 --> 00:26:01.126 A:middle
-and follow along, so we can
-give them a more high intensity
-
-00:26:01.126 --> 00:26:03.206 A:middle
+514
+00:26:01,126 --> 00:26:03,206
 playlist when they speed up.
 
-00:26:04.576 --> 00:26:06.836 A:middle
+
+515
+00:26:04,576 --> 00:26:06,836
 Then we want to context switch.
 
-00:26:07.256 --> 00:26:10.086 A:middle
+
+516
+00:26:07,256 --> 00:26:10,086
 When the user goes for a
 drive, I want to be able
 
-00:26:10.086 --> 00:26:14.386 A:middle
+
+517
+00:26:10,086 --> 00:26:14,386
 to give them their podcast or
 whatever they usually listen
 
-00:26:14.386 --> 00:26:15.586 A:middle
+
+518
+00:26:14,386 --> 00:26:15,586
 to on their morning commute.
 
-00:26:16.046 --> 00:26:20.946 A:middle
+
+519
+00:26:16,046 --> 00:26:20,946
 So this is the detection
 piece and engagement piece.
 
-00:26:21.566 --> 00:26:23.266 A:middle
+
+520
+00:26:21,566 --> 00:26:23,266
 Next we have the
 reflection piece.
 
-00:26:24.636 --> 00:26:27.906 A:middle
+
+521
+00:26:24,636 --> 00:26:27,906
 I want to put this information
 into interesting pieces
 
-00:26:27.906 --> 00:26:30.526 A:middle
+
+522
+00:26:27,906 --> 00:26:30,526
 so the user can scroll back and
 see what they have been doing.
 
-00:26:30.836 --> 00:26:33.656 A:middle
+
+523
+00:26:30,836 --> 00:26:33,656
 This is where I might tie
 in kind of that playlist
 
-00:26:33.656 --> 00:26:36.066 A:middle
+
+524
+00:26:33,656 --> 00:26:36,066
 that they were listening to
 at different moments in time.
 
-00:26:36.646 --> 00:26:41.446 A:middle
+
+525
+00:26:36,646 --> 00:26:41,446
 So now that we have an idea of
 what the app will look like,
 
-00:26:42.206 --> 00:26:44.886 A:middle
+
+526
+00:26:42,206 --> 00:26:44,886
 let's see where motion
 activity actually fits in
 
-00:26:45.266 --> 00:26:49.186 A:middle
+
+527
+00:26:45,266 --> 00:26:49,186
 and what APIs we might need to
 use for each of these pieces.
 
-00:26:51.116 --> 00:26:52.966 A:middle
+
+528
+00:26:51,116 --> 00:26:52,966
 First we have the
 detection piece.
 
-00:26:53.156 --> 00:26:55.956 A:middle
+
+529
+00:26:53,156 --> 00:26:55,956
 This is something we are going
 to want to do all the time.
 
-00:26:55.956 --> 00:26:59.826 A:middle
+
+530
+00:26:55,956 --> 00:26:59,826
 We are going to want to
 see if a user is driving.
 
-00:26:59.826 --> 00:27:02.816 A:middle
+
+531
+00:26:59,826 --> 00:27:02,816
 If a user is walking, how
 fast they might be walking.
 
 
-
-00:26:59.826 --> 00:27:02.816 A:middle
-If a user is walking, how
-fast they might be walking.
-
-00:27:03.336 --> 00:27:04.826 A:middle
+532
+00:27:03,336 --> 00:27:04,826
 So what are we going
 to need for that?
 
-00:27:05.946 --> 00:27:08.296 A:middle
+
+533
+00:27:05,946 --> 00:27:08,296
 Activity updates and
 pedometer updates.
 
-00:27:08.636 --> 00:27:12.286 A:middle
+
+534
+00:27:08,636 --> 00:27:12,286
 We'll want to be monitoring
 those and smoothing those out
 
-00:27:12.656 --> 00:27:16.726 A:middle
+
+535
+00:27:12,656 --> 00:27:16,726
 and seeing which information
 allows us to determine context.
 
-00:27:17.066 --> 00:27:20.026 A:middle
+
+536
+00:27:17,066 --> 00:27:20,026
 Next we have that
 engagement piece.
 
-00:27:20.486 --> 00:27:24.876 A:middle
+
+537
+00:27:20,486 --> 00:27:24,876
 If the user is walking or
 running, in my case I want
 
-00:27:24.876 --> 00:27:26.566 A:middle
+
+538
+00:27:24,876 --> 00:27:26,566
 to see how fast they are going.
 
-00:27:26.836 --> 00:27:31.176 A:middle
+
+539
+00:27:26,836 --> 00:27:31,176
 Look at that cadence, and
 also I had that idea of maybe
 
-00:27:31.176 --> 00:27:35.276 A:middle
+
+540
+00:27:31,176 --> 00:27:35,276
 if they climb a big hill I can
 give them a great cheerful song
 
-00:27:35.276 --> 00:27:36.266 A:middle
+
+541
+00:27:35,276 --> 00:27:36,266
 at their achievement.
 
-00:27:36.966 --> 00:27:39.606 A:middle
+
+542
+00:27:36,966 --> 00:27:39,606
 For that I would need
 pedometer updates
 
-00:27:39.606 --> 00:27:42.236 A:middle
+
+543
+00:27:39,606 --> 00:27:42,236
 which includes those
 pace and cadence changes
 
-00:27:42.676 --> 00:27:44.116 A:middle
+
+544
+00:27:42,676 --> 00:27:44,116
 and altitude updates as well.
 
-00:27:45.616 --> 00:27:47.666 A:middle
+
+545
+00:27:45,616 --> 00:27:47,666
 Then we had the reflection
 piece.
 
-00:27:48.616 --> 00:27:50.776 A:middle
+
+546
+00:27:48,616 --> 00:27:50,776
 As I said, the great
 thing about Core Motion is
 
-00:27:50.776 --> 00:27:53.436 A:middle
+
+547
+00:27:50,776 --> 00:27:53,436
 that they work really
 hard for me 24/7.
 
-00:27:53.476 --> 00:27:57.366 A:middle
+
+548
+00:27:53,476 --> 00:27:57,366
 So I can look back and get those
 historical activity queries
 
-00:27:57.676 --> 00:28:00.716 A:middle
+
+549
+00:27:57,676 --> 00:28:00,716
 and pedometer queries
 to put that information
 
 
-
-00:27:57.676 --> 00:28:00.716 A:middle
-and pedometer queries
-to put that information
-
-00:28:00.746 --> 00:28:02.136 A:middle
+550
+00:28:00,746 --> 00:28:02,136
 into interesting segments.
 
-00:28:02.826 --> 00:28:09.276 A:middle
+
+551
+00:28:02,826 --> 00:28:09,276
 So now that I've gone through
 exactly what my app might look
 
-00:28:09.276 --> 00:28:13.076 A:middle
+
+552
+00:28:09,276 --> 00:28:13,076
 like, the detection, engagement,
 and reflection pieces,
 
-00:28:13.076 --> 00:28:16.366 A:middle
+
+553
+00:28:13,076 --> 00:28:16,366
 and which parts of Core Motion's
 APIs I would need to use,
 
-00:28:16.716 --> 00:28:18.986 A:middle
+
+554
+00:28:16,716 --> 00:28:18,986
 I'm going to show you
 exactly how I coded it up,
 
-00:28:18.986 --> 00:28:21.406 A:middle
+
+555
+00:28:18,986 --> 00:28:21,406
 at least for the data model
 part of my application.
 
-00:28:21.966 --> 00:28:25.226 A:middle
+
+556
+00:28:21,966 --> 00:28:25,226
 I am about to open Xcode.
 
-00:28:26.006 --> 00:28:28.316 A:middle
+
+557
+00:28:26,006 --> 00:28:28,316
 Before I walk to the
 computer over here,
 
-00:28:28.696 --> 00:28:31.636 A:middle
+
+558
+00:28:28,696 --> 00:28:31,636
 be warned that there will be
 a lot of text on the screen.
 
-00:28:32.226 --> 00:28:33.716 A:middle
+
+559
+00:28:32,226 --> 00:28:33,716
 Don't be intimidated.
 
-00:28:34.076 --> 00:28:37.036 A:middle
+
+560
+00:28:34,076 --> 00:28:37,036
 The sample code is
 already available online.
 
-00:28:37.196 --> 00:28:39.386 A:middle
+
+561
+00:28:37,196 --> 00:28:39,386
 Don't go open it now, please.
 
-00:28:39.746 --> 00:28:41.746 A:middle
+
+562
+00:28:39,746 --> 00:28:41,746
 [Chuckles.]
 
-00:28:42.106 --> 00:28:43.256 A:middle
-&gt;&gt; GABRIELLE BADIE:
+
+563
+00:28:42,106 --> 00:28:43,256
+>> GABRIELLE BADIE:
 Please just focus
 
-00:28:43.296 --> 00:28:45.626 A:middle
+
+564
+00:28:43,296 --> 00:28:45,626
 on the segments I
 highlight for you.
 
-00:28:46.096 --> 00:28:48.276 A:middle
+
+565
+00:28:46,096 --> 00:28:48,276
 As I said, there's a
 lot of text on there.
 
-00:28:48.486 --> 00:28:52.376 A:middle
+
+566
+00:28:48,486 --> 00:28:52,376
 If you focus on those few things
 and maybe go back and look
 
-00:28:52.376 --> 00:28:54.406 A:middle
+
+567
+00:28:52,376 --> 00:28:54,406
 at the sample code
 after the session,
 
-00:28:54.696 --> 00:28:57.576 A:middle
+
+568
+00:28:54,696 --> 00:28:57,576
 you'll remember the things I
 focused on instead of trying
 
-00:28:57.576 --> 00:28:59.036 A:middle
+
+569
+00:28:57,576 --> 00:28:59,036
 to do too many things at once.
 
 
-
-00:29:00.076 --> 00:29:01.656 A:middle
+570
+00:29:00,076 --> 00:29:01,656
 As I said, a lot of text.
 
-00:29:01.656 --> 00:29:02.146 A:middle
+
+571
+00:29:01,656 --> 00:29:02,146
 Be warned.
 
-00:29:02.976 --> 00:29:05.086 A:middle
+
+572
+00:29:02,976 --> 00:29:05,086
 So as I said, a lot
 of text on the screen.
 
-00:29:05.366 --> 00:29:07.906 A:middle
+
+573
+00:29:05,366 --> 00:29:07,906
 I just want you to
 remember the three parts
 
-00:29:09.446 --> 00:29:12.006 A:middle
+
+574
+00:29:09,446 --> 00:29:12,006
 that would be detect,
 engage, and reflect.
 
-00:29:12.006 --> 00:29:13.576 A:middle
+
+575
+00:29:12,006 --> 00:29:13,576
 As we keep those in
 mind I am going to go
 
-00:29:13.576 --> 00:29:14.956 A:middle
+
+576
+00:29:13,576 --> 00:29:14,956
 through these things here
 
-00:29:14.956 --> 00:29:16.916 A:middle
+
+577
+00:29:14,956 --> 00:29:16,916
 in this data model
 of my application.
 
-00:29:17.516 --> 00:29:20.796 A:middle
+
+578
+00:29:17,516 --> 00:29:20,796
 This is just the
 data model piece.
 
-00:29:21.326 --> 00:29:23.026 A:middle
+
+579
+00:29:21,326 --> 00:29:23,026
 The rest is for you
 to explore later.
 
-00:29:23.576 --> 00:29:26.186 A:middle
+
+580
+00:29:23,576 --> 00:29:26,186
 So the first thing I'm going
 to want to do is detect.
 
-00:29:26.536 --> 00:29:29.516 A:middle
+
+581
+00:29:26,536 --> 00:29:29,516
 That requires activity
 updates and pedometer updates.
 
-00:29:29.516 --> 00:29:31.236 A:middle
+
+582
+00:29:29,516 --> 00:29:31,236
 Let's look at those
 activity updates.
 
-00:29:35.716 --> 00:29:37.506 A:middle
+
+583
+00:29:35,716 --> 00:29:37,506
 Great. A lot of text, right?
 
-00:29:38.136 --> 00:29:40.936 A:middle
+
+584
+00:29:38,136 --> 00:29:40,936
 So the first thing I'm
 going to want to do is check
 
-00:29:40.976 --> 00:29:43.776 A:middle
+
+585
+00:29:40,976 --> 00:29:43,776
 if activity is available
 on this hardware.
 
-00:29:43.776 --> 00:29:47.526 A:middle
+
+586
+00:29:43,776 --> 00:29:47,526
 As an Anil noted before
 activity isn't always available,
 
-00:29:47.526 --> 00:29:48.356 A:middle
+
+587
+00:29:47,526 --> 00:29:48,356
 so we're going to want
 
-00:29:48.356 --> 00:29:51.516 A:middle
+
+588
+00:29:48,356 --> 00:29:51,516
 to do those checks before
 we query for any updates.
 
-00:29:52.926 --> 00:29:55.136 A:middle
+
+589
+00:29:52,926 --> 00:29:55,136
 The second thing we
 are going to want
 
-00:29:55.136 --> 00:29:58.486 A:middle
+
+590
+00:29:55,136 --> 00:29:58,486
 to do is use the
 startActivitiesUpdateToQueue
 
-00:29:58.486 --> 00:29:58.876 A:middle
+
+591
+00:29:58,486 --> 00:29:58,876
 API.
 
 
-
-00:30:00.036 --> 00:30:03.766 A:middle
+592
+00:30:00,036 --> 00:30:03,766
 In my case I provide an just
 a simple NS operation queue,
 
-00:30:04.846 --> 00:30:09.016 A:middle
+
+593
+00:30:04,846 --> 00:30:09,016
 and then I want to
 handle the data.
 
-00:30:09.196 --> 00:30:12.296 A:middle
+
+594
+00:30:09,196 --> 00:30:12,296
 Now, activity updates
 come in pretty frequently.
 
-00:30:12.876 --> 00:30:15.426 A:middle
+
+595
+00:30:12,876 --> 00:30:15,426
 It's up to you how you
 want to do the smoothing.
 
-00:30:15.936 --> 00:30:20.046 A:middle
+
+596
+00:30:15,936 --> 00:30:20,046
 In my case when a user is going
 on a run and maybe they stop
 
-00:30:20.046 --> 00:30:22.916 A:middle
+
+597
+00:30:20,046 --> 00:30:22,916
 at a stop light and they are
 semi-stationary , I don't want
 
-00:30:22.916 --> 00:30:25.046 A:middle
+
+598
+00:30:22,916 --> 00:30:25,046
 to keep transitioning
 from the running playlist
 
-00:30:25.046 --> 00:30:26.576 A:middle
+
+599
+00:30:25,046 --> 00:30:26,576
 to the really slow
 playlist and back
 
-00:30:26.576 --> 00:30:27.836 A:middle
+
+600
+00:30:26,576 --> 00:30:27,836
 and forth and back and forth.
 
-00:30:27.836 --> 00:30:29.096 A:middle
+
+601
+00:30:27,836 --> 00:30:29,096
 So I'm going to want to do
 
-00:30:29.096 --> 00:30:32.436 A:middle
+
+602
+00:30:29,096 --> 00:30:32,436
 that application specific
 smoothing myself and I leave it
 
-00:30:32.436 --> 00:30:34.696 A:middle
+
+603
+00:30:32,436 --> 00:30:34,696
 up to you to do what's
 best for your application.
 
-00:30:35.226 --> 00:30:39.446 A:middle
+
+604
+00:30:35,226 --> 00:30:39,446
 Let's look at pedometer
 updates next.
 
-00:30:42.616 --> 00:30:45.066 A:middle
+
+605
+00:30:42,616 --> 00:30:45,066
 Great. As you can see,
 
-00:30:45.066 --> 00:30:47.846 A:middle
+
+606
+00:30:45,066 --> 00:30:47,846
 the PedometerUpdates
 API is very similar.
 
-00:30:48.426 --> 00:30:51.746 A:middle
+
+607
+00:30:48,426 --> 00:30:51,746
 I'm also going to want to check
 if step counting is available.
 
-00:30:52.496 --> 00:30:55.036 A:middle
+
+608
+00:30:52,496 --> 00:30:55,036
 Even though we assume that
 activity might be available,
 
-00:30:55.036 --> 00:30:57.016 A:middle
+
+609
+00:30:55,036 --> 00:30:57,016
 that doesn't mean that step
 counting will be available
 
-00:30:57.016 --> 00:30:57.476 A:middle
+
+610
+00:30:57,016 --> 00:30:57,476
 as well.
 
-00:30:58.946 --> 00:31:02.086 A:middle
+
+611
+00:30:58,946 --> 00:31:02,086
 Assuming that that's true, I'm
 going to startPedometerUpdates.
 
 
-
-00:30:58.946 --> 00:31:02.086 A:middle
-Assuming that that's true, I'm
-going to startPedometerUpdates.
-
-00:31:02.736 --> 00:31:05.776 A:middle
+612
+00:31:02,736 --> 00:31:05,776
 This API allows us
 to provide a date.
 
-00:31:06.366 --> 00:31:08.686 A:middle
+
+613
+00:31:06,366 --> 00:31:08,686
 If you are in a more journaling
 context you might want
 
-00:31:08.686 --> 00:31:10.706 A:middle
+
+614
+00:31:08,686 --> 00:31:10,706
 to start these updates at
 the beginning of your day.
 
-00:31:10.816 --> 00:31:12.546 A:middle
+
+615
+00:31:10,816 --> 00:31:12,546
 In my case I want to look
 
-00:31:12.546 --> 00:31:14.686 A:middle
+
+616
+00:31:12,546 --> 00:31:14,686
 at them during the
 lifecycle of my application.
 
-00:31:14.686 --> 00:31:19.746 A:middle
+
+617
+00:31:14,686 --> 00:31:19,746
 So I start these
 updates from right now.
 
-00:31:19.986 --> 00:31:22.756 A:middle
+
+618
+00:31:19,986 --> 00:31:22,756
 Now, there's a really important
 thing I want to point out here.
 
-00:31:24.326 --> 00:31:25.486 A:middle
+
+619
+00:31:24,326 --> 00:31:25,486
 We may get an error.
 
-00:31:25.626 --> 00:31:33.206 A:middle
+
+620
+00:31:25,626 --> 00:31:33,206
 One of the great things about
 Core Motion is that they do kind
 
-00:31:33.206 --> 00:31:34.656 A:middle
+
+621
+00:31:33,206 --> 00:31:34,656
 of the: Hey, do you want
 
-00:31:34.656 --> 00:31:38.116 A:middle
+
+622
+00:31:34,656 --> 00:31:38,116
 to let this app use
 motion data pop up for you.
 
-00:31:38.666 --> 00:31:42.236 A:middle
+
+623
+00:31:38,666 --> 00:31:42,236
 But while a user may first
 open your application
 
-00:31:42.236 --> 00:31:44.876 A:middle
+
+624
+00:31:42,236 --> 00:31:44,876
 and give you access to
 motion data, they can go back
 
-00:31:44.876 --> 00:31:49.156 A:middle
+
+625
+00:31:44,876 --> 00:31:49,156
 at any time in the preferences
 and remove that authorization.
 
-00:31:49.746 --> 00:31:52.476 A:middle
+
+626
+00:31:49,746 --> 00:31:52,476
 In that case then we would
 throw an authorization error
 
-00:31:52.636 --> 00:31:54.526 A:middle
+
+627
+00:31:52,636 --> 00:31:54,526
 when you try to receive updates.
 
-00:31:54.526 --> 00:31:56.946 A:middle
+
+628
+00:31:54,526 --> 00:31:56,946
 You are going to want
 to handle those smoothly
 
-00:31:57.146 --> 00:32:01.306 A:middle
+
+629
+00:31:57,146 --> 00:32:01,306
 and prompt the user to go
 into the settings application
 
 
-
-00:31:57.146 --> 00:32:01.306 A:middle
-and prompt the user to go
-into the settings application
-
-00:32:01.536 --> 00:32:04.746 A:middle
+630
+00:32:01,536 --> 00:32:04,746
 and give your application
 authorization again.
 
-00:32:05.296 --> 00:32:10.166 A:middle
+
+631
+00:32:05,296 --> 00:32:10,166
 I won't go into it here, but I
 pop up a simple UI alert view
 
-00:32:10.166 --> 00:32:11.806 A:middle
+
+632
+00:32:10,166 --> 00:32:11,806
 to prompt to go into settings.
 
-00:32:12.366 --> 00:32:14.706 A:middle
+
+633
+00:32:12,366 --> 00:32:14,706
 So that is the detection piece.
 
-00:32:15.216 --> 00:32:18.256 A:middle
+
+634
+00:32:15,216 --> 00:32:18,256
 The next thing I'm going to want
 to do is the engagement piece.
 
-00:32:18.996 --> 00:32:23.486 A:middle
+
+635
+00:32:18,996 --> 00:32:23,486
 In my case when I'm looking
 at activities updates,
 
-00:32:23.866 --> 00:32:27.106 A:middle
+
+636
+00:32:23,866 --> 00:32:27,106
 I also want to start and
 stop altimeter updates,
 
-00:32:27.976 --> 00:32:30.896 A:middle
+
+637
+00:32:27,976 --> 00:32:30,896
 so I'm going to do that here.
 
-00:32:31.106 --> 00:32:34.456 A:middle
+
+638
+00:32:31,106 --> 00:32:34,456
 I smooth out to see when the
 user is running or is walking.
 
-00:32:34.496 --> 00:32:36.886 A:middle
+
+639
+00:32:34,496 --> 00:32:36,886
 In that case I'm interested
 in altitude updates.
 
-00:32:37.316 --> 00:32:43.166 A:middle
+
+640
+00:32:37,316 --> 00:32:43,166
 Great. Now you're starting
 to see a theme here.
 
-00:32:43.976 --> 00:32:45.356 A:middle
+
+641
+00:32:43,976 --> 00:32:45,356
 First thing I'm going to do,
 
-00:32:45.356 --> 00:32:47.436 A:middle
+
+642
+00:32:45,356 --> 00:32:47,436
 check if altitude
 updates are available.
 
-00:32:48.566 --> 00:32:49.846 A:middle
+
+643
+00:32:48,566 --> 00:32:49,846
 Assuming that's true,
 
-00:32:50.086 --> 00:32:52.946 A:middle
+
+644
+00:32:50,086 --> 00:32:52,946
 I startRelativeAltitude
 UpdatesToQueue.
 
-00:32:54.686 --> 00:32:56.306 A:middle
+
+645
+00:32:54,686 --> 00:32:56,306
 I provide a queue.
 
-00:32:56.886 --> 00:32:58.856 A:middle
+
+646
+00:32:56,886 --> 00:32:58,856
 And then I handle
 the data accordingly.
 
-00:32:59.546 --> 00:33:01.646 A:middle
+
+647
+00:32:59,546 --> 00:33:01,646
 I do check again if
 there is an error.
 
 
-
-00:32:59.546 --> 00:33:01.646 A:middle
-I do check again if
-there is an error.
-
-00:33:01.996 --> 00:33:04.246 A:middle
+648
+00:33:01,996 --> 00:33:04,246
 And if not, I'm going to
 want to handle that data
 
-00:33:04.246 --> 00:33:08.456 A:middle
+
+649
+00:33:04,246 --> 00:33:08,456
 as best serves my application,
 and I leave that to you
 
-00:33:09.236 --> 00:33:10.876 A:middle
+
+650
+00:33:09,236 --> 00:33:10,876
 to do as best serves yours.
 
-00:33:10.876 --> 00:33:16.506 A:middle
+
+651
+00:33:10,876 --> 00:33:16,506
 The next thing I'm going to want
 to do because I'm not interested
 
-00:33:16.506 --> 00:33:20.846 A:middle
+
+652
+00:33:16,506 --> 00:33:20,846
 in altitude updates all the time
 is make sure that I stop them
 
-00:33:21.056 --> 00:33:22.626 A:middle
+
+653
+00:33:21,056 --> 00:33:22,626
 when I'm not running or walking.
 
-00:33:23.196 --> 00:33:25.876 A:middle
+
+654
+00:33:23,196 --> 00:33:25,876
 Hmm, typo!
 
-00:33:26.046 --> 00:33:33.636 A:middle
+
+655
+00:33:26,046 --> 00:33:33,636
 Great. And here, the API
 is pretty straightforward.
 
-00:33:33.636 --> 00:33:35.086 A:middle
+
+656
+00:33:33,636 --> 00:33:35,086
 I check for availability.
 
-00:33:35.276 --> 00:33:38.476 A:middle
+
+657
+00:33:35,276 --> 00:33:38,476
 And I
 stopRelativeAltitudeUpdates.
 
-00:33:40.766 --> 00:33:42.686 A:middle
+
+658
+00:33:40,766 --> 00:33:42,686
 Now, I know that
 when I said we want
 
-00:33:42.686 --> 00:33:44.586 A:middle
+
+659
+00:33:42,686 --> 00:33:44,586
 to engage the user
 we are going to look
 
-00:33:44.586 --> 00:33:46.206 A:middle
+
+660
+00:33:44,586 --> 00:33:46,206
 at pedometer updates as well.
 
-00:33:46.856 --> 00:33:49.866 A:middle
+
+661
+00:33:46,856 --> 00:33:49,866
 As you may recall I was already
 looking at pedometer updates
 
-00:33:49.866 --> 00:33:53.036 A:middle
+
+662
+00:33:49,866 --> 00:33:53,036
 for the lifecycle of my
 application, and so I don't need
 
-00:33:53.036 --> 00:33:54.506 A:middle
+
+663
+00:33:53,036 --> 00:33:54,506
 to start and stop those again.
 
-00:33:54.786 --> 00:33:57.876 A:middle
+
+664
+00:33:54,786 --> 00:33:57,876
 I can use those in fusion
 with the altitude updates
 
-00:33:57.976 --> 00:34:01.126 A:middle
+
+665
+00:33:57,976 --> 00:34:01,126
 to give me what I want
 for my application,
 
 
-
-00:33:57.976 --> 00:34:01.126 A:middle
-to give me what I want
-for my application,
-
-00:34:01.196 --> 00:34:03.046 A:middle
+666
+00:34:01,196 --> 00:34:03,046
 which is to motivate
 the user through music.
 
-00:34:03.476 --> 00:34:06.356 A:middle
+
+667
+00:34:03,476 --> 00:34:06,356
 Now, we have the
 reflection piece.
 
-00:34:11.856 --> 00:34:15.826 A:middle
+
+668
+00:34:11,856 --> 00:34:15,826
 So here I'm going to want
 to look at activity updates
 
-00:34:15.826 --> 00:34:18.856 A:middle
+
+669
+00:34:15,826 --> 00:34:18,856
 so I can provide these
 in interesting segments
 
-00:34:18.856 --> 00:34:19.886 A:middle
+
+670
+00:34:18,856 --> 00:34:19,886
 as I showed you earlier.
 
-00:34:20.416 --> 00:34:29.866 A:middle
+
+671
+00:34:20,416 --> 00:34:29,866
 Great. So the first
 thing I want you to look
 
-00:34:29.866 --> 00:34:33.176 A:middle
+
+672
+00:34:29,866 --> 00:34:33,176
 at is we can query activity
 updates starting from date.
 
-00:34:33.496 --> 00:34:36.206 A:middle
+
+673
+00:34:33,496 --> 00:34:36,206
 In my case I wanted to look
 at it during the last week
 
-00:34:36.326 --> 00:34:38.116 A:middle
+
+674
+00:34:36,326 --> 00:34:38,116
 so that even if we
 are not looking
 
-00:34:38.275 --> 00:34:41.386 A:middle
+
+675
+00:34:38,275 --> 00:34:41,386
 at using the application during
 that week, we can get all
 
-00:34:41.386 --> 00:34:46.585 A:middle
+
+676
+00:34:41,386 --> 00:34:46,585
 of that data and
 put it together.
 
-00:34:46.706 --> 00:34:49.596 A:middle
+
+677
+00:34:46,706 --> 00:34:49,596
 In my case I handle
 that data and I put it
 
-00:34:49.596 --> 00:34:51.126 A:middle
+
+678
+00:34:49,596 --> 00:34:51,126
 into interesting
 segments for me.
 
-00:34:51.275 --> 00:34:53.616 A:middle
+
+679
+00:34:51,275 --> 00:34:53,616
 I can't wait to see
 what you guys want
 
-00:34:53.616 --> 00:34:54.835 A:middle
+
+680
+00:34:53,616 --> 00:34:54,835
 to do with it yourselves.
 
-00:34:55.505 --> 00:34:57.526 A:middle
+
+681
+00:34:55,505 --> 00:34:57,526
 Again, I know, broken
 record, right?
 
-00:34:57.526 --> 00:35:00.036 A:middle
+
+682
+00:34:57,526 --> 00:35:00,036
 I want to handle the
 error accordingly.
 
 
-
-00:34:57.526 --> 00:35:00.036 A:middle
-I want to handle the
-error accordingly.
-
-00:35:01.326 --> 00:35:04.516 A:middle
+683
+00:35:01,326 --> 00:35:04,516
 Now, in my case also
 I wanted to give all
 
-00:35:04.516 --> 00:35:07.986 A:middle
+
+684
+00:35:04,516 --> 00:35:07,986
 that extra historical pedometer
 information once I found
 
-00:35:07.986 --> 00:35:09.936 A:middle
+
+685
+00:35:07,986 --> 00:35:09,936
 interesting walking segments.
 
-00:35:09.976 --> 00:35:15.416 A:middle
+
+686
+00:35:09,976 --> 00:35:15,416
 So what I'm going to do
 is down here I am going
 
-00:35:15.416 --> 00:35:20.616 A:middle
+
+687
+00:35:15,416 --> 00:35:20,616
 to request pedometer updates
 for a given activity segment.
 
-00:35:21.116 --> 00:35:29.576 A:middle
+
+688
+00:35:21,116 --> 00:35:29,576
 The first thing I do is
 queryPedometerDataFromDate.
 
-00:35:29.576 --> 00:35:32.186 A:middle
+
+689
+00:35:29,576 --> 00:35:32,186
 And I provide a start
 date and an end date.
 
-00:35:32.186 --> 00:35:35.726 A:middle
+
+690
+00:35:32,186 --> 00:35:35,726
 In my case I've already
 put the data into segments.
 
-00:35:35.726 --> 00:35:39.146 A:middle
+
+691
+00:35:35,726 --> 00:35:39,146
 So I look at the start
 and end of those segments.
 
-00:35:39.736 --> 00:35:44.506 A:middle
+
+692
+00:35:39,736 --> 00:35:44,506
 The second thing I want to
 point out here is that if I want
 
-00:35:44.506 --> 00:35:48.086 A:middle
+
+693
+00:35:44,506 --> 00:35:48,086
 to make any UI changes I'm
 going to want to dispatch those
 
-00:35:48.086 --> 00:35:51.116 A:middle
+
+694
+00:35:48,086 --> 00:35:51,116
 on the main queue, and
 you'll start to find issues
 
-00:35:51.116 --> 00:35:53.086 A:middle
+
+695
+00:35:51,116 --> 00:35:53,086
 if you don't do that in
 your own applications.
 
-00:35:53.726 --> 00:35:56.326 A:middle
+
+696
+00:35:53,726 --> 00:35:56,326
 So that's it.
 
-00:35:57.266 --> 00:35:59.156 A:middle
+
+697
+00:35:57,266 --> 00:35:59,156
 That's all I really
 have to show you
 
-00:35:59.366 --> 00:36:01.956 A:middle
+
+698
+00:35:59,366 --> 00:36:01,956
 with adding motion
 to your application.
 
 
-
-00:35:59.366 --> 00:36:01.956 A:middle
-with adding motion
-to your application.
-
-00:36:02.126 --> 00:36:04.356 A:middle
+699
+00:36:02,126 --> 00:36:04,356
 And it took me like ten
 minutes or something
 
-00:36:04.356 --> 00:36:07.646 A:middle
+
+700
+00:36:04,356 --> 00:36:07,646
 so it is actually really easy
 for you to go back and for you
 
-00:36:07.646 --> 00:36:09.176 A:middle
+
+701
+00:36:07,646 --> 00:36:09,176
 to do in your own applications.
 
-00:36:10.156 --> 00:36:12.966 A:middle
+
+702
+00:36:10,156 --> 00:36:12,966
 Now, I really want to show you
 this app but I'm not going to go
 
-00:36:12.966 --> 00:36:15.096 A:middle
+
+703
+00:36:12,966 --> 00:36:15,096
 for a run or drive
 on stage here.
 
-00:36:15.516 --> 00:36:17.446 A:middle
+
+704
+00:36:15,516 --> 00:36:17,446
 So I will show you
 what I have been up to
 
-00:36:17.446 --> 00:36:19.506 A:middle
+
+705
+00:36:17,446 --> 00:36:19,506
 in the last couple days and how
 
-00:36:19.506 --> 00:36:21.596 A:middle
+
+706
+00:36:19,506 --> 00:36:21,596
 that reflection piece
 organizing the data
 
-00:36:21.596 --> 00:36:22.776 A:middle
+
+707
+00:36:21,596 --> 00:36:22,776
 into interesting segments.
 
-00:36:28.116 --> 00:36:29.816 A:middle
+
+708
+00:36:28,116 --> 00:36:29,816
 Hopefully this will
 be an iPhone.
 
-00:36:30.336 --> 00:36:36.956 A:middle
+
+709
+00:36:30,336 --> 00:36:36,956
 Great! So here is my
 music motion application.
 
-00:36:37.746 --> 00:36:39.736 A:middle
+
+710
+00:36:37,746 --> 00:36:39,736
 As you can see, I'm
 not doing very much.
 
-00:36:39.736 --> 00:36:41.886 A:middle
+
+711
+00:36:39,736 --> 00:36:41,886
 So I'm sitting here
 in low intensity mode.
 
-00:36:41.886 --> 00:36:45.686 A:middle
+
+712
+00:36:41,886 --> 00:36:45,686
 Now, let me look at
 my historical updates.
 
-00:36:45.996 --> 00:36:49.426 A:middle
+
+713
+00:36:45,996 --> 00:36:49,426
 I'm actually going to
 start at yesterday morning
 
-00:36:49.866 --> 00:36:51.266 A:middle
+
+714
+00:36:49,866 --> 00:36:51,266
 and I'll take you through today,
 
-00:36:51.266 --> 00:36:53.566 A:middle
+
+715
+00:36:51,266 --> 00:36:53,566
 but all I've really done
 is walk around Moscone.
 
-00:36:55.026 --> 00:36:58.256 A:middle
+
+716
+00:36:55,026 --> 00:36:58,256
 Yesterday I woke up and I
 decided to go for a quick cycle.
 
-00:36:58.756 --> 00:37:02.716 A:middle
+
+717
+00:36:58,756 --> 00:37:02,716
 What I've done, I've -- the app
 has already figured that out
 
 
-
-00:36:58.756 --> 00:37:02.716 A:middle
-What I've done, I've -- the app
-has already figured that out
-
-00:37:02.716 --> 00:37:04.796 A:middle
+718
+00:37:02,716 --> 00:37:04,796
 and put that into an
 interesting segment for me.
 
-00:37:05.936 --> 00:37:10.626 A:middle
+
+719
+00:37:05,936 --> 00:37:10,626
 Then I walked to my bus,
 realized I was a little late
 
-00:37:10.626 --> 00:37:14.296 A:middle
+
+720
+00:37:10,626 --> 00:37:14,296
 and started running, and then
 finally made it on the bus.
 
-00:37:15.156 --> 00:37:19.516 A:middle
+
+721
+00:37:15,156 --> 00:37:19,516
 As you can see, what I've done
 here is the walking segments
 
-00:37:19.516 --> 00:37:22.716 A:middle
+
+722
+00:37:19,516 --> 00:37:22,716
 have that mile information,
 the pace information,
 
-00:37:23.066 --> 00:37:26.016 A:middle
+
+723
+00:37:23,066 --> 00:37:26,016
 floors ascended and
 descended, and puts those
 
-00:37:26.016 --> 00:37:27.366 A:middle
+
+724
+00:37:26,016 --> 00:37:27,366
 into interesting chunks for me.
 
-00:37:28.206 --> 00:37:30.906 A:middle
+
+725
+00:37:28,206 --> 00:37:30,906
 Now if I were actually
 developing a music application
 
-00:37:31.266 --> 00:37:34.616 A:middle
+
+726
+00:37:31,266 --> 00:37:34,616
 in one of these cells I
 might put attach the playlist
 
-00:37:34.616 --> 00:37:36.456 A:middle
+
+727
+00:37:34,616 --> 00:37:36,456
 that I was listening
 to for that segment.
 
-00:37:36.906 --> 00:37:41.106 A:middle
+
+728
+00:37:36,906 --> 00:37:41,106
 One thing I want to point
 out as I scroll to today
 
-00:37:41.106 --> 00:37:43.556 A:middle
+
+729
+00:37:41,106 --> 00:37:43,556
 when I have been
 walking around Moscone,
 
-00:37:43.966 --> 00:37:46.706 A:middle
+
+730
+00:37:43,966 --> 00:37:46,706
 I'm not getting any floors
 ascended or descended.
 
-00:37:47.146 --> 00:37:48.306 A:middle
+
+731
+00:37:47,146 --> 00:37:48,306
 That's because I've been lazy
 
-00:37:48.306 --> 00:37:49.856 A:middle
+
+732
+00:37:48,306 --> 00:37:49,856
 and taking the escalator
 everywhere,
 
-00:37:50.896 --> 00:37:53.056 A:middle
+
+733
+00:37:50,896 --> 00:37:53,056
 and so I just wanted you
 guys to notice that as well.
 
-00:37:54.856 --> 00:37:57.226 A:middle
+
+734
+00:37:54,856 --> 00:37:57,226
 So that's my basic
 music application.
 
-00:37:57.946 --> 00:38:02.966 A:middle
+
+735
+00:37:57,946 --> 00:38:02,966
 I'm just going to wrap this up.
 
 
-
-00:37:57.946 --> 00:38:02.966 A:middle
-I'm just going to wrap this up.
-
-00:38:03.226 --> 00:38:05.866 A:middle
+736
+00:38:03,226 --> 00:38:05,866
 So I really hope you
 guys enjoyed the demo.
 
-00:38:05.866 --> 00:38:08.346 A:middle
+
+737
+00:38:05,866 --> 00:38:08,346
 I tried to focus on
 just a few things
 
-00:38:08.386 --> 00:38:11.336 A:middle
+
+738
+00:38:08,386 --> 00:38:11,336
 so that you can remember
 them for your application.
 
-00:38:11.976 --> 00:38:14.836 A:middle
+
+739
+00:38:11,976 --> 00:38:14,836
 Remember, there's the
 detection piece, using motion
 
-00:38:14.836 --> 00:38:17.946 A:middle
+
+740
+00:38:14,836 --> 00:38:17,946
 to detect what a user is
 doing instead of a user having
 
-00:38:17.946 --> 00:38:19.376 A:middle
+
+741
+00:38:17,946 --> 00:38:19,376
 to tell you what they are doing.
 
-00:38:20.056 --> 00:38:23.626 A:middle
+
+742
+00:38:20,056 --> 00:38:23,626
 Engaging with them with the
 push updates from activity,
 
-00:38:23.626 --> 00:38:28.686 A:middle
+
+743
+00:38:23,626 --> 00:38:28,686
 pedometer, and altimeter,
 and as well reflecting back
 
-00:38:28.686 --> 00:38:33.206 A:middle
+
+744
+00:38:28,686 --> 00:38:33,206
 and really using those
 historical queries wisely.
 
-00:38:33.856 --> 00:38:37.116 A:middle
+
+745
+00:38:33,856 --> 00:38:37,116
 If you have any more
 questions, feel free to look
 
-00:38:37.116 --> 00:38:38.196 A:middle
+
+746
+00:38:37,116 --> 00:38:38,196
 at the Developer Forums.
 
-00:38:38.196 --> 00:38:40.676 A:middle
+
+747
+00:38:38,196 --> 00:38:40,676
 Please do check out
 music motion.
 
-00:38:40.956 --> 00:38:42.736 A:middle
+
+748
+00:38:40,956 --> 00:38:42,736
 It should be on the
 developer portal.
 
-00:38:43.156 --> 00:38:46.126 A:middle
+
+749
+00:38:43,156 --> 00:38:46,126
 And for any general inquiries,
 contact our evangelist.
 
-00:38:47.376 --> 00:38:49.876 A:middle
+
+750
+00:38:47,376 --> 00:38:49,876
 There are also some
 related sessions
 
-00:38:49.956 --> 00:38:51.496 A:middle
+
+751
+00:38:49,956 --> 00:38:51,496
 that are really worth
 checking out.
 
-00:38:52.296 --> 00:38:54.866 A:middle
+
+752
+00:38:52,296 --> 00:38:54,866
 If you are here at WWDC, you may
 
-00:38:54.866 --> 00:38:57.026 A:middle
+
+753
+00:38:54,866 --> 00:38:57,026
 or may not have seen the
 HealthKit presentation
 
-00:38:57.026 --> 00:38:58.716 A:middle
+
+754
+00:38:57,026 --> 00:38:58,716
 or the Cocoa Touch presentation.
 
-00:38:59.366 --> 00:39:01.546 A:middle
+
+755
+00:38:59,366 --> 00:39:01,546
 If you missed them or
 are sitting at home,
 
 
-
-00:38:59.366 --> 00:39:01.546 A:middle
-If you missed them or
-are sitting at home,
-
-00:39:01.546 --> 00:39:03.186 A:middle
+756
+00:39:01,546 --> 00:39:03,186
 please go check those
 out online.
 
-00:39:03.616 --> 00:39:05.116 A:middle
+
+757
+00:39:03,616 --> 00:39:05,116
 I also encourage you to check
 
-00:39:05.116 --> 00:39:07.436 A:middle
+
+758
+00:39:05,116 --> 00:39:07,436
 out the Core Location
 presentation as well.
 
-00:39:08.656 --> 00:39:12.436 A:middle
+
+759
+00:39:08,656 --> 00:39:12,436
 If you really combine
 motion data with health data
 
-00:39:12.646 --> 00:39:16.606 A:middle
+
+760
+00:39:12,646 --> 00:39:16,606
 and location data, you can
 create some incredible contexts
 
-00:39:16.606 --> 00:39:18.556 A:middle
+
+761
+00:39:16,606 --> 00:39:18,556
 to really enhance
 your applications.
 
-00:39:19.016 --> 00:39:20.936 A:middle
+
+762
+00:39:19,016 --> 00:39:20,936
 I really can't wait to
 see what you guys put
 
-00:39:20.936 --> 00:39:21.846 A:middle
+
+763
+00:39:20,936 --> 00:39:21,846
 out on the App Store.
 
-00:39:23.516 --> 00:39:30.856 A:middle
+
+764
+00:39:23,516 --> 00:39:30,856
 [Applause.]
 
-00:39:31.356 --> 00:39:31.696 A:middle
-&gt;&gt; GABRIELLE BADIE: Thanks.
 
-00:39:31.736 --> 00:39:32.706 A:middle
+765
+00:39:31,356 --> 00:39:31,696
+>> GABRIELLE BADIE: Thanks.
+
+
+766
+00:39:31,736 --> 00:39:32,706
 Thank you very much.
 
-00:39:33.016 --> 00:39:35.000 A:middle
+
+767
+00:39:33,016 --> 00:39:35,000
 [Applause.]
 

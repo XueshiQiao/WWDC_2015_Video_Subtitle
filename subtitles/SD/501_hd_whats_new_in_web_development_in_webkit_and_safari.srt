@@ -1,3592 +1,5149 @@
-
-00:00:17.396 --> 00:00:19.586 A:middle
-&gt;&gt; BRENT FULGHAM: Hello
+1
+00:00:17,396 --> 00:00:19,586
+>> BRENT FULGHAM: Hello
 and welcome to "What's New
 
-00:00:19.586 --> 00:00:21.606 A:middle
+
+2
+00:00:19,586 --> 00:00:21,606
 In Web Development and
 WebKit and Safari."
 
-00:00:22.506 --> 00:00:25.086 A:middle
+
+3
+00:00:22,506 --> 00:00:25,086
 My name's Brent Fulgham
 and I will be taking you
 
-00:00:25.086 --> 00:00:27.846 A:middle
+
+4
+00:00:25,086 --> 00:00:27,846
 on a guided tour of some of the
 advances we've made this year.
 
-00:00:28.346 --> 00:00:30.876 A:middle
+
+5
+00:00:28,346 --> 00:00:30,876
 This is an especially
 exciting time of year for us,
 
-00:00:31.216 --> 00:00:34.406 A:middle
+
+6
+00:00:31,216 --> 00:00:34,406
 because throughout most of the
 year, we only hear from you
 
-00:00:34.406 --> 00:00:38.756 A:middle
+
+7
+00:00:34,406 --> 00:00:38,756
 through bug reports and things
 told to us by other people,
 
-00:00:38.756 --> 00:00:41.576 A:middle
+
+8
+00:00:38,756 --> 00:00:41,576
 but this time of year, we have
 labs, we have sessions like this
 
-00:00:41.576 --> 00:00:44.416 A:middle
+
+9
+00:00:41,576 --> 00:00:44,416
 where we can get into all of the
 things that we have done to try
 
-00:00:44.676 --> 00:00:45.606 A:middle
+
+10
+00:00:44,676 --> 00:00:45,606
 to make your lives better.
 
-00:00:46.146 --> 00:00:50.736 A:middle
+
+11
+00:00:46,146 --> 00:00:50,736
 And whether you primarily target
 Safari as a web developer,
 
-00:00:51.186 --> 00:00:53.766 A:middle
+
+12
+00:00:51,186 --> 00:00:53,766
 or an embedded web view
 in a larger application,
 
-00:00:53.766 --> 00:00:56.046 A:middle
+
+13
+00:00:53,766 --> 00:00:56,046
 I think you will find a
 few things in this talk
 
-00:00:56.046 --> 00:00:58.556 A:middle
+
+14
+00:00:56,046 --> 00:00:58,556
 that will be useful to
 you almost immediately.
 
-00:00:58.716 --> 00:01:02.256 A:middle
+
+15
+00:00:58,716 --> 00:01:02,256
 So I would like to start with a
 brief overview of what WebKit is
 
 
-
-00:00:58.716 --> 00:01:02.256 A:middle
-So I would like to start with a
-brief overview of what WebKit is
-
-00:01:02.256 --> 00:01:04.916 A:middle
+16
+00:01:02,256 --> 00:01:04,916
 and how it fits into the
 software design stack at Apple,
 
-00:01:05.266 --> 00:01:08.126 A:middle
+
+17
+00:01:05,266 --> 00:01:08,126
 and then move on to some
 enhancements we've made
 
-00:01:08.126 --> 00:01:11.806 A:middle
+
+18
+00:01:08,126 --> 00:01:11,806
 in Safari this year
 that you will be able
 
-00:01:11.806 --> 00:01:12.766 A:middle
+
+19
+00:01:11,806 --> 00:01:12,766
 to take advantage of.
 
-00:01:12.986 --> 00:01:15.656 A:middle
+
+20
+00:01:12,986 --> 00:01:15,656
 And finally, I would
 like to talk
 
-00:01:15.656 --> 00:01:17.926 A:middle
+
+21
+00:01:15,656 --> 00:01:17,926
 about creating some
 amazing experiences
 
-00:01:18.306 --> 00:01:19.886 A:middle
+
+22
+00:01:18,306 --> 00:01:19,886
 for the iOS and Mac platforms.
 
-00:01:20.206 --> 00:01:22.126 A:middle
+
+23
+00:01:20,206 --> 00:01:22,126
 Technologies that are
 available on these platforms
 
-00:01:22.176 --> 00:01:23.516 A:middle
+
+24
+00:01:22,176 --> 00:01:23,516
 that if you take advantage
 
-00:01:23.516 --> 00:01:27.456 A:middle
+
+25
+00:01:23,516 --> 00:01:27,456
 of them will really make
 your website more compelling
 
-00:01:27.456 --> 00:01:29.016 A:middle
+
+26
+00:01:27,456 --> 00:01:29,016
 and useful to your customers.
 
-00:01:29.806 --> 00:01:32.116 A:middle
+
+27
+00:01:29,806 --> 00:01:32,116
 So let's get started
 talking about WebKit.
 
-00:01:32.486 --> 00:01:34.366 A:middle
+
+28
+00:01:32,486 --> 00:01:34,366
 WebKit is our web
 browsing engine.
 
-00:01:34.766 --> 00:01:37.576 A:middle
+
+29
+00:01:34,766 --> 00:01:37,576
 And it's an open source
 project that anyone,
 
-00:01:37.726 --> 00:01:39.086 A:middle
+
+30
+00:01:37,726 --> 00:01:39,086
 any of you could join.
 
-00:01:39.496 --> 00:01:44.016 A:middle
+
+31
+00:01:39,496 --> 00:01:44,016
 And while you may know
 that WebKit is the engine
 
-00:01:44.016 --> 00:01:47.866 A:middle
+
+32
+00:01:44,016 --> 00:01:47,866
 that powers Safari, you may
 not be aware that it's used
 
-00:01:47.866 --> 00:01:50.676 A:middle
+
+33
+00:01:47,866 --> 00:01:50,676
 in a tremendous number of
 applications across the spectrum
 
-00:01:50.676 --> 00:01:53.876 A:middle
+
+34
+00:01:50,676 --> 00:01:53,876
 of things we do at Apple.
 
-00:01:54.066 --> 00:01:57.546 A:middle
+
+35
+00:01:54,066 --> 00:01:57,546
 WebKit is the same
 engine on iOS and OS X
 
-00:01:57.546 --> 00:01:59.236 A:middle
+
+36
+00:01:57,546 --> 00:01:59,236
 with very few variations
 between them.
 
-00:01:59.616 --> 00:02:00.836 A:middle
+
+37
+00:01:59,616 --> 00:02:00,836
 So during rest of my talk,
 
 
-
-00:01:59.616 --> 00:02:00.836 A:middle
-So during rest of my talk,
-
-00:02:00.836 --> 00:02:02.466 A:middle
+38
+00:02:00,836 --> 00:02:02,466
 unless I specifically
 call something
 
-00:02:02.466 --> 00:02:04.986 A:middle
+
+39
+00:02:02,466 --> 00:02:04,986
 out as being available only
 on one platform or the other,
 
-00:02:05.446 --> 00:02:07.316 A:middle
+
+40
+00:02:05,446 --> 00:02:07,316
 you can safely assume that
 the things we are talking
 
-00:02:07.316 --> 00:02:10.006 A:middle
+
+41
+00:02:07,316 --> 00:02:10,006
 about today will be
 available on both platforms.
 
-00:02:11.626 --> 00:02:14.686 A:middle
+
+42
+00:02:11,626 --> 00:02:14,686
 So the takeaway here is that
 if you are a web developer
 
-00:02:14.686 --> 00:02:17.736 A:middle
+
+43
+00:02:14,686 --> 00:02:17,736
 targeting Safari or
 any web browser on iOS,
 
-00:02:18.126 --> 00:02:20.216 A:middle
+
+44
+00:02:18,126 --> 00:02:20,216
 you can use all the things I
 am going to talk about today.
 
-00:02:20.746 --> 00:02:23.376 A:middle
+
+45
+00:02:20,746 --> 00:02:23,376
 And if you are an app developer
 with an embedded web view,
 
-00:02:23.376 --> 00:02:24.906 A:middle
+
+46
+00:02:23,376 --> 00:02:24,906
 you can use all the
 things I'm talking about.
 
-00:02:25.406 --> 00:02:30.146 A:middle
+
+47
+00:02:25,406 --> 00:02:30,146
 And if you are a
 developer targeting just the
 
-00:02:30.146 --> 00:02:34.946 A:middle
+
+48
+00:02:30,146 --> 00:02:34,946
 JavaScriptCore framework itself,
 or the OS X automation tools,
 
-00:02:34.946 --> 00:02:37.186 A:middle
+
+49
+00:02:34,946 --> 00:02:37,186
 you can make use of all
 the JavaScript features
 
-00:02:37.186 --> 00:02:38.716 A:middle
+
+50
+00:02:37,186 --> 00:02:38,716
 that we will talk
 about in this session.
 
-00:02:39.326 --> 00:02:43.726 A:middle
+
+51
+00:02:39,326 --> 00:02:43,726
 So that was our introduction
 to WebKit, and let's move
 
-00:02:43.726 --> 00:02:45.826 A:middle
+
+52
+00:02:43,726 --> 00:02:45,826
 on to the enhancements
 we made this year.
 
-00:02:46.426 --> 00:02:51.326 A:middle
+
+53
+00:02:46,426 --> 00:02:51,326
 So I'm going to break this
 down just for structure
 
-00:02:51.326 --> 00:02:53.446 A:middle
+
+54
+00:02:51,326 --> 00:02:53,446
 into new layout and
 rendering features.
 
-00:02:54.156 --> 00:02:56.336 A:middle
+
+55
+00:02:54,156 --> 00:02:56,336
 Some JavaScript updates
 that we made
 
-00:02:56.336 --> 00:03:00.366 A:middle
+
+56
+00:02:56,336 --> 00:03:00,366
 to support the new ES6
 standard, and CSS features
 
 
-
-00:02:56.336 --> 00:03:00.366 A:middle
-to support the new ES6
-standard, and CSS features
-
-00:03:00.366 --> 00:03:02.606 A:middle
+57
+00:03:00,366 --> 00:03:02,606
 that will make your
 style sheets easier
 
-00:03:02.606 --> 00:03:04.076 A:middle
+
+58
+00:03:02,606 --> 00:03:04,076
 to maintain and simpler to read.
 
-00:03:04.246 --> 00:03:09.256 A:middle
+
+59
+00:03:04,246 --> 00:03:09,256
 So let's talk a little bit
 about the enhancements in Safari
 
-00:03:09.256 --> 00:03:11.776 A:middle
+
+60
+00:03:09,256 --> 00:03:11,776
 and specifically, layout
 and rendering features.
 
-00:03:12.576 --> 00:03:14.356 A:middle
+
+61
+00:03:12,576 --> 00:03:14,356
 And even more specifically,
 I want to talk
 
-00:03:14.356 --> 00:03:15.706 A:middle
+
+62
+00:03:14,356 --> 00:03:15,706
 about backdrop effects.
 
-00:03:16.096 --> 00:03:18.786 A:middle
+
+63
+00:03:16,096 --> 00:03:18,786
 In iOS 7, the design language
 
-00:03:18.786 --> 00:03:20.336 A:middle
+
+64
+00:03:18,786 --> 00:03:20,336
 for the user interface
 was changed
 
-00:03:20.336 --> 00:03:23.156 A:middle
+
+65
+00:03:20,336 --> 00:03:23,156
 to incorporate some beautiful
 backdrop blur effects.
 
-00:03:23.736 --> 00:03:27.656 A:middle
+
+66
+00:03:23,736 --> 00:03:27,656
 For example, here you can see
 the home screen icons just kind
 
-00:03:27.656 --> 00:03:29.576 A:middle
+
+67
+00:03:27,656 --> 00:03:29,576
 of peeking through that
 frosted glass effect.
 
-00:03:29.576 --> 00:03:32.596 A:middle
+
+68
+00:03:29,576 --> 00:03:32,596
 And this kind of layering
 gives a lot of depth
 
-00:03:33.176 --> 00:03:36.576 A:middle
+
+69
+00:03:33,176 --> 00:03:36,576
 and gives you a sense of what's
 happening behind this overlay,
 
-00:03:37.146 --> 00:03:39.806 A:middle
+
+70
+00:03:37,146 --> 00:03:39,806
 without obstructing the content
 that we are trying to view
 
-00:03:39.806 --> 00:03:42.076 A:middle
+
+71
+00:03:39,806 --> 00:03:42,076
 in the front of the interface.
 
-00:03:43.416 --> 00:03:45.586 A:middle
+
+72
+00:03:43,416 --> 00:03:45,586
 And later, in OS X Yosemite,
 
-00:03:45.996 --> 00:03:47.796 A:middle
+
+73
+00:03:45,996 --> 00:03:47,796
 we provided similar
 backdrop effects.
 
-00:03:48.586 --> 00:03:51.696 A:middle
+
+74
+00:03:48,586 --> 00:03:51,696
 Here we have a very subtle blur
 in the sidebar of the finder
 
-00:03:52.536 --> 00:03:56.096 A:middle
+
+75
+00:03:52,536 --> 00:03:56,096
 and we have this beautiful
 frosted glass effect on the doc.
 
-00:03:57.606 --> 00:04:00.696 A:middle
+
+76
+00:03:57,606 --> 00:04:00,696
 And so these effects
 are important to feel
 
 
-
-00:03:57.606 --> 00:04:00.696 A:middle
-And so these effects
-are important to feel
-
-00:04:00.696 --> 00:04:02.006 A:middle
+77
+00:04:00,696 --> 00:04:02,006
 like a native part
 of the system.
 
-00:04:02.006 --> 00:04:04.286 A:middle
+
+78
+00:04:02,006 --> 00:04:04,286
 And they are the kind of
 things you might want to use
 
-00:04:04.286 --> 00:04:08.206 A:middle
+
+79
+00:04:04,286 --> 00:04:08,206
 in the most refined version of
 your webpage for people visiting
 
-00:04:08.206 --> 00:04:12.226 A:middle
+
+80
+00:04:08,206 --> 00:04:12,226
 on a Mac or iOS device,
 but it's doubly important
 
-00:04:12.226 --> 00:04:14.286 A:middle
+
+81
+00:04:12,226 --> 00:04:14,286
 when you have an embedded
 web view that you want
 
-00:04:14.286 --> 00:04:17.216 A:middle
+
+82
+00:04:14,286 --> 00:04:17,216
 to have be part of the
 system, and look like part
 
-00:04:17.216 --> 00:04:18.526 A:middle
+
+83
+00:04:17,216 --> 00:04:18,526
 of the native user interface.
 
-00:04:19.456 --> 00:04:21.995 A:middle
+
+84
+00:04:19,456 --> 00:04:21,995
 But how do you do that?
 
-00:04:22.276 --> 00:04:25.266 A:middle
+
+85
+00:04:22,276 --> 00:04:25,266
 Let's say I have an application
 that's displaying photos.
 
-00:04:26.276 --> 00:04:28.506 A:middle
+
+86
+00:04:26,276 --> 00:04:28,506
 There's no obvious way to
 create a backdrop effect
 
-00:04:28.666 --> 00:04:30.016 A:middle
+
+87
+00:04:28,666 --> 00:04:30,016
 like the ones we saw earlier.
 
-00:04:31.056 --> 00:04:34.026 A:middle
+
+88
+00:04:31,056 --> 00:04:34,026
 We can try an overlay with
 a translucent background
 
-00:04:34.256 --> 00:04:36.796 A:middle
+
+89
+00:04:34,256 --> 00:04:36,796
 but you can see that the
 content kind of fights
 
-00:04:36.796 --> 00:04:38.416 A:middle
+
+90
+00:04:36,796 --> 00:04:38,416
 with the text on top of it.
 
-00:04:38.416 --> 00:04:40.396 A:middle
+
+91
+00:04:38,416 --> 00:04:40,396
 You know that there are things
 behind it and it's difficult,
 
-00:04:40.396 --> 00:04:42.136 A:middle
+
+92
+00:04:40,396 --> 00:04:42,136
 makes it more difficult to read.
 
-00:04:43.416 --> 00:04:46.036 A:middle
+
+93
+00:04:43,416 --> 00:04:46,036
 Now, we have CSS filters
 and those include a blur.
 
-00:04:46.036 --> 00:04:47.606 A:middle
+
+94
+00:04:46,036 --> 00:04:47,606
 Could we try something
 like that?
 
-00:04:48.916 --> 00:04:50.436 A:middle
+
+95
+00:04:48,916 --> 00:04:50,436
 Well, that's a nice effect,
 
-00:04:51.376 --> 00:04:53.316 A:middle
+
+96
+00:04:51,376 --> 00:04:53,316
 but it doesn't really
 get us what we want.
 
-00:04:53.566 --> 00:04:54.796 A:middle
+
+97
+00:04:53,566 --> 00:04:54,796
 About the only thing
 that is clear
 
-00:04:54.796 --> 00:04:56.206 A:middle
+
+98
+00:04:54,796 --> 00:04:56,206
 in this image is the background,
 
-00:04:56.206 --> 00:04:58.946 A:middle
+
+99
+00:04:56,206 --> 00:04:58,946
 which is kind of
 besides the point.
 
 
-
-00:05:00.866 --> 00:05:02.846 A:middle
+100
+00:05:00,866 --> 00:05:02,846
 So we observed people,
 
-00:05:03.286 --> 00:05:06.466 A:middle
+
+101
+00:05:03,286 --> 00:05:06,466
 developers like yourselves
 going to heroic efforts.
 
-00:05:06.466 --> 00:05:08.496 A:middle
+
+102
+00:05:06,466 --> 00:05:08,496
 What they would do is they
 would have a background picture
 
-00:05:08.496 --> 00:05:11.686 A:middle
+
+103
+00:05:08,496 --> 00:05:11,686
 like this and they would create
 an entirely blurred version
 
-00:05:11.686 --> 00:05:15.126 A:middle
+
+104
+00:05:11,686 --> 00:05:15,126
 of it, which would then be
 clipped and moved into position
 
-00:05:15.126 --> 00:05:17.896 A:middle
+
+105
+00:05:15,126 --> 00:05:17,896
 to cover up the elements that
 you want to dismay as a blur.
 
-00:05:18.306 --> 00:05:19.486 A:middle
+
+106
+00:05:18,306 --> 00:05:19,486
 And that's awful.
 
-00:05:19.486 --> 00:05:25.166 A:middle
+
+107
+00:05:19,486 --> 00:05:25,166
 I mean, it's amazing that you
 did that but it's bad for us
 
-00:05:25.166 --> 00:05:25.906 A:middle
+
+108
+00:05:25,166 --> 00:05:25,906
 that we did that to you.
 
-00:05:26.346 --> 00:05:29.846 A:middle
+
+109
+00:05:26,346 --> 00:05:29,846
 So -- and there are
 other problems with that.
 
-00:05:29.846 --> 00:05:31.566 A:middle
+
+110
+00:05:29,846 --> 00:05:31,566
 We can't animate
 those backgrounds.
 
-00:05:31.926 --> 00:05:33.796 A:middle
+
+111
+00:05:31,926 --> 00:05:33,796
 And it's difficult to
 change the blur effects.
 
-00:05:33.796 --> 00:05:36.356 A:middle
+
+112
+00:05:33,796 --> 00:05:36,356
 Once we have made a choice, we
 have to re-render everything.
 
-00:05:36.966 --> 00:05:41.166 A:middle
+
+113
+00:05:36,966 --> 00:05:41,166
 So we needed a better way,
 and that is backdrop-filter.
 
-00:05:42.786 --> 00:05:44.676 A:middle
+
+114
+00:05:42,786 --> 00:05:44,676
 Backdrop filter allows us
 
-00:05:44.676 --> 00:05:47.396 A:middle
+
+115
+00:05:44,676 --> 00:05:47,396
 to specify these backdrop
 effects entirely in CSS
 
-00:05:47.396 --> 00:05:51.246 A:middle
+
+116
+00:05:47,396 --> 00:05:51,246
 and it's been proposed
 as a standard to the W3C
 
-00:05:51.246 --> 00:05:53.256 A:middle
+
+117
+00:05:51,246 --> 00:05:53,256
 and is undergoing that
 process right now.
 
-00:05:54.176 --> 00:05:55.396 A:middle
+
+118
+00:05:54,176 --> 00:05:55,396
 Let's see how this
 fits together.
 
-00:05:56.036 --> 00:05:58.206 A:middle
+
+119
+00:05:56,036 --> 00:05:58,206
 So if we have an
 element that we want
 
-00:05:58.206 --> 00:05:59.666 A:middle
+
+120
+00:05:58,206 --> 00:05:59,666
 to provide a backdrop
 filter for,
 
 
-
-00:06:01.066 --> 00:06:04.016 A:middle
+121
+00:06:01,066 --> 00:06:04,016
 WebKit will take the region
 behind it and re-render it
 
-00:06:04.276 --> 00:06:05.726 A:middle
+
+122
+00:06:04,276 --> 00:06:05,726
 in an off screen context.
 
-00:06:06.656 --> 00:06:11.186 A:middle
+
+123
+00:06:06,656 --> 00:06:11,186
 And while that's efficient,
 rendering passes are costly,
 
-00:06:11.716 --> 00:06:14.296 A:middle
+
+124
+00:06:11,716 --> 00:06:14,296
 and so we want to make sure
 we don't over use them.
 
-00:06:15.016 --> 00:06:16.526 A:middle
+
+125
+00:06:15,016 --> 00:06:16,526
 Once we have this
 background context,
 
-00:06:16.526 --> 00:06:18.376 A:middle
+
+126
+00:06:16,526 --> 00:06:18,376
 we then apply the filter
 to them, so we blur it,
 
-00:06:18.896 --> 00:06:21.846 A:middle
+
+127
+00:06:18,896 --> 00:06:21,846
 we composite the front-end
 content back on top of it,
 
-00:06:22.206 --> 00:06:25.536 A:middle
+
+128
+00:06:22,206 --> 00:06:25,536
 and then we can recomposite
 the entire scene back together
 
-00:06:25.536 --> 00:06:29.346 A:middle
+
+129
+00:06:25,536 --> 00:06:29,346
 and you get this beautiful blur
 effect, exactly what we wanted.
 
-00:06:29.836 --> 00:06:32.086 A:middle
+
+130
+00:06:29,836 --> 00:06:32,086
 And once we got the
 blurs to work,
 
-00:06:32.526 --> 00:06:34.396 A:middle
+
+131
+00:06:32,526 --> 00:06:34,396
 we realized that we
 wanted the flexibility
 
-00:06:34.396 --> 00:06:36.666 A:middle
+
+132
+00:06:34,396 --> 00:06:36,666
 to use any of the CSS filters.
 
-00:06:36.876 --> 00:06:37.506 A:middle
+
+133
+00:06:36,876 --> 00:06:37,506
 So we did.
 
-00:06:37.506 --> 00:06:38.916 A:middle
+
+134
+00:06:37,506 --> 00:06:38,916
 We made it so that
 you can use any
 
-00:06:39.166 --> 00:06:40.856 A:middle
+
+135
+00:06:39,166 --> 00:06:40,856
 of the CSS filters
 in this effect.
 
-00:06:41.376 --> 00:06:43.206 A:middle
+
+136
+00:06:41,376 --> 00:06:43,206
 So we can invert colors.
 
-00:06:44.296 --> 00:06:46.266 A:middle
+
+137
+00:06:44,296 --> 00:06:46,266
 We can combine filters together.
 
-00:06:46.266 --> 00:06:48.026 A:middle
+
+138
+00:06:46,266 --> 00:06:48,026
 So we can get a blur
 and a grayscale
 
-00:06:48.026 --> 00:06:49.276 A:middle
+
+139
+00:06:48,026 --> 00:06:49,276
 to get an effect like this.
 
-00:06:49.686 --> 00:06:53.886 A:middle
+
+140
+00:06:49,686 --> 00:06:53,886
 And most amazingly of
 all, we can overlay this
 
-00:06:53.886 --> 00:06:55.396 A:middle
+
+141
+00:06:53,886 --> 00:06:55,396
 on top of dynamic content.
 
-00:06:55.716 --> 00:07:00.436 A:middle
+
+142
+00:06:55,716 --> 00:07:00,436
 So this backdrop blur filter
 that's one line of CSS can be
 
 
-
-00:06:55.716 --> 00:07:00.436 A:middle
-So this backdrop blur filter
-that's one line of CSS can be
-
-00:07:00.436 --> 00:07:03.686 A:middle
+143
+00:07:00,436 --> 00:07:03,686
 on top of a video,
 which is amazing!
 
-00:07:03.686 --> 00:07:07.336 A:middle
+
+144
+00:07:03,686 --> 00:07:07,336
 I was so excited when we had
 this working and I can't wait
 
-00:07:07.336 --> 00:07:10.186 A:middle
+
+145
+00:07:07,336 --> 00:07:10,186
 to see what you guys do
 with it on your own sites.
 
-00:07:11.536 --> 00:07:13.936 A:middle
+
+146
+00:07:11,536 --> 00:07:13,936
 So let's shift gears
 a little bit.
 
-00:07:13.936 --> 00:07:16.586 A:middle
+
+147
+00:07:13,936 --> 00:07:16,586
 Another area that we saw
 some issues was in layout
 
-00:07:16.586 --> 00:07:18.496 A:middle
+
+148
+00:07:16,586 --> 00:07:18,496
 and rendering of
 scrolling effects.
 
-00:07:19.096 --> 00:07:25.146 A:middle
+
+149
+00:07:19,096 --> 00:07:25,146
 You have probably seen this
 great iTunes banner at the top.
 
-00:07:25.566 --> 00:07:27.926 A:middle
+
+150
+00:07:25,566 --> 00:07:27,926
 And if you've ever tried
 playing with it, you'll notice
 
-00:07:27.926 --> 00:07:31.916 A:middle
+
+151
+00:07:27,926 --> 00:07:31,916
 that when you try to scroll
 it, it moves in whole steps.
 
-00:07:31.916 --> 00:07:35.386 A:middle
+
+152
+00:07:31,916 --> 00:07:35,386
 You get an entire movie
 title, movie brick,
 
-00:07:35.386 --> 00:07:37.176 A:middle
+
+153
+00:07:35,386 --> 00:07:37,176
 each time you make a movement.
 
-00:07:37.676 --> 00:07:41.966 A:middle
+
+154
+00:07:37,676 --> 00:07:41,966
 And our photos app in iOS
 has a similar kind of effect.
 
-00:07:41.966 --> 00:07:45.656 A:middle
+
+155
+00:07:41,966 --> 00:07:45,656
 Each time we look at a photo we
 want to swipe to the next one,
 
-00:07:45.656 --> 00:07:48.686 A:middle
+
+156
+00:07:45,656 --> 00:07:48,686
 we move across an entire
 photo, we don't show part
 
-00:07:48.686 --> 00:07:49.966 A:middle
+
+157
+00:07:48,686 --> 00:07:49,966
 of one photo and
 part of another.
 
-00:07:50.516 --> 00:07:53.916 A:middle
+
+158
+00:07:50,516 --> 00:07:53,916
 This kind of interaction is
 really great for image galleries
 
-00:07:53.916 --> 00:07:56.926 A:middle
+
+159
+00:07:53,916 --> 00:07:56,926
 or other types of tiled
 content like this.
 
-00:07:57.376 --> 00:08:01.556 A:middle
+
+160
+00:07:57,376 --> 00:08:01,556
 And so what we observe people
 doing was writing complicated
 
 
-
-00:07:57.376 --> 00:08:01.556 A:middle
-And so what we observe people
-doing was writing complicated
-
-00:08:01.556 --> 00:08:03.276 A:middle
+161
+00:08:01,556 --> 00:08:03,276
 JavaScript implementations
 that take
 
-00:08:03.276 --> 00:08:04.866 A:middle
+
+162
+00:08:03,276 --> 00:08:04,866
 over the scrolling operations.
 
-00:08:05.216 --> 00:08:08.436 A:middle
+
+163
+00:08:05,216 --> 00:08:08,436
 They'd effectively throw out
 the browser's built-in smooth
 
-00:08:08.436 --> 00:08:10.896 A:middle
+
+164
+00:08:08,436 --> 00:08:10,896
 scrolling infrastructure,
 and replace it
 
-00:08:10.896 --> 00:08:15.656 A:middle
+
+165
+00:08:10,896 --> 00:08:15,656
 with manual JavaScript that
 did this frame by frame.
 
-00:08:16.456 --> 00:08:18.826 A:middle
+
+166
+00:08:16,456 --> 00:08:18,826
 And we know that that's a
 significant performance penalty.
 
-00:08:18.826 --> 00:08:21.466 A:middle
+
+167
+00:08:18,826 --> 00:08:21,466
 One thing we found is that
 you can't get smooth scrolling
 
-00:08:21.886 --> 00:08:24.226 A:middle
+
+168
+00:08:21,886 --> 00:08:24,226
 by running complicated
 JavaScript on every frame
 
-00:08:24.516 --> 00:08:25.526 A:middle
+
+169
+00:08:24,516 --> 00:08:25,526
 of a scrolling effect.
 
-00:08:26.716 --> 00:08:28.386 A:middle
+
+170
+00:08:26,716 --> 00:08:28,386
 So we needed another
 way to do this.
 
-00:08:29.286 --> 00:08:31.216 A:middle
+
+171
+00:08:29,286 --> 00:08:31,216
 And that's scroll snap points.
 
-00:08:33.135 --> 00:08:36.046 A:middle
+
+172
+00:08:33,135 --> 00:08:36,046
 Scroll Snap Points are
 a way to declare in CSS,
 
-00:08:36.765 --> 00:08:40.806 A:middle
+
+173
+00:08:36,765 --> 00:08:40,806
 regions of scrolling that
 take over the animation
 
-00:08:40.806 --> 00:08:44.576 A:middle
+
+174
+00:08:40,806 --> 00:08:44,576
 of that scrolling curve, and
 this is also a CSS standard.
 
-00:08:47.636 --> 00:08:51.456 A:middle
+
+175
+00:08:47,636 --> 00:08:51,456
 So imagine we have a viewport
 of some kind, a box that we want
 
-00:08:51.456 --> 00:08:53.406 A:middle
+
+176
+00:08:51,456 --> 00:08:53,406
 to look at a series
 of album covers in.
 
-00:08:53.926 --> 00:08:57.026 A:middle
+
+177
+00:08:53,926 --> 00:08:57,026
 And so in this image, I
 have the album covers kind
 
-00:08:57.176 --> 00:08:58.566 A:middle
+
+178
+00:08:57,176 --> 00:08:58,566
 of dim and off-screen.
 
-00:08:58.966 --> 00:09:02.286 A:middle
+
+179
+00:08:58,966 --> 00:09:02,286
 But I want to cycle
 through them one at a time.
 
 
-
-00:08:58.966 --> 00:09:02.286 A:middle
-But I want to cycle
-through them one at a time.
-
-00:09:02.806 --> 00:09:04.956 A:middle
+180
+00:09:02,806 --> 00:09:04,956
 And let's say that I know
 that they have a thick size,
 
-00:09:04.956 --> 00:09:06.576 A:middle
+
+181
+00:09:04,956 --> 00:09:06,576
 they are all 300
 pixels, for example.
 
-00:09:07.246 --> 00:09:11.076 A:middle
+
+182
+00:09:07,246 --> 00:09:11,076
 Every time I swipe on this
 content, I would want the scroll
 
-00:09:11.076 --> 00:09:14.706 A:middle
+
+183
+00:09:11,076 --> 00:09:14,706
 to take me across, one
 entire album cover.
 
-00:09:18.816 --> 00:09:20.826 A:middle
+
+184
+00:09:18,816 --> 00:09:20,826
 And we can specify this behavior
 
-00:09:21.176 --> 00:09:23.506 A:middle
+
+185
+00:09:21,176 --> 00:09:23,506
 in Scroll Snap Points using
 the Scroll Snap Points
 
-00:09:23.906 --> 00:09:25.806 A:middle
+
+186
+00:09:23,906 --> 00:09:25,806
 x declaration.
 
-00:09:26.496 --> 00:09:28.806 A:middle
+
+187
+00:09:26,496 --> 00:09:28,806
 And we tell it that we want
 it to be marching along
 
-00:09:28.806 --> 00:09:31.956 A:middle
+
+188
+00:09:28,806 --> 00:09:31,956
 in a 300-pixel interval
 using the repeat function,
 
-00:09:31.956 --> 00:09:33.516 A:middle
+
+189
+00:09:31,956 --> 00:09:33,516
 with a 300-pixel argument.
 
-00:09:34.316 --> 00:09:37.456 A:middle
+
+190
+00:09:34,316 --> 00:09:37,456
 And this animation shows
 kind of how this looks.
 
-00:09:37.456 --> 00:09:39.856 A:middle
+
+191
+00:09:37,456 --> 00:09:39,856
 I make a gesture to swipe
 through these images,
 
-00:09:40.676 --> 00:09:42.656 A:middle
+
+192
+00:09:40,676 --> 00:09:42,656
 we travel across
 some number of them,
 
-00:09:42.656 --> 00:09:45.496 A:middle
+
+193
+00:09:42,656 --> 00:09:45,496
 depending on how strong my
 gesture is, but as we --
 
-00:09:45.766 --> 00:09:49.066 A:middle
+
+194
+00:09:45,766 --> 00:09:49,066
 as the momentum slows us
 down, and we come to a stop,
 
-00:09:49.066 --> 00:09:52.536 A:middle
+
+195
+00:09:49,066 --> 00:09:52,536
 we always land on a
 clean album boundary.
 
-00:09:52.536 --> 00:09:59.896 A:middle
+
+196
+00:09:52,536 --> 00:09:59,896
 Now, in source code, that
 effect requires two lines.
 
 
-
-00:10:00.836 --> 00:10:04.106 A:middle
+197
+00:10:00,836 --> 00:10:04,106
 We turn the feature on using
 the Scroll Snap Type mandatory,
 
-00:10:04.806 --> 00:10:09.006 A:middle
+
+198
+00:10:04,806 --> 00:10:09,006
 and then we specify the
 repeat 300 pixel declaration.
 
-00:10:11.366 --> 00:10:13.906 A:middle
+
+199
+00:10:11,366 --> 00:10:13,906
 So I did a capture
 on a live site.
 
-00:10:13.906 --> 00:10:17.916 A:middle
+
+200
+00:10:13,906 --> 00:10:17,916
 You can see that as I'm swiping
 across these, you get movement.
 
-00:10:17.916 --> 00:10:21.836 A:middle
+
+201
+00:10:17,916 --> 00:10:21,836
 And if I slightly pull off and
 let go, the system scrolls back
 
-00:10:21.966 --> 00:10:23.236 A:middle
+
+202
+00:10:21,966 --> 00:10:23,236
 to the nearest scroll
 snap point.
 
-00:10:23.316 --> 00:10:25.646 A:middle
+
+203
+00:10:23,316 --> 00:10:25,646
 So, like, they're rubber
 banding back to that position.
 
-00:10:26.016 --> 00:10:30.576 A:middle
+
+204
+00:10:26,016 --> 00:10:30,576
 And you've probably already
 figured this out from the name,
 
-00:10:30.876 --> 00:10:33.646 A:middle
+
+205
+00:10:30,876 --> 00:10:33,646
 but scroll snap points work
 in both dimensions, x and y.
 
-00:10:33.736 --> 00:10:38.426 A:middle
+
+206
+00:10:33,736 --> 00:10:38,426
 So what I have shown you
 
-00:10:38.426 --> 00:10:41.356 A:middle
+
+207
+00:10:38,426 --> 00:10:41,356
 so far would already be
 a pretty neat feature
 
-00:10:41.556 --> 00:10:45.516 A:middle
+
+208
+00:10:41,556 --> 00:10:45,516
 but it doesn't handle the case
 of varying sizes of content
 
-00:10:45.516 --> 00:10:46.526 A:middle
+
+209
+00:10:45,516 --> 00:10:46,526
 in the scroll container.
 
-00:10:47.666 --> 00:10:50.076 A:middle
+
+210
+00:10:47,666 --> 00:10:50,076
 And so here, where I have
 non-uniform elements,
 
-00:10:50.076 --> 00:10:52.616 A:middle
+
+211
+00:10:50,076 --> 00:10:52,616
 even though I might
 have a 300 pixel square,
 
-00:10:52.996 --> 00:10:54.496 A:middle
+
+212
+00:10:52,996 --> 00:10:54,496
 I also have a rectangular unit.
 
-00:10:55.006 --> 00:10:59.706 A:middle
+
+213
+00:10:55,006 --> 00:10:59,706
 That rectangular image
 or content will not fit
 
-00:10:59.706 --> 00:11:01.206 A:middle
+
+214
+00:10:59,706 --> 00:11:01,206
 in that 300 pixel boundary.
 
 
-
-00:10:59.706 --> 00:11:01.206 A:middle
-in that 300 pixel boundary.
-
-00:11:01.206 --> 00:11:02.666 A:middle
+215
+00:11:01,206 --> 00:11:02,666
 And so if I attempt
 to do a scroll
 
-00:11:02.666 --> 00:11:05.156 A:middle
+
+216
+00:11:02,666 --> 00:11:05,156
 with that set content,
 it won't look right.
 
-00:11:06.176 --> 00:11:11.176 A:middle
+
+217
+00:11:06,176 --> 00:11:11,176
 And so scroll snap has a
 way of dealing with this.
 
-00:11:11.386 --> 00:11:14.736 A:middle
+
+218
+00:11:11,386 --> 00:11:14,736
 If we take the scroll container
 as this white box behind me,
 
-00:11:15.766 --> 00:11:17.986 A:middle
+
+219
+00:11:15,766 --> 00:11:17,986
 there's something called
 the scroll snap destination
 
-00:11:18.196 --> 00:11:22.546 A:middle
+
+220
+00:11:18,196 --> 00:11:22,546
 and that's a position that
 we will align our elements
 
-00:11:22.596 --> 00:11:23.396 A:middle
+
+221
+00:11:22,596 --> 00:11:23,396
 when scrolling.
 
-00:11:23.946 --> 00:11:25.576 A:middle
+
+222
+00:11:23,946 --> 00:11:25,576
 It defaults to the
 upper left corner
 
-00:11:25.756 --> 00:11:28.986 A:middle
+
+223
+00:11:25,756 --> 00:11:28,986
 but we can position it using
 standard CSS positioning syntax.
 
-00:11:29.496 --> 00:11:33.726 A:middle
+
+224
+00:11:29,496 --> 00:11:33,726
 The companion to the scroll
 snap destination is the scroll
 
-00:11:33.726 --> 00:11:34.606 A:middle
+
+225
+00:11:33,726 --> 00:11:34,606
 snap coordinate.
 
-00:11:36.736 --> 00:11:38.536 A:middle
+
+226
+00:11:36,736 --> 00:11:38,536
 These are positions on each
 
-00:11:38.536 --> 00:11:40.886 A:middle
+
+227
+00:11:38,536 --> 00:11:40,886
 of the elements inside
 the scrolling container.
 
-00:11:41.896 --> 00:11:43.806 A:middle
+
+228
+00:11:41,896 --> 00:11:43,806
 And they are also defaulted
 to the upper left corner.
 
-00:11:44.446 --> 00:11:46.106 A:middle
+
+229
+00:11:44,446 --> 00:11:46,106
 So we can tell the scroll --
 
-00:11:46.106 --> 00:11:49.456 A:middle
+
+230
+00:11:46,106 --> 00:11:49,456
 the WebKit that we want our
 scroll snap coordinates to be
 
-00:11:49.456 --> 00:11:52.226 A:middle
+
+231
+00:11:49,456 --> 00:11:52,226
 in the center of each
 element using this syntax,
 
-00:11:52.396 --> 00:11:54.536 A:middle
+
+232
+00:11:52,396 --> 00:11:54,536
 and we can say that
 we want the center
 
-00:11:54.896 --> 00:11:56.196 A:middle
+
+233
+00:11:54,896 --> 00:11:56,196
 of the scrolling container
 
-00:11:56.196 --> 00:11:58.126 A:middle
+
+234
+00:11:56,196 --> 00:11:58,126
 to be our target
 point, the destination.
 
-00:11:58.616 --> 00:12:00.346 A:middle
+
+235
+00:11:58,616 --> 00:12:00,346
 And when you put them together,
 
 
-
-00:11:58.616 --> 00:12:00.346 A:middle
-And when you put them together,
-
-00:12:00.956 --> 00:12:04.226 A:middle
+236
+00:12:00,956 --> 00:12:04,226
 when you perform a scroll
 gesture, we land on a clean,
 
-00:12:04.596 --> 00:12:07.136 A:middle
+
+237
+00:12:04,596 --> 00:12:07,136
 centered point on that box.
 
-00:12:08.186 --> 00:12:12.596 A:middle
+
+238
+00:12:08,186 --> 00:12:12,596
 And the code for that is no
 more complicated than it was
 
-00:12:12.596 --> 00:12:14.346 A:middle
+
+239
+00:12:12,596 --> 00:12:14,346
 for the simple repeating
 pixel case.
 
-00:12:14.756 --> 00:12:16.926 A:middle
+
+240
+00:12:14,756 --> 00:12:16,926
 We turn the feature
 on, on the container,
 
-00:12:16.926 --> 00:12:18.816 A:middle
+
+241
+00:12:16,926 --> 00:12:18,816
 the scrolling container,
 with mandatory,
 
-00:12:19.496 --> 00:12:21.926 A:middle
+
+242
+00:12:19,496 --> 00:12:21,926
 and we position the
 destination in the center
 
-00:12:21.926 --> 00:12:22.976 A:middle
+
+243
+00:12:21,926 --> 00:12:22,976
 of the scrolling container.
 
-00:12:23.516 --> 00:12:26.216 A:middle
+
+244
+00:12:23,516 --> 00:12:26,216
 And then we position
 the coordinate
 
-00:12:26.216 --> 00:12:27.226 A:middle
+
+245
+00:12:26,216 --> 00:12:27,226
 on each of the elements.
 
-00:12:27.226 --> 00:12:29.126 A:middle
+
+246
+00:12:27,226 --> 00:12:29,126
 And I created a class,
 'photograph,' here, but,
 
-00:12:29.126 --> 00:12:30.426 A:middle
+
+247
+00:12:29,126 --> 00:12:30,426
 you know, you can do
 whatever you want,
 
-00:12:30.766 --> 00:12:32.316 A:middle
+
+248
+00:12:30,766 --> 00:12:32,316
 and position that in the center.
 
-00:12:33.816 --> 00:12:36.966 A:middle
+
+249
+00:12:33,816 --> 00:12:36,966
 And so this is a capture of what
 that looks like on a website.
 
-00:12:37.196 --> 00:12:41.626 A:middle
+
+250
+00:12:37,196 --> 00:12:41,626
 And so with a series of images,
 as I scroll through them,
 
-00:12:41.626 --> 00:12:43.506 A:middle
+
+251
+00:12:41,626 --> 00:12:43,506
 we always land with
 something in the middle.
 
-00:12:44.066 --> 00:12:49.156 A:middle
+
+252
+00:12:44,066 --> 00:12:49,156
 And with an example, with a
 demonstration of how this looks
 
-00:12:49.156 --> 00:12:50.756 A:middle
+
+253
+00:12:49,156 --> 00:12:50,756
 in practice, I will invite Chris
 
-00:12:50.756 --> 00:12:53.796 A:middle
+
+254
+00:12:50,756 --> 00:12:53,796
 up to give you an
 amazing example of this.
 
-00:12:54.516 --> 00:12:59.166 A:middle
+
+255
+00:12:54,516 --> 00:12:59,166
 [Applause]
 
-00:12:59.666 --> 00:13:00.396 A:middle
-&gt;&gt; CHRIS YOUNG-ZAWADA:
+
+256
+00:12:59,666 --> 00:13:00,396
+>> CHRIS YOUNG-ZAWADA:
 Thanks, Brent.
 
 
-
-00:12:59.666 --> 00:13:00.396 A:middle
-&gt;&gt; CHRIS YOUNG-ZAWADA:
-Thanks, Brent.
-
-00:13:00.866 --> 00:13:03.006 A:middle
+257
+00:13:00,866 --> 00:13:03,006
 My name is Chris
 Young-Zawada and I'm a developer
 
-00:13:03.006 --> 00:13:04.166 A:middle
+
+258
+00:13:03,006 --> 00:13:04,166
 on Apple's Interactive team.
 
-00:13:04.616 --> 00:13:06.286 A:middle
+
+259
+00:13:04,616 --> 00:13:06,286
 The interactive team at
 Apple does a lot of work
 
-00:13:06.286 --> 00:13:07.376 A:middle
+
+260
+00:13:06,286 --> 00:13:07,376
 around the company, and one
 
-00:13:07.376 --> 00:13:09.226 A:middle
+
+261
+00:13:07,376 --> 00:13:09,226
 of the things we do is
 we're responsible for a lot
 
-00:13:09.226 --> 00:13:10.866 A:middle
+
+262
+00:13:09,226 --> 00:13:10,866
 of the web content
 you see on Apple.com.
 
-00:13:11.256 --> 00:13:13.836 A:middle
+
+263
+00:13:11,256 --> 00:13:13,836
 So I'm super excited to be here
 today because I feel like a lot
 
-00:13:13.836 --> 00:13:15.566 A:middle
+
+264
+00:13:13,836 --> 00:13:15,566
 of the features that Brent
 has been showing off are going
 
-00:13:15.566 --> 00:13:16.906 A:middle
+
+265
+00:13:15,566 --> 00:13:16,906
 to be really great
 for web developers
 
-00:13:16.906 --> 00:13:18.296 A:middle
+
+266
+00:13:16,906 --> 00:13:18,296
 and I'm really excited
 to use them myself.
 
-00:13:19.376 --> 00:13:24.916 A:middle
+
+267
+00:13:19,376 --> 00:13:24,916
 So to get started what we put
 together is a little web app
 
-00:13:24.916 --> 00:13:27.316 A:middle
+
+268
+00:13:24,916 --> 00:13:27,316
 here that shows off some of
 these new features in WebKit.
 
-00:13:27.936 --> 00:13:30.396 A:middle
+
+269
+00:13:27,936 --> 00:13:30,396
 And we have a photo
 gallery laid out here
 
-00:13:30.396 --> 00:13:31.566 A:middle
+
+270
+00:13:30,396 --> 00:13:31,566
 that we can scroll up and down.
 
-00:13:31.876 --> 00:13:32.526 A:middle
+
+271
+00:13:31,876 --> 00:13:32,526
 And you can see that some
 
-00:13:32.526 --> 00:13:34.226 A:middle
+
+272
+00:13:32,526 --> 00:13:34,226
 of the photos are
 different sizes than others.
 
-00:13:34.546 --> 00:13:37.166 A:middle
+
+273
+00:13:34,546 --> 00:13:37,166
 We can hover over one, and
 when we click to open it,
 
-00:13:37.166 --> 00:13:39.866 A:middle
+
+274
+00:13:37,166 --> 00:13:39,866
 it will open in this overlay
 view, where we are able
 
-00:13:39.866 --> 00:13:43.516 A:middle
+
+275
+00:13:39,866 --> 00:13:43,516
 to scroll between the photos,
 by going left and right,
 
-00:13:43.866 --> 00:13:45.266 A:middle
+
+276
+00:13:43,866 --> 00:13:45,266
 and we can even choose
 our favorites
 
-00:13:45.266 --> 00:13:46.366 A:middle
+
+277
+00:13:45,266 --> 00:13:46,366
 in the top right
 by clicking here.
 
-00:13:47.656 --> 00:13:48.416 A:middle
+
+278
+00:13:47,656 --> 00:13:48,416
 Now this is pretty cool,
 
-00:13:48.416 --> 00:13:50.226 A:middle
+
+279
+00:13:48,416 --> 00:13:50,226
 but I feel like we could make
 it a lot better using some
 
-00:13:50.226 --> 00:13:51.316 A:middle
+
+280
+00:13:50,226 --> 00:13:51,316
 of the new features in Webkit.
 
-00:13:51.316 --> 00:13:54.496 A:middle
+
+281
+00:13:51,316 --> 00:13:54,496
 So, to get started, I want
 to focus on backdrop filters.
 
-00:13:55.326 --> 00:13:58.016 A:middle
+
+282
+00:13:55,326 --> 00:13:58,016
 If you notice at the top
 of the application here,
 
-00:13:58.016 --> 00:13:59.586 A:middle
+
+283
+00:13:58,016 --> 00:13:59,586
 we have this fixed
 navigation element
 
-00:13:59.996 --> 00:14:02.166 A:middle
+
+284
+00:13:59,996 --> 00:14:02,166
 and right now it's just
 a solid black color
 
 
-
-00:13:59.996 --> 00:14:02.166 A:middle
-and right now it's just
-a solid black color
-
-00:14:02.166 --> 00:14:03.206 A:middle
+285
+00:14:02,166 --> 00:14:03,206
 and it's fixed at the top.
 
-00:14:03.636 --> 00:14:06.846 A:middle
+
+286
+00:14:03,636 --> 00:14:06,846
 As we scroll up and down, the
 content goes underneath it
 
-00:14:07.146 --> 00:14:10.356 A:middle
+
+287
+00:14:07,146 --> 00:14:10,356
 and then goes into the Safari
 tool bar where it gets blurred.
 
-00:14:10.496 --> 00:14:11.176 A:middle
+
+288
+00:14:10,496 --> 00:14:11,176
 That's pretty cool
 
-00:14:11.176 --> 00:14:13.456 A:middle
+
+289
+00:14:11,176 --> 00:14:13,456
 but we actually can make
 it a lot more cohesive
 
-00:14:13.456 --> 00:14:15.896 A:middle
+
+290
+00:14:13,456 --> 00:14:15,896
 by adding a backdrop filter to
 this element and making it feel
 
-00:14:15.896 --> 00:14:17.346 A:middle
+
+291
+00:14:15,896 --> 00:14:17,346
 like it's much more
 part of the UI.
 
-00:14:17.346 --> 00:14:20.166 A:middle
+
+292
+00:14:17,346 --> 00:14:20,166
 So I'm going to show
 you how to do that.
 
-00:14:20.306 --> 00:14:22.386 A:middle
+
+293
+00:14:20,306 --> 00:14:22,386
 Just so you guys know, I like
 to use spaces a lot when I code,
 
-00:14:22.386 --> 00:14:24.986 A:middle
+
+294
+00:14:22,386 --> 00:14:24,986
 so I'm going to jump between
 the UI here and the code,
 
-00:14:24.986 --> 00:14:28.676 A:middle
+
+295
+00:14:24,986 --> 00:14:28,676
 back and forth, quite a bit.
 
-00:14:28.886 --> 00:14:31.396 A:middle
+
+296
+00:14:28,886 --> 00:14:31,396
 Cool. So right now, I'm in
 Xcode and I'm in a CSS file
 
-00:14:31.396 --> 00:14:33.286 A:middle
+
+297
+00:14:31,396 --> 00:14:33,286
 that we are going to start
 appending some new code to.
 
-00:14:33.286 --> 00:14:36.516 A:middle
+
+298
+00:14:33,286 --> 00:14:36,516
 So to do that, I'm going
 to start, and I'm going
 
-00:14:36.516 --> 00:14:39.626 A:middle
+
+299
+00:14:36,516 --> 00:14:39,626
 to paste a new navigation
 declaration here
 
-00:14:39.626 --> 00:14:42.916 A:middle
+
+300
+00:14:39,626 --> 00:14:42,916
 which is targeting that
 solid black navigation bar,
 
-00:14:43.226 --> 00:14:44.786 A:middle
+
+301
+00:14:43,226 --> 00:14:44,786
 and we are going to set
 the background color
 
-00:14:44.786 --> 00:14:47.786 A:middle
+
+302
+00:14:44,786 --> 00:14:47,786
 to be solid black
 with 50% opacity.
 
-00:14:48.506 --> 00:14:49.946 A:middle
+
+303
+00:14:48,506 --> 00:14:49,946
 And then we are going
 to add a backdrop filter
 
-00:14:49.946 --> 00:14:50.886 A:middle
+
+304
+00:14:49,946 --> 00:14:50,886
 with 10 pixels of blur.
 
-00:14:51.476 --> 00:14:56.466 A:middle
+
+305
+00:14:51,476 --> 00:14:56,466
 If we go back, we can
 now see in just one line
 
-00:14:56.466 --> 00:14:59.246 A:middle
+
+306
+00:14:56,466 --> 00:14:59,246
 of code we have added
 this amazing new way
 
-00:14:59.246 --> 00:15:02.576 A:middle
+
+307
+00:14:59,246 --> 00:15:02,576
 to blur the content behind
 as you are scrolling.
 
 
-
-00:14:59.246 --> 00:15:02.576 A:middle
-to blur the content behind
-as you are scrolling.
-
-00:15:02.576 --> 00:15:04.206 A:middle
+308
+00:15:02,576 --> 00:15:04,206
 The text is still super clear
 
-00:15:04.206 --> 00:15:06.586 A:middle
+
+309
+00:15:04,206 --> 00:15:06,586
 and everything goes really
 nicely into the Safari toolbar.
 
-00:15:06.996 --> 00:15:08.126 A:middle
+
+310
+00:15:06,996 --> 00:15:08,126
 I think this is awesome.
 
-00:15:08.176 --> 00:15:12.976 A:middle
+
+311
+00:15:08,176 --> 00:15:12,976
 Like, this is fantastic work
 on the WebKit team, to do this.
 
-00:15:13.176 --> 00:15:14.336 A:middle
+
+312
+00:15:13,176 --> 00:15:14,336
 Awesome. So the next
 thing I want
 
-00:15:14.336 --> 00:15:17.056 A:middle
+
+313
+00:15:14,336 --> 00:15:17,056
 to show you guys is
 scroll snap points.
 
-00:15:17.436 --> 00:15:19.036 A:middle
+
+314
+00:15:17,436 --> 00:15:19,036
 And I think a really
 good candidate
 
-00:15:19.036 --> 00:15:21.226 A:middle
+
+315
+00:15:19,036 --> 00:15:21,226
 for Scroll Snap points
 is this overlay gallery.
 
-00:15:22.116 --> 00:15:24.626 A:middle
+
+316
+00:15:22,116 --> 00:15:24,626
 Remember, when we're
 scrolling this left and right,
 
-00:15:24.626 --> 00:15:27.826 A:middle
+
+317
+00:15:24,626 --> 00:15:27,826
 we can get left in places where
 we might see through the content
 
-00:15:27.826 --> 00:15:29.996 A:middle
+
+318
+00:15:27,826 --> 00:15:29,996
 and not exactly focus on
 what we're looking at here.
 
-00:15:30.906 --> 00:15:33.446 A:middle
+
+319
+00:15:30,906 --> 00:15:33,446
 This is okay, but we can
 definitely make it better
 
-00:15:33.446 --> 00:15:35.056 A:middle
+
+320
+00:15:33,446 --> 00:15:35,056
 and by focusing on the content
 
-00:15:35.056 --> 00:15:36.596 A:middle
+
+321
+00:15:35,056 --> 00:15:36,596
 with Scroll Snap Points we
 are always going to look
 
-00:15:36.596 --> 00:15:37.596 A:middle
+
+322
+00:15:36,596 --> 00:15:37,596
 at the photos we
 want to look at.
 
-00:15:38.456 --> 00:15:40.136 A:middle
+
+323
+00:15:38,456 --> 00:15:40,136
 So I'm going to show you
 how to do that as well.
 
-00:15:40.136 --> 00:15:42.876 A:middle
+
+324
+00:15:40,136 --> 00:15:42,876
 So if we go back to
 the CSS, we are going
 
-00:15:42.876 --> 00:15:45.926 A:middle
+
+325
+00:15:42,876 --> 00:15:45,926
 to add a new declaration
 on the overlay gallery
 
-00:15:45.926 --> 00:15:48.216 A:middle
+
+326
+00:15:45,926 --> 00:15:48,216
 where we are going to set the
 scroll snap type to mandatory
 
-00:15:48.696 --> 00:15:50.836 A:middle
+
+327
+00:15:48,696 --> 00:15:50,836
 and we are going to set
 Scroll Snap Points x to repeat
 
-00:15:50.836 --> 00:15:52.346 A:middle
+
+328
+00:15:50,836 --> 00:15:52,346
 at 100 viewport width.
 
-00:15:52.346 --> 00:15:53.696 A:middle
+
+329
+00:15:52,346 --> 00:15:53,696
 Each photo container
 is this size,
 
-00:15:53.696 --> 00:15:55.806 A:middle
+
+330
+00:15:53,696 --> 00:15:55,806
 so everything should fit
 really nicely when we go back
 
-00:15:55.806 --> 00:15:56.686 A:middle
+
+331
+00:15:55,806 --> 00:15:56,686
 and we scroll that element.
 
-00:15:57.516 --> 00:16:04.946 A:middle
+
+332
+00:15:57,516 --> 00:16:04,946
 If we refresh, we can now very
 cleanly go between the photos
 
 
-
-00:15:57.516 --> 00:16:04.946 A:middle
-If we refresh, we can now very
-cleanly go between the photos
-
-00:16:04.946 --> 00:16:06.686 A:middle
+333
+00:16:04,946 --> 00:16:06,686
 and WebKit has taken
 control of the scrolling.
 
-00:16:06.686 --> 00:16:08.996 A:middle
+
+334
+00:16:06,686 --> 00:16:08,996
 So you'll see that
 I can hit the edges
 
-00:16:08.996 --> 00:16:10.536 A:middle
+
+335
+00:16:08,996 --> 00:16:10,536
 and everything will
 bounce back into place.
 
-00:16:11.106 --> 00:16:12.056 A:middle
+
+336
+00:16:11,106 --> 00:16:12,056
 It's really nice.
 
-00:16:12.056 --> 00:16:14.536 A:middle
+
+337
+00:16:12,056 --> 00:16:14,536
 And as you guys know this would
 take a lot of JavaScript to do
 
-00:16:14.656 --> 00:16:17.326 A:middle
+
+338
+00:16:14,656 --> 00:16:17,326
 without this feature, so I can't
 wait to see what you guys do
 
-00:16:17.326 --> 00:16:19.016 A:middle
+
+339
+00:16:17,326 --> 00:16:19,016
 with it and I think it's
 going to be really great.
 
-00:16:19.946 --> 00:16:23.656 A:middle
+
+340
+00:16:19,946 --> 00:16:23,656
 Another thing that is
 popular, as you guys know,
 
-00:16:23.656 --> 00:16:25.956 A:middle
+
+341
+00:16:23,656 --> 00:16:25,956
 is you oftentimes will use
 JavaScript to append styles
 
-00:16:25.956 --> 00:16:28.966 A:middle
+
+342
+00:16:25,956 --> 00:16:28,966
 to elements and what would be
 a really interesting use-case
 
-00:16:28.966 --> 00:16:30.266 A:middle
+
+343
+00:16:28,966 --> 00:16:30,266
 for that would be
 on this overlay --
 
-00:16:30.366 --> 00:16:32.086 A:middle
+
+344
+00:16:30,366 --> 00:16:32,086
 on this masonry gallery here.
 
-00:16:32.086 --> 00:16:34.196 A:middle
+
+345
+00:16:32,086 --> 00:16:34,196
 As we are scrolling up and down,
 
-00:16:34.196 --> 00:16:36.496 A:middle
+
+346
+00:16:34,196 --> 00:16:36,496
 we actually generate
 this grid in JavaScript.
 
-00:16:36.496 --> 00:16:40.186 A:middle
+
+347
+00:16:36,496 --> 00:16:40,186
 So we can change how many cells
 we want on the x and y axis.
 
-00:16:40.666 --> 00:16:43.376 A:middle
+
+348
+00:16:40,666 --> 00:16:43,376
 So we don't really know ahead of
 time how tall each one is going
 
-00:16:43.376 --> 00:16:47.116 A:middle
+
+349
+00:16:43,376 --> 00:16:47,116
 to be but we can actually
 set a repeat value
 
-00:16:47.116 --> 00:16:48.956 A:middle
+
+350
+00:16:47,116 --> 00:16:48,956
 on Scroll Snap Points
 in JavaScript to make it
 
-00:16:48.956 --> 00:16:51.186 A:middle
+
+351
+00:16:48,956 --> 00:16:51,186
 so as we're scrolling
 this vertically,
 
-00:16:51.526 --> 00:16:53.586 A:middle
+
+352
+00:16:51,526 --> 00:16:53,586
 the nav bar will sit very
 nicely with these elements,
 
-00:16:53.586 --> 00:16:55.436 A:middle
+
+353
+00:16:53,586 --> 00:16:55,436
 so you are always focusing
 on what you are supposed to.
 
-00:16:56.376 --> 00:16:59.796 A:middle
+
+354
+00:16:56,376 --> 00:16:59,796
 So to do that, we are going to
 jump into the JavaScript, here,
 
 
-
-00:17:00.036 --> 00:17:01.646 A:middle
+355
+00:17:00,036 --> 00:17:01,646
 and this is a new JS file.
 
-00:17:02.176 --> 00:17:06.215 A:middle
+
+356
+00:17:02,176 --> 00:17:06,215
 And we are going to extend our
 masonry gallery constructor
 
-00:17:06.306 --> 00:17:07.826 A:middle
+
+357
+00:17:06,306 --> 00:17:07,826
 to a Snap Points
 masonry gallery.
 
-00:17:07.826 --> 00:17:10.136 A:middle
+
+358
+00:17:07,826 --> 00:17:10,136
 We are going to, and
 basically all we're going
 
-00:17:10.136 --> 00:17:11.846 A:middle
+
+359
+00:17:10,136 --> 00:17:11,846
 to do is we're going to add
 a new method called set snap
 
-00:17:11.886 --> 00:17:12.486 A:middle
+
+360
+00:17:11,886 --> 00:17:12,486
 point styles.
 
-00:17:13.076 --> 00:17:15.195 A:middle
+
+361
+00:17:13,076 --> 00:17:15,195
 What this will do is we will
 actually set the scroll snap
 
-00:17:15.246 --> 00:17:17.915 A:middle
+
+362
+00:17:15,246 --> 00:17:17,915
 type to mandatory, and it
 will set the snap points
 
-00:17:18.126 --> 00:17:22.506 A:middle
+
+363
+00:17:18,126 --> 00:17:22,506
 on the y axis to repeat as tall
 as each cell is in the y axis
 
-00:17:23.046 --> 00:17:25.776 A:middle
+
+364
+00:17:23,046 --> 00:17:25,776
 and this is a variable that we
 set inside of the constructor
 
-00:17:26.266 --> 00:17:27.945 A:middle
+
+365
+00:17:26,266 --> 00:17:27,945
 when we are running
 this on instantiation.
 
-00:17:29.126 --> 00:17:31.376 A:middle
+
+366
+00:17:29,126 --> 00:17:31,376
 The last thing we're going
 to do is we are going
 
-00:17:31.376 --> 00:17:33.816 A:middle
+
+367
+00:17:31,376 --> 00:17:33,816
 to tell our JS file to use this
 so, because we've extended it,
 
-00:17:33.816 --> 00:17:35.576 A:middle
+
+368
+00:17:33,816 --> 00:17:35,576
 we just have to put it
 here and use that instead
 
-00:17:35.576 --> 00:17:36.386 A:middle
+
+369
+00:17:35,576 --> 00:17:36,386
 of the masonry gallery.
 
-00:17:36.996 --> 00:17:39.616 A:middle
+
+370
+00:17:36,996 --> 00:17:39,616
 And now when we refresh,
 you'll notice
 
-00:17:39.656 --> 00:17:42.666 A:middle
+
+371
+00:17:39,656 --> 00:17:42,666
 that the nav bar sits very
 nicely with these elements
 
-00:17:42.986 --> 00:17:44.596 A:middle
+
+372
+00:17:42,986 --> 00:17:44,596
 and we can throw it
 and it will always land
 
-00:17:44.596 --> 00:17:48.476 A:middle
+
+373
+00:17:44,596 --> 00:17:48,476
 in a really nice place where
 it fits with the content.
 
-00:17:48.476 --> 00:17:50.496 A:middle
+
+374
+00:17:48,476 --> 00:17:50,496
 I think that's really
 great, and with that,
 
-00:17:50.496 --> 00:17:53.096 A:middle
+
+375
+00:17:50,496 --> 00:17:53,096
 I want to give it back to Brent,
 who is going to talk some more
 
-00:17:53.096 --> 00:17:53.796 A:middle
+
+376
+00:17:53,096 --> 00:17:53,796
 about layout and rendering.
 
-00:17:53.796 --> 00:17:53.976 A:middle
+
+377
+00:17:53,796 --> 00:17:53,976
 Thank you.
 
-00:17:54.516 --> 00:17:59.246 A:middle
+
+378
+00:17:54,516 --> 00:17:59,246
 [Applause]
 
-00:17:59.746 --> 00:18:00.066 A:middle
-&gt;&gt; BRENT FULGHAM: Thank you.
+
+379
+00:17:59,746 --> 00:18:00,066
+>> BRENT FULGHAM: Thank you.
 
 
-
-00:17:59.746 --> 00:18:00.066 A:middle
-&gt;&gt; BRENT FULGHAM: Thank you.
-
-00:18:00.066 --> 00:18:00.896 A:middle
+380
+00:18:00,066 --> 00:18:00,896
 That was amazing.
 
-00:18:02.686 --> 00:18:08.046 A:middle
+
+381
+00:18:02,686 --> 00:18:08,046
 So I just want to go
 over a couple of things
 
-00:18:08.046 --> 00:18:09.636 A:middle
+
+382
+00:18:08,046 --> 00:18:09,636
 about those features
 we just talked about.
 
-00:18:09.996 --> 00:18:11.886 A:middle
+
+383
+00:18:09,996 --> 00:18:11,886
 Backdrop filters
 are very efficient.
 
-00:18:11.886 --> 00:18:14.606 A:middle
+
+384
+00:18:11,886 --> 00:18:14,606
 They are hardware accelerated,
 but the rendering passes
 
-00:18:14.636 --> 00:18:18.046 A:middle
+
+385
+00:18:14,636 --> 00:18:18,046
 that it causes to
 trigger can be expensive.
 
-00:18:18.046 --> 00:18:20.156 A:middle
+
+386
+00:18:18,046 --> 00:18:20,156
 So we want to be
 careful to measure
 
-00:18:20.156 --> 00:18:22.126 A:middle
+
+387
+00:18:20,156 --> 00:18:22,126
 and see how things
 work on your own sites.
 
-00:18:22.606 --> 00:18:26.736 A:middle
+
+388
+00:18:22,606 --> 00:18:26,736
 Scroll Snap is great for page
 content, for tile content,
 
-00:18:27.036 --> 00:18:28.876 A:middle
+
+389
+00:18:27,036 --> 00:18:28,876
 but you want to be careful
 if you are doing any kind
 
-00:18:28.876 --> 00:18:30.096 A:middle
+
+390
+00:18:28,876 --> 00:18:30,096
 of programmatic scrolling
 
-00:18:30.436 --> 00:18:33.886 A:middle
+
+391
+00:18:30,436 --> 00:18:33,886
 because the two features will
 fight each other when trying
 
-00:18:33.886 --> 00:18:34.716 A:middle
+
+392
+00:18:33,886 --> 00:18:34,716
 to animate the scroll.
 
-00:18:34.876 --> 00:18:35.936 A:middle
+
+393
+00:18:34,876 --> 00:18:35,936
 So keep that in mind.
 
-00:18:36.466 --> 00:18:41.246 A:middle
+
+394
+00:18:36,466 --> 00:18:41,246
 And that wraps up the section on
 layout and rendering features.
 
-00:18:41.786 --> 00:18:44.986 A:middle
+
+395
+00:18:41,786 --> 00:18:44,986
 And now I would like to move
 on to some JavaScript updates
 
-00:18:45.026 --> 00:18:46.236 A:middle
+
+396
+00:18:45,026 --> 00:18:46,236
 that we worked on this year.
 
-00:18:46.886 --> 00:18:50.376 A:middle
+
+397
+00:18:46,886 --> 00:18:50,376
 The JavaScript ES6
 standard is fantastic
 
-00:18:50.726 --> 00:18:53.146 A:middle
+
+398
+00:18:50,726 --> 00:18:53,146
 and is moving JavaScript
 forward in a number
 
-00:18:53.146 --> 00:18:56.776 A:middle
+
+399
+00:18:53,146 --> 00:18:56,776
 of exciting new ways, and Chris
 alluded to some in his demo.
 
-00:18:56.776 --> 00:19:00.866 A:middle
+
+400
+00:18:56,776 --> 00:19:00,866
 I want to talk for
 a moment about a few
 
 
-
-00:18:56.776 --> 00:19:00.866 A:middle
-I want to talk for
-a moment about a few
-
-00:19:00.866 --> 00:19:03.956 A:middle
+401
+00:19:00,866 --> 00:19:03,956
 of the exciting features that
 we put together this year.
 
-00:19:05.186 --> 00:19:07.316 A:middle
+
+402
+00:19:05,186 --> 00:19:07,316
 Last year, in our session,
 we talked about a number
 
-00:19:07.316 --> 00:19:08.496 A:middle
+
+403
+00:19:07,316 --> 00:19:08,496
 of features that were added
 
-00:19:09.036 --> 00:19:10.626 A:middle
+
+404
+00:19:09,036 --> 00:19:10,626
 and we haven't been
 sitting around since then.
 
-00:19:10.626 --> 00:19:13.816 A:middle
+
+405
+00:19:10,626 --> 00:19:13,816
 We have expanded the ES6
 support tremendously this year
 
-00:19:14.256 --> 00:19:17.336 A:middle
+
+406
+00:19:14,256 --> 00:19:17,336
 with a lot of stuff, symbol
 objects, object out of sign,
 
-00:19:17.436 --> 00:19:20.426 A:middle
+
+407
+00:19:17,436 --> 00:19:20,426
 weak sets, but I am just going
 to touch on a couple of things
 
-00:19:20.426 --> 00:19:21.846 A:middle
+
+408
+00:19:20,426 --> 00:19:21,846
 that I think are
 really, really useful.
 
-00:19:22.406 --> 00:19:25.026 A:middle
+
+409
+00:19:22,406 --> 00:19:25,026
 Let's start with my favorite.
 
-00:19:25.886 --> 00:19:26.726 A:middle
+
+410
+00:19:25,886 --> 00:19:26,726
 Template Literals.
 
-00:19:27.426 --> 00:19:30.686 A:middle
+
+411
+00:19:27,426 --> 00:19:30,686
 Now how many times have
 you run into this problem
 
-00:19:30.686 --> 00:19:31.996 A:middle
+
+412
+00:19:30,686 --> 00:19:31,996
 where you have a set of --
 
-00:19:32.386 --> 00:19:34.186 A:middle
+
+413
+00:19:32,386 --> 00:19:34,186
 you are trying to
 build a logging string
 
-00:19:34.186 --> 00:19:36.686 A:middle
+
+414
+00:19:34,186 --> 00:19:36,686
 or produce something for a
 user, and you have a bunch
 
-00:19:36.686 --> 00:19:38.026 A:middle
+
+415
+00:19:36,686 --> 00:19:38,026
 of string chunks that you want
 
-00:19:38.026 --> 00:19:39.996 A:middle
+
+416
+00:19:38,026 --> 00:19:39,996
 to concatenate together,
 and some objects.
 
-00:19:40.226 --> 00:19:42.886 A:middle
+
+417
+00:19:40,226 --> 00:19:42,886
 And so you end up with something
 like this old syntax example.
 
-00:19:43.396 --> 00:19:46.506 A:middle
+
+418
+00:19:43,396 --> 00:19:46,506
 And I have spent more time
 than I care to admit looking
 
-00:19:46.506 --> 00:19:48.386 A:middle
+
+419
+00:19:46,506 --> 00:19:48,386
 for the missing concatenating
 operator
 
-00:19:48.386 --> 00:19:50.646 A:middle
+
+420
+00:19:48,386 --> 00:19:50,646
 or the closing quote
 sign that I forgot about.
 
-00:19:51.506 --> 00:19:53.176 A:middle
+
+421
+00:19:51,506 --> 00:19:53,176
 And so I was super excited
 
-00:19:53.476 --> 00:19:56.386 A:middle
+
+422
+00:19:53,476 --> 00:19:56,386
 when ES6 introduced this
 new template literal syntax,
 
-00:19:57.126 --> 00:20:00.486 A:middle
+
+423
+00:19:57,126 --> 00:20:00,486
 where we create strings,
 special strings,
 
 
-
-00:19:57.126 --> 00:20:00.486 A:middle
-where we create strings,
-special strings,
-
-00:20:00.526 --> 00:20:02.926 A:middle
+424
+00:20:00,526 --> 00:20:02,926
 using the backtick
 character instead
 
-00:20:02.926 --> 00:20:03.946 A:middle
+
+425
+00:20:02,926 --> 00:20:03,946
 of a regular quote string.
 
-00:20:04.056 --> 00:20:07.266 A:middle
+
+426
+00:20:04,056 --> 00:20:07,266
 And when we do that,
 anything inside of the string
 
-00:20:07.726 --> 00:20:11.306 A:middle
+
+427
+00:20:07,726 --> 00:20:11,306
 that is escaped with this dollar
 sign curly brace syntax gets
 
-00:20:11.306 --> 00:20:13.826 A:middle
+
+428
+00:20:11,306 --> 00:20:13,826
 converted into string
 representation automatically.
 
-00:20:14.406 --> 00:20:18.046 A:middle
+
+429
+00:20:14,406 --> 00:20:18,046
 And you can even do operations
 inside the syntax, like,
 
-00:20:18.326 --> 00:20:19.876 A:middle
+
+430
+00:20:18,326 --> 00:20:19,876
 here I'm adding two
 numbers together.
 
-00:20:20.186 --> 00:20:22.966 A:middle
+
+431
+00:20:20,186 --> 00:20:22,966
 And so both of these
 give us the same output,
 
-00:20:23.396 --> 00:20:26.936 A:middle
+
+432
+00:20:23,396 --> 00:20:26,936
 but I find that the second
 one is so much easier to read,
 
-00:20:27.266 --> 00:20:29.356 A:middle
+
+433
+00:20:27,266 --> 00:20:29,356
 and I have jumped
 wholeheartedly into this.
 
-00:20:29.356 --> 00:20:31.666 A:middle
+
+434
+00:20:29,356 --> 00:20:31,666
 Everything I write is
 in this syntax now.
 
-00:20:31.796 --> 00:20:35.036 A:middle
+
+435
+00:20:31,796 --> 00:20:35,036
 I love it!
 
-00:20:35.296 --> 00:20:39.586 A:middle
+
+436
+00:20:35,296 --> 00:20:39,586
 Another neat shorthand that was
 introduced this year is related
 
-00:20:39.586 --> 00:20:41.056 A:middle
+
+437
+00:20:39,586 --> 00:20:41,056
 to object literal creation.
 
-00:20:41.396 --> 00:20:43.576 A:middle
+
+438
+00:20:41,396 --> 00:20:43,576
 So you often have a
 situation like this,
 
-00:20:43.576 --> 00:20:46.536 A:middle
+
+439
+00:20:43,576 --> 00:20:46,536
 where we have a generator
 function of some kind with a set
 
-00:20:46.536 --> 00:20:48.146 A:middle
+
+440
+00:20:46,536 --> 00:20:48,146
 of argument names
 that we want to use.
 
-00:20:48.756 --> 00:20:51.756 A:middle
+
+441
+00:20:48,756 --> 00:20:51,756
 And often those argument names
 are actually the names we want
 
-00:20:51.756 --> 00:20:54.316 A:middle
+
+442
+00:20:51,756 --> 00:20:54,316
 to use for the new object
 literals that we're creating
 
-00:20:54.546 --> 00:20:58.306 A:middle
+
+443
+00:20:54,546 --> 00:20:58,306
 and so you send up with a silly
 repetition of name, colon, name,
 
-00:20:58.306 --> 00:21:00.076 A:middle
+
+444
+00:20:58,306 --> 00:21:00,076
 and category, colon, category.
 
 
-
-00:20:58.306 --> 00:21:00.076 A:middle
-and category, colon, category.
-
-00:21:00.336 --> 00:21:02.216 A:middle
+445
+00:21:00,336 --> 00:21:02,216
 And that's such a common idiom
 
-00:21:02.666 --> 00:21:05.946 A:middle
+
+446
+00:21:02,666 --> 00:21:05,946
 that the ES6 designers
 introduced a shorthand for this,
 
-00:21:06.866 --> 00:21:10.006 A:middle
+
+447
+00:21:06,866 --> 00:21:10,006
 where you can create an
 object literal with variables
 
-00:21:10.146 --> 00:21:12.986 A:middle
+
+448
+00:21:10,146 --> 00:21:12,986
 and if you don't supply the
 property names it will just use
 
-00:21:12.986 --> 00:21:15.166 A:middle
+
+449
+00:21:12,986 --> 00:21:15,166
 the names of the values that
 you are supplying to it.
 
-00:21:15.636 --> 00:21:18.686 A:middle
+
+450
+00:21:15,636 --> 00:21:18,686
 We were able to get rid of
 a couple of hundred cases
 
-00:21:18.686 --> 00:21:21.386 A:middle
+
+451
+00:21:18,686 --> 00:21:21,386
 of this kind of duplication
 in the web inspector,
 
-00:21:22.136 --> 00:21:24.286 A:middle
+
+452
+00:21:22,136 --> 00:21:24,286
 and found that to
 be quite useful.
 
-00:21:24.286 --> 00:21:26.086 A:middle
+
+453
+00:21:24,286 --> 00:21:26,086
 And I'm sure that if you
 look into your own code,
 
-00:21:26.086 --> 00:21:28.326 A:middle
+
+454
+00:21:26,086 --> 00:21:28,326
 you will find plenty of
 cases where this is helpful.
 
-00:21:28.906 --> 00:21:34.856 A:middle
+
+455
+00:21:28,906 --> 00:21:34,856
 Now, JavaScript has always had
 strong object-oriented software
 
-00:21:34.856 --> 00:21:38.556 A:middle
+
+456
+00:21:34,856 --> 00:21:38,556
 design features but it's
 prototype based syntax has
 
-00:21:38.556 --> 00:21:43.106 A:middle
+
+457
+00:21:38,556 --> 00:21:43,106
 seemed, has been somewhat less
 accessible for people coming
 
-00:21:43.106 --> 00:21:45.746 A:middle
+
+458
+00:21:43,106 --> 00:21:45,746
 to JavaScript from
 languages like Swift or C++
 
-00:21:45.746 --> 00:21:48.486 A:middle
+
+459
+00:21:45,746 --> 00:21:48,486
 or other class-based
 syntax languages.
 
-00:21:49.226 --> 00:21:52.466 A:middle
+
+460
+00:21:49,226 --> 00:21:52,466
 So here I have a simple example
 of a polygon class written
 
-00:21:52.606 --> 00:21:54.316 A:middle
+
+461
+00:21:52,606 --> 00:21:54,316
 in the standard prototype
 syntax.
 
-00:21:55.016 --> 00:21:59.996 A:middle
+
+462
+00:21:55,016 --> 00:21:59,996
 But in ES6, a new syntax has
 been introduced, an object,
 
-00:21:59.996 --> 00:22:03.456 A:middle
+
+463
+00:21:59,996 --> 00:22:03,456
 a class-based syntax that
 looks very familiar to anyone
 
 
-
-00:21:59.996 --> 00:22:03.456 A:middle
-a class-based syntax that
-looks very familiar to anyone
-
-00:22:03.456 --> 00:22:07.816 A:middle
+464
+00:22:03,456 --> 00:22:07,816
 who comes from a language like
 C++ or swift, and allows us
 
-00:22:07.816 --> 00:22:09.466 A:middle
+
+465
+00:22:07,816 --> 00:22:09,466
 to encapsulate everything
 together.
 
-00:22:09.786 --> 00:22:12.376 A:middle
+
+466
+00:22:09,786 --> 00:22:12,376
 It's so much easier to
 read and easier to see
 
-00:22:12.376 --> 00:22:13.826 A:middle
+
+467
+00:22:12,376 --> 00:22:13,826
 where things relate
 to each other.
 
-00:22:15.086 --> 00:22:19.316 A:middle
+
+468
+00:22:15,086 --> 00:22:19,316
 The class syntax includes a
 special function, a constructor,
 
-00:22:19.766 --> 00:22:22.246 A:middle
+
+469
+00:22:19,766 --> 00:22:22,246
 that handles the object
 initialization for us,
 
-00:22:22.956 --> 00:22:24.896 A:middle
+
+470
+00:22:22,956 --> 00:22:24,896
 and we can define
 methods in the class
 
-00:22:24.986 --> 00:22:26.406 A:middle
+
+471
+00:22:24,986 --> 00:22:26,406
 that are part of the object.
 
-00:22:26.856 --> 00:22:29.736 A:middle
+
+472
+00:22:26,856 --> 00:22:29,736
 And it supports inheritance.
 
-00:22:29.736 --> 00:22:32.306 A:middle
+
+473
+00:22:29,736 --> 00:22:32,306
 So we can inherit using
 the extends keyword
 
-00:22:32.306 --> 00:22:33.456 A:middle
+
+474
+00:22:32,306 --> 00:22:33,456
 from existing objects.
 
-00:22:34.476 --> 00:22:36.326 A:middle
+
+475
+00:22:34,476 --> 00:22:36,326
 When we inherit, we
 want to make sure
 
-00:22:36.326 --> 00:22:39.676 A:middle
+
+476
+00:22:36,326 --> 00:22:39,676
 that we initialize the parent
 class using the super operator.
 
-00:22:41.016 --> 00:22:43.096 A:middle
+
+477
+00:22:41,016 --> 00:22:43,096
 We can override methods
 like you would expect
 
-00:22:43.096 --> 00:22:44.926 A:middle
+
+478
+00:22:43,096 --> 00:22:44,926
 from other object-oriented
 languages,
 
-00:22:45.286 --> 00:22:47.616 A:middle
+
+479
+00:22:45,286 --> 00:22:47,616
 and it even supports
 static methods now,
 
-00:22:47.616 --> 00:22:50.246 A:middle
+
+480
+00:22:47,616 --> 00:22:50,246
 so you can define
 methods on the class
 
-00:22:50.246 --> 00:22:53.566 A:middle
+
+481
+00:22:50,246 --> 00:22:53,566
 that you don't need a specific
 instance of the object to use.
 
-00:22:54.656 --> 00:22:59.386 A:middle
+
+482
+00:22:54,656 --> 00:22:59,386
 And finally, this new class
 syntax is completely compatible
 
-00:22:59.656 --> 00:23:01.546 A:middle
+
+483
+00:22:59,656 --> 00:23:01,546
 with the existing
 prototype-based syntax.
 
 
-
-00:22:59.656 --> 00:23:01.546 A:middle
-with the existing
-prototype-based syntax.
-
-00:23:01.546 --> 00:23:05.576 A:middle
+484
+00:23:01,546 --> 00:23:05,576
 So you can immediately start
 extending prototype-based code
 
-00:23:05.706 --> 00:23:08.156 A:middle
+
+485
+00:23:05,706 --> 00:23:08,156
 using this new syntax without
 having to rewrite anything.
 
-00:23:08.376 --> 00:23:11.206 A:middle
+
+486
+00:23:08,376 --> 00:23:11,206
 I think that's a huge
 advantage and it's something
 
-00:23:11.206 --> 00:23:12.546 A:middle
+
+487
+00:23:11,206 --> 00:23:12,546
 that you can start
 using right away.
 
-00:23:14.206 --> 00:23:18.846 A:middle
+
+488
+00:23:14,206 --> 00:23:18,846
 So that was the brief overview
 of some JavaScript updates.
 
-00:23:19.096 --> 00:23:22.356 A:middle
+
+489
+00:23:19,096 --> 00:23:22,356
 We have a ton more JavaScript
 things that we did this year,
 
-00:23:22.616 --> 00:23:26.296 A:middle
+
+490
+00:23:22,616 --> 00:23:26,296
 so I really recommend you
 get the El Capitan developer
 
-00:23:26.296 --> 00:23:30.496 A:middle
+
+491
+00:23:26,296 --> 00:23:30,496
 software and try it out.
 
-00:23:31.356 --> 00:23:34.016 A:middle
+
+492
+00:23:31,356 --> 00:23:34,016
 Now, as we've dealt with CSS
 for many years we have run
 
-00:23:34.016 --> 00:23:40.816 A:middle
+
+493
+00:23:34,016 --> 00:23:40,816
 across a number of patterns that
 lead to bloated style rules.
 
-00:23:40.996 --> 00:23:44.636 A:middle
+
+494
+00:23:40,996 --> 00:23:44,636
 And so this year, we implemented
 a number of new CSS standards
 
-00:23:44.636 --> 00:23:47.556 A:middle
+
+495
+00:23:44,636 --> 00:23:47,556
 that are aimed at combatting
 that, making styles simpler
 
-00:23:47.556 --> 00:23:48.406 A:middle
+
+496
+00:23:47,556 --> 00:23:48,406
 and easier to maintain.
 
-00:23:48.976 --> 00:23:52.756 A:middle
+
+497
+00:23:48,976 --> 00:23:52,756
 It's a recurring theme in this
 talk, but I don't have time
 
-00:23:52.756 --> 00:23:55.526 A:middle
+
+498
+00:23:52,756 --> 00:23:55,526
 to get into all the things
 we did this year, any-link,
 
-00:23:55.526 --> 00:23:59.336 A:middle
+
+499
+00:23:55,526 --> 00:23:59,336
 placeholder-shown, lang,
 just a bunch of improvements,
 
-00:23:59.676 --> 00:24:02.316 A:middle
+
+500
+00:23:59,676 --> 00:24:02,316
 but I do hope that you get our
 developer seed and try it out.
 
 
-
-00:23:59.676 --> 00:24:02.316 A:middle
-but I do hope that you get our
-developer seed and try it out.
-
-00:24:02.366 --> 00:24:05.766 A:middle
+501
+00:24:02,366 --> 00:24:05,766
 So I want to talk first
 
-00:24:05.766 --> 00:24:08.336 A:middle
+
+502
+00:24:05,766 --> 00:24:08,336
 about some recently unprefixed
 properties and values.
 
-00:24:08.856 --> 00:24:12.036 A:middle
+
+503
+00:24:08,856 --> 00:24:12,036
 We became satisfied with
 the standards compliance
 
-00:24:12.036 --> 00:24:13.976 A:middle
+
+504
+00:24:12,036 --> 00:24:13,976
 and stability of a number
 of features this year,
 
-00:24:14.186 --> 00:24:15.636 A:middle
+
+505
+00:24:14,186 --> 00:24:15,636
 and so we've unprefixed them.
 
-00:24:15.636 --> 00:24:17.756 A:middle
+
+506
+00:24:15,636 --> 00:24:17,756
 So now you can use them
 in their native format.
 
-00:24:18.106 --> 00:24:21.036 A:middle
+
+507
+00:24:18,106 --> 00:24:21,036
 We will continue to support
 the WebKit prefixed version
 
-00:24:21.036 --> 00:24:23.216 A:middle
+
+508
+00:24:21,036 --> 00:24:23,216
 of these, so your existing
 sites will continue to work.
 
-00:24:23.496 --> 00:24:25.856 A:middle
+
+509
+00:24:23,496 --> 00:24:25,856
 We recommend that you
 switch to the new WebKit,
 
-00:24:26.566 --> 00:24:30.386 A:middle
+
+510
+00:24:26,566 --> 00:24:30,386
 or the WebKit less version of
 these strings in your new code.
 
-00:24:31.476 --> 00:24:35.016 A:middle
+
+511
+00:24:31,476 --> 00:24:35,016
 Now, I know it's going
 to be hard to top
 
-00:24:35.016 --> 00:24:36.936 A:middle
+
+512
+00:24:35,016 --> 00:24:36,936
 that exciting unprefixing slide.
 
-00:24:36.936 --> 00:24:38.366 A:middle
+
+513
+00:24:36,936 --> 00:24:38,366
 But I am going to try.
 
-00:24:40.376 --> 00:24:44.276 A:middle
+
+514
+00:24:40,376 --> 00:24:44,276
 A very common need is
 the ability to recognize
 
-00:24:44.276 --> 00:24:46.356 A:middle
+
+515
+00:24:44,276 --> 00:24:46,356
 when your site is
 being used in a browser
 
-00:24:46.356 --> 00:24:48.016 A:middle
+
+516
+00:24:46,356 --> 00:24:48,016
 that supports specific features.
 
-00:24:48.276 --> 00:24:50.306 A:middle
+
+517
+00:24:48,276 --> 00:24:50,306
 And so you may choose
 to use certain features
 
-00:24:50.306 --> 00:24:52.336 A:middle
+
+518
+00:24:50,306 --> 00:24:52,336
 or not depending on
 what the browser can do.
 
-00:24:52.806 --> 00:24:58.776 A:middle
+
+519
+00:24:52,806 --> 00:24:58,776
 Let's say, for example, I
 have a website where I want
 
-00:24:58.776 --> 00:25:02.366 A:middle
+
+520
+00:24:58,776 --> 00:25:02,366
 to use a neat drop cap style,
 and so to achieve this look,
 
 
-
-00:24:58.776 --> 00:25:02.366 A:middle
-to use a neat drop cap style,
-and so to achieve this look,
-
-00:25:02.466 --> 00:25:05.366 A:middle
+521
+00:25:02,466 --> 00:25:05,366
 I want to use a different
 font for that "C."
 
-00:25:05.636 --> 00:25:09.496 A:middle
+
+522
+00:25:05,636 --> 00:25:09,496
 I want to add spacing and
 extra padding around it.
 
-00:25:09.496 --> 00:25:11.206 A:middle
+
+523
+00:25:09,496 --> 00:25:11,206
 I want it to be a different size
 
-00:25:11.806 --> 00:25:14.226 A:middle
+
+524
+00:25:11,806 --> 00:25:14,226
 so that it's visually
 distinctive.
 
-00:25:14.606 --> 00:25:16.736 A:middle
+
+525
+00:25:14,606 --> 00:25:16,736
 And I can do that using
 WebKit initial letter,
 
-00:25:16.736 --> 00:25:19.206 A:middle
+
+526
+00:25:16,736 --> 00:25:19,206
 which is another new
 feature this year in WebKit.
 
-00:25:19.726 --> 00:25:24.946 A:middle
+
+527
+00:25:19,726 --> 00:25:24,946
 But if the browser viewing
 my site doesn't support this,
 
-00:25:25.056 --> 00:25:30.236 A:middle
+
+528
+00:25:25,056 --> 00:25:30,236
 we get this awful --
 I mean this is gross!
 
-00:25:30.516 --> 00:25:32.736 A:middle
+
+529
+00:25:30,516 --> 00:25:32,736
 I would never have used this
 font if I knew it was going
 
-00:25:32.736 --> 00:25:33.676 A:middle
+
+530
+00:25:32,736 --> 00:25:33,676
 to end up looking like this.
 
-00:25:33.676 --> 00:25:35.656 A:middle
+
+531
+00:25:33,676 --> 00:25:35,656
 I wouldn't have put
 the spacing around it,
 
-00:25:35.906 --> 00:25:37.106 A:middle
+
+532
+00:25:35,906 --> 00:25:37,106
 if I knew it was
 not going to fit
 
-00:25:37.106 --> 00:25:38.576 A:middle
+
+533
+00:25:37,106 --> 00:25:38,576
 in this with idea that I had.
 
-00:25:38.576 --> 00:25:40.536 A:middle
+
+534
+00:25:38,576 --> 00:25:40,536
 I would rather have
 done nothing at all.
 
-00:25:40.886 --> 00:25:46.056 A:middle
+
+535
+00:25:40,886 --> 00:25:46,056
 And so in the past, we would
 use code that looks something
 
-00:25:46.056 --> 00:25:48.806 A:middle
+
+536
+00:25:46,056 --> 00:25:48,806
 like this, to probe the
 browser and say, hey,
 
-00:25:48.806 --> 00:25:50.246 A:middle
+
+537
+00:25:48,806 --> 00:25:50,246
 do you support initial style?
 
-00:25:50.246 --> 00:25:52.646 A:middle
+
+538
+00:25:50,246 --> 00:25:52,646
 And if you do, then I
 can do some extra work,
 
-00:25:52.646 --> 00:25:54.806 A:middle
+
+539
+00:25:52,646 --> 00:25:54,806
 navigate the dom, find
 the elements that I want
 
-00:25:54.806 --> 00:25:56.836 A:middle
+
+540
+00:25:54,806 --> 00:25:56,836
 to style, turn these things on.
 
-00:25:56.836 --> 00:25:59.976 A:middle
+
+541
+00:25:56,836 --> 00:25:59,976
 Well, that's a lot of
 JavaScript to run or a lot
 
-00:25:59.976 --> 00:26:02.506 A:middle
+
+542
+00:25:59,976 --> 00:26:02,506
 of libraries to import
 to do that.
 
 
-
-00:25:59.976 --> 00:26:02.506 A:middle
-of libraries to import
-to do that.
-
-00:26:03.606 --> 00:26:05.096 A:middle
+543
+00:26:03,606 --> 00:26:05,096
 And now we don't have to.
 
-00:26:05.686 --> 00:26:09.216 A:middle
+
+544
+00:26:05,686 --> 00:26:09,216
 WebKit supports the
 @supports function this year,
 
-00:26:09.676 --> 00:26:11.346 A:middle
+
+545
+00:26:09,676 --> 00:26:11,346
 which allows us to
 create a conditional
 
-00:26:11.586 --> 00:26:15.446 A:middle
+
+546
+00:26:11,586 --> 00:26:15,446
 where everything inside the
 brackets is applied only
 
-00:26:15.446 --> 00:26:16.666 A:middle
+
+547
+00:26:15,446 --> 00:26:16,666
 if the conditional is true.
 
-00:26:16.666 --> 00:26:19.466 A:middle
+
+548
+00:26:16,666 --> 00:26:19,466
 So in this case where I
 have WebKit initial letter,
 
-00:26:19.806 --> 00:26:22.516 A:middle
+
+549
+00:26:19,806 --> 00:26:22,516
 I can have all my
 special styling inside the
 
-00:26:22.516 --> 00:26:24.676 A:middle
+
+550
+00:26:22,516 --> 00:26:24,676
 supports clause.
 
-00:26:25.376 --> 00:26:27.326 A:middle
+
+551
+00:26:25,376 --> 00:26:27,326
 And so if I go to that
 site with a browser
 
-00:26:27.326 --> 00:26:30.926 A:middle
+
+552
+00:26:27,326 --> 00:26:30,926
 that doesn't support WebKit
 initial letter, I get a,
 
-00:26:31.166 --> 00:26:37.656 A:middle
+
+553
+00:26:31,166 --> 00:26:37,656
 you know, blander view of
 things, but it's perfectly fine.
 
-00:26:37.656 --> 00:26:39.986 A:middle
+
+554
+00:26:37,656 --> 00:26:39,986
 This is legible and
 it looks good.
 
-00:26:40.516 --> 00:26:42.786 A:middle
+
+555
+00:26:40,516 --> 00:26:42,786
 But if someone goes to
 the site with Safari,
 
-00:26:43.296 --> 00:26:45.746 A:middle
+
+556
+00:26:43,296 --> 00:26:45,746
 they get this glorious drop cap.
 
-00:26:46.696 --> 00:26:53.166 A:middle
+
+557
+00:26:46,696 --> 00:26:53,166
 Amazing! I want to talk a little
 bit about reducing repetition.
 
-00:26:54.636 --> 00:26:57.076 A:middle
+
+558
+00:26:54,636 --> 00:26:57,076
 This is some actual code
 from the web inspector.
 
-00:26:57.536 --> 00:27:00.476 A:middle
+
+559
+00:26:57,536 --> 00:27:00,476
 Well, I cleaned it up a
 little bit for the slide,
 
 
-
-00:26:57.536 --> 00:27:00.476 A:middle
-Well, I cleaned it up a
-little bit for the slide,
-
-00:27:00.476 --> 00:27:03.466 A:middle
+560
+00:27:00,476 --> 00:27:03,466
 but we have lots of cases where
 we have something like this,
 
-00:27:03.866 --> 00:27:08.016 A:middle
+
+561
+00:27:03,866 --> 00:27:08,016
 defaults and a bunch of
 classes that are part of --
 
-00:27:08.016 --> 00:27:09.196 A:middle
+
+562
+00:27:08,016 --> 00:27:09,196
 are part of that same group,
 
-00:27:09.376 --> 00:27:13.496 A:middle
+
+563
+00:27:09,376 --> 00:27:13,496
 and we want to apply
 some styling to them.
 
-00:27:13.726 --> 00:27:16.286 A:middle
+
+564
+00:27:13,726 --> 00:27:16,286
 But we're repeating
 defaults over and over again,
 
-00:27:16.286 --> 00:27:19.666 A:middle
+
+565
+00:27:16,286 --> 00:27:19,666
 and you multiply this times
 dozens of other classes
 
-00:27:19.666 --> 00:27:22.596 A:middle
+
+566
+00:27:19,666 --> 00:27:22,596
 and hundreds of other styles
 that we are trying to achieve
 
-00:27:23.026 --> 00:27:25.666 A:middle
+
+567
+00:27:23,026 --> 00:27:25,666
 and it ends up being a
 lot of stuff to maintain.
 
-00:27:26.966 --> 00:27:31.056 A:middle
+
+568
+00:27:26,966 --> 00:27:31,056
 And so the CSS 4
 designers agreed
 
-00:27:31.056 --> 00:27:33.876 A:middle
+
+569
+00:27:31,056 --> 00:27:33,876
 and created the matches
 pseudo-class.
 
-00:27:34.486 --> 00:27:37.146 A:middle
+
+570
+00:27:34,486 --> 00:27:37,146
 And what this does
 is it allows us
 
-00:27:37.696 --> 00:27:42.406 A:middle
+
+571
+00:27:37,696 --> 00:27:42,406
 to programmatically
 define all the permutations
 
-00:27:42.406 --> 00:27:47.066 A:middle
+
+572
+00:27:42,406 --> 00:27:47,066
 between default, for example, a
 class, and a list of selectors.
 
-00:27:47.816 --> 00:27:49.196 A:middle
+
+573
+00:27:47,816 --> 00:27:49,196
 And this takes the place
 
-00:27:49.196 --> 00:27:51.376 A:middle
+
+574
+00:27:49,196 --> 00:27:51,376
 of those repeated
 lines of common stuff.
 
-00:27:52.906 --> 00:27:54.226 A:middle
+
+575
+00:27:52,906 --> 00:27:54,226
 Replaces it with one line.
 
-00:27:55.236 --> 00:27:57.516 A:middle
+
+576
+00:27:55,236 --> 00:27:57,516
 And, so, about the only
 thing I like better
 
-00:27:57.516 --> 00:27:59.366 A:middle
+
+577
+00:27:57,516 --> 00:27:59,366
 than writing code
 is deleting it.
 
-00:27:59.456 --> 00:28:01.356 A:middle
+
+578
+00:27:59,456 --> 00:28:01,356
 And so this is fantastic!
 
 
-
-00:27:59.456 --> 00:28:01.356 A:middle
-And so this is fantastic!
-
-00:28:01.356 --> 00:28:05.186 A:middle
+579
+00:28:01,356 --> 00:28:05,186
 Because we can get rid of tons
 and tons of replicated code.
 
-00:28:05.186 --> 00:28:07.406 A:middle
+
+580
+00:28:05,186 --> 00:28:07,406
 This was a great day in the
 web inspector when we were able
 
-00:28:07.406 --> 00:28:09.886 A:middle
+
+581
+00:28:07,406 --> 00:28:09,886
 to land these changes and get
 rid of all this duplication.
 
-00:28:10.446 --> 00:28:15.776 A:middle
+
+582
+00:28:10,446 --> 00:28:15,776
 And so those were some new
 CSS features this year.
 
-00:28:15.776 --> 00:28:19.046 A:middle
+
+583
+00:28:15,776 --> 00:28:19,046
 And that also completes
 our discussion
 
-00:28:19.046 --> 00:28:20.696 A:middle
+
+584
+00:28:19,046 --> 00:28:20,696
 about enhancements in Safari.
 
-00:28:20.696 --> 00:28:25.726 A:middle
+
+585
+00:28:20,696 --> 00:28:25,726
 So now I want to shift gears
 a little bit and talk a bit
 
-00:28:25.726 --> 00:28:29.116 A:middle
+
+586
+00:28:25,726 --> 00:28:29,116
 about creating amazing
 experiences on OS X and iOS.
 
-00:28:29.976 --> 00:28:33.346 A:middle
+
+587
+00:28:29,976 --> 00:28:33,346
 How many of you here have sites
 
-00:28:33.346 --> 00:28:36.336 A:middle
+
+588
+00:28:33,346 --> 00:28:36,336
 that are targeted
 just for desktop?
 
-00:28:36.906 --> 00:28:38.706 A:middle
+
+589
+00:28:36,906 --> 00:28:38,706
 Or you have special things
 that are just for desktop?
 
-00:28:39.196 --> 00:28:39.796 A:middle
+
+590
+00:28:39,196 --> 00:28:39,796
 One or two.
 
-00:28:40.556 --> 00:28:43.746 A:middle
+
+591
+00:28:40,556 --> 00:28:43,746
 And others that might have stuff
 that's specific for mobile,
 
-00:28:43.826 --> 00:28:45.176 A:middle
+
+592
+00:28:43,826 --> 00:28:45,176
 right, iOS and Safari.
 
-00:28:46.396 --> 00:28:51.926 A:middle
+
+593
+00:28:46,396 --> 00:28:51,926
 And so while the bulk of my
 talk is aimed at convincing you
 
-00:28:51.926 --> 00:28:53.766 A:middle
+
+594
+00:28:51,926 --> 00:28:53,766
 to use some of these
 web standard features
 
-00:28:53.766 --> 00:28:56.826 A:middle
+
+595
+00:28:53,766 --> 00:28:56,826
 that have been developed,
 in this part of the talk,
 
-00:28:56.826 --> 00:28:59.266 A:middle
+
+596
+00:28:56,826 --> 00:28:59,266
 I'm hoping to convince you
 to adopt a few of the things
 
-00:28:59.706 --> 00:29:01.796 A:middle
+
+597
+00:28:59,706 --> 00:29:01,796
 that are unique to Mac and iOS.
 
 
-
-00:28:59.706 --> 00:29:01.796 A:middle
-that are unique to Mac and iOS.
-
-00:29:02.266 --> 00:29:05.656 A:middle
+598
+00:29:02,266 --> 00:29:05,656
 And by supporting these
 technologies, you can surprise
 
-00:29:05.656 --> 00:29:08.256 A:middle
+
+599
+00:29:05,656 --> 00:29:08,256
 and delight your users and
 extend their engagement
 
-00:29:08.256 --> 00:29:11.226 A:middle
+
+600
+00:29:08,256 --> 00:29:11,226
 with your content across
 our entire ecosystem.
 
-00:29:13.626 --> 00:29:17.186 A:middle
+
+601
+00:29:13,626 --> 00:29:17,186
 AirPlay has been around on iOS
 since iOS 4 and we've supported
 
-00:29:17.186 --> 00:29:19.636 A:middle
+
+602
+00:29:17,186 --> 00:29:19,636
 that in Safari since iOS 4.
 
-00:29:20.166 --> 00:29:25.016 A:middle
+
+603
+00:29:20,166 --> 00:29:25,016
 But this year, we opened
 up AirPlay on Safari,
 
-00:29:25.166 --> 00:29:29.976 A:middle
+
+604
+00:29:25,166 --> 00:29:29,976
 on OS X which allows your
 users to play your media
 
-00:29:30.816 --> 00:29:34.006 A:middle
+
+605
+00:29:30,816 --> 00:29:34,006
 to Apple TV directly
 from the device.
 
-00:29:34.456 --> 00:29:38.196 A:middle
+
+606
+00:29:34,456 --> 00:29:38,196
 The API is identical to the
 one that was produced for iOS.
 
-00:29:38.196 --> 00:29:40.146 A:middle
+
+607
+00:29:38,196 --> 00:29:40,146
 So if you did the work
 to support it back
 
-00:29:40.146 --> 00:29:42.256 A:middle
+
+608
+00:29:40,146 --> 00:29:42,256
 in 2013, you are done!
 
-00:29:42.456 --> 00:29:45.606 A:middle
+
+609
+00:29:42,456 --> 00:29:45,606
 Or if you use our
 media controls,
 
-00:29:46.106 --> 00:29:47.206 A:middle
+
+610
+00:29:46,106 --> 00:29:47,206
 you have that support now.
 
-00:29:47.626 --> 00:29:51.066 A:middle
+
+611
+00:29:47,626 --> 00:29:51,066
 But if you haven't, I
 recommend that you look
 
-00:29:51.066 --> 00:29:54.606 A:middle
+
+612
+00:29:51,066 --> 00:29:54,606
 at our WWDC 2013 talk where we
 go into some detail about how
 
-00:29:54.606 --> 00:29:56.106 A:middle
+
+613
+00:29:54,606 --> 00:29:56,106
 to support the AirPlay protocol.
 
 
-
-00:30:00.176 --> 00:30:01.486 A:middle
+614
+00:30:00,176 --> 00:30:01,486
 Multitasking.
 
-00:30:01.486 --> 00:30:04.456 A:middle
+
+615
+00:30:01,486 --> 00:30:04,456
 Wasn't it cool to see
 multitasking on iPad yesterday?
 
-00:30:06.586 --> 00:30:08.956 A:middle
+
+616
+00:30:06,586 --> 00:30:08,956
 Until yesterday you
 had a pretty good idea
 
-00:30:08.956 --> 00:30:11.426 A:middle
+
+617
+00:30:08,956 --> 00:30:11,426
 that when you viewed content
 on an iPad, you had a good idea
 
-00:30:11.426 --> 00:30:12.236 A:middle
+
+618
+00:30:11,426 --> 00:30:12,236
 of what you were getting.
 
-00:30:12.656 --> 00:30:14.246 A:middle
+
+619
+00:30:12,656 --> 00:30:14,246
 You pretty much had
 the entire screen.
 
-00:30:14.456 --> 00:30:17.936 A:middle
+
+620
+00:30:14,456 --> 00:30:17,936
 But now you can have two-thirds
 of the screen allocated
 
-00:30:17.936 --> 00:30:24.156 A:middle
+
+621
+00:30:17,936 --> 00:30:24,156
 to your content, or
 half, or a third.
 
-00:30:24.156 --> 00:30:27.626 A:middle
+
+622
+00:30:24,156 --> 00:30:27,626
 And so responsive design
 is really important now.
 
-00:30:28.436 --> 00:30:31.116 A:middle
+
+623
+00:30:28,436 --> 00:30:31,116
 Users control the
 size of the view,
 
-00:30:31.696 --> 00:30:34.476 A:middle
+
+624
+00:30:31,696 --> 00:30:34,476
 and iPad is a lot
 more like desktop now.
 
-00:30:35.056 --> 00:30:39.466 A:middle
+
+625
+00:30:35,056 --> 00:30:39,466
 It's so important, responsive
 design is so important,
 
-00:30:39.466 --> 00:30:44.386 A:middle
+
+626
+00:30:39,466 --> 00:30:44,386
 that we have an entire session
 tomorrow, same time, same place.
 
-00:30:45.036 --> 00:30:46.996 A:middle
+
+627
+00:30:45,036 --> 00:30:46,996
 I know you all are capable
 of getting up in the morning
 
-00:30:46.996 --> 00:30:49.976 A:middle
+
+628
+00:30:46,996 --> 00:30:49,976
 because you are here today,
 and I recommend you come
 
-00:30:49.976 --> 00:30:51.776 A:middle
+
+629
+00:30:49,976 --> 00:30:51,776
 and see "Using Safari to Deliver
 
-00:30:51.776 --> 00:30:53.716 A:middle
+
+630
+00:30:51,776 --> 00:30:53,716
 and Debug a Responsive
 Web Design" tomorrow,
 
-00:30:53.716 --> 00:30:56.096 A:middle
+
+631
+00:30:53,716 --> 00:30:56,096
 which goes into the tools and
 features that have been added
 
-00:30:56.376 --> 00:30:59.786 A:middle
+
+632
+00:30:56,376 --> 00:30:59,786
 to the web inspector in Safari
 to make your life easier
 
-00:30:59.786 --> 00:31:01.596 A:middle
+
+633
+00:30:59,786 --> 00:31:01,596
 when trying to support
 these styles.
 
 
-
-00:30:59.786 --> 00:31:01.596 A:middle
-when trying to support
-these styles.
-
-00:31:02.036 --> 00:31:04.256 A:middle
+634
+00:31:02,036 --> 00:31:04,256
 There's also a session
 on multitasking
 
-00:31:04.436 --> 00:31:08.236 A:middle
+
+635
+00:31:04,436 --> 00:31:08,236
 for media-based apps on iPad and
 iOS 9 which is also of interest.
 
-00:31:08.736 --> 00:31:13.366 A:middle
+
+636
+00:31:08,736 --> 00:31:13,366
 And we talked about
 picture-in-picture yesterday.
 
-00:31:13.936 --> 00:31:18.406 A:middle
+
+637
+00:31:13,936 --> 00:31:18,406
 The iPad has always been a
 great way to view content,
 
-00:31:19.296 --> 00:31:22.056 A:middle
+
+638
+00:31:19,296 --> 00:31:22,056
 and until yesterday,
 you had a good idea
 
-00:31:22.056 --> 00:31:24.286 A:middle
+
+639
+00:31:22,056 --> 00:31:24,286
 that your content
 would be consumed
 
-00:31:24.286 --> 00:31:25.776 A:middle
+
+640
+00:31:24,286 --> 00:31:25,776
 in this sort of full
 screen form.
 
-00:31:26.826 --> 00:31:27.866 A:middle
+
+641
+00:31:26,826 --> 00:31:27,866
 But now we have a new way.
 
-00:31:27.866 --> 00:31:30.446 A:middle
+
+642
+00:31:27,866 --> 00:31:30,446
 We have picture-in-picture
 which allows you
 
-00:31:30.446 --> 00:31:34.276 A:middle
+
+643
+00:31:30,446 --> 00:31:34,276
 to compress your pictures of
 your children into a small box
 
-00:31:34.276 --> 00:31:36.636 A:middle
+
+644
+00:31:34,276 --> 00:31:36,636
 in the corner of your
 giant empty calendar.
 
-00:31:41.086 --> 00:31:43.466 A:middle
+
+645
+00:31:41,086 --> 00:31:43,466
 But it's a great feature.
 
-00:31:43.636 --> 00:31:47.776 A:middle
+
+646
+00:31:43,636 --> 00:31:47,776
 We have -- we defined this in
 WebKit as presentation mode.
 
-00:31:47.776 --> 00:31:50.106 A:middle
+
+647
+00:31:47,776 --> 00:31:50,106
 We support full screen,
 which you are familiar with.
 
-00:31:50.606 --> 00:31:55.236 A:middle
+
+648
+00:31:50,606 --> 00:31:55,236
 And inline in which your content
 is displayed in the page itself,
 
-00:31:55.556 --> 00:31:59.136 A:middle
+
+649
+00:31:55,556 --> 00:31:59,136
 and picture-in-picture,
 which is our new style.
 
 
-
-00:32:00.146 --> 00:32:03.766 A:middle
+650
+00:32:00,146 --> 00:32:03,766
 So we have a range of sizes that
 you need to be worried about.
 
-00:32:05.696 --> 00:32:08.426 A:middle
+
+651
+00:32:05,696 --> 00:32:08,426
 The WebKit, default WebKit
 Media Controls support
 
-00:32:08.426 --> 00:32:09.896 A:middle
+
+652
+00:32:08,426 --> 00:32:09,896
 picture-in-picture
 out of the box,
 
-00:32:10.766 --> 00:32:12.596 A:middle
+
+653
+00:32:10,766 --> 00:32:12,596
 but if you write your
 own media controls,
 
-00:32:12.596 --> 00:32:14.746 A:middle
+
+654
+00:32:12,596 --> 00:32:14,746
 you need to use the
 presentation mode API
 
-00:32:14.836 --> 00:32:15.896 A:middle
+
+655
+00:32:14,836 --> 00:32:15,896
 to control these things.
 
-00:32:16.396 --> 00:32:19.966 A:middle
+
+656
+00:32:16,396 --> 00:32:19,966
 And our developer documentation
 has information on how
 
-00:32:19.966 --> 00:32:22.836 A:middle
+
+657
+00:32:19,966 --> 00:32:22,836
 to take advantage of
 that in your own content.
 
-00:32:23.206 --> 00:32:25.526 A:middle
+
+658
+00:32:23,206 --> 00:32:25,526
 There are a few things for
 you to be thinking about here.
 
-00:32:26.516 --> 00:32:30.376 A:middle
+
+659
+00:32:26,516 --> 00:32:30,376
 When a viewer starts
 viewing your content
 
-00:32:30.376 --> 00:32:32.366 A:middle
+
+660
+00:32:30,376 --> 00:32:32,366
 in full screen video display,
 
-00:32:32.616 --> 00:32:34.426 A:middle
+
+661
+00:32:32,616 --> 00:32:34,426
 the page may not
 be obscured anymore
 
-00:32:34.426 --> 00:32:37.486 A:middle
+
+662
+00:32:34,426 --> 00:32:37,486
 because the viewer can exit
 full screen mode and go
 
-00:32:37.486 --> 00:32:39.896 A:middle
+
+663
+00:32:37,486 --> 00:32:39,896
 into picture-in-picture without
 you really knowing about it.
 
-00:32:40.096 --> 00:32:42.826 A:middle
+
+664
+00:32:40,096 --> 00:32:42,826
 So if you take the opportunity
 to turn certain features off
 
-00:32:42.826 --> 00:32:45.026 A:middle
+
+665
+00:32:42,826 --> 00:32:45,026
 or hide content on your
 page while a video is being
 
-00:32:45.026 --> 00:32:47.966 A:middle
+
+666
+00:32:45,026 --> 00:32:47,966
 displayed, that may not
 look right if they are going
 
-00:32:47.966 --> 00:32:48.746 A:middle
+
+667
+00:32:47,966 --> 00:32:48,746
 to picture-in-picture.
 
-00:32:49.016 --> 00:32:52.056 A:middle
+
+668
+00:32:49,016 --> 00:32:52,056
 And since the media may be
 playing in a very small window,
 
-00:32:52.386 --> 00:32:55.756 A:middle
+
+669
+00:32:52,386 --> 00:32:55,756
 we strongly recommend that
 use HTTP Live Streaming,
 
-00:32:55.886 --> 00:32:58.616 A:middle
+
+670
+00:32:55,886 --> 00:32:58,616
 or HLS, for delivering media.
 
-00:32:58.616 --> 00:33:03.546 A:middle
+
+671
+00:32:58,616 --> 00:33:03,546
 HLS allows our media engine
 to select a bit encoding,
 
 
-
-00:32:58.616 --> 00:33:03.546 A:middle
-HLS allows our media engine
-to select a bit encoding,
-
-00:33:03.586 --> 00:33:06.696 A:middle
+672
+00:33:03,586 --> 00:33:06,696
 a bit rate for the video
 that matches the size
 
-00:33:06.696 --> 00:33:08.066 A:middle
+
+673
+00:33:06,696 --> 00:33:08,066
 of the content being displayed.
 
-00:33:08.376 --> 00:33:10.566 A:middle
+
+674
+00:33:08,376 --> 00:33:10,566
 It also takes into
 effect, network conditions,
 
-00:33:10.566 --> 00:33:12.286 A:middle
+
+675
+00:33:10,566 --> 00:33:12,286
 battery status on the device.
 
-00:33:12.706 --> 00:33:15.256 A:middle
+
+676
+00:33:12,706 --> 00:33:15,256
 And so by using it,
 you will ensure
 
-00:33:15.256 --> 00:33:19.216 A:middle
+
+677
+00:33:15,256 --> 00:33:19,216
 that your user has
 the best experience
 
-00:33:19.216 --> 00:33:22.136 A:middle
+
+678
+00:33:19,216 --> 00:33:22,136
 because it will take care of a
 lot of those details for them.
 
-00:33:23.356 --> 00:33:26.206 A:middle
+
+679
+00:33:23,356 --> 00:33:26,206
 Multitasking essentials for
 media based apps on iPad
 
-00:33:26.456 --> 00:33:28.626 A:middle
+
+680
+00:33:26,456 --> 00:33:28,626
 in iOS 9 is a great
 session to see on Wednesday.
 
-00:33:28.706 --> 00:33:31.766 A:middle
+
+681
+00:33:28,706 --> 00:33:31,766
 And if you haven't heard
 enough from me this year,
 
-00:33:31.766 --> 00:33:34.476 A:middle
+
+682
+00:33:31,766 --> 00:33:34,476
 you can see me and Jer
 talking about advanced media
 
-00:33:34.476 --> 00:33:37.866 A:middle
+
+683
+00:33:34,476 --> 00:33:37,866
 for the web last year, where we
 went into some detail about HLS.
 
-00:33:38.626 --> 00:33:41.716 A:middle
+
+684
+00:33:38,626 --> 00:33:41,716
 So finally, I want to talk
 about something really amazing,
 
-00:33:42.016 --> 00:33:43.466 A:middle
+
+685
+00:33:42,016 --> 00:33:43,466
 our Force Touch trackpad.
 
-00:33:44.816 --> 00:33:47.366 A:middle
+
+686
+00:33:44,816 --> 00:33:47,366
 back in March we were excited
 to show off our new products
 
-00:33:47.366 --> 00:33:49.236 A:middle
+
+687
+00:33:47,366 --> 00:33:49,236
 with this great new hardware.
 
-00:33:49.756 --> 00:33:52.956 A:middle
+
+688
+00:33:49,756 --> 00:33:52,956
 It allows us to recognize
 a second level of click,
 
-00:33:53.056 --> 00:33:55.456 A:middle
+
+689
+00:33:53,056 --> 00:33:55,456
 we call Force Click, and we
 are really excited about this.
 
-00:33:55.976 --> 00:34:01.786 A:middle
+
+690
+00:33:55,976 --> 00:34:01,786
 We had a lot of fun adding
 new user interface features
 
 
-
-00:33:55.976 --> 00:34:01.786 A:middle
-We had a lot of fun adding
-new user interface features
-
-00:34:01.786 --> 00:34:05.286 A:middle
+691
+00:34:01,786 --> 00:34:05,286
 like this mode of dictionary
 look up that allows us to find
 
-00:34:05.286 --> 00:34:06.886 A:middle
+
+692
+00:34:05,286 --> 00:34:06,886
 out what a fluoroelastomer
 really is.
 
-00:34:07.516 --> 00:34:11.116 A:middle
+
+693
+00:34:07,516 --> 00:34:11,116
 And we added a way to view
 the content behind a link
 
-00:34:11.116 --> 00:34:12.786 A:middle
+
+694
+00:34:11,116 --> 00:34:12,786
 without having to
 leave the web page.
 
-00:34:13.206 --> 00:34:15.766 A:middle
+
+695
+00:34:13,206 --> 00:34:15,766
 I know that all of you can
 come up with even better ways
 
-00:34:15.766 --> 00:34:18.545 A:middle
+
+696
+00:34:15,766 --> 00:34:18,545
 to make use of this
 hardware in a web context.
 
-00:34:18.545 --> 00:34:21.295 A:middle
+
+697
+00:34:18,545 --> 00:34:21,295
 And so we wanted to open
 up access to that hardware
 
-00:34:21.295 --> 00:34:22.886 A:middle
+
+698
+00:34:21,295 --> 00:34:22,886
 so that you could
 use it yourselves
 
-00:34:22.886 --> 00:34:23.946 A:middle
+
+699
+00:34:22,886 --> 00:34:23,946
 in your own web pages.
 
-00:34:24.426 --> 00:34:27.815 A:middle
+
+700
+00:34:24,426 --> 00:34:27,815
 Let me talk briefly about
 how this fits together.
 
-00:34:28.416 --> 00:34:31.266 A:middle
+
+701
+00:34:28,416 --> 00:34:31,266
 When we have a normal
 Trackpad, if the user presses
 
-00:34:31.266 --> 00:34:33.835 A:middle
+
+702
+00:34:31,266 --> 00:34:33,835
 down we eventually
 reach a level of force
 
-00:34:33.976 --> 00:34:36.356 A:middle
+
+703
+00:34:33,976 --> 00:34:36,356
 that we consider
 to be mouse down.
 
-00:34:36.886 --> 00:34:40.396 A:middle
+
+704
+00:34:36,886 --> 00:34:40,396
 And as the user continues
 to press, and then lets up,
 
-00:34:40.676 --> 00:34:43.136 A:middle
+
+705
+00:34:40,676 --> 00:34:43,136
 we come back through
 that pressure level
 
-00:34:43.346 --> 00:34:46.746 A:middle
+
+706
+00:34:43,346 --> 00:34:46,746
 and call it mouse up, and
 we issue it a click event.
 
-00:34:47.616 --> 00:34:52.255 A:middle
+
+707
+00:34:47,616 --> 00:34:52,255
 We extended this model to
 support Force Click operations
 
-00:34:52.585 --> 00:34:55.795 A:middle
+
+708
+00:34:52,585 --> 00:34:55,795
 by adding a WebKit force
 property to all mouse events,
 
-00:34:55.795 --> 00:34:57.596 A:middle
+
+709
+00:34:55,795 --> 00:34:57,596
 which tells you how much
 force is being applied
 
-00:34:57.596 --> 00:34:58.126 A:middle
+
+710
+00:34:57,596 --> 00:34:58,126
 to the Trackpad.
 
-00:34:58.126 --> 00:35:01.986 A:middle
+
+711
+00:34:58,126 --> 00:35:01,986
 And then we also added
 a number of new events
 
 
-
-00:34:58.126 --> 00:35:01.986 A:middle
-And then we also added
-a number of new events
-
-00:35:01.986 --> 00:35:04.656 A:middle
+712
+00:35:01,986 --> 00:35:04,656
 that you can register
 for, to handle this.
 
-00:35:05.186 --> 00:35:08.276 A:middle
+
+713
+00:35:05,186 --> 00:35:08,276
 So if we go back
 to this last slide
 
-00:35:08.276 --> 00:35:10.186 A:middle
+
+714
+00:35:08,276 --> 00:35:10,186
 where we had mouse
 up, mouse down.
 
-00:35:10.506 --> 00:35:13.396 A:middle
+
+715
+00:35:10,506 --> 00:35:13,396
 We now emit a mouse
 force will begin event.
 
-00:35:13.666 --> 00:35:16.356 A:middle
+
+716
+00:35:13,666 --> 00:35:16,356
 And that's a great opportunity
 to call prevent defaults
 
-00:35:16.356 --> 00:35:18.876 A:middle
+
+717
+00:35:16,356 --> 00:35:18,876
 on the event itself
 to prevent us
 
-00:35:18.876 --> 00:35:21.106 A:middle
+
+718
+00:35:18,876 --> 00:35:21,106
 from calling the
 dictionary look up logic
 
-00:35:21.106 --> 00:35:22.516 A:middle
+
+719
+00:35:21,106 --> 00:35:22,516
 or from doing the link preview,
 
-00:35:22.546 --> 00:35:23.926 A:middle
+
+720
+00:35:22,546 --> 00:35:23,926
 if you want to take
 over this yourself.
 
-00:35:24.346 --> 00:35:28.806 A:middle
+
+721
+00:35:24,346 --> 00:35:28,806
 After passing through
 the mouse down phase,
 
-00:35:28.806 --> 00:35:32.136 A:middle
+
+722
+00:35:28,806 --> 00:35:32,136
 if the user continues to press,
 we hit a second level of force
 
-00:35:32.136 --> 00:35:34.276 A:middle
+
+723
+00:35:32,136 --> 00:35:34,276
 that we consider
 to be a force click
 
-00:35:34.276 --> 00:35:36.206 A:middle
+
+724
+00:35:34,276 --> 00:35:36,206
 and we emit a mouse
 force down event.
 
-00:35:36.586 --> 00:35:40.396 A:middle
+
+725
+00:35:36,586 --> 00:35:40,396
 And as the user lets
 up on the force,
 
-00:35:40.396 --> 00:35:42.056 A:middle
+
+726
+00:35:40,396 --> 00:35:42,056
 we pass through a
 mouse force up.
 
-00:35:42.056 --> 00:35:45.226 A:middle
+
+727
+00:35:42,056 --> 00:35:45,226
 So it's completely analogous
 to mouse up, mouse down,
 
-00:35:45.226 --> 00:35:47.946 A:middle
+
+728
+00:35:45,226 --> 00:35:47,946
 we have mouse force
 down, mouse force up.
 
-00:35:48.446 --> 00:35:53.086 A:middle
+
+729
+00:35:48,446 --> 00:35:53,086
 And during the entire phase
 of time, between mouse down
 
-00:35:53.296 --> 00:35:56.456 A:middle
+
+730
+00:35:53,296 --> 00:35:56,456
 and mouse up, we emit
 mouse force changed events
 
-00:35:56.456 --> 00:35:59.986 A:middle
+
+731
+00:35:56,456 --> 00:35:59,986
 and we do this because the
 user may be changing pressure,
 
 
-
-00:36:00.226 --> 00:36:01.996 A:middle
+732
+00:36:00,226 --> 00:36:01,996
 changing the amount
 of force they apply
 
-00:36:02.476 --> 00:36:04.096 A:middle
+
+733
+00:36:02,476 --> 00:36:04,096
 without moving their
 finger around.
 
-00:36:04.096 --> 00:36:06.136 A:middle
+
+734
+00:36:04,096 --> 00:36:06,136
 So there would be
 no mouse move event
 
-00:36:06.136 --> 00:36:07.526 A:middle
+
+735
+00:36:06,136 --> 00:36:07,526
 to capture that force for you.
 
-00:36:08.836 --> 00:36:13.316 A:middle
+
+736
+00:36:08,836 --> 00:36:13,316
 And note, we also define
 two layers, two constants
 
-00:36:13.316 --> 00:36:14.996 A:middle
+
+737
+00:36:13,316 --> 00:36:14,996
 that define the level of force
 
-00:36:14.996 --> 00:36:17.276 A:middle
+
+738
+00:36:14,996 --> 00:36:17,276
 at a regular click
 and a Force Click.
 
-00:36:17.276 --> 00:36:19.996 A:middle
+
+739
+00:36:17,276 --> 00:36:19,996
 And we strongly recommend you
 use these constants instead
 
-00:36:19.996 --> 00:36:23.006 A:middle
+
+740
+00:36:19,996 --> 00:36:23,006
 of capturing numeric values
 because those may change
 
-00:36:23.316 --> 00:36:25.396 A:middle
+
+741
+00:36:23,316 --> 00:36:25,396
 as the specification matures.
 
-00:36:26.496 --> 00:36:29.476 A:middle
+
+742
+00:36:26,496 --> 00:36:29,476
 And so to show us how to
 take advantage of this
 
-00:36:30.166 --> 00:36:32.246 A:middle
+
+743
+00:36:30,166 --> 00:36:32,246
 in your own website, I would
 like to invite Chris back
 
-00:36:33.146 --> 00:36:34.046 A:middle
+
+744
+00:36:33,146 --> 00:36:34,046
 to show us another demo.
 
-00:36:35.516 --> 00:36:38.586 A:middle
+
+745
+00:36:35,516 --> 00:36:38,586
 [Applause]
 
-00:36:39.086 --> 00:36:39.326 A:middle
-&gt;&gt; CHRIS YOUNG-ZAWADA: Great.
 
-00:36:40.606 --> 00:36:41.066 A:middle
+746
+00:36:39,086 --> 00:36:39,326
+>> CHRIS YOUNG-ZAWADA: Great.
+
+
+747
+00:36:40,606 --> 00:36:41,066
 Thanks, Brent.
 
-00:36:41.386 --> 00:36:44.546 A:middle
+
+748
+00:36:41,386 --> 00:36:44,546
 So as Brent just told us about
 Force Touch, there's a lot
 
-00:36:44.546 --> 00:36:45.896 A:middle
+
+749
+00:36:44,546 --> 00:36:45,896
 of really cool things
 you can do with it
 
-00:36:45.896 --> 00:36:47.366 A:middle
+
+750
+00:36:45,896 --> 00:36:47,366
 that can really enhance
 your websites.
 
-00:36:47.746 --> 00:36:49.206 A:middle
+
+751
+00:36:47,746 --> 00:36:49,206
 And if you guys remember
 when we were looking
 
-00:36:49.206 --> 00:36:52.996 A:middle
+
+752
+00:36:49,206 --> 00:36:52,996
 at the demo earlier, when we
 were clicking into this overlay,
 
-00:36:52.996 --> 00:36:54.986 A:middle
+
+753
+00:36:52,996 --> 00:36:54,986
 we had the ability to
 choose our favorite photos.
 
-00:36:55.346 --> 00:36:58.156 A:middle
+
+754
+00:36:55,346 --> 00:36:58,156
 That's really easy to do,
 but it's also another step
 
-00:36:58.156 --> 00:37:00.466 A:middle
+
+755
+00:36:58,156 --> 00:37:00,466
 and I think if we can really
 make it better for users
 
 
-
-00:36:58.156 --> 00:37:00.466 A:middle
-and I think if we can really
-make it better for users
-
-00:37:00.466 --> 00:37:03.206 A:middle
+756
+00:37:00,466 --> 00:37:03,206
 that have a Force Touch
 trackpad in case we want
 
-00:37:03.206 --> 00:37:05.676 A:middle
+
+757
+00:37:03,206 --> 00:37:05,676
 to make a little bit more
 interactivity for them.
 
-00:37:07.036 --> 00:37:10.256 A:middle
+
+758
+00:37:07,036 --> 00:37:10,256
 So while I was offstage,
 I actually made a couple
 
-00:37:10.256 --> 00:37:12.506 A:middle
+
+759
+00:37:10,256 --> 00:37:12,506
 of changes to the code and what
 I have done is I've actually
 
-00:37:12.506 --> 00:37:14.426 A:middle
+
+760
+00:37:12,506 --> 00:37:14,426
 extended the Snap
 Points masonry gallery
 
-00:37:14.426 --> 00:37:16.716 A:middle
+
+761
+00:37:14,426 --> 00:37:16,716
 to create a force enhanced
 masonry gallery and we are going
 
-00:37:16.716 --> 00:37:18.226 A:middle
+
+762
+00:37:16,716 --> 00:37:18,226
 to use this to add
 some force events,
 
-00:37:18.396 --> 00:37:21.166 A:middle
+
+763
+00:37:18,396 --> 00:37:21,166
 and actually do some
 animation on force change.
 
-00:37:21.946 --> 00:37:23.556 A:middle
+
+764
+00:37:21,946 --> 00:37:23,556
 So there's a couple of
 things to point out here.
 
-00:37:23.556 --> 00:37:25.666 A:middle
+
+765
+00:37:23,556 --> 00:37:25,666
 The most important thing is we
 are going to get the min force
 
-00:37:25.666 --> 00:37:27.916 A:middle
+
+766
+00:37:25,666 --> 00:37:27,916
 and max force values from
 the mouse event data,
 
-00:37:27.916 --> 00:37:31.386 A:middle
+
+767
+00:37:27,916 --> 00:37:31,386
 which are the force at mouse
 down and force at force mouse
 
-00:37:31.416 --> 00:37:33.746 A:middle
+
+768
+00:37:31,416 --> 00:37:33,746
 down contstants that
 Brent just told us about.
 
-00:37:34.146 --> 00:37:35.786 A:middle
+
+769
+00:37:34,146 --> 00:37:35,786
 The other thing we are
 going to do is we're going
 
-00:37:35.786 --> 00:37:40.406 A:middle
+
+770
+00:37:35,786 --> 00:37:40,406
 to bind some event listeners for
 the force events that get thrown
 
-00:37:40.406 --> 00:37:43.626 A:middle
+
+771
+00:37:40,406 --> 00:37:43,626
 so we can actually bind to
 them and make updates on those.
 
-00:37:44.126 --> 00:37:46.276 A:middle
+
+772
+00:37:44,126 --> 00:37:46,276
 I've just stepped out how we
 are going to handle those,
 
-00:37:46.276 --> 00:37:47.336 A:middle
+
+773
+00:37:46,276 --> 00:37:47,336
 so it doesn't do
 anything right now.
 
-00:37:47.336 --> 00:37:48.536 A:middle
+
+774
+00:37:47,336 --> 00:37:48,536
 So we are going to
 go step by step.
 
-00:37:50.216 --> 00:37:52.006 A:middle
+
+775
+00:37:50,216 --> 00:37:52,006
 Cool. So to get started, I
 am actually going to start
 
-00:37:52.006 --> 00:37:53.076 A:middle
+
+776
+00:37:52,006 --> 00:37:53,076
 with force mouse down.
 
-00:37:53.196 --> 00:37:55.246 A:middle
+
+777
+00:37:53,196 --> 00:37:55,246
 And what we are going to do
 in this case, is we are going
 
-00:37:55.326 --> 00:37:56.796 A:middle
+
+778
+00:37:55,326 --> 00:37:56,796
 to run this function
 I have written,
 
-00:37:56.796 --> 00:37:58.636 A:middle
+
+779
+00:37:56,796 --> 00:37:58,636
 called set within
 force range of true,
 
-00:37:58.976 --> 00:38:01.696 A:middle
+
+780
+00:37:58,976 --> 00:38:01,696
 and all this really does is
 put a CSS property in the page
 
 
-
-00:37:58.976 --> 00:38:01.696 A:middle
-and all this really does is
-put a CSS property in the page
-
-00:38:01.696 --> 00:38:04.336 A:middle
+781
+00:38:01,696 --> 00:38:04,336
 that makes sure that our CSS
 transitions don't interfere
 
-00:38:04.336 --> 00:38:06.996 A:middle
+
+782
+00:38:04,336 --> 00:38:06,996
 with our own animations in
 JavaScript, because we are going
 
-00:38:06.996 --> 00:38:09.026 A:middle
+
+783
+00:38:06,996 --> 00:38:09,026
 to be getting a lot of force
 data with force change events.
 
-00:38:09.026 --> 00:38:10.166 A:middle
+
+784
+00:38:09,026 --> 00:38:10,166
 We don't want those
 to interfere.
 
-00:38:10.166 --> 00:38:11.216 A:middle
+
+785
+00:38:10,166 --> 00:38:11,216
 So this basically makes sure
 
-00:38:11.216 --> 00:38:13.306 A:middle
+
+786
+00:38:11,216 --> 00:38:13,306
 that the transitions is
 set in a lot of things.
 
-00:38:14.346 --> 00:38:16.486 A:middle
+
+787
+00:38:14,346 --> 00:38:16,486
 The next thing we are
 going to do is look
 
-00:38:16.486 --> 00:38:17.946 A:middle
+
+788
+00:38:16,486 --> 00:38:17,946
 at what kit mouse force changed.
 
-00:38:19.296 --> 00:38:20.776 A:middle
+
+789
+00:38:19,296 --> 00:38:20,776
 And we do a few things here.
 
-00:38:20.776 --> 00:38:22.216 A:middle
+
+790
+00:38:20,776 --> 00:38:22,216
 We are actually getting
 the force data
 
-00:38:22.616 --> 00:38:24.586 A:middle
+
+791
+00:38:22,616 --> 00:38:24,586
 from the WebKit force
 property of the event.
 
-00:38:24.936 --> 00:38:26.546 A:middle
+
+792
+00:38:24,936 --> 00:38:26,546
 And we are going to create
 a progress, and we are going
 
-00:38:26.546 --> 00:38:28.266 A:middle
+
+793
+00:38:26,546 --> 00:38:28,266
 to see how far along
 between the min force
 
-00:38:28.266 --> 00:38:29.466 A:middle
+
+794
+00:38:28,266 --> 00:38:29,466
 and the max force values we are.
 
-00:38:29.906 --> 00:38:32.066 A:middle
+
+795
+00:38:29,906 --> 00:38:32,066
 And we're actually going
 to animate some elements
 
-00:38:32.106 --> 00:38:34.366 A:middle
+
+796
+00:38:32,106 --> 00:38:34,366
 between those, so you'll see
 that we are going to go back
 
-00:38:34.366 --> 00:38:35.586 A:middle
+
+797
+00:38:34,366 --> 00:38:35,586
 and do some interesting
 things there.
 
-00:38:36.516 --> 00:38:37.546 A:middle
+
+798
+00:38:36,516 --> 00:38:37,546
 And basically when we are
 
-00:38:37.546 --> 00:38:39.026 A:middle
+
+799
+00:38:37,546 --> 00:38:39,026
 through our progress
 we are going to say
 
-00:38:39.026 --> 00:38:40.576 A:middle
+
+800
+00:38:39,026 --> 00:38:40,576
 that we favorited the image
 and we are going to say
 
-00:38:40.576 --> 00:38:41.326 A:middle
+
+801
+00:38:40,576 --> 00:38:41,326
 that we are done animating.
 
-00:38:41.946 --> 00:38:44.686 A:middle
+
+802
+00:38:41,946 --> 00:38:44,686
 So if we go back and refresh.
 
-00:38:45.566 --> 00:38:48.046 A:middle
+
+803
+00:38:45,566 --> 00:38:48,046
 If you hover over this photo you
 can see that now as I press up
 
-00:38:48.046 --> 00:38:50.376 A:middle
+
+804
+00:38:48,046 --> 00:38:50,376
 and down, we are actually
 scaling the image depending
 
-00:38:50.376 --> 00:38:52.376 A:middle
+
+805
+00:38:50,376 --> 00:38:52,376
 on the pressure that I'm
 applying to the force trackpad.
 
-00:38:52.916 --> 00:38:54.916 A:middle
+
+806
+00:38:52,916 --> 00:38:54,916
 It's really cool and
 it's really interactive
 
-00:38:54.916 --> 00:38:56.256 A:middle
+
+807
+00:38:54,916 --> 00:38:56,256
 and it adds a whole
 new layer of depth.
 
-00:38:57.226 --> 00:38:58.596 A:middle
+
+808
+00:38:57,226 --> 00:38:58,596
 When I press all the
 way down, you will see
 
-00:38:58.596 --> 00:39:01.026 A:middle
+
+809
+00:38:58,596 --> 00:39:01,026
 that this heart appears which
 means we've liked the photo,
 
 
-
-00:38:58.596 --> 00:39:01.026 A:middle
-that this heart appears which
-means we've liked the photo,
-
-00:39:01.026 --> 00:39:02.696 A:middle
+810
+00:39:01,026 --> 00:39:02,696
 but I'm actually still
 holding my finger down.
 
-00:39:02.696 --> 00:39:05.586 A:middle
+
+811
+00:39:02,696 --> 00:39:05,586
 So as I pull it up,
 you will see that we go
 
-00:39:05.586 --> 00:39:06.586 A:middle
+
+812
+00:39:05,586 --> 00:39:06,586
 into this overlay view.
 
-00:39:06.836 --> 00:39:08.636 A:middle
+
+813
+00:39:06,836 --> 00:39:08,636
 And that might not
 be what we want.
 
-00:39:08.636 --> 00:39:11.046 A:middle
+
+814
+00:39:08,636 --> 00:39:11,046
 What's happening is that the
 click event is still being fired
 
-00:39:11.046 --> 00:39:12.406 A:middle
+
+815
+00:39:11,046 --> 00:39:12,406
 because we haven't prevented any
 
-00:39:12.406 --> 00:39:13.886 A:middle
+
+816
+00:39:12,406 --> 00:39:13,886
 of the default behavior
 in the browser.
 
-00:39:13.986 --> 00:39:16.226 A:middle
+
+817
+00:39:13,986 --> 00:39:16,226
 So to do that, we
 actually just go back
 
-00:39:16.226 --> 00:39:17.276 A:middle
+
+818
+00:39:16,226 --> 00:39:17,276
 and add a quick line of code.
 
-00:39:18.356 --> 00:39:21.076 A:middle
+
+819
+00:39:18,356 --> 00:39:21,076
 And we're going to go to
 'mouse force will begin'
 
-00:39:21.426 --> 00:39:23.276 A:middle
+
+820
+00:39:21,426 --> 00:39:23,276
 and we are basically just
 going to call prevent default.
 
-00:39:23.276 --> 00:39:24.616 A:middle
+
+821
+00:39:23,276 --> 00:39:24,616
 This is going to
 make sure that none
 
-00:39:24.616 --> 00:39:27.036 A:middle
+
+822
+00:39:24,616 --> 00:39:27,036
 of the OS interactions
 interfere with what you
 
-00:39:27.036 --> 00:39:29.676 A:middle
+
+823
+00:39:27,036 --> 00:39:29,676
 as developers are doing
 and you get full control.
 
-00:39:30.726 --> 00:39:33.476 A:middle
+
+824
+00:39:30,726 --> 00:39:33,476
 So if we go back, we can
 try it one more time,
 
-00:39:33.476 --> 00:39:37.326 A:middle
+
+825
+00:39:33,476 --> 00:39:37,326
 and after we hit this level,
 nothing is going to happen.
 
-00:39:37.326 --> 00:39:38.756 A:middle
+
+826
+00:39:37,326 --> 00:39:38,756
 But we still have
 to reset everything.
 
-00:39:38.756 --> 00:39:40.786 A:middle
+
+827
+00:39:38,756 --> 00:39:40,786
 So to do that, we have to
 remove the styles we've set
 
-00:39:40.786 --> 00:39:42.286 A:middle
+
+828
+00:39:40,786 --> 00:39:42,286
 with JavaScript and make sure
 
-00:39:42.286 --> 00:39:43.526 A:middle
+
+829
+00:39:42,286 --> 00:39:43,526
 that everything runs
 really smoothly.
 
-00:39:44.376 --> 00:39:49.086 A:middle
+
+830
+00:39:44,376 --> 00:39:49,086
 So we can just fill that
 in with mouse force up.
 
-00:39:49.546 --> 00:39:50.996 A:middle
+
+831
+00:39:49,546 --> 00:39:50,996
 And all we are doing
 here is removing a lot
 
-00:39:50.996 --> 00:39:53.246 A:middle
+
+832
+00:39:50,996 --> 00:39:53,246
 of the styles we set
 and making sure that all
 
-00:39:53.246 --> 00:39:55.946 A:middle
+
+833
+00:39:53,246 --> 00:39:55,946
 of the CSS properties we put in
 there get removed and go back
 
-00:39:55.946 --> 00:39:58.186 A:middle
+
+834
+00:39:55,946 --> 00:39:58,186
 to normal as if we never
 touched this at all.
 
-00:39:58.716 --> 00:40:02.306 A:middle
+
+835
+00:39:58,716 --> 00:40:02,306
 Great. So with this new
 interaction we can hover
 
 
-
-00:39:58.716 --> 00:40:02.306 A:middle
-Great. So with this new
-interaction we can hover
-
-00:40:02.306 --> 00:40:06.266 A:middle
+836
+00:40:02,306 --> 00:40:06,266
 over the photos, get that
 animation, like them,
 
-00:40:06.866 --> 00:40:11.126 A:middle
+
+837
+00:40:06,866 --> 00:40:11,126
 and just like that, we have got
 the ability to add favorites
 
-00:40:11.126 --> 00:40:13.116 A:middle
+
+838
+00:40:11,126 --> 00:40:13,116
 to our photos and we can still
 just do a regular click to go
 
-00:40:13.116 --> 00:40:14.176 A:middle
+
+839
+00:40:13,116 --> 00:40:14,176
 to the gallery any time.
 
-00:40:14.606 --> 00:40:16.966 A:middle
+
+840
+00:40:14,606 --> 00:40:16,966
 I think this is really
 cool and I'm really excited
 
-00:40:16.966 --> 00:40:18.646 A:middle
+
+841
+00:40:16,966 --> 00:40:18,646
 to see what you guys are going
 to do with this new technology.
 
-00:40:19.186 --> 00:40:20.776 A:middle
+
+842
+00:40:19,186 --> 00:40:20,776
 And with that, I am going
 to give it back to Brent.
 
-00:40:20.776 --> 00:40:20.956 A:middle
+
+843
+00:40:20,776 --> 00:40:20,956
 Thank you.
 
-00:40:21.516 --> 00:40:26.276 A:middle
+
+844
+00:40:21,516 --> 00:40:26,276
 [Applause]
 
-00:40:26.776 --> 00:40:27.336 A:middle
-&gt;&gt; BRENT FULGHAM: Thanks, Chris.
 
-00:40:28.786 --> 00:40:31.676 A:middle
+845
+00:40:26,776 --> 00:40:27,336
+>> BRENT FULGHAM: Thanks, Chris.
+
+
+846
+00:40:28,786 --> 00:40:31,676
 So I think you will agree
 that that was a great way
 
-00:40:31.676 --> 00:40:32.826 A:middle
+
+847
+00:40:31,676 --> 00:40:32,826
 to make use of this hardware.
 
-00:40:33.426 --> 00:40:37.466 A:middle
+
+848
+00:40:33,426 --> 00:40:37,466
 A couple of best practices
 for the Force Touch trackpad
 
-00:40:37.466 --> 00:40:38.966 A:middle
+
+849
+00:40:37,466 --> 00:40:38,966
 that I would like to recommend.
 
-00:40:39.676 --> 00:40:41.776 A:middle
+
+850
+00:40:39,676 --> 00:40:41,776
 Always use the mouse
 force constants
 
-00:40:41.886 --> 00:40:45.006 A:middle
+
+851
+00:40:41,886 --> 00:40:45,006
 and not hardcoded numerical
 values, because we expect
 
-00:40:45.006 --> 00:40:48.756 A:middle
+
+852
+00:40:45,006 --> 00:40:48,756
 that these may change as
 we navigate the process
 
-00:40:48.966 --> 00:40:52.476 A:middle
+
+853
+00:40:48,966 --> 00:40:52,476
 of fulfilling or
 completing this feature.
 
-00:40:53.136 --> 00:40:56.146 A:middle
+
+854
+00:40:53,136 --> 00:40:56,146
 And remember that not all users
 have Force Touch hardware,
 
-00:40:56.146 --> 00:41:01.786 A:middle
+
+855
+00:40:56,146 --> 00:41:01,786
 sadly, and so we should use this
 as a shortcut or as a flourish,
 
 
-
-00:40:56.146 --> 00:41:01.786 A:middle
-sadly, and so we should use this
-as a shortcut or as a flourish,
-
-00:41:01.786 --> 00:41:03.866 A:middle
+856
+00:41:01,786 --> 00:41:03,866
 an extra for people
 who have this hardware.
 
-00:41:04.166 --> 00:41:07.336 A:middle
+
+857
+00:41:04,166 --> 00:41:07,336
 Use it to drive animations or
 to provide a shortcut to content
 
-00:41:07.336 --> 00:41:08.666 A:middle
+
+858
+00:41:07,336 --> 00:41:08,666
 that you can get to other ways.
 
-00:41:09.136 --> 00:41:14.706 A:middle
+
+859
+00:41:09,136 --> 00:41:14,706
 And that was creating amazing
 experiences on Mac and iOS.
 
-00:41:15.306 --> 00:41:19.176 A:middle
+
+860
+00:41:15,306 --> 00:41:19,176
 And that rounds out the
 bulk of the talk today.
 
-00:41:19.266 --> 00:41:21.196 A:middle
+
+861
+00:41:19,266 --> 00:41:21,196
 I just want to summarize
 a couple of things.
 
-00:41:21.936 --> 00:41:24.366 A:middle
+
+862
+00:41:21,936 --> 00:41:24,366
 We talked about backdrop
 filters, an amazing way
 
-00:41:24.366 --> 00:41:28.096 A:middle
+
+863
+00:41:24,366 --> 00:41:28,096
 of hardware accelerated backdrop
 filter effects on your sites.
 
-00:41:28.466 --> 00:41:32.866 A:middle
+
+864
+00:41:28,466 --> 00:41:32,866
 Scroll Snap Points allow
 you to get tiled scrolling
 
-00:41:32.866 --> 00:41:34.516 A:middle
+
+865
+00:41:32,866 --> 00:41:34,516
 with just a few lines of CSS.
 
-00:41:35.396 --> 00:41:38.656 A:middle
+
+866
+00:41:35,396 --> 00:41:38,656
 We talked about the amazing
 new class syntax in JavaScript,
 
-00:41:39.406 --> 00:41:44.696 A:middle
+
+867
+00:41:39,406 --> 00:41:44,696
 the @supports functions for CSS,
 so that we can block out content
 
-00:41:44.696 --> 00:41:46.316 A:middle
+
+868
+00:41:44,696 --> 00:41:46,316
 and have styles that apply only
 
-00:41:46.316 --> 00:41:47.846 A:middle
+
+869
+00:41:46,316 --> 00:41:47,846
 when certain features
 are available.
 
-00:41:48.456 --> 00:41:52.216 A:middle
+
+870
+00:41:48,456 --> 00:41:52,216
 We talked a bit about AirPlay
 coming to OS X through Safari,
 
-00:41:52.736 --> 00:41:56.376 A:middle
+
+871
+00:41:52,736 --> 00:41:56,376
 and picture-in-picture and iOS
 multitasking, and some sessions
 
-00:41:56.376 --> 00:42:00.156 A:middle
+
+872
+00:41:56,376 --> 00:42:00,156
 that you should see about that,
 and this new Force Touch API.
 
 
-
-00:41:56.376 --> 00:42:00.156 A:middle
-that you should see about that,
-and this new Force Touch API.
-
-00:42:01.276 --> 00:42:04.756 A:middle
+873
+00:42:01,276 --> 00:42:04,756
 For more information,
 documentation is available.
 
-00:42:04.756 --> 00:42:06.216 A:middle
+
+874
+00:42:04,756 --> 00:42:06,216
 We always love people to come
 
-00:42:06.216 --> 00:42:09.726 A:middle
+
+875
+00:42:06,216 --> 00:42:09,726
 to the WebKit project
 at www.WebKit.org.
 
-00:42:10.086 --> 00:42:12.636 A:middle
+
+876
+00:42:10,086 --> 00:42:12,636
 Join us and see what we
 are doing or come try
 
-00:42:12.636 --> 00:42:14.916 A:middle
+
+877
+00:42:12,636 --> 00:42:14,916
 out the nightlies and see
 what new features are coming
 
-00:42:14.916 --> 00:42:15.816 A:middle
+
+878
+00:42:14,916 --> 00:42:15,816
 for next year.
 
-00:42:15.816 --> 00:42:16.836 A:middle
+
+879
+00:42:15,816 --> 00:42:16,836
 Get a sneak peek.
 
-00:42:16.836 --> 00:42:20.446 A:middle
+
+880
+00:42:16,836 --> 00:42:20,446
 And for general inquiries,
 I recommend that you get
 
-00:42:20.446 --> 00:42:22.546 A:middle
+
+881
+00:42:20,446 --> 00:42:22,546
 to know Jonathan Davis,
 our WebKit Evangelist.
 
-00:42:22.546 --> 00:42:25.146 A:middle
+
+882
+00:42:22,546 --> 00:42:25,146
 He's a great person to get
 to know when you have issues
 
-00:42:25.146 --> 00:42:28.576 A:middle
+
+883
+00:42:25,146 --> 00:42:28,576
 that you want to talk about or
 if you have messages you want
 
-00:42:28.576 --> 00:42:30.076 A:middle
+
+884
+00:42:28,576 --> 00:42:30,076
 to get to us on the WebKit team.
 
-00:42:31.246 --> 00:42:34.016 A:middle
+
+885
+00:42:31,246 --> 00:42:34,016
 And with that, thank you so
 much for your time this morning
 
-00:42:34.016 --> 00:42:35.966 A:middle
+
+886
+00:42:34,016 --> 00:42:35,966
 and have a great time
 at WWDC this week.
 
-00:42:36.031 --> 00:42:38.031 A:middle
+
+887
+00:42:36,031 --> 00:42:38,031
 [Applause]
 
-00:42:38.046 --> 00:42:38.266 A:middle
+
+888
+00:42:38,046 --> 00:42:38,266
 Thank you.
 

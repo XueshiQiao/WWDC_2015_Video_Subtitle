@@ -1,4643 +1,6693 @@
-
-00:00:32.095 --> 00:00:33.746 A:middle
-&gt;&gt; BRUNO SOMMER: Hello
+1
+00:00:32,095 --> 00:00:33,746
+>> BRUNO SOMMER: Hello
 everyone and welcome.
 
-00:00:34.216 --> 00:00:36.006 A:middle
+
+2
+00:00:34,216 --> 00:00:36,006
 My name is Bruno Sommer,
 
-00:00:36.006 --> 00:00:37.856 A:middle
+
+3
+00:00:36,006 --> 00:00:37,856
 I'm a game technologies
 engineer here at Apple.
 
-00:00:38.226 --> 00:00:40.246 A:middle
+
+4
+00:00:38,226 --> 00:00:40,246
 And today I'm very
 excited to be able
 
-00:00:40.246 --> 00:00:43.196 A:middle
+
+5
+00:00:40,246 --> 00:00:43,196
 to introduce you to GameplayKit.
 
-00:00:43.876 --> 00:00:46.766 A:middle
+
+6
+00:00:43,876 --> 00:00:46,766
 Apple's first dedicated
 Gameplay framework.
 
-00:00:47.756 --> 00:00:51.656 A:middle
+
+7
+00:00:47,756 --> 00:00:51,656
 We have a lot of solutions to
 the visual part of making game
 
-00:00:51.696 --> 00:00:55.266 A:middle
+
+8
+00:00:51,696 --> 00:00:55,266
 on our platform things like
 SpriteKit, SceneKit and Metal.
 
-00:00:56.196 --> 00:00:58.196 A:middle
+
+9
+00:00:56,196 --> 00:00:58,196
 The gameplay is another
 really important part
 
-00:00:58.196 --> 00:00:59.426 A:middle
+
+10
+00:00:58,196 --> 00:00:59,426
 of that game development puzzle.
 
 
-
-00:01:00.296 --> 00:01:03.756 A:middle
+11
+00:01:00,296 --> 00:01:03,756
 As it turns out, there is hard
 problems in the gameplay space,
 
-00:01:04.105 --> 00:01:07.316 A:middle
+
+12
+00:01:04,105 --> 00:01:07,316
 things like AI, pathfinding,
 autonomous movement.
 
-00:01:09.006 --> 00:01:09.866 A:middle
+
+13
+00:01:09,006 --> 00:01:09,866
 We firmly believe
 
-00:01:09.866 --> 00:01:11.856 A:middle
+
+14
+00:01:09,866 --> 00:01:11,856
 that experience shouldn't
 be a barrier
 
-00:01:12.586 --> 00:01:16.016 A:middle
+
+15
+00:01:12,586 --> 00:01:16,016
 to prevent our developers making
 great and compelling games.
 
-00:01:17.196 --> 00:01:19.576 A:middle
+
+16
+00:01:17,196 --> 00:01:19,576
 So going forward we want
 you guys to be able to focus
 
-00:01:19.576 --> 00:01:21.026 A:middle
+
+17
+00:01:19,576 --> 00:01:21,026
 on bringing your
 cool ideas to life.
 
-00:01:21.486 --> 00:01:22.436 A:middle
+
+18
+00:01:21,486 --> 00:01:22,436
 And we'll do the heavy lifting
 
-00:01:22.436 --> 00:01:25.496 A:middle
+
+19
+00:01:22,436 --> 00:01:25,496
 on the back end to
 make that happen.
 
-00:01:26.506 --> 00:01:27.416 A:middle
+
+20
+00:01:26,506 --> 00:01:27,416
 So our mission when we set
 
-00:01:27.416 --> 00:01:29.196 A:middle
+
+21
+00:01:27,416 --> 00:01:29,196
 out to make GameplayKit
 was very clear.
 
-00:01:29.906 --> 00:01:32.616 A:middle
+
+22
+00:01:29,906 --> 00:01:32,616
 We wanted to make a simple,
 yet powerful solution API
 
-00:01:32.726 --> 00:01:33.756 A:middle
+
+23
+00:01:32,726 --> 00:01:33,756
 of gameplay solutions.
 
-00:01:33.756 --> 00:01:36.486 A:middle
+
+24
+00:01:33,756 --> 00:01:36,486
 Now this is things like
 common design patterns
 
-00:01:36.486 --> 00:01:39.086 A:middle
+
+25
+00:01:36,486 --> 00:01:39,086
 and architectures so we can
 all start speaking the same
 
-00:01:39.086 --> 00:01:39.826 A:middle
+
+26
+00:01:39,086 --> 00:01:39,826
 gameplay language.
 
-00:01:40.646 --> 00:01:43.156 A:middle
+
+27
+00:01:40,646 --> 00:01:43,156
 And there's also a number of
 standard gameplay algorithms
 
-00:01:43.226 --> 00:01:45.946 A:middle
+
+28
+00:01:43,226 --> 00:01:45,946
 that is applicable to a
 wide variety of game genres.
 
-00:01:47.426 --> 00:01:49.526 A:middle
+
+29
+00:01:47,426 --> 00:01:49,526
 And it is also very important
 to us that this remains graphic
 
-00:01:49.526 --> 00:01:52.066 A:middle
+
+30
+00:01:49,526 --> 00:01:52,066
 and engine agnostic, so
 while GameplayKit is separate
 
-00:01:52.066 --> 00:01:54.096 A:middle
+
+31
+00:01:52,066 --> 00:01:54,096
 from a lot of those visual
 frameworks I talked about,
 
-00:01:54.706 --> 00:01:55.836 A:middle
+
+32
+00:01:54,706 --> 00:01:55,836
 it plays really nicely
 with them.
 
-00:01:56.066 --> 00:01:59.256 A:middle
+
+33
+00:01:56,066 --> 00:01:59,256
 It plays nice with SpriteKit,
 SceneKit, Metal, and more.
 
-00:01:59.316 --> 00:02:04.126 A:middle
+
+34
+00:01:59,316 --> 00:02:04,126
 So here we have GameplayKit
 
 
-
-00:01:59.316 --> 00:02:04.126 A:middle
-So here we have GameplayKit
-
-00:02:04.176 --> 00:02:06.236 A:middle
+35
+00:02:04,176 --> 00:02:06,236
 and the seven major
 features that make it up.
 
-00:02:07.236 --> 00:02:09.226 A:middle
+
+36
+00:02:07,236 --> 00:02:09,226
 And these are components
 which are a really great way
 
-00:02:09.226 --> 00:02:11.176 A:middle
+
+37
+00:02:09,226 --> 00:02:11,176
 to structure your game
 objects and game logic.
 
-00:02:12.536 --> 00:02:15.016 A:middle
+
+38
+00:02:12,536 --> 00:02:15,016
 State machines, which describe
 the statefulness in our games
 
-00:02:15.016 --> 00:02:17.136 A:middle
+
+39
+00:02:15,016 --> 00:02:17,136
 and the various state
 changes of our game objects.
 
-00:02:18.476 --> 00:02:20.946 A:middle
+
+40
+00:02:18,476 --> 00:02:20,946
 Agents, which are
 autonomously moving entities
 
-00:02:20.946 --> 00:02:23.516 A:middle
+
+41
+00:02:20,946 --> 00:02:23,516
 that are controlled by
 realistic behaviors and goals.
 
-00:02:24.776 --> 00:02:27.306 A:middle
+
+42
+00:02:24,776 --> 00:02:27,306
 Pathfinding, which deals with
 navigation graph generation
 
-00:02:27.356 --> 00:02:28.616 A:middle
+
+43
+00:02:27,356 --> 00:02:28,616
 and how we move our entities
 
-00:02:29.106 --> 00:02:30.856 A:middle
+
+44
+00:02:29,106 --> 00:02:30,856
 between the passable
 areas in our game world.
 
-00:02:30.856 --> 00:02:33.586 A:middle
+
+45
+00:02:30,856 --> 00:02:33,586
 We also have a great
 MinMax AI solution
 
-00:02:33.586 --> 00:02:35.316 A:middle
+
+46
+00:02:33,586 --> 00:02:35,316
 which is a really
 great way to give life
 
-00:02:35.406 --> 00:02:36.936 A:middle
+
+47
+00:02:35,406 --> 00:02:36,936
 to our computer-controlled
 opponents.
 
-00:02:37.836 --> 00:02:40.346 A:middle
+
+48
+00:02:37,836 --> 00:02:40,346
 There is a number of game
 quality random sources
 
-00:02:40.346 --> 00:02:42.516 A:middle
+
+49
+00:02:40,346 --> 00:02:42,516
 and random distributions
 at your disposal.
 
-00:02:42.826 --> 00:02:44.916 A:middle
+
+50
+00:02:42,826 --> 00:02:44,916
 And last we have a rule system,
 which are a really great way
 
-00:02:45.096 --> 00:02:47.296 A:middle
+
+51
+00:02:45,096 --> 00:02:47,296
 to model discreet
 and fuzzy logic.
 
-00:02:48.346 --> 00:02:50.186 A:middle
+
+52
+00:02:48,346 --> 00:02:50,186
 There's a lot to cover today.
 
-00:02:50.326 --> 00:02:53.596 A:middle
+
+53
+00:02:50,326 --> 00:02:53,596
 Let's go ahead and jump right
 in with entities and components.
 
-00:02:53.626 --> 00:02:59.816 A:middle
+
+54
+00:02:53,626 --> 00:02:59,816
 I want to pose sort of this
 classic problem with inheriting
 
-00:02:59.866 --> 00:03:01.216 A:middle
+
+55
+00:02:59,866 --> 00:03:01,216
 from common game objects.
 
 
-
-00:02:59.866 --> 00:03:01.216 A:middle
-from common game objects.
-
-00:03:01.636 --> 00:03:02.786 A:middle
+56
+00:03:01,636 --> 00:03:02,786
 Here we have a tower
 defense game
 
-00:03:03.046 --> 00:03:05.916 A:middle
+
+57
+00:03:03,046 --> 00:03:05,916
 with a simple projectile
 tower and archer classes.
 
-00:03:07.266 --> 00:03:08.906 A:middle
+
+58
+00:03:07,266 --> 00:03:08,906
 We have some shared
 functionality here.
 
-00:03:09.736 --> 00:03:11.806 A:middle
+
+59
+00:03:09,736 --> 00:03:11,806
 We have shooting,
 and we have moving,
 
-00:03:11.806 --> 00:03:13.296 A:middle
+
+60
+00:03:11,806 --> 00:03:13,296
 and we have being targeted.
 
-00:03:14.156 --> 00:03:15.636 A:middle
+
+61
+00:03:14,156 --> 00:03:15,636
 Let's take shooting for example.
 
-00:03:15.976 --> 00:03:18.396 A:middle
+
+62
+00:03:15,976 --> 00:03:18,396
 We want towers and archers
 to both be able to shoot.
 
-00:03:18.856 --> 00:03:20.116 A:middle
+
+63
+00:03:18,856 --> 00:03:20,116
 Where then do we put
 our shoot function?
 
-00:03:21.656 --> 00:03:23.606 A:middle
+
+64
+00:03:21,656 --> 00:03:23,606
 One option might be to
 simply copy and paste it
 
-00:03:23.606 --> 00:03:25.286 A:middle
+
+65
+00:03:23,606 --> 00:03:25,286
 between the tower
 and archer classes,
 
-00:03:25.896 --> 00:03:28.526 A:middle
+
+66
+00:03:25,896 --> 00:03:28,526
 but now I have two spots in my
 code that share functionality,
 
-00:03:28.616 --> 00:03:30.546 A:middle
+
+67
+00:03:28,616 --> 00:03:30,546
 and if I ever want to
 update that functionality,
 
-00:03:30.826 --> 00:03:32.426 A:middle
+
+68
+00:03:30,826 --> 00:03:32,426
 there is now two spots
 where I need to update it.
 
-00:03:32.526 --> 00:03:34.696 A:middle
+
+69
+00:03:32,526 --> 00:03:34,696
 And if I only update it in
 one I'm undoubtably going
 
-00:03:34.696 --> 00:03:35.866 A:middle
+
+70
+00:03:34,696 --> 00:03:35,866
 to get some really
 weird behavior.
 
-00:03:36.776 --> 00:03:39.886 A:middle
+
+71
+00:03:36,776 --> 00:03:39,886
 So our only real option in
 this inheritance model I've
 
-00:03:39.886 --> 00:03:42.426 A:middle
+
+72
+00:03:39,886 --> 00:03:42,426
 described, is to move
 shared functionality higher
 
-00:03:42.426 --> 00:03:42.866 A:middle
+
+73
+00:03:42,426 --> 00:03:42,866
 in the tree.
 
-00:03:43.356 --> 00:03:45.366 A:middle
+
+74
+00:03:43,356 --> 00:03:45,366
 So here we have a shoot
 function we might put it
 
-00:03:45.596 --> 00:03:48.086 A:middle
+
+75
+00:03:45,596 --> 00:03:48,086
 in the game object class
 or some common-based class.
 
-00:03:48.936 --> 00:03:51.466 A:middle
+
+76
+00:03:48,936 --> 00:03:51,466
 Now the problem with this
 approach is that as we get more
 
-00:03:51.466 --> 00:03:54.236 A:middle
+
+77
+00:03:51,466 --> 00:03:54,236
 and more shared functionality
 in our games we're forced
 
-00:03:54.236 --> 00:03:56.256 A:middle
+
+78
+00:03:54,236 --> 00:03:56,256
 to move it higher and
 higher in the hierarchies.
 
-00:03:56.716 --> 00:03:59.116 A:middle
+
+79
+00:03:56,716 --> 00:03:59,116
 And our basic game objects
 become anything but basic.
 
-00:03:59.706 --> 00:04:02.926 A:middle
+
+80
+00:03:59,706 --> 00:04:02,926
 They become large and hard to
 understand, hard to maintain,
 
 
-
-00:03:59.706 --> 00:04:02.926 A:middle
-They become large and hard to
-understand, hard to maintain,
-
-00:04:03.346 --> 00:04:04.386 A:middle
+81
+00:04:03,346 --> 00:04:04,386
 and hard to collaborate on.
 
-00:04:05.446 --> 00:04:08.446 A:middle
+
+82
+00:04:05,446 --> 00:04:08,446
 Let's take a look at how
 we solve this problem using
 
-00:04:08.446 --> 00:04:09.366 A:middle
+
+83
+00:04:08,446 --> 00:04:09,366
 entities and components.
 
-00:04:10.656 --> 00:04:12.126 A:middle
+
+84
+00:04:10,656 --> 00:04:12,126
 You see here we still
 have our three objects:
 
-00:04:12.126 --> 00:04:13.916 A:middle
+
+85
+00:04:12,126 --> 00:04:13,916
 projectile, tower, archer.
 
-00:04:14.656 --> 00:04:16.956 A:middle
+
+86
+00:04:14,656 --> 00:04:16,956
 But now instead of them
 having functionality
 
-00:04:16.956 --> 00:04:20.346 A:middle
+
+87
+00:04:16,956 --> 00:04:20,346
 in an inheritance sense, being
 a mover, being a shooter,
 
-00:04:20.346 --> 00:04:21.386 A:middle
+
+88
+00:04:20,346 --> 00:04:21,386
 or being targetable,
 
-00:04:22.106 --> 00:04:24.576 A:middle
+
+89
+00:04:22,106 --> 00:04:24,576
 they instead have these
 objects we call components
 
-00:04:24.576 --> 00:04:26.996 A:middle
+
+90
+00:04:24,576 --> 00:04:26,996
 which encapsulate singular
 elements of our game logic,
 
-00:04:26.996 --> 00:04:29.776 A:middle
+
+91
+00:04:26,996 --> 00:04:29,776
 so here we have a MoveComponent
 that deals with moving,
 
-00:04:29.926 --> 00:04:33.016 A:middle
+
+92
+00:04:29,926 --> 00:04:33,016
 a ShootComponent that deals with
 shooting, and a TargetComponent,
 
-00:04:33.206 --> 00:04:34.276 A:middle
+
+93
+00:04:33,206 --> 00:04:34,276
 what it means to be targetable.
 
-00:04:34.276 --> 00:04:39.016 A:middle
+
+94
+00:04:34,276 --> 00:04:39,016
 So we gain these really
 nice little black boxes
 
-00:04:39.016 --> 00:04:41.336 A:middle
+
+95
+00:04:39,016 --> 00:04:41,336
 of singular functionality,
 that are loosely rather
 
-00:04:41.336 --> 00:04:43.156 A:middle
+
+96
+00:04:41,336 --> 00:04:43,156
 than tightly coupled
 with the hierarchy.
 
-00:04:43.156 --> 00:04:48.706 A:middle
+
+97
+00:04:43,156 --> 00:04:48,706
 So we see now that entities
 and components are a great way
 
-00:04:48.706 --> 00:04:50.026 A:middle
+
+98
+00:04:48,706 --> 00:04:50,026
 to organize our game logic.
 
-00:04:51.336 --> 00:04:52.816 A:middle
+
+99
+00:04:51,336 --> 00:04:52,816
 For one, they're
 easy to maintain
 
-00:04:52.816 --> 00:04:54.716 A:middle
+
+100
+00:04:52,816 --> 00:04:54,716
 because they're these
 nice black boxes
 
-00:04:54.716 --> 00:04:57.276 A:middle
+
+101
+00:04:54,716 --> 00:04:57,276
 of incapsulated functionality;
 they tend to be simpler.
 
-00:04:58.696 --> 00:05:00.936 A:middle
+
+102
+00:04:58,696 --> 00:05:00,936
 We also have a really
 nice collaboration
 
 
-
-00:04:58.696 --> 00:05:00.936 A:middle
-We also have a really
-nice collaboration
-
-00:05:00.936 --> 00:05:01.966 A:middle
+103
+00:05:00,936 --> 00:05:01,966
 with the entities
 and components.
 
-00:05:02.126 --> 00:05:04.196 A:middle
+
+104
+00:05:02,126 --> 00:05:04,196
 Now I can have one developer
 work on one component
 
-00:05:04.486 --> 00:05:06.586 A:middle
+
+105
+00:05:04,486 --> 00:05:06,586
 and another developer working
 on yet another component,
 
-00:05:06.856 --> 00:05:09.286 A:middle
+
+106
+00:05:06,856 --> 00:05:09,286
 and they don't necessarily need
 to know the intimate details
 
-00:05:09.436 --> 00:05:10.346 A:middle
+
+107
+00:05:09,436 --> 00:05:10,346
 between these components.
 
-00:05:12.316 --> 00:05:14.336 A:middle
+
+108
+00:05:12,316 --> 00:05:14,336
 We also get nice
 scaling with complexity.
 
-00:05:14.336 --> 00:05:15.636 A:middle
+
+109
+00:05:14,336 --> 00:05:15,636
 What I mean by that,
 in that class
 
-00:05:15.636 --> 00:05:18.746 A:middle
+
+110
+00:05:15,636 --> 00:05:18,746
 and inheritance model my
 hierarchy is grows wide and tall
 
-00:05:18.746 --> 00:05:20.146 A:middle
+
+111
+00:05:18,746 --> 00:05:20,146
 as my game gets more complex.
 
-00:05:20.556 --> 00:05:22.816 A:middle
+
+112
+00:05:20,556 --> 00:05:22,816
 With entities and
 components it just grows wider
 
-00:05:23.496 --> 00:05:25.286 A:middle
+
+113
+00:05:23,496 --> 00:05:25,286
 in that width is no
 longer a detriment.
 
-00:05:25.646 --> 00:05:26.826 A:middle
+
+114
+00:05:25,646 --> 00:05:26,826
 It's really a toolbox.
 
-00:05:27.836 --> 00:05:29.876 A:middle
+
+115
+00:05:27,836 --> 00:05:29,876
 Any time I want to make a new
 entity in the game I simply look
 
-00:05:29.876 --> 00:05:31.206 A:middle
+
+116
+00:05:29,876 --> 00:05:31,206
 at the components
 I have available,
 
-00:05:31.606 --> 00:05:34.156 A:middle
+
+117
+00:05:31,606 --> 00:05:34,156
 choose the appropriate ones or
 perhaps implement a new one.
 
-00:05:34.206 --> 00:05:37.806 A:middle
+
+118
+00:05:34,206 --> 00:05:37,806
 And with entities and components
 we get really easy access
 
-00:05:37.866 --> 00:05:38.986 A:middle
+
+119
+00:05:37,866 --> 00:05:38,986
 to dynamic behavior.
 
-00:05:39.676 --> 00:05:41.206 A:middle
+
+120
+00:05:39,676 --> 00:05:41,206
 Let's think back to the
 tower defense example.
 
-00:05:41.206 --> 00:05:43.956 A:middle
+
+121
+00:05:41,206 --> 00:05:43,956
 Perhaps I want to implement a
 magic spell that roots archers
 
-00:05:43.956 --> 00:05:45.416 A:middle
+
+122
+00:05:43,956 --> 00:05:45,416
 to the ground so they
 can no longer move.
 
-00:05:46.346 --> 00:05:47.646 A:middle
+
+123
+00:05:46,346 --> 00:05:47,646
 One way to represent
 this might be
 
-00:05:47.646 --> 00:05:49.916 A:middle
+
+124
+00:05:47,646 --> 00:05:49,916
 to simply temporarily
 remove it's MoveComponent.
 
-00:05:50.376 --> 00:05:52.016 A:middle
+
+125
+00:05:50,376 --> 00:05:52,016
 This implicitly tells
 the rest of my game
 
-00:05:52.376 --> 00:05:53.526 A:middle
+
+126
+00:05:52,376 --> 00:05:53,526
 that it can no longer move.
 
-00:05:53.606 --> 00:05:56.026 A:middle
+
+127
+00:05:53,606 --> 00:05:56,026
 And I get the added benefit of
 the rest of my game not needing
 
-00:05:56.026 --> 00:05:58.006 A:middle
+
+128
+00:05:56,026 --> 00:05:58,006
 to know the intimate
 details of magic spells.
 
-00:05:58.006 --> 00:06:01.286 A:middle
+
+129
+00:05:58,006 --> 00:06:01,286
 So let's go ahead and take
 a look at the classes.
 
 
-
-00:05:58.006 --> 00:06:01.286 A:middle
-So let's go ahead and take
-a look at the classes.
-
-00:06:02.116 --> 00:06:03.336 A:middle
+130
+00:06:02,116 --> 00:06:03,336
 Here we have GKEntity.
 
-00:06:03.336 --> 00:06:04.956 A:middle
+
+131
+00:06:03,336 --> 00:06:04,956
 This is our entity base class,
 
-00:06:04.956 --> 00:06:07.336 A:middle
+
+132
+00:06:04,956 --> 00:06:07,336
 and it's really just a simple
 collection of components.
 
-00:06:07.856 --> 00:06:10.886 A:middle
+
+133
+00:06:07,856 --> 00:06:10,886
 It has the functions to add and
 remove components dynamically,
 
-00:06:11.176 --> 00:06:13.396 A:middle
+
+134
+00:06:11,176 --> 00:06:13,396
 as my entities functionality
 undoubtedly changes.
 
-00:06:14.256 --> 00:06:17.146 A:middle
+
+135
+00:06:14,256 --> 00:06:17,146
 Also let's me access existing
 components by unique class type.
 
-00:06:17.976 --> 00:06:20.186 A:middle
+
+136
+00:06:17,976 --> 00:06:20,186
 When I call update on
 my GKEntity it's going
 
-00:06:20.186 --> 00:06:22.546 A:middle
+
+137
+00:06:20,186 --> 00:06:22,546
 to automatically update all
 of the components that it has.
 
-00:06:23.596 --> 00:06:25.876 A:middle
+
+138
+00:06:23,596 --> 00:06:25,876
 So thinking back to that
 example, projectile, tower,
 
-00:06:25.876 --> 00:06:27.896 A:middle
+
+139
+00:06:25,876 --> 00:06:27,896
 and archer would
 all be GKEntities.
 
-00:06:28.386 --> 00:06:33.056 A:middle
+
+140
+00:06:28,386 --> 00:06:33,056
 Here we have our
 GKComponent class.
 
-00:06:33.216 --> 00:06:35.136 A:middle
+
+141
+00:06:33,216 --> 00:06:35,136
 Now you subclass this
 any time you want
 
-00:06:35.136 --> 00:06:37.616 A:middle
+
+142
+00:06:35,136 --> 00:06:37,616
 to add those singular bits of
 functionality to your game.
 
-00:06:37.656 --> 00:06:39.056 A:middle
+
+143
+00:06:37,656 --> 00:06:39,056
 And you do that in
 a number of ways.
 
-00:06:39.966 --> 00:06:42.356 A:middle
+
+144
+00:06:39,966 --> 00:06:42,356
 Properties on your components
 become state information
 
-00:06:42.396 --> 00:06:43.276 A:middle
+
+145
+00:06:42,396 --> 00:06:43,276
 about those components.
 
-00:06:43.276 --> 00:06:45.666 A:middle
+
+146
+00:06:43,276 --> 00:06:45,666
 So you can imagine the
 ShootComponent here would likely
 
-00:06:45.666 --> 00:06:46.706 A:middle
+
+147
+00:06:45,666 --> 00:06:46,706
 have a damage property
 
-00:06:46.956 --> 00:06:49.046 A:middle
+
+148
+00:06:46,956 --> 00:06:49,046
 that describes how much
 damage it's projectiles do.
 
-00:06:49.866 --> 00:06:51.836 A:middle
+
+149
+00:06:49,866 --> 00:06:51,836
 You also implement
 custom selectors
 
-00:06:51.836 --> 00:06:54.556 A:middle
+
+150
+00:06:51,836 --> 00:06:54,556
 that extend functionally and
 tell the rest of your game how
 
-00:06:54.556 --> 00:06:55.786 A:middle
+
+151
+00:06:54,556 --> 00:06:55,786
 to communicate with
 your component.
 
-00:06:56.796 --> 00:06:59.036 A:middle
+
+152
+00:06:56,796 --> 00:06:59,036
 So the MoveComponent here for
 example would likely have a move
 
-00:06:59.036 --> 00:07:01.396 A:middle
+
+153
+00:06:59,036 --> 00:07:01,396
 to position function that
 you would call from the input
 
 
-
-00:06:59.036 --> 00:07:01.396 A:middle
-to position function that
-you would call from the input
-
-00:07:01.796 --> 00:07:02.966 A:middle
+154
+00:07:01,796 --> 00:07:02,966
 or game controller code.
 
-00:07:03.856 --> 00:07:06.296 A:middle
+
+155
+00:07:03,856 --> 00:07:06,296
 As I mentioned before components
 are automatically updated
 
-00:07:06.296 --> 00:07:09.116 A:middle
+
+156
+00:07:06,296 --> 00:07:09,116
 by their entity's update and
 you can optionally implement any
 
-00:07:09.116 --> 00:07:11.466 A:middle
+
+157
+00:07:09,116 --> 00:07:11,466
 time based logic in
 updateWithDeltaTime.
 
-00:07:14.236 --> 00:07:17.246 A:middle
+
+158
+00:07:14,236 --> 00:07:17,246
 So undoubtedly a need will arise
 where you need finer control
 
-00:07:17.666 --> 00:07:19.826 A:middle
+
+159
+00:07:17,666 --> 00:07:19,826
 over the order or how
 your components update,
 
-00:07:19.826 --> 00:07:22.316 A:middle
+
+160
+00:07:19,826 --> 00:07:22,316
 and for that we're
 providing GKComponentSystem.
 
-00:07:22.736 --> 00:07:24.606 A:middle
+
+161
+00:07:22,736 --> 00:07:24,606
 This is a collection
 of components
 
-00:07:24.606 --> 00:07:28.776 A:middle
+
+162
+00:07:24,606 --> 00:07:28,776
 from different entities, but
 they're all the same class type.
 
-00:07:28.936 --> 00:07:31.836 A:middle
+
+163
+00:07:28,936 --> 00:07:31,836
 And you use this when update
 order is somehow intrinsically
 
-00:07:31.836 --> 00:07:32.646 A:middle
+
+164
+00:07:31,836 --> 00:07:32,646
 important to your game.
 
-00:07:33.076 --> 00:07:35.376 A:middle
+
+165
+00:07:33,076 --> 00:07:35,376
 Perhaps I want to update
 AI after my movement code
 
-00:07:35.376 --> 00:07:37.056 A:middle
+
+166
+00:07:35,376 --> 00:07:37,056
 because I want my AI
 to deal with the most
 
-00:07:37.056 --> 00:07:39.366 A:middle
+
+167
+00:07:37,056 --> 00:07:39,366
 up to date position
 information available.
 
-00:07:40.466 --> 00:07:42.686 A:middle
+
+168
+00:07:40,466 --> 00:07:42,686
 And it's important to note that
 the components that are placed
 
-00:07:42.686 --> 00:07:44.616 A:middle
+
+169
+00:07:42,686 --> 00:07:44,616
 in these component
 systems no longer update
 
-00:07:44.616 --> 00:07:45.586 A:middle
+
+170
+00:07:44,616 --> 00:07:45,586
 with their entities update.
 
-00:07:45.826 --> 00:07:48.246 A:middle
+
+171
+00:07:45,826 --> 00:07:48,246
 It is up to you to call the
 component systems update
 
-00:07:48.416 --> 00:07:50.586 A:middle
+
+172
+00:07:48,416 --> 00:07:50,586
 at the correct time to
 update all these entities.
 
-00:07:51.416 --> 00:07:53.106 A:middle
+
+173
+00:07:51,416 --> 00:07:53,106
 So thinking back to
 our example again,
 
-00:07:53.416 --> 00:07:55.436 A:middle
+
+174
+00:07:53,416 --> 00:07:55,436
 we probably have a
 move system which would
 
-00:07:55.436 --> 00:07:57.816 A:middle
+
+175
+00:07:55,436 --> 00:07:57,816
 in turn have all the move
 components in my game,
 
-00:07:58.326 --> 00:07:59.946 A:middle
+
+176
+00:07:58,326 --> 00:07:59,946
 and I can use that to
 synchronize the movement
 
-00:07:59.946 --> 00:08:01.446 A:middle
+
+177
+00:07:59,946 --> 00:08:01,446
 between my various entities.
 
 
-
-00:07:59.946 --> 00:08:01.446 A:middle
-between my various entities.
-
-00:08:02.046 --> 00:08:06.636 A:middle
+178
+00:08:02,046 --> 00:08:06,636
 So lastly we have a code
 example of what using entities
 
-00:08:06.636 --> 00:08:08.466 A:middle
+
+179
+00:08:06,636 --> 00:08:08,466
 and components in
 GameplayKit looks like.
 
-00:08:09.156 --> 00:08:10.926 A:middle
+
+180
+00:08:09,156 --> 00:08:10,926
 You see at the top here I'm
 going to make my archer entity,
 
-00:08:10.926 --> 00:08:13.426 A:middle
+
+181
+00:08:10,926 --> 00:08:13,426
 and then I'm going to make
 the three components that make
 
-00:08:13.426 --> 00:08:15.636 A:middle
+
+182
+00:08:13,426 --> 00:08:15,636
 up being an archer:
 the MoveComponent,
 
-00:08:15.736 --> 00:08:17.536 A:middle
+
+183
+00:08:15,736 --> 00:08:17,536
 the ShootComponent, and
 the TargetComponent.
 
-00:08:17.846 --> 00:08:19.056 A:middle
+
+184
+00:08:17,846 --> 00:08:19,056
 And add those to my archer.
 
-00:08:20.266 --> 00:08:22.336 A:middle
+
+185
+00:08:20,266 --> 00:08:22,336
 Then I'm going to make that
 moveSystem we talked about,
 
-00:08:22.366 --> 00:08:24.026 A:middle
+
+186
+00:08:22,366 --> 00:08:24,026
 passing in the MoveComponent's
 class,
 
-00:08:24.026 --> 00:08:26.686 A:middle
+
+187
+00:08:24,026 --> 00:08:26,686
 indicating this component system
 only deals with MoveComponents.
 
-00:08:28.006 --> 00:08:29.556 A:middle
+
+188
+00:08:28,006 --> 00:08:29,556
 Then I'm going to add my
 archer's MoveComponent
 
-00:08:29.556 --> 00:08:31.546 A:middle
+
+189
+00:08:29,556 --> 00:08:31,546
 to that moveSystem
 and I'm good to go.
 
-00:08:31.546 --> 00:08:34.265 A:middle
+
+190
+00:08:31,546 --> 00:08:34,265
 This archer and moveSystem
 are ready for use in my game.
 
-00:08:34.826 --> 00:08:39.596 A:middle
+
+191
+00:08:34,826 --> 00:08:39,596
 So that's entities
 and components.
 
-00:08:39.596 --> 00:08:41.666 A:middle
+
+192
+00:08:39,596 --> 00:08:41,666
 So let's move on
 to state machines.
 
-00:08:41.836 --> 00:08:45.076 A:middle
+
+193
+00:08:41,836 --> 00:08:45,076
 I'm going to start with
 another example here.
 
-00:08:45.326 --> 00:08:47.546 A:middle
+
+194
+00:08:45,326 --> 00:08:47,546
 Let's imagine some game where
 the player is being chased
 
-00:08:47.546 --> 00:08:50.556 A:middle
+
+195
+00:08:47,546 --> 00:08:50,556
 by ghosts, and sometimes he gets
 to take a power-up and chase,
 
-00:08:50.556 --> 00:08:52.096 A:middle
+
+196
+00:08:50,556 --> 00:08:52,096
 and maybe defeat
 the ghosts instead.
 
-00:08:52.876 --> 00:08:55.826 A:middle
+
+197
+00:08:52,876 --> 00:08:55,826
 Here's an example of what
 a state machine to control
 
-00:08:55.826 --> 00:08:57.026 A:middle
+
+198
+00:08:55,826 --> 00:08:57,026
 that ghost might look like.
 
-00:08:57.446 --> 00:08:59.816 A:middle
+
+199
+00:08:57,446 --> 00:08:59,816
 You see here we have
 the four states
 
-00:08:59.816 --> 00:09:00.836 A:middle
+
+200
+00:08:59,816 --> 00:09:00,836
 that a ghost can ever be in,
 
 
-
-00:08:59.816 --> 00:09:00.836 A:middle
-that a ghost can ever be in,
-
-00:09:01.246 --> 00:09:02.966 A:middle
+201
+00:09:01,246 --> 00:09:02,966
 chase for when the ghost
 is chasing the player,
 
-00:09:03.766 --> 00:09:05.456 A:middle
+
+202
+00:09:03,766 --> 00:09:05,456
 flee for when the player
 is chasing the ghost,
 
-00:09:06.066 --> 00:09:08.566 A:middle
+
+203
+00:09:06,066 --> 00:09:08,566
 defeated for when the ghost
 gets caught and gets defeated,
 
-00:09:09.236 --> 00:09:12.546 A:middle
+
+204
+00:09:09,236 --> 00:09:12,546
 and respawn sometime after the
 ghost is defeated before it
 
-00:09:12.546 --> 00:09:13.236 A:middle
+
+205
+00:09:12,546 --> 00:09:13,236
 comes back to life.
 
-00:09:13.376 --> 00:09:15.866 A:middle
+
+206
+00:09:13,376 --> 00:09:15,866
 Now it's important to
 note here that only some
 
-00:09:15.866 --> 00:09:17.446 A:middle
+
+207
+00:09:15,866 --> 00:09:17,446
 of these state transitions
 are valid.
 
-00:09:18.306 --> 00:09:20.806 A:middle
+
+208
+00:09:18,306 --> 00:09:20,806
 You see I move between chase
 and flee interchangeably here.
 
-00:09:20.806 --> 00:09:22.726 A:middle
+
+209
+00:09:20,806 --> 00:09:22,726
 This makes sense based on
 the game I just described,
 
-00:09:22.966 --> 00:09:24.416 A:middle
+
+210
+00:09:22,966 --> 00:09:24,416
 sometimes the ghost
 does the chasing
 
-00:09:24.416 --> 00:09:26.356 A:middle
+
+211
+00:09:24,416 --> 00:09:26,356
 and sometimes the
 player does the chasing.
 
-00:09:27.166 --> 00:09:29.526 A:middle
+
+212
+00:09:27,166 --> 00:09:29,526
 And of course we only go
 to defeated from flee,
 
-00:09:29.526 --> 00:09:31.456 A:middle
+
+213
+00:09:29,526 --> 00:09:31,456
 this is the only time that the
 player can actually defeat the
 
-00:09:31.456 --> 00:09:33.636 A:middle
+
+214
+00:09:31,456 --> 00:09:33,636
 ghost, when he has that power-up
 and is chasing the ghost.
 
-00:09:34.246 --> 00:09:37.056 A:middle
+
+215
+00:09:34,246 --> 00:09:37,056
 Then we go from respawn to
 defeated, this again makes sense
 
-00:09:37.356 --> 00:09:39.286 A:middle
+
+216
+00:09:37,356 --> 00:09:39,286
 and after we respawn
 we go right into chase.
 
-00:09:39.316 --> 00:09:40.306 A:middle
+
+217
+00:09:39,316 --> 00:09:40,306
 This is our initial state.
 
-00:09:40.306 --> 00:09:42.256 A:middle
+
+218
+00:09:40,306 --> 00:09:42,256
 After ghosts respawn,
 they go right back
 
-00:09:42.316 --> 00:09:43.266 A:middle
+
+219
+00:09:42,316 --> 00:09:43,266
 to chasing the player.
 
-00:09:43.866 --> 00:09:48.526 A:middle
+
+220
+00:09:43,866 --> 00:09:48,526
 So why are state machines so
 important in game development?
 
-00:09:49.236 --> 00:09:50.996 A:middle
+
+221
+00:09:49,236 --> 00:09:50,996
 Well for a lot of games
 they're the backbone
 
-00:09:50.996 --> 00:09:52.346 A:middle
+
+222
+00:09:50,996 --> 00:09:52,346
 of many gameplay elements.
 
-00:09:53.176 --> 00:09:55.476 A:middle
+
+223
+00:09:53,176 --> 00:09:55,476
 A ton of our common gameplay
 elements are full of state,
 
-00:09:55.516 --> 00:09:58.966 A:middle
+
+224
+00:09:55,516 --> 00:09:58,966
 things like animation,
 AI, UI, levels.
 
 
-
-00:10:00.436 --> 00:10:02.256 A:middle
+225
+00:10:00,436 --> 00:10:02,256
 Anyone who's tried to bring
 life to a humanoid character
 
-00:10:02.256 --> 00:10:03.466 A:middle
+
+226
+00:10:02,256 --> 00:10:03,466
 in a game is undoubtedly
 familiar
 
-00:10:03.466 --> 00:10:04.456 A:middle
+
+227
+00:10:03,466 --> 00:10:04,456
 with the state machine
 on the right.
 
-00:10:04.926 --> 00:10:06.236 A:middle
+
+228
+00:10:04,926 --> 00:10:06,236
 We usually have an
 IdleAnimation,
 
-00:10:06.326 --> 00:10:08.466 A:middle
+
+229
+00:10:06,326 --> 00:10:08,466
 and a MoveAnimation,
 and an AttackAnimation,
 
-00:10:08.736 --> 00:10:10.336 A:middle
+
+230
+00:10:08,736 --> 00:10:10,336
 and move between them
 in meaningful ways.
 
-00:10:10.886 --> 00:10:15.656 A:middle
+
+231
+00:10:10,886 --> 00:10:15,656
 So because this pattern is
 so pervasive in our code,
 
-00:10:15.806 --> 00:10:17.876 A:middle
+
+232
+00:10:15,806 --> 00:10:17,876
 we reimplemented it a lot, to
 what amounts to little more
 
-00:10:17.876 --> 00:10:19.666 A:middle
+
+233
+00:10:17,876 --> 00:10:19,666
 than boilerplate, and
 this take the form
 
-00:10:19.666 --> 00:10:22.026 A:middle
+
+234
+00:10:19,666 --> 00:10:22,026
 of really big switch
 statements or if else trees.
 
-00:10:23.386 --> 00:10:25.676 A:middle
+
+235
+00:10:23,386 --> 00:10:25,676
 What if you could come up with
 some common implementation
 
-00:10:25.676 --> 00:10:28.836 A:middle
+
+236
+00:10:25,676 --> 00:10:28,836
 to remove that boilerplate, add
 a little bit of maintainability,
 
-00:10:29.046 --> 00:10:31.156 A:middle
+
+237
+00:10:29,046 --> 00:10:31,156
 and give us the benefit of
 being able to reuse our states
 
-00:10:31.276 --> 00:10:32.566 A:middle
+
+238
+00:10:31,276 --> 00:10:32,566
 and state machines
 throughout our game.
 
-00:10:33.406 --> 00:10:34.926 A:middle
+
+239
+00:10:33,406 --> 00:10:34,926
 That's what we've
 done in GameplayKit.
 
-00:10:35.736 --> 00:10:36.856 A:middle
+
+240
+00:10:35,736 --> 00:10:36,856
 So let's take a look
 at the classes.
 
-00:10:37.966 --> 00:10:39.576 A:middle
+
+241
+00:10:37,966 --> 00:10:39,576
 Here we have GKStateMachine.
 
-00:10:39.836 --> 00:10:42.106 A:middle
+
+242
+00:10:39,836 --> 00:10:42,106
 This is your general
 purpose finite state machine.
 
-00:10:42.106 --> 00:10:43.856 A:middle
+
+243
+00:10:42,106 --> 00:10:43,856
 And what I mean by
 that is it's in one,
 
-00:10:43.856 --> 00:10:45.676 A:middle
+
+244
+00:10:43,856 --> 00:10:45,676
 and only one state at any given.
 
-00:10:45.746 --> 00:10:49.946 A:middle
+
+245
+00:10:45,746 --> 00:10:49,946
 And it possesses all of the
 states that it can ever be in.
 
-00:10:50.326 --> 00:10:52.386 A:middle
+
+246
+00:10:50,326 --> 00:10:52,386
 You call enterState
 on our state machines
 
-00:10:52.446 --> 00:10:54.516 A:middle
+
+247
+00:10:52,446 --> 00:10:54,516
 to cause those state
 transitions I was talking about.
 
-00:10:54.976 --> 00:10:56.796 A:middle
+
+248
+00:10:54,976 --> 00:10:56,796
 And what happens under
 the hood, is it checks
 
-00:10:56.796 --> 00:10:59.576 A:middle
+
+249
+00:10:56,796 --> 00:10:59,576
 if that transition is valid,
 and if so, makes that change.
 
 
-
-00:11:00.246 --> 00:11:02.746 A:middle
+250
+00:11:00,246 --> 00:11:02,746
 And it calls a number of call
 backs on the state objects.
 
-00:11:02.746 --> 00:11:06.016 A:middle
+
+251
+00:11:02,746 --> 00:11:06,016
 We exit the state we were in, we
 enter the state we're going to,
 
-00:11:06.206 --> 00:11:08.366 A:middle
+
+252
+00:11:06,206 --> 00:11:08,366
 and we update the current state
 that the state machine is in.
 
-00:11:09.236 --> 00:11:10.856 A:middle
+
+253
+00:11:09,236 --> 00:11:10,856
 So in that ghost example
 we'd probably have
 
-00:11:10.856 --> 00:11:11.766 A:middle
+
+254
+00:11:10,856 --> 00:11:11,766
 a GhostStateMachine.
 
-00:11:11.996 --> 00:11:14.206 A:middle
+
+255
+00:11:11,996 --> 00:11:14,206
 It would in turn have those four
 states we were talking about.
 
-00:11:14.706 --> 00:11:19.486 A:middle
+
+256
+00:11:14,706 --> 00:11:19,486
 Here we have our
 GKState abstract class.
 
-00:11:20.016 --> 00:11:22.266 A:middle
+
+257
+00:11:20,016 --> 00:11:22,266
 And you implement
 your state based logic
 
-00:11:22.626 --> 00:11:23.616 A:middle
+
+258
+00:11:22,626 --> 00:11:23,616
 in a number of callbacks.
 
-00:11:23.696 --> 00:11:25.776 A:middle
+
+259
+00:11:23,696 --> 00:11:25,776
 We give you an enter callback
 when the state is being entered,
 
-00:11:26.016 --> 00:11:27.926 A:middle
+
+260
+00:11:26,016 --> 00:11:27,926
 an exit callback when
 we're leaving the state,
 
-00:11:28.136 --> 00:11:29.996 A:middle
+
+261
+00:11:28,136 --> 00:11:29,996
 and an update callback when
 this is the current state
 
-00:11:29.996 --> 00:11:30.706 A:middle
+
+262
+00:11:29,996 --> 00:11:30,706
 in the state machine.
 
-00:11:30.886 --> 00:11:32.766 A:middle
+
+263
+00:11:30,886 --> 00:11:32,766
 As I mentioned before,
 they're automatically called
 
-00:11:32.766 --> 00:11:34.416 A:middle
+
+264
+00:11:32,766 --> 00:11:34,416
 by the state machine at
 the appropriate time.
 
-00:11:35.176 --> 00:11:37.956 A:middle
+
+265
+00:11:35,176 --> 00:11:37,956
 You can optionally override
 the isValidNextState function
 
-00:11:38.256 --> 00:11:39.896 A:middle
+
+266
+00:11:38,256 --> 00:11:39,896
 to control the edges
 of your state graph,
 
-00:11:39.896 --> 00:11:41.726 A:middle
+
+267
+00:11:39,896 --> 00:11:41,726
 those valid transitions
 I was talking about.
 
-00:11:41.766 --> 00:11:44.236 A:middle
+
+268
+00:11:41,766 --> 00:11:44,236
 Now by default, all of
 these edges are valid
 
-00:11:44.236 --> 00:11:46.696 A:middle
+
+269
+00:11:44,236 --> 00:11:46,696
 but undoubtedly you'll want
 to use the dynamic internals
 
-00:11:46.696 --> 00:11:49.766 A:middle
+
+270
+00:11:46,696 --> 00:11:49,766
 of your states to decide which
 of those transitions are valid.
 
-00:11:50.936 --> 00:11:53.456 A:middle
+
+271
+00:11:50,936 --> 00:11:53,456
 So these four ghost states we
 talked about: chase, defeated,
 
-00:11:53.456 --> 00:11:56.256 A:middle
+
+272
+00:11:53,456 --> 00:11:56,256
 flee, respawn would all be
 implemented as GKStates.
 
-00:11:56.256 --> 00:12:00.126 A:middle
+
+273
+00:11:56,256 --> 00:12:00,126
 So I want to end
 on an example here.
 
 
-
-00:11:56.256 --> 00:12:00.126 A:middle
-So I want to end
-on an example here.
-
-00:12:01.316 --> 00:12:01.786 A:middle
+274
+00:12:01,316 --> 00:12:01,786
 Let's implement
 
-00:12:01.786 --> 00:12:03.486 A:middle
+
+275
+00:12:01,786 --> 00:12:03,486
 that GhostStateMachine
 we just talked about.
 
-00:12:03.936 --> 00:12:06.326 A:middle
+
+276
+00:12:03,936 --> 00:12:06,326
 At the top here I'm going to go
 ahead and make my four states:
 
-00:12:06.676 --> 00:12:09.076 A:middle
+
+277
+00:12:06,676 --> 00:12:09,076
 chase, flee, defeated,
 and respawn.
 
-00:12:10.006 --> 00:12:12.146 A:middle
+
+278
+00:12:10,006 --> 00:12:12,146
 Then I'm going to make
 my state machine passing
 
-00:12:12.146 --> 00:12:13.906 A:middle
+
+279
+00:12:12,146 --> 00:12:13,906
 in those four states,
 those are the four states
 
-00:12:13.906 --> 00:12:15.266 A:middle
+
+280
+00:12:13,906 --> 00:12:15,266
 that the state machine
 can ever be in.
 
-00:12:16.256 --> 00:12:18.296 A:middle
+
+281
+00:12:16,256 --> 00:12:18,296
 Then I'm going to go ahead
 and enter the initial state
 
-00:12:18.416 --> 00:12:19.746 A:middle
+
+282
+00:12:18,416 --> 00:12:19,746
 which is chase in this example.
 
-00:12:20.036 --> 00:12:20.626 A:middle
+
+283
+00:12:20,036 --> 00:12:20,626
 We're good to go.
 
-00:12:20.626 --> 00:12:22.406 A:middle
+
+284
+00:12:20,626 --> 00:12:22,406
 This state machine is
 ready for use in our game,
 
-00:12:22.406 --> 00:12:28.086 A:middle
+
+285
+00:12:22,406 --> 00:12:28,086
 and that ghost is going to
 do exactly what we expect.
 
-00:12:28.086 --> 00:12:28.966 A:middle
+
+286
+00:12:28,086 --> 00:12:28,966
 So that's state machines,
 
-00:12:29.996 --> 00:12:32.196 A:middle
+
+287
+00:12:29,996 --> 00:12:32,196
 let's move on to agents,
 goals, and behaviors.
 
-00:12:32.196 --> 00:12:35.796 A:middle
+
+288
+00:12:32,196 --> 00:12:35,796
 So some concepts
 before we get started.
 
-00:12:36.846 --> 00:12:39.616 A:middle
+
+289
+00:12:36,846 --> 00:12:39,616
 What we call agents,
 goals, and behaviors,
 
-00:12:39.916 --> 00:12:43.326 A:middle
+
+290
+00:12:39,916 --> 00:12:43,326
 are really autonomously moving
 entities, they're controlled
 
-00:12:43.396 --> 00:12:45.436 A:middle
+
+291
+00:12:43,396 --> 00:12:45,436
 by realistic behaviors
 and goals.
 
-00:12:45.816 --> 00:12:48.456 A:middle
+
+292
+00:12:45,816 --> 00:12:48,456
 They have a number of physical
 constraints, things like masks,
 
-00:12:48.646 --> 00:12:50.166 A:middle
+
+293
+00:12:48,646 --> 00:12:50,166
 acceleration, and inertia.
 
-00:12:50.756 --> 00:12:53.856 A:middle
+
+294
+00:12:50,756 --> 00:12:53,856
 The behaviors that control
 these agents are in turn made
 
-00:12:53.856 --> 00:12:56.046 A:middle
+
+295
+00:12:53,856 --> 00:12:56,046
 up of a number of
 goals, that you combine
 
-00:12:56.046 --> 00:12:57.016 A:middle
+
+296
+00:12:56,046 --> 00:12:57,016
 with the appropriate weights,
 
-00:12:57.306 --> 00:13:00.366 A:middle
+
+297
+00:12:57,306 --> 00:13:00,366
 to achieve some meaningful
 autonomous movement functionally
 
 
-
-00:12:57.306 --> 00:13:00.366 A:middle
-to achieve some meaningful
-autonomous movement functionally
-
-00:13:00.366 --> 00:13:03.826 A:middle
+298
+00:13:00,366 --> 00:13:03,826
 in your game.
 
-00:13:04.016 --> 00:13:06.356 A:middle
+
+299
+00:13:04,016 --> 00:13:06,356
 So why are agents so
 important in game development?
 
-00:13:06.356 --> 00:13:08.156 A:middle
+
+300
+00:13:06,356 --> 00:13:08,156
 I think a lot of games benefit
 
-00:13:08.156 --> 00:13:10.626 A:middle
+
+301
+00:13:08,156 --> 00:13:10,626
 from really believable
 realistic movement.
 
-00:13:11.246 --> 00:13:12.926 A:middle
+
+302
+00:13:11,246 --> 00:13:12,926
 When our game entities
 move in straight lines
 
-00:13:13.306 --> 00:13:15.846 A:middle
+
+303
+00:13:13,306 --> 00:13:15,846
 and take turns instantly
 and bump into obstacles
 
-00:13:15.976 --> 00:13:18.046 A:middle
+
+304
+00:13:15,976 --> 00:13:18,046
 in our environment, it
 doesn't look very real.
 
-00:13:19.096 --> 00:13:20.936 A:middle
+
+305
+00:13:19,096 --> 00:13:20,936
 Movement in the real world
 has things like inertia,
 
-00:13:21.336 --> 00:13:22.546 A:middle
+
+306
+00:13:21,336 --> 00:13:22,546
 and mass, and acceleration.
 
-00:13:23.106 --> 00:13:24.826 A:middle
+
+307
+00:13:23,106 --> 00:13:24,826
 And it correctly
 avoids nearby obstacles
 
-00:13:24.826 --> 00:13:25.946 A:middle
+
+308
+00:13:24,826 --> 00:13:25,946
 as well as other entities.
 
-00:13:27.156 --> 00:13:28.636 A:middle
+
+309
+00:13:27,156 --> 00:13:28,636
 And when entities know
 how to get from point A
 
-00:13:28.746 --> 00:13:31.076 A:middle
+
+310
+00:13:28,746 --> 00:13:31,076
 to B they usually follow a
 path, and they usually do
 
-00:13:31.076 --> 00:13:32.656 A:middle
+
+311
+00:13:31,076 --> 00:13:32,656
 so smoothly rather than rigidly.
 
-00:13:33.246 --> 00:13:37.696 A:middle
+
+312
+00:13:33,246 --> 00:13:37,696
 So here's an overview
 of what we're giving you
 
-00:13:37.696 --> 00:13:38.606 A:middle
+
+313
+00:13:37,696 --> 00:13:38,606
 in our agent system.
 
-00:13:38.976 --> 00:13:41.706 A:middle
+
+314
+00:13:38,976 --> 00:13:41,706
 We have our Agent class, it
 is controlled by a behavior
 
-00:13:41.706 --> 00:13:43.876 A:middle
+
+315
+00:13:41,706 --> 00:13:43,876
 and it also has a delegate
 that let's you respond
 
-00:13:43.876 --> 00:13:44.896 A:middle
+
+316
+00:13:43,876 --> 00:13:44,896
 to changes in the agent.
 
-00:13:46.196 --> 00:13:48.656 A:middle
+
+317
+00:13:46,196 --> 00:13:48,656
 These behaviors are in turn
 made up of a number of goals
 
-00:13:48.656 --> 00:13:50.056 A:middle
+
+318
+00:13:48,656 --> 00:13:50,056
 that you combine with
 weights to achieve
 
-00:13:50.056 --> 00:13:51.206 A:middle
+
+319
+00:13:50,056 --> 00:13:51,206
 that meaningful functionality.
 
-00:13:51.996 --> 00:13:54.226 A:middle
+
+320
+00:13:51,996 --> 00:13:54,226
 You have a lot of goals at your
 disposal: things like seeking,
 
-00:13:54.226 --> 00:13:57.116 A:middle
+
+321
+00:13:54,226 --> 00:13:57,116
 and intercepting, avoiding
 obstacles, and following paths.
 
-00:13:57.586 --> 00:14:01.826 A:middle
+
+322
+00:13:57,586 --> 00:14:01,826
 Let's go ahead and take
 a look at the classes.
 
 
-
-00:13:57.586 --> 00:14:01.826 A:middle
-Let's go ahead and take
-a look at the classes.
-
-00:14:02.596 --> 00:14:05.236 A:middle
+323
+00:14:02,596 --> 00:14:05,236
 GKAgent is a simple
 autonomous point mass
 
-00:14:05.686 --> 00:14:08.106 A:middle
+
+324
+00:14:05,686 --> 00:14:08,106
 and it's also a GKComponent
 so it plays really nice
 
-00:14:08.106 --> 00:14:09.406 A:middle
+
+325
+00:14:08,106 --> 00:14:09,406
 with our entity and
 component systems.
 
-00:14:09.806 --> 00:14:12.606 A:middle
+
+326
+00:14:09,806 --> 00:14:12,606
 And when you call update
 on GKAgent it's going
 
-00:14:12.606 --> 00:14:14.556 A:middle
+
+327
+00:14:12,606 --> 00:14:14,556
 to apply its current
 behavior and what that does
 
-00:14:14.556 --> 00:14:16.866 A:middle
+
+328
+00:14:14,556 --> 00:14:16,866
 under the hood it's going to
 look at the goals that make
 
-00:14:16.866 --> 00:14:19.566 A:middle
+
+329
+00:14:16,866 --> 00:14:19,566
 up its behavior,
 and calculate along
 
-00:14:19.566 --> 00:14:22.536 A:middle
+
+330
+00:14:19,566 --> 00:14:22,536
 with the weights some total
 change in acceleration necessary
 
-00:14:22.736 --> 00:14:25.456 A:middle
+
+331
+00:14:22,736 --> 00:14:25,456
 to simultaneously meet
 those goals as best it can.
 
-00:14:26.826 --> 00:14:28.596 A:middle
+
+332
+00:14:26,826 --> 00:14:28,596
 It then uses that
 change in acceleration
 
-00:14:29.156 --> 00:14:31.986 A:middle
+
+333
+00:14:29,156 --> 00:14:31,986
 to change the agents velocity
 and position in rotation.
 
-00:14:33.426 --> 00:14:34.516 A:middle
+
+334
+00:14:33,426 --> 00:14:34,516
 Now GKAgent has a had lot
 
-00:14:34.516 --> 00:14:36.526 A:middle
+
+335
+00:14:34,516 --> 00:14:36,526
 of those physical constraints I
 talked about, things like mass,
 
-00:14:36.946 --> 00:14:39.646 A:middle
+
+336
+00:14:36,946 --> 00:14:39,646
 and A bounding radius, max
 speed, max acceleration.
 
-00:14:40.026 --> 00:14:42.716 A:middle
+
+337
+00:14:40,026 --> 00:14:42,716
 It is important to note that
 these units are dimensionless
 
-00:14:42.716 --> 00:14:44.476 A:middle
+
+338
+00:14:42,716 --> 00:14:44,476
 and very likely to be
 game world specific.
 
-00:14:45.256 --> 00:14:47.636 A:middle
+
+339
+00:14:45,256 --> 00:14:47,636
 So you can imagine a game on
 the scale of kilometers is going
 
-00:14:47.636 --> 00:14:49.046 A:middle
+
+340
+00:14:47,636 --> 00:14:49,046
 to have vastly different
 numbers here
 
-00:14:49.646 --> 00:14:51.136 A:middle
+
+341
+00:14:49,646 --> 00:14:51,136
 than a game that's
 on the scale of feet.
 
-00:14:51.826 --> 00:14:53.256 A:middle
+
+342
+00:14:51,826 --> 00:14:53,256
 So make sure you choose
 the appropriate numbers
 
-00:14:53.256 --> 00:14:54.166 A:middle
+
+343
+00:14:53,256 --> 00:14:54,166
 for your game world here.
 
-00:14:54.166 --> 00:14:58.476 A:middle
+
+344
+00:14:54,166 --> 00:14:58,476
 Here we have our
 GKBehavior class.
 
-00:14:58.476 --> 00:15:00.306 A:middle
+
+345
+00:14:58,476 --> 00:15:00,306
 And it's a simple
 dictionary-like container
 
 
-
-00:14:58.476 --> 00:15:00.306 A:middle
-And it's a simple
-dictionary-like container
-
-00:15:00.306 --> 00:15:01.146 A:middle
+346
+00:15:00,306 --> 00:15:01,146
 of those goals.
 
-00:15:01.766 --> 00:15:03.606 A:middle
+
+347
+00:15:01,766 --> 00:15:03,606
 It let's you dynamically
 modify the behavior
 
-00:15:03.896 --> 00:15:06.486 A:middle
+
+348
+00:15:03,896 --> 00:15:06,486
 as your game undoubtedly
 changes, and you do this
 
-00:15:06.486 --> 00:15:09.926 A:middle
+
+349
+00:15:06,486 --> 00:15:09,926
 by adding new behaviors,
 adding new goals,
 
-00:15:10.296 --> 00:15:11.416 A:middle
+
+350
+00:15:10,296 --> 00:15:11,416
 removing existing goals,
 
-00:15:11.566 --> 00:15:13.436 A:middle
+
+351
+00:15:11,566 --> 00:15:13,436
 and modifying the
 weights on existing goals.
 
-00:15:14.106 --> 00:15:16.396 A:middle
+
+352
+00:15:14,106 --> 00:15:16,396
 As I mentioned before, you
 set a behavior on an agent
 
-00:15:16.496 --> 00:15:17.486 A:middle
+
+353
+00:15:16,496 --> 00:15:17,486
 and that agent is good to go.
 
-00:15:17.586 --> 00:15:19.056 A:middle
+
+354
+00:15:17,586 --> 00:15:19,056
 The next time you
 update that agent,
 
-00:15:19.056 --> 00:15:21.686 A:middle
+
+355
+00:15:19,056 --> 00:15:21,686
 it's going to correctly
 attempt to follow that behavior.
 
-00:15:22.596 --> 00:15:24.656 A:middle
+
+356
+00:15:22,596 --> 00:15:24,656
 So some examples of
 what behaviors might be,
 
-00:15:24.656 --> 00:15:26.316 A:middle
+
+357
+00:15:24,656 --> 00:15:26,316
 perhaps you want to
 implement a flocking behavior,
 
-00:15:26.696 --> 00:15:28.666 A:middle
+
+358
+00:15:26,696 --> 00:15:28,666
 to simulate the flocking
 of birds in real life.
 
-00:15:29.296 --> 00:15:32.076 A:middle
+
+359
+00:15:29,296 --> 00:15:32,076
 We may combine a cohere, a
 separate, and an align goal
 
-00:15:32.366 --> 00:15:34.406 A:middle
+
+360
+00:15:32,366 --> 00:15:34,406
 with the appropriate
 weights to achieve that.
 
-00:15:34.986 --> 00:15:36.996 A:middle
+
+361
+00:15:34,986 --> 00:15:36,996
 Or maybe I'm making a
 racing game and want
 
-00:15:36.996 --> 00:15:38.886 A:middle
+
+362
+00:15:36,996 --> 00:15:38,886
 to make a racing behavior
 to control my race cars.
 
-00:15:39.396 --> 00:15:41.556 A:middle
+
+363
+00:15:39,396 --> 00:15:41,556
 This might be as simple as
 combining a follow path,
 
-00:15:41.556 --> 00:15:43.426 A:middle
+
+364
+00:15:41,556 --> 00:15:43,426
 I want my race car to
 follow the race track,
 
-00:15:44.006 --> 00:15:46.376 A:middle
+
+365
+00:15:44,006 --> 00:15:46,376
 and an avoid other agents
 goal, I want my race car
 
-00:15:46.376 --> 00:15:48.366 A:middle
+
+366
+00:15:46,376 --> 00:15:48,366
 to avoid colliding with
 the other race cars.
 
-00:15:48.366 --> 00:15:53.066 A:middle
+
+367
+00:15:48,366 --> 00:15:53,066
 Here's a code example much
 what making these behaviors
 
-00:15:53.066 --> 00:15:53.446 A:middle
+
+368
+00:15:53,066 --> 00:15:53,446
 looks like.
 
-00:15:54.226 --> 00:15:55.876 A:middle
+
+369
+00:15:54,226 --> 00:15:55,876
 You see the top, I'm going
 to make a seek behavior,
 
-00:15:55.876 --> 00:15:58.046 A:middle
+
+370
+00:15:55,876 --> 00:15:58,046
 I want to seek some enemy
 agent in my environment.
 
-00:15:58.046 --> 00:16:00.516 A:middle
+
+371
+00:15:58,046 --> 00:16:00,516
 I'm going to make an avoid goal,
 
 
-
-00:15:58.046 --> 00:16:00.516 A:middle
-I'm going to make an avoid goal,
-
-00:16:00.516 --> 00:16:02.216 A:middle
+372
+00:16:00,516 --> 00:16:02,216
 I want to avoid nearby
 obstacles.
 
-00:16:02.656 --> 00:16:04.046 A:middle
+
+373
+00:16:02,656 --> 00:16:04,046
 Then I'm going to make
 a targetSpeed goal.
 
-00:16:04.206 --> 00:16:07.646 A:middle
+
+374
+00:16:04,206 --> 00:16:07,646
 I want my agent to accelerate
 to and reach some target speed.
 
-00:16:08.236 --> 00:16:10.276 A:middle
+
+375
+00:16:08,236 --> 00:16:10,276
 Then I'm going to make
 my behavior passing
 
-00:16:10.276 --> 00:16:12.846 A:middle
+
+376
+00:16:10,276 --> 00:16:12,846
 in those three goals with an
 appropriate set of weights.
 
-00:16:13.306 --> 00:16:15.276 A:middle
+
+377
+00:16:13,306 --> 00:16:15,276
 You see here I'm weighting
 the avoid goal at a 5
 
-00:16:15.276 --> 00:16:17.096 A:middle
+
+378
+00:16:15,276 --> 00:16:17,096
 because I definitely don't
 want my agent to collide
 
-00:16:17.096 --> 00:16:18.126 A:middle
+
+379
+00:16:17,096 --> 00:16:18,126
 with nearby obstacles.
 
-00:16:19.056 --> 00:16:22.676 A:middle
+
+380
+00:16:19,056 --> 00:16:22,676
 Then I'm going to make my agent,
 initialize it, set the behavior
 
-00:16:22.676 --> 00:16:24.436 A:middle
+
+381
+00:16:22,676 --> 00:16:24,436
 on it, and this agent
 is good to go.
 
-00:16:24.496 --> 00:16:26.426 A:middle
+
+382
+00:16:24,496 --> 00:16:26,426
 The next time I call update
 on this agent it's going
 
-00:16:26.426 --> 00:16:28.356 A:middle
+
+383
+00:16:26,426 --> 00:16:28,356
 to correctly do what I expect.
 
-00:16:28.356 --> 00:16:32.856 A:middle
+
+384
+00:16:28,356 --> 00:16:32,856
 So let's talk a little
 about that agent delegate.
 
-00:16:33.656 --> 00:16:36.746 A:middle
+
+385
+00:16:33,656 --> 00:16:36,746
 GKAgentDelegate is useful when
 you need to sync your visuals,
 
-00:16:36.836 --> 00:16:39.266 A:middle
+
+386
+00:16:36,836 --> 00:16:39,266
 things like graphics,
 animation, physics,
 
-00:16:39.616 --> 00:16:41.436 A:middle
+
+387
+00:16:39,616 --> 00:16:41,436
 with this underlying
 agent simulation.
 
-00:16:42.216 --> 00:16:43.866 A:middle
+
+388
+00:16:42,216 --> 00:16:43,866
 We give you two callbacks
 to do that.
 
-00:16:44.346 --> 00:16:47.296 A:middle
+
+389
+00:16:44,346 --> 00:16:47,296
 agentWillUpdate, which is called
 before any updates are applied
 
-00:16:47.296 --> 00:16:47.756 A:middle
+
+390
+00:16:47,296 --> 00:16:47,756
 to the agent.
 
-00:16:48.416 --> 00:16:49.676 A:middle
+
+391
+00:16:48,416 --> 00:16:49,676
 And agentDidUpdate,
 which is called
 
-00:16:49.676 --> 00:16:50.876 A:middle
+
+392
+00:16:49,676 --> 00:16:50,876
 after the updates are applied.
 
-00:16:51.676 --> 00:16:54.806 A:middle
+
+393
+00:16:51,676 --> 00:16:54,806
 In your game this might be
 things like a SpriteKit node,
 
-00:16:55.226 --> 00:16:57.576 A:middle
+
+394
+00:16:55,226 --> 00:16:57,576
 or a SceneKit node,
 or a render component.
 
-00:16:58.086 --> 00:17:01.566 A:middle
+
+395
+00:16:58,086 --> 00:17:01,566
 Let's take a look at what
 this delegation looks
 
 
-
-00:16:58.086 --> 00:17:01.566 A:middle
-Let's take a look at what
-this delegation looks
-
-00:17:01.566 --> 00:17:02.766 A:middle
+396
+00:17:01,566 --> 00:17:02,766
 like in a SpriteKit game.
 
-00:17:03.486 --> 00:17:05.925 A:middle
+
+397
+00:17:03,486 --> 00:17:05,925
 You see here I have a custom
 sprite node MyAgentSpriteNode
 
-00:17:06.326 --> 00:17:07.915 A:middle
+
+398
+00:17:06,326 --> 00:17:07,915
 and I'm going to go
 ahead and implement both
 
-00:17:07.915 --> 00:17:09.786 A:middle
+
+399
+00:17:07,915 --> 00:17:09,786
 of those callbacks
 that I talked about.
 
-00:17:10.516 --> 00:17:13.816 A:middle
+
+400
+00:17:10,516 --> 00:17:13,816
 In agentWillUpdate, I'll set the
 agent's position in rotation,
 
-00:17:13.976 --> 00:17:15.796 A:middle
+
+401
+00:17:13,976 --> 00:17:15,796
 equal to my node's
 position in rotation,
 
-00:17:15.976 --> 00:17:18.685 A:middle
+
+402
+00:17:15,976 --> 00:17:18,685
 I want that underlying agent
 simulation to match my visuals.
 
-00:17:19.915 --> 00:17:21.116 A:middle
+
+403
+00:17:19,915 --> 00:17:21,116
 Then we are going
 to do some updating.
 
-00:17:21.215 --> 00:17:23.715 A:middle
+
+404
+00:17:21,215 --> 00:17:23,715
 And then an agentDidUpdate,
 I'm going to do the inverse,
 
-00:17:23.715 --> 00:17:25.866 A:middle
+
+405
+00:17:23,715 --> 00:17:25,866
 I'm going to set my node's
 position in rotation,
 
-00:17:26.205 --> 00:17:28.646 A:middle
+
+406
+00:17:26,205 --> 00:17:28,646
 equal to my agent's position in
 rotation, the visuals will match
 
-00:17:28.646 --> 00:17:30.376 A:middle
+
+407
+00:17:28,646 --> 00:17:30,376
 that underlying agent
 simulation again.
 
-00:17:30.906 --> 00:17:34.836 A:middle
+
+408
+00:17:30,906 --> 00:17:34,836
 Now I would like to
 give you a quick demo
 
-00:17:35.456 --> 00:17:37.676 A:middle
+
+409
+00:17:35,456 --> 00:17:37,676
 on what agent movement
 looks look and some
 
-00:17:37.746 --> 00:17:40.766 A:middle
+
+410
+00:17:37,746 --> 00:17:40,766
 of the goals you have
 at your disposal.
 
-00:17:49.066 --> 00:17:50.906 A:middle
+
+411
+00:17:49,066 --> 00:17:50,906
 So here I have a simple
 SpriteKit scene and we're going
 
-00:17:50.906 --> 00:17:53.296 A:middle
+
+412
+00:17:50,906 --> 00:17:53,296
 to represent the agents
 with a triangle in a circle.
 
-00:17:53.686 --> 00:17:55.196 A:middle
+
+413
+00:17:53,686 --> 00:17:55,196
 They're oriented where
 the triangle is pointing.
 
-00:17:56.186 --> 00:17:57.386 A:middle
+
+414
+00:17:56,186 --> 00:17:57,386
 Here I have a seat goal.
 
-00:17:57.846 --> 00:17:59.436 A:middle
+
+415
+00:17:57,846 --> 00:17:59,436
 The agent in the center
 is simply going to try
 
-00:17:59.436 --> 00:18:00.716 A:middle
+
+416
+00:17:59,436 --> 00:18:00,716
 to seek my mouse position.
 
 
-
-00:17:59.436 --> 00:18:00.716 A:middle
-to seek my mouse position.
-
-00:18:01.776 --> 00:18:04.126 A:middle
+417
+00:18:01,776 --> 00:18:04,126
 Notice how fluid and realistic
 the movement looks, because he's
 
-00:18:04.126 --> 00:18:06.586 A:middle
+
+418
+00:18:04,126 --> 00:18:06,586
 under those realistic physical
 constraints, things like mass,
 
-00:18:06.586 --> 00:18:08.016 A:middle
+
+419
+00:18:06,586 --> 00:18:08,016
 and acceleration, and inertia.
 
-00:18:13.796 --> 00:18:15.946 A:middle
+
+420
+00:18:13,796 --> 00:18:15,946
 Here we have an example of
 the inverse, a flee goal.
 
-00:18:16.066 --> 00:18:17.816 A:middle
+
+421
+00:18:16,066 --> 00:18:17,816
 The agent is going to
 instead attempt to run away
 
-00:18:17.816 --> 00:18:19.036 A:middle
+
+422
+00:18:17,816 --> 00:18:19,036
 from the mouse position.
 
-00:18:25.416 --> 00:18:27.156 A:middle
+
+423
+00:18:25,416 --> 00:18:27,156
 Here is an example
 of a wander behavior.
 
-00:18:27.716 --> 00:18:29.186 A:middle
+
+424
+00:18:27,716 --> 00:18:29,186
 My agent is just going
 to randomly wander
 
-00:18:29.186 --> 00:18:33.886 A:middle
+
+425
+00:18:29,186 --> 00:18:33,886
 about the environment making
 random left and right turns.
 
-00:18:39.296 --> 00:18:41.906 A:middle
+
+426
+00:18:39,296 --> 00:18:41,906
 Here we have an example of
 an obstacle avoidance goal.
 
-00:18:42.136 --> 00:18:43.356 A:middle
+
+427
+00:18:42,136 --> 00:18:43,356
 Once again my agent
 is going to attempt
 
-00:18:43.356 --> 00:18:44.456 A:middle
+
+428
+00:18:43,356 --> 00:18:44,456
 to seek the mouse position
 
-00:18:44.456 --> 00:18:46.696 A:middle
+
+429
+00:18:44,456 --> 00:18:46,696
 but I have added a couple
 circle obstacles to my scene,
 
-00:18:47.066 --> 00:18:48.716 A:middle
+
+430
+00:18:47,066 --> 00:18:48,716
 and he has an obstacle
 avoidance goal on him.
 
-00:18:49.066 --> 00:18:51.246 A:middle
+
+431
+00:18:49,066 --> 00:18:51,246
 So while he's still trying
 to seek the mouse position,
 
-00:18:51.246 --> 00:18:53.506 A:middle
+
+432
+00:18:51,246 --> 00:18:53,506
 he's also going to avoid
 colliding with the obstacles.
 
 
-
-00:19:02.236 --> 00:19:04.396 A:middle
+433
+00:19:02,236 --> 00:19:04,396
 Here I have an example
 of a separation goal.
 
-00:19:04.396 --> 00:19:06.126 A:middle
+
+434
+00:19:04,396 --> 00:19:06,126
 I have three agents that
 are once again going to try
 
-00:19:06.126 --> 00:19:07.086 A:middle
+
+435
+00:19:06,126 --> 00:19:07,086
 to seek the mouse position.
 
-00:19:07.316 --> 00:19:09.006 A:middle
+
+436
+00:19:07,316 --> 00:19:09,006
 But they also have a
 separation goal on them.
 
-00:19:09.286 --> 00:19:11.296 A:middle
+
+437
+00:19:09,286 --> 00:19:11,296
 They're going to try to
 maintain some minimum separation
 
-00:19:11.296 --> 00:19:11.746 A:middle
+
+438
+00:19:11,296 --> 00:19:11,746
 between them.
 
-00:19:11.746 --> 00:19:14.946 A:middle
+
+439
+00:19:11,746 --> 00:19:14,946
 And this is really useful for
 things like formation flying
 
-00:19:14.946 --> 00:19:22.316 A:middle
+
+440
+00:19:14,946 --> 00:19:22,316
 or keeping groups of units
 together in your game.
 
-00:19:22.516 --> 00:19:24.136 A:middle
+
+441
+00:19:22,516 --> 00:19:24,136
 Here I have an example
 of an alignment goal.
 
-00:19:24.446 --> 00:19:25.886 A:middle
+
+442
+00:19:24,446 --> 00:19:25,886
 The agent on the right
 is simply going to try
 
-00:19:25.886 --> 00:19:28.166 A:middle
+
+443
+00:19:25,886 --> 00:19:28,166
 to match the heading of
 the agent on the left.
 
-00:19:29.076 --> 00:19:30.556 A:middle
+
+444
+00:19:29,076 --> 00:19:30,556
 This is really useful for things
 
-00:19:30.556 --> 00:19:32.546 A:middle
+
+445
+00:19:30,556 --> 00:19:32,546
 like synchronizing
 units in your game.
 
-00:19:40.276 --> 00:19:42.586 A:middle
+
+446
+00:19:40,276 --> 00:19:42,586
 Here I have an example
 of a flocking goal.
 
-00:19:43.316 --> 00:19:45.556 A:middle
+
+447
+00:19:43,316 --> 00:19:45,556
 Here we have our leader agent
 in the red which is just going
 
-00:19:45.556 --> 00:19:46.486 A:middle
+
+448
+00:19:45,556 --> 00:19:46,486
 to wander about the scene.
 
-00:19:47.016 --> 00:19:49.176 A:middle
+
+449
+00:19:47,016 --> 00:19:49,176
 But I also have a group
 of these blue agents
 
-00:19:49.176 --> 00:19:50.276 A:middle
+
+450
+00:19:49,176 --> 00:19:50,276
 under a flocking behavior.
 
-00:19:50.276 --> 00:19:52.826 A:middle
+
+451
+00:19:50,276 --> 00:19:52,826
 They are combining a cohere,
 a separate, and an align goal
 
-00:19:53.036 --> 00:19:54.946 A:middle
+
+452
+00:19:53,036 --> 00:19:54,946
 to stay in a blob,
 while also trying
 
-00:19:54.946 --> 00:19:56.676 A:middle
+
+453
+00:19:54,946 --> 00:19:56,676
 to chase that leader entity.
 
-00:19:57.046 --> 00:19:59.196 A:middle
+
+454
+00:19:57,046 --> 00:19:59,196
 So the separate goal is
 maintaining some minimum
 
-00:19:59.196 --> 00:20:00.136 A:middle
+
+455
+00:19:59,196 --> 00:20:00,136
 separation between them,
 
 
-
-00:19:59.196 --> 00:20:00.136 A:middle
-separation between them,
-
-00:20:00.336 --> 00:20:03.456 A:middle
+456
+00:20:00,336 --> 00:20:03,456
 the cohere goal makes them stay
 together in a cohesive mass,
 
-00:20:03.456 --> 00:20:05.086 A:middle
+
+457
+00:20:03,456 --> 00:20:05,086
 and the alignment
 goal wants them
 
-00:20:05.086 --> 00:20:07.076 A:middle
+
+458
+00:20:05,086 --> 00:20:07,076
 to reach an average heading.
 
-00:20:10.796 --> 00:20:14.146 A:middle
+
+459
+00:20:10,796 --> 00:20:14,146
 Last thing I have an example
 of a follow path behavior here.
 
-00:20:14.146 --> 00:20:16.706 A:middle
+
+460
+00:20:14,146 --> 00:20:16,706
 I have a simple polyline
 path and my agent is going
 
-00:20:16.706 --> 00:20:18.286 A:middle
+
+461
+00:20:16,706 --> 00:20:18,286
 to attempt to follow it.
 
-00:20:18.286 --> 00:20:20.326 A:middle
+
+462
+00:20:18,286 --> 00:20:20,326
 Now I want you to notice
 that he doesn't take the
 
-00:20:20.576 --> 00:20:21.556 A:middle
+
+463
+00:20:20,576 --> 00:20:21,556
 corners sharply.
 
-00:20:22.256 --> 00:20:24.076 A:middle
+
+464
+00:20:22,256 --> 00:20:24,076
 He's under those realistic
 physical constraints we talked
 
-00:20:24.076 --> 00:20:25.856 A:middle
+
+465
+00:20:24,076 --> 00:20:25,856
 about, things like
 mass and acceleration.
 
-00:20:26.136 --> 00:20:27.426 A:middle
+
+466
+00:20:26,136 --> 00:20:27,426
 So he's forced to follow it
 
-00:20:27.426 --> 00:20:30.266 A:middle
+
+467
+00:20:27,426 --> 00:20:30,266
 in a smooth manner even though
 the underlying path itself
 
-00:20:30.396 --> 00:20:30.906 A:middle
+
+468
+00:20:30,396 --> 00:20:30,906
 is rigid.
 
-00:20:36.836 --> 00:20:39.666 A:middle
+
+469
+00:20:36,836 --> 00:20:39,666
 So that's agents,
 goals, and behaviors.
 
-00:20:40.516 --> 00:20:48.816 A:middle
+
+470
+00:20:40,516 --> 00:20:48,816
 [ Applause ]
 
-00:20:49.316 --> 00:20:50.696 A:middle
+
+471
+00:20:49,316 --> 00:20:50,696
 Let's go ahead and
 move on to pathfinding.
 
-00:20:51.346 --> 00:20:54.216 A:middle
+
+472
+00:20:51,346 --> 00:20:54,216
 Now I'm sure we're familiar
 
-00:20:54.216 --> 00:20:55.656 A:middle
+
+473
+00:20:54,216 --> 00:20:55,656
 with this problem
 in game development.
 
-00:20:55.726 --> 00:20:58.266 A:middle
+
+474
+00:20:55,726 --> 00:20:58,266
 I have some entity in my
 game world that wants to get
 
-00:20:58.266 --> 00:21:00.766 A:middle
+
+475
+00:20:58,266 --> 00:21:00,766
 from point A to B, but there
 is an obstacle in my way.
 
 
-
-00:20:58.266 --> 00:21:00.766 A:middle
-from point A to B, but there
-is an obstacle in my way.
-
-00:21:01.826 --> 00:21:03.836 A:middle
+476
+00:21:01,826 --> 00:21:03,836
 I don't want the entity to
 move through the obstacle.
 
-00:21:03.836 --> 00:21:05.986 A:middle
+
+477
+00:21:03,836 --> 00:21:05,986
 I don't want her to
 bump into the obstacle.
 
-00:21:05.986 --> 00:21:08.036 A:middle
+
+478
+00:21:05,986 --> 00:21:08,036
 I want her to correctly
 find a path
 
-00:21:08.036 --> 00:21:09.856 A:middle
+
+479
+00:21:08,036 --> 00:21:09,856
 around the obstacle
 like a human would.
 
-00:21:11.166 --> 00:21:13.756 A:middle
+
+480
+00:21:11,166 --> 00:21:13,756
 What I'm looking for here
 is something like this:
 
-00:21:13.886 --> 00:21:15.796 A:middle
+
+481
+00:21:13,886 --> 00:21:15,796
 I want her to correctly
 find the shortest way
 
-00:21:15.796 --> 00:21:17.776 A:middle
+
+482
+00:21:15,796 --> 00:21:17,776
 around the obstacle,
 clear the obstacle,
 
-00:21:18.146 --> 00:21:19.216 A:middle
+
+483
+00:21:18,146 --> 00:21:19,216
 and continue on to my goal.
 
-00:21:19.766 --> 00:21:24.316 A:middle
+
+484
+00:21:19,766 --> 00:21:24,316
 This is the realm of problems
 we call in gameplay pathfinding.
 
-00:21:25.196 --> 00:21:29.256 A:middle
+
+485
+00:21:25,196 --> 00:21:29,256
 Now some concepts before we get
 started, pathfinding operates
 
-00:21:29.256 --> 00:21:30.466 A:middle
+
+486
+00:21:29,256 --> 00:21:30,466
 on a navigation graph.
 
-00:21:30.976 --> 00:21:33.516 A:middle
+
+487
+00:21:30,976 --> 00:21:33,516
 In this navigation graph,
 it is a collection of nodes
 
-00:21:33.516 --> 00:21:35.876 A:middle
+
+488
+00:21:33,516 --> 00:21:35,876
 that describe the passable
 areas in your game world.
 
-00:21:36.086 --> 00:21:39.396 A:middle
+
+489
+00:21:36,086 --> 00:21:39,396
 The places where my entities
 are allowed to be and move.
 
-00:21:39.686 --> 00:21:41.696 A:middle
+
+490
+00:21:39,686 --> 00:21:41,696
 These nodes are in turn
 joined by connections
 
-00:21:41.696 --> 00:21:44.776 A:middle
+
+491
+00:21:41,696 --> 00:21:44,776
 to describe how my entities move
 between these passable areas.
 
-00:21:45.226 --> 00:21:47.316 A:middle
+
+492
+00:21:45,226 --> 00:21:47,316
 And these connections
 can be single directional
 
-00:21:47.556 --> 00:21:51.426 A:middle
+
+493
+00:21:47,556 --> 00:21:51,426
 or bidirectional, and there is
 always exists an optimal path
 
-00:21:51.486 --> 00:21:53.776 A:middle
+
+494
+00:21:51,486 --> 00:21:53,776
 between any two nodes
 in a connected graph.
 
-00:21:53.866 --> 00:21:55.686 A:middle
+
+495
+00:21:53,866 --> 00:21:55,686
 And this is usually
 the path we're looking
 
-00:21:55.686 --> 00:21:56.846 A:middle
+
+496
+00:21:55,686 --> 00:21:56,846
 for in pathfinding.
 
-00:21:56.846 --> 00:22:00.536 A:middle
+
+497
+00:21:56,846 --> 00:22:00,536
 So let's go ahead and take
 a look at the classes.
 
 
-
-00:21:56.846 --> 00:22:00.536 A:middle
-So let's go ahead and take
-a look at the classes.
-
-00:22:01.076 --> 00:22:04.866 A:middle
+498
+00:22:01,076 --> 00:22:04,866
 Here we have GKGraph, which is
 our abstract graph base class,
 
-00:22:05.206 --> 00:22:07.866 A:middle
+
+499
+00:22:05,206 --> 00:22:07,866
 it's quite simply a container of
 graph nodes, those descriptions
 
-00:22:07.866 --> 00:22:09.666 A:middle
+
+500
+00:22:07,866 --> 00:22:09,666
 of the passable areas
 in my game world.
 
-00:22:10.236 --> 00:22:13.336 A:middle
+
+501
+00:22:10,236 --> 00:22:13,336
 It has the functions necessary
 to add and remove nodes
 
-00:22:13.336 --> 00:22:15.066 A:middle
+
+502
+00:22:13,336 --> 00:22:15,066
 as the game world
 undoubtedly changes,
 
-00:22:15.486 --> 00:22:17.756 A:middle
+
+503
+00:22:15,486 --> 00:22:17,756
 and it also lets me connect
 new nodes to the graph,
 
-00:22:17.756 --> 00:22:19.106 A:middle
+
+504
+00:22:17,756 --> 00:22:19,106
 making the appropriate
 connections
 
-00:22:19.106 --> 00:22:20.676 A:middle
+
+505
+00:22:19,106 --> 00:22:20,676
 to existing nodes
 I would expect.
 
-00:22:21.746 --> 00:22:23.596 A:middle
+
+506
+00:22:21,746 --> 00:22:23,596
 Add of course we also
 let you find paths
 
-00:22:23.656 --> 00:22:25.126 A:middle
+
+507
+00:22:23,656 --> 00:22:25,126
 between nodes and a graph.
 
-00:22:25.816 --> 00:22:28.016 A:middle
+
+508
+00:22:25,816 --> 00:22:28,016
 And we're offering you
 guy's two specializations,
 
-00:22:28.486 --> 00:22:30.816 A:middle
+
+509
+00:22:28,486 --> 00:22:30,816
 a GKGraph that works
 with grids, and a GKGraph
 
-00:22:30.816 --> 00:22:31.816 A:middle
+
+510
+00:22:30,816 --> 00:22:31,816
 that works with obstacles.
 
-00:22:31.816 --> 00:22:33.676 A:middle
+
+511
+00:22:31,816 --> 00:22:33,676
 Let's talk a little bit
 more about those now.
 
-00:22:34.216 --> 00:22:35.986 A:middle
+
+512
+00:22:34,216 --> 00:22:35,986
 All right.
 
-00:22:36.196 --> 00:22:37.306 A:middle
+
+513
+00:22:36,196 --> 00:22:37,306
 GKGridGraph.
 
-00:22:37.346 --> 00:22:39.886 A:middle
+
+514
+00:22:37,346 --> 00:22:39,886
 This is our GK graph that's
 specialized for a 2D grid.
 
-00:22:40.236 --> 00:22:41.116 A:middle
+
+515
+00:22:40,236 --> 00:22:41,116
 And what this does,
 is it's going
 
-00:22:41.116 --> 00:22:43.836 A:middle
+
+516
+00:22:41,116 --> 00:22:43,836
 to automatically create all
 the nodes to represent a grid
 
-00:22:44.356 --> 00:22:46.676 A:middle
+
+517
+00:22:44,356 --> 00:22:46,676
 of some given start position
 and width and height.
 
-00:22:46.936 --> 00:22:50.086 A:middle
+
+518
+00:22:46,936 --> 00:22:50,086
 It's going to automatically
 make the cardinal connections
 
-00:22:50.086 --> 00:22:50.996 A:middle
+
+519
+00:22:50,086 --> 00:22:50,996
 between the grid nodes
 
-00:22:51.356 --> 00:22:52.916 A:middle
+
+520
+00:22:51,356 --> 00:22:52,916
 and optionally the
 diagonal ones as well.
 
-00:22:52.916 --> 00:22:55.866 A:middle
+
+521
+00:22:52,916 --> 00:22:55,866
 And it also has easy
 functions available to add
 
-00:22:55.866 --> 00:22:59.096 A:middle
+
+522
+00:22:55,866 --> 00:22:59,096
 and remove grid spaces as they
 undoubtedly become impassable
 
-00:22:59.096 --> 00:23:03.026 A:middle
+
+523
+00:22:59,096 --> 00:23:03,026
 and passable again in your game.
 
 
-
-00:22:59.096 --> 00:23:03.026 A:middle
-and passable again in your game.
-
-00:23:03.246 --> 00:23:05.186 A:middle
+524
+00:23:03,246 --> 00:23:05,186
 Next we have our
 GKObstacleGraph.
 
-00:23:05.186 --> 00:23:07.976 A:middle
+
+525
+00:23:05,186 --> 00:23:07,976
 This is a GK graph that's
 specialized for pathfinding
 
-00:23:07.976 --> 00:23:09.436 A:middle
+
+526
+00:23:07,976 --> 00:23:09,436
 around obstacles
 in your game world.
 
-00:23:09.436 --> 00:23:12.186 A:middle
+
+527
+00:23:09,436 --> 00:23:12,186
 And these obstacles can
 be any arbitrary polygon.
 
-00:23:12.186 --> 00:23:15.786 A:middle
+
+528
+00:23:12,186 --> 00:23:15,786
 Now we give you the functions
 necessary to dynamically add
 
-00:23:15.786 --> 00:23:17.366 A:middle
+
+529
+00:23:15,786 --> 00:23:17,366
 and remove obstacles
 as your game world,
 
-00:23:17.366 --> 00:23:18.696 A:middle
+
+530
+00:23:17,366 --> 00:23:18,696
 again, undoubtedly changes.
 
-00:23:18.836 --> 00:23:21.666 A:middle
+
+531
+00:23:18,836 --> 00:23:21,666
 It also lets you dynamically
 connect new nodes to the graph
 
-00:23:21.666 --> 00:23:24.656 A:middle
+
+532
+00:23:21,666 --> 00:23:24,656
 and this is really useful for
 stuff like inserting a start
 
-00:23:24.656 --> 00:23:27.636 A:middle
+
+533
+00:23:24,656 --> 00:23:27,636
 and an end node in my graph
 to find a path for a unit.
 
-00:23:27.636 --> 00:23:30.906 A:middle
+
+534
+00:23:27,636 --> 00:23:30,906
 Now we do this by what we're
 calling a buffer radius,
 
-00:23:30.906 --> 00:23:32.916 A:middle
+
+535
+00:23:30,906 --> 00:23:32,916
 this is a safety zone
 around obstacles,
 
-00:23:33.136 --> 00:23:34.646 A:middle
+
+536
+00:23:33,136 --> 00:23:34,646
 where my entities are
 not allowed to go,
 
-00:23:34.646 --> 00:23:37.286 A:middle
+
+537
+00:23:34,646 --> 00:23:37,286
 and it's often a
 game-dependent size relating
 
-00:23:37.286 --> 00:23:39.046 A:middle
+
+538
+00:23:37,286 --> 00:23:39,046
 to the bounding radius
 of the entities
 
-00:23:39.046 --> 00:23:40.206 A:middle
+
+539
+00:23:39,046 --> 00:23:40,206
 that I want to do
 the navigating.
 
-00:23:41.256 --> 00:23:42.236 A:middle
+
+540
+00:23:41,256 --> 00:23:42,236
 So let's talk a little more
 
-00:23:42.236 --> 00:23:44.306 A:middle
+
+541
+00:23:42,236 --> 00:23:44,306
 about how these obstacle
 graphs are generated.
 
-00:23:44.886 --> 00:23:47.656 A:middle
+
+542
+00:23:44,886 --> 00:23:47,656
 So here I have a simple scene
 with two square obstacles,
 
-00:23:48.166 --> 00:23:50.406 A:middle
+
+543
+00:23:48,166 --> 00:23:50,406
 an entity on the lower
 left that wants to get
 
-00:23:50.476 --> 00:23:52.026 A:middle
+
+544
+00:23:50,476 --> 00:23:52,026
 to that bridge on
 the lower right.
 
-00:23:52.496 --> 00:23:56.766 A:middle
+
+545
+00:23:52,496 --> 00:23:56,766
 My entity is bounded by some
 bounding radius, and we're going
 
-00:23:56.766 --> 00:23:58.216 A:middle
+
+546
+00:23:56,766 --> 00:23:58,216
 to use that as our buffer radius
 
-00:23:58.246 --> 00:24:00.296 A:middle
+
+547
+00:23:58,246 --> 00:24:00,296
 to artificially make
 our obstacles larger.
 
 
-
-00:23:58.246 --> 00:24:00.296 A:middle
-to artificially make
-our obstacles larger.
-
-00:24:01.656 --> 00:24:04.186 A:middle
+548
+00:24:01,656 --> 00:24:04,186
 Then under the hood the
 obstacle graph is going
 
-00:24:04.186 --> 00:24:05.876 A:middle
+
+549
+00:24:04,186 --> 00:24:05,876
 to make the appropriate
 connections between all
 
-00:24:05.876 --> 00:24:07.826 A:middle
+
+550
+00:24:05,876 --> 00:24:07,826
 of our grid nodes,
 and it's going
 
-00:24:07.826 --> 00:24:09.176 A:middle
+
+551
+00:24:07,826 --> 00:24:09,176
 to correctly not make the ones
 
-00:24:09.176 --> 00:24:11.806 A:middle
+
+552
+00:24:09,176 --> 00:24:11,806
 that would violate the
 spatiality of our obstacles.
 
-00:24:12.056 --> 00:24:13.556 A:middle
+
+553
+00:24:12,056 --> 00:24:13,556
 So you see here that we found
 
-00:24:13.556 --> 00:24:14.916 A:middle
+
+554
+00:24:13,556 --> 00:24:14,916
 that shortest path
 we were looking for.
 
-00:24:15.116 --> 00:24:16.986 A:middle
+
+555
+00:24:15,116 --> 00:24:16,986
 It doesn't collide with
 any of my obstacles.
 
-00:24:22.336 --> 00:24:25.066 A:middle
+
+556
+00:24:22,336 --> 00:24:25,066
 Here is a code example
 of that last example,
 
-00:24:25.066 --> 00:24:26.626 A:middle
+
+557
+00:24:25,066 --> 00:24:26,626
 but with just a single obstacle.
 
-00:24:26.886 --> 00:24:27.696 A:middle
+
+558
+00:24:26,886 --> 00:24:27,696
 Here at the top I'm going
 
-00:24:27.696 --> 00:24:30.676 A:middle
+
+559
+00:24:27,696 --> 00:24:30,676
 to make a simple square polygon
 obstacle; it's just four points.
 
-00:24:31.646 --> 00:24:33.466 A:middle
+
+560
+00:24:31,646 --> 00:24:33,466
 Then I'm going to make
 our obstacle graph,
 
-00:24:33.536 --> 00:24:35.856 A:middle
+
+561
+00:24:33,536 --> 00:24:35,856
 passing in our obstacle
 and some buffer radius.
 
-00:24:37.366 --> 00:24:38.866 A:middle
+
+562
+00:24:37,366 --> 00:24:38,866
 Then, I'm going to make
 a start and end node.
 
-00:24:39.176 --> 00:24:41.256 A:middle
+
+563
+00:24:39,176 --> 00:24:41,256
 One for where my hero
 currently is and one
 
-00:24:41.256 --> 00:24:42.166 A:middle
+
+564
+00:24:41,256 --> 00:24:42,166
 for where she wants to go.
 
-00:24:42.166 --> 00:24:45.506 A:middle
+
+565
+00:24:42,166 --> 00:24:45,506
 Then I'm going to
 dynamically connect those nodes
 
-00:24:45.506 --> 00:24:48.476 A:middle
+
+566
+00:24:45,506 --> 00:24:48,476
 to my obstacle graph using the
 obstacles that it possesses.
 
-00:24:48.476 --> 00:24:50.396 A:middle
+
+567
+00:24:48,476 --> 00:24:50,396
 And what it's going to do is
 it's going to insert those nodes
 
-00:24:50.396 --> 00:24:52.436 A:middle
+
+568
+00:24:50,396 --> 00:24:52,436
 into the graph and again
 automatically make the
 
-00:24:52.436 --> 00:24:54.676 A:middle
+
+569
+00:24:52,436 --> 00:24:54,676
 connections that make
 sense, and not make the ones
 
-00:24:54.676 --> 00:24:57.096 A:middle
+
+570
+00:24:54,676 --> 00:24:57,096
 that would violate the
 spatiality of my obstacles.
 
-00:24:57.176 --> 00:25:00.806 A:middle
+
+571
+00:24:57,176 --> 00:25:00,806
 Then at the end here I'm going
 to find a path for my start
 
 
-
-00:24:57.176 --> 00:25:00.806 A:middle
-Then at the end here I'm going
-to find a path for my start
-
-00:25:00.806 --> 00:25:03.756 A:middle
+572
+00:25:00,806 --> 00:25:03,756
 and end node and I get back a
 simple NSArray of graph nodes,
 
-00:25:03.756 --> 00:25:10.406 A:middle
+
+573
+00:25:03,756 --> 00:25:10,406
 which I can then use to
 animate my character.
 
-00:25:10.746 --> 00:25:13.546 A:middle
+
+574
+00:25:10,746 --> 00:25:13,546
 Some advance nodes on our graph
 node class which is GKGraphNode,
 
-00:25:13.926 --> 00:25:16.306 A:middle
+
+575
+00:25:13,926 --> 00:25:16,306
 undoubtedly some need will arise
 where you want to subclass this.
 
-00:25:16.306 --> 00:25:19.306 A:middle
+
+576
+00:25:16,306 --> 00:25:19,306
 And this is really useful for
 implementing stuff like advanced
 
-00:25:19.306 --> 00:25:20.726 A:middle
+
+577
+00:25:19,306 --> 00:25:20,726
 or non-spatial costs or for
 
-00:25:20.726 --> 00:25:24.506 A:middle
+
+578
+00:25:20,726 --> 00:25:24,506
 when you need more clear
 control over the pathfinding.
 
-00:25:24.986 --> 00:25:26.386 A:middle
+
+579
+00:25:24,986 --> 00:25:26,386
 You can imagine a strategy game
 
-00:25:26.386 --> 00:25:27.696 A:middle
+
+580
+00:25:26,386 --> 00:25:27,696
 that has a variety
 of terrain types.
 
-00:25:27.696 --> 00:25:29.106 A:middle
+
+581
+00:25:27,696 --> 00:25:29,106
 Perhaps you want a
 forest terrain type
 
-00:25:29.576 --> 00:25:31.716 A:middle
+
+582
+00:25:29,576 --> 00:25:31,716
 to take double the move over
 as my other terrain types.
 
-00:25:31.956 --> 00:25:34.286 A:middle
+
+583
+00:25:31,956 --> 00:25:34,286
 I correctly want pathfinding
 to take this into account.
 
-00:25:34.286 --> 00:25:36.866 A:middle
+
+584
+00:25:34,286 --> 00:25:36,866
 I don't want it to return
 the visually shortest path.
 
-00:25:36.866 --> 00:25:39.306 A:middle
+
+585
+00:25:36,866 --> 00:25:39,306
 I correctly want it to
 navigate around the forest.
 
-00:25:39.306 --> 00:25:41.136 A:middle
+
+586
+00:25:39,306 --> 00:25:41,136
 Because that is actually
 the shortest path
 
-00:25:41.416 --> 00:25:42.936 A:middle
+
+587
+00:25:41,416 --> 00:25:42,936
 in my game world's terms.
 
-00:25:43.876 --> 00:25:45.836 A:middle
+
+588
+00:25:43,876 --> 00:25:45,836
 GKGraphNode is also
 useful when you want
 
-00:25:45.836 --> 00:25:48.306 A:middle
+
+589
+00:25:45,836 --> 00:25:48,306
 to manually make your own
 graphs, and you do this
 
-00:25:48.306 --> 00:25:50.486 A:middle
+
+590
+00:25:48,306 --> 00:25:50,486
 by manually managing the
 connections between nodes.
 
-00:25:50.846 --> 00:25:52.886 A:middle
+
+591
+00:25:50,846 --> 00:25:52,886
 This is really good for
 things like abstract
 
-00:25:52.886 --> 00:25:54.036 A:middle
+
+592
+00:25:52,886 --> 00:25:54,036
 or non-spatial graphs.
 
-00:25:54.456 --> 00:25:56.706 A:middle
+
+593
+00:25:54,456 --> 00:25:56,706
 Perhaps you want your game to
 have portals and your units
 
-00:25:56.706 --> 00:25:58.366 A:middle
+
+594
+00:25:56,706 --> 00:25:58,366
 to correctly take those
 portals into account
 
-00:25:58.366 --> 00:25:59.586 A:middle
+
+595
+00:25:58,366 --> 00:25:59,586
 for pathfinding purposes,
 
 
-
-00:26:00.166 --> 00:26:02.686 A:middle
+596
+00:26:00,166 --> 00:26:02,686
 even though those portals aren't
 spatially connected in anyway.
 
-00:26:03.656 --> 00:26:06.836 A:middle
+
+597
+00:26:03,656 --> 00:26:06,836
 And our Grid/GraphNode and
 GraphNode2D which is used
 
-00:26:06.836 --> 00:26:08.586 A:middle
+
+598
+00:26:06,836 --> 00:26:08,586
 with our obstacle node
 are also available
 
-00:26:08.586 --> 00:26:09.966 A:middle
+
+599
+00:26:08,586 --> 00:26:09,966
 for subclass as you see fit.
 
-00:26:12.996 --> 00:26:14.906 A:middle
+
+600
+00:26:12,996 --> 00:26:14,906
 This is a feature I'm
 really excited about.
 
-00:26:14.906 --> 00:26:17.336 A:middle
+
+601
+00:26:14,906 --> 00:26:17,336
 We have done some work with
 the SpriteKit team to allow you
 
-00:26:17.336 --> 00:26:19.206 A:middle
+
+602
+00:26:17,336 --> 00:26:19,206
 to easily generate
 these obstacle graphs
 
-00:26:19.456 --> 00:26:21.276 A:middle
+
+603
+00:26:19,456 --> 00:26:21,276
 from your existing
 SpriteKit Scenes.
 
-00:26:21.776 --> 00:26:23.726 A:middle
+
+604
+00:26:21,776 --> 00:26:23,726
 And you can do this for
 things like node bounds,
 
-00:26:24.046 --> 00:26:26.166 A:middle
+
+605
+00:26:24,046 --> 00:26:26,166
 node physics bodies,
 and nodes textures.
 
-00:26:27.096 --> 00:26:28.726 A:middle
+
+606
+00:26:27,096 --> 00:26:28,726
 So what this means is
 with very few lines
 
-00:26:28.726 --> 00:26:30.536 A:middle
+
+607
+00:26:28,726 --> 00:26:30,536
 of code you can take an
 existing SpriteKit scene
 
-00:26:30.736 --> 00:26:32.046 A:middle
+
+608
+00:26:30,736 --> 00:26:32,046
 and generate an obstacle graph
 
-00:26:32.526 --> 00:26:34.986 A:middle
+
+609
+00:26:32,526 --> 00:26:34,986
 and automatically
 pathfind around it.
 
-00:26:35.696 --> 00:26:37.916 A:middle
+
+610
+00:26:35,696 --> 00:26:37,916
 Now I would like to give
 you a small demo of this.
 
-00:26:38.726 --> 00:26:40.426 A:middle
+
+611
+00:26:38,726 --> 00:26:40,426
 Let's explore pathfinding
 with SpriteKit.
 
-00:26:52.296 --> 00:26:54.036 A:middle
+
+612
+00:26:52,296 --> 00:26:54,036
 Here I have the tower
 defense game we have talked
 
-00:26:54.036 --> 00:26:56.686 A:middle
+
+613
+00:26:54,036 --> 00:26:56,686
 about implemented as
 a SpriteKit scene.
 
-00:26:57.346 --> 00:26:59.856 A:middle
+
+614
+00:26:57,346 --> 00:26:59,856
 I'm generating entities on
 the left and they want to move
 
-00:26:59.856 --> 00:27:00.786 A:middle
+
+615
+00:26:59,856 --> 00:27:00,786
 to the bridge on the right.
 
 
-
-00:26:59.856 --> 00:27:00.786 A:middle
-to the bridge on the right.
-
-00:27:01.246 --> 00:27:03.716 A:middle
+616
+00:27:01,246 --> 00:27:03,716
 But because this is a tower
 defense game I'm undoubtedly
 
-00:27:03.716 --> 00:27:05.686 A:middle
+
+617
+00:27:03,716 --> 00:27:05,686
 going to place some
 towers right,
 
-00:27:05.726 --> 00:27:07.766 A:middle
+
+618
+00:27:05,726 --> 00:27:07,766
 that violate their current path.
 
-00:27:07.766 --> 00:27:08.896 A:middle
+
+619
+00:27:07,766 --> 00:27:08,896
 So let's go ahead and place one.
 
-00:27:09.866 --> 00:27:12.206 A:middle
+
+620
+00:27:09,866 --> 00:27:12,206
 And you'll notice they
 correctly pathfind around it.
 
-00:27:12.206 --> 00:27:14.056 A:middle
+
+621
+00:27:12,206 --> 00:27:14,056
 That's because we're using
 the SpriteKit integration,
 
-00:27:14.056 --> 00:27:14.726 A:middle
+
+622
+00:27:14,056 --> 00:27:14,726
 that we just talked about,
 
-00:27:14.726 --> 00:27:17.256 A:middle
+
+623
+00:27:14,726 --> 00:27:17,256
 to automatically generate
 an obstacle from that node,
 
-00:27:17.966 --> 00:27:19.776 A:middle
+
+624
+00:27:17,966 --> 00:27:19,776
 update the underlying
 GKObstacleGraph,
 
-00:27:20.046 --> 00:27:20.796 A:middle
+
+625
+00:27:20,046 --> 00:27:20,796
 and update our path.
 
-00:27:20.926 --> 00:27:24.286 A:middle
+
+626
+00:27:20,926 --> 00:27:24,286
 So let me turn a debugger, let
 me remove this tower real quick.
 
-00:27:24.446 --> 00:27:26.176 A:middle
+
+627
+00:27:24,446 --> 00:27:26,176
 You see we just start with
 our simple path, right,
 
-00:27:26.176 --> 00:27:27.236 A:middle
+
+628
+00:27:26,176 --> 00:27:27,236
 between start and end node.
 
-00:27:28.006 --> 00:27:29.586 A:middle
+
+629
+00:27:28,006 --> 00:27:29,586
 But as I insert an
 obstacle in here,
 
-00:27:30.186 --> 00:27:32.666 A:middle
+
+630
+00:27:30,186 --> 00:27:32,666
 we recalculate the
 underlining GKObstacleGraph.
 
-00:27:32.666 --> 00:27:33.926 A:middle
+
+631
+00:27:32,666 --> 00:27:33,926
 And this allows our entities
 
-00:27:33.926 --> 00:27:35.736 A:middle
+
+632
+00:27:33,926 --> 00:27:35,736
 to find a new path
 around that obstacle.
 
-00:27:35.736 --> 00:27:38.096 A:middle
+
+633
+00:27:35,736 --> 00:27:38,096
 So let's go ahead
 and add a few more.
 
-00:27:38.726 --> 00:27:44.516 A:middle
+
+634
+00:27:38,726 --> 00:27:44,516
 And because of that SpriteKit
 integration, every time we add
 
-00:27:44.516 --> 00:27:45.656 A:middle
+
+635
+00:27:44,516 --> 00:27:45,656
 or remove an obstacle,
 
-00:27:46.146 --> 00:27:48.916 A:middle
+
+636
+00:27:46,146 --> 00:27:48,916
 we can keep that underlying
 GKObstacleGraph updated.
 
-00:27:53.296 --> 00:27:55.846 A:middle
+
+637
+00:27:53,296 --> 00:27:55,846
 So that's pathfinding
 with SpriteKit.
 
-00:27:56.516 --> 00:28:04.546 A:middle
+
+638
+00:27:56,516 --> 00:28:04,546
 [ Applause ]
 
 
-
-00:27:56.516 --> 00:28:04.546 A:middle
-[ Applause ]
-
-00:28:05.046 --> 00:28:06.766 A:middle
+639
+00:28:05,046 --> 00:28:06,766
 Now I would like to call
 my colleague Ross Dexter
 
-00:28:06.766 --> 00:28:09.226 A:middle
+
+640
+00:28:06,766 --> 00:28:09,226
 up to tell you a little
 about our MinMax AI.
 
-00:28:09.696 --> 00:28:09.966 A:middle
+
+641
+00:28:09,696 --> 00:28:09,966
 Ross.
 
-00:28:11.516 --> 00:28:15.806 A:middle
+
+642
+00:28:11,516 --> 00:28:15,806
 [ Applause ]
 
-00:28:16.306 --> 00:28:16.966 A:middle
-&gt;&gt; ROSS DEXTER: Thanks, Bruno.
 
-00:28:19.976 --> 00:28:22.166 A:middle
+643
+00:28:16,306 --> 00:28:16,966
+>> ROSS DEXTER: Thanks, Bruno.
+
+
+644
+00:28:19,976 --> 00:28:22,166
 So many of the features
 that Bruno spoke
 
-00:28:22.166 --> 00:28:26.136 A:middle
+
+645
+00:28:22,166 --> 00:28:26,136
 about earlier can be used to
 create AI, but they're more
 
-00:28:26.136 --> 00:28:28.496 A:middle
+
+646
+00:28:26,136 --> 00:28:28,496
 about giving life to
 entities within your game.
 
-00:28:29.376 --> 00:28:31.256 A:middle
+
+647
+00:28:29,376 --> 00:28:31,256
 Many games also need
 equal AI opponents
 
-00:28:31.256 --> 00:28:34.246 A:middle
+
+648
+00:28:31,256 --> 00:28:34,246
 that can play the entire game by
 the same rules as human players.
 
-00:28:34.246 --> 00:28:36.636 A:middle
+
+649
+00:28:34,246 --> 00:28:36,636
 And this is critical for
 games like Chess, Checkers,
 
-00:28:36.826 --> 00:28:38.336 A:middle
+
+650
+00:28:36,826 --> 00:28:38,336
 Tic-Tac-Toe, and so on.
 
-00:28:38.866 --> 00:28:40.816 A:middle
+
+651
+00:28:38,866 --> 00:28:40,816
 So we wanted to provide
 you a solution for this.
 
-00:28:42.136 --> 00:28:45.226 A:middle
+
+652
+00:28:42,136 --> 00:28:45,226
 And so we've chosen to implement
 a classic AI solution, MinMax,
 
-00:28:45.226 --> 00:28:46.676 A:middle
+
+653
+00:28:45,226 --> 00:28:46,676
 as a key part of GameplayKit.
 
-00:28:47.146 --> 00:28:50.116 A:middle
+
+654
+00:28:47,146 --> 00:28:50,116
 MinMax works by looking at all
 the moves available to a player,
 
-00:28:50.406 --> 00:28:51.896 A:middle
+
+655
+00:28:50,406 --> 00:28:51,896
 and then it builds
 out a decision tree,
 
-00:28:52.226 --> 00:28:54.976 A:middle
+
+656
+00:28:52,226 --> 00:28:54,976
 from each of those moves and all
 the permutations that can arise
 
-00:28:54.976 --> 00:28:56.806 A:middle
+
+657
+00:28:54,976 --> 00:28:56,806
 from each of those moves.
 
-00:28:56.846 --> 00:28:59.286 A:middle
+
+658
+00:28:56,846 --> 00:28:59,286
 When you request a move
 from it, it searches this,
 
-00:28:59.286 --> 00:29:01.276 A:middle
+
+659
+00:28:59,286 --> 00:29:01,276
 the decision tree,
 looking for a move
 
 
-
-00:28:59.286 --> 00:29:01.276 A:middle
-the decision tree,
-looking for a move
-
-00:29:01.276 --> 00:29:04.866 A:middle
+660
+00:29:01,276 --> 00:29:04,866
 that maximizes potential gain
 while minimizing potential loss.
 
-00:29:05.306 --> 00:29:08.796 A:middle
+
+661
+00:29:05,306 --> 00:29:08,796
 This Tic-Tac-Toe example
 here, the AI selects the move
 
-00:29:08.796 --> 00:29:10.116 A:middle
+
+662
+00:29:08,796 --> 00:29:10,116
 on the right for the X player
 
-00:29:10.186 --> 00:29:12.226 A:middle
+
+663
+00:29:10,186 --> 00:29:12,226
 because in the best case
 it results in a win,
 
-00:29:12.496 --> 00:29:14.456 A:middle
+
+664
+00:29:12,496 --> 00:29:14,456
 or in the worst case, it
 only results in a draw,
 
-00:29:14.836 --> 00:29:19.976 A:middle
+
+665
+00:29:14,836 --> 00:29:19,976
 the other two moves
 both lead to losses.
 
-00:29:19.976 --> 00:29:21.726 A:middle
+
+666
+00:29:19,976 --> 00:29:21,726
 So MinMax AI gives
 you the ability
 
-00:29:22.036 --> 00:29:23.506 A:middle
+
+667
+00:29:22,036 --> 00:29:23,506
 to add AI controlled
 opponents to your games,
 
-00:29:23.616 --> 00:29:26.896 A:middle
+
+668
+00:29:23,616 --> 00:29:26,896
 but it can also be used to
 suggest a move for human players
 
-00:29:26.896 --> 00:29:28.886 A:middle
+
+669
+00:29:26,896 --> 00:29:28,886
 when they get stuck, and it's
 going to be great for games
 
-00:29:28.886 --> 00:29:31.066 A:middle
+
+670
+00:29:28,886 --> 00:29:31,066
 that even don't have any
 other AI requirements.
 
-00:29:31.576 --> 00:29:34.666 A:middle
+
+671
+00:29:31,576 --> 00:29:34,666
 It's best suited for turn
 based games, but it can be made
 
-00:29:34.666 --> 00:29:36.976 A:middle
+
+672
+00:29:34,666 --> 00:29:36,976
 to work with any game
 where you have a set
 
-00:29:36.976 --> 00:29:38.846 A:middle
+
+673
+00:29:36,976 --> 00:29:38,846
 of discrete moves available
 for players to make.
 
-00:29:39.086 --> 00:29:43.756 A:middle
+
+674
+00:29:39,086 --> 00:29:43,756
 You can easily adjust
 the difficulty of the AI
 
-00:29:44.026 --> 00:29:46.796 A:middle
+
+675
+00:29:44,026 --> 00:29:46,796
 by varying how far out
 into the future it looks.
 
-00:29:47.406 --> 00:29:48.966 A:middle
+
+676
+00:29:47,406 --> 00:29:48,966
 Looking 10 moves
 in advance results
 
-00:29:48.966 --> 00:29:52.346 A:middle
+
+677
+00:29:48,966 --> 00:29:52,346
 in much more effective play than
 looking ahead only 2 or 3 moves.
 
-00:29:52.936 --> 00:29:55.336 A:middle
+
+678
+00:29:52,936 --> 00:29:55,336
 Additionally you can
 optionally direct it
 
-00:29:55.336 --> 00:29:57.546 A:middle
+
+679
+00:29:55,336 --> 00:29:57,546
 to randomly select
 suboptimum moves
 
-00:29:57.596 --> 00:29:59.266 A:middle
+
+680
+00:29:57,596 --> 00:29:59,266
 to give it an element
 of human error.
 
 
-
-00:30:00.556 --> 00:30:02.356 A:middle
+681
+00:30:00,556 --> 00:30:02,356
 So let's look at how this
 integrates with your game.
 
-00:30:03.066 --> 00:30:05.886 A:middle
+
+682
+00:30:03,066 --> 00:30:05,886
 The great thing about MinMax is
 that it doesn't need to know any
 
-00:30:05.886 --> 00:30:06.806 A:middle
+
+683
+00:30:05,886 --> 00:30:06,806
 of the details of your game.
 
-00:30:06.906 --> 00:30:08.986 A:middle
+
+684
+00:30:06,906 --> 00:30:08,986
 You don't need to teach it
 your rules and it doesn't need
 
-00:30:08.986 --> 00:30:10.496 A:middle
+
+685
+00:30:08,986 --> 00:30:10,496
 to know how it's implemented.
 
-00:30:10.776 --> 00:30:12.326 A:middle
+
+686
+00:30:10,776 --> 00:30:12,326
 This is all abstracted away.
 
-00:30:12.436 --> 00:30:15.346 A:middle
+
+687
+00:30:12,436 --> 00:30:15,346
 All you have to do is provide
 a list of players in the game,
 
-00:30:15.886 --> 00:30:17.116 A:middle
+
+688
+00:30:15,886 --> 00:30:17,116
 the possible moves
 they can make,
 
-00:30:17.716 --> 00:30:20.656 A:middle
+
+689
+00:30:17,716 --> 00:30:20,656
 and a score for each player that
 indicates the relative strength
 
-00:30:20.936 --> 00:30:21.916 A:middle
+
+690
+00:30:20,936 --> 00:30:21,916
 of their current position.
 
-00:30:22.996 --> 00:30:25.906 A:middle
+
+691
+00:30:22,996 --> 00:30:25,906
 When you request a move from
 the AI, it takes all this data
 
-00:30:25.906 --> 00:30:27.676 A:middle
+
+692
+00:30:25,906 --> 00:30:27,676
 into account and it
 builds a decision tree,
 
-00:30:27.796 --> 00:30:30.036 A:middle
+
+693
+00:30:27,796 --> 00:30:30,036
 and returns the optimal
 move for you to use.
 
-00:30:30.036 --> 00:30:34.566 A:middle
+
+694
+00:30:30,036 --> 00:30:34,566
 Let's look at the classes.
 
-00:30:34.816 --> 00:30:36.256 A:middle
+
+695
+00:30:34,816 --> 00:30:36,256
 There are three key protocols
 that you're going to need
 
-00:30:36.256 --> 00:30:38.336 A:middle
+
+696
+00:30:36,256 --> 00:30:38,336
 to implement to work
 with the MinMax AI.
 
-00:30:38.336 --> 00:30:40.516 A:middle
+
+697
+00:30:38,336 --> 00:30:40,516
 And the first of
 these is GKGameModel,
 
-00:30:40.856 --> 00:30:42.876 A:middle
+
+698
+00:30:40,856 --> 00:30:42,876
 and it's an abstract of
 the current game state.
 
-00:30:44.336 --> 00:30:48.396 A:middle
+
+699
+00:30:44,336 --> 00:30:48,396
 If you're creating a Chess game
 for example, a good candidate
 
-00:30:48.396 --> 00:30:50.936 A:middle
+
+700
+00:30:48,396 --> 00:30:50,936
 to implement this class would
 be on, say, the board class
 
-00:30:50.936 --> 00:30:54.426 A:middle
+
+701
+00:30:50,936 --> 00:30:54,426
 because it tracks all of the
 positions on the board as well
 
-00:30:54.426 --> 00:30:55.806 A:middle
+
+702
+00:30:54,426 --> 00:30:55,806
 as all the pieces that
 are currently in play.
 
-00:30:56.416 --> 00:30:58.646 A:middle
+
+703
+00:30:56,416 --> 00:30:58,646
 As I mentioned on the
 previous slide, all this needs
 
-00:30:58.646 --> 00:31:01.486 A:middle
+
+704
+00:30:58,646 --> 00:31:01,486
 to do is provide a list of
 the players that are active
 
 
-
-00:30:58.646 --> 00:31:01.486 A:middle
-to do is provide a list of
-the players that are active
-
-00:31:01.486 --> 00:31:04.526 A:middle
+705
+00:31:01,486 --> 00:31:04,526
 in the game, the current
 player, scores for each
 
-00:31:04.526 --> 00:31:07.146 A:middle
+
+706
+00:31:04,526 --> 00:31:07,146
 of those players, and then
 the possible moves that each
 
-00:31:07.146 --> 00:31:08.456 A:middle
+
+707
+00:31:07,146 --> 00:31:08,456
 of those players can make.
 
-00:31:08.456 --> 00:31:11.546 A:middle
+
+708
+00:31:08,456 --> 00:31:11,546
 It also needs to have a method
 for applying those moves
 
-00:31:11.956 --> 00:31:14.456 A:middle
+
+709
+00:31:11,956 --> 00:31:14,456
 and this is used by the AI to
 build out its decision tree,
 
-00:31:14.456 --> 00:31:16.456 A:middle
+
+710
+00:31:14,456 --> 00:31:16,456
 and can be used by
 you to apply a move
 
-00:31:16.456 --> 00:31:17.646 A:middle
+
+711
+00:31:16,456 --> 00:31:17,646
 after it's been selected
 by the AI.
 
-00:31:18.076 --> 00:31:19.536 A:middle
+
+712
+00:31:18,076 --> 00:31:19,536
 And when this move is applied,
 
-00:31:19.566 --> 00:31:21.206 A:middle
+
+713
+00:31:19,566 --> 00:31:21,206
 it will change the
 current game state,
 
-00:31:21.456 --> 00:31:23.786 A:middle
+
+714
+00:31:21,456 --> 00:31:23,786
 possibly changing the
 current act of the player,
 
-00:31:23.996 --> 00:31:25.786 A:middle
+
+715
+00:31:23,996 --> 00:31:25,786
 scores for each of those
 players, and the moves
 
-00:31:25.906 --> 00:31:26.876 A:middle
+
+716
+00:31:25,906 --> 00:31:26,876
 that are available to them.
 
-00:31:28.296 --> 00:31:30.486 A:middle
+
+717
+00:31:28,296 --> 00:31:30,486
 The next protocol is
 GKGameModelUpdate,
 
-00:31:30.656 --> 00:31:32.516 A:middle
+
+718
+00:31:30,656 --> 00:31:32,516
 this is an abstract of
 a move within your game.
 
-00:31:32.996 --> 00:31:35.196 A:middle
+
+719
+00:31:32,996 --> 00:31:35,196
 It should have all
 of the data you need
 
-00:31:35.276 --> 00:31:37.376 A:middle
+
+720
+00:31:35,276 --> 00:31:37,376
 to apply a move to
 your game model.
 
-00:31:37.996 --> 00:31:40.436 A:middle
+
+721
+00:31:37,996 --> 00:31:40,436
 As we have said, it is
 used by MinMax to build
 
-00:31:40.436 --> 00:31:43.256 A:middle
+
+722
+00:31:40,436 --> 00:31:43,256
 out the decision tree, and can
 be used by you to apply a move
 
-00:31:43.256 --> 00:31:44.146 A:middle
+
+723
+00:31:43,256 --> 00:31:44,146
 after it's been selected.
 
-00:31:45.186 --> 00:31:47.216 A:middle
+
+724
+00:31:45,186 --> 00:31:47,216
 Finally we have
 GKGameModelPlayer
 
-00:31:47.616 --> 00:31:50.356 A:middle
+
+725
+00:31:47,616 --> 00:31:50,356
 which is an abstract of a player
 of the game, and it's used
 
-00:31:50.356 --> 00:31:53.186 A:middle
+
+726
+00:31:50,356 --> 00:31:53,186
 by the AI to differentiate
 moves from one another.
 
-00:31:53.186 --> 00:31:57.376 A:middle
+
+727
+00:31:53,186 --> 00:31:57,376
 Now we get to the AI itself,
 
-00:31:57.376 --> 00:31:59.716 A:middle
+
+728
+00:31:57,376 --> 00:31:59,716
 it's within the class
 GKMinMaxStrategist,
 
 
-
-00:32:00.116 --> 00:32:01.946 A:middle
+729
+00:32:00,116 --> 00:32:01,946
 and it operates on
 a GKGameModel.
 
-00:32:02.146 --> 00:32:04.566 A:middle
+
+730
+00:32:02,146 --> 00:32:04,566
 So after you create an
 instance the MinMaxStrategist,
 
-00:32:04.616 --> 00:32:06.336 A:middle
+
+731
+00:32:04,616 --> 00:32:06,336
 you're going to hook it up
 on the gameModel property.
 
-00:32:07.696 --> 00:32:10.466 A:middle
+
+732
+00:32:07,696 --> 00:32:10,466
 maxLookAheadDepth is how
 far into the future it looks
 
-00:32:10.466 --> 00:32:11.936 A:middle
+
+733
+00:32:10,466 --> 00:32:11,936
 when you request a
 move from the AI.
 
-00:32:12.106 --> 00:32:15.656 A:middle
+
+734
+00:32:12,106 --> 00:32:15,656
 And as we mentioned earlier
 higher numbers result
 
-00:32:15.916 --> 00:32:17.856 A:middle
+
+735
+00:32:15,916 --> 00:32:17,856
 in more effective play
 than lower numbers.
 
-00:32:18.326 --> 00:32:19.716 A:middle
+
+736
+00:32:18,326 --> 00:32:19,716
 And that's all you need
 to do to start using it.
 
-00:32:20.126 --> 00:32:22.926 A:middle
+
+737
+00:32:20,126 --> 00:32:22,926
 When you call bestMoveForPlayer,
 the AI will build
 
-00:32:22.926 --> 00:32:25.956 A:middle
+
+738
+00:32:22,926 --> 00:32:25,956
 out its decision tree, rank all
 the available moves in order
 
-00:32:25.956 --> 00:32:28.546 A:middle
+
+739
+00:32:25,956 --> 00:32:28,546
 from best to worse, and then
 return the optimal move.
 
-00:32:29.146 --> 00:32:31.196 A:middle
+
+740
+00:32:29,146 --> 00:32:31,196
 There may arise cases where
 you'll have more than one move
 
-00:32:31.196 --> 00:32:33.036 A:middle
+
+741
+00:32:31,196 --> 00:32:33,036
 that is equally advantageous
 for the AI to make,
 
-00:32:33.576 --> 00:32:36.426 A:middle
+
+742
+00:32:33,576 --> 00:32:36,426
 and in those cases
 you can direct the AI
 
-00:32:36.546 --> 00:32:37.626 A:middle
+
+743
+00:32:36,546 --> 00:32:37,626
 to randomly break ties.
 
-00:32:38.486 --> 00:32:40.316 A:middle
+
+744
+00:32:38,486 --> 00:32:40,316
 And that sort of thing
 comes in use if you want
 
-00:32:40.316 --> 00:32:41.646 A:middle
+
+745
+00:32:40,316 --> 00:32:41,646
 to call randomMoveForPlayer.
 
-00:32:42.086 --> 00:32:45.696 A:middle
+
+746
+00:32:42,086 --> 00:32:45,696
 Say you have 10 moves available
 for a player, but you only want
 
-00:32:45.696 --> 00:32:49.086 A:middle
+
+747
+00:32:45,696 --> 00:32:49,086
 to select a random one from
 the 3 best moves, it will take
 
-00:32:49.086 --> 00:32:52.576 A:middle
+
+748
+00:32:49,086 --> 00:32:52,576
 that sorting and randomly choose
 one of those 3 best moves.
 
-00:32:53.156 --> 00:32:54.886 A:middle
+
+749
+00:32:53,156 --> 00:32:54,886
 One of those moves may be
 suboptimal unfortunately,
 
-00:32:54.886 --> 00:32:56.466 A:middle
+
+750
+00:32:54,886 --> 00:32:56,466
 but that may be desirable
 if you are trying
 
-00:32:56.466 --> 00:32:58.206 A:middle
+
+751
+00:32:56,466 --> 00:32:58,206
 to make your AI appear
 more human
 
-00:32:58.206 --> 00:32:59.586 A:middle
+
+752
+00:32:58,206 --> 00:32:59,586
 and have a chance
 of making an error.
 
 
-
-00:33:00.166 --> 00:33:02.256 A:middle
+753
+00:33:00,166 --> 00:33:02,256
 And both bestMoveForPlayer
 
-00:33:02.256 --> 00:33:05.396 A:middle
+
+754
+00:33:02,256 --> 00:33:05,396
 and randomMoveForPlayer
 return a GKGameModelUpdate
 
-00:33:05.396 --> 00:33:06.686 A:middle
+
+755
+00:33:05,396 --> 00:33:06,686
 which you can then use to apply
 
-00:33:07.106 --> 00:33:10.086 A:middle
+
+756
+00:33:07,106 --> 00:33:10,086
 to your GKGameModel
 to make a move.
 
-00:33:11.256 --> 00:33:13.186 A:middle
+
+757
+00:33:11,256 --> 00:33:13,186
 So here is a quick code sample.
 
-00:33:13.596 --> 00:33:15.796 A:middle
+
+758
+00:33:13,596 --> 00:33:15,796
 Here we're creating
 a Chess game model.
 
-00:33:16.126 --> 00:33:19.196 A:middle
+
+759
+00:33:16,126 --> 00:33:19,196
 And unfortunately going over the
 details of how you might want
 
-00:33:19.196 --> 00:33:21.166 A:middle
+
+760
+00:33:19,196 --> 00:33:21,166
 to implement your game
 model are beyond the scope
 
-00:33:21.166 --> 00:33:23.686 A:middle
+
+761
+00:33:21,166 --> 00:33:23,686
 of this session, but we do have
 excellent sample code available
 
-00:33:23.976 --> 00:33:25.686 A:middle
+
+762
+00:33:23,976 --> 00:33:25,686
 that you can look at to
 show how you might want
 
-00:33:25.686 --> 00:33:26.566 A:middle
+
+763
+00:33:25,686 --> 00:33:26,566
 to go about doing this.
 
-00:33:26.886 --> 00:33:28.446 A:middle
+
+764
+00:33:26,886 --> 00:33:28,446
 So we create our Chess model,
 
-00:33:28.846 --> 00:33:31.636 A:middle
+
+765
+00:33:28,846 --> 00:33:31,636
 and then we create
 our MinMax AI,
 
-00:33:31.636 --> 00:33:34.496 A:middle
+
+766
+00:33:31,636 --> 00:33:34,496
 and hook it up by
 setting the game model
 
-00:33:34.496 --> 00:33:35.396 A:middle
+
+767
+00:33:34,496 --> 00:33:35,396
 on the gameModel property.
 
-00:33:36.216 --> 00:33:38.226 A:middle
+
+768
+00:33:36,216 --> 00:33:38,226
 We then choose our
 LookAheadDepth to 6,
 
-00:33:38.746 --> 00:33:40.426 A:middle
+
+769
+00:33:38,746 --> 00:33:40,426
 so we're going to look
 ahead 6 turns in advance
 
-00:33:40.426 --> 00:33:41.476 A:middle
+
+770
+00:33:40,426 --> 00:33:41,476
 when we build our decision tree.
 
-00:33:42.216 --> 00:33:43.116 A:middle
+
+771
+00:33:42,216 --> 00:33:43,116
 That's all we need to do.
 
-00:33:43.656 --> 00:33:46.416 A:middle
+
+772
+00:33:43,656 --> 00:33:46,416
 Now we call bestMoveForPlayer
 with a currently active player
 
-00:33:46.656 --> 00:33:49.086 A:middle
+
+773
+00:33:46,656 --> 00:33:49,086
 and it will find the
 optimal move for that player
 
-00:33:49.166 --> 00:33:50.116 A:middle
+
+774
+00:33:49,166 --> 00:33:50,116
 with the given information.
 
-00:33:50.786 --> 00:33:53.296 A:middle
+
+775
+00:33:50,786 --> 00:33:53,296
 You can then apply that move to
 the game model to make the move.
 
-00:33:53.296 --> 00:33:56.866 A:middle
+
+776
+00:33:53,296 --> 00:33:56,866
 So let's look at a quick demo.
 
 
-
-00:34:13.076 --> 00:34:15.005 A:middle
+777
+00:34:13,076 --> 00:34:15,005
 So here we have a simple game
 where there are two players,
 
-00:34:15.326 --> 00:34:17.565 A:middle
+
+778
+00:34:15,326 --> 00:34:17,565
 black and white, and they're
 trying to get as many pieces
 
-00:34:17.815 --> 00:34:19.856 A:middle
+
+779
+00:34:17,815 --> 00:34:19,856
 of their color on the
 board as they can.
 
-00:34:20.505 --> 00:34:25.136 A:middle
+
+780
+00:34:20,505 --> 00:34:25,136
 When they place a piece on the
 board they will flip any colors
 
-00:34:25.136 --> 00:34:27.576 A:middle
+
+781
+00:34:25,136 --> 00:34:27,576
 of the opponent's pieces
 to their color that lie
 
-00:34:27.576 --> 00:34:28.835 A:middle
+
+782
+00:34:27,576 --> 00:34:28,835
 between their own pieces.
 
-00:34:29.386 --> 00:34:33.416 A:middle
+
+783
+00:34:29,386 --> 00:34:33,416
 So here we have both
 players controlled by the AI,
 
-00:34:33.696 --> 00:34:36.025 A:middle
+
+784
+00:34:33,696 --> 00:34:36,025
 the black player is looking
 ahead five moves in advance,
 
-00:34:36.025 --> 00:34:38.565 A:middle
+
+785
+00:34:36,025 --> 00:34:38,565
 while the white player is only
 looking ahead three moves.
 
-00:34:38.946 --> 00:34:42.606 A:middle
+
+786
+00:34:38,946 --> 00:34:42,606
 This allows the black player to
 easily defeat the white player
 
-00:34:42.696 --> 00:34:43.596 A:middle
+
+787
+00:34:42,696 --> 00:34:43,596
 as it goes through the game.
 
-00:34:43.726 --> 00:34:47.856 A:middle
+
+788
+00:34:43,726 --> 00:34:47,856
 You can see here we have
 a score for each player.
 
-00:34:47.966 --> 00:34:51.866 A:middle
+
+789
+00:34:47,966 --> 00:34:51,866
 This is simply we take a look at
 how many pieces the player has
 
-00:34:51.866 --> 00:34:55.456 A:middle
+
+790
+00:34:51,866 --> 00:34:55,456
 on the board minus the number of
 pieces that their opponent has
 
-00:34:55.456 --> 00:34:57.436 A:middle
+
+791
+00:34:55,456 --> 00:34:57,436
 on the board, adjusted
 with some weights,
 
-00:34:57.436 --> 00:34:58.556 A:middle
+
+792
+00:34:57,436 --> 00:34:58,556
 and that gives us our score.
 
-00:34:58.556 --> 00:35:01.286 A:middle
+
+793
+00:34:58,556 --> 00:35:01,286
 So you see here the black player
 easily defeats the white player.
 
 
-
-00:34:58.556 --> 00:35:01.286 A:middle
-So you see here the black player
-easily defeats the white player.
-
-00:35:01.676 --> 00:35:06.076 A:middle
+794
+00:35:01,676 --> 00:35:06,076
 So let's look closer
 at the score here.
 
-00:35:06.996 --> 00:35:10.546 A:middle
+
+795
+00:35:06,996 --> 00:35:10,546
 We see here that we have all
 of the pieces in the center,
 
-00:35:10.546 --> 00:35:11.886 A:middle
+
+796
+00:35:10,546 --> 00:35:11,886
 they're weighted at 1.
 
-00:35:12.116 --> 00:35:14.426 A:middle
+
+797
+00:35:12,116 --> 00:35:14,426
 The position on the edge of
 the board are weighted higher,
 
-00:35:14.426 --> 00:35:16.226 A:middle
+
+798
+00:35:14,426 --> 00:35:16,226
 the corners are weighted
 even higher.
 
-00:35:16.476 --> 00:35:18.106 A:middle
+
+799
+00:35:16,476 --> 00:35:18,106
 That's because these
 positions are more advantageous
 
-00:35:18.106 --> 00:35:20.456 A:middle
+
+800
+00:35:18,106 --> 00:35:20,456
 for the players, and
 so we direct the AI
 
-00:35:20.566 --> 00:35:21.546 A:middle
+
+801
+00:35:20,566 --> 00:35:21,546
 to favor these places
 
-00:35:21.546 --> 00:35:24.666 A:middle
+
+802
+00:35:21,546 --> 00:35:24,666
 by changing how those
 places effect the scores.
 
-00:35:26.216 --> 00:35:29.256 A:middle
+
+803
+00:35:26,216 --> 00:35:29,256
 So let's change-up the
 look ahead on these guys.
 
-00:35:29.256 --> 00:35:31.636 A:middle
+
+804
+00:35:29,256 --> 00:35:31,636
 We'll make white look
 ahead 4 instead of just 3.
 
-00:35:32.346 --> 00:35:35.246 A:middle
+
+805
+00:35:32,346 --> 00:35:35,246
 And even just this small
 change will allow the AI
 
-00:35:35.656 --> 00:35:37.616 A:middle
+
+806
+00:35:35,656 --> 00:35:37,616
 to play more effectively
 and in fact in the middle
 
-00:35:37.616 --> 00:35:40.516 A:middle
+
+807
+00:35:37,616 --> 00:35:40,516
 of the game it looks like the
 white AI has the upper hand,
 
-00:35:40.516 --> 00:35:43.536 A:middle
+
+808
+00:35:40,516 --> 00:35:43,536
 but the black AI is able
 to trade a short-term game
 
-00:35:43.686 --> 00:35:44.736 A:middle
+
+809
+00:35:43,686 --> 00:35:44,736
 for a long-term victory,
 
-00:35:45.106 --> 00:35:47.946 A:middle
+
+810
+00:35:45,106 --> 00:35:47,946
 and is able to overcome
 white in the end.
 
-00:35:54.096 --> 00:35:54.736 A:middle
+
+811
+00:35:54,096 --> 00:35:54,736
 That's MinMax AI.
 
-00:35:56.516 --> 00:36:02.696 A:middle
+
+812
+00:35:56,516 --> 00:36:02,696
 [ Applause ]
 
 
-
-00:35:56.516 --> 00:36:02.696 A:middle
-[ Applause ]
-
-00:36:03.196 --> 00:36:05.086 A:middle
-&gt;&gt; ROSS DEXTER: So now let's
+813
+00:36:03,196 --> 00:36:05,086
+>> ROSS DEXTER: So now let's
 talk about random sources.
 
-00:36:06.136 --> 00:36:07.986 A:middle
+
+814
+00:36:06,136 --> 00:36:07,986
 And at first this topic
 may seem unnecessary,
 
-00:36:07.986 --> 00:36:09.656 A:middle
+
+815
+00:36:07,986 --> 00:36:09,656
 because we already have rand.
 
-00:36:09.656 --> 00:36:10.636 A:middle
+
+816
+00:36:09,656 --> 00:36:10,636
 Why shouldn't we just use that?
 
-00:36:11.556 --> 00:36:13.046 A:middle
+
+817
+00:36:11,556 --> 00:36:13,046
 Well rand gives us
 random numbers
 
-00:36:13.046 --> 00:36:15.266 A:middle
+
+818
+00:36:13,046 --> 00:36:15,266
 but games have unique
 random number needs,
 
-00:36:15.266 --> 00:36:18.186 A:middle
+
+819
+00:36:15,266 --> 00:36:18,186
 and rand may not give
 us everything we want.
 
-00:36:19.046 --> 00:36:20.066 A:middle
+
+820
+00:36:19,046 --> 00:36:20,066
 First of all the numbers
 
-00:36:20.066 --> 00:36:23.536 A:middle
+
+821
+00:36:20,066 --> 00:36:23,536
 that rand generates may not be
 the same from system to system.
 
-00:36:23.536 --> 00:36:25.246 A:middle
+
+822
+00:36:23,536 --> 00:36:25,246
 You're not guaranteed
 to have the same results
 
-00:36:25.346 --> 00:36:26.326 A:middle
+
+823
+00:36:25,346 --> 00:36:26,326
 on different platforms.
 
-00:36:26.766 --> 00:36:29.036 A:middle
+
+824
+00:36:26,766 --> 00:36:29,036
 And that can be a big
 problem for networking games,
 
-00:36:29.036 --> 00:36:31.296 A:middle
+
+825
+00:36:29,036 --> 00:36:31,296
 because if we can't rely on
 the numbers on either side
 
-00:36:31.296 --> 00:36:32.636 A:middle
+
+826
+00:36:31,296 --> 00:36:32,636
 of the collection
 to be generated
 
-00:36:32.636 --> 00:36:35.026 A:middle
+
+827
+00:36:32,636 --> 00:36:35,026
 in the same sequence we have
 to waste critical bandwidth
 
-00:36:35.286 --> 00:36:36.456 A:middle
+
+828
+00:36:35,286 --> 00:36:36,456
 in syncing those two sides up.
 
-00:36:37.216 --> 00:36:39.156 A:middle
+
+829
+00:36:37,216 --> 00:36:39,156
 So we want platform-independent
 determinism.
 
-00:36:40.016 --> 00:36:41.486 A:middle
+
+830
+00:36:40,016 --> 00:36:41,486
 Also whenever we make a call
 
-00:36:41.486 --> 00:36:43.186 A:middle
+
+831
+00:36:41,486 --> 00:36:43,186
 to rand we're drawing
 from a single source.
 
-00:36:43.706 --> 00:36:46.476 A:middle
+
+832
+00:36:43,706 --> 00:36:46,476
 So if I have a bunch of
 calls to rand in my AI code,
 
-00:36:46.526 --> 00:36:48.826 A:middle
+
+833
+00:36:46,526 --> 00:36:48,826
 and then I add a new
 call in my physics code,
 
-00:36:49.206 --> 00:36:51.096 A:middle
+
+834
+00:36:49,206 --> 00:36:51,096
 that call in the physics
 code will affect the numbers
 
-00:36:51.096 --> 00:36:54.276 A:middle
+
+835
+00:36:51,096 --> 00:36:54,276
 that are being generated in
 my AI code, which could result
 
-00:36:54.456 --> 00:36:55.606 A:middle
+
+836
+00:36:54,456 --> 00:36:55,606
 in unexpected behavior.
 
-00:36:55.886 --> 00:36:56.906 A:middle
+
+837
+00:36:55,886 --> 00:36:56,906
 What we really want
 to do is be able
 
-00:36:56.906 --> 00:36:58.476 A:middle
+
+838
+00:36:56,906 --> 00:36:58,476
 to separate those
 two systems apart,
 
-00:36:58.806 --> 00:37:01.346 A:middle
+
+839
+00:36:58,806 --> 00:37:01,346
 so that the numbers generated
 in one system have no effect
 
 
-
-00:36:58.806 --> 00:37:01.346 A:middle
-so that the numbers generated
-in one system have no effect
-
-00:37:01.526 --> 00:37:03.646 A:middle
+840
+00:37:01,526 --> 00:37:03,646
 on the numbers generated
 in a different system.
 
-00:37:04.316 --> 00:37:07.366 A:middle
+
+841
+00:37:04,316 --> 00:37:07,366
 And also we may not want
 control over just the range
 
-00:37:07.366 --> 00:37:08.286 A:middle
+
+842
+00:37:07,366 --> 00:37:08,286
 of numbers we're generating
 
-00:37:08.526 --> 00:37:11.146 A:middle
+
+843
+00:37:08,526 --> 00:37:11,146
 but also how those numbers are
 distributed across that range.
 
-00:37:11.146 --> 00:37:13.436 A:middle
+
+844
+00:37:11,146 --> 00:37:13,436
 And this is where
 random sources comes in.
 
-00:37:14.076 --> 00:37:16.536 A:middle
+
+845
+00:37:14,076 --> 00:37:16,536
 So we're offering you a set
 of game quality random sources
 
-00:37:16.536 --> 00:37:18.896 A:middle
+
+846
+00:37:16,536 --> 00:37:18,896
 that are deterministic, so
 when you have the same seed,
 
-00:37:18.896 --> 00:37:20.406 A:middle
+
+847
+00:37:18,896 --> 00:37:20,406
 you will always get
 the same sequence
 
-00:37:20.406 --> 00:37:21.996 A:middle
+
+848
+00:37:20,406 --> 00:37:21,996
 of numbers no matter
 what platform you're on.
 
-00:37:22.416 --> 00:37:24.336 A:middle
+
+849
+00:37:22,416 --> 00:37:24,336
 They are also serializable
 so they can be saved
 
-00:37:24.336 --> 00:37:25.046 A:middle
+
+850
+00:37:24,336 --> 00:37:25,046
 out with your game data.
 
-00:37:25.046 --> 00:37:27.306 A:middle
+
+851
+00:37:25,046 --> 00:37:27,306
 And this can be really useful
 in helping to prevent cheating.
 
-00:37:27.586 --> 00:37:30.076 A:middle
+
+852
+00:37:27,586 --> 00:37:30,076
 And they're also implemented
 using industry-standard
 
-00:37:30.076 --> 00:37:31.686 A:middle
+
+853
+00:37:30,076 --> 00:37:31,686
 algorithms that are
 known to be reliable,
 
-00:37:32.296 --> 00:37:34.236 A:middle
+
+854
+00:37:32,296 --> 00:37:34,236
 and have excellent
 random characteristics.
 
-00:37:34.906 --> 00:37:37.356 A:middle
+
+855
+00:37:34,906 --> 00:37:37,356
 In addition we offer you a
 set of random distributions
 
-00:37:37.356 --> 00:37:39.106 A:middle
+
+856
+00:37:37,356 --> 00:37:39,106
 to leverage, and these allow you
 
-00:37:39.106 --> 00:37:42.016 A:middle
+
+857
+00:37:39,106 --> 00:37:42,016
 to control how your
 numbers are distributed
 
-00:37:42.016 --> 00:37:43.506 A:middle
+
+858
+00:37:42,016 --> 00:37:43,506
 across the given range.
 
-00:37:43.506 --> 00:37:46.596 A:middle
+
+859
+00:37:43,506 --> 00:37:46,596
 We have a true random where
 every value is equally likely
 
-00:37:46.596 --> 00:37:49.886 A:middle
+
+860
+00:37:46,596 --> 00:37:49,886
 to occur, Gaussian distribution
 where values are weighted
 
-00:37:49.886 --> 00:37:52.426 A:middle
+
+861
+00:37:49,886 --> 00:37:52,426
 on a bell curve with values
 toward the mean more likely
 
-00:37:52.426 --> 00:37:55.106 A:middle
+
+862
+00:37:52,426 --> 00:37:55,106
 than those on the fringes,
 and also anti-clustering
 
-00:37:55.106 --> 00:37:56.566 A:middle
+
+863
+00:37:55,106 --> 00:37:56,566
 or fair random distribution
 
-00:37:56.806 --> 00:37:58.506 A:middle
+
+864
+00:37:56,806 --> 00:37:58,506
 which helps eliminate
 runs of numbers.
 
-00:37:59.146 --> 00:38:02.246 A:middle
+
+865
+00:37:59,146 --> 00:38:02,246
 And finally we have NSArray
 shuffling, which is super useful
 
 
-
-00:37:59.146 --> 00:38:02.246 A:middle
-And finally we have NSArray
-shuffling, which is super useful
-
-00:38:02.246 --> 00:38:04.196 A:middle
+866
+00:38:02,246 --> 00:38:04,196
 for doing things like
 shuffling a deck of cards.
 
-00:38:04.196 --> 00:38:06.166 A:middle
+
+867
+00:38:04,196 --> 00:38:06,166
 So let's look at the classes.
 
-00:38:06.566 --> 00:38:09.556 A:middle
+
+868
+00:38:06,566 --> 00:38:09,556
 GKRandomSource is the base
 class for random sources.
 
-00:38:09.816 --> 00:38:11.776 A:middle
+
+869
+00:38:09,816 --> 00:38:11,776
 And it adopts NSSecureCoding
 and NSCopying
 
-00:38:11.776 --> 00:38:13.226 A:middle
+
+870
+00:38:11,776 --> 00:38:13,226
 so it can be securely
 serialized.
 
-00:38:14.816 --> 00:38:17.636 A:middle
+
+871
+00:38:14,816 --> 00:38:17,636
 Determinism is guaranteed
 with the same seed,
 
-00:38:17.786 --> 00:38:18.996 A:middle
+
+872
+00:38:17,786 --> 00:38:18,996
 no matter what platform
 you're on,
 
-00:38:18.996 --> 00:38:21.476 A:middle
+
+873
+00:38:18,996 --> 00:38:21,476
 so if you want the same sequence
 of numbers, you can always rely
 
-00:38:21.476 --> 00:38:22.306 A:middle
+
+874
+00:38:21,476 --> 00:38:22,306
 on it to be generated.
 
-00:38:23.066 --> 00:38:26.046 A:middle
+
+875
+00:38:23,066 --> 00:38:26,046
 If no seed is given,
 one is drawn
 
-00:38:26.046 --> 00:38:27.276 A:middle
+
+876
+00:38:26,046 --> 00:38:27,276
 from a secure system source.
 
-00:38:28.066 --> 00:38:31.786 A:middle
+
+877
+00:38:28,066 --> 00:38:31,786
 Go on to sharedRandom, which is
 the system's underlying shared
 
-00:38:31.786 --> 00:38:33.976 A:middle
+
+878
+00:38:31,786 --> 00:38:33,976
 random source, and this
 is not deterministic
 
-00:38:33.976 --> 00:38:36.176 A:middle
+
+879
+00:38:33,976 --> 00:38:36,176
 but there are cases in
 which this may be desirable,
 
-00:38:36.526 --> 00:38:38.656 A:middle
+
+880
+00:38:36,526 --> 00:38:38,656
 such as when you're
 shuffling a deck of cards
 
-00:38:38.696 --> 00:38:40.466 A:middle
+
+881
+00:38:38,696 --> 00:38:40,466
 and you want every
 result to be unique.
 
-00:38:40.946 --> 00:38:44.546 A:middle
+
+882
+00:38:40,946 --> 00:38:44,546
 Let's go over the AI random
 source algorithms we have
 
-00:38:44.656 --> 00:38:45.376 A:middle
+
+883
+00:38:44,656 --> 00:38:45,376
 available for you.
 
-00:38:45.716 --> 00:38:48.156 A:middle
+
+884
+00:38:45,716 --> 00:38:48,156
 We have ARC4, which
 has very low overhead
 
-00:38:48.156 --> 00:38:49.856 A:middle
+
+885
+00:38:48,156 --> 00:38:49,856
 and excellent random
 characteristics and is going
 
-00:38:49.856 --> 00:38:51.386 A:middle
+
+886
+00:38:49,856 --> 00:38:51,386
 to be your Goldilocks
 random source,
 
-00:38:51.386 --> 00:38:54.036 A:middle
+
+887
+00:38:51,386 --> 00:38:54,036
 we have Linear Congruential
 which has even lower overhead
 
-00:38:54.036 --> 00:38:57.396 A:middle
+
+888
+00:38:54,036 --> 00:38:57,396
 than ARC4, but it's random
 characteristics are not quite
 
-00:38:57.396 --> 00:38:59.346 A:middle
+
+889
+00:38:57,396 --> 00:38:59,346
 as good, and you may see
 some more frequently repeated
 
-00:38:59.346 --> 00:39:02.006 A:middle
+
+890
+00:38:59,346 --> 00:39:02,006
 sequences of numbers, finally
 we have the Mersenne Twister,
 
 
-
-00:38:59.346 --> 00:39:02.006 A:middle
-sequences of numbers, finally
-we have the Mersenne Twister,
-
-00:39:02.296 --> 00:39:04.056 A:middle
+891
+00:39:02,296 --> 00:39:04,056
 which is high quality
 but memory intensive.
 
-00:39:04.636 --> 00:39:06.626 A:middle
+
+892
+00:39:04,636 --> 00:39:06,626
 Note that none of these are
 suitable for cryptography
 
-00:39:06.626 --> 00:39:09.316 A:middle
+
+893
+00:39:06,626 --> 00:39:09,316
 but Apple offers other separate
 APIs to meet these needs.
 
-00:39:10.006 --> 00:39:13.966 A:middle
+
+894
+00:39:10,006 --> 00:39:13,966
 Now we get to our random
 distributions, in the base class
 
-00:39:13.966 --> 00:39:15.726 A:middle
+
+895
+00:39:13,966 --> 00:39:15,726
 for this, it is
 GKRandomDistribution
 
-00:39:15.726 --> 00:39:17.896 A:middle
+
+896
+00:39:15,726 --> 00:39:17,896
 which is implements a
 pure random distribution,
 
-00:39:18.226 --> 00:39:21.666 A:middle
+
+897
+00:39:18,226 --> 00:39:21,666
 meaning every value between
 lowest value and highest value,
 
-00:39:21.966 --> 00:39:23.166 A:middle
+
+898
+00:39:21,966 --> 00:39:23,166
 are equally likely to occur.
 
-00:39:23.906 --> 00:39:25.676 A:middle
+
+899
+00:39:23,906 --> 00:39:25,676
 You can get numbers
 by calling nextInt,
 
-00:39:26.236 --> 00:39:27.306 A:middle
+
+900
+00:39:26,236 --> 00:39:27,306
 nextUniform, and nextBool.
 
-00:39:27.306 --> 00:39:31.406 A:middle
+
+901
+00:39:27,306 --> 00:39:31,406
 We also offer a set of dice
 convenience constructors
 
-00:39:31.406 --> 00:39:35.696 A:middle
+
+902
+00:39:31,406 --> 00:39:35,696
 to create 6 sided, 20
 sided, and custom sided die.
 
-00:39:37.296 --> 00:39:39.656 A:middle
+
+903
+00:39:37,296 --> 00:39:39,656
 Then we have
 GKGaussianDistribution
 
-00:39:39.656 --> 00:39:42.936 A:middle
+
+904
+00:39:39,656 --> 00:39:42,936
 which implements a bell
 curve Gaussian distribution.
 
-00:39:43.926 --> 00:39:46.146 A:middle
+
+905
+00:39:43,926 --> 00:39:46,146
 The values are biased
 towards the mean value
 
-00:39:46.546 --> 00:39:49.306 A:middle
+
+906
+00:39:46,546 --> 00:39:49,306
 and the values farther away
 from the mean are less likely
 
-00:39:49.306 --> 00:39:50.216 A:middle
+
+907
+00:39:49,306 --> 00:39:50,216
 to occur, and that's
 what happened
 
-00:39:50.216 --> 00:39:51.526 A:middle
+
+908
+00:39:50,216 --> 00:39:51,526
 in our sample distribution here.
 
-00:39:52.216 --> 00:39:55.656 A:middle
+
+909
+00:39:52,216 --> 00:39:55,656
 We have generated a sequence
 of 15 numbers between 1 and 5,
 
-00:39:55.656 --> 00:39:58.396 A:middle
+
+910
+00:39:55,656 --> 00:39:58,396
 and we see that the mean value
 of 3 occurs far more frequently
 
-00:39:58.796 --> 00:39:59.946 A:middle
+
+911
+00:39:58,796 --> 00:39:59,946
 than any of the other numbers.
 
 
-
-00:40:00.476 --> 00:40:03.016 A:middle
+912
+00:40:00,476 --> 00:40:03,016
 In fact it occurs
 more than twice
 
-00:40:03.016 --> 00:40:04.386 A:middle
+
+913
+00:40:03,016 --> 00:40:04,386
 as frequently as
 any other number.
 
-00:40:04.386 --> 00:40:06.026 A:middle
+
+914
+00:40:04,386 --> 00:40:06,026
 With 1 and 5, the
 values on the fringes,
 
-00:40:06.306 --> 00:40:07.646 A:middle
+
+915
+00:40:06,306 --> 00:40:07,646
 only occurring a
 single time each.
 
-00:40:08.176 --> 00:40:11.386 A:middle
+
+916
+00:40:08,176 --> 00:40:11,386
 Note that in a standard Gaussian
 distribution, is unbounded
 
-00:40:11.756 --> 00:40:13.526 A:middle
+
+917
+00:40:11,756 --> 00:40:13,526
 but that's undesirable
 for a random source,
 
-00:40:13.846 --> 00:40:16.026 A:middle
+
+918
+00:40:13,846 --> 00:40:16,026
 so we call every value outside
 
-00:40:16.276 --> 00:40:18.076 A:middle
+
+919
+00:40:16,276 --> 00:40:18,076
 of a three standard
 deviations of the mean.
 
-00:40:18.566 --> 00:40:24.006 A:middle
+
+920
+00:40:18,566 --> 00:40:24,006
 Next we have our anti-clustering
 distribution implemented
 
-00:40:24.006 --> 00:40:25.816 A:middle
+
+921
+00:40:24,006 --> 00:40:25,816
 in the class
 GKShuffledDistribution.
 
-00:40:26.056 --> 00:40:29.756 A:middle
+
+922
+00:40:26,056 --> 00:40:29,756
 This is our fair random
 distribution, which helps reduce
 
-00:40:29.756 --> 00:40:32.636 A:middle
+
+923
+00:40:29,756 --> 00:40:32,636
 or eliminate runs of numbers,
 but it's random over time.
 
-00:40:33.276 --> 00:40:35.526 A:middle
+
+924
+00:40:33,276 --> 00:40:35,526
 And you control this by
 using the uniformDistance.
 
-00:40:36.096 --> 00:40:40.016 A:middle
+
+925
+00:40:36,096 --> 00:40:40,016
 At 0.0, all numbers are
 equally likely to occur,
 
-00:40:40.266 --> 00:40:43.026 A:middle
+
+926
+00:40:40,266 --> 00:40:43,026
 and this is indistinguishable
 from a true random source,
 
-00:40:43.936 --> 00:40:44.776 A:middle
+
+927
+00:40:43,936 --> 00:40:44,776
 our random distribution.
 
-00:40:45.656 --> 00:40:47.796 A:middle
+
+928
+00:40:45,656 --> 00:40:47,796
 At 1.0, all values are
 different and it will run
 
-00:40:47.796 --> 00:40:49.506 A:middle
+
+929
+00:40:47,796 --> 00:40:49,506
 through every value in
 the range before you start
 
-00:40:49.506 --> 00:40:50.876 A:middle
+
+930
+00:40:49,506 --> 00:40:50,876
 to see any repeated values.
 
-00:40:51.936 --> 00:40:52.806 A:middle
+
+931
+00:40:51,936 --> 00:40:52,806
 That's what we have here.
 
-00:40:52.806 --> 00:40:54.026 A:middle
+
+932
+00:40:52,806 --> 00:40:54,026
 In our distribution here.
 
-00:40:54.026 --> 00:40:56.706 A:middle
+
+933
+00:40:54,026 --> 00:40:56,706
 Once again we're generating
 15 numbers between 1 and 5
 
-00:40:57.126 --> 00:40:59.466 A:middle
+
+934
+00:40:57,126 --> 00:40:59,466
 and you can see that
 we're hitting every number
 
-00:40:59.466 --> 00:41:02.296 A:middle
+
+935
+00:40:59,466 --> 00:41:02,296
 in the range before we start
 to see any repeated values.
 
 
-
-00:40:59.466 --> 00:41:02.296 A:middle
-in the range before we start
-to see any repeated values.
-
-00:41:02.666 --> 00:41:06.496 A:middle
+936
+00:41:02,666 --> 00:41:06,496
 And in fact every value is
 generated exactly three times.
 
-00:41:06.496 --> 00:41:10.486 A:middle
+
+937
+00:41:06,496 --> 00:41:10,486
 So let's go over the
 simple code examples.
 
-00:41:11.786 --> 00:41:14.846 A:middle
+
+938
+00:41:11,786 --> 00:41:14,846
 It's very easy to create a
 6 sided die random source,
 
-00:41:14.846 --> 00:41:16.336 A:middle
+
+939
+00:41:14,846 --> 00:41:16,336
 you just use the
 connivence constructor
 
-00:41:16.646 --> 00:41:20.346 A:middle
+
+940
+00:41:16,646 --> 00:41:20,346
 GKRandomDistribution,
 and rolling the dye is
 
-00:41:20.346 --> 00:41:22.446 A:middle
+
+941
+00:41:20,346 --> 00:41:22,446
 as easy as calling nextInt.
 
-00:41:23.116 --> 00:41:30.116 A:middle
+
+942
+00:41:23,116 --> 00:41:30,116
 It's similarly easy to
 create a 20 sided die.
 
-00:41:30.296 --> 00:41:33.386 A:middle
+
+943
+00:41:30,296 --> 00:41:33,386
 And creating custom
 die is also quite easy.
 
-00:41:33.486 --> 00:41:35.146 A:middle
+
+944
+00:41:33,486 --> 00:41:35,146
 Here we're creating
 a 256 sided die
 
-00:41:35.146 --> 00:41:36.256 A:middle
+
+945
+00:41:35,146 --> 00:41:36,256
 which would be pretty
 awkward if you tried
 
-00:41:36.256 --> 00:41:37.136 A:middle
+
+946
+00:41:36,256 --> 00:41:37,136
 to roll it in the real world.
 
-00:41:37.716 --> 00:41:43.026 A:middle
+
+947
+00:41:37,716 --> 00:41:43,026
 The previous three examples were
 all implemented using a true
 
-00:41:43.026 --> 00:41:45.586 A:middle
+
+948
+00:41:43,026 --> 00:41:45,586
 random distribution, but you
 can use any of the distributions
 
-00:41:45.586 --> 00:41:46.586 A:middle
+
+949
+00:41:45,586 --> 00:41:46,586
 that we have available to you.
 
-00:41:46.966 --> 00:41:48.626 A:middle
+
+950
+00:41:46,966 --> 00:41:48,626
 Here we're creating
 a 20 sided die
 
-00:41:48.626 --> 00:41:51.556 A:middle
+
+951
+00:41:48,626 --> 00:41:51,556
 with a Gaussian distribution, so
 it's weighted to the mean value,
 
-00:41:51.556 --> 00:41:54.246 A:middle
+
+952
+00:41:51,556 --> 00:41:54,246
 around 11, so when you roll
 it, you're most likely to come
 
-00:41:54.246 --> 00:41:55.116 A:middle
+
+953
+00:41:54,246 --> 00:41:55,116
 up with a number around there.
 
-00:41:55.656 --> 00:41:59.416 A:middle
+
+954
+00:41:55,656 --> 00:41:59,416
 And here we're creating
 a die, a 20 sided die
 
-00:41:59.876 --> 00:42:01.576 A:middle
+
+955
+00:41:59,876 --> 00:42:01,576
 with our shuffle distribution,
 
 
-
-00:41:59.876 --> 00:42:01.576 A:middle
-with our shuffle distribution,
-
-00:42:02.706 --> 00:42:04.786 A:middle
+956
+00:42:02,706 --> 00:42:04,786
 and by default the
 uniform distance
 
-00:42:04.786 --> 00:42:08.046 A:middle
+
+957
+00:42:04,786 --> 00:42:08,046
 on our shuffle distribution
 is 1.0.
 
-00:42:08.236 --> 00:42:10.946 A:middle
+
+958
+00:42:08,236 --> 00:42:10,946
 So when we roll this one,
 we're going to hit every value
 
-00:42:10.946 --> 00:42:13.196 A:middle
+
+959
+00:42:10,946 --> 00:42:13,196
 in the range before we start
 to see any repeated values.
 
-00:42:13.416 --> 00:42:15.136 A:middle
+
+960
+00:42:13,416 --> 00:42:15,136
 The first time we roll
 it, we might get 5,
 
-00:42:15.566 --> 00:42:17.616 A:middle
+
+961
+00:42:15,566 --> 00:42:17,616
 then we know the next time we
 roll it, we definitely not going
 
-00:42:17.616 --> 00:42:19.606 A:middle
+
+962
+00:42:17,616 --> 00:42:19,606
 to get that number
 again, until we run
 
-00:42:19.606 --> 00:42:21.576 A:middle
+
+963
+00:42:19,606 --> 00:42:21,576
 through every other
 value in the range.
 
-00:42:23.706 --> 00:42:26.416 A:middle
+
+964
+00:42:23,706 --> 00:42:26,416
 And finally, here we
 have array shuffling,
 
-00:42:27.036 --> 00:42:29.496 A:middle
+
+965
+00:42:27,036 --> 00:42:29,496
 we're using the shared random
 source we mentioned earlier
 
-00:42:29.496 --> 00:42:31.396 A:middle
+
+966
+00:42:29,496 --> 00:42:31,396
 on GKRandomSource,
 which gives us access
 
-00:42:31.426 --> 00:42:33.496 A:middle
+
+967
+00:42:31,426 --> 00:42:33,496
 to the system's underlying
 random source,
 
-00:42:33.496 --> 00:42:34.786 A:middle
+
+968
+00:42:33,496 --> 00:42:34,786
 which is not deterministic,
 
-00:42:35.226 --> 00:42:37.866 A:middle
+
+969
+00:42:35,226 --> 00:42:37,866
 but in this case
 that's advantageous.
 
-00:42:38.206 --> 00:42:41.466 A:middle
+
+970
+00:42:38,206 --> 00:42:41,466
 We want every instance of the
 card shoveling to be unique.
 
-00:42:42.286 --> 00:42:43.896 A:middle
+
+971
+00:42:42,286 --> 00:42:43,896
 And you can see how easy it is
 
-00:42:44.216 --> 00:42:45.896 A:middle
+
+972
+00:42:44,216 --> 00:42:45,896
 to make random sources
 a part of your game.
 
-00:42:46.336 --> 00:42:48.306 A:middle
+
+973
+00:42:46,336 --> 00:42:48,306
 It's only a couple lines of
 code and you can get going.
 
-00:42:48.306 --> 00:42:50.396 A:middle
+
+974
+00:42:48,306 --> 00:42:50,396
 And that's random sources.
 
-00:42:51.696 --> 00:42:53.946 A:middle
+
+975
+00:42:51,696 --> 00:42:53,946
 So now I would like to invite
 Joshua Boggs up here to talk
 
-00:42:53.946 --> 00:42:54.916 A:middle
+
+976
+00:42:53,946 --> 00:42:54,916
 about our rule systems.
 
-00:42:55.516 --> 00:43:02.076 A:middle
+
+977
+00:42:55,516 --> 00:43:02,076
 [ Applause ]
 
 
+978
+00:43:02,576 --> 00:43:02,996
+>> JOSHUA BOGGS: Thanks, Ross.
 
-00:42:55.516 --> 00:43:02.076 A:middle
-[ Applause ]
 
-00:43:02.576 --> 00:43:02.996 A:middle
-&gt;&gt; JOSHUA BOGGS: Thanks, Ross.
-
-00:43:07.046 --> 00:43:08.106 A:middle
+979
+00:43:07,046 --> 00:43:08,106
 Hi. I'm Josh.
 
-00:43:08.326 --> 00:43:10.266 A:middle
+
+980
+00:43:08,326 --> 00:43:10,266
 I have been working
 alongside Bruno
 
-00:43:10.266 --> 00:43:11.656 A:middle
+
+981
+00:43:10,266 --> 00:43:11,656
 and Ross while they've
 been putting
 
-00:43:11.656 --> 00:43:13.956 A:middle
+
+982
+00:43:11,656 --> 00:43:13,956
 on the finishing
 touches to GameplayKit.
 
-00:43:14.166 --> 00:43:18.386 A:middle
+
+983
+00:43:14,166 --> 00:43:18,386
 I'm here to talk about one of
 those systems, the rule systems.
 
-00:43:18.866 --> 00:43:21.996 A:middle
+
+984
+00:43:18,866 --> 00:43:21,996
 So before I go into the rule
 systems, I just want to go
 
-00:43:21.996 --> 00:43:24.196 A:middle
+
+985
+00:43:21,996 --> 00:43:24,196
 over some common ingredients
 that games tend to have.
 
-00:43:24.946 --> 00:43:28.156 A:middle
+
+986
+00:43:24,946 --> 00:43:28,156
 Games tend to consistent of
 three elements, it is things
 
-00:43:28.156 --> 00:43:32.726 A:middle
+
+987
+00:43:28,156 --> 00:43:32,726
 like your nouns: position,
 speed, player health,
 
-00:43:33.406 --> 00:43:34.456 A:middle
+
+988
+00:43:33,406 --> 00:43:34,456
 equipment they may be holding.
 
-00:43:36.056 --> 00:43:39.616 A:middle
+
+989
+00:43:36,056 --> 00:43:39,616
 Secondly, you've got things
 like verbs: these are actions
 
-00:43:39.616 --> 00:43:42.936 A:middle
+
+990
+00:43:39,616 --> 00:43:42,936
 that the player can perform,
 things like run, jump,
 
-00:43:43.746 --> 00:43:47.116 A:middle
+
+991
+00:43:43,746 --> 00:43:47,116
 using an item, or if you're
 in a car, accelerating.
 
-00:43:47.596 --> 00:43:49.476 A:middle
+
+992
+00:43:47,596 --> 00:43:49,476
 Lastly, the rules.
 
-00:43:49.966 --> 00:43:52.826 A:middle
+
+993
+00:43:49,966 --> 00:43:52,826
 Rules are incredibly important
 
-00:43:52.826 --> 00:43:55.746 A:middle
+
+994
+00:43:52,826 --> 00:43:55,746
 because they define how your
 nouns and verbs interact.
 
-00:43:57.166 --> 00:43:59.256 A:middle
+
+995
+00:43:57,166 --> 00:43:59,256
 Rules give flavor and
 texture to your gam,
 
-00:43:59.256 --> 00:44:00.656 A:middle
+
+996
+00:43:59,256 --> 00:44:00,656
 and great games have
 great rules.
 
 
-
-00:43:59.256 --> 00:44:00.656 A:middle
-and great games have
-great rules.
-
-00:44:00.656 --> 00:44:03.526 A:middle
+997
+00:44:00,656 --> 00:44:03,526
 So let's have a look
 at an example rule.
 
-00:44:03.526 --> 00:44:10.346 A:middle
+
+998
+00:44:03,526 --> 00:44:10,346
 Here we have a rule that
 a driver may use to decide
 
-00:44:10.346 --> 00:44:11.676 A:middle
+
+999
+00:44:10,346 --> 00:44:11,676
 when to brake and
 when to accelerate.
 
-00:44:13.366 --> 00:44:14.376 A:middle
+
+1000
+00:44:13,366 --> 00:44:14,376
 Using an input property
 
-00:44:14.376 --> 00:44:17.556 A:middle
+
+1001
+00:44:14,376 --> 00:44:17,556
 of distance the player will
 either slow down or speed up.
 
-00:44:17.556 --> 00:44:22.136 A:middle
+
+1002
+00:44:17,556 --> 00:44:22,136
 We can see in this example that
 if the distance is less than 5,
 
-00:44:22.136 --> 00:44:23.726 A:middle
+
+1003
+00:44:22,136 --> 00:44:23,726
 they're going to brake,
 when it's greater than
 
-00:44:23.726 --> 00:44:24.676 A:middle
+
+1004
+00:44:23,726 --> 00:44:24,676
 or equal they'll accelerate.
 
-00:44:26.656 --> 00:44:29.326 A:middle
+
+1005
+00:44:26,656 --> 00:44:29,326
 This is fine logic, but
 there is a subtle problem.
 
-00:44:29.756 --> 00:44:33.926 A:middle
+
+1006
+00:44:29,756 --> 00:44:33,926
 In the distances around 5, we're
 going to get very jerky movement
 
-00:44:34.176 --> 00:44:36.956 A:middle
+
+1007
+00:44:34,176 --> 00:44:36,956
 because the car is going
 to continue to oscillate
 
-00:44:37.496 --> 00:44:38.766 A:middle
+
+1008
+00:44:37,496 --> 00:44:38,766
 between braking and
 accelerating.
 
-00:44:39.356 --> 00:44:42.976 A:middle
+
+1009
+00:44:39,356 --> 00:44:42,976
 This is going to give
 us very jerky movement.
 
-00:44:43.306 --> 00:44:46.336 A:middle
+
+1010
+00:44:43,306 --> 00:44:46,336
 So for more natural movement
 we need something a little
 
-00:44:46.406 --> 00:44:47.246 A:middle
+
+1011
+00:44:46,406 --> 00:44:47,246
 more approximate.
 
-00:44:49.496 --> 00:44:55.426 A:middle
+
+1012
+00:44:49,496 --> 00:44:55,426
 Using a more fuzzy solution
 we output facts about what
 
-00:44:55.426 --> 00:44:58.216 A:middle
+
+1013
+00:44:55,426 --> 00:44:58,216
 to do rather than perform
 the actions immediately,
 
-00:44:58.766 --> 00:45:01.266 A:middle
+
+1014
+00:44:58,766 --> 00:45:01,266
 we've output two facts
 here, closeness and farness,
 
 
-
-00:44:58.766 --> 00:45:01.266 A:middle
-we've output two facts
-here, closeness and farness,
-
-00:45:01.676 --> 00:45:02.666 A:middle
+1015
+00:45:01,676 --> 00:45:02,666
 both based on distance.
 
-00:45:03.586 --> 00:45:09.676 A:middle
+
+1016
+00:45:03,586 --> 00:45:09,676
 The important thing is you
 can now be both close and far.
 
-00:45:09.676 --> 00:45:11.746 A:middle
+
+1017
+00:45:09,676 --> 00:45:11,746
 So rather than perform
 one or the other,
 
-00:45:12.196 --> 00:45:13.756 A:middle
+
+1018
+00:45:12,196 --> 00:45:13,756
 this lets us blend
 the two together
 
-00:45:13.756 --> 00:45:14.976 A:middle
+
+1019
+00:45:13,756 --> 00:45:14,976
 to get a more natural movement.
 
-00:45:15.706 --> 00:45:18.996 A:middle
+
+1020
+00:45:15,706 --> 00:45:18,996
 This is especially important
 around the previous example.
 
-00:45:18.996 --> 00:45:19.806 A:middle
+
+1021
+00:45:18,996 --> 00:45:19,806
 Now when the distance is
 
-00:45:19.806 --> 00:45:23.926 A:middle
+
+1022
+00:45:19,806 --> 00:45:23,926
 around 5 we'll get much
 more natural acceleration.
 
-00:45:23.926 --> 00:45:30.056 A:middle
+
+1023
+00:45:23,926 --> 00:45:30,056
 This is the motivation
 behind rule systems.
 
-00:45:30.916 --> 00:45:32.416 A:middle
+
+1024
+00:45:30,916 --> 00:45:32,416
 Facts can be grades of true.
 
-00:45:32.416 --> 00:45:34.786 A:middle
+
+1025
+00:45:32,416 --> 00:45:34,786
 This allows us to perform
 more complex reasoning
 
-00:45:34.786 --> 00:45:35.466 A:middle
+
+1026
+00:45:34,786 --> 00:45:35,466
 with fuzzy logic.
 
-00:45:37.426 --> 00:45:39.206 A:middle
+
+1027
+00:45:37,426 --> 00:45:39,206
 Fuzzy logic deals
 with approximations.
 
-00:45:39.936 --> 00:45:43.456 A:middle
+
+1028
+00:45:39,936 --> 00:45:43,456
 It also allows us to
 separate what we do
 
-00:45:43.656 --> 00:45:44.456 A:middle
+
+1029
+00:45:43,656 --> 00:45:44,456
 from how we should do it,
 
-00:45:44.456 --> 00:45:48.136 A:middle
+
+1030
+00:45:44,456 --> 00:45:48,136
 rather than performing actions
 immediately, we just state facts
 
-00:45:48.136 --> 00:45:50.996 A:middle
+
+1031
+00:45:48,136 --> 00:45:50,996
 about the world, and then take
 deferred actions later based off
 
-00:45:50.996 --> 00:45:51.576 A:middle
+
+1032
+00:45:50,996 --> 00:45:51,576
 of those facts.
 
-00:45:52.846 --> 00:45:54.236 A:middle
+
+1033
+00:45:52,846 --> 00:45:54,236
 So let's take a look at
 one of those classes.
 
-00:45:56.576 --> 00:45:57.536 A:middle
+
+1034
+00:45:56,576 --> 00:45:57,536
 Here we have GKRule.
 
-00:45:59.116 --> 00:46:02.136 A:middle
+
+1035
+00:45:59,116 --> 00:46:02,136
 GKRule consists of a Boolean
 predicate and an action.
 
 
-
-00:45:59.116 --> 00:46:02.136 A:middle
-GKRule consists of a Boolean
-predicate and an action.
-
-00:46:03.626 --> 00:46:06.566 A:middle
+1036
+00:46:03,626 --> 00:46:06,566
 The predicate matches
 against facts and the state
 
-00:46:06.566 --> 00:46:09.766 A:middle
+
+1037
+00:46:06,566 --> 00:46:09,766
 in the system and only fires its
 action if the predicate is true.
 
-00:46:10.876 --> 00:46:12.956 A:middle
+
+1038
+00:46:10,876 --> 00:46:12,956
 Actions could be as
 simple as asserting a fact,
 
-00:46:12.956 --> 00:46:15.446 A:middle
+
+1039
+00:46:12,956 --> 00:46:15,446
 or as complicated as you'd
 like with a complex block.
 
-00:46:17.226 --> 00:46:22.126 A:middle
+
+1040
+00:46:17,226 --> 00:46:22,126
 Importantly they can now be
 serializable using NSPredicate
 
-00:46:22.206 --> 00:46:24.536 A:middle
+
+1041
+00:46:22,206 --> 00:46:24,536
 serialization methods.
 
-00:46:27.536 --> 00:46:29.226 A:middle
+
+1042
+00:46:27,536 --> 00:46:29,226
 The important thing
 to remember is
 
-00:46:29.226 --> 00:46:32.546 A:middle
+
+1043
+00:46:29,226 --> 00:46:32,546
 that rule systems provide
 approximations to answers.
 
-00:46:32.686 --> 00:46:34.776 A:middle
+
+1044
+00:46:32,686 --> 00:46:34,776
 Things like how close am
 I to the car in front?
 
-00:46:34.776 --> 00:46:37.106 A:middle
+
+1045
+00:46:34,776 --> 00:46:37,106
 In the first example
 we can kind of say
 
-00:46:37.106 --> 00:46:38.816 A:middle
+
+1046
+00:46:37,106 --> 00:46:38,816
 that with a fairly high grade
 
-00:46:38.816 --> 00:46:40.836 A:middle
+
+1047
+00:46:38,816 --> 00:46:40,836
 of confidence, that
 we're quite far.
 
-00:46:41.216 --> 00:46:44.316 A:middle
+
+1048
+00:46:41,216 --> 00:46:44,316
 Where with the other two,
 things are a little more fuzzy,
 
-00:46:44.316 --> 00:46:45.136 A:middle
+
+1049
+00:46:44,316 --> 00:46:45,136
 answers that we're after,
 
-00:46:45.136 --> 00:46:47.546 A:middle
+
+1050
+00:46:45,136 --> 00:46:47,546
 things like somewhere
 in between, closer.
 
-00:46:48.106 --> 00:46:52.696 A:middle
+
+1051
+00:46:48,106 --> 00:46:52,696
 Let's have a look at the system
 that manages these rules.
 
-00:46:52.696 --> 00:46:57.106 A:middle
+
+1052
+00:46:52,696 --> 00:46:57,106
 Here we have the other
 class, GKRuleSystem.
 
-00:46:57.306 --> 00:47:02.986 A:middle
+
+1053
+00:46:57,306 --> 00:47:02,986
 GKRuleSystem is an ordered
 collection of rules and facts.
 
 
-
-00:46:57.306 --> 00:47:02.986 A:middle
-GKRuleSystem is an ordered
-collection of rules and facts.
-
-00:47:03.636 --> 00:47:07.586 A:middle
+1054
+00:47:03,636 --> 00:47:07,586
 To assert facts about the world,
 simply call evaluate on it.
 
-00:47:08.496 --> 00:47:11.496 A:middle
+
+1055
+00:47:08,496 --> 00:47:11,496
 This will to run through
 the rules in the array
 
-00:47:11.496 --> 00:47:14.136 A:middle
+
+1056
+00:47:11,496 --> 00:47:14,136
 and those rules will use a
 state dictionary as input
 
-00:47:14.136 --> 00:47:16.776 A:middle
+
+1057
+00:47:14,136 --> 00:47:16,776
 and insert facts later
 based off of that.
 
-00:47:17.806 --> 00:47:21.586 A:middle
+
+1058
+00:47:17,806 --> 00:47:21,586
 The facts will be held in the
 facts array and it's important
 
-00:47:21.586 --> 00:47:24.396 A:middle
+
+1059
+00:47:21,586 --> 00:47:24,396
 to know that whenever a fact
 is asserted the evaluate will
 
-00:47:24.396 --> 00:47:26.086 A:middle
+
+1060
+00:47:24,396 --> 00:47:26,086
 actually go back
 to the beginning,
 
-00:47:26.386 --> 00:47:27.506 A:middle
+
+1061
+00:47:26,386 --> 00:47:27,506
 and continue evaluating.
 
-00:47:28.596 --> 00:47:30.646 A:middle
+
+1062
+00:47:28,596 --> 00:47:30,646
 This is because when
 you assert a fact,
 
-00:47:30.726 --> 00:47:32.346 A:middle
+
+1063
+00:47:30,726 --> 00:47:32,346
 this may affect the
 way other rules work.
 
-00:47:34.776 --> 00:47:37.326 A:middle
+
+1064
+00:47:34,776 --> 00:47:37,326
 This ensures that when evaluate
 is finished you know you have
 
-00:47:37.476 --> 00:47:41.456 A:middle
+
+1065
+00:47:37,476 --> 00:47:41,456
 the most concise and
 accurate view of the game.
 
-00:47:41.676 --> 00:47:44.916 A:middle
+
+1066
+00:47:41,676 --> 00:47:44,916
 To start over again, like maybe
 at the end of an update loop
 
-00:47:45.036 --> 00:47:48.716 A:middle
+
+1067
+00:47:45,036 --> 00:47:48,716
 or on a timer, simply call reset
 and will clear up old facts
 
-00:47:48.776 --> 00:47:50.706 A:middle
+
+1068
+00:47:48,776 --> 00:47:50,706
 so that you can repeat
 the evaluation.
 
-00:47:50.706 --> 00:47:55.396 A:middle
+
+1069
+00:47:50,706 --> 00:47:55,396
 Let's have a look
 at the code example.
 
-00:47:56.926 --> 00:47:59.666 A:middle
+
+1070
+00:47:56,926 --> 00:47:59,666
 Here in the beginning, we
 initialize our rule system,
 
-00:47:59.936 --> 00:48:02.286 A:middle
+
+1071
+00:47:59,936 --> 00:48:02,286
 and then later we
 access the state
 
 
-
-00:47:59.936 --> 00:48:02.286 A:middle
-and then later we
-access the state
-
-00:48:02.846 --> 00:48:06.416 A:middle
+1072
+00:48:02,846 --> 00:48:06,416
 and assert two facts
 based off this.
 
-00:48:06.646 --> 00:48:09.416 A:middle
+
+1073
+00:48:06,646 --> 00:48:09,416
 Later in the game
 code, excuse me.
 
-00:48:09.826 --> 00:48:12.556 A:middle
+
+1074
+00:48:09,826 --> 00:48:12,556
 We then grab these two
 grades and sum them together
 
-00:48:12.556 --> 00:48:14.616 A:middle
+
+1075
+00:48:12,556 --> 00:48:14,616
 to get a sort of
 fuzzy approximation
 
-00:48:14.616 --> 00:48:15.916 A:middle
+
+1076
+00:48:14,616 --> 00:48:15,916
 about how much we
 should accelerate,
 
-00:48:16.426 --> 00:48:17.676 A:middle
+
+1077
+00:48:16,426 --> 00:48:17,676
 and feed this in our game code.
 
-00:48:17.676 --> 00:48:24.056 A:middle
+
+1078
+00:48:17,676 --> 00:48:24,056
 So let's take a look at
 little example we have going.
 
-00:48:44.046 --> 00:48:46.626 A:middle
+
+1079
+00:48:44,046 --> 00:48:46,626
 Here we've got cars
 driving along the freeway.
 
-00:48:48.066 --> 00:48:50.246 A:middle
+
+1080
+00:48:48,066 --> 00:48:50,246
 The cars in the intersections
 are using one set of rules,
 
-00:48:50.246 --> 00:48:52.296 A:middle
+
+1081
+00:48:50,246 --> 00:48:52,296
 and the cars on the freeway
 are using a different set.
 
-00:48:52.866 --> 00:48:55.906 A:middle
+
+1082
+00:48:52,866 --> 00:48:55,906
 The ones on the freeway are
 deciding how much they should
 
-00:48:55.906 --> 00:48:57.956 A:middle
+
+1083
+00:48:55,906 --> 00:48:57,956
 slow down or speed up
 based off the distance
 
-00:48:57.956 --> 00:48:58.856 A:middle
+
+1084
+00:48:57,956 --> 00:48:58,856
 of the car in front.
 
-00:48:59.966 --> 00:49:01.366 A:middle
+
+1085
+00:48:59,966 --> 00:49:01,366
 They're asserting two
 facts about the world.
 
 
-
-00:48:59.966 --> 00:49:01.366 A:middle
-They're asserting two
-facts about the world.
-
-00:49:01.986 --> 00:49:04.596 A:middle
+1086
+00:49:01,986 --> 00:49:04,596
 These are things like
 distance, relative speed.
 
-00:49:05.986 --> 00:49:07.926 A:middle
+
+1087
+00:49:05,986 --> 00:49:07,926
 The cars in the intersection are
 using a different set of rules
 
-00:49:07.966 --> 00:49:11.456 A:middle
+
+1088
+00:49:07,966 --> 00:49:11,456
 and asserting facts on
 who has the right of way.
 
-00:49:13.126 --> 00:49:19.756 A:middle
+
+1089
+00:49:13,126 --> 00:49:19,756
 Putting them altogether we can
 get very complex simulations
 
-00:49:19.756 --> 00:49:20.596 A:middle
+
+1090
+00:49:19,756 --> 00:49:20,596
 about the world.
 
-00:49:20.596 --> 00:49:23.256 A:middle
+
+1091
+00:49:20,596 --> 00:49:23,256
 This is a power of rule systems.
 
-00:49:38.046 --> 00:49:39.256 A:middle
+
+1092
+00:49:38,046 --> 00:49:39,256
 So before I go just
 some best practices
 
-00:49:39.256 --> 00:49:40.136 A:middle
+
+1093
+00:49:39,256 --> 00:49:40,136
 on using the rule systems.
 
-00:49:40.186 --> 00:49:43.536 A:middle
+
+1094
+00:49:40,186 --> 00:49:43,536
 It is important to remember
 that GKRuleSystem is isolated.
 
-00:49:43.536 --> 00:49:45.636 A:middle
+
+1095
+00:49:43,536 --> 00:49:45,636
 You should be using
 the state dictionary
 
-00:49:45.636 --> 00:49:46.786 A:middle
+
+1096
+00:49:45,636 --> 00:49:46,786
 as a snapshot of the game world.
 
-00:49:48.326 --> 00:49:50.956 A:middle
+
+1097
+00:49:48,326 --> 00:49:50,956
 You should also use many simple
 rules and assert many facts
 
-00:49:50.956 --> 00:49:52.156 A:middle
+
+1098
+00:49:50,956 --> 00:49:52,156
 about the game world as opposed
 
-00:49:52.156 --> 00:49:54.566 A:middle
+
+1099
+00:49:52,156 --> 00:49:54,566
 to large complex
 rules and fewer facts.
 
-00:49:55.256 --> 00:49:58.596 A:middle
+
+1100
+00:49:55,256 --> 00:49:58,596
 It is also important to note
 that facts are approximations
 
-00:49:58.596 --> 00:50:00.716 A:middle
+
+1101
+00:49:58,596 --> 00:50:00,716
 and it is up to you to decide
 how you should use them.
 
 
-
-00:49:58.596 --> 00:50:00.716 A:middle
-and it is up to you to decide
-how you should use them.
-
-00:50:01.626 --> 00:50:03.496 A:middle
+1102
+00:50:01,626 --> 00:50:03,496
 The grade of a fact is the
 system's confidence in it,
 
-00:50:04.016 --> 00:50:06.216 A:middle
+
+1103
+00:50:04,016 --> 00:50:06,216
 and this allows us
 to use fuzzy logic
 
-00:50:06.216 --> 00:50:07.896 A:middle
+
+1104
+00:50:06,216 --> 00:50:07,896
 to achieve more complex
 reasoning.
 
-00:50:08.996 --> 00:50:12.386 A:middle
+
+1105
+00:50:08,996 --> 00:50:12,386
 With that, I would
 like to hand it back
 
-00:50:12.386 --> 00:50:14.256 A:middle
+
+1106
+00:50:12,386 --> 00:50:14,256
 to my colleague Bruno
 to finish up.
 
-00:50:15.516 --> 00:50:20.006 A:middle
+
+1107
+00:50:15,516 --> 00:50:20,006
 [ Applause ]
 
-00:50:20.506 --> 00:50:21.026 A:middle
-&gt;&gt; BRUNO SOMMER: Thanks, Josh.
 
-00:50:24.086 --> 00:50:25.056 A:middle
+1108
+00:50:20,506 --> 00:50:21,026
+>> BRUNO SOMMER: Thanks, Josh.
+
+
+1109
+00:50:24,086 --> 00:50:25,056
 So that's GameplayKit.
 
-00:50:25.656 --> 00:50:28.626 A:middle
+
+1110
+00:50:25,656 --> 00:50:28,626
 Today we talked about the seven
 major systems in GameplayKit,
 
-00:50:29.166 --> 00:50:31.016 A:middle
+
+1111
+00:50:29,166 --> 00:50:31,016
 entities and components
 which are a really great way
 
-00:50:31.016 --> 00:50:32.226 A:middle
+
+1112
+00:50:31,016 --> 00:50:32,226
 to structure your game logic.
 
-00:50:32.766 --> 00:50:35.366 A:middle
+
+1113
+00:50:32,766 --> 00:50:35,366
 State machines which deal with
 the statefulness in our games
 
-00:50:35.366 --> 00:50:37.466 A:middle
+
+1114
+00:50:35,366 --> 00:50:37,466
 and the various state changes
 that our objects undergo.
 
-00:50:37.986 --> 00:50:41.696 A:middle
+
+1115
+00:50:37,986 --> 00:50:41,696
 Agents, which are our
 autonomously moving entities
 
-00:50:41.696 --> 00:50:44.076 A:middle
+
+1116
+00:50:41,696 --> 00:50:44,076
 controlled by realistic
 behaviors and goals.
 
-00:50:45.306 --> 00:50:47.646 A:middle
+
+1117
+00:50:45,306 --> 00:50:47,646
 Pathfinding, which deals with
 navigation graph generation
 
-00:50:47.796 --> 00:50:49.336 A:middle
+
+1118
+00:50:47,796 --> 00:50:49,336
 and finding paths
 within our game world.
 
-00:50:50.496 --> 00:50:52.896 A:middle
+
+1119
+00:50:50,496 --> 00:50:52,896
 We also talked about our
 great MinMax AI solution,
 
-00:50:53.056 --> 00:50:53.846 A:middle
+
+1120
+00:50:53,056 --> 00:50:53,846
 which helps you give life
 
-00:50:53.846 --> 00:50:55.216 A:middle
+
+1121
+00:50:53,846 --> 00:50:55,216
 to your computer
 controlled opponents.
 
-00:50:56.226 --> 00:51:00.116 A:middle
+
+1122
+00:50:56,226 --> 00:51:00,116
 Also the slew of great random
 sources and distributions
 
 
-
-00:50:56.226 --> 00:51:00.116 A:middle
-Also the slew of great random
-sources and distributions
-
-00:51:00.246 --> 00:51:01.596 A:middle
+1123
+00:51:00,246 --> 00:51:01,596
 that are available to you.
 
-00:51:01.896 --> 00:51:04.146 A:middle
+
+1124
+00:51:01,896 --> 00:51:04,146
 Lastly we talked about rule
 systems which are a great way
 
-00:51:04.396 --> 00:51:06.766 A:middle
+
+1125
+00:51:04,396 --> 00:51:06,766
 to describe discreet
 and fuzzy logic.
 
-00:51:08.046 --> 00:51:10.396 A:middle
+
+1126
+00:51:08,046 --> 00:51:10,396
 We really are excited to finally
 get GameplayKit in your hands
 
-00:51:10.476 --> 00:51:13.006 A:middle
+
+1127
+00:51:10,476 --> 00:51:13,006
 and can't wait to see
 what you make with it.
 
-00:51:15.636 --> 00:51:17.396 A:middle
+
+1128
+00:51:15,636 --> 00:51:17,396
 Some great code samples
 dropped this week,
 
-00:51:17.526 --> 00:51:18.866 A:middle
+
+1129
+00:51:17,526 --> 00:51:18,866
 you should definitely
 check it out if you want
 
-00:51:18.866 --> 00:51:20.236 A:middle
+
+1130
+00:51:18,866 --> 00:51:20,236
 to learn a little more.
 
-00:51:20.746 --> 00:51:23.376 A:middle
+
+1131
+00:51:20,746 --> 00:51:23,376
 DemoBots is a SpriteKit
 game covers a wide variety
 
-00:51:23.376 --> 00:51:26.686 A:middle
+
+1132
+00:51:23,376 --> 00:51:26,686
 of the GameplayKit API,
 FourInARow is a good example
 
-00:51:26.686 --> 00:51:28.036 A:middle
+
+1133
+00:51:26,686 --> 00:51:28,036
 of MinMax AI in action,
 
-00:51:28.276 --> 00:51:30.256 A:middle
+
+1134
+00:51:28,276 --> 00:51:30,256
 and AgentsCatalog is
 a really good example
 
-00:51:30.256 --> 00:51:32.866 A:middle
+
+1135
+00:51:30,256 --> 00:51:32,866
 of the agent's behaviors and
 goals, so definitely check
 
-00:51:32.866 --> 00:51:35.436 A:middle
+
+1136
+00:51:32,866 --> 00:51:35,436
 that out if you want
 to learn a little more.
 
-00:51:36.056 --> 00:51:38.396 A:middle
+
+1137
+00:51:36,056 --> 00:51:38,396
 There is also some sessions
 coming up if you want to find
 
-00:51:38.396 --> 00:51:40.766 A:middle
+
+1138
+00:51:38,396 --> 00:51:40,766
 out a little more about our
 related technologies, SpriteKit,
 
-00:51:40.966 --> 00:51:43.306 A:middle
+
+1139
+00:51:40,966 --> 00:51:43,306
 ReplayKit, Game Center,
 SceneKit.
 
-00:51:43.786 --> 00:51:46.246 A:middle
+
+1140
+00:51:43,786 --> 00:51:46,246
 After lunch today we have
 a deeper dive into DemoBots
 
-00:51:46.246 --> 00:51:48.406 A:middle
+
+1141
+00:51:46,246 --> 00:51:48,406
 which is that sample I talked
 about, so definitely check
 
-00:51:48.406 --> 00:51:49.946 A:middle
+
+1142
+00:51:48,406 --> 00:51:49,946
 that out if you want to
 learn a little bit more
 
-00:51:50.086 --> 00:51:51.866 A:middle
+
+1143
+00:51:50,086 --> 00:51:51,866
 about GameplayKit or SpriteKit.
 
-00:51:52.976 --> 00:51:55.266 A:middle
+
+1144
+00:51:52,976 --> 00:51:55,266
 There is also some
 great labs coming up,
 
-00:51:55.586 --> 00:51:56.846 A:middle
+
+1145
+00:51:55,586 --> 00:51:56,846
 check out the Game
 Controllers lab.
 
-00:51:57.096 --> 00:51:59.216 A:middle
+
+1146
+00:51:57,096 --> 00:51:59,216
 There is also a GameplayKit
 lab today after lunch,
 
-00:51:59.786 --> 00:52:01.726 A:middle
+
+1147
+00:51:59,786 --> 00:52:01,726
 meet the team, ask questions,
 
 
-
-00:51:59.786 --> 00:52:01.726 A:middle
-meet the team, ask questions,
-
-00:52:01.946 --> 00:52:03.946 A:middle
+1148
+00:52:01,946 --> 00:52:03,946
 talk about any problems you
 might have with the code.
 
-00:52:04.596 --> 00:52:08.026 A:middle
+
+1149
+00:52:04,596 --> 00:52:08,026
 If you need anymore information,
 we direct you to check
 
-00:52:08.026 --> 00:52:09.146 A:middle
+
+1150
+00:52:08,026 --> 00:52:09,146
 out our great developer site
 
-00:52:09.856 --> 00:52:12.056 A:middle
+
+1151
+00:52:09,856 --> 00:52:12,056
 and for any general inquiries
 contact Allan Schaffer,
 
-00:52:12.056 --> 00:52:13.796 A:middle
+
+1152
+00:52:12,056 --> 00:52:13,796
 our Game Technologies
 Evangelist.
 
-00:52:14.256 --> 00:52:15.956 A:middle
+
+1153
+00:52:14,256 --> 00:52:15,956
 Thank you.
 
-00:52:16.106 --> 00:52:17.776 A:middle
+
+1154
+00:52:16,106 --> 00:52:17,776
 Have a really great
 rest of your conference.
 
-00:52:19.516 --> 00:52:31.040 A:middle
+
+1155
+00:52:19,516 --> 00:52:31,040
 [ Applause ]
 

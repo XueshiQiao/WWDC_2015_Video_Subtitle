@@ -1,3051 +1,4370 @@
-
-00:00:26.516 --> 00:00:31.966 A:middle
+1
+00:00:26,516 --> 00:00:31,966
 [Applause]
 
-00:00:32.466 --> 00:00:33.226 A:middle
-&gt;&gt; VINCE SPADER: Hello.
 
-00:00:33.366 --> 00:00:34.736 A:middle
+2
+00:00:32,466 --> 00:00:33,226
+>> VINCE SPADER: Hello.
+
+
+3
+00:00:33,366 --> 00:00:34,736
 My name is Vince Spader.
 
-00:00:35.056 --> 00:00:36.876 A:middle
+
+4
+00:00:35,056 --> 00:00:36,876
 I'm an engineer on
 the Cocoa frameworks.
 
-00:00:37.266 --> 00:00:39.436 A:middle
+
+5
+00:00:37,266 --> 00:00:39,436
 And today I'm going
 to be talking to you
 
-00:00:39.436 --> 00:00:41.536 A:middle
+
+6
+00:00:39,436 --> 00:00:41,536
 about Best Practices
 for Progress Reporting,
 
-00:00:42.326 --> 00:00:44.456 A:middle
+
+7
+00:00:42,326 --> 00:00:44,456
 which in Cocoa means NSProgress.
 
-00:00:45.356 --> 00:00:48.656 A:middle
+
+8
+00:00:45,356 --> 00:00:48,656
 So I'm going to give you an
 introduction in NSProgress,
 
-00:00:49.186 --> 00:00:52.236 A:middle
+
+9
+00:00:49,186 --> 00:00:52,236
 then we'll talk about composing
 NSProgress objects together,
 
-00:00:52.956 --> 00:00:55.456 A:middle
+
+10
+00:00:52,956 --> 00:00:55,456
 and then how to use
 NSProgress as an interface
 
-00:00:55.456 --> 00:00:57.636 A:middle
+
+11
+00:00:55,456 --> 00:00:57,636
 for cancellation,
 pausing, and resuming.
 
-00:00:58.466 --> 00:01:00.756 A:middle
+
+12
+00:00:58,466 --> 00:01:00,756
 Then we'll talk a little
 bit about hooking NSProgress
 
 
-
-00:00:58.466 --> 00:01:00.756 A:middle
-Then we'll talk a little
-bit about hooking NSProgress
-
-00:01:00.756 --> 00:01:03.326 A:middle
+13
+00:01:00,756 --> 00:01:03,326
 up to your user interface,
 and we'll wrap
 
-00:01:03.326 --> 00:01:05.146 A:middle
+
+14
+00:01:03,326 --> 00:01:05,146
 up with some tips
 and best practices.
 
-00:01:05.146 --> 00:01:07.686 A:middle
+
+15
+00:01:05,146 --> 00:01:07,686
 So let's get started.
 
-00:01:09.616 --> 00:01:12.106 A:middle
+
+16
+00:01:09,616 --> 00:01:12,106
 NSProgress is an
 object in Foundation
 
-00:01:12.206 --> 00:01:14.336 A:middle
+
+17
+00:01:12,206 --> 00:01:14,336
 that represents the
 completion of some work.
 
-00:01:14.826 --> 00:01:18.416 A:middle
+
+18
+00:01:14,826 --> 00:01:18,416
 That work could be downloading
 a file, installing an app,
 
-00:01:19.316 --> 00:01:21.546 A:middle
+
+19
+00:01:19,316 --> 00:01:21,546
 or something your own
 application is doing.
 
-00:01:22.516 --> 00:01:26.406 A:middle
+
+20
+00:01:22,516 --> 00:01:26,406
 The NSProgress object exists to
 let you easily report progress
 
-00:01:26.406 --> 00:01:29.246 A:middle
+
+21
+00:01:26,406 --> 00:01:29,246
 in your application
 across various components,
 
-00:01:29.296 --> 00:01:31.486 A:middle
+
+22
+00:01:29,296 --> 00:01:31,486
 both yours and the system's.
 
-00:01:31.996 --> 00:01:36.246 A:middle
+
+23
+00:01:31,996 --> 00:01:36,246
 In fact, several Cocoa APIs are
 reporting their progress via
 
-00:01:36.246 --> 00:01:39.156 A:middle
+
+24
+00:01:36,246 --> 00:01:39,156
 NSProgress, like
 NSBundle Resource Request,
 
-00:01:39.516 --> 00:01:41.066 A:middle
+
+25
+00:01:39,516 --> 00:01:41,066
 UIDocument, and NSData.
 
-00:01:41.066 --> 00:01:44.256 A:middle
+
+26
+00:01:41,066 --> 00:01:44,256
 So you can use NSProgress
 to get information
 
-00:01:44.256 --> 00:01:46.976 A:middle
+
+27
+00:01:44,256 --> 00:01:46,976
 about what those APIs are
 doing in your application.
 
-00:01:47.536 --> 00:01:50.726 A:middle
+
+28
+00:01:47,536 --> 00:01:50,726
 And NSProgress is localized.
 
-00:01:50.936 --> 00:01:53.166 A:middle
+
+29
+00:01:50,936 --> 00:01:53,166
 You can use it to show
 information to the user
 
-00:01:53.166 --> 00:01:54.196 A:middle
+
+30
+00:01:53,166 --> 00:01:54,196
 about what's happening.
 
-00:01:54.496 --> 00:01:56.936 A:middle
+
+31
+00:01:54,496 --> 00:01:56,936
 And we have ways to
 influence what it says,
 
-00:01:56.936 --> 00:01:57.876 A:middle
+
+32
+00:01:56,936 --> 00:01:57,876
 which we'll get to soon.
 
-00:01:59.116 --> 00:02:03.056 A:middle
+
+33
+00:01:59,116 --> 00:02:03,056
 But first, these are the core
 properties on NSProgress.
 
 
-
-00:01:59.116 --> 00:02:03.056 A:middle
-But first, these are the core
-properties on NSProgress.
-
-00:02:03.056 --> 00:02:06.026 A:middle
+34
+00:02:03,056 --> 00:02:06,026
 We have the totalUnitCount,
 which is how much work there is
 
-00:02:06.026 --> 00:02:08.186 A:middle
+
+35
+00:02:06,026 --> 00:02:08,186
 to do, and the
 completedUnitCount,
 
-00:02:08.536 --> 00:02:10.576 A:middle
+
+36
+00:02:08,536 --> 00:02:10,576
 which is how much work
 has been completed.
 
-00:02:10.726 --> 00:02:12.756 A:middle
+
+37
+00:02:10,726 --> 00:02:12,756
 And that gets updated
 as the work occurs.
 
-00:02:13.736 --> 00:02:18.436 A:middle
+
+38
+00:02:13,736 --> 00:02:18,436
 And the fractionCompleted is a
 double that gets updated from 0
 
-00:02:18.436 --> 00:02:21.756 A:middle
+
+39
+00:02:18,436 --> 00:02:21,756
 to 1, letting you know how
 far along the work is toward
 
-00:02:21.756 --> 00:02:22.366 A:middle
+
+40
+00:02:21,756 --> 00:02:22,366
 being completed.
 
-00:02:22.926 --> 00:02:26.806 A:middle
+
+41
+00:02:22,926 --> 00:02:26,806
 So, totalUnitCount and
 completedUnitCount,
 
-00:02:27.416 --> 00:02:30.436 A:middle
+
+42
+00:02:27,416 --> 00:02:30,436
 the unit these properties are
 referring to is up to you.
 
-00:02:30.486 --> 00:02:32.366 A:middle
+
+43
+00:02:30,486 --> 00:02:32,366
 It is whatever unit
 it makes sense
 
-00:02:32.366 --> 00:02:33.866 A:middle
+
+44
+00:02:32,366 --> 00:02:33,866
 to track in terms of progress.
 
-00:02:34.376 --> 00:02:38.626 A:middle
+
+45
+00:02:34,376 --> 00:02:38,626
 Perhaps bytes, number of files,
 photos, or even abstract units
 
-00:02:38.946 --> 00:02:41.106 A:middle
+
+46
+00:02:38,946 --> 00:02:41,106
 like percentage points
 or fractions of work.
 
-00:02:41.646 --> 00:02:44.726 A:middle
+
+47
+00:02:41,646 --> 00:02:44,726
 Each individual NSProgress
 object has its own idea
 
-00:02:44.726 --> 00:02:48.176 A:middle
+
+48
+00:02:44,726 --> 00:02:48,176
 of what unit it is reporting in.
 
-00:02:48.396 --> 00:02:51.176 A:middle
+
+49
+00:02:48,396 --> 00:02:51,176
 And if you don't know how
 much work there is total,
 
-00:02:51.176 --> 00:02:52.906 A:middle
+
+50
+00:02:51,176 --> 00:02:52,906
 so you don't know
 your totalUnitCount,
 
-00:02:53.526 --> 00:02:55.166 A:middle
+
+51
+00:02:53,526 --> 00:02:55,166
 you can make your
 progress indeterminant.
 
-00:02:55.206 --> 00:02:58.406 A:middle
+
+52
+00:02:55,206 --> 00:02:58,406
 And you do that by either
 setting the completedUnitCount
 
-00:02:58.646 --> 00:03:00.986 A:middle
+
+53
+00:02:58,646 --> 00:03:00,986
 or the totalUnitCount
 to a negative value.
 
 
-
-00:02:58.646 --> 00:03:00.986 A:middle
-or the totalUnitCount
-to a negative value.
-
-00:03:01.306 --> 00:03:04.896 A:middle
+54
+00:03:01,306 --> 00:03:04,896
 Next, let's talk
 about localization.
 
-00:03:06.096 --> 00:03:09.016 A:middle
+
+55
+00:03:06,096 --> 00:03:09,016
 NSProgress has two properties,
 localized Description
 
-00:03:09.016 --> 00:03:10.656 A:middle
+
+56
+00:03:09,016 --> 00:03:10,656
 and localized Additional
 Description,
 
-00:03:10.936 --> 00:03:12.316 A:middle
+
+57
+00:03:10,936 --> 00:03:12,316
 that you can display
 to the user.
 
-00:03:13.026 --> 00:03:16.436 A:middle
+
+58
+00:03:13,026 --> 00:03:16,436
 You can set them yourself
 but NSProgress will also come
 
-00:03:16.436 --> 00:03:18.126 A:middle
+
+59
+00:03:16,436 --> 00:03:18,126
 up with something
 for you by default.
 
-00:03:19.416 --> 00:03:22.626 A:middle
+
+60
+00:03:19,416 --> 00:03:22,626
 So, here is an example of the
 default localized Description
 
-00:03:22.626 --> 00:03:24.146 A:middle
+
+61
+00:03:22,626 --> 00:03:24,146
 and localized Additional
 Description.
 
-00:03:24.626 --> 00:03:27.706 A:middle
+
+62
+00:03:24,626 --> 00:03:27,706
 We have an NSProgress with a
 totalUnitCount of 5 million
 
-00:03:27.706 --> 00:03:30.176 A:middle
+
+63
+00:03:27,706 --> 00:03:30,176
 and some, and a
 completedUnitCount
 
-00:03:30.176 --> 00:03:32.266 A:middle
+
+64
+00:03:30,176 --> 00:03:32,266
 of 419 thousand and change.
 
-00:03:32.266 --> 00:03:36.116 A:middle
+
+65
+00:03:32,266 --> 00:03:36,116
 The default localized
 Description is 7 percent
 
-00:03:36.116 --> 00:03:39.276 A:middle
+
+66
+00:03:36,116 --> 00:03:39,276
 completed, and the localized
 Additional Description formats
 
-00:03:39.276 --> 00:03:40.596 A:middle
+
+67
+00:03:39,276 --> 00:03:40,596
 those numbers nicely.
 
-00:03:41.466 --> 00:03:43.396 A:middle
+
+68
+00:03:41,466 --> 00:03:43,396
 So this is the default.
 
-00:03:43.686 --> 00:03:45.026 A:middle
+
+69
+00:03:43,686 --> 00:03:45,026
 And if you want something
 different,
 
-00:03:45.366 --> 00:03:46.956 A:middle
+
+70
+00:03:45,366 --> 00:03:46,956
 you could set the
 localized Description
 
-00:03:46.956 --> 00:03:48.896 A:middle
+
+71
+00:03:46,956 --> 00:03:48,896
 and localized Additional
 Description yourself
 
-00:03:49.386 --> 00:03:51.716 A:middle
+
+72
+00:03:49,386 --> 00:03:51,716
 but then you would need
 to actually localize it
 
-00:03:51.756 --> 00:03:53.486 A:middle
+
+73
+00:03:51,756 --> 00:03:53,486
 in the languages
 your app supports.
 
-00:03:54.046 --> 00:03:57.196 A:middle
+
+74
+00:03:54,046 --> 00:03:57,196
 And instead of doing that,
 we have a couple of knobs
 
-00:03:57.196 --> 00:03:59.316 A:middle
+
+75
+00:03:57,196 --> 00:03:59,316
 that you can use to
 alter those defaults.
 
-00:03:59.706 --> 00:04:01.686 A:middle
+
+76
+00:03:59,706 --> 00:04:01,686
 So the first is through
 the kind property.
 
 
-
-00:03:59.706 --> 00:04:01.686 A:middle
-So the first is through
-the kind property.
-
-00:04:02.186 --> 00:04:05.516 A:middle
+77
+00:04:02,186 --> 00:04:05,516
 Currently the only option is
 for files, NSProgressKindFile.
 
-00:04:06.666 --> 00:04:08.506 A:middle
+
+78
+00:04:06,666 --> 00:04:08,506
 Using this means
 your units are bytes,
 
-00:04:08.556 --> 00:04:10.866 A:middle
+
+79
+00:04:08,556 --> 00:04:10,866
 so when NSProgress knows
 your units are bytes,
 
-00:04:11.216 --> 00:04:12.586 A:middle
+
+80
+00:04:11,216 --> 00:04:12,586
 it can format them as such,
 
-00:04:12.586 --> 00:04:17.055 A:middle
+
+81
+00:04:12,586 --> 00:04:17,055
 so you see now it can say 419
 kilobytes of 5.3 megabytes.
 
-00:04:17.776 --> 00:04:22.246 A:middle
+
+82
+00:04:17,776 --> 00:04:22,246
 The other knob for changing the
 default localized Descriptions
 
-00:04:22.246 --> 00:04:24.716 A:middle
+
+83
+00:04:22,246 --> 00:04:24,716
 is through certain keys in
 the user info dictionary.
 
-00:04:25.136 --> 00:04:29.276 A:middle
+
+84
+00:04:25,136 --> 00:04:29,276
 So NSProgress has a user info
 dictionary, there is a method,
 
-00:04:29.276 --> 00:04:32.186 A:middle
+
+85
+00:04:29,276 --> 00:04:32,186
 Set User Info Object For
 Key, that lets you set a key
 
-00:04:32.186 --> 00:04:33.776 A:middle
+
+86
+00:04:32,186 --> 00:04:33,776
 and value in the userInfo.
 
-00:04:34.616 --> 00:04:37.236 A:middle
+
+87
+00:04:34,616 --> 00:04:37,236
 And one key that's useful
 for virtually any kind
 
-00:04:37.236 --> 00:04:40.886 A:middle
+
+88
+00:04:37,236 --> 00:04:40,886
 of NSProgress is NSProgress
 Estimated Time Remaining Key.
 
-00:04:41.236 --> 00:04:43.236 A:middle
+
+89
+00:04:41,236 --> 00:04:43,236
 The value there is an NSNumber
 
-00:04:43.286 --> 00:04:44.746 A:middle
+
+90
+00:04:43,286 --> 00:04:44,746
 of how many seconds
 are remaining
 
-00:04:44.746 --> 00:04:45.856 A:middle
+
+91
+00:04:44,746 --> 00:04:45,856
 until the work is completed.
 
-00:04:46.546 --> 00:04:50.516 A:middle
+
+92
+00:04:46,546 --> 00:04:50,516
 And you can see if we set
 that to, say, 97 seconds,
 
-00:04:50.586 --> 00:04:52.556 A:middle
+
+93
+00:04:50,586 --> 00:04:52,556
 our localized Additional
 Description now includes
 
-00:04:52.556 --> 00:04:56.266 A:middle
+
+94
+00:04:52,556 --> 00:04:56,266
 that information formatted as
 1 minute, 37 seconds remaining.
 
-00:04:57.676 --> 00:05:00.946 A:middle
+
+95
+00:04:57,676 --> 00:05:00,946
 And there are additional
 userInfo keys that are only used
 
 
-
-00:04:57.676 --> 00:05:00.946 A:middle
-And there are additional
-userInfo keys that are only used
-
-00:05:00.946 --> 00:05:02.306 A:middle
+96
+00:05:00,946 --> 00:05:02,306
 if your kind is set to file.
 
-00:05:02.886 --> 00:05:06.626 A:middle
+
+97
+00:05:02,886 --> 00:05:06,626
 First let's look at NSProgress
 File Operation Kind Key.
 
-00:05:06.986 --> 00:05:09.326 A:middle
+
+98
+00:05:06,986 --> 00:05:09,326
 This tells NSProgress
 the type of operation
 
-00:05:09.326 --> 00:05:10.956 A:middle
+
+99
+00:05:09,326 --> 00:05:10,956
 that is being performed
 on the file.
 
-00:05:11.396 --> 00:05:14.136 A:middle
+
+100
+00:05:11,396 --> 00:05:14,136
 The values are either
 downloading, decompressing,
 
-00:05:14.426 --> 00:05:19.216 A:middle
+
+101
+00:05:14,426 --> 00:05:19,216
 receiving, or copying, so if
 you set the File Operation Kind
 
-00:05:19.216 --> 00:05:22.006 A:middle
+
+102
+00:05:19,216 --> 00:05:22,006
 to NSProgress File
 Operation Kind Downloading,
 
-00:05:22.376 --> 00:05:23.986 A:middle
+
+103
+00:05:22,376 --> 00:05:23,986
 that updates the
 localized Description
 
-00:05:23.986 --> 00:05:25.636 A:middle
+
+104
+00:05:23,986 --> 00:05:25,636
 to say it is downloading files.
 
-00:05:26.226 --> 00:05:30.706 A:middle
+
+105
+00:05:26,226 --> 00:05:30,706
 Another key available when your
 Kind is File is the NSProgress
 
-00:05:30.706 --> 00:05:31.676 A:middle
+
+106
+00:05:30,706 --> 00:05:31,676
 File URL Key.
 
-00:05:32.086 --> 00:05:34.896 A:middle
+
+107
+00:05:32,086 --> 00:05:34,896
 And that is an NSURL of
 the file being worked on.
 
-00:05:35.336 --> 00:05:36.376 A:middle
+
+108
+00:05:35,336 --> 00:05:36,376
 So when you set that,
 
-00:05:36.426 --> 00:05:38.766 A:middle
+
+109
+00:05:36,426 --> 00:05:38,766
 the localized Description will
 include the name of the file,
 
-00:05:38.806 --> 00:05:42.106 A:middle
+
+110
+00:05:38,806 --> 00:05:42,106
 in this example, photos.zip,
 which is from the given URL.
 
-00:05:43.836 --> 00:05:45.156 A:middle
+
+111
+00:05:43,836 --> 00:05:45,156
 There are also options
 
-00:05:45.156 --> 00:05:47.676 A:middle
+
+112
+00:05:45,156 --> 00:05:47,676
 for if you're operating
 on a set of files.
 
-00:05:47.856 --> 00:05:50.926 A:middle
+
+113
+00:05:47,856 --> 00:05:50,926
 NSProgress File Total Count
 Key and Completed Count Key.
 
-00:05:51.386 --> 00:05:52.616 A:middle
+
+114
+00:05:51,386 --> 00:05:52,616
 So, here's an example
 
-00:05:52.616 --> 00:05:54.986 A:middle
+
+115
+00:05:52,616 --> 00:05:54,986
 where we're setting the
 File Completed Count to 7,
 
-00:05:54.986 --> 00:05:56.596 A:middle
+
+116
+00:05:54,986 --> 00:05:56,596
 and the File Total Count to 9,
 
-00:05:57.066 --> 00:05:59.706 A:middle
+
+117
+00:05:57,066 --> 00:05:59,706
 and the localized Description
 might use that information,
 
-00:05:59.706 --> 00:06:01.816 A:middle
+
+118
+00:05:59,706 --> 00:06:01,816
 so now it says, downloading
 9 files.
 
 
-
-00:05:59.706 --> 00:06:01.816 A:middle
-so now it says, downloading
-9 files.
-
-00:06:02.916 --> 00:06:06.316 A:middle
+119
+00:06:02,916 --> 00:06:06,316
 Note that the kind is still File
 and the units are still bytes,
 
-00:06:06.316 --> 00:06:09.236 A:middle
+
+120
+00:06:06,316 --> 00:06:09,236
 it is just the total bytes
 of the files being worked on.
 
-00:06:10.526 --> 00:06:13.716 A:middle
+
+121
+00:06:10,526 --> 00:06:13,716
 And finally, we have the
 NSProgress Throughput Key.
 
-00:06:14.136 --> 00:06:15.996 A:middle
+
+122
+00:06:14,136 --> 00:06:15,996
 And that's the bytes-per-second
 
-00:06:16.066 --> 00:06:18.286 A:middle
+
+123
+00:06:16,066 --> 00:06:18,286
 that the file operations
 are being performed at.
 
-00:06:18.466 --> 00:06:19.536 A:middle
+
+124
+00:06:18,466 --> 00:06:19,536
 So, say, it is downloading
 
-00:06:19.536 --> 00:06:22.306 A:middle
+
+125
+00:06:19,536 --> 00:06:22,306
 at a blazing fast
 50,000 bytes-per-second,
 
-00:06:22.716 --> 00:06:24.896 A:middle
+
+126
+00:06:22,716 --> 00:06:24,896
 if we set the throughput
 on the userInfo,
 
-00:06:25.316 --> 00:06:27.316 A:middle
+
+127
+00:06:25,316 --> 00:06:27,316
 the NSProgress can
 include that information
 
-00:06:27.316 --> 00:06:29.366 A:middle
+
+128
+00:06:27,316 --> 00:06:29,366
 in the localized
 Description, so it says,
 
-00:06:29.366 --> 00:06:30.636 A:middle
+
+129
+00:06:29,366 --> 00:06:30,636
 50 kilobytes-per-second.
 
-00:06:31.816 --> 00:06:34.036 A:middle
+
+130
+00:06:31,816 --> 00:06:34,036
 So, all these options
 can really provide,
 
-00:06:34.226 --> 00:06:37.136 A:middle
+
+131
+00:06:34,226 --> 00:06:37,136
 help you provide more
 information to the user
 
-00:06:37.166 --> 00:06:40.076 A:middle
+
+132
+00:06:37,166 --> 00:06:40,076
 about what's happening.,
 without you having
 
-00:06:40.076 --> 00:06:41.156 A:middle
+
+133
+00:06:40,076 --> 00:06:41,156
 to localize it yourself.
 
-00:06:42.516 --> 00:06:45.306 A:middle
+
+134
+00:06:42,516 --> 00:06:45,306
 Now, before we go any
 further, we need to talk
 
-00:06:45.306 --> 00:06:46.326 A:middle
+
+135
+00:06:45,306 --> 00:06:46,326
 about responsibilities.
 
-00:06:47.576 --> 00:06:49.336 A:middle
+
+136
+00:06:47,576 --> 00:06:49,336
 There are two sides
 of NSProgress,
 
-00:06:49.336 --> 00:06:52.396 A:middle
+
+137
+00:06:49,336 --> 00:06:52,396
 there is the creation side of
 it, and the client side of it.
 
-00:06:53.036 --> 00:06:54.176 A:middle
+
+138
+00:06:53,036 --> 00:06:54,176
 First the creation side.
 
-00:06:55.026 --> 00:06:58.976 A:middle
+
+139
+00:06:55,026 --> 00:06:58,976
 So, when you create an
 NSProgress, you are responsible
 
-00:06:58.976 --> 00:07:00.446 A:middle
+
+140
+00:06:58,976 --> 00:07:00,446
 for setting its properties
 
 
-
-00:06:58.976 --> 00:07:00.446 A:middle
-for setting its properties
-
-00:07:00.526 --> 00:07:02.226 A:middle
+141
+00:07:00,526 --> 00:07:02,226
 and updating the
 completedUnitCount
 
-00:07:02.226 --> 00:07:03.246 A:middle
+
+142
+00:07:02,226 --> 00:07:03,246
 as the work finishes.
 
-00:07:03.786 --> 00:07:06.316 A:middle
+
+143
+00:07:03,786 --> 00:07:06,316
 So you're creating it, you're
 setting the totalUnitCount,
 
-00:07:06.546 --> 00:07:09.266 A:middle
+
+144
+00:07:06,546 --> 00:07:09,266
 the Kind, setting
 keys in the userInfo,
 
-00:07:09.266 --> 00:07:11.346 A:middle
+
+145
+00:07:09,266 --> 00:07:11,346
 and updating the
 completedUnitCount
 
-00:07:11.346 --> 00:07:12.336 A:middle
+
+146
+00:07:11,346 --> 00:07:12,336
 as the work finishes.
 
-00:07:13.306 --> 00:07:16.376 A:middle
+
+147
+00:07:13,306 --> 00:07:16,376
 On the other hand, if
 you receive an NSProgress
 
-00:07:16.376 --> 00:07:18.076 A:middle
+
+148
+00:07:16,376 --> 00:07:18,076
 from someone else,
 you're the client.
 
-00:07:18.576 --> 00:07:20.406 A:middle
+
+149
+00:07:18,576 --> 00:07:20,406
 You can get and observe
 the various properties,
 
-00:07:20.466 --> 00:07:22.556 A:middle
+
+150
+00:07:20,466 --> 00:07:22,556
 the totalUnitCount and
 completedUnitCount,
 
-00:07:22.926 --> 00:07:25.496 A:middle
+
+151
+00:07:22,926 --> 00:07:25,496
 the fractionCompleted, or
 those localizedDescriptions,
 
-00:07:26.066 --> 00:07:27.686 A:middle
+
+152
+00:07:26,066 --> 00:07:27,686
 but do not go setting
 those properties
 
-00:07:27.716 --> 00:07:29.696 A:middle
+
+153
+00:07:27,716 --> 00:07:29,696
 because that's just
 going to cause confusion
 
-00:07:29.696 --> 00:07:31.286 A:middle
+
+154
+00:07:29,696 --> 00:07:31,286
 with the creator
 of the NSProgress.
 
-00:07:33.056 --> 00:07:36.496 A:middle
+
+155
+00:07:33,056 --> 00:07:36,496
 So when you create an
 NSProgress, you need a way
 
-00:07:36.496 --> 00:07:39.086 A:middle
+
+156
+00:07:36,496 --> 00:07:39,086
 to give it to clients, and when
 you're a client you need a way
 
-00:07:39.086 --> 00:07:39.466 A:middle
+
+157
+00:07:39,086 --> 00:07:39,466
 to get it.
 
-00:07:40.016 --> 00:07:41.426 A:middle
+
+158
+00:07:40,016 --> 00:07:41,426
 And one way of doing this is
 
-00:07:41.426 --> 00:07:44.566 A:middle
+
+159
+00:07:41,426 --> 00:07:44,566
 through the NSProgress reporting
 protocol, which we added
 
-00:07:44.566 --> 00:07:47.226 A:middle
+
+160
+00:07:44,566 --> 00:07:47,226
 in OS X 10.11 and iOS 9.
 
-00:07:47.696 --> 00:07:50.986 A:middle
+
+161
+00:07:47,696 --> 00:07:50,986
 It is pretty simple, and it
 defines one property, progress.
 
-00:07:52.146 --> 00:07:54.056 A:middle
+
+162
+00:07:52,146 --> 00:07:54,056
 In Cocoa UIDocument
 
-00:07:54.056 --> 00:07:56.476 A:middle
+
+163
+00:07:54,056 --> 00:07:56,476
 and NSBundleResourceRequest,
 both implement this.
 
-00:07:56.936 --> 00:07:58.566 A:middle
+
+164
+00:07:56,936 --> 00:07:58,566
 And it makes it really obvious
 
-00:07:59.226 --> 00:08:01.336 A:middle
+
+165
+00:07:59,226 --> 00:08:01,336
 that a class supports
 progress reporting.
 
 
-
-00:07:59.226 --> 00:08:01.336 A:middle
-that a class supports
-progress reporting.
-
-00:08:01.886 --> 00:08:03.206 A:middle
+166
+00:08:01,886 --> 00:08:03,206
 All right.
 
-00:08:03.366 --> 00:08:07.746 A:middle
+
+167
+00:08:03,366 --> 00:08:07,746
 Now, let's do a demo and
 take a look at some code.
 
-00:08:08.366 --> 00:08:09.846 A:middle
+
+168
+00:08:08,366 --> 00:08:09,846
 So, here we have an app.
 
-00:08:10.176 --> 00:08:11.206 A:middle
+
+169
+00:08:10,176 --> 00:08:11,206
 It is pretty basic.
 
-00:08:11.906 --> 00:08:15.306 A:middle
+
+170
+00:08:11,906 --> 00:08:15,306
 It has a photo, and you hit this
 import button and it downloads
 
-00:08:15.306 --> 00:08:18.636 A:middle
+
+171
+00:08:15,306 --> 00:08:18,636
 that photo, and when
 the download finishes,
 
-00:08:19.936 --> 00:08:21.026 A:middle
+
+172
+00:08:19,936 --> 00:08:21,026
 it shows it to the user.
 
-00:08:21.746 --> 00:08:24.066 A:middle
+
+173
+00:08:21,746 --> 00:08:24,066
 Now, that's a pretty
 awful user experience,
 
-00:08:24.066 --> 00:08:26.396 A:middle
+
+174
+00:08:24,066 --> 00:08:26,396
 the user has basically
 no idea what's happening.
 
-00:08:26.816 --> 00:08:28.846 A:middle
+
+175
+00:08:26,816 --> 00:08:28,846
 And we can make it better
 by reporting progress
 
-00:08:28.846 --> 00:08:30.356 A:middle
+
+176
+00:08:28,846 --> 00:08:30,356
 to the user for our download.
 
-00:08:30.656 --> 00:08:37.096 A:middle
+
+177
+00:08:30,656 --> 00:08:37,096
 So, if we go to our project,
 we have our download class
 
-00:08:37.436 --> 00:08:43.775 A:middle
+
+178
+00:08:37,436 --> 00:08:43,775
 that is used to download the
 photo, and it has an initializer
 
-00:08:43.775 --> 00:08:46.136 A:middle
+
+179
+00:08:43,775 --> 00:08:46,136
 that takes a URL
 for it to download,
 
-00:08:46.636 --> 00:08:48.926 A:middle
+
+180
+00:08:46,636 --> 00:08:48,926
 and it has a completion
 handler that gets called
 
-00:08:48.926 --> 00:08:51.816 A:middle
+
+181
+00:08:48,926 --> 00:08:51,816
 with the downloaded data or
 an error if an error occurs.
 
-00:08:52.286 --> 00:08:57.136 A:middle
+
+182
+00:08:52,286 --> 00:08:57,136
 Next there is a start
 method which gets --
 
-00:08:57.136 --> 00:09:00.646 A:middle
+
+183
+00:08:57,136 --> 00:09:00,646
 which kicks the whole download
 off, and we have a handful
 
 
-
-00:08:57.136 --> 00:09:00.646 A:middle
-which kicks the whole download
-off, and we have a handful
-
-00:09:00.646 --> 00:09:03.956 A:middle
+184
+00:09:00,646 --> 00:09:03,956
 of private methods for various
 download-related functionality.
 
-00:09:05.436 --> 00:09:10.476 A:middle
+
+185
+00:09:05,436 --> 00:09:10,476
 And we also have these
 convenience methods
 
-00:09:10.476 --> 00:09:12.866 A:middle
+
+186
+00:09:10,476 --> 00:09:12,866
 that will get called as
 the download progresses.
 
-00:09:13.426 --> 00:09:18.616 A:middle
+
+187
+00:09:13,426 --> 00:09:18,616
 So we have Will Begin
 Download, which gets called
 
-00:09:18.616 --> 00:09:19.716 A:middle
+
+188
+00:09:18,616 --> 00:09:19,716
 when the download begins
 
-00:09:19.716 --> 00:09:21.716 A:middle
+
+189
+00:09:19,716 --> 00:09:21,716
 and it gets the total
 length of the download.
 
-00:09:22.516 --> 00:09:25.646 A:middle
+
+190
+00:09:22,516 --> 00:09:25,646
 Did Download Data, which
 gets called periodically
 
-00:09:25.646 --> 00:09:27.396 A:middle
+
+191
+00:09:25,646 --> 00:09:27,396
 as the download completes.
 
-00:09:28.586 --> 00:09:32.516 A:middle
+
+192
+00:09:28,586 --> 00:09:32,516
 Did Finish Download gets called
 when the download is completed,
 
-00:09:32.746 --> 00:09:35.136 A:middle
+
+193
+00:09:32,746 --> 00:09:35,136
 and Did Fail To Download
 is called
 
-00:09:35.326 --> 00:09:36.756 A:middle
+
+194
+00:09:35,326 --> 00:09:36,756
 if there was an error
 during the download.
 
-00:09:37.736 --> 00:09:39.946 A:middle
+
+195
+00:09:37,736 --> 00:09:39,946
 So what we're going to do is
 we want to report progress
 
-00:09:40.156 --> 00:09:43.126 A:middle
+
+196
+00:09:40,156 --> 00:09:43,126
 about this download
 operation, and we can do
 
-00:09:43.126 --> 00:09:45.666 A:middle
+
+197
+00:09:43,126 --> 00:09:45,666
 that by adopting the
 NSProgressReporting protocol.
 
-00:09:46.506 --> 00:09:49.806 A:middle
+
+198
+00:09:46,506 --> 00:09:49,806
 So let's go ahead and go up
 to our class declaration,
 
-00:09:50.306 --> 00:09:52.496 A:middle
+
+199
+00:09:50,306 --> 00:09:52,496
 and we can add
 NSProgressReporting
 
-00:09:52.646 --> 00:09:54.356 A:middle
+
+200
+00:09:52,646 --> 00:09:54,356
 to our list of classes.
 
-00:09:55.006 --> 00:09:59.286 A:middle
+
+201
+00:09:55,006 --> 00:09:59,286
 And in order to conform
 to NSProgressReporting,
 
 
-
-00:10:00.606 --> 00:10:02.016 A:middle
+202
+00:10:00,606 --> 00:10:02,016
 we need a ProgressProperty.
 
-00:10:02.266 --> 00:10:04.436 A:middle
+
+203
+00:10:02,266 --> 00:10:04,436
 So let's add that,
 it's in NSProgress.
 
-00:10:05.126 --> 00:10:06.836 A:middle
+
+204
+00:10:05,126 --> 00:10:06,836
 And now in our initializer
 we need
 
-00:10:06.836 --> 00:10:08.596 A:middle
+
+205
+00:10:06,836 --> 00:10:08,596
 to create our NSProgressObject.
 
-00:10:09.586 --> 00:10:14.836 A:middle
+
+206
+00:10:09,586 --> 00:10:14,836
 And since we don't know how
 much there is to download yet,
 
-00:10:15.116 --> 00:10:16.926 A:middle
+
+207
+00:10:15,116 --> 00:10:16,926
 we're going to make our
 progress indeterminant.
 
-00:10:17.416 --> 00:10:19.576 A:middle
+
+208
+00:10:17,416 --> 00:10:19,576
 And one way of making your
 progress indeterminant is
 
-00:10:19.576 --> 00:10:23.386 A:middle
+
+209
+00:10:19,576 --> 00:10:23,386
 setting the totalUnitCount to a
 negative value, so we're going
 
-00:10:23.386 --> 00:10:25.186 A:middle
+
+210
+00:10:23,386 --> 00:10:25,186
 to set our totalUnitCount
 to negative 1.
 
-00:10:26.126 --> 00:10:28.316 A:middle
+
+211
+00:10:26,126 --> 00:10:28,316
 And since we know we're
 downloading a file here,
 
-00:10:28.726 --> 00:10:33.116 A:middle
+
+212
+00:10:28,726 --> 00:10:33,116
 we can also give the NSProgress
 a little bit more information
 
-00:10:33.116 --> 00:10:33.886 A:middle
+
+213
+00:10:33,116 --> 00:10:33,886
 about what's happening.
 
-00:10:34.416 --> 00:10:37.726 A:middle
+
+214
+00:10:34,416 --> 00:10:37,726
 So we can set the Kind
 to NSProgress Kind File,
 
-00:10:38.596 --> 00:10:40.866 A:middle
+
+215
+00:10:38,596 --> 00:10:40,866
 and we can set in the userInfo,
 
-00:10:40.866 --> 00:10:44.416 A:middle
+
+216
+00:10:40,866 --> 00:10:44,416
 the NSProgress File Operation
 Kind Key to Downloading.
 
-00:10:44.946 --> 00:10:48.546 A:middle
+
+217
+00:10:44,946 --> 00:10:48,546
 So now we have created our
 NSProgress and now we just need
 
-00:10:48.546 --> 00:10:50.856 A:middle
+
+218
+00:10:48,546 --> 00:10:50,856
 to update it as the
 download completes.
 
-00:10:51.386 --> 00:10:53.726 A:middle
+
+219
+00:10:51,386 --> 00:10:53,726
 So, back to our Will
 Begin Download method,
 
-00:10:53.726 --> 00:10:58.136 A:middle
+
+220
+00:10:53,726 --> 00:10:58,136
 that gets the total
 amount to download.
 
-00:10:58.136 --> 00:11:01.146 A:middle
+
+221
+00:10:58,136 --> 00:11:01,146
 So we want to set our
 totalUnitCount to that amount.
 
 
-
-00:10:58.136 --> 00:11:01.146 A:middle
-So we want to set our
-totalUnitCount to that amount.
-
-00:11:01.676 --> 00:11:04.606 A:middle
+222
+00:11:01,676 --> 00:11:04,606
 And at that point the progress
 will no longer be indeterminant.
 
-00:11:04.606 --> 00:11:07.686 A:middle
+
+223
+00:11:04,606 --> 00:11:07,686
 And in our Did Download
 Data callback,
 
-00:11:07.686 --> 00:11:11.806 A:middle
+
+224
+00:11:07,686 --> 00:11:11,806
 which is called periodically, we
 can set our completedUnitCount
 
-00:11:12.016 --> 00:11:14.326 A:middle
+
+225
+00:11:12,016 --> 00:11:14,326
 to the number of bytes
 downloaded so far.
 
-00:11:15.136 --> 00:11:18.006 A:middle
+
+226
+00:11:15,136 --> 00:11:18,006
 And finally, in our Did
 Download Data callback,
 
-00:11:18.876 --> 00:11:20.676 A:middle
+
+227
+00:11:18,876 --> 00:11:20,676
 we can set our
 completedUnitCount
 
-00:11:20.676 --> 00:11:22.876 A:middle
+
+228
+00:11:20,676 --> 00:11:22,876
 to the total number of
 bytes in the download,
 
-00:11:23.306 --> 00:11:24.996 A:middle
+
+229
+00:11:23,306 --> 00:11:24,996
 and that way the
 progress will be finished.
 
-00:11:26.446 --> 00:11:29.636 A:middle
+
+230
+00:11:26,446 --> 00:11:29,636
 Now if we, now the user
 interface is already using
 
-00:11:29.686 --> 00:11:33.386 A:middle
+
+231
+00:11:29,686 --> 00:11:33,386
 NSProgressReporting and
 looking for the download
 
-00:11:33.386 --> 00:11:37.036 A:middle
+
+232
+00:11:33,386 --> 00:11:37,036
 to implement that, and will show
 the progress, so when we build
 
-00:11:37.036 --> 00:11:42.406 A:middle
+
+233
+00:11:37,036 --> 00:11:42,406
 and run our app, and we
 press the import button,
 
-00:11:42.836 --> 00:11:45.286 A:middle
+
+234
+00:11:42,836 --> 00:11:45,286
 we have a progress being
 reported for the download
 
-00:11:45.286 --> 00:11:48.336 A:middle
+
+235
+00:11:45,286 --> 00:11:48,336
 to the user, and it is a
 much less painful experience.
 
-00:11:49.536 --> 00:11:49.886 A:middle
+
+236
+00:11:49,536 --> 00:11:49,886
 All right.
 
-00:11:50.266 --> 00:11:51.366 A:middle
+
+237
+00:11:50,266 --> 00:11:51,366
 So, back to slides.
 
-00:11:52.516 --> 00:11:54.566 A:middle
+
+238
+00:11:52,516 --> 00:11:54,566
 [Applause]
 
-00:11:55.066 --> 00:11:55.286 A:middle
-&gt;&gt; VINCE SPADER: All right.
 
-00:11:55.576 --> 00:11:57.636 A:middle
+239
+00:11:55,066 --> 00:11:55,286
+>> VINCE SPADER: All right.
+
+
+240
+00:11:55,576 --> 00:11:57,636
 So, that's the basics
 of NSProgress.
 
-00:11:57.636 --> 00:12:00.716 A:middle
+
+241
+00:11:57,636 --> 00:12:00,716
 Now let's get into what really
 makes NSProgress powerful,
 
 
-
-00:11:57.636 --> 00:12:00.716 A:middle
-Now let's get into what really
-makes NSProgress powerful,
-
-00:12:00.716 --> 00:12:03.226 A:middle
+242
+00:12:00,716 --> 00:12:03,226
 which is the ability to
 compose progress objects
 
-00:12:03.226 --> 00:12:04.986 A:middle
+
+243
+00:12:03,226 --> 00:12:04,986
 into other progress objects.
 
-00:12:06.276 --> 00:12:08.976 A:middle
+
+244
+00:12:06,276 --> 00:12:08,976
 Now, just because I press a
 download button doesn't mean
 
-00:12:08.976 --> 00:12:10.706 A:middle
+
+245
+00:12:08,976 --> 00:12:10,706
 that there is really
 only one thing happening.
 
-00:12:11.166 --> 00:12:13.276 A:middle
+
+246
+00:12:11,166 --> 00:12:13,276
 There might be the
 download, a verify,
 
-00:12:13.276 --> 00:12:16.336 A:middle
+
+247
+00:12:13,276 --> 00:12:16,336
 and a decompress operation all
 running in reporting progress.
 
-00:12:16.826 --> 00:12:19.676 A:middle
+
+248
+00:12:16,826 --> 00:12:19,676
 But the user only
 sees one progress bar.
 
-00:12:20.646 --> 00:12:23.816 A:middle
+
+249
+00:12:20,646 --> 00:12:23,816
 So, let's say that these
 boxes represent individual
 
-00:12:23.856 --> 00:12:24.856 A:middle
+
+250
+00:12:23,856 --> 00:12:24,856
 NSProgress objects.
 
-00:12:25.336 --> 00:12:28.216 A:middle
+
+251
+00:12:25,336 --> 00:12:28,216
 They each report their own
 progress in their own units
 
-00:12:28.216 --> 00:12:29.886 A:middle
+
+252
+00:12:28,216 --> 00:12:29,886
 without having to
 worry about the others.
 
-00:12:30.356 --> 00:12:33.326 A:middle
+
+253
+00:12:30,356 --> 00:12:33,326
 But we want them to be combined
 into a single NSProgress
 
-00:12:33.716 --> 00:12:36.226 A:middle
+
+254
+00:12:33,716 --> 00:12:36,226
 that we hook up to
 the user interface.
 
-00:12:36.726 --> 00:12:38.966 A:middle
+
+255
+00:12:36,726 --> 00:12:38,966
 So we're going to create
 an NSProgress object
 
-00:12:38.966 --> 00:12:40.476 A:middle
+
+256
+00:12:38,966 --> 00:12:40,476
 and call it the overall
 progress.
 
-00:12:41.246 --> 00:12:43.666 A:middle
+
+257
+00:12:41,246 --> 00:12:43,666
 And we can compose
 these other progresses
 
-00:12:43.666 --> 00:12:45.166 A:middle
+
+258
+00:12:43,666 --> 00:12:45,166
 into our overall progress,
 
-00:12:45.626 --> 00:12:47.426 A:middle
+
+259
+00:12:45,626 --> 00:12:47,426
 the overall progress
 becomes a parent
 
-00:12:47.426 --> 00:12:50.416 A:middle
+
+260
+00:12:47,426 --> 00:12:50,416
 of these other three progress
 objects, the download, verify,
 
-00:12:50.416 --> 00:12:53.156 A:middle
+
+261
+00:12:50,416 --> 00:12:53,156
 and decompress progresses
 are its children.
 
-00:12:53.906 --> 00:12:55.656 A:middle
+
+262
+00:12:53,906 --> 00:12:55,656
 And as those children complete,
 
-00:12:55.916 --> 00:12:58.946 A:middle
+
+263
+00:12:55,916 --> 00:12:58,946
 the overall progress
 will be updated.
 
-00:12:59.076 --> 00:13:01.926 A:middle
+
+264
+00:12:59,076 --> 00:13:01,926
 So for composing NSProgress
 objects, we have this idea
 
 
-
-00:12:59.076 --> 00:13:01.926 A:middle
-So for composing NSProgress
-objects, we have this idea
-
-00:13:01.926 --> 00:13:03.116 A:middle
+265
+00:13:01,926 --> 00:13:03,116
 of a pendingUnitCount.
 
-00:13:03.526 --> 00:13:05.516 A:middle
+
+266
+00:13:03,526 --> 00:13:05,516
 The pendingUnitCount
 is a portion
 
-00:13:05.516 --> 00:13:08.456 A:middle
+
+267
+00:13:05,516 --> 00:13:08,456
 of the parent's totalUnitCount
 that gets assigned
 
-00:13:08.636 --> 00:13:10.546 A:middle
+
+268
+00:13:08,636 --> 00:13:10,546
 to a child progress object.
 
-00:13:11.246 --> 00:13:13.846 A:middle
+
+269
+00:13:11,246 --> 00:13:13,846
 The pendingUnitCount is in
 terms of the parent's units,
 
-00:13:14.106 --> 00:13:15.556 A:middle
+
+270
+00:13:14,106 --> 00:13:15,556
 the child has its own units,
 
-00:13:16.146 --> 00:13:18.756 A:middle
+
+271
+00:13:16,146 --> 00:13:18,756
 and we say that the parent's
 pendingUnitCount is assigned
 
-00:13:19.006 --> 00:13:21.456 A:middle
+
+272
+00:13:19,006 --> 00:13:21,456
 to the child.
 
-00:13:21.626 --> 00:13:24.916 A:middle
+
+273
+00:13:21,626 --> 00:13:24,916
 So what happens is, when
 a child progress finishes,
 
-00:13:25.356 --> 00:13:27.666 A:middle
+
+274
+00:13:25,356 --> 00:13:27,666
 the parent's completedUnitCount
 is incremented
 
-00:13:27.666 --> 00:13:29.976 A:middle
+
+275
+00:13:27,666 --> 00:13:29,976
 by the pendingUnitCount
 for that child.
 
-00:13:30.396 --> 00:13:31.726 A:middle
+
+276
+00:13:30,396 --> 00:13:31,726
 So when you have a child,
 
-00:13:32.276 --> 00:13:34.736 A:middle
+
+277
+00:13:32,276 --> 00:13:34,736
 you don't update the
 completedUnitCount manually,
 
-00:13:35.056 --> 00:13:37.246 A:middle
+
+278
+00:13:35,056 --> 00:13:37,246
 that might conflict with
 an update that happens
 
-00:13:37.246 --> 00:13:38.466 A:middle
+
+279
+00:13:37,246 --> 00:13:38,466
 when your child finishes.
 
-00:13:38.926 --> 00:13:41.176 A:middle
+
+280
+00:13:38,926 --> 00:13:41,176
 When your at parent
 progress, you really want
 
-00:13:41.176 --> 00:13:43.486 A:middle
+
+281
+00:13:41,176 --> 00:13:43,486
 to assign your entire
 totalUnitCount to children.
 
-00:13:44.066 --> 00:13:47.126 A:middle
+
+282
+00:13:44,066 --> 00:13:47,126
 So let's go over a
 diagram of composition.
 
-00:13:47.256 --> 00:13:49.206 A:middle
+
+283
+00:13:47,256 --> 00:13:49,206
 Let's say we're importing
 some photos.
 
-00:13:49.566 --> 00:13:52.556 A:middle
+
+284
+00:13:49,566 --> 00:13:52,556
 So we have the overall
 import NSProgress object.
 
-00:13:53.496 --> 00:13:56.446 A:middle
+
+285
+00:13:53,496 --> 00:13:56,446
 There are two photos
 total, so the totalUnitCount
 
-00:13:56.846 --> 00:13:58.456 A:middle
+
+286
+00:13:56,846 --> 00:13:58,456
 for our import progress is 2.
 
-00:13:59.526 --> 00:14:01.926 A:middle
+
+287
+00:13:59,526 --> 00:14:01,926
 And it is going to assign
 its entire totalUnitCount
 
 
-
-00:13:59.526 --> 00:14:01.926 A:middle
-And it is going to assign
-its entire totalUnitCount
-
-00:14:01.926 --> 00:14:03.666 A:middle
+288
+00:14:01,926 --> 00:14:03,666
 to its children, which
 are the progresses
 
-00:14:03.666 --> 00:14:05.286 A:middle
+
+289
+00:14:03,666 --> 00:14:05,286
 for the individual photos below.
 
-00:14:05.756 --> 00:14:09.186 A:middle
+
+290
+00:14:05,756 --> 00:14:09,186
 So each photo is assigned a
 pendingUnitCount of 1 photo
 
-00:14:09.186 --> 00:14:11.166 A:middle
+
+291
+00:14:09,186 --> 00:14:11,166
 from the overall
 import progress.
 
-00:14:11.766 --> 00:14:15.576 A:middle
+
+292
+00:14:11,766 --> 00:14:15,576
 Now, the individual photo
 progresses are similar
 
-00:14:15.576 --> 00:14:16.726 A:middle
+
+293
+00:14:15,576 --> 00:14:16,726
 but their unit is different,
 
-00:14:16.726 --> 00:14:18.826 A:middle
+
+294
+00:14:16,726 --> 00:14:18,826
 they have a totalUnitCount
 of two steps.
 
-00:14:19.746 --> 00:14:22.306 A:middle
+
+295
+00:14:19,746 --> 00:14:22,306
 And each step is taking
 up one pendingUnitCount,
 
-00:14:22.306 --> 00:14:24.516 A:middle
+
+296
+00:14:22,306 --> 00:14:24,516
 one for the download
 and one for the filter.
 
-00:14:25.456 --> 00:14:28.236 A:middle
+
+297
+00:14:25,456 --> 00:14:28,236
 And finally we have the
 download and filter progresses.
 
-00:14:28.716 --> 00:14:30.066 A:middle
+
+298
+00:14:28,716 --> 00:14:30,066
 They have their own units.
 
-00:14:30.456 --> 00:14:31.756 A:middle
+
+299
+00:14:30,456 --> 00:14:31,756
 They have no children.
 
-00:14:31.906 --> 00:14:34.466 A:middle
+
+300
+00:14:31,906 --> 00:14:34,466
 And they update their
 completedUnitCount manually.
 
-00:14:36.256 --> 00:14:36.906 A:middle
+
+301
+00:14:36,256 --> 00:14:36,906
 All right.
 
-00:14:36.906 --> 00:14:39.566 A:middle
+
+302
+00:14:36,906 --> 00:14:39,566
 So I brought in the
 completedUnitCounts here.
 
-00:14:39.566 --> 00:14:40.886 A:middle
+
+303
+00:14:39,566 --> 00:14:40,886
 That's the zero of.
 
-00:14:40.886 --> 00:14:44.646 A:middle
+
+304
+00:14:40,886 --> 00:14:44,646
 And the fraction completed is
 the percentage at the bottom.
 
-00:14:44.646 --> 00:14:46.646 A:middle
+
+305
+00:14:44,646 --> 00:14:46,646
 Since we haven't done anything
 yet, it starts at zero.
 
-00:14:46.646 --> 00:14:49.716 A:middle
+
+306
+00:14:46,646 --> 00:14:49,716
 And let's see what happens
 as the completedUnitCounts
 
-00:14:49.716 --> 00:14:50.956 A:middle
+
+307
+00:14:49,716 --> 00:14:50,956
 at the bottom are updated.
 
-00:14:52.426 --> 00:14:55.566 A:middle
+
+308
+00:14:52,426 --> 00:14:55,566
 So you can see these -- as
 these children complete,
 
-00:14:56.036 --> 00:14:58.386 A:middle
+
+309
+00:14:56,036 --> 00:14:58,386
 the fraction completed is
 updating in the parents.
 
-00:14:58.626 --> 00:15:00.736 A:middle
+
+310
+00:14:58,626 --> 00:15:00,736
 Progress kind of flows
 up to the parent.
 
 
-
-00:14:58.626 --> 00:15:00.736 A:middle
-Progress kind of flows
-up to the parent.
-
-00:15:01.366 --> 00:15:03.016 A:middle
+311
+00:15:01,366 --> 00:15:03,016
 And note that the
 completedUnitCount
 
-00:15:03.016 --> 00:15:05.526 A:middle
+
+312
+00:15:03,016 --> 00:15:05,526
 for the overall progress
 is still zero.
 
-00:15:05.846 --> 00:15:08.866 A:middle
+
+313
+00:15:05,846 --> 00:15:08,866
 The completedUnitCount is only
 incremented once the child is
 
-00:15:08.866 --> 00:15:11.686 A:middle
+
+314
+00:15:08,866 --> 00:15:11,686
 finished and photo 1
 still isn't finished.
 
-00:15:12.246 --> 00:15:15.486 A:middle
+
+315
+00:15:12,246 --> 00:15:15,486
 And once a child does finish,
 
-00:15:15.516 --> 00:15:17.156 A:middle
+
+316
+00:15:15,516 --> 00:15:17,156
 the completedUnitCount
 is incremented
 
-00:15:17.156 --> 00:15:19.066 A:middle
+
+317
+00:15:17,156 --> 00:15:19,066
 by the pendingUnitCount
 for the child.
 
-00:15:19.526 --> 00:15:23.516 A:middle
+
+318
+00:15:19,526 --> 00:15:23,516
 You can see that the import
 progress now has one photo
 
-00:15:23.516 --> 00:15:26.406 A:middle
+
+319
+00:15:23,516 --> 00:15:26,406
 complete since photo one
 is now 100% finished.
 
-00:15:27.776 --> 00:15:31.296 A:middle
+
+320
+00:15:27,776 --> 00:15:31,296
 The fraction completed, on
 the other hand, is multiplying
 
-00:15:31.296 --> 00:15:33.036 A:middle
+
+321
+00:15:31,296 --> 00:15:33,036
 up based on the pendingUnitCount
 
-00:15:33.346 --> 00:15:35.226 A:middle
+
+322
+00:15:33,346 --> 00:15:35,226
 and the fraction
 completed of the child.
 
-00:15:35.226 --> 00:15:38.576 A:middle
+
+323
+00:15:35,226 --> 00:15:38,576
 It doesn't wait until the
 child is finished to update.
 
-00:15:40.066 --> 00:15:44.376 A:middle
+
+324
+00:15:40,066 --> 00:15:44,376
 And when everything is at 100%,
 the import progress is finished,
 
-00:15:45.016 --> 00:15:47.226 A:middle
+
+325
+00:15:45,016 --> 00:15:47,226
 and that's an example
 of what happens
 
-00:15:47.226 --> 00:15:49.646 A:middle
+
+326
+00:15:47,226 --> 00:15:49,646
 when you're composing
 NSProgress objects.
 
-00:15:51.006 --> 00:15:52.266 A:middle
+
+327
+00:15:51,006 --> 00:15:52,266
 Now let's zoom in here.
 
-00:15:52.836 --> 00:15:56.086 A:middle
+
+328
+00:15:52,836 --> 00:15:56,086
 Here we have a progress for
 an individual photo's import,
 
-00:15:56.086 --> 00:15:57.506 A:middle
+
+329
+00:15:56,086 --> 00:15:57,506
 so this is just one photo.
 
-00:15:58.186 --> 00:16:00.746 A:middle
+
+330
+00:15:58,186 --> 00:16:00,746
 There are the two steps,
 download and filter.
 
 
-
-00:15:58.186 --> 00:16:00.746 A:middle
-There are the two steps,
-download and filter.
-
-00:16:00.746 --> 00:16:02.766 A:middle
+331
+00:16:00,746 --> 00:16:02,766
 So we have a totalUnitCount
 of 2.
 
-00:16:03.176 --> 00:16:05.616 A:middle
+
+332
+00:16:03,176 --> 00:16:05,616
 And we say the download is
 going to take one of those units
 
-00:16:05.616 --> 00:16:07.576 A:middle
+
+333
+00:16:05,616 --> 00:16:07,576
 and the filter is going to
 take one of those units.
 
-00:16:08.276 --> 00:16:12.836 A:middle
+
+334
+00:16:08,276 --> 00:16:12,836
 So each step takes up half of
 the photo's overall progress.
 
-00:16:13.596 --> 00:16:15.776 A:middle
+
+335
+00:16:13,596 --> 00:16:15,776
 But what if these
 operations aren't equal?
 
-00:16:16.266 --> 00:16:18.856 A:middle
+
+336
+00:16:16,266 --> 00:16:18,856
 What if we know that the
 filter is pretty quick relative
 
-00:16:18.856 --> 00:16:22.416 A:middle
+
+337
+00:16:18,856 --> 00:16:22,416
 to the time to download, so it
 looks something more like this?
 
-00:16:23.586 --> 00:16:25.526 A:middle
+
+338
+00:16:23,586 --> 00:16:25,526
 Well, units can be arbitrary.
 
-00:16:25.526 --> 00:16:27.986 A:middle
+
+339
+00:16:25,526 --> 00:16:27,986
 You can say that there
 are actually ten steps
 
-00:16:27.986 --> 00:16:29.826 A:middle
+
+340
+00:16:27,986 --> 00:16:29,826
 and the download is
 assigned nine of those,
 
-00:16:29.936 --> 00:16:31.126 A:middle
+
+341
+00:16:29,936 --> 00:16:31,126
 and the filter is assigned one.
 
-00:16:31.886 --> 00:16:33.836 A:middle
+
+342
+00:16:31,886 --> 00:16:33,836
 And now as the download
 completes,
 
-00:16:34.406 --> 00:16:37.716 A:middle
+
+343
+00:16:34,406 --> 00:16:37,716
 the download step takes up
 90% of the import progress
 
-00:16:37.816 --> 00:16:39.786 A:middle
+
+344
+00:16:37,816 --> 00:16:39,786
 and the filter takes
 the remaining 10%.
 
-00:16:40.486 --> 00:16:43.706 A:middle
+
+345
+00:16:40,486 --> 00:16:43,706
 So you can modify the units
 of the progress in order
 
-00:16:43.706 --> 00:16:45.516 A:middle
+
+346
+00:16:43,706 --> 00:16:45,516
 to weight the work being
 assigned to children.
 
-00:16:45.516 --> 00:16:46.106 A:middle
+
+347
+00:16:45,516 --> 00:16:46,106
 All right.
 
-00:16:47.236 --> 00:16:50.436 A:middle
+
+348
+00:16:47,236 --> 00:16:50,436
 Let's see how to
 actually do this in code.
 
-00:16:50.436 --> 00:16:54.676 A:middle
+
+349
+00:16:50,436 --> 00:16:54,676
 There are two ways of
 composing NSProgress objects
 
-00:16:55.016 --> 00:16:56.226 A:middle
+
+350
+00:16:55,016 --> 00:16:56,226
 and the first way
 I'm going to talk
 
-00:16:56.226 --> 00:16:57.826 A:middle
+
+351
+00:16:56,226 --> 00:16:57,826
 about is implicit composition.
 
-00:16:58.556 --> 00:17:02.296 A:middle
+
+352
+00:16:58,556 --> 00:17:02,296
 So you create a parent
 progress object.
 
 
-
-00:16:58.556 --> 00:17:02.296 A:middle
-So you create a parent
-progress object.
-
-00:17:02.676 --> 00:17:05.076 A:middle
+353
+00:17:02,676 --> 00:17:05,076
 This will be the
 photoProgress from before.
 
-00:17:05.856 --> 00:17:07.886 A:middle
+
+354
+00:17:05,856 --> 00:17:07,886
 So there are two steps.
 
-00:17:08.425 --> 00:17:12.826 A:middle
+
+355
+00:17:08,425 --> 00:17:12,826
 And we have -- so we have
 a totalUnitCount of 2.
 
-00:17:13.516 --> 00:17:16.915 A:middle
+
+356
+00:17:13,516 --> 00:17:16,915
 And what we want to do, is add
 a download progress as a child.
 
-00:17:17.776 --> 00:17:20.046 A:middle
+
+357
+00:17:17,776 --> 00:17:20,046
 So we call become Current
 With Pending Unit Count
 
-00:17:20.046 --> 00:17:22.156 A:middle
+
+358
+00:17:20,046 --> 00:17:22,156
 on the parent progress,
 the photoProgress.
 
-00:17:22.915 --> 00:17:26.965 A:middle
+
+359
+00:17:22,915 --> 00:17:26,965
 And what this does is it sets
 a thread local current progress
 
-00:17:27.756 --> 00:17:30.086 A:middle
+
+360
+00:17:27,756 --> 00:17:30,086
 so the photoProgress is
 the current progress,
 
-00:17:30.546 --> 00:17:33.466 A:middle
+
+361
+00:17:30,546 --> 00:17:33,466
 and that pendingUnitCount
 of 1 is set aside
 
-00:17:34.166 --> 00:17:37.616 A:middle
+
+362
+00:17:34,166 --> 00:17:37,616
 and basically reserved
 for progress to come along
 
-00:17:37.616 --> 00:17:39.756 A:middle
+
+363
+00:17:37,616 --> 00:17:39,756
 and get added to the
 current progress.
 
-00:17:40.396 --> 00:17:46.706 A:middle
+
+364
+00:17:40,396 --> 00:17:46,706
 And next we call our download
 function, startDownload,
 
-00:17:47.366 --> 00:17:50.296 A:middle
+
+365
+00:17:47,366 --> 00:17:50,296
 and that creates a
 progress with the NSProgress
 
-00:17:50.296 --> 00:17:52.386 A:middle
+
+366
+00:17:50,296 --> 00:17:52,386
 with totalUnitCount
 convenience constructor,
 
-00:17:52.856 --> 00:17:55.936 A:middle
+
+367
+00:17:52,856 --> 00:17:55,936
 and with totalUnit
 convenience constructor,
 
-00:17:56.356 --> 00:17:59.836 A:middle
+
+368
+00:17:56,356 --> 00:17:59,836
 we'll add the created progress
 to the current progress.
 
 
-
-00:18:00.826 --> 00:18:05.296 A:middle
+369
+00:18:00,826 --> 00:18:05,296
 So the download is added as
 a child of our photoProgress.
 
-00:18:06.786 --> 00:18:08.266 A:middle
+
+370
+00:18:06,786 --> 00:18:08,266
 Next we need to clean this up.
 
-00:18:08.376 --> 00:18:09.756 A:middle
+
+371
+00:18:08,376 --> 00:18:09,756
 So we call resigned current
 
-00:18:10.106 --> 00:18:13.646 A:middle
+
+372
+00:18:10,106 --> 00:18:13,646
 and the photoProgress is no
 longer the current progress.
 
-00:18:13.706 --> 00:18:15.766 A:middle
+
+373
+00:18:13,706 --> 00:18:15,766
 And that's it.
 
-00:18:16.276 --> 00:18:18.716 A:middle
+
+374
+00:18:16,276 --> 00:18:18,716
 Now we've used implicit
 composition
 
-00:18:18.876 --> 00:18:23.306 A:middle
+
+375
+00:18:18,876 --> 00:18:23,306
 to add a child to a parent.
 
-00:18:23.306 --> 00:18:25.916 A:middle
+
+376
+00:18:23,306 --> 00:18:25,916
 A few things to remember when
 using implicit composition,
 
-00:18:26.706 --> 00:18:28.906 A:middle
+
+377
+00:18:26,706 --> 00:18:28,906
 when supporting implicit
 composition,
 
-00:18:29.926 --> 00:18:35.366 A:middle
+
+378
+00:18:29,926 --> 00:18:35,366
 you want to create the
 NSProgress immediately using the
 
-00:18:35.366 --> 00:18:37.306 A:middle
+
+379
+00:18:35,366 --> 00:18:37,306
 with totalUnitCount
 convenience constructor.
 
-00:18:37.676 --> 00:18:40.436 A:middle
+
+380
+00:18:37,676 --> 00:18:40,436
 That's because the first
 progress object added
 
-00:18:40.436 --> 00:18:43.886 A:middle
+
+381
+00:18:40,436 --> 00:18:43,886
 to the current progress takes
 up that entire pendingUnitCount.
 
-00:18:44.456 --> 00:18:47.396 A:middle
+
+382
+00:18:44,456 --> 00:18:47,396
 And if you create it first
 thing, you don't have to worry
 
-00:18:47.396 --> 00:18:50.096 A:middle
+
+383
+00:18:47,396 --> 00:18:50,096
 about getters or other
 calls unintentionally taking
 
-00:18:50.096 --> 00:18:51.436 A:middle
+
+384
+00:18:50,096 --> 00:18:51,436
 up the parent's
 pendingUnitCount.
 
-00:18:52.716 --> 00:18:54.426 A:middle
+
+385
+00:18:52,716 --> 00:18:54,426
 Also, be sure to document it.
 
-00:18:54.736 --> 00:18:57.076 A:middle
+
+386
+00:18:54,736 --> 00:18:57,076
 Implicit composition
 is implicit after all,
 
-00:18:57.476 --> 00:19:00.406 A:middle
+
+387
+00:18:57,476 --> 00:19:00,406
 clients won't know you support
 implicit composition unless you
 
 
-
-00:18:57.476 --> 00:19:00.406 A:middle
-clients won't know you support
-implicit composition unless you
-
-00:19:00.406 --> 00:19:03.176 A:middle
+388
+00:19:00,406 --> 00:19:03,176
 say so.
 
-00:19:03.416 --> 00:19:05.756 A:middle
+
+389
+00:19:03,416 --> 00:19:05,756
 Also, if no child is added
 
-00:19:05.756 --> 00:19:07.436 A:middle
+
+390
+00:19:05,756 --> 00:19:07,436
 by the time you call
 resigned current,
 
-00:19:08.156 --> 00:19:10.806 A:middle
+
+391
+00:19:08,156 --> 00:19:10,806
 that pendingUnitCount
 will be immediately added
 
-00:19:10.806 --> 00:19:12.596 A:middle
+
+392
+00:19:10,806 --> 00:19:12,596
 to the parent's
 completedUnitCount.
 
-00:19:13.256 --> 00:19:15.016 A:middle
+
+393
+00:19:13,256 --> 00:19:15,016
 So your completedUnitCount
 will be updated.
 
-00:19:15.646 --> 00:19:20.996 A:middle
+
+394
+00:19:15,646 --> 00:19:20,996
 So, the second way to compose
 NSProgress objects is new
 
-00:19:20.996 --> 00:19:23.376 A:middle
+
+395
+00:19:20,996 --> 00:19:23,376
 in OS X 10.11 and iOS 9,
 
-00:19:23.696 --> 00:19:25.466 A:middle
+
+396
+00:19:23,696 --> 00:19:25,466
 and that's called
 explicit composition.
 
-00:19:26.186 --> 00:19:29.696 A:middle
+
+397
+00:19:26,186 --> 00:19:29,696
 So, you receive a progress
 that you want to add
 
-00:19:29.696 --> 00:19:31.076 A:middle
+
+398
+00:19:29,696 --> 00:19:31,076
 as a child from somewhere.
 
-00:19:31.076 --> 00:19:32.506 A:middle
+
+399
+00:19:31,076 --> 00:19:32,506
 Perhaps something that conforms
 
-00:19:32.506 --> 00:19:34.626 A:middle
+
+400
+00:19:32,506 --> 00:19:34,626
 to the NSProgressReporting,
 we'll say a filter.
 
-00:19:35.826 --> 00:19:37.236 A:middle
+
+401
+00:19:35,826 --> 00:19:37,236
 And you have your
 parent progress
 
-00:19:37.236 --> 00:19:38.296 A:middle
+
+402
+00:19:37,236 --> 00:19:38,296
 that you want to add it to.
 
-00:19:38.906 --> 00:19:41.666 A:middle
+
+403
+00:19:38,906 --> 00:19:41,666
 Let's say the photoProgress
 from before.
 
-00:19:43.156 --> 00:19:47.116 A:middle
+
+404
+00:19:43,156 --> 00:19:47,116
 Then you simply call
 addChild with pendingUnitCount
 
-00:19:47.746 --> 00:19:51.646 A:middle
+
+405
+00:19:47,746 --> 00:19:51,646
 on the progress you
 want to add it to,
 
-00:19:51.776 --> 00:19:55.176 A:middle
+
+406
+00:19:51,776 --> 00:19:55,176
 and path in your child progress,
 the filterProgress, here,
 
-00:19:55.646 --> 00:19:57.736 A:middle
+
+407
+00:19:55,646 --> 00:19:57,736
 and give it the pendingUnitCount
 you want to add it with,
 
-00:19:57.736 --> 00:20:00.716 A:middle
+
+408
+00:19:57,736 --> 00:20:00,716
 since it is one step, we want to
 add it with a pendingCount of 1.
 
 
-
-00:19:57.736 --> 00:20:00.716 A:middle
-since it is one step, we want to
-add it with a pendingCount of 1.
-
-00:20:01.596 --> 00:20:02.306 A:middle
+409
+00:20:01,596 --> 00:20:02,306
 And that's it.
 
-00:20:02.486 --> 00:20:06.286 A:middle
+
+410
+00:20:02,486 --> 00:20:06,286
 Now your progress is a child
 of the parent progress.
 
-00:20:06.286 --> 00:20:11.856 A:middle
+
+411
+00:20:06,286 --> 00:20:11,856
 So here are some guidelines
 for when to use explicit
 
-00:20:11.856 --> 00:20:13.266 A:middle
+
+412
+00:20:11,856 --> 00:20:13,266
 or implicit composition.
 
-00:20:13.876 --> 00:20:17.356 A:middle
+
+413
+00:20:13,876 --> 00:20:17,356
 If you have a method that
 can't return in NSProgress
 
-00:20:17.526 --> 00:20:20.316 A:middle
+
+414
+00:20:17,526 --> 00:20:20,316
 like you're crossing an API
 boundary you can't change,
 
-00:20:20.656 --> 00:20:22.576 A:middle
+
+415
+00:20:20,656 --> 00:20:22,576
 use implicit composition
 and document
 
-00:20:22.576 --> 00:20:24.086 A:middle
+
+416
+00:20:22,576 --> 00:20:24,086
 that it supports
 implicit composition.
 
-00:20:24.956 --> 00:20:29.876 A:middle
+
+417
+00:20:24,956 --> 00:20:29,876
 Or, because explicit composition
 is new in OS X 10.11 and iOS 9,
 
-00:20:30.346 --> 00:20:33.316 A:middle
+
+418
+00:20:30,346 --> 00:20:33,316
 you'll have to use implicit
 composition on older releases.
 
-00:20:33.806 --> 00:20:35.726 A:middle
+
+419
+00:20:33,806 --> 00:20:35,726
 Otherwise, you will
 generally want
 
-00:20:35.726 --> 00:20:38.046 A:middle
+
+420
+00:20:35,726 --> 00:20:38,046
 to use explicit composition;
 it is a lot simpler.
 
-00:20:38.046 --> 00:20:38.726 A:middle
+
+421
+00:20:38,046 --> 00:20:38,726
 All right.
 
-00:20:40.216 --> 00:20:45.566 A:middle
+
+422
+00:20:40,216 --> 00:20:45,566
 Now let's go through
 a demo of composition.
 
-00:20:45.566 --> 00:20:48.586 A:middle
+
+423
+00:20:45,566 --> 00:20:48,586
 So here we have our
 photo download class
 
-00:20:48.626 --> 00:20:51.836 A:middle
+
+424
+00:20:48,626 --> 00:20:51,836
 that we added our progress
 reporting to last time.
 
-00:20:51.836 --> 00:20:55.686 A:middle
+
+425
+00:20:51,836 --> 00:20:55,686
 And if we run our app, it
 has been changed a bit.
 
-00:20:56.166 --> 00:20:57.826 A:middle
+
+426
+00:20:56,166 --> 00:20:57,826
 Now it has a CollectionView
 
-00:20:57.826 --> 00:21:00.586 A:middle
+
+427
+00:20:57,826 --> 00:21:00,586
 of photos instead
 of a single photo.
 
 
-
-00:20:57.826 --> 00:21:00.586 A:middle
-of photos instead
-of a single photo.
-
-00:21:01.156 --> 00:21:03.246 A:middle
+428
+00:21:01,156 --> 00:21:03,246
 So, and when we press import,
 
-00:21:03.676 --> 00:21:05.846 A:middle
+
+429
+00:21:03,676 --> 00:21:05,846
 instead of just downloading
 those images,
 
-00:21:06.136 --> 00:21:07.976 A:middle
+
+430
+00:21:06,136 --> 00:21:07,976
 it is also running
 them through a filter.
 
-00:21:08.456 --> 00:21:10.126 A:middle
+
+431
+00:21:08,456 --> 00:21:10,126
 So we don't have
 progress information
 
-00:21:10.126 --> 00:21:13.506 A:middle
+
+432
+00:21:10,126 --> 00:21:13,506
 for that overall thing, so
 the experience is pretty bad.
 
-00:21:14.366 --> 00:21:16.076 A:middle
+
+433
+00:21:14,366 --> 00:21:16,076
 And again, we can make it better
 
-00:21:16.076 --> 00:21:19.736 A:middle
+
+434
+00:21:16,076 --> 00:21:19,736
 by having our operations
 report progress.
 
-00:21:20.816 --> 00:21:21.726 A:middle
+
+435
+00:21:20,816 --> 00:21:21,726
 So let's do that.
 
-00:21:22.996 --> 00:21:24.296 A:middle
+
+436
+00:21:22,996 --> 00:21:24,296
 So we have our download class
 
-00:21:24.336 --> 00:21:25.866 A:middle
+
+437
+00:21:24,336 --> 00:21:25,866
 that supports
 NSProgressReporting,
 
-00:21:26.666 --> 00:21:30.096 A:middle
+
+438
+00:21:26,666 --> 00:21:30,096
 and we have our filter class,
 which has a class method
 
-00:21:30.096 --> 00:21:32.366 A:middle
+
+439
+00:21:30,096 --> 00:21:32,366
 that takes an image and
 returns a filtered image.
 
-00:21:33.836 --> 00:21:38.206 A:middle
+
+440
+00:21:33,836 --> 00:21:38,206
 And we have this import class,
 which has both the download
 
-00:21:38.206 --> 00:21:41.116 A:middle
+
+441
+00:21:38,206 --> 00:21:41,116
 and runs the filter when
 the download completes.
 
-00:21:41.486 --> 00:21:43.086 A:middle
+
+442
+00:21:41,486 --> 00:21:43,086
 So it combines the
 progress for --
 
-00:21:43.086 --> 00:21:51.406 A:middle
+
+443
+00:21:43,086 --> 00:21:51,406
 we want it to combine the
 progress for the download
 
-00:21:51.736 --> 00:21:53.106 A:middle
+
+444
+00:21:51,736 --> 00:21:53,106
 and the filter operation.
 
-00:21:54.556 --> 00:21:57.666 A:middle
+
+445
+00:21:54,556 --> 00:21:57,666
 So let's look at
 our photo import.
 
-00:21:57.666 --> 00:21:59.866 A:middle
+
+446
+00:21:57,666 --> 00:21:59,866
 It has an initializer,
 which takes a URL
 
 
-
-00:22:00.436 --> 00:22:03.726 A:middle
+447
+00:22:00,436 --> 00:22:03,726
 and it creates the
 download with that URL.
 
-00:22:04.436 --> 00:22:07.876 A:middle
+
+448
+00:22:04,436 --> 00:22:07,876
 It also has a completion
 handler that gets called
 
-00:22:07.876 --> 00:22:10.396 A:middle
+
+449
+00:22:07,876 --> 00:22:10,396
 with the filtered
 and downloaded image,
 
-00:22:10.456 --> 00:22:11.856 A:middle
+
+450
+00:22:10,456 --> 00:22:11,856
 or an error if an error occurs.
 
-00:22:12.786 --> 00:22:15.686 A:middle
+
+451
+00:22:12,786 --> 00:22:15,686
 And it also has a start method
 for starting the import.
 
-00:22:15.976 --> 00:22:19.756 A:middle
+
+452
+00:22:15,976 --> 00:22:19,756
 And the start method sets
 the completion handler
 
-00:22:19.756 --> 00:22:23.236 A:middle
+
+453
+00:22:19,756 --> 00:22:23,236
 on the download, and
 then creates a UIImage
 
-00:22:23.306 --> 00:22:28.736 A:middle
+
+454
+00:22:23,306 --> 00:22:28,736
 from the downloaded data,
 and then passes that image
 
-00:22:28.736 --> 00:22:30.916 A:middle
+
+455
+00:22:28,736 --> 00:22:30,916
 into our filter, getting
 out our filtered image,
 
-00:22:31.306 --> 00:22:33.066 A:middle
+
+456
+00:22:31,306 --> 00:22:33,066
 and then calls its
 own completion handler
 
-00:22:33.066 --> 00:22:34.146 A:middle
+
+457
+00:22:33,066 --> 00:22:34,146
 with the filtered image.
 
-00:22:34.436 --> 00:22:37.536 A:middle
+
+458
+00:22:34,436 --> 00:22:37,536
 And once the completion handler
 is set, it starts the download.
 
-00:22:38.106 --> 00:22:43.066 A:middle
+
+459
+00:22:38,106 --> 00:22:43,066
 So what we want to do is have
 our photo import report a
 
-00:22:43.066 --> 00:22:46.256 A:middle
+
+460
+00:22:43,066 --> 00:22:46,256
 combined progress comprising
 of both the download
 
-00:22:46.256 --> 00:22:47.576 A:middle
+
+461
+00:22:46,256 --> 00:22:47,576
 and the filter's progress.
 
-00:22:48.066 --> 00:22:49.246 A:middle
+
+462
+00:22:48,066 --> 00:22:49,246
 And we are going
 to do that again
 
-00:22:49.366 --> 00:22:53.696 A:middle
+
+463
+00:22:49,366 --> 00:22:53,696
 by having our photo import class
 conform to NSProgressReporting.
 
-00:22:54.296 --> 00:22:56.496 A:middle
+
+464
+00:22:54,296 --> 00:22:56,496
 So let's go up to
 our class declaration
 
-00:22:57.086 --> 00:22:58.566 A:middle
+
+465
+00:22:57,086 --> 00:22:58,566
 and add NSProgressReporting.
 
 
-
-00:23:00.096 --> 00:23:04.216 A:middle
+466
+00:23:00,096 --> 00:23:04,216
 Now we need to have a progress
 property, so let's add that.
 
-00:23:05.106 --> 00:23:07.446 A:middle
+
+467
+00:23:05,106 --> 00:23:07,446
 ANd we need to create
 our NSProgress object.
 
-00:23:08.236 --> 00:23:10.546 A:middle
+
+468
+00:23:08,236 --> 00:23:10,546
 And this time for
 our units we're going
 
-00:23:10.546 --> 00:23:12.166 A:middle
+
+469
+00:23:10,546 --> 00:23:12,166
 to use something
 a little abstract.
 
-00:23:12.286 --> 00:23:14.546 A:middle
+
+470
+00:23:12,286 --> 00:23:14,546
 We have run the app a
 few times and we've found
 
-00:23:14.546 --> 00:23:17.276 A:middle
+
+471
+00:23:14,546 --> 00:23:17,276
 that if we have the
 download take up about 90%
 
-00:23:17.276 --> 00:23:19.846 A:middle
+
+472
+00:23:17,276 --> 00:23:19,846
 of the import's progress,
 that feels pretty good.
 
-00:23:20.386 --> 00:23:22.346 A:middle
+
+473
+00:23:20,386 --> 00:23:22,346
 So we're going to have
 a totalUnitCount of 10,
 
-00:23:22.686 --> 00:23:24.936 A:middle
+
+474
+00:23:22,686 --> 00:23:24,936
 and we're going to say
 the download takes up 9
 
-00:23:24.936 --> 00:23:26.916 A:middle
+
+475
+00:23:24,936 --> 00:23:26,916
 of that totalUnitCount
 and the filter is going
 
-00:23:26.916 --> 00:23:27.926 A:middle
+
+476
+00:23:26,916 --> 00:23:27,926
 to take up the remaining 1.
 
-00:23:28.506 --> 00:23:31.146 A:middle
+
+477
+00:23:28,506 --> 00:23:31,146
 So now in our start method,
 
-00:23:31.666 --> 00:23:37.596 A:middle
+
+478
+00:23:31,666 --> 00:23:37,596
 since the download already
 conforms to NSProgressReporting,
 
-00:23:37.886 --> 00:23:40.826 A:middle
+
+479
+00:23:37,886 --> 00:23:40,826
 we can just get the progress
 object from it and add it
 
-00:23:40.826 --> 00:23:42.656 A:middle
+
+480
+00:23:40,826 --> 00:23:42,656
 to our progress, and we can do
 
-00:23:42.656 --> 00:23:44.756 A:middle
+
+481
+00:23:42,656 --> 00:23:44,756
 that with the explicit
 add child method.
 
-00:23:45.286 --> 00:23:48.136 A:middle
+
+482
+00:23:45,286 --> 00:23:48,136
 So we're calling progress
 add child download progress,
 
-00:23:48.306 --> 00:23:51.066 A:middle
+
+483
+00:23:48,306 --> 00:23:51,066
 and our pendingUnitCount is 9,
 
-00:23:51.126 --> 00:23:53.216 A:middle
+
+484
+00:23:51,126 --> 00:23:53,216
 so it takes up 90%
 of our progress.
 
-00:23:53.766 --> 00:23:57.656 A:middle
+
+485
+00:23:53,766 --> 00:23:57,656
 And now we want to also
 add the filter's progress
 
-00:23:57.746 --> 00:23:58.656 A:middle
+
+486
+00:23:57,746 --> 00:23:58,656
 to our progress.
 
-00:23:59.376 --> 00:24:01.536 A:middle
+
+487
+00:23:59,376 --> 00:24:01,536
 But the filter is a class method
 
 
-
-00:23:59.376 --> 00:24:01.536 A:middle
-But the filter is a class method
-
-00:24:01.536 --> 00:24:03.756 A:middle
+488
+00:24:01,536 --> 00:24:03,756
 that takes an image
 and returns an image.
 
-00:24:03.856 --> 00:24:06.246 A:middle
+
+489
+00:24:03,856 --> 00:24:06,246
 There is no obvious way to
 get a progress out of it.
 
-00:24:06.946 --> 00:24:11.646 A:middle
+
+490
+00:24:06,946 --> 00:24:11,646
 But, if we go to our
 photo filter class,
 
-00:24:11.646 --> 00:24:12.986 A:middle
+
+491
+00:24:11,646 --> 00:24:12,986
 we can see a comment here
 
-00:24:12.986 --> 00:24:15.706 A:middle
+
+492
+00:24:12,986 --> 00:24:15,706
 that says it supports
 implicit progress composition.
 
-00:24:16.226 --> 00:24:18.336 A:middle
+
+493
+00:24:16,226 --> 00:24:18,336
 So we can use implicit
 progress composition
 
-00:24:18.666 --> 00:24:19.816 A:middle
+
+494
+00:24:18,666 --> 00:24:19,816
 to add it as a child.
 
-00:24:20.916 --> 00:24:23.356 A:middle
+
+495
+00:24:20,916 --> 00:24:23,356
 So let's go back to our
 import start method.
 
-00:24:24.046 --> 00:24:28.606 A:middle
+
+496
+00:24:24,046 --> 00:24:28,606
 And in the downloads completion
 handler, which might be called
 
-00:24:28.606 --> 00:24:32.566 A:middle
+
+497
+00:24:28,606 --> 00:24:32,566
 on a background thread,
 we're going to become current
 
-00:24:33.296 --> 00:24:34.826 A:middle
+
+498
+00:24:33,296 --> 00:24:34,826
 with the pendingUnitCount of 1.
 
-00:24:35.436 --> 00:24:39.706 A:middle
+
+499
+00:24:35,436 --> 00:24:39,706
 And note, like I said,
 the completion handler
 
-00:24:39.706 --> 00:24:41.646 A:middle
+
+500
+00:24:39,706 --> 00:24:41,646
 for the download might be
 called in a background thread,
 
-00:24:41.896 --> 00:24:44.876 A:middle
+
+501
+00:24:41,896 --> 00:24:44,876
 but that's okay because we're
 calling the filter immediately
 
-00:24:44.876 --> 00:24:46.056 A:middle
+
+502
+00:24:44,876 --> 00:24:46,056
 after on the same thread.
 
-00:24:47.006 --> 00:24:52.146 A:middle
+
+503
+00:24:47,006 --> 00:24:52,146
 So, after we become
 current, our filter will run
 
-00:24:52.146 --> 00:24:55.696 A:middle
+
+504
+00:24:52,146 --> 00:24:55,696
 and it will add itself as a
 child to the current progress,
 
-00:24:56.606 --> 00:24:58.166 A:middle
+
+505
+00:24:56,606 --> 00:24:58,166
 and once it returns, we need
 
-00:24:58.166 --> 00:25:00.226 A:middle
+
+506
+00:24:58,166 --> 00:25:00,226
 to no longer be the current
 progress, so we're going
 
 
-
-00:24:58.166 --> 00:25:00.226 A:middle
-to no longer be the current
-progress, so we're going
-
-00:25:00.226 --> 00:25:01.176 A:middle
+507
+00:25:00,226 --> 00:25:01,176
 to call resign current.
 
-00:25:01.766 --> 00:25:04.246 A:middle
+
+508
+00:25:01,766 --> 00:25:04,246
 And that's it.
 
-00:25:04.246 --> 00:25:07.376 A:middle
+
+509
+00:25:04,246 --> 00:25:07,376
 Now we have added both the
 download and the filter progress
 
-00:25:07.426 --> 00:25:08.596 A:middle
+
+510
+00:25:07,426 --> 00:25:08,596
 to our import progress.
 
-00:25:09.186 --> 00:25:18.026 A:middle
+
+511
+00:25:09,186 --> 00:25:18,026
 And now if we run our
 app, and we press import,
 
-00:25:18.336 --> 00:25:21.606 A:middle
+
+512
+00:25:18,336 --> 00:25:21,606
 you can see the imports
 are reporting progress
 
-00:25:21.666 --> 00:25:22.386 A:middle
+
+513
+00:25:21,666 --> 00:25:22,386
 for each photo.
 
-00:25:23.266 --> 00:25:25.306 A:middle
+
+514
+00:25:23,266 --> 00:25:25,306
 And that's good, the
 user has more information
 
-00:25:25.306 --> 00:25:27.736 A:middle
+
+515
+00:25:25,306 --> 00:25:27,736
 on what's going on, but it
 is not really that great.
 
-00:25:27.736 --> 00:25:30.266 A:middle
+
+516
+00:25:27,736 --> 00:25:30,266
 We only want one progress
 to show to the user.
 
-00:25:30.736 --> 00:25:33.826 A:middle
+
+517
+00:25:30,736 --> 00:25:33,826
 So let's do that.
 
-00:25:34.066 --> 00:25:37.196 A:middle
+
+518
+00:25:34,066 --> 00:25:37,196
 So we're going to zoom out a
 little bit and we're going to go
 
-00:25:37.196 --> 00:25:39.876 A:middle
+
+519
+00:25:37,196 --> 00:25:39,876
 to our root View Controller,
 photos View Controller,
 
-00:25:41.076 --> 00:25:43.366 A:middle
+
+520
+00:25:41,076 --> 00:25:43,366
 and this has an overall
 progress property.
 
-00:25:43.656 --> 00:25:47.576 A:middle
+
+521
+00:25:43,656 --> 00:25:47,576
 It is a client of this
 NSProgress, it just gets it,
 
-00:25:47.576 --> 00:25:49.696 A:middle
+
+522
+00:25:47,576 --> 00:25:49,696
 and it is going to hook it
 up to the UI and show it.
 
-00:25:49.696 --> 00:25:51.846 A:middle
+
+523
+00:25:49,696 --> 00:25:51,846
 It is not going to
 create it itself.
 
-00:25:53.206 --> 00:25:55.626 A:middle
+
+524
+00:25:53,206 --> 00:25:55,626
 And it also has a
 reference to an Album,
 
-00:25:55.626 --> 00:25:57.626 A:middle
+
+525
+00:25:55,626 --> 00:25:57,626
 which is the collection of
 photos that we're downloading.
 
-00:25:57.626 --> 00:26:02.156 A:middle
+
+526
+00:25:57,626 --> 00:26:02,156
 And it has IBActions
 for the toolbar buttons,
 
 
-
-00:25:57.626 --> 00:26:02.156 A:middle
-And it has IBActions
-for the toolbar buttons,
-
-00:26:02.156 --> 00:26:03.866 A:middle
+527
+00:26:02,156 --> 00:26:03,866
 in this case the
 start import button
 
-00:26:04.236 --> 00:26:08.676 A:middle
+
+528
+00:26:04,236 --> 00:26:08,676
 and that IBAction just calls
 import photos on our album.
 
-00:26:09.646 --> 00:26:14.576 A:middle
+
+529
+00:26:09,646 --> 00:26:14,576
 So if we look at our album
 it has an array of photos,
 
-00:26:15.556 --> 00:26:21.166 A:middle
+
+530
+00:26:15,556 --> 00:26:21,166
 and it creates the photos
 from URLs in the main bundle,
 
-00:26:21.726 --> 00:26:27.256 A:middle
+
+531
+00:26:21,726 --> 00:26:27,256
 and in its import photos method
 it goes through each photo
 
-00:26:27.516 --> 00:26:29.216 A:middle
+
+532
+00:26:27,516 --> 00:26:29,216
 and calls start import on them.
 
-00:26:29.786 --> 00:26:35.476 A:middle
+
+533
+00:26:29,786 --> 00:26:35,476
 Now if we look at our photo,
 our photo has an image URL
 
-00:26:35.476 --> 00:26:37.716 A:middle
+
+534
+00:26:35,476 --> 00:26:37,716
 that it gets in its initializer,
 
-00:26:38.306 --> 00:26:42.306 A:middle
+
+535
+00:26:38,306 --> 00:26:42,306
 and it also has a UIImage
 property that starts
 
-00:26:42.306 --> 00:26:43.596 A:middle
+
+536
+00:26:42,306 --> 00:26:43,596
 out as a place holder.
 
-00:26:44.606 --> 00:26:46.896 A:middle
+
+537
+00:26:44,606 --> 00:26:46,896
 It also has its start
 import method
 
-00:26:46.896 --> 00:26:48.416 A:middle
+
+538
+00:26:46,896 --> 00:26:48,416
 that is getting called
 by the album.
 
-00:26:48.706 --> 00:26:50.696 A:middle
+
+539
+00:26:48,706 --> 00:26:50,696
 It creates that photo
 import class
 
-00:26:50.926 --> 00:26:53.056 A:middle
+
+540
+00:26:50,926 --> 00:26:53,056
 that we added
 NSProgressReporting to,
 
-00:26:54.066 --> 00:26:55.646 A:middle
+
+541
+00:26:54,066 --> 00:26:55,646
 and then sets a completion
 handler
 
-00:26:55.646 --> 00:26:58.956 A:middle
+
+542
+00:26:55,646 --> 00:26:58,956
 for that photo import
 class, to set the image
 
-00:26:58.956 --> 00:27:00.416 A:middle
+
+543
+00:26:58,956 --> 00:27:00,416
 as the image that's
 been imported.
 
 
-
-00:26:58.956 --> 00:27:00.416 A:middle
-as the image that's
-been imported.
-
-00:27:00.976 --> 00:27:03.926 A:middle
+544
+00:27:00,976 --> 00:27:03,926
 And it is then, after the
 completion handler is set,
 
-00:27:03.926 --> 00:27:09.146 A:middle
+
+545
+00:27:03,926 --> 00:27:09,146
 it starts the import and stashes
 it away in case it needs it.
 
-00:27:09.416 --> 00:27:11.286 A:middle
+
+546
+00:27:09,416 --> 00:27:11,286
 So what we want to do is we want
 
-00:27:11.286 --> 00:27:15.126 A:middle
+
+547
+00:27:11,286 --> 00:27:15,126
 to get the photo imports
 progress and collect them
 
-00:27:15.196 --> 00:27:18.146 A:middle
+
+548
+00:27:15,196 --> 00:27:18,146
 into a progress for all of the
 imports that are happening.
 
-00:27:19.496 --> 00:27:21.456 A:middle
+
+549
+00:27:19,496 --> 00:27:21,456
 So let's go back up to
 our root View Controller.
 
-00:27:21.456 --> 00:27:24.166 A:middle
+
+550
+00:27:21,456 --> 00:27:24,166
 And what we can do is we can say
 
-00:27:24.166 --> 00:27:28.316 A:middle
+
+551
+00:27:24,166 --> 00:27:28,316
 that our import progress
 method returns that NSProgress.
 
-00:27:28.896 --> 00:27:31.576 A:middle
+
+552
+00:27:28,896 --> 00:27:31,576
 so we're going to set our
 overall progress property
 
-00:27:31.576 --> 00:27:33.376 A:middle
+
+553
+00:27:31,576 --> 00:27:33,376
 to that returned NSProgress.
 
-00:27:34.686 --> 00:27:37.246 A:middle
+
+554
+00:27:34,686 --> 00:27:37,246
 And import photos doesn't
 return in NSProgress yet,
 
-00:27:37.296 --> 00:27:38.456 A:middle
+
+555
+00:27:37,296 --> 00:27:38,456
 so we need to go do that.
 
-00:27:38.986 --> 00:27:42.926 A:middle
+
+556
+00:27:38,986 --> 00:27:42,926
 So let's go to our album and
 its import photos method.
 
-00:27:43.646 --> 00:27:45.476 A:middle
+
+557
+00:27:43,646 --> 00:27:45,476
 And it is currently
 returning void.
 
-00:27:45.476 --> 00:27:48.126 A:middle
+
+558
+00:27:45,476 --> 00:27:48,126
 And we need to make it
 return in NSProgress.
 
-00:27:48.866 --> 00:27:51.786 A:middle
+
+559
+00:27:48,866 --> 00:27:51,786
 Then we need to create
 the progress object
 
-00:27:51.786 --> 00:27:52.836 A:middle
+
+560
+00:27:51,786 --> 00:27:52,836
 that we're going to return.
 
-00:27:53.766 --> 00:27:56.766 A:middle
+
+561
+00:27:53,766 --> 00:27:56,766
 And since this progress object
 is going to have a child
 
-00:27:56.766 --> 00:28:01.486 A:middle
+
+562
+00:27:56,766 --> 00:28:01,486
 for every photo in our album,
 we want our totalUnitCount
 
 
-
-00:27:56.766 --> 00:28:01.486 A:middle
-for every photo in our album,
-we want our totalUnitCount
-
-00:28:01.876 --> 00:28:06.106 A:middle
+563
+00:28:01,876 --> 00:28:06,106
 to be the number of
 photos in the album.
 
-00:28:06.106 --> 00:28:08.536 A:middle
+
+564
+00:28:06,106 --> 00:28:08,536
 And also let's go
 ahead and return it.
 
-00:28:09.596 --> 00:28:11.646 A:middle
+
+565
+00:28:09,596 --> 00:28:11,646
 And what we're going
 to do is we're going
 
-00:28:11.646 --> 00:28:15.506 A:middle
+
+566
+00:28:11,646 --> 00:28:15,506
 to have our photo start import
 method also return a progress,
 
-00:28:16.836 --> 00:28:17.656 A:middle
+
+567
+00:28:16,836 --> 00:28:17,656
 so we're just going to assign
 
-00:28:17.656 --> 00:28:19.966 A:middle
+
+568
+00:28:17,656 --> 00:28:19,966
 that to a local variable
 import progress.
 
-00:28:20.356 --> 00:28:23.726 A:middle
+
+569
+00:28:20,356 --> 00:28:23,726
 And then we're going to add
 that as a child to our --
 
-00:28:24.046 --> 00:28:26.656 A:middle
+
+570
+00:28:24,046 --> 00:28:26,656
 to the album's progress with
 the pendingUnitCount of 1,
 
-00:28:26.656 --> 00:28:29.946 A:middle
+
+571
+00:28:26,656 --> 00:28:29,946
 since this is the import
 progress for one photo.
 
-00:28:30.466 --> 00:28:36.356 A:middle
+
+572
+00:28:30,466 --> 00:28:36,356
 And now, in our photos
 start import method,
 
-00:28:36.356 --> 00:28:38.186 A:middle
+
+573
+00:28:36,356 --> 00:28:38,186
 it is currently returning void.
 
-00:28:38.406 --> 00:28:40.796 A:middle
+
+574
+00:28:38,406 --> 00:28:40,796
 We want in to return in
 NSProgress, so let's do that.
 
-00:28:41.646 --> 00:28:45.276 A:middle
+
+575
+00:28:41,646 --> 00:28:45,276
 And since our photo
 import already conforms
 
-00:28:45.276 --> 00:28:46.256 A:middle
+
+576
+00:28:45,276 --> 00:28:46,256
 to NSProgressReporting,
 
-00:28:46.526 --> 00:28:48.936 A:middle
+
+577
+00:28:46,526 --> 00:28:48,936
 we can just return the
 progress property from it.
 
-00:28:50.586 --> 00:28:51.726 A:middle
+
+578
+00:28:50,586 --> 00:28:51,726
 And that's it.
 
-00:28:51.726 --> 00:28:53.846 A:middle
+
+579
+00:28:51,726 --> 00:28:53,846
 We have quite a composition
 happening now.
 
-00:28:53.846 --> 00:28:56.056 A:middle
+
+580
+00:28:53,846 --> 00:28:56,056
 We have that overall
 progress being assigned
 
-00:28:56.436 --> 00:28:58.316 A:middle
+
+581
+00:28:56,436 --> 00:28:58,316
 to a progress made up --
 
-00:28:58.316 --> 00:29:01.066 A:middle
+
+582
+00:28:58,316 --> 00:29:01,066
 that has children for each
 import that's happening,
 
 
-
-00:28:58.316 --> 00:29:01.066 A:middle
-that has children for each
-import that's happening,
-
-00:29:01.386 --> 00:29:03.906 A:middle
+583
+00:29:01,386 --> 00:29:03,906
 and each of those imports
 has both a download
 
-00:29:03.906 --> 00:29:04.816 A:middle
+
+584
+00:29:03,906 --> 00:29:04,816
 and a filter child.
 
-00:29:05.536 --> 00:29:10.626 A:middle
+
+585
+00:29:05,536 --> 00:29:10,626
 So let's run the app.
 
-00:29:10.896 --> 00:29:13.806 A:middle
+
+586
+00:29:10,896 --> 00:29:13,806
 And now we have an overall
 progress at the bottom
 
-00:29:13.806 --> 00:29:16.086 A:middle
+
+587
+00:29:13,806 --> 00:29:16,086
 that gets updated as all
 those children complete.
 
-00:29:17.296 --> 00:29:20.416 A:middle
+
+588
+00:29:17,296 --> 00:29:20,416
 Removing all of the smaller
 progress bars is left
 
-00:29:20.416 --> 00:29:22.666 A:middle
+
+589
+00:29:20,416 --> 00:29:22,666
 as an exercise.
 
-00:29:23.516 --> 00:29:26.626 A:middle
+
+590
+00:29:23,516 --> 00:29:26,626
 [Applause]
 
-00:29:27.126 --> 00:29:27.326 A:middle
+
+591
+00:29:27,126 --> 00:29:27,326
 All right.
 
-00:29:27.326 --> 00:29:27.496 A:middle
-&gt;&gt; VINCE SPADER: Okay.
 
-00:29:27.496 --> 00:29:28.276 A:middle
+592
+00:29:27,326 --> 00:29:27,496
+>> VINCE SPADER: Okay.
+
+
+593
+00:29:27,496 --> 00:29:28,276
 Back to slides.
 
-00:29:28.756 --> 00:29:34.316 A:middle
+
+594
+00:29:28,756 --> 00:29:34,316
 So now I would like to talk a
 little bit about cancellation,
 
-00:29:34.316 --> 00:29:35.616 A:middle
+
+595
+00:29:34,316 --> 00:29:35,616
 pausing, and resuming.
 
-00:29:36.296 --> 00:29:39.296 A:middle
+
+596
+00:29:36,296 --> 00:29:39,296
 NSProgress objects can be
 a conduit for cancellation.
 
-00:29:39.476 --> 00:29:42.596 A:middle
+
+597
+00:29:39,476 --> 00:29:42,596
 The creator of the
 NSProgress sets cancelable
 
-00:29:42.856 --> 00:29:44.326 A:middle
+
+598
+00:29:42,856 --> 00:29:44,326
 and the cancellationHandler.
 
-00:29:45.016 --> 00:29:48.126 A:middle
+
+599
+00:29:45,016 --> 00:29:48,126
 If your operation is doing
 some work synchronously and
 
-00:29:48.126 --> 00:29:49.806 A:middle
+
+600
+00:29:48,126 --> 00:29:49,806
 and the cancellationHandler
 doesn't really work,
 
-00:29:50.426 --> 00:29:51.996 A:middle
+
+601
+00:29:50,426 --> 00:29:51,996
 you can pull the canceled flag
 
-00:29:51.996 --> 00:29:53.616 A:middle
+
+602
+00:29:51,996 --> 00:29:53,616
 on the NSProgress
 object as well.
 
-00:29:54.156 --> 00:29:59.326 A:middle
+
+603
+00:29:54,156 --> 00:29:59,326
 A client can call cancel and
 the NSProgress will set cancel
 
-00:29:59.326 --> 00:30:01.986 A:middle
+
+604
+00:29:59,326 --> 00:30:01,986
 to true and invoke the
 cancellationHandler.
 
 
-
-00:29:59.326 --> 00:30:01.986 A:middle
-to true and invoke the
-cancellationHandler.
-
-00:30:02.396 --> 00:30:04.666 A:middle
+605
+00:30:02,396 --> 00:30:04,666
 So cancellation flows
 down to children.
 
-00:30:04.986 --> 00:30:08.076 A:middle
+
+606
+00:30:04,986 --> 00:30:08,076
 So if you have child progresses
 with cancellation handlers,
 
-00:30:08.336 --> 00:30:09.346 A:middle
+
+607
+00:30:08,336 --> 00:30:09,346
 those will be invoked too.
 
-00:30:09.996 --> 00:30:11.506 A:middle
+
+608
+00:30:09,996 --> 00:30:11,506
 And it is permanent.
 
-00:30:11.726 --> 00:30:14.486 A:middle
+
+609
+00:30:11,726 --> 00:30:14,486
 Once a progress is canceled,
 there is no uncanceling.
 
-00:30:16.736 --> 00:30:19.046 A:middle
+
+610
+00:30:16,736 --> 00:30:19,046
 Pausing is pretty
 similar to cancellation.
 
-00:30:19.546 --> 00:30:23.076 A:middle
+
+611
+00:30:19,546 --> 00:30:23,076
 The creator of the
 NSProgress sets pausable along
 
-00:30:23.076 --> 00:30:25.056 A:middle
+
+612
+00:30:23,076 --> 00:30:25,056
 with a pausing handler
 and resuming handler.
 
-00:30:25.486 --> 00:30:27.306 A:middle
+
+613
+00:30:25,486 --> 00:30:27,306
 That resuming handler
 is actually new
 
-00:30:27.306 --> 00:30:29.506 A:middle
+
+614
+00:30:27,306 --> 00:30:29,506
 in OS X 10.11 and iOS 9.
 
-00:30:30.336 --> 00:30:33.636 A:middle
+
+615
+00:30:30,336 --> 00:30:33,636
 And you can also pull that
 paused flag to determine
 
-00:30:33.636 --> 00:30:37.076 A:middle
+
+616
+00:30:33,636 --> 00:30:37,076
 if the progress is
 currently paused.
 
-00:30:37.256 --> 00:30:39.686 A:middle
+
+617
+00:30:37,256 --> 00:30:39,686
 Clients can call pause
 and will set pause
 
-00:30:39.686 --> 00:30:43.006 A:middle
+
+618
+00:30:39,686 --> 00:30:43,006
 and call the pausing handler,
 or they can call resume
 
-00:30:43.006 --> 00:30:45.266 A:middle
+
+619
+00:30:43,006 --> 00:30:45,266
 and will unset pause and
 invoke the resuming handler.
 
-00:30:45.556 --> 00:30:47.986 A:middle
+
+620
+00:30:45,556 --> 00:30:47,986
 Pausing and resuming also flows
 
-00:30:47.986 --> 00:30:50.226 A:middle
+
+621
+00:30:47,986 --> 00:30:50,226
 down to child progresses
 just like cancellation.
 
-00:30:51.546 --> 00:30:57.406 A:middle
+
+622
+00:30:51,546 --> 00:30:57,406
 And let's go ahead
 and do a demo of that.
 
-00:30:57.606 --> 00:31:00.356 A:middle
+
+623
+00:30:57,606 --> 00:31:00,356
 So if your objects, if your
 operations already support
 
 
-
-00:30:57.606 --> 00:31:00.356 A:middle
-So if your objects, if your
-operations already support
-
-00:31:00.356 --> 00:31:01.886 A:middle
+624
+00:31:00,356 --> 00:31:01,886
 cancellation, pausing,
 and resuming,
 
-00:31:01.886 --> 00:31:04.966 A:middle
+
+625
+00:31:01,886 --> 00:31:04,966
 it is actually really easy to
 expose that through NSProgress.
 
-00:31:06.016 --> 00:31:08.196 A:middle
+
+626
+00:31:06,016 --> 00:31:08,196
 So we're back in our
 photos View Controller.
 
-00:31:08.196 --> 00:31:09.686 A:middle
+
+627
+00:31:08,196 --> 00:31:09,686
 And this is our root
 View Controller.
 
-00:31:10.326 --> 00:31:13.106 A:middle
+
+628
+00:31:10,326 --> 00:31:13,106
 And this time the app
 has a few more buttons.
 
-00:31:13.106 --> 00:31:16.376 A:middle
+
+629
+00:31:13,106 --> 00:31:16,376
 So if you press import, there is
 also a cancel and pause button,
 
-00:31:16.376 --> 00:31:18.146 A:middle
+
+630
+00:31:16,376 --> 00:31:18,146
 but they don't really
 do anything right now.
 
-00:31:18.236 --> 00:31:19.186 A:middle
+
+631
+00:31:18,236 --> 00:31:19,186
 And we need to hook them up.
 
-00:31:20.276 --> 00:31:22.406 A:middle
+
+632
+00:31:20,276 --> 00:31:22,406
 So let's do that.
 
-00:31:23.096 --> 00:31:25.786 A:middle
+
+633
+00:31:23,096 --> 00:31:25,786
 So we have our IBActions
 defined for those buttons,
 
-00:31:25.786 --> 00:31:29.206 A:middle
+
+634
+00:31:25,786 --> 00:31:29,206
 we have cancel import, pause
 import, and resume import.
 
-00:31:29.206 --> 00:31:31.606 A:middle
+
+635
+00:31:29,206 --> 00:31:31,606
 And what we're going to do is
 we're going to call cancel,
 
-00:31:31.606 --> 00:31:34.876 A:middle
+
+636
+00:31:31,606 --> 00:31:34,876
 pause, and resume on the
 overall progress inside
 
-00:31:34.876 --> 00:31:35.686 A:middle
+
+637
+00:31:34,876 --> 00:31:35,686
 of those actions.
 
-00:31:36.336 --> 00:31:43.966 A:middle
+
+638
+00:31:36,336 --> 00:31:43,966
 And now once -- and now that
 will call any cancellation,
 
-00:31:43.966 --> 00:31:46.666 A:middle
+
+639
+00:31:43,966 --> 00:31:46,666
 pausing, or resuming handlers
 on any child progresses.
 
-00:31:46.666 --> 00:31:48.366 A:middle
+
+640
+00:31:46,666 --> 00:31:48,366
 And we don't have any yet,
 
-00:31:48.366 --> 00:31:50.296 A:middle
+
+641
+00:31:48,366 --> 00:31:50,296
 but our download does
 support cancellation,
 
-00:31:50.296 --> 00:31:51.216 A:middle
+
+642
+00:31:50,296 --> 00:31:51,216
 pausing, and resuming.
 
-00:31:51.516 --> 00:31:53.096 A:middle
+
+643
+00:31:51,516 --> 00:31:53,096
 So let's go to our
 photo download.
 
-00:31:53.816 --> 00:31:57.126 A:middle
+
+644
+00:31:53,816 --> 00:31:57,126
 And if we go down to our
 Will Begin Download callback,
 
-00:31:57.846 --> 00:32:01.016 A:middle
+
+645
+00:31:57,846 --> 00:32:01,016
 we can add cancellation,
 pausing,
 
 
-
-00:31:57.846 --> 00:32:01.016 A:middle
-we can add cancellation,
-pausing,
-
-00:32:01.016 --> 00:32:02.956 A:middle
+646
+00:32:01,016 --> 00:32:02,956
 resuming support
 to this NSProgress.
 
-00:32:03.236 --> 00:32:05.956 A:middle
+
+647
+00:32:03,236 --> 00:32:05,956
 So first we set cancelable
 to true,
 
-00:32:06.696 --> 00:32:08.656 A:middle
+
+648
+00:32:06,696 --> 00:32:08,656
 and we set our
 cancellationHandler,
 
-00:32:09.486 --> 00:32:12.756 A:middle
+
+649
+00:32:09,486 --> 00:32:12,756
 and here our cancellationHandler
 is calling Failed Download
 
-00:32:12.756 --> 00:32:15.056 A:middle
+
+650
+00:32:12,756 --> 00:32:15,056
 With Error with an
 NSUser Canceled Error.
 
-00:32:18.156 --> 00:32:21.076 A:middle
+
+651
+00:32:18,156 --> 00:32:21,076
 And we also are pausable and
 resumable, so we're going
 
-00:32:21.076 --> 00:32:24.076 A:middle
+
+652
+00:32:21,076 --> 00:32:24,076
 to set pausable to true, and in
 our pausing handler we're going
 
-00:32:24.076 --> 00:32:25.936 A:middle
+
+653
+00:32:24,076 --> 00:32:25,936
 to call this Suspend
 Download method.
 
-00:32:26.726 --> 00:32:29.176 A:middle
+
+654
+00:32:26,726 --> 00:32:29,176
 And in our resuming handler,
 we're calling Resume Download.
 
-00:32:30.026 --> 00:32:33.706 A:middle
+
+655
+00:32:30,026 --> 00:32:33,706
 Now, note that these are all
 private, the Failed Download
 
-00:32:33.706 --> 00:32:36.236 A:middle
+
+656
+00:32:33,706 --> 00:32:36,236
 With Error, Suspend Download,
 and Resume Download methods,
 
-00:32:36.786 --> 00:32:39.456 A:middle
+
+657
+00:32:36,786 --> 00:32:39,456
 so we're only exposing this
 functionality for canceling,
 
-00:32:39.456 --> 00:32:41.396 A:middle
+
+658
+00:32:39,456 --> 00:32:41,396
 pausing, or resuming
 through NSProgress,
 
-00:32:41.396 --> 00:32:43.426 A:middle
+
+659
+00:32:41,396 --> 00:32:43,426
 so it can be a pretty
 powerful point of interaction.
 
-00:32:44.956 --> 00:32:51.466 A:middle
+
+660
+00:32:44,956 --> 00:32:51,466
 Now when we run the app, and
 we compress, start our import
 
-00:32:51.466 --> 00:32:55.226 A:middle
+
+661
+00:32:51,466 --> 00:32:55,226
 and pause, and the progress,
 the download pauses itself,
 
-00:32:55.956 --> 00:32:58.546 A:middle
+
+662
+00:32:55,956 --> 00:32:58,546
 and we press resume,
 and it resumes,
 
-00:32:58.546 --> 00:33:00.466 A:middle
+
+663
+00:32:58,546 --> 00:33:00,466
 and we can hit cancel,
 and it gets canceled.
 
 
-
-00:32:58.546 --> 00:33:00.466 A:middle
-and we can hit cancel,
-and it gets canceled.
-
-00:33:00.466 --> 00:33:03.566 A:middle
+664
+00:33:00,466 --> 00:33:03,566
 And what's happening is that
 overall progress is sending --
 
-00:33:03.566 --> 00:33:06.136 A:middle
+
+665
+00:33:03,566 --> 00:33:06,136
 invoking any
 cancellationHandlers
 
-00:33:06.136 --> 00:33:07.626 A:middle
+
+666
+00:33:06,136 --> 00:33:07,626
 for any children it might have.
 
-00:33:08.286 --> 00:33:09.896 A:middle
+
+667
+00:33:08,286 --> 00:33:09,896
 And that's it.
 
-00:33:11.066 --> 00:33:12.546 A:middle
+
+668
+00:33:11,066 --> 00:33:12,546
 Back to slides.
 
-00:33:13.516 --> 00:33:17.936 A:middle
+
+669
+00:33:13,516 --> 00:33:17,936
 [Applause]
 
-00:33:18.436 --> 00:33:18.696 A:middle
-&gt;&gt; VINCE SPADER: All right.
 
-00:33:19.426 --> 00:33:21.686 A:middle
+670
+00:33:18,436 --> 00:33:18,696
+>> VINCE SPADER: All right.
+
+
+671
+00:33:19,426 --> 00:33:21,686
 So let's talk a little bit
 about the user interface.
 
-00:33:22.256 --> 00:33:23.626 A:middle
+
+672
+00:33:22,256 --> 00:33:23,626
 We have gone through
 all of this trouble
 
-00:33:23.626 --> 00:33:25.586 A:middle
+
+673
+00:33:23,626 --> 00:33:25,586
 of creating these
 NSProgress objects,
 
-00:33:25.656 --> 00:33:28.086 A:middle
+
+674
+00:33:25,656 --> 00:33:28,086
 but their ultimate purpose
 is to give the user an idea
 
-00:33:28.086 --> 00:33:30.666 A:middle
+
+675
+00:33:28,086 --> 00:33:30,666
 of what's happening, and that
 means the user interface.
 
-00:33:31.856 --> 00:33:33.536 A:middle
+
+676
+00:33:31,856 --> 00:33:33,536
 So all of the properties
 
-00:33:33.536 --> 00:33:36.006 A:middle
+
+677
+00:33:33,536 --> 00:33:36,006
 on NSProgress are
 key value observable,
 
-00:33:36.386 --> 00:33:39.146 A:middle
+
+678
+00:33:36,386 --> 00:33:39,146
 clients can add the KVO
 observers to update their UI.
 
-00:33:39.146 --> 00:33:43.056 A:middle
+
+679
+00:33:39,146 --> 00:33:43,056
 For example, a client can update
 their UI progress views progress
 
-00:33:43.176 --> 00:33:45.496 A:middle
+
+680
+00:33:43,176 --> 00:33:45,496
 with the NSProgress as
 fractionCompleted property,
 
-00:33:46.176 --> 00:33:48.836 A:middle
+
+681
+00:33:46,176 --> 00:33:48,836
 or update a label with
 a localizedDescription.
 
-00:33:50.156 --> 00:33:54.626 A:middle
+
+682
+00:33:50,156 --> 00:33:54,626
 Also be aware, that these KVO
 callbacks might not necessarily
 
-00:33:54.626 --> 00:33:55.996 A:middle
+
+683
+00:33:54,626 --> 00:33:55,996
 be called on the main thread.
 
-00:33:56.026 --> 00:33:58.516 A:middle
+
+684
+00:33:56,026 --> 00:33:58,516
 So if you're updating
 UIControls, you want to move
 
-00:33:58.516 --> 00:33:59.766 A:middle
+
+685
+00:33:58,516 --> 00:33:59,766
 that work to the main queue.
 
 
-
-00:34:00.336 --> 00:34:02.736 A:middle
+686
+00:34:00,336 --> 00:34:02,736
 So here is an example of what
 
-00:34:02.786 --> 00:34:04.906 A:middle
+
+687
+00:34:02,786 --> 00:34:04,906
 that adding an observer
 might look like.
 
-00:34:06.396 --> 00:34:10.976 A:middle
+
+688
+00:34:06,396 --> 00:34:10,976
 You call addObserver for
 key path on the NSProgress
 
-00:34:11.585 --> 00:34:13.306 A:middle
+
+689
+00:34:11,585 --> 00:34:13,306
 for the fractionCompleted
 property.
 
-00:34:14.346 --> 00:34:16.946 A:middle
+
+690
+00:34:14,346 --> 00:34:16,946
 Then in our override
 of observe Value
 
-00:34:16.946 --> 00:34:20.716 A:middle
+
+691
+00:34:16,946 --> 00:34:20,716
 For Key Path we enqueue
 some work on the main queue,
 
-00:34:21.356 --> 00:34:23.735 A:middle
+
+692
+00:34:21,356 --> 00:34:23,735
 and on the main queue we
 get the fractionCompleted
 
-00:34:23.735 --> 00:34:26.886 A:middle
+
+693
+00:34:23,735 --> 00:34:26,886
 from the NSProgress, and
 update our UIProgressView.
 
-00:34:27.446 --> 00:34:28.896 A:middle
+
+694
+00:34:27,446 --> 00:34:28,896
 And that's basically it.
 
-00:34:28.896 --> 00:34:31.556 A:middle
+
+695
+00:34:28,896 --> 00:34:31,556
 You can use a similar
 pattern for updating labels
 
-00:34:31.746 --> 00:34:33.376 A:middle
+
+696
+00:34:31,746 --> 00:34:33,376
 or buttons in your UI.
 
-00:34:33.376 --> 00:34:37.166 A:middle
+
+697
+00:34:33,376 --> 00:34:37,166
 All right, finally, let's go
 
-00:34:37.166 --> 00:34:39.735 A:middle
+
+698
+00:34:37,166 --> 00:34:39,735
 over some best practice
 for NSProgress.
 
-00:34:39.735 --> 00:34:42.896 A:middle
+
+699
+00:34:39,735 --> 00:34:42,896
 Since this talk is called best
 practices, I better squeeze some
 
-00:34:42.896 --> 00:34:45.315 A:middle
+
+700
+00:34:42,896 --> 00:34:45,315
 in at the last minute.
 
-00:34:45.456 --> 00:34:47.346 A:middle
+
+701
+00:34:45,456 --> 00:34:47,346
 So, first is completion.
 
-00:34:47.876 --> 00:34:50.686 A:middle
+
+702
+00:34:47,876 --> 00:34:50,686
 Don't use fractionCompleted
 to determine completion.
 
-00:34:50.686 --> 00:34:53.085 A:middle
+
+703
+00:34:50,686 --> 00:34:53,085
 It's a floating point
 value determined --
 
-00:34:53.085 --> 00:34:54.446 A:middle
+
+704
+00:34:53,085 --> 00:34:54,446
 derived from a calculation.
 
-00:34:54.786 --> 00:34:58.346 A:middle
+
+705
+00:34:54,786 --> 00:34:58,346
 So comparing it to 1.0
 won't always be right.
 
-00:34:58.346 --> 00:35:02.896 A:middle
+
+706
+00:34:58,346 --> 00:35:02,896
 Use completedUnitCount and
 totalUnitCount instead,
 
 
-
-00:34:58.346 --> 00:35:02.896 A:middle
-Use completedUnitCount and
-totalUnitCount instead,
-
-00:35:02.896 --> 00:35:04.456 A:middle
+707
+00:35:02,896 --> 00:35:04,456
 unless your progress
 is indeterminant
 
-00:35:04.456 --> 00:35:05.766 A:middle
+
+708
+00:35:04,456 --> 00:35:05,766
 or the totalUnitCount is 0.
 
-00:35:07.456 --> 00:35:10.666 A:middle
+
+709
+00:35:07,456 --> 00:35:10,666
 It is important, by the way,
 that progress is finished.
 
-00:35:10.716 --> 00:35:13.646 A:middle
+
+710
+00:35:10,716 --> 00:35:13,646
 The parents completedUnitCount
 only gets updated
 
-00:35:13.766 --> 00:35:14.956 A:middle
+
+711
+00:35:13,766 --> 00:35:14,956
 when the child finishes.
 
-00:35:15.376 --> 00:35:19.226 A:middle
+
+712
+00:35:15,376 --> 00:35:19,226
 And also NSProgress can optimize
 a way of completed children
 
-00:35:19.226 --> 00:35:21.686 A:middle
+
+713
+00:35:19,226 --> 00:35:21,686
 so memory can be saved
 as work finishes.
 
-00:35:23.876 --> 00:35:27.846 A:middle
+
+714
+00:35:23,876 --> 00:35:27,846
 Next, NSProgress
 objects cannot be reused.
 
-00:35:28.206 --> 00:35:29.616 A:middle
+
+715
+00:35:28,206 --> 00:35:29,616
 Once they're done, they're done.
 
-00:35:29.876 --> 00:35:32.126 A:middle
+
+716
+00:35:29,876 --> 00:35:32,126
 Once they're canceled,
 they're canceled.
 
-00:35:32.186 --> 00:35:34.146 A:middle
+
+717
+00:35:32,186 --> 00:35:34,146
 If you need to reuse
 an NSProgress,
 
-00:35:34.546 --> 00:35:36.956 A:middle
+
+718
+00:35:34,546 --> 00:35:36,956
 instead make a new instance
 and provide a mechanism
 
-00:35:36.956 --> 00:35:39.026 A:middle
+
+719
+00:35:36,956 --> 00:35:39,026
 so the client of
 your progress knows
 
-00:35:39.026 --> 00:35:41.496 A:middle
+
+720
+00:35:39,026 --> 00:35:41,496
 that the object has been
 replaced, like a notification.
 
-00:35:43.636 --> 00:35:45.446 A:middle
+
+721
+00:35:43,636 --> 00:35:45,446
 Finally, performance.
 
-00:35:46.926 --> 00:35:48.866 A:middle
+
+722
+00:35:46,926 --> 00:35:48,866
 Don't update the
 completedUnitCount
 
-00:35:48.866 --> 00:35:49.956 A:middle
+
+723
+00:35:48,866 --> 00:35:49,956
 in a tight loop.
 
-00:35:49.956 --> 00:35:53.696 A:middle
+
+724
+00:35:49,956 --> 00:35:53,696
 So, for example, don't update
 it every byte of a download.
 
-00:35:53.696 --> 00:35:55.476 A:middle
+
+725
+00:35:53,696 --> 00:35:55,476
 If you have a parent,
 we might be calling
 
-00:35:55.476 --> 00:35:57.606 A:middle
+
+726
+00:35:55,476 --> 00:35:57,606
 up to update the
 fractionCompleted,
 
-00:35:57.816 --> 00:35:59.596 A:middle
+
+727
+00:35:57,816 --> 00:35:59,596
 which might take longer
 than you're expecting
 
-00:35:59.596 --> 00:36:03.226 A:middle
+
+728
+00:35:59,596 --> 00:36:03,226
 since your composition can be
 arbitrarily large and very deep.
 
 
-
-00:35:59.596 --> 00:36:03.226 A:middle
-since your composition can be
-arbitrarily large and very deep.
-
-00:36:03.876 --> 00:36:07.426 A:middle
+729
+00:36:03,876 --> 00:36:07,426
 But when you do so, don't
 forget to finish the progress.
 
-00:36:07.426 --> 00:36:09.286 A:middle
+
+730
+00:36:07,426 --> 00:36:09,286
 So be sure to update
 the completedUnitCount
 
-00:36:09.286 --> 00:36:10.236 A:middle
+
+731
+00:36:09,286 --> 00:36:10,236
 to the totalUnitCount.
 
-00:36:10.646 --> 00:36:11.856 A:middle
+
+732
+00:36:10,646 --> 00:36:11,856
 Otherwise you're
 going to be left
 
-00:36:11.856 --> 00:36:13.046 A:middle
+
+733
+00:36:11,856 --> 00:36:13,046
 with nearly finished progresses.
 
-00:36:13.046 --> 00:36:15.406 A:middle
+
+734
+00:36:13,046 --> 00:36:15,406
 And that's no fun.
 
-00:36:15.606 --> 00:36:16.206 A:middle
+
+735
+00:36:15,606 --> 00:36:16,206
 So that's it.
 
-00:36:16.666 --> 00:36:20.256 A:middle
+
+736
+00:36:16,666 --> 00:36:20,256
 We talked a lot about how to
 use NSProgress effectively.
 
-00:36:20.256 --> 00:36:24.496 A:middle
+
+737
+00:36:20,256 --> 00:36:24,496
 If there is anything to
 remember, it is these points.
 
-00:36:24.496 --> 00:36:26.636 A:middle
+
+738
+00:36:24,496 --> 00:36:26,636
 Each progress has its own unit.
 
-00:36:27.056 --> 00:36:30.806 A:middle
+
+739
+00:36:27,056 --> 00:36:30,806
 You can compose them either
 implicitly or explicitly.
 
-00:36:31.026 --> 00:36:33.156 A:middle
+
+740
+00:36:31,026 --> 00:36:33,156
 And when you do, the
 pendingUnitCount is
 
-00:36:33.156 --> 00:36:34.596 A:middle
+
+741
+00:36:33,156 --> 00:36:34,596
 in the parent's units.
 
-00:36:35.726 --> 00:36:38.516 A:middle
+
+742
+00:36:35,726 --> 00:36:38,516
 Also you either create the
 NSProgress or you're a client.
 
-00:36:39.426 --> 00:36:42.976 A:middle
+
+743
+00:36:39,426 --> 00:36:42,976
 For localization, you can use
 the kind and userInfo properties
 
-00:36:42.976 --> 00:36:45.666 A:middle
+
+744
+00:36:42,976 --> 00:36:45,666
 to help us give you a
 better localizedDescription.
 
-00:36:47.276 --> 00:36:50.656 A:middle
+
+745
+00:36:47,276 --> 00:36:50,656
 NSProgress can be a really nice
 interface for cancellation,
 
-00:36:50.656 --> 00:36:51.996 A:middle
+
+746
+00:36:50,656 --> 00:36:51,996
 pausing, and resuming.
 
-00:36:52.226 --> 00:36:57.066 A:middle
+
+747
+00:36:52,226 --> 00:36:57,066
 And all its properties are KVO
 observable, so you can use it,
 
-00:36:57.066 --> 00:37:00.166 A:middle
+
+748
+00:36:57,066 --> 00:37:00,166
 use that to update your UI.
 
 
+749
+00:37:00,166 --> 00:37:00,746
+>> That's it.
 
-00:36:57.066 --> 00:37:00.166 A:middle
-use that to update your UI.
 
-00:37:00.166 --> 00:37:00.746 A:middle
-&gt;&gt; That's it.
-
-00:37:00.746 --> 00:37:03.146 A:middle
+750
+00:37:00,746 --> 00:37:03,146
 For more information,
 see the documentation;
 
-00:37:03.466 --> 00:37:05.446 A:middle
+
+751
+00:37:03,466 --> 00:37:05,446
 also check out the
 header for NSProgress,
 
-00:37:05.446 --> 00:37:06.906 A:middle
+
+752
+00:37:05,446 --> 00:37:06,906
 it is extremely well commented.
 
-00:37:06.986 --> 00:37:10.066 A:middle
+
+753
+00:37:06,986 --> 00:37:10,066
 We have some new sample
 code, photoProgress,
 
-00:37:10.066 --> 00:37:12.936 A:middle
+
+754
+00:37:10,066 --> 00:37:12,936
 which is based off the
 demos I showed today.
 
-00:37:12.936 --> 00:37:15.906 A:middle
+
+755
+00:37:12,936 --> 00:37:15,906
 If you need any help,
 try the developer forums
 
-00:37:15.906 --> 00:37:17.726 A:middle
+
+756
+00:37:15,906 --> 00:37:17,726
 or contact developer
 technical support,
 
-00:37:18.196 --> 00:37:20.986 A:middle
+
+757
+00:37:18,196 --> 00:37:20,986
 and for general inquiries,
 email Paul Marcos.
 
-00:37:21.106 --> 00:37:21.696 A:middle
+
+758
+00:37:21,106 --> 00:37:21,696
 And that's all.
 
-00:37:22.266 --> 00:37:22.496 A:middle
+
+759
+00:37:22,266 --> 00:37:22,496
 Thanks.
 
-00:37:23.508 --> 00:37:25.508 A:middle
+
+760
+00:37:23,508 --> 00:37:25,508
 [Applause]
 
