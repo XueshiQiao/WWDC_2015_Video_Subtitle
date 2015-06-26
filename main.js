@@ -38,7 +38,7 @@ async.waterfall([
                     videoURLPrefix: group[1],
                     videoNameWithOutExtension: group[2],
                     subtitleNameForHD: subtitlesFolderForHD + group[2] + ".srt",
-                    subtitleNameForSD: subtitlesFolderForSD + group[2] + ".srt",
+                    subtitleNameForSD: subtitlesFolderForSD + group[2].replace("_hd_", "_sd_") + ".srt",
                     webvttFileNames: [],
                     errorMessage: null,
                     skip:false
@@ -89,7 +89,7 @@ async.waterfall([
 
     //download webvtt files and combine them to a srt file
     function (videoInfos, callback) {
-        async.mapLimit(videoInfos, 10, function (videoInfo, callback) {
+        async.mapLimit(videoInfos, 100, function (videoInfo, callback) {
             if (!videoInfo.skip && !videoInfo.errorMessage) {
                 console.log("start to download webvtt files of " + videoInfo.videoNameWithOutExtension);
                 (function (videoInfo) {
